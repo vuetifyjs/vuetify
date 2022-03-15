@@ -26,6 +26,7 @@ import { makeTimesProps, useTimes } from './composables/times'
 import { CalendarCategory, CalendarFormatter, CalendarTimestamp, copyTimestamp, getEndOfMonth, getStartOfMonth, nextDay, parseTimestamp, relativeDays, updateFormatted, validateTimestamp } from '@/composables/calendar/timestamp'
 import { getParsedCategories } from './composables/parser'
 import { VCalendarWeekly } from './VCalendarWeekly'
+import { VCalendarMonthly } from './VCalendarMonthly'
 
 export const VCalendar = genericComponent<new <T>() => {
   $props: {
@@ -45,7 +46,7 @@ export const VCalendar = genericComponent<new <T>() => {
     ...makeThemeProps()
   },
 
-  setup(props, { slots }) {
+  setup(props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
     const {
       times,
@@ -109,7 +110,7 @@ export const VCalendar = genericComponent<new <T>() => {
     const parsedValue: ComputedRef<CalendarTimestamp> = computed(() => {
       return (validateTimestamp(this.value)
         ? parseTimestamp(this.value, true)
-        : (parsedStart || times.today))
+        : (parsedStart.value || times.today))
     })
 
     const parsedCategoryDays: ComputedRef<number> = computed(() => {
@@ -182,7 +183,7 @@ export const VCalendar = genericComponent<new <T>() => {
           throw new Error(props.type + ' is not a valid Calendar type')
       }
 
-      return { component, start, end, maxDays, weekdays, categories }
+      return { component, start: start.date, end: end.date, maxDays, weekdays, categories }
     })
     
     const eventWeekdays: ComputedRef<number[]> = computed(() => {
@@ -227,24 +228,22 @@ export const VCalendar = genericComponent<new <T>() => {
 
     // Methods
 
-
     watch(parsedNow, () => {
       updateTimes()
     })
 
-    useRender(() => {
-      return (
-        <div
-          class={[
-            themeClasses.value
-          ]}
-        >
-          { slots.default?.() }
-        </div>
-      )
-    })
+    return () => (
+      <div
+        class={[
+          themeClasses.value
+        ]}
+      >
+        <renderProps.value.component { ...renderProps.value }></renderProps.value.component>
+      </div>
+    )
 
   }
+
 })
 
 export type VCalendar = InstanceType<typeof VCalendar>

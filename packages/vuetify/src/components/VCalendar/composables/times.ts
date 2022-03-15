@@ -1,6 +1,6 @@
 import { parseDate, parseTimestamp, validateTimestamp } from '@/composables/calendar/timestamp'
 import type { CalendarTimestamp } from '@/composables/calendar/timestamp'
-import { computed } from 'vue'
+import { computed, watch } from 'vue'
 import type { ComputedRef } from 'vue'
 import { propsFactory } from '@/util'
 
@@ -55,6 +55,11 @@ export function useTimes (now: string) {
     updateTime(now, times.now)
     updateDay(now, times.today)
   }
+
+  watch(parsedNow, () => updateTimes)
+
+  updateTimes()
+  setPresent()
 
   return { times, parsedNow, setPresent, getNow, updateDay, updateTime, updateTimes }
 }

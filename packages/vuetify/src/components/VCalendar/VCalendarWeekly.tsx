@@ -1,13 +1,19 @@
 import { CalendarFormatter, CalendarTimestamp, createDayList, createNativeLocaleFormatter, getDayIdentifier } from "@/composables/calendar/timestamp"
 import { genericComponent, MakeSlots } from "@/util"
-import type { ComputedRef, VNode } from "vue"
+import { ComputedRef } from "vue"
 import { computed } from 'vue'
+import { useLocale } from '@/composables/locale'
 import { useBaseCalendar } from "./composables/base"
 import { makeBaseProps, makeWeeksProps } from "./composables/props"
 import { makeTimesProps, useTimes } from "./composables/times"
 
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { makeVariantProps, useVariant } from '@/composables/variant'
 import { weekNumber } from "@/util/dateTimeUtils"
+import { VBtn } from "../VBtn"
+
+// Styles
+import './VCalendarWeekly.sass'
 
 export const VCalendarWeekly = genericComponent<new <T>() => {
   $props: {}
@@ -20,10 +26,12 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     ...makeBaseProps(),
     ...makeWeeksProps(),
     ...makeThemeProps(),
+    ...makeVariantProps(),
   },
 
   setup(props, { slots }) {
     const { themeClasses } = provideTheme(props)
+    const { current } = useLocale()
     const {
       times,
       parsedNow,
@@ -46,8 +54,10 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       getStartOfWeek,
       getEndOfWeek,
       getFormatter
-    } = useBaseCalendar({currentLocale: null, dayFormat: null, end: props.end, start: props.start, times,weekdayFormat: null, weekdays: null})
-
+    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, [0,1,2,3,4,5,6])
+    
+    const { colorClasses, colorStyles } = useVariant(props)
+    
     const staticClass: ComputedRef<string> = computed(() => {
       return 'v-calendar-weekly'
     })
@@ -71,11 +81,11 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
         minDays
       )
     })
+
     const todayWeek: ComputedRef<CalendarTimestamp[]> = computed(() => {
       const today = times.today
       const start = getStartOfWeek(today)
       const end = getEndOfWeek(today)
-
       return createDayList(
         start,
         end,
@@ -95,71 +105,34 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       const shortOptions = { timeZone: 'UTC', month: 'short' }
 
       return createNativeLocaleFormatter(
-        currentLocale,
+        current.value,
         (_tms, short) => short ? shortOptions : longOptions
       )
     })
     
     // methods
-    const isOutside =  (day: CalendarTimestamp): boolean => {
+    const isOutside = (day: CalendarTimestamp): boolean => {
       const dayIdentifier = getDayIdentifier(day)
 
       return dayIdentifier < getDayIdentifier(parsedStart.value) ||
              dayIdentifier > getDayIdentifier(parsedEnd.value)
     }
 
-    const genHead = (): VNode => {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__head',
-      }, genHeadDays())
+    interface WeekObject {
+      days: CalendarTimestamp[],
+      weekIndex: Number
     }
 
-    const genHeadDays = (): VNode[] => {
-      const header = todayWeek.value.map(genHeadDay)
-
-      if (props.showWeek) {
-        header.unshift(this.$createElement('div', {
-          staticClass: 'v-calendar-weekly__head-weeknumber',
-        }))
-      }
-
-      return header
-    }
-
-    const genHeadDay = (day: CalendarTimestamp, index: number): VNode => {
-      const outside = isOutside(days.value[index])
-      const color = day.present ? color : undefined
-
-      return this.$createElement('div', this.setTextColor(color, {
-        key: day.date,
-        staticClass: 'v-calendar-weekly__head-weekday',
-        class: getRelativeClasses(day, outside),
-      }), weekdayFormatter.value(day, props.shortWeekdays))
-    }
-
-    const genWeeks = (): VNode[] => {
+    const genWeeks: ComputedRef = computed(() => {
       const weekDays = parsedWeekdays.value.length
-      const weeks: VNode[] = []
+      const weeks: WeekObject[] = []
 
       for (let i = 0; i < days.value.length; i += weekDays) {
-        weeks.push(genWeek(days.value.slice(i, i + weekDays), getWeekNumber(days.value[i])))
+        weeks.push({days: days.value.slice(i, i + weekDays), weekIndex: i})
       }
 
       return weeks
-    }
-
-    const genWeek = (week: CalendarTimestamp[], weekNumber: number): VNode => {
-      const weekNodes = week.map((day, index) => genDay(day, index, week))
-
-      if (props.showWeek) {
-        weekNodes.unshift(genWeekNumber(weekNumber))
-      }
-
-      return this.$createElement('div', {
-        key: week[0].date,
-        staticClass: 'v-calendar-weekly__week',
-      }, weekNodes)
-    }
+    })
 
     const getWeekNumber = (determineDay: CalendarTimestamp) => {
       return weekNumber(
@@ -171,74 +144,74 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       )
     }
 
-    const genWeekNumber = (weekNumber: number) => {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__weeknumber',
-      }, [
-        this.$createElement('small', String(weekNumber)),
-      ])
-    }
+    // const genDayMonth = (day: CalendarTimestamp): VNode | string => {
+    //   const color = day.present ? color : undefined
 
-    const genDay = (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode => {
-      const outside = isOutside(day)
+    //   return this.$createElement('div', this.setTextColor(color, {
+    //     staticClass: 'v-calendar-weekly__day-month',
+    //   }), getSlot(this, 'day-month', day) || monthFormatter.value(day, props.shortMonths))
+    // }
 
-      return this.$createElement('div', {
-        key: day.date,
-        staticClass: 'v-calendar-weekly__day',
-        class: getRelativeClasses(day, outside),
-        on: getDefaultMouseEventHandlers(':day', _e => day),
-      }, [
-        genDayLabel(day),
-        ...(getSlot(this, 'day', () => ({ outside, index, week, ...day })) || []),
-      ])
-    }
-
-    const genDayLabel = (day: CalendarTimestamp): VNode => {
-      return this.$createElement('div', {
-        staticClass: 'v-calendar-weekly__day-label',
-      }, getSlot(this, 'day-label', day) || [genDayLabelButton(day)])
-    }
-
-    const genDayLabelButton = (day: CalendarTimestamp): VNode => {
-      const color = day.present ? color : 'transparent'
-      const hasMonth = day.day === 1 && props.showMonthOnFirst
-
-      return this.$createElement(VBtn, {
-        props: {
-          color,
-          fab: true,
-          depressed: true,
-          small: true,
-        },
-        on: getMouseEventHandlers({
-          'click:date': { event: 'click', stop: true },
-          'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-        }, _e => day),
-      }, hasMonth
-        ? monthFormatter.value(day, props.shortMonths) + ' ' + dayFormatter.value(day, false)
-        : dayFormatter.value(day, false)
-      )
-    }
-
-    const genDayMonth = (day: CalendarTimestamp): VNode | string => {
-      const color = day.present ? color : undefined
-
-      return this.$createElement('div', this.setTextColor(color, {
-        staticClass: 'v-calendar-weekly__day-month',
-      }), getSlot(this, 'day-month', day) || monthFormatter.value(day, props.shortMonths))
-    }
-
-    useRender(() => {
+    return (() => {
       return (
         <div
           class={[
             staticClass.value, classes.value
           ]}
         >
-          { slots.default?.() }
+          {!props.hideHeader ? 
+            <div class="v-calendar-weekly__head">
+              { props.showWeek ? <div class="v-calendar-weekly__head-weeknumber"></div> : ''}
+              { todayWeek.value.map((day, index) => {
+                return <div
+                  style={ `color: ${day.present ? props.color : undefined}` }
+                  key={ day.date }
+                  class={[
+                    'v-calendar-weekly__head-weekday',
+                    getRelativeClasses(day, isOutside(days.value[index]))
+                  ]}
+                >
+                  { weekdayFormatter.value(day, props.shortWeekdays) }
+                </div>
+              })}
+            </div> : '' }
+            
+            { genWeeks.value.map(week => {
+              return <div key={week.days[0].date} class="v-calendar-weekly__week">
+                { props.showWeek ? <div class="v-calendar-weekly__weknumber"><small>{ getWeekNumber(week.weekIndex) }</small></div> : ''}
+                { week.days.map((day, index) => {
+                  return <div
+                  key={ day.date }
+                  class={['v-calendar-weekly__day', getRelativeClasses(day, isOutside(day))]}
+                  // on: getDefaultMouseEventHandlers(':day', _e => day),
+                >
+                  <div class="v-calendar-weekly__day-label">
+                    <slot name="day-label" day={ day }>
+                        <VBtn
+                          icon
+                          color={day.present ? props.color : 'transparent'}
+                          flat
+                          small
+                          // on: getMouseEventHandlers({
+                          //   'click:date': { event: 'click', stop: true },
+                          //   'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+                          // }, _e => day),
+                        >
+                          { day.day === 1 && props.showMonthOnFirst ? `${monthFormatter.value(day, props.shortMonths)} ${dayFormatter.value(day, false)}` : `${dayFormatter.value(day, false)}`}
+                        </VBtn>
+                    </slot>
+                  </div>
+                  {/* { slots.day({outside: isOutside(day), index, week, ...day }) } */}
+                </div>
+                })}
+              </div>
+            })}
         </div>
       )
     })
+    
+
+    // return { days, todayWeek, staticClass, classes, parsedMinWeeks, isOutside, genWeeks, getWeekNumber, getRelativeClasses, weekdayFormatter }
   }
 })
 

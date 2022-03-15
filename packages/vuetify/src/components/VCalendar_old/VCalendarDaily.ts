@@ -109,7 +109,7 @@ export default CalendarWithIntervals.extend({
     genHeadDayLabel (day: CalendarTimestamp): VNode {
       return this.$createElement('div', {
         staticClass: 'v-calendar-daily_head-day-label',
-      }, getSlot(this, 'day-label-header', day) || [this.genHeadDayButton(day)])
+      }, getSlot(this, 'day-label-header', day) || [ this.genHeadDayButton(day) ])
     },
     genHeadDayButton (day: CalendarTimestamp): VNode {
       const color = day.present ? this.color : 'transparent'
@@ -182,7 +182,7 @@ export default CalendarWithIntervals.extend({
       return getSlot(this, 'day-body', () => this.getSlotScope(day)) || []
     },
     genDayIntervals (index: number): VNode[] {
-      return this.intervals[index].map(this.genDayInterval)
+      return this.intervals[ index ].map(this.genDayInterval)
     },
     genDayInterval (interval: CalendarTimestamp): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
@@ -218,7 +218,7 @@ export default CalendarWithIntervals.extend({
     genIntervalLabels (): VNode[] | null {
       if (!this.intervals.length) return null
 
-      return this.intervals[0].map(this.genIntervalLabel)
+      return this.intervals[ 0 ].map(this.genIntervalLabel)
     },
     genIntervalLabel (interval: CalendarTimestamp): VNode {
       const height: string | undefined = convertToUnit(this.intervalHeight)
@@ -238,25 +238,38 @@ export default CalendarWithIntervals.extend({
           staticClass: 'v-calendar-daily__interval-text',
         }, label),
       ])
+
+        < div
+      class="v-calendar-daily__interval"
+      key = { interval.time }
+      style = {`height: ${ convertToUnit(intervalHeight) }`
+    }
+        >
+    <div class="v-calendar-daily__interval-text">
+      { (showIntervalLabel || showIntervalLabelDefault)(interval) ? intervalFormatter(interval, shortIntervals) : ''
+}
+  < /div>
+  < /div>
+
     },
   },
 
-  render (h): VNode {
-    return h('div', {
-      class: this.classes,
-      on: {
-        dragstart: (e: MouseEvent) => {
-          e.preventDefault()
-        },
+  render(h): VNode {
+  return h('div', {
+    class: this.classes,
+    on: {
+      dragstart: (e: MouseEvent) => {
+        e.preventDefault()
       },
-      directives: [{
-        modifiers: { quiet: true },
-        name: 'resize',
-        value: this.onResize,
-      }],
-    }, [
-      !this.hideHeader ? this.genHead() : '',
-      this.genBody(),
-    ])
-  },
+    },
+    directives: [ {
+      modifiers: { quiet: true },
+      name: 'resize',
+      value: this.onResize,
+    } ],
+  }, [
+    !this.hideHeader ? this.genHead() : '',
+    this.genBody(),
+  ])
+},
 })
