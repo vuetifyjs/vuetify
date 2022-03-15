@@ -431,7 +431,6 @@ export function createDayList (
   if (stop < getDayIdentifier(start)) {
     throw new Error('End date is earlier than start date.')
   }
-
   while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
     stopped = stopped || currentIdentifier === stop

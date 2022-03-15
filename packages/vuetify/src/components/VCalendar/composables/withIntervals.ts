@@ -5,7 +5,6 @@ import {
   createNativeLocaleFormatter,
   MINUTES_IN_DAY,
   parseTime,
-  parseTimestamp,
   updateMinutes,
 } from '@/composables/calendar/timestamp'
 import type {
@@ -17,30 +16,38 @@ import type { ComputedRef } from 'vue'
 import { computed, ref } from 'vue'
 
 export function useWithIntervals (
-  props,
   currentLocale,
   doDays,
+  firstInterval,
+  firstTime,
+  intervalCount,
+  intervalFormat,
+  intervalHeight,
+  intervalMinutes,
   maxDays,
-  times
+  parsedStart,
+  parsedEnd,
+  times,
+  weekdaySkips
 ) {
   const parsedFirstInterval: ComputedRef<number> = computed(() => {
-    return parseInt(props.firstInterval)
+    return parseInt(firstInterval)
   })
 
   const parsedIntervalMinutes: ComputedRef<number> = computed(() => {
-    return parseInt(props.intervalMinutes)
+    return parseInt(intervalMinutes)
   })
 
   const parsedIntervalCount: ComputedRef<number> = computed(() => {
-    return parseInt(props.intervalCount)
+    return parseInt(intervalCount)
   })
 
   const parsedIntervalHeight: ComputedRef<number> = computed(() => {
-    return parseFloat(props.intervalHeight)
+    return parseFloat(intervalHeight)
   })
 
   const parsedFirstTime: ComputedRef<number | false> = computed(() => {
-    return parseTime(props.firstTime)
+    return parseTime(firstTime)
   })
 
   const firstMinute: ComputedRef<number> = computed(() => {
@@ -57,10 +64,10 @@ export function useWithIntervals (
 
   const days: ComputedRef<CalendarTimestamp[]> = computed(() => {
     return createDayList(
-      parseTimestamp(props.start),
-      parseTimestamp(props.end),
+      parsedStart,
+      parsedEnd,
       times.today,
-      props.weekdays,
+      weekdaySkips,
       maxDays
     )
   })
@@ -76,8 +83,8 @@ export function useWithIntervals (
   })
 
   const intervalFormatter: ComputedRef<CalendarFormatter> = computed(() => {
-    if (props.intervalFormat) {
-      return props.intervalFormat as CalendarFormatter
+    if (intervalFormat) {
+      return intervalFormat as CalendarFormatter
     }
 
     const longOptions = { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' }
@@ -163,13 +170,13 @@ export function useWithIntervals (
 
   const scrollToTime = (time: VTime): boolean => {
     const y = timeToY(time)
-    const scrollArea = ref(null) as unknown as HTMLElement
+    const pane = ref('scrollArea') as HTMLElement
 
-    if (y === false || !scrollArea) {
+    if (y === false || !pane) {
       return false
     }
 
-    scrollArea.scrollTop = y
+    pane.scrollTop = y
 
     return true
   }

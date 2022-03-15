@@ -12,7 +12,7 @@ import {
 
 import type { CalendarFormatter, CalendarTimestamp } from '@/composables/calendar/timestamp'
 
-export function useBaseCalendar ({ currentLocale, dayFormat, end, start, times, weekdayFormat, weekdays }) {
+export function useBaseCalendar (currentLocale, dayFormat, end, start, times, weekdayFormat, weekdays) {
   // Computeds
   const parsedWeekdays: ComputedRef<Array<number>> = computed(() => {
     return Array.isArray(weekdays)
