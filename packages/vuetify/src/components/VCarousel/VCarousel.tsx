@@ -3,6 +3,7 @@ import './VCarousel.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { VWindow } from '@/components/VWindow'
 
@@ -12,15 +13,16 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
+import { onMounted, ref, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import { onMounted, ref, watch } from 'vue'
 
 export const VCarousel = defineComponent({
   name: 'VCarousel',
 
   props: {
+    color: String,
     cycle: Boolean,
     delimiterIcon: {
       type: String,
@@ -54,7 +56,7 @@ export const VCarousel = defineComponent({
   setup (props, { slots }) {
     const model = useProxiedModel(props, 'modelValue')
     const { t } = useLocale()
-    const windowRef = ref<VWindow>()
+    const windowRef = ref<typeof VWindow>()
 
     let slideTimeout = -1
     watch(model, restartTimeout)
@@ -95,27 +97,41 @@ export const VCarousel = defineComponent({
       >
         {{
           default: slots.default,
-          additional: ({ group }) => (
+          additional: ({ group }: any) => (
             <>
               { !props.hideDelimiters && (
                 <div
-                  v-model={ model.value }
                   class="v-carousel__controls"
                   style={{
                     left: props.verticalDelimiters === 'left' && props.verticalDelimiters ? 0 : 'auto',
                     right: props.verticalDelimiters === 'right' ? 0 : 'auto',
                   }}
                 >
-                  { group.items.value.map(item => (
-                    <VBtn
-                      class={['v-carousel__controls__item', { 'v-btn--selected': group.isSelected(item.id) }]}
-                      color={ group.isSelected(item.id) ? 'surface' : 'surface-variant' }
-                      aria-label={ t('$vuetify.carousel.ariaLabel.delimiter') }
-                      icon={ props.delimiterIcon }
-                      size="small"
-                      onClick={ () => group.select(item.id, true) }
-                    />
-                  ))}
+                  { group.items.value.length > 0 && (
+                    <VDefaultsProvider
+                      defaults={{
+                        VBtn: {
+                          color: props.color,
+                          icon: props.delimiterIcon,
+                          size: 'x-small',
+                          variant: 'text',
+                        },
+                      }}
+                      scoped
+                    >
+                      { group.items.value.map((item: any) => {
+                        const props = {
+                          'aria-label': t('$vuetify.carousel.ariaLabel.delimiter'),
+                          class: [group.isSelected(item.id) && 'v-btn--selected'],
+                          onClick: () => group.select(item.id, true),
+                        }
+
+                        return slots.item
+                          ? slots.item({ props, item })
+                          : (<VBtn { ...item } { ...props } />)
+                      }) }
+                    </VDefaultsProvider>
+                  ) }
                 </div>
               )}
 
