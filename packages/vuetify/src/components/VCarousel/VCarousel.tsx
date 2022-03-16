@@ -6,13 +6,15 @@ import { VBtn } from '@/components/VBtn'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { VWindow } from '@/components/VWindow'
 
+// Composables
+import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
-import { useLocale } from '@/composables/locale'
 
 // Types
 import type { PropType } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { onMounted, ref, watch } from 'vue'
 
 export const VCarousel = defineComponent({
