@@ -11,6 +11,9 @@ import { computed, inject, nextTick, ref } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
+// Types
+import type { Component, PropType, TransitionProps } from 'vue'
+
 export const VWindowItem = defineComponent({
   name: 'VWindowItem',
 
@@ -20,11 +23,11 @@ export const VWindowItem = defineComponent({
 
   props: {
     reverseTransition: {
-      type: [Boolean, String, Object],
+      type: [Boolean, String, Object] as PropType<string | boolean | TransitionProps & { component?: Component }>,
       default: undefined,
     },
     transition: {
-      type: [Boolean, String, Object],
+      type: [Boolean, String, Object] as PropType<string | boolean | TransitionProps & { component?: Component }>,
       default: undefined,
     },
     ...makeLazyProps(),
@@ -38,7 +41,11 @@ export const VWindowItem = defineComponent({
     if (!window || !groupItem) throw new Error('[Vuetify] VWindowItem must be used inside VWindow')
 
     const isTransitioning = ref(false)
-    const hasTransition = computed(() => window.isReversed.value ? props.reverseTransition !== false : props.transition !== false)
+    const hasTransition = computed(() => (
+      window.isReversed.value
+        ? props.reverseTransition !== false
+        : props.transition !== false
+    ))
 
     function onAfterTransition () {
       if (!isTransitioning.value || !window) {
