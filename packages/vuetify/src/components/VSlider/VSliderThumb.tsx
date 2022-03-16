@@ -58,7 +58,6 @@ export const VSliderThumb = defineComponent({
       thumbSize,
       thumbLabel,
       direction,
-      label,
       readonly,
       elevation,
       isReversed,
@@ -129,7 +128,6 @@ export const VSliderThumb = defineComponent({
           }}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
-          aria-label={ label.value }
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }

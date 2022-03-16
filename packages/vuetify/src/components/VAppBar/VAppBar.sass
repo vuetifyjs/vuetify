@@ -4,3 +4,9 @@
 
 .v-app-bar
   display: flex
+
+  &.v-toolbar
+    @include tools.theme($app-bar-theme...)
+
+    &:not(.v-toolbar--flat)
+      @include tools.elevation($app-bar-elevation)

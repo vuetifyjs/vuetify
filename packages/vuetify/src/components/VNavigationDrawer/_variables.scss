@@ -8,7 +8,7 @@ $navigation-drawer-border-radius: map.get(settings.$rounded, '0') !default;
 $navigation-drawer-border-style: settings.$border-style-root !default;
 $navigation-drawer-border-thin-width: thin !default;
 $navigation-drawer-border-width: 0 !default;
-$navigation-drawer-color: rgb(var(--v-theme-on-surface)) !default;
+$navigation-drawer-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $navigation-drawer-content-height: 100% !default;
 $navigation-drawer-content-overflow-x: hidden !default;
 $navigation-drawer-content-overflow-y: auto !default;

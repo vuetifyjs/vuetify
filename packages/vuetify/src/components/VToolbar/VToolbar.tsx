@@ -46,7 +46,7 @@ export const makeVToolbarProps = propsFactory({
   floating: Boolean,
   height: {
     type: [Number, String],
-    default: 64,
+    default: 56,
   },
   image: String,
   title: String,
@@ -174,9 +174,7 @@ export const VToolbar = genericComponent<new () => {
       )
     })
 
-    return useForwardRef({
-      //
-    })
+    return useForwardRef({ contentHeight })
   },
 })
 

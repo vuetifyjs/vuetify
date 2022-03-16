@@ -100,7 +100,7 @@ export const VSelect = genericComponent<new <T>() => {
     )
 
     const menu = ref(false)
-    const active = computed({
+    const selected = computed({
       get: () => model.value,
       set: val => {
         model.value = val
@@ -136,7 +136,7 @@ export const VSelect = genericComponent<new <T>() => {
     })
 
     function onClear (e: MouseEvent) {
-      active.value = []
+      selected.value = []
 
       if (props.openOnClear) {
         menu.value = true
@@ -209,8 +209,8 @@ export const VSelect = genericComponent<new <T>() => {
                     transition={ props.transition }
                   >
                     <VList
-                      v-model:active={ active.value }
-                      activeStrategy={ props.multiple ? 'multiple' : 'single' }
+                      v-model:selected={ selected.value }
+                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
                       { !items.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />

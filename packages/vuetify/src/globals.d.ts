@@ -1,5 +1,6 @@
 import type { TouchStoredHandlers } from './directives/touch'
 import type { VNode } from 'vue'
+import type { Events } from '@vue/runtime-dom'
 
 declare global {
   interface HTMLCollection {
@@ -87,8 +88,6 @@ declare module '@vue/runtime-core' {
 }
 
 declare module '@vue/runtime-dom' {
-  import type { Events } from '@vue/runtime-dom'
-
   type UnionToIntersection<U> =
     (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
 

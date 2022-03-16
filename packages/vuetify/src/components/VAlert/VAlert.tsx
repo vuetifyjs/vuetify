@@ -22,6 +22,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -69,6 +70,7 @@ export const VAlert = defineComponent({
     },
 
     ...makeDensityProps(),
+    ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
@@ -98,6 +100,7 @@ export const VAlert = defineComponent({
     const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
     const { densityClasses } = useDensity(props)
+    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
@@ -133,6 +136,7 @@ export const VAlert = defineComponent({
           ]}
           style={[
             colorStyles.value,
+            dimensionStyles.value,
             positionStyles.value,
           ]}
           role="alert"

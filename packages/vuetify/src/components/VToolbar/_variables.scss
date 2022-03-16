@@ -2,8 +2,8 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
-$toolbar-background: rgb(var(--v-theme-surface)) !default;
-$toolbar-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
+$toolbar-background: rgb(var(--v-theme-on-surface-variant)) !default;
+$toolbar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-radius: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
@@ -11,7 +11,7 @@ $toolbar-collapsed-max-width: 112px !default;
 $toolbar-content-padding-x: 16px !default;
 $toolbar-content-padding-y: 4px !default;
 $toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent': -3 ) !default;
-$toolbar-elevation: 4 !default;
+$toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
 $toolbar-padding-end: 16px !default;
 $toolbar-padding-start: 16px !default;

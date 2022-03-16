@@ -14,13 +14,35 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { createRange, defineComponent, getUid } from '@/util'
+import { createRange, genericComponent, getUid } from '@/util'
 
 // Types
-import type { Variant } from '@/composables/variant'
 import type { Prop } from 'vue'
+import type { MakeSlots } from '@/util'
+import type { Variant } from '@/composables/variant'
 
-export const VRating = defineComponent({
+type VRatingItemSlot = {
+  value: number
+  index: number
+  isFilled: boolean
+  isHovered: boolean
+  icon: string
+  color?: string
+  props: Record<string, unknown>
+}
+
+type VRatingItemLabelSlot = {
+  value: number
+  index: number
+  label?: string
+}
+
+export const VRating = genericComponent<new <T>() => {
+  $slots: MakeSlots<{
+    item: [VRatingItemSlot]
+    'item-label': [VRatingItemLabelSlot]
+  }>
+}>()({
   name: 'VRating',
 
   props: {
@@ -170,7 +192,7 @@ export const VRating = defineComponent({
             {
               !showStar ? undefined
               : slots.item ? slots.item({
-                ...itemState.value,
+                ...itemState.value[index],
                 props: btnProps,
                 value,
                 index,
@@ -199,7 +221,7 @@ export const VRating = defineComponent({
     }
 
     return () => {
-      const hasLabels = !!props.itemLabels?.length
+      const hasLabels = !!props.itemLabels?.length || slots['item-label']
 
       return (
         <props.tag

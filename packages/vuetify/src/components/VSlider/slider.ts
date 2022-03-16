@@ -25,7 +25,6 @@ type SliderProvide = {
   direction: Ref<'vertical' | 'horizontal'>
   disabled: Ref<boolean | undefined>
   elevation: Ref<number | string | undefined>
-  label: Ref<string | undefined>
   min: Ref<number>
   max: Ref<number>
   mousePressed: Ref<boolean>
@@ -50,7 +49,6 @@ type SliderProvide = {
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
-  showTickLabels: Ref<boolean | undefined>
   parsedTicks: Ref<Tick[]>
   hasLabels: Ref<boolean>
   isReversed: Ref<boolean>
@@ -105,12 +103,8 @@ export const makeSliderProps = propsFactory({
     default: false,
     validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
-  showTickLabels: {
-    type: Boolean,
-    default: false,
-  },
   ticks: {
-    type: [Array, Object] as PropType<number[] | Record<string, string>>,
+    type: [Array, Object] as PropType<number[] | Record<number, string>>,
   },
   tickSize: {
     type: [Number, String],
@@ -129,7 +123,6 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => ['vertical', 'horizontal'].includes(v),
   },
   reverse: Boolean,
-  label: String,
 
   ...makeRoundedProps(),
   ...makeElevationProps({
@@ -326,7 +319,6 @@ export const useSlider = ({
     hasLabels,
     horizontalDirection,
     isReversed,
-    label: toRef(props, 'label'),
     min,
     max,
     mousePressed,
@@ -339,7 +331,6 @@ export const useSlider = ({
     readonly: toRef(props, 'readonly'),
     rounded: toRef(props, 'rounded'),
     roundValue,
-    showTickLabels: toRef(props, 'showTickLabels'),
     showTicks: toRef(props, 'showTicks'),
     startOffset,
     step,

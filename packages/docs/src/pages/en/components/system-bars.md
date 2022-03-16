@@ -1,6 +1,7 @@
 ---
+nav: System bars
 meta:
-  title: System bar component
+  title: System-bar component
   description: The system bar component creates an android style status bar that rests on the very top of your application.
   keywords: system bars, vuetify system bar component, vue system bar component, android status bar, status bar
 related:
@@ -13,7 +14,9 @@ related:
 
 The `v-system-bar` component can be used for displaying statuses to the user. It looks like the Android system bar and can contain icons, spacers, and some text.
 
-<entry />
+![System Bar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-entry.png)
+
+---
 
 ## Usage
 
@@ -21,9 +24,28 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 <usage name="v-system-bar" />
 
+<entry />
+
+## Anatomy
+
+The recommended placement of elements inside of `v-system-bar` is:
+
+* Place informational icons to the right
+* Place time or other textual information to the far right
+
+![System Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-system-bar/v-system-bar-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The System Bar container has a default slot with content justified right |
+| 2. Icon items (optional) | Used to convey information through the use of icons |
+| 3. Text (optional) | Textual content that is typically used to show time |
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-system-bar](/api/v-system-bar/) | Primary component |
 
 ## Examples
 
@@ -34,18 +56,6 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 You can optionally change the color of the `v-system-bar` by using the `color` prop.
 
 <example file="v-system-bar/prop-color" />
-
-#### Lights out
-
-You can reduce `v-system-bar`'s opacity using `lights-out` property.
-
-<example file="v-system-bar/prop-lights-out" />
-
-#### Themes
-
-Dark or light theme variants can be applied to `v-system-bar`.
-
-<example file="v-system-bar/prop-themes" />
 
 #### Window
 

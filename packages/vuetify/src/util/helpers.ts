@@ -419,8 +419,10 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 export function mergeDeep (
   source: Record<string, any> = {},
   target: Record<string, any> = {},
-  out: Record<string, any> = {},
+  arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
 ) {
+  const out: Record<string, any> = {}
+
   for (const key in source) {
     out[key] = source[key]
   }
@@ -435,7 +437,13 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      out[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
+
+      continue
+    }
+
+    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+      out[key] = arrayFn(sourceProperty, targetProperty)
 
       continue
     }

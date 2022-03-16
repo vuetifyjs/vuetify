@@ -14,7 +14,9 @@ related:
 
 The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors.
 
-<entry />
+![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
+
+---
 
 ## Usage
 
@@ -22,23 +24,33 @@ An alert is a [v-sheet](/components/sheets/) that specializes in getting the use
 
 <usage name="v-alert" />
 
-## Specification
+<entry />
 
-The `v-alert` component consists of 5 main areas; **prepend**, **content**, **title**, **append**, and **close**.
+## Anatomy
 
-![Alert Specification](https://cdn.vuetifyjs.com/docs/images/specifications/alerts.png "VAlert Specification")
+The recommended placement of elements inside of `v-alert` is:
 
-| Area       | Scope of Responsibility |
-| ---------- | ----------------------- |
-| 1. Prepend | Displays `v-icon` by **type** or a specifically defined **icon** |
-| 2. Title   | The `v-alert-title` is located within the content area, displays **title** prop if present |
-| 3. Content | Default slot, displays **text** prop if present |
-| 4. Append  | Displays contents of the Append slot |
-| 5. Close   | Displays `v-icon` that hides `v-alert` when clicked |
+* Place a `v-icon` on the far left
+* Place `v-alert-title` to the right of the contextual icon
+* Place textual content below the title
+* Place closing actions to the far right
+
+![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Alert container holds all `v-alert` components |
+| 2. Icon | An icon that correlates to the contextual state of the alert; **success, info, warning, error** |
+| 3. Title | A heading with increased font-size |
+| 4. Text | A content area for displaying text and other inline elements |
+| 5. Close Icon (optional) | Used to hide the `v-alert` component |
 
 ## API
 
-<api-inline />
+| Element / Area | Description |
+| - | - |
+| [v-alert](/api/v-alert/) | Primary Component |
+| **v-alert-title** | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
 ## Examples
 

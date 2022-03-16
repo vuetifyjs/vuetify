@@ -16,7 +16,7 @@ $card-border-radius: settings.$border-radius-root !default;
 $card-border-style: settings.$border-style-root !default;
 $card-border-thin-width: thin !default;
 $card-border-width: 0 !default;
-$card-color: rgb(var(--v-theme-on-surface)) !default;
+$card-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
 $card-hover-elevation: 8 !default;
