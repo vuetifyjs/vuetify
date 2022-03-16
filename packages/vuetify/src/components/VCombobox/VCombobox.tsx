@@ -18,6 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
+import type { PropType } from 'vue'
 import { computed, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
@@ -62,6 +63,13 @@ function genItem (item: any) {
   }
 }
 
+interface InternalItem {
+  title: string
+  value: any
+  index: number
+  selected: boolean
+}
+
 export const VCombobox = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
@@ -74,6 +82,8 @@ export const VCombobox = genericComponent<new <T>() => {
   props: {
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
+
+    delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ menuIcon: '' }),
@@ -119,6 +129,17 @@ export const VCombobox = genericComponent<new <T>() => {
           model.value = [val]
         }
 
+        if (val && props.multiple && props.delimiters?.length) {
+          const values = val.split(new RegExp(`(?:${props.delimiters.join('|')})+`))
+          if (values.length > 1) {
+            values.forEach(v => {
+              v = v.trim()
+              if (v) select({ value: v })
+            })
+            _search.value = ''
+          }
+        }
+
         if (!val) selectionIndex.value = -1
         if (isFocused.value) menu.value = true
 
@@ -128,7 +149,7 @@ export const VCombobox = genericComponent<new <T>() => {
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
-      const array: any[] = []
+      const array: InternalItem[] = []
       let index = 0
       for (const unwrapped of model.value) {
         const item = genItem(unwrapped)
@@ -225,11 +246,8 @@ export const VCombobox = genericComponent<new <T>() => {
         }
       }
 
-      if (['Enter', ','].includes(e.key)) {
-        if (e.key === ',') e.preventDefault()
-
+      if (e.key === 'Enter') {
         select({ value: search.value })
-
         search.value = ''
       }
     }
