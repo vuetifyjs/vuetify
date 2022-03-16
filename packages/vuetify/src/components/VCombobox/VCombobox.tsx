@@ -2,9 +2,10 @@
 import './VCombobox.sass'
 
 // Components
-import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { genItem, makeSelectProps } from '@/components/VSelect/VSelect'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -18,28 +19,21 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
-import type { PropType } from 'vue'
 import { computed, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
+import type { DefaultChipSlot, InternalSelectItem } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
 
-export interface DefaultSelectionSlot {
-  selection: {
-    index: number
-    selected: boolean
-    title: string
-    value: any
-  }
+export interface InternalComboboxItem extends InternalSelectItem {
+  selected: boolean
 }
 
-export interface DefaultChipSlot extends DefaultSelectionSlot {
-  props: {
-    'onClick:close': (e: Event) => void
-    modelValue: any
-  }
+export interface DefaultComboboxSlot {
+  selection: InternalComboboxItem
 }
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
@@ -56,25 +50,11 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
     : text
 }
 
-function genItem (item: any) {
-  return {
-    title: String((typeof item === 'object' ? item.title : item) ?? ''),
-    value: (typeof item === 'object' ? item.value : item),
-  }
-}
-
-interface InternalItem {
-  title: string
-  value: any
-  index: number
-  selected: boolean
-}
-
 export const VCombobox = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultSelectionSlot]
+    selection: [DefaultComboboxSlot]
   }>
 }>()({
   name: 'VCombobox',
@@ -82,22 +62,14 @@ export const VCombobox = genericComponent<new <T>() => {
   props: {
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
-
     delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ menuIcon: '' }),
+    ...makeSelectProps({ hideNoData: true }),
     ...makeTransitionProps({ transition: false }),
-
-    hideNoData: {
-      type: Boolean,
-      default: true,
-    },
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
-    'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
   },
 
@@ -149,7 +121,7 @@ export const VCombobox = genericComponent<new <T>() => {
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
-      const array: InternalItem[] = []
+      const array: InternalComboboxItem[] = []
       let index = 0
       for (const unwrapped of model.value) {
         const item = genItem(unwrapped)
@@ -251,7 +223,9 @@ export const VCombobox = genericComponent<new <T>() => {
         search.value = ''
       }
     }
-
+    function onAfterLeave () {
+      if (isFocused.value) isPristine.value = true
+    }
     function select (item: any) {
       if (props.multiple) {
         const index = selections.value.findIndex(selection => selection.value === item.value)
@@ -272,9 +246,6 @@ export const VCombobox = genericComponent<new <T>() => {
           isPristine.value = true
         })
       }
-    }
-    function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
     }
 
     watch(() => vTextFieldRef.value, val => {
@@ -320,6 +291,18 @@ export const VCombobox = genericComponent<new <T>() => {
         >
           {{
             ...slots,
+            appendInner: slotProps => (
+              <>
+                { slots.appendInner?.(slotProps) }
+
+                { props.menuIcon && props.items.length > 0 && (
+                  <VIcon
+                    class="v-combobox__menu-icon"
+                    icon={ props.menuIcon }
+                  />
+                ) }
+              </>
+            ),
             default: () => (
               <>
                 { activator.value && (
@@ -333,7 +316,6 @@ export const VCombobox = genericComponent<new <T>() => {
                     onAfterLeave={ onAfterLeave }
                   >
                     <VList
-                      mandatory
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
@@ -359,59 +341,60 @@ export const VCombobox = genericComponent<new <T>() => {
                     </VList>
                   </VMenu>
                 ) }
-                  { selections.value.map((selection, index) => {
-                    function onChipClose (e: Event) {
-                      e.stopPropagation()
-                      e.preventDefault()
 
-                      select(selection)
-                    }
+                { selections.value.map((selection, index) => {
+                  function onChipClose (e: Event) {
+                    e.stopPropagation()
+                    e.preventDefault()
 
-                    const slotProps = {
-                      'onClick:close': onChipClose,
-                      modelValue: true,
-                    }
+                    select(selection)
+                  }
 
-                    return (
-                      <div
-                        class={[
-                          'v-combobox__selection',
-                          selection.selected && textColorClasses.value,
-                        ]}
-                        style={ selection.selected ? textColorStyles.value : {} }
-                      >
-                        { hasChips && (
-                          <VDefaultsProvider
-                            defaults={{
-                              VChip: {
-                                closable: props.closableChips,
-                                size: 'small',
-                                text: selection.title,
-                              },
-                            }}
-                          >
-                            { slots.chip
-                              ? slots.chip({ props: slotProps, selection })
-                              : (<VChip { ...slotProps } />)
-                            }
-                          </VDefaultsProvider>
-                        ) }
+                  const slotProps = {
+                    'onClick:close': onChipClose,
+                    modelValue: true,
+                  }
 
-                        { !hasChips && (
-                          slots.selection
-                            ? slots.selection({ selection })
-                            : (
-                              <span class="v-combobox__selection-text">
-                                { selection.title }
-                                { props.multiple && (index < selections.value.length - 1) && (
-                                  <span class="v-combobox__selection-comma">,</span>
-                                ) }
-                              </span>
-                            )
-                        ) }
-                      </div>
-                    )
-                  }) }
+                  return (
+                    <div
+                      class={[
+                        'v-combobox__selection',
+                        selection.selected && textColorClasses.value,
+                      ]}
+                      style={ selection.selected ? textColorStyles.value : {} }
+                    >
+                      { hasChips && (
+                        <VDefaultsProvider
+                          defaults={{
+                            VChip: {
+                              closable: props.closableChips,
+                              size: 'small',
+                              text: selection.title,
+                            },
+                          }}
+                        >
+                          { slots.chip
+                            ? slots.chip({ props: slotProps, selection })
+                            : (<VChip { ...slotProps } />)
+                          }
+                        </VDefaultsProvider>
+                      ) }
+
+                      { !hasChips && (
+                        slots.selection
+                          ? slots.selection({ selection })
+                          : (
+                            <span class="v-combobox__selection-text">
+                              { selection.title }
+                              { props.multiple && (index < selections.value.length - 1) && (
+                                <span class="v-combobox__selection-comma">,</span>
+                              ) }
+                            </span>
+                          )
+                      ) }
+                    </div>
+                  )
+                }) }
               </>
             ),
           }}

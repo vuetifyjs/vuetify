@@ -10,15 +10,20 @@
   .v-field
     .v-text-field__prefix,
     .v-text-field__suffix,
-    .v-field__input
-      cursor: inherit
+    .v-field__input,
+    &.v-field
+      cursor: pointer
 
-    input
+  .v-field .v-field__input
+    > input
+      align-self: flex-start
       opacity: 0
       flex: 0 0
 
-  .v-field.v-field
-    cursor: pointer
+
+  .v-field--dirty
+    .v-select__selection
+      margin-inline-end: 2px
 
   &__content
     overflow: hidden
@@ -33,16 +38,8 @@
 
   &__selection
     display: inline-flex
-    margin-inline-end: 2px
-    margin-bottom: 2px
-    white-space: nowrap
-
-  &__selections
-    align-items: flex-start
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-    flex: 1 1
-    flex-wrap: wrap
-    display: flex
+    letter-spacing: inherit
+    line-height: inherit
 
   &--active-menu
     .v-select__menu-icon
