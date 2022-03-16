@@ -14,12 +14,17 @@
     &.v-field
       cursor: pointer
 
-  .v-field .v-field__input
-    > input
-      align-self: flex-start
-      opacity: 0
-      flex: 0 0
+  .v-field
+    .v-field__input
+      > input
+        align-self: flex-start
+        opacity: 0
+        flex: 0 0
 
+    .v-field__append-inner
+      > .v-icon
+        margin-inline-start: 4px
+        transition: $select-transition
 
   .v-field--dirty
     .v-select__selection
@@ -31,11 +36,6 @@
     @include tools.elevation($select-content-elevation)
     @include tools.rounded($select-content-border-radius)
 
-  &__menu-icon
-    order: 1
-    margin-inline-start: 4px
-    transition: $select-transition
-
   &__selection
     display: inline-flex
     letter-spacing: inherit
@@ -43,8 +43,7 @@
 
   &--active-menu
     .v-field__append-inner
-      > .v-select__menu-icon
-        color: inherit
+      > .v-icon
         opacity: var(--v-high-emphasis-opacity)
         transform: rotate(180deg)
 

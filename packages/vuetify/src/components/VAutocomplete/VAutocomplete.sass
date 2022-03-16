@@ -14,10 +14,16 @@
     &.v-field
       cursor: text
 
-  .v-field .v-field__input
-    > input
-      align-self: flex-start
-      flex: 1 1
+  .v-field
+    .v-field__input
+      > input
+        align-self: flex-start
+        flex: 1 1
+
+    .v-field__append-inner
+      > .v-icon
+        margin-inline-start: 4px
+        transition: $autocomplete-transition
 
   .v-field:not(.v-field--focused)
     input
@@ -34,11 +40,6 @@
     @include tools.elevation($autocomplete-content-elevation)
     @include tools.rounded($autocomplete-content-border-radius)
 
-  &__menu-icon
-    order: 1
-    margin-inline-start: 4px
-    transition: $autocomplete-transition
-
   &__mask
     background: rgb(var(--v-theme-on-surface-variant))
 
@@ -49,8 +50,7 @@
 
   &--active-menu
     .v-field__append-inner
-      > .v-autocomplete__menu-icon
-        color: inherit
+      > .v-icon
         opacity: var(--v-high-emphasis-opacity)
         transform: rotate(180deg)
 

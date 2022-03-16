@@ -281,6 +281,7 @@ export const VCombobox = genericComponent<new <T>() => {
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
@@ -291,18 +292,6 @@ export const VCombobox = genericComponent<new <T>() => {
         >
           {{
             ...slots,
-            appendInner: slotProps => (
-              <>
-                { slots.appendInner?.(slotProps) }
-
-                { props.menuIcon && props.items.length > 0 && (
-                  <VIcon
-                    class="v-combobox__menu-icon"
-                    icon={ props.menuIcon }
-                  />
-                ) }
-              </>
-            ),
             default: () => (
               <>
                 { activator.value && (

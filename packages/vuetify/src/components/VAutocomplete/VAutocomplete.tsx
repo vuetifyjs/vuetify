@@ -205,6 +205,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          appendInnerIcon={ props.menuIcon }
           dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
@@ -215,18 +216,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
         >
           {{
             ...slots,
-            appendInner: slotProps => (
-              <>
-                { slots.appendInner?.(slotProps) }
-
-                { props.menuIcon && (
-                  <VIcon
-                    class="v-autocomplete__menu-icon"
-                    icon={ props.menuIcon }
-                  />
-                ) }
-              </>
-            ),
             default: () => (
               <>
                 { activator.value && (

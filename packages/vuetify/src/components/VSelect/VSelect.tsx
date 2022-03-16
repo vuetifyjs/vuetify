@@ -185,6 +185,7 @@ export const VSelect = genericComponent<new <T>() => {
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }
           onClick:input={ onClickControl }
@@ -195,18 +196,6 @@ export const VSelect = genericComponent<new <T>() => {
         >
           {{
             ...slots,
-            appendInner: slotProps => (
-              <>
-                { slots.appendInner?.(slotProps) }
-
-                { props.menuIcon && (
-                  <VIcon
-                    class="v-select__menu-icon"
-                    icon={ props.menuIcon }
-                  />
-                ) }
-              </>
-            ),
             default: () => (
               <>
                 { activator.value && (
