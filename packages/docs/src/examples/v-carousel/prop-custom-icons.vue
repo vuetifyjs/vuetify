@@ -7,10 +7,9 @@
     <v-system-bar lights-out></v-system-bar>
     <v-carousel
       :continuous="false"
-      :cycle="cycle"
       :show-arrows="false"
       hide-delimiter-background
-      delimiter-icon="mdi-minus"
+      delimiter-icon="mdi-square"
       height="300"
     >
       <v-carousel-item
@@ -22,36 +21,14 @@
           height="100%"
           tile
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
+          <div class="d-flex fill-height justify-center align-center">
             <div class="text-h2">
               {{ slide }} Slide
             </div>
-          </v-row>
+          </div>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>
-    <v-list two-line>
-      <v-list-item>
-        <v-list-item-avatar>
-          <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-        </v-list-item-avatar>
-        <v-list-item-content>
-          <v-list-item-title>John Leider</v-list-item-title>
-          <v-list-item-subtitle>Author</v-list-item-subtitle>
-        </v-list-item-content>
-        <v-list-item-action>
-          <v-switch
-            v-model="cycle"
-            label="Cycle Slides"
-            inset
-          ></v-switch>
-        </v-list-item-action>
-      </v-list-item>
-    </v-list>
   </v-card>
 </template>
 
@@ -66,7 +43,6 @@
           'red lighten-2',
           'orange darken-1',
         ],
-        cycle: false,
         slides: [
           'First',
           'Second',
