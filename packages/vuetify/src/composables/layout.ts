@@ -2,7 +2,7 @@
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref, watch } from 'vue'
+import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
@@ -45,14 +45,7 @@ interface LayoutProvide {
   rootZIndex: Ref<number>
 }
 
-type OverlayProvide = {
-  overlays: Ref<number[]>
-  zIndex: Ref<number>
-}
-
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
-
-export const VuetifyOverlayKey: InjectionKey<OverlayProvide> = Symbol.for('vuetify:overlay')
 
 const ROOT_ZINDEX = 1000
 
@@ -84,26 +77,6 @@ export function useLayout () {
   return layout
 }
 
-export function useOverlay (isActive: Ref<boolean | undefined>) {
-  const layout = inject(VuetifyOverlayKey, { zIndex: ref(ROOT_ZINDEX), overlays: ref([]) })
-
-  const id = getUid()
-
-  watch(isActive, value => {
-    if (value) {
-      layout.overlays.value.push(id)
-    } else {
-      layout.overlays.value = layout.overlays.value.filter(x => x !== id)
-    }
-  }, {
-    immediate: true,
-  })
-
-  const overlayZIndex = computed(() => layout.zIndex.value + layout.overlays.value.indexOf(id) + 1)
-
-  return { overlayZIndex }
-}
-
 export function useLayoutItem (options: {
   id: string | undefined
   priority: Ref<number>
@@ -129,7 +102,6 @@ export function useLayoutItem (options: {
   const {
     layoutItemStyles,
     layoutItemScrimStyles,
-    zIndex,
   } = layout.register(vm, {
     ...options,
     active: computed(() => isKeptAlive.value ? false : options.active.value),
@@ -137,13 +109,6 @@ export function useLayoutItem (options: {
   })
 
   onBeforeUnmount(() => layout.unregister(id))
-
-  const overlays = ref<number[]>([])
-
-  provide(VuetifyOverlayKey, {
-    overlays,
-    zIndex,
-  })
 
   return { layoutItemStyles, layoutRect: layout.layoutRect, layoutItemScrimStyles }
 }

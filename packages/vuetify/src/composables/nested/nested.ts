@@ -17,6 +17,7 @@ export interface NestedProps {
   openStrategy: OpenStrategy | undefined
   selected: string[] | undefined
   opened: string[] | undefined
+  mandatory: boolean
   'onUpdate:selected': ((val: string[]) => void) | undefined
   'onUpdate:opened': ((val: string[]) => void) | undefined
 }
@@ -59,6 +60,7 @@ export const makeNestedProps = propsFactory({
   openStrategy: [String, Function] as Prop<OpenStrategy>,
   opened: Array as Prop<string[]>,
   selected: Array as Prop<string[]>,
+  mandatory: Boolean,
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
@@ -176,6 +178,7 @@ export const useNested = (props: NestedProps) => {
           children: children.value,
           parents: parents.value,
           event,
+          mandatory: props.mandatory,
         })
         newSelected && (selected.value = newSelected)
       },

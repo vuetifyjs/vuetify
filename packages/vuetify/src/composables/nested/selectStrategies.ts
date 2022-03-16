@@ -5,6 +5,7 @@ export type SelectStrategyFn = (data: {
   children: Map<string, string[]>
   parents: Map<string, string>
   event?: Event
+  mandatory?: boolean
 }) => Map<string, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
@@ -26,8 +27,11 @@ export type SelectStrategy = {
 }
 
 export const independentSelectStrategy: SelectStrategy = {
-  select: ({ id, value, selected }) => {
-    selected.set(id, value ? 'on' : 'off')
+  select: ({ id, value, mandatory, selected }) => {
+    selected.set(id, value ? 'on' : (
+      mandatory &&
+      !Array.from(selected.entries()).find(([key, value]) => value === 'on' && key !== id)
+    ) ? 'on' : 'off')
 
     return selected
   },

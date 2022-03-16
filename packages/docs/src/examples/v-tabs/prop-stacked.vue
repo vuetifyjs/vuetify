@@ -2,40 +2,37 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="deep-purple accent-4"
+      background-color="deep-purple-accent-4"
       centered
-      dark
-      icons-and-text
+      stacked
     >
-      <v-tabs-slider></v-tabs-slider>
-
-      <v-tab href="#tab-1">
-        Recents
+      <v-tab value="tab-1">
         <v-icon>mdi-phone</v-icon>
+        Recents
       </v-tab>
 
-      <v-tab href="#tab-2">
-        Favorites
+      <v-tab value="tab-2">
         <v-icon>mdi-heart</v-icon>
+        Favorites
       </v-tab>
 
-      <v-tab href="#tab-3">
-        Nearby
+      <v-tab value="tab-3">
         <v-icon>mdi-account-box</v-icon>
+        Nearby
       </v-tab>
     </v-tabs>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item
+    <v-window v-model="tab">
+      <v-window-item
         v-for="i in 3"
         :key="i"
         :value="'tab-' + i"
       >
-        <v-card flat>
+        <v-card>
           <v-card-text>{{ text }}</v-card-text>
         </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+      </v-window-item>
+    </v-window>
   </v-card>
 </template>
 

@@ -5,6 +5,8 @@ import { VLayout } from '@/components'
 import { VOverlay } from '../VOverlay'
 import { Application } from '../../../../cypress/templates'
 import { VLayoutItem } from '@/components/VLayout'
+import { VNavigationDrawer } from '@/components/VNavigationDrawer'
+import { VMain } from '@/components/VMain'
 
 describe('VOverlay', () => {
   it('without activator', () => {
@@ -47,6 +49,7 @@ describe('VOverlay', () => {
       .get('[data-test="content"]').should('not.exist')
   })
 
+
   it('should have correct z-index inside layout item', () => {
     cy.mount(() => (
       <Application>
@@ -66,5 +69,61 @@ describe('VOverlay', () => {
     cy.get('[data-test="layout-item"').should('have.css', 'z-index').then(zIndex => {
       cy.get('[data-test="overlay"]').should('have.css', 'z-index', String(Number(zIndex) + 1))
     })
+  })
+
+  it('should render overlay on top of layout', () => {
+    cy.mount(() => (
+      <Application>
+        <VNavigationDrawer permanent class="bg-blue" data-test="drawer" />
+        <VMain>
+          <VOverlay>
+            {{
+              activator: ({ props }) => <div { ...props } data-test="activator">Click me</div>,
+              default: () => <div data-test="content">Content</div>,
+            }}
+          </VOverlay>
+        </VMain>
+      </Application>
+    ))
+      .get('[data-test="content"]').should('not.exist')
+      .get('[data-test="activator"]').should('exist').click()
+      .get('[data-test="content"]').should('be.visible')
+      .get('[data-test="drawer"]').should('not.be.visible')
+      .get('body').click()
+      .get('[data-test="content"]').should('not.exist')
+      .get('[data-test="drawer"]').should('be.visible')
+  })
+
+  it('should render nested overlays', () => {
+    cy.mount(() => (
+      <Application>
+        <VOverlay>
+          {{
+            activator: ({ props }) => <div { ...props } data-test="first-activator">Click me</div>,
+            default: () => (
+              <div data-test="first-content">
+                <VOverlay>
+                  {{
+                    activator: ({ props }) => <div { ...props } data-test="second-activator">Click me nested</div>,
+                    default: () => <div data-test="second-content">Content</div>,
+                  }}
+                </VOverlay>
+              </div>
+            ),
+          }}
+        </VOverlay>
+      </Application>
+    ))
+      .get('[data-test="first-content"]').should('not.exist')
+      .get('[data-test="first-activator"]').should('exist').click()
+      .get('[data-test="first-content"]').should('be.visible')
+      .get('[data-test="second-activator').should('exist').click()
+      .get('[data-test="first-content').should('not.be.visible')
+      .get('[data-test="second-content').should('be.visible')
+      .get('body').click()
+      .get('[data-test="second-content').should('not.be.visible')
+      .get('[data-test="first-content').should('be.visible')
+      .get('body').click()
+      .get('[data-test="first-content').should('not.be.visible')
   })
 })
