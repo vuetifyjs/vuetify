@@ -27,15 +27,18 @@
 
 .v-tabs--fixed-tabs,
 .v-tabs--centered
-  .v-slide-group__content > .v-tab:last-child
+  .v-slide-group__content > *:last-child
     margin-inline-end: auto
 
-  .v-slide-group__content > .v-tab:first-child
+  .v-slide-group__content > *:first-child
     margin-inline-start: auto
 
-.v-tabs--grow .v-tab
-  flex: 1 0 auto
-  max-width: none
+.v-tabs--grow
+  flex-grow: 1
+
+  .v-tab
+    flex: 1 0 auto
+    max-width: none
 
 .v-tabs--right
   .v-tab:first-child

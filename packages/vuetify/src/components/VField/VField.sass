@@ -163,10 +163,13 @@
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
-  .v-field:hover &,
-  .v-input--focused &,
+  .v-field--focused &,
   .v-field--persistent-clear &
     opacity: 1
+
+  @media (hover: hover)
+    .v-field:hover &
+      opacity: 1
 
 /* endregion */
 /* region LABEL */
@@ -236,8 +239,9 @@
   right: 0
   width: 100%
 
-  .v-field:hover &
-    --v-field-border-opacity: var(--v-high-emphasis-opacity)
+  @media (hover: hover)
+    .v-field:hover &
+      --v-field-border-opacity: var(--v-high-emphasis-opacity)
 
   .v-field--error:not(.v-field--disabled) &
     color: rgb(var(--v-theme-error))
@@ -351,8 +355,9 @@
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
-  &:hover .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
   &.v-field--focused .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
