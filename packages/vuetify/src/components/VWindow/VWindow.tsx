@@ -33,6 +33,13 @@ type WindowProvide = {
   rootRef: Ref<HTMLElement | undefined>
 }
 
+type ControlProps = {
+  icon: string
+  class: string
+  onClick: () => void
+  ariaLabel: string
+}
+
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
@@ -40,6 +47,8 @@ export const VWindow = genericComponent<new () => {
   $slots: MakeSlots<{
     default: [{ group: GroupProvide }]
     additional: [{ group: GroupProvide }]
+    prev: [{ props: ControlProps }]
+    next: [{ props: ControlProps }]
   }>
 }>()({
   name: 'VWindow',

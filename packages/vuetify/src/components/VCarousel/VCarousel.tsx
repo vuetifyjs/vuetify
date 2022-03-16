@@ -39,6 +39,11 @@ export const VCarousel = defineComponent({
     },
     modelValue: null,
     progress: [Boolean, String],
+    showArrows: {
+      type: [Boolean, String],
+      default: true,
+      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+    },
     verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
   },
 
@@ -85,7 +90,7 @@ export const VCarousel = defineComponent({
         ]}
         style={{ height: convertToUnit(props.height) }}
         continuous
-        showArrows
+        showArrows={ props.showArrows }
         mandatory="force"
       >
         {{
@@ -123,6 +128,8 @@ export const VCarousel = defineComponent({
               )}
             </>
           ),
+          prev: slots.prev,
+          next: slots.next,
         }}
       </VWindow>
     ))
