@@ -131,7 +131,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
         menu.value = true
       }
 
-      if (['Escape', 'Tab'].includes(e.key)) {
+      if (['Escape'].includes(e.key)) {
         menu.value = false
       }
 

@@ -166,7 +166,7 @@ export const VCombobox = genericComponent<new <T>() => {
         menu.value = true
       }
 
-      if (['Escape', 'Tab'].includes(e.key)) {
+      if (['Escape'].includes(e.key)) {
         menu.value = false
       }
 
@@ -257,11 +257,15 @@ export const VCombobox = genericComponent<new <T>() => {
     })
 
     watch(isFocused, val => {
-      if (!val && props.multiple && search.value) {
+      if (val) {
+        selectionIndex.value = -1
+      } else {
+        menu.value = false
+
+        if (!props.multiple || !search.value) return
+
         model.value.push(search.value)
         search.value = ''
-      } else {
-        selectionIndex.value = -1
       }
     })
 
