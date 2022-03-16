@@ -10,15 +10,25 @@
   .v-field
     .v-text-field__prefix,
     .v-text-field__suffix,
+    .v-field__input,
+    &.v-field
+      cursor: pointer
+
+  .v-field
     .v-field__input
-      cursor: inherit
+      > input
+        align-self: flex-start
+        opacity: 0
+        flex: 0 0
 
-    input.v-field__input
-      opacity: 0
-      flex: 0 0
+    .v-field__append-inner
+      > .v-icon
+        margin-inline-start: 4px
+        transition: $select-transition
 
-  .v-field.v-field
-    cursor: pointer
+  .v-field--dirty
+    .v-select__selection
+      margin-inline-end: 2px
 
   &__content
     overflow: hidden
@@ -26,28 +36,16 @@
     @include tools.elevation($select-content-elevation)
     @include tools.rounded($select-content-border-radius)
 
-  &__menu-icon
-    order: 1
-    margin-inline-start: 4px
-    transition: $select-transition
-
   &__selection
     display: inline-flex
-    margin-inline-end: 2px
-    margin-bottom: 2px
-    white-space: nowrap
-
-  &__selections
-    align-items: flex-start
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-    flex: 1 1
-    flex-wrap: wrap
-    display: flex
+    letter-spacing: inherit
+    line-height: inherit
 
   &--active-menu
-    .v-select__menu-icon
-      color: inherit
-      transform: rotate(180deg)
+    .v-field__append-inner
+      > .v-icon
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
 
   &--chips
     .v-select__selection

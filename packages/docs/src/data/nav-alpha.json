@@ -84,6 +84,7 @@
         "items": [
           "autocompletes",
           "checkboxes",
+          "combobox",
           "file-inputs",
           "forms",
           "inputs",

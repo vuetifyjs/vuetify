@@ -6,7 +6,7 @@
 @use './variables' as *
 @use '../VInput/variables' as *
 
-.v-autocomplete
+.v-combobox
   .v-field
     .v-text-field__prefix,
     .v-text-field__suffix,
@@ -23,22 +23,22 @@
     .v-field__append-inner
       > .v-icon
         margin-inline-start: 4px
-        transition: $autocomplete-transition
+        transition: $combobox-transition
 
   .v-field:not(.v-field--focused)
     input
       min-width: 0
 
   .v-field--dirty
-    .v-autocomplete__selection
+    .v-combobox__selection
       margin-inline-end: 2px
 
-.v-autocomplete
+.v-combobox
   &__content
     overflow: hidden
 
-    @include tools.elevation($autocomplete-content-elevation)
-    @include tools.rounded($autocomplete-content-border-radius)
+    @include tools.elevation($combobox-content-elevation)
+    @include tools.rounded($combobox-content-border-radius)
 
   &__mask
     background: rgb(var(--v-theme-on-surface-variant))
@@ -55,9 +55,19 @@
         transform: rotate(180deg)
 
   &--chips
-    .v-autocomplete__selection
+    .v-combobox__selection
       &:first-child
         margin-inline-start: 0
+
+  &--selecting-index
+    .v-combobox__selection
+      opacity: var(--v-medium-emphasis-opacity)
+
+      &--selected
+        opacity: 1
+
+    .v-field__input > input
+      caret-color: transparent !important
 
   &--single
     &.v-text-field input
@@ -77,5 +87,5 @@
         opacity: 0
 
     .v-field--focused
-      .v-autocomplete__selection
+      .v-combobox__selection
         opacity: 0
