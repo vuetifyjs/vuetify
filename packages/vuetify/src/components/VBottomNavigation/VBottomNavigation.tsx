@@ -13,6 +13,7 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -61,6 +62,7 @@ export const VBottomNavigation = defineComponent({
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const { resizeRef, contentRect } = useResizeObserver()
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
@@ -71,8 +73,8 @@ export const VBottomNavigation = defineComponent({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
       position: computed(() => 'bottom'),
-      layoutSize: computed(() => isActive.value ? height.value : 0),
-      elementSize: height,
+      layoutSize: computed(() => isActive.value ? contentRect.value?.height ?? 0 : 0),
+      elementSize: computed(() => props.height ?? 0),
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })
@@ -91,6 +93,7 @@ export const VBottomNavigation = defineComponent({
     return () => {
       return (
         <props.tag
+          ref={ resizeRef }
           class={[
             'v-bottom-navigation',
             {
