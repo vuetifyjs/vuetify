@@ -20,16 +20,14 @@ export const VSystemBar = defineComponent({
 
   props: {
     color: String,
-    height: {
-      type: [Number, String],
-      default: 24,
-    },
-    window: Boolean,
+    height: [Number, String],
     position: {
       type: String as PropType<'top' | 'bottom'>,
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
+    window: Boolean,
+
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -48,7 +46,7 @@ export const VSystemBar = defineComponent({
       priority: computed(() => parseInt(props.priority, 10)),
       position: toRef(props, 'position'),
       layoutSize: computed(() => contentRect.value?.height ?? 0),
-      elementSize: computed(() => props.window ? 32 : Number(props.height)),
+      elementSize: computed(() => props.height ?? props.window ? 32 : 24),
       active: computed(() => true),
       absolute: toRef(props, 'absolute'),
     })
