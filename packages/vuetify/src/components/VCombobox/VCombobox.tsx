@@ -77,7 +77,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ menuIcon: '' }),
-    ...makeTransitionProps({ transition: false } as const),
+    ...makeTransitionProps({ transition: false }),
 
     hideNoData: {
       type: Boolean,
@@ -98,12 +98,9 @@ export const VCombobox = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const isPristine = ref(true)
     const menu = ref(false)
-    const search = ref('')
     const selectionIndex = ref(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const items = computed(() => props.items.map(genItem))
-    const searchValue = computed(() => isPristine.value ? undefined : search.value)
-    const { filteredItems } = useFilter(props, items, searchValue)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const model = useProxiedModel(
       props,
@@ -112,6 +109,23 @@ export const VCombobox = genericComponent<new <T>() => {
       v => wrapInArray(v || []),
       (v: any) => props.multiple ? v : v[0]
     )
+    const _search = ref('')
+    const search = computed<string>({
+      get: () => props.multiple ? _search.value : genItem(model.value[0]).value,
+      set: val => {
+        if (props.multiple) {
+          _search.value = val
+        } else {
+          model.value = [val]
+        }
+
+        if (!val) selectionIndex.value = -1
+        if (isFocused.value) menu.value = true
+
+        isPristine.value = !val
+      },
+    })
+    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       const array: any[] = []
@@ -219,9 +233,7 @@ export const VCombobox = genericComponent<new <T>() => {
         search.value = ''
       }
     }
-    function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
-    }
+
     function select (item: any) {
       if (props.multiple) {
         const index = selections.value.findIndex(selection => selection.value === item.value)
@@ -243,6 +255,9 @@ export const VCombobox = genericComponent<new <T>() => {
         })
       }
     }
+    function onAfterLeave () {
+      if (isFocused.value) isPristine.value = true
+    }
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
@@ -257,17 +272,8 @@ export const VCombobox = genericComponent<new <T>() => {
         model.value.push(search.value)
         search.value = ''
       } else {
-        isPristine.value = true
         selectionIndex.value = -1
       }
-    })
-
-    watch(search, val => {
-      if (!props.multiple) model.value = [val]
-      if (!val) selectionIndex.value = -1
-      if (isFocused.value) menu.value = true
-
-      isPristine.value = !val
     })
 
     useRender(() => {
@@ -395,7 +401,15 @@ export const VCombobox = genericComponent<new <T>() => {
       )
     })
 
-    return useForwardRef({}, vTextFieldRef)
+    return useForwardRef({
+      isFocused,
+      isPristine,
+      menu,
+      search,
+      selectionIndex,
+      filteredItems,
+      select,
+    }, vTextFieldRef)
   },
 })
 

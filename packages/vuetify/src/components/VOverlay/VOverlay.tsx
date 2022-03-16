@@ -239,10 +239,10 @@ export const VOverlay = genericComponent<new () => {
                 />
                 <MaybeTransition
                   appear
-                  onAfterLeave={ [onAfterLeave, () => emit('afterLeave')] }
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
+                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
                 >
                   <div
                     ref={ contentEl }
