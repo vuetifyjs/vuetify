@@ -359,7 +359,10 @@ export const VCombobox = genericComponent<new <T>() => {
                     <div
                       class={[
                         'v-combobox__selection',
-                        selection.selected && textColorClasses.value,
+                        selection.selected && [
+                          'v-combobox__selection--selected',
+                          textColorClasses.value,
+                        ],
                       ]}
                       style={ selection.selected ? textColorStyles.value : {} }
                     >

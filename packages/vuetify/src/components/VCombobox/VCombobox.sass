@@ -48,9 +48,11 @@
     line-height: inherit
 
   &--active-menu
-    .v-combobox__menu-icon
-      color: inherit
-      transform: rotate(180deg)
+    .v-field__append-inner
+      > .v-combobox__menu-icon
+        color: inherit
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
 
   &--chips
     .v-combobox__selection
@@ -58,6 +60,12 @@
         margin-inline-start: 0
 
   &--selecting-index
+    .v-combobox__selection
+      opacity: var(--v-medium-emphasis-opacity)
+
+      &--selected
+        opacity: 1
+
     .v-field__input > input
       caret-color: transparent !important
 

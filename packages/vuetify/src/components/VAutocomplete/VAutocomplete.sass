@@ -48,9 +48,11 @@
     line-height: inherit
 
   &--active-menu
-    .v-autocomplete__menu-icon
-      color: inherit
-      transform: rotate(180deg)
+    .v-field__append-inner
+      > .v-autocomplete__menu-icon
+        color: inherit
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
 
   &--chips
     .v-autocomplete__selection

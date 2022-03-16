@@ -42,9 +42,11 @@
     line-height: inherit
 
   &--active-menu
-    .v-select__menu-icon
-      color: inherit
-      transform: rotate(180deg)
+    .v-field__append-inner
+      > .v-select__menu-icon
+        color: inherit
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
 
   &--chips
     .v-select__selection
