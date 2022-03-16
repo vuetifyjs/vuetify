@@ -8,8 +8,9 @@
           md="4"
         >
           <v-text-field
-            dense
-            label="Regular"
+            density="default"
+            label="Default"
+            placeholder="Default"
           ></v-text-field>
         </v-col>
 
@@ -19,23 +20,11 @@
           md="4"
         >
           <v-text-field
-            label="Filled"
-            filled
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Filled"
-            placeholder="Dense & Rounded"
-            filled
+            density="comfortable"
+            label="Comfortable"
+            placeholder="Comfortable"
+            variant="filled"
             rounded
-            dense
           ></v-text-field>
         </v-col>
 
@@ -45,9 +34,10 @@
           md="4"
         >
           <v-text-field
-            label="Solo"
-            solo
-            dense
+            density="compact"
+            label="Compact"
+            placeholder="Compact"
+            variant="contained"
           ></v-text-field>
         </v-col>
 
@@ -57,9 +47,10 @@
           md="4"
         >
           <v-text-field
-            label="Outlined"
-            outlined
-            dense
+            density="default"
+            label="Default"
+            placeholder="Default"
+            variant="underlined"
           ></v-text-field>
         </v-col>
 
@@ -69,10 +60,23 @@
           md="4"
         >
           <v-text-field
-            label="Outlined"
-            placeholder="Placeholder"
-            outlined
-            dense
+            density="comfortable"
+            label="Comfortable"
+            placeholder="Comfortable"
+            variant="plain"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="4"
+        >
+          <v-text-field
+            density="compact"
+            label="Compact"
+            placeholder="Compact"
+            variant="outlined"
           ></v-text-field>
         </v-col>
       </v-row>

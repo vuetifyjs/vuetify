@@ -13,8 +13,8 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { defineComponent, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent } from '@/util'
 
 export const VAvatar = defineComponent({
   name: 'VAvatar',
@@ -25,6 +25,7 @@ export const VAvatar = defineComponent({
     right: Boolean,
     icon: String,
     image: String,
+
     ...makeDensityProps(),
     ...makeRoundedProps(),
     ...makeSizeProps(),
@@ -37,7 +38,7 @@ export const VAvatar = defineComponent({
     const { roundedClasses } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-avatar',
@@ -55,13 +56,17 @@ export const VAvatar = defineComponent({
           sizeStyles.value,
         ]}
       >
-        { props.image && <VImg src={ props.image } alt="" /> }
 
-        { props.icon && !props.image && <VIcon icon={ props.icon } /> }
-
-        { slots.default?.() }
+        { props.image
+          ? (<VImg src={ props.image } alt="" />)
+          : props.icon
+            ? (<VIcon icon={ props.icon } />)
+            : slots.default?.()
+        }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
 

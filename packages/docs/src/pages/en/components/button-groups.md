@@ -1,4 +1,5 @@
 ---
+nav: Button groups
 meta:
   title: Button group component
   description: The button group component allows you to combine a series of selectable buttons together in a single-line.
@@ -13,7 +14,7 @@ related:
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

@@ -14,7 +14,7 @@ related:
 
 The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -44,7 +44,7 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 <example file="v-list/prop-density" />
 
-<promoted-ad slug="vuetify-lux-admin-pro" />
+<promoted slug="vuetify-lux-admin-pro" />
 
 #### Disabled
 

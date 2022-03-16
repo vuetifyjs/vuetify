@@ -17,6 +17,7 @@ import { Touch } from '@/directives/touch'
 
 // Utilities
 import { computed, defineComponent, provide, ref, watch } from 'vue'
+import { useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -206,7 +207,7 @@ export const VWindow = defineComponent({
       }
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ rootRef }
         class={[
@@ -233,6 +234,10 @@ export const VWindow = defineComponent({
           ) }
         </div>
       </props.tag>
-    )
+    ))
+
+    return {
+      group,
+    }
   },
 })

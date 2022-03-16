@@ -13,7 +13,7 @@ related:
 
 The Vuetify **layout system** makes it easy to rapidly scaffold an application's UI regions with little effort.
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
+<promoted slug="vuetify-zero-theme-pro" />
 
 ## Examples
 

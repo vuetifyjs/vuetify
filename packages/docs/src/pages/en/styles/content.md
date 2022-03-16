@@ -13,7 +13,7 @@ related:
 
 Vuetify has custom styling for multiple standard elements.
 
-<entry-ad />
+<entry />
 
 ## Block quote
 

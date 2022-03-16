@@ -168,10 +168,7 @@
   "components/system-bars": ["v-system-bar"],
   "components/tabs": [
     "v-tabs",
-    "v-tab",
-    "v-tab-item",
-    "v-tabs-items",
-    "v-tabs-slider"
+    "v-tab"
   ],
   "components/text-fields": ["v-text-field"],
   "components/textareas": ["v-textarea"],

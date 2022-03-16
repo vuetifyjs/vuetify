@@ -20,12 +20,17 @@
     .#{$name}__overlay
       display: none
 
-  &--variant-contained
+  &--variant-contained,
+  &--variant-contained-flat
     background: $contained-background
     color: $contained-color
 
-    @if ($contained-elevation > 0)
+  @if ($contained-elevation > 0)
+    &--variant-contained
       @include elevation($contained-elevation)
+
+  &--variant-contained-flat
+    @include elevation(0)
 
   &--variant-outlined
     border: thin solid currentColor

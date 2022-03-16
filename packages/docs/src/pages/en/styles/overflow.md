@@ -13,7 +13,7 @@ related:
 
 Configure how content overflows when it becomes out of container bounds.
 
-<entry-ad />
+<entry />
 
 ## How it works
 

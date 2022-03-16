@@ -1,7 +1,7 @@
 @use '../../styles/settings';
 
 $expansion-panel-background-color: rgb(var(--v-theme-surface)) !default;
-$expansion-panel-color: rgb(var(--v-theme-on-surface)) !default;
+$expansion-panel-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $expansion-panel-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $expansion-panel-border-radius: settings.$border-radius-root !default;
 $expansion-panel-active-margin: 16px !default;

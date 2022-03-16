@@ -3,13 +3,11 @@
 @use '../../styles/tools';
 
 // Defaults
-$banner-avatar-after-opacity: var(--v-border-opacity) !default;
-$banner-avatar-after-opacity: var(--v-border-opacity) !default;
 $banner-avatar-border-radius: map.get(settings.$rounded, 'circle') !default;
 $banner-avatar-margin-end: 24px !default;
 $banner-avatar-margin-start: 0 !default;
-$banner-background: rgb(var(--v-theme-background)) !default;
-$banner-color: rgb(var(--v-theme-on-surface)) !default;
+$banner-background: rgb(var(--v-theme-surface)) !default;
+$banner-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $banner-border-color: settings.$border-color-root !default;
 $banner-border-radius: map.get(settings.$rounded, 0) !default;
 $banner-border-style: settings.$border-style-root !default;
@@ -26,12 +24,10 @@ $banner-padding-top: 10px !default;
 $banner-positions: absolute fixed sticky !default;
 $banner-rounded-border-radius: settings.$border-radius-root !default;
 $banner-sticky-top: 0 !default;
-$banner-text-color: rgb(var(--v-theme-on-surface)) !default;
 $banner-text-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
 $banner-two-line-content-margin-bottom: 4px !default;
 $banner-two-line-padding-top: 24px !default;
 $banner-three-line-content-margin-bottom: 8px !default;
-$banner-three-line-margin-bottom: 24px !default;
 $banner-three-line-padding-top: 24px !default;
 $banner-width: 100% !default;
 

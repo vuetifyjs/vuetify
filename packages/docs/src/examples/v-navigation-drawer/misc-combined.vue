@@ -5,7 +5,6 @@
         theme="dark"
         rail
         permanent
-        absolute
       >
         <v-list-item prepend-avatar="https://randomuser.me/api/portraits/women/75.jpg"></v-list-item>
 
@@ -22,7 +21,6 @@
 
       <v-navigation-drawer
         permanent
-        absolute
       >
         <v-list>
           <v-list-item title="Home" value="home"></v-list-item>

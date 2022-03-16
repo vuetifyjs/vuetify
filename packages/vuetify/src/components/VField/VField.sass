@@ -20,6 +20,10 @@
   grid-area: control
   position: relative
 
+  &--disabled
+    opacity: var(--v-disabled-opacity)
+    pointer-events: none
+
   --v-field-padding-start: #{$field-control-padding-start}
   --v-field-padding-end: #{$field-control-padding-end}
   --v-field-padding-top: #{$field-control-padding-top}
@@ -41,6 +45,7 @@
   &--variant-contained
     background: $field-control-contained-background
     border-color: transparent
+    color: $field-control-contained-color
 
     @include tools.elevation($field-control-contained-elevation)
 
@@ -64,13 +69,6 @@
   &--single-line
     --v-field-padding-top: 0
 
-  &--variant-filled,
-  &--variant-outlined,
-  &--variant-underlined
-    &.v-field--focused
-      .v-label
-        color: inherit
-
   &--variant-contained,
   &--variant-filled
     $root: &
@@ -93,6 +91,7 @@
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
+  color: inherit
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
   padding-inline-start: var(--v-field-padding-start)
@@ -119,12 +118,14 @@
 /* region AFFIXES */
 .v-field__prepend-inner
   grid-area: prepend-inner
+  padding-inline-end: var(--v-field-padding-after)
 
 .v-field__clearable
   grid-area: clear
 
 .v-field__append-inner
   grid-area: append-inner
+  padding-inline-start: var(--v-field-padding-after)
 
 .v-field__field,
 .v-field__prepend-inner,
@@ -139,17 +140,36 @@
   .v-field--focused &
     opacity: 1
 
+.v-field__prepend-inner,
+.v-field__append-inner,
+.v-field__clearable
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-field--disabled &,
+  .v-field--error &
+    > .v-icon
+      opacity: 1
+
+  .v-field--error:not(.v-field--disabled) &
+    > .v-icon
+      color: rgb(var(--v-theme-error))
+
 .v-field__clearable
   cursor: pointer
   opacity: 0
-  margin-inline-end: $field-clearable-margin-inline-end
+  margin-inline-start: $field-clearable-margin
+  margin-inline-end: $field-clearable-margin
   transition: $field-transition-timing
   transition-property: opacity, transform, width
 
-  .v-field:hover &,
-  .v-input--focused &,
+  .v-field--focused &,
   .v-field--persistent-clear &
     opacity: 1
+
+  @media (hover: hover)
+    .v-field:hover &
+      opacity: 1
 
 /* endregion */
 /* region LABEL */
@@ -167,9 +187,13 @@
   .v-field--active &
     visibility: hidden
 
-  .v-input--disabled &,
-  .v-input--error &
-    color: inherit
+  .v-field--disabled &,
+  .v-field--focused &,
+  .v-field--error &
+    opacity: 1
+
+  .v-field--error:not(.v-field--disabled) &
+    color: rgb(var(--v-theme-error))
 
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
@@ -187,7 +211,7 @@
       @at-root
         @include tools.density('v-input', $input-density) using ($modifier)
           @at-root #{selector.nest(&, $root)}
-            top: 9px + $modifier * .25
+            top: 7px + $modifier * .25
 
     .v-field--variant-plain &,
     .v-field--variant-underlined &
@@ -215,8 +239,12 @@
   right: 0
   width: 100%
 
-  .v-field:hover &
-    --v-field-border-opacity: var(--v-high-emphasis-opacity)
+  @media (hover: hover)
+    .v-field:hover &
+      --v-field-border-opacity: var(--v-high-emphasis-opacity)
+
+  .v-field--error:not(.v-field--disabled) &
+    color: rgb(var(--v-theme-error))
 
   .v-field.v-field--focused &,
   .v-input.v-input--error &
@@ -317,7 +345,7 @@
 /* region OVERLAY */
 .v-field--variant-filled
   .v-field__overlay
-    background-color: rgb(var(--v-theme-on-surface))
+    background-color: currentColor
     border-radius: inherit
     opacity: $field-overlay-filled-opacity
     pointer-events: none
@@ -327,8 +355,9 @@
   &.v-field--has-background .v-field__overlay
     opacity: 0
 
-  &:hover .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
 
   &.v-field--focused .v-field__overlay
     opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))

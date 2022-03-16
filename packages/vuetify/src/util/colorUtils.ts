@@ -162,6 +162,10 @@ export function RGBAtoCSS (rgba: RGBA): string {
   return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 }
 
+export function HSVAtoCSS (hsva: HSVA): string {
+  return RGBAtoCSS(HSVAtoRGBA(hsva))
+}
+
 export function RGBtoCSS (rgba: RGBA): string {
   return RGBAtoCSS({ ...rgba, a: 1 })
 }

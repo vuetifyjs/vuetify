@@ -1,17 +1,11 @@
-@import '../../styles/styles.sass';
+@use 'sass:math';
+@use 'sass:map';
 
-$tab-disabled-opacity: .5 !default;
-$tab-font-size: map-deep-get($typography, 'subtitle-2', 'size') !default;
-$tab-font-weight: map-deep-get($typography, 'subtitle-2', 'weight') !default;
-$tab-line-height: normal !default;
-$tabs-bar-background-color: 'cards' !default;
-$tabs-bar-height: 48px !default;
-$tabs-icons-and-text-bar-height: 72px !default;
-$tabs-icons-and-text-first-tab-margin-bottom: 6px !default;
-$tabs-item-align-with-title-margin: 42px !default;
-$tabs-item-letter-spacing: .0892857143em !default;
-$tabs-item-max-width: 360px !default;
-$tabs-item-min-width: 90px !default;
-$tabs-item-padding: 0 16px !default;
-$tabs-item-vertical-height: $tabs-bar-height !default;
-$tabs-item-vertical-icons-and-text-height: $tabs-icons-and-text-bar-height !default;
+$tabs-density: ( 'default': 0, 'comfortable' : -1, 'compact': -3) !default;
+$tabs-height: 48px !default;
+$tabs-stacked-height: 72px !default;
+
+$tab-align-with-title-margin: 42px !default;
+$tab-max-width: 360px !default;
+$tab-min-width: 90px !default;
+$tab-slider-size: 2px !default;

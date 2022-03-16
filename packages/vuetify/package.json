@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.12",
+  "version": "3.0.0-alpha.13",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -44,7 +44,8 @@
   ],
   "files": [
     "dist/",
-    "lib/"
+    "lib/",
+    "CHANGELOG.md"
   ],
   "exports": {
     ".": {
@@ -132,6 +133,7 @@
     "cy-mobile-commands": "^0.3.0",
     "cypress": "^9.0.0",
     "cypress-file-upload": "^5.0.8",
+    "cypress-real-events": "^1.6.0",
     "dotenv": "^8.6.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^25.2.4",
@@ -150,7 +152,7 @@
     "vue-router": "^4.0.12"
   },
   "peerDependencies": {
-    "@formatjs/intl": "^1.0.0",
+    "@formatjs/intl": "^1.0.0 || ^2.0.0",
     "vue": "^3.2.19",
     "vue-i18n": "^9.0.0"
   },

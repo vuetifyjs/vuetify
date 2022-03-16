@@ -4,9 +4,9 @@ import { VSliderThumb } from '../VSlider/VSliderThumb'
 import { VSliderTrack } from '../VSlider/VSliderTrack'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { getOffset, makeSliderProps, useSlider } from '../VSlider/slider'
-import { useFocus } from '@/composables/focus'
+import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, defineComponent, ref } from 'vue'
@@ -19,6 +19,7 @@ export const VRangeSlider = defineComponent({
   name: 'VRangeSlider',
 
   props: {
+    ...makeFocusProps(),
     ...makeVInputProps(),
     ...makeSliderProps(),
 
@@ -30,6 +31,7 @@ export const VRangeSlider = defineComponent({
   },
 
   emits: {
+    'update:focused': (value: boolean) => true,
     'update:modelValue': (value: [number, number]) => true,
   },
 
@@ -96,7 +98,7 @@ export const VRangeSlider = defineComponent({
       },
     ) as WritableComputedRef<[number, number]>
 
-    const { isFocused, focus, blur } = useFocus()
+    const { isFocused, focus, blur } = useFocus(props)
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
 

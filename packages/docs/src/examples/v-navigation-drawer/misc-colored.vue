@@ -5,7 +5,6 @@
         class="bg-deep-purple"
         theme="dark"
         permanent
-        absolute
       >
         <v-list color="transparent">
           <v-list-item prepend-icon="mdi-view-dashboard" title="Dashboard"></v-list-item>

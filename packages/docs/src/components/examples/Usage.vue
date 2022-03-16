@@ -1,5 +1,15 @@
 <template>
-  <app-sheet class="mb-12">
-    <div class="text-h5 ma-3">Usage example coming soon...</div>
+  <app-sheet class="mb-6">
+    <vue-file :file="`${name}/usage`" />
   </app-sheet>
 </template>
+
+<script>
+  export default {
+    name: 'Usage',
+
+    props: {
+      name: String,
+    },
+  }
+</script>

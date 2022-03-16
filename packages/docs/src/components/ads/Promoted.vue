@@ -9,7 +9,7 @@
     >
       <base-ad
         v-bind="$attrs"
-        class="v-vuetify-ad--promoted"
+        class="v-vuetify--promoted"
         compact
         color="transparent"
         dark
@@ -21,6 +21,7 @@
           :src="background"
           class="flex-1-1-auto rounded"
           max-height="56"
+          cover
         >
           <div class="d-flex align-center fill-height">
             <v-img
@@ -34,7 +35,7 @@
 
             <app-markdown
               v-if="description"
-              class="text-subtitle-2 text-sm-h6 font-weight-light"
+              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
               :content="description"
             />
           </div>
@@ -61,20 +62,20 @@
       ...createAdProps(),
       medium: {
         type: String,
-        default: 'promoted-ad',
+        default: 'promoted',
       },
     },
 
     setup (props) {
       const { ad, attrs } = useAd(props)
 
-      const description = computed(() => ad.value.metadata.description_short ?? ad.value.metadata.description)
-      const logo = computed(() => ad.value.metadata?.images?.logo?.url ?? ad.value.metadata?.images?.preview?.url)
+      const description = computed(() => ad.value.metadata.description_short || ad.value.metadata.description)
+      const logo = computed(() => ad.value.metadata?.images?.logo?.url || ad.value.metadata?.images?.preview?.url)
       const background = computed(() => ad.value.metadata?.images?.background?.url)
 
       function onClick () {
         // this.$gtag.event('click', {
-        //   event_category: 'vuetify-ads',
+        //   event_category: 'vuetifys',
         //   event_label: this.slug,
         //   value: 'promoted',
         // })
@@ -138,7 +139,7 @@
 </script>
 
 <style lang="sass">
-  .v-vuetify-ad--promoted
+  .v-vuetify--promoted
     p
       line-height: 1.1
 

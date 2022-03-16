@@ -17,13 +17,13 @@ assets:
 
 The `v-icon` component provides a large set of glyphs to provide context to various aspects of your application. For a list of all available icons, visit the official [Material Design Icons](https://materialdesignicons.com/) page. To use any of these icons simply use the `mdi-` prefix followed by the icon name.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
 Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-<usage name="v-icon" />
+<!-- <usage name="v-icon" /> -->
 
 ## API
 

@@ -7,9 +7,9 @@ import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useFocus } from '@/composables/focus'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Helpers
 import { defineComponent } from '@/util'
@@ -22,6 +22,7 @@ export const VSlider = defineComponent({
   name: 'VSlider',
 
   props: {
+    ...makeFocusProps(),
     ...makeSliderProps(),
     ...makeVInputProps(),
 
@@ -32,6 +33,7 @@ export const VSlider = defineComponent({
   },
 
   emits: {
+    'update:focused': (value: boolean) => true,
     'update:modelValue': (v: number) => true,
   },
 
@@ -69,7 +71,7 @@ export const VSlider = defineComponent({
       },
     )
 
-    const { isFocused, focus, blur } = useFocus()
+    const { isFocused, focus, blur } = useFocus(props)
     const trackStop = computed(() => position(model.value))
 
     return () => {

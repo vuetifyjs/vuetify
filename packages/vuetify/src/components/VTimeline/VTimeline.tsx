@@ -83,7 +83,7 @@ export const VTimeline = defineComponent({
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset || undefined),
+          '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
       >
         { (props.truncateLine === 'none' || props.truncateLine === 'end') && (

@@ -2,7 +2,6 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
-        absolute
         permanent
         position="right"
       >

@@ -90,7 +90,7 @@ export function useBackButton (cb: (next: NavigationGuardNext) => void) {
   })
 
   function onPopstate (e: PopStateEvent) {
-    if (e.state.replaced) return
+    if (e.state?.replaced) return
 
     popped = true
     setTimeout(() => (popped = false))

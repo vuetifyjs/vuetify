@@ -13,7 +13,7 @@ related:
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

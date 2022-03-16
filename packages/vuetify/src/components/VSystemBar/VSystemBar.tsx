@@ -2,25 +2,25 @@
 import './VSystemBar.sass'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { defineComponent } from '@/util'
+import { toRef } from 'vue'
 
 export const VSystemBar = defineComponent({
   name: 'VSystemBar',
 
   props: {
-    lightsOut: Boolean,
+    color: String,
     window: Boolean,
 
-    ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makePositionProps(),
@@ -31,7 +31,7 @@ export const VSystemBar = defineComponent({
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
-    const { borderClasses } = useBorder(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
@@ -40,18 +40,16 @@ export const VSystemBar = defineComponent({
     return () => (
       <props.tag
         class={[
-          {
-            'v-system-bar': true,
-            'v-system-bar--lights-out': props.lightsOut,
-            'v-system-bar--window': props.window,
-          },
+          'v-system-bar',
+          { 'v-system-bar--window': props.window },
           themeClasses.value,
-          borderClasses.value,
+          backgroundColorClasses.value,
           elevationClasses.value,
           positionClasses.value,
           roundedClasses.value,
         ]}
         style={[
+          backgroundColorStyles.value,
           dimensionStyles.value,
           positionStyles.value,
         ]}

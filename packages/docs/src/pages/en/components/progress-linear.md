@@ -1,4 +1,5 @@
 ---
+nav: Progress linear
 meta:
   title: Progress linear component
   description: The progress-linear component is useful for displaying a visual indicator of numerical data in a straight line.
@@ -13,7 +14,7 @@ related:
 
 The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).
 
-<entry-ad />
+<entry />
 
 ## Usage
 

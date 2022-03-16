@@ -13,7 +13,7 @@ related:
 
 The `v-skeleton-loader` component is a versatile tool that can fill many roles within a project.  At its heart, the component provides an indication to the user that something is coming but not yet available. There are over 30 pre-defined options available that can be combined to make custom examples.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

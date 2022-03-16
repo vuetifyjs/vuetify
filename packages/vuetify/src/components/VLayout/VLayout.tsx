@@ -13,10 +13,10 @@ export const VLayout = defineComponent({
   props: makeLayoutProps(),
 
   setup (props, { slots }) {
-    const { layoutClasses, getLayoutItem, items } = createLayout(props)
+    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
 
     useRender(() => (
-      <div class={ layoutClasses.value }>
+      <div ref={ layoutRef } class={ layoutClasses.value } style={ layoutStyles.value }>
         { slots.default?.() }
       </div>
     ))

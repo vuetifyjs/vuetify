@@ -1,41 +1,73 @@
 <template>
-  <v-theme-provider :theme="isDark ? 'dark' : 'light'">
-    <v-sheet
-      ref="root"
-      class="app-markup overflow-hidden"
-      :color="isDark ? '#1F1F1F' : 'grey-lighten-5'"
-      rounded
-      outlined
-      dir="ltr"
-      v-bind="$attrs"
+  <v-sheet
+    ref="root"
+    :theme="isDark ? 'dark' : 'light'"
+    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    class="app-markup overflow-hidden border"
+    dir="ltr"
+    outlined
+    rounded
+    v-bind="$attrs"
+  >
+    <v-toolbar
+      border="b"
+      class="px-1"
+      color="transparent"
+      flat
+      height="44"
     >
+      <v-sheet
+        v-if="resource"
+        class="text-body-2 px-3 pt-3 text-disabled"
+        color="transparent"
+        height="44"
+        rounded="tl"
+      >
+        <v-icon icon="mdi-file-tree" class="mr-1" />
+
+        {{ resource }}
+      </v-sheet>
+
+      <v-spacer />
+
+      <v-tooltip anchor="bottom">
+        <template #activator="{ props }">
+          <v-btn
+            :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
+            class="mr-1 text-disabled"
+            density="comfortable"
+            v-bind="props"
+            @click="copy"
+          />
+        </template>
+
+        <span>{{ t('copy-example-source') }}</span>
+      </v-tooltip>
+    </v-toolbar>
+
+    <div class="pa-4">
       <slot>
         <pre v-if="inline" :class="className">
           <code :class="className" v-html="highlighted" />
         </pre>
+
         <code v-else :class="className" v-html="highlighted" />
       </slot>
-
-      <v-btn
-        size="small"
-        class="v-btn--copy"
-        icon
-        variant="text"
-        @click="copy"
-      >
-        <v-fade-transition hide-on-leave>
-          <v-icon
-            :key="String(clicked)"
-            color="grey"
-            :icon="clicked ? '$complete' : 'mdi-content-copy'"
-          />
-        </v-fade-transition>
-      </v-btn>
-    </v-sheet>
-  </v-theme-provider>
+    </div>
+  </v-sheet>
 </template>
 
 <script lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
+  import { IN_BROWSER } from '@/util/globals'
+  import { wait } from '@/util/helpers'
+
   // Imports
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
@@ -47,18 +79,13 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
-  import { useTheme } from 'vuetify'
-  import { wait } from '@/util/helpers'
-  import { IN_BROWSER } from '@/util/globals'
-  import { useUserStore } from '@/store/user'
-
   export default defineComponent({
     name: 'Markup',
 
     inheritAttrs: false,
 
     props: {
+      resource: String,
       code: String,
       inline: Boolean,
       language: {
@@ -72,6 +99,8 @@
       const theme = useTheme()
       const clicked = ref(false)
       const root = ref<ComponentPublicInstance>()
+      const type = ref('js')
+      const { t } = useI18n()
 
       const highlighted = computed(() => (
         props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
@@ -81,7 +110,7 @@
       async function copy () {
         if (!IN_BROWSER || !root.value) return
 
-        const el = root.value.$el.querySelector('pre')
+        const el = root.value.$el.querySelector('code')
 
         if (!el) return
 
@@ -97,15 +126,25 @@
 
         await wait(500)
 
-        clicked.value = false
         window.getSelection()?.removeAllRanges()
+
+        clicked.value = false
       }
 
       const isDark = computed(() => {
         return user.mixedTheme || theme.getTheme(theme.current.value).dark
       })
 
-      return { root, isDark, highlighted, className, clicked, copy }
+      return {
+        root,
+        isDark,
+        highlighted,
+        className,
+        clicked,
+        copy,
+        type,
+        t,
+      }
     },
   })
 </script>
@@ -114,22 +153,9 @@
   .v-sheet.app-markup
     // margin: 16px 0
     position: relative
-    padding: 12px 50px 12px 16px
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
-
-    .v-btn--copy
-      position: absolute
-      top: 4px
-      right: 4px
-
-    pre, code
-      background: transparent
-      font-size: 1rem
-      font-weight: 300
-      margin: 0 !important
-      min-height: 48px
 
     > pre
       border-radius: inherit
@@ -137,8 +163,10 @@
     code,
     pre
       background: none
+      color: currentColor !important
       font-family: Consolas, Monaco, 'Andale Mono', 'Ubuntu Mono', monospace
       font-size: 1rem
+      font-weight: 300
       hyphens: none
       line-height: 1.5
       margin: 0
@@ -153,17 +181,17 @@
 
     pre
       &::after
-        bottom: 0.75rem
+        bottom: .5rem
         color: hsla(0, 0%, 19%, 0.5)
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
         position: absolute
-        right: 1rem
+        right: 12px
         text-transform: uppercase
 
     pre.language-bash::after
-      content: 'sh'
+      content: ' sh '
 
     pre.language-html::after
       content: 'html'

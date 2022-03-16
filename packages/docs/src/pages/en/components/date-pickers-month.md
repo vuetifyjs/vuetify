@@ -13,7 +13,7 @@ related:
 
 `v-date-picker` can be used as a standalone month picker component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

@@ -1,18 +1,17 @@
 // Components
 import { VIcon } from '@/components/VIcon'
-import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
 
 // Directives
-import ripple from '@/directives/ripple'
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, inject } from 'vue'
-import { defineComponent, propsFactory } from '@/util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 
 export const makeVExpansionPanelTitleProps = propsFactory({
+  color: String,
   expandIcon: {
     type: String,
     default: '$expand',
@@ -26,13 +25,12 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     type: [Boolean, Object],
     default: false,
   },
-  color: String,
 })
 
 export const VExpansionPanelTitle = defineComponent({
   name: 'VExpansionPanelTitle',
 
-  directives: { ripple },
+  directives: { Ripple },
 
   props: {
     open: Boolean,
@@ -47,7 +45,7 @@ export const VExpansionPanelTitle = defineComponent({
   setup (props, { slots, emit }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
-    return () => (
+    useRender(() => (
       <button
         class={[
           'v-expansion-panel-title',
@@ -75,6 +73,10 @@ export const VExpansionPanelTitle = defineComponent({
           </div>
         ) }
       </button>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VExpansionPanelTitle = InstanceType<typeof VExpansionPanelTitle>

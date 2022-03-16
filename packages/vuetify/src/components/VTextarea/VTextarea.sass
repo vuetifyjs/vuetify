@@ -7,6 +7,10 @@
 @use '../VInput/variables' as *
 
 .v-textarea
+  .v-field--active
+    textarea
+      opacity: 1
+
   .v-field__input
     flex: 1 1 auto
     line-height: $textarea-line-height
@@ -28,3 +32,16 @@
     left: 0
     height: 0 !important
     pointer-events: none
+
+  textarea
+    flex: 1
+    opacity: 0
+    transition: .15s opacity settings.$standard-easing
+
+    &:focus,
+    &:active
+      outline: none
+
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none

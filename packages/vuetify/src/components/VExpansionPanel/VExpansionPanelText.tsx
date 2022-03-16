@@ -1,13 +1,12 @@
 // Components
 import { VExpandTransition } from '@/components/transitions'
-import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
-import { inject, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VExpansionPanelText = defineComponent({
   name: 'VExpansionPanelText',
@@ -20,13 +19,11 @@ export const VExpansionPanelText = defineComponent({
   setup (props, { slots }) {
     const { hasContent, onAfterLeave } = useLazy(props, toRef(props, 'open'))
 
-    return () => (
+    useRender(() => (
       <VExpandTransition onAfterLeave={ onAfterLeave }>
         <div
+          class="v-expansion-panel-text"
           v-show={ props.open }
-          class={[
-            'v-expansion-panel-text',
-          ]}
         >
           { slots.default && hasContent.value && (
             <div class="v-expansion-panel-text__wrapper">
@@ -35,6 +32,10 @@ export const VExpansionPanelText = defineComponent({
           ) }
         </div>
       </VExpandTransition>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VExpansionPanelText = InstanceType<typeof VExpansionPanelText>

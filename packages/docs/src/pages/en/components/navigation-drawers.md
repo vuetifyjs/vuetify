@@ -14,7 +14,7 @@ related:
 
 The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -27,12 +27,6 @@ The navigation drawer is primarily used to house links to the pages in your appl
 <api-inline />
 
 ## Caveats
-
-<alert type="warning">
-
-  In most cases it is not necessary to add the **absolute** prop on the `v-navigation-drawer`. The examples on this page use it because the drawers are nested inside another application.
-
-</alert>
 
 <alert type="info">
 

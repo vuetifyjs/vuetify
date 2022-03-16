@@ -3,17 +3,17 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-system-bar
+    <!-- <v-system-bar
       color="indigo darken-2"
       dark
     >
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-window-minimize</v-icon>
+      <v-icon icon="mdi-window-minimize"></v-icon>
 
-      <v-icon>mdi-window-maximize</v-icon>
+      <v-icon icon="mdi-window-maximize"></v-icon>
 
-      <v-icon>mdi-close</v-icon>
+      <v-icon icon="mdi-close"></v-icon>
     </v-system-bar>
 
     <v-toolbar
@@ -26,10 +26,8 @@
 
       <v-spacer></v-spacer>
 
-      <v-btn icon>
-        <v-icon>mdi-magnify</v-icon>
-      </v-btn>
-    </v-toolbar>
+      <v-btn icon="mdi-magnify"></v-btn>
+    </v-toolbar> -->
 
     <v-container fluid>
       <v-row dense>
@@ -44,24 +42,19 @@
               class="white--text align-end"
               gradient="to bottom, rgba(0,0,0,.1), rgba(0,0,0,.5)"
               height="200px"
+              cover
             >
-              <v-card-title v-text="card.title"></v-card-title>
+              <v-card-title class="text-white" v-text="card.title"></v-card-title>
             </v-img>
 
             <v-card-actions>
               <v-spacer></v-spacer>
 
-              <v-btn icon>
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
+              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-heart"></v-btn>
 
-              <v-btn icon>
-                <v-icon>mdi-bookmark</v-icon>
-              </v-btn>
+              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-bookmark"></v-btn>
 
-              <v-btn icon>
-                <v-icon>mdi-share-variant</v-icon>
-              </v-btn>
+              <v-btn size="small" color="surface-variant" variant="text" icon="mdi-share-variant"></v-btn>
             </v-card-actions>
           </v-card>
         </v-col>

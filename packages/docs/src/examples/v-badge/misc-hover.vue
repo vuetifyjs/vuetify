@@ -4,7 +4,7 @@
       :model-value="hover"
       color="deep-purple"
       content="9999+"
-      location="top-left"
+      location="top-end"
       transition="slide-x-transition"
     >
       <v-hover v-slot="{ props }" v-model="hover">

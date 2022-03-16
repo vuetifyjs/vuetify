@@ -41,6 +41,7 @@ export const VBtnGroup = defineComponent({
       VBtn: {
         height: 'auto',
         color: toRef(props, 'color'),
+        density: toRef(props, 'density'),
         flat: true,
         variant: toRef(props, 'variant'),
       },

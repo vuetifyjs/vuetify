@@ -9,7 +9,7 @@ meta:
 
 The `v-no-ssr` component is a simple wrapper that allows a developer to designate what a server-side renderer should not render, but leave to the client.
 
-<entry-ad />
+<entry />
 
 ## Code Example
 
