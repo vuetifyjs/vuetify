@@ -49,7 +49,6 @@ describe('VOverlay', () => {
       .get('[data-test="content"]').should('not.exist')
   })
 
-
   it('should have correct z-index inside layout item', () => {
     cy.mount(() => (
       <Application>
