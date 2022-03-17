@@ -49,7 +49,7 @@ describe('VOverlay', () => {
       .get('[data-test="content"]').should('not.exist')
   })
 
-  it('should have correct z-index inside layout item', () => {
+  it.skip('should have correct z-index inside layout item', () => {
     cy.mount(() => (
       <Application>
         <VLayoutItem position="left" size="300" modelValue data-test="layout-item">
@@ -116,13 +116,13 @@ describe('VOverlay', () => {
       .get('[data-test="first-content"]').should('not.exist')
       .get('[data-test="first-activator"]').should('exist').click()
       .get('[data-test="first-content"]').should('be.visible')
-      .get('[data-test="second-activator').should('exist').click()
-      .get('[data-test="first-content').should('not.be.visible')
-      .get('[data-test="second-content').should('be.visible')
+      .get('[data-test="second-activator"]').should('exist').click()
+      .get('[data-test="first-content"]').should('not.be.visible')
+      .get('[data-test="second-content"]').should('be.visible')
       .get('body').click()
-      .get('[data-test="second-content').should('not.be.visible')
-      .get('[data-test="first-content').should('be.visible')
+      .get('[data-test="second-content"]').should('not.be.visible')
+      .get('[data-test="first-content"]').should('be.visible')
       .get('body').click()
-      .get('[data-test="first-content').should('not.be.visible')
+      .get('[data-test="first-content"]').should('not.exist')
   })
 })
