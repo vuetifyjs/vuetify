@@ -1,54 +1,61 @@
 ---
 nav: Installation
 meta:
-  title: Get started with Vuetify 3 Alpha
-  description: Details for v3 alpha release - faq, changes, and upgrading.
-  keywords: migration, releases, upgrading vuetify, alpha, v3
+  title: Get started with Vuetify 3 Beta
+  description: Details for v3 beta release - faq, changes, and upgrading.
+  keywords: migration, releases, upgrading vuetify, beta, v3
 related:
   - /getting-started/contributing/
   - /introduction/roadmap/
   - /getting-started/release-notes/
 ---
 
-# Vuetify 3 Alpha
+# Vuetify 3 Beta
 
-Vuetify 3 Alpha is here! Below is a collection of information to help you get started and answer some frequently asked questions regarding the alpha.
+Welcome to the Vuetify 3 Beta release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
 
 <alert type="error">
 
-  Before proceeding, it is important to note that this installation is intended primarily for testing purposes, and should not be considered for production applications.
+  The Vuetify 3 Beta is for testing purposes only and is not intended for production applications.
 
 </alert>
 
 ## Installation
 
-Installation of the alpha is limited to new cli projects at this time and intended primarily for testing. If you have any questions or run into issues, please reach out to our [Discord community](https://community.vuetifyjs.com/).
-
 ### vue-cli
 
-In order for the installation to proceed correctly, **vue-cli 5.0** is required. Further instructions are available at [vue-cli](https://github.com/vuejs/vue-cli).
+<alert type="warning">
 
-Once installed, generate a project with the following command using the **vue-cli 5.0**:
+  Vuetify 3 requires **vue-cli 5.0** in order to install properly. For more information, visit the vue-cli [installation guide](https://cli.vuejs.org/guide/installation.html).
+
+</alert>
+
+Generate a new Vue 3 application by entering the following command into your terminal:
 
 ```bash
-vue create my-app
+vue create my-beta-app
 ```
 
-When prompted, choose **Vue 3** (possibly **Vue 3 Preview** depending on the exact version of vue-cli):
+When prompted, select the **Vue 3 Preview** preset:
 
 ```bash
-? Please pick a preset: (Use arrow keys)
+? Please pick a preset:
     Default ([Vue 2] babel, eslint)
-  ❯ Default (Vue 3) ([Vue 3] babel, eslint)
+  ❯ Default (Vue 3 Preview) ([Vue 3] babel, eslint)
     Manually select features
 ```
 
-It is recommended to commit or stash your changes at this point, in case you need to rollback the changes.
+After choosing your option, **vue-cli** generates a new Vue 3 project located in the **my-beta-app** folder; or whatever name you provided. Once complete, navigate to your new project's folder by typing `cd my-beta-app`.
 
-Next, navigate to your project directory and add Vuetify to your project:
+<alert type="info">
+
+  Before installing Vuetify, we **recommend** a pristine `.git` status. This allows you to rollback changes if you encounter an issue.
+
+</alert>
+
+Using **vue-cli**, add the `vuetify` cli package by running the following command:
 
 ```bash
-cd my-app
 vue add vuetify
 ```
 
@@ -69,19 +76,18 @@ Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start,
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-app --template vue
+npm init @vitejs/app my-beta-app --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-app -- --template vue
+npm init @vitejs/app my-beta-app -- --template vue
 
 # yarn
-yarn create @vitejs/app my-app --template vue
+yarn create @vitejs/app my-beta-app --template vue
 ```
 
-Next, navigate to your project directory and add Vuetify to your project:
+Next, navigate to your project directory by typing `cd my-beta-app` in your terminal; then add Vuetify to your project using the following:
 
 ```bash
-cd my-app
 vue add vuetify
 ```
 
@@ -130,7 +136,7 @@ const vuetify = createVuetify({
 
 ### Table of Contents
 
-- [What is included in the Alpha?](#included)
+- [What is included in the Beta?](#included)
 - [When will Vuetify 3 be released?](#version-3)
 - [Can I use it with Vite?](#use-vite)
 
@@ -140,13 +146,13 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 ---
 
-- **What is included in the alpha?** { #included }
+- **What is included in the Beta?** { #included }
 
-  Currently most base functionality of Vuetify is included in the alpha. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
+  Currently most base functionality of Vuetify is included in the beta. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
 
 - **When will Vuetify 3 be released?** { #version-3 }
 
-  Version 3 is currently under development - Alpha is the first step toward this. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
+  Beta could take upwards of 2 months. Immediately following is a Release Candidate and then final release. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
 - **Can I use it with Vite?** { #use-vite }
 
@@ -154,9 +160,9 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 ## How to report an issue or bug
 
-For bugs related to the Alpha, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
+For bugs related to the Beta, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
 
-- Vuetify components and functions available in the Alpha
+- Vuetify components and functions available in the Beta
 - Documentation content
 
 <alert type="info">
