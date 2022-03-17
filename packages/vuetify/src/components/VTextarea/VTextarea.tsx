@@ -92,7 +92,7 @@ export const VTextarea = defineComponent({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const isFocused = ref(false)
-    const controlHeight = ref('auto')
+    const controlHeight = ref('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       isFocused.value ||

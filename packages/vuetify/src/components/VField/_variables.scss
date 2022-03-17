@@ -22,10 +22,11 @@ $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-o
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;
 $field-control-padding-top: 4px !default;
-$field-control-padding-bottom: 4px !default;
+$field-control-padding-bottom: 6px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
-$field-control-underlined-height: 40px !default;
+$field-control-underlined-height: 48px !default;
+$field-control-underlined-padding-bottom: 2px !default;
 $field-control-height: 56px !default;
 
 // INPUT

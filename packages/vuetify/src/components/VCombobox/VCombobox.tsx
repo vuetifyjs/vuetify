@@ -295,7 +295,7 @@ export const VCombobox = genericComponent<new <T>() => {
         >
           {{
             ...slots,
-            default: () => (
+            default: ({ inputNode }: any) => (
               <>
                 { activator.value && (
                   <VMenu
@@ -390,6 +390,8 @@ export const VCombobox = genericComponent<new <T>() => {
                     </div>
                   )
                 }) }
+
+                { inputNode }
               </>
             ),
           }}
