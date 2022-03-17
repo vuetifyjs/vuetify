@@ -19,17 +19,19 @@ export const VApp = defineComponent({
 
   setup (props, { slots }) {
     const theme = provideTheme(props)
-    const { layoutClasses, getLayoutItem, items } = createLayout(props)
+    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
     const { rtlClasses } = useRtl()
 
     useRender(() => (
       <div
+        ref={ layoutRef }
         class={[
           'v-application',
           theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
         ]}
+        style={ layoutStyles.value }
         data-app="true"
       >
         <div class="v-application__wrap">

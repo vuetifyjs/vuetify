@@ -12,19 +12,15 @@ related:
 
 # Buttons
 
-The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline-ad slug="scrimba-buttons" />
+The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
 
-<entry-ad />
-
-<!--
+<entry />
 
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-<usage name="v-btn" />
-
--->
+<!-- <usage name="v-btn" /> -->
 
 ## API
 
@@ -76,7 +72,7 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 --->
 
-<random-ad />
+<random />
 
 #### Outlined
 

@@ -1,9 +1,12 @@
 <template>
   <v-alert
+    :border-color="type"
     border="start"
-    class="v-alert--doc mb-4"
-    variant="outlined"
+    class="v-alert--doc mb-4 border-opacity-100"
   >
+    <template #prepend>
+      <v-icon :color="type" :icon="`$${type}`" />
+    </template>
     <slot />
   </v-alert>
 </template>
@@ -11,6 +14,8 @@
 <script>
   export default {
     name: 'Alert',
+
+    props: { type: String },
   }
 </script>
 

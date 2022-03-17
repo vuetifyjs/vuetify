@@ -38,7 +38,7 @@
 
       // computed
       const logo = computed(() => {
-        return props.alt ? `vuetify-logo-${theme.current.value}-text.svg` : `vuetify-logo-${theme.current.value}.svg`
+        return props.alt ? `vuetify-logo-v3-slim-text-${theme.current.value}.svg` : `vuetify-logo-v3-slim-${theme.current.value}.svg`
       })
       const width = computed(() => {
         return props.alt ? 148 : 34

@@ -1,16 +1,16 @@
 <template>
-  <vuetify-ad />
+  <vuetify />
 </template>
 
 <script>
   // Extensions
-  import VuetifyAd from '@/components/ads/Vuetify.vue'
+  import Vuetify from '@/components/ads/Vuetify.vue'
 
   export default {
     name: 'RandomAd',
 
     components: {
-      VuetifyAd,
+      Vuetify,
     },
   }
 </script>

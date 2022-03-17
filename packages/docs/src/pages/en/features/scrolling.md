@@ -13,7 +13,7 @@ related:
 
 You can programmatically trigger scrolling in your application by using the **goTo** method found on the `$vuetify` object. This method supports several different types of target selectors, and options including smooth scrolling using built-in easing functions.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

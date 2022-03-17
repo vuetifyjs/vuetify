@@ -1,36 +1,73 @@
 <template>
-  <v-sheet elevation="1" rounded class="mb-9">
-    <div class="d-flex justify-end pa-2 example-header">
-      <v-tooltip v-for="{ path, ...action } in actions" :key="path" anchor="top">
-        <template #activator="{ props: tooltip }">
-          <v-btn size="small" variant="text" v-bind="mergeProps(action, tooltip)" />
-        </template>
-        <span>{{ t(path) }}</span>
-      </v-tooltip>
-      <Codepen v-if="isLoaded" />
-    </div>
-    <v-expand-transition>
-      <div v-if="showCode">
-        <template v-for="section of sections" :key="section.name">
-          <app-markup v-if="section.content" :code="section.content" />
-        </template>
-      </div>
-    </v-expand-transition>
-    <v-theme-provider v-if="isLoaded" :theme="theme" with-background class="pa-4">
-      <component :is="ExampleComponent" />
-    </v-theme-provider>
-  </v-sheet>
+  <v-defaults-provider scoped>
+    <v-sheet
+      border
+      class="mb-9"
+      rounded
+    >
+      <v-toolbar
+        border="b"
+        class="px-4"
+        height="44"
+        flat
+        rounded="t"
+      >
+        <v-spacer />
+
+        <v-tooltip
+          v-for="{ path, ...action } in actions"
+          :key="path"
+          anchor="top"
+        >
+          <template #activator="{ props: tooltip }">
+            <v-btn
+              class="ml-2 text-medium-emphasis"
+              density="comfortable"
+              variant="text"
+              v-bind="mergeProps(action, tooltip)"
+            />
+          </template>
+
+          <span>{{ t(path) }}</span>
+        </v-tooltip>
+
+        <Codepen v-if="isLoaded" />
+      </v-toolbar>
+
+      <v-expand-transition>
+        <div v-if="showCode" class="border-b">
+          <template v-for="section of sections" :key="section.name">
+            <v-theme-provider v-if="section.content" :theme="theme">
+              <app-markup :code="section.content" class="rounded-0" :resource="`${file}.vue`" />
+            </v-theme-provider>
+          </template>
+        </div>
+      </v-expand-transition>
+
+      <v-theme-provider
+        :theme="theme"
+        class="pa-4 rounded-b"
+        with-background
+      >
+        <component :is="ExampleComponent" v-if="isLoaded" />
+      </v-theme-provider>
+    </v-sheet>
+  </v-defaults-provider>
 </template>
 
 <script setup lang="ts">
-  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
+  // Components
+  import ExampleMissing from './ExampleMissing.vue'
+
+  // Composables
+  import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
-  import { getBranch } from '@/util/helpers'
 
+  // Utilities
+  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
+  import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
-  import ExampleMissing from './ExampleMissing.vue'
-  import { useCodepen } from '@/composables/codepen'
 
   const { t } = useI18n()
 
@@ -129,9 +166,3 @@
     },
   ])
 </script>
-
-<style>
-.example-header {
-  border-bottom: 1px solid lightgrey;
-}
-</style>

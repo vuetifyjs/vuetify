@@ -1,13 +1,13 @@
 <template>
   <v-app ref="app">
-    <v-app-bar color="grey-lighten-2" absolute name="app-bar" class="justify-center">
+    <v-app-bar color="grey-lighten-2" name="app-bar" class="justify-center">
       <div class="d-flex justify-center align-center w-100">
         <child v-slot="{ print }">
           <v-btn @click="print('app-bar')">Get data</v-btn>
         </child>
       </div>
     </v-app-bar>
-    <v-navigation-drawer color="grey-darken-2" absolute permanent name="drawer">
+    <v-navigation-drawer color="grey-darken-2" permanent name="drawer">
       <div class="d-flex justify-center align-center h-100">
         <child v-slot="{ print }">
           <v-btn @click="print('drawer')">Get data</v-btn>

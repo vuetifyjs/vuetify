@@ -34,6 +34,9 @@ export function useProxiedModel<
       else return internal.value
     },
     set (newValue) {
+      if ((propIsDefined.value ? transformIn(props[prop]) : internal.value) === newValue) {
+        return
+      }
       internal.value = newValue
       vm?.emit(`update:${prop}`, transformOut(newValue))
     },

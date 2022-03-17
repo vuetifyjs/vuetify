@@ -14,7 +14,7 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-<!-- <promoted-ad slug="vuemastery-getting-started" /> -->
+<!-- <promoted slug="vuemastery-getting-started" /> -->
 
 ## Getting started
 
@@ -67,6 +67,6 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 
-<!-- <promoted-ad slug="vuetify-discord" /> -->
+<!-- <promoted slug="vuetify-discord" /> -->
 
 <backmatter />

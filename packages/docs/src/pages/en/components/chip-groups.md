@@ -13,7 +13,7 @@ related:
 
 The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

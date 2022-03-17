@@ -14,7 +14,7 @@ related:
 
 The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

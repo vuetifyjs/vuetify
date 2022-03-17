@@ -1,4 +1,5 @@
 ---
+nav: Avatars
 meta:
   title: Avatar component
   description: The avatar component is used to control the size and border radius of an image. It can be used with numerous components to provide better visual context.
@@ -13,13 +14,13 @@ related:
 
 The `v-avatar` component is typically used to display circular user profile pictures. This component will allow you to dynamically size and add a border radius of responsive images, icons, and text. A **tile** variation is available for displaying an avatar without border radius.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
 Avatars in their simplest form display content within a circular container.
 
-<usage name="v-avatar" />
+<!-- <usage name="v-avatar" /> -->
 
 ## API
 
@@ -47,7 +48,7 @@ The `v-avatar` default slot allows you to render content such as `v-icon` compon
 
 <example file="v-avatar/slot-default" />
 
-<discovery-ad />
+<discovery />
 
 ### Misc
 

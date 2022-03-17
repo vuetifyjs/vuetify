@@ -198,18 +198,22 @@ export const VTextarea = defineComponent({
             ...slots,
             default: ({
               isDisabled,
+              isDirty,
               isReadonly,
+              isValid,
             }) => (
               <VField
                 style={{
                   '--v-input-control-height': controlHeight.value,
                 }}
-                focused={ isFocused.value }
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
-                modelValue={ model.value }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                focused={ isFocused.value }
+                error={ isValid.value === false }
               >
                 {{
                   ...slots,
@@ -235,6 +239,7 @@ export const VTextarea = defineComponent({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
+                        name={ props.name }
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }

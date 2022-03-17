@@ -4,6 +4,7 @@
       v-for="(item,i) in items"
       :key="i"
       :src="item.src"
+      cover
     ></v-carousel-item>
   </v-carousel>
 </template>

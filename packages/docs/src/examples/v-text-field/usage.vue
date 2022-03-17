@@ -29,8 +29,8 @@
           md="3"
         >
           <v-text-field
-            label="Solo"
-            solo
+            label="Contained"
+            variant="contained"
           ></v-text-field>
         </v-col>
 
@@ -40,9 +40,9 @@
           md="3"
         >
           <v-text-field
-            label="Solo"
+            label="Contained"
+            variant="contained"
             placeholder="Placeholder"
-            solo
           ></v-text-field>
         </v-col>
 
@@ -53,7 +53,7 @@
         >
           <v-text-field
             label="Filled"
-            filled
+            variant="filled"
           ></v-text-field>
         </v-col>
 
@@ -65,7 +65,7 @@
           <v-text-field
             label="Filled"
             placeholder="Placeholder"
-            filled
+            variant="filled"
           ></v-text-field>
         </v-col>
 
@@ -76,7 +76,7 @@
         >
           <v-text-field
             label="Outlined"
-            outlined
+            variant="outlined"
           ></v-text-field>
         </v-col>
 
@@ -88,7 +88,53 @@
           <v-text-field
             label="Outlined"
             placeholder="Placeholder"
-            outlined
+            variant="outlined"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+          <v-text-field
+            label="Plain"
+            variant="plain"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+          <v-text-field
+            label="Plain"
+            placeholder="Placeholder"
+            variant="plain"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+          <v-text-field
+            label="Underlined"
+            variant="underlined"
+          ></v-text-field>
+        </v-col>
+
+        <v-col
+          cols="12"
+          sm="6"
+          md="3"
+        >
+          <v-text-field
+            label="Underlined"
+            placeholder="Placeholder"
+            variant="underlined"
           ></v-text-field>
         </v-col>
       </v-row>

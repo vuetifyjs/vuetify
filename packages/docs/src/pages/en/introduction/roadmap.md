@@ -14,7 +14,7 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.
 
-<promoted-ad slug="vuetify-github-sponsors" />
+<promoted slug="vuetify-github-sponsors" />
 
 ## In Development
 
@@ -22,9 +22,9 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** February 2022
-- **Alpha:** March 2021
-- **Beta:** December 2021
+- **Target Release:** May 2022
+- **Alpha:** [Live](https://next.vuetifyjs.com/)
+- **Beta:** March 2022
 - **Overview:**
   - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Global properties that allow you to make large overarching changes to your app
@@ -56,7 +56,7 @@ The following versions have continued maintenance for backwards compatible fixes
 
 ---
 
-<promoted-ad slug="vuetify-open-collective" />
+<promoted slug="vuetify-open-collective" />
 
 ## Released
 

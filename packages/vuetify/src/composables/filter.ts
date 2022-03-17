@@ -2,11 +2,12 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray, wrapInRef } from '@/util'
-import { computed } from 'vue'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
+import { computed, unref } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
@@ -19,6 +20,7 @@ export interface FilterProps {
   customKeyFilter?: FilterKeyFunctions
   filterKeys?: FilterKeys
   filterMode?: FilterMode
+  noFilter?: boolean
 }
 
 // Composables
@@ -36,21 +38,22 @@ export const makeFilterProps = propsFactory({
     type: String as PropType<FilterMode>,
     default: 'intersection',
   },
+  noFilter: Boolean,
 }, 'filter')
 
-export function filterItems (
-  items: (Record<string, any> | string)[],
+export function filterItems<T = Record<string, any>> (
+  items: T[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
     default?: FilterFunction
     filterKeys?: FilterKeys
     filterMode?: FilterMode
+    noFilter?: boolean
   },
 ) {
-  const array: (typeof items) = []
-  // always ensure we fallback
-  // to a functioning filter
+  const array: { item: T, matches: Record<string, FilterMatch> }[] = []
+  // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
   const customFiltersLength = Object.keys(options?.customKeyFilter ?? {}).length
@@ -60,14 +63,14 @@ export function filterItems (
   loop:
   for (const item of items) {
     const customMatches: Record<string, FilterMatch> = {}
-    let defaultMatches: Record<string, FilterMatch> | FilterMatch[] = {}
+    const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (typeof item === 'object') {
+    if (query && typeof item === 'object' && !options?.noFilter) {
       const filterKeys = keys || Object.keys(item)
 
       for (const key of filterKeys) {
-        const value = getPropertyFromItem(item, key, item)
+        const value = getPropertyFromItem(item as any, key, item)
         const keyFilter = options?.customKeyFilter?.[key]
 
         match = keyFilter
@@ -100,12 +103,6 @@ export function filterItems (
           !defaultMatchesLength
         )
       ) continue
-    } else if (typeof item === 'string') {
-      match = filter(item, query, item)
-
-      if (match === -1 || match === false) continue
-
-      defaultMatches = wrapInArray(match)
     }
 
     array.push({ item, matches: { ...defaultMatches, ...customMatches } })
@@ -114,10 +111,10 @@ export function filterItems (
   return array
 }
 
-export function useFilter (
+export function useFilter<T> (
   props: FilterProps,
-  items: Ref<any[]> | any[],
-  query?: Ref<string>,
+  items: MaybeRef<T[]>,
+  query?: Ref<string | undefined>,
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
@@ -126,13 +123,14 @@ export function useFilter (
 
   const filteredItems = computed(() => {
     return filterItems(
-      wrapInRef(items).value,
+      unref(items),
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
         filterKeys: props.filterKeys,
         filterMode: props.filterMode,
+        noFilter: props.noFilter,
       },
     )
   })

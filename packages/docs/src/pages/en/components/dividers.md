@@ -14,13 +14,13 @@ related:
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
 Dividers in their simplest form display a horizontal line.
 
-<usage name="v-divider" />
+<!-- <usage name="v-divider" /> -->
 
 ## API
 

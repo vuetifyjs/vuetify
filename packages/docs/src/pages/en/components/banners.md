@@ -14,13 +14,13 @@ related:
 
 The `v-banner` component is used as a middle-interrupting message to the user with one to two actions. It comes in two variations **single-line** and **multi-line** (implicit). These can have icons and actions that you can use with your message. Note that only one banner should be shown at a time.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
 Banners can contain one to two lines of text, to which actions and icons can be added.
 
-<usage name="v-banner" />
+<!-- <usage name="v-banner" /> -->
 
 ## API
 

@@ -1,38 +1,34 @@
 <template>
-  <div
-    style="width: 100%"
-    class="text-center"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-badge"
   >
-    <v-badge
-      v-bind="$attrs"
-    >
-      <v-icon large>
-        $mdiVuetify
-      </v-icon>
-    </v-badge>
-  </div>
+    <div class="text-center">
+      <v-defaults-provider
+        :defaults="{
+          VBadge: {
+            inline: model === 'inline',
+            floating: model === 'floating',
+          }
+        }"
+      >
+        <v-badge overlap>
+          <v-icon icon="mdi-vuetify" size="x-large"></v-icon>
+        </v-badge>
+      </v-defaults-provider>
+    </div>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VBadgeUsageExample',
 
     data: () => ({
-      defaults: {
-        bordered: false,
-        bottom: false,
-        dot: false,
-        inline: false,
-        left: false,
-        overlap: false,
-        tile: false,
-      },
-      options: {
-        booleans: ['bottom', 'dot', 'left', 'overlap'],
-      },
-      tabs: ['bordered', 'inline', 'tile'],
+      badge: true,
+      model: 'default',
+      options: ['floating', 'inline'],
     }),
   }
 </script>

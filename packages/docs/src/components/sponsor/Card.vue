@@ -15,7 +15,7 @@
     <v-img
       :alt="sponsor.metadata.name"
       :src="src"
-      :width="width"
+      :width="imgWidth"
       class="d-inline-block"
       contain
       eager
@@ -36,6 +36,7 @@
       sponsor: Object,
       compact: Boolean,
       comfortable: Boolean,
+      width: [Number, String],
     },
 
     setup (props) {
@@ -53,7 +54,8 @@
         return !current.dark ? logolight.url || lightLogo : logodark.url || darkLogo
       })
 
-      const width = computed(() => {
+      const imgWidth = computed(() => {
+        if (props.width) return props.width
         if (props.compact) return 112
         if (props.comfortable) return 148
 
@@ -71,7 +73,7 @@
 
       return {
         src,
-        width,
+        imgWidth,
         onClick,
       }
     },

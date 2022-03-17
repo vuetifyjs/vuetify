@@ -13,7 +13,7 @@ related:
 
 `v-date-picker` is a fully featured date selection component that lets users select a date, or range of dates.
 
-<entry-ad />
+<entry />
 
 ## Usage
 

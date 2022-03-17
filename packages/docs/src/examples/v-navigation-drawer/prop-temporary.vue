@@ -3,7 +3,6 @@
     <v-layout>
       <v-navigation-drawer
         v-model="drawer"
-        absolute
         temporary
       >
         <v-list-item
@@ -19,19 +18,14 @@
         </v-list>
       </v-navigation-drawer>
       <v-main style="height: 250px">
-        <v-container class="fill-height">
-          <v-row
-            align="center"
-            justify="center"
+        <div class="d-flex justify-center align-center h-100">
+          <v-btn
+            color="primary"
+            @click.stop="drawer = !drawer"
           >
-            <v-btn
-              color="primary"
-              @click.stop="drawer = !drawer"
-            >
-              Toggle
-            </v-btn>
-          </v-row>
-        </v-container>
+            Toggle
+          </v-btn>
+        </div>
       </v-main>
     </v-layout>
   </v-card>

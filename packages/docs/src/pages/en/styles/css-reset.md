@@ -13,7 +13,7 @@ related:
 
 Opinionated base styles for Vuetify projects.
 
-<entry-ad />
+<entry />
 
 ## Bootstrapping
 

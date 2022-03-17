@@ -2,7 +2,6 @@
   <v-card>
     <v-layout>
       <v-navigation-drawer
-        absolute
         expand-on-hover
         rail
       >
@@ -16,10 +15,10 @@
 
         <v-divider></v-divider>
 
-        <v-list density="compact">
-          <v-list-item prepend-icon="mdi-folder" title="My Files"></v-list-item>
-          <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me"></v-list-item>
-          <v-list-item prepend-icon="mdi-star" title="Starred"></v-list-item>
+        <v-list density="compact" nav>
+          <v-list-item prepend-icon="mdi-folder" title="My Files" value="myfiles"></v-list-item>
+          <v-list-item prepend-icon="mdi-account-multiple" title="Shared with me" value="shared"></v-list-item>
+          <v-list-item prepend-icon="mdi-star" title="Starred" value="starred"></v-list-item>
         </v-list>
       </v-navigation-drawer>
 

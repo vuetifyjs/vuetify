@@ -1,40 +1,39 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
 $snackbar-absolute-z-index: 1 !default;
 $snackbar-action-margin: 8px !default;
 $snackbar-background-color: #333333 !default;
-$snackbar-border-radius: $border-radius-root !default;
+$snackbar-border-radius: settings.$border-radius-root !default;
+$snackbar-plain-opacity: .62 !default;
 $snackbar-bottom: 0 !default;
 $snackbar-btn-padding: 0 8px !default;
-$snackbar-color: hsla(0, 0%, 100%, .87) !default;
-$snackbar-content-font-size: map-deep-get($typography, 'body-2', 'size') !default;
-$snackbar-content-font-weight: map-deep-get($typography, 'body-2', 'weight') !default;
-$snackbar-content-letter-spacing: map-deep-get($typography, 'body-2', 'letter-spacing') !default;
-$snackbar-content-line-height: map-deep-get($typography, 'body-2', 'line-height') !default;
+$snackbar-background: #333333 !default;
+$snackbar-color: rgb(var(--v-theme-on-surface-variant)) !default;
+$snackbar-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
+$snackbar-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$snackbar-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
+$snackbar-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
 $snackbar-content-padding: 14px 16px !default;
-$snackbar-content-text-transform: map-deep-get($typography, 'body-2', 'text-transform') !default;
 $snackbar-elevation: 6 !default;
 $snackbar-left: 0 !default;
 $snackbar-multi-line-wrapper-min-height: 68px !default;
 $snackbar-right: 0 !default;
-$snackbar-shaped-border-radius: map-get($rounded, 'xl') $snackbar-border-radius !default;
+$snackbar-shaped-border-radius: map-get(settings.$rounded, 'xl') $snackbar-border-radius !default;
 $snackbar-top: 0 !default;
-$snackbar-transition-wrapper-transform: .8 !default;
+$snackbar-transition-scale: .8 !default;
 $snackbar-vertical-action-margin-bottom: 8px !default;
-$snackbar-vertical-wrapper-btn-margin-top: 0 !default;
-$snackbar-vertical-wrapper-padding: initial !default;
 $snackbar-wrapper-margin: 8px !default;
 $snackbar-wrapper-max-width: 672px !default;
 $snackbar-wrapper-min-height: 48px !default;
 $snackbar-wrapper-min-width: 344px !default;
 $snackbar-wrapper-padding: 0 !default;
-$snackbar-z-index: 1000 !default;
+$snackbar-z-index: 10000 !default;
 
-// TODO: remove in v3
-$snackbar-btn-margin-left: 0 !default;
-$snackbar-btn-margin-right: 0 !default;
-$snackbar-content-first-btn-margin: 0 !default;
-$snackbar-corner-offset: 0 !default;
-$snackbar-font-size: $snackbar-content-font-size !default;
-$snackbar-wrapper-max-width: $snackbar-content-max-width !default;
-$snackbar-wrapper-min-width: $snackbar-content-min-width !default;
+$snackbar-variants: (
+  $snackbar-background,
+  $snackbar-color,
+  $snackbar-elevation,
+  $snackbar-plain-opacity,
+  'v-snackbar'
+);

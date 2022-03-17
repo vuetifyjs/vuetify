@@ -12,9 +12,9 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, icons, and more. Card components that have no listed options, such as `v-card-header`, are functional components that serve as _markup sugar_ that help make your code more readable. <inline-ad slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, icons, and more. Card components that have no listed options, such as `v-card-header`, are functional components that serve as _markup sugar_ that help make your code more readable. <inline slug="scrimba-cards" />
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -66,7 +66,7 @@ The following snippet shows the general structure of a card:
 
 ### v-card-actions
 
-The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.
 
 ### v-card-avatar
 
@@ -96,7 +96,7 @@ Primarily used for **text content** in a card. Applies padding for text, reduces
 
 Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
+<promoted slug="vuetify-zero-theme-pro" />
 
 ## Examples
 

@@ -78,6 +78,7 @@ export const VBtn = defineComponent({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasColor = !group || group.isSelected.value
 
       return (
         <Tag
@@ -96,7 +97,7 @@ export const VBtn = defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             positionClasses.value,
@@ -105,7 +106,7 @@ export const VBtn = defineComponent({
             variantClasses.value,
           ]}
           style={[
-            colorStyles.value,
+            hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             positionStyles.value,
           ]}

@@ -25,7 +25,8 @@
         }
       }
 
-      .v-chip__prepend {
+      .v-chip__prepend,
+      .v-chip__filter {
         margin-inline-start: -$padding * .5;
         margin-inline-end: $padding * .5;
 

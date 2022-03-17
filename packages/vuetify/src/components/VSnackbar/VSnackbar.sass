@@ -1,15 +1,11 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use '../../styles/settings'
+@use './variables' as *
 
-+theme(v-snack) using ($material)
-  &__wrapper
-    color: map-deep-get($material, 'text', 'primary')
-
-+sheet(v-snack__wrapper, $snackbar-elevation, $snackbar-border-radius, $snackbar-shaped-border-radius)
-
-.v-snack
+.v-snackbar
   bottom: $snackbar-bottom
   display: flex
-  font-size: $snackbar-font-size
   justify-content: center
   left: $snackbar-left
   pointer-events: none
@@ -17,18 +13,16 @@
   top: $snackbar-top
   width: 100%
 
-  &:not(.v-snack--absolute)
+  &:not(.v-snackbar--absolute)
     height: 100vh
     position: fixed
     z-index: $snackbar-z-index
 
-  &:not(.v-snack--centered):not(.v-snack--top)
+  &:not(.v-snackbar--centered):not(.v-snackbar--top)
     align-items: flex-end
 
   &__wrapper
     align-items: center
-    // TODO: move this to sheet in v3
-    border-color: currentColor !important
     display: flex
     margin: $snackbar-wrapper-margin
     max-width: $snackbar-wrapper-max-width
@@ -39,86 +33,55 @@
     position: relative
     transition-duration: .15s
     transition-property: opacity, transform
-    transition-timing-function: map-get($transition, 'linear-out-slow-in')
+    transition-timing-function: settings.$decelerated-easing
     z-index: 1
 
-    &.theme--dark
-      background-color: $snackbar-background-color
-      color: $snackbar-color
+    @include tools.rounded($snackbar-border-radius)
+
+    @at-root .v-snackbar
+      @include tools.variant($snackbar-variants...)
 
   &__content
     flex-grow: 1
-    font-size: $snackbar-content-font-size
-    font-weight: $snackbar-content-font-weight
-    letter-spacing: $snackbar-content-letter-spacing
-    line-height: $snackbar-content-line-height
+    font-size: $snackbar-font-size
+    font-weight: $snackbar-font-weight
+    letter-spacing: $snackbar-letter-spacing
+    line-height: $snackbar-line-height
     margin-right: auto
     padding: $snackbar-content-padding
     text-align: initial
 
-  &__action
+  &__actions
     align-items: center
     align-self: center
     display: flex
+    margin-inline-end: $snackbar-action-margin
 
-    // Snackbar actions shouldn't have ripples
-    .v-ripple__container
-      display: none
-
-    +ltr()
-      margin-right: $snackbar-action-margin
-
-    +rtl()
-      margin-left: $snackbar-action-margin
-
-  // Increased specificity to change
-  // the default padding of .v-btn
-  &__action > .v-snack__btn.v-btn
-    padding: $snackbar-btn-padding
-
-  &__btn
-    margin-left: $snackbar-btn-margin-left
-    margin-right: $snackbar-btn-margin-right
-    margin: $snackbar-content-first-btn-margin
-    min-width: auto
+    & > .v-btn
+      padding: $snackbar-btn-padding
+      min-width: auto
 
   &--absolute
     height: 100%
     position: absolute
     z-index: $snackbar-absolute-z-index
 
-  &--centered
-    align-items: center
-
-  &--left
-    justify-content: flex-start
-    right: auto
-
   &--multi-line &__wrapper
     min-height: $snackbar-multi-line-wrapper-min-height
 
-  &--right
+  &--centered
+    align-items: center
+
+  &--start
+    justify-content: flex-start
+    right: auto
+
+  &--end
     justify-content: flex-end
     left: auto
 
-  &:not(.v-snack--has-background) &__wrapper
-    box-shadow: none
-
   &--bottom
     top: auto
-
-  &--text &__wrapper:before
-    background-color: currentColor
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0.12
-    pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    z-index: -1
 
   &--top
     align-items: flex-start
@@ -127,16 +90,16 @@
   &--vertical &__wrapper
     flex-direction: column
 
-    .v-snack__action
+    .v-snackbar__actions
       align-self: flex-end
       margin-bottom: $snackbar-vertical-action-margin-bottom
 
-.v-snack-transition
-  &-enter
-    &.v-snack__wrapper
-      transform: scale($snackbar-transition-wrapper-transform)
+.v-snackbar-transition
+  &-enter-from
+    &.v-snackbar__wrapper
+      transform: scale($snackbar-transition-scale)
 
-  &-enter,
+  &-enter-from,
   &-leave-to
-    &.v-snack__wrapper
+    &.v-snackbar__wrapper
       opacity: 0

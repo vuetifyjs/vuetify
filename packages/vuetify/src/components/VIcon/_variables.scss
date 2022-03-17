@@ -3,7 +3,6 @@
 @use '../../styles/tools';
 
 // Defaults
-$icon-btn-bottom-navigation-font-size: 24px !default;
 $icon-btn-margin-start-multiplier: -9 !default;
 $icon-btn-margin-end-multiplier: 4.5 !default;
 $icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;

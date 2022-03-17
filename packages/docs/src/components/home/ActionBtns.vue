@@ -39,10 +39,6 @@
           text: 'home.get-started',
           to: {
             name: `${locale.value}-getting-started-installation`,
-            params: {
-              category: 'getting-started',
-              page: 'installation',
-            },
           },
         },
         {
@@ -52,10 +48,6 @@
           text: 'home.why-vuetify',
           to: {
             name: `${locale.value}-introduction-why-vuetify`,
-            params: {
-              category: 'introduction',
-              page: 'why-vuetify',
-            },
           },
         },
         {

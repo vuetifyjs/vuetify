@@ -8,7 +8,7 @@
             :append-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
             :append-outer-icon="message ? 'mdi-send' : 'mdi-microphone'"
             :prepend-icon="icon"
-            filled
+            variant="filled"
             clear-icon="mdi-close-circle"
             clearable
             label="Message"

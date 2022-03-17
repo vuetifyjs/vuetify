@@ -13,7 +13,7 @@ related:
 
 The **useDisplay** composable provides information on multiple aspects of the current device. This enables you to control various aspects of your application based upon the window size, device type, and SSR state. This composable works in conjunction with [grids](/components/grids/) and other responsive utility classes (e.g. [display](/styles/display/)).
 
-<entry-ad />
+<entry />
 
 <page-component path="features/BreakpointsTable" />
 
