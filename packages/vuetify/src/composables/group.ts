@@ -39,6 +39,7 @@ export interface GroupProvide {
     disabled: boolean | undefined
   }[]>
   disabled: Ref<boolean | undefined>
+  getItemIndex: (value: unknown) => number
 }
 
 export interface GroupItemProvide {
@@ -271,7 +272,7 @@ export function useGroup (
     }
   }
 
-  const state = {
+  const state: GroupProvide = {
     register,
     unregister,
     selected,
@@ -282,11 +283,20 @@ export function useGroup (
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
     items: computed(() => items),
+    getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 
   provide(injectKey, state)
 
   return state
+}
+
+function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
+  const ids = getIds(items, [value])
+
+  if (!ids.length) return -1
+
+  return items.findIndex(item => item.id === ids[0])
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {

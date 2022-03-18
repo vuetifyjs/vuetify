@@ -72,6 +72,12 @@ You can hide the bottom controls with **hide-delimiters** prop.
 
 <example file="v-carousel/prop-hide-delimiters" />
 
+#### Progress
+
+You can show a linear progress bar with the **progress** prop. It will indicate how far into the cycle the carousel currently is.
+
+<example file="v-carousel/prop-progress" />
+
 #### Model
 
 You can control carousel with **v-model**.

@@ -17,6 +17,7 @@ import { onMounted, ref, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VCarousel = defineComponent({
   name: 'VCarousel',
@@ -97,7 +98,7 @@ export const VCarousel = defineComponent({
       >
         {{
           default: slots.default,
-          additional: ({ group }: any) => (
+          additional: ({ group }: { group: GroupProvide }) => (
             <>
               { !props.hideDelimiters && (
                 <div
@@ -139,7 +140,7 @@ export const VCarousel = defineComponent({
                 <VProgressLinear
                   class="v-carousel__progress"
                   color={ typeof props.progress === 'string' ? props.progress : undefined }
-                  modelValue={ (+model.value + 1) / group.items.value.length * 100 }
+                  modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                 />
               )}
             </>
