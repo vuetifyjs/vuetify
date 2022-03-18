@@ -1,10 +1,18 @@
 <template>
-  <v-treeview :items="items"></v-treeview>
+  <div>
+    <v-treeview
+      v-model:selected="selected"
+      :items="items"
+      show-select
+    ></v-treeview>
+    <pre class="mt-4">{{ selected }}</pre>
+  </div>
 </template>
 
 <script>
   export default {
     data: () => ({
+      selected: [],
       items: [
         {
           value: 1,

@@ -21,6 +21,7 @@ export type FilterFunction = (value: string, query: string, item?: any) => Filte
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
+export type Filtered<T> = { item: T, matches: Record<string, FilterMatch> }
 
 export interface FilterProps {
   customFilter?: FilterFunction

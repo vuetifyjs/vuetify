@@ -31,7 +31,8 @@ export interface IconAliases {
   sort: IconValue
   expand: IconValue
   menu: IconValue
-  subgroup: IconValue
+  treeviewExpand: IconValue
+  treeviewCollapse: IconValue
   dropdown: IconValue
   radioOn: IconValue
   radioOff: IconValue

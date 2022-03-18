@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, toRef } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -26,6 +26,7 @@ export interface NestedProps {
   mandatory: boolean
   'onUpdate:selected': ((val: unknown[]) => void) | undefined
   'onUpdate:opened': ((val: unknown[]) => void) | undefined
+  selectedClass: string | undefined
 }
 
 type NestedProvide = {
@@ -42,6 +43,9 @@ type NestedProvide = {
     open: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
+    selectedClass: Ref<string | undefined>
+    getPath: (id: string) => string[]
+    getChildren: (id: string) => string[]
   }
 }
 
@@ -60,6 +64,9 @@ export const emptyNested: NestedProvide = {
     opened: ref(new Set()),
     selected: ref(new Map()),
     selectedValues: ref([]),
+    selectedClass: ref(),
+    getPath: () => [],
+    getChildren: () => [],
   },
 }
 
@@ -68,6 +75,7 @@ export const makeNestedProps = propsFactory({
   openStrategy: [String, Function] as Prop<OpenStrategyProp>,
   opened: Array as Prop<unknown[]>,
   selected: Array as Prop<unknown[]>,
+  selectedClass: String,
   mandatory: Boolean,
 }, 'nested')
 
@@ -76,7 +84,7 @@ export const useNested = (props: NestedProps) => {
   const children = ref(new Map<unknown, unknown[]>())
   const parents = ref(new Map<unknown, unknown>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
+  const opened = useProxiedModel(props, 'opened', v => new Set(v), v => [...v.values()])
 
   const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
@@ -105,7 +113,6 @@ export const useNested = (props: NestedProps) => {
   const selected = useProxiedModel(
     props,
     'selected',
-    props.selected,
     v => selectStrategy.value.in(v, children.value, parents.value),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )
@@ -124,6 +131,23 @@ export const useNested = (props: NestedProps) => {
     }
 
     return path
+  }
+
+  function getChildren (id: string) {
+    const arr: unknown[] = []
+    const queue = (children.value.get(id) ?? []).slice()
+
+    while (queue.length) {
+      const child = queue.shift()
+
+      if (!child) continue
+
+      arr.push(child)
+
+      queue.push(...(children.value.get(child) ?? []))
+    }
+
+    return arr
   }
 
   const vm = getCurrentInstance('nested')
@@ -148,8 +172,9 @@ export const useNested = (props: NestedProps) => {
         isGroup && children.value.set(id, [])
 
         if (parentId != null) {
-          children.value.set(parentId, [...children.value.get(parentId) || [], id])
+          children.value.set(parentId, [...(children.value.get(parentId) ?? []), id])
         }
+        opened.value.add(id)
       },
       unregister: id => {
         if (isUnmounted) return
@@ -206,6 +231,9 @@ export const useNested = (props: NestedProps) => {
       },
       children,
       parents,
+      selectedClass: toRef(props, 'selectedClass'),
+      getPath,
+      getChildren,
     },
   }
 
@@ -219,6 +247,10 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
 
   const computedId = computed(() => id.value ?? getUid().toString())
 
+  const root = parent.root
+
+  const isSelected = computed(() => root.selected.value.get(computedId.value) === 'on')
+
   const item = {
     ...parent,
     id: computedId,
@@ -230,13 +262,14 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
+    selectedClass: computed(() => isSelected.value && [root.selectedClass.value]),
     isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
+  !parent.isGroupActivator && root.register(computedId.value, parent.id.value, isGroup)
 
   onBeforeUnmount(() => {
-    !parent.isGroupActivator && parent.root.unregister(computedId.value)
+    !parent.isGroupActivator && root.unregister(computedId.value)
   })
 
   isGroup && provide(VNestedSymbol, item)

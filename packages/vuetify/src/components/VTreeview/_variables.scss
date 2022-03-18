@@ -1,10 +1,20 @@
-@import '../../styles/styles.sass';
+@use 'sass:math';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
-$treeview-transition: .2s map-get($transition, 'linear-out-slow-in') !default;
-$treeview-label-font-size: inherit !default;
-$treeview-node-height: 48px !default;
-$treeview-node-height-dense: 40px !default;
-$treeview-node-shaped-margin: 8px !default;
-$treeview-node-padding: 8px !default;
-$treeview-node-margin: 6px !default;
-$treeview-node-level-width: 24px !default;
+// $treeview-transition: .2s map-get($transition, 'linear-out-slow-in') !default;
+// $treeview-label-font-size: inherit !default;
+// $treeview-node-height: 48px !default;
+// $treeview-node-height-dense: 40px !default;
+// $treeview-node-shaped-margin: 8px !default;
+// $treeview-node-padding: 8px !default;
+// $treeview-node-margin: 6px !default;
+// $treeview-node-level-width: 24px !default;
+$treeview-item-min-height: 48px !default;
+$treeview-item-padding: 8px 16px !default;
+$treeview-item-checkbox-size: 40px !default;
+$treeview-item-checkbox-margin-start: 8px !default;
+$treeview-indent-size: 40px !default;
+
+$treeview-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;

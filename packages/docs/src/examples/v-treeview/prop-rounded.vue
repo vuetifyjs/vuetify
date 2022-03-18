@@ -12,43 +12,43 @@
     data: () => ({
       items: [
         {
-          id: 1,
-          name: 'Applications :',
-          children: [
-            { id: 2, name: 'Calendar : app' },
-            { id: 3, name: 'Chrome : app' },
-            { id: 4, name: 'Webstorm : app' },
+          value: 1,
+          title: 'Applications',
+          $children: [
+            { value: 2, title: 'Calendar.app' },
+            { value: 3, title: 'Chrome.app' },
+            { value: 4, title: 'Webstorm.app' },
           ],
         },
         {
-          id: 5,
-          name: 'Documents :',
-          children: [
+          value: 5,
+          title: 'Documents',
+          $children: [
             {
-              id: 6,
-              name: 'vuetify :',
-              children: [
+              value: 6,
+              title: 'vuetify',
+              $children: [
                 {
-                  id: 7,
-                  name: 'src :',
-                  children: [
-                    { id: 8, name: 'index : ts' },
-                    { id: 9, name: 'bootstrap : ts' },
+                  value: 7,
+                  title: 'src',
+                  $children: [
+                    { value: 8, title: 'index.ts' },
+                    { value: 9, title: 'bootstrap.ts' },
                   ],
                 },
               ],
             },
             {
-              id: 10,
-              name: 'material2 :',
-              children: [
+              value: 10,
+              title: 'material2',
+              $children: [
                 {
-                  id: 11,
-                  name: 'src :',
-                  children: [
-                    { id: 12, name: 'v-btn : ts' },
-                    { id: 13, name: 'v-card : ts' },
-                    { id: 14, name: 'v-window : ts' },
+                  value: 11,
+                  title: 'src',
+                  $children: [
+                    { value: 12, title: 'v-btn.ts' },
+                    { value: 13, title: 'v-card.ts' },
+                    { value: 14, title: 'v-window.ts' },
                   ],
                 },
               ],
@@ -56,29 +56,29 @@
           ],
         },
         {
-          id: 15,
-          name: 'Downloads :',
-          children: [
-            { id: 16, name: 'October : pdf' },
-            { id: 17, name: 'November : pdf' },
-            { id: 18, name: 'Tutorial : html' },
+          value: 15,
+          title: 'Downloads',
+          $children: [
+            { value: 16, title: 'October.pdf' },
+            { value: 17, title: 'November.pdf' },
+            { value: 18, title: 'Tutorial.html' },
           ],
         },
         {
-          id: 19,
-          name: 'Videos :',
-          children: [
+          value: 19,
+          title: 'Videos',
+          $children: [
             {
-              id: 20,
-              name: 'Tutorials :',
-              children: [
-                { id: 21, name: 'Basic layouts : mp4' },
-                { id: 22, name: 'Advanced techniques : mp4' },
-                { id: 23, name: 'All about app : dir' },
+              value: 20,
+              title: 'Tutorials',
+              $children: [
+                { value: 21, title: 'Basic layouts.mp4' },
+                { value: 22, title: 'Advanced techniques.mp4' },
+                { value: 23, title: 'All about app.dir' },
               ],
             },
-            { id: 24, name: 'Intro : mov' },
-            { id: 25, name: 'Conference introduction : avi' },
+            { value: 24, title: 'Intro.mov' },
+            { value: 25, title: 'Conference introduction.avi' },
           ],
         },
       ],

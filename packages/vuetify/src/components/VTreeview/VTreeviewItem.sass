@@ -1,0 +1,78 @@
+@use 'sass:math'
+@forward './variables'
+@use 'sass:map'
+@use 'sass:list'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-treeview-item
+  position: relative
+  display: flex
+  align-items: center
+  flex-grow: 1
+
+  @include tools.states('.v-treeview__overlay', false)
+
+  &__content
+    display: flex
+    align-items: center
+
+  &__title
+    display: flex
+    align-items: center
+    padding-inline-start: 8px
+
+  &__prepend
+    min-width: 40px
+    display: flex
+    justify-content: center
+
+  &__expand
+    position: relative
+
+  &__loading
+    position: absolute
+    top: 0
+    left: 0
+
+  &--clickable
+    cursor: pointer
+
+.v-treeview-item--filtered, .v-treeview-group--filtered
+  display: none
+
+.v-treeview__overlay
+  @include tools.absolute()
+  background-color: currentColor
+  border-radius: inherit
+  pointer-events: none
+  opacity: 0
+  transition: opacity .2s ease-in-out
+
+$base-padding: list.nth($treeview-item-padding, 2)
+
+.v-treeview
+  --indent-padding: 0px
+
+.v-treeview-group
+  --parent-padding: var(--indent-padding)
+
+.v-treeview-group__items
+  --indent-padding: calc(var(--parent-padding) + #{$treeview-indent-size})
+
+.v-treeview-group__items .v-treeview-item
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+
+.v-treeview-item--prepend,
+.v-treeview-group__items .v-treeview-item--prepend
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$treeview-item-checkbox-size}) !important
+
+.v-treeview-item
+  $root: &
+
+  @at-root
+    @include tools.density('v-treeview', $treeview-density) using ($modifier)
+      & #{$root}
+        min-height: $treeview-item-min-height + $modifier
+        padding: (list.nth($treeview-item-padding, 1) + $modifier) list.nth($treeview-item-padding, 2)

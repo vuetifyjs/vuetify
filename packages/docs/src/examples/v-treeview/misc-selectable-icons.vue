@@ -1,11 +1,7 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="primary"
-      dark
-      flat
-    >
-      <v-icon>mdi-silverware</v-icon>
+    <v-toolbar color="primary">
+      <v-icon start>mdi-silverware</v-icon>
       <v-toolbar-title>Local hotspots</v-toolbar-title>
     </v-toolbar>
 
@@ -13,17 +9,16 @@
       <v-col>
         <v-card-text>
           <v-treeview
-            v-model="tree"
-            :load-children="fetch"
-            :items="items"
+            v-model:selected="selection"
+            :items="tree"
+            :loading="isLoading"
             selected-color="indigo"
-            open-on-click
-            selectable
-            return-object
-            expand-icon="mdi-chevron-down"
-            on-icon="mdi-bookmark"
-            off-icon="mdi-bookmark-outline"
+            select-on-click
+            show-select
+            true-icon="mdi-bookmark"
+            false-icon="mdi-bookmark-outline"
             indeterminate-icon="mdi-bookmark-minus"
+            @click:open="fetch"
           >
           </v-treeview>
         </v-card-text>
@@ -37,7 +32,7 @@
       >
         <v-card-text>
           <div
-            v-if="tree.length === 0"
+            v-if="selectedBreweries.length === 0"
             key="title"
             class="text-h6 font-weight-light grey--text pa-4 text-center"
           >
@@ -49,20 +44,18 @@
             hide-on-leave
           >
             <v-chip
-              v-for="(selection, i) in tree"
+              v-for="(brewery, i) in selectedBreweries"
               :key="i"
               color="grey"
-              dark
-              small
+              size="small"
               class="ma-1"
             >
               <v-icon
                 start
-                small
-              >
-                mdi-beer
-              </v-icon>
-              {{ selection.name }}
+                size="small"
+                icon="mdi-beer"
+              ></v-icon>
+              {{ brewery.name }}
             </v-chip>
           </v-scroll-x-transition>
         </v-card-text>
@@ -74,7 +67,7 @@
     <v-card-actions>
       <v-btn
         text
-        @click="tree = []"
+        @click="selection = []"
       >
         Reset
       </v-btn>
@@ -82,9 +75,8 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        class="white--text"
-        color="green darken-1"
-        depressed
+        color="green-darken-1"
+        variant="outlined"
       >
         Save
         <v-icon end>
@@ -96,30 +88,50 @@
 </template>
 
 <script>
+  function capitalize (str) {
+    return `${str.charAt(0).toUpperCase()}${str.slice(1)}`
+  }
+
   export default {
     data: () => ({
       breweries: [],
       isLoading: false,
-      tree: [],
+      selection: [],
       types: [],
     }),
 
     computed: {
-      items () {
+      tree () {
         const children = this.types.map(type => ({
-          id: type,
-          name: this.getName(type),
-          children: this.getChildren(type),
+          value: type,
+          title: capitalize(type),
+          $children: this.breweries
+            .filter(brewery => {
+              return brewery.brewery_type === type
+            })
+            .map(brewery => {
+              return {
+                value: brewery.id,
+                title: capitalize(brewery.name),
+              }
+            })
+            .sort((a, b) => {
+              return a.title > b.title ? 1 : -1
+            }),
         }))
 
         return [{
-          id: 1,
-          name: 'All Breweries',
-          children,
+          value: 1,
+          hideSelect: true,
+          title: 'All Breweries',
+          $children: children,
         }]
       },
       shouldShowTree () {
         return this.breweries.length > 0 && !this.isLoading
+      },
+      selectedBreweries () {
+        return this.breweries.filter(brewery => this.selection.includes(brewery.id))
       },
     },
 
@@ -139,29 +151,15 @@
       fetch () {
         if (this.breweries.length) return
 
+        this.isLoading = true
+
         return fetch('https://api.openbrewerydb.org/breweries')
           .then(res => res.json())
-          .then(data => (this.breweries = data))
-          .catch(err => console.log(err))
-      },
-      getChildren (type) {
-        const breweries = []
-
-        for (const brewery of this.breweries) {
-          if (brewery.brewery_type !== type) continue
-
-          breweries.push({
-            ...brewery,
-            name: this.getName(brewery.name),
+          .then(data => {
+            this.breweries = data
+            this.isLoading = false
           })
-        }
-
-        return breweries.sort((a, b) => {
-          return a.name > b.name ? 1 : -1
-        })
-      },
-      getName (name) {
-        return `${name.charAt(0).toUpperCase()}${name.slice(1)}`
+          .catch(err => console.log(err))
       },
     },
   }

@@ -1,5 +1,8 @@
 <template>
-  <v-treeview :items="items"></v-treeview>
+  <v-treeview
+    density="compact"
+    :items="items"
+  ></v-treeview>
 </template>
 
 <script>

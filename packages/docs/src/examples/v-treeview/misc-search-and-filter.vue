@@ -3,38 +3,25 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-sheet class="pa-4 primary lighten-2">
+    <v-sheet class="pa-4 primary-lighten-2">
       <v-text-field
         v-model="search"
         label="Search Company Directory"
-        dark
-        flat
-        solo-inverted
         hide-details
         clearable
-        clear-icon="mdi-close-circle-outline"
       ></v-text-field>
       <v-checkbox
         v-model="caseSensitive"
-        dark
         hide-details
         label="Case sensitive search"
       ></v-checkbox>
     </v-sheet>
     <v-card-text>
       <v-treeview
-        v-model:open="open"
         :items="items"
         :search="search"
-        :filter="filter"
-      >
-        <template v-slot:prepend="{ item }">
-          <v-icon
-            v-if="item.children"
-            v-text="`mdi-${item.id === 1 ? 'home-variant' : 'folder-network'}`"
-          ></v-icon>
-        </template>
-      </v-treeview>
+        :custom-filter="filter"
+      ></v-treeview>
     </v-card-text>
   </v-card>
 </template>
@@ -44,64 +31,68 @@
     data: () => ({
       items: [
         {
-          id: 1,
-          name: 'Vuetify Human Resources',
-          children: [
+          value: 1,
+          title: 'Vuetify Human Resources',
+          prependIcon: 'mdi-home-variant',
+          $children: [
             {
-              id: 2,
-              name: 'Core team',
-              children: [
+              value: 2,
+              title: 'Core team',
+              prependIcon: 'mdi-folder-network',
+              $children: [
                 {
-                  id: 201,
-                  name: 'John',
+                  value: 201,
+                  title: 'John',
                 },
                 {
-                  id: 202,
-                  name: 'Kael',
+                  value: 202,
+                  title: 'Kael',
                 },
                 {
-                  id: 203,
-                  name: 'Nekosaur',
+                  value: 203,
+                  title: 'Nekosaur',
                 },
                 {
-                  id: 204,
-                  name: 'Jacek',
+                  value: 204,
+                  title: 'Jacek',
                 },
                 {
-                  id: 205,
-                  name: 'Andrew',
+                  value: 205,
+                  title: 'Andrew',
                 },
               ],
             },
             {
-              id: 3,
-              name: 'Administrators',
-              children: [
+              value: 3,
+              title: 'Administrators',
+              prependIcon: 'mdi-folder-network',
+              $children: [
                 {
-                  id: 301,
-                  name: 'Mike',
+                  value: 301,
+                  title: 'Mike',
                 },
                 {
-                  id: 302,
-                  name: 'Hunt',
+                  value: 302,
+                  title: 'Hunt',
                 },
               ],
             },
             {
-              id: 4,
-              name: 'Contributors',
-              children: [
+              value: 4,
+              title: 'Contributors',
+              prependIcon: 'mdi-folder-network',
+              $children: [
                 {
-                  id: 401,
-                  name: 'Phlow',
+                  value: 401,
+                  title: 'Phlow',
                 },
                 {
-                  id: 402,
-                  name: 'Brandon',
+                  value: 402,
+                  title: 'Brandon',
                 },
                 {
-                  id: 403,
-                  name: 'Sean',
+                  value: 403,
+                  title: 'Sean',
                 },
               ],
             },
@@ -115,7 +106,7 @@
     computed: {
       filter () {
         return this.caseSensitive
-          ? (item, search, textKey) => item[textKey].indexOf(search) > -1
+          ? (value, query, item) => String(value).indexOf(query)
           : undefined
       },
     },
