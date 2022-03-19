@@ -4,10 +4,10 @@
 
 <script>
 // Extensions
-  import Vuetify from '@/components/ads/Vuetify.vue'
+  import Vuetify from '@/components/promoted/Vuetify.vue'
 
   export default {
-    name: 'DiscoveryAd',
+    name: 'PromotedDiscovery',
 
     components: {
       Vuetify,

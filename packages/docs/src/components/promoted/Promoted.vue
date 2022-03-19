@@ -7,7 +7,7 @@
       v-bind="attrs"
       @click="onClick"
     >
-      <base-ad
+      <promoted-base
         v-bind="$attrs"
         class="v-vuetify--promoted"
         compact
@@ -40,7 +40,7 @@
             />
           </div>
         </v-img>
-      </base-ad>
+      </promoted-base>
     </a>
   </div>
 </template>
@@ -49,12 +49,12 @@
   import { computed, defineComponent } from 'vue'
   import { createAdProps, useAd } from '../../composables/ad'
 
-  import BaseAd from './Base.vue'
+  import PromotedBase from './Base.vue'
 
   export default defineComponent({
-    name: 'PromotedAd',
+    name: 'Promoted',
 
-    components: { BaseAd },
+    components: { PromotedBase },
 
     inheritAttrs: false,
 

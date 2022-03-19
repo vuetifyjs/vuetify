@@ -4,21 +4,21 @@
     v-if="!error"
     class="d-flex"
   >
-    <ads-base max-width="360">
-      <ads-script
+    <promoted-base max-width="360">
+      <promoted-script
         id="carbonads"
         script-id="_carbonads_js"
         src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
         @script:error="error = true"
       />
-    </ads-base>
+    </promoted-base>
   </div>
 </template>
 
 <script setup>
   // Components
-  import AdsBase from './Base.vue'
-  import AdsScript from './Script.vue'
+  import PromotedBase from './Base.vue'
+  import PromotedScript from './Script.vue'
 
   // Utiltlies
   import { ref } from 'vue'
