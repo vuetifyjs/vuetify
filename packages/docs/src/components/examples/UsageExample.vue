@@ -10,6 +10,7 @@
         v-model="model"
         class="py-2"
         mandatory
+        color="primary"
       >
         <v-btn value="default" rounded="tl">Default</v-btn>
 
@@ -21,6 +22,20 @@
           {{ option }}
         </v-btn>
       </v-btn-toggle>
+
+      <v-tooltip anchor="bottom">
+        <template #activator="{ props }">
+          <v-btn
+            icon="mdi-code-tags"
+            class="mr-1 text-medium-emphasis"
+            density="comfortable"
+            v-bind="props"
+            @click="code = !code"
+          />
+        </template>
+
+        <span>Show code</span>
+      </v-tooltip>
 
       <v-tooltip anchor="bottom">
         <template #activator="{ props }">
@@ -41,7 +56,7 @@
       <v-main>
         <v-sheet
           class="px-12 d-flex align-center"
-          min-height="300"
+          min-height="250"
           rounded="0"
         >
           <div class="flex-grow-1 px-12">
@@ -65,9 +80,13 @@
       </v-navigation-drawer>
     </v-layout>
 
-    <div class="pa-3">
-      <app-markup :code="formatAttributes" />
-    </div>
+    <v-expand-transition>
+      <div v-if="code">
+        <div class="pa-3">
+          <app-markup :code="formatAttributes" />
+        </div>
+      </div>
+    </v-expand-transition>
   </div>
 </template>
 
@@ -96,6 +115,7 @@
 
     setup (props, { emit }) {
       const tune = ref(false)
+      const code = ref(false)
       const model = computed({
         get () {
           return props.modelValue
@@ -122,6 +142,7 @@
         formatAttributes,
         model,
         tune,
+        code,
       }
     },
   }
