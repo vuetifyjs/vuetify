@@ -1,7 +1,7 @@
 <template>
-  <div class="pt-3 px-2">
+  <div class="pt-2 px-2">
     <app-caption
-      class="ml-2 mb-2"
+      class="ml-2"
       path="premiere-sponsors"
     />
 
@@ -9,8 +9,8 @@
       v-for="sponsor of sponsors"
       :key="sponsor.slug"
       :sponsor="sponsor"
-      width="164"
-      max-height="48"
+      class="mb-n2"
+      width="146"
     />
   </div>
 </template>
@@ -34,7 +34,16 @@
       const store = useSponsorsStore()
 
       return {
-        sponsors: computed(() => store.sponsors.filter(sponsor => sponsor.metadata.tier === 0)),
+        sponsors: computed(() => {
+          return store.sponsors
+            .filter(sponsor => sponsor.metadata.tier <= 0)
+            .sort((a, b) => {
+              const aTier = a.metadata.tier
+              const bTier = b.metadata.tier
+
+              return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
+            })
+        }),
       }
     },
   })
