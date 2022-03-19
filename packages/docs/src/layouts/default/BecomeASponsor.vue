@@ -1,16 +1,26 @@
 <template>
   <div
     v-if="sponsors.length > 0"
-    class="pt-4 pb-3 px-2"
+    class="pt-2 pb-2 px-2"
   >
     <app-caption
-      class="ml-2 mb-3"
+      class="ml-2 mb-1"
       path="premiere-sponsors"
     />
 
     <sponsor
       comfortable
+      slug="appeggio"
+    />
+
+    <sponsor
+      comfortable
       slug="qomplx"
+    />
+
+    <sponsor
+      comfortable
+      slug="vueschool"
     />
   </div>
 </template>

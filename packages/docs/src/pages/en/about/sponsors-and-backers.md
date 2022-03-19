@@ -30,11 +30,11 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 ### Special
 
+<sponsors tier="-1" />
+
+### Palladium
+
 <sponsors tier="0" />
-
-### Diamond
-
-<sponsors tier="1" />
 
 ### Platinum
 
