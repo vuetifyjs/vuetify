@@ -4,10 +4,7 @@
     v-if="!error"
     class="d-flex"
   >
-    <ads-base
-      max-width="360"
-      border
-    >
+    <ads-base max-width="360">
       <ads-script
         id="carbonads"
         script-id="_carbonads_js"
@@ -18,19 +15,15 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
+<script setup>
+  // Components
   import AdsBase from './Base.vue'
   import AdsScript from './Script.vue'
 
-  export default defineComponent({
-    name: 'CarbonAd',
+  // Utiltlies
+  import { ref } from 'vue'
 
-    components: { AdsBase, AdsScript },
-
-    data: () => ({ error: false }),
-  })
+  const error = ref(false)
 </script>
 
 <style lang="sass">

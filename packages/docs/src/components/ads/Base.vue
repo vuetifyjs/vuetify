@@ -2,6 +2,7 @@
   <v-sheet
     :style="styles"
     class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 mt-2 mb-4"
+    color="grey-lighten-5"
     rounded
     width="100%"
     v-bind="$attrs"

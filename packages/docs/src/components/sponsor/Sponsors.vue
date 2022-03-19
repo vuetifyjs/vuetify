@@ -11,7 +11,7 @@
       cols="auto"
     >
       <sponsor-card
-        :comfortable="Number() === 2"
+        :comfortable="Number(tier) === 2"
         :compact="Number(tier) > 2"
         :sponsor="sponsor"
         v-bind="$attrs"

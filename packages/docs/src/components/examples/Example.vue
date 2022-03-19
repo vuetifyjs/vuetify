@@ -7,7 +7,10 @@
     >
       <v-toolbar
         border="b"
-        class="px-4"
+        :class="[
+          'px-4',
+          !showCode && 'border-opacity-0'
+        ]"
         height="44"
         flat
         rounded="t"

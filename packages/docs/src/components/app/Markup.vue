@@ -3,17 +3,14 @@
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
     :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
-    class="app-markup overflow-hidden border"
+    class="app-markup overflow-hidden"
     dir="ltr"
     outlined
     rounded
     v-bind="$attrs"
   >
     <v-toolbar
-      border="b"
       class="px-1"
-      color="transparent"
-      flat
       height="44"
     >
       <v-sheet
@@ -23,7 +20,7 @@
         height="44"
         rounded="tl"
       >
-        <v-icon icon="mdi-file-tree" class="mr-1" />
+        <v-icon icon="mdi-file-tree" />
 
         {{ resource }}
       </v-sheet>

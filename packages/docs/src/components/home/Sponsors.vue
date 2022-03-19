@@ -22,8 +22,8 @@
           cols="auto"
         >
           <sponsor-card
-            :comfortable="sponsor.metadata.tier === 2"
-            :compact="sponsor.metadata.tier > 2"
+            :comfortable="Number(sponsor.metadata.tier) === 2"
+            :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
             v-bind="$attrs"
           />
@@ -58,7 +58,15 @@
 
       const sponsors = computed(() => {
         return Object.values(sponsorStore.byTier)
-          .reduce((tiers, tier) => tiers.concat(tier), [] as any[])
+          .reduce((tiers, tier) => {
+            for (const sponsor of tier) {
+              if (Number(sponsor.metadata.tier) < 0) continue
+
+              tiers.push(sponsor)
+            }
+
+            return tiers
+          }, [] as any[])
       })
 
       return {

@@ -4,7 +4,6 @@
       border="b"
       class="ps-1 pe-2"
       density="compact"
-      color="#E5E5E5"
       flat
     >
       <v-btn-toggle
