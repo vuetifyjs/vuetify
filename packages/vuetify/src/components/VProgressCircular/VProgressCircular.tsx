@@ -52,7 +52,8 @@ export const VProgressCircular = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const { textColorClasses: underlayColorClasses, textColorStyles: underlayColorStyles } = useTextColor(toRef(props, 'bgColor'))
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
-    const { resizeRef, contentRect } = useResizeObserver()
+    const resizeRef = ref<HTMLElement>()
+    const { contentRect } = useResizeObserver(resizeRef)
 
     const normalizedValue = computed(() => Math.max(0, Math.min(100, parseFloat(props.modelValue))))
     const width = computed(() => Number(props.width))

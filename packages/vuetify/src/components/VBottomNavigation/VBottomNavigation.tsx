@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
@@ -62,7 +62,8 @@ export const VBottomNavigation = defineComponent({
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { resizeRef, contentRect } = useResizeObserver()
+    const resizeRef = ref<HTMLElement>()
+    const { contentRect } = useResizeObserver(resizeRef)
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -

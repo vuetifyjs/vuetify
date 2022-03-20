@@ -76,7 +76,8 @@ export const VSlideGroup = defineComponent({
     const contentSize = ref(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
-    const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
+    const containerRef = ref<HTMLElement>()
+    const { contentRect: containerRect } = useResizeObserver(containerRef)
     const contentRef = ref<HTMLElement>()
 
     watchEffect(() => {

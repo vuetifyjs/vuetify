@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -52,7 +52,8 @@ export const VAppBar = defineComponent({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { resizeRef, contentRect } = useResizeObserver()
+    const resizeRef = ref<VToolbar>()
+    const { contentRect } = useResizeObserver(resizeRef)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
@@ -68,7 +69,7 @@ export const VAppBar = defineComponent({
 
       return (
         <VToolbar
-          ref={ (vm: any) => resizeRef.value = vm?.$el }
+          ref={ resizeRef }
           class={[
             'v-app-bar',
             {

@@ -11,9 +11,11 @@ import { useBackgroundColor } from '@/composables/color'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import type { PropType } from 'vue'
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { defineComponent } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VSystemBar = defineComponent({
   name: 'VSystemBar',
@@ -40,7 +42,8 @@ export const VSystemBar = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { resizeRef, contentRect } = useResizeObserver()
+    const resizeRef = ref<HTMLElement>()
+    const { contentRect } = useResizeObserver(resizeRef)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),

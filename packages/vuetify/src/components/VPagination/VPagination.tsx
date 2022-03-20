@@ -122,7 +122,8 @@ export const VPagination = defineComponent({
 
     provideDefaults(undefined, { scoped: true })
 
-    const { resizeRef } = useResizeObserver((entries: ResizeObserverEntry[]) => {
+    const resizeRef = ref<HTMLElement>()
+    useResizeObserver(resizeRef, (entries: ResizeObserverEntry[]) => {
       if (!entries.length) return
 
       const { target, contentRect } = entries[0]

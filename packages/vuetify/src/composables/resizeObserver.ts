@@ -1,19 +1,23 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
-import type { DeepReadonly, Ref } from 'vue'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
 
+// Types
+import type { ComponentPublicInstance, DeepReadonly, Ref } from 'vue'
+
 interface ResizeState {
-  resizeRef: Ref<Element | undefined>
+  resizeRef: Ref<Element | ComponentPublicInstance | undefined>
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
   borderBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
   contentBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
 }
 
-export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
-  const resizeRef = ref<Element>()
+export function useResizeObserver (
+  resizeRef: Ref<Element | ComponentPublicInstance | undefined>,
+  callback?: ResizeObserverCallback
+): ResizeState {
   const contentRect = ref<DOMRectReadOnly>()
   const contentBoxSize = ref<ResizeObserverSize>()
   const borderBoxSize = ref<ResizeObserverSize>()
@@ -34,14 +38,17 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
     })
 
     watch(resizeRef, (newValue, oldValue) => {
-      if (oldValue) {
-        observer.unobserve(oldValue)
+      const oldElement = oldValue instanceof Element ? oldValue : oldValue?.$el
+      const newElement = newValue instanceof Element ? newValue : newValue?.$el
+
+      if (oldElement) {
+        observer.unobserve(oldElement)
         contentRect.value = undefined
         contentBoxSize.value = undefined
         borderBoxSize.value = undefined
       }
 
-      if (newValue) observer.observe(newValue)
+      if (newValue) observer.observe(newElement)
     }, {
       flush: 'post',
     })
