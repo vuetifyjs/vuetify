@@ -47,7 +47,7 @@ export interface GroupItemProvide {
   isSelected: Ref<boolean>
   toggle: () => void
   select: (value: boolean) => void
-  selectedClass: Ref<string | false | undefined>
+  selectedClass: Ref<(string | undefined)[] | false>
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
@@ -126,7 +126,7 @@ export function useGroupItem (
     return group.isSelected(id)
   })
 
-  const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
+  const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
 
   return {
     id,
