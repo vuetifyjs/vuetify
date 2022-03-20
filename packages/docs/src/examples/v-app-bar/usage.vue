@@ -32,8 +32,7 @@
         </v-app-bar>
 
         <v-main>
-          <div class="text-center py-16">
-          </div>
+          <div style="height: 250px;"></div>
         </v-main>
       </v-layout>
     </v-defaults-provider>

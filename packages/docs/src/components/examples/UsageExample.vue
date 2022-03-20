@@ -55,11 +55,11 @@
     <v-layout>
       <v-main>
         <v-sheet
-          class="px-12 d-flex align-center"
+          class="pa-14 d-flex align-center"
           min-height="250"
           rounded="0"
         >
-          <div class="flex-grow-1 px-12">
+          <div class="flex-fill">
             <slot />
           </div>
         </v-sheet>

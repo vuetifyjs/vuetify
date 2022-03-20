@@ -11,20 +11,22 @@
         }
       }"
     >
-      <v-card>
+      <v-card
+        class="mx-auto"
+        max-width="344"
+      >
         <v-card-title>Card title</v-card-title>
 
         <v-card-subtitle>Subtitle text</v-card-subtitle>
 
         <v-card-text>
-          Greyhound divisively hello coldly wonderfully marginally far upon excluding.
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus.
         </v-card-text>
 
         <v-card-actions>
           <v-btn
             v-for="n in 2"
             :key="n"
-            color="primary"
           >
             Action {{ n }}
           </v-btn>
