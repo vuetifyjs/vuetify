@@ -1,9 +1,8 @@
 <template>
-  <v-card max-width="448" class="mx-auto" color="grey-lighten-4">
+  <v-card max-width="448" class="mx-auto" color="grey-lighten-3">
     <v-layout>
       <v-app-bar
         color="teal-darken-4"
-        class="text-white"
         image="https://picsum.photos/1920/1080?random"
       >
         <template v-slot:image>
