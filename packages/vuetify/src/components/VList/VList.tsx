@@ -111,6 +111,8 @@ export const VList = genericComponent<new <T>() => {
 
     provideDefaults({
       VListItem: {
+        density: toRef(props, 'density'),
+        disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
       },
     })
