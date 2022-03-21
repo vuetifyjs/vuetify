@@ -7,8 +7,8 @@ import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
-import { genericComponent } from '@/util'
+import { computed, toRef } from 'vue'
+import { defineComponent, genericComponent } from '@/util'
 
 // Types
 import type { Ref } from 'vue'

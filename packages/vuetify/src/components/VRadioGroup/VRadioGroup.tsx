@@ -8,8 +8,8 @@ import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Utility
-import { computed, defineComponent } from 'vue'
-import { filterInputAttrs, getUid, useRender } from '@/util'
+import { computed } from 'vue'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VRadioGroup = defineComponent({
   name: 'VRadioGroup',

@@ -2,8 +2,7 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { defineComponent } from 'vue'
-import { useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VCardActions = defineComponent({
   name: 'VCardActions',

@@ -9,7 +9,8 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
-import { defineComponent, inject, toRef } from 'vue'
+import { inject, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',

@@ -9,7 +9,8 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, defineComponent, ref } from 'vue'
+import { computed, ref } from 'vue'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
