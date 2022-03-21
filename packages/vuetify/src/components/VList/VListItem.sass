@@ -137,19 +137,17 @@
     @include tools.typography($list-item-nav-title-typography...)
 
 .v-list-item
-  $root: &
-
   @at-root
     @include tools.density('v-list-item', $list-density) using ($modifier)
-      &.v-list-item--one-line #{$root}
+      &.v-list-item--one-line
         min-height: $list-item-min-height + $modifier
         padding: (list.nth($list-item-padding, 1) + $modifier) list.nth($list-item-padding, 2)
 
-      &.v-list-item--two-line #{$root}
+      &.v-list-item--two-line
         min-height: $list-item-two-line-min-height + $modifier
         padding: (list.nth($list-item-two-line-padding, 1) + $modifier) list.nth($list-item-two-line-padding, 2)
 
-      &.v-list-item--three-line #{$root}
+      &.v-list-item--three-line
         min-height: $list-item-three-line-min-height + $modifier
         padding: (list.nth($list-item-three-line-padding, 1) + $modifier) list.nth($list-item-three-line-padding, 2)
 
