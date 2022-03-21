@@ -1,8 +1,7 @@
 <template>
   <v-card
-    v-if="sponsor"
-    :aria-label="sponsor.metadata.name"
-    :href="sponsor.metadata.href"
+    :aria-label="found?.metadata.name"
+    :href="found?.metadata.href"
     :ripple="false"
     class="d-inline-block px-2 py-1"
     color="transparent"
@@ -13,7 +12,7 @@
     @click="onClick"
   >
     <v-img
-      :alt="sponsor.metadata.name"
+      :alt="found?.metadata.name"
       :src="src"
       :width="imgWidth"
       class="d-inline-block"
@@ -25,8 +24,9 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  import { computed, defineComponent, ref, watch } from 'vue'
   import { useTheme } from 'vuetify/lib/composables/theme.mjs'
+  import { useSponsorsStore } from '@/store/sponsors'
 
   export default defineComponent({
     name: 'SponsorCard',
@@ -41,6 +41,8 @@
 
     setup (props) {
       const theme = useTheme()
+      const sponsors = useSponsorsStore()
+      const sponsor = ref(props.sponsor)
 
       const src = computed(() => {
         const {
@@ -48,7 +50,7 @@
           darkLogo = '',
           logolight = { url: '' },
           lightLogo = '',
-        } = props.sponsor?.metadata ?? {}
+        } = sponsor?.value?.metadata ?? {}
 
         const current = theme.getTheme(theme.current.value)
         return !current.dark ? logolight.url || lightLogo : logodark.url || darkLogo
@@ -61,6 +63,14 @@
 
         return 212
       })
+
+      if (props.slug && !props.sponsor) {
+        watch(() => sponsors.sponsors, val => {
+          if (sponsor.value || !val.length) return
+
+          sponsor.value = sponsors.bySlug(props.slug)
+        })
+      }
 
       function onClick () {
         // TODO: gtag
@@ -75,6 +85,7 @@
         src,
         imgWidth,
         onClick,
+        found: sponsor,
       }
     },
   })

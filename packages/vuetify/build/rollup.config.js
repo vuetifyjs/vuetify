@@ -45,7 +45,7 @@ export default {
       format: 'umd',
       globals: { vue: 'Vue' },
       plugins: [terser({
-        output: { comments: /^!/ }
+        format: { comments: /^!/, ecma: 2015, semicolons: false }
       })],
       sourcemap: true,
       banner,

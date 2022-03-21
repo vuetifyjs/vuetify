@@ -4,7 +4,7 @@
 // Defaults
 $footer-background: rgb(var(--v-theme-surface)) !default;
 $footer-border-radius: map.get(settings.$rounded, 0) !default;
-$footer-color: rgb(var(--v-theme-on-surface)) !default;
+$footer-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $footer-flex: 1 1 auto !default;
 $footer-font-size: 14px;
 $footer-elevation: 0 !default;

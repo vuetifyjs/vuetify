@@ -66,6 +66,28 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: 'foo', 
 </div>
 `;
 
+exports[`VBadge.tsx should match snapshot with badge slot and { content: 10, max: 11 } props 1`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge v-theme--light"
+            aria-atomic="true"
+            aria-label="Badge"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
 exports[`VBadge.tsx should match snapshot with badge slot and { dot: true } props 1`] = `
 <div class="v-badge v-badge--dot">
   <div class="v-badge__wrapper">

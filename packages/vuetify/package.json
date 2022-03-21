@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-alpha.13",
+  "version": "3.0.0-beta.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -133,6 +133,7 @@
     "cy-mobile-commands": "^0.3.0",
     "cypress": "^9.0.0",
     "cypress-file-upload": "^5.0.8",
+    "cypress-real-events": "^1.6.0",
     "dotenv": "^8.6.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^25.2.4",

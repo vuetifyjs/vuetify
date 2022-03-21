@@ -76,9 +76,8 @@ export const VList = genericComponent<new <T>() => {
     items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
-      selectStrategy: 'leaf' as const,
+      selectStrategy: 'single-leaf' as const,
       openStrategy: 'multiple' as const,
-      activeStrategy: 'single' as const,
     }),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -92,7 +91,8 @@ export const VList = genericComponent<new <T>() => {
   emits: {
     'update:selected': (val: string[]) => true,
     'update:opened': (val: string[]) => true,
-    'update:active': (val: string[]) => true,
+    'click:open': (value: { id: string, value: boolean, path: string[] }) => true,
+    'click:select': (value: { id: string, value: boolean, path: string[] }) => true,
   },
 
   setup (props, { slots }) {
@@ -104,7 +104,7 @@ export const VList = genericComponent<new <T>() => {
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select, activate } = useNested(props)
+    const { open, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
 
     createList()
@@ -153,7 +153,6 @@ export const VList = genericComponent<new <T>() => {
     return {
       open,
       select,
-      activate,
     }
   },
 })

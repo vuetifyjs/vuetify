@@ -3,12 +3,19 @@
     v-model="app.drawer"
     width="300"
   >
+    <template #prepend>
+      <app-drawer-prepend />
+    </template>
+
+    <v-divider />
+
     <app-list :items="items" nav />
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
   // Components
+  import AppDrawerPrepend from './DrawerPrepend.vue'
   import AppList from '@/components/app/list/List.vue'
 
   // Composables
@@ -24,7 +31,10 @@
   export default defineComponent({
     name: 'AppDrawer',
 
-    components: { AppList },
+    components: {
+      AppList,
+      AppDrawerPrepend,
+    },
 
     setup () {
       const { locale } = useI18n()

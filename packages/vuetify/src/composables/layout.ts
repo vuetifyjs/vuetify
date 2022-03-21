@@ -2,7 +2,7 @@
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref, watch } from 'vue'
+import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref } from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
@@ -35,6 +35,7 @@ interface LayoutProvide {
   ) => {
     layoutItemStyles: Ref<Record<string, unknown>>
     layoutItemScrimStyles: Ref<Record<string, unknown>>
+    zIndex: Ref<number>
   }
   unregister: (id: string) => void
   mainStyles: Ref<Record<string, unknown>>
@@ -42,7 +43,6 @@ interface LayoutProvide {
   items: Ref<LayoutItem[]>
   layoutRect: Ref<DOMRectReadOnly | undefined>
   rootZIndex: Ref<number>
-  overlays: Ref<number[]>
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
@@ -75,26 +75,6 @@ export function useLayout () {
   if (!layout) throw new Error('Could not find injected Vuetify layout')
 
   return layout
-}
-
-export function useOverlay (isActive: Ref<boolean | undefined>) {
-  const layout = useLayout()
-
-  const id = getUid()
-
-  watch(isActive, value => {
-    if (value) {
-      layout.overlays.value.push(id)
-    } else {
-      layout.overlays.value = layout.overlays.value.filter(x => x !== id)
-    }
-  }, {
-    immediate: true,
-  })
-
-  const overlayZIndex = computed(() => ROOT_ZINDEX + layout.overlays.value.indexOf(id) + 1)
-
-  return { overlayZIndex, layoutRect: layout.layoutRect }
 }
 
 export function useLayoutItem (options: {
@@ -173,7 +153,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
   const activeItems = reactive(new Map<string, Ref<boolean>>())
   const disabledTransitions = reactive(new Map<string, Ref<boolean>>())
   const { resizeRef, contentRect: layoutRect } = useResizeObserver()
-  const overlays = ref<number[]>([])
 
   const computedOverlaps = computed(() => {
     const map = new Map<string, { position: Position, amount: number }>()
@@ -318,7 +297,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         position: rootZIndex.value === ROOT_ZINDEX ? 'fixed' : 'absolute',
       }))
 
-      return { layoutItemStyles, layoutItemScrimStyles }
+      return { layoutItemStyles, layoutItemScrimStyles, zIndex }
     },
     unregister: (id: string) => {
       priorities.delete(id)
@@ -333,7 +312,6 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     items,
     layoutRect,
     rootZIndex,
-    overlays,
   })
 
   const layoutClasses = computed(() => [

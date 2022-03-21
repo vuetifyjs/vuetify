@@ -8,6 +8,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
 import { VCardActions } from './VCardActions'
 import { VCardAvatar } from './VCardAvatar'
+import { VCardContent } from './VCardContent'
 import { VCardHeader } from './VCardHeader'
 import { VCardHeaderText } from './VCardHeaderText'
 import { VCardImg } from './VCardImg'
@@ -167,6 +168,8 @@ export const VCard = defineComponent({
                       { slots.subtitle ? slots.subtitle() : props.subtitle }
                     </VCardSubtitle>
                   ) }
+
+                  { slots.headerText?.() }
                 </VCardHeaderText>
               ) }
 
@@ -192,6 +195,10 @@ export const VCard = defineComponent({
             <VCardText>
               { slots.text ? slots.text() : props.text }
             </VCardText>
+          ) }
+
+          { slots.content && (
+            <VCardContent v-slots={{ default: slots.content }} />
           ) }
 
           { slots.default?.() }

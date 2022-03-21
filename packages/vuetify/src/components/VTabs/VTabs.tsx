@@ -17,6 +17,7 @@ import { defineComponent } from '@/util'
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
+import { useBackgroundColor } from '@/composables/color'
 
 export type TabItem = string | Record<string, any>
 
@@ -59,14 +60,20 @@ export const VTabs = defineComponent({
     optional: Boolean,
     right: Boolean,
     sliderColor: String,
+    modelValue: null,
 
     ...makeDensityProps(),
     ...makeTagProps(),
   },
 
-  setup (props, { slots, attrs }) {
+  emits: {
+    'update:modelValue': (v: unknown) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'backgroundColor'))
 
     provideDefaults({
       VTab: {
@@ -93,12 +100,15 @@ export const VTabs = defineComponent({
             'v-tabs--stacked': props.stacked,
           },
           densityClasses.value,
+          backgroundColorClasses.value,
         ]}
+        style={backgroundColorStyles.value}
         role="tablist"
         symbol={ VTabsSymbol }
         mandatory="force"
         direction={ props.direction }
-        { ...attrs }
+        modelValue={ props.modelValue }
+        onUpdate:modelValue={ v => emit('update:modelValue', v) }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />

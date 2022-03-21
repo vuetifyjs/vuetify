@@ -1,50 +1,44 @@
 <template>
-  <v-row
-    justify="center"
-    align="center"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-system-bar"
   >
-    <v-container fluid>
-      <v-card
-        img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg"
-        height="200px"
-        class="mb-6"
+    <v-defaults-provider
+      :defaults="{
+        VSystemBar: {
+          window: model === 'window',
+        }
+      }"
+    >
+      <v-layout
+        class="elevation-2 rounded mx-auto bg-white"
+        style="max-width: 448px;"
       >
-        <v-system-bar
-          color="orange"
-          v-bind="$attrs"
-        >
-          <v-icon>mdi-gmail</v-icon>
-          <span>10 unread emails</span>
-          <v-spacer></v-spacer>
+        <v-system-bar>
           <v-icon>mdi-wifi-strength-4</v-icon>
-          <v-icon>mdi-signal-cellular-outline</v-icon>
+          <v-icon>mdi-signal</v-icon>
           <v-icon>mdi-battery</v-icon>
-          <span>12:30</span>
+
+          <span class="ml-2">3:13PM</span>
         </v-system-bar>
-      </v-card>
-    </v-container>
-  </v-row>
+
+        <v-main>
+          <div class="py-16">
+          </div>
+        </v-main>
+      </v-layout>
+    </v-defaults-provider>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VSystemBarUsageExample',
 
     data: () => ({
-      defaults: {
-        height: 30,
-        'lights-out': false,
-        window: false,
-      },
-      options: {
-        booleans: ['lights-out'],
-        sliders: {
-          height: [1, 60],
-        },
-      },
-      tabs: ['window'],
+      model: 'default',
+      options: ['window'],
     }),
   }
 </script>

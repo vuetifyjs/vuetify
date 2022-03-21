@@ -54,7 +54,7 @@ describe('VPagination', () => {
     cy.get('.v-pagination__item').last().should('have.class', 'v-pagination__item--is-active')
   })
 
-  it('should render offset pages when using start prop', () => {
+  it.skip('should render offset pages when using start prop', () => {
     cy.mount(() => (
       <VPagination length="3" start="3" />
     ))

@@ -129,3 +129,5 @@ export const VWindowItem = defineComponent({
     }
   },
 })
+
+export type VWindowItem = InstanceType<typeof VWindowItem>

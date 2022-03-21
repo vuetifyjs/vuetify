@@ -25,7 +25,7 @@ export const VBadge = defineComponent({
   props: {
     bordered: Boolean,
     color: String,
-    content: String,
+    content: [Number, String],
     dot: Boolean,
     floating: Boolean,
     icon: String,

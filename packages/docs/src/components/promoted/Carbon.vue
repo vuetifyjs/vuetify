@@ -4,33 +4,26 @@
     v-if="!error"
     class="d-flex"
   >
-    <ads-base
-      max-width="360"
-      border
-    >
-      <ads-script
+    <promoted-base max-width="360">
+      <promoted-script
         id="carbonads"
         script-id="_carbonads_js"
         src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
         @script:error="error = true"
       />
-    </ads-base>
+    </promoted-base>
   </div>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup>
+  // Components
+  import PromotedBase from './Base.vue'
+  import PromotedScript from './Script.vue'
 
-  import AdsBase from './Base.vue'
-  import AdsScript from './Script.vue'
+  // Utiltlies
+  import { ref } from 'vue'
 
-  export default defineComponent({
-    name: 'CarbonAd',
-
-    components: { AdsBase, AdsScript },
-
-    data: () => ({ error: false }),
-  })
+  const error = ref(false)
 </script>
 
 <style lang="sass">

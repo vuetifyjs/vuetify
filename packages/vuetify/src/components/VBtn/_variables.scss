@@ -6,7 +6,7 @@
 // Defaults
 $button-app-bar-elevation: 0 !default;
 $button-background: rgb(var(--v-theme-surface)) !default;
-$button-color: rgb(var(--v-theme-on-surface)) !default;
+$button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $button-banner-actions-padding: 0 8px !default;
 $button-pagination-active-overlay-opacity: var(--v-border-opacity) !default;
 $button-pagination-border-radius: settings.$border-radius-root !default;

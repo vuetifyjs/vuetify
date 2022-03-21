@@ -1,5 +1,5 @@
 <template>
-  <div class="mb-8">
+  <div class="mb-4">
     <vuetify
       :slug="slug"
       medium="entry"
@@ -11,7 +11,7 @@
   import { defineComponent } from 'vue'
 
   export default defineComponent({
-    name: 'EntryAd',
+    name: 'PromotedEntry',
 
     props: {
       slug: String,

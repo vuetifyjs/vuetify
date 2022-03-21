@@ -14,6 +14,25 @@
     &.v-field
       cursor: text
 
+  .v-field
+    .v-field__input
+      > input
+        align-self: flex-start
+        flex: 1 1
+
+    .v-field__append-inner
+      > .v-icon
+        margin-inline-start: 4px
+        transition: $autocomplete-transition
+
+  .v-field:not(.v-field--focused)
+    input
+      min-width: 0
+
+  .v-field--dirty
+    .v-autocomplete__selection
+      margin-inline-end: 2px
+
 .v-autocomplete
   &__content
     overflow: hidden
@@ -21,31 +40,19 @@
     @include tools.elevation($autocomplete-content-elevation)
     @include tools.rounded($autocomplete-content-border-radius)
 
-  &__search-input
-    opacity: 0
-
-  &__menu-icon
-    order: 1
-    margin-inline-start: 4px
-    transition: $autocomplete-transition
-
   &__mask
     background: rgb(var(--v-theme-on-surface-variant))
 
   &__selection
     display: inline-flex
-    margin-inline-end: 2px
-
-  &__selections
-    align-items: flex-start
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
-    display: flex
-    flex: 1 1
+    letter-spacing: inherit
+    line-height: inherit
 
   &--active-menu
-    .v-autocomplete__menu-icon
-      color: inherit
-      transform: rotate(180deg)
+    .v-field__append-inner
+      > .v-icon
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
 
   &--chips
     .v-autocomplete__selection
@@ -53,25 +60,22 @@
         margin-inline-start: 0
 
   &--single
-    &.v-text-field input.v-field__input
+    &.v-text-field input
+      flex: 1 1
       position: absolute
       left: 0
+      right: 0
+      padding-inline-start: inherit
+      padding-inline-end: inherit
 
     .v-field--active
-        input.v-field__input
-          transition: none
+      input
+        transition: none
 
     .v-field--dirty:not(.v-field--focused)
-        input.v-field__input
-          opacity: 0
-
-    .v-field--focused
-      .v-autocomplete__selections
+      input
         opacity: 0
 
-  &--multiple
-    input.v-field__input
-      padding-inline-start: 0
-
-    .v-autocomplete__selections
-      padding-inline-end: 0
+    .v-field--focused
+      .v-autocomplete__selection
+        opacity: 0

@@ -1,5 +1,5 @@
 <template>
-  <ads-base
+  <promoted-base
     class="v-vuetify"
     v-bind="$attrs"
     comfortable
@@ -21,7 +21,7 @@
         />
       </template>
     </v-list-item>
-  </ads-base>
+  </promoted-base>
 </template>
 
 <script lang="ts">
@@ -29,13 +29,13 @@
   import { useI18n } from 'vue-i18n'
   import { createAdProps, useAd } from '../../composables/ad'
 
-  import AdsBase from './Base.vue'
+  import PromotedBase from './Base.vue'
 
   // Mixins
   export default defineComponent({
-    name: 'AdsVuetify',
+    name: 'PromotedVuetify',
 
-    components: { AdsBase },
+    components: { PromotedBase },
 
     props: {
       color: String,
