@@ -9,6 +9,7 @@
 .v-skeleton-loader__chip,
 .v-skeleton-loader__divider,
 .v-skeleton-loader__heading,
+.v-skeleton-loader__subheading,
 .v-skeleton-loader__image,
 .v-skeleton-loader__text
   background: $skeleton-loader-text-background
@@ -32,7 +33,6 @@
   background: $skeleton-loader-table-tfoot-background
 
 .v-skeleton-loader
-  border-radius: $skeleton-loader-border-radius
   position: relative
   vertical-align: top
 
@@ -183,8 +183,11 @@
     height: $skeleton-loader-divider-height
 
   &__heading
-    border-radius: $skeleton-loader-heading-border-radius
     height: $skeleton-loader-heading-height
+    width: 45%
+
+  &__subheading
+    height: $skeleton-loader-heading-height * 0.8
     width: 45%
 
   &__image
@@ -331,7 +334,6 @@
       margin-bottom: 0
 
   &__text
-    border-radius: $skeleton-loader-text-border-radius
     flex: 1 0 auto
     height: $skeleton-loader-text-height
     margin-bottom: 6px
@@ -348,6 +350,10 @@
 
     .v-skeleton-loader__bone
       border-radius: 0
+
+.v-skeleton-bone
+  &--rounded
+    border-radius: $skeleton-loader-heading-border-radius
 
 @keyframes loading
   100%

@@ -1,1 +1,1 @@
-export { VSkeletonLoaderItem } from './VSkeletonLoaderItem'
+export { VSkeletonBone } from './VSkeletonBone'

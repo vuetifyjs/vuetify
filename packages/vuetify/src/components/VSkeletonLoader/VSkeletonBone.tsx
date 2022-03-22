@@ -9,9 +9,10 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { defineComponent, useRender } from '@/util'
 
-const rootTypes = ['avatar', 'button', 'chip', 'heading', 'image', 'text']
+const rootTypes = ['heading', 'subheading', 'image', 'text']
 
-export const VSkeletonLoaderItem = defineComponent({
+export const VSkeletonBone = defineComponent({
+  name: 'VSkeletonBone',
   props: {
     boilerplate: Boolean,
     loading: Boolean,
