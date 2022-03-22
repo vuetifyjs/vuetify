@@ -74,7 +74,7 @@
 .v-card-actions
   align-items: center
   display: flex
-  flex: 1 1 auto
+  flex: $card-actions-flex
   min-height: $card-actions-min-height
   padding: $card-actions-padding
 
@@ -91,13 +91,14 @@
       padding-inline-start: $card-avatar-header-padding
 
 .v-card-header-text
-  flex: 1 1 auto
+  flex: $card-header-text-flex
   min-width: 0
 
 .v-card-img
   border-radius: inherit
   display: flex
   height: 100%
+  flex: $card-img-flex
   left: 0
   overflow: hidden
   position: absolute
@@ -107,17 +108,16 @@
 .v-card-header
   align-items: $card-item-align-items
   display: flex
+  flex: $card-header-flex
   padding: $card-item-padding
 
   + .v-card-text
     padding-top: 0
 
-.v-card-media
-  overflow: hidden
-
 .v-card-subtitle
   align-items: center
   display: flex
+  flex: $card-subtitle-flex
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
@@ -132,6 +132,7 @@
 
 .v-card-text
   color: $card-text-color
+  flex: $card-text-flex
   font-size: $card-text-font-size
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
@@ -145,9 +146,14 @@
   + .v-card-actions
     margin-top: -.5rem
 
+.v-card-content
+  flex: $card-content-flex
+  padding: $card-text-padding
+
 .v-card-title
   align-items: center
   display: flex
+  flex: $card-title-flex
   font-size: $card-title-font-size
   font-weight: $card-title-font-weight
   hyphens: $card-title-hyphens

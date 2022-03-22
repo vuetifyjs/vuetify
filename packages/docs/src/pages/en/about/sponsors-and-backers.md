@@ -30,31 +30,35 @@ We thank all of our project sponsors for their continued support of Vuetify. If 
 
 ### Special
 
-<page-component path="home/Sponsors" tier="0" />
+<page-component path="sponsor/Sponsors" tier="-1" />
 
-### Diamond
+### Palladium
 
-<page-component path="home/Sponsors" tier="1" />
+<page-component path="sponsor/Sponsors" tier="0" />
+
+<!-- ### Diamond
+
+<page-component path="sponsor/Sponsors" tier="1" /> -->
 
 ### Platinum
 
-<page-component path="home/Sponsors" tier="2" />
+<page-component path="sponsor/Sponsors" tier="2" />
 
 ### Gold
 
-<page-component path="home/Sponsors" tier="3" />
+<page-component path="sponsor/Sponsors" tier="3" />
 
 ### Silver
 
-<page-component path="home/Sponsors" tier="4" />
+<page-component path="sponsor/Sponsors" tier="4" />
 
 ### Affiliate
 
-<page-component path="home/Sponsors" tier="5" />
+<page-component path="sponsor/Sponsors" tier="5" />
 
 ### Service
 
-<page-component path="home/Sponsors" tier="6" />
+<page-component path="sponsor/Sponsors" tier="6" />
 
 ## Cursory
 

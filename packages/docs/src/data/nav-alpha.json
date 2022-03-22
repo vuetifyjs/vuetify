@@ -69,6 +69,7 @@
       "breadcrumbs",
       "buttons",
       "cards",
+      "carousels",
       "chips",
       "color-pickers",
       "defaults-providers",
@@ -83,6 +84,7 @@
         "items": [
           "autocompletes",
           "checkboxes",
+          "combobox",
           "file-inputs",
           "forms",
           "inputs",

@@ -1,14 +1,14 @@
 <template>
   <div class="d-none">
     <!-- TODO: resolve style issues -->
-    <base-ad>
+    <promoted-base>
       <app-markdown
         v-if="ad"
         class="v-markdown--inline d-inline"
         tag="span"
         :content="description"
       />
-    </base-ad>
+    </promoted-base>
   </div>
 </template>
 
@@ -17,12 +17,12 @@
   import { defineComponent } from 'vue'
   import { createAdProps, useAd } from '@/composables/ad'
 
-  import BaseAd from './Base.vue'
+  import PromotedBase from './Base.vue'
 
   export default defineComponent({
-    name: 'InlineAd',
+    name: 'PromotedInline',
 
-    components: { BaseAd },
+    components: { PromotedBase },
 
     props: {
       ...createAdProps(),

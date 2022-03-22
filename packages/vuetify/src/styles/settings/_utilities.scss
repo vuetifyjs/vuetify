@@ -482,6 +482,13 @@ $utilities: () !default;
         property: position,
         class: position,
         values: static relative fixed absolute sticky
+      ),
+      "fill-height": (
+        property: height,
+        class: fill,
+        values: (
+          height: 100%
+        )
       )
     ),
     $utilities

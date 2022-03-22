@@ -4,7 +4,6 @@ import './VSelect.sass'
 // Components
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -24,12 +23,14 @@ import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
+export interface InternalSelectItem {
+  title: string
+  value: any
+  index: number
+}
+
 export interface DefaultSelectionSlot {
-  selection: {
-    active: boolean
-    text: string
-    value: any
-  }
+  selection: InternalSelectItem
 }
 
 export interface DefaultChipSlot extends DefaultSelectionSlot {
@@ -42,6 +43,13 @@ export interface DefaultChipSlot extends DefaultSelectionSlot {
 export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
+
+export function genItem (item: any) {
+  return {
+    title: String((typeof item === 'object' ? item.title : item) ?? ''),
+    value: (typeof item === 'object' ? item.value : item),
+  }
+}
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -71,6 +79,7 @@ export const makeSelectProps = propsFactory({
 
 export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
+    chip: [DefaultChipSlot]
     default: []
     selection: [DefaultSelectionSlot]
   }>
@@ -83,14 +92,15 @@ export const VSelect = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
+    const menu = ref(false)
+    const items = computed(() => props.items.map(genItem))
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -98,62 +108,60 @@ export const VSelect = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
+    const selections = computed(() => {
+      const array: InternalSelectItem[] = []
+      let index = 0
+      for (const unwrapped of model.value) {
+        const item = genItem(unwrapped)
 
-    const menu = ref(false)
-    const selected = computed({
-      get: () => model.value,
-      set: val => {
-        model.value = val
+        const found = array.find(selection => selection.value === item.value)
 
-        if (props.multiple) return
+        if (found == null) {
+          array.push({
+            ...item,
+            index,
+          })
 
-        menu.value = false
-      },
-    })
-    const items = computed(() => {
-      const array = []
-
-      for (const item of props.items as any) {
-        const title = item?.title ?? String(item)
-        const value = item?.value ?? item
-        const active = model.value.includes(value)
-
-        if (props.hideSelected && active) continue
-
-        array.push({
-          active,
-          title,
-          value,
-        })
+          index++
+        }
       }
 
       return array
     })
-    const selections = computed(() => {
-      return model.value.map(value => {
-        return items.value.find(item => item.value === value)
-      })
-    })
+    const selected = computed(() => selections.value.map(selection => selection.value))
 
     function onClear (e: MouseEvent) {
-      selected.value = []
+      model.value = []
 
       if (props.openOnClear) {
         menu.value = true
       }
     }
+    function onClickControl () {
+      if (props.hideNoData && !items.value.length) return
+
+      menu.value = true
+    }
     function onKeydown (e: KeyboardEvent) {
-      if (
-        ['Enter', ' '].includes(e.key) &&
-        !menu.value
-      ) {
+      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
       }
 
-      if (
-        e.key === 'Escape' &&
-        menu.value
-      ) {
+      if (['Escape', 'Tab'].includes(e.key)) {
+        menu.value = false
+      }
+    }
+    function select (item: any) {
+      if (props.multiple) {
+        const index = selections.value.findIndex(selection => selection.value === item.value)
+
+        if (index === -1) {
+          model.value.push(item.value)
+        } else {
+          model.value = selected.value.filter(selection => selection !== item.value)
+        }
+      } else {
+        model.value = [item.value]
         menu.value = false
       }
     }
@@ -176,27 +184,17 @@ export const VSelect = genericComponent<new <T>() => {
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
           ]}
+          appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }
-          onClick:control={ () => menu.value = true }
+          onClick:input={ onClickControl }
+          onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
           modelValue={ model.value.join(', ') }
           onKeydown={ onKeydown }
         >
           {{
             ...slots,
-            appendInner: slotProps => (
-              <>
-                { slots.appendInner?.(slotProps) }
-
-                { props.menuIcon && (
-                  <VIcon
-                    class="v-select__menu-icon"
-                    icon={ props.menuIcon }
-                  />
-                ) }
-              </>
-            ),
             default: () => (
               <>
                 { activator.value && (
@@ -209,73 +207,72 @@ export const VSelect = genericComponent<new <T>() => {
                     transition={ props.transition }
                   >
                     <VList
-                      v-model:selected={ selected.value }
+                      selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
                       { !items.value.length && !props.hideNoData && (
                         <VListItem title={ t(props.noDataText) } />
-                      )}
+                      ) }
 
-                      { items.value.map(({ title, value }) => (
+                      { items.value.map(item => (
                         <VListItem
-                          title={ title }
-                          value={ value }
+                          title={ item.title }
+                          value={ item.value }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                          onClick={ () => select(item) }
                         />
                       )) }
                     </VList>
                   </VMenu>
                 ) }
 
-                <div class="v-select__selections v-field__input">
-                  { selections.value.map((selection, index) => {
-                    const active = selection?.active
-                    const title = selection?.title
-                    const value = selection?.value
+                { selections.value.map((selection, index) => {
+                  function onChipClose (e: Event) {
+                    e.stopPropagation()
+                    e.preventDefault()
 
-                    function onChipClose (e: Event) {
-                      e.stopPropagation()
-                      e.preventDefault()
+                    select(selection)
+                  }
 
-                      model.value = model.value.filter(item => item !== value)
-                    }
+                  const slotProps = {
+                    'onClick:close': onChipClose,
+                    modelValue: true,
+                  }
 
-                    const slotProps = {
-                      'onClick:close': onChipClose,
-                      modelValue: active,
-                    }
-
-                    return (
-                      <VDefaultsProvider
-                        defaults={{
-                          VChip: {
-                            closable: props.closableChips,
-                            size: 'small',
-                            text: title,
-                          },
-                        }}
-                      >
-                        <div class="v-select__selection">
-                          { hasChips
-                            ? slots.chip
-                              ? slots.chip({ props: slotProps, selection })
-                              : (<VChip { ...slotProps } />)
-                            : slots.selection
-                              ? slots.selection({ selection })
-                              : (
-                                <span class="v-select__selection-text">
-                                  { title }
-                                  { index < model.value.length - 1 && (
-                                    <span class="v-select__selection-comma">,</span>
-                                  ) }
-                                </span>
-                              )
+                  return (
+                    <div class="v-select__selection">
+                      { hasChips && (
+                        <VDefaultsProvider
+                          defaults={{
+                            VChip: {
+                              closable: props.closableChips,
+                              size: 'small',
+                              text: selection.title,
+                            },
+                          }}
+                        >
+                          { slots.chip
+                            ? slots.chip({ props: slotProps, selection })
+                            : (<VChip { ...slotProps } />)
                           }
-                        </div>
-                      </VDefaultsProvider>
-                    )
-                  }) }
-                </div>
+                        </VDefaultsProvider>
+                      ) }
+
+                      { !hasChips && (
+                        slots.selection
+                          ? slots.selection({ selection })
+                          : (
+                            <span class="v-select__selection-text">
+                              { selection.title }
+                              { props.multiple && (index < selections.value.length - 1) && (
+                                <span class="v-select__selection-comma">,</span>
+                              ) }
+                            </span>
+                          )
+                      ) }
+                    </div>
+                  )
+                }) }
               </>
             ),
           }}
@@ -283,9 +280,7 @@ export const VSelect = genericComponent<new <T>() => {
       )
     })
 
-    return useForwardRef({
-      //
-    }, vTextFieldRef)
+    return useForwardRef({}, vTextFieldRef)
   },
 })
 

@@ -59,7 +59,7 @@ export function provideDefaults (
       return properties
     }
 
-    return mergeDeep(properties, properties.prev)
+    return mergeDeep(properties.prev, properties)
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)

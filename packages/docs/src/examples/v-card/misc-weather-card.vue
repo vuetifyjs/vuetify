@@ -1,81 +1,88 @@
 <template>
   <v-card
     class="mx-auto"
-    max-width="400"
+    max-width="368"
   >
-    <v-list-item>
-      <v-list-item-content>
-        <v-list-item-title class="text-h5 pb-1">
-          San Francisco
-        </v-list-item-title>
-        <v-list-item-subtitle>Mon, 12:30 PM, Mostly sunny</v-list-item-subtitle>
-      </v-list-item-content>
-    </v-list-item>
+    <v-card-header>
+      <v-card-header-text>
+        <v-card-title class="text-h5">Florida</v-card-title>
 
-    <v-card-text>
-      <v-row align="center">
+        <v-card-subtitle>
+          <v-icon
+            icon="mdi-alert"
+            size="18"
+            color="error"
+            class="mr-1 pb-1"
+          ></v-icon>
+
+          Extreme Weather Alert
+        </v-card-subtitle>
+      </v-card-header-text>
+    </v-card-header>
+
+    <v-card-text class="py-0">
+      <v-row align="center" hide-gutters no-gutters>
         <v-col
           class="text-h2"
           cols="6"
         >
-          23&deg;C
+          64&deg;F
         </v-col>
-        <v-col cols="6">
-          <v-img
-            src="https://cdn.vuetifyjs.com/images/cards/sun.png"
-            alt="Sunny image"
-            width="92"
-          ></v-img>
+
+        <v-col cols="6" class="text-right">
+          <v-icon size="88" color="error" icon="mdi-weather-hurricane"></v-icon>
         </v-col>
       </v-row>
     </v-card-text>
 
-    <v-list-item>
+    <v-list-item density="compact">
       <v-list-item-avatar left>
-        <v-icon icon="mdi-send"></v-icon>
+        <v-icon icon="mdi-weather-windy"></v-icon>
       </v-list-item-avatar>
-      <v-list-item-subtitle>23 km/h</v-list-item-subtitle>
+
+      <v-list-item-subtitle>123 km/h</v-list-item-subtitle>
     </v-list-item>
 
-    <v-list-item>
+    <v-list-item density="compact">
       <v-list-item-avatar left>
-        <v-icon icon="mdi-cloud-download"></v-icon>
+        <v-icon icon="mdi-weather-pouring"></v-icon>
       </v-list-item-avatar>
+
       <v-list-item-subtitle>48%</v-list-item-subtitle>
     </v-list-item>
 
-    <v-slider
-      v-model="time"
-      color="primary"
-      :max="6"
-      :step="1"
-      :ticks="labels"
-      class="mx-4"
-      show-ticks="always"
-    ></v-slider>
+    <v-expand-transition>
+      <div v-if="expand">
+        <v-slider
+          v-model="time"
+          :max="6"
+          :step="1"
+          :ticks="labels"
+          class="mx-4"
+          color="primary"
+          density="compact"
+          hide-details
+          show-ticks="always"
+          thumb-size="10"
+        ></v-slider>
 
-    <div class="d-flex flex-column">
-      <div
-        v-for="item in forecast"
-        :key="item.day"
-        class="d-flex justify-space-between pa-4"
-      >
-        <v-list-item-title>{{ item.day }}</v-list-item-title>
-
-        <v-list-item-icon>
-          <v-icon>{{ item.icon }}</v-icon>
-        </v-list-item-icon>
-
-        <v-list-item-subtitle class="text-right">
-          {{ item.temp }}
-        </v-list-item-subtitle>
+        <v-list class="transparent">
+          <v-list-item
+            v-for="item in forecast"
+            :key="item.day"
+            :title="item.day"
+            :append-icon="item.icon"
+            :subtitle="item.temp"
+          >
+          </v-list-item>
+        </v-list>
       </div>
-    </div>
+    </v-expand-transition>
 
     <v-divider></v-divider>
 
     <v-card-actions>
-      <v-btn text>
+      <v-btn @click="expand = !expand">
         Full Report
       </v-btn>
     </v-card-actions>
@@ -84,16 +91,15 @@
 
 <script>
   export default {
-    data () {
-      return {
-        labels: { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' },
-        time: 0,
-        forecast: [
-          { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },
-          { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
-          { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
-        ],
-      }
-    },
+    data: () => ({
+      labels: { 0: 'SU', 1: 'MO', 2: 'TU', 3: 'WED', 4: 'TH', 5: 'FR', 6: 'SA' },
+      expand: false,
+      time: 0,
+      forecast: [
+        { day: 'Tuesday', icon: 'mdi-white-balance-sunny', temp: '24\xB0/12\xB0' },
+        { day: 'Wednesday', icon: 'mdi-white-balance-sunny', temp: '22\xB0/14\xB0' },
+        { day: 'Thursday', icon: 'mdi-cloud', temp: '25\xB0/15\xB0' },
+      ],
+    }),
   }
 </script>

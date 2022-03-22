@@ -12,101 +12,57 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, icons, and more. Card components that have no listed options, such as `v-card-header`, are functional components that serve as _markup sugar_ that help make your code more readable. <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile an enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
 
-<entry />
+![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
+
+---
 
 ## Usage
 
+The `v-card` component is a stylish way to wrap different types of content; such as tables, images, or user actions.
+
 <usage name="v-card" />
+
+<entry slug="vuetify-zero-theme-pro" />
+
+## Anatomy
+
+The recommended placement of elements inside of `v-card` is:
+
+* Place `v-card-title`, `v-card-subtitle` or other title text on top
+* Place `v-card-text` and other forms of media below the card header
+* Place `v-card-actions` after card content
+
+![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Card container holds all `v-card` components |
+| 2. Title (optional) | A heading with increased **font-size** |
+| 3. Subtitle (optional) | A subheading with a lower emphasis text color |
+| 4. Text (optional) | A content area with a lower emphasis text color |
+| 5. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
 
 ## API
 
-<api-inline />
-
-## Structure
-
-The following snippet shows the general structure of a card:
-
-```html
-<v-card>
-  <v-card-img>
-    <v-img src="..." />
-  </v-card-img>
-
-  <v-card-media>
-    <v-img src="..." />
-  </v-card-media>
-
-  <v-card-header>
-    <v-card-avatar>
-      <v-avatar image="...">
-    </v-card-avatar>
-
-    <v-card-header-text>
-      <v-card-title>...</v-card-title>
-
-      <v-card-subtitle>...</v-card-subtitle>
-    </v-card-header-text>
-
-    <v-card-avatar>
-      <v-avatar icon="...">
-    </v-card-avatar>
-  </v-card-header>
-
-  <v-card-text>...</v-card-text>
-
-  <v-card-actions>
-    <v-btn>Action 1</v-btn>
-
-    <v-btn>Action 2</v-btn>
-  </v-card-actions>
-</v-card>
-```
-
-### v-card-actions
-
-The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies _special margin_ to buttons so that they properly line up with other card content areas.
-
-### v-card-avatar
-
-TODO
-
-### v-card-header
-
-TODO
-
-### v-card-header-text
-
-TODO
-
-### v-card-img
-
-TODO
-
-### v-card-subtitle
-
-Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
-
-### v-card-text
-
-Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
-
-### v-card-title
-
-Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/text-and-typography).
-
-<promoted slug="vuetify-zero-theme-pro" />
+| Component | Description |
+| - | - |
+| [v-card](/api/v-card/) | Primary Component |
+| **v-card-title** | Functional component used to display the Card's title. Wraps the `#title` slot |
+| **v-card-subtitle** | Functional component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
+| **v-card-text** | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
+| **v-card-actions** | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
 ## Examples
 
 ### Props
 
-<!-- #### Loading
+#### Loading
 
 Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear).
 
-<example file="v-card/prop-loading" /> -->
+<example file="v-card/prop-loading" />
 
 #### Outlined
 
@@ -142,15 +98,15 @@ Using grids, you can create beautiful layouts.
 
 #### Horizontal cards
 
-<!-- TODO: better description -->
+TODO: better description
 
 <example file="v-card/misc-horizontal-cards" />
 
-<!-- #### Information card
+#### Information card
 
 Cards are entry points to more detailed information. To keep things concise, ensure to limit the number of actions the user can take.
 
-<example file="v-card/misc-information-card" /> -->
+<example file="v-card/misc-information-card" />
 
 #### Media with text
 

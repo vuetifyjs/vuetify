@@ -2,13 +2,13 @@
   <v-card
     height="300"
     flat
+    class="d-flex flex-column"
   >
     <v-snackbar
       :timeout="-1"
-      :value="true"
+      :model-value="true"
       absolute
       left
-      shaped
       top
     >
       Lorem ipsum dolor sit amet consectetur.
@@ -16,7 +16,7 @@
 
     <v-snackbar
       :timeout="-1"
-      :value="true"
+      :model-value="true"
       color="blue-grey"
       absolute
       right
@@ -28,10 +28,10 @@
 
     <v-snackbar
       :timeout="-1"
-      :value="true"
+      :model-value="true"
       absolute
       centered
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       elevation="24"
     >
       Lorem ipsum dolor sit amet consectetur.
@@ -39,23 +39,23 @@
 
     <v-snackbar
       :timeout="-1"
-      :value="true"
+      :model-value="true"
       absolute
       bottom
       color="primary"
       left
-      text
+      variant="contained-text"
     >
       Lorem ipsum dolor sit amet consectetur.
     </v-snackbar>
 
     <v-snackbar
       :timeout="-1"
-      :value="true"
+      :model-value="true"
       absolute
       bottom
       color="success"
-      outlined
+      variant="outlined"
       right
     >
       Lorem ipsum dolor sit amet consectetur.

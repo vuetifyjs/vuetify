@@ -9,7 +9,7 @@
   import { defineComponent, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
 
   export default defineComponent({
-    name: 'AdsScript',
+    name: 'PromotedScript',
 
     props: {
       id: {

@@ -11,8 +11,8 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, defineComponent, ref } from 'vue'
-import { filterInputAttrs, useRender } from '@/util'
+import { computed, ref } from 'vue'
+import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',

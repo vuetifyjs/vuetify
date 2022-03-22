@@ -7,6 +7,8 @@
       <app-drawer-prepend />
     </template>
 
+    <v-divider />
+
     <app-list :items="items" nav />
   </v-navigation-drawer>
 </template>

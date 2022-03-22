@@ -93,7 +93,7 @@ export const VToolbar = genericComponent<new () => {
       VTextField: {
         hideDetails: true,
       },
-    }, { scoped: true })
+    })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
