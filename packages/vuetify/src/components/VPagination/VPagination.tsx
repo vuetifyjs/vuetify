@@ -149,10 +149,6 @@ export const VPagination = defineComponent({
     const range = computed(() => {
       if (length.value <= 0) return []
 
-      if (totalVisible.value <= 3) {
-        return [Math.min(Math.max(start.value, page.value), start.value + length.value)]
-      }
-
       if (props.length <= totalVisible.value) {
         return createRange(length.value, start.value)
       }
