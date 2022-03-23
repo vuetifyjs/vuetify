@@ -93,7 +93,6 @@ export const VAlert = defineComponent({
     })
     const variantProps = computed(() => ({
       color: props.color ?? props.type,
-      textColor: props.textColor,
       variant: props.variant,
     }))
 
