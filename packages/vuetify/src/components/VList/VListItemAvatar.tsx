@@ -1,3 +1,6 @@
+// Components
+import { VAvatar } from '@/components/VAvatar'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 
@@ -17,7 +20,7 @@ export const VListItemAvatar = defineComponent({
   setup (props, { slots }) {
     return () => {
       return (
-        <props.tag
+        <VAvatar
           class={[
             'v-list-item-avatar',
             {

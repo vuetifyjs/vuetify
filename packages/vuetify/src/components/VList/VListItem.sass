@@ -28,7 +28,9 @@
   &--link
     cursor: pointer
 
-.v-list-item-avatar
+  .v-list-item-action,
+.v-list-item-avatar,
+.v-list-item-icon
   $root: &
 
   align-self: center
@@ -36,27 +38,6 @@
   align-items: center
   transition: inherit
   transition-property: height, width
-
-  > .v-icon
-    opacity: var(--v-medium-emphasis-opacity)
-
-  &--start
-    margin-inline-end: $list-item-avatar-margin-end
-
-  .v-list-item &
-    &--start
-      > .v-avatar
-        margin-inline-end: $list-item-avatar-margin-end
-
-      > .v-icon
-        margin-inline-end: $list-item-icon-margin-end
-
-    &--end
-      > .v-avatar
-        margin-inline-start: $list-item-avatar-margin-start
-
-      > .v-icon
-        margin-inline-start: $list-item-icon-margin-start
 
   @at-root
     @include tools.density('v-list-item', $list-density) using ($modifier)
@@ -66,11 +47,21 @@
   .v-list-item--three-line &
     align-self: flex-start
 
-.v-list-item-action
-  align-items: center
-  align-self: center
-  display: flex
+.v-list-item-avatar
+  &--start
+    margin-inline-end: $list-item-avatar-margin-end
 
+  &--end
+    margin-inline-start: $list-item-avatar-margin-start
+
+.v-list-item-icon
+  &--start
+    margin-inline-end: $list-item-icon-margin-end
+
+  &--end
+    margin-inline-start: $list-item-icon-margin-start
+
+.v-list-item-action
   &--start
     margin-inline-end: $list-item-action-margin-start
 
@@ -183,7 +174,11 @@ $base-padding: list.nth($list-item-padding, 2)
 
 .v-list-item--prepend,
 .v-list-group__items .v-list-item--prepend
-  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
+  .v-list-item-avatar
+    padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
+
+  .v-list-item-icon
+    padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-icon-size} + #{$list-item-icon-margin-start}) !important
 
 .v-list-group__header.v-list-item--active
   .v-list-item__overlay

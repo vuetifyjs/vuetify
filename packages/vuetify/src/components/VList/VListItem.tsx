@@ -2,11 +2,9 @@
 import './VListItem.sass'
 
 // Components
-import { VAvatar } from '@/components/VAvatar'
-import { VIcon } from '@/components/VIcon'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VListItemAvatar } from './VListItemAvatar'
 import { VListItemHeader } from './VListItemHeader'
+import { VListItemIcon } from './VListItemIcon'
 import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
 
@@ -73,7 +71,6 @@ export const VListItem = genericComponent<new () => {
       type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
       default: false,
     },
-    link: Boolean,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
@@ -99,14 +96,10 @@ export const VListItem = genericComponent<new () => {
     const isActive = computed(() => {
       return props.active || link.isExactActive?.value || isSelected.value
     })
-    const variantProps = computed(() => {
-      const activeColor = props.activeColor ?? props.color
-      return {
-        color: isActive.value ? activeColor : props.color,
-        textColor: props.textColor,
-        variant: props.variant,
-      }
-    })
+    const variantProps = computed(() => ({
+      color: isActive.value ? props.activeColor ?? props.color : props.color,
+      variant: props.variant,
+    }))
 
     onMounted(() => {
       if (link.isExactActive?.value && parent.value != null) {
@@ -142,7 +135,7 @@ export const VListItem = genericComponent<new () => {
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link || props.value != null)
+      const isClickable = !props.disabled && (link.isClickable.value || props.value != null || !!list)
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -155,7 +148,7 @@ export const VListItem = genericComponent<new () => {
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
-              [`${props.activeClass}`]: isActive.value && props.activeClass,
+              [`${props.activeClass}`]: isActive.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -181,18 +174,23 @@ export const VListItem = genericComponent<new () => {
           { genOverlays(isClickable || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <VDefaultsProvider
-              defaults={{
-                VAvatar: { image: props.prependAvatar },
-                VIcon: { icon: props.prependIcon },
-              }}
-            >
-              <VListItemAvatar start>
-                { props.prependAvatar && (<VAvatar />)}
-                { props.prependIcon && (<VIcon />)}
-                { slots.prepend?.(slotProps.value) }
-              </VListItemAvatar>
-            </VDefaultsProvider>
+            <>
+              { props.prependAvatar && (
+                <VListItemAvatar
+                  image={ props.prependAvatar }
+                  start
+                />
+              ) }
+
+              { props.prependIcon && (
+                <VListItemIcon
+                  icon={ props.prependIcon }
+                  start
+                />
+              ) }
+
+              { slots.prepend?.(slotProps.value) }
+            </>
           ) }
 
           { hasHeader && (
@@ -220,18 +218,23 @@ export const VListItem = genericComponent<new () => {
           { slots.default?.(slotProps.value) }
 
           { hasAppend && (
-            <VDefaultsProvider
-              defaults={{
-                VAvatar: { image: props.appendAvatar },
-                VIcon: { icon: props.appendIcon },
-              }}
-            >
-              <VListItemAvatar end>
-                { slots.append?.(slotProps.value) }
-                { props.appendAvatar && (<VAvatar />)}
-                { props.appendIcon && (<VIcon />)}
-              </VListItemAvatar>
-            </VDefaultsProvider>
+            <>
+              { slots.append?.(slotProps.value) }
+
+              { props.appendAvatar && (
+                <VListItemAvatar
+                  image={ props.appendAvatar }
+                  end
+                />
+              ) }
+
+              { props.appendIcon && (
+                <VListItemIcon
+                  icon={ props.appendIcon }
+                  end
+                />
+              ) }
+            </>
           ) }
         </Tag>
       )

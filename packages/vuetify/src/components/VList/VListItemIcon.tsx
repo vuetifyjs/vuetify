@@ -1,3 +1,6 @@
+// Components
+import { VIcon } from '@/components/VIcon'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 
@@ -17,7 +20,7 @@ export const VListItemIcon = defineComponent({
   setup (props, { slots }) {
     return () => {
       return (
-        <props.tag
+        <VIcon
           class={[
             'v-list-item-icon',
             {
