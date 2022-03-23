@@ -3,9 +3,7 @@
     v-model="app.drawer"
     width="300"
   >
-    <template #prepend>
-      <app-drawer-prepend />
-    </template>
+    <app-drawer-prepend />
 
     <v-divider />
 
