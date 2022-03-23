@@ -37,7 +37,6 @@ export function genOverlays (isClickable: boolean, name: string) {
 
 export const makeVariantProps = propsFactory({
   color: String,
-  textColor: String,
   variant: {
     type: String as PropType<Variant>,
     default: 'contained',
