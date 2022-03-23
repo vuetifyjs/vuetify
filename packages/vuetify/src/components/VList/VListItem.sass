@@ -31,7 +31,6 @@
 .v-list-item-action,
 .v-list-item-avatar,
 .v-list-item-icon
-  $root: &
 
   align-self: center
   display: flex
@@ -39,20 +38,22 @@
   transition: inherit
   transition-property: height, width
 
-  @at-root
-    @include tools.density('v-list-item', $list-density) using ($modifier)
-      &.v-list-item--three-line #{$root}
-        margin-top: $list-item-avatar-margin-y - $modifier
-
   .v-list-item--three-line &
     align-self: flex-start
 
 .v-list-item-avatar
+  $root: &
+
   &--start
     margin-inline-end: $list-item-avatar-margin-end
 
   &--end
     margin-inline-start: $list-item-avatar-margin-start
+
+  @at-root
+    @include tools.density('v-list-item', $list-density) using ($modifier)
+      &.v-list-item--three-line #{$root}
+        margin-top: $list-item-avatar-margin-y - $modifier
 
 .v-list-item-icon
   &--start
@@ -176,9 +177,6 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group__items .v-list-item--prepend
   .v-list-item-avatar
     padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
-
-  .v-list-item-icon
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-icon-size} + #{$list-item-icon-margin-start}) !important
 
 .v-list-group__header.v-list-item--active
   .v-list-item__overlay
