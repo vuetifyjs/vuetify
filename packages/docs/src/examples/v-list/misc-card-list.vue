@@ -39,7 +39,7 @@
 
     <v-list lines="two">
       <v-list-item>
-        <v-list-item-avatar left>
+        <v-list-item-avatar start>
           <v-icon color="indigo" icon="mdi-phone"></v-icon>
         </v-list-item-avatar>
 
@@ -48,20 +48,20 @@
           <v-list-item-subtitle>Mobile</v-list-item-subtitle>
         </v-list-item-header>
 
-        <v-list-item-avatar right>
+        <v-list-item-avatar end>
           <v-icon icon="mdi-message-text"></v-icon>
         </v-list-item-avatar>
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-avatar right></v-list-item-avatar>
+        <v-list-item-avatar end></v-list-item-avatar>
 
         <v-list-item-header>
           <v-list-item-title>(323) 555-6789</v-list-item-title>
           <v-list-item-subtitle>Work</v-list-item-subtitle>
         </v-list-item-header>
 
-        <v-list-item-avatar right>
+        <v-list-item-avatar end>
           <v-icon icon="mdi-message-text"></v-icon>
         </v-list-item-avatar>
       </v-list-item>
@@ -69,7 +69,7 @@
       <v-divider inset></v-divider>
 
       <v-list-item>
-        <v-list-item-avatar left>
+        <v-list-item-avatar start>
           <v-icon color="indigo" icon="mdi-email"></v-icon>
         </v-list-item-avatar>
 
@@ -80,7 +80,7 @@
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-avatar right></v-list-item-avatar>
+        <v-list-item-avatar end></v-list-item-avatar>
 
         <v-list-item-header>
           <v-list-item-title>ali_connors@example.com</v-list-item-title>
@@ -91,7 +91,7 @@
       <v-divider inset></v-divider>
 
       <v-list-item>
-        <v-list-item-avatar left>
+        <v-list-item-avatar start>
           <v-icon color="indigo" icon="mdi-map-marker"></v-icon>
         </v-list-item-avatar>
 

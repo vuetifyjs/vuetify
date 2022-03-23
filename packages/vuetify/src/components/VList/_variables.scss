@@ -37,7 +37,7 @@ $list-item-border-radius: 0 !default;
 $list-item-border-style: settings.$border-style-root !default;
 $list-item-border-width: 0 !default;
 $list-item-border-thin-width: thin !default;
-$list-item-elevation: 0 !default;
+$list-item-elevation: 1 !default;
 $list-item-min-height: 48px !default;
 $list-item-padding: 8px 16px !default;
 $list-item-plain-opacity: .62 !default;
@@ -53,6 +53,13 @@ $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
 $list-item-avatar-margin-y: 4px !default;
+
+$list-item-action-margin-end: 12px !default;
+$list-item-action-margin-start: 12px !default;
+
+$list-item-icon-margin-end: 32px !default;
+$list-item-icon-margin-start: 32px !default;
+$list-item-icon-size: 16px !default;
 
 $list-item-media-margin-bottom: 0 !default;
 $list-item-media-margin-end: 16px !default;

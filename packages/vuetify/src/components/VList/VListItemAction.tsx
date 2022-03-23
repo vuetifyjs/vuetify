@@ -4,8 +4,8 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { defineComponent } from '@/util'
 
-export const VListItemMedia = defineComponent({
-  name: 'VListItemMedia',
+export const VListItemAction = defineComponent({
+  name: 'VListItemAction',
 
   props: {
     start: Boolean,
@@ -19,10 +19,10 @@ export const VListItemMedia = defineComponent({
       return (
         <props.tag
           class={[
-            'v-list-item-media',
+            'v-list-item-action',
             {
-              'v-list-item-media--start': props.start,
-              'v-list-item-media--end': props.end,
+              'v-list-item-action--start': props.start,
+              'v-list-item-action--end': props.end,
             },
           ]}
           v-slots={ slots }

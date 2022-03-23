@@ -1,11 +1,14 @@
+// Components
+import { VIcon } from '@/components/VIcon'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { defineComponent } from '@/util'
 
-export const VListItemMedia = defineComponent({
-  name: 'VListItemMedia',
+export const VListItemIcon = defineComponent({
+  name: 'VListItemIcon',
 
   props: {
     start: Boolean,
@@ -17,12 +20,12 @@ export const VListItemMedia = defineComponent({
   setup (props, { slots }) {
     return () => {
       return (
-        <props.tag
+        <VIcon
           class={[
-            'v-list-item-media',
+            'v-list-item-icon',
             {
-              'v-list-item-media--start': props.start,
-              'v-list-item-media--end': props.end,
+              'v-list-item-icon--start': props.start,
+              'v-list-item-icon--end': props.end,
             },
           ]}
           v-slots={ slots }

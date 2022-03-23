@@ -17,7 +17,6 @@ export const VToolbarItems = defineComponent({
     provideDefaults({
       VBtn: {
         color: toRef(props, 'color'),
-        textColor: toRef(props, 'textColor'),
         variant: toRef(props, 'variant'),
       },
     })
