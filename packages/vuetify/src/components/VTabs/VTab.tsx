@@ -3,7 +3,6 @@ import './VTab.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VTabsSymbol } from './VTabs'
 
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -16,6 +15,7 @@ import { useTextColor } from '@/composables/color'
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
+import { VTabsSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'

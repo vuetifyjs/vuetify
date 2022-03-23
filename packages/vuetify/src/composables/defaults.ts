@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util'
+import { mergeDeep } from '@/util/helpers'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'

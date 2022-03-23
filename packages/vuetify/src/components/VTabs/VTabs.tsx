@@ -6,18 +6,18 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
+import { VTabsSymbol } from './shared'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
-import type { InjectionKey, PropType } from 'vue'
-import { useBackgroundColor } from '@/composables/color'
+import type { PropType } from 'vue'
 
 export type TabItem = string | Record<string, any>
 
@@ -30,8 +30,6 @@ function parseItems (items: TabItem[] | undefined) {
     return item
   })
 }
-
-export const VTabsSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-tabs')
 
 export const VTabs = defineComponent({
   name: 'VTabs',
