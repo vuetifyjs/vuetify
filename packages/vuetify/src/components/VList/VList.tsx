@@ -14,6 +14,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { makeVariantProps } from '@/composables/variant'
 import { createList } from './list'
 import { provideDefaults } from '@/composables/defaults'
 
@@ -66,7 +67,9 @@ export const VList = genericComponent<new <T>() => {
   name: 'VList',
 
   props: {
-    color: String,
+    activeColor: String,
+    activeClass: String,
+    bgColor: String,
     disabled: Boolean,
     lines: {
       type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
@@ -86,6 +89,7 @@ export const VList = genericComponent<new <T>() => {
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   },
 
   emits: {
@@ -98,7 +102,7 @@ export const VList = genericComponent<new <T>() => {
   setup (props, { slots }) {
     const items = computed(() => parseItems(props.items))
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
@@ -111,9 +115,13 @@ export const VList = genericComponent<new <T>() => {
 
     provideDefaults({
       VListItem: {
+        activeClass: toRef(props, 'activeClass'),
+        activeColor: toRef(props, 'activeColor'),
+        color: toRef(props, 'color'),
         density: toRef(props, 'density'),
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),
+        variant: toRef(props, 'variant'),
       },
     })
 
