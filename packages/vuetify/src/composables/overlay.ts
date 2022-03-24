@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, provide, ref, watch } from 'vue'
 import { getUid } from '@/util'
 
 // Types
@@ -28,6 +28,8 @@ export function useOverlay (isActive: Ref<boolean | undefined>) {
   }, {
     immediate: true,
   })
+
+  provide(VuetifyOverlayKey, { zIndex, overlays })
 
   const overlayZIndex = computed(() => zIndex.value + overlays.value.indexOf(id) + 1)
 
