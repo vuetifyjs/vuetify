@@ -39,13 +39,13 @@ The following shows how to access the application's display information:
 </script>
 ```
 
-If you are still using the Options API, you can access the display information on the global **$vuetify** variable
+If you are still using the Options API, you can access the display information on the global **$vuetify** variable. Note that refs are unwrapped here, so you don't need `.value`.
 
 ```html
 <script>
   export default {
     mounted () {
-      console.log(this.$vuetify.display.mobile.value)
+      console.log(this.$vuetify.display.mobile)
     }
   }
 </script>
