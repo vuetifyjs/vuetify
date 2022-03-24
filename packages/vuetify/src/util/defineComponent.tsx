@@ -43,6 +43,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   }
 
   if (options._setup) {
+    options.props = options.props ?? {}
+    options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
@@ -51,7 +53,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
       const _props = shallowReactive({ ...toRaw(props) })
       watchEffect(() => {
         const globalDefaults = defaults.value.global
-        const componentDefaults = defaults.value[options.name!]
+        const componentDefaults = defaults.value[props._as ?? options.name!]
 
         if (componentDefaults) {
           const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith('V'))

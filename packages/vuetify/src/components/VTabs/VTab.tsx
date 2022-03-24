@@ -9,11 +9,10 @@ import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
 import { VTabsSymbol } from './shared'
 
@@ -57,18 +56,6 @@ export const VTab = defineComponent({
     const { isSelected, select, selectedClass } = useGroupItem(props, VTabsSymbol)
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
-
-    provideDefaults({
-      VBtn: {
-        block: toRef(props, 'fixed'),
-        maxWidth: computed(() => props.fixed ? 300 : undefined),
-        color: computed(() => isSelected.value ? props.color : undefined),
-        variant: 'text',
-        rounded: 0,
-      },
-    }, {
-      scoped: true,
-    })
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
@@ -134,6 +121,7 @@ export const VTab = defineComponent({
 
       return (
         <VBtn
+          _as="VTab"
           ref={ rootEl }
           class={[
             'v-tab',
@@ -143,6 +131,11 @@ export const VTab = defineComponent({
           role="tab"
           aria-selected={ String(isSelected.value) }
           onClick={ () => !props.disabled && select(!isSelected.value) }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
+          color={ isSelected.value ? props.color : undefined }
+          variant="text"
+          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
         >
