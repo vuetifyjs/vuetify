@@ -15,6 +15,7 @@ export interface ScrollStrategyData {
 }
 
 const scrollStrategies = {
+  none: null,
   close: closeScrollStrategy,
   block: blockScrollStrategy,
   reposition: repositionScrollStrategy,
