@@ -138,7 +138,7 @@ export default mixins(
     },
   },
 
-  mounted () {
+  beforeMount () {
     this.init()
   },
 
@@ -146,6 +146,7 @@ export default mixins(
     init () {
       this.selected = null
 
+      this.onResize()
       this.$nextTick(this.onResize)
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)

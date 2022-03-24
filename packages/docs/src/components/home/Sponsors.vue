@@ -18,7 +18,7 @@
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
-          :md="sponsor.metadata.tier > 1 ? 3 : 12"
+          :md="sponsor.metadata.tier > 1 ? 3 : 5"
           class="d-flex align-center justify-center"
           cols="auto"
         >

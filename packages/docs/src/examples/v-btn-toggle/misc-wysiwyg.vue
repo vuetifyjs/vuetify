@@ -1,7 +1,7 @@
 <template>
   <v-card
     max-width="400"
-    class="mx-auto"
+    class="mx-auto px-4"
   >
     <v-textarea
       v-model="value"
@@ -11,7 +11,7 @@
     ></v-textarea>
 
     <v-row
-      class="px-2 pb-2 ma-0"
+      class="pb-2 ma-0"
       justify="space-between"
     >
       <v-btn-toggle
@@ -67,7 +67,7 @@
     </v-row>
 
     <v-sheet
-      class="pa-4 text-center"
+      class="py-4 text-center"
       tile
     >
       <v-row
