@@ -111,6 +111,7 @@ export const VDialog = genericComponent<new () => {
             'v-dialog',
             {
               'v-dialog--fullscreen': props.fullscreen,
+              'v-dialog--scrollable': props.scrollable,
             },
           ]}
           style={ dimensionStyles.value }
