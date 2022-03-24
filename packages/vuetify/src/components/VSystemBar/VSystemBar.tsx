@@ -2,17 +2,17 @@
 import './VSystemBar.sass'
 
 // Composables
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export const VSystemBar = defineComponent({
   name: 'VSystemBar',
@@ -20,10 +20,10 @@ export const VSystemBar = defineComponent({
   props: {
     color: String,
     window: Boolean,
+    height: [Number, String],
 
-    ...makeDimensionProps(),
     ...makeElevationProps(),
-    ...makePositionProps(),
+    ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -32,10 +32,25 @@ export const VSystemBar = defineComponent({
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+    const height = computed(() => props.height ?? props.window ? 32 : 24)
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: ref('top'),
+      layoutSize: height,
+      elementSize: height,
+      active: computed(() => true),
+      absolute: toRef(props, 'absolute'),
+    })
+
+    provideDefaults({
+      VBtn: {
+        variant: 'text',
+        density: 'compact',
+      },
+    }, { scoped: true })
 
     return () => (
       <props.tag
@@ -45,13 +60,11 @@ export const VSystemBar = defineComponent({
           themeClasses.value,
           backgroundColorClasses.value,
           elevationClasses.value,
-          positionClasses.value,
           roundedClasses.value,
         ]}
         style={[
           backgroundColorStyles.value,
-          dimensionStyles.value,
-          positionStyles.value,
+          layoutItemStyles.value,
         ]}
         v-slots={ slots }
       />
