@@ -3,24 +3,24 @@ import './VSystemBar.sass'
 
 // Composables
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
-import { defineComponent } from '@/util'
 import { computed, ref, toRef } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
+import { defineComponent } from '@/util'
 
 export const VSystemBar = defineComponent({
   name: 'VSystemBar',
 
   props: {
     color: String,
-    window: Boolean,
     height: [Number, String],
+    window: Boolean,
 
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
