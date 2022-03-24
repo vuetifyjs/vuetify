@@ -113,7 +113,7 @@ export default baseMixins.extend<options>().extend(
       ...data.attrs,
       'aria-selected': String(this.isActive),
       role: 'tab',
-      tabindex: 0,
+      tabindex: this.disabled ? -1 : 0,
     }
     data.on = {
       ...data.on,

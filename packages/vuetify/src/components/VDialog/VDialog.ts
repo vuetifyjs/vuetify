@@ -11,7 +11,6 @@ import Detachable from '../../mixins/detachable'
 import Overlayable from '../../mixins/overlayable'
 import Returnable from '../../mixins/returnable'
 import Stackable from '../../mixins/stackable'
-import Toggleable from '../../mixins/toggleable'
 
 // Directives
 import ClickOutside from '../../directives/click-outside'
@@ -28,13 +27,12 @@ import {
 import { VNode, VNodeData } from 'vue'
 
 const baseMixins = mixins(
-  Activatable,
   Dependent,
   Detachable,
   Overlayable,
   Returnable,
   Stackable,
-  Toggleable
+  Activatable,
 )
 
 /* @vue/component */
@@ -72,7 +70,6 @@ export default baseMixins.extend({
       activatedBy: null as EventTarget | null,
       animate: false,
       animateTimeout: -1,
-      isActive: !!this.value,
       stackMinZIndex: 200,
       previousActiveElement: null as HTMLElement | null,
     }
@@ -253,8 +250,9 @@ export default baseMixins.extend({
           this.$createElement('div', {
             class: this.contentClasses,
             attrs: {
-              role: 'document',
+              role: 'dialog',
               tabindex: this.isActive ? 0 : undefined,
+              'aria-modal': this.hideOverlay ? undefined : 'true',
               ...this.getScopeIdAttrs(),
             },
             on: { keydown: this.onKeydown },
@@ -318,7 +316,6 @@ export default baseMixins.extend({
           this.attach === true ||
           this.attach === 'attach',
       },
-      attrs: { role: 'dialog' },
     }, [
       this.genActivator(),
       this.genContent(),

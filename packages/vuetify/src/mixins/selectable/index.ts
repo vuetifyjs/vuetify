@@ -125,9 +125,6 @@ export default mixins(
         ref: 'input',
       })
     },
-    onBlur () {
-      this.isFocused = false
-    },
     onClick (e: Event) {
       this.onChange()
       this.$emit('click', e)
@@ -162,8 +159,13 @@ export default mixins(
       this.internalValue = input
       this.hasColor = input
     },
-    onFocus () {
+    onFocus (e: FocusEvent) {
       this.isFocused = true
+      this.$emit('focus', e)
+    },
+    onBlur (e: FocusEvent) {
+      this.isFocused = false
+      this.$emit('blur', e)
     },
     /** @abstract */
     onKeydown (e: Event) {},
