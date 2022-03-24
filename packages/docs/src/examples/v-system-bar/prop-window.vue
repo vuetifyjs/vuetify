@@ -1,17 +1,17 @@
 <template>
-  <div>
+  <v-layout style="height: 50px">
     <v-system-bar window>
-      <v-icon>mdi-message</v-icon>
+      <v-icon icon="mdi-message" class="mr-2"></v-icon>
 
       <span>10 unread messages</span>
 
       <v-spacer></v-spacer>
 
-      <v-icon>mdi-minus</v-icon>
+      <v-btn icon="mdi-minus" variant="text"></v-btn>
 
-      <v-icon>mdi-checkbox-blank-outline</v-icon>
+      <v-btn icon="mdi-checkbox-blank-outline" variant="text" class="ml-2"></v-btn>
 
-      <v-icon>mdi-close</v-icon>
+      <v-btn icon="mdi-close" variant="text" class="ml-2"></v-btn>
     </v-system-bar>
-  </div>
+  </v-layout>
 </template>
