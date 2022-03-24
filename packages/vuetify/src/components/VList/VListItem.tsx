@@ -111,6 +111,10 @@ export const VListItem = genericComponent<new () => {
       if (val && parent.value != null) {
         root.open(parent.value, true)
       }
+
+      if (isSelected.value && !link.isExactActive?.value) {
+        select(false)
+      }
     })
 
     const { themeClasses } = provideTheme(props)

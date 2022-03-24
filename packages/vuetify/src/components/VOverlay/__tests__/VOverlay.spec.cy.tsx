@@ -49,25 +49,34 @@ describe('VOverlay', () => {
       .get('[data-test="content"]').should('not.exist')
   })
 
-  it.skip('should have correct z-index inside layout item', () => {
+  it('should have correct z-index', () => {
     cy.mount(() => (
       <Application>
-        <VLayoutItem position="left" size="300" modelValue data-test="layout-item">
-          <VOverlay data-test="overlay">
-            {{
-              activator: ({ props }) => <div { ...props } data-test="activator">Click me</div>,
-              default: () => <div data-test="content">Content</div>,
-            }}
-          </VOverlay>
-        </VLayoutItem>
+        <VOverlay data-test="overlay">
+          {{
+            activator: ({ props }) => <div { ...props } data-test="activator">Click me</div>,
+            default: () => (
+              <div data-test="content">
+                <VOverlay data-test="overlay-2">
+                  {{
+                    activator: ({ props }) => <div { ...props } data-test="activator-2">Click me</div>,
+                    default: () => <div data-test="content-2">Content</div>,
+                  }}
+                </VOverlay>
+              </div>
+            ),
+          }}
+        </VOverlay>
       </Application>
     ))
 
     cy.get('[data-test="activator"]').should('exist').click()
 
-    cy.get('[data-test="layout-item"').should('have.css', 'z-index').then(zIndex => {
-      cy.get('[data-test="overlay"]').should('have.css', 'z-index', String(Number(zIndex) + 1))
-    })
+    cy.get('[data-test="overlay"]').should('have.css', 'z-index', '2001')
+
+    cy.get('[data-test="activator-2"]').should('exist').click()
+
+    cy.get('[data-test="overlay-2"]').should('have.css', 'z-index', '2002')
   })
 
   it('should render overlay on top of layout', () => {
