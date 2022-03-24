@@ -46,6 +46,7 @@ interface LayoutProvide {
 }
 
 export const VuetifyLayoutKey: InjectionKey<LayoutProvide> = Symbol.for('vuetify:layout')
+export const VuetifyLayoutItemKey: InjectionKey<{ id: string }> = Symbol.for('vuetify:layout-item')
 
 const ROOT_ZINDEX = 1000
 
@@ -94,6 +95,8 @@ export function useLayoutItem (options: {
   const id = options.id ?? `layout-item-${getUid()}`
 
   const vm = getCurrentInstance('useLayoutItem')
+
+  provide(VuetifyLayoutItemKey, { id })
 
   const isKeptAlive = ref(false)
   onDeactivated(() => isKeptAlive.value = true)
@@ -246,7 +249,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       activeItems.set(id, active)
       disableTransitions && disabledTransitions.set(id, disableTransitions)
 
-      const instances = findChildrenWithProvide(VuetifyLayoutKey, rootVm?.vnode)
+      const instances = findChildrenWithProvide(VuetifyLayoutItemKey, rootVm?.vnode)
       const instanceIndex = instances.indexOf(vm)
 
       if (instanceIndex > -1) registered.value.splice(instanceIndex, 0, id)
