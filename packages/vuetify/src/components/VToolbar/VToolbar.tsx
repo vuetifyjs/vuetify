@@ -31,10 +31,7 @@ const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
   collapse: Boolean,
-  color: {
-    type: String,
-    default: 'surface',
-  },
+  color: String,
   density: {
     type: String as PropType<Density>,
     default: 'default',
@@ -49,7 +46,7 @@ export const makeVToolbarProps = propsFactory({
   floating: Boolean,
   height: {
     type: [Number, String],
-    default: 64,
+    default: 56,
   },
   image: String,
   title: String,
@@ -96,7 +93,7 @@ export const VToolbar = genericComponent<new () => {
       VTextField: {
         hideDetails: true,
       },
-    }, { scoped: true })
+    })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)

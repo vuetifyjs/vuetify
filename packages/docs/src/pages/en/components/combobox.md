@@ -1,4 +1,5 @@
 ---
+nav: Combobox
 meta:
   title: Combobox component
   description: The combobox component provides type-ahead autocomplete functionality and allows users to provide a custom values beyond the provided list of options.
@@ -11,7 +12,7 @@ related:
 
 # Combobox
 
-The `v-combobox` component is a [v-autocomplete](/components/autocompletes) that allows the user to enter values that do not exist within the provided **items**. Created items will be returned as strings.
+The `v-combobox` component is a [v-text-field](/components/text-fields) that allows the user to select values from a provided **items** array, or to enter their own value. Created items will be returned as strings.
 
 <entry />
 

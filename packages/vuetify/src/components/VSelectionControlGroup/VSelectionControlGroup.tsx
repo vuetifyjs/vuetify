@@ -5,8 +5,8 @@ import './VSelectionControlGroup.sass'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, defineComponent, provide, toRef } from 'vue'
-import { getUid, useRender } from '@/util'
+import { computed, provide, toRef } from 'vue'
+import { defineComponent, getUid, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'

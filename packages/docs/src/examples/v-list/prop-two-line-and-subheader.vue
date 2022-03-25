@@ -29,7 +29,7 @@
         :subtitle="folder.subtitle"
       >
         <template v-slot:append>
-          <v-list-item-avatar right>
+          <v-list-item-avatar end>
             <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
           </v-list-item-avatar>
         </template>
@@ -47,7 +47,7 @@
         :subtitle="file.subtitle"
       >
         <template v-slot:append>
-          <v-list-item-avatar right>
+          <v-list-item-avatar end>
             <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
           </v-list-item-avatar>
         </template>

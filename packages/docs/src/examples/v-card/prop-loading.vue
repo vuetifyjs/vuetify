@@ -15,9 +15,24 @@
     <v-img
       height="250"
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
+      cover
     ></v-img>
 
-    <v-card-title>Cafe Badilico</v-card-title>
+    <v-card-header>
+      <v-card-header-text>
+        <v-card-title>Cafe Badilico</v-card-title>
+
+        <v-card-subtitle>
+          <span class="mr-1">Local Favorite</span>
+
+          <v-icon
+            color="error"
+            icon="mdi-fire-circle"
+            size="small"
+          ></v-icon>
+        </v-card-subtitle>
+      </v-card-header-text>
+    </v-card-header>
 
     <v-card-text>
       <v-row
@@ -25,7 +40,7 @@
         class="mx-0"
       >
         <v-rating
-          :value="4.5"
+          :model-value="4.5"
           color="amber"
           dense
           half-increments
@@ -33,7 +48,7 @@
           size="14"
         ></v-rating>
 
-        <div class="grey--text ms-4">
+        <div class="text-grey ms-4">
           4.5 (413)
         </div>
       </v-row>
@@ -45,16 +60,12 @@
       <div>Small plates, salads & sandwiches - an intimate setting with 12 indoor seats plus patio seating.</div>
     </v-card-text>
 
-    <v-divider class="mx-4"></v-divider>
+    <v-divider class="mx-4 mb-1"></v-divider>
 
     <v-card-title>Tonight's availability</v-card-title>
 
-    <v-card-text>
-      <v-chip-group
-        v-model="selection"
-        active-class="deep-purple accent-4 white--text"
-        column
-      >
+    <div class="px-4">
+      <v-chip-group v-model="selection">
         <v-chip>5:30PM</v-chip>
 
         <v-chip>7:30PM</v-chip>
@@ -63,11 +74,11 @@
 
         <v-chip>9:00PM</v-chip>
       </v-chip-group>
-    </v-card-text>
+    </div>
 
     <v-card-actions>
       <v-btn
-        color="deep-purple lighten-2"
+        color="deep-purple-lighten-2"
         text
         @click="reserve"
       >

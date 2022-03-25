@@ -19,10 +19,7 @@ export const VSheet = defineComponent({
   name: 'VSheet',
 
   props: {
-    color: {
-      type: String,
-      default: 'surface',
-    },
+    color: String,
 
     ...makeBorderProps(),
     ...makeDimensionProps(),

@@ -7,7 +7,10 @@
     >
       <v-toolbar
         border="b"
-        class="px-4"
+        :class="[
+          'px-4',
+          !showCode && 'border-opacity-0'
+        ]"
         height="44"
         flat
         rounded="t"
@@ -38,7 +41,7 @@
         <div v-if="showCode" class="border-b">
           <template v-for="section of sections" :key="section.name">
             <v-theme-provider v-if="section.content" :theme="theme">
-              <app-markup :code="section.content" class="rounded-0" />
+              <app-markup :code="section.content" class="rounded-0" :resource="`${file}.vue`" />
             </v-theme-provider>
           </template>
         </div>

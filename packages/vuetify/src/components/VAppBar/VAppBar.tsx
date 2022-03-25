@@ -38,6 +38,11 @@ export const VAppBar = defineComponent({
 
     ...makeVToolbarProps(),
     ...makeLayoutItemProps(),
+
+    height: {
+      type: [Number, String],
+      default: 64,
+    },
   },
 
   emits: {

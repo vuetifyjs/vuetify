@@ -1,4 +1,5 @@
 ---
+nav: Autocompletes
 meta:
   title: Autocomplete component
   description: The autocomplete component provides type-ahead autocomplete functionality and provides a list of available options.

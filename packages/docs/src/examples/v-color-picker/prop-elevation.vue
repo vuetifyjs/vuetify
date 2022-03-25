@@ -1,18 +1,15 @@
 <template>
-  <v-row
-    justify="space-around"
-    align="center"
-  >
+  <div class="d-flex justify-space-around">
     <v-color-picker
       v-model="picker"
-      flat
+      elevation="0"
     ></v-color-picker>
 
     <v-color-picker
       v-model="picker"
       elevation="15"
     ></v-color-picker>
-  </v-row>
+  </div>
 </template>
 
 <script>

@@ -7,7 +7,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -29,7 +29,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: '10', m
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -51,7 +51,29 @@ exports[`VBadge.tsx should match snapshot with badge slot and { content: 'foo', 
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
+            aria-atomic="true"
+            aria-label="Badge"
+            aria-live="polite"
+            role="status"
+      >
+        <span>
+          content
+        </span>
+      </span>
+    </transition-stub>
+  </div>
+</div>
+`;
+
+exports[`VBadge.tsx should match snapshot with badge slot and { content: 10, max: 11 } props 1`] = `
+<div class="v-badge">
+  <div class="v-badge__wrapper">
+    <span>
+      element
+    </span>
+    <transition-stub>
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -73,7 +95,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true } prop
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -92,7 +114,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { dot: true, float
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -111,7 +133,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -133,7 +155,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { floating: true }
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -155,7 +177,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { icon: 'foo' } pr
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -177,7 +199,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { inline: true } p
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -199,7 +221,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: 'botto
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -221,7 +243,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: null }
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -243,7 +265,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { location: undefi
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -265,7 +287,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: fals
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -288,7 +310,7 @@ exports[`VBadge.tsx should match snapshot with badge slot and { modelValue: true
       element
     </span>
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -307,7 +329,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -326,7 +348,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { content: 'foo
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"
@@ -346,7 +368,7 @@ exports[`VBadge.tsx should match snapshot without badge slot and { icon: 'foo' }
 <div class="v-badge">
   <div class="v-badge__wrapper">
     <transition-stub>
-      <span class="v-badge__badge bg-surface-variant v-theme--light"
+      <span class="v-badge__badge v-theme--light"
             aria-atomic="true"
             aria-label="Badge"
             aria-live="polite"

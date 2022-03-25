@@ -100,6 +100,7 @@ $utilities: () !default;
           center: center,
           space-between: space-between,
           space-around: space-around,
+          space-evenly: space-evenly,
         )
       ),
       "align-items": (
@@ -481,6 +482,13 @@ $utilities: () !default;
         property: position,
         class: position,
         values: static relative fixed absolute sticky
+      ),
+      "fill-height": (
+        property: height,
+        class: fill,
+        values: (
+          height: 100%
+        )
       )
     ),
     $utilities

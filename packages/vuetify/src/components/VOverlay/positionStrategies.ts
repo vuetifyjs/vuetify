@@ -191,12 +191,15 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
     const contentHeight = Math.min(configuredMaxHeight.value, contentBox.height)
 
+    // Regard undefined maxWidth as maximally occupying whole remaining space by default
+    const maxFreeSpaceWidth = props.maxWidth === undefined ? Number.MAX_VALUE : parseInt(props.maxWidth ?? 0, 10)
+
     const viewportMargin = 12
     const freeSpace = {
       top: targetBox.top - viewportMargin,
       bottom: viewportHeight - targetBox.bottom - viewportMargin,
-      left: targetBox.left - viewportMargin,
-      right: viewportWidth - targetBox.right - viewportMargin,
+      left: Math.min(targetBox.left - viewportMargin, maxFreeSpaceWidth),
+      right: Math.min(viewportWidth - targetBox.right - viewportMargin, maxFreeSpaceWidth),
     }
 
     const fitsY = (preferredAnchor.value.side === 'bottom' && contentHeight <= freeSpace.bottom) ||

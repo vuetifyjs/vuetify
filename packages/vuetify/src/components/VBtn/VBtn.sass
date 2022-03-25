@@ -20,7 +20,7 @@
   text-decoration: none
   text-indent: $button-text-letter-spacing
   text-transform: $button-text-transform
-  transition-property: box-shadow, transform, opacity, color
+  transition-property: $button-transition-property
   transition-duration: 0.28s
   transition-timing-function: settings.$standard-easing
   user-select: none
@@ -131,8 +131,6 @@
   .v-banner-actions &
     padding: $button-banner-actions-padding
 
-    @include tools.elevation($button-banner-actions-elevation)
-
 // VPagination
 .v-btn
   .v-pagination &
@@ -141,3 +139,8 @@
   &__overlay
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
+
+// VSnackbar
+.v-btn
+  .v-snackbar-actions &
+    padding: $button-snackbar-action-padding

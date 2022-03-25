@@ -8,6 +8,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
 import { VCardActions } from './VCardActions'
 import { VCardAvatar } from './VCardAvatar'
+import { VCardContent } from './VCardContent'
 import { VCardHeader } from './VCardHeader'
 import { VCardHeaderText } from './VCardHeaderText'
 import { VCardImg } from './VCardImg'
@@ -32,6 +33,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { defineComponent } from '@/util'
+import { VDefaultsProvider } from '../VDefaultsProvider'
 
 export const VCard = defineComponent({
   name: 'VCard',
@@ -62,10 +64,7 @@ export const VCard = defineComponent({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
-    ...makeVariantProps({
-      color: 'surface',
-      variant: 'contained',
-    } as const),
+    ...makeVariantProps({ variant: 'contained' } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -122,12 +121,18 @@ export const VCard = defineComponent({
           { genOverlays(isClickable, 'v-card') }
 
           { hasImage && (
-            <VCardImg>
-              { slots.image
-                ? slots.image?.({ src: props.image })
-                : (<VImg src={ props.image } cover alt="" />)
-              }
-            </VCardImg>
+            <VDefaultsProvider
+              defaults={{
+                VImg: {
+                  cover: true,
+                  src: props.image,
+                },
+              }}
+            >
+              <VCardImg>
+                { slots.image ? slots.image?.() : (<VImg alt="" />) }
+              </VCardImg>
+            </VDefaultsProvider>
           ) }
 
           { slots.media?.() }
@@ -135,55 +140,53 @@ export const VCard = defineComponent({
           { hasHeader && (
             <VCardHeader>
               { hasPrepend && (
-                <VCardAvatar>
-                  { slots.prepend
-                    ? slots.prepend()
-                    : (
-                      <VAvatar
-                        density={ props.density }
-                        icon={ props.prependIcon }
-                        image={ props.prependAvatar }
-                      />
-                    )
-                  }
-                </VCardAvatar>
+                <VDefaultsProvider
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      icon: props.prependIcon,
+                      image: props.prependAvatar,
+                    },
+                  }}
+                >
+                  <VCardAvatar>
+                    { slots.prepend ? slots.prepend() : (<VAvatar />) }
+                  </VCardAvatar>
+                </VDefaultsProvider>
               ) }
 
               { hasHeaderText && (
                 <VCardHeaderText>
                   { hasTitle && (
                     <VCardTitle>
-                      { slots.title
-                        ? slots.title()
-                        : props.title
-                      }
+                      { slots.title ? slots.title() : props.title}
                     </VCardTitle>
                   ) }
 
                   { hasSubtitle && (
                     <VCardSubtitle>
-                      { slots.subtitle
-                        ? slots.subtitle()
-                        : props.subtitle
-                      }
+                      { slots.subtitle ? slots.subtitle() : props.subtitle }
                     </VCardSubtitle>
                   ) }
+
+                  { slots.headerText?.() }
                 </VCardHeaderText>
               ) }
 
               { hasAppend && (
-                <VCardAvatar>
-                  { slots.append
-                    ? slots.append()
-                    : (
-                      <VAvatar
-                        density={ props.density }
-                        icon={ props.appendIcon }
-                        image={ props.appendAvatar }
-                      />
-                    )
-                  }
-                </VCardAvatar>
+                <VDefaultsProvider
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                      image: props.appendAvatar,
+                    },
+                  }}
+                >
+                  <VCardAvatar>
+                    { slots.append ? slots.append() : (<VAvatar />) }
+                  </VCardAvatar>
+                </VDefaultsProvider>
               ) }
             </VCardHeader>
           ) }
@@ -192,6 +195,10 @@ export const VCard = defineComponent({
             <VCardText>
               { slots.text ? slots.text() : props.text }
             </VCardText>
+          ) }
+
+          { slots.content && (
+            <VCardContent v-slots={{ default: slots.content }} />
           ) }
 
           { slots.default?.() }

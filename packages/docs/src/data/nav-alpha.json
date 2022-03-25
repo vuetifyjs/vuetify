@@ -63,12 +63,15 @@
       "app-bars",
       "application",
       "aspect-ratios",
+      "avatars",
       "badges",
       "banners",
       "breadcrumbs",
       "buttons",
       "cards",
+      "carousels",
       "chips",
+      "color-pickers",
       "defaults-providers",
       "dividers",
       "expansion-panels",
@@ -79,13 +82,15 @@
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
+          "autocompletes",
           "checkboxes",
+          "combobox",
           "file-inputs",
           "forms",
           "inputs",
           "radio-buttons",
-          "range-sliders",
           "sliders",
+          "range-sliders",
           "switches",
           "textareas",
           "text-fields"
@@ -98,6 +103,7 @@
         "items": [
           "button-groups",
           "item-groups",
+          "slide-groups",
           "windows"
         ]
       },
@@ -129,8 +135,13 @@
       },
       "ratings",
       "sheets",
+      "snackbars",
+      "system-bars",
       "tables",
-      "theme-providers"
+      "tabs",
+      "theme-providers",
+      "timelines",
+      "toolbars"
     ]
   },
   {

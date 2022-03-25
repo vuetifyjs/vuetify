@@ -199,9 +199,6 @@ export const VTextarea = defineComponent({
               isValid,
             }) => (
               <VField
-                active={ isActive.value || isDirty.value }
-                dirty={ isDirty.value }
-                focused={ isFocused.value }
                 style={{
                   '--v-input-control-height': controlHeight.value,
                 }}
@@ -209,6 +206,9 @@ export const VTextarea = defineComponent({
                 onClick:clear={ onClear }
                 role="textbox"
                 { ...fieldProps }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                focused={ isFocused.value }
                 error={ isValid.value === false }
               >
                 {{
@@ -235,6 +235,7 @@ export const VTextarea = defineComponent({
                         disabled={ isDisabled.value }
                         placeholder={ props.placeholder }
                         rows={ props.rows }
+                        name={ props.name }
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }

@@ -1,10 +1,6 @@
 <template>
   <v-card>
-    <v-toolbar
-      color="cyan"
-      dark
-      flat
-    >
+    <v-toolbar color="primary">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Your Dashboard</v-toolbar-title>
@@ -24,11 +20,10 @@
           v-model="tab"
           align-with-title
         >
-          <v-tabs-slider color="yellow"></v-tabs-slider>
-
           <v-tab
             v-for="item in items"
             :key="item"
+            :value="item"
           >
             {{ item }}
           </v-tab>
@@ -36,16 +31,17 @@
       </template>
     </v-toolbar>
 
-    <v-tabs-items v-model="tab">
-      <v-tab-item
+    <v-window v-model="tab">
+      <v-window-item
         v-for="item in items"
         :key="item"
+        :value="item"
       >
         <v-card flat>
           <v-card-text v-text="text"></v-card-text>
         </v-card>
-      </v-tab-item>
-    </v-tabs-items>
+      </v-window-item>
+    </v-window>
   </v-card>
 </template>
 

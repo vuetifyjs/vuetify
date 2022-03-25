@@ -7,9 +7,9 @@
     ></v-progress-linear>
     <br>
     <v-progress-linear
+      model-value="20"
       color="teal"
       buffer-value="0"
-      value="20"
       stream
     ></v-progress-linear>
     <br>
@@ -20,8 +20,8 @@
     ></v-progress-linear>
     <br>
     <v-progress-linear
+      model-value="40"
       buffer-value="60"
-      value="40"
       stream
       color="orange"
     ></v-progress-linear>

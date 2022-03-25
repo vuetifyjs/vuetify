@@ -14,14 +14,16 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
+import { makeVariantProps } from '@/composables/variant'
 import { createList } from './list'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 
@@ -65,19 +67,20 @@ export const VList = genericComponent<new <T>() => {
   name: 'VList',
 
   props: {
-    color: String,
+    activeColor: String,
+    activeClass: String,
+    bgColor: String,
     disabled: Boolean,
     lines: {
-      type: String,
+      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
       default: 'one',
     },
     nav: Boolean,
     items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
-      selectStrategy: 'leaf' as const,
+      selectStrategy: 'single-leaf' as const,
       openStrategy: 'multiple' as const,
-      activeStrategy: 'single' as const,
     }),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -86,26 +89,41 @@ export const VList = genericComponent<new <T>() => {
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'text' } as const),
   },
 
   emits: {
     'update:selected': (val: string[]) => true,
     'update:opened': (val: string[]) => true,
-    'update:active': (val: string[]) => true,
+    'click:open': (value: { id: string, value: boolean, path: string[] }) => true,
+    'click:select': (value: { id: string, value: boolean, path: string[] }) => true,
   },
 
   setup (props, { slots }) {
     const items = computed(() => parseItems(props.items))
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select, activate } = useNested(props)
+    const { open, select } = useNested(props)
+    const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
 
     createList()
+
+    provideDefaults({
+      VListItem: {
+        activeClass: toRef(props, 'activeClass'),
+        activeColor: toRef(props, 'activeColor'),
+        color: toRef(props, 'color'),
+        density: toRef(props, 'density'),
+        disabled: toRef(props, 'disabled'),
+        lines: toRef(props, 'lines'),
+        variant: toRef(props, 'variant'),
+      },
+    })
 
     useRender(() => {
       return (
@@ -115,13 +133,13 @@ export const VList = genericComponent<new <T>() => {
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
-              [`v-list--${props.lines}-line`]: true,
             },
             themeClasses.value,
             backgroundColorClasses.value,
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
+            lineClasses.value,
             roundedClasses.value,
           ]}
           style={[
@@ -145,7 +163,6 @@ export const VList = genericComponent<new <T>() => {
     return {
       open,
       select,
-      activate,
     }
   },
 })

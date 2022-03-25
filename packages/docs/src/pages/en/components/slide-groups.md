@@ -1,4 +1,5 @@
 ---
+nav: Slide groups
 meta:
   title: Slide group component
   description: The slide group component is similar to item groups in that you can make selectable content out of elements but does so in a single line fashion.

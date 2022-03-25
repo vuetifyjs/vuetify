@@ -22,7 +22,6 @@ export type Variant = typeof allowedVariants[number]
 
 export interface VariantProps {
   color?: string
-  textColor?: string
   variant: Variant
 }
 
@@ -38,7 +37,6 @@ export function genOverlays (isClickable: boolean, name: string) {
 
 export const makeVariantProps = propsFactory({
   color: String,
-  textColor: String,
   variant: {
     type: String as PropType<Variant>,
     default: 'contained',
@@ -56,9 +54,8 @@ export function useVariant (
   })
 
   const { colorClasses, colorStyles } = useColor(computed(() => {
-    const { textColor, variant, color } = unref(props)
+    const { variant, color } = unref(props)
     return {
-      text: textColor,
       [['contained', 'contained-flat'].includes(variant) ? 'background' : 'text']: color,
     }
   }))

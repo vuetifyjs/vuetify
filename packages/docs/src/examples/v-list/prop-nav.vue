@@ -14,7 +14,7 @@
             subtitle="john@vuetifyjs.com"
           >
             <template v-slot:append>
-              <v-list-item-avatar right>
+              <v-list-item-avatar end>
                 <v-btn size="small" variant="text" icon="mdi-menu-down"></v-btn>
               </v-list-item-avatar>
             </template>

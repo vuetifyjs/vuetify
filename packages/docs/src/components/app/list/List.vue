@@ -12,7 +12,7 @@
   import { computed, defineComponent, ref } from 'vue'
   import type { Prop } from 'vue'
   import { useI18n } from 'vue-i18n'
-  import routes from 'virtual:generated-pages'
+  import { generatedRoutes as routes } from '@/util/routes'
 
   type Item = {
     title: string,
@@ -24,12 +24,12 @@
   }
 
   function generateApiItems (locale: string) {
-    return (routes as { path: string}[])
+    return routes
       .filter(route => route.path.includes(`${locale}/api/`))
       .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
         return {
-          title: route.path.slice(route.path.lastIndexOf('/') + 1),
+          title: (route.meta!.title as string).slice(0, -4),
           to: route.path,
         }
       })
@@ -39,7 +39,7 @@
     if (item.items) {
       return item.items.map(child => {
         if (typeof child === 'string') {
-          const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${path}/${child}`))
+          const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${path}/${child}/`))
 
           return {
             title: route?.meta?.nav ?? route?.meta?.title ?? child,

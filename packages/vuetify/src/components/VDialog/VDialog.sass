@@ -7,25 +7,25 @@
   z-index: $dialog-z-index
   align-items: center
   justify-content: center
+  margin: auto
 
   .v-overlay__content
-    max-height: $dialog-overlay-content-max-height
-    min-width: $dialog-overlay-content-min-width
-    max-width: $dialog-overlay-content-max-width
-
-    @include tools.rounded($dialog-overlay-content-border-radius)
-
-    @media #{$dialog-overlay-content-mobile-breakpoint}
-      max-width: $dialog-overlay-content-mobile-max-width
+    max-height: calc(100% - #{$dialog-margin * 2})
+    margin: $dialog-margin
+    display: flex
+    flex-direction: column
 
     > .v-card,
     > .v-sheet
-      border-radius: inherit
-      overflow: hidden
+      border-radius: $dialog-border-radius
+      overflow-y: auto
 
       @include tools.elevation($dialog-elevation)
 
     > .v-card
+      display: flex
+      flex-direction: column
+
       > .v-card-avatar
         padding: $dialog-card-avatar-padding
 
@@ -47,6 +47,7 @@
   .v-overlay__content
     border-radius: 0
     margin: 0
+    padding: 0
     width: 100%
     height: 100%
     max-width: 100%
@@ -59,3 +60,19 @@
     > .v-sheet
       min-height: 100%
       min-width: 100%
+      border-radius: 0
+
+.v-dialog--scrollable .v-overlay__content,
+.v-dialog--scrollable .v-overlay__content > form
+  display: flex
+
+  > .v-card
+    display: flex
+    flex: 1 1 100%
+    flex-direction: column
+    max-height: 100%
+    max-width: 100%
+
+    > .v-card-text
+      backface-visibility: hidden
+      overflow-y: auto

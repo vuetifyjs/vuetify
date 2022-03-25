@@ -15,7 +15,7 @@ import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useStack } from '@/composables/stack'
-import { useOverlay } from '@/composables/layout'
+import { useOverlay } from '@/composables/overlay'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -106,6 +106,7 @@ export const VOverlay = genericComponent<new () => {
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
@@ -238,10 +239,10 @@ export const VOverlay = genericComponent<new () => {
                 />
                 <MaybeTransition
                   appear
-                  onAfterLeave={ onAfterLeave }
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
+                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
                 >
                   <div
                     ref={ contentEl }

@@ -37,7 +37,6 @@ export const VTextField = genericComponent<new <T>() => {
     autofocus: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
-    dirty: Boolean,
     hint: String,
     persistentHint: Boolean,
     prefix: String,
@@ -59,6 +58,7 @@ export const VTextField = genericComponent<new <T>() => {
     'click:append-inner': (e: MouseEvent) => true,
     'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
+    'click:input': (e: MouseEvent) => true,
     'click:prepend': (e: MouseEvent) => true,
     'click:prepend-inner': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
@@ -165,9 +165,6 @@ export const VTextField = genericComponent<new <T>() => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                active={ isActive.value || isDirty.value }
-                dirty={ isDirty.value }
-                focused={ isFocused.value }
                 onMousedown={ (e: MouseEvent) => {
                   if (e.target === inputRef.value) return
 
@@ -179,6 +176,9 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
                 role="textbox"
                 { ...fieldProps }
+                active={ isActive.value || isDirty.value }
+                dirty={ isDirty.value || props.dirty }
+                focused={ isFocused.value }
                 error={ isValid.value === false }
               >
                 {{
@@ -194,26 +194,30 @@ export const VTextField = genericComponent<new <T>() => {
                           </span>
                         ) }
 
-                        { slots.default?.() }
-
-                        <input
-                          ref={ inputRef }
+                        <div
                           class={ fieldClass }
-                          v-model={ model.value }
-                          v-intersect={[{
-                            handler: onIntersect,
-                          }, null, ['once']]}
-                          autofocus={ props.autofocus }
-                          readonly={ isReadonly.value }
-                          disabled={ isDisabled.value }
-                          placeholder={ props.placeholder }
-                          size={ 1 }
-                          type={ props.type }
-                          onFocus={ onFocus }
-                          onBlur={ () => (isFocused.value = false) }
-                          { ...slotProps }
-                          { ...inputAttrs }
-                        />
+                          onClick={ e => emit('click:input', e) }
+                        >
+                          { slots.default?.() }
+
+                          <input
+                            ref={ inputRef }
+                            v-model={ model.value }
+                            v-intersect={[{
+                              handler: onIntersect,
+                            }, null, ['once']]}
+                            autofocus={ props.autofocus }
+                            readonly={ isReadonly.value }
+                            disabled={ isDisabled.value }
+                            placeholder={ props.placeholder }
+                            size={ 1 }
+                            type={ props.type }
+                            onFocus={ onFocus }
+                            onBlur={ () => (isFocused.value = false) }
+                            { ...slotProps }
+                            { ...inputAttrs }
+                          />
+                        </div>
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">

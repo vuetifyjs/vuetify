@@ -1,4 +1,5 @@
 ---
+nav: Toolbars
 meta:
   title: Toolbar component
   description: The toolbar component sits above the content that it affects and provides an area for labeling and additional actions.

@@ -1,16 +1,25 @@
 <template>
-  <v-row justify="space-around">
+  <div class="d-flex justify-space-around">
     <v-color-picker
-      class="ma-2"
+      v-model="c1"
       hide-canvas
+      hide-sliders
     ></v-color-picker>
+
     <v-color-picker
-      class="ma-2"
-      canvas-height="300"
+      v-model="c2"
+      hide-inputs
+      show-swatches
     ></v-color-picker>
-    <v-color-picker
-      class="ma-2"
-      dot-size="30"
-    ></v-color-picker>
-  </v-row>
+  </div>
 </template>
+
+<script>
+
+  export default {
+    data: () => ({
+      c1: '#ff00ff',
+      c2: '#00ff00',
+    }),
+  }
+</script>

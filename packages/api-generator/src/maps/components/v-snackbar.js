@@ -12,8 +12,8 @@ module.exports = {
         props: undefined,
       },
       {
-        name: 'action',
-        props: { attrs: 'object' },
+        name: 'actions',
+        props: undefined,
       },
     ],
   },

@@ -1,6 +1,7 @@
 export { VCard } from './VCard'
 export { VCardActions } from './VCardActions'
 export { VCardAvatar } from './VCardAvatar'
+export { VCardContent } from './VCardContent'
 export { VCardHeader } from './VCardHeader'
 export { VCardHeaderText } from './VCardHeaderText'
 export { VCardImg } from './VCardImg'
