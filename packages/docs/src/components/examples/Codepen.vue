@@ -57,9 +57,9 @@
       cssResources () {
         return [
           'https://fonts.googleapis.com/css?family=Roboto:100,300,400,500,700,900',
-          'https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css',
+          'https://unpkg.com/@mdi/font@6.x/css/materialdesignicons.min.css',
           'https://fonts.googleapis.com/css?family=Material+Icons',
-          `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.css`,
+          `https://unpkg.com/vuetify@${this.version}/dist/vuetify.min.css`,
         ]
       },
       editors () {
@@ -71,9 +71,9 @@
       },
       jsResources () {
         return [
-          'https://cdn.jsdelivr.net/npm/babel-polyfill/dist/polyfill.min.js',
-          'https://cdn.jsdelivr.net/npm/vue@2.x/dist/vue.js',
-          `https://cdn.jsdelivr.net/npm/vuetify@${this.version}/dist/vuetify.min.js`,
+          'https://unpkg.com/babel-polyfill/dist/polyfill.min.js',
+          'https://unpkg.com/vue@2.x/dist/vue.js',
+          `https://unpkg.com/vuetify@${this.version}/dist/vuetify.min.js`,
         ]
       },
       script () {
