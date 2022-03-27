@@ -1,24 +1,10 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
-  >
-    <v-icon>{{ icons.mdiAccount }}</v-icon>
-    <div class="mx-2"></div>
-    <v-icon>{{ icons.mdiPencil }}</v-icon>
-    <div class="mx-2"></div>
-    <v-icon>{{ icons.mdiShareVariant }}</v-icon>
-    <div class="mx-2"></div>
-    <v-btn
-      color="primary"
-      depressed
-    >
-      <v-icon start>
-        {{ icons.mdiDelete }}
-      </v-icon>
-      Delete
-    </v-btn>
-  </v-row>
+  <div class="d-flex justify-space-around">
+    <v-icon :icon="`mdiSvg:${icons.mdiAccount}`"></v-icon>
+    <v-icon :icon="`mdiSvg:${icons.mdiPencil}`"></v-icon>
+    <v-icon :icon="`mdiSvg:${icons.mdiShareVariant}`"></v-icon>
+    <v-icon :icon="`mdiSvg:${icons.mdiDelete}`"></v-icon>
+  </div>
 </template>
 
 <script>

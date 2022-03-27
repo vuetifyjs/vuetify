@@ -30,7 +30,7 @@ Avatars in their simplest form display content within a circular container.
 
 #### Size
 
-The `size` prop allows you to change the height and width of `v-avatar`.
+The `size` prop allows you to change the height and width of the avatar.
 
 <example file="v-avatar/prop-size" />
 

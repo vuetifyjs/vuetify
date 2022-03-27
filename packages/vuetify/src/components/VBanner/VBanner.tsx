@@ -57,7 +57,7 @@ export const VBanner = defineComponent({
 
     useRender(() => {
       const hasAvatar = !!(props.avatar || props.icon || slots.avatar || slots.icon)
-      const hasText = !!(props.text || slots.text)
+      const hasText = !!(props.text || slots.default)
       const hasContent = hasAvatar || hasText || slots.default
 
       return (
@@ -96,18 +96,16 @@ export const VBanner = defineComponent({
                   }}
                 >
                   <div class="v-banner__avatar">
-                    { slots.avatar ? slots.avatar() : (<VAvatar />) }
+                    { slots.avatar ? slots.avatar() : slots.icon ? slots.icon() : (<VAvatar />) }
                   </div>
                 </VDefaultsProvider>
               ) }
 
               { hasText && (
                 <VBannerText>
-                  { slots.text ? slots.text() : props.text }
+                  { slots.default ? slots.default() : props.text }
                 </VBannerText>
               ) }
-
-              { slots.default?.() }
             </div>
           ) }
 
