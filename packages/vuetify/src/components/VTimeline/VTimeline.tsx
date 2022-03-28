@@ -1,9 +1,6 @@
 // Styles
 import './VTimeline.sass'
 
-// Components
-import { VTimelineItem } from './VTimelineItem'
-
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -18,12 +15,19 @@ import { VTimelineSymbol } from './shared'
 import type { Prop } from 'vue'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
-export type TimelineSide = 'before' | 'after' | undefined
+export type TimelineSide = 'start' | 'end' | undefined
+export type TimelineAlign = 'center' | 'start'
+export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
 export const VTimeline = defineComponent({
   name: 'VTimeline',
 
   props: {
+    align: {
+      type: String,
+      default: 'center',
+      validator: (v: any) => ['center', 'start'].includes(v),
+    } as Prop<TimelineAlign>,
     direction: {
       type: String,
       default: 'vertical',
@@ -44,9 +48,8 @@ export const VTimeline = defineComponent({
     lineColor: String,
     truncateLine: {
       type: String,
-      default: 'start',
-      validator: (v: any) => ['none', 'start', 'end', 'both'].includes(v),
-    },
+      validator: (v: any) => ['start', 'end', 'both'].includes(v),
+    } as Prop<TimelineTruncateLine>,
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -68,14 +71,29 @@ export const VTimeline = defineComponent({
       return side && `v-timeline--side-${side}`
     })
 
+    const truncateClasses = computed(() => {
+      const classes = [
+        'v-timeline--truncate-line-start',
+        'v-timeline--truncate-line-end',
+      ]
+
+      switch (props.truncateLine) {
+        case 'both': return classes
+        case 'start': return classes[0]
+        case 'end': return classes[1]
+        default: return null
+      }
+    })
+
     return () => (
       <props.tag
         class={[
           'v-timeline',
           `v-timeline--${props.direction}`,
+          `v-timeline--align-${props.align}`,
+          !props.lineInset && truncateClasses.value,
           {
             'v-timeline--inset-line': !!props.lineInset,
-            'v-timeline--truncate-line-end': props.truncateLine === 'end' || props.truncateLine === 'both',
           },
           themeClasses.value,
           densityClasses.value,
@@ -86,10 +104,6 @@ export const VTimeline = defineComponent({
           '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
       >
-        { (props.truncateLine === 'none' || props.truncateLine === 'end') && (
-          <VTimelineItem hideDot />
-        ) }
-
         { slots.default?.() }
       </props.tag>
     )
