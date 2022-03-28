@@ -41,25 +41,25 @@ v-timeline-item description -->
 
 #### Direction
 
-You can switch to a horizontal timeline using the **direction** prop.
+Switch between a horizontal and vertical timeline in real-time using the **direction** prop.
 
 <example file="v-timeline/prop-direction" />
 
 #### Side
 
-**side** positions all items to one side of the timeline. In this example, `v-alert` replaces the card to provide a different design.
+Use the **side** property to force all items to one side of the timeline.
 
 <example file="v-timeline/prop-single-side" />
 
 #### Alignment
 
-By default item content is aligned to the center of the item. Using the **align** prop you can change this to align to the start instead.
+By default, `v-timeline-item` content is vertically *aligned* center. The **align** prop also supports  orient the.
 
 <example file="v-timeline/prop-align" />
 
 #### Dot color
 
-Colored dots create visual breakpoints that make your timelines easier to read.
+Colored dots create visual breakpoints that make your timelines easier for users to read.
 
 <example file="v-timeline/prop-color" />
 
@@ -83,13 +83,13 @@ The **size** prop allows you to customize the size of each dot.
 
 #### Truncated line
 
-Using the **truncate-line** prop you can truncate the line at the start, end, or both ends.
+Truncate the start, end or both ends of the timeline center line by using the **truncate-line** prop.
 
 <example file="v-timeline/prop-truncate-line" />
 
 #### Line inset
 
-Using the **line-inset** prop you can specify an amount that each dividing line is inset.
+Modify the inset of dividing lines by specifying a custom amount using the **line-inset** prop.
 
 <alert type="warning">
 
