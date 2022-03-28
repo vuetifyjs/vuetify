@@ -108,26 +108,7 @@ export const VSelect = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
-    const selections = computed(() => {
-      const array: InternalSelectItem[] = []
-      let index = 0
-      for (const unwrapped of model.value) {
-        const item = genItem(unwrapped)
-
-        const found = array.find(selection => selection.value === item.value)
-
-        if (found == null) {
-          array.push({
-            ...item,
-            index,
-          })
-
-          index++
-        }
-      }
-
-      return array
-    })
+    const selections = computed(() => items.value.filter(item => model.value.includes(item.value)))
     const selected = computed(() => selections.value.map(selection => selection.value))
 
     function onClear (e: MouseEvent) {
