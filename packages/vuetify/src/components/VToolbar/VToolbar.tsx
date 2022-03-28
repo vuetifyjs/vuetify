@@ -77,23 +77,26 @@ export const VToolbar = genericComponent<new () => {
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const isExtended = computed(() => (!!(props.extended || slots.extension)))
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ), 10))
-    const extensionHeight = computed(() => parseInt((
-      Number(props.extensionHeight) +
-      (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
-      (props.density === 'comfortable' ? 4 : 0) -
-      (props.density === 'compact' ? 8 : 0)
-    ), 10))
+    const extensionHeight = computed(() => isExtended.value
+      ? parseInt((
+        Number(props.extensionHeight) +
+        (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
+        (props.density === 'comfortable' ? 4 : 0) -
+        (props.density === 'compact' ? 8 : 0)
+      ), 10)
+      : 0
+    )
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
-      const isExtended = !!(props.extended || slots.extension)
 
       return (
         <props.tag
@@ -157,7 +160,7 @@ export const VToolbar = genericComponent<new () => {
             ) }
           </div>
 
-          { isExtended && (
+          { isExtended.value && (
             <div
               class="v-toolbar__extension"
               style={{ height: convertToUnit(extensionHeight.value) }}
