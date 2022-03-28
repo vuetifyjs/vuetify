@@ -52,7 +52,12 @@ export const VAppBar = defineComponent({
   setup (props, { slots }) {
     const vToolbarRef = ref()
     const isActive = useProxiedModel(props, 'modelValue')
-    const height = computed(() => vToolbarRef.value?.contentHeight)
+    const height = computed(() => {
+      const height: number = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
+
+      return (height + extensionHeight)
+    })
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
@@ -75,7 +80,10 @@ export const VAppBar = defineComponent({
               'v-app-bar--bottom': props.position === 'bottom',
             },
           ]}
-          style={ layoutItemStyles.value }
+          style={{
+            ...layoutItemStyles.value,
+            height: undefined,
+          }}
           { ...toolbarProps }
           v-slots={ slots }
         />
