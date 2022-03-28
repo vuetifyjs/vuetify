@@ -27,4 +27,19 @@ describe('VTextField', () => {
   describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
     generate({ stories })
   })
+
+  it('should update validation when model changes', () => {
+    const rules = [
+      (value: string) => value.length > 5 || 'Error!',
+    ]
+
+    cy.mount(() => (
+      <VTextField label="Label" rules={ rules } />
+    ))
+
+    cy.get('.v-text-field input').type('Hello')
+
+    cy.get('.v-text-field').should('have.class', 'v-input--error')
+    cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+  })
 })
