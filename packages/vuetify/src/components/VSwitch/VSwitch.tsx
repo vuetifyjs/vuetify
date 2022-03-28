@@ -88,6 +88,7 @@ export const VSwitch = defineComponent({
                 { ...controlAttrs }
               >
                 {{
+                  ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div
