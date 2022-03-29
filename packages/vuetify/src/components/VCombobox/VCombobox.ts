@@ -156,6 +156,11 @@ export default VAutocomplete.extend({
       if (this.editingIndex > -1) {
         this.updateEditing()
       } else {
+        const text = this.getText(item)
+        // if the element is an empty string with spaces
+        // then stop execution
+        if (text.length && !text.trim().length) return
+
         VAutocomplete.options.methods.selectItem.call(this, item)
 
         // if selected item contains search value,
@@ -163,7 +168,7 @@ export default VAutocomplete.extend({
         if (
           this.internalSearch &&
           this.multiple &&
-          this.getText(item).toLocaleLowerCase().includes(this.internalSearch.toLocaleLowerCase())
+          text.toLocaleLowerCase().includes(this.internalSearch.toLocaleLowerCase())
         ) {
           this.internalSearch = null
         }
