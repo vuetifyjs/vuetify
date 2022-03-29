@@ -4,6 +4,7 @@
 @use './variables' as *
 
 .v-icon
+  --v-icon-size-multiplier: 1
   align-items: center
   display: inline-flex
   font-feature-settings: 'liga'
@@ -25,7 +26,7 @@
 
   @each $name in settings.$sizes
     &--size-#{$name}
-      font-size: map.get($icon-sizes, $name)
+      font-size: calc(var(--v-icon-size-multiplier) * #{map.get($icon-sizes, $name)})
 
 .v-icon__svg
   fill: currentColor

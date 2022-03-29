@@ -101,6 +101,14 @@
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
 
+  .v-icon
+    --v-icon-size-multiplier: #{calc(18/21)}
+
+  &--stacked,
+  &--icon
+    .v-icon
+      --v-icon-size-multiplier: #{calc(24/21)}
+
 .v-btn__content
   transition: $button-content-transition
 
