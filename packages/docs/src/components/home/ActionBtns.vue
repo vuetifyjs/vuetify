@@ -11,7 +11,7 @@
           v-bind="attrs"
           size="x-large"
         >
-          <v-icon :icon="icon" left />
+          <v-icon :icon="icon" start />
           {{ t(text) }}
         </v-btn>
       </v-col>

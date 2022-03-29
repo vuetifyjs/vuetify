@@ -16,7 +16,7 @@
         >
           <td>
             <v-icon
-              left
+              start
               :icon="breakpoint.icon"
             />
 

@@ -152,7 +152,7 @@
         depressed
         @click="isUpdating = true"
       >
-        <v-icon left>
+        <v-icon start>
           mdi-update
         </v-icon>
         Update Now

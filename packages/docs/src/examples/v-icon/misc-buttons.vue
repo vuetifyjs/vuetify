@@ -9,7 +9,7 @@
         Accept
         <v-icon
           dark
-          right
+          end
         >
           mdi-checkbox-marked-circle
         </v-icon>
@@ -23,7 +23,7 @@
         Decline
         <v-icon
           dark
-          right
+          end
         >
           mdi-cancel
         </v-icon>
@@ -35,7 +35,7 @@
       >
         <v-icon
           dark
-          left
+          start
         >
           mdi-minus-circle
         </v-icon>Cancel
@@ -50,7 +50,7 @@
       >
         <v-icon
           dark
-          left
+          start
         >
           mdi-arrow-left
         </v-icon>Back

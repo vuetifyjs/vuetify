@@ -108,7 +108,7 @@
             class="text-subtitle d-flex align-center my-2"
           >
             <v-icon
-              left
+              start
               :icon="icons[field]"
             />
 
