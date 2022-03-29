@@ -2,7 +2,7 @@
   <v-sheet
     :style="styles"
     class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 mt-2 mb-4"
-    color="grey-lighten-5"
+    :color="dark ? undefined : 'grey-lighten-5'"
     rounded
     width="100%"
     v-bind="$attrs"
@@ -13,6 +13,7 @@
 
 <script lang="ts">
   import { defineComponent } from 'vue'
+  import { useTheme } from 'vuetify'
 
   export default defineComponent({
     name: 'PromotedBase',
@@ -35,6 +36,11 @@
         return {
           minHeight: `${this.minHeight}px`,
         }
+      },
+      dark () {
+        const theme = useTheme()
+
+        return theme.getTheme(theme.current.value).dark
       },
     },
   })

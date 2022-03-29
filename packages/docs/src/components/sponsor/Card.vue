@@ -3,7 +3,7 @@
     :aria-label="found?.metadata.name"
     :href="found?.metadata.href"
     :ripple="false"
-    class="d-inline-block px-2 py-1"
+    class="d-inline-flex align-center pa-2"
     color="transparent"
     flat
     rel="noopener"
