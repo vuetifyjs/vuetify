@@ -4,7 +4,6 @@ import { computed, provide, toRef } from 'vue'
 import { createExpanded, useGroupBy, useHeaders, useSort, useSortedItems, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
-import { VDataTableVirtualHeaders } from './VDataTableVirtualHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
 
 export const VDataTableVirtual = defineComponent({
