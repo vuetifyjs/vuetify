@@ -18,12 +18,6 @@
   vertical-align: $icon-vertical-align
   width: $icon-size
 
-  &--left
-    margin-inline-end: $icon-margin-start
-
-  &--right
-    margin-inline-start: $icon-margin-end
-
   @each $name in settings.$sizes
     &--size-#{$name}
       font-size: calc(var(--v-icon-size-multiplier) * #{map.get($icon-sizes, $name)})
@@ -33,13 +27,26 @@
   width: 100%
   height: 100%
 
-.v-icon
-  &--left
-    .v-btn:not(.v-btn--icon) &
-      margin-inline-start: $icon-btn-margin-start
-      margin-inline-end: $icon-btn-margin-end
+.v-icon--start
+  margin-inline-end: $icon-margin-start
 
-  &--right
-    .v-btn:not(.v-btn--icon) &
-      margin-inline-start: $icon-btn-margin-end
-      margin-inline-end: $icon-btn-margin-start
+  .v-btn:not(.v-btn--icon) &
+    margin-inline-start: $icon-btn-margin-start
+    margin-inline-end: $icon-btn-margin-end
+
+  .v-btn.v-btn--stacked &
+    margin-inline-start: 0
+    margin-inline-end: 0
+    margin-bottom: $icon-btn-stacked-margin
+
+.v-icon--end
+  margin-inline-start: $icon-margin-end
+
+  .v-btn:not(.v-btn--icon) &
+    margin-inline-start: $icon-btn-margin-end
+    margin-inline-end: $icon-btn-margin-start
+
+  .v-btn.v-btn--stacked &
+    margin-inline-start: 0
+    margin-inline-end: 0
+    margin-top: $icon-btn-stacked-margin

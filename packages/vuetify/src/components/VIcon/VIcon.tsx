@@ -21,8 +21,8 @@ export const VIcon = defineComponent({
 
   props: {
     color: String,
-    left: Boolean,
-    right: Boolean,
+    start: Boolean,
+    end: Boolean,
     icon: {
       type: [String, Object] as PropType<IconValue>,
     },
@@ -61,8 +61,8 @@ export const VIcon = defineComponent({
             textColorClasses.value,
             themeClasses.value,
             {
-              'v-icon--left': props.left,
-              'v-icon--right': props.right,
+              'v-icon--start': props.start,
+              'v-icon--end': props.end,
             },
           ]}
           style={[
