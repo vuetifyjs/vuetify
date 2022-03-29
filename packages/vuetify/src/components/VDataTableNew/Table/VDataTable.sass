@@ -13,17 +13,28 @@
 .v-data-table-regular__tr
   height: 48px
 
-.v-data-table-regular__td,
-.v-data-table-regular__th
-  padding: 0.5rem
-
   &--focus
     border: 1px dotted black
 
 .v-data-table-regular__th
-  background: grey
-  border: 1px solid black
   align-items: center
+
+.v-data-table-regular
+  .v-table__wrapper
+    > table
+      > thead
+        > tr
+          th.v-data-table-regular__th--sortable:hover
+            cursor: pointer
+            color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+          th:not(.v-data-table-regular__th--sorted)
+            .v-data-table-header__sort-icon
+              opacity: 0
+
+            &:hover
+              .v-data-table-header__sort-icon
+                opacity: 1
 
 .v-data-table-regular__td
   background: lightgrey

@@ -3,6 +3,7 @@ import { convertToUnit, defineComponent } from '@/util'
 import { computed, provide, toRef } from 'vue'
 import { createExpanded, useGroupBy, useHeaders, useSort, useSortedItems, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
+import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableVirtualHeaders } from './VDataTableVirtualHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
 
@@ -14,7 +15,7 @@ export const VDataTableVirtual = defineComponent({
       type: [String, Number],
       default: 48,
     },
-    itemCount: {
+    itemsLength: {
       type: Number,
       required: true,
     },
@@ -24,6 +25,7 @@ export const VDataTableVirtual = defineComponent({
 
   emits: {
     'update:sortBy': (sortBy: any) => true,
+    load: (value: any) => true,
   },
 
   setup (props, { slots }) {
@@ -42,7 +44,9 @@ export const VDataTableVirtual = defineComponent({
       itemHeight,
       afterHeight,
       beforeHeight,
-    } = useVirtual(props, computed(() => props.itemCount + expanded.value.size + numGroups.value - numHiddenItems.value))
+    } = useVirtual(props, computed(() => items.value.length + expanded.value.size))
+    // } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size + numGroups.value - numHiddenItems.value))
+
 
     const visibleItems = computed(() => {
       return items.value.slice(startIndex.value, stopIndex.value)
@@ -55,8 +59,11 @@ export const VDataTableVirtual = defineComponent({
 
     return () => (
       <VTable
+        class="v-data-table-regular"
+        height={ props.height }
         fixedHeader={ props.fixedHeader }
-        v-slots={{
+      >
+        {{
           wrapper: () => (
             <div
               ref={ containerRef }
@@ -67,10 +74,10 @@ export const VDataTableVirtual = defineComponent({
             >
               <table>
                 <thead>
-                  <VDataTableVirtualHeaders
+                  <VDataTableHeaders
                     headers={ headers.value }
                     rowHeight={ itemHeight.value }
-                    fixed={ props.fixedHeader }
+                    sticky={ props.fixedHeader }
                     sortBy={ sortBy.value }
                   />
                 </thead>
@@ -89,7 +96,7 @@ export const VDataTableVirtual = defineComponent({
             </div>
           ),
         }}
-      ></VTable>
+      </VTable>
     )
   },
 })

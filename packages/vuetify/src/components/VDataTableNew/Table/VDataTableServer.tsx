@@ -1,10 +1,16 @@
+// Components
 import { VTable } from '@/components'
-import { defineComponent } from '@/util'
-import { PropType, provide } from 'vue'
-import { useHeaders, useOptions, usePagination, useSort } from '../composables'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
+
+// Utilities
+import { provide } from 'vue'
+import { defineComponent } from '@/util'
+import { useHeaders, useOptions, usePagination, useSort } from '../composables'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
@@ -27,7 +33,7 @@ export const VDataTableServer = defineComponent({
       type: Number,
       default: 1,
     },
-    itemCount: Number,
+    itemsLength: Number,
     fixedHeader: Boolean,
     sortBy: {
       type: Array as PropType<any[]>,
@@ -47,7 +53,7 @@ export const VDataTableServer = defineComponent({
 
     const { sortBy, toggleSort } = useSort(props)
 
-    const { page, itemsPerPage, startIndex, stopIndex, pageCount, itemCount } = usePagination(props)
+    const { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength } = usePagination(props)
 
     useOptions(page, itemsPerPage, sortBy)
 
@@ -67,13 +73,10 @@ export const VDataTableServer = defineComponent({
               <thead class="v-data-table-regular__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
-                    rows={ headers.value }
+                    headers={ headers.value }
                     rowHeight={ 48 }
                     sticky={ props.fixedHeader }
                     sortBy={ sortBy.value }
-                    onSort={ sorted => {
-                      sortBy.value = sorted
-                    } }
                   />
                 ) }
               </thead>
@@ -90,7 +93,7 @@ export const VDataTableServer = defineComponent({
           ),
           bottom: () => (
             <VDataTableFooter
-              itemCount={itemCount.value}
+              itemsLength={itemsLength.value}
               itemsPerPage={itemsPerPage.value}
               startIndex={startIndex.value}
               stopIndex={stopIndex.value}

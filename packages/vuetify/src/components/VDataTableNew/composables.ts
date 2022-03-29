@@ -281,7 +281,7 @@ export const usePagination = (props: {
   'onUpdate:page': ((val: any) => void) | undefined
   itemsPerPage: number
   'onUpdate:itemsPerPage': ((val: any) => void) | undefined
-  itemCount?: number
+  itemsLength?: number
 }) => {
   const page = useProxiedModel(props, 'page')
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
@@ -289,10 +289,10 @@ export const usePagination = (props: {
   const startIndex = computed(() => itemsPerPage.value * (page.value - 1))
   const stopIndex = computed(() => startIndex.value + itemsPerPage.value)
 
-  const itemCount = computed(() => props.itemCount ?? props.items.length)
-  const pageCount = computed(() => Math.floor(itemCount.value / itemsPerPage.value))
+  const itemsLength = computed(() => props.itemsLength ?? props.items.length)
+  const pageCount = computed(() => Math.floor(itemsLength.value / itemsPerPage.value))
 
-  return { page, itemsPerPage, startIndex, stopIndex, pageCount, itemCount }
+  return { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
 }
 
 // export const paginateItems = (items: Ref<any[]>, startIndex: Ref<number>, stopIndex: Ref<number>) => {
@@ -321,7 +321,7 @@ export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy:
 }
 
 export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) => {
-  const groupByOpen = ref(new Set<string>())
+  const opened = ref(new Set<string>())
 
   const groupedItems = computed(() => {
     const groups = new Map<string, any[]>()
@@ -345,27 +345,27 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
 
     for (const [key, value] of groupedItems.value.entries()) {
       flatItems.push({ $type: 'group-header', groupBy: groupBy.value, groupByValue: key })
-      if (groupByOpen.value.has(key)) flatItems.push(...value)
+      if (opened.value.has(key)) flatItems.push(...value)
     }
 
     return flatItems
   })
 
   const toggleGroup = (group: string, value?: boolean) => {
-    const open = value == null ? !groupByOpen.value.has(group) : value
-    if (open) groupByOpen.value.add(group)
-    else groupByOpen.value.delete(group)
+    const open = value == null ? !opened.value.has(group) : value
+    if (open) opened.value.add(group)
+    else opened.value.delete(group)
   }
 
   onBeforeMount(() => {
     for (const key of groupedItems.value.keys()) {
-      groupByOpen.value.add(key)
+      opened.value.add(key)
     }
   })
 
   const numGroups = computed(() => [...groupedItems.value.keys()].length)
   const numHiddenItems = computed(() => {
-    const hiddenGroups = [...groupedItems.value.keys()].filter(g => !groupByOpen.value.has(g))
+    const hiddenGroups = [...groupedItems.value.keys()].filter(g => !opened.value.has(g))
 
     return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
   })
