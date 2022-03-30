@@ -22,6 +22,7 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 // Types
 import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, PropType } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export type Density = typeof allowedDensities[number]
 
@@ -93,6 +94,13 @@ export const VToolbar = genericComponent<new () => {
       ), 10)
       : 0
     )
+
+    provideDefaults({
+      VBtn: {
+        flat: true,
+        variant: 'text',
+      },
+    })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)

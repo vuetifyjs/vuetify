@@ -104,8 +104,11 @@
   .v-icon
     --v-icon-size-multiplier: #{calc(18/21)}
 
-  &--stacked,
   &--icon
+    .v-icon
+      --v-icon-size-multiplier: 1
+
+  &--stacked
     .v-icon
       --v-icon-size-multiplier: #{calc(24/21)}
 
