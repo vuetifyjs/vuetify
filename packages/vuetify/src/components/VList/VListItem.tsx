@@ -130,6 +130,7 @@ export const VListItem = genericComponent<new () => {
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasColor = !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
@@ -152,7 +153,7 @@ export const VListItem = genericComponent<new () => {
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             lineClasses.value,
@@ -160,7 +161,7 @@ export const VListItem = genericComponent<new () => {
             variantClasses.value,
           ]}
           style={[
-            colorStyles.value,
+            hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
           ]}
           href={ link.href.value }
