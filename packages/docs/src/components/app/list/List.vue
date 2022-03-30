@@ -3,6 +3,7 @@
     v-model:active="active"
     v-model:opened="opened"
     density="compact"
+    color="primary"
     :nav="nav"
     :items="computedItems"
   />
