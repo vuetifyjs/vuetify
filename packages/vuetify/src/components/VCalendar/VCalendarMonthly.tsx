@@ -1,10 +1,9 @@
-import { useRender } from "@/util";
 import { computed, defineComponent } from "vue";
 import type { ComputedRef } from 'vue'
 
 import { VCalendarWeekly } from "./VCalendarWeekly";
 import { CalendarTimestamp, getEndOfMonth, getStartOfMonth, parseTimestamp } from "@/composables/calendar/timestamp";
-import type { CalendarCategory } from '@/composables/calendar/timestamp'
+// import type { CalendarCategory } from '@/composables/calendar/timestamp'
 import { makeTimesProps } from "./composables/times";
 import { makeBaseProps, makeWeeksProps } from "./composables/props";
 import { makeThemeProps } from "@/composables/theme";

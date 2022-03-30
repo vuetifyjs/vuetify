@@ -1,8 +1,6 @@
 
 // import './VCalendar.sass'
-
-// import { VCalendarWithEvents } from './VCalendarWithEvents'
-
+import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { 
   makeBaseProps,
@@ -17,7 +15,7 @@ import { useWithEvents } from './composables/withEvents'
 
 // Utilities
 // import { computed, toRef } from 'vue'
-import { genericComponent, MakeSlots, useRender } from '@/util'
+import { genericComponent, MakeSlots } from '@/util'
 
 // Types1
 import { computed, watch } from 'vue'
@@ -27,6 +25,7 @@ import { CalendarCategory, CalendarFormatter, CalendarTimestamp, copyTimestamp, 
 import { getParsedCategories } from './composables/parser'
 import { VCalendarWeekly } from './VCalendarWeekly'
 import { VCalendarMonthly } from './VCalendarMonthly'
+import { VCalendarDaily } from './VCalendarDaily'
 
 export const VCalendar = genericComponent<new <T>() => {
   $props: {
@@ -47,31 +46,23 @@ export const VCalendar = genericComponent<new <T>() => {
   },
 
   setup(props, { attrs, slots }) {
+    const { current } = useLocale()
     const { themeClasses } = provideTheme(props)
     const {
       times,
       parsedNow,
       setPresent,
-      getNow,
-      updateDay,
-      updateTime,
       updateTimes,
     } = useTimes(props.now)
 
     const {
       parsedWeekdays,
-      weekdaySkips,
-      weekdaySkipsReverse,
       parsedStart,
       parsedEnd,
-      days,
-      dayFormatter,
-      weekdayFormatter,
-      getRelativeClasses,
       getStartOfWeek,
       getEndOfWeek,
       getFormatter
-    } = useBaseCalendar({currentLocale: null, dayFormat: null, end: props.end, start: props.start, times,weekdayFormat: null, weekdays: null})
+    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
 
     const {
       noEvents,
@@ -108,13 +99,13 @@ export const VCalendar = genericComponent<new <T>() => {
 
     // computeds
     const parsedValue: ComputedRef<CalendarTimestamp> = computed(() => {
-      return (validateTimestamp(this.value)
-        ? parseTimestamp(this.value, true)
+      return (validateTimestamp(modelValue)
+        ? parseTimestamp(modelvalue, true)
         : (parsedStart.value || times.today))
     })
 
     const parsedCategoryDays: ComputedRef<number> = computed(() => {
-      return parseInt(categoryDays) || 1
+      return parseInt(props.categoryDays) || 1
     })
     
     const renderProps: ComputedRef<VCalendarRenderProps> = computed(() => {

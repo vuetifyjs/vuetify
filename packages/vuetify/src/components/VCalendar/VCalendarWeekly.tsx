@@ -8,7 +8,7 @@ import { makeBaseProps, makeWeeksProps } from "./composables/props"
 import { makeTimesProps, useTimes } from "./composables/times"
 
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeVariantProps, useVariant } from '@/composables/variant'
+import { makeVariantProps } from '@/composables/variant'
 import { weekNumber } from "@/util/dateTimeUtils"
 import { VBtn } from "../VBtn"
 
@@ -33,31 +33,20 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     const { themeClasses } = provideTheme(props)
     const { current } = useLocale()
     const {
-      times,
-      parsedNow,
-      setPresent,
-      getNow,
-      updateDay,
-      updateTime,
-      updateTimes,
+      times
     } = useTimes(props.now)
     const {
       parsedWeekdays,
       weekdaySkips,
-      weekdaySkipsReverse,
       parsedStart,
       parsedEnd,
-      days: doDays,
       dayFormatter,
       weekdayFormatter,
       getRelativeClasses,
       getStartOfWeek,
-      getEndOfWeek,
-      getFormatter
-    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, [0,1,2,3,4,5,6])
-    
-    const { colorClasses, colorStyles } = useVariant(props)
-    
+      getEndOfWeek
+    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
+
     const staticClass: ComputedRef<string> = computed(() => {
       return 'v-calendar-weekly'
     })
@@ -123,7 +112,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       weekIndex: Number
     }
 
-    const genWeeks: ComputedRef = computed(() => {
+    const genWeeks: ComputedRef<WeekObject[]> = computed(() => {
       const weekDays = parsedWeekdays.value.length
       const weeks: WeekObject[] = []
 
@@ -139,18 +128,10 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
         determineDay.year,
         determineDay.month - 1,
         determineDay.day,
-        parsedWeekdays.value[0],
-        parseInt(localeFirstDayOfYear)
+        parseInt(parsedWeekdays.value[0]),
+        parseInt(props.localeFirstDayOfYear)
       )
     }
-
-    // const genDayMonth = (day: CalendarTimestamp): VNode | string => {
-    //   const color = day.present ? color : undefined
-
-    //   return this.$createElement('div', this.setTextColor(color, {
-    //     staticClass: 'v-calendar-weekly__day-month',
-    //   }), getSlot(this, 'day-month', day) || monthFormatter.value(day, props.shortMonths))
-    // }
 
     return (() => {
       return (
@@ -176,10 +157,10 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
               })}
             </div> : '' }
             
-            { genWeeks.value.map(week => {
+            { genWeeks.value.map((week: WeekObject) => {
               return <div key={week.days[0].date} class="v-calendar-weekly__week">
-                { props.showWeek ? <div class="v-calendar-weekly__weknumber"><small>{ getWeekNumber(week.weekIndex) }</small></div> : ''}
-                { week.days.map((day, index) => {
+                { props.showWeek ? <div class="v-calendar-weekly__weknumber"><small>{ getWeekNumber(week.days[0]) }</small></div> : ''}
+                { week.days.map((day, index: number) => {
                   return <div
                   key={ day.date }
                   class={['v-calendar-weekly__day', getRelativeClasses(day, isOutside(day))]}
@@ -192,7 +173,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
                           color={day.present ? props.color : 'transparent'}
                           flat
                           small
-                          // on: getMouseEventHandlers({
+                          // TODO: on: getMouseEventHandlers({
                           //   'click:date': { event: 'click', stop: true },
                           //   'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
                           // }, _e => day),
@@ -201,7 +182,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
                         </VBtn>
                     </slot>
                   </div>
-                  {/* { slots.day({outside: isOutside(day), index, week, ...day }) } */}
+                  { slots.day && slots.day({outside: isOutside(day), index, ...day }) }
                 </div>
                 })}
               </div>
@@ -209,9 +190,6 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
         </div>
       )
     })
-    
-
-    // return { days, todayWeek, staticClass, classes, parsedMinWeeks, isOutside, genWeeks, getWeekNumber, getRelativeClasses, weekdayFormatter }
   }
 })
 

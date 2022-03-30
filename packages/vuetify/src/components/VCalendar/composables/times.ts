@@ -11,7 +11,7 @@ export const makeTimesProps = propsFactory({
   },
 })
 
-export function useTimes (now: string) {
+export function useTimes (now: string | undefined) {
   const times = {
     now: parseTimestamp('0000-00-00 00:00', true),
     today: parseTimestamp('0000-00-00', true),
