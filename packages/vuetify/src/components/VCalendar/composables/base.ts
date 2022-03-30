@@ -12,15 +12,22 @@ import {
 
 import type { CalendarFormatter, CalendarTimestamp } from '@/composables/calendar/timestamp'
 
-export function useBaseCalendar (currentLocale, dayFormat, end, start, times, weekdayFormat, weekdays) {
+export function useBaseCalendar (
+  currentLocale: string,
+  dayFormat, end: string | number | Date | undefined,
+  start: string | number | Date | undefined,
+  times: object,
+  weekdayFormat,
+  weekdays: string | number[]
+) {
   // Computeds
-  const parsedWeekdays: ComputedRef<Array<number>> = computed(() => {
+  const parsedWeekdays: ComputedRef<number[]> = computed(() => {
     return Array.isArray(weekdays)
       ? weekdays
       : (weekdays || '').split(',').map((x: number | string): Number => parseInt(x, 10))
   })
 
-  const weekdaySkips: ComputedRef<Array<number>> = computed(() => {
+  const weekdaySkips: ComputedRef<number[]> = computed(() => {
     return getWeekdaySkips(parsedWeekdays.value)
   })
 
@@ -97,7 +104,7 @@ export function useBaseCalendar (currentLocale, dayFormat, end, start, times, we
 
   const getFormatter = (options: object): CalendarFormatter => {
     return createNativeLocaleFormatter(
-      locale,
+      currentLocale,
       (_tms, _short) => options
     )
   }

@@ -18,7 +18,7 @@ import { computed } from 'vue'
 import type { ComputedRef, VNode } from 'vue'
 // import './calendar-with-events.sass'
 import { CalendarEventOverlapModes } from './modes'
-import { doParseEvent, isEventHiddenOn } from './events'
+import { doParseEvent, isEventHiddenOn, isEventOverlapping } from './events'
 
 // Types
 type VEventGetter<D> = (day: D) => CalendarEventParsed[]

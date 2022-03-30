@@ -1,18 +1,15 @@
 import { useLocale } from "@/composables/locale"
 import { makeThemeProps, provideTheme } from "@/composables/theme"
 import { makeVariantProps } from "@/composables/variant"
-import { convertToUnit, genericComponent, MakeSlots } from "@/util"
-import { computed, ComputedRef, nextTick, onMounted, ref } from "vue"
+import { convertToUnit } from "@/util"
+import { computed, ComputedRef, defineComponent, nextTick, onMounted, ref } from "vue"
 import { VBtn } from "../VBtn"
 import { makeBaseProps, makeWeeksProps, makeIntervalProps } from "./composables/props"
 import { useBaseCalendar } from './composables/base'
 import { makeTimesProps, useTimes } from "./composables/times"
 import { useWithIntervals } from "./composables/withIntervals"
 
-export const VCalendarDaily = genericComponent<new <T>() => {
-  $props: {}
-  $slots: MakeSlots<{}>
-}>()({
+export const VCalendarDaily = defineComponent({
   name: 'VCalendarDaily',
 
   props: {
@@ -30,48 +27,20 @@ export const VCalendarDaily = genericComponent<new <T>() => {
     
     const {
       times,
-      parsedNow,
-      setPresent,
-      getNow,
-      updateDay,
-      updateTime,
-      updateTimes,
     } = useTimes(props.now)
 
     const {
-      parsedWeekdays,
-      weekdaySkips,
-      weekdaySkipsReverse,
-      parsedStart,
-      parsedEnd,
-      days: doDays,
       dayFormatter,
       weekdayFormatter,
       getRelativeClasses,
-      getStartOfWeek,
-      getEndOfWeek,
-      getFormatter
     } = useBaseCalendar(current.value, null, props.end, props.start, times, null, [0,1,2,3,4,5,6])
 
     const {
-      parsedFirstInterval,
-      parsedIntervalMinutes,
-      parsedIntervalCount,
-      parsedIntervalHeight,
-      parsedFirstTime,
-      firstMinute,
       bodyHeight,
       days,
       intervals,
       intervalFormatter,
-      showIntervalLabelDefault,
-      intervalStyleDefault,
-      getTimestampAtEvent,
-      getSlotScope,
-      scrollToTime,
-      minutesToPixels,
-      timeToY,
-      timeDelta,
+      showIntervalLabelDefault
     } = useWithIntervals(
       current.value,
       null,

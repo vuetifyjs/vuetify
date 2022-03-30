@@ -170,13 +170,13 @@ export function useWithIntervals (
 
   const scrollToTime = (time: VTime): boolean => {
     const y = timeToY(time)
-    const pane = ref('scrollArea') as HTMLElement
+    const scrollArea = ref(null) as unknown as HTMLElement
 
-    if (y === false || !pane) {
+    if (y === false || !scrollArea) {
       return false
     }
 
-    pane.scrollTop = y
+    scrollArea.scrollTop = y
 
     return true
   }
