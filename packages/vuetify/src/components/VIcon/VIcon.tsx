@@ -10,26 +10,29 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, flattenFragments } from '@/util'
+import { convertToUnit, defineComponent, flattenFragments, propsFactory } from '@/util'
 
 // Types
 import type { IconValue } from '@/composables/icons'
 import type { ComputedRef, PropType } from 'vue'
 
+export const makeVIconProps = propsFactory({
+  color: String,
+  start: Boolean,
+  end: Boolean,
+  icon: {
+    type: [String, Object] as PropType<IconValue>,
+  },
+
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'i' }),
+  ...makeThemeProps(),
+}, 'v-icon')
+
 export const VIcon = defineComponent({
   name: 'VIcon',
 
-  props: {
-    color: String,
-    start: Boolean,
-    end: Boolean,
-    icon: {
-      type: [String, Object] as PropType<IconValue>,
-    },
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'i' }),
-    ...makeThemeProps(),
-  },
+  props: makeVIconProps(),
 
   setup (props, { slots }) {
     let slotIcon: ComputedRef<string | undefined> | undefined
