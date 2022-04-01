@@ -130,7 +130,6 @@ In the example above we have created a custom component with a **title** prop an
 // test/CustomCard.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
