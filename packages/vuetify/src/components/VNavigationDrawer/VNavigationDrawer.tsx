@@ -31,7 +31,7 @@ export const VNavigationDrawer = defineComponent({
     expandOnHover: Boolean,
     floating: Boolean,
     modelValue: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: null,
     },
     permanent: Boolean,
@@ -73,7 +73,7 @@ export const VNavigationDrawer = defineComponent({
     const { mobile } = useDisplay()
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const isHovering = ref(false)
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
