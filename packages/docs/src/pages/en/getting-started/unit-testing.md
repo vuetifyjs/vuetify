@@ -240,7 +240,6 @@ Many of Vuetify's components utilize the global `$vuetify` object to derive sett
 // test/CustomAlert.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -283,7 +282,6 @@ Keep in mind, you **only need to stub** the services that are being used. such a
 // test/CustomNavigationDrawer.spec.js
 
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
