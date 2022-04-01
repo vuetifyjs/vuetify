@@ -61,7 +61,7 @@
               </template>
 
               <template v-else>
-                {{ item[header] }}
+                {{ item[header as never] }}
               </template>
             </td>
           </tr>
@@ -100,6 +100,8 @@
   import { useLocaleStore } from '../../store/locale'
   // import { searchItems } from 'vuetify/lib/util/helpers'
 
+  import type { PropType } from 'vue'
+
   const HEADERS: Record<string, string[]> = {
     options: ['name', 'type', 'default', 'description'],
     slots: ['name', 'description'],
@@ -112,7 +114,12 @@
   }
 
   type Item = {
+    name: string
+    source: string
+    type: string | string[]
+    signature: string
     default: any
+    description: Record<string, string>,
     snippet: string
     value: any
     example: string
@@ -129,7 +136,7 @@
         required: true,
       },
       filter: String,
-      apiData: Array,
+      apiData: Array as PropType<Item[]>,
     },
 
     setup (props) {
@@ -138,7 +145,7 @@
       function getType (value: string | string[]) {
         const type = Array.isArray(value) ? value.join(' | ') : value
 
-        return Prism.highlight(String(type), Prism.languages.typescript)
+        return Prism.highlight(String(type), Prism.languages.typescript, 'ts')
       }
 
       function getDefaultValue (item: Item) {
@@ -149,7 +156,11 @@
 
         if (str.startsWith('gh:')) return `<a target="_blank" href="https://github.com/vuetifyjs/vuetify/search?q=${str.slice(3)}">${str.slice(3)}</a>`
 
-        return Prism.highlight(str, props.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript)
+        return Prism.highlight(
+          str,
+          props.field === 'sass' ? Prism.languages.scss : Prism.languages.typescript,
+          props.field === 'sass' ? 'scss' : 'ts'
+        )
       }
 
       function getLanguage (item: Item) {
@@ -178,6 +189,8 @@
       function hasExtraRow (item: Item) {
         return item.example || item.snippet || item.props || item.value
       }
+
+      console.log(props.apiData)
 
       return {
         locale: computed(() => store.locale),

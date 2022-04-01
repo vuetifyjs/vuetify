@@ -23,10 +23,11 @@
 
 <script lang="ts">
   // Utilities
+  import { defineComponent } from 'vue'
   // import { call, get } from 'vuex-pathify'
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
-  export default {
+  export default defineComponent({
     name: 'JobsLink',
 
     components: { AppTooltipBtn },
@@ -64,7 +65,7 @@
         newJobs: [],
       }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

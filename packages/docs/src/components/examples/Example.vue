@@ -27,7 +27,7 @@
               class="ml-2 text-medium-emphasis"
               density="comfortable"
               variant="text"
-              v-bind="mergeProps(action, tooltip)"
+              v-bind="mergeProps(action as any, tooltip)"
             />
           </template>
 

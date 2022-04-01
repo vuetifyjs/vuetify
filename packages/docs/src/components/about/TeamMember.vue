@@ -101,7 +101,7 @@
           </template>
         </div>
 
-        <template v-for="field in ['work', 'location', 'languages']">
+        <template v-for="field in fields">
           <div
             v-if="member[field]"
             :key="field"
@@ -117,7 +117,7 @@
                 <app-markdown :content="focus" />
 
                 <span
-                  v-if="j < member[field].length - 1"
+                  v-if="j < member[field]!.length - 1"
                   :key="`span-${j}`"
                   class="mx-2"
                 >
@@ -211,6 +211,7 @@
         },
         links,
         copyTextToClipboard,
+        fields: ['work', 'location', 'languages'] as const,
       }
     },
   })

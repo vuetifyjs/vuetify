@@ -166,6 +166,7 @@
   "components/subheaders": ["v-subheader"],
   "components/switches": ["v-switch"],
   "components/system-bars": ["v-system-bar"],
+  "components/tables": ["v-table"],
   "components/tabs": [
     "v-tabs",
     "v-tab"

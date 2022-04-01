@@ -69,9 +69,9 @@
     setup (props) {
       const { ad, attrs } = useAd(props)
 
-      const description = computed(() => ad.value.metadata.description_short || ad.value.metadata.description)
-      const logo = computed(() => ad.value.metadata?.images?.logo?.url || ad.value.metadata?.images?.preview?.url)
-      const background = computed(() => ad.value.metadata?.images?.background?.url)
+      const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
+      const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
+      const background = computed(() => ad.value?.metadata?.images?.background?.url)
 
       function onClick () {
         // this.$gtag.event('click', {

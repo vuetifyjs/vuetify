@@ -25,7 +25,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, ref, watch } from 'vue'
-  import { useTheme } from 'vuetify/lib/composables/theme.mjs'
+  import { useTheme } from 'vuetify'
   import { useSponsorsStore } from '@/store/sponsors'
 
   export default defineComponent({
@@ -68,7 +68,7 @@
         watch(() => sponsors.sponsors, val => {
           if (sponsor.value || !val.length) return
 
-          sponsor.value = sponsors.bySlug(props.slug)
+          sponsor.value = sponsors.bySlug(props.slug!)
         })
       }
 

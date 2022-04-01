@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts">
-  import { computed } from 'vue'
+  import { computed, defineComponent } from 'vue'
   import { useUserStore } from '@/store/user'
   import AppSettingsGroup from './Group.vue'
 
-  export default {
+  export default defineComponent({
     name: 'AppSettingsTheme',
 
     components: { AppSettingsGroup },
@@ -64,5 +64,5 @@
         model,
       }
     },
-  }
+  })
 </script>

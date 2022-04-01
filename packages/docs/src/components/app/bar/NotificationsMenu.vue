@@ -91,7 +91,7 @@
 </template>
 
 <script lang="ts">
-  import { computed, ref } from 'vue'
+  import { computed, defineComponent, ref } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useDisplay } from 'vuetify'
   import { useUserStore } from '@/store/user'
@@ -110,7 +110,7 @@
     title: string
   }
 
-  export default {
+  export default defineComponent({
     name: 'NotificationsMenu',
 
     components: { AppTooltipBtn, AppMenu },
@@ -122,7 +122,7 @@
       const user = useUserStore()
       const menu = ref(false)
       const done = ref(false)
-      const all = ref([])
+      const all = ref<Notification[]>([])
       const showArchived = ref(false)
 
       const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
@@ -139,7 +139,7 @@
       const maxWidth = computed(() => mobile.value ? 296 : 320)
 
       async function load () {
-        const { objects } = await bucket.getObjects({
+        const { objects } = await bucket.getObjects<Notification>({
           query: {
             type: 'notifications',
             status: 'published',
@@ -191,5 +191,5 @@
         toggleAll,
       }
     },
-  }
+  })
 </script>

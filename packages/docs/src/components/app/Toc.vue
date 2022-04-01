@@ -19,7 +19,7 @@
 
     <ul class="mb-4 ml-5">
       <router-link
-        v-for="({ to, level, text }, i) in toc"
+        v-for="{ to, level, text } in toc"
         v-slot="{ href }"
         :key="text"
         :to="to"
@@ -40,7 +40,7 @@
           <a
             :href="href"
             class="v-toc-link d-block transition-swing text-decoration-none"
-            @click.prevent.stop="onClick(to, i)"
+            @click.prevent.stop="onClick(to)"
             v-text="text"
           />
         </li>
@@ -90,7 +90,7 @@
 
 <script lang="ts">
   // Utilities
-  import { computed, onBeforeMount, ref } from 'vue'
+  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useSponsorsStore } from '../../store/sponsors'
   import { useTheme } from 'vuetify'
@@ -191,7 +191,7 @@
     return { onScroll, scrolling }
   }
 
-  export default {
+  export default defineComponent({
     name: 'AppToc',
 
     components: {
@@ -240,7 +240,7 @@
         route,
       }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

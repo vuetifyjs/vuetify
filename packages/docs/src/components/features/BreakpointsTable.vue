@@ -73,6 +73,7 @@
 </template>
 
 <script lang="ts">
+  import { defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
 
   const breakpoints = [
@@ -120,7 +121,7 @@
     'range',
   ]
 
-  export default {
+  export default defineComponent({
     name: 'BreakpointsTable',
 
     setup () {
@@ -132,5 +133,5 @@
         t,
       }
     },
-  }
+  })
 </script>

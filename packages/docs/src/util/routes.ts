@@ -8,7 +8,6 @@ import { IN_BROWSER } from '@/util/globals'
 // Regexp
 const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 export const fallbackLocale = genericLocaleRegexp.source
-console.log(fallbackLocale)
 const languagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
 const languageRegexp = new RegExp(`^(${languagePattern})$`)
 

@@ -14,18 +14,21 @@
   import type { Prop } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { generatedRoutes as routes } from '@/util/routes'
+  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 
-  type Item = {
-    title: string,
-    activeIcon: string,
-    inactiveIcon: string,
-    items: string[] | Item[]
-    heading?: string;
-    divider?: boolean;
+  export type Item = {
+    title?: string
+    activeIcon?: string
+    inactiveIcon?: string
+    items?: (string | Item)[]
+    heading?: string
+    divider?: boolean
+    to?: RouteLocationRaw
+    href?: string
   }
 
   function generateApiItems (locale: string) {
-    return routes
+    return (routes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
       .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
@@ -49,7 +52,7 @@
           }
         } else {
           return {
-            title: t(child.title),
+            title: t(child.title!),
             $children: generateItems(child, path, locale, t),
           }
         }
@@ -81,9 +84,9 @@
 
         return {
           title: item.title && te(item.title) ? t(item.title) : item.title,
-          prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
+          prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
           value: item.title,
-          $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title, locale.value, t),
+          $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }
       }))
 
