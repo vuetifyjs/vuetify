@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="false"
+    v-if="hasPromotion"
     color="#0F335F"
     app
     dark
@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://store.vuetifyjs.com/products/ui-lib-bundle?utm_source=vuetify"
+      href="https://store.vuetifyjs.com/products/nitro-vuetify-3-admin-pro?utm_source=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -78,11 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-mobile.png)
 
     @media (min-width: 437px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-desktop.png)
 </style>
