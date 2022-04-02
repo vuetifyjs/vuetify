@@ -16,7 +16,7 @@
         </v-btn>
       </template>
 
-      <v-list>
+      <v-list :rounded="rounded">
         <v-list-item
           v-for="item in items"
           :key="item"
