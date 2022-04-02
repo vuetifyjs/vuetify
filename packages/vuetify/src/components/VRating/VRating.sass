@@ -36,7 +36,7 @@
 
   &:hover:not(.v-rating__item--focused)
     .v-rating--hover &
-      .v-icon
+      .v-btn
         transform: $rating-item-icon-transform
 
   &--focused
@@ -47,7 +47,7 @@
   &--half
     overflow: hidden
     position: absolute
-    width: 50%
+    clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%)
     z-index: 1
 
     .v-btn__overlay,
