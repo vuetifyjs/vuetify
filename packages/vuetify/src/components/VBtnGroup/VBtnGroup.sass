@@ -26,18 +26,27 @@
 
   .v-btn
     border-radius: 0
+    border-color: inherit
 
     &:not(:last-child)
-      border-right: none
+      border-inline-end: none
 
     &:not(:first-child)
-      border-left: none
+      border-inline-start: none
+
+    &:first-child
+      border-start-start-radius: inherit
+      border-end-start-radius: inherit
+
+    &:last-child
+      border-start-end-radius: inherit
+      border-end-end-radius: inherit
 
   &--divided
     .v-btn:not(:last-child)
-      border-right-width: $btn-group-border-thin-width
-      border-right-style: $btn-group-border-style
-      border-right-color: $btn-group-border-color
+      border-inline-end-width: $btn-group-border-thin-width
+      border-inline-end-style: $btn-group-border-style
+      border-inline-end-color: $btn-group-border-color
 
   &--tile
     @include tools.rounded($btn-group-tile-border-radius)
