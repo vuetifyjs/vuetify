@@ -15,7 +15,7 @@
       >
         <v-badge overlap>
           <v-icon
-            color="grey-lighten-4"
+            color="grey"
             icon="mdi-vuetify"
             size="x-large"
           ></v-icon>

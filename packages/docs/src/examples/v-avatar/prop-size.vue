@@ -1,23 +1,23 @@
 <template>
-  <v-row justify="space-around">
+  <div class="d-flex align-center justify-space-between">
     <v-avatar
       color="primary"
       size="x-small"
     >
-      <span class="text-h5">32</span>
+      32
     </v-avatar>
 
     <v-avatar
       color="secondary"
     >
-      <span class="text-h5">48</span>
+      48
     </v-avatar>
 
     <v-avatar
       color="info"
       size="x-large"
     >
-      <span class="text-h5">64</span>
+      64
     </v-avatar>
-  </v-row>
+  </div>
 </template>

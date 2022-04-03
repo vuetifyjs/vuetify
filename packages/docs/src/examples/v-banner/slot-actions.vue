@@ -1,25 +1,23 @@
 <template>
-  <div>
-    <v-checkbox
-      v-model="v0"
-      label="Visible"
-    ></v-checkbox>
+  <div class="pa-4 bg-grey-lighten-4">
     <v-banner
-      v-model="v0"
-      single-line
-      transition="slide-y-transition"
+      lines="one"
+      icon="mdi-wifi-strength-alert-outline"
+      color="warning"
     >
       No Internet connection
-      <template v-slot:actions="{ dismiss }">
+
+      <template v-slot:actions>
         <v-btn
-          text
+          variant="text"
           color="primary"
           @click="dismiss"
         >
           Dismiss
         </v-btn>
+
         <v-btn
-          text
+          variant="text"
           color="primary"
         >
           Retry
@@ -28,10 +26,3 @@
     </v-banner>
   </div>
 </template>
-<script>
-  export default {
-    data: () => ({
-      v0: true,
-    }),
-  }
-</script>

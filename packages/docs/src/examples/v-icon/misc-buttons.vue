@@ -4,97 +4,75 @@
       <v-btn
         class="ma-2"
         color="primary"
-        dark
       >
         Accept
         <v-icon
-          dark
           end
-        >
-          mdi-checkbox-marked-circle
-        </v-icon>
+          icon="mdi-checkbox-marked-circle"
+        ></v-icon>
       </v-btn>
 
       <v-btn
         class="ma-2"
         color="red"
-        dark
       >
         Decline
         <v-icon
-          dark
           end
-        >
-          mdi-cancel
-        </v-icon>
+          icon="mdi-cancel"
+        ></v-icon>
       </v-btn>
 
       <v-btn
         class="ma-2"
-        dark
       >
         <v-icon
-          dark
           start
-        >
-          mdi-minus-circle
-        </v-icon>Cancel
+          icon="mdi-minus-circle"
+        ></v-icon>
+        Cancel
       </v-btn>
     </div>
 
     <div>
       <v-btn
         class="ma-2"
-        color="orange darken-2"
-        dark
+        color="orange-darken-2"
       >
         <v-icon
-          dark
           start
-        >
-          mdi-arrow-left
-        </v-icon>Back
+          icon="mdi-arrow-left"
+        ></v-icon>
+        Back
       </v-btn>
 
       <v-btn
         class="ma-2"
         color="purple"
-        dark
-      >
-        <v-icon dark>
-          mdi-wrench
-        </v-icon>
-      </v-btn>
+        icon="mdi-wrench"
+      ></v-btn>
 
       <v-btn
         class="ma-2"
         color="indigo"
-        dark
-      >
-        <v-icon dark>
-          mdi-cloud-upload
-        </v-icon>
-      </v-btn>
+        icon="mdi-cloud-upload"
+      ></v-btn>
     </div>
 
     <div>
       <v-btn
         class="ma-2"
-        text
-        icon
-        color="blue lighten-2"
-      >
-        <v-icon>mdi-thumb-up</v-icon>
-      </v-btn>
+        variant="text"
+        icon="mdi-thumb-up"
+        color="blue-lighten-2"
+      ></v-btn>
 
       <v-btn
         class="ma-2"
-        text
-        icon
-        color="red lighten-2"
-      >
-        <v-icon>mdi-thumb-down</v-icon>
-      </v-btn>
+        variant="text"
+        icon="mdi-thumb-down"
+        color="red-lighten-2"
+      ></v-btn>
     </div>
   </div>
 </template>

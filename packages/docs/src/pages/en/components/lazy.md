@@ -30,7 +30,7 @@ The `v-lazy` component by default will not render its contents until it has been
 
 <alert type="info">
 
-  The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11 / Safari. It's possible on some iOS versions will also require the use of this polyfill.
+  The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11 / Safari. It's possible some iOS versions will also require the use of this polyfill.
 
 </alert>
 
