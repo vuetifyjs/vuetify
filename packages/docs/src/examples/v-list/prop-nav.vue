@@ -32,7 +32,7 @@
             active-color="primary"
           >
             <v-list-item-avatar>
-              <v-icon v-text="item.icon"></v-icon>
+              <v-icon :icon="item.icon"></v-icon>
             </v-list-item-avatar>
 
             <v-list-item-title v-text="item.text"></v-list-item-title>
