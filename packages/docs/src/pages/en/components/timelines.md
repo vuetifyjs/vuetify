@@ -53,7 +53,7 @@ Use the **side** property to force all items to one side of the timeline.
 
 #### Alignment
 
-By default, `v-timeline-item` content is vertically *aligned* center. The **align** prop also supports  orient the.
+By default, `v-timeline-item` content is vertically aligned `center`. The **align** prop also supports `top` alignment.
 
 <example file="v-timeline/prop-align" />
 
