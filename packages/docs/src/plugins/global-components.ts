@@ -20,6 +20,7 @@ import Backmatter from '@/components/Backmatter.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
 import Entry from '@/components/promoted/Entry.vue'
+import VueSchoolAd from '@/components/promoted/VueSchool.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
 import PageComponent from '@/components/PageComponent.vue'
@@ -57,6 +58,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('Carbon', Carbon)
   app.component('Discovery', Discovery)
   app.component('Entry', Entry)
+  app.component('VueSchoolAd', VueSchoolAd)
   app.component('Example', Example)
   app.component('Inline', Inline)
   app.component('PageComponent', PageComponent)

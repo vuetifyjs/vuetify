@@ -120,6 +120,10 @@ The **rounded** prop will add or remove **border-radius** to the alert. Similar 
 
 ## Accessibility
 
+<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
+Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
+</vue-school-ad>
+
 By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert) which denotes that the alert \"is a live region with important and usually time-sensitive information.\" When using the **closable** prop, the close icon will receive a corresponding `aria-label`. This value can be modified by changing either the **close-label** prop or globally through customizing the [Internationalization](/features/internationalization)'s default value for the _close_ property.
 
 <backmatter />

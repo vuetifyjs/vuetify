@@ -71,6 +71,9 @@ Once prompted, choose `Vuetify 3 Preview`:
 ```
 
 ### Vite
+<vue-school-ad href="https://vueschool.io/courses/rapid-development-with-vite?friend=vuetify" title="Vue School - Learn How to Use Vite">
+Learn how to use Vite to power your Vue.js development with a free Vue School video course
+</vue-school-ad>
 
 Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
 

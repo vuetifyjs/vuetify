@@ -118,6 +118,10 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 ### Slots
 
+<vue-school-ad href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuetify" title="Vue School - Free Slots Video Tutorial" >
+Not sure how slots work? Learn all about slots with this free video from Vue School.
+</vue-school-ad>
+
 #### Icon slots
 
 Instead of using `prepend`/`append`/`append-outer` icons you can use slots to extend input's functionality.

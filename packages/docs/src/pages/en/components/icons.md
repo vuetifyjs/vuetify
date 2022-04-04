@@ -93,6 +93,10 @@ You can manually import only the icons you use when using the [@mdi/js](https://
 
 ## Accessibility
 
+<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
+Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
+</vue-school-ad>
+
 Icons can convey all sorts of meaningful information, so it’s important that they reach the largest amount of people possible. There are two use cases you’ll want to consider:
 
 - **Decorative Icons** are only being used for visual or branding reinforcement. If they were removed from the page, users would still understand and be able to use your page.

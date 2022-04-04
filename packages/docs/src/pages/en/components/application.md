@@ -116,6 +116,10 @@ console.log(this.$vuetify.application.top) // 56
 
 ## Accessibility
 
+<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
+Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
+</vue-school-ad>
+
 By default, `v-main` is assigned the [TR](https://www.w3.org/TR/html51/) tag of [**main**](https://www.w3.org/TR/html51/grouping-content.html#the-main-element) which denotes that it is the main content area of the `body` of a document or application.
 
 <backmatter />
