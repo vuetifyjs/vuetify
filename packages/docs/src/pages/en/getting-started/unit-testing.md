@@ -13,7 +13,9 @@ related:
 
 Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and workflows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
 
-<entry-ad />
+<vue-school-ad href="https://vueschool.io/courses/learn-how-to-test-vuejs-components?friend=vuetify" title="Vue School - Component Testing Video Course">
+Learn how to test Vue.js components with a free video courses from Vue School
+</vue-school-ad>
 
 <alert type="warning">
 

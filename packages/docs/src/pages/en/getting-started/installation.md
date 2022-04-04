@@ -67,6 +67,8 @@ This will start the Vue User Interface and open a new window in your browser. On
 
 ## Nuxt install
 
+<vue-school-ad href="https://vueschool.io/courses/nuxtjs-fundamentals?friend=vuetify">Learn Nuxt.js from a free Vue School video course</vue-school-ad>
+
 Vuetify can be added by installing the Nuxt Vuetify module.
 
 ```bash
