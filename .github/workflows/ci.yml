@@ -69,7 +69,7 @@ jobs:
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
       - run: yarn cy:run
-        if: github.event_name == 'pull_request'
+        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v2
         if: failure()
