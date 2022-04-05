@@ -1,5 +1,5 @@
 <template>
-  <a v-bind="$attrs" target="_blank">
+  <a v-bind="$attrs" :href="fullLink" target="_blank">
   <promoted-base
     class="v-vuetify"
     comfortable
@@ -22,11 +22,16 @@
 </template>
 
 <script lang="ts" setup>
+  import { computed } from "vue"
   import logo from "../../assets/vue-school-logo.png"
   import PromotedBase from './Base.vue'
-  defineProps<{
-    title?: string
+  const props = defineProps<{
+    title?: string,
+    href: string,
   }>()
+  const fullLink = computed(() : string =>{
+    return `${props.href}?utm_source=Vuetify&utm_medium=banner&utm_campaign=sponsorship&friend=s-vuetify`
+  })
 </script>
 
 <style lang="sass">

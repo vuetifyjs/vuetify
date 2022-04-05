@@ -71,7 +71,7 @@ Once prompted, choose `Vuetify 3 Preview`:
 ```
 
 ### Vite
-<vue-school-link href="https://vueschool.io/courses/rapid-development-with-vite?friend=vuetify" title="Watch a Vite Course at Vue School">
+<vue-school-link href="https://vueschool.io/courses/rapid-development-with-vite" title="Watch a Vite Course at Vue School">
 Learn how to use Vite to power your Vue.js development with a Vue School video course
 </vue-school-link>
 
