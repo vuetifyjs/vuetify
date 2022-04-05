@@ -2,9 +2,8 @@
 import './VBanner.sass'
 
 // Components
+import { VExpandTransition } from '@/components/transitions'
 import { VAvatar } from '@/components/VAvatar'
-import { VBannerActions } from './VBannerActions'
-import { VBannerText } from './VBannerText'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
@@ -19,12 +18,18 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useDisplay } from '@/composables/display'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
-export const VBanner = defineComponent({
+export const VBanner = genericComponent<new () => {
+  $slots: MakeSlots<{
+    actions: [{ dismiss: () => void }]
+  }>
+}>()({
   name: 'VBanner',
 
   props: {
@@ -34,6 +39,10 @@ export const VBanner = defineComponent({
     lines: String as PropType<'one' | 'two' | 'three'>,
     sticky: Boolean,
     text: String,
+    modelValue: {
+      type: Boolean,
+      default: true,
+    },
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -45,7 +54,12 @@ export const VBanner = defineComponent({
     ...makeThemeProps(),
   },
 
+  emits: {
+    'update:modelValue': (val: boolean) => true,
+  },
+
   setup (props, { slots }) {
+    const isActive = useProxiedModel(props, 'modelValue')
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { densityClasses } = useDensity(props)
@@ -61,68 +75,73 @@ export const VBanner = defineComponent({
       const hasContent = hasAvatar || hasText || slots.default
 
       return (
-        <props.tag
-          class={[
-            'v-banner',
-            {
-              'v-banner--mobile': mobile.value,
-              'v-banner--sticky': props.sticky,
-              [`v-banner--${props.lines}-line`]: true,
-            },
-            borderClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            positionClasses.value,
-            roundedClasses.value,
-            themeClasses.value,
-          ]}
-          style={[
-            dimensionStyles.value,
-            positionStyles.value,
-          ]}
-          role="banner"
-        >
-          { hasContent && (
-            <div class="v-banner__content">
-              { hasAvatar && (
-                <VDefaultsProvider
-                  defaults={{
-                    VAvatar: {
-                      color: props.color,
-                      density: props.density,
-                      icon: props.icon,
-                      image: props.avatar,
-                    },
-                  }}
-                >
-                  <div class="v-banner__avatar">
-                    { slots.avatar ? slots.avatar() : slots.icon ? slots.icon() : (<VAvatar />) }
+        <VExpandTransition>
+          <props.tag
+            class={[
+              'v-banner',
+              {
+                'v-banner--mobile': mobile.value,
+                'v-banner--sticky': props.sticky,
+                [`v-banner--${props.lines}-line`]: true,
+              },
+              borderClasses.value,
+              densityClasses.value,
+              elevationClasses.value,
+              positionClasses.value,
+              roundedClasses.value,
+              themeClasses.value,
+            ]}
+            style={[
+              dimensionStyles.value,
+              positionStyles.value,
+            ]}
+            role="banner"
+            v-show={ isActive.value }
+          >
+            { hasContent && (
+              <div class="v-banner__content">
+                { hasAvatar && (
+                  <VDefaultsProvider
+                    defaults={{
+                      VAvatar: {
+                        color: props.color,
+                        density: props.density,
+                        icon: props.icon,
+                        image: props.avatar,
+                      },
+                    }}
+                  >
+                    <div class="v-banner__avatar">
+                      { slots.avatar ? slots.avatar() : slots.icon ? slots.icon() : (<VAvatar />) }
+                    </div>
+                  </VDefaultsProvider>
+                ) }
+
+                { hasText && (
+                  <div class="v-banner__text">
+                    { slots.default ? slots.default() : props.text }
                   </div>
-                </VDefaultsProvider>
-              ) }
+                ) }
+              </div>
+            ) }
 
-              { hasText && (
-                <VBannerText>
-                  { slots.default ? slots.default() : props.text }
-                </VBannerText>
-              ) }
-            </div>
-          ) }
-
-          { slots.actions && (
-            <VDefaultsProvider
-              defaults={{
-                VBtn: {
-                  color: props.color,
-                  density: props.density,
-                  variant: 'text',
-                },
-              }}
-            >
-              <VBannerActions v-slots={{ default: slots.actions }} />
-            </VDefaultsProvider>
-          ) }
-        </props.tag>
+            { slots.actions && (
+              <VDefaultsProvider
+                defaults={{
+                  VBtn: {
+                    color: props.color,
+                    density: props.density,
+                    variant: 'text',
+                  },
+                }}
+              >
+                <div class="v-banner__actions">
+                  { slots.actions?.({ dismiss: () => isActive.value = false }) }
+                </div>
+              </VDefaultsProvider>
+            ) }
+          </props.tag>
+        </VExpandTransition>
       )
     })
   },

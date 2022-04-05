@@ -7,7 +7,7 @@
     >
       No Internet connection
 
-      <template v-slot:actions>
+      <template v-slot:actions="{ dismiss }">
         <v-btn
           variant="text"
           color="primary"
