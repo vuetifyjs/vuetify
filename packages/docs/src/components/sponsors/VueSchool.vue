@@ -1,7 +1,7 @@
 <template>
 
   <v-list>
-    <a :href="href">
+    <a :href="href" target="_blank">
       <v-list-item class="grey lighten-3">
         <v-list-item-avatar style="border-radius: 0;">
           <v-img :src="require('../../assets/vue-school.png')" />
@@ -18,7 +18,7 @@
 
 <script>
   export default {
-    name: 'VueSchoolAd',
+    name: 'VueSchoolLink',
     props: {
       title: { type: String, default: 'Vue School - Industry Leading Video Training' },
       href: { type: String, required: true },

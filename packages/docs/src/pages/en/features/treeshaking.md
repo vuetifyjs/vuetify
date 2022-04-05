@@ -170,9 +170,9 @@ When using the `vuetify-loader`, there are a few scenarios which will require ma
 
 ### Dynamic components
 
-<vue-school-ad href="https://vueschool.io/lessons/dynamic-components?friend=vuetify" title="Vue School - Dynamic Components Video Lesson">
+<vue-school-link href="https://vueschool.io/lessons/dynamic-components?friend=vuetify" title="Watch a Dynamic Components Video at Vue School">
 Learn how to benefit from Dynamic Components with a video lesson from Vue School
-</vue-school-ad>
+</vue-school-link>
 
 `v-data-iterator` can use any component via the content-tag prop. This component must be registered [globally](#markup-js-a-la-carte-manual):
 
@@ -222,9 +222,9 @@ Dynamic components used with `<component :is="my-component">` can be registered 
 
 ### Functional components
 
-<vue-school-ad href="https://vueschool.io/courses/functional-components?friend=vuetify" title="Vue School - Functional Components Video Course">
+<vue-school-link href="https://vueschool.io/courses/functional-components?friend=vuetify" title="Watch a Functional Components Course at Vue School">
 Learn how to improve your Vue.js apps by using Functional Components from a video course by Vue School
-</vue-school-ad>
+</vue-school-link>
 
 Functional components are inlined at runtime by vue, and cannot have a **components** property in their options. Any Vuetify components used in a custom functional component must either be registered globally (recommended), or locally, wherever the custom component is used.
 
