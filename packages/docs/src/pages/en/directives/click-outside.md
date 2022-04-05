@@ -12,10 +12,6 @@ related:
 
 The `v-click-outside` directive calls a function when something outside of the target element is clicked on. This is used internally by components like `v-menu` and `v-dialog`.
 
-<vue-school-link href="https://vueschool.io/courses/custom-vuejs-directives?friend=vuetify" title="Watch a Custom Directives Course at Vue School">
-Learn how to create custom directives such as the v-click-outside directive with a video course from Vue School
-</vue-school-link>
-
 ## Usage
 
 The `v-click-outside` directive allows you to provide a handler to be invoked when the user clicks outside of the target element.

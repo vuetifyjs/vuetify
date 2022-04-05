@@ -131,10 +131,6 @@ Vuetify includes simple validation through the **rules** prop. The prop accepts 
 
 ### Slots
 
-<vue-school-link href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuetify" title="Watch a Free Slots Tutorial at Vue School">
-Not sure how slots work? Learn all about slots with this free video from Vue School.
-</vue-school-link>
-
 #### Icon slots
 
 Instead of using `prepend`/`append`/`append-outer` icons you can use slots to extend input's functionality.

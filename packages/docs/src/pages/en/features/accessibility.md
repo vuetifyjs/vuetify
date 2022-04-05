@@ -13,11 +13,6 @@ related:
 
 Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.
 
-
-<vue-school-link href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify" title="Watch an Accessibility Video Course at Vue School">
-Learn how to make the web accessible for everyone, despite their hardware, software, language, location, or ability
-</vue-school-link>
-
 <promoted-ad slug="vuetify-fundamentals-cheat-sheet" />
 
 ## Material Design Accessibility

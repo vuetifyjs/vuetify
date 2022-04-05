@@ -13,7 +13,7 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.
 
-<vue-school-link href="https://vueschool.io/?friend=vuetify">
+<vue-school-link href="https://vueschool.io/">
 Up your Vue.js game and support Vuetify by subscribing to Vue School
 </vue-school-link>
 
@@ -117,7 +117,7 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 ### Slots
 
-<vue-school-link href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuetify" title="Watch a Free Slots Tutorial at Vue School">
+<vue-school-link href="https://vueschool.io/lessons/vue-3-component-slots" title="Watch a Free Slots Tutorial at Vue School">
 Not sure how slots work? Learn all about slots with this free video from Vue School.
 </vue-school-link>
 

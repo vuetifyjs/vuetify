@@ -13,7 +13,7 @@ related:
 
 Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i18n).
 
-<vue-school-link href="https://vueschool.io/courses/internationalization-with-vue-i18n?friend=vuetify" title="Watch an i18n Video Course at Vue School">
+<vue-school-link href="https://vueschool.io/courses/internationalization-with-vue-i18n" title="Watch an i18n Video Course at Vue School">
 Master internationalization and learn how to create multilingual websites
 </vue-school-link>
 
