@@ -114,9 +114,9 @@ Menus can be placed within almost any component.
 
 ## Accessibility
 
-<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
-Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
-</vue-school-ad>
+<vue-school-link href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Watch an Accessibility Course at Vue School">
+Learn how to make the web accessible for everyone, despite their hardware, software, language, location, or ability
+</vue-school-link>
 
 By default, `v-menu` components are _detached_ and moved to the root of your application. In order to properly support [inserting dynamic content into the DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26), you _must_ use the **attach** prop. This will ensure that focus transfers from the activator to the content when pressing the <kbd>tab</kbd> key.
 

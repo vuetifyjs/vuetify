@@ -13,9 +13,9 @@ related:
 
 Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
-<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
-Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
-</vue-school-ad>
+<vue-school-link href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Watch an i18n Video Course at Vue School">
+Master internationalization and learn how to create multilingual websites
+</vue-school-link>
 
 ## Getting started
 

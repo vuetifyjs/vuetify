@@ -118,9 +118,9 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 ### Slots
 
-<vue-school-ad href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuetify" title="Vue School - Free Slots Video Tutorial" >
+<vue-school-link href="https://vueschool.io/lessons/vue-3-component-slots?friend=vuetify" title="Watch a Free Slots Tutorial at Vue School" >
 Not sure how slots work? Learn all about slots with this free video from Vue School.
-</vue-school-ad>
+</vue-school-link>
 
 #### Icon slots
 

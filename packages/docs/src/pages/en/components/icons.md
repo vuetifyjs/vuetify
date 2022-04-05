@@ -93,9 +93,9 @@ You can manually import only the icons you use when using the [@mdi/js](https://
 
 ## Accessibility
 
-<vue-school-ad href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Vue School - Accessibility Course">
-Learn more about web accessibility with the Web Accessibility Fundamentals course from Vue School
-</vue-school-ad>
+<vue-school-link href="https://vueschool.io/courses/web-accessibility-fundamentals?friend=vuetify"  title="Watch an Accessibility Course at Vue School">
+Learn how to make the web accessible for everyone, despite their hardware, software, language, location, or ability
+</vue-school-link>
 
 Icons can convey all sorts of meaningful information, so it’s important that they reach the largest amount of people possible. There are two use cases you’ll want to consider:
 

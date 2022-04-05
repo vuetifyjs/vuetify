@@ -6,7 +6,7 @@
     border
   >
     <v-list-item
-      class="rounded px-2 vue-school-ad"
+      class="rounded px-2 vue-school-link"
       style="min-height: inherit; width: 90%"
       :prepend-avatar="logo"
       :title="title || 'Vue School - Industry Leading Video Training'"
@@ -30,7 +30,7 @@
 </script>
 
 <style lang="sass">
-  .vue-school-ad .v-avatar 
+  .vue-school-link .v-avatar 
     border-radius: 0
   .v-vuetify
     .powered-by
