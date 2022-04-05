@@ -14,7 +14,7 @@ related:
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.
 
 <vue-school-link href="https://vueschool.io/?friend=vuetify">
-Up you Vue.js game and support Vuetify by subscribing to Vue School
+Up your Vue.js game and support Vuetify by subscribing to Vue School
 </vue-school-link>
 
 ## Usage
