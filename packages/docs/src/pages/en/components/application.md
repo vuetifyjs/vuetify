@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Application service
+  title: Application
   description: Vuetify comes equipped with a default markup that makes it easy to create layouts (boilerplate) for any Vue application.
   keywords: default layout, vuetify default markup, vuetify default layout
 related:
@@ -13,12 +13,11 @@ related:
 
 In Vuetify, the `v-app` component and the **app** prop on components like `v-navigation-drawer`, `v-app-bar`, `v-footer` and more, help bootstrap your application with the proper sizing around `<v-main>` component. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. The `v-app` component is **REQUIRED** for all applications. This is the mount point for many of Vuetify's components and functionality and ensures that it propagates the default application _variant_ (**dark/light**) to children components and also ensures proper cross-browser support for certain click events in browsers like Safari. `v-app` should only be rendered within your application **ONCE**.
 
-<entry-ad />
+<entry />
 
 ## API
 
-- [v-app](/api/v-app)
-- [v-main](/api/v-main)
+<api-inline />
 
 <alert type="error">
 
@@ -34,7 +33,7 @@ In Vuetify, the `v-app` component and the **app** prop on components like `v-nav
 
 ## Default application markup
 
-This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component in all of this is `v-main`. This will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
+This is an example of the default application markup for Vuetify. You can place your layout elements anywhere, as long as you apply the **app** property. The key component to making your page content work together with layout elements is `v-main`. The `v-main` component will be dynamically sized depending upon the structure of your designated **app** components. You can use combinations of any or all of the above components including `v-bottom-navigation`.
 
 When using [vue-router](https://router.vuejs.org/) it is recommended that you place your views inside `v-main`.
 

@@ -1,8 +1,9 @@
 ---
+nav: Color pickers
 meta:
   title: Color picker component
   description: The color picker component allows users to select a from pre-defined or custom colors using a variety of different inputs and formats.
-  keyword: color pickers, vuetify color picker component, vue color picker component
+  keywords: color pickers, vuetify color picker component, vue color picker component
 related:
   - /components/menu/
   - /styles/colors/
@@ -13,7 +14,7 @@ related:
 
 The `v-color-picker` allows you to select a color using a variety of input methods.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -21,15 +22,15 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 ## API
 
-- [v-color-picker](/api/v-color-picker)
+<api-inline />
 
 ## Examples
 
 ### Props
 
-#### Canvas
+#### Customizing the look of the picker
 
-The canvas can be hidden with the `hide-canvas` prop, and you can set its height with the prop `canvas-height`. The size of the selection dot can be controlled with the `dot-size` prop.
+There are a number of props available to help you customize the component by hiding or showing the various parts of the picker. You can independently hide the canvas, the sliders, and the inputs. You can also show a collection of swatches.
 
 <example file="v-color-picker/prop-canvas" />
 
@@ -39,15 +40,15 @@ Adjust the elevation of the `v-color-picker` component using the **elevation** o
 
 <example file="v-color-picker/prop-elevation" />
 
-#### Inputs
+#### Mode
 
-The number inputs can be hidden with the `hide-inputs` prop, and the sliders can be hidden with the `hide-sliders` prop. You can also hide the mode switch icon with the `hide-mode-switch` prop. The mode can also be controlled externally through the `mode` prop.
+You can specify which input modes are available to your users with the `modes` prop. If you only set a single mode, then the mode toggle will automatically be hidden. You can also control the current mode with the `mode` v-model.
 
-<example file="v-color-picker/prop-inputs" />
+<example file="v-color-picker/prop-mode" />
 
 #### Model
 
-The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values.
+The `v-color-picker` uses the `v-model` prop to control the color displayed. It supports hex strings such as **#FF00FF** and **#FF00FF00**, and objects representing **RGBA**, **HSLA** and **HSVA** values. The component will try to emit the color in the same format that was provided. If the value is null, then the `v-color-picker` will default to emitting hex colors.
 
 <example file="v-color-picker/prop-model" />
 

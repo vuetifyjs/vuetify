@@ -13,7 +13,7 @@ related:
 
 Out of the box you get access to all colors in the [Material Design specification](https://material.io/design/color/the-color-system.html) through **sass** and **javascript**. These values can be used within your style sheets, your component files and on actual components via the **color** prop.
 
-<entry-ad />
+<entry />
 
 ## Classes
 
@@ -93,6 +93,6 @@ This can also be done within your main **App.vue** file. Keep in mind, depending
 
 Below is a list of the Material design color palette grouped by primary color
 
-<color-palette />
+[//]: # (<page-component path="features/ColorPalette" />)
 
 <backmatter />

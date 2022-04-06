@@ -8,9 +8,9 @@
           cols="12"
           md="4"
         >
-          <v-item v-slot="{ selected, toggle }">
+          <v-item v-slot="{ isSelected, toggle }">
             <v-card
-              :color="selected ? 'primary' : ''"
+              :color="isSelected ? 'primary' : ''"
               class="d-flex align-center"
               dark
               height="200"
@@ -18,7 +18,7 @@
             >
               <v-scroll-y-transition>
                 <div
-                  v-if="selected"
+                  v-if="isSelected"
                   class="text-h2 flex-grow-1 text-center"
                 >
                   Selected

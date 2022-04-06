@@ -1,22 +1,16 @@
 <template>
-  <v-row
-    class="d-flex"
-    justify="center"
-  >
+  <div class="d-flex justify-center">
     <v-menu
       v-model="showMenu"
-      absolute
-      offset-y
       style="max-width: 600px"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-card
           class="portrait"
-          img="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
+          image="https://cdn.vuetifyjs.com/images/cards/girl.jpg"
           height="300"
           width="600"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         ></v-card>
       </template>
 
@@ -29,7 +23,7 @@
         </v-list-item>
       </v-list>
     </v-menu>
-  </v-row>
+  </div>
 </template>
 
 <script>

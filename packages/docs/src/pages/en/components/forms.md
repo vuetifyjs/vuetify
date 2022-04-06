@@ -1,4 +1,5 @@
 ---
+nav: Forms
 meta:
   title: Form component
   description: The form component provides a wrapper that makes it easy to process and control validation states of input components.
@@ -13,7 +14,7 @@ related:
 
 When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
 
-<promoted-ad slug="vuemastery-forms" />
+<promoted slug="vuemastery-forms" />
 
 ## Usage
 
@@ -23,7 +24,7 @@ The internal `v-form` component makes it easy to add validation to form inputs. 
 
 ## API
 
-- [v-form](/api/v-form)
+<api-inline />
 
 ## Examples
 
@@ -45,7 +46,7 @@ The `v-form` component has **three** functions that can be accessed by setting a
 
 #### Vee-validate
 
-**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://logaretm.github.io/vee-validate/)
+**vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://vee-validate.logaretm.com/v3)
 
 <example file="v-form/misc-vee-validate" />
 

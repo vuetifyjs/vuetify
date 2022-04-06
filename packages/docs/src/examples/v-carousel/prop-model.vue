@@ -1,33 +1,34 @@
 <template>
   <div>
-    <v-row justify="space-around">
-      <v-icon @click="model--">
-        mdi-minus
-      </v-icon>
+    <div class="d-flex justify-space-around align-center py-4">
+      <v-btn
+        variant="text"
+        icon="mdi-minus"
+        @click="model = Math.max(model - 1, 0)"
+      ></v-btn>
       {{ model }}
-      <v-icon @click="model++">
-        mdi-plus
-      </v-icon>
-    </v-row>
+      <v-btn
+        variant="text"
+        icon="mdi-plus"
+        @click="model = Math.min(model + 1, 4)"
+      ></v-btn>
+    </div>
     <v-carousel v-model="model">
       <v-carousel-item
         v-for="(color, i) in colors"
         :key="color"
+        :value="i"
       >
         <v-sheet
           :color="color"
           height="100%"
           tile
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
+          <div class="d-flex fill-height justify-center align-center">
             <div class="text-h2">
               Slide {{ i + 1 }}
             </div>
-          </v-row>
+          </div>
         </v-sheet>
       </v-carousel-item>
     </v-carousel>

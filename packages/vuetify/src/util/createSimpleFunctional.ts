@@ -1,5 +1,5 @@
 import { camelize, capitalize, h } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent } from './defineComponent'
 
 export function createSimpleFunctional (
   klass: string,

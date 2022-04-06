@@ -1,4 +1,6 @@
-@each $size, $media_query in $display-breakpoints
+@use '../settings'
+
+@each $size, $media_query in settings.$display-breakpoints
   .hidden
     &-#{$size}
       @media #{$media_query}

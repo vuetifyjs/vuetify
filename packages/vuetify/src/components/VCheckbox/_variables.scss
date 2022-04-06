@@ -1,4 +1,2 @@
-@import '../../styles/styles.sass';
-
-$checkbox-disabled-opacity: .6 !default;
-$checkbox-dense-margin-top: 4px !default;
+$checkbox-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
+$checkbox-error-color: rgb(var(--v-theme-error)) !default;

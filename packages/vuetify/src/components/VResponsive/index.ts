@@ -1,1 +1,1 @@
-export { default as VResponsive } from './VResponsive'
+export { VResponsive } from './VResponsive'

@@ -1,41 +1,44 @@
-@use "sass:string"
-
-@import './_display.sass'
-@import './_screenreaders.sass'
-@import './_text.sass'
+@use 'sass:string'
+@use 'sass:map'
+@use 'sass:meta'
+@use './display.sass'
+@use './screenreaders.sass'
+@use './text.sass'
+@use '../settings'
+@use '../tools'
 
 // Utilities
-@each $breakpoint in map-keys($grid-breakpoints)
+@each $breakpoint in map.keys(settings.$grid-breakpoints)
   // Generate media query if needed
-  +media-breakpoint-up($breakpoint)
-    $infix: breakpoint-infix($breakpoint, $grid-breakpoints)
+  +tools.media-breakpoint-up($breakpoint)
+    $infix: tools.breakpoint-infix($breakpoint, settings.$grid-breakpoints)
 
     // Loop over each utility property
-    @each $key, $utility in $utilities
+    @each $key, $utility in settings.$utilities
       // The utility can be disabled with `false`, thus check if the utility is a map first
       // Only proceed if responsive media queries are enabled or if it's the base media query
       @if string.slice($key, -4) == ':ltr'
-        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
-          +generate-utility($utility, $infix, 'ltr')
+        @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+          +tools.generate-utility($utility, $infix, 'ltr')
       @else if string.slice($key, -4) == ':rtl'
-        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
-          +generate-utility($utility, $infix, 'rtl')
+        @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+          +tools.generate-utility($utility, $infix, 'rtl')
       @else
-        @if type-of($utility) == "map" and (map-get($utility, responsive) or $infix == "")
-          +generate-utility($utility, $infix, 'bidi')
+        @if meta.type-of($utility) == "map" and (map.get($utility, responsive) or $infix == "")
+          +tools.generate-utility($utility, $infix, 'bidi')
 
 
 // Print utilities
 @media print
-  @each $key, $utility in $utilities
+  @each $key, $utility in settings.$utilities
     // The utility can be disabled with `false`, thus check if the utility is a map first
     // Then check if the utility needs print styles
     @if string.slice($key, -4) == ':ltr'
-      @if type-of($utility) == "map" and map-get($utility, print) == true
-        +generate-utility($utility, "-print", 'ltr')
+      @if meta.type-of($utility) == "map" and map.get($utility, print) == true
+        +tools.generate-utility($utility, "-print", 'ltr')
     @else if string.slice($key, -4) == ':rtl'
-      @if type-of($utility) == "map" and map-get($utility, print) == true
-        +generate-utility($utility, "-print", 'rtl')
+      @if meta.type-of($utility) == "map" and map.get($utility, print) == true
+        +tools.generate-utility($utility, "-print", 'rtl')
     @else
-      @if type-of($utility) == "map" and map-get($utility, print) == true
-        +generate-utility($utility, "-print", 'bidi')
+      @if meta.type-of($utility) == "map" and map.get($utility, print) == true
+        +tools.generate-utility($utility, "-print", 'bidi')

@@ -1,5 +1,8 @@
-import type { Ref, Slots, VNode } from 'vue'
-import { camelize, Fragment, isRef, ref } from 'vue'
+// Utilities
+import { camelize, Fragment } from 'vue'
+
+// Types
+import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -54,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Dictionary<any>, fallback?: any) => any)
+type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: object,
@@ -89,7 +92,7 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Dictionary<string> = {
+const tagsToReplace: Record<string, string> = {
   '&': '&amp;',
   '<': '&lt;',
   '>': '&gt;',
@@ -119,13 +122,19 @@ export function convertToUnit (str: string | number | null | undefined, unit = '
     return undefined
   } else if (isNaN(+str!)) {
     return String(str)
+  } else if (!isFinite(+str!)) {
+    return undefined
   } else {
     return `${Number(str)}${unit}`
   }
 }
 
 export function isObject (obj: any): obj is object {
-  return obj !== null && typeof obj === 'object'
+  return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
+}
+
+export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
+  return obj?.$el
 }
 
 // KeyboardEvent.keyCode aliases
@@ -173,19 +182,49 @@ export function keys<O> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
-export function extract (obj: Dictionary<unknown>, properties: string[]) {
-  const extracted: Dictionary<unknown> = {}
-  const rest: Dictionary<unknown> = {}
+type MaybePick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
-  Object.entries(obj).forEach(([key, value]) => {
-    if (properties.includes(key)) {
-      extracted[key] = value
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+export function pick<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  const found = Object.create(null)
+  const rest = Object.create(null)
+
+  for (const key in obj) {
+    if (
+      paths.some(path => path instanceof RegExp
+        ? path.test(key)
+        : path === key
+      )
+    ) {
+      found[key] = obj[key]
     } else {
-      rest[key] = value
+      rest[key] = obj[key]
     }
-  })
+  }
 
-  return [extracted, rest]
+  return [found, rest]
+}
+
+/**
+ * Filter attributes that should be applied to
+ * the root element of a an input component. Remaining
+ * attributes should be passed to the <input> element inside.
+ */
+export function filterInputAttrs (attrs: Record<string, unknown>) {
+  return pick(attrs, ['class', 'style', 'id', /^data-/])
 }
 
 /**
@@ -212,7 +251,7 @@ export function groupItems<T extends any = any> (
   const key = groupBy[0]
   const groups: ItemGroup<T>[] = []
   let current
-  for (var i = 0; i < items.length; i++) {
+  for (let i = 0; i < items.length; i++) {
     const item = items[i]
     const val = getObjectValueByPath(item, key, null)
     if (current !== val) {
@@ -269,6 +308,11 @@ export function sortItems<T extends any, K extends keyof T> (
         continue
       }
 
+      // Dates should be compared numerically
+      if (sortA instanceof Date && sortB instanceof Date) {
+        return sortA.getTime() - sortB.getTime()
+      }
+
       [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
 
       if (sortA !== sortB) {
@@ -315,6 +359,10 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
+type Writable<T> = {
+  -readonly [P in keyof T]: T[P]
+}
+
 /**
  * Filters slots to only those starting with `prefix`, removing the prefix
  */
@@ -345,13 +393,12 @@ export function chunk (str: string, size = 1) {
   return chunked
 }
 
-export function humanReadableFileSize (bytes: number, binary = false): string {
-  const base = binary ? 1024 : 1000
+export function humanReadableFileSize (bytes: number, base: 1000 | 1024 = 1000): string {
   if (bytes < base) {
     return `${bytes} B`
   }
 
-  const prefix = binary ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
+  const prefix = base === 1024 ? ['Ki', 'Mi', 'Gi'] : ['k', 'M', 'G']
   let unit = -1
   while (Math.abs(bytes) >= base && unit < prefix.length - 1) {
     bytes /= base
@@ -370,9 +417,16 @@ export function camelizeObjectKeys (obj: Record<string, any> | null | undefined)
 }
 
 export function mergeDeep (
-  source: Dictionary<any> = {},
-  target: Dictionary<any> = {}
+  source: Record<string, any> = {},
+  target: Record<string, any> = {},
+  arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
 ) {
+  const out: Record<string, any> = {}
+
+  for (const key in source) {
+    out[key] = source[key]
+  }
+
   for (const key in target) {
     const sourceProperty = source[key]
     const targetProperty = target[key]
@@ -383,15 +437,21 @@ export function mergeDeep (
       isObject(sourceProperty) &&
       isObject(targetProperty)
     ) {
-      source[key] = mergeDeep(sourceProperty, targetProperty)
+      out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
 
       continue
     }
 
-    source[key] = targetProperty
+    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+      out[key] = arrayFn(sourceProperty, targetProperty)
+
+      continue
+    }
+
+    out[key] = targetProperty
   }
 
-  return source
+  return out
 }
 
 export function fillArray<T> (length: number, obj: T) {
@@ -418,12 +478,83 @@ export const randomHexColor = () => {
   return '#' + n.slice(0, 6)
 }
 
-export const toKebabCase = (str: string) => str.replace(/([A-Z])/g, match => `-${match.toLowerCase()}`)
+export function toKebabCase (str = '') {
+  return str
+    .replace(/[^a-z]/gi, '-')
+    .replace(/\B([A-Z])/g, '-$1')
+    .toLowerCase()
+}
 
 export type MaybeRef<T> = T | Ref<T>
 
-export type ExtractMaybeRef<P> = P extends MaybeRef<infer T> ? T : P;
+export function findChildren (vnode?: VNodeChild): ComponentInternalInstance[] {
+  if (!vnode || typeof vnode !== 'object') {
+    return []
+  }
 
-export function wrapInRef <T> (x: T) {
-  return (isRef(x) ? x : ref(x)) as Ref<ExtractMaybeRef<T>>
+  if (Array.isArray(vnode)) {
+    return vnode
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (Array.isArray(vnode.children)) {
+    return vnode.children
+      .map(child => findChildren(child))
+      .filter(v => v)
+      .flat(1)
+  } else if (vnode.component) {
+    return [vnode.component, ...findChildren(vnode.component?.subTree)]
+      .filter(v => v)
+      .flat(1)
+  }
+
+  return []
+}
+
+export function findChildrenWithProvide (
+  key: InjectionKey<any> | symbol,
+  vnode?: VNodeChild,
+): ComponentInternalInstance[] {
+  if (!vnode || typeof vnode !== 'object') return []
+
+  if (Array.isArray(vnode)) {
+    return vnode.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (Array.isArray(vnode.children)) {
+    return vnode.children.map(child => findChildrenWithProvide(key, child)).flat(1)
+  } else if (vnode.component) {
+    if (Object.getOwnPropertySymbols(vnode.component.provides).includes(key as symbol)) {
+      return [vnode.component]
+    } else if (vnode.component.subTree) {
+      return findChildrenWithProvide(key, vnode.component.subTree).flat(1)
+    }
+  }
+
+  return []
+}
+
+export class CircularBuffer<T = never> {
+  readonly #arr: Array<T> = []
+  #pointer = 0
+
+  constructor (public readonly size: number) {}
+
+  push (val: T) {
+    this.#arr[this.#pointer] = val
+    this.#pointer = (this.#pointer + 1) % this.size
+  }
+
+  values (): T[] {
+    return this.#arr.slice(this.#pointer).concat(this.#arr.slice(0, this.#pointer))
+  }
+}
+
+export type UnionToIntersection<U> =
+  (U extends any ? (k: U) => void : never) extends ((k: infer I) => void) ? I : never
+
+export function getEventCoordinates (e: MouseEvent | TouchEvent) {
+  if ('touches' in e) {
+    return { clientX: e.touches[0].clientX, clientY: e.touches[0].clientY }
+  }
+
+  return { clientX: e.clientX, clientY: e.clientY }
 }

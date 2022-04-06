@@ -2,39 +2,35 @@
 import './VBreadcrumbs.sass'
 
 // Components
-import VBreadcrumbsItem from './VBreadcrumbsItem'
-import VBreadcrumbsDivider from './VBreadcrumbsDivider'
 import { VIcon } from '@/components/VIcon'
+import { VBreadcrumbsItem } from './VBreadcrumbsItem'
+import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useTextColor } from '@/composables/color'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import type { LinkProps } from '@/composables/router'
-
-interface BreadcrumbsContext {
-  color: Ref<string | undefined>
-  disabled: Ref<boolean>
-}
-
-export const VBreadcrumbsSymbol: InjectionKey<BreadcrumbsContext> = Symbol.for('vuetify:breadcrumbs')
 
 export type BreadcrumbItem = string | (LinkProps & {
   text: string
 })
 
-export default defineComponent({
+export const VBreadcrumbs = defineComponent({
   name: 'VBreadcrumbs',
 
   props: {
+    activeClass: String,
+    bgColor: String,
     color: String,
     disabled: Boolean,
     divider: {
@@ -53,51 +49,46 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { densityClasses } = useDensity(props, 'v-breadcrumbs')
-    const { roundedClasses } = useRounded(props, 'v-breadcrumbs')
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
-    const items = computed(() => {
-      return props.items.map((item, index, array) => ({
-        props: {
-          disabled: index >= array.length - 1,
-          ...(typeof item === 'string' ? { text: item } : item),
-        },
-      }))
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+
+    provideDefaults({
+      VBreadcrumbsItem: {
+        activeClass: toRef(props, 'activeClass'),
+        color: toRef(props, 'color'),
+        disabled: toRef(props, 'disabled'),
+      },
     })
 
-    provide(VBreadcrumbsSymbol, {
-      color: toRef(props, 'color'),
-      disabled: toRef(props, 'disabled'),
-    })
-
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-breadcrumbs',
+          backgroundColorClasses.value,
           densityClasses.value,
           roundedClasses.value,
-          textColorClasses.value,
         ]}
-        style={[
-          textColorStyles.value,
-        ]}
+        style={ backgroundColorStyles.value }
       >
         { props.icon && (
           <VIcon icon={ props.icon } left />
         ) }
 
-        { items.value.map((item, index) => (
+        { props.items.map((item, index, array) => (
           <>
             <VBreadcrumbsItem
               key={ index }
-              { ...item.props }
-            >
-              { slots.item?.({ ...item, index }) }
-            </VBreadcrumbsItem>
+              disabled={ index >= array.length - 1 }
+              { ...(typeof item === 'string' ? { text: item } : item) }
+              v-slots={{
+                default: slots.text ? () => slots.text?.({ item, index }) : undefined,
+              }}
+            />
 
-            { index < props.items.length - 1 && (
+            { index < array.length - 1 && (
               <VBreadcrumbsDivider>
-                { slots.divider ? slots.divider({ ...item, index }) : props.divider }
+                { slots.divider?.({ item, index }) ?? props.divider }
               </VBreadcrumbsDivider>
             ) }
           </>
@@ -105,6 +96,10 @@ export default defineComponent({
 
         { slots.default?.() }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VBreadcrumbs = InstanceType<typeof VBreadcrumbs>

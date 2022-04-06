@@ -1,0 +1,159 @@
+// Imports
+@forward './variables'
+@use 'sass:map'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+// Theme
+.v-slider-track__background
+  background-color: rgb(var(--v-theme-surface-variant))
+
+.v-slider-track__fill
+  background-color: rgb(var(--v-theme-surface-variant))
+
+.v-slider-track__tick
+  background-color: rgb(var(--v-theme-surface-variant))
+
+  &--filled
+    background-color: rgb(var(--v-theme-on-surface-variant))
+
+// Elements
+.v-slider-track
+  border-radius: $slider-track-border-radius
+
+.v-slider-track
+  &__background, &__fill
+    position: absolute
+    transition: $slider-transition
+    border-radius: inherit
+
+    .v-slider--pressed &
+      transition: none
+
+    .v-input--error:not(.v-input--disabled) &
+      background-color: currentColor
+
+.v-slider-track__ticks
+  height: 100%
+  width: 100%
+  position: relative
+
+.v-slider-track__tick
+  position: absolute
+  opacity: 0
+  transition: 0.2s opacity settings.$standard-easing
+  border-radius: $slider-tick-border-radius
+  width: var(--v-slider-tick-size)
+  height: var(--v-slider-tick-size)
+  transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / -2))
+
+  &:first-child .v-slider-track__tick-label
+    @include tools.ltr()
+      transform: none
+
+    @include tools.rtl()
+      transform: translateX(100%)
+
+  &:last-child .v-slider-track__tick-label
+    @include tools.ltr()
+      transform: translateX(-100%)
+
+    @include tools.rtl()
+      transform: none
+
+.v-slider-track__tick-label
+  position: absolute
+  user-select: none
+  white-space: nowrap
+
+// Horizontal
+.v-slider.v-input--horizontal
+  .v-slider-track
+    display: flex
+    align-items: center
+    width: 100%
+    height: calc(var(--v-slider-track-size) + 2px)
+    touch-action: pan-y
+
+    &__background
+      height: var(--v-slider-track-size)
+
+    &__fill
+      height: inherit
+
+  .v-slider-track__tick
+    margin-block-start: calc((var(--v-slider-track-size) / 2) + 1px)
+
+    @include tools.rtl()
+      transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / -2))
+
+    &:first-child
+      margin-inline-start: calc(var(--v-slider-tick-size) + 1px)
+
+      .v-slider-track__tick-label
+        @include tools.ltr()
+          transform: translateX(0%)
+
+        @include tools.rtl()
+          transform: translateX(0%)
+
+    &:last-child
+      margin-inline-start: calc(100% - var(--v-slider-tick-size) - 1px)
+
+      .v-slider-track__tick-label
+        @include tools.ltr()
+          transform: translateX(-100%)
+
+        @include tools.rtl()
+          transform: translateX(100%)
+
+    .v-slider-track__tick-label
+      bottom: calc((var(--v-slider-track-size) / -2) - #{$slider-tick-label-margin-bottom})
+
+      @include tools.ltr()
+        transform: translateX(-50%)
+
+      @include tools.rtl()
+        transform: translateX(50%)
+
+// Vertical
+.v-slider.v-input--vertical
+  .v-slider-track
+    height: 100%
+    display: flex
+    justify-content: center
+    width: calc(var(--v-slider-track-size, $slider-track-width) + 2px)
+    touch-action: pan-x
+
+    &__background
+      width: var(--v-slider-track-size)
+
+    &__fill
+      width: inherit
+
+  .v-slider-track__ticks
+    height: 100%
+
+  .v-slider-track__tick
+    margin-inline-start: calc((var(--v-slider-track-size) / 2) + 1px)
+    transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / 2))
+
+    @include tools.rtl()
+      transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
+
+    &:last-child
+      inset-block-end: calc(0% + var(--v-slider-tick-size) + 1px)
+
+    .v-slider-track__tick-label
+      margin-inline-start: calc(var(--v-slider-track-size) + 20px)
+      transform: translateY(-50%)
+
+// Modifiers
+.v-slider-track__ticks--always-show, .v-slider--focused
+  .v-slider-track__tick
+    opacity: 1
+
+.v-slider-track__background--opacity
+  opacity: 0.38

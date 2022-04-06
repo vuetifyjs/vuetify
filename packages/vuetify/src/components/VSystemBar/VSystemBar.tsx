@@ -2,58 +2,69 @@
 import './VSystemBar.sass'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makePositionProps, usePosition } from '@/composables/position'
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { computed, ref, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VSystemBar = defineComponent({
   name: 'VSystemBar',
 
   props: {
-    lightsOut: Boolean,
+    color: String,
+    height: [Number, String],
     window: Boolean,
 
-    ...makeBorderProps(),
-    ...makeDimensionProps(),
     ...makeElevationProps(),
-    ...makePositionProps(),
+    ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-system-bar')
-    const { dimensionStyles } = useDimension(props)
+    const { themeClasses } = provideTheme(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-system-bar')
-    const { roundedClasses } = useRounded(props, 'v-system-bar')
+    const { roundedClasses } = useRounded(props)
+    const height = computed(() => props.height ?? props.window ? 32 : 24)
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: ref('top'),
+      layoutSize: height,
+      elementSize: height,
+      active: computed(() => true),
+      absolute: toRef(props, 'absolute'),
+    })
+
+    provideDefaults({
+      VBtn: {
+        variant: 'text',
+        density: 'compact',
+      },
+    }, { scoped: true })
 
     return () => (
       <props.tag
         class={[
-          {
-            'v-system-bar': true,
-            'v-system-bar--lights-out': props.lightsOut,
-            'v-system-bar--window': props.window,
-          },
+          'v-system-bar',
+          { 'v-system-bar--window': props.window },
           themeClasses.value,
-          borderClasses.value,
+          backgroundColorClasses.value,
           elevationClasses.value,
-          positionClasses.value,
           roundedClasses.value,
         ]}
         style={[
-          dimensionStyles.value,
-          positionStyles.value,
+          backgroundColorStyles.value,
+          layoutItemStyles.value,
         ]}
         v-slots={ slots }
       />

@@ -14,7 +14,7 @@ related:
 
 The `v-treeview` component is useful for displaying large amounts of nested data.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -24,7 +24,7 @@ A basic example
 
 ## API
 
-- [v-treeview](/api/v-treeview)
+<api-inline />
 
 ## Examples
 

@@ -13,7 +13,7 @@ related:
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +23,7 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 
 ## API
 
-- [v-virtual-scroll](/api/v-virtual-scroll)
+<api-inline />
 
 ## Caveats
 

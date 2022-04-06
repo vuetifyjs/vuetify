@@ -4,14 +4,14 @@ import './VItemGroup.sass'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export default defineComponent({
+export const VItemGroup = defineComponent({
   name: 'VItemGroup',
 
   props: {
@@ -27,7 +27,7 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const { isSelected, select, next, prev, selected } = useGroup(props, VItemGroupSymbol)
 
     return () => (
@@ -48,3 +48,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VItemGroup = InstanceType<typeof VItemGroup>

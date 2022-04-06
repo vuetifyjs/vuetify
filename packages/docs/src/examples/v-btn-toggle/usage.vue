@@ -156,7 +156,7 @@
         <v-btn value="left">
           <span class="hidden-sm-and-down">Left</span>
 
-          <v-icon right>
+          <v-icon end>
             mdi-format-align-left
           </v-icon>
         </v-btn>
@@ -164,7 +164,7 @@
         <v-btn value="center">
           <span class="hidden-sm-and-down">Center</span>
 
-          <v-icon right>
+          <v-icon end>
             mdi-format-align-center
           </v-icon>
         </v-btn>
@@ -172,7 +172,7 @@
         <v-btn value="right">
           <span class="hidden-sm-and-down">Right</span>
 
-          <v-icon right>
+          <v-icon end>
             mdi-format-align-right
           </v-icon>
         </v-btn>
@@ -180,7 +180,7 @@
         <v-btn value="justify">
           <span class="hidden-sm-and-down">Justify</span>
 
-          <v-icon right>
+          <v-icon end>
             mdi-format-align-justify
           </v-icon>
         </v-btn>

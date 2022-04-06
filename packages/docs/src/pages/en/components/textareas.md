@@ -1,4 +1,5 @@
 ---
+nav: Textareas
 meta:
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.
@@ -13,7 +14,7 @@ related:
 
 Textarea components are used for collecting large amounts of textual data.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +24,7 @@ Textarea components are used for collecting large amounts of textual data.
 
 ## API
 
-- [v-textarea](/api/v-textarea)
+<api-inline />
 
 ## Examples
 

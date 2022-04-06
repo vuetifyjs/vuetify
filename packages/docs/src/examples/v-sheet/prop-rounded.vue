@@ -3,7 +3,7 @@
     <v-row justify="space-around">
       <v-col
         v-for="rounded in [false, true, 'xl']"
-        :key="rounded"
+        :key="String(rounded)"
         cols="12"
         md="4"
       >

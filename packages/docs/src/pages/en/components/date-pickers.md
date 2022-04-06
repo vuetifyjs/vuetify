@@ -13,7 +13,7 @@ related:
 
 `v-date-picker` is a fully featured date selection component that lets users select a date, or range of dates.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +23,7 @@ Date pickers come in two orientation variations, portrait **(default)** and land
 
 ## API
 
-- [v-date-picker](/api/v-date-picker)
+<api-inline />
 
 ## Caveats
 

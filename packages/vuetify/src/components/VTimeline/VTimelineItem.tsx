@@ -1,9 +1,6 @@
-// Types
-import type { ComponentPublicInstance } from 'vue'
-
 // Components
-import { VTimelineSymbol } from './VTimeline'
-import VTimelineDivider from './VTimelineDivider'
+import { VTimelineSymbol } from './shared'
+import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
@@ -16,7 +13,7 @@ import { inject, ref, watch } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
-export default defineComponent({
+export const VTimelineItem = defineComponent({
   name: 'VTimelineItem',
 
   props: {
@@ -45,7 +42,7 @@ export default defineComponent({
     const { dimensionStyles } = useDimension(props)
 
     const dotSize = ref(0)
-    const dotRef = ref<ComponentPublicInstance>()
+    const dotRef = ref<VTimelineDivider>()
     watch(dotRef, newValue => {
       if (!newValue) return
       dotSize.value = newValue.$el.querySelector('.v-timeline-divider__dot')?.getBoundingClientRect().width ?? 0
@@ -62,7 +59,6 @@ export default defineComponent({
           },
         ]}
         style={{
-          // @ts-expect-error: broken vue types
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
         }}
       >

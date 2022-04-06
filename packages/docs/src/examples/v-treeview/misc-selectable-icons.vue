@@ -57,7 +57,7 @@
               class="ma-1"
             >
               <v-icon
-                left
+                start
                 small
               >
                 mdi-beer
@@ -87,7 +87,7 @@
         depressed
       >
         Save
-        <v-icon right>
+        <v-icon end>
           mdi-content-save
         </v-icon>
       </v-btn>

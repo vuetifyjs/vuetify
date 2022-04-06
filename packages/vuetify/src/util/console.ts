@@ -104,6 +104,7 @@ function generateComponentTrace (vm: any): string {
         i === 0 ? '---> ' : ' '.repeat(5 + i * 2)
       }${
         Array.isArray(vm)
+          // eslint-disable-next-line sonarjs/no-nested-template-literals
           ? `${formatComponentName(vm[0])}... (${vm[1]} recursive calls)`
           : formatComponentName(vm)
       }`)

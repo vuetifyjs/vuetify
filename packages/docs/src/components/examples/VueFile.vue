@@ -2,19 +2,16 @@
   <component
     :is="component"
     v-if="component"
-    v-bind="{
-      ...$attrs,
-      ...$props,
-    }"
-    v-on="$listeners"
   />
 </template>
 
 <script>
+  // Utilities
+  import { getExample } from 'virtual:examples'
+  import { shallowRef } from 'vue'
+
   export default {
     name: 'VueFile',
-
-    inheritAttrs: false,
 
     props: {
       file: {
@@ -23,7 +20,7 @@
       },
     },
 
-    data: () => ({ component: undefined }),
+    data: () => ({ component: shallowRef() }),
 
     created () {
       this.load()
@@ -31,23 +28,12 @@
 
     methods: {
       async load () {
-        let component = {}
-
         try {
-          component = await import(
-            /* webpackChunkName: "examples" */
-            /* webpackMode: "lazy-once" */
-            `../../examples/${this.file}.vue`
-          )
-
-          this.$emit('loaded', component.default)
-        } catch (err) {
-          component = await import('./ExampleMissing')
-
-          this.$emit('error', err)
+          const { component } = await getExample(this.file)
+          this.component = component
+        } catch (e) {
+          console.error(e)
         }
-
-        this.component = component.default
       },
     },
   }

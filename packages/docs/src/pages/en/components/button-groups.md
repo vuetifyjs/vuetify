@@ -1,7 +1,8 @@
 ---
+nav: Button toggles
 meta:
-  title: Button group component
-  description: The button group component allows you to combine a series of selectable buttons together in a single-line.
+  title: Button toggle component
+  description: The button toggle component allows you to combine a series of selectable buttons together in a single element.
   keywords: button groups, vuetify button group component, vue button group component
 related:
   - /components/buttons/
@@ -9,11 +10,11 @@ related:
   - /components/selection-controls/
 ---
 
-# Button groups
+# Button toggles
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,12 +24,23 @@ Toggle buttons allow you to create a styled group of buttons that can be selecte
 
 ## API
 
-- [v-btn-toggle](/api/v-btn-toggle)
-- [v-btn](/api/v-btn)
+<api-inline />
 
 ## Examples
 
 ### Props
+
+#### Divided
+
+You can add a visual divider between buttons with the **divided** prop.
+
+<example file="v-btn-toggle/prop-divided" />
+
+#### Variant
+
+You can switch the button variant by using **variant** prop on `v-btn-toggle`.
+
+<example file="v-btn-toggle/prop-variant" />
 
 #### Mandatory
 
@@ -44,17 +56,17 @@ A `v-btn-toggle` with the **multiple** prop will allow a user to select multiple
 
 #### Rounded
 
-You can make `v-btn-toggle` rounded using the **rounded** prop.
+You can control the border radius with the **rounded** prop.
 
 <example file="v-btn-toggle/prop-rounded" />
 
 ### Misc
 
-#### Toolbar
+<!-- #### Toolbar
 
 Easily integrate customized button solutions with a `v-toolbar`
 
-<example file="v-btn-toggle/misc-toolbar" />
+<example file="v-btn-toggle/misc-toolbar" /> -->
 
 #### WYSIWYG
 

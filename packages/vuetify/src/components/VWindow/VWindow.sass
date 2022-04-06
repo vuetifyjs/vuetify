@@ -1,4 +1,6 @@
-@import './_variables.scss'
+// Imports
+@forward './variables'
+@use './variables' as *
 
 .v-window
   overflow: hidden
@@ -10,59 +12,33 @@
     position: relative
     transition: $window-transition
 
-    &--is-active
-      overflow: hidden
-
-  &__prev,
-  &__next
-    background: rgba(0, 0, 0, .3)
-    border-radius: 50%
+  &__controls
     position: absolute
-    margin: $window-controls-margin
-    top: $window-controls-top
-    z-index: 1
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    display: flex
+    align-items: center
+    justify-content: space-between
+    padding: $window-controls-padding
+    pointer-events: none
 
-    .v-btn:hover
-      background: none
-
-  &__prev
-    +ltr()
-      left: 0
-
-    +rtl()
-      right: 0
-
-  &__next
-    +ltr()
-      right: 0
-
-    +rtl()
-      left: 0
+    *
+      pointer-events: auto
 
   &--show-arrows-on-hover
     overflow: hidden
 
-    .v-window__next,
-    .v-window__prev
-      transition: .2s transform map-get($transition, 'swing')
+    .v-window__left
+      transform: translateX(-200%)
 
-    .v-window__prev
-      +ltr()
-        transform: translateX(-200%)
-
-      +rtl()
-        transform: translateX(200%)
-
-    .v-window__next
-      +ltr()
-        transform: translateX(200%)
-
-      +rtl()
-        transform: translateX(-200%)
+    .v-window__right
+      transform: translateX(200%)
 
     &:hover
-      .v-window__next,
-      .v-window__prev
+      .v-window__left,
+      .v-window__right
         transform: translateX(0)
 
   &-x-transition,
@@ -73,35 +49,35 @@
     &-leave-active
       transition: $window-transition
 
-    &-leave,
+    &-leave-from,
     &-leave-to
       position: absolute !important
       top: 0
       width: 100%
 
   &-x-transition
-    &-enter
+    &-enter-from
       transform: translateX(100%)
 
     &-leave-to
       transform: translateX(-100%)
 
   &-x-reverse-transition
-    &-enter
+    &-enter-from
       transform: translateX(-100%)
 
     &-leave-to
       transform: translateX(100%)
 
   &-y-transition
-    &-enter
+    &-enter-from
       transform: translateY(100%)
 
     &-leave-to
       transform: translateY(-100%)
 
   &-y-reverse-transition
-    &-enter
+    &-enter-from
       transform: translateY(-100%)
 
     &-leave-to

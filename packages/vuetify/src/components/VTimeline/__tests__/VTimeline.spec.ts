@@ -1,6 +1,6 @@
 // Components
-import VTimeline from '../VTimeline'
-import VTimelineItem from '../VTimelineItem'
+import { VTimeline } from '../VTimeline'
+import { VTimelineItem } from '../VTimelineItem'
 
 // Helpers
 import { h } from 'vue'

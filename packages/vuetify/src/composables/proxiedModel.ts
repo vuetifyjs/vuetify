@@ -1,13 +1,13 @@
 // Utilities
-import { computed, getCurrentInstance, ref } from 'vue'
-import { consoleError, toKebabCase } from '@/util'
+import { computed, ref } from 'vue'
+import { getCurrentInstance, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
 
 // Composables
 export function useProxiedModel<
-  Props extends object,
+  Props extends object & { [key in Prop as `onUpdate:${Prop}`]: ((val: any) => void) | undefined },
   Prop extends Extract<keyof Props, string>,
   Inner = Props[Prop],
 > (
@@ -17,9 +17,7 @@ export function useProxiedModel<
   transformIn: (value?: Props[Prop]) => Inner = (v: any) => v,
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
-  const vm = getCurrentInstance()
-
-  if (!vm) consoleError('useProxiedModel must be called from inside a setup function')
+  const vm = getCurrentInstance('useProxiedModel')
 
   const propIsDefined = computed(() => {
     return !!(
@@ -36,6 +34,9 @@ export function useProxiedModel<
       else return internal.value
     },
     set (newValue) {
+      if ((propIsDefined.value ? transformIn(props[prop]) : internal.value) === newValue) {
+        return
+      }
       internal.value = newValue
       vm?.emit(`update:${prop}`, transformOut(newValue))
     },

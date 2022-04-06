@@ -1,4 +1,5 @@
 ---
+nav: Ripple
 meta:
   title: Ripple directive
   description: The ripple directive adds touch and click feedback to any element in the form of a water ripple.
@@ -13,7 +14,7 @@ related:
 
 The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +24,7 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## API
 
-- [v-ripple](/api/v-ripple)
+<api-inline />
 
 ## Examples
 

@@ -1,6 +1,4 @@
-@import '../../styles/styles.sass';
-
-$carousel-controls-bg: rgba(0, 0, 0, .3) !default;
+$carousel-controls-bg: rgba(var(--v-theme-surface-variant), .3) !default;
 $carousel-controls-size: 50px !default;
 $carousel-dot-margin: 0 8px !default;
 $carousel-dot-inactive-opacity: .5 !default;

@@ -1,4 +1,1 @@
-import VTooltip from './VTooltip'
-
-export { VTooltip }
-export default VTooltip
+export { VTooltip } from './VTooltip'

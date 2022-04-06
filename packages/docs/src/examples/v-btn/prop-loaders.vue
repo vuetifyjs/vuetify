@@ -19,7 +19,7 @@
     >
       Upload
       <v-icon
-        right
+        end
         dark
       >
         mdi-cloud-upload

@@ -60,11 +60,11 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </li>
 </ul>
 
-### What's the difference between Patreon and OpenCollective
+### What's the difference between GitHub Sponsors, Patreon, and OpenCollective
 
-Funds donated via Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
+Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h3 align="center"><b>Diamond Sponsors</b></h3>
+<h3 align="center"><b>Special Sponsors</b></h3>
 
 <table>
   <tbody>
@@ -101,6 +101,11 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
       <td>
         <a href="http://crossword-solver.io/">
           <img height="50px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
+        </a>
+      </td>
+      <td>
+        <a href="https://kintell.com/?utm_source=Vuetify&utm_medium=VuetifyReferral&utm_campaign=Vuetify-logo-click">
+          <img height="50px" src="https://imgix.cosmicjs.com/e13a39e0-ff78-11eb-a3f4-b70be1f3fd88-image.png">
         </a>
       </td>
     </tr>
@@ -141,7 +146,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
     <tr></tr>
     <tr>
       <td>
-        <a href="https://www.cosmicjs.com/?ref=vuetify-github">
+        <a href="https://papersowl.com/write-my-essay-please">
           <img height="30px" src="https://cdn.cosmicjs.com/ae13a830-974a-11eb-bf6a-1ffd0f06b0f7-papersowl-logo-light.png">
         </a>
       </td>
@@ -152,7 +157,7 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
       </td>
       <td>
         <a href="https://www.dealerdesk.de/?ref=vuetify-github">
-          <img height="26px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/dealerdesk-light-sm.png">
+          <img height="42px" src="https://imgix.cosmicjs.com/15326970-c482-11eb-9242-8105a76f57b3-dealerdesklogocmyk20210520-1515-3.png">
         </a>
       </td>
       <td>
@@ -161,21 +166,16 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="https://www.ionos.com/partner?utm_source=Vue&utm_medium=paid-social&utm_campaign=ION-USA-VUE-ABP-AWR-AgencyBusiness&utm_term=&utm_content=ION-USA-VUE-ABP-AWR-AgencyBusiness&ac=OM.US.USo54K418913T7073a"">
-          <img height="35px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/ionos-light-sm.png">
+        <a href="https://www.topratedcasinosites.co.uk/">
+          <img height="30px" src="https://cdn.cosmicjs.com/d5a76910-9748-11eb-bf6a-1ffd0f06b0f7-toprated-light.png">
         </a>
       </td>
     </tr>
     <tr></tr>
     <tr>
       <td>
-        <a href="https://www.topratedcasinosites.co.uk/">
-          <img height="30px" src="https://cdn.cosmicjs.com/d5a76910-9748-11eb-bf6a-1ffd0f06b0f7-toprated-light.png">
-        </a>
-      </td>
-      <td>
         <a href="https://aussiecasinohex.com/">
-          <img height="38px" src="https://cdn.cosmicjs.com/5e118ca0-9748-11eb-bf6a-1ffd0f06b0f7-hex-light.png">
+          <img height="30px" src="https://imgix.cosmicjs.com/5e118ca0-9748-11eb-bf6a-1ffd0f06b0f7-hex-light.png">
         </a>
       </td>
       <td>
@@ -184,50 +184,26 @@ Funds donated via Patreon go directly to support John and Heather's full-time wo
         </a>
       </td>
       <td>
-        <a href="https://www.leoboost.com/">
-          <img height="26px" src="https://cdn.cosmicjs.com/bfb5d890-9747-11eb-bf6a-1ffd0f06b0f7-leo-light.png">
-        </a>
-      </td>
-      <td>
         <a href="https://goread.io/buy-instagram-followers">
           <img height="26px" src="https://cdn.cosmicjs.com/3ab46070-9711-11eb-b593-972a7dbc1054-goread-light.png">
         </a>
       </td>
-    </tr>
-  </tbody>
-</table>
-
-<br>
-
-<h3 align="center"><b>Sponsors via <a href="https://opencollective.com/vuetify">Open Collective</a></b></h3>
-
-<div align="center">
-  <a href="https://opencollective.com/vuetify">
-    <img src="https://opencollective.com/static/images/become_sponsor.svg" alt="Donate to OpenCollective">
-  </a>
-  <br>
-</div>
-
-<!-- start bronze oc sponsors -->
-<table>
-  <tbody>
-    <tr>
       <td>
-        <a href="http://crossword-solver.io/?ref=vuetify-github">
-          <img height="44px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/crossword-solver-logo-light.svg">
+        <a href="https://onlinecasinohex.ca/">
+          <im
+      <td>
+        <a href="https://www.casinoonlineaams.com/">
+          <img height="30px" src="https://imgix.cosmicjs.com/9d6390c0-c483-11eb-9242-8105a76f57b3-casinoonlineaams-light-md-1.png">
         </a>
       </td>
       <td>
-        <a href="https://volleyballlife.com/">
-          <img src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/volleyballlife-logo-light.png" height="40">
+        <a href="https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071">
+          <img height="55px" src="https://imgix.cosmicjs.com/5a155730-c547-11eb-9242-8105a76f57b3-tm-logo-light-md.png">
         </a>
       </td>
     </tr>
   </tbody>
 </table>
-<!-- end bronze oc sponsors -->
-
-</div>
 
 <br>
 
@@ -250,7 +226,9 @@ Vuetify is a Vue UI Library with beautifully handcrafted Components using the [M
 Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [polyfills](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)). Components are designed for a minimum width of _320px_.
 
 ### Vuetify Ecosystem
+
 #### Plugins
+
 <table>
   <thead>
     <tr>
@@ -392,6 +370,7 @@ Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [p
 </table>
 
 #### Presets
+
 <table>
   <thead>
     <tr>

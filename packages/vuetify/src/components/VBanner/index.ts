@@ -1,5 +1,3 @@
-export { default as VBanner } from './VBanner'
-export { default as VBannerActions } from './VBannerActions'
-export { default as VBannerAvatar } from './VBannerAvatar'
-export { default as VBannerContent } from './VBannerContent'
-export { default as VBannerText } from './VBannerText'
+export { VBanner } from './VBanner'
+export { VBannerActions } from './VBannerActions'
+export { VBannerText } from './VBannerText'

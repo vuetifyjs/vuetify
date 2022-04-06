@@ -2,32 +2,25 @@
 import './VTimeline.sass'
 
 // Components
-import VTimelineItem from './VTimelineItem'
+import { VTimelineItem } from './VTimelineItem'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Helpers
 import { computed, provide, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
+import { VTimelineSymbol } from './shared'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
-import type { Density } from '@/composables/density'
+import type { Prop } from 'vue'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
 export type TimelineSide = 'before' | 'after' | undefined
 
-interface TimelineInstance {
-  density: Ref<Density>
-  lineColor: Ref<string>
-}
-
-export const VTimelineSymbol: InjectionKey<TimelineInstance> = Symbol.for('vuetify:timeline')
-
-export default defineComponent({
+export const VTimeline = defineComponent({
   name: 'VTimeline',
 
   props: {
@@ -61,8 +54,8 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { densityClasses } = useDensity(props, 'v-timeline')
+    const { themeClasses } = provideTheme(props)
+    const { densityClasses } = useDensity(props)
 
     provide(VTimelineSymbol, {
       density: toRef(props, 'density'),
@@ -90,7 +83,7 @@ export default defineComponent({
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset || undefined),
+          '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
       >
         { (props.truncateLine === 'none' || props.truncateLine === 'end') && (

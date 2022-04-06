@@ -1,1 +1,1 @@
-export { default as VProgressCircular } from './VProgressCircular'
+export { VProgressCircular } from './VProgressCircular'

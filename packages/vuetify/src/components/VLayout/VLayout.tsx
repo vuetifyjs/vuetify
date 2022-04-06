@@ -7,16 +7,16 @@ import { defineComponent, useRender } from '@/util'
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
-export default defineComponent({
+export const VLayout = defineComponent({
   name: 'VLayout',
 
   props: makeLayoutProps(),
 
   setup (props, { slots }) {
-    const { layoutClasses, getLayoutItem, items } = createLayout(props)
+    const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)
 
     useRender(() => (
-      <div class={ layoutClasses.value }>
+      <div ref={ layoutRef } class={ layoutClasses.value } style={ layoutStyles.value }>
         { slots.default?.() }
       </div>
     ))
@@ -27,3 +27,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VLayout = InstanceType<typeof VLayout>

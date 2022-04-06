@@ -598,6 +598,9 @@ export default mixins(
 
       return this.$createElement(VSimpleTable, {
         props: simpleProps,
+        class: {
+          'v-data-table--mobile': this.isMobile,
+        },
       }, [
         this.proxySlot('top', getSlot(this, 'top', {
           ...props,

@@ -8,11 +8,12 @@ import { VClassIcon } from '@/composables/icons'
 import type { IconAliases, IconSet } from '@/composables/icons'
 
 const aliases: IconAliases = {
+  collapse: 'mdi-chevron-up',
   complete: 'mdi-check',
   cancel: 'mdi-close-circle',
   close: 'mdi-close',
   delete: 'mdi-close-circle', // delete (e.g. v-chip close)
-  clear: 'mdi-close',
+  clear: 'mdi-close-circle',
   success: 'mdi-check-circle',
   info: 'mdi-information',
   warning: 'mdi-alert-circle',

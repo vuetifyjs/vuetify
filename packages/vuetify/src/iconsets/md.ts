@@ -8,11 +8,12 @@ import { VLigatureIcon } from '@/composables/icons'
 import type { IconAliases, IconSet } from '@/composables/icons'
 
 const aliases: IconAliases = {
+  collapse: 'keyboard_arrow_up',
   complete: 'check',
   cancel: 'cancel',
   close: 'close',
   delete: 'cancel', // delete (e.g. v-chip close)
-  clear: 'clear',
+  clear: 'cancel',
   success: 'check_circle',
   info: 'info',
   warning: 'priority_high',

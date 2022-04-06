@@ -17,9 +17,9 @@
     <v-card-text>
       <v-autocomplete
         v-model="model"
+        v-model:search-input="search"
         :items="items"
         :loading="isLoading"
-        :search-input.sync="search"
         color="white"
         hide-no-data
         hide-selected

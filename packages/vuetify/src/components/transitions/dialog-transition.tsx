@@ -1,8 +1,8 @@
 import type { PropType } from 'vue'
 import { Transition } from 'vue'
-import { acceleratedEasing, deceleratedEasing, defineComponent } from '@/util'
+import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms } from '@/util'
 
-export default defineComponent({
+export const VDialogTransition = defineComponent({
   name: 'VDialogTransition',
 
   props: {
@@ -11,7 +11,12 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const functions = {
-      onEnter (el: Element, done: () => void) {
+      onBeforeEnter (el: Element) {
+        (el as HTMLElement).style.pointerEvents = 'none'
+      },
+      async onEnter (el: Element, done: () => void) {
+        await new Promise(resolve => requestAnimationFrame(resolve))
+
         const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([
@@ -23,7 +28,15 @@ export default defineComponent({
         })
         animation.finished.then(() => done())
       },
-      onLeave (el: Element, done: () => void) {
+      onAfterEnter (el: Element) {
+        (el as HTMLElement).style.removeProperty('pointer-events')
+      },
+      onBeforeLeave (el: Element) {
+        (el as HTMLElement).style.pointerEvents = 'none'
+      },
+      async onLeave (el: Element, done: () => void) {
+        await new Promise(resolve => requestAnimationFrame(resolve))
+
         const { x, y } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = el.animate([
@@ -35,30 +48,49 @@ export default defineComponent({
         })
         animation.finished.then(() => done())
       },
+      onAfterLeave (el: Element) {
+        (el as HTMLElement).style.removeProperty('pointer-events')
+      },
     }
 
     return () => {
       return props.target
-        ? <Transition name="dialog-transition" { ...functions } css={ false } v-slots={ slots } />
+        ? (
+          <Transition
+            name="dialog-transition"
+            { ...functions }
+            css={ false }
+            v-slots={ slots }
+          />
+        )
         : <Transition name="dialog-transition" v-slots={ slots } />
     }
   },
 })
 
 function getDimensions (target: HTMLElement, el: HTMLElement) {
-  const initialDisplay = el.style.display
-  const initialTransform = el.style.transform
-
-  el.style.transition = 'none'
-  el.style.display = ''
-  el.style.transform = 'none'
-
   const targetBox = target.getBoundingClientRect()
-  const elBox = el.getBoundingClientRect()
-  const x = (targetBox.width / 2 + targetBox.left) - (elBox.width / 2 + elBox.left)
-  const y = (targetBox.height / 2 + targetBox.top) - (elBox.height / 2 + elBox.top)
-  el.style.display = initialDisplay
-  el.style.transform = initialTransform
+  const elBox = nullifyTransforms(el)
+  const [originX, originY] = getComputedStyle(el).transformOrigin.split(' ').map(v => parseFloat(v))
 
-  return { x, y }
+  const [anchorSide, anchorOffset] = getComputedStyle(el).getPropertyValue('--v-overlay-anchor-origin').split(' ')
+
+  let offsetX = targetBox.left + targetBox.width / 2
+  if (anchorSide === 'left' || anchorOffset === 'left') {
+    offsetX -= targetBox.width / 2
+  } else if (anchorSide === 'right' || anchorOffset === 'right') {
+    offsetX += targetBox.width / 2
+  }
+
+  let offsetY = targetBox.top + targetBox.height / 2
+  if (anchorSide === 'top' || anchorOffset === 'top') {
+    offsetY -= targetBox.height / 2
+  } else if (anchorSide === 'bottom' || anchorOffset === 'bottom') {
+    offsetY += targetBox.height / 2
+  }
+
+  return {
+    x: offsetX - (originX + elBox.left),
+    y: offsetY - (originY + elBox.top),
+  }
 }

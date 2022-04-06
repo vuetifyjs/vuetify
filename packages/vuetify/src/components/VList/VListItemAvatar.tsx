@@ -1,33 +1,27 @@
-// Composables
-import { makeTagProps } from '@/composables/tag'
+// Components
+import { makeVAvatarProps, VAvatar } from '@/components/VAvatar/VAvatar'
 
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VListItemAvatar = defineComponent({
   name: 'VListItemAvatar',
 
-  props: {
-    left: Boolean,
-    right: Boolean,
-
-    ...makeTagProps(),
-  },
+  props: makeVAvatarProps(),
 
   setup (props, { slots }) {
-    return () => {
-      return (
-        <props.tag
-          class={[
-            'v-list-item-avatar',
-            {
-              'v-list-item-avatar--start': props.left,
-              'v-list-item-avatar--end': props.right,
-            },
-          ]}
-          v-slots={ slots }
-        />
-      )
-    }
+    return () => (
+      <VAvatar
+        class={[
+          'v-list-item-avatar',
+          {
+            'v-list-item-avatar--start': props.start,
+            'v-list-item-avatar--end': props.end,
+          },
+        ]}
+        { ...props }
+        v-slots={ slots }
+      />
+    )
   },
 })

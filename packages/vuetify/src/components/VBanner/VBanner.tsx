@@ -3,10 +3,9 @@ import './VBanner.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
-import VBannerActions from './VBannerActions'
-import VBannerAvatar from './VBannerAvatar'
-import VBannerContent from './VBannerContent'
-import VBannerText from './VBannerText'
+import { VBannerActions } from './VBannerActions'
+import { VBannerText } from './VBannerText'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -16,25 +15,23 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useDisplay } from '@/composables/display'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
-export default defineComponent({
+// Types
+import type { PropType } from 'vue'
+
+export const VBanner = defineComponent({
   name: 'VBanner',
 
   props: {
     avatar: String,
     color: String,
     icon: String,
-    lines: {
-      type: String,
-      default: 'one',
-    },
+    lines: String as PropType<'one' | 'two' | 'three'>,
     sticky: Boolean,
     text: String,
 
@@ -49,19 +46,18 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-banner')
-    const { densityClasses } = useDensity(props, 'v-banner')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { mobile } = useDisplay()
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props, 'v-banner')
-    const { roundedClasses } = useRounded(props, 'v-banner')
-    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
+    const { positionClasses, positionStyles } = usePosition(props)
+    const { roundedClasses } = useRounded(props)
 
-    return () => {
+    useRender(() => {
       const hasAvatar = !!(props.avatar || props.icon || slots.avatar || slots.icon)
-      const hasText = !!(props.text || slots.text)
+      const hasText = !!(props.text || slots.default)
       const hasContent = hasAvatar || hasText || slots.default
 
       return (
@@ -78,48 +74,58 @@ export default defineComponent({
             elevationClasses.value,
             positionClasses.value,
             roundedClasses.value,
-            textColorClasses.value,
             themeClasses.value,
           ]}
           style={[
             dimensionStyles.value,
             positionStyles.value,
-            textColorStyles.value,
           ]}
           role="banner"
         >
           { hasContent && (
-            <VBannerContent>
+            <div class="v-banner__content">
               { hasAvatar && (
-                <VBannerAvatar>
-                  { slots.avatar
-                    ? slots.avatar()
-                    : (
-                      <VAvatar
-                        density={ props.density }
-                        icon={ props.icon }
-                        image={ props.avatar }
-                      />
-                    )
-                  }
-                </VBannerAvatar>
+                <VDefaultsProvider
+                  defaults={{
+                    VAvatar: {
+                      color: props.color,
+                      density: props.density,
+                      icon: props.icon,
+                      image: props.avatar,
+                    },
+                  }}
+                >
+                  <div class="v-banner__avatar">
+                    { slots.avatar ? slots.avatar() : slots.icon ? slots.icon() : (<VAvatar />) }
+                  </div>
+                </VDefaultsProvider>
               ) }
 
               { hasText && (
                 <VBannerText>
-                  { slots.text ? slots.text() : props.text }
+                  { slots.default ? slots.default() : props.text }
                 </VBannerText>
               ) }
-
-              { slots.default?.() }
-            </VBannerContent>
+            </div>
           ) }
 
           { slots.actions && (
-            <VBannerActions v-slots={{ default: slots.actions }} />
+            <VDefaultsProvider
+              defaults={{
+                VBtn: {
+                  color: props.color,
+                  density: props.density,
+                  variant: 'text',
+                },
+              }}
+            >
+              <VBannerActions v-slots={{ default: slots.actions }} />
+            </VDefaultsProvider>
           ) }
         </props.tag>
       )
-    }
+    })
   },
 })
+
+export type VBanner = InstanceType<typeof VBanner>

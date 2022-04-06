@@ -1,10 +1,10 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-banner
   $root: &
 
-  background: $banner-background
   display: flex
   flex-wrap: wrap
   font-size: $banner-font-size
@@ -14,11 +14,11 @@
   position: relative
   width: $banner-width
 
-  @include border($banner-border...)
-  @include elevation($banner-elevation)
-  @include position($banner-positions)
-  @include rounded($banner-border-radius)
-  @include theme($banner-theme...)
+  @include tools.border($banner-border...)
+  @include tools.elevation($banner-elevation)
+  @include tools.position($banner-positions)
+  @include tools.rounded($banner-border-radius)
+  @include tools.theme($banner-theme...)
 
   &--border
     border-width: $banner-border-thin-width
@@ -29,12 +29,11 @@
     padding-inline-start: $banner-mobile-padding-start
 
   &--rounded
-    @include rounded($banner-rounded-border-radius)
+    @include tools.rounded($banner-rounded-border-radius)
 
   @at-root
-    @include density('v-banner', $banner-density) using ($modifier)
-      &.v-banner--one-line
-        padding-top: $banner-padding-top + $modifier
+    @include tools.density('v-banner', $banner-density) using ($modifier)
+      padding-top: $banner-padding-top + $modifier
 
       &.v-banner--two-line
         padding-top: $banner-two-line-padding-top + $modifier
@@ -54,7 +53,7 @@
   .v-banner--mobile &
     flex: 1 0
 
-.v-banner-content
+.v-banner__content
   display: flex
   flex: 1 1
   min-width: 0
@@ -70,23 +69,12 @@
   .v-banner--three-line &
     margin-bottom: $banner-three-line-content-margin-bottom
 
-.v-banner-avatar
+.v-banner__avatar
   align-self: flex-start
   border-radius: $banner-avatar-border-radius
   margin-inline-end: $banner-avatar-margin-end
   margin-inline-start: $banner-avatar-margin-start
   position: relative
-
-  &::after
-    background: currentColor
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: $banner-avatar-after-opacity
-    position: absolute
-    right: 0
-    top: 0
 
   .v-banner--mobile &
     margin-inline-end: $banner-mobile-avatar-margin-end
@@ -96,16 +84,17 @@
 
 .v-banner-text
   -webkit-box-orient: vertical
-  align-self: flex-start
-  color: $banner-text-color
+  align-self: center
   display: -webkit-box
   line-height: $banner-text-line-height
   overflow: hidden
 
   .v-banner--one-line &
-    align-self: center
+    -webkit-line-clamp: 1
 
-  .v-banner--two-line &
+  .v-banner--two-line &,
+  .v-banner--three-line &
+    align-self: flex-start
     -webkit-line-clamp: 2
 
   .v-banner--three-line &

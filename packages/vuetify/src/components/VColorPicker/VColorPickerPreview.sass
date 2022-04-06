@@ -1,23 +1,33 @@
-@import './_variables.scss'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
-.v-color-picker
-  .v-input__slider
-    border-radius: $color-picker-slider-border-radius
+.v-color-picker-preview__alpha
+  .v-slider-track__background
+    background-color: transparent !important
 
-    .v-slider
-      margin: 0
+    +tools.ltr()
+      background-image: linear-gradient(to right, transparent, var(--v-color-picker-color-hsv))
+    +tools.rtl()
+      background-image: linear-gradient(to left, transparent, var(--v-color-picker-color-hsv))
 
-.v-color-picker__alpha:not(.v-input--is-disabled)
-  .v-slider
-    border-radius: $color-picker-slider-border-radius
-    background: $color-picker-checkerboard
+    &::after
+      content: ''
+      z-index: -1
+      left: 0
+      top: 0
+      width: 100%
+      height: 100%
+      position: absolute
+      background: $color-picker-checkerboard
+      border-radius: inherit
 
-.v-color-picker__sliders
+.v-color-picker-preview__sliders
   display: flex
   flex: 1 0 auto
   flex-direction: column
 
-.v-color-picker__dot
+.v-color-picker-preview__dot
   position: relative
   height: $color-picker-preview-dot-size
   width: $color-picker-preview-dot-size
@@ -25,42 +35,35 @@
   border-radius: 50%
   overflow: hidden
 
-  +ltr()
+  +tools.ltr()
     margin-right: $color-picker-preview-dot-margin
 
-  +rtl()
+  +tools.rtl()
     margin-left: $color-picker-preview-dot-margin
 
   > div
     width: 100%
     height: 100%
 
-.v-color-picker__hue
+.v-color-picker-preview__hue
   &:not(.v-input--is-disabled)
-    +ltr()
-      background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+    .v-slider-track__background
+      +tools.ltr()
+        background: linear-gradient(to right, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
-    +rtl()
-      background: linear-gradient(to left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
+      +tools.rtl()
+        background: linear-gradient(to left, #F00 0%, #FF0 16.66%, #0F0 33.33%, #0FF 50%, #00F 66.66%, #F0F 83.33%, #F00 100%)
 
-.v-color-picker__track
+.v-color-picker-preview__track
   position: relative
   width: 100%
 
-.v-color-picker__preview
+  margin: 0 !important
+
+  .v-slider-track__fill
+    display: none
+
+.v-color-picker-preview
   align-items: center
   display: flex
-
-  .v-slider
-    min-height: $color-picker-slider-height
-
-    &:not(.v-slider--disabled)
-      .v-slider__thumb
-        +elevation(3)
-
-      .v-slider__track-container
-        opacity: 0
-
-  &:not(.v-color-picker__preview--hide-alpha)
-    .v-color-picker__hue
-      margin-bottom: $color-picker-hue-margin-bottom
+  margin-bottom: $color-picker-preview-margin-bottom

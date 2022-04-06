@@ -1,4 +1,5 @@
 ---
+nav: Intersection observer
 meta:
   title: Intersection observer directive
   description: The intersection observer directive utilizes the Intersection observer API. It allows you to determine when elements are visible on the screen.
@@ -12,7 +13,7 @@ related:
 
 The `v-intersect` directive utilizes the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). It provides an easy-to-use interface for detecting when elements are visible within the user's viewport. This is also used for the [v-lazy](/components/lazy) component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -22,7 +23,7 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 ## API
 
-- [v-intersect](/api/v-intersect)
+<api-inline />
 
 ## Caveats
 

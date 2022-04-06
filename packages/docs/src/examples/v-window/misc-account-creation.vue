@@ -6,8 +6,7 @@
     <v-card-title class="text-h6 font-weight-regular justify-space-between">
       <span>{{ currentTitle }}</span>
       <v-avatar
-        color="primary lighten-2"
-        class="subheading white--text"
+        color="primary"
         size="24"
         v-text="step"
       ></v-avatar>
@@ -18,7 +17,7 @@
         <v-card-text>
           <v-text-field
             label="Email"
-            value="john@vuetifyjs.com"
+            placeholder="john@vuetifyjs.com"
           ></v-text-field>
           <span class="text-caption grey--text text--darken-1">
             This is the email you will use to login to your Vuetify account
@@ -62,7 +61,7 @@
 
     <v-card-actions>
       <v-btn
-        :disabled="step === 1"
+        v-if="step > 1"
         text
         @click="step--"
       >
@@ -70,7 +69,7 @@
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="step === 3"
+        v-if="step < 3"
         color="primary"
         depressed
         @click="step++"

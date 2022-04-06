@@ -8,8 +8,8 @@
       <v-menu
         ref="menu"
         v-model="menu"
+        v-model:return-value="date"
         :close-on-content-click="false"
-        :return-value.sync="date"
         transition="scale-transition"
         offset-y
         min-width="auto"
@@ -56,7 +56,7 @@
       <v-dialog
         ref="dialog"
         v-model="modal"
-        :return-value.sync="date"
+        v-model:return-value="date"
         persistent
         width="290px"
       >
@@ -128,7 +128,7 @@
 <script>
   export default {
     data: () => ({
-      date: new Date().toISOString().substr(0, 10),
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       menu: false,
       modal: false,
       menu2: false,

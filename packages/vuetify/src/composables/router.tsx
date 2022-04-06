@@ -1,8 +1,7 @@
 // Utilities
-import { propsFactory } from '@/util'
+import { getCurrentInstance, propsFactory } from '@/util'
 import {
   computed,
-  getCurrentInstance,
   onBeforeUnmount,
   onMounted,
   resolveDynamicComponent,
@@ -18,21 +17,22 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
-  RouterLinkOptions,
 } from 'vue-router'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
-  const vm = getCurrentInstance()
+  const vm = getCurrentInstance('useRoute')
 
   return computed(() => vm?.proxy?.$route)
 }
 
 export function useRouter (): Router | undefined {
-  return getCurrentInstance()?.proxy?.$router
+  return getCurrentInstance('useRouter')?.proxy?.$router
 }
 
-export interface LinkProps extends Partial<RouterLinkOptions> {
+export interface LinkProps {
   href?: string
+  replace?: boolean
+  to?: RouteLocationRaw
 }
 
 interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
@@ -57,7 +57,7 @@ export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLin
     }
   }
 
-  const link = props.to ? RouterLink.useLink(props as RouterLinkOptions) : undefined
+  const link = props.to ? RouterLink.useLink(props as Required<LinkProps>) : undefined
 
   return {
     ...link,
@@ -90,7 +90,7 @@ export function useBackButton (cb: (next: NavigationGuardNext) => void) {
   })
 
   function onPopstate (e: PopStateEvent) {
-    if (e.state.replaced) return
+    if (e.state?.replaced) return
 
     popped = true
     setTimeout(() => (popped = false))

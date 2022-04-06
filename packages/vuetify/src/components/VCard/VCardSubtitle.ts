@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-card-subtitle')
+export const VCardSubtitle = createSimpleFunctional('v-card-subtitle')

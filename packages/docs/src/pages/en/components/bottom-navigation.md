@@ -13,7 +13,7 @@ related:
 
 The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +23,7 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 
 ## API
 
-- [v-bottom-navigation](/api/v-bottom-navigation)
+<api-inline />
 
 ## Examples
 

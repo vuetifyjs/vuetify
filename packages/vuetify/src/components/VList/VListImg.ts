@@ -1,3 +1,3 @@
 import { createSimpleFunctional } from '@/util'
 
-export default createSimpleFunctional('v-list-img')
+export const VListImg = createSimpleFunctional('v-list-img')

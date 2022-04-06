@@ -3,6 +3,8 @@ import './VChip.sass'
 
 // Components
 import { VAvatar } from '@/components/VAvatar'
+import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
+import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -10,11 +12,12 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
@@ -23,7 +26,7 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VChip = defineComponent({
   name: 'VChip',
 
   directives: { Ripple },
@@ -41,7 +44,6 @@ export default defineComponent({
       type: String,
       default: '$vuetify.close',
     },
-    disabled: Boolean,
     draggable: Boolean,
     filter: Boolean,
     filterIcon: {
@@ -57,6 +59,7 @@ export default defineComponent({
       type: Boolean,
       default: true,
     },
+    text: String,
     modelValue: {
       type: Boolean,
       default: true,
@@ -65,29 +68,32 @@ export default defineComponent({
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
+    ...makeGroupItemProps(),
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'contained-text' } as const),
   },
 
   emits: {
-    'click:close': (e: Event) => e,
-    'update:active': (value: Boolean) => value,
+    'click:close': (e: Event) => true,
+    'update:active': (value: Boolean) => true,
+    'update:modelValue': (value: Boolean) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
 
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-chip')
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props, 'v-chip')
+    const { themeClasses } = provideTheme(props)
+    const { borderClasses } = useBorder(props)
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-chip')
-    const { sizeClasses } = useSize(props, 'v-chip')
-    const { densityClasses } = useDensity(props, 'v-chip')
+    const group = useGroupItem(props, VChipGroupSymbol, false)
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses } = useSize(props)
+    const { densityClasses } = useDensity(props)
     const link = useLink(props, attrs)
 
     function onCloseClick (e: Event) {
@@ -100,8 +106,11 @@ export default defineComponent({
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
+      const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
+      const hasColor = !group || group.isSelected.value
+      const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
+      const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
@@ -115,21 +124,38 @@ export default defineComponent({
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            group?.selectedClass.value,
           ]}
-          style={ [colorStyles.value] }
+          style={[
+            hasColor ? colorStyles.value : undefined,
+          ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={ [isClickable && props.ripple, null] }
-          onClick={ isClickable && link.navigate }
+          onClick={ isClickable && onClickFunc }
         >
           { genOverlays(isClickable, 'v-chip') }
+
+          { hasFilter && (
+            <VExpandXTransition>
+              <div
+                class="v-chip__filter"
+                v-show={ group.isSelected.value }
+              >
+                { slots.filter
+                  ? slots.filter()
+                  : <VIcon icon={ props.filterIcon } />
+                }
+              </div>
+            </VExpandXTransition>
+          ) }
 
           { hasPrepend && (
             <div class="v-chip__prepend">
@@ -146,7 +172,14 @@ export default defineComponent({
             </div>
           ) }
 
-          { slots.default?.() }
+          { slots.default?.({
+            isSelected: group?.isSelected.value,
+            selectedClass: group?.selectedClass.value,
+            select: group?.select,
+            toggle: group?.toggle,
+            value: group?.value.value,
+            disabled: props.disabled,
+          }) ?? props.text }
 
           { hasAppend && (
             <div class="v-chip__append">
@@ -184,3 +217,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VChip = InstanceType<typeof VChip>

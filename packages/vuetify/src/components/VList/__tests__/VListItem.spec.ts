@@ -35,22 +35,4 @@ describe('VListItem', () => {
 
     expect(wrapper.classes()).toContain(activeClass)
   })
-
-  it('should conditionally have the tabindex attribute', async () => {
-    const wrapper = mountFunction()
-
-    expect(wrapper.attributes('tabindex')).toBeUndefined()
-
-    wrapper.setProps({ link: true })
-
-    await nextTick()
-
-    expect(wrapper.attributes('tabindex')).toBe('0')
-
-    wrapper.setProps({ disabled: true })
-
-    await nextTick()
-
-    expect(wrapper.attributes('tabindex')).toBeUndefined()
-  })
 })

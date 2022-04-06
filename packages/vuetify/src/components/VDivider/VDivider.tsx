@@ -2,20 +2,22 @@
 import './VDivider.sass'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export default defineComponent({
+export const VDivider = defineComponent({
   name: 'VDivider',
 
   props: {
+    color: String,
     inset: Boolean,
     length: [Number, String],
     thickness: [Number, String],
@@ -24,7 +26,8 @@ export default defineComponent({
   },
 
   setup (props, { attrs }) {
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
@@ -49,8 +52,12 @@ export default defineComponent({
               'v-divider--vertical': props.vertical,
             },
             themeClasses.value,
+            backgroundColorClasses.value,
           ]}
-          style={ dividerStyles.value }
+          style={[
+            dividerStyles.value,
+            backgroundColorStyles.value,
+          ]}
           aria-orientation={
             !attrs.role || attrs.role === 'separator'
               ? props.vertical ? 'vertical' : 'horizontal'

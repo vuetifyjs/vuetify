@@ -13,7 +13,7 @@ related:
 
 The `v-list-item-group` provides the ability to create a group of selectable `v-list-item`s. The `v-list-item-group` component utilizes [v-item-group](/components/item-groups) at its core to provide a clean interface for interactive lists.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,15 +23,7 @@ By default, the `v-list-item-group` operates similarly to `v-item-group`. If a *
 
 ## API
 
-- [v-list-group](/api/v-list-group)
-- [v-list-item](/api/v-list-item)
-- [v-list-item-action](/api/v-list-item-action)
-- [v-list-item-action-text](/api/v-list-item-action-text)
-- [v-list-item-avatar](/api/v-list-item-avatar)
-- [v-list-item-content](/api/v-list-item-content)
-- [v-list-item-group](/api/v-list-item-group)
-- [v-list-item-subtitle](/api/v-list-item-subtitle)
-- [v-list-item-title](/api/v-list-item-title)
+<api-inline />
 
 ## Examples
 

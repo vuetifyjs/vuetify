@@ -1,4 +1,5 @@
 ---
+nav: Parallax
 meta:
   title: Parallax component
   description: The parallax component creates a 3d effect that makes an image appear to scroll slower than the window.
@@ -13,7 +14,7 @@ related:
 
 The `v-parallax` component creates a 3d effect that makes an image appear to scroll slower than the window.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +24,7 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 ## API
 
-- [v-parallax](/api/v-parallax)
+<api-inline />
 
 ## Examples
 

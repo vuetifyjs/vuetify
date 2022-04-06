@@ -26,7 +26,8 @@ function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
 
   target.addEventListener('scroll', handler, options)
 
-  el._onScroll = {
+  el._onScroll = Object(el._onScroll)
+  el._onScroll![binding.instance!.$.uid] = {
     handler,
     options,
     // Don't reference self
@@ -34,19 +35,19 @@ function mounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
   }
 }
 
-function unmounted (el: HTMLElement) {
-  if (!el._onScroll) return
+function unmounted (el: HTMLElement, binding: ScrollDirectiveBinding) {
+  if (!el._onScroll?.[binding.instance!.$.uid]) return
 
-  const { handler, options, target = el } = el._onScroll
+  const { handler, options, target = el } = el._onScroll[binding.instance!.$.uid]!
 
   target.removeEventListener('scroll', handler, options)
-  delete el._onScroll
+  delete el._onScroll[binding.instance!.$.uid]
 }
 
 function updated (el: HTMLElement, binding: ScrollDirectiveBinding) {
   if (binding.value === binding.oldValue) return
 
-  unmounted(el)
+  unmounted(el, binding)
   mounted(el, binding)
 }
 

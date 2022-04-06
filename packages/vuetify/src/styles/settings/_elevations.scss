@@ -1,4 +1,4 @@
-@import '../tools/_functions.sass';
+@use '../tools/functions' as *;
 
 $shadow-key-umbra-opacity: rgba(0, 0, 0, 0.2) !default;
 $shadow-key-penumbra-opacity: rgba(0, 0, 0, 0.14) !default;

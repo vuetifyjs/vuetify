@@ -1,4 +1,5 @@
 ---
+nav: Touch
 meta:
   title: Touch directive
   description: The touch directive provides an interface for responding to various user touch actions.
@@ -11,7 +12,7 @@ related:
 
 The `v-touch` directive allows you to capture swipe gestures and apply directional callbacks.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -21,6 +22,6 @@ On a mobile device, try swiping in various directions.
 
 ## API
 
-- [v-touch](/api/v-touch)
+<api-inline />
 
 <backmatter />

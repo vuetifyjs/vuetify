@@ -305,17 +305,17 @@ export default CalendarBase.extend({
       const timeSummary = () => formatTime(event.start, overlapsNoon) + ' - ' + formatTime(event.end, true)
       const eventSummary = () => {
         const name = this.eventNameFunction(event, timedEvent)
-
         if (event.start.hasTime) {
+          const eventSummaryClass = 'v-event-summary'
           if (timedEvent) {
             const time = timeSummary()
             const delimiter = singline ? ', ' : '<br>'
 
-            return `<strong>${name}</strong>${delimiter}${time}`
+            return `<span class="${eventSummaryClass}"><strong>${name}</strong>${delimiter}${time}</span>`
           } else {
             const time = formatTime(event.start, true)
 
-            return `<strong>${time}</strong> ${name}`
+            return `<span class="${eventSummaryClass}"><strong>${time}</strong> ${name}</span>`
           }
         }
 

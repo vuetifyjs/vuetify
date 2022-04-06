@@ -4,12 +4,11 @@
       transition="scale-transition"
       origin="center center"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           dark
           color="primary"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Scale Transition
         </v-btn>

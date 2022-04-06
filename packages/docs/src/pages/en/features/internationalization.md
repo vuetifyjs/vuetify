@@ -13,26 +13,20 @@ related:
 
 Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
-<entry-ad />
-
-<!--
-## API
-
-- [internationalization](/api/internationalization)
--->
+<entry />
 
 ## Getting started
 
-To set the available locale messages or the default locale, supply the `locale` option when installing Vuetify. You can change the locale during runtime through the global `$vuetify` property, or by using the `useLocale` composable.
+To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify. You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on **$vuetify.locale**.
 
 ```js
 // src/main.js
 
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify/lib'
+import { createVuetify } from 'vuetify'
 
 // Translations provided by Vuetify
-import { pl, zhHans } from 'vuetify/lib/locale'
+  import { pl, zhHans } from 'vuetify/locale'
 
 // Your own translation file
 import sv from './i18n/vuetify/sv'
@@ -51,6 +45,10 @@ app.use(vuetify)
 
 app.mount('#app')
 ```
+
+## API
+
+<api-inline />
 
 ## Scoped languages
 
@@ -83,7 +81,7 @@ export default {
 
 ```js
 // src/main.js
-import { createVuetify } from 'vuetify/lib'
+import { createVuetify } from 'vuetify'
 import customLocale from './locales/customLocale'
 
 const vuetify = createVuetify({
@@ -99,16 +97,28 @@ const vuetify = createVuetify({
 
 ## Custom Vuetify components
 
-If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function which is part of the `$vuetify.locale` API.
+If you are building custom Vuetify components that need to hook into the locale service, you can use the `t` function from the **useLocale** composable, or the `$vuetify.locale` property when using Options API.
 
 ```html
-<!-- Vue Component -->
+<!-- Custom Vuetify Component -->
 
 <template>
   <div class="my-component">
     {{ $vuetify.locale.t('$vuetify.my-component.text') }}
   </div>
 </template>
+```
+
+```html
+<script>
+  import { useLocale } from 'vuetify'
+
+  export default {
+    setup () {
+      const { t } = useLocale()
+    }
+  }
+</script>
 ```
 
 <alert type="warning">
@@ -125,8 +135,8 @@ If you are using the vue-i18n library, you can very easily integrate it with Vue
 // src/main.js
 
 import { createApp } from 'vue'
-import { createVuetify } from 'vuetify/lib'
-import { createVueI18nAdapter } from 'vuetify/lib/locale/adapters'
+import { createVuetify } from 'vuetify'
+import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'
 import { createI18n, useI18n } from 'vue-i18n'
 
 const messages = {

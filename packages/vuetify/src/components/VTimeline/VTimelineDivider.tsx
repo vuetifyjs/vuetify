@@ -1,6 +1,6 @@
 // Components
-import { VIcon } from '@/components'
-import { VTimelineSymbol } from './VTimeline'
+import { VIcon } from '@/components/VIcon'
+import { VTimelineSymbol } from './shared'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
@@ -9,9 +9,10 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
-import { defineComponent, inject, toRef } from 'vue'
+import { inject, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
 
   props: {
@@ -55,7 +56,8 @@ export default defineComponent({
               sizeClasses.value,
               elevationClasses.value,
             ]}
-            style={ sizeStyles.value as any } // TODO: Fix this!
+            // @ts-expect-error: null
+            style={ sizeStyles.value }
           >
             <div
               class={[
@@ -84,3 +86,5 @@ export default defineComponent({
     )
   },
 })
+
+export type VTimelineDivider = InstanceType<typeof VTimelineDivider>

@@ -1,1 +1,1 @@
-export { default as VPagination } from './VPagination'
+export { VPagination } from './VPagination'

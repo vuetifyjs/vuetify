@@ -1,9 +1,10 @@
-// Imports
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 .v-card
-  color: $card-color
-  overflow: hidden
+  display: block
   position: relative
   padding: $card-padding
   text-decoration: none
@@ -11,11 +12,11 @@
   transition-property: $card-transition-property
   transition-timing-function: $card-transition-timing-function
 
-  @include border($card-border...)
-  @include position($card-positions)
-  @include rounded($card-border-radius)
-  @include states('.v-card__overlay')
-  @include variant($card-variants...)
+  @include tools.border($card-border...)
+  @include tools.position($card-positions)
+  @include tools.rounded($card-border-radius)
+  @include tools.states('.v-card__overlay')
+  @include tools.variant($card-variants...)
 
   &--disabled
     pointer-events: none
@@ -47,13 +48,13 @@
       opacity: 1
       z-index: -1
 
-      @include elevation($card-elevation)
+      @include tools.elevation($card-elevation)
 
     &::after
       z-index: 1
       opacity: 0
 
-      @include elevation($card-hover-elevation)
+      @include tools.elevation($card-hover-elevation)
 
     &:hover::after
       opacity: 1
@@ -61,18 +62,18 @@
     &:hover::before
       opacity: 0
 
-    @include elevation(0)
+    @include tools.elevation(0)
 
   &--link
     cursor: pointer
 
   &--tile
-    @include rounded($card-tile-border-radius)
+    @include tools.rounded($card-tile-border-radius)
 
 .v-card-actions
   align-items: center
   display: flex
-  flex: 1 1 auto
+  flex: $card-actions-flex
   min-height: $card-actions-min-height
   padding: $card-actions-padding
 
@@ -89,12 +90,14 @@
       padding-inline-start: $card-avatar-header-padding
 
 .v-card-header-text
-  flex: 1 1 auto
+  flex: $card-header-text-flex
+  min-width: 0
 
 .v-card-img
   border-radius: inherit
   display: flex
   height: 100%
+  flex: $card-img-flex
   left: 0
   overflow: hidden
   position: absolute
@@ -104,14 +107,16 @@
 .v-card-header
   align-items: $card-item-align-items
   display: flex
+  flex: $card-header-flex
   padding: $card-item-padding
 
-.v-card-media
-  overflow: hidden
+  + .v-card-text
+    padding-top: 0
 
 .v-card-subtitle
   align-items: center
   display: flex
+  flex: $card-subtitle-flex
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
@@ -125,20 +130,28 @@
     padding: $card-subtitle-header-padding
 
 .v-card-text
+  color: $card-text-color
+  flex: $card-text-flex
   font-size: $card-text-font-size
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
-  opacity: $card-text-opacity
   padding: $card-text-padding
+  // position: relative
   text-transform: $card-text-text-transform
   transition: inherit
   transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
 
+.v-card-content
+  flex: $card-content-flex
+  padding: $card-text-padding
+  // position: relative
+
 .v-card-title
   align-items: center
   display: flex
+  flex: $card-title-flex
   font-size: $card-title-font-size
   font-weight: $card-title-font-weight
   hyphens: $card-title-hyphens
@@ -166,10 +179,6 @@
   opacity: 0
   transition: opacity 0.2s ease-in-out
 
-// VDialog
-.v-card
-  .v-dialog .v-overlay__content > &
-    border-radius: inherit
-    overflow: hidden
-
-    @include elevation($card-dialog-elevation)
+  + .v-card-media
+    border-top-left-radius: inherit
+    border-top-right-radius: inherit

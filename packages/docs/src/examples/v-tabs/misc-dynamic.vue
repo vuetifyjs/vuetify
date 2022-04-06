@@ -2,12 +2,12 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="red lighten-2"
-      dark
+      background-color="red-lighten-2"
     >
       <v-tab
         v-for="n in length"
         :key="n"
+        :value="n"
       >
         Item {{ n }}
       </v-tab>

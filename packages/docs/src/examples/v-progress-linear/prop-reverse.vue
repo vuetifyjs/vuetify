@@ -1,8 +1,8 @@
 <template>
   <div>
     <v-progress-linear
+      model-value="15"
       color="pink"
-      value="15"
       reverse
     ></v-progress-linear>
 
@@ -17,20 +17,20 @@
     <br>
 
     <v-progress-linear
+      model-value="30"
       buffer-value="55"
       color="success"
       reverse
-      stream
-      value="30"
+      streams
     ></v-progress-linear>
 
     <br>
 
-    <v-subheader>In specific cases you may want progress to display in left-to-right mode regardless of the application direction (LTR or RTL):</v-subheader>
+    <p>In specific cases you may want progress to display in left-to-right mode regardless of the application direction (LTR or RTL):</p>
 
     <v-progress-linear
-      :reverse="$vuetify.rtl"
-      value="15"
+      model-value="15"
+      :reverse="!!$vuetify?.rtl?.isRtl"
     ></v-progress-linear>
   </div>
 </template>

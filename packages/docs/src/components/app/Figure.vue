@@ -1,37 +1,38 @@
 <template>
-  <figure>
-    <app-sheet :outlined="outlined">
-      <app-img
-        v-bind="$attrs"
-        v-on="$listeners"
-      />
-    </app-sheet>
-
-    <slot />
+  <figure
+    :class="[
+      caption ? 'mb-6' : 'mb-10'
+    ]"
+  >
+    <app-img
+      v-bind="attrs"
+    />
 
     <figcaption
-      v-if="!$slots.default && caption"
-      class="text-subtitle-2 text-center text-capitalize mt-3"
+      v-if="caption"
+      class="text-caption font-weight-bold text-center text-capitalize font-italic"
       v-text="caption"
     />
   </figure>
 </template>
 
 <script>
-  export default {
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     name: 'AppFigure',
 
     inheritAttrs: false,
 
     props: {
       name: String,
-      outlined: Boolean,
     },
 
-    computed: {
-      caption () {
-        return this.name || this.$attrs.alt
-      },
+    setup (props, { attrs }) {
+      return {
+        attrs,
+        caption: attrs.title === 'null' ? null : attrs.title,
+      }
     },
-  }
+  })
 </script>

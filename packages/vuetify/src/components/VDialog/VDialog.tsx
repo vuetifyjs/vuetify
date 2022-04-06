@@ -11,11 +11,18 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { mergeProps, ref, watch } from 'vue'
-import { defineComponent, IN_BROWSER } from '@/util'
+import { nextTick, ref, watch } from 'vue'
+import { genericComponent, IN_BROWSER } from '@/util'
 
-export default defineComponent({
+// Types
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
+export const VDialog = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VDialog',
+
+  inheritAttrs: false,
 
   props: {
     fullscreen: Boolean,
@@ -44,25 +51,25 @@ export default defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
 
-    const overlay = ref<InstanceType<typeof VOverlay>>()
+    const overlay = ref<VOverlay>()
     function onFocusin (e: FocusEvent) {
       const before = e.relatedTarget as HTMLElement | null
       const after = e.target as HTMLElement | null
 
       if (
         before !== after &&
-        overlay.value?.content &&
+        overlay.value?.contentEl &&
         // It isn't the document or the dialog body
-        ![document, overlay.value.content].includes(after!) &&
+        ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the dialog body
-        !overlay.value.content.contains(after)
+        !overlay.value.contentEl.contains(after)
         // We're the topmost dialog
         // TODO: this.activeZIndex >= this.getMaxZIndex() &&
         // It isn't inside a dependent element (like a menu)
         // TODO: !this.getOpenDependentElements().some(el => el.contains(target))
         // So we must have focused something outside the dialog and its children
       ) {
-        const focusable = [...overlay.value.content.querySelectorAll(
+        const focusable = [...overlay.value.contentEl.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
 
@@ -87,27 +94,16 @@ export default defineComponent({
       }, { immediate: true })
     }
 
-    const activatorElement = ref()
-    const activator = ({ props, ...data }: any) => {
-      return slots.activator?.({
-        ...data,
-        props: mergeProps(props, {
-          'aria-haspopup': 'dialog',
-          onClick: (e: MouseEvent) => {
-            activatorElement.value = e.currentTarget
-          },
-        }),
-      })
-    }
+    watch(isActive, async val => {
+      await nextTick()
+      if (val) {
+        overlay.value!.contentEl?.focus({ preventScroll: true })
+      } else {
+        overlay.value!.activatorEl?.focus({ preventScroll: true })
+      }
+    })
 
     return () => {
-      const transition = mergeProps(
-        { target: activatorElement.value },
-        typeof props.transition === 'string'
-          ? { name: props.transition }
-          : props.transition as any
-      ) as any
-
       return (
         <VOverlay
           v-model={ isActive.value }
@@ -115,20 +111,27 @@ export default defineComponent({
             'v-dialog',
             {
               'v-dialog--fullscreen': props.fullscreen,
+              'v-dialog--scrollable': props.scrollable,
             },
           ]}
           style={ dimensionStyles.value }
-          transition={ transition }
+          transition={ props.transition }
           ref={ overlay }
           aria-role="dialog"
           aria-modal="true"
+          activatorProps={{
+            'aria-haspopup': 'dialog',
+            'aria-expanded': String(isActive.value),
+          }}
           { ...attrs }
           v-slots={{
             default: slots.default,
-            activator,
+            activator: slots.activator,
           }}
         />
       )
     }
   },
 })
+
+export type VDialog = InstanceType<typeof VDialog>

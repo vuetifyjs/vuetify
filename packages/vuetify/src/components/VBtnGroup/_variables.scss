@@ -1,0 +1,25 @@
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+$btn-group-background: transparent !default;
+$btn-group-border-color: settings.$border-color-root !default;
+$btn-group-border-radius: settings.$border-radius-root !default;
+$btn-group-border-style: settings.$border-style-root !default;
+$btn-group-border-thin-width: thin !default;
+$btn-group-border-width: 0 !default;
+$btn-group-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$btn-group-height: 48px !default;
+$btn-group-elevation: 0 !default;
+$btn-group-tile-border-radius: 0 !default;
+
+$btn-group-border: (
+  $btn-group-border-color,
+  $btn-group-border-style,
+  $btn-group-border-width,
+  $btn-group-border-thin-width
+) !default;
+
+$btn-group-theme: (
+  $btn-group-background,
+  $btn-group-color
+) !default;

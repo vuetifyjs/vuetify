@@ -1,6 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
+import { createRouter, createWebHistory } from 'vue-router'
 import { VList, VListItem } from '..'
 
 describe('VList', () => {
@@ -50,5 +51,137 @@ describe('VList', () => {
     wrapper.get('.v-list--one-line').should('exist')
     wrapper.get('.v-list--two-line').should('exist')
     wrapper.get('.v-list--three-line').should('exist')
+  })
+
+  it('supports items prop', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        $children: [
+          {
+            title: 'Child',
+            subtitle: 'Subtitle',
+            value: 'child',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="200px">
+        <VList items={items} opened={['group']} />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-list-item').should('have.length', 3)
+  })
+
+  it('supports item slot', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        $children: [
+          {
+            title: 'Child',
+            subtitle: 'Subtitle',
+            value: 'child',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="400px">
+        <VList items={ items } opened={['group']}>
+          {{ item: item => <VListItem {...item} prependIcon="mdi-home" /> }}
+        </VList>
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-icon.mdi-home').should('have.length', 2)
+  })
+
+  it('should set active item on route change', () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: '/',
+          component: { template: 'Home' },
+        },
+        {
+          path: '/about',
+          component: { template: 'About' },
+        },
+      ],
+    })
+
+    cy.mount(() => (
+      <CenteredGrid width="400px">
+        <VList>
+          <VListItem to="/" title="Home" />
+          <VListItem to="/about" title="About" />
+        </VList>
+      </CenteredGrid>
+    ), {
+      global: {
+        plugins: [router],
+      },
+    })
+
+    cy.get('.v-list').then(() => {
+      router.push('/about')
+    })
+
+    cy.get('.v-list-item--active').should('exist').should('have.text', 'About')
+  })
+
+  it('should change route when clicking item with to prop', () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: '/',
+          component: { template: 'Home' },
+        },
+        {
+          path: '/about',
+          component: { template: 'About' },
+        },
+      ],
+    })
+
+    cy.mount(() => (
+      <CenteredGrid width="400px">
+        <VList>
+          <VListItem to="/" title="Home" />
+          <VListItem to="/team" title="Team" />
+        </VList>
+      </CenteredGrid>
+    ), {
+      global: {
+        plugins: [router],
+      },
+    })
+
+    cy.get('.v-list').then(() => {
+      router.push('/team')
+    })
+
+    cy.get('.v-list-item').eq(1).trigger('click').then(() => {
+      expect(router.currentRoute.value.path).to.equal('/team')
+    })
   })
 })

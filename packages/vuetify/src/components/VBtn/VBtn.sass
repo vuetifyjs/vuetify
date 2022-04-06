@@ -1,5 +1,10 @@
-// Imports
-@import ./index
+@use 'sass:math'
+@forward './variables'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
 .v-btn
   align-items: center
@@ -9,45 +14,60 @@
   justify-content: center
   letter-spacing: $button-text-letter-spacing
   line-height: $button-line-height
+  max-width: $button-max-width
   outline: none
-  overflow: visible
+  overflow: $button-overflow
   position: relative
   text-decoration: none
   text-indent: $button-text-letter-spacing
   text-transform: $button-text-transform
-  transition-property: box-shadow, transform, opacity, color
+  transition-property: $button-transition-property
   transition-duration: 0.28s
-  transition-timing-function: $standard-easing
+  transition-timing-function: settings.$standard-easing
   user-select: none
   vertical-align: $button-vertical-align
   flex-shrink: 0
+  white-space: $button-white-space
 
   @at-root
-    +button-sizes()
-    +button-density('height', $button-density)
+    @include button-sizes()
+    @include button-density('height', $button-density)
 
-  @include border($button-border...)
-  @include states('.v-btn__overlay', false)
-  @include variant($button-variants...)
+  @include tools.border($button-border...)
+  @include tools.states('.v-btn__overlay', false)
+  @include tools.variant($button-variants...)
 
-  &--flat
-    box-shadow: none
+  @supports selector(:focus-visible)
+    &::after
+      @include tools.absolute(true)
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: inherit
+      opacity: 0
+      transition: opacity .2s ease-in-out
+
+    &:focus-visible::after
+      opacity: calc(.25 * var(--v-theme-overlay-multiplier))
 
   &--icon
     border-radius: $button-icon-border-radius
     min-width: 0
     padding: 0
+    font-size: $button-icon-font-size
 
     @at-root &
-      +button-density(('width', 'height'), $button-icon-density)
+      @include button-density(('width', 'height'), $button-icon-density)
 
   &--elevated
     &:hover,
     &:focus
-      +elevation(map-get($button-elevation, 'hover'))
+      +tools.elevation(map.get($button-elevation, 'hover'))
 
     &:active
-      +elevation(map-get($button-elevation, 'active'))
+      +tools.elevation(map.get($button-elevation, 'active'))
+
+  &--flat
+    box-shadow: none
 
   &--block
     display: flex
@@ -68,7 +88,7 @@
       .v-btn__overlay
         // This is multiplied by the text opacity,
         // so we need to divide it to get the desired value
-        opacity: $button-disabled-overlay / $button-disabled-opacity
+        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
   &--stacked
     flex-direction: column
@@ -78,80 +98,42 @@
       @include button-sizes($button-stacked-sizes, true)
       @include button-density('height', $button-stacked-density)
 
+  &--rounded
+    @include tools.rounded($button-rounded-border-radius)
+
+  .v-icon
+    --v-icon-size-multiplier: #{calc(18/21)}
+
+  &--icon
+    .v-icon
+      --v-icon-size-multiplier: 1
+
+  &--stacked
+    .v-icon
+      --v-icon-size-multiplier: #{calc(24/21)}
+
+.v-btn__content
+  transition: $button-content-transition
+
 .v-btn__overlay
+  @include tools.absolute()
   background-color: currentColor
   border-radius: inherit
-  position: absolute
-  top: 0
-  right: 0
-  bottom: 0
-  left: 0
   pointer-events: none
   opacity: 0
-  transition: opacity 0.2s ease-in-out
+  transition: opacity .2s ease-in-out
 
 // VAppBar
 .v-btn
   .v-app-bar &
-    @include elevation($button-app-bar-elevation)
-
-// VBottomNavigation
-.v-btn
-  .v-bottom-navigation &
-    filter: $button-bottom-navigation-filter
-    flex-direction: column
-    font-size: $button-bottom-navigation-font-size
-    height: auto
-    max-width: $button-bottom-navigation-max-width
-    min-width: $button-bottom-navigation-min-width
-    opacity: $button-bottom-navigation-opacity
-    text-transform: $button-bottom-navigation-text-transform
-    transition-duration: $button-bottom-navigation-transition-duration
-    transition-property: transform, opacity, filter
-    width: auto
-
-    @include elevation($button-bottom-navigation-elevation)
-    @include rounded($button-bottom-navigation-border-radius)
-
-  .v-bottom-navigation--grow &
-    width: 100%
-
-  .v-bottom-navigation--horizontal &
-    flex-direction: row
-
-  .v-bottom-navigation--shift &
-    > .v-icon
-      transform: $button-bottom-navigation-shift-icon-transform
-      transition: inherit
-
-    > *:not([class*='v-'])
-      opacity: $button-bottom-navigation-shift-opacity
-      position: absolute
-      top: $button-bottom-navigation-shift-top
-      transform: $button-bottom-navigation-shift-transform
-      transition: inherit
-
-  &--active
-    .v-bottom-navigation &
-      @include active-states('.v-btn__overlay')
-
-      filter: $button-bottom-navigation-active-filter
-      opacity: $button-bottom-navigation-active-opacity
-
-    .v-bottom-navigation--shift &
-      > .v-icon
-        transform: $button-bottom-navigation-shift-active-icon-transform
-
-      > *:not([class*='v-'])
-        opacity: $button-bottom-navigation-active-opacity
-        transform: $button-bottom-navigation-shift-active-transform
+    @include tools.elevation($button-app-bar-elevation)
 
 // VCard
 .v-btn
   .v-card-actions &
     padding: $button-card-actions-padding
 
-    @include elevation($button-card-actions-elevation)
+    @include tools.elevation($button-card-actions-elevation)
 
   ~ .v-btn
     .v-card-actions &
@@ -162,19 +144,16 @@
   .v-banner-actions &
     padding: $button-banner-actions-padding
 
-    @include elevation($button-banner-actions-elevation)
-
 // VPagination
 .v-btn
   .v-pagination &
-    @include elevation($button-pagination-elevation)
-    @include rounded($button-pagination-border-radius)
-    @include button-density('height' 'width', $button-pagination-density)
-
-  &--elevated
-    .v-pagination__list &
-      @include elevation($button-pagination-elevation)
+    @include tools.rounded($button-pagination-border-radius)
 
   &__overlay
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
+
+// VSnackbar
+.v-btn
+  .v-snackbar-actions &
+    padding: $button-snackbar-action-padding

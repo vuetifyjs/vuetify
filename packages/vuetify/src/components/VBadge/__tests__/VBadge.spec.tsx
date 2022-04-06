@@ -24,11 +24,12 @@ describe('VBadge.tsx', () => {
     [{ floating: true }],
     [{ icon: 'foo' }], // badge slot overrides icon
     [{ inline: true }],
-    [{ location: 'bottom-left' }],
+    [{ location: 'bottom-start' }],
     [{ location: undefined }],
     [{ location: null }],
     [{ content: '10', max: 9 }],
     [{ content: '10', max: 11 }],
+    [{ content: 10, max: 11 }],
     [{ content: 'foo', max: 9 }],
   ])('should match snapshot with badge slot and %s props', (props: any) => {
     const wrapper = mountFunction({

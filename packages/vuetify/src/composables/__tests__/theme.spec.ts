@@ -1,27 +1,32 @@
 /* eslint-disable jest/no-commented-out-tests */
 
 import { createTheme } from '../theme'
+import { createApp } from 'vue'
+import type { App } from 'vue'
 
 describe('createTheme', () => {
+  let app: App
+
   beforeEach(() => {
     const child = document.querySelector('#vuetify-theme-stylesheet')
     child && document.head.removeChild(child)
+    app = createApp({})
   })
 
   it('should create style element', async () => {
-    createTheme()
+    createTheme(app)
 
     expect(document.head).toMatchSnapshot()
   })
 
   it('should not generate style element if disabled', async () => {
-    createTheme(false)
+    createTheme(app, false)
 
     expect(document.head).toMatchSnapshot()
   })
 
   it('should generate on-* colors', async () => {
-    const theme = createTheme()
+    const theme = createTheme(app)
 
     const colors = [
       'on-background',
@@ -40,7 +45,7 @@ describe('createTheme', () => {
   })
 
   it('should generate color variants', async () => {
-    const theme = createTheme({
+    const theme = createTheme(app, {
       variations: {
         colors: ['primary', 'secondary'],
         lighten: 2,
@@ -59,11 +64,11 @@ describe('createTheme', () => {
   })
 
   it('should update existing theme', async () => {
-    const theme = createTheme({
+    const theme = createTheme(app, {
       variations: false,
     })
 
-    expect(theme.themes.value.light.colors.background).not.toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).not.toBe('#FF0000')
 
     theme.setTheme('light', {
       ...theme.themes.value.light,
@@ -73,7 +78,7 @@ describe('createTheme', () => {
       },
     })
 
-    expect(theme.themes.value.light.colors.background).toEqual('#FF0000')
+    expect(theme.themes.value.light.colors.background).toBe('#FF0000')
   })
 
   // it('should use vue-meta@2.3 functionality', () => {

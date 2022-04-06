@@ -1,4 +1,3 @@
-
 <template>
   <v-sheet
     v-if="sponsors.length"
@@ -18,13 +17,13 @@
         <v-col
           v-for="sponsor in sponsors"
           :key="sponsor.slug"
-          :md="sponsor.metadata.tier > 1 ? 3 : 12"
+          :md="sponsor.metadata.tier > 1 ? 3 : 5"
           class="d-flex align-center justify-center"
           cols="auto"
         >
-          <sponsor
-            :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
-            :compact="compact || Number(sponsor.metadata.tier) > 2"
+          <sponsor-card
+            :comfortable="Number(sponsor.metadata.tier) === 2"
+            :compact="Number(sponsor.metadata.tier) > 2"
             :sponsor="sponsor"
             v-bind="$attrs"
           />
@@ -32,34 +31,48 @@
       </v-row>
     </v-responsive>
 
-    <sponsor-link large />
+    <sponsor-link size="large" />
   </v-sheet>
 </template>
 
-<script>
-  // Mixins
-  import Density from '@/mixins/density'
-
+<script lang="ts">
   // Utilities
-  import { get } from 'vuex-pathify'
+  import { computed, defineComponent, onBeforeMount } from 'vue'
+  import { useSponsorsStore } from '../../store/sponsors'
 
-  export default {
-    name: 'HomeSponsors',
+  import SponsorCard from '@/components/sponsor/Card.vue'
+  import SponsorLink from '@/components/sponsor/Link.vue'
 
-    mixins: [Density],
+  export default defineComponent({
+    name: 'Sponsors',
 
-    computed: {
-      byTier: get('sponsors/byTier'),
-      sponsors () {
-        return Object.values(this.byTier)
-          .reduce((tiers, tier) => tiers.concat(tier), [])
-      },
+    components: {
+      SponsorCard,
+      SponsorLink,
     },
-  }
-</script>
 
-<style lang="sass">
-  #home-sponsors
-    .v-sponsors
-      justify-content: space-between
-</style>
+    setup () {
+      const sponsorStore = useSponsorsStore()
+
+      onBeforeMount(async () => sponsorStore.load())
+
+      const sponsors = computed(() => {
+        return Object.values(sponsorStore.byTier)
+          .reduce((tiers, tier) => {
+            for (const sponsor of tier) {
+              if (Number(sponsor.metadata.tier) < 0) continue
+
+              tiers.push(sponsor)
+            }
+
+            return tiers
+          }, [] as any[])
+      })
+
+      return {
+        sponsors,
+      }
+    },
+
+  })
+</script>

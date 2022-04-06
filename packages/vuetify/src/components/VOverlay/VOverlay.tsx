@@ -2,57 +2,47 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeActivatorProps, useActivator } from './useActivator'
+import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
+import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 import { useTeleport } from '@/composables/teleport'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useStack } from '@/composables/stack'
+import { useOverlay } from '@/composables/overlay'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
-import { convertToUnit, defineComponent, getScrollParent, getScrollParents, standardEasing, useRender } from '@/util'
+import {
+  convertToUnit,
+  genericComponent,
+  getScrollParent,
+  IN_BROWSER,
+  standardEasing,
+  useRender,
+} from '@/util'
 import {
   computed,
-  nextTick,
+  mergeProps,
   ref,
   Teleport,
-  toRef,
+  toHandlers,
   Transition,
   watch,
-  watchEffect,
 } from 'vue'
 
 // Types
+import type { PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
-import type { Prop, PropType, Ref } from 'vue'
-
-function useBooted (isActive: Ref<boolean>, eager: Ref<boolean>) {
-  const isBooted = ref(eager.value)
-
-  watchEffect(() => {
-    if (eager.value || isActive.value) {
-      isBooted.value = true
-    }
-  })
-
-  return { isBooted }
-}
-
-const positionStrategies = [
-  'global', // specific viewport position, usually centered
-  'connected', // connected to a certain element
-  'flexible', // connected to an element with the ability to overflow or shift if it doesn't fit in the screen
-] as const
-
-const scrollStrategies = [
-  'close',
-  'block',
-  'reposition',
-] as const
 
 interface ScrimProps {
   [key: string]: unknown
@@ -77,72 +67,14 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-interface ScrollStrategy {
-  enable (): void
-  disable (): void
-}
+export type OverlaySlots = MakeSlots<{
+  default: [{ isActive: Ref<boolean> }]
+  activator: [{ isActive: boolean, props: Record<string, any> }]
+}>
 
-class CloseScrollStrategy implements ScrollStrategy {
-  private content: Ref<HTMLElement | undefined>
-  private scrollElements: EventTarget[] = []
-  private isActive: Ref<boolean>
-
-  constructor ({ content, isActive }: { content: Ref<HTMLElement | undefined>, isActive: Ref<boolean> }) {
-    this.content = content
-    this.isActive = isActive
-  }
-
-  enable () {
-    this.scrollElements = [document, ...getScrollParents(this.content.value)]
-
-    this.scrollElements.forEach(el => {
-      el.addEventListener('scroll', this.onScroll.bind(this), { passive: true })
-    })
-  }
-
-  disable () {
-    this.scrollElements.forEach(el => {
-      el.removeEventListener('scroll', this.onScroll.bind(this))
-    })
-  }
-
-  private onScroll () {
-    this.isActive.value = false
-  }
-}
-
-class BlockScrollStrategy implements ScrollStrategy {
-  private initialOverflow: string[] = []
-  private scrollElements: HTMLElement[] = []
-  private content: Ref<HTMLElement | undefined>
-
-  constructor ({ content }: { content: Ref<HTMLElement | undefined> }) {
-    this.content = content
-  }
-
-  enable () {
-    this.scrollElements = getScrollParents(this.content.value)
-    const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
-
-    document.documentElement.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-
-    this.scrollElements.forEach((el, i) => {
-      this.initialOverflow[i] = el.style.overflowY
-      el.style.overflowY = 'hidden'
-      el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
-    })
-  }
-
-  disable () {
-    this.scrollElements.forEach((el, i) => {
-      el.style.overflowY = this.initialOverflow[i]
-      el.style.removeProperty('--v-scrollbar-offset')
-    })
-    document.documentElement.style.removeProperty('--v-scrollbar-offset')
-  }
-}
-
-export default defineComponent({
+export const VOverlay = genericComponent<new () => {
+  $slots: OverlaySlots
+}>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -151,48 +83,59 @@ export default defineComponent({
 
   props: {
     absolute: Boolean,
-    attach: {
-      type: [Boolean, String, Object] as PropType<boolean | string | Element>,
-      default: 'body',
-    },
-    eager: Boolean,
+    attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+    contained: Boolean,
+    contentClass: null,
     noClickAnimation: Boolean,
     modelValue: Boolean,
-    origin: [String, Object] as Prop<string | Element>,
     persistent: Boolean,
-    positionStrategy: {
-      type: String as PropType<typeof positionStrategies[number]>,
-      default: 'global',
-      validator: (val: any) => positionStrategies.includes(val),
-    },
     scrim: {
       type: [String, Boolean],
       default: true,
     },
-    scrollStrategy: {
-      type: String as PropType<typeof scrollStrategies[number]>,
-      default: 'block',
-      validator: (val: any) => scrollStrategies.includes(val),
-    },
+
+    ...makeActivatorProps(),
+    ...makeDimensionProps(),
+    ...makePositionStrategyProps(),
+    ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
+    ...makeLazyProps(),
   },
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    afterLeave: () => true,
   },
 
   setup (props, { slots, attrs, emit }) {
     const isActive = useProxiedModel(props, 'modelValue')
-
-    const { teleportTarget } = useTeleport(toRef(props, 'attach'))
-    const { themeClasses } = useTheme(props)
+    const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
+    const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
-    const { isBooted } = useBooted(isActive, toRef(props, 'eager'))
+    const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
+    const { activatorEl, activatorRef, activatorEvents } = useActivator(props, isActive)
+    const { dimensionStyles } = useDimension(props)
+    const { isTop } = useStack(isActive)
+
+    const root = ref<HTMLElement>()
+    const contentEl = ref<HTMLElement>()
+    const { contentStyles, updatePosition } = usePositionStrategies(props, {
+      contentEl,
+      activatorEl,
+      isActive,
+    })
+    useScrollStrategies(props, {
+      root,
+      contentEl,
+      activatorEl,
+      isActive,
+      updatePosition,
+    })
 
     function onClickOutside (e: MouseEvent) {
       emit('click:outside', e)
@@ -202,17 +145,19 @@ export default defineComponent({
     }
 
     function closeConditional () {
-      return isActive.value
+      return isActive.value && isTop.value
     }
 
-    const activatorElement = ref<HTMLElement>()
-    function onActivatorClick (e: MouseEvent) {
-      activatorElement.value = (e.currentTarget || e.target) as HTMLElement
-      isActive.value = !isActive.value
-    }
+    IN_BROWSER && watch(isActive, val => {
+      if (val) {
+        window.addEventListener('keydown', onKeydown)
+      } else {
+        window.removeEventListener('keydown', onKeydown)
+      }
+    }, { immediate: true })
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape') {
+      if (e.key === 'Escape' && isTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -220,26 +165,17 @@ export default defineComponent({
     }
 
     useBackButton(next => {
-      next(!isActive.value)
-
-      if (!props.persistent) isActive.value = false
-      else animateClick()
+      if (isTop.value && isActive.value) {
+        next(false)
+        if (!props.persistent) isActive.value = false
+        else animateClick()
+      } else {
+        next()
+      }
     })
 
-    const content = ref<HTMLElement>()
-    watch(isActive, val => {
-      nextTick(() => {
-        if (val) {
-          content.value?.focus()
-        } else {
-          activatorElement.value?.focus()
-        }
-      })
-    })
-
-    const root = ref()
     const top = ref<number>()
-    watch(() => isActive.value && props.absolute && teleportTarget.value == null, val => {
+    watch(() => isActive.value && (props.absolute || props.contained) && teleportTarget.value == null, val => {
       if (val) {
         const scrollParent = getScrollParent(root.value)
         if (scrollParent && scrollParent !== document.scrollingElement) {
@@ -252,7 +188,7 @@ export default defineComponent({
     function animateClick () {
       if (props.noClickAnimation) return
 
-      content.value?.animate([
+      contentEl.value?.animate([
         { transformOrigin: 'center' },
         { transform: 'scale(1.03)' },
         { transformOrigin: 'center' },
@@ -262,83 +198,81 @@ export default defineComponent({
       })
     }
 
-    function onAfterLeave () {
-      if (!props.eager) isBooted.value = false
-    }
-
-    const scrollStrategy =
-      props.scrollStrategy === 'close' ? new CloseScrollStrategy({ content, isActive })
-      : props.scrollStrategy === 'block' ? new BlockScrollStrategy({ content })
-      : null
-
-    // TODO: reactive
-    if (scrollStrategy) {
-      watch(isActive, val => {
-        nextTick(() => {
-          val ? scrollStrategy.enable() : scrollStrategy.disable()
-        })
-      })
-    }
+    const { overlayZIndex } = useOverlay(isActive)
 
     useRender(() => (
       <>
         { slots.activator?.({
           isActive: isActive.value,
-          props: {
-            modelValue: isActive.value,
-            'onUpdate:modelValue': (val: boolean) => isActive.value = val,
-            onClick: onActivatorClick,
-          },
+          props: mergeProps({
+            ref: activatorRef,
+          }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
-        <Teleport
-          disabled={ !teleportTarget.value }
-          ref={ root }
-          to={ teleportTarget.value }
-        >
-          { isBooted.value && (
-            <div
-              class={[
-                'v-overlay',
-                {
-                  'v-overlay--absolute': props.absolute,
-                  'v-overlay--active': isActive.value,
-                },
-                themeClasses.value,
-                rtlClasses.value,
-              ]}
-              style={ top.value != null ? `top: ${convertToUnit(top.value)}` : undefined }
-              {...attrs}
-            >
-              <Scrim
-                color={ scrimColor }
-                modelValue={ isActive.value && !!props.scrim }
-              />
-              <MaybeTransition
-                appear
-                onAfterLeave={ onAfterLeave }
-                persisted
-                transition={ props.transition }
+
+        { IN_BROWSER && (
+          <Teleport
+            disabled={ !teleportTarget.value }
+            to={ teleportTarget.value }
+          >
+            { hasContent.value && (
+              <div
+                class={[
+                  'v-overlay',
+                  {
+                    'v-overlay--absolute': props.absolute || props.contained,
+                    'v-overlay--active': isActive.value,
+                    'v-overlay--contained': props.contained,
+                  },
+                  themeClasses.value,
+                  rtlClasses.value,
+                ]}
+                style={{
+                  top: convertToUnit(top.value),
+                  zIndex: overlayZIndex.value,
+                }}
+                ref={ root }
+                {...attrs}
               >
-                <div
-                  ref={ content }
-                  v-show={ isActive.value }
-                  v-click-outside={{ handler: onClickOutside, closeConditional }}
-                  class="v-overlay__content"
-                  tabindex={ -1 }
-                  onKeydown={ onKeydown }
+                <Scrim
+                  color={ scrimColor }
+                  modelValue={ isActive.value && !!props.scrim }
+                />
+                <MaybeTransition
+                  appear
+                  persisted
+                  transition={ props.transition }
+                  target={ activatorEl.value }
+                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
                 >
-                  { slots.default?.({ isActive }) }
-                </div>
-              </MaybeTransition>
-            </div>
-          )}
-        </Teleport>
+                  <div
+                    ref={ contentEl }
+                    v-show={ isActive.value }
+                    v-click-outside={{ handler: onClickOutside, closeConditional, include: () => [activatorEl.value] }}
+                    class={[
+                      'v-overlay__content',
+                      props.contentClass,
+                    ]}
+                    style={[
+                      dimensionStyles.value,
+                      contentStyles.value,
+                    ]}
+                  >
+                    { slots.default?.({ isActive }) }
+                  </div>
+                </MaybeTransition>
+              </div>
+            )}
+          </Teleport>
+        ) }
       </>
     ))
 
     return {
       animateClick,
-      content,
+      contentEl,
+      activatorEl,
     }
   },
 })
+
+export type VOverlay = InstanceType<typeof VOverlay>

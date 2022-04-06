@@ -1,31 +1,30 @@
 ---
+nav: Ratings
 meta:
   title: Rating component
   description: The star rating component is a specialized widget for collecting user feedback via ratings.
   keywords: star ratings, vuetify star rating component, vue star rating component, rating component
 related:
-  - /components/cards/
-  - /components/icons/
-  - /components/lists/
+  - /components/cards
+  - /components/icons
+  - /components/lists
 ---
 
 # Ratings
 
 The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
-<entry-ad />
+<entry />
 
-<!--
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
-<usage name="v-rating" />
--->
+<!-- <usage name="v-rating" /> -->
 
 ## API
 
-- [v-rating](/api/v-rating)
+<api-inline />
 
 ## Examples
 
@@ -79,9 +78,9 @@ Change the number of items by modifying the the **length** prop.
 
 <example file="v-rating/prop-length" />
 
-#### Incremented
+#### Half increments
 
-A `v-rating` component has 3 types of icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+The **half-increments** prop increases the granularity of the ratings, allow for `.5` values as well.
 
 <example file="v-rating/prop-half-increments" />
 
@@ -113,11 +112,11 @@ Any arbitrary content could be displayed for labels in **item-label** slot.
 
 ### Misc
 
-#### Advanced usage
+<!-- #### Advanced usage
 
 The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
 
-<example file="v-rating/misc-advanced" />
+<example file="v-rating/misc-advanced" /> -->
 
 #### Card ratings
 

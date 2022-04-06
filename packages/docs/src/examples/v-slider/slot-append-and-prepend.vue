@@ -8,12 +8,10 @@
       dense
     >
       <v-toolbar-title>
-        <span class="subheading">METRONOME</span>
+        <span class="text-subheading">METRONOME</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
-      <v-btn icon>
-        <v-icon>mdi-share-variant</v-icon>
-      </v-btn>
+      <v-btn variant="text" icon="mdi-share-variant"></v-btn>
     </v-toolbar>
 
     <v-card-text>
@@ -42,14 +40,12 @@
         <v-col class="text-right">
           <v-btn
             :color="color"
-            dark
-            depressed
-            fab
+            theme="dark"
+            icon
+            elevation="0"
             @click="toggle"
           >
-            <v-icon large>
-              {{ isPlaying ? 'mdi-pause' : 'mdi-play' }}
-            </v-icon>
+            <v-icon size="large" :icon="isPlaying ? 'mdi-pause' : 'mdi-play'"></v-icon>
           </v-btn>
         </v-col>
       </v-row>
@@ -58,26 +54,28 @@
         v-model="bpm"
         :color="color"
         track-color="grey"
-        always-dirty
         min="40"
         max="218"
+        :step="1"
       >
         <template v-slot:prepend>
-          <v-icon
+          <v-btn
+            size="small"
+            variant="text"
+            icon="mdi-minus"
             :color="color"
             @click="decrement"
-          >
-            mdi-minus
-          </v-icon>
+          ></v-btn>
         </template>
 
         <template v-slot:append>
-          <v-icon
+          <v-btn
+            size="small"
+            variant="text"
+            icon="mdi-plus"
             :color="color"
             @click="increment"
-          >
-            mdi-plus
-          </v-icon>
+          ></v-btn>
         </template>
       </v-slider>
     </v-card-text>

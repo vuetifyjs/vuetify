@@ -2,26 +2,20 @@
 import './VAppBar.sass'
 
 // Components
-import { VImg } from '@/components/VImg'
+import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
-import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export default defineComponent({
+export const VAppBar = defineComponent({
   name: 'VAppBar',
 
   props: {
@@ -32,39 +26,23 @@ export default defineComponent({
     // elevateOnScroll: Boolean
     // shrinkOnScroll: Boolean
     // fadeImageOnScroll: Boolean
-    collapse: Boolean,
-    color: String,
-    flat: Boolean,
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-    extensionHeight: {
-      type: [Number, String],
-      default: 48,
-    },
-    floating: Boolean,
-    image: String,
     modelValue: {
       type: Boolean,
       default: true,
-    },
-    prominent: Boolean,
-    prominentHeight: {
-      type: [Number, String],
-      default: 128,
     },
     position: {
       type: String as PropType<'top' | 'bottom'>,
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeLayoutItemProps({ name: 'app-bar' }),
-    ...makeTagProps({ tag: 'header' }),
+
+    ...makeVToolbarProps(),
+    ...makeLayoutItemProps(),
+
+    height: {
+      type: [Number, String],
+      default: 64,
+    },
   },
 
   emits: {
@@ -72,91 +50,46 @@ export default defineComponent({
   },
 
   setup (props, { slots }) {
-    const { borderClasses } = useBorder(props, 'v-app-bar')
-    const { densityClasses } = useDensity(props, 'v-app-bar')
-    const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-app-bar')
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const extension = ref<HTMLElement | boolean>(!!slots.extension)
-    const height = computed(() => (
-      Number(props.prominent ? props.prominentHeight : props.height) +
-      Number(extension.value ? props.extensionHeight : 0) -
-      (props.density === 'comfortable' ? 8 : 0) -
-      (props.density === 'compact' ? 16 : 0)
-    ))
-    const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const layoutStyles = useLayoutItem(
-      props.name,
-      toRef(props, 'priority'),
-      toRef(props, 'position'),
-      height,
-      height,
-      isActive,
-    )
+    const vToolbarRef = ref()
+    const isActive = useProxiedModel(props, 'modelValue')
+    const height = computed(() => {
+      const height: number = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
+
+      return (height + extensionHeight)
+    })
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: toRef(props, 'position'),
+      layoutSize: height,
+      elementSize: height,
+      active: isActive,
+      absolute: toRef(props, 'absolute'),
+    })
 
     return () => {
-      const hasImage = !!(slots.image || props.image)
+      const [toolbarProps] = filterToolbarProps(props)
 
       return (
-        <props.tag
+        <VToolbar
+          ref={ vToolbarRef }
           class={[
             'v-app-bar',
             {
               'v-app-bar--bottom': props.position === 'bottom',
-              'v-app-bar--collapsed': props.collapse,
-              'v-app-bar--flat': props.flat,
-              'v-app-bar--floating': props.floating,
-              'v-app-bar--is-active': isActive.value,
-              'v-app-bar--prominent': props.prominent,
-              'v-app-bar--absolute': props.absolute,
             },
-            backgroundColorClasses.value,
-            borderClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            roundedClasses.value,
           ]}
-          style={[
-            backgroundColorStyles.value,
-            layoutStyles.value,
-          ]}
-        >
-          { hasImage && (
-            <div class="v-app-bar__image">
-              { slots.image
-                ? slots.img?.({ src: props.image })
-                : (<VImg src={ props.image } cover />)
-              }
-            </div>
-          ) }
-
-          <div class="v-app-bar__content">
-            { slots.prepend && (
-              <div class="v-app-bar__prepend">
-                { slots.prepend() }
-              </div>
-            ) }
-
-            { slots.default?.() }
-
-            { slots.append && (
-              <div class="v-app-bar__append">
-                { slots.append() }
-              </div>
-            ) }
-          </div>
-
-          { slots.extension && (
-            <div
-              class="v-app-bar__extension"
-              style={{ height: convertToUnit(props.extensionHeight) }}
-              ref={ extension }
-            >
-              { slots.extension?.() }
-            </div>
-          ) }
-        </props.tag>
+          style={{
+            ...layoutItemStyles.value,
+            height: undefined,
+          }}
+          { ...toolbarProps }
+          v-slots={ slots }
+        />
       )
     }
   },
 })
+
+export type VAppBar = InstanceType<typeof VAppBar>

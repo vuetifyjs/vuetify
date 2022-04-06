@@ -10,22 +10,21 @@
         rounded
         offset-y
       >
-        <template v-slot:activator="{ on }">
+        <template v-slot:activator="{ props }">
           <v-btn
             icon
-            x-large
-            v-on="on"
+            v-bind="props"
           >
             <v-avatar
               color="brown"
-              size="48"
+              size="large"
             >
               <span class="white--text text-h5">{{ user.initials }}</span>
             </v-avatar>
           </v-btn>
         </template>
         <v-card>
-          <v-list-item-content class="justify-center">
+          <v-card-text>
             <div class="mx-auto text-center">
               <v-avatar
                 color="brown"
@@ -38,22 +37,20 @@
               </p>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                depressed
                 rounded
-                text
+                variant="text"
               >
                 Edit Account
               </v-btn>
               <v-divider class="my-3"></v-divider>
               <v-btn
-                depressed
                 rounded
-                text
+                variant="text"
               >
                 Disconnect
               </v-btn>
             </div>
-          </v-list-item-content>
+          </v-card-text>
         </v-card>
       </v-menu>
     </v-row>

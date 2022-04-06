@@ -1,3 +1,8 @@
+<script>
+// TODO
+// @ts-disable
+</script>
+
 <template>
   <v-row
     class="py-12"

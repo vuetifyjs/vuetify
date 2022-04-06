@@ -11,6 +11,9 @@ import Scroll from '../'
 import { scrollWindow } from '../../../../test'
 
 describe('v-scroll', () => {
+  const instance = {
+    $: { uid: 1 },
+  }
   const el = document.createElement('div')
   const mountFunction = (value: EventListenerOrEventListenerObject, selector?: string): HTMLElement => {
     const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [[Scroll, value, selector]]))
@@ -27,14 +30,14 @@ describe('v-scroll', () => {
       selector => selector === '.selector' ? targetElement : undefined
     )
 
-    Scroll.mounted(el, { value, arg: '.selector' } as any)
+    Scroll.mounted(el, { value, arg: '.selector', instance } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el)
+    Scroll.unmounted(el, { instance })
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
-    Scroll.mounted(el, { value, arg: '.selector' } as any)
+    Scroll.mounted(el, { value, arg: '.selector', instance } as any)
     expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el)
+    Scroll.unmounted(el, { instance })
     expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     querySelector.mockRestore()
@@ -46,9 +49,9 @@ describe('v-scroll', () => {
     const removeListener = jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Scroll.mounted(el as HTMLElement, { value } as any)
+    Scroll.mounted(el as HTMLElement, { value, instance } as any)
     expect(addListener).toHaveBeenCalledWith('scroll', value, { passive: true })
-    Scroll.unmounted(el as HTMLElement)
+    Scroll.unmounted(el as HTMLElement, { instance })
     expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
     addListener.mockRestore()
@@ -62,11 +65,11 @@ describe('v-scroll', () => {
     const removeListener = jest.spyOn(window, 'removeEventListener')
     const el = {}
 
-    Scroll.mounted(el as HTMLElement, { value: value1 } as any)
+    Scroll.mounted(el as HTMLElement, { value: value1, instance } as any)
     expect(addListener).toHaveBeenCalledTimes(1)
     expect(addListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
 
-    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1 } as any)
+    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1, instance } as any)
     expect(removeListener).toHaveBeenCalledTimes(1)
     expect(removeListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
     expect(addListener).toHaveBeenCalledTimes(2)
@@ -78,7 +81,7 @@ describe('v-scroll', () => {
 
   it('should not fail when unbinding element without _onScroll', () => {
     expect(() => {
-      Scroll.unmounted({} as HTMLElement)
+      Scroll.unmounted({} as HTMLElement, { instance })
     }).not.toThrow()
   })
 

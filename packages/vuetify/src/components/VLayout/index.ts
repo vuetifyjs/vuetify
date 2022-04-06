@@ -1,2 +1,2 @@
-export { default as VLayout } from './VLayout'
-export { default as VLayoutItem } from './VLayoutItem'
+export { VLayout } from './VLayout'
+export { VLayoutItem } from './VLayoutItem'

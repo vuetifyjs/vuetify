@@ -46,7 +46,7 @@ const createWebTypesApi = () => {
   const components = getComponentsApi(['en'])
   const directives = getDirectivesApi(['en'])
 
-  const getDocUrl = (cmp, heading = null) => `https://www.vuetifyjs.com/api/${cmp}${heading ? `#${heading}` : ''}`
+  const getDocUrl = (cmp, heading = null) => `https://vuetifyjs.com/api/${cmp}` + (heading ? `#${heading}` : '')
 
   const createTag = component => {
     const createTagSlot = slot => {
@@ -102,8 +102,8 @@ const createWebTypesApi = () => {
       events: component.events.map(createTagEvent),
       slots: component.slots.map(createTagSlot),
       'vue-model': { // TODO: we should expose this in api data if we can
-        prop: 'value',
-        event: 'input',
+        prop: 'modelValue',
+        event: 'update:modelValue',
       },
     }
   }

@@ -1,4 +1,5 @@
 ---
+nav: Radio buttons
 meta:
   title: Radio button component
   description: A radio button allows the user to choose only one of a set of options using a radio group.
@@ -13,7 +14,7 @@ related:
 
 The `v-radio` component is a simple radio button. When combined with  the `v-radio-group` component you can provide groupable functionality to allow users to select from a predefined set of options.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,8 +24,7 @@ Although `v-radio` can be used on its own, it is best used in conjunction with `
 
 ## API
 
-- [v-radio](/api/v-radio)
-- [v-radio-group](/api/v-radio-group)
+<api-inline />
 
 ## Examples
 

@@ -1,4 +1,5 @@
 ---
+nav: Scroll
 meta:
   title: Scroll directive
   description: The scroll directive gives you the ability to conditionally invoke methods when the screen or an element are scrolled.
@@ -12,7 +13,7 @@ related:
 
 The `v-scroll` directive allows you to provide callbacks when the window, specified target or element itself (with `.self` modifier) is scrolled.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -22,7 +23,7 @@ The default behavior is to bind to the window. If no additional configuration op
 
 ## API
 
-- [v-scroll](/api/v-scroll)
+<api-inline />
 
 ## Examples
 

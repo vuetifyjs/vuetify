@@ -13,7 +13,7 @@ related:
 
 The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,8 +23,7 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 ## API
 
-- [v-chip-group](/api/v-chip-group)
-- [v-chip](/api/v-chip)
+<api-inline />
 
 ## Examples
 

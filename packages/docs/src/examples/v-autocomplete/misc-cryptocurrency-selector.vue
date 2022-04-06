@@ -6,9 +6,9 @@
     </v-toolbar-title>
     <v-autocomplete
       v-model="model"
+      v-model:search-input="search"
       :items="items"
       :loading="isLoading"
-      :search-input.sync="search"
       chips
       clearable
       hide-details
@@ -34,7 +34,7 @@
           class="white--text"
           v-on="on"
         >
-          <v-icon left>
+          <v-icon start>
             mdi-bitcoin
           </v-icon>
           <span v-text="item.name"></span>

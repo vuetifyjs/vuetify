@@ -5,28 +5,29 @@ import './VBottomNavigation.sass'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, useTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
-export default defineComponent({
+// Types
+import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
+
+export const VBottomNavigation = defineComponent({
   name: 'VBottomNavigation',
 
   props: {
     bgColor: String,
     color: String,
     grow: Boolean,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
     mode: {
       type: String,
       validator: (v: any) => !v || ['horizontal', 'shift'].includes(v),
@@ -35,43 +36,57 @@ export default defineComponent({
       type: [Number, String],
       default: 56,
     },
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
-    ...makeLayoutItemProps({
-      name: 'bottom-navigation',
-    }),
+    ...makeLayoutItemProps({ name: 'bottom-navigation' }),
     ...makeTagProps({ tag: 'header' }),
+    ...makeGroupProps({
+      modelValue: true,
+      selectedClass: 'v-btn--selected',
+    }),
     ...makeThemeProps(),
   },
 
   emits: {
-    'update:modelValue': (value: boolean) => true,
+    'update:modelValue': (value: any) => true,
   },
 
   setup (props, { slots }) {
-    const { themeClasses } = useTheme(props)
-    const { borderClasses } = useBorder(props, 'v-bottom-navigation')
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor))
-    const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
-    const { densityClasses } = useDensity(props, 'v-bottom-navigation')
+    const { themeClasses } = useTheme()
+    const { borderClasses } = useBorder(props)
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props, 'v-bottom-navigation')
+    const { roundedClasses } = useRounded(props)
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const layoutStyles = useLayoutItem(
-      props.name,
-      computed(() => props.priority),
-      computed(() => 'bottom'),
-      computed(() => isActive.value ? height.value : 0),
-      height,
-      isActive
-    )
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: computed(() => 'bottom'),
+      layoutSize: computed(() => isActive.value ? height.value : 0),
+      elementSize: height,
+      active: isActive,
+      absolute: toRef(props, 'absolute'),
+    })
+
+    useGroup(props, VBtnToggleSymbol)
+
+    provideDefaults({
+      VBtn: {
+        color: toRef(props, 'color'),
+        density: toRef(props, 'density'),
+        stacked: computed(() => props.mode !== 'horizontal'),
+        variant: 'text',
+      },
+    }, { scoped: true })
 
     return () => {
       return (
@@ -79,11 +94,9 @@ export default defineComponent({
           class={[
             'v-bottom-navigation',
             {
+              'v-bottom-navigation--active': isActive.value,
               'v-bottom-navigation--grow': props.grow,
-              'v-bottom-navigation--horizontal': props.mode === 'horizontal',
-              'v-bottom-navigation--is-active': isActive.value,
               'v-bottom-navigation--shift': props.mode === 'shift',
-              'v-bottom-navigation--absolute': props.absolute,
             },
             themeClasses.value,
             backgroundColorClasses.value,
@@ -91,12 +104,10 @@ export default defineComponent({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
-            textColorClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
-            layoutStyles.value,
-            textColorStyles.value,
+            layoutItemStyles.value,
             {
               height: convertToUnit(height.value),
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
@@ -113,3 +124,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VBottomNavigation = InstanceType<typeof VBottomNavigation>

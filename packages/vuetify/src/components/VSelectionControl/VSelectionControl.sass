@@ -1,0 +1,96 @@
+@forward './variables'
+@use 'sass:map'
+@use 'sass:list'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-selection-control
+  align-items: center
+  contain: layout
+  display: flex
+  flex: 1 0
+  grid-area: control
+  position: relative
+  user-select: none
+
+  .v-label
+    height: 100%
+    width: 100%
+
+  &--disabled
+    opacity: var(--v-disabled-opacity)
+    pointer-events: none
+
+  &--error,
+  &--disabled
+    .v-label
+      opacity: 1
+
+  &--error:not(.v-selection-control--disabled)
+    .v-label
+      color: rgb(var(--v-theme-error))
+
+  &--inline
+    display: inline-flex
+
+    .v-label
+      width: auto
+
+  @at-root
+    @include tools.density('v-selection-control', $selection-control-density) using ($modifier)
+      --v-selection-control-size: #{$selection-control-size + $modifier}
+
+.v-selection-control__wrapper
+  width: var(--v-selection-control-size)
+  height: var(--v-selection-control-size)
+  display: inline-flex
+  align-items: center
+  position: relative
+  justify-content: center
+  flex: none
+
+.v-selection-control__input
+  width: var(--v-selection-control-size)
+  height: var(--v-selection-control-size)
+  align-items: center
+  display: flex
+  flex: none
+  justify-content: center
+  position: relative
+  border-radius: 50%
+
+  input
+    cursor: pointer
+    position: absolute
+    left: 0
+    top: 0
+    width: 100%
+    height: 100%
+    opacity: 0
+
+  &::before
+    @include tools.absolute(true)
+    border-radius: 100%
+    background-color: currentColor
+    opacity: 0
+    pointer-events: none
+
+  &:hover::before
+    opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
+
+  .v-selection-control--disabled &,
+  .v-selection-control--dirty &,
+  .v-selection-control--error &
+    > .v-icon
+      opacity: 1
+
+  .v-selection-control--error:not(.v-selection-control--disabled) &
+    > .v-icon
+      color: rgb(var(--v-theme-error))
+
+  .v-selection-control--focus-visible &::before
+    opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))

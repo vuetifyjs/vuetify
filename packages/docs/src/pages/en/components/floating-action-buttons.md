@@ -13,7 +13,7 @@ related:
 
 The `v-btn` component can be used as a floating action button. This provides an application with a main point of action. Combined with the `v-speed-dial` component, you can create a diverse set of functions available for your users.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,8 +23,7 @@ Floating action buttons can be attached to material to signify a promoted action
 
 ## API
 
-- [v-btn](/api/v-btn)
-- [v-speed-dial](/api/v-speed-dial)
+<api-inline />
 
 <!-- ## Sub-components
 

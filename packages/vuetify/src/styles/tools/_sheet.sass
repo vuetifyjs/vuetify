@@ -1,14 +1,17 @@
+@use './elevation' as *
+@use './radius' as *
+
 @mixin paper ($elevation, $radius, $shaped-radius)
-  +radius($radius)
+  @include radius($radius)
 
   &:not(.v-sheet--outlined)
-    +elevation($elevation)
+    @include elevation($elevation)
 
   @if ($shaped-radius)
     &.v-sheet--shaped
-      +radius($shaped-radius)
+      @include radius($shaped-radius)
 
 
 @mixin sheet ($component, $elevation, $radius, $shaped-radius)
   .v-sheet.#{$component}
-    +paper($elevation, $radius, $shaped-radius)
+    @include paper($elevation, $radius, $shaped-radius)

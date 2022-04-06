@@ -139,22 +139,28 @@ const getComponentApi = (componentName, locales) => {
   const componentMap = loadMap(kebabName, 'components', { props: [], slots: [], events: [], functions: [] })
 
   const component = app._context.components[componentName]
-  const props = Object.keys(component.props).reduce((arr, key) => {
+  const props = Object.keys(component.props || {}).reduce((arr, key) => {
     const prop = component.props[key]
 
-    const type = getPropType(prop.type)
+    const type = getPropType(prop?.type)
 
     return [...arr, {
       name: kebabCase(key),
-      source: prop.source || kebabName,
-      default: getPropDefault(prop.default, type),
+      source: prop?.source || kebabName,
+      default: getPropDefault(prop?.default, type),
       type,
+    }]
+  }, [])
+
+  const events = Object.keys(component.emits || []).reduce((arr, key) => {
+    return [...arr, {
+      name: key,
     }]
   }, [])
 
   const sassVariables = parseSassVariables(componentName)
 
-  const api = deepmerge(componentMap, { name: kebabName, props, sass: sassVariables, component: true })
+  const api = deepmerge(componentMap, { name: kebabName, props, events, sass: sassVariables, component: true })
 
   // Make sure things are sorted
   const categories = ['props', 'slots', 'events', 'functions']
@@ -254,16 +260,10 @@ const getCompleteApi = locales => {
   ].sort((a, b) => a.name.localeCompare(b.name))
 }
 
-const getHeaderLocale = locale => {
-  const { headers } = loadLocale('generic', locale)
-  return headers || {}
-}
-
 module.exports = {
   getApi,
   getCompleteApi,
   getComponentsApi,
   getComposablesApi,
   getDirectivesApi,
-  getHeaderLocale,
 }

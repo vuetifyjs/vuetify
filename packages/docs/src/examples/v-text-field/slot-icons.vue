@@ -5,10 +5,10 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            outlined
             clearable
             label="Message"
             type="text"
+            variant="outlined"
           >
             <template v-slot:prepend>
               <v-tooltip
@@ -49,7 +49,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon left>
+                    <v-icon start>
                       mdi-menu
                     </v-icon>
                     Menu
@@ -63,7 +63,7 @@
                       color="primary"
                       @click="clickMe"
                     >
-                      <v-icon left>
+                      <v-icon start>
                         mdi-target
                       </v-icon>Click me
                     </v-btn>

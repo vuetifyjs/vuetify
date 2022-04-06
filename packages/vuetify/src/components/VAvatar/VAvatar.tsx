@@ -13,37 +13,40 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { defineComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent } from '@/util'
 
-export default defineComponent({
+export const makeVAvatarProps = propsFactory({
+  color: String,
+  start: Boolean,
+  end: Boolean,
+  icon: String,
+  image: String,
+
+  ...makeDensityProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeTagProps(),
+})
+
+export const VAvatar = defineComponent({
   name: 'VAvatar',
 
-  props: {
-    color: String,
-    left: Boolean,
-    right: Boolean,
-    icon: String,
-    image: String,
-    ...makeDensityProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
-  },
+  props: makeVAvatarProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { densityClasses } = useDensity(props, 'v-avatar')
-    const { roundedClasses } = useRounded(props, 'v-avatar')
-    const { sizeClasses, sizeStyles } = useSize(props, 'v-avatar')
+    const { densityClasses } = useDensity(props)
+    const { roundedClasses } = useRounded(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-avatar',
           {
-            'v-avatar--left': props.left,
-            'v-avatar--right': props.right,
+            'v-avatar--start': props.start,
+            'v-avatar--end': props.end,
           },
           backgroundColorClasses.value,
           densityClasses.value,
@@ -55,12 +58,18 @@ export default defineComponent({
           sizeStyles.value,
         ]}
       >
-        { props.image && <VImg src={ props.image } alt="" /> }
 
-        { props.icon && !props.image && <VIcon icon={ props.icon } /> }
-
-        { slots.default?.() }
+        { props.image
+          ? (<VImg src={ props.image } alt="" />)
+          : props.icon
+            ? (<VIcon icon={ props.icon } />)
+            : slots.default?.()
+        }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VAvatar = InstanceType<typeof VAvatar>

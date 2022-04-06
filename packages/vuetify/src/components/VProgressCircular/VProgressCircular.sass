@@ -1,5 +1,7 @@
-// Imports
-@import ./index
+@forward './variables'
+@use 'sass:list'
+@use '../../styles/settings'
+@use './variables' as *
 
 // Elements
 .v-progress-circular
@@ -38,7 +40,7 @@
 // Modifiers
 .v-progress-circular
   @each $name, $multiplier in $progress-circular-sizes
-    $size: $progress-circular-size + ($size-scale * $multiplier)
+    $size: $progress-circular-size + (settings.$size-scale * $multiplier)
 
     &--size-#{$name}
       height: $size
@@ -58,7 +60,7 @@
 
 .v-progress-circular--disable-shrink
   > svg
-    animation-duration: nth($progress-circular-rotate-animation, 2) / 2
+    animation-duration: list.nth($progress-circular-rotate-animation, 2) * .5
 
   .v-progress-circular__overlay
     animation: none

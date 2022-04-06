@@ -5,7 +5,6 @@
   >
     <v-btn
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <v-icon v-if="$attrs.fab || $attrs.icon">
         $mdiVuetify
@@ -33,7 +32,6 @@
         icon: false,
         large: false,
         loading: false,
-        medium: false,
         outlined: false,
         rounded: false,
         small: false,
@@ -48,7 +46,6 @@
           'disabled',
           'large',
           'loading',
-          'medium',
           'small',
           'x-large',
           'x-small',

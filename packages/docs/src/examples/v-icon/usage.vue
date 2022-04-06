@@ -6,7 +6,6 @@
   >
     <v-icon
       v-bind="$attrs"
-      v-on="$listeners"
     >
       {{ icon || 'mdi-plus' }}
     </v-icon>
@@ -36,13 +35,19 @@
         dense: false,
         disabled: false,
         large: false,
-        medium: false,
         small: false,
         'x-large': false,
         'x-small': false,
       },
       options: {
-        booleans: ['disabled'],
+        booleans: [
+          'disabled',
+          'x-small',
+          'small',
+          'dense',
+          'large',
+          'x-large',
+        ],
         selects: {
           color: [
             'red',
@@ -51,16 +56,6 @@
             'green',
             'blue',
             'purple',
-          ],
-        },
-        radioGroups: {
-          size: [
-            'x-small',
-            'small',
-            'dense',
-            'medium',
-            'large',
-            'x-large',
           ],
         },
       },

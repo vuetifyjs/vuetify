@@ -1,4 +1,5 @@
 ---
+nav: Hover
 meta:
   title: Hover component
   description: The hover component makes it easy respond when the user hover events by wrapping selectable content.
@@ -11,19 +12,19 @@ related:
 
 # Hover
 
-The `v-hover` component provides a clean interface for handling hover states for any component.
+The `v-hover` component provides a simple interface for handling hover states for any component.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
-The `v-hover` component is a wrapper that should contain only one child element, and can trigger an event when hovered over. In order for `v-hover` to work properly, either the **value** prop should be set to `true` or the wrapped element should contain `v-slot="{ wrapper }"`.
+ `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To explicitly control the internal state, use the **model-value** property.
 
-<usage name="v-hover" />
+<example file="v-hover/usage" />
 
 ## API
 
-- [v-hover](/api/v-hover)
+<api-inline />
 
 ## Examples
 

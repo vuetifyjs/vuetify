@@ -1,8 +1,10 @@
-@import './index'
+@forward './variables'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
 .v-avatar
   align-items: center
-  border-radius: $avatar-border-radius
   display: inline-flex
   justify-content: center
   line-height: $avatar-line-height
@@ -13,22 +15,8 @@
 
   @include avatar-sizes($avatar-sizes)
   @include avatar-density(('height', 'width'), $avatar-density)
-  @include rounded($avatar-border-radius)
-
-  > *
-    border-radius: inherit
-    width: inherit
-    height: inherit
-
-  > .v-icon
-    font-size: var(--v-avatar-height)
+  @include tools.rounded($avatar-border-radius)
+  @include tools.theme($avatar-theme...)
 
   &--rounded
-    +rounded($avatar-rounded-border-radius)
-
-// VList
-.v-avatar
-  .v-list-item-avatar &
-    overflow: visible
-    height: inherit
-    width: inherit
+    @includes tools.rounded($avatar-rounded-border-radius)

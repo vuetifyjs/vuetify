@@ -1,8 +1,9 @@
 ---
+nav: Click outside
 meta:
   title: Click outside directive
   description: The v-click-outside directive calls a function when something outside of the target element is clicked on.,
-  keyword: click outside, click directive, vue click directive, vuetify click directives
+  keywords: click outside, click directive, vue click directive, vuetify click directives
 related:
   - /components/dialogs/
   - /directives/intersect/
@@ -12,7 +13,7 @@ related:
 
 The `v-click-outside` directive calls a function when something outside of the target element is clicked on. This is used internally by components like `v-menu` and `v-dialog`.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -22,7 +23,7 @@ The `v-click-outside` directive allows you to provide a handler to be invoked wh
 
 ## API
 
-- [v-click-outside](/api/v-click-outside)
+<api-inline />
 
 ## Examples
 

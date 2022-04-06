@@ -1,37 +1,6 @@
-@import './_variables.scss'
-
 .v-parallax
   position: relative
   overflow: hidden
-  z-index: 0
 
-  &__image-container
-    position: absolute
-    top: 0
-    left: 0
-    right: 0
-    bottom: 0
-    z-index: 1
-    contain: strict
-
-  &__image
-    position: absolute
-    bottom: 0
-    left: 50%
-    min-width: 100%
-    min-height: 100%
-    display: none
-    transform: translate(-50%, 0)
+  &--active > .v-img__img
     will-change: transform
-    transition: $parallax-transition
-    z-index: 1
-
-  &__content
-    color: map-get($shades, 'white')
-    height: 100%
-    z-index: 2
-    position: relative
-    display: flex
-    flex-direction: column
-    justify-content: center
-    padding: $parallax-padding

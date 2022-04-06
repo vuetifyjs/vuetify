@@ -1,4 +1,5 @@
 ---
+nav: Buttons
 meta:
   title: Button component
   description: The button component communicates actions that a user can take and are typically placed in dialogs, forms, cards and toolbars.
@@ -11,24 +12,19 @@ related:
 
 # Buttons
 
-The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline-ad slug="scrimba-buttons" />
+The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
 
-<entry-ad />
-
-<!--
+<entry />
 
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-<usage name="v-btn" />
-
--->
+<!-- <usage name="v-btn" /> -->
 
 ## API
 
-- [v-btn](/api/v-btn)
-- [v-btn-toggle](/api/v-btn-toggle)
+<api-inline />
 
 ## Caveats
 
@@ -41,6 +37,12 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 ## Examples
 
 ### Props
+
+#### Variant
+
+The **variant** prop gives you easy access to several different button styles
+
+<example file="v-btn/prop-variant" />
 
 #### Block
 
@@ -70,7 +72,7 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 --->
 
-<random-ad />
+<random />
 
 #### Outlined
 
@@ -95,11 +97,5 @@ Use the **rounded** prop to control the border radius of buttons.
 Buttons can be given different sizing options to fit a multitude of scenarios.
 
 <example file="v-btn/prop-sizing" />
-
-#### Text
-
-Text buttons have no box shadow and no background. Only on hover is the container for the button shown. When used with the **color** prop, the supplied color is applied to the button text instead of the background.
-
-<example file="v-btn/prop-text" />
 
 <backmatter />

@@ -3,7 +3,7 @@ meta:
   title: Calendar component
   description: The calendar component is a clean and simple adaptation to the popular Google Calendar application.
   keywords: calendars, vuetify calendar component, vue calendar component
-  related:
+related:
   - /components/date-pickers
   - /components/time-pickers
   - /components/cards
@@ -13,7 +13,7 @@ meta:
 
 The `v-calendar` component is used to display information in a daily, weekly, monthly, or category view. The daily view has slots for all day or timed elements, and the weekly and monthly view has a slot for each day. The category view has a slot for each category in the day and timed sections based on the categories given or the categories in the given events. Optionally you can pass in an array of events and they will be rendered over the appropriate days and times.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,10 +23,7 @@ A calendar has a type and a value which determines what type of calendar is show
 
 ## API
 
-- [v-calendar](/api/v-calendar)
-- [v-calendar-daily](/api/v-calendar-daily)
-- [v-calendar-monthly](/api/v-calendar-monthly)
-- [v-calendar-weekly](/api/v-calendar-weekly)
+<api-inline />
 
 <!-- ## Sub-components
 

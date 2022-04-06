@@ -33,7 +33,7 @@
               </v-btn>
             </v-list-item-icon>
 
-            <v-list-item-icon :class="{ 'mx-5': $vuetify.breakpoint.mdAndUp }">
+            <v-list-item-icon :class="{ 'mx-5': $vuetify.display.mdAndUp }">
               <v-btn icon>
                 <v-icon>mdi-pause</v-icon>
               </v-btn>
@@ -41,7 +41,7 @@
 
             <v-list-item-icon
               class="ml-0"
-              :class="{ 'mr-3': $vuetify.breakpoint.mdAndUp }"
+              :class="{ 'mr-3': $vuetify.display.mdAndUp }"
             >
               <v-btn icon>
                 <v-icon>mdi-fast-forward</v-icon>

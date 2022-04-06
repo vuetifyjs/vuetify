@@ -9,18 +9,40 @@ import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { createRange, defineComponent, getUid } from '@/util'
+import { createRange, genericComponent, getUid } from '@/util'
 
 // Types
-import type { Variant } from '@/composables/variant'
 import type { Prop } from 'vue'
+import type { MakeSlots } from '@/util'
+import type { Variant } from '@/composables/variant'
 
-export default defineComponent({
+type VRatingItemSlot = {
+  value: number
+  index: number
+  isFilled: boolean
+  isHovered: boolean
+  icon: string
+  color?: string
+  props: Record<string, unknown>
+}
+
+type VRatingItemLabelSlot = {
+  value: number
+  index: number
+  label?: string
+}
+
+export const VRating = genericComponent<new <T>() => {
+  $slots: MakeSlots<{
+    item: [VRatingItemSlot]
+    'item-label': [VRatingItemLabelSlot]
+  }>
+}>()({
   name: 'VRating',
 
   props: {
@@ -72,7 +94,7 @@ export default defineComponent({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { themeClasses } = useTheme(props)
+    const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
 
     const range = computed(() => createRange(Number(props.length), 1))
@@ -170,7 +192,7 @@ export default defineComponent({
             {
               !showStar ? undefined
               : slots.item ? slots.item({
-                ...itemState.value,
+                ...itemState.value[index],
                 props: btnProps,
                 value,
                 index,
@@ -198,14 +220,23 @@ export default defineComponent({
       )
     }
 
+    function createLabel (labelProps: { value: number, index: number, label?: string }) {
+      if (slots['item-label']) return slots['item-label'](labelProps)
+
+      if (labelProps.label) return <span>{ labelProps.label }</span>
+
+      return <span>&nbsp;</span>
+    }
+
     return () => {
-      const hasLabels = !!props.itemLabels?.length
+      const hasLabels = !!props.itemLabels?.length || slots['item-label']
 
       return (
         <props.tag
           class={[
             'v-rating',
             {
+              'v-rating--hover': props.hover,
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
@@ -216,10 +247,9 @@ export default defineComponent({
           { range.value.map((value, i) => (
             <div class="v-rating__wrapper">
               {
-                !hasLabels ? undefined
-                : slots['item-label'] ? slots['item-label']()
-                : props.itemLabels?.[i] ? <span>{ props.itemLabels?.[i] }</span>
-                : <span>&nbsp;</span>
+                hasLabels && props.itemLabelPosition === 'top'
+                  ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
+                  : undefined
               }
               <div
                 class={[
@@ -238,6 +268,11 @@ export default defineComponent({
                   <VRatingItem value={ value } index={ i } />
                 ) }
               </div>
+              {
+                hasLabels && props.itemLabelPosition === 'bottom'
+                  ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
+                  : undefined
+              }
             </div>
           )) }
         </props.tag>
@@ -245,3 +280,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VRating = InstanceType<typeof VRating>

@@ -1,3 +1,1 @@
-import VOverlay from './VOverlay'
-
-export { VOverlay }
+export { VOverlay } from './VOverlay'

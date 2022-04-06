@@ -2,10 +2,10 @@
   <v-container fluid>
     <v-combobox
       v-model="model"
+      v-model:search-input="search"
       :filter="filter"
       :hide-no-data="!search"
       :items="items"
-      :search-input.sync="search"
       hide-selected
       label="Search for an option"
       multiple
@@ -40,7 +40,7 @@
             small
             @click="parent.selectItem(item)"
           >
-            close
+            $delete
           </v-icon>
         </v-chip>
       </template>

@@ -8,7 +8,7 @@
       <v-date-picker
         ref="picker"
         v-model="date"
-        :picker-date.sync="pickerDate"
+        v-model:picker-date="pickerDate"
         full-width
       ></v-date-picker>
     </v-col>
@@ -38,7 +38,7 @@
 <script>
   export default {
     data: () => ({
-      date: new Date().toISOString().substr(0, 10),
+      date: (new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10),
       pickerDate: null,
       notes: [],
       allNotes: [

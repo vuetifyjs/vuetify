@@ -13,7 +13,7 @@ related:
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback. It is our job to enable you to create amazing applications. A lot of the time, you come across something that can be made better. Maybe you find a bug, or you have an idea for additional functionality. That's great! It's as easy as cloning the Vuetify repository to get started working in a development environment.
 
-<promoted-ad slug="vuetify-discord" />
+<promoted slug="vuetify-discord" />
 
 ## Reporting Issues
 
@@ -188,7 +188,7 @@ Some of the more notable links within these services include:
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 
-<promoted-ad slug="vue-jobs" />
+<promoted slug="vue-jobs" />
 
 ### Issue triage
 
@@ -217,7 +217,7 @@ Some changes though are _substantial_, and we ask that these be put through a bi
 
 In order to get a major feature added to Vuetify you must get your RFC merged into this repository as a `.md` file. The following is a guide on how to get started:
 
-- Fork the Vuetify RFC repo <https://github.com/vuetifyjs/rfcs>
+- Fork the Vuetify RFC repo https://github.com/vuetifyjs/rfcs
 
 - Copy `0000-template.md` to `active-rfcs/0000-my-feature.md` (where **my-feature** is descriptive. **do not** assign an RFC number yet).
 
@@ -243,13 +243,13 @@ In order to get a major feature added to Vuetify you must get your RFC merged in
 
 Once an RFC is merged and the corresponding functionality implemented within the Vuetify repository, it will be part of the next _major_ or _minor_ release. Once released, the RFC will enter the **Released** stage and be locked.
 
-For more information regarding RFCs, see the official repository: <https://github.com/vuetifyjs/rfcs>
+For more information regarding RFCs, see the official repository: https://github.com/vuetifyjs/rfcs
 
 ### Commit guidelines
 
 All commit messages are required to follow the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) standard using the _angular_ preset. This standard format consists of 2 types of commits:
 
-- With scope: `<type>(scope): <subject>`
+- With scope: `\<type\>(scope): \<subject\>`
 
   ```bash
   fix(VSelect): don't close when a detachable child is clicked
@@ -257,7 +257,7 @@ All commit messages are required to follow the [conventional-changelog](https://
   fixes #12354
   ```
 
-- Without scope: `<type>: <subject>`
+- Without scope: `\<type\>: \<subject\>`
 
   ```bash
   docs: restructure nav components
@@ -297,7 +297,7 @@ The following is a list of **commit types** used in the _angular_ preset:
 - **chore:** Other commits that don't modify src or test files.
 - **revert:** Commits that revert previous commits.
 
-<promoted-ad slug="vuetify-reddit" />
+<promoted slug="vuetify-reddit" />
 
 #### Commitizen
 
@@ -326,6 +326,6 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 
 [commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /about/team/
+[Core Team]: /about/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
 [Issues]: https://github.com/vuetifyjs/vuetify/issues

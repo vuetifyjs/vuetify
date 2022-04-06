@@ -1,12 +1,10 @@
 <template>
   <v-autocomplete
     clearable
-    multiple
+    item-value="text"
     prepend-inner-icon="$mdiDatabaseSearch"
-    return-object
     solo
     v-bind="$attrs"
-    v-on="$listeners"
   >
     <template #selection="{ item, selected }">
       <v-chip
@@ -16,7 +14,7 @@
         label
       >
         <v-icon
-          left
+          start
           v-text="item.icon"
         />
         <span v-text="item.text" />
@@ -41,5 +39,6 @@
 <script>
   export default {
     name: 'ApiSearch',
+    inheritAttrs: false,
   }
 </script>

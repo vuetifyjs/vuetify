@@ -6,7 +6,6 @@
     <v-breadcrumbs
       :items="items"
       v-bind="$attrs"
-      v-on="$listeners"
     ></v-breadcrumbs>
   </v-row>
 </template>
@@ -37,11 +36,9 @@
       ],
       defaults: {
         large: false,
-        customDivider: false,
         divider: undefined,
       },
       options: {
-        booleans: ['customDivider'],
         selects: {
           divider: ['/', '\\', '.', ';', '>', '-'],
         },

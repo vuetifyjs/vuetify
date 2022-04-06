@@ -3,7 +3,7 @@
     cycle
     height="400"
     hide-delimiter-background
-    show-arrows-on-hover
+    show-arrows="hover"
   >
     <v-carousel-item
       v-for="(slide, i) in slides"
@@ -13,15 +13,11 @@
         :color="colors[i]"
         height="100%"
       >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
+        <div class="d-flex fill-height justify-center align-center">
           <div class="text-h2">
             {{ slide }} Slide
           </div>
-        </v-row>
+        </div>
       </v-sheet>
     </v-carousel-item>
   </v-carousel>

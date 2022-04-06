@@ -1,5 +1,6 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-badge
   display: inline-block
@@ -22,6 +23,8 @@
   transition: $badge-transition
   white-space: nowrap
 
+  @include tools.theme($badge-theme...)
+
   .v-badge--bordered &
     &::after
       border-radius: inherit
@@ -43,8 +46,6 @@
     padding: 0
     width: $badge-dot-width
 
-    @include theme($badge-theme...)
-
     &::after
       border-width: $badge-dot-border-width
 
@@ -54,9 +55,6 @@
 
   .v-icon
     color: inherit
-    font-size: $badge-font-size
-    height: $badge-font-size
-    width: $badge-font-size
 
   img,
   .v-img

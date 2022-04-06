@@ -1,21 +1,27 @@
-// Imports
-@import ./index
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+@use './mixins' as *
 
 .v-chip
   align-items: center
   cursor: default
   display: inline-flex
+  font-weight: $chip-font-weight
+  max-width: $chip-max-width
+  overflow: hidden
   position: relative
   text-decoration: none
+  white-space: $chip-white-space
+  vertical-align: middle
 
   @at-root
     @include chip-sizes()
     @include chip-density('height', $chip-density)
 
-  @include border($chip-border...)
-  @include elevation($chip-elevation)
-  @include rounded($chip-border-radius)
-  @include variant($chip-variants...)
+  @include tools.border($chip-border...)
+  @include tools.rounded($chip-border-radius)
+  @include tools.variant($chip-variants...)
 
   &--border
     border-width: $chip-border-thin-width
@@ -24,34 +30,34 @@
     cursor: pointer
 
   &--label
-    @include rounded($chip-label-border-radius)
+    @include tools.rounded($chip-label-border-radius)
 
 // Elements
-.v-chip__append
-  margin-inline-start: $chip-append-margin-inline-start
-  margin-inline-end: $chip-append-margin-inline-end
-
-  + .v-chip__close
-    margin-inline-start: 0
-
-.v-chip__prepend
-  margin-inline-start: $chip-prepend-margin-inline-start
-  margin-inline-end: $chip-prepend-margin-inline-end
+.v-chip__filter,
+.v-chip__prepend,
+.v-chip__append,
+.v-chip__close
+  align-items: center
+  display: inline-flex
 
 .v-chip__close
-  align-self: center
   cursor: pointer
-  display: inline-flex
   flex: 0 1 auto
   font-size: $chip-close-size
   max-height: $chip-close-size
   max-width: $chip-close-size
   user-select: none
-  margin-inline-start: $chip-close-margin-inline-start
-  margin-inline-end: $chip-close-margin-inline-end
 
   .v-icon
     font-size: inherit
+
+.v-chip__overlay
+  @include tools.absolute()
+  background-color: currentColor
+  border-radius: inherit
+  pointer-events: none
+  opacity: 0
+  transition: opacity .2s ease-in-out
 
 .v-chip--disabled
   opacity: $chip-disabled-opacity

@@ -21,6 +21,7 @@ import {
   withDirectives,
 } from 'vue'
 import {
+  convertToUnit,
   defineComponent,
   SUPPORTS_INTERSECTION,
   useRender,
@@ -37,7 +38,7 @@ export interface srcObject {
   aspect: number
 }
 
-export default defineComponent({
+export const VImg = defineComponent({
   name: 'VImg',
 
   directives: { intersect },
@@ -47,6 +48,7 @@ export default defineComponent({
     alt: String,
     cover: Boolean,
     eager: Boolean,
+    gradient: String,
     lazySrc: String,
     options: {
       type: Object as PropType<IntersectionObserverInit>,
@@ -58,16 +60,13 @@ export default defineComponent({
         threshold: undefined,
       }),
     },
-    position: {
-      type: String,
-      default: 'center center',
-    },
     sizes: String,
     src: {
       type: [String, Object] as PropType<string | srcObject>,
       default: '',
     },
     srcset: String,
+    width: [String, Number],
 
     ...makeTransitionProps(),
   },
@@ -115,6 +114,15 @@ export default defineComponent({
       ) return
 
       state.value = 'loading'
+
+      if (normalisedSrc.value.lazySrc) {
+        const lazyImg = new Image()
+        lazyImg.src = normalisedSrc.value.lazySrc
+        pollForSize(lazyImg, null)
+      }
+
+      if (!normalisedSrc.value.src) return
+
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
@@ -132,12 +140,6 @@ export default defineComponent({
           getSrc()
         }
       })
-
-      if (normalisedSrc.value.lazySrc) {
-        const lazyImg = new Image()
-        lazyImg.src = normalisedSrc.value.lazySrc
-        pollForSize(lazyImg, null)
-      }
     }
 
     function onLoad () {
@@ -244,9 +246,34 @@ export default defineComponent({
       )
     })
 
+    const __gradient = computed(() => {
+      if (!props.gradient) return
+
+      return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
+    })
+
+    const isBooted = ref(false)
+    {
+      const stop = watch(aspectRatio, val => {
+        if (val) {
+          // Doesn't work with nextTick, idk why
+          requestAnimationFrame(() => {
+            requestAnimationFrame(() => {
+              isBooted.value = true
+            })
+          })
+          stop()
+        }
+      })
+    }
+
     useRender(() => (
       <VResponsive
-        class="v-img"
+        class={[
+          'v-img',
+          { 'v-img--booting': !isBooted.value },
+        ]}
+        style={{ width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) }}
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }
@@ -255,7 +282,7 @@ export default defineComponent({
           options: props.options,
         }, null, ['once']]}
         v-slots={{
-          additional: () => [__image.value, __preloadImage.value, __placeholder.value, __error.value],
+          additional: () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value],
           default: slots.default,
         }}
       />
@@ -270,3 +297,5 @@ export default defineComponent({
     }
   },
 })
+
+export type VImg = InstanceType<typeof VImg>

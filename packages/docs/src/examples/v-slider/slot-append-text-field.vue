@@ -1,68 +1,76 @@
 <template>
-  <v-card class="e4">
+  <v-card width="400" style="margin: auto">
     <v-responsive
       :style="{ background: `rgb(${red}, ${green}, ${blue})` }"
       height="300px"
     ></v-responsive>
 
     <v-card-text>
-      <v-container fluid>
-        <v-row>
-          <v-col cols="12">
-            <v-slider
-              v-model="red"
-              :max="255"
-              label="R"
-              class="align-center"
-            >
-              <template v-slot:append>
-                <v-text-field
-                  v-model="red"
-                  class="mt-0 pt-0"
-                  type="number"
-                  style="width: 60px"
-                ></v-text-field>
-              </template>
-            </v-slider>
-          </v-col>
+      <v-slider
+        v-model="red"
+        :max="255"
+        :step="1"
+        label="R"
+        hide-details
+        class="ma-4"
+      >
+        <template v-slot:append>
+          <v-text-field
+            v-model="red"
+            class="mt-0 pt-0"
+            type="number"
+            style="width: 80px"
+            density="compact"
+            single-line
+            hide-details
+            variant="outlined"
+          ></v-text-field>
+        </template>
+      </v-slider>
 
-          <v-col cols="12">
-            <v-slider
-              v-model="green"
-              :max="255"
-              label="G"
-              class="align-center"
-            >
-              <template v-slot:append>
-                <v-text-field
-                  v-model="green"
-                  class="mt-0 pt-0"
-                  type="number"
-                  style="width: 60px"
-                ></v-text-field>
-              </template>
-            </v-slider>
-          </v-col>
+      <v-slider
+        v-model="green"
+        :max="255"
+        :step="1"
+        label="G"
+        hide-details
+        class="ma-4"
+      >
+        <template v-slot:append>
+          <v-text-field
+            v-model="green"
+            class="mt-0 pt-0"
+            type="number"
+            style="width: 80px"
+            density="compact"
+            single-line
+            hide-details
+            variant="outlined"
+          ></v-text-field>
+        </template>
+      </v-slider>
 
-          <v-col cols="12">
-            <v-slider
-              v-model="blue"
-              :max="255"
-              label="B"
-              class="align-center"
-            >
-              <template v-slot:append>
-                <v-text-field
-                  v-model="blue"
-                  class="mt-0 pt-0"
-                  type="number"
-                  style="width: 60px"
-                ></v-text-field>
-              </template>
-            </v-slider>
-          </v-col>
-        </v-row>
-      </v-container>
+      <v-slider
+        v-model="blue"
+        :max="255"
+        :step="1"
+        label="B"
+        hide-details
+        class="ma-4"
+      >
+        <template v-slot:append>
+          <v-text-field
+            v-model="blue"
+            class="mt-0 pt-0"
+            type="number"
+            style="width: 80px"
+            density="compact"
+            single-line
+            hide-details
+            variant="outlined"
+          ></v-text-field>
+        </template>
+      </v-slider>
     </v-card-text>
   </v-card>
 </template>

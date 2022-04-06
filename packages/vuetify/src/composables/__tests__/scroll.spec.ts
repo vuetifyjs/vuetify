@@ -108,14 +108,14 @@ describe('useScroll', () => {
     const { vm } = mountFunction()
 
     await scrollWindow(1000)
-    expect(vm.savedScroll).toEqual(0)
+    expect(vm.savedScroll).toBe(0)
 
     await scrollWindow(900)
-    expect(vm.savedScroll).toEqual(900)
+    expect(vm.savedScroll).toBe(900)
 
     vm.isScrollActive = true
     await wait()
-    expect(vm.savedScroll).toEqual(0)
+    expect(vm.savedScroll).toBe(0)
   })
 
   it(`should warn if target isn't present`, async () => {
