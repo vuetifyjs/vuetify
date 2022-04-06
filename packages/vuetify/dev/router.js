@@ -4,32 +4,32 @@ const home = {
   setup: () => () => h('div', 'hello'),
 }
 const page1 = {
-  setup: () => () => h('div', 'hello'),
+  setup: () => () => h('div', 'page1'),
 }
 const page2 = {
-  setup: () => () => h('div', 'hello'),
+  setup: () => () => h('div', 'page2'),
 }
 const nested1 = {
-  setup: () => () => h('div', 'hello'),
+  setup: () => () => h('div', 'nested1'),
 }
 const nested2 = {
-  setup: () => () => h('div', 'hello'),
+  setup: () => () => h('div', 'nested2'),
 }
 
 export const routes = [
   {
     path: '/',
-    name: 'Home',
+    name: 'home',
     component: home,
   },
   {
     path: '/page1',
-    name: 'Page 1',
+    name: 'page1',
     component: page1,
   },
   {
     path: '/page2',
-    name: 'Page 2',
+    name: 'page2',
     component: page2,
   },
   {

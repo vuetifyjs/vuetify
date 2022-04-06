@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -127,6 +127,10 @@ export function useGroupItem (
   })
 
   const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
+
+  watch(isSelected, value => {
+    vm.emit('group:selected', { value })
+  })
 
   return {
     id,

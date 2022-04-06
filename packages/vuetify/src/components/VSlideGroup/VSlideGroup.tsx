@@ -315,7 +315,7 @@ export const VSlideGroup = defineComponent({
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
         ]}
-        tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
+        tabindex={ -1 }
         onFocus={ onFocus }
       >
         { hasAffixes.value && (
