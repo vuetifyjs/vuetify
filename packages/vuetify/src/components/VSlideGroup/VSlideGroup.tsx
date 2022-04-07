@@ -27,10 +27,6 @@ export const VSlideGroup = defineComponent({
   name: 'VSlideGroup',
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'v-slide-item--active',
-    },
     centerActive: Boolean,
     direction: {
       type: String,
@@ -59,7 +55,9 @@ export const VSlideGroup = defineComponent({
       ),
     },
     ...makeTagProps(),
-    ...makeGroupProps(),
+    ...makeGroupProps({
+      selectedClass: 'v-slide-group-item--active',
+    }),
   },
 
   emits: {
