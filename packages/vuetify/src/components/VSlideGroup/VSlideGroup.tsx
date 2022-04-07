@@ -270,7 +270,7 @@ export const VSlideGroup = defineComponent({
         case 'always': return true
 
         // Always show arrows on desktop
-        case 'desktop': return mobile.value
+        case 'desktop': return !mobile.value
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior
