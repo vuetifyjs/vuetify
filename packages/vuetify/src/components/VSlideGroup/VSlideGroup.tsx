@@ -132,7 +132,7 @@ export const VSlideGroup = defineComponent({
     watch(isOverflowing, () => {
       if (!firstOverflow || !contentRef.value || firstSelectedIndex.value < 0) return
 
-      firstOverflow = true
+      firstOverflow = false
 
       // TODO: Is this too naive? Should we store element references in group composable?
       const selectedElement = contentRef.value.children[firstSelectedIndex.value] as HTMLElement
