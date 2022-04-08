@@ -94,7 +94,7 @@ export const VListItem = genericComponent<new () => {
     const { select, isSelected, root, parent } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isSelected.value
+      return props.active || (link.isExactActive?.value ?? isSelected.value)
     })
     const variantProps = computed(() => ({
       color: isActive.value ? props.activeColor ?? props.color : props.color,
