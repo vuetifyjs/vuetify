@@ -33,9 +33,7 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 
 ## Functional Components
 
-<vue-school-link href="https://vueschool.io/courses/functional-components" title="Watch a Functional Components Course at Vue School">
-Learn how to improve your Vue.js apps by using Functional Components from a video course by Vue School
-</vue-school-link>
+<vuetify-ad slug="vs-video-functional-components" />
 
 ### v-card-actions
 

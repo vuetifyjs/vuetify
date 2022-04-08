@@ -67,7 +67,7 @@ This will start the Vue User Interface and open a new window in your browser. On
 
 ## Nuxt install
 
-<vue-school-link href="https://vueschool.io/courses/nuxtjs-fundamentals" title="Watch a Nuxt Course at Vue School">Learn Nuxt.js with a FREE course, created together with the founders of Nuxt</vue-school-link>
+<vuetify-ad slug="vs-video-nuxt" />
 
 Vuetify can be added by installing the Nuxt Vuetify module.
 
