@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://store.vuetifyjs.com/products/nitro-vuetify-3-admin-pro?utm_source=vuetify"
+      href="https://vueschool.io/free-weekend/?friend=vuetify?utm_source=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'ui-lib-road-to-vuetify-3',
+          event_label: 'vs-free-weekend-2022',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,11 +78,11 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-free-weekend-2022/vs-fw-mobile.png)
 
     @media (min-width: 437px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-free-weekend-2022/vs-fw-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-nitro-vuetify-3/ui-lib-nitro-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-free-weekend-2022/vs-fw-desktop.png)
 </style>
