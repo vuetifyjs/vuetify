@@ -23,6 +23,8 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { computed, toRef } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export const VBanner = defineComponent({
   name: 'VBanner',
@@ -32,6 +34,7 @@ export const VBanner = defineComponent({
     color: String,
     icon: String,
     lines: String as PropType<'one' | 'two' | 'three'>,
+    stacked: Boolean,
     sticky: Boolean,
     text: String,
 
@@ -54,24 +57,31 @@ export const VBanner = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+    const lineClasses = computed(() => props.lines ? `v-banner--${props.lines}-line` : undefined)
+
+    provideDefaults({
+      VBannerActions: {
+        color: toRef(props, 'color'),
+        density: toRef(props, 'density'),
+      },
+    })
 
     useRender(() => {
-      const hasAvatar = !!(props.avatar || props.icon || slots.avatar || slots.icon)
-      const hasText = !!(props.text || slots.default)
-      const hasContent = hasAvatar || hasText || slots.default
+      const hasText = !!(props.text || slots.text)
+      const hasPrepend = !!(slots.prepend || props.avatar || props.icon)
 
       return (
         <props.tag
           class={[
             'v-banner',
             {
-              'v-banner--mobile': mobile.value,
+              'v-banner--stacked': props.stacked || mobile.value,
               'v-banner--sticky': props.sticky,
-              [`v-banner--${props.lines}-line`]: true,
             },
             borderClasses.value,
             densityClasses.value,
             elevationClasses.value,
+            lineClasses.value,
             positionClasses.value,
             roundedClasses.value,
             themeClasses.value,
@@ -82,45 +92,33 @@ export const VBanner = defineComponent({
           ]}
           role="banner"
         >
-          { hasContent && (
-            <div class="v-banner__content">
-              { hasAvatar && (
-                <VDefaultsProvider
-                  defaults={{
-                    VAvatar: {
-                      color: props.color,
-                      density: props.density,
-                      icon: props.icon,
-                      image: props.avatar,
-                    },
-                  }}
-                >
-                  <div class="v-banner__avatar">
-                    { slots.avatar ? slots.avatar() : slots.icon ? slots.icon() : (<VAvatar />) }
-                  </div>
-                </VDefaultsProvider>
-              ) }
-
-              { hasText && (
-                <VBannerText>
-                  { slots.default ? slots.default() : props.text }
-                </VBannerText>
-              ) }
-            </div>
-          ) }
-
-          { slots.actions && (
+          { hasPrepend && (
             <VDefaultsProvider
               defaults={{
-                VBtn: {
+                VAvatar: {
                   color: props.color,
                   density: props.density,
-                  variant: 'text',
+                  icon: props.icon,
+                  image: props.avatar,
                 },
               }}
             >
-              <VBannerActions v-slots={{ default: slots.actions }} />
+              <div class="v-banner__prepend">
+                { slots.prepend ? slots.prepend() : (<VAvatar />) }
+              </div>
             </VDefaultsProvider>
+          ) }
+
+          { hasText && (
+            <VBannerText>
+              { slots.text ? slots.text() : props.text }
+            </VBannerText>
+          ) }
+
+          { slots.default?.() }
+
+          { slots.actions && (
+            <VBannerActions v-slots={{ default: slots.actions }} />
           ) }
         </props.tag>
       )

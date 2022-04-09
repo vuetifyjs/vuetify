@@ -5,7 +5,9 @@
       icon="mdi-wifi-strength-alert-outline"
       color="warning"
     >
-      No Internet connection
+      <template v-slot:text>
+        No Internet connection
+      </template>
 
       <template v-slot:actions>
         <v-btn
