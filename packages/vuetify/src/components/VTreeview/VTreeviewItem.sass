@@ -14,29 +14,29 @@
 
   @include tools.states('.v-treeview__overlay', false)
 
-  &__content
-    display: flex
-    align-items: center
+.v-treeview-item__content
+  display: flex
+  align-items: center
 
-  &__title
-    display: flex
-    align-items: center
-    padding-inline-start: 8px
+.v-treeview-item__title
+  display: flex
+  align-items: center
+  padding-inline-start: 8px
 
-  &__prepend
-    min-width: 40px
-    display: flex
-    justify-content: center
+.v-treeview-item__prepend
+  min-width: 40px
+  display: flex
+  justify-content: center
 
-  &__expand
-    position: relative
+.v-treeview-item__expand
+  position: relative
 
-  &__loading
-    position: absolute
-    top: 0
-    left: 0
+.v-treeview-item__loading
+  position: absolute
+  top: 0
+  left: 0
 
-  &--clickable
+.v-treeview-item--clickable
     cursor: pointer
 
 .v-treeview-item--filtered, .v-treeview-group--filtered
@@ -66,7 +66,23 @@ $base-padding: list.nth($treeview-item-padding, 2)
 
 .v-treeview-item--prepend,
 .v-treeview-group__items .v-treeview-item--prepend
-  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$treeview-item-checkbox-size}) !important
+  padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$treeview-indent-size}) !important
+
+// Show lines
+.v-treeview-group__items
+  position: relative
+
+.v-treeview-group__line
+  display: flex
+  position: absolute
+  justify-content: flex-start
+  height: calc(100% - 26px)
+  left: calc(#{$base-padding} + var(--indent-padding) - #{$treeview-indent-size})
+  top: 0
+  width: $treeview-indent-size
+  margin-inline-start: calc($treeview-indent-size / 2)
+  border-left: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
+  border-bottom: 1px solid rgba(var(--v-border-color), var(--v-border-opacity))
 
 .v-treeview-item
   $root: &

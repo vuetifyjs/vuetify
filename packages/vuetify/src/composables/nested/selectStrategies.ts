@@ -183,6 +183,26 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       const arr = []
 
       for (const [key, value] of v.entries()) {
+        if (value === 'on') arr.push(key)
+      }
+
+      return arr
+    },
+  }
+
+  return strategy
+}
+
+export const classicLeafSelectStrategy = (mandatory?: boolean): SelectStrategy => {
+  const parentStrategy = classicSelectStrategy(mandatory)
+
+  const strategy: SelectStrategy = {
+    select: parentStrategy.select,
+    in: parentStrategy.in,
+    out: (v, children) => {
+      const arr = []
+
+      for (const [key, value] of v.entries()) {
         if (value === 'on' && !children.has(key)) arr.push(key)
       }
 

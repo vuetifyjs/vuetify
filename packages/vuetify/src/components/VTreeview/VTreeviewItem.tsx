@@ -136,7 +136,7 @@ export const VTreeviewItem = defineComponent({
               { slots.expand ? slots.expand() : (
                 <VBtn
                   variant="text"
-                  size="small"
+                  size="x-small"
                   disabled={ props.loading }
                   icon={ isOpen.value ? props.collapseIcon : props.expandIcon }
                   onClick={ onExpandClick }
@@ -152,6 +152,7 @@ export const VTreeviewItem = defineComponent({
             { props.showSelect && (slots.selection ? slots.selection(slotProps.value) : (
               <VSelectionControl
                 type="checkbox"
+                density="comfortable"
                 disabled={ props.disabled || props.loading }
                 trueIcon={ trueIcon.value }
                 falseIcon={ falseIcon.value }

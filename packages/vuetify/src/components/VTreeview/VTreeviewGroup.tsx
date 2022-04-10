@@ -61,6 +61,7 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
     },
     hideExpand: Boolean,
     openOnClick: Boolean,
+    showLines: Boolean,
 
     ...makeTagProps(),
   },
@@ -82,6 +83,7 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
         <props.tag
           class={[
             'v-treeview-group',
+            'v-treeview-group--foo',
             {
               'v-treeview-group--filtered': !visibleIds.value.has(id.value),
             },
@@ -91,6 +93,9 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
             { slots.activator?.({ props: activatorProps.value }) }
           </VTreeviewGroupActivator>
           <div class="v-treeview-group__items" v-show={ isOpen.value }>
+            { props.showLines && (
+              <div class="v-treeview-group__line"></div>
+            ) }
             { slots.default?.() }
           </div>
         </props.tag>

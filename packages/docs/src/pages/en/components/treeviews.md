@@ -34,6 +34,10 @@ A basic example
 
 <example file="v-treeview/prop-selection" />
 
+#### Show lines
+
+<example file="v-treeview/prop-show-lines" />
+
 #### Density
 
 Use the **density** prop to provide a more compact layout that decreases the heights of the items.
@@ -81,6 +85,7 @@ Treeview supports several different selection strategies using the **select-stra
 | `independent` | Any items can be selected, without regard for the parent-child hierarchy.
 | `single-independent` | Same as `independent` but only a single item can be selected at a time.
 | `classic` | The default select strategy. Selecting (and unselecting) a parent will also affect all of its children.
+| `classic-leaf` | Same as `classic` but only leaf items will be emitted
 
 <example file="v-treeview/prop-select-strategy" />
 

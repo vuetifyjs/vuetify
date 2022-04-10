@@ -68,6 +68,7 @@ export const VTreeview = defineComponent({
     indeterminateIcon: String,
     selectedColor: String,
     search: String,
+    showLines: Boolean,
   },
 
   emits: {
@@ -84,10 +85,13 @@ export const VTreeview = defineComponent({
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter(props, computed(() => flatten(items.value)), search)
     const visibleIds = computed(() => {
-      const ids = filteredItems.value.flatMap(({ item }) => {
+      if (!search.value) {
+        return new Set(items.value.flatMap(item => [item.props.value, ...getChildren(item.props.value)]))
+      }
+
+      return new Set(filteredItems.value.flatMap(({ item }) => {
         return [...getPath(item.props.value), ...getChildren(item.props.value)]
-      })
-      return new Set(ids)
+      }))
     })
 
     let previousOpened: Set<string> | null = null
@@ -125,6 +129,9 @@ export const VTreeview = defineComponent({
         indeterminateIcon: toRef(props, 'indeterminateIcon'),
         selectedColor: toRef(props, 'selectedColor'),
         rounded: toRef(props, 'rounded'),
+      },
+      VTreeviewGroup: {
+        showLines: toRef(props, 'showLines'),
       },
     }))
 

@@ -2,7 +2,7 @@
   <v-container>
     <v-select
       v-model="selectionStrategy"
-      :items="['single-leaf', 'leaf', 'single-independent', 'independent', 'classic']"
+      :items="['single-leaf', 'leaf', 'single-independent', 'independent', 'classic', 'classic-leaf']"
       label="Selection strategy"
     ></v-select>
     <v-row>
