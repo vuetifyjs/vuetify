@@ -1,0 +1,124 @@
+/// <reference types="../../../../types/cypress" />
+
+import { createRouter, createWebHistory } from 'vue-router'
+import { VTab, VTabs } from '../'
+
+describe('VTabs', () => {
+  it('should respond to clicks', () => {
+    cy.mount(() => (
+      <>
+        <VTabs>
+          <VTab value="foo">foo</VTab>
+          <VTab value="bar">bar</VTab>
+        </VTabs>
+      </>
+    ))
+
+    cy.get('.v-tab').eq(1).click()
+
+    cy.vue().then(wrapper => {
+      const tabs = wrapper.findComponent('.v-tabs')
+      const emits = tabs.emitted('update:modelValue')
+
+      expect(emits).to.deep.equal([
+        ['foo'], // tabs will have initially set first tab as selected because of mandatory
+        ['bar'],
+      ])
+    })
+  })
+
+  it('should render slider', () => {
+    cy.mount(() => (
+      <VTabs>
+        <VTab>foo</VTab>
+        <VTab>bar</VTab>
+      </VTabs>
+    ))
+
+    cy.get('.v-tab').eq(0).find('.v-tab__slider').should('exist')
+
+    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('exist')
+  })
+
+  it('should hide slider', () => {
+    cy.mount(() => (
+      <VTabs hideSlider>
+        <VTab>foo</VTab>
+        <VTab>bar</VTab>
+      </VTabs>
+    ))
+
+    cy.get('.v-tab').eq(0).find('.v-tab__slider').should('not.exist')
+
+    cy.get('.v-tab').eq(1).click().find('.v-tab__slider').should('not.exist')
+  })
+
+  it('should respond to v-model changes', () => {
+    cy.mount(({ modelValue }: any) => (
+      <VTabs modelValue={ modelValue }>
+        <VTab value="foo">foo</VTab>
+        <VTab value="bar">bar</VTab>
+      </VTabs>
+    ))
+
+    cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
+
+    cy.vue().then(wrapper => {
+      wrapper.setProps({ modelValue: 'bar' })
+    })
+
+    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+  })
+
+  it('should react to router changes', () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: '/',
+          component: { template: 'Home' },
+        },
+        {
+          path: '/about',
+          component: { template: 'About' },
+        },
+      ],
+    })
+
+    cy.mount(() => (
+      <VTabs>
+        <VTab to="/">foo</VTab>
+        <VTab to="/about">bar</VTab>
+      </VTabs>
+    ), {
+      global: {
+        plugins: [router],
+      },
+    })
+
+    cy.get('.v-tab').eq(1).click().then(() => {
+      expect(router.currentRoute.value.path).to.equal('/about')
+    })
+
+    cy.get('.v-tabs').then(() => {
+      router.push('/')
+    })
+
+    cy.get('.v-tab').eq(0).should('not.have.class', 'v-tab--selected')
+    cy.get('.v-tab').eq(1).should('have.class', 'v-tab--selected')
+  })
+
+  it('should render tabs vertically', () => {
+    cy.mount(() => (
+      <VTabs direction="vertical">
+        <VTab>foo</VTab>
+        <VTab>bar</VTab>
+      </VTabs>
+    ))
+
+    cy.get('.v-tabs').should('have.class', 'v-tabs--vertical')
+
+    cy.get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
+  })
+})
