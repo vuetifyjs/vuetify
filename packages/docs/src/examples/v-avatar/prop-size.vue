@@ -1,5 +1,5 @@
 <template>
-  <div class="d-flex align-center justify-space-between">
+  <div class="d-flex align-center justify-space-around">
     <v-avatar
       color="primary"
       size="x-small"

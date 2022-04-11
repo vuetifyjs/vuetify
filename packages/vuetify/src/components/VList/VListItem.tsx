@@ -67,10 +67,7 @@ export const VListItem = genericComponent<new () => {
     appendAvatar: String,
     appendIcon: String,
     disabled: Boolean,
-    lines: {
-      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
-      default: false,
-    },
+    lines: String as PropType<'one' | 'two' | 'three'>,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,

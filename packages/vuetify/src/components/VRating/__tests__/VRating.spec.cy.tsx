@@ -130,7 +130,7 @@ describe('VRating', () => {
 
     cy.get('.v-rating__item input').should('have.length', 10)
 
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click()
+    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
 
     cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
   })
@@ -144,7 +144,7 @@ describe('VRating', () => {
 
     cy.get('.v-rating__item input').should('have.length', 10)
 
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click()
+    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
 
     cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
   })

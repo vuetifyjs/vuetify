@@ -11,7 +11,6 @@
         <v-btn
           variant="text"
           color="primary"
-          @click="dismiss"
         >
           Dismiss
         </v-btn>

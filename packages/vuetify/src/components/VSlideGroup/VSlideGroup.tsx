@@ -27,10 +27,6 @@ export const VSlideGroup = defineComponent({
   name: 'VSlideGroup',
 
   props: {
-    activeClass: {
-      type: String,
-      default: 'v-slide-item--active',
-    },
     centerActive: Boolean,
     direction: {
       type: String,
@@ -59,7 +55,9 @@ export const VSlideGroup = defineComponent({
       ),
     },
     ...makeTagProps(),
-    ...makeGroupProps(),
+    ...makeGroupProps({
+      selectedClass: 'v-slide-group-item--active',
+    }),
   },
 
   emits: {
@@ -90,15 +88,25 @@ export const VSlideGroup = defineComponent({
       isOverflowing.value = containerSize.value + 1 < contentSize.value
     })
 
-    watch(group.selected, selected => {
-      if (!selected.length || !contentRef.value) return
+    const firstSelectedIndex = computed(() => {
+      if (!group.selected.value.length) return -1
 
-      const index = group.items.value.findIndex(item => item.id === selected[selected.length - 1])
+      return group.items.value.findIndex(item => item.id === group.selected.value[0])
+    })
+
+    const lastSelectedIndex = computed(() => {
+      if (!group.selected.value.length) return -1
+
+      return group.items.value.findIndex(item => item.id === group.selected.value[group.selected.value.length - 1])
+    })
+
+    watch(group.selected, () => {
+      if (firstSelectedIndex.value < 0 || !contentRef.value) return
 
       // TODO: Is this too naive? Should we store element references in group composable?
-      const selectedElement = contentRef.value.children[index] as HTMLElement
+      const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
 
-      if (index === 0 || !isOverflowing.value) {
+      if (firstSelectedIndex.value === 0 || !isOverflowing.value) {
         scrollOffset.value = 0
       } else if (props.centerActive) {
         scrollOffset.value = calculateCenteredOffset({
@@ -118,6 +126,24 @@ export const VSlideGroup = defineComponent({
           isHorizontal: isHorizontal.value,
         })
       }
+    })
+
+    let firstOverflow = true
+    watch(isOverflowing, () => {
+      if (!firstOverflow || !contentRef.value || firstSelectedIndex.value < 0) return
+
+      firstOverflow = false
+
+      // TODO: Is this too naive? Should we store element references in group composable?
+      const selectedElement = contentRef.value.children[firstSelectedIndex.value] as HTMLElement
+
+      scrollOffset.value = calculateCenteredOffset({
+        selectedElement,
+        containerSize: containerSize.value,
+        contentSize: contentSize.value,
+        isRtl: isRtl.value,
+        isHorizontal: isHorizontal.value,
+      })
     })
 
     const disableTransition = ref(false)
@@ -272,7 +298,7 @@ export const VSlideGroup = defineComponent({
         case 'always': return true
 
         // Always show arrows on desktop
-        case 'desktop': return mobile.value
+        case 'desktop': return !mobile.value
 
         // Show arrows on mobile when overflowing.
         // This matches the default 2.2 behavior

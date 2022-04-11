@@ -17,11 +17,9 @@
         <template v-slot:append>
           <v-text-field
             v-model="red"
-            class="mt-0 pt-0"
             type="number"
             style="width: 80px"
             density="compact"
-            single-line
             hide-details
             variant="outlined"
           ></v-text-field>
@@ -39,11 +37,9 @@
         <template v-slot:append>
           <v-text-field
             v-model="green"
-            class="mt-0 pt-0"
             type="number"
             style="width: 80px"
             density="compact"
-            single-line
             hide-details
             variant="outlined"
           ></v-text-field>
@@ -61,11 +57,9 @@
         <template v-slot:append>
           <v-text-field
             v-model="blue"
-            class="mt-0 pt-0"
             type="number"
             style="width: 80px"
             density="compact"
-            single-line
             hide-details
             variant="outlined"
           ></v-text-field>
@@ -81,15 +75,8 @@
       return {
         red: 64,
         green: 128,
-        blue: 0,
+        blue: 10,
       }
     },
   }
 </script>
-
-<style scoped>
-.e4 {
-  width: 400px;
-  margin: auto;
-}
-</style>

@@ -2,6 +2,7 @@
 
 import { VBtn } from '../VBtn'
 import { generate } from '@/../cypress/templates'
+import { createRouter, createWebHistory } from 'vue-router'
 
 const loadingText = 'Loading'
 const anchor = {
@@ -201,11 +202,36 @@ describe('VBtn', () => {
       cy.mount(<VBtn href={ anchor.href }>Click me</VBtn>)
         .get('.v-btn')
         .click()
-        .get('a') // currently not rendering the <a> tag at all
+        .get('a')
         .should('contain.text', 'Click me')
         .should('have.focus')
         .hash()
         .should('contain', anchor.hash)
+    })
+
+    it('should change route when using to prop', () => {
+      const router = createRouter({
+        history: createWebHistory(),
+        routes: [
+          {
+            path: '/',
+            component: { template: 'Home' },
+          },
+          {
+            path: '/about',
+            component: { template: 'About' },
+          },
+        ],
+      })
+
+      cy.mount(<VBtn to="/about">Click me</VBtn>, { global: { plugins: [router] } })
+        .get('.v-btn')
+        .click()
+        .get('a')
+        .should('contain.text', 'Click me')
+        .should('have.focus')
+        .url()
+        .should('contain', '/about')
     })
   })
 

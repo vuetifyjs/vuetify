@@ -1,4 +1,4 @@
-import { computed, effectScope, onScopeDispose, ref, toRaw, watch } from 'vue'
+import { effectScope, onScopeDispose, readonly, ref, toRaw, watch, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
@@ -25,11 +25,13 @@ export function useStack (isActive: Ref<boolean>) {
     }
   }, { immediate: true })
 
-  const isTop = computed(() => {
-    return toRaw(stack.value[stack.value.length - 1]) === vm
+  const isTop = ref(true)
+  watchEffect(() => {
+    const _isTop = toRaw(stack.value[stack.value.length - 1]) === vm
+    setTimeout(() => isTop.value = _isTop)
   })
 
   return {
-    isTop,
+    isTop: readonly(isTop),
   }
 }
