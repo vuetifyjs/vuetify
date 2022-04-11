@@ -65,10 +65,12 @@ export const VBanner = defineComponent({
         density: toRef(props, 'density'),
       },
       VBannerAvatar: {
+        density: toRef(props, 'density'),
         image: props.avatar,
         start: true,
       },
       VBannerIcon: {
+        density: toRef(props, 'density'),
         color: toRef(props, 'color'),
         icon: props.icon,
         start: true,
