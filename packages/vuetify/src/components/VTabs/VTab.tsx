@@ -5,14 +5,14 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeGroupItemProps } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
 import { VTabsSymbol } from './shared'
 
@@ -53,14 +53,17 @@ export const VTab = defineComponent({
   },
 
   setup (props, { slots, attrs }) {
-    const { isSelected, select, selectedClass } = useGroupItem(props, VTabsSymbol)
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
+    const isSelected = ref(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
-    watch(isSelected, isSelected => {
-      if (isSelected) {
+
+    function updateSlider ({ value }: { value: boolean }) {
+      isSelected.value = value
+
+      if (value) {
         const prevEl: HTMLElement | undefined = rootEl.value?.$el.parentElement?.querySelector('.v-tab--selected .v-tab__slider')
         const nextEl = sliderEl.value
 
@@ -103,7 +106,7 @@ export const VTab = defineComponent({
           easing: standardEasing,
         })
       }
-    })
+    }
 
     useRender(() => {
       const [btnProps] = pick(props, [
@@ -117,27 +120,29 @@ export const VTab = defineComponent({
         'ripple',
         'theme',
         'disabled',
+        'selectedClass',
+        'value',
+        'color',
       ])
 
       return (
         <VBtn
           _as="VTab"
+          symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
-            selectedClass.value,
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
-          onClick={ () => !props.disabled && select(!isSelected.value) }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
-          color={ isSelected.value ? props.color : undefined }
           variant="text"
           rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          onGroup:selected={ updateSlider }
         >
           { slots.default ? slots.default() : props.title }
           { !props.hideSlider && (
@@ -154,9 +159,7 @@ export const VTab = defineComponent({
       )
     })
 
-    return {
-      isSelected,
-    }
+    return {}
   },
 })
 

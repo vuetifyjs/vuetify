@@ -18,6 +18,7 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { useSelectLink } from '@/composables/selectLink'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -32,6 +33,10 @@ export const VBtn = defineComponent({
   directives: { Ripple },
 
   props: {
+    symbol: {
+      type: null,
+      default: VBtnToggleSymbol,
+    },
     flat: Boolean,
     icon: [Boolean, String],
     prependIcon: String,
@@ -69,12 +74,14 @@ export const VBtn = defineComponent({
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
-    const group = useGroupItem(props, VBtnToggleSymbol, false)
+    const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
     })
+
+    useSelectLink(link, group?.select)
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
@@ -117,7 +124,12 @@ export const VBtn = defineComponent({
             null,
             props.icon ? ['center'] : null,
           ]}
-          onClick={ isDisabled.value || link.navigate || group?.toggle }
+          onClick={ (e: MouseEvent) => {
+            if (isDisabled.value) return
+
+            link.navigate?.(e)
+            group?.toggle()
+          } }
         >
           { genOverlays(true, 'v-btn') }
 
