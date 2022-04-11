@@ -1,3 +1,5 @@
 export { VBanner } from './VBanner'
 export { VBannerActions } from './VBannerActions'
+export { VBannerAvatar } from './VBannerAvatar'
+export { VBannerIcon } from './VBannerIcon'
 export { VBannerText } from './VBannerText'

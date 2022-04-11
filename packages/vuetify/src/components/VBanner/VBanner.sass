@@ -1,5 +1,5 @@
-@use 'sass:math'
 @forward './variables'
+@use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -25,9 +25,6 @@
   @include tools.position($banner-positions)
   @include tools.rounded($banner-border-radius)
   @include tools.theme($banner-theme...)
-
-  &--border
-    border-width: $banner-border-thin-width
 
   &--rounded
     @include tools.rounded($banner-rounded-border-radius)
@@ -63,6 +60,7 @@
         padding-top: $banner-padding * 3 + $modifier
         padding-bottom: $banner-padding * 2 + $modifier
 
+      &:not(.v-banner--one-line),
       &.v-banner--two-line,
       &.v-banner--three-line
         .v-banner-actions
@@ -71,10 +69,12 @@
   &--sticky
     top: $banner-sticky-top
 
+.v-banner-avatar,
+.v-banner-icon,
 .v-banner__prepend
   align-self: flex-start
   grid-area: prepend
-  margin-inline-end: $banner-avatar-margin-end
+  margin-inline-end: $banner-prepend-margin-end
 
 .v-banner-actions
   align-self: flex-end
@@ -85,7 +85,7 @@
 
   .v-banner--two-line &,
   .v-banner--three-line &
-    margin-top: 20px
+    margin-top: $banner-actions-line-margin-top
 
 .v-banner-text
   -webkit-box-orient: vertical
