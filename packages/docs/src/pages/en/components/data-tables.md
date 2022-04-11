@@ -13,9 +13,7 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.
 
-<vue-school-link href="https://vueschool.io" >
-Up you Vue.js game and support Vuetify by subscribing to Vue School
-</vue-school-link>
+<entry slug="vs-vuetify-subscribe" />
 
 <promoted type="theme" />
 
@@ -113,9 +111,7 @@ The data table exposes a **search** prop that allows you to filter your data.
 
 ### Slots
 
-<vue-school-link href="https://vueschool.io/lessons/vue-3-component-slots" title="Watch a Free Slots Tutorial at Vue School">
-Not sure how slots work? Learn all about slots with this free video from Vue School.
-</vue-school-link>
+<entry slug="vs-vue-3-slots" />
 
 The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.\<name\>`.
 
