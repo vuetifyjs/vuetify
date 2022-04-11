@@ -17,4 +17,4 @@ export const VAppBarTitle = defineComponent({
       />
     )
   },
-})
+}) as typeof VToolbarTitle

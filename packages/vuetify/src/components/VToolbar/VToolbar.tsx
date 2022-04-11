@@ -12,7 +12,6 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useForwardRef } from '@/composables/forwardRef'
 
@@ -23,6 +22,7 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 // Types
 import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, PropType } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export type Density = typeof allowedDensities[number]
 
@@ -78,27 +78,33 @@ export const VToolbar = genericComponent<new () => {
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const contentHeight = computed(() => (
+    const isExtended = computed(() => (!!(props.extended || slots.extension)))
+    const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
-    ))
+    ), 10))
+    const extensionHeight = computed(() => isExtended.value
+      ? parseInt((
+        Number(props.extensionHeight) +
+        (props.density === 'prominent' ? Number(props.extensionHeight) : 0) -
+        (props.density === 'comfortable' ? 4 : 0) -
+        (props.density === 'compact' ? 8 : 0)
+      ), 10)
+      : 0
+    )
 
     provideDefaults({
       VBtn: {
         flat: true,
         variant: 'text',
       },
-      VTextField: {
-        hideDetails: true,
-      },
     })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
-      const isExtended = !!(props.extended || slots.extension)
 
       return (
         <props.tag
@@ -162,10 +168,10 @@ export const VToolbar = genericComponent<new () => {
             ) }
           </div>
 
-          { isExtended && (
+          { isExtended.value && (
             <div
               class="v-toolbar__extension"
-              style={{ height: convertToUnit(props.extensionHeight) }}
+              style={{ height: convertToUnit(extensionHeight.value) }}
             >
               { slots.extension?.() }
             </div>
@@ -174,7 +180,10 @@ export const VToolbar = genericComponent<new () => {
       )
     })
 
-    return useForwardRef({ contentHeight })
+    return useForwardRef({
+      contentHeight,
+      extensionHeight,
+    })
   },
 })
 

@@ -9,14 +9,11 @@
     @include tools.rounded($menu-content-border-radius)
 
     > .v-card,
-    > .v-sheet
+    > .v-sheet,
+    > .v-list
       background: rgb(var(--v-theme-surface))
       border-radius: inherit
       overflow: auto
       height: 100%
 
-      &::before
-        border-radius: inherit
-        z-index: -1
-        @include tools.absolute(true)
-        @include tools.elevation($menu-elevation)
+      @include tools.elevation($menu-elevation)

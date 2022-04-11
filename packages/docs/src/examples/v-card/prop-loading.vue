@@ -4,13 +4,14 @@
     class="mx-auto my-12"
     max-width="374"
   >
-    <template v-slot:progress>
-      <v-progress-linear
-        color="deep-purple"
-        height="10"
-        indeterminate
-      ></v-progress-linear>
-    </template>
+    <v-progress-linear
+      v-if="loading"
+      class="position-absolute"
+      style="z-index: 1"
+      color="deep-purple"
+      height="10"
+      indeterminate
+    ></v-progress-linear>
 
     <v-img
       height="250"

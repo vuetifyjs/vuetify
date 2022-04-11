@@ -110,14 +110,20 @@ export const VList = genericComponent<new <T>() => {
     const { roundedClasses } = useRounded(props)
     const { open, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
+    const activeColor = toRef(props, 'activeColor')
+    const color = toRef(props, 'color')
 
     createList()
 
     provideDefaults({
+      VListGroup: {
+        activeColor,
+        color,
+      },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
-        activeColor: toRef(props, 'activeColor'),
-        color: toRef(props, 'color'),
+        activeColor,
+        color,
         density: toRef(props, 'density'),
         disabled: toRef(props, 'disabled'),
         lines: toRef(props, 'lines'),

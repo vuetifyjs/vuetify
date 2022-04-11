@@ -1,3 +1,6 @@
+// Styles
+import '../VSlider/VSlider.sass'
+
 // Components
 import { VInput } from '../VInput'
 import { VSliderThumb } from '../VSlider/VSliderThumb'

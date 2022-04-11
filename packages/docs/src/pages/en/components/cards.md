@@ -54,15 +54,29 @@ The recommended placement of elements inside of `v-card` is:
 | **v-card-text** | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
 | **v-card-actions** | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
+## Basics
+
+There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
+
+<example file="v-card/basics-content" />
+
+Props give you an easy interface to display text-only content. They can also be used to easily render images and icons.
+
+Use slots if you need to render more complex content. If you need full control over the content, use markup.
+
+In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
+
+<alert type="info">
+
+  In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
+
+</alert>
+
+<example file="v-card/basics-combine" />
+
 ## Examples
 
 ### Props
-
-#### Loading
-
-Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear).
-
-<example file="v-card/prop-loading" />
 
 #### Outlined
 
@@ -125,5 +139,11 @@ The `v-card` component has multiple children components that help you build comp
 Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), we are able to create a unique weather card. The list components ensure that we have consistent spacing and functionality while the slider component allows us to provide a useful interface of selection to the user.
 
 <example file="v-card/misc-weather-card" />
+
+#### Loading
+
+Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
+
+<example file="v-card/prop-loading" />
 
 <backmatter />

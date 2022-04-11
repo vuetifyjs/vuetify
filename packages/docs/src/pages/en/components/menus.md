@@ -18,7 +18,13 @@ The `v-menu` component shows a menu at the position of the element used to activ
 
 ## Usage
 
-Remember to put the element that activates the menu in the `activator` slot.
+There are three main ways that menus can be defined in markup.
+
+The first one is by using the **activator** slot. Don't forget to bind the slot **props** to the activating element.
+
+The second one is by using the **activator** prop with value `parent`. This will turn the parent element of the menu into the activator.
+
+The third one is to supply a CSS selector string to **activator** prop. This allows you to place the menu and its activator in separate parts of the markup.
 
 <example file="v-menu/usage" />
 
@@ -30,7 +36,7 @@ Remember to put the element that activates the menu in the `activator` slot.
 
 ### Props
 
-#### Absolute
+<!-- #### Absolute
 
 Menus can also be placed absolutely on top of the activator element using the **absolute** prop. Try clicking anywhere on the image.
 
@@ -40,9 +46,9 @@ Menus can also be placed absolutely on top of the activator element using the **
 
 Menus can also be used without an activator by using **absolute** together with the props **position-x** and **position-y**. Try right-clicking anywhere on the image.
 
-<example file="v-menu/prop-absolute-without-activator" />
+<example file="v-menu/prop-absolute-without-activator" /> -->
 
-#### Close on click
+<!-- #### Close on click
 
 Menu can be closed when lost focus.
 
@@ -52,25 +58,19 @@ Menu can be closed when lost focus.
 
 You can configure whether `v-menu` should be closed when its content is clicked.
 
-<example file="v-menu/prop-close-on-content-click" />
+<example file="v-menu/prop-close-on-content-click" /> -->
 
-#### Disabled
+<!-- #### Disabled
 
 You can disable the menu. Disabled menus can't be opened.
 
-<example file="v-menu/prop-disabled" />
+<example file="v-menu/prop-disabled" /> -->
 
-#### Offset x
+#### Anchor
 
-Menu can be offset by the X axis to make the activator visible.
+Menu can be offset relative to the activator by using the **anchor** prop. Read more about **anchor** [here](/components/overlays).
 
-<example file="v-menu/prop-offset-x" />
-
-#### Offset y
-
-Menu can be offset by the Y axis to make the activator visible.
-
-<example file="v-menu/prop-offset-y" />
+<example file="v-menu/prop-anchor" />
 
 #### Open on hover
 
@@ -78,17 +78,17 @@ Menus can be accessed using hover instead of clicking with the **open-on-hover**
 
 <example file="v-menu/prop-open-on-hover" />
 
-#### Rounded
-
-Menus can have their border-radius set by the **rounded** prop. Additional information about rounded classes is on the [Border Radius page](/styles/border-radius).
-
-<example file="v-menu/prop-rounded" />
-
 ### Slots
 
 #### Activator and tooltip
 
-With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly. **Note: this same syntax is used for other nested activators such as `v-dialog` w/ `v-tooltip`.**
+With the new `v-slot` syntax, nested activators such as those seen with a `v-menu` and `v-tooltip` attached to the same activator button, need a particular setup in order to function correctly.
+
+<alert type="info">
+
+  This same syntax is used for other nested activators such as `v-dialog` with `v-tooltip`
+
+</alert>
 
 <example file="v-menu/slot-activator-and-tooltip" />
 
@@ -106,11 +106,11 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <example file="v-menu/misc-popover" />
 
-#### Use In components
+<!-- #### Use In components
 
 Menus can be placed within almost any component.
 
-<example file="v-menu/misc-use-in-components" />
+<example file="v-menu/misc-use-in-components" /> -->
 
 ## Accessibility
 

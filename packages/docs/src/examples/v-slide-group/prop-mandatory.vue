@@ -7,37 +7,34 @@
     <v-slide-group
       v-model="model"
       class="pa-4"
+      selected-class="bg-primary"
       mandatory
       show-arrows
     >
-      <v-slide-item
+      <v-slide-group-item
         v-for="n in 15"
         :key="n"
-        v-slot="{ active, toggle }"
+        v-slot="{ isSelected, toggle, selectedClass }"
       >
         <v-card
-          :color="active ? 'primary' : 'grey lighten-1'"
-          class="ma-4"
+          color="grey-lighten-1"
+          :class="['ma-4', selectedClass]"
           height="200"
           width="100"
           @click="toggle"
         >
-          <v-row
-            class="fill-height"
-            align="center"
-            justify="center"
-          >
+          <div class="d-flex fill-height align-center justify-center">
             <v-scale-transition>
               <v-icon
-                v-if="active"
+                v-if="isSelected"
                 color="white"
                 size="48"
-                v-text="'mdi-close-circle-outline'"
+                icon="mdi-close-circle-outline"
               ></v-icon>
             </v-scale-transition>
-          </v-row>
+          </div>
         </v-card>
-      </v-slide-item>
+      </v-slide-group-item>
     </v-slide-group>
   </v-sheet>
 </template>

@@ -87,6 +87,7 @@ export const VCheckbox = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                v-slots={ slots }
               />
             ),
           }}

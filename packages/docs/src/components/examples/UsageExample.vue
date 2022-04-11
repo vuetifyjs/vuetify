@@ -23,6 +23,8 @@
         </v-btn>
       </v-btn-toggle>
 
+      <v-spacer />
+
       <v-tooltip anchor="bottom">
         <template #activator="{ props }">
           <v-btn

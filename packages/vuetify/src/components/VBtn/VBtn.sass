@@ -14,8 +14,9 @@
   justify-content: center
   letter-spacing: $button-text-letter-spacing
   line-height: $button-line-height
+  max-width: $button-max-width
   outline: none
-  overflow: visible
+  overflow: $button-overflow
   position: relative
   text-decoration: none
   text-indent: $button-text-letter-spacing
@@ -26,6 +27,7 @@
   user-select: none
   vertical-align: $button-vertical-align
   flex-shrink: 0
+  white-space: $button-white-space
 
   @at-root
     @include button-sizes()
@@ -98,6 +100,17 @@
 
   &--rounded
     @include tools.rounded($button-rounded-border-radius)
+
+  .v-icon
+    --v-icon-size-multiplier: #{calc(18/21)}
+
+  &--icon
+    .v-icon
+      --v-icon-size-multiplier: 1
+
+  &--stacked
+    .v-icon
+      --v-icon-size-multiplier: #{calc(24/21)}
 
 .v-btn__content
   transition: $button-content-transition

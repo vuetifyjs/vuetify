@@ -1,7 +1,6 @@
 <template>
-  <v-card>
-    <v-system-bar></v-system-bar>
-    <v-toolbar flat>
+  <v-card max-height="300" class="overflow-auto">
+    <v-toolbar color="primary">
       <v-toolbar-title>My Document</v-toolbar-title>
       <v-spacer></v-spacer>
       <div>
@@ -13,7 +12,7 @@
       </div>
     </v-toolbar>
     <v-banner
-      single-line
+      lines="one"
       :sticky="sticky"
     >
       We can't save your edits while you are in offline mode.
@@ -27,9 +26,8 @@
         </v-btn>
       </template>
     </v-banner>
-    <v-card-text class="grey lighten-4">
+    <v-card-text class="bg-grey-lighten-4">
       <v-sheet
-        max-width="800"
         height="300"
         class="mx-auto"
       ></v-sheet>

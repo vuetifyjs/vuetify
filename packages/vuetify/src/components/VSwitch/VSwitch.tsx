@@ -7,7 +7,7 @@ import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/V
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
@@ -23,8 +23,11 @@ export const VSwitch = defineComponent({
     indeterminate: Boolean,
     inset: Boolean,
     flat: Boolean,
+    loading: {
+      type: [Boolean, String],
+      default: false,
+    },
 
-    ...makeLoaderProps(),
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
   },
@@ -88,6 +91,7 @@ export const VSwitch = defineComponent({
                 { ...controlAttrs }
               >
                 {{
+                  ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div

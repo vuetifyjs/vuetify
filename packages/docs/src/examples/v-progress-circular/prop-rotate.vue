@@ -4,7 +4,7 @@
       :rotate="360"
       :size="100"
       :width="15"
-      :value="value"
+      :model-value="value"
       color="teal"
     >
       {{ value }}
@@ -14,7 +14,7 @@
       :rotate="-90"
       :size="100"
       :width="15"
-      :value="value"
+      :model-value="value"
       color="primary"
     >
       {{ value }}
@@ -24,7 +24,7 @@
       :rotate="90"
       :size="100"
       :width="15"
-      :value="value"
+      :model-value="value"
       color="red"
     >
       {{ value }}
@@ -34,7 +34,7 @@
       :rotate="180"
       :size="100"
       :width="15"
-      :value="value"
+      :model-value="value"
       color="pink"
     >
       {{ value }}

@@ -54,7 +54,7 @@ describe('VPagination', () => {
     cy.get('.v-pagination__item').last().should('have.class', 'v-pagination__item--is-active')
   })
 
-  it.skip('should render offset pages when using start prop', () => {
+  it('should render offset pages when using start prop', () => {
     cy.mount(() => (
       <VPagination length="3" start="3" />
     ))
@@ -78,7 +78,8 @@ describe('VPagination', () => {
       <VPagination length="100" total-visible="5" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 5)
+    // 5 buttons and 1 ellipsis
+    cy.get('.v-pagination__item').should('have.length', 6)
   })
 
   it('should limit items when not enough space', () => {
@@ -86,7 +87,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 6)
+    cy.get('.v-pagination__item').should('have.length', 7)
   })
 
   it('should render in RTL mode', () => {

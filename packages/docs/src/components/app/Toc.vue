@@ -19,7 +19,7 @@
 
     <ul class="mb-4 ml-5">
       <router-link
-        v-for="({ to, level, text }, i) in toc"
+        v-for="{ to, level, text } in toc"
         v-slot="{ href }"
         :key="text"
         :to="to"
@@ -40,40 +40,60 @@
           <a
             :href="href"
             class="v-toc-link d-block transition-swing text-decoration-none"
-            @click.prevent.stop="onClick(to, i)"
+            @click.prevent.stop="onClick(to)"
             v-text="text"
           />
         </li>
       </router-link>
     </ul>
 
-    <v-container>
-      <app-caption
-        v-if="sponsors.length"
-        path="sponsors"
-        class="mb-2 ml-2"
-      />
+    <template #append>
+      <v-container>
+        <v-card
+          :color="dark ? undefined : 'grey-lighten-5'"
+          variant="contained-flat"
+        >
 
-      <v-row no-gutters>
-        <v-col v-for="sponsor of sponsors" :key="sponsor.slug" cols="6">
-          <sponsor-card width="96" compact :sponsor="sponsor" max-height="36" />
-        </v-col>
-      </v-row>
+          <v-container class="pa-2">
+            <app-caption
+              v-if="sponsors.length"
+              path="sponsors"
+              class="mt-n1 mb-1 ml-2"
+            />
 
-      <v-row>
-        <v-col cols="12">
-          <carbon class="pl-2" />
-        </v-col>
-      </v-row>
-    </v-container>
+            <v-row dense>
+              <v-col
+                v-for="sponsor of sponsors"
+                :key="sponsor.slug"
+                :cols="sponsor.metadata.tier === -1 ? 12 : 6"
+                class="text-center"
+              >
+                <sponsor-card
+                  :max-height="sponsor.metadata.tier === -1 ? 52 : undefined"
+                  :sponsor="sponsor"
+                  style="width: 100%; height: 100%;"
+                />
+              </v-col>
+            </v-row>
+          </v-container>
+        </v-card>
+
+        <v-row>
+          <v-col cols="12">
+            <carbon />
+          </v-col>
+        </v-row>
+      </v-container>
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
   // Utilities
-  import { computed, onBeforeMount, ref } from 'vue'
+  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useSponsorsStore } from '../../store/sponsors'
+  import { useTheme } from 'vuetify'
 
   import SponsorCard from '@/components/sponsor/Card.vue'
 
@@ -171,7 +191,7 @@
     return { onScroll, scrolling }
   }
 
-  export default {
+  export default defineComponent({
     name: 'AppToc',
 
     components: {
@@ -181,6 +201,7 @@
     setup () {
       const route = useRoute()
       const router = useRouter()
+      const theme = useTheme()
 
       const { onScroll, scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -205,11 +226,21 @@
         toc: computed(() => route.meta.toc as TocItem[]),
         onClick,
         onScroll,
-        sponsors: computed(() => sponsorStore.sponsors.filter(sponsor => sponsor.metadata.tier === 2)),
+        sponsors: computed(() => (
+          sponsorStore.sponsors
+            .filter(sponsor => sponsor.metadata.tier <= 2)
+            .sort((a, b) => {
+              const aTier = a.metadata.tier
+              const bTier = b.metadata.tier
+
+              return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
+            })
+        )),
+        dark: computed(() => theme.getTheme(theme.current.value).dark),
         route,
       }
     },
-  }
+  })
 </script>
 
 <style lang="sass">
@@ -229,4 +260,7 @@
     &.theme--dark
       li:not(.router-link-active)
         border-left-color: rgba(255, 255, 255, 0.5)
+
+    .v-navigation-drawer__content
+      height: auto
 </style>

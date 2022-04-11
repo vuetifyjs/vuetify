@@ -3,17 +3,12 @@
     v-model="app.drawer"
     width="300"
   >
-    <app-drawer-prepend />
-
-    <v-divider />
-
     <app-list :items="items" nav />
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
   // Components
-  import AppDrawerPrepend from './DrawerPrepend.vue'
   import AppList from '@/components/app/list/List.vue'
 
   // Composables
@@ -31,7 +26,6 @@
 
     components: {
       AppList,
-      AppDrawerPrepend,
     },
 
     setup () {

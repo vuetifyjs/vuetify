@@ -67,10 +67,7 @@ export const VListItem = genericComponent<new () => {
     appendAvatar: String,
     appendIcon: String,
     disabled: Boolean,
-    lines: {
-      type: [Boolean, String] as PropType<'one' | 'two' | 'three' | false>,
-      default: false,
-    },
+    lines: String as PropType<'one' | 'two' | 'three'>,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
@@ -130,12 +127,13 @@ export const VListItem = genericComponent<new () => {
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
+      const hasColor = !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || props.value != null || !!list)
+      const isClickable = !props.disabled && (link.isClickable.value || (props.value != null && !!list))
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -152,7 +150,7 @@ export const VListItem = genericComponent<new () => {
             },
             themeClasses.value,
             borderClasses.value,
-            colorClasses.value,
+            hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
             lineClasses.value,
@@ -160,7 +158,7 @@ export const VListItem = genericComponent<new () => {
             variantClasses.value,
           ]}
           style={[
-            colorStyles.value,
+            hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
           ]}
           href={ link.href.value }

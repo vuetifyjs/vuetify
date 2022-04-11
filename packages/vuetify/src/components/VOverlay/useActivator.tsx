@@ -14,9 +14,11 @@ import {
 // Types
 import type { DelayProps } from '@/composables/delay'
 import type {
+  ComponentInternalInstance,
   ComponentPublicInstance,
   EffectScope,
   PropType,
+
   Ref,
 } from 'vue'
 
@@ -133,12 +135,13 @@ export function useActivator (
     })
   })
 
+  const vm = getCurrentInstance('useActivator')
   let scope: EffectScope
   watch(() => !!props.activator, val => {
     if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, { activatorEl, activatorRef, activatorEvents })
+        _useActivator(props, vm, { activatorEl, activatorRef, activatorEvents })
       })
     } else if (scope) {
       scope.stop()
@@ -148,7 +151,11 @@ export function useActivator (
   return { activatorEl, activatorRef, activatorEvents }
 }
 
-function _useActivator (props: ActivatorProps, { activatorEl, activatorEvents }: ReturnType<typeof useActivator>) {
+function _useActivator (
+  props: ActivatorProps,
+  vm: ComponentInternalInstance,
+  { activatorEl, activatorEvents }: ReturnType<typeof useActivator>
+) {
   watch(() => props.activator, (val, oldVal) => {
     if (oldVal && val !== oldVal) {
       const activator = getActivator(oldVal)
@@ -195,7 +202,6 @@ function _useActivator (props: ActivatorProps, { activatorEl, activatorEvents }:
     })
   }
 
-  const vm = getCurrentInstance('useActivator')
   function getActivator (selector = props.activator): HTMLElement | undefined {
     let activator
     if (selector) {

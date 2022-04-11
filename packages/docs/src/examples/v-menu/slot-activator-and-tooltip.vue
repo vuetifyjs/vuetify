@@ -2,11 +2,10 @@
   <div class="text-center">
     <v-menu>
       <template v-slot:activator="{ props: menu }">
-        <v-tooltip bottom>
+        <v-tooltip anchor="top">
           <template v-slot:activator="{ props: tooltip }">
             <v-btn
               color="primary"
-              dark
               v-bind="mergeProps(menu, tooltip)"
             >
               Dropdown w/ Tooltip

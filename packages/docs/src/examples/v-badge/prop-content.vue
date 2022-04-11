@@ -2,7 +2,7 @@
   <v-toolbar color="blue-grey-darken-3">
     <v-spacer></v-spacer>
 
-    <v-btn class="text-none" stacked variant="contained-text">
+    <v-btn class="text-none" stacked>
       <v-badge dot color="success">
         <v-icon>mdi-home-outline</v-icon>
       </v-badge>

@@ -1,14 +1,11 @@
 <template>
   <div class="text-center">
-    <v-switch
-      v-model="offset"
-      label="Y offset"
-      color="primary"
-    ></v-switch>
-    <v-menu
-      top
-      :offset-y="offset"
-    >
+    <v-select
+      v-model="anchor"
+      :items="anchors"
+      label="Anchor"
+    ></v-select>
+    <v-menu :anchor="anchor">
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
@@ -40,7 +37,14 @@
         { title: 'Click Me' },
         { title: 'Click Me 2' },
       ],
-      offset: true,
+      anchors: [
+        'top',
+        'bottom',
+        'start',
+        'end',
+        'center',
+      ],
+      anchor: 'end',
     }),
   }
 </script>

@@ -3,7 +3,7 @@
     :aria-label="found?.metadata.name"
     :href="found?.metadata.href"
     :ripple="false"
-    class="d-inline-block px-2 py-1"
+    class="d-inline-flex align-center pa-2"
     color="transparent"
     flat
     rel="noopener"
@@ -25,7 +25,7 @@
 
 <script lang="ts">
   import { computed, defineComponent, ref, watch } from 'vue'
-  import { useTheme } from 'vuetify/lib/composables/theme.mjs'
+  import { useTheme } from 'vuetify'
   import { useSponsorsStore } from '@/store/sponsors'
 
   export default defineComponent({
@@ -68,7 +68,7 @@
         watch(() => sponsors.sponsors, val => {
           if (sponsor.value || !val.length) return
 
-          sponsor.value = sponsors.bySlug(props.slug)
+          sponsor.value = sponsors.bySlug(props.slug!)
         })
       }
 

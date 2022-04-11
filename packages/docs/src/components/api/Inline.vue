@@ -40,7 +40,7 @@
         if (props.components) return props.components.split(/, ?/)
 
         const path = route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
-        return pageToApi[path] as string[]
+        return pageToApi[path as keyof typeof pageToApi]
       })
 
       const showInline = computed(() => store.api === 'inline')

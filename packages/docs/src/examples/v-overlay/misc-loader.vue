@@ -6,7 +6,7 @@
       @click="overlay = !overlay"
     >
       Launch Application
-      <v-icon right>
+      <v-icon end>
         mdi-open-in-new
       </v-icon>
     </v-btn>

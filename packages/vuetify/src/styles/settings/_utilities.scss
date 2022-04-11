@@ -483,11 +483,39 @@ $utilities: () !default;
         class: position,
         values: static relative fixed absolute sticky
       ),
+      // Sizing
       "fill-height": (
         property: height,
         class: fill,
         values: (
           height: 100%
+        )
+      ),
+      "height": (
+        property: height,
+        class: h,
+        values: (
+          auto: auto,
+          screen: 100vh,
+          0: 0,
+          25: 25%,
+          50: 50%,
+          75: 75%,
+          100: 100%
+        )
+      ),
+      "width": (
+        property: width,
+        class: w,
+        values: (
+          auto: auto,
+          0: 0,
+          25: 25%,
+          33: 33%,
+          50: 50%,
+          66: 66%,
+          75: 75%,
+          100: 100%
         )
       )
     ),

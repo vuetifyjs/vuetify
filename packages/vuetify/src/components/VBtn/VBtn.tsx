@@ -125,7 +125,7 @@ export const VBtn = defineComponent({
             <VIcon
               class="v-btn__icon"
               icon={ props.prependIcon }
-              left={ !props.stacked }
+              start
             />
           ) }
 
@@ -144,7 +144,7 @@ export const VBtn = defineComponent({
             <VIcon
               class="v-btn__icon"
               icon={ props.appendIcon }
-              right={ !props.stacked }
+              end
             />
           ) }
         </Tag>

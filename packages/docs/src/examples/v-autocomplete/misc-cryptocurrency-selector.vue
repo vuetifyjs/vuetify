@@ -34,7 +34,7 @@
           class="white--text"
           v-on="on"
         >
-          <v-icon left>
+          <v-icon start>
             mdi-bitcoin
           </v-icon>
           <span v-text="item.name"></span>

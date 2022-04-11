@@ -3,43 +3,32 @@
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
-      :nudge-width="200"
-      offset-x
+      anchor="end"
     >
       <template v-slot:activator="{ props }">
         <v-btn
           color="indigo"
-          dark
           v-bind="props"
         >
           Menu as Popover
         </v-btn>
       </template>
 
-      <v-card>
+      <v-card min-width="300">
         <v-list>
-          <v-list-item>
-            <v-list-item-avatar>
-              <img
-                src="https://cdn.vuetifyjs.com/images/john.jpg"
-                alt="John"
-              >
-            </v-list-item-avatar>
-
-            <v-list-item-content>
-              <v-list-item-title>John Leider</v-list-item-title>
-              <v-list-item-subtitle>Founder of Vuetify</v-list-item-subtitle>
-            </v-list-item-content>
-
-            <v-list-item-action>
+          <v-list-item
+            prepend-avatar="https://cdn.vuetifyjs.com/images/john.jpg"
+            title="John Leider"
+            subtitle="Founder of Vuetify"
+          >
+            <template v-slot:append>
               <v-btn
-                :class="fav ? 'red--text' : ''"
-                icon
+                variant="text"
+                :class="fav ? 'text-red' : ''"
+                icon="mdi-heart"
                 @click="fav = !fav"
-              >
-                <v-icon>mdi-heart</v-icon>
-              </v-btn>
-            </v-list-item-action>
+              ></v-btn>
+            </template>
           </v-list-item>
         </v-list>
 
@@ -47,23 +36,21 @@
 
         <v-list>
           <v-list-item>
-            <v-list-item-action>
-              <v-switch
-                v-model="message"
-                color="purple"
-              ></v-switch>
-            </v-list-item-action>
-            <v-list-item-title>Enable messages</v-list-item-title>
+            <v-switch
+              v-model="message"
+              color="purple"
+              label="Enable messages"
+              hide-details
+            ></v-switch>
           </v-list-item>
 
           <v-list-item>
-            <v-list-item-action>
-              <v-switch
-                v-model="hints"
-                color="purple"
-              ></v-switch>
-            </v-list-item-action>
-            <v-list-item-title>Enable hints</v-list-item-title>
+            <v-switch
+              v-model="hints"
+              color="purple"
+              label="Enable hints"
+              hide-details
+            ></v-switch>
           </v-list-item>
         </v-list>
 

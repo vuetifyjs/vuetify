@@ -7,7 +7,6 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useGroup } from '@/composables/group'
 import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
@@ -157,12 +156,6 @@ export const VWindow = genericComponent<new () => {
     function next () {
       canMoveForward.value && group.next()
     }
-
-    provideDefaults({
-      VBtn: {
-        variant: 'text',
-      },
-    }, { scoped: true })
 
     const arrows = computed(() => {
       const arrows = []

@@ -149,26 +149,25 @@ export const VPagination = defineComponent({
     const range = computed(() => {
       if (length.value <= 0) return []
 
-      if (totalVisible.value <= 3) {
-        return [Math.min(Math.max(start.value, page.value), start.value + length.value)]
-      }
+      if (totalVisible.value <= 2) return [page.value]
 
-      if (props.length <= totalVisible.value) {
+      if (length.value <= totalVisible.value) {
         return createRange(length.value, start.value)
       }
 
-      const middle = Math.ceil(totalVisible.value / 2)
-      const left = middle
+      const even = totalVisible.value % 2 === 0
+      const middle = even ? totalVisible.value / 2 : Math.floor(totalVisible.value / 2)
+      const left = even ? middle : middle + 1
       const right = length.value - middle
 
-      if (page.value < left) {
-        return [...createRange(Math.max(1, totalVisible.value - 2), start.value), props.ellipsis, length.value]
-      } else if (page.value > right) {
-        const rangeLength = totalVisible.value - 2
+      if (left - page.value >= 0) {
+        return [...createRange(Math.max(1, totalVisible.value - 1), start.value), props.ellipsis, length.value]
+      } else if (page.value - right >= 0) {
+        const rangeLength = totalVisible.value - 1
         const rangeStart = length.value - rangeLength + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]
       } else {
-        const rangeLength = Math.max(1, totalVisible.value - 4)
+        const rangeLength = Math.max(1, totalVisible.value - 3)
         const rangeStart = rangeLength === 1 ? page.value : page.value - Math.ceil(rangeLength / 2) + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart), props.ellipsis, length.value]
       }
