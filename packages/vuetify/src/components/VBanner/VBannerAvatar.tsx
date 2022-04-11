@@ -12,13 +12,7 @@ export const VBannerAvatar = defineComponent({
   setup (props, { slots }) {
     return () => (
       <VAvatar
-        class={[
-          'v-banner-avatar',
-          {
-            'v-banner-avatar--start': props.start,
-            'v-banner-avatar--end': props.end,
-          },
-        ]}
+        class="v-banner-avatar"
         { ...props }
         v-slots={ slots }
       />
