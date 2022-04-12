@@ -66,6 +66,10 @@ export const BaseItem = Vue.extend({
       },
     })
 
+    if (this.disabled) {
+      element.data.attrs = { ...element.data.attrs, tabindex: -1 }
+    }
+
     return element
   },
 })
