@@ -21,7 +21,7 @@ import { useDisplay } from '@/composables/display'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
-import { toRef } from 'vue'
+import { computed } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -59,20 +59,13 @@ export const VBanner = defineComponent({
 
     const { themeClasses } = provideTheme(props)
 
+    const color = computed(() => props.color)
+    const density = computed(() => props.density)
+
     provideDefaults({
-      VBannerActions: {
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
-      },
-      VBannerAvatar: {
-        density: toRef(props, 'density'),
-        image: props.avatar,
-      },
-      VBannerIcon: {
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
-        icon: props.icon,
-      },
+      VBannerActions: { color, density },
+      VBannerAvatar: { density, image: props.avatar },
+      VBannerIcon: { color, density, icon: props.icon },
     })
 
     useRender(() => {
