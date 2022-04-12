@@ -1,7 +1,8 @@
 <template>
   <v-card
+    class="overflow-auto mx-auto"
     max-height="300"
-    class="overflow-auto"
+    width="448"
   >
     <v-toolbar color="primary">
       <v-toolbar-title>My Document</v-toolbar-title>
@@ -18,8 +19,8 @@
     </v-toolbar>
 
     <v-banner
-      lines="one"
       :sticky="sticky"
+      lines="one"
     >
       <template v-slot:text>
         We can't save your edits while you are in offline mode.
@@ -27,7 +28,7 @@
 
       <template v-slot:actions>
         <v-btn color="deep-purple accent-4">
-          Get Online
+          Go Online
         </v-btn>
       </template>
     </v-banner>
@@ -38,6 +39,13 @@
         height="300"
       ></v-sheet>
     </v-card-text>
+
+    <v-footer
+      class="justify-center"
+      color="primary"
+    >
+      End of Content
+    </v-footer>
   </v-card>
 </template>
 

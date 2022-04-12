@@ -7,7 +7,7 @@
     <v-defaults-provider
       :defaults="{
         VBanner: {
-          avatar: model === 'avatar' ? 'https://randomuser.me/api/portraits/women/75.jpg' : undefined,
+          avatar: model === 'avatar' ? 'https://vuetifyjs.b-cdn.net/images/john-smirk.png' : undefined,
           lines: model === 'one line' ? 'one' : undefined
         }
       }"

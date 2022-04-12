@@ -1,5 +1,5 @@
 <template>
-  <div class="pa-4 bg-grey-lighten-4">
+  <div>
     <v-banner
       lines="one"
       icon="mdi-lock"
@@ -17,8 +17,8 @@
 
     <v-banner
       lines="two"
-      icon="mdi-lock"
-      color="deep-purple-accent-4"
+      icon="mdi-weather-hurricane"
+      color="error"
       class="my-4"
     >
       <v-banner-text>
@@ -32,8 +32,8 @@
 
     <v-banner
       lines="three"
-      icon="mdi-lock"
-      color="deep-purple-accent-4"
+      icon="$warning"
+      color="warning"
       class="my-4"
     >
       <v-banner-text>

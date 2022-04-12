@@ -30,7 +30,7 @@ Banners can contain one to two lines of text, to which actions and icons can be 
 
 The recommended placement of elements inside of `v-banner` is:
 
-* Place a `v-avatar` or `v-icon` on the far left
+* Place a `v-banner-avatar` or `v-banner-icon` on the far left
 * Place `v-banner-text` to the right of any visual content
 * Place `v-banner-actions` to the far right of textual content, offset bottom
 
@@ -48,7 +48,9 @@ The recommended placement of elements inside of `v-banner` is:
 | Component | Description |
 | - | - |
 | [v-banner](/api/v-banner/) | Primary Component |
-| **v-banner-text** | Functional component used to display the Banner's subtitle. Wraps the `#text` slot. |
+| [v-banner-avatar](/api/v-banner-avatar/) | A custom component that uses [v-avatar](/components/avatars/) as its base |
+| [v-banner-icon](/api/v-banner-icon/) | A custom component that uses [v-icon](/components/icons/) as its base |
+| **v-banner-text** | Functional component used to display the Banner's subtitle. Wraps the `#text` slot |
 | **v-banner-actions** | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
 ## Examples
@@ -74,6 +76,12 @@ You can optionally turn on the **sticky** prop to ensure that the content is pin
 Banners may have one or two text buttons that don't stand out that much.
 
 <example file="v-banner/slot-actions" />
+
+#### Icon
+
+The icon slot allows you to to explicitly control the content and functionality within it.
+
+<example file="v-banner/slot-icon" />
 
 #### Prepend
 
