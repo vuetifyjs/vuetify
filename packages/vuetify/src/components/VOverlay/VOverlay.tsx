@@ -118,9 +118,9 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, activatorRef, activatorEvents } = useActivator(props, isActive)
-    const { dimensionStyles } = useDimension(props)
     const { isTop } = useStack(isActive)
+    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
+    const { dimensionStyles } = useDimension(props)
 
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
@@ -256,6 +256,7 @@ export const VOverlay = genericComponent<new () => {
                       dimensionStyles.value,
                       contentStyles.value,
                     ]}
+                    { ...toHandlers(contentEvents.value) }
                   >
                     { slots.default?.({ isActive }) }
                   </div>
