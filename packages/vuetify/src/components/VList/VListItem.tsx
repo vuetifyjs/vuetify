@@ -69,6 +69,7 @@ export const VListItem = genericComponent<new () => {
     appendIcon: String,
     disabled: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
+    nav: Boolean,
     prependAvatar: String,
     prependIcon: String,
     subtitle: String,
@@ -94,6 +95,7 @@ export const VListItem = genericComponent<new () => {
     const isActive = computed(() => {
       return props.active || link.isExactActive?.value || isSelected.value
     })
+    const roundedProps = computed(() => props.rounded || props.nav)
     const variantProps = computed(() => ({
       color: isActive.value ? props.activeColor ?? props.color : props.color,
       variant: props.variant,
@@ -117,7 +119,7 @@ export const VListItem = genericComponent<new () => {
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { roundedClasses } = useRounded(props)
+    const { roundedClasses } = useRounded(roundedProps)
     const lineClasses = computed(() => props.lines ? `v-list-item--${props.lines}-line` : undefined)
 
     const slotProps = computed(() => ({
@@ -148,6 +150,7 @@ export const VListItem = genericComponent<new () => {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
               'v-list-item--link': isClickable,
+              'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.activeClass}`]: isActive.value,
             },

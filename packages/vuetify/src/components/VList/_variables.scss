@@ -17,6 +17,7 @@ $list-positions: absolute fixed !default;
 $list-rounded-border-radius: map.get(settings.$rounded, null) !default;
 $list-indent-size: 16px !default;
 
+$list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
 
 $list-subheader-font-size: .875rem !default;
@@ -24,7 +25,7 @@ $list-subheader-font-weight: 500 !default;
 $list-subheader-inset-margin: 56px !default;
 $list-subheader-inset-padding-start: 72px !default;
 $list-subheader-line-height: 1.375rem !default;
-$list-subheader-min-height: 48px !default;
+$list-subheader-min-height: 40px !default;
 $list-subheader-padding-end: 16px !default;
 $list-subheader-padding-start: 16px !default;
 $list-subheader-padding-top: 0 !default;
@@ -38,7 +39,7 @@ $list-item-border-style: settings.$border-style-root !default;
 $list-item-border-width: 0 !default;
 $list-item-border-thin-width: thin !default;
 $list-item-elevation: 1 !default;
-$list-item-min-height: 48px !default;
+$list-item-min-height: 40px !default;
 $list-item-padding: 8px 16px !default;
 $list-item-plain-opacity: .62 !default;
 $list-item-rounded-border-radius: map.get(settings.$rounded, null) !default;
@@ -70,6 +71,7 @@ $list-item-media-two-line-margin-top: -4px !default;
 $list-item-media-three-line-margin-bottom: 0 !default;
 $list-item-media-three-line-margin-top: 0 !default;
 
+$list-item-nav-margin-top: 4px !default;
 $list-item-nav-title-font-size: .8125rem !default;
 $list-item-nav-title-font-weight: 500 !default;
 $list-item-nav-title-letter-spacing: normal !default;

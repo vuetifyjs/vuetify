@@ -132,16 +132,46 @@
   @at-root
     @include tools.density('v-list-item', $list-density) using ($modifier)
       &.v-list-item--one-line
+        $one-line-padding: (list.nth($list-item-padding, 1) + $modifier)
+
         min-height: $list-item-min-height + $modifier
-        padding: (list.nth($list-item-padding, 1) + $modifier) list.nth($list-item-padding, 2)
+        padding-top: $one-line-padding
+        padding-bottom: $one-line-padding
 
       &.v-list-item--two-line
+        $two-line-padding: (list.nth($list-item-two-line-padding, 1) + $modifier)
+
         min-height: $list-item-two-line-min-height + $modifier
-        padding: (list.nth($list-item-two-line-padding, 1) + $modifier) list.nth($list-item-two-line-padding, 2)
+        padding-top: $two-line-padding
+        padding-bottom: $two-line-padding
 
       &.v-list-item--three-line
+        $three-line-padding: (list.nth($list-item-three-line-padding, 1) + $modifier)
+
         min-height: $list-item-three-line-min-height + $modifier
-        padding: (list.nth($list-item-three-line-padding, 1) + $modifier) list.nth($list-item-three-line-padding, 2)
+        padding-top: $three-line-padding
+        padding-bottom: $three-line-padding
+
+      &:not(.v-list-item--nav)
+        &.v-list-item--one-line
+          padding-inline-start: list.nth($list-item-padding, 2)
+          padding-inline-end: list.nth($list-item-padding, 2)
+
+        &.v-list-item--two-line
+          padding-inline-start: list.nth($list-item-two-line-padding, 2)
+          padding-inline-end: list.nth($list-item-two-line-padding, 2)
+
+        &.v-list-item--three-line
+          padding-inline-start: list.nth($list-item-three-line-padding, 2)
+          padding-inline-end: list.nth($list-item-three-line-padding, 2)
+
+  &--nav
+    padding-inline-start: $list-nav-padding
+    padding-inline-end: $list-nav-padding
+
+    .v-list &
+      &:not(:last-child):not(:only-child)
+        margin-bottom: $list-item-nav-margin-top
 
 .v-list-item__overlay
   background-color: currentColor
@@ -161,6 +191,9 @@
 $base-padding: list.nth($list-item-padding, 2)
 .v-list
   --indent-padding: 0px
+
+  &--nav
+    --indent-padding: -#{$list-nav-padding}
 
 .v-list-group
   --parent-padding: var(--indent-padding)
