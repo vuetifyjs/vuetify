@@ -217,7 +217,7 @@ export default mixins(
         this.buildTree(children, key)
 
         // This fixed bug with dynamic children resetting selected parent state
-        if (!this.nodes.hasOwnProperty(key) && parent !== null && this.nodes.hasOwnProperty(parent)) {
+        if (!this.nodes.hasOwnProperty(key) && parent !== null && this.nodes.hasOwnProperty(parent) && this.selectionType !== 'independent') {
           node.isSelected = this.nodes[parent].isSelected
         } else {
           node.isSelected = oldNode.isSelected
