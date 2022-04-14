@@ -1,7 +1,7 @@
 <template>
   <v-system-bar
     v-if="hasPromotion"
-    color="#0F335F"
+    class="cm-system-bar"
     app
     dark
     height="66"
@@ -85,4 +85,7 @@
 
     @media (min-width: 992px)
       background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-free-weekend-2022/vs-fw-desktop.png)
+
+  .cm-system-bar
+    background: linear-gradient(90deg, hsl(228deg 76% 6%) 40%, hsl(273deg 45% 45%) 74%)
 </style>
