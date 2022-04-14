@@ -4,7 +4,7 @@
 import { ref } from 'vue'
 import { Application } from '../../../../cypress/templates'
 import { VForm } from '../'
-import { VTextField } from '@/components'
+import { VBtn, VTextField } from '@/components'
 
 describe('VForm', () => {
   it('should emit when inputs are updated', () => {
@@ -38,7 +38,7 @@ describe('VForm', () => {
     })
   })
 
-  it.only('should only emit true if all inputs are explicitly valid', () => {
+  it('should only emit true if all inputs are explicitly valid', () => {
     cy.mount(() => (
       <Application>
         <VForm>
@@ -145,5 +145,31 @@ describe('VForm', () => {
 
       expect(emits).to.deep.equal([[false], [null]])
     })
+  })
+
+  it('should not submit form if validation fails', () => {
+    cy.mount(() => (
+      <VForm action="/action">
+        <VTextField rules={ [v => !!v || 'Field required'] } />
+        <VBtn type="submit">Submit</VBtn>
+      </VForm>
+    ))
+
+    cy.get('.v-btn').click().url().should('not.contain', '/action')
+    cy.get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
+  })
+
+  // TODO: This test has to be the last one,
+  // because subsequent tests in the same file
+  // will break due to the page change
+  it('should submit form if validation passes', () => {
+    cy.mount(() => (
+      <VForm action="/action">
+        <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+        <VBtn type="submit">Submit</VBtn>
+      </VForm>
+    ))
+
+    cy.get('.v-btn').click().url().should('contain', '/action')
   })
 })
