@@ -126,6 +126,7 @@ export const VListItem = genericComponent<new () => {
       isActive: isActive.value,
       select,
       isSelected: isSelected.value,
+      isIndeterminate: isIndeterminate.value,
     }))
 
     useSelectLink(link, select)
