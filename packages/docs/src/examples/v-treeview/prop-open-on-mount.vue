@@ -1,6 +1,6 @@
 <template>
   <v-treeview
-    open-all
+    open-on-mount="all"
     :items="items"
   ></v-treeview>
 </template>

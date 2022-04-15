@@ -56,11 +56,11 @@ Setting **item-disabled** prop allows to control which node's property disables 
 
 <example file="v-treeview/prop-item-disabled" />
 
-#### Open all
+#### Open on mount
 
-Treeview nodes can be pre-opened on page load.
+Treeview nodes can be pre-opened on page load. Use the **open-on-mount** prop with either `all` to open the entire tree, or `root` to only open the first level.
 
-<example file="v-treeview/prop-open-all" />
+<example file="v-treeview/prop-open-on-mount" />
 
 #### Rounded
 

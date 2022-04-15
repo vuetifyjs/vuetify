@@ -1,6 +1,6 @@
 <template>
   <v-treeview
-    rounded
+    rounded="xl"
     hoverable
     activatable
     :items="items"

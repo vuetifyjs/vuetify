@@ -92,7 +92,7 @@ export const VTreeviewItem = defineComponent({
       props.openOnClick && !isLeaf.value && open(!isOpen.value, e)
     }
 
-    function onExpandClick (e: MouseEvent) {
+    function onOpenClick (e: MouseEvent) {
       e.stopPropagation()
 
       open(!isOpen.value, e)
@@ -139,11 +139,11 @@ export const VTreeviewItem = defineComponent({
                   size="x-small"
                   disabled={ props.loading }
                   icon={ isOpen.value ? props.collapseIcon : props.expandIcon }
-                  onClick={ onExpandClick }
+                  onClick={ onOpenClick }
                 />
               ) }
               { props.loading && (
-                <VProgressCircular size={ 40 } indeterminate class="v-treeview-item__loading" />
+                <VProgressCircular indeterminate class="v-treeview-item__loading" />
               ) }
             </div>
           ) }

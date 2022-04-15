@@ -12,7 +12,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
-import { computed, provide, ref, toRef, watch } from 'vue'
+import { computed, onMounted, provide, ref, toRef, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { VTreeviewSymbol } from './shared'
 
@@ -49,6 +49,10 @@ export const VTreeview = defineComponent({
     items: Array as PropType<TreeviewItem[]>,
     selectOnClick: Boolean,
     openOnClick: Boolean,
+    openOnMount: {
+      type: String as PropType<'all' | 'root' | undefined>,
+      validator: (v: any) => !v || ['all', 'root'].includes(v),
+    },
     hover: {
       type: Boolean,
       default: true,
@@ -82,11 +86,24 @@ export const VTreeview = defineComponent({
     const { open, select, getPath, getChildren, children, opened } = useNested(props)
 
     const items = computed(() => parseItems(props.items))
+    const flatItems = computed(() => flatten(items.value))
+
+    onMounted(() => {
+      if (props.openOnMount === 'root') {
+        items.value.forEach(item => open(item.props.value, true))
+      } else if (props.openOnMount === 'all') {
+        const parents = flatItems.value.reduce((ids, item) => {
+          return children.value.has(item.props.value) ? [...ids, item.props.value] : ids
+        }, [] as any[])
+        parents.forEach(parent => open(parent, true))
+      }
+    })
+
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter(props, computed(() => flatten(items.value)), search)
+    const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
       if (!search.value) {
-        return new Set(items.value.flatMap(item => [item.props.value, ...getChildren(item.props.value)]))
+        return new Set(flatItems.value.map(item => item.props.value))
       }
 
       return new Set(filteredItems.value.flatMap(({ item }) => {

@@ -138,6 +138,7 @@ export const useNested = (props: NestedProps) => {
   function getChildren (id: string) {
     const arr: unknown[] = []
     const queue = (children.value.get(id) ?? []).slice()
+
     while (queue.length) {
       const child = queue.shift()
 

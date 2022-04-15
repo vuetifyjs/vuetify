@@ -5,7 +5,6 @@
       :items="items"
       show-lines
     ></v-treeview>
-    <pre class="mt-4">{{ selected }}</pre>
   </div>
 </template>
 
