@@ -5,17 +5,19 @@ import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 
 // Utilities
-import { provide } from 'vue'
+import { provide, toRef } from 'vue'
 import { defineComponent } from '@/util'
-import { useHeaders, useOptions, usePagination, useSort } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSort } from '../composables'
 
 // Types
 import type { PropType } from 'vue'
+import { VProgressLinear } from '@/components/VProgressLinear'
 
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
 
   props: {
+    color: String,
     headers: {
       type: Array as PropType<any[]>,
       required: true,
@@ -35,10 +37,13 @@ export const VDataTableServer = defineComponent({
     },
     itemsLength: Number,
     fixedHeader: Boolean,
+    fixedFooter: Boolean,
+    height: [String, Number],
     sortBy: {
       type: Array as PropType<any[]>,
       default: () => ([]),
     },
+    groupBy: String,
   },
 
   emits: {
@@ -49,16 +54,31 @@ export const VDataTableServer = defineComponent({
   },
 
   setup (props, { slots, emit }) {
+    const { expanded } = createExpanded()
+
     const { columns, headers } = useHeaders(props)
 
     const { sortBy, toggleSort } = useSort(props)
 
     const { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength } = usePagination(props)
 
-    useOptions(page, itemsPerPage, sortBy)
+    const { items, toggleGroup, opened } = useGroupBy(toRef(props, 'items'), toRef(props, 'groupBy'))
+
+    useOptions({
+      page,
+      itemsPerPage,
+      sortBy,
+      startIndex,
+      stopIndex,
+      pageCount,
+      itemsLength,
+    })
 
     provide('v-data-table', {
       toggleSort,
+      toggleGroup,
+      sortBy,
+      opened,
     })
 
     return () => (
@@ -66,6 +86,9 @@ export const VDataTableServer = defineComponent({
         class={{
           'v-data-table-regular--loading': props.loading,
         }}
+        fixedHeader={ props.fixedHeader }
+        fixedFooter={ props.fixedFooter }
+        height={ props.height }
       >
         {{
           default: () => (
@@ -74,17 +97,20 @@ export const VDataTableServer = defineComponent({
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     headers={ headers.value }
-                    rowHeight={ 48 }
                     sticky={ props.fixedHeader }
                     sortBy={ sortBy.value }
+                    loading={ props.loading }
+                    color={ props.color }
+                    columns={ columns.value }
                   />
                 ) }
               </thead>
+              { slots.thead?.() }
               <tbody class="v-data-table-regular__tbody" role="rowgroup">
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     columns={ columns.value }
-                    items={ props.items }
+                    items={ items.value }
                     v-slots={ slots }
                   />
                 ) }
@@ -93,17 +119,14 @@ export const VDataTableServer = defineComponent({
           ),
           bottom: () => (
             <VDataTableFooter
-              itemsLength={itemsLength.value}
-              itemsPerPage={itemsPerPage.value}
-              startIndex={startIndex.value}
-              stopIndex={stopIndex.value}
+              startIndex={ startIndex.value }
+              stopIndex={ stopIndex.value }
+              itemsLength={ itemsLength.value }
               page={ page.value }
-              onPreviousPage={() => {
-                page.value = Math.max(1, page.value - 1)
-              }}
-              onNextPage={() => {
-                page.value = Math.min(pageCount.value, page.value + 1)
-              }}
+              pageCount={ pageCount.value }
+              itemsPerPage={ itemsPerPage.value }
+              onUpdate:itemsPerPage={ v => itemsPerPage.value = v }
+              onUpdate:page={ v => page.value = v }
             />
           ),
         }}

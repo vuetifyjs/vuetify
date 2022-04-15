@@ -1,9 +1,15 @@
+// Components
+import { VDataTableRow } from '@/components'
+
+// Composables
+import { useExpanded } from '../composables'
+import { VDataTableColumn, VDataTableRows } from './VDataTableRows'
+
+// Utilities
 import { convertToUnit, defineComponent } from '@/util'
 
+// Types
 import type { PropType } from 'vue'
-import { inject } from 'vue'
-import { useExpanded } from '../composables'
-import { VDataTableRows } from './VDataTableRows'
 
 export const VDataTableVirtualRows = defineComponent({
   name: 'VDataTableVirtualRows',
@@ -22,10 +28,9 @@ export const VDataTableVirtualRows = defineComponent({
       required: true,
     },
     loading: Boolean,
-    showLoader: Boolean,
     before: Number,
     after: Number,
-    isScrolling: Boolean,
+    showScrollingRow: Boolean,
   },
 
   setup (props, { slots }) {
@@ -38,19 +43,18 @@ export const VDataTableVirtualRows = defineComponent({
             <td colspan={props.columns.length} style={{ height: convertToUnit(props.before) }}></td>
           </tr>
 
-          { props.isScrolling
+          { props.showScrollingRow
             ? props.items.map((item, i) => (
               <>
-                <tr class="v-data-table-regular__tr" key={ `row_${item.id}` }>
-                  <td class="v-data-table-regular__td" style={{ height: convertToUnit(props.rowHeight) }} colspan={props.columns.length}>
-                    {item.id} loading
-                  </td>
-                </tr>
-                {expanded.value.has(item.id) ? (
-                  <tr key={ `expanded_${item.id}` }>
-                    <td colspan={props.columns.length}>expanded row</td>
-                  </tr>
-                ) : undefined}
+                { slots['scrolling-row']?.({ item, columns: props.columns }) ?? (
+                  <VDataTableRow key={ `row_${item.id}` }>
+                    <VDataTableColumn height={ props.rowHeight } colspan={ props.columns.length }>
+                      Loading...
+                    </VDataTableColumn>
+                  </VDataTableRow>
+                ) }
+
+                { expanded.value.has(item.id) && slots['expanded-row']?.() }
               </>
             ))
             : (

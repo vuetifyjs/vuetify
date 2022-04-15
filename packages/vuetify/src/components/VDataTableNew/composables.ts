@@ -11,9 +11,6 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
   const containerRef = ref<HTMLElement>()
   const itemHeight = computed(() => parseInt(props.itemHeight, 10))
   const totalHeight = computed(() => itemsLength.value * itemHeight.value)
-  // const scrollTop = ref(0) // TODO: Scroll threshold should be relative to current position to avoid fixed load positions
-  // const chunkSize = ref(10) // TODO: Should reflect height of container
-  // const windowSize = computed(() => itemHeight.value * (chunkSize.value * 3))
   const windowSize = computed(() => {
     if (!containerRef.value) return 500
 
@@ -23,10 +20,6 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
     return el.clientHeight
   })
   const visibleItems = computed(() => (windowSize.value / itemHeight.value) * 3)
-  // const windowMidPoint = computed(() => scrollTop.value + (windowSize.value / 2))
-  // const scrollIndex = computed(() => Math.floor(scrollTop.value / itemHeight.value))
-  // const chunkIndex = computed(() => Math.floor(scrollIndex.value / chunkSize.value))
-  // const startIndex = computed(() => Math.max(0, (chunkIndex.value * chunkSize.value) - chunkSize.value))
   const startIndex = ref(0)
   const stopIndex = computed(() => Math.min(startIndex.value + visibleItems.value, itemsLength.value))
   const visibleItemsHeight = computed(() => (stopIndex.value - startIndex.value) * itemHeight.value)
@@ -64,47 +57,14 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
 
     if (direction === 1 && windowMidPoint > visibleItemsMidPoint.value) {
       startIndex.value = Math.max(0, Math.floor((scrollTop - (visibleItemsHeight.value / 3)) / itemHeight.value))
-      // console.log('forward', startIndex.value)
     } else if (direction === -1 && scrollTop - startOffset.value < visibleItemsHeight.value / 3) {
       startIndex.value = Math.max(0, Math.floor((scrollTop - visibleItemsHeight.value / 2) / itemHeight.value))
-      // console.log('back', startIndex.value)
     }
 
     clearTimeout(scrollTimeout)
 
     scrollTimeout = setTimeout(() => {
       if (!containerRef.value) return
-
-      // isScrolling.value = false
-
-      // const newScrollTop = (containerRef.value?.scrollTop ?? 0)
-      // const direction = newScrollTop > scrollTop.value ? 1 : -1
-
-      // scrollTop.value = newScrollTop
-
-      // const diff = Math.abs(newScrollTop - (direction < 0 ? startOffset.value : startOffset.value + windowSize.value))
-      // const delta = windowSize.value / 4
-
-      // console.log({
-      //   direction,
-      //   newScrollTop,
-      //   startOffset: startOffset.value,
-      //   windowSize: windowSize.value,
-      //   diff,
-      //   delta,
-      // })
-      // const scrollDistance = Math.abs(containerRef.value.scrollTop - (startScroll ?? 0))
-
-      // // console.log('scroll stop', scrollDistance, scrollTop, startScroll, windowSize.value)
-
-      // if (scrollDistance === 0) return
-      // // if (diff < delta || diff > windowSize.value / 2) {
-      // //   startIndex.value = Math.floor(Math.max(0, (newScrollTop - (windowSize.value / 2))) / itemHeight.value)
-      // // }
-      // if (scrollDistance > visibleItemsHeight.value || scrollTop === 0 || scrollTop > totalHeight.value - (visibleItemsHeight.value / 2)) {
-      //   startIndex.value = Math.max(0, Math.floor((scrollTop - (visibleItemsHeight.value / 2)) / itemHeight.value))
-      //   console.log('start timeout', startIndex.value)
-      // }
 
       isScrolling.value = false
       startScroll = undefined
@@ -171,14 +131,6 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
   const columns = computed(() => headers.value.flatMap(row => row.filter(col => col.id)))
 
   return { headers, columns }
-}
-
-// export const combine = (composables: ) => {
-
-// }
-
-export const useFilter = () => {
-
 }
 
 function sortItems<T extends any, K extends keyof T> (
@@ -283,6 +235,8 @@ export const usePagination = (props: {
   'onUpdate:itemsPerPage': ((val: any) => void) | undefined
   itemsLength?: number
 }) => {
+  const vm = getCurrentInstance('usePagination')
+
   const page = useProxiedModel(props, 'page')
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
 
@@ -301,12 +255,31 @@ export const usePagination = (props: {
 //   return items.value.slice(startIndex.value, stopIndex.value)
 // }
 
-export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy: Ref<any[]>) => {
+export const useOptions = ({
+  page,
+  itemsPerPage,
+  sortBy,
+  startIndex,
+  stopIndex,
+  pageCount,
+  itemsLength,
+}: {
+  page: Ref<number>
+  itemsPerPage: Ref<number>
+  sortBy: Ref<any[]>
+  startIndex: Ref<number>
+  stopIndex: Ref<number>
+  pageCount: Ref<number>
+  itemsLength: Ref<number>
+}) => {
   const vm = getCurrentInstance('VDataTable')
 
   const options = computed(() => ({
     page: page.value,
     itemsPerPage: itemsPerPage.value,
+    startIndex: startIndex.value,
+    stopIndex: stopIndex.value,
+    pageCount: pageCount.value,
     sortBy: sortBy.value,
   }))
 
@@ -314,6 +287,11 @@ export const useOptions = (page: Ref<number>, itemsPerPage: Ref<number>, sortBy:
   watch(sortBy, () => {
     page.value = 1
   }, { deep: true })
+
+  // Reset page when items-per-page changes
+  watch(itemsPerPage, () => {
+    page.value = 1
+  })
 
   watch(options, () => {
     vm.emit('update:options', options.value)
@@ -344,7 +322,7 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
     const flatItems = []
 
     for (const [key, value] of groupedItems.value.entries()) {
-      flatItems.push({ $type: 'group-header', groupBy: groupBy.value, groupByValue: key })
+      flatItems.push({ $type: 'group-header', groupBy: groupBy.value, groupByValue: key, items: value })
       if (opened.value.has(key)) flatItems.push(...value)
     }
 
@@ -370,5 +348,5 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
     return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
   })
 
-  return { items: flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems }
+  return { items: flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
 }

@@ -57,21 +57,30 @@ export const VDataTable = defineComponent({
     const { headers, columns } = useHeaders(props)
     const { sortBy, toggleSort } = useSort(props)
     const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
-    const { page, itemsPerPage, startIndex, stopIndex, itemsLength } = usePagination(props)
+    const { page, itemsPerPage, startIndex, stopIndex, itemsLength, pageCount } = usePagination(props)
 
     const paginatedItems = computed(() => {
       return itemsPerPage.value > 0 ? sortedItems.value.slice(startIndex.value, stopIndex.value) : sortedItems.value
     })
 
-    const { items, toggleGroup } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
+    const { items, toggleGroup, opened } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
 
     provide('v-data-table', {
       toggleGroup,
       toggleSort,
       sortBy,
+      opened,
     })
 
-    useOptions(page, itemsPerPage, sortBy)
+    useOptions({
+      page,
+      itemsPerPage,
+      sortBy,
+      pageCount,
+      startIndex,
+      stopIndex,
+      itemsLength,
+    })
 
     return () => (
       <VTable
@@ -86,7 +95,6 @@ export const VDataTable = defineComponent({
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     headers={ headers.value }
-                    rowHeight={ 48 }
                     sticky={ props.fixedHeader }
                     sortBy={ sortBy.value }
                   />
@@ -110,14 +118,10 @@ export const VDataTable = defineComponent({
               stopIndex={ stopIndex.value }
               itemsLength={ itemsLength.value }
               page={ page.value }
+              pageCount={ pageCount.value }
               itemsPerPage={ itemsPerPage.value }
               onUpdate:itemsPerPage={ v => itemsPerPage.value = v }
-              onPreviousPage={ () => {
-                page.value = Math.max(1, page.value - 1)
-              } }
-              onNextPage={ () => {
-                page.value = Math.min(Math.floor(props.items.length / itemsPerPage.value), page.value + 1)
-              } }
+              onUpdate:page={ v => page.value = v }
             />
           ),
         }}

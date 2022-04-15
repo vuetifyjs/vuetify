@@ -6,11 +6,11 @@
   border-collapse: separate
   border-spacing: 0
 
-.v-data-table-regular__thead
+// .v-data-table-regular__thead
 
-.v-data-table-regular__tbody
+// .v-data-table-regular__tbody
 
-.v-data-table-regular__tr
+.v-data-table__tr
   height: 48px
 
   &--focus
@@ -36,7 +36,7 @@
               .v-data-table-header__sort-icon
                 opacity: 1
 
-.v-data-table-regular__td
+.v-data-table__td
   background: lightgrey
   height: 48px
 
@@ -46,9 +46,24 @@
     left: 0
     border-right: 1px solid black
 
-  &--group-header
+.v-data-table__tr--group-header
+  .v-data-table__td
     background: darkgrey
 
+    > span
+      padding-left: 5px
+
 .v-data-table-regular--loading
-  .v-data-table-regular__td
+  .v-data-table__td
     opacity: 0.3
+
+.v-data-table__progress
+  th
+    position: relative
+    border: none !important
+    height: auto !important
+
+  .v-progress-linear
+    position: absolute
+    top: 0
+    left: 0

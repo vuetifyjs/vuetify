@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
-import { computed, provide, toRef } from 'vue'
-import { createExpanded, useGroupBy, useHeaders, useSort, useSortedItems, useVirtual } from '../composables'
+import { computed, provide, ref, toRef } from 'vue'
+import { createExpanded, useGroupBy, useHeaders, useOptions, useSort, useSortedItems, useVirtual } from '../composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -18,7 +18,7 @@ export const VDataTableVirtual = defineComponent({
       type: Number,
       required: true,
     },
-    scrollLoader: Boolean,
+    showScrollingRow: Boolean,
     ...makeVDataTableProps(),
   },
 
@@ -46,7 +46,6 @@ export const VDataTableVirtual = defineComponent({
     } = useVirtual(props, computed(() => items.value.length + expanded.value.size))
     // } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size + numGroups.value - numHiddenItems.value))
 
-
     const visibleItems = computed(() => {
       return items.value.slice(startIndex.value, stopIndex.value)
     })
@@ -54,6 +53,16 @@ export const VDataTableVirtual = defineComponent({
     provide('v-data-table', {
       toggleGroup,
       toggleSort,
+    })
+
+    useOptions({
+      sortBy,
+      page: ref(1),
+      startIndex: ref(0),
+      stopIndex: computed(() => items.value.length - 1),
+      pageCount: ref(1),
+      itemsPerPage: ref(-1),
+      itemsLength: computed(() => items.value.length),
     })
 
     return () => (
@@ -87,7 +96,7 @@ export const VDataTableVirtual = defineComponent({
                     rowHeight={ itemHeight.value }
                     before={ beforeHeight.value }
                     after={ afterHeight.value }
-                    isScrolling={ isScrolling.value && props.scrollLoader }
+                    showScrollingRow={ isScrolling.value && props.showScrollingRow }
                     v-slots={ slots }
                   />
                 </tbody>

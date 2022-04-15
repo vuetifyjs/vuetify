@@ -1,5 +1,6 @@
-export { VDataTableGrid } from './Grid/VDataTableGrid'
-export { VDataTableVirtualGrid } from './Grid/VDataTableVirtualGrid'
+// export { VDataTableGrid } from './Grid/VDataTableGrid'
+// export { VDataTableVirtualGrid } from './Grid/VDataTableVirtualGrid'
 export { VDataTable } from './Table/VDataTable'
+export { VDataTableRow, VDataTableColumn, VDataTableRows } from './Table/VDataTableRows'
 export { VDataTableVirtual } from './Table/VDataTableVirtual'
 export { VDataTableServer } from './Table/VDataTableServer'
