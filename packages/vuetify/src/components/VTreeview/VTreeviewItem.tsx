@@ -54,8 +54,11 @@ export const VTreeviewItem = defineComponent({
   emits: {
     'update:selected': (value: boolean, e: MouseEvent) => true,
     'update:indeterminate': (value: boolean) => true,
-    'click:prepend': (e: MouseEvent) => true,
-    'click:select': () => true,
+    'click:prepend': (data: { event: MouseEvent }) => true,
+    'click:select': (data: { id: string, value: boolean, path: string[], event?: Event }) => true,
+    'click:open': (data: { id: string, value: boolean, path: string[], event?: Event }) => true,
+    'click:dblclick': (data: { event: MouseEvent }) => true,
+    'click:contextmenu': (data: { event: MouseEvent }) => true,
   },
 
   setup (props, { slots, emit, attrs }) {
@@ -104,6 +107,14 @@ export const VTreeviewItem = defineComponent({
       select(!isSelected.value, e)
     }
 
+    function onDblclick (event: MouseEvent) {
+      emit('click:dblclick', { event })
+    }
+
+    function onContextmenu (event: MouseEvent) {
+      emit('click:contextmenu', { event })
+    }
+
     const { textColorClasses, textColorStyles } = useTextColor(props, 'selectedColor')
     const { roundedClasses } = useRounded(props)
 
@@ -128,6 +139,8 @@ export const VTreeviewItem = defineComponent({
           ]}
           style={isSelected.value ? textColorStyles.value : undefined}
           onClick={ onItemClick }
+          onDblclick={ onDblclick }
+          onContextmenu={ onContextmenu }
         >
           { genOverlays(props.hover, 'v-treeview') }
 
