@@ -57,14 +57,14 @@ export const VDataTableHeaders = defineComponent({
       return (
         <>
           { props.headers.map((row, y) => (
-            <tr class="v-data-table-regular__tr" role="row">
+            <tr class="v-data-table__tr" role="row">
               {row.map((column, x) => (
                 <th
                   class={[
-                    'v-data-table-regular__th',
+                    'v-data-table__th',
                     {
-                      'v-data-table-regular__th--sortable': column.sortable !== false && column.id,
-                      'v-data-table-regular__th--sorted': !!props.sortBy?.find(x => x.key === column.id),
+                      'v-data-table__th--sortable': column.sortable !== false && column.id,
+                      'v-data-table__th--sorted': !!props.sortBy?.find(x => x.key === column.id),
                     },
                   ]}
                   style={{

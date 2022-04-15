@@ -1,14 +1,14 @@
-.v-data-table-regular
+.v-data-table
   width: 100%
 
-.v-data-table-regular__table
+.v-data-table__table
   width: 100%
   border-collapse: separate
   border-spacing: 0
 
-// .v-data-table-regular__thead
+// .v-data-table__thead
 
-// .v-data-table-regular__tbody
+// .v-data-table__tbody
 
 .v-data-table__tr
   height: 48px
@@ -16,19 +16,19 @@
   &--focus
     border: 1px dotted black
 
-.v-data-table-regular__th
+.v-data-table__th
   align-items: center
 
-.v-data-table-regular
+.v-data-table
   .v-table__wrapper
     > table
       > thead
         > tr
-          th.v-data-table-regular__th--sortable:hover
+          th.v-data-table__th--sortable:hover
             cursor: pointer
             color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
 
-          th:not(.v-data-table-regular__th--sorted)
+          th:not(.v-data-table__th--sorted)
             .v-data-table-header__sort-icon
               opacity: 0
 
@@ -53,7 +53,7 @@
     > span
       padding-left: 5px
 
-.v-data-table-regular--loading
+.v-data-table--loading
   .v-data-table__td
     opacity: 0.3
 

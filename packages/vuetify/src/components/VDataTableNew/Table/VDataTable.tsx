@@ -84,14 +84,14 @@ export const VDataTable = defineComponent({
 
     return () => (
       <VTable
-        class="v-data-table-regular"
+        class="v-data-table"
         height={ props.height }
         fixedHeader={ props.fixedHeader }
       >
         {{
           default: () => (
             <>
-              <thead class="v-data-table-regular__thead" role="rowgroup">
+              <thead class="v-data-table__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     headers={ headers.value }
@@ -101,7 +101,7 @@ export const VDataTable = defineComponent({
                 ) }
               </thead>
               { slots.thead?.() }
-              <tbody class="v-data-table-regular__tbody" role="rowgroup">
+              <tbody class="v-data-table__tbody" role="rowgroup">
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     columns={ columns.value }

@@ -67,7 +67,7 @@ export const VDataTableVirtual = defineComponent({
 
     return () => (
       <VTable
-        class="v-data-table-regular"
+        class="v-data-table"
         height={ props.height }
         fixedHeader={ props.fixedHeader }
       >
