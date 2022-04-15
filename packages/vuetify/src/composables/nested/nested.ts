@@ -2,7 +2,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
-import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy } from './selectStrategies'
+import {
+  classicSelectStrategy,
+  independentSelectStrategy,
+  independentSingleSelectStrategy,
+  leafSelectStrategy,
+  leafSingleSelectStrategy,
+} from './selectStrategies'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
@@ -74,12 +80,12 @@ export const useNested = (props: NestedProps) => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
 
     switch (props.selectStrategy) {
-      case 'single-leaf': return leafSelectStrategy(true)
-      case 'leaf': return leafSelectStrategy()
-      case 'independent': return independentSelectStrategy
-      case 'single-independent': return independentSingleSelectStrategy
+      case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
+      case 'leaf': return leafSelectStrategy(props.mandatory)
+      case 'independent': return independentSelectStrategy(props.mandatory)
+      case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
       case 'classic':
-      default: return classicSelectStrategy
+      default: return classicSelectStrategy(props.mandatory)
     }
   })
 
@@ -178,7 +184,6 @@ export const useNested = (props: NestedProps) => {
           children: children.value,
           parents: parents.value,
           event,
-          mandatory: props.mandatory,
         })
         newSelected && (selected.value = newSelected)
       },
