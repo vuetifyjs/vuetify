@@ -2,6 +2,8 @@
 import './VAlert.sass'
 
 // Components
+import { VAlertIcon } from './VAlertIcon'
+import { VAlertText } from './VAlertText'
 import { VAlertTitle } from './VAlertTitle'
 import { VIcon } from '@/components/VIcon'
 
@@ -23,6 +25,7 @@ import { defineComponent } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { provideDefaults } from '@/composables/defaults'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -109,10 +112,19 @@ export const VAlert = defineComponent({
       isActive.value = false
     }
 
+    provideDefaults({
+      VAlertIcon: {
+        density: toRef(props, 'density'),
+        icon: computed(() => icon.value),
+        size: computed(() => props.prominent ? 44 : 'default'),
+      },
+    })
+
     return () => {
-      const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
+      const hasText = !!(props.text || slots.text)
+      const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
         <props.tag
@@ -153,36 +165,31 @@ export const VAlert = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-alert__prepend">
+            <>
               { slots.prepend
-                ? slots.prepend()
-                : (
-                  <VIcon
-                    icon={ icon.value }
-                    size={ props.prominent ? 'large' : 'default' }
-                  />
+                ? (
+                  <div class="v-banner__prepend">
+                    { slots.prepend() }
+                  </div>
                 )
+                : icon.value && (<VAlertIcon />)
               }
-            </div>
+            </>
           ) }
 
-          <div class="v-alert__content">
-            { hasTitle && (
-              <VAlertTitle>
-                { slots.title ? slots.title() : props.title }
-              </VAlertTitle>
-            ) }
-
-            { slots.text ? slots.text() : props.text }
-
-            { slots.default?.() }
-          </div>
-
-          { slots.append && (
-            <div class="v-alert__append">
-              { slots.append() }
-            </div>
+          { hasTitle && (
+            <VAlertTitle>
+              { slots.title ? slots.title() : props.title }
+            </VAlertTitle>
           ) }
+
+          { hasText && (
+            <VAlertText>
+              { slots.text ? slots.text() : props.text }
+            </VAlertText>
+          ) }
+
+          { slots.default?.() }
 
           { hasClose && (
             <div

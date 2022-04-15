@@ -4,11 +4,11 @@
 // Defaults
 $alert-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $alert-border-color: currentColor !default;
+$alert-border-opacity: .38 !default;
 $alert-border-radius: settings.$border-radius-root !default;
 $alert-border-style: settings.$border-style-root !default;
 $alert-border-thin-width: 8px !default;
 $alert-border-width: 0 !default;
-$alert-border-opacity: .38 !default;
 $alert-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $alert-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $alert-elevation: 1 !default;
@@ -17,13 +17,12 @@ $alert-plain-opacity: .62 !default;
 $alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed sticky !default;
 $alert-prepend-margin-inline-end: 16px !default;
-$alert-title-comfortable-line-height: 1.75rem !default;
-$alert-title-compact-line-height: 1.55rem !default;
+$alert-text-line-height: 1.35 !default;
 $alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !default;
 $alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
 $alert-title-hyphens: auto !default;
 $alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
-$alert-title-line-height: 1.35 !default;
+$alert-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $alert-title-overflow-wrap: normal !default;
 $alert-title-text-transform: none !default;
 $alert-title-word-break: normal !default;
