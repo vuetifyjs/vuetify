@@ -48,7 +48,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
           {{
             activator: ({ props: activatorProps }) => slots.header
               ? slots.header({ ...itemProps, ...activatorProps })
-              : <VListItem { ...itemProps } { ...activatorProps } />,
+              : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slots } />,
             default: () => (
               <VListChildren items={ children } v-slots={ slots } />
             ),
