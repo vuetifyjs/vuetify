@@ -24,7 +24,7 @@ export interface NestedProps {
 
 type NestedProvide = {
   id: Ref<string | undefined>
-  skipRegister?: boolean
+  isGroupActivator?: boolean
   root: {
     children: Ref<Map<string, string[]>>
     parents: Ref<Map<string, string>>
@@ -207,12 +207,13 @@ export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => 
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
+    isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.skipRegister && parent.root.register(computedId.value, parent.id.value, isGroup)
+  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
 
   onBeforeUnmount(() => {
-    !parent.skipRegister && parent.root.unregister(computedId.value)
+    !parent.isGroupActivator && parent.root.unregister(computedId.value)
   })
 
   isGroup && provide(VNestedSymbol, item)
@@ -223,5 +224,5 @@ export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => 
 export const useNestedGroupActivator = () => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  provide(VNestedSymbol, { ...parent, skipRegister: true })
+  provide(VNestedSymbol, { ...parent, isGroupActivator: true })
 }
