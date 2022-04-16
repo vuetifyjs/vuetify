@@ -36,11 +36,11 @@ Switches can be colored by using any of the builtin colors and contextual names 
 
 <example file="v-switch/prop-colors" />
 
-#### Flat
+<!-- #### Flat
 
 You can make switch render without elevation of thumb using **flat** property.
 
-<example file="v-switch/prop-flat" />
+<example file="v-switch/prop-flat" /> -->
 
 #### Inset
 
@@ -54,11 +54,11 @@ Multiple `v-switch`'s can share the same **v-model** by using an array.
 
 <example file="v-switch/prop-model-as-array" />
 
-#### Model as boolean
+#### Custom true/false values
 
-A single `v-switch` will have a boolean value as its **value**.
+The switch can use custom values for its v-model, using the props **true-value** and **false-value**.
 
-<example file="v-switch/prop-model-as-boolean" />
+<example file="v-switch/prop-custom-values" />
 
 #### States
 
@@ -70,7 +70,7 @@ A single `v-switch` will have a boolean value as its **value**.
 
 #### Label
 
-Switch labels can be defined in `label` slot - that will allow to use HTML content.
+If you need to render a switch label with more complex markup than plain text, you can use the **label** slot.
 
 <example file="v-switch/slot-label" />
 
