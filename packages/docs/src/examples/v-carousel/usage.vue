@@ -9,15 +9,11 @@
         height="100%"
         tile
       >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
+        <div class="d-flex fill-height justify-center align-center">
           <div class="text-h2">
             Slide {{ i + 1 }}
           </div>
-        </v-row>
+        </div>
       </v-sheet>
     </v-carousel-item>
   </v-carousel>

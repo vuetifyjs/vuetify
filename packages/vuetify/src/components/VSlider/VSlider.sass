@@ -8,11 +8,15 @@
 
 // Block
 .v-slider
-  input
-    cursor: default
+  .v-slider__container
+    input
+      cursor: default
+      padding: 0
+      width: 100%
+      display: none
+
+  .v-input__append, .v-input__prepend
     padding: 0
-    width: 100%
-    display: none
 
 // Elements
 .v-slider__container
@@ -32,6 +36,7 @@
 
 // Modifiers
 .v-slider.v-input--horizontal
+  align-items: center
   margin-left: $slider-horizontal-left
   margin-right: $slider-horizontal-right
 
@@ -41,6 +46,7 @@
     align-items: center
 
 .v-slider.v-input--vertical
+  justify-content: center
   margin-top: $slider-vertical-margin-top
   margin-bottom: $slider-vertical-margin-bottom
 

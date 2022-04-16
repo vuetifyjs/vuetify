@@ -4,6 +4,7 @@ import { ref } from 'vue'
 import { VLayout } from '@/components'
 import { VOverlay } from '../VOverlay'
 import { Application } from '../../../../cypress/templates'
+import { VLayoutItem } from '@/components/VLayout'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 import { VMain } from '@/components/VMain'
 
@@ -94,13 +95,13 @@ describe('VOverlay', () => {
       .get('[data-test="first-content"]').should('not.exist')
       .get('[data-test="first-activator"]').should('exist').click()
       .get('[data-test="first-content"]').should('be.visible')
-      .get('[data-test="second-activator').should('exist').click()
-      .get('[data-test="first-content').should('not.be.visible')
-      .get('[data-test="second-content').should('be.visible')
+      .get('[data-test="second-activator"]').should('exist').click()
+      .get('[data-test="first-content"]').should('not.be.visible')
+      .get('[data-test="second-content"]').should('be.visible')
       .get('body').click()
-      .get('[data-test="second-content').should('not.be.visible')
-      .get('[data-test="first-content').should('be.visible')
+      .get('[data-test="second-content"]').should('not.be.visible')
+      .get('[data-test="first-content"]').should('be.visible')
       .get('body').click()
-      .get('[data-test="first-content').should('not.be.visible')
+      .get('[data-test="first-content"]').should('not.exist')
   })
 })

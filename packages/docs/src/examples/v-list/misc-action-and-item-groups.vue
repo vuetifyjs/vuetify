@@ -41,7 +41,7 @@
 
       <v-list-item value="notifications">
         <template v-slot:default="{ isActive }">
-          <v-list-item-avatar left>
+          <v-list-item-avatar start>
             <v-checkbox :model-value="isActive" hide-details></v-checkbox>
           </v-list-item-avatar>
 
@@ -54,7 +54,7 @@
 
       <v-list-item value="sound">
         <template v-slot:default="{ isActive }">
-          <v-list-item-avatar left>
+          <v-list-item-avatar start>
             <v-checkbox :model-value="isActive" hide-details></v-checkbox>
           </v-list-item-avatar>
 
@@ -67,7 +67,7 @@
 
       <v-list-item value="widgets">
         <template v-slot:default="{ isActive }">
-          <v-list-item-avatar left>
+          <v-list-item-avatar start>
             <v-checkbox :model-value="isActive" hide-details></v-checkbox>
           </v-list-item-avatar>
 

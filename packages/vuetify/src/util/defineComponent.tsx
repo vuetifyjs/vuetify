@@ -1,14 +1,17 @@
 // Utils
 import {
   defineComponent as _defineComponent,
+  effectScope,
   getCurrentInstance,
   shallowReactive,
+  shallowRef,
   toRaw,
+  watch,
   watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
 import { toKebabCase } from '@/util/helpers'
-import { useDefaults } from '@/composables/defaults'
+import { provideDefaults, useDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -18,6 +21,7 @@ import type {
   ComponentPropsOptions,
   ComputedOptions,
   DefineComponent,
+  EffectScope,
   EmitsOptions,
   MethodOptions,
   VNode,
@@ -39,14 +43,22 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   }
 
   if (options._setup) {
+    options.props = options.props ?? {}
+    options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
 
+      const _subcomponentDefaults = shallowRef()
       const _props = shallowReactive({ ...toRaw(props) })
       watchEffect(() => {
         const globalDefaults = defaults.value.global
-        const componentDefaults = defaults.value[options.name!]
+        const componentDefaults = defaults.value[props._as ?? options.name!]
+
+        if (componentDefaults) {
+          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith('V'))
+          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
+        }
 
         for (const prop of Object.keys(props)) {
           let newVal
@@ -61,7 +73,20 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         }
       })
 
-      return options._setup(_props, ctx)
+      const setupBindings = options._setup(_props, ctx)
+
+      let scope: EffectScope
+      watch(_subcomponentDefaults, (val, oldVal) => {
+        if (!val && scope) scope.stop()
+        else if (val && !oldVal) {
+          scope = effectScope()
+          scope.run(() => {
+            provideDefaults(val)
+          })
+        }
+      }, { immediate: true })
+
+      return setupBindings
     }
   }
 

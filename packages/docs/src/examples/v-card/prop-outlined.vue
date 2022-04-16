@@ -17,11 +17,7 @@
     </v-card-header>
 
     <v-card-actions>
-      <v-btn
-        variant="outlined"
-        rounded
-        text
-      >
+      <v-btn variant="outlined">
         Button
       </v-btn>
     </v-card-actions>

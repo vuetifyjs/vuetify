@@ -13,24 +13,26 @@ import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
+
+export const makeVAvatarProps = propsFactory({
+  color: String,
+  start: Boolean,
+  end: Boolean,
+  icon: String,
+  image: String,
+
+  ...makeDensityProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeTagProps(),
+})
 
 export const VAvatar = defineComponent({
   name: 'VAvatar',
 
-  props: {
-    color: String,
-    left: Boolean,
-    right: Boolean,
-    icon: String,
-    image: String,
-
-    ...makeDensityProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
-  },
+  props: makeVAvatarProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -43,8 +45,8 @@ export const VAvatar = defineComponent({
         class={[
           'v-avatar',
           {
-            'v-avatar--left': props.left,
-            'v-avatar--right': props.right,
+            'v-avatar--start': props.start,
+            'v-avatar--end': props.end,
           },
           backgroundColorClasses.value,
           densityClasses.value,

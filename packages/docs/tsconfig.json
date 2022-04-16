@@ -18,6 +18,7 @@
     "skipLibCheck": true,
     "strict": true,
     "strictNullChecks": true,
+    "allowJs": true,
     "target": "esnext",
     "types": [
       "vite/client",

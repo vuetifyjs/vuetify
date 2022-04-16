@@ -42,16 +42,16 @@
 
 <script lang="ts">
   import { useI18n } from 'vue-i18n'
-  import { computed } from 'vue'
+  import { computed, defineComponent, PropType } from 'vue'
   import { useTheme } from 'vuetify'
 
-  export default {
+  export default defineComponent({
     name: 'SettingsGroup',
 
     props: {
       title: String,
       modelValue: null,
-      items: Array,
+      items: Array as PropType<{ icon: string, text: string }[]>,
       multiple: Boolean,
     },
 
@@ -65,7 +65,7 @@
 
       return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

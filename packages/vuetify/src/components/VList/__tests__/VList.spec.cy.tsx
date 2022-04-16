@@ -1,3 +1,4 @@
+/* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
@@ -167,7 +168,7 @@ describe('VList', () => {
       <CenteredGrid width="400px">
         <VList>
           <VListItem to="/" title="Home" />
-          <VListItem to="/team" title="Team" />
+          <VListItem to="/about" title="About" />
         </VList>
       </CenteredGrid>
     ), {
@@ -176,12 +177,54 @@ describe('VList', () => {
       },
     })
 
+    cy.get('.v-list-item').eq(1).trigger('click')
+
     cy.get('.v-list').then(() => {
-      router.push('/team')
+      expect(router.currentRoute.value.path).to.equal('/about')
+    })
+  })
+
+  it('should deselect v-list-item if route changes externally', () => {
+    const router = createRouter({
+      history: createWebHistory(),
+      routes: [
+        {
+          path: '/',
+          component: { template: 'Home' },
+        },
+        {
+          path: '/about',
+          component: { template: 'About' },
+        },
+        {
+          path: '/other',
+          component: { template: 'Other' },
+        },
+      ],
     })
 
-    cy.get('.v-list-item').eq(1).trigger('click').then(() => {
-      expect(router.currentRoute.value.path).to.equal('/team')
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    cy.mount(() => (
+      <CenteredGrid width="400px">
+        <VList>
+          <VListItem to="/" title="Home" />
+          <VListItem to="/about" title="About" />
+        </VList>
+      </CenteredGrid>
+    ), {
+      global: {
+        plugins: [router],
+      },
     })
+
+    cy.get('.v-list-item').eq(1).click().should('have.class', 'v-list-item--active')
+
+    cy.get('.v-list').then(() => {
+      expect(router.currentRoute.value.path).to.equal('/about')
+    })
+
+    cy.get('.v-list').then(() => router.push('/other'))
+
+    cy.get('.v-list-item').eq(1).should('not.have.class', 'v-list-item--active')
   })
 })

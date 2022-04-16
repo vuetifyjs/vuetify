@@ -47,7 +47,7 @@ The recommended placement of elements inside of `v-alert` is:
 
 ## API
 
-| Element / Area | Description |
+| Component | Description |
 | - | - |
 | [v-alert](/api/v-alert/) | Primary Component |
 | **v-alert-title** | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |

@@ -91,13 +91,19 @@
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
+  align-self: stretch
   color: inherit
+  display: flex
+  flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
   padding-top: var(--v-field-padding-top, $field-control-padding-top)
   width: 100%
+
+  input
+    letter-spacing: inherit
 
   &:focus,
   &:active

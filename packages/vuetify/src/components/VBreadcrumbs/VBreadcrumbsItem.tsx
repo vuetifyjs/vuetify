@@ -23,14 +23,14 @@ export const VBreadcrumbsItem = defineComponent({
   },
 
   setup (props, { slots, attrs }) {
-    const { isExactActive, isLink, navigate } = useLink(props, attrs)
-    const isActive = computed(() => props.active || isExactActive?.value)
+    const link = useLink(props, attrs)
+    const isActive = computed(() => props.active || link.isExactActive?.value)
     const color = computed(() => isActive.value ? props.activeColor : props.color)
 
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     useRender(() => {
-      const Tag = (isLink.value) ? 'a' : props.tag
+      const Tag = link.isLink.value ? 'a' : props.tag
       const hasText = !!(slots.default || props.text)
 
       return (
@@ -40,7 +40,7 @@ export const VBreadcrumbsItem = defineComponent({
             {
               'v-breadcrumbs-item--active': isActive.value,
               'v-breadcrumbs-item--disabled': props.disabled,
-              'v-breadcrumbs-item--link': isLink.value,
+              'v-breadcrumbs-item--link': link.isLink.value,
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
@@ -48,8 +48,9 @@ export const VBreadcrumbsItem = defineComponent({
           style={[
             textColorStyles.value,
           ]}
+          href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }
-          onClick={ isActive.value && navigate }
+          onClick={ link.navigate }
           v-slots={{
             default: hasText ? () => slots.default?.() ?? props.text : undefined,
           }}

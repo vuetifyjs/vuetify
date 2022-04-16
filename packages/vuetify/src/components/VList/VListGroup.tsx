@@ -1,4 +1,5 @@
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
 
 // Composables
@@ -7,8 +8,8 @@ import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
-import { computed, defineComponent, toRef } from 'vue'
-import { genericComponent } from '@/util'
+import { computed, toRef } from 'vue'
+import { defineComponent, genericComponent } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
@@ -20,6 +21,7 @@ export type ListGroupActivatorSlot = {
     onClick: (e: Event) => void
     appendIcon: string
     class: string
+    color?: string
   }
 }
 
@@ -45,6 +47,8 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   name: 'VListGroup',
 
   props: {
+    activeColor: String,
+    color: String,
     collapseIcon: {
       type: String,
       default: '$collapse',
@@ -70,6 +74,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       onClick,
       appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
       class: 'v-list-group__header',
+      color: isOpen.value ? props.activeColor ?? props.color : undefined,
     }))
 
     return () => {
@@ -83,9 +88,15 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
           ]}
         >
           { slots.activator && (
-            <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value }) }
-            </VListGroupActivator>
+            <VDefaultsProvider
+              defaults={{
+                VListItemIcon: { color: activatorProps.value.color },
+              }}
+            >
+              <VListGroupActivator>
+                { slots.activator({ props: activatorProps.value, isOpen }) }
+              </VListGroupActivator>
+            </VDefaultsProvider>
           ) }
           <VExpandTransition>
             <div class="v-list-group__items" v-show={isOpen.value}>

@@ -1,14 +1,9 @@
 <template>
   <div class="text-center">
-    <v-menu
-      disabled
-      top
-      offset-y
-    >
+    <v-menu disabled>
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
           v-bind="props"
         >
           Dropdown

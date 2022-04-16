@@ -78,7 +78,8 @@ describe('VPagination', () => {
       <VPagination length="100" total-visible="5" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 5)
+    // 5 buttons and 1 ellipsis
+    cy.get('.v-pagination__item').should('have.length', 6)
   })
 
   it('should limit items when not enough space', () => {
@@ -86,7 +87,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 6)
+    cy.get('.v-pagination__item').should('have.length', 7)
   })
 
   it('should render in RTL mode', () => {

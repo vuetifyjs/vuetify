@@ -1,4 +1,5 @@
-@import './_variables.scss'
+@forward './variables'
+@use './variables' as *
 
 .v-carousel
   overflow: hidden
@@ -45,10 +46,13 @@
   left: 0
   right: 0
 
-.v-carousel .v-window-item
+.v-carousel-item
   display: block
   height: inherit
   text-decoration: none
+
+  & > .v-img
+    height: inherit
 
 // Modifier
 .v-carousel--hide-delimiter-background
@@ -57,5 +61,6 @@
 
 .v-carousel--vertical-delimiters
   .v-carousel__controls
+    flex-direction: column
     height: 100% !important
     width: $carousel-controls-size

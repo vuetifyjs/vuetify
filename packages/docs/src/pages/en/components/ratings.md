@@ -78,9 +78,9 @@ Change the number of items by modifying the the **length** prop.
 
 <example file="v-rating/prop-length" />
 
-#### Incremented
+#### Half increments
 
-A `v-rating` component has 3 types of icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+The **half-increments** prop increases the granularity of the ratings, allow for `.5` values as well.
 
 <example file="v-rating/prop-half-increments" />
 

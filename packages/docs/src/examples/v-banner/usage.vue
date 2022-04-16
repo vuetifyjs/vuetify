@@ -1,52 +1,42 @@
 <template>
-  <div style="width: 100%;">
-    <v-banner
-      v-bind="$attrs"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-banner"
+  >
+    <v-defaults-provider
+      :defaults="{
+        VBanner: {
+          avatar: model === 'avatar' ? 'https://vuetifyjs.b-cdn.net/images/john-smirk.png' : undefined,
+          lines: model === 'one line' ? 'one' : undefined
+        }
+      }"
     >
-      A banner for use on desktop / mobile
-    </v-banner>
-  </div>
+      <v-banner>
+        <v-banner-text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus.
+        </v-banner-text>
+
+        <v-banner-actions>
+          <v-btn
+            v-for="n in 2"
+            :key="n"
+          >
+            Action {{ n }}
+          </v-btn>
+        </v-banner-actions>
+      </v-banner>
+    </v-defaults-provider>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VBannerUsageExample',
 
     data: () => ({
-      defaults: {
-        elevation: null,
-        icon: null,
-        color: null,
-        'single-line': false,
-        outlined: false,
-        rounded: false,
-        shaped: false,
-        tile: false,
-      },
-      options: {
-        selects: {
-          icon: ['$mdiAccount', '$mdiVuetify'],
-          color: [
-            'accent',
-            'primary',
-            'secondary',
-          ],
-        },
-        sliders: {
-          elevation: [0, 24],
-        },
-      },
-      tabs: [
-        'single-line',
-        'sticky',
-        'outlined',
-        'rounded',
-        'shaped',
-        'tile',
-        'dark',
-      ],
+      model: 'default',
+      options: ['one line', 'avatar'],
     }),
   }
 </script>

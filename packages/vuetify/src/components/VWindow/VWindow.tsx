@@ -7,7 +7,6 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useGroup } from '@/composables/group'
 import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
@@ -16,13 +15,14 @@ import { useRtl } from '@/composables/rtl'
 import { Touch } from '@/directives/touch'
 
 // Utilities
-import { computed, defineComponent, provide, ref, watch } from 'vue'
-import { useRender } from '@/util'
+import { computed, provide, ref, watch } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
-import type { GroupItemProvide } from '@/composables/group'
+import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
+import type { MakeSlots } from '@/util'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -32,10 +32,24 @@ type WindowProvide = {
   rootRef: Ref<HTMLElement | undefined>
 }
 
+type ControlProps = {
+  icon: string
+  class: string
+  onClick: () => void
+  ariaLabel: string
+}
+
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
-export const VWindow = defineComponent({
+export const VWindow = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: [{ group: GroupProvide }]
+    additional: [{ group: GroupProvide }]
+    prev: [{ props: ControlProps }]
+    next: [{ props: ControlProps }]
+  }>
+}>()({
   name: 'VWindow',
 
   directives: {
@@ -143,12 +157,6 @@ export const VWindow = defineComponent({
       canMoveForward.value && group.next()
     }
 
-    provideDefaults({
-      VBtn: {
-        variant: 'text',
-      },
-    }, { scoped: true })
-
     const arrows = computed(() => {
       const arrows = []
 
@@ -225,14 +233,16 @@ export const VWindow = defineComponent({
             height: transitionHeight.value,
           }}
         >
-          { slots.default?.({ prev, next }) }
+          { slots.default?.({ group }) }
 
           { props.showArrows !== false && (
             <div class="v-window__controls">
               { arrows.value }
             </div>
-          ) }
+          )}
         </div>
+
+        { slots.additional?.({ group }) }
       </props.tag>
     ))
 
@@ -241,3 +251,5 @@ export const VWindow = defineComponent({
     }
   },
 })
+
+export type VWindow = InstanceType<typeof VWindow>

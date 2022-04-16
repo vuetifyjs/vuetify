@@ -114,6 +114,15 @@ export const VImg = defineComponent({
       ) return
 
       state.value = 'loading'
+
+      if (normalisedSrc.value.lazySrc) {
+        const lazyImg = new Image()
+        lazyImg.src = normalisedSrc.value.lazySrc
+        pollForSize(lazyImg, null)
+      }
+
+      if (!normalisedSrc.value.src) return
+
       nextTick(() => {
         emit('loadstart', image.value?.currentSrc || normalisedSrc.value.src)
 
@@ -131,12 +140,6 @@ export const VImg = defineComponent({
           getSrc()
         }
       })
-
-      if (normalisedSrc.value.lazySrc) {
-        const lazyImg = new Image()
-        lazyImg.src = normalisedSrc.value.lazySrc
-        pollForSize(lazyImg, null)
-      }
     }
 
     function onLoad () {

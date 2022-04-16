@@ -59,7 +59,7 @@
 </template>
 
 <script lang="ts">
-  import { computed } from 'vue'
+  import { computed, defineComponent } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
   import { generatedRoutes, rpath } from '@/util/routes'
@@ -108,7 +108,7 @@
   }
 
   // Utilities
-  export default {
+  export default defineComponent({
     name: 'Backmatter',
 
     setup () {
@@ -125,7 +125,7 @@
         const category = href.split('/')[1]
 
         return {
-          title: route.meta?.nav ?? route.meta?.title ?? href,
+          title: (route.meta?.nav ?? route.meta?.title ?? href) as string | undefined,
           subtitle: category,
           ...categoryIcons[category],
           href: path,
@@ -138,5 +138,5 @@
         rpath,
       }
     },
-  }
+  })
 </script>

@@ -220,6 +220,14 @@ export const VRating = genericComponent<new <T>() => {
       )
     }
 
+    function createLabel (labelProps: { value: number, index: number, label?: string }) {
+      if (slots['item-label']) return slots['item-label'](labelProps)
+
+      if (labelProps.label) return <span>{ labelProps.label }</span>
+
+      return <span>&nbsp;</span>
+    }
+
     return () => {
       const hasLabels = !!props.itemLabels?.length || slots['item-label']
 
@@ -239,10 +247,9 @@ export const VRating = genericComponent<new <T>() => {
           { range.value.map((value, i) => (
             <div class="v-rating__wrapper">
               {
-                !hasLabels ? undefined
-                : slots['item-label'] ? slots['item-label']({ value, index: i, label: props.itemLabels?.[i] })
-                : props.itemLabels?.[i] ? <span>{ props.itemLabels[i] }</span>
-                : <span>&nbsp;</span>
+                hasLabels && props.itemLabelPosition === 'top'
+                  ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
+                  : undefined
               }
               <div
                 class={[
@@ -261,6 +268,11 @@ export const VRating = genericComponent<new <T>() => {
                   <VRatingItem value={ value } index={ i } />
                 ) }
               </div>
+              {
+                hasLabels && props.itemLabelPosition === 'bottom'
+                  ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
+                  : undefined
+              }
             </div>
           )) }
         </props.tag>

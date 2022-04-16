@@ -12,6 +12,14 @@ env:
   LOCAL_BRANCH: docs/update-from-crowdin
 
 jobs:
+  close:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next') && github.repository_owner == 'vuetifyjs'
+    steps:
+      - uses: vuetifyjs/close-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   pre_job:
     runs-on: ubuntu-latest
     outputs:
@@ -61,7 +69,7 @@ jobs:
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
       - run: yarn cy:run
-        if: github.event_name == 'pull_request'
+        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
         working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v2
         if: failure()

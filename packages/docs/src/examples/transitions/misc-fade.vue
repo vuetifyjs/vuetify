@@ -1,12 +1,11 @@
 <template>
   <div class="text-center">
     <v-menu transition="fade-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           dark
           color="primary"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Fade Transition
         </v-btn>

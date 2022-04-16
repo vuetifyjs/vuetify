@@ -7,7 +7,10 @@
     >
       <v-toolbar
         border="b"
-        class="px-4"
+        :class="[
+          'px-4',
+          !showCode && 'border-opacity-0'
+        ]"
         height="44"
         flat
         rounded="t"
@@ -24,7 +27,7 @@
               class="ml-2 text-medium-emphasis"
               density="comfortable"
               variant="text"
-              v-bind="mergeProps(action, tooltip)"
+              v-bind="mergeProps(action as any, tooltip)"
             />
           </template>
 

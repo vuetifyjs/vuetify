@@ -35,7 +35,7 @@ export interface LinkProps {
   to?: RouteLocationRaw
 }
 
-interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
+export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
   isLink: ComputedRef<boolean>
   isClickable: ComputedRef<boolean>
   href: Ref<string | undefined>

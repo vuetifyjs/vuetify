@@ -30,6 +30,12 @@ Tooltips can wrap any element.
 
 ### Props
 
+#### Anchor
+
+Use the **anchor** prop to specify on which side of the element the tooltip should show. Read more about **anchor** [here](/components/overlays).
+
+<example file="v-tooltip/prop-anchor" />
+
 #### Visibility
 
 Tooltip visibility can be programmatically changed using `v-model`.

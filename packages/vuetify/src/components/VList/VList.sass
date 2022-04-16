@@ -18,8 +18,9 @@
     pointer-events: none
     user-select: none
 
-    > [class*='v-list-']
-      opacity: $list-disabled-opacity
+  &--nav
+    padding-inline-start: $list-nav-padding
+    padding-inline-end: $list-nav-padding
 
   &--rounded
     @include tools.rounded($list-rounded-border-radius)

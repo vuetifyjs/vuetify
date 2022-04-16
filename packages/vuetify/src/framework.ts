@@ -4,11 +4,11 @@ import { defaultSets, IconSymbol } from '@/composables/icons'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createLocaleAdapter, LocaleAdapterSymbol } from '@/composables/locale'
 import { createRtl, RtlSymbol } from '@/composables/rtl'
-import { aliases, mdi } from '@/iconsets/mdi'
+import { aliases as iconAliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
 import { reactive } from 'vue'
-import { mergeDeep } from '@/util'
+import { defineComponent, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
@@ -22,6 +22,7 @@ import type { DefaultsOptions } from '@/composables/defaults'
 export * from './composables'
 
 export interface VuetifyOptions {
+  aliases?: Record<string, any>
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
@@ -34,21 +35,25 @@ export interface VuetifyOptions {
 export const createVuetify = (options: VuetifyOptions = {}) => {
   const install = (app: App) => {
     const {
+      aliases = {},
       components = {},
       directives = {},
       icons = {},
     } = options
 
     for (const key in directives) {
-      const directive = directives[key]
-
-      app.directive(key, directive)
+      app.directive(key, directives[key])
     }
 
     for (const key in components) {
-      const component = components[key]
+      app.component(key, components[key])
+    }
 
-      app.component(key, component)
+    for (const key in aliases) {
+      app.component(key, defineComponent({
+        ...aliases[key],
+        name: key,
+      }))
     }
 
     app.provide(DefaultsSymbol, createDefaults(options.defaults))
@@ -60,7 +65,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
         ...defaultSets,
         mdi,
       },
-      aliases,
+      aliases: iconAliases,
     }, icons))
     const { adapter, rootInstance } = createLocaleAdapter(app, options?.locale)
     app.provide(LocaleAdapterSymbol, adapter)

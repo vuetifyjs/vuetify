@@ -24,9 +24,12 @@ $chip-font-weight: 400 !default;
 $chip-height: 32px !default;
 $chip-icon-font-size: 1.25rem !default;
 $chip-label-border-radius: settings.$border-radius-root !default;
+$chip-max-width: 100% !default;
+$chip-overflow: hidden !default;
 $chip-padding-ratio: 2 + math.div(2, 3) !default;
 $chip-plain-opacity: 0.26 !default;
 $chip-rounded-border-radius: settings.$border-radius-root !default;
+$chip-white-space: nowrap !default;
 
 $chip-sizes: (
   "height": $chip-height,

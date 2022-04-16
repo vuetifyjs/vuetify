@@ -6,12 +6,14 @@
       color="primary"
       label="John"
       value="John"
+      hide-details
     ></v-switch>
     <v-switch
       v-model="people"
       color="primary"
       label="Jacob"
       value="Jacob"
+      hide-details
     ></v-switch>
   </v-container>
 </template>

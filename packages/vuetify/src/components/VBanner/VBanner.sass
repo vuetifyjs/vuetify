@@ -1,16 +1,22 @@
 @forward './variables'
+@use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-banner
-  $root: &
-
-  display: flex
-  flex-wrap: wrap
+  align-items: center
+  display: grid
+  flex: 1 1
   font-size: $banner-font-size
-  padding-bottom: $banner-padding-bottom
-  padding-inline-end: $banner-padding-end
-  padding-inline-start: $banner-padding-start
+  grid-template-areas: "prepend text actions"
+  grid-template-columns: max-content auto max-content
+  grid-template-rows: max-content max-content
+  line-height: $banner-line-height
+  overflow: hidden
+  padding-inline-start: $banner-padding-inline-start
+  padding-inline-end: $banner-padding-inline-end
+  padding-top: $banner-padding * 2
+  padding-bottom: $banner-padding * 2
   position: relative
   width: $banner-width
 
@@ -20,82 +26,83 @@
   @include tools.rounded($banner-border-radius)
   @include tools.theme($banner-theme...)
 
-  &--border
-    border-width: $banner-border-thin-width
-
-  &--mobile
-    align-items: center
-    padding-inline-end: $banner-mobile-padding-end
-    padding-inline-start: $banner-mobile-padding-start
-
   &--rounded
     @include tools.rounded($banner-rounded-border-radius)
 
+  &--stacked
+    &:not(.v-banner--one-line)
+      grid-template-areas: "prepend text" ". actions"
+
+    .v-banner-text
+      padding-inline-end: $banner-stacked-padding-inline-end
+
   @at-root
     @include tools.density('v-banner', $banner-density) using ($modifier)
-      padding-top: $banner-padding-top + $modifier
+      .v-banner-actions
+        margin-bottom: -($banner-padding + $modifier)
+
+      &.v-banner--one-line
+        padding-top: $banner-padding + $modifier
+        padding-bottom: $banner-padding + $modifier
+
+        .v-banner-actions
+          margin-bottom: 0
+
+      @if ($modifier == 0px)
+        &.v-banner--one-line
+          padding-top: $banner-padding + $modifier + 2
 
       &.v-banner--two-line
-        padding-top: $banner-two-line-padding-top + $modifier
+        padding-top: $banner-padding * 2 + $modifier
+        padding-bottom: $banner-padding * 2 + $modifier
 
       &.v-banner--three-line
-        padding-top: $banner-three-line-padding-top + $modifier
+        padding-top: $banner-padding * 3 + $modifier
+        padding-bottom: $banner-padding * 2 + $modifier
+
+      &:not(.v-banner--one-line),
+      &.v-banner--two-line,
+      &.v-banner--three-line
+        .v-banner-actions
+          margin-top: $banner-action-margin + $modifier
 
   &--sticky
     top: $banner-sticky-top
 
+.v-banner-avatar,
+.v-banner-icon,
+.v-banner__prepend
+  align-self: flex-start
+  grid-area: prepend
+  margin-inline-end: $banner-prepend-margin-end
+
 .v-banner-actions
-  align-items: flex-end
+  align-self: flex-end
   display: flex
   flex: 0 1
+  grid-area: actions
   justify-content: flex-end
 
-  .v-banner--mobile &
-    flex: 1 0
-
-.v-banner__content
-  display: flex
-  flex: 1 1
-  min-width: 0
-  padding-inline-end: $banner-content-padding-end
-
-  .v-banner--mobile &
-    flex: 1 1 auto
-    padding-inline-end: $banner-mobile-content-padding-end
-
-  .v-banner--two-line &
-    margin-bottom: $banner-two-line-content-margin-bottom
-
+  .v-banner--two-line &,
   .v-banner--three-line &
-    margin-bottom: $banner-three-line-content-margin-bottom
-
-.v-banner__avatar
-  align-self: flex-start
-  border-radius: $banner-avatar-border-radius
-  margin-inline-end: $banner-avatar-margin-end
-  margin-inline-start: $banner-avatar-margin-start
-  position: relative
-
-  .v-banner--mobile &
-    margin-inline-end: $banner-mobile-avatar-margin-end
-
-  .v-banner--one-line &
-    align-self: center
+    margin-top: $banner-actions-line-margin-top
 
 .v-banner-text
   -webkit-box-orient: vertical
-  align-self: center
   display: -webkit-box
-  line-height: $banner-text-line-height
+  grid-area: text
   overflow: hidden
+  padding-inline-end: $banner-text-padding-end
 
   .v-banner--one-line &
     -webkit-line-clamp: 1
 
-  .v-banner--two-line &,
-  .v-banner--three-line &
-    align-self: flex-start
+  .v-banner--two-line &
     -webkit-line-clamp: 2
 
   .v-banner--three-line &
     -webkit-line-clamp: 3
+
+  .v-banner--two-line &,
+  .v-banner--three-line &
+    align-self: flex-start

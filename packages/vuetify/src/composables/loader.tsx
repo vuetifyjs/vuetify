@@ -16,7 +16,7 @@ export interface LoaderSlotProps {
 }
 
 export interface LoaderProps {
-  loading: boolean
+  loading: boolean | string
 }
 
 // Composables

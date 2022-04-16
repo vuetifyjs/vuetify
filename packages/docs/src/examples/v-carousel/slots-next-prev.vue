@@ -1,22 +1,21 @@
 <template>
   <v-carousel
-    cycle
     height="400"
+    show-arrows
     hide-delimiter-background
-    show-arrows-on-hover
   >
-    <template v-slot:prev="{ on, attrs }">
+    <template v-slot:prev="{ props }">
       <v-btn
+        variant="contained"
         color="success"
-        v-bind="attrs"
-        v-on="on"
+        @click="props.onClick"
       >Previous slide</v-btn>
     </template>
-    <template v-slot:next="{ on, attrs }">
+    <template v-slot:next="{ props }">
       <v-btn
+        variant="contained"
         color="info"
-        v-bind="attrs"
-        v-on="on"
+        @click="props.onClick"
       >Next slide</v-btn>
     </template>
     <v-carousel-item
@@ -27,15 +26,11 @@
         :color="colors[i]"
         height="100%"
       >
-        <v-row
-          class="fill-height"
-          align="center"
-          justify="center"
-        >
+        <div class="d-flex fill-height justify-center align-center">
           <div class="text-h2">
             {{ slide }} Slide
           </div>
-        </v-row>
+        </div>
       </v-sheet>
     </v-carousel-item>
   </v-carousel>

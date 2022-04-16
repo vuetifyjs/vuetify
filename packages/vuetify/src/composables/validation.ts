@@ -3,7 +3,7 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -88,6 +88,8 @@ export function useValidation (
   onBeforeUnmount(() => {
     form?.unregister(uid.value)
   })
+
+  watch(model, validate)
 
   function reset () {
     resetValidation()

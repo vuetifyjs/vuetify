@@ -2,7 +2,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
 import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
-import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy } from './selectStrategies'
+import {
+  classicSelectStrategy,
+  independentSelectStrategy,
+  independentSingleSelectStrategy,
+  leafSelectStrategy,
+  leafSingleSelectStrategy,
+} from './selectStrategies'
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
@@ -24,7 +30,7 @@ export interface NestedProps {
 
 type NestedProvide = {
   id: Ref<string | undefined>
-  skipRegister?: boolean
+  isGroupActivator?: boolean
   root: {
     children: Ref<Map<string, string[]>>
     parents: Ref<Map<string, string>>
@@ -74,12 +80,12 @@ export const useNested = (props: NestedProps) => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
 
     switch (props.selectStrategy) {
-      case 'single-leaf': return leafSelectStrategy(true)
-      case 'leaf': return leafSelectStrategy()
-      case 'independent': return independentSelectStrategy
-      case 'single-independent': return independentSingleSelectStrategy
+      case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
+      case 'leaf': return leafSelectStrategy(props.mandatory)
+      case 'independent': return independentSelectStrategy(props.mandatory)
+      case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
       case 'classic':
-      default: return classicSelectStrategy
+      default: return classicSelectStrategy(props.mandatory)
     }
   })
 
@@ -178,7 +184,6 @@ export const useNested = (props: NestedProps) => {
           children: children.value,
           parents: parents.value,
           event,
-          mandatory: props.mandatory,
         })
         newSelected && (selected.value = newSelected)
       },
@@ -203,16 +208,17 @@ export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => 
     open: (open: boolean, e: Event) => parent.root.open(computedId.value, open, e),
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
-    select: (selected: boolean, e: Event) => parent.root.select(computedId.value, selected, e),
+    select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
     isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
+    isGroupActivator: parent.isGroupActivator,
   }
 
-  !parent.skipRegister && parent.root.register(computedId.value, parent.id.value, isGroup)
+  !parent.isGroupActivator && parent.root.register(computedId.value, parent.id.value, isGroup)
 
   onBeforeUnmount(() => {
-    !parent.skipRegister && parent.root.unregister(computedId.value)
+    !parent.isGroupActivator && parent.root.unregister(computedId.value)
   })
 
   isGroup && provide(VNestedSymbol, item)
@@ -223,5 +229,5 @@ export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => 
 export const useNestedGroupActivator = () => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  provide(VNestedSymbol, { ...parent, skipRegister: true })
+  provide(VNestedSymbol, { ...parent, isGroupActivator: true })
 }

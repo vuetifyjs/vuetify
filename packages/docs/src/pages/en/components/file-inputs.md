@@ -48,9 +48,9 @@ When using the **show-size** property along with **counter**, the total number o
 
 <example file="v-file-input/prop-counter" />
 
-#### Dense
+#### Density
 
-You can reduces the file input height with `dense` prop.
+You can reduces the file input height with the **density** prop.
 
 <example file="v-file-input/prop-dense" />
 
@@ -62,7 +62,7 @@ The `v-file-input` can contain multiple files at the same time when using the **
 
 #### Prepend icon
 
-The `v-file-input` has a default `prepend-icon` that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/features/icon-fonts).
+The `v-file-input` has a default **prepend-icon** that can be set on the component or adjusted globally. More information on changing global components can be found on the [customizing icons page](/features/icon-fonts).
 
 <example file="v-file-input/prop-prepend-icon" />
 

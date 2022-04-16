@@ -2,8 +2,8 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
-import { consoleWarn, deepEqual, findChildren, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { ComponentInternalInstance, ComputedRef, ExtractPropTypes, InjectionKey, PropType, Ref, UnwrapRef } from 'vue'
@@ -40,6 +40,7 @@ export interface GroupProvide {
   }[]>
   disabled: Ref<boolean | undefined>
   findId: (value: unknown) => number | undefined
+  getItemIndex: (value: unknown) => number
 }
 
 export interface GroupItemProvide {
@@ -47,7 +48,7 @@ export interface GroupItemProvide {
   isSelected: Ref<boolean>
   toggle: () => void
   select: (value: boolean) => void
-  selectedClass: Ref<string | false | undefined>
+  selectedClass: Ref<(string | undefined)[] | false>
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
@@ -97,6 +98,10 @@ export function useGroupItem (
     )
   }
 
+  const id = getUid()
+
+  provide(Symbol.for(`${injectKey.description}:id`), id)
+
   const group = inject(injectKey, null)
 
   if (!group) {
@@ -105,7 +110,6 @@ export function useGroupItem (
     throw new Error(`[Vuetify] Could not find useGroup injection with symbol ${injectKey.description}`)
   }
 
-  const id = getUid()
   const value = toRef(props, 'value')
   const disabled = computed(() => group.disabled.value || props.disabled)
 
@@ -123,7 +127,11 @@ export function useGroupItem (
     return group.isSelected(id)
   })
 
-  const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
+  const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
+
+  watch(isSelected, value => {
+    vm.emit('group:selected', { value })
+  })
 
   return {
     id,
@@ -165,11 +173,9 @@ export function useGroup (
     // Is there a better way to fix this typing?
     const unwrapped = item as unknown as UnwrapRef<GroupItem>
 
-    const children = findChildren(groupVm?.vnode)
-    const instances = children
-      .slice(1) // First one is group component itself
-      .filter(cmp => !!cmp.provides[injectKey as any]) // TODO: Fix in TS 4.4
-    const index = instances.indexOf(vm)
+    const key = Symbol.for(`${injectKey.description}:id`)
+    const children = findChildrenWithProvide(key, groupVm?.vnode)
+    const index = children.indexOf(vm)
 
     if (index > -1) {
       items.splice(index, 0, unwrapped)
@@ -271,7 +277,7 @@ export function useGroup (
     }
   }
 
-  const state = {
+  const state: GroupProvide = {
     register,
     unregister,
     selected,
@@ -283,6 +289,7 @@ export function useGroup (
     selectedClass: computed(() => props.selectedClass),
     items: computed(() => items),
     findId: (value: unknown) => items.find(item => item.value === value)?.id,
+    getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 
   provide(injectKey, state)
@@ -290,14 +297,24 @@ export function useGroup (
   return state
 }
 
+function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
+  const ids = getIds(items, [value])
+
+  if (!ids.length) return -1
+
+  return items.findIndex(item => item.id === ids[0])
+}
+
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
   const ids = []
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+
     if (item.value != null) {
       if (modelValue.find(value => deepEqual(value, item.value)) != null) {
         ids.push(item.id)
       }
-    } else if (modelValue.includes(item.id)) {
+    } else if (modelValue.includes(i)) {
       ids.push(item.id)
     }
   }
@@ -308,9 +325,11 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
   const values = []
 
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
+
     if (ids.includes(item.id)) {
-      values.push(item.value != null ? item.value : item.id)
+      values.push(item.value != null ? item.value : i)
     }
   }
 

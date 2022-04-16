@@ -11,8 +11,6 @@ $system-bar-flex: 1 1 auto !default;
 $system-bar-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
 $system-bar-font-weight: tools.map-deep-get(settings.$typography, 'caption', 'weight') !default;
 $system-bar-height: 24px !default;
-$system-bar-icon-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
-$system-bar-icon-margin-inline-start: 8px !default;
 $system-bar-icon-opacity: var(--v-medium-emphasis-opacity) !default;
 $system-bar-justify-content: flex-end !default;
 $system-bar-letter-spacing: tools.map-deep-get(settings.$typography, 'caption', 'letter-spacing') !default;
@@ -23,7 +21,6 @@ $system-bar-positions: absolute fixed !default;
 $system-bar-text-align: end !default;
 $system-bar-text-transform: tools.map-deep-get(settings.$typography, 'caption', 'text-transform') !default;
 $system-bar-window-height: 32px !default;
-$system-bar-window-icon-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 
 $system-bar-theme: (
   $system-bar-background,
