@@ -14,7 +14,7 @@ import { computed, inject } from 'vue'
 import { VStepperGroupProvideSymbol, VStepperProvideSymbol } from './VStepper'
 
 // Types
-import type { PropType } from 'vue'
+import { useTextColor } from '@/composables/color'
 
 export const VStepperStep = defineComponent({
   name: 'VStepperStep',
@@ -36,21 +36,21 @@ export const VStepperStep = defineComponent({
       type: String,
       default: '$edit',
     },
+    errors: Boolean,
     errorIcon: {
       type: String,
       default: '$error',
     },
-    rules: {
-      type: Array as PropType<any[]>,
-      default: () => [],
-    },
+    // rules: {
+    //   type: Array as PropType<any[]>,
+    //   default: () => [],
+    // },
     step: {
       type: Number,
       required: true,
     },
     title: String,
     subtitle: String,
-    last: Boolean,
     ...makeGroupItemProps(),
   },
 
@@ -62,10 +62,24 @@ export const VStepperStep = defineComponent({
     const completed = computed(() => props.step < currentStep.value)
 
     const icon = computed(() => {
+      if (props.errors && props.errorIcon) return props.errorIcon
       if (completed.value && props.completeIcon) return props.completeIcon
 
       return undefined
     })
+
+    const color = computed(() => {
+      if (props.errors) return 'error'
+      if (active.value) return 'primary'
+
+      return 'grey'
+    })
+
+    const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
+      if (props.errors) return 'error'
+
+      return undefined
+    }))
 
     const stepper = inject(VStepperProvideSymbol)
 
@@ -79,7 +93,11 @@ export const VStepperStep = defineComponent({
           {
             'v-stepper-step--stacked-labels': stepper.direction.value === 'horizontal' && stepper.stackedLabels.value,
           },
+          textColorClasses.value,
         ]}
+        style={{
+          ...textColorStyles.value,
+        }}
         stacked={ stepper.direction.value === 'horizontal' && stepper.stackedLabels.value }
         variant="text"
         rounded={ 0 }
@@ -91,7 +109,7 @@ export const VStepperStep = defineComponent({
           prepend: () => (
             <VAvatar
               size="x-small"
-              color={ active.value ? 'primary' : 'grey' }
+              color={ color.value }
               class={ !active.value && 'text-white' }
               icon={ icon.value }
             >

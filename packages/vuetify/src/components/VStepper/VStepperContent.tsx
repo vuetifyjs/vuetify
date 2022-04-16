@@ -51,9 +51,7 @@ export const VStepperContent = defineComponent({
     return () => {
       const content = slots[`content.${props.value}`]
         ? slots[`content.${props.value}`]!(slotProps.value)
-        : slots.content
-          ? slots.content(slotProps.value)
-          : null
+        : null
 
       if (stepper.direction.value === 'vertical') {
         return (

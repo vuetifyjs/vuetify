@@ -30,16 +30,6 @@ export const VStepperProvideSymbol: InjectionKey<VStepperProvide> = Symbol.for('
 
 type VStepperItem<T> = {
   value: T
-} | T
-
-function parseItems<T> (items: VStepperItem<T>[] | undefined) {
-  if (!items) return []
-
-  return items.map(item => {
-    if (typeof item === 'string') return { value: item }
-
-    return item
-  })
 }
 
 export const VStepper = genericComponent<new <T>() => {
@@ -53,6 +43,7 @@ export const VStepper = genericComponent<new <T>() => {
   name: 'VStepper',
 
   props: {
+    eager: Boolean,
     stackedLabels: Boolean,
     nonLinear: Boolean,
     flat: Boolean,
@@ -61,7 +52,10 @@ export const VStepper = genericComponent<new <T>() => {
       default: 'vertical',
       validator: (v: any) => ['vertical', 'horizontal'].includes(v),
     },
-    items: Array as PropType<VStepperItem<any>[]>,
+    items: {
+      type: Array as PropType<VStepperItem<any>[]>,
+      default: () => ([]),
+    },
     ...makeGroupProps({
       mandatory: 'force' as const,
     }),
@@ -74,7 +68,7 @@ export const VStepper = genericComponent<new <T>() => {
 
   setup (props, { slots, emit }) {
     const group = useGroup(props, VStepperGroupProvideSymbol)
-    const items = computed(() => parseItems(props.items))
+    const items = computed(() => props.items)
 
     provide(VStepperProvideSymbol, {
       stackedLabels: toRef(props, 'stackedLabels'),
@@ -96,7 +90,7 @@ export const VStepper = genericComponent<new <T>() => {
 
                 <div class="v-stepper__wrapper">
                   <VStepperLine empty={ index + 1 === Number(props.items?.length) } />
-                  <VStepperContent value={item.value} step={ index + 1 } v-slots={ slots } />
+                  <VStepperContent value={item.value} step={ index + 1 } eager={ props.eager } v-slots={ slots } />
                 </div>
               </>
             )) }
@@ -119,8 +113,8 @@ export const VStepper = genericComponent<new <T>() => {
 
           <div class="v-stepper__wrapper">
             <VWindow modelValue={ group.selected.value }>
-              { props.items?.map((item, index) => (
-                <VStepperContent value={item.value} step={ index + 1 } v-slots={ slots } />
+              { items.value.map((item, index) => (
+                <VStepperContent value={item.value} step={ index + 1 } eager={ props.eager } v-slots={ slots } />
               )) }
             </VWindow>
           </div>
