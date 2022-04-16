@@ -75,8 +75,9 @@
   grid-area: close
   user-select: none
 
-.v-alert__content
-  grid-area: content
+.v-alert__content,
+.v-alert-text
+  grid-area: auto / 2 / auto / 2
 
 .v-alert-icon,
 .v-alert__prepend
@@ -88,12 +89,11 @@
     align-self: center
 
   + .v-alert-title
-    margin-top: -0.2rem
-
-  + .v-alert-text
-    grid-area: title
+    margin-top: -0.25rem
 
 .v-alert__underlay
+  grid-area: none
+
   .v-alert--border-start &
     border-top-left-radius: 0
     border-bottom-left-radius: 0
@@ -111,7 +111,6 @@
     border-bottom-right-radius: 0
 
 .v-alert-text
-  grid-area: text
   overflow: hidden
 
 .v-alert-title
