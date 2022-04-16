@@ -75,6 +75,7 @@ export const VListItem = genericComponent<new () => {
     subtitle: String,
     title: String,
     value: null,
+    link: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -139,7 +140,7 @@ export const VListItem = genericComponent<new () => {
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || (props.value != null && !!list))
+      const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
 
       list?.updateHasPrepend(hasPrepend)
 

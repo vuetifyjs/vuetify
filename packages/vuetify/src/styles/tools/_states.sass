@@ -16,7 +16,8 @@
         opacity: calc(#{map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
 
   @if ($active)
-    &--active
+    &--active,
+    &[aria-haspopup="menu"][aria-expanded="true"]
       @include active-states($selector)
 
 @mixin active-states ($selector: '::before')
