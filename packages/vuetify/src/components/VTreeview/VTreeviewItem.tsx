@@ -54,11 +54,9 @@ export const VTreeviewItem = defineComponent({
   emits: {
     'update:selected': (value: boolean, e: MouseEvent) => true,
     'update:indeterminate': (value: boolean) => true,
-    'click:prepend': (data: { event: MouseEvent }) => true,
-    'click:select': (data: { id: string, value: boolean, path: string[], event?: Event }) => true,
-    'click:open': (data: { id: string, value: boolean, path: string[], event?: Event }) => true,
-    'click:dblclick': (data: { event: MouseEvent }) => true,
-    'click:contextmenu': (data: { event: MouseEvent }) => true,
+    'click:prepend': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
+    'click:dblclick': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
+    'click:contextmenu': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
   },
 
   setup (props, { slots, emit, attrs }) {
@@ -71,6 +69,7 @@ export const VTreeviewItem = defineComponent({
       open,
       isLeaf,
       selectedClass,
+      root,
     } = useNestedItem(id, false)
     const { visibleIds } = inject(VTreeviewSymbol, { visibleIds: ref(new Set()) })
 
@@ -108,11 +107,13 @@ export const VTreeviewItem = defineComponent({
     }
 
     function onDblclick (event: MouseEvent) {
-      emit('click:dblclick', { event })
+      emit('click:dblclick', { event, isOpen: isOpen.value, open })
+      root.emit('click:dblclick', { event, isOpen: isOpen.value, open }) // TODO: Better way to do this that is not re-emitting manually up the chain?
     }
 
     function onContextmenu (event: MouseEvent) {
-      emit('click:contextmenu', { event })
+      emit('click:contextmenu', { event, isOpen: isOpen.value, open })
+      root.emit('click:contextmenu', { event, isOpen: isOpen.value, open })
     }
 
     const { textColorClasses, textColorStyles } = useTextColor(props, 'selectedColor')

@@ -51,6 +51,7 @@ type NestedProvide = {
     open: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
+    emit: (event: string, value: any) => void
     selectedClass: Ref<string | undefined>
     getPath: (id: string) => string[]
     getChildren: (id: string) => string[]
@@ -62,6 +63,7 @@ export const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:ne
 export const emptyNested: NestedProvide = {
   id: ref(),
   root: {
+    emit: () => null,
     register: () => null,
     unregister: () => null,
     parents: ref(new Map()),
@@ -164,6 +166,7 @@ export const useNested = (props: NestedProps) => {
   const nested: NestedProvide = {
     id: ref(),
     root: {
+      emit: vm.emit,
       opened,
       selected,
       selectedValues: computed(() => {
@@ -263,7 +266,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const item = {
     ...parent,
     id: computedId,
-    open: (open: boolean, e: Event) => root.open(computedId.value, open, e),
+    open: (open: boolean, e?: Event) => root.open(computedId.value, open, e),
     openOnSelect: (open: boolean, e?: Event) => root.openOnSelect(computedId.value, open, e),
     isOpen: computed(() => root.opened.value.has(computedId.value)),
     parent: computed(() => root.parents.value.get(computedId.value)),

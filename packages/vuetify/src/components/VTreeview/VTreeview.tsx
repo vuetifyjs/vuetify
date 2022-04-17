@@ -96,6 +96,9 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
     'update:opened': (val: string[]) => true,
     'click:open': (value: { id: string, value: unknown }) => true,
     'click:select': (value: { id: string, value: unknown }) => true,
+    'click:prepend': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
+    'click:dblclick': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
+    'click:contextmenu': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
   },
 
   setup (props, { slots, emit }) {
