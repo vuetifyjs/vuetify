@@ -1,10 +1,10 @@
 // Components
-// import { VExpandTransition } from '@/components/transitions'
+import { VExpandTransition } from '@/components/transitions'
 
 // Composables
-// import { useList } from './list'
 import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed, defineComponent, inject, ref, toRef } from 'vue'
@@ -63,6 +63,9 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
     hideExpand: Boolean,
     openOnClick: Boolean,
     showLines: Boolean,
+    ...makeTransitionProps({
+      transition: { component: VExpandTransition },
+    }),
 
     ...makeTagProps(),
   },
@@ -92,12 +95,14 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
           <VTreeviewGroupActivator>
             { slots.activator?.({ props: activatorProps.value }) }
           </VTreeviewGroupActivator>
-          <div class="v-treeview-group__items" v-show={ isOpen.value }>
-            { props.showLines && (
-              <div class="v-treeview-group__line"></div>
-            ) }
-            { slots.default?.() }
-          </div>
+          <MaybeTransition transition={ props.transition }>
+            <div class="v-treeview-group__items" v-show={ isOpen.value }>
+              { props.showLines && (
+                <div class="v-treeview-group__line"></div>
+              ) }
+              { slots.default?.() }
+            </div>
+          </MaybeTransition>
         </props.tag>
       )
     }

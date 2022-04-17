@@ -2,6 +2,7 @@
 
 // Components
 import { VTreeviewChildren } from './VTreeviewChildren'
+import { VExpandTransition } from '../transitions'
 
 // Composables
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
@@ -10,6 +11,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { provideDefaults } from '@/composables/defaults'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { makeTransitionProps } from '@/composables/transition'
 
 // Utilities
 import { computed, onMounted, provide, ref, toRef, watch } from 'vue'
@@ -77,6 +79,9 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
     ...makeRoundedProps(),
     ...makeFilterProps({
       filterKeys: ['props.value', 'props.title'],
+    }),
+    ...makeTransitionProps({
+      transition: { component: VExpandTransition },
     }),
     falseIcon: String,
     trueIcon: String,
@@ -160,6 +165,7 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
       },
       VTreeviewGroup: {
         showLines: toRef(props, 'showLines'),
+        transition: toRef(props, 'transition'),
       },
     }))
 
