@@ -21,6 +21,7 @@ export type TreeviewGroupActivatorSlot = {
     collapseIcon: string
     expandIcon: string
     class: string
+    value: any
     hideExpand: boolean | undefined
   }
 }
@@ -83,7 +84,6 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
         <props.tag
           class={[
             'v-treeview-group',
-            'v-treeview-group--foo',
             {
               'v-treeview-group--filtered': !visibleIds.value.has(id.value),
             },

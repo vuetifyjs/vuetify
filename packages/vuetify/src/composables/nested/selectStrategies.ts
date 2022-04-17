@@ -6,6 +6,7 @@ export type SelectStrategyFn = (data: {
   children: Map<unknown, unknown[]>
   parents: Map<unknown, unknown>
   event?: Event
+  mandatory?: boolean
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
@@ -26,189 +27,157 @@ export type SelectStrategy = {
   out: SelectStrategyTransformOutFn
 }
 
-export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const strategy: SelectStrategy = {
-    select: ({ id, value, selected }) => {
-      // When mandatory and we're trying to deselect when id
-      // is the only currently selected item then do nothing
-      if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
-        if (on.length === 1 && on[0] === id) return selected
-      }
+export const independentSelectStrategy: SelectStrategy = {
+  select: ({ id, value, selected, mandatory }) => {
+    // When mandatory and we're trying to deselect when id
+    // is the only currently selected item then do nothing
+    if (mandatory && !value) {
+      const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
+      if (on.length === 1 && on[0] === id) return selected
+    }
 
-      selected.set(id, value ? 'on' : 'off')
+    selected.set(id, value ? 'on' : 'off')
 
-      return selected
-    },
-    in: (v, children, parents) => {
-      let map = new Map()
+    return selected
+  },
+  in: (v, children, parents) => {
+    let map = new Map()
 
-      for (const id of (v || [])) {
-        map = strategy.select({
-          id,
-          value: true,
-          selected: new Map(map),
-          children,
-          parents,
-        })
-      }
+    for (const id of (v || [])) {
+      map = independentSelectStrategy.select({
+        id,
+        value: true,
+        selected: new Map(map),
+        children,
+        parents,
+      })
+    }
 
-      return map
-    },
-    out: v => {
-      const arr = []
+    return map
+  },
+  out: v => {
+    const arr = []
 
-      for (const [key, value] of v.entries()) {
-        if (value === 'on') arr.push(key)
-      }
+    for (const [key, value] of v.entries()) {
+      if (value === 'on') arr.push(key)
+    }
 
-      return arr
-    },
-  }
-
-  return strategy
+    return arr
+  },
 }
 
-export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const parentStrategy = independentSelectStrategy(mandatory)
+export const independentSingleSelectStrategy: SelectStrategy = {
+  select: ({ selected, id, ...rest }) => {
+    const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
+    return independentSelectStrategy.select({ ...rest, id, selected: singleSelected })
+  },
+  in: (v, children, parents) => {
+    let map = new Map()
 
-  const strategy: SelectStrategy = {
-    select: ({ selected, id, ...rest }) => {
-      const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
-      return parentStrategy.select({ ...rest, id, selected: singleSelected })
-    },
-    in: (v, children, parents) => {
-      let map = new Map()
+    if (v?.length) {
+      map = independentSelectStrategy.in(v.slice(0, 1), children, parents)
+    }
 
-      if (v?.length) {
-        map = parentStrategy.in(v.slice(0, 1), children, parents)
-      }
-
-      return map
-    },
-    out: (v, children, parents) => {
-      return parentStrategy.out(v, children, parents)
-    },
-  }
-
-  return strategy
+    return map
+  },
+  out: (v, children, parents) => {
+    return independentSelectStrategy.out(v, children, parents)
+  },
 }
 
-export const leafSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const parentStrategy = independentSelectStrategy(mandatory)
+export const leafSelectStrategy: SelectStrategy = {
+  select: ({ id, selected, children, ...rest }) => {
+    if (children.has(id)) return selected
 
-  const strategy: SelectStrategy = {
-    select: ({ id, selected, children, ...rest }) => {
-      if (children.has(id)) return selected
-
-      return parentStrategy.select({ id, selected, children, ...rest })
-    },
-    in: parentStrategy.in,
-    out: parentStrategy.out,
-  }
-
-  return strategy
+    return independentSelectStrategy.select({ id, selected, children, ...rest })
+  },
+  in: independentSelectStrategy.in,
+  out: independentSelectStrategy.out,
 }
 
-export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const parentStrategy = independentSingleSelectStrategy(mandatory)
+export const leafSingleSelectStrategy: SelectStrategy = {
+  select: ({ id, selected, children, ...rest }) => {
+    if (children.has(id)) return selected
 
-  const strategy: SelectStrategy = {
-    select: ({ id, selected, children, ...rest }) => {
-      if (children.has(id)) return selected
-
-      return parentStrategy.select({ id, selected, children, ...rest })
-    },
-    in: parentStrategy.in,
-    out: parentStrategy.out,
-  }
-
-  return strategy
+    return independentSingleSelectStrategy.select({ id, selected, children, ...rest })
+  },
+  in: independentSingleSelectStrategy.in,
+  out: independentSingleSelectStrategy.out,
 }
 
-export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const strategy: SelectStrategy = {
-    select: ({ id, value, selected, children, parents }) => {
-      const original = new Map(selected)
+export const classicSelectStrategy: SelectStrategy = {
+  select: ({ id, value, selected, children, parents, mandatory }) => {
+    const original = new Map(selected)
 
-      const items = [id]
+    const items = [id]
 
-      while (items.length) {
-        const item = items.shift()!
+    while (items.length) {
+      const item = items.shift()!
 
-        selected.set(item, value ? 'on' : 'off')
+      selected.set(item, value ? 'on' : 'off')
 
-        if (children.has(item)) {
-          items.push(...children.get(item)!)
-        }
+      if (children.has(item)) {
+        items.push(...children.get(item)!)
       }
+    }
 
-      let parent = parents.get(id)
+    let parent = parents.get(id)
 
-      while (parent) {
-        const childrenIds = children.get(parent)!
-        const everySelected = childrenIds.every(cid => selected.get(cid) === 'on')
-        const noneSelected = childrenIds.every(cid => !selected.has(cid) || selected.get(cid) === 'off')
+    while (parent) {
+      const childrenIds = children.get(parent)!
+      const everySelected = childrenIds.every(cid => selected.get(cid) === 'on')
+      const noneSelected = childrenIds.every(cid => !selected.has(cid) || selected.get(cid) === 'off')
 
-        selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
+      selected.set(parent, everySelected ? 'on' : noneSelected ? 'off' : 'indeterminate')
 
-        parent = parents.get(parent)
-      }
+      parent = parents.get(parent)
+    }
 
-      // If mandatory and planned deselect results in no selected
-      // items then we can't do it, so return original state
-      if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
-        if (on.length === 0) return original
-      }
+    // If mandatory and planned deselect results in no selected
+    // items then we can't do it, so return original state
+    if (mandatory && !value) {
+      const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
+      if (on.length === 0) return original
+    }
 
-      return selected
-    },
-    in: (v, children, parents) => {
-      let map = new Map()
+    return selected
+  },
+  in: (v, children, parents) => {
+    let map = new Map()
 
-      for (const id of (v || [])) {
-        map = strategy.select({
-          id,
-          value: true,
-          selected: new Map(map),
-          children,
-          parents,
-        })
-      }
+    for (const id of (v || [])) {
+      map = classicSelectStrategy.select({
+        id,
+        value: true,
+        selected: new Map(map),
+        children,
+        parents,
+      })
+    }
 
-      return map
-    },
-    out: (v, children) => {
-      const arr = []
+    return map
+  },
+  out: (v, children) => {
+    const arr = []
 
-      for (const [key, value] of v.entries()) {
-        if (value === 'on') arr.push(key)
-      }
+    for (const [key, value] of v.entries()) {
+      if (value === 'on') arr.push(key)
+    }
 
-      return arr
-    },
-  }
-
-  return strategy
+    return arr
+  },
 }
 
-export const classicLeafSelectStrategy = (mandatory?: boolean): SelectStrategy => {
-  const parentStrategy = classicSelectStrategy(mandatory)
+export const classicLeafSelectStrategy: SelectStrategy = {
+  select: classicSelectStrategy.select,
+  in: classicSelectStrategy.in,
+  out: (v, children) => {
+    const arr = []
 
-  const strategy: SelectStrategy = {
-    select: parentStrategy.select,
-    in: parentStrategy.in,
-    out: (v, children) => {
-      const arr = []
+    for (const [key, value] of v.entries()) {
+      if (value === 'on' && !children.has(key)) arr.push(key)
+    }
 
-      for (const [key, value] of v.entries()) {
-        if (value === 'on' && !children.has(key)) arr.push(key)
-      }
-
-      return arr
-    },
-  }
-
-  return strategy
+    return arr
+  },
 }

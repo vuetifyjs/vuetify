@@ -13,12 +13,14 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
 import { computed, onMounted, provide, ref, toRef, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { VTreeviewSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { InternalTreeviewItem, TreeviewItem } from './shared'
+import type { TreeviewGroupActivatorSlot } from './VTreeviewGroup'
 
 const parseItems = (items?: TreeviewItem[]): InternalTreeviewItem[] => {
   if (!items) return []
@@ -42,7 +44,16 @@ function flatten (items: InternalTreeviewItem[], flat: InternalTreeviewItem[] = 
   return flat
 }
 
-export const VTreeview = defineComponent({
+export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
+  $props: {
+    items?: T[]
+  }
+  $slots: MakeSlots<{
+    default: []
+    activator: [TreeviewGroupActivatorSlot]
+    item: [T]
+  }>
+}>()({
   name: 'VTreeview',
 
   props: {

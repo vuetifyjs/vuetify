@@ -16,14 +16,21 @@ import type { InjectionKey, Prop, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategy } from './openStrategies'
 
-export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
-export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
+export type SelectStrategyValue =
+  | 'single-leaf'
+  | 'leaf'
+  | 'independent'
+  | 'single-independent'
+  | 'classic'
+  | 'classic-leaf'
+  | SelectStrategyFn
+export type OpenStrategyValue = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export interface NestedProps {
-  selectStrategy: SelectStrategy | undefined
-  openStrategy: OpenStrategyProp | undefined
   selected: unknown[] | undefined
   opened: unknown[] | undefined
+  selectStrategy: SelectStrategyValue | undefined
+  openStrategy: OpenStrategyValue | undefined
   mandatory: boolean
   'onUpdate:selected': ((val: unknown[]) => void) | undefined
   'onUpdate:opened': ((val: unknown[]) => void) | undefined
@@ -72,10 +79,10 @@ export const emptyNested: NestedProvide = {
 }
 
 export const makeNestedProps = propsFactory({
-  selectStrategy: [String, Function] as Prop<SelectStrategy>,
-  openStrategy: [String, Function] as Prop<OpenStrategyProp>,
   opened: Array as Prop<unknown[]>,
   selected: Array as Prop<unknown[]>,
+  selectStrategy: [String, Function] as Prop<SelectStrategyValue>,
+  openStrategy: [String, Function] as Prop<OpenStrategyValue>,
   selectedClass: String,
   mandatory: Boolean,
 }, 'nested')
@@ -88,21 +95,21 @@ export const useNested = (props: NestedProps) => {
   const opened = useProxiedModel(props, 'opened', v => new Set(v), v => [...v.values()])
 
   const selectStrategy = computed(() => {
-    if (typeof props.selectStrategy === 'object') return props.selectStrategy
+    if (props.selectStrategy && typeof props.selectStrategy !== 'string') return props.selectStrategy(props.mandatory)
 
     switch (props.selectStrategy) {
-      case 'single-leaf': return leafSingleSelectStrategy(props.mandatory)
-      case 'leaf': return leafSelectStrategy(props.mandatory)
-      case 'independent': return independentSelectStrategy(props.mandatory)
-      case 'single-independent': return independentSingleSelectStrategy(props.mandatory)
-      case 'classic-leaf': return classicLeafSelectStrategy(props.mandatory)
+      case 'single-leaf': return leafSingleSelectStrategy
+      case 'leaf': return leafSelectStrategy
+      case 'independent': return independentSelectStrategy
+      case 'single-independent': return independentSingleSelectStrategy
+      case 'classic-leaf': return classicLeafSelectStrategy
       case 'classic':
-      default: return classicSelectStrategy(props.mandatory)
+      default: return classicSelectStrategy
     }
   })
 
   const openStrategy = computed(() => {
-    if (typeof props.openStrategy === 'function') return props.openStrategy
+    if (props.openStrategy && typeof props.openStrategy !== 'string') return props.openStrategy
 
     switch (props.openStrategy) {
       case 'list': return listOpenStrategy
@@ -225,6 +232,7 @@ export const useNested = (props: NestedProps) => {
           children: children.value,
           parents: parents.value,
           event,
+          mandatory: props.mandatory,
         })
         newSelected && (selected.value = newSelected)
 

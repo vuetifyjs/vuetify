@@ -17,7 +17,7 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalTreevie
   }
   $slots: MakeSlots<{
     default: []
-    header: [TreeviewGroupActivatorSlot]
+    activator: [TreeviewGroupActivatorSlot]
     item: [T]
   }>
 }>()({
@@ -39,13 +39,17 @@ export const VTreeviewChildren = genericComponent<new <T extends InternalTreevie
             default: () => (
               <VTreeviewChildren items={ children } v-slots={ slots } />
             ),
-            activator: ({ props: activatorProps }) => slots.header
-              ? slots.header({ ...itemProps, ...activatorProps })
-              : <VTreeviewItem { ...itemProps } { ...activatorProps } v-slots={ slots } />,
+            activator: ({ props: activatorProps }) => {
+              const { activator, ...rest } = slots
+
+              return activator
+                ? activator({ props: { ...itemProps, ...activatorProps } })
+                : <VTreeviewItem { ...itemProps } { ...activatorProps } v-slots={ rest } />
+            },
           }}
         </VTreeviewGroup>
       ) : (
-        slots.item ? slots.item(itemProps) : (
+        slots.item ? slots.item({ props: itemProps }) : (
           <VTreeviewItem
             key={ itemProps?.value }
             { ...itemProps }
