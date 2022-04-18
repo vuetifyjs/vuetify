@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 /* eslint-disable sonarjs/no-identical-functions */
 import { classicSelectStrategy, independentSelectStrategy, independentSingleSelectStrategy, leafSelectStrategy, leafSingleSelectStrategy } from '../selectStrategies'
 
