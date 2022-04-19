@@ -1,5 +1,5 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, watch } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { consoleWarn, propsFactory } from '@/util'
 
@@ -11,7 +11,8 @@ export interface FormProvide {
     id: number | string,
     validate: () => Promise<string[]>,
     reset: () => void,
-    resetValidation: () => void
+    resetValidation: () => void,
+    isValid: Ref<boolean | null>,
   ) => void
   unregister: (id: number | string) => void
   items: Ref<FormField[]>
@@ -25,6 +26,7 @@ interface FormField {
   validate: () => Promise<string[]>
   reset: () => void
   resetValidation: () => void
+  isValid: boolean | null
 }
 
 interface FormValidationResult {
@@ -68,7 +70,6 @@ export function createForm (props: FormProps) {
     let valid = true
 
     errorMessages.value = []
-    model.value = null
     isValidating.value = true
 
     for (const item of items.value) {
@@ -87,7 +88,6 @@ export function createForm (props: FormProps) {
     }
 
     errorMessages.value = results
-    model.value = valid
     isValidating.value = false
 
     return { valid, errorMessages: errorMessages.value }
@@ -104,8 +104,22 @@ export function createForm (props: FormProps) {
     model.value = null
   }
 
+  watch(items, () => {
+    let valid = null
+
+    if (items.value.some(item => item.isValid === false)) {
+      valid = false
+    } else if (items.value.every(item => item.isValid === true)) {
+      valid = true
+    }
+
+    model.value = valid
+  }, {
+    deep: true,
+  })
+
   provide(FormKey, {
-    register: (id, validate, reset, resetValidation) => {
+    register: (id, validate, reset, resetValidation, isValid) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -115,6 +129,7 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
+        isValid: isValid as unknown as boolean | null, // TODO: Better way to type this unwrapping?
       })
     },
     unregister: id => {

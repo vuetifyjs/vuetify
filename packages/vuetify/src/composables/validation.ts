@@ -82,14 +82,16 @@ export function useValidation (
   const uid = computed(() => props.name ?? getUid())
 
   onBeforeMount(() => {
-    form?.register(uid.value, validate, reset, resetValidation)
+    form?.register(uid.value, validate, reset, resetValidation, isValid)
   })
 
   onBeforeUnmount(() => {
     form?.unregister(uid.value)
   })
 
-  watch(model, validate)
+  watch(model, () => {
+    if (model.value != null) validate()
+  })
 
   function reset () {
     resetValidation()

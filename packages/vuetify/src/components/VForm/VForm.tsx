@@ -31,6 +31,7 @@ export const VForm = defineComponent({
       form.validate().then(({ valid }) => {
         if (valid) {
           emit('submit', e)
+          formRef.value?.submit()
         }
       })
     }
