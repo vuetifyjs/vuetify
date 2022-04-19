@@ -81,6 +81,9 @@
       ]
     }
   },
+  "engines": {
+    "node": "^12.20 || >=14.13"
+  },
   "scripts": {
     "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
