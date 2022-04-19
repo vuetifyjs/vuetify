@@ -1,5 +1,8 @@
 <template>
-  <div class="mb-4">
+  <div
+    v-if="slug"
+    class="mb-4"
+  >
     <vuetify
       :slug="slug"
       medium="entry"
