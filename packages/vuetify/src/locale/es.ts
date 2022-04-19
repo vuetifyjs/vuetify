@@ -22,7 +22,7 @@ export default {
     itemsPerPageAll: 'Todos',
     nextPage: 'Página siguiente',
     prevPage: 'Página anterior',
-    firstPage: 'Primer página',
+    firstPage: 'Primera página',
     lastPage: 'Última página',
     pageText: '{0}-{1} de {2}',
   },
