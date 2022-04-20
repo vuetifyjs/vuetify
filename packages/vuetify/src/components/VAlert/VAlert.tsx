@@ -168,7 +168,7 @@ export const VAlert = defineComponent({
             <>
               { slots.prepend
                 ? (
-                  <div class="v-banner__prepend">
+                  <div class="v-alert__prepend">
                     { slots.prepend() }
                   </div>
                 )
