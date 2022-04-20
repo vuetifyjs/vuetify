@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // Styles
 import './VChip.sass'
 
@@ -25,6 +26,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { defineComponent } from '@/util'
+import { VDefaultsProvider } from '../VDefaultsProvider'
 
 export const VChip = defineComponent({
   name: 'VChip',
@@ -158,18 +160,29 @@ export const VChip = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-chip__prepend">
+            <VDefaultsProvider
+              defaults={{
+                VAvatar: {
+                  image: props.prependAvatar,
+                  start: true,
+                },
+                VIcon: {
+                  icon: props.prependIcon,
+                  start: true,
+                },
+              }}
+            >
               { slots.prepend
-                ? slots.prepend()
-                : (
-                  <VAvatar
-                    icon={ props.prependIcon }
-                    image={ props.prependAvatar }
-                    size={ props.size }
-                  />
+                ? (
+                  <div class="v-chip__prepend">
+                    { slots.prepend() }
+                  </div>
                 )
+                : props.prependAvatar ? (<VAvatar />)
+                : props.prependIcon ? (<VIcon />)
+                : undefined
               }
-            </div>
+            </VDefaultsProvider>
           ) }
 
           { slots.default?.({
@@ -182,18 +195,29 @@ export const VChip = defineComponent({
           }) ?? props.text }
 
           { hasAppend && (
-            <div class="v-chip__append">
+            <VDefaultsProvider
+              defaults={{
+                VAvatar: {
+                  image: props.appendAvatar,
+                  end: true,
+                },
+                VIcon: {
+                  icon: props.appendIcon,
+                  end: true,
+                },
+              }}
+            >
               { slots.append
-                ? slots.append()
-                : (
-                  <VAvatar
-                    icon={ props.appendIcon }
-                    image={ props.appendAvatar }
-                    size={ props.size }
-                  />
+                ? (
+                  <div class="v-chip__append">
+                    { slots.append() }
+                  </div>
                 )
+                : props.appendAvatar ? (<VAvatar />)
+                : props.appendIcon ? (<VIcon />)
+                : undefined
               }
-            </div>
+            </VDefaultsProvider>
           ) }
 
           { hasClose && (
