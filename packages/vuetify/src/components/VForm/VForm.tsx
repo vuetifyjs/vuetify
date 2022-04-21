@@ -39,14 +39,16 @@ export const VForm = defineComponent({
       e.finally = ready.finally.bind(ready)
 
       emit('submit', e)
-      const { defaultPrevented } = e
-      e.preventDefault()
 
-      ready.then(({ valid }) => {
-        if (valid && !defaultPrevented) {
-          formRef.value?.submit()
-        }
-      })
+      if (!e.defaultPrevented) {
+        ready.then(({ valid }) => {
+          if (valid) {
+            formRef.value?.submit()
+          }
+        })
+      }
+
+      e.preventDefault()
     }
 
     useRender(() => ((
