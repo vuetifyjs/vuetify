@@ -10,6 +10,7 @@ export { useLayout } from './layout'
 
 export type { DefaultsInstance } from './defaults'
 export type { DisplayBreakpoint, DisplayInstance, DisplayThresholds } from './display'
+export type { SubmitEventPromise } from './form'
 export type { IconAliases, IconProps, IconSet, IconOptions } from './icons'
 export type { LocaleAdapter } from './locale'
 export type { RtlInstance } from './rtl'
