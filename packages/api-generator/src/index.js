@@ -140,22 +140,26 @@ const getComponentApi = (componentName, locales) => {
 
   const component = app._context.components[componentName]
   const props = Object.keys(component.props || {}).reduce((arr, key) => {
+    if (key === '_as') return arr
+
     const prop = component.props[key]
-
     const type = getPropType(prop?.type)
-
-    return [...arr, {
+    arr.push({
       name: kebabCase(key),
       source: prop?.source || kebabName,
       default: getPropDefault(prop?.default, type),
       type,
-    }]
+    })
+
+    return arr
   }, [])
 
   const events = Object.keys(component.emits || []).reduce((arr, key) => {
-    return [...arr, {
+    arr.push({
       name: key,
-    }]
+    })
+
+    return arr
   }, [])
 
   const sassVariables = parseSassVariables(componentName)
