@@ -56,7 +56,7 @@ export function useValidation (
   const form = useForm()
   const internalErrorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
+  const isDirty = computed(() => wrapInArray(model.value === '' ? null : model.value).length > 0)
   const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const errorMessages = computed(() => {
