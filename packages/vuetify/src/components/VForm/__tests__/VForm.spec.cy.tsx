@@ -5,6 +5,7 @@ import { ref } from 'vue'
 import { Application } from '../../../../cypress/templates'
 import { VForm } from '../'
 import { VBtn, VTextField } from '@/components'
+import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {
   it('should emit when inputs are updated', () => {
@@ -157,6 +158,28 @@ describe('VForm', () => {
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
     cy.get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
+  })
+
+  it('should emit a SubmitEventPromise', () => {
+    cy.mount(() => (
+      <Application>
+        <VForm action="/action" onSubmit={ onSubmit }>
+          <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+          <VBtn type="submit">Submit</VBtn>
+        </VForm>
+      </Application>
+    ))
+
+    function onSubmit (e: SubmitEventPromise) {
+      e.preventDefault()
+    }
+
+    cy.get('.v-btn').click().url().should('not.contain', '/action')
+    cy.vue().then(async wrapper => {
+      const emits = wrapper.findComponent('.v-form').emitted('submit')
+
+      expect(await emits[0][0]).to.deep.equal({ valid: true, errorMessages: [] })
+    })
   })
 
   // TODO: This test has to be the last one,
