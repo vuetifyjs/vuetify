@@ -34,6 +34,8 @@ interface FormValidationResult {
   errorMessages: string[]
 }
 
+export interface SubmitEventPromise extends SubmitEvent, Promise<{ valid: boolean, errorMessages: FormValidationResult[] }> {}
+
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 
 export interface FormProps {

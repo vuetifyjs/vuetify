@@ -22,12 +22,12 @@ module.exports = {
     ],
     events: [
       {
-        name: 'input',
+        name: 'update:modelValue',
         value: 'boolean',
       },
       {
         name: 'submit',
-        value: 'event',
+        value: 'SubmitEventPromise',
       },
     ],
   },

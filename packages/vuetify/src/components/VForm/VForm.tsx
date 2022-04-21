@@ -4,6 +4,10 @@ import { createForm, makeFormProps } from '@/composables/form'
 // Utilities
 import { ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { useForwardRef } from '@/composables/forwardRef'
+
+// Types
+import type { SubmitEventPromise } from '@/composables/form'
 
 export const VForm = defineComponent({
   name: 'VForm',
@@ -14,7 +18,7 @@ export const VForm = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean | null) => true,
-    submit: (e: Event) => true,
+    submit: (e: SubmitEventPromise) => true,
   },
 
   setup (props, { slots, emit }) {
@@ -26,14 +30,25 @@ export const VForm = defineComponent({
       form.reset()
     }
 
-    function onSubmit (e: Event) {
+    function onSubmit (_e: Event) {
+      const e = _e as SubmitEventPromise
+
+      const ready = form.validate()
+      e.then = ready.then.bind(ready)
+      e.catch = ready.catch.bind(ready)
+      e.finally = ready.finally.bind(ready)
+
+      emit('submit', e)
+
+      if (!e.defaultPrevented) {
+        ready.then(({ valid }) => {
+          if (valid) {
+            formRef.value?.submit()
+          }
+        })
+      }
+
       e.preventDefault()
-      form.validate().then(({ valid }) => {
-        if (valid) {
-          emit('submit', e)
-          formRef.value?.submit()
-        }
-      })
     }
 
     useRender(() => ((
@@ -48,7 +63,7 @@ export const VForm = defineComponent({
       </form>
     )))
 
-    return form
+    return useForwardRef(form, formRef)
   },
 })
 
