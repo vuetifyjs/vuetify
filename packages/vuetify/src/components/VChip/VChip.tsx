@@ -157,7 +157,7 @@ export const VChip = defineComponent({
                   class="v-chip__filter"
                   v-show={ group.isSelected.value }
                 >
-                  { slots.filter ? slots.filter() : <VIcon /> }
+                  { slots.filter ? slots.filter() : (<VIcon />) }
                 </div>
               </VExpandXTransition>
             </VDefaultsProvider>
@@ -168,11 +168,9 @@ export const VChip = defineComponent({
               defaults={{
                 VAvatar: {
                   image: props.prependAvatar,
-                  start: true,
                 },
                 VIcon: {
                   icon: props.prependIcon,
-                  start: true,
                 },
               }}
             >
@@ -182,8 +180,8 @@ export const VChip = defineComponent({
                     { slots.prepend() }
                   </div>
                 )
-                : props.prependAvatar ? (<VAvatar />)
-                : props.prependIcon ? (<VIcon />)
+                : props.prependAvatar ? (<VAvatar start />)
+                : props.prependIcon ? (<VIcon start />)
                 : undefined
               }
             </VDefaultsProvider>
@@ -203,11 +201,9 @@ export const VChip = defineComponent({
               defaults={{
                 VAvatar: {
                   image: props.appendAvatar,
-                  end: true,
                 },
                 VIcon: {
                   icon: props.appendIcon,
-                  end: true,
                 },
               }}
             >
@@ -217,8 +213,8 @@ export const VChip = defineComponent({
                     { slots.append() }
                   </div>
                 )
-                : props.appendAvatar ? (<VAvatar />)
-                : props.appendIcon ? (<VIcon />)
+                : props.appendAvatar ? (<VAvatar end />)
+                : props.appendIcon ? (<VIcon end />)
                 : undefined
               }
             </VDefaultsProvider>
