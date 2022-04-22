@@ -5,6 +5,7 @@ import './VChip.sass'
 // Components
 import { VAvatar } from '@/components/VAvatar'
 import { VChipGroupSymbol } from '@/components/VChipGroup/VChipGroup'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandXTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
@@ -26,7 +27,6 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { VDefaultsProvider } from '../VDefaultsProvider'
 
 export const VChip = defineComponent({
   name: 'VChip',
@@ -86,16 +86,16 @@ export const VChip = defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const isActive = useProxiedModel(props, 'modelValue')
-
-    const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
-    const group = useGroupItem(props, VChipGroupSymbol, false)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
-    const { densityClasses } = useDensity(props)
+    const { themeClasses } = provideTheme(props)
+
+    const isActive = useProxiedModel(props, 'modelValue')
+    const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
 
     function onCloseClick (e: Event) {
@@ -122,6 +122,7 @@ export const VChip = defineComponent({
               'v-chip--disabled': props.disabled,
               'v-chip--label': props.label,
               'v-chip--link': isClickable,
+              'v-chip--filter': hasFilter,
               'v-chip--pill': props.pill,
             },
             themeClasses.value,
@@ -146,17 +147,20 @@ export const VChip = defineComponent({
           { genOverlays(isClickable, 'v-chip') }
 
           { hasFilter && (
-            <VExpandXTransition>
-              <div
-                class="v-chip__filter"
-                v-show={ group.isSelected.value }
-              >
-                { slots.filter
-                  ? slots.filter()
-                  : <VIcon icon={ props.filterIcon } />
-                }
-              </div>
-            </VExpandXTransition>
+            <VDefaultsProvider
+              defaults={{
+                VIcon: { icon: props.filterIcon },
+              }}
+            >
+              <VExpandXTransition>
+                <div
+                  class="v-chip__filter"
+                  v-show={ group.isSelected.value }
+                >
+                  { slots.filter ? slots.filter() : <VIcon /> }
+                </div>
+              </VExpandXTransition>
+            </VDefaultsProvider>
           ) }
 
           { hasPrepend && (
@@ -221,20 +225,21 @@ export const VChip = defineComponent({
           ) }
 
           { hasClose && (
-            <div
-              class="v-chip__close"
-              onClick={ onCloseClick }
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  icon: props.closeIcon,
+                  size: 'x-small',
+                },
+              }}
             >
-              { slots.close
-                ? slots.close({ props: { onClick: onCloseClick } })
-                : (
-                  <VIcon
-                    icon={ props.closeIcon }
-                    size="x-small"
-                  />
-                )
-              }
-            </div>
+              <div
+                class="v-chip__close"
+                onClick={ onCloseClick }
+              >
+                { slots.close ? slots.close() : (<VIcon />) }
+              </div>
+            </VDefaultsProvider>
           ) }
         </Tag>
       )

@@ -17,6 +17,7 @@
       font-size: $size;
       padding: 0 $padding;
 
+      .v-chip__filter,
       .v-chip__prepend,
       .v-icon--start {
         margin-inline-start: -$padding * .5;
