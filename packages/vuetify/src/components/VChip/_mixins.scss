@@ -18,7 +18,7 @@
       padding: 0 $padding;
 
       .v-avatar {
-        --v-avatar-height: #{$height - 8};
+        --v-avatar-height: #{$height - 6};
 
         @at-root #{selector.append('.v-chip--pill', &)} {
           --v-avatar-height: #{$height};
@@ -29,12 +29,18 @@
       .v-chip__prepend,
       > .v-avatar--start,
       > .v-icon--start {
-        margin-inline-start: -$padding * .5;
         margin-inline-end: $padding * .5;
       }
 
-      .v-avatar--start,
+      .v-chip__filter,
+      .v-chip__prepend,
       .v-icon--start {
+        margin-inline-start: -$padding * .5;
+      }
+
+      .v-avatar--start {
+        margin-inline-start: -$padding * .7;
+
         @at-root #{selector.append('.v-chip--pill', &)} {
           margin-inline-start: -$padding;
         }
