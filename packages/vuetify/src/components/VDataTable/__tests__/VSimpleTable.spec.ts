@@ -83,6 +83,12 @@ describe('VSimpleTable.ts', () => {
       'v-data-table--dense': true,
     })
     wrapper.setProps({
+      showSelect: true,
+    })
+    expect(wrapper.vm.classes).toMatchObject({
+      'v-data-table--selectable': true,
+    })
+    wrapper.setProps({
       dark: true,
     })
     expect(wrapper.vm.classes).toMatchObject({

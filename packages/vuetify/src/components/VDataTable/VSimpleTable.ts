@@ -12,6 +12,7 @@ export default mixins(Themeable).extend({
     dense: Boolean,
     fixedHeader: Boolean,
     height: [Number, String],
+    showSelect: Boolean,
   },
 
   computed: {
@@ -22,6 +23,7 @@ export default mixins(Themeable).extend({
         'v-data-table--fixed-header': this.fixedHeader,
         'v-data-table--has-top': !!this.$slots.top,
         'v-data-table--has-bottom': !!this.$slots.bottom,
+        'v-data-table--selectable': this.showSelect,
         ...this.themeClasses,
       }
     },
