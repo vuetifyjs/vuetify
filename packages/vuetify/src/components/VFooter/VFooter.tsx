@@ -5,6 +5,7 @@ import './VFooter.sass'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -12,18 +13,20 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { computed, toRef } from 'vue'
 import { defineComponent } from '@/util'
-import { toRef } from 'vue'
 
 export const VFooter = defineComponent({
   name: 'VFooter',
 
   props: {
+    app: Boolean,
     color: String,
 
     ...makeBorderProps(),
-    ...makeDimensionProps(),
+    ...makeDimensionProps({ height: 'auto' }),
     ...makeElevationProps(),
+    ...makeLayoutItemProps({ name: 'bottom' }),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'footer' }),
@@ -38,6 +41,17 @@ export const VFooter = defineComponent({
     const { elevationClasses } = useElevation(props)
     const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
+
+    const height = toRef(props, 'height')
+    const { layoutItemStyles } = useLayoutItem({
+      id: props.name,
+      priority: computed(() => parseInt(props.priority, 10)),
+      position: computed(() => 'bottom'),
+      layoutSize: height,
+      elementSize: height,
+      active: computed(() => true),
+      absolute: toRef(props, 'absolute'),
+    })
 
     return () => (
       <props.tag
@@ -54,6 +68,7 @@ export const VFooter = defineComponent({
           backgroundColorStyles,
           dimensionStyles.value,
           positionStyles.value,
+          props.app ? layoutItemStyles.value : undefined,
         ]}
         v-slots={ slots }
       />
