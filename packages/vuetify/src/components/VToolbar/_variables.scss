@@ -1,10 +1,15 @@
 @use "sass:map";
+@use '../../styles/settings';
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
 $toolbar-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $toolbar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
-$toolbar-border-radius: 0 !default;
+$toolbar-border-color: settings.$border-color-root !default;
+$toolbar-border-radius: map.get(settings.$rounded, 0) !default;
+$toolbar-border-style: settings.$border-style-root !default;
+$toolbar-border-thin-width: thin !default;
+$toolbar-border-width: 0 !default;
 $toolbar-btn-icon-size: 48px !default;
 $toolbar-collapsed-border-radius: 24px !default;
 $toolbar-collapsed-max-width: 112px !default;
@@ -33,6 +38,13 @@ $toolbar-prominent-title-font-weight: 400 !default;
 $toolbar-prominent-title-letter-spacing: 0 !default;
 $toolbar-prominent-title-line-height: 2.25rem !default;
 $toolbar-prominent-title-text-transform: none !default;
+
+$toolbar-border: (
+  $toolbar-border-color,
+  $toolbar-border-style,
+  $toolbar-border-width,
+  $toolbar-border-thin-width
+) !default;
 
 $toolbar-title-typography: (
   $toolbar-title-font-size,
