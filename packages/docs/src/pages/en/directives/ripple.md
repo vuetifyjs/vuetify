@@ -28,6 +28,12 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## Examples
 
+### Propagation
+
+If multiple elements have the ripple directive applied, only the inner one will show the effect. This can also be done without having a visible ripple by using `v-ripple.stop` to prevent ripples in the outer element if the inner element is clicked on. `v-ripple.stop` will not actually stop propagation of the mousedown/touchstart events unlike other workarounds.
+
+<example file="v-ripple/stop" />
+
 ### Options
 
 #### Center
