@@ -88,10 +88,16 @@ function blockScrollStrategy (data: ScrollStrategyData) {
 
   onScopeDispose(() => {
     scrollElements.forEach((el, i) => {
+      const x = parseFloat(el.style.getPropertyValue('--v-ios-body-scroll-x'))
+      const y = parseFloat(el.style.getPropertyValue('--v-ios-body-scroll-y'))
+
       el.style.removeProperty('--v-ios-body-scroll-x')
       el.style.removeProperty('--v-ios-body-scroll-y')
       el.style.removeProperty('--v-scrollbar-offset')
       el.classList.remove('v-overlay-scroll-blocked')
+
+      el.scrollLeft = -x
+      el.scrollTop = -y
     })
     if (scrollableParent) {
       data.root.value!.classList.remove('v-overlay--scroll-blocked')
