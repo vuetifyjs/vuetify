@@ -72,6 +72,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
 
     const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
       onClick,
+      active: isOpen.value,
       appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
       class: 'v-list-group__header',
       color: isOpen.value ? props.activeColor ?? props.color : undefined,
