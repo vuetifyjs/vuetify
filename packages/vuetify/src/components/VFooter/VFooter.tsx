@@ -49,7 +49,7 @@ export const VFooter = defineComponent({
       position: computed(() => 'bottom'),
       layoutSize: height,
       elementSize: height,
-      active: computed(() => true),
+      active: computed(() => props.app),
       absolute: toRef(props, 'absolute'),
     })
 
