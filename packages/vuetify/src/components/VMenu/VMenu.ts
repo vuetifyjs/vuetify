@@ -169,29 +169,32 @@ export default baseMixins.extend({
       this.hasJustFocused = val
     },
     listIndex (next, prev) {
-      if (next in this.tiles) {
-        const tile = this.tiles[next]
-        tile.classList.add('v-list-item--highlighted')
-        const scrollTop = this.$refs.content.scrollTop
-        const contentHeight = this.$refs.content.clientHeight
+      // filter out prepend items
+      const filteredTiles = this.tiles.filter(t => t.attributes.getNamedItem('role')?.value === 'option')
+      if (next in filteredTiles) {
+        const tile = filteredTiles[next]
+        if (tile.classList.contains('v-list-item--active')) {
+          tile.classList.add('v-list-item--highlighted')
+          const scrollTop = this.$refs.content.scrollTop
+          const contentHeight = this.$refs.content.clientHeight
 
-        if (scrollTop > tile.offsetTop - 8) {
-          goTo(tile.offsetTop - tile.clientHeight, {
-            appOffset: false,
-            duration: 300,
-            container: this.$refs.content,
-          })
-        } else if (scrollTop + contentHeight < tile.offsetTop + tile.clientHeight + 8) {
-          goTo(tile.offsetTop - contentHeight + tile.clientHeight * 2, {
-            appOffset: false,
-            duration: 300,
-            container: this.$refs.content,
-          })
+          if (scrollTop > tile.offsetTop - 8) {
+            goTo(tile.offsetTop - tile.clientHeight, {
+              appOffset: false,
+              duration: 300,
+              container: this.$refs.content,
+            })
+          } else if (scrollTop + contentHeight < tile.offsetTop + tile.clientHeight + 8) {
+            goTo(tile.offsetTop - contentHeight + tile.clientHeight * 2, {
+              appOffset: false,
+              duration: 300,
+              container: this.$refs.content,
+            })
+          }
         }
       }
-
-      prev in this.tiles &&
-        this.tiles[prev].classList.remove('v-list-item--highlighted')
+      prev in filteredTiles &&
+        filteredTiles[prev].classList.remove('v-list-item--highlighted')
     },
   },
 
