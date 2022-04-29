@@ -137,6 +137,10 @@ export default baseMixins.extend<options>().extend({
     allItems (): object[] {
       return this.filterDuplicates(this.cachedItems.concat(this.items))
     },
+    /* All items including prepend and append so we can get the correct index */
+    allElements (): object[] {
+      return this.filterDuplicates(this.cachedItems.concat(this.$slots['prepend-item']?.filter(v => v.tag), this.items, this.$slots['append-item']))
+    },
     classes (): object {
       return {
         ...VTextField.options.computed.classes.call(this),
@@ -847,7 +851,7 @@ export default baseMixins.extend<options>().extend({
         if (this.hideSelected) {
           this.setMenuIndex(-1)
         } else {
-          const index = this.allItems.indexOf(item)
+          const index = this.allElements.indexOf(item)
           if (~index) {
             this.$nextTick(() => this.$refs.menu.getTiles())
             setTimeout(() => this.setMenuIndex(index))
