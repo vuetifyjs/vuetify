@@ -268,6 +268,8 @@ export const VOverlay = genericComponent<new () => {
       animateClick,
       contentEl,
       activatorEl,
+      isTop,
+      updatePosition,
     }
   },
 })

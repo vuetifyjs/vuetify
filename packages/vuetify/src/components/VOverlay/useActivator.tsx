@@ -1,9 +1,11 @@
 // Utilities
 import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import { makeDelayProps, useDelay } from '@/composables/delay'
+import { VMenuSymbol } from '@/components/VMenu/shared'
 import {
   computed,
   effectScope,
+  inject,
   nextTick,
   onScopeDispose,
   ref,
@@ -18,7 +20,6 @@ import type {
   ComponentPublicInstance,
   EffectScope,
   PropType,
-
   Ref,
 } from 'vue'
 
@@ -146,12 +147,20 @@ export function useActivator (
     }
 
     if (props.closeOnContentClick) {
+      const menu = inject(VMenuSymbol, null)
       events.click = () => {
         isActive.value = false
+        menu?.closeParents()
       }
     }
 
     return events
+  })
+
+  watch(isTop, val => {
+    if (val && props.openOnHover && !isHovered) {
+      isActive.value = false
+    }
   })
 
   const activatorRef = ref()
