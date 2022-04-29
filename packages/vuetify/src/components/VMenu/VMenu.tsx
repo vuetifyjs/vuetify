@@ -25,15 +25,7 @@ export const VMenu = genericComponent<new () => {
 
   props: {
     // TODO
-    // closeOnClick: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    // closeOnContentClick: {
-    //   type: Boolean,
-    //   default: true,
-    // },
-    disableKeys: Boolean,
+    // disableKeys: Boolean,
     modelValue: Boolean,
     id: String,
 
@@ -61,9 +53,12 @@ export const VMenu = genericComponent<new () => {
           ]}
           transition={ props.transition }
           absolute
+          closeOnContentClick
           positionStrategy="connected"
           scrollStrategy="reposition"
           scrim={ false }
+          openDelay="300"
+          closeDelay="250"
           activatorProps={{
             'aria-haspopup': 'menu',
             'aria-expanded': String(isActive.value),

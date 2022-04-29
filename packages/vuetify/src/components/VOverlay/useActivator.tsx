@@ -29,6 +29,8 @@ interface ActivatorProps extends DelayProps {
   openOnClick: boolean | undefined
   openOnHover: boolean
   openOnFocus: boolean | undefined
+
+  closeOnContentClick: boolean
 }
 
 export const makeActivatorProps = propsFactory({
@@ -47,6 +49,8 @@ export const makeActivatorProps = propsFactory({
     type: Boolean,
     default: undefined,
   },
+
+  closeOnContentClick: Boolean,
 
   ...makeDelayProps(),
 })
@@ -138,6 +142,12 @@ export function useActivator (
       events.mouseleave = () => {
         isHovered = false
         runCloseDelay()
+      }
+    }
+
+    if (props.closeOnContentClick) {
+      events.click = () => {
+        isActive.value = false
       }
     }
 
