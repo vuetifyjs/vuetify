@@ -3331,10 +3331,10 @@
   resolved "https://registry.yarnpkg.com/@vue/test-utils/-/test-utils-2.0.0-rc.9.tgz#b3f817d710a1d0ae2084143520c9d8d3c552bfa6"
   integrity sha512-iJNAAfXTTSd2/5vUZpFbUwUwC8w3hbFu8s9ptKkZGsiw6pO6mFsaLs2rzI3Ea/8hwqcF3K7Wp2diKOdzqmb6qg==
 
-"@vuetify/vite-ssg@^0.18.0":
-  version "0.18.0"
-  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.18.0.tgz#bbaf2bfb282500c373225337216a21f9f02d77cb"
-  integrity sha512-zIzLriIj50K09qWo0jEl2kQ6KEX4aYJxQ+deyjlHzi6NQM9nXaS+L3ZQnZ+SW9zrrFmB2keC87VMBxNoTTpR8g==
+"@vuetify/vite-ssg@^0.19.0":
+  version "0.19.0"
+  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.19.0.tgz#7ed7e7999e095fc4c81a63559ae1a8640937f386"
+  integrity sha512-zYhU+af2DI/AjPvG6iP2MMdaqIZL+feB5qD7qe3zELZmJgijU183KZSwww5ZzyrytFqRiWtiqH0egKd4F/Sfpg==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.0.0"
@@ -13350,6 +13350,11 @@ workbox-core@6.4.2:
   resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.4.2.tgz#f99fd36a211cc01dce90aa7d5f2c255e8fe9d6bc"
   integrity sha512-1U6cdEYPcajRXiboSlpJx6U7TvhIKbxRRerfepAJu2hniKwJ3DHILjpU/zx3yvzSBCWcNJDoFalf7Vgd7ey/rw==
 
+workbox-core@6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-core/-/workbox-core-6.5.3.tgz#bca038a9ef0d7a634a6db2a60f45313ed22ac249"
+  integrity sha512-Bb9ey5n/M9x+l3fBTlLpHt9ASTzgSGj6vxni7pY72ilB/Pb3XtN+cZ9yueboVhD5+9cNQrC9n/E1fSrqWsUz7Q==
+
 workbox-expiration@6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-expiration/-/workbox-expiration-6.4.2.tgz#61613459fd6ddd1362730767618d444c6b9c9139"
@@ -13384,6 +13389,15 @@ workbox-precaching@6.4.2:
     workbox-routing "6.4.2"
     workbox-strategies "6.4.2"
 
+workbox-precaching@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-precaching/-/workbox-precaching-6.5.3.tgz#c870312b2ef901d790ab9e48da084e776c62af47"
+  integrity sha512-sjNfgNLSsRX5zcc63H/ar/hCf+T19fRtTqvWh795gdpghWb5xsfEkecXEvZ8biEi1QD7X/ljtHphdaPvXDygMQ==
+  dependencies:
+    workbox-core "6.5.3"
+    workbox-routing "6.5.3"
+    workbox-strategies "6.5.3"
+
 workbox-range-requests@6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-range-requests/-/workbox-range-requests-6.4.2.tgz#050f0dfbb61cd1231e609ed91298b6c2442ae41b"
@@ -13410,12 +13424,26 @@ workbox-routing@6.4.2:
   dependencies:
     workbox-core "6.4.2"
 
+workbox-routing@6.5.3, workbox-routing@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-routing/-/workbox-routing-6.5.3.tgz#a0a699d8cc90b5692bd3df24679acbbda3913777"
+  integrity sha512-DFjxcuRAJjjt4T34RbMm3MCn+xnd36UT/2RfPRfa8VWJGItGJIn7tG+GwVTdHmvE54i/QmVTJepyAGWtoLPTmg==
+  dependencies:
+    workbox-core "6.5.3"
+
 workbox-strategies@6.4.2:
   version "6.4.2"
   resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.4.2.tgz#50c02bf2d116918e1a8052df5f2c1e4103c62d5d"
   integrity sha512-YXh9E9dZGEO1EiPC3jPe2CbztO5WT8Ruj8wiYZM56XqEJp5YlGTtqRjghV+JovWOqkWdR+amJpV31KPWQUvn1Q==
   dependencies:
     workbox-core "6.4.2"
+
+workbox-strategies@6.5.3, workbox-strategies@^6.5.3:
+  version "6.5.3"
+  resolved "https://registry.yarnpkg.com/workbox-strategies/-/workbox-strategies-6.5.3.tgz#4bea9a48fee16cf43766e0d8138296773c8a9783"
+  integrity sha512-MgmGRrDVXs7rtSCcetZgkSZyMpRGw8HqL2aguszOc3nUmzGZsT238z/NN9ZouCxSzDu3PQ3ZSKmovAacaIhu1w==
+  dependencies:
+    workbox-core "6.5.3"
 
 workbox-streams@6.4.2:
   version "6.4.2"

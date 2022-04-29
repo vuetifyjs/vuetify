@@ -18,6 +18,8 @@
     </v-main>
 
     <app-toc />
+
+    <app-pwa-snackbar />
   </v-app>
 </template>
 
@@ -27,6 +29,7 @@
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppToc from '@/components/app/Toc.vue'
+  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
 
   // Composables
   import { useRoute } from 'vue-router'
@@ -43,6 +46,7 @@
       AppDrawer,
       AppSettingsDrawer,
       AppToc,
+      AppPwaSnackbar,
     },
 
     setup () {

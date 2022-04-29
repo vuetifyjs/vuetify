@@ -20,9 +20,6 @@
     <v-divider />
 
     <v-container>
-
-      <app-settings-pwa v-if="!!pwa.sw.install" />
-
       <app-settings-theme />
 
       <v-divider class="mt-4 mb-3 mx-n3" />
@@ -39,13 +36,11 @@
 <script>
   // Components
   import AppSettingsApi from './Api.vue'
-  import AppSettingsPwa from './Pwa.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { usePwaStore } from '@/store/pwa'
   import { useRtl } from 'vuetify'
 
   export default {
@@ -53,7 +48,6 @@
 
     components: {
       AppSettingsApi,
-      AppSettingsPwa,
       AppSettingsRtl,
       AppSettingsTheme,
     },
@@ -61,12 +55,10 @@
     setup () {
       const { isRtl } = useRtl()
       const app = useAppStore()
-      const pwa = usePwaStore()
 
       return {
         app,
         isRtl,
-        pwa,
       }
     },
   }

@@ -1,0 +1,17 @@
+diff --git a/node_modules/workbox-window/package.json b/node_modules/workbox-window/package.json
+index 94331d6..8fb936f 100644
+--- a/node_modules/workbox-window/package.json
++++ b/node_modules/workbox-window/package.json
+@@ -23,6 +23,12 @@
+   "main": "build/workbox-window.prod.umd.js",
+   "module": "build/workbox-window.prod.es5.mjs",
+   "types": "index.d.ts",
++  "exports": {
++    ".": {
++      "import": "./build/workbox-window.prod.es5.mjs",
++      "require": "./build/workbox-window.prod.umd.js"
++    }
++  },
+   "dependencies": {
+     "@types/trusted-types": "^2.0.2",
+     "workbox-core": "6.4.2"

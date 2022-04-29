@@ -1,4 +1,5 @@
-import path from 'path'
+import path, { join } from 'path'
+import fs from 'fs'
 
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
@@ -7,7 +8,7 @@ import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 // import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
-// import { VitePWA } from 'vite-plugin-pwa'
+import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 
@@ -36,6 +37,9 @@ export default defineConfig(({ mode }) => {
     },
     define: {
       'process.env': {}, // This is so that 3rd party packages don't crap out
+    },
+    build: {
+      sourcemap: true,
     },
     plugins: [
       // https://github.com/stafyniaksacha/vite-plugin-fonts
@@ -107,16 +111,38 @@ export default defineConfig(({ mode }) => {
       }),
 
       // https://github.com/antfu/vite-plugin-pwa
-      // VitePWA({
-      //   registerType: 'autoUpdate',
-      //   includeAssets: ['favicon.ico', 'robots.txt'],
-      //   manifest: {
-      //     name: 'Vuetify',
-      //     short_name: 'Vuetify',
-      //     theme_color: '#094A7F',
-      //     icons: [],
-      //   },
-      // }),
+      VitePWA({
+        srcDir: 'src',
+        filename: 'service-worker.js',
+        strategies: 'injectManifest',
+        includeAssets: ['favicon.ico'],
+        injectManifest: {
+          globIgnores: ['**/*.html'],
+          additionalManifestEntries: [
+            { url: '/_crowdin.html', revision: Date.now().toString(16) },
+            { url: '/_fallback.html', revision: Date.now().toString(16) },
+          ],
+          dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
+          maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
+        },
+        manifest: {
+          name: 'Vuetify',
+          short_name: 'Vuetify',
+          theme_color: '#094A7F',
+          icons: [
+            {
+              src: 'img/icons/android-chrome-192x192.png',
+              sizes: '192x192',
+              type: 'image/png',
+            },
+            {
+              src: 'img/icons/android-chrome-512x512.png',
+              sizes: '512x512',
+              type: 'image/png',
+            },
+          ],
+        },
+      }),
 
       Vue({
         include: [/\.vue$/, /\.md$/],
@@ -159,6 +185,14 @@ export default defineConfig(({ mode }) => {
       script: 'async',
       formatting: 'minify',
       crittersOptions: false,
+      onAfterClientBuild () {
+        const index = fs.readFileSync(resolve('dist/index.html'), 'utf8')
+        fs.writeFileSync(join('dist/_fallback.html'), index)
+        fs.writeFileSync(join('dist/_crowdin.html').replace(/<\/head>/, `
+<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
+<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+$&`), index)
+      },
     },
 
     optimizeDeps: {
