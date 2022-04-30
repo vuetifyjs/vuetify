@@ -230,7 +230,7 @@ export const VCombobox = genericComponent<new <T>() => {
         const index = selections.value.findIndex(selection => selection.value === item.value)
 
         if (index === -1) {
-          model.value.push(item.value)
+          model.value = model.value.slice().concat([item.value])
         } else {
           model.value = selected.value.filter(selection => selection !== item.value)
         }
@@ -263,7 +263,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
         if (!props.multiple || !search.value) return
 
-        model.value.push(search.value)
+        model.value = model.value.slice().concat([search.value])
         search.value = ''
       }
     })
