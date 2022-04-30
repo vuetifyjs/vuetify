@@ -7,6 +7,7 @@
     select-on-click
     hide-select
     selected-color="primary"
+    @click:dblclick="({ isOpen, open }) => open(!isOpen)"
   >
     <template v-slot:prepend="{ file, isOpen }">
       <v-icon v-if="!file" :icon="isOpen ? 'mdi-folder-open' : 'mdi-folder'"></v-icon>

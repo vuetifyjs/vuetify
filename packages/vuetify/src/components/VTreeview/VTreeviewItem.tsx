@@ -64,6 +64,7 @@ export const VTreeviewItem = defineComponent({
     const {
       select,
       isSelected,
+      isSelectable,
       isIndeterminate,
       isOpen,
       open,
@@ -163,10 +164,10 @@ export const VTreeviewItem = defineComponent({
           ) }
 
           <div class="v-treeview-item__content">
-            { props.showSelect && (slots.selection ? slots.selection(slotProps.value) : (
+            { props.showSelect && isSelectable.value && (slots.selection ? slots.selection(slotProps.value) : (
               <VSelectionControl
                 type="checkbox"
-                density="comfortable"
+                density="compact"
                 disabled={ props.disabled || props.loading }
                 trueIcon={ trueIcon.value }
                 falseIcon={ falseIcon.value }
