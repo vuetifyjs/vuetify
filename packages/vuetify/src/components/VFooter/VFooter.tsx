@@ -3,17 +3,16 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
-import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { defineComponent } from '@/util'
 
 export const VFooter = defineComponent({
@@ -23,15 +22,16 @@ export const VFooter = defineComponent({
     app: Boolean,
     color: String,
     inset: Boolean,
+    height: {
+      type: [Number, String],
+      default: 'auto',
+    },
 
     ...makeBorderProps(),
-    ...makeDimensionProps({ height: 'auto' }),
     ...makeElevationProps(),
     ...makeLayoutItemProps({
-      name: 'bottom',
       priority: -1,
     }),
-    ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'footer' }),
     ...makeThemeProps(),
@@ -41,37 +41,38 @@ export const VFooter = defineComponent({
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
-    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
-    const height = toRef(props, 'height')
+    const autoHeight = ref(32)
+    const { resizeRef } = useResizeObserver(entries => {
+      if (!entries.length) return
+      autoHeight.value = entries[0].target.clientHeight
+    })
+    const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => props.inset ? 0 : parseInt(props.priority, 10)),
       position: computed(() => 'bottom'),
       layoutSize: height,
-      elementSize: height,
+      elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
       active: computed(() => props.app),
       absolute: toRef(props, 'absolute'),
     })
 
     return () => (
       <props.tag
+        ref={ resizeRef }
         class={[
           'v-footer',
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
           elevationClasses.value,
-          positionClasses.value,
           roundedClasses.value,
         ]}
         style={[
           backgroundColorStyles,
-          dimensionStyles.value,
-          positionStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}
         v-slots={ slots }
