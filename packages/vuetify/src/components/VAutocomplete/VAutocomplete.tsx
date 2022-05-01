@@ -138,6 +138,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
         isPristine.value = true
       }
     }
+    function onInput (e: InputEvent) {
+      search.value = (e.target as HTMLInputElement).value
+    }
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
@@ -195,7 +198,8 @@ export const VAutocomplete = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ search.value }
+          modelValue={ search.value }
+          onInput={ onInput }
           class={[
             'v-autocomplete',
             {
