@@ -1,0 +1,47 @@
+$padding: 2px
+
+.v-date-picker-month
+  display: flex
+
+.v-date-picker-month__weeks
+  display: grid
+  grid-template-rows: min-content min-content min-content min-content min-content min-content min-content
+  grid-row-gap: 4px
+
+.v-date-picker-month__days
+  display: grid
+  grid-template-columns: min-content min-content min-content min-content min-content min-content min-content
+  grid-row-gap: 4px
+
+.v-date-picker-month__day
+  position: relative
+  width: #{40px + $padding * 2}
+  height: #{40px + $padding * 2}
+  padding-left: $padding
+  padding-right: $padding
+  display: flex
+  align-items: center
+  justify-content: center
+
+.v-date-picker-month__day--adjacent
+  opacity: 0.5
+
+.v-date-picker-month__day--range
+  position: absolute
+  width: 100%
+  height: calc(100% - $padding * 2)
+  opacity: 0.5
+
+.v-date-picker-month__day--start
+  .v-date-picker-month__day--range
+    border-bottom-left-radius: 50%
+    border-top-left-radius: 50%
+    left: $padding
+    width: calc(100% - $padding)
+
+.v-date-picker-month__day--end
+  .v-date-picker-month__day--range
+    border-bottom-right-radius: 50%
+    border-top-right-radius: 50%
+    right: $padding
+    width: calc(100% - $padding)
