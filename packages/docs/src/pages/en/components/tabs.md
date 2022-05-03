@@ -76,9 +76,9 @@ If the tab items overflow their container, pagination controls will appear on de
 
 #### Right
 
-The **right** prop aligns the tabs to the right.
+The **end** prop aligns the tabs to the right.
 
-<example file="v-tabs/prop-right" />
+<example file="v-tabs/prop-end" />
 
 #### Vertical Tabs
 
