@@ -14,7 +14,8 @@ import type { CalendarFormatter, CalendarTimestamp } from '@/composables/calenda
 
 export function useBaseCalendar (
   currentLocale: string,
-  dayFormat, end: string | number | Date | undefined,
+  dayFormat,
+  end: string | number | Date | undefined,
   start: string | number | Date | undefined,
   times: object,
   weekdayFormat,

@@ -8,6 +8,7 @@ import { makeTimesProps } from "./composables/times";
 import { makeBaseProps, makeWeeksProps } from "./composables/props";
 import { makeThemeProps } from "@/composables/theme";
 import { makeVariantProps } from "@/composables/variant";
+import { VTimestampInput } from "../VCalendar_old/util/timestamp";
 
 export const VCalendarMonthly = defineComponent({
   name: 'VCalendarMonthly',
@@ -31,14 +32,12 @@ export const VCalendarMonthly = defineComponent({
     })
 
     const parsedEnd: ComputedRef<CalendarTimestamp> = computed(() => {
-      return getEndOfMonth(parseTimestamp(props.end, true))
+      return getEndOfMonth(parseTimestamp(props.end as VTimestampInput, true))
     })
-    
-    const thisProps = {...props, start: props.start, end: props.end, parsedStart: parsedStart.value, parsedEnd: parsedEnd.value}
     return () => (
       <div>
         Monthly
-        <VCalendarWeekly class={staticClass} { ...thisProps }></VCalendarWeekly>
+        <VCalendarWeekly class={staticClass} { ...{...props, start: props.start, end: props.end, parsedStart: parsedStart.value, parsedEnd: parsedEnd.value} }></VCalendarWeekly>
       </div>
     )
    

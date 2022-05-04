@@ -50,7 +50,7 @@ export const makeEventsProps = propsFactory({
   events: {
     type: Array,
     default: () => [],
-  } as CalendarEvent[],
+  } as Proptype<CalendarEvent[]>,
   eventStart: {
     type: String,
     default: 'start',

@@ -9,6 +9,8 @@ import { useBaseCalendar } from './composables/base'
 import { makeTimesProps, useTimes } from "./composables/times"
 import { useWithIntervals } from "./composables/withIntervals"
 
+import './VCalendarDaily.sass'
+
 export const VCalendarDaily = defineComponent({
   name: 'VCalendarDaily',
 
@@ -31,9 +33,14 @@ export const VCalendarDaily = defineComponent({
 
     const {
       dayFormatter,
-      weekdayFormatter,
+      days: doDays,
+      getEndOfWeek,
       getRelativeClasses,
-    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, [0,1,2,3,4,5,6])
+      getStartOfWeek,
+      parsedEnd,
+      parsedStart,
+      weekdayFormatter,
+    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
 
     const {
       bodyHeight,
@@ -43,18 +50,18 @@ export const VCalendarDaily = defineComponent({
       showIntervalLabelDefault
     } = useWithIntervals(
       current.value,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
-      null,
+      doDays.value,
+      props.firstInterval,
+      props.firstTime,
+      props.intervalCount,
+      props.intervalFormat,
+      props.intervalHeight,
+      props.intervalMinutes,
+      7,
       props.start,
       props.end,
       times,
-      [0,1,2,3,4,5,6] )
+      props.weekdays )
 
       let scrollPush = 0
 
@@ -113,7 +120,7 @@ export const VCalendarDaily = defineComponent({
                       </slot>
                     </div>
                     <div>
-                      <slot name="day-header" v-bind={{week: days.value, ...day, index}}></slot>
+                      <slot name="day-header" { ...{ week: days.value, ...day, index } }></slot>
                     </div>
                   </div>
                 })}
@@ -121,7 +128,7 @@ export const VCalendarDaily = defineComponent({
              : ''}
             <div class="v-calendar-daily__body">
               <div ref="scollArea" class="v-calendar-daily__scroll-area">
-                <div ref="pane" class="v-calendar-daily__pane" style={`height: ${bodyHeight}`}>
+                <div ref="pane" class="v-calendar-daily__pane" style={`height: ${bodyHeight.value}`}>
                   <div class="v-calendar-daily__day-container">
                     <div
                       class="v-calendar-daily__intervals-body"
@@ -130,35 +137,35 @@ export const VCalendarDaily = defineComponent({
                     >
                       { !intervals.value.length ? '' : intervals.value[0].map(interval => {
                         return <div
-                                class="v-calendar-daily__interval"
-                                key = { interval.time }
-                                style = {`height: ${ convertToUnit(props.intervalHeight) }`}
-                              >
-                              <div class="v-calendar-daily__interval-text">
-                                { (props.showIntervalLabel || showIntervalLabelDefault)(interval) ? intervalFormatter.value(interval, props.shortIntervals) : ''}
-                              </div>
-                            </div>
+                            class="v-calendar-daily__interval"
+                            key = { interval.time }
+                            style = {`height: ${ convertToUnit(props.intervalHeight) }`}
+                          >
+                          <div class="v-calendar-daily__interval-text">
+                            { (props.showIntervalLabel || showIntervalLabelDefault)(interval) ? intervalFormatter.value(interval, props.shortIntervals) : ''}
+                          </div>
+                        </div>
                       })}
                       { days.value.map((day, index) => {
                         return <div
                                 key={day.date}
                                 class={['v-calendar-daily__day', getRelativeClasses(day)]}
                                 // TODO: On
-                              >
-                                { intervals.value[index].map(interval => {
-                                  return <div
-                                          key={interval.time}
-                                          class={'v-calendar-daily__day-interval'}
-                                          style={
-                                            `height: ${convertToUnit(props.intervalHeight)}`
-                                            // TODO: Interval Styles
-                                          }
-                                        >
-                                          <slot name="interval" v-bind={{...interval}}></slot>
-                                        </div>
-                                })}
-                                <slot name="day-body" v-bind={{...day}}></slot>
-                              </div>
+                        >
+                          { intervals.value[index].map(interval => {
+                            return <div
+                                    key={interval.time}
+                                    class={'v-calendar-daily__day-interval'}
+                                    style={
+                                      `height: ${convertToUnit(props.intervalHeight)}`
+                                      // TODO: Interval Styles
+                                    }
+                            >
+                              <slot name="interval" {...interval}></slot>
+                            </div>
+                          })}
+                          <slot name="day-body" {...day}></slot>
+                        </div>
                       })}
                     </div>
                   </div>
