@@ -56,7 +56,7 @@ export const VTabs = defineComponent({
     },
     hideSlider: Boolean,
     optional: Boolean,
-    right: Boolean,
+    end: Boolean,
     sliderColor: String,
     modelValue: null,
 
@@ -94,7 +94,7 @@ export const VTabs = defineComponent({
             'v-tabs--centered': props.centered,
             'v-tabs--fixed-tabs': props.fixedTabs,
             'v-tabs--grow': props.grow,
-            'v-tabs--right': props.right,
+            'v-tabs--end': props.end,
             'v-tabs--stacked': props.stacked,
           },
           densityClasses.value,
