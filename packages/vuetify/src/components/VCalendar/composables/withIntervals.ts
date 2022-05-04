@@ -5,6 +5,7 @@ import {
   createNativeLocaleFormatter,
   MINUTES_IN_DAY,
   parseTime,
+  parseTimestamp,
   updateMinutes,
 } from '@/composables/calendar/timestamp'
 import type {
@@ -28,7 +29,7 @@ export function useWithIntervals (
   parsedStart,
   parsedEnd,
   times,
-  weekdaySkips
+  weekdays
 ) {
   const parsedFirstInterval: ComputedRef<number> = computed(() => {
     return parseInt(firstInterval)
@@ -64,10 +65,10 @@ export function useWithIntervals (
 
   const days: ComputedRef<CalendarTimestamp[]> = computed(() => {
     return createDayList(
-      parsedStart,
-      parsedEnd,
+      parseTimestamp(parsedStart),
+      parseTimestamp(parsedEnd),
       times.today,
-      weekdaySkips,
+      weekdays,
       maxDays
     )
   })

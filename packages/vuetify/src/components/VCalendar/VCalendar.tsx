@@ -13,6 +13,8 @@ import {
 import { useBaseCalendar } from './composables/base'
 import { useWithEvents } from './composables/withEvents'
 
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 // import { computed, toRef } from 'vue'
 import { genericComponent, MakeSlots } from '@/util'
@@ -42,7 +44,8 @@ export const VCalendar = genericComponent<new <T>() => {
     ...makeCategoryProps(),
     ...makeWeeksProps(),
     ...makeIntervalProps(),
-    ...makeThemeProps()
+    ...makeThemeProps(),
+    modelValue: null
   },
 
   setup(props, { attrs, slots }) {
@@ -94,13 +97,15 @@ export const VCalendar = genericComponent<new <T>() => {
       getScopedSlots,
     } = useWithEvents({ events: props.events, eventStart: props.eventStart, eventEnd: props.eventEnd, eventOverlapThreshold: props.eventOverlapThreshold, eventTimed: props.eventTimed, eventCategory: props.eventCategory, eventTextColor: props.eventTextColor, eventName: props.eventName, eventOverlapMode: props.eventOverlapMode, parsedWeekdays, type: props.type, eventColor: props.eventColor, getFormatter, eventMore: props.eventMore, eventMoreText: props.eventMoreText, eventHeight: props.eventHeight, eventMarginBottom: props.eventMarginBottom, eventRipple: props.eventRipple })
 
+    const model = useProxiedModel(props, 'modelValue')
+
     updateTimes()
     setPresent()
 
     // computeds
     const parsedValue: ComputedRef<CalendarTimestamp> = computed(() => {
-      return (validateTimestamp(modelValue)
-        ? parseTimestamp(modelvalue, true)
+      return (validateTimestamp(model.value)
+        ? parseTimestamp(model.value, true)
         : (parsedStart.value || times.today))
     })
 
@@ -229,7 +234,33 @@ export const VCalendar = genericComponent<new <T>() => {
           themeClasses.value
         ]}
       >
-        <renderProps.value.component { ...renderProps.value }></renderProps.value.component>
+        <renderProps.value.component weekdays={renderProps.value.weekdays} { ...{...renderProps.value, noEvents,
+      parsedEvents,
+      parsedEventOverlapThreshold,
+      eventTimedFunction,
+      eventCategoryFunction,
+      eventTextColorFunction,
+      eventNameFunction,
+      eventModeFunction,
+      eventWeekdays: doEventWeekdays,
+      categoryMode: doCategoryMode,
+      eventColorFunction,
+      parseEvent,
+      formatTime,
+      updateEventVisibility,
+      getEventsMap,
+      genEvent,
+      genDayEvent,
+      genTimedEvent,
+      genName,
+      genPlaceholder,
+      genMore,
+      getVisibleEvents,
+      isEventForCategory,
+      getEventsForDay,
+      getEventsForDayAll,
+      getEventsForDayTimed,
+      getScopedSlots} }></renderProps.value.component>
       </div>
     )
 

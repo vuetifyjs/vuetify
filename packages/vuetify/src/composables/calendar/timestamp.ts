@@ -427,10 +427,10 @@ export function createDayList (
   let current = copyTimestamp(start)
   let currentIdentifier = 0
   let stopped = currentIdentifier === stop
-
   if (stop < getDayIdentifier(start)) {
     throw new Error('End date is earlier than start date.')
   }
+
   while ((!stopped || days.length < min) && days.length < max) {
     currentIdentifier = getDayIdentifier(current)
     stopped = stopped || currentIdentifier === stop
@@ -444,7 +444,6 @@ export function createDayList (
     days.push(day)
     current = relativeDays(current, nextDay, weekdaySkips[ current.weekday ])
   }
-
   if (!days.length) throw new Error('No dates found using specified start date, end date, and weekdays.')
 
   return days
