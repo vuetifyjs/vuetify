@@ -39,7 +39,8 @@ export const VExpansionPanel = defineComponent({
     const isDisabled = computed(() => groupItem?.disabled.value || props.disabled)
 
     const selectedIndices = computed(() => groupItem.group.items.value.reduce<number[]>((arr, item, index) => {
-      return groupItem.group.selected.value.includes(item.id) ? [...arr, index] : arr
+      if (groupItem.group.selected.value.includes(item.id)) arr.push(index)
+      return arr
     }, []))
 
     const isBeforeSelected = computed(() => {

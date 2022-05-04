@@ -144,12 +144,14 @@ export const VAutocomplete = genericComponent<new <T>() => {
     const isSelecting = ref(false)
     function select (item: any) {
       if (props.multiple) {
-        const index = selections.value.findIndex(selection => selection.value === item.value)
+        const index = selected.value.findIndex(selection => selection === item.value)
 
         if (index === -1) {
-          model.value = model.value.slice().concat([item.value])
+          model.value = [...model.value, item.value]
         } else {
-          model.value = selected.value.filter(selection => selection !== item.value)
+          const value = [...model.value]
+          value.splice(index, 1)
+          model.value = value
         }
       } else {
         model.value = [item.value]
