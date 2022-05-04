@@ -15,11 +15,12 @@
   padding-inline-end: var(--v-scrollbar-offset)
   overflow-y: hidden !important
 
-  @supports (-webkit-touch-callout: none)
-    @at-root #{selector.append(html, &)}
-      position: fixed
-      top: var(--v-ios-body-scroll-y)
-      left: var(--v-ios-body-scroll-x)
+  @at-root #{selector.append(html, &)}
+    position: fixed
+    top: var(--v-body-scroll-y)
+    left: var(--v-body-scroll-x)
+    width: 100%
+    height: 100%
 
 .v-overlay
   border-radius: inherit

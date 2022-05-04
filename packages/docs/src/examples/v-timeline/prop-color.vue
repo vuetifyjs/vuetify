@@ -1,72 +1,60 @@
 <template>
-  <v-timeline single-side="after">
+  <v-timeline side="end" align="start">
     <v-timeline-item
-      align-dot="start"
-      color="pink"
+      dot-color="pink"
       size="small"
     >
-      <v-row class="pt-1">
-        <v-col cols="3">
-          <strong>5pm</strong>
-        </v-col>
-        <v-col>
+      <div class="d-flex">
+        <strong class="mr-4">5pm</strong>
+        <div>
           <strong>New Icon</strong>
           <div class="text-caption">
             Mobile App
           </div>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-timeline-item>
 
     <v-timeline-item
-      align-dot="start"
-      color="teal-lighten-3"
+      dot-color="teal-lighten-3"
       size="small"
     >
-      <v-row class="pt-1">
-        <v-col cols="3">
-          <strong>3-4pm</strong>
-        </v-col>
-        <v-col>
+      <div class="d-flex">
+        <strong class="mr-4">3-4pm</strong>
+        <div>
           <strong>Design Stand Up</strong>
           <div class="text-caption mb-2">
             Hangouts
           </div>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-timeline-item>
 
     <v-timeline-item
-      align-dot="start"
-      color="pink"
+      dot-color="pink"
       size="small"
     >
-      <v-row class="pt-1">
-        <v-col cols="3">
-          <strong>12pm</strong>
-        </v-col>
-        <v-col>
+      <div class="d-flex">
+        <strong class="mr-4">12pm</strong>
+        <div>
           <strong>Lunch break</strong>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-timeline-item>
 
     <v-timeline-item
-      align-dot="start"
-      color="teal-lighten-3"
+      dot-color="teal-lighten-3"
       size="small"
     >
-      <v-row class="pt-1">
-        <v-col cols="3">
-          <strong>9-11am</strong>
-        </v-col>
-        <v-col>
+      <div class="d-flex">
+        <strong class="mr-4">9-11am</strong>
+        <div>
           <strong>Finish Home Screen</strong>
           <div class="text-caption">
             Web App
           </div>
-        </v-col>
-      </v-row>
+        </div>
+      </div>
     </v-timeline-item>
   </v-timeline>
 </template>

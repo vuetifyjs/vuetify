@@ -13,7 +13,7 @@ related:
 
 Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
-<entry />
+<entry slug="vs-video-i18n" />
 
 ## Getting started
 

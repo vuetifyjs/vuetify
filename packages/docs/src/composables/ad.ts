@@ -64,7 +64,12 @@ export const useAd = (props: { medium: string, slug?: string, type?: string, com
   })
 
   const src = computed(() => {
-    return props.compact ? undefined : ad.value?.metadata?.src
+    if (props.compact) return undefined
+
+    return (
+      ad.value?.metadata?.images?.logo?.url ||
+      ad.value?.metadata?.src
+    )
   })
 
   return { ad, attrs, description, src }

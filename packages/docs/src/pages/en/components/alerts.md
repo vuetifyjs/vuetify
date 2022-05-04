@@ -24,7 +24,7 @@ An alert is a [v-sheet](/components/sheets/) that specializes in getting the use
 
 <usage name="v-alert" />
 
-<entry />
+<entry slug="vs-vuetify-subscribe" />
 
 ## Anatomy
 

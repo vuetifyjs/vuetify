@@ -1,11 +1,10 @@
 <template>
-  <v-timeline single-side="after">
+  <v-timeline side="end">
     <v-timeline-item
       v-for="item in items"
       :key="item.id"
-      :color="item.color"
+      :dot-color="item.color"
       size="small"
-      fill-dot
     >
       <v-alert
         :value="true"

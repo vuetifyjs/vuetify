@@ -78,21 +78,19 @@ function blockScrollStrategy (data: ScrollStrategyData) {
   }
 
   scrollElements.forEach((el, i) => {
-    if (el === document.documentElement && /iphone|ipad|ipod/i.test(navigator.userAgent)) {
-      el.style.setProperty('--v-ios-body-scroll-x', convertToUnit(-el.scrollLeft))
-      el.style.setProperty('--v-ios-body-scroll-y', convertToUnit(-el.scrollTop))
-    }
+    el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
+    el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
     el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     el.classList.add('v-overlay-scroll-blocked')
   })
 
   onScopeDispose(() => {
     scrollElements.forEach((el, i) => {
-      const x = parseFloat(el.style.getPropertyValue('--v-ios-body-scroll-x'))
-      const y = parseFloat(el.style.getPropertyValue('--v-ios-body-scroll-y'))
+      const x = parseFloat(el.style.getPropertyValue('--v-body-scroll-x'))
+      const y = parseFloat(el.style.getPropertyValue('--v-body-scroll-y'))
 
-      el.style.removeProperty('--v-ios-body-scroll-x')
-      el.style.removeProperty('--v-ios-body-scroll-y')
+      el.style.removeProperty('--v-body-scroll-x')
+      el.style.removeProperty('--v-body-scroll-y')
       el.style.removeProperty('--v-scrollbar-offset')
       el.classList.remove('v-overlay-scroll-blocked')
 
