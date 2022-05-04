@@ -10,9 +10,9 @@ import type {
   ObjectDirective,
 } from 'vue'
 
-const rippleStop = Symbol('rippleStop')
+const stopSymbol = Symbol('rippleStop')
 
-type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [rippleStop]?: boolean }
+type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [stopSymbol]?: boolean }
 
 const DELAY_RIPPLE = 80
 
@@ -36,6 +36,7 @@ export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifier
   modifiers: {
     center?: boolean
     circle?: boolean
+    stop?: boolean
   }
 }
 
@@ -172,10 +173,10 @@ function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement | undefined
 
-  if (!element?._ripple || element._ripple.touched || e[rippleStop]) return
+  if (!element?._ripple || element._ripple.touched || e[stopSymbol]) return
 
   // Don't allow the event to trigger ripples on any other elements
-  e[rippleStop] = true
+  e[stopSymbol] = true
 
   if (isTouchEvent(e)) {
     element._ripple.touched = true
@@ -209,6 +210,10 @@ function rippleShow (e: VuetifyRippleEvent) {
   } else {
     ripples.show(e, element, value)
   }
+}
+
+function rippleStop (e: VuetifyRippleEvent) {
+  e[stopSymbol] = true
 }
 
 function rippleHide (e: Event) {
@@ -287,6 +292,12 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   }
 
   if (enabled && !wasEnabled) {
+    if (modifiers.stop) {
+      el.addEventListener('touchstart', rippleStop, { passive: true })
+      el.addEventListener('mousedown', rippleStop)
+      return
+    }
+
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
     el.addEventListener('touchmove', rippleCancelShow, { passive: true })
