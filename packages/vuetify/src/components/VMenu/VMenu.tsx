@@ -10,7 +10,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, watch } from 'vue'
 import { genericComponent, getUid, useRender } from '@/util'
 import { VMenuSymbol } from './shared'
 
@@ -49,11 +49,26 @@ export const VMenu = genericComponent<new () => {
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
+    let openChildren = 0
     provide(VMenuSymbol, {
-      closeParents () {
-        isActive.value = false
-        parent?.closeParents()
+      register () {
+        ++openChildren
       },
+      unregister () {
+        --openChildren
+      },
+      closeParents () {
+        setTimeout(() => {
+          if (!openChildren) {
+            isActive.value = false
+            parent?.closeParents()
+          }
+        }, 40)
+      },
+    })
+
+    watch(isActive, val => {
+      val ? parent?.register() : parent?.unregister()
     })
 
     function onClickOutside () {

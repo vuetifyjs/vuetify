@@ -1,6 +1,8 @@
 import type { InjectionKey } from 'vue'
 
 interface MenuProvide {
+  register (): void
+  unregister (): void
   closeParents (): void
 }
 
