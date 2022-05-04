@@ -99,7 +99,7 @@ describe('VOverlay', () => {
       .get('[data-test="first-content"]').should('not.be.visible')
       .get('[data-test="second-content"]').should('be.visible')
       .get('body').click()
-      .get('[data-test="second-content"]').should('not.be.visible')
+      .get('[data-test="second-content"]').should('not.exist')
       .get('[data-test="first-content"]').should('be.visible')
       .get('body').click()
       .get('[data-test="first-content"]').should('not.exist')
