@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBadge } from '..'
-import { generate } from '@/../cypress/templates'
+import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 const location = ['bottom-start', 'bottom-end', 'top-start', 'top-end']
@@ -24,39 +24,20 @@ const props = {
 const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="mdi-vuetify" />,
-  'Offset badge': (
-    <div class="d-flex flex-column" style="gap: 0.8rem">
-      { ['offsetX', 'offsetY'].map(key => (
-        <>
-          <h5>{ key }</h5>
-          <div class="d-flex" style="gap: 1.3rem">
-            { offset.map(val => (
-              <VBadge {...{ [key]: val }} content={ `${val}` }>
-                <button class="v-btn v-btn--size-default v-btn--variant-contained">
-                  { key }
-                </button>
-              </VBadge>
-            )) }
-          </div>
-        </>
-      )) }
-    </div>
-  ),
-  'Text color': (
-    <div class="d-flex flex-row" style="gap: 0.8rem">
-      { defaultColors.map((color, idx) => (
-        <>
-          <div class="d-flex" style="gap: 0.8rem">
-            <VBadge textColor={ color } content={ idx.toString() }>
-              <button class="v-btn v-btn--size-default v-btn--variant-contained">
-                { color }
-              </button>
-            </VBadge>
-          </div>
-        </>
-      )) }
-    </div>
-  ),
+  'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
+      <VBadge {...{ [xy]: offset }} content={ `${offset}` }>
+        <button class="v-btn v-btn--size-default v-btn--variant-contained">
+          { xy }
+        </button>
+      </VBadge>
+  )),
+  'Text color': gridOn(defaultColors, [null], color => (
+    <VBadge textColor={ color } content={ color }>
+      <button class="v-btn v-btn--size-default v-btn--variant-contained">
+        { color }
+      </button>
+    </VBadge>
+  )),
 }
 
 // Tests

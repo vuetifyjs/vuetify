@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBtn } from '../VBtn'
-import { generate } from '@/../cypress/templates'
+import { generate, gridOn } from '@/../cypress/templates'
 import { createRouter, createWebHistory } from 'vue-router'
 
 const loadingText = 'Loading'
@@ -28,18 +28,7 @@ const stories = {
   'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
   // 'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
   Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
-  'Density + size': (
-    <div class="d-flex flex-column" style="gap: 0.4rem">
-      { densities.map(density => (
-        <>
-          <h5>{ density }</h5>
-          <div class="d-flex" style="gap: 0.8rem">
-            { sizes.map(size => <VBtn size={ size } density={ density }>{ size }</VBtn>) }
-          </div>
-        </>
-      )) }
-    </div>
-  ),
+  'Density + size': gridOn(densities, sizes, (density, size) => <VBtn size={ size } density={ density }>{ size }</VBtn>),
 }
 
 // Actual tests
