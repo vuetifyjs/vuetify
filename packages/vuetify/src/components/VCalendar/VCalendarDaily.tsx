@@ -4,9 +4,9 @@ import { makeVariantProps } from "@/composables/variant"
 import { convertToUnit } from "@/util"
 import { computed, ComputedRef, defineComponent, nextTick, onMounted, ref } from "vue"
 import { VBtn } from "../VBtn"
-import { makeBaseProps, makeWeeksProps, makeIntervalProps } from "./composables/props"
+import { makeBaseProps, makeIntervalProps, makeTimesProps, makeWeeksProps } from "./composables/props"
 import { useBaseCalendar } from './composables/base'
-import { makeTimesProps, useTimes } from "./composables/times"
+import { useTimes } from "./composables/times"
 import { useWithIntervals } from "./composables/withIntervals"
 
 import './VCalendarDaily.sass'
@@ -29,7 +29,7 @@ export const VCalendarDaily = defineComponent({
     
     const {
       times,
-    } = useTimes(props.now)
+    } = useTimes(props)
 
     const {
       dayFormatter,
@@ -40,7 +40,7 @@ export const VCalendarDaily = defineComponent({
       parsedEnd,
       parsedStart,
       weekdayFormatter,
-    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
+    } = useBaseCalendar(props, current.value, null, times, null)
 
     const {
       bodyHeight,
@@ -49,19 +49,11 @@ export const VCalendarDaily = defineComponent({
       intervalFormatter,
       showIntervalLabelDefault
     } = useWithIntervals(
+      props,
       current.value,
       doDays.value,
-      props.firstInterval,
-      props.firstTime,
-      props.intervalCount,
-      props.intervalFormat,
-      props.intervalHeight,
-      props.intervalMinutes,
       7,
-      props.start,
-      props.end,
-      times,
-      props.weekdays )
+      times )
 
       let scrollPush = 0
 

@@ -4,8 +4,8 @@ import { ComputedRef } from "vue"
 import { computed } from 'vue'
 import { useLocale } from '@/composables/locale'
 import { useBaseCalendar } from "./composables/base"
-import { makeBaseProps, makeWeeksProps } from "./composables/props"
-import { makeTimesProps, useTimes } from "./composables/times"
+import { makeBaseProps, makeTimesProps, makeWeeksProps } from "./composables/props"
+import { useTimes } from "./composables/times"
 
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
@@ -34,7 +34,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     const { current } = useLocale()
     const {
       times
-    } = useTimes(props.now)
+    } = useTimes(props)
     const {
       parsedWeekdays,
       weekdaySkips,
@@ -45,7 +45,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       getRelativeClasses,
       getStartOfWeek,
       getEndOfWeek
-    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
+    } = useBaseCalendar(props, current.value, null, times, null)
 
     const staticClass: ComputedRef<string> = computed(() => {
       return 'v-calendar-weekly'

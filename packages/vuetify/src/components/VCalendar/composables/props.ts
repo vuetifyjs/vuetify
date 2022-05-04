@@ -14,6 +14,13 @@ import { propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import { CalendarEventOverlapModes } from './modes'
 
+export const makeTimesProps = propsFactory({
+  now: {
+    type: String,
+    validator: validateTimestamp,
+  },
+})
+
 export const makeBaseProps = propsFactory({
   start: {
     type: [ String, Number, Date ],

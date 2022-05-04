@@ -17,38 +17,30 @@ import type { ComputedRef } from 'vue'
 import { computed, ref } from 'vue'
 
 export function useWithIntervals (
+  props,
   currentLocale,
   doDays,
-  firstInterval,
-  firstTime,
-  intervalCount,
-  intervalFormat,
-  intervalHeight,
-  intervalMinutes,
   maxDays,
-  parsedStart,
-  parsedEnd,
-  times,
-  weekdays
+  times
 ) {
   const parsedFirstInterval: ComputedRef<number> = computed(() => {
-    return parseInt(firstInterval)
+    return parseInt(props.firstInterval)
   })
 
   const parsedIntervalMinutes: ComputedRef<number> = computed(() => {
-    return parseInt(intervalMinutes)
+    return parseInt(props.intervalMinutes)
   })
 
   const parsedIntervalCount: ComputedRef<number> = computed(() => {
-    return parseInt(intervalCount)
+    return parseInt(props.intervalCount)
   })
 
   const parsedIntervalHeight: ComputedRef<number> = computed(() => {
-    return parseFloat(intervalHeight)
+    return parseFloat(props.intervalHeight)
   })
 
   const parsedFirstTime: ComputedRef<number | false> = computed(() => {
-    return parseTime(firstTime)
+    return parseTime(props.firstTime)
   })
 
   const firstMinute: ComputedRef<number> = computed(() => {
@@ -65,10 +57,10 @@ export function useWithIntervals (
 
   const days: ComputedRef<CalendarTimestamp[]> = computed(() => {
     return createDayList(
-      parseTimestamp(parsedStart),
-      parseTimestamp(parsedEnd),
+      parseTimestamp(props.start),
+      parseTimestamp(props.end),
       times.today,
-      weekdays,
+      props.weekdays,
       maxDays
     )
   })
@@ -84,8 +76,8 @@ export function useWithIntervals (
   })
 
   const intervalFormatter: ComputedRef<CalendarFormatter> = computed(() => {
-    if (intervalFormat) {
-      return intervalFormat as CalendarFormatter
+    if (props.intervalFormat) {
+      return props.intervalFormat as CalendarFormatter
     }
 
     const longOptions = { timeZone: 'UTC', hour: '2-digit', minute: '2-digit' }

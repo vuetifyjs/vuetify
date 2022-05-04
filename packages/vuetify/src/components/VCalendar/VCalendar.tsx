@@ -1,13 +1,15 @@
 
 // import './VCalendar.sass'
+import './withEvents.sass'
 import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { 
   makeBaseProps,
-  makeEventsProps,
   makeCalendarProps,
   makeCategoryProps,
+  makeEventsProps,
   makeIntervalProps,
+  makeTimesProps,
   makeWeeksProps,
 } from './composables/props'
 import { useBaseCalendar } from './composables/base'
@@ -22,7 +24,7 @@ import { genericComponent, MakeSlots } from '@/util'
 // Types1
 import { computed, watch } from 'vue'
 import type { ComputedRef } from 'vue'
-import { makeTimesProps, useTimes } from './composables/times'
+import { useTimes } from './composables/times'
 import { CalendarCategory, CalendarFormatter, CalendarTimestamp, copyTimestamp, getEndOfMonth, getStartOfMonth, nextDay, parseTimestamp, relativeDays, updateFormatted, validateTimestamp } from '@/composables/calendar/timestamp'
 import { getParsedCategories } from './composables/parser'
 import { VCalendarWeekly } from './VCalendarWeekly'
@@ -56,7 +58,7 @@ export const VCalendar = genericComponent<new <T>() => {
       parsedNow,
       setPresent,
       updateTimes,
-    } = useTimes(props.now)
+    } = useTimes(props)
 
     const {
       parsedWeekdays,
@@ -65,7 +67,7 @@ export const VCalendar = genericComponent<new <T>() => {
       getStartOfWeek,
       getEndOfWeek,
       getFormatter
-    } = useBaseCalendar(current.value, null, props.end, props.start, times, null, props.weekdays)
+    } = useBaseCalendar(props, current.value, null, times, null)
 
     const {
       noEvents,
@@ -95,7 +97,7 @@ export const VCalendar = genericComponent<new <T>() => {
       getEventsForDayAll,
       getEventsForDayTimed,
       getScopedSlots,
-    } = useWithEvents({ events: props.events, eventStart: props.eventStart, eventEnd: props.eventEnd, eventOverlapThreshold: props.eventOverlapThreshold, eventTimed: props.eventTimed, eventCategory: props.eventCategory, eventTextColor: props.eventTextColor, eventName: props.eventName, eventOverlapMode: props.eventOverlapMode, parsedWeekdays, type: props.type, eventColor: props.eventColor, getFormatter, eventMore: props.eventMore, eventMoreText: props.eventMoreText, eventHeight: props.eventHeight, eventMarginBottom: props.eventMarginBottom, eventRipple: props.eventRipple })
+    } = useWithEvents(props)
 
     const model = useProxiedModel(props, 'modelValue')
 
@@ -189,6 +191,59 @@ export const VCalendar = genericComponent<new <T>() => {
     const categoryMode: ComputedRef<boolean> = computed(() => {
       return props.type === 'category'
     })
+
+    const getCategoryList: CalendarCategory[] = (categories: CalendarCategory[]) => {
+      if (!noEvents.value) {
+        const categoryMap: any = categories.reduce((map: any, category, index) => {
+          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
+          else if (typeof category === 'string') map[category] = { index, count: 0 }
+          return map
+        }, {})
+
+        if (!props.categoryHideDynamic || !props.categoryShowAll) {
+          let categoryLength = categories.length
+
+          parsedEvents.value.forEach(ev => {
+            let category = ev.category
+
+            if (typeof category !== 'string') {
+              category = props.categoryForInvalid
+            }
+
+            if (!category) {
+              return
+            }
+
+            if (category in categoryMap) {
+              categoryMap[category].count++
+            } else if (!props.categoryHideDynamic) {
+              categoryMap[category] = {
+                index: categoryLength++,
+                count: 1,
+              }
+            }
+          })
+        }
+
+        if (!props.categoryShowAll) {
+          for (const category in categoryMap) {
+            if (categoryMap[category].count === 0) {
+              delete categoryMap[category]
+            }
+          }
+        }
+
+        categories = categories.filter((category: CalendarCategory) => {
+          if (typeof category === 'object' && category.categoryName) {
+            return categoryMap.hasOwnProperty(category.categoryName)
+          } else if (typeof category === 'string') {
+            return categoryMap.hasOwnProperty(category)
+          }
+          return false
+        })
+      }
+      return categories
+    }
     
     const title: ComputedRef<string> = computed(() => {
       const { start, end } = renderProps.value
@@ -235,32 +290,35 @@ export const VCalendar = genericComponent<new <T>() => {
         ]}
       >
         <renderProps.value.component weekdays={renderProps.value.weekdays} { ...{...renderProps.value, noEvents,
-      parsedEvents,
-      parsedEventOverlapThreshold,
-      eventTimedFunction,
-      eventCategoryFunction,
-      eventTextColorFunction,
-      eventNameFunction,
-      eventModeFunction,
-      eventWeekdays: doEventWeekdays,
-      categoryMode: doCategoryMode,
-      eventColorFunction,
-      parseEvent,
-      formatTime,
-      updateEventVisibility,
-      getEventsMap,
-      genEvent,
-      genDayEvent,
-      genTimedEvent,
-      genName,
-      genPlaceholder,
-      genMore,
-      getVisibleEvents,
-      isEventForCategory,
-      getEventsForDay,
-      getEventsForDayAll,
-      getEventsForDayTimed,
-      getScopedSlots} }></renderProps.value.component>
+          parsedEvents,
+          parsedEventOverlapThreshold,
+          eventTimedFunction,
+          eventCategoryFunction,
+          eventTextColorFunction,
+          eventNameFunction,
+          eventModeFunction,
+          eventWeekdays: doEventWeekdays,
+          categoryMode: doCategoryMode,
+          eventColorFunction,
+          parseEvent,
+          formatTime,
+          updateEventVisibility,
+          getEventsMap,
+          genEvent,
+          genDayEvent,
+          genTimedEvent,
+          genName,
+          genPlaceholder,
+          genMore,
+          getVisibleEvents,
+          isEventForCategory,
+          getEventsForDay,
+          getEventsForDayAll,
+          getEventsForDayTimed,
+          getScopedSlots, title } }
+        >
+
+        </renderProps.value.component>
       </div>
     )
 

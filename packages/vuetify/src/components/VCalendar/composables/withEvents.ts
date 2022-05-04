@@ -51,90 +51,71 @@ const WIDTH_FULL = 100
 const WIDTH_START = 95
 const MINUTES_IN_DAY = 1440
 
-export function useWithEvents ({
-  events,
-  eventStart,
-  eventEnd,
-  eventOverlapThreshold,
-  eventTimed,
-  eventCategory,
-  eventTextColor,
-  eventName,
-  eventOverlapMode,
-  parsedWeekdays,
-  type,
-  eventColor,
-  getFormatter,
-  eventMore,
-  eventMoreText,
-  eventHeight,
-  eventMarginBottom,
-  eventRipple
-}) {
+export function useWithEvents (props) {
   // Computeds
   const noEvents: ComputedRef<boolean> = computed(() => {
-    return events.length === 0
+    return props.events.length === 0
   })
 
   const parsedEvents: ComputedRef<CalendarEventParsed[]> = computed(() => {
-    return events.map(doParseEvent)
+    return props.events.map(doParseEvent)
   })
 
   const parsedEventOverlapThreshold: ComputedRef<number> = computed(() => {
-    return parseInt(eventOverlapThreshold)
+    return parseInt(props.eventOverlapThreshold)
   })
 
   const eventTimedFunction: ComputedRef<CalendarEventTimedFunction> = computed(() => {
-    return typeof eventTimed === 'function'
-      ? eventTimed
-      : event => !!event[ eventTimed as string ]
+    return typeof props.eventTimed === 'function'
+      ? props.eventTimed
+      : event => !!event[ props.eventTimed as string ]
   })
 
   const eventCategoryFunction: ComputedRef<CalendarEventCategoryFunction> = computed(() => {
-    return typeof eventCategory === 'function'
-      ? eventCategory
-      : event => event[ eventCategory as string ]
+    return typeof props.eventCategory === 'function'
+      ? props.eventCategory
+      : event => event[ props.eventCategory as string ]
   })
 
   const eventTextColorFunction: ComputedRef<CalendarEventColorFunction> = computed(() => {
-    return typeof eventTextColor === 'function'
-      ? eventTextColor
-      : () => eventTextColor as string
+    return typeof props.eventTextColor === 'function'
+      ? props.eventTextColor
+      : () => props.eventTextColor as string
   })
 
   const eventNameFunction: ComputedRef<CalendarEventNameFunction> = computed(() => {
-    return typeof eventName === 'function'
-      ? eventName
-      : (event, timedEvent) => escapeHTML(event.input[ eventName as string ] as string || '')
+    return typeof props.eventName === 'function'
+      ? props.eventName
+      : (event, timedEvent) => escapeHTML(event.input[ props.eventName as string ] as string || '')
   })
 
   const eventModeFunction: ComputedRef<CalendarEventOverlapMode> = computed(() => {
-    return typeof eventOverlapMode === 'function'
-      ? eventOverlapMode
-      : CalendarEventOverlapModes[ eventOverlapMode ]
+    return typeof props.eventOverlapMode === 'function'
+      ? props.eventOverlapMode
+      : CalendarEventOverlapModes[ props.eventOverlapMode ]
   })
 
   const eventWeekdays: ComputedRef<number[]> = computed(() => {
-    return parsedWeekdays
+    return props.parsedWeekdays
   })
 
   const categoryMode: ComputedRef<boolean> = computed(() => {
-    return type === 'category'
+    return props.type === 'category'
   })
 
   // methods
   const eventColorFunction = (e: CalendarEvent): string => {
-    return typeof eventColor === 'function'
-      ? eventColor(e)
-      : e.color || eventColor
+    return typeof props.eventColor === 'function'
+      ? props.eventColor(e)
+      : e.color || props.eventColor
   }
 
   const parseEvent = (input: CalendarEvent, index = 0): CalendarEventParsed => {
     return doParseEvent(
       input,
       index,
-      eventStart,
-      eventEnd,
+      props.eventStart,
+      props.eventEnd,
       eventTimedFunction.value(input),
       categoryMode.value ? eventCategoryFunction.value(input) : false,
     )
@@ -150,8 +131,38 @@ export function useWithEvents ({
     return formatter(withTime, true)
   }
 
+  const getEventsMap = (): VDailyEventsMap => {
+    const eventsMap: VDailyEventsMap = {}
+    const elements = this.$refs.events as HTMLElement[]
+
+    if (!elements || !elements.forEach) {
+      return eventsMap
+    }
+
+    elements.forEach(el => {
+      const date = el.getAttribute('data-date')
+      if (el.parentElement && date) {
+        if (!(date in eventsMap)) {
+          eventsMap[ date ] = {
+            parent: el.parentElement,
+            more: null,
+            events: [],
+          }
+        }
+        if (el.getAttribute('data-more')) {
+          eventsMap[ date ].more = el
+        } else {
+          eventsMap[ date ].events.push(el)
+          el.style.display = ''
+        }
+      }
+    })
+
+    return eventsMap
+  }
+
   const updateEventVisibility = () => {
-    if (noEvents.value || !eventMore) {
+    if (noEvents.value || !props.eventMore) {
       return
     }
 
@@ -192,35 +203,6 @@ export function useWithEvents ({
     }
   }
 
-  const getEventsMap = (): VDailyEventsMap => {
-    const eventsMap: VDailyEventsMap = {}
-    const elements = this.$refs.events as HTMLElement[]
-
-    if (!elements || !elements.forEach) {
-      return eventsMap
-    }
-
-    elements.forEach(el => {
-      const date = el.getAttribute('data-date')
-      if (el.parentElement && date) {
-        if (!(date in eventsMap)) {
-          eventsMap[ date ] = {
-            parent: el.parentElement,
-            more: null,
-            events: [],
-          }
-        }
-        if (el.getAttribute('data-more')) {
-          eventsMap[ date ].more = el
-        } else {
-          eventsMap[ date ].events.push(el)
-          el.style.display = ''
-        }
-      }
-    })
-
-    return eventsMap
-  }
 
   const genEvent = (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode => {
     const slot = this.$scopedSlots.event
