@@ -4,9 +4,9 @@ import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import './VDataTable.sass'
 
-import type { PropType, Ref } from 'vue'
+import type { PropType } from 'vue'
 import type { DataTableHeader } from '../types'
-import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSort, useSortedItems } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSelection, useSort, useSortedItems } from '../composables'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VTable } from '@/components'
 
@@ -27,6 +27,7 @@ export const makeVDataTableProps = propsFactory({
     type: Array as PropType<{ key: string, order: string }[]>,
     default: () => ([]),
   },
+  showSelect: Boolean,
 }, 'v-data-table')
 
 export const VDataTable = defineComponent({
@@ -42,6 +43,7 @@ export const VDataTable = defineComponent({
       type: Number,
       default: 10,
     },
+    itemValue: String,
   },
 
   emits: {
@@ -63,6 +65,8 @@ export const VDataTable = defineComponent({
       return itemsPerPage.value > 0 ? sortedItems.value.slice(startIndex.value, stopIndex.value) : sortedItems.value
     })
 
+    const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = useSelection(props, paginatedItems)
+
     const { items, toggleGroup, opened } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
 
     provide('v-data-table', {
@@ -70,6 +74,11 @@ export const VDataTable = defineComponent({
       toggleSort,
       sortBy,
       opened,
+      toggleSelect,
+      isSelected,
+      someSelected,
+      allSelected,
+      selectAll,
     })
 
     useOptions({

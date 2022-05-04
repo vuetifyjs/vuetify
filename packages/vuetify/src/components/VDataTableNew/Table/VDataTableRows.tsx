@@ -1,4 +1,5 @@
 import { VBtn } from '@/components/VBtn'
+import { VCheckbox } from '@/components/VCheckbox'
 import { convertToUnit, defineComponent } from '@/util'
 
 import type { PropType, SetupContext } from 'vue'
@@ -61,7 +62,7 @@ export const VDataTableRows = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { toggleGroup, opened } = inject('v-data-table', {} as any)
+    const { toggleGroup, opened, toggleSelect, isSelected } = inject('v-data-table', {} as any)
     const { expanded, expand } = useExpanded()
 
     return () => {
@@ -88,8 +89,8 @@ export const VDataTableRows = defineComponent({
           ) : (
             <>
               <VDataTableRow
-                key={ `row_${item.id}` }
-                onClick={ slots['expanded-row'] ? () => expand(item, !expanded.value.has(item.id)) : undefined }
+                key={ `row_${item.value}` }
+                onClick={ slots['expanded-row'] ? () => expand(item, !expanded.value.has(item.value)) : undefined }
               >
                 { props.columns.map(column => (
                   <VDataTableColumn
@@ -97,12 +98,20 @@ export const VDataTableRows = defineComponent({
                     stickyWidth={ column.stickyWidth }
                     height={ props.rowHeight }
                   >
-                    { slots[`item.${column.id}`]?.() ?? item[column.id] }
+                    {
+                      slots[`item.${column.value}`]?.() ?? column.value === 'data-table-select' ? (
+                        <VCheckbox
+                          modelValue={ isSelected(item) }
+                          onClick={ () => toggleSelect(item) }
+                          hide-details
+                        />
+                      ) : item[column.value]
+                    }
                   </VDataTableColumn>
                 ))}
               </VDataTableRow>
 
-              { expanded.value.has(item.id) && slots['expanded-row']?.() }
+              { expanded.value.has(item.value) && slots['expanded-row']?.() }
             </>
           ))}
         </>

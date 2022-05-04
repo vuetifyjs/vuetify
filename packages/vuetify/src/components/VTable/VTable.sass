@@ -17,7 +17,7 @@
           &:last-child
             > th
               border-bottom: $table-border
-              color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
+              // color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity))
 
       > tbody
         > tr
@@ -77,21 +77,17 @@
         > tr
           > td,
           > th
-            padding: 0 16px
+            padding: 0 8px
             transition: height settings.$standard-easing
 
           > th
             user-select: none
-            font-size: $table-header-font-size
 
             @include tools.ltr()
               text-align: left
 
             @include tools.rtl()
               text-align: right
-
-          > td
-            font-size: $table-row-font-size
 
   @at-root
     @include tools.density('v-table', $table-density) using ($modifier)

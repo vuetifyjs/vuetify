@@ -1,4 +1,4 @@
-import { getCurrentInstance, getObjectValueByPath } from '@/util'
+import { createRange, getCurrentInstance, getObjectValueByPath } from '@/util'
 import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
 import type { InjectionKey, Ref } from 'vue'
@@ -126,9 +126,34 @@ export const useExpanded = () => {
   return data
 }
 
-export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][] }) => {
-  const headers = computed(() => Array.isArray(props.headers[0]) ? props.headers as DataTableHeader[][] : [props.headers as DataTableHeader[]])
-  const columns = computed(() => headers.value.flatMap(row => row.filter(col => col.id)))
+export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][], showSelect?: boolean }) => {
+  const headers = ref<DataTableHeader[][]>([])
+  const columns = ref<DataTableHeader[]>([])
+
+  watch(() => props.headers, () => {
+    const wrapped = Array.isArray(props.headers[0]) ? props.headers as DataTableHeader[][] : [props.headers as DataTableHeader[]]
+    const flat = wrapped.flatMap((row, index) => row.map(column => ({ column, row: index })))
+
+    const rowCount = wrapped.length
+    const defaultHeader = { title: '', sortable: false, width: 1 }
+
+    if (props.showSelect) {
+      const index = flat.findIndex(({ column }) => column.value === 'data-table-select')
+      if (index < 0) flat.unshift({ column: { ...defaultHeader, value: 'data-table-select', rowspan: rowCount }, row: 0 })
+      else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column }, row: flat[index].row })
+    }
+
+    const rows = flat.reduce((arr, item) => {
+      arr[item.row].push(item.column)
+      return arr
+    }, createRange(rowCount).map(() => []) as DataTableHeader[][])
+
+    headers.value = rows
+    columns.value = rows.flatMap(row => row.filter(col => col.value != null))
+  }, {
+    deep: true,
+    immediate: true,
+  })
 
   return { headers, columns }
 }
@@ -349,4 +374,36 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
   })
 
   return { items: flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
+}
+
+export const useSelection = (props: any, items: Ref<any[]>) => {
+  const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
+    return new Set(v)
+  }, v => {
+    return [...v.values()]
+  })
+
+  function isSelected (item: any) {
+    const id = item[props.itemValue]
+    return selected.value.has(id)
+  }
+
+  function select (item: any, value: boolean) {
+    const id = item[props.itemValue]
+    if (value) selected.value.add(id)
+    else selected.value.delete(id)
+  }
+
+  function toggleSelect (item: any) {
+    select(item, !isSelected(item))
+  }
+
+  function selectAll (value: boolean) {
+    items.value.forEach(item => select(item, value))
+  }
+
+  const someSelected = computed(() => selected.value.size > 0)
+  const allSelected = computed(() => items.value.every(item => isSelected(item)))
+
+  return { toggleSelect, select, selectAll, isSelected, someSelected, allSelected }
 }

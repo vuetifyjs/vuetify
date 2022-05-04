@@ -1,6 +1,6 @@
 export type DataTableHeader = {
-  id: string
-  name: string
+  value: string
+  title: string
   colspan?: number
   rowspan?: number
   width?: number
@@ -8,6 +8,7 @@ export type DataTableHeader = {
   maxWidth?: string
   sticky?: boolean
   stickyWidth?: number
+  sortable?: boolean
 }
 
 export type Column = DataTableHeader & {

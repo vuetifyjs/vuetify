@@ -27,6 +27,22 @@ export const VDataTableFooter = defineComponent({
       type: Number,
       required: true,
     },
+    prevIcon: {
+      type: String,
+      default: '$prev',
+    },
+    nextIcon: {
+      type: String,
+      default: '$next',
+    },
+    firstIcon: {
+      type: String,
+      default: '$first',
+    },
+    lastIcon: {
+      type: String,
+      default: '$last',
+    },
     itemsPerPageOptions: {
       type: Array as PropType<SelectItem[]>,
       default: () => ([
@@ -36,6 +52,7 @@ export const VDataTableFooter = defineComponent({
         { value: 100, title: '100' },
       ]),
     },
+    showCurrentPage: Boolean,
   },
 
   emits: {
@@ -64,9 +81,33 @@ export const VDataTableFooter = defineComponent({
           <div>{ (props.startIndex ?? -1) + 1 } - { props.stopIndex ?? 0 } of { props.itemsLength ?? 0 }</div>
         </div>
         <div class="v-data-table-footer__pagination">
-          <VBtn icon="mdi-chevron-left" variant="plain" onClick={() => emit('update:page', Math.max(1, props.page - 1)) } />
-          { props.page }
-          <VBtn icon="mdi-chevron-right" variant="plain" onClick={() => emit('update:page', Math.min(props.pageCount, props.page + 1)) } />
+          <VBtn
+            icon={ props.firstIcon }
+            variant="plain"
+            onClick={ () => emit('update:page', 1) }
+            disabled={ props.page === 1 }
+          />
+          <VBtn
+            icon={ props.prevIcon }
+            variant="plain"
+            onClick={ () => emit('update:page', Math.max(1, props.page - 1)) }
+            disabled={ props.page === 1 }
+          />
+          { props.showCurrentPage && (
+            <div>props.page</div>
+          ) }
+          <VBtn
+            icon={ props.nextIcon }
+            variant="plain"
+            onClick={ () => emit('update:page', Math.min(props.pageCount, props.page + 1)) }
+            disabled={ props.page === props.pageCount }
+          />
+          <VBtn
+            icon={ props.lastIcon }
+            variant="plain"
+            onClick={ () => emit('update:page', props.pageCount) }
+            disabled={ props.page === props.pageCount }
+          />
         </div>
       </div>
     )
