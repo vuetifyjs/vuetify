@@ -222,6 +222,9 @@ export const VCombobox = genericComponent<new <T>() => {
         search.value = ''
       }
     }
+    function onInput (e: InputEvent) {
+      search.value = (e.target as HTMLInputElement).value
+    }
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
@@ -274,7 +277,8 @@ export const VCombobox = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          v-model={ search.value }
+          modelValue={ search.value }
+          onInput={ onInput }
           class={[
             'v-combobox',
             {
