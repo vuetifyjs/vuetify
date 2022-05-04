@@ -13,19 +13,17 @@ import {
 import type { CalendarFormatter, CalendarTimestamp } from '@/composables/calendar/timestamp'
 
 export function useBaseCalendar (
+  props,
   currentLocale: string,
   dayFormat,
-  end: string | number | Date | undefined,
-  start: string | number | Date | undefined,
   times: object,
   weekdayFormat,
-  weekdays: string | number[]
 ) {
   // Computeds
   const parsedWeekdays: ComputedRef<number[]> = computed(() => {
-    return Array.isArray(weekdays)
-      ? weekdays
-      : (weekdays || '').split(',').map((x: number | string): Number => parseInt(x, 10))
+    return Array.isArray(props.weekdays)
+      ? props.weekdays
+      : (props.weekdays || '').split(',').map((x: number | string): Number => parseInt(x, 10))
   })
 
   const weekdaySkips: ComputedRef<number[]> = computed(() => {
@@ -39,12 +37,12 @@ export function useBaseCalendar (
   })
 
   const parsedStart: ComputedRef<CalendarTimestamp> = computed(() => {
-    return parseTimestamp(start, true)
+    return parseTimestamp(props.start, true)
   })
 
   const parsedEnd: ComputedRef<CalendarTimestamp> = computed(() => {
     const pStart = parsedStart.value
-    const pEnd: CalendarTimestamp = end ? parseTimestamp(end) || pStart : pStart
+    const pEnd: CalendarTimestamp = props.end ? parseTimestamp(props.end) || pStart : pStart
 
     return getTimestampIdentifier(pEnd) < getTimestampIdentifier(pStart) ? pStart : pEnd
   })

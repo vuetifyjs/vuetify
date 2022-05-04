@@ -4,8 +4,7 @@ import type { ComputedRef } from 'vue'
 import { VCalendarWeekly } from "./VCalendarWeekly";
 import { CalendarTimestamp, getEndOfMonth, getStartOfMonth, parseTimestamp } from "@/composables/calendar/timestamp";
 // import type { CalendarCategory } from '@/composables/calendar/timestamp'
-import { makeTimesProps } from "./composables/times";
-import { makeBaseProps, makeWeeksProps } from "./composables/props";
+import { makeBaseProps, makeTimesProps, makeWeeksProps } from "./composables/props";
 import { makeThemeProps } from "@/composables/theme";
 import { makeVariantProps } from "@/composables/variant";
 import { VTimestampInput } from "../VCalendar_old/util/timestamp";
@@ -35,10 +34,7 @@ export const VCalendarMonthly = defineComponent({
       return getEndOfMonth(parseTimestamp(props.end as VTimestampInput, true))
     })
     return () => (
-      <div>
-        Monthly
         <VCalendarWeekly class={staticClass} { ...{...props, start: props.start, end: props.end, parsedStart: parsedStart.value, parsedEnd: parsedEnd.value} }></VCalendarWeekly>
-      </div>
     )
    
     

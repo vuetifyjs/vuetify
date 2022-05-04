@@ -1,24 +1,16 @@
-import { parseDate, parseTimestamp, validateTimestamp } from '@/composables/calendar/timestamp'
+import { parseDate, parseTimestamp } from '@/composables/calendar/timestamp'
 import type { CalendarTimestamp } from '@/composables/calendar/timestamp'
 import { computed, watch } from 'vue'
 import type { ComputedRef } from 'vue'
-import { propsFactory } from '@/util'
 
-export const makeTimesProps = propsFactory({
-  now: {
-    type: String,
-    validator: validateTimestamp,
-  },
-})
-
-export function useTimes (now: string | undefined) {
+export function useTimes (props) {
   const times = {
     now: parseTimestamp('0000-00-00 00:00', true),
     today: parseTimestamp('0000-00-00', true),
   }
 
   // Computed
-  const parsedNow: ComputedRef<CalendarTimestamp | null> = computed(() => now ? parseTimestamp(now, true) : null)
+  const parsedNow: ComputedRef<CalendarTimestamp | null> = computed(() => props.now ? parseTimestamp(props.now, true) : null)
 
   // Methods
   const setPresent = (): void => {
