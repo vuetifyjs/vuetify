@@ -28,7 +28,7 @@ export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
-  selected: Ref<any[]>
+  selected: Ref<Readonly<number[]>>
   isSelected: (id: number) => boolean
   prev: () => void
   next: () => void

@@ -28,8 +28,8 @@ export function useProxiedModel<
 
   const internal = ref(transformIn(props[prop])) as Ref<Inner>
 
-  return computed<Inner>({
-    get () {
+  return computed<Inner extends any[] ? Readonly<Inner> : Inner>({
+    get (): any {
       if (propIsDefined.value) return transformIn(props[prop])
       else return internal.value
     },
