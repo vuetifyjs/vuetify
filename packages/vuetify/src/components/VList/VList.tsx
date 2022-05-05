@@ -80,7 +80,7 @@ export const VList = genericComponent<new <T>() => {
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
-      openStrategy: 'multiple' as const,
+      openStrategy: 'list' as const,
     }),
     ...makeBorderProps(),
     ...makeDensityProps(),
