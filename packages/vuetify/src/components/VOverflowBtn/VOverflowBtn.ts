@@ -41,7 +41,7 @@ export default VAutocomplete.extend({
       return this.segmented ? this.allItems : this.filteredItems
     },
     labelValue (): boolean {
-      return (this.isFocused || this.isLabelActive) && !this.persistentPlaceholder
+      return (this.isFocused && !this.persistentPlaceholder) || this.isLabelActive
     },
   },
 
