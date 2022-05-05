@@ -16,7 +16,7 @@
       <v-btn variant="text" icon="mdi-magnify"></v-btn>
     </v-toolbar>
 
-    <v-list three-line :items="items">
+    <v-list lines="three" :items="items">
       <template v-slot:subtitle="{ subtitle }">
         <div v-html="subtitle"></div>
       </template>
@@ -37,7 +37,7 @@
         { $type: 'divider', inset: true },
         {
           prependAvatar: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
-          title: 'Summer BBQ <span class="grey--text text--lighten-1">4</span>',
+          title: 'Summer BBQ',
           subtitle: `<span class="text-primary">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.`,
         },
         { $type: 'divider', inset: true },

@@ -22,7 +22,7 @@
       </v-btn>
     </v-toolbar>
 
-    <v-list two-line>
+    <v-list lines="two">
       <v-list-item-group
         v-model="selected"
         active-class="pink--text"

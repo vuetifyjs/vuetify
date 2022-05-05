@@ -13,7 +13,7 @@
     </v-toolbar>
 
     <v-list
-      two-line
+      lines="two"
       subheader
     >
       <v-subheader>General</v-subheader>
@@ -37,7 +37,7 @@
 
     <v-list
       subheader
-      two-line
+      lines="two"
       flat
     >
       <v-subheader>Hangout notifications</v-subheader>
