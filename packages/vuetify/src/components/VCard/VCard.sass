@@ -141,6 +141,9 @@
   transition: inherit
   transition-property: color, opacity
 
+  & + &
+    padding-top: 0
+
   @include card-line-height-densities($card-text-densities)
 
 .v-card-content
