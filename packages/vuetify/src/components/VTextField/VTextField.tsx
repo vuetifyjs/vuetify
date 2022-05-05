@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import Intersect from '@/directives/intersect'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref } from 'vue'
 import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
@@ -186,27 +186,6 @@ export const VTextField = genericComponent<new <T>() => {
                   default: ({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
-                    const inputNode = (
-                      <input
-                        ref={ inputRef }
-                        v-model={ model.value }
-                        v-intersect={[{
-                          handler: onIntersect,
-                        }, null, ['once']]}
-                        autofocus={ props.autofocus }
-                        readonly={ isReadonly.value }
-                        disabled={ isDisabled.value }
-                        name={ props.name }
-                        placeholder={ props.placeholder }
-                        size={ 1 }
-                        type={ props.type }
-                        onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
-                        { ...slotProps }
-                        { ...inputAttrs }
-                      />
-                    )
-
                     return (
                       <>
                         { props.prefix && (
@@ -215,14 +194,31 @@ export const VTextField = genericComponent<new <T>() => {
                           </span>
                         ) }
 
-                        { slots.default ? (
-                          <div
-                            class={ fieldClass }
-                            onClick={ e => emit('click:input', e) }
-                          >
-                            { slots.default({ inputNode }) }
-                          </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass }) }
+                        <div
+                          class={ fieldClass }
+                          onClick={ e => emit('click:input', e) }
+                        >
+                          { slots.default?.() }
+
+                          <input
+                            ref={ inputRef }
+                            v-model={ model.value }
+                            v-intersect={[{
+                              handler: onIntersect,
+                            }, null, ['once']]}
+                            autofocus={ props.autofocus }
+                            readonly={ isReadonly.value }
+                            disabled={ isDisabled.value }
+                            name={ props.name }
+                            placeholder={ props.placeholder }
+                            size={ 1 }
+                            type={ props.type }
+                            onFocus={ onFocus }
+                            onBlur={ () => (isFocused.value = false) }
+                            { ...slotProps }
+                            { ...inputAttrs }
+                          />
+                        </div>
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
