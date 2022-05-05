@@ -86,8 +86,8 @@ export const VCheckbox = defineComponent({
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
+                title={ attrs.title }
                 { ...controlAttrs }
-                { ...attrs }
                 v-slots={ slots }
               />
             ),
