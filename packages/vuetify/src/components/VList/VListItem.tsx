@@ -175,7 +175,7 @@ export const VListItem = genericComponent<new () => {
             if (isGroupActivator) return
 
             link.navigate?.(e)
-            select(!isSelected.value, e)
+            props.value != null && select(!isSelected.value, e)
           })}
           v-ripple={ isClickable }
         >
