@@ -75,15 +75,15 @@ export const VSlideGroup = defineComponent({
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const contentRef = ref<HTMLElement>()
+    const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
     watchEffect(() => {
-      if (!containerRect.value || !contentRef.value) return
+      if (!containerRect.value || !contentRect.value) return
 
       const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
       containerSize.value = containerRect.value[sizeProperty]
-      contentSize.value = contentRef.value.getBoundingClientRect()[sizeProperty]
+      contentSize.value = contentRect.value[sizeProperty]
 
       isOverflowing.value = containerSize.value + 1 < contentSize.value
     })
