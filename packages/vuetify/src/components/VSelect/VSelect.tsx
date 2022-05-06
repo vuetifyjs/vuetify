@@ -193,9 +193,9 @@ export const VSelect = genericComponent<new <T>() => {
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
-                      { !items.value.length && !props.hideNoData && (
+                      { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      ) }
+                      )) }
 
                       { items.value.map(item => (
                         <VListItem

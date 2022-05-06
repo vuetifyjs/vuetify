@@ -70,9 +70,10 @@ export const VCombobox = genericComponent<new <T>() => {
 
   emits: {
     'update:modelValue': (val: any) => true,
+    'update:searchInput': (val: string) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
@@ -117,6 +118,10 @@ export const VCombobox = genericComponent<new <T>() => {
         isPristine.value = !val
       },
     })
+    watch(_search, value => {
+      emit('update:searchInput', value)
+    })
+
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
@@ -317,9 +322,9 @@ export const VCombobox = genericComponent<new <T>() => {
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     >
-                      { !filteredItems.value.length && !props.hideNoData && (
+                      { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      ) }
+                      )) }
 
                       { filteredItems.value.map(({ item, matches }) => (
                         <VListItem
