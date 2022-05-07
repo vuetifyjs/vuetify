@@ -112,6 +112,7 @@ export default baseMixins.extend<options>().extend({
         'v-text-field--solo': this.isSolo,
         'v-text-field--solo-inverted': this.soloInverted,
         'v-text-field--solo-flat': this.flat,
+        'v-text-field--suffix': this.suffix,
         'v-text-field--filled': this.filled,
         'v-text-field--is-booted': this.isBooted,
         'v-text-field--enclosed': this.isEnclosed,
