@@ -13,6 +13,14 @@
         fluid
         tag="section"
       >
+        <alert type="warning">
+          This is <b>BETA</b> documentation for Vuetify 3, examples and information may be broken or outdated.
+          <br>
+          Components not listed in the sidebar are not available yet.
+          <br>
+          Vuetify 2 documentation can be found on <app-link href="https://vuetifyjs.com/">vuetifyjs.com</app-link>
+        </alert>
+
         <router-view />
       </v-container>
     </v-main>
