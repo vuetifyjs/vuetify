@@ -1,4 +1,5 @@
 ---
+nav: Selects
 meta:
   title: Select component
   description: The select component provides a list of options that a user can make selections from.
