@@ -25,11 +25,9 @@ ress is a modern CSS reset that applies a solid base for stylesheets. It is buil
 
 </alert>
 
-These styles are automatically imported within **src/styles/generic/_reset.scss** and bootstrapped as **Generic** styles within **src/styles/generic/_index.scss**:
+These styles are automatically imported within `src/styles/generic/_reset.scss` and bootstrapped as **Generic** styles within `src/styles/generic/_index.scss`:
 
-```scss
-// styles/generic/_index.scss
-
+```scss { resource="styles/generic/_index.scss" }
 // Generic styling for bare HTML elements (like H1, A, etc.).
 // These come with default styling from the browser so that
 // we can redefine them here.

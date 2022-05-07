@@ -31,9 +31,7 @@ When you run yarn serve, the vuetify-cli-plugin will automatically hoist the glo
 
 This section assumes that you have already followed our Nuxt guide on the [Quick start](/getting-started/installation/#nuxt-install) page. The Nuxt Vuetify module exposes a `vuetify` property where you can configure the module. Ensure that you enable the `treeShake` option first. This option will use [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) to enable automatic [treeshaking](/features/treeshaking). This is required for custom SASS variables to work. Then provide the `customVariables` file path option to customize SASS variables.
 
-```js
-// nuxt.config.js
-
+```js { resource="nuxt.config.js" }
 export default {
   vuetify: {
     customVariables: ['~/assets/variables.scss'],
@@ -42,9 +40,7 @@ export default {
 }
 ```
 
-```scss
-// assets/variables.scss
-
+```scss { resource="assets/variables.scss" }
 // Variables you want to modify
 $btn-border-radius: 0px;
 
@@ -56,9 +52,7 @@ $material-light: ( cards: blue );
 
 This section assumes you have already followed our Webpack guide on the [Quick start](/getting-started/installation#webpack-install) page. The option can vary depending upon the version of [sass-loader](https://github.com/webpack-contrib/sass-loader) you are use using. Ensure that you use the proper syntax when setting up the SASS/SCSS data options as they have different line endings. You can find more information about [additionalData](https://github.com/webpack-contrib/sass-loader#additionaldata) or [prependData](https://github.com/webpack-contrib/sass-loader/tree/v8.0.0#prependdata) on sass-loader's GitHub page.
 
-```js
-// webpack.config.js
-
+```js { resource="webpack.config.js" }
 module.exports = {
   module: {
     rules: [
@@ -137,9 +131,7 @@ There are many SASS/SCSS variables that can be customized across the entire Vuet
 
 Below is an example of what a custom variable file could look like:
 
-```scss
-// src/sass/variables.scss
-
+```scss { resource="src/sass/variables.scss" }
 // Globals
 $body-font-family: 'Work Sans', serif;
 $border-radius-root: 6px;
@@ -227,18 +219,14 @@ When using sass variables, there are a few considerations to be aware of.
 
 Importing a regular stylesheet into a `variables` file will cause massive style duplication. In the following snippet, we have an `overrides.sass` file to modify the **text-transform** CSS property of [v-btn](/components/buttons/).
 
-```sass
-// src/styles/overrides.sass
-
+```sass { resource="src/styles/overrides.sass" }
 .v-btn
   text-transform: capitalize
 ```
 
 The following snippet is an example of what **NOT** to do.
 
-```scss
-// src/styles/variables.scss
-
+```scss { resource="src/styles/variables.scss" }
 // The following import will cause style duplication
 @import './overrides.sass';
 
@@ -254,9 +242,7 @@ $typography: (
 
 When using variables, the initial compilation of your application will increase. This is due to the fact that styles are updated in real time whenever you make a modification to a hoisted variable file. This is only experienced with the initial compilation step and can be improved by changing where you import Vuetify from. Keep in mind this _will not_ work if your application is affected by any of the [Vuetify loader limitations](/features/treeshaking/#limitations); your application will still work, but not receive the performance increase.
 
-```js
-// src/plugins/vuetify.js
-
+```js { resource="src/plugins/vuetify.js" }
 // CORRECT
 import Vuetify from 'vuetify/lib/framework'
 

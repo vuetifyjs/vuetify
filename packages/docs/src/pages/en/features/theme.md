@@ -23,8 +23,7 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
 
-```js
-// src/plugins/vuetify.js
+```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -39,8 +38,7 @@ Adding new themes is as easy as defining a new property in the **theme** object.
 
 Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
 
-```ts
-// src/plugins/vuetify.ts
+```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
 import { createVuetify, ThemeDefinition } from 'vuetify'
 
@@ -132,8 +130,7 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
 
 The Vuetify theme system supports adding _custom_ colors. When configuring the Vuetify theme settings, add any number of custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
 
-```js
-// src/plugins/vuetify.js
+```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -176,8 +173,7 @@ Custom properties for colors are a list of `red, green, blue`, so the `rgb()` or
 
 The Vuetify theme system can help you generate any number of **variations** for the colors in your theme. The following example shows how to generate 1 lighten and 2 darken variants for the `primary` and `secondary` colors.
 
-```js
-// src/plugins/vuetify.js
+```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -210,8 +206,7 @@ export default createVuetify({
 
 The theme functionality can be disabled by setting the **theme** configuration property to `false`. This prevents the creation of the Vuetify stylesheet, and theme classes will not be applied to components.
 
-```js
-// src/plugins/vuetify.js
+```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 

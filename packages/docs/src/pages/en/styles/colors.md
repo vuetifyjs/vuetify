@@ -29,8 +29,7 @@ Text colors also support **darken** and **lighten** variants
 
 Vuetify has an optional javascript color pack that you can import and use within your application. This can also be used to help define your application's theme.
 
-```js
-// src/plugins/vuetify.js
+```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify/lib'
 
 import colors from 'vuetify/lib/util/colors'
@@ -55,9 +54,7 @@ export default createVuetify({
 
 While convenient, the color pack increases the CSS export size by ~30kb. Some projects may only require the classes that are created at run-time from the Vuetify **theme** system. To disable the color pack feature, you will have to _manually_ import and build the main **sass** file. This will require a [Sass loader](https://github.com/webpack-contrib/sass-loader) and a `.sass`/`.scss` file entry.
 
-```sass
-// src/sass/main.scss
-
+```sass { resource="src/sass/main.scss" }
 $color-pack: false;
 
 @import '~vuetify/src/styles/main.sass';
@@ -65,9 +62,7 @@ $color-pack: false;
 
 Your created `main.sass` file will then need to be included in your project.
 
-```js
-// src/index.js
-
+```js { resource="src/index.js" }
 import './src/sass/main.scss'
 // OR
 require('./src/sass/main.scss')

@@ -34,9 +34,7 @@ Vuetify utilizes features of ES2015/2017 that require the need to use polyfills 
 
 Unfortunately Vue CLI doesn't automatically bring IE11 compatibility in which you may encounter various errors (such as Symbol is not defined). To assist in resolving these errors you need to manually add `transpileDependencies` parameter in `vue.config.js`:
 
-```js
-// vue.config.js
-
+```js { resource="vue.config.js" }
 module.exports = {
   transpileDependencies: ['vuetify']
 }
@@ -54,9 +52,7 @@ npm install core-js regenerator-runtime --save
 
 Include the plugin as _early_ as possible within your **main.js** file—or whatever the main entry point of your application is.
 
-```js
-// src/main.js
-
+```js { resource="src/main.js" }
 // Polyfills
 import 'core-js/stable'
 import 'regenerator-runtime/runtime'
@@ -85,9 +81,7 @@ npm install @babel/preset-env -D
 
 Once installed, add the preset to your `babel.config.js` file:
 
-```js
-// babel.config.js
-
+```js { resource="babel.config.js" }
 module.exports = {
   presets: ['@babel/preset-env']
 }
@@ -95,9 +89,7 @@ module.exports = {
 
 or if using a `.babelrc` file:
 
-```json
-// .babelrc
-
+```json { resource=".babelrc" }
 {
   "presets": ["@babel/preset-env"]
 }

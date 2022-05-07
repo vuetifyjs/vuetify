@@ -19,9 +19,7 @@ Vuetify supports language Internationalization (i18n) of its components. When bo
 
 To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify. You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on **$vuetify.locale**.
 
-```js
-// src/main.js
-
+```js { resource="src/main.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -70,8 +68,7 @@ Using the `v-locale-provider` component it is possible to scope a portion of you
 
 To create your own locale messages, copy and paste the content of `vuetify/src/locale/en.ts` to a new file, and change the localized strings. You can also specify if they should be displayed RTL or not by using the `rtl` property of the locale options.
 
-```js
-// src/locales/customLocale.js
+```js { resource="src/locales/customLocale.js" }
 export default {
   badge: '...',
   close: '...',
@@ -79,8 +76,7 @@ export default {
 }
 ```
 
-```js
-// src/main.js
+```js { resource="src/main.js" }
 import { createVuetify } from 'vuetify'
 import customLocale from './locales/customLocale'
 
@@ -131,9 +127,7 @@ If you are building custom Vuetify components that need to hook into the locale 
 
 If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided wrapper function (as seen in the example below).
 
-```js
-// src/main.js
-
+```js { resource="src/main.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { createVueI18nAdapter } from 'vuetify/locale/adapters/vue-i18n'

@@ -23,17 +23,16 @@ The following shows how to access the application's display information:
 
 ```html
 <script>
-  // Composables
   import { onMounted } from 'vue'
   import { useDisplay } from 'vuetify'
 
   export default {
     setup () {
-      onMounted () {
-        const display = useDisplay()
+      const display = useDisplay()
 
+      onMounted(() => {
         console.log(display.mobile.value) // false
-      }
+      })
     }
   }
 </script>
@@ -60,9 +59,7 @@ The **useDisplay** composable has a numerous configuration options, such as the 
 
 For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg* and sets **mobileBreakpoint** to `sm`.
 
-```js
-// src/plugins/vuetify.js
-
+```js { resource="src/plugins/vuetify.js" }
 import { createVuetify} from 'vuetify'
 
 export default createVuetify({
@@ -90,8 +87,6 @@ export default createVuetify({
 In the following example, we use a switch statement and the current breakpoint name to modify the **height** property of the [v-card](/components/cards/) component:
 
 ```html
-<!-- Vue Component -->
-
 <template>
   <v-card :height="height">
     ...
@@ -99,7 +94,6 @@ In the following example, we use a switch statement and the current breakpoint n
 </template>
 
 <script>
-  // Composables
   import { useDisplay } from 'vuetify'
 
   export default {
@@ -197,7 +191,6 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 </template>
 
 <script>
-  // Composables
   import { useDisplay } from 'vuetify'
 
   export default {
@@ -215,8 +208,6 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 Breakpoint and conditional values return a `boolean` that is derived from the current viewport size. Additionally, the **breakpoint** composable follows the [Vuetify Grid](/components/grids) naming conventions and has access to properties such as **xlOnly**, **xsOnly**, **mdAndDown**, and many others. In the following example we use the `setup` function to pass the _xs_ and _mdAndUp_ values to our template:
 
 ```html
-<!-- Vue Component -->
-
 <template>
   <v-sheet
     :min-height="mdAndUp ? 300 : '20vh'"
@@ -227,14 +218,15 @@ Breakpoint and conditional values return a `boolean` that is derived from the cu
 </template>
 
 <script>
-  // Composables
   import { useDisplay } from 'vuetify'
 
-  setup () {
-    // Destructure only the keys we want to use
-    const { xs, mdAndUp } = useDisplay()
+  export default {
+    setup () {
+      // Destructure only the keys we want to use
+      const { xs, mdAndUp } = useDisplay()
 
-    return { xs, mdAndUp }
+      return { xs, mdAndUp }
+    }
   }
 </script>
 ```
@@ -266,12 +258,12 @@ For example, the [v-banner](/components/banners/) component implements different
 
   export default {
     setup () {
-      onMounted () {
-        const display = useDisplay()
+      const display = useDisplay()
 
+      onMounted(() => {
         console.log(display.width.value) // 960
         console.log(display.mobile.value) // true
-      }
+      })
     }
   }
 </script>

@@ -15,7 +15,7 @@
     >
       <v-sheet
         v-if="resource"
-        class="text-body-2 px-3 pt-3 text-disabled"
+        class="text-body-2 px-3 pt-3 text-medium-emphasis"
         color="transparent"
         height="44"
         rounded="tl"
