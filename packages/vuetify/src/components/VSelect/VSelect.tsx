@@ -15,7 +15,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, ref, watch } from 'vue'
+import { computed, ref, toRaw, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -93,9 +93,10 @@ export const VSelect = genericComponent<new <T>() => {
 
   emits: {
     'update:modelValue': (val: any) => true,
+    change: (val: any) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const activator = ref()
@@ -151,6 +152,11 @@ export const VSelect = genericComponent<new <T>() => {
 
     watch(() => vTextFieldRef.value, val => {
       activator.value = val.$el.querySelector('.v-input__control')
+    })
+
+    watch(() => model.value, (value: any) => {
+      const changedValue = props.multiple ? toRaw(value) : value[0]
+      emit('change', changedValue)
     })
 
     useRender(() => {
