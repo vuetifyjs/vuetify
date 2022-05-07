@@ -30,7 +30,7 @@ Text colors also support **darken** and **lighten** variants
 Vuetify has an optional javascript color pack that you can import and use within your application. This can also be used to help define your application's theme.
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify/lib'
+import { createVuetify } from 'vuetify'
 
 import colors from 'vuetify/lib/util/colors'
 
