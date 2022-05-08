@@ -71,7 +71,7 @@ export const VImg = defineComponent({
     ...makeTransitionProps(),
   },
 
-  emits: ['loadstart', 'load', 'error'],
+  emits: ['loadstart', 'load', 'error','sizeChanged'],
 
   setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
@@ -165,6 +165,7 @@ export const VImg = defineComponent({
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
+          emit('sizeChanged',{width:naturalWidth,height:naturalHeight})
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
           setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
