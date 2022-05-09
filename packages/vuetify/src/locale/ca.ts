@@ -8,12 +8,12 @@ export default {
   dataTable: {
     itemsPerPageText: 'Files per pàgina:',
     ariaLabel: {
-      sortDescending: 'Ordre descendent. Premi per treure la ordenació.',
-      sortAscending: 'Ordre ascendent. Premi per ordenar descendent.',
-      sortNone: 'Sense ordenar. Premi per ordenar ascendent.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'Ordre descendent.',
+      sortAscending: 'Ordre ascendent.',
+      sortNone: 'Sense ordenar.',
+      activateNone: 'Premi per treure la ordenació.',
+      activateDescending: 'Premi per ordenar descendent.',
+      activateAscending: 'Premi per ordenar ascendent.',
     },
     sortBy: 'Ordenat per',
   },
@@ -59,13 +59,13 @@ export default {
       previous: 'Pàgina anterior',
       page: 'Ves a la pàgina {0}',
       currentPage: 'Pàgina actual, pàgina {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Primera pàgina',
+      last: 'Última pàgina',
     },
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Puntuació {0} de {1}',
     },
   },
 }
