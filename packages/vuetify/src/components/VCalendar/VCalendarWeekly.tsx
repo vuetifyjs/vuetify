@@ -4,7 +4,7 @@ import { ComputedRef } from "vue"
 import { computed } from 'vue'
 import { useLocale } from '@/composables/locale'
 import { useBaseCalendar } from "./composables/base"
-import { makeBaseProps, makeTimesProps, makeWeeksProps } from "./composables/props"
+import { makeBaseProps, makeEventsProps, makeTimesProps, makeWeeksProps } from "./composables/props"
 import { useTimes } from "./composables/times"
 
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -22,11 +22,12 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
   name: 'VCalendarWeekly',
 
   props: {
-    ...makeTimesProps(),
     ...makeBaseProps(),
-    ...makeWeeksProps(),
+    ...makeEventsProps(),
     ...makeThemeProps(),
+    ...makeTimesProps(),
     ...makeVariantProps(),
+    ...makeWeeksProps(),
   },
 
   setup(props, { slots }) {

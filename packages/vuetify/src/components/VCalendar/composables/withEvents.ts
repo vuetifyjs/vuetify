@@ -1,6 +1,13 @@
 // Styles
 // eslint-disable-next-line @typescript-eslint/consistent-type-imports
 import {
+  CalendarDayBodySlotScope,
+  CalendarDaySlotScope,
+  CalendarEventCategoryFunction,
+  CalendarEventColorFunction,
+  CalendarEventNameFunction,
+  CalendarEventOverlapMode,
+  CalendarEventTimedFunction,
   diffMinutes,
   getDayIdentifier,
 } from '@/composables/calendar/timestamp'
@@ -133,30 +140,30 @@ export function useWithEvents (props) {
 
   const getEventsMap = (): VDailyEventsMap => {
     const eventsMap: VDailyEventsMap = {}
-    const elements = this.$refs.events as HTMLElement[]
+    // const elements = this.$refs.events as HTMLElement[]
 
-    if (!elements || !elements.forEach) {
-      return eventsMap
-    }
+    // if (!elements || !elements.forEach) {
+    //   return eventsMap
+    // }
 
-    elements.forEach(el => {
-      const date = el.getAttribute('data-date')
-      if (el.parentElement && date) {
-        if (!(date in eventsMap)) {
-          eventsMap[ date ] = {
-            parent: el.parentElement,
-            more: null,
-            events: [],
-          }
-        }
-        if (el.getAttribute('data-more')) {
-          eventsMap[ date ].more = el
-        } else {
-          eventsMap[ date ].events.push(el)
-          el.style.display = ''
-        }
-      }
-    })
+    // elements.forEach(el => {
+    //   const date = el.getAttribute('data-date')
+    //   if (el.parentElement && date) {
+    //     if (!(date in eventsMap)) {
+    //       eventsMap[ date ] = {
+    //         parent: el.parentElement,
+    //         more: null,
+    //         events: [],
+    //       }
+    //     }
+    //     if (el.getAttribute('data-more')) {
+    //       eventsMap[ date ].more = el
+    //     } else {
+    //       eventsMap[ date ].events.push(el)
+    //       el.style.display = ''
+    //     }
+    //   }
+    // })
 
     return eventsMap
   }
@@ -186,7 +193,7 @@ export function useWithEvents (props) {
         const bottom = eventsSorted[ i ].bottom
         const hide = i === last
           ? (bottom > parentBounds.bottom)
-          : (bottom + eventHeight > parentBounds.bottom)
+          : (bottom + props.eventHeight > parentBounds.bottom)
 
         if (hide) {
           eventsSorted[ i ].event.style.display = 'none'
@@ -196,16 +203,24 @@ export function useWithEvents (props) {
 
       if (hidden) {
         more.style.display = ''
-        more.innerHTML = this.$vuetify.lang.t(eventMoreText, hidden)
+        more.innerHTML = this.$vuetify.lang.t(props.eventMoreText, hidden)
       } else {
         more.style.display = 'none'
       }
     }
   }
 
+  const genName = (eventSummary: () => string): VNode => {
+    return this.$createElement('div', {
+      staticClass: 'pl-1',
+      domProps: {
+        innerHTML: eventSummary(),
+      },
+    })
+  }
 
   const genEvent = (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode => {
-    const slot = this.$scopedSlots.event
+    const slot = slots.event
     const text = eventTextColorFunction.value(event.input)
     const background = eventColorFunction(event.input)
     const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
@@ -241,296 +256,302 @@ export function useWithEvents (props) {
       eventSummary,
     }
 
-    return this.$createElement('div',
-      this.setTextColor(text,
-        this.setBackgroundColor(background, {
-          on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
-          directives: [ {
-            name: 'ripple',
-            value: eventRipple ?? true,
-          } ],
-          ...data,
-        })
-      ), slot
-      ? slot(scope)
-      : [ genName(eventSummary) ]
-    )
-  }
+    const eventComponents = genericComponent<new <T>() => {
+      $props: {},
+      $slots: MakeSlots<{}>
+    }>()({
+      name: 'VCalendarEvent',
+      setup (props, ctx) {
+        return () => (
+          <div
 
-  const genDayEvent = ({ event }: CalendarEventVisual, day: CalendarDaySlotScope): VNode => {
-    const dayIdentifier = getDayIdentifier(day)
-    const week = day.week
-    const start = dayIdentifier === event.startIdentifier
-    let end = dayIdentifier === event.endIdentifier
-    let width = WIDTH_START
-
-    if (!categoryMode.value) {
-      for (let i = day.index + 1; i < week.length; i++) {
-        const weekdayIdentifier = getDayIdentifier(week[ i ])
-        if (event.endIdentifier >= weekdayIdentifier) {
-          width += WIDTH_FULL
-          end = end || weekdayIdentifier === event.endIdentifier
-        } else {
-          end = true
-          break
-        }
+          >
+          </div>
+        )
       }
-    }
-    const scope = { eventParsed: event, day, start, end, timed: false }
-
-    return genEvent(event, scope, false, {
-      staticClass: 'v-event',
-      class: {
-        'v-event-start': start,
-        'v-event-end': end,
-      },
-      style: {
-        height: `${ eventHeight }px`,
-        width: `${ width }%`,
-        'margin-bottom': `${ eventMarginBottom }px`,
-      },
-      attrs: {
-        'data-date': day.date,
-      },
-      key: event.index,
-      ref: 'events',
-      refInFor: true,
     })
   }
-
-  const genTimedEvent = ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false => {
-    if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
-      return false
-    }
-
-    const dayIdentifier = getDayIdentifier(day)
-    const start = event.startIdentifier >= dayIdentifier
-    const end = event.endIdentifier > dayIdentifier
-    const top = start ? day.timeToY(event.start) : 0
-    const bottom = end ? day.timeToY(MINUTES_IN_DAY) : day.timeToY(event.end)
-    const height = Math.max(eventHeight, bottom - top)
-    const scope = { eventParsed: event, day, start, end, timed: true }
-
-    return genEvent(event, scope, true, {
-      staticClass: 'v-event-timed',
-      style: {
-        top: `${ top }px`,
-        height: `${ height }px`,
-        left: `${ left }%`,
-        width: `${ width }%`,
-      },
-    })
-  }
-
-  const genName = (eventSummary: () => string): VNode => {
-    return this.$createElement('div', {
-      staticClass: 'pl-1',
-      domProps: {
-        innerHTML: eventSummary(),
-      },
-    })
-  }
-
-  const genPlaceholder = (day: CalendarTimestamp): VNode => {
-    const height = eventHeight + eventMarginBottom
-
-    return this.$createElement('div', {
-      style: {
-        height: `${ height }px`,
-      },
-      attrs: {
-        'data-date': day.date,
-      },
-      ref: 'events',
-      refInFor: true,
-    })
-  }
-
-  const genMore = (day: CalendarDaySlotScope): VNode => {
-    return this.$createElement('div', {
-      staticClass: 'v-event-more pl-1',
-      class: {
-        'v-outside': day.outside,
-      },
-      attrs: {
-        'data-date': day.date,
-        'data-more': 1,
-      },
-      directives: [ {
-        name: 'ripple',
-        value: eventRipple ?? true,
-      } ],
-      on: {
-        click: (e: MouseEvent) => this.$emit('click:more', day, e),
-      },
-      style: {
-        display: 'none',
-        height: `${ eventHeight }px`,
-        'margin-bottom': `${ eventMarginBottom }px`,
-      },
-      ref: 'events',
-      refInFor: true,
-    })
-  }
-  const getVisibleEvents = (): CalendarEventParsed[] => {
-    const start = getDayIdentifier(this.days[ 0 ])
-    const end = getDayIdentifier(this.days[ this.days.length - 1 ])
-
-    return this.parsedEvents.filter(
-      event => isEventOverlapping(event, start, end)
-    )
-  }
-
-  const isEventForCategory = (event: CalendarEventParsed, category: CalendarCategory): boolean => {
-    return !this.categoryMode ||
-      (typeof category === 'object' && category.categoryName &&
-        category.categoryName === event.category) ||
-      (typeof event.category === 'string' && category === event.category) ||
-      (typeof event.category !== 'string' && category === null)
-  }
-
-  const getEventsForDay = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
-    const identifier = getDayIdentifier(day)
-    const firstWeekday = this.eventWeekdays[ 0 ]
-
-    return this.parsedEvents.filter(
-      event => isEventStart(event, day, identifier, firstWeekday)
-    )
-  }
-
-  const getEventsForDayAll = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
-    const identifier = getDayIdentifier(day)
-    const firstWeekday = this.eventWeekdays[ 0 ]
-
-    return this.parsedEvents.filter(
-      event => event.allDay &&
-        (this.categoryMode ? isEventOn(event, identifier) : isEventStart(event, day, identifier, firstWeekday)) &&
-        this.isEventForCategory(event, day.category)
-    )
-  }
-
-  const getEventsForDayTimed = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
-    const identifier = getDayIdentifier(day)
-    return this.parsedEvents.filter(
-      event => !event.allDay &&
-        isEventOn(event, identifier) &&
-        this.isEventForCategory(event, day.category)
-    )
-  }
-
-  const getScopedSlots = () => {
-    if (this.noEvents) {
-      return { ...this.$scopedSlots }
-    }
-
-    const mode = this.eventModeFunction(
-      this.parsedEvents,
-      this.eventWeekdays[ 0 ],
-      this.parsedEventOverlapThreshold
-    )
-
-    const isNode = (input: VNode | false): input is VNode => !!input
-    const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
-      const events = getter(day)
-      const visuals = mode(day, events, timed, this.categoryMode)
-
-      if (timed) {
-        return visuals.map(visual => mapper(visual, day)).filter(isNode)
-      }
-
-      const children: VNode[] = []
-
-      visuals.forEach((visual, index) => {
-        while (children.length < visual.column) {
-          children.push(this.genPlaceholder(day))
-        }
-
-        const mapped = mapper(visual, day)
-        if (mapped) {
-          children.push(mapped)
-        }
+  return this.$createElement('div',
+    this.setTextColor(text,
+      this.setBackgroundColor(background, {
+        on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
+        directives: [ {
+          name: 'ripple',
+          value: props.eventRipple ?? true,
+        } ],
+        ...data,
       })
+    ), slot
+    ? slot(scope)
+    : [ genName(eventSummary) ]
+  )
+}
 
-      return children
-    }
+const genDayEvent = ({ event }: CalendarEventVisual, day: CalendarDaySlotScope): VNode => {
+  const dayIdentifier = getDayIdentifier(day)
+  const week = day.week
+  const start = dayIdentifier === event.startIdentifier
+  let end = dayIdentifier === event.endIdentifier
+  let width = WIDTH_START
 
-    const slots = this.$scopedSlots
-    const slotDay = slots.day
-    const slotDayHeader = slots[ 'day-header' ]
-    const slotDayBody = slots[ 'day-body' ]
-
-    return {
-      ...slots,
-      day: (day: CalendarDaySlotScope) => {
-        let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
-        if (children && children.length > 0 && this.eventMore) {
-          children.push(this.genMore(day))
-        }
-        if (slotDay) {
-          const slot = slotDay(day)
-          if (slot) {
-            children = children ? children.concat(slot) : slot
-          }
-        }
-        return children
-      },
-      'day-header': (day: CalendarDaySlotScope) => {
-        let children = getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
-
-        if (slotDayHeader) {
-          const slot = slotDayHeader(day)
-          if (slot) {
-            children = children ? children.concat(slot) : slot
-          }
-        }
-        return children
-      },
-      'day-body': (day: CalendarDayBodySlotScope) => {
-        const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
-        let children: VNode[] = [
-          this.$createElement('div', {
-            staticClass: 'v-event-timed-container',
-          }, events),
-        ]
-
-        if (slotDayBody) {
-          const slot = slotDayBody(day)
-          if (slot) {
-            children = children.concat(slot)
-          }
-        }
-        return children
-      },
+  if (!categoryMode.value) {
+    for (let i = day.index + 1; i < week.length; i++) {
+      const weekdayIdentifier = getDayIdentifier(week[ i ])
+      if (event.endIdentifier >= weekdayIdentifier) {
+        width += WIDTH_FULL
+        end = end || weekdayIdentifier === event.endIdentifier
+      } else {
+        end = true
+        break
+      }
     }
   }
+  const scope = { eventParsed: event, day, start, end, timed: false }
+
+  return genEvent(event, scope, false, {
+    staticClass: 'v-event',
+    class: {
+      'v-event-start': start,
+      'v-event-end': end,
+    },
+    style: {
+      height: `${ props.eventHeight }px`,
+      width: `${ width }%`,
+      'margin-bottom': `${ props.eventMarginBottom }px`,
+    },
+    attrs: {
+      'data-date': day.date,
+    },
+    key: event.index,
+    ref: 'events',
+    refInFor: true,
+  })
+}
+
+const genTimedEvent = ({ event, left, width }: CalendarEventVisual, day: CalendarDayBodySlotScope): VNode | false => {
+  if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
+    return false
+  }
+
+  const dayIdentifier = getDayIdentifier(day)
+  const start = event.startIdentifier >= dayIdentifier
+  const end = event.endIdentifier > dayIdentifier
+  const top = start ? day.timeToY(event.start) : 0
+  const bottom = end ? day.timeToY(MINUTES_IN_DAY) : day.timeToY(event.end)
+  const height = Math.max(eventHeight, bottom - top)
+  const scope = { eventParsed: event, day, start, end, timed: true }
+
+  return genEvent(event, scope, true, {
+    staticClass: 'v-event-timed',
+    style: {
+      top: `${ top }px`,
+      height: `${ height }px`,
+      left: `${ left }%`,
+      width: `${ width }%`,
+    },
+  })
+}
+
+const genPlaceholder = (day: CalendarTimestamp): VNode => {
+  const height = eventHeight + eventMarginBottom
+
+  return this.$createElement('div', {
+    style: {
+      height: `${ height }px`,
+    },
+    attrs: {
+      'data-date': day.date,
+    },
+    ref: 'events',
+    refInFor: true,
+  })
+}
+
+const genMore = (day: CalendarDaySlotScope): VNode => {
+  return this.$createElement('div', {
+    staticClass: 'v-event-more pl-1',
+    class: {
+      'v-outside': day.outside,
+    },
+    attrs: {
+      'data-date': day.date,
+      'data-more': 1,
+    },
+    directives: [ {
+      name: 'ripple',
+      value: eventRipple ?? true,
+    } ],
+    on: {
+      click: (e: MouseEvent) => this.$emit('click:more', day, e),
+    },
+    style: {
+      display: 'none',
+      height: `${ eventHeight }px`,
+      'margin-bottom': `${ eventMarginBottom }px`,
+    },
+    ref: 'events',
+    refInFor: true,
+  })
+}
+const getVisibleEvents = (): CalendarEventParsed[] => {
+  const start = getDayIdentifier(this.days[ 0 ])
+  const end = getDayIdentifier(this.days[ this.days.length - 1 ])
+
+  return this.parsedEvents.filter(
+    event => isEventOverlapping(event, start, end)
+  )
+}
+
+const isEventForCategory = (event: CalendarEventParsed, category: CalendarCategory): boolean => {
+  return !this.categoryMode ||
+    (typeof category === 'object' && category.categoryName &&
+      category.categoryName === event.category) ||
+    (typeof event.category === 'string' && category === event.category) ||
+    (typeof event.category !== 'string' && category === null)
+}
+
+const getEventsForDay = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
+  const identifier = getDayIdentifier(day)
+  const firstWeekday = this.eventWeekdays[ 0 ]
+
+  return this.parsedEvents.filter(
+    event => isEventStart(event, day, identifier, firstWeekday)
+  )
+}
+
+const getEventsForDayAll = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
+  const identifier = getDayIdentifier(day)
+  const firstWeekday = this.eventWeekdays[ 0 ]
+
+  return this.parsedEvents.filter(
+    event => event.allDay &&
+      (this.categoryMode ? isEventOn(event, identifier) : isEventStart(event, day, identifier, firstWeekday)) &&
+      this.isEventForCategory(event, day.category)
+  )
+}
+
+const getEventsForDayTimed = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
+  const identifier = getDayIdentifier(day)
+  return this.parsedEvents.filter(
+    event => !event.allDay &&
+      isEventOn(event, identifier) &&
+      this.isEventForCategory(event, day.category)
+  )
+}
+
+const getScopedSlots = () => {
+  if (props.noEvents) {
+    return { ...slots }
+  }
+
+  const mode = props.eventModeFunction(
+    parsedEvents,
+    eventWeekdays[ 0 ],
+    parsedEventOverlapThreshold
+  )
+
+  const isNode = (input: VNode | false): input is VNode => !!input
+  const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
+    const events = getter(day)
+    const visuals = mode(day, events, timed, this.categoryMode)
+
+    if (timed) {
+      return visuals.map(visual => mapper(visual, day)).filter(isNode)
+    }
+
+    const children: VNode[] = []
+
+    visuals.forEach((visual, index) => {
+      while (children.length < visual.column) {
+        children.push(this.genPlaceholder(day))
+      }
+
+      const mapped = mapper(visual, day)
+      if (mapped) {
+        children.push(mapped)
+      }
+    })
+
+    return children
+  }
+  console.log(slots)
+  // const slots = this.$scopedSlots
+  const slotDay = slots.day
+  const slotDayHeader = slots[ 'day-header' ]
+  const slotDayBody = slots[ 'day-body' ]
 
   return {
-    noEvents,
-    parsedEvents,
-    parsedEventOverlapThreshold,
-    eventTimedFunction,
-    eventCategoryFunction,
-    eventTextColorFunction,
-    eventNameFunction,
-    eventModeFunction,
-    eventWeekdays,
-    categoryMode,
-    eventColorFunction,
-    parseEvent,
-    formatTime,
-    updateEventVisibility,
-    getEventsMap,
-    genEvent,
-    genDayEvent,
-    genTimedEvent,
-    genName,
-    genPlaceholder,
-    genMore,
-    getVisibleEvents,
-    isEventForCategory,
-    getEventsForDay,
-    getEventsForDayAll,
-    getEventsForDayTimed,
-    getScopedSlots,
+    ...slots,
+    day: (day: CalendarDaySlotScope) => {
+      let children = getSlotChildren(day, getEventsForDay, genDayEvent, false)
+      if (children && children.length > 0 && props.eventMore) {
+        children.push(genMore(day))
+      }
+      if (slotDay) {
+        const slot = slotDay(day)
+        if (slot) {
+          children = children ? children.concat(slot) : slot
+        }
+      }
+      return children
+    },
+    'day-header': (day: CalendarDaySlotScope) => {
+      let children = getSlotChildren(day, this.getEventsForDayAll, this.genDayEvent, false)
+
+      if (slotDayHeader) {
+        const slot = slotDayHeader(day)
+        if (slot) {
+          children = children ? children.concat(slot) : slot
+        }
+      }
+      return children
+    },
+    'day-body': (day: CalendarDayBodySlotScope) => {
+      const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
+      let children: VNode[] = [
+        this.$createElement('div', {
+          staticClass: 'v-event-timed-container',
+        }, events),
+      ]
+
+      if (slotDayBody) {
+        const slot = slotDayBody(day)
+        if (slot) {
+          children = children.concat(slot)
+        }
+      }
+      return children
+    },
   }
+}
+
+return {
+  noEvents,
+  parsedEvents,
+  parsedEventOverlapThreshold,
+  eventTimedFunction,
+  eventCategoryFunction,
+  eventTextColorFunction,
+  eventNameFunction,
+  eventModeFunction,
+  eventWeekdays,
+  categoryMode,
+  eventColorFunction,
+  parseEvent,
+  formatTime,
+  updateEventVisibility,
+  getEventsMap,
+  genEvent,
+  genDayEvent,
+  genTimedEvent,
+  genName,
+  genPlaceholder,
+  genMore,
+  getVisibleEvents,
+  isEventForCategory,
+  getEventsForDay,
+  getEventsForDayAll,
+  getEventsForDayTimed,
+  getScopedSlots,
+}
 }
