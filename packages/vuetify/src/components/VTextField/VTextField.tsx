@@ -135,6 +135,7 @@ export const VTextField = genericComponent<new <T>() => {
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
+      const hasLabel = !!(props.label || slots.label?.())
 
       return (
         <VInput
@@ -147,6 +148,7 @@ export const VTextField = genericComponent<new <T>() => {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-text-field--placeholder': props.placeholder && !hasLabel,
             },
           ]}
           onClick:prepend={ (e: MouseEvent) => emit('click:prepend', e) }
