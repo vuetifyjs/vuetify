@@ -18,7 +18,6 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
 import { useList } from './list'
 
 // Directives
@@ -129,8 +128,6 @@ export const VListItem = genericComponent<new () => {
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
     }))
-
-    useSelectLink(link, select)
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
