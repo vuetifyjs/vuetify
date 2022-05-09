@@ -15,7 +15,6 @@ import { useTeleport } from '@/composables/teleport'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useStack } from '@/composables/stack'
-import { useOverlay } from '@/composables/overlay'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -118,9 +117,9 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { activatorEl, activatorRef, activatorEvents } = useActivator(props, isActive)
-    const { dimensionStyles } = useDimension(props)
     const { isTop } = useStack(isActive)
+    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
+    const { dimensionStyles } = useDimension(props)
 
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
@@ -198,8 +197,6 @@ export const VOverlay = genericComponent<new () => {
       })
     }
 
-    const { overlayZIndex } = useOverlay(isActive)
-
     useRender(() => (
       <>
         { slots.activator?.({
@@ -228,7 +225,6 @@ export const VOverlay = genericComponent<new () => {
                 ]}
                 style={{
                   top: convertToUnit(top.value),
-                  zIndex: overlayZIndex.value,
                 }}
                 ref={ root }
                 {...attrs}
@@ -256,6 +252,7 @@ export const VOverlay = genericComponent<new () => {
                       dimensionStyles.value,
                       contentStyles.value,
                     ]}
+                    { ...toHandlers(contentEvents.value) }
                   >
                     { slots.default?.({ isActive }) }
                   </div>
@@ -271,6 +268,8 @@ export const VOverlay = genericComponent<new () => {
       animateClick,
       contentEl,
       activatorEl,
+      isTop,
+      updatePosition,
     }
   },
 })

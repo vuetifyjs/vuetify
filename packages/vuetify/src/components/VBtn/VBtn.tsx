@@ -33,6 +33,7 @@ export const VBtn = defineComponent({
   directives: { Ripple },
 
   props: {
+    active: Boolean,
     symbol: {
       type: null,
       default: VBtnToggleSymbol,
@@ -94,7 +95,7 @@ export const VBtn = defineComponent({
             'v-btn',
             group?.selectedClass.value,
             {
-              'v-btn--active': link.isExactActive?.value,
+              'v-btn--active': props.active,
               'v-btn--block': props.block,
               'v-btn--disabled': isDisabled.value,
               'v-btn--elevated': isElevated.value,

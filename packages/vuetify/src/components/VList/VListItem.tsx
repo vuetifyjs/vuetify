@@ -18,7 +18,6 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
 import { useList } from './list'
 
 // Directives
@@ -75,6 +74,7 @@ export const VListItem = genericComponent<new () => {
     subtitle: String,
     title: String,
     value: null,
+    link: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -129,8 +129,6 @@ export const VListItem = genericComponent<new () => {
       isIndeterminate: isIndeterminate.value,
     }))
 
-    useSelectLink(link, select)
-
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasColor = !list || isSelected.value || isActive.value
@@ -139,7 +137,7 @@ export const VListItem = genericComponent<new () => {
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || (props.value != null && !!list))
+      const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -174,7 +172,7 @@ export const VListItem = genericComponent<new () => {
             if (isGroupActivator) return
 
             link.navigate?.(e)
-            select(!isSelected.value, e)
+            props.value != null && select(!isSelected.value, e)
           })}
           v-ripple={ isClickable }
         >
