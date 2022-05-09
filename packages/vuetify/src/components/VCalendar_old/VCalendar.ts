@@ -98,7 +98,7 @@ export default CalendarWithEvents.extend({
         case 'day':
           component = VCalendarDaily
           maxDays = 1
-          weekdays = [start.weekday]
+          weekdays = [ start.weekday ]
           break
         case '4day':
           component = VCalendarDaily
@@ -253,7 +253,7 @@ export default CalendarWithEvents.extend({
       this.move(-amount)
     },
     timeToY (time: VTime, clamp = true): number | false {
-      const c = this.$children[0] as any
+      const c = this.$children[ 0 ] as any
 
       if (c && c.timeToY) {
         return c.timeToY(time, clamp)
@@ -262,7 +262,7 @@ export default CalendarWithEvents.extend({
       }
     },
     timeDelta (time: VTime): number | false {
-      const c = this.$children[0] as any
+      const c = this.$children[ 0 ] as any
 
       if (c && c.timeDelta) {
         return c.timeDelta(time)
@@ -271,7 +271,7 @@ export default CalendarWithEvents.extend({
       }
     },
     minutesToPixels (minutes: number): number {
-      const c = this.$children[0] as any
+      const c = this.$children[ 0 ] as any
 
       if (c && c.minutesToPixels) {
         return c.minutesToPixels(minutes)
@@ -280,7 +280,7 @@ export default CalendarWithEvents.extend({
       }
     },
     scrollToTime (time: VTime): boolean {
-      const c = this.$children[0] as any
+      const c = this.$children[ 0 ] as any
 
       if (c && c.scrollToTime) {
         return c.scrollToTime(time)
@@ -297,8 +297,8 @@ export default CalendarWithEvents.extend({
     getCategoryList (categories: CalendarCategory[]): CalendarCategory[] {
       if (!this.noEvents) {
         const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-          else if (typeof category === 'string') map[category] = { index, count: 0 }
+          if (typeof category === 'object' && category.categoryName) map[ category.categoryName ] = { index, count: 0 }
+          else if (typeof category === 'string') map[ category ] = { index, count: 0 }
           return map
         }, {})
 
@@ -317,9 +317,9 @@ export default CalendarWithEvents.extend({
             }
 
             if (category in categoryMap) {
-              categoryMap[category].count++
+              categoryMap[ category ].count++
             } else if (!this.categoryHideDynamic) {
-              categoryMap[category] = {
+              categoryMap[ category ] = {
                 index: categoryLength++,
                 count: 1,
               }
@@ -329,8 +329,8 @@ export default CalendarWithEvents.extend({
 
         if (!this.categoryShowAll) {
           for (const category in categoryMap) {
-            if (categoryMap[category].count === 0) {
-              delete categoryMap[category]
+            if (categoryMap[ category ].count === 0) {
+              delete categoryMap[ category ]
             }
           }
         }
@@ -364,18 +364,18 @@ export default CalendarWithEvents.extend({
         weekdays,
         categories,
       },
-      directives: [{
+      directives: [ {
         modifiers: { quiet: true },
         name: 'resize',
         value: this.updateEventVisibility,
-      }],
+      } ],
       on: {
         ...this.$listeners,
         'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
           if (this.$listeners.input) {
             this.$emit('input', day.date)
           }
-          if (this.$listeners['click:date']) {
+          if (this.$listeners[ 'click:date' ]) {
             this.$emit('click:date', day, e)
           }
         },
