@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, provide, ref, toRef } from 'vue'
-import { createExpanded, useGroupBy, useHeaders, useOptions, useSort, useSortedItems, useVirtual } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useOptions, useSelection, useSort, useSortedItems, useVirtual } from './composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -12,7 +12,7 @@ export const VDataTableVirtual = defineComponent({
   props: {
     itemHeight: {
       type: [String, Number],
-      default: 48,
+      default: 52,
     },
     itemsLength: {
       type: Number,
@@ -28,11 +28,12 @@ export const VDataTableVirtual = defineComponent({
   },
 
   setup (props, { slots }) {
+    const allItems = toRef(props, 'items')
     const { expanded } = createExpanded()
 
     const { headers, columns } = useHeaders(props)
     const { sortBy, toggleSort } = useSort(props)
-    const { sortedItems } = useSortedItems(toRef(props, 'items'), sortBy)
+    const { sortedItems } = useSortedItems(allItems, sortBy)
     const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
 
     const {
@@ -44,7 +45,8 @@ export const VDataTableVirtual = defineComponent({
       afterHeight,
       beforeHeight,
     } = useVirtual(props, computed(() => items.value.length + expanded.value.size))
-    // } = useVirtual(props, computed(() => props.itemsLength + expanded.value.size + numGroups.value - numHiddenItems.value))
+
+    const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = useSelection(props, allItems)
 
     const visibleItems = computed(() => {
       return items.value.slice(startIndex.value, stopIndex.value)
@@ -53,6 +55,12 @@ export const VDataTableVirtual = defineComponent({
     provide('v-data-table', {
       toggleGroup,
       toggleSort,
+      sortBy,
+      toggleSelect,
+      isSelected,
+      someSelected,
+      allSelected,
+      selectAll,
     })
 
     useOptions({

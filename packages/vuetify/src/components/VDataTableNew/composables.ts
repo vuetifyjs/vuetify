@@ -1,23 +1,66 @@
-import { createRange, getCurrentInstance, getObjectValueByPath } from '@/util'
+import { createRange, debounce, getCurrentInstance, getObjectValueByPath } from '@/util'
 import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
 
 import type { InjectionKey, Ref } from 'vue'
 import type { DataTableHeader } from './types'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useResizeObserver } from '@/composables/resizeObserver'
+
+// export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
+//   const { resizeRef: containerRef, contentRect } = useResizeObserver()
+//   const windowSize = computed(() => {
+//     return contentRect.value?.height ?? 0
+//   })
+//   const itemHeight = computed(() => 52)
+//   const visibleItems = computed(() => (windowSize.value / itemHeight.value) * 2)
+//   const startIndex = ref(0)
+//   const stopIndex = computed(() => Math.min(startIndex.value + visibleItems.value, itemsLength.value))
+//   const beforeHeight = computed(() => startIndex.value * itemHeight.value)
+//   const afterHeight = computed(() => (itemsLength.value * itemHeight.value) - beforeHeight.value - (visibleItems.value * itemHeight.value))
+//   const totalHeight = computed(() => itemsLength.value * itemsLength.value)
+//   const offsetStart = computed(() => beforeHeight.value)
+//   const isScrolling = ref(false)
+
+//   const foo = debounce(() => {
+//     const scrollTop = containerRef.value?.scrollTop
+//     startIndex.value = Math.max(0, Math.min(itemsLength.value - visibleItems.value, Math.floor((scrollTop - (visibleItems.value / 2)) / itemHeight.value)))
+//   }, 5)
+
+//   function onScroll () {
+//     console.log(containerRef.value?.scrollTop)
+//     foo()
+//   }
+
+//   onMounted(() => {
+//     console.log(containerRef.value)
+//     containerRef.value?.addEventListener('scroll', onScroll, { passive: true })
+//   })
+
+//   onBeforeUnmount(() => {
+//     containerRef.value?.removeEventListener('scroll', onScroll)
+//   })
+
+//   return {
+//     totalHeight,
+//     containerRef,
+//     offsetStart,
+//     startIndex,
+//     stopIndex,
+//     isScrolling,
+//     itemHeight,
+//     afterHeight,
+//     beforeHeight,
+//   }
+// }
 
 export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
   const vm = getCurrentInstance('useVirtual')
 
-  const containerRef = ref<HTMLElement>()
   const itemHeight = computed(() => parseInt(props.itemHeight, 10))
   const totalHeight = computed(() => itemsLength.value * itemHeight.value)
+  const { resizeRef: containerRef, contentRect } = useResizeObserver()
   const windowSize = computed(() => {
-    if (!containerRef.value) return 500
-
-    // @ts-ignore
-    const el = containerRef.value.$el ?? containerRef.value
-
-    return el.clientHeight
+    return contentRect.value?.height ?? 0
   })
   const visibleItems = computed(() => (windowSize.value / itemHeight.value) * 3)
   const startIndex = ref(0)
@@ -41,16 +84,10 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
     immediate: true,
   })
 
-  let startScroll: undefined | number
   let scrollTop: number
 
-  function tableScroll () {
+  const updateIndex = debounce(() => {
     if (!containerRef.value) return
-
-    if (!startScroll) startScroll = containerRef.value.scrollTop
-
-    isScrolling.value = true
-
     const direction = containerRef.value.scrollTop < scrollTop ? -1 : 1
     scrollTop = containerRef.value.scrollTop
     const windowMidPoint = scrollTop + (windowSize.value / 2)
@@ -60,22 +97,24 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
     } else if (direction === -1 && scrollTop - startOffset.value < visibleItemsHeight.value / 3) {
       startIndex.value = Math.max(0, Math.floor((scrollTop - visibleItemsHeight.value / 2) / itemHeight.value))
     }
+  }, 5)
+
+  function tableScroll () {
+    isScrolling.value = true
+
+    updateIndex()
 
     clearTimeout(scrollTimeout)
 
     scrollTimeout = setTimeout(() => {
-      if (!containerRef.value) return
-
       isScrolling.value = false
-      startScroll = undefined
     }, 100)
   }
 
   onMounted(() => {
     if (!containerRef.value) return
 
-    // @ts-ignore
-    const el = containerRef.value.$el ?? containerRef.value
+    const el = containerRef.value
     el.addEventListener('scroll', tableScroll, { passive: true })
   })
 

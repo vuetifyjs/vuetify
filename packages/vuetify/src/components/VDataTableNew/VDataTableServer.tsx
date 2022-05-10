@@ -7,7 +7,7 @@ import { VDataTableRows } from './VDataTableRows'
 // Utilities
 import { provide, toRef } from 'vue'
 import { defineComponent } from '@/util'
-import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSort } from '../composables'
+import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSort } from './composables'
 
 // Types
 import type { PropType } from 'vue'

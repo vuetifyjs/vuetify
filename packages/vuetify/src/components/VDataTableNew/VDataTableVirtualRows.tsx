@@ -2,14 +2,14 @@
 import { VDataTableRow } from '@/components'
 
 // Composables
-import { useExpanded } from '../composables'
-import { VDataTableColumn, VDataTableRows } from './VDataTableRows'
+import { useExpanded } from './composables'
 
 // Utilities
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VDataTableRows } from './VDataTableRows'
 
 export const VDataTableVirtualRows = defineComponent({
   name: 'VDataTableVirtualRows',
@@ -34,19 +34,17 @@ export const VDataTableVirtualRows = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { expanded, expand } = useExpanded()
-
     return () => {
       return (
         <>
-          <tr style={{ height: convertToUnit(props.before) }}>
-            <td colspan={props.columns.length} style={{ height: convertToUnit(props.before) }}></td>
+          <tr style={{ height: convertToUnit(props.before), border: 0 }}>
+            <td colspan={props.columns.length} style={{ height: convertToUnit(props.before), border: 0 }}></td>
           </tr>
 
           { props.showScrollingRow
             ? props.items.map((item, i) => (
               <>
-                { slots['scrolling-row']?.({ item, columns: props.columns }) ?? (
+                {/* { slots['scrolling-row']?.({ item, columns: props.columns }) ?? (
                   <VDataTableRow key={ `row_${item.id}` }>
                     <VDataTableColumn height={ props.rowHeight } colspan={ props.columns.length }>
                       Loading...
@@ -54,7 +52,8 @@ export const VDataTableVirtualRows = defineComponent({
                   </VDataTableRow>
                 ) }
 
-                { expanded.value.has(item.id) && slots['expanded-row']?.() }
+                { expanded.value.has(item.id) && slots['expanded-row']?.() } */}
+                <div>foo</div>
               </>
             ))
             : (
@@ -67,8 +66,8 @@ export const VDataTableVirtualRows = defineComponent({
             )
           }
 
-          <tr style={{ height: convertToUnit(props.after) }}>
-            <td colspan={props.columns.length} style={{ height: convertToUnit(props.after) }}></td>
+          <tr style={{ height: convertToUnit(props.after), border: 0 }}>
+            <td colspan={props.columns.length} style={{ height: convertToUnit(props.after), border: 0 }}></td>
           </tr>
         </>
       )

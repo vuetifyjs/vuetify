@@ -5,8 +5,8 @@ import { VDataTableRows } from './VDataTableRows'
 import './VDataTable.sass'
 
 import type { PropType } from 'vue'
-import type { DataTableHeader } from '../types'
-import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSelection, useSort, useSortedItems } from '../composables'
+import type { DataTableHeader } from './types'
+import { createExpanded, useGroupBy, useHeaders, useOptions, usePagination, useSelection, useSort, useSortedItems } from './composables'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VTable } from '@/components'
 

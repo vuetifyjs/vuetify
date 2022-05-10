@@ -4,7 +4,7 @@ import { convertToUnit, defineComponent } from '@/util'
 import type { PropType } from 'vue'
 import { VIcon } from '@/components/VIcon'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import type { DataTableHeader } from '../types'
+import type { DataTableHeader } from './types'
 import { VCheckbox } from '@/components/VCheckbox'
 
 export const VDataTableHeaders = defineComponent({
@@ -64,6 +64,7 @@ export const VDataTableHeaders = defineComponent({
               'v-data-table__th--sortable': column.sortable !== false && column.value,
               'v-data-table__th--sorted': !!props.sortBy?.find(x => x.key === column.value),
             },
+            column.className,
           ]}
           style={{
             ...column.style,
@@ -75,7 +76,7 @@ export const VDataTableHeaders = defineComponent({
           role="columnheader"
           colspan={column.colspan}
           rowspan={column.rowspan}
-          onClick={column.sortable ? () => toggleSort(column.value) : undefined}
+          onClick={column.sortable !== false ? () => toggleSort(column.value) : undefined}
         >
           { column.value === 'data-table-select' ? (
             <VCheckbox
