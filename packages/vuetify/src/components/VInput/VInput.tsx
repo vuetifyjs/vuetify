@@ -66,12 +66,10 @@ export const VInput = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:prepend': (e: MouseEvent) => true,
-    'click:append': (e: MouseEvent) => true,
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
     const {
       errorMessages,
@@ -131,7 +129,7 @@ export const VInput = genericComponent<new <T>() => {
 
               { props.prependIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:prepend', e) }
+                  onClick={ attrs['onClick:prepend'] }
                   icon={ props.prependIcon }
                 />
               ) }
@@ -152,7 +150,7 @@ export const VInput = genericComponent<new <T>() => {
 
               { props.appendIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:append', e) }
+                  onClick={ attrs['onClick:append'] }
                   icon={ props.appendIcon }
                 />
               ) }
