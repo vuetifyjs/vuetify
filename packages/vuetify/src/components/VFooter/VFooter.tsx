@@ -21,7 +21,6 @@ export const VFooter = defineComponent({
   props: {
     app: Boolean,
     color: String,
-    inset: Boolean,
     height: {
       type: [Number, String],
       default: 'auto',
@@ -29,9 +28,7 @@ export const VFooter = defineComponent({
 
     ...makeBorderProps(),
     ...makeElevationProps(),
-    ...makeLayoutItemProps({
-      priority: -1,
-    }),
+    ...makeLayoutItemProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'footer' }),
     ...makeThemeProps(),
@@ -52,7 +49,7 @@ export const VFooter = defineComponent({
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => props.inset ? 0 : parseInt(props.priority, 10)),
+      priority: computed(() => parseInt(props.priority, 10)),
       position: computed(() => 'bottom'),
       layoutSize: height,
       elementSize: computed(() => props.height === 'auto' ? undefined : height.value),
