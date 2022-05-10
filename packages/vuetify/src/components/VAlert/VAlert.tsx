@@ -10,11 +10,13 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
@@ -24,8 +26,6 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { provideDefaults } from '@/composables/defaults'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
