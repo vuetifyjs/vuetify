@@ -16,6 +16,7 @@
   transition: $toolbar-transition
   transition-property: height, transform, max-width
 
+  @include tools.border($toolbar-border...)
   @include tools.elevation($toolbar-elevation)
   @include tools.rounded($toolbar-border-radius)
   @include tools.theme($toolbar-theme...)
