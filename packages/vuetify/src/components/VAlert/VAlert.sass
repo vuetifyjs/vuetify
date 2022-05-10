@@ -87,8 +87,11 @@
   margin-inline-start: $alert-append-margin-inline-start
 
 .v-alert__append
-  align-self: center
+  align-self: flex-start
   grid-area: append
+
+  + .v-alert__close
+    margin-inline-start: $alert-append-close-margin-inline-start
 
 .v-alert-icon,
 .v-alert__prepend
