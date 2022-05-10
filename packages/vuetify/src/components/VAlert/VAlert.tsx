@@ -189,11 +189,7 @@ export const VAlert = defineComponent({
             </VAlertText>
           ) }
 
-          { slots.default && (
-            <div class="v-alert__content">
-              { slots.default?.() }
-            </div>
-          ) }
+          { slots.default?.() }
 
           { hasClose && (
             <div
