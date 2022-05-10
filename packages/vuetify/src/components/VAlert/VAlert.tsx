@@ -191,6 +191,12 @@ export const VAlert = defineComponent({
 
           { slots.default?.() }
 
+          { slots.append && (
+            <div class="v-alert__append">
+              { slots.append() }
+            </div>
+          ) }
+
           { hasClose && (
             <div
               class="v-alert__close"

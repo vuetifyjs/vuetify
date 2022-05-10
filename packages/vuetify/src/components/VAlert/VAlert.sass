@@ -5,8 +5,8 @@
 .v-alert
   display: grid
   flex: 1 1
-  grid-template-areas: "prepend title close" ". text ."
-  grid-template-columns: max-content auto max-content
+  grid-template-areas: "prepend title append close" ". text append ."
+  grid-template-columns: max-content auto max-content max-content
   position: relative
   padding: $alert-padding
   overflow: hidden
@@ -17,7 +17,7 @@
   @include tools.variant($alert-variants...)
 
   &--prominent
-    grid-template-areas: "prepend title close" "prepend text ."
+    grid-template-areas: "prepend title append close" "prepend text append ."
 
   &.v-alert--border
     --v-border-opacity: #{$alert-border-opacity}
@@ -76,7 +76,17 @@
   user-select: none
 
 .v-alert-text
+  align-self: center
   grid-area: auto / 2 / auto / 2
+  overflow: hidden
+
+.v-alert__append,
+.v-alert__close
+  margin-inline-start: $alert-append-margin-inline-start
+
+.v-alert__append
+  align-self: center
+  grid-area: append
 
 .v-alert-icon,
 .v-alert__prepend
@@ -92,6 +102,7 @@
 
 .v-alert__underlay
   grid-area: none
+  position: absolute
 
   .v-alert--border-start &
     border-top-left-radius: 0
@@ -108,9 +119,6 @@
   .v-alert--border-bottom &
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
-
-.v-alert-text
-  overflow: hidden
 
 .v-alert-title
   align-items: center
