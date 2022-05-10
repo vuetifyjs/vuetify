@@ -5,6 +5,7 @@ import './VAlert.sass'
 import { VAlertIcon } from './VAlertIcon'
 import { VAlertText } from './VAlertText'
 import { VAlertTitle } from './VAlertTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -198,20 +199,24 @@ export const VAlert = defineComponent({
           ) }
 
           { hasClose && (
-            <div
-              class="v-alert__close"
-              onClick={ onCloseClick }
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  icon: props.closeIcon,
+                  size: 'small',
+                },
+              }}
             >
-              { slots.close
-                ? slots.close()
-                : (
-                  <VIcon
-                    icon={ props.closeIcon }
-                    size="small"
-                  />
-                )
-              }
-            </div>
+              <div
+                class="v-alert__close"
+                onClick={ onCloseClick }
+              >
+                { slots.close
+                  ? slots.close()
+                  : (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
         </props.tag>
       )

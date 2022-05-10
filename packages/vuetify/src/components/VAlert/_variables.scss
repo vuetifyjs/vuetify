@@ -1,7 +1,8 @@
+// Imports
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VAlert
 $alert-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $alert-border-color: currentColor !default;
 $alert-border-opacity: .38 !default;
@@ -18,17 +19,23 @@ $alert-plain-transition: .2s opacity settings.$standard-easing !default;
 $alert-positions: absolute fixed sticky !default;
 $alert-prepend-margin-inline-end: 16px !default;
 $alert-append-margin-inline-start: 16px !default;
-$alert-text-line-height: 1.35 !default;
+
+// VAlertTitle
 $alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !default;
 $alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
 $alert-title-hyphens: auto !default;
 $alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
 $alert-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $alert-title-overflow-wrap: normal !default;
+$alert-title-prepend-margin-top: -0.25rem !default;
 $alert-title-text-transform: none !default;
 $alert-title-word-break: normal !default;
 $alert-title-word-wrap: break-word !default;
 
+// VAlertText
+$alert-text-line-height: 1.35 !default;
+
+// Lists
 $alert-border: (
   $alert-border-color,
   $alert-border-style,

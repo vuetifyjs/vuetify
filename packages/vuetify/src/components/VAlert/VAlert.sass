@@ -1,4 +1,6 @@
 @forward './variables'
+
+// Imports
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -68,7 +70,6 @@
     border-bottom-width: $alert-border-thin-width
 
 .v-alert__close
-  align-self: flex-start
   cursor: pointer
   display: flex
   flex: 0 1 auto
@@ -82,6 +83,7 @@
 
 .v-alert__append,
 .v-alert__close
+  align-self: flex-start
   margin-inline-start: $alert-append-margin-inline-start
 
 .v-alert__append
@@ -98,7 +100,7 @@
     align-self: center
 
   + .v-alert-title
-    margin-top: -0.25rem
+    margin-top: $alert-title-prepend-margin-top
 
 .v-alert__underlay
   grid-area: none
@@ -124,9 +126,9 @@
   align-items: center
   align-self: center
   display: flex
-  grid-area: title
   font-size: $alert-title-font-size
   font-weight: $alert-title-font-weight
+  grid-area: title
   hyphens: $alert-title-hyphens
   letter-spacing: $alert-title-letter-spacing
   line-height: $alert-title-line-height
