@@ -3,13 +3,13 @@ import './VCheckbox.sass'
 
 // Components
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
+import { VCheckboxBtn } from './VCheckboxBtn'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed } from 'vue'
 import { defineComponent, filterInputAttrs, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -43,16 +43,6 @@ export const VCheckbox = defineComponent({
 
   setup (props, { attrs, slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
-    const falseIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.falseIcon
-    })
-    const trueIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.trueIcon
-    })
 
     function onChange () {
       if (indeterminate.value) {
@@ -77,13 +67,10 @@ export const VCheckbox = defineComponent({
               isDisabled,
               isReadonly,
             }) => (
-              <VSelectionControl
+              <VCheckboxBtn
                 { ...controlProps }
-                type="checkbox"
+                indeterminate={ indeterminate.value }
                 onUpdate:modelValue={ onChange }
-                falseIcon={ falseIcon.value }
-                trueIcon={ trueIcon.value }
-                aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }

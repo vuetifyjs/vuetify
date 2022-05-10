@@ -208,6 +208,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
         })
         : props.label
       const type = group?.type.value ?? props.type
+      const [rootAttrs, inputAttrs] = pick(attrs, ['class'])
 
       return (
         <div
@@ -223,6 +224,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             },
             densityClasses.value,
           ]}
+          { ...rootAttrs }
         >
           <div class={[
             'v-selection-control__wrapper',
@@ -255,8 +257,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 type={ type }
                 value={ trueValue.value }
                 name={ group?.name.value ?? props.name }
+                checked={ type === 'checkbox' ? model.value : undefined }
                 aria-checked={ type === 'checkbox' ? model.value : undefined }
-                { ...attrs }
+                { ...inputAttrs }
               />
 
               { slots.input?.({
@@ -271,9 +274,11 @@ export const VSelectionControl = genericComponent<new <T>() => {
             </div>
           </div>
 
-          <VLabel for={ id.value }>
-            { label }
-          </VLabel>
+          { label && (
+            <VLabel for={ id.value }>
+              { label }
+            </VLabel>
+          ) }
         </div>
       )
     })
