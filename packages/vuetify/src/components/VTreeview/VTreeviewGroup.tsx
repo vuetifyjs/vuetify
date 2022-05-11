@@ -96,7 +96,15 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalTreeviewIt
             { slots.activator?.({ props: activatorProps.value }) }
           </VTreeviewGroupActivator>
           <MaybeTransition transition={ props.transition }>
-            <div class="v-treeview-group__items" v-show={ isOpen.value }>
+            <div
+              class={[
+                'v-treeview-group__items',
+                {
+                  'v-treeview-group__items--open': isOpen.value,
+                },
+              ]}
+              v-show={ isOpen.value }
+            >
               { props.showLines && (
                 <div class="v-treeview-group__line"></div>
               ) }
