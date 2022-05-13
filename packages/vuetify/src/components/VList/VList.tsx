@@ -23,7 +23,7 @@ import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 import { makeItemsProps, useItems } from '@/composables/items'
