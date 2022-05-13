@@ -34,7 +34,7 @@ export const VIcon = defineComponent({
 
   props: makeVIconProps(),
 
-  setup (props, { slots }) {
+  setup (props, { attrs, slots }) {
     let slotIcon: ComputedRef<string | undefined> | undefined
     if (slots.default) {
       slotIcon = computed(() => {
@@ -64,6 +64,7 @@ export const VIcon = defineComponent({
             textColorClasses.value,
             themeClasses.value,
             {
+              'v-icon--clickable': !!attrs.onClick,
               'v-icon--start': props.start,
               'v-icon--end': props.end,
             },

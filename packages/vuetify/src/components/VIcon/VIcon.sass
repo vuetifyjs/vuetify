@@ -18,6 +18,9 @@
   vertical-align: $icon-vertical-align
   width: $icon-size
 
+  &--clickable
+    cursor: pointer
+
   @each $name in settings.$sizes
     &--size-#{$name}
       font-size: calc(var(--v-icon-size-multiplier) * #{map.get($icon-sizes, $name)})
