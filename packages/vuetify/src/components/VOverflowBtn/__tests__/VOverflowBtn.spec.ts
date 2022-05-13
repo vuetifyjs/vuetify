@@ -108,4 +108,22 @@ describe('VOverflowBtn.js', () => {
 
     expect(callback).toHaveBeenCalled()
   })
+
+  it('should show label with persistentPlaceholder property set to true', async () => {
+    const wrapper = mountFunction({
+      propsData: {
+        items: ['foo'],
+        label: 'Some label',
+        persistentPlaceholder: true,
+      },
+    })
+
+    expect(wrapper.html()).toMatchSnapshot()
+
+    wrapper.find('input').trigger('click')
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.html()).toMatchSnapshot()
+  })
 })
