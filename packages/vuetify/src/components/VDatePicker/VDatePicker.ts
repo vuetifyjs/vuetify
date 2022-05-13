@@ -356,7 +356,7 @@ export default mixins(
 
       this.inputYear = parseInt(year, 10)
       this.inputMonth = parseInt(month, 10) - 1
- 
+
       if (this.type === 'date') {
         if (this.inputDay) {
           this.inputDay = Math.min(this.inputDay, daysInMonth(this.inputYear, this.inputMonth + 1))
