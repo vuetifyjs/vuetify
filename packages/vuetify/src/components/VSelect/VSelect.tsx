@@ -21,7 +21,6 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 // Types
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
 import { makeItemsProps, useItems } from '@/composables/items'
 
 export interface InternalSelectItem {
@@ -38,6 +37,13 @@ export interface DefaultChipSlot extends DefaultSelectionSlot {
   props: {
     'onClick:close': (e: Event) => void
     modelValue: any
+  }
+}
+
+export function genItem (item: any) {
+  return {
+    title: String((typeof item === 'object' ? item.title : item) ?? ''),
+    value: (typeof item === 'object' ? item.value : item),
   }
 }
 
@@ -189,8 +195,7 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { items.value.map(item => (
                         <VListItem
-                          title={ item.title }
-                          value={ item.value }
+                          { ...item }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => select(item) }
                         />

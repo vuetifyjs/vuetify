@@ -56,7 +56,7 @@ export function useItems (props: ItemProps) {
         ...props.itemProps(item),
       }
 
-      if (children) newItem.children = children
+      if (children.length) newItem.children = children
 
       array.push(newItem)
     }
