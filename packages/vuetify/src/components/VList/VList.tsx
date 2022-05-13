@@ -9,6 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeItemsProps, useItems } from '@/composables/items'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
@@ -26,7 +27,6 @@ import { genericComponent, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import { makeItemsProps, useItems } from '@/composables/items'
 
 export type ListItem = {
   [key: string]: any

@@ -1,9 +1,10 @@
 // Utilities
-import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+
 export interface InternalItem {
   [key: string]: any
   children?: InternalItem[]

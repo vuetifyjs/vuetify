@@ -9,6 +9,7 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
@@ -21,7 +22,6 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 // Types
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
-import { makeItemsProps, useItems } from '@/composables/items'
 
 export interface InternalSelectItem {
   title: string
