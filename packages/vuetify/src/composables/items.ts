@@ -1,16 +1,28 @@
 // Utilities
+import type { PropType } from 'vue'
 import { computed } from 'vue'
 import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
-export interface ItemProps {
+export interface InternalItem {
   [key: string]: any
+  children?: InternalItem[]
+  title: string
+  value: any
+}
+
+export interface ItemProps {
+  items: (string | Partial<InternalItem>)[]
+  itemTitle: string
+  itemValue: any
+  itemChildren: string
+  itemProps: (item: any) => Partial<InternalItem>
 }
 
 // Composables
 export const makeItemsProps = propsFactory({
   items: {
-    type: Array,
+    type: Array as PropType<ItemProps['items']>,
     default: () => ([]),
   },
   itemTitle: {
@@ -26,17 +38,17 @@ export const makeItemsProps = propsFactory({
     default: 'children',
   },
   itemProps: {
-    type: Function,
+    type: Function as PropType<ItemProps['itemProps']>,
     default: (item: any) => ({}),
   },
 }, 'item')
 
 export function useItems (props: ItemProps) {
-  const items = computed(() => {
-    const array = []
+  function transformItems (items: ItemProps['items']) {
+    const array: InternalItem[] = []
 
-    for (const item of props.items) {
-      const children = item[props.itemChildren]
+    for (const item of items) {
+      const children = transformItems(getPropertyFromItem(item, props.itemChildren, []))
 
       const newItem = {
         title: getPropertyFromItem(item, props.itemTitle, item),
@@ -50,7 +62,9 @@ export function useItems (props: ItemProps) {
     }
 
     return array
-  })
+  }
+
+  const items = computed(() => transformItems(props.items))
 
   return { items }
 }

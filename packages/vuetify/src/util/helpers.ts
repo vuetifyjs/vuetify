@@ -60,7 +60,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
 type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
-  item: object,
+  item: any,
   property: SelectItemKey,
   fallback?: any
 ): any {
