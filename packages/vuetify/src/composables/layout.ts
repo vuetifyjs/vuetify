@@ -27,7 +27,7 @@ interface LayoutProvide {
       priority: Ref<number>
       position: Ref<Position>
       layoutSize: Ref<number | string>
-      elementSize: Ref<number | string>
+      elementSize: Ref<number | string | undefined>
       active: Ref<boolean>
       disableTransitions?: Ref<boolean>
       absolute: Ref<boolean | undefined>
@@ -83,7 +83,7 @@ export function useLayoutItem (options: {
   priority: Ref<number>
   position: Ref<Position>
   layoutSize: Ref<number | string>
-  elementSize: Ref<number | string>
+  elementSize: Ref<number | string | undefined>
   active: Ref<boolean>
   disableTransitions?: Ref<boolean>
   absolute: Ref<boolean | undefined>
@@ -286,12 +286,12 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         return {
           ...styles,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
+          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
           marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
           marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
           marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
           marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
+          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
         }
       })
 
