@@ -59,15 +59,12 @@ export const VDialog = genericComponent<new () => {
       if (
         before !== after &&
         overlay.value?.contentEl &&
+        // We're the topmost dialog
+        overlay.value?.isTop &&
         // It isn't the document or the dialog body
         ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the dialog body
         !overlay.value.contentEl.contains(after)
-        // We're the topmost dialog
-        // TODO: this.activeZIndex >= this.getMaxZIndex() &&
-        // It isn't inside a dependent element (like a menu)
-        // TODO: !this.getOpenDependentElements().some(el => el.contains(target))
-        // So we must have focused something outside the dialog and its children
       ) {
         const focusable = [...overlay.value.contentEl.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
