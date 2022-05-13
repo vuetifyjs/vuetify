@@ -13,7 +13,7 @@ export const makeItemsProps = propsFactory({
     type: Array,
     default: () => ([]),
   },
-  itemText: {
+  itemTitle: {
     type: String,
     default: 'title',
   },
@@ -39,7 +39,7 @@ export function useItems (props: ItemProps) {
       const children = item[props.itemChildren]
 
       const newItem = {
-        [`${props.itemText ?? 'text'}`]: item[props.itemText],
+        title: getPropertyFromItem(item, props.itemTitle, item),
         value: getPropertyFromItem(item, props.itemValue, item),
         ...props.itemProps(item),
       }
