@@ -139,7 +139,6 @@ export const VTextField = genericComponent<new <T>() => {
           class={[
             'v-text-field',
             {
-              'v-text-field--persistent-placeholder': props.persistentPlaceholder,
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),

@@ -7,10 +7,6 @@
 @use '../VInput/variables' as *
 
 .v-textarea
-  .v-field--active
-    textarea
-      opacity: 1
-
   .v-field__input
     flex: 1 1 auto
     line-height: $textarea-line-height
@@ -33,9 +29,16 @@
     height: 0 !important
     pointer-events: none
 
+  .v-field--has-label
+    textarea
+      opacity: 0
+
+  .v-field--active
+    textarea
+      opacity: 1
+
   textarea
     flex: 1
-    opacity: 0
     transition: .15s opacity settings.$standard-easing
 
     &:focus,

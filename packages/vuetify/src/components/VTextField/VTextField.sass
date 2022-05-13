@@ -8,7 +8,6 @@
   input
     color: inherit
     flex: $text-field-input-flex
-    opacity: 0
     transition: $text-field-input-transition
 
     &:focus,
@@ -32,6 +31,10 @@
   .v-input__details
     padding-inline-start: $text-field-details-padding-inline
     padding-inline-end: $text-field-details-padding-inline
+
+  .v-field--has-label
+    input
+      opacity: 0
 
   .v-field--active
     input
@@ -73,8 +76,4 @@
   &--flush-details
     .v-input__details
       padding: 0
-
-  &--persistent-placeholder
-    input
-      opacity: 1
 /* endregion */

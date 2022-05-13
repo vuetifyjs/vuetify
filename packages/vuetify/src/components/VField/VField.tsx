@@ -211,6 +211,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
+              'v-field--has-label': !!label,
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
