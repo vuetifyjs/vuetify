@@ -23,6 +23,7 @@ export * from './composables'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
+  blueprint?: Partial<VuetifyOptions>
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
@@ -32,8 +33,10 @@ export interface VuetifyOptions {
   locale?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions)
 }
 
-export const createVuetify = (options: VuetifyOptions = {}) => {
+export const createVuetify = (vuetify: VuetifyOptions = {}) => {
   const install = (app: App) => {
+    const { blueprint, ...rest } = vuetify
+    const options = mergeDeep(blueprint, rest)
     const {
       aliases = {},
       components = {},
