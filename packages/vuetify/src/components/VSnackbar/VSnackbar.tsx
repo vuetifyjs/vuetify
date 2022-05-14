@@ -14,6 +14,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 // Utilities
 import { onMounted, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
@@ -35,6 +36,7 @@ export const VSnackbar = defineComponent({
     modelValue: Boolean,
 
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeVariantProps(),
     ...makeTransitionProps({ transition: 'v-snackbar-transition' }),
   },
@@ -48,6 +50,7 @@ export const VSnackbar = defineComponent({
     const { positionClasses, positionStyles } = usePosition(props)
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { roundedClasses } = useRounded(props)
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -104,6 +107,7 @@ export const VSnackbar = defineComponent({
           class={[
             'v-snackbar__wrapper',
             colorClasses.value,
+            roundedClasses.value,
             variantClasses.value,
           ]}
           onPointerenter={ onPointerenter }
