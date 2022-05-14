@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, propsFactory } from '@/util'
+import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -49,15 +49,17 @@ export function useItems (props: ItemProps) {
     const array: InternalItem[] = []
 
     for (const item of items) {
-      const children = transformItems(getPropertyFromItem(item, props.itemChildren, []))
+      const title = getPropertyFromItem(item, props.itemTitle, item)
+      const value = getPropertyFromItem(item, props.itemValue, title)
+      const children = getObjectValueByPath(item, props.itemChildren, [])
 
       const newItem = {
-        title: getPropertyFromItem(item, props.itemTitle, item),
-        value: getPropertyFromItem(item, props.itemValue, item),
-        ...props.itemProps(item),
+        title,
+        value,
+        ...props.itemProps?.(item),
       }
 
-      if (children.length) newItem.children = children
+      if (children.length) newItem.children = transformItems(children)
 
       array.push(newItem)
     }
