@@ -7,9 +7,9 @@ import type { PropType } from 'vue'
 
 export interface InternalItem {
   [key: string]: any
-  children?: InternalItem[]
   title: string
   value: any
+  children?: InternalItem[]
 }
 
 export interface ItemProps {
