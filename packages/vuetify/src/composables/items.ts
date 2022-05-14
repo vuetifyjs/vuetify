@@ -44,30 +44,34 @@ export const makeItemsProps = propsFactory({
   },
 }, 'item')
 
-export function useItems (props: ItemProps) {
-  function transformItems (items: ItemProps['items']) {
-    const array: InternalItem[] = []
+export function transformItem (props: ItemProps, item: any) {
+  const title = getPropertyFromItem(item, props.itemTitle, item)
+  const value = getPropertyFromItem(item, props.itemValue, title)
+  const children = getObjectValueByPath(item, props.itemChildren, [])
 
-    for (const item of items) {
-      const title = getPropertyFromItem(item, props.itemTitle, item)
-      const value = getPropertyFromItem(item, props.itemValue, title)
-      const children = getObjectValueByPath(item, props.itemChildren, [])
-
-      const newItem = {
-        title,
-        value,
-        ...props.itemProps?.(item),
-      }
-
-      if (children.length) newItem.children = transformItems(children)
-
-      array.push(newItem)
-    }
-
-    return array
+  const newItem = {
+    title,
+    value,
+    ...props.itemProps?.(item),
   }
 
-  const items = computed(() => transformItems(props.items))
+  if (children.length) newItem.children = transformItems(props, children)
+
+  return newItem
+}
+
+export function transformItems (props: ItemProps, items: ItemProps['items']) {
+  const array: InternalItem[] = []
+
+  for (const item of items) {
+    array.push(transformItem(props, item))
+  }
+
+  return array
+}
+
+export function useItems (props: ItemProps) {
+  const items = computed(() => transformItems(props, props.items))
 
   return { items }
 }

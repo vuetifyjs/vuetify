@@ -40,13 +40,6 @@ export interface DefaultChipSlot extends DefaultSelectionSlot {
   }
 }
 
-export function genItem (item: any) {
-  return {
-    title: String((typeof item === 'object' ? item.title : item) ?? ''),
-    value: (typeof item === 'object' ? item.value : item),
-  }
-}
-
 export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
   text: string
 })
