@@ -4,6 +4,7 @@ import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { SelectItemKey } from '@/util'
 
 export interface InternalItem {
   [key: string]: any
@@ -14,8 +15,8 @@ export interface InternalItem {
 
 export interface ItemProps {
   items: (string | Partial<InternalItem>)[]
-  itemTitle: string
-  itemValue: any
+  itemTitle: SelectItemKey
+  itemValue: SelectItemKey
   itemChildren: string
   itemProps: (item: any) => Partial<InternalItem>
 }
@@ -27,11 +28,11 @@ export const makeItemsProps = propsFactory({
     default: () => ([]),
   },
   itemTitle: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'title',
   },
   itemValue: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
   },
   itemChildren: {
