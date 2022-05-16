@@ -5,7 +5,8 @@ import './VCombobox.sass'
 import { genItem, makeSelectProps } from '@/components/VSelect/VSelect'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VList, VListItem } from '@/components/VList'
+import { VDivider } from '@/components/VDivider'
+import { VList, VListItem, VListItemTitle, VListSubheader } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
@@ -41,9 +42,9 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
   return typeof matches === 'number' && ~matches
     ? (
       <>
-        <span class="v-combobox__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-combobox__mask">{ text.substr(matches, length) }</span>
-        <span class="v-combobox__unmask">{ text.substr(matches + length) }</span>
+        <span class="v-combobox__unmask">{ text.substring(0, matches) }</span>
+        <span class="v-combobox__mask">{ text.substring(matches, length) }</span>
+        <span class="v-combobox__unmask">{ text.substring(matches + length) }</span>
       </>
     )
     : text
@@ -54,6 +55,7 @@ export const VCombobox = genericComponent<new <T>() => {
     chip: [DefaultChipSlot]
     default: []
     selection: [DefaultComboboxSlot]
+    item: []
   }>
 }>()({
   name: 'VCombobox',
@@ -326,21 +328,30 @@ export const VCombobox = genericComponent<new <T>() => {
                         <VListItem title={ t(props.noDataText) } />
                       )) }
 
-                      { filteredItems.value.map(({ item, matches }) => (
-                        <VListItem
-                          value={ item.value }
-                          onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => select(item) }
-                        >
-                          {{
-                            title: () => {
-                              return isPristine.value
-                                ? item.title
-                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
-                            },
-                          }}
-                        </VListItem>
-                      )) }
+                      { filteredItems.value.map(({ item, matches }) => {
+                        if (item.divider) {
+                          return (<VDivider />)
+                        } else if (item.header) {
+                          return (<VListSubheader>{ item.header }</VListSubheader>)
+                        } else {
+                          return (
+                            <VListItem
+                              value={ item.value }
+                              onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                              onClick={ () => select(item) }
+                            >
+                              { slots.item
+                                ? slots.item({ item, matches, isPristine: isPristine.value })
+                                : (
+                                  <VListItemTitle>{
+                                    isPristine.value ? item.title : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                                  }</VListItemTitle>
+                                )
+                              }
+                            </VListItem>
+                          )
+                        }
+                      })}
                     </VList>
                   </VMenu>
                 ) }

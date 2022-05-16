@@ -46,6 +46,8 @@ export type SelectItem = string | (string | number)[] | ((item: Record<string, a
 
 export function genItem (item: any) {
   return {
+    header: String((typeof item === 'object' ? item.header : '') ?? ''),
+    divider: Boolean((typeof item === 'object' ? item.divider : false) ?? false),
     title: String((typeof item === 'object' ? item.title : item) ?? ''),
     value: (typeof item === 'object' ? item.value : item),
   }
