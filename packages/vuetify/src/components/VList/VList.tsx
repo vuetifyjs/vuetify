@@ -31,7 +31,6 @@ import type { ListGroupActivatorSlot } from './VListGroup'
 export type ListItem = {
   [key: string]: any
   $type?: 'item' | 'subheader' | 'divider'
-  $children?: (string | ListItem)[]
 }
 
 export type InternalListItem = {
@@ -46,14 +45,14 @@ const parseItems = (items?: (string | ListItem)[]): InternalListItem[] | undefin
   return items.map(item => {
     if (typeof item === 'string') return { type: 'item', value: item, title: item }
 
-    const { $type, $children, ...props } = item
+    const { $type, children, ...props } = item
 
     props.title = props.text ?? props.title
 
     if ($type === 'subheader') return { type: 'subheader', props }
     if ($type === 'divider') return { type: 'divider', props }
 
-    return { type: 'item', props, children: parseItems($children) }
+    return { type: 'item', props, children: parseItems(children) }
   })
 }
 
