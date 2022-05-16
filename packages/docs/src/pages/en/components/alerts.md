@@ -54,7 +54,7 @@ The recommended placement of elements inside of `v-alert` is:
 
 ## Implementation
 
-Unlike the `v-banner` component, `v-alert` is intended to be re-used throughout your application as call-outs that draw a user's attention.
+Unlike the `v-banner` component, `v-alert` is intended to be re-used throughout your application as callouts that draw a user's attention.
 
 ### Props
 
@@ -85,33 +85,6 @@ The **density** prop supports 3 levels of component height; **default**, **comfo
 `v-alert` has 6 style variants, **contained, contained-flat, contained-text, outlined, plain,** and **text**. By default, the `v-alert` component is **contained-flat**; which means that it has a solid background and does not have a box-shadow (elevation).
 
 <example file="v-alert/prop-variant" />
-
-All Vuetify components are globally configurable which makes it easy to create your own design system using our framework. The following example demonstrates how to set the default **variant** and other properties globally for `v-alert`:
-
-```js { resource="src/plugins/vuetify.js" }
-import 'vuetify/styles'
-import { createVuetify } from 'vuetify'
-
-export default new Vuetify({
-  defaults: {
-    VAlert: {
-      border: true,
-      color: 'primary',
-      variant: 'contained-text',
-    },
-  },
-})
-```
-
-Once a global default is set, the corresponding component(s) apply the new values at runtime and remove the need to manually define the same properties every time that you use `v-alert`. Since these values are only a **default**, we have multiple options for overwriting them. The following example demonstrates how to supercede the globally defined default border within your template:
-
-```html
-<template>
-  <v-alert :border="false">
-    I'm an alert that removes the global border locally
-  </v-alert>
-</template>
-```
 
 #### Closable
 
@@ -168,28 +141,6 @@ TODO
 ### Material Design 3
 
 TODO
-
-### SASS Variables
-
-| Variable | Value | Description |
-| - | - | - |
-| $alert-background | `rgb(var(--v-theme-on-surface-variant))` | The components default background color |
-| $alert-border-append-close-margin-inline-start | `16px` | Applied spacing between the `append` and `close` slots |
-| $alert-border-append-margin-inline-start | `90px` | Minimum spacing between the `default` and `append` slots |
-| $alert-border-color | `currentColor` | The default color used for borders |
-| $alert-border-color | `rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))` | Assigns the default color used when applying a border |
-| $alert-border-density | `('default': 0, 'comfortable': -1, 'compact': -2)` | Represents the intervals of reduced height for different densities. By default, a value of 1 represents **4px** |
-| $alert-border-elevation | `1` | The elevation when using **contained** as the applied variant |
-| $alert-border-opacity | `.38` | The default opacity used for borders |
-| $alert-border-padding | `16px` | The default padding applied to the root `v-alert` element |
-| $alert-border-plain-opacity | `.62` | The dimmed opacity used with the **plain** variant |
-| $alert-border-plain-transition | `.2s opacity $settings.$standard-easing` | Standard transition |
-| $alert-border-positions | `absolute fixed sticky` | Supported through the **position** prop, i.e. **position="fixed"** |
-| $alert-border-prepend-margin-inline-end | `16px` | The spacing between the prepend slot and main content area |
-| $alert-border-radius | `settings.$border-radius-root` | Uses the root border-radius from global variables |
-| $alert-border-style | `settings.$border-style-root` | Uses the root border-style from global variables |
-| $alert-border-thin-width | `8px` | The value used when applying a border |
-| $alert-border-width | `0` | The default value used for borders |
 
 #### Grid
 
