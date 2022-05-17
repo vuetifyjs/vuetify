@@ -2,17 +2,22 @@
 import './VAlert.sass'
 
 // Components
+import { VAlertIcon } from './VAlertIcon'
+import { VAlertText } from './VAlertText'
 import { VAlertTitle } from './VAlertTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
@@ -22,7 +27,6 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -109,10 +113,19 @@ export const VAlert = defineComponent({
       isActive.value = false
     }
 
+    provideDefaults({
+      VAlertIcon: {
+        density: toRef(props, 'density'),
+        icon: computed(() => icon.value),
+        size: computed(() => props.prominent ? 44 : 'default'),
+      },
+    })
+
     return () => {
-      const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
+      const hasText = !!(props.text || slots.text)
+      const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
         <props.tag
@@ -153,30 +166,31 @@ export const VAlert = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-alert__prepend">
+            <>
               { slots.prepend
-                ? slots.prepend()
-                : (
-                  <VIcon
-                    icon={ icon.value }
-                    size={ props.prominent ? 'large' : 'default' }
-                  />
+                ? (
+                  <div class="v-alert__prepend">
+                    { slots.prepend() }
+                  </div>
                 )
+                : icon.value && (<VAlertIcon />)
               }
-            </div>
+            </>
           ) }
 
-          <div class="v-alert__content">
-            { hasTitle && (
-              <VAlertTitle>
-                { slots.title ? slots.title() : props.title }
-              </VAlertTitle>
-            ) }
+          { hasTitle && (
+            <VAlertTitle>
+              { slots.title ? slots.title() : props.title }
+            </VAlertTitle>
+          ) }
 
-            { slots.text ? slots.text() : props.text }
+          { hasText && (
+            <VAlertText>
+              { slots.text ? slots.text() : props.text }
+            </VAlertText>
+          ) }
 
-            { slots.default?.() }
-          </div>
+          { slots.default?.() }
 
           { slots.append && (
             <div class="v-alert__append">
@@ -185,20 +199,24 @@ export const VAlert = defineComponent({
           ) }
 
           { hasClose && (
-            <div
-              class="v-alert__close"
-              onClick={ onCloseClick }
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  icon: props.closeIcon,
+                  size: 'small',
+                },
+              }}
             >
-              { slots.close
-                ? slots.close()
-                : (
-                  <VIcon
-                    icon={ props.closeIcon }
-                    size="small"
-                  />
-                )
-              }
-            </div>
+              <div
+                class="v-alert__close"
+                onClick={ onCloseClick }
+              >
+                { slots.close
+                  ? slots.close()
+                  : (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
         </props.tag>
       )
