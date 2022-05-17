@@ -58,7 +58,7 @@ Unlike the `v-banner` component, `v-alert` is intended to be re-used throughout 
 
 ### Props
 
-In addition to the standard [v-sheet](/components/sheets/) properties such as elevation, dimension, and rounded, `v-alert` supports **v-model**, [variants](), and [density](); and many more.
+In addition to the standard [v-sheet](/components/sheets/) properties such as elevation, dimension, and rounded, `v-alert` supports **v-model**, **variants**, and **density**; and many more.
 
 #### Type
 
@@ -74,7 +74,7 @@ While the **type** prop shorthand is preferred, **color** and **icon** are usabl
 </v-alert>
 ```
 
-The `v-alert` component has multiple customization options such as reducing overall height using or adding a customized **border**. The following example uses [density]() to reduce the vertical space needed for the component:
+The `v-alert` component has multiple customization options such as reducing overall height using or adding a customized **border**. The following example uses density to reduce the vertical space needed for the component:
 
 <example file="v-alert/prop-density" />
 
@@ -104,7 +104,7 @@ The close icon automatically applies a default `aria-label` and is configurable 
 
 TODO
 
-## Examples
+### More Examples
 
 TODO
 
