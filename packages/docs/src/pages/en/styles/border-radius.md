@@ -60,6 +60,12 @@ $rounded: (
 
 ### Misc
 
+<alert type="info">
+
+  To align classes with RTL logical properties `left` and `right` is swapped with `start` and `end` respectively.
+
+</alert>
+
 #### Pill and circle
 
 You can create pills with the `.rounded-pill` class and circles with the `.rounded-circle` class.
@@ -68,7 +74,7 @@ You can create pills with the `.rounded-pill` class and circles with the `.round
 
 #### Rounding by side
 
-Border radius is configurable on a per side basis using the infix classes `-t`, `-r`, `-b`, and `-l` (corresponding respectively to the sides **top**, **right**, **left** and **right**).
+Border radius is configurable on a per side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **right**, **left** and **right**).
 
 E.g. `.rounded-b-xl` and `.rounded-t`.
 
@@ -76,7 +82,7 @@ E.g. `.rounded-b-xl` and `.rounded-t`.
 
 #### Rounding by corner
 
-Border radius is configurable on a per corner basis using the infix classes, `-tl`, `-tr`, `-br`, `-bl` (corresponding respectively to the corners **top-left**, **top-right**, **bottom-right**, **bottom-left**)
+Border radius is configurable on a per corner basis using the infix classes, `-ts`, `-te`, `-be`, `-bs` (corresponding respectively to the corners **top-left**, **top-right**, **bottom-right**, **bottom-left**)
 
 E.g. `.rounded-br-xl` and `.rounded-tr`.
 
