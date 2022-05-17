@@ -20,14 +20,11 @@ import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { InternalItem} from '@/composables/items'
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 
-export interface InternalSelectItem {
-  title: string
-  value: any
-  index: number
-}
+export interface InternalSelectItem extends InternalItem {}
 
 export interface DefaultSelectionSlot {
   selection: InternalSelectItem
@@ -55,7 +52,7 @@ export const makeSelectProps = propsFactory({
     default: '$dropdown',
   },
   modelValue: {
-    type: [Number, String, Array],
+    type: [Number, String, Object, Array],
     default: () => ([]),
   },
   multiple: Boolean,
@@ -91,15 +88,33 @@ export const VSelect = genericComponent<new <T>() => {
     const vTextFieldRef = ref()
     const activator = ref()
     const menu = ref(false)
-    const { items } = useItems(props)
+    const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => wrapInArray(v),
-      (v: any) => props.multiple ? v : v[0]
+      v => transformIn(wrapInArray(v)),
+      v => {
+        const transformed = transformOut(v)
+        return props.multiple ? transformed : transformed[0]
+      }
     )
-    const selections = computed(() => items.value.filter(item => model.value.includes(item.props.value)))
+    const selections = computed(() => {
+      const array: InternalItem[] = Array(model.value.length)
+
+      const indices = model.value.reduce((obj, value, index) => {
+        obj[value] = index
+        return obj
+      }, {} as Record<any, number>)
+
+      for (const item of items.value) {
+        const index = indices[item.props.value]
+
+        if (index != null) array.splice(index, 1, item)
+      }
+
+      return array
+    })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
     function onClear (e: MouseEvent) {
@@ -123,19 +138,19 @@ export const VSelect = genericComponent<new <T>() => {
         menu.value = false
       }
     }
-    function select (value: any) {
+    function select (item: InternalItem) {
       if (props.multiple) {
-        const index = selected.value.findIndex(selection => selection === value)
+        const index = selected.value.findIndex(selection => selection === item.props.value)
 
         if (index === -1) {
-          model.value = [...model.value, value]
+          model.value = [...model.value, item.props.value]
         } else {
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
         }
       } else {
-        model.value = [value]
+        model.value = [item.props.value]
         menu.value = false
       }
     }
@@ -192,7 +207,7 @@ export const VSelect = genericComponent<new <T>() => {
                         <VListItem
                           { ...item.props }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => select(item.props.value) }
+                          onClick={ () => select(item) }
                         />
                       )) }
                     </VList>

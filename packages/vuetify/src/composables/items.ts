@@ -13,7 +13,7 @@ export interface InternalItem {
     value: any
   }
   children?: InternalItem[]
-  item: unknown
+  item: string | object
 }
 
 export interface ItemProps {
@@ -22,6 +22,7 @@ export interface ItemProps {
   itemValue: SelectItemKey
   itemChildren: string
   itemProps: (item: string | object) => object
+  returnObject?: boolean
 }
 
 // Composables
@@ -46,6 +47,7 @@ export const makeItemsProps = propsFactory({
     type: Function as PropType<ItemProps['itemProps']>,
     default: (item: any) => ({}),
   },
+  returnObject: Boolean,
 }, 'item')
 
 export function transformItem (props: ItemProps, item: any) {
@@ -77,5 +79,15 @@ export function transformItems (props: ItemProps, items: ItemProps['items']) {
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
-  return { items }
+  function transformIn (value: any[]) {
+    if (props.returnObject) return value.map(item => getPropertyFromItem(item, props.itemValue))
+    return value
+  }
+
+  function transformOut (value: any[]) {
+    if (props.returnObject) return items.value.filter(item => value.includes(item.props.value)).map(({ item }) => item)
+    return value
+  }
+
+  return { items, transformIn, transformOut }
 }
