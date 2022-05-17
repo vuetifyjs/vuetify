@@ -355,24 +355,24 @@ $utilities: () !default;
         class: rounded-s,
         values: variables.$rounded
       ),
-      "rounded-start-start": (
+      "rounded-top-start": (
         property: border-start-start-radius,
-        class: rounded-ss,
+        class: rounded-ts,
         values: variables.$rounded
       ),
-      "rounded-start-end": (
+      "rounded-top-end": (
         property: border-start-end-radius,
-        class: rounded-se,
+        class: rounded-te,
         values: variables.$rounded
       ),
-      "rounded-end-end": (
+      "rounded-bottom-end": (
         property: border-end-end-radius,
-        class: rounded-ee,
+        class: rounded-be,
         values: variables.$rounded
       ),
-      "rounded-end-start": (
+      "rounded-bottom-start": (
         property: border-end-start-radius,
-        class: rounded-es,
+        class: rounded-bs,
         values: variables.$rounded
       ),
 
@@ -388,23 +388,23 @@ $utilities: () !default;
         values: variables.$border-opacities
       ),
       "border-top": (
-        property: border-top-width border-top-style border-top-color,
+        property: border-block-start-width border-block-start-style border-block-start-color,
         class: border-t,
         values: variables.$borders
       ),
-      "border-right": (
-        property: border-right-width border-right-style border-right-color,
-        class: border-r,
+      "border-end": (
+        property: border-inline-end-width border-inline-end-style border-inline-end-color,
+        class: border-e,
         values: variables.$borders
       ),
       "border-bottom": (
-        property: border-bottom-width border-bottom-style border-bottom-color,
+        property: border-block-end-width border-block-end-style border-block-end-color,
         class: border-b,
         values: variables.$borders
       ),
-      "border-left": (
-        property: border-left-width border-left-style border-left-color,
-        class: border-l,
+      "border-start": (
+        property: border-inline-start-width border-inline-start-style border-inline-start-color,
+        class: border-s,
         values: variables.$borders
       ),
       "border-style": (
