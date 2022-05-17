@@ -41,8 +41,8 @@ export function parseDate (date: string): [number, number, number] {
   return [year, month, day]
 }
 
-export function getWeek (year: number, month: number, day: number) {
-  const date = new Date(year, month - 1, day)
+export function getWeek (date: Date) {
+  date = new Date(date)
   date.setHours(0, 0, 0, 0)
   // Thursday in current week decides the year.
   date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7)

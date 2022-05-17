@@ -16,6 +16,8 @@ import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import { createDateAdapter, DateAdapterSymbol } from './composables/date'
+import type { IUtils } from '@date-io/core/IUtils'
 
 export * from './composables'
 
@@ -30,6 +32,9 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: boolean
+  date?: {
+    adapter: IUtils<any>
+  }
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -48,6 +53,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
+  const date = createDateAdapter(options?.date)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -73,6 +79,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
+    app.provide(DateAdapterSymbol, date)
 
     if (IN_BROWSER && options.ssr) {
       if (app.$nuxt) {
@@ -102,6 +109,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
               theme: inject.call(this, ThemeSymbol),
               icons: inject.call(this, IconSymbol),
               locale: inject.call(this, LocaleSymbol),
+              date: inject.call(this, DateAdapterSymbol),
             })
           },
         },

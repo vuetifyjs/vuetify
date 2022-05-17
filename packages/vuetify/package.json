@@ -107,6 +107,10 @@
     "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
+  "dependencies": {
+    "@date-io/core": "2.14.0",
+    "@date-io/date-fns": "2.14.0"
+  },
   "devDependencies": {
     "@formatjs/intl": "^2.2.5",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
@@ -138,6 +142,7 @@
     "cypress": "^10.2.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-real-events": "^1.7.0",
+    "date-fns": "^2.28.0",
     "dotenv": "^8.6.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^25.7.0",
