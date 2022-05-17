@@ -2,8 +2,6 @@
 import './VAlert.sass'
 
 // Components
-import { VAlertIcon } from './VAlertIcon'
-import { VAlertText } from './VAlertText'
 import { VAlertTitle } from './VAlertTitle'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
@@ -17,7 +15,6 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
@@ -113,14 +110,6 @@ export const VAlert = defineComponent({
       isActive.value = false
     }
 
-    provideDefaults({
-      VAlertIcon: {
-        density: toRef(props, 'density'),
-        icon: computed(() => icon.value),
-        size: computed(() => props.prominent ? 44 : 'default'),
-      },
-    })
-
     return () => {
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
@@ -166,31 +155,37 @@ export const VAlert = defineComponent({
           ) }
 
           { hasPrepend && (
-            <>
-              { slots.prepend
-                ? (
-                  <div class="v-alert__prepend">
-                    { slots.prepend() }
-                  </div>
-                )
-                : icon.value && (<VAlertIcon />)
-              }
-            </>
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  density: props.density,
+                  icon: icon.value,
+                  size: props.prominent ? 44 : 'default',
+                },
+              }}
+            >
+              <div class="v-alert__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : icon.value && (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
-          { hasTitle && (
-            <VAlertTitle>
-              { slots.title ? slots.title() : props.title }
-            </VAlertTitle>
-          ) }
+          <div class="v-alert__content">
+            { hasTitle && (
+              <VAlertTitle>
+                { slots.title ? slots.title() : props.title }
+              </VAlertTitle>
+            ) }
 
-          { hasText && (
-            <VAlertText>
-              { slots.text ? slots.text() : props.text }
-            </VAlertText>
-          ) }
+            { hasText && (
+              slots.text ? slots.text() : props.text
+            ) }
 
-          { slots.default?.() }
+            { slots.default?.() }
+          </div>
 
           { slots.append && (
             <div class="v-alert__append">

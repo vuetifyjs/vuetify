@@ -25,9 +25,9 @@ $alert-title-font-size: tools.map-deep-get(settings.$typography, 'h6', 'size') !
 $alert-title-font-weight: tools.map-deep-get(settings.$typography, 'h6', 'weight') !default;
 $alert-title-hyphens: auto !default;
 $alert-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
-$alert-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
+// $alert-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
+$alert-title-line-height: 1.75rem !default;
 $alert-title-overflow-wrap: normal !default;
-$alert-title-prepend-margin-top: -0.25rem !default;
 $alert-title-text-transform: none !default;
 $alert-title-word-break: normal !default;
 $alert-title-word-wrap: break-word !default;

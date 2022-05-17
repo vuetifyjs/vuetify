@@ -6,7 +6,7 @@
 .v-alert
   display: grid
   flex: 1 1
-  grid-template-areas: "prepend title append close" ". text append ."
+  grid-template-areas: "prepend content append close" ". content . ."
   grid-template-columns: max-content auto max-content max-content
   position: relative
   padding: $alert-padding
@@ -18,7 +18,7 @@
   @include tools.variant($alert-variants...)
 
   &--prominent
-    grid-template-areas: "prepend title append close" "prepend text append ."
+    grid-template-areas: "prepend content append close" "prepend content . ."
 
   &.v-alert--border
     --v-border-opacity: #{$alert-border-opacity}
@@ -75,9 +75,9 @@
   grid-area: close
   user-select: none
 
-.v-alert-text
+.v-alert__content
   align-self: center
-  grid-area: auto / 2 / auto / 2
+  grid-area: content
   overflow: hidden
 
 .v-alert__append,
@@ -92,17 +92,15 @@
   + .v-alert__close
     margin-inline-start: $alert-append-close-margin-inline-start
 
-.v-alert-icon,
 .v-alert__prepend
   align-self: flex-start
+  display: flex
+  align-items: center
   grid-area: prepend
   margin-inline-end: $alert-prepend-margin-inline-end
 
   .v-alert--prominent &
     align-self: center
-
-  + .v-alert-title
-    margin-top: $alert-title-prepend-margin-top
 
 .v-alert__underlay
   grid-area: none
@@ -130,7 +128,6 @@
   display: flex
   font-size: $alert-title-font-size
   font-weight: $alert-title-font-weight
-  grid-area: title
   hyphens: $alert-title-hyphens
   letter-spacing: $alert-title-letter-spacing
   line-height: $alert-title-line-height
