@@ -7,18 +7,21 @@ import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
 export interface InternalItem {
-  [key: string]: any
-  title: string
-  value: any
+  props: {
+    [key: string]: any
+    title: string
+    value: any
+  }
   children?: InternalItem[]
+  item: unknown
 }
 
 export interface ItemProps {
-  items: (string | Partial<InternalItem>)[]
+  items: (string | object)[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
   itemChildren: string
-  itemProps: (item: any) => Partial<InternalItem>
+  itemProps: (item: string | object) => object
 }
 
 // Composables
@@ -51,10 +54,13 @@ export function transformItem (props: ItemProps, item: any) {
   const children = getObjectValueByPath(item, props.itemChildren)
 
   return {
-    title,
-    value,
+    props: {
+      title,
+      value,
+      ...props.itemProps?.(item),
+    },
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
-    ...props.itemProps?.(item),
+    item,
   }
 }
 

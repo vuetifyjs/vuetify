@@ -99,8 +99,8 @@ export const VSelect = genericComponent<new <T>() => {
       v => wrapInArray(v),
       (v: any) => props.multiple ? v : v[0]
     )
-    const selections = computed(() => items.value.filter(item => model.value.includes(item.value)))
-    const selected = computed(() => selections.value.map(selection => selection.value))
+    const selections = computed(() => items.value.filter(item => model.value.includes(item.props.value)))
+    const selected = computed(() => selections.value.map(selection => selection.props.value))
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -123,19 +123,19 @@ export const VSelect = genericComponent<new <T>() => {
         menu.value = false
       }
     }
-    function select (item: any) {
+    function select (value: any) {
       if (props.multiple) {
-        const index = selected.value.findIndex(selection => selection === item.value)
+        const index = selected.value.findIndex(selection => selection === value)
 
         if (index === -1) {
-          model.value = [...model.value, item.value]
+          model.value = [...model.value, value]
         } else {
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
         }
       } else {
-        model.value = [item.value]
+        model.value = [value]
         menu.value = false
       }
     }
@@ -190,9 +190,9 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { items.value.map(item => (
                         <VListItem
-                          { ...item }
+                          { ...item.props }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => select(item) }
+                          onClick={ () => select(item.props.value) }
                         />
                       )) }
                     </VList>
@@ -220,7 +220,7 @@ export const VSelect = genericComponent<new <T>() => {
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
-                              text: selection.title,
+                              text: selection.props.title,
                             },
                           }}
                         >
@@ -236,7 +236,7 @@ export const VSelect = genericComponent<new <T>() => {
                           ? slots.selection({ selection })
                           : (
                             <span class="v-select__selection-text">
-                              { selection.title }
+                              { selection.props.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-select__selection-comma">,</span>
                               ) }
