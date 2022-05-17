@@ -2,10 +2,10 @@
 import './VBanner.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VBannerActions } from './VBannerActions'
-import { VBannerAvatar } from './VBannerAvatar'
-import { VBannerIcon } from './VBannerIcon'
 import { VBannerText } from './VBannerText'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -62,11 +62,7 @@ export const VBanner = defineComponent({
     const color = toRef(props, 'color')
     const density = toRef(props, 'density')
 
-    provideDefaults({
-      VBannerActions: { color, density },
-      VBannerAvatar: { density, image: toRef(props, 'avatar') },
-      VBannerIcon: { color, density, icon: toRef(props, 'icon') },
-    })
+    provideDefaults({ VBannerActions: { color, density } })
 
     useRender(() => {
       const hasText = !!(props.text || slots.text)
@@ -95,27 +91,39 @@ export const VBanner = defineComponent({
           role="banner"
         >
           { hasPrepend && (
-            <>
-              { slots.prepend
-                ? (
-                  <div class="v-banner__prepend">
-                    { slots.prepend() }
-                  </div>
-                )
-                : props.avatar ? (<VBannerAvatar />)
-                : props.icon ? (<VBannerIcon />)
-                : undefined
-              }
-            </>
+            <VDefaultsProvider
+              defaults={{
+                VAvatar: {
+                  color: color.value,
+                  density: density.value,
+                  image: props.avatar,
+                  icon: props.icon,
+                },
+              }}
+            >
+              <div class="v-banner__prepend">
+                { (props.avatar || props.icon) && (<VAvatar />) }
+
+                { slots.prepend?.() }
+              </div>
+            </VDefaultsProvider>
           ) }
 
-          { hasText && (
-            <VBannerText>
-              { slots.text ? slots.text() : props.text }
-            </VBannerText>
-          ) }
+          <div class="v-banner__content">
+            { hasText && (
+              <VBannerText>
+                { slots.text ? slots.text() : props.text }
+              </VBannerText>
+            ) }
 
-          { slots.default?.() }
+            { slots.default?.() }
+          </div>
+
+          { slots.append && (
+            <div class="v-banner__append">
+              { slots.append() }
+            </div>
+          ) }
 
           { slots.actions && (
             <VBannerActions>
