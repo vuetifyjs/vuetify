@@ -81,7 +81,7 @@ export const VSliderTrack = defineComponent({
       const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
 
       return ticks.map((tick, index) => {
-        const directionProperty = vertical.value ? 'inset-block-end' : 'margin-inline-start'
+        const directionProperty = vertical.value ? 'bottom' : 'margin-inline-start'
         return (
           <div
             key={ tick.value }
