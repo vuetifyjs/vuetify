@@ -2,7 +2,7 @@
 import './VCombobox.sass'
 
 // Components
-import { genItem, makeSelectProps } from '@/components/VSelect/VSelect'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -12,6 +12,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
+import { transformItem, useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -82,7 +83,7 @@ export const VCombobox = genericComponent<new <T>() => {
     const menu = ref(false)
     const selectionIndex = ref(-1)
     const color = computed(() => vTextFieldRef.value?.color)
-    const items = computed(() => props.items.map(genItem))
+    const { items } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
     const model = useProxiedModel(
       props,
@@ -93,7 +94,7 @@ export const VCombobox = genericComponent<new <T>() => {
     )
     const _search = ref('')
     const search = computed<string>({
-      get: () => props.multiple ? _search.value : genItem(model.value[0]).value,
+      get: () => props.multiple ? _search.value : transformItem(props, model.value[0]).value,
       set: val => {
         if (props.multiple) {
           _search.value = val
@@ -128,7 +129,7 @@ export const VCombobox = genericComponent<new <T>() => {
       const array: InternalComboboxItem[] = []
       let index = 0
       for (const unwrapped of model.value) {
-        const item = genItem(unwrapped)
+        const item = transformItem(props, unwrapped)
 
         const found = array.find(selection => selection.value === item.value)
 

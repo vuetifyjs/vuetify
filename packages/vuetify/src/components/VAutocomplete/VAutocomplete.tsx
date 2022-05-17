@@ -2,7 +2,7 @@
 import './VAutocomplete.sass'
 
 // Components
-import { genItem, makeSelectProps } from '@/components/VSelect/VSelect'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -12,6 +12,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
+import { transformItem, useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -79,7 +80,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const isPristine = ref(true)
     const menu = ref(false)
-    const items = computed(() => props.items.map(genItem))
+    const { items } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -93,7 +94,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       const array: InternalSelectItem[] = []
       let index = 0
       for (const unwrapped of model.value) {
-        const item = genItem(unwrapped)
+        const item = transformItem(props, unwrapped)
 
         const found = array.find(selection => selection.value === item.value)
 

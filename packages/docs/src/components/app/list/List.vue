@@ -53,7 +53,7 @@
         } else {
           return {
             title: t(child.title!),
-            $children: generateItems(child, path, locale, t),
+            children: generateItems(child, path, locale, t),
           }
         }
       })
@@ -86,7 +86,7 @@
           title: item.title && te(item.title) ? t(item.title) : item.title,
           prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
           value: item.title,
-          $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
+          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }
       }))
 

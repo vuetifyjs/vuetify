@@ -9,6 +9,7 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
@@ -21,7 +22,6 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 // Types
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
 
 export interface InternalSelectItem {
   title: string
@@ -44,23 +44,12 @@ export type SelectItem = string | (string | number)[] | ((item: Record<string, a
   text: string
 })
 
-export function genItem (item: any) {
-  return {
-    title: String((typeof item === 'object' ? item.title : item) ?? ''),
-    value: (typeof item === 'object' ? item.value : item),
-  }
-}
-
 export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
-  items: {
-    type: Array as PropType<SelectItem[]>,
-    default: () => ([]),
-  },
   menuIcon: {
     type: String,
     default: '$dropdown',
@@ -75,6 +64,8 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+
+  ...makeItemsProps(),
 }, 'select')
 
 export const VSelect = genericComponent<new <T>() => {
@@ -100,7 +91,7 @@ export const VSelect = genericComponent<new <T>() => {
     const vTextFieldRef = ref()
     const activator = ref()
     const menu = ref(false)
-    const items = computed(() => props.items.map(genItem))
+    const { items } = useItems(props)
     const model = useProxiedModel(
       props,
       'modelValue',
@@ -199,8 +190,7 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { items.value.map(item => (
                         <VListItem
-                          title={ item.title }
-                          value={ item.value }
+                          { ...item }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => select(item) }
                         />

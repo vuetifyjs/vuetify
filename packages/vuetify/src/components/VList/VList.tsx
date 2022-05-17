@@ -9,6 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeItemsProps, useItems } from '@/composables/items'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
@@ -23,14 +24,13 @@ import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 
 export type ListItem = {
   [key: string]: any
   $type?: 'item' | 'subheader' | 'divider'
-  $children?: (string | ListItem)[]
 }
 
 export type InternalListItem = {
@@ -45,12 +45,14 @@ const parseItems = (items?: (string | ListItem)[]): InternalListItem[] | undefin
   return items.map(item => {
     if (typeof item === 'string') return { type: 'item', value: item, title: item }
 
-    const { $type, $children, ...props } = item
+    const { $type, children, ...props } = item
+
+    props.title = props.text ?? props.title
 
     if ($type === 'subheader') return { type: 'subheader', props }
     if ($type === 'divider') return { type: 'divider', props }
 
-    return { type: 'item', props, children: parseItems($children) }
+    return { type: 'item', props, children: parseItems(children) }
   })
 }
 
@@ -76,7 +78,6 @@ export const VList = genericComponent<new <T>() => {
       default: 'one',
     },
     nav: Boolean,
-    items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -86,6 +87,7 @@ export const VList = genericComponent<new <T>() => {
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeItemsProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -100,7 +102,8 @@ export const VList = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
-    const items = computed(() => parseItems(props.items))
+    const { items } = useItems(props)
+    const parsedItems = computed(() => parseItems(items.value))
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)
@@ -154,7 +157,7 @@ export const VList = genericComponent<new <T>() => {
             dimensionStyles.value,
           ]}
         >
-          <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
+          <VListChildren items={ parsedItems.value } v-slots={ slots }></VListChildren>
         </props.tag>
       )
     })
