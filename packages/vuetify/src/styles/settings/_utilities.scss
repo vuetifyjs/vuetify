@@ -336,43 +336,43 @@ $utilities: () !default;
         values: variables.$rounded
       ),
       "rounded-top": (
-        property: border-top-left-radius border-top-right-radius,
+        property: border-start-start-radius border-start-end-radius,
         class: rounded-t,
         values: variables.$rounded
       ),
-      "rounded-right": (
-        property: border-top-right-radius border-bottom-right-radius,
-        class: rounded-r,
+      "rounded-end": (
+        property: border-start-end-radius border-end-end-radius,
+        class: rounded-e,
         values: variables.$rounded
       ),
       "rounded-bottom": (
-        property: border-bottom-left-radius border-bottom-right-radius,
+        property: border-end-start-radius border-end-end-radius,
         class: rounded-b,
         values: variables.$rounded
       ),
-      "rounded-left": (
-        property: border-top-left-radius border-bottom-left-radius,
-        class: rounded-l,
+      "rounded-start": (
+        property: border-start-start-radius border-end-start-radius,
+        class: rounded-s,
         values: variables.$rounded
       ),
-      "rounded-top-left": (
-        property: border-top-left-radius,
-        class: rounded-tl,
+      "rounded-start-start": (
+        property: border-start-start-radius,
+        class: rounded-ss,
         values: variables.$rounded
       ),
-      "rounded-top-right": (
-        property: border-top-right-radius,
-        class: rounded-tr,
+      "rounded-start-end": (
+        property: border-start-end-radius,
+        class: rounded-se,
         values: variables.$rounded
       ),
-      "rounded-bottom-right": (
-        property: border-bottom-right-radius,
-        class: rounded-br,
+      "rounded-end-end": (
+        property: border-end-end-radius,
+        class: rounded-ee,
         values: variables.$rounded
       ),
-      "rounded-bottom-left": (
-        property: border-bottom-left-radius,
-        class: rounded-bl,
+      "rounded-end-start": (
+        property: border-end-start-radius,
+        class: rounded-es,
         values: variables.$rounded
       ),
 

@@ -1,10 +1,10 @@
 // Utilities
-import { makeRoundedProps, useRounded } from '../rounded'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
-
+import { mount } from '@vue/test-utils'
 // Types
 import type { RoundedProps } from '../rounded'
+import { makeRoundedProps, useRounded } from '../rounded'
+
 
 describe('rounded.ts', () => {
   it('should create rounded props', () => {
@@ -34,7 +34,7 @@ describe('rounded.ts', () => {
     [{ rounded: 'shaped' }, ['rounded-shaped']],
     [{ rounded: 'pill' }, ['rounded-pill']],
     // // Corner and axis rounded
-    [{ rounded: 'tr-xl br-lg' }, ['rounded-tr-xl', 'rounded-br-lg']],
+    [{ rounded: 'se-xl ee-lg' }, ['rounded-se-xl', 'rounded-ee-lg']],
   ] as RoundedProps[])('should return correct rounded classes', (props: RoundedProps, expected: any) => {
     const { roundedClasses } = useRounded(props, 'foo')
 
