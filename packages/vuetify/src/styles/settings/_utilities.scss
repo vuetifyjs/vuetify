@@ -336,42 +336,42 @@ $utilities: () !default;
         values: variables.$rounded
       ),
       "rounded-top": (
-        property: border-start-start-radius border-start-end-radius,
+        property: border-top-left-radius border-top-right-radius,
         class: rounded-t,
         values: variables.$rounded
       ),
       "rounded-end": (
-        property: border-start-end-radius border-end-end-radius,
+        property: (ltr: border-top-right-radius border-bottom-right-radius, rtl: border-top-left-radius border-bottom-left-radius),
         class: rounded-e,
         values: variables.$rounded
       ),
       "rounded-bottom": (
-        property: border-end-start-radius border-end-end-radius,
+        property: border-bottom-left-radius border-bottom-right-radius,
         class: rounded-b,
         values: variables.$rounded
       ),
       "rounded-start": (
-        property: border-start-start-radius border-end-start-radius,
+        property: (ltr: border-top-left-radius border-bottom-left-radius, rtl: border-top-right-radius border-bottom-right-radius),
         class: rounded-s,
         values: variables.$rounded
       ),
       "rounded-top-start": (
-        property: border-start-start-radius,
+        property: (ltr: border-top-left-radius, rtl: border-top-right-radius),
         class: rounded-ts,
         values: variables.$rounded
       ),
       "rounded-top-end": (
-        property: border-start-end-radius,
+        property: (ltr: border-top-right-radius, rtl: border-top-left-radius),
         class: rounded-te,
         values: variables.$rounded
       ),
       "rounded-bottom-end": (
-        property: border-end-end-radius,
+        property: (ltr: border-bottom-right-radius, rtl: border-bottom-left-radius),
         class: rounded-be,
         values: variables.$rounded
       ),
       "rounded-bottom-start": (
-        property: border-end-start-radius,
+        property: (ltr: border-bottom-left-radius, rtl: border-bottom-right-radius),
         class: rounded-bs,
         values: variables.$rounded
       ),
