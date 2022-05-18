@@ -40,7 +40,7 @@ Select fields components are used for collecting user provided information from 
 
 <alert type="error">
 
-  When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.
+  When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 
 </alert>
 
@@ -50,7 +50,7 @@ Select fields components are used for collecting user provided information from 
 
 #### Custom text and value
 
-You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
+You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
 
 <example file="v-select/prop-custom-text-and-value" />
 
