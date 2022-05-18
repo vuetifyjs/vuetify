@@ -1,12 +1,12 @@
 // Composables
-import { describe, expect, it } from '@jest/globals'
-// Utilities
-import { mount } from '@vue/test-utils'
-// Types
-import type { BorderProps } from '../border'
 import { makeBorderProps, useBorder } from '../border'
 
+// Utilities
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
+// Types
+import type { BorderProps } from '../border'
 
 describe('border.ts', () => {
   it('should create border props', () => {
@@ -32,7 +32,7 @@ describe('border.ts', () => {
     // Border with a word
     [{ border: 'tl' }, ['foo--border', 'border-tl']],
     [{ border: 'tr opacity-50' }, ['foo--border', 'border-tr', 'border-opacity-50']],
-    [{ border: 'r-xl primary' }, ['foo--border', 'border-e-xl', 'border-primary']],
+    [{ border: 'e-xl primary' }, ['foo--border', 'border-e-xl', 'border-primary']],
   ] as const)('should have the correct class using %s', (props, expected) => {
     const { borderClasses } = useBorder(props as BorderProps, 'foo')
 

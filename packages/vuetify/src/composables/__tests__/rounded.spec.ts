@@ -1,10 +1,12 @@
-// Utilities
-import { describe, expect, it } from '@jest/globals'
-import { mount } from '@vue/test-utils'
-// Types
-import type { RoundedProps } from '../rounded'
+// Composables
 import { makeRoundedProps, useRounded } from '../rounded'
 
+// Utilities
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
+
+// Types
+import type { RoundedProps } from '../rounded'
 
 describe('rounded.ts', () => {
   it('should create rounded props', () => {
