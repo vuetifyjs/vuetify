@@ -74,7 +74,7 @@
     display: flex
     align-items: center
     width: 100%
-    height: calc(var(--v-slider-track-size) + 2px)
+    height: $slider-track-active-size
     touch-action: pan-y
 
     &__background
@@ -84,7 +84,7 @@
       height: inherit
 
   .v-slider-track__tick
-    margin-block-start: calc((var(--v-slider-track-size) / 2) + 1px)
+    margin-top: calc(#{$slider-track-active-size} / 2)
 
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / -2))
@@ -110,7 +110,7 @@
           transform: translateX(100%)
 
     .v-slider-track__tick-label
-      bottom: calc((var(--v-slider-track-size) / -2) - #{$slider-tick-label-margin-bottom})
+      margin-top: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-top})
 
       @include tools.ltr()
         transform: translateX(-50%)
@@ -124,7 +124,7 @@
     height: 100%
     display: flex
     justify-content: center
-    width: calc(var(--v-slider-track-size, $slider-track-width) + 2px)
+    width: $slider-track-active-size
     touch-action: pan-x
 
     &__background
@@ -137,17 +137,17 @@
     height: 100%
 
   .v-slider-track__tick
-    margin-inline-start: calc((var(--v-slider-track-size) / 2) + 1px)
+    margin-inline-start: calc(#{$slider-track-active-size} / 2)
     transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / 2))
 
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
 
     &:last-child
-      inset-block-end: calc(0% + var(--v-slider-tick-size) + 1px)
+      bottom: calc(0% + var(--v-slider-tick-size) + 1px)
 
     .v-slider-track__tick-label
-      margin-inline-start: calc(var(--v-slider-track-size) + 20px)
+      margin-inline-start: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-start})
       transform: translateY(-50%)
 
 // Modifiers
