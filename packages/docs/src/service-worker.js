@@ -1,7 +1,7 @@
 // Imports
-import { precacheAndRoute, matchPrecache } from 'workbox-precaching'
-import { registerRoute, setDefaultHandler, setCatchHandler } from 'workbox-routing'
-import { NetworkOnly, CacheFirst } from 'workbox-strategies'
+import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
+import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
+import { CacheFirst, NetworkOnly } from 'workbox-strategies'
 
 precacheAndRoute(self.__WB_MANIFEST)
 
@@ -9,8 +9,16 @@ const cacheFirst = new CacheFirst()
 const networkOnly = new NetworkOnly()
 
 registerRoute(
-  ({ url, request }) => url.origin === self.location.origin && request.destination !== 'document',
-  cacheFirst
+  ({ url, request }) => url.origin === self.location.origin && request.destination === 'document',
+  async options => {
+    const { url } = options
+    const fallback = await getFallbackDocument(url)
+    if (fallback) {
+      console.log(`[SW] serving fallback for ${url.pathname}`)
+    }
+
+    return fallback ?? networkOnly.handle(options)
+  }
 )
 
 setDefaultHandler(networkOnly)
@@ -20,12 +28,18 @@ setCatchHandler(async ({ url, request }) => {
     url.origin === self.location.origin &&
     request.destination === 'document'
   ) {
-    return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+    return getFallbackDocument(url)
   }
 
   return Response.error()
 })
 
+
 self.addEventListener('message', event => {
-  if (event.data === 'sw:update') self.skipWaiting()
+  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting()
+  else console.log(event)
 })
+
+function getFallbackDocument (url) {
+  return matchPrecache(url.pathname.startsWith('/eo-UY/') ? '_crowdin.html' : '/_fallback.html')
+}
