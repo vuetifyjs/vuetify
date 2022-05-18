@@ -340,9 +340,9 @@ $utilities: () !default;
         class: rounded-t,
         values: variables.$rounded
       ),
-      "rounded-right": (
-        property: border-top-right-radius border-bottom-right-radius,
-        class: rounded-r,
+      "rounded-end": (
+        property: (ltr: border-top-right-radius border-bottom-right-radius, rtl: border-top-left-radius border-bottom-left-radius),
+        class: rounded-e,
         values: variables.$rounded
       ),
       "rounded-bottom": (
@@ -350,29 +350,29 @@ $utilities: () !default;
         class: rounded-b,
         values: variables.$rounded
       ),
-      "rounded-left": (
-        property: border-top-left-radius border-bottom-left-radius,
-        class: rounded-l,
+      "rounded-start": (
+        property: (ltr: border-top-left-radius border-bottom-left-radius, rtl: border-top-right-radius border-bottom-right-radius),
+        class: rounded-s,
         values: variables.$rounded
       ),
-      "rounded-top-left": (
-        property: border-top-left-radius,
-        class: rounded-tl,
+      "rounded-top-start": (
+        property: (ltr: border-top-left-radius, rtl: border-top-right-radius),
+        class: rounded-ts,
         values: variables.$rounded
       ),
-      "rounded-top-right": (
-        property: border-top-right-radius,
-        class: rounded-tr,
+      "rounded-top-end": (
+        property: (ltr: border-top-right-radius, rtl: border-top-left-radius),
+        class: rounded-te,
         values: variables.$rounded
       ),
-      "rounded-bottom-right": (
-        property: border-bottom-right-radius,
-        class: rounded-br,
+      "rounded-bottom-end": (
+        property: (ltr: border-bottom-right-radius, rtl: border-bottom-left-radius),
+        class: rounded-be,
         values: variables.$rounded
       ),
-      "rounded-bottom-left": (
-        property: border-bottom-left-radius,
-        class: rounded-bl,
+      "rounded-bottom-start": (
+        property: (ltr: border-bottom-left-radius, rtl: border-bottom-right-radius),
+        class: rounded-bs,
         values: variables.$rounded
       ),
 
@@ -388,23 +388,23 @@ $utilities: () !default;
         values: variables.$border-opacities
       ),
       "border-top": (
-        property: border-top-width border-top-style border-top-color,
+        property: border-block-start-width border-block-start-style border-block-start-color,
         class: border-t,
         values: variables.$borders
       ),
-      "border-right": (
-        property: border-right-width border-right-style border-right-color,
-        class: border-r,
+      "border-end": (
+        property: border-inline-end-width border-inline-end-style border-inline-end-color,
+        class: border-e,
         values: variables.$borders
       ),
       "border-bottom": (
-        property: border-bottom-width border-bottom-style border-bottom-color,
+        property: border-block-end-width border-block-end-style border-block-end-color,
         class: border-b,
         values: variables.$borders
       ),
-      "border-left": (
-        property: border-left-width border-left-style border-left-color,
-        class: border-l,
+      "border-start": (
+        property: border-inline-start-width border-inline-start-style border-inline-start-color,
+        class: border-s,
         values: variables.$borders
       ),
       "border-style": (
