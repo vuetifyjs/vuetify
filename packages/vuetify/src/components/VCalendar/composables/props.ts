@@ -7,6 +7,11 @@ import {
 import type {
   CalendarCategory,
   CalendarEvent,
+  CalendarEventCategoryFunction,
+  CalendarEventColorFunction,
+  CalendarEventNameFunction,
+  CalendarEventOverlapMode,
+  CalendarEventTimedFunction,
   CalendarFormatter,
   CalendarTimestamp,
 } from '@/composables/calendar/timestamp'
@@ -55,9 +60,9 @@ export const makeBaseProps = propsFactory({
 
 export const makeEventsProps = propsFactory({
   events: {
-    type: Array,
+    type: Array as PropType<CalendarEvent[]>,
     default: () => [],
-  } as Proptype<CalendarEvent[]>,
+  },
   eventStart: {
     type: String,
     default: 'start',
@@ -95,10 +100,10 @@ export const makeEventsProps = propsFactory({
     default: 60,
   },
   eventOverlapMode: {
-    type: [ String, Function ],
+    type: [ String, Function ] as 'stack' | 'column' | CalendarEventOverlapMode,
     default: 'stack',
     validate: (mode: any) => mode in CalendarEventOverlapModes || typeof mode === 'function',
-  } as 'stack' | 'column' | CalendarEventOverlapMode,
+  },
   eventMore: {
     type: Boolean,
     default: true,
