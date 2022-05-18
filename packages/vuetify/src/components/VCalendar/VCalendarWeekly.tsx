@@ -14,6 +14,7 @@ import { VBtn } from "../VBtn"
 
 // Styles
 import './VCalendarWeekly.sass'
+import { VCalendarDaily } from "./VCalendarDaily"
 
 export const VCalendarWeekly = genericComponent<new <T>() => {
   $props: {}

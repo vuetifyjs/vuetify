@@ -24,7 +24,7 @@ export const VCalendarMonthly = defineComponent({
       return 'v-calendar-monthly v-calendar-weekly'
     })
     return () => (
-        <VCalendarWeekly class={staticClass} { ...props}></VCalendarWeekly>
+      <VCalendarWeekly class={staticClass.value} { ...props} v-slots={ slots }></VCalendarWeekly>
     )
    
     
