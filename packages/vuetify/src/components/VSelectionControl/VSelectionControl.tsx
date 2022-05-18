@@ -105,6 +105,8 @@ export function useSelectionControl (
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
+      if (props.readonly) return
+
       const currentValue = val ? trueValue.value : falseValue.value
 
       let newVal = currentValue
@@ -251,7 +253,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
-                readonly={ props.readonly }
+                aria-readonly={ props.readonly }
                 type={ type }
                 value={ trueValue.value }
                 name={ group?.name.value ?? props.name }
