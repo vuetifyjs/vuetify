@@ -76,9 +76,16 @@ declare module 'vue/types/options' {
 }
 
 // Public types
-export type TreeviewItemFunction = (item: object, search: string, textKey: string) => boolean
+export type TreeviewItemFunction<T = any> = (
+  item: T,
+  search: string,
+  textKey: string
+) => boolean
 
-export type SelectItemKey = string | (string | number)[] | ((item: object, fallback?: any) => any)
+export type SelectItemKey<T = any> =
+  | string
+  | (string | number)[]
+  | ((item: T, fallback?: any) => any)
 
 export interface ItemGroup<T> {
   name: string
