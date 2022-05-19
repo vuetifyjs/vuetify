@@ -1,11 +1,10 @@
 // Imports
 import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
 import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
-import { CacheFirst, NetworkOnly } from 'workbox-strategies'
+import { NetworkOnly } from 'workbox-strategies'
 
 precacheAndRoute(self.__WB_MANIFEST)
 
-const cacheFirst = new CacheFirst()
 const networkOnly = new NetworkOnly()
 
 registerRoute(
@@ -33,7 +32,6 @@ setCatchHandler(async ({ url, request }) => {
 
   return Response.error()
 })
-
 
 self.addEventListener('message', event => {
   if (event.data?.type === 'SKIP_WAITING') self.skipWaiting()
