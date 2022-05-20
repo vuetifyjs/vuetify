@@ -52,6 +52,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
+    item: []
     selection: [DefaultAutocompleteSlot]
   }>
 }>()({
@@ -250,6 +251,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
                         >
                           {{
                             title: () => {
+                              if (slots.item) {
+                                return slots.item(item)
+                              }
                               return isPristine.value
                                 ? item.title
                                 : highlightResult(item.title, matches.title, search.value?.length ?? 0)
