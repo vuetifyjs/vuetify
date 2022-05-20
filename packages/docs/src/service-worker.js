@@ -34,8 +34,7 @@ setCatchHandler(async ({ url, request }) => {
 })
 
 self.addEventListener('message', event => {
-  if (event.data?.type === 'SKIP_WAITING') self.skipWaiting()
-  else console.log(event)
+  if (event.data === 'sw:update') self.skipWaiting()
 })
 
 function getFallbackDocument (url) {
