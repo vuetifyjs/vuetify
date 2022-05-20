@@ -19,6 +19,7 @@ import type {
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
   ComponentPropsOptions,
+  ComponentProvideOptions,
   ComputedOptions,
   DefineComponent,
   EffectScope,
@@ -119,6 +120,30 @@ export function genericComponent<T extends (new () => {
   E extends EmitsOptions = Record<string, any>,
   EE extends string = string,
   I = InstanceType<T>,
+  Provide extends ComponentProvideOptions = ComponentProvideOptions,
+  Options extends ComponentOptionsWithObjectProps<
+    PropsOptions,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    Provide
+  > = ComponentOptionsWithObjectProps<
+    PropsOptions,
+    RawBindings,
+    D,
+    C,
+    M,
+    Mixin,
+    Extends,
+    E,
+    EE,
+    Provide
+  >,
   Base = DefineComponent<
     (I extends Record<'$props', any> ? Omit<PropsOptions, keyof I['$props']> : PropsOptions) & (
       I extends Record<'$slots', any>
@@ -132,8 +157,10 @@ export function genericComponent<T extends (new () => {
     Mixin,
     Extends,
     E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
-    EE
+    EE,
+    Provide,
+    Options
   >
->(options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>) => Base & T {
+>(options: Options & ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>) => Base & T {
   return options => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
 }

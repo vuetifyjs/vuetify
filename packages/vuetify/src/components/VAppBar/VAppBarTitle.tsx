@@ -5,9 +5,9 @@ import { VToolbarTitle } from '@/components/VToolbar'
 import { defineComponent } from '@/util'
 
 export const VAppBarTitle = defineComponent({
-  ...VToolbarTitle,
-
   name: 'VAppBarTitle',
+
+  props: { ...VToolbarTitle.props },
 
   setup (_, { slots }) {
     return () => (
@@ -17,4 +17,4 @@ export const VAppBarTitle = defineComponent({
       />
     )
   },
-}) as typeof VToolbarTitle
+})
