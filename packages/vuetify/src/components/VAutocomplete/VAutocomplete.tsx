@@ -12,7 +12,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { transformItem, useItems } from '@/composables/items'
+import { useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -94,7 +94,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
       const array: InternalSelectItem[] = []
       let index = 0
       for (const unwrapped of model.value) {
-        const item = transformItem(props, unwrapped)
+        const item = items.value.find(x => x.value === unwrapped)!
 
         const found = array.find(selection => selection.value === item.value)
 
@@ -107,7 +107,6 @@ export const VAutocomplete = genericComponent<new <T>() => {
           index++
         }
       }
-
       return array
     })
     const selected = computed(() => selections.value.map(selection => selection.value))
@@ -177,7 +176,12 @@ export const VAutocomplete = genericComponent<new <T>() => {
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value ?? '')
+        if (props.multiple || model.value === undefined) {
+          search.value = ''
+        } else {
+          const item = items.value.find(x => x.value === model.value[0])!
+          search.value = item.title
+        }
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
