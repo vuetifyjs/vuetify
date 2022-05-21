@@ -4,6 +4,7 @@ import './VBtn.sass'
 // Components
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
 import { VIcon } from '@/components/VIcon'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -45,6 +46,8 @@ export const VBtn = defineComponent({
 
     block: Boolean,
     stacked: Boolean,
+
+    loading: Boolean,
 
     ripple: {
       type: Boolean,
@@ -102,6 +105,7 @@ export const VBtn = defineComponent({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--stacked': props.stacked,
+              'v-btn--loading': props.loading,
             },
             themeClasses.value,
             borderClasses.value,
@@ -143,15 +147,27 @@ export const VBtn = defineComponent({
           ) }
 
           { typeof props.icon === 'boolean'
-            ? slots.default?.()
+            ? <span class="v-btn__content">{ slots.default?.() }</span>
             : (
               <VIcon
-                class="v-btn__icon"
+                class="v-btn__content v-btn__icon"
                 icon={ props.icon }
                 size={ props.size }
               />
             )
           }
+
+          { props.loading && (
+            <span class="v-btn__loader">{
+              slots.loader ? slots.loader?.() : (
+                <VProgressCircular
+                  indeterminate
+                  size="23"
+                  width="2"
+                />
+              )
+            }</span>
+          ) }
 
           { !props.icon && props.appendIcon && (
             <VIcon
