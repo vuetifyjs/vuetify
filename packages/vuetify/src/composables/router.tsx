@@ -2,8 +2,8 @@
 import { getCurrentInstance, propsFactory } from '@/util'
 import {
   computed,
-  onBeforeUnmount,
-  onMounted,
+  nextTick,
+  onScopeDispose,
   resolveDynamicComponent,
   toRef,
 } from 'vue'
@@ -74,13 +74,12 @@ export const makeRouterProps = propsFactory({
 }, 'router')
 
 let inTransition = false
-export function useBackButton (cb: (next: NavigationGuardNext) => void) {
-  const router = useRouter()
+export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
   let popped = false
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
-  onMounted(() => {
+  nextTick(() => {
     window.addEventListener('popstate', onPopstate)
     removeBefore = router?.beforeEach((to, from, next) => {
       if (!inTransition) {
@@ -94,7 +93,7 @@ export function useBackButton (cb: (next: NavigationGuardNext) => void) {
       inTransition = false
     })
   })
-  onBeforeUnmount(() => {
+  onScopeDispose(() => {
     window.removeEventListener('popstate', onPopstate)
     removeBefore?.()
     removeAfter?.()

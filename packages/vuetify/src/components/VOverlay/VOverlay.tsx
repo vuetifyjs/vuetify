@@ -7,7 +7,8 @@ import { makePositionStrategyProps, usePositionStrategies } from './positionStra
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackButton } from '@/composables/router'
+import { useBackButton, useRouter } from '@/composables/router'
+import { useToggleScope } from '@/composables/toggleScope'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
@@ -83,6 +84,10 @@ export const VOverlay = genericComponent<new () => {
   props: {
     absolute: Boolean,
     attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+    closeOnBack: {
+      type: Boolean,
+      default: true,
+    },
     contained: Boolean,
     contentClass: null,
     noClickAnimation: Boolean,
@@ -163,14 +168,17 @@ export const VOverlay = genericComponent<new () => {
       }
     }
 
-    useBackButton(next => {
-      if (isTop.value && isActive.value) {
-        next(false)
-        if (!props.persistent) isActive.value = false
-        else animateClick()
-      } else {
-        next()
-      }
+    const router = useRouter()
+    useToggleScope(() => props.closeOnBack, () => {
+      useBackButton(router, next => {
+        if (isTop.value && isActive.value) {
+          next(false)
+          if (!props.persistent) isActive.value = false
+          else animateClick()
+        } else {
+          next()
+        }
+      })
     })
 
     const top = ref<number>()

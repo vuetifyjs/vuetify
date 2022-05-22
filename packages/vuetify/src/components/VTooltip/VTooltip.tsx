@@ -94,6 +94,7 @@ export const VTooltip = genericComponent<new () => {
           persistent
           open-on-click={ false }
           open-on-hover
+          close-on-back={ false }
           role="tooltip"
           eager
           activatorProps={{
