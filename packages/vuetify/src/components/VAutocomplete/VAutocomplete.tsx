@@ -176,7 +176,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        if (props.multiple || model.value === undefined) {
+        if (props.multiple || model.value.length === 0) {
           search.value = ''
         } else {
           const item = items.value.find(x => x.value === model.value[0])!
