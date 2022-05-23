@@ -120,6 +120,7 @@ export const VDialog = genericComponent<new () => {
             'aria-haspopup': 'dialog',
             'aria-expanded': String(isActive.value),
           }}
+          z-index={ 2400 }
           { ...attrs }
           v-slots={{
             default: slots.default,

@@ -35,6 +35,7 @@ import {
   ref,
   Teleport,
   toHandlers,
+  toRef,
   Transition,
   watch,
 } from 'vue'
@@ -97,6 +98,10 @@ export const VOverlay = genericComponent<new () => {
       type: [String, Boolean],
       default: true,
     },
+    zIndex: {
+      type: [Number, String],
+      default: 2000,
+    },
 
     ...makeActivatorProps(),
     ...makeDimensionProps(),
@@ -122,7 +127,7 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { isTop } = useStack(isActive)
+    const { isTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
     const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
     const { dimensionStyles } = useDimension(props)
 
@@ -231,9 +236,7 @@ export const VOverlay = genericComponent<new () => {
                   themeClasses.value,
                   rtlClasses.value,
                 ]}
-                style={{
-                  top: convertToUnit(top.value),
-                }}
+                style={[stackStyles.value, { top: convertToUnit(top.value) }]}
                 ref={ root }
                 {...attrs}
               >
