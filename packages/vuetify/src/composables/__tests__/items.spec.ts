@@ -17,17 +17,37 @@ describe('items.ts', () => {
 
   it.each([
     [{ items: [] }, []],
-    [{ items: ['Foo'] }, [{ title: 'Foo', value: 'Foo' }]],
-    [{ items: [{ title: 'Foo' }] }, [{ title: 'Foo', value: 'Foo' }]],
-    [{ items: [{ text: 'Foo' }], itemTitle: 'text' }, [{ title: 'Foo', value: 'Foo' }]],
-    [{ items: [{ title: 'Foo', id: 1 }], itemValue: 'id' }, [{ title: 'Foo', value: 1 }]],
+    [{ items: ['Foo'] }, [{ title: 'Foo', value: 'Foo', header: null, divider: false }]],
+    [{ items: [{ title: 'Foo' }] }, [{ title: 'Foo', value: 'Foo', header: null, divider: false }]],
+    [{ items: [{ text: 'Foo' }], itemTitle: 'text' }, [{ title: 'Foo', value: 'Foo', header: null, divider: false }]],
+    [{ items: [{ title: 'Foo', id: 1 }], itemValue: 'id' }, [{ title: 'Foo', value: 1, header: null, divider: false }]],
     [{ items: [{ title: 'Foo', children: ['Fizz'] }] }, [
-      { title: 'Foo', value: 'Foo', children: [{ title: 'Fizz', value: 'Fizz' }] },
+      {
+        title: 'Foo',
+        value: 'Foo',
+        header: null,
+        divider: false,
+        children: [
+          { title: 'Fizz', value: 'Fizz', header: null, divider: false },
+        ],
+      },
     ]],
     [{ items: [{ title: 'Foo', labels: ['Fizz'] }], itemChildren: 'labels' }, [
-      { title: 'Foo', value: 'Foo', children: [{ title: 'Fizz', value: 'Fizz' }] },
+      {
+        title: 'Foo',
+        value: 'Foo',
+        header: null,
+        divider: false,
+        children: [
+          { title: 'Fizz', value: 'Fizz', header: null, divider: false },
+        ],
+      },
     ]],
-    [{ items: ['Foo'], itemProps: () => ({ status: true }) }, [{ title: 'Foo', value: 'Foo', status: true }]],
+    [{ items: ['Foo'], itemProps: () => ({ status: true }) }, [
+      { title: 'Foo', value: 'Foo', header: null, divider: false, status: true },
+    ]],
+    [{ items: [{ header: 'Foo Header' }] }, [{ title: null, value: null, header: 'Foo Header', divider: false }]],
+    [{ items: [{ divider: true }] }, [{ title: null, value: null, header: null, divider: true }]],
   ])('should have proper styles', (props: ItemProps, expected) => {
     const { items } = useItems({ ...defaults, ...props })
 

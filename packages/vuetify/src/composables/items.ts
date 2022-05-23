@@ -46,13 +46,17 @@ export const makeItemsProps = propsFactory({
 }, 'item')
 
 export function transformItem (props: ItemProps, item: any) {
-  const title = getPropertyFromItem(item, props.itemTitle, item)
-  const value = getPropertyFromItem(item, props.itemValue, title)
+  const header = getPropertyFromItem(item, 'header', null)
+  const divider = getPropertyFromItem(item, 'divider', false)
+  const title = getPropertyFromItem(item, props.itemTitle, header || divider ? null : item)
+  const value = getPropertyFromItem(item, props.itemValue, header || divider ? null : title)
   const children = getObjectValueByPath(item, props.itemChildren)
 
   return {
     title,
     value,
+    header,
+    divider,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
     ...props.itemProps?.(item),
   }
