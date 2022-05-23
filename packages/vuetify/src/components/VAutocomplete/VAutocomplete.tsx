@@ -94,20 +94,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     )
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
-      const array: InternalItem[] = Array(model.value.length)
-
-      const indices = model.value.reduce((obj, value, index) => {
-        obj[value] = index
-        return obj
-      }, {} as Record<any, number>)
-
-      for (const item of items.value) {
-        const index = indices[item.props.value]
-
-        if (index != null) array.splice(index, 1, item)
-      }
-
-      return array
+      return model.value
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
@@ -150,7 +137,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
         const index = selected.value.findIndex(selection => selection === item.props.value)
 
         if (index === -1) {
-          model.value = [...model.value, item.props.value]
+          model.value = [...model.value, item]
           search.value = ''
         } else {
           const value = [...model.value]
@@ -158,7 +145,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
           model.value = value
         }
       } else {
-        model.value = [item.props.value]
+        model.value = [item]
 
         isSelecting.value = true
 

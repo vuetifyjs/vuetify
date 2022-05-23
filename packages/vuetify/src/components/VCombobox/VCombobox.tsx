@@ -12,7 +12,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { InternalItem, transformItem, useItems } from '@/composables/items'
+import { transformItem, useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -24,6 +24,7 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
+import type { InternalItem } from '@/composables/items'
 import type { DefaultChipSlot, InternalSelectItem } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
@@ -108,7 +109,7 @@ export const VCombobox = genericComponent<new <T>() => {
         if (props.multiple) {
           _search.value = val
         } else {
-          model.value = [val]
+          model.value = [transformItem(props, val)]
         }
 
         if (val && props.multiple && props.delimiters?.length) {
@@ -116,7 +117,7 @@ export const VCombobox = genericComponent<new <T>() => {
           if (values.length > 1) {
             values.forEach(v => {
               v = v.trim()
-              if (v) select({ props: { value: v, title: v }, item: { value: v, title: v } })
+              if (v) select({ props: { value: v, title: v }, item: v })
             })
             _search.value = ''
           }
@@ -135,20 +136,7 @@ export const VCombobox = genericComponent<new <T>() => {
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
-      const array: InternalItem[] = Array(model.value.length)
-
-      const indices = model.value.reduce((obj, value, index) => {
-        obj[value] = index
-        return obj
-      }, {} as Record<any, number>)
-
-      for (const item of items.value) {
-        const index = indices[item.props.value]
-
-        if (index != null) array.splice(index, 1, item)
-      }
-
-      return array
+      return model.value
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
@@ -228,7 +216,7 @@ export const VCombobox = genericComponent<new <T>() => {
       }
 
       if (e.key === 'Enter') {
-        select({ props: { value: search.value, title: search.value }, item: { value: search.value, title: search.value } })
+        select({ props: { value: search.value, title: search.value }, item: search.value })
         search.value = ''
       }
     }
@@ -243,7 +231,7 @@ export const VCombobox = genericComponent<new <T>() => {
         const index = selected.value.findIndex(selection => selection === item.props.value)
 
         if (index === -1) {
-          model.value = [...model.value, item.props.value]
+          model.value = [...model.value, item]
         } else {
           const value = [...model.value]
           value.splice(index, 1)

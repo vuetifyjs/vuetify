@@ -79,14 +79,13 @@ export function transformItems (props: ItemProps, items: ItemProps['items']) {
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
-  function transformIn (value: any[]) {
-    if (props.returnObject) return value.map(item => getPropertyFromItem(item, props.itemValue))
-    return value
+  function transformIn (value: any[]): InternalItem[] {
+    return value.map(item => transformItem(props, item))
   }
 
-  function transformOut (value: any[]) {
-    if (props.returnObject) return items.value.filter(item => value.includes(item.props.value)).map(({ item }) => item)
-    return value
+  function transformOut (value: InternalItem[]) {
+    if (props.returnObject) return value.map(({ item }) => item)
+    return value.map(({ props }) => props.value)
   }
 
   return { items, transformIn, transformOut }
