@@ -1,23 +1,23 @@
-import { createDisplay, DisplaySymbol } from '@/composables/display'
-import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { defaultSets, IconSymbol } from '@/composables/icons'
+// Composables
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
-import { createLocaleAdapter, LocaleAdapterSymbol } from '@/composables/locale'
-import { createRtl, RtlSymbol } from '@/composables/rtl'
-import { aliases as iconAliases, mdi } from '@/iconsets/mdi'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createIcons, IconSymbol } from '@/composables/icons'
+import { createLocale, LocaleAdapterSymbol } from '@/composables/locale'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
+import { defineComponent } from '@/util'
 import { reactive } from 'vue'
-import { defineComponent, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
-import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
-import type { DefaultsOptions } from '@/composables/defaults'
+import type { ThemeOptions } from '@/composables/theme'
 
 export * from './composables'
 
@@ -38,7 +38,6 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
       aliases = {},
       components = {},
       directives = {},
-      icons = {},
     } = options
 
     for (const key in directives) {
@@ -59,17 +58,8 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     app.provide(DefaultsSymbol, createDefaults(options.defaults))
     app.provide(DisplaySymbol, createDisplay(options.display))
     app.provide(ThemeSymbol, createTheme(app, options.theme))
-    app.provide(IconSymbol, mergeDeep({
-      defaultSet: 'mdi',
-      sets: {
-        ...defaultSets,
-        mdi,
-      },
-      aliases: iconAliases,
-    }, icons))
-    const { adapter, rootInstance } = createLocaleAdapter(app, options?.locale)
-    app.provide(LocaleAdapterSymbol, adapter)
-    app.provide(RtlSymbol, createRtl(rootInstance, options?.locale))
+    app.provide(IconSymbol, createIcons(options.icons))
+    app.provide(LocaleAdapterSymbol, createLocale(app, options.locale))
 
     // Vue's inject() can only be used in setup
     function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
