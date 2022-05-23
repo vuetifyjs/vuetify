@@ -128,6 +128,14 @@ export function useValidation (
       results.push(result)
     }
 
+    if (form?.isReactiveErrors) {
+      if (results.length) {
+        form.errorMessagesForItems.value[uid.value] = results
+      } else if (uid.value in form.errorMessagesForItems.value) {
+        delete form.errorMessagesForItems.value[uid.value]
+      }
+    }
+
     internalErrorMessages.value = results
     isValidating.value = false
     isPristine.value = false

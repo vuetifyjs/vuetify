@@ -12,13 +12,16 @@ export interface FormProvide {
     validate: () => Promise<string[]>,
     reset: () => void,
     resetValidation: () => void,
-    isValid: Ref<boolean | null>,
+    isValid: Ref<boolean | null>
   ) => void
   unregister: (id: number | string) => void
   items: Ref<FormField[]>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  isReactiveErrors: ComputedRef<boolean>
+  errorMessagesForItems: Ref<Record<string, string[]>>
+  errorMessages: ComputedRef<FormValidationResult[]>
 }
 
 interface FormField {
@@ -29,12 +32,14 @@ interface FormField {
   isValid: boolean | null
 }
 
-interface FormValidationResult {
+export interface FormValidationResult {
   id: number | string
   errorMessages: string[]
 }
 
-export interface SubmitEventPromise extends SubmitEvent, Promise<{ valid: boolean, errorMessages: FormValidationResult[] }> {}
+export interface SubmitEventPromise
+  extends SubmitEvent,
+  Promise<{ valid: boolean, errorMessages: FormValidationResult[] }> { }
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 
@@ -45,6 +50,8 @@ export interface FormProps {
   readonly: boolean
   modelValue: boolean | null
   'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+
+  isReactiveErrors: boolean
 }
 
 export const makeFormProps = propsFactory({
@@ -56,6 +63,10 @@ export const makeFormProps = propsFactory({
     type: Boolean as PropType<boolean | null>,
     default: null,
   },
+  isReactiveErrors: {
+    type: Boolean,
+    default: false,
+  },
 })
 
 export function createForm (props: FormProps) {
@@ -63,15 +74,22 @@ export function createForm (props: FormProps) {
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
+  const isReactiveErrors = computed(() => props.isReactiveErrors)
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
-  const errorMessages = ref<FormValidationResult[]>([])
+  const errorMessagesForItems = ref<Record<string, string[]>>({})
+  const errorMessages = computed<FormValidationResult[]>(() =>
+    Object.keys(errorMessagesForItems.value).reduce<FormValidationResult[]>((rec, i) => {
+      rec.push({ id: i, errorMessages: errorMessagesForItems.value[i] })
+      return rec
+    }, [])
+  )
 
   async function validate () {
-    const results = []
+    const results: Record<string, string[]> = {}
     let valid = true
 
-    errorMessages.value = []
+    errorMessagesForItems.value = {}
     isValidating.value = true
 
     for (const item of items.value) {
@@ -80,16 +98,13 @@ export function createForm (props: FormProps) {
       if (itemErrorMessages.length > 0) {
         valid = false
 
-        results.push({
-          id: item.id,
-          errorMessages: itemErrorMessages,
-        })
+        results[item.id] = itemErrorMessages
       }
 
       if (!valid && props.fastFail) break
     }
 
-    errorMessages.value = results
+    errorMessagesForItems.value = results
     isValidating.value = false
 
     return { valid, errorMessages: errorMessages.value }
@@ -102,23 +117,27 @@ export function createForm (props: FormProps) {
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errorMessages.value = []
+    errorMessagesForItems.value = {}
     model.value = null
   }
 
-  watch(items, () => {
-    let valid = null
+  watch(
+    items,
+    () => {
+      let valid = null
 
-    if (items.value.some(item => item.isValid === false)) {
-      valid = false
-    } else if (items.value.every(item => item.isValid === true)) {
-      valid = true
+      if (items.value.some(item => item.isValid === false)) {
+        valid = false
+      } else if (items.value.every(item => item.isValid === true)) {
+        valid = true
+      }
+
+      model.value = valid
+    },
+    {
+      deep: true,
     }
-
-    model.value = valid
-  }, {
-    deep: true,
-  })
+  )
 
   provide(FormKey, {
     register: (id, validate, reset, resetValidation, isValid) => {
@@ -143,6 +162,9 @@ export function createForm (props: FormProps) {
     isReadonly,
     isValidating,
     items,
+    errorMessagesForItems,
+    errorMessages,
+    isReactiveErrors,
   })
 
   return {
