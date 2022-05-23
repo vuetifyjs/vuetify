@@ -168,7 +168,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ attrs['onClick:prependInner'] }
-                onClick:appendInner={ attrs['onClick:prependInner'] }
+                onClick:appendInner={ attrs['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }

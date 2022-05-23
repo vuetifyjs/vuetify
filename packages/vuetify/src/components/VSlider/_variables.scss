@@ -22,10 +22,13 @@ $slider-thumb-label-transition: .2s settings.$accelerated-easing !default;
 $slider-thumb-label-padding: 6px !default;
 $slider-thumb-touch-size: 42px !default;
 $slider-tick-border-radius: 2px !default;
-$slider-tick-label-margin-bottom: 25px !default;
+$slider-tick-label-margin-top: 8px !default;
+$slider-tick-label-margin-start: 12px !default;
 $slider-track-border-radius: 6px !default;
-$slider-track-width: 2px !default;
+$slider-track-active-size-offset: 2px !default;
 $slider-transition: .3s cubic-bezier(0.25, 0.8, 0.5, 1) !default;
 $slider-vertical-margin-bottom: 12px !default;
 $slider-vertical-margin-top: 12px !default;
 $slider-vertical-min-height: 300px !default;
+
+$slider-track-active-size: calc(var(--v-slider-track-size) + #{$slider-track-active-size-offset}) !default;
