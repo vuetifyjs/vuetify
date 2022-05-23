@@ -16,7 +16,6 @@
   line-height: $button-line-height
   max-width: $button-max-width
   outline: none
-  overflow: $button-overflow
   position: relative
   text-decoration: none
   text-indent: $button-text-letter-spacing
@@ -27,7 +26,6 @@
   user-select: none
   vertical-align: $button-vertical-align
   flex-shrink: 0
-  white-space: $button-white-space
 
   @at-root
     @include button-sizes()
@@ -113,7 +111,9 @@
       --v-icon-size-multiplier: #{calc(24/21)}
 
 .v-btn__content
+  overflow: $button-overflow
   transition: $button-content-transition
+  white-space: $button-white-space
 
 .v-btn__overlay
   @include tools.absolute()
