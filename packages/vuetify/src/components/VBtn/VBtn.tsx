@@ -142,16 +142,18 @@ export const VBtn = defineComponent({
             />
           ) }
 
-          { typeof props.icon === 'boolean'
-            ? slots.default?.()
-            : (
-              <VIcon
-                class="v-btn__icon"
-                icon={ props.icon }
-                size={ props.size }
-              />
-            )
-          }
+          <div class="v-btn__content">
+            { typeof props.icon === 'boolean'
+              ? slots.default?.()
+              : (
+                <VIcon
+                  class="v-btn__icon"
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              )
+            }
+          </div>
 
           { !props.icon && props.appendIcon && (
             <VIcon
