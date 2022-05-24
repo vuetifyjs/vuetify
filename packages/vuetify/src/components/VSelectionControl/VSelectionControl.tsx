@@ -19,6 +19,7 @@ import { Ripple } from '@/directives/ripple'
 import { computed, inject, ref } from 'vue'
 import {
   deepEqual,
+  filterInputAttrs,
   genericComponent,
   getUid,
   pick,
@@ -208,7 +209,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
         })
         : props.label
       const type = group?.type.value ?? props.type
-      const [rootAttrs, inputAttrs] = pick(attrs, ['class'])
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       return (
         <div
