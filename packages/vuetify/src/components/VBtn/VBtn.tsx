@@ -157,6 +157,14 @@ export const VBtn = defineComponent({
                 />
               )
             }
+
+            { !props.icon && props.appendIcon && (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.appendIcon }
+                end
+              />
+            ) }
           </span>
 
           { props.loading && (
@@ -171,13 +179,6 @@ export const VBtn = defineComponent({
             }</span>
           ) }
 
-          { !props.icon && props.appendIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.appendIcon }
-              end
-            />
-          ) }
         </Tag>
       )
     }
