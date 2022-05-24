@@ -266,7 +266,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
         if (!props.multiple || !search.value) return
 
-        model.value = [...model.value, search.value]
+        model.value = [...model.value, transformItem(props, search.value)]
         search.value = ''
       }
     })

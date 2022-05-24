@@ -20,7 +20,7 @@ import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { InternalItem} from '@/composables/items'
+import type { InternalItem } from '@/composables/items'
 import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 
