@@ -146,20 +146,22 @@ export const VBtn = defineComponent({
             />
           ) }
 
-          { typeof props.icon === 'boolean'
-            ? <span class="v-btn__content">{ slots.default?.() }</span>
-            : (
-              <VIcon
-                class="v-btn__content v-btn__icon"
-                icon={ props.icon }
-                size={ props.size }
-              />
-            )
-          }
+          <span class="v-btn__content">
+            { typeof props.icon === 'boolean'
+              ? slots.default?.()
+              : (
+                <VIcon
+                  class="v-btn__icon"
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              )
+            }
+          </span>
 
           { props.loading && (
             <span class="v-btn__loader">{
-              slots.loader ? slots.loader?.() : (
+              slots.loader ? slots.loader() : (
                 <VProgressCircular
                   indeterminate
                   size="23"
