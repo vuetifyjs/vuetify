@@ -43,7 +43,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: (string | Record<string, any>)[],
+  items: any[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -131,9 +131,9 @@ export function useFilter<T extends InternalItem> (
   ) ? '' : String(query.value))
 
   const filteredItems = computed(() => {
-    const rawItems = unref(items)
+    const transformedItems = unref(items)
     const matches = filterItems(
-      rawItems.map(({ item }) => item),
+      transformedItems.map(({ originalItem }) => originalItem),
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
@@ -145,7 +145,7 @@ export function useFilter<T extends InternalItem> (
     )
 
     return matches.map(({ index, matches }) => {
-      const item = rawItems[index]
+      const item = transformedItems[index]
 
       return {
         item,

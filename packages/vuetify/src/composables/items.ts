@@ -13,16 +13,16 @@ export interface InternalItem {
     value: any
   }
   children?: InternalItem[]
-  item: string | object
+  originalItem: any
 }
 
 export interface ItemProps {
-  items: (string | object)[]
+  items: any[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
   itemChildren: string
-  itemProps: (item: string | object) => object
-  returnObject?: boolean
+  itemProps: ((item: any) => object) | undefined
+  returnObject: boolean | undefined
 }
 
 // Composables
@@ -50,7 +50,7 @@ export const makeItemsProps = propsFactory({
   returnObject: Boolean,
 }, 'item')
 
-export function transformItem (props: ItemProps, item: any) {
+export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getObjectValueByPath(item, props.itemChildren)
@@ -62,11 +62,11 @@ export function transformItem (props: ItemProps, item: any) {
       ...props.itemProps?.(item),
     },
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
-    item,
+    originalItem: item,
   }
 }
 
-export function transformItems (props: ItemProps, items: ItemProps['items']) {
+export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
   const array: InternalItem[] = []
 
   for (const item of items) {
@@ -84,7 +84,7 @@ export function useItems (props: ItemProps) {
   }
 
   function transformOut (value: InternalItem[]) {
-    if (props.returnObject) return value.map(({ item }) => item)
+    if (props.returnObject) return value.map(({ originalItem: item }) => item)
     return value.map(({ props }) => props.value)
   }
 

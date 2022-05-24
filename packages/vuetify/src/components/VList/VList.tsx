@@ -27,16 +27,13 @@ import { genericComponent, getObjectValueByPath, getPropertyFromItem, useRender 
 import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import type { ItemProps } from '@/composables/items'
+import type { InternalItem, ItemProps } from '@/composables/items'
 
-export type InternalListItem = {
+export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
-  props?: Record<string, any>
-  children?: InternalListItem[]
-  item: unknown
 }
 
-function transformItem (props: ItemProps & { itemType: string }, item: string | object) {
+function transformItem (props: ItemProps & { itemType: string }, item: string | object): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
@@ -50,7 +47,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: string | 
       ...props.itemProps?.(item),
     },
     children: type === item && children ? transformItems(props, children) : undefined,
-    item,
+    originalItem: item,
   }
 }
 

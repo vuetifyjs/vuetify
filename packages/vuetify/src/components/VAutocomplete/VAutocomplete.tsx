@@ -273,7 +273,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
                             }}
                           >
                             { slots.chip
-                              ? slots.chip({ props: slotProps, item: selection.item })
+                              ? slots.chip({ props: slotProps, item: selection.originalItem })
                               : (<VChip { ...slotProps } />)
                             }
                           </VDefaultsProvider>
@@ -281,7 +281,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
                         { !hasChips && (
                           slots.selection
-                            ? slots.selection({ item: selection.item })
+                            ? slots.selection({ item: selection.originalItem })
                             : (
                               <span class="v-autocomplete__selection-text">
                                 { selection.props.title }

@@ -117,7 +117,7 @@ export const VCombobox = genericComponent<new <T>() => {
           if (values.length > 1) {
             values.forEach(v => {
               v = v.trim()
-              if (v) select({ props: { value: v, title: v }, item: v })
+              if (v) select({ props: { value: v, title: v }, originalItem: v })
             })
             _search.value = ''
           }
@@ -216,7 +216,7 @@ export const VCombobox = genericComponent<new <T>() => {
       }
 
       if (e.key === 'Enter') {
-        select({ props: { value: search.value, title: search.value }, item: search.value })
+        select({ props: { value: search.value, title: search.value }, originalItem: search.value })
         search.value = ''
       }
     }
@@ -373,7 +373,7 @@ export const VCombobox = genericComponent<new <T>() => {
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item: selection.item })
+                            ? slots.chip({ props: slotProps, item: selection.originalItem })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
@@ -381,7 +381,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
                       { !hasChips && (
                         slots.selection
-                          ? slots.selection({ item: selection.item })
+                          ? slots.selection({ item: selection.originalItem })
                           : (
                             <span class="v-combobox__selection-text">
                               { selection.props.title }
