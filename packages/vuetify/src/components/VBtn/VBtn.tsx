@@ -138,15 +138,15 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && props.prependIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.prependIcon }
-              start
-            />
-          ) }
-
           <span class="v-btn__content">
+            { !props.icon && props.prependIcon && (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.prependIcon }
+                start
+              />
+            ) }
+
             { typeof props.icon === 'boolean'
               ? slots.default?.()
               : (
