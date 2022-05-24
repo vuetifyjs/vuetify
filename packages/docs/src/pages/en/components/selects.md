@@ -50,7 +50,7 @@ Select fields components are used for collecting user provided information from 
 
 #### Custom text and value
 
-You can specify the specific properties within your items array correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
+You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
 
 <example file="v-select/prop-custom-text-and-value" />
 
