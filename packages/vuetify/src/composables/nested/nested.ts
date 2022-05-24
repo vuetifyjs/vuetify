@@ -85,8 +85,8 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   opened: Array as Prop<unknown[]>,
   selected: Array as Prop<unknown[]>,
-  selectStrategy: [String, Function] as Prop<SelectStrategyValue>,
-  openStrategy: [String, Function] as Prop<OpenStrategyValue>,
+  selectStrategy: [String, Object] as Prop<SelectStrategyValue>,
+  openStrategy: [String, Object] as Prop<OpenStrategyValue>,
   selectedClass: String,
   mandatory: Boolean,
 }, 'nested')

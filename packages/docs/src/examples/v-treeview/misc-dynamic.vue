@@ -12,7 +12,6 @@
         select-strategy="single-independent"
         selected-color="warning"
         select-on-click
-        transition
         hide-select
         @click:open="handleOpen"
       ></v-treeview>

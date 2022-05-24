@@ -45,6 +45,35 @@
       ],
     }),
 
+    computed: {
+      openStrategy () {
+        return {
+          open: ({ id, value, opened, children, parents }) => {
+            if (value) {
+              opened.add(id)
+            } else {
+              opened.delete(id)
+            }
+
+            if (this.ctrlKeyPressed) {
+              const pids = [...new Set([...parents.values()]).values()]
+
+              for (const cid of this.findAllChildren(id, children).filter(cid => pids.includes(cid))) {
+                if (value) {
+                  opened.add(cid)
+                } else {
+                  opened.delete(cid)
+                }
+              }
+            }
+
+            return opened
+          },
+          select: () => null,
+        }
+      },
+    },
+
     mounted () {
       window.addEventListener('keydown', this.checkCtrlKey, { passive: true })
       window.addEventListener('keyup', this.checkCtrlKey, { passive: true })
@@ -69,27 +98,6 @@
         }
 
         return found
-      },
-      openStrategy ({ id, value, opened, children, parents }) {
-        if (value) {
-          opened.add(id)
-        } else {
-          opened.delete(id)
-        }
-
-        if (this.ctrlKeyPressed) {
-          const pids = [...new Set([...parents.values()]).values()]
-
-          for (const cid of this.findAllChildren(id, children).filter(cid => pids.includes(cid))) {
-            if (value) {
-              opened.add(cid)
-            } else {
-              opened.delete(cid)
-            }
-          }
-        }
-
-        return opened
       },
     },
   }

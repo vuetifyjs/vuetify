@@ -1,7 +1,6 @@
 <template>
   <v-treeview
-    selectable
-    item-disabled="locked"
+    show-select
     :items="items"
   ></v-treeview>
 </template>
