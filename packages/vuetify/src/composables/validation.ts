@@ -65,6 +65,7 @@ export function useValidation (
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
+    if (!props.rules.length) return true
     if (props.error || errorMessages.value.length) return false
 
     return isPristine.value ? null : true
