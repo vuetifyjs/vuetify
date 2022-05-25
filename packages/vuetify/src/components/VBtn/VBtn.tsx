@@ -177,8 +177,8 @@ export const VBtn = defineComponent({
                 />
               )
             }</span>
-          ) }
 
+          ) }
         </Tag>
       )
     }
