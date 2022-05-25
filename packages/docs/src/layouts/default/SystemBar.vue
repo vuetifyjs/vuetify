@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
     v-if="false"
-    color="#0F335F"
+    class="cm-system-bar"
     app
     dark
     height="66"
   >
     <a
       class="cm-banner"
-      href="https://store.vuetifyjs.com/products/ui-lib-bundle?utm_source=vuetify"
+      href="https://vueschool.io/sales/price-increase-22?friend=vuetify"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'ui-lib-road-to-vuetify-3',
+          event_label: 'vs-summer-2022',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,11 +78,14 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-mobile.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-mobile.png)
 
     @media (min-width: 437px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-tablet.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-desktop.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-desktop.png)
+
+  .cm-system-bar
+    background: linear-gradient(90deg, hsl(228deg 76% 6%) 40%, hsl(273deg 45% 45%) 74%)
 </style>

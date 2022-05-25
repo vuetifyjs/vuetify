@@ -13,7 +13,7 @@ related:
 
 Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the currently active locale with the **current** option. The **lang** service also supports easy integration with [vue-i18n](#vue-i18n).
 
-<entry-ad />
+<vuetify-ad slug="vs-video-i18n" />
 
 ## Getting started
 

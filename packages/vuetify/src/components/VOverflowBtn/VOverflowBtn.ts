@@ -40,6 +40,9 @@ export default VAutocomplete.extend({
     computedItems (): object[] {
       return this.segmented ? this.allItems : this.filteredItems
     },
+    labelValue (): boolean {
+      return (this.isFocused && !this.persistentPlaceholder) || this.isLabelActive
+    },
   },
 
   methods: {

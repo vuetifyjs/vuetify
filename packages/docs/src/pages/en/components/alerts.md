@@ -107,6 +107,8 @@ The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **
 
 ## Accessibility
 
+<vuetify-ad slug="vs-video-accessibility" />
+
 By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert) which denotes that the alert \"is a live region with important and usually time-sensitive information.\" When using the **dismissible** prop, the close icon will receive a corresponding `aria-label`. This value can be modified by changing either the **close-label** prop or globally through customizing the [Internationalization](/features/internationalization)'s default value for the _close_ property.
 
 <backmatter />
