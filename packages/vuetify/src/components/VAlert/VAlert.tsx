@@ -11,6 +11,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -73,6 +74,7 @@ export const VAlert = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -102,7 +104,8 @@ export const VAlert = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
 
@@ -138,7 +141,7 @@ export const VAlert = defineComponent({
           style={[
             colorStyles.value,
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           role="alert"
         >

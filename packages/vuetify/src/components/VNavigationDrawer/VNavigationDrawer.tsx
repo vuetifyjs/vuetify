@@ -47,7 +47,7 @@ export const VNavigationDrawer = defineComponent({
       type: [Number, String],
       default: 256,
     },
-    position: {
+    location: {
       type: String as PropType<'left' | 'right' | 'bottom'>,
       default: 'left',
       validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
@@ -107,7 +107,7 @@ export const VNavigationDrawer = defineComponent({
       isTemporary,
       width,
       touchless: toRef(props, 'touchless'),
-      position: toRef(props, 'position'),
+      position: toRef(props, 'location'),
     })
 
     const layoutSize = computed(() => {
@@ -120,7 +120,7 @@ export const VNavigationDrawer = defineComponent({
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
-      position: toRef(props, 'position'),
+      position: toRef(props, 'location'),
       layoutSize,
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),
@@ -154,13 +154,13 @@ export const VNavigationDrawer = defineComponent({
             class={[
               'v-navigation-drawer',
               {
-                'v-navigation-drawer--bottom': props.position === 'bottom',
-                'v-navigation-drawer--end': props.position === 'right',
+                'v-navigation-drawer--bottom': props.location === 'bottom',
+                'v-navigation-drawer--end': props.location === 'right',
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
-                'v-navigation-drawer--start': props.position === 'left',
+                'v-navigation-drawer--start': props.location === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--active': isActive.value,
               },

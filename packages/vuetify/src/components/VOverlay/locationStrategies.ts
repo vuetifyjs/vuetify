@@ -9,26 +9,26 @@ import type { EffectScope, PropType, Ref } from 'vue'
 import type { Anchor } from './util/anchor'
 import { Box } from '@/util/box'
 
-export interface PositionStrategyData {
+export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
 }
 
-const positionStrategies = {
-  static: staticPositionStrategy, // specific viewport position, usually centered
-  connected: connectedPositionStrategy, // connected to a certain element
+const locationStrategies = {
+  static: staticLocationStrategy, // specific viewport position, usually centered
+  connected: connectedLocationStrategy, // connected to a certain element
 }
 
 export interface StrategyProps {
-  positionStrategy: keyof typeof positionStrategies | (
+  locationStrategy: keyof typeof locationStrategies | (
     (
-      data: PositionStrategyData,
+      data: LocationStrategyData,
       props: StrategyProps,
       contentStyles: Ref<Record<string, string>>
-    ) => undefined | { updatePosition: (e: Event) => void }
+    ) => undefined | { updateLocation: (e: Event) => void }
   )
-  anchor: Anchor
+  location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string
   maxHeight?: number | string
@@ -37,14 +37,14 @@ export interface StrategyProps {
   minWidth?: number | string
 }
 
-export const makePositionStrategyProps = propsFactory({
-  positionStrategy: {
-    type: [String, Function] as PropType<StrategyProps['positionStrategy']>,
+export const makeLocationStrategyProps = propsFactory({
+  locationStrategy: {
+    type: [String, Function] as PropType<StrategyProps['locationStrategy']>,
     default: 'static',
-    validator: (val: any) => typeof val === 'function' || val in positionStrategies,
+    validator: (val: any) => typeof val === 'function' || val in locationStrategies,
   },
-  anchor: {
-    type: String as PropType<StrategyProps['anchor']>,
+  location: {
+    type: String as PropType<StrategyProps['location']>,
     default: 'bottom',
   },
   origin: {
@@ -54,27 +54,27 @@ export const makePositionStrategyProps = propsFactory({
   offset: [Number, String],
 })
 
-export function usePositionStrategies (
+export function useLocationStrategies (
   props: StrategyProps,
-  data: PositionStrategyData
+  data: LocationStrategyData
 ) {
   const contentStyles = ref({})
-  const updatePosition = ref<(e: Event) => void>()
+  const updateLocation = ref<(e: Event) => void>()
 
   let scope: EffectScope | undefined
   watchEffect(async () => {
     scope?.stop()
-    updatePosition.value = undefined
+    updateLocation.value = undefined
 
-    if (!(IN_BROWSER && data.isActive.value && props.positionStrategy)) return
+    if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
 
     scope = effectScope()
     await nextTick()
     scope.run(() => {
-      if (typeof props.positionStrategy === 'function') {
-        updatePosition.value = props.positionStrategy(data, props, contentStyles)?.updatePosition
+      if (typeof props.locationStrategy === 'function') {
+        updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
-        updatePosition.value = positionStrategies[props.positionStrategy](data, props, contentStyles)?.updatePosition
+        updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
       }
     })
   })
@@ -83,25 +83,25 @@ export function usePositionStrategies (
 
   onScopeDispose(() => {
     IN_BROWSER && window.removeEventListener('resize', onResize)
-    updatePosition.value = undefined
+    updateLocation.value = undefined
     scope?.stop()
   })
 
   function onResize (e: Event) {
-    updatePosition.value?.(e)
+    updateLocation.value?.(e)
   }
 
   return {
     contentStyles,
-    updatePosition,
+    updateLocation,
   }
 }
 
-function staticPositionStrategy () {
+function staticLocationStrategy () {
   // TODO
 }
 
-function connectedPositionStrategy (data: PositionStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
+function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
   const activatorFixed = isFixedPosition(data.activatorEl.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
@@ -109,7 +109,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
     })
   }
 
-  const preferredAnchor = computed(() => parseAnchor(props.anchor))
+  const preferredAnchor = computed(() => parseAnchor(props.location))
   const preferredOrigin = computed(() =>
     props.origin === 'overlap' ? preferredAnchor.value
     : props.origin === 'auto' ? oppositeAnchor(preferredAnchor.value)
@@ -132,7 +132,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   let observe = false
   if (IN_BROWSER) {
     const observer = new ResizeObserver(() => {
-      if (observe) updatePosition()
+      if (observe) updateLocation()
     })
     observer.observe(data.activatorEl.value!)
     observer.observe(data.contentEl.value!)
@@ -143,7 +143,7 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
   }
 
   // eslint-disable-next-line max-statements
-  function updatePosition () {
+  function updateLocation () {
     observe = false
     requestAnimationFrame(() => {
       requestAnimationFrame(() => observe = true)
@@ -244,14 +244,14 @@ function connectedPositionStrategy (data: PositionStrategyData, props: StrategyP
 
   watch(
     () => [preferredAnchor.value, preferredOrigin.value, props.offset],
-    () => updatePosition(),
+    () => updateLocation(),
     { immediate: !activatorFixed }
   )
 
-  if (activatorFixed) nextTick(() => updatePosition())
+  if (activatorFixed) nextTick(() => updateLocation())
   requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updatePosition()
+    if (contentStyles.value.maxHeight) updateLocation()
   })
 
-  return { updatePosition }
+  return { updateLocation }
 }
