@@ -2,11 +2,11 @@
   <v-app>
     <v-navigation-drawer color="grey-darken-2" permanent></v-navigation-drawer>
 
-    <v-app-bar color="grey-lighten-2" elevation="0" :priority="priority"></v-app-bar>
+    <v-app-bar color="grey-lighten-2" elevation="0" :order="order"></v-app-bar>
 
     <v-main>
       <v-card height="200px" class="d-flex justify-center align-center">
-        <v-switch v-model="priority" true-value="-1" false-value="0" label="Toggle priority"></v-switch>
+        <v-switch v-model="order" true-value="-1" false-value="0" label="Toggle order"></v-switch>
       </v-card>
     </v-main>
   </v-app>
@@ -15,7 +15,7 @@
 <script>
   export default {
     data: () => ({
-      priority: 0,
+      order: 0,
     }),
   }
 </script>
