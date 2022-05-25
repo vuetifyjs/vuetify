@@ -9,9 +9,7 @@ import { toRef } from 'vue'
 export const VToolbarItems = defineComponent({
   name: 'VToolbarItems',
 
-  props: {
-    ...makeVariantProps({ variant: 'contained-text' }),
-  },
+  props: makeVariantProps({ variant: 'contained-text' }),
 
   setup (props, { slots }) {
     provideDefaults({
