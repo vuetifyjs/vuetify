@@ -23,16 +23,8 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
-import type { DefaultChipSlot, InternalSelectItem } from '@/components/VSelect/VSelect'
+import type { DefaultChipSlot } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
-
-export interface InternalAutocompleteItem extends InternalSelectItem {
-
-}
-
-export interface DefaultAutocompleteSlot {
-  selection: InternalAutocompleteItem
-}
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -52,7 +44,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultAutocompleteSlot]
+    selection: [{ item: T }]
   }>
 }>()({
   name: 'VAutocomplete',

@@ -25,17 +25,9 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 // Types
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { DefaultChipSlot, InternalSelectItem } from '@/components/VSelect/VSelect'
+import type { DefaultChipSlot } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
-
-export interface InternalComboboxItem extends InternalSelectItem {
-  selected: boolean
-}
-
-export interface DefaultComboboxSlot {
-  selection: InternalComboboxItem
-}
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -55,7 +47,7 @@ export const VCombobox = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultComboboxSlot]
+    selection: [{ item: T }]
   }>
 }>()({
   name: 'VCombobox',

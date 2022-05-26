@@ -21,7 +21,6 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { InternalItem } from '@/composables/items'
-import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 
 export interface InternalSelectItem extends InternalItem {}
@@ -36,10 +35,6 @@ export interface DefaultChipSlot extends DefaultSelectionSlot {
     modelValue: any
   }
 }
-
-export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
-  text: string
-})
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -69,7 +64,7 @@ export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultSelectionSlot]
+    selection: [{ item: T }]
   }>
 }>()({
   name: 'VSelect',
@@ -235,7 +230,7 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { !hasChips && (
                         slots.selection
-                          ? slots.selection({ selection })
+                          ? slots.selection({ item: selection.originalItem })
                           : (
                             <span class="v-select__selection-text">
                               { selection.props.title }
