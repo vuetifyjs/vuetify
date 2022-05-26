@@ -109,7 +109,7 @@ export const VCombobox = genericComponent<new <T>() => {
           if (values.length > 1) {
             values.forEach(v => {
               v = v.trim()
-              if (v) select({ props: { value: v, title: v }, originalItem: v })
+              if (v) select(transformItem(props, v))
             })
             _search.value = ''
           }
@@ -208,7 +208,7 @@ export const VCombobox = genericComponent<new <T>() => {
       }
 
       if (e.key === 'Enter') {
-        select({ props: { value: search.value, title: search.value }, originalItem: search.value })
+        select(transformItem(props, search.value))
         search.value = ''
       }
     }
