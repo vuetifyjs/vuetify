@@ -237,13 +237,13 @@ export default VSelect.extend({
 
         this.$refs.menu.getTiles()
 
-        if (!val.length) {
-          this.setMenuIndex(-1)
-        }
-
         if (this.autoSelectFirst && val.length) {
           this.setMenuIndex(0)
           this.$emit('update:list-index', this.$refs.menu.listIndex)
+        }
+
+        if (!val.length) {
+          this.setMenuIndex(-1)
         }
       })
     },
