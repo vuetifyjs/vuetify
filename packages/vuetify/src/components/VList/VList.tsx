@@ -39,13 +39,17 @@ function transformItem (props: ItemProps & { itemType: string }, item: string | 
   const value = getPropertyFromItem(item, props.itemValue, undefined)
   const children = getObjectValueByPath(item, props.itemChildren)
 
+  const _props = {
+    title,
+    value,
+    ...props.itemProps?.(item),
+  }
+
   return {
     type,
-    props: {
-      title,
-      value,
-      ...props.itemProps?.(item),
-    },
+    title: _props.title,
+    value: _props.value,
+    props: _props,
     children: type === 'item' && children ? transformItems(props, children) : undefined,
     originalItem: item,
   }
