@@ -47,7 +47,7 @@ export const makeSelectProps = propsFactory({
     default: '$dropdown',
   },
   modelValue: {
-    type: [Number, String, Object, Array],
+    type: null,
     default: () => ([]),
   },
   multiple: Boolean,
