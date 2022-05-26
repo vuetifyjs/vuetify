@@ -95,7 +95,9 @@ export const VSelect = genericComponent<new <T>() => {
       }
     )
     const selections = computed(() => {
-      return model.value
+      return model.value.map(v => {
+        return items.value.find(item => item.props.value === v.props.value) || v
+      })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
@@ -161,7 +163,7 @@ export const VSelect = genericComponent<new <T>() => {
           onClick:input={ onClickControl }
           onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
-          modelValue={ model.value.join(', ') }
+          modelValue={ model.value.map(v => v.props.value).join(', ') }
           onKeydown={ onKeydown }
         >
           {{

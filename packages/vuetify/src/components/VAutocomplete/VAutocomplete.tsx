@@ -86,7 +86,9 @@ export const VAutocomplete = genericComponent<new <T>() => {
     )
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
-      return model.value
+      return model.value.map(v => {
+        return items.value.find(item => item.props.value === v.props.value) || v
+      })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
@@ -156,7 +158,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value ?? '')
+        search.value = props.multiple ? '' : String(model.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)

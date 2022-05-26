@@ -128,7 +128,9 @@ export const VCombobox = genericComponent<new <T>() => {
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
-      return model.value
+      return model.value.map(v => {
+        return items.value.find(item => item.props.value === v.props.value) || v
+      })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
