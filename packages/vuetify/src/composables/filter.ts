@@ -10,10 +10,16 @@ import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 import type { InternalItem } from './items'
 
+/**
+ * - match without highlight
+ * - single match (index), length already known
+ * - single match (start, end)
+ * - multiple matches (start, end), probably shouldn't overlap
+ */
+export type FilterMatch = boolean | number | [number, number] | [number, number][]
 export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
-export type FilterMatch = number | [number, number] | [number, number][] | boolean
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
 
 export interface FilterProps {
