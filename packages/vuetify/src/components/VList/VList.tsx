@@ -46,7 +46,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: string | 
       value,
       ...props.itemProps?.(item),
     },
-    children: type === item && children ? transformItems(props, children) : undefined,
+    children: type === 'item' && children ? transformItems(props, children) : undefined,
     originalItem: item,
   }
 }
