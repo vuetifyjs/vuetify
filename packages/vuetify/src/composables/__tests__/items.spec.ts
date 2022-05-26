@@ -23,6 +23,8 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, items: ['Foo'] })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -36,6 +38,8 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, items: [{ title: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -49,6 +53,8 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, itemTitle: 'text', items: [{ text: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -62,6 +68,8 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, itemValue: 'id', items: [{ title: 'Foo', id: 1 }] })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 1,
         props: {
           title: 'Foo',
           value: 1,
@@ -85,12 +93,16 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, items: originalItems })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
         },
         children: [
           {
+            title: 'Bar',
+            value: 'Bar',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -117,12 +129,16 @@ describe('items.ts', () => {
     const { items } = useItems({ ...defaults, itemChildren: 'labels', items: originalItems })
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
         },
         children: [
           {
+            title: 'Bar',
+            value: 'Bar',
             props: {
               title: 'Bar',
               value: 'Bar',
@@ -154,6 +170,8 @@ describe('items.ts', () => {
 
     expect(items.value).toEqual([
       {
+        title: 'Foo',
+        value: 'Foo',
         props: {
           title: 'Foo',
           value: 'Foo',
@@ -163,6 +181,8 @@ describe('items.ts', () => {
         originalItem: originalItems[0],
       },
       {
+        title: 'Bar',
+        value: 'Bar',
         props: {
           title: 'Bar',
           value: 'Bar',
