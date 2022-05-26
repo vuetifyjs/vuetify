@@ -139,7 +139,7 @@ export function useFilter (
   const filteredItems = computed(() => {
     const transformedItems = unref(items)
     const matches = filterItems(
-      transformedItems.map(({ originalItem }) => originalItem),
+      transformedItems,
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
@@ -150,14 +150,10 @@ export function useFilter (
       },
     )
 
-    return matches.map(({ index, matches }) => {
-      const item = transformedItems[index]
-
-      return {
-        item,
-        matches,
-      }
-    })
+    return matches.map(({ index, matches }) => ({
+      item: transformedItems[index],
+      matches,
+    }))
   })
 
   return { filteredItems }

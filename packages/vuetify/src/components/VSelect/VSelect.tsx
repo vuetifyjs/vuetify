@@ -96,7 +96,7 @@ export const VSelect = genericComponent<new <T>() => {
     )
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => item.props.value === v.props.value) || v
+        return items.value.find(item => item.value === v.value) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
@@ -124,7 +124,7 @@ export const VSelect = genericComponent<new <T>() => {
     }
     function select (item: InternalItem) {
       if (props.multiple) {
-        const index = selected.value.findIndex(selection => selection === item.props.value)
+        const index = selected.value.findIndex(selection => selection === item.value)
 
         if (index === -1) {
           model.value = [...model.value, item]

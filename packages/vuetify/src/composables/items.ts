@@ -7,6 +7,8 @@ import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
 export interface InternalItem {
+  title: string
+  value: any
   props: {
     [key: string]: any
     title: string
@@ -55,12 +57,16 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getObjectValueByPath(item, props.itemChildren)
 
+  const _props = {
+    title,
+    value,
+    ...props.itemProps?.(item),
+  }
+
   return {
-    props: {
-      title,
-      value,
-      ...props.itemProps?.(item),
-    },
+    title: _props.title,
+    value: _props.value,
+    props: _props,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
     originalItem: item,
   }

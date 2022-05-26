@@ -129,7 +129,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => item.props.value === v.props.value) || v
+        return items.value.find(item => item.value === v.value) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
@@ -222,7 +222,7 @@ export const VCombobox = genericComponent<new <T>() => {
     }
     function select (item: InternalItem) {
       if (props.multiple) {
-        const index = selected.value.findIndex(selection => selection === item.props.value)
+        const index = selected.value.findIndex(selection => selection === item.value)
 
         if (index === -1) {
           model.value = [...model.value, item]
@@ -234,7 +234,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
         search.value = ''
       } else {
-        search.value = item.props.title
+        search.value = item.title
 
         // watch for search watcher to trigger
         nextTick(() => {
@@ -322,8 +322,8 @@ export const VCombobox = genericComponent<new <T>() => {
                           {{
                             title: () => {
                               return isPristine.value
-                                ? item.props.title
-                                : highlightResult(item.props.title, matches.title, search.value?.length ?? 0)
+                                ? item.title
+                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
                             },
                           }}
                         </VListItem>
