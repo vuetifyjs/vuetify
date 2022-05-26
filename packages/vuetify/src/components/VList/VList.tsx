@@ -9,6 +9,7 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeItemsProps } from '@/composables/items'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
@@ -20,38 +21,54 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, getObjectValueByPath, getPropertyFromItem, useRender } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
+import type { InternalItem, ItemProps } from '@/composables/items'
 
-export type ListItem = {
-  [key: string]: any
-  $type?: 'item' | 'subheader' | 'divider'
-  $children?: (string | ListItem)[]
-}
-
-export type InternalListItem = {
+export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
-  props?: Record<string, any>
-  children?: InternalListItem[]
 }
 
-const parseItems = (items?: (string | ListItem)[]): InternalListItem[] | undefined => {
-  if (!items) return undefined
+function transformItem (props: ItemProps & { itemType: string }, item: string | object): InternalListItem {
+  const type = getPropertyFromItem(item, props.itemType, 'item')
+  const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
+  const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const children = getObjectValueByPath(item, props.itemChildren)
 
-  return items.map(item => {
-    if (typeof item === 'string') return { type: 'item', value: item, title: item }
+  const _props = {
+    title,
+    value,
+    ...props.itemProps?.(item),
+  }
 
-    const { $type, $children, ...props } = item
+  return {
+    type,
+    title: _props.title,
+    value: _props.value,
+    props: _props,
+    children: type === 'item' && children ? transformItems(props, children) : undefined,
+    originalItem: item,
+  }
+}
 
-    if ($type === 'subheader') return { type: 'subheader', props }
-    if ($type === 'divider') return { type: 'divider', props }
+function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
+  const array: InternalListItem[] = []
 
-    return { type: 'item', props, children: parseItems($children) }
-  })
+  for (const item of items) {
+    array.push(transformItem(props, item))
+  }
+
+  return array
+}
+
+function useListItems (props: ItemProps & { itemType: string }) {
+  const items = computed(() => transformItems(props, props.items))
+
+  return { items }
 }
 
 export const VList = genericComponent<new <T>() => {
@@ -76,7 +93,6 @@ export const VList = genericComponent<new <T>() => {
       default: 'one',
     },
     nav: Boolean,
-    items: Array as Prop<ListItem[]>,
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -86,6 +102,11 @@ export const VList = genericComponent<new <T>() => {
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    itemType: {
+      type: String,
+      default: 'type',
+    },
+    ...makeItemsProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -100,7 +121,7 @@ export const VList = genericComponent<new <T>() => {
   },
 
   setup (props, { slots }) {
-    const items = computed(() => parseItems(props.items))
+    const { items } = useListItems(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { borderClasses } = useBorder(props)

@@ -1,6 +1,5 @@
 <template>
   <v-list
-    v-model:active="active"
     v-model:opened="opened"
     density="compact"
     color="primary"
@@ -75,25 +74,31 @@
 
     setup (props) {
       const { t, te, locale } = useI18n()
-      const active = ref<string[]>([])
       const opened = ref<string[]>([])
 
       const computedItems = computed(() => props.items?.map(item => {
-        if (item.heading) return { $type: 'subheader', text: item.heading }
-        if (item.divider) return { $type: 'divider' }
+        if (item.heading) return { type: 'subheader', title: item.heading }
+        if (item.divider) return { type: 'divider' }
 
         return {
+          activeIcon: item.activeIcon,
+          inactiveIcon: item.inactiveIcon,
           title: item.title && te(item.title) ? t(item.title) : item.title,
-          prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
           value: item.title,
           $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }
       }))
 
+      function itemProps (item: any) {
+        return {
+          prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
+        }
+      }
+
       return {
         computedItems,
-        active,
         opened,
+        itemProps,
       }
     },
   })
