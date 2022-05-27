@@ -21,7 +21,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, getObjectValueByPath, getPropertyFromItem, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,16 +33,17 @@ export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
 }
 
-function transformItem (props: ItemProps & { itemType: string }, item: string | object): InternalListItem {
+function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
-  const children = getObjectValueByPath(item, props.itemChildren)
+  const children = getPropertyFromItem(item, props.itemChildren)
+  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
 
   const _props = {
     title,
     value,
-    ...props.itemProps?.(item),
+    ...itemProps,
   }
 
   return {

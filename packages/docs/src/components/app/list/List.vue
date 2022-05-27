@@ -5,6 +5,7 @@
     color="primary"
     :nav="nav"
     :items="computedItems"
+    item-props
   />
 </template>
 
@@ -52,7 +53,7 @@
         } else {
           return {
             title: t(child.title!),
-            $children: generateItems(child, path, locale, t),
+            children: generateItems(child, path, locale, t),
           }
         }
       })
@@ -81,24 +82,16 @@
         if (item.divider) return { type: 'divider' }
 
         return {
-          activeIcon: item.activeIcon,
-          inactiveIcon: item.inactiveIcon,
           title: item.title && te(item.title) ? t(item.title) : item.title,
           value: item.title,
-          $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
+          prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
+          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }
       }))
-
-      function itemProps (item: any) {
-        return {
-          prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
-        }
-      }
 
       return {
         computedItems,
         opened,
-        itemProps,
       }
     },
   })

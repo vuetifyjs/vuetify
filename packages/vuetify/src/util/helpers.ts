@@ -66,7 +66,7 @@ export function getPropertyFromItem (
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback === undefined ? item : fallback
+  if (item !== Object(item)) return fallback
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
