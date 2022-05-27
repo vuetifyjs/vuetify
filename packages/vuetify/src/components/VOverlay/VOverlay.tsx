@@ -3,7 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
-import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
+import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -91,6 +91,7 @@ export const VOverlay = genericComponent<new () => {
     },
     contained: Boolean,
     contentClass: null,
+    contentProps: null,
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
@@ -105,7 +106,7 @@ export const VOverlay = genericComponent<new () => {
 
     ...makeActivatorProps(),
     ...makeDimensionProps(),
-    ...makePositionStrategyProps(),
+    ...makeLocationStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
@@ -133,7 +134,7 @@ export const VOverlay = genericComponent<new () => {
 
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
-    const { contentStyles, updatePosition } = usePositionStrategies(props, {
+    const { contentStyles, updateLocation } = useLocationStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
@@ -143,7 +144,7 @@ export const VOverlay = genericComponent<new () => {
       contentEl,
       activatorEl,
       isActive,
-      updatePosition,
+      updateLocation,
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -264,6 +265,7 @@ export const VOverlay = genericComponent<new () => {
                       contentStyles.value,
                     ]}
                     { ...toHandlers(contentEvents.value) }
+                    { ...props.contentProps }
                   >
                     { slots.default?.({ isActive }) }
                   </div>
@@ -280,7 +282,7 @@ export const VOverlay = genericComponent<new () => {
       contentEl,
       activatorEl,
       isTop,
-      updatePosition,
+      updateLocation,
     }
   },
 })

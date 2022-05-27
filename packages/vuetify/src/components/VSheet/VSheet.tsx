@@ -5,6 +5,7 @@ import './VSheet.sass'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -24,6 +25,7 @@ export const VSheet = defineComponent({
     ...makeBorderProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -36,7 +38,8 @@ export const VSheet = defineComponent({
     const { borderClasses } = useBorder(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
     return () => (
@@ -53,7 +56,7 @@ export const VSheet = defineComponent({
         style={[
           backgroundColorStyles.value,
           dimensionStyles.value,
-          positionStyles.value,
+          locationStyles.value,
         ]}
         v-slots={ slots }
       />

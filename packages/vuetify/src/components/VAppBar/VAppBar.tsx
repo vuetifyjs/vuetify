@@ -30,7 +30,7 @@ export const VAppBar = defineComponent({
       type: Boolean,
       default: true,
     },
-    position: {
+    location: {
       type: String as PropType<'top' | 'bottom'>,
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
@@ -61,7 +61,7 @@ export const VAppBar = defineComponent({
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       priority: computed(() => parseInt(props.priority, 10)),
-      position: toRef(props, 'position'),
+      position: toRef(props, 'location'),
       layoutSize: height,
       elementSize: height,
       active: isActive,
@@ -77,7 +77,7 @@ export const VAppBar = defineComponent({
           class={[
             'v-app-bar',
             {
-              'v-app-bar--bottom': props.position === 'bottom',
+              'v-app-bar--bottom': props.location === 'bottom',
             },
           ]}
           style={{
