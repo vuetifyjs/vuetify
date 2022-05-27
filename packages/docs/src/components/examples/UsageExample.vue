@@ -71,7 +71,7 @@
         :model-value="tune"
         permanent
         name="tune"
-        position="right"
+        location="right"
         width="200"
       >
         <v-list>
