@@ -60,7 +60,7 @@ export const VAppBar = defineComponent({
     })
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
+      order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
       layoutSize: height,
       elementSize: height,

@@ -119,7 +119,7 @@ export const VNavigationDrawer = defineComponent({
     })
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
+      order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
       layoutSize,
       elementSize: width,

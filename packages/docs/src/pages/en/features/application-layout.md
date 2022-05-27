@@ -40,13 +40,13 @@ Let's create a more complex layout to show the flexibility of the system. In the
 
 <example file="application-layout/discord" />
 
-## Dynamic layouts and priority
+## Dynamic layouts and order
 
 In most cases, it should be enough to simply place your layout components in the correct order in your markup to achieve the layout you want. There are however a couple of scenarios where this might not be possible. One of these is if you want to change the order of your layout components dynamically.
 
-To solve this you can explicitly set the layout order by using the **priority** prop. Explore the example below to see what happens when using the prop. By toggling the switch, you change the priority of the app-bar to `-1`, thus putting it above the navigation-drawer in the layout ordering.
+To solve this you can explicitly set the layout order by using the **order** prop. Explore the example below to see what happens when using the prop. By toggling the switch, you change the order of the app-bar to `-1`, thus putting it above the navigation-drawer in the layout ordering.
 
-All layout components have a default priority of `0`. Layout components with the same priority will be ordered as they appear in the markup.
+All layout components have a default order of `0`. Layout components with the same order will be ordered as they appear in the markup.
 
 <example file="application-layout/dynamic" />
 

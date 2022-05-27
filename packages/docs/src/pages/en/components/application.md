@@ -76,7 +76,7 @@ When using [vue-router](https://router.vuejs.org/) it is recommended that you pl
 
 Below is a list of all the components that support the **app** prop and can be used as layout elements in your application. These can be mixed and matched and only **one** of each particular component should exist at any time. You can, however, swap them out and the layout will accommodate. For some examples displaying how you can build various layouts, checkout the [Pre-made layouts](/getting-started/wireframes) page.
 
-Each of these application components have a designated location and priority that it affects within the layout system.
+Each of these application components have a designated location and order that it affects within the layout system.
 
 - [v-app-bar](/components/app-bars): Is always placed at the top of an application with a lower priority than `v-system-bar`.
 - [v-bottom-navigation](/components/bottom-navigation): Is always placed at the bottom of an application with a higher priority than `v-footer`.
