@@ -85,7 +85,7 @@ export const VMenu = genericComponent<new () => {
         transition={ props.transition }
         absolute
         closeOnContentClick
-        positionStrategy="connected"
+        locationStrategy="connected"
         scrollStrategy="reposition"
         scrim={ false }
         openDelay="300"

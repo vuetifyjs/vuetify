@@ -12,7 +12,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { transformItem, useItems } from '@/composables/items'
+import { useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -23,16 +23,8 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
-import type { DefaultChipSlot, InternalSelectItem } from '@/components/VSelect/VSelect'
+import type { DefaultChipSlot } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
-
-export interface InternalAutocompleteItem extends InternalSelectItem {
-
-}
-
-export interface DefaultAutocompleteSlot {
-  selection: InternalAutocompleteItem
-}
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -52,7 +44,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultAutocompleteSlot]
+    selection: [{ item: T }]
   }>
 }>()({
   name: 'VAutocomplete',
@@ -80,37 +72,25 @@ export const VAutocomplete = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const isPristine = ref(true)
     const menu = ref(false)
-    const { items } = useItems(props)
+    const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => wrapInArray(v || []),
-      (v: any) => props.multiple ? v : v[0]
+      v => transformIn(wrapInArray(v)),
+      v => {
+        const transformed = transformOut(v)
+        return props.multiple ? transformed : transformed[0]
+      }
     )
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
-      const array: InternalSelectItem[] = []
-      let index = 0
-      for (const unwrapped of model.value) {
-        const item = transformItem(props, unwrapped)
-
-        const found = array.find(selection => selection.value === item.value)
-
-        if (found == null) {
-          array.push({
-            ...item,
-            index,
-          })
-
-          index++
-        }
-      }
-
-      return array
+      return model.value.map(v => {
+        return items.value.find(item => item.value === v.value) || v
+      })
     })
-    const selected = computed(() => selections.value.map(selection => selection.value))
+    const selected = computed(() => selections.value.map(selection => selection.props.value))
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -151,14 +131,15 @@ export const VAutocomplete = genericComponent<new <T>() => {
         const index = selected.value.findIndex(selection => selection === item.value)
 
         if (index === -1) {
-          model.value = [...model.value, item.value]
+          model.value = [...model.value, item]
+          search.value = ''
         } else {
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
         }
       } else {
-        model.value = [item.value]
+        model.value = [item]
 
         isSelecting.value = true
 
@@ -177,7 +158,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(model.value ?? '')
+        search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -244,7 +225,7 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
                       { filteredItems.value.map(({ item, matches }) => (
                         <VListItem
-                          value={ item.value }
+                          { ...item.props }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => select(item) }
                         >
@@ -281,12 +262,12 @@ export const VAutocomplete = genericComponent<new <T>() => {
                               VChip: {
                                 closable: props.closableChips,
                                 size: 'small',
-                                text: selection.title,
+                                text: selection.props.title,
                               },
                             }}
                           >
                             { slots.chip
-                              ? slots.chip({ props: slotProps, selection })
+                              ? slots.chip({ props: slotProps, item: selection.originalItem })
                               : (<VChip { ...slotProps } />)
                             }
                           </VDefaultsProvider>
@@ -294,10 +275,10 @@ export const VAutocomplete = genericComponent<new <T>() => {
 
                         { !hasChips && (
                           slots.selection
-                            ? slots.selection({ selection })
+                            ? slots.selection({ item: selection.originalItem })
                             : (
                               <span class="v-autocomplete__selection-text">
-                                { selection.title }
+                                { selection.props.title }
                                 { props.multiple && (index < selections.value.length - 1) && (
                                   <span class="v-autocomplete__selection-comma">,</span>
                                 ) }
