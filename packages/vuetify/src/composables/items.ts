@@ -23,7 +23,7 @@ export interface ItemProps {
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
-  itemProps: SelectItemKey | true
+  itemProps: SelectItemKey
   returnObject: boolean
 }
 
@@ -46,7 +46,7 @@ export const makeItemsProps = propsFactory({
     default: 'children',
   },
   itemProps: {
-    type: [Boolean, String, Array, Function] as PropType<SelectItemKey | true>,
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'props',
   },
   returnObject: Boolean,

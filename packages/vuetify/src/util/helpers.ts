@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,

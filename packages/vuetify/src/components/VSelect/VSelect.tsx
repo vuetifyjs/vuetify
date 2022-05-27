@@ -57,7 +57,7 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
 
-  ...makeItemsProps(),
+  ...makeItemsProps({ itemChildren: false }),
 }, 'select')
 
 export const VSelect = genericComponent<new <T>() => {
