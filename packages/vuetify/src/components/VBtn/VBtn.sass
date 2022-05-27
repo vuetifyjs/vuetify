@@ -111,9 +111,11 @@
       --v-icon-size-multiplier: #{calc(24/21)}
 
 .v-btn__content
-  overflow: $button-overflow
   transition: $button-content-transition
   white-space: $button-white-space
+
+  .v-btn--stacked &
+    white-space: normal
 
 .v-btn__overlay
   @include tools.absolute()
