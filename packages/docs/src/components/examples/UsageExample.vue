@@ -25,7 +25,7 @@
 
       <v-spacer />
 
-      <v-tooltip anchor="bottom">
+      <v-tooltip location="bottom">
         <template #activator="{ props }">
           <v-btn
             icon="mdi-code-tags"
@@ -39,7 +39,7 @@
         <span>Show code</span>
       </v-tooltip>
 
-      <v-tooltip anchor="bottom">
+      <v-tooltip location="bottom">
         <template #activator="{ props }">
           <v-btn
             icon="mdi-tune"

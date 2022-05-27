@@ -20,7 +20,7 @@
         <v-tooltip
           v-for="{ path, ...action } in actions"
           :key="path"
-          anchor="top"
+          location="top"
         >
           <template #activator="{ props: tooltip }">
             <v-btn
