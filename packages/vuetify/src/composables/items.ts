@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
+import { getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -22,9 +22,9 @@ export interface ItemProps {
   items: any[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
-  itemChildren: string
-  itemProps: ((item: any) => object) | undefined
-  returnObject: boolean | undefined
+  itemChildren: SelectItemKey
+  itemProps: SelectItemKey
+  returnObject: boolean
 }
 
 // Composables
@@ -42,12 +42,12 @@ export const makeItemsProps = propsFactory({
     default: 'value',
   },
   itemChildren: {
-    type: String,
+    type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'children',
   },
   itemProps: {
-    type: Function as PropType<ItemProps['itemProps']>,
-    default: (item: any) => ({}),
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'props',
   },
   returnObject: Boolean,
 }, 'item')
@@ -55,12 +55,13 @@ export const makeItemsProps = propsFactory({
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
-  const children = getObjectValueByPath(item, props.itemChildren)
+  const children = getPropertyFromItem(item, props.itemChildren)
+  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
 
   const _props = {
     title,
     value,
-    ...props.itemProps?.(item),
+    ...itemProps,
   }
 
   return {
