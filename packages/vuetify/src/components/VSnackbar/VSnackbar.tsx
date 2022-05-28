@@ -16,6 +16,7 @@ import { onMounted, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeLocationProps, useLocation } from '@/composables/location'
+import { useScopeId } from '@/composables/scopeId'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
@@ -50,6 +51,7 @@ export const VSnackbar = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
+    const { scopeId } = useScopeId()
 
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
@@ -98,6 +100,7 @@ export const VSnackbar = defineComponent({
         scrim={ false }
         scrollStrategy="none"
         transition={ props.transition }
+        { ...scopeId }
         v-slots={{ activator: slots.activator }}
       >
         <div

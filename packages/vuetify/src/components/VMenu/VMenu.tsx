@@ -17,6 +17,7 @@ import { VMenuSymbol } from './shared'
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import { useForwardRef } from '@/composables/forwardRef'
+import { useScopeId } from '@/composables/scopeId'
 
 export const VMenu = genericComponent<new () => {
   $slots: OverlaySlots
@@ -42,6 +43,7 @@ export const VMenu = genericComponent<new () => {
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+    const { scopeId } = useScopeId()
 
     const uid = getUid()
     const id = computed(() => props.id || `v-menu-${uid}`)
@@ -96,6 +98,7 @@ export const VMenu = genericComponent<new () => {
           'aria-owns': id.value,
         }}
         onClick:outside={ onClickOutside }
+        { ...scopeId }
         { ...attrs }
         v-slots={{
           default: slots.default,

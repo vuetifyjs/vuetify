@@ -9,6 +9,7 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { nextTick, ref, watch } from 'vue'
@@ -50,6 +51,7 @@ export const VDialog = genericComponent<new () => {
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
+    const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
     function onFocusin (e: FocusEvent) {
@@ -121,6 +123,7 @@ export const VDialog = genericComponent<new () => {
             'aria-expanded': String(isActive.value),
           }}
           z-index={ 2400 }
+          { ...scopeId }
           { ...attrs }
           v-slots={{
             default: slots.default,

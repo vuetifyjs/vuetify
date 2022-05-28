@@ -16,6 +16,7 @@ import { genericComponent, getUid } from '@/util'
 import type { PropType } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+import { useScopeId } from '@/composables/scopeId'
 
 export const VTooltip = genericComponent<new () => {
   $slots: OverlaySlots
@@ -49,6 +50,7 @@ export const VTooltip = genericComponent<new () => {
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+    const { scopeId } = useScopeId()
 
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
@@ -100,6 +102,7 @@ export const VTooltip = genericComponent<new () => {
           activatorProps={{
             'aria-describedby': id.value,
           }}
+          { ...scopeId }
           { ...attrs }
         >
           {{
