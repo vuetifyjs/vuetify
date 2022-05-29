@@ -19,7 +19,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
-  isReactiveErrors: ComputedRef<boolean>
+  isReactiveErrors: boolean
   errorMessagesForItems: Ref<Record<string, string[]>>
   errorMessages: ComputedRef<FormValidationResult[]>
 }
@@ -74,7 +74,7 @@ export function createForm (props: FormProps) {
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
-  const isReactiveErrors = computed(() => props.isReactiveErrors)
+
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
   const errorMessagesForItems = ref<Record<string, string[]>>({})
@@ -164,7 +164,7 @@ export function createForm (props: FormProps) {
     items,
     errorMessagesForItems,
     errorMessages,
-    isReactiveErrors,
+    isReactiveErrors: props.isReactiveErrors,
   })
 
   return {
