@@ -19,6 +19,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
@@ -33,7 +34,7 @@ export const VBanner = defineComponent({
   props: {
     avatar: String,
     color: String,
-    icon: String,
+    icon: IconValue,
     lines: String as PropType<'one' | 'two' | 'three'>,
     stacked: Boolean,
     sticky: Boolean,

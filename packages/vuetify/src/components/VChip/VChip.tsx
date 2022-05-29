@@ -19,6 +19,7 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -34,10 +35,10 @@ export const VChip = defineComponent({
   props: {
     activeClass: String,
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     closable: Boolean,
     closeIcon: {
-      type: String,
+      type: IconValue,
       default: '$delete',
     },
     closeLabel: {
@@ -54,7 +55,7 @@ export const VChip = defineComponent({
     link: Boolean,
     pill: Boolean,
     prependAvatar: String,
-    prependIcon: String,
+    prependIcon: IconValue,
     ripple: {
       type: Boolean,
       default: true,

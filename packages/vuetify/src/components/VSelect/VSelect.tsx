@@ -14,6 +14,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed, ref, watch } from 'vue'
@@ -43,7 +44,7 @@ export const makeSelectProps = propsFactory({
   hideNoData: Boolean,
   hideSelected: Boolean,
   menuIcon: {
-    type: String,
+    type: IconValue,
     default: '$dropdown',
   },
   modelValue: {

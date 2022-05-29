@@ -12,6 +12,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -28,7 +29,7 @@ export const VBadge = defineComponent({
     content: [Number, String],
     dot: Boolean,
     floating: Boolean,
-    icon: String,
+    icon: IconValue,
     inline: Boolean,
     label: {
       type: String,

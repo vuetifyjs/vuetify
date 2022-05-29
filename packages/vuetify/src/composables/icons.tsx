@@ -6,6 +6,7 @@ import { defineComponent, propsFactory } from '@/util'
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
 export type IconValue = string | JSXComponent
+export const IconValue = [String, Function, Object] as PropType<IconValue>
 
 export interface IconAliases {
   [name: string]: IconValue
@@ -71,7 +72,7 @@ export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
-    type: [String, Object] as PropType<IconValue>,
+    type: IconValue,
     required: true,
   },
   // Could not remove this and use makeTagProps, types complained because it is not required

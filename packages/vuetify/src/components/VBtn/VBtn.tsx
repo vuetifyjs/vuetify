@@ -20,6 +20,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useSelectLink } from '@/composables/selectLink'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -27,6 +28,9 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VBtn = defineComponent({
   name: 'VBtn',
@@ -40,9 +44,9 @@ export const VBtn = defineComponent({
       default: VBtnToggleSymbol,
     },
     flat: Boolean,
-    icon: [Boolean, String],
-    prependIcon: String,
-    appendIcon: String,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
 
     block: Boolean,
     stacked: Boolean,

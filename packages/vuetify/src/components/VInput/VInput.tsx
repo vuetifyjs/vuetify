@@ -8,6 +8,7 @@ import { VMessages } from '@/components/VMessages'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
@@ -32,8 +33,8 @@ export interface VInputSlot {
 
 export const makeVInputProps = propsFactory({
   id: String,
-  appendIcon: String,
-  prependIcon: String,
+  appendIcon: IconValue,
+  prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   messages: {
     type: [Array, String] as PropType<string | string[]>,

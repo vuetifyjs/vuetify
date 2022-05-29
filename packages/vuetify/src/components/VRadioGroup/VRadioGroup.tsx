@@ -7,7 +7,10 @@ import { VLabel } from '@/components/VLabel'
 import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
-// Utility
+// Composables
+import { IconValue } from '@/composables/icons'
+
+// Utilities
 import { computed } from 'vue'
 import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
@@ -26,11 +29,11 @@ export const VRadioGroup = defineComponent({
     ...makeSelectionControlProps(),
 
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOn',
     },
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOff',
     },
     type: {

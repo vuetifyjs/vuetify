@@ -11,6 +11,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -47,11 +48,11 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
-  appendInnerIcon: String,
+  appendInnerIcon: IconValue,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
-    type: String,
+    type: IconValue,
     default: '$clear',
   },
   active: Boolean,
@@ -61,7 +62,7 @@ export const makeVFieldProps = propsFactory({
   error: Boolean,
   label: String,
   persistentClear: Boolean,
-  prependInnerIcon: String,
+  prependInnerIcon: IconValue,
   reverse: Boolean,
   singleLine: Boolean,
   variant: {

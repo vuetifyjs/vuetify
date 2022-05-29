@@ -18,6 +18,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -48,7 +49,7 @@ export const VAlert = defineComponent({
     borderColor: String,
     closable: Boolean,
     closeIcon: {
-      type: String,
+      type: IconValue,
       default: '$close',
     },
     closeLabel: {
@@ -56,7 +57,7 @@ export const VAlert = defineComponent({
       default: '$vuetify.close',
     },
     icon: {
-      type: [Boolean, String] as PropType<false | string>,
+      type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
       default: null,
     },
     modelValue: {

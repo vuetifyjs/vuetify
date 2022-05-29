@@ -28,6 +28,7 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -43,14 +44,14 @@ export const VCard = defineComponent({
 
   props: {
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     disabled: Boolean,
     flat: Boolean,
     hover: Boolean,
     image: String,
     link: Boolean,
     prependAvatar: String,
-    prependIcon: String,
+    prependIcon: IconValue,
     ripple: Boolean,
     subtitle: String,
     text: String,
