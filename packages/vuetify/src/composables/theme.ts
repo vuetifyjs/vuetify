@@ -244,10 +244,16 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
   const styles = computed(() => {
     const lines = []
 
+    if (computedThemes.value[current.value].dark) {
+      lines.push(...createCssClass(':root', ['color-scheme: dark']))
+    }
+
     for (const themeName of Object.keys(computedThemes.value)) {
       const variables = computedThemes.value[themeName].variables
+      const dark = computedThemes.value[themeName].dark
 
       lines.push(...createCssClass(`.v-theme--${themeName}`, [
+        `color-scheme: ${dark ? 'dark' : 'normal'}`,
         ...genCssVariables(themeName),
         ...Object.keys(variables).map(key => {
           const value = variables[key]
@@ -320,7 +326,7 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
       watchEffect(() => head.updateDOM())
     }
   } else {
-    watch(themes, updateStyles, { deep: true, immediate: true })
+    watch(styles, updateStyles, { immediate: true })
 
     function updateStyles () {
       if (parsedOptions.isDisabled) return

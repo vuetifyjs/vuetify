@@ -1,12 +1,11 @@
 <template>
-  <v-theme-provider :theme="theme">
-    <router-view />
-  </v-theme-provider>
+  <router-view />
 </template>
 
 <script lang="ts">
   // Utilities
-  import { computed, defineComponent, onBeforeMount, ref, watch } from 'vue'
+  import { computed, defineComponent, onBeforeMount, ref, watch, watchEffect } from 'vue'
+  import { useTheme } from 'vuetify'
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
@@ -23,6 +22,7 @@
       const user = useUserStore()
       const router = useRouter()
       const route = useRoute()
+      const theme = useTheme()
       const { locale } = useI18n()
 
       const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
@@ -64,12 +64,15 @@
         function onThemeChange () {
           systemTheme.value = media!.matches ? 'dark' : 'light'
         }
+
+        watchEffect(() => {
+          theme.current.value = (
+            user.theme === 'system' ? systemTheme.value : user.theme
+          )
+        })
       }
 
       return {
-        theme: computed(() => {
-          return user.theme === 'system' ? systemTheme.value : user.theme
-        }),
         user,
       }
     },
