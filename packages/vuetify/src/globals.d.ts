@@ -1,6 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { VNode } from 'vue'
-import type { Events } from '@vue/runtime-dom'
+import type { Events, VNode } from 'vue'
 
 declare global {
   interface HTMLCollection {
