@@ -15,7 +15,7 @@ import { makeLocationProps, useLocation } from '@/composables/location'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { toRef } from 'vue'
 import { defineComponent, pick } from '@/util'
 
 export const VBadge = defineComponent({
@@ -40,6 +40,8 @@ export const VBadge = defineComponent({
       type: Boolean,
       default: true,
     },
+    offsetX: [Number, String],
+    offsetY: [Number, String],
     textColor: String,
 
     ...makeLocationProps({ location: 'top end' } as const),
@@ -56,11 +58,17 @@ export const VBadge = defineComponent({
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
     const { themeClasses } = useTheme()
 
-    const { locationStyles } = useLocation(props, true, computed(() => {
-      return props.floating
+    const { locationStyles } = useLocation(props, true, side => {
+      const base = props.floating
         ? (props.dot ? 2 : 4)
         : (props.dot ? 8 : 12)
-    }))
+
+      return base + (
+        ['top', 'bottom'].includes(side) ? +(props.offsetY ?? 0)
+        : ['left', 'right'].includes(side) ? +(props.offsetX ?? 0)
+        : 0
+      )
+    })
 
     return () => {
       const value = Number(props.content)

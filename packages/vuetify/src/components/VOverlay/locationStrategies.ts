@@ -1,13 +1,22 @@
 // Utilities
 import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
-import { convertToUnit, getScrollParent, IN_BROWSER, isFixedPosition, nullifyTransforms, propsFactory } from '@/util'
-import { oppositeAnchor, parseAnchor, physicalAnchor } from './util/anchor'
+import {
+  convertToUnit,
+  getScrollParent,
+  IN_BROWSER,
+  isFixedPosition,
+  nullifyTransforms,
+  oppositeAnchor,
+  parseAnchor,
+  physicalAnchor,
+  propsFactory,
+} from '@/util'
+import { Box } from '@/util/box'
 import { anchorToPoint, getOffset } from './util/point'
 
 // Types
 import type { EffectScope, PropType, Ref } from 'vue'
-import type { Anchor } from './util/anchor'
-import { Box } from '@/util/box'
+import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>

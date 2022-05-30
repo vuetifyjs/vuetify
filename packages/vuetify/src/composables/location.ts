@@ -1,10 +1,13 @@
-import type { MaybeRef } from '@/util'
-import { propsFactory } from '@/util'
-import { computed, unref } from 'vue'
-import type { CSSProperties, PropType } from 'vue'
-import type { Anchor } from '@/components/VOverlay/util/anchor'
-import { parseAnchor } from '@/components/VOverlay/util/anchor'
+// Composables
 import { useRtl } from '@/composables/rtl'
+
+// Utilities
+import { computed } from 'vue'
+import { parseAnchor, propsFactory } from '@/util'
+
+// Types
+import type { CSSProperties, PropType } from 'vue'
+import type { Anchor } from '@/util'
 
 const oppositeMap = {
   center: 'center',
@@ -22,7 +25,7 @@ export const makeLocationProps = propsFactory({
   location: String as PropType<Anchor>,
 }, 'location')
 
-export function useLocation (props: LocationProps, opposite = false, offset: MaybeRef<number> = 0) {
+export function useLocation (props: LocationProps, opposite = false, offset?: (side: string) => number) {
   const { isRtl } = useRtl()
 
   function toPhysical (side: string) {
@@ -45,14 +48,20 @@ export function useLocation (props: LocationProps, opposite = false, offset: May
     const side = toPhysical(anchor.side)
     const align = toPhysical(anchor.align)
 
+    function getOffset (side: string) {
+      return offset
+        ? offset(side)
+        : 0
+    }
+
     const styles = {} as CSSProperties
 
     if (side !== 'center') {
-      if (opposite) styles[oppositeMap[side]] = `calc(100% - ${unref(offset)}px)`
+      if (opposite) styles[oppositeMap[side]] = `calc(100% - ${getOffset(side)}px)`
       else styles[side] = 0
     }
     if (align !== 'center') {
-      if (opposite) styles[oppositeMap[align]] = `calc(100% - ${unref(offset)}px)`
+      if (opposite) styles[oppositeMap[align]] = `calc(100% - ${getOffset(align)}px)`
       else styles[align] = 0
     } else {
       if (side === 'center') styles.top = styles.left = '50%'
