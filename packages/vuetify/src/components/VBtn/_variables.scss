@@ -35,7 +35,6 @@ $button-plain-opacity: .62 !default;
 $button-padding-ratio: 2.25 !default;
 $button-stacked-padding-ratio: 4.5 !default;
 $button-max-width: 100% !default;
-$button-overflow: hidden !default;
 $button-positions: absolute fixed !default;
 $button-text-letter-spacing: tools.map-deep-get(settings.$typography, 'button', 'letter-spacing') !default;
 $button-text-transform: tools.map-deep-get(settings.$typography, 'button', 'text-transform') !default;

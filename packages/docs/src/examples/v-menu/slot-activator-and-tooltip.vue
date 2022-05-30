@@ -2,7 +2,7 @@
   <div class="text-center">
     <v-menu>
       <template v-slot:activator="{ props: menu }">
-        <v-tooltip anchor="top">
+        <v-tooltip location="top">
           <template v-slot:activator="{ props: tooltip }">
             <v-btn
               color="primary"

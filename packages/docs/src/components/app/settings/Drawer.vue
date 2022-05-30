@@ -2,9 +2,9 @@
   <v-navigation-drawer
     id="settings-drawer"
     v-model="app.settings"
-    :position="isRtl ? 'left' : 'right'"
+    :location="isRtl ? 'left' : 'right'"
     disable-route-watcher
-    fixed
+    position="fixed"
     hide-overlay
     temporary
     width="300"

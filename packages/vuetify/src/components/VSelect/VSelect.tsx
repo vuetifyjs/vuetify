@@ -14,20 +14,17 @@ import { makeTransitionProps } from '@/composables/transition'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { LinkProps } from '@/composables/router'
+import type { InternalItem } from '@/composables/items'
 import type { MakeSlots } from '@/util'
 
-export interface InternalSelectItem {
-  title: string
-  value: any
-  index: number
-}
+export interface InternalSelectItem extends InternalItem {}
 
 export interface DefaultSelectionSlot {
   selection: InternalSelectItem
@@ -40,10 +37,6 @@ export interface DefaultChipSlot extends DefaultSelectionSlot {
   }
 }
 
-export type SelectItem = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any) | (LinkProps & {
-  text: string
-})
-
 export const makeSelectProps = propsFactory({
   chips: Boolean,
   closableChips: Boolean,
@@ -51,11 +44,11 @@ export const makeSelectProps = propsFactory({
   hideNoData: Boolean,
   hideSelected: Boolean,
   menuIcon: {
-    type: String,
+    type: IconValue,
     default: '$dropdown',
   },
   modelValue: {
-    type: [Number, String, Array],
+    type: null,
     default: () => ([]),
   },
   multiple: Boolean,
@@ -65,14 +58,14 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
 
-  ...makeItemsProps(),
+  ...makeItemsProps({ itemChildren: false }),
 }, 'select')
 
 export const VSelect = genericComponent<new <T>() => {
   $slots: MakeSlots<{
     chip: [DefaultChipSlot]
     default: []
-    selection: [DefaultSelectionSlot]
+    selection: [{ item: T }]
   }>
 }>()({
   name: 'VSelect',
@@ -91,16 +84,23 @@ export const VSelect = genericComponent<new <T>() => {
     const vTextFieldRef = ref()
     const activator = ref()
     const menu = ref(false)
-    const { items } = useItems(props)
+    const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
       'modelValue',
       [],
-      v => wrapInArray(v),
-      (v: any) => props.multiple ? v : v[0]
+      v => transformIn(wrapInArray(v)),
+      v => {
+        const transformed = transformOut(v)
+        return props.multiple ? transformed : transformed[0]
+      }
     )
-    const selections = computed(() => items.value.filter(item => model.value.includes(item.value)))
-    const selected = computed(() => selections.value.map(selection => selection.value))
+    const selections = computed(() => {
+      return model.value.map(v => {
+        return items.value.find(item => item.value === v.value) || v
+      })
+    })
+    const selected = computed(() => selections.value.map(selection => selection.props.value))
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -123,19 +123,19 @@ export const VSelect = genericComponent<new <T>() => {
         menu.value = false
       }
     }
-    function select (item: any) {
+    function select (item: InternalItem) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => selection === item.value)
 
         if (index === -1) {
-          model.value = [...model.value, item.value]
+          model.value = [...model.value, item]
         } else {
           const value = [...model.value]
           value.splice(index, 1)
           model.value = value
         }
       } else {
-        model.value = [item.value]
+        model.value = [item]
         menu.value = false
       }
     }
@@ -164,7 +164,7 @@ export const VSelect = genericComponent<new <T>() => {
           onClick:input={ onClickControl }
           onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
-          modelValue={ model.value.join(', ') }
+          modelValue={ model.value.map(v => v.props.value).join(', ') }
           onKeydown={ onKeydown }
         >
           {{
@@ -190,7 +190,7 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { items.value.map(item => (
                         <VListItem
-                          { ...item }
+                          { ...item.props }
                           onMousedown={ (e: MouseEvent) => e.preventDefault() }
                           onClick={ () => select(item) }
                         />
@@ -220,7 +220,7 @@ export const VSelect = genericComponent<new <T>() => {
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
-                              text: selection.title,
+                              text: selection.props.title,
                             },
                           }}
                         >
@@ -233,10 +233,10 @@ export const VSelect = genericComponent<new <T>() => {
 
                       { !hasChips && (
                         slots.selection
-                          ? slots.selection({ selection })
+                          ? slots.selection({ item: selection.originalItem })
                           : (
                             <span class="v-select__selection-text">
-                              { selection.title }
+                              { selection.props.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-select__selection-comma">,</span>
                               ) }

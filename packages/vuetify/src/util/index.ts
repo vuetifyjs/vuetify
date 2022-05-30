@@ -1,3 +1,4 @@
+export * from './anchor'
 export * from './animation'
 export * from './colorUtils'
 export * from './console'

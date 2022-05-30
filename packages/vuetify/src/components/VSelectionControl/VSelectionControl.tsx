@@ -11,6 +11,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -51,8 +52,8 @@ export const makeSelectionControlProps = propsFactory({
   id: String,
   inline: Boolean,
   label: String,
-  falseIcon: String,
-  trueIcon: String,
+  falseIcon: IconValue,
+  trueIcon: IconValue,
   ripple: {
     type: Boolean,
     default: true,

@@ -5,7 +5,7 @@
     class="py-4 pr-3"
     floating
     width="256"
-    position="right"
+    location="right"
   >
     <template
       v-if="toc.length"
