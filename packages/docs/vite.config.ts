@@ -40,6 +40,25 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: true,
+      rollupOptions: {
+        output: {
+          manualChunks: process.env.VITE_SSG === 'true' ? undefined : id => {
+            if (id.includes('packages/docs/src/examples/v-date-picker/')) return 'data-examples-pickers'
+            if (
+              id.startsWith('@vuetify-examples/') ||
+              id.includes('packages/docs/src/examples/')
+            ) return id.endsWith('?raw') ? 'data-examples-source' : 'data-examples'
+            if (id.includes('packages/docs/src/pages/en/components/')) return 'en-pages-components'
+            if (id.includes('packages/docs/src/pages/en/getting-started/')) return 'en-pages-getting-started'
+            if (id.includes('packages/docs/src/api/en/')) return 'en-pages-api'
+            if (id.includes('packages/docs/src/api/data/')) return 'data-api'
+            if (
+              id.includes('packages/docs/src/pages/en/') &&
+             !id.endsWith('packages/docs/src/pages/en/index.md')
+            ) return 'en-pages'
+          },
+        },
+      },
     },
     plugins: [
       // https://github.com/stafyniaksacha/vite-plugin-fonts
