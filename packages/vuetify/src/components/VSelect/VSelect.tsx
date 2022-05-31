@@ -2,6 +2,7 @@
 import './VSelect.sass'
 
 // Components
+import { VDialogTransition } from '@/components/transitions'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -72,7 +73,7 @@ export const VSelect = genericComponent<new <T>() => {
 
   props: {
     ...makeSelectProps(),
-    ...makeTransitionProps({ transition: 'scale-transition' }),
+    ...makeTransitionProps({ transition: { component: VDialogTransition } }),
   },
 
   emits: {
