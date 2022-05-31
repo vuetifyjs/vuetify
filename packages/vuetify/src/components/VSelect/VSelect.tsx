@@ -22,21 +22,10 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots } from '@/util'
-
-export interface InternalSelectItem extends InternalItem {}
-
-export interface DefaultSelectionSlot {
-  selection: InternalSelectItem
-}
-
-export interface DefaultChipSlot extends DefaultSelectionSlot {
-  props: {
-    'onClick:close': (e: Event) => void
-    modelValue: any
-  }
-}
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -62,11 +51,34 @@ export const makeSelectProps = propsFactory({
   ...makeItemsProps({ itemChildren: false }),
 }, 'select')
 
-export const VSelect = genericComponent<new <T>() => {
-  $slots: MakeSlots<{
-    chip: [DefaultChipSlot]
-    default: []
-    selection: [{ item: T }]
+type Primitive = string | number | boolean | symbol
+
+type Val <T, ReturnObject extends boolean> = T extends Primitive
+  ? T
+  : (ReturnObject extends true ? T : any)
+
+type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
+  Multiple extends true
+    ? Val<T, ReturnObject>[]
+    : Val<T, ReturnObject>
+
+export const VSelect = genericComponent<new <
+  T,
+  ReturnObject extends boolean = false,
+  Multiple extends boolean = false,
+  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+>() => {
+  $props: {
+    items?: readonly T[]
+    returnObject?: ReturnObject
+    multiple?: Multiple
+    modelValue?: Readonly<V>
+    'onUpdate:modelValue'?: (val: V) => void
+  }
+  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    chip: [{ item: T, index: number, props: Record<string, unknown> }]
+    selection: [{ item: T, index: number }]
+    'no-data': []
   }>
 }>()({
   name: 'VSelect',
@@ -208,7 +220,7 @@ export const VSelect = genericComponent<new <T>() => {
 
                   return (
                     <div class="v-select__selection">
-                      { hasChips && (
+                      { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
                             VChip: {
@@ -219,15 +231,13 @@ export const VSelect = genericComponent<new <T>() => {
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, selection })
+                            ? slots.chip({ props: slotProps, selection, index })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
-                      ) }
-
-                      { !hasChips && (
+                      ) : (
                         slots.selection
-                          ? slots.selection({ item: selection.originalItem })
+                          ? slots.selection({ item: selection.originalItem, index })
                           : (
                             <span class="v-select__selection-text">
                               { selection.props.title }
@@ -236,7 +246,7 @@ export const VSelect = genericComponent<new <T>() => {
                               ) }
                             </span>
                           )
-                      ) }
+                      )}
                     </div>
                   )
                 }) }
