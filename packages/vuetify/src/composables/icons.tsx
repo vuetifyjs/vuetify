@@ -1,6 +1,9 @@
+// Icons
+import { aliases, mdi } from '@/iconsets/mdi'
+
 // Utilities
 import { computed, inject, isRef } from 'vue'
-import { defineComponent, propsFactory } from '@/util'
+import { defineComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
@@ -158,6 +161,17 @@ export const defaultSets: Record<string, IconSet> = {
 }
 
 // Composables
+export function createIcons (options?: IconOptions) {
+  return mergeDeep({
+    defaultSet: 'mdi',
+    sets: {
+      ...defaultSets,
+      mdi,
+    },
+    aliases,
+  }, options)
+}
+
 export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) => {
   const icons = inject(IconSymbol)
 
