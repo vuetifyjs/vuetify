@@ -227,10 +227,12 @@ export const VSelectionControl = genericComponent<new <T>() => {
             densityClasses.value,
           ]}
         >
-          <div class={[
-            'v-selection-control__wrapper',
-            textColorClasses.value,
-          ]}
+          <div
+            class={[
+              'v-selection-control__wrapper',
+              textColorClasses.value,
+            ]}
+            style={ textColorStyles.value }
           >
             { slots.default?.() }
 
@@ -238,7 +240,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
               class={[
                 'v-selection-control__input',
               ]}
-              style={ textColorStyles.value }
               v-ripple={ props.ripple && [
                 !props.disabled && !props.readonly,
                 null,
