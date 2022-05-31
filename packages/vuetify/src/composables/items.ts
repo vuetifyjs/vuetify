@@ -42,7 +42,7 @@ export const makeItemsProps = propsFactory({
     default: 'value',
   },
   itemChildren: {
-    type: [String, Array, Function] as PropType<SelectItemKey>,
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'children',
   },
   itemProps: {

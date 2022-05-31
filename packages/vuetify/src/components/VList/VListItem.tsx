@@ -72,8 +72,8 @@ export const VListItem = genericComponent<new () => {
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
-    subtitle: String,
-    title: String,
+    subtitle: [String, Number, Boolean],
+    title: [String, Number, Boolean],
     value: null,
     link: Boolean,
 
