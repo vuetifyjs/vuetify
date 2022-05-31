@@ -26,6 +26,7 @@
     "activeIcon": "mdi-image-edit",
     "items": [
       "application-layout",
+      "blueprints",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
