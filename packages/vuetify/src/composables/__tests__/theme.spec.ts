@@ -40,7 +40,7 @@ describe('createTheme', () => {
     ]
 
     for (const color of colors) {
-      expect(theme.themes.value.light.colors).toHaveProperty(color)
+      expect(theme.computedThemes.value.light.colors).toHaveProperty(color)
     }
   })
 
@@ -56,8 +56,8 @@ describe('createTheme', () => {
     for (const color of ['primary', 'secondary']) {
       for (const variant of ['lighten', 'darken']) {
         for (const amount of [1, 2]) {
-          expect(theme.themes.value.light.colors).toHaveProperty(`${color}-${variant}-${amount}`)
-          expect(theme.themes.value.light.colors).toHaveProperty(`on-${color}-${variant}-${amount}`)
+          expect(theme.computedThemes.value.light.colors).toHaveProperty(`${color}-${variant}-${amount}`)
+          expect(theme.computedThemes.value.light.colors).toHaveProperty(`on-${color}-${variant}-${amount}`)
         }
       }
     }
@@ -68,17 +68,17 @@ describe('createTheme', () => {
       variations: false,
     })
 
-    expect(theme.themes.value.light.colors.background).not.toBe('#FF0000')
+    expect(theme.computedThemes.value.light.colors.background).not.toBe('#FF0000')
 
-    theme.setTheme('light', {
+    theme.themes.value.light = {
       ...theme.themes.value.light,
       colors: {
         ...theme.themes.value.light.colors,
         background: '#FF0000',
       },
-    })
+    }
 
-    expect(theme.themes.value.light.colors.background).toBe('#FF0000')
+    expect(theme.computedThemes.value.light.colors.background).toBe('#FF0000')
   })
 
   // it('should use vue-meta@2.3 functionality', () => {
