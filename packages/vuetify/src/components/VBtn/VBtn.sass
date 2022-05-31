@@ -89,7 +89,7 @@
         // so we need to divide it to get the desired value
         opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
-    &.v-btn--variant-outlined 
+    &:not(.text-no):not(.v-btn--variant-contained)
       // Logic copied from the opacity calculation of .v-btn--variant-contained .v-btn__overlay
       opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
