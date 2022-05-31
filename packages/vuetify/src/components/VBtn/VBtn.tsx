@@ -168,17 +168,16 @@ export const VBtn = defineComponent({
           </span>
 
           { props.loading && (
-            <span class="v-btn__loader">{
-              slots.loader ? slots.loader() : (
+            <span class="v-btn__loader">
+              { slots.loader ? slots.loader() : (
                 <VProgressCircular
                   indeterminate
                   size="23"
                   width="2"
                 />
-              )
-            }</span>
-
-          ) }
+              )}
+            </span>
+          )}
         </Tag>
       )
     }
