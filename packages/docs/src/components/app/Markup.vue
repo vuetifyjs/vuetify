@@ -129,7 +129,7 @@
       }
 
       const isDark = computed(() => {
-        return user.mixedTheme || theme.getTheme(theme.current.value).dark
+        return user.mixedTheme || theme.current.value.dark
       })
 
       return {
