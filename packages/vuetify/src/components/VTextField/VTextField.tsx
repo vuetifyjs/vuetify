@@ -192,6 +192,7 @@ export const VTextField = genericComponent<new <T>() => {
                         <div
                           class={ fieldClass }
                           onClick={ e => emit('click:input', e) }
+                          data-no-activator=""
                         >
                           { slots.default?.() }
 

@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
 
 // Utility
-import { computed, ref, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -82,7 +82,6 @@ export const VSelect = genericComponent<new <T>() => {
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const activator = ref()
     const menu = ref(false)
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -140,10 +139,6 @@ export const VSelect = genericComponent<new <T>() => {
       }
     }
 
-    watch(() => vTextFieldRef.value, val => {
-      activator.value = val.$el.querySelector('.v-input__control')
-    })
-
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
 
@@ -171,33 +166,31 @@ export const VSelect = genericComponent<new <T>() => {
             ...slots,
             default: () => (
               <>
-                { activator.value && (
-                  <VMenu
-                    v-model={ menu.value }
-                    activator={ activator.value }
-                    contentClass="v-select__content"
-                    eager={ props.eager }
-                    openOnClick={ false }
-                    transition={ props.transition }
+                <VMenu
+                  v-model={ menu.value }
+                  activator="parent"
+                  contentClass="v-select__content"
+                  eager={ props.eager }
+                  openOnClick={ false }
+                  transition={ props.transition }
+                >
+                  <VList
+                    selected={ selected.value }
+                    selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                   >
-                    <VList
-                      selected={ selected.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                    >
-                      { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
-                      )) }
+                    { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                      <VListItem title={ t(props.noDataText) } />
+                    )) }
 
-                      { items.value.map(item => (
-                        <VListItem
-                          { ...item.props }
-                          onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => select(item) }
-                        />
-                      )) }
-                    </VList>
-                  </VMenu>
-                ) }
+                    { items.value.map(item => (
+                      <VListItem
+                        { ...item.props }
+                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                        onClick={ () => select(item) }
+                      />
+                    )) }
+                  </VList>
+                </VMenu>
 
                 { selections.value.map((selection, index) => {
                   function onChipClose (e: Event) {

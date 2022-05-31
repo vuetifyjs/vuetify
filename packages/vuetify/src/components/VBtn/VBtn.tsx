@@ -149,7 +149,7 @@ export const VBtn = defineComponent({
             />
           ) }
 
-          <div class="v-btn__content">
+          <div class="v-btn__content" data-no-activator="">
             { typeof props.icon === 'boolean'
               ? slots.default?.()
               : (
