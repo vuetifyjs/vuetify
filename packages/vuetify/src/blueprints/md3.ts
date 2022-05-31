@@ -4,29 +4,43 @@ import { mdi } from '@/iconsets/mdi'
 // Types
 import type { Blueprint } from '@/framework'
 
-export const md1: Blueprint = {
+export const md3: Blueprint = {
   defaults: {
-    global: {
-      rounded: 'sm',
+    VAppBar: {
+      flat: true,
     },
     VAutocomplete: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VBanner: {
       color: 'primary',
     },
     VBtn: {
       color: 'primary',
-      rounded: 0,
+      rounded: 'xl',
+    },
+    VCard: {
+      rounded: 'lg',
     },
     VCheckbox: {
       color: 'secondary',
     },
+    VChip: {
+      rounded: 'sm',
+    },
     VCombobox: {
-      variant: 'underlined',
+      variant: 'filled',
+    },
+    VNavigationDrawer: {
+      // VList: {
+      //   nav: true,
+      //   VListItem: {
+      //     rounded: 'xl',
+      //   },
+      // },
     },
     VSelect: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VSlider: {
       color: 'primary',
@@ -35,10 +49,10 @@ export const md1: Blueprint = {
       color: 'primary',
     },
     VTextarea: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VTextField: {
-      variant: 'underlined',
+      variant: 'filled',
     },
   },
   icons: {
@@ -51,13 +65,11 @@ export const md1: Blueprint = {
     themes: {
       light: {
         colors: {
-          primary: '#3F51B5',
-          'primary-darken-1': '#303F9F',
-          'primary-lighten-1': '#C5CAE9',
-          secondary: '#FF4081',
-          'secondary-darken-1': '#F50057',
-          'secondary-lighten-1': '#FF80AB',
-          accent: '#009688',
+          primary: '#6750a4',
+          secondary: '#b4b0bb',
+          tertiary: '#7d5260',
+          error: '#b3261e',
+          surface: '#fffbfe',
         },
       },
     },

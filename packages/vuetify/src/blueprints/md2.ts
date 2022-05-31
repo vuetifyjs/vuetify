@@ -4,29 +4,28 @@ import { mdi } from '@/iconsets/mdi'
 // Types
 import type { Blueprint } from '@/framework'
 
-export const md1: Blueprint = {
+export const md2: Blueprint = {
   defaults: {
     global: {
-      rounded: 'sm',
+      rounded: 'md',
     },
     VAutocomplete: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VBanner: {
       color: 'primary',
     },
     VBtn: {
       color: 'primary',
-      rounded: 0,
     },
     VCheckbox: {
       color: 'secondary',
     },
     VCombobox: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VSelect: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VSlider: {
       color: 'primary',
@@ -35,10 +34,10 @@ export const md1: Blueprint = {
       color: 'primary',
     },
     VTextarea: {
-      variant: 'underlined',
+      variant: 'filled',
     },
     VTextField: {
-      variant: 'underlined',
+      variant: 'filled',
     },
   },
   icons: {
@@ -51,13 +50,11 @@ export const md1: Blueprint = {
     themes: {
       light: {
         colors: {
-          primary: '#3F51B5',
-          'primary-darken-1': '#303F9F',
-          'primary-lighten-1': '#C5CAE9',
-          secondary: '#FF4081',
-          'secondary-darken-1': '#F50057',
-          'secondary-lighten-1': '#FF80AB',
-          accent: '#009688',
+          primary: '#6200EE',
+          'primary-darken-1': '#3700B3',
+          secondary: '#03DAC6',
+          'secondary-darken-1': '#018786',
+          error: '#B00020',
         },
       },
     },

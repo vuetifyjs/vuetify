@@ -23,7 +23,7 @@ export * from './composables'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
-  blueprint?: Partial<VuetifyOptions>
+  blueprint?: Blueprint
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
@@ -32,6 +32,8 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions)
 }
+
+export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
 export const createVuetify = (vuetify: VuetifyOptions = {}) => {
   const install = (app: App) => {
