@@ -68,7 +68,7 @@ describe('applicationable.js', () => {
       mixins: [Applicationable(null, ['foo', 'bar'])],
     })
 
-    expect(wrapper.vm._watchers).toHaveLength(6)
+    expect(wrapper.vm._scope.effects).toHaveLength(6)
   })
 
   it('should call to remove application on destroy', async () => {
