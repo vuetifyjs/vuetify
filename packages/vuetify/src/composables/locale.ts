@@ -1,9 +1,15 @@
+// Locales
+import en from '@/locale/en'
+
+// Composables
+import { createRtl, RtlSymbol } from '@/composables/rtl'
+
+// Utilities
 import { computed, inject, provide, ref } from 'vue'
 import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
 
-import en from '@/locale/en'
-
 // Types
+import type { RtlOptions } from '@/composables/rtl'
 import type { App, InjectionKey, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 
@@ -32,7 +38,7 @@ export interface LocaleInstance {
 }
 
 export interface LocaleAdapter {
-  createRoot: (app: App) => LocaleInstance
+  createRoot: (app?: App) => LocaleInstance
   getScope: () => LocaleInstance
   createScope: (options?: LocaleProps) => LocaleInstance
 }
@@ -60,12 +66,16 @@ function isLocaleAdapter (x: any): x is LocaleAdapter {
   return !!x && x.hasOwnProperty('getScope') && x.hasOwnProperty('createScope') && x.hasOwnProperty('createRoot')
 }
 
-export function createLocaleAdapter (app: App, options?: LocaleOptions | LocaleAdapter) {
+export function createLocale (
+  app: App,
+  options?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions),
+) {
   const adapter = isLocaleAdapter(options) ? options : createDefaultLocaleAdapter(options)
+  const instance = adapter.createRoot(app)
 
-  const rootInstance = adapter.createRoot(app)
+  app?.provide(RtlSymbol, createRtl(instance, options))
 
-  return { adapter, rootInstance }
+  return adapter
 }
 
 const LANG_PREFIX = '$vuetify.'
@@ -146,6 +156,8 @@ export function createDefaultLocaleAdapter (options?: LocaleOptions): LocaleAdap
         fallback: options?.fallbackLocale ?? 'en',
         messages: options?.messages ?? { en },
       })
+
+      if (!app) throw new Error('[Vuetify] Could not find default app instance')
 
       app.provide(VuetifyLocaleSymbol, rootScope)
 

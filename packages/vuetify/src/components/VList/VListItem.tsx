@@ -19,6 +19,7 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useList } from './list'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -65,14 +66,14 @@ export const VListItem = genericComponent<new () => {
     activeColor: String,
     activeClass: String,
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     disabled: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
     nav: Boolean,
     prependAvatar: String,
-    prependIcon: String,
-    subtitle: String,
-    title: String,
+    prependIcon: IconValue,
+    subtitle: [String, Number, Boolean],
+    title: [String, Number, Boolean],
     value: null,
     link: Boolean,
 

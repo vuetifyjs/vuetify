@@ -1,7 +1,11 @@
 @use 'sass:map'
+@use 'sass:string'
 @use '../settings'
 
 @mixin states ($selector: '&::before', $active: true)
+  @if string.slice(string.unquote($selector), 1, 1) != '&'
+    $selector: #{'>'} #{$selector}
+
   &:hover
     #{$selector}
       opacity: calc(#{map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
@@ -20,10 +24,13 @@
     &[aria-haspopup="menu"][aria-expanded="true"]
       @include active-states($selector)
 
-@mixin active-states ($selector: '::before')
-  &:hover#{$selector},
+@mixin active-states ($selector)
   #{$selector}
     opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
+
+  &:hover
+    #{$selector}
+      opacity: calc(#{map.get(settings.$states, 'activated')} * var(--v-theme-overlay-multiplier))
 
   &:focus
     #{$selector}

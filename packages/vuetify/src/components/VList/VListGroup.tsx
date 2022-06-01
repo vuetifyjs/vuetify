@@ -6,6 +6,7 @@ import { VExpandTransition } from '@/components/transitions'
 import { useList } from './list'
 import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -19,7 +20,7 @@ import type { InternalListItem } from './VList'
 export type ListGroupActivatorSlot = {
   props: {
     onClick: (e: Event) => void
-    appendIcon: string
+    appendIcon: IconValue
     class: string
     color?: string
   }
@@ -50,11 +51,11 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
     activeColor: String,
     color: String,
     collapseIcon: {
-      type: String,
+      type: IconValue,
       default: '$collapse',
     },
     expandIcon: {
-      type: String,
+      type: IconValue,
       default: '$expand',
     },
     value: null,
