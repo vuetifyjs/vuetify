@@ -22,6 +22,7 @@
           <v-item :value="text">
             <template #default="{ isSelected, toggle }">
               <v-card
+                :ref="'item-' + text"
                 :color="isSelected ? 'primary' : `grey-${dark ? 'darken' : 'lighten'}-3`"
                 class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
                 rounded
