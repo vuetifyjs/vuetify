@@ -236,7 +236,7 @@
               return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
             })
         )),
-        dark: computed(() => theme.getTheme(theme.current.value).dark),
+        dark: computed(() => theme.current.value.dark),
         route,
       }
     },

@@ -63,7 +63,7 @@
       const { t } = useI18n()
       const theme = useTheme()
 
-      return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
+      return { t, dark: computed(() => theme.current.value.dark) }
     },
   })
 </script>

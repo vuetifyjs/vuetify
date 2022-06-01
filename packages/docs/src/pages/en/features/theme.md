@@ -70,26 +70,26 @@ export default createVuetify({
 
 ## Changing theme
 
-To dynamically change theme during run-time, add the **theme** prop to the `<v-app>` component.
+To dynamically change theme during runtime.
 
 ```html
 <template>
-  <v-app :theme="theme">
+  <v-app>
     <v-btn @click="toggleTheme">toggle theme</v-btn>
     ...
   </v-app>
 </template>
 
 <script>
-import { ref } from 'vue'
+import { useTheme } from 'vuetify'
 
 export default {
   setup () {
-    const theme = ref('light')
+    const theme = useTheme()
 
     return {
       theme,
-      toggleTheme: () => theme.value = theme.value === 'light' ? 'dark' : 'light'
+      toggleTheme: () => theme.name.value = theme.current.value.dark ? 'light' : 'dark'
     }
   }
 }
@@ -215,8 +215,24 @@ export default createVuetify({
 })
 ```
 
+## Theme object structure
+
+```ts
+interface ThemeInstance {
+  /** Name of the current theme */
+  name: Ref<string>
+
+  /** Raw theme objects */
+  themes: Ref<{ [name: string]: ThemeDefinition }>
+
+  /** Processed theme object, includes automatically generated colors */
+  readonly current: ThemeDefinition
+  readonly computedThemes: { [name: string]: ThemeDefinition }
+}
+```
+
 ## Implementation
 
-Vuetify generates theme styles at run-time according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
+Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
 
 <backmatter />
