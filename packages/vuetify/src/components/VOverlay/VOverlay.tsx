@@ -92,6 +92,7 @@ export const VOverlay = genericComponent<new () => {
     contained: Boolean,
     contentClass: null,
     contentProps: null,
+    disabled: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
@@ -120,7 +121,13 @@ export const VOverlay = genericComponent<new () => {
   },
 
   setup (props, { slots, attrs, emit }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue')
+    const isActive = computed({
+      get: () => model.value,
+      set: v => {
+        if (!(v && props.disabled)) model.value = v
+      },
+    })
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
@@ -131,6 +138,10 @@ export const VOverlay = genericComponent<new () => {
     const { isTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
     const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
     const { dimensionStyles } = useDimension(props)
+
+    watch(() => props.disabled, v => {
+      if (v) isActive.value = false
+    })
 
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
