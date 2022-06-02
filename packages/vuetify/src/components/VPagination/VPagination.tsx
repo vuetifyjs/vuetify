@@ -17,6 +17,7 @@ import { makeBorderProps } from '@/composables/border'
 import { useRefs } from '@/composables/refs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, nextTick, ref, toRef } from 'vue'
@@ -46,19 +47,19 @@ export const VPagination = defineComponent({
     },
     totalVisible: [Number, String],
     firstIcon: {
-      type: String,
+      type: IconValue,
       default: '$first',
     },
     prevIcon: {
-      type: String,
+      type: IconValue,
       default: '$prev',
     },
     nextIcon: {
-      type: String,
+      type: IconValue,
       default: '$next',
     },
     lastIcon: {
-      type: String,
+      type: IconValue,
       default: '$last',
     },
     ariaLabel: {

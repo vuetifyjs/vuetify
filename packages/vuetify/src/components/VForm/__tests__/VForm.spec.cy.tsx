@@ -278,6 +278,7 @@ describe('VForm', () => {
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
     cy.vue().then(async wrapper => {
+
       const emits = wrapper
         .findComponent('.v-form')
         .emitted<SubmitEventPromise[]>('submit')

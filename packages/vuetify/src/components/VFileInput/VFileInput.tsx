@@ -11,6 +11,7 @@ import { VField } from '@/components/VField'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
@@ -54,7 +55,7 @@ export const VFileInput = defineComponent({
     ...makeVInputProps(),
 
     prependIcon: {
-      type: String,
+      type: IconValue,
       default: '$file',
     },
     modelValue: {

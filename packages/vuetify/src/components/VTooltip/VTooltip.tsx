@@ -15,7 +15,8 @@ import { genericComponent, getUid } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
-import type { StrategyProps } from '@/components/VOverlay/positionStrategies'
+import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
+import { useScopeId } from '@/composables/scopeId'
 
 export const VTooltip = genericComponent<new () => {
   $slots: OverlaySlots
@@ -29,8 +30,8 @@ export const VTooltip = genericComponent<new () => {
     modelValue: Boolean,
     text: String,
 
-    anchor: {
-      type: String as PropType<StrategyProps['anchor']>,
+    location: {
+      type: String as PropType<StrategyProps['location']>,
       default: 'end',
     },
     origin: {
@@ -49,14 +50,15 @@ export const VTooltip = genericComponent<new () => {
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
+    const { scopeId } = useScopeId()
 
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
-    const anchor = computed(() => {
-      return props.anchor.split(' ').length > 1
-        ? props.anchor
-        : props.anchor + ' center' as StrategyProps['anchor']
+    const location = computed(() => {
+      return props.location.split(' ').length > 1
+        ? props.location
+        : props.location + ' center' as StrategyProps['location']
     })
 
     const origin = computed(() => {
@@ -64,7 +66,7 @@ export const VTooltip = genericComponent<new () => {
         props.origin === 'auto' ||
         props.origin === 'overlap' ||
         props.origin.split(' ').length > 1 ||
-        props.anchor.split(' ').length > 1
+        props.location.split(' ').length > 1
       ) ? props.origin
         : props.origin + ' center' as StrategyProps['origin']
     })
@@ -84,9 +86,9 @@ export const VTooltip = genericComponent<new () => {
           id={ id.value }
           transition={ transition.value }
           absolute
-          positionStrategy="connected"
+          locationStrategy="connected"
           scrollStrategy="reposition"
-          anchor={ anchor.value }
+          location={ location.value }
           origin={ origin.value }
           min-width={ 0 }
           offset={ 10 }
@@ -100,6 +102,7 @@ export const VTooltip = genericComponent<new () => {
           activatorProps={{
             'aria-describedby': id.value,
           }}
+          { ...scopeId }
           { ...attrs }
         >
           {{

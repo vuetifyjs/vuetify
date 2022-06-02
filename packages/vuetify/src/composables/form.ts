@@ -32,6 +32,7 @@ interface FormField {
   isValid: boolean | null
 }
 
+
 export interface FormValidationResult {
   id: number | string
   errorMessages: string[]
@@ -77,6 +78,7 @@ export function createForm (props: FormProps) {
 
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
+
   const errorMessagesForItems = ref<Record<string, string[]>>({})
   const errorMessages = computed<FormValidationResult[]>(() =>
     Object.keys(errorMessagesForItems.value).reduce<FormValidationResult[]>((rec, i) => {
@@ -85,9 +87,11 @@ export function createForm (props: FormProps) {
     }, [])
   )
 
+
   async function validate () {
     const results: Record<string, string[]> = {}
     let valid = true
+
 
     errorMessagesForItems.value = {}
     isValidating.value = true
@@ -104,10 +108,12 @@ export function createForm (props: FormProps) {
       if (!valid && props.fastFail) break
     }
 
+
     errorMessagesForItems.value = results
+
     isValidating.value = false
 
-    return { valid, errorMessages: errorMessages.value }
+    return { valid, errors: errors.value }
   }
 
   function reset () {
@@ -117,7 +123,9 @@ export function createForm (props: FormProps) {
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
+
     errorMessagesForItems.value = {}
+
     model.value = null
   }
 
@@ -168,7 +176,7 @@ export function createForm (props: FormProps) {
   })
 
   return {
-    errorMessages,
+    errors,
     isDisabled,
     isReadonly,
     isValidating,

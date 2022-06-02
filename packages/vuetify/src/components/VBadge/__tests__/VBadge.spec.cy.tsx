@@ -4,7 +4,7 @@ import { VBadge } from '..'
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
-const location = ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+const location = ['bottom start', 'bottom end', 'top start', 'top end']
 const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg', 0] // TODO: fix pill
 const offset = [8, -8, '4', '-4', undefined]
 

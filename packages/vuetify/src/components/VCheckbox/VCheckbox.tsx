@@ -7,6 +7,7 @@ import { filterControlProps, makeSelectionControlProps, VSelectionControl } from
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed } from 'vue'
@@ -20,7 +21,7 @@ export const VCheckbox = defineComponent({
   props: {
     indeterminate: Boolean,
     indeterminateIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxIndeterminate',
     },
 
@@ -28,11 +29,11 @@ export const VCheckbox = defineComponent({
     ...makeSelectionControlProps(),
 
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxOff',
     },
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxOn',
     },
   },

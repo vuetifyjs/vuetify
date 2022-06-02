@@ -1,11 +1,11 @@
 <template>
   <div class="text-center">
     <v-select
-      v-model="anchor"
-      :items="anchors"
-      label="Anchor"
+      v-model="location"
+      :items="locations"
+      label="Location"
     ></v-select>
-    <v-menu :anchor="anchor">
+    <v-menu :location="location">
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
@@ -37,14 +37,14 @@
         { title: 'Click Me' },
         { title: 'Click Me 2' },
       ],
-      anchors: [
+      locations: [
         'top',
         'bottom',
         'start',
         'end',
         'center',
       ],
-      anchor: 'end',
+      location: 'end',
     }),
   }
 </script>

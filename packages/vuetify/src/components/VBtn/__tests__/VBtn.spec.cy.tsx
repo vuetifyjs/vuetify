@@ -14,11 +14,11 @@ const anchor = {
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
 const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
-const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text']
+const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
 const props = {
   color: colors,
-  variant: variants,
-  disabled: false,
+  // variant: variants,
+  // disabled: false,
   // loading: false,
 }
 
@@ -28,7 +28,18 @@ const stories = {
   'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
   // 'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
   Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
-  'Density + size': gridOn(densities, sizes, (density, size) => <VBtn size={ size } density={ density }>{ size }</VBtn>),
+  'Density + size': gridOn(densities, sizes, (density, size) =>
+    <VBtn size={ size } density={ density }>{ size }</VBtn>
+  ),
+  Variants: gridOn(['no color', 'primary'], variants, (color, variant) =>
+    <VBtn color={ color } variant={ variant }>{ variant }</VBtn>
+  ),
+  'Disabled variants': gridOn(['no color', 'primary'], variants, (color, variant) =>
+    <VBtn disabled color={ color } variant={ variant }>{ variant }</VBtn>
+  ),
+  Stacked: gridOn([undefined], variants, (_, variant) =>
+    <VBtn stacked prependIcon="mdi-vuetify" variant={ variant }>{ variant }</VBtn>
+  ),
 }
 
 // Actual tests
@@ -275,7 +286,7 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+  describe('Showcase', { viewportHeight: 1432, viewportWidth: 700 }, () => {
     generate({ stories, props, component: VBtn })
   })
 })

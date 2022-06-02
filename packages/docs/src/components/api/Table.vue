@@ -32,7 +32,6 @@
                   :id="`${field}-${item[header].replace('$', '')}`"
                   class="name-item text-mono ml-n2"
                 >
-                  <span class="primary--text">#</span>
                   <app-link
                     :href="`#${field}-${item[header].replace('$', '')}`"
                     class="font-weight-bold"

@@ -1,7 +1,10 @@
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
 
-// Utility
+// Composables
+import { IconValue } from '@/composables/icons'
+
+// Utilities
 import { defineComponent, useRender } from '@/util'
 
 export const VRadio = defineComponent({
@@ -9,11 +12,11 @@ export const VRadio = defineComponent({
 
   props: {
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOff',
     },
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOn',
     },
   },
