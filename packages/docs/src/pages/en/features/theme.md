@@ -34,7 +34,7 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the **theme** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
 Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
 
@@ -128,7 +128,7 @@ You can use the `<v-theme-provider>` component to dynamically apply different th
 
 ## Custom theme colors
 
-The Vuetify theme system supports adding _custom_ colors. When configuring the Vuetify theme settings, add any number of custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
+The Vuetify theme system supports adding custom colors. When configuring the Vuetify theme settings, add your custom colors to the **colors** object and Vuetify will generate a number of CSS classes and variables for you to use in your application.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -142,7 +142,7 @@ export default createVuetify({
         dark: false,
         colors: {
           ..., // We have omitted the standard color properties here to emphasize the custom one that we've added
-          green: '#00ff00'
+          something: '#00ff00'
         }
       }
     }
@@ -154,17 +154,17 @@ Custom properties for colors are a list of `red, green, blue`, so the `rgb()` or
 
 ```html
 <template>
-  <div class="bg-green on-green">background color with appropriate text color contrast</div>
+  <div class="bg-something on-something">background color with appropriate text color contrast</div>
 
-  <div class="text-green">text color</div>
+  <div class="text-something">text color</div>
 
-  <div class="border-green">border color</div>
+  <div class="border-something">border color</div>
 </template>
 
 <style>
   .custom-class {
-    background: rgb(var(--v-theme-green))
-    color: rgba(var(--v-theme-on-green), 0.9)
+    background: rgb(var(--v-theme-something))
+    color: rgba(var(--v-theme-on-something), 0.9)
   }
 </style>
 ```
