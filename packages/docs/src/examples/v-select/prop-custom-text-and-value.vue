@@ -12,7 +12,7 @@
           v-model="select"
           :hint="`${select.state}, ${select.abbr}`"
           :items="items"
-          item-text="state"
+          item-title="state"
           item-value="abbr"
           label="Select"
           persistent-hint
