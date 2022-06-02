@@ -301,7 +301,9 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
       watchEffect(() => head.updateDOM())
     }
   } else {
-    let styleEl: HTMLStyleElement
+    let styleEl = IN_BROWSER
+      ? document.getElementById('vuetify-theme-stylesheet')
+      : null
 
     watch(styles, updateStyles, { immediate: true })
     function updateStyles () {
