@@ -7,7 +7,7 @@ import { createTheme, ThemeSymbol } from '@/composables/theme'
 import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, IN_BROWSER } from '@/util'
 import { reactive } from 'vue'
 
 // Types
@@ -55,11 +55,25 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
       }))
     }
 
-    app.provide(DefaultsSymbol, createDefaults(options.defaults))
-    app.provide(DisplaySymbol, createDisplay(options.display))
-    app.provide(ThemeSymbol, createTheme(app, options.theme))
-    app.provide(IconSymbol, createIcons(options.icons))
-    app.provide(LocaleAdapterSymbol, createLocale(app, options.locale))
+    function provideApp (isHydrate?: boolean) {
+      app.provide(DefaultsSymbol, createDefaults(options.defaults))
+      app.provide(DisplaySymbol, createDisplay(options.display, isHydrate))
+      app.provide(ThemeSymbol, createTheme(app, options.theme))
+      app.provide(IconSymbol, createIcons(options.icons))
+      app.provide(LocaleAdapterSymbol, createLocale(app, options.locale))
+    }
+
+    if (!IN_BROWSER) {
+      provideApp()
+    }
+
+    const mount = app.mount
+    app.mount = (rootContainer: any, isHydrate?: boolean, isSVG?: boolean) => {
+      provideApp(isHydrate)
+      const ret = mount(rootContainer, isHydrate, isSVG)
+      app.mount = mount
+      return ret
+    }
 
     // Vue's inject() can only be used in setup
     function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
