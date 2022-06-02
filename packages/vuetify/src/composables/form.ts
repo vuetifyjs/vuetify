@@ -115,19 +115,19 @@ export function createForm (props: FormProps) {
   watch(items, () => {
     let valid = 0
     let invalid = 0
-    const messages = []
+    const results = []
 
     for (const item of items.value) {
       if (item.isValid === false) {
         invalid++
-        messages.push({
+        results.push({
           id: item.id,
           errorMessages: item.errorMessages,
         })
       } else if (item.isValid === true) valid++
     }
 
-    errorMessages.value = messages
+    errors.value = results
     model.value =
       invalid > 0 ? false
       : valid === items.value.length ? true

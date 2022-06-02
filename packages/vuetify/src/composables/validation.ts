@@ -3,12 +3,12 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, ref, unref, watch } from 'vue'
-import type { MaybeRef } from '@/util'
+import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MaybeRef } from '@/util'
 
 export type ValidationResult = string | true
 export type ValidationRule =
@@ -102,6 +102,9 @@ export function useValidation (
   onBeforeUnmount(() => {
     form?.unregister(uid.value)
   })
+
+  // Set initial valid state, for inputs that might not have rules
+  onMounted(() => form?.update(uid.value, isValid.value, errorMessages.value))
 
   watch(validationModel, () => {
     if (validationModel.value != null) validate()
