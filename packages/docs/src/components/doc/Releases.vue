@@ -10,7 +10,7 @@
       dense
       flat
       hide-details
-      item-text="name"
+      item-title="name"
       label="Select Release Version"
       prepend-inner-icon="$mdiTextBoxSearchOutline"
       return-object
