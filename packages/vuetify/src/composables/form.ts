@@ -117,23 +117,22 @@ export function createForm (props: FormProps) {
     let invalid = 0
     const messages = []
 
-    for (let i = 0; i < items.value.length; i++) {
-      const item = items.value[i]
-
+    for (const item of items.value) {
       if (item.isValid === false) {
-        invalid += 1
+        invalid++
         messages.push({
           id: item.id,
           errorMessages: item.errorMessages,
         })
-      } else if (item.isValid === true) valid += 1
+      } else if (item.isValid === true) valid++
     }
 
     errorMessages.value = messages
-    model.value = invalid > 0 ? false : valid === items.value.length ? true : null
-  }, {
-    deep: true,
-  })
+    model.value =
+      invalid > 0 ? false
+      : valid === items.value.length ? true
+      : null
+  }, { deep: true })
 
   provide(FormKey, {
     register: ({ id, validate, reset, resetValidation }) => {
