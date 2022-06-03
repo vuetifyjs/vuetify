@@ -73,13 +73,9 @@
 </template>
 
 <script setup lang="ts">
-  // Composables
-  import { useTheme } from 'vuetify'
-
   // Utilities
   import { computed, nextTick, onMounted, ref } from 'vue'
 
-  const theme = useTheme()
   const isFocused = ref(false)
   const isLoading = ref(true)
   const isSearching = ref(false)
@@ -102,10 +98,6 @@
       timeout = window.setTimeout(() => (isFocused.value = false), timeout)
     })
   }
-
-  const backgroundColor = computed(() => {
-    return theme.current.value.dark ? undefined : `grey lighten-${isFocused.value ? '5' : '3'}`
-  })
 
   const menuProps = computed(() => {
     return {
