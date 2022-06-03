@@ -2,72 +2,24 @@
   <div>
     <v-autocomplete
       v-model="search"
-      :background-color="backgroundColor"
-      :class="isFocused ? 'rounded-b-0 rounded-t-lg' : 'rounded-lg'"
       :items="releases"
-      class="mt-8 mb-12"
+      class="mt-8"
       item-title="name"
+      hide-details
       label="Select Release Version"
       :menu-props="menuProps"
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      variant="contained"
+      variant="filled"
       @blur="resetSearch"
       @focus="onFocus"
-    >
-      <template #prepend-inner>
-        <div
-          class="ml-1 mr-2"
-          style="width: 40px;"
-        >
-          <v-progress-circular
-            v-if="isLoading"
-            color="primary"
-            indeterminate
-            size="20"
-            width="1"
-          />
-
-          <v-icon
-            v-else
-            :color="!isFocused ? 'grey' : undefined"
-          >
-            $mdiTextBoxSearchOutline
-          </v-icon>
-        </div>
-      </template>
-
-      <!-- <template #item="props">
-        <v-list-item-action>
-          <v-icon>$mdiTagOutline</v-icon>
-        </v-list-item-action>
-
-        <v-list-item-content>
-          <v-list-item-title
-            :id="props.attrs['aria-labelledby']"
-            v-text="props.item.name"
-          />
-
-          <v-list-item-subtitle>
-            <i18n-t path="published-on">
-              <template #date>
-                <strong v-text="props.item.published_at" />
-              </template>
-            </i18n-t>
-          </v-list-item-subtitle>
-        </v-list-item-content>
-      </template> -->
-    </v-autocomplete>
-
-    <!-- <v-skeleton-loader
-      v-if="isLoading"
-      type="image"
-      height="180"
-    /> -->
+    />
 
     <v-card
       min-height="180"
-      variant="outlined"
+      flat
+      border="t-0"
+      rounded="t-0 b"
     >
       <div
         v-if="!!search"
