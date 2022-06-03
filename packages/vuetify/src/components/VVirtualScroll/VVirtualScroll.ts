@@ -38,6 +38,7 @@ export default Measurable.extend({
   },
 
   data: () => ({
+    currentFirstChild: 0,
     first: 0,
     last: 0,
     scrollTop: 0,
@@ -56,6 +57,12 @@ export default Measurable.extend({
     lastToRender (): number {
       return Math.min(this.items.length, this.last + this.__bench)
     },
+    virtualList (): Array<any> {
+      return this.items.map((data, index) => ({
+        __vVScrollerIndex: index,
+        data,
+      }))
+    },
   },
 
   watch: {
@@ -68,22 +75,30 @@ export default Measurable.extend({
   },
 
   methods: {
-    getChildren (): VNode[] {
-      return this.items.slice(
-        this.firstToRender,
+    getList (firstToRender: number) {
+      return this.virtualList.slice(
+        firstToRender,
         this.lastToRender,
-      ).map(this.genChild)
+      )
+    },
+    getChildren (): VNode[] {
+      const { __vVScrollerIndex: firstChildToRender } = this.virtualList[this.firstToRender]
+      const firstChild = firstChildToRender > 0 && this.currentFirstChild !== firstChildToRender
+        ? this.firstToRender - 1
+        : this.firstToRender
+
+      this.currentFirstChild = firstChildToRender
+      return this.getList(firstChild).map(this.genChild)
     },
     genChild (item: any, index: number) {
       index += this.firstToRender
-
       const top = convertToUnit(index * this.__itemHeight)
-
+      const { __vVScrollerIndex, data } = item
       return this.$createElement('div', {
         staticClass: 'v-virtual-scroll__item',
         style: { top },
-        key: index,
-      }, getSlot(this, 'default', { index, item }))
+        key: __vVScrollerIndex,
+      }, getSlot(this, 'default', { index, item: data }))
     },
     getFirst (): number {
       return Math.floor(this.scrollTop / this.__itemHeight)

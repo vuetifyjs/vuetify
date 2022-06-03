@@ -94,7 +94,7 @@ describe('VVirtualScroll.ts', () => {
 
     wrapper.setData({ first: 2 })
 
-    wrapper.vm.genChild(0, 1)
+    wrapper.vm.genChild({ data: 0 }, 1)
 
     expect(spy.mock.calls[0][2]).toEqual({
       item: 0,
