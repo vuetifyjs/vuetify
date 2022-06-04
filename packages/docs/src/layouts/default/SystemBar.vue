@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="false"
+    v-if="hasPromotion"
     class="cm-system-bar"
     app
     dark
@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://vueschool.io/sales/price-increase-22?friend=vuetify"
+      href="https://cutt.ly/WJfebcU"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'vs-summer-2022',
+          event_label: 'ui-lib-nitro',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,14 +78,12 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-mobile.png)
+    background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-3.png)
+    background-size: cover
 
     @media (min-width: 437px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-tablet.png)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-2.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-summer-2022/vs-offer-desktop.png)
-
-  .cm-system-bar
-    background: linear-gradient(90deg, hsl(228deg 76% 6%) 40%, hsl(273deg 45% 45%) 74%)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-1.png)
 </style>
