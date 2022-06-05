@@ -157,6 +157,26 @@ export const VInput = genericComponent<new <T>() => {
               ) }
             </div>
           ) }
+          
+          { props.hideDetails && errorMessages.value.length > 0 && (
+            <div
+              class="v-input__append"
+            >
+              <VIcon
+                icon="mdi-alert-circle-outline"
+              />
+              <VTooltip
+                location="bottom"
+                activator="parent"
+              >
+                <VMessages
+                  active={ true }
+                  messages={ errorMessages.value }
+                />
+              </VTooltip>
+            </div>
+          ) }
+
 
           { hasDetails && (
             <div class="v-input__details">
