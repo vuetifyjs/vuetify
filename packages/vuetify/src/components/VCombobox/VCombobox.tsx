@@ -322,6 +322,7 @@ export const VCombobox = genericComponent<new <
                   openOnClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  { ...props.menuProps }
                 >
                   <VList
                     selected={ selected.value }

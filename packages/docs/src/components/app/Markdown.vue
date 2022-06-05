@@ -4,6 +4,7 @@
 
 <script>
   // Utilities
+  import { computed } from 'vue'
   import MarkdownIt from 'markdown-it'
 
   const md = MarkdownIt({
@@ -25,7 +26,7 @@
 
     setup (props) {
       return {
-        markdown: md.render(props.content, {}),
+        markdown: computed(() => md.render(props.content, {})),
       }
     },
 
