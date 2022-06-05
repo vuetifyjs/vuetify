@@ -4,6 +4,7 @@ import './VInput.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
+import { VTooltip } from '@/components/VTooltip'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
@@ -176,7 +177,6 @@ export const VInput = genericComponent<new <T>() => {
               </VTooltip>
             </div>
           ) }
-
 
           { hasDetails && (
             <div class="v-input__details">
