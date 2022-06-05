@@ -158,7 +158,7 @@ export const VInput = genericComponent<new <T>() => {
               ) }
             </div>
           ) }
-          
+
           { props.hideDetails && errorMessages.value.length > 0 && (
             <div
               class="v-input__append"
