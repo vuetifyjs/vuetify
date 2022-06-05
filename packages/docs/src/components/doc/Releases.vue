@@ -132,11 +132,13 @@
 
   onMounted(async () => {
     const filteredReleases = []
-    const res = await fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases', { method: 'GET' })
+    const res = await Promise.all([
+      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases', { method: 'GET' }),
+      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=2', { method: 'GET' }),
+      // fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=3', { method: 'GET' }),
+    ]).then(v => Promise.all(v.map(res => res.json())))
 
-    isLoading.value = false
-
-    for (const release of await res.json()) {
+    for (const release of res.flat()) {
       if (release.name.startsWith('v2')) continue
 
       filteredReleases.push({
@@ -145,6 +147,7 @@
       })
     }
 
+    isLoading.value = false
     releases.value = filteredReleases
     search.value = filteredReleases[0]
   })
