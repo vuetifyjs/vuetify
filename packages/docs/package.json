@@ -49,6 +49,7 @@
     "markdown-it": "^13.0.1",
     "markdown-it-anchor": "^8.4.1",
     "markdown-it-attrs": "^4.1.4",
+    "markdown-it-emoji": "^2.0.2",
     "markdown-it-header-sections": "^1.0.0",
     "markdown-it-link-attributes": "^4.0.0",
     "markdown-it-meta": "^0.0.1",
