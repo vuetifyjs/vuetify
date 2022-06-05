@@ -171,7 +171,7 @@ export const VInput = genericComponent<new <T>() => {
                 activator="parent"
               >
                 <VMessages
-                  active={ true }
+                  active
                   messages={ errorMessages.value }
                 />
               </VTooltip>
