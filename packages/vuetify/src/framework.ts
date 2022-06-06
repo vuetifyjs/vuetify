@@ -7,7 +7,7 @@ import { createTheme, ThemeSymbol } from '@/composables/theme'
 import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent, IN_BROWSER } from '@/util'
+import { defineComponent, getUid, IN_BROWSER } from '@/util'
 import { reactive } from 'vue'
 
 // Types
@@ -66,6 +66,8 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
     if (!IN_BROWSER) {
       provideApp()
     }
+
+    getUid.reset()
 
     const mount = app.mount
     app.mount = (rootContainer: any, isHydrate?: boolean, isSVG?: boolean) => {
