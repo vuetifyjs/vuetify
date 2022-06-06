@@ -6,7 +6,7 @@
   // Utilities
   import { computed } from 'vue'
   import MarkdownIt from 'markdown-it'
-  import Emoji from 'markdown-it-emoji/bare'
+  import Emoji from 'markdown-it-emoji/bare.js'
 
   const md = MarkdownIt({
     html: true,
