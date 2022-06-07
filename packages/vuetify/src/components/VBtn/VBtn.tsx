@@ -27,7 +27,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -91,7 +91,7 @@ export const VBtn = defineComponent({
 
     useSelectLink(link, group?.select)
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasColor = !group || group.isSelected.value
 
@@ -171,7 +171,11 @@ export const VBtn = defineComponent({
           ) }
         </Tag>
       )
-    }
+    })
+
+    const expose = {}
+
+    return group ? group.isReady.then(() => expose) : expose
   },
 })
 

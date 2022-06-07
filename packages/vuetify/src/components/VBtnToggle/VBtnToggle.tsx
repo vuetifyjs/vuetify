@@ -2,6 +2,7 @@
 import './VBtnToggle.sass'
 
 // Components
+import { Suspense } from 'vue'
 import { VBtnGroup } from '@/components/VBtnGroup'
 
 // Composables
@@ -38,13 +39,17 @@ export const VBtnToggle = genericComponent<new <T>() => {
 
     useRender(() => (
       <VBtnGroup class="v-btn-toggle">
-        { slots.default?.({
-          isSelected,
-          next,
-          prev,
-          select,
-          selected,
-        } as DefaultBtnToggleSlot) }
+        <Suspense>
+          <>
+            { slots.default?.({
+              isSelected,
+              next,
+              prev,
+              select,
+              selected,
+            } as DefaultBtnToggleSlot) }
+          </>
+        </Suspense>
       </VBtnGroup>
     ))
 

@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
+import { computed, inject, nextTick, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -45,6 +45,7 @@ export interface GroupProvide {
 export interface GroupItemProvide {
   id: number
   isSelected: Ref<boolean>
+  isReady: Promise<void>
   toggle: () => void
   select: (value: boolean) => void
   selectedClass: Ref<(string | undefined)[] | false>
@@ -132,9 +133,14 @@ export function useGroupItem (
     vm.emit('group:selected', { value })
   })
 
+  let resolve: (val?: any) => void
+  const isReady = new Promise<void>(_resolve => resolve = _resolve)
+  nextTick(() => resolve())
+
   return {
     id,
     isSelected,
+    isReady,
     toggle: () => group.select(id, !isSelected.value),
     select: (value: boolean) => group.select(id, value),
     selectedClass,
