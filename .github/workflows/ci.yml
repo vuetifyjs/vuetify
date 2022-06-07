@@ -34,9 +34,14 @@ jobs:
           do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
 
   lint:
+    name: Lint
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -48,9 +53,12 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build vuetify
-      - run: yarn run lint
+      - run: yarn lerna run lint $SCOPES
+        env:
+          SCOPES: ${{ matrix.scopes }}
 
-  test:
+  test-jest:
+    name: Test (Jest)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
@@ -67,9 +75,33 @@ jobs:
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
-      - run: yarn cy:run
+
+  test-cypress:
+    name: Test (Cypress)
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') }}
         working-directory: ./packages/vuetify
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
@@ -78,7 +110,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    needs: [lint, test]
+    needs: [lint, test-jest, test-cypress]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
@@ -121,7 +153,7 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
-    needs: [lint, test]
+    needs: [lint, test-jest, test-cypress]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
