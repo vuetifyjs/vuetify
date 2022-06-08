@@ -133,9 +133,7 @@ export function useGroupItem (
     vm.emit('group:selected', { value })
   })
 
-  let resolve: (val?: any) => void
-  const isReady = new Promise<void>(_resolve => resolve = _resolve)
-  nextTick(() => resolve())
+  const isReady = nextTick()
 
   return {
     id,

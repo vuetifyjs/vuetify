@@ -1,0 +1,22 @@
+diff --git a/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js b/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+index 9c71d2d..554c9cc 100644
+--- a/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
++++ b/node_modules/@vue/runtime-core/dist/runtime-core.esm-bundler.js
+@@ -5659,7 +5659,7 @@ function baseCreateRenderer(options, createHydrationFns) {
+                 }
+                 patch(prevTree, nextTree,
+                 // parent may have changed if it's in a teleport
+-                hostParentNode(prevTree.el), 
++                prevTree.el && hostParentNode(prevTree.el),
+                 // anchor may have changed if it's in a fragment
+                 getNextHostNode(prevTree), instance, parentSuspense, isSVG);
+                 if ((process.env.NODE_ENV !== 'production')) {
+@@ -6191,7 +6191,7 @@ function baseCreateRenderer(options, createHydrationFns) {
+         }
+     };
+     const getNextHostNode = vnode => {
+-        if (vnode.shapeFlag & 6 /* COMPONENT */) {
++        if (vnode.shapeFlag & 6 /* COMPONENT */ && vnode.component.subTree) {
+             return getNextHostNode(vnode.component.subTree);
+         }
+         if (vnode.shapeFlag & 128 /* SUSPENSE */) {

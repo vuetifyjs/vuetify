@@ -16,5 +16,7 @@ exports[`VBottomNavigation should not render content with no default slot and ma
 <header class="v-bottom-navigation v-bottom-navigation--active v-theme--light v-bottom-navigation--density-default"
         style="bottom: 0px; z-index: 1004; transform: translateY(0%); position: fixed; height: 56px;"
 >
+  <div class="v-bottom-navigation__content">
+  </div>
 </header>
 `;

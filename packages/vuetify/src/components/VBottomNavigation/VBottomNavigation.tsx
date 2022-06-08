@@ -15,7 +15,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, Suspense, toRef } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
@@ -114,11 +114,13 @@ export const VBottomNavigation = defineComponent({
             },
           ]}
         >
-          { slots.default && (
-            <div class="v-bottom-navigation__content">
-              { slots.default() }
-            </div>
-          ) }
+          <div class="v-bottom-navigation__content">
+            <Suspense>
+              <>
+                { slots.default?.() }
+              </>
+            </Suspense>
+          </div>
         </props.tag>
       )
     }

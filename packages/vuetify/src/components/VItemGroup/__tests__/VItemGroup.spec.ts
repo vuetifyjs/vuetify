@@ -3,7 +3,7 @@ import { VItem } from '../VItem'
 import { VItemGroup } from '../VItemGroup'
 
 // Utilities
-import { h } from 'vue'
+import { h, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
@@ -35,6 +35,8 @@ describe('VItemGroup', () => {
       },
     })
 
+    await nextTick()
+
     const items = wrapper.findAll('#item')
 
     await items[0].trigger('click')
@@ -56,6 +58,9 @@ describe('VItemGroup', () => {
       },
     })
 
+    await nextTick()
+    await nextTick()
+
     const items = wrapper.findAll('#item')
 
     await items[0].trigger('click')
@@ -75,6 +80,9 @@ describe('VItemGroup', () => {
         default: defaultSlot,
       },
     })
+
+    await nextTick()
+    await nextTick()
 
     const items = wrapper.findAll('#item')
 
@@ -105,6 +113,8 @@ describe('VItemGroup', () => {
         ],
       },
     })
+
+    await nextTick()
 
     const items = wrapper.findAll('#item')
 

@@ -107,7 +107,7 @@ export const VExpansionPanel = defineComponent({
       )
     })
 
-    return {}
+    return groupItem.isReady
   },
 })
 

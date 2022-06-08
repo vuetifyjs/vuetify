@@ -7,6 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
+import { Suspense } from 'vue'
 import { defineComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
@@ -37,13 +38,17 @@ export const VItemGroup = defineComponent({
           themeClasses.value,
         ]}
       >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        }) }
+        <Suspense>
+          <>
+            { slots.default?.({
+              isSelected,
+              select,
+              next,
+              prev,
+              selected: selected.value,
+            }) }
+          </>
+        </Suspense>
       </props.tag>
     )
   },

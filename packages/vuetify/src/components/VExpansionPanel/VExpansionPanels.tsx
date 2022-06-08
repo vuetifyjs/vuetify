@@ -8,7 +8,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, Suspense, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
@@ -65,8 +65,13 @@ export const VExpansionPanels = defineComponent({
           themeClasses.value,
           variantClass.value,
         ]}
-        v-slots={ slots }
-      />
+      >
+        <Suspense>
+          <>
+            { slots.default?.() }
+          </>
+        </Suspense>
+      </props.tag>
     ))
 
     return {}

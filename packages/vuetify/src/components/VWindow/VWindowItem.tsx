@@ -9,7 +9,7 @@ import Touch from '@/directives/touch'
 
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
 export const VWindowItem = defineComponent({
@@ -114,7 +114,7 @@ export const VWindowItem = defineComponent({
 
     const { hasContent } = useLazy(props, groupItem.isSelected)
 
-    return () => {
+    useRender(() => {
       return (
         <MaybeTransition transition={ isBooted.value && transition.value } >
           <div
@@ -128,7 +128,9 @@ export const VWindowItem = defineComponent({
           </div>
         </MaybeTransition>
       )
-    }
+    })
+
+    return groupItem.isReady
   },
 })
 

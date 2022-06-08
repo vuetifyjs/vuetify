@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/rtl'
 import { Touch } from '@/directives/touch'
 
 // Utilities
-import { computed, provide, ref, watch } from 'vue'
+import { computed, provide, ref, Suspense, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
@@ -234,7 +234,11 @@ export const VWindow = genericComponent<new () => {
             height: transitionHeight.value,
           }}
         >
-          { slots.default?.({ group }) }
+          <Suspense>
+            <>
+              { slots.default?.({ group }) }
+            </>
+          </Suspense>
 
           { props.showArrows !== false && (
             <div class="v-window__controls">

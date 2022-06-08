@@ -14,13 +14,13 @@ import { useRtl } from '@/composables/rtl'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { computed, ref, Suspense, watch, watchEffect } from 'vue'
 import { clamp, defineComponent, useRender } from '@/util'
-import { computed, ref, watch, watchEffect } from 'vue'
+import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -377,7 +377,11 @@ export const VSlideGroup = defineComponent({
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
           >
-            { slots.default?.(slotProps.value) }
+            <Suspense>
+              <>
+                { slots.default?.(slotProps.value) }
+              </>
+            </Suspense>
           </div>
         </div>
 

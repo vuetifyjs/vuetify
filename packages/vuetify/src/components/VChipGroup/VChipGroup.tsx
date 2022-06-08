@@ -9,8 +9,8 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
+import { Suspense, toRef } from 'vue'
 import { deepEqual, defineComponent } from '@/util'
-import { toRef } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -60,13 +60,17 @@ export const VChipGroup = defineComponent({
           themeClasses.value,
         ]}
       >
-        { slots.default?.({
-          isSelected,
-          select,
-          next,
-          prev,
-          selected: selected.value,
-        }) }
+        <Suspense>
+          <>
+            { slots.default?.({
+              isSelected,
+              select,
+              next,
+              prev,
+              selected: selected.value,
+            }) }
+          </>
+        </Suspense>
       </props.tag>
     )
   },

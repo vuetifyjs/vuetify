@@ -25,7 +25,7 @@ import { IconValue } from '@/composables/icons'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VChip = defineComponent({
   name: 'VChip',
@@ -103,7 +103,7 @@ export const VChip = defineComponent({
       emit('click:close', e)
     }
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
       const hasClose = !!(slots.close || props.closable)
@@ -215,7 +215,9 @@ export const VChip = defineComponent({
           ) }
         </Tag>
       )
-    }
+    })
+
+    return group ? group.isReady : undefined
   },
 })
 
