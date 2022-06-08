@@ -15,7 +15,7 @@ export const VMain = defineComponent({
   props: makeTagProps({ tag: 'main' }),
 
   setup (props, { slots }) {
-    const { mainStyles } = useLayout()
+    const { mainStyles, layoutIsReady } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
     useRender(() => (
@@ -32,6 +32,6 @@ export const VMain = defineComponent({
       </props.tag>
     ))
 
-    return {}
+    return layoutIsReady
   },
 })

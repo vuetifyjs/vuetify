@@ -67,7 +67,7 @@ export const VBottomNavigation = defineComponent({
       (props.density === 'compact' ? 16 : 0)
     ))
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: computed(() => 'bottom'),
@@ -123,7 +123,7 @@ export const VBottomNavigation = defineComponent({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

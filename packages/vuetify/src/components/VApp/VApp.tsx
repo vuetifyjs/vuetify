@@ -7,6 +7,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
+import { Suspense } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 export const VApp = defineComponent({
@@ -34,7 +35,11 @@ export const VApp = defineComponent({
         style={ layoutStyles.value }
       >
         <div class="v-application__wrap">
-          { slots.default?.() }
+          <Suspense>
+            <>
+              { slots.default?.() }
+            </>
+          </Suspense>
         </div>
       </div>
     ))

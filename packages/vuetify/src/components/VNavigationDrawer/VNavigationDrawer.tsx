@@ -16,7 +16,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
 
 // Utilities
-import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
+import { computed, ref, toRef, Transition, watch } from 'vue'
 import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
@@ -96,11 +96,9 @@ export const VNavigationDrawer = defineComponent({
       if (val) isActive.value = true
     })
 
-    onBeforeMount(() => {
-      if (props.modelValue != null || isTemporary.value) return
-
+    if (props.modelValue == null && !isTemporary.value) {
       isActive.value = props.permanent || !mobile.value
-    })
+    }
 
     const rootEl = ref<HTMLElement>()
 
@@ -119,7 +117,7 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
-    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutRect, layoutItemScrimStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
@@ -219,7 +217,7 @@ export const VNavigationDrawer = defineComponent({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

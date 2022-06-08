@@ -47,7 +47,7 @@ export const VFooter = defineComponent({
       autoHeight.value = entries[0].target.clientHeight
     })
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: computed(() => 'bottom'),
@@ -76,6 +76,6 @@ export const VFooter = defineComponent({
       />
     ))
 
-    return {}
+    return props.app ? layoutIsReady : {}
   },
 })

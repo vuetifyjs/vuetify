@@ -53,12 +53,12 @@ export const VAppBar = defineComponent({
     const vToolbarRef = ref()
     const isActive = useProxiedModel(props, 'modelValue')
     const height = computed(() => {
-      const height: number = vToolbarRef.value?.contentHeight ?? 0
+      const height: number = vToolbarRef.value?.contentHeight ?? props.height
       const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
 
       return (height + extensionHeight)
     })
-    const { layoutItemStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutIsReady } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
@@ -90,7 +90,7 @@ export const VAppBar = defineComponent({
       )
     })
 
-    return {}
+    return layoutIsReady
   },
 })
 

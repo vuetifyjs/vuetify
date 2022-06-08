@@ -1,11 +1,12 @@
 // Styles
 import './VLayout.sass'
 
-// Utilities
-import { defineComponent, useRender } from '@/util'
-
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
+
+// Utilities
+import { Suspense } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VLayout = defineComponent({
   name: 'VLayout',
@@ -17,7 +18,11 @@ export const VLayout = defineComponent({
 
     useRender(() => (
       <div ref={ layoutRef } class={ layoutClasses.value } style={ layoutStyles.value }>
-        { slots.default?.() }
+        <Suspense>
+          <>
+            { slots.default?.() }
+          </>
+        </Suspense>
       </div>
     ))
 

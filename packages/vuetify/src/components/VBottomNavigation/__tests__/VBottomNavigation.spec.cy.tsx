@@ -31,4 +31,14 @@ describe('VBottomNavigation', () => {
 
     cy.get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
+
+  it('should not be visible if modelValue is false', () => {
+    cy.mount(() => (
+      <VLayout>
+        <VBottomNavigation modelValue={false}></VBottomNavigation>
+      </VLayout>
+    ))
+
+    cy.get('.v-bottom-navigation').should('not.be.visible')
+  })
 })
