@@ -1,28 +1,28 @@
 // Components
 import { VIcon } from '@/components/VIcon'
-import { VTimelineSymbol } from './shared'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
-import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeSizeProps, useSize } from '@/composables/size'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { IconValue } from '@/composables/icons'
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeSizeProps, useSize } from '@/composables/size'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { inject, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { computed, toRef } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
 
   props: {
+    dotColor: String,
+    fillDot: Boolean,
     hideDot: Boolean,
-    lineColor: String,
     icon: IconValue,
     iconColor: String,
-    fillDot: Boolean,
-    dotColor: String,
+    lineColor: String,
 
     ...makeRoundedProps(),
     ...makeSizeProps(),
@@ -30,17 +30,25 @@ export const VTimelineDivider = defineComponent({
   },
 
   setup (props, { slots }) {
-    const timeline = inject(VTimelineSymbol)
-
-    if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
-
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')
     const { backgroundColorStyles, backgroundColorClasses } = useBackgroundColor(toRef(props, 'dotColor'))
-    const { backgroundColorStyles: lineColorStyles, backgroundColorClasses: lineColorClasses } = useBackgroundColor(timeline.lineColor)
     const { roundedClasses } = useRounded(props, 'v-timeline-divider__dot')
     const { elevationClasses } = useElevation(props)
+    const {
+      backgroundColorClasses: lineColorClasses,
+      backgroundColorStyles: lineColorStyles,
+    } = useBackgroundColor(toRef(props, 'lineColor'))
+    const slotProps = computed(() => ({
+      icon: props.icon,
+      iconColor: props.iconColor,
+      size: props.size,
+    }))
 
-    return () => (
+    provideDefaults({
+      VIcon: { ...slotProps.value },
+    })
+
+    useRender(() => (
       <div
         class={[
           'v-timeline-divider',
@@ -53,9 +61,9 @@ export const VTimelineDivider = defineComponent({
           <div
             class={[
               'v-timeline-divider__dot',
+              elevationClasses.value,
               roundedClasses.value,
               sizeClasses.value,
-              elevationClasses.value,
             ]}
             // @ts-expect-error: null
             style={ sizeStyles.value }
@@ -63,19 +71,19 @@ export const VTimelineDivider = defineComponent({
             <div
               class={[
                 'v-timeline-divider__inner-dot',
-                roundedClasses.value,
                 backgroundColorClasses.value,
+                roundedClasses.value,
               ]}
               style={ backgroundColorStyles.value }
             >
-              {
-                slots.default ? slots.default({ icon: props.icon, iconColor: props.iconColor, size: props.size })
-                : props.icon ? <VIcon icon={ props.icon } color={ props.iconColor } size={ props.size } />
-                : undefined
+              { slots.default
+                ? slots.default(slotProps.value)
+                : props.icon ? (<VIcon />) : undefined
               }
             </div>
           </div>
         ) }
+
         <div
           class={[
             'v-timeline-divider__line',
@@ -84,7 +92,9 @@ export const VTimelineDivider = defineComponent({
           style={ lineColorStyles.value }
         />
       </div>
-    )
+    ))
+
+    return {}
   },
 })
 
