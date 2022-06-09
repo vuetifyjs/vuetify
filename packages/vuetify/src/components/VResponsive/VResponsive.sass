@@ -1,21 +1,24 @@
+@forward './variables'
+
 @use '../../styles/settings'
+@use './variables' as *
 
 .v-responsive
   display: flex
-  flex: 1 0 auto
-  max-height: 100%
-  max-width: 100%
+  flex: $responsive-flex
+  max-height: $responsive-max-height
+  max-width: $responsive-max-width
   overflow: hidden
   position: relative
 
 .v-responsive__content
-  flex: 1 0 0px
-  max-width: 100%
+  flex: $responsive-content-flex
+  max-width: $responsive-content-max-width
 
 .v-responsive__sizer ~ .v-responsive__content
-  margin-inline-start: -100%
+  margin-inline-start: $responsive-sizer-content-inline-start
 
 .v-responsive__sizer
-  flex: 1 0 0px
+  flex: $responsive-sizer-flex
   transition: padding-bottom 0.2s settings.$standard-easing
   pointer-events: none
