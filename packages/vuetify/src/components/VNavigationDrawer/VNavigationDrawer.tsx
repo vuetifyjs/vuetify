@@ -17,7 +17,7 @@ import { useTouch } from './touch'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -144,7 +144,7 @@ export const VNavigationDrawer = defineComponent({
       ...layoutItemScrimStyles.value,
     }))
 
-    return () => {
+    useRender(() => {
       const hasImage = (slots.image || props.image)
 
       return (
@@ -217,7 +217,9 @@ export const VNavigationDrawer = defineComponent({
           </Transition>
         </>
       )
-    }
+    })
+
+    return {}
   },
 })
 
