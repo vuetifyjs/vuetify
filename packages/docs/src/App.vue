@@ -66,7 +66,7 @@
         }
 
         watchEffect(() => {
-          theme.name.value = (
+          theme.global.name.value = (
             user.theme === 'system' ? systemTheme.value : user.theme
           )
         })

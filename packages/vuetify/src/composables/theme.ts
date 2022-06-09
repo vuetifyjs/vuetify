@@ -82,15 +82,20 @@ interface OnColors {
 }
 
 export interface ThemeInstance {
-  isDisabled: boolean
-  name: Ref<string>
-  themes: Ref<Record<string, InternalThemeDefinition>>
+  readonly isDisabled: boolean
+  readonly themes: Ref<Record<string, InternalThemeDefinition>>
 
+  readonly name: Readonly<Ref<string>>
   readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
   readonly computedThemes: DeepReadonly<Ref<Record<string, InternalThemeDefinition>>>
 
-  themeClasses: Readonly<Ref<string | undefined>>
-  styles: Readonly<Ref<string>>
+  readonly themeClasses: Readonly<Ref<string | undefined>>
+  readonly styles: Readonly<Ref<string>>
+
+  readonly global: {
+    readonly name: Ref<string>
+    readonly current: DeepReadonly<Ref<InternalThemeDefinition>>
+  }
 }
 
 export const ThemeSymbol: InjectionKey<ThemeInstance> = Symbol.for('vuetify:theme')
@@ -332,6 +337,10 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
     computedThemes,
     themeClasses,
     styles,
+    global: {
+      name,
+      current,
+    },
   }
 }
 
