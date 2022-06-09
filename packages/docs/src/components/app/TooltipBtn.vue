@@ -17,7 +17,7 @@
       />
 
       <v-tooltip
-        anchor="bottom"
+        location="bottom"
         class="v-app-tooltip-btn__content"
         open-delay="200"
         activator="parent"

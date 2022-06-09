@@ -24,10 +24,6 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VTextField', () => {
-  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
-    generate({ stories })
-  })
-
   it('should update validation when model changes', () => {
     const rules = [
       (value: string) => value.length > 5 || 'Error!',
@@ -41,5 +37,9 @@ describe('VTextField', () => {
 
     cy.get('.v-text-field').should('have.class', 'v-input--error')
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+  })
+
+  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
+    generate({ stories })
   })
 })

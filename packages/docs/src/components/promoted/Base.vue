@@ -40,7 +40,7 @@
       dark () {
         const theme = useTheme()
 
-        return theme.getTheme(theme.current.value).dark
+        return theme.current.value.dark
       },
     },
   })

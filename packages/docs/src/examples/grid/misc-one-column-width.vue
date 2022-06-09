@@ -1,36 +1,42 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-row
-      class="mb-6"
-      no-gutters
-    >
-      <v-col
-        v-for="n in 3"
-        :key="n"
-        :cols="n === 2 ? 6 : undefined"
-      >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          {{ n }} of 3 {{ n === 2 ? '(wider)' : '' }}
-        </v-card>
+  <v-container class="bg-surface-variant">
+    <v-row no-gutters>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+
+      <v-col cols="6">
+        <v-sheet class="pa-2 ma-2">
+          .v-col-6
+        </v-sheet>
+      </v-col>
+
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
       </v-col>
     </v-row>
+
     <v-row no-gutters>
-      <v-col
-        v-for="n in 3"
-        :key="n"
-        :cols="n === 2 ? 5 : undefined"
-      >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          {{ n }} of 3 {{ n === 2 ? '(wider)' : '' }}
-        </v-card>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+
+      <v-col cols="2">
+        <v-sheet class="pa-2 ma-2">
+          .v-col-2
+        </v-sheet>
+      </v-col>
+
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

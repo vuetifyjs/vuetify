@@ -10,6 +10,7 @@ import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -24,9 +25,9 @@ export const VTab = defineComponent({
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String],
-    prependIcon: String,
-    appendIcon: String,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
 
     stacked: Boolean,
     title: String,

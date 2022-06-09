@@ -6,7 +6,7 @@
 
         <v-tooltip
           :model-value="true"
-          :anchor="anchor"
+          :location="location"
           :origin="origin"
           no-click-animation
         >
@@ -18,7 +18,7 @@
       </v-col>
 
       <v-col>
-        <v-radio-group v-model="anchorSide" label="Anchor side">
+        <v-radio-group v-model="locationSide" label="Location side">
           <v-radio value="top" label="top"></v-radio>
           <v-radio value="end" label="end"></v-radio>
           <v-radio value="bottom" label="bottom"></v-radio>
@@ -27,12 +27,12 @@
       </v-col>
 
       <v-col>
-        <v-radio-group v-model="anchorAlign" label="Anchor alignment">
-          <v-radio value="top" label="top" :disabled="anchorSide === 'top' || anchorSide === 'bottom'"></v-radio>
-          <v-radio value="start" label="start" :disabled="!(anchorSide === 'top' || anchorSide === 'bottom')"></v-radio>
+        <v-radio-group v-model="locationAlign" label="Location alignment">
+          <v-radio value="top" label="top" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
+          <v-radio value="start" label="start" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
           <v-radio value="center" label="center"></v-radio>
-          <v-radio value="end" label="end" :disabled="!(anchorSide === 'top' || anchorSide === 'bottom')"></v-radio>
-          <v-radio value="bottom" label="bottom" :disabled="anchorSide === 'top' || anchorSide === 'bottom'"></v-radio>
+          <v-radio value="end" label="end" :disabled="!(locationSide === 'top' || locationSide === 'bottom')"></v-radio>
+          <v-radio value="bottom" label="bottom" :disabled="locationSide === 'top' || locationSide === 'bottom'"></v-radio>
         </v-radio-group>
       </v-col>
 
@@ -63,37 +63,37 @@
 <script>
   export default {
     data: () => ({
-      anchorSide: 'top',
-      anchorAlign: 'center',
+      locationSide: 'top',
+      locationAlign: 'center',
       originSide: 'auto',
       originAlign: '',
     }),
     computed: {
-      anchor () {
-        return `${this.anchorSide} ${this.anchorAlign}`
+      location () {
+        return `${this.locationSide} ${this.anchorAlign}`
       },
       origin () {
         return this.originDisabled ? this.originSide : `${this.originSide} ${this.originAlign}`
       },
       code () {
-        return `<v-tooltip anchor="${this.anchor}" origin="${this.origin}" />`
+        return `<v-tooltip location="${this.location}" origin="${this.origin}" />`
       },
       originDisabled () {
         return ['auto', 'overlap'].includes(this.originSide)
       },
     },
     watch: {
-      anchorSide (val) {
+      locationSide (val) {
         if (['top', 'bottom'].includes(val)) {
-          this.anchorAlign = {
+          this.locationAlign = {
             top: 'start',
             bottom: 'end',
-          }[this.anchorAlign] || this.anchorAlign
+          }[this.locationAlign] || this.locationAlign
         } else {
-          this.anchorAlign = {
+          this.locationAlign = {
             start: 'top',
             end: 'bottom',
-          }[this.anchorAlign] || this.anchorAlign
+          }[this.locationAlign] || this.locationAlign
         }
       },
       originDisabled (val) {

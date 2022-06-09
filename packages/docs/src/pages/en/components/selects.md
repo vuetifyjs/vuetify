@@ -54,9 +54,9 @@ You can specify the specific properties within your items array that correspond 
 
 <example file="v-select/prop-custom-title-and-value" />
 
-#### Dense
+#### Density
 
-You can use **dense** prop to reduce the field height and lower max height of list items.
+You can use **density** prop to reduce the field height and lower max height of list items.
 
 <example file="v-select/prop-dense" />
 
@@ -72,41 +72,41 @@ Use a custom prepended or appended icon.
 
 <example file="v-select/prop-icons" />
 
-#### Light
-
-A standard single select has a multitude of configuration options.
-
-<example file="v-select/prop-light" />
-
-#### Menu props
+<!-- #### Menu props
 
 Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
 
-<example file="v-select/prop-menu-props" />
+<example file="v-select/prop-menu-props" /> -->
 
 #### Multiple
 
-A multi-select can utilize `v-chip` as the display for selected items.
+The **multiple** prop allows for multiple selections.
 
 <example file="v-select/prop-multiple" />
 
-#### Readonly
+#### Chips
 
-You can use the **read-only** prop on `v-select` which will prevent a user from changing its value.
+Display selected items as chips with the **chips** prop.
 
-<example file="v-select/prop-readonly" />
+<example file="v-select/prop-chips" />
+
+<!-- #### Readonly
+
+You can use the **readonly** prop on `v-select` which will prevent a user from changing its value.
+
+<example file="v-select/prop-readonly" /> -->
 
 ### Slots
 
-#### Append and prepend item
+<!-- #### Append and prepend item
 
 The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality.
 
-<example file="v-select/slot-append-and-prepend-item" />
+<example file="v-select/slot-append-and-prepend-item" /> -->
 
 #### Selection
 
-The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines.
+The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <example file="v-select/slot-selection" />
 

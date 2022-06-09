@@ -7,19 +7,18 @@
 
 .v-tabs
   display: flex
+  height: var(--v-tabs-height)
 
   @at-root
     @include tools.density('v-tabs', $tabs-density) using ($modifier)
-      height: $tabs-height + $modifier
+      --v-tabs-height: #{$tabs-height + $modifier}
 
       &.v-tabs--stacked
-        height: $tabs-stacked-height + $modifier
+        --v-tabs-height: #{$tabs-stacked-height + $modifier}
 
   &.v-slide-group--vertical
     height: auto
-
-    .v-tab
-      --v-btn-height: #{$tabs-height}
+    --v-tabs-height: #{$tabs-height}
 
 .v-tabs--align-with-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child

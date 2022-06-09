@@ -11,6 +11,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
@@ -19,6 +20,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useSelectLink } from '@/composables/selectLink'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -26,6 +28,9 @@ import { Ripple } from '@/directives/ripple'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VBtn = defineComponent({
   name: 'VBtn',
@@ -39,9 +44,9 @@ export const VBtn = defineComponent({
       default: VBtnToggleSymbol,
     },
     flat: Boolean,
-    icon: [Boolean, String],
-    prependIcon: String,
-    appendIcon: String,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
 
     block: Boolean,
     stacked: Boolean,
@@ -57,6 +62,7 @@ export const VBtn = defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeGroupItemProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
@@ -72,7 +78,8 @@ export const VBtn = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
@@ -116,7 +123,7 @@ export const VBtn = defineComponent({
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
@@ -142,16 +149,18 @@ export const VBtn = defineComponent({
             />
           ) }
 
-          { typeof props.icon === 'boolean'
-            ? slots.default?.()
-            : (
-              <VIcon
-                class="v-btn__icon"
-                icon={ props.icon }
-                size={ props.size }
-              />
-            )
-          }
+          <div class="v-btn__content" data-no-activator="">
+            { typeof props.icon === 'boolean'
+              ? slots.default?.()
+              : (
+                <VIcon
+                  class="v-btn__icon"
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              )
+            }
+          </div>
 
           { !props.icon && props.appendIcon && (
             <VIcon
