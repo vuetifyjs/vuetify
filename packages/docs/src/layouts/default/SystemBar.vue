@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://cutt.ly/WJfebcU"
+      href="https://cutt.ly/0JmRXHr"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -78,12 +78,12 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-3.png)
+    background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-3.png)
     background-size: cover
 
     @media (min-width: 437px)
-      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-2.png)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-2.png)
 
     @media (min-width: 992px)
-      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/nitro-vuetify-3-admin/vuetify-3-nitro-1.png)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-1.png)
 </style>
