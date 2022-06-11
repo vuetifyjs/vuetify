@@ -31,6 +31,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VProgressCircular } from '../VProgressCircular'
 
 export const VBtn = defineComponent({
   name: 'VBtn',
@@ -45,6 +46,7 @@ export const VBtn = defineComponent({
     },
     flat: Boolean,
     icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    loading: Boolean,
     prependIcon: IconValue,
     appendIcon: IconValue,
 
@@ -108,6 +110,7 @@ export const VBtn = defineComponent({
               'v-btn--elevated': isElevated.value,
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
+              'v-btn--loading': props.loading,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
@@ -161,6 +164,21 @@ export const VBtn = defineComponent({
               )
             }
           </div>
+
+          {props.loading && (
+            <div class="v-btn__loader">
+              { slots.loader
+                ? slots.loader()
+                : (
+                  <VProgressCircular
+                    indeterminate
+                    size={23}
+                    width={2}
+                  />
+                )
+              }
+            </div>
+          )}
 
           { !props.icon && props.appendIcon && (
             <VIcon

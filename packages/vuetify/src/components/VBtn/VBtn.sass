@@ -57,6 +57,21 @@
     @at-root &
       @include button-density(('width', 'height'), $button-icon-density)
 
+  &--loading
+    pointer-events: none
+    transition: none
+    .v-btn__content
+      opacity: 0
+    .v-btn__loader
+      align-items: center
+      display: flex
+      height: 100%
+      justify-content: center
+      left: 0
+      position: absolute
+      top: 0
+      width: 100%
+
   &--elevated
     &:hover,
     &:focus
@@ -73,10 +88,10 @@
     flex: 1 0 auto
     min-width: 100%
 
-  &--disabled
+  &--disabled,&--loading
     pointer-events: none
 
-    &.v-btn--disabled
+    &.v-btn--disabled,&.v-btn--loading
       color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
       opacity: 1
 
