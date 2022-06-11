@@ -16,6 +16,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
+import { LoaderSlot, useLoader } from '@/composables/loader'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
@@ -84,6 +85,7 @@ export const VBtn = defineComponent({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses } = useSize(props)
+    const { loaderClasses } = useLoader(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
@@ -110,7 +112,6 @@ export const VBtn = defineComponent({
               'v-btn--elevated': isElevated.value,
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
-              'v-btn--loading': props.loading,
               'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
@@ -122,6 +123,7 @@ export const VBtn = defineComponent({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            loaderClasses.value,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
@@ -165,20 +167,25 @@ export const VBtn = defineComponent({
             }
           </div>
 
-          {props.loading && (
-            <div class="v-btn__loader">
-              { slots.loader
-                ? slots.loader()
-                : (
-                  <VProgressCircular
-                    indeterminate
-                    size={23}
-                    width={2}
-                  />
-                )
-              }
-            </div>
-          )}
+          { props.loading && (
+            <LoaderSlot
+              name="v-btn"
+              active
+            >
+              { slotProps => (
+                slots.loader
+                  ? slots.loader(slotProps)
+                  : (
+                      <VProgressCircular
+                        active={ slotProps.isActive }
+                        indeterminate
+                        size="23"
+                        width="2"
+                      />
+                  )
+              )}
+            </LoaderSlot>
+          ) }
 
           { !props.icon && props.appendIcon && (
             <VIcon
