@@ -26,7 +26,7 @@ const stories = {
   'Default button': <VBtn>Basic button</VBtn>,
   'Small success button': <VBtn color="success" size="small">Completed!</VBtn>,
   'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
-  // 'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
+  'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
   Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
   'Density + size': gridOn(densities, sizes, (density, size) =>
     <VBtn size={ size } density={ density }>{ size }</VBtn>
