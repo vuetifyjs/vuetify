@@ -1,4 +1,5 @@
 // Styles
+import './_forwards.sass'
 import './VSliderTrack.sass'
 
 // Components

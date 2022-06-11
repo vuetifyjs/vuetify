@@ -1,4 +1,5 @@
 // Styles
+import './_forwards.sass'
 import './VColorPickerSwatches.sass'
 
 // Components

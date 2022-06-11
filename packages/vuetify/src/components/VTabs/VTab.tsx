@@ -1,4 +1,5 @@
 // Styles
+import './_forwards.sass'
 import './VTab.sass'
 
 // Components
