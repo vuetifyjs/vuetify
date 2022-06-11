@@ -146,15 +146,15 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && props.prependIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.prependIcon }
-              start
-            />
-          ) }
-
           <div class="v-btn__content" data-no-activator="">
+            { !props.icon && props.prependIcon && (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.prependIcon }
+                start
+              />
+            ) }
+
             { typeof props.icon === 'boolean'
               ? slots.default?.()
               : (
@@ -165,6 +165,14 @@ export const VBtn = defineComponent({
                 />
               )
             }
+
+            { !props.icon && props.appendIcon && (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.appendIcon }
+                end
+              />
+            ) }
           </div>
 
           { props.loading && (
@@ -185,14 +193,6 @@ export const VBtn = defineComponent({
                   )
               )}
             </LoaderSlot>
-          ) }
-
-          { !props.icon && props.appendIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.appendIcon }
-              end
-            />
           ) }
         </Tag>
       )
