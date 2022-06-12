@@ -1,11 +1,18 @@
-import { useBackgroundColor } from '@/composables/color'
-import { createRange } from '@/util'
-import { inject, PropType } from 'vue';
-import { computed, defineComponent } from 'vue'
-import { VBtn } from '../VBtn'
-import { getWeek } from './utils'
+// Styles
 import './VDatePickerMonth.sass'
-import { useDate } from '@/composables/date'
+
+// Components
+import { VBtn } from '../VBtn'
+
+// Composables
+import { useBackgroundColor } from '@/composables/color'
+import { useDatePicker } from './composables'
+
+// Utilities
+import { computed, defineComponent } from 'vue'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
@@ -15,25 +22,9 @@ export const VDatePickerMonth = defineComponent({
       type: Array as PropType<any[]>,
       default: () => ([]),
     },
-    year: {
-      type: Number,
-      required: true,
-    },
-    month: {
-      type: Number,
-      required: true,
-    },
-    // firstDayOfWeek: {
-    //   type: Number,
-    //   default: 0,
-    // },
     color: {
       type: String,
       default: 'primary',
-    },
-    locale: {
-      type: null,
-      default: 'en-US',
     },
     showAdjacentMonths: Boolean,
     showWeekdays: Boolean,
@@ -41,20 +32,40 @@ export const VDatePickerMonth = defineComponent({
   },
 
   setup (props, { emit, slots }) {
-    const { adapter } = useDate(props)
+    const { displayDate, adapter } = useDatePicker()
 
-    const firstDayInMonth = computed(() => adapter.value.date(`${props.year}-${props.month}-01`))
+    const weeksInMonth = computed(() => {
+      const weeks = adapter.value.getWeekArray(displayDate.value)
 
-    const weeksInMonth = computed(() => adapter.value.getWeekArray(firstDayInMonth.value))
+      const days = weeks.flat()
+
+      // Make sure there's always 6 weeks in month (6 * 7 days)
+      const daysInMonth = 6 * 7
+      if (days.length < daysInMonth) {
+        const lastDay = days[days.length - 1]
+
+        let week = []
+        for (let day = 1; day <= daysInMonth - days.length; day++) {
+          week.push(adapter.value.addDays(lastDay, day))
+
+          if (day % 7 === 0) {
+            weeks.push(week)
+            week = []
+          }
+        }
+      }
+
+      return weeks
+    })
 
     const daysInMonth = computed(() => {
       const { format, getYear, getMonth, isSameMonth, isSameYear, isSameDay, isWithinRange } = adapter.value
       const sortedModelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
       const isRange = sortedModelValue.length > 1
 
-      const daysInMonth = weeksInMonth.value.flat()
+      const days = weeksInMonth.value.flat()
 
-      return daysInMonth.map(date => {
+      return days.map(date => {
         const index = sortedModelValue.findIndex(modelDate => {
           return isSameYear(date, modelDate) && isSameMonth(date, modelDate) && isSameDay(date, modelDate)
         })
@@ -66,85 +77,16 @@ export const VDatePickerMonth = defineComponent({
           isSelected: index > -1,
           isStart: index === 0,
           isEnd: index === 1,
-          isAdjacent: !isSameMonth(date, firstDayInMonth.value),
+          isAdjacent: !isSameMonth(date, displayDate.value),
           inRange: isRange && (index === 0 || isWithinRange(date, sortedModelValue as [any, any])),
           localized: format(date, 'dayOfMonth'),
         }
       })
     })
 
-    // const daysInMonth = computed(() => {
-    //   const { getDaysInMonth, addDays, format, date } = adapter.value
-    //   const sortedModelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
-    //   const isRange = sortedModelValue.length > 1
-
-    //   const firstDayInMonth = date(`${props.year}-${props.month}-01`)
-    //   const daysInMonth = getDaysInMonth(firstDayInMonth)
-
-    //   return createRange(daysInMonth).map(day => {
-    //     const date = format(addDays(firstDayInMonth, day), 'keyboardDate')
-    //     const index = sortedModelValue.indexOf(date)
-
-    //     return {
-    //       date,
-    //       year: props.year,
-    //       month: props.month,
-    //       day: day + 1,
-    //       isSelected: index > -1,
-    //       isStart: index === 0,
-    //       isEnd: index === 1,
-    //       inRange: isRange && day + 1 >= sortedModelValue[0] && day + 1 < sortedModelValue[1],
-    //       localized: format(addDays(firstDayInMonth, day), 'dayOfMonth'),
-    //     }
-    //   })
-
-    //   // const dateTimeFormat = Intl.DateTimeFormat([props.locale], { day: 'numeric' })
-
-    //   // return getDaysInMonth(props.year, props.month).map(day => {
-    //   //   const index = sortedModelValue.indexOf(day.date)
-    //   //   return {
-    //   //     ...day,
-    //   //     // localized: dateTimeFormat.format(new Date(day.date)),
-    //   //     isSelected: index > -1,
-    //   //     isStart: index === 0,
-    //   //     isEnd: index === 1,
-    //   //     inRange: isRange && day.date >= sortedModelValue[0] && day.date <= sortedModelValue[1],
-    //   //   }
-    //   // })
-    // })
-
-    // const daysBeforeFirst = computed(() => {
-    //   const firstWeekdayOfMonth = getFirstWeekdayOfMonth(props.year, props.month)
-
-    //   const [year, month] = changeMonth(props.year, props.month, -1)
-    //   const daysInPreviousMonth = getDaysInMonth(year, month)
-    //   const daysBeforeFirst = (props.firstDayOfWeek !== 0 ? 7 + firstWeekdayOfMonth - props.firstDayOfWeek : firstWeekdayOfMonth) % 7
-
-    //   return daysBeforeFirst > 0 ? daysInPreviousMonth.slice(-daysBeforeFirst) : []
-    // })
-
-    // const daysAfterLast = computed(() => {
-    //   const [year, month] = changeMonth(props.year, props.month, +1)
-    //   const daysInNextMonth = getDaysInMonth(year, month)
-
-    //   // If we want variable number of weeks
-    //   // const daysInLastWeek = (daysBeforeFirst.value.length + daysInMonth.value.length) % 7
-    //   // return daysInLastWeek > 0 ? daysInNextMonth.slice(0, 7 - daysInLastWeek) : []
-
-    //   return daysInNextMonth.slice(0, 42 - daysBeforeFirst.value.length - daysInMonth.value.length)
-    // })
-
-    // const weekDays = computed(() => {
-    //   const dateTimeFormat = Intl.DateTimeFormat([props.locale], { weekday: 'narrow' })
-
-    //   // 2017-01-15 is a Sunday
-    //   return createRange(7).map(i => dateTimeFormat.format(new Date(`2017-01-${15 + props.firstDayOfWeek + i}`)))
-    // })
-
     const weeks = computed(() => {
-      const { toJsDate } = adapter.value
       return weeksInMonth.value.map(week => {
-        return getWeek(toJsDate(week[0]))
+        return adapter.value.getWeek(week[0])
       })
     })
 
@@ -195,18 +137,20 @@ export const VDatePickerMonth = defineComponent({
                 />
               ) }
 
-              <VBtn
-                icon
-                size="small"
-                variant="contained-flat"
-                color={ item.isSelected ? props.color : 'transparent' }
-              >
-                { item.localized }
-              </VBtn>
+              { (props.showAdjacentMonths || (!props.showAdjacentMonths && !item.isAdjacent)) && (
+                <VBtn
+                  icon
+                  size="small"
+                  variant="contained-flat"
+                  color={ item.isSelected ? props.color : 'transparent' }
+                >
+                  { item.localized }
+                </VBtn>
+              ) }
             </div>
           ))}
         </div>
       </div>
     )
-  }
+  },
 })

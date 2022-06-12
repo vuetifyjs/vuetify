@@ -1,35 +1,21 @@
-import { IUtils } from '@date-io/core/IUtils'
-import { computed, inject, provide, InjectionKey, Ref, toRef } from 'vue'
-import { LocaleInstance, useLocale } from './locale'
+import type { DateAdapter } from '@/adapters/date-adapter'
+import type { InjectionKey, Ref } from 'vue'
+import { computed, inject } from 'vue'
 
-export const DateSymbol: InjectionKey<{ adapter: IUtils<any> }> = Symbol.for('vuetify:date')
-export const DateAdapterSymbol: InjectionKey<any> = Symbol.for('vuetify:date-adapter')
+export const DateAdapterSymbol: InjectionKey<{ adapter: DateAdapter<any> }> = Symbol.for('vuetify:date-adapter')
 
-export function createDate (options: { adapter: IUtils<any> }) {
+export function createDate (options: { adapter: DateAdapter<any> }) {
   return options
 }
 
-export function useDate (props: { locale?: any }) {
-  const adapter = inject(DateAdapterSymbol)
+export function useDate (locale: Ref<string>) {
+  const date = inject(DateAdapterSymbol)
 
-  adapter.createScope(toRef(props, 'locale'))
-}
+  if (!date) throw new Error('foo')
 
-export interface DateAdapter {
+  const adapter = computed<DateAdapter<any>>(() => {
+    return new date.adapter({ locale: locale.value })
+  })
 
-}
-
-
-function isDateAdapter (x: any): x is DateAdapter {
-  return true
-}
-
-export function createDateAdapter (options: any) {
-  return isDateAdapter(options) ? options : createDefaultDateAdapter(options)
-}
-
-function createDefaultDateAdapter (options: any) {
-  return {
-    createScope
-  }
+  return { adapter }
 }

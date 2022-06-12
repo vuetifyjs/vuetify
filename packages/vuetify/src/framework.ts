@@ -18,6 +18,7 @@ import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
 import { createDateAdapter, DateAdapterSymbol } from './composables/date'
 import type { IUtils } from '@date-io/core/IUtils'
+import type { DateAdapter } from './adapters/date-adapter'
 
 export * from './composables'
 
@@ -33,7 +34,7 @@ export interface VuetifyOptions {
   locale?: LocaleOptions & RtlOptions
   ssr?: boolean
   date?: {
-    adapter: IUtils<any>
+    adapter: DateAdapter<any>
   }
 }
 

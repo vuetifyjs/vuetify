@@ -1,4 +1,1 @@
-import VPicker from './VPicker'
-
-export { VPicker }
-export default VPicker
+export * from './VPicker'
