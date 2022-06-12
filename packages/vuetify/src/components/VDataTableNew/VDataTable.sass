@@ -16,6 +16,7 @@
 
 .v-data-table__th
   align-items: center
+  background: rgb(var(--v-theme-surface))
 
 .v-data-table
   .v-table__wrapper
@@ -35,14 +36,14 @@
                 opacity: 1
 
 .v-data-table__td
-  background: lightgrey
   height: 52px
+  background: rgb(var(--v-theme-surface))
 
-  &--fixed
-    position: sticky
-    z-index: 2
-    left: 0
-    border-right: 1px solid black
+.v-data-table-column--fixed
+  position: sticky
+  z-index: 2
+  left: 0
+  border-right: 1px solid black
 
 .v-data-table__tr--group-header
   .v-data-table__td

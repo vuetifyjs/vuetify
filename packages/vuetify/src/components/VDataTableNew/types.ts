@@ -1,13 +1,15 @@
+import type { SelectItemKey } from '@/util'
+
 export type DataTableHeader = {
-  value: string
+  id: string
+  value?: SelectItemKey
   title: string
   colspan?: number
   rowspan?: number
   width?: number
   minWidth?: string
   maxWidth?: string
-  sticky?: boolean
-  stickyWidth?: number
+  fixed?: boolean
   sortable?: boolean
 }
 

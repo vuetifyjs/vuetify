@@ -1,10 +1,21 @@
-import { createRange, debounce, getCurrentInstance, getObjectValueByPath } from '@/util'
-import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
-
-import type { InjectionKey, Ref } from 'vue'
-import type { DataTableHeader } from './types'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useItems } from '@/composables/items'
+
+// Utilities
+import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { createRange, debounce, getCurrentInstance, getObjectValueByPath, getPropertyFromItem } from '@/util'
+
+// Types
+import type { InjectionKey, Ref } from 'vue'
+import type { DataTableHeader } from './types'
+import type { InternalItem, ItemProps } from '@/composables/items'
+
+export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }
+export type GroupHeaderItem = { type: 'group-header', groupBy: string, groupByValue: string, items: any[] }
+export type ExpandedItem = { type: 'expanded-item' }
+export type InternalDataTableItem = DataTableItem | GroupHeaderItem | ExpandedItem
 
 // export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
 //   const { resizeRef: containerRef, contentRect } = useResizeObserver()
@@ -52,6 +63,23 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 //     beforeHeight,
 //   }
 // }
+
+export function useDataTableItems (props: ItemProps, columns: Ref<DataTableHeader[]>) {
+  const { items } = useItems(props)
+
+  const dataTableItems = computed<DataTableItem[]>(() => items.value.map(item => {
+    return {
+      ...item,
+      type: 'item',
+      columns: columns.value.reduce((obj, column) => {
+        obj[column.id] = getPropertyFromItem(item.originalItem, column.value ?? column.id)
+        return obj
+      }, {} as Record<string, unknown>),
+    }
+  }))
+
+  return { items: dataTableItems }
+}
 
 export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
   const vm = getCurrentInstance('useVirtual')
@@ -177,8 +205,8 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
     const defaultHeader = { title: '', sortable: false, width: 1 }
 
     if (props.showSelect) {
-      const index = flat.findIndex(({ column }) => column.value === 'data-table-select')
-      if (index < 0) flat.unshift({ column: { ...defaultHeader, value: 'data-table-select', rowspan: rowCount }, row: 0 })
+      const index = flat.findIndex(({ column }) => column.id === 'data-table-select')
+      if (index < 0) flat.unshift({ column: { ...defaultHeader, id: 'data-table-select', rowspan: rowCount }, row: 0 })
       else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column }, row: flat[index].row })
     }
 
@@ -188,7 +216,7 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
     }, createRange(rowCount).map(() => []) as DataTableHeader[][])
 
     headers.value = rows
-    columns.value = rows.flatMap(row => row.filter(col => col.value != null))
+    columns.value = rows.flatMap(row => row.filter(col => col.id != null))
   }, {
     deep: true,
     immediate: true,
@@ -198,14 +226,14 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
 }
 
 function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: {
+  items: DataTableItem[],
+  sortBy: readonly {
     key: string
     order: string
   }[],
   locale: string,
   // customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
+): DataTableItem[] {
   if (sortBy === null || !sortBy.length) return items
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -213,8 +241,8 @@ function sortItems<T extends any, K extends keyof T> (
     for (let i = 0; i < sortBy.length; i++) {
       const { key, order } = sortBy[i]
 
-      let sortA = getObjectValueByPath(a, key)
-      let sortB = getObjectValueByPath(b, key)
+      let sortA = getObjectValueByPath(a.originalItem, key)
+      let sortB = getObjectValueByPath(b.originalItem, key)
 
       if (order === 'desc') {
         [sortA, sortB] = [sortB, sortA]
@@ -250,8 +278,10 @@ function sortItems<T extends any, K extends keyof T> (
   })
 }
 
+export type SortItem = { key: string, order: 'asc' | 'desc' }
+
 export const useSort = (props: {
-  sortBy: { key: string, order: string }[]
+  sortBy: SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort?: boolean
   multiSort?: boolean
@@ -281,7 +311,7 @@ export const useSort = (props: {
   return { sortBy, toggleSort }
 }
 
-export const useSortedItems = (items: Ref<any[]>, sortBy: Ref<{ key: string, order: string }[]>) => {
+export const useSortedItems = (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>) => {
   const sortedItems = computed(() => {
     if (!sortBy.value?.length) return items.value
 
@@ -313,11 +343,20 @@ export const usePagination = (props: {
   return { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
 }
 
-// export const paginateItems = (items: Ref<any[]>, startIndex: Ref<number>, stopIndex: Ref<number>) => {
-//   if (itemsPerPage.value <= 0) return items.value
+export const usePaginatedItems = (
+  items: Ref<DataTableItem[]>,
+  startIndex: Ref<number>,
+  stopIndex: Ref<number>,
+  itemsPerPage: Ref<number>
+) => {
+  const paginatedItems = computed(() => {
+    if (itemsPerPage.value <= 0) return items.value
 
-//   return items.value.slice(startIndex.value, stopIndex.value)
-// }
+    return items.value.slice(startIndex.value, stopIndex.value)
+  })
+
+  return { paginatedItems }
+}
 
 export const useOptions = ({
   page,
@@ -330,7 +369,7 @@ export const useOptions = ({
 }: {
   page: Ref<number>
   itemsPerPage: Ref<number>
-  sortBy: Ref<any[]>
+  sortBy: Ref<readonly SortItem[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   pageCount: Ref<number>
@@ -362,16 +401,16 @@ export const useOptions = ({
   }, { deep: true })
 }
 
-export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) => {
+export const useGroupBy = (items: Ref<DataTableItem[]>, groupBy: Ref<string | undefined>) => {
   const opened = ref(new Set<string>())
 
   const groupedItems = computed(() => {
-    const groups = new Map<string, any[]>()
+    const groups = new Map<string, DataTableItem[]>()
 
     if (!groupBy.value) return groups
 
     for (const item of items.value) {
-      const value = item[groupBy.value]
+      const value = getObjectValueByPath(item.originalItem, groupBy.value)
       const group = groups.get(value) ?? []
       group.push(item)
       groups.set(value, group)
@@ -383,10 +422,10 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
   const flatItems = computed(() => {
     if (!groupBy.value) return items.value
 
-    const flatItems = []
+    const flatItems: (DataTableItem | GroupHeaderItem)[] = []
 
     for (const [key, value] of groupedItems.value.entries()) {
-      flatItems.push({ $type: 'group-header', groupBy: groupBy.value, groupByValue: key, items: value })
+      flatItems.push({ type: 'group-header', groupBy: groupBy.value, groupByValue: key, items: value })
       if (opened.value.has(key)) flatItems.push(...value)
     }
 
@@ -412,28 +451,28 @@ export const useGroupBy = (items: Ref<any[]>, groupBy: Ref<string | undefined>) 
     return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
   })
 
-  return { items: flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
+  return { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
 }
 
-export const useSelection = (props: any, items: Ref<any[]>) => {
+type SelectionProps = Pick<ItemProps, 'itemValue'> & { modelValue: any[], 'onUpdate:modelValue': (value: any[]) => void }
+
+export const useSelection = (props: SelectionProps, items: Ref<DataTableItem[]>) => {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {
     return [...v.values()]
   })
 
-  function isSelected (item: any) {
-    const id = item[props.itemValue]
-    return selected.value.has(id)
+  function isSelected (item: DataTableItem) {
+    return selected.value.has(item.value)
   }
 
-  function select (item: any, value: boolean) {
-    const id = item[props.itemValue]
-    if (value) selected.value.add(id)
-    else selected.value.delete(id)
+  function select (item: DataTableItem, value: boolean) {
+    if (value) selected.value.add(item.value)
+    else selected.value.delete(item.value)
   }
 
-  function toggleSelect (item: any) {
+  function toggleSelect (item: DataTableItem) {
     select(item, !isSelected(item))
   }
 

@@ -1,21 +1,31 @@
+// Components
+import { VIcon } from '@/components/VIcon'
+import { VProgressLinear } from '@/components/VProgressLinear'
+import { VCheckbox } from '@/components/VCheckbox'
+
+// Composables
+
+// Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
+// Types
 import type { PropType } from 'vue'
-import { VIcon } from '@/components/VIcon'
-import { VProgressLinear } from '@/components/VProgressLinear'
 import type { DataTableHeader } from './types'
-import { VCheckbox } from '@/components/VCheckbox'
+import type { SortItem } from './composables'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
 
   props: {
     color: String,
-    columns: Array,
+    columns: {
+      type: Array as PropType<DataTableHeader[]>,
+      required: true,
+    },
     loading: Boolean,
     headers: {
-      type: Array as PropType<any[][]>,
+      type: Array as PropType<DataTableHeader[][]>,
       required: true,
     },
     rowHeight: {
@@ -23,20 +33,19 @@ export const VDataTableHeaders = defineComponent({
       default: 48,
     },
     sticky: Boolean,
-    sortBy: Array as PropType<any[]>,
+    sortBy: Array as PropType<readonly SortItem[]>,
   },
 
   setup (props, { slots, emit }) {
     const { toggleSort, someSelected, allSelected, selectAll } = inject('v-data-table', {} as any)
 
     const fixedOffsets = computed(() => {
-      return props.headers.flat().reduce((offsets, column) => {
-        // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
+      return props.columns.reduce((offsets, column) => {
         return [...offsets, offsets[offsets.length - 1] + (column.width ?? 0)]
       }, [0])
     })
 
-    const getStickyStyles = (sticky: boolean | undefined, y: number, x: number) => {
+    const getFixedStyles = (sticky: boolean | undefined, y: number, x: number) => {
       if (!props.sticky && !sticky) return null
 
       return {
@@ -61,24 +70,23 @@ export const VDataTableHeaders = defineComponent({
           class={[
             'v-data-table__th',
             {
-              'v-data-table__th--sortable': column.sortable !== false && column.value,
-              'v-data-table__th--sorted': !!props.sortBy?.find(x => x.key === column.value),
+              'v-data-table__th--sortable': column.sortable !== false && column.id,
+              'v-data-table__th--sorted': !!props.sortBy?.find(x => x.key === column.id),
+              'v-data-table-column--fixed': column.fixed,
             },
-            column.className,
           ]}
           style={{
-            ...column.style,
-            width: column.width,
-            'min-width': column.width,
+            width: convertToUnit(column.width),
+            minWidth: convertToUnit(column.width),
             height: convertToUnit(props.rowHeight),
-            ...getStickyStyles(column.sticky, y, x),
+            ...getFixedStyles(column.fixed, y, x),
           }}
           role="columnheader"
           colspan={column.colspan}
           rowspan={column.rowspan}
-          onClick={column.sortable !== false ? () => toggleSort(column.value) : undefined}
+          onClick={column.sortable !== false ? () => toggleSort(column.id) : undefined}
         >
-          { column.value === 'data-table-select' ? (
+          { column.id === 'data-table-select' ? (
             <VCheckbox
               hide-details
               modelValue={ allSelected.value }
@@ -88,10 +96,10 @@ export const VDataTableHeaders = defineComponent({
           ) : (
             <>
               <span>{ column.title }</span>
-              { column.value && column.sortable !== false && (
+              { column.id && column.sortable !== false && (
                 <VIcon
                   class="v-data-table-header__sort-icon"
-                  icon={ getSortIcon(column.value) }
+                  icon={ getSortIcon(column.id) }
                 />
               )}
             </>
@@ -112,12 +120,7 @@ export const VDataTableHeaders = defineComponent({
           )) }
           { props.loading && (
             <tr class="v-data-table__progress">
-              <th
-                style={{
-                  ...getStickyStyles(false, props.headers.length, 0),
-                }}
-                colspan={ props.columns?.length }
-              >
+              <th colspan={ props.columns?.length }>
                 <VProgressLinear indeterminate color={ props.color } />
               </th>
             </tr>

@@ -2,8 +2,9 @@ import { convertToUnit } from '@/util'
 import type { SetupContext } from 'vue'
 
 export function VDataTableColumn (props: {
-  height?: number
-  stickyWidth?: number
+  height?: number | string
+  width?: number | string
+  fixedOffset?: number | string
   fixed?: boolean
 }, { slots, attrs }: SetupContext) {
   return (
@@ -11,14 +12,14 @@ export function VDataTableColumn (props: {
       class={[
         'v-data-table__td',
         {
-          'v-data-table__td--fixed': props.fixed,
+          'v-data-table-column--fixed': props.fixed,
         },
       ]}
       style={{
         height: convertToUnit(props.height),
-        left: props.fixed ? convertToUnit(props.stickyWidth ?? 0) : undefined,
+        width: convertToUnit(props.width),
+        left: convertToUnit(props.fixedOffset),
       }}
-      { ...attrs }
     >
       { slots.default?.() }
     </td>

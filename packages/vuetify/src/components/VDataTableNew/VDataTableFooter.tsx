@@ -9,7 +9,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { SelectItem } from '@/components/VSelect/VSelect'
+import type { InternalItem } from '@/composables/items'
 
 export const VDataTableFooter = defineComponent({
   name: 'VDataTableFooter',
@@ -44,7 +44,7 @@ export const VDataTableFooter = defineComponent({
       default: '$last',
     },
     itemsPerPageOptions: {
-      type: Array as PropType<SelectItem[]>,
+      type: Array as PropType<InternalItem[]>,
       default: () => ([
         { value: 10, title: '10' },
         { value: 25, title: '25' },
@@ -73,7 +73,7 @@ export const VDataTableFooter = defineComponent({
             modelValue={ props.itemsPerPage }
             onUpdate:modelValue={ v => emit('update:itemsPerPage', v)}
             density="compact"
-            variant="plain"
+            variant="underlined"
             hide-details
           />
         </div>
