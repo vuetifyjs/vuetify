@@ -1,14 +1,19 @@
 <template>
   <v-app>
-    <!-- <v-data-table
+    <v-data-table
       :headers="headers"
       :items="items"
       height="500px"
     >
-      <template #item.end>
+      <template #item.four>
         <v-btn>hello</v-btn>
       </template>
-    </v-data-table> -->
+    </v-data-table>
+
+    <v-data-table
+      :headers="simple"
+      :items="items"
+    ></v-data-table>
     <!-- <div>foo</div>
     <v-virtual-data-table
       :headers="headers"
@@ -21,19 +26,17 @@
       </template>
     </v-virtual-data-table> -->
     <div>foo</div>
-    <v-virtual-data-table
+    <!-- <v-data-table-virtual
       :headers="headers"
-      :items="remoteItems"
-      :items-length="1000"
-      :loading="loading"
-      show-loader
-      @load="getItems"
+      :items="items"
+      :items-length="items.length"
+      fixed-header
       height="500px"
     >
       <template #item.four>
         <v-btn>hello</v-btn>
       </template>
-    </v-virtual-data-table>
+    </v-data-table-virtual> -->
   </v-app>
 </template>
 
@@ -44,43 +47,75 @@
 
   export default defineComponent({
     data: () => ({
+      simple: [
+        {
+          title: 'Name',
+          id: 'name',
+          rowspan: 3,
+          fixed: true,
+          width: 200,
+        },
+        {
+          title: 'One',
+          id: 'one',
+          width: 200,
+          fixed: true,
+        },
+        {
+          title: 'Two',
+          id: 'two',
+          width: 200,
+        },
+        {
+          title: 'Three',
+          id: 'three',
+        },
+        {
+          title: 'Four',
+          id: 'four',
+        },
+      ],
       headers: [
         [
           {
-            name: 'Name',
+            title: 'Name',
             id: 'name',
             rowspan: 3,
+            fixed: true,
+            width: 200,
           },
           {
-            name: 'Header',
+            title: 'Header',
             colspan: 4,
           },
         ],
         [
           {
-            name: 'Section',
+            title: 'Section',
             colspan: 2,
           },
           {
-            name: 'Section',
+            title: 'Section',
             colspan: 2,
           },
         ],
         [
           {
-            name: 'One',
+            title: 'One',
             id: 'one',
+            width: 200,
           },
           {
-            name: 'Two',
+            title: 'Two',
             id: 'two',
+            width: 200,
           },
           {
-            name: 'Three',
+            title: 'Three',
             id: 'three',
           },
           {
-            name: 'Four',
+            title: 'Four',
             id: 'four',
           },
         ],
