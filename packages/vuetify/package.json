@@ -156,13 +156,21 @@
   "peerDependencies": {
     "@formatjs/intl": "^1.0.0 || ^2.0.0",
     "vue": "^3.2.0",
-    "vue-i18n": "^9.0.0"
+    "vue-i18n": "^9.0.0",
+    "webpack-plugin-vuetify": "2.0.0-alpha.11",
+    "vite-plugin-vuetify": "2.0.0-alpha.12"
   },
   "peerDependenciesMeta": {
     "vue-i18n": {
       "optional": true
     },
     "@formatjs/intl": {
+      "optional": true
+    },
+    "webpack-plugin-vuetify": {
+      "optional": true
+    },
+    "vite-plugin-vuetify": {
       "optional": true
     }
   },
