@@ -10,6 +10,8 @@ import { useDatePicker } from './composables'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
+import { computed } from 'vue'
+import { useLocale } from '@/composables/locale'
 
 export const VDatePickerHeader = defineComponent({
   name: 'VDatePickerHeader',
@@ -17,7 +19,7 @@ export const VDatePickerHeader = defineComponent({
   props: {
     color: String,
     title: String,
-    text: String,
+    header: String,
     keyboardIcon: {
       type: String,
       default: '$edit',
@@ -27,6 +29,7 @@ export const VDatePickerHeader = defineComponent({
       default: 'mdi-home',
     },
     showInputSwitch: Boolean,
+    range: Boolean,
   },
 
   emits: {
@@ -34,8 +37,35 @@ export const VDatePickerHeader = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { input } = useDatePicker()
+    const { t } = useLocale()
+    const { input, model, adapter, displayDate } = useDatePicker()
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    const headerText = computed(() => {
+      if (props.header) return props.header
+
+      if (!model.value.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
+
+      if (model.value.length === 1) return adapter.value.format(model.value[0], 'normalDateWithWeekday')
+
+      return model.value.map(date => adapter.value.format(date, 'monthAndDate')).join(' - ')
+    })
+
+    const titleText = computed(() => {
+      if (props.title) return props.title
+
+      if (!model.value.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
+
+      return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
+    })
+
+    function scrollToDisplayDate () {
+      if (!model.value.length) return
+
+      const date = model.value[0]
+
+      displayDate.value = date
+    }
 
     useRender(() => (
       <div
@@ -47,10 +77,15 @@ export const VDatePickerHeader = defineComponent({
       >
         <div class="v-date-picker-header__wrapper">
           <div class="v-date-picker-header__title">
-            { props.title }
+            { titleText.value }
           </div>
           <div class="v-date-picker-header__text">
-            <div>{ props.text }</div>
+            <div
+              class="v-date-picker-header__date"
+              onClick={ scrollToDisplayDate }
+            >
+              { headerText.value }
+            </div>
             <VBtn
               variant="text"
               icon={ input.value === 'keyboard' ? props.calendarIcon : props.keyboardIcon }

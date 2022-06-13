@@ -1,4 +1,5 @@
 // Styles
+import './VDatePicker.sass'
 
 // Components
 import { VDatePickerControls } from './VDatePickerControls'
@@ -13,7 +14,6 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { createDatePicker } from './composables'
 
 // Utilites
-import { computed } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
@@ -42,23 +42,24 @@ export const VDatePicker = defineComponent({
 
   setup (props) {
     const { mode, input } = createDatePicker(props)
-    const headerTitle = computed(() => 'select date')
-    const headerText = computed(() => 'foo')
 
     useRender(() => (
       <VPicker
+        class="v-date-picker"
         width="350"
         v-slots={{
           header: () => (
             <VDatePickerHeader
               color={ props.color }
-              title={ headerTitle.value }
-              text={ headerText.value }
+              // title={ props.title }
+              // header={ props.header }
             />
           ),
           default: () => input.value === 'calendar' ? (
             <>
-              <VDatePickerControls />
+              <VDatePickerControls
+                showPrevNextButtons
+              />
               <MaybeTransition transition={ props.transition } mode="out-in">
                 { mode.value === 'month' ? (
                   <VDatePickerMonth

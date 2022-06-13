@@ -27,7 +27,7 @@ export const VDatePickerYears = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { displayDate, adapter } = useDatePicker()
+    const { displayDate, adapter, mode } = useDatePicker()
     const displayYear = computed(() => adapter.value.getYear(displayDate.value))
     const years = computed(() => {
       const min = props.min ?? displayYear.value - 50 - 2
@@ -56,8 +56,8 @@ export const VDatePickerYears = defineComponent({
               rounded="xl"
               color={ year === displayYear.value ? 'primary' : undefined }
               onClick={ () => {
-                emit('update:displayDate', adapter.value.setYear(displayDate.value, year))
-                emit('update:mode', 'month')
+                displayDate.value = adapter.value.setYear(displayDate.value, year)
+                mode.value = 'month'
               } }
             >{ year }</VBtn>
           ))}

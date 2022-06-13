@@ -94,14 +94,23 @@
 //   +elevation(0)
 
 .v-picker
-  //
+  display: grid
+  grid-template-areas: "header" "body" "actions"
+
+.v-picker__body
+  grid-area: body
 
 .v-picker__header
+  grid-area: header
   background: rgb(var(--v-theme-surface-variant))
   color: rgb(var(--v-theme-on-surface-variant))
 
 .v-picker__actions
+  grid-area: actions
   padding: 1rem
   display: flex
   align-items: center
   justify-content: flex-end
+
+.v-picker--landscape
+  grid-template-areas: "header body" "header actions"

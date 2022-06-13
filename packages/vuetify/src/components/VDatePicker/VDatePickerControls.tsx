@@ -60,7 +60,7 @@ export const VDatePickerControls = defineComponent({
             <VBtn
               size="x-small"
               variant="plain"
-              icon={ props.prevIcon }
+              icon={ props.nextIcon }
               onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, 1) }
             />
           </div>

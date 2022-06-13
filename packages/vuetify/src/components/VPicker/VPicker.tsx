@@ -14,6 +14,8 @@ export const VPicker = defineComponent({
   name: 'VPicker',
 
   props: {
+    landscape: Boolean,
+
     ...makeVSheetProps(),
   },
 
@@ -22,6 +24,9 @@ export const VPicker = defineComponent({
       <VSheet
         class={[
           'v-picker',
+          {
+            'v-picker--landscape': props.landscape,
+          },
         ]}
         { ...props }
       >

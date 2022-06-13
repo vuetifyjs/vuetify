@@ -11,17 +11,10 @@ import { useDatePicker } from './composables'
 // Utilities
 import { computed, defineComponent } from 'vue'
 
-// Types
-import type { PropType } from 'vue'
-
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
 
   props: {
-    modelValue: {
-      type: Array as PropType<any[]>,
-      default: () => ([]),
-    },
     color: {
       type: String,
       default: 'primary',
@@ -29,10 +22,11 @@ export const VDatePickerMonth = defineComponent({
     showAdjacentMonths: Boolean,
     showWeekdays: Boolean,
     showWeek: Boolean,
+    range: Boolean,
   },
 
   setup (props, { emit, slots }) {
-    const { displayDate, adapter } = useDatePicker()
+    const { displayDate, adapter, model } = useDatePicker()
 
     const weeksInMonth = computed(() => {
       const weeks = adapter.value.getWeekArray(displayDate.value)
@@ -60,13 +54,13 @@ export const VDatePickerMonth = defineComponent({
 
     const daysInMonth = computed(() => {
       const { format, getYear, getMonth, isSameMonth, isSameYear, isSameDay, isWithinRange } = adapter.value
-      const sortedModelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
-      const isRange = sortedModelValue.length > 1
+      // const props.modelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
+      const isRange = model.value.length > 1
 
       const days = weeksInMonth.value.flat()
 
       return days.map(date => {
-        const index = sortedModelValue.findIndex(modelDate => {
+        const index = model.value.findIndex(modelDate => {
           return isSameYear(date, modelDate) && isSameMonth(date, modelDate) && isSameDay(date, modelDate)
         })
 
@@ -78,7 +72,7 @@ export const VDatePickerMonth = defineComponent({
           isStart: index === 0,
           isEnd: index === 1,
           isAdjacent: !isSameMonth(date, displayDate.value),
-          inRange: isRange && (index === 0 || isWithinRange(date, sortedModelValue as [any, any])),
+          inRange: isRange && (index === 0 || isWithinRange(date, model.value as [any, any])),
           localized: format(date, 'dayOfMonth'),
         }
       })
@@ -91,6 +85,26 @@ export const VDatePickerMonth = defineComponent({
     })
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    function selectDate (date: any) {
+      let value = model.value.slice()
+      if (value.length <= 1 && !props.range) {
+        value = [date]
+      } else if (value.length > 1 && props.range) {
+        const closest = model.value.reduce((prev, curr) => {
+          const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
+          const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
+
+          return distCurr < distPrev ? curr : prev
+        })
+
+        const index = model.value.indexOf(closest)
+
+        value.splice(index, 1, date)
+      }
+
+      model.value = value
+    }
 
     return () => (
       <div class="v-date-picker-month">
@@ -143,6 +157,7 @@ export const VDatePickerMonth = defineComponent({
                   size="small"
                   variant="contained-flat"
                   color={ item.isSelected ? props.color : 'transparent' }
+                  onClick={ () => selectDate(item.date) }
                 >
                   { item.localized }
                 </VBtn>
