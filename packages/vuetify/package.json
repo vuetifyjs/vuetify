@@ -158,7 +158,7 @@
     "vue": "^3.2.0",
     "vue-i18n": "^9.0.0",
     "webpack-plugin-vuetify": "2.0.0-alpha.11",
-    "vite-plugin-vuetify": "2.0.0-alpha.12"
+    "vite-plugin-vuetify": "1.0.0-alpha.12"
   },
   "peerDependenciesMeta": {
     "vue-i18n": {
