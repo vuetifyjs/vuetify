@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="hasPromotion"
+    v-if="hasPromotion && false"
     class="cm-system-bar"
     app
     dark
