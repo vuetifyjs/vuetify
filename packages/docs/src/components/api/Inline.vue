@@ -1,13 +1,18 @@
 <template>
   <api-links :components="components" />
   <div v-if="showInline">
-    <div class="d-flex justify-space-between align-center">
-      <select v-model="name">
-        <template v-for="component of components" :key="component">
-          <option :value="component">{{ component }}</option>
-        </template>
-      </select>
-    </div>
+    <v-row class="mb-2" justify="space-between" no-gutters>
+      <v-col class="mt-2" cols="12" sm="5" md="4">
+        <v-select
+          v-if="components.length > 1"
+          v-model="name"
+          :items="components"
+          hide-details
+          density="compact"
+          prepend-inner-icon="mdi-view-dashboard-outline"
+        />
+      </v-col>
+    </v-row>
     <template v-for="section of sections" :key="section">
       <api-section :name="name" :section="section" show-headline />
     </template>

@@ -1,8 +1,8 @@
 <template>
   <component
     :is="tag"
-    class="app-link text-decoration-none text-primary font-weight-medium d-inline-flex align-center"
-    v-bind="attrs"
+    class="app-link text-decoration-none font-weight-medium d-inline-flex align-center"
+    v-bind="attrs, $attrs"
     @click="onClick"
   >
     <template v-if="iconProps && isSamePage">
@@ -68,7 +68,7 @@
         return {
           icon: icon.value,
           class: `m${isSamePage.value ? 'r' : 'l'}-1`,
-          color: 'primary',
+          // color: 'primary',
           size: '.875rem',
         }
       })

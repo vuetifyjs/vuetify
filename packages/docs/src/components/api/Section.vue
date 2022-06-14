@@ -8,7 +8,7 @@
         @input="filter = $event"
       />
     </div> -->
-    <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
+    <app-headline v-if="showHeadline" tag="h3" size="h5" :path="`api-headers.${section}`" />
     <api-table
       :api-data="apiData"
       class="mb-4"

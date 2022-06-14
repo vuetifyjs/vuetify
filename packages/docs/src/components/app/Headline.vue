@@ -1,7 +1,11 @@
 <template>
   <component
     :is="tag"
-    :class="`text-${size} font-weight-${weight} text-${color}`"
+    :class="{
+      [`text-${size}`]: size,
+      [`font-weight-${weight}`]: weight,
+      [`text-${color}`]: color,
+    }"
   >
     {{ t(path) }}
   </component>
@@ -12,7 +16,7 @@
   import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
-    name: 'Headline',
+    name: 'AppHeadline',
 
     props: {
       color: String,

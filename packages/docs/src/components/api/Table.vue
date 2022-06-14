@@ -1,5 +1,49 @@
 <template>
   <app-sheet>
+    <div
+      style="display: grid;
+  grid-template-columns: [name description] auto [type] auto [defaultValue] 1fr [description-end];
+  grid-auto-rows: auto;
+  align-items: baseline;
+  padding-left: 14px;
+"
+    >
+      <template v-for="item in items" :key="item.name">
+        <section
+          :id="`${field}-${item.name.replace('$', '')}`"
+          style="display: contents"
+        >
+          <app-heading
+            level="4"
+            :href="`#${field}-${item.name.replace('$', '')}`"
+            :content="item.name"
+            style="grid-column-start: name"
+          />
+
+          <div style="grid-column-start: type">
+            type:
+            <span
+              class="text-mono text-pre"
+              v-html="getType(item.type)"
+            />
+          </div>
+
+          <div style="grid-column-start: defaultValue">
+            default:
+            <span
+              class="text-mono text-pre"
+              v-html="getDefaultValue(item)"
+            />
+          </div>
+
+          <app-markdown v-if="item.description[locale]" :content="item.description[locale]" style="grid-column-start: description; grid-column-end: description-end" />
+          <p v-else tyle="grid-column-start: description; grid-column-end: description-end" />
+
+          <v-divider style="grid-column-start: description; grid-column-end: description-end; margin-left: -14px" />
+        </section>
+      </template>
+    </div>
+
     <v-table
       class="api-table"
     >
@@ -21,24 +65,30 @@
       <tbody>
         <template v-for="item in items" :key="item.name">
           <tr
+            :id="`${field}-${item.name.replace('$', '')}`"
             :class="['regular-row', hasExtraRow(item) && 'has-extra-row']"
           >
-            <td
-              v-for="(header, i) in headers"
-              :key="i"
-            >
+            <td v-for="(header, i) in headers" :key="i">
               <template v-if="header === 'name'">
-                <span
-                  :id="`${field}-${item[header].replace('$', '')}`"
-                  class="name-item text-mono ml-n2"
-                >
-                  <app-link
-                    :href="`#${field}-${item[header].replace('$', '')}`"
-                    class="font-weight-bold"
-                  >
-                    {{ item[header] }}
-                  </app-link>
-                </span>
+                <app-heading
+                  level="5"
+                  :href="`#${field}-${item.name.replace('$', '')}`"
+                  :content="item.name"
+                />
+                <div class="text-no-wrap">
+                  type:
+                  <span
+                    class="text-mono text-pre"
+                    v-html="getType(item.type)"
+                  />
+                </div>
+                <div class="text-no-wrap">
+                  default:
+                  <span
+                    class="text-mono text-pre"
+                    v-html="getDefaultValue(item)"
+                  />
+                </div>
               </template>
 
               <template v-else-if="header === 'type' || header === 'signature'">
@@ -104,7 +154,7 @@
   const HEADERS: Record<string, string[]> = {
     options: ['name', 'type', 'default', 'description'],
     slots: ['name', 'description'],
-    props: ['name', 'type', 'default', 'description'],
+    props: ['name', 'description'],
     events: ['name', 'description'],
     sass: ['name', 'default', 'description'],
     functions: ['name', 'signature', 'description'],
@@ -189,8 +239,6 @@
         return item.example || item.snippet || item.props || item.value
       }
 
-      console.log(props.apiData)
-
       return {
         locale: computed(() => store.locale),
         headers: computed(() => HEADERS[props.field]),
@@ -219,6 +267,9 @@
 
     .regular-row td
       padding: 8px 16px !important
+
+      &:first-child
+        border-right: thin solid rgba(var(--v-border-color), var(--v-border-opacity))
 
     .regular-row.has-extra-row td
       border-bottom: none !important
