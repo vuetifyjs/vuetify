@@ -2,22 +2,22 @@
 import './VColorPicker.sass'
 
 // Components
-import { VSheet } from '@/components/VSheet'
-import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
+import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
+import { VSheet } from '@/components/VSheet'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps } from '@/composables/theme'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { onMounted, ref } from 'vue'
-import { defineComponent, HSVAtoCSS } from '@/util'
+import { defineComponent, HSVAtoCSS, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
+import { onMounted, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -110,7 +110,7 @@ export const VColorPicker = defineComponent({
       if (!props.modes.includes(mode.value)) mode.value = props.modes[0]
     })
 
-    return () => (
+    useRender(() => (
       <VSheet
         rounded={ props.rounded }
         elevation={ props.elevation }
@@ -133,6 +133,7 @@ export const VColorPicker = defineComponent({
             height={ props.canvasHeight }
           />
         ) }
+
         { (!props.hideSliders || !props.hideInputs) && (
           <div class="v-color-picker__controls">
             { !props.hideSliders && (
@@ -143,6 +144,7 @@ export const VColorPicker = defineComponent({
                 disabled={ props.disabled }
               />
             ) }
+
             { !props.hideInputs && (
               <VColorPickerEdit
                 modes={ props.modes }
@@ -155,6 +157,7 @@ export const VColorPicker = defineComponent({
             ) }
           </div>
         ) }
+
         { props.showSwatches && (
           <VColorPickerSwatches
             color={ currentColor.value }
@@ -165,7 +168,9 @@ export const VColorPicker = defineComponent({
           />
         ) }
       </VSheet>
-    )
+    ))
+
+    return {}
   },
 })
 
