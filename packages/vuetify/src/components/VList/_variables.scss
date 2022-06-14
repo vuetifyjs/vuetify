@@ -2,7 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VList
 $list-background: rgba(var(--v-theme-surface)) !default;
 $list-border-color: settings.$border-color-root !default;
 $list-border-radius: 0 !default;
@@ -16,9 +16,20 @@ $list-padding: 8px 0 !default;
 $list-rounded-border-radius: map.get(settings.$rounded, null) !default;
 $list-indent-size: 16px !default;
 
+// VList/VListItem nav
 $list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
+$list-item-nav-margin-top: 4px !default;
+$list-item-nav-title-font-size: .8125rem !default;
+$list-item-nav-title-font-weight: 500 !default;
+$list-item-nav-title-letter-spacing: normal !default;
+$list-item-nav-title-line-height: 1rem !default;
+$list-item-nav-subtitle-font-size: .75rem !default;
+$list-item-nav-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$list-item-nav-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
+$list-item-nav-subtitle-line-height: 1rem !default;
 
+// VListSubheader
 $list-subheader-font-size: .875rem !default;
 $list-subheader-font-weight: 500 !default;
 $list-subheader-inset-margin: 56px !default;
@@ -32,6 +43,7 @@ $list-subheader-min-height-multiplier: 1 !default;
 $list-subheader-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-subheader-transition: 0.2s min-height settings.$standard-easing !default;
 
+// VListItem
 $list-item-border-color: settings.$border-color-root !default;
 $list-item-border-radius: 0 !default;
 $list-item-border-style: settings.$border-style-root !default;
@@ -48,7 +60,7 @@ $list-item-two-line-padding: 12px 16px !default;
 $list-item-three-line-min-height: 88px !default;
 $list-item-three-line-padding: 16px 16px !default;
 
-$list-item-avatar-align-self: flex-start !default;
+// $list-item-avatar-align-self: flex-start !default;
 $list-item-avatar-margin-end: 16px !default;
 $list-item-avatar-margin-start: 16px !default;
 $list-item-avatar-size: 40px !default;
@@ -57,9 +69,9 @@ $list-item-avatar-margin-y: 4px !default;
 $list-item-action-margin-end: 12px !default;
 $list-item-action-margin-start: 12px !default;
 
-$list-item-icon-margin-end: 32px !default;
-$list-item-icon-margin-start: 32px !default;
-$list-item-icon-size: 16px !default;
+// $list-item-icon-margin-end: 32px !default;
+// $list-item-icon-margin-start: 32px !default;
+// $list-item-icon-size: 16px !default;
 
 $list-item-media-margin-bottom: 0 !default;
 $list-item-media-margin-end: 16px !default;
@@ -70,24 +82,7 @@ $list-item-media-two-line-margin-top: -4px !default;
 $list-item-media-three-line-margin-bottom: 0 !default;
 $list-item-media-three-line-margin-top: 0 !default;
 
-$list-item-nav-margin-top: 4px !default;
-$list-item-nav-title-font-size: .8125rem !default;
-$list-item-nav-title-font-weight: 500 !default;
-$list-item-nav-title-letter-spacing: normal !default;
-$list-item-nav-title-line-height: 1rem !default;
-$list-item-nav-subtitle-font-size: .75rem !default;
-$list-item-nav-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
-$list-item-nav-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
-$list-item-nav-subtitle-line-height: 1rem !default;
-
-$list-item-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
-$list-item-subtitle-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
-$list-item-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
-$list-item-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
-$list-item-subtitle-line-height: 1rem !default;
-$list-item-subtitle-padding: 0 !default;
-$list-item-subtitle-text-transform: none !default;
-
+// VListItemTitle
 $list-item-title-font-size: tools.map-deep-get(settings.$typography, 'body-1', 'size') !default;
 $list-item-title-font-weight: tools.map-deep-get(settings.$typography, 'body-1', 'weight') !default;
 $list-item-title-header-padding: 0 !default;
@@ -100,6 +95,15 @@ $list-item-title-text-overflow: ellipsis;
 $list-item-title-text-transform: none !default;
 $list-item-title-word-break: normal !default;
 $list-item-title-word-wrap: break-word !default;
+
+// VListItemSubtitle
+$list-item-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
+$list-item-subtitle-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
+$list-item-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$list-item-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
+$list-item-subtitle-line-height: 1rem !default;
+$list-item-subtitle-padding: 0 !default;
+$list-item-subtitle-text-transform: none !default;
 
 $list-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 

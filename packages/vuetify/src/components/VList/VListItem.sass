@@ -4,7 +4,9 @@
 
 .v-list-item
   align-items: center
-  display: flex
+  display: grid
+  grid-template-areas: "prepend title append" "prepend subtitle append"
+  grid-template-columns: max-content auto max-content
   padding: $list-item-padding
   position: relative
   outline: none
@@ -15,6 +17,32 @@
   @include tools.states('.v-list-item__overlay')
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
+
+  &__prepend,
+  .v-avatar--start,
+  .v-icon--start
+    $root: &
+
+    grid-area: prepend
+    margin-inline-end: 1rem
+
+    @at-root
+      @include tools.density('v-list-item', $list-density) using ($modifier)
+        &.v-list-item--three-line #{$root}
+          margin-top: $list-item-avatar-margin-y - $modifier
+
+  &__append,
+  .v-avatar--end,
+  .v-icon--end
+    $root: &
+
+    grid-area: append
+    margin-inline-start: 1rem
+
+    @at-root
+      @include tools.density('v-list-item', $list-density) using ($modifier)
+        &.v-list-item--three-line #{$root}
+          margin-top: $list-item-avatar-margin-y - $modifier
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)
@@ -27,9 +55,7 @@
   &--link
     cursor: pointer
 
-.v-list-item-action,
-.v-list-item-avatar,
-.v-list-item-icon
+.v-list-item-action
   align-self: center
   display: flex
   align-items: center
@@ -40,33 +66,13 @@
   .v-list-item--three-line &
     align-self: flex-start
 
-.v-list-item-avatar
-  $root: &
+.v-list-item-action--start,
+.v-list-item__prepend
+  margin-inline-end: $list-item-action-margin-start
 
-  &--start
-    margin-inline-end: $list-item-avatar-margin-end
-
-  &--end
-    margin-inline-start: $list-item-avatar-margin-start
-
-  @at-root
-    @include tools.density('v-list-item', $list-density) using ($modifier)
-      &.v-list-item--three-line #{$root}
-        margin-top: $list-item-avatar-margin-y - $modifier
-
-.v-list-item-icon
-  &--start
-    margin-inline-end: $list-item-icon-margin-end
-
-  &--end
-    margin-inline-start: $list-item-icon-margin-start
-
-.v-list-item-action
-  &--start
-    margin-inline-end: $list-item-action-margin-start
-
-  &--end
-    margin-inline-start: $list-item-action-margin-end
+.v-list-item-action--end,
+.v-list-item__append
+  margin-inline-start: $list-item-action-margin-end
 
 .v-list-item-media
   margin-top: $list-item-media-margin-top
@@ -87,12 +93,30 @@
     margin-bottom: $list-item-media-three-line-margin-bottom
 
 .v-list-item-header
+  grid-area: header
   flex: 1 1 auto
   min-width: 0
+
+.v-list-item-title
+  grid-area: title
+  hyphens: $list-item-title-hyphens
+  overflow-wrap: $list-item-title-overflow-wrap
+  overflow: hidden
+  padding: $list-item-title-padding
+  white-space: nowrap
+  text-overflow: ellipsis
+  word-break: $list-item-title-word-break
+  word-wrap: $list-item-title-word-wrap
+
+  @include tools.typography($list-item-title-typography...)
+
+  .v-list-item--nav &
+    @include tools.typography($list-item-nav-title-typography...)
 
 .v-list-item-subtitle
   -webkit-box-orient: vertical
   display: -webkit-box
+  grid-area: subtitle
   opacity: $list-item-subtitle-opacity
   overflow: hidden
   padding: $list-item-subtitle-padding
@@ -111,21 +135,6 @@
 
   .v-list-item--nav &
     @include tools.typography($list-item-nav-subtitle-typography...)
-
-.v-list-item-title
-  hyphens: $list-item-title-hyphens
-  overflow-wrap: $list-item-title-overflow-wrap
-  overflow: hidden
-  padding: $list-item-title-padding
-  white-space: nowrap
-  text-overflow: ellipsis
-  word-break: $list-item-title-word-break
-  word-wrap: $list-item-title-word-wrap
-
-  @include tools.typography($list-item-title-typography...)
-
-  .v-list-item--nav &
-    @include tools.typography($list-item-nav-title-typography...)
 
 .v-list-item
   @at-root
