@@ -9,6 +9,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDatePicker } from './composables'
 
 // Utilities
+import type { PropType } from 'vue'
 import { computed, defineComponent } from 'vue'
 
 export const VDatePickerMonth = defineComponent({
@@ -19,17 +20,22 @@ export const VDatePickerMonth = defineComponent({
       type: String,
       default: 'primary',
     },
-    showAdjacentMonths: Boolean,
-    showWeekdays: Boolean,
+    hideAdjacentMonths: Boolean,
+    hideWeekdays: Boolean,
     showWeek: Boolean,
-    range: Boolean,
+    range: {
+      type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
+      validator: (v: any) => ['start', 'end'].includes(v),
+    },
   },
 
   setup (props, { emit, slots }) {
     const { displayDate, adapter, model } = useDatePicker()
 
+    const month = computed(() => props.range === 'end' ? adapter.value.addMonths(displayDate.value, 1) : displayDate.value)
+
     const weeksInMonth = computed(() => {
-      const weeks = adapter.value.getWeekArray(displayDate.value)
+      const weeks = adapter.value.getWeekArray(month.value)
 
       const days = weeks.flat()
 
@@ -55,9 +61,11 @@ export const VDatePickerMonth = defineComponent({
     const daysInMonth = computed(() => {
       const { format, getYear, getMonth, isSameMonth, isSameYear, isSameDay, isWithinRange } = adapter.value
       // const props.modelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
-      const isRange = model.value.length > 1
+      const validDates = model.value.filter(v => !!v)
+      const isRange = validDates.length > 1
 
       const days = weeksInMonth.value.flat()
+      const today = adapter.value.date()
 
       return days.map(date => {
         const index = model.value.findIndex(modelDate => {
@@ -71,8 +79,9 @@ export const VDatePickerMonth = defineComponent({
           isSelected: index > -1,
           isStart: index === 0,
           isEnd: index === 1,
-          isAdjacent: !isSameMonth(date, displayDate.value),
-          inRange: isRange && (index === 0 || isWithinRange(date, model.value as [any, any])),
+          isToday: adapter.value.isSameDay(date, today),
+          isAdjacent: !isSameMonth(date, month.value),
+          inRange: isRange && (index === 0 || (validDates.length === 2 && isWithinRange(date, validDates as [any, any]))),
           localized: format(date, 'dayOfMonth'),
         }
       })
@@ -86,31 +95,41 @@ export const VDatePickerMonth = defineComponent({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
-    function selectDate (date: any) {
-      let value = model.value.slice()
-      if (value.length <= 1 && !props.range) {
-        value = [date]
-      } else if (value.length > 1 && props.range) {
-        const closest = model.value.reduce((prev, curr) => {
-          const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
-          const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
+    function selectDate (date: any): any[] {
+      const value = model.value.slice()
 
-          return distCurr < distPrev ? curr : prev
-        })
+      if (props.range) {
+        if (props.range === 'start') {
+          return [date, value[1] ?? null]
+        } else if (props.range === 'end') {
+          return [value[0] ?? null, date]
+        } else if (value.length === 2) {
+          const closest = model.value.reduce((prev, curr) => {
+            const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
+            const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
 
-        const index = model.value.indexOf(closest)
+            return distCurr < distPrev ? curr : prev
+          })
 
-        value.splice(index, 1, date)
+          const index = model.value.indexOf(closest)
+
+          value.splice(index, 1, date)
+
+          return value
+        } else {
+          value.push(date)
+          return value
+        }
+      } else {
+        return [date]
       }
-
-      model.value = value
     }
 
     return () => (
       <div class="v-date-picker-month">
         { props.showWeek && (
           <div class="v-date-picker-month__weeks">
-            { props.showWeekdays && (
+            { !props.hideWeekdays && (
               <div class="v-date-picker-month__day">&nbsp;</div>
             ) }
             { weeks.value.map(week => (
@@ -125,7 +144,7 @@ export const VDatePickerMonth = defineComponent({
         ) }
 
         <div class="v-date-picker-month__days">
-          { props.showWeekdays && adapter.value.getWeekdays().map(weekDay => (
+          { !props.hideWeekdays && adapter.value.getWeekdays().map(weekDay => (
             <div class="v-date-picker-month__day">{ weekDay }</div>
           )) }
 
@@ -151,13 +170,13 @@ export const VDatePickerMonth = defineComponent({
                 />
               ) }
 
-              { (props.showAdjacentMonths || (!props.showAdjacentMonths && !item.isAdjacent)) && (
+              { (!props.hideAdjacentMonths || (props.hideAdjacentMonths && !item.isAdjacent)) && (
                 <VBtn
                   icon
                   size="small"
-                  variant="contained-flat"
-                  color={ item.isSelected ? props.color : 'transparent' }
-                  onClick={ () => selectDate(item.date) }
+                  variant={ item.isToday && !item.isSelected ? 'outlined' : 'contained-flat' }
+                  color={ item.isSelected ? props.color : item.isToday ? undefined : 'transparent' }
+                  onClick={ () => model.value = selectDate(item.date) }
                 >
                   { item.localized }
                 </VBtn>

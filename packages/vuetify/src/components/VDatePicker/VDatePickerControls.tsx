@@ -32,41 +32,61 @@ export const VDatePickerControls = defineComponent({
       type: [String],
       default: '$collapse',
     },
-    showPrevNextButtons: Boolean,
+    range: {
+      type: String,
+      validator: (v: any) => ['start', 'end'].includes(v),
+    },
   },
 
   setup (props, { emit }) {
     const { displayDate, mode, adapter } = useDatePicker()
-    const monthAndYear = computed(() => adapter.value.format(displayDate.value, 'monthAndYear'))
+    const monthAndYear = computed(() => {
+      const month = props.range === 'end' ? adapter.value.addMonths(displayDate.value, 1) : displayDate.value
+      return adapter.value.format(month, 'monthAndYear')
+    })
 
-    useRender(() => (
-      <div class="v-date-picker-controls">
-        <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
+    useRender(() => {
+      const prevBtn = (
         <VBtn
           size="x-small"
           variant="plain"
-          icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
-          onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
+          icon={ props.prevIcon }
+          onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, -1) }
         />
-        <VSpacer />
-        { props.showPrevNextButtons && (
-          <div>
+      )
+
+      const nextBtn = (
+        <VBtn
+          size="x-small"
+          variant="plain"
+          icon={ props.nextIcon }
+          onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, 1) }
+        />
+      )
+
+      return (
+        <div class="v-date-picker-controls">
+          { props.range === 'start' && prevBtn }
+          <VSpacer />
+          <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
+          { !props.range && (
             <VBtn
               size="x-small"
               variant="plain"
-              icon={ props.prevIcon }
-              onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, -1) }
+              icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
+              onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
             />
-            <VBtn
-              size="x-small"
-              variant="plain"
-              icon={ props.nextIcon }
-              onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, 1) }
-            />
-          </div>
-        ) }
-      </div>
-    ))
+          ) }
+          <VSpacer />
+          { mode.value === 'month' && (
+            <div>
+              { !props.range && prevBtn }
+              { props.range === 'end' && nextBtn }
+            </div>
+          ) }
+        </div>
+      )
+    })
 
     return {}
   },

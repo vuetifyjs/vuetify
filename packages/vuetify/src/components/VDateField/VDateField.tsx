@@ -1,8 +1,9 @@
 import { useDate } from '@/composables/date'
+import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { defineComponent, useRender } from '@/util'
 import { computed, ref, watch } from 'vue'
-import { VDateCard, VDatePicker } from '../VDatePicker'
+import { VDateCard } from '../VDatePicker'
 import { VMenu } from '../VMenu'
 import { VTextField } from '../VTextField'
 
@@ -44,6 +45,12 @@ export const VDateField = defineComponent({
       if (!newValue) return
 
       inputModel.value = adapter.value.format(newValue, 'keyboardDate')
+    })
+
+    provideDefaults({
+      VOverlay: {
+        minWidth: '100%',
+      },
     })
 
     useRender(() => {

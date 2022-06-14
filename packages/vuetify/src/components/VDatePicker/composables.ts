@@ -16,7 +16,19 @@ export type DatePickerProvide = {
 
 export const DatePickerSymbol: InjectionKey<DatePickerProvide> = Symbol.for('vuetify:date-picker')
 
-export function createDatePicker (props: any) {
+interface DateProps {
+  locale: any
+  mode: 'month' | 'years'
+  'onUpdate:mode': (mode: 'month' | 'years') => void
+  modelValue: any
+  'onUpdate:modelValue': (date: any) => void
+  input: 'keyboard' | 'calendar'
+  'onUpdate:input': (input: 'keyboard' | 'calendar') => void
+  displayDate: any
+  'onUpdate:displayDate': (displayDate: any) => void
+}
+
+export function createDatePicker (props: DateProps, range?: boolean) {
   const locale = computed(() => props.locale)
   const { adapter } = useDate(locale)
   const model = useProxiedModel(
@@ -29,12 +41,12 @@ export function createDatePicker (props: any) {
       return arr.map(adapter.value.date)
     },
     v => {
-      if (props.range) return v
+      if (range) return v
       return v[0]
     })
   const input = useProxiedModel(props, 'input')
   const mode = useProxiedModel(props, 'mode')
-  const displayDate = useProxiedModel(props, 'displayDate', props.modelValue, v => adapter.value.date(v ?? new Date()))
+  const displayDate = useProxiedModel(props, 'displayDate', null, v => adapter.value.date(v ?? new Date()))
 
   // TODO: Do this nicer
   watch(() => props.modelValue, () => {
