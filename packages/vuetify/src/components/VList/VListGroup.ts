@@ -126,13 +126,15 @@ export default baseMixins.extend<options>().extend({
     genAppendIcon (): VNode | null {
       const icon = !this.subGroup ? this.appendIcon : false
 
-      if (!icon && !this.$slots.appendIcon) return null
+      if (!icon && !this.$slots['append-icon'] && !this.$slots.appendIcon) return null
 
-      return this.$createElement(VListItemIcon, {
-        staticClass: 'v-list-group__header__append-icon',
-      }, [
-        this.$slots.appendIcon || this.genIcon(icon),
-      ])
+      return this.$createElement(
+        VListItemIcon,
+        {
+          staticClass: 'v-list-group__header__append-icon',
+        },
+        [this.$slots['append-icon'] || this.$slots.appendIcon || this.genIcon(icon)]
+      )
     },
     genHeader (): VNode {
       return this.$createElement(VListItem, {
@@ -177,12 +179,12 @@ export default baseMixins.extend<options>().extend({
         ? '$subgroup'
         : this.prependIcon
 
-      if (!icon && !this.$slots.prependIcon) return null
+      if (!icon && !this.$slots['prepend-icon'] && !this.$slots.prependIcon) return null
 
       return this.$createElement(VListItemIcon, {
         staticClass: 'v-list-group__header__prepend-icon',
       }, [
-        this.$slots.prependIcon || this.genIcon(icon),
+        this.$slots.prependIcon || this.$slots['prepend-icon'] || this.genIcon(icon),
       ])
     },
     onRouteChange (to: Route) {
