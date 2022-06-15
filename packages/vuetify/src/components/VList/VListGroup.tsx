@@ -1,6 +1,8 @@
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
+import { MaybeTransition } from '@/composables/transition'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Composables
 import { useList } from './list'
@@ -66,6 +68,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   setup (props, { slots }) {
     const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
     const list = useList()
+    const { isBooted } = useSsrBoot()
 
     const onClick = (e: Event) => {
       open(!isOpen.value, e)
@@ -100,11 +103,11 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
               </VListGroupActivator>
             </VDefaultsProvider>
           ) }
-          <VExpandTransition>
-            <div class="v-list-group__items" v-show={isOpen.value}>
+          <MaybeTransition transition={ isBooted.value && { component: VExpandTransition }}>
+            <div class="v-list-group__items" v-show={ isOpen.value }>
               { slots.default?.() }
             </div>
-          </VExpandTransition>
+          </MaybeTransition>
         </props.tag>
       )
     }

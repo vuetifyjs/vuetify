@@ -153,6 +153,7 @@ export const VTextField = genericComponent<new <T>() => {
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -171,6 +172,7 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:appendInner={ attrs['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 focused={ isFocused.value }
