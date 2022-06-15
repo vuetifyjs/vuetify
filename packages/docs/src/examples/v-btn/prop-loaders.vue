@@ -1,52 +1,31 @@
 <template>
-  <div class="text-center">
+  <div class="d-flex justify-center align-baseline" style="gap: 1rem">
     <v-btn
-      class="ma-2"
-      :loading="loading"
-      :disabled="loading"
+      :loading="loading[1]"
+      :disabled="loading[1]"
       color="secondary"
-      @click="loader = 'loading'"
+      @click="load(1)"
     >
       Accept Terms
     </v-btn>
 
     <v-btn
-      :loading="loading3"
-      :disabled="loading3"
+      :loading="loading[2]"
+      :disabled="loading[2]"
       color="blue-grey"
-      class="ma-2 white--text"
-      @click="loader = 'loading3'"
+      prepend-icon="mdi-cloud-upload"
+      @click="load(2)"
     >
       Upload
-      <v-icon
-        end
-        dark
-      >
-        mdi-cloud-upload
-      </v-icon>
     </v-btn>
 
     <v-btn
-      class="ma-2"
-      :loading="loading2"
-      :disabled="loading2"
-      color="success"
-      @click="loader = 'loading2'"
+      :loading="loading[3]"
+      :disabled="loading[3]"
+      color="info"
+      @click="load(3)"
     >
       Custom Loader
-      <template v-slot:loader>
-        <span>Loading...</span>
-      </template>
-    </v-btn>
-
-    <v-btn
-      class="ma-2"
-      :loading="loading4"
-      :disabled="loading4"
-      color="info"
-      @click="loader = 'loading4'"
-    >
-      Icon Loader
       <template v-slot:loader>
         <span class="custom-loader">
           <v-icon light>mdi-cached</v-icon>
@@ -55,17 +34,12 @@
     </v-btn>
 
     <v-btn
-      :loading="loading5"
-      :disabled="loading5"
+      :loading="loading[4]"
+      :disabled="loading[4]"
       color="blue-grey"
-      class="ma-2 white--text"
-      fab
-      @click="loader = 'loading5'"
-    >
-      <v-icon dark>
-        mdi-cloud-upload
-      </v-icon>
-    </v-btn>
+      icon="mdi-cloud-upload"
+      @click="load(4)"
+    ></v-btn>
   </div>
 </template>
 
@@ -73,22 +47,13 @@
   export default {
     data () {
       return {
-        loader: null,
-        loading: false,
-        loading2: false,
-        loading3: false,
-        loading4: false,
-        loading5: false,
+        loading: [],
       }
     },
-    watch: {
-      loader () {
-        const l = this.loader
-        this[l] = !this[l]
-
-        setTimeout(() => (this[l] = false), 3000)
-
-        this.loader = null
+    methods: {
+      load (i) {
+        this.loading[i] = true
+        setTimeout(() => (this.loading[i] = false), 3000)
       },
     },
   }

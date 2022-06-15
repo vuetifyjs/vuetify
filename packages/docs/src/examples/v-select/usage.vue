@@ -8,7 +8,7 @@
       >
         <v-select
           :items="items"
-          label="Standard"
+          label="Standard variant"
         ></v-select>
       </v-col>
 
@@ -19,8 +19,8 @@
       >
         <v-select
           :items="items"
-          filled
-          label="Filled style"
+          variant="plain"
+          label="Plain variant"
         ></v-select>
       </v-col>
 
@@ -31,8 +31,8 @@
       >
         <v-select
           :items="items"
-          label="Outlined style"
-          outlined
+          label="Outlined variant"
+          variant="outlined"
         ></v-select>
       </v-col>
 
@@ -43,8 +43,20 @@
       >
         <v-select
           :items="items"
-          label="Solo field"
-          solo
+          label="Underlined variant"
+          variant="underlined"
+        ></v-select>
+      </v-col>
+
+      <v-col
+        class="d-flex"
+        cols="12"
+        sm="6"
+      >
+        <v-select
+          :items="items"
+          label="Contained variant"
+          variant="contained"
         ></v-select>
       </v-col>
     </v-row>
