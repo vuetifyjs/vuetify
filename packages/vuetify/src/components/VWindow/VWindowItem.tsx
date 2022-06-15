@@ -2,6 +2,7 @@
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { MaybeTransition } from '@/composables/transition'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Directives
 import Touch from '@/directives/touch'
@@ -34,6 +35,7 @@ export const VWindowItem = defineComponent({
   setup (props, { slots }) {
     const window = inject(VWindowSymbol)
     const groupItem = useGroupItem(props, VWindowGroupSymbol)
+    const { isBooted } = useSsrBoot()
 
     if (!window || !groupItem) throw new Error('[Vuetify] VWindowItem must be used inside VWindow')
 
@@ -114,7 +116,7 @@ export const VWindowItem = defineComponent({
 
     return () => {
       return (
-        <MaybeTransition transition={ transition.value } >
+        <MaybeTransition transition={ isBooted.value && transition.value } >
           <div
             class={[
               'v-window-item',
@@ -122,7 +124,7 @@ export const VWindowItem = defineComponent({
             ]}
             v-show={ groupItem.isSelected.value }
           >
-            { slots.default && hasContent.value && slots.default() }
+            { hasContent.value && slots.default?.() }
           </div>
         </MaybeTransition>
       )

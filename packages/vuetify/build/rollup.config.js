@@ -99,13 +99,19 @@ export default {
       async buildEnd () {
         const components = Object.create(null)
         const directives = []
+        const variables = []
 
         { // Components
-          const info = this.getModuleInfo(
+          const { importedIds } = this.getModuleInfo(
             (await this.resolve('src/components/index.ts')).id
           )
-          info.importedIds.forEach(id => {
+          await Promise.all(importedIds.map(async id => {
             const importFrom = path.relative(path.resolve(__dirname, '../src'), id).replace(/\.ts$/, '.mjs')
+
+            if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
+              variables.push(id)
+            }
+
             const { ast } = this.getModuleInfo(id)
             walk(ast, {
               ExportNamedDeclaration (node) {
@@ -117,13 +123,18 @@ export default {
                 })
               },
             })
-          })
+          }))
         }
 
         { // Directives
-          const { ast } = this.getModuleInfo(
+          const { ast, importedIds } = this.getModuleInfo(
             (await this.resolve('src/directives/index.ts')).id
           )
+          await Promise.all(importedIds.map(async id => {
+            if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
+              variables.push(id)
+            }
+          }))
           walk(ast, {
             ExportNamedDeclaration (node) {
               node.specifiers.forEach(node => {
@@ -143,6 +154,18 @@ export default {
             }])),
             directives,
           }, null, 2),
+        })
+
+        this.emitFile({
+          type: 'asset',
+          fileName: '_component-variables.sass',
+          source: variables.map(id => {
+            return `@forward '` + path.join(
+              '../lib',
+              path.relative(path.resolve(__dirname, '../src'), id),
+              '../_variables.scss'
+            ) + `'`
+          }).sort().join('\n')
         })
       }
     }

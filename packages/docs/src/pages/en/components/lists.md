@@ -26,17 +26,37 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 
 <api-inline />
 
-## Caveats
+<!-- ## Caveats
 
 <alert type="info">
 
   If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
 
-</alert>
+</alert> -->
 
 ## Examples
 
 ### Props
+
+#### Items
+
+Lists can either be created by markup using the many sub-components that are available, or by using the **items** prop.
+
+<example file="v-list/prop-items" />
+
+To customize which properties will be used for the title and value of each item, use the **item-title** and **item-value** props.
+
+<example file="v-list/prop-items-custom" />
+
+If you need to render subheaders or dividers, add an item with a **type** property. Which property to use can be customized using the **item-type** prop.
+
+<example file="v-list/prop-items-type" />
+
+To customize individual items, you can use the **item-props** prop. It defaults to looking for a **props** property on the items. The value should be an object, and if found it will be spread on the **v-list-item** component.
+
+If **item-props** is set to **true** then the whole item will be spread.
+
+<example file="v-list/prop-items-prop" />
 
 #### Density
 
