@@ -11,7 +11,7 @@ export interface ScrollStrategyData {
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
-  updatePosition: Ref<((e: Event) => void) | undefined>
+  updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
 const scrollStrategies = {
@@ -110,7 +110,7 @@ function repositionScrollStrategy (data: ScrollStrategyData) {
   function update (e: Event) {
     requestNewFrame(() => {
       const start = performance.now()
-      data.updatePosition.value?.(e)
+      data.updateLocation.value?.(e)
       const time = performance.now() - start
       slow = time / (1000 / 60) > 2
     })

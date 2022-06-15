@@ -7,10 +7,11 @@ import { filterControlProps, makeSelectionControlProps, VSelectionControl } from
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -20,7 +21,7 @@ export const VCheckbox = defineComponent({
   props: {
     indeterminate: Boolean,
     indeterminateIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxIndeterminate',
     },
 
@@ -28,11 +29,11 @@ export const VCheckbox = defineComponent({
     ...makeSelectionControlProps(),
 
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxOff',
     },
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$checkboxOn',
     },
   },
@@ -54,6 +55,9 @@ export const VCheckbox = defineComponent({
         : props.trueIcon
     })
 
+    const uid = getUid()
+    const id = computed(() => props.id || `checkbox-${uid}`)
+
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -70,15 +74,18 @@ export const VCheckbox = defineComponent({
           class="v-checkbox"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (
               <VSelectionControl
                 { ...controlProps }
+                id={ id.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 falseIcon={ falseIcon.value }

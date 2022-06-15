@@ -16,7 +16,7 @@
             <v-tooltip
               v-if="link.href || link.copyText"
               :key="link.href || link.copyText"
-              anchor="bottom"
+              location="bottom"
             >
               <template #activator="{ props }">
                 <a

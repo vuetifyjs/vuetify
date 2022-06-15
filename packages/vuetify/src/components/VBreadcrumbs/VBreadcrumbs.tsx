@@ -12,6 +12,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toRef } from 'vue'
@@ -39,7 +40,7 @@ export const VBreadcrumbs = defineComponent({
       type: String,
       default: '/',
     },
-    icon: String,
+    icon: IconValue,
     items: {
       type: Array as PropType<BreadcrumbItem[]>,
       default: () => ([]),

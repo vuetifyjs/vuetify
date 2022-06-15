@@ -2,14 +2,6 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": true,
-  "build": {
-    "env": {
-      "VITE_COSMIC_BUCKET_SLUG": "@cosmic-bucket-slug",
-      "VITE_COSMIC_BUCKET_READ_KEY": "@cosmic-bucket-read-key",
-      "VITE_COSMIC_BUCKET_SLUG_STORE": "@cosmic-bucket-slug-store",
-      "VITE_COSMIC_BUCKET_READ_KEY_STORE": "@cosmic-bucket-read-key-store"
-    }
-  },
   "rewrites": [
     {
       "source": "/eo-UY/(.*)",
@@ -22,6 +14,35 @@
     {
       "source": "/(.*)",
       "destination": "/_fallback"
+    }
+  ],
+  "headers": [
+    {
+      "source": "/service-worker.js",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=0, must-revalidate"
+        }
+      ]
+    },
+    {
+      "source": "[a-z0-9]{8}\\.(js|css)(\\.map)?",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=31536000, immutable"
+        }
+      ]
+    },
+    {
+      "source": "/(.*)",
+      "headers" : [
+        {
+          "key" : "Cache-Control",
+          "value" : "public, max-age=3600, must-revalidate"
+        }
+      ]
     }
   ],
   "github": {

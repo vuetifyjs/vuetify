@@ -4,7 +4,7 @@
       Start
       <v-tooltip
         activator="parent"
-        anchor="start"
+        location="start"
       >Tooltip</v-tooltip>
     </v-btn>
 
@@ -12,7 +12,7 @@
       End
       <v-tooltip
         activator="parent"
-        anchor="end"
+        location="end"
       >Tooltip</v-tooltip>
     </v-btn>
 
@@ -20,7 +20,7 @@
       Top
       <v-tooltip
         activator="parent"
-        anchor="top"
+        location="top"
       >Tooltip</v-tooltip>
     </v-btn>
 
@@ -28,7 +28,7 @@
       Bottom
       <v-tooltip
         activator="parent"
-        anchor="bottom"
+        location="bottom"
       >Tooltip</v-tooltip>
     </v-btn>
   </div>

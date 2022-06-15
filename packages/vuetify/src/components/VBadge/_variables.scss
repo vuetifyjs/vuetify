@@ -9,7 +9,6 @@ $badge-border-radius: 10px !default;
 $badge-border-style: solid !default;
 $badge-border-transform: scale(1.20) !default;
 $badge-border-width: 2px !default;
-$badge-content-padding: 0 2px !default;
 $badge-dot-border-radius: 4.5px;
 $badge-dot-border-width: 1.5px !default;
 $badge-dot-height: 9px !default;
@@ -23,7 +22,7 @@ $badge-icon-padding: 4px 6px !default;
 $badge-inline-vertical-align: middle !default;
 $badge-line-height: 1 !default;
 $badge-min-width: 20px !default;
-$badge-padding: 4px !default;
+$badge-padding: 4px 6px !default;
 $badge-transition: .225s settings.$standard-easing !default;
 $badge-wrapper-margin: 0 4px !default;
 

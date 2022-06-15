@@ -11,6 +11,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { defineComponent, propsFactory, useRender } from '@/util'
@@ -20,7 +21,7 @@ export const makeVAvatarProps = propsFactory({
   color: String,
   start: Boolean,
   end: Boolean,
-  icon: String,
+  icon: IconValue,
   image: String,
 
   ...makeDensityProps(),
