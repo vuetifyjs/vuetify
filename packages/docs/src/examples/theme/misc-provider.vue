@@ -1,12 +1,6 @@
 <template>
-  <v-card
-    dark
-    flat
-  >
-    <v-toolbar
-      flat
-      height="72"
-    >
+  <v-card dark flat>
+    <v-toolbar flat height="72">
       <v-switch
         v-model="$vuetify.theme.dark"
         hint="This toggles the global state of the Vuetify theme"
@@ -20,11 +14,16 @@
       <v-list>
         <v-subheader>I inherit dark from my parent</v-subheader>
 
-        <v-list-item
-          v-for="item in items"
-          :key="item"
-        >
-          <v-list-item-title v-text="item"></v-list-item-title>
+        <v-list-item>
+          <v-list-item-title>One</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Two</v-list-item-title>
+        </v-list-item>
+
+        <v-list-item>
+          <v-list-item-title>Three</v-list-item-title>
         </v-list-item>
       </v-list>
 
@@ -38,27 +37,19 @@
             <strong>&nbsp;$vuetify.theme.dark</strong>
           </v-subheader>
 
-          <v-list-item
-            v-for="item in items"
-            :key="item"
-          >
-            <v-list-item-title v-text="item"></v-list-item-title>
+          <v-list-item>
+            <v-list-item-title>One</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Two</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Three</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-theme-provider>
     </v-card-text>
   </v-card>
 </template>
-
-<script>
-  export default {
-    props: {
-      attrs: {
-        type: Object,
-        default: () => ({}),
-      },
-    },
-
-    data: () => ({ items: ['One', 'Two', 'Three'] }),
-  }
-</script>
