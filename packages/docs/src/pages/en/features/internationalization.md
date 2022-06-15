@@ -11,7 +11,9 @@ related:
 
 # Internationalization (i18n)
 
-Vuetify supports language Internationalization (i18n) of its components. When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
+Vuetify supports language Internationalization (i18n) of its components.
+
+When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
 <entry slug="vs-video-i18n" />
 
@@ -24,7 +26,7 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
 // Translations provided by Vuetify
-  import { pl, zhHans } from 'vuetify/locale'
+import { pl, zhHans } from 'vuetify/locale'
 
 // Your own translation file
 import sv from './i18n/vuetify/sv'
@@ -125,7 +127,7 @@ If you are building custom Vuetify components that need to hook into the locale 
 
 ## vue-i18n
 
-If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided wrapper function (as seen in the example below).
+If you are using the vue-i18n library, you can very easily integrate it with Vuetify. This allows you to keep all of your translations in one place. Simply create an entry for $vuetify within your messages and add the corresponding language changes. Then hook up vue-i18n to Vuetify by using the provided adapter function (as seen in the example below).
 
 ```js { resource="src/main.js" }
 import { createApp } from 'vue'
@@ -160,10 +162,7 @@ const i18n = new createI18n({
 })
 
 const vuetify = createVuetify({
-  locale: createVueI18nAdapter({
-    i18n,
-    useI18n,
-  })
+  locale: createVueI18nAdapter({ i18n, useI18n })
 })
 
 const app = createApp()

@@ -1,5 +1,5 @@
 // Utilities
-import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
+import { inject, nextTick, reactive, ref, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
@@ -87,20 +87,16 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-// Cross-browser support as described in:
-// https://stackoverflow.com/questions/1248081
-function getClientWidth () {
-  return IN_BROWSER ? Math.max(
-    document.documentElement!.clientWidth,
-    window.innerWidth
-  ) : 0 // SSR
+function getClientWidth (isHydrate?: boolean) {
+  return IN_BROWSER && !isHydrate
+    ? window.innerWidth
+    : 0
 }
 
-function getClientHeight () {
-  return IN_BROWSER ? Math.max(
-    document.documentElement!.clientHeight,
-    window.innerHeight
-  ) : 0 // SSR
+function getClientHeight (isHydrate?: boolean) {
+  return IN_BROWSER && !isHydrate
+    ? window.innerHeight
+    : 0
 }
 
 function getPlatform (): DisplayPlatform {
@@ -140,17 +136,21 @@ function getPlatform (): DisplayPlatform {
   }
 }
 
-export function createDisplay (options?: DisplayOptions): ToRefs<DisplayInstance> {
+export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): ToRefs<DisplayInstance> {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight())
+  const height = ref(getClientHeight(isHydrate))
   const platform = getPlatform()
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth())
+  const width = ref(getClientWidth(isHydrate))
 
   function onResize () {
     height.value = getClientHeight()
     width.value = getClientWidth()
+  }
+
+  if (isHydrate) {
+    nextTick(() => onResize())
   }
 
   // eslint-disable-next-line max-statements
