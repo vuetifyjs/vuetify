@@ -155,15 +155,16 @@ export default baseMixins.extend<options>().extend({
       return `list-${this._uid}`
     },
     computedCounterValue (): number {
-      const value = this.multiple
-        ? this.selectedItems
-        : (this.getText(this.selectedItems[0]) || '').toString()
+      let value
 
-      if (typeof this.counterValue === 'function') {
-        return this.counterValue(value)
+      if (this.multiple) {
+        value = this.selectedItems
+      } else {
+        const text = this.getText(this.selectedItems[0])
+        value = (text || text === 0 ? text : '').toString()
       }
 
-      return value.length
+      return typeof this.counterValue === 'function' ? this.counterValue(value) : value.length
     },
     directives (): VNodeDirective[] | undefined {
       return this.isFocused ? [{
@@ -650,7 +651,8 @@ export default baseMixins.extend<options>().extend({
       this.keyboardLookupLastTime = now
 
       const index = this.allItems.findIndex(item => {
-        const text = (this.getText(item) || '').toString()
+        const value = this.getText(item)
+        const text = (value || value === 0 ? value : '').toString()
 
         return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
       })
