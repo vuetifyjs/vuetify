@@ -36,7 +36,6 @@
     "@mdi/font": "6.2.95",
     "@mdi/js": "6.2.95",
     "@mdi/svg": "6.2.95",
-    "@octokit/core": "^3.6.0",
     "@typescript-eslint/eslint-plugin": "^5.26.0",
     "@typescript-eslint/parser": "^5.26.0",
     "@vue/compiler-sfc": "^3.2.36",
