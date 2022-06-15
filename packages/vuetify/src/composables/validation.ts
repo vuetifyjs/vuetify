@@ -3,7 +3,8 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, ref, watch } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref, unref, watch } from 'vue'
+import type { MaybeRef } from '@/util'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -51,6 +52,7 @@ export const makeValidationProps = propsFactory({
 export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
+  id: MaybeRef<string | number> = getUid(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
   const form = useForm()
@@ -80,7 +82,7 @@ export function useValidation (
     }
   })
 
-  const uid = computed(() => props.name ?? getUid())
+  const uid = computed(() => props.name ?? unref(id))
 
   onBeforeMount(() => {
     form?.register(uid.value, validate, reset, resetValidation, isValid)

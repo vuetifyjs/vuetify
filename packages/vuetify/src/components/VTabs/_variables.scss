@@ -1,7 +1,7 @@
 @use 'sass:math';
 @use 'sass:map';
 
-$tabs-density: ( 'default': 0, 'comfortable' : -1, 'compact': -3) !default;
+$tabs-density: ('default': 0, 'comfortable' : -1, 'compact': -3) !default;
 $tabs-height: 48px !default;
 $tabs-stacked-height: 72px !default;
 

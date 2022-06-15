@@ -21,7 +21,6 @@ import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
-import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
 
 export const VBreadcrumbs = genericComponent<new <T>() => {

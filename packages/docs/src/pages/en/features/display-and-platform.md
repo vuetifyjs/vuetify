@@ -11,7 +11,9 @@ related:
 
 # Display & Platform
 
-The **useDisplay** composable provides information on multiple aspects of the current device. This enables you to control various aspects of your application based upon the window size, device type, and SSR state. This composable works in conjunction with [grids](/components/grids/) and other responsive utility classes (e.g. [display](/styles/display/)).
+The **useDisplay** composable provides information on multiple aspects of the current device.
+
+This enables you to control various aspects of your application based upon the window size, device type, and SSR state. This composable works in conjunction with [grids](/components/grids/) and other responsive utility classes (e.g. [display](/styles/display/)).
 
 <entry />
 
@@ -28,10 +30,10 @@ The following shows how to access the application's display information:
 
   export default {
     setup () {
-      const display = useDisplay()
+      const { mobile } = useDisplay()
 
       onMounted(() => {
-        console.log(display.mobile.value) // false
+        console.log(mobile.value) // false
       })
     }
   }
@@ -53,9 +55,10 @@ If you are still using the Options API, you can access the display information o
 ## API
 
 <api-inline />
+
 ## Options
 
-The **useDisplay** composable has a numerous configuration options, such as the ability to define custom values for breakpoints.
+The **useDisplay** composable has several configuration options, such as the ability to define custom values for breakpoints.
 
 For example, the **thresholds** option modifies the values used for viewport calculations. The following snippet overrides **thresholds** values *xs* through *lg* and sets **mobileBreakpoint** to `sm`.
 
@@ -185,7 +188,7 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 
 ```html
 <template>
-  <v-dialog :fullscreen="display.mobile.value">
+  <v-dialog :fullscreen="mobile">
     ...
   </v-dialog>
 </template>
@@ -195,9 +198,9 @@ Use the **useDisplay** composable alongside Vue 3's `setup` function to harness 
 
   export default {
     setup () {
-      const display = useDisplay()
+      const { mobile } = useDisplay()
 
-      return { display }
+      return { mobile }
     },
   }
 </script>
@@ -258,11 +261,11 @@ For example, the [v-banner](/components/banners/) component implements different
 
   export default {
     setup () {
-      const display = useDisplay()
+      const { width, mobile } = useDisplay()
 
       onMounted(() => {
-        console.log(display.width.value) // 960
-        console.log(display.mobile.value) // true
+        console.log(width.value) // 960
+        console.log(mobile.value) // true
       })
     }
   }
