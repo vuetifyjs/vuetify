@@ -22,9 +22,10 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** February 2022
-- **Alpha:** [Live](https://next.vuetifyjs.com/)
-- **Beta:** December 2021
+- **Target Release:** June 2022
+- **Alpha:** Complete
+- **Beta:** [Live](https://next.vuetifyjs.com/)
+- **Release Candidate:** [Pending](https://github.com/vuetifyjs/vuetify/issues/14984)
 - **Overview:**
   - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Global properties that allow you to make large overarching changes to your app

@@ -216,12 +216,16 @@ export const BaseSlideGroup = mixins<options &
     // and need to be recalculated
     isOverflowing: 'setWidths',
     scrollOffset (val) {
-      const scroll =
+      if (this.$vuetify.rtl) val = -val
+
+      let scroll =
         val <= 0
           ? bias(-val)
           : val > this.widths.content - this.widths.wrapper
             ? -(this.widths.content - this.widths.wrapper) + bias(this.widths.content - this.widths.wrapper - val)
             : -val
+
+      if (this.$vuetify.rtl) scroll = -scroll
 
       this.$refs.content.style.transform = `translateX(${scroll}px)`
     },
@@ -475,8 +479,10 @@ export const BaseSlideGroup = mixins<options &
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
       }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setWidths /* istanbul ignore next */  () {
+    setWidths () {
       window.requestAnimationFrame(() => {
+        if (this._isDestroyed) return
+
         const { content, wrapper } = this.$refs
 
         this.widths = {
