@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',
@@ -46,6 +46,9 @@ export const VSwitch = defineComponent({
         : props.color
     })
 
+    const uid = getUid()
+    const id = computed(() => props.id || `switch-${uid}`)
+
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -72,10 +75,12 @@ export const VSwitch = defineComponent({
           ]}
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
               isValid,
@@ -83,6 +88,7 @@ export const VSwitch = defineComponent({
               <VSelectionControl
                 ref={ control }
                 { ...controlProps }
+                id={ id.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
