@@ -97,7 +97,7 @@
               chips
               color="blue-grey lighten-2"
               label="Select"
-              item-text="name"
+              item-title="name"
               item-value="name"
               multiple
             >
