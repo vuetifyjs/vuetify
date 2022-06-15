@@ -104,6 +104,10 @@ Once prompted, choose **Preview (Vuetify 3 + Vite)**:
   Vuetify 3 Preview (Vuetify 3)
 ```
 
+### CDN
+
+Coming soon™
+
 ## Usage
 
 With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.

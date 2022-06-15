@@ -26,6 +26,7 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -36,6 +37,9 @@ export const makeSelectProps = propsFactory({
   menuIcon: {
     type: IconValue,
     default: '$dropdown',
+  },
+  menuProps: {
+    type: Object as PropType<VMenu['$props']>,
   },
   modelValue: {
     type: null,
@@ -186,6 +190,7 @@ export const VSelect = genericComponent<new <
                   eager={ props.eager }
                   openOnClick={ false }
                   transition={ props.transition }
+                  { ...props.menuProps }
                 >
                   <VList
                     selected={ selected.value }

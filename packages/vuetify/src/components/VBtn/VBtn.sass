@@ -1,5 +1,4 @@
 @use 'sass:math'
-@forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -89,6 +88,12 @@
         // so we need to divide it to get the desired value
         opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
+  &--loading
+    pointer-events: none
+
+    .v-btn__content
+      opacity: 0
+
   &--stacked
     flex-direction: column
     line-height: $button-stacked-line-height
@@ -110,6 +115,16 @@
   &--stacked
     .v-icon
       --v-icon-size-multiplier: #{calc(24/21)}
+
+.v-btn__loader
+  align-items: center
+  display: flex
+  height: 100%
+  justify-content: center
+  left: 0
+  position: absolute
+  top: 0
+  width: 100%
 
 .v-btn__content
   transition: $button-content-transition
