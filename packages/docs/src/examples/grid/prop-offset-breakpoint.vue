@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row
       class="mb-6"
       no-gutters
@@ -8,13 +8,9 @@
         sm="5"
         md="6"
       >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-sm-5 .col-md-6
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-sm-5 .v-col-md-6
+        </v-sheet>
       </v-col>
       <v-col
         sm="5"
@@ -22,13 +18,9 @@
         md="6"
         offset-md="0"
       >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-sm-5 .offset-sm-2 .col-md-6 .offset-md-0
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-sm-5 .offset-sm-2 .v-col-md-6 .offset-md-0
+        </v-sheet>
       </v-col>
     </v-row>
     <v-row no-gutters>
@@ -37,13 +29,9 @@
         md="5"
         lg="6"
       >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-sm-6 .col-md-5 .col-lg-6
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          sm-6 md-5 lg-6
+        </v-sheet>
       </v-col>
       <v-col
         sm="6"
@@ -52,13 +40,9 @@
         lg="6"
         offset-lg="0"
       >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-sm-6 .col-md-5 .offset-md-2 .col-lg-6 .offset-lg-0
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-sm-6 md-5 .offset-md-2 .v-col-lg-6 .offset-lg-0
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

@@ -19,12 +19,13 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useList } from './list'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 
@@ -65,14 +66,14 @@ export const VListItem = genericComponent<new () => {
     activeColor: String,
     activeClass: String,
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     disabled: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
     nav: Boolean,
     prependAvatar: String,
-    prependIcon: String,
-    subtitle: String,
-    title: String,
+    prependIcon: IconValue,
+    subtitle: [String, Number, Boolean],
+    title: [String, Number, Boolean],
     value: null,
     link: Boolean,
 
@@ -101,11 +102,9 @@ export const VListItem = genericComponent<new () => {
       variant: props.variant,
     }))
 
-    onMounted(() => {
-      if (link.isExactActive?.value && parent.value != null) {
-        root.open(parent.value, true)
-      }
-    })
+    if (link.isExactActive?.value && parent.value != null) {
+      root.open(parent.value, true)
+    }
 
     watch(() => link.isExactActive?.value, val => {
       if (val && parent.value != null) {

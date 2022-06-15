@@ -12,7 +12,12 @@ export const usePwa: PwaPlugin = async ({ isClient, router }) => {
   const pwa = usePwaStore()
   const user = useUserStore()
   const updateSW = pwa.updateSW = registerSW({
-    onNeedRefresh () {
+    async onNeedRefresh () {
+      const registration = await navigator.serviceWorker.getRegistration()
+      if (registration?.active && registration?.waiting) {
+        await messageSW(registration.active, { type: 'CLEAN_CACHE' })
+      }
+
       if (user.pwaRefresh) pwa.snackbar = true
     },
   })
@@ -21,5 +26,15 @@ export const usePwa: PwaPlugin = async ({ isClient, router }) => {
     if (to.path !== from.path) {
       updateSW(true)
     }
+  })
+}
+
+function messageSW (sw: ServiceWorker, data: {}): Promise<any> {
+  return new Promise(resolve => {
+    const messageChannel = new MessageChannel()
+    messageChannel.port1.onmessage = (event: MessageEvent) => {
+      resolve(event.data)
+    }
+    sw.postMessage(data, [messageChannel.port2])
   })
 }

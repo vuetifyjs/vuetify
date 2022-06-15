@@ -5,8 +5,8 @@
       .rounded-0
     </div>
 
-    <div class="pa-4 text-center bg-secondary rounded-xl rounded-br-0">
-      .rounded-xl .rounded-br-0
+    <div class="pa-4 text-center bg-secondary rounded-xl rounded-be-0">
+      .rounded-xl .rounded-be-0
     </div>
   </div>
 </template>

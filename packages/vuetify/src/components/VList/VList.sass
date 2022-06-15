@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
@@ -10,7 +9,6 @@
 
   @include tools.border($list-border...)
   @include tools.elevation($list-elevation)
-  @include tools.position($list-positions)
   @include tools.rounded($list-border-radius)
   @include tools.theme($list-theme...)
 

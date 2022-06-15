@@ -40,6 +40,11 @@ export default defineConfig(({ mode }) => {
     },
     build: {
       sourcemap: true,
+      rollupOptions: {
+        output: {
+          inlineDynamicImports: true,
+        },
+      },
     },
     plugins: [
       // https://github.com/stafyniaksacha/vite-plugin-fonts

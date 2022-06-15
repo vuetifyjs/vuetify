@@ -1,4 +1,4 @@
-import type { ParsedAnchor } from './anchor'
+import type { ParsedAnchor } from '@/util'
 import type { Box } from '@/util/box'
 
 type Point = { x: number, y: number }

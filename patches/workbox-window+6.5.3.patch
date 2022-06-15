@@ -1,5 +1,5 @@
 diff --git a/node_modules/workbox-window/package.json b/node_modules/workbox-window/package.json
-index 94331d6..8fb936f 100644
+index fad63af..d1d5e4c 100644
 --- a/node_modules/workbox-window/package.json
 +++ b/node_modules/workbox-window/package.json
 @@ -23,6 +23,12 @@
@@ -14,4 +14,4 @@ index 94331d6..8fb936f 100644
 +  },
    "dependencies": {
      "@types/trusted-types": "^2.0.2",
-     "workbox-core": "6.4.2"
+     "workbox-core": "6.5.3"
