@@ -142,13 +142,17 @@ export const VAutocomplete = genericComponent<new <
         isPristine.value = true
       }
     }
+
     function onInput (e: InputEvent) {
       search.value = (e.target as HTMLInputElement).value
     }
+
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
+
     const isSelecting = ref(false)
+
     function select (item: any) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => selection === item.value)
@@ -232,6 +236,7 @@ export const VAutocomplete = genericComponent<new <
                   openOnClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
+                  { ...props.menuProps }
                 >
                   <VList
                     selected={ selected.value }

@@ -38,7 +38,8 @@
         :items="states"
         :filter="customFilter"
         color="white"
-        item-text="name"
+        item-title="name"
+        item-value="abbr"
         label="State"
       ></v-autocomplete>
     </v-card-text>

@@ -458,11 +458,6 @@ export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
 }
 
-export function getUid () {
-  return getUid._uid++
-}
-getUid._uid = 0
-
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {
     if (node.type === Fragment) {

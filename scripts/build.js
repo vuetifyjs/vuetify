@@ -8,8 +8,11 @@ const alias = {
 }
 target = alias[target] || target
 
+let result
 if (!target) {
-  spawn('yarn', ['lerna', 'run', 'build', '--stream'], { stdio: 'inherit' })
+  result = spawn.sync('yarn', ['lerna', 'run', 'build', '--stream'], { stdio: 'inherit' })
 } else {
-  spawn('yarn', ['lerna', 'run', 'build', '--scope', target, '--stream'], { stdio: 'inherit' })
+  result = spawn.sync('yarn', ['lerna', 'run', 'build', '--scope', target, '--stream', '--no-prefix'], { stdio: 'inherit' })
 }
+
+process.exitCode = result.status

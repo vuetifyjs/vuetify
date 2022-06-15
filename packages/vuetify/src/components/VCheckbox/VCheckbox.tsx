@@ -11,7 +11,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -55,6 +55,9 @@ export const VCheckbox = defineComponent({
         : props.trueIcon
     })
 
+    const uid = getUid()
+    const id = computed(() => props.id || `checkbox-${uid}`)
+
     function onChange () {
       if (indeterminate.value) {
         indeterminate.value = false
@@ -71,15 +74,18 @@ export const VCheckbox = defineComponent({
           class="v-checkbox"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (
               <VSelectionControl
                 { ...controlProps }
+                id={ id.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 falseIcon={ falseIcon.value }
