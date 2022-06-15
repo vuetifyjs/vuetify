@@ -37,15 +37,21 @@ export default baseMixins.extend<options>().extend({
   inheritAttrs: false,
 
   props: {
+    filled: Boolean,
+    flat: Boolean,
     length: {
       type: [Number, String],
       default: 6,
     },
+    plain: Boolean,
+    rounded: Boolean,
+    shaped: Boolean,
+    solo: Boolean,
+    soloInverted: Boolean,
     type: {
       type: String,
       default: 'text',
     },
-    plain: Boolean,
   },
 
   data: () => ({
@@ -63,11 +69,29 @@ export default baseMixins.extend<options>().extend({
       return {
         ...VInput.options.computed.classes.call(this),
         ...VTextField.options.computed.classes.call(this),
+        'v-otp-input--enclosed': this.isEnclosed,
+        'v-otp-input--filled': this.filled,
+        'v-otp-input--outlined': this.outlined,
         'v-otp-input--plain': this.plain,
+        'v-otp-input--rounded': this.rounded,
+        'v-otp-input--shaped': this.shaped,
+        'v-otp-input--solo': this.isSolo,
+        'v-text-field--solo-flat': this.flat,
+        'v-otp-input--solo-inverted': this.soloInverted,
       }
     },
     isDirty (): boolean {
       return VInput.options.computed.isDirty.call(this) || this.badInput
+    },
+    isEnclosed (): boolean {
+      return (
+        this.filled ||
+        this.isSolo ||
+        this.outlined
+      ) as boolean
+    },
+    isSolo (): boolean {
+      return this.solo || this.soloInverted
     },
   },
 
