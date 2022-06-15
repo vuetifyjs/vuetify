@@ -27,7 +27,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -90,88 +90,86 @@ export const VBtn = defineComponent({
     })
 
     useSelectLink(link, group?.select)
+    const Tag = (link.isLink.value) ? 'a' : props.tag
+    const hasColor = !group || group.isSelected.value
 
-    return () => {
-      const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasColor = !group || group.isSelected.value
+    useRender(() => (
+      <Tag
+        type={ Tag === 'a' ? undefined : 'button' }
+        class={[
+          'v-btn',
+          group?.selectedClass.value,
+          {
+            'v-btn--active': props.active,
+            'v-btn--block': props.block,
+            'v-btn--disabled': isDisabled.value,
+            'v-btn--elevated': isElevated.value,
+            'v-btn--flat': props.flat,
+            'v-btn--icon': !!props.icon,
+            'v-btn--stacked': props.stacked,
+          },
+          themeClasses.value,
+          borderClasses.value,
+          hasColor ? colorClasses.value : undefined,
+          densityClasses.value,
+          elevationClasses.value,
+          positionClasses.value,
+          roundedClasses.value,
+          sizeClasses.value,
+          variantClasses.value,
+        ]}
+        style={[
+          hasColor ? colorStyles.value : undefined,
+          dimensionStyles.value,
+          locationStyles.value,
+        ]}
+        disabled={ isDisabled.value || undefined }
+        href={ link.href.value }
+        v-ripple={[
+          !isDisabled.value && props.ripple,
+          null,
+          props.icon ? ['center'] : null,
+        ]}
+        onClick={ (e: MouseEvent) => {
+          if (isDisabled.value) return
 
-      return (
-        <Tag
-          type={ Tag === 'a' ? undefined : 'button' }
-          class={[
-            'v-btn',
-            group?.selectedClass.value,
-            {
-              'v-btn--active': props.active,
-              'v-btn--block': props.block,
-              'v-btn--disabled': isDisabled.value,
-              'v-btn--elevated': isElevated.value,
-              'v-btn--flat': props.flat,
-              'v-btn--icon': !!props.icon,
-              'v-btn--stacked': props.stacked,
-            },
-            themeClasses.value,
-            borderClasses.value,
-            hasColor ? colorClasses.value : undefined,
-            densityClasses.value,
-            elevationClasses.value,
-            positionClasses.value,
-            roundedClasses.value,
-            sizeClasses.value,
-            variantClasses.value,
-          ]}
-          style={[
-            hasColor ? colorStyles.value : undefined,
-            dimensionStyles.value,
-            locationStyles.value,
-          ]}
-          disabled={ isDisabled.value || undefined }
-          href={ link.href.value }
-          v-ripple={[
-            !isDisabled.value && props.ripple,
-            null,
-            props.icon ? ['center'] : null,
-          ]}
-          onClick={ (e: MouseEvent) => {
-            if (isDisabled.value) return
+          link.navigate?.(e)
+          group?.toggle()
+        } }
+      >
+        { genOverlays(true, 'v-btn') }
 
-            link.navigate?.(e)
-            group?.toggle()
-          } }
-        >
-          { genOverlays(true, 'v-btn') }
+        { !props.icon && props.prependIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.prependIcon }
+            start
+          />
+        ) }
 
-          { !props.icon && props.prependIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.prependIcon }
-              start
-            />
-          ) }
+        <div class="v-btn__content" data-no-activator="">
+          { typeof props.icon === 'boolean'
+            ? slots.default?.()
+            : (
+              <VIcon
+                class="v-btn__icon"
+                icon={ props.icon }
+                size={ props.size }
+              />
+            )
+          }
+        </div>
 
-          <div class="v-btn__content" data-no-activator="">
-            { typeof props.icon === 'boolean'
-              ? slots.default?.()
-              : (
-                <VIcon
-                  class="v-btn__icon"
-                  icon={ props.icon }
-                  size={ props.size }
-                />
-              )
-            }
-          </div>
-
-          { !props.icon && props.appendIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.appendIcon }
-              end
-            />
-          ) }
-        </Tag>
-      )
-    }
+        { !props.icon && props.appendIcon && (
+          <VIcon
+            class="v-btn__icon"
+            icon={ props.appendIcon }
+            end
+          />
+        ) }
+      </Tag>
+    ))
+    return {}
   },
 })
 
