@@ -1,6 +1,5 @@
 <template>
   <div>
-    <h3 class="mb-3">align content center</h3>
     <v-card
       class="d-flex align-content-center flex-wrap"
       color="grey lighten-2"
