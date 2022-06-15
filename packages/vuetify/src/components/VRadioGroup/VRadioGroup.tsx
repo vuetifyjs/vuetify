@@ -62,10 +62,12 @@ export const VRadioGroup = defineComponent({
           class="v-radio-group"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (

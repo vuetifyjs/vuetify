@@ -12,7 +12,9 @@ related:
 
 # Grid system
 
-Vuetify comes with a 12 point grid system built using flexbox. The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations, **xs**, **sm**, **md**, **lg** and **xl**. These resolutions are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
+Vuetify comes with a 12 point grid system built using flexbox.
+
+The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. These breakpoints are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
 <promoted slug="vuemastery-grids" />
 
@@ -20,7 +22,7 @@ Vuetify comes with a 12 point grid system built using flexbox. The grid is used 
 
 ## Usage
 
-The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is integrated by using a series of containers, rows, and columns to layout and align content. **If you are new to flexbox**, [Read the CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets.
+The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is implemented by using a series of containers, rows, and columns to layout and align content. If you are new to flexbox, read the [CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets.
 
 <example file="grid/usage" />
 
@@ -48,15 +50,9 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## Helper Classes
 
-`fill-height` applies `height: 100%` to an element. When applied to `v-container` it will also `align-items: center`.
+The class `fill-height` applies `height: 100%` to an element. When applied to `v-container` it will also set `align-items: center`.
 
 ## Caveats
-
-<alert type="info">
-
-  1.x grid system has been deprecated in favor of the 2.x grid system. Documentation for 1.x grids can be found in the [v1.5 docs](https://v15.vuetifyjs.com/framework/grid)
-
-</alert>
 
 <alert type="info">
 
@@ -64,12 +60,6 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 - Props like **justify-sm** and **justify-md** exist, but **justify-xs** does not, it is simply **justify**
 - The **xs** prop does not exist on `v-col`. The equivalent to this is the **cols** prop
-
-</alert>
-
-<alert type="info">
-
-  When using the grid system with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.
 
 </alert>
 
@@ -131,11 +121,13 @@ You can also designate explicitly **first** or **last** which will assign **-1**
 
 When more than 12 columns are placed within a given row (that is not using the `.flex-nowrap` utility class), each group of extra columns will wrap onto a new line.
 
+In the example below, the first and second **v-col** components are a total of 13 columns wide, which means the second **v-col** gets wrapped to a new line.
+
 <example file="grid/misc-column-wrapping" />
 
 #### Equal width columns
 
-You can break equal width columns into multiple lines. While there are workarounds for older browser versions, there was a [Safari flexbox bug](https://github.com/philipwalton/flexbugs#11-min-and-max-size-declarations-are-ignored-when-wrapping-flex-items). This shouldn't be necessary if you're up-to-date.
+You can break equal width columns into multiple lines using **v-responsive**.
 
 <example file="grid/misc-equal-width-columns" />
 
@@ -165,7 +157,7 @@ When using the auto-layout, you can define the width of only one column and stil
 
 #### Row and column breakpoints
 
-Dynamically change your layout based upon resolution. **(resize your screen and watch the top `row` layout change on sm, md, and lg breakpoints)**
+Dynamically change your layout based upon resolution. Resize your screen and watch the row layout change on sm, md, and lg breakpoints.
 
 <example file="grid/misc-row-and-column-breakpoints" />
 
@@ -175,16 +167,16 @@ The `v-spacer` component is useful when you want to fill available space or make
 
 <example file="grid/misc-spacer" />
 
-#### Unique layouts
+<!-- #### Unique layouts
 
 The power and flexibility of the Vuetify grid system allows you to create amazing user interfaces.
 
-<example file="grid/misc-unique-layouts" />
+<example file="grid/misc-unique-layouts" /> -->
 
-#### Variable content width
+<!-- #### Variable content width
 
 Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content.
 
-<example file="grid/misc-variable-content" />
+<example file="grid/misc-variable-content" /> -->
 
 <backmatter />
