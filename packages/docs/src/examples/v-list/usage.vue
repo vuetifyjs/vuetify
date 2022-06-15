@@ -10,14 +10,14 @@
       </v-list-item-header>
     </v-list-item>
 
-    <v-list-item two-line>
+    <v-list-item lines="two">
       <v-list-item-header>
         <v-list-item-title>Two-line item</v-list-item-title>
         <v-list-item-subtitle>Secondary text</v-list-item-subtitle>
       </v-list-item-header>
     </v-list-item>
 
-    <v-list-item three-line>
+    <v-list-item lines="three">
       <v-list-item-header>
         <v-list-item-title>Three-line item</v-list-item-title>
         <v-list-item-subtitle>

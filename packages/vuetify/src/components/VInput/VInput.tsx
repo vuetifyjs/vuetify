@@ -8,6 +8,7 @@ import { VMessages } from '@/components/VMessages'
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
@@ -32,8 +33,8 @@ export interface VInputSlot {
 
 export const makeVInputProps = propsFactory({
   id: String,
-  appendIcon: String,
-  prependIcon: String,
+  appendIcon: IconValue,
+  prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
@@ -66,13 +67,15 @@ export const VInput = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:prepend': (e: MouseEvent) => true,
-    'click:append': (e: MouseEvent) => true,
     'update:modelValue': (val: any) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+
+    const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
+
     const {
       errorMessages,
       isDirty,
@@ -85,10 +88,7 @@ export const VInput = genericComponent<new <T>() => {
       resetValidation,
       validate,
       validationClasses,
-    } = useValidation(props)
-
-    const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
+    } = useValidation(props, 'v-input', id)
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
@@ -131,7 +131,7 @@ export const VInput = genericComponent<new <T>() => {
 
               { props.prependIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:prepend', e) }
+                  onClick={ attrs['onClick:prepend'] }
                   icon={ props.prependIcon }
                 />
               ) }
@@ -152,7 +152,7 @@ export const VInput = genericComponent<new <T>() => {
 
               { props.appendIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:append', e) }
+                  onClick={ attrs['onClick:append'] }
                   icon={ props.appendIcon }
                 />
               ) }

@@ -11,6 +11,7 @@ import { VField } from '@/components/VField'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
@@ -54,7 +55,7 @@ export const VFileInput = defineComponent({
     ...makeVInputProps(),
 
     prependIcon: {
-      type: String,
+      type: IconValue,
       default: '$file',
     },
     modelValue: {
@@ -134,7 +135,7 @@ export const VFileInput = defineComponent({
     }
 
     useRender(() => {
-      const hasCounter = !!(slots.counter || props.counter || counterValue.value)
+      const hasCounter = !!(slots.counter || props.counter)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -225,6 +226,7 @@ export const VFileInput = defineComponent({
                 <span />
 
                 <VCounter
+                  active={ !!model.value.length }
                   value={ counterValue.value }
                   v-slots={ slots.counter }
                 />

@@ -31,6 +31,7 @@ export const VExpansionPanels = defineComponent({
       default: 'default',
       validator: (v: any) => allowedVariants.includes(v),
     },
+    readonly: Boolean,
 
     ...makeGroupProps(),
     ...makeTagProps(),
@@ -51,6 +52,9 @@ export const VExpansionPanels = defineComponent({
     provideDefaults({
       VExpansionPanel: {
         color: toRef(props, 'color'),
+      },
+      VExpansionPanelTitle: {
+        readonly: toRef(props, 'readonly'),
       },
     })
 

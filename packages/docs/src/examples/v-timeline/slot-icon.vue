@@ -1,12 +1,8 @@
 <template>
   <v-timeline>
-    <v-timeline-item
-      size="large"
-    >
+    <v-timeline-item size="large">
       <template v-slot:icon>
-        <v-avatar>
-          <img src="https://i.pravatar.cc/64">
-        </v-avatar>
+        <v-avatar image="https://i.pravatar.cc/64"></v-avatar>
       </template>
       <template v-slot:opposite>
         <span>Tus eu perfecto</span>

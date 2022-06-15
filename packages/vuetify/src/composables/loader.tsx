@@ -6,8 +6,7 @@ import { computed } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
-import type { ExtractPropTypes } from 'vue'
-import type { SetupContext } from '@vue/runtime-core'
+import type { ExtractPropTypes, SetupContext } from 'vue'
 import type { MakeSlots, SlotsToProps } from '@/util'
 
 export interface LoaderSlotProps {

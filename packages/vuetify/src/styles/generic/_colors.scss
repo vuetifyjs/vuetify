@@ -5,7 +5,6 @@
 
 @mixin background-color($color_value) {
   background-color: $color_value !important;
-  border-color: $color_value !important;
 }
 @mixin text-color($color_value) {
   color: $color_value !important;

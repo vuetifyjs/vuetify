@@ -26,11 +26,13 @@
     "activeIcon": "mdi-image-edit",
     "items": [
       "application-layout",
-      "theme",
       "display-and-platform",
-      "icon-fonts",
       "global-configuration",
-      "internationalization"
+      "icon-fonts",
+      "internationalization",
+      "sass-variables",
+      "theme",
+      "treeshaking"
     ]
   },
   {
@@ -66,6 +68,7 @@
       "avatars",
       "badges",
       "banners",
+      "bottom-navigation",
       "breadcrumbs",
       "buttons",
       "cards",
@@ -88,6 +91,7 @@
           "forms",
           "inputs",
           "radio-buttons",
+          "selects",
           "sliders",
           "range-sliders",
           "switches",
@@ -100,6 +104,7 @@
         "title": "groups",
         "items": [
           "button-groups",
+          "chip-groups",
           "item-groups",
           "slide-groups",
           "windows"

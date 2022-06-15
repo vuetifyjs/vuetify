@@ -1,9 +1,9 @@
 // Utilities
-import { getCurrentInstance, propsFactory } from '@/util'
+import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
-  onBeforeUnmount,
-  onMounted,
+  nextTick,
+  onScopeDispose,
   resolveDynamicComponent,
   toRef,
 } from 'vue'
@@ -73,21 +73,33 @@ export const makeRouterProps = propsFactory({
   to: [String, Object] as PropType<RouteLocationRaw>,
 }, 'router')
 
-export function useBackButton (cb: (next: NavigationGuardNext) => void) {
-  const router = useRouter()
+let inTransition = false
+export function useBackButton (router: Router | undefined, cb: (next: NavigationGuardNext) => void) {
   let popped = false
-  let removeGuard: (() => void) | undefined
+  let removeBefore: (() => void) | undefined
+  let removeAfter: (() => void) | undefined
 
-  onMounted(() => {
-    window.addEventListener('popstate', onPopstate)
-    removeGuard = router?.beforeEach((to, from, next) => {
-      setTimeout(() => popped ? cb(next) : next())
+  if (IN_BROWSER) {
+    nextTick(() => {
+      window.addEventListener('popstate', onPopstate)
+      removeBefore = router?.beforeEach((to, from, next) => {
+        if (!inTransition) {
+          setTimeout(() => popped ? cb(next) : next())
+        } else {
+          popped ? cb(next) : next()
+        }
+        inTransition = true
+      })
+      removeAfter = router?.afterEach(() => {
+        inTransition = false
+      })
     })
-  })
-  onBeforeUnmount(() => {
-    window.removeEventListener('popstate', onPopstate)
-    removeGuard?.()
-  })
+    onScopeDispose(() => {
+      window.removeEventListener('popstate', onPopstate)
+      removeBefore?.()
+      removeAfter?.()
+    })
+  }
 
   function onPopstate (e: PopStateEvent) {
     if (e.state?.replaced) return

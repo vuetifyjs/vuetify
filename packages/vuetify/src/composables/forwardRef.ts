@@ -23,16 +23,20 @@ export function useForwardRef<T extends {}, U extends Ref<{} | undefined>[]> (
       const descriptor = Reflect.getOwnPropertyDescriptor(target, key)
       if (descriptor) return descriptor
 
+      // Check each ref's own properties
       for (const ref of refs) {
         if (!ref.value) continue
         const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
         if (descriptor) return descriptor
       }
+      // Recursive search up each ref's prototype
       for (const ref of refs) {
-        const obj = ref.value && Object.getPrototypeOf(ref.value)
-        if (!obj) continue
-        const descriptor = Reflect.getOwnPropertyDescriptor(obj, key)
-        if (descriptor) return descriptor
+        let obj = ref.value && Object.getPrototypeOf(ref.value)
+        while (obj) {
+          const descriptor = Reflect.getOwnPropertyDescriptor(obj, key)
+          if (descriptor) return descriptor
+          obj = Object.getPrototypeOf(obj)
+        }
       }
       return undefined
     },

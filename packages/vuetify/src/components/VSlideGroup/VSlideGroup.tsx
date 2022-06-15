@@ -11,6 +11,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/rtl'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
@@ -37,11 +38,11 @@ export const VSlideGroup = defineComponent({
       default: VSlideGroupSymbol,
     },
     nextIcon: {
-      type: String,
+      type: IconValue,
       default: '$next',
     },
     prevIcon: {
-      type: String,
+      type: IconValue,
       default: '$prev',
     },
     showArrows: {
@@ -75,15 +76,15 @@ export const VSlideGroup = defineComponent({
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const contentRef = ref<HTMLElement>()
+    const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
     watchEffect(() => {
-      if (!containerRect.value || !contentRef.value) return
+      if (!containerRect.value || !contentRect.value) return
 
       const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
       containerSize.value = containerRect.value[sizeProperty]
-      contentSize.value = contentRef.value.getBoundingClientRect()[sizeProperty]
+      contentSize.value = contentRect.value[sizeProperty]
 
       isOverflowing.value = containerSize.value + 1 < contentSize.value
     })

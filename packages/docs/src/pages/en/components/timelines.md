@@ -39,17 +39,29 @@ v-timeline-item description -->
 
 ### Props
 
-#### Color
+#### Direction
 
-Colored dots create visual breakpoints that make your timelines easier to read.
+Switch between a horizontal and vertical timeline in real-time using the **direction** prop.
 
-<example file="v-timeline/prop-color" />
+<example file="v-timeline/prop-direction" />
 
-#### Single side
+#### Side
 
-**single-side** positions all items to one side of the timeline. In this example, `v-alert` replaces the card to provide a different design.
+Use the **side** property to force all items to one side of the timeline.
 
 <example file="v-timeline/prop-single-side" />
+
+#### Alignment
+
+By default, `v-timeline-item` content is vertically aligned `center`. The **align** prop also supports `top` alignment.
+
+<example file="v-timeline/prop-align" />
+
+#### Dot color
+
+Colored dots create visual breakpoints that make your timelines easier for users to read.
+
+<example file="v-timeline/prop-color" />
 
 #### Icon dots
 
@@ -57,17 +69,35 @@ Use icons within the `v-timeline-item` dot to provide additional context.
 
 <example file="v-timeline/prop-icon-dots" />
 
-#### Mirror
+<!-- #### Mirror
 
 You can mirror the placement of the timeline items by using the **mirror** prop.
 
-<example file="v-timeline/prop-mirror" />
+<example file="v-timeline/prop-mirror" /> -->
 
 #### Size
 
 The **size** prop allows you to customize the size of each dot.
 
 <example file="v-timeline/prop-size" />
+
+#### Truncated line
+
+Truncate the start, end or both ends of the timeline center line by using the **truncate-line** prop.
+
+<example file="v-timeline/prop-truncate-line" />
+
+#### Line inset
+
+Modify the inset of dividing lines by specifying a custom amount using the **line-inset** prop.
+
+<alert type="warning">
+
+  It is not possible to use the **line-inset** prop together with the **truncate-line** prop. The **line-inset** prop will take precedence if both are specified.
+
+</alert>
+
+<example file="v-timeline/prop-line-inset" />
 
 ### Slots
 
@@ -94,8 +124,6 @@ If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on th
 ### Misc
 
 #### Advanced
-
-Modular components allow you to create highly customized solutions that just work.
 
 <example file="v-timeline/misc-advanced" />
 

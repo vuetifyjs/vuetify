@@ -11,6 +11,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -51,8 +52,8 @@ export const makeSelectionControlProps = propsFactory({
   id: String,
   inline: Boolean,
   label: String,
-  falseIcon: String,
-  trueIcon: String,
+  falseIcon: IconValue,
+  trueIcon: IconValue,
   ripple: {
     type: Boolean,
     default: true,
@@ -105,6 +106,8 @@ export function useSelectionControl (
         : props.valueComparator(val, trueValue.value)
     },
     set (val: boolean) {
+      if (props.readonly) return
+
       const currentValue = val ? trueValue.value : falseValue.value
 
       let newVal = currentValue
@@ -224,10 +227,12 @@ export const VSelectionControl = genericComponent<new <T>() => {
             densityClasses.value,
           ]}
         >
-          <div class={[
-            'v-selection-control__wrapper',
-            textColorClasses.value,
-          ]}
+          <div
+            class={[
+              'v-selection-control__wrapper',
+              textColorClasses.value,
+            ]}
+            style={ textColorStyles.value }
           >
             { slots.default?.() }
 
@@ -235,7 +240,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
               class={[
                 'v-selection-control__input',
               ]}
-              style={ textColorStyles.value }
               v-ripple={ props.ripple && [
                 !props.disabled && !props.readonly,
                 null,
@@ -251,7 +255,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
-                readonly={ props.readonly }
+                aria-readonly={ props.readonly }
                 type={ type }
                 value={ trueValue.value }
                 name={ group?.name.value ?? props.name }

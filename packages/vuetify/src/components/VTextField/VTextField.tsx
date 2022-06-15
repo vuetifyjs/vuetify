@@ -54,13 +54,9 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:append': (e: MouseEvent) => true,
-    'click:append-inner': (e: MouseEvent) => true,
     'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'click:input': (e: MouseEvent) => true,
-    'click:prepend': (e: MouseEvent) => true,
-    'click:prepend-inner': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
 
@@ -143,14 +139,13 @@ export const VTextField = genericComponent<new <T>() => {
           class={[
             'v-text-field',
             {
-              'v-text-field--persistent-placeholder': props.persistentPlaceholder,
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
-          onClick:prepend={ (e: MouseEvent) => emit('click:prepend', e) }
-          onClick:append={ (e: MouseEvent) => emit('click:append', e) }
+          onClick:prepend={ attrs['onClick:prepend'] }
+          onClick:append={ attrs['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           messages={ messages.value }
@@ -158,6 +153,7 @@ export const VTextField = genericComponent<new <T>() => {
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -172,10 +168,11 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
-                onClick:prependInner={ (e: MouseEvent) => emit('click:prepend-inner', e) }
-                onClick:appendInner={ (e: MouseEvent) => emit('click:append-inner', e) }
+                onClick:prependInner={ attrs['onClick:prependInner'] }
+                onClick:appendInner={ attrs['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 focused={ isFocused.value }
@@ -197,6 +194,7 @@ export const VTextField = genericComponent<new <T>() => {
                         <div
                           class={ fieldClass }
                           onClick={ e => emit('click:input', e) }
+                          data-no-activator=""
                         >
                           { slots.default?.() }
 
@@ -209,6 +207,7 @@ export const VTextField = genericComponent<new <T>() => {
                             autofocus={ props.autofocus }
                             readonly={ isReadonly.value }
                             disabled={ isDisabled.value }
+                            name={ props.name }
                             placeholder={ props.placeholder }
                             size={ 1 }
                             type={ props.type }

@@ -3,7 +3,7 @@
     <v-tabs
       v-model="tab"
       color="deep-purple-accent-4"
-      right
+      end
     >
       <v-tab :value="1">Landscape</v-tab>
       <v-tab :value="2">City</v-tab>

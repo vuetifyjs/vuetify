@@ -38,16 +38,21 @@ export const VExpansionPanel = defineComponent({
     const { roundedClasses } = useRounded(props)
     const isDisabled = computed(() => groupItem?.disabled.value || props.disabled)
 
+    const selectedIndices = computed(() => groupItem.group.items.value.reduce<number[]>((arr, item, index) => {
+      if (groupItem.group.selected.value.includes(item.id)) arr.push(index)
+      return arr
+    }, []))
+
     const isBeforeSelected = computed(() => {
       const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
+        selectedIndices.value.some(selectedIndex => selectedIndex - index === 1)
     })
 
     const isAfterSelected = computed(() => {
       const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
+        selectedIndices.value.some(selectedIndex => selectedIndex - index === -1)
     })
 
     provide(VExpansionPanelSymbol, groupItem)

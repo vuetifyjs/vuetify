@@ -55,10 +55,6 @@ declare module 'cosmicjs' {
   export default function Cosmic (): Cosmic
 }
 
-declare module 'virtual:pwa-register' {
-  export function registerSW (params: { immediate?: boolean }): void
-}
-
 declare module 'virtual:examples' {
   import type { Component } from 'vue'
 

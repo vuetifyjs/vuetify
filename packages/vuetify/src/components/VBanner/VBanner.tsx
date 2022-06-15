@@ -12,12 +12,14 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
@@ -32,7 +34,7 @@ export const VBanner = defineComponent({
   props: {
     avatar: String,
     color: String,
-    icon: String,
+    icon: IconValue,
     lines: String as PropType<'one' | 'two' | 'three'>,
     stacked: Boolean,
     sticky: Boolean,
@@ -42,6 +44,7 @@ export const VBanner = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -54,7 +57,8 @@ export const VBanner = defineComponent({
     const { mobile } = useDisplay()
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
     const { themeClasses } = provideTheme(props)
@@ -90,7 +94,7 @@ export const VBanner = defineComponent({
           ]}
           style={[
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           role="banner"
         >

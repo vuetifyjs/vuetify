@@ -1,7 +1,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
-import { multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
+import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
   independentSelectStrategy,
@@ -13,14 +13,14 @@ import {
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
-import type { OpenStrategyFn } from './openStrategies'
+import type { OpenStrategy } from './openStrategies'
 
 export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
-export type OpenStrategy = 'single' | 'multiple' | OpenStrategyFn
+export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export interface NestedProps {
   selectStrategy: SelectStrategy | undefined
-  openStrategy: OpenStrategy | undefined
+  openStrategy: OpenStrategyProp | undefined
   selected: string[] | undefined
   opened: string[] | undefined
   mandatory: boolean
@@ -63,7 +63,7 @@ export const emptyNested: NestedProvide = {
 
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as Prop<SelectStrategy>,
-  openStrategy: [String, Function] as Prop<OpenStrategy>,
+  openStrategy: [String, Function] as Prop<OpenStrategyProp>,
   opened: Array as Prop<string[]>,
   selected: Array as Prop<string[]>,
   mandatory: Boolean,
@@ -93,6 +93,7 @@ export const useNested = (props: NestedProps) => {
     if (typeof props.openStrategy === 'function') return props.openStrategy
 
     switch (props.openStrategy) {
+      case 'list': return listOpenStrategy
       case 'single': return singleOpenStrategy
       case 'multiple':
       default: return multipleOpenStrategy
@@ -163,7 +164,7 @@ export const useNested = (props: NestedProps) => {
       open: (id, value, event) => {
         vm.emit('click:open', { id, value, path: getPath(id), event })
 
-        const newOpened = openStrategy.value({
+        const newOpened = openStrategy.value.open({
           id,
           value,
           opened: new Set(opened.value),
@@ -186,6 +187,17 @@ export const useNested = (props: NestedProps) => {
           event,
         })
         newSelected && (selected.value = newSelected)
+
+        const newOpened = openStrategy.value.select({
+          id,
+          value,
+          selected: new Map(selected.value),
+          opened: new Set(opened.value),
+          children: children.value,
+          parents: parents.value,
+          event,
+        })
+        newOpened && (opened.value = newOpened)
       },
       children,
       parents,

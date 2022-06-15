@@ -10,6 +10,7 @@ import { VWindow } from '@/components/VWindow'
 // Composables
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
@@ -26,7 +27,7 @@ export const VCarousel = defineComponent({
     color: String,
     cycle: Boolean,
     delimiterIcon: {
-      type: String,
+      type: IconValue,
       default: '$delimiter',
     },
     height: {

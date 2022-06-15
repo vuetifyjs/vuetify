@@ -1,14 +1,14 @@
 <template>
   <v-container style="max-width: 600px;">
     <v-timeline
-      dense
-      clipped
+      density="compact"
+      side="end"
     >
       <v-timeline-item
         fill-dot
         class="white--text mb-12"
-        color="orange"
-        large
+        dot-color="orange"
+        size="large"
       >
         <template v-slot:icon>
           <span>JL</span>
@@ -16,15 +16,14 @@
         <v-text-field
           v-model="input"
           hide-details
-          flat
           label="Leave a comment..."
-          solo
+          density="compact"
           @keydown.enter="comment"
         >
           <template v-slot:append>
             <v-btn
               class="mx-0"
-              depressed
+              variant="text"
               @click="comment"
             >
               Post
@@ -40,20 +39,13 @@
           v-for="event in timeline"
           :key="event.id"
           class="mb-4"
-          color="pink"
-          small
+          dot-color="pink"
+          size="small"
         >
-          <v-row justify="space-between">
-            <v-col
-              cols="7"
-              v-text="event.text"
-            ></v-col>
-            <v-col
-              class="text-right"
-              cols="5"
-              v-text="event.time"
-            ></v-col>
-          </v-row>
+          <div class="d-flex justify-space-between flex-grow-1">
+            <div>{{ event.text }}</div>
+            <div class="flex-shrink-0">{{ event.time }}</div>
+          </div>
         </v-timeline-item>
       </v-slide-x-transition>
 
@@ -66,64 +58,55 @@
 
       <v-timeline-item
         class="mb-4"
-        color="grey"
-        icon-color="grey lighten-2"
-        small
+        dot-color="grey"
+        size="small"
       >
-        <v-row justify="space-between">
-          <v-col cols="7">
+        <div class="d-flex justify-space-between flex-grow-1">
+          <div>
             This order was archived.
-          </v-col>
-          <v-col
-            class="text-right"
-            cols="5"
-          >
+          </div>
+          <div class="flex-shrink-0">
             15:26 EDT
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-timeline-item>
 
       <v-timeline-item
         class="mb-4"
-        small
+        dot-color="primary"
+        size="small"
       >
-        <v-row justify="space-between">
-          <v-col cols="7">
+        <div class="d-flex justify-space-between flex-grow-1">
+          <div>
             <v-chip
               class="white--text ml-0"
               color="purple"
               label
-              small
+              size="small"
             >
               APP
             </v-chip>
             Digital Downloads fulfilled 1 item.
-          </v-col>
-          <v-col
-            class="text-right"
-            cols="5"
-          >
+          </div>
+          <div class="flex-shrink-0">
             15:25 EDT
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-timeline-item>
 
       <v-timeline-item
         class="mb-4"
-        color="grey"
-        small
+        dot-color="grey"
+        size="small"
       >
-        <v-row justify="space-between">
-          <v-col cols="7">
+        <div class="d-flex justify-space-between flex-grow-1">
+          <div>
             Order confirmation email was sent to John Leider (john@vuetifyjs.com).
-          </v-col>
-          <v-col
-            class="text-right"
-            cols="5"
-          >
+          </div>
+          <div class="flex-shrink-0">
             15:25 EDT
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-timeline-item>
 
       <v-timeline-item
@@ -131,7 +114,7 @@
         hide-dot
       >
         <v-btn
-          class="mx-0"
+          variant="outlined"
         >
           Resend Email
         </v-btn>
@@ -139,37 +122,31 @@
 
       <v-timeline-item
         class="mb-4"
-        color="grey"
-        small
+        dot-color="grey"
+        size="small"
       >
-        <v-row justify="space-between">
-          <v-col cols="7">
+        <div class="d-flex justify-space-between flex-grow-1">
+          <div>
             A $15.00 USD payment was processed on PayPal Express Checkout
-          </v-col>
-          <v-col
-            class="text-right"
-            cols="5"
-          >
+          </div>
+          <div class="flex-shrink-0">
             15:25 EDT
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-timeline-item>
 
       <v-timeline-item
-        color="grey"
-        small
+        dot-color="grey"
+        size="small"
       >
-        <v-row justify="space-between">
-          <v-col cols="7">
+        <div class="d-flex justify-space-between flex-grow-1">
+          <div>
             John Leider placed this order on Online Store (checkout #1937432132572).
-          </v-col>
-          <v-col
-            class="text-right"
-            cols="5"
-          >
+          </div>
+          <div class="flex-shrink-0">
             15:25 EDT
-          </v-col>
-        </v-row>
+          </div>
+        </div>
       </v-timeline-item>
     </v-timeline>
   </v-container>

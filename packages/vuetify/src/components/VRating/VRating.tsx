@@ -11,6 +11,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -26,7 +27,7 @@ type VRatingItemSlot = {
   index: number
   isFilled: boolean
   isHovered: boolean
-  icon: string
+  icon: IconValue
   color?: string
   props: Record<string, unknown>
 }
@@ -56,11 +57,11 @@ export const VRating = genericComponent<new <T>() => {
     clearable: Boolean,
     disabled: Boolean,
     emptyIcon: {
-      type: String,
+      type: IconValue,
       default: '$ratingEmpty',
     },
     fullIcon: {
-      type: String,
+      type: IconValue,
       default: '$ratingFull',
     },
     halfIncrements: Boolean,

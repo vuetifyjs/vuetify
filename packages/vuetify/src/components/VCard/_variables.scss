@@ -40,7 +40,6 @@ $card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', '
 $card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
 $card-subtitle-padding: 0 1rem !default;
 $card-subtitle-text-transform: none !default;
-$card-text-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-text-comfortable-line-height: 1.2rem !default;
 $card-text-compact-line-height: 1.15rem !default;
 $card-text-flex: 1 1 auto !default;

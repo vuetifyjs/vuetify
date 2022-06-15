@@ -18,14 +18,14 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSelectLink } from '@/composables/selectLink'
 import { useList } from './list'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 
@@ -66,15 +66,16 @@ export const VListItem = genericComponent<new () => {
     activeColor: String,
     activeClass: String,
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     disabled: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
     nav: Boolean,
     prependAvatar: String,
-    prependIcon: String,
-    subtitle: String,
-    title: String,
+    prependIcon: IconValue,
+    subtitle: [String, Number, Boolean],
+    title: [String, Number, Boolean],
     value: null,
+    link: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -101,11 +102,9 @@ export const VListItem = genericComponent<new () => {
       variant: props.variant,
     }))
 
-    onMounted(() => {
-      if (link.isExactActive?.value && parent.value != null) {
-        root.open(parent.value, true)
-      }
-    })
+    if (link.isExactActive?.value && parent.value != null) {
+      root.open(parent.value, true)
+    }
 
     watch(() => link.isExactActive?.value, val => {
       if (val && parent.value != null) {
@@ -129,8 +128,6 @@ export const VListItem = genericComponent<new () => {
       isIndeterminate: isIndeterminate.value,
     }))
 
-    useSelectLink(link, select)
-
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasColor = !list || isSelected.value || isActive.value
@@ -139,7 +136,7 @@ export const VListItem = genericComponent<new () => {
       const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (link.isClickable.value || (props.value != null && !!list))
+      const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -174,7 +171,7 @@ export const VListItem = genericComponent<new () => {
             if (isGroupActivator) return
 
             link.navigate?.(e)
-            select(!isSelected.value, e)
+            props.value != null && select(!isSelected.value, e)
           })}
           v-ripple={ isClickable }
         >
