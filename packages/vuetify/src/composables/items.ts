@@ -1,24 +1,30 @@
 // Utilities
 import { computed } from 'vue'
-import { getObjectValueByPath, getPropertyFromItem, propsFactory } from '@/util'
+import { getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
 export interface InternalItem {
-  [key: string]: any
   title: string
   value: any
+  props: {
+    [key: string]: any
+    title: string
+    value: any
+  }
   children?: InternalItem[]
+  originalItem: any
 }
 
 export interface ItemProps {
-  items: (string | Partial<InternalItem>)[]
+  items: any[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
-  itemChildren: string
-  itemProps: (item: any) => Partial<InternalItem>
+  itemChildren: SelectItemKey
+  itemProps: SelectItemKey
+  returnObject: boolean
 }
 
 // Composables
@@ -36,29 +42,38 @@ export const makeItemsProps = propsFactory({
     default: 'value',
   },
   itemChildren: {
-    type: String,
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'children',
   },
   itemProps: {
-    type: Function as PropType<ItemProps['itemProps']>,
-    default: (item: any) => ({}),
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'props',
   },
+  returnObject: Boolean,
 }, 'item')
 
-export function transformItem (props: ItemProps, item: any) {
+export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
-  const children = getObjectValueByPath(item, props.itemChildren)
+  const children = getPropertyFromItem(item, props.itemChildren)
+  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
 
-  return {
+  const _props = {
     title,
     value,
+    ...itemProps,
+  }
+
+  return {
+    title: _props.title,
+    value: _props.value,
+    props: _props,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
-    ...props.itemProps?.(item),
+    originalItem: item,
   }
 }
 
-export function transformItems (props: ItemProps, items: ItemProps['items']) {
+export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
   const array: InternalItem[] = []
 
   for (const item of items) {
@@ -71,5 +86,14 @@ export function transformItems (props: ItemProps, items: ItemProps['items']) {
 export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
-  return { items }
+  function transformIn (value: any[]): InternalItem[] {
+    return value.map(item => transformItem(props, item))
+  }
+
+  function transformOut (value: InternalItem[]) {
+    if (props.returnObject) return value.map(({ originalItem: item }) => item)
+    return value.map(({ props }) => props.value)
+  }
+
+  return { items, transformIn, transformOut }
 }

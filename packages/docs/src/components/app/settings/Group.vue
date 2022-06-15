@@ -22,6 +22,7 @@
           <v-item :value="text">
             <template #default="{ isSelected, toggle }">
               <v-card
+                :ref="'item-' + text"
                 :color="isSelected ? 'primary' : `grey-${dark ? 'darken' : 'lighten'}-3`"
                 class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
                 rounded
@@ -63,7 +64,7 @@
       const { t } = useI18n()
       const theme = useTheme()
 
-      return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
+      return { t, dark: computed(() => theme.current.value.dark) }
     },
   })
 </script>

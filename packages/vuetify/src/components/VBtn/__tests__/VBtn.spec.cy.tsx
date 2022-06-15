@@ -4,7 +4,6 @@ import { VBtn } from '../VBtn'
 import { generate, gridOn } from '@/../cypress/templates'
 import { createRouter, createWebHistory } from 'vue-router'
 
-const loadingText = 'Loading'
 const anchor = {
   href: '#my-anchor',
   hash: 'my-anchor',
@@ -14,11 +13,11 @@ const anchor = {
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
 const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
-const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text']
+const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
 const props = {
   color: colors,
-  variant: variants,
-  disabled: false,
+  // variant: variants,
+  // disabled: false,
   // loading: false,
 }
 
@@ -26,9 +25,27 @@ const stories = {
   'Default button': <VBtn>Basic button</VBtn>,
   'Small success button': <VBtn color="success" size="small">Completed!</VBtn>,
   'Large, plain button w/ error': <VBtn color="error" variant="plain" size="large">Whoops</VBtn>,
-  // 'Loading button': <VBtn loading v-slots={ { loader: <span>Loading...</span> } }></VBtn>,
+  Loading: (
+    <div style={{ display: 'flex', gap: '1.2rem' }}>
+      <VBtn>{{ loader: () => <span>Loading...</span>, default: () => 'Default Content' }}</VBtn>
+      <VBtn loading>{{ loader: () => <span>Loading...</span>, default: () => 'Default Content' }}</VBtn>
+      <VBtn loading>{{ loader: () => <span>Loading...</span> }}</VBtn>
+      <VBtn loading>Default Content</VBtn>
+    </div>
+  ),
   Icon: <VBtn icon="mdi-vuetify" color="pink"></VBtn>,
-  'Density + size': gridOn(densities, sizes, (density, size) => <VBtn size={ size } density={ density }>{ size }</VBtn>),
+  'Density + size': gridOn(densities, sizes, (density, size) =>
+    <VBtn size={ size } density={ density }>{ size }</VBtn>
+  ),
+  Variants: gridOn(['no color', 'primary'], variants, (color, variant) =>
+    <VBtn color={ color } variant={ variant }>{ variant }</VBtn>
+  ),
+  'Disabled variants': gridOn(['no color', 'primary'], variants, (color, variant) =>
+    <VBtn disabled color={ color } variant={ variant }>{ variant }</VBtn>
+  ),
+  Stacked: gridOn([undefined], variants, (_, variant) =>
+    <VBtn stacked prependIcon="mdi-vuetify" variant={ variant }>{ variant }</VBtn>
+  ),
 }
 
 // Actual tests
@@ -127,7 +144,6 @@ describe('VBtn', () => {
 
   // These tests were copied over from the previous Jest tests,
   // but they are breaking because the features have not been implemented
-
   describe.skip('disabled', () => {
     // The actual behavior here is working, but the color class name isn't being removed
     // We can _technically_ test that the background is NOT the color's background,
@@ -147,27 +163,6 @@ describe('VBtn', () => {
       cy.mount(<VBtn activeClass="my-active-class">Active Class</VBtn>)
         .get('.my-active-class')
         .should('exist')
-    })
-  })
-
-  describe.skip('loading', () => {
-    it('when using the loader slot, do not show the progress indicator', () => {
-      cy.mount(() => (
-        <VBtn loading v-slots={ { loader: () => <span>{ loadingText }</span> } } />
-      ))
-        .get('button')
-        .should('contain.text', loadingText)
-        .get('role[progressbar]')
-        .should('not.exist')
-    })
-
-    // custom loaders are not yet implemented
-    it('when loading is true, show the progress indicator', () => {
-      cy.mount(<VBtn loading>{ loadingText }</VBtn>)
-        .get('button')
-        .should('contain.text', loadingText)
-        .get('role[progressbar]')
-        .should('be.visible')
     })
   })
 
@@ -275,7 +270,7 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+  describe('Showcase', { viewportHeight: 1525, viewportWidth: 800 }, () => {
     generate({ stories, props, component: VBtn })
   })
 })

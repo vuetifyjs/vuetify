@@ -120,7 +120,7 @@ describe('VNavigationDrawer', () => {
   it('should position drawer to the right', () => {
     cy.mount(() => (
       <VLayout>
-        <VNavigationDrawer position="right" permanent />
+        <VNavigationDrawer location="right" permanent />
       </VLayout>
     ))
 
@@ -130,7 +130,7 @@ describe('VNavigationDrawer', () => {
   it('should position drawer on the bottom', () => {
     cy.mount(() => (
       <VLayout>
-        <VNavigationDrawer position="bottom" permanent />
+        <VNavigationDrawer location="bottom" permanent />
       </VLayout>
     ))
 

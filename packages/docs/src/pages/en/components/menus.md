@@ -66,11 +66,11 @@ You can disable the menu. Disabled menus can't be opened.
 
 <example file="v-menu/prop-disabled" /> -->
 
-#### Anchor
+#### Location
 
-Menu can be offset relative to the activator by using the **anchor** prop. Read more about **anchor** [here](/components/overlays).
+Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location).
 
-<example file="v-menu/prop-anchor" />
+<example file="v-menu/prop-location" />
 
 #### Open on hover
 

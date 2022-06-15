@@ -8,11 +8,18 @@ import { computed, unref } from 'vue'
 // Types
 import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
+import type { InternalItem } from './items'
 
+/**
+ * - match without highlight
+ * - single match (index), length already known
+ * - single match (start, end)
+ * - multiple matches (start, end), probably shouldn't overlap
+ */
+export type FilterMatch = boolean | number | [number, number] | [number, number][]
 export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
-export type FilterMatch = number | [number, number] | [number, number][] | boolean
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
 
 export interface FilterProps {
@@ -41,8 +48,8 @@ export const makeFilterProps = propsFactory({
   noFilter: Boolean,
 }, 'filter')
 
-export function filterItems<T = Record<string, any>> (
-  items: T[],
+export function filterItems (
+  items: any[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -52,7 +59,7 @@ export function filterItems<T = Record<string, any>> (
     noFilter?: boolean
   },
 ) {
-  const array: { item: T, matches: Record<string, FilterMatch> }[] = []
+  const array: { index: number, matches: Record<string, FilterMatch> }[] = []
   // always ensure we fall back to a functioning filter
   const filter = options?.default ?? defaultFilter
   const keys = options?.filterKeys ? wrapInArray(options.filterKeys) : false
@@ -61,27 +68,35 @@ export function filterItems<T = Record<string, any>> (
   if (!items?.length) return array
 
   loop:
-  for (const item of items) {
+  for (let i = 0; i < items.length; i++) {
+    const item = items[i]
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
 
-    if (query && typeof item === 'object' && !options?.noFilter) {
-      const filterKeys = keys || Object.keys(item)
+    if (query && !options?.noFilter) {
+      if (typeof item === 'object') {
+        const filterKeys = keys || Object.keys(item)
 
-      for (const key of filterKeys) {
-        const value = getPropertyFromItem(item as any, key, item)
-        const keyFilter = options?.customKeyFilter?.[key]
+        for (const key of filterKeys) {
+          const value = getPropertyFromItem(item as any, key, item)
+          const keyFilter = options?.customKeyFilter?.[key]
 
-        match = keyFilter
-          ? keyFilter(value, query, item)
-          : filter(value, query, item)
+          match = keyFilter
+            ? keyFilter(value, query, item)
+            : filter(value, query, item)
 
+          if (match !== -1 && match !== false) {
+            if (keyFilter) customMatches[key] = match
+            else defaultMatches[key] = match
+          } else if (options?.filterMode === 'every') {
+            continue loop
+          }
+        }
+      } else {
+        match = filter(item, query, item)
         if (match !== -1 && match !== false) {
-          if (keyFilter) customMatches[key] = match
-          else defaultMatches[key] = match
-        } else if (options?.filterMode === 'every') {
-          continue loop
+          defaultMatches.title = match
         }
       }
 
@@ -105,15 +120,15 @@ export function filterItems<T = Record<string, any>> (
       ) continue
     }
 
-    array.push({ item, matches: { ...defaultMatches, ...customMatches } })
+    array.push({ index: i, matches: { ...defaultMatches, ...customMatches } })
   }
 
   return array
 }
 
-export function useFilter<T> (
+export function useFilter (
   props: FilterProps,
-  items: MaybeRef<T[]>,
+  items: MaybeRef<InternalItem[]>,
   query?: Ref<string | undefined>,
 ) {
   const strQuery = computed(() => (
@@ -122,8 +137,9 @@ export function useFilter<T> (
   ) ? '' : String(query.value))
 
   const filteredItems = computed(() => {
-    return filterItems(
-      unref(items),
+    const transformedItems = unref(items)
+    const matches = filterItems(
+      transformedItems,
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
@@ -133,6 +149,11 @@ export function useFilter<T> (
         noFilter: props.noFilter,
       },
     )
+
+    return matches.map(({ index, matches }) => ({
+      item: transformedItems[index],
+      matches,
+    }))
   })
 
   return { filteredItems }

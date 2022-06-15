@@ -52,7 +52,7 @@
           lightLogo = '',
         } = sponsor?.value?.metadata ?? {}
 
-        const current = theme.getTheme(theme.current.value)
+        const current = theme.current.value
         return !current.dark ? logolight.url || lightLogo : logodark.url || darkLogo
       })
 
