@@ -6,7 +6,7 @@
           <v-list-item-title> Item 1 </v-list-item-title>
         </v-list-item>
 
-        <v-list-item>
+        <v-list-item disabled>
           <v-list-item-title> Item 2 </v-list-item-title>
         </v-list-item>
 
