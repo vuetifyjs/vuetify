@@ -6,6 +6,15 @@
   .v-calendar-category__column-header
     border-right: map-deep-get($material, 'calendar', 'line-color') $calendar-line-width solid
 
+  .v-calendar-daily__head
+    background: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-daily__intervals-head
+    background: map-deep-get($material, 'calendar', 'background-color')
+
+  .v-calendar-daily__intervals-body
+    background: map-deep-get($material, 'calendar', 'background-color')
+
 .v-calendar-category
   overflow: auto
   position: relative
@@ -33,7 +42,6 @@
     min-width: 100%
     position: sticky
     top: 0
-    background: white
     z-index: 2
 
   .v-calendar-daily_head-day
@@ -44,7 +52,6 @@
     position: sticky
     left: 0
     top: 0
-    background: white
     z-index: 2
 
   .v-calendar-daily_head-weekday
@@ -63,7 +70,6 @@
   .v-calendar-daily__intervals-body
     position: sticky
     left: 0
-    background: white
     z-index: 1
 
   .v-calendar-daily__interval

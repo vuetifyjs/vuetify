@@ -33,6 +33,8 @@ A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` 
 
 ## Functional Components
 
+<vuetify-ad slug="vs-video-functional-components" />
+
 ### v-card-actions
 
 The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.

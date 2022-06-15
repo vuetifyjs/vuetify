@@ -67,6 +67,8 @@ This will start the Vue User Interface and open a new window in your browser. On
 
 ## Nuxt install
 
+<vuetify-ad slug="vs-video-nuxt" />
+
 Vuetify can be added by installing the Nuxt Vuetify module.
 
 ```bash

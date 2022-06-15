@@ -8,10 +8,10 @@
       ></div>
     </v-col>
     <v-col
-      cols="12"
-      md="3"
       v-for="value in ['t', 'r', 'b', 'l', 'tl', 'tr', 'br', 'bl']"
       :key="value"
+      cols="12"
+      md="3"
     >
       <div
         :class="`pa-4 text-center secondary rounded-lg rounded-${value}-0`"

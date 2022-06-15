@@ -30,6 +30,10 @@ export default baseMixins.extend({
     },
     disabled: Boolean,
     internalActivator: Boolean,
+    openOnClick: {
+      type: Boolean,
+      default: true,
+    },
     openOnHover: Boolean,
     openOnFocus: Boolean,
   },
@@ -89,7 +93,7 @@ export default baseMixins.extend({
     },
     genActivatorAttributes () {
       return {
-        role: 'button',
+        role: (this.openOnClick && !this.openOnHover) ? 'button' : undefined,
         'aria-haspopup': true,
         'aria-expanded': String(this.isActive),
       }
@@ -108,7 +112,7 @@ export default baseMixins.extend({
           this.getActivator(e)
           this.runDelay('close')
         }
-      } else {
+      } else if (this.openOnClick) {
         listeners.click = (e: MouseEvent) => {
           const activator = this.getActivator(e)
           if (activator) activator.focus()

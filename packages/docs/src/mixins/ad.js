@@ -61,7 +61,11 @@ export default {
       return this.current?.metadata?.sponsored
     },
     src () {
-      return this.compact || this.current?.metadata?.src
+      return (
+        this.compact ||
+        this.current?.metadata?.images?.logo?.url ||
+        this.current?.metadata?.src
+      )
     },
   },
 

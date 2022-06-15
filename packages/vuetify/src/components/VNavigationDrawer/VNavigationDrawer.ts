@@ -444,7 +444,7 @@ export default baseMixins.extend({
       return isNaN(width) ? this.$el.clientWidth : width
     },
     updateMiniVariant (val: boolean) {
-      if (this.miniVariant !== val) this.$emit('update:mini-variant', val)
+      if (this.expandOnHover && this.miniVariant !== val) this.$emit('update:mini-variant', val)
     },
   },
 
