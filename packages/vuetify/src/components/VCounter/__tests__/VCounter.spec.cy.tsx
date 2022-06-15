@@ -6,14 +6,9 @@ import { generate } from '@/../cypress/templates'
 const props = {}
 
 const stories = {
-  'Default counter': <VCounter />,
+  Default: <VCounter />,
 }
-
 // Tests
 describe('VCounter', () => {
-  // TODO
-
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
-    generate({ stories, props, component: VCounter })
-  })
+  generate({ stories, props, component: VCounter })
 })
