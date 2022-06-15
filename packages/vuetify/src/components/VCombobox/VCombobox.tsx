@@ -108,7 +108,7 @@ export const VCombobox = genericComponent<new <
       v => transformIn(wrapInArray(v || [])),
       v => {
         const transformed = transformOut(v)
-        return props.multiple ? transformed : transformed[0]
+        return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const _search = ref('')
@@ -116,9 +116,9 @@ export const VCombobox = genericComponent<new <
       get: () => {
         if (props.multiple) return _search.value
 
-        const item = items.value.find(({ props }) => props.value === model.value[0])
+        const item = items.value.find(item => item.value === model.value[0]?.value)
 
-        return item?.props.value
+        return item?.value
       },
       set: val => {
         if (props.multiple) {
@@ -237,9 +237,6 @@ export const VCombobox = genericComponent<new <
         search.value = ''
       }
     }
-    function onInput (e: InputEvent) {
-      search.value = (e.target as HTMLInputElement).value
-    }
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
@@ -290,8 +287,9 @@ export const VCombobox = genericComponent<new <
       return (
         <VTextField
           ref={ vTextFieldRef }
-          modelValue={ search.value }
-          onInput={ onInput }
+          v-model={ search.value }
+          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          validationValue={ props.modelValue }
           class={[
             'v-combobox',
             {
@@ -302,7 +300,6 @@ export const VCombobox = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
-          dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }

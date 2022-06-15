@@ -104,7 +104,7 @@ export const VAutocomplete = genericComponent<new <
       v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
-        return props.multiple ? transformed : transformed[0]
+        return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
@@ -206,6 +206,8 @@ export const VAutocomplete = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           modelValue={ search.value }
+          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          validationValue={ props.modelValue }
           onInput={ onInput }
           class={[
             'v-autocomplete',
@@ -216,7 +218,6 @@ export const VAutocomplete = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
-          dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }
