@@ -3,17 +3,12 @@
 import { VCarousel } from '..'
 import { generate } from '@/../cypress/templates'
 
-const props = {
-
-}
+const props = {}
 
 const stories = {
-  'Default carousel': <VCarousel />,
+  Default: <VCarousel />,
 }
-
 // Tests
 describe('VCarousel', () => {
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
-    generate({ stories, props, component: VCarousel })
-  })
+  generate({ stories, props, component: VCarousel })
 })
