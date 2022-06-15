@@ -6,7 +6,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-start" outlined tile>
-        Aligned flex item
+        Aligned start
       </v-card>
 
       <v-card class="pa-2" outlined tile>
@@ -20,7 +20,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-center" outlined tile>
-        Aligned flex item
+        Aligned center
       </v-card>
 
       <v-card class="pa-2" outlined tile>
@@ -34,7 +34,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-end" outlined tile>
-        Aligned flex item
+        Aligned end
       </v-card>
 
       <v-card class="pa-2" outlined tile>
@@ -48,7 +48,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-baseline" outlined tile>
-        Aligned flex item
+        Aligned baseline
       </v-card>
 
       <v-card class="pa-2" outlined tile>
@@ -62,7 +62,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-auto" outlined tile>
-        Aligned flex item
+        Aligned auto
       </v-card>
 
       <v-card class="pa-2" outlined tile>
@@ -76,7 +76,7 @@
       </v-card>
 
       <v-card class="pa-2 align-self-stretch" outlined tile>
-        Aligned flex item
+        Aligned stretch
       </v-card>
 
       <v-card class="pa-2" outlined tile>
