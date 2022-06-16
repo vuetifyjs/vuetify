@@ -66,7 +66,9 @@ Checkbox labels can be defined in `label` slot - that will allow to use HTML con
 
 #### Inline text-field
 
-You can place `v-checkbox` in line with other components such as `v-text-field`.
+If you need to place checkboxes in line with other components, you can use the `v-checkbox-btn` component.
+
+This component renders just checkbox, without the trapping of a form input such as validation, a label, and messages.
 
 <example file="v-checkbox/misc-inline-textfield" />
 
