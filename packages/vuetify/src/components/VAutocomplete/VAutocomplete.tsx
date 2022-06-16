@@ -88,6 +88,7 @@ export const VAutocomplete = genericComponent<new <
     'click:clear': (e: MouseEvent) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { slots }) {
@@ -95,7 +96,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = ref(false)
+    const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
@@ -323,7 +324,12 @@ export const VAutocomplete = genericComponent<new <
     })
 
     return useForwardRef({
+      isFocused,
+      isPristine,
+      menu,
+      search,
       filteredItems,
+      select,
     }, vTextFieldRef)
   },
 })

@@ -35,6 +35,7 @@ export const makeSelectProps = propsFactory({
   eager: Boolean,
   hideNoData: Boolean,
   hideSelected: Boolean,
+  menu: Boolean,
   menuIcon: {
     type: IconValue,
     default: '$dropdown',
@@ -95,12 +96,13 @@ export const VSelect = genericComponent<new <
 
   emits: {
     'update:modelValue': (val: any) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const menu = ref(false)
+    const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
@@ -272,7 +274,10 @@ export const VSelect = genericComponent<new <
       )
     })
 
-    return useForwardRef({}, vTextFieldRef)
+    return useForwardRef({
+      menu,
+      select,
+    }, vTextFieldRef)
   },
 })
 

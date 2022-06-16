@@ -90,6 +90,7 @@ export const VCombobox = genericComponent<new <
   emits: {
     'update:modelValue': (val: any) => true,
     'update:searchInput': (val: string) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -97,7 +98,7 @@ export const VCombobox = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = ref(false)
+    const menu = useProxiedModel(props, 'menu')
     const selectionIndex = ref(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
