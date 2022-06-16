@@ -3,6 +3,7 @@ import './VAutocomplete.sass'
 
 // Components
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -235,6 +236,7 @@ export const VAutocomplete = genericComponent<new <
                   contentClass="v-autocomplete__content"
                   eager={ props.eager }
                   openOnClick={ false }
+                  closeOnContentClick={ false }
                   transition={ props.transition }
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
@@ -254,6 +256,9 @@ export const VAutocomplete = genericComponent<new <
                         onClick={ () => select(item) }
                       >
                         {{
+                          prepend: ({ isSelected }) => props.multiple ? (
+                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                          ) : undefined,
                           title: () => {
                             return isPristine.value
                               ? item.title

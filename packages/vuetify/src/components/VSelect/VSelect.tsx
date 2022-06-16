@@ -3,6 +3,7 @@ import './VSelect.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -191,6 +192,7 @@ export const VSelect = genericComponent<new <
                   contentClass="v-select__content"
                   eager={ props.eager }
                   openOnClick={ false }
+                  closeOnContentClick={ false }
                   transition={ props.transition }
                   { ...props.menuProps }
                 >
@@ -207,7 +209,13 @@ export const VSelect = genericComponent<new <
                         { ...item.props }
                         onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onClick={ () => select(item) }
-                      />
+                      >
+                        {{
+                          prepend: ({ isSelected }) => props.multiple ? (
+                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                          ) : undefined,
+                        }}
+                      </VListItem>
                     )) }
                   </VList>
                 </VMenu>
