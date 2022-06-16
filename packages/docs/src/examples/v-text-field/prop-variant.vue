@@ -19,7 +19,7 @@
           md="4"
         >
           <v-text-field
-            label="Contained"
+            label="Solo"
             variant="solo"
             placeholder="Placeholder"
           ></v-text-field>

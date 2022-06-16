@@ -21,7 +21,7 @@
         >
           <v-text-field
             color="secondary"
-            label="Contained"
+            label="Solo"
             variant="solo"
             placeholder="Placeholder"
           ></v-text-field>
