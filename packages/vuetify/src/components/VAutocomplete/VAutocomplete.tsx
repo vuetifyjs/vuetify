@@ -19,7 +19,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -251,7 +251,10 @@ export const VAutocomplete = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { filteredItems.value.map(({ item, matches }) => (
+                    { filteredItems.value.map(({ item, matches }) => slots.item?.({
+                      item,
+                      props: mergeProps(item.props, { onClick: () => select(item) }),
+                    }) ?? (
                       <VListItem
                         { ...item.props }
                         onClick={ () => select(item) }
@@ -271,12 +274,12 @@ export const VAutocomplete = genericComponent<new <
                   </VList>
                 </VMenu>
 
-                { selections.value.map((selection, index) => {
+                { selections.value.map((item, index) => {
                   function onChipClose (e: Event) {
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(selection)
+                    select(item)
                   }
 
                   const slotProps = {
@@ -292,21 +295,21 @@ export const VAutocomplete = genericComponent<new <
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
-                              text: selection.props.title,
+                              text: item.title,
                             },
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item: selection.originalItem, index })
+                            ? slots.chip({ props: slotProps, item, index })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
                       ) : (
                         slots.selection
-                          ? slots.selection({ item: selection.originalItem, index })
+                          ? slots.selection({ item, index })
                           : (
                             <span class="v-autocomplete__selection-text">
-                              { selection.props.title }
+                              { item.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-autocomplete__selection-comma">,</span>
                               ) }

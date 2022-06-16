@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
 
 // Utility
-import { computed, ref } from 'vue'
+import { computed, mergeProps, ref } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -207,7 +207,10 @@ export const VSelect = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { items.value.map(item => (
+                    { items.value.map(item => slots.item?.({
+                      item,
+                      props: mergeProps(item.props, { onClick: () => select(item) }),
+                    }) ?? (
                       <VListItem
                         { ...item.props }
                         onClick={ () => select(item) }
@@ -222,12 +225,12 @@ export const VSelect = genericComponent<new <
                   </VList>
                 </VMenu>
 
-                { selections.value.map((selection, index) => {
+                { selections.value.map((item, index) => {
                   function onChipClose (e: Event) {
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(selection)
+                    select(item)
                   }
 
                   const slotProps = {
@@ -243,21 +246,21 @@ export const VSelect = genericComponent<new <
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
-                              text: selection.props.title,
+                              text: item.title,
                             },
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, selection, index })
+                            ? slots.chip({ props: slotProps, item, index })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
                       ) : (
                         slots.selection
-                          ? slots.selection({ item: selection.originalItem, index })
+                          ? slots.selection({ item, index })
                           : (
                             <span class="v-select__selection-text">
-                              { selection.props.title }
+                              { item.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-select__selection-comma">,</span>
                               ) }
