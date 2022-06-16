@@ -108,7 +108,7 @@ export const VSelect = genericComponent<new <
       v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
-        return props.multiple ? transformed : transformed[0]
+        return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const selections = computed(() => {
@@ -162,6 +162,9 @@ export const VSelect = genericComponent<new <
       return (
         <VTextField
           ref={ vTextFieldRef }
+          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          validationValue={ props.modelValue }
           class={[
             'v-select',
             {
@@ -176,7 +179,6 @@ export const VSelect = genericComponent<new <
           onClick:input={ onClickControl }
           onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
           onKeydown={ onKeydown }
         >
           {{
