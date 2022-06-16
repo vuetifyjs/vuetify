@@ -37,7 +37,7 @@ export const VSystemBar = defineComponent({
     const height = computed(() => props.height ?? props.window ? 32 : 24)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
+      order: computed(() => parseInt(props.order, 10)),
       position: ref('top'),
       layoutSize: height,
       elementSize: height,

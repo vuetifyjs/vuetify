@@ -1,6 +1,9 @@
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+
 // Utilities
 import { defineComponent } from '@/util'
 
@@ -9,7 +12,7 @@ export const VAppBarNavIcon = defineComponent({
 
   props: {
     icon: {
-      type: String,
+      type: IconValue,
       default: '$menu',
     },
   },

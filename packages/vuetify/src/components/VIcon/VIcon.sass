@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
 @use './variables' as *
@@ -17,6 +16,9 @@
   user-select: none
   vertical-align: $icon-vertical-align
   width: $icon-size
+
+  &--clickable
+    cursor: pointer
 
   @each $name in settings.$sizes
     &--size-#{$name}

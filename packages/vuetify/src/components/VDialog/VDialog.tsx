@@ -9,6 +9,7 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { nextTick, ref, watch } from 'vue'
@@ -50,6 +51,7 @@ export const VDialog = genericComponent<new () => {
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { dimensionStyles } = useDimension(props)
+    const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
     function onFocusin (e: FocusEvent) {
@@ -59,15 +61,12 @@ export const VDialog = genericComponent<new () => {
       if (
         before !== after &&
         overlay.value?.contentEl &&
+        // We're the topmost dialog
+        overlay.value?.isTop &&
         // It isn't the document or the dialog body
         ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the dialog body
         !overlay.value.contentEl.contains(after)
-        // We're the topmost dialog
-        // TODO: this.activeZIndex >= this.getMaxZIndex() &&
-        // It isn't inside a dependent element (like a menu)
-        // TODO: !this.getOpenDependentElements().some(el => el.contains(target))
-        // So we must have focused something outside the dialog and its children
       ) {
         const focusable = [...overlay.value.contentEl.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
@@ -123,6 +122,8 @@ export const VDialog = genericComponent<new () => {
             'aria-haspopup': 'dialog',
             'aria-expanded': String(isActive.value),
           }}
+          z-index={ 2400 }
+          { ...scopeId }
           { ...attrs }
           v-slots={{
             default: slots.default,

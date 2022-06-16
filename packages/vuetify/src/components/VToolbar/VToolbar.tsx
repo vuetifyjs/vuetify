@@ -3,6 +3,7 @@ import './VToolbar.sass'
 
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VExpandTransition } from '@/components/transitions'
 import { VImg } from '@/components/VImg'
 import { VToolbarTitle } from './VToolbarTitle'
 
@@ -16,7 +17,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -78,7 +79,8 @@ export const VToolbar = genericComponent<new () => {
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const isExtended = computed(() => (!!(props.extended || slots.extension)))
+
+    const isExtended = ref(!!(props.extended || slots.extension?.()))
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -
@@ -105,6 +107,9 @@ export const VToolbar = genericComponent<new () => {
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
       const hasImage = !!(slots.image || props.image)
+
+      const extension = slots.extension?.()
+      isExtended.value = !!(props.extended || extension)
 
       return (
         <props.tag
@@ -168,14 +173,16 @@ export const VToolbar = genericComponent<new () => {
             ) }
           </div>
 
-          { isExtended.value && (
-            <div
-              class="v-toolbar__extension"
-              style={{ height: convertToUnit(extensionHeight.value) }}
-            >
-              { slots.extension?.() }
-            </div>
-          ) }
+          <VExpandTransition>
+            { isExtended.value && (
+              <div
+                class="v-toolbar__extension"
+                style={{ height: convertToUnit(extensionHeight.value) }}
+              >
+                { extension }
+              </div>
+            ) }
+          </VExpandTransition>
         </props.tag>
       )
     })

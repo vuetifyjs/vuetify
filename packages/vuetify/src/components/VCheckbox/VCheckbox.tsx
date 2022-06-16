@@ -5,8 +5,9 @@ import './VCheckbox.sass'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { filterCheckboxBtnProps, makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
-// Utility
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+// Utilities
+import { computed } from 'vue'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -19,6 +20,9 @@ export const VCheckbox = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
+    const uid = getUid()
+    const id = computed(() => props.id || `checkbox-${uid}`)
+
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
@@ -29,15 +33,18 @@ export const VCheckbox = defineComponent({
           class="v-checkbox"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (
               <VCheckboxBtn
                 { ...checkboxProps }
+                id={ id.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }

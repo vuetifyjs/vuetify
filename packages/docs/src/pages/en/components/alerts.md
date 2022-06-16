@@ -52,39 +52,67 @@ The recommended placement of elements inside of `v-alert` is:
 | [v-alert](/api/v-alert/) | Primary Component |
 | **v-alert-title** | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
-## Examples
+## Implementation
+
+Unlike the `v-banner` component, `v-alert` is intended to be re-used throughout your application as callouts that draw a user's attention.
 
 ### Props
 
+In addition to the standard [v-sheet](/components/sheets/) properties such as elevation, dimension, and rounded, `v-alert` supports **v-model**, **variants**, and **density**; and many more.
+
 #### Type
 
-The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provides a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/features/theme).
+The `v-alert` component has 4 contextual states: **success**, **info**, **warning**, and **error**. Each state has a default _color_ and _icon_ associated with it. The following example uses the **type** prop to tell the `v-alert` that it's in an **error** state:
 
 <example file="v-alert/prop-type" />
 
-#### Border
+While the **type** prop shorthand is preferred, **color** and **icon** are usable individually and can achieve the same effect. The following example produces the same result as using **type="info"** by defining a custom color and using the icon lookup table to get the globally defined info icon:
 
-The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined with props like **color**, **dark**, and **type** to provide unique accents to the alert.
+```html
+<v-alert color="info" icon="$info">
+  I'm an info alert that uses <strong>color</strong> and <strong>icon</strong> props instead of <strong>type</strong>
+</v-alert>
+```
 
-<example file="v-alert/prop-border" />
+The `v-alert` component has multiple customization options such as reducing overall height using or adding a customized **border**. The following example uses density to reduce the vertical space needed for the component:
+
+<example file="v-alert/prop-density" />
+
+The **density** prop supports 3 levels of component height; **default**, **comfortable**, and **compact**.
+
+#### Variants
+
+`v-alert` has 6 style variants, **contained, contained-flat, contained-text, outlined, plain,** and **text**. By default, the `v-alert` component is **contained-flat**; which means that it has a solid background and does not have a box-shadow (elevation).
+
+<example file="v-alert/prop-variant" />
+
+#### Closable
+
+The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visilibity of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
+
+<example file="v-alert/prop-closable" />
+
+The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
+
+<alert type="info">
+
+  For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
+
+</alert>
+
+### Slots
+
+TODO
+
+### More Examples
+
+TODO
 
 #### Colored border
 
 The **colored-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
 
 <example file="v-alert/prop-colored-border" />
-
-#### Density
-
-The **density** prop decreases the height of the alert based upon 1 of 3 levels of density; **default**, **comfortable**, and **compact**.
-
-<example file="v-alert/prop-density" />
-
-#### Closable
-
-The **closable** prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding **v-model** and setting it to true. The close icon automatically has an `aria-label` applied that can be changed by modifying the **close-label** prop or changing **close** value in your locale. For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
-
-<example file="v-alert/prop-closable" />
 
 #### Icon
 
@@ -98,25 +126,27 @@ The **outlined** prop inverts the style of an alert, inheriting the currently ap
 
 <example file="v-alert/prop-outlined" />
 
-<discovery />
+## Theming
 
-#### Prominent
+TODO
 
-The **prominent** prop provides a more pronounced alert by increasing the size of the icon.
+### Material Design 1
 
-<example file="v-alert/prop-prominent" />
+TODO
 
-#### Variant
+### Material Design 2
 
-The **variant** prop provides an easy way to change the overall style of your alerts. Together with other props like **density**, **prominent**, **border**, and **shaped**, it allows you to create a unique and customized component.
+TODO
 
-<example file="v-alert/prop-variant" />
+### Material Design 3
 
-#### Rounded
+TODO
 
-The **rounded** prop will add or remove **border-radius** to the alert. Similar to other styled props, **rounded** can be combined with other props like **density**, **prominent**, and **variant** to create a unique and customized component.
+#### Grid
 
-<example file="v-alert/prop-rounded" />
+TODO
+
+![Alert Grid](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-grid.png)
 
 ## Accessibility
 

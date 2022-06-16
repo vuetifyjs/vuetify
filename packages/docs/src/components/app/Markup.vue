@@ -27,7 +27,7 @@
 
       <v-spacer />
 
-      <v-tooltip anchor="bottom">
+      <v-tooltip location="bottom">
         <template #activator="{ props }">
           <v-btn
             :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
@@ -129,7 +129,7 @@
       }
 
       const isDark = computed(() => {
-        return user.mixedTheme || theme.getTheme(theme.current.value).dark
+        return user.mixedTheme || theme.current.value.dark
       })
 
       return {

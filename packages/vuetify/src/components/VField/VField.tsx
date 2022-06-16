@@ -11,6 +11,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -47,11 +48,11 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
-  appendInnerIcon: String,
+  appendInnerIcon: IconValue,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
-    type: String,
+    type: IconValue,
     default: '$clear',
   },
   active: Boolean,
@@ -61,7 +62,7 @@ export const makeVFieldProps = propsFactory({
   error: Boolean,
   label: String,
   persistentClear: Boolean,
-  prependInnerIcon: String,
+  prependInnerIcon: IconValue,
   reverse: Boolean,
   singleLine: Boolean,
   variant: {
@@ -103,8 +104,6 @@ export const VField = genericComponent<new <T>() => {
 
   emits: {
     'click:clear': (e: MouseEvent) => true,
-    'click:prepend-inner': (e: MouseEvent) => true,
-    'click:append-inner': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
@@ -213,6 +212,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
+              'v-field--has-label': !!label,
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
@@ -242,7 +242,7 @@ export const VField = genericComponent<new <T>() => {
             >
               { props.prependInnerIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:prepend-inner', e) }
+                  onClick={ attrs['onClick:prependInner'] }
                   icon={ props.prependInnerIcon }
                 />
               ) }
@@ -251,7 +251,7 @@ export const VField = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-field__field">
+          <div class="v-field__field" data-no-activator="">
             { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 ref={ floatingLabelRef }
@@ -304,7 +304,7 @@ export const VField = genericComponent<new <T>() => {
 
               { props.appendInnerIcon && (
                 <VIcon
-                  onClick={ (e: MouseEvent) => emit('click:append-inner', e) }
+                  onClick={ attrs['onClick:appendInner'] }
                   icon={ props.appendInnerIcon }
                 />
               ) }

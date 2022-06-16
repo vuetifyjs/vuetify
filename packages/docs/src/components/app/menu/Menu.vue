@@ -5,7 +5,7 @@
     open-delay="60"
     :open-on-hover="false"
     transition="slide-y-transition"
-    anchor="bottom"
+    location="bottom"
   >
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }" />
