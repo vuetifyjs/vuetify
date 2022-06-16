@@ -32,7 +32,7 @@ import type { LoaderSlotProps } from '@/composables/loader'
 import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {

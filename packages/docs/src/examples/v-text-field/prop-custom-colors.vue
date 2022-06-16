@@ -22,7 +22,7 @@
           <v-text-field
             color="secondary"
             label="Contained"
-            variant="contained"
+            variant="solo"
             placeholder="Placeholder"
           ></v-text-field>
         </v-col>
