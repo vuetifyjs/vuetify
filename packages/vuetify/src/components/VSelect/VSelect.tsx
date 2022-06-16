@@ -199,6 +199,7 @@ export const VSelect = genericComponent<new <
                   <VList
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
                     { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
@@ -207,7 +208,6 @@ export const VSelect = genericComponent<new <
                     { items.value.map(item => (
                       <VListItem
                         { ...item.props }
-                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onClick={ () => select(item) }
                       >
                         {{

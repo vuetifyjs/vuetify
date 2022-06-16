@@ -326,6 +326,7 @@ export const VCombobox = genericComponent<new <
                   <VList
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
                     { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
@@ -334,7 +335,6 @@ export const VCombobox = genericComponent<new <
                     { filteredItems.value.map(({ item, matches }) => (
                       <VListItem
                         { ...item.props }
-                        onMousedown={ (e: MouseEvent) => e.preventDefault() }
                         onClick={ () => select(item) }
                       >
                         {{
