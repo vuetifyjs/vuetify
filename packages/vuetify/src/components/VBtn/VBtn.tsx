@@ -71,7 +71,7 @@ export const VBtn = defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -89,7 +89,7 @@ export const VBtn = defineComponent({
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
+      return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
 
     useSelectLink(link, group?.select)

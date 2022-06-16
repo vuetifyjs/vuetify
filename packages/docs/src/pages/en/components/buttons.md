@@ -53,11 +53,11 @@ The recommended placement of elements inside of `v-btn` is:
 
 #### Variant
 
-The **variant** prop gives you easy access to several different button styles. Available variants are: **contained**(default), **contained-flat**, **contained-text**, **outlined**, **plain**, and **text**.
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
 <alert type="warning">
 
-  When a `v-btn` is used inside of `v-toolbar` and `v-app-bar` the default variant **text** is applied instead of **contained**.
+  When a `v-btn` is used inside of `v-toolbar` and `v-app-bar` the default variant **text** is applied instead of **elevated**.
 
 </alert>
 
