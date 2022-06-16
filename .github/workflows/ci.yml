@@ -12,6 +12,14 @@ env:
   LOCAL_BRANCH: docs/update-from-crowdin
 
 jobs:
+  close:
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next') && github.repository_owner == 'vuetifyjs'
+    steps:
+      - uses: vuetifyjs/close-action@master
+        with:
+          token: ${{ secrets.GITHUB_TOKEN }}
+
   pre_job:
     runs-on: ubuntu-latest
     outputs:
@@ -26,9 +34,14 @@ jobs:
           do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
 
   lint:
+    name: Lint
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -39,11 +52,13 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn run build
-        working-directory: ./packages/vuetify
-      - run: yarn run lint
+      - run: yarn build vuetify
+      - run: yarn lerna run lint $SCOPES
+        env:
+          SCOPES: ${{ matrix.scopes }}
 
-  test:
+  test-jest:
+    name: Test (Jest)
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
@@ -60,9 +75,33 @@ jobs:
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
-      - run: yarn cy:run
-        if: github.event_name == 'pull_request'
+
+  test-cypress:
+    name: Test (Cypress)
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: [1, 2, 3, 4]
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
+        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
         working-directory: ./packages/vuetify
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
@@ -71,7 +110,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    needs: [lint, test]
+    needs: [lint, test-jest, test-cypress]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
@@ -84,7 +123,7 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn lerna run build --scope vuetify
+      - run: yarn build vuetify
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
@@ -114,7 +153,7 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
-    needs: [lint, test]
+    needs: [lint, test-jest, test-cypress]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
@@ -126,7 +165,7 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
+      - run: yarn global add vercel
 
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
@@ -168,6 +207,11 @@ jobs:
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 
+      - run: yarn build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
+          VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

@@ -36,6 +36,12 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 </components-list-item>
 
+<components-list-item name="banners">
+
+  Banners are used to communicate important information to the user.
+
+</components-list-item>
+
 <components-list-item name="breadcrumbs">
 
   Breadcrumbs are navigational helpers for router pages.

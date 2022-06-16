@@ -11,7 +11,7 @@ export type Member = {
   location?: string
   work?: string
   name: string
-  // avatar: string
+  avatar?: string
   github?: string
   team: string
   twitter?: string

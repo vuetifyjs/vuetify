@@ -3,6 +3,8 @@
     :border-color="type"
     border="start"
     class="v-alert--doc mb-4 border-opacity-100"
+    variant="contained-text"
+    :type="type"
   >
     <template #prepend>
       <v-icon :color="type" :icon="`$${type}`" />
@@ -11,12 +13,8 @@
   </v-alert>
 </template>
 
-<script>
-  export default {
-    name: 'Alert',
-
-    props: { type: String },
-  }
+<script setup>
+  defineProps({ type: String })
 </script>
 
 <style lang="sass">

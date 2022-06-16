@@ -7,6 +7,7 @@ $icon-btn-margin-start-multiplier: -9 !default;
 $icon-btn-margin-end-multiplier: 4.5 !default;
 $icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;
 $icon-btn-margin-end: calc(var(--v-btn-height) / #{$icon-btn-margin-end-multiplier}) !default;
+$icon-btn-stacked-margin: 4px !default;
 $icon-left-margin-left: map.get(settings.$grid-gutters, 'md') !default;
 $icon-letter-spacing: normal !default;
 $icon-line-height: 1 !default;

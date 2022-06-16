@@ -7,9 +7,12 @@ import { VLabel } from '@/components/VLabel'
 import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
-// Utility
-import { computed, defineComponent } from 'vue'
-import { filterInputAttrs, getUid, useRender } from '@/util'
+// Composables
+import { IconValue } from '@/composables/icons'
+
+// Utilities
+import { computed } from 'vue'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VRadioGroup = defineComponent({
   name: 'VRadioGroup',
@@ -26,11 +29,11 @@ export const VRadioGroup = defineComponent({
     ...makeSelectionControlProps(),
 
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOn',
     },
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOff',
     },
     type: {
@@ -59,10 +62,12 @@ export const VRadioGroup = defineComponent({
           class="v-radio-group"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (

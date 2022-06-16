@@ -2,7 +2,7 @@
 import { useProxiedModel } from './proxiedModel'
 
 // Utilities
-import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, reactive, toRef, watch } from 'vue'
 import { consoleWarn, deepEqual, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -28,7 +28,7 @@ export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
-  selected: Ref<any[]>
+  selected: Ref<Readonly<number[]>>
   isSelected: (id: number) => boolean
   prev: () => void
   next: () => void
@@ -39,6 +39,7 @@ export interface GroupProvide {
     disabled: boolean | undefined
   }[]>
   disabled: Ref<boolean | undefined>
+  getItemIndex: (value: unknown) => number
 }
 
 export interface GroupItemProvide {
@@ -46,7 +47,7 @@ export interface GroupItemProvide {
   isSelected: Ref<boolean>
   toggle: () => void
   select: (value: boolean) => void
-  selectedClass: Ref<string | false | undefined>
+  selectedClass: Ref<(string | undefined)[] | false>
   value: Ref<unknown>
   disabled: Ref<boolean | undefined>
   group: GroupProvide
@@ -125,7 +126,11 @@ export function useGroupItem (
     return group.isSelected(id)
   })
 
-  const selectedClass = computed(() => isSelected.value && (group.selectedClass.value ?? props.selectedClass))
+  const selectedClass = computed(() => isSelected.value && [group.selectedClass.value, props.selectedClass])
+
+  watch(isSelected, value => {
+    vm.emit('group:selected', { value })
+  })
 
   return {
     id,
@@ -271,7 +276,7 @@ export function useGroup (
     }
   }
 
-  const state = {
+  const state: GroupProvide = {
     register,
     unregister,
     selected,
@@ -282,11 +287,20 @@ export function useGroup (
     isSelected: (id: number) => selected.value.includes(id),
     selectedClass: computed(() => props.selectedClass),
     items: computed(() => items),
+    getItemIndex: (value: unknown) => getItemIndex(items, value),
   }
 
   provide(injectKey, state)
 
   return state
+}
+
+function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
+  const ids = getIds(items, [value])
+
+  if (!ids.length) return -1
+
+  return items.findIndex(item => item.id === ids[0])
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {

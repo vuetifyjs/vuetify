@@ -7,6 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeSizeProps } from '@/composables/size'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { inject, ref, watch } from 'vue'
@@ -24,7 +25,7 @@ export const VTimelineItem = defineComponent({
       type: Boolean,
       default: undefined,
     },
-    icon: String,
+    icon: IconValue,
     iconColor: String,
 
     ...makeRoundedProps(),

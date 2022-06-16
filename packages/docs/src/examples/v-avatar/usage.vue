@@ -1,39 +1,32 @@
 <template>
-  <div
-    style="width: 100%"
-    class="text-center"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-avatar"
   >
-    <v-avatar
-      v-bind="$attrs"
+    <v-defaults-provider
+      :defaults="{
+        VAvatar: {
+          icon: model === 'icon' ? 'mdi-vuetify' : undefined,
+          image: model !== 'icon' ? 'https://randomuser.me/api/portraits/women/75.jpg' : undefined,
+          size: model === 'large' ? 'large' : undefined
+        }
+      }"
     >
-      <span class="white--text">VJ</span>
-    </v-avatar>
-  </div>
+      <div class="text-center">
+        <v-avatar></v-avatar>
+      </div>
+    </v-defaults-provider>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VAvatarUsageExample',
 
     data: () => ({
-      defaults: {
-        color: 'primary',
-        rounded: false,
-        size: 56,
-        tile: false,
-      },
-      options: {
-        selects: {
-          color: ['primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-2'],
-        },
-        booleans: [],
-        sliders: {
-          size: [25, 128],
-        },
-      },
-      tabs: ['rounded', 'tile'],
+      model: 'default',
+      options: ['large', 'icon'],
     }),
   }
 </script>

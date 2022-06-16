@@ -14,7 +14,11 @@
         }"
       >
         <v-badge overlap>
-          <v-icon icon="mdi-vuetify" size="x-large"></v-icon>
+          <v-icon
+            color="grey"
+            icon="mdi-vuetify"
+            size="x-large"
+          ></v-icon>
         </v-badge>
       </v-defaults-provider>
     </div>

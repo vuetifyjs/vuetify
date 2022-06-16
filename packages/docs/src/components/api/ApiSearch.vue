@@ -14,7 +14,7 @@
         label
       >
         <v-icon
-          left
+          start
           v-text="item.icon"
         />
         <span v-text="item.text" />

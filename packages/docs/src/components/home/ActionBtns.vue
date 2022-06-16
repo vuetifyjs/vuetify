@@ -11,7 +11,7 @@
           v-bind="attrs"
           size="x-large"
         >
-          <v-icon :icon="icon" left />
+          <v-icon :icon="icon" start />
           {{ t(text) }}
         </v-btn>
       </v-col>
@@ -31,7 +31,7 @@
       const { locale, t } = useI18n()
 
       // data
-      const buttons: Array<Object> = [
+      const buttons = [
         {
           color: 'primary',
           flat: true,
@@ -60,7 +60,7 @@
           target: '_blank',
           text: 'github',
         },
-      ]
+      ] as const
       const btnWidth = 228
 
       return {

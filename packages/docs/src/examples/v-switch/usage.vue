@@ -4,8 +4,8 @@
     fluid
   >
     <v-switch
-      v-model="switch1"
-      :label="`Switch 1: ${switch1.toString()}`"
+      v-model="model"
+      :label="`Switch: ${model.toString()}`"
     ></v-switch>
   </v-container>
 </template>
@@ -14,7 +14,7 @@
   export default {
     data () {
       return {
-        switch1: true,
+        model: true,
       }
     },
   }

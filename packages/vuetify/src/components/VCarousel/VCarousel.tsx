@@ -10,6 +10,7 @@ import { VWindow } from '@/components/VWindow'
 // Composables
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
@@ -17,6 +18,7 @@ import { onMounted, ref, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VCarousel = defineComponent({
   name: 'VCarousel',
@@ -25,7 +27,7 @@ export const VCarousel = defineComponent({
     color: String,
     cycle: Boolean,
     delimiterIcon: {
-      type: String,
+      type: IconValue,
       default: '$delimiter',
     },
     height: {
@@ -97,7 +99,7 @@ export const VCarousel = defineComponent({
       >
         {{
           default: slots.default,
-          additional: ({ group }: any) => (
+          additional: ({ group }: { group: GroupProvide }) => (
             <>
               { !props.hideDelimiters && (
                 <div
@@ -139,7 +141,7 @@ export const VCarousel = defineComponent({
                 <VProgressLinear
                   class="v-carousel__progress"
                   color={ typeof props.progress === 'string' ? props.progress : undefined }
-                  modelValue={ (+model.value + 1) / group.items.value.length * 100 }
+                  modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
                 />
               )}
             </>

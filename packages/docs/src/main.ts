@@ -5,7 +5,7 @@ import App from './App.vue'
 
 // plugins
 import { useI18n } from './plugins/i18n'
-// import { usePwa } from './plugins/pwa'
+import { usePwa } from './plugins/pwa'
 import { pinia, usePinia } from './plugins/pinia'
 import { useVuetify } from './plugins/vuetify'
 import { useLocaleStore } from './store/locale'
@@ -71,10 +71,13 @@ export const createApp = ViteSSG(
     ctx.router.beforeEach(({ path, hash }, from, next) => {
       return path.endsWith('/') ? next() : next(`${trailingSlash(path)}` + hash)
     })
+    ctx.router.onError(err => {
+      console.error(err)
+    })
 
     useGlobalComponents(ctx)
     useI18n(ctx)
-    // usePwa(ctx)
+    usePwa(ctx)
     usePinia(ctx)
     useVuetify(ctx)
   },

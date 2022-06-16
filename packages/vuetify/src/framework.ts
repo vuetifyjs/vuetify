@@ -1,27 +1,28 @@
-import { createDisplay, DisplaySymbol } from '@/composables/display'
-import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { defaultSets, IconSymbol } from '@/composables/icons'
+// Composables
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
-import { createLocaleAdapter, LocaleAdapterSymbol } from '@/composables/locale'
-import { createRtl, RtlSymbol } from '@/composables/rtl'
-import { aliases, mdi } from '@/iconsets/mdi'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createIcons, IconSymbol } from '@/composables/icons'
+import { createLocale, LocaleAdapterSymbol } from '@/composables/locale'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
+import { defineComponent, getUid, IN_BROWSER } from '@/util'
 import { reactive } from 'vue'
-import { mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
-import type { ThemeOptions } from '@/composables/theme'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
 import type { RtlOptions } from '@/composables/rtl'
-import type { DefaultsOptions } from '@/composables/defaults'
+import type { ThemeOptions } from '@/composables/theme'
 
 export * from './composables'
 
 export interface VuetifyOptions {
+  aliases?: Record<string, any>
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
@@ -34,37 +35,47 @@ export interface VuetifyOptions {
 export const createVuetify = (options: VuetifyOptions = {}) => {
   const install = (app: App) => {
     const {
+      aliases = {},
       components = {},
       directives = {},
-      icons = {},
     } = options
 
     for (const key in directives) {
-      const directive = directives[key]
-
-      app.directive(key, directive)
+      app.directive(key, directives[key])
     }
 
     for (const key in components) {
-      const component = components[key]
-
-      app.component(key, component)
+      app.component(key, components[key])
     }
 
-    app.provide(DefaultsSymbol, createDefaults(options.defaults))
-    app.provide(DisplaySymbol, createDisplay(options.display))
-    app.provide(ThemeSymbol, createTheme(app, options.theme))
-    app.provide(IconSymbol, mergeDeep({
-      defaultSet: 'mdi',
-      sets: {
-        ...defaultSets,
-        mdi,
-      },
-      aliases,
-    }, icons))
-    const { adapter, rootInstance } = createLocaleAdapter(app, options?.locale)
-    app.provide(LocaleAdapterSymbol, adapter)
-    app.provide(RtlSymbol, createRtl(rootInstance, options?.locale))
+    for (const key in aliases) {
+      app.component(key, defineComponent({
+        ...aliases[key],
+        name: key,
+      }))
+    }
+
+    function provideApp (isHydrate?: boolean) {
+      app.provide(DefaultsSymbol, createDefaults(options.defaults))
+      app.provide(DisplaySymbol, createDisplay(options.display, isHydrate))
+      app.provide(ThemeSymbol, createTheme(app, options.theme))
+      app.provide(IconSymbol, createIcons(options.icons))
+      app.provide(LocaleAdapterSymbol, createLocale(app, options.locale))
+    }
+
+    if (!IN_BROWSER) {
+      provideApp()
+    }
+
+    getUid.reset()
+
+    const mount = app.mount
+    app.mount = (rootContainer: any, isHydrate?: boolean, isSVG?: boolean) => {
+      provideApp(isHydrate)
+      const ret = mount(rootContainer, isHydrate, isSVG)
+      app.mount = mount
+      return ret
+    }
 
     // Vue's inject() can only be used in setup
     function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {

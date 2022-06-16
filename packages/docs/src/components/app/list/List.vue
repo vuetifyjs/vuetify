@@ -1,10 +1,11 @@
 <template>
   <v-list
-    v-model:active="active"
     v-model:opened="opened"
     density="compact"
+    color="primary"
     :nav="nav"
     :items="computedItems"
+    item-props
   />
 </template>
 
@@ -13,18 +14,21 @@
   import type { Prop } from 'vue'
   import { useI18n } from 'vue-i18n'
   import { generatedRoutes as routes } from '@/util/routes'
+  import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 
-  type Item = {
-    title: string,
-    activeIcon: string,
-    inactiveIcon: string,
-    items: string[] | Item[]
-    heading?: string;
-    divider?: boolean;
+  export type Item = {
+    title?: string
+    activeIcon?: string
+    inactiveIcon?: string
+    items?: (string | Item)[]
+    heading?: string
+    divider?: boolean
+    to?: RouteLocationRaw
+    href?: string
   }
 
   function generateApiItems (locale: string) {
-    return routes
+    return (routes as RouteRecordRaw[])
       .filter(route => route.path.includes(`${locale}/api/`))
       .sort((a, b) => a.path.localeCompare(b.path))
       .map(route => {
@@ -48,8 +52,8 @@
           }
         } else {
           return {
-            title: t(child.title),
-            $children: generateItems(child, path, locale, t),
+            title: t(child.title!),
+            children: generateItems(child, path, locale, t),
           }
         }
       })
@@ -71,24 +75,22 @@
 
     setup (props) {
       const { t, te, locale } = useI18n()
-      const active = ref<string[]>([])
       const opened = ref<string[]>([])
 
       const computedItems = computed(() => props.items?.map(item => {
-        if (item.heading) return { $type: 'subheader', text: item.heading }
-        if (item.divider) return { $type: 'divider' }
+        if (item.heading) return { type: 'subheader', title: item.heading }
+        if (item.divider) return { type: 'divider' }
 
         return {
           title: item.title && te(item.title) ? t(item.title) : item.title,
-          prependIcon: opened.value.includes(item.title) ? item.activeIcon : item.inactiveIcon,
           value: item.title,
-          $children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title, locale.value, t),
+          prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
+          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }
       }))
 
       return {
         computedItems,
-        active,
         opened,
       }
     },

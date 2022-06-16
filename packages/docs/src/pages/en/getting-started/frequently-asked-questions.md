@@ -115,8 +115,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
   Vuetify components are easily extendable by importing it and using the `extends` option in vue. [Codepen Example](https://codepen.io/whoistobias/pen/yLNgjwy)
 
-```js
-// src/components/ActivateBtn
+```js { resource="src/components/ActivateBtn" }
 import { VBtn } from 'vuetify/lib'
 
 export default {
@@ -281,8 +280,7 @@ export default {
 
   Update the `compilerOptions` key in `tsconfig.json` with the vuetify type:
 
-```json
-// tsconfig.json
+```json { resource="tsconfig.json" }
 {
   "compilerOptions": {
     "types": ["vuetify"]

@@ -16,7 +16,7 @@
             <v-tooltip
               v-if="link.href || link.copyText"
               :key="link.href || link.copyText"
-              anchor="bottom"
+              location="bottom"
             >
               <template #activator="{ props }">
                 <a
@@ -101,14 +101,14 @@
           </template>
         </div>
 
-        <template v-for="field in ['work', 'location', 'languages']">
+        <template v-for="field in fields">
           <div
             v-if="member[field]"
             :key="field"
             class="text-subtitle d-flex align-center my-2"
           >
             <v-icon
-              left
+              start
               :icon="icons[field]"
             />
 
@@ -117,7 +117,7 @@
                 <app-markdown :content="focus" />
 
                 <span
-                  v-if="j < member[field].length - 1"
+                  v-if="j < member[field]!.length - 1"
                   :key="`span-${j}`"
                   class="mx-2"
                 >
@@ -211,6 +211,7 @@
         },
         links,
         copyTextToClipboard,
+        fields: ['work', 'location', 'languages'] as const,
       }
     },
   })

@@ -13,11 +13,21 @@
         fluid
         tag="section"
       >
+        <alert type="warning">
+          This is <b>BETA</b> documentation for Vuetify 3, examples and information may be broken or outdated.
+          <br>
+          Components not listed in the sidebar are not available yet.
+          <br>
+          Vuetify 2 documentation can be found on <app-link href="https://vuetifyjs.com/">vuetifyjs.com</app-link>
+        </alert>
+
         <router-view />
       </v-container>
     </v-main>
 
     <app-toc />
+
+    <app-pwa-snackbar />
   </v-app>
 </template>
 
@@ -27,6 +37,7 @@
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import AppToc from '@/components/app/Toc.vue'
+  import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
 
   // Composables
   import { useRoute } from 'vue-router'
@@ -43,6 +54,7 @@
       AppDrawer,
       AppSettingsDrawer,
       AppToc,
+      AppPwaSnackbar,
     },
 
     setup () {

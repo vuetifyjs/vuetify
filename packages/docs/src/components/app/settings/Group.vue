@@ -22,6 +22,7 @@
           <v-item :value="text">
             <template #default="{ isSelected, toggle }">
               <v-card
+                :ref="'item-' + text"
                 :color="isSelected ? 'primary' : `grey-${dark ? 'darken' : 'lighten'}-3`"
                 class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
                 rounded
@@ -42,16 +43,16 @@
 
 <script lang="ts">
   import { useI18n } from 'vue-i18n'
-  import { computed } from 'vue'
+  import { computed, defineComponent, PropType } from 'vue'
   import { useTheme } from 'vuetify'
 
-  export default {
+  export default defineComponent({
     name: 'SettingsGroup',
 
     props: {
       title: String,
       modelValue: null,
-      items: Array,
+      items: Array as PropType<{ icon: string, text: string }[]>,
       multiple: Boolean,
     },
 
@@ -63,9 +64,9 @@
       const { t } = useI18n()
       const theme = useTheme()
 
-      return { t, dark: computed(() => theme.getTheme(theme.current.value).dark) }
+      return { t, dark: computed(() => theme.current.value.dark) }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

@@ -8,15 +8,11 @@ import { IN_BROWSER } from '@/util/globals'
 interface ResizeState {
   resizeRef: Ref<Element | undefined>
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
-  borderBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
-  contentBoxSize: DeepReadonly<Ref<ResizeObserverSize | undefined>>
 }
 
 export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
   const resizeRef = ref<Element>()
   const contentRect = ref<DOMRectReadOnly>()
-  const contentBoxSize = ref<ResizeObserverSize>()
-  const borderBoxSize = ref<ResizeObserverSize>()
 
   if (IN_BROWSER) {
     const observer = new ResizeObserver((entries: ResizeObserverEntry[]) => {
@@ -25,8 +21,6 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
       if (!entries.length) return
 
       contentRect.value = entries[0].contentRect
-      contentBoxSize.value = entries[0].contentBoxSize[0]
-      borderBoxSize.value = entries[0].borderBoxSize[0]
     })
 
     onBeforeUnmount(() => {
@@ -37,8 +31,6 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
       if (oldValue) {
         observer.unobserve(oldValue)
         contentRect.value = undefined
-        contentBoxSize.value = undefined
-        borderBoxSize.value = undefined
       }
 
       if (newValue) observer.observe(newValue)
@@ -50,7 +42,5 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
   return {
     resizeRef,
     contentRect: readonly(contentRect),
-    contentBoxSize: readonly(contentBoxSize),
-    borderBoxSize: readonly(borderBoxSize),
   }
 }

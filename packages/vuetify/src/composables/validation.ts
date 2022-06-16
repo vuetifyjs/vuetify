@@ -3,7 +3,8 @@ import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, ref } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, ref, unref, watch } from 'vue'
+import type { MaybeRef } from '@/util'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -26,6 +27,7 @@ export interface ValidationProps {
   rules: ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
+  validationValue: any
 }
 
 export const makeValidationProps = propsFactory({
@@ -46,17 +48,23 @@ export const makeValidationProps = propsFactory({
     default: () => ([]),
   },
   modelValue: null,
+  validationValue: null,
 })
 
 export function useValidation (
   props: ValidationProps,
   name = getCurrentInstanceName(),
+  id: MaybeRef<string | number> = getUid(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
+  const validationModel = computed(() => props.validationValue ?? model.value)
   const form = useForm()
   const internalErrorMessages = ref<string[]>([])
   const isPristine = ref(true)
-  const isDirty = computed(() => wrapInArray(model.value || []).length > 0)
+  const isDirty = computed(() => !!(
+    wrapInArray(model.value === '' ? null : model.value).length ||
+    wrapInArray(validationModel.value === '' ? null : validationModel.value).length
+  ))
   const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const errorMessages = computed(() => {
@@ -65,6 +73,7 @@ export function useValidation (
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
+    if (!props.rules.length) return true
     if (props.error || errorMessages.value.length) return false
 
     return isPristine.value ? null : true
@@ -79,14 +88,18 @@ export function useValidation (
     }
   })
 
-  const uid = computed(() => props.name ?? getUid())
+  const uid = computed(() => props.name ?? unref(id))
 
   onBeforeMount(() => {
-    form?.register(uid.value, validate, reset, resetValidation)
+    form?.register(uid.value, validate, reset, resetValidation, isValid)
   })
 
   onBeforeUnmount(() => {
     form?.unregister(uid.value)
+  })
+
+  watch(validationModel, () => {
+    if (validationModel.value != null) validate()
   })
 
   function reset () {
@@ -110,7 +123,7 @@ export function useValidation (
       }
 
       const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await handler(model.value)
+      const result = await handler(validationModel.value)
 
       if (result === true) continue
 

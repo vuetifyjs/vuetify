@@ -49,7 +49,7 @@
                     v-bind="attrs"
                     v-on="on"
                   >
-                    <v-icon left>
+                    <v-icon start>
                       mdi-menu
                     </v-icon>
                     Menu
@@ -63,7 +63,7 @@
                       color="primary"
                       @click="clickMe"
                     >
-                      <v-icon left>
+                      <v-icon start>
                         mdi-target
                       </v-icon>Click me
                     </v-btn>

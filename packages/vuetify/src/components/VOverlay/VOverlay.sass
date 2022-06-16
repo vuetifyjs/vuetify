@@ -1,4 +1,4 @@
-@forward './variables'
+@use 'sass:selector'
 @use './variables' as *
 
 // Block
@@ -13,6 +13,13 @@
 .v-overlay-scroll-blocked
   padding-inline-end: var(--v-scrollbar-offset)
   overflow-y: hidden !important
+
+  @at-root #{selector.append(html, &)}
+    position: fixed
+    top: var(--v-body-scroll-y)
+    left: var(--v-body-scroll-x)
+    width: 100%
+    height: 100%
 
 .v-overlay
   border-radius: inherit

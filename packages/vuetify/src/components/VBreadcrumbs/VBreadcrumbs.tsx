@@ -12,6 +12,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { toRef } from 'vue'
@@ -23,6 +24,7 @@ import type { LinkProps } from '@/composables/router'
 
 export type BreadcrumbItem = string | (LinkProps & {
   text: string
+  disabled?: boolean
 })
 
 export const VBreadcrumbs = defineComponent({
@@ -30,6 +32,7 @@ export const VBreadcrumbs = defineComponent({
 
   props: {
     activeClass: String,
+    activeColor: String,
     bgColor: String,
     color: String,
     disabled: Boolean,
@@ -37,7 +40,7 @@ export const VBreadcrumbs = defineComponent({
       type: String,
       default: '/',
     },
-    icon: String,
+    icon: IconValue,
     items: {
       type: Array as PropType<BreadcrumbItem[]>,
       default: () => ([]),
@@ -56,6 +59,7 @@ export const VBreadcrumbs = defineComponent({
     provideDefaults({
       VBreadcrumbsItem: {
         activeClass: toRef(props, 'activeClass'),
+        activeColor: toRef(props, 'activeColor'),
         color: toRef(props, 'color'),
         disabled: toRef(props, 'disabled'),
       },

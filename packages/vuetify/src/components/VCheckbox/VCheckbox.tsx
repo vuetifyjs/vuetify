@@ -3,14 +3,11 @@ import './VCheckbox.sass'
 
 // Components
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { filterCheckboxBtnProps, makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
-
-// Utility
+// Utilities
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, useRender } from '@/util'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
   name: 'VCheckbox',
@@ -18,75 +15,40 @@ export const VCheckbox = defineComponent({
   inheritAttrs: false,
 
   props: {
-    indeterminate: Boolean,
-    indeterminateIcon: {
-      type: String,
-      default: '$checkboxIndeterminate',
-    },
-
     ...makeVInputProps(),
-    ...makeSelectionControlProps(),
-
-    falseIcon: {
-      type: String,
-      default: '$checkboxOff',
-    },
-    trueIcon: {
-      type: String,
-      default: '$checkboxOn',
-    },
-  },
-
-  emits: {
-    'update:indeterminate': (val: boolean) => true,
+    ...makeVCheckboxBtnProps(),
   },
 
   setup (props, { attrs, slots }) {
-    const indeterminate = useProxiedModel(props, 'indeterminate')
-    const falseIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.falseIcon
-    })
-    const trueIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.trueIcon
-    })
-
-    function onChange () {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
-    }
+    const uid = getUid()
+    const id = computed(() => props.id || `checkbox-${uid}`)
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [checkboxProps, _2] = filterCheckboxBtnProps(props)
 
       return (
         <VInput
           class="v-checkbox"
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
             }) => (
-              <VSelectionControl
-                { ...controlProps }
-                type="checkbox"
-                onUpdate:modelValue={ onChange }
-                falseIcon={ falseIcon.value }
-                trueIcon={ trueIcon.value }
-                aria-checked={ indeterminate.value ? 'mixed' : undefined }
+              <VCheckboxBtn
+                { ...checkboxProps }
+                id={ id.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                v-slots={ slots }
               />
             ),
           }}

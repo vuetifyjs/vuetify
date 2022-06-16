@@ -3,19 +3,19 @@ import './VTab.sass'
 
 // Components
 import { VBtn } from '@/components/VBtn'
-import { VTabsSymbol } from './VTabs'
 
 // Composables
-import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeGroupItemProps } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, ref } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
+import { VTabsSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,9 +25,9 @@ export const VTab = defineComponent({
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String],
-    prependIcon: String,
-    appendIcon: String,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
 
     stacked: Boolean,
     title: String,
@@ -54,26 +54,17 @@ export const VTab = defineComponent({
   },
 
   setup (props, { slots, attrs }) {
-    const { isSelected, select, selectedClass } = useGroupItem(props, VTabsSymbol)
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
-
-    provideDefaults({
-      VBtn: {
-        block: toRef(props, 'fixed'),
-        maxWidth: computed(() => props.fixed ? 300 : undefined),
-        color: computed(() => isSelected.value ? props.color : undefined),
-        variant: 'text',
-        rounded: 0,
-      },
-    }, {
-      scoped: true,
-    })
+    const isSelected = ref(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()
-    watch(isSelected, isSelected => {
-      if (isSelected) {
+
+    function updateSlider ({ value }: { value: boolean }) {
+      isSelected.value = value
+
+      if (value) {
         const prevEl: HTMLElement | undefined = rootEl.value?.$el.parentElement?.querySelector('.v-tab--selected .v-tab__slider')
         const nextEl = sliderEl.value
 
@@ -116,7 +107,7 @@ export const VTab = defineComponent({
           easing: standardEasing,
         })
       }
-    })
+    }
 
     useRender(() => {
       const [btnProps] = pick(props, [
@@ -130,21 +121,29 @@ export const VTab = defineComponent({
         'ripple',
         'theme',
         'disabled',
+        'selectedClass',
+        'value',
+        'color',
       ])
 
       return (
         <VBtn
+          _as="VTab"
+          symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
-            selectedClass.value,
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
-          onClick={ () => !props.disabled && select(!isSelected.value) }
+          block={ props.fixed }
+          maxWidth={ props.fixed ? 300 : undefined }
+          variant="text"
+          rounded={ 0 }
           { ...btnProps }
           { ...attrs }
+          onGroup:selected={ updateSlider }
         >
           { slots.default ? slots.default() : props.title }
           { !props.hideSlider && (
@@ -161,9 +160,7 @@ export const VTab = defineComponent({
       )
     })
 
-    return {
-      isSelected,
-    }
+    return {}
   },
 })
 

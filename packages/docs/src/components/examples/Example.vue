@@ -7,7 +7,10 @@
     >
       <v-toolbar
         border="b"
-        class="px-4"
+        :class="[
+          'px-4',
+          !showCode && 'border-opacity-0'
+        ]"
         height="44"
         flat
         rounded="t"
@@ -17,14 +20,14 @@
         <v-tooltip
           v-for="{ path, ...action } in actions"
           :key="path"
-          anchor="top"
+          location="top"
         >
           <template #activator="{ props: tooltip }">
             <v-btn
               class="ml-2 text-medium-emphasis"
               density="comfortable"
               variant="text"
-              v-bind="mergeProps(action, tooltip)"
+              v-bind="mergeProps(action as any, tooltip)"
             />
           </template>
 
@@ -135,7 +138,7 @@
   const parentTheme = useTheme()
   const _theme = ref<null | string>(null)
   const theme = computed({
-    get: () => _theme.value ?? parentTheme.current.value,
+    get: () => _theme.value ?? parentTheme.name.value,
     set: val => _theme.value = val,
   })
   const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'

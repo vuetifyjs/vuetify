@@ -4,6 +4,7 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -15,11 +16,11 @@ import { defineComponent, propsFactory, useRender } from '@/util'
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
   expandIcon: {
-    type: String,
+    type: IconValue,
     default: '$expand',
   },
   collapseIcon: {
-    type: String,
+    type: IconValue,
     default: '$collapse',
   },
   hideActions: Boolean,
@@ -27,6 +28,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     type: [Boolean, Object],
     default: false,
   },
+  readonly: Boolean,
 })
 
 export const VExpansionPanelTitle = defineComponent({
@@ -50,6 +52,7 @@ export const VExpansionPanelTitle = defineComponent({
       disabled: expansionPanel.disabled.value,
       expanded: expansionPanel.isSelected.value,
       expandIcon: props.expandIcon,
+      readonly: props.readonly,
     }))
 
     useRender(() => (
@@ -66,7 +69,7 @@ export const VExpansionPanelTitle = defineComponent({
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }
         disabled={ expansionPanel.disabled.value }
         aria-expanded={ expansionPanel.isSelected.value }
-        onClick={ expansionPanel.toggle }
+        onClick={ !props.readonly ? expansionPanel.toggle : undefined }
         v-ripple={ props.ripple }
       >
         <div class="v-expansion-panel-title__overlay" />

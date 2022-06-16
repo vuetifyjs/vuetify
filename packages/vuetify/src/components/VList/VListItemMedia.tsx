@@ -8,8 +8,8 @@ export const VListItemMedia = defineComponent({
   name: 'VListItemMedia',
 
   props: {
-    left: Boolean,
-    right: Boolean,
+    start: Boolean,
+    end: Boolean,
 
     ...makeTagProps(),
   },
@@ -21,8 +21,8 @@ export const VListItemMedia = defineComponent({
           class={[
             'v-list-item-media',
             {
-              'v-list-item-media--start': props.left,
-              'v-list-item-media--end': props.right,
+              'v-list-item-media--start': props.start,
+              'v-list-item-media--end': props.end,
             },
           ]}
           v-slots={ slots }

@@ -1,5 +1,3 @@
-// Imports
-@forward './variables'
 @use 'sass:map'
 @use 'sass:selector'
 @use '../../styles/settings'
@@ -8,11 +6,15 @@
 
 // Block
 .v-slider
-  input
-    cursor: default
+  .v-slider__container
+    input
+      cursor: default
+      padding: 0
+      width: 100%
+      display: none
+
+  .v-input__append, .v-input__prepend
     padding: 0
-    width: 100%
-    display: none
 
 // Elements
 .v-slider__container
@@ -32,6 +34,7 @@
 
 // Modifiers
 .v-slider.v-input--horizontal
+  align-items: center
   margin-left: $slider-horizontal-left
   margin-right: $slider-horizontal-right
 
@@ -41,6 +44,7 @@
     align-items: center
 
 .v-slider.v-input--vertical
+  justify-content: center
   margin-top: $slider-vertical-margin-top
   margin-bottom: $slider-vertical-margin-bottom
 
@@ -51,4 +55,4 @@
   pointer-events: none
 
 .v-slider--has-labels .v-input__control
-  margin-bottom: $slider-tick-label-margin-bottom * .5
+  margin-bottom: $slider-tick-label-margin-top * .5

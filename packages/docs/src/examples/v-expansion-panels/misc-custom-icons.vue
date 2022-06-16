@@ -2,7 +2,7 @@
   <div>
     <v-expansion-panels class="mb-6">
       <v-expansion-panel
-        v-for="(item,i) in 3"
+        v-for="i in 3"
         :key="i"
       >
         <v-expansion-panel-title expand-icon="mdi-menu-down">

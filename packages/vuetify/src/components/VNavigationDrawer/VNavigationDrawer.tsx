@@ -12,6 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
+import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
 
 // Utilities
@@ -31,7 +32,7 @@ export const VNavigationDrawer = defineComponent({
     expandOnHover: Boolean,
     floating: Boolean,
     modelValue: {
-      type: Boolean,
+      type: Boolean as PropType<boolean | null>,
       default: null,
     },
     permanent: Boolean,
@@ -47,7 +48,7 @@ export const VNavigationDrawer = defineComponent({
       type: [Number, String],
       default: 256,
     },
-    position: {
+    location: {
       type: String as PropType<'left' | 'right' | 'bottom'>,
       default: 'left',
       validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
@@ -73,8 +74,9 @@ export const VNavigationDrawer = defineComponent({
     const { mobile } = useDisplay()
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const isHovering = ref(false)
+    const { ssrBootStyles } = useSsrBoot()
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
@@ -107,7 +109,7 @@ export const VNavigationDrawer = defineComponent({
       isTemporary,
       width,
       touchless: toRef(props, 'touchless'),
-      position: toRef(props, 'position'),
+      position: toRef(props, 'location'),
     })
 
     const layoutSize = computed(() => {
@@ -119,8 +121,8 @@ export const VNavigationDrawer = defineComponent({
     })
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
-      position: toRef(props, 'position'),
+      order: computed(() => parseInt(props.order, 10)),
+      position: toRef(props, 'location'),
       layoutSize,
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),
@@ -154,13 +156,13 @@ export const VNavigationDrawer = defineComponent({
             class={[
               'v-navigation-drawer',
               {
-                'v-navigation-drawer--bottom': props.position === 'bottom',
-                'v-navigation-drawer--end': props.position === 'right',
+                'v-navigation-drawer--bottom': props.location === 'bottom',
+                'v-navigation-drawer--end': props.location === 'right',
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
-                'v-navigation-drawer--start': props.position === 'left',
+                'v-navigation-drawer--start': props.location === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--active': isActive.value,
               },
@@ -174,6 +176,7 @@ export const VNavigationDrawer = defineComponent({
               backgroundColorStyles.value,
               layoutItemStyles.value,
               dragStyles.value,
+              ssrBootStyles.value,
             ]}
             { ...attrs }
           >

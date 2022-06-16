@@ -7,9 +7,11 @@ import { useBackgroundColor } from '@/composables/color'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent, inject, toRef } from 'vue'
+import { inject, toRef } from 'vue'
+import { defineComponent } from '@/util'
 
 export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
@@ -17,7 +19,7 @@ export const VTimelineDivider = defineComponent({
   props: {
     hideDot: Boolean,
     lineColor: String,
-    icon: String,
+    icon: IconValue,
     iconColor: String,
     fillDot: Boolean,
     dotColor: String,

@@ -1,64 +1,55 @@
 <template>
   <v-container fluid>
-    <v-row class="dark--text">
-      <v-col cols="6">
-        on
-      </v-col>
-      <v-col cols="6">
-        off
-      </v-col>
-    </v-row>
     <v-row>
       <v-col cols="6">
         <v-switch
           color="primary"
-          value
-          input-value="true"
+          :model-value="true"
+          label="on"
         ></v-switch>
       </v-col>
       <v-col cols="6">
-        <v-switch color="primary"></v-switch>
+        <v-switch
+          color="primary"
+          :model-value="false"
+          label="off"
+        ></v-switch>
       </v-col>
     </v-row>
-    <v-row class="dark--text">
-      <v-col cols="6">
-        on disabled
-      </v-col>
-      <v-col cols="6">
-        off disabled
-      </v-col>
-    </v-row>
+
     <v-row>
       <v-col cols="6">
         <v-switch
           color="primary"
-          value
-          input-value="true"
+          :model-value="true"
           disabled
+          label="on disabled"
         ></v-switch>
       </v-col>
       <v-col cols="6">
-        <v-switch disabled></v-switch>
+        <v-switch
+          color="primary"
+          :model-value="false"
+          disabled
+          label="off disabled"
+        ></v-switch>
       </v-col>
     </v-row>
-    <v-row class="dark--text">
-      <v-col cols="6">
-        on loading
-      </v-col>
-      <v-col cols="6">
-        off loading
-      </v-col>
-    </v-row>
+
     <v-row>
       <v-col cols="6">
         <v-switch
           loading="warning"
-          value
-          input-value="true"
+          :model-value="true"
+          label="on loading"
         ></v-switch>
       </v-col>
       <v-col cols="6">
-        <v-switch loading="warning"></v-switch>
+        <v-switch
+          :model-value="false"
+          loading="warning"
+          label="off loading"
+        ></v-switch>
       </v-col>
     </v-row>
   </v-container>

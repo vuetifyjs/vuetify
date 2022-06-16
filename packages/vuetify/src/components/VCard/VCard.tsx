@@ -8,6 +8,7 @@ import { VAvatar } from '@/components/VAvatar'
 import { VImg } from '@/components/VImg'
 import { VCardActions } from './VCardActions'
 import { VCardAvatar } from './VCardAvatar'
+import { VCardContent } from './VCardContent'
 import { VCardHeader } from './VCardHeader'
 import { VCardHeaderText } from './VCardHeaderText'
 import { VCardImg } from './VCardImg'
@@ -20,12 +21,14 @@ import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -41,14 +44,14 @@ export const VCard = defineComponent({
 
   props: {
     appendAvatar: String,
-    appendIcon: String,
+    appendIcon: IconValue,
     disabled: Boolean,
     flat: Boolean,
     hover: Boolean,
     image: String,
     link: Boolean,
     prependAvatar: String,
-    prependIcon: String,
+    prependIcon: IconValue,
     ripple: Boolean,
     subtitle: String,
     text: String,
@@ -59,6 +62,7 @@ export const VCard = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeRouterProps(),
@@ -73,7 +77,8 @@ export const VCard = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
@@ -111,7 +116,7 @@ export const VCard = defineComponent({
           style={[
             colorStyles.value,
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           href={ link.href.value }
           onClick={ isClickable && link.navigate }
@@ -167,6 +172,8 @@ export const VCard = defineComponent({
                       { slots.subtitle ? slots.subtitle() : props.subtitle }
                     </VCardSubtitle>
                   ) }
+
+                  { slots.headerText?.() }
                 </VCardHeaderText>
               ) }
 
@@ -192,6 +199,10 @@ export const VCard = defineComponent({
             <VCardText>
               { slots.text ? slots.text() : props.text }
             </VCardText>
+          ) }
+
+          { slots.content && (
+            <VCardContent v-slots={{ default: slots.content }} />
           ) }
 
           { slots.default?.() }

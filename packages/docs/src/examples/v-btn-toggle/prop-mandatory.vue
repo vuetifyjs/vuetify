@@ -1,45 +1,24 @@
 <template>
-  <v-card
-    flat
-    class="py-12"
-  >
-    <v-card-text>
-      <v-row
-        align="center"
-        justify="center"
-      >
-        <v-col cols="12">
-          <p class="text-center">
-            Mandatory
-          </p>
-        </v-col>
-        <v-btn-toggle
-          v-model="toggle_exclusive"
-          mandatory
-        >
-          <v-btn>
-            <v-icon>mdi-format-align-left</v-icon>
-          </v-btn>
-          <v-btn>
-            <v-icon>mdi-format-align-center</v-icon>
-          </v-btn>
-          <v-btn>
-            <v-icon>mdi-format-align-right</v-icon>
-          </v-btn>
-          <v-btn>
-            <v-icon>mdi-format-align-justify</v-icon>
-          </v-btn>
-        </v-btn-toggle>
-      </v-row>
-    </v-card-text>
-  </v-card>
+  <div class="d-flex flex-column align-center bg-grey-lighten-4 pa-6">
+    <v-btn-toggle
+      v-model="toggle"
+      color="primary"
+      mandatory
+    >
+      <v-btn icon="mdi-format-align-left" value="left"></v-btn>
+      <v-btn icon="mdi-format-align-center" value="center"></v-btn>
+      <v-btn icon="mdi-format-align-right" value="right"></v-btn>
+      <v-btn icon="mdi-format-align-justify" value="justify"></v-btn>
+    </v-btn-toggle>
+    <pre class="pt-2">{{ toggle }}</pre>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        toggle_exclusive: undefined,
+        toggle: undefined,
       }
     },
   }

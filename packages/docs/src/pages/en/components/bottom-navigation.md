@@ -1,4 +1,5 @@
 ---
+nav: Bottom navigation
 meta:
   title: Bottom navigation component
   description: The bottom navigation component is used for mobile devices and acts as the primary navigation for your application.

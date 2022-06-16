@@ -3,32 +3,28 @@
 @use '../../styles/tools';
 
 // Defaults
-$banner-avatar-border-radius: map.get(settings.$rounded, 'circle') !default;
-$banner-avatar-margin-end: 24px !default;
-$banner-avatar-margin-start: 0 !default;
+$banner-action-margin: 20px !default;
+$banner-actions-line-margin-top: 20px !default;
 $banner-background: rgb(var(--v-theme-surface)) !default;
-$banner-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $banner-border-color: settings.$border-color-root !default;
 $banner-border-radius: map.get(settings.$rounded, 0) !default;
 $banner-border-style: settings.$border-style-root !default;
 $banner-border-thin-width: thin !default;
 $banner-border-width: 0 0 thin 0 !default;
-$banner-content-padding-end: 90px !default;
+$banner-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $banner-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $banner-elevation: 0 !default;
 $banner-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
-$banner-padding-bottom: 8px !default;
-$banner-padding-end: 8px !default;
-$banner-padding-start: 24px !default;
-$banner-padding-top: 10px !default;
+$banner-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
+$banner-padding-inline-start: 16px !default;
+$banner-padding-inline-end: 8px !default;
+$banner-padding: 8px !default;
 $banner-positions: absolute fixed sticky !default;
+$banner-prepend-margin-end: 24px !default;
 $banner-rounded-border-radius: settings.$border-radius-root !default;
+$banner-stacked-padding-inline-end: 36px !default;
 $banner-sticky-top: 0 !default;
-$banner-text-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
-$banner-two-line-content-margin-bottom: 4px !default;
-$banner-two-line-padding-top: 24px !default;
-$banner-three-line-content-margin-bottom: 8px !default;
-$banner-three-line-padding-top: 24px !default;
+$banner-text-padding-end: 90px !default;
 $banner-width: 100% !default;
 
 // Mobile

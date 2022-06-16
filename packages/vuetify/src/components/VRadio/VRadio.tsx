@@ -1,20 +1,22 @@
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
 
-// Utility
-import { defineComponent } from 'vue'
-import { useRender } from '@/util'
+// Composables
+import { IconValue } from '@/composables/icons'
+
+// Utilities
+import { defineComponent, useRender } from '@/util'
 
 export const VRadio = defineComponent({
   name: 'VRadio',
 
   props: {
     falseIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOff',
     },
     trueIcon: {
-      type: String,
+      type: IconValue,
       default: '$radioOn',
     },
   },

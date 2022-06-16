@@ -13,20 +13,17 @@
     >
       <v-layout
         class="elevation-2 rounded mx-auto bg-white"
-        style="max-width: 448px;"
+        style="max-width: 448px; height: 150px"
       >
         <v-system-bar>
-          <v-icon>mdi-wifi-strength-4</v-icon>
-          <v-icon>mdi-signal</v-icon>
-          <v-icon>mdi-battery</v-icon>
+          <v-icon icon="mdi-wifi-strength-4"></v-icon>
+          <v-icon icon="mdi-signal" class="ml-2"></v-icon>
+          <v-icon icon="mdi-battery" class="ml-2"></v-icon>
 
           <span class="ml-2">3:13PM</span>
         </v-system-bar>
 
-        <v-main>
-          <div class="py-16">
-          </div>
-        </v-main>
+        <v-main></v-main>
       </v-layout>
     </v-defaults-provider>
   </usage-example>

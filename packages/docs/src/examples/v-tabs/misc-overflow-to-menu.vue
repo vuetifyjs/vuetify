@@ -42,7 +42,7 @@
                 v-bind="props"
               >
                 more
-                <v-icon right>
+                <v-icon end>
                   mdi-menu-down
                 </v-icon>
               </v-btn>

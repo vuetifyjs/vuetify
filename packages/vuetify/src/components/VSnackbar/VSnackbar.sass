@@ -1,17 +1,10 @@
-@forward './variables'
 @use '../../styles/tools'
 @use '../../styles/settings'
 @use './variables' as *
 
 .v-snackbar
-  bottom: $snackbar-bottom
-  display: flex
   justify-content: center
-  left: $snackbar-left
-  pointer-events: none
-  right: $snackbar-right
-  top: $snackbar-top
-  width: 100%
+  padding-inline-end: var(--v-scrollbar-offset)
 
   &:not(.v-snackbar--absolute)
     height: 100vh
@@ -31,10 +24,6 @@
     padding: $snackbar-wrapper-padding
     pointer-events: auto
     position: relative
-    transition-duration: .15s
-    transition-property: opacity, transform
-    transition-timing-function: settings.$decelerated-easing
-    z-index: 1
 
     @include tools.rounded($snackbar-border-radius)
 
@@ -69,24 +58,6 @@
   &--multi-line &__wrapper
     min-height: $snackbar-multi-line-wrapper-min-height
 
-  &--centered
-    align-items: center
-
-  &--start
-    justify-content: flex-start
-    right: auto
-
-  &--end
-    justify-content: flex-end
-    left: auto
-
-  &--bottom
-    top: auto
-
-  &--top
-    align-items: flex-start
-    bottom: auto
-
   &--vertical &__wrapper
     flex-direction: column
 
@@ -95,11 +66,20 @@
       margin-bottom: $snackbar-vertical-action-margin-bottom
 
 .v-snackbar-transition
-  &-enter-from
-    &.v-snackbar__wrapper
-      transform: scale($snackbar-transition-scale)
+  &-enter-active,
+  &-leave-active
+    transition-duration: .15s
+    transition-timing-function: settings.$decelerated-easing
 
-  &-enter-from,
+  &-enter-active
+    transition-property: opacity, transform
+
+  &-enter-from
+    opacity: 0
+    transform: scale($snackbar-transition-scale)
+
+  &-leave-active
+    transition-property: opacity
+
   &-leave-to
-    &.v-snackbar__wrapper
-      opacity: 0
+    opacity: 0

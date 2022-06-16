@@ -5,7 +5,7 @@
     open-delay="60"
     :open-on-hover="false"
     transition="slide-y-transition"
-    anchor="bottom"
+    location="bottom"
   >
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }" />
@@ -22,8 +22,8 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
-  import AppList from '@/components/app/list/List.vue'
+  import { defineComponent, PropType } from 'vue'
+  import AppList, { Item } from '@/components/app/list/List.vue'
 
   // Components
   export default defineComponent({
@@ -33,7 +33,7 @@
 
     props: {
       items: {
-        type: Array,
+        type: Array as PropType<Item[]>,
         default: () => ([]),
       },
     },

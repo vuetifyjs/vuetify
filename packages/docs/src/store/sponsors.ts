@@ -48,5 +48,11 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     return tiers
   })
 
-  return { sponsors, byTier, load }
+  function bySlug (slug: string) {
+    return sponsors.value.find(sponsor => {
+      return sponsor.slug === slug
+    })
+  }
+
+  return { sponsors, bySlug, byTier, load }
 })

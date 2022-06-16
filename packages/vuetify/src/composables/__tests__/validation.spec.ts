@@ -1,16 +1,15 @@
-import { makeValidationProps } from '@/composables/validation'
-import { defineComponent, nextTick, ref } from 'vue'
 // Composables
-import { useValidation } from '../validation'
+import { makeValidationProps, useValidation } from '../validation'
 
 // Utilites
 import { describe, expect, it } from '@jest/globals'
+import { defineComponent, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { ValidationProps, ValidationRule } from './../validation'
+import type { ValidationProps, ValidationRule } from '../validation'
 
-describe('validation.ts', () => {
+describe('validation', () => {
   function mountFunction (props: Partial<ValidationProps> = {}) {
     return mount(defineComponent({
       props: makeValidationProps(),
@@ -30,12 +29,11 @@ describe('validation.ts', () => {
     ['', [(v: any) => new Promise(resolve => resolve(!!v || 'buzz'))], ['buzz']],
     ['foo', [(v: any) => v === 'foo' || 'bar'], []],
     ['foo', [(v: any) => v === 'bar' || 'fizz'], ['fizz']],
-  ])('should validate rules and return array of errorMessages', async (
-    value: any,
+  ])('should validate rules and return array of errorMessages %#', async (
+    modelValue: any,
     rules: ValidationRule[],
     expected: any
   ) => {
-    const modelValue = ref(value)
     const props = { rules, modelValue }
     const wrapper = mountFunction(props)
 
@@ -51,7 +49,7 @@ describe('validation.ts', () => {
     [3, 3],
     [4, 4],
     [5, 4],
-  ])('only validate up to the maximum error count', async (
+  ])('only validate up to the maximum error count %s', async (
     maxErrors: number | string,
     expected: number,
   ) => {
@@ -77,10 +75,9 @@ describe('validation.ts', () => {
   })
 
   it('should update isPristine when using the validate and reset methods', async () => {
-    const modelValue = ref('')
     const wrapper = mountFunction({
       rules: [(v: any) => v === 'foo' || 'bar'],
-      modelValue,
+      modelValue: '',
     })
 
     expect(wrapper.vm.isPristine).toBe(true)
@@ -91,7 +88,7 @@ describe('validation.ts', () => {
     expect(wrapper.vm.isPristine).toBe(false)
     expect(wrapper.vm.isValid).toBe(false)
 
-    modelValue.value = 'fizz'
+    await wrapper.setProps({ modelValue: 'fizz' })
 
     await nextTick()
     await wrapper.vm.validate()
@@ -99,7 +96,7 @@ describe('validation.ts', () => {
     expect(wrapper.vm.isPristine).toBe(false)
     expect(wrapper.vm.isValid).toBe(false)
 
-    modelValue.value = 'foo'
+    await wrapper.setProps({ modelValue: 'foo' })
 
     await nextTick()
     await wrapper.vm.validate()

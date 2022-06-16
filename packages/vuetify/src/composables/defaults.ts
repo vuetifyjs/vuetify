@@ -1,6 +1,6 @@
 // Utilities
 import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util'
+import { mergeDeep } from '@/util/helpers'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
@@ -59,7 +59,7 @@ export function provideDefaults (
       return properties
     }
 
-    return mergeDeep(properties, properties.prev)
+    return mergeDeep(properties.prev, properties)
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)

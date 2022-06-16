@@ -118,6 +118,8 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 ### Slots
 
+<vuetify slug="vs-vue-3-slots" />
+
 #### Icon slots
 
 Instead of using `prepend`/`append`/`append-outer` icons you can use slots to extend input's functionality.

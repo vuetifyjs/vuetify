@@ -18,6 +18,8 @@ export const VSlideGroupItem = defineComponent({
     return () => slots.default?.({
       isSelected: slideGroupItem.isSelected.value,
       select: slideGroupItem.select,
+      toggle: slideGroupItem.toggle,
+      selectedClass: slideGroupItem.selectedClass.value,
     })
   },
 })

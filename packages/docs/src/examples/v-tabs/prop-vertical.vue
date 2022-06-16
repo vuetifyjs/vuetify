@@ -12,19 +12,19 @@
         color="primary"
       >
         <v-tab value="option-1">
-          <v-icon left>
+          <v-icon start>
             mdi-account
           </v-icon>
           Option 1
         </v-tab>
         <v-tab value="option-2">
-          <v-icon left>
+          <v-icon start>
             mdi-lock
           </v-icon>
           Option 2
         </v-tab>
         <v-tab value="option-3">
-          <v-icon left>
+          <v-icon start>
             mdi-access-point
           </v-icon>
           Option 3

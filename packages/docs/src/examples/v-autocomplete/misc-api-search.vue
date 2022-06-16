@@ -23,7 +23,7 @@
         color="white"
         hide-no-data
         hide-selected
-        item-text="Description"
+        item-title="Description"
         item-value="API"
         label="Public APIs"
         placeholder="Start typing to Search"

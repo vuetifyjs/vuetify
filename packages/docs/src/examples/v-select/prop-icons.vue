@@ -26,7 +26,7 @@
         <v-select
           v-model="e2"
           :items="states"
-          append-outer-icon="mdi-map"
+          append-icon="mdi-map"
           menu-props="auto"
           hide-details
           label="Select"

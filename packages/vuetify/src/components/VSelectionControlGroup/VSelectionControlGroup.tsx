@@ -3,10 +3,11 @@ import './VSelectionControlGroup.sass'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { IconValue } from '@/composables/icons'
 
-// Utility
-import { computed, defineComponent, provide, toRef } from 'vue'
-import { getUid, useRender } from '@/util'
+// Utilities
+import { computed, provide, toRef } from 'vue'
+import { defineComponent, getUid, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -17,8 +18,8 @@ export interface VSelectionGroupContext {
   name: Ref<string | undefined>
   modelValue: Ref<any>
   multiple: Ref<boolean>
-  trueIcon: Ref<string | undefined>
-  falseIcon: Ref<string | undefined>
+  trueIcon: Ref<IconValue | undefined>
+  falseIcon: Ref<IconValue | undefined>
   readonly: Ref<boolean>
   type: Ref<string | undefined>
 }
@@ -33,8 +34,8 @@ export const VSelectionControlGroup = defineComponent({
     id: String,
     inline: Boolean,
     name: String,
-    falseIcon: String,
-    trueIcon: String,
+    falseIcon: IconValue,
+    trueIcon: IconValue,
     multiple: {
       type: Boolean as PropType<boolean | null>,
       default: null,

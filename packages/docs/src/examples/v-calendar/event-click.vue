@@ -51,7 +51,7 @@
                 v-on="on"
               >
                 <span>{{ typeToLabel[type] }}</span>
-                <v-icon right>
+                <v-icon end>
                   mdi-menu-down
                 </v-icon>
               </v-btn>

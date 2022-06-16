@@ -25,7 +25,7 @@
 
       const links = computed(() => {
         const path = props.path || route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
-        const apis = pageToApi[path] as string[]
+        const apis = pageToApi[path as keyof typeof pageToApi]
 
         return apis.map(name => ({
           name,

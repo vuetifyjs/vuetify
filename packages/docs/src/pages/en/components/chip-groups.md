@@ -1,4 +1,5 @@
 ---
+nav: Chip groups
 meta:
   title: Chip group component
   description: The chip group component combines numerous selectable chips into single or multiple lines.

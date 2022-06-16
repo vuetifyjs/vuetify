@@ -3,18 +3,22 @@ import './VAlert.sass'
 
 // Components
 import { VAlertTitle } from './VAlertTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -22,7 +26,6 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -46,7 +49,7 @@ export const VAlert = defineComponent({
     borderColor: String,
     closable: Boolean,
     closeIcon: {
-      type: String,
+      type: IconValue,
       default: '$close',
     },
     closeLabel: {
@@ -54,7 +57,7 @@ export const VAlert = defineComponent({
       default: '$vuetify.close',
     },
     icon: {
-      type: [Boolean, String] as PropType<false | string>,
+      type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
       default: null,
     },
     modelValue: {
@@ -72,6 +75,7 @@ export const VAlert = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -93,7 +97,6 @@ export const VAlert = defineComponent({
     })
     const variantProps = computed(() => ({
       color: props.color ?? props.type,
-      textColor: props.textColor,
       variant: props.variant,
     }))
 
@@ -102,7 +105,8 @@ export const VAlert = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
 
@@ -111,9 +115,10 @@ export const VAlert = defineComponent({
     }
 
     return () => {
-      const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
+      const hasText = !!(props.text || slots.text)
+      const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
         <props.tag
@@ -137,7 +142,7 @@ export const VAlert = defineComponent({
           style={[
             colorStyles.value,
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           role="alert"
         >
@@ -154,17 +159,22 @@ export const VAlert = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-alert__prepend">
-              { slots.prepend
-                ? slots.prepend()
-                : (
-                  <VIcon
-                    icon={ icon.value }
-                    size={ props.prominent ? 'large' : 'default' }
-                  />
-                )
-              }
-            </div>
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  density: props.density,
+                  icon: icon.value,
+                  size: props.prominent ? 44 : 'default',
+                },
+              }}
+            >
+              <div class="v-alert__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : icon.value && (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
           <div class="v-alert__content">
@@ -174,7 +184,9 @@ export const VAlert = defineComponent({
               </VAlertTitle>
             ) }
 
-            { slots.text ? slots.text() : props.text }
+            { hasText && (
+              slots.text ? slots.text() : props.text
+            ) }
 
             { slots.default?.() }
           </div>
@@ -186,20 +198,24 @@ export const VAlert = defineComponent({
           ) }
 
           { hasClose && (
-            <div
-              class="v-alert__close"
-              onClick={ onCloseClick }
+            <VDefaultsProvider
+              defaults={{
+                VIcon: {
+                  icon: props.closeIcon,
+                  size: 'small',
+                },
+              }}
             >
-              { slots.close
-                ? slots.close()
-                : (
-                  <VIcon
-                    icon={ props.closeIcon }
-                    size="small"
-                  />
-                )
-              }
-            </div>
+              <div
+                class="v-alert__close"
+                onClick={ onCloseClick }
+              >
+                { slots.close
+                  ? slots.close()
+                  : (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
         </props.tag>
       )

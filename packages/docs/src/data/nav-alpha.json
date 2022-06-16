@@ -26,11 +26,13 @@
     "activeIcon": "mdi-image-edit",
     "items": [
       "application-layout",
-      "theme",
       "display-and-platform",
-      "icon-fonts",
       "global-configuration",
-      "internationalization"
+      "icon-fonts",
+      "internationalization",
+      "sass-variables",
+      "theme",
+      "treeshaking"
     ]
   },
   {
@@ -47,6 +49,7 @@
       "flex",
       "float",
       "overflow",
+      "sizing",
       "spacing",
       "text-and-typography",
       "transitions"
@@ -56,7 +59,6 @@
     "title": "components",
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
-    "group": "components",
     "items": [
       "all",
       "alerts",
@@ -66,6 +68,7 @@
       "avatars",
       "badges",
       "banners",
+      "bottom-navigation",
       "breadcrumbs",
       "buttons",
       "cards",
@@ -78,7 +81,6 @@
       "footers",
       {
         "title": "form-inputs-and-controls",
-        "group": "components",
         "activeIcon": "",
         "inactiveIcon": "",
         "items": [
@@ -89,6 +91,7 @@
           "forms",
           "inputs",
           "radio-buttons",
+          "selects",
           "sliders",
           "range-sliders",
           "switches",
@@ -99,9 +102,9 @@
       "grids",
       {
         "title": "groups",
-        "group": "components",
         "items": [
           "button-groups",
+          "chip-groups",
           "item-groups",
           "slide-groups",
           "windows"
@@ -115,7 +118,6 @@
       "navigation-drawers",
       {
         "title": "overlays",
-        "group": "components",
         "items": [
           "overlays",
           "dialogs",
@@ -127,7 +129,6 @@
       "parallax",
       {
         "title": "progress",
-        "group": "components",
         "items": [
           "progress-circular",
           "progress-linear"
@@ -148,7 +149,6 @@
     "title": "api",
     "inactiveIcon": "mdi-flask-empty-outline",
     "activeIcon": "mdi-flask-outline",
-    "group": "api",
     "items": []
   },
   {

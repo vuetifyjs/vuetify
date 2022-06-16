@@ -13,7 +13,7 @@
       clearable
       hide-details
       hide-selected
-      item-text="name"
+      item-title="name"
       item-value="symbol"
       label="Search for a coin..."
       solo
@@ -34,7 +34,7 @@
           class="white--text"
           v-on="on"
         >
-          <v-icon left>
+          <v-icon start>
             mdi-bitcoin
           </v-icon>
           <span v-text="item.name"></span>

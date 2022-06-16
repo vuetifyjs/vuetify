@@ -7,12 +7,12 @@ import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/V
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, defineComponent, ref } from 'vue'
-import { filterInputAttrs, useRender } from '@/util'
+import { computed, ref } from 'vue'
+import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VSwitch = defineComponent({
   name: 'VSwitch',
@@ -23,8 +23,11 @@ export const VSwitch = defineComponent({
     indeterminate: Boolean,
     inset: Boolean,
     flat: Boolean,
+    loading: {
+      type: [Boolean, String],
+      default: false,
+    },
 
-    ...makeLoaderProps(),
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
   },
@@ -42,6 +45,9 @@ export const VSwitch = defineComponent({
         ? props.loading
         : props.color
     })
+
+    const uid = getUid()
+    const id = computed(() => props.id || `switch-${uid}`)
 
     function onChange () {
       if (indeterminate.value) {
@@ -69,10 +75,12 @@ export const VSwitch = defineComponent({
           ]}
           { ...inputAttrs }
           { ...inputProps }
+          id={ id.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isReadonly,
               isValid,
@@ -80,6 +88,7 @@ export const VSwitch = defineComponent({
               <VSelectionControl
                 ref={ control }
                 { ...controlProps }
+                id={ id.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
@@ -88,6 +97,7 @@ export const VSwitch = defineComponent({
                 { ...controlAttrs }
               >
                 {{
+                  ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div

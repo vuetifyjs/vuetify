@@ -11,10 +11,11 @@ export interface ScrollStrategyData {
   contentEl: Ref<HTMLElement | undefined>
   activatorEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
-  updatePosition: Ref<((e: Event) => void) | undefined>
+  updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
 const scrollStrategies = {
+  none: null,
   close: closeScrollStrategy,
   block: blockScrollStrategy,
   reposition: repositionScrollStrategy,
@@ -77,14 +78,24 @@ function blockScrollStrategy (data: ScrollStrategyData) {
   }
 
   scrollElements.forEach((el, i) => {
+    el.style.setProperty('--v-body-scroll-x', convertToUnit(-el.scrollLeft))
+    el.style.setProperty('--v-body-scroll-y', convertToUnit(-el.scrollTop))
     el.style.setProperty('--v-scrollbar-offset', convertToUnit(scrollbarWidth))
     el.classList.add('v-overlay-scroll-blocked')
   })
 
   onScopeDispose(() => {
     scrollElements.forEach((el, i) => {
+      const x = parseFloat(el.style.getPropertyValue('--v-body-scroll-x'))
+      const y = parseFloat(el.style.getPropertyValue('--v-body-scroll-y'))
+
+      el.style.removeProperty('--v-body-scroll-x')
+      el.style.removeProperty('--v-body-scroll-y')
       el.style.removeProperty('--v-scrollbar-offset')
       el.classList.remove('v-overlay-scroll-blocked')
+
+      el.scrollLeft = -x
+      el.scrollTop = -y
     })
     if (scrollableParent) {
       data.root.value!.classList.remove('v-overlay--scroll-blocked')
@@ -99,7 +110,7 @@ function repositionScrollStrategy (data: ScrollStrategyData) {
   function update (e: Event) {
     requestNewFrame(() => {
       const start = performance.now()
-      data.updatePosition.value?.(e)
+      data.updateLocation.value?.(e)
       const time = performance.now() - start
       slow = time / (1000 / 60) > 2
     })

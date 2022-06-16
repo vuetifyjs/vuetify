@@ -42,6 +42,8 @@ You can set a fixed aspect ratio if you want to change aspect ratio of the image
 
 If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible without cropping. To fill the entire available space use the `cover` prop.
 
+<example file="v-img/prop-cover" />
+
 #### Height
 
 `v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.

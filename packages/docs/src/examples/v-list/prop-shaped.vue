@@ -12,7 +12,7 @@
         active-color="primary"
         rounded="shaped"
       >
-        <v-list-item-avatar left>
+        <v-list-item-avatar start>
           <v-icon :icon="item.icon"></v-icon>
         </v-list-item-avatar>
         <v-list-item-title v-text="item.text"></v-list-item-title>

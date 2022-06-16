@@ -7,7 +7,6 @@ import { VBtn } from '@/components/VBtn'
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useGroup } from '@/composables/group'
 import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
@@ -24,6 +23,7 @@ import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { TouchHandlers } from '@/directives/touch'
 import type { MakeSlots } from '@/util'
+import type { IconValue } from '@/composables/icons'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -34,7 +34,7 @@ type WindowProvide = {
 }
 
 type ControlProps = {
-  icon: string
+  icon: IconValue
   class: string
   onClick: () => void
   ariaLabel: string
@@ -60,11 +60,11 @@ export const VWindow = genericComponent<new () => {
   props: {
     continuous: Boolean,
     nextIcon: {
-      type: [Boolean, String],
+      type: [Boolean, String, Function, Object] as PropType<IconValue>,
       default: '$next',
     },
     prevIcon: {
-      type: [Boolean, String],
+      type: [Boolean, String, Function, Object] as PropType<IconValue>,
       default: '$prev',
     },
     reverse: Boolean,
@@ -157,12 +157,6 @@ export const VWindow = genericComponent<new () => {
     function next () {
       canMoveForward.value && group.next()
     }
-
-    provideDefaults({
-      VBtn: {
-        variant: 'text',
-      },
-    }, { scoped: true })
 
     const arrows = computed(() => {
       const arrows = []

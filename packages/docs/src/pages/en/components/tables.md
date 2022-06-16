@@ -18,8 +18,6 @@ The `v-table` component is a simple wrapper component around the `<table>` eleme
 
 ## Usage
 
-The simple table is a wrapper component around the `<table>` element.
-
 <example file="v-table/usage" />
 
 ## API
@@ -30,28 +28,28 @@ The simple table is a wrapper component around the `<table>` element.
 
 ### Props
 
-#### Dark
+#### Theme
 
-Use **dark** prop to switch table to the dark theme.
+Use **theme** prop to switch table to another theme.
 
 <example file="v-table/prop-dark" />
 
-#### Dense
+#### Density
 
-You can show a dense version of the table by using the **dense** prop.
+You can show a dense version of the table by using the **density** prop.
 
 <example file="v-table/prop-dense" />
-
-#### Fixed header
-
-Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
-
-<example file="v-table/prop-fixed-header" />
 
 #### Height
 
 Use the **height** prop to set the height of the table.
 
 <example file="v-table/prop-height" />
+
+#### Fixed header
+
+Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
+
+<example file="v-table/prop-fixed-header" />
 
 <backmatter />

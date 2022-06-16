@@ -1,78 +1,33 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-btn"
   >
-    <v-btn
-      v-bind="$attrs"
-    >
-      <v-icon v-if="$attrs.fab || $attrs.icon">
-        $mdiVuetify
-      </v-icon>
-
-      <span v-else>Click Me</span>
-    </v-btn>
-  </v-row>
+    <div class="text-center">
+      <v-defaults-provider
+        :defaults="{
+          VBtn: {
+            prependIcon: model === 'prepend' ? 'mdi-vuetify' : undefined,
+            appendIcon: model === 'append' ? 'mdi-account-circle' : undefined,
+          }
+        }"
+      >
+        <v-btn>
+          Button text
+        </v-btn>
+      </v-defaults-provider>
+    </div>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VBtnUsageExample',
 
     data: () => ({
-      defaults: {
-        block: false,
-        color: null,
-        depressed: false,
-        disabled: false,
-        elevation: 2,
-        fab: false,
-        icon: false,
-        large: false,
-        loading: false,
-        outlined: false,
-        plain: false,
-        rounded: false,
-        small: false,
-        text: false,
-        tile: false,
-        'x-large': false,
-        'x-small': false,
-      },
-      options: {
-        booleans: [
-          'block',
-          'disabled',
-          'large',
-          'loading',
-          'small',
-          'x-large',
-          'x-small',
-        ],
-        sliders: {
-          elevation: [0, 24],
-        },
-        selects: {
-          color: [
-            'accent',
-            'primary',
-            'secondary',
-          ],
-        },
-      },
-      tabs: [
-        'depressed',
-        'icon',
-        'outlined',
-        'plain',
-        'raised',
-        'rounded',
-        'fab',
-        'text',
-        'tile',
-      ],
+      model: 'default',
+      options: ['prepend', 'append'],
     }),
   }
 </script>

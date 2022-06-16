@@ -3,34 +3,31 @@
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
     :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
-    class="app-markup overflow-hidden border"
+    class="app-markup overflow-hidden"
     dir="ltr"
     outlined
     rounded
     v-bind="$attrs"
   >
     <v-toolbar
-      border="b"
       class="px-1"
-      color="transparent"
-      flat
       height="44"
     >
       <v-sheet
         v-if="resource"
-        class="text-body-2 px-3 pt-3 text-disabled"
+        class="text-body-2 px-3 pt-3 text-medium-emphasis"
         color="transparent"
         height="44"
         rounded="tl"
       >
-        <v-icon icon="mdi-file-tree" class="mr-1" />
+        <v-icon icon="mdi-file-tree" />
 
         {{ resource }}
       </v-sheet>
 
       <v-spacer />
 
-      <v-tooltip anchor="bottom">
+      <v-tooltip location="bottom">
         <template #activator="{ props }">
           <v-btn
             :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
@@ -132,7 +129,7 @@
       }
 
       const isDark = computed(() => {
-        return user.mixedTheme || theme.getTheme(theme.current.value).dark
+        return user.mixedTheme || theme.current.value.dark
       })
 
       return {

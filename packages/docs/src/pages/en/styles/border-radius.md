@@ -60,6 +60,12 @@ $rounded: (
 
 ### Misc
 
+<alert type="info">
+
+  Logical values `start` and `end` are only used in the inline direction (left and right) to avoid confusion
+
+</alert>
+
 #### Pill and circle
 
 You can create pills with the `.rounded-pill` class and circles with the `.rounded-circle` class.
@@ -68,7 +74,7 @@ You can create pills with the `.rounded-pill` class and circles with the `.round
 
 #### Rounding by side
 
-Border radius is configurable on a per side basis using the infix classes `-t`, `-r`, `-b`, and `-l` (corresponding respectively to the sides **top**, **right**, **left** and **right**).
+Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **left**).
 
 E.g. `.rounded-b-xl` and `.rounded-t`.
 
@@ -76,7 +82,7 @@ E.g. `.rounded-b-xl` and `.rounded-t`.
 
 #### Rounding by corner
 
-Border radius is configurable on a per corner basis using the infix classes, `-tl`, `-tr`, `-br`, `-bl` (corresponding respectively to the corners **top-left**, **top-right**, **bottom-right**, **bottom-left**)
+Border radius is configurable on a per-corner basis using the infix classes, `-ts`, `-te`, `-be`, `-bs` (corresponding respectively to the corners **top-start**, **top-end**, **bottom-end**, **bottom-start**)
 
 E.g. `.rounded-br-xl` and `.rounded-tr`.
 
@@ -84,7 +90,7 @@ E.g. `.rounded-br-xl` and `.rounded-tr`.
 
 #### Removing Border Radius
 
-Use the `.rounded-0` helper class to remove all bordier radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.
+Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-te-0`.
 
 <example file="border-radius/misc-removing-border-radius" />
 

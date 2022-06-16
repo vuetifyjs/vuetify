@@ -54,7 +54,7 @@
 
               <v-icon
                 color="orange darken-4"
-                right
+                end
               >
                 mdi-open-in-new
               </v-icon>
