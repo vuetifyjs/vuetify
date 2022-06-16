@@ -252,7 +252,7 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           <div class="v-field__field" data-no-activator="">
-            { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
+            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
