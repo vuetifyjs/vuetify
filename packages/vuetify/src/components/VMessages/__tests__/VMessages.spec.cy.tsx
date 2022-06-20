@@ -3,17 +3,12 @@
 import { VMessages } from '..'
 import { generate } from '@/../cypress/templates'
 
-const props = {
-  //
-}
+const props = {}
 
 const stories = {
-  'Default Messages': <VMessages />,
+  Default: <VMessages />,
 }
-
 // Tests
 describe('VMessages', () => {
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
-    generate({ stories, props, component: VMessages })
-  })
+  generate({ stories, props, component: VMessages })
 })
