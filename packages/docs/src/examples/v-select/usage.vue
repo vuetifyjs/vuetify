@@ -55,8 +55,8 @@
       >
         <v-select
           :items="items"
-          label="Contained variant"
-          variant="contained"
+          label="Solo variant"
+          variant="solo"
         ></v-select>
       </v-col>
     </v-row>
