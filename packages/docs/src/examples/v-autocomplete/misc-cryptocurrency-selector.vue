@@ -13,7 +13,7 @@
       clearable
       hide-details
       hide-selected
-      item-text="name"
+      item-title="name"
       item-value="symbol"
       label="Search for a coin..."
       solo

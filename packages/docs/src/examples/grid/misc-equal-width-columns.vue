@@ -1,22 +1,30 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row no-gutters>
-      <template v-for="n in 4" :key="n">
-        <v-col>
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            Column
-          </v-card>
-        </v-col>
-        <v-responsive
-          v-if="n === 2"
-          :key="`width-${n}`"
-          width="100%"
-        ></v-responsive>
-      </template>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+
+      <v-responsive width="100%"></v-responsive>
+
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
     </v-row>
   </v-container>
 </template>

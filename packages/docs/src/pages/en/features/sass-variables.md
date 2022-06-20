@@ -11,7 +11,9 @@ related:
 
 # SASS variables
 
-Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework. Utilizing the _sass/scss data option_ of your `vue.config.js` file, you can optionally pass in custom variables to overwrite the global defaults. A list of available variables is located within each component's API section and in the [Variable API](#variable-api) of this page. This functionality is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).
+Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
+
+Utilizing the sass/scss data option of your `vue.config.js` file, you can optionally pass in custom variables to overwrite the global defaults. A list of available variables is located within each component's API section and in the [Variable API](#variable-api) of this page. This functionality is automatically handled by [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugin-vuetify).
 
 <entry />
 

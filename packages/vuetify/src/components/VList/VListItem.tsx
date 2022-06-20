@@ -25,7 +25,7 @@ import { IconValue } from '@/composables/icons'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { computed, onMounted, watch } from 'vue'
+import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 import { useNestedItem } from '@/composables/nested/nested'
 
@@ -102,11 +102,9 @@ export const VListItem = genericComponent<new () => {
       variant: props.variant,
     }))
 
-    onMounted(() => {
-      if (link.isExactActive?.value && parent.value != null) {
-        root.open(parent.value, true)
-      }
-    })
+    if (link.isExactActive?.value && parent.value != null) {
+      root.open(parent.value, true)
+    }
 
     watch(() => link.isExactActive?.value, val => {
       if (val && parent.value != null) {
