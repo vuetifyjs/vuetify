@@ -20,6 +20,7 @@ import { Ripple } from '@/directives/ripple'
 import { computed, inject, ref } from 'vue'
 import {
   deepEqual,
+  filterInputAttrs,
   genericComponent,
   getUid,
   pick,
@@ -211,6 +212,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
         })
         : props.label
       const type = group?.type.value ?? props.type
+      const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       return (
         <div
@@ -226,6 +228,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             },
             densityClasses.value,
           ]}
+          { ...rootAttrs }
         >
           <div
             class={[
@@ -260,7 +263,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 value={ trueValue.value }
                 name={ group?.name.value ?? props.name }
                 aria-checked={ type === 'checkbox' ? model.value : undefined }
-                { ...attrs }
+                { ...inputAttrs }
               />
 
               { slots.input?.({
@@ -275,9 +278,11 @@ export const VSelectionControl = genericComponent<new <T>() => {
             </div>
           </div>
 
-          <VLabel for={ id.value }>
-            { label }
-          </VLabel>
+          { label && (
+            <VLabel for={ id.value }>
+              { label }
+            </VLabel>
+          ) }
         </div>
       )
     })

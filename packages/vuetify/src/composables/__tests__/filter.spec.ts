@@ -4,7 +4,7 @@ import { describe, expect, it } from '@jest/globals'
 import { ref } from 'vue'
 import { transformItem, transformItems } from '../items'
 
-describe('filter.ts', () => {
+describe('filter', () => {
   describe('defaultFilter', () => {
     it.each([
       [null, null, -1],
@@ -147,17 +147,17 @@ describe('filter.ts', () => {
       const { filteredItems } = useFilter(props, items, query)
 
       expect(filteredItems.value).toHaveLength(2)
-      expect(filteredItems.value.map(({ item }) => item.originalItem.title)).toEqual(['fizz', 'buzz'])
+      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['fizz', 'buzz'])
 
       query.value = 'foo'
 
       expect(filteredItems.value).toHaveLength(1)
-      expect(filteredItems.value.map(({ item }) => item.originalItem.title)).toEqual(['foo'])
+      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['foo'])
 
       items.value.push(transformItem(itemProps, { title: 'foobar' }))
 
       expect(filteredItems.value).toHaveLength(2)
-      expect(filteredItems.value.map(({ item }) => item.originalItem.title)).toEqual(['foo', 'foobar'])
+      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['foo', 'foobar'])
     })
   })
 })
