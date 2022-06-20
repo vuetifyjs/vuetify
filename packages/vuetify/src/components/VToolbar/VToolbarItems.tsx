@@ -9,7 +9,9 @@ import { toRef } from 'vue'
 export const VToolbarItems = defineComponent({
   name: 'VToolbarItems',
 
-  props: makeVariantProps({ variant: 'contained-text' }),
+  props: {
+    ...makeVariantProps({ variant: 'tonal' }),
+  },
 
   setup (props, { slots }) {
     provideDefaults({

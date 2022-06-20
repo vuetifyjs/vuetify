@@ -4,7 +4,7 @@ import './VIcon.sass'
 // Composables
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { useIcon } from '@/composables/icons'
+import { IconValue, useIcon } from '@/composables/icons'
 import { useTextColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
@@ -13,16 +13,13 @@ import { computed, toRef } from 'vue'
 import { convertToUnit, defineComponent, flattenFragments, propsFactory } from '@/util'
 
 // Types
-import type { IconValue } from '@/composables/icons'
-import type { ComputedRef, PropType } from 'vue'
+import type { ComputedRef } from 'vue'
 
 export const makeVIconProps = propsFactory({
   color: String,
   start: Boolean,
   end: Boolean,
-  icon: {
-    type: [String, Object] as PropType<IconValue>,
-  },
+  icon: IconValue,
 
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),

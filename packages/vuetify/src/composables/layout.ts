@@ -34,7 +34,7 @@ interface LayoutProvide {
     vm: ComponentInternalInstance,
     options: {
       id: string
-      priority: Ref<number>
+      order: Ref<number>
       position: Ref<Position>
       layoutSize: Ref<number | string>
       elementSize: Ref<number | string | undefined>
@@ -73,7 +73,7 @@ export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
   },
-  priority: {
+  order: {
     type: [Number, String],
     default: 0,
   },
@@ -90,7 +90,7 @@ export function useLayout () {
 
 export function useLayoutItem (options: {
   id: string | undefined
-  priority: Ref<number>
+  order: Ref<number>
   position: Ref<Position>
   layoutSize: Ref<number | string>
   elementSize: Ref<number | string | undefined>
@@ -244,7 +244,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       vm: ComponentInternalInstance,
       {
         id,
-        priority,
+        order,
         position,
         layoutSize,
         elementSize,
@@ -253,7 +253,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         absolute,
       }
     ) => {
-      priorities.set(id, priority)
+      priorities.set(id, order)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
       activeItems.set(id, active)

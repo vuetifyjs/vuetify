@@ -4,6 +4,7 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -15,11 +16,11 @@ import { defineComponent, propsFactory, useRender } from '@/util'
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
   expandIcon: {
-    type: String,
+    type: IconValue,
     default: '$expand',
   },
   collapseIcon: {
-    type: String,
+    type: IconValue,
     default: '$collapse',
   },
   hideActions: Boolean,

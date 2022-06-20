@@ -8,5 +8,6 @@
   "ol-prefix": false,
   "no-inline-html": false,
   "no-emphasis-as-heading": false,
-  "no-bare-urls": false
+  "no-bare-urls": false,
+  "emphasis-style": false
 }

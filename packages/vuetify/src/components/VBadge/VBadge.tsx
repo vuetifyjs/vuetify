@@ -11,11 +11,12 @@ import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
+import { makeLocationProps, useLocation } from '@/composables/location'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, pick } from '@/util'
+import { toRef } from 'vue'
+import { defineComponent, pick } from '@/util'
 
 export const VBadge = defineComponent({
   name: 'VBadge',
@@ -28,23 +29,11 @@ export const VBadge = defineComponent({
     content: [Number, String],
     dot: Boolean,
     floating: Boolean,
-    icon: String,
+    icon: IconValue,
     inline: Boolean,
     label: {
       type: String,
       default: '$vuetify.badge',
-    },
-    location: {
-      type: String,
-      default: 'top-end',
-      validator: (value: string) => {
-        const [vertical, horizontal] = (value ?? '').split('-')
-
-        return (
-          ['top', 'bottom'].includes(vertical) &&
-          ['start', 'end'].includes(horizontal)
-        )
-      },
     },
     max: [Number, String],
     modelValue: {
@@ -54,6 +43,8 @@ export const VBadge = defineComponent({
     offsetX: [Number, String],
     offsetY: [Number, String],
     textColor: String,
+
+    ...makeLocationProps({ location: 'top end' } as const),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -62,40 +53,21 @@ export const VBadge = defineComponent({
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
-    const { isRtl } = useRtl()
     const { roundedClasses } = useRounded(props)
     const { t } = useLocale()
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'textColor'))
     const { themeClasses } = useTheme()
 
-    const position = computed(() => {
-      return props.floating
+    const { locationStyles } = useLocation(props, true, side => {
+      const base = props.floating
         ? (props.dot ? 2 : 4)
         : (props.dot ? 8 : 12)
-    })
 
-    function calculatePosition (offset?: number | string) {
-      return `calc(100% - ${convertToUnit(position.value + parseInt(offset ?? 0, 10))})`
-    }
-
-    const locationStyles = computed(() => {
-      const [vertical, horizontal] = (props.location ?? '').split('-')
-
-      const styles = {
-        bottom: 'auto',
-        left: 'auto',
-        right: 'auto',
-        top: 'auto',
-      }
-
-      if (!props.inline) {
-        const isRight = (isRtl.value && horizontal === 'end') || (!isRtl.value && horizontal === 'start')
-
-        styles[isRight ? 'right' : 'left'] = calculatePosition(props.offsetX)
-        styles[vertical === 'top' ? 'bottom' : 'top'] = calculatePosition(props.offsetY)
-      }
-
-      return styles
+      return base + (
+        ['top', 'bottom'].includes(side) ? +(props.offsetY ?? 0)
+        : ['left', 'right'].includes(side) ? +(props.offsetX ?? 0)
+        : 0
+      )
     })
 
     return () => {
@@ -140,8 +112,8 @@ export const VBadge = defineComponent({
                 ]}
                 style={[
                   backgroundColorStyles.value,
-                  locationStyles.value,
                   textColorStyles.value,
+                  props.inline ? {} : locationStyles.value,
                 ]}
                 aria-atomic="true"
                 aria-label={ t(props.label, value) }

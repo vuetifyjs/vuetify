@@ -1,5 +1,5 @@
 // Utilities
-import { getCurrentInstance, propsFactory } from '@/util'
+import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
   nextTick,
@@ -79,25 +79,27 @@ export function useBackButton (router: Router | undefined, cb: (next: Navigation
   let removeBefore: (() => void) | undefined
   let removeAfter: (() => void) | undefined
 
-  nextTick(() => {
-    window.addEventListener('popstate', onPopstate)
-    removeBefore = router?.beforeEach((to, from, next) => {
-      if (!inTransition) {
-        setTimeout(() => popped ? cb(next) : next())
-      } else {
-        popped ? cb(next) : next()
-      }
-      inTransition = true
+  if (IN_BROWSER) {
+    nextTick(() => {
+      window.addEventListener('popstate', onPopstate)
+      removeBefore = router?.beforeEach((to, from, next) => {
+        if (!inTransition) {
+          setTimeout(() => popped ? cb(next) : next())
+        } else {
+          popped ? cb(next) : next()
+        }
+        inTransition = true
+      })
+      removeAfter = router?.afterEach(() => {
+        inTransition = false
+      })
     })
-    removeAfter = router?.afterEach(() => {
-      inTransition = false
+    onScopeDispose(() => {
+      window.removeEventListener('popstate', onPopstate)
+      removeBefore?.()
+      removeAfter?.()
     })
-  })
-  onScopeDispose(() => {
-    window.removeEventListener('popstate', onPopstate)
-    removeBefore?.()
-    removeAfter?.()
-  })
+  }
 
   function onPopstate (e: PopStateEvent) {
     if (e.state?.replaced) return

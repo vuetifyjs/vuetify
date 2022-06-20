@@ -16,6 +16,7 @@ import AppMarkup from '@/components/app/Markup.vue'
 import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
 import AppTitle from '@/components/app/Title.vue'
+import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 import Backmatter from '@/components/Backmatter.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
@@ -44,6 +45,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('AppSheet', AppSheet)
   app.component('AppTable', AppTable)
   app.component('AppTitle', AppTitle)
+  app.component('AppTooltipBtn', AppTooltipBtn)
 
   // Used by markdown files
   app.component('Alert', Alert)

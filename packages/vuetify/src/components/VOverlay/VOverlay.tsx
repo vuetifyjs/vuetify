@@ -3,7 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
-import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
+import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -91,6 +91,8 @@ export const VOverlay = genericComponent<new () => {
     },
     contained: Boolean,
     contentClass: null,
+    contentProps: null,
+    disabled: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
@@ -105,7 +107,7 @@ export const VOverlay = genericComponent<new () => {
 
     ...makeActivatorProps(),
     ...makeDimensionProps(),
-    ...makePositionStrategyProps(),
+    ...makeLocationStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
@@ -119,7 +121,13 @@ export const VOverlay = genericComponent<new () => {
   },
 
   setup (props, { slots, attrs, emit }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue')
+    const isActive = computed({
+      get: () => model.value,
+      set: v => {
+        if (!(v && props.disabled)) model.value = v
+      },
+    })
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
@@ -131,9 +139,13 @@ export const VOverlay = genericComponent<new () => {
     const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
     const { dimensionStyles } = useDimension(props)
 
+    watch(() => props.disabled, v => {
+      if (v) isActive.value = false
+    })
+
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
-    const { contentStyles, updatePosition } = usePositionStrategies(props, {
+    const { contentStyles, updateLocation } = useLocationStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
@@ -143,7 +155,7 @@ export const VOverlay = genericComponent<new () => {
       contentEl,
       activatorEl,
       isActive,
-      updatePosition,
+      updateLocation,
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -264,6 +276,7 @@ export const VOverlay = genericComponent<new () => {
                       contentStyles.value,
                     ]}
                     { ...toHandlers(contentEvents.value) }
+                    { ...props.contentProps }
                   >
                     { slots.default?.({ isActive }) }
                   </div>
@@ -280,7 +293,7 @@ export const VOverlay = genericComponent<new () => {
       contentEl,
       activatorEl,
       isTop,
-      updatePosition,
+      updateLocation,
     }
   },
 })

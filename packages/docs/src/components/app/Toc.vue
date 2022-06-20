@@ -5,7 +5,7 @@
     class="py-4 pr-3"
     floating
     width="256"
-    position="right"
+    location="right"
   >
     <template
       v-if="toc.length"
@@ -51,7 +51,7 @@
       <v-container>
         <v-card
           :color="dark ? undefined : 'grey-lighten-5'"
-          variant="contained-flat"
+          variant="flat"
         >
 
           <v-container class="pa-2">
@@ -236,7 +236,7 @@
               return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
             })
         )),
-        dark: computed(() => theme.getTheme(theme.current.value).dark),
+        dark: computed(() => theme.current.value.dark),
         route,
       }
     },

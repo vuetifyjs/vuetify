@@ -13,7 +13,6 @@ $list-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !de
 $list-disabled-opacity: 0.6 !default;
 $list-elevation: 0 !default;
 $list-padding: 8px 0 !default;
-$list-positions: absolute fixed !default;
 $list-rounded-border-radius: map.get(settings.$rounded, null) !default;
 $list-indent-size: 16px !default;
 
