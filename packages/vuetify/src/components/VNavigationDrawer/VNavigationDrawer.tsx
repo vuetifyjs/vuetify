@@ -12,6 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
+import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
 
 // Utilities
@@ -75,6 +76,7 @@ export const VNavigationDrawer = defineComponent({
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const isHovering = ref(false)
+    const { ssrBootStyles } = useSsrBoot()
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
@@ -174,6 +176,7 @@ export const VNavigationDrawer = defineComponent({
               backgroundColorStyles.value,
               layoutItemStyles.value,
               dragStyles.value,
+              ssrBootStyles.value,
             ]}
             { ...attrs }
           >

@@ -10,7 +10,7 @@ export const VToolbarItems = defineComponent({
   name: 'VToolbarItems',
 
   props: {
-    ...makeVariantProps({ variant: 'contained-text' }),
+    ...makeVariantProps({ variant: 'tonal' }),
   },
 
   setup (props, { slots }) {

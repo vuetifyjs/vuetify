@@ -59,9 +59,9 @@
 
   const vm = getCurrentInstance()!
 
-  const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.domLoading
-
   function startTransition (val: string) {
+    const loadTime = performance.timing.domContentLoadedEventEnd - performance.timing.domLoading
+
     if (!loadTime || loadTime > 2000) return
 
     const el: HTMLElement = vm.root.proxy!.$el

@@ -29,12 +29,17 @@ interface FormField {
   isValid: boolean | null
 }
 
-interface FormValidationResult {
+interface FieldValidationResult {
   id: number | string
   errorMessages: string[]
 }
 
-export interface SubmitEventPromise extends SubmitEvent, Promise<{ valid: boolean, errorMessages: FormValidationResult[] }> {}
+interface FormValidationResult {
+  valid: boolean
+  errors: FieldValidationResult[]
+}
+
+export interface SubmitEventPromise extends SubmitEvent, Promise<FormValidationResult> {}
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 
@@ -65,13 +70,13 @@ export function createForm (props: FormProps) {
   const isReadonly = computed(() => props.readonly)
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
-  const errorMessages = ref<FormValidationResult[]>([])
+  const errors = ref<FieldValidationResult[]>([])
 
   async function validate () {
     const results = []
     let valid = true
 
-    errorMessages.value = []
+    errors.value = []
     isValidating.value = true
 
     for (const item of items.value) {
@@ -89,10 +94,10 @@ export function createForm (props: FormProps) {
       if (!valid && props.fastFail) break
     }
 
-    errorMessages.value = results
+    errors.value = results
     isValidating.value = false
 
-    return { valid, errorMessages: errorMessages.value }
+    return { valid, errors: errors.value }
   }
 
   function reset () {
@@ -102,7 +107,7 @@ export function createForm (props: FormProps) {
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errorMessages.value = []
+    errors.value = []
     model.value = null
   }
 
@@ -146,7 +151,7 @@ export function createForm (props: FormProps) {
   })
 
   return {
-    errorMessages,
+    errors,
     isDisabled,
     isReadonly,
     isValidating,
