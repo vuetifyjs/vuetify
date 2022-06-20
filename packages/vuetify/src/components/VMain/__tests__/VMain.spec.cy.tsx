@@ -1,14 +1,16 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VApp } from '@/components'
 import { VMain } from '..'
-import { generate } from '@/../cypress/templates'
 
-const props = {}
+describe('VAppBar', () => {
+  it('should allow custom height', () => {
+    cy.mount(() => (
+      <VApp>
+        <VMain tag="div" />
+      </VApp>
+    ))
 
-const stories = {
-  Default: <VMain />,
-}
-// Tests
-describe('VMain', () => {
-  generate({ stories, props, component: VMain })
+    cy.get('.v-main').should('have.prop', 'tagName').should('eq', 'DIV')
+  })
 })
