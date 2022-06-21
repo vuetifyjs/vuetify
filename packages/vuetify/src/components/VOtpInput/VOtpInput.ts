@@ -49,7 +49,6 @@ export default baseMixins.extend<options>().extend({
   },
 
   data: () => ({
-    badInput: false,
     initialValue: null,
     isBooted: false,
     otp: [] as string[],
@@ -65,9 +64,6 @@ export default baseMixins.extend<options>().extend({
         ...VTextField.options.computed.classes.call(this),
         'v-otp-input--plain': this.plain,
       }
-    },
-    isDirty (): boolean {
-      return VInput.options.computed.isDirty.call(this) || this.badInput
     },
   },
 
@@ -159,18 +155,17 @@ export default baseMixins.extend<options>().extend({
         },
         attrs: {
           ...this.attrs$,
+          autocomplete: 'one-time-code',
           disabled: this.isDisabled,
           readonly: this.isReadonly,
           type: this.type,
           id: `${this.computedId}--${otpIdx}`,
           class: `otp-field-box--${otpIdx}`,
-          maxlength: 1,
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
           input: (e: Event) => this.onInput(e, otpIdx),
           focus: (e: Event) => this.onFocus(e, otpIdx),
-          paste: (e: ClipboardEvent) => this.onPaste(e, otpIdx),
           keydown: this.onKeyDown,
           keyup: (e: KeyboardEvent) => this.onKeyUp(e, otpIdx),
         }),
@@ -212,22 +207,31 @@ export default baseMixins.extend<options>().extend({
         e && this.$emit('focus', e)
       }
     },
-    onInput (e: Event, otpIdx: number) {
+    onInput (e: Event, index: number) {
+      const maxCursor = +this.length - 1
+
       const target = e.target as HTMLInputElement
       const value = target.value
-      this.applyValue(otpIdx, target.value, () => {
-        this.internalValue = this.otp.join('')
-      })
-      this.badInput = target.validity && target.validity.badInput
+      const inputDataArray = value?.split('') || []
 
-      const nextIndex = otpIdx + 1
-      if (value) {
-        if (nextIndex < +this.length) {
-          this.changeFocus(nextIndex)
-        } else {
-          this.clearFocus(otpIdx)
-          this.onCompleted()
-        }
+      const newOtp: string[] = [...this.otp]
+      for (let i = 0; i < inputDataArray.length; i++) {
+        const appIdx = index + i
+        if (appIdx > maxCursor) break
+        newOtp[appIdx] = inputDataArray[i].toString()
+      }
+      if (!inputDataArray.length) {
+        newOtp.splice(index, 1)
+      }
+
+      this.otp = newOtp
+      this.internalValue = this.otp.join('')
+
+      if (index + inputDataArray.length >= +this.length) {
+        this.onCompleted()
+        this.clearFocus(index)
+      } else if (inputDataArray.length) {
+        this.changeFocus(index + inputDataArray.length)
       }
     },
     clearFocus (index: number) {
@@ -254,30 +258,6 @@ export default baseMixins.extend<options>().extend({
       if (this.hasMouseDown) this.focus(e, otpIdx)
 
       VInput.options.methods.onMouseUp.call(this, e)
-    },
-    onPaste (event: ClipboardEvent, index: number) {
-      const maxCursor = +this.length - 1
-      const inputVal = event?.clipboardData?.getData('Text')
-      const inputDataArray = inputVal?.split('') || []
-      event.preventDefault()
-      const newOtp: string[] = [...this.otp]
-      for (let i = 0; i < inputDataArray.length; i++) {
-        const appIdx = index + i
-        if (appIdx > maxCursor) break
-        newOtp[appIdx] = inputDataArray[i].toString()
-      }
-      this.otp = newOtp
-      this.internalValue = this.otp.join('')
-      const targetFocus = Math.min(index + inputDataArray.length, maxCursor)
-      this.changeFocus(targetFocus)
-
-      if (newOtp.length === +this.length) { this.onCompleted(); this.clearFocus(targetFocus) }
-    },
-    applyValue (index: number, inputVal: string, next: Function) {
-      const newOtp: string[] = [...this.otp]
-      newOtp[index] = inputVal
-      this.otp = newOtp
-      next()
     },
     changeFocus (index: number) {
       this.onFocus(undefined, index || 0)

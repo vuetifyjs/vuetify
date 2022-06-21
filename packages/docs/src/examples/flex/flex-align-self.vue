@@ -1,39 +1,87 @@
 <template>
   <div>
-    <v-card
-      v-for="j in justify"
-      :key="j"
-      class="d-flex mb-6"
-      color="grey lighten-2"
-      flat
-      height="100"
-      tile
-    >
-      <v-card
-        v-for="n in 3"
-        :key="n"
-        class="pa-2"
-        :class="[n === 2 && `align-self-${j}`]"
-        outlined
-        tile
-      >
-        {{ n === 2 ? 'Aligned flex item' : 'Flex item' }}
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-start" outlined tile>
+        Aligned start
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+    </v-card>
+
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-center" outlined tile>
+        Aligned center
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+    </v-card>
+
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-end" outlined tile>
+        Aligned end
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+    </v-card>
+
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-baseline" outlined tile>
+        Aligned baseline
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+    </v-card>
+
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-auto" outlined tile>
+        Aligned auto
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+    </v-card>
+
+    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
+      <v-card class="pa-2" outlined tile>
+        flex item
+      </v-card>
+
+      <v-card class="pa-2 align-self-stretch" outlined tile>
+        Aligned stretch
+      </v-card>
+
+      <v-card class="pa-2" outlined tile>
+        flex item
       </v-card>
     </v-card>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      justify: [
-        'start',
-        'end',
-        'center',
-        'baseline',
-        'auto',
-        'stretch',
-      ],
-    }),
-  }
-</script>
