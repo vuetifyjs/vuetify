@@ -100,15 +100,16 @@ export const VBanner = defineComponent({
                 VAvatar: {
                   color: color.value,
                   density: density.value,
-                  image: props.avatar,
                   icon: props.icon,
+                  image: props.avatar,
                 },
               }}
             >
               <div class="v-banner__prepend">
-                { (props.avatar || props.icon) && (<VAvatar />) }
-
-                { slots.prepend?.() }
+                { slots.prepend
+                  ? slots.prepend()
+                  : (props.avatar || props.icon) && (<VAvatar />)
+                }
               </div>
             </VDefaultsProvider>
           ) }
@@ -122,12 +123,6 @@ export const VBanner = defineComponent({
 
             { slots.default?.() }
           </div>
-
-          { slots.append && (
-            <div class="v-banner__append">
-              { slots.append() }
-            </div>
-          ) }
 
           { slots.actions && (
             <VBannerActions>
