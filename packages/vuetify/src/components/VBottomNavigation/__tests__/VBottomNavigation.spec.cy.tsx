@@ -21,18 +21,14 @@ describe('VBottomNavigation', () => {
       </VLayout>
     ))
 
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '64px')
-
-    cy.vue().then(wrapper => wrapper.setProps({ density: 'prominent' }))
-
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '128px')
+    cy.get('.v-bottom-navigation').should('have.css', 'height', '56px')
 
     cy.vue().then(wrapper => wrapper.setProps({ density: 'comfortable' }))
 
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '56px')
+    cy.get('.v-bottom-navigation').should('have.css', 'height', '48px')
 
     cy.vue().then(wrapper => wrapper.setProps({ density: 'compact' }))
 
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '48px')
+    cy.get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
 })
