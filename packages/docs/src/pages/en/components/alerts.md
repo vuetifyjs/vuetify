@@ -82,7 +82,7 @@ The **density** prop supports 3 levels of component height; **default**, **comfo
 
 #### Variants
 
-`v-alert` has 6 style variants, **contained, contained-flat, contained-text, outlined, plain,** and **text**. By default, the `v-alert` component is **contained-flat**; which means that it has a solid background and does not have a box-shadow (elevation).
+`v-alert` has 6 style variants, **elevated**, **flat**, **tonal**, **outlined**, **text**, and **plain**. By default, the `v-alert` component is **flat**; which means that it has a solid background and does not have a box-shadow (elevation).
 
 <example file="v-alert/prop-variant" />
 

@@ -30,7 +30,7 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 
 <alert type="error">
 
-  When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.
+  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 
 </alert>
 

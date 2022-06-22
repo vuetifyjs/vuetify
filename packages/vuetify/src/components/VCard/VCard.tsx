@@ -67,7 +67,7 @@ export const VCard = defineComponent({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
   setup (props, { attrs, slots }) {

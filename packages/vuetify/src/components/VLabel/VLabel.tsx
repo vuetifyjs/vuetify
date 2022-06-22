@@ -5,7 +5,7 @@ import './VLabel.sass'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VLabel = defineComponent({
   name: 'VLabel',
@@ -17,13 +17,15 @@ export const VLabel = defineComponent({
   },
 
   setup (props, { slots }) {
-    return () => (
+    useRender(() => (
       <label class="v-label">
         { props.text }
 
         { slots.default?.() }
       </label>
-    )
+    ))
+
+    return {}
   },
 })
 
