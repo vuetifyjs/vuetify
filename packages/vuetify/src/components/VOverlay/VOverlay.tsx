@@ -3,19 +3,19 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton, useRouter } from '@/composables/router'
-import { useToggleScope } from '@/composables/toggleScope'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
-import { useTeleport } from '@/composables/teleport'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useStack } from '@/composables/stack'
+import { useTeleport } from '@/composables/teleport'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -41,9 +41,9 @@ import {
 } from 'vue'
 
 // Types
-import type { PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
+import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -107,11 +107,11 @@ export const VOverlay = genericComponent<new () => {
 
     ...makeActivatorProps(),
     ...makeDimensionProps(),
+    ...makeLazyProps(),
     ...makeLocationStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
-    ...makeLazyProps(),
   },
 
   emits: {
@@ -289,9 +289,9 @@ export const VOverlay = genericComponent<new () => {
     ))
 
     return {
+      activatorEl,
       animateClick,
       contentEl,
-      activatorEl,
       isTop,
       updateLocation,
     }
