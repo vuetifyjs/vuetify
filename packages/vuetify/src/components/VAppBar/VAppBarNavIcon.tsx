@@ -5,7 +5,7 @@ import { VBtn } from '@/components/VBtn'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VAppBarNavIcon = defineComponent({
   name: 'VAppBarNavIcon',
@@ -18,10 +18,14 @@ export const VAppBarNavIcon = defineComponent({
   },
 
   setup (props, { slots }) {
-    return () => (
-      <VBtn class="v-app-bar-nav-icon" icon={ props.icon }>
-        { slots.default?.() }
-      </VBtn>
-    )
+    useRender(() => (
+      <VBtn
+        class="v-app-bar-nav-icon"
+        icon={ props.icon }
+        v-slots={ slots }
+      />
+    ))
+
+    return {}
   },
 })
