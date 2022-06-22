@@ -6,9 +6,9 @@ import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
