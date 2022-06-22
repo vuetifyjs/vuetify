@@ -6,7 +6,7 @@ import { generate } from '@/../cypress/templates'
 const props = {}
 
 const stories = {
-  Default: <VIcon />,
+  Default: <VIcon icon="mdi-vuetify" />,
 }
 // Tests
 describe('VIcon', () => {
