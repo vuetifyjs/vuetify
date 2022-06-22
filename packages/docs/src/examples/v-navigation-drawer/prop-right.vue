@@ -3,7 +3,7 @@
     <v-layout>
       <v-navigation-drawer
         permanent
-        position="right"
+        location="right"
       >
         <template v-slot:prepend>
           <v-list-item

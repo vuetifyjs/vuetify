@@ -11,6 +11,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -31,7 +32,7 @@ import type { LoaderSlotProps } from '@/composables/loader'
 import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -47,11 +48,11 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
-  appendInnerIcon: String,
+  appendInnerIcon: IconValue,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
-    type: String,
+    type: IconValue,
     default: '$clear',
   },
   active: Boolean,
@@ -61,7 +62,7 @@ export const makeVFieldProps = propsFactory({
   error: Boolean,
   label: String,
   persistentClear: Boolean,
-  prependInnerIcon: String,
+  prependInnerIcon: IconValue,
   reverse: Boolean,
   singleLine: Boolean,
   variant: {
@@ -250,8 +251,8 @@ export const VField = genericComponent<new <T>() => {
             </div>
           ) }
 
-          <div class="v-field__field">
-            { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
+          <div class="v-field__field" data-no-activator="">
+            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}

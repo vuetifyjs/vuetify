@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
@@ -32,8 +33,8 @@ export interface VInputSlot {
 
 export const makeVInputProps = propsFactory({
   id: String,
-  appendIcon: String,
-  prependIcon: String,
+  appendIcon: IconValue,
+  prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
@@ -71,6 +72,10 @@ export const VInput = genericComponent<new <T>() => {
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+
+    const uid = getUid()
+    const id = computed(() => props.id || `input-${uid}`)
+
     const {
       errorMessages,
       isDirty,
@@ -83,10 +88,7 @@ export const VInput = genericComponent<new <T>() => {
       resetValidation,
       validate,
       validationClasses,
-    } = useValidation(props)
-
-    const uid = getUid()
-    const id = computed(() => props.id || `input-${uid}`)
+    } = useValidation(props, 'v-input', id)
 
     const slotProps = computed<VInputSlot>(() => ({
       id,

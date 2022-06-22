@@ -20,7 +20,7 @@
         <v-tooltip
           v-for="{ path, ...action } in actions"
           :key="path"
-          anchor="top"
+          location="top"
         >
           <template #activator="{ props: tooltip }">
             <v-btn
@@ -138,7 +138,7 @@
   const parentTheme = useTheme()
   const _theme = ref<null | string>(null)
   const theme = computed({
-    get: () => _theme.value ?? parentTheme.current.value,
+    get: () => _theme.value ?? parentTheme.name.value,
     set: val => _theme.value = val,
   })
   const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'

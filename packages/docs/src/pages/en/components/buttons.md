@@ -53,7 +53,13 @@ The recommended placement of elements inside of `v-btn` is:
 
 #### Variant
 
-The **variant** prop gives you easy access to several different button styles
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
+
+<alert type="warning">
+
+  When a `v-btn` is used inside of `v-toolbar` and `v-app-bar` the default variant **text** is applied instead of **elevated**.
+
+</alert>
 
 <example file="v-btn/prop-variant" />
 
@@ -75,15 +81,11 @@ Icons can be used for the primary content of a button. Use the **icon** prop to 
 
 <example file="v-btn/prop-icon" />
 
-<!--
-
 #### Loaders
 
-Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized.
+Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
 
 <example file="v-btn/prop-loaders" />
-
---->
 
 <random />
 

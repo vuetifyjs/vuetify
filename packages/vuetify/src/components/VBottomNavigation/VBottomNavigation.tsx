@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
@@ -69,7 +69,7 @@ export const VBottomNavigation = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue', props.modelValue)
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
+      order: computed(() => parseInt(props.order, 10)),
       position: computed(() => 'bottom'),
       layoutSize: computed(() => isActive.value ? height.value : 0),
       elementSize: height,
@@ -88,7 +88,7 @@ export const VBottomNavigation = defineComponent({
       },
     }, { scoped: true })
 
-    return () => {
+    useRender(() => {
       return (
         <props.tag
           class={[
@@ -121,7 +121,9 @@ export const VBottomNavigation = defineComponent({
           ) }
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

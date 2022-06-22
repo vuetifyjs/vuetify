@@ -22,9 +22,10 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** May 2022
-- **Alpha:** [Live](https://next.vuetifyjs.com/)
-- **Beta:** March 2022
+- **Target Release:** June 2022
+- **Alpha:** Complete
+- **Beta:** [Live](https://next.vuetifyjs.com/)
+- **Release Candidate:** [Pending](https://github.com/vuetifyjs/vuetify/issues/14984)
 - **Overview:**
   - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Global properties that allow you to make large overarching changes to your app
@@ -110,9 +111,9 @@ The following are the already released **minor** and **major** version updates. 
 - **Released:** January 2020
 - **Notes:** [v2.2 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.2.0)
 - **Overview:**
-  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be _user customizable_. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
+  The introduction of Vuetify Presets. Will include the entire Material Design Studies collection and be *user customizable*. Will streamline the process for altering the default styles for the framework. Thousands of SASS variables will be added and a lookup tree for finding those variables will put into the documentation. For more information on Google's studies, please [navigate here](https://material.io/design/material-studies/about-our-material-studies.html).
 - **Objectives:**
-  - Add _thousands_ of new SASS variables
+  - Add *thousands* of new SASS variables
   - Create a new Vuetify Service for bootstrapping pre-configured framework options; **Preset**
   - Create presets for the official [Material Design Studies](https://material.io/design/material-studies/about-our-material-studies.html)
   - Add new features and improve code styling of `v-badge`

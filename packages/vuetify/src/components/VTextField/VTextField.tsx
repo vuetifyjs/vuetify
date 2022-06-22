@@ -153,6 +153,7 @@ export const VTextField = genericComponent<new <T>() => {
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -168,9 +169,10 @@ export const VTextField = genericComponent<new <T>() => {
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ attrs['onClick:prependInner'] }
-                onClick:appendInner={ attrs['onClick:prependInner'] }
+                onClick:appendInner={ attrs['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
+                id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 focused={ isFocused.value }
@@ -192,6 +194,7 @@ export const VTextField = genericComponent<new <T>() => {
                         <div
                           class={ fieldClass }
                           onClick={ e => emit('click:input', e) }
+                          data-no-activator=""
                         >
                           { slots.default?.() }
 

@@ -2,9 +2,10 @@
 import './VSelectionControlGroup.sass'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-// Utility
+// Utilities
 import { computed, provide, toRef } from 'vue'
 import { defineComponent, getUid, useRender } from '@/util'
 
@@ -17,8 +18,8 @@ export interface VSelectionGroupContext {
   name: Ref<string | undefined>
   modelValue: Ref<any>
   multiple: Ref<boolean>
-  trueIcon: Ref<string | undefined>
-  falseIcon: Ref<string | undefined>
+  trueIcon: Ref<IconValue | undefined>
+  falseIcon: Ref<IconValue | undefined>
   readonly: Ref<boolean>
   type: Ref<string | undefined>
 }
@@ -33,8 +34,8 @@ export const VSelectionControlGroup = defineComponent({
     id: String,
     inline: Boolean,
     name: String,
-    falseIcon: String,
-    trueIcon: String,
+    falseIcon: IconValue,
+    trueIcon: IconValue,
     multiple: {
       type: Boolean as PropType<boolean | null>,
       default: null,
@@ -66,17 +67,15 @@ export const VSelectionControlGroup = defineComponent({
       type: toRef(props, 'type'),
     })
 
-    useRender(() => {
-      return (
-        <div
-          class="v-selection-control-group"
-          aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
-          role={ props.type === 'radio' ? 'radiogroup' : undefined }
-        >
-          { slots?.default?.() }
-        </div>
-      )
-    })
+    useRender(() => (
+      <div
+        class="v-selection-control-group"
+        aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
+        role={ props.type === 'radio' ? 'radiogroup' : undefined }
+      >
+        { slots?.default?.() }
+      </div>
+    ))
 
     return {}
   },
