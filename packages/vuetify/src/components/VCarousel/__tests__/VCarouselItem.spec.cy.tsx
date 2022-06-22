@@ -1,12 +1,16 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VCarouselItem } from '..'
+import { VCarousel, VCarouselItem } from '..'
 import { generate } from '@/../cypress/templates'
 
 const props = {}
 
 const stories = {
-  Default: <VCarouselItem />,
+  Default: (
+    <VCarousel>
+      <VCarouselItem />
+    </VCarousel>
+  ),
 }
 // Tests
 describe('VCarouselItem', () => {
