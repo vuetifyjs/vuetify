@@ -1,37 +1,32 @@
 <template>
-  <v-toolbar
-    v-bind="$attrs"
+  <usage-example
+    v-model="model"
+    :options="options"
+    name="v-toolbar"
   >
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
-  </v-toolbar>
+    <v-defaults-provider
+      :defaults="{
+        VToolbar: {
+          variant: model === 'elevated' ? 'elevated' : undefined,
+        }
+      }"
+    >
+      <v-layout>
+        <v-toolbar>
+          <v-toolbar-title>Toolbar Title</v-toolbar-title>
+        </v-toolbar>
+      </v-layout>
+    </v-defaults-provider>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VToolbarUsageExample',
 
     data: () => ({
-      defaults: {
-        color: null,
-        elevation: 4,
-        dense: false,
-        flat: false,
-        outlined: false,
-        prominent: false,
-        rounded: false,
-        shaped: false,
-      },
-      options: {
-        sliders: {
-          elevation: [0, 24],
-        },
-        selects: {
-          color: ['red', 'orange', 'yellow', 'green', 'blue', 'purple'],
-        },
-      },
-      tabs: ['dense', 'flat', 'outlined', 'prominent', 'rounded', 'shaped'],
+      model: 'default',
+      options: ['elevated'],
     }),
   }
 </script>
