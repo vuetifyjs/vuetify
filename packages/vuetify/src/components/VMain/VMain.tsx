@@ -7,7 +7,7 @@ import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VMain = defineComponent({
   name: 'VMain',
@@ -18,7 +18,7 @@ export const VMain = defineComponent({
     const { mainStyles } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
-    return () => (
+    useRender(() => (
       <props.tag
         class="v-main"
         style={[
@@ -30,6 +30,8 @@ export const VMain = defineComponent({
           { slots.default?.() }
         </div>
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })

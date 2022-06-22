@@ -1,5 +1,5 @@
 // Utilities
-import { computed } from 'vue'
+import { computed, isRef } from 'vue'
 import { getCurrentInstanceName, propsFactory } from '@/util'
 
 // Types
@@ -17,17 +17,16 @@ export function useBorder (
   name = getCurrentInstanceName(),
 ) {
   const borderClasses = computed(() => {
+    const border = isRef(props) ? props.value : props.border
     const classes: string[] = []
 
-    if (props.border != null && props.border !== false) {
+    if (border === true || border === '') {
       classes.push(`${name}--border`)
-    }
-
-    if (
-      (typeof props.border === 'string' && props.border !== '') ||
-      props.border === 0
+    } else if (
+      typeof border === 'string' ||
+      border === 0
     ) {
-      for (const value of String(props.border).split(' ')) {
+      for (const value of String(border).split(' ')) {
         classes.push(`border-${value}`)
       }
     }
