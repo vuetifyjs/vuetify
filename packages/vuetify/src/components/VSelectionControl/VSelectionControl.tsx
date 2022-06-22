@@ -6,15 +6,15 @@ import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
 import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
