@@ -30,8 +30,8 @@
         >
           <v-text-field
             value="John Doe"
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             disabled
           ></v-text-field>
         </v-col>
@@ -42,8 +42,8 @@
         >
           <v-text-field
             value="John Doe"
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             readonly
           ></v-text-field>
         </v-col>

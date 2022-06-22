@@ -26,14 +26,14 @@ const stories = {
   'Icon badge': <VBadge icon="mdi-vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
       <VBadge {...{ [xy]: offset }} content={ `${offset}` }>
-        <button class="v-btn v-btn--size-default v-btn--variant-contained">
+        <button class="v-btn v-btn--size-default v-btn--variant-elevated">
           { xy }
         </button>
       </VBadge>
   )),
   'Text color': gridOn(defaultColors, [null], color => (
     <VBadge textColor={ color } content={ color }>
-      <button class="v-btn v-btn--size-default v-btn--variant-contained">
+      <button class="v-btn v-btn--size-default v-btn--variant-elevated">
         { color }
       </button>
     </VBadge>

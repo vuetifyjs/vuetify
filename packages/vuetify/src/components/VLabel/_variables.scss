@@ -1,5 +1,6 @@
 @use '../../styles/settings';
 
+// VLabel
 $label-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $label-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $label-display: inline-flex !default;
