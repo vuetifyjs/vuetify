@@ -1,13 +1,13 @@
 // Styles
 import './VDivider.sass'
 
-// Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
-
 // Composables
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+
+// Utilities
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
@@ -22,6 +22,7 @@ export const VDivider = defineComponent({
     length: [Number, String],
     thickness: [Number, String],
     vertical: Boolean,
+
     ...makeThemeProps(),
   },
 
@@ -42,30 +43,30 @@ export const VDivider = defineComponent({
       return styles
     })
 
-    return () => {
-      return (
-        <hr
-          class={[
-            {
-              'v-divider': true,
-              'v-divider--inset': props.inset,
-              'v-divider--vertical': props.vertical,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-          ]}
-          style={[
-            dividerStyles.value,
-            backgroundColorStyles.value,
-          ]}
-          aria-orientation={
-            !attrs.role || attrs.role === 'separator'
-              ? props.vertical ? 'vertical' : 'horizontal'
-              : undefined
-          }
-          role={`${attrs.role || 'separator'}`}
-        />
-      )
-    }
+    useRender(() => (
+      <hr
+        class={[
+          {
+            'v-divider': true,
+            'v-divider--inset': props.inset,
+            'v-divider--vertical': props.vertical,
+          },
+          themeClasses.value,
+          backgroundColorClasses.value,
+        ]}
+        style={[
+          dividerStyles.value,
+          backgroundColorStyles.value,
+        ]}
+        aria-orientation={
+          !attrs.role || attrs.role === 'separator'
+            ? props.vertical ? 'vertical' : 'horizontal'
+            : undefined
+        }
+        role={`${attrs.role || 'separator'}`}
+      />
+    ))
+
+    return {}
   },
 })

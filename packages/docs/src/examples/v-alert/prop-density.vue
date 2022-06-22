@@ -12,7 +12,7 @@
     <v-alert
       density="comfortable"
       type="success"
-      variant="contained-text"
+      variant="tonal"
     >
       I'm a comfortable alert with the <strong>text</strong> prop and a <strong>type</strong> of success
     </v-alert>
