@@ -12,8 +12,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
+import { genericComponent, IN_BROWSER, useRender } from '@/util'
 import { nextTick, ref, watch } from 'vue'
-import { genericComponent, IN_BROWSER } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -102,36 +102,36 @@ export const VDialog = genericComponent<new () => {
       }
     })
 
-    return () => {
-      return (
-        <VOverlay
-          v-model={ isActive.value }
-          class={[
-            'v-dialog',
-            {
-              'v-dialog--fullscreen': props.fullscreen,
-              'v-dialog--scrollable': props.scrollable,
-            },
-          ]}
-          style={ dimensionStyles.value }
-          transition={ props.transition }
-          ref={ overlay }
-          aria-role="dialog"
-          aria-modal="true"
-          activatorProps={{
-            'aria-haspopup': 'dialog',
-            'aria-expanded': String(isActive.value),
-          }}
-          z-index={ 2400 }
-          { ...scopeId }
-          { ...attrs }
-          v-slots={{
-            default: slots.default,
-            activator: slots.activator,
-          }}
-        />
-      )
-    }
+    useRender(() => (
+      <VOverlay
+        v-model={ isActive.value }
+        class={[
+          'v-dialog',
+          {
+            'v-dialog--fullscreen': props.fullscreen,
+            'v-dialog--scrollable': props.scrollable,
+          },
+        ]}
+        style={ dimensionStyles.value }
+        transition={ props.transition }
+        ref={ overlay }
+        aria-role="dialog"
+        aria-modal="true"
+        activatorProps={{
+          'aria-haspopup': 'dialog',
+          'aria-expanded': String(isActive.value),
+        }}
+        z-index={ 2400 }
+        { ...scopeId }
+        { ...attrs }
+        v-slots={{
+          default: slots.default,
+          activator: slots.activator,
+        }}
+      />
+    ))
+
+    return {}
   },
 })
 
