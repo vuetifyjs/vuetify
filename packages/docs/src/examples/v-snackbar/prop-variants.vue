@@ -44,7 +44,7 @@
       bottom
       color="primary"
       left
-      variant="contained-text"
+      variant="tonal"
     >
       Lorem ipsum dolor sit amet consectetur.
     </v-snackbar>

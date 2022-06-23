@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:map'
 @use 'sass:selector'
 @use '../../styles/settings'
@@ -42,14 +41,13 @@
   &--appended
     padding-inline-end: $field-control-affixed-padding
 
-  &--variant-contained
-    background: $field-control-contained-background
+  &--variant-solo
+    background: $field-control-solo-background
     border-color: transparent
-    color: $field-control-contained-color
+    color: $field-control-solo-color
 
-    @include tools.elevation($field-control-contained-elevation)
+    @include tools.elevation($field-control-solo-elevation)
 
-  &--variant-contained,
   &--variant-filled
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
@@ -69,7 +67,7 @@
   &--single-line
     --v-field-padding-top: 0
 
-  &--variant-contained,
+  &--variant-solo,
   &--variant-filled
     $root: &
 
@@ -210,7 +208,7 @@
     .v-field.v-field--active &
       visibility: visible
 
-    .v-field--variant-contained &,
+    .v-field--variant-solo &,
     .v-field--variant-filled &
       $root: &
 

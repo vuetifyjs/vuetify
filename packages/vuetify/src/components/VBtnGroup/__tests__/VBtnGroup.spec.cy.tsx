@@ -6,8 +6,9 @@ import { VBtnGroup } from '..'
 
 const colors = ['success', 'info', 'warning', 'error', 'invalid'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
-const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
+const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'] as const
 
+// TODO: screenshot tests
 describe('VBtnGroup', () => {
   describe('color', () => {
     it('should render set length', () => {

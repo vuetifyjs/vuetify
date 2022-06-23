@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
@@ -185,7 +184,7 @@
   top: 0
   transition: opacity 0.2s ease-in-out
 
-  .v-list-item--active.v-list-item--contained &
+  .v-list-item--active.v-list-item--variant-elevated &
     --v-theme-overlay-multiplier: 0
 
 $base-padding: list.nth($list-item-padding, 2)
