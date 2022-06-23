@@ -2,7 +2,7 @@
 import { VToolbarTitle } from '@/components/VToolbar'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VAppBarTitle = defineComponent({
   name: 'VAppBarTitle',
@@ -10,11 +10,13 @@ export const VAppBarTitle = defineComponent({
   props: { ...VToolbarTitle.props },
 
   setup (_, { slots }) {
-    return () => (
+    useRender(() => (
       <VToolbarTitle
         class="v-app-bar-title"
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })

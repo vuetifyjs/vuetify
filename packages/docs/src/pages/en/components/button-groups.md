@@ -14,13 +14,17 @@ related:
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-<entry />
+![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png)
+
+---
 
 ## Usage
 
 Toggle buttons allow you to create a styled group of buttons that can be selected or toggled under a single **v-model**.
 
 <example file="v-btn-toggle/usage" />
+
+<entry />
 
 ## API
 
