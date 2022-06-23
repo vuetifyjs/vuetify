@@ -80,7 +80,7 @@ export const VAlert = defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-flat' } as const),
+    ...makeVariantProps({ variant: 'flat' } as const),
   },
 
   emits: {

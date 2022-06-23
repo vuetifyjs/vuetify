@@ -15,7 +15,7 @@ export interface InternalItem {
     value: any
   }
   children?: InternalItem[]
-  originalItem: any
+  raw: any
 }
 
 export interface ItemProps {
@@ -69,7 +69,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
     value: _props.value,
     props: _props,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
-    originalItem: item,
+    raw: item,
   }
 }
 
@@ -91,7 +91,7 @@ export function useItems (props: ItemProps) {
   }
 
   function transformOut (value: InternalItem[]) {
-    if (props.returnObject) return value.map(({ originalItem: item }) => item)
+    if (props.returnObject) return value.map(({ raw: item }) => item)
     return value.map(({ props }) => props.value)
   }
 

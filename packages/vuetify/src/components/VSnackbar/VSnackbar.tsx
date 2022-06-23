@@ -6,17 +6,17 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makePositionProps, usePosition } from '@/composables/position'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeLocationProps, useLocation } from '@/composables/location'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTransitionProps } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { onMounted, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeLocationProps, useLocation } from '@/composables/location'
-import { useScopeId } from '@/composables/scopeId'
+import { onMounted, watch } from 'vue'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
@@ -124,7 +124,7 @@ export const VSnackbar = defineComponent({
               role="status"
               aria-live="polite"
             >
-              { slots.default?.() }
+              { slots.default() }
             </div>
           ) }
 
@@ -138,7 +138,7 @@ export const VSnackbar = defineComponent({
               }}
             >
               <div class="v-snackbar__actions">
-                { slots.actions?.() }
+                { slots.actions() }
               </div>
             </VDefaultsProvider>
           ) }
