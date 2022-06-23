@@ -1,4 +1,3 @@
-@forward './variables'
 @use '../../styles/tools'
 @use './mixins' as *
 @use './variables' as *
@@ -19,4 +18,4 @@
   @include tools.theme($avatar-theme...)
 
   &--rounded
-    @includes tools.rounded($avatar-rounded-border-radius)
+    @include tools.rounded($avatar-rounded-border-radius)

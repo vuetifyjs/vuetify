@@ -1,4 +1,3 @@
-@use '../../styles/settings';
-@use '../../styles/tools';
-
-// Defaults
+$radio-group-label-grid-area: label !default;
+$radio-group-label-margin-inline-start: 12px !default;
+$radio-group-label-selection-group-margin-top: 16px !default;

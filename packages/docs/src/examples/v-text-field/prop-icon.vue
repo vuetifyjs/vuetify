@@ -34,25 +34,25 @@
           <v-text-field
             label="Prepend"
             prepend-icon="mdi-map-marker"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
             label="Prepend inner"
             prepend-inner-icon="mdi-map-marker"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
             label="Append"
             append-icon="mdi-map-marker"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
             label="Append outer"
             append-outer-icon="mdi-map-marker"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
         </v-col>
 

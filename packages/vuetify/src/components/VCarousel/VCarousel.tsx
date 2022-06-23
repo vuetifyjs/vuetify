@@ -8,17 +8,17 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { VWindow } from '@/components/VWindow'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
 import type { GroupProvide } from '@/composables/group'
+import type { PropType } from 'vue'
 
 export const VCarousel = defineComponent({
   name: 'VCarousel',
@@ -94,8 +94,8 @@ export const VCarousel = defineComponent({
         ]}
         style={{ height: convertToUnit(props.height) }}
         continuous
-        showArrows={ props.showArrows }
         mandatory="force"
+        showArrows={ props.showArrows }
       >
         {{
           default: slots.default,
@@ -151,5 +151,7 @@ export const VCarousel = defineComponent({
         }}
       </VWindow>
     ))
+
+    return {}
   },
 })

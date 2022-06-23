@@ -36,7 +36,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
   setup (props, { slots }) {
     createList()
 
-    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type, originalItem: item }) => {
+    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type, raw: item }) => {
       if (type === 'divider') return <VDivider {...itemProps} />
 
       if (type === 'subheader') return <VListSubheader {...itemProps} v-slots={ slots } />
