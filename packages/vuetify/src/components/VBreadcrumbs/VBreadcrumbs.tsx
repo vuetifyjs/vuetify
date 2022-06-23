@@ -10,7 +10,6 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeItemsProps, useItems } from '@/composables/items'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
@@ -21,7 +20,14 @@ import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
+import type { LinkProps } from '@/composables/router'
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
+
+export type BreadcrumbItem = string | (LinkProps & {
+  text: string
+  disabled?: boolean
+})
 
 export const VBreadcrumbs = genericComponent<new <T>() => {
   $props: {
@@ -45,9 +51,12 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
       default: '/',
     },
     icon: IconValue,
+    items: {
+      type: Array as PropType<BreadcrumbItem[]>,
+      default: () => ([]),
+    },
 
     ...makeDensityProps(),
-    ...makeItemsProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'ul' }),
   },
@@ -56,7 +65,6 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { densityClasses } = useDensity(props)
 
-    const { items } = useItems(props)
     const { roundedClasses } = useRounded(props)
 
     provideDefaults({
@@ -103,15 +111,16 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
             </VDefaultsProvider>
           ) }
 
-          { items.value.map(({ props: itemProps, originalItem: item }, index, array) => (
+          { props.items.map((item, index, array) => (
             <>
               <VBreadcrumbsItem
                 key={ index }
                 disabled={ index >= array.length - 1 }
-                { ...itemProps }
-              >
-                { slots.item?.({ item, index }) }
-              </VBreadcrumbsItem>
+                { ...(typeof item === 'string' ? { title: item } : item) }
+                v-slots={{
+                  default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                }}
+              />
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider>

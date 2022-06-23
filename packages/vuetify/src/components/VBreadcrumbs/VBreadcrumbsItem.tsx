@@ -51,7 +51,7 @@ export const VBreadcrumbsItem = defineComponent({
           aria-current={ isActive.value ? 'page' : undefined }
           onClick={ link.navigate }
         >
-          { slots.title ? slots.title() : props.title }
+          { slots.default?.() ?? props.title }
         </Tag>
       )
     })
