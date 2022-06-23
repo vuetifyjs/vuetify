@@ -4,15 +4,18 @@
 import './VCard.sass'
 
 // Components
-import { VAvatar } from '@/components/VAvatar'
-import { VImg } from '@/components/VImg'
 import { VCardActions } from './VCardActions'
-import { VCardHeader } from './VCardHeader'
-import { VCardSubtitle } from './VCardSubtitle'
+import { VCardItem } from './VCardItem'
 import { VCardText } from './VCardText'
-import { VCardTitle } from './VCardTitle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VImg } from '@/components/VImg'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -23,15 +26,9 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { VDefaultsProvider } from '../VDefaultsProvider'
 
 export const VCard = defineComponent({
   name: 'VCard',
@@ -82,11 +79,11 @@ export const VCard = defineComponent({
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
-      const hasHeaderContent = hasTitle || hasSubtitle
+      const hasHeader = hasTitle || hasSubtitle
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
-      const hasHeader = hasHeaderContent || hasPrepend || hasAppend
+      const hasListItem = hasHeader || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
       const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
@@ -133,64 +130,23 @@ export const VCard = defineComponent({
 
           { slots.media?.() }
 
-          { hasHeader && (
-            <VCardHeader>
-              { hasPrepend && (
-                <VDefaultsProvider
-                  defaults={{
-                    VAvatar: {
-                      density: props.density,
-                      icon: props.prependIcon,
-                      image: props.prependAvatar,
-                    },
-                  }}
-                >
-                  <div class="v-card__prepend">
-                    { slots.prepend
-                      ? slots.prepend()
-                      : (<VAvatar />)
-                    }
-                  </div>
-                </VDefaultsProvider>
-              ) }
-
-              { hasHeaderContent && (
-                <>
-                  { hasTitle && (
-                    <VCardTitle>
-                      { slots.title ? slots.title() : props.title}
-                    </VCardTitle>
-                  ) }
-
-                  { hasSubtitle && (
-                    <VCardSubtitle>
-                      { slots.subtitle ? slots.subtitle() : props.subtitle }
-                    </VCardSubtitle>
-                  ) }
-
-                  { slots.header?.() }
-                </>
-              ) }
-
-              { hasAppend && (
-                <VDefaultsProvider
-                  defaults={{
-                    VAvatar: {
-                      density: props.density,
-                      icon: props.appendIcon,
-                      image: props.appendAvatar,
-                    },
-                  }}
-                >
-                  <div class="v-card__append">
-                    { slots.append
-                      ? slots.append()
-                      : (<VAvatar />)
-                    }
-                  </div>
-                </VDefaultsProvider>
-              ) }
-            </VCardHeader>
+          { hasListItem && (
+            <VCardItem
+              prependAvatar={ props.prependAvatar }
+              prependIcon={ props.prependIcon }
+              title={ props.title }
+              subtitle={ props.subtitle }
+              appendAvatar={ props.appendAvatar }
+              appendIcon={ props.appendIcon }
+            >
+              {{
+                default: slots.item,
+                prepend: slots.prepend,
+                title: slots.title,
+                subtitle: slots.subtitle,
+                append: slots.append,
+              }}
+            </VCardItem>
           ) }
 
           { hasText && (

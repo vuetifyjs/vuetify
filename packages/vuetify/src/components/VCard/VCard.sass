@@ -18,14 +18,6 @@
   @include tools.states('.v-card__overlay')
   @include tools.variant($card-variants...)
 
-  &__prepend
-    grid-area: prepend
-    padding-inline-end: $card-prepend-padding-inline-end
-
-  &__append
-    grid-area: append
-    padding-inline-start: $card-append-padding-inline-start
-
   &--disabled
     pointer-events: none
     user-select: none
@@ -89,23 +81,35 @@
   min-height: $card-actions-min-height
   padding: $card-actions-padding
 
-.v-card-header
+.v-card-item
   align-items: $card-item-align-items
   display: grid
   flex: $card-header-flex
-  grid-template-areas: "prepend title append" "prepend subtitle append"
-  grid-template-columns: max-content auto max-content max-content
+  grid-template-areas: "prepend content append"
+  grid-template-columns: max-content auto max-content
   padding: $card-item-padding
 
   + .v-card-text
     padding-top: 0
+
+  &__prepend
+    grid-area: prepend
+    padding-inline-end: $card-prepend-padding-inline-end
+
+  &__append
+    grid-area: append
+    padding-inline-start: $card-append-padding-inline-start
+
+.v-card-item__content
+  align-self: center
+  grid-area: content
+  overflow: hidden
 
 .v-card-title
   display: block
   flex: $card-title-flex
   font-size: $card-title-font-size
   font-weight: $card-title-font-weight
-  grid-area: title
   hyphens: $card-title-hyphens
   letter-spacing: $card-title-letter-spacing
   min-width: 0
@@ -123,7 +127,7 @@
 
   @include card-line-height-densities($card-title-densities)
 
-  .v-card-header &
+  .v-card-item &
     padding: $card-title-header-padding
 
   + .v-card-text,
@@ -136,7 +140,6 @@
   flex: $card-subtitle-flex
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
-  grid-area: subtitle
   letter-spacing: $card-subtitle-letter-spacing
   opacity: $card-subtitle-opacity
   overflow: $card-subtitle-overflow
@@ -147,7 +150,7 @@
 
   @include card-line-height-densities($card-subtitle-densities)
 
-  .v-card-header &
+  .v-card-item &
     padding: $card-subtitle-header-padding
 
 .v-card-text
