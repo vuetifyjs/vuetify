@@ -1,12 +1,17 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VFooter } from '..'
+import { VLayout } from '@/components'
 import { generate } from '@/../cypress/templates'
 
 const props = {}
 
 const stories = {
-  Default: <VFooter />,
+  Default: (
+    <VLayout>
+      <VFooter />
+    </VLayout>
+  ),
 }
 // Tests
 describe('VFooter', () => {
