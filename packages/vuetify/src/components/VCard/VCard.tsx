@@ -126,6 +126,7 @@ export const VCard = defineComponent({
 
           { hasImage && (
             <VDefaultsProvider
+              key="image"
               defaults={{
                 VImg: {
                   cover: true,
@@ -142,9 +143,10 @@ export const VCard = defineComponent({
           { slots.media?.() }
 
           { hasHeader && (
-            <VCardHeader>
+            <VCardHeader key="header">
               { hasPrepend && (
                 <VDefaultsProvider
+                  key="prepend"
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -160,15 +162,15 @@ export const VCard = defineComponent({
               ) }
 
               { hasHeaderText && (
-                <VCardHeaderText>
+                <VCardHeaderText key="headerText">
                   { hasTitle && (
-                    <VCardTitle>
+                    <VCardTitle key="title">
                       { slots.title ? slots.title() : props.title}
                     </VCardTitle>
                   ) }
 
                   { hasSubtitle && (
-                    <VCardSubtitle>
+                    <VCardSubtitle key="subtitle">
                       { slots.subtitle ? slots.subtitle() : props.subtitle }
                     </VCardSubtitle>
                   ) }
@@ -179,6 +181,7 @@ export const VCard = defineComponent({
 
               { hasAppend && (
                 <VDefaultsProvider
+                  key="append"
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -196,7 +199,7 @@ export const VCard = defineComponent({
           ) }
 
           { hasText && (
-            <VCardText>
+            <VCardText key="text">
               { slots.text ? slots.text() : props.text }
             </VCardText>
           ) }

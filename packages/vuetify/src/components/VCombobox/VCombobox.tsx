@@ -70,6 +70,7 @@ export const VCombobox = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   }
   $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
     'no-data': []
@@ -333,11 +334,13 @@ export const VCombobox = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { filteredItems.value.map(({ item, matches }) => slots.item?.({
+                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
+                      index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
                     }) ?? (
                       <VListItem
+                        key={ index }
                         { ...item.props }
                         onClick={ () => select(item) }
                       >
@@ -371,6 +374,7 @@ export const VCombobox = genericComponent<new <
 
                   return (
                     <div
+                      key={ index }
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [
@@ -391,7 +395,7 @@ export const VCombobox = genericComponent<new <
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item, index })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>

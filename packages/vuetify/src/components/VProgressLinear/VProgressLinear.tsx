@@ -115,6 +115,7 @@ export const VProgressLinear = defineComponent({
       >
         { props.stream && (
           <div
+            key="stream"
             class={[
               'v-progress-linear__stream',
               textColorClasses.value,

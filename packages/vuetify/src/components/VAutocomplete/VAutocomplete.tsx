@@ -67,6 +67,7 @@ export const VAutocomplete = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   }
   $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
     'no-data': []
@@ -251,11 +252,13 @@ export const VAutocomplete = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { filteredItems.value.map(({ item, matches }) => slots.item?.({
+                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
+                      index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
                     }) ?? (
                       <VListItem
+                        key={ index }
                         { ...item.props }
                         onClick={ () => select(item) }
                       >
@@ -288,7 +291,7 @@ export const VAutocomplete = genericComponent<new <
                   }
 
                   return (
-                    <div class="v-autocomplete__selection">
+                    <div key={ index } class="v-autocomplete__selection">
                       { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
@@ -300,7 +303,7 @@ export const VAutocomplete = genericComponent<new <
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item, index })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>

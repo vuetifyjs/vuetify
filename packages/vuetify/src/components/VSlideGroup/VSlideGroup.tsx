@@ -348,6 +348,7 @@ export const VSlideGroup = defineComponent({
       >
         { hasAffixes.value && (
           <div
+            key="prev"
             class={[
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
@@ -363,6 +364,7 @@ export const VSlideGroup = defineComponent({
         ) }
 
         <div
+          key="container"
           ref={ containerRef }
           class="v-slide-group__container"
           onScroll={ onScroll }
@@ -384,6 +386,7 @@ export const VSlideGroup = defineComponent({
 
         { hasAffixes.value && (
           <div
+            key="next"
             class={[
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },

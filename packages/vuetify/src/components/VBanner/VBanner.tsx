@@ -96,6 +96,7 @@ export const VBanner = defineComponent({
         >
           { hasPrepend && (
             <VDefaultsProvider
+              key="prepend"
               defaults={{
                 VAvatar: {
                   color: color.value,
@@ -116,7 +117,7 @@ export const VBanner = defineComponent({
 
           <div class="v-banner__content">
             { hasText && (
-              <VBannerText>
+              <VBannerText key="text">
                 { slots.text ? slots.text() : props.text }
               </VBannerText>
             ) }

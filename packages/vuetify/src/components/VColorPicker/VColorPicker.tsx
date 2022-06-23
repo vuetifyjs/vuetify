@@ -125,6 +125,7 @@ export const VColorPicker = defineComponent({
       >
         { !props.hideCanvas && (
           <VColorPickerCanvas
+            key="canvas"
             color={ currentColor.value }
             onUpdate:color={ updateColor }
             disabled={ props.disabled }
@@ -135,9 +136,10 @@ export const VColorPicker = defineComponent({
         ) }
 
         { (!props.hideSliders || !props.hideInputs) && (
-          <div class="v-color-picker__controls">
+          <div key="controls" class="v-color-picker__controls">
             { !props.hideSliders && (
               <VColorPickerPreview
+                key="preview"
                 color={ currentColor.value }
                 onUpdate:color={ updateColor }
                 hideAlpha={ !mode.value.endsWith('a') }
@@ -147,6 +149,7 @@ export const VColorPicker = defineComponent({
 
             { !props.hideInputs && (
               <VColorPickerEdit
+                key="edit"
                 modes={ props.modes }
                 mode={ mode.value }
                 onUpdate:mode={ m => mode.value = m }
@@ -160,6 +163,7 @@ export const VColorPicker = defineComponent({
 
         { props.showSwatches && (
           <VColorPickerSwatches
+            key="swatches"
             color={ currentColor.value }
             onUpdate:color={ updateColor }
             maxHeight={ props.swatchesMaxHeight }

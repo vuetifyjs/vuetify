@@ -198,9 +198,9 @@ export const VListItem = genericComponent<new () => {
           ) }
 
           { hasHeader && (
-            <VListItemHeader>
+            <VListItemHeader key="header">
               { hasTitle && (
-                <VListItemTitle>
+                <VListItemTitle key="title">
                   { slots.title
                     ? slots.title({ title: props.title })
                     : props.title

@@ -82,6 +82,7 @@ export const VSelect = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   }
   $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
     'no-data': []
@@ -207,11 +208,13 @@ export const VSelect = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { items.value.map(item => slots.item?.({
+                    { items.value.map((item, index) => slots.item?.({
                       item,
+                      index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
                     }) ?? (
                       <VListItem
+                        key={ index }
                         { ...item.props }
                         onClick={ () => select(item) }
                       >
@@ -239,7 +242,7 @@ export const VSelect = genericComponent<new <
                   }
 
                   return (
-                    <div class="v-select__selection">
+                    <div key={ index } class="v-select__selection">
                       { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
@@ -251,7 +254,7 @@ export const VSelect = genericComponent<new <
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item, index })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
