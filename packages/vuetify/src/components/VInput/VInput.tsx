@@ -127,7 +127,7 @@ export const VInput = genericComponent<new <T>() => {
             <div
               class="v-input__prepend"
             >
-              { slots?.prepend?.(slotProps.value) }
+              { slots.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
                 <VIcon
@@ -148,7 +148,7 @@ export const VInput = genericComponent<new <T>() => {
             <div
               class="v-input__append"
             >
-              { slots?.append?.(slotProps.value) }
+              { slots.append?.(slotProps.value) }
 
               { props.appendIcon && (
                 <VIcon

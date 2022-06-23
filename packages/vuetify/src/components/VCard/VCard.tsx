@@ -173,7 +173,7 @@ export const VCard = defineComponent({
                     </VCardSubtitle>
                   ) }
 
-                  { slots.headerText?.() }
+                  { slots['header-text']?.() }
                 </VCardHeaderText>
               ) }
 
