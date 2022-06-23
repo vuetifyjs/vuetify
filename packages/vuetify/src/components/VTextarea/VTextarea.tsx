@@ -7,12 +7,12 @@ import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/V
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
+// Directives
+import Intersect from '@/directives/intersect'
+
 // Composables
 import { useForwardRef } from '@/composables/forwardRef'
 import { useProxiedModel } from '@/composables/proxiedModel'
-
-// Directives
-import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
