@@ -6,12 +6,12 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/rtl'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
@@ -55,6 +55,7 @@ export const VSlideGroup = defineComponent({
         ].includes(v)
       ),
     },
+
     ...makeTagProps(),
     ...makeGroupProps({
       selectedClass: 'v-slide-group-item--active',
@@ -347,6 +348,7 @@ export const VSlideGroup = defineComponent({
       >
         { hasAffixes.value && (
           <div
+            key="prev"
             class={[
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
@@ -362,6 +364,7 @@ export const VSlideGroup = defineComponent({
         ) }
 
         <div
+          key="container"
           ref={ containerRef }
           class="v-slide-group__container"
           onScroll={ onScroll }
@@ -383,6 +386,7 @@ export const VSlideGroup = defineComponent({
 
         { hasAffixes.value && (
           <div
+            key="next"
             class={[
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },

@@ -8,8 +8,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import intersect from '@/directives/intersect'
 
 // Utilities
+import { defineComponent, useRender } from '@/util'
+
+// Types
 import type { PropType } from 'vue'
-import { defineComponent } from '@/util'
 
 export const VLazy = defineComponent({
   name: 'VLazy',
@@ -40,6 +42,7 @@ export const VLazy = defineComponent({
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)
+
     const isActive = useProxiedModel(props, 'modelValue')
 
     function onIntersect (isIntersecting: boolean) {
@@ -48,7 +51,7 @@ export const VLazy = defineComponent({
       isActive.value = isIntersecting
     }
 
-    return () => (
+    useRender(() => (
       <props.tag
         class="v-lazy"
         v-intersect={[
@@ -64,6 +67,8 @@ export const VLazy = defineComponent({
           </MaybeTransition>
         )}
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })

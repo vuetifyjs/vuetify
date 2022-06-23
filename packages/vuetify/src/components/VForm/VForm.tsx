@@ -1,10 +1,10 @@
 // Composables
 import { createForm, makeFormProps } from '@/composables/form'
+import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
 import { ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { useForwardRef } from '@/composables/forwardRef'
 
 // Types
 import type { SubmitEventPromise } from '@/composables/form'
