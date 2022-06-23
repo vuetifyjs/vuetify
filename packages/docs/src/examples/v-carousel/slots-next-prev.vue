@@ -6,14 +6,14 @@
   >
     <template v-slot:prev="{ props }">
       <v-btn
-        variant="contained"
+        variant="elevated"
         color="success"
         @click="props.onClick"
       >Previous slide</v-btn>
     </template>
     <template v-slot:next="{ props }">
       <v-btn
-        variant="contained"
+        variant="elevated"
         color="info"
         @click="props.onClick"
       >Next slide</v-btn>

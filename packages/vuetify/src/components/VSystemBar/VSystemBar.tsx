@@ -7,12 +7,11 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VSystemBar = defineComponent({
   name: 'VSystemBar',
@@ -45,14 +44,7 @@ export const VSystemBar = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
-    provideDefaults({
-      VBtn: {
-        variant: 'text',
-        density: 'compact',
-      },
-    }, { scoped: true })
-
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-system-bar',
@@ -68,6 +60,8 @@ export const VSystemBar = defineComponent({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })

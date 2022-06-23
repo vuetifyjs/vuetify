@@ -1,10 +1,12 @@
 @use 'sass:math';
 @use 'sass:map';
 
+// VTabs
 $tabs-density: ( 'default': 0, 'comfortable' : -1, 'compact': -3) !default;
 $tabs-height: 48px !default;
 $tabs-stacked-height: 72px !default;
 
+// VTab
 $tab-align-with-title-margin: 42px !default;
 $tab-max-width: 360px !default;
 $tab-min-width: 90px !default;
