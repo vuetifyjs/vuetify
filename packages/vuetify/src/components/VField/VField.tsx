@@ -3,15 +3,15 @@ import './VField.sass'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'
-import { VIcon } from '@/components/VIcon'
 import { VFieldLabel } from './VFieldLabel'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { makeFocusProps, useFocus } from '@/composables/focus'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -27,10 +27,10 @@ import {
 } from '@/util'
 
 // Types
-import type { VInputSlot } from '@/components/VInput/VInput'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
+import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 type Variant = typeof allowedVariants[number]
