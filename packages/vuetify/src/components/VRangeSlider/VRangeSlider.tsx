@@ -2,22 +2,21 @@
 import '../VSlider/VSlider.sass'
 
 // Components
-import { VInput } from '../VInput'
+import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VSliderThumb } from '../VSlider/VSliderThumb'
 import { VSliderTrack } from '../VSlider/VSliderTrack'
 
 // Composables
-import { getOffset, makeSliderProps, useSlider } from '../VSlider/slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
-import { filterInputProps, makeVInputProps } from '../VInput/VInput'
 
 export const VRangeSlider = defineComponent({
   name: 'VRangeSlider',
@@ -39,7 +38,7 @@ export const VRangeSlider = defineComponent({
     'update:modelValue': (value: [number, number]) => true,
   },
 
-  setup (props, { slots, attrs }) {
+  setup (props, { slots }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
@@ -57,16 +56,16 @@ export const VRangeSlider = defineComponent({
     }
 
     const {
-      min,
+      activeThumbRef,
+      hasLabels,
       max,
+      min,
       mousePressed,
-      roundValue,
       onSliderMousedown,
       onSliderTouchstart,
-      trackContainerRef,
       position,
-      hasLabels,
-      activeThumbRef,
+      roundValue,
+      trackContainerRef,
     } = useSlider({
       /* eslint-disable @typescript-eslint/no-use-before-define */
       props,
@@ -106,7 +105,7 @@ export const VRangeSlider = defineComponent({
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
 
-    return () => {
+    useRender(() => {
       const [inputProps, _] = filterInputProps(props)
 
       return (
@@ -229,7 +228,9 @@ export const VRangeSlider = defineComponent({
           }}
         </VInput>
       )
-    }
+    })
+
+    return {}
   },
 })
 

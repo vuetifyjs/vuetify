@@ -6,17 +6,17 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
-import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
-import { VTabsSymbol } from './shared'
+import { defineComponent, useRender } from '@/util'
 
 // Types
+import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
 
 export type TabItem = string | Record<string, any>
@@ -84,7 +84,7 @@ export const VTabs = defineComponent({
       },
     })
 
-    return () => (
+    useRender(() => (
       <VSlideGroup
         class={[
           'v-tabs',
@@ -112,7 +112,9 @@ export const VTabs = defineComponent({
           <VTab { ...item } key={ item.title } />
         )) }
       </VSlideGroup>
-    )
+    ))
+
+    return {}
   },
 })
 
