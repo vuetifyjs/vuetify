@@ -52,7 +52,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
     value: _props.value,
     props: _props,
     children: type === 'item' && children ? transformItems(props, children) : undefined,
-    originalItem: item,
+    raw: item,
   }
 }
 

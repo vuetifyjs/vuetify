@@ -2,24 +2,24 @@
 import './VRating.sass'
 
 // Components
-import { VBtn } from '../VBtn'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
-import { IconValue } from '@/composables/icons'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { createRange, genericComponent, getUid } from '@/util'
+import { createRange, genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { Prop } from 'vue'
 import type { Variant } from '@/composables/variant'
 
 type VRatingItemSlot = {
@@ -203,6 +203,7 @@ export const VRating = genericComponent<new <T>() => {
               )
             }
           </label>
+
           <input
             class="v-rating__hidden"
             name={ name.value }
@@ -229,7 +230,7 @@ export const VRating = genericComponent<new <T>() => {
       return <span>&nbsp;</span>
     }
 
-    return () => {
+    useRender(() => {
       const hasLabels = !!props.itemLabels?.length || slots['item-label']
 
       return (
@@ -278,7 +279,9 @@ export const VRating = genericComponent<new <T>() => {
           )) }
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

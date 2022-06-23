@@ -14,13 +14,17 @@ related:
 
 The `v-checkbox` component provides users the ability to choose between two distinct values. These are very similar to a switch and can be used in complex forms and checklists. A simpler version, `v-simple-checkbox` is used primarily as a lightweight alternative in data-table components to select rows or display inline boolean data.
 
-<entry />
+![checkbox Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-checkbox/v-checkbox-entry.png)
+
+---
 
 ## Usage
 
 A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 <example file="v-checkbox/usage" />
+
+<entry />
 
 ## API
 
@@ -66,7 +70,9 @@ Checkbox labels can be defined in `label` slot - that will allow to use HTML con
 
 #### Inline text-field
 
-You can place `v-checkbox` in line with other components such as `v-text-field`.
+If you need to place checkboxes in line with other components, you can use the `v-checkbox-btn` component.
+
+This component renders just checkbox, without the trapping of a form input such as validation, a label, and messages.
 
 <example file="v-checkbox/misc-inline-textfield" />
 
