@@ -132,7 +132,7 @@ export const VToolbar = genericComponent<new () => {
           ]}
         >
           { hasImage && (
-            <div class="v-toolbar__image">
+            <div key="image" class="v-toolbar__image">
               <VDefaultsProvider
                 defaults={{
                   VImg: {
@@ -157,7 +157,7 @@ export const VToolbar = genericComponent<new () => {
             ) }
 
             { hasTitle && (
-              <VToolbarTitle text={ props.title }>
+              <VToolbarTitle key="title" text={ props.title }>
                 {{ text: slots.title }}
               </VToolbarTitle>
             ) }

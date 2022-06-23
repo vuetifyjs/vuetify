@@ -181,7 +181,7 @@ export const VNavigationDrawer = defineComponent({
             { ...attrs }
           >
             { hasImage && (
-              <div class="v-navigation-drawer__img">
+              <div key="image" class="v-navigation-drawer__img">
                 { slots.image
                   ? slots.image?.({ image: props.image })
                   : (<img src={ props.image } alt="" />)

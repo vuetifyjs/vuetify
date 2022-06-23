@@ -237,11 +237,10 @@ export const VField = genericComponent<new <T>() => {
           />
 
           { hasPrepend && (
-            <div
-              class="v-field__prepend-inner"
-            >
+            <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <VIcon
+                  key="prepend-icon"
                   onClick={ attrs['onClick:prependInner'] }
                   icon={ props.prependInnerIcon }
                 />
@@ -254,6 +253,7 @@ export const VField = genericComponent<new <T>() => {
           <div class="v-field__field" data-no-activator="">
             { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
+                key="floating-label"
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
@@ -278,7 +278,7 @@ export const VField = genericComponent<new <T>() => {
           </div>
 
           { hasClear && (
-            <VExpandXTransition>
+            <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }
@@ -297,13 +297,12 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           { hasAppend && (
-            <div
-              class="v-field__append-inner"
-            >
+            <div key="append" class="v-field__append-inner">
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
                 <VIcon
+                  key="append-icon"
                   onClick={ attrs['onClick:appendInner'] }
                   icon={ props.appendInnerIcon }
                 />

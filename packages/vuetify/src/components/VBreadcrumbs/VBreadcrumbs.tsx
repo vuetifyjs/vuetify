@@ -90,11 +90,12 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
           style={ backgroundColorStyles.value }
         >
           { props.icon && (
-            <VIcon icon={ props.icon } left />
+            <VIcon key="icon" icon={ props.icon } left />
           ) }
 
           { hasPrepend && (
             <VDefaultsProvider
+              key="prepend"
               defaults={{
                 VIcon: {
                   icon: props.icon,
@@ -103,9 +104,9 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
               }}
             >
               <div class="v-breadcrumbs__prepend">
-              { slots.prepend
-                ? slots.prepend()
-                : props.icon && (<VIcon />)
+                { slots.prepend
+                  ? slots.prepend()
+                  : props.icon && (<VIcon />)
                 }
               </div>
             </VDefaultsProvider>

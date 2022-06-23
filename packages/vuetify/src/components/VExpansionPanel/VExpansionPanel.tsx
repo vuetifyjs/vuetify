@@ -86,6 +86,7 @@ export const VExpansionPanel = defineComponent({
 
           { hasTitle && (
             <VExpansionPanelTitle
+              key="title"
               collapseIcon={ props.collapseIcon }
               color={ props.color }
               expandIcon={ props.expandIcon }
@@ -97,7 +98,7 @@ export const VExpansionPanel = defineComponent({
           ) }
 
           { hasText && (
-            <VExpansionPanelText eager={ props.eager }>
+            <VExpansionPanelText key="text" eager={ props.eager }>
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
           ) }

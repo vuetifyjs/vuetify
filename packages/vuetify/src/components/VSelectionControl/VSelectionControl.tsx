@@ -249,7 +249,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 ['center', 'circle'],
               ]}
             >
-              { icon.value && <VIcon icon={ icon.value } /> }
+              { icon.value && <VIcon key="icon" icon={ icon.value } /> }
 
               <input
                 v-model={ model.value }
