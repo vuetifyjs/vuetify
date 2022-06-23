@@ -6,9 +6,9 @@ import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
@@ -127,7 +127,7 @@ export const VInput = genericComponent<new <T>() => {
             <div
               class="v-input__prepend"
             >
-              { slots?.prepend?.(slotProps.value) }
+              { slots.prepend?.(slotProps.value) }
 
               { props.prependIcon && (
                 <VIcon
@@ -148,7 +148,7 @@ export const VInput = genericComponent<new <T>() => {
             <div
               class="v-input__append"
             >
-              { slots?.append?.(slotProps.value) }
+              { slots.append?.(slotProps.value) }
 
               { props.appendIcon && (
                 <VIcon

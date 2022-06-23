@@ -104,7 +104,7 @@ Vuetify includes simple validation through the **rules** prop. The prop accepts 
 
 #### Variant
 
-The **variant** prop provides an easy way to customize the style of your text field. The following values are valid options: **contained**, **filled**, **outlined**, **plain**, and **underlined**.
+The **variant** prop provides an easy way to customize the style of your text field. The following values are valid options: **solo**, **filled**, **outlined**, **plain**, and **underlined**.
 
 <example file="v-text-field/prop-variant" />
 

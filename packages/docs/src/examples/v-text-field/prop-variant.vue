@@ -19,8 +19,8 @@
           md="4"
         >
           <v-text-field
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             placeholder="Placeholder"
           ></v-text-field>
         </v-col>

@@ -16,7 +16,7 @@ export const VCardActions = defineComponent({
 
     useRender(() => (
       <div class="v-card-actions">
-        { slots?.default?.() }
+        { slots.default?.() }
       </div>
     ))
 

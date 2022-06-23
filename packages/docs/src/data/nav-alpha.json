@@ -125,6 +125,7 @@
           "tooltips"
         ]
       },
+      "no-ssr",
       "paginations",
       "parallax",
       {

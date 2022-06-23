@@ -2,7 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VSystemBar
 $system-bar-background: rgba(var(--v-theme-on-surface-variant)) !default;
 $system-bar-border-radius: map.get(settings.$rounded, 0) !default;
 $system-bar-color: rgba(var(--v-theme-on-variant), var(--v-medium-emphasis-opacity)) !default;
@@ -22,6 +22,7 @@ $system-bar-text-align: end !default;
 $system-bar-text-transform: tools.map-deep-get(settings.$typography, 'caption', 'text-transform') !default;
 $system-bar-window-height: 32px !default;
 
+// Lists
 $system-bar-theme: (
   $system-bar-background,
   $system-bar-color
