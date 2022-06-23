@@ -1,5 +1,5 @@
 // Utilities
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, readonly, ref } from 'vue'
 
 // Composables
 export function useSsrBoot () {
@@ -15,5 +15,5 @@ export function useSsrBoot () {
     transition: 'none !important',
   }) : undefined)
 
-  return { ssrBootStyles }
+  return { ssrBootStyles, isBooted: readonly(isBooted) }
 }

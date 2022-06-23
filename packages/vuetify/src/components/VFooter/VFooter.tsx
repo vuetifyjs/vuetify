@@ -49,7 +49,7 @@ export const VFooter = defineComponent({
     const height = computed(() => props.height === 'auto' ? autoHeight.value : parseInt(props.height, 10))
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
+      order: computed(() => parseInt(props.order, 10)),
       position: computed(() => 'bottom'),
       layoutSize: height,
       elementSize: computed(() => props.height === 'auto' ? undefined : height.value),

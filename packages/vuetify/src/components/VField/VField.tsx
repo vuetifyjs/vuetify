@@ -11,6 +11,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -31,7 +32,7 @@ import type { LoaderSlotProps } from '@/composables/loader'
 import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -47,11 +48,11 @@ export interface VFieldSlot extends DefaultInputSlot {
 }
 
 export const makeVFieldProps = propsFactory({
-  appendInnerIcon: String,
+  appendInnerIcon: IconValue,
   bgColor: String,
   clearable: Boolean,
   clearIcon: {
-    type: String,
+    type: IconValue,
     default: '$clear',
   },
   active: Boolean,
@@ -61,7 +62,7 @@ export const makeVFieldProps = propsFactory({
   error: Boolean,
   label: String,
   persistentClear: Boolean,
-  prependInnerIcon: String,
+  prependInnerIcon: IconValue,
   reverse: Boolean,
   singleLine: Boolean,
   variant: {
@@ -76,8 +77,8 @@ export const makeVFieldProps = propsFactory({
 
 export type VFieldSlots = MakeSlots<{
   clear: []
-  prependInner: [DefaultInputSlot & VInputSlot]
-  appendInner: [DefaultInputSlot & VInputSlot]
+  'prepend-inner': [DefaultInputSlot & VInputSlot]
+  'append-inner': [DefaultInputSlot & VInputSlot]
   label: [DefaultInputSlot & VInputSlot]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
@@ -186,9 +187,9 @@ export const VField = genericComponent<new <T>() => {
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots.prependInner || props.prependInnerIcon)
+      const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
-      const hasAppend = !!(slots.appendInner || props.appendInnerIcon || hasClear)
+      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -246,12 +247,12 @@ export const VField = genericComponent<new <T>() => {
                 />
               ) }
 
-              { slots?.prependInner?.(slotProps.value) }
+              { slots['prepend-inner']?.(slotProps.value) }
             </div>
           ) }
 
-          <div class="v-field__field">
-            { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
+          <div class="v-field__field" data-no-activator="">
+            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
@@ -299,7 +300,7 @@ export const VField = genericComponent<new <T>() => {
             <div
               class="v-field__append-inner"
             >
-              { slots?.appendInner?.(slotProps.value) }
+              { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
                 <VIcon

@@ -11,6 +11,7 @@ import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/rtl'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
@@ -37,11 +38,11 @@ export const VSlideGroup = defineComponent({
       default: VSlideGroupSymbol,
     },
     nextIcon: {
-      type: String,
+      type: IconValue,
       default: '$next',
     },
     prevIcon: {
-      type: String,
+      type: IconValue,
       default: '$prev',
     },
     showArrows: {

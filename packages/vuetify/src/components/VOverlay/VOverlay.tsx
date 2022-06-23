@@ -3,18 +3,19 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
-import { makePositionStrategyProps, usePositionStrategies } from './positionStrategies'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useBackButton } from '@/composables/router'
+import { useBackButton, useRouter } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
-import { useTeleport } from '@/composables/teleport'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useStack } from '@/composables/stack'
+import { useTeleport } from '@/composables/teleport'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
@@ -34,14 +35,15 @@ import {
   ref,
   Teleport,
   toHandlers,
+  toRef,
   Transition,
   watch,
 } from 'vue'
 
 // Types
-import type { PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
+import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -83,8 +85,14 @@ export const VOverlay = genericComponent<new () => {
   props: {
     absolute: Boolean,
     attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+    closeOnBack: {
+      type: Boolean,
+      default: true,
+    },
     contained: Boolean,
     contentClass: null,
+    contentProps: null,
+    disabled: Boolean,
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
@@ -92,14 +100,18 @@ export const VOverlay = genericComponent<new () => {
       type: [String, Boolean],
       default: true,
     },
+    zIndex: {
+      type: [Number, String],
+      default: 2000,
+    },
 
     ...makeActivatorProps(),
     ...makeDimensionProps(),
-    ...makePositionStrategyProps(),
+    ...makeLazyProps(),
+    ...makeLocationStrategyProps(),
     ...makeScrollStrategyProps(),
     ...makeThemeProps(),
     ...makeTransitionProps(),
-    ...makeLazyProps(),
   },
 
   emits: {
@@ -109,7 +121,13 @@ export const VOverlay = genericComponent<new () => {
   },
 
   setup (props, { slots, attrs, emit }) {
-    const isActive = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue')
+    const isActive = computed({
+      get: () => model.value,
+      set: v => {
+        if (!(v && props.disabled)) model.value = v
+      },
+    })
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
@@ -117,13 +135,17 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { isTop } = useStack(isActive)
+    const { isTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
     const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
     const { dimensionStyles } = useDimension(props)
 
+    watch(() => props.disabled, v => {
+      if (v) isActive.value = false
+    })
+
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
-    const { contentStyles, updatePosition } = usePositionStrategies(props, {
+    const { contentStyles, updateLocation } = useLocationStrategies(props, {
       contentEl,
       activatorEl,
       isActive,
@@ -133,7 +155,7 @@ export const VOverlay = genericComponent<new () => {
       contentEl,
       activatorEl,
       isActive,
-      updatePosition,
+      updateLocation,
     })
 
     function onClickOutside (e: MouseEvent) {
@@ -163,14 +185,17 @@ export const VOverlay = genericComponent<new () => {
       }
     }
 
-    useBackButton(next => {
-      if (isTop.value && isActive.value) {
-        next(false)
-        if (!props.persistent) isActive.value = false
-        else animateClick()
-      } else {
-        next()
-      }
+    const router = useRouter()
+    useToggleScope(() => props.closeOnBack, () => {
+      useBackButton(router, next => {
+        if (isTop.value && isActive.value) {
+          next(false)
+          if (!props.persistent) isActive.value = false
+          else animateClick()
+        } else {
+          next()
+        }
+      })
     })
 
     const top = ref<number>()
@@ -223,9 +248,7 @@ export const VOverlay = genericComponent<new () => {
                   themeClasses.value,
                   rtlClasses.value,
                 ]}
-                style={{
-                  top: convertToUnit(top.value),
-                }}
+                style={[stackStyles.value, { top: convertToUnit(top.value) }]}
                 ref={ root }
                 {...attrs}
               >
@@ -253,6 +276,7 @@ export const VOverlay = genericComponent<new () => {
                       contentStyles.value,
                     ]}
                     { ...toHandlers(contentEvents.value) }
+                    { ...props.contentProps }
                   >
                     { slots.default?.({ isActive }) }
                   </div>
@@ -265,11 +289,11 @@ export const VOverlay = genericComponent<new () => {
     ))
 
     return {
+      activatorEl,
       animateClick,
       contentEl,
-      activatorEl,
       isTop,
-      updatePosition,
+      updateLocation,
     }
   },
 })

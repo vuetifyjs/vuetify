@@ -4,7 +4,7 @@ import { VBadge } from '..'
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
-const location = ['bottom-start', 'bottom-end', 'top-start', 'top-end']
+const location = ['bottom start', 'bottom end', 'top start', 'top end']
 const rounded = ['circle', 'pill', 'shaped', 'tr-xl', 'br-lg', 0] // TODO: fix pill
 const offset = [8, -8, '4', '-4', undefined]
 
@@ -26,14 +26,14 @@ const stories = {
   'Icon badge': <VBadge icon="mdi-vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
       <VBadge {...{ [xy]: offset }} content={ `${offset}` }>
-        <button class="v-btn v-btn--size-default v-btn--variant-contained">
+        <button class="v-btn v-btn--size-default v-btn--variant-elevated">
           { xy }
         </button>
       </VBadge>
   )),
   'Text color': gridOn(defaultColors, [null], color => (
     <VBadge textColor={ color } content={ color }>
-      <button class="v-btn v-btn--size-default v-btn--variant-contained">
+      <button class="v-btn v-btn--size-default v-btn--variant-elevated">
         { color }
       </button>
     </VBadge>
@@ -111,9 +111,8 @@ describe('VBadge', () => {
         })
     })
   })
-})
 
-// Useful to preview all of the variants and pre-made examples
-describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
-  generate({ stories, props, component: VBadge })
+  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+    generate({ stories, props, component: VBadge })
+  })
 })

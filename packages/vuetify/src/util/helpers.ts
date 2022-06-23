@@ -57,7 +57,7 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
@@ -66,7 +66,7 @@ export function getPropertyFromItem (
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback === undefined ? item : fallback
+  if (item !== Object(item)) return fallback
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
@@ -457,11 +457,6 @@ export function mergeDeep (
 export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
 }
-
-export function getUid () {
-  return getUid._uid++
-}
-getUid._uid = 0
 
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {

@@ -3,7 +3,7 @@
     <v-menu
       v-model="menu"
       :close-on-content-click="false"
-      anchor="end"
+      location="end"
     >
       <template v-slot:activator="{ props }">
         <v-btn

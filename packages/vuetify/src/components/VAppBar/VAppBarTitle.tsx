@@ -2,19 +2,21 @@
 import { VToolbarTitle } from '@/components/VToolbar'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VAppBarTitle = defineComponent({
-  ...VToolbarTitle,
-
   name: 'VAppBarTitle',
 
+  props: { ...VToolbarTitle.props },
+
   setup (_, { slots }) {
-    return () => (
+    useRender(() => (
       <VToolbarTitle
         class="v-app-bar-title"
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
-}) as typeof VToolbarTitle
+})
