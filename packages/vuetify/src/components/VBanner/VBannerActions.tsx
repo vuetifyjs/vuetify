@@ -23,7 +23,7 @@ export const VBannerActions = defineComponent({
 
     useRender(() => (
       <div class="v-banner-actions">
-        { slots?.default?.() }
+        { slots.default?.() }
       </div>
     ))
 

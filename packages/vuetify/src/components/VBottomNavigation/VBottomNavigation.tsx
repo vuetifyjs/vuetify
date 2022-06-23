@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
@@ -88,7 +88,7 @@ export const VBottomNavigation = defineComponent({
       },
     }, { scoped: true })
 
-    return () => {
+    useRender(() => {
       return (
         <props.tag
           class={[
@@ -121,7 +121,9 @@ export const VBottomNavigation = defineComponent({
           ) }
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

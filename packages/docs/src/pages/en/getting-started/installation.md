@@ -22,74 +22,35 @@ Welcome to the Vuetify 3 Beta release. To get started, select an installation me
 
 ## Installation
 
-### vue-cli
-
-<alert type="warning">
-
-  Vuetify 3 requires **vue-cli 5.0** in order to install properly. For more information, visit the vue-cli [installation guide](https://cli.vuejs.org/guide/installation.html).
-
-</alert>
-
-Generate a new Vue 3 application by entering the following command into your terminal:
-
-```bash
-vue create my-beta-app
-```
-
-When prompted, select the **Vue 3 Preview** preset:
-
-```bash
-? Please pick a preset:
-    Default ([Vue 2] babel, eslint)
-  ❯ Default (Vue 3 Preview) ([Vue 3] babel, eslint)
-    Manually select features
-```
-
-After choosing your option, **vue-cli** generates a new Vue 3 project located in the **my-beta-app** folder; or whatever name you provided. Once complete, navigate to your new project's folder by typing `cd my-beta-app`.
-
-<alert type="info">
-
-  Before installing Vuetify, we **recommend** a pristine `.git` status. This allows you to rollback changes if you encounter an issue.
-
-</alert>
-
-Using **vue-cli**, add the `vuetify` cli package by running the following command:
-
-```bash
-vue add vuetify
-```
-
-Once prompted, choose `Vuetify 3 Preview`:
-
-```bash
-? Choose a preset:
-  Configure (advanced)
-  Default (recommended)
-  Vite Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-❯ Vuetify 3 Preview (Vuetify 3)
-```
-
 ### Vite
 
 <vuetify slug="vs-video-vite" />
 
-Installing Vuetify 3 using vite can be done using [vue-cli](#vue-cli). To start, use npm/yarn to set up your vite project outlined in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project):
+First, use npm/yarn to create your Vite project:
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-beta-app --template vue
+npm init @vitejs/app my-vuetify-app --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-beta-app -- --template vue
+npm init @vitejs/app my-vuetify-app -- --template vue
 
 # yarn
-yarn create @vitejs/app my-beta-app --template vue
+yarn create @vitejs/app my-vuetify-app --template vue
 ```
 
-Next, navigate to your project directory by typing `cd my-beta-app` in your terminal; then add Vuetify to your project using the following:
+<alert type="info">
+
+  More detailed information can be found in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
+
+</alert>
+
+For the next step you will need to have the **Vue CLI** installed. See their [installation guide](https://cli.vuejs.org/guide/installation.html)
+
+Navigate to your newly created project and then add vuetify using our **Vue CLI** plugin:
 
 ```bash
+cd my-vuetify-app
 vue add vuetify
 ```
 
@@ -102,6 +63,55 @@ Once prompted, choose **Preview (Vuetify 3 + Vite)**:
 ❯ Vite Preview (Vuetify 3 + Vite)
   Prototype (rapid development)
   Vuetify 3 Preview (Vuetify 3)
+```
+
+### Vue CLI
+
+<alert type="warning">
+
+  Vuetify 3 requires **Vue CLI 5.0** in order to install properly. For more information, visit the Vue CLI [installation guide](https://cli.vuejs.org/guide/installation.html).
+
+</alert>
+
+Generate a new Vue 3 application by entering the following command into your terminal:
+
+```bash
+vue create my-vuetify-app
+```
+
+When prompted, select the **Vue 3 Preview** preset:
+
+```bash
+? Please pick a preset:
+    Default ([Vue 2] babel, eslint)
+  ❯ Default (Vue 3 Preview) ([Vue 3] babel, eslint)
+    Manually select features
+```
+
+After choosing your option, **Vue CLI** generates a new Vue 3 project located in the **my-vuetify-app** folder (or whatever name you provided).
+
+<alert type="info">
+
+  Before installing Vuetify, we **recommend** you commit your changes to `git` or whichever source control software you use. This allows you to rollback changes if you encounter an issue.
+
+</alert>
+
+Navigate to your new project's folder, and using **Vue CLI**, add the `vuetify` package:
+
+```bash
+cd my-vuetify-app
+vue add vuetify
+```
+
+Once prompted, choose `Vuetify 3 Preview`:
+
+```bash
+? Choose a preset:
+  Configure (advanced)
+  Default (recommended)
+  Vite Preview (Vuetify 3 + Vite)
+  Prototype (rapid development)
+❯ Vuetify 3 Preview (Vuetify 3)
 ```
 
 ### CDN

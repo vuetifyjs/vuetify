@@ -8,7 +8,7 @@
       :defaults="{
         VAlert: {
           border: model === 'border',
-          variant: model === 'contained' ? 'contained' : undefined,
+          variant: model === 'elevated' ? 'elevated' : undefined,
         }
       }"
     >
@@ -36,7 +36,7 @@
     data: () => ({
       alert: true,
       model: 'default',
-      options: ['contained', 'border'],
+      options: ['elevated', 'border'],
     }),
   }
 </script>

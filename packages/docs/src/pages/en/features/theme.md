@@ -89,7 +89,7 @@ export default {
 
     return {
       theme,
-      toggleTheme: () => theme.name.value = theme.current.value.dark ? 'light' : 'dark'
+      toggleTheme: () => theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
     }
   }
 }
@@ -219,15 +219,32 @@ export default createVuetify({
 
 ```ts
 interface ThemeInstance {
-  /** Name of the current theme */
-  name: Ref<string>
-
-  /** Raw theme objects */
+  /**
+   * Raw theme objects
+   * Can be mutated to add new themes or update existing colors
+   */
   themes: Ref<{ [name: string]: ThemeDefinition }>
 
+  /**
+   * Name of the current theme
+   * Inherited from parent components
+   */
+  readonly name: Ref<string>
+
   /** Processed theme object, includes automatically generated colors */
-  readonly current: ThemeDefinition
-  readonly computedThemes: { [name: string]: ThemeDefinition }
+  readonly current: Ref<ThemeDefinition>
+  readonly computedThemes: Ref<{ [name: string]: ThemeDefinition }>
+
+  readonly global: {
+    /** Name of the current global theme */
+    name: Ref<string>
+
+    /**
+     * Processed theme object of the current global theme
+     * Equivalent to `theme.computedThemes.value[theme.global.name.value]`
+     */
+    readonly current: Ref<ThemeDefinition>
+  }
 }
 ```
 
