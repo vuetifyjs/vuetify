@@ -12,8 +12,8 @@ import { computed, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
+import type { InjectionKey, PropType } from 'vue'
 
 export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
 

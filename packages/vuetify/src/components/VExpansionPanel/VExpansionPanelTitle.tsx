@@ -1,13 +1,13 @@
 // Components
-import { VIcon } from '@/components/VIcon'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
-
-// Composables
-import { useBackgroundColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
+import { VIcon } from '@/components/VIcon'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
+
+// Composables
+import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'

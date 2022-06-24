@@ -1,15 +1,15 @@
 // Components
 import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
-import { VExpansionPanelText } from './VExpansionPanelText'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelText } from './VExpansionPanelText'
 
 // Composables
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { useBackgroundColor } from '@/composables/color'
-import { makeTagProps } from '@/composables/tag'
 import { makeLazyProps } from '@/composables/lazy'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
