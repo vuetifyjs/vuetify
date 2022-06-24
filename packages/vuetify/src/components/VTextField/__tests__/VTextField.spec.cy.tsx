@@ -39,7 +39,7 @@ describe('VTextField', () => {
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
   })
 
-  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories })
   })
 })

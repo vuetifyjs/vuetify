@@ -270,7 +270,7 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1525, viewportWidth: 800 }, () => {
+  describe('Showcase', () => {
     generate({ stories, props, component: VBtn })
   })
 })

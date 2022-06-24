@@ -120,6 +120,8 @@ describe('VSlideGroup', () => {
       },
     })
 
+    cy.viewport(500, 600)
+
     cy.get('.v-slide-group__prev').should('not.exist')
     cy.get('.v-slide-group__next').should('not.exist')
 
