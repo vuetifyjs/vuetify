@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VFooter } from '..'
-import { VLayout } from '@/components'
+import { VLayout } from '@/components/VLayout'
 import { generate } from '@/../cypress/templates'
 
 const props = {}

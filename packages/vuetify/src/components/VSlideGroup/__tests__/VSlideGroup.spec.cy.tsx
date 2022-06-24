@@ -2,7 +2,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { Application, CenteredGrid } from '../../../../cypress/templates'
-import { VCard } from '@/components'
+import { VCard } from '@/components/VCard'
 import { VSlideGroup, VSlideGroupItem } from '../'
 import { createRange } from '@/util'
 

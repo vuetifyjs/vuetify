@@ -1,6 +1,7 @@
+import '../../src/styles/main.sass'
 import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from '@cypress/vue'
-import { createVuetify } from '../../src/entry-bundler'
+import { createVuetify } from '../../src/framework'
 import { mergeDeep } from '../../src/util'
 
 /**

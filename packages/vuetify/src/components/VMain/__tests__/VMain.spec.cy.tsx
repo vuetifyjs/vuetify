@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VApp } from '@/components'
+import { VApp } from '@/components/VApp'
 import { VMain } from '..'
 
 describe('VAppBar', () => {
