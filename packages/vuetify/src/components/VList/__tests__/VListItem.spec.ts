@@ -234,4 +234,16 @@ describe('VListItem.ts', () => {
     wrapper2.vm.toggle()
     expect(wrapper2.vm.isActive).toBeTruthy()
   })
+
+  it('should not react to keydown.enter when disabled', () => {
+    const click = jest.fn()
+    const wrapper = mountFunction({
+      methods: { click },
+      propsData: { disabled: true },
+    })
+
+    wrapper.trigger('keydown.enter')
+
+    expect(click).not.toHaveBeenCalled()
+  })
 })

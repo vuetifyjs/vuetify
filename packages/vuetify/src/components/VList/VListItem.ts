@@ -168,10 +168,12 @@ export default baseMixins.extend<options>().extend({
     data[this.to ? 'nativeOn' : 'on'] = {
       ...data[this.to ? 'nativeOn' : 'on'],
       keydown: (e: KeyboardEvent) => {
-        /* istanbul ignore else */
-        if (e.keyCode === keyCodes.enter) this.click(e)
+        if (!this.disabled) {
+          /* istanbul ignore else */
+          if (e.keyCode === keyCodes.enter) this.click(e)
 
-        this.$emit('keydown', e)
+          this.$emit('keydown', e)
+        }
       },
     }
 
