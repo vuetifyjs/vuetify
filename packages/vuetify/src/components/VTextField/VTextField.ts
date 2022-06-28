@@ -231,7 +231,8 @@ export default baseMixins.extend<options>().extend({
   mounted () {
     // #11533
     this.$watch(() => this.labelValue, this.setLabelWidth)
-    this.autofocus && this.tryAutofocus()
+    this.$watch(() => this.autofocus, this.tryAutofocus, { immediate: true })
+
     requestAnimationFrame(() => {
       this.isBooted = true
       requestAnimationFrame(() => {
