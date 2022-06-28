@@ -47,7 +47,7 @@ export const makeVToolbarProps = propsFactory({
   floating: Boolean,
   height: {
     type: [Number, String],
-    default: 56,
+    default: 64,
   },
   image: String,
   title: String,
