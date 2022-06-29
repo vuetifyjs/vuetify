@@ -1,6 +1,5 @@
 export { VCard } from './VCard'
 export { VCardActions } from './VCardActions'
-export { VCardHeader } from './VCardHeader'
 export { VCardItem } from './VCardItem'
 export { VCardItemSubtitle } from './VCardItemSubtitle'
 export { VCardItemTitle } from './VCardItemTitle'

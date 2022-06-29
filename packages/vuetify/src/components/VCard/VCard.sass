@@ -67,13 +67,6 @@
   &--link
     cursor: pointer
 
-  &--tile
-    @include tools.rounded($card-tile-border-radius)
-
-  > *:first-child
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit
-
 .v-card-actions
   align-items: center
   display: flex
@@ -131,7 +124,6 @@
     padding: $card-title-header-padding
 
   + .v-card-text,
-  + .v-card-subtitle,
   + .v-card-actions
     padding-top: 0
 
@@ -177,8 +169,9 @@
   width: 100%
 
 .v-card__content
-  position: relative
+  border-radius: inherit
   overflow: hidden
+  position: relative
 
 .v-card__overlay
   background-color: currentColor

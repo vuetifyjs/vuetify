@@ -26,7 +26,6 @@ $card-padding: 0 !default;
 $card-plain-opacity: .62 !default;
 $card-positions: absolute fixed !default;
 $card-prepend-padding-inline-end: 1rem !default;
-$card-tile-border-radius: 0 !default;
 $card-transition-duration: 0.28s !default;
 $card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;
@@ -34,7 +33,7 @@ $card-transition-timing-function: settings.$standard-easing !default;
 // VCardHeader
 $card-header-flex: none !default;
 
-// VCardTitle
+// VCardItemTitle
 $card-title-comfortable-line-height: 1.75rem !default;
 $card-title-compact-line-height: 1.55rem !default;
 $card-title-flex: none !default;
@@ -54,7 +53,7 @@ $card-title-white-space: nowrap !default;
 $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
 
-// VCardSubtitle
+// VCardItemSubtitle
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
 $card-subtitle-compact-line-height: 1rem !default;
