@@ -157,7 +157,7 @@ export default baseMixins.extend<options>().extend({
     computedCounterValue (): number {
       const value = this.multiple
         ? this.selectedItems
-        : (this.getText(this.selectedItems[0]) || '').toString()
+        : (this.getText(this.selectedItems[0]) ?? '').toString()
 
       if (typeof this.counterValue === 'function') {
         return this.counterValue(value)
@@ -650,7 +650,7 @@ export default baseMixins.extend<options>().extend({
       this.keyboardLookupLastTime = now
 
       const index = this.allItems.findIndex(item => {
-        const text = (this.getText(item) || '').toString()
+        const text = (this.getText(item) ?? '').toString()
 
         return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
       })
