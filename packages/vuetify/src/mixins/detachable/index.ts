@@ -7,13 +7,13 @@ import mixins, { ExtractVue } from '../../util/mixins'
 import { consoleWarn } from '../../util/console'
 
 // Types
-import Vue, { PropOptions } from 'vue'
+import { PropOptions } from 'vue'
 import { VNode } from 'vue/types'
 
-interface options extends Vue {
+interface options {
   $el: HTMLElement
   $refs: {
-    content: HTMLElement
+    content?: HTMLElement
   }
 }
 
