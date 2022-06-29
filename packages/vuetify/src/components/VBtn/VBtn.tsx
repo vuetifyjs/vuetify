@@ -160,10 +160,7 @@ export const VBtn = defineComponent({
               }}
             >
               <div class="v-btn__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : (<VIcon />)
-                }
+                { slots.prepend?.() ?? (<VIcon />) }
               </div>
             </VDefaultsProvider>
           ) }
@@ -197,10 +194,7 @@ export const VBtn = defineComponent({
               }}
             >
               <div class="v-btn__append">
-                { slots.append
-                  ? slots.append()
-                  : (<VIcon />)
-                }
+                { slots.append?.() ?? (<VIcon />) }
               </div>
             </VDefaultsProvider>
           ) }
