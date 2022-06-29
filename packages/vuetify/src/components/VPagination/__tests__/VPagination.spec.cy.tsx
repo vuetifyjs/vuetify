@@ -83,6 +83,8 @@ describe('VPagination', () => {
   })
 
   it('should limit items when not enough space', () => {
+    cy.viewport(500, 500)
+
     cy.mount(() => (
       <VPagination length="100" />
     ))

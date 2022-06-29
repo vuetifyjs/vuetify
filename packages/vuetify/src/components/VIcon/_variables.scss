@@ -2,7 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VIcon
 $icon-btn-margin-start-multiplier: -9 !default;
 $icon-btn-margin-end-multiplier: 4.5 !default;
 $icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;
@@ -17,6 +17,7 @@ $icon-size: 1em !default;
 $icon-text-indent: 0 !default;
 $icon-vertical-align: middle !default;
 
+// Lists
 $icon-sizes: () !default;
 $icon-sizes: tools.map-deep-merge(
   (
