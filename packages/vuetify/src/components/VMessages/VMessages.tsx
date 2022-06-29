@@ -9,8 +9,10 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, wrapInArray } from '@/util'
 import { computed } from 'vue'
+import { defineComponent, useRender, wrapInArray } from '@/util'
+
+// Types
 import type { PropType } from 'vue'
 
 export const VMessages = defineComponent({
@@ -37,7 +39,7 @@ export const VMessages = defineComponent({
     const messages = computed(() => wrapInArray(props.messages))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
 
-    return () => (
+    useRender(() => (
       <MaybeTransition
         transition={ props.transition }
         tag="div"
@@ -58,6 +60,8 @@ export const VMessages = defineComponent({
           ))
         ) }
       </MaybeTransition>
-    )
+    ))
+
+    return {}
   },
 })

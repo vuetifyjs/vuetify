@@ -24,7 +24,7 @@ export function useSize (
   const sizeClasses = computed(() => {
     return predefinedSizes.includes(props.size as string)
       ? `${name}--size-${props.size}`
-      : null
+      : undefined
   })
 
   const sizeStyles = computed(() => {
@@ -32,7 +32,7 @@ export function useSize (
       ? ({
         width: convertToUnit(props.size),
         height: convertToUnit(props.size),
-      }) : null
+      }) : undefined
   })
 
   return { sizeClasses, sizeStyles }

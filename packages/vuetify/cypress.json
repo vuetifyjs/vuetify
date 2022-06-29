@@ -1,9 +1,0 @@
-{
-  "component": {
-    "componentFolder": "./src",
-    "testFiles": "**/*.spec.cy.{js,jsx,ts,tsx}",
-    "video": false,
-    "supportFile": "./cypress/support/index.ts",
-    "pluginsFile": "./cypress/plugins/index.cjs"
-  }
-}

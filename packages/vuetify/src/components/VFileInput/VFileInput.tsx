@@ -3,15 +3,16 @@ import './VFileInput.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { useForwardRef } from '@/composables/forwardRef'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
@@ -19,7 +20,6 @@ import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wr
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',

@@ -4,15 +4,15 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Directives
+import { Touch } from '@/directives/touch'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
 import { useLocale } from '@/composables/locale'
 import { useRtl } from '@/composables/rtl'
-
-// Directives
-import { Touch } from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, watch } from 'vue'
@@ -21,9 +21,9 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
-import type { TouchHandlers } from '@/directives/touch'
-import type { MakeSlots } from '@/util'
 import type { IconValue } from '@/composables/icons'
+import type { MakeSlots } from '@/util'
+import type { TouchHandlers } from '@/directives/touch'
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>

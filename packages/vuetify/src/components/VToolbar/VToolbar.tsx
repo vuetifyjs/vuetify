@@ -13,6 +13,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useForwardRef } from '@/composables/forwardRef'
 
@@ -21,9 +22,8 @@ import { computed, ref, toRef } from 'vue'
 import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, PropType } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
+import type { MakeSlots } from '@/util'
 
 export type Density = typeof allowedDensities[number]
 
@@ -62,7 +62,7 @@ export const makeVToolbarProps = propsFactory({
 export const VToolbar = genericComponent<new () => {
   $slots: MakeSlots<{
     default: []
-    image: [{ image: string }]
+    image: []
     prepend: []
     append: []
     title: []
@@ -74,11 +74,11 @@ export const VToolbar = genericComponent<new () => {
   props: makeVToolbarProps(),
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
 
     const isExtended = ref(!!(props.extended || slots.extension?.()))
     const contentHeight = computed(() => parseInt((
@@ -99,7 +99,6 @@ export const VToolbar = genericComponent<new () => {
 
     provideDefaults({
       VBtn: {
-        flat: true,
         variant: 'text',
       },
     })
@@ -133,7 +132,7 @@ export const VToolbar = genericComponent<new () => {
           ]}
         >
           { hasImage && (
-            <div class="v-toolbar__image">
+            <div key="image" class="v-toolbar__image">
               <VDefaultsProvider
                 defaults={{
                   VImg: {
@@ -141,7 +140,6 @@ export const VToolbar = genericComponent<new () => {
                     src: props.image,
                   },
                 }}
-                scoped
               >
                 { slots.image ? slots.image?.() : (<VImg />) }
               </VDefaultsProvider>
@@ -159,7 +157,7 @@ export const VToolbar = genericComponent<new () => {
             ) }
 
             { hasTitle && (
-              <VToolbarTitle text={ props.title }>
+              <VToolbarTitle key="title" text={ props.title }>
                 {{ text: slots.title }}
               </VToolbarTitle>
             ) }

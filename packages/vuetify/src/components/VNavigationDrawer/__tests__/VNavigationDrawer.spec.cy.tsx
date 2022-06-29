@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VLayout } from '@/components'
+import { VLayout } from '@/components/VLayout'
 import { VNavigationDrawer } from '..'
 
 describe('VNavigationDrawer', () => {

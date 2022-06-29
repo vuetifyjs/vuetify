@@ -1,4 +1,5 @@
-import { VApp, VLocaleProvider } from '@/components'
+import { VApp } from '@/components/VApp'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 
 export const Application = (_, { slots, attrs }) => {
   return (
