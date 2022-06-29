@@ -17,7 +17,7 @@ import Toggleable from '../../mixins/toggleable'
 import ClickOutside from '../../directives/click-outside'
 
 // Helpers
-import mixins, { ExtractVue } from '../../util/mixins'
+import mixins from '../../util/mixins'
 import { removed } from '../../util/console'
 import {
   convertToUnit,
@@ -37,15 +37,8 @@ const baseMixins = mixins(
   Toggleable
 )
 
-interface options extends ExtractVue<typeof baseMixins> {
-  $refs: {
-    dialog: HTMLElement
-    content: HTMLElement
-  }
-}
-
 /* @vue/component */
-export default baseMixins.extend<options>().extend({
+export default baseMixins.extend({
   name: 'v-dialog',
 
   directives: { ClickOutside },
@@ -188,9 +181,9 @@ export default baseMixins.extend<options>().extend({
       // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
         this.$nextTick(() => {
-          if (!this.$refs.dialog.contains(document.activeElement)) {
+          if (!this.$refs.dialog?.contains(document.activeElement)) {
             this.previousActiveElement = document.activeElement as HTMLElement
-            this.$refs.dialog.focus()
+            this.$refs.dialog?.focus()
           }
           this.bind()
         })
@@ -232,6 +225,7 @@ export default baseMixins.extend<options>().extend({
 
       if (
         !!target &&
+        this.$refs.dialog &&
         // It isn't the document or the dialog body
         ![document, this.$refs.dialog].includes(target) &&
         // It isn't inside the dialog body

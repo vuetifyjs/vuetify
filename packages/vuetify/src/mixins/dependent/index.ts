@@ -3,10 +3,10 @@ import Vue from 'vue'
 import mixins from '../../util/mixins'
 import { VOverlay } from '../../components/VOverlay'
 
-interface options extends Vue {
+interface options {
   $el: HTMLElement
   $refs: {
-    content: HTMLElement
+    content?: HTMLElement
   }
   overlay?: InstanceType<typeof VOverlay>
 }
@@ -31,7 +31,7 @@ function searchChildren (children: Vue[]): DependentInstance[] {
 }
 
 /* @vue/component */
-export default mixins<options>().extend({
+export default mixins<Vue & options>().extend({
   name: 'dependent',
 
   data () {
