@@ -3,6 +3,7 @@ import './VBtn.sass'
 
 // Components
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
@@ -97,6 +98,8 @@ export const VBtn = defineComponent({
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasColor = !group || group.isSelected.value
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
+      const hasAppend = !!(props.appendIcon || slots.append)
 
       return (
         <Tag
@@ -145,36 +148,59 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && props.prependIcon && (
-            <VIcon
-              key="prependIcon"
-              class="v-btn__icon"
-              icon={ props.prependIcon }
-              start
-            />
+          { !props.icon && hasPrepend && (
+            <VDefaultsProvider
+              key="prepend"
+              defaults={{
+                VIcon: {
+                  icon: props.prependIcon,
+                },
+              }}
+            >
+              <div class="v-btn__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
           <div class="v-btn__content" data-no-activator="">
-            { typeof props.icon === 'boolean'
-              ? slots.default?.()
-              : (
-                <VIcon
-                  key="icon"
-                  class="v-btn__icon"
-                  icon={ props.icon }
-                  size={ props.size }
-                />
-              )
-            }
+            <VDefaultsProvider
+              key="content"
+              defaults={{
+                VIcon: {
+                  icon: typeof props.icon === 'string'
+                    ? props.icon
+                    : undefined,
+                },
+              }}
+            >
+              { slots.default?.() ?? (
+                typeof props.icon === 'string' && (
+                  <VIcon key="icon" />
+                )
+              ) }
+            </VDefaultsProvider>
           </div>
 
-          { !props.icon && props.appendIcon && (
-            <VIcon
-              key="appendIcon"
-              class="v-btn__icon"
-              icon={ props.appendIcon }
-              end
-            />
+          { !props.icon && hasAppend && (
+            <VDefaultsProvider
+              key="append"
+              defaults={{
+                VIcon: {
+                  icon: props.appendIcon,
+                },
+              }}
+            >
+              <div class="v-btn__append">
+                { slots.append
+                  ? slots.append()
+                  : (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
           { props.loading && (
