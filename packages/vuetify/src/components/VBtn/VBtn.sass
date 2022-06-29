@@ -93,7 +93,9 @@
   &--loading
     pointer-events: none
 
-    .v-btn__content
+    .v-btn__content,
+    .v-btn__prepend,
+    .v-btn__append
       opacity: 0
 
   &--stacked
@@ -133,6 +135,7 @@
 .v-btn__append
   align-items: center
   display: flex
+  transition: $button-content-transition
 
 .v-btn__prepend
   grid-area: prepend
@@ -147,7 +150,6 @@
 .v-btn__content
   grid-area: content
   justify-content: center
-  transition: $button-content-transition
   white-space: $button-white-space
 
   > .v-icon--start
