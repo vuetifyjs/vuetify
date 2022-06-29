@@ -89,7 +89,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 7)
+    cy.get('.v-pagination__item').should('have.length', 8)
   })
 
   it('should render in RTL mode', () => {
