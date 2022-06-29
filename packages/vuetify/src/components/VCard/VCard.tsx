@@ -144,7 +144,7 @@ export const VCard = defineComponent({
 
           { hasCardItem && (
             <VCardItem
-              key="card-item"
+              key="item"
               prependAvatar={ props.prependAvatar }
               prependIcon={ props.prependIcon }
               title={ props.title }
@@ -163,7 +163,7 @@ export const VCard = defineComponent({
           ) }
 
           { hasText && (
-            <VCardText key="card-text">
+            <VCardText key="text">
               { slots.text?.() ?? props.text }
             </VCardText>
           ) }
