@@ -18,6 +18,8 @@ $card-border-width: 0 !default;
 $card-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
+$card-loader-top: 0 !default;
+$card-loader-bottom: auto !default;
 $card-hover-elevation: 8 !default;
 $card-img-flex: 1 1 auto !default;
 $card-item-align-items: center !default;

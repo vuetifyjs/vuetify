@@ -16,6 +16,7 @@ import { Ripple } from '@/directives/ripple'
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -43,6 +44,7 @@ export const VCard = defineComponent({
     hover: Boolean,
     image: String,
     link: Boolean,
+    loaderColor: String,
     prependAvatar: String,
     prependIcon: IconValue,
     ripple: Boolean,
@@ -55,6 +57,7 @@ export const VCard = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLoaderProps(),
     ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
@@ -70,6 +73,7 @@ export const VCard = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
+    const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
@@ -130,7 +134,19 @@ export const VCard = defineComponent({
             </VDefaultsProvider>
           ) }
 
-          <div class="v-card__content">
+          <div
+            class={[
+              'v-card__content',
+              loaderClasses.value,
+            ]}
+          >
+            <LoaderSlot
+              name="v-card"
+              active={ props.loading }
+              color={ props.loaderColor }
+              v-slots={{ default: slots.loader }}
+            />
+
             { hasListItem && (
               <VCardItem
                 prependAvatar={ props.prependAvatar }
