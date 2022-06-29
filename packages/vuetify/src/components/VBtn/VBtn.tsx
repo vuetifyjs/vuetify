@@ -7,12 +7,18 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -20,12 +26,7 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useSelectLink } from '@/composables/selectLink'
-import { IconValue } from '@/composables/icons'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
@@ -53,8 +54,6 @@ export const VBtn = defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    loading: Boolean,
-
     ripple: {
       type: Boolean,
       default: true,
@@ -66,6 +65,7 @@ export const VBtn = defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeGroupItemProps(),
+    ...makeLoaderProps(),
     ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRouterProps(),
@@ -82,6 +82,7 @@ export const VBtn = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
+    const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
@@ -122,6 +123,7 @@ export const VBtn = defineComponent({
             hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
+            loaderClasses.value,
             positionClasses.value,
             roundedClasses.value,
             sizeClasses.value,
@@ -203,10 +205,11 @@ export const VBtn = defineComponent({
             </VDefaultsProvider>
           ) }
 
-          { props.loading && (
+          { !!props.loading && (
             <span key="loader" class="v-btn__loader">
-              { slots.loader ? slots.loader() : (
+              { slots.loader?.() ?? (
                 <VProgressCircular
+                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
                   size="23"
                   width="2"
