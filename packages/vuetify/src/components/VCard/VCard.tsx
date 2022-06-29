@@ -44,7 +44,6 @@ export const VCard = defineComponent({
     hover: Boolean,
     image: String,
     link: Boolean,
-    loaderColor: String,
     prependAvatar: String,
     prependIcon: IconValue,
     ripple: Boolean,
@@ -142,8 +141,8 @@ export const VCard = defineComponent({
           >
             <LoaderSlot
               name="v-card"
-              active={ props.loading }
-              color={ props.loaderColor }
+              active={ !!props.loading }
+              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
               v-slots={{ default: slots.loader }}
             />
 
