@@ -117,6 +117,30 @@ module.exports = {
 }
 ```
 
+## Post Install
+
+Once you’ve installed, add your variables.scss or variables.sass file. In this file, first add any of the SASS variables you’d like to overwrite (such as `$body-font-family` in the example below) and then pass them to SASS’ @use like so:
+
+```scss { resource="src/sass/variables.scss" }
+$body-font-family: "Comic Sans", sans-serif;
+
+@use "vuetify/styles" with (
+  $body-font-family: $body-font-family
+);
+```
+
+Now, make sure you import your variables.(scss|sass) file in your main Vuetify setup file:
+
+```js
+import "@/styles/variables.scss";
+
+import { createVuetify } from "vuetify";
+
+export default createVuetify(
+  // options
+);
+```
+
 ## Variable API
 
 There are many SASS/SCSS variables that can be customized across the entire Vuetify framework. You can browse all the variables using the tool below:
