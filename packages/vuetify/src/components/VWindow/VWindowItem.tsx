@@ -1,15 +1,15 @@
+// Directives
+import Touch from '@/directives/touch'
+
 // Composables
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { MaybeTransition } from '@/composables/transition'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
-// Directives
-import Touch from '@/directives/touch'
-
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
 export const VWindowItem = defineComponent({
@@ -28,8 +28,9 @@ export const VWindowItem = defineComponent({
       type: [Boolean, String],
       default: undefined,
     },
-    ...makeLazyProps(),
+
     ...makeGroupItemProps(),
+    ...makeLazyProps(),
   },
 
   setup (props, { slots }) {
@@ -114,21 +115,21 @@ export const VWindowItem = defineComponent({
 
     const { hasContent } = useLazy(props, groupItem.isSelected)
 
-    return () => {
-      return (
-        <MaybeTransition transition={ isBooted.value && transition.value } >
-          <div
-            class={[
-              'v-window-item',
-              groupItem.selectedClass.value,
-            ]}
-            v-show={ groupItem.isSelected.value }
-          >
-            { hasContent.value && slots.default?.() }
-          </div>
-        </MaybeTransition>
-      )
-    }
+    useRender(() => (
+      <MaybeTransition transition={ isBooted.value && transition.value } >
+        <div
+          class={[
+            'v-window-item',
+            groupItem.selectedClass.value,
+          ]}
+          v-show={ groupItem.isSelected.value }
+        >
+          { hasContent.value && slots.default?.() }
+        </div>
+      </MaybeTransition>
+    ))
+
+    return {}
   },
 })
 

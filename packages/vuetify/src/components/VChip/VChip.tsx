@@ -75,7 +75,7 @@ export const VChip = defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-text' } as const),
+    ...makeVariantProps({ variant: 'tonal' } as const),
   },
 
   emits: {
@@ -145,7 +145,7 @@ export const VChip = defineComponent({
           { genOverlays(isClickable, 'v-chip') }
 
           { hasFilter && (
-            <VExpandXTransition>
+            <VExpandXTransition key="filter">
               <div
                 class="v-chip__filter"
                 v-show={ group.isSelected.value }
@@ -159,7 +159,7 @@ export const VChip = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-chip__prepend">
+            <div key="prepend" class="v-chip__prepend">
               { slots.prepend
                 ? slots.prepend()
                 : (
@@ -183,7 +183,7 @@ export const VChip = defineComponent({
           }) ?? props.text }
 
           { hasAppend && (
-            <div class="v-chip__append">
+            <div key="append" class="v-chip__append">
               { slots.append
                 ? slots.append()
                 : (

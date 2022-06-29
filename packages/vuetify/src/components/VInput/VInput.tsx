@@ -6,9 +6,9 @@ import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed } from 'vue'
@@ -124,17 +124,16 @@ export const VInput = genericComponent<new <T>() => {
         ]}
         >
           { hasPrepend && (
-            <div
-              class="v-input__prepend"
-            >
-              { slots?.prepend?.(slotProps.value) }
-
+            <div key="prepend" class="v-input__prepend">
               { props.prependIcon && (
                 <VIcon
+                  key="prepend-icon"
                   onClick={ attrs['onClick:prepend'] }
                   icon={ props.prependIcon }
                 />
               ) }
+
+              { slots.prepend?.(slotProps.value) }
             </div>
           ) }
 
@@ -145,13 +144,12 @@ export const VInput = genericComponent<new <T>() => {
           ) }
 
           { hasAppend && (
-            <div
-              class="v-input__append"
-            >
-              { slots?.append?.(slotProps.value) }
+            <div key="append" class="v-input__append">
+              { slots.append?.(slotProps.value) }
 
               { props.appendIcon && (
                 <VIcon
+                  key="append-icon"
                   onClick={ attrs['onClick:append'] }
                   icon={ props.appendIcon }
                 />

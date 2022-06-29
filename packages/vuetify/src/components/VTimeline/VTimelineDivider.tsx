@@ -59,13 +59,13 @@ export const VTimelineDivider = defineComponent({
       >
         { !props.hideDot && (
           <div
+            key="dot"
             class={[
               'v-timeline-divider__dot',
               elevationClasses.value,
               roundedClasses.value,
               sizeClasses.value,
             ]}
-            // @ts-expect-error: null
             style={ sizeStyles.value }
           >
             <div

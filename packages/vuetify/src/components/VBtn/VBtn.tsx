@@ -4,6 +4,7 @@ import './VBtn.sass'
 // Components
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
 import { VIcon } from '@/components/VIcon'
+import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
@@ -51,6 +52,8 @@ export const VBtn = defineComponent({
     block: Boolean,
     stacked: Boolean,
 
+    loading: Boolean,
+
     ripple: {
       type: Boolean,
       default: true,
@@ -68,7 +71,7 @@ export const VBtn = defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -86,7 +89,7 @@ export const VBtn = defineComponent({
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
+      return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
 
     useSelectLink(link, group?.select)
@@ -109,6 +112,7 @@ export const VBtn = defineComponent({
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
               'v-btn--stacked': props.stacked,
+              'v-btn--loading': props.loading,
             },
             themeClasses.value,
             borderClasses.value,
@@ -141,34 +145,49 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          { !props.icon && props.prependIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.prependIcon }
-              start
-            />
-          ) }
+          <span class="v-btn__content" data-no-activator="">
+            { !props.icon && props.prependIcon && (
+              <VIcon
+                key="prependIcon"
+                class="v-btn__icon"
+                icon={ props.prependIcon }
+                start
+              />
+            ) }
 
-          <div class="v-btn__content" data-no-activator="">
             { typeof props.icon === 'boolean'
               ? slots.default?.()
               : (
                 <VIcon
+                  key="icon"
                   class="v-btn__icon"
                   icon={ props.icon }
                   size={ props.size }
                 />
               )
             }
-          </div>
 
-          { !props.icon && props.appendIcon && (
-            <VIcon
-              class="v-btn__icon"
-              icon={ props.appendIcon }
-              end
-            />
-          ) }
+            { !props.icon && props.appendIcon && (
+              <VIcon
+                key="appendIcon"
+                class="v-btn__icon"
+                icon={ props.appendIcon }
+                end
+              />
+            ) }
+          </span>
+
+          { props.loading && (
+            <span key="loader" class="v-btn__loader">
+              { slots.loader ? slots.loader() : (
+                <VProgressCircular
+                  indeterminate
+                  size="23"
+                  width="2"
+                />
+              )}
+            </span>
+          )}
         </Tag>
       )
     }

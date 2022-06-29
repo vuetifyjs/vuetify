@@ -25,7 +25,7 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VInput', () => {
-  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories })
   })
 })

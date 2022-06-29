@@ -1,19 +1,24 @@
 @use '../../styles/settings';
 
+// VExpansionPanel
+$expansion-panel-active-margin: 16px !default;
 $expansion-panel-background-color: rgb(var(--v-theme-surface)) !default;
-$expansion-panel-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $expansion-panel-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $expansion-panel-border-radius: settings.$border-radius-root !default;
-$expansion-panel-active-margin: 16px !default;
+$expansion-panel-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$expansion-panel-disabled-opacity: 0.26 !default;
+$expansion-panel-disabled-color: rgba(var(--v-theme-on-surface), $expansion-panel-disabled-opacity) !default;
+$expansion-panel-disabled-overlay: 0.12 !default;
+$expansion-panel-inset-active-max-width: calc(100% - #{$expansion-panel-active-margin * 2}) !default;
+$expansion-panel-inset-max-width: 100% !default;
+$expansion-panel-popout-active-max-width: calc(100% + #{$expansion-panel-active-margin}) !default;
+$expansion-panel-popout-max-width: calc(100% - #{$expansion-panel-active-margin * 2}) !default;
+
+// VExpansionPanelTitle
+$expansion-panel-active-title-min-height: 64px !default;
 $expansion-panel-title-font-size: 0.9375rem !default;
 $expansion-panel-title-min-height: 48px !default;
-$expansion-panel-active-title-min-height: 64px !default;
 $expansion-panel-title-padding: 16px 24px !default;
+
+// VExpansionPanelText
 $expansion-panel-text-padding: 8px 24px 16px !default;
-$expansion-panel-popout-max-width: calc(100% - #{$expansion-panel-active-margin * 2}) !default;
-$expansion-panel-popout-active-max-width: calc(100% + #{$expansion-panel-active-margin}) !default;
-$expansion-panel-inset-max-width: 100% !default;
-$expansion-panel-inset-active-max-width: calc(100% - #{$expansion-panel-active-margin * 2}) !default;
-$expansion-panel-disabled-opacity: 0.26 !default;
-$expansion-panel-disabled-overlay: 0.12 !default;
-$expansion-panel-disabled-color: rgba(var(--v-theme-on-surface), $expansion-panel-disabled-opacity) !default;
