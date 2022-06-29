@@ -10,8 +10,8 @@ import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { toRef } from 'vue'
 
 export const VTimelineDivider = defineComponent({
   name: 'VTimelineDivider',
@@ -38,14 +38,13 @@ export const VTimelineDivider = defineComponent({
       backgroundColorClasses: lineColorClasses,
       backgroundColorStyles: lineColorStyles,
     } = useBackgroundColor(toRef(props, 'lineColor'))
-    const slotProps = computed(() => ({
-      icon: props.icon,
-      iconColor: props.iconColor,
-      size: props.size,
-    }))
 
     provideDefaults({
-      VIcon: { ...slotProps.value },
+      VIcon: {
+        color: toRef(props, 'iconColor'),
+        icon: toRef(props, 'icon'),
+        size: toRef(props, 'size'),
+      },
     })
 
     useRender(() => (
@@ -76,10 +75,7 @@ export const VTimelineDivider = defineComponent({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default
-                ? slots.default(slotProps.value)
-                : props.icon ? (<VIcon />) : undefined
-              }
+              { slots.default?.() ?? props.icon ? (<VIcon />) : undefined }
             </div>
           </div>
         ) }
