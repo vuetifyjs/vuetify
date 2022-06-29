@@ -29,7 +29,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VCard = defineComponent({
   name: 'VCard',
@@ -78,7 +78,7 @@ export const VCard = defineComponent({
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
@@ -86,7 +86,7 @@ export const VCard = defineComponent({
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const hasImage = !!(slots.image || props.image)
-      const hasListItem = hasHeader || hasPrepend || hasAppend
+      const hasCardItem = hasHeader || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
       const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
@@ -146,7 +146,7 @@ export const VCard = defineComponent({
               v-slots={{ default: slots.loader }}
             />
 
-            { hasListItem && (
+            { hasCardItem && (
               <VCardItem
                 prependAvatar={ props.prependAvatar }
                 prependIcon={ props.prependIcon }
@@ -181,7 +181,9 @@ export const VCard = defineComponent({
           { genOverlays(isClickable, 'v-card') }
         </Tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

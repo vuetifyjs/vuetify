@@ -35,7 +35,7 @@ $card-transition-timing-function: settings.$standard-easing !default;
 // VCardHeader
 $card-header-flex: none !default;
 
-// VCardItemTitle
+// VCardTitle
 $card-title-comfortable-line-height: 1.75rem !default;
 $card-title-compact-line-height: 1.55rem !default;
 $card-title-flex: none !default;
@@ -55,7 +55,7 @@ $card-title-white-space: nowrap !default;
 $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
 
-// VCardItemSubtitle
+// VCardSubtitle
 $card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $card-subtitle-comfortable-line-height: 1.125rem !default;
 $card-subtitle-compact-line-height: 1rem !default;
