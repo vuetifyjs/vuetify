@@ -233,9 +233,9 @@ export default baseMixins.extend<options>().extend({
       if (
         !!target &&
         // It isn't the document or the dialog body
-        ![document, this.$refs.content].includes(target) &&
+        ![document, this.$refs.dialog].includes(target) &&
         // It isn't inside the dialog body
-        !this.$refs.content.contains(target) &&
+        !this.$refs.dialog.contains(target) &&
         // We're the topmost dialog
         this.activeZIndex >= this.getMaxZIndex() &&
         // It isn't inside a dependent element (like a menu)
@@ -243,7 +243,7 @@ export default baseMixins.extend<options>().extend({
         // So we must have focused something outside the dialog and its children
       ) {
         // Find and focus the first available element inside the dialog
-        const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        const focusable = this.$refs.dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
         const el = [...focusable].find(el => !el.hasAttribute('disabled')) as HTMLElement | undefined
         el && el.focus()
       }
