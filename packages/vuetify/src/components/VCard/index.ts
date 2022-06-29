@@ -1,6 +1,6 @@
 export { VCard } from './VCard'
 export { VCardActions } from './VCardActions'
 export { VCardItem } from './VCardItem'
-export { VCardItemSubtitle } from './VCardItemSubtitle'
-export { VCardItemTitle } from './VCardItemTitle'
 export { VCardText } from './VCardText'
+export { VCardTitle } from './VCardTitle'
+export { VCardSubtitle } from './VCardSubtitle'

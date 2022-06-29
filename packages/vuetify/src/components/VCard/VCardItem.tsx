@@ -1,7 +1,7 @@
 // Components
 import { VAvatar } from '../VAvatar'
-import { VCardItemSubtitle } from './VCardItemSubtitle'
-import { VCardItemTitle } from './VCardItemTitle'
+import { VCardSubtitle } from './VCardSubtitle'
+import { VCardTitle } from './VCardTitle'
 import { VDefaultsProvider } from '../VDefaultsProvider'
 
 // Composables
@@ -60,15 +60,15 @@ export const VCardItem = defineComponent({
 
           <div class="v-card-item__content">
             { hasTitle && (
-              <VCardItemTitle>
+              <VCardTitle>
                 { slots.title ? slots.title() : props.title}
-              </VCardItemTitle>
+              </VCardTitle>
             ) }
 
             { hasSubtitle && (
-              <VCardItemSubtitle>
+              <VCardSubtitle>
                 { slots.subtitle ? slots.subtitle() : props.subtitle }
-              </VCardItemSubtitle>
+              </VCardSubtitle>
             ) }
 
             { slots.default?.() }
