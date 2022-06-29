@@ -51,10 +51,7 @@ export const VCardItem = defineComponent({
               }}
             >
               <div class="v-card-item__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : (<VAvatar />)
-                }
+                { slots.prepend?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
           ) }
@@ -62,13 +59,13 @@ export const VCardItem = defineComponent({
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title ? slots.title() : props.title}
+                { slots.title?.() ?? props.title}
               </VCardTitle>
             ) }
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
-                { slots.subtitle ? slots.subtitle() : props.subtitle }
+                { slots.subtitle?.() ?? props.subtitle }
               </VCardSubtitle>
             ) }
 
@@ -91,10 +88,7 @@ export const VCardItem = defineComponent({
               }}
             >
               <div class="v-card-item__append">
-                { slots.append
-                  ? slots.append()
-                  : (<VAvatar />)
-                }
+                { slots.append?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
           ) }
