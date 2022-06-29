@@ -99,8 +99,9 @@
       opacity: 0
 
   &--stacked
-    flex-direction: column
-    line-height: $button-stacked-line-height
+    .v-btn__content
+      flex-direction: column
+      line-height: $button-stacked-line-height
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
