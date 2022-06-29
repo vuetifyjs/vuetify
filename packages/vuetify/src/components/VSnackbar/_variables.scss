@@ -1,6 +1,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
+// VSnackbar
 $snackbar-absolute-z-index: 1 !default;
 $snackbar-action-margin: 8px !default;
 $snackbar-background-color: #333333 !default;
@@ -26,6 +27,7 @@ $snackbar-wrapper-min-width: 344px !default;
 $snackbar-wrapper-padding: 0 !default;
 $snackbar-z-index: 10000 !default;
 
+// List
 $snackbar-variants: (
   $snackbar-background,
   $snackbar-color,

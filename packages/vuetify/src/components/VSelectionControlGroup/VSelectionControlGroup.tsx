@@ -2,8 +2,8 @@
 import './VSelectionControlGroup.sass'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'
@@ -67,17 +67,15 @@ export const VSelectionControlGroup = defineComponent({
       type: toRef(props, 'type'),
     })
 
-    useRender(() => {
-      return (
-        <div
-          class="v-selection-control-group"
-          aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
-          role={ props.type === 'radio' ? 'radiogroup' : undefined }
-        >
-          { slots?.default?.() }
-        </div>
-      )
-    })
+    useRender(() => (
+      <div
+        class="v-selection-control-group"
+        aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
+        role={ props.type === 'radio' ? 'radiogroup' : undefined }
+      >
+        { slots.default?.() }
+      </div>
+    ))
 
     return {}
   },

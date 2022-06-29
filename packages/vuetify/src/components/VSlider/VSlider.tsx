@@ -1,23 +1,19 @@
 // Styles
-import './_forwards.sass'
 import './VSlider.sass'
 
 // Components
-import { VInput } from '../VInput'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-// Helpers
-import { defineComponent } from '@/util'
-
-// Types
+// Util
 import { computed, ref } from 'vue'
-import { filterInputProps, makeVInputProps } from '../VInput/VInput'
+import { defineComponent, useRender } from '@/util'
 
 export const VSlider = defineComponent({
   name: 'VSlider',
@@ -38,7 +34,7 @@ export const VSlider = defineComponent({
     'update:modelValue': (v: number) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const thumbContainerRef = ref()
 
     const {
@@ -75,7 +71,7 @@ export const VSlider = defineComponent({
     const { isFocused, focus, blur } = useFocus(props)
     const trackStop = computed(() => position(model.value))
 
-    return () => {
+    useRender(() => {
       const [inputProps, _] = filterInputProps(props)
 
       return (
@@ -136,7 +132,9 @@ export const VSlider = defineComponent({
           }}
         </VInput>
       )
-    }
+    })
+
+    return {}
   },
 })
 

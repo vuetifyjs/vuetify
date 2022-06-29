@@ -22,7 +22,7 @@ export default defineConfig(({ mode }) => {
     },
     resolve: {
       alias: [
-        { find: /^vuetify$/, replacement: resolve('./src/entry-bundler.ts') },
+        { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
         { find: /^vuetify\/(.*)/, replacement: resolve('./$1') },
         { find: /^@\/(.*)/, replacement: resolve('./src/$1')}
       ]

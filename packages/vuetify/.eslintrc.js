@@ -19,6 +19,7 @@ module.exports = {
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
+    'local-rules/jsx-condition-key': 'error',
 
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',

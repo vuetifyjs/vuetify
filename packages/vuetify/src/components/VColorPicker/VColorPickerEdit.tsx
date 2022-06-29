@@ -1,5 +1,4 @@
 // Styles
-import './_forwards.sass'
 import './VColorPickerEdit.sass'
 
 // Components
@@ -7,7 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 import { modes } from './util'
 
 // Types
@@ -77,7 +76,7 @@ export const VColorPickerEdit = defineComponent({
       })
     })
 
-    return () => (
+    useRender(() => (
       <div
         class="v-color-picker-edit"
       >
@@ -97,6 +96,8 @@ export const VColorPickerEdit = defineComponent({
           />
         ) }
       </div>
-    )
+    ))
+
+    return {}
   },
 })

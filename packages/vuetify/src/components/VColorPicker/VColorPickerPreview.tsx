@@ -1,12 +1,11 @@
 // Styles
-import './_forwards.sass'
 import './VColorPickerPreview.sass'
 
 // Components
 import { VSlider } from '@/components/VSlider'
 
 // Utilities
-import { defineComponent, HSVAtoCSS } from '@/util'
+import { defineComponent, HSVAtoCSS, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
@@ -29,7 +28,7 @@ export const VColorPickerPreview = defineComponent({
   },
 
   setup (props, { emit }) {
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-color-picker-preview',
@@ -41,6 +40,7 @@ export const VColorPickerPreview = defineComponent({
         <div class="v-color-picker-preview__dot">
           <div style={{ background: HSVAtoCSS(props.color ?? nullColor) }} />
         </div>
+
         <div class="v-color-picker-preview__sliders">
           <VSlider
             class="v-color-picker-preview__track v-color-picker-preview__hue"
@@ -55,6 +55,7 @@ export const VColorPickerPreview = defineComponent({
             trackFillColor="white"
             hideDetails
           />
+
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
@@ -72,6 +73,8 @@ export const VColorPickerPreview = defineComponent({
           ) }
         </div>
       </div>
-    )
+    ))
+
+    return {}
   },
 })

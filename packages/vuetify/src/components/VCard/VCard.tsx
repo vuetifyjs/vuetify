@@ -62,7 +62,7 @@ export const VCard = defineComponent({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -120,6 +120,7 @@ export const VCard = defineComponent({
         >
           { hasImage && (
             <VDefaultsProvider
+              key="image"
               defaults={{
                 VImg: {
                   cover: true,
@@ -128,7 +129,7 @@ export const VCard = defineComponent({
               }}
             >
               <div class="v-card__image">
-                { slots.image ? slots.image?.() : <VImg /> }
+                { slots.image?.() ?? <VImg /> }
               </div>
             </VDefaultsProvider>
           ) }
@@ -148,6 +149,7 @@ export const VCard = defineComponent({
 
             { hasCardItem && (
               <VCardItem
+                key="card-item"
                 prependAvatar={ props.prependAvatar }
                 prependIcon={ props.prependIcon }
                 title={ props.title }
@@ -166,8 +168,8 @@ export const VCard = defineComponent({
             ) }
 
             { hasText && (
-              <VCardText>
-                { slots.text ? slots.text() : props.text }
+              <VCardText key="card-text">
+                { slots.text?.() ?? props.text }
               </VCardText>
             ) }
 

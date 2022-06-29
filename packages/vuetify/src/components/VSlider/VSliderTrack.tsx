@@ -1,5 +1,4 @@
 // Styles
-import './_forwards.sass'
 import './VSliderTrack.sass'
 
 // Components
@@ -11,7 +10,7 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 export const VSliderTrack = defineComponent({
   name: 'VSliderTrack',
@@ -35,16 +34,16 @@ export const VSliderTrack = defineComponent({
     if (!slider) throw new Error('[Vuetify] v-slider-track must be inside v-slider or v-range-slider')
 
     const {
+      color,
+      horizontalDirection,
+      parsedTicks,
+      rounded,
+      showTicks,
+      tickSize,
       trackColor,
       trackFillColor,
-      vertical,
-      tickSize,
-      showTicks,
       trackSize,
-      color,
-      rounded,
-      parsedTicks,
-      horizontalDirection,
+      vertical,
     } = slider
 
     const { roundedClasses } = useRounded(rounded)
@@ -107,7 +106,7 @@ export const VSliderTrack = defineComponent({
       })
     })
 
-    return () => {
+    useRender(() => {
       return (
         <div
           class={[
@@ -158,7 +157,9 @@ export const VSliderTrack = defineComponent({
           ) }
         </div>
       )
-    }
+    })
+
+    return {}
   },
 })
 

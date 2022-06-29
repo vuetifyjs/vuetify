@@ -37,6 +37,7 @@ export const VCardItem = defineComponent({
         <div class="v-card-item">
           { hasPrepend && (
             <VDefaultsProvider
+              key="prepend"
               defaults={{
                 VAvatar: {
                   density: props.density,
@@ -60,13 +61,13 @@ export const VCardItem = defineComponent({
 
           <div class="v-card-item__content">
             { hasTitle && (
-              <VCardTitle>
+              <VCardTitle key="title">
                 { slots.title ? slots.title() : props.title}
               </VCardTitle>
             ) }
 
             { hasSubtitle && (
-              <VCardSubtitle>
+              <VCardSubtitle key="subtitle">
                 { slots.subtitle ? slots.subtitle() : props.subtitle }
               </VCardSubtitle>
             ) }
@@ -76,6 +77,7 @@ export const VCardItem = defineComponent({
 
           { hasAppend && (
             <VDefaultsProvider
+              key="append"
               defaults={{
                 VAvatar: {
                   density: props.density,

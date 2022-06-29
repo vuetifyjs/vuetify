@@ -44,7 +44,7 @@
 
     data: () => ({
       model: 'default',
-      options: ['contained-text', 'plain'],
+      options: ['tonal', 'plain'],
     }),
   }
 </script>

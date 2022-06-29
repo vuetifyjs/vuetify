@@ -1,31 +1,32 @@
+// Styles
 import './VPagination.sass'
 
 // Components
 import { VBtn } from '../VBtn'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
-import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
-import { makeElevationProps } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { makeBorderProps } from '@/composables/border'
 import { makeDensityProps } from '@/composables/density'
+import { makeElevationProps } from '@/composables/elevation'
+import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { useResizeObserver } from '@/composables/resizeObserver'
-import { makeBorderProps } from '@/composables/border'
-import { useRefs } from '@/composables/refs'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
-import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRefs } from '@/composables/refs'
+import { useResizeObserver } from '@/composables/resizeObserver'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, nextTick, ref, toRef } from 'vue'
-import { createRange, defineComponent, keyValues } from '@/util'
+import { createRange, defineComponent, keyValues, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
-import { makeRoundedProps } from '@/composables/rounded'
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -96,10 +97,10 @@ export const VPagination = defineComponent({
     },
     showFirstLastPage: Boolean,
 
-    ...makeRoundedProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
+    ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'nav' }),
     ...makeThemeProps(),
@@ -280,7 +281,7 @@ export const VPagination = defineComponent({
       }
     }
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ resizeRef }
         class={[
@@ -294,7 +295,7 @@ export const VPagination = defineComponent({
       >
         <ul class="v-pagination__list">
           { props.showFirstLastPage && (
-            <li class="v-pagination__first" data-test="v-pagination-first">
+            <li key="first" class="v-pagination__first" data-test="v-pagination-first">
               { slots.first ? slots.first(controls.value.first) : (
                 <VBtn {...controls.value.first} />
               ) }
@@ -331,7 +332,7 @@ export const VPagination = defineComponent({
           </li>
 
           { props.showFirstLastPage && (
-            <li class="v-pagination__last" data-test="v-pagination-last">
+            <li key="last" class="v-pagination__last" data-test="v-pagination-last">
               { slots.last ? slots.last(controls.value.last) : (
                 <VBtn {...controls.value.last} />
               ) }
@@ -339,7 +340,9 @@ export const VPagination = defineComponent({
           ) }
         </ul>
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
 
