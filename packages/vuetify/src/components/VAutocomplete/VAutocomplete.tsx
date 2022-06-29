@@ -13,8 +13,8 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { useItems } from '@/composables/items'
 import { useForwardRef } from '@/composables/forwardRef'
+import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -23,10 +23,10 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VFieldSlots } from '@/components/VField/VField'
 import type { FilterMatch } from '@/composables/filter'
 import type { MakeSlots } from '@/util'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
