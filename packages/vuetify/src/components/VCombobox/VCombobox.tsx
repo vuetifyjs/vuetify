@@ -24,12 +24,12 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VFieldSlots } from '@/components/VField/VField'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
