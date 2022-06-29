@@ -24,8 +24,8 @@
   &.v-expansion-panels--hover
     > .v-expansion-panel
       > .v-expansion-panel-header
-        &:hover
-          +states($material)
+        &:hover::before
+          opacity: map-deep-get($material, 'states', 'hover')
 
 // Block
 .v-expansion-panels
