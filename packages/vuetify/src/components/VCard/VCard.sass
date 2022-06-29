@@ -105,7 +105,7 @@
   grid-area: content
   overflow: hidden
 
-.v-card-title
+.v-card-item-title
   display: block
   flex: $card-title-flex
   font-size: $card-title-font-size
@@ -135,7 +135,7 @@
   + .v-card-actions
     padding-top: 0
 
-.v-card-subtitle
+.v-card-item-subtitle
   display: block
   flex: $card-subtitle-flex
   font-size: $card-subtitle-font-size
@@ -164,6 +164,21 @@
   transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
+
+.v-card__image
+  border-radius: inherit
+  display: flex
+  height: 100%
+  flex: $card-img-flex
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+
+.v-card__content
+  position: relative
+  overflow: hidden
 
 .v-card__overlay
   background-color: currentColor

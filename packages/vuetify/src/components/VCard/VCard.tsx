@@ -124,42 +124,44 @@ export const VCard = defineComponent({
                 },
               }}
             >
-              { slots.image ? slots.image?.() : <VImg /> }
+              <div class="v-card__image">
+                { slots.image ? slots.image?.() : <VImg /> }
+              </div>
             </VDefaultsProvider>
           ) }
 
-          { slots.media?.() }
+          <div class="v-card__content">
+            { hasListItem && (
+              <VCardItem
+                prependAvatar={ props.prependAvatar }
+                prependIcon={ props.prependIcon }
+                title={ props.title }
+                subtitle={ props.subtitle }
+                appendAvatar={ props.appendAvatar }
+                appendIcon={ props.appendIcon }
+              >
+                {{
+                  default: slots.item,
+                  prepend: slots.prepend,
+                  title: slots.title,
+                  subtitle: slots.subtitle,
+                  append: slots.append,
+                }}
+              </VCardItem>
+            ) }
 
-          { hasListItem && (
-            <VCardItem
-              prependAvatar={ props.prependAvatar }
-              prependIcon={ props.prependIcon }
-              title={ props.title }
-              subtitle={ props.subtitle }
-              appendAvatar={ props.appendAvatar }
-              appendIcon={ props.appendIcon }
-            >
-              {{
-                default: slots.item,
-                prepend: slots.prepend,
-                title: slots.title,
-                subtitle: slots.subtitle,
-                append: slots.append,
-              }}
-            </VCardItem>
-          ) }
+            { hasText && (
+              <VCardText>
+                { slots.text ? slots.text() : props.text }
+              </VCardText>
+            ) }
 
-          { hasText && (
-            <VCardText>
-              { slots.text ? slots.text() : props.text }
-            </VCardText>
-          ) }
+            { slots.default?.() }
 
-          { slots.default?.() }
-
-          { slots.actions && (
-            <VCardActions v-slots={{ default: slots.actions }} />
-          ) }
+            { slots.actions && (
+              <VCardActions v-slots={{ default: slots.actions }} />
+            ) }
+          </div>
 
           { genOverlays(isClickable, 'v-card') }
         </Tag>
