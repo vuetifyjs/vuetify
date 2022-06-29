@@ -1,23 +1,24 @@
 // Components
-import { VTimelineSymbol } from './shared'
 import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
-import { makeSizeProps } from '@/composables/size'
+import { IconValue } from '@/composables/icons'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
-import { IconValue } from '@/composables/icons'
+import { makeSizeProps } from '@/composables/size'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { inject, ref, watch } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import type { PropType } from 'vue'
+import { ref, watch } from 'vue'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 export const VTimelineItem = defineComponent({
   name: 'VTimelineItem',
 
   props: {
+    density: String as PropType<'default' | 'compact'>,
     dotColor: String,
     fillDot: Boolean,
     hideDot: Boolean,
@@ -36,10 +37,6 @@ export const VTimelineItem = defineComponent({
   },
 
   setup (props, { slots }) {
-    const timeline = inject(VTimelineSymbol)
-
-    if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
-
     const { dimensionStyles } = useDimension(props)
 
     const dotSize = ref(0)
@@ -51,7 +48,7 @@ export const VTimelineItem = defineComponent({
       flush: 'post',
     })
 
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-timeline-item',
@@ -83,12 +80,14 @@ export const VTimelineItem = defineComponent({
           v-slots={{ default: slots.icon }}
         />
 
-        { timeline.density.value !== 'compact' && (
+        { props.density !== 'compact' && (
           <div class="v-timeline-item__opposite">
             { !props.hideOpposite && slots.opposite?.() }
           </div>
         ) }
       </div>
-    )
+    ))
+
+    return {}
   },
 })

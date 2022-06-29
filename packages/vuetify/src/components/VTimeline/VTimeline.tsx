@@ -2,14 +2,14 @@
 import './VTimeline.sass'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 
-// Helpers
-import { computed, provide, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
-import { VTimelineSymbol } from './shared'
+// Utilities
+import { computed, toRef } from 'vue'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -60,12 +60,16 @@ export const VTimeline = defineComponent({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    provide(VTimelineSymbol, {
-      density: toRef(props, 'density'),
-      lineColor: toRef(props, 'lineColor'),
+    provideDefaults({
+      VTimelineDivider: {
+        lineColor: toRef(props, 'lineColor'),
+      },
+      VTimelineItem: {
+        density: toRef(props, 'density'),
+      },
     })
 
-    const sideClass = computed(() => {
+    const sideClasses = computed(() => {
       const side = props.side ? props.side : props.density !== 'default' ? 'end' : null
 
       return side && `v-timeline--side-${side}`
@@ -85,7 +89,7 @@ export const VTimeline = defineComponent({
       }
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-timeline',
@@ -97,15 +101,16 @@ export const VTimeline = defineComponent({
           },
           themeClasses.value,
           densityClasses.value,
-          sideClass.value,
+          sideClasses.value,
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
           '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
-      >
-        { slots.default?.() }
-      </props.tag>
-    )
+        v-slots={ slots }
+      />
+    ))
+
+    return {}
   },
 })
