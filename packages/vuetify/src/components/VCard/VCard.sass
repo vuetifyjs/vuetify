@@ -4,12 +4,14 @@
 
 .v-card
   display: block
+  overflow: hidden
   position: relative
   padding: $card-padding
   text-decoration: none
   transition-duration: $card-transition-duration
   transition-property: $card-transition-property
   transition-timing-function: $card-transition-timing-function
+  z-index: 0
 
   @include tools.border($card-border...)
   @include tools.position($card-positions)
@@ -157,7 +159,6 @@
   @include card-line-height-densities($card-text-densities)
 
 .v-card__image
-  border-radius: inherit
   display: flex
   height: 100%
   flex: $card-img-flex
@@ -166,6 +167,7 @@
   position: absolute
   top: 0
   width: 100%
+  z-index: -1
 
 .v-card__content
   border-radius: inherit

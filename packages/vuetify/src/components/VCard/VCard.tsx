@@ -105,6 +105,7 @@ export const VCard = defineComponent({
             colorClasses.value,
             densityClasses.value,
             elevationClasses.value,
+            loaderClasses.value,
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
@@ -134,51 +135,44 @@ export const VCard = defineComponent({
             </VDefaultsProvider>
           ) }
 
-          <div
-            class={[
-              'v-card__content',
-              loaderClasses.value,
-            ]}
-          >
-            <LoaderSlot
-              name="v-card"
-              active={ !!props.loading }
-              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-              v-slots={{ default: slots.loader }}
-            />
+          <LoaderSlot
+            name="v-card"
+            active={ !!props.loading }
+            color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+            v-slots={{ default: slots.loader }}
+          />
 
-            { hasCardItem && (
-              <VCardItem
-                key="card-item"
-                prependAvatar={ props.prependAvatar }
-                prependIcon={ props.prependIcon }
-                title={ props.title }
-                subtitle={ props.subtitle }
-                appendAvatar={ props.appendAvatar }
-                appendIcon={ props.appendIcon }
-              >
-                {{
-                  default: slots.item,
-                  prepend: slots.prepend,
-                  title: slots.title,
-                  subtitle: slots.subtitle,
-                  append: slots.append,
-                }}
-              </VCardItem>
-            ) }
+          { hasCardItem && (
+            <VCardItem
+              key="card-item"
+              prependAvatar={ props.prependAvatar }
+              prependIcon={ props.prependIcon }
+              title={ props.title }
+              subtitle={ props.subtitle }
+              appendAvatar={ props.appendAvatar }
+              appendIcon={ props.appendIcon }
+            >
+              {{
+                default: slots.item,
+                prepend: slots.prepend,
+                title: slots.title,
+                subtitle: slots.subtitle,
+                append: slots.append,
+              }}
+            </VCardItem>
+          ) }
 
-            { hasText && (
-              <VCardText key="card-text">
-                { slots.text?.() ?? props.text }
-              </VCardText>
-            ) }
+          { hasText && (
+            <VCardText key="card-text">
+              { slots.text?.() ?? props.text }
+            </VCardText>
+          ) }
 
-            { slots.default?.() }
+          { slots.default?.() }
 
-            { slots.actions && (
-              <VCardActions v-slots={{ default: slots.actions }} />
-            ) }
-          </div>
+          { slots.actions && (
+            <VCardActions v-slots={{ default: slots.actions }} />
+          ) }
 
           { genOverlays(isClickable, 'v-card') }
         </Tag>
