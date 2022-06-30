@@ -25,7 +25,7 @@ import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { HeadClient } from '@vueuse/head'
+import type { HeadAttrs, HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -296,13 +296,16 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
   })
 
   if (head) {
-    head.addHeadObjs(computed(() => ({
-      style: [{
+    head.addHeadObjs(computed(() => {
+      const style: HeadAttrs = {
         children: styles.value,
         type: 'text/css',
         id: 'vuetify-theme-stylesheet',
-      }],
-    })))
+      }
+      if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
+
+      return { style: [style] }
+    }))
 
     if (IN_BROWSER) {
       watchEffect(() => head.updateDOM())
