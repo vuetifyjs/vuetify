@@ -132,7 +132,6 @@ export const VListItem = genericComponent<new () => {
       const hasColor = !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasHeader = !!(hasTitle || hasSubtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
       const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
@@ -192,37 +191,26 @@ export const VListItem = genericComponent<new () => {
               }}
             >
               <div class="v-list-item__prepend">
-                { slots.prepend
-                  ? slots.prepend(slotProps.value)
-                  : <VAvatar />
-                }
+                { slots.prepend?.(slotProps.value) ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
           ) }
 
-          { hasHeader && (
-            <>
-              { hasTitle && (
-                <VListItemTitle key="title">
-                  { slots.title
-                    ? slots.title({ title: props.title })
-                    : props.title
-                  }
-                </VListItemTitle>
-              ) }
+          <div class="v-list-item__content">
+            { hasTitle && (
+              <VListItemTitle key="title">
+                { slots.title?.() ?? props.title }
+              </VListItemTitle>
+            ) }
 
-              { hasSubtitle && (
-                <VListItemSubtitle>
-                  { slots.subtitle
-                    ? slots.subtitle({ subtitle: props.subtitle })
-                    : props.subtitle
-                  }
-                </VListItemSubtitle>
-              ) }
-            </>
-          ) }
+            { hasSubtitle && (
+              <VListItemSubtitle key="subtitle">
+                { slots.subtitle?.() ?? props.subtitle }
+              </VListItemSubtitle>
+            ) }
 
-          { slots.default?.(slotProps.value) }
+            { slots.default?.(slotProps.value) }
+          </div>
 
           { hasAppend && (
             <VDefaultsProvider
@@ -240,16 +228,15 @@ export const VListItem = genericComponent<new () => {
               }}
             >
               <div class="v-list-item__append">
-                { slots.append
-                  ? slots.append(slotProps.value)
-                  : <VAvatar />
-                }
+                { slots.append?.(slotProps.value) ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
           ) }
         </Tag>
       )
     })
+
+    return {}
   },
 })
 

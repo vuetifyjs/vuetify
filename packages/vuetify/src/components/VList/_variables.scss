@@ -19,6 +19,9 @@ $list-indent-size: 16px !default;
 // VList/VListItem nav
 $list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
+$list-item-nav-min-height: 40px !default;
+$list-item-nav-two-line-min-height: 56px !default;
+$list-item-nav-three-line-min-height: 80px !default;
 $list-item-nav-margin-top: 4px !default;
 $list-item-nav-title-font-size: .8125rem !default;
 $list-item-nav-title-font-weight: 500 !default;
@@ -50,7 +53,7 @@ $list-item-border-style: settings.$border-style-root !default;
 $list-item-border-width: 0 !default;
 $list-item-border-thin-width: thin !default;
 $list-item-elevation: 1 !default;
-$list-item-min-height: 40px !default;
+$list-item-min-height: 48px !default;
 $list-item-padding: 8px 16px !default;
 $list-item-plain-opacity: .62 !default;
 $list-item-rounded-border-radius: map.get(settings.$rounded, null) !default;

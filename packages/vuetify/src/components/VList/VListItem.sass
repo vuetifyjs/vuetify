@@ -5,8 +5,8 @@
 .v-list-item
   align-items: center
   display: grid
-  grid-template-areas: "prepend title append" "prepend subtitle append"
-  grid-template-columns: max-content auto max-content
+  grid-template-areas: "prepend content append"
+  grid-template-columns: min-content minmax(0, 1fr) min-content
   padding: $list-item-padding
   position: relative
   outline: none
@@ -29,6 +29,7 @@
     @at-root
       @include tools.density('v-list-item', $list-density) using ($modifier)
         &.v-list-item--three-line #{$root}
+          align-self: flex-start
           margin-top: $list-item-avatar-margin-y - $modifier
 
   &__append,
@@ -92,13 +93,13 @@
     margin-top: $list-item-media-three-line-margin-top
     margin-bottom: $list-item-media-three-line-margin-bottom
 
-.v-list-item-header
-  grid-area: header
-  flex: 1 1 auto
-  min-width: 0
+.v-list-item__content
+  align-self: center
+  grid-area: content
+  overflow: hidden
 
 .v-list-item-title
-  grid-area: title
+  display: block
   hyphens: $list-item-title-hyphens
   overflow-wrap: $list-item-title-overflow-wrap
   overflow: hidden
@@ -116,20 +117,19 @@
 .v-list-item-subtitle
   -webkit-box-orient: vertical
   display: -webkit-box
-  grid-area: subtitle
   opacity: $list-item-subtitle-opacity
   overflow: hidden
   padding: $list-item-subtitle-padding
   text-overflow: ellipsis
 
   .v-list-item--one-line &
-    -webkit-line-clamp: 1
+    -webkit-line-clamp: 0
 
   .v-list-item--two-line &
-    -webkit-line-clamp: 2
+    -webkit-line-clamp: 1
 
   .v-list-item--three-line &
-    -webkit-line-clamp: 3
+    -webkit-line-clamp: 2
 
   @include tools.typography($list-item-subtitle-typography...)
 
@@ -159,6 +159,17 @@
         min-height: $list-item-three-line-min-height + $modifier
         padding-top: $three-line-padding
         padding-bottom: $three-line-padding
+
+      &.v-list-item--nav
+        &.v-list-item--one-line
+          min-height: $list-item-nav-min-height + $modifier
+
+        &.v-list-item--two-line
+          min-height: $list-item-nav-two-line-min-height + $modifier
+
+        &.v-list-item--three-line
+          min-height: $list-item-nav-three-line-min-height + $modifier
+
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line
@@ -195,6 +206,9 @@
 
   .v-list-item--active.v-list-item--variant-elevated &
     --v-theme-overlay-multiplier: 0
+
+.v-list-item__underlay
+  position: absolute
 
 $base-padding: list.nth($list-item-padding, 2)
 .v-list
