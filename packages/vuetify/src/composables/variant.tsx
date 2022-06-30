@@ -10,12 +10,12 @@ import type { PropType } from 'vue'
 import type { MaybeRef } from '@/util'
 
 export const allowedVariants = [
+  'elevated',
+  'flat',
+  'tonal',
   'outlined',
-  'plain',
   'text',
-  'contained',
-  'contained-flat',
-  'contained-text',
+  'plain',
 ] as const
 
 export type Variant = typeof allowedVariants[number]
@@ -28,9 +28,9 @@ export interface VariantProps {
 export function genOverlays (isClickable: boolean, name: string) {
   return (
     <>
-      { isClickable && <div class={`${name}__overlay`} /> }
+      { isClickable && <div key="overlay" class={`${name}__overlay`} /> }
 
-      <div class={`${name}__underlay`} />
+      <div key="underlay" class={`${name}__underlay`} />
     </>
   )
 }
@@ -39,7 +39,7 @@ export const makeVariantProps = propsFactory({
   color: String,
   variant: {
     type: String as PropType<Variant>,
-    default: 'contained',
+    default: 'elevated',
     validator: (v: any) => allowedVariants.includes(v),
   },
 }, 'variant')
@@ -56,7 +56,7 @@ export function useVariant (
   const { colorClasses, colorStyles } = useColor(computed(() => {
     const { variant, color } = unref(props)
     return {
-      [['contained', 'contained-flat'].includes(variant) ? 'background' : 'text']: color,
+      [['elevated', 'flat'].includes(variant) ? 'background' : 'text']: color,
     }
   }))
 

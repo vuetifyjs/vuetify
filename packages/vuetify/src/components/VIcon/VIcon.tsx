@@ -2,15 +2,15 @@
 import './VIcon.sass'
 
 // Composables
+import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { IconValue, useIcon } from '@/composables/icons'
-import { useTextColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, flattenFragments, propsFactory } from '@/util'
+import { convertToUnit, defineComponent, flattenFragments, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef } from 'vue'
@@ -49,34 +49,34 @@ export const VIcon = defineComponent({
     const { sizeClasses } = useSize(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
-    return () => {
-      return (
-        <iconData.value.component
-          tag={ props.tag }
-          icon={ iconData.value.icon }
-          class={[
-            'v-icon',
-            'notranslate',
-            sizeClasses.value,
-            textColorClasses.value,
-            themeClasses.value,
-            {
-              'v-icon--clickable': !!attrs.onClick,
-              'v-icon--start': props.start,
-              'v-icon--end': props.end,
-            },
-          ]}
-          style={[
-            !sizeClasses.value ? ({
-              fontSize: convertToUnit(props.size),
-              width: convertToUnit(props.size),
-              height: convertToUnit(props.size),
-            }) : undefined,
-            textColorStyles.value,
-          ]}
-          aria-hidden="true"
-        />
-      )
-    }
+    useRender(() => (
+      <iconData.value.component
+        tag={ props.tag }
+        icon={ iconData.value.icon }
+        class={[
+          'v-icon',
+          'notranslate',
+          themeClasses.value,
+          sizeClasses.value,
+          textColorClasses.value,
+          {
+            'v-icon--clickable': !!attrs.onClick,
+            'v-icon--start': props.start,
+            'v-icon--end': props.end,
+          },
+        ]}
+        style={[
+          !sizeClasses.value ? ({
+            fontSize: convertToUnit(props.size),
+            height: convertToUnit(props.size),
+            width: convertToUnit(props.size),
+          }) : undefined,
+          textColorStyles.value,
+        ]}
+        aria-hidden="true"
+      />
+    ))
+
+    return {}
   },
 })

@@ -2,12 +2,12 @@
 import './VColorPickerCanvas.sass'
 
 // Utilities
+import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender } from '@/util'
 import { computed, onMounted, ref, watch } from 'vue'
-import { clamp, convertToUnit, defineComponent, getEventCoordinates } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { HSVA } from '@/util'
+import type { PropType } from 'vue'
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
@@ -159,7 +159,7 @@ export const VColorPickerCanvas = defineComponent({
 
     onMounted(() => updateCanvas())
 
-    return () => (
+    useRender(() => (
       <div
         class="v-color-picker-canvas"
         style={{
@@ -185,6 +185,8 @@ export const VColorPickerCanvas = defineComponent({
           style={ dotStyles.value }
         />
       </div>
-    )
+    ))
+
+    return {}
   },
 })

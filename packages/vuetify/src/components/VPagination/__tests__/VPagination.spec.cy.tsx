@@ -83,11 +83,13 @@ describe('VPagination', () => {
   })
 
   it('should limit items when not enough space', () => {
+    cy.viewport(500, 500)
+
     cy.mount(() => (
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 7)
+    cy.get('.v-pagination__item').should('have.length', 8)
   })
 
   it('should render in RTL mode', () => {

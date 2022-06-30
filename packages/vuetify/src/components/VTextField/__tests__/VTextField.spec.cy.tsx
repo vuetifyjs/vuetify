@@ -4,7 +4,7 @@ import { VTextField } from '../VTextField'
 import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
 
-const variants = ['underlined', 'outlined', 'filled', 'contained', 'plain']
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VTextField label="label" />,
@@ -39,7 +39,7 @@ describe('VTextField', () => {
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
   })
 
-  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories })
   })
 })
