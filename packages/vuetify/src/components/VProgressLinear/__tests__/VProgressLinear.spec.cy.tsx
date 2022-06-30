@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import { VLocaleProvider } from '@/components'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { defineComponent, ref } from 'vue'
 import { VProgressLinear } from '../VProgressLinear'
 

@@ -13,7 +13,7 @@ const anchor = {
 const colors = ['success', 'info', 'warning', 'error', 'invalid']
 const sizes = ['x-small', 'small', 'default', 'large', 'x-large'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
-const variants = ['contained', 'outlined', 'plain', 'text', 'contained-text'] as const
+const variants = ['elevated', 'flat', 'tonal', 'outlined', 'text', 'plain'] as const
 const props = {
   color: colors,
   // variant: variants,
@@ -270,7 +270,7 @@ describe('VBtn', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1525, viewportWidth: 800 }, () => {
+  describe('Showcase', () => {
     generate({ stories, props, component: VBtn })
   })
 })

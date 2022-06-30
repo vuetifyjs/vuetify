@@ -1,17 +1,18 @@
 @use '../../styles/settings';
 
-// Defaults
+// VSheet
 $sheet-background: rgb(var(--v-theme-surface)) !default;
-$sheet-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
 $sheet-border-color: settings.$border-color-root !default;
 $sheet-border-radius: 0 !default;
 $sheet-border-style: settings.$border-style-root !default;
 $sheet-border-thin-width: thin !default;
 $sheet-border-width: 0 !default;
+$sheet-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
 $sheet-elevation: 0 !default;
 $sheet-positions: absolute fixed !default;
 $sheet-rounded-border-radius: settings.$border-radius-root !default;
 
+// Lists
 $sheet-border: (
   $sheet-border-color,
   $sheet-border-style,

@@ -13,9 +13,12 @@ export const VDialogTransition = defineComponent({
     const functions = {
       onBeforeEnter (el: Element) {
         (el as HTMLElement).style.pointerEvents = 'none'
+        ;(el as HTMLElement).style.visibility = 'hidden'
       },
       async onEnter (el: Element, done: () => void) {
         await new Promise(resolve => requestAnimationFrame(resolve))
+        await new Promise(resolve => requestAnimationFrame(resolve))
+        ;(el as HTMLElement).style.visibility = ''
 
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 

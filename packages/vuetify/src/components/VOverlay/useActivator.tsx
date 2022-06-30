@@ -1,7 +1,9 @@
-// Utilities
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
+// Composables
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import { VMenuSymbol } from '@/components/VMenu/shared'
+
+// Utilities
+import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import {
   computed,
   effectScope,

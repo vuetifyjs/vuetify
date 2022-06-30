@@ -4,17 +4,17 @@ import './VSliderThumb.sass'
 // Components
 import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
-import { useElevation } from '@/composables/elevation'
 
 // Directives
 import Ripple from '@/directives/ripple'
 
 // Composables
+import { useElevation } from '@/composables/elevation'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, keyValues } from '@/util'
+import { convertToUnit, defineComponent, keyValues, useRender } from '@/util'
 
 export const VSliderThumb = defineComponent({
   name: 'VSliderThumb',
@@ -107,7 +107,7 @@ export const VSliderThumb = defineComponent({
       newValue != null && emit('update:modelValue', newValue)
     }
 
-    return () => {
+    useRender(() => {
       const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
       const inset = vertical.value ? 'block' : 'inline'
       const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
@@ -171,7 +171,9 @@ export const VSliderThumb = defineComponent({
           </VScaleTransition>
         </div>
       )
-    }
+    })
+
+    return {}
   },
 })
 

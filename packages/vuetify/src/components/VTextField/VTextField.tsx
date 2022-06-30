@@ -2,16 +2,16 @@
 import './VTextField.sass'
 
 // Components
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VCounter } from '@/components/VCounter'
+
+// Directives
+import Intersect from '@/directives/intersect'
 
 // Composables
 import { useForwardRef } from '@/composables/forwardRef'
 import { useProxiedModel } from '@/composables/proxiedModel'
-
-// Directives
-import Intersect from '@/directives/intersect'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
@@ -19,8 +19,8 @@ import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 

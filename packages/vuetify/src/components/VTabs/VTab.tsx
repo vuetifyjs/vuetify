@@ -5,19 +5,19 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeGroupItemProps } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref } from 'vue'
 import { defineComponent, pick, standardEasing, useRender } from '@/util'
-import { VTabsSymbol } from './shared'
 
 // Types
+import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
 
 export const VTab = defineComponent({

@@ -5,6 +5,7 @@
 .v-toolbar
   align-items: flex-start
   display: flex
+  flex: $toolbar-flex
   flex-direction: column
   justify-content: space-between
   max-width: 100%
@@ -109,3 +110,6 @@
 .v-toolbar-items
   display: flex
   height: inherit
+
+  > .v-btn
+    border-radius: 0

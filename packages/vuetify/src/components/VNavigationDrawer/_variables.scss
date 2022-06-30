@@ -1,7 +1,7 @@
 @use 'sass:map';
 @use '../../styles/settings';
 
-// Defaults
+// VNavigationDrawer
 $navigation-drawer-background: rgb(var(--v-theme-surface)) !default;
 $navigation-drawer-border-color: settings.$border-color-root !default;
 $navigation-drawer-border-radius: map.get(settings.$rounded, '0') !default;
@@ -25,6 +25,7 @@ $navigation-drawer-transition-property: box-shadow, transform, visibility, width
 $navigation-drawer-transition-timing-function: settings.$standard-easing !default;
 $navigation-drawer-will-change: transform !default;
 
+// Lists
 $navigation-drawer-border: (
   $navigation-drawer-border-color,
   $navigation-drawer-border-style,

@@ -1,6 +1,6 @@
 @use '../../styles/settings';
 
-// Defaults
+// VTextField
 $text-field-affix-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $text-field-border-radius: settings.$border-radius-root !default;
 $text-field-details-padding-inline: 16px !default;

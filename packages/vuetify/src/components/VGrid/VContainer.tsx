@@ -5,7 +5,7 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VContainer = defineComponent({
   name: 'VContainer',
@@ -15,11 +15,12 @@ export const VContainer = defineComponent({
       type: Boolean,
       default: false,
     },
+
     ...makeTagProps(),
   },
 
   setup (props, { slots }) {
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-container',
@@ -27,6 +28,8 @@ export const VContainer = defineComponent({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })

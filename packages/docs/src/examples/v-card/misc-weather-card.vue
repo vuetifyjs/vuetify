@@ -3,22 +3,20 @@
     class="mx-auto"
     max-width="368"
   >
-    <v-card-header>
-      <v-card-header-text>
-        <v-card-title class="text-h5">Florida</v-card-title>
+    <v-card-item>
+      <v-card-title class="text-h5">Florida</v-card-title>
 
-        <v-card-subtitle>
-          <v-icon
-            icon="mdi-alert"
-            size="18"
-            color="error"
-            class="mr-1 pb-1"
-          ></v-icon>
+      <v-card-subtitle>
+        <v-icon
+          icon="mdi-alert"
+          size="18"
+          color="error"
+          class="mr-1 pb-1"
+        ></v-icon>
 
-          Extreme Weather Alert
-        </v-card-subtitle>
-      </v-card-header-text>
-    </v-card-header>
+        Extreme Weather Alert
+      </v-card-subtitle>
+    </v-card-item>
 
     <v-card-text class="py-0">
       <v-row align="center" hide-gutters no-gutters>

@@ -77,7 +77,7 @@ export const VChip = defineComponent({
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'span' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-text' } as const),
+    ...makeVariantProps({ variant: 'tonal' } as const),
   },
 
   emits: {
@@ -149,6 +149,7 @@ export const VChip = defineComponent({
 
           { hasFilter && (
             <VDefaultsProvider
+              key="filter"
               defaults={{
                 VIcon: { icon: props.filterIcon },
               }}
@@ -166,6 +167,7 @@ export const VChip = defineComponent({
 
           { hasPrepend && (
             <VDefaultsProvider
+              key="prepend"
               defaults={{
                 VAvatar: {
                   image: props.prependAvatar,
@@ -199,6 +201,7 @@ export const VChip = defineComponent({
 
           { hasAppend && (
             <VDefaultsProvider
+              key="append"
               defaults={{
                 VAvatar: {
                   image: props.appendAvatar,
@@ -223,6 +226,7 @@ export const VChip = defineComponent({
 
           { hasClose && (
             <VDefaultsProvider
+              key="close"
               defaults={{
                 VIcon: {
                   icon: props.closeIcon,
