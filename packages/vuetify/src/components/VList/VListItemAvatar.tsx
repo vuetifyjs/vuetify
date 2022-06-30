@@ -2,7 +2,7 @@
 import { makeVAvatarProps, VAvatar } from '@/components/VAvatar/VAvatar'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VListItemAvatar = defineComponent({
   name: 'VListItemAvatar',
@@ -10,7 +10,7 @@ export const VListItemAvatar = defineComponent({
   props: makeVAvatarProps(),
 
   setup (props, { slots }) {
-    return () => (
+    useRender(() => (
       <VAvatar
         class={[
           'v-list-item-avatar',
@@ -22,6 +22,8 @@ export const VListItemAvatar = defineComponent({
         { ...props }
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
