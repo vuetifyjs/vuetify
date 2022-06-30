@@ -62,6 +62,15 @@
   width: 100%
 
 .v-toolbar__content
+  > .v-btn:first-child
+    margin-inline-start: $toolbar-prepend-btn-margin-start
+
+    + .v-toolbar-title
+      padding-inline-start: $toolbar-title-padding
+
+  > .v-btn:last-child
+    margin-inline-end: $toolbar-append-btn-margin-end
+
   .v-toolbar--density-prominent &
     align-items: flex-start
 
@@ -75,19 +84,15 @@
   display: flex
 
 .v-toolbar__prepend
+  margin-inline-start: $toolbar-prepend-btn-margin-start
   margin-inline-end: auto
-
-  > .v-btn:first-child
-    margin-inline-start: $toolbar-prepend-btn-margin-start
 
   + .v-toolbar-title
     padding-inline-start: $toolbar-title-padding
 
 .v-toolbar__append
   margin-inline-start: auto
-
-  > .v-btn:last-child
-    margin-inline-end: $toolbar-append-btn-margin-end
+  margin-inline-end: $toolbar-append-btn-margin-end
 
 .v-toolbar-title
   flex: 1 1
