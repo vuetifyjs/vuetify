@@ -7,7 +7,7 @@ import { createTheme, ThemeSymbol } from '@/composables/theme'
 import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent, getUid, IN_BROWSER } from '@/util'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 import { reactive } from 'vue'
 
 // Types
