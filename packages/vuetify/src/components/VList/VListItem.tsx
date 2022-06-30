@@ -8,8 +8,12 @@ import { VListItemIcon } from './VListItemIcon'
 import { VListItemSubtitle } from './VListItemSubtitle'
 import { VListItemTitle } from './VListItemTitle'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -19,15 +23,11 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useList } from './list'
-import { IconValue } from '@/composables/icons'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
+import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
-import { useNestedItem } from '@/composables/nested/nested'
 
 // Types
 import type { MakeSlots } from '@/util'
@@ -243,6 +243,8 @@ export const VListItem = genericComponent<new () => {
         </Tag>
       )
     })
+
+    return {}
   },
 })
 
