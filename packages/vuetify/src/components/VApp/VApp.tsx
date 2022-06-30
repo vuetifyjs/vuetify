@@ -7,8 +7,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { Suspense } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { Suspense } from 'vue'
 
 export const VApp = defineComponent({
   name: 'VApp',

@@ -5,8 +5,8 @@ import './VLayout.sass'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
-import { Suspense } from 'vue'
 import { defineComponent, useRender } from '@/util'
+import { Suspense } from 'vue'
 
 export const VLayout = defineComponent({
   name: 'VLayout',
