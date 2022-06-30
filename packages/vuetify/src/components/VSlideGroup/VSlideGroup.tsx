@@ -354,6 +354,7 @@ export const VSlideGroup = defineComponent({
           ref={ containerRef }
           class="v-slide-group__container"
           onScroll={ onScroll }
+          key="container"
         >
           <div
             ref={ contentRef }
