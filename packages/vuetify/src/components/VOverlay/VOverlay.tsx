@@ -130,7 +130,7 @@ export const VOverlay = genericComponent<new () => {
     })
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
-    const { rtlClasses } = useRtl()
+    const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
@@ -146,6 +146,7 @@ export const VOverlay = genericComponent<new () => {
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
+      isRtl,
       contentEl,
       activatorEl,
       isActive,
