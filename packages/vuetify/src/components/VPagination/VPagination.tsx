@@ -318,6 +318,7 @@ export const VPagination = defineComponent({
                 },
               ]}
               data-test="v-pagination-item"
+              data-page={ item.page }
             >
               { slots.item ? slots.item(item) : (
                 <VBtn {...item.props}>{ item.page }</VBtn>
