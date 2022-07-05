@@ -25,11 +25,12 @@ import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { HeadClient } from '@vueuse/head'
+import type { HeadAttrs, HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
 export type ThemeOptions = false | {
+  cspNonce?: string
   defaultTheme?: string
   variations?: false | VariationsOptions
   themes?: Record<string, ThemeDefinition>
@@ -37,6 +38,7 @@ export type ThemeOptions = false | {
 export type ThemeDefinition = DeepPartial<InternalThemeDefinition>
 
 interface InternalThemeOptions {
+  cspNonce?: string
   isDisabled: boolean
   defaultTheme: string
   variations: false | VariationsOptions
@@ -294,13 +296,16 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
   })
 
   if (head) {
-    head.addHeadObjs(computed(() => ({
-      style: [{
+    head.addHeadObjs(computed(() => {
+      const style: HeadAttrs = {
         children: styles.value,
         type: 'text/css',
         id: 'vuetify-theme-stylesheet',
-      }],
-    })))
+      }
+      if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
+
+      return { style: [style] }
+    }))
 
     if (IN_BROWSER) {
       watchEffect(() => head.updateDOM())
@@ -318,6 +323,7 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
         const el = document.createElement('style')
         el.type = 'text/css'
         el.id = 'vuetify-theme-stylesheet'
+        if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
 
         styleEl = el
         document.head.appendChild(styleEl)
