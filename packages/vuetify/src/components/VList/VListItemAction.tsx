@@ -2,7 +2,7 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VListItemAction = defineComponent({
   name: 'VListItemAction',
@@ -15,19 +15,19 @@ export const VListItemAction = defineComponent({
   },
 
   setup (props, { slots }) {
-    return () => {
-      return (
-        <props.tag
-          class={[
-            'v-list-item-action',
-            {
-              'v-list-item-action--start': props.start,
-              'v-list-item-action--end': props.end,
-            },
-          ]}
-          v-slots={ slots }
-        />
-      )
-    }
+    useRender(() => (
+      <props.tag
+        class={[
+          'v-list-item-action',
+          {
+            'v-list-item-action--start': props.start,
+            'v-list-item-action--end': props.end,
+          },
+        ]}
+        v-slots={ slots }
+      />
+    ))
+
+    return {}
   },
 })

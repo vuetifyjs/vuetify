@@ -11,12 +11,17 @@ related:
 
 # Application layout
 
-Vuetify features an application layout system that allows you to easily create complex website designs. The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
+Vuetify features an application layout system that allows you to easily create complex website designs.
+
+The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
 
 The following components are compatible with the layout system:
 
 - [v-app-bar](/components/app-bars)
+- [v-system-bar](/components/system-bars)
 - [v-navigation-drawer](/components/navigation-drawers)
+- [v-footer](/components/footers)
+- [v-bottom-navigation](/components/bottom-navigation)
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 
@@ -24,15 +29,21 @@ The final part of the layout system is the **v-main** component. Inside this is 
 
 By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
+<alert type="info">
+
+  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
+
+</alert>
+
 <example file="application-layout/app-bar-first" />
 
 <example file="application-layout/nav-drawer-first" />
 
 As you can see, placing the **v-app-bar** before the **v-navigation-drawer** means that it will use the full width of the screen. When it it placed after the **v-navigation-drawer**, it will only use the free space left over.
 
-Some layout components accept a **position** prop with which you can place the component in the layout. In the example below, we use two **v-navigation-drawer** components, one on each side of the application.
+Some layout components accept a **location** prop with which you can place the component in the layout. In the example below, we use two **v-navigation-drawer** components, one on each side of the application.
 
-<example file="application-layout/position" />
+<example file="application-layout/location" />
 
 ## Complex layouts
 

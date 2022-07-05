@@ -12,11 +12,12 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
+import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -75,6 +76,7 @@ export const VNavigationDrawer = defineComponent({
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const isHovering = ref(false)
+    const { ssrBootStyles } = useSsrBoot()
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
@@ -142,7 +144,7 @@ export const VNavigationDrawer = defineComponent({
       ...layoutItemScrimStyles.value,
     }))
 
-    return () => {
+    useRender(() => {
       const hasImage = (slots.image || props.image)
 
       return (
@@ -174,11 +176,12 @@ export const VNavigationDrawer = defineComponent({
               backgroundColorStyles.value,
               layoutItemStyles.value,
               dragStyles.value,
+              ssrBootStyles.value,
             ]}
             { ...attrs }
           >
             { hasImage && (
-              <div class="v-navigation-drawer__img">
+              <div key="image" class="v-navigation-drawer__img">
                 { slots.image
                   ? slots.image?.({ image: props.image })
                   : (<img src={ props.image } alt="" />)
@@ -214,7 +217,9 @@ export const VNavigationDrawer = defineComponent({
           </Transition>
         </>
       )
-    }
+    })
+
+    return {}
   },
 })
 

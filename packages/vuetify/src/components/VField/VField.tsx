@@ -3,15 +3,15 @@ import './VField.sass'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'
-import { VIcon } from '@/components/VIcon'
 import { VFieldLabel } from './VFieldLabel'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { makeFocusProps, useFocus } from '@/composables/focus'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -27,12 +27,12 @@ import {
 } from '@/util'
 
 // Types
-import type { VInputSlot } from '@/components/VInput/VInput'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
+import type { VInputSlot } from '@/components/VInput/VInput'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'contained', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -77,8 +77,8 @@ export const makeVFieldProps = propsFactory({
 
 export type VFieldSlots = MakeSlots<{
   clear: []
-  prependInner: [DefaultInputSlot & VInputSlot]
-  appendInner: [DefaultInputSlot & VInputSlot]
+  'prepend-inner': [DefaultInputSlot & VInputSlot]
+  'append-inner': [DefaultInputSlot & VInputSlot]
   label: [DefaultInputSlot & VInputSlot]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
@@ -187,9 +187,9 @@ export const VField = genericComponent<new <T>() => {
 
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
-      const hasPrepend = (slots.prependInner || props.prependInnerIcon)
+      const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
       const hasClear = !!(props.clearable || slots.clear)
-      const hasAppend = !!(slots.appendInner || props.appendInnerIcon || hasClear)
+      const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -237,23 +237,23 @@ export const VField = genericComponent<new <T>() => {
           />
 
           { hasPrepend && (
-            <div
-              class="v-field__prepend-inner"
-            >
+            <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <VIcon
+                  key="prepend-icon"
                   onClick={ attrs['onClick:prependInner'] }
                   icon={ props.prependInnerIcon }
                 />
               ) }
 
-              { slots?.prependInner?.(slotProps.value) }
+              { slots['prepend-inner']?.(slotProps.value) }
             </div>
           ) }
 
-          <div class="v-field__field">
-            { ['contained', 'filled'].includes(props.variant) && hasLabel.value && (
+          <div class="v-field__field" data-no-activator="">
+            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
+                key="floating-label"
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
@@ -278,7 +278,7 @@ export const VField = genericComponent<new <T>() => {
           </div>
 
           { hasClear && (
-            <VExpandXTransition>
+            <VExpandXTransition key="clear">
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }
@@ -297,13 +297,12 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           { hasAppend && (
-            <div
-              class="v-field__append-inner"
-            >
-              { slots?.appendInner?.(slotProps.value) }
+            <div key="append" class="v-field__append-inner">
+              { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
                 <VIcon
+                  key="append-icon"
                   onClick={ attrs['onClick:appendInner'] }
                   icon={ props.appendInnerIcon }
                 />

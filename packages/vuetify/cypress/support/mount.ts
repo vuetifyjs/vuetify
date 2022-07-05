@@ -1,6 +1,7 @@
+import '../../src/styles/main.sass'
 import type { VueWrapper } from '@vue/test-utils'
-import { mount as cyMount } from '@cypress/vue'
-import { createVuetify } from '../../src/entry-bundler'
+import { mount as cyMount } from 'cypress/vue'
+import { createVuetify } from '../../src/framework'
 import { mergeDeep } from '../../src/util'
 
 /**
@@ -8,11 +9,11 @@ import { mergeDeep } from '../../src/util'
  * cy.mount(<VBtn>My button</VBtn>)
  */
 Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
-  const root = document.getElementById("__cy_root");
+  const root = document.getElementById('cy-root');
 
   // add the v-application class that allows Vuetify styles to work
-  if (!root.classList.contains("v-locale--is-rtl")) {
-    root.classList.add("v-locale--is-ltr");
+  if (!root.classList.contains('v-locale--is-rtl')) {
+    root.classList.add('v-locale--is-ltr');
   }
 
   const vuetify = createVuetify(vuetifyOptions)

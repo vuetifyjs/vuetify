@@ -14,13 +14,17 @@ related:
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-<entry />
+![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png)
+
+---
 
 ## Usage
 
 Dividers in their simplest form display a horizontal line.
 
 <!-- <usage name="v-divider" /> -->
+
+<entry />
 
 ## API
 

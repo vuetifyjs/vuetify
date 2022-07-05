@@ -13,7 +13,9 @@ import markdownRules from './rules'
 export const configureMarkdown = (md: MarkdownIt) => {
   md.use(MarkdownItPrism)
     .use(MarkdownItLinkAttributes, {
-      pattern: /^https?:\/\//,
+      matcher (href: string) {
+        return /^https?:\/\//.test(href)
+      },
       attrs: {
         target: '_blank',
         rel: 'noopener',

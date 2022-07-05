@@ -21,8 +21,8 @@
         >
           <v-text-field
             color="secondary"
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             placeholder="Placeholder"
           ></v-text-field>
         </v-col>

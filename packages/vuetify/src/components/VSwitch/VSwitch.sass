@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -46,6 +45,12 @@
 
   .v-switch--inset &
     @include tools.elevation(0)
+
+  .v-switch:not(.v-switch--loading) .v-icon ~ &
+    display: none
+
+.v-switch--loading .v-selection-control__input > .v-icon
+  display: none
 
 .v-switch
   $switch-thumb-transform: $switch-track-width * .5 - $switch-thumb-width * .5 + $switch-thumb-offset

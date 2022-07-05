@@ -32,7 +32,7 @@
           :key="i"
           :value="item"
           active-color="primary"
-          variant="contained"
+          variant="elevated"
         >
           <v-list-item-avatar start>
             <v-icon :icon="item.icon"></v-icon>

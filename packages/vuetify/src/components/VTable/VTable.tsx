@@ -2,12 +2,12 @@
 import './VTable.sass'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, defineComponent } from '@/util'
-import { makeDensityProps, useDensity } from '@/composables/density'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 export const VTable = defineComponent({
   name: 'VTable',
@@ -18,15 +18,15 @@ export const VTable = defineComponent({
     height: [Number, String],
 
     ...makeDensityProps(),
-    ...makeThemeProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-table',
@@ -49,13 +49,15 @@ export const VTable = defineComponent({
             style={{ height: convertToUnit(props.height) }}
           >
             <table>
-              { slots.default?.() }
+              { slots.default() }
             </table>
           </div>
         ) }
 
         { slots.bottom?.() }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })

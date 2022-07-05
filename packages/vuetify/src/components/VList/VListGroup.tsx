@@ -4,18 +4,20 @@ import { VExpandTransition } from '@/components/transitions'
 
 // Composables
 import { useList } from './list'
-import { makeTagProps } from '@/composables/tag'
-import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { IconValue } from '@/composables/icons'
+import { makeTagProps } from '@/composables/tag'
+import { MaybeTransition } from '@/composables/transition'
+import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, genericComponent } from '@/util'
+import { defineComponent, genericComponent, useRender } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { InternalListItem } from './VList'
+import type { MakeSlots } from '@/util'
+import type { Ref } from 'vue'
 
 export type ListGroupActivatorSlot = {
   props: {
@@ -66,6 +68,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   setup (props, { slots }) {
     const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
     const list = useList()
+    const { isBooted } = useSsrBoot()
 
     const onClick = (e: Event) => {
       open(!isOpen.value, e)
@@ -79,34 +82,34 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       color: isOpen.value ? props.activeColor ?? props.color : undefined,
     }))
 
-    return () => {
-      return (
-        <props.tag
-          class={[
-            'v-list-group',
-            {
-              'v-list-group--prepend': list?.hasPrepend.value,
-            },
-          ]}
-        >
-          { slots.activator && (
-            <VDefaultsProvider
-              defaults={{
-                VListItemIcon: { color: activatorProps.value.color },
-              }}
-            >
-              <VListGroupActivator>
-                { slots.activator({ props: activatorProps.value, isOpen }) }
-              </VListGroupActivator>
-            </VDefaultsProvider>
-          ) }
-          <VExpandTransition>
-            <div class="v-list-group__items" v-show={isOpen.value}>
-              { slots.default?.() }
-            </div>
-          </VExpandTransition>
-        </props.tag>
-      )
-    }
+    useRender(() => (
+      <props.tag
+        class={[
+          'v-list-group',
+          {
+            'v-list-group--prepend': list?.hasPrepend.value,
+          },
+        ]}
+      >
+        { slots.activator && (
+          <VDefaultsProvider
+            defaults={{
+              VListItemIcon: { color: activatorProps.value.color },
+            }}
+          >
+            <VListGroupActivator>
+              { slots.activator({ props: activatorProps.value, isOpen }) }
+            </VListGroupActivator>
+          </VDefaultsProvider>
+        ) }
+        <MaybeTransition transition={ isBooted.value && { component: VExpandTransition }}>
+          <div class="v-list-group__items" v-show={ isOpen.value }>
+            { slots.default?.() }
+          </div>
+        </MaybeTransition>
+      </props.tag>
+    ))
+
+    return {}
   },
 })

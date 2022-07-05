@@ -3,6 +3,7 @@ import './VCombobox.sass'
 
 // Components
 import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
@@ -19,15 +20,16 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
-import { computed, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { DefaultChipSlot } from '@/components/VSelect/VSelect'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -43,11 +45,35 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
     : text
 }
 
-export const VCombobox = genericComponent<new <T>() => {
-  $slots: MakeSlots<{
-    chip: [DefaultChipSlot]
-    default: []
-    selection: [{ item: T }]
+type Primitive = string | number | boolean | symbol
+
+type Val <T, ReturnObject extends boolean> = T extends Primitive
+  ? T
+  : (ReturnObject extends true ? T : any)
+
+type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
+  Multiple extends true
+    ? Val<T, ReturnObject>[]
+    : Val<T, ReturnObject>
+
+export const VCombobox = genericComponent<new <
+  T,
+  ReturnObject extends boolean = true,
+  Multiple extends boolean = false,
+  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+>() => {
+  $props: {
+    items?: readonly T[]
+    returnObject?: ReturnObject
+    multiple?: Multiple
+    modelValue?: Readonly<V>
+    'onUpdate:modelValue'?: (val: V) => void
+  }
+  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
+    chip: [{ item: T, index: number, props: Record<string, unknown> }]
+    selection: [{ item: T, index: number }]
+    'no-data': []
   }>
 }>()({
   name: 'VCombobox',
@@ -58,22 +84,22 @@ export const VCombobox = genericComponent<new <T>() => {
     delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ hideNoData: true }),
+    ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...makeTransitionProps({ transition: false }),
   },
 
   emits: {
     'update:modelValue': (val: any) => true,
     'update:searchInput': (val: string) => true,
+    'update:menu': (val: boolean) => true,
   },
 
   setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const activator = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = ref(false)
+    const menu = useProxiedModel(props, 'menu')
     const selectionIndex = ref(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
@@ -85,7 +111,7 @@ export const VCombobox = genericComponent<new <T>() => {
       v => transformIn(wrapInArray(v || [])),
       v => {
         const transformed = transformOut(v)
-        return props.multiple ? transformed : transformed[0]
+        return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const _search = ref('')
@@ -93,9 +119,9 @@ export const VCombobox = genericComponent<new <T>() => {
       get: () => {
         if (props.multiple) return _search.value
 
-        const item = items.value.find(({ props }) => props.value === model.value[0])
+        const item = items.value.find(item => item.value === model.value[0]?.value)
 
-        return item?.props.value
+        return item?.value
       },
       set: val => {
         if (props.multiple) {
@@ -214,9 +240,6 @@ export const VCombobox = genericComponent<new <T>() => {
         search.value = ''
       }
     }
-    function onInput (e: InputEvent) {
-      search.value = (e.target as HTMLInputElement).value
-    }
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
@@ -244,10 +267,6 @@ export const VCombobox = genericComponent<new <T>() => {
       }
     }
 
-    watch(() => vTextFieldRef.value, val => {
-      activator.value = val.$el.querySelector('.v-input__control')
-    })
-
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
     })
@@ -271,8 +290,9 @@ export const VCombobox = genericComponent<new <T>() => {
       return (
         <VTextField
           ref={ vTextFieldRef }
-          modelValue={ search.value }
-          onInput={ onInput }
+          v-model={ search.value }
+          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          validationValue={ props.modelValue }
           class={[
             'v-combobox',
             {
@@ -283,7 +303,6 @@ export const VCombobox = genericComponent<new <T>() => {
             },
           ]}
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
-          dirty={ selected.value.length > 0 }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }
@@ -295,49 +314,57 @@ export const VCombobox = genericComponent<new <T>() => {
             ...slots,
             default: () => (
               <>
-                { activator.value && (
-                  <VMenu
-                    v-model={ menu.value }
-                    activator={ activator.value }
-                    contentClass="v-combobox__content"
-                    eager={ props.eager }
-                    openOnClick={ false }
-                    transition={ props.transition }
-                    onAfterLeave={ onAfterLeave }
+                <VMenu
+                  v-model={ menu.value }
+                  activator="parent"
+                  contentClass="v-combobox__content"
+                  eager={ props.eager }
+                  openOnClick={ false }
+                  closeOnContentClick={ false }
+                  transition={ props.transition }
+                  onAfterLeave={ onAfterLeave }
+                  { ...props.menuProps }
+                >
+                  <VList
+                    selected={ selected.value }
+                    selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
-                    <VList
-                      selected={ selected.value }
-                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                    >
-                      { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                        <VListItem title={ t(props.noDataText) } />
-                      )) }
+                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                      <VListItem title={ t(props.noDataText) } />
+                    )) }
 
-                      { filteredItems.value.map(({ item, matches }) => (
-                        <VListItem
-                          { ...item.props }
-                          onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                          onClick={ () => select(item) }
-                        >
-                          {{
-                            title: () => {
-                              return isPristine.value
-                                ? item.title
-                                : highlightResult(item.title, matches.title, search.value?.length ?? 0)
-                            },
-                          }}
-                        </VListItem>
-                      )) }
-                    </VList>
-                  </VMenu>
-                ) }
+                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
+                      item,
+                      index,
+                      props: mergeProps(item.props, { onClick: () => select(item) }),
+                    }) ?? (
+                      <VListItem
+                        key={ index }
+                        { ...item.props }
+                        onClick={ () => select(item) }
+                      >
+                        {{
+                          prepend: ({ isSelected }) => props.multiple ? (
+                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                          ) : undefined,
+                          title: () => {
+                            return isPristine.value
+                              ? item.title
+                              : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                          },
+                        }}
+                      </VListItem>
+                    )) }
+                  </VList>
+                </VMenu>
 
-                { selections.value.map((selection, index) => {
+                { selections.value.map((item, index) => {
                   function onChipClose (e: Event) {
                     e.stopPropagation()
                     e.preventDefault()
 
-                    select(selection)
+                    select(item)
                   }
 
                   const slotProps = {
@@ -347,6 +374,7 @@ export const VCombobox = genericComponent<new <T>() => {
 
                   return (
                     <div
+                      key={ index }
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [
@@ -356,29 +384,27 @@ export const VCombobox = genericComponent<new <T>() => {
                       ]}
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
-                      { hasChips && (
+                      { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
-                              text: selection.props.title,
+                              text: item.title,
                             },
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item: selection.originalItem })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
-                      ) }
-
-                      { !hasChips && (
+                      ) : (
                         slots.selection
-                          ? slots.selection({ item: selection.originalItem })
+                          ? slots.selection({ item, index })
                           : (
                             <span class="v-combobox__selection-text">
-                              { selection.props.title }
+                              { item.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-combobox__selection-comma">,</span>
                               ) }

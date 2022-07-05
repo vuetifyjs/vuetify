@@ -1,4 +1,3 @@
-@forward './variables'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -25,10 +24,7 @@
       display: flex
       flex-direction: column
 
-      > .v-card-avatar
-        padding: $dialog-card-avatar-padding
-
-      > .v-card-header
+      > .v-card-item
         padding: $dialog-card-header-padding
 
         + .v-card-text

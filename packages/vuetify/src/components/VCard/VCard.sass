@@ -1,16 +1,17 @@
-@forward './variables'
 @use '../../styles/tools'
 @use './variables' as *
 @use './mixins' as *
 
 .v-card
   display: block
+  overflow: hidden
   position: relative
   padding: $card-padding
   text-decoration: none
   transition-duration: $card-transition-duration
   transition-property: $card-transition-property
   transition-timing-function: $card-transition-timing-function
+  z-index: 0
 
   @include tools.border($card-border...)
   @include tools.position($card-positions)
@@ -67,9 +68,6 @@
   &--link
     cursor: pointer
 
-  &--tile
-    @include tools.rounded($card-tile-border-radius)
-
 .v-card-actions
   align-items: center
   display: flex
@@ -77,56 +75,75 @@
   min-height: $card-actions-min-height
   padding: $card-actions-padding
 
-.v-card-avatar
-  align-self: $card-avatar-align-self
-  padding: $card-avatar-padding
-
-  &:last-child
-    .v-card-header &
-      padding-inline-end: $card-avatar-header-padding
-
-  &:first-child
-    .v-card-header &
-      padding-inline-start: $card-avatar-header-padding
-
-.v-card-header-text
-  flex: $card-header-text-flex
-  min-width: 0
-
-.v-card-img
-  border-radius: inherit
-  display: flex
-  height: 100%
-  flex: $card-img-flex
-  left: 0
-  overflow: hidden
-  position: absolute
-  top: 0
-  width: 100%
-
-.v-card-header
+.v-card-item
   align-items: $card-item-align-items
-  display: flex
+  display: grid
   flex: $card-header-flex
+  grid-template-areas: "prepend content append"
+  grid-template-columns: max-content auto max-content
   padding: $card-item-padding
 
   + .v-card-text
     padding-top: 0
 
+  &__prepend
+    grid-area: prepend
+    padding-inline-end: $card-prepend-padding-inline-end
+
+  &__append
+    grid-area: append
+    padding-inline-start: $card-append-padding-inline-start
+
+.v-card-item__content
+  align-self: center
+  grid-area: content
+  overflow: hidden
+
+.v-card-title
+  display: block
+  flex: $card-title-flex
+  font-size: $card-title-font-size
+  font-weight: $card-title-font-weight
+  hyphens: $card-title-hyphens
+  letter-spacing: $card-title-letter-spacing
+  min-width: 0
+  overflow-wrap: $card-title-overflow-wrap
+  overflow: $card-title-overflow
+  overflow: hidden
+  padding: $card-title-padding
+  text-overflow: $card-title-text-overflow
+  text-overflow: ellipsis
+  text-transform: $card-title-text-transform
+  white-space: $card-title-white-space
+  white-space: nowrap
+  word-break: $card-title-word-break
+  word-wrap: $card-title-word-wrap
+
+  @include card-line-height-densities($card-title-densities)
+
+  .v-card-item &
+    padding: $card-title-header-padding
+
+  + .v-card-text,
+  + .v-card-actions
+    padding-top: 0
+
 .v-card-subtitle
-  align-items: center
-  display: flex
+  display: block
   flex: $card-subtitle-flex
   font-size: $card-subtitle-font-size
   font-weight: $card-subtitle-font-weight
   letter-spacing: $card-subtitle-letter-spacing
   opacity: $card-subtitle-opacity
+  overflow: $card-subtitle-overflow
   padding: $card-subtitle-padding
+  text-overflow: $card-subtitle-text-overflow
   text-transform: $card-subtitle-text-transform
+  white-space: $card-subtitle-white-space
 
   @include card-line-height-densities($card-subtitle-densities)
 
-  .v-card-header &
+  .v-card-item &
     padding: $card-subtitle-header-padding
 
 .v-card-text
@@ -135,36 +152,35 @@
   font-weight: $card-text-font-weight
   letter-spacing: $card-text-letter-spacing
   padding: $card-text-padding
-  // position: relative
   text-transform: $card-text-text-transform
   transition: inherit
   transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
 
-.v-card-content
-  flex: $card-content-flex
-  padding: $card-text-padding
-  // position: relative
-
-.v-card-title
-  align-items: center
+.v-card__image
   display: flex
-  flex: $card-title-flex
-  font-size: $card-title-font-size
-  font-weight: $card-title-font-weight
-  hyphens: $card-title-hyphens
-  letter-spacing: $card-title-letter-spacing
-  overflow-wrap: $card-title-overflow-wrap
-  padding: $card-title-padding
-  text-transform: $card-title-text-transform
-  word-break: $card-title-word-break
-  word-wrap: $card-title-word-wrap
+  height: 100%
+  flex: $card-img-flex
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
 
-  @include card-line-height-densities($card-title-densities)
+.v-card__content
+  border-radius: inherit
+  overflow: hidden
+  position: relative
 
-  .v-card-header &
-    padding: $card-title-header-padding
+.v-card__loader
+  bottom: $card-loader-bottom
+  top: $card-loader-top
+  left: 0
+  position: absolute
+  right: 0
+  width: 100%
 
 .v-card__overlay
   background-color: currentColor
@@ -177,7 +193,3 @@
   pointer-events: none
   opacity: 0
   transition: opacity 0.2s ease-in-out
-
-  + .v-card-media
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit

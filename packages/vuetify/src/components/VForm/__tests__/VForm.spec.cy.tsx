@@ -4,7 +4,8 @@
 import { ref } from 'vue'
 import { Application } from '../../../../cypress/templates'
 import { VForm } from '../'
-import { VBtn, VTextField } from '@/components'
+import { VBtn } from '@/components/VBtn'
+import { VTextField } from '@/components/VTextField'
 import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {
@@ -178,7 +179,7 @@ describe('VForm', () => {
     cy.vue().then(async wrapper => {
       const emits = wrapper.findComponent('.v-form').emitted('submit')
 
-      expect(await emits[0][0]).to.deep.equal({ valid: true, errorMessages: [] })
+      expect(await emits[0][0]).to.deep.equal({ valid: true, errors: [] })
     })
   })
 

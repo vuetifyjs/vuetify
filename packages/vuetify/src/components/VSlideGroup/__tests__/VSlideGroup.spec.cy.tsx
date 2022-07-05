@@ -2,7 +2,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { Application, CenteredGrid } from '../../../../cypress/templates'
-import { VCard } from '@/components'
+import { VCard } from '@/components/VCard'
 import { VSlideGroup, VSlideGroupItem } from '../'
 import { createRange } from '@/util'
 
@@ -119,6 +119,8 @@ describe('VSlideGroup', () => {
         mobileBreakpoint: 'sm',
       },
     })
+
+    cy.viewport(500, 600)
 
     cy.get('.v-slide-group__prev').should('not.exist')
     cy.get('.v-slide-group__next').should('not.exist')

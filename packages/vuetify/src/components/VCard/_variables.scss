@@ -1,10 +1,11 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VCard
 $card-actions-flex: none !default;
 $card-actions-min-height: 52px !default;
 $card-actions-padding: .5rem !default;
+$card-append-padding-inline-start: 1rem !default;
 $card-avatar-align-self: flex-start !default;
 $card-avatar-header-padding: 0 !default;
 $card-avatar-padding: .5rem 1rem !default;
@@ -15,12 +16,10 @@ $card-border-style: settings.$border-style-root !default;
 $card-border-thin-width: thin !default;
 $card-border-width: 0 !default;
 $card-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
-$card-content-flex: 1 1 auto !default;
-$card-content-padding: 16px !default;
 $card-disabled-opacity: 0.6 !default;
 $card-elevation: 1 !default;
-$card-header-flex: none !default;
-$card-header-text-flex: 1 1 auto !default;
+$card-loader-top: 0 !default;
+$card-loader-bottom: auto !default;
 $card-hover-elevation: 8 !default;
 $card-img-flex: 1 1 auto !default;
 $card-item-align-items: center !default;
@@ -28,29 +27,15 @@ $card-item-padding: .625rem 1rem !default;
 $card-padding: 0 !default;
 $card-plain-opacity: .62 !default;
 $card-positions: absolute fixed !default;
-$card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
-$card-subtitle-comfortable-line-height: 1.125rem !default;
-$card-subtitle-compact-line-height: 1rem !default;
-$card-subtitle-flex: none !default;
-$card-subtitle-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
-$card-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
-$card-subtitle-header-padding: 0 0 .25rem !default;
-$card-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
-$card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
-$card-subtitle-padding: 0 1rem !default;
-$card-subtitle-text-transform: none !default;
-$card-text-comfortable-line-height: 1.2rem !default;
-$card-text-compact-line-height: 1.15rem !default;
-$card-text-flex: 1 1 auto !default;
-$card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
-$card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
-$card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
-$card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
-$card-text-padding-bottom: 1rem !default;
-$card-text-padding: 1rem !default;
-$card-text-text-transform: tools.map-deep-get(settings.$typography, 'body-2', 'text-transform') !default;
-$card-tile-border-radius: 0 !default;
+$card-prepend-padding-inline-end: 1rem !default;
+$card-transition-duration: 0.28s !default;
+$card-transition-property: box-shadow, opacity, background !default;
+$card-transition-timing-function: settings.$standard-easing !default;
+
+// VCardHeader
+$card-header-flex: none !default;
+
+// VCardTitle
 $card-title-comfortable-line-height: 1.75rem !default;
 $card-title-compact-line-height: 1.55rem !default;
 $card-title-flex: none !default;
@@ -61,15 +46,45 @@ $card-title-hyphens: auto !default;
 $card-title-letter-spacing: tools.map-deep-get(settings.$typography, 'h6', 'letter-spacing') !default;
 $card-title-line-height: tools.map-deep-get(settings.$typography, 'h6', 'line-height') !default;
 $card-title-overflow-wrap: normal !default;
+$card-title-overflow: hidden !default;
 $card-title-padding-top: 1rem !default;
 $card-title-padding: .5rem 1rem !default;
+$card-title-text-overflow: ellipsis !default;
 $card-title-text-transform: none !default;
+$card-title-white-space: nowrap !default;
 $card-title-word-break: normal !default;
 $card-title-word-wrap: break-word !default;
-$card-transition-duration: 0.28s !default;
-$card-transition-property: box-shadow, opacity, background !default;
-$card-transition-timing-function: settings.$standard-easing !default;
 
+// VCardSubtitle
+$card-subtitle-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$card-subtitle-comfortable-line-height: 1.125rem !default;
+$card-subtitle-compact-line-height: 1rem !default;
+$card-subtitle-flex: none !default;
+$card-subtitle-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
+$card-subtitle-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$card-subtitle-header-padding: 0 0 .25rem !default;
+$card-subtitle-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
+$card-subtitle-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
+$card-subtitle-opacity: var(--v-medium-emphasis-opacity) !default;
+$card-subtitle-overflow: hidden !default;
+$card-subtitle-padding: 0 1rem !default;
+$card-subtitle-text-overflow: ellipsis !default;
+$card-subtitle-text-transform: none !default;
+$card-subtitle-white-space: nowrap !default;
+
+// VCardText
+$card-text-comfortable-line-height: 1.2rem !default;
+$card-text-compact-line-height: 1.15rem !default;
+$card-text-flex: 1 1 auto !default;
+$card-text-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
+$card-text-font-weight: tools.map-deep-get(settings.$typography, 'body-2', 'weight') !default;
+$card-text-letter-spacing: tools.map-deep-get(settings.$typography, 'body-2', 'letter-spacing') !default;
+$card-text-line-height: tools.map-deep-get(settings.$typography, 'body-2', 'line-height') !default;
+$card-text-padding-bottom: 1rem !default;
+$card-text-padding: 1rem !default;
+$card-text-text-transform: tools.map-deep-get(settings.$typography, 'body-2', 'text-transform') !default;
+
+// Lists
 $card-border: (
   $card-border-color,
   $card-border-style,

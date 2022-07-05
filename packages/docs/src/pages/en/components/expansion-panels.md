@@ -14,13 +14,17 @@ related:
 
 The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.
 
-<entry />
+![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png)
+
+---
 
 ## Usage
 
 Expansion panels in their simplest form display a list of expandable items. You can either declare the markup explicitly, or use the **title** and **text** props.
 
 <example file="v-expansion-panels/usage" />
+
+<entry />
 
 ## API
 

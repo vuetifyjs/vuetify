@@ -1,7 +1,9 @@
-// Utilities
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
+// Composables
 import { makeDelayProps, useDelay } from '@/composables/delay'
 import { VMenuSymbol } from '@/components/VMenu/shared'
+
+// Utilities
+import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import {
   computed,
   effectScope,
@@ -244,7 +246,11 @@ function _useActivator (
     let activator
     if (selector) {
       if (selector === 'parent') {
-        activator = vm?.proxy?.$el?.parentNode
+        let el = vm?.proxy?.$el?.parentNode
+        while (el.hasAttribute('data-no-activator')) {
+          el = el.parentNode
+        }
+        activator = el
       } else if (typeof selector === 'string') {
         // Selector
         activator = document.querySelector(selector)

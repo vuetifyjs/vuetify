@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
 @use './variables' as *
@@ -33,10 +32,6 @@
 .v-icon--start
   margin-inline-end: $icon-margin-start
 
-  .v-btn:not(.v-btn--icon) &
-    margin-inline-start: $icon-btn-margin-start
-    margin-inline-end: $icon-btn-margin-end
-
   .v-btn.v-btn--stacked &
     margin-inline-start: 0
     margin-inline-end: 0
@@ -44,10 +39,6 @@
 
 .v-icon--end
   margin-inline-start: $icon-margin-end
-
-  .v-btn:not(.v-btn--icon) &
-    margin-inline-start: $icon-btn-margin-end
-    margin-inline-end: $icon-btn-margin-start
 
   .v-btn.v-btn--stacked &
     margin-inline-start: 0

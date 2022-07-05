@@ -1,11 +1,10 @@
-@forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 @use './mixins' as *
 
-// Theme
+// VTimeline
 .v-timeline
   .v-timeline-divider__dot
     background: $timeline-dot-divider-background
@@ -13,7 +12,6 @@
   .v-timeline-divider__inner-dot
     background: $timeline-inner-dot-divider-background
 
-// Elements
 .v-timeline
   display: grid
   grid-auto-flow: dense
@@ -84,9 +82,11 @@
         text-align: end
         padding-inline-end: $timeline-item-padding
 
+// VTimelineItem
 .v-timeline-item
   display: contents
 
+// VTimelineDivider
 .v-timeline-divider
   position: relative
   display: flex
