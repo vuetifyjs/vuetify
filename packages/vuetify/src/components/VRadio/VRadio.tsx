@@ -24,6 +24,7 @@ export const VRadio = defineComponent({
   setup (props, { slots }) {
     useRender(() => (
       <VSelectionControl
+        _as="VRadio"
         class="v-radio"
         trueIcon={ props.trueIcon }
         falseIcon={ props.falseIcon }
