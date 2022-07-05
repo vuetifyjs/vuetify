@@ -16,6 +16,8 @@
 
 // Component specific transitions
 .carousel-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(100%, 0);
   }
@@ -28,6 +30,8 @@
 }
 
 .carousel-reverse-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(-100%, 0);
   }
@@ -40,6 +44,8 @@
 }
 
 .dialog-transition {
+  @include transition-default();
+
   &-enter-active {
     transition: 225ms settings.$decelerated-easing
   }
@@ -65,12 +71,16 @@
 }
 
 .dialog-bottom-transition {
+  @include transition-default();
+
   &-enter-from, &-leave-to {
     transform: translateY(100%);
   }
 }
 
 .dialog-top-transition {
+  @include transition-default();
+
   &-enter-from, &-leave-to {
     transform: translateY(-100%);
   }
@@ -78,6 +88,8 @@
 
 .picker-transition,
 .picker-reverse-transition {
+  @include transition-default();
+
   &-enter-from,
   &-leave-to {
     opacity: 0;
@@ -91,6 +103,8 @@
 }
 
 .picker-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(0, 100%);
   }
@@ -101,6 +115,8 @@
 }
 
 .picker-reverse-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(0, -100%);
   }
@@ -111,6 +127,8 @@
 }
 
 .picker-title-transition {
+  @include transition-default();
+
   &-enter-to,
   &-leave-from {
     transform: translate(0, 0);
@@ -133,6 +151,8 @@
 }
 
 .tab-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(100%, 0);
   }
@@ -149,6 +169,8 @@
 }
 
 .tab-reverse-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(-100%, 0);
   }
