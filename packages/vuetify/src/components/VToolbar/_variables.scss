@@ -3,6 +3,7 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
+// VToolbar
 $toolbar-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $toolbar-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $toolbar-border-color: settings.$border-color-root !default;
@@ -18,14 +19,16 @@ $toolbar-content-padding-y: 4px !default;
 $toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent': -3 ) !default;
 $toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
+$toolbar-flex: 1 1 auto !default;
 $toolbar-padding-end: 16px !default;
 $toolbar-padding-start: 16px !default;
 $toolbar-padding: 16px !default;
-$toolbar-prepend-btn-margin-start: -12px !default;
-$toolbar-append-btn-margin-end: -12px !default;
+$toolbar-prepend-btn-margin-start: -6px !default;
+$toolbar-append-btn-margin-end: -6px !default;
 $toolbar-rounded-border-radius: variables.$border-radius-root !default;
 $toolbar-transition: .2s variables.$standard-easing !default;
 
+// VToolbarTitle
 $toolbar-title-padding: 20px !default;
 $toolbar-title-extended-padding: 56px !default;
 $toolbar-title-font-size: 1.25rem !default;
@@ -39,6 +42,7 @@ $toolbar-prominent-title-letter-spacing: 0 !default;
 $toolbar-prominent-title-line-height: 2.25rem !default;
 $toolbar-prominent-title-text-transform: none !default;
 
+// Lists
 $toolbar-border: (
   $toolbar-border-color,
   $toolbar-border-style,

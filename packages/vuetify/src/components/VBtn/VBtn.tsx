@@ -3,15 +3,22 @@ import './VBtn.sass'
 
 // Components
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
+// Directives
+import { Ripple } from '@/directives/ripple'
+
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
+import { makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -19,16 +26,11 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { useSelectLink } from '@/composables/selectLink'
-import { IconValue } from '@/composables/icons'
-
-// Directives
-import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -52,8 +54,6 @@ export const VBtn = defineComponent({
     block: Boolean,
     stacked: Boolean,
 
-    loading: Boolean,
-
     ripple: {
       type: Boolean,
       default: true,
@@ -65,13 +65,14 @@ export const VBtn = defineComponent({
     ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeGroupItemProps(),
+    ...makeLoaderProps(),
     ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRouterProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'button' }),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained' } as const),
+    ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
   setup (props, { attrs, slots }) {
@@ -81,6 +82,7 @@ export const VBtn = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
+    const { loaderClasses } = useLoader(props)
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
@@ -89,14 +91,16 @@ export const VBtn = defineComponent({
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
-      return props.variant === 'contained' && !(props.disabled || props.flat || props.border)
+      return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
 
     useSelectLink(link, group?.select)
 
-    return () => {
+    useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
       const hasColor = !group || group.isSelected.value
+      const hasPrepend = !!(props.prependIcon || slots.prepend)
+      const hasAppend = !!(props.appendIcon || slots.append)
 
       return (
         <Tag
@@ -111,14 +115,15 @@ export const VBtn = defineComponent({
               'v-btn--elevated': isElevated.value,
               'v-btn--flat': props.flat,
               'v-btn--icon': !!props.icon,
-              'v-btn--stacked': props.stacked,
               'v-btn--loading': props.loading,
+              'v-btn--stacked': props.stacked,
             },
             themeClasses.value,
             borderClasses.value,
             hasColor ? colorClasses.value : undefined,
             densityClasses.value,
             elevationClasses.value,
+            loaderClasses.value,
             positionClasses.value,
             roundedClasses.value,
             sizeClasses.value,
@@ -145,49 +150,72 @@ export const VBtn = defineComponent({
         >
           { genOverlays(true, 'v-btn') }
 
-          <span class="v-btn__content" data-no-activator="">
-            { !props.icon && props.prependIcon && (
-              <VIcon
-                class="v-btn__icon"
-                icon={ props.prependIcon }
-                start
-              />
-            ) }
+          { !props.icon && hasPrepend && (
+            <VDefaultsProvider
+              key="prepend"
+              defaults={{
+                VIcon: {
+                  icon: props.prependIcon,
+                },
+              }}
+            >
+              <div class="v-btn__prepend">
+                { slots.prepend?.() ?? (<VIcon />) }
+              </div>
+            </VDefaultsProvider>
+          ) }
 
-            { typeof props.icon === 'boolean'
-              ? slots.default?.()
-              : (
-                <VIcon
-                  class="v-btn__icon"
-                  icon={ props.icon }
-                  size={ props.size }
-                />
-              )
-            }
+          <div class="v-btn__content" data-no-activator="">
+            <VDefaultsProvider
+              key="content"
+              defaults={{
+                VIcon: {
+                  icon: typeof props.icon === 'string'
+                    ? props.icon
+                    : undefined,
+                },
+              }}
+            >
+              { slots.default?.() ?? (
+                typeof props.icon === 'string' && (
+                  <VIcon key="icon" />
+                )
+              ) }
+            </VDefaultsProvider>
+          </div>
 
-            { !props.icon && props.appendIcon && (
-              <VIcon
-                class="v-btn__icon"
-                icon={ props.appendIcon }
-                end
-              />
-            ) }
-          </span>
+          { !props.icon && hasAppend && (
+            <VDefaultsProvider
+              key="append"
+              defaults={{
+                VIcon: {
+                  icon: props.appendIcon,
+                },
+              }}
+            >
+              <div class="v-btn__append">
+                { slots.append?.() ?? (<VIcon />) }
+              </div>
+            </VDefaultsProvider>
+          ) }
 
-          { props.loading && (
-            <span class="v-btn__loader">
-              { slots.loader ? slots.loader() : (
+          { !!props.loading && (
+            <span key="loader" class="v-btn__loader">
+              { slots.loader?.() ?? (
                 <VProgressCircular
+                  color={ typeof props.loading === 'boolean' ? undefined : props.loading }
                   indeterminate
                   size="23"
                   width="2"
                 />
-              )}
+              ) }
             </span>
-          )}
+          ) }
         </Tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

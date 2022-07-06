@@ -2,12 +2,14 @@
 import './VMenu.sass'
 
 // Components
-import { VOverlay } from '@/components/VOverlay'
 import { VDialogTransition } from '@/components/transitions'
+import { VOverlay } from '@/components/VOverlay'
 
 // Composables
 import { makeTransitionProps } from '@/composables/transition'
+import { useForwardRef } from '@/composables/forwardRef'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { computed, inject, provide, ref, watch } from 'vue'
@@ -16,8 +18,6 @@ import { VMenuSymbol } from './shared'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
-import { useForwardRef } from '@/composables/forwardRef'
-import { useScopeId } from '@/composables/scopeId'
 
 export const VMenu = genericComponent<new () => {
   $slots: OverlaySlots

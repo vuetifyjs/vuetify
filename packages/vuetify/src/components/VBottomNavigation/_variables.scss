@@ -4,7 +4,7 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
-// Defaults
+// VBottomNavigation
 $bottom-navigation-background: rgb(var(--v-theme-surface)) !default;
 $bottom-navigation-border-color: settings.$border-color-root !default;
 $bottom-navigation-border-radius: 0 !default;
@@ -12,24 +12,23 @@ $bottom-navigation-border-radius: map.get(settings.$rounded, '0') !default;
 $bottom-navigation-border-style: settings.$border-style-root !default;
 $bottom-navigation-border-thin-width: thin !default;
 $bottom-navigation-border-width: 0 !default;
+$bottom-navigation-button-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$bottom-navigation-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $bottom-navigation-content-font-size: functions.map-deep-get(variables.$typography, 'caption', 'size') !default;
 $bottom-navigation-elevation: 4 !default;
 $bottom-navigation-flat-elevation: 0 !default;
 $bottom-navigation-height: 100% !default;
-$bottom-navigation-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $bottom-navigation-icon-font-size: 1.5rem !default;
 $bottom-navigation-max-width: 168px !default;
 $bottom-navigation-min-width: 80px !default;
 $bottom-navigation-opacity: var(--v-medium-emphasis-opacity) !default;
-$bottom-navigation-button-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$bottom-navigation-shift-content-color: rgba(var(--v-theme-on-surface), 0) !default;
+$bottom-navigation-shift-icon-top: math.div($bottom-navigation-icon-font-size, 3) !default;
+$bottom-navigation-shift-icon-transform: translateY($bottom-navigation-shift-icon-top) !default;
 $bottom-navigation-text-transform: none !default;
 $bottom-navigation-transition: transform, color .2s, .1s settings.$standard-easing !default;
 
-// Shift
-$bottom-navigation-shift-content-color: rgba(var(--v-theme-on-surface), 0) !default;
-$bottom-navigation-shift-icon-top: math.div($bottom-navigation-icon-font-size, 3) !default;
-$bottom-navigation-shift-icon-transform: translateY(-($bottom-navigation-shift-icon-top)) !default;
-
+// Lists
 $bottom-navigation-border: (
   $bottom-navigation-border-color,
   $bottom-navigation-border-style,

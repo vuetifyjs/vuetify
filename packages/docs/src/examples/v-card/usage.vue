@@ -15,13 +15,11 @@
         class="mx-auto"
         max-width="344"
       >
-        <v-card-header>
-          <v-card-header-text>
-            <v-card-title>Card title</v-card-title>
+        <v-card-item>
+          <v-card-title>Card title</v-card-title>
 
-            <v-card-subtitle>Subtitle text</v-card-subtitle>
-          </v-card-header-text>
-        </v-card-header>
+          <v-card-subtitle>Subtitle text</v-card-subtitle>
+        </v-card-item>
 
         <v-card-text>
           Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus.
@@ -46,7 +44,7 @@
 
     data: () => ({
       model: 'default',
-      options: ['contained-text', 'plain'],
+      options: ['tonal', 'plain'],
     }),
   }
 </script>

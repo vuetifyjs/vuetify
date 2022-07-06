@@ -5,13 +5,13 @@ import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
 
 // Utilities
-import { genericComponent } from '@/util'
 import { createList } from './list'
+import { genericComponent } from '@/util'
 
 // Types
 import type { InternalListItem } from './VList'
-import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { ListGroupActivatorSlot } from './VListGroup'
+import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { MakeSlots } from '@/util'
 import type { Prop } from 'vue'
 

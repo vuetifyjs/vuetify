@@ -1,10 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 import { ref } from 'vue'
-import { VLayout } from '@/components'
+import { VLayout, VLayoutItem } from '@/components/VLayout'
 import { VOverlay } from '../VOverlay'
 import { Application } from '../../../../cypress/templates'
-import { VLayoutItem } from '@/components/VLayout'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
 import { VMain } from '@/components/VMain'
 

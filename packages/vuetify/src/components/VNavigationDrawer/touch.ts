@@ -1,5 +1,10 @@
+// Composables
 import { useVelocity } from '@/composables/touch'
+
+// Utilities
 import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
+
+// Types
 import type { Ref } from 'vue'
 
 export function useTouch ({ isActive, isTemporary, width, touchless, position }: {

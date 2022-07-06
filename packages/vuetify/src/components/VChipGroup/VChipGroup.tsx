@@ -9,7 +9,7 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, defineComponent } from '@/util'
+import { deepEqual, defineComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
@@ -31,7 +31,7 @@ export const VChipGroup = defineComponent({
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-text' } as const),
+    ...makeVariantProps({ variant: 'tonal' } as const),
   },
 
   emits: {
@@ -50,7 +50,7 @@ export const VChipGroup = defineComponent({
       },
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-chip-group',
@@ -68,7 +68,9 @@ export const VChipGroup = defineComponent({
           selected: selected.value,
         }) }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
 

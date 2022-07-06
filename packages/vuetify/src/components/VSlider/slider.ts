@@ -1,12 +1,12 @@
 /* eslint-disable max-statements */
 // Composables
-import { useRtl } from '@/composables/rtl'
-import { makeRoundedProps } from '@/composables/rounded'
 import { makeElevationProps } from '@/composables/elevation'
+import { makeRoundedProps } from '@/composables/rounded'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { computed, provide, ref, toRef } from 'vue'
 import { clamp, createRange, propsFactory } from '@/util'
+import { computed, provide, ref, toRef } from 'vue'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'

@@ -1,15 +1,15 @@
 // Components
 import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
-import { VExpansionPanelText } from './VExpansionPanelText'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelText } from './VExpansionPanelText'
 
 // Composables
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { useBackgroundColor } from '@/composables/color'
-import { makeTagProps } from '@/composables/tag'
 import { makeLazyProps } from '@/composables/lazy'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
@@ -86,6 +86,7 @@ export const VExpansionPanel = defineComponent({
 
           { hasTitle && (
             <VExpansionPanelTitle
+              key="title"
               collapseIcon={ props.collapseIcon }
               color={ props.color }
               expandIcon={ props.expandIcon }
@@ -97,7 +98,7 @@ export const VExpansionPanel = defineComponent({
           ) }
 
           { hasText && (
-            <VExpansionPanelText eager={ props.eager }>
+            <VExpansionPanelText key="text" eager={ props.eager }>
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
           ) }

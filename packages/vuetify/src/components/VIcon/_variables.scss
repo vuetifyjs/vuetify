@@ -2,11 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
-$icon-btn-margin-start-multiplier: -9 !default;
-$icon-btn-margin-end-multiplier: 4.5 !default;
-$icon-btn-margin-start: calc(var(--v-btn-height) / #{$icon-btn-margin-start-multiplier}) !default;
-$icon-btn-margin-end: calc(var(--v-btn-height) / #{$icon-btn-margin-end-multiplier}) !default;
+// VIcon
 $icon-btn-stacked-margin: 4px !default;
 $icon-left-margin-left: map.get(settings.$grid-gutters, 'md') !default;
 $icon-letter-spacing: normal !default;
@@ -17,6 +13,7 @@ $icon-size: 1em !default;
 $icon-text-indent: 0 !default;
 $icon-vertical-align: middle !default;
 
+// Lists
 $icon-sizes: () !default;
 $icon-sizes: tools.map-deep-merge(
   (
