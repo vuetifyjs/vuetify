@@ -43,9 +43,9 @@
   }
 }
 
-.dialog-transition {
-  @include transition-default();
-
+.dialog-transition,
+.dialog-bottom-transition,
+.dialog-top-transition {
   &-enter-active {
     transition: 225ms settings.$decelerated-easing
   }
@@ -59,7 +59,9 @@
     transition-property: transform, opacity;
     pointer-events: none;
   }
+}
 
+.dialog-transition {
   &-enter-from, &-leave-to {
     transform: scale(0.9);
     opacity: 0;
@@ -71,18 +73,14 @@
 }
 
 .dialog-bottom-transition {
-  @include transition-default();
-
   &-enter-from, &-leave-to {
-    transform: translateY(100%);
+    transform: translateY(calc(50vh + 50%));
   }
 }
 
 .dialog-top-transition {
-  @include transition-default();
-
   &-enter-from, &-leave-to {
-    transform: translateY(-100%);
+    transform: translateY(calc(-50vh - 50%));
   }
 }
 
