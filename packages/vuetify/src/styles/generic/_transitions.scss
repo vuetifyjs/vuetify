@@ -15,34 +15,6 @@
 }
 
 // Component specific transitions
-.carousel-transition {
-  @include transition-default();
-
-  &-enter-from {
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    position: absolute;
-    top: 0;
-    transform: translate(-100%, 0);
-  }
-}
-
-.carousel-reverse-transition {
-  @include transition-default();
-
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    position: absolute;
-    top: 0;
-    transform: translate(100%, 0);
-  }
-}
-
 .dialog-transition,
 .dialog-bottom-transition,
 .dialog-top-transition {
@@ -121,62 +93,6 @@
 
   &-leave-to {
     transform: translate(0, 100%);
-  }
-}
-
-.picker-title-transition {
-  @include transition-default();
-
-  &-enter-to,
-  &-leave-from {
-    transform: translate(0, 0);
-  }
-
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-to {
-    opacity: 0;
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from,
-  &-leave-to,
-  &-leave-active {
-    position: absolute !important;
-  }
-}
-
-.tab-transition {
-  @include transition-default();
-
-  &-enter-from {
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from, &-leave-active {
-    position: absolute;
-    top: 0;
-  }
-
-  &-leave-to {
-    position: absolute;
-    transform: translate(-100%, 0);
-  }
-}
-
-.tab-reverse-transition {
-  @include transition-default();
-
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    top: 0;
-    position: absolute;
-    transform: translate(100%, 0);
   }
 }
 
