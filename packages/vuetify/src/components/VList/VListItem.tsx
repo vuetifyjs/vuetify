@@ -102,15 +102,11 @@ export const VListItem = genericComponent<new () => {
       variant: props.variant,
     }))
 
-    if (link.isExactActive?.value && parent.value != null) {
-      root.open(parent.value, true)
-    }
-
     watch(() => link.isExactActive?.value, val => {
       if (val && parent.value != null) {
         root.open(parent.value, true)
       }
-    })
+    }, { immediate: true })
 
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
