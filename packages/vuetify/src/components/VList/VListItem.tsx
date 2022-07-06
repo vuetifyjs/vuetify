@@ -63,19 +63,20 @@ export const VListItem = genericComponent<new () => {
 
   props: {
     active: Boolean,
-    activeColor: String,
     activeClass: String,
+    activeColor: String,
     appendAvatar: String,
     appendIcon: IconValue,
     disabled: Boolean,
+    inactive: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
+    link: Boolean,
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
     subtitle: [String, Number, Boolean],
     title: [String, Number, Boolean],
     value: null,
-    link: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -94,7 +95,7 @@ export const VListItem = genericComponent<new () => {
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isSelected.value
+      return !props.inactive && (props.active || link.isExactActive?.value || isSelected.value)
     })
     const roundedProps = computed(() => props.rounded || props.nav)
     const variantProps = computed(() => ({
