@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, computed, Fragment, reactive, toRefs } from 'vue'
+import { camelize, computed, Fragment, toRef, watch } from 'vue'
 
 // Types
 import type {
@@ -564,8 +564,18 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   return { clientX: e.clientX, clientY: e.clientY }
 }
 
-export function destructComputed<T extends object> (getter: ComputedGetter<T>): ToRefs<T> {
-  return toRefs(reactive({ value: computed(getter) }).value)
+export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
+  const refs = {} as ToRefs<T>
+  const base = computed(getter)
+  for (const key in base.value) {
+    refs[key] = toRef(base.value, key)
+  }
+  watch(base, val => {
+    for (const key in val) {
+      refs[key].value = val[key]
+    }
+  }, { flush: 'sync' })
+  return refs
 }
 
 export function includes (arr: readonly any[], val: any) {
