@@ -248,6 +248,30 @@ interface ThemeInstance {
 }
 ```
 
+## CSP Nonce
+
+Pages with the `script-src` or `style-src` CSP rules enabled may require a **nonce** to be specified for embedded style tags.
+
+```html
+<!-- Use with script-src -->
+Content-Security-Policy: script-src 'self' 'nonce-dQw4w9WgXcQ'
+
+<!-- Use with style-src -->
+Content-Security-Policy: style-src 'self' 'nonce-dQw4w9WgXcQ'
+```
+
+```ts
+// src/plugins/vuetify.js
+
+import {createVuetify} from 'vuetify'
+
+export const vuetify = createVuetify({
+  theme: {
+    cspNonce: 'dQw4w9WgXcQ'
+  }
+})
+```
+
 ## Implementation
 
 Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.

@@ -8,7 +8,7 @@
 .v-btn
   align-items: center
   border-radius: $button-border-radius
-  display: grid
+  display: inline-grid
   grid-template-areas: "prepend content append"
   grid-template-columns: max-content auto max-content
   font-weight: $button-font-weight
@@ -77,18 +77,22 @@
   &--disabled
     pointer-events: none
 
+    // This is multiplied by the text opacity,
+    // so we need to divide it to get the desired value
+    $button-overlay-opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
+
     &.v-btn--disabled
       color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
-      opacity: 1
+      opacity: $button-overlay-opacity
 
-    &.v-btn--variant-elevated
+    &.v-btn--variant-elevated,
+    &.v-btn--variant-flat
       background: rgb(var(--v-theme-surface))
       box-shadow: none
+      opacity: 1
 
       .v-btn__overlay
-        // This is multiplied by the text opacity,
-        // so we need to divide it to get the desired value
-        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
+        opacity: $button-overlay-opacity
 
   &--loading
     pointer-events: none

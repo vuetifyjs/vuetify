@@ -1,8 +1,18 @@
 // Utilities
-import { camelize, Fragment } from 'vue'
+import { camelize, computed, Fragment, reactive, toRefs } from 'vue'
 
 // Types
-import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentInternalInstance,
+  ComponentPublicInstance,
+  ComputedGetter,
+  InjectionKey,
+  Ref,
+  Slots,
+  ToRefs,
+  VNode,
+  VNodeChild,
+} from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -552,4 +562,12 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   }
 
   return { clientX: e.clientX, clientY: e.clientY }
+}
+
+export function destructComputed<T extends object> (getter: ComputedGetter<T>): ToRefs<T> {
+  return toRefs(reactive({ value: computed(getter) }).value)
+}
+
+export function includes (arr: readonly any[], val: any) {
+  return arr.includes(val)
 }

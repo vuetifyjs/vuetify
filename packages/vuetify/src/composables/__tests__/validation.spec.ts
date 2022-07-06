@@ -109,4 +109,34 @@ describe('validation', () => {
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()
   })
+
+  it('should return valid if no rules are set', async () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({ rules: [] })
+
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({ error: true })
+
+    expect(wrapper.vm.isValid).toBe(false)
+  })
+
+  it('should return invalid if error is manually set', async () => {
+    const wrapper = mountFunction({
+      error: true,
+    })
+
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({ error: false, errorMessages: ['error'] })
+
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({ errorMessages: [] })
+
+    expect(wrapper.vm.isValid).toBe(true)
+  })
 })

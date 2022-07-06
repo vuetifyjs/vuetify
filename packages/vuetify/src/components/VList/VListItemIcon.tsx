@@ -2,7 +2,7 @@
 import { makeVIconProps, VIcon } from '@/components/VIcon/VIcon'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VListItemIcon = defineComponent({
   name: 'VListItemIcon',
@@ -10,7 +10,7 @@ export const VListItemIcon = defineComponent({
   props: makeVIconProps(),
 
   setup (props, { slots }) {
-    return () => (
+    useRender(() => (
       <VIcon
         class={[
           'v-list-item-icon',
@@ -22,6 +22,8 @@ export const VListItemIcon = defineComponent({
         { ...props }
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })

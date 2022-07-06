@@ -5,29 +5,29 @@ import './VList.sass'
 import { VListChildren } from './VListChildren'
 
 // Composables
+import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeItemsProps } from '@/composables/items'
+import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeVariantProps } from '@/composables/variant'
-import { createList } from './list'
 import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
 import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
-import type { ListGroupActivatorSlot } from './VListGroup'
 import type { InternalItem, ItemProps } from '@/composables/items'
+import type { ListGroupActivatorSlot } from './VListGroup'
+import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
 
 export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
@@ -154,32 +154,30 @@ export const VList = genericComponent<new <T>() => {
       },
     })
 
-    useRender(() => {
-      return (
-        <props.tag
-          class={[
-            'v-list',
-            {
-              'v-list--disabled': props.disabled,
-              'v-list--nav': props.nav,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-            borderClasses.value,
-            densityClasses.value,
-            elevationClasses.value,
-            lineClasses.value,
-            roundedClasses.value,
-          ]}
-          style={[
-            backgroundColorStyles.value,
-            dimensionStyles.value,
-          ]}
-        >
-          <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
-        </props.tag>
-      )
-    })
+    useRender(() => (
+      <props.tag
+        class={[
+          'v-list',
+          {
+            'v-list--disabled': props.disabled,
+            'v-list--nav': props.nav,
+          },
+          themeClasses.value,
+          backgroundColorClasses.value,
+          borderClasses.value,
+          densityClasses.value,
+          elevationClasses.value,
+          lineClasses.value,
+          roundedClasses.value,
+        ]}
+        style={[
+          backgroundColorStyles.value,
+          dimensionStyles.value,
+        ]}
+      >
+        <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
+      </props.tag>
+    ))
 
     return {
       open,
