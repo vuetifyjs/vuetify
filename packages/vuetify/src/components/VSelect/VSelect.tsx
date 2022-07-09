@@ -219,7 +219,7 @@ export const VSelect = genericComponent<new <
                         onClick={ () => select(item) }
                       >
                         {{
-                          prepend: ({ isSelected }) => props.multiple ? (
+                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
                             <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                           ) : undefined,
                         }}
