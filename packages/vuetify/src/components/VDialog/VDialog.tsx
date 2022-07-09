@@ -10,10 +10,11 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
-import { genericComponent, IN_BROWSER, useRender } from '@/util'
 import { nextTick, ref, watch } from 'vue'
+import { genericComponent, IN_BROWSER, useRender } from '@/util'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -131,7 +132,7 @@ export const VDialog = genericComponent<new () => {
       />
     ))
 
-    return {}
+    return useForwardRef({}, overlay)
   },
 })
 
