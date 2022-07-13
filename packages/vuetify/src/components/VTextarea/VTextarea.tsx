@@ -128,6 +128,9 @@ export const VTextarea = defineComponent({
         emit('click:clear', e)
       })
     }
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLTextAreaElement).value
+    }
 
     const sizerRef = ref<HTMLTextAreaElement>()
     function calculateInputHeight () {
@@ -226,7 +229,8 @@ export const VTextarea = defineComponent({
                       <textarea
                         ref={ textareaRef }
                         class={ fieldClass }
-                        v-model={ model.value }
+                        value={ model.value }
+                        onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
