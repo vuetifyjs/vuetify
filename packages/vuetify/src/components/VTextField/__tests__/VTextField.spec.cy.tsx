@@ -39,7 +39,15 @@ describe('VTextField', () => {
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
   })
 
-  describe('Showcase', () => {
+  // https://github.com/vuetifyjs/vuetify/issues/15231
+  it('should render details if using hide-details="auto" and counter prop', () => {
+    cy.mount(() => (
+      <VTextField hide-details="auto" counter></VTextField>
+    ))
+      .get('.v-input__details').should('be.visible')
+  })
+
+  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
     generate({ stories })
   })
 })
