@@ -195,6 +195,7 @@ export default VSelect.extend({
         !this.isMenuActive &&
         val.length
       ) this.activateMenu()
+      this.updateMenuDimensions()
     },
     searchInput (val: string) {
       this.lazySearch = val
