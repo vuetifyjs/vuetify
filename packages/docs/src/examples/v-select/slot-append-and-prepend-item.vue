@@ -11,25 +11,28 @@
           title="Select All"
           @click="toggle"
         >
-          <template #prepend>
+          <template v-slot:prepend>
             <v-checkbox-btn
-              :model-value="likesSomeFruit"
-              :indeterminate="likesSomeFruit && !likesAllFruit"
               :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
+              :indeterminate="likesSomeFruit && !likesAllFruit"
+              :model-value="likesSomeFruit"
             ></v-checkbox-btn>
           </template>
         </v-list-item>
-        <v-divider></v-divider>
+
+        <v-divider class="mt-2"></v-divider>
       </template>
+
       <template v-slot:append-item>
-        <v-divider></v-divider>
+        <v-divider class="mb-2"></v-divider>
+
         <v-list-item
-          :title="title"
           :subtitle="subtitle"
+          :title="title"
           disabled
         >
-          <template #prepend>
-            <v-avatar icon="mdi-food-apple" bg-color="primary">
+          <template v-slot:prepend>
+            <v-avatar icon="mdi-food-apple" color="primary">
               mdi-food-apple
             </v-avatar>
           </template>
