@@ -163,13 +163,13 @@ export const VBtn = defineComponent({
                 },
               }}
             >
-              <div class="v-btn__prepend">
+              <span class="v-btn__prepend">
                 { slots.prepend?.() ?? (<VIcon />) }
-              </div>
+              </span>
             </VDefaultsProvider>
           ) }
 
-          <div class="v-btn__content" data-no-activator="">
+          <span class="v-btn__content" data-no-activator="">
             <VDefaultsProvider
               key="content"
               defaults={{
@@ -186,7 +186,7 @@ export const VBtn = defineComponent({
                 )
               ) }
             </VDefaultsProvider>
-          </div>
+          </span>
 
           { !props.icon && hasAppend && (
             <VDefaultsProvider
@@ -197,9 +197,9 @@ export const VBtn = defineComponent({
                 },
               }}
             >
-              <div class="v-btn__append">
+              <span class="v-btn__append">
                 { slots.append?.() ?? (<VIcon />) }
-              </div>
+              </span>
             </VDefaultsProvider>
           ) }
 
