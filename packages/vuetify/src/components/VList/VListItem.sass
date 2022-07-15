@@ -130,10 +130,12 @@
 .v-list-item
   @at-root
     @include tools.density('v-list-item', $list-density) using ($modifier)
+      min-height: $list-item-min-height + $modifier
+
       &.v-list-item--one-line
         $one-line-padding: (list.nth($list-item-padding, 1) + $modifier)
 
-        min-height: $list-item-min-height + $modifier
+        min-height: $list-item-one-line-min-height + $modifier
         padding-top: $one-line-padding
         padding-bottom: $one-line-padding
 

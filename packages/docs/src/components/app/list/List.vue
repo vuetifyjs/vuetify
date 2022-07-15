@@ -6,6 +6,7 @@
     :nav="nav"
     :items="computedItems"
     item-props
+    :lines="false"
   />
 </template>
 
