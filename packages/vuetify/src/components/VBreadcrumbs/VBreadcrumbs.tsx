@@ -89,10 +89,6 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
           ]}
           style={ backgroundColorStyles.value }
         >
-          { props.icon && (
-            <VIcon key="icon" icon={ props.icon } left />
-          ) }
-
           { hasPrepend && (
             <VDefaultsProvider
               key="prepend"

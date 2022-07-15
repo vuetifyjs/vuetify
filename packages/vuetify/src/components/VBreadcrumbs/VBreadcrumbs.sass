@@ -2,17 +2,22 @@
 @use './variables' as *
 
 .v-breadcrumbs
+  display: flex
+  align-items: center
   line-height: $breadcrumbs-line-height
-  padding: $breadcrumbs-padding
+  padding: $breadcrumbs-padding-y $breadcrumbs-padding-x
 
   &--rounded
     @include tools.rounded($breadcrumbs-rounded-border-radius)
 
   @at-root
     @include tools.density('v-breadcrumbs', $breadcrumbs-density) using ($modifier)
-      padding-top: $breadcrumbs-padding + $modifier
-      padding-bottom: $breadcrumbs-padding + $modifier
+      padding-top: #{$breadcrumbs-padding-y + $modifier}
+      padding-bottom: #{$breadcrumbs-padding-y + $modifier}
 
+.v-breadcrumbs__prepend
+  align-items: center
+  display: inline-flex
 
 .v-breadcrumbs-item
   align-items: center
