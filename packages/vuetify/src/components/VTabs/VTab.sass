@@ -1,11 +1,14 @@
 @use './variables' as *
 
 .v-tab
-  --v-btn-height: var(--v-tabs-height)
   display: inline-flex
   position: relative
   max-width: $tab-max-width
   min-width: $tab-min-width
+
+  // override density specificity
+  &.v-tab.v-tab
+    height: var(--v-tabs-height)
 
   .v-slide-group--vertical &
     justify-content: start

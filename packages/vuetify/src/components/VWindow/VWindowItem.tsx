@@ -33,6 +33,10 @@ export const VWindowItem = defineComponent({
     ...makeLazyProps(),
   },
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { slots }) {
     const window = inject(VWindowSymbol)
     const groupItem = useGroupItem(props, VWindowGroupSymbol)

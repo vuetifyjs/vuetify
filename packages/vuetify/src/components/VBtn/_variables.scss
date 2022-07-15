@@ -28,7 +28,6 @@ $button-height: 36px !default;
 $button-stacked-height: 72px !default;
 $button-icon-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-icon-font-size: 1rem !default;
-$button-icon-size: 40px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.25 !default;
 $button-plain-opacity: .62 !default;
@@ -50,9 +49,9 @@ $button-stacked-width-ratio: 1 !default;
 $button-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 $button-white-space: nowrap !default;
 
-$button-density: ('default': 1, 'comfortable': -2, 'compact': -3) !default;
+$button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
-$button-icon-density: ('default': 1, 'comfortable': -2, 'compact': -2) !default;
+$button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
 
 $button-border: (
   $button-border-color,

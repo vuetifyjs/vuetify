@@ -112,7 +112,7 @@ export const VInput = genericComponent<new <T>() => {
       )
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
-        hasMessages
+        (hasMessages || !!slots.details)
       )
 
       return (

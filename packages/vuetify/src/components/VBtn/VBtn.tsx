@@ -75,6 +75,10 @@ export const VBtn = defineComponent({
     ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)

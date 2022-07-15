@@ -55,12 +55,16 @@ describe('VTabs', () => {
   })
 
   it('should respond to v-model changes', () => {
-    cy.mount(({ modelValue }: any) => (
+    cy.mount(({ modelValue }: { modelValue: string }) => (
       <VTabs modelValue={ modelValue }>
         <VTab value="foo">foo</VTab>
         <VTab value="bar">bar</VTab>
       </VTabs>
-    ))
+    ), {
+      props: {
+        modelValue: 'foo',
+      },
+    })
 
     cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
 

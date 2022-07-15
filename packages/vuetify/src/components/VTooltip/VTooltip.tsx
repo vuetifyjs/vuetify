@@ -8,9 +8,10 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { genericComponent, getUid, useRender } from '@/util'
 
 // Types
@@ -55,6 +56,8 @@ export const VTooltip = genericComponent<new () => {
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
+    const overlay = ref<VOverlay>()
+
     const location = computed(() => {
       return props.location.split(' ').length > 1
         ? props.location
@@ -79,6 +82,7 @@ export const VTooltip = genericComponent<new () => {
     useRender(() => (
       <VOverlay
         v-model={ isActive.value }
+        ref={ overlay }
         class={[
           'v-tooltip',
         ]}
@@ -111,7 +115,7 @@ export const VTooltip = genericComponent<new () => {
       </VOverlay>
     ))
 
-    return {}
+    return useForwardRef({}, overlay)
   },
 })
 

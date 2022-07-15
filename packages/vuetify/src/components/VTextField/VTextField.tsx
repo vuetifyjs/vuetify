@@ -125,9 +125,13 @@ export const VTextField = genericComponent<new <T>() => {
         emit('click:clear', e)
       })
     }
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLInputElement).value
+    }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -200,7 +204,8 @@ export const VTextField = genericComponent<new <T>() => {
 
                           <input
                             ref={ inputRef }
-                            v-model={ model.value }
+                            value={ model.value }
+                            onInput={ onInput }
                             v-intersect={[{
                               handler: onIntersect,
                             }, null, ['once']]}
@@ -229,16 +234,22 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ props.persistentCounter || isFocused.value }
-                  value={ counterValue.value }
-                  max={ max.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ props.persistentCounter || isFocused.value }
+                      value={ counterValue.value }
+                      max={ max.value }
+                      v-slots={ slots.counter }
+                    />
+                  </>
+                ) }
               </>
             ) : undefined,
           }}

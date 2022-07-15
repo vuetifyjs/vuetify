@@ -15,31 +15,9 @@
 }
 
 // Component specific transitions
-.carousel-transition {
-  &-enter-from {
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    position: absolute;
-    top: 0;
-    transform: translate(-100%, 0);
-  }
-}
-
-.carousel-reverse-transition {
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    position: absolute;
-    top: 0;
-    transform: translate(100%, 0);
-  }
-}
-
-.dialog-transition {
+.dialog-transition,
+.dialog-bottom-transition,
+.dialog-top-transition {
   &-enter-active {
     transition: 225ms settings.$decelerated-easing
   }
@@ -53,7 +31,9 @@
     transition-property: transform, opacity;
     pointer-events: none;
   }
+}
 
+.dialog-transition {
   &-enter-from, &-leave-to {
     transform: scale(0.9);
     opacity: 0;
@@ -66,18 +46,20 @@
 
 .dialog-bottom-transition {
   &-enter-from, &-leave-to {
-    transform: translateY(100%);
+    transform: translateY(calc(50vh + 50%));
   }
 }
 
 .dialog-top-transition {
   &-enter-from, &-leave-to {
-    transform: translateY(-100%);
+    transform: translateY(calc(-50vh - 50%));
   }
 }
 
 .picker-transition,
 .picker-reverse-transition {
+  @include transition-default();
+
   &-enter-from,
   &-leave-to {
     opacity: 0;
@@ -91,6 +73,8 @@
 }
 
 .picker-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(0, 100%);
   }
@@ -101,62 +85,14 @@
 }
 
 .picker-reverse-transition {
+  @include transition-default();
+
   &-enter-from {
     transform: translate(0, -100%);
   }
 
   &-leave-to {
     transform: translate(0, 100%);
-  }
-}
-
-.picker-title-transition {
-  &-enter-to,
-  &-leave-from {
-    transform: translate(0, 0);
-  }
-
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-to {
-    opacity: 0;
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from,
-  &-leave-to,
-  &-leave-active {
-    position: absolute !important;
-  }
-}
-
-.tab-transition {
-  &-enter-from {
-    transform: translate(100%, 0);
-  }
-
-  &-leave-from, &-leave-active {
-    position: absolute;
-    top: 0;
-  }
-
-  &-leave-to {
-    position: absolute;
-    transform: translate(-100%, 0);
-  }
-}
-
-.tab-reverse-transition {
-  &-enter-from {
-    transform: translate(-100%, 0);
-  }
-
-  &-leave-from, &-leave-to {
-    top: 0;
-    position: absolute;
-    transform: translate(100%, 0);
   }
 }
 
