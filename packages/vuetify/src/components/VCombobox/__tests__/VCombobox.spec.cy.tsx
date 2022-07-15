@@ -44,7 +44,7 @@ describe('VCombobox', () => {
         .click()
         .type('3')
         .get('.v-list-item')
-        .should('have.length', 0)
+        .should('not.exist')
     })
   })
 })
