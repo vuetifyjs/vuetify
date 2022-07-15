@@ -208,6 +208,8 @@ export const VSelect = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
+                    { slots['prepend-item']?.() }
+
                     { items.value.map((item, index) => slots.item?.({
                       item,
                       index,
@@ -225,6 +227,8 @@ export const VSelect = genericComponent<new <
                         }}
                       </VListItem>
                     )) }
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 
