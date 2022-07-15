@@ -31,6 +31,10 @@ export const VExpansionPanel = defineComponent({
     ...makeVExpansionPanelTitleProps(),
   },
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { slots }) {
     const groupItem = useGroupItem(props, VExpansionPanelSymbol)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')

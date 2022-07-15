@@ -136,6 +136,7 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -221,15 +222,21 @@ export const VFileInput = defineComponent({
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ !!model.value.length }
-                  value={ counterValue.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ !!model.value.length }
+                      value={ counterValue.value }
+                      v-slots={ slots.counter }
+                    />
+                  </>
+                ) }
               </>
             ) : undefined,
           }}

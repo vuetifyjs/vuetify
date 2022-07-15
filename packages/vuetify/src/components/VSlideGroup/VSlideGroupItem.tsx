@@ -14,6 +14,10 @@ export const VSlideGroupItem = defineComponent({
     ...makeGroupItemProps(),
   },
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { slots }) {
     const slideGroupItem = useGroupItem(props, VSlideGroupSymbol)
 

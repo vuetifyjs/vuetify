@@ -20,8 +20,8 @@ export function useProxiedModel<
   const vm = getCurrentInstance('useProxiedModel')
 
   const propIsDefined = computed(() => {
+    void props[prop]
     return !!(
-      typeof props[prop] !== 'undefined' &&
       (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(toKebabCase(prop)))
     )
   })
