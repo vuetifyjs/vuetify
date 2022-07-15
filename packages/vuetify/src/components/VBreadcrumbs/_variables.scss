@@ -11,6 +11,7 @@ $breadcrumbs-item-icon-margin-inline-start: -4px !default;
 $breadcrumbs-item-link-text-decoration: underline !default;
 $breadcrumbs-item-padding: 0 4px !default;
 $breadcrumbs-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
-$breadcrumbs-padding: 16px 12px !default;
+$breadcrumbs-padding-y: 16px !default;
+$breadcrumbs-padding-x: 12px !default;
 $breadcrumbs-rounded-border-radius: settings.$border-radius-root !default;
 $breadcrumbs-vertical-align: middle !default;
