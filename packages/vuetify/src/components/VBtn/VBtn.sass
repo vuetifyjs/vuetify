@@ -169,12 +169,15 @@
     white-space: normal
 
 .v-btn__overlay
-  @include tools.absolute()
   background-color: currentColor
   border-radius: inherit
-  pointer-events: none
   opacity: 0
   transition: opacity .2s ease-in-out
+
+.v-btn__overlay,
+.v-btn__underlay
+  @include tools.absolute()
+  pointer-events: none
 
 // VAppBar
 .v-btn
