@@ -18,12 +18,16 @@
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
 
-  .v-icon
-    --v-icon-opacity: #{$list-item-icon-opacity}
+  &__prepend,
+  &__append
+    > .v-icon
+      --v-icon-opacity: #{$list-item-icon-opacity}
 
   &--active
-    .v-icon
-      --v-icon-opacity: #{$list-item-icon-active-opacity}
+    .v-list-item__prepend,
+    .v-list-item__append
+      > .v-icon
+        --v-icon-opacity: #{$list-item-icon-active-opacity}
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)
