@@ -139,7 +139,6 @@ export default VWindow.extend({
       const children = []
 
       for (let i = 0; i < length; i++) {
-        const val = this.getValue(this.items[i], i)
         const child = this.$createElement(VBtn, {
           staticClass: 'v-carousel__controls__item',
           attrs: {
@@ -148,9 +147,9 @@ export default VWindow.extend({
           props: {
             icon: true,
             small: true,
-            value: val,
+            value: this.getValue(this.items[i], i),
           },
-          key: val,
+          key: i,
         }, [
           this.$createElement(VIcon, {
             props: { size: 18 },
