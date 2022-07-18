@@ -31,12 +31,36 @@
     cursor: pointer
 
 .v-list-item__prepend
-  align-self: start
+  align-items: center
+  align-self: center
+  display: flex
   grid-area: prepend
 
+  > .v-avatar
+    margin-inline-end: $list-item-avatar-margin-end
+
+  > .v-icon
+    margin-inline-end: $list-item-icon-margin-end
+
+  .v-list-item--two-line &,
+  .v-list-item--three-line &
+    align-self: start
+
 .v-list-item__append
-  align-self: start
+  align-self: center
+  display: flex
+  align-items: center
   grid-area: append
+
+  > .v-avatar
+    margin-inline-start: $list-item-avatar-margin-start
+
+  > .v-icon
+    margin-inline-start: $list-item-icon-margin-start
+
+  .v-list-item--two-line &,
+  .v-list-item--three-line &
+    align-self: start
 
 .v-list-item__content
   align-self: center
@@ -52,19 +76,6 @@
   transition: inherit
   transition-property: height, width
 
-.v-list-item__prepend > .v-avatar
-  margin-inline-end: $list-item-avatar-margin-end
-
-.v-list-item__append > .v-avatar
-  margin-inline-start: $list-item-avatar-margin-start
-
-.v-list-item__prepend > .v-icon
-  margin-inline-end: $list-item-icon-margin-end
-
-.v-list-item__append > .v-icon
-  margin-inline-start: $list-item-icon-margin-start
-
-.v-list-item-action
   &--start
     margin-inline-end: $list-item-action-margin-start
 
