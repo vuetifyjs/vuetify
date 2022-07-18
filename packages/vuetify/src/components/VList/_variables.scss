@@ -2,7 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-// Defaults
+// VList
 $list-background: rgba(var(--v-theme-surface)) !default;
 $list-border-color: settings.$border-color-root !default;
 $list-border-radius: 0 !default;
@@ -19,10 +19,11 @@ $list-indent-size: 16px !default;
 $list-nav-padding: 8px !default;
 $list-nav-subheader-font-size: .75rem !default;
 
+// VListSubheader
 $list-subheader-font-size: .875rem !default;
-$list-subheader-font-weight: 500 !default;
+$list-subheader-font-weight: 400 !default;
 $list-subheader-inset-margin: 56px !default;
-$list-subheader-inset-padding-start: 72px !default;
+$list-subheader-inset-padding-start: 56px !default;
 $list-subheader-line-height: 1.375rem !default;
 $list-subheader-min-height: 40px !default;
 $list-subheader-padding-end: 16px !default;
@@ -32,6 +33,7 @@ $list-subheader-min-height-multiplier: 1 !default;
 $list-subheader-text-opacity: var(--v-medium-emphasis-opacity) !default;
 $list-subheader-transition: 0.2s min-height settings.$standard-easing !default;
 
+// VListItem
 $list-item-border-color: settings.$border-color-root !default;
 $list-item-border-radius: 0 !default;
 $list-item-border-style: settings.$border-style-root !default;
