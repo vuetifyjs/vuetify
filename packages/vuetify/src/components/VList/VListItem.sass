@@ -12,12 +12,15 @@
   padding: $list-item-padding
   position: relative
   text-decoration: none
-  transition: $list-item-transition
 
   @include tools.border($list-item-border...)
   @include tools.states('.v-list-item__overlay')
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
+
+  &--active
+    .v-icon
+      --v-icon-opacity: #{$list-item-icon-active-opacity}
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)
