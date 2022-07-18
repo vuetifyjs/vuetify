@@ -198,7 +198,7 @@ export const VListItem = genericComponent<new () => {
                   <VIcon key="prepend-icon" />
                 ) }
 
-                { slots.prepend?.() }
+                { slots.prepend?.(slotProps.value) }
               </div>
             </VDefaultsProvider>
           ) }
@@ -206,13 +206,13 @@ export const VListItem = genericComponent<new () => {
           <div class="v-list-item__content">
             { hasTitle && (
               <VListItemTitle key="title">
-                { slots.title?.() ?? props.title}
+                { slots.title?.({ title: props.title }) ?? props.title}
               </VListItemTitle>
             ) }
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
-                { slots.subtitle?.() ?? props.subtitle }
+                { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
               </VListItemSubtitle>
             ) }
 
@@ -237,7 +237,7 @@ export const VListItem = genericComponent<new () => {
               }}
             >
               <div class="v-list-item__append">
-                { slots.append?.() }
+                { slots.append?.(slotProps.value) }
 
                 { props.appendIcon && (
                   <VIcon key="append-icon" />
