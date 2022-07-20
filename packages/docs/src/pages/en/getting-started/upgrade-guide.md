@@ -61,3 +61,13 @@ app.use(vuetify)
 - **`dismissable`** prop has been replaced by **`closeable`**
 - **`outlined`** and **`text`** props have been replaced by single prop **`variant`**
 - **`text`** prop has new purpose. It represents the text content of the alert, if default slot is not used
+
+### v-app
+
+- **`id`** prop has been removed
+
+### v-layout
+
+* **``fill-height``** prop has been replaced by **``full-height`**
+* **``id``** prop has been removed
+* The grid helper classes such as `align-{direction}` and `justify-{direction}` are still available, but have been removed as props. See [Grid documentation](/components/grids/#helper-classes) for more details.
