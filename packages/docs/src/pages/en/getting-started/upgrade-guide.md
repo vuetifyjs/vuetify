@@ -68,6 +68,6 @@ app.use(vuetify)
 
 ### v-layout
 
-* **``fill-height``** prop has been replaced by **``full-height`**
-* **``id``** prop has been removed
+* **`fill-height`** prop has been replaced by **`full-height`**
+* **`id`** prop has been removed
 * The grid helper classes such as `align-{direction}` and `justify-{direction}` are still available, but have been removed as props. See [Grid documentation](/components/grids/#helper-classes) for more details.
