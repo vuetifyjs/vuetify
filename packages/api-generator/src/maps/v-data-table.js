@@ -122,7 +122,7 @@ const DataGroupScopedProps = {
   options: DataOptions,
   isMobile: 'boolean',
   items: 'any[]',
-  headers: 'i DataTableHeader[]',
+  headers: 'DataTableHeader[]',
 }
 
 const DataGroupHeaderScopedProps = {
