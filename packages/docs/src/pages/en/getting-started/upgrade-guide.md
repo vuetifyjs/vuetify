@@ -14,7 +14,7 @@ This page contains a detailed list of breaking changes and the steps required to
 
 ## Setup
 
-- **Vuetify** class removed, use **createVuetify** function
+- **`Vuetify`** class removed, use **`createVuetify`** function
 
 ```js
 // 2.x
@@ -50,18 +50,14 @@ app.use(vuetify)
 
 ### General changes
 
-- **light** and **dark** props have been removed from all components. Use **theme** prop instead
-- **value** prop has been replaced by **model-value** on components that support `v-model` usage
-- **@input** event has been replaced by **@update:model-value** on components that support `v-model` usage
+- **`light`** and **`dark`** props have been removed from all components. Use **`theme`** prop instead
+- **`value`** prop has been replaced by **`model-value`** on components that support `v-model` usage
+- **`@input`** event has been replaced by **`@update:model-value`** on components that support `v-model` usage
 
 ### v-alert
 
-- **border** prop values `left` and `right` have been replaced by `start` and `end`
-- **colored-border** prop has been replaced by **border-color**
-- **dismissable** prop has been replaced by **closeable**
-- **outlined** and **text** props have been replaced by single prop **variant**
-- **text** prop has new purpose. It represents the text content of the alert, if default slot is not used
-
-### v-app
-
-- **id** prop has been removed
+- **`border`** prop values `left` and `right` have been replaced by `start` and `end`
+- **`colored-border`** prop has been replaced by **`border-color`**
+- **`dismissable`** prop has been replaced by **`closeable`**
+- **`outlined`** and **`text`** props have been replaced by single prop **`variant`**
+- **`text`** prop has new purpose. It represents the text content of the alert, if default slot is not used
