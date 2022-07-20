@@ -93,15 +93,9 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
         ]}
       >
         { slots.activator && (
-          <VDefaultsProvider
-            defaults={{
-              VListItemIcon: { color: activatorProps.value.color },
-            }}
-          >
-            <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen }) }
-            </VListGroupActivator>
-          </VDefaultsProvider>
+          <VListGroupActivator>
+            { slots.activator({ props: activatorProps.value, isOpen }) }
+          </VListGroupActivator>
         ) }
 
         <VExpandTransition>

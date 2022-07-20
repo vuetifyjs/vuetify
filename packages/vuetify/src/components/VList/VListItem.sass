@@ -257,9 +257,16 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group
   --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
+  --prepend-width: #{$list-item-avatar-size}
 
   &--fluid
     --list-indent-size: 0px
+
+  &--prepend
+    --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
+
+  &--fluid.v-list-group--prepend
+    --parent-padding: var(--indent-padding)
 
 .v-list-group__items
   --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
