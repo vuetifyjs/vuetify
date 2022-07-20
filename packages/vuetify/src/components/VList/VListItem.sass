@@ -212,29 +212,57 @@
   .v-list-item--active.v-list-item--variant-elevated &
     --v-theme-overlay-multiplier: 0
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 $base-padding: list.nth($list-item-padding, 2)
 .v-list
   --indent-padding: 0px
 
-  &--nav
-    --indent-padding: -#{$list-nav-padding}
-
 .v-list-group
+  --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
-  &--prepend
-    --parent-padding: calc(var(--indent-padding) + #{$list-item-avatar-size})
+
+  &--fluid
+    --list-indent-size: 0px
 
 .v-list-group__items
-  --indent-padding: calc(var(--parent-padding) + #{$list-indent-size})
+  --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
 
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
-
-.v-list-item--prepend,
-.v-list-group__items .v-list-item--prepend
-  .v-list-item__prepend > .v-avatar
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
-
-.v-list-group__header.v-list-item--active
-  .v-list-item__overlay
-    display: none

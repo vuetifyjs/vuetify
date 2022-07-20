@@ -10,12 +10,12 @@ import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nes
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, genericComponent, useRender } from '@/util'
+import { defineComponent, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InternalListItem } from './VList'
 import type { MakeSlots } from '@/util'
-import type { Ref } from 'vue'
+import type { ExtractPropTypes, Ref } from 'vue'
 
 export type ListGroupActivatorSlot = {
   props: {
@@ -36,6 +36,23 @@ const VListGroupActivator = defineComponent({
   },
 })
 
+export const makeVListGroupProps = propsFactory({
+  activeColor: String,
+  color: String,
+  collapseIcon: {
+    type: IconValue,
+    default: '$collapse',
+  },
+  expandIcon: {
+    type: IconValue,
+    default: '$expand',
+  },
+  fluid: Boolean,
+  value: null,
+
+  ...makeTagProps(),
+})
+
 export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
@@ -47,21 +64,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
 }>()({
   name: 'VListGroup',
 
-  props: {
-    activeColor: String,
-    color: String,
-    collapseIcon: {
-      type: IconValue,
-      default: '$collapse',
-    },
-    expandIcon: {
-      type: IconValue,
-      default: '$expand',
-    },
-    value: null,
-
-    ...makeTagProps(),
-  },
+  props: makeVListGroupProps(),
 
   setup (props, { slots }) {
     const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
@@ -85,6 +88,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
           'v-list-group',
           {
             'v-list-group--prepend': list?.hasPrepend.value,
+            'v-list-group--fluid': props.fluid,
           },
         ]}
       >
@@ -99,6 +103,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
             </VListGroupActivator>
           </VDefaultsProvider>
         ) }
+
         <VExpandTransition>
           <div class="v-list-group__items" v-show={ isOpen.value }>
             { slots.default?.() }
@@ -110,3 +115,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
     return {}
   },
 })
+
+export function filterListGroupProps (props: ExtractPropTypes<ReturnType<typeof makeVListGroupProps>>) {
+  return pick(props, Object.keys(VListGroup.props) as any)
+}
