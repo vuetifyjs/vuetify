@@ -88,7 +88,7 @@ app.use(vuetify)
 - **`fixed`** has been removed
 - **`{max/min}-{height/width}`** has been removed
 - **`short`** has been removed
-* The **`img`** slot has been renamed to **`image`**
+- The **`img`** slot has been renamed to **`image`**
 
 ### v-navigation-drawer
 
