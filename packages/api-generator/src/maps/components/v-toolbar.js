@@ -10,7 +10,7 @@ module.exports = {
         props: undefined,
       },
       {
-        name: 'img',
+        name: 'image',
         props: {
           props: '{ height: string, src: string | srcObject }',
         },
