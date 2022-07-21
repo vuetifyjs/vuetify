@@ -53,7 +53,11 @@
     border-radius: $button-icon-border-radius
     min-width: 0
     padding: 0
-    font-size: $button-icon-font-size
+
+    // ensure that default
+    // v-icon size is 24px
+    &.v-btn--size-default
+      font-size: $button-icon-font-size
 
     @at-root &
       @include button-density(('width', 'height'), $button-icon-density)
