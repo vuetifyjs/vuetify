@@ -90,6 +90,22 @@ app.use(vuetify)
 - **`short`** has been removed
 * The **`img`** slot has been renamed to **`image`**
 
+### v-navigation-drawer
+
+- **``** 
+- **`app`** has been removed and is no longer needed
+- **`bottom`** has been replaced by **`position='bottom'`**
+- **`right`** has been replaced by **`position='right'`**
+- **`clipped`** has been removed
+- **`fixed`** has been removed
+- **`height`** has been removed
+- **`hide-overlay`**, **`overlay-color`** and **`overlay-opacity`** has been removed
+- **`mini-variant`** and **`mini-variant`** has been replaced by **`rail`** and **`rail-width`**
+- **`mobile-breakpoint`** has been removed, the global breakpoints are used instead
+- **`src`** has been renamed to **`image`**
+- **`stateless`** has been removed
+
+
 ### v-system-bar
 
 - **`app`** has been removed and is no longer needed
