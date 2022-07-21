@@ -92,7 +92,6 @@ app.use(vuetify)
 
 ### v-navigation-drawer
 
-- **``** 
 - **`app`** has been removed and is no longer needed
 - **`bottom`** has been replaced by **`position='bottom'`**
 - **`right`** has been replaced by **`position='right'`**
@@ -104,7 +103,6 @@ app.use(vuetify)
 - **`mobile-breakpoint`** has been removed, the global breakpoints are used instead
 - **`src`** has been renamed to **`image`**
 - **`stateless`** has been removed
-
 
 ### v-system-bar
 
