@@ -90,6 +90,12 @@ app.use(vuetify)
 - **`short`** has been removed
 * The **`img`** slot has been renamed to **`image`**
 
+### v-system-bar
+
+- **`app`** has been removed and is no longer needed
+- **`fixed`** has been removed
+- **`lights-out`** has been removed
+
 ### v-toolbar
 
 - **`bottom`** has been replaced by **`position='bottom'`**
