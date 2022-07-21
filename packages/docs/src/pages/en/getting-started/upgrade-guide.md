@@ -53,6 +53,7 @@ app.use(vuetify)
 - **`light`** and **`dark`** props have been removed from all components. Use **`theme`** prop instead
 - **`value`** prop has been replaced by **`model-value`** on components that support `v-model` usage
 - **`@input`** event has been replaced by **`@update:model-value`** on components that support `v-model` usage
+- **`dense`** has been replaced by **`density="compact"`**
 
 ### v-alert
 
@@ -71,3 +72,35 @@ app.use(vuetify)
 * **`fill-height`** prop has been replaced by **`full-height`**
 * **`id`** prop has been removed
 * The grid helper classes such as `align-{direction}` and `justify-{direction}` are still available, but have been removed as props. See [Grid documentation](/components/grids/#helper-classes) for more details.
+
+### v-app-bar
+
+[//]: # TODO: Investigate breaking changes for `scroll-off-screen`, `scroll-target` and `scroll-threshold` when scrolling is completed / danieka 2022-07-21
+
+* **`bottom`** has been replaced by **`position='bottom'`**
+* **`prominent`** has been replaced by **`density='prominent'`**
+* **`app`** has been removed and is no longer needed
+* **`clipped-left`** and **`clipped-right`** has been removed
+* **`src`** has been renamed to **`image`**
+* **`outlined`** has been removed
+* **`tile`** has been removed
+* **`width`** has been removed
+* **`fixed`** has been removed
+* **`{max/min}-{height/width}`** has been removed
+* **`short`** has been removed
+* The **`img`** slot has been renamed to **`image`**
+
+### v-toolbar
+
+* **`bottom`** has been replaced by **`position='bottom'`**
+* **`prominent`** has been replaced by **`density='prominent'`**
+* **`app`** has been removed and is no longer needed
+* **`clipped-left`** and **`clipped-right`** has been removed
+* **`src`** has been renamed to **`image`**
+* **`outlined`** has been removed
+* **`tile`** has been removed
+* **`width`** has been removed
+* **`fixed`** has been removed
+* **`{max/min}-{height/width}`** has been removed
+* **`short`** has been removed
+* The **`img`** slot has been renamed to **`image`**
