@@ -69,38 +69,38 @@ app.use(vuetify)
 
 ### v-layout
 
-* **`fill-height`** prop has been replaced by **`full-height`**
-* **`id`** prop has been removed
-* The grid helper classes such as `align-{direction}` and `justify-{direction}` are still available, but have been removed as props. See [Grid documentation](/components/grids/#helper-classes) for more details.
+- **`fill-height`** prop has been replaced by **`full-height`**
+- **`id`** prop has been removed
+- The grid helper classes such as `align-{direction}` and `justify-{direction}` are still available, but have been removed as props. See [Grid documentation](/components/grids/#helper-classes) for more details.
 
 ### v-app-bar
 
 [//]: # TODO: Investigate breaking changes for `scroll-off-screen`, `scroll-target` and `scroll-threshold` when scrolling is completed / danieka 2022-07-21
 
-* **`bottom`** has been replaced by **`position='bottom'`**
-* **`prominent`** has been replaced by **`density='prominent'`**
-* **`app`** has been removed and is no longer needed
-* **`clipped-left`** and **`clipped-right`** has been removed
-* **`src`** has been renamed to **`image`**
-* **`outlined`** has been removed
-* **`tile`** has been removed
-* **`width`** has been removed
-* **`fixed`** has been removed
-* **`{max/min}-{height/width}`** has been removed
-* **`short`** has been removed
+- **`bottom`** has been replaced by **`position='bottom'`**
+- **`prominent`** has been replaced by **`density='prominent'`**
+- **`app`** has been removed and is no longer needed
+- **`clipped-left`** and **`clipped-right`** has been removed
+- **`src`** has been renamed to **`image`**
+- **`outlined`** has been removed
+- **`tile`** has been removed
+- **`width`** has been removed
+- **`fixed`** has been removed
+- **`{max/min}-{height/width}`** has been removed
+- **`short`** has been removed
 * The **`img`** slot has been renamed to **`image`**
 
 ### v-toolbar
 
-* **`bottom`** has been replaced by **`position='bottom'`**
-* **`prominent`** has been replaced by **`density='prominent'`**
-* **`app`** has been removed and is no longer needed
-* **`clipped-left`** and **`clipped-right`** has been removed
-* **`src`** has been renamed to **`image`**
-* **`outlined`** has been removed
-* **`tile`** has been removed
-* **`width`** has been removed
-* **`fixed`** has been removed
-* **`{max/min}-{height/width}`** has been removed
-* **`short`** has been removed
-* The **`img`** slot has been renamed to **`image`**
+- **`bottom`** has been replaced by **`position='bottom'`**
+- **`prominent`** has been replaced by **`density='prominent'`**
+- **`app`** has been removed and is no longer needed
+- **`clipped-left`** and **`clipped-right`** has been removed
+- **`src`** has been renamed to **`image`**
+- **`outlined`** has been removed
+- **`tile`** has been removed
+- **`width`** has been removed
+- **`fixed`** has been removed
+- **`{max/min}-{height/width}`** has been removed
+- **`short`** has been removed
+- The **`img`** slot has been renamed to **`image`**
