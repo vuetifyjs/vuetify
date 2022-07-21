@@ -478,6 +478,7 @@ export default baseMixins.extend<options>().extend({
         attrs: {
           type: 'hidden',
           name: this.attrs$.name,
+          disabled: this.itemDisabled,
         },
       })
     },
