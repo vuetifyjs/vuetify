@@ -62,7 +62,10 @@ export const VListItem = genericComponent<new () => {
   directives: { Ripple },
 
   props: {
-    active: Boolean,
+    active: {
+      type: Boolean,
+      default: undefined,
+    },
     activeColor: String,
     activeClass: String,
     appendAvatar: String,
@@ -94,6 +97,8 @@ export const VListItem = genericComponent<new () => {
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() => {
+      if (props.active === false) return false
+
       return props.active || link.isExactActive?.value || isSelected.value
     })
     const roundedProps = computed(() => props.rounded || props.nav)
