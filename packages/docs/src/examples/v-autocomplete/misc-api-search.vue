@@ -1,67 +1,77 @@
 <template>
-  <v-card
-    color="red lighten-2"
-    dark
-  >
-    <v-card-title class="text-h5 red lighten-3">
-      Search for Public APIs
-    </v-card-title>
-    <v-card-text>
-      Explore hundreds of free API's ready for consumption! For more information visit
-      <a
-        class="grey--text text--lighten-3"
-        href="https://github.com/toddmotto/public-apis"
-        target="_blank"
-      >the GitHub repository</a>.
-    </v-card-text>
-    <v-card-text>
-      <v-autocomplete
-        v-model="model"
-        v-model:search-input="search"
-        :items="items"
-        :loading="isLoading"
-        color="white"
-        hide-no-data
-        hide-selected
-        item-title="Description"
-        item-value="API"
-        label="Public APIs"
-        placeholder="Start typing to Search"
-        prepend-icon="mdi-database-search"
-        return-object
-      ></v-autocomplete>
-    </v-card-text>
-    <v-divider></v-divider>
-    <v-expand-transition>
-      <v-list
-        v-if="model"
-        class="red lighten-3"
-      >
-        <v-list-item
-          v-for="(field, i) in fields"
-          :key="i"
+  <div class="ma-4 pa-4">
+    <v-card>
+      <v-card-title>
+        Search for Public APIs
+      </v-card-title>
+
+      <v-card-text>
+        Explore hundreds of free API's ready for consumption! For more information visit
+        <a
+          class="text-grey-lighten-3"
+          href="https://github.com/toddmotto/public-apis"
+          target="_blank"
+          rel="noopener noreferrer"
+        >the GitHub repository</a>.
+      </v-card-text>
+
+      <v-card-text>
+        <v-autocomplete
+          v-model="model"
+          v-model:search="search"
+          :items="items"
+          :loading="isLoading"
+          hide-no-data
+          hide-selected
+          item-title="Description"
+          item-value="API"
+          label="Public APIs"
+          placeholder="Start typing to Search"
+          prepend-icon="mdi-database-search"
+          return-object
+        ></v-autocomplete>
+      </v-card-text>
+
+      <v-divider></v-divider>
+
+      <v-expand-transition>
+        <div v-if="model">
+          <v-list color="red-lighten-3">
+            <v-list-item
+              v-for="(field, i) in fields"
+              :key="i"
+            >
+              <v-list-item-header>
+                <v-list-item-title>{{ field.value }}</v-list-item-title>
+
+                <v-list-item-subtitle>{{ field.key }}</v-list-item-subtitle>
+              </v-list-item-header>
+            </v-list-item>
+          </v-list>
+        </div>
+      </v-expand-transition>
+
+      <v-divider v-if="model"></v-divider>
+
+      <v-card-actions>
+        <v-spacer></v-spacer>
+
+        <v-btn
+          :disabled="!model"
+          variant="outlined"
+          @click="model = null"
         >
-          <v-list-item-content>
-            <v-list-item-title v-text="field.value"></v-list-item-title>
-            <v-list-item-subtitle v-text="field.key"></v-list-item-subtitle>
-          </v-list-item-content>
-        </v-list-item>
-      </v-list>
-    </v-expand-transition>
-    <v-card-actions>
-      <v-spacer></v-spacer>
-      <v-btn
-        :disabled="!model"
-        color="grey darken-3"
-        @click="model = null"
-      >
-        Clear
-        <v-icon right>
-          mdi-close-circle
-        </v-icon>
-      </v-btn>
-    </v-card-actions>
-  </v-card>
+          Clear
+
+          <v-icon end>
+            mdi-close-circle
+          </v-icon>
+        </v-btn>
+      </v-card-actions>
+    </v-card>
+
+    <pre>{{ JSON.stringify(entries, null, 2) }}</pre>
+  </div>
 </template>
 
 <script>
@@ -110,9 +120,9 @@
         fetch('https://api.publicapis.org/entries')
           .then(res => res.json())
           .then(res => {
-            const { count, entries } = res
-            this.count = count
-            this.entries = entries
+            const { entries } = res
+            this.entries = entries.slice(0, 100)
+            this.count = 100
           })
           .catch(err => {
             console.log(err)
@@ -120,5 +130,6 @@
           .finally(() => (this.isLoading = false))
       },
     },
+
   }
 </script>
