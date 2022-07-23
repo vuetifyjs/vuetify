@@ -160,7 +160,8 @@ export function useActivator (
   })
 
   watch(isTop, val => {
-    if (val && props.openOnHover && !isHovered) {
+    const isFocusOrHover = (props.openOnHover && isHovered) || (props.openOnFocus && isFocused)
+    if (val && !isFocusOrHover ) {
       isActive.value = false
     }
   })
