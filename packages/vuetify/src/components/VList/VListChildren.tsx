@@ -49,7 +49,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
         title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
       }
 
-      const [listGroupProps, _1] = filterListGroupProps(itemProps)
+      const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
 
       return children ? (
         <VListGroup

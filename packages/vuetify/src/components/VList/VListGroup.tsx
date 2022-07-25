@@ -1,5 +1,4 @@
 // Components
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
 
 // Composables
