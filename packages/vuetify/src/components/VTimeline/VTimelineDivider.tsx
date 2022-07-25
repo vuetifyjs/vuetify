@@ -75,7 +75,7 @@ export const VTimelineDivider = defineComponent({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default?.() ?? props.icon ? (<VIcon />) : undefined }
+              { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
             </div>
           </div>
         ) }
