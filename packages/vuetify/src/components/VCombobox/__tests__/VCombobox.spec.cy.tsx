@@ -4,47 +4,56 @@ import { VCombobox } from '../VCombobox'
 
 describe('VCombobox', () => {
   describe('search', () => {
-    it('should find one entry and put it in list item', () => {
+    it('should filter items', () => {
       const items = [
         'Item 1',
+        'Item 1a',
         'Item 2',
+        'Item 2a',
       ]
+
       cy.mount(() => (
         <VCombobox items={items} />
       ))
         .get('input')
-        .click()
-        .type('1')
-        .get('.v-list-item')
-        .should('have.length', 1)
-    })
-    it('should find all entries and put them in list item', () => {
-      const items = [
-        'Item 1',
-        'Item 2',
-      ]
-      cy.mount(() => (
-        <VCombobox items={items} />
-      ))
-        .get('input')
-        .click()
         .type('Item')
         .get('.v-list-item')
+        .should('have.length', 4)
+        .get('input')
+        .clear()
+        .type('Item 1')
+        .get('.v-list-item')
         .should('have.length', 2)
+        .get('input')
+        .clear()
+        .type('Item 3')
+        .should('have.length', 1)
     })
-    it('should not find unexisting entry', () => {
+
+    it('should filter items when using multiple', () => {
       const items = [
         'Item 1',
+        'Item 1a',
         'Item 2',
+        'Item 2a',
       ]
+
       cy.mount(() => (
-        <VCombobox items={items} />
+        <VCombobox items={items} multiple />
       ))
         .get('input')
-        .click()
-        .type('3')
+        .type('Item')
         .get('.v-list-item')
-        .should('not.exist')
+        .should('have.length', 4)
+        .get('input:first-child')
+        .clear()
+        .type('Item 1')
+        .get('.v-list-item')
+        .should('have.length', 2)
+        .get('input:first-child')
+        .clear()
+        .type('Item 3')
+        .should('have.length', 1)
     })
   })
 })
