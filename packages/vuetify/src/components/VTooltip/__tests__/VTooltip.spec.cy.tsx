@@ -36,7 +36,7 @@ describe('VTooltip', () => {
     // eslint-disable-next-line
     cy.wait(500)
 
-    // Verify tooltip is still visible
+    // Verify tooltip should be still visible
     cy.get('.v-overlay__content').should('be.visible')
   })
 })
