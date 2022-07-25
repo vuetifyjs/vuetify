@@ -117,16 +117,11 @@ export const VCombobox = genericComponent<new <
     const _search = ref('')
     const search = computed<string>({
       get: () => {
-        if (props.multiple) return _search.value
-
-        const item = items.value.find(item => item.value === model.value[0]?.value)
-
-        return item?.value
+        return _search.value
       },
       set: val => {
-        if (props.multiple) {
-          _search.value = val
-        } else {
+        _search.value = val
+        if (!props.multiple) {
           model.value = [transformItem(props, val)]
         }
 
