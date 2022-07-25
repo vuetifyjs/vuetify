@@ -327,14 +327,22 @@ export const VPagination = defineComponent({
             </li>
           )) }
 
-          <li key="next" class="v-pagination__next" data-test="v-pagination-next">
+          <li
+            key="next"
+            class="v-pagination__next"
+            data-test="v-pagination-next"
+          >
             { slots.next ? slots.next(controls.value.next) : (
               <VBtn _as="VPaginationBtn" {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
-            <li key="last" class="v-pagination__last" data-test="v-pagination-last">
+            <li
+              key="last"
+              class="v-pagination__last"
+              data-test="v-pagination-last"
+            >
               { slots.last ? slots.last(controls.value.last) : (
                 <VBtn _as="VPaginationBtn" {...controls.value.last} />
               ) }
