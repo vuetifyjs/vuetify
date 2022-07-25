@@ -28,12 +28,15 @@ describe('VTooltip', () => {
 
     cy.get('.v-btn').focus()
 
+    cy.get('.v-overlay__content').should('be.visible')
+
     // This arbitrary time periods just aims to verify when UI is in stable state.
     // As there seems to be no way for cypress to wait for an explicit
-    // vuetify/vue internal event finish
+    // vuetify/vue internal event finish (isTop watcher logic in this case)
     // eslint-disable-next-line
     cy.wait(500)
 
+    // Verify tooltip is still visible
     cy.get('.v-overlay__content').should('be.visible')
   })
 })
