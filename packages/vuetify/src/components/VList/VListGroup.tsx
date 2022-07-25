@@ -1,4 +1,5 @@
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
 
 // Composables
@@ -19,9 +20,7 @@ import type { ExtractPropTypes, Ref } from 'vue'
 export type ListGroupActivatorSlot = {
   props: {
     onClick: (e: Event) => void
-    appendIcon: IconValue
     class: string
-    color?: string
   }
 }
 
@@ -46,7 +45,10 @@ export const makeVListGroupProps = propsFactory({
     type: IconValue,
     default: '$expand',
   },
+  prependIcon: IconValue,
+  appendIcon: IconValue,
   fluid: Boolean,
+  subgroup: Boolean,
   value: null,
 
   ...makeTagProps(),
@@ -63,7 +65,11 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
 }>()({
   name: 'VListGroup',
 
-  props: makeVListGroupProps(),
+  props: {
+    title: String,
+
+    ...makeVListGroupProps(),
+  },
 
   setup (props, { slots }) {
     const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
@@ -75,11 +81,10 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
 
     const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
       onClick,
-      active: isOpen.value,
-      appendIcon: isOpen.value ? props.collapseIcon : props.expandIcon,
       class: 'v-list-group__header',
-      color: isOpen.value ? props.activeColor ?? props.color : undefined,
     }))
+
+    const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
 
     useRender(() => (
       <props.tag
@@ -88,13 +93,28 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
           {
             'v-list-group--prepend': list?.hasPrepend.value,
             'v-list-group--fluid': props.fluid,
+            'v-list-group--subgroup': props.subgroup,
           },
         ]}
       >
         { slots.activator && (
-          <VListGroupActivator>
-            { slots.activator({ props: activatorProps.value, isOpen }) }
-          </VListGroupActivator>
+          <VDefaultsProvider
+            defaults={{
+              VListItem: {
+                active: isOpen.value,
+                activeColor: props.activeColor,
+                color: props.color,
+                prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
+                appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
+                title: props.title,
+                value: props.value,
+              },
+            }}
+          >
+            <VListGroupActivator>
+              { slots.activator({ props: activatorProps.value, isOpen }) }
+            </VListGroupActivator>
+          </VDefaultsProvider>
         ) }
 
         <VExpandTransition>
