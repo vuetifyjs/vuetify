@@ -216,6 +216,9 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list
   --indent-padding: 0px
 
+  &--nav
+    --indent-padding: -#{$list-nav-padding}
+
 .v-list-group
   --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
@@ -235,3 +238,7 @@ $base-padding: list.nth($list-item-padding, 2)
 
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+
+.v-list-group__header.v-list-item--active
+  .v-list-item__overlay
+    display: none
