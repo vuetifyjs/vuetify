@@ -32,6 +32,7 @@ export const VPagination = defineComponent({
   name: 'VPagination',
 
   props: {
+    activeColor: String,
     start: {
       type: [Number, String],
       default: 1,
@@ -185,7 +186,8 @@ export const VPagination = defineComponent({
     const { refs, updateRef } = useRefs<ComponentPublicInstance>()
 
     provideDefaults({
-      VBtn: {
+      VPaginationBtn: {
+        color: toRef(props, 'color'),
         border: toRef(props, 'border'),
         density: toRef(props, 'density'),
         size: toRef(props, 'size'),
@@ -220,7 +222,7 @@ export const VPagination = defineComponent({
               disabled: !!props.disabled || props.length < 2,
               elevation: props.elevation,
               rounded: props.rounded,
-              color: isActive ? props.color : undefined,
+              color: isActive ? props.activeColor : props.color,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
               onClick: (e: Event) => setValue(e, item),
@@ -297,20 +299,20 @@ export const VPagination = defineComponent({
           { props.showFirstLastPage && (
             <li key="first" class="v-pagination__first" data-test="v-pagination-first">
               { slots.first ? slots.first(controls.value.first) : (
-                <VBtn {...controls.value.first} />
+                <VBtn _as="VPaginationBtn" {...controls.value.first} />
               ) }
             </li>
           ) }
 
-          <li class="v-pagination__prev" data-test="v-pagination-prev">
+          <li key="prev" class="v-pagination__prev" data-test="v-pagination-prev">
             { slots.prev ? slots.prev(controls.value.prev) : (
-              <VBtn {...controls.value.prev} />
+              <VBtn _as="VPaginationBtn" {...controls.value.prev} />
             ) }
           </li>
 
           { items.value.map((item, index) => (
             <li
-              key={ `${index}_${item.page}` }
+              key={ item.page }
               class={[
                 'v-pagination__item',
                 {
@@ -320,21 +322,29 @@ export const VPagination = defineComponent({
               data-test="v-pagination-item"
             >
               { slots.item ? slots.item(item) : (
-                <VBtn {...item.props}>{ item.page }</VBtn>
+                <VBtn _as="VPaginationBtn" {...item.props}>{ item.page }</VBtn>
               ) }
             </li>
           )) }
 
-          <li class="v-pagination__next" data-test="v-pagination-next">
+          <li
+            key="next"
+            class="v-pagination__next"
+            data-test="v-pagination-next"
+          >
             { slots.next ? slots.next(controls.value.next) : (
-              <VBtn {...controls.value.next} />
+              <VBtn _as="VPaginationBtn" {...controls.value.next} />
             ) }
           </li>
 
           { props.showFirstLastPage && (
-            <li key="last" class="v-pagination__last" data-test="v-pagination-last">
+            <li
+              key="last"
+              class="v-pagination__last"
+              data-test="v-pagination-last"
+            >
               { slots.last ? slots.last(controls.value.last) : (
-                <VBtn {...controls.value.last} />
+                <VBtn _as="VPaginationBtn" {...controls.value.last} />
               ) }
             </li>
           ) }
