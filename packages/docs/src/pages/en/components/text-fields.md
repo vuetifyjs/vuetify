@@ -5,22 +5,35 @@ meta:
   description: The text field component accepts textual input from users.
   keywords: text fields, vuetify text field component, vue text field component
 related:
-  - /components/forms/
-  - /components/selects/
   - /components/textarea/
+  - /components/selects/
+  - /components/forms/
 ---
 
 # Text fields
 
 Text field components are used for collecting user provided information.
 
-<entry />
+![Text-field Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-entry.png)
+
+---
 
 ## Usage
 
 A simple text field with placeholder and/or label.
 
-<example file="v-text-field/usage" />
+<usage name="v-text-field" />
+
+<entry />
+
+## Anatomy
+
+The recommended placement of elements inside of `v-text-field` is:
+
+* Place a `v-icon` at the start of the input or label
+* Place label after prepended content
+
+![Text-field Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-anatomy.png)
 
 ## API
 
