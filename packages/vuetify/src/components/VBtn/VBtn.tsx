@@ -173,6 +173,9 @@ export const VBtn = defineComponent({
                   icon: typeof props.icon === 'string'
                     ? props.icon
                     : undefined,
+                  size: typeof props.size === 'string'
+                    ? props.size
+                    : undefined,
                 },
               }}
             >
