@@ -2,7 +2,7 @@
   <div>
     <v-toolbar
       border="b"
-      class="ps-1 pe-2"
+      class="ps-2 pe-2"
       density="compact"
       flat
     >
