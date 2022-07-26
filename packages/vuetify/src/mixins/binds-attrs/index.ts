@@ -1,11 +1,11 @@
-import Vue, { WatchHandler } from 'vue'
+import Vue from 'vue'
 
 /**
  * This mixin provides `attrs$` and `listeners$` to work around
  * vue bug https://github.com/vuejs/vue/issues/10115
  */
 
-function makeWatcher (property: string): ThisType<Vue> & WatchHandler<any> {
+function makeWatcher (property: string): ThisType<Vue> & ((val: any, oldVal: any) => void) {
   return function (this: Vue, val, oldVal) {
     for (const attr in oldVal) {
       if (!Object.prototype.hasOwnProperty.call(val, attr)) {

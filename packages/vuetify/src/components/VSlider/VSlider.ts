@@ -221,14 +221,8 @@ export default mixins<options &
       handler (v: number) {
         this.internalValue = v
       },
+      immediate: true,
     },
-  },
-
-  // If done in as immediate in
-  // value watcher, causes issues
-  // with vue-test-utils
-  beforeMount () {
-    this.internalValue = this.value
   },
 
   mounted () {

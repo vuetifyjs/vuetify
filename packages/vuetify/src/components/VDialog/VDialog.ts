@@ -178,9 +178,9 @@ export default baseMixins.extend({
       // Double nextTick to wait for lazy content to be generated
       this.$nextTick(() => {
         this.$nextTick(() => {
-          if (!this.$refs.content.contains(document.activeElement)) {
+          if (!this.$refs.dialog?.contains(document.activeElement)) {
             this.previousActiveElement = document.activeElement as HTMLElement
-            this.$refs.content.focus()
+            this.$refs.dialog?.focus()
           }
           this.bind()
         })
@@ -222,10 +222,11 @@ export default baseMixins.extend({
 
       if (
         !!target &&
+        this.$refs.dialog &&
         // It isn't the document or the dialog body
-        ![document, this.$refs.content].includes(target) &&
+        ![document, this.$refs.dialog].includes(target) &&
         // It isn't inside the dialog body
-        !this.$refs.content.contains(target) &&
+        !this.$refs.dialog.contains(target) &&
         // We're the topmost dialog
         this.activeZIndex >= this.getMaxZIndex() &&
         // It isn't inside a dependent element (like a menu)
@@ -233,7 +234,7 @@ export default baseMixins.extend({
         // So we must have focused something outside the dialog and its children
       ) {
         // Find and focus the first available element inside the dialog
-        const focusable = this.$refs.content.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
+        const focusable = this.$refs.dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
         const el = [...focusable].find(el => !el.hasAttribute('disabled')) as HTMLElement | undefined
         el && el.focus()
       }
@@ -251,7 +252,6 @@ export default baseMixins.extend({
             class: this.contentClasses,
             attrs: {
               role: 'dialog',
-              tabindex: this.isActive ? 0 : undefined,
               'aria-modal': this.hideOverlay ? undefined : 'true',
               ...this.getScopeIdAttrs(),
             },
@@ -278,6 +278,9 @@ export default baseMixins.extend({
     genInnerContent () {
       const data: VNodeData = {
         class: this.classes,
+        attrs: {
+          tabindex: this.isActive ? 0 : undefined,
+        },
         ref: 'dialog',
         directives: [
           {

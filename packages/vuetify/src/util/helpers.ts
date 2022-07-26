@@ -59,7 +59,7 @@ try {
       get: () => {
         passiveSupported = true
       },
-    })
+    }) as EventListener & EventListenerOptions
 
     window.addEventListener('testListener', testListenerOpts, testListenerOpts)
     window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
@@ -70,7 +70,7 @@ export { passiveSupported }
 export function addPassiveEventListener (
   el: EventTarget,
   event: string,
-  cb: EventHandlerNonNull | (() => void),
+  cb: (event: any) => void,
   options: {}
 ): void {
   el.addEventListener(event, cb, passiveSupported ? options : false)
