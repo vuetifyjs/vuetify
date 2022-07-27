@@ -4,17 +4,30 @@
 
 .v-list-item
   align-items: center
-  display: flex
+  display: grid
+  flex: none
+  grid-template-areas: "prepend content append"
+  grid-template-columns: max-content auto max-content
+  outline: none
   padding: $list-item-padding
   position: relative
-  outline: none
   text-decoration: none
-  transition: $list-item-transition
 
   @include tools.border($list-item-border...)
   @include tools.states('.v-list-item__overlay')
   @include tools.rounded($list-item-border-radius)
   @include tools.variant($list-item-variants...)
+
+  &__prepend,
+  &__append
+    > .v-icon
+      opacity: #{$list-item-icon-opacity}
+
+  &--active
+    .v-list-item__prepend,
+    .v-list-item__append
+      > .v-icon
+        opacity: #{$list-item-icon-active-opacity}
 
   &--rounded
     @include tools.rounded($list-item-rounded-border-radius)
@@ -27,41 +40,52 @@
   &--link
     cursor: pointer
 
-.v-list-item-action,
-.v-list-item-avatar,
-.v-list-item-icon
+.v-list-item__prepend
+  align-items: center
+  align-self: center
+  display: flex
+  grid-area: prepend
+
+  > .v-avatar
+    margin-inline-end: $list-item-avatar-margin-end
+
+  > .v-icon
+    margin-inline-end: $list-item-icon-margin-end
+
+  .v-list-item--two-line &,
+  .v-list-item--three-line &
+    align-self: start
+
+.v-list-item__append
   align-self: center
   display: flex
   align-items: center
+  grid-area: append
+
+  > .v-avatar
+    margin-inline-start: $list-item-avatar-margin-start
+
+  > .v-icon
+    margin-inline-start: $list-item-icon-margin-start
+
+  .v-list-item--two-line &,
+  .v-list-item--three-line &
+    align-self: start
+
+.v-list-item__content
+  align-self: center
+  grid-area: content
+  overflow: hidden
+
+.v-list-item-action
+  align-self: center
+  display: flex
+  align-items: center
+  grid-area: prepend
   flex: none
   transition: inherit
   transition-property: height, width
 
-  .v-list-item--three-line &
-    align-self: flex-start
-
-.v-list-item-avatar
-  $root: &
-
-  &--start
-    margin-inline-end: $list-item-avatar-margin-end
-
-  &--end
-    margin-inline-start: $list-item-avatar-margin-start
-
-  @at-root
-    @include tools.density('v-list-item', $list-density) using ($modifier)
-      &.v-list-item--three-line #{$root}
-        margin-top: $list-item-avatar-margin-y - $modifier
-
-.v-list-item-icon
-  &--start
-    margin-inline-end: $list-item-icon-margin-end
-
-  &--end
-    margin-inline-start: $list-item-icon-margin-start
-
-.v-list-item-action
   &--start
     margin-inline-end: $list-item-action-margin-start
 
@@ -85,10 +109,6 @@
   .v-list-item--three-line &
     margin-top: $list-item-media-three-line-margin-top
     margin-bottom: $list-item-media-three-line-margin-bottom
-
-.v-list-item-header
-  flex: 1 1 auto
-  min-width: 0
 
 .v-list-item-subtitle
   -webkit-box-orient: vertical
@@ -174,6 +194,9 @@
       &:not(:last-child):not(:only-child)
         margin-bottom: $list-item-nav-margin-top
 
+.v-list-item__underlay
+  position: absolute
+
 .v-list-item__overlay
   background-color: currentColor
   border-radius: inherit
@@ -197,20 +220,24 @@ $base-padding: list.nth($list-item-padding, 2)
     --indent-padding: -#{$list-nav-padding}
 
 .v-list-group
+  --list-indent-size: #{$list-indent-size}
   --parent-padding: var(--indent-padding)
+  --prepend-width: #{$list-item-prepend-size}
+
+  &--fluid
+    --list-indent-size: 0px
+
   &--prepend
-    --parent-padding: calc(var(--indent-padding) + #{$list-item-avatar-size})
+    --parent-padding: calc(var(--indent-padding) + var(--prepend-width))
+
+  &--fluid.v-list-group--prepend
+    --parent-padding: var(--indent-padding)
 
 .v-list-group__items
-  --indent-padding: calc(var(--parent-padding) + #{$list-indent-size})
+  --indent-padding: calc(var(--parent-padding) + var(--list-indent-size))
 
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
-
-.v-list-item--prepend,
-.v-list-group__items .v-list-item--prepend
-  .v-list-item-avatar
-    padding-inline-start: calc(#{$base-padding} + var(--indent-padding) + #{$list-item-avatar-size} + #{$list-item-avatar-margin-start}) !important
 
 .v-list-group__header.v-list-item--active
   .v-list-item__overlay

@@ -20,7 +20,7 @@ The `v-list` component is used to display information. It can contain an avatar,
 
 Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop.
 
-<example file="v-list/usage" />
+<usage name="v-list" />
 
 ## API
 

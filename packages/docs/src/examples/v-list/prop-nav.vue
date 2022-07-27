@@ -2,11 +2,11 @@
   <v-card
     class="mx-auto"
     width="256"
-    tile
   >
     <v-layout>
+      <v-system-bar></v-system-bar>
+
       <v-navigation-drawer permanent absolute>
-        <v-system-bar></v-system-bar>
         <v-list>
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
@@ -14,16 +14,21 @@
             subtitle="john@vuetifyjs.com"
           >
             <template v-slot:append>
-              <v-list-item-avatar end>
-                <v-btn size="small" variant="text" icon="mdi-menu-down"></v-btn>
-              </v-list-item-avatar>
+              <v-btn
+                size="small"
+                variant="text"
+                icon="mdi-menu-down"
+              ></v-btn>
             </template>
           </v-list-item>
         </v-list>
+
         <v-divider></v-divider>
+
         <v-list
+          :lines="false"
+          density="compact"
           nav
-          dense
         >
           <v-list-item
             v-for="(item, i) in items"
@@ -31,15 +36,16 @@
             :value="item"
             active-color="primary"
           >
-            <v-list-item-avatar>
+            <template v-slot:prepend>
               <v-icon :icon="item.icon"></v-icon>
-            </v-list-item-avatar>
+            </template>
 
             <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-main style="height: 450px"></v-main>
+
+      <v-main style="height: 354px;"></v-main>
     </v-layout>
   </v-card>
 </template>
