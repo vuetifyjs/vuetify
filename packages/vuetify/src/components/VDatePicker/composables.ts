@@ -2,11 +2,11 @@ import type { DateAdapter } from '@/adapters/date-adapter'
 import { useDate } from '@/composables/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { wrapInArray } from '@/util'
-import { computed, inject, provide, watch } from 'vue'
+import { computed, inject, onBeforeMount, provide } from 'vue'
 import type { InjectionKey, Ref } from 'vue'
 
 export type DatePickerProvide = {
-  model: Ref<any[]>
+  model: Ref<readonly any[]>
   mode: Ref<'month' | 'years'>
   input: Ref<'calendar' | 'keyboard'>
   displayDate: Ref<any>
@@ -46,13 +46,19 @@ export function createDatePicker (props: DateProps, range?: boolean) {
     })
   const input = useProxiedModel(props, 'input')
   const mode = useProxiedModel(props, 'mode')
-  const displayDate = useProxiedModel(props, 'displayDate', null, v => adapter.value.date(v ?? new Date()))
+  const displayDate = useProxiedModel(props, 'displayDate', null)
+
+  onBeforeMount(() => {
+    if (displayDate.value == null) {
+      displayDate.value = model.value[0] ?? adapter.value.date()
+    }
+  })
 
   // TODO: Do this nicer
-  watch(() => props.modelValue, () => {
-    const date = wrapInArray(props.modelValue)[0]
-    displayDate.value = adapter.value.date(date)
-  })
+  // watch(() => props.modelValue, () => {
+  //   const date = wrapInArray(props.modelValue)[0]
+  //   displayDate.value = adapter.value.date(date)
+  // })
 
   provide(DatePickerSymbol, {
     model,
@@ -68,6 +74,7 @@ export function createDatePicker (props: DateProps, range?: boolean) {
     input,
     mode,
     displayDate,
+    adapter,
   }
 }
 

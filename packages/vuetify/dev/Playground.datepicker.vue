@@ -75,12 +75,23 @@
       </template>
     </v-picker> -->
 
-    <v-date-picker
+    <!-- <v-date-picker
       v-model="date"
       :locale="locale"
-    />
+    /> -->
+    <v-date-field label="Date" />
     <!-- <v-btn @click="prev">prev</v-btn>
     <v-btn @click="next">next</v-btn> -->
+
+    <!-- <v-date-range-card
+      v-model="multiple"
+      :locale="locale"
+    /> -->
+    <div class="ma-4">
+      <!-- <v-date-field label="Date" v-model="foo" /> -->
+
+      <v-date-range-field from-label="From" to-label="To" v-model="multiple" />
+    </div>
   </v-app>
 </template>
 
@@ -93,8 +104,10 @@
     data: () => ({
       date: '2022-01-01',
       displayDate: '2022-06',
-      locale: enUS,
+      locale: sv,
       mode: 'year',
+      multiple: [],
+      foo: null,
     }),
     methods: {
       prev () {

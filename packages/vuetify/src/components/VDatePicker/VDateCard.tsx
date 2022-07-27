@@ -49,6 +49,7 @@ export const VDateCard = defineComponent({
                 <>
                   <VDivider vertical />
                   <VDatePickerMonth
+                    height="350"
                     locale={ props.locale }
                   />
                 </>

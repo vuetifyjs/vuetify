@@ -33,8 +33,9 @@ export const VDatePickerControls = defineComponent({
       default: '$collapse',
     },
     range: {
-      type: String,
-      validator: (v: any) => ['start', 'end'].includes(v),
+      default: false,
+      type: [String, Boolean],
+      validator: (v: any) => v === false || ['start', 'end'].includes(v),
     },
   },
 
@@ -66,24 +67,24 @@ export const VDatePickerControls = defineComponent({
 
       return (
         <div class="v-date-picker-controls">
-          { props.range === 'start' && prevBtn }
-          <VSpacer />
+          { mode.value === 'month' && props.range === 'start' && prevBtn }
+          { !!props.range && <VSpacer key="range-spacer" /> }
           <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
-          { !props.range && (
-            <VBtn
-              size="x-small"
-              variant="plain"
-              icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
-              onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
-            />
-          ) }
+          <VBtn
+            key="expand-btn"
+            size="x-small"
+            variant="plain"
+            icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
+            onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
+          />
           <VSpacer />
-          { mode.value === 'month' && (
-            <div>
-              { !props.range && prevBtn }
-              { props.range === 'end' && nextBtn }
+          { (mode.value === 'month' && !props.range) && (
+            <div key="month-buttons">
+              { prevBtn }
+              { nextBtn }
             </div>
           ) }
+          { mode.value === 'month' && props.range === 'end' && nextBtn }
         </div>
       )
     })

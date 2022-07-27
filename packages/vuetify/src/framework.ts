@@ -16,8 +16,7 @@ import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import { createDateAdapter, DateAdapterSymbol } from './composables/date'
-import type { IUtils } from '@date-io/core/IUtils'
+import { createDate, DateAdapterSymbol } from './composables/date'
 import type { DateAdapter } from './adapters/date-adapter'
 
 export * from './composables'
@@ -54,7 +53,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
-  const date = createDateAdapter(options?.date)
+  const date = createDate(options?.date)
 
   const install = (app: App) => {
     for (const key in directives) {

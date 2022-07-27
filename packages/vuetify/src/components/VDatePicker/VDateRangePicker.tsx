@@ -21,8 +21,8 @@ import { defineComponent, useRender } from '@/util'
 import type { PropType } from 'vue'
 import { VBtn } from '../VBtn'
 
-export const VDatePicker = defineComponent({
-  name: 'VDatePicker',
+export const VDateRangePicker = defineComponent({
+  name: 'VDateRangePicker',
 
   props: {
     color: String,
@@ -76,6 +76,7 @@ export const VDatePicker = defineComponent({
               <VDatePickerControls />
               <MaybeTransition transition={ props.transition } mode="out-in">
                 { mode.value === 'month' ? (
+                  // TODO: Replace this with scrollable month range component?
                   <VDatePickerMonth
                     locale={ props.locale }
                   />
@@ -90,14 +91,24 @@ export const VDatePicker = defineComponent({
           ) : (
             <div class="v-date-picker__input">
               <VTextField
+                label="From"
+                placeholder="yyyy/mm/dd"
                 modelValue={ inputModel.value }
                 onUpdate:modelValue={ (value: any) => {
                   if (value.length === 10 && adapter.value.isValid(value)) {
                     model.value = [adapter.value.date(value)]
                   }
                 } }
-                label="Enter date"
+              />
+              <VTextField
+                label="To"
                 placeholder="yyyy/mm/dd"
+                modelValue={ inputModel.value }
+                onUpdate:modelValue={ (value: any) => {
+                  if (value.length === 10 && adapter.value.isValid(value)) {
+                    model.value = [adapter.value.date(value)]
+                  }
+                } }
               />
             </div>
           ),

@@ -38,7 +38,7 @@ export const VDatePickerYears = defineComponent({
 
     const yearRef = ref<VBtn>()
     onMounted(() => {
-      yearRef.value?.$el.scrollIntoView()
+      yearRef.value?.$el.scrollIntoView({ block: 'center' })
     })
 
     useRender(() => (
@@ -52,7 +52,7 @@ export const VDatePickerYears = defineComponent({
           { years.value.map(year => (
             <VBtn
               ref={ year === displayYear.value ? yearRef : undefined }
-              variant="contained-flat"
+              variant="flat"
               rounded="xl"
               color={ year === displayYear.value ? 'primary' : undefined }
               onClick={ () => {

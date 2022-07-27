@@ -26,7 +26,7 @@ export const VDatePickerHeader = defineComponent({
     },
     calendarIcon: {
       type: String,
-      default: 'mdi-home',
+      default: '$calendar',
     },
     showInputSwitch: Boolean,
     range: Boolean,
