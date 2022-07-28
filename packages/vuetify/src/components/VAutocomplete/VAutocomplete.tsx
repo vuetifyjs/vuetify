@@ -92,7 +92,7 @@ export const VAutocomplete = genericComponent<new <
     'update:menu': (val: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = ref(false)
@@ -126,6 +126,8 @@ export const VAutocomplete = genericComponent<new <
       }
 
       search.value = ''
+
+      emit('click:clear', e)
     }
     function onClickControl () {
       if (props.hideNoData && !filteredItems.value.length) return
