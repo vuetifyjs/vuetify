@@ -18,6 +18,7 @@
         align-self: flex-start
         opacity: 0
         flex: 0 0
+        position: absolute
 
     .v-field__append-inner
       > .v-icon
@@ -27,6 +28,12 @@
   .v-field--dirty
     .v-select__selection
       margin-inline-end: 2px
+
+  .v-field--single-line
+    .v-select__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
 
   &__content
     overflow: hidden
@@ -38,6 +45,7 @@
     display: inline-flex
     letter-spacing: inherit
     line-height: inherit
+    max-width: 100%
 
   &--active-menu
     .v-field__append-inner
