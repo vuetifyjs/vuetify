@@ -564,6 +564,15 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   return { clientX: e.clientX, clientY: e.clientY }
 }
 
+// Only allow a single return type
+type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
+type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
+
+/**
+ * Convert a computed ref to a record of refs.
+ * The getter function must always return an object with the same keys.
+ */
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   const refs = {} as ToRefs<T>
   const base = computed(getter)
@@ -578,6 +587,7 @@ export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
   return refs
 }
 
+/** Array.includes but value can be any type */
 export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
