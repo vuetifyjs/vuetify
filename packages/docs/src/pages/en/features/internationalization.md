@@ -66,6 +66,22 @@ Using the `v-locale-provider` component it is possible to scope a portion of you
 </template>
 ```
 
+## RTL
+
+There is built-in RTL (Right To Left) support for the locales that ship with Vuetify. If a locale flagged as RTL is used, all content directions will be automatically switched. See the [next section](#creating-a-custom-locale) if you need to add RTL support to a custom locale.
+
+If you need to force RTL for a section of your content, without switching locale, you can use the `v-locale-provider` component.
+
+```html
+<v-app>
+  <v-card>...</v-card> <!-- default locale used here -->
+
+  <v-locale-provider rtl>
+    <v-card>...<v-card> <!-- default locale used here, but with RTL active -->
+  </v-locale-provider>
+</v-app>
+```
+
 ## Creating a custom locale
 
 To create your own locale messages, copy and paste the content of `vuetify/src/locale/en.ts` to a new file, and change the localized strings. You can also specify if they should be displayed RTL or not by using the `rtl` property of the locale options.
