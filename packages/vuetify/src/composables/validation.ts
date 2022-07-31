@@ -10,7 +10,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 // Types
 import type { PropType } from 'vue'
 
-export type ValidationResult = string | true
+export type ValidationResult = string | boolean
 export type ValidationRule =
   | ValidationResult
   | PromiseLike<ValidationResult>
