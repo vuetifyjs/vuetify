@@ -1,10 +1,14 @@
 import type { Ref, UnwrapRef } from 'vue'
 import type { UnionToIntersection } from '@/util'
 
-export function useForwardRef<T extends {}, U extends Ref<{} | undefined>[]> (
+const Refs = Symbol('Forwarded refs')
+
+export function forwardRefs<T extends {}, U extends Ref<{} | undefined>[]> (
   target: T,
   ...refs: U
 ): T & UnwrapRef<UnionToIntersection<U[number]>> {
+  (target as any)[Refs] = refs
+
   return new Proxy(target, {
     get (target, key) {
       if (Reflect.has(target, key)) {
@@ -36,6 +40,19 @@ export function useForwardRef<T extends {}, U extends Ref<{} | undefined>[]> (
           const descriptor = Reflect.getOwnPropertyDescriptor(obj, key)
           if (descriptor) return descriptor
           obj = Object.getPrototypeOf(obj)
+        }
+      }
+      // Call forwarded refs' proxies
+      for (const ref of refs) {
+        const childRefs = ref.value && (ref.value as any)[Refs]
+        if (!childRefs) continue
+        const queue = childRefs.slice()
+        while (queue.length) {
+          const ref = queue.shift()
+          const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
+          if (descriptor) return descriptor
+          const childRefs = ref.value && (ref.value as any)[Refs]
+          if (childRefs) queue.push(...childRefs)
         }
       }
       return undefined

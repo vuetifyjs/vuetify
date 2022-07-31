@@ -8,7 +8,7 @@ import { VOverlay } from '@/components/VOverlay'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -115,7 +115,7 @@ export const VTooltip = genericComponent<new () => {
       </VOverlay>
     ))
 
-    return useForwardRef({}, overlay)
+    return forwardRefs({}, overlay)
   },
 })
 

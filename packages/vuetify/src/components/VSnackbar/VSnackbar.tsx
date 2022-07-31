@@ -13,7 +13,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { onMounted, ref, watch } from 'vue'
@@ -150,7 +150,7 @@ export const VSnackbar = defineComponent({
       </VOverlay>
     ))
 
-    return useForwardRef({}, overlay)
+    return forwardRefs({}, overlay)
   },
 })
 

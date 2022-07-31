@@ -10,7 +10,7 @@ import { VCounter } from '@/components/VCounter'
 import Intersect from '@/directives/intersect'
 
 // Composables
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -89,7 +89,7 @@ export const VTextField = genericComponent<new <T>() => {
     }
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
@@ -257,7 +257,7 @@ export const VTextField = genericComponent<new <T>() => {
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

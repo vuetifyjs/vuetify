@@ -10,7 +10,7 @@ import { VField } from '@/components/VField'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -244,7 +244,7 @@ export const VFileInput = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 
