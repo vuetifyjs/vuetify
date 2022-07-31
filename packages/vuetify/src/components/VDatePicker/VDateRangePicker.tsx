@@ -1,5 +1,5 @@
 // Styles
-import './VDatePicker.sass'
+import './VDateRangePicker.sass'
 
 // Components
 import { VDatePickerControls } from './VDatePickerControls'
@@ -20,6 +20,8 @@ import { defineComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VBtn } from '../VBtn'
+import { VDateRangePickerHeader } from './VDateRangePickerHeader'
+import { VDateRangePickerMonth } from './VDateRangePickerMonth'
 
 export const VDateRangePicker = defineComponent({
   name: 'VDateRangePicker',
@@ -40,16 +42,19 @@ export const VDateRangePicker = defineComponent({
     ...makeTransitionProps({
       transition: 'fade',
     }),
-    showActions: Boolean,
   },
 
   emits: {
-    ok: (date: any) => true,
+    'update:modelValue': (date: any) => true,
+    'update:mode': (mode: 'month' | 'years') => true,
+    'update:input': (input: string) => true,
+    'update:displayDate': (date: any) => true,
+    save: () => true,
     cancel: () => true,
   },
 
   setup (props, { emit }) {
-    const { mode, input, model, adapter } = createDatePicker(props)
+    const { mode, input, model, adapter } = createDatePicker(props, true)
 
     const inputModel = ref(model.value[0] ? adapter.value.format(model.value[0], 'keyboardDate') : '')
 
@@ -59,69 +64,64 @@ export const VDateRangePicker = defineComponent({
       inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
     })
 
-    useRender(() => (
-      <VPicker
-        class="v-date-picker"
-        width="328"
-        v-slots={{
-          header: () => (
-            <VDatePickerHeader
-              color={ props.color }
-              // title={ props.title }
-              // header={ props.header }
-            />
-          ),
-          default: () => input.value === 'calendar' ? (
-            <>
-              <VDatePickerControls />
-              <MaybeTransition transition={ props.transition } mode="out-in">
-                { mode.value === 'month' ? (
-                  // TODO: Replace this with scrollable month range component?
-                  <VDatePickerMonth
-                    locale={ props.locale }
-                  />
-                ) : (
-                  <VDatePickerYears
-                    height="350"
-                    locale={ props.locale }
-                  />
-                ) }
-              </MaybeTransition>
-            </>
-          ) : (
-            <div class="v-date-picker__input">
-              <VTextField
-                label="From"
-                placeholder="yyyy/mm/dd"
-                modelValue={ inputModel.value }
-                onUpdate:modelValue={ (value: any) => {
-                  if (value.length === 10 && adapter.value.isValid(value)) {
-                    model.value = [adapter.value.date(value)]
-                  }
-                } }
+    useRender(() => {
+      return (
+        <VPicker
+          key={input.value}
+          class={[
+            'v-date-range-picker',
+            `v-date-range-picker--${input.value}`,
+          ]}
+          width={328}
+          v-slots={{
+            header: () => (
+              // <VDatePickerHeader
+              //   color={ props.color }
+              //   range
+              //   // title={ props.title }
+              //   // header={ props.header }
+              // />
+              <VDateRangePickerHeader
+                color={ props.color }
+                onCancel={ () => emit('cancel') }
+                onSave={ () => emit('save') }
               />
-              <VTextField
-                label="To"
-                placeholder="yyyy/mm/dd"
-                modelValue={ inputModel.value }
-                onUpdate:modelValue={ (value: any) => {
-                  if (value.length === 10 && adapter.value.isValid(value)) {
-                    model.value = [adapter.value.date(value)]
-                  }
-                } }
-              />
-            </div>
-          ),
-          actions: props.showActions && (() => (
-            <div>
-              <VBtn variant="text" color={props.color} onClick={() => emit('cancel')}>Cancel</VBtn>
-              <VBtn variant="text" color={props.color} onClick={() => emit('ok', model.value)}>Ok</VBtn>
-            </div>
-          )),
-        }}
-      />
-    ))
-
-    return {}
+            ),
+            default: () => input.value === 'calendar' ? (
+              <VDateRangePickerMonth />
+            ) : (
+              <div class="v-date-range-picker__input">
+                <VTextField
+                  label="From"
+                  placeholder="yyyy/mm/dd"
+                  modelValue={ inputModel.value }
+                  onUpdate:modelValue={ (value: any) => {
+                    if (value.length === 10 && adapter.value.isValid(value)) {
+                      model.value = [adapter.value.date(value)]
+                    }
+                  } }
+                />
+                <VTextField
+                  label="To"
+                  placeholder="yyyy/mm/dd"
+                  modelValue={ inputModel.value }
+                  onUpdate:modelValue={ (value: any) => {
+                    if (value.length === 10 && adapter.value.isValid(value)) {
+                      model.value = [adapter.value.date(value)]
+                    }
+                  } }
+                />
+              </div>
+            ),
+            actions: input.value === 'keyboard' ? () => (
+              <div>
+                <VBtn variant="text" color={props.color} onClick={() => emit('cancel')}>Cancel</VBtn>
+                <VBtn variant="text" color={props.color} onClick={() => emit('save')}>Ok</VBtn>
+              </div>
+            ) : null,
+          }}
+        />
+      )
+    })
   },
 })

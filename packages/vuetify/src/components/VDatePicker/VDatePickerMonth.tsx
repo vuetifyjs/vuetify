@@ -28,12 +28,19 @@ export const VDatePickerMonth = defineComponent({
       type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
       validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
     },
+    displayDate: null,
+    modelValue: null,
+  },
+
+  emits: {
+    'update:displayDate': (date: any) => true,
+    'update:modelValue': (date: any) => true,
   },
 
   setup (props, { emit, slots }) {
-    const { displayDate, adapter, model } = useDatePicker()
+    const { adapter } = useDatePicker()
 
-    const month = computed(() => props.range === 'end' ? adapter.value.addMonths(displayDate.value, 1) : displayDate.value)
+    const month = computed(() => props.range === 'end' ? adapter.value.addMonths(props.displayDate, 1) : props.displayDate)
 
     const weeksInMonth = computed(() => {
       const weeks = adapter.value.getWeekArray(month.value)
@@ -41,8 +48,9 @@ export const VDatePickerMonth = defineComponent({
       const days = weeks.flat()
 
       // Make sure there's always 6 weeks in month (6 * 7 days)
+      // But only do it if we're not hiding adjacent months?
       const daysInMonth = 6 * 7
-      if (days.length < daysInMonth) {
+      if (days.length < daysInMonth && !props.hideAdjacentMonths) {
         const lastDay = days[days.length - 1]
 
         let week = []
@@ -62,16 +70,18 @@ export const VDatePickerMonth = defineComponent({
     const daysInMonth = computed(() => {
       const { format, getYear, getMonth, isSameMonth, isSameYear, isSameDay, isWithinRange } = adapter.value
       // const props.modelValue = [...props.modelValue].sort((a: string, b: string) => a < b ? -1 : 1)
-      const validDates = model.value.filter(v => !!v)
+      const validDates = props.modelValue.filter(v => !!v)
       const isRange = validDates.length > 1
 
       const days = weeksInMonth.value.flat()
       const today = adapter.value.date()
 
       return days.map((date, index) => {
-        const modelIndex = model.value.findIndex(modelDate => {
+        const modelIndex = props.modelValue.findIndex(modelDate => {
           return isSameYear(date, modelDate) && isSameMonth(date, modelDate) && isSameDay(date, modelDate)
         })
+
+        const isAdjacent = !isSameMonth(date, month.value)
 
         return {
           date,
@@ -79,11 +89,11 @@ export const VDatePickerMonth = defineComponent({
           month: getMonth(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
-          isSelected: modelIndex > -1,
+          isSelected: modelIndex > -1 && !isAdjacent,
           isStart: modelIndex === 0,
           isEnd: modelIndex === 1,
           isToday: adapter.value.isSameDay(date, today),
-          isAdjacent: !isSameMonth(date, month.value),
+          isAdjacent,
           inRange: isRange && (modelIndex === 0 || (validDates.length === 2 && isWithinRange(date, validDates as [any, any]))),
           localized: format(date, 'dayOfMonth'),
         }
@@ -99,33 +109,37 @@ export const VDatePickerMonth = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     function selectDate (date: any): any[] {
-      const value = model.value.slice()
+      const value = props.modelValue.slice()
 
       if (props.range) {
-        if (props.range === 'start') {
-          return [date, value[1] ?? null]
-        } else if (props.range === 'end') {
-          return [value[0] ?? null, date]
-        } else if (value.length === 2) {
-          const closest = model.value.reduce((prev, curr) => {
-            const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
-            const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
+        // if (props.range === 'start') {
+        //   return [date, value[1] ?? null]
+        // } else if (props.range === 'end') {
+        //   return [value[0] ?? null, date]
+        // } else if (value.length === 2) {
+        if (value.length === 2) {
+          // const closest = props.modelValue.reduce((prev, curr) => {
+          //   const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
+          //   const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
 
-            return distCurr < distPrev ? curr : prev
-          })
+          //   return distCurr < distPrev ? curr : prev
+          // })
 
-          const index = model.value.indexOf(closest)
+          // const index = props.modelValue.indexOf(closest)
 
-          value.splice(index, 1, date)
+          // value.splice(index, 1, date)
 
-          return value
+          return [date]
         } else {
-          value.push(date)
-          return value
+          if (adapter.value.isBefore(value[0], date)) {
+            return [value[0], date]
+          } else {
+            return [date, value[0]]
+          }
         }
       } else {
         if (!adapter.value.isSameMonth(month.value, date)) {
-          displayDate.value = date
+          emit('update:displayDate', date)
         }
 
         return [date]
@@ -164,6 +178,7 @@ export const VDatePickerMonth = defineComponent({
                   'v-date-picker-month__day--start': item.isStart,
                   'v-date-picker-month__day--end': item.isEnd,
                   'v-date-picker-month__day--adjacent': item.isAdjacent,
+                  'v-date-picker-month__day--hide-adjacent': item.isAdjacent && props.hideAdjacentMonths,
                   'v-date-picker-month__day--week-start': item.isWeekStart,
                   'v-date-picker-month__day--week-end': item.isWeekEnd,
                 },
@@ -186,7 +201,7 @@ export const VDatePickerMonth = defineComponent({
                   size="small"
                   variant={ item.isToday && !item.isSelected ? 'outlined' : 'flat' }
                   color={ item.isSelected ? props.color : item.isToday ? undefined : 'transparent' }
-                  onClick={ () => model.value = selectDate(item.date) }
+                  onClick={ () => emit('update:modelValue', selectDate(item.date)) }
                 >
                   { item.localized }
                 </VBtn>

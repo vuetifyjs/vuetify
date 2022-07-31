@@ -43,6 +43,8 @@ export const VDateRangeField = defineComponent({
     const locale = computed(() => props.locale)
     const { adapter } = useDate(locale)
     const model = useProxiedModel(props, 'modelValue')
+    const selected = ref()
+    const input = ref('calendar')
 
     const startInput = ref('')
     const endInput = ref('')
@@ -74,6 +76,7 @@ export const VDateRangeField = defineComponent({
     useRender(() => {
       return mobile.value ? (
         <VDialog
+          fullscreen={ input.value === 'calendar' }
           v-slots={{
             activator: ({ props: slotProps }) => (
               <div class="v-date-range-field" { ...slotProps }>
@@ -94,9 +97,11 @@ export const VDateRangeField = defineComponent({
             ),
             default: ({ isActive }) => (
               <VDateRangePicker
-                showActions
-                onOk={() => {
+                onUpdate:input={ v => input.value = v }
+                v-model={ selected.value }
+                onSave={() => {
                   isActive.value = false
+                  model.value = selected.value
                 }}
                 onCancel={() => {
                   isActive.value = false

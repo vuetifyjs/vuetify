@@ -95,6 +95,10 @@
 
 .v-picker
   display: grid
+  grid-template-areas: "header" "body"
+  grid-auto-rows: min-content
+
+.v-picker--with-actions
   grid-template-areas: "header" "body" "actions"
 
 .v-picker__body
@@ -113,4 +117,7 @@
   justify-content: flex-end
 
 .v-picker--landscape
+  grid-template-areas: "header body" "header body"
+
+.v-picker--landscape.v-picker--with-actions
   grid-template-areas: "header body" "header actions"

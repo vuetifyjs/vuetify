@@ -36,7 +36,7 @@ export function createDatePicker (props: DateProps, range?: boolean) {
     'modelValue',
     null,
     v => {
-      const arr = wrapInArray(v)
+      const arr = wrapInArray(v).filter(v => !!v)
 
       return arr.map(adapter.value.date)
     },

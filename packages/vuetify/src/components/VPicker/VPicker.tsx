@@ -26,6 +26,7 @@ export const VPicker = defineComponent({
           'v-picker',
           {
             'v-picker--landscape': props.landscape,
+            'v-picker--with-actions': !!slots.actions,
           },
         ]}
         { ...props }

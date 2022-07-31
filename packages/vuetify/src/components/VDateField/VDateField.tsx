@@ -29,6 +29,10 @@ export const VDateField = defineComponent({
     mobile: Boolean,
   },
 
+  emits: {
+    'update:modelValue': (date: any) => true,
+  },
+
   setup (props, { slots, emit }) {
     const locale = computed(() => props.locale)
     const { adapter } = useDate(locale)
@@ -78,7 +82,7 @@ export const VDateField = defineComponent({
               <VDatePicker
                 v-model={ selected.value }
                 showActions
-                onOk={() => {
+                onSave={() => {
                   model.value = selected.value
                   isActive.value = false
                 }}

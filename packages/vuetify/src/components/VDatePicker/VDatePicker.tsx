@@ -44,12 +44,12 @@ export const VDatePicker = defineComponent({
   },
 
   emits: {
-    ok: (date: any) => true,
+    save: () => true,
     cancel: () => true,
   },
 
   setup (props, { emit }) {
-    const { mode, input, model, adapter } = createDatePicker(props)
+    const { mode, input, model, adapter, displayDate } = createDatePicker(props)
 
     const inputModel = ref(model.value[0] ? adapter.value.format(model.value[0], 'keyboardDate') : '')
 
@@ -78,6 +78,8 @@ export const VDatePicker = defineComponent({
                 { mode.value === 'month' ? (
                   <VDatePickerMonth
                     locale={ props.locale }
+                    v-model:displayDate={ displayDate.value }
+                    v-model={ model.value }
                   />
                 ) : (
                   <VDatePickerYears
@@ -104,7 +106,7 @@ export const VDatePicker = defineComponent({
           actions: props.showActions && (() => (
             <div>
               <VBtn variant="text" color={props.color} onClick={() => emit('cancel')}>Cancel</VBtn>
-              <VBtn variant="text" color={props.color} onClick={() => emit('ok', model.value)}>Ok</VBtn>
+              <VBtn variant="text" color={props.color} onClick={() => emit('save')}>Ok</VBtn>
             </div>
           )),
         }}
