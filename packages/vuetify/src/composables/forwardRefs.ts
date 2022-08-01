@@ -27,6 +27,9 @@ export function forwardRefs<T extends {}, U extends Ref<{} | undefined>[]> (
       const descriptor = Reflect.getOwnPropertyDescriptor(target, key)
       if (descriptor) return descriptor
 
+      // Skip internal properties
+      if (typeof key === 'symbol' || key.startsWith('__')) return
+
       // Check each ref's own properties
       for (const ref of refs) {
         if (!ref.value) continue
