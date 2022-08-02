@@ -1,21 +1,27 @@
 <template>
-  <app-btn variant="text">
+  <app-btn>
     {{ title }}
+
     <chevron-down />
 
     <app-menu
-      min-width="180"
-      activator="parent"
       :items="items"
+      activator="parent"
+      min-width="180"
     />
   </app-btn>
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
-  import { useI18n } from 'vue-i18n'
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
+  // Components
   import AppMenu from '@/components/app/menu/Menu.vue'
+  import ChevronDown from '@/components/icons/ChevronDown.vue'
+
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'SupportMenu',
@@ -28,29 +34,28 @@
       return {
         title: t('support'),
         items: computed(() => ([
-          // { heading: t('professional-support') },
-          {
-            title: 'direct-support',
-            // to: {
-            //   name: 'Documentation',
-            //   params: {
-            //     category: 'introduction',
-            //     page: 'support',
-            //   },
-            // },
-          },
-          {
-            title: 'enterprise',
-            // to: {
-            //   name: 'Documentation',
-            //   params: {
-            //     category: 'introduction',
-            //     page: 'enterprise',
-            //   },
-            // },
-          },
+          // {
+          //   title: 'direct-support',
+          //   to: {
+          //     name: 'Documentation',
+          //     params: {
+          //       category: 'introduction',
+          //       page: 'support',
+          //     },
+          //   },
+          // },
+          // {
+          //   title: 'enterprise',
+          //   to: {
+          //     name: 'Documentation',
+          //     params: {
+          //       category: 'introduction',
+          //       page: 'enterprise',
+          //     },
+          //   },
+          // },
           // { divider: true },
-          // { heading: t('community-support') },
+          { heading: t('community-support') },
           {
             title: 'Discord',
             href: 'https://community.vuetifyjs.com/',
@@ -59,8 +64,8 @@
             title: 'github-discussions',
             href: 'https://discussions.vuetifyjs.com/',
           },
-          // { divider: true },
-          // { heading: t('resources-and-tools') },
+          { divider: true },
+          { heading: t('resources-and-tools') },
           {
             title: 'file-a-bug-report',
             href: 'https://issues.vuetifyjs.com/',
