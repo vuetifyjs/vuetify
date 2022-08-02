@@ -62,6 +62,7 @@
     "vite-plugin-pages": "^0.23.0",
     "vite-plugin-pwa": "^0.12.0",
     "vite-plugin-vue-layouts": "^0.6.0",
+    "vite-plugin-vuetify": "^1.0.0-alpha.14",
     "vue-tsc": "^0.35.2",
     "workbox-precaching": "^6.5.3",
     "workbox-routing": "^6.5.3",
