@@ -88,6 +88,7 @@ const DataTableItemColumnScopedProps = {
   item: 'any',
   header: 'DataTableHeader',
   value: 'any',
+  index: 'number',
 }
 
 const DataTableHeaderSelectScopedProps = {
