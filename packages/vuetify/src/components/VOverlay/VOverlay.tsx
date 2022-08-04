@@ -135,8 +135,8 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { isTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
-    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
+    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
 
     watch(() => props.disabled, v => {
@@ -167,7 +167,7 @@ export const VOverlay = genericComponent<new () => {
     }
 
     function closeConditional () {
-      return isActive.value && isTop.value
+      return isActive.value && globalTop.value
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -179,7 +179,7 @@ export const VOverlay = genericComponent<new () => {
     }, { immediate: true })
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape' && isTop.value) {
+      if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -189,7 +189,7 @@ export const VOverlay = genericComponent<new () => {
     const router = useRouter()
     useToggleScope(() => props.closeOnBack, () => {
       useBackButton(router, next => {
-        if (isTop.value && isActive.value) {
+        if (globalTop.value && isActive.value) {
           next(false)
           if (!props.persistent) isActive.value = false
           else animateClick()
@@ -293,7 +293,8 @@ export const VOverlay = genericComponent<new () => {
       activatorEl,
       animateClick,
       contentEl,
-      isTop,
+      globalTop,
+      localTop,
       updateLocation,
     }
   },
