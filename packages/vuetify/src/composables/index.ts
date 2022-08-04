@@ -4,14 +4,15 @@
  */
 
 export { useDisplay } from './display'
-export { useTheme } from './theme'
-export { provideRtl, useRtl } from './rtl'
 export { useLayout } from './layout'
+export { useLocale } from './locale'
+export { provideRtl, useRtl } from './rtl'
+export { useTheme } from './theme'
 
 export type { DefaultsInstance } from './defaults'
 export type { DisplayBreakpoint, DisplayInstance, DisplayThresholds } from './display'
 export type { SubmitEventPromise } from './form'
 export type { IconAliases, IconProps, IconSet, IconOptions } from './icons'
-export type { LocaleAdapter } from './locale'
+export type { LocaleAdapter, LocaleInstance } from './locale'
 export type { RtlInstance } from './rtl'
 export type { ThemeDefinition, ThemeInstance } from './theme'
