@@ -23,7 +23,6 @@ export const VSnackbar = defineComponent({
   name: 'VSnackbar',
 
   props: {
-    app: Boolean,
     contentClass: {
       type: String,
       default: '',
@@ -99,6 +98,7 @@ export const VSnackbar = defineComponent({
         contentProps={{
           style: locationStyles.value,
         }}
+        contentClass={ props.contentClass }
         persistent
         noClickAnimation
         scrim={ false }
@@ -121,10 +121,7 @@ export const VSnackbar = defineComponent({
 
           { slots.default && (
             <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
+              class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
