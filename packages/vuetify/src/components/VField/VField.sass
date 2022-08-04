@@ -103,12 +103,10 @@
   input
     letter-spacing: inherit
 
-  $v-field-input: &
   @at-root
-    #{$v-field-input} input,
-    textarea#{$v-field-input}
-      &::placeholder
-        opacity: var(--v-disabled-opacity)
+    & input::placeholder,
+    textarea#{&}::placeholder
+      opacity: var(--v-disabled-opacity)
 
   &:focus,
   &:active
