@@ -35,9 +35,13 @@
   &--variant-outlined
     border: thin solid currentColor
 
-  &--variant-text
-    .#{$name}__overlay
-      background: currentColor
+  .#{name}__overlay,
+  .#{name}__underlay
+    @include absolute()
+
+    opacity: 0
+    pointer-events: none
+    transition: opacity .2s ease-in-out
 
   &--variant-tonal
     .#{$name}__underlay
@@ -50,4 +54,3 @@
       bottom: 0
       left: 0
       pointer-events: none
-      transition: opacity 0.2s ease-in-out

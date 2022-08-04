@@ -82,7 +82,6 @@ export const VBtn = defineComponent({
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
-    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -97,6 +96,11 @@ export const VBtn = defineComponent({
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
+    const variantProps = computed(() => ({
+      color: !isDisabled.value ? props.color : undefined,
+      variant: !isDisabled.value ? props.variant : ['elevated', 'text'].includes(props.variant) ? 'tonal' : props.variant,
+    }))
+    const { colorClasses, colorStyles, variantClasses } = useVariant(variantProps)
 
     useSelectLink(link, group?.select)
 

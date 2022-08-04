@@ -79,24 +79,7 @@
     min-width: 100%
 
   &--disabled
-    pointer-events: none
-
-    // This is multiplied by the text opacity,
-    // so we need to divide it to get the desired value
-    $button-overlay-opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
-
-    &.v-btn--disabled
-      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
-      opacity: $button-overlay-opacity
-
-    &.v-btn--variant-elevated,
-    &.v-btn--variant-flat
-      background: rgb(var(--v-theme-surface))
-      box-shadow: none
-      opacity: 1
-
-      .v-btn__overlay
-        opacity: $button-overlay-opacity
+    opacity: $button-disabled-opacity
 
   &--loading
     pointer-events: none
@@ -171,17 +154,6 @@
 
   .v-btn--stacked &
     white-space: normal
-
-.v-btn__overlay
-  background-color: currentColor
-  border-radius: inherit
-  opacity: 0
-  transition: opacity .2s ease-in-out
-
-.v-btn__overlay,
-.v-btn__underlay
-  @include tools.absolute()
-  pointer-events: none
 
 // VAppBar
 .v-btn
