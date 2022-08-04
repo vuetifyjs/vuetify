@@ -91,12 +91,6 @@ Truncate the start, end or both ends of the timeline center line by using the **
 
 Modify the inset of dividing lines by specifying a custom amount using the **line-inset** prop.
 
-<alert type="warning">
-
-  It is not possible to use the **line-inset** prop together with the **truncate-line** prop. The **line-inset** prop will take precedence if both are specified.
-
-</alert>
-
 <example file="v-timeline/prop-line-inset" />
 
 ### Slots
