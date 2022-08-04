@@ -188,6 +188,7 @@ export const VImg = defineComponent({
         class: ['v-img__img', containClasses.value],
         src: normalisedSrc.value.src,
         srcset: normalisedSrc.value.srcset,
+        alt: '',
         sizes: props.sizes,
         ref: image,
         onLoad,
