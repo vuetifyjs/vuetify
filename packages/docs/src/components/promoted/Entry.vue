@@ -1,13 +1,5 @@
 <template>
-  <div
-    v-if="slug"
-    class="mb-4"
-  >
-    <vuetify
-      :slug="slug"
-      medium="entry"
-    />
-  </div>
+  <vuetify medium="entry" />
 </template>
 
 <script lang="ts">
@@ -15,9 +7,5 @@
 
   export default defineComponent({
     name: 'PromotedEntry',
-
-    props: {
-      slug: String,
-    },
   })
 </script>
