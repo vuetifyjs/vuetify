@@ -35,25 +35,97 @@ The recommended placement of elements inside of `v-text-field` is:
 
 ![Text-field Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-anatomy.png)
 
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Text field container contains the `v-input` and `v-field` components |
+| 2. Prepend icon | A custom icon that is located before `v-field` |
+| 3. Prepend-inner icon | A custom icon that is located at the start of `v-field` |
+| 4. Label | A content area for displaying text to users that correlates to the input |
+| 5. Append-inner icon | A custom icon that is located at the end of `v-field` component |
+| 6. Append icon | A custom icon that is located after `v-field` component |
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-text-field](/api/v-text-field/) | Primary Component |
 
 ## Examples
 
+The `v-text-field` component is a versatile `<input type="text">` field which combines both the `v-input` and `v-field` components into a single offering. It is a commonly used element that provides the baseline for other form inputs; such as [v-select](/components/selects/), [v-autocomplete](/components/autocompletes/), [v-combobox](/components/combobox/).
+
+In the following section we walk through different ways to configure and implement the `v-text-field` into your application.
+
 ### Props
 
-#### Counter
+The `v-text-field` component has an massive API with numerous options to modify the display, functionality, or style of your inputs. Many of the configurable options are also available through [slots](#slots).
 
-Use a **counter** prop to inform a user of the character limit. The counter does not perform any validation by itself - you will need to pair it with either the internal validation system, or a 3rd party library. The counter can be customised with the **counter-value** prop and **counter** scoped slot.
+#### Labeling
 
-<example file="v-text-field/prop-counter" />
+The **label** prop displays custom text for identifying an input's purpose. The following code snippet is an example of a basic `v-text-field` component:
+
+```html
+<v-text-field label="First name"></v-text-field>
+```
+
+Using this baseline makes it easy to put together quick mock implementations of your interface without needing to hook up any functional logic.
+
+The following code snippet is an example of a simple form for for collecting a user's **First** name:
+
+<example file="v-text-field/prop-label" />
+
+#### Placeholders
+
+Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label][#labeling] or [hint](#hints) properties.
+
+In the following snippet, we improve the user experience of a `v-text-field` that is capturing an email address:
+
+```html
+<v-text-field
+  label="Email address"
+  placeholder="johndoe@gmail.com"
+  type="email"
+></v-text-field>
+```
+
+When the user focuses the input, the placeholder fades in as the label translates up. The added visual element improves the user experience when using multiple field inputs.
+
+<example file="v-text-field/prop-placeholder" />
+
+<alert type="info">
+
+  Use the **persistent-placeholder** prop to force the **placeholder** to be visible, even when the input is not focused.
+
+</alert>
 
 #### Clearable
 
-The **clearable** prop appends an icon that clears the `text field` when clicked. The clearable icon is easily customizable by using **clearable** in combination with the **clear-icon** prop.
+The **clearable** prop appends an icon that clears the `v-text-field` when clicked.
+
+```html
+<v-text-field
+  label="Last name"
+  placeholder="Doe"
+  clearable
+></v-text-field>
+```
+
+The clearable icon is configurable by using the **clearable** property in combination with the **clear-icon** property. By default, this value is set to the global default assigned in [Icon font](/features/icon-fonts) but still has the ability to overwrite in the local template.
+
+In the following example we change the icon that is shown when the input can be cleared:
+
+```html
+<v-text-field
+  label="Last name"
+  placeholder="Doe"
+  clearable
+  clear-icon="mdi-trash"
+></v-text-field>
+```
 
 <example file="v-text-field/prop-clearable" />
+
+<!--
 
 #### Custom colors
 
@@ -170,5 +242,6 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
+-->
 
 <backmatter />
