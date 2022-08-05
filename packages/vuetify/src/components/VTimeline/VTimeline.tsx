@@ -66,6 +66,7 @@ export const VTimeline = defineComponent({
       },
       VTimelineItem: {
         density: toRef(props, 'density'),
+        lineInset: toRef(props, 'lineInset'),
       },
     })
 
@@ -95,7 +96,7 @@ export const VTimeline = defineComponent({
           'v-timeline',
           `v-timeline--${props.direction}`,
           `v-timeline--align-${props.align}`,
-          !props.lineInset && truncateClasses.value,
+          truncateClasses.value,
           {
             'v-timeline--inset-line': !!props.lineInset,
           },
@@ -105,7 +106,6 @@ export const VTimeline = defineComponent({
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
         v-slots={ slots }
       />
