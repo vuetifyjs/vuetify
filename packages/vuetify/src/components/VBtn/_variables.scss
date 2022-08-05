@@ -4,6 +4,9 @@
 @use '../../styles/tools';
 
 // Defaults
+/** if false, disabled buttons will be greyed out */
+$button-colored-disabled: true !default;
+
 $button-app-bar-elevation: 0 !default;
 $button-background: rgb(var(--v-theme-surface)) !default;
 $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;

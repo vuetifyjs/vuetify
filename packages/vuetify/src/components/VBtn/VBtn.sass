@@ -80,14 +80,25 @@
 
   &--disabled
     pointer-events: none
-    opacity: $button-disabled-opacity
+
+    @if ($button-colored-disabled)
+      opacity: $button-disabled-opacity
+    @else
+      opacity: 1
+      &.v-btn
+        // specificity has to be higher to override theme !important
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity) !important
 
     &.v-btn--variant-elevated,
     &.v-btn--variant-flat
-      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
-      background: rgb(var(--v-theme-surface))
       box-shadow: none
-      opacity: 1
+
+      @if ($button-colored-disabled)
+        opacity: 1
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+        background: rgb(var(--v-theme-surface))
+      @else
+        background: rgb(var(--v-theme-surface)) !important
 
       .v-btn__overlay
         // __overlay uses currentColor, so we need to divide
