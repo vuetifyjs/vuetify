@@ -107,9 +107,30 @@
       opacity: 0
 
   &--stacked
+    grid-template-areas: "prepend" "content" "append"
+    grid-template-columns: auto
+    grid-template-rows: max-content max-content max-content
+    justify-items: center
+    align-content: center
+
     .v-btn__content
       flex-direction: column
       line-height: $button-stacked-line-height
+
+    .v-btn__prepend,
+    .v-btn__append,
+    .v-btn__content > .v-icon--start,
+    .v-btn__content > .v-icon--end
+      margin-inline-start: 0
+      margin-inline-end: 0
+
+    .v-btn__prepend,
+    .v-btn__content > .v-icon--start
+      margin-bottom: $button-stacked-icon-margin
+
+    .v-btn__append,
+    .v-btn__content > .v-icon--end
+      margin-top: $button-stacked-icon-margin
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
