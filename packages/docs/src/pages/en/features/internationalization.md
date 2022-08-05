@@ -68,9 +68,9 @@ Using the `v-locale-provider` component it is possible to scope a portion of you
 
 ## RTL
 
-There is built-in RTL (Right To Left) support for the locales that ship with Vuetify. If a locale flagged as RTL is used, all content directions will be automatically switched. See the [next section](#creating-a-custom-locale) if you need to add RTL support to a custom locale.
+RTL (Right To Left) support is built in for all localizations that ship with Vuetify. If a [supported language](#supported-languages) is flagged as RTL, all content directions are automatically switched. See the [next section](#creating-a-custom-locale) for information on how to add RTL support to a custom locale.
 
-If you need to force RTL for a section of your content, without switching locale, you can use the `v-locale-provider` component.
+The following example demonstrates how to force RTL for a specific section of your content, without switching the current language, by using the `v-locale-provider` component:
 
 ```html
 <v-app>
