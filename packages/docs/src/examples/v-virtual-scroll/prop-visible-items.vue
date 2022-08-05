@@ -5,51 +5,41 @@
       class="mx-auto mb-4"
     >
       <v-text-field
-        v-model="benched"
+        v-model="visibleItems"
         type="number"
-        label="Total Benched"
-        min="0"
-        max="10"
+        label="Visible items"
+        min="10"
+        max="30"
       ></v-text-field>
     </v-responsive>
 
     <v-card
-      elevation="16"
+      elevation="4"
       max-width="400"
       class="mx-auto"
     >
       <v-virtual-scroll
-        :bench="benched"
+        :visible-items="visibleItems"
         :items="items"
         height="300"
-        item-height="64"
+        item-height="48"
       >
         <template v-slot:default="{ item }">
-          <v-list-item :key="item">
-            <v-list-item-action>
-              <v-btn
-                fab
-                small
-                depressed
-                color="primary"
-              >
-                {{ item }}
-              </v-btn>
-            </v-list-item-action>
+          <v-list-item>
+            <template v-slot:prepend>
+              <v-btn icon variant="flat" color="primary" size="small">{{ item }}</v-btn>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>
-                User Database Record <strong>ID {{ item }}</strong>
-              </v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title class="ml-4">
+              User Database Record <strong>ID {{ item }}</strong>
+            </v-list-item-title>
 
-            <v-list-item-action>
-              <v-icon small>
+            <template v-slot:append>
+              <v-icon size="small">
                 mdi-open-in-new
               </v-icon>
-            </v-list-item-action>
+            </template>
           </v-list-item>
-
           <v-divider></v-divider>
         </template>
       </v-virtual-scroll>
@@ -60,7 +50,7 @@
 <script>
   export default {
     data: () => ({
-      benched: 0,
+      visibleItems: 30,
     }),
     computed: {
       items () {

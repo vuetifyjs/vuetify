@@ -1,4 +1,1 @@
-import VVirtualScroll from './VVirtualScroll'
-
-export { VVirtualScroll }
-export default VVirtualScroll
+export * from './VVirtualScroll'

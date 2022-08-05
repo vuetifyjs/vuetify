@@ -1,51 +1,39 @@
 <template>
-  <div class="py-6 grow">
-    <v-slider
-      v-model="count"
-      hide-details
-      min="7000"
-      max="15000"
-    ></v-slider>
-    <div class="text-center font-weight-bold">
-      {{ items.length }} Total Items
-    </div>
-
-    <v-card outlined>
+  <usage-example
+    :options="options"
+    name="v-virtual-scroll"
+  >
+    <v-defaults-provider
+      :defaults="{
+        VAlert: {
+          border: model === 'border',
+          variant: model === 'elevated' ? 'elevated' : undefined,
+        }
+      }"
+    >
       <v-virtual-scroll
+        height="400"
         :items="items"
-        v-bind="$attrs"
+        item-height="32"
       >
-        <template v-slot:default="{ item }">
-          <div class="px-2">
-            I'm item number {{ item }}
+        <template v-slot:default="{ item, index }">
+          <div :class="['pa-1', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
+            Item number #{{ item }}
           </div>
         </template>
       </v-virtual-scroll>
-    </v-card>
-  </div>
+    </v-defaults-provider>
+  </usage-example>
 </template>
 
 <script>
   export default {
-    name: 'Usage',
-
-    inheritAttrs: false,
+    name: 'VVirtualScrollerUsageExample',
 
     data: () => ({
       count: 10000,
-      defaults: {
-        height: 100,
-        'item-height': 20,
-      },
-      options: {
-        sliders: {
-          height: [100, 175],
-          'item-height': [20, 50],
-        },
-      },
-      tabs: [],
+      options: [],
     }),
-
     computed: {
       items () {
         return Array.from({ length: this.count }, (k, v) => v + 1)

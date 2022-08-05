@@ -1,7 +1,8 @@
 ---
+nav: Virtual scrollers
 meta:
-  title: Virtual scroller component,
-  description: The Virtual scroll component is a container that renders only visible elements. It is useful when in need to display large amount of uniform data.,
+  title: Virtual scroll component
+  description: The Virtual scroll component is a container that renders only visible elements. It is useful when you need to display large amounts of uniform data.
   keywords: virtual scroll, vuetify virtual scroll component, vue virtual scroll component, v-virtual-scroll component
 related:
   - /components/lists/
@@ -9,7 +10,7 @@ related:
   - /components/data-iterators/
 ---
 
-# Virtual scroller
+# Virtual scrollers
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically.
 
@@ -25,30 +26,26 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 
 <api-inline />
 
-## Caveats
-
-<alert type="info">
-
-We are in the process of integrating the `v-virtual-scroll` component into existing features and components. If you are interested in helping, please reach out to **John Leider** in the [Discord Community](https://community.vuetifyjs.com).
-
-</alert>
-
 ## Examples
 
 ### Props
 
-#### Bench
+#### Dynamic item height
 
-By default the `v-virtual-scroll` does not pre-render additional items outside of the viewport. Using the `bench` prop will have the scroller render additional items as **padding**. It is **recommended** to keep this number as low as possible for the best possible performance.
+If your items are not of a uniform size, you can use the **dynamic-item-height** prop. Keep in mind that you will still need to specify an initial, estimated, **item-height**.
 
-<example file="v-virtual-scroll/prop-bench" />
+<example file="v-virtual-scroll/prop-dynamic-item-height" />
 
-### Misc
+If the items you are rendering are objects, you will additionally need to set the **item-key** prop. This should point to a unique property on the objects.
 
-#### User directory
+<example file="v-virtual-scroll/prop-item-key" />
 
-The `v-virtual-scroll` component can render an unlimited amount of items by rendering only what it needs to fill the scroller's viewport.
+#### Visible items
 
-<example file="v-virtual-scroll/misc-user-directory" />
+The `v-virtual-scroll` renders a set amount of visible items, meant to cover the viewport of the scroller, plus some amount of buffer below and beneath it so that scrolling looks and feels smooth. This amount can be changed with the **visible-items** prop.
+
+Depending on the size of the scroll container, the size of the items, and the complexity of what you are rendering, adjusting the **visible-items** might improve the performance of the scrolling.
+
+<example file="v-virtual-scroll/prop-visible-items" />
 
 <backmatter />
