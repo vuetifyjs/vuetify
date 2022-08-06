@@ -73,4 +73,8 @@ export default {
       item: 'Hodnocení {0} z {1}',
     },
   },
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

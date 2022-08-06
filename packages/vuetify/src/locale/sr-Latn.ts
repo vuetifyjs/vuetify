@@ -73,4 +73,8 @@ export default {
       item: 'Ocena {0} od {1}',
     },
   },
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

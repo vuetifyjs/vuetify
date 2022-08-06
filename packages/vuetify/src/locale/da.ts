@@ -73,4 +73,8 @@ export default {
       item: 'Bedømmelse {0} af {1}',
     },
   },
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

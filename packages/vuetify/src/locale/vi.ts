@@ -73,4 +73,8 @@ export default {
       item: 'Đánh giá {0} trên {1}',
     },
   },
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }
