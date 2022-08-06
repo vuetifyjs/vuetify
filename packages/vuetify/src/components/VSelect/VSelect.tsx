@@ -13,7 +13,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
@@ -284,7 +284,7 @@ export const VSelect = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       menu,
       select,
     }, vTextFieldRef)

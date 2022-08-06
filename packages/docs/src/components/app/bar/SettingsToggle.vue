@@ -7,22 +7,25 @@
   />
 </template>
 
-<script>
-  import { useAppStore } from '@/store/app'
-
+<script lang="ts">
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
-  export default {
+  // Composables
+  import { useAppStore } from '@/store/app'
+
+  // Utilities
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     name: 'SettingsToggle',
 
-    components: {
-      AppTooltipBtn,
-    },
+    components: { AppTooltipBtn },
 
     setup () {
       const app = useAppStore()
 
       return { app }
     },
-  }
+  })
 </script>

@@ -1,36 +1,55 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
-import { computed, onScopeDispose, reactive, readonly, ref, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, provide, reactive, readonly, ref, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
 
-const stack = reactive<[uid: number, zIndex: number][]>([])
+const StackSymbol: InjectionKey<StackProvide> = Symbol.for('vuetify:stack')
+
+interface StackProvide {
+  activeChildren: Set<number>
+}
+
+const globalStack = reactive<[uid: number, zIndex: number][]>([])
 
 export function useStack (isActive: Readonly<Ref<boolean>>, zIndex: Readonly<Ref<string | number>>) {
   const vm = getCurrentInstance('useStack')
 
+  const parent = inject(StackSymbol, undefined)
+  const stack: StackProvide = reactive({
+    activeChildren: new Set<number>(),
+  })
+  provide(StackSymbol, stack)
+
   const _zIndex = ref(+zIndex.value)
   useToggleScope(isActive, () => {
-    const lastZIndex = stack.at(-1)?.[1]
+    const lastZIndex = globalStack.at(-1)?.[1]
     _zIndex.value = lastZIndex ? lastZIndex + 10 : +zIndex.value
-    stack.push([vm.uid, _zIndex.value])
+    globalStack.push([vm.uid, _zIndex.value])
+
+    parent?.activeChildren.add(vm.uid)
 
     onScopeDispose(() => {
-      const idx = stack.findIndex(v => v[0] === vm.uid)
-      stack.splice(idx, 1)
+      const idx = globalStack.findIndex(v => v[0] === vm.uid)
+      globalStack.splice(idx, 1)
+
+      parent?.activeChildren.delete(vm.uid)
     })
   })
 
-  const isTop = ref(true)
+  const globalTop = ref(true)
   watchEffect(() => {
-    const _isTop = stack.at(-1)?.[0] === vm.uid
-    setTimeout(() => isTop.value = _isTop)
+    const _isTop = globalStack.at(-1)?.[0] === vm.uid
+    setTimeout(() => globalTop.value = _isTop)
   })
 
+  const localTop = computed(() => !stack.activeChildren.size)
+
   return {
-    isTop: readonly(isTop),
+    globalTop: readonly(globalTop),
+    localTop,
     stackStyles: computed(() => ({ zIndex: _zIndex.value })),
   }
 }

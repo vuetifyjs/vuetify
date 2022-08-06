@@ -80,23 +80,19 @@
 
   &--disabled
     pointer-events: none
-
-    // This is multiplied by the text opacity,
-    // so we need to divide it to get the desired value
-    $button-overlay-opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
-
-    &.v-btn--disabled
-      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
-      opacity: $button-overlay-opacity
+    opacity: $button-disabled-opacity
 
     &.v-btn--variant-elevated,
     &.v-btn--variant-flat
+      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
       background: rgb(var(--v-theme-surface))
       box-shadow: none
       opacity: 1
 
       .v-btn__overlay
-        opacity: $button-overlay-opacity
+        // __overlay uses currentColor, so we need to divide
+        // by the text opacity to get the correct value
+        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
   &--loading
     pointer-events: none
@@ -107,9 +103,30 @@
       opacity: 0
 
   &--stacked
+    grid-template-areas: "prepend" "content" "append"
+    grid-template-columns: auto
+    grid-template-rows: max-content max-content max-content
+    justify-items: center
+    align-content: center
+
     .v-btn__content
       flex-direction: column
       line-height: $button-stacked-line-height
+
+    .v-btn__prepend,
+    .v-btn__append,
+    .v-btn__content > .v-icon--start,
+    .v-btn__content > .v-icon--end
+      margin-inline-start: 0
+      margin-inline-end: 0
+
+    .v-btn__prepend,
+    .v-btn__content > .v-icon--start
+      margin-bottom: $button-stacked-icon-margin
+
+    .v-btn__append,
+    .v-btn__content > .v-icon--end
+      margin-top: $button-stacked-icon-margin
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)

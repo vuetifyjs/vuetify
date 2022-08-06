@@ -149,7 +149,7 @@ export const VField = genericComponent<new <T>() => {
           ? { maxWidth: convertToUnit(targetWidth) }
           : undefined
 
-        const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000
+        const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000 || 150
         const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--v-field-label-scale'))
 
         el.style.visibility = 'visible'

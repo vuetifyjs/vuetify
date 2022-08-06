@@ -1,21 +1,26 @@
 <template>
   <v-list
     v-model:opened="opened"
-    density="compact"
-    color="primary"
-    :nav="nav"
     :items="computedItems"
-    item-props
     :lines="false"
+    :nav="nav"
+    color="primary"
+    density="compact"
+    item-props
   />
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import type { Prop } from 'vue'
+  // Composables
   import { useI18n } from 'vue-i18n'
+
+  // Utiltities
+  import { computed, defineComponent, ref } from 'vue'
   import { generatedRoutes as routes } from '@/util/routes'
   import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
+
+  // Types
+  import type { Prop } from 'vue'
 
   export type Item = {
     title?: string
@@ -79,12 +84,28 @@
       const opened = ref<string[]>([])
 
       const computedItems = computed(() => props.items?.map(item => {
-        if (item.heading) return { type: 'subheader', title: item.heading }
-        if (item.divider) return { type: 'divider' }
+        if (item.heading) {
+          return {
+            type: 'subheader',
+            title: item.heading,
+            class: 'on-surface font-weight-black text-uppercase',
+          }
+        }
+
+        if (item.divider) {
+          return {
+            type: 'divider',
+            class: 'my-2 ml-2 mr-n2',
+          }
+        }
 
         return {
           title: item.title && te(item.title) ? t(item.title) : item.title,
           value: item.title,
+          to: item?.to,
+          href: item?.href,
+          target: item.href ? '_blank' : undefined,
+          rel: item.href ? 'noopener noreferrer' : undefined,
           prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
           children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
         }

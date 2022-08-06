@@ -17,10 +17,10 @@
       />
 
       <v-tooltip
-        location="bottom"
-        class="v-app-tooltip-btn__content"
-        open-delay="200"
         activator="parent"
+        class="v-app-tooltip-btn__content"
+        location="bottom"
+        open-delay="200"
       >
         {{ t(path) }}
       </v-tooltip>
@@ -28,10 +28,14 @@
   </span>
 </template>
 
-<script>
+<script lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
 
-  export default {
+  // Utilities
+  import { defineComponent } from 'vue'
+
+  export default defineComponent({
     name: 'AppTooltipBtn',
 
     inheritAttrs: false,
@@ -46,7 +50,7 @@
 
       return { t }
     },
-  }
+  })
 </script>
 
 <style lang="sass">

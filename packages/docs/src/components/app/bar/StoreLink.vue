@@ -10,10 +10,14 @@
 </template>
 
 <script lang="ts">
+  // Components
+  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
+
+  // Composables
+  // import { useRoute } from 'vue-router'
+
   // Utilities
   import { defineComponent } from 'vue'
-  // import { useRoute } from 'vue-router'
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
   export default defineComponent({
     name: 'TeamLink',
@@ -23,16 +27,14 @@
     setup () {
       // const route = useRoute()
 
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'store',
-        //   value: route.name,
-        // })
-      }
-
       return {
-        onClick,
+        onClick () {
+          // this.$gtag.event('click', {
+          //   event_category: 'toolbar',
+          //   event_label: 'store',
+          //   value: route.name,
+          // })
+        },
       }
     },
   })

@@ -11,7 +11,7 @@ import { VField } from '@/components/VField'
 import Intersect from '@/directives/intersect'
 
 // Composables
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -293,7 +293,7 @@ export const VTextarea = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, textareaRef)
+    return forwardRefs({}, vInputRef, vFieldRef, textareaRef)
   },
 })
 

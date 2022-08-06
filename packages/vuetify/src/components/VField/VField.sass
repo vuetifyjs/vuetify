@@ -103,6 +103,12 @@
   input
     letter-spacing: inherit
 
+  @at-root
+    & input::placeholder,
+    textarea#{&}::placeholder
+      color: currentColor
+      opacity: var(--v-disabled-opacity)
+
   &:focus,
   &:active
     outline: none

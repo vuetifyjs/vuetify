@@ -30,13 +30,16 @@ First, use npm/yarn to create your Vite project:
 
 ```bash
 # npm 6.x
-npm init @vitejs/app my-vuetify-app --template vue
+npm create vite@latest my-vue-app --template vue
 
 # npm 7+, extra double-dash is needed:
-npm init @vitejs/app my-vuetify-app -- --template vue
+npm create vite@latest my-vue-app -- --template vue
 
 # yarn
-yarn create @vitejs/app my-vuetify-app --template vue
+yarn create vite my-vue-app --template vue
+
+# pnpm
+pnpm create vite my-vue-app -- --template vue
 ```
 
 <alert type="info">
