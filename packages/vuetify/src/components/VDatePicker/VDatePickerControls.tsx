@@ -3,7 +3,7 @@ import './VDatePickerControls.sass'
 
 // Components
 import { VSpacer } from '../VGrid'
-import { VBtn } from '../VBtn'
+import { VIcon } from '../VIcon'
 
 // Composables
 import { useDatePicker } from './composables'
@@ -48,18 +48,14 @@ export const VDatePickerControls = defineComponent({
 
     useRender(() => {
       const prevBtn = (
-        <VBtn
-          size="x-small"
-          variant="plain"
+        <VIcon
           icon={ props.prevIcon }
           onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, -1) }
         />
       )
 
       const nextBtn = (
-        <VBtn
-          size="x-small"
-          variant="plain"
+        <VIcon
           icon={ props.nextIcon }
           onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, 1) }
         />
@@ -70,10 +66,8 @@ export const VDatePickerControls = defineComponent({
           { mode.value === 'month' && props.range === 'start' && prevBtn }
           { !!props.range && <VSpacer key="range-spacer" /> }
           <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
-          <VBtn
+          <VIcon
             key="expand-btn"
-            size="x-small"
-            variant="plain"
             icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
             onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
           />

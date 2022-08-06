@@ -100,7 +100,6 @@ export const VDateField = defineComponent({
               activator,
               default: ({ isActive }) => (
                 <VDateCard
-                  width="328"
                   modelValue={ model.value }
                   onUpdate:modelValue={(value: any) => {
                     isActive.value = false

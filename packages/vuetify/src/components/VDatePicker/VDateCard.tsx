@@ -1,3 +1,4 @@
+import './VDateCard.sass'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { defineComponent, useRender } from '@/util'
 import type { PropType } from 'vue'
@@ -30,30 +31,24 @@ export const VDateCard = defineComponent({
     range: Boolean,
   },
 
-  setup (props) {
-    const { mode } = createDatePicker(props)
+  emits: {
+    'update:modelValue': (value: any) => true,
+  },
+
+  setup (props, { emit }) {
+    const { mode, displayDate } = createDatePicker(props)
     useRender(() => (
       <VCard
         class="v-date-card"
       >
-        <VDatePickerControls
-          showPrevNextButtons
-        />
+        <VDatePickerControls />
         <MaybeTransition transition={ props.transition } mode="out-in">
           { mode.value === 'month' ? (
             <div class="v-date-card__month">
               <VDatePickerMonth
+                v-model:displayDate={ displayDate.value }
                 locale={ props.locale }
               />
-              { props.range && (
-                <>
-                  <VDivider vertical />
-                  <VDatePickerMonth
-                    height="350"
-                    locale={ props.locale }
-                  />
-                </>
-              ) }
             </div>
           ) : (
             <VDatePickerYears

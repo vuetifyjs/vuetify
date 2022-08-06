@@ -33,7 +33,7 @@ export const VDateRangeCard = defineComponent({
   },
 
   setup (props) {
-    const { mode } = createDatePicker(props, true)
+    const { mode, displayDate, adapter } = createDatePicker(props, true)
 
     useRender(() => (
       <VCard
@@ -44,6 +44,7 @@ export const VDateRangeCard = defineComponent({
             <div class="v-date-range-card__start">
               <VDatePickerControls range="start" />
               <VDatePickerMonth
+                displayDate={ displayDate.value }
                 locale={ props.locale }
                 range="start"
               />
@@ -52,6 +53,7 @@ export const VDateRangeCard = defineComponent({
             <div class="v-date-range-card__end">
               <VDatePickerControls range="end" />
               <VDatePickerMonth
+                displayDate={ adapter.value.addMonths(displayDate.value, 1) }
                 locale={ props.locale }
                 range="end"
               />

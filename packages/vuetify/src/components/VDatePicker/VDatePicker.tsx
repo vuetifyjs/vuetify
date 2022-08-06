@@ -62,7 +62,6 @@ export const VDatePicker = defineComponent({
     useRender(() => (
       <VPicker
         class="v-date-picker"
-        width="328"
         v-slots={{
           header: () => (
             <VDatePickerHeader

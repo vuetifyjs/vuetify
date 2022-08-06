@@ -57,7 +57,7 @@
     // ensure that default
     // v-icon size is 24px
     &.v-btn--size-default
-      font-size: $button-icon-font-size
+      --v-btn-size: #{$button-icon-font-size}
 
     @at-root &
       @include button-density(('width', 'height'), $button-icon-density)
