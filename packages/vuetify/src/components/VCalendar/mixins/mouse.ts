@@ -24,11 +24,12 @@ export default Vue.extend({
 
   methods: {
     getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
-      const listeners = Object.fromEntries(
-        Object.keys(this.$listeners)
-          .filter(key => key.endsWith(suffix))
-          .map(key => [key, { event: key.slice(0, -suffix.length) }])
-      )
+      const listeners = Object.keys(this.$listeners)
+        .filter(key => key.endsWith(suffix))
+        .reduce((acc, key) => {
+          acc[key] = { event: key.slice(0, -suffix.length) }
+          return acc
+        }, {} as MouseEvents)
 
       return this.getMouseEventHandlers({
         ...listeners,
