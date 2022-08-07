@@ -216,6 +216,9 @@ export const VInfiniteScroll = defineComponent({
           ]}
           style={ dimensionStyles.value }
         >
+          <div class="v-infinite-scroll__side">
+            { renderSide('start', startStatus.value) }
+          </div>
           { rootEl.value && hasStartIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="start"
@@ -225,13 +228,7 @@ export const VInfiniteScroll = defineComponent({
               rootMargin={ margin.value }
             />
           ) }
-          <div class="v-infinite-scroll__side">
-            { renderSide('start', startStatus.value) }
-          </div>
           { slots.default?.() }
-          <div class="v-infinite-scroll__side">
-            { renderSide('end', endStatus.value) }
-          </div>
           { rootEl.value && hasEndIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="end"
@@ -241,6 +238,9 @@ export const VInfiniteScroll = defineComponent({
               rootMargin={ margin.value }
             />
           ) }
+          <div class="v-infinite-scroll__side">
+            { renderSide('end', endStatus.value) }
+          </div>
         </div>
       )
     })
