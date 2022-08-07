@@ -89,4 +89,12 @@ You can customize the empty message with the **empty** slot.
 
 <example file="v-infinite-scroll/slot-empty" />
 
+### Misc
+
+#### Virtualized infinite scroller
+
+If the items in your infinite list are of a uniform size, you can quite easily virtualize the list to only render a small amount of items regardless of how far you scroll in either direction.
+
+<example file="v-infinite-scroll/misc-virtual" />
+
 <backmatter />
