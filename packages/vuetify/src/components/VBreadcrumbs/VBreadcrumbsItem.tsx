@@ -16,7 +16,7 @@ export const VBreadcrumbsItem = defineComponent({
     activeColor: String,
     color: String,
     disabled: Boolean,
-    text: String,
+    title: String,
 
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
@@ -31,7 +31,6 @@ export const VBreadcrumbsItem = defineComponent({
 
     useRender(() => {
       const Tag = link.isLink.value ? 'a' : props.tag
-      const hasText = !!(slots.default || props.text)
 
       return (
         <Tag
@@ -51,10 +50,9 @@ export const VBreadcrumbsItem = defineComponent({
           href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }
           onClick={ link.navigate }
-          v-slots={{
-            default: hasText ? () => slots.default?.() ?? props.text : undefined,
-          }}
-        />
+        >
+          { slots.default?.() ?? props.title }
+        </Tag>
       )
     })
 

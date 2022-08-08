@@ -1,5 +1,6 @@
 @use '../../styles/settings';
 
+// VProgressLinear
 $progress-linear-background: currentColor !default;
 $progress-linear-background-background: $progress-linear-background !default;
 $progress-linear-background-opacity: var(--v-border-opacity) !default;

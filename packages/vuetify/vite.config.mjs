@@ -17,12 +17,12 @@ export default defineConfig(({ mode }) => {
   return {
     root: resolve('dev'),
     server: {
-      port: process.env.PORT,
-      strictPort: !!process.env.PORT,
+      port: process.env.CYPRESS ? undefined : process.env.PORT,
+      strictPort: !!process.env.PORT && !process.env.CYPRESS,
     },
     resolve: {
       alias: [
-        { find: /^vuetify$/, replacement: resolve('./src/entry-bundler.ts') },
+        { find: /^vuetify$/, replacement: resolve('./src/framework.ts') },
         { find: /^vuetify\/(.*)/, replacement: resolve('./$1') },
         { find: /^@\/(.*)/, replacement: resolve('./src/$1')}
       ]

@@ -29,8 +29,8 @@
           md="3"
         >
           <v-text-field
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
           ></v-text-field>
         </v-col>
 
@@ -40,8 +40,8 @@
           md="3"
         >
           <v-text-field
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             placeholder="Placeholder"
           ></v-text-field>
         </v-col>

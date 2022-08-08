@@ -2,12 +2,12 @@
 import './VApp.sass'
 
 // Composables
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { createLayout, makeLayoutProps } from '@/composables/layout'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
-import { useRtl } from '@/composables/rtl'
 
 export const VApp = defineComponent({
   name: 'VApp',
@@ -32,7 +32,6 @@ export const VApp = defineComponent({
           rtlClasses.value,
         ]}
         style={ layoutStyles.value }
-        data-app="true"
       >
         <div class="v-application__wrap">
           { slots.default?.() }

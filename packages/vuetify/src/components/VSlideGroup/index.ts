@@ -1,2 +1,2 @@
-export * from './VSlideGroup'
-export * from './VSlideGroupItem'
+export { VSlideGroup } from './VSlideGroup'
+export { VSlideGroupItem } from './VSlideGroupItem'

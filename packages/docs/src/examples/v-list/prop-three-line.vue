@@ -1,13 +1,10 @@
 <template>
   <v-card
-    max-width="450"
     class="mx-auto"
+    max-width="450"
   >
-    <v-toolbar
-      color="cyan"
-      dark
-    >
-      <v-app-bar-nav-icon variant="text"></v-app-bar-nav-icon>
+    <v-toolbar color="cyan-lighten-1">
+      <v-btn variant="text" icon="mdi-menu"></v-btn>
 
       <v-toolbar-title>Inbox</v-toolbar-title>
 
@@ -16,7 +13,11 @@
       <v-btn variant="text" icon="mdi-magnify"></v-btn>
     </v-toolbar>
 
-    <v-list lines="three" :items="items" item-props>
+    <v-list
+      :items="items"
+      item-props
+      lines="three"
+    >
       <template v-slot:subtitle="{ subtitle }">
         <div v-html="subtitle"></div>
       </template>

@@ -97,6 +97,7 @@ export const VCol = defineComponent({
       default: null,
       validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
     },
+
     ...makeTagProps(),
   },
 

@@ -37,7 +37,7 @@
             density="compact"
             label="Compact"
             placeholder="Compact"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
         </v-col>
 

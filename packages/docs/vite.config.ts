@@ -11,6 +11,7 @@ import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
+import Vuetify from 'vite-plugin-vuetify'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
@@ -25,7 +26,7 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ mode }) => {
+export default defineConfig(({ command, mode }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   return {
@@ -160,6 +161,11 @@ export default defineConfig(({ mode }) => {
             },
           },
         },
+      }),
+
+      Vuetify({
+        autoImport: false,
+        styles: command === 'serve' || mode === 'development' ? 'sass' : true,
       }),
 
       // https://github.com/intlify/bundle-tools/tree/main/packages/vite-plugin-vue-i18n

@@ -9,12 +9,12 @@ import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { toRef } from 'vue'
 import { defineComponent } from '@/util'
+import { toRef } from 'vue'
 
 export const VSheet = defineComponent({
   name: 'VSheet',

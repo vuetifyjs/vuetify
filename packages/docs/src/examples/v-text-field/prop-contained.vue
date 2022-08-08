@@ -9,7 +9,7 @@
           <v-text-field
             v-model="first"
             label="First Name"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
         </v-col>
 
@@ -20,7 +20,7 @@
           <v-text-field
             v-model="last"
             label="Last Name"
-            variant="contained"
+            variant="solo"
           ></v-text-field>
         </v-col>
       </v-row>

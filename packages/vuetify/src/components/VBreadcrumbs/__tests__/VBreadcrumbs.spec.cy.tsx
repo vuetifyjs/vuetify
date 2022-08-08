@@ -12,7 +12,7 @@ describe('VBreadcrumbs', () => {
       <Application>
         <VBreadcrumbs items={ ['hello', 'world']}>
           {{
-            text: ({ item }: any) => `${item}!`,
+            title: ({ item }: any) => `${item}!`,
           }}
         </VBreadcrumbs>
       </Application>
@@ -42,7 +42,7 @@ describe('VBreadcrumbs', () => {
       </Application>
     ))
 
-    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home')
+    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home').should('have.length', 1)
   })
 
   it('should use bg-color', () => {

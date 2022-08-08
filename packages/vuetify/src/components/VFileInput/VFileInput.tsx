@@ -3,15 +3,16 @@ import './VFileInput.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
-import { useForwardRef } from '@/composables/forwardRef'
+import { IconValue } from '@/composables/icons'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
@@ -19,7 +20,6 @@ import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wr
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 export const VFileInput = defineComponent({
   name: 'VFileInput',
@@ -136,6 +136,7 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -221,15 +222,21 @@ export const VFileInput = defineComponent({
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ !!model.value.length }
-                  value={ counterValue.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ !!model.value.length }
+                      value={ counterValue.value }
+                      v-slots={ slots.counter }
+                    />
+                  </>
+                ) }
               </>
             ) : undefined,
           }}
@@ -237,7 +244,7 @@ export const VFileInput = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

@@ -1,23 +1,28 @@
 @use '../../styles/tools';
 
-// Defaults
+// VTimeline
 $timeline-density-comfortable-grid-template-end: min-content min-content auto !default;
 $timeline-density-comfortable-grid-template-start: auto min-content min-content !default;
 $timeline-density-compact-grid-template-end: min-content auto !default;
 $timeline-density-compact-grid-template-start: auto min-content !default;
+$timeline-dot-border-radius: 50% !default;
+$timeline-dot-divider-background: rgb(var(--v-theme-on-surface-variant)) !default;
+$timeline-dot-size: 38px !default;
+$timeline-inner-dot-divider-background: rgb(var(--v-theme-on-surface)) !default;
+$timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
+$timeline-inset-line-size: 4px !default;
+
+// VTimelineDivider
 $timeline-divider-dot-elevation: 0 !default;
 $timeline-divider-line-background: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $timeline-divider-line-horizontal-width: var(--v-timeline-line-inset, 0px) !default;
 $timeline-divider-line-thickness: var(--v-timeline-line-thickness) !default;
-$timeline-dot-border-radius: 50% !default;
-$timeline-dot-divider-background: rgb(var(--v-theme-on-surface-variant)) !default;
-$timeline-inner-dot-divider-background: rgb(var(--v-theme-on-surface)) !default;
-$timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
-$timeline-inset-line-size: 4px !default;
+
+// VTimelineItem
 $timeline-item-grid-template: auto min-content auto !default;
 $timeline-item-padding: 24px !default;
-$timeline-dot-size: 38px !default;
 
+// Lists
 $timeline-dot-border-sizes: () !default;
 $timeline-dot-border-sizes: tools.map-deep-merge(
   (

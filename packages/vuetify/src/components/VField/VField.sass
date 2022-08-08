@@ -37,14 +37,13 @@
   &--appended
     padding-inline-end: $field-control-affixed-padding
 
-  &--variant-contained
-    background: $field-control-contained-background
+  &--variant-solo
+    background: $field-control-solo-background
     border-color: transparent
-    color: $field-control-contained-color
+    color: $field-control-solo-color
 
-    @include tools.elevation($field-control-contained-elevation)
+    @include tools.elevation($field-control-solo-elevation)
 
-  &--variant-contained,
   &--variant-filled
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
@@ -69,7 +68,7 @@
   &--appended
     --v-field-padding-end: #{$field-control-affixed-inner-padding}
 
-  &--variant-contained,
+  &--variant-solo,
   &--variant-filled
     $root: &
 
@@ -90,7 +89,6 @@
 /* endregion */
 /* region ELEMENTS */
 .v-field__input
-  align-self: stretch
   color: inherit
   display: flex
   flex-wrap: wrap
@@ -105,6 +103,12 @@
 
   input
     letter-spacing: inherit
+
+  @at-root
+    & input::placeholder,
+    textarea#{&}::placeholder
+      color: currentColor
+      opacity: var(--v-disabled-opacity)
 
   &:focus,
   &:active
@@ -211,7 +215,7 @@
     .v-field.v-field--active &
       visibility: visible
 
-    .v-field--variant-contained &,
+    .v-field--variant-solo &,
     .v-field--variant-filled &
       $root: &
 

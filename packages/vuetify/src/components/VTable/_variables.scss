@@ -3,6 +3,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
+// VTable
 $table-background: rgb(var(--v-theme-surface)) !default;
 $table-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $table-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
@@ -15,6 +16,7 @@ $table-border: thin solid $table-border-color !default;
 $table-hover-color: rgba(var(--v-border-color), var(--v-hover-opacity)) !default;
 $table-line-height: 1.5 !default;
 
+// Lists
 $table-theme: (
   $table-background,
   $table-color,

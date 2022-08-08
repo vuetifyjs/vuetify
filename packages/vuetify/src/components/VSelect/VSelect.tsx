@@ -13,7 +13,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
@@ -82,6 +82,7 @@ export const VSelect = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   }
   $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
     'no-data': []
@@ -207,21 +208,27 @@ export const VSelect = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { items.value.map(item => slots.item?.({
+                    { slots['prepend-item']?.() }
+
+                    { items.value.map((item, index) => slots.item?.({
                       item,
+                      index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
                     }) ?? (
                       <VListItem
+                        key={ index }
                         { ...item.props }
                         onClick={ () => select(item) }
                       >
                         {{
-                          prepend: ({ isSelected }) => props.multiple ? (
+                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
                             <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                           ) : undefined,
                         }}
                       </VListItem>
                     )) }
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 
@@ -239,7 +246,7 @@ export const VSelect = genericComponent<new <
                   }
 
                   return (
-                    <div class="v-select__selection">
+                    <div key={ index } class="v-select__selection">
                       { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
@@ -251,7 +258,7 @@ export const VSelect = genericComponent<new <
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item, index })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
@@ -277,7 +284,7 @@ export const VSelect = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       menu,
       select,
     }, vTextFieldRef)

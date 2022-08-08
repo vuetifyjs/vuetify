@@ -1,21 +1,14 @@
 <template>
-  <div>
-    <v-card
-      class="d-flex align-content-end flex-wrap"
-      color="grey lighten-2"
-      flat
-      tile
-      min-height="200"
+  <v-sheet
+    class="d-flex align-content-end flex-wrap bg-surface-variant"
+    min-height="200"
+  >
+    <v-sheet
+      v-for="n in 20"
+      :key="n"
+      class="ma-2 pa-2"
     >
-      <v-card
-        v-for="n in 20"
-        :key="n"
-        class="pa-2"
-        outlined
-        tile
-      >
-        Flex item
-      </v-card>
-    </v-card>
-  </div>
+      Flex item
+    </v-sheet>
+  </v-sheet>
 </template>

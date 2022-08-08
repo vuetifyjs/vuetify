@@ -27,8 +27,8 @@ export function nullifyTransforms (el: HTMLElement): Box {
     const to = style.transformOrigin
     const x = rect.x - dx - (1 - sx) * parseFloat(to)
     const y = rect.y - dy - (1 - sy) * parseFloat(to.slice(to.indexOf(' ') + 1))
-    const w = sx ? rect.width / sx : el.offsetWidth
-    const h = sy ? rect.height / sy : el.offsetHeight
+    const w = sx ? rect.width / sx : el.offsetWidth + 1
+    const h = sy ? rect.height / sy : el.offsetHeight + 1
 
     return new Box({ x, y, width: w, height: h })
   } else {

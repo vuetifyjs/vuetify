@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Table component
+  title: Table
   description: The table component is a lightweight wrapper around the table element that provides a Material Design feel without all the baggage.
   keywords: table, simple table, vuetify table component, vue simple table component, table component
 nav: 'Tables'
@@ -14,11 +14,15 @@ related:
 
 The `v-table` component is a simple wrapper component around the `<table>` element. Inside the component you can use all the regular table elements such as `<thead>`, `<tbody>`, `<tr>`, etc.
 
-<entry />
+![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png)
+
+---
 
 ## Usage
 
 <example file="v-table/usage" />
+
+<entry />
 
 ## API
 

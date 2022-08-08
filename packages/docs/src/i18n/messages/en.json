@@ -86,6 +86,7 @@
   "email-address": "Email address",
   "extra-large": "Extra large",
   "extra-small": "Extra small",
+  "feature-guides": "Feature guides",
   "features": "Features",
   "file-a-bug-report": "File a bug report",
   "focus": "Focus",
@@ -161,6 +162,7 @@
   "released-under-the": "Released under the {0}",
   "resources-and-tools": "Resources and tools",
   "resources": "Resources",
+  "roadmap": "Roadmap",
   "rtl": "RTL",
   "scroll-to-top": "Scroll to top",
   "search": {

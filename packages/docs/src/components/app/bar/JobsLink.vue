@@ -1,20 +1,19 @@
 <template>
   <app-tooltip-btn
-    to="/resources/jobs-for-vue/"
     class="jobs-link"
     path="jobs"
     @click="onClick"
   >
     <template #icon>
       <v-badge
-        :value="newJobs.length"
+        :model-value="newJobs.length > 0"
         color="#ED561B"
         dot
         location="top-end"
       >
         <v-icon
+          :icon="icon"
           class="mx-1"
-          icon="mdi-briefcase-variant-outline"
         />
       </v-badge>
     </template>
@@ -22,46 +21,38 @@
 </template>
 
 <script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
-  // import { call, get } from 'vuex-pathify'
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
+
+  // Composables
+  import { useRoute } from 'vue-router'
+
+  // Utilities
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'JobsLink',
 
     components: { AppTooltipBtn },
 
-    // computed: {
-    //   name: get('route/name'),
-    //   newJobs: get('jobs/newJobs'),
-    //   page: get('route/params@page'),
-    //   icon () {
-    //     return this.page === 'jobs-for-vue'
-    //       ? '$mdiBriefcaseVariant'
-    //       : '$mdiBriefcaseVariantOutline'
-    //   },
-    // },
-
-    // async mounted () {
-    //   this.fetch()
-    // },
-
-    // methods: {
-    //   fetch: call('jobs/fetch'),
-    // },
-
     setup () {
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'jobs',
-        //   value: route.name,
-        // })
-      }
+      const { path } = useRoute()
+
+      const icon = computed(() => {
+        return path.match('vue-jobs')
+          ? 'mdi-briefcase-variant'
+          : 'mdi-briefcase-variant-outline'
+      })
 
       return {
-        onClick,
+        icon,
+        onClick () {
+          // this.$gtag.event('click', {
+          //   event_category: 'toolbar',
+          //   event_label: 'jobs',
+          //   value: route.name,
+          // })
+        },
         newJobs: [],
       }
     },

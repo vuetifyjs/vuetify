@@ -1,3 +1,4 @@
+// VProgressCircular
 $progress-circular-intermediate-svg-transition: all 0.2s ease-in-out !default;
 $progress-circular-overlay-transition: all 0.2s ease-in-out, stroke-width 0s !default;
 $progress-circular-rotate-animation: progress-circular-rotate 1.4s linear infinite !default;
@@ -5,6 +6,7 @@ $progress-circular-rotate-dash: progress-circular-dash 1.4s ease-in-out infinite
 $progress-circular-size: 32px !default;
 $progress-circular-underlay-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 
+// Lists
 $progress-circular-sizes: (
   'x-small': -2,
   'small': -1,

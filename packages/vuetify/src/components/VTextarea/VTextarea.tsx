@@ -7,12 +7,12 @@ import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/V
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
-// Composables
-import { useForwardRef } from '@/composables/forwardRef'
-import { useProxiedModel } from '@/composables/proxiedModel'
-
 // Directives
 import Intersect from '@/directives/intersect'
+
+// Composables
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
@@ -128,6 +128,9 @@ export const VTextarea = defineComponent({
         emit('click:clear', e)
       })
     }
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLTextAreaElement).value
+    }
 
     const sizerRef = ref<HTMLTextAreaElement>()
     function calculateInputHeight () {
@@ -174,6 +177,7 @@ export const VTextarea = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -230,7 +234,8 @@ export const VTextarea = defineComponent({
                       <textarea
                         ref={ textareaRef }
                         class={ fieldClass }
-                        v-model={ model.value }
+                        value={ model.value }
+                        onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
@@ -269,16 +274,22 @@ export const VTextarea = defineComponent({
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ props.persistentCounter || isFocused.value }
-                  value={ counterValue.value }
-                  max={ max.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ props.persistentCounter || isFocused.value }
+                      value={ counterValue.value }
+                      max={ max.value }
+                      v-slots={ slots.counter }
+                    />
+                  </>
+                ) }
               </>
             ) : undefined,
           }}
@@ -286,7 +297,7 @@ export const VTextarea = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, textareaRef)
+    return forwardRefs({}, vInputRef, vFieldRef, textareaRef)
   },
 })
 

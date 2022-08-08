@@ -1,5 +1,5 @@
 {
   "props": {
-    "variant": "Applies one of 6 styles, **contained** (default), **contained-flat**, **contained-text**, **outlined**, **plain**, and **text**."
+    "variant": "Applies one of 6 styles: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**."
   }
 }

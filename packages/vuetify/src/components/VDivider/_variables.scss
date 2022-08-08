@@ -1,6 +1,6 @@
 @use '../../styles/settings';
 
-// Defaults
+// VDivider
 $divider-border-color: settings.$border-color-root !default;
 $divider-border-style: settings.$border-style-root !default;
 $divider-border-width: thin 0 0 0 !default;
@@ -14,6 +14,8 @@ $divider-vertical-inset-margin-top: $divider-margin !default;
 $divider-vertical-inset-max-height: calc(100% - #{$divider-margin * 2}) !default;
 $divider-vertical-margin-left: -1px !default;
 
+
+// Lists
 $divider-border: (
   $divider-border-color,
   $divider-border-style,

@@ -11,8 +11,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/rtl'
 
 // Utilities
-import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 export const VProgressLinear = defineComponent({
   name: 'VProgressLinear',
@@ -88,7 +88,7 @@ export const VProgressLinear = defineComponent({
       progress.value = Math.round(value / width * max.value)
     }
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ intersectionRef }
         class={[
@@ -115,6 +115,7 @@ export const VProgressLinear = defineComponent({
       >
         { props.stream && (
           <div
+            key="stream"
             class={[
               'v-progress-linear__stream',
               textColorClasses.value,
@@ -180,6 +181,8 @@ export const VProgressLinear = defineComponent({
           </div>
         ) }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })

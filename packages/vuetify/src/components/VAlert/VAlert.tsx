@@ -80,7 +80,7 @@ export const VAlert = defineComponent({
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-flat' } as const),
+    ...makeVariantProps({ variant: 'flat' } as const),
   },
 
   emits: {
@@ -150,6 +150,7 @@ export const VAlert = defineComponent({
 
           { props.border && (
             <div
+              key="border"
               class={[
                 'v-alert__border',
                 textColorClasses.value,
@@ -160,6 +161,7 @@ export const VAlert = defineComponent({
 
           { hasPrepend && (
             <VDefaultsProvider
+              key="prepend"
               defaults={{
                 VIcon: {
                   density: props.density,
@@ -179,7 +181,7 @@ export const VAlert = defineComponent({
 
           <div class="v-alert__content">
             { hasTitle && (
-              <VAlertTitle>
+              <VAlertTitle key="title">
                 { slots.title ? slots.title() : props.title }
               </VAlertTitle>
             ) }
@@ -192,13 +194,14 @@ export const VAlert = defineComponent({
           </div>
 
           { slots.append && (
-            <div class="v-alert__append">
+            <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
           ) }
 
           { hasClose && (
             <VDefaultsProvider
+              key="close"
               defaults={{
                 VIcon: {
                   icon: props.closeIcon,

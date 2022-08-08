@@ -1,3 +1,4 @@
+// Styles
 import './VLocaleProvider.sass'
 
 // Composables
@@ -5,7 +6,7 @@ import { provideLocale } from '@/composables/locale'
 import { provideRtl } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VLocaleProvider = defineComponent({
   name: 'VLocaleProvider',
@@ -24,7 +25,7 @@ export const VLocaleProvider = defineComponent({
     const localeInstance = provideLocale(props)
     const { rtlClasses } = provideRtl(props, localeInstance)
 
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-locale-provider',
@@ -33,6 +34,8 @@ export const VLocaleProvider = defineComponent({
       >
         { slots.default?.() }
       </div>
-    )
+    ))
+
+    return {}
   },
 })

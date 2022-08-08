@@ -13,7 +13,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VFooter = defineComponent({
   name: 'VFooter',
@@ -57,7 +57,7 @@ export const VFooter = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ resizeRef }
         class={[
@@ -74,6 +74,8 @@ export const VFooter = defineComponent({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })

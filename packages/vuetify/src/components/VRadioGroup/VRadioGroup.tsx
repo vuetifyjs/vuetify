@@ -2,10 +2,10 @@
 import './VRadioGroup.sass'
 
 // Components
+import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
-import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { IconValue } from '@/composables/icons'

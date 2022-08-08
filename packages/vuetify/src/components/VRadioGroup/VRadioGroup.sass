@@ -1,9 +1,11 @@
+@use './variables' as *
+
 .v-radio-group
   grid-template-areas: "prepend label append" ". control ." "a messages b"
 
   > .v-label
-    grid-area: label
-    margin-inline-start: 12px
+    grid-area: $radio-group-label-grid-area
+    margin-inline-start: $radio-group-label-margin-inline-start
 
     + .v-selection-control-group
-      margin-top: 16px
+      margin-top: $radio-group-label-selection-group-margin-top

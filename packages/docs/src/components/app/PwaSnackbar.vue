@@ -19,7 +19,7 @@
         />
       </v-btn>
       <app-btn
-        variant="contained"
+        variant="flat"
         color="primary"
         @click="pwa.update"
       >

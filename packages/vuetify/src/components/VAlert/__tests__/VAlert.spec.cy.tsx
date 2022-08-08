@@ -39,7 +39,7 @@ describe('VAlert', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories, props, component: VAlert })
   })
 })

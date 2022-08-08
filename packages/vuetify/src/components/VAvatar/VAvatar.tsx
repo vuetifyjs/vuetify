@@ -59,7 +59,6 @@ export const VAvatar = defineComponent({
           sizeStyles.value,
         ]}
       >
-
         { props.image
           ? (<VImg src={ props.image } alt="" />)
           : props.icon

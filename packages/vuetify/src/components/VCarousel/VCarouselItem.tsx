@@ -17,10 +17,7 @@ export const VCarouselItem = defineComponent({
   setup (props, { slots, attrs }) {
     useRender(() => (
       <VWindowItem class="v-carousel-item" value={ props.value }>
-        <VImg
-          { ...attrs }
-          v-slots={ slots }
-        />
+        <VImg { ...attrs } v-slots={ slots } />
       </VWindowItem>
     ))
   },

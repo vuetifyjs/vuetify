@@ -93,6 +93,7 @@ export const VRow = defineComponent({
       default: null,
       validator: alignContentValidator,
     },
+
     ...alignContentProps,
     ...makeTagProps(),
   },

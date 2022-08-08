@@ -1,16 +1,17 @@
 <template>
   <v-btn
     :icon="smAndDown"
-    class="text--secondary px-0 px-md-2"
+    class="px-0 px-md-2 font-weight-regular"
     variant="text"
   >
     <v-icon icon="mdi-translate" />
+
     <chevron-down />
 
     <app-menu
       key="language-menu"
-      activator="parent"
       :items="items"
+      activator="parent"
     >
       <template #item="{ item }">
         <v-list-item
@@ -26,18 +27,21 @@
 </template>
 
 <script lang="ts">
+  // Components
+  import AppMenu from '@/components/app/menu/Menu.vue'
+  import ChevronDown from '@/components/icons/ChevronDown.vue'
+
+  // Composables
+  import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
+  import { useLocaleStore } from '@/store/locale'
+  import { useRoute, useRouter } from 'vue-router'
+
   // Utilities
   import { computed, defineComponent } from 'vue'
-  import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify'
-  import { useRoute, useRouter } from 'vue-router'
 
   // Language
   import locales from '@/i18n/locales.json'
-  import { useLocaleStore } from '@/store/locale'
-
-  import AppMenu from '@/components/app/menu/Menu.vue'
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
 
   export default defineComponent({
     name: 'LanguageMenu',

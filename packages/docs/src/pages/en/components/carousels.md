@@ -14,13 +14,17 @@ related:
 
 The `v-carousel` component is used to display large numbers of visual content on a rotating timer.
 
-<entry />
+![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png)
+
+---
 
 ## Usage
 
 The `v-carousel` component expands upon `v-window` by providing additional features targeted at displaying images.
 
 <example file="v-carousel/usage" />
+
+<entry />
 
 ## API
 

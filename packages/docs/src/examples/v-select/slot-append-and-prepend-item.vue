@@ -8,54 +8,34 @@
     >
       <template v-slot:prepend-item>
         <v-list-item
-          ripple
+          title="Select All"
           @click="toggle"
         >
-          <v-list-item-action>
-            <v-icon :color="selectedFruits.length > 0 ? 'indigo darken-4' : ''">
-              {{ icon }}
-            </v-icon>
-          </v-list-item-action>
-          <v-list-item-content>
-            <v-list-item-title>
-              Select All
-            </v-list-item-title>
-          </v-list-item-content>
+          <template v-slot:prepend>
+            <v-checkbox-btn
+              :color="likesSomeFruit ? 'indigo-darken-4' : undefined"
+              :indeterminate="likesSomeFruit && !likesAllFruit"
+              :model-value="likesSomeFruit"
+            ></v-checkbox-btn>
+          </template>
         </v-list-item>
+
         <v-divider class="mt-2"></v-divider>
       </template>
+
       <template v-slot:append-item>
         <v-divider class="mb-2"></v-divider>
-        <v-list-item disabled>
-          <v-list-item-avatar color="grey lighten-3">
-            <v-icon>
+
+        <v-list-item
+          :subtitle="subtitle"
+          :title="title"
+          disabled
+        >
+          <template v-slot:prepend>
+            <v-avatar icon="mdi-food-apple" color="primary">
               mdi-food-apple
-            </v-icon>
-          </v-list-item-avatar>
-
-          <v-list-item-content v-if="likesAllFruit">
-            <v-list-item-title>
-              Holy smokes, someone call the fruit police!
-            </v-list-item-title>
-          </v-list-item-content>
-
-          <v-list-item-content v-else-if="likesSomeFruit">
-            <v-list-item-title>
-              Fruit Count
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              {{ selectedFruits.length }}
-            </v-list-item-subtitle>
-          </v-list-item-content>
-
-          <v-list-item-content v-else>
-            <v-list-item-title>
-              How could you not like fruit?
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              Go ahead, make a selection above!
-            </v-list-item-subtitle>
-          </v-list-item-content>
+            </v-avatar>
+          </template>
         </v-list-item>
       </template>
     </v-select>
@@ -121,24 +101,31 @@
         return this.selectedFruits.length === this.fruits.length
       },
       likesSomeFruit () {
-        return this.selectedFruits.length > 0 && !this.likesAllFruit
+        return this.selectedFruits.length > 0
       },
-      icon () {
-        if (this.likesAllFruit) return 'mdi-close-box'
-        if (this.likesSomeFruit) return 'mdi-minus-box'
-        return 'mdi-checkbox-blank-outline'
+      title () {
+        if (this.likesAllFruit) return 'Holy smokes, someone call the fruit police!'
+
+        if (this.likesSomeFruit) return 'Fruit Count'
+
+        return 'How could you not like fruit?'
+      },
+      subtitle () {
+        if (this.likesAllFruit) return undefined
+
+        if (this.likesSomeFruit) return this.selectedFruits.length
+
+        return 'Go ahead, make a selection above!'
       },
     },
 
     methods: {
       toggle () {
-        this.$nextTick(() => {
-          if (this.likesAllFruit) {
-            this.selectedFruits = []
-          } else {
-            this.selectedFruits = this.fruits.slice()
-          }
-        })
+        if (this.likesAllFruit) {
+          this.selectedFruits = []
+        } else {
+          this.selectedFruits = this.fruits.slice()
+        }
       },
     },
   }

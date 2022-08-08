@@ -14,7 +14,7 @@ import { VTextField } from '@/components/VTextField'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { transformItem, useItems } from '@/composables/items'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
@@ -24,12 +24,12 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
-import type { VFieldSlots } from '@/components/VField/VField'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
+import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 function highlightResult (text: string, matches: FilterMatch, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
@@ -70,6 +70,7 @@ export const VCombobox = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   }
   $slots: VInputSlots & VFieldSlots & MakeSlots<{
+    item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
     'no-data': []
@@ -116,16 +117,11 @@ export const VCombobox = genericComponent<new <
     const _search = ref('')
     const search = computed<string>({
       get: () => {
-        if (props.multiple) return _search.value
-
-        const item = items.value.find(item => item.value === model.value[0]?.value)
-
-        return item?.value
+        return _search.value
       },
       set: val => {
-        if (props.multiple) {
-          _search.value = val
-        } else {
+        _search.value = val
+        if (!props.multiple) {
           model.value = [transformItem(props, val)]
         }
 
@@ -333,16 +329,18 @@ export const VCombobox = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
-                    { filteredItems.value.map(({ item, matches }) => slots.item?.({
+                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
+                      index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
                     }) ?? (
                       <VListItem
+                        key={ index }
                         { ...item.props }
                         onClick={ () => select(item) }
                       >
                         {{
-                          prepend: ({ isSelected }) => props.multiple ? (
+                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
                             <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                           ) : undefined,
                           title: () => {
@@ -371,6 +369,7 @@ export const VCombobox = genericComponent<new <
 
                   return (
                     <div
+                      key={ index }
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [
@@ -391,7 +390,7 @@ export const VCombobox = genericComponent<new <
                           }}
                         >
                           { slots.chip
-                            ? slots.chip({ props: slotProps, item, index })
+                            ? slots.chip({ item, index, props: slotProps })
                             : (<VChip { ...slotProps } />)
                           }
                         </VDefaultsProvider>
@@ -419,7 +418,7 @@ export const VCombobox = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       isFocused,
       isPristine,
       menu,

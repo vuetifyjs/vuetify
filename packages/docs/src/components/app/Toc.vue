@@ -51,7 +51,7 @@
       <v-container>
         <v-card
           :color="dark ? undefined : 'grey-lighten-5'"
-          variant="contained-flat"
+          variant="flat"
         >
 
           <v-container class="pa-2">

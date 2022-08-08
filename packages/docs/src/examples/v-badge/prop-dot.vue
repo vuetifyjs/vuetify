@@ -24,7 +24,7 @@
 
     <v-btn
       stacked
-      variant="contained-text"
+      variant="tonal"
     >
       <v-icon icon="mdi-login"></v-icon>
 

@@ -1,13 +1,13 @@
 // Components
-import { VIcon } from '@/components/VIcon'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
-
-// Composables
-import { useBackgroundColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
+import { VIcon } from '@/components/VIcon'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
+
+// Composables
+import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
@@ -72,17 +72,17 @@ export const VExpansionPanelTitle = defineComponent({
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
         v-ripple={ props.ripple }
       >
-        <div class="v-expansion-panel-title__overlay" />
+        <span class="v-expansion-panel-title__overlay" />
 
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <div class="v-expansion-panel-title__icon">
+          <span class="v-expansion-panel-title__icon">
             {
               slots.actions ? slots.actions(slotProps.value)
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
-          </div>
+          </span>
         ) }
       </button>
     ))

@@ -14,13 +14,17 @@ related:
 
 The `v-toolbar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).
 
-<entry />
+![Toolbar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-toolbar/v-toolbar-entry.png)
+
+---
 
 ## Usage
 
 A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height.
 
-<!-- <usage name="v-toolbar" /> -->
+<usage name="v-toolbar" />
+
+<entry />
 
 ## API
 

@@ -3,8 +3,8 @@
     <v-alert
       color="yellow-darken-4"
       icon="mdi-flash"
-      title="Contained Flat (Default)"
-      variant="contained-flat"
+      title="Flat (Default)"
+      variant="flat"
     >
       Nullam tincidunt adipiscing enim. In consectetuer turpis ut velit. Maecenas egestas arcu quis ligula mattis placerat. Praesent metus tellus, elementum eu, semper a, adipiscing nec, purus.
     </v-alert>
@@ -13,8 +13,8 @@
 
     <v-alert
       color="info"
-      title="Contained Text"
-      variant="contained-text"
+      title="Tonal"
+      variant="tonal"
     >
       <div>
         Maecenas nec odio et ante tincidunt tempus. Sed mollis, eros et ultrices tempus, mauris ipsum aliquam libero, non adipiscing dolor urna a orci. Proin viverra, ligula sit amet ultrices semper, ligula arcu tristique sapien, a accumsan nisi mauris ac eros. Curabitur turpis.
@@ -54,8 +54,8 @@
       color="teal-darken-4"
       density="compact"
       icon="mdi-clock-fast"
-      title="Contained"
-      variant="contained"
+      title="Elevated"
+      variant="elevated"
     >
       Vestibulum ullamcorper mauris at ligula. Nulla porta dolor. Vestibulum facilisis, purus nec pulvinar iaculis, ligula mi congue nunc, vitae euismod ligula urna in dolor. Curabitur at lacus ac velit ornare lobortis.
     </v-alert>

@@ -7,7 +7,7 @@ import { createTheme, ThemeSymbol } from '@/composables/theme'
 import { RtlSymbol } from '@/composables/rtl'
 
 // Utilities
-import { defineComponent, getUid, IN_BROWSER } from '@/util'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 import { reactive } from 'vue'
 
 // Types
@@ -23,6 +23,7 @@ export * from './composables'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
+  blueprint?: Blueprint
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
@@ -32,8 +33,12 @@ export interface VuetifyOptions {
   locale?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions)
 }
 
-export const createVuetify = (options: VuetifyOptions = {}) => {
+export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
+
+export const createVuetify = (vuetify: VuetifyOptions = {}) => {
   const install = (app: App) => {
+    const { blueprint, ...rest } = vuetify
+    const options = mergeDeep(blueprint, rest)
     const {
       aliases = {},
       components = {},

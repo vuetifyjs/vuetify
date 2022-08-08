@@ -1,6 +1,6 @@
 import { allowedVariants, makeVariantProps, useVariant } from '../variant'
 
-describe('size', () => {
+describe('variant', () => {
   it.each([
     [{ variant: 'default' }, 'test--variant-default'],
     [{ variant: 'contained' }, 'test--variant-contained'],
@@ -28,7 +28,7 @@ describe('size', () => {
   it.each([
     [{ color: 'primary' }, 'text-primary'],
     [{ variant: 'default', color: 'primary' }, 'text-primary'],
-    [{ variant: 'contained', color: 'primary' }, 'bg-primary'],
+    [{ variant: 'elevated', color: 'primary' }, 'bg-primary'],
     [{ variant: 'outlined', color: 'primary' }, 'text-primary'],
     [{ variant: 'text', color: 'primary' }, 'text-primary'],
   ] as const)('should return correct classes for %s props', (props, expected) => {

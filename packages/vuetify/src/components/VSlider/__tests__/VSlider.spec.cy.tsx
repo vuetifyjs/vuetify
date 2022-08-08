@@ -1,6 +1,6 @@
 /// <reference types='../../../../types/cypress' />
 
-import { VApp } from '@/components'
+import { VApp } from '@/components/VApp'
 import { CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
 
@@ -14,10 +14,10 @@ describe('VSlider', () => {
       </VApp>
     ))
 
-    cy.get('.v-slider').realClick({ x: 100, y: 15 })
+    cy.get('.v-slider').click(100, 15)
 
     cy.vue().then(wrapper => {
-      const slider = wrapper.getComponent('.v-slider')
+      const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.have.length(1)
     })
@@ -37,7 +37,7 @@ describe('VSlider', () => {
 
     // eslint-disable-next-line sonarjs/no-identical-functions
     cy.vue().then(wrapper => {
-      const slider = wrapper.getComponent('.v-slider')
+      const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
 
       expect(emits).length.to.be.gt(0)
@@ -71,7 +71,7 @@ describe('VSlider', () => {
     cy.realPress('Home')
 
     cy.vue().then(wrapper => {
-      const slider = wrapper.getComponent('.v-slider')
+      const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.deep.equal([
         [1],
@@ -127,7 +127,7 @@ describe('VSlider', () => {
     cy.realPress('ArrowRight')
 
     cy.vue().then(wrapper => {
-      const slider = wrapper.getComponent('.v-slider')
+      const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.deep.equal([
         [2],

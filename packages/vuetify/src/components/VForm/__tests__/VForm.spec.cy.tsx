@@ -4,7 +4,8 @@
 import { ref } from 'vue'
 import { Application } from '../../../../cypress/templates'
 import { VForm } from '../'
-import { VBtn, VTextField } from '@/components'
+import { VBtn } from '@/components/VBtn'
+import { VTextField } from '@/components/VTextField'
 import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {

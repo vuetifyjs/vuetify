@@ -6,23 +6,23 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makePositionProps, usePosition } from '@/composables/position'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeLocationProps, useLocation } from '@/composables/location'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTransitionProps } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { onMounted, watch } from 'vue'
+import { onMounted, ref, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeLocationProps, useLocation } from '@/composables/location'
-import { useScopeId } from '@/composables/scopeId'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
 
   props: {
-    app: Boolean,
     contentClass: {
       type: String,
       default: '',
@@ -56,6 +56,8 @@ export const VSnackbar = defineComponent({
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
 
+    const overlay = ref<VOverlay>()
+
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
 
@@ -82,6 +84,7 @@ export const VSnackbar = defineComponent({
     useRender(() => (
       <VOverlay
         v-model={ isActive.value }
+        ref={ overlay }
         class={[
           'v-snackbar',
           {
@@ -95,6 +98,7 @@ export const VSnackbar = defineComponent({
         contentProps={{
           style: locationStyles.value,
         }}
+        contentClass={ props.contentClass }
         persistent
         noClickAnimation
         scrim={ false }
@@ -117,14 +121,11 @@ export const VSnackbar = defineComponent({
 
           { slots.default && (
             <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
+              class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
-              { slots.default?.() }
+              { slots.default() }
             </div>
           ) }
 
@@ -138,13 +139,15 @@ export const VSnackbar = defineComponent({
               }}
             >
               <div class="v-snackbar__actions">
-                { slots.actions?.() }
+                { slots.actions() }
               </div>
             </VDefaultsProvider>
           ) }
         </div>
       </VOverlay>
     ))
+
+    return forwardRefs({}, overlay)
   },
 })
 

@@ -6,17 +6,18 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
-import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
-import { VTabsSymbol } from './shared'
+import { defineComponent, useRender } from '@/util'
 
 // Types
+import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
 
 export type TabItem = string | Record<string, any>
@@ -68,7 +69,8 @@ export const VTabs = defineComponent({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
+    const model = useProxiedModel(props, 'modelValue')
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'backgroundColor'))
@@ -84,8 +86,9 @@ export const VTabs = defineComponent({
       },
     })
 
-    return () => (
+    useRender(() => (
       <VSlideGroup
+        v-model={ model.value }
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
@@ -105,14 +108,14 @@ export const VTabs = defineComponent({
         symbol={ VTabsSymbol }
         mandatory="force"
         direction={ props.direction }
-        modelValue={ props.modelValue }
-        onUpdate:modelValue={ v => emit('update:modelValue', v) }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />
         )) }
       </VSlideGroup>
-    )
+    ))
+
+    return {}
   },
 })
 

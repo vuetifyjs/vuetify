@@ -1,7 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VTextarea } from '../VTextarea'
-import { ref } from 'vue'
+import { VTextarea } from '..'
 
 describe.skip('VTextarea', () => {
   it('should auto-grow', () => {

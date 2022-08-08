@@ -70,7 +70,7 @@
     }),
     computed: {
       location () {
-        return `${this.locationSide} ${this.anchorAlign}`
+        return `${this.locationSide} ${this.locationAlign}`
       },
       origin () {
         return this.originDisabled ? this.originSide : `${this.originSide} ${this.originAlign}`

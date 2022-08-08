@@ -5,18 +5,19 @@ import './VTooltip.sass'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTransitionProps } from '@/composables/transition'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { computed } from 'vue'
-import { genericComponent, getUid } from '@/util'
+import { computed, ref } from 'vue'
+import { genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
-import { useScopeId } from '@/composables/scopeId'
 
 export const VTooltip = genericComponent<new () => {
   $slots: OverlaySlots
@@ -55,6 +56,8 @@ export const VTooltip = genericComponent<new () => {
     const uid = getUid()
     const id = computed(() => props.id || `v-tooltip-${uid}`)
 
+    const overlay = ref<VOverlay>()
+
     const location = computed(() => {
       return props.location.split(' ').length > 1
         ? props.location
@@ -76,42 +79,43 @@ export const VTooltip = genericComponent<new () => {
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
-    return () => {
-      return (
-        <VOverlay
-          v-model={ isActive.value }
-          class={[
-            'v-tooltip',
-          ]}
-          id={ id.value }
-          transition={ transition.value }
-          absolute
-          locationStrategy="connected"
-          scrollStrategy="reposition"
-          location={ location.value }
-          origin={ origin.value }
-          min-width={ 0 }
-          offset={ 10 }
-          scrim={ false }
-          persistent
-          open-on-click={ false }
-          open-on-hover
-          close-on-back={ false }
-          role="tooltip"
-          eager
-          activatorProps={{
-            'aria-describedby': id.value,
-          }}
-          { ...scopeId }
-          { ...attrs }
-        >
-          {{
-            activator: slots.activator,
-            default: (...args) => slots.default?.(...args) ?? props.text,
-          }}
-        </VOverlay>
-      )
-    }
+    useRender(() => (
+      <VOverlay
+        v-model={ isActive.value }
+        ref={ overlay }
+        class={[
+          'v-tooltip',
+        ]}
+        id={ id.value }
+        transition={ transition.value }
+        absolute
+        locationStrategy="connected"
+        scrollStrategy="reposition"
+        location={ location.value }
+        origin={ origin.value }
+        min-width={ 0 }
+        offset={ 10 }
+        scrim={ false }
+        persistent
+        open-on-click={ false }
+        open-on-hover
+        close-on-back={ false }
+        role="tooltip"
+        eager
+        activatorProps={{
+          'aria-describedby': id.value,
+        }}
+        { ...scopeId }
+        { ...attrs }
+      >
+        {{
+          activator: slots.activator,
+          default: (...args) => slots.default?.(...args) ?? props.text,
+        }}
+      </VOverlay>
+    ))
+
+    return forwardRefs({}, overlay)
   },
 })
 

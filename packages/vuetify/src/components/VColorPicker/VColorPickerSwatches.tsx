@@ -5,13 +5,13 @@ import './VColorPickerSwatches.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Utilities
-import { convertToUnit, deepEqual, defineComponent, getContrast } from '@/util'
-import colors from '@/util/colors'
+import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
 import { parseColor } from './util'
+import colors from '@/util/colors'
 
 // Types
-import type { PropType } from 'vue'
 import type { HSVA } from '@/util'
+import type { PropType } from 'vue'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {
@@ -53,7 +53,7 @@ export const VColorPickerSwatches = defineComponent({
   },
 
   setup (props, { emit }) {
-    return () => (
+    useRender(() => (
       <div
         class="v-color-picker-swatches"
         style={{
@@ -84,6 +84,8 @@ export const VColorPickerSwatches = defineComponent({
           ))}
         </div>
       </div>
-    )
+    ))
+
+    return {}
   },
 })

@@ -4,7 +4,7 @@ import { VTextField } from '../VTextField'
 import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
 
-const variants = ['underlined', 'outlined', 'filled', 'contained', 'plain']
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VTextField label="label" />,
@@ -37,6 +37,14 @@ describe('VTextField', () => {
 
     cy.get('.v-text-field').should('have.class', 'v-input--error')
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/15231
+  it('should render details if using hide-details="auto" and counter prop', () => {
+    cy.mount(() => (
+      <VTextField hide-details="auto" counter></VTextField>
+    ))
+      .get('.v-input__details').should('be.visible')
   })
 
   describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {

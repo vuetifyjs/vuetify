@@ -15,9 +15,9 @@ $field-clearable-margin: 4px !default;
 $field-clearable-transition: .15s opacity, .15s width settings.$standard-easing !default;
 
 // CONTROL
-$field-control-contained-background: rgb(var(--v-theme-surface)) !default;
-$field-control-contained-color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)) !default;
-$field-control-contained-elevation: 2 !default;
+$field-control-solo-background: rgb(var(--v-theme-surface)) !default;
+$field-control-solo-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$field-control-solo-elevation: 2 !default;
 $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;

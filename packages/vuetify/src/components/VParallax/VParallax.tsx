@@ -8,8 +8,8 @@ import { VImg } from '@/components/VImg'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 
 // Utilities
+import { defineComponent, getScrollParent, useRender } from '@/util'
 import { onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import { defineComponent, getScrollParent } from '@/util'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
@@ -25,9 +25,10 @@ export const VParallax = defineComponent({
     },
   },
 
-  setup (props, { attrs, slots }) {
-    const root = ref<VImg>()
+  setup (props, { slots }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+
+    const root = ref<VImg>()
 
     watchEffect(() => {
       intersectionRef.value = root.value?.$el
@@ -69,7 +70,7 @@ export const VParallax = defineComponent({
       })
     }
 
-    return () => (
+    useRender(() => (
       <VImg
         class={[
           'v-parallax',
@@ -81,7 +82,9 @@ export const VParallax = defineComponent({
         onLoad={ onScroll }
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
 

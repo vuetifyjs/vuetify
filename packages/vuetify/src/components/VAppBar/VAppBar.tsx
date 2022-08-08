@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +68,7 @@ export const VAppBar = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
-    return () => {
+    useRender(() => {
       const [toolbarProps] = filterToolbarProps(props)
 
       return (
@@ -88,7 +88,9 @@ export const VAppBar = defineComponent({
           v-slots={ slots }
         />
       )
-    }
+    })
+
+    return {}
   },
 })
 

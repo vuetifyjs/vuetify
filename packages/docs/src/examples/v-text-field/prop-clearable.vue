@@ -19,8 +19,8 @@
         >
           <v-text-field
             v-model="message2"
-            label="Contained"
-            variant="contained"
+            label="Solo"
+            variant="solo"
             clearable
             clear-icon="mdi-delete"
           ></v-text-field>

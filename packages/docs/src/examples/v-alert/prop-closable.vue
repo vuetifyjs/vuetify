@@ -3,7 +3,7 @@
     <v-alert
       v-model="alert"
       border="start"
-      variant="contained-text"
+      variant="tonal"
       closable
       close-label="Close Alert"
       color="deep-purple accent-4"
