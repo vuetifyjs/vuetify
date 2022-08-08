@@ -4,8 +4,9 @@
     max-width="344"
   >
     <v-text-field
-      label="First name"
-      hide-details="auto"
+      label="Password"
+      type="input"
+      hint="Enter your password to access this website"
     ></v-text-field>
   </v-responsive>
 </template>

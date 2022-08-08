@@ -4,8 +4,11 @@
     max-width="344"
   >
     <v-text-field
-      label="First name"
-      hide-details="auto"
+      :rules="[
+        v => !!v || 'Field is required'
+      ]"
+      clearable
+      label="Last name"
     ></v-text-field>
   </v-responsive>
 </template>

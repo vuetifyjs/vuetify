@@ -50,11 +50,9 @@ The recommended placement of elements inside of `v-text-field` is:
 | - | - |
 | [v-text-field](/api/v-text-field/) | Primary Component |
 
-## Examples
+## Guide
 
-The `v-text-field` component is a versatile `<input type="text">` field which combines both the `v-input` and `v-field` components into a single offering. It is a commonly used element that provides the baseline for other form inputs; such as [v-select](/components/selects/), [v-autocomplete](/components/autocompletes/), [v-combobox](/components/combobox/).
-
-In the following section we walk through different ways to configure and implement the `v-text-field` into your application.
+The `v-text-field` component is a versatile `<input type="text">` field which combines both the `v-input` and `v-field` components into a single offering. It is a commonly used element that provides the baseline for other form inputs; such as [v-select](/components/selects/), [v-autocomplete](/components/autocompletes/), [v-combobox](/components/combobox/). In this guide you learn the basic fundamentals of `v-text-field` and how its various properties interact with each other.
 
 ### Props
 
@@ -98,41 +96,84 @@ When the user focuses the input, the placeholder fades in as the label translate
 
 </alert>
 
+#### Hints & messages
+
+The **label** and **placeholder** props are useful for providing context to the input but are typically concise. For longer textual information, all Vuetify inputs contain a **details** section that is used to provide **hints**, regular **messages**, and **error-messages**. In the following example watch the custom hint message display when you focus the input:
+
+<example file="v-text-field/prop-messages" open />
+
+If you want to make the hint visible at all times, use the **persistent-hint** property. The following example demonstrates how to force a **hint** to show in the input's details:
+
+```html
+<v-text-field
+  hint="Enter your password to access this website"
+  label="Password"
+  persistent-hint
+  type="input"
+></v-text-field>
+```
+
+In addition to **persistent-hint**, there are 3 other properties that support a persistent state:
+
+* **persistent-clear** - always show the input clear icon when a **value** is present
+* **persistent-counter** - always show input character length element
+* **persistent-placeholder** - always show placeholder, causes label to automatically elevate
+
 #### Clearable
 
-The **clearable** prop appends an icon that clears the `v-text-field` when clicked.
+The **clearable** prop appends an inner [v-icon](/components/icons/) that clears the `v-text-field` when clicked. When an input is cleared, it resets the current `v-text-field` value. The following example displays an interactive icon when the mouse hovers over the input:
+
+<example file="v-text-field/prop-clearable" open />
+
+Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
 
 ```html
-<v-text-field
-  label="Last name"
-  placeholder="Doe"
-  clearable
-></v-text-field>
+<template>
+  <v-text-field
+    clearable
+    label="Last name"
+    placeholder="Doe"
+    persistent-clear
+    @click:clear="onClear"
+  ></v-text-field>
+</template>
+
+<script>
+  export default {
+    methods: {
+      onClear () {
+        alert('User cleared the input')
+      }
+    }
+  }
+</script>
 ```
 
-The clearable icon is configurable by using the **clearable** property in combination with the **clear-icon** property. By default, this value is set to the global default assigned in [Icon font](/features/icon-fonts) but still has the ability to overwrite in the local template.
+You can see more supported events on the `v-text-field` [API page](/api/v-text-field/#events).
 
-In the following example we change the icon that is shown when the input can be cleared:
+#### Validation & rules
 
-```html
-<v-text-field
-  label="Last name"
-  placeholder="Doe"
-  clearable
-  clear-icon="mdi-trash"
-></v-text-field>
-```
+When working with inputs you often need to validate the user's input in some manner; i.e. Email, Password. Use the **rules** property to invoke custom functions based upon the `v-text-field`'s state. It accepts an array of **functions** that return either `true` or a `string`. In the following example, enter a value into the field and then clear it:
 
-<example file="v-text-field/prop-clearable" />
+<example file="v-text-field/prop-rules" open />
 
-<!--
+#### Forms
+
+Group multiple `v-text-field` components and other functionality within a `v-form` component; for a more detailed look at forms, please visit the [v-form](/components/forms/) page. Forms are useful for validating more than 1 input and make it easy to interact with the state of many fields at once. The following example combines multiple `v-text-field` components to create a login form:
+
+<example file="v-text-field/misc-guide" />
+
+### Examples
+
+The following is a collection of `v-text-field` examples that demonstrate how different the properties work in an application.
 
 #### Custom colors
 
-The **color** prop provides an easy way to change the color of your text field.
+The **color** prop provides an easy way to change the color of textual content; label, prefix, suffix, etc. This color is applied as long as `v-text-field` is focused.
 
 <example file="v-text-field/prop-custom-colors" />
 
+<!--
 #### Density
 
 The **density** prop decreases the height of the text field based upon 1 of 3 levels of density; **default**, **comfortable**, and **compact**.
