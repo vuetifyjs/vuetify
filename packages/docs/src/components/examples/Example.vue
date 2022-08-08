@@ -8,7 +8,7 @@
       <v-toolbar
         border="b"
         :class="[
-          'px-4',
+          'px-1',
           !showCode && 'border-opacity-0'
         ]"
         height="44"
@@ -37,23 +37,41 @@
         <Codepen v-if="isLoaded" />
       </v-toolbar>
 
-      <v-expand-transition>
-        <div v-if="showCode" class="border-b">
-          <template v-for="section of sections" :key="section.name">
-            <v-theme-provider v-if="section.content" :theme="theme">
-              <app-markup :code="section.content" class="rounded-0" :resource="`${file}.vue`" />
-            </v-theme-provider>
-          </template>
-        </div>
-      </v-expand-transition>
+      <div class="d-flex flex-column">
+        <v-expand-transition>
+          <div
+            v-if="showCode"
+            :class="[
+              'border-b',
+              inline && 'order-1'
+            ]"
+          >
+            <template
+              v-for="section of sections"
+              :key="section.name"
+            >
+              <v-theme-provider
+                v-if="section.content"
+                :theme="theme"
+              >
+                <app-markup
+                  :code="section.content"
+                  class="rounded-0"
+                  :resource="`${file}.vue`"
+                />
+              </v-theme-provider>
+            </template>
+          </div>
+        </v-expand-transition>
 
-      <v-theme-provider
-        :theme="theme"
-        class="pa-4 rounded-b"
-        with-background
-      >
-        <component :is="ExampleComponent" v-if="isLoaded" />
-      </v-theme-provider>
+        <v-theme-provider
+          :theme="theme"
+          class="pa-4 rounded-b"
+          with-background
+        >
+          <component :is="ExampleComponent" v-if="isLoaded" />
+        </v-theme-provider>
+      </div>
     </v-sheet>
   </v-defaults-provider>
 </template>
@@ -75,6 +93,7 @@
   const { t } = useI18n()
 
   const props = defineProps({
+    inline: Boolean,
     file: {
       type: String,
       required: true,
@@ -91,7 +110,7 @@
 
   const isLoaded = ref(false)
   const isError = ref(false)
-  const showCode = ref(false)
+  const showCode = ref(props.inline)
 
   const component = shallowRef()
   const code = ref<string>()
