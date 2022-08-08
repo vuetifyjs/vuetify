@@ -9,6 +9,7 @@ import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
@@ -42,9 +43,14 @@ export const VRadioGroup = defineComponent({
     },
   },
 
+  emits: {
+    'update:modelValue': (val: any) => true,
+  },
+
   setup (props, { attrs, slots }) {
     const uid = getUid()
     const id = computed(() => props.id || `radio-group-${uid}`)
+    const model = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -62,6 +68,7 @@ export const VRadioGroup = defineComponent({
           class="v-radio-group"
           { ...inputAttrs }
           { ...inputProps }
+          v-model={ model.value }
           id={ id.value }
         >
           {{
@@ -87,6 +94,7 @@ export const VRadioGroup = defineComponent({
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
                   { ...controlAttrs }
+                  v-model={ model.value }
                   v-slots={ slots }
                 />
               </>
