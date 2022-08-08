@@ -80,9 +80,14 @@ declare global {
 }
 
 declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    _: ComponentInternalInstance
+  }
+
   export interface ComponentInternalInstance {
     ctx: Record<string, unknown>
     provides: Record<string, unknown>
+    setupState: any
   }
 }
 

@@ -102,7 +102,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
