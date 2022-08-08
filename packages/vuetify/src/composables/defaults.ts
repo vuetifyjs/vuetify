@@ -1,9 +1,9 @@
 // Utilities
-import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util/helpers'
+import { computed, inject, onScopeDispose, provide, ref, unref } from 'vue'
+import { getCurrentInstance, mergeDeep } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { ComponentInternalInstance, ComputedRef, InjectionKey, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 
 export interface DefaultsInstance {
@@ -27,6 +27,8 @@ export function useDefaults () {
   return defaults
 }
 
+const provideMap = new WeakMap<ComponentInternalInstance, Record<symbol, any>>()
+
 export function provideDefaults (
   defaults?: MaybeRef<DefaultsInstance | undefined>,
   options?: {
@@ -35,6 +37,11 @@ export function provideDefaults (
     scoped?: MaybeRef<boolean | undefined>
   }
 ) {
+  const vm = getCurrentInstance('provideDefaults')
+  if (!provideMap.has(vm)) provideMap.set(vm, {})
+  const defaultsList = provideMap.get(vm)!
+  const key = Symbol('')
+
   const injectedDefaults = useDefaults()
   const providedDefaults = ref(defaults)
 
@@ -59,8 +66,20 @@ export function provideDefaults (
       return properties
     }
 
-    return mergeDeep(properties.prev, properties)
+    const symbols = Object.getOwnPropertySymbols(defaultsList)
+    const idx = symbols.indexOf(key)
+
+    return [
+      properties.prev,
+      ...symbols.slice(0, idx).map(v => defaultsList[v].value),
+      properties,
+    ].reduce((acc, val) => mergeDeep(acc, val), {})
   }) as ComputedRef<DefaultsInstance>
+
+  defaultsList[key] = newDefaults
+  onScopeDispose(() => {
+    delete defaultsList[key]
+  })
 
   provide(DefaultsSymbol, newDefaults)
 
