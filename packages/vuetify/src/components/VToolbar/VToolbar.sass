@@ -65,11 +65,11 @@
   > .v-btn:first-child
     margin-inline-start: $toolbar-prepend-btn-margin-start
 
-    + .v-toolbar-title
-      padding-inline-start: $toolbar-title-padding
-
   > .v-btn:last-child
     margin-inline-end: $toolbar-append-btn-margin-end
+
+  > .v-toolbar-title
+      margin-inline-start: $toolbar-title-margin
 
   .v-toolbar--density-prominent &
     align-items: flex-start
@@ -86,9 +86,6 @@
 .v-toolbar__prepend
   margin-inline-start: $toolbar-prepend-btn-margin-start
   margin-inline-end: auto
-
-  + .v-toolbar-title
-    padding-inline-start: $toolbar-title-padding
 
 .v-toolbar__append
   margin-inline-start: auto

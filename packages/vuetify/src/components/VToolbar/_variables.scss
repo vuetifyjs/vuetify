@@ -20,16 +20,16 @@ $toolbar-density: ( 'default': 0, 'comfortable': -1, 'compact': -2, 'prominent':
 $toolbar-elevation: 0 !default;
 $toolbar-flat-elevation: 0 !default;
 $toolbar-flex: 1 1 auto !default;
-$toolbar-padding-end: 16px !default;
-$toolbar-padding-start: 16px !default;
-$toolbar-padding: 16px !default;
-$toolbar-prepend-btn-margin-start: -6px !default;
-$toolbar-append-btn-margin-end: -6px !default;
+$toolbar-padding-end: 0 !default;
+$toolbar-padding-start: 0 !default;
+$toolbar-padding: 0 !default;
+$toolbar-prepend-btn-margin-start: 10px !default;
+$toolbar-append-btn-margin-end: 10px !default;
 $toolbar-rounded-border-radius: variables.$border-radius-root !default;
 $toolbar-transition: .2s variables.$standard-easing !default;
 
 // VToolbarTitle
-$toolbar-title-padding: 20px !default;
+$toolbar-title-margin: 16px !default;
 $toolbar-title-extended-padding: 56px !default;
 $toolbar-title-font-size: 1.25rem !default;
 $toolbar-title-font-weight: 400 !default;
