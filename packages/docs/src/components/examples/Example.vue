@@ -98,6 +98,7 @@
       type: String,
       required: true,
     },
+    open: Boolean,
   })
 
   function parseTemplate (target: string, template: string) {
@@ -110,7 +111,7 @@
 
   const isLoaded = ref(false)
   const isError = ref(false)
-  const showCode = ref(props.inline)
+  const showCode = ref(props.inline || props.open)
 
   const component = shallowRef()
   const code = ref<string>()
