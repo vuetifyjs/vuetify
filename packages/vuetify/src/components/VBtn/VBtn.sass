@@ -227,6 +227,8 @@
     @include tools.rounded($button-pagination-border-radius)
 
   &__overlay
+    transition: none
+
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
 
