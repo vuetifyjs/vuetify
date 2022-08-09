@@ -8,7 +8,7 @@ const icons: VuetifyIcons = {
   clear: 'fas fa-times-circle', // delete (e.g. v-chip close)
   success: 'fas fa-check-circle',
   info: 'fas fa-info-circle',
-  warning: 'fas fa-exclamation',
+  warning: 'fas fa-exclamation-circle',
   error: 'fas fa-exclamation-triangle',
   prev: 'fas fa-chevron-left',
   next: 'fas fa-chevron-right',
