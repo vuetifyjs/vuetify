@@ -252,12 +252,15 @@ export const VSelectionControl = genericComponent<new <T>() => {
               { icon.value && <VIcon key="icon" icon={ icon.value } /> }
 
               <input
-                v-model={ model.value }
                 ref={ input }
+                checked={ model.value }
                 disabled={ props.disabled }
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
+                onInput={ (e: Event) => {
+                  model.value = (e.target as HTMLInputElement).checked
+                } }
                 aria-readonly={ props.readonly }
                 type={ type }
                 value={ trueValue.value }
