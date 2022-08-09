@@ -41,6 +41,10 @@ export const VNavigationDrawer = defineComponent({
       type: [Number, String],
       default: 72,
     },
+    scrim: {
+      type: [String, Boolean],
+      default: true,
+    },
     image: String,
     temporary: Boolean,
     touchless: Boolean,
@@ -130,6 +134,9 @@ export const VNavigationDrawer = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
+    const scrimColor = useBackgroundColor(computed(() => {
+      return typeof props.scrim === 'string' ? props.scrim : null
+    }))
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
@@ -207,10 +214,10 @@ export const VNavigationDrawer = defineComponent({
           </props.tag>
 
           <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && (
+            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
               <div
-                class="v-navigation-drawer__scrim"
-                style={ scrimStyles.value }
+                class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
+                style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => isActive.value = false }
               />
             )}
