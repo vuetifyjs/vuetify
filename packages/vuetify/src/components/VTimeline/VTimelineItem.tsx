@@ -28,6 +28,7 @@ export const VTimelineItem = defineComponent({
     },
     icon: IconValue,
     iconColor: String,
+    lineInset: [Number, String],
 
     ...makeRoundedProps(),
     ...makeElevationProps(),
@@ -58,6 +59,7 @@ export const VTimelineItem = defineComponent({
         ]}
         style={{
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
+          '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),
         }}
       >
         <div

@@ -10,7 +10,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { nextTick, ref, watch } from 'vue'
@@ -63,7 +63,7 @@ export const VDialog = genericComponent<new () => {
         before !== after &&
         overlay.value?.contentEl &&
         // We're the topmost dialog
-        overlay.value?.isTop &&
+        overlay.value?.globalTop &&
         // It isn't the document or the dialog body
         ![document, overlay.value.contentEl].includes(after!) &&
         // It isn't inside the dialog body
@@ -132,7 +132,7 @@ export const VDialog = genericComponent<new () => {
       />
     ))
 
-    return useForwardRef({}, overlay)
+    return forwardRefs({}, overlay)
   },
 })
 

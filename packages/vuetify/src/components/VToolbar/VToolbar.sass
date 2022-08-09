@@ -10,8 +10,7 @@
   justify-content: space-between
   max-width: 100%
   overflow: hidden
-  padding-inline-end: calc(#{$toolbar-padding-end} + var(--v-scrollbar-offset))
-  padding-inline-start: $toolbar-padding-start
+  padding-inline-end: var(--v-scrollbar-offset)
   position: relative
   transition: $toolbar-transition
   transition-property: height, transform, max-width
@@ -20,12 +19,6 @@
   @include tools.elevation($toolbar-elevation)
   @include tools.rounded($toolbar-border-radius)
   @include tools.theme($toolbar-theme...)
-
-  @at-root
-    @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
-      .v-toolbar__content
-        padding-top: $toolbar-padding + $modifier
-        padding-bottom: $toolbar-padding + $modifier
 
   &--absolute
     position: absolute
@@ -65,11 +58,11 @@
   > .v-btn:first-child
     margin-inline-start: $toolbar-prepend-btn-margin-start
 
-    + .v-toolbar-title
-      padding-inline-start: $toolbar-title-padding
-
   > .v-btn:last-child
     margin-inline-end: $toolbar-append-btn-margin-end
+
+  > .v-toolbar-title
+      margin-inline-start: $toolbar-title-margin
 
   .v-toolbar--density-prominent &
     align-items: flex-start
@@ -86,9 +79,6 @@
 .v-toolbar__prepend
   margin-inline-start: $toolbar-prepend-btn-margin-start
   margin-inline-end: auto
-
-  + .v-toolbar-title
-    padding-inline-start: $toolbar-title-padding
 
 .v-toolbar__append
   margin-inline-start: auto

@@ -13,7 +13,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { onMounted, ref, watch } from 'vue'
@@ -23,7 +23,6 @@ export const VSnackbar = defineComponent({
   name: 'VSnackbar',
 
   props: {
-    app: Boolean,
     contentClass: {
       type: String,
       default: '',
@@ -99,6 +98,7 @@ export const VSnackbar = defineComponent({
         contentProps={{
           style: locationStyles.value,
         }}
+        contentClass={ props.contentClass }
         persistent
         noClickAnimation
         scrim={ false }
@@ -121,10 +121,7 @@ export const VSnackbar = defineComponent({
 
           { slots.default && (
             <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
+              class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
@@ -150,7 +147,7 @@ export const VSnackbar = defineComponent({
       </VOverlay>
     ))
 
-    return useForwardRef({}, overlay)
+    return forwardRefs({}, overlay)
   },
 })
 

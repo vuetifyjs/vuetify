@@ -14,7 +14,7 @@ import { VTextField } from '@/components/VTextField'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { transformItem, useItems } from '@/composables/items'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
@@ -69,7 +69,7 @@ export const VCombobox = genericComponent<new <
     modelValue?: Readonly<V>
     'onUpdate:modelValue'?: (val: V) => void
   }
-  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
@@ -416,7 +416,7 @@ export const VCombobox = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       isFocused,
       isPristine,
       menu,

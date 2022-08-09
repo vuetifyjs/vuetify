@@ -13,7 +13,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
@@ -81,7 +81,7 @@ export const VSelect = genericComponent<new <
     modelValue?: Readonly<V>
     'onUpdate:modelValue'?: (val: V) => void
   }
-  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
@@ -102,7 +102,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -284,7 +284,7 @@ export const VSelect = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       menu,
       select,
     }, vTextFieldRef)

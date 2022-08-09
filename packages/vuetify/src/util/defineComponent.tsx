@@ -10,8 +10,9 @@ import {
   watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { toKebabCase } from '@/util/helpers'
-import { provideDefaults, useDefaults } from '@/composables/defaults'
+import { mergeDeep, toKebabCase } from '@/util/helpers'
+import { injectSelf } from '@/util/injectSelf'
+import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -81,7 +82,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         else if (val && !oldVal) {
           scope = effectScope()
           scope.run(() => {
-            provideDefaults(val)
+            provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, val))
           })
         }
       }, { immediate: true })

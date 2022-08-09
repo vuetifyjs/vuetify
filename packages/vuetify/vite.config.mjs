@@ -17,7 +17,7 @@ export default defineConfig(({ mode }) => {
   return {
     root: resolve('dev'),
     server: {
-      port: process.env.PORT,
+      port: process.env.CYPRESS ? undefined : process.env.PORT,
       strictPort: !!process.env.PORT && !process.env.CYPRESS,
     },
     resolve: {

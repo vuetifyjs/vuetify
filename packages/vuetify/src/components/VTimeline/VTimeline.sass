@@ -1,4 +1,5 @@
 @use 'sass:map'
+@use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
@@ -65,7 +66,7 @@
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
         grid-column: 1
-        text-align: end
+        justify-self: flex-end
         padding-inline-end: $timeline-item-padding
 
       .v-timeline-item__opposite
@@ -79,7 +80,7 @@
 
       .v-timeline-item__opposite
         grid-column: 1
-        text-align: end
+        justify-self: flex-end
         padding-inline-end: $timeline-item-padding
 
 // VTimelineItem
@@ -102,35 +103,106 @@
     flex-direction: column
     grid-column: 2
 
-.v-timeline-divider__line
+$timeline-divider-size: calc(50% + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
+$timeline-divider-offset: math.div(-$timeline-item-padding, 2)
+
+.v-timeline-divider__before
   background: $timeline-divider-line-background
   position: absolute
 
   @include horizontal
     height: $timeline-divider-line-thickness
-    width: calc(100% + #{$timeline-item-padding})
+    width: $timeline-divider-size
 
     @include tools.ltr
-      left: 0
+      left: $timeline-divider-offset
+      right: initial
+
     @include tools.rtl
-      right: 0
+      right: $timeline-divider-offset
+      left: initial
 
   @include vertical
-    height: calc(100% + #{$timeline-item-padding})
+    height: $timeline-divider-size
     width: $timeline-divider-line-thickness
+    top: $timeline-divider-offset
+
+.v-timeline-divider__after
+  background: $timeline-divider-line-background
+  position: absolute
+
+  @include horizontal
+    height: $timeline-divider-line-thickness
+    width: $timeline-divider-size
 
     @include tools.ltr
-      top: 0
-    @include tools.rtl
-      bottom: 0
+      right: $timeline-divider-offset
+      left: initial
 
-.v-timeline-item:last-child
-  .v-timeline-divider__line
+    @include tools.rtl
+      left: $timeline-divider-offset
+      right: initial
+
+  @include vertical
+    height: $timeline-divider-size
+    width: $timeline-divider-line-thickness
+    bottom: $timeline-divider-offset
+
+.v-timeline-item:first-child
+  .v-timeline-divider__before
     @include vertical
-      height: 100%
+      height: $timeline-divider-size
+      top: 0
 
     @include horizontal
-      width: 100%
+      width: $timeline-divider-size
+
+      @include tools.ltr
+        left: 0
+        right: initial
+
+      @include tools.rtl
+        right: 0
+        left: initial
+
+  .v-timeline-divider__after
+    @include vertical
+      height: calc(50% - var(--v-timeline-line-inset))
+
+    @include horizontal
+      width: calc(50% - var(--v-timeline-line-inset))
+
+      @include tools.ltr
+        right: math.div(-$timeline-item-padding,2)
+        left: initial
+
+      @include tools.rtl
+        left: math.div(-$timeline-item-padding,2)
+        right: initial
+
+.v-timeline-item:last-child
+  .v-timeline-divider__before
+    @include vertical
+      height: calc(50% - var(--v-timeline-line-inset))
+
+    @include horizontal
+      width: calc(50% - var(--v-timeline-line-inset))
+
+  .v-timeline-divider__after
+    @include vertical
+      height: calc(50% + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
+      bottom: 0
+
+    @include horizontal
+      width: calc(50% + #{math.div($timeline-item-padding, 2)} - var(--v-timeline-line-inset))
+
+      @include tools.ltr
+        right: 0
+        left: initial
+
+      @include tools.rtl
+        left: 0
+        right: initial
 
 .v-timeline-divider__dot
   z-index: 1
@@ -219,13 +291,13 @@
     @include vertical(true)
       .v-timeline-item__body
         grid-column: 3
-        text-align: initial
         padding-inline-start: $timeline-item-padding
         padding-inline-end: initial
+        justify-self: flex-start
 
       .v-timeline-item__opposite
         grid-column: 1
-        text-align: end
+        justify-self: flex-end
         padding-inline-end: $timeline-item-padding
         padding-inline-start: initial
 
@@ -245,13 +317,13 @@
     @include vertical(true)
       .v-timeline-item__body
         grid-column: 1
-        text-align: end
+        justify-self: flex-end
         padding-inline-end: $timeline-item-padding
 
       .v-timeline-item__opposite
         grid-column: 3
-        text-align: initial
         padding-inline-start: $timeline-item-padding
+        justify-self: flex-start
 
 // Fill dot
 .v-timeline-divider--fill-dot
@@ -260,51 +332,15 @@
     width: inherit
 
 // Truncate line
-.v-timeline--truncate-line-end
-  .v-timeline-item:last-child
-    .v-timeline-divider__line
-      @include horizontal(true)
-        width: 50%
-
-      @include vertical(true)
-        height: $timeline-item-padding
-
-.v-timeline--truncate-line-end.v-timeline--align-start
-  .v-timeline-item:last-child
-    .v-timeline-divider__line
-      @include horizontal(true)
-        width: $timeline-item-padding
-
 .v-timeline--truncate-line-start
   .v-timeline-item:first-child
-    @include horizontal(true)
-      .v-timeline-item__body, .v-timeline-item__opposite, .v-timeline-divider
-        padding-inline-start: 0
+    .v-timeline-divider__before
+      display: none
 
-    @include vertical(true)
-      .v-timeline-item__body, .v-timeline-item__opposite, .v-timeline-divider
-        padding-block-start: 0
-
-.v-timeline--truncate-line-start.v-timeline--align-center
-  .v-timeline-item:first-child
-    .v-timeline-divider__line
-      $inset: calc(50% + #{$timeline-item-padding} - var(--v-timeline-dot-size))
-
-      @include horizontal(true)
-        width: calc(50% + var(--v-timeline-dot-size))
-
-        @include tools.ltr
-          left: $inset
-        @include tools.rtl
-          right: $inset
-
-      @include vertical(true)
-        height: calc(50% + var(--v-timeline-dot-size))
-
-        @include tools.ltr
-          top: $inset
-        @include tools.rtl
-          bottom: $inset
+.v-timeline--truncate-line-end
+  .v-timeline-item:last-child
+    .v-timeline-divider__after
+      display: none
 
 // Alignment
 .v-timeline--align-center
@@ -321,8 +357,34 @@
       justify-content: center
 
 .v-timeline--align-start
-  @include horizontal
-    justify-content: flex-start
+  $timeline-divider-before-base: calc(#{math.div($timeline-item-padding, 2)} + var(--v-timeline-dot-size) / 2 - var(--v-timeline-line-inset))
+  $timeline-divider-after-base: calc(100% - var(--v-timeline-dot-size) / 2 + #{$timeline-item-padding} / 2 - var(--v-timeline-line-inset))
+  $timeline-divider-before-first: calc($timeline-item-padding + var(--v-timeline-dot-size) / 2 - var(--v-timeline-line-inset))
+  $timeline-divider-after-first: calc(100% - #{math.div($timeline-item-padding, 2)} - var(--v-timeline-dot-size) / 2 - var(--v-timeline-line-inset))
+  $timeline-divider-after-last: calc(100% - var(--v-timeline-dot-size) / 2 - var(--v-timeline-line-inset))
+
+  @include horizontal(true)
+    justify-items: flex-start
+
+    .v-timeline-divider
+      justify-content: flex-start
+
+      .v-timeline-divider__before
+        width: $timeline-divider-before-base
+
+      .v-timeline-divider__after
+        width: $timeline-divider-after-base
+
+    .v-timeline-item:first-child
+      .v-timeline-divider__before
+        width: $timeline-divider-before-first
+
+      .v-timeline-divider__after
+        width: $timeline-divider-after-first
+
+    .v-timeline-item:last-child
+      .v-timeline-divider__after
+        width: $timeline-divider-after-last
 
   @include vertical(true)
     align-items: flex-start
@@ -330,63 +392,19 @@
     .v-timeline-divider
       justify-content: flex-start
 
-// Inset line
-.v-timeline--inset-line
-  .v-timeline-divider__line
-    $inset: calc(50% + var(--v-timeline-line-inset) + var(--v-timeline-dot-size) / 2)
+      .v-timeline-divider__before
+        height: $timeline-divider-before-base
 
-    @include horizontal(true)
-      width: calc(100% + #{$timeline-item-padding} - var(--v-timeline-dot-size) - var(--v-timeline-line-inset) * 2)
+      .v-timeline-divider__after
+        height: $timeline-divider-after-base
 
-      @include tools.ltr
-        left: $inset
-      @include tools.rtl
-        right: $inset
+    .v-timeline-item:first-child
+      .v-timeline-divider__before
+        height: $timeline-divider-before-first
 
-    @include vertical(true)
-      height: calc(100% + #{$timeline-item-padding} - var(--v-timeline-dot-size) - var(--v-timeline-line-inset) * 2)
+      .v-timeline-divider__after
+        height: $timeline-divider-after-first
 
-      @include tools.ltr
-        top: $inset
-      @include tools.rtl
-        bottom: $inset
-
-  .v-timeline-item:first-child
-    $inset: calc(50% + var(--v-timeline-dot-size) / 2 + #{$timeline-item-padding} / 2 + var(--v-timeline-line-inset))
-
-    .v-timeline-divider__line
-      @include horizontal(true)
-        width: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset) * 2)
-
-        @include tools.ltr
-          left: $inset
-        @include tools.rtl
-          right: $inset
-
-      @include vertical(true)
-        height: calc(100% - var(--v-timeline-dot-size) - var(--v-timeline-line-inset) * 2)
-
-        @include tools.ltr
-          top: $inset
-        @include tools.rtl
-          bottom: $inset
-
-  .v-timeline-item:last-child
-    $inset: calc(50% + var(--v-timeline-line-inset) - #{$timeline-item-padding} / 2 + var(--v-timeline-dot-size) / 2)
-
-    .v-timeline-divider__line
-      @include horizontal(true)
-        width: calc(50% - #{$timeline-item-padding} - var(--v-timeline-line-inset) * 2)
-
-        @include tools.ltr
-          left: $inset
-        @include tools.rtl
-          right: $inset
-
-      @include vertical(true)
-        height: calc(50% - #{$timeline-item-padding} - var(--v-timeline-line-inset) * 2)
-
-        @include tools.ltr
-          top: $inset
-        @include tools.rtl
-          bottom: $inset
+    .v-timeline-item:last-child
+      .v-timeline-divider__after
+        height: $timeline-divider-after-last

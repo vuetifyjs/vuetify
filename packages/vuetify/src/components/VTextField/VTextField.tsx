@@ -10,22 +10,25 @@ import { VCounter } from '@/components/VCounter'
 import Intersect from '@/directives/intersect'
 
 // Composables
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref } from 'vue'
 import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const VTextField = genericComponent<new <T>() => {
-  $slots: VInputSlots & VFieldSlots
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+    default: []
+  }>
 }>()({
   name: 'VTextField',
 
@@ -89,7 +92,7 @@ export const VTextField = genericComponent<new <T>() => {
     }
 
     const vInputRef = ref<VInput>()
-    const vFieldRef = ref<VInput>()
+    const vFieldRef = ref<VField>()
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
@@ -124,9 +127,6 @@ export const VTextField = genericComponent<new <T>() => {
 
         emit('click:clear', e)
       })
-    }
-    function onInput (e: Event) {
-      model.value = (e.target as HTMLInputElement).value
     }
 
     useRender(() => {
@@ -187,6 +187,27 @@ export const VTextField = genericComponent<new <T>() => {
                   default: ({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
+                    const inputNode = (
+                      <input
+                        ref={ inputRef }
+                        v-model={ model.value }
+                        v-intersect={[{
+                          handler: onIntersect,
+                        }, null, ['once']]}
+                        autofocus={ props.autofocus }
+                        readonly={ isReadonly.value }
+                        disabled={ isDisabled.value }
+                        name={ props.name }
+                        placeholder={ props.placeholder }
+                        size={ 1 }
+                        type={ props.type }
+                        onFocus={ onFocus }
+                        onBlur={ () => (isFocused.value = false) }
+                        { ...slotProps }
+                        { ...inputAttrs }
+                      />
+                    )
+
                     return (
                       <>
                         { props.prefix && (
@@ -195,33 +216,16 @@ export const VTextField = genericComponent<new <T>() => {
                           </span>
                         ) }
 
-                        <div
-                          class={ fieldClass }
-                          onClick={ e => emit('click:input', e) }
-                          data-no-activator=""
-                        >
-                          { slots.default?.() }
-
-                          <input
-                            ref={ inputRef }
-                            value={ model.value }
-                            onInput={ onInput }
-                            v-intersect={[{
-                              handler: onIntersect,
-                            }, null, ['once']]}
-                            autofocus={ props.autofocus }
-                            readonly={ isReadonly.value }
-                            disabled={ isDisabled.value }
-                            name={ props.name }
-                            placeholder={ props.placeholder }
-                            size={ 1 }
-                            type={ props.type }
-                            onFocus={ onFocus }
-                            onBlur={ () => (isFocused.value = false) }
-                            { ...slotProps }
-                            { ...inputAttrs }
-                          />
-                        </div>
+                        { slots.default ? (
+                          <div
+                            class={ fieldClass }
+                            onClick={ e => emit('click:input', e) }
+                            data-no-activator=""
+                          >
+                            { slots.default() }
+                            { inputNode }
+                          </div>
+                        ) : cloneVNode(inputNode, { class: fieldClass }) }
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
@@ -257,7 +261,7 @@ export const VTextField = genericComponent<new <T>() => {
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

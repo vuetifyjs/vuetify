@@ -6,7 +6,6 @@ import type { InjectionKey, Ref } from 'vue'
 import type { LocaleInstance } from './locale'
 
 export interface RtlOptions {
-  defaultRtl?: boolean
   rtl?: Record<string, boolean>
 }
 
@@ -28,7 +27,7 @@ export function createRtl (localeScope: LocaleInstance, options?: RtlOptions) {
       ...rtl,
       ...(options?.rtl ?? {}),
     },
-    isRtl: ref(options?.defaultRtl ?? false),
+    isRtl: ref(false),
     rtlClasses: ref(''),
   }, localeScope)
 }
