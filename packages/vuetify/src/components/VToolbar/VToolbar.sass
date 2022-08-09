@@ -10,8 +10,7 @@
   justify-content: space-between
   max-width: 100%
   overflow: hidden
-  padding-inline-end: calc(#{$toolbar-padding-end} + var(--v-scrollbar-offset))
-  padding-inline-start: $toolbar-padding-start
+  padding-inline-end: var(--v-scrollbar-offset)
   position: relative
   transition: $toolbar-transition
   transition-property: height, transform, max-width
@@ -20,12 +19,6 @@
   @include tools.elevation($toolbar-elevation)
   @include tools.rounded($toolbar-border-radius)
   @include tools.theme($toolbar-theme...)
-
-  @at-root
-    @include tools.density('v-toolbar', $toolbar-density) using ($modifier)
-      .v-toolbar__content
-        padding-top: $toolbar-padding + $modifier
-        padding-bottom: $toolbar-padding + $modifier
 
   &--absolute
     position: absolute
