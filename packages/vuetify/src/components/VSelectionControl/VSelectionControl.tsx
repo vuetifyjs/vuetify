@@ -204,6 +204,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
       isFocusVisible.value = false
     }
 
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLInputElement).checked
+    }
+
     useRender(() => {
       const label = slots.label
         ? slots.label({
@@ -258,9 +262,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 id={ id.value }
                 onBlur={ onBlur }
                 onFocus={ onFocus }
-                onInput={ (e: Event) => {
-                  model.value = (e.target as HTMLInputElement).checked
-                } }
+                onInput={ onInput }
                 aria-readonly={ props.readonly }
                 type={ type }
                 value={ trueValue.value }
