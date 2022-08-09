@@ -60,13 +60,12 @@
   &--variant-outlined,
   &--single-line
     --v-field-padding-top: 0px
-    --v-field-padding-bottom: 16px
+    $root: &
 
-  &--prepended
-    --v-field-padding-start: #{$field-control-affixed-inner-padding}
-
-  &--appended
-    --v-field-padding-end: #{$field-control-affixed-inner-padding}
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.nest(&, $root)}
+          --v-field-padding-bottom: #{16px + $modifier * .5}
 
   &--variant-solo,
   &--variant-filled
@@ -86,6 +85,13 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+
+  // These are separate so they can override the default variant styles
+  &--prepended
+    --v-field-padding-start: #{$field-control-affixed-inner-padding}
+
+  &--appended
+    --v-field-padding-end: #{$field-control-affixed-inner-padding}
 
 /* endregion */
 /* region ELEMENTS */
