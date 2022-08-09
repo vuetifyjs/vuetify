@@ -9,6 +9,7 @@
   transition: .3s map-get($transition, 'fast-in-fast-out')
   width: 100%
   z-index: inherit
+  outline: none
   +elevation($dialog-elevation)
 
   &:not(.v-dialog--fullscreen)
@@ -46,7 +47,6 @@
   transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
   width: 100%
   z-index: 6
-  outline: none
 
 .v-dialog__container
   display: none

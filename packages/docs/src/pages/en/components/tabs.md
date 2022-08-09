@@ -101,7 +101,7 @@ The **grow** prop will make the tab items take up all available space up to a ma
 
 #### Icons and text
 
-Using **icons-with-text** prop increases the `v-tabs` height to 72px to allow for both icons as well as text to be used.
+Using **icons-and-text** prop increases the `v-tabs` height to 72px to allow for both icons as well as text to be used.
 
 <example file="v-tabs/prop-icons-and-text" />
 

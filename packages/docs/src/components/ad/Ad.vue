@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     :style="styles"
-    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 my-2"
+    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 mb-4"
     rounded
     width="100%"
     v-bind="$attrs"

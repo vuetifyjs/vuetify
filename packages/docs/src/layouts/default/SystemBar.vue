@@ -1,14 +1,14 @@
 <template>
   <v-system-bar
-    v-if="hasPromotion"
-    color="#0F335F"
+    v-if="hasPromotion && false"
+    class="cm-system-bar"
     app
     dark
     height="66"
   >
     <a
       class="cm-banner"
-      href="https://store.vuetifyjs.com/products/ui-lib-bundle?utm_source=vuetify"
+      href="https://cutt.ly/0JmRXHr"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'ui-lib-road-to-vuetify-3',
+          event_label: 'ui-lib-nitro',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,11 +78,12 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-mobile.png)
+    background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-3.png)
+    background-size: cover
 
     @media (min-width: 437px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-tablet.png)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-2.png)
 
     @media (min-width: 992px)
-      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/ui-lib-road-to-vuetify-3/ui-lib-road-to-vuetify-3-desktop.png)
+      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-1.png)
 </style>

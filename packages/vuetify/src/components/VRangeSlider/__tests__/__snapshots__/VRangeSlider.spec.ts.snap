@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`VRangeSlider.ts should render a vertical slider 1`] = `
+exports[`VRangeSlider should render a vertical slider 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty theme--light v-input__slider v-input__slider--vertical v-input--range-slider">
   <div class="v-input__control">
     <div class="v-input__slot">
@@ -64,7 +64,7 @@ exports[`VRangeSlider.ts should render a vertical slider 1`] = `
 </div>
 `;
 
-exports[`VRangeSlider.ts should render disabled slider 1`] = `
+exports[`VRangeSlider should render disabled slider 1`] = `
 <div class="v-input v-input--is-label-active v-input--is-dirty v-input--is-disabled theme--light v-input__slider v-input--range-slider">
   <div class="v-input__control">
     <div class="v-input__slot">
