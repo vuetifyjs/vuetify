@@ -1,5 +1,6 @@
 // Styles
 import './VTextarea.sass'
+import '../VTextField/VTextField.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
@@ -189,10 +190,12 @@ export const VTextarea = defineComponent({
           ref={ vInputRef }
           v-model={ model.value }
           class={[
-            'v-textarea',
+            'v-textarea v-text-field',
             {
               'v-textarea--prefixed': props.prefix,
               'v-textarea--suffixed': props.suffix,
+              'v-text-field--prefixed': props.prefix,
+              'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
             },
