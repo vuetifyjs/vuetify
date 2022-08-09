@@ -18,14 +18,17 @@ import { cloneVNode, computed, nextTick, ref } from 'vue'
 import { filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, VNode } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
 export const VTextField = genericComponent<new <T>() => {
-  $slots: VInputSlots & VFieldSlots
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+    default: [{ inputNode: VNode }]
+  }>
 }>()({
   name: 'VTextField',
 
@@ -194,7 +197,7 @@ export const VTextField = genericComponent<new <T>() => {
                         autofocus={ props.autofocus }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
-                            name={ props.name }
+                        name={ props.name }
                         placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
