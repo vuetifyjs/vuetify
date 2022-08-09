@@ -132,7 +132,7 @@ export const VSelect = genericComponent<new <
     function onClickControl () {
       if (props.hideNoData && !items.value.length) return
 
-      menu.value = true
+      menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
@@ -180,7 +180,6 @@ export const VSelect = genericComponent<new <
           appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }
-          onClick:input={ onClickControl }
           onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
           onKeydown={ onKeydown }
