@@ -8,7 +8,7 @@
 .v-btn
   align-items: center
   border-radius: $button-border-radius
-  display: grid
+  display: inline-grid
   grid-template-areas: "prepend content append"
   grid-template-columns: max-content auto max-content
   font-weight: $button-font-weight
@@ -53,7 +53,11 @@
     border-radius: $button-icon-border-radius
     min-width: 0
     padding: 0
-    font-size: $button-icon-font-size
+
+    // ensure that default
+    // v-icon size is 24px
+    &.v-btn--size-default
+      font-size: $button-icon-font-size
 
     @at-root &
       @include button-density(('width', 'height'), $button-icon-density)
@@ -77,17 +81,28 @@
   &--disabled
     pointer-events: none
 
-    &.v-btn--disabled
-      color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+    @if ($button-colored-disabled)
+      opacity: $button-disabled-opacity
+    @else
       opacity: 1
+      &.v-btn
+        // specificity has to be higher to override theme !important
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity) !important
 
-    &.v-btn--variant-elevated
-      background: rgb(var(--v-theme-surface))
+    &.v-btn--variant-elevated,
+    &.v-btn--variant-flat
       box-shadow: none
 
+      @if ($button-colored-disabled)
+        opacity: 1
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+        background: rgb(var(--v-theme-surface))
+      @else
+        background: rgb(var(--v-theme-surface)) !important
+
       .v-btn__overlay
-        // This is multiplied by the text opacity,
-        // so we need to divide it to get the desired value
+        // __overlay uses currentColor, so we need to divide
+        // by the text opacity to get the correct value
         opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
   &--loading
@@ -99,9 +114,30 @@
       opacity: 0
 
   &--stacked
+    grid-template-areas: "prepend" "content" "append"
+    grid-template-columns: auto
+    grid-template-rows: max-content max-content max-content
+    justify-items: center
+    align-content: center
+
     .v-btn__content
       flex-direction: column
       line-height: $button-stacked-line-height
+
+    .v-btn__prepend,
+    .v-btn__append,
+    .v-btn__content > .v-icon--start,
+    .v-btn__content > .v-icon--end
+      margin-inline-start: 0
+      margin-inline-end: 0
+
+    .v-btn__prepend,
+    .v-btn__content > .v-icon--start
+      margin-bottom: $button-stacked-icon-margin
+
+    .v-btn__append,
+    .v-btn__content > .v-icon--end
+      margin-top: $button-stacked-icon-margin
 
     @at-root
       @include button-sizes($button-stacked-sizes, true)
@@ -165,12 +201,15 @@
     white-space: normal
 
 .v-btn__overlay
-  @include tools.absolute()
   background-color: currentColor
   border-radius: inherit
-  pointer-events: none
   opacity: 0
   transition: opacity .2s ease-in-out
+
+.v-btn__overlay,
+.v-btn__underlay
+  @include tools.absolute()
+  pointer-events: none
 
 // VAppBar
 .v-btn
@@ -199,6 +238,8 @@
     @include tools.rounded($button-pagination-border-radius)
 
   &__overlay
+    transition: none
+
     .v-pagination__item--is-active &
       opacity: $button-pagination-active-overlay-opacity
 

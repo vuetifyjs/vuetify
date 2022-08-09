@@ -98,11 +98,11 @@ You can use the **readonly** prop on `v-select` which will prevent a user from c
 
 ### Slots
 
-<!-- #### Append and prepend item
+#### Append and prepend item
 
 The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality.
 
-<example file="v-select/slot-append-and-prepend-item" /> -->
+<example file="v-select/slot-append-and-prepend-item" />
 
 #### Selection
 

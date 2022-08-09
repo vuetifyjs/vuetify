@@ -13,7 +13,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -66,7 +66,7 @@ export const VAutocomplete = genericComponent<new <
     modelValue?: Readonly<V>
     'onUpdate:modelValue'?: (val: V) => void
   }
-  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
@@ -263,7 +263,7 @@ export const VAutocomplete = genericComponent<new <
                         onClick={ () => select(item) }
                       >
                         {{
-                          prepend: ({ isSelected }) => props.multiple ? (
+                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
                             <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                           ) : undefined,
                           title: () => {
@@ -329,7 +329,7 @@ export const VAutocomplete = genericComponent<new <
       )
     })
 
-    return useForwardRef({
+    return forwardRefs({
       isFocused,
       isPristine,
       menu,

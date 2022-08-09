@@ -4,6 +4,9 @@
 @use '../../styles/tools';
 
 // Defaults
+/** if false, disabled buttons will be greyed out */
+$button-colored-disabled: true !default;
+
 $button-app-bar-elevation: 0 !default;
 $button-background: rgb(var(--v-theme-surface)) !default;
 $button-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
@@ -26,9 +29,9 @@ $button-font-size: tools.map-deep-get(settings.$typography, 'button', 'size') !d
 $button-font-weight: tools.map-deep-get(settings.$typography, 'button', 'weight') !default;
 $button-height: 36px !default;
 $button-stacked-height: 72px !default;
+$button-stacked-icon-margin: 4px !default;
 $button-icon-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-icon-font-size: 1rem !default;
-$button-icon-size: 40px !default;
 $button-line-height: normal !default;
 $button-stacked-line-height: 1.25 !default;
 $button-plain-opacity: .62 !default;
@@ -50,9 +53,9 @@ $button-stacked-width-ratio: 1 !default;
 $button-rounded-border-radius: map.get(settings.$rounded, 'xl') !default;
 $button-white-space: nowrap !default;
 
-$button-density: ('default': 1, 'comfortable': -2, 'compact': -3) !default;
+$button-density: ('default': 0, 'comfortable': -2, 'compact': -3) !default;
 $button-stacked-density: ('default': 0, 'comfortable': -4, 'compact': -6) !default;
-$button-icon-density: ('default': 1, 'comfortable': -2, 'compact': -2) !default;
+$button-icon-density: ('default': 3, 'comfortable': 0, 'compact': -2) !default;
 
 $button-border: (
   $button-border-color,

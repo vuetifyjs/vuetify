@@ -61,3 +61,5 @@ export const VTable = defineComponent({
     return {}
   },
 })
+
+export type VTable = InstanceType<typeof VTable>

@@ -18,6 +18,10 @@ export const VItem = genericComponent<new () => {
 
   props: makeGroupItemProps(),
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { slots }) {
     const { isSelected, select, toggle, selectedClass, value, disabled } = useGroupItem(props, VItemGroupSymbol)
     return () => slots.default?.({

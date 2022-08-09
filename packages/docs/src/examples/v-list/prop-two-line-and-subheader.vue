@@ -1,13 +1,10 @@
 <template>
   <v-card
-    max-width="600"
     class="mx-auto"
+    max-width="600"
   >
-    <v-toolbar
-      color="light-blue"
-      dark
-    >
-      <v-app-bar-nav-icon variant="text"></v-app-bar-nav-icon>
+    <v-toolbar color="secondary">
+      <v-btn variant="text" icon="mdi-menu"></v-btn>
 
       <v-toolbar-title>My files</v-toolbar-title>
 
@@ -24,14 +21,21 @@
       <v-list-item
         v-for="folder in folders"
         :key="folder.title"
-        prepend-icon="mdi-folder"
         :title="folder.title"
         :subtitle="folder.subtitle"
       >
+        <template v-slot:prepend>
+          <v-avatar color="grey-lighten-1">
+            <v-icon color="white">mdi-folder</v-icon>
+          </v-avatar>
+        </template>
+
         <template v-slot:append>
-          <v-list-item-avatar end>
-            <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
-          </v-list-item-avatar>
+          <v-btn
+            color="grey-lighten-1"
+            icon="mdi-information"
+            variant="text"
+          ></v-btn>
         </template>
       </v-list-item>
 
@@ -42,14 +46,21 @@
       <v-list-item
         v-for="file in files"
         :key="file.title"
-        :prepend-icon="file.icon"
         :title="file.title"
         :subtitle="file.subtitle"
       >
+        <template v-slot:prepend>
+          <v-avatar :color="file.color">
+            <v-icon color="white">{{ file.icon }}</v-icon>
+          </v-avatar>
+        </template>
+
         <template v-slot:append>
-          <v-list-item-avatar end>
-            <v-btn variant="text" color="grey lighten-1" icon="mdi-information"></v-btn>
-          </v-list-item-avatar>
+          <v-btn
+            color="grey-lighten-1"
+            icon="mdi-information"
+            variant="text"
+          ></v-btn>
         </template>
       </v-list-item>
     </v-list>

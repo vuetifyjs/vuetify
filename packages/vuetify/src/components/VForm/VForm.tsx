@@ -1,6 +1,6 @@
 // Composables
 import { createForm, makeFormProps } from '@/composables/form'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { ref } from 'vue'
@@ -63,7 +63,7 @@ export const VForm = defineComponent({
       </form>
     )))
 
-    return useForwardRef(form, formRef)
+    return forwardRefs(form, formRef)
   },
 })
 

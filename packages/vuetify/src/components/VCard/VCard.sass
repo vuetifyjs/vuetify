@@ -5,6 +5,7 @@
 .v-card
   display: block
   overflow: hidden
+  overflow-wrap: $card-overflow-wrap
   position: relative
   padding: $card-padding
   text-decoration: none
@@ -23,7 +24,7 @@
     pointer-events: none
     user-select: none
 
-    > [class*='v-card-']
+    >:not(.v-card__loader)
       opacity: $card-disabled-opacity
 
   &--flat
@@ -153,8 +154,6 @@
   letter-spacing: $card-text-letter-spacing
   padding: $card-text-padding
   text-transform: $card-text-text-transform
-  transition: inherit
-  transition-property: color, opacity
 
   @include card-line-height-densities($card-text-densities)
 
@@ -181,6 +180,7 @@
   position: absolute
   right: 0
   width: 100%
+  z-index: 1
 
 .v-card__overlay
   background-color: currentColor

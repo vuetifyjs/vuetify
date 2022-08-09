@@ -4,6 +4,7 @@ import {
   arrayDiff,
   convertToUnit,
   deepEqual,
+  destructComputed,
   getNestedValue,
   getObjectValueByPath,
   getPropertyFromItem,
@@ -11,6 +12,7 @@ import {
   mergeDeep,
   sortItems,
 } from '../helpers'
+import { isProxy, isReactive, isRef, nextTick, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {
@@ -440,6 +442,38 @@ describe('helpers', () => {
 
     it('should use arrayFn function if provided', () => {
       expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
+    })
+  })
+
+  describe('destructComputed', () => {
+    it('should return object as refs', () => {
+      const obj = destructComputed(() => {
+        return {
+          a: 'foo',
+          b: 'bar',
+        }
+      })
+
+      expect(obj).toHaveProperty('a')
+      expect(obj).toHaveProperty('b')
+      expect(isRef(obj.a)).toBeTruthy()
+      expect(isRef(obj.b)).toBeTruthy()
+      expect(isProxy(obj)).toBeFalsy()
+    })
+
+    it('should be reactive', async () => {
+      const val = ref('foo')
+      const obj = destructComputed(() => {
+        return {
+          a: val.value,
+        }
+      })
+
+      expect(obj.a.value).toBe('foo')
+
+      val.value = 'bar'
+
+      expect(obj.a.value).toBe('bar')
     })
   })
 })

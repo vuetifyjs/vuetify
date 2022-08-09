@@ -89,7 +89,7 @@ describe('VPagination', () => {
       <VPagination length="100" />
     ))
 
-    cy.get('.v-pagination__item').should('have.length', 8)
+    cy.get('.v-pagination__item').should('have.length', 7)
   })
 
   it('should render in RTL mode', () => {
@@ -98,5 +98,13 @@ describe('VPagination', () => {
         <VPagination length="5" />
       </VLocaleProvider>
     ))
+  })
+
+  it('should use color props', () => {
+    cy.mount(() => (
+      <VPagination color="error" activeColor="success" length="5" />
+    ))
+      .get('.v-btn').eq(0).should('have.class', 'text-error')
+      .get('.v-btn').eq(1).should('have.class', 'text-success')
   })
 })

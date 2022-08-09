@@ -7,7 +7,7 @@ import { VOverlay } from '@/components/VOverlay'
 
 // Composables
 import { makeTransitionProps } from '@/composables/transition'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
@@ -107,7 +107,7 @@ export const VMenu = genericComponent<new () => {
       />
     ))
 
-    return useForwardRef({ id }, overlay)
+    return forwardRefs({ id }, overlay)
   },
 })
 

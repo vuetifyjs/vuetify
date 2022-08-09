@@ -72,17 +72,17 @@ export const VExpansionPanelTitle = defineComponent({
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
         v-ripple={ props.ripple }
       >
-        <div class="v-expansion-panel-title__overlay" />
+        <span class="v-expansion-panel-title__overlay" />
 
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <div class="v-expansion-panel-title__icon">
+          <span class="v-expansion-panel-title__icon">
             {
               slots.actions ? slots.actions(slotProps.value)
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
-          </div>
+          </span>
         ) }
       </button>
     ))

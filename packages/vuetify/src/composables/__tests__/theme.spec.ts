@@ -81,6 +81,20 @@ describe('createTheme', () => {
     expect(theme.computedThemes.value.light.colors.background).toBe('#FF0000')
   })
 
+  it('should set a CSP nonce if configured', async () => {
+    createTheme(app, { cspNonce: 'my-csp-nonce' })
+
+    const styleElement = document.getElementById('vuetify-theme-stylesheet')
+    expect(styleElement?.getAttribute('nonce')).toBe('my-csp-nonce')
+  })
+
+  it('should not set a CSP nonce if option was left blank', async () => {
+    createTheme(app, {})
+
+    const styleElement = document.getElementById('vuetify-theme-stylesheet')
+    expect(styleElement?.getAttribute('nonce')).toBeNull()
+  })
+
   // it('should use vue-meta@2.3 functionality', () => {
   //   const theme = createTheme()
   //   const set = jest.fn()

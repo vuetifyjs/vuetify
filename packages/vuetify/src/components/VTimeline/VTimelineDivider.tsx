@@ -56,6 +56,14 @@ export const VTimelineDivider = defineComponent({
           },
         ]}
       >
+        <div
+          class={[
+            'v-timeline-divider__before',
+            lineColorClasses.value,
+          ]}
+          style={ lineColorStyles.value }
+        />
+
         { !props.hideDot && (
           <div
             key="dot"
@@ -75,14 +83,14 @@ export const VTimelineDivider = defineComponent({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default?.() ?? props.icon ? (<VIcon />) : undefined }
+              { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
             </div>
           </div>
         ) }
 
         <div
           class={[
-            'v-timeline-divider__line',
+            'v-timeline-divider__after',
             lineColorClasses.value,
           ]}
           style={ lineColorStyles.value }
