@@ -307,7 +307,7 @@ export const VCombobox = genericComponent<new <
         >
           {{
             ...slots,
-            default: ({ inputNode }) => (
+            default: () => (
               <>
                 <VMenu
                   v-model={ menu.value }
@@ -409,8 +409,6 @@ export const VCombobox = genericComponent<new <
                     </div>
                   )
                 }) }
-
-                { inputNode }
               </>
             ),
           }}

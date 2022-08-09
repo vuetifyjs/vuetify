@@ -230,7 +230,7 @@ export const VAutocomplete = genericComponent<new <
         >
           {{
             ...slots,
-            default: ({ inputNode }) => (
+            default: () => (
               <>
                 <VMenu
                   v-model={ menu.value }
@@ -322,8 +322,6 @@ export const VAutocomplete = genericComponent<new <
                     </div>
                   )
                 }) }
-
-                { inputNode }
               </>
             ),
           }}
