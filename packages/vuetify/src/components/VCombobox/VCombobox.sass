@@ -31,6 +31,12 @@
     .v-combobox__selection
       margin-inline-end: 2px
 
+  .v-field--single-line
+    .v-combobox__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
 .v-combobox
   &__content
     overflow: hidden
@@ -45,6 +51,7 @@
     display: inline-flex
     letter-spacing: inherit
     line-height: inherit
+    max-width: 100%
 
   &--active-menu
     .v-field__append-inner
