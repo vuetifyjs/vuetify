@@ -3,10 +3,13 @@ import type { UnionToIntersection } from '@/util'
 
 const Refs = Symbol('Forwarded refs')
 
+/** Omit properties starting with P */
+type OmitPrefix<T, P extends string> = Omit<T, keyof T extends `${P}${any}` ? keyof T : never>
+
 export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit'> | undefined>[]> (
   target: T,
   ...refs: U
-): T & UnwrapRef<UnionToIntersection<U[number]>> {
+): T & OmitPrefix<UnwrapRef<UnionToIntersection<U[number]>>, '$'> {
   (target as any)[Refs] = refs
 
   return new Proxy(target, {
