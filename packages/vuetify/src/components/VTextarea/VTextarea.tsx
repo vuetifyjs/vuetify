@@ -137,19 +137,21 @@ export const VTextarea = defineComponent({
       if (!props.autoGrow) return
 
       nextTick(() => {
-        if (!sizerRef.value) return
+        if (!sizerRef.value || !vFieldRef.value) return
 
         const style = getComputedStyle(sizerRef.value)
+        const fieldStyle = getComputedStyle(vFieldRef.value.$el)
 
         const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
           parseFloat(style.getPropertyValue('--v-input-padding-top')) +
           parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
 
-        const baseHeight = parseFloat(style.getPropertyValue('--v-textarea-base-height'))
-
         const height = sizerRef.value.scrollHeight
         const lineHeight = parseFloat(style.lineHeight)
-        const minHeight = Math.max(parseFloat(props.rows) * lineHeight + padding, baseHeight)
+        const minHeight = Math.max(
+          parseFloat(props.rows) * lineHeight + padding,
+          parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
+        )
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
 
         controlHeight.value = convertToUnit(clamp(height ?? 0, minHeight, maxHeight))
@@ -184,6 +186,7 @@ export const VTextarea = defineComponent({
 
       return (
         <VInput
+          ref={ vInputRef }
           v-model={ model.value }
           class={[
             'v-textarea',
@@ -207,8 +210,9 @@ export const VTextarea = defineComponent({
               isValid,
             }) => (
               <VField
+                ref={ vFieldRef }
                 style={{
-                  '--v-input-control-height': controlHeight.value,
+                  '--v-textarea-control-height': controlHeight.value,
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
