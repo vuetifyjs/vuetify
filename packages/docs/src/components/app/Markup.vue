@@ -10,6 +10,7 @@
     v-bind="$attrs"
   >
     <v-toolbar
+      v-if="resource"
       class="px-1"
       height="44"
     >
@@ -24,25 +25,25 @@
 
         {{ resource }}
       </v-sheet>
-
-      <v-spacer />
-
-      <v-tooltip location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-            class="mr-1 text-disabled"
-            density="comfortable"
-            v-bind="props"
-            @click="copy"
-          />
-        </template>
-
-        <span>{{ t('copy-example-source') }}</span>
-      </v-tooltip>
     </v-toolbar>
 
-    <div class="pa-4">
+    <v-tooltip location="bottom">
+      <template #activator="{ props }">
+        <v-btn
+          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
+          class="mr-1 text-disabled me-2 mt-2"
+          density="compact"
+          style="position: absolute; right: 0; top: 0;"
+          v-bind="props"
+          variant="text"
+          @click="copy"
+        />
+      </template>
+
+      <span>{{ t('copy-example-source') }}</span>
+    </v-tooltip>
+
+    <div class="pa-4 pe-12">
       <slot>
         <pre v-if="inline" :class="className">
           <code :class="className" v-html="highlighted" />
@@ -183,8 +184,9 @@
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
+        pointer-events: none
         position: absolute
-        right: 12px
+        right: .5rem
         text-transform: uppercase
 
     pre.language-bash::after
