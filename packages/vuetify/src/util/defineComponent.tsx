@@ -16,9 +16,11 @@ import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defa
 
 // Types
 import type {
+  ComponentCustomOptions,
   ComponentOptions,
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
+  ComponentOptionsWithoutProps,
   ComponentPropsOptions,
   ComputedOptions,
   DefineComponent,
@@ -34,7 +36,51 @@ function propIsDefined (vnode: VNode, prop: string) {
   vnode.props?.hasOwnProperty(toKebabCase(prop))
 }
 
-export const defineComponent = (function defineComponent (options: ComponentOptions) {
+export function defineComponent<
+  Props = {},
+  RawBindings = {},
+  D = {},
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = EmitsOptions,
+  EE extends string = string
+>(options: ComponentOptionsWithoutProps<
+  Props,
+  RawBindings,
+  D,
+  C,
+  M,
+  Mixin,
+  Extends,
+  E,
+  EE
+>): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE>
+
+export function defineComponent<
+  PropsOptions extends Readonly<ComponentPropsOptions>,
+  RawBindings,
+  D,
+  C extends ComputedOptions = {},
+  M extends MethodOptions = {},
+  Mixin extends ComponentOptionsMixin = ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
+  E extends EmitsOptions = Record<string, any>,
+  EE extends string = string
+>(options: ComponentOptionsWithObjectProps<
+  PropsOptions,
+  RawBindings,
+  D,
+  C,
+  M,
+  Mixin,
+  Extends,
+  E,
+  EE
+>): DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+
+export function defineComponent (options: ComponentOptions) {
   options._setup = options._setup ?? options.setup
 
   if (!options.name) {
@@ -92,7 +138,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   }
 
   return options
-}) as unknown as typeof _defineComponent
+}
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 export type SlotsToProps<T extends Record<string, Slot>> = {
@@ -105,6 +151,21 @@ export type SlotsToProps<T extends Record<string, Slot>> = {
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {
   [K in keyof T]?: Slot<T[K]>
+}
+
+interface ComponentOptionsGeneric<
+  Props,
+  RawBindings,
+  D,
+  C extends ComputedOptions,
+  M extends MethodOptions,
+  Mixin extends ComponentOptionsMixin,
+  Extends extends ComponentOptionsMixin,
+  E extends EmitsOptions,
+  EE extends string = string,
+  Defaults = {}
+> extends ComponentCustomOptions {
+  //
 }
 
 export function genericComponent<T extends (new () => {
