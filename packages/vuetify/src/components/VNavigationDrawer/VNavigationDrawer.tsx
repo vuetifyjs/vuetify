@@ -14,6 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
+import { useRtl } from '@/composables'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
@@ -49,9 +50,9 @@ export const VNavigationDrawer = defineComponent({
       default: 256,
     },
     location: {
-      type: String as PropType<'left' | 'right' | 'bottom'>,
-      default: 'left',
-      validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
+      type: String as PropType<'start' | 'end' | 'bottom'>,
+      default: 'start',
+      validator: (value: any) => ['start', 'end', 'bottom'].includes(value),
     },
 
     ...makeBorderProps(),
@@ -104,12 +105,19 @@ export const VNavigationDrawer = defineComponent({
 
     const rootEl = ref<HTMLElement>()
 
+    const { isRtl } = useRtl()
+    const position = computed(() => {
+      if (props.location === 'bottom') return props.location
+
+      return props.location === 'start' !== isRtl.value ? 'left' : 'right'
+    })
+
     const { isDragging, dragProgress, dragStyles } = useTouch({
       isActive,
       isTemporary,
       width,
       touchless: toRef(props, 'touchless'),
-      position: toRef(props, 'location'),
+      position,
     })
 
     const layoutSize = computed(() => {
@@ -119,10 +127,11 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
+
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(props, 'location'),
+      position,
       layoutSize,
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),

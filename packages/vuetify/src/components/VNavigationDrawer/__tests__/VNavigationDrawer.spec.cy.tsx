@@ -117,10 +117,10 @@ describe('VNavigationDrawer', () => {
     cy.get('.v-navigation-drawer').should('have.css', 'width', '300px')
   })
 
-  it('should position drawer to the right', () => {
+  it('should position drawer on the opposite side', () => {
     cy.mount(() => (
       <VLayout>
-        <VNavigationDrawer location="right" permanent />
+        <VNavigationDrawer location="end" permanent />
       </VLayout>
     ))
 
