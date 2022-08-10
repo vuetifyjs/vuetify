@@ -43,6 +43,16 @@ const DataTableEvents = [
     source: 'v-data-table',
     value: `MouseEvent, ${dataString}`,
   },
+  {
+    name: 'mouseover:row',
+    source: 'v-data-table',
+    value: `MouseEvent, ${dataString}`,
+  },
+  {
+    name: 'mouseleave:row',
+    source: 'v-data-table',
+    value: `MouseEvent, ${dataString}`,
+  },
 ].concat(DataIteratorEvents)
 
 const DataTableHeaderScopedProps = {
