@@ -86,13 +86,12 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = ref(false)
@@ -126,8 +125,6 @@ export const VAutocomplete = genericComponent<new <
       }
 
       search.value = ''
-
-      emit('click:clear', e)
     }
     function onClickControl () {
       if (props.hideNoData && !filteredItems.value.length) return
