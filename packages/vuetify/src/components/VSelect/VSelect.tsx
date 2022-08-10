@@ -53,6 +53,8 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'select')
@@ -169,6 +171,8 @@ export const VSelect = genericComponent<new <
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ props.modelValue }
+          placeholder={ props.placeholder }
+          persistentPlaceholder={ props.persistentPlaceholder }
           class={[
             'v-select',
             {
