@@ -14,7 +14,8 @@
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
   // Composables
-  // import { useRoute } from 'vue-router'
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
 
   // Utilities
   import { defineComponent } from 'vue'
@@ -25,15 +26,16 @@
     components: { AppTooltipBtn },
 
     setup () {
-      // const route = useRoute()
+      const { name } = useRoute()
+      const { event } = useGtag()
 
       return {
         onClick () {
-          // this.$gtag.event('click', {
-          //   event_category: 'toolbar',
-          //   event_label: 'store',
-          //   value: route.name,
-          // })
+          event('click', {
+            event_category: 'app-bar',
+            event_label: 'store',
+            value: name,
+          })
         },
       }
     },

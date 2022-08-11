@@ -4,6 +4,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 import App from './App.vue'
 
 // plugins
+import { useGtag } from './plugins/gtag'
 import { useI18n } from './plugins/i18n'
 import { usePwa } from './plugins/pwa'
 import { pinia, usePinia } from './plugins/pinia'
@@ -76,6 +77,7 @@ export const createApp = ViteSSG(
     })
 
     useGlobalComponents(ctx)
+    useGtag(ctx)
     useI18n(ctx)
     usePwa(ctx)
     usePinia(ctx)

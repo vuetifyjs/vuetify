@@ -24,9 +24,14 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent, ref, watch } from 'vue'
-  import { useTheme } from 'vuetify'
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
   import { useSponsorsStore } from '@/store/sponsors'
+  import { useTheme } from 'vuetify'
+
+  // Utilities
+  import { computed, defineComponent, ref, watch } from 'vue'
 
   export default defineComponent({
     name: 'SponsorCard',
@@ -40,6 +45,8 @@
     },
 
     setup (props) {
+      const { event } = useGtag()
+      const { name } = useRoute()
       const theme = useTheme()
       const sponsors = useSponsorsStore()
       const sponsor = ref(props.sponsor)
@@ -72,19 +79,20 @@
         })
       }
 
-      function onClick () {
-        // TODO: gtag
-        // this.$gtag.event('click', {
-        //   event_category: 'vuetify-sponsor',
-        //   event_label: this.value.slug,
-        //   value: this.name.toLowerCase(),
-        // })
-      }
-
       return {
         src,
         imgWidth,
-        onClick,
+        onClick () {
+          const slug = sponsor.value?.slug ?? props.slug
+
+          if (!slug) return
+
+          event('click', {
+            event_category: 'vuetify-sponsor',
+            event_label: slug,
+            value: name,
+          })
+        },
         found: sponsor,
       }
     },

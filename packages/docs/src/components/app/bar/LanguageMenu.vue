@@ -4,7 +4,10 @@
     class="px-0 px-md-2 font-weight-regular"
     variant="text"
   >
-    <v-icon icon="mdi-translate" />
+    <v-icon
+      color="medium-emphasis"
+      icon="mdi-translate"
+    />
 
     <chevron-down />
 

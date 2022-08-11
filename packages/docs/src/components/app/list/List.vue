@@ -1,13 +1,23 @@
 <template>
   <v-list
     v-model:opened="opened"
+    :nav="nav"
     :items="computedItems"
     :lines="false"
-    :nav="nav"
     color="primary"
     density="compact"
     item-props
-  />
+  >
+    <template #divider>
+      <v-divider class="my-3 mb-4 mr-n2" />
+    </template>
+
+    <template #subheader="{ props }">
+      <v-list-subheader class="text-high-emphasis text-black text-uppercase font-weight-black">
+        {{ props.title }}
+      </v-list-subheader>
+    </template>
+  </v-list>
 </template>
 
 <script lang="ts">

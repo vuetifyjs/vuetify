@@ -1,5 +1,8 @@
 <template>
-  <app-btn>
+  <app-btn
+    color="medium-emphasis"
+    variant="text"
+  >
     {{ title }}
 
     <chevron-down />
@@ -34,6 +37,7 @@
       return {
         title: t('support'),
         items: computed(() => ([
+          // { heading: t('professional-support') },
           // {
           //   title: 'direct-support',
           //   to: {
