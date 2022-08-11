@@ -19,7 +19,7 @@
         opacity: 1
         flex: 0 0
         position: absolute
-        min-width: 100%
+        width: 100%
 
     .v-field__append-inner
       > .v-icon
@@ -60,3 +60,9 @@
 
       &:first-child
         margin-inline-start: 0
+
+  &--selected
+    .v-field
+      .v-field__input
+        > input
+          opacity: 0
