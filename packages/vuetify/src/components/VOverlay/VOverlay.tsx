@@ -117,6 +117,7 @@ export const VOverlay = genericComponent<new () => {
   emits: {
     'click:outside': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
+    keydown: (e: KeyboardEvent) => true,
     afterLeave: () => true,
   },
 
@@ -180,6 +181,7 @@ export const VOverlay = genericComponent<new () => {
 
     function onKeydown (e: KeyboardEvent) {
       if (e.key === 'Escape' && globalTop.value) {
+        emit('keydown', e)
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
