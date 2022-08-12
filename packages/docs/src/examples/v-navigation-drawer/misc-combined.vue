@@ -6,7 +6,7 @@
         rail
         permanent
       >
-        <v-list-item prepend-avatar="https://randomuser.me/api/portraits/women/75.jpg"></v-list-item>
+        <v-list-item class="pl-2" prepend-avatar="https://randomuser.me/api/portraits/women/75.jpg"></v-list-item>
 
         <v-divider></v-divider>
 
