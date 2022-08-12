@@ -11,6 +11,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeItemsProps } from '@/composables/items'
+import { makeKeyboardProps, useKeyboard } from '@/composables/keyboard'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -108,6 +109,7 @@ export const VList = genericComponent<new <T>() => {
       default: 'type',
     },
     ...makeItemsProps(),
+    ...makeKeyboardProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -131,6 +133,7 @@ export const VList = genericComponent<new <T>() => {
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { open, select } = useNested(props)
+    const { onKeydown } = useKeyboard(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const color = toRef(props, 'color')
@@ -174,6 +177,7 @@ export const VList = genericComponent<new <T>() => {
           backgroundColorStyles.value,
           dimensionStyles.value,
         ]}
+        onKeydown={ onKeydown }
       >
         <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
       </props.tag>
