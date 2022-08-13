@@ -86,7 +86,10 @@ export const VDateField = defineComponent({
                   model.value = selected.value
                   isActive.value = false
                 }}
-                onCancel={() => isActive.value = false}
+                onCancel={() => {
+                  isActive.value = false
+                  selected.value = model.value
+                }}
               />
             ),
           }}

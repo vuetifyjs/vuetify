@@ -52,7 +52,6 @@ export const VDateCard = defineComponent({
             </div>
           ) : (
             <VDatePickerYears
-              height="350"
               locale={ props.locale }
             />
           ) }

@@ -1,8 +1,8 @@
-$padding: 4px
-
 .v-date-picker-month
   display: flex
   justify-content: center
+
+  --v-date-picker-month-day-diff: 4px
 
 .v-date-picker-month__weeks
   display: grid
@@ -29,22 +29,22 @@ $padding: 4px
 .v-date-picker-month__day--range
   position: absolute
   width: 100%
-  height: calc(100% - $padding * 2)
+  height: calc(100% - var(--v-date-picker-month-day-diff) * 2)
   opacity: 0.5
 
 .v-date-picker-month__day--start, .v-date-picker-month__day--week-start
   .v-date-picker-month__day--range
     border-bottom-left-radius: 50%
     border-top-left-radius: 50%
-    left: $padding
-    width: calc(100% - $padding)
+    left: var(--v-date-picker-month-day-diff)
+    width: calc(100% - var(--v-date-picker-month-day-diff))
 
 .v-date-picker-month__day--end, .v-date-picker-month__day--week-end
   .v-date-picker-month__day--range
     border-bottom-right-radius: 50%
     border-top-right-radius: 50%
-    right: $padding
-    width: calc(100% - $padding)
+    right: var(--v-date-picker-month-day-diff)
+    width: calc(100% - var(--v-date-picker-month-day-diff))
 
 .v-date-picker-month__day--selected.v-date-picker-month__day--end.v-date-picker-month__day--week-start,
 .v-date-picker-month__day--selected.v-date-picker-month__day--start.v-date-picker-month__day--week-end
