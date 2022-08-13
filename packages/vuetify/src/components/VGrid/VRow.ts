@@ -32,7 +32,7 @@ const alignProps = makeRowProps('align', () => ({
   validator: alignValidator,
 }))
 
-const JUSTIFY_VALUES = [...ALIGNMENT, ...SPACE, 'stretch'] as const
+const JUSTIFY_VALUES = [...ALIGNMENT, ...SPACE] as const
 const justifyValidator = (str: any) => JUSTIFY_VALUES.includes(str)
 const justifyProps = makeRowProps('justify', () => ({
   type: String as PropType<typeof JUSTIFY_VALUES[number]>,
