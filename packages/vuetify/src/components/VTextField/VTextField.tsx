@@ -25,6 +25,9 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
+type EventProp<T = (...args: any[]) => any> = T | T[]
+const EventProp = [Function, Array] as PropType<EventProp>
+
 export const VTextField = genericComponent<new <T>() => {
   $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     default: []
@@ -52,12 +55,15 @@ export const VTextField = genericComponent<new <T>() => {
       default: 'text',
     },
 
+    'onClick:clear': EventProp,
+    'onClick:appendInner': EventProp,
+    'onClick:prependInner': EventProp,
+
     ...makeVInputProps(),
     ...makeVFieldProps(),
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'click:input': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
@@ -125,7 +131,7 @@ export const VTextField = genericComponent<new <T>() => {
       nextTick(() => {
         model.value = ''
 
-        emit('click:clear', e)
+        props['onClick:clear']?.(e)
       })
     }
 
@@ -172,8 +178,8 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
-                onClick:prependInner={ attrs['onClick:prependInner'] }
-                onClick:appendInner={ attrs['onClick:appendInner'] }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
                 id={ id.value }

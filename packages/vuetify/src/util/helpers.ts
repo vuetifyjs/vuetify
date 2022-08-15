@@ -591,3 +591,6 @@ export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
 export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
+
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
