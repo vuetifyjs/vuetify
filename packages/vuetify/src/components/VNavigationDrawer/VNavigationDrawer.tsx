@@ -18,7 +18,7 @@ import { useRtl } from '@/composables'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -50,7 +50,7 @@ export const VNavigationDrawer = defineComponent({
       default: 256,
     },
     location: {
-      type: String as PropType<'start' | 'end' | 'bottom'>,
+      type: String as PropType<'start' | 'end' | 'left' | 'right' | 'bottom'>,
       default: 'start',
       validator: (value: any) => ['start', 'end', 'bottom'].includes(value),
     },
@@ -107,9 +107,7 @@ export const VNavigationDrawer = defineComponent({
 
     const { isRtl } = useRtl()
     const position = computed(() => {
-      if (props.location === 'bottom') return props.location
-
-      return props.location === 'start' !== isRtl.value ? 'left' : 'right'
+      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
 
     const { isDragging, dragProgress, dragStyles } = useTouch({
