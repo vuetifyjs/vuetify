@@ -10,7 +10,6 @@
             prepend-avatar="https://randomuser.me/api/portraits/women/85.jpg"
             title="Sandra Adams"
             subtitle="sandra_a88@gmailcom"
-            class="pl-2"
           ></v-list-item>
         </v-list>
 
