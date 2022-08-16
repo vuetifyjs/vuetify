@@ -1,3 +1,4 @@
+@use '../../styles/tools'
 @use './variables' as *
 
 @mixin firefox()
@@ -13,14 +14,15 @@
   padding-top: var(--v-layout-top)
   padding-bottom: var(--v-layout-bottom)
 
-  &__wrap
+  &__scroller
     max-width: 100%
     position: relative
 
   &--scrollable
     display: flex
+    @include tools.absolute()
 
-    & > .v-main__wrap
+    & > .v-main__scroller
       flex: 1 1 auto
       overflow-y: auto
       --v-layout-left: 0px

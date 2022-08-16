@@ -35,7 +35,7 @@ export const VMain = defineComponent({
       >
         { props.scrollable
           ? (
-            <div class="v-main__wrap">
+            <div class="v-main__scroller">
               { slots.default?.() }
             </div>
           )

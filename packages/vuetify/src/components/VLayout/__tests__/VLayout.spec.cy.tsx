@@ -18,8 +18,8 @@ describe('VLayout', () => {
       </VLayout>
     ))
 
-    cy.get('.v-main').should('have.css', 'top', '64px')
-    cy.get('.v-main').should('have.css', 'left', '200px')
+    cy.get('.v-main').should('have.css', 'padding-top', '64px')
+    cy.get('.v-main').should('have.css', 'padding-left', '200px')
   })
 
   it('should work with sticky elements', () => {
@@ -30,6 +30,25 @@ describe('VLayout', () => {
         <VMain>
           <div>
             {createRange(10).map(_ => <div>hello</div>)}
+            <nav style="position: sticky; top: var(--v-layout-top); background: grey">Sticky Header</nav>
+            {createRange(100).map(_ => <div>hello</div>)}
+          </div>
+        </VMain>
+      </VLayout>
+    ))
+
+    cy.get('html').scrollTo(0, 1000)
+      .get('nav').should('be.visible')
+  })
+
+  it.only('should work with scrollable main', () => {
+    cy.mount(() => (
+      <VLayout>
+        <VAppBar height="64"></VAppBar>
+        <VNavigationDrawer width="200" permanent></VNavigationDrawer>
+        <VMain scrollable>
+          <div>
+            {createRange(10).map(_ => <div>hello</div>)}
             <nav style="position: sticky; top: 0px; background: grey">Sticky Header</nav>
             {createRange(100).map(_ => <div>hello</div>)}
           </div>
@@ -37,7 +56,7 @@ describe('VLayout', () => {
       </VLayout>
     ))
 
-    cy.get('.v-main').scrollTo(0, 1000)
+    cy.get('.v-main__scroller').scrollTo(0, 1000)
       .get('nav').should('be.visible')
   })
 
