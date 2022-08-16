@@ -23,6 +23,8 @@ import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
+const locations = ['start', 'end', 'left', 'right', 'bottom'] as const
+
 export const VNavigationDrawer = defineComponent({
   name: 'VNavigationDrawer',
 
@@ -50,9 +52,9 @@ export const VNavigationDrawer = defineComponent({
       default: 256,
     },
     location: {
-      type: String as PropType<'start' | 'end' | 'left' | 'right' | 'bottom'>,
+      type: String as PropType<typeof locations[number]>,
       default: 'start',
-      validator: (value: any) => ['start', 'end', 'bottom'].includes(value),
+      validator: (value: any) => locations.includes(value),
     },
 
     ...makeBorderProps(),
@@ -162,10 +164,8 @@ export const VNavigationDrawer = defineComponent({
             onMouseleave={ () => (isHovering.value = false) }
             class={[
               'v-navigation-drawer',
+              `v-navigation-drawer--${location.value}`,
               {
-                'v-navigation-drawer--left': location.value === 'left',
-                'v-navigation-drawer--right': location.value === 'right',
-                'v-navigation-drawer--bottom': location.value === 'bottom',
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
