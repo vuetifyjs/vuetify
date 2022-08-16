@@ -12,9 +12,9 @@ import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
+import { useRtl } from '@/composables'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
-import { useRtl } from '@/composables'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
