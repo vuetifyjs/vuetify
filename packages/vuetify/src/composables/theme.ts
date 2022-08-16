@@ -277,20 +277,25 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
       ])
     }
 
+    const bgLines: string[] = []
+    const fgLines: string[] = []
+
     const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
     for (const key of colors) {
       if (/on-[a-z]/.test(key)) {
-        createCssClass(lines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
+        createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
       } else {
-        createCssClass(lines, `.bg-${key}`, [
+        createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
           `background: rgb(var(--v-theme-${key})) !important`,
           `color: rgb(var(--v-theme-on-${key})) !important`,
         ])
-        createCssClass(lines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
-        createCssClass(lines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`])
+        createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
+        createCssClass(fgLines, `.border-${key}`, [`--v-border-color: var(--v-theme-${key})`])
       }
     }
+
+    lines.push(...bgLines, ...fgLines)
 
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })

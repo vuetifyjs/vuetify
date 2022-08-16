@@ -8,7 +8,6 @@
 }
 @mixin text-color($color_value) {
   color: $color_value !important;
-  caret-color: $color_value !important;
 }
 @mixin background-text-color($color_name, $color_type) {
   $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
@@ -25,10 +24,6 @@
         @include background-text-color('shades', $color_name);
       }
     }
-
-    .text-#{$color_name} {
-      @include text-color($color_value);
-    }
   }
 
   @each $color_name, $color_color in colors.$colors {
@@ -41,10 +36,6 @@
             @include background-text-color($color_name, $color_type);
           }
         }
-
-        .text-#{$color_name} {
-          @include text-color($color_value);
-        }
       }
       @else if ($color_type != 'shades') {
         .bg-#{$color_name}-#{$color_type} {
@@ -54,7 +45,24 @@
             @include background-text-color($color_name, $color_type);
           }
         }
+      }
+    }
+  }
 
+  @each $color_name, $color_value in colors.$shades {
+    .text-#{$color_name} {
+      @include text-color($color_value);
+    }
+  }
+
+  @each $color_name, $color_color in colors.$colors {
+    @each $color_type, $color_value in $color_color {
+      @if ($color_type == 'base') {
+        .text-#{$color_name} {
+          @include text-color($color_value);
+        }
+      }
+      @else if ($color_type != 'shades') {
         .text-#{$color_name}-#{$color_type} {
           @include text-color($color_value);
         }
