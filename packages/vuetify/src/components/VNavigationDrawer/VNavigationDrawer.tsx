@@ -106,7 +106,7 @@ export const VNavigationDrawer = defineComponent({
     const rootEl = ref<HTMLElement>()
 
     const { isRtl } = useRtl()
-    const position = computed(() => {
+    const location = computed(() => {
       return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
 
@@ -115,7 +115,7 @@ export const VNavigationDrawer = defineComponent({
       isTemporary,
       width,
       touchless: toRef(props, 'touchless'),
-      position,
+      position: location,
     })
 
     const layoutSize = computed(() => {
@@ -129,7 +129,7 @@ export const VNavigationDrawer = defineComponent({
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position,
+      position: location,
       layoutSize,
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),
@@ -163,13 +163,13 @@ export const VNavigationDrawer = defineComponent({
             class={[
               'v-navigation-drawer',
               {
-                'v-navigation-drawer--bottom': props.location === 'bottom',
-                'v-navigation-drawer--end': props.location === 'right',
+                'v-navigation-drawer--left': location.value === 'left',
+                'v-navigation-drawer--right': location.value === 'right',
+                'v-navigation-drawer--bottom': location.value === 'bottom',
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
-                'v-navigation-drawer--start': props.location === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--active': isActive.value,
               },

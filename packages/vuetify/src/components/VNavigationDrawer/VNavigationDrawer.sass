@@ -27,29 +27,17 @@
     left: 0
     border-top-width: $navigation-drawer-border-thin-width
 
-  &--start
+  &--left
     top: 0
-    border-inline-end-width: $navigation-drawer-border-thin-width
+    left: 0
+    right: auto
+    border-right-width: $navigation-drawer-border-thin-width
 
-    @include tools.ltr()
-      left: 0
-      right: auto
-
-    @include tools.rtl()
-      left: auto
-      right: 0
-
-  &--end
+  &--right
     top: 0
-    border-inline-start-width: $navigation-drawer-border-thin-width
-
-    @include tools.ltr()
-      left: auto
-      right: 0
-
-    @include tools.rtl()
-      left: 0
-      right: auto
+    left: auto
+    right: 0
+    border-left-width: $navigation-drawer-border-thin-width
 
   &--floating
     border: none
