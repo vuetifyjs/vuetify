@@ -455,11 +455,6 @@ $utilities: () !default;
         class: text,
         values: (truncate: nowrap hidden ellipsis)
       ),
-      "text-transform": (
-        property: text-transform,
-        class: text,
-        values: none capitalize lowercase uppercase
-      ),
       "typography": (
         responsive: true,
         property: (
@@ -476,6 +471,21 @@ $utilities: () !default;
           line-height
         ),
         values: variables.$flat-typography
+      ),
+      "text-transform": (
+        property: text-transform,
+        class: text,
+        values: none capitalize lowercase uppercase
+      ),
+      "font-weight": (
+        property: font-weight,
+        class: font-weight,
+        values: variables.$font-weights
+      ),
+      "font-italic": (
+        property: font-style,
+        class: font,
+        values: italic
       ),
       // Position
       "position": (
