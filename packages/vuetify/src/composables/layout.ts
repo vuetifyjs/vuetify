@@ -206,11 +206,10 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     const layer = layers.value[layers.value.length - 1].layer
 
     return {
-      position: 'absolute',
-      left: convertToUnit(layer.left),
-      right: convertToUnit(layer.right),
-      top: convertToUnit(layer.top),
-      bottom: convertToUnit(layer.bottom),
+      '--v-layout-left': convertToUnit(layer.left),
+      '--v-layout-right': convertToUnit(layer.right),
+      '--v-layout-top': convertToUnit(layer.top),
+      '--v-layout-bottom': convertToUnit(layer.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     }
   })
@@ -277,7 +276,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           [position.value]: 0,
           zIndex: zIndex.value,
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
-          position: 'absolute',
+          position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
         } as const
 
