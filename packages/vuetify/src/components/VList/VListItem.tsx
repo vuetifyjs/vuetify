@@ -105,8 +105,8 @@ export const VListItem = genericComponent<new () => {
     const isLink = computed(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
-        props.link !== false &&
-        (props.link || link.isClickable.value || (props.value != null && !!list))
+      props.link !== false &&
+      (props.link || link.isClickable.value || (props.value != null && !!list))
     )
 
     const roundedProps = computed(() => props.rounded || props.nav)
