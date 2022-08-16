@@ -3,7 +3,7 @@
     <v-container>
       <v-text-field>
         <template v-slot:label>
-          What about <strong>icon</strong> here? <v-icon style="vertical-align: middle">
+          What about <strong>icon</strong> here? <v-icon>
             mdi-file-find
           </v-icon>
         </template>

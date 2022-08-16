@@ -173,7 +173,6 @@ The **color** prop provides an easy way to change the color of textual content; 
 
 <example file="v-text-field/prop-custom-colors" />
 
-<!--
 #### Density
 
 The **density** prop decreases the height of the text field based upon 1 of 3 levels of density; **default**, **comfortable**, and **compact**.
@@ -283,6 +282,5 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
--->
 
 <backmatter />
