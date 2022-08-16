@@ -3,6 +3,7 @@ import './VAlert.sass'
 
 // Components
 import { VAlertTitle } from './VAlertTitle'
+import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
@@ -16,6 +17,7 @@ import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 import { IconValue } from '@/composables/icons'
@@ -109,10 +111,14 @@ export const VAlert = defineComponent({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+    const { t } = useLocale()
 
-    function onCloseClick (e: MouseEvent) {
-      isActive.value = false
-    }
+    const closeProps = computed(() => ({
+      'aria-label': t(props.closeLabel),
+      onClick (e: MouseEvent) {
+        isActive.value = false
+      },
+    }))
 
     return () => {
       const hasPrepend = !!(slots.prepend || icon.value)
@@ -203,20 +209,15 @@ export const VAlert = defineComponent({
             <VDefaultsProvider
               key="close"
               defaults={{
-                VIcon: {
+                VBtn: {
                   icon: props.closeIcon,
-                  size: 'small',
+                  size: 'x-small',
+                  variant: 'text',
                 },
               }}
             >
-              <div
-                class="v-alert__close"
-                onClick={ onCloseClick }
-              >
-                { slots.close
-                  ? slots.close()
-                  : (<VIcon />)
-                }
+              <div class="v-alert__close">
+                { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
               </div>
             </VDefaultsProvider>
           ) }
