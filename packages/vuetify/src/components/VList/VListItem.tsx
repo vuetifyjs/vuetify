@@ -62,20 +62,26 @@ export const VListItem = genericComponent<new () => {
   directives: { Ripple },
 
   props: {
-    active: Boolean,
-    activeColor: String,
+    active: {
+      type: Boolean,
+      default: undefined,
+    },
     activeClass: String,
+    activeColor: String,
     appendAvatar: String,
     appendIcon: IconValue,
     disabled: Boolean,
     lines: String as PropType<'one' | 'two' | 'three'>,
+    link: {
+      type: Boolean,
+      default: undefined,
+    },
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
     subtitle: [String, Number, Boolean],
     title: [String, Number, Boolean],
     value: null,
-    link: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -93,9 +99,17 @@ export const VListItem = genericComponent<new () => {
     const id = computed(() => props.value ?? link.href.value)
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
     const list = useList()
-    const isActive = computed(() => {
-      return props.active || link.isExactActive?.value || isSelected.value
-    })
+    const isActive = computed(() =>
+      props.active !== false &&
+      (props.active || link.isExactActive?.value || isSelected.value)
+    )
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (props.link || link.isClickable.value || (props.value != null && !!list))
+    )
+
     const roundedProps = computed(() => props.rounded || props.nav)
     const variantProps = computed(() => ({
       color: isActive.value ? props.activeColor ?? props.color : props.color,
@@ -125,13 +139,12 @@ export const VListItem = genericComponent<new () => {
     }))
 
     useRender(() => {
-      const Tag = (link.isLink.value) ? 'a' : props.tag
+      const Tag = isLink.value ? 'a' : props.tag
       const hasColor = !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
       const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
-      const isClickable = !props.disabled && (props.link || link.isClickable.value || (props.value != null && !!list))
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -142,7 +155,7 @@ export const VListItem = genericComponent<new () => {
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
-              'v-list-item--link': isClickable,
+              'v-list-item--link': isClickable.value,
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
               [`${props.activeClass}`]: isActive.value,
@@ -161,16 +174,16 @@ export const VListItem = genericComponent<new () => {
             dimensionStyles.value,
           ]}
           href={ link.href.value }
-          tabindex={ isClickable ? 0 : undefined }
-          onClick={ isClickable && ((e: MouseEvent) => {
+          tabindex={ isClickable.value ? 0 : undefined }
+          onClick={ isClickable.value && ((e: MouseEvent) => {
             if (isGroupActivator) return
 
             link.navigate?.(e)
             props.value != null && select(!isSelected.value, e)
           })}
-          v-ripple={ isClickable }
+          v-ripple={ isClickable.value }
         >
-          { genOverlays(isClickable || isActive.value, 'v-list-item') }
+          { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
             <VDefaultsProvider
