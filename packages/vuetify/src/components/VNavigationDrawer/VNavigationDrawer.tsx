@@ -8,6 +8,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -42,7 +43,7 @@ export const VNavigationDrawer = defineComponent({
     rail: Boolean,
     railWidth: {
       type: [Number, String],
-      default: 72,
+      default: 56,
     },
     scrim: {
       type: [String, Boolean],
@@ -159,6 +160,12 @@ export const VNavigationDrawer = defineComponent({
       } : undefined,
       ...layoutItemScrimStyles.value,
     }))
+
+    provideDefaults({
+      VList: {
+        bgColor: 'transparent',
+      },
+    })
 
     useRender(() => {
       const hasImage = (slots.image || props.image)

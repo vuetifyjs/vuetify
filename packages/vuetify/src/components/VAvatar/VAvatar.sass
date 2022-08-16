@@ -1,3 +1,4 @@
+@use '../../styles/settings'
 @use '../../styles/tools'
 @use './mixins' as *
 @use './variables' as *
@@ -10,6 +11,8 @@
   overflow: hidden
   position: relative
   text-align: center
+  transition: 0.2s settings.$standard-easing
+  transition-property: width, height
   vertical-align: $avatar-vertical-align
 
   @include avatar-sizes($avatar-sizes)

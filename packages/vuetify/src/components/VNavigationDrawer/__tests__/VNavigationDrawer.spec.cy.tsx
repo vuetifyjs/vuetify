@@ -37,7 +37,7 @@ describe('VNavigationDrawer', () => {
       wrapper.setProps({ rail: true, expandOnHover: true })
     })
 
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '72px')
+    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
 
     cy.get('.v-navigation-drawer').trigger('mouseenter')
 
@@ -45,7 +45,7 @@ describe('VNavigationDrawer', () => {
 
     cy.get('.v-navigation-drawer').trigger('mouseleave')
 
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '72px')
+    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
   })
 
   it('should hide drawer if window resizes below mobile breakpoint', () => {
