@@ -210,7 +210,6 @@ export const VAlert = defineComponent({
               key="close"
               defaults={{
                 VBtn: {
-                  density: 'compact',
                   icon: props.closeIcon,
                   size: 'x-small',
                   variant: 'text',
