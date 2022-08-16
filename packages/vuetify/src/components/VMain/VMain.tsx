@@ -12,7 +12,11 @@ import { defineComponent, useRender } from '@/util'
 export const VMain = defineComponent({
   name: 'VMain',
 
-  props: makeTagProps({ tag: 'main' }),
+  props: {
+    scrollable: Boolean,
+
+    ...makeTagProps({ tag: 'main' }),
+  },
 
   setup (props, { slots }) {
     const { mainStyles } = useLayout()
@@ -20,15 +24,23 @@ export const VMain = defineComponent({
 
     useRender(() => (
       <props.tag
-        class="v-main"
+        class={[
+          'v-main',
+          { 'v-main--scrollable': props.scrollable },
+        ]}
         style={[
           mainStyles.value,
           ssrBootStyles.value,
         ]}
       >
-        <div class="v-main__wrap">
-          { slots.default?.() }
-        </div>
+        { props.scrollable
+          ? (
+            <div class="v-main__scroller">
+              { slots.default?.() }
+            </div>
+          )
+          : slots.default?.()
+        }
       </props.tag>
     ))
 
