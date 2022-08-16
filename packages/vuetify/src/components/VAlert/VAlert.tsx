@@ -218,7 +218,7 @@ export const VAlert = defineComponent({
               }}
             >
               <div class="v-alert__close">
-                { slots.close?.(closeProps.value) ?? <VBtn { ...closeProps.value } /> }
+                { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
               </div>
             </VDefaultsProvider>
           ) }
