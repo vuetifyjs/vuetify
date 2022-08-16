@@ -99,9 +99,10 @@ export const VListItem = genericComponent<new () => {
     const id = computed(() => props.value ?? link.href.value)
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
     const list = useList()
-    const isActive = computed(() => {
-      return props.active !== false && (props.active || link.isExactActive?.value || isSelected.value)
-    })
+    const isActive = computed(() =>
+      props.active !== false &&
+      (props.active || link.isExactActive?.value || isSelected.value)
+    )
     const isLink = computed(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
       !props.disabled &&
