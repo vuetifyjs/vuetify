@@ -166,7 +166,7 @@ export const VAlert = defineComponent({
                 VIcon: {
                   density: props.density,
                   icon: icon.value,
-                  size: props.prominent ? 44 : 'default',
+                  size: props.prominent ? 44 : 28,
                 },
               }}
             >
