@@ -113,27 +113,67 @@ exports[`createTheme should create style element 1`] = `
       background: rgb(var(--v-theme-background)) !important;
       color: rgb(var(--v-theme-on-background)) !important;
     }
+    .bg-surface {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
+      background: rgb(var(--v-theme-surface)) !important;
+      color: rgb(var(--v-theme-on-surface)) !important;
+    }
+    .bg-surface-variant {
+      --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
+      background: rgb(var(--v-theme-surface-variant)) !important;
+      color: rgb(var(--v-theme-on-surface-variant)) !important;
+    }
+    .bg-primary {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
+      background: rgb(var(--v-theme-primary)) !important;
+      color: rgb(var(--v-theme-on-primary)) !important;
+    }
+    .bg-primary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
+      background: rgb(var(--v-theme-primary-darken-1)) !important;
+      color: rgb(var(--v-theme-on-primary-darken-1)) !important;
+    }
+    .bg-secondary {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
+      background: rgb(var(--v-theme-secondary)) !important;
+      color: rgb(var(--v-theme-on-secondary)) !important;
+    }
+    .bg-secondary-darken-1 {
+      --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
+      background: rgb(var(--v-theme-secondary-darken-1)) !important;
+      color: rgb(var(--v-theme-on-secondary-darken-1)) !important;
+    }
+    .bg-error {
+      --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
+      background: rgb(var(--v-theme-error)) !important;
+      color: rgb(var(--v-theme-on-error)) !important;
+    }
+    .bg-info {
+      --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
+      background: rgb(var(--v-theme-info)) !important;
+      color: rgb(var(--v-theme-on-info)) !important;
+    }
+    .bg-success {
+      --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
+      background: rgb(var(--v-theme-success)) !important;
+      color: rgb(var(--v-theme-on-success)) !important;
+    }
+    .bg-warning {
+      --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
+      background: rgb(var(--v-theme-warning)) !important;
+      color: rgb(var(--v-theme-on-warning)) !important;
+    }
     .text-background {
       color: rgb(var(--v-theme-background)) !important;
     }
     .border-background {
       --v-border-color: var(--v-theme-background);
     }
-    .bg-surface {
-      --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
-      background: rgb(var(--v-theme-surface)) !important;
-      color: rgb(var(--v-theme-on-surface)) !important;
-    }
     .text-surface {
       color: rgb(var(--v-theme-surface)) !important;
     }
     .border-surface {
       --v-border-color: var(--v-theme-surface);
-    }
-    .bg-surface-variant {
-      --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
-      background: rgb(var(--v-theme-surface-variant)) !important;
-      color: rgb(var(--v-theme-on-surface-variant)) !important;
     }
     .text-surface-variant {
       color: rgb(var(--v-theme-surface-variant)) !important;
@@ -144,21 +184,11 @@ exports[`createTheme should create style element 1`] = `
     .on-surface-variant {
       color: rgb(var(--v-theme-on-surface-variant)) !important;
     }
-    .bg-primary {
-      --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
-      background: rgb(var(--v-theme-primary)) !important;
-      color: rgb(var(--v-theme-on-primary)) !important;
-    }
     .text-primary {
       color: rgb(var(--v-theme-primary)) !important;
     }
     .border-primary {
       --v-border-color: var(--v-theme-primary);
-    }
-    .bg-primary-darken-1 {
-      --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
-      background: rgb(var(--v-theme-primary-darken-1)) !important;
-      color: rgb(var(--v-theme-on-primary-darken-1)) !important;
     }
     .text-primary-darken-1 {
       color: rgb(var(--v-theme-primary-darken-1)) !important;
@@ -166,21 +196,11 @@ exports[`createTheme should create style element 1`] = `
     .border-primary-darken-1 {
       --v-border-color: var(--v-theme-primary-darken-1);
     }
-    .bg-secondary {
-      --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
-      background: rgb(var(--v-theme-secondary)) !important;
-      color: rgb(var(--v-theme-on-secondary)) !important;
-    }
     .text-secondary {
       color: rgb(var(--v-theme-secondary)) !important;
     }
     .border-secondary {
       --v-border-color: var(--v-theme-secondary);
-    }
-    .bg-secondary-darken-1 {
-      --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
-      background: rgb(var(--v-theme-secondary-darken-1)) !important;
-      color: rgb(var(--v-theme-on-secondary-darken-1)) !important;
     }
     .text-secondary-darken-1 {
       color: rgb(var(--v-theme-secondary-darken-1)) !important;
@@ -188,21 +208,11 @@ exports[`createTheme should create style element 1`] = `
     .border-secondary-darken-1 {
       --v-border-color: var(--v-theme-secondary-darken-1);
     }
-    .bg-error {
-      --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
-      background: rgb(var(--v-theme-error)) !important;
-      color: rgb(var(--v-theme-on-error)) !important;
-    }
     .text-error {
       color: rgb(var(--v-theme-error)) !important;
     }
     .border-error {
       --v-border-color: var(--v-theme-error);
-    }
-    .bg-info {
-      --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
-      background: rgb(var(--v-theme-info)) !important;
-      color: rgb(var(--v-theme-on-info)) !important;
     }
     .text-info {
       color: rgb(var(--v-theme-info)) !important;
@@ -210,21 +220,11 @@ exports[`createTheme should create style element 1`] = `
     .border-info {
       --v-border-color: var(--v-theme-info);
     }
-    .bg-success {
-      --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
-      background: rgb(var(--v-theme-success)) !important;
-      color: rgb(var(--v-theme-on-success)) !important;
-    }
     .text-success {
       color: rgb(var(--v-theme-success)) !important;
     }
     .border-success {
       --v-border-color: var(--v-theme-success);
-    }
-    .bg-warning {
-      --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
-      background: rgb(var(--v-theme-warning)) !important;
-      color: rgb(var(--v-theme-on-warning)) !important;
     }
     .text-warning {
       color: rgb(var(--v-theme-warning)) !important;
