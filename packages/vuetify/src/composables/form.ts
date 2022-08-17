@@ -7,14 +7,14 @@ import { consoleWarn, propsFactory } from '@/util'
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 
 export interface FormProvide {
-  register: (
-    id: number | string,
-    validate: () => Promise<string[]>,
-    reset: () => void,
-    resetValidation: () => void,
-    isValid: Ref<boolean | null>,
-  ) => void
+  register: (item: {
+    id: number | string
+    validate: () => Promise<string[]>
+    reset: () => void
+    resetValidation: () => void
+  }) => void
   unregister: (id: number | string) => void
+  update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
   items: Ref<FormField[]>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
@@ -27,6 +27,7 @@ interface FormField {
   reset: () => void
   resetValidation: () => void
   isValid: boolean | null
+  errorMessages: string[]
 }
 
 interface FieldValidationResult {
@@ -112,21 +113,29 @@ export function createForm (props: FormProps) {
   }
 
   watch(items, () => {
-    let valid = null
+    let valid = 0
+    let invalid = 0
+    const results = []
 
-    if (items.value.some(item => item.isValid === false)) {
-      valid = false
-    } else if (items.value.every(item => item.isValid === true)) {
-      valid = true
+    for (const item of items.value) {
+      if (item.isValid === false) {
+        invalid++
+        results.push({
+          id: item.id,
+          errorMessages: item.errorMessages,
+        })
+      } else if (item.isValid === true) valid++
     }
 
-    model.value = valid
-  }, {
-    deep: true,
-  })
+    errors.value = results
+    model.value =
+      invalid > 0 ? false
+      : valid === items.value.length ? true
+      : null
+  }, { deep: true })
 
   provide(FormKey, {
-    register: (id, validate, reset, resetValidation, isValid) => {
+    register: ({ id, validate, reset, resetValidation }) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -136,13 +145,22 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
-        isValid: isValid as unknown as boolean | null, // TODO: Better way to type this unwrapping?
+        isValid: null,
+        errorMessages: [],
       })
     },
     unregister: id => {
       items.value = items.value.filter(item => {
         return item.id !== id
       })
+    },
+    update: (id, isValid, errorMessages) => {
+      const found = items.value.find(item => item.id === id)
+
+      if (!found) return
+
+      found.isValid = isValid
+      found.errorMessages = errorMessages
     },
     isDisabled,
     isReadonly,
