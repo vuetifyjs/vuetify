@@ -56,7 +56,7 @@
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
     "./blueprints": "./lib/blueprints/index.mjs",
-    "./blueprints/*": "./lib/blueprints/*/index.mjs",
+    "./blueprints/*": "./lib/blueprints/*.mjs",
     "./components": "./lib/components/index.mjs",
     "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",
