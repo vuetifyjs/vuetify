@@ -86,7 +86,6 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
