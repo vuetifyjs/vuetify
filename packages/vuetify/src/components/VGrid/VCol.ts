@@ -9,7 +9,7 @@ import { capitalize, computed, h } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
@@ -73,6 +73,8 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
+const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
+
 export const VCol = defineComponent({
   name: 'VCol',
 
@@ -93,9 +95,9 @@ export const VCol = defineComponent({
     },
     ...orderProps,
     alignSelf: {
-      type: String,
+      type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
       default: null,
-      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
+      validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
     },
 
     ...makeTagProps(),
@@ -134,3 +136,5 @@ export const VCol = defineComponent({
     }, slots.default?.())
   },
 })
+
+export type VCol = InstanceType<typeof VCol>

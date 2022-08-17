@@ -9,36 +9,41 @@ import { capitalize, computed, h } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
-function makeRowProps (prefix: string, def: () => Prop<string, null>) {
+const SPACE = ['space-between', 'space-around', 'space-evenly'] as const
+
+function makeRowProps <T> (prefix: string, def: () => Prop<T, null>) {
   return breakpoints.reduce((props, val) => {
     props[prefix + capitalize(val)] = def()
     return props
-  }, {} as Record<string, Prop<string, null>>)
+  }, {} as Record<string, Prop<T, null>>)
 }
 
-const alignValidator = (str: any) => [...ALIGNMENT, 'baseline', 'stretch'].includes(str)
+const ALIGN_VALUES = [...ALIGNMENT, 'baseline', 'stretch'] as const
+const alignValidator = (str: any) => ALIGN_VALUES.includes(str)
 const alignProps = makeRowProps('align', () => ({
-  type: String,
+  type: String as PropType<typeof ALIGN_VALUES[number]>,
   default: null,
   validator: alignValidator,
 }))
 
-const justifyValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around'].includes(str)
+const JUSTIFY_VALUES = [...ALIGNMENT, ...SPACE] as const
+const justifyValidator = (str: any) => JUSTIFY_VALUES.includes(str)
 const justifyProps = makeRowProps('justify', () => ({
-  type: String,
+  type: String as PropType<typeof JUSTIFY_VALUES[number]>,
   default: null,
   validator: justifyValidator,
 }))
 
-const alignContentValidator = (str: any) => [...ALIGNMENT, 'space-between', 'space-around', 'stretch'].includes(str)
+const ALIGN_CONTENT_VALUES = [...ALIGNMENT, ...SPACE, 'stretch'] as const
+const alignContentValidator = (str: any) => ALIGN_CONTENT_VALUES.includes(str)
 const alignContentProps = makeRowProps('alignContent', () => ({
-  type: String,
+  type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
   default: null,
   validator: alignContentValidator,
 }))
@@ -77,19 +82,19 @@ export const VRow = defineComponent({
     dense: Boolean,
     noGutters: Boolean,
     align: {
-      type: String,
+      type: String as PropType<typeof ALIGN_VALUES[number]>,
       default: null,
       validator: alignValidator,
     },
     ...alignProps,
     justify: {
-      type: String,
+      type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
       default: null,
       validator: justifyValidator,
     },
     ...justifyProps,
     alignContent: {
-      type: String,
+      type: String as PropType<typeof ALIGN_CONTENT_VALUES[number]>,
       default: null,
       validator: alignContentValidator,
     },
@@ -128,3 +133,5 @@ export const VRow = defineComponent({
     }, slots.default?.())
   },
 })
+
+export type VRow = InstanceType<typeof VRow>
