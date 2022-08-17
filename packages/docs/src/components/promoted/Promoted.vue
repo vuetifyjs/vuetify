@@ -46,8 +46,12 @@
 </template>
 
 <script lang="ts">
-  import { computed, defineComponent } from 'vue'
+  // Composables
   import { createAdProps, useAd } from '../../composables/ad'
+  import { useGtag } from 'vue-gtag-next'
+
+  // Utilities
+  import { computed, defineComponent } from 'vue'
 
   import PromotedBase from './Base.vue'
 
@@ -68,17 +72,22 @@
 
     setup (props) {
       const { ad, attrs } = useAd(props)
+      const { event } = useGtag()
 
       const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
       const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
       const background = computed(() => ad.value?.metadata?.images?.background?.url)
 
       function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'vuetifys',
-        //   event_label: this.slug,
-        //   value: 'promoted',
-        // })
+        const slug = ad.value?.slug
+
+        if (!slug) return
+
+        event('click', {
+          event_category: 'vuetifys',
+          event_label: slug,
+          value: 'promoted',
+        })
       }
 
       return {
@@ -90,51 +99,6 @@
         onClick,
       }
     },
-
-    // computed: {
-    //   ads () {
-    //     const all = Ad.computed.ads.call(this)
-
-    //     return all.filter(ad => !!ad.metadata.images?.background?.url)
-    //   },
-    //   bg () {
-    //     return this.images?.background?.url
-    //   },
-    //   // Promoted ads have less space
-    //   // available for descriptions
-    //   description () {
-    //     // Originates from Ad mixin
-    //     const current = this.current
-
-    //     if (!current) return ''
-
-    //     const {
-    //       description,
-    //       description_short,
-    //     } = current.metadata
-
-    //     // Fallback to description
-    //     // with a reduced length
-    //     return description_short || (
-    //       description.length > 58
-    //         ? description.slice(0, 55) + '...'
-    //         : description
-    //     )
-    //   },
-    //   images () {
-    //     return this.current.metadata?.images
-    //   },
-    //   logo () {
-    //     return (
-    //       this.images?.logo?.url ||
-    //       this.images?.preview?.url
-    //     )
-    //   },
-    // },
-
-    // methods: {
-
-    // },
   })
 </script>
 

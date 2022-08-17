@@ -1,9 +1,0 @@
-@use '../settings'
-
-@each $name, $weight in settings.$font-weights
-  .font-weight
-    &-#{$name}
-      font-weight: $weight !important
-
-.font-italic
-  font-style: italic !important

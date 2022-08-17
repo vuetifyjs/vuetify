@@ -2,7 +2,7 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VListItemMedia = defineComponent({
   name: 'VListItemMedia',
@@ -15,7 +15,7 @@ export const VListItemMedia = defineComponent({
   },
 
   setup (props, { slots }) {
-    return () => {
+    useRender(() => {
       return (
         <props.tag
           class={[
@@ -28,6 +28,8 @@ export const VListItemMedia = defineComponent({
           v-slots={ slots }
         />
       )
-    }
+    })
+
+    return {}
   },
 })

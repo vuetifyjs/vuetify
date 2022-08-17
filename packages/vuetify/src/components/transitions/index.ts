@@ -6,11 +6,6 @@ import {
 import ExpandTransitionGenerator from './expand-transition'
 
 // Component specific transitions
-export const VCarouselTransition = createCssTransition('carousel-transition')
-export const VCarouselReverseTransition = createCssTransition('carousel-reverse-transition')
-export const VTabTransition = createCssTransition('tab-transition')
-export const VTabReverseTransition = createCssTransition('tab-reverse-transition')
-export const VMenuTransition = createCssTransition('menu-transition')
 export const VFabTransition = createCssTransition('fab-transition', 'center center', 'out-in')
 
 // Generic transitions

@@ -1,20 +1,21 @@
 <template>
   <app-tooltip-btn
-    to="/resources/jobs-for-vue/"
+    :to="rpath('/resources/jobs-for-vue')"
     class="jobs-link"
     path="jobs"
     @click="onClick"
   >
     <template #icon>
       <v-badge
-        :value="newJobs.length"
+        :model-value="newJobs.length > 0"
         color="#ED561B"
         dot
-        location="top-end"
+        location="top end"
       >
         <v-icon
+          :icon="icon"
           class="mx-1"
-          icon="mdi-briefcase-variant-outline"
+          color="medium-emphasis"
         />
       </v-badge>
     </template>
@@ -22,47 +23,44 @@
 </template>
 
 <script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
-  // import { call, get } from 'vuex-pathify'
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
+
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute, useRouter } from 'vue-router'
+
+  // Utilities
+  import { computed, defineComponent } from 'vue'
+  import { rpath } from '@/util/routes'
 
   export default defineComponent({
     name: 'JobsLink',
 
     components: { AppTooltipBtn },
 
-    // computed: {
-    //   name: get('route/name'),
-    //   newJobs: get('jobs/newJobs'),
-    //   page: get('route/params@page'),
-    //   icon () {
-    //     return this.page === 'jobs-for-vue'
-    //       ? '$mdiBriefcaseVariant'
-    //       : '$mdiBriefcaseVariantOutline'
-    //   },
-    // },
-
-    // async mounted () {
-    //   this.fetch()
-    // },
-
-    // methods: {
-    //   fetch: call('jobs/fetch'),
-    // },
-
     setup () {
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'jobs',
-        //   value: route.name,
-        // })
-      }
+      const { currentRoute } = useRouter()
+      const { event } = useGtag()
+      const { name } = useRoute()
+
+      const icon = computed(() => {
+        return currentRoute.value.path.match('resources/jobs-for-vue')
+          ? 'mdi-briefcase-variant'
+          : 'mdi-briefcase-variant-outline'
+      })
 
       return {
-        onClick,
+        icon,
+        onClick () {
+          event('click', {
+            event_category: 'app-bar',
+            event_label: 'jobs',
+            value: name,
+          })
+        },
         newJobs: [],
+        rpath,
       }
     },
   })

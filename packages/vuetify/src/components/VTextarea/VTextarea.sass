@@ -5,11 +5,17 @@
 @use './variables' as *
 
 .v-textarea
+  .v-field__field
+    --v-input-control-height: var(--v-textarea-control-height)
+
   .v-field__input
+    $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
+    $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
+
     flex: 1 1 auto
-    line-height: $textarea-line-height
     outline: none
-    mask-image: linear-gradient(to bottom, transparent, transparent calc(var(--v-field-padding-top, 0) / 1.25), black var(--v-field-padding-top, 0))
+    -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
+    mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
 
   &--auto-grow
     .v-field__input
@@ -25,6 +31,7 @@
     top: 0
     left: 0
     height: 0 !important
+    min-height: 0 !important
     pointer-events: none
 
   .v-field--has-label

@@ -10,6 +10,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -68,7 +69,8 @@ export const VTabs = defineComponent({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
+    const model = useProxiedModel(props, 'modelValue')
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'backgroundColor'))
@@ -86,6 +88,7 @@ export const VTabs = defineComponent({
 
     useRender(() => (
       <VSlideGroup
+        v-model={ model.value }
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
@@ -105,8 +108,6 @@ export const VTabs = defineComponent({
         symbol={ VTabsSymbol }
         mandatory="force"
         direction={ props.direction }
-        modelValue={ props.modelValue }
-        onUpdate:modelValue={ v => emit('update:modelValue', v) }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />

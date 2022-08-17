@@ -99,4 +99,12 @@ describe('VPagination', () => {
       </VLocaleProvider>
     ))
   })
+
+  it('should use color props', () => {
+    cy.mount(() => (
+      <VPagination color="error" activeColor="success" length="5" />
+    ))
+      .get('.v-btn').eq(0).should('have.class', 'text-error')
+      .get('.v-btn').eq(1).should('have.class', 'text-success')
+  })
 })

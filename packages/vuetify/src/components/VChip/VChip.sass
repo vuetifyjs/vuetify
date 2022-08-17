@@ -28,6 +28,9 @@
   &--link
     cursor: pointer
 
+  &--filter
+    user-select: none
+
   &--label
     @include tools.rounded($chip-label-border-radius)
 
@@ -49,6 +52,9 @@
 
   .v-icon
     font-size: inherit
+
+.v-chip__filter
+  transition: $chip-filter-transition
 
 .v-chip__overlay
   @include tools.absolute()

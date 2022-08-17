@@ -1,9 +1,10 @@
 <template>
   <v-btn
     :aria-label="t('become-a-sponsor')"
+    :size="size"
+    :to="rpath('/about/sponsors-and-backers')"
     color="primary"
     variant="outlined"
-    :size="size"
     @click="onClick"
   >
     <span
@@ -14,9 +15,14 @@
 </template>
 
 <script lang="ts">
-  import { defineComponent } from 'vue'
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
-  // import { useRoute } from 'vue-router'
+  import { useRoute } from 'vue-router'
+
+  // Utilities
+  import { defineComponent } from 'vue'
+  import { rpath } from '@/util/routes'
 
   export default defineComponent({
     name: 'SponsorLink',
@@ -26,29 +32,22 @@
     },
 
     setup () {
+      const { event } = useGtag()
+      const { name } = useRoute()
       const { t } = useI18n()
-      // const route = useRoute()
 
       const onClick = () => {
-        // TODO: gtag
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'sponsors',
-        //   value: route.name,
-        // })
-
-        // :to="{
-        //   name: 'Documentation',
-        //   params: {
-        //     category: 'about',
-        //     page: 'sponsors-and-backers'
-        //   }
-        // }"
+        event('click', {
+          event_category: 'toolbar',
+          event_label: 'sponsors',
+          value: name,
+        })
       }
 
       return {
         onClick,
         t,
+        rpath,
       }
     },
   })

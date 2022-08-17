@@ -33,7 +33,7 @@ export const VSystemBar = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const height = computed(() => props.height ?? props.window ? 32 : 24)
+    const height = computed(() => props.height ?? (props.window ? 32 : 24))
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),

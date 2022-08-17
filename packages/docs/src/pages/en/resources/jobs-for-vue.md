@@ -9,6 +9,9 @@ related:
   - /introduction/support/
   - /introduction/enterprise/
 ---
+<script setup>
+  import VueJobs from '@/components/doc/VueJobs.vue'
+</script>
 
 # Vue and Vuetify jobs
 
@@ -16,6 +19,6 @@ Find top Vue.js developers, ready to join your team; or browse available opening
 
 <promoted slug="vue-jobs" />
 
-<!-- <vue-jobs /> -->
+<vue-jobs />
 
 <backmatter />

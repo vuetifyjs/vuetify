@@ -42,7 +42,7 @@ describe('VBreadcrumbs', () => {
       </Application>
     ))
 
-    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home')
+    cy.get('.v-icon').should('exist').should('have.class', 'mdi-home').should('have.length', 1)
   })
 
   it('should use bg-color', () => {

@@ -1,5 +1,6 @@
 <template>
   <app-btn
+    color="medium-emphasis"
     variant="text"
     :to="rpath('/about/meet-the-team')"
     text="team"
@@ -8,27 +9,29 @@
 </template>
 
 <script lang="ts">
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
+
   // Utilities
   import { defineComponent } from 'vue'
   import { rpath } from '@/util/routes'
-  // import { useRoute } from 'vue-router'
 
   export default defineComponent({
     name: 'TeamLink',
 
     setup () {
-      // const route = useRoute()
-
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'team',
-        //   value: route.name,
-        // })
-      }
+      const { event } = useGtag()
+      const { name } = useRoute()
 
       return {
-        onClick,
+        onClick () {
+          event('click', {
+            event_category: 'app-bar',
+            event_label: 'team',
+            value: name,
+          })
+        },
         rpath,
       }
     },

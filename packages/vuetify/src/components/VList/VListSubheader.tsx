@@ -4,7 +4,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VListSubheader = defineComponent({
   name: 'VListSubheader',
@@ -21,7 +21,7 @@ export const VListSubheader = defineComponent({
   setup (props, { slots }) {
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
 
-    return () => {
+    useRender(() => {
       const hasText = !!(slots.default || props.title)
 
       return (
@@ -43,6 +43,8 @@ export const VListSubheader = defineComponent({
           ) }
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })

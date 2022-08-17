@@ -1,6 +1,5 @@
 // Utilities
-import { computed } from 'vue'
-import { convertToUnit, getCurrentInstanceName, propsFactory } from '@/util'
+import { convertToUnit, destructComputed, getCurrentInstanceName, includes, propsFactory } from '@/util'
 
 // Types
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
@@ -21,19 +20,17 @@ export function useSize (
   props: SizeProps,
   name = getCurrentInstanceName(),
 ) {
-  const sizeClasses = computed(() => {
-    return predefinedSizes.includes(props.size as string)
-      ? `${name}--size-${props.size}`
-      : undefined
-  })
-
-  const sizeStyles = computed(() => {
-    return !predefinedSizes.includes(props.size as string) && props.size
-      ? ({
+  return destructComputed(() => {
+    let sizeClasses
+    let sizeStyles
+    if (includes(predefinedSizes, props.size)) {
+      sizeClasses = `${name}--size-${props.size}`
+    } else if (props.size) {
+      sizeStyles = {
         width: convertToUnit(props.size),
         height: convertToUnit(props.size),
-      }) : undefined
+      }
+    }
+    return { sizeClasses, sizeStyles }
   })
-
-  return { sizeClasses, sizeStyles }
 }

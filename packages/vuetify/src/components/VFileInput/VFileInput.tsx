@@ -10,7 +10,7 @@ import { VField } from '@/components/VField'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -136,6 +136,7 @@ export const VFileInput = defineComponent({
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -221,15 +222,21 @@ export const VFileInput = defineComponent({
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ !!model.value.length }
-                  value={ counterValue.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ !!model.value.length }
+                      value={ counterValue.value }
+                      v-slots={ slots.counter }
+                    />
+                  </>
+                ) }
               </>
             ) : undefined,
           }}
@@ -237,7 +244,7 @@ export const VFileInput = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

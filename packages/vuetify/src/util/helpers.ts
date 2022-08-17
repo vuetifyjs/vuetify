@@ -1,8 +1,18 @@
 // Utilities
-import { camelize, Fragment } from 'vue'
+import { camelize, computed, Fragment, toRef, watch } from 'vue'
 
 // Types
-import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentInternalInstance,
+  ComponentPublicInstance,
+  ComputedGetter,
+  InjectionKey,
+  Ref,
+  Slots,
+  ToRefs,
+  VNode,
+  VNodeChild,
+} from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -552,4 +562,32 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   }
 
   return { clientX: e.clientX, clientY: e.clientY }
+}
+
+// Only allow a single return type
+type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
+type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
+
+/**
+ * Convert a computed ref to a record of refs.
+ * The getter function must always return an object with the same keys.
+ */
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
+  const refs = {} as ToRefs<T>
+  const base = computed(getter)
+  for (const key in base.value) {
+    refs[key] = toRef(base.value, key)
+  }
+  watch(base, val => {
+    for (const key in val) {
+      refs[key].value = val[key]
+    }
+  }, { flush: 'sync' })
+  return refs
+}
+
+/** Array.includes but value can be any type */
+export function includes (arr: readonly any[], val: any) {
+  return arr.includes(val)
 }

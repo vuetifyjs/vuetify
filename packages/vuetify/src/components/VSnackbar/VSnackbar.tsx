@@ -13,16 +13,16 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
+import { onMounted, ref, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { onMounted, watch } from 'vue'
 
 export const VSnackbar = defineComponent({
   name: 'VSnackbar',
 
   props: {
-    app: Boolean,
     contentClass: {
       type: String,
       default: '',
@@ -56,6 +56,8 @@ export const VSnackbar = defineComponent({
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
 
+    const overlay = ref<VOverlay>()
+
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
 
@@ -82,6 +84,7 @@ export const VSnackbar = defineComponent({
     useRender(() => (
       <VOverlay
         v-model={ isActive.value }
+        ref={ overlay }
         class={[
           'v-snackbar',
           {
@@ -95,6 +98,7 @@ export const VSnackbar = defineComponent({
         contentProps={{
           style: locationStyles.value,
         }}
+        contentClass={ props.contentClass }
         persistent
         noClickAnimation
         scrim={ false }
@@ -117,10 +121,7 @@ export const VSnackbar = defineComponent({
 
           { slots.default && (
             <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
+              class="v-snackbar__content"
               role="status"
               aria-live="polite"
             >
@@ -145,6 +146,8 @@ export const VSnackbar = defineComponent({
         </div>
       </VOverlay>
     ))
+
+    return forwardRefs({}, overlay)
   },
 })
 

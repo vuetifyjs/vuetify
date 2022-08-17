@@ -10,7 +10,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 import type { PropType } from 'vue'
 import type { MaybeRef } from '@/util'
 
-export type ValidationResult = string | true
+export type ValidationResult = string | boolean
 export type ValidationRule =
   | ValidationResult
   | PromiseLike<ValidationResult>
@@ -73,8 +73,8 @@ export function useValidation (
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
-    if (!props.rules.length) return true
     if (props.error || errorMessages.value.length) return false
+    if (!props.rules.length) return true
 
     return isPristine.value ? null : true
   })

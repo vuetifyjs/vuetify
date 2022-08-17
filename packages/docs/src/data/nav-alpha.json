@@ -26,6 +26,7 @@
     "activeIcon": "mdi-image-edit",
     "items": [
       "application-layout",
+      "blueprints",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
@@ -164,6 +165,14 @@
       "ripple",
       "scroll",
       "touch"
+    ]
+  },
+  {
+    "title": "resources",
+    "inactiveIcon": "mdi-human-male-board",
+    "activeIcon": "mdi-human-male-board",
+    "items": [
+      "jobs-for-vue"
     ]
   },
   {

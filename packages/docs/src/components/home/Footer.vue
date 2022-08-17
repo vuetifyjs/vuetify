@@ -2,7 +2,6 @@
   <v-footer
     id="footer"
     class="d-block py-6"
-    color="grey darken-4"
     theme="dark"
   >
     <v-container class="text-center">
@@ -11,13 +10,13 @@
           <v-img
             class="mx-auto"
             contain
-            height="64px"
+            height="64"
             src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-light.svg"
-            width="64px"
+            width="64"
           />
         </v-col>
 
-        <v-col cols="12">
+        <v-col cols="12" class="pb-0">
           <a
             v-for="(social, i) in socials"
             :key="i"
@@ -28,59 +27,15 @@
             rel="noopener"
             target="_blank"
           >
-            <v-icon color="white" :icon="social.icon" />
+            <v-icon :icon="social.icon" color="white" />
           </a>
         </v-col>
 
         <v-col cols="12">
           <v-responsive
             class="mx-auto"
-            max-width="400"
-          >
-          <!--
-            <v-form
-              action="https://www.getrevue.co/profile/vuetify/add_subscriber"
-              method="post"
-              name="revue-form"
-              target="_blank"
-            >
-              <v-text-field
-                id="member_email"
-                v-model="email"
-                :label="t('email-address')"
-                background-color="grey darken-3"
-                flat
-                name="member[email]"
-                rounded
-                solo
-                type="email"
-              >
-                <template #append>
-                  <v-btn
-                    color="secondary"
-                    name="member[subscribe]"
-                    type="submit"
-                    value="Subscribe"
-                  >
-                    {{ t('subscribe') }}
-                  </v-btn>
-                </template>
-              </v-text-field>
-            </v-form>
-          -->
-          </v-responsive>
-
-          <div class="text-center text-caption">
-            {{ t('subscribe-to-our') }}
-            <strong>{{ t('newsletter') }}</strong>
-          </div>
-        </v-col>
-
-        <v-col cols="12">
-          <v-responsive
-            class="mx-auto"
             max-width="70%"
-            width="150px"
+            width="150"
           >
             <v-divider />
           </v-responsive>
@@ -89,9 +44,8 @@
         <v-col cols="12">
           <div>
             {{ t('released-under-the') }}
-            &nbsp;
             <a
-              class="text-grey-lighten-1"
+              class="text-grey-lighten-1 text-decoration-underline"
               href="https://opensource.org/licenses/MIT"
               path="mit-license"
               rel="noopener"
@@ -105,11 +59,12 @@
 
           <template v-for="(link, i) in links" :key="i">
             <a
-              class="text-grey-lighten-1"
               :href="link.href"
+              class="text-grey-lighten-1"
               rel="noopener"
               target="_blank"
             >{{ t(link.path) }}</a>
+
             <template v-if="i !== links.length - 1">&nbsp;•&nbsp;</template>
           </template>
         </v-col>
@@ -119,9 +74,11 @@
 </template>
 
 <script lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
   // Utilities
   import { defineComponent } from 'vue'
-  import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
     name: 'HomeFooter',

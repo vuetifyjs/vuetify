@@ -15,7 +15,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
@@ -47,7 +46,7 @@ export const makeVToolbarProps = propsFactory({
   floating: Boolean,
   height: {
     type: [Number, String],
-    default: 56,
+    default: 64,
   },
   image: String,
   title: String,
@@ -185,10 +184,10 @@ export const VToolbar = genericComponent<new () => {
       )
     })
 
-    return useForwardRef({
+    return {
       contentHeight,
       extensionHeight,
-    })
+    }
   },
 })
 
