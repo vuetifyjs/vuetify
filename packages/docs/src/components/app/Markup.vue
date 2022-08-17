@@ -31,7 +31,7 @@
       <template #activator="{ props }">
         <v-btn
           :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-          class="mr-1 text-disabled me-2 mt-2"
+          class="mr-1 text-disabled me-2 mt-2 app-markup-btn"
           density="compact"
           style="position: absolute; right: 0; top: 0;"
           v-bind="props"
@@ -151,6 +151,10 @@
   .v-sheet.app-markup
     // margin: 16px 0
     position: relative
+
+    &:not(:hover)
+      .app-markup-btn
+        opacity: 0 !important
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
