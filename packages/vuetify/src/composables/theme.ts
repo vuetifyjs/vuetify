@@ -228,7 +228,7 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
       }
 
       for (const color of Object.keys(theme.colors)) {
-        if (/on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
+        if (/^on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
         const colorVal = colorToInt(theme.colors[color]!)
@@ -282,7 +282,7 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
 
     const colors = new Set(Object.values(computedThemes.value).flatMap(theme => Object.keys(theme.colors)))
     for (const key of colors) {
-      if (/on-[a-z]/.test(key)) {
+      if (/^on-[a-z]/.test(key)) {
         createCssClass(fgLines, `.${key}`, [`color: rgb(var(--v-theme-${key})) !important`])
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
