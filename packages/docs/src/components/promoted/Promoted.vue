@@ -1,7 +1,7 @@
 <template>
   <div
     v-if="ad"
-    class="mb-8"
+    class="mb-5"
   >
     <a
       v-bind="attrs"
