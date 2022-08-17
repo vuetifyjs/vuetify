@@ -4,6 +4,7 @@
     location="bottom"
     max-height="500"
     open-delay="60"
+    open-on-hover
   >
     <template #activator="{ props }">
       <slot name="activator" v-bind="{ props }" />

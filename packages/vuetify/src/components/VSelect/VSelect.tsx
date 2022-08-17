@@ -81,7 +81,7 @@ export const VSelect = genericComponent<new <
     modelValue?: Readonly<V>
     'onUpdate:modelValue'?: (val: V) => void
   }
-  $slots: VInputSlots & VFieldSlots & MakeSlots<{
+  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     item: [{ item: T, index: number, props: Record<string, unknown> }]
     chip: [{ item: T, index: number, props: Record<string, unknown> }]
     selection: [{ item: T, index: number }]
@@ -102,7 +102,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref()
+    const vTextFieldRef = ref<VTextField>()
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -132,7 +132,7 @@ export const VSelect = genericComponent<new <
     function onClickControl () {
       if (props.hideNoData && !items.value.length) return
 
-      menu.value = true
+      menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
@@ -180,7 +180,6 @@ export const VSelect = genericComponent<new <
           appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }
-          onClick:input={ onClickControl }
           onClick:control={ onClickControl }
           onBlur={ () => menu.value = false }
           onKeydown={ onKeydown }

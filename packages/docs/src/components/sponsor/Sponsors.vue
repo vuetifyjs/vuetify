@@ -1,6 +1,6 @@
 <template>
   <v-row
-    v-if="sponsors.length"
+    v-if="sponsors?.length"
     align="center"
     class="v-sponsors"
     justify="start"

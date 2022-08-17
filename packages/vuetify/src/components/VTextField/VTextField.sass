@@ -54,9 +54,10 @@
     cursor: default
     display: flex
     opacity: 0
-    padding-top: var(--v-field-padding-top)
     transition: inherit
     white-space: nowrap
+    padding-top: calc(var(--v-field-padding-top, 4px) + var(--v-input-padding-top, 0))
+    padding-bottom: var(--v-field-padding-bottom, 6px)
 
     .v-field--active &
       opacity: 1

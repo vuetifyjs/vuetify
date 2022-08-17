@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-beta.6",
+  "version": "3.0.0-beta.8",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -55,6 +55,8 @@
     "./styles": "./lib/styles/main.css",
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
+    "./blueprints": "./lib/blueprints/index.mjs",
+    "./blueprints/*": "./lib/blueprints/*.mjs",
     "./components": "./lib/components/index.mjs",
     "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",

@@ -30,6 +30,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
+import { computed } from 'vue'
 
 export const VCard = defineComponent({
   name: 'VCard',
@@ -43,7 +44,10 @@ export const VCard = defineComponent({
     flat: Boolean,
     hover: Boolean,
     image: String,
-    link: Boolean,
+    link: {
+      type: Boolean,
+      default: undefined,
+    },
     prependAvatar: String,
     prependIcon: IconValue,
     ripple: Boolean,
@@ -78,8 +82,15 @@ export const VCard = defineComponent({
     const { roundedClasses } = useRounded(props)
     const link = useLink(props, attrs)
 
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (props.link || link.isClickable.value)
+    )
+
     useRender(() => {
-      const Tag = (link.isLink.value) ? 'a' : props.tag
+      const Tag = isLink.value ? 'a' : props.tag
       const hasTitle = !!(slots.title || props.title)
       const hasSubtitle = !!(slots.subtitle || props.subtitle)
       const hasHeader = hasTitle || hasSubtitle
@@ -88,7 +99,6 @@ export const VCard = defineComponent({
       const hasImage = !!(slots.image || props.image)
       const hasCardItem = hasHeader || hasPrepend || hasAppend
       const hasText = !!(slots.text || props.text)
-      const isClickable = !props.disabled && (link.isClickable.value || props.link)
 
       return (
         <Tag
@@ -98,7 +108,7 @@ export const VCard = defineComponent({
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
               'v-card--hover': props.hover && !(props.disabled || props.flat),
-              'v-card--link': isClickable,
+              'v-card--link': isClickable.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -116,8 +126,8 @@ export const VCard = defineComponent({
             locationStyles.value,
           ]}
           href={ link.href.value }
-          onClick={ isClickable && link.navigate }
-          v-ripple={ isClickable }
+          onClick={ isClickable.value && link.navigate }
+          v-ripple={ isClickable.value }
         >
           { hasImage && (
             <VDefaultsProvider
@@ -174,7 +184,7 @@ export const VCard = defineComponent({
             <VCardActions v-slots={{ default: slots.actions }} />
           ) }
 
-          { genOverlays(isClickable, 'v-card') }
+          { genOverlays(isClickable.value, 'v-card') }
         </Tag>
       )
     })

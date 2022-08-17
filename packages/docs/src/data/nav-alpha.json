@@ -168,6 +168,14 @@
     ]
   },
   {
+    "title": "resources",
+    "inactiveIcon": "mdi-human-male-board",
+    "activeIcon": "mdi-human-male-board",
+    "items": [
+      "jobs-for-vue"
+    ]
+  },
+  {
     "title": "about",
     "inactiveIcon": "mdi-vuetify",
     "activeIcon": "mdi-vuetify",

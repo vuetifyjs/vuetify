@@ -206,11 +206,10 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     const layer = layers.value[layers.value.length - 1].layer
 
     return {
-      position: 'relative',
-      paddingLeft: convertToUnit(layer.left),
-      paddingRight: convertToUnit(layer.right),
-      paddingTop: convertToUnit(layer.top),
-      paddingBottom: convertToUnit(layer.bottom),
+      '--v-layout-left': convertToUnit(layer.left),
+      '--v-layout-right': convertToUnit(layer.right),
+      '--v-layout-top': convertToUnit(layer.top),
+      '--v-layout-bottom': convertToUnit(layer.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     }
   })
@@ -297,17 +296,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         return {
           ...styles,
           height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
-          marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
-          marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
-          marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
-          marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
+          left: isOppositeHorizontal ? undefined : `${item.left}px`,
+          right: isOppositeHorizontal ? `${item.right}px` : undefined,
+          top: position.value !== 'bottom' ? `${item.top}px` : undefined,
+          bottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
           width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
         }
       })
 
       const layoutItemScrimStyles = computed<CSSProperties>(() => ({
         zIndex: zIndex.value - 1,
-        position: rootZIndex.value === ROOT_ZINDEX ? 'fixed' : 'absolute',
       }))
 
       return { layoutItemStyles, layoutItemScrimStyles, zIndex }
@@ -334,6 +332,8 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const layoutStyles = computed(() => ({
     zIndex: rootZIndex.value,
+    position: parentLayout ? 'relative' as const : undefined,
+    overflow: parentLayout ? 'hidden' : undefined,
   }))
 
   return {

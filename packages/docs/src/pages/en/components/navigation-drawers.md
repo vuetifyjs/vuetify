@@ -70,7 +70,7 @@ By default, a navigation drawer has a 1px right border that separates it from co
 
 #### Location
 
-Navigation drawers can also be positioned on the right side of your application (or an element) using the **location** prop. This is useful for creating a side-sheet with auxiliary information that may not have any navigation links.
+Navigation drawers can also be positioned on the opposite side of your application (or an element) using the **location** prop. This is useful for creating a side-sheet with auxiliary information that may not have any navigation links.
 
 <example file="v-navigation-drawer/prop-right" />
 

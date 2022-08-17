@@ -32,7 +32,7 @@ export function parseAnchor (anchor: Anchor, isRtl: boolean) {
   } as ParsedAnchor
 }
 
-function toPhysical (str: 'center' | Tblock | Tinline, isRtl: boolean) {
+export function toPhysical (str: 'center' | Tblock | Tinline, isRtl: boolean) {
   if (str === 'start') return isRtl ? 'right' : 'left'
   if (str === 'end') return isRtl ? 'left' : 'right'
   return str

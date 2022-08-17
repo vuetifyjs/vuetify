@@ -1,8 +1,6 @@
 <template>
   <v-app>
-    <div>
-      <Playground />
-    </div>
+    <Playground />
   </v-app>
 </template>
 

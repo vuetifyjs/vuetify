@@ -183,6 +183,29 @@ describe('VForm', () => {
     })
   })
 
+  it('should expose errors reactively', () => {
+    const form = ref()
+
+    cy.mount(() => (
+      <Application>
+        <VForm ref={ form }>
+          <VTextField rules={ [v => v.length < 4 || 'Error'] } />
+        </VForm>
+      </Application>
+    ))
+
+    cy.get('.v-text-field')
+      .type('Invalid')
+      .then(() => {
+        expect(form.value.errors).to.deep.equal([
+          {
+            id: 'input-0',
+            errorMessages: ['Error'],
+          },
+        ])
+      })
+  })
+
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change

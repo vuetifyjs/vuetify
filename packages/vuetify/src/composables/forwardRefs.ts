@@ -1,12 +1,15 @@
-import type { Ref, UnwrapRef } from 'vue'
+import type { ComponentPublicInstance, Ref, UnwrapRef } from 'vue'
 import type { UnionToIntersection } from '@/util'
 
 const Refs = Symbol('Forwarded refs')
 
-export function forwardRefs<T extends {}, U extends Ref<{} | undefined>[]> (
+/** Omit properties starting with P */
+type OmitPrefix<T, P extends string> = Omit<T, keyof T extends `${P}${any}` ? keyof T : never>
+
+export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit'> | undefined>[]> (
   target: T,
   ...refs: U
-): T & UnwrapRef<UnionToIntersection<U[number]>> {
+): T & OmitPrefix<UnwrapRef<UnionToIntersection<U[number]>>, '$'> {
   (target as any)[Refs] = refs
 
   return new Proxy(target, {
@@ -35,6 +38,10 @@ export function forwardRefs<T extends {}, U extends Ref<{} | undefined>[]> (
         if (!ref.value) continue
         const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
         if (descriptor) return descriptor
+        if ('_' in ref.value && 'setupState' in ref.value._) {
+          const descriptor = Reflect.getOwnPropertyDescriptor(ref.value._.setupState, key)
+          if (descriptor) return descriptor
+        }
       }
       // Recursive search up each ref's prototype
       for (const ref of refs) {

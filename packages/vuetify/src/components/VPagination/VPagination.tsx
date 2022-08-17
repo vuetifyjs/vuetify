@@ -150,7 +150,7 @@ export const VPagination = defineComponent({
     })
 
     const range = computed(() => {
-      if (length.value <= 0) return []
+      if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
       if (totalVisible.value <= 2) return [page.value]
 

@@ -2,9 +2,9 @@
   <span class="v-app-tooltip-btn d-inline-block">
     <v-btn
       :aria-label="path"
+      v-bind="$attrs"
       icon
       variant="text"
-      v-bind="$attrs"
     >
       <slot
         v-if="$slots.icon"
@@ -13,6 +13,7 @@
 
       <v-icon
         v-else
+        color="medium-emphasis"
         :icon="icon"
       />
 

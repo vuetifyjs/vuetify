@@ -8,19 +8,23 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useDisplay } from '@/composables/display'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
+import { useRtl } from '@/composables'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { useTouch } from './touch'
 
 // Utilities
 import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+const locations = ['start', 'end', 'left', 'right', 'bottom'] as const
 
 export const VNavigationDrawer = defineComponent({
   name: 'VNavigationDrawer',
@@ -39,7 +43,11 @@ export const VNavigationDrawer = defineComponent({
     rail: Boolean,
     railWidth: {
       type: [Number, String],
-      default: 72,
+      default: 56,
+    },
+    scrim: {
+      type: [String, Boolean],
+      default: true,
     },
     image: String,
     temporary: Boolean,
@@ -49,9 +57,9 @@ export const VNavigationDrawer = defineComponent({
       default: 256,
     },
     location: {
-      type: String as PropType<'left' | 'right' | 'bottom'>,
-      default: 'left',
-      validator: (value: any) => ['left', 'right', 'bottom'].includes(value),
+      type: String as PropType<typeof locations[number]>,
+      default: 'start',
+      validator: (value: any) => locations.includes(value),
     },
 
     ...makeBorderProps(),
@@ -104,12 +112,17 @@ export const VNavigationDrawer = defineComponent({
 
     const rootEl = ref<HTMLElement>()
 
+    const { isRtl } = useRtl()
+    const location = computed(() => {
+      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
+    })
+
     const { isDragging, dragProgress, dragStyles } = useTouch({
       isActive,
       isTemporary,
       width,
       touchless: toRef(props, 'touchless'),
-      position: toRef(props, 'location'),
+      position: location,
     })
 
     const layoutSize = computed(() => {
@@ -119,10 +132,11 @@ export const VNavigationDrawer = defineComponent({
 
       return isDragging.value ? size * dragProgress.value : size
     })
+
     const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: toRef(props, 'location'),
+      position: location,
       layoutSize,
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),
@@ -130,6 +144,9 @@ export const VNavigationDrawer = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
+    const scrimColor = useBackgroundColor(computed(() => {
+      return typeof props.scrim === 'string' ? props.scrim : null
+    }))
     const scrimStyles = computed(() => ({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
@@ -144,6 +161,12 @@ export const VNavigationDrawer = defineComponent({
       ...layoutItemScrimStyles.value,
     }))
 
+    provideDefaults({
+      VList: {
+        bgColor: 'transparent',
+      },
+    })
+
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -155,14 +178,12 @@ export const VNavigationDrawer = defineComponent({
             onMouseleave={ () => (isHovering.value = false) }
             class={[
               'v-navigation-drawer',
+              `v-navigation-drawer--${location.value}`,
               {
-                'v-navigation-drawer--bottom': props.location === 'bottom',
-                'v-navigation-drawer--end': props.location === 'right',
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
                 'v-navigation-drawer--floating': props.floating,
                 'v-navigation-drawer--is-hovering': isHovering.value,
                 'v-navigation-drawer--rail': props.rail,
-                'v-navigation-drawer--start': props.location === 'left',
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--active': isActive.value,
               },
@@ -207,10 +228,10 @@ export const VNavigationDrawer = defineComponent({
           </props.tag>
 
           <Transition name="fade-transition">
-            { isTemporary.value && (isDragging.value || isActive.value) && (
+            { isTemporary.value && (isDragging.value || isActive.value) && !!props.scrim && (
               <div
-                class="v-navigation-drawer__scrim"
-                style={ scrimStyles.value }
+                class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
+                style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => isActive.value = false }
               />
             )}
