@@ -18,7 +18,7 @@ export function genMetaInfo (
   description: string,
   keywords: string,
 ) {
-  const length = description.length
+  const length = (description ?? '').length
 
   description = length <= 117
     ? description
