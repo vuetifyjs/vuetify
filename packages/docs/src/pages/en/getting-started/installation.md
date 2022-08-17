@@ -22,53 +22,63 @@ Welcome to the Vuetify 3 Beta release. To get started, select an installation me
 
 ## Installation
 
+To get started with Vuetify 3 create a new Vue project using [Vue CLI](#vue-cli). For [Vite preview](#vite), installations, there is an added step you must first use the **create** command using one of the following package managers:
+
+* [yarn](https://yarnpkg.com/)
+* [npm](https://npmjs.org/)
+* [pnpm](https://pnpm.io/)
+
+We recommend using **yarn**, but any will work just fine. For more information on different installation options for vite, visit the official [installation guide](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+
 ### Vite
 
-<vuetify slug="vs-video-vite" />
+Vite is a build tool from the creator of Vue designed to provide faster and leaner development. It offers significantly lower build and compilation times during development and extremely fast Hot Module Replacement (HMR). The following sections cover how you can create a new vite application for Vue and Vuetify 3.
 
-First, use npm/yarn to create your Vite project:
+#### Yarn
+
+If you're using [yarn](https://yarnpkg.com/) as your package manager, run the following command in your terminal:
 
 ```bash
-# npm 6.x
-npm create vite@latest my-vue-app --template vue
+yarn create vite my-app --template vue
+```
 
-# npm 7+, extra double-dash is needed:
+#### NPM
+
+If you're using [npm](https://www.npmjs.com/) as your package manager, use the following command to check your current version:
+
+```bash
+npm -v
+```
+
+Note the displayed value to determine the correct installation command. For more information on how to upgrade **npm** on your system, visit the official [Upgrade NPM Page](https://docs.npmjs.com/try-the-latest-stable-version-of-npm).
+
+For version **7 and above**, an additional "**- -**" is required before specifying the vite template parameters. Use the following code for newer npm versions:
+
+```bash
 npm create vite@latest my-vue-app -- --template vue
+```
 
-# yarn
-yarn create vite my-vue-app --template vue
+If your npm version is **less than 7**, the extra "**- -**" is not required. Use the following code for older npm versions:
 
-# pnpm
+```bash
+npm create vite@latest my-vue-app --template vue
+```
+
+#### PNPM
+
+If you're using the [pnpm](https://pnpm.io/) to manage your packages, use the following command to generate a new project:
+
+
+```bash
 pnpm create vite my-vue-app -- --template vue
 ```
+----
 
-<alert type="info">
-
-  More detailed information can be found in the [Vite documentation](https://vitejs.dev/guide/#scaffolding-your-first-vite-project)
-
-</alert>
-
-For the next step you will need to have the **Vue CLI** installed. See their [installation guide](https://cli.vuejs.org/guide/installation.html)
-
-Navigate to your newly created project and then add vuetify using our **Vue CLI** plugin:
-
-```bash
-cd my-vuetify-app
-vue add vuetify
-```
-
-Once prompted, choose **Preview (Vuetify 3 + Vite)**:
-
-```bash
-? Choose a preset:
-  Configure (advanced)
-  Default (recommended)
-❯ Vite Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-  Vuetify 3 Preview (Vuetify 3)
-```
+Once your project is created, navigate to the [Adding Vuetify](#adding-vuetify) section to continue.
 
 ### Vue CLI
+
+For more information on how to setup Vue CLI, see the official [installation guide](https://cli.vuejs.org/guide/installation.html).
 
 <alert type="warning">
 
@@ -99,6 +109,8 @@ After choosing your option, **Vue CLI** generates a new Vue 3 project located in
 
 </alert>
 
+#### Adding Vuetify
+
 Navigate to your new project's folder, and using **Vue CLI**, add the `vuetify` package:
 
 ```bash
@@ -110,11 +122,11 @@ Once prompted, choose `Vuetify 3 Preview`:
 
 ```bash
 ? Choose a preset:
-  Configure (advanced)
-  Default (recommended)
-  Vite Preview (Vuetify 3 + Vite)
-  Prototype (rapid development)
-❯ Vuetify 3 Preview (Vuetify 3)
+  Vuetify 2 - Configure Vue CLI (advanced)
+  Vuetify 2 - Vue CLI (recommended)
+  Vuetify 2 - Prototype (rapid development)
+  Vuetify 3 - Vite (preview)
+❯ Vuetify 3 - Vue CLI (preview 3)
 ```
 
 ### CDN
@@ -125,7 +137,7 @@ Coming soon™
 
 With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
 
-```js
+```js { data-resource="src/plugins/vuetify.js" }
 import 'vuetify/styles' // Global CSS has to be imported
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
@@ -141,7 +153,7 @@ app.mount('#app')
 
 Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin) or [Webpack](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader) plugin.
 
-```js
+```js { data-resource="src/plugins/vuetify.js" }
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -152,6 +164,8 @@ const vuetify = createVuetify({
 ```
 
 ## Frequently asked questions
+
+<promoted slug="vuetify-discord" />
 
 ### Table of Contents
 
