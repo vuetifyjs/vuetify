@@ -68,10 +68,10 @@ npm create vite@latest my-vue-app --template vue
 
 If you're using the [pnpm](https://pnpm.io/) to manage your packages, use the following command to generate a new project:
 
-
 ```bash
 pnpm create vite my-vue-app -- --template vue
 ```
+
 ----
 
 Once your project is created, navigate to the [Adding Vuetify](#adding-vuetify) section to continue.
@@ -169,25 +169,25 @@ const vuetify = createVuetify({
 
 ### Table of Contents
 
-- [What is included in the Beta?](#included)
-- [When will Vuetify 3 be released?](#version-3)
-- [Can I use it with Vite?](#use-vite)
+* [What is included in the Beta?](#included)
+* [When will Vuetify 3 be released?](#version-3)
+* [Can I use it with Vite?](#use-vite)
 
 ### Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
----
+----
 
-- **What is included in the Beta?** { #included }
+* **What is included in the Beta?** { #included }
 
   Currently most base functionality of Vuetify is included in the beta. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
 
-- **When will Vuetify 3 be released?** { #version-3 }
+* **When will Vuetify 3 be released?** { #version-3 }
 
   Beta could take upwards of 2 months. Immediately following is a Release Candidate and then final release. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
 
-- **Can I use it with Vite?** { #use-vite }
+* **Can I use it with Vite?** { #use-vite }
 
   Yes. We recommend creating a new project using the [vite](#vite) installation instructions.
 
@@ -195,8 +195,8 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 For bugs related to the Beta, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
 
-- Vuetify components and functions available in the Beta
-- Documentation content
+* Vuetify components and functions available in the Beta
+* Documentation content
 
 <alert type="info">
 
