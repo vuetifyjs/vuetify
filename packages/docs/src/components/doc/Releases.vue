@@ -1,54 +1,56 @@
 <template>
-  <div>
+  <div class="border rounded mt-12">
     <v-autocomplete
       v-model="search"
       :items="releases"
-      class="mt-8"
-      item-title="name"
-      hide-details
-      label="Select Release Version"
       :menu-props="menuProps"
+      hide-details
+      item-title="name"
+      label="Select Release Version"
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      variant="filled"
       @blur="resetSearch"
       @focus="onFocus"
     />
 
     <v-card
-      min-height="180"
       flat
-      border="t-0"
+      min-height="180"
       rounded="t-0 b"
     >
       <div
         v-if="!!search"
         class="d-flex justify-space-between"
       >
-        <v-list-item>
-          <v-list-item-avatar size="48" class="mr-4 mt-2 mb-2">
-            <v-img :src="search.author.avatar_url" />
-          </v-list-item-avatar>
+        <v-list-item
+          :prepend-avatar="search.author.avatar_url"
+          lines="two"
+        >
+          <v-list-item-title class="mb-1 text-h6">
+            <i18n-t keypath="released-by">
+              <template #author>
+                <app-link :href="search.author.html_url">
+                  {{ search.author.login }}
+                </app-link>
+              </template>
+            </i18n-t>
+          </v-list-item-title>
 
-          <v-list-item-header>
-            <v-list-item-title class="mb-1 text-h6">
-              <i18n-t keypath="released-by">
-                <template #author>
-                  <app-link :href="search.author.html_url">
-                    {{ search.author.login }}
-                  </app-link>
-                </template>
-              </i18n-t>
-            </v-list-item-title>
-
-            <v-list-item-subtitle>
-              <i18n-t keypath="published-on">
-                <template #date>
+          <v-list-item-subtitle>
+            <i18n-t keypath="published-on">
+              <template #date>
+                <v-chip
+                  color="green-darken-3"
+                  density="comfortable"
+                  label
+                  size="small"
+                  variant="flat"
+                >
                   <strong v-text="search.published_at" />
-                </template>
-              </i18n-t>
-            </v-list-item-subtitle>
-          </v-list-item-header>
+                </v-chip>
+              </template>
+            </i18n-t>
+          </v-list-item-subtitle>
         </v-list-item>
 
         <div class="pr-3 d-flex align-center flex-1-0-auto">
@@ -58,7 +60,10 @@
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
+            :color="tooltip.color ?? 'grey-darken-1'"
             :target="tooltip.href ? '_blank' : undefined"
+            class="text-white"
+            variant="flat"
           />
         </div>
       </div>
@@ -66,7 +71,10 @@
       <v-divider />
 
       <div class="pa-4">
-        <app-markdown class="releases" :content="search ? search.body : ''" />
+        <app-markdown
+          :content="search?.body"
+          class="releases"
+        />
       </div>
     </v-card>
   </div>
@@ -108,24 +116,10 @@
   const tooltips = computed(() => {
     return [
       {
+        color: '#738ADB',
         icon: 'mdi-discord',
         href: 'https://discord.gg/QHWSAbA',
         path: 'discuss-on-discord',
-      },
-      {
-        icon: 'mdi-github',
-        href: `https://github.com/vuetifyjs/vuetify/discussions?discussions_q=${search.value.tag_name}`,
-        path: 'discuss-on-github',
-      },
-      {
-        icon: 'mdi-alert-circle-outline',
-        href: 'https://issues.vuetifyjs.com/',
-        path: 'file-a-bug-report',
-      },
-      {
-        icon: 'mdi-open-in-new',
-        href: search.value.html_url,
-        path: 'open-github-release',
       },
     ]
   })
