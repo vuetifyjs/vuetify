@@ -280,6 +280,7 @@ export default baseMixins.extend<options>().extend({
         }
 
         this.setSelectedItems()
+        this.updateMenuDimensions()
       },
     },
   },
@@ -889,6 +890,10 @@ export default baseMixins.extend<options>().extend({
       const appendInner = this.$refs['append-inner']
 
       return appendInner && (appendInner === target || appendInner.contains(target))
+    },
+    updateMenuDimensions () {
+      // Type from menuable is not making it through
+      this.isMenuActive && this.$refs.menu && this.$refs.menu.updateDimensions()
     },
   },
 })
