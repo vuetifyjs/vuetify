@@ -1,12 +1,19 @@
 <template>
   <app-tooltip-btn
     href="https://store.vuetifyjs.com/?utm_source=vuetifyjs.com&utm_medium=toolbar"
-    icon="mdi-shopping-outline"
     path="store"
+    icon
     rel="noopener"
     target="_blank"
     @click="onClick"
-  />
+  >
+    <template #icon>
+      <v-icon
+        color="medium-emphasis"
+        icon="mdi-shopping-outline"
+      />
+    </template>
+  </app-tooltip-btn>
 </template>
 
 <script lang="ts">

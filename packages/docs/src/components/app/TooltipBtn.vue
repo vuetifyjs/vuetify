@@ -2,9 +2,9 @@
   <span class="v-app-tooltip-btn d-inline-block">
     <v-btn
       :aria-label="path"
+      :variant="variant"
       v-bind="$attrs"
       icon
-      variant="text"
     >
       <slot
         v-if="$slots.icon"
@@ -13,7 +13,6 @@
 
       <v-icon
         v-else
-        color="medium-emphasis"
         :icon="icon"
       />
 
@@ -44,6 +43,10 @@
     props: {
       icon: String,
       path: String,
+      variant: {
+        type: String,
+        default: 'text',
+      },
     },
 
     setup () {
