@@ -1,8 +1,8 @@
 <template>
   <v-lazy min-height="128">
     <div class="d-flex">
-      <v-avatar v-if="member.avatar" size="72">
-        <v-img :src="member.avatar" />
+      <v-avatar color="grey-lighten-4" size="72">
+        <v-img v-if="member.avatar" :src="member.avatar" />
       </v-avatar>
 
       <div class="pl-6 font-weight-medium">
@@ -28,11 +28,12 @@
                   v-bind="props"
                 >
                   <v-icon
-                    size="small"
                     :color="link.color"
                     :icon="link.icon"
+                    size="small"
                   />
                 </a>
+
                 <div
                   v-else
                   class="cursor-pointer"
@@ -46,6 +47,7 @@
                   />
                 </div>
               </template>
+
               <span>{{ link.tooltip }}</span>
             </v-tooltip>
           </template>
@@ -137,10 +139,15 @@
 </template>
 
 <script lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
+  // Utilities
   import { computed, defineComponent } from 'vue'
+
+  // Types
   import type { PropType } from 'vue'
   import type { Member } from '@/store/team'
-  import { useI18n } from 'vue-i18n'
 
   export default defineComponent({
     name: 'TeamMember',

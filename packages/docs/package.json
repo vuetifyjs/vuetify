@@ -22,6 +22,7 @@
   "dependencies": {
     "@vueuse/head": "~0.7.6",
     "cosmicjs": "^4.1.5",
+    "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.14",
     "prism-theme-vars": "^0.2.3",

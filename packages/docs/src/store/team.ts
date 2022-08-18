@@ -1,5 +1,11 @@
+// Plugins
+import octokit from '@/plugins/octokit'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
+
+// Data
 import team from '@/data/team.json'
 
 export type Member = {
@@ -17,13 +23,37 @@ export type Member = {
   twitter?: string
 }
 
+export type GithubMember = {
+  avatar_url: string
+  login: string
+}
+
 export const useTeamStore = defineStore('team', () => {
   const members = ref<Member[]>([])
 
-  onBeforeMount(() => {
-    members.value = (Object.keys(team) as any as (keyof typeof team)[]).reduce<Member[]>((arr, key) => {
-      return [...arr, team[key]]
-    }, [])
+  for (const key in team) {
+    const record: Member = (team as Record<string, Member>)[key]
+
+    members.value.push({
+      ...record,
+      github: key,
+    })
+  }
+
+  onBeforeMount(async () => {
+    const res = await octokit.request('GET /orgs/vuetifyjs/members')
+    const data = res.data as GithubMember[]
+
+    members.value = members.value.map(member => {
+      const record = data.find(u => u.login.localeCompare(member.github ?? '', 'en', {
+        sensitivity: 'base',
+      }) === 0)
+
+      return {
+        ...member,
+        avatar: record?.avatar_url,
+      }
+    })
   })
 
   return { members }

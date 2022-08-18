@@ -2365,6 +2365,26 @@
   dependencies:
     "@octokit/types" "^6.0.3"
 
+"@octokit/auth-token@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/auth-token/-/auth-token-3.0.1.tgz#88bc2baf5d706cb258474e722a720a8365dff2ec"
+  integrity sha512-/USkK4cioY209wXRpund6HZzHo9GmjakpV9ycOkpMcMxMk7QVcVFVyCMtzvXYiHsB2crgDgrtNYSELYFBXhhaA==
+  dependencies:
+    "@octokit/types" "^7.0.0"
+
+"@octokit/core@^4.0.5":
+  version "4.0.5"
+  resolved "https://registry.yarnpkg.com/@octokit/core/-/core-4.0.5.tgz#589e68c0a35d2afdcd41dafceab072c2fbc6ab5f"
+  integrity sha512-4R3HeHTYVHCfzSAi0C6pbGXV8UDI5Rk+k3G7kLVNckswN9mvpOzW9oENfjfH3nEmzg8y3AmKmzs8Sg6pLCeOCA==
+  dependencies:
+    "@octokit/auth-token" "^3.0.0"
+    "@octokit/graphql" "^5.0.0"
+    "@octokit/request" "^6.0.0"
+    "@octokit/request-error" "^3.0.0"
+    "@octokit/types" "^7.0.0"
+    before-after-hook "^2.2.0"
+    universal-user-agent "^6.0.0"
+
 "@octokit/endpoint@^6.0.1":
   version "6.0.6"
   resolved "https://registry.yarnpkg.com/@octokit/endpoint/-/endpoint-6.0.6.tgz#4f09f2b468976b444742a1d5069f6fa45826d999"
@@ -2374,10 +2394,33 @@
     is-plain-object "^5.0.0"
     universal-user-agent "^6.0.0"
 
+"@octokit/endpoint@^7.0.0":
+  version "7.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/endpoint/-/endpoint-7.0.1.tgz#cb0d03e62e8762f3c80e52b025179de81899a823"
+  integrity sha512-/wTXAJwt0HzJ2IeE4kQXO+mBScfzyCkI0hMtkIaqyXd9zg76OpOfNQfHL9FlaxAV2RsNiOXZibVWloy8EexENg==
+  dependencies:
+    "@octokit/types" "^7.0.0"
+    is-plain-object "^5.0.0"
+    universal-user-agent "^6.0.0"
+
+"@octokit/graphql@^5.0.0":
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/graphql/-/graphql-5.0.1.tgz#a06982514ad131fb6fbb9da968653b2233fade9b"
+  integrity sha512-sxmnewSwAixkP1TrLdE6yRG53eEhHhDTYUykUwdV9x8f91WcbhunIHk9x1PZLALdBZKRPUO2HRcm4kezZ79HoA==
+  dependencies:
+    "@octokit/request" "^6.0.0"
+    "@octokit/types" "^7.0.0"
+    universal-user-agent "^6.0.0"
+
 "@octokit/openapi-types@^10.1.0":
   version "10.1.0"
   resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-10.1.0.tgz#43c2ce1ad0ad711869f0a366dfa04d48e06f2fa2"
   integrity sha512-Nq5TMBwijRXco+Bm/Rq1n5maxxXsHLwd/Cm3lyNeOxbjyzAOSD0qmr4TwKCD4TN4rHZ7lq/tARuqSv/WJHF7IA==
+
+"@octokit/openapi-types@^13.1.0":
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/openapi-types/-/openapi-types-13.1.0.tgz#30459b45e6dd388d48d72de166f2f08ee8ece5b6"
+  integrity sha512-Z7vzLqfTkoVQyoy/2iQla1N2I4Vav2wi4JbZK8QxIYAfBimhuflosFxmsqw5LTH7DkdNW46ZYpAcqJf0XaS8SQ==
 
 "@octokit/plugin-enterprise-rest@^6.0.1":
   version "6.0.1"
@@ -2422,6 +2465,15 @@
     deprecation "^2.0.0"
     once "^1.4.0"
 
+"@octokit/request-error@^3.0.0":
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request-error/-/request-error-3.0.1.tgz#3fd747913c06ab2195e52004a521889dadb4b295"
+  integrity sha512-ym4Bp0HTP7F3VFssV88WD1ZyCIRoE8H35pXSKwLeMizcdZAYc/t6N9X9Yr9n6t3aG9IH75XDnZ6UeZph0vHMWQ==
+  dependencies:
+    "@octokit/types" "^7.0.0"
+    deprecation "^2.0.0"
+    once "^1.4.0"
+
 "@octokit/request@^5.2.0":
   version "5.6.3"
   resolved "https://registry.yarnpkg.com/@octokit/request/-/request-5.6.3.tgz#19a022515a5bba965ac06c9d1334514eb50c48b0"
@@ -2430,6 +2482,18 @@
     "@octokit/endpoint" "^6.0.1"
     "@octokit/request-error" "^2.1.0"
     "@octokit/types" "^6.16.1"
+    is-plain-object "^5.0.0"
+    node-fetch "^2.6.7"
+    universal-user-agent "^6.0.0"
+
+"@octokit/request@^6.0.0":
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/@octokit/request/-/request-6.2.1.tgz#3ceeb22dab09a29595d96594b6720fc14495cf4e"
+  integrity sha512-gYKRCia3cpajRzDSU+3pt1q2OcuC6PK8PmFIyxZDWCzRXRSIBH8jXjFJ8ZceoygBIm0KsEUg4x1+XcYBz7dHPQ==
+  dependencies:
+    "@octokit/endpoint" "^7.0.0"
+    "@octokit/request-error" "^3.0.0"
+    "@octokit/types" "^7.0.0"
     is-plain-object "^5.0.0"
     node-fetch "^2.6.7"
     universal-user-agent "^6.0.0"
@@ -2476,6 +2540,13 @@
   integrity sha512-ha27f8DToxXBPEJdzHCCuqpw7AgKfjhWGdNf3yIlBAhAsaexBXTfWw36zNSsncALXGvJq4EjLy1p3Wz45Aqb4A==
   dependencies:
     "@octokit/openapi-types" "^10.1.0"
+
+"@octokit/types@^7.0.0":
+  version "7.1.0"
+  resolved "https://registry.yarnpkg.com/@octokit/types/-/types-7.1.0.tgz#98e345dbc6eba326dad5cfa4074171d89abb9d84"
+  integrity sha512-+ClA0jRc9zGFj5mfQeQNfgTlelzhpAexbAueQG1t2Xn8yhgnsjkF8bgLcUUpwrpqkv296uXyiGwkqXRSU7KYzQ==
+  dependencies:
+    "@octokit/openapi-types" "^13.1.0"
 
 "@percy/cli-build@1.3.1":
   version "1.3.1"
@@ -3928,7 +3999,7 @@ bcrypt-pbkdf@^1.0.0:
   dependencies:
     tweetnacl "^0.14.3"
 
-before-after-hook@^2.0.0:
+before-after-hook@^2.0.0, before-after-hook@^2.2.0:
   version "2.2.2"
   resolved "https://registry.yarnpkg.com/before-after-hook/-/before-after-hook-2.2.2.tgz#a6e8ca41028d90ee2c24222f201c90956091613e"
   integrity sha512-3pZEU3NT5BFUo/AD5ERPWOgQOCZITni6iavr5AUw5AUwQjMlI0kzu5btnyD39AF0gUEsDPwJT+oY1ORBJijPjQ==
@@ -7899,6 +7970,14 @@ isobject@^3.0.0, isobject@^3.0.1:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/isobject/-/isobject-3.0.1.tgz#4e431e92b11a9731636aa1f9c8d1ccbcfdab78df"
   integrity sha1-TkMekrEalzFjaqH5yNHMvP2reN8=
+
+isomorphic-fetch@^3.0.0:
+  version "3.0.0"
+  resolved "https://registry.yarnpkg.com/isomorphic-fetch/-/isomorphic-fetch-3.0.0.tgz#0267b005049046d2421207215d45d6a262b8b8b4"
+  integrity sha512-qvUtwJ3j6qwsF3jLxkZ72qCgjMysPzDfeV240JHiGZsANBYd+EEuu35v7dfrJ9Up0Ak07D7GGSkGhCHTqg/5wA==
+  dependencies:
+    node-fetch "^2.6.1"
+    whatwg-fetch "^3.4.1"
 
 isstream@~0.1.2:
   version "0.1.2"
@@ -13133,6 +13212,11 @@ whatwg-encoding@^1.0.1, whatwg-encoding@^1.0.5:
   integrity sha512-b5lim54JOPN9HtzvK9HFXvBma/rnfFeqsic0hSpjtDbVxR3dJKLc+KB4V6GgiGOvl7CY/KNh8rxSo9DKQrnUEw==
   dependencies:
     iconv-lite "0.4.24"
+
+whatwg-fetch@^3.4.1:
+  version "3.6.2"
+  resolved "https://registry.yarnpkg.com/whatwg-fetch/-/whatwg-fetch-3.6.2.tgz#dced24f37f2624ed0281725d51d0e2e3fe677f8c"
+  integrity sha512-bJlen0FcuU/0EMLrdbJ7zOnW6ITZLrZMIarMUVmdKtsGvZna8vxKYaexICWPfZ8qwf9fzNq+UEIZrnSaApt6RA==
 
 whatwg-mimetype@^2.2.0, whatwg-mimetype@^2.3.0:
   version "2.3.0"

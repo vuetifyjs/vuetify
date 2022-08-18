@@ -34,6 +34,7 @@ export default defineConfig(({ command, mode }) => {
     resolve: {
       alias: {
         '@/': `${resolve('src')}/`,
+        'node-fetch': 'isomorphic-fetch',
       },
     },
     define: {
