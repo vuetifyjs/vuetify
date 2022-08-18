@@ -184,6 +184,7 @@ export default baseMixins.extend<options>().extend({
           dark: this.dark,
           disabled: this.isDisabled,
           light: this.light,
+          tabindex: type === 'clear' ? -1 : undefined,
         },
         on: !hasListener
           ? undefined
