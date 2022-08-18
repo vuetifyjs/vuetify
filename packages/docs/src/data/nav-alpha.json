@@ -15,6 +15,7 @@
     "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
+      "browser-support",
       "upgrade-guide",
       "release-notes",
       "contributing"
