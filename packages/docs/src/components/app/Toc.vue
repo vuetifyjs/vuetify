@@ -1,23 +1,23 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
-    color="background"
     class="py-4 pr-3"
+    color="background"
     floating
-    width="256"
     location="right"
+    width="256"
   >
     <template
       v-if="toc.length"
       #prepend
     >
       <app-headline
-        class="mb-2"
+        class="mb-2 ml-4"
         path="contents"
       />
     </template>
 
-    <ul class="mb-4 ml-5">
+    <ul class="ml-5">
       <router-link
         v-for="{ to, level, text } in toc"
         v-slot="{ href }"
@@ -49,53 +49,54 @@
 
     <template #append>
       <v-container>
-        <v-card
-          :color="dark ? undefined : 'grey-lighten-5'"
-          variant="flat"
-        >
+        <app-headline
+          v-if="sponsors.length"
+          class="mb-1 mt-n1"
+          path="sponsors"
+          size="subtitle-1"
+        />
 
-          <v-container class="pa-2">
-            <app-caption
-              v-if="sponsors.length"
-              path="sponsors"
-              class="mt-n1 mb-1 ml-2"
-            />
+        <v-container class="pa-0">
+          <v-row dense>
+            <v-col
+              v-for="sponsor of sponsors"
+              :key="sponsor.slug"
+              :cols="sponsor.metadata.tier === -1 ? 12 : 6"
+              class="d-inline-flex"
+            >
+              <sponsor-card
+                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+                :sponsor="sponsor"
+                :color="dark ? undefined : 'grey-lighten-5'"
+              />
+            </v-col>
 
-            <v-row dense>
-              <v-col
-                v-for="sponsor of sponsors"
-                :key="sponsor.slug"
-                :cols="sponsor.metadata.tier === -1 ? 12 : 6"
-                class="text-center"
-              >
-                <sponsor-card
-                  :max-height="sponsor.metadata.tier === -1 ? 52 : undefined"
-                  :sponsor="sponsor"
-                  style="width: 100%; height: 100%;"
-                />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
+            <v-col cols="12">
+              <sponsor-link block size="large" />
+            </v-col>
 
-        <v-row>
-          <v-col cols="12">
-            <carbon />
-          </v-col>
-        </v-row>
+            <v-col cols="12">
+              <carbon />
+            </v-col>
+          </v-row>
+        </v-container>
       </v-container>
     </template>
   </v-navigation-drawer>
 </template>
 
 <script lang="ts">
-  // Utilities
-  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
+  // Components
+  import SponsorCard from '@/components/sponsor/Card.vue'
+  import SponsorLink from '@/components/sponsor/Link.vue'
+
+  // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useSponsorsStore } from '../../store/sponsors'
   import { useTheme } from 'vuetify'
 
-  import SponsorCard from '@/components/sponsor/Card.vue'
+  // Utilities
+  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
 
   type TocItem = {
     to: string;
@@ -196,6 +197,7 @@
 
     components: {
       SponsorCard,
+      SponsorLink,
     },
 
     setup () {
