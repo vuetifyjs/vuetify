@@ -12,31 +12,54 @@ import { provideDefaults } from '@/composables/defaults'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
+import { makeItemsProps } from '@/composables/items'
 
 // Utilities
 import { computed, onMounted, provide, ref, toRef, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 import { VTreeviewSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
-import type { InternalTreeviewItem, TreeviewItem } from './shared'
 import type { TreeviewGroupActivatorSlot } from './VTreeviewGroup'
+import type { ItemProps } from '@/composables/items'
+import type { InternalListItem } from '../VList/VList'
 
-const parseItems = (items?: TreeviewItem[]): InternalTreeviewItem[] => {
-  if (!items) return []
+function transformItem (props: ItemProps, item: any): InternalListItem {
+  const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
+  const value = getPropertyFromItem(item, props.itemValue, title)
+  const children = getPropertyFromItem(item, props.itemChildren)
+  const itemProps = props.itemProps === true
+    ? pick(item, ['children'])[1]
+    : getPropertyFromItem(item, props.itemProps)
 
-  return items.map(item => {
-    const { $children, ...props } = item
+  const _props = {
+    title,
+    value,
+    ...itemProps,
+  }
 
-    const children = $children ? parseItems($children) : undefined
-
-    return { item, props, children }
-  })
+  return {
+    title: _props.title,
+    value: _props.value,
+    props: _props,
+    children: children ? transformItems(props, children) : undefined,
+    raw: item,
+  }
 }
 
-function flatten (items: InternalTreeviewItem[], flat: InternalTreeviewItem[] = []) {
+function transformItems (props: ItemProps, items: (string | object)[]) {
+  const array: InternalListItem[] = []
+
+  for (const item of items) {
+    array.push(transformItem(props, item))
+  }
+
+  return array
+}
+
+function flatten (items: InternalListItem[], flat: InternalListItem[] = []) {
   for (const item of items) {
     flat.push(item)
 
@@ -46,10 +69,7 @@ function flatten (items: InternalTreeviewItem[], flat: InternalTreeviewItem[] = 
   return flat
 }
 
-export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
-  $props: {
-    items?: T[]
-  }
+export const VTreeview = genericComponent<new <T extends InternalListItem>() => {
   $slots: MakeSlots<{
     default: []
     activator: [TreeviewGroupActivatorSlot]
@@ -59,7 +79,6 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
   name: 'VTreeview',
 
   props: {
-    items: Array as PropType<TreeviewItem[]>,
     selectOnClick: Boolean,
     openOnClick: Boolean,
     openOnMount: {
@@ -83,6 +102,7 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
     ...makeTransitionProps({
       transition: { component: VExpandTransition },
     }),
+    ...makeItemsProps(),
     falseIcon: String,
     trueIcon: String,
     indeterminateIcon: String,
@@ -104,7 +124,7 @@ export const VTreeview = genericComponent<new <T extends TreeviewItem>() => {
   setup (props, { slots, emit }) {
     const { open, select, getPath, getChildren, children, opened } = useNested(props)
 
-    const items = computed(() => parseItems(props.items))
+    const items = computed(() => transformItems(props, props.items))
     const flatItems = computed(() => flatten(items.value))
 
     onMounted(() => {

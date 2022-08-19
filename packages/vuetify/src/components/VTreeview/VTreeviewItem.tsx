@@ -1,12 +1,11 @@
 import './VTreeviewItem.sass'
 
 // Components
-import { VBtn, VIcon, VProgressCircular, VSelectionControl } from '@/components'
+import { VBtn, VIcon, VProgressCircular, VCheckboxBtn } from '@/components'
 
 // Composables
 import { useNestedItem } from '@/composables/nested/nested'
 import { makeTagProps } from '@/composables/tag'
-import { makeCheckboxProps, useCheckbox } from '../VCheckbox/VCheckbox'
 import { makeRouterProps } from '@/composables/router'
 import { useTextColor } from '@/composables/color'
 import { genOverlays } from '@/composables/variant'
@@ -46,7 +45,6 @@ export const VTreeviewItem = defineComponent({
     value: null,
     disabled: Boolean,
     ...makeTagProps(),
-    ...makeCheckboxProps(),
     ...makeRouterProps(),
     ...makeRoundedProps(),
   },
@@ -81,13 +79,8 @@ export const VTreeviewItem = defineComponent({
       isOpen: isOpen.value,
       select,
       isSelected: isSelected.value,
+      isIndeterminate: isIndeterminate.value,
     }))
-
-    const { trueIcon, falseIcon, indeterminate } = useCheckbox(props)
-
-    watch(isIndeterminate, () => {
-      indeterminate.value = isIndeterminate.value
-    })
 
     function onItemClick (e: MouseEvent) {
       props.selectOnClick && select(!isSelected.value, e)
@@ -147,7 +140,7 @@ export const VTreeviewItem = defineComponent({
           { genOverlays(props.hover, 'v-treeview') }
 
           { (!isLeaf.value && !props.hideExpand) && (
-            <div class="v-treeview-item__expand">
+            <div key="expand" class="v-treeview-item__expand">
               { slots.expand ? slots.expand() : (
                 <VBtn
                   variant="text"
@@ -165,20 +158,17 @@ export const VTreeviewItem = defineComponent({
 
           <div class="v-treeview-item__content">
             { props.showSelect && isSelectable.value && (slots.selection ? slots.selection(slotProps.value) : (
-              <VSelectionControl
-                type="checkbox"
+              <VCheckboxBtn
                 density="compact"
                 disabled={ props.disabled || props.loading }
-                trueIcon={ trueIcon.value }
-                falseIcon={ falseIcon.value }
                 modelValue={ isSelected.value }
+                indeterminate={ isIndeterminate.value }
                 onClick={ onSelectClick }
-                aria-checked={ indeterminate.value ? 'mixed' : undefined }
               />
             )) }
 
             { hasPrepend && (
-              <div class="v-treeview-item__prepend">
+              <div key="prepend" class="v-treeview-item__prepend">
                 { slots.prepend ? slots.prepend(slotProps.value) : props.prependIcon ? (
                   <VIcon icon={ props.prependIcon } />
                 ) : undefined }
@@ -186,13 +176,13 @@ export const VTreeviewItem = defineComponent({
             ) }
 
             { hasTitle && (
-              <div class="v-treeview-item__title">
+              <div key="title" class="v-treeview-item__title">
                 { slots.title ? slots.title(slotProps.value) : props.title }
               </div>
             ) }
 
             { hasAppend && (
-              <div class="v-treeview-item__append">
+              <div key="append" class="v-treeview-item__append">
                 { slots.append ? slots.append(slotProps.value) : (
                   <VIcon icon={ props.appendIcon } />
                 ) }

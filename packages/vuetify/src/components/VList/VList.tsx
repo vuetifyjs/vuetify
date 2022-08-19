@@ -33,6 +33,10 @@ export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
 }
 
+type ListDefaultSlot = {
+  items: InternalListItem[]
+}
+
 function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
