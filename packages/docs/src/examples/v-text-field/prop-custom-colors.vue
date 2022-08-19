@@ -33,7 +33,7 @@
           md="4"
         >
           <v-text-field
-            color="tertiary"
+            color="primary-darken-1"
             label="Filled"
             placeholder="Placeholder"
             variant="filled"

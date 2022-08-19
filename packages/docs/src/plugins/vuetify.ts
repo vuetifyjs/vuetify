@@ -23,18 +23,6 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
         mdiSvg,
       },
     },
-    theme: {
-      themes: {
-        light: {
-          colors: {
-            primary: '#1867c0',
-            secondary: '#5CBBF6',
-            tertiary: '#E57373',
-            accent: '#005CAF',
-          },
-        },
-      },
-    },
   })
   app.use(vuetify)
 }
