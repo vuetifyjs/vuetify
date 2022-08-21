@@ -46,11 +46,11 @@
 
         scriptEl.value = script
 
-        await wait(1000)
+        // await wait(1000)
 
         // If script fails or is blocked
         // will only contain script el
-        if ((rootEl.value?.children?.length ?? 0) <= 1) onError()
+        // if ((rootEl.value?.children?.length ?? 0) <= 1) onError()
       })
 
       onMounted(() => {

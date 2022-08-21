@@ -1,7 +1,6 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
-    class="py-4 pr-3"
     color="background"
     floating
     location="right"
@@ -12,7 +11,7 @@
       #prepend
     >
       <app-headline
-        class="mb-2 ml-4"
+        class="mt-4 mb-2 ml-4"
         path="contents"
       />
     </template>
@@ -56,30 +55,28 @@
           size="subtitle-1"
         />
 
-        <v-container class="pa-0">
-          <v-row dense>
-            <v-col
-              v-for="sponsor of sponsors"
-              :key="sponsor.slug"
-              :cols="sponsor.metadata.tier === -1 ? 12 : 6"
-              class="d-inline-flex"
-            >
-              <sponsor-card
-                :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
-                :sponsor="sponsor"
-                :color="dark ? undefined : 'grey-lighten-5'"
-              />
-            </v-col>
+        <v-row dense>
+          <v-col
+            v-for="sponsor of sponsors"
+            :key="sponsor.slug"
+            :cols="sponsor.metadata.tier === -1 ? 12 : 6"
+            class="d-inline-flex"
+          >
+            <sponsor-card
+              :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+              :sponsor="sponsor"
+              :color="dark ? undefined : 'grey-lighten-5'"
+            />
+          </v-col>
 
-            <v-col cols="12">
-              <sponsor-link block size="large" />
-            </v-col>
+          <v-col cols="12">
+            <sponsor-link block size="large" />
+          </v-col>
 
-            <v-col cols="12">
-              <carbon />
-            </v-col>
-          </v-row>
-        </v-container>
+          <v-col cols="12">
+            <carbon />
+          </v-col>
+        </v-row>
       </v-container>
     </template>
   </v-navigation-drawer>
@@ -265,4 +262,5 @@
 
     .v-navigation-drawer__content
       height: auto
+      margin-right: 12px
 </style>
