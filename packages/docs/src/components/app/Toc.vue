@@ -4,6 +4,7 @@
     class="py-4 pr-3"
     color="background"
     floating
+    sticky
     location="right"
     width="256"
   >
