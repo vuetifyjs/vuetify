@@ -1,5 +1,17 @@
 <template>
   <v-app>
+    <v-system-bar color="error" window>
+      <v-icon icon="$warning" class="me-2" />
+
+      This is the Vuetify 3 documentation, examples and information may be broken or outdated.
+
+      <v-spacer />
+
+      <div class="bg-white px-2 rounded">
+        <app-link href="https://vuetifyjs.com/">Vuetify 2 documentation</app-link>
+      </div>
+    </v-system-bar>
+
     <app-settings-drawer />
 
     <app-bar />
@@ -13,14 +25,6 @@
         fluid
         tag="section"
       >
-        <alert type="warning">
-          This is <b>BETA</b> documentation for Vuetify 3, examples and information may be broken or outdated.
-          <br>
-          Components not listed in the sidebar are not available yet.
-          <br>
-          Vuetify 2 documentation can be found on <app-link href="https://vuetifyjs.com/">vuetifyjs.com</app-link>
-        </alert>
-
         <router-view />
       </v-container>
     </v-main>
