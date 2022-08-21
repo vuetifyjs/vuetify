@@ -4,7 +4,7 @@
 
 <script lang="ts">
   // Utilities
-  import { wait } from '@/util/helpers'
+  // import { wait } from '@/util/helpers'
   import { IN_BROWSER } from '@/util/globals'
   import { defineComponent, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
 
