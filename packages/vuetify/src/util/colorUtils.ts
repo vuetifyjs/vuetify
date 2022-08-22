@@ -34,7 +34,7 @@ export function colorToInt (color: Color): ColorInt {
     if (c.length === 3) {
       c = c.split('').map(char => char + char).join('')
     }
-    if (c.length !== 6) {
+    if (c.length !== 6 && c.length !== 8) {
       consoleWarn(`'${color}' is not a valid rgb color`)
     }
     rgb = parseInt(c, 16)
@@ -45,7 +45,7 @@ export function colorToInt (color: Color): ColorInt {
   if (rgb < 0) {
     consoleWarn(`Colors cannot be negative: '${color}'`)
     rgb = 0
-  } else if (rgb > 0xffffff || isNaN(rgb)) {
+  } else if (rgb > 0xffffffff || isNaN(rgb)) {
     consoleWarn(`'${color}' is not a valid rgb color`)
     rgb = 0xffffff
   }
