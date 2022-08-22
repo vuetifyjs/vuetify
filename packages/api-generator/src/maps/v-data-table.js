@@ -88,6 +88,7 @@ const DataTableItemColumnScopedProps = {
   item: 'any',
   header: 'DataTableHeader',
   value: 'any',
+  index: 'number',
 }
 
 const DataTableHeaderSelectScopedProps = {
@@ -122,7 +123,7 @@ const DataGroupScopedProps = {
   options: DataOptions,
   isMobile: 'boolean',
   items: 'any[]',
-  headers: 'i DataTableHeader[]',
+  headers: 'DataTableHeader[]',
 }
 
 const DataGroupHeaderScopedProps = {

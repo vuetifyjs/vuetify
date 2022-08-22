@@ -89,7 +89,7 @@ export default mixins(
     items (): (string | number)[] {
       const totalVisible = parseInt(this.totalVisible, 10)
 
-      if (totalVisible === 0) {
+      if (totalVisible === 0 || isNaN(this.length) || this.length > Number.MAX_SAFE_INTEGER) {
         return []
       }
 

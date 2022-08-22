@@ -45,6 +45,7 @@
 
   .v-input--selection-controls__input
     width: $switch-width
+    transition: opacity $primary-transition
 
   .v-input--selection-controls__ripple
     top: $switch-ripple-top
@@ -68,8 +69,8 @@
     .v-input--selection-controls__ripple
       top: $switch-ripple-dense-top
 
-  &.v-input--is-dirty
-    &.v-input--is-disabled
+  &.v-input--is-dirty.v-input--is-disabled
+    .v-input--selection-controls__input
       opacity: $switch-disabled-opacity
 
   +ltr()

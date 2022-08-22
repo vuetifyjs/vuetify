@@ -361,6 +361,9 @@ export default CalendarWithEvents.extend({
         weekdays,
         categories,
       },
+      attrs: {
+        role: 'grid',
+      },
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',
