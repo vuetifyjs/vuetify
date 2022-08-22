@@ -189,8 +189,6 @@
         return item.example || item.snippet || item.props || item.value
       }
 
-      console.log(props.apiData)
-
       return {
         locale: computed(() => store.locale),
         headers: computed(() => HEADERS[props.field]),
