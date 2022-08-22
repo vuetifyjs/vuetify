@@ -90,6 +90,7 @@ export default defineConfig(({ command, mode }) => {
         dirs: [
           { dir: 'src/pages', baseRoute: 'pages' },
           { dir: 'src/api', baseRoute: 'api' },
+          { dir: 'src/wireframes', baseRoute: 'wireframes' },
         ],
         extendRoute (route) {
           if (['index', 'all'].includes(route.component)) {
@@ -114,6 +115,8 @@ export default defineConfig(({ command, mode }) => {
 
           if (paths.length < 3) {
             layout = 'home'
+          } else if (base === 'wireframes') {
+            layout = 'wireframe'
           }
 
           return {
