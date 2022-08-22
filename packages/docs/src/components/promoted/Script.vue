@@ -4,7 +4,6 @@
 
 <script lang="ts">
   // Utilities
-  import { wait } from '@/util/helpers'
   import { IN_BROWSER } from '@/util/globals'
   import { defineComponent, onBeforeMount, onBeforeUnmount, onMounted, ref } from 'vue'
 
@@ -45,12 +44,6 @@
         script.onerror = onError
 
         scriptEl.value = script
-
-        await wait(1000)
-
-        // If script fails or is blocked
-        // will only contain script el
-        if ((rootEl.value?.children?.length ?? 0) <= 1) onError()
       })
 
       onMounted(() => {

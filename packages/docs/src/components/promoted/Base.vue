@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     :style="styles"
-    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0 mb-4"
+    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
     :color="dark ? undefined : 'grey-lighten-5'"
     rounded
     width="100%"

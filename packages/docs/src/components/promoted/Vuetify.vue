@@ -1,6 +1,6 @@
 <template>
   <promoted-base
-    class="v-vuetify"
+    class="v-vuetify mb-4"
     v-bind="$attrs"
     comfortable
     border

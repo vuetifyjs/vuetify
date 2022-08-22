@@ -1,48 +1,45 @@
 <template>
-  <div
+  <a
     v-if="ad"
-    class="mb-5"
+    v-bind="attrs"
+    class="d-flex mb-4"
+    @click="onClick"
   >
-    <a
-      v-bind="attrs"
-      @click="onClick"
+    <promoted-base
+      v-bind="$attrs"
+      class="v-vuetify--promoted"
+      compact
+      color="transparent"
+      dark
+      max-width="640"
+      outlined
     >
-      <promoted-base
-        v-bind="$attrs"
-        class="v-vuetify--promoted"
-        compact
-        color="transparent"
-        dark
-        max-width="640"
-        outlined
+
+      <v-img
+        :src="background"
+        class="flex-1-1-auto rounded"
+        max-height="56"
+        cover
       >
+        <div class="d-flex align-center fill-height">
+          <v-img
+            :alt="`Link to ${ad.title}`"
+            :src="logo"
+            class="mx-2"
+            contain
+            height="56"
+            max-width="56"
+          />
 
-        <v-img
-          :src="background"
-          class="flex-1-1-auto rounded"
-          max-height="56"
-          cover
-        >
-          <div class="d-flex align-center fill-height">
-            <v-img
-              :alt="`Link to ${ad.title}`"
-              :src="logo"
-              class="mx-2"
-              contain
-              height="56"
-              max-width="56"
-            />
-
-            <app-markdown
-              v-if="description"
-              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
-              :content="description"
-            />
-          </div>
-        </v-img>
-      </promoted-base>
-    </a>
-  </div>
+          <app-markdown
+            v-if="description"
+            class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
+            :content="description"
+          />
+        </div>
+      </v-img>
+    </promoted-base>
+  </a>
 </template>
 
 <script lang="ts">
