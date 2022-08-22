@@ -106,9 +106,12 @@ export default defineConfig(({ command, mode }) => {
             path = ['', parts[2], parts[1], parts.slice(3)].join('/')
           }
 
+          const name = path.split('/').slice(2).join('-')
+
           return {
             ...route,
             path,
+            name,
             meta: {
               ...meta,
               layout,
