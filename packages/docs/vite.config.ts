@@ -87,34 +87,45 @@ export default defineConfig(({ command, mode }) => {
       // https://github.com/hannoeru/vite-plugin-pages
       Pages({
         extensions: ['vue', 'md'],
-        pagesDir: [
-          { dir: 'src/pages', baseRoute: '' },
+        dirs: [
+          { dir: 'src/pages', baseRoute: 'pages' },
           { dir: 'src/api', baseRoute: 'api' },
         ],
         extendRoute (route) {
-          if (['index', 'all'].includes(route.name)) {
+          if (['index', 'all'].includes(route.component)) {
             return route
           }
 
-          const currentPath = route.path.split('/')
-          const layout = currentPath.length === 2 ? 'home' : 'default'
-          const meta = parseMeta(route.component)
-          let path = route.path
+          const [base, locale, ...folders] = route.component.split('/').slice(2)
+          const paths = [locale]
 
-          if (path.startsWith('/api')) {
-            const parts = path.split('/')
-            path = ['', parts[2], parts[1], parts.slice(3)].join('/')
+          if (base !== 'pages') paths.push(base)
+
+          for (const folder of folders) {
+            if (folder.match('index')) continue
+
+            // remove file extensions if present
+            paths.push(folder.replace(/\.[a-z]*/, ''))
           }
 
-          const name = path.split('/').slice(2).join('-')
+          const [category, page] = paths.slice(1)
+
+          let layout = 'default'
+
+          if (paths.length < 3) {
+            layout = 'home'
+          }
 
           return {
             ...route,
-            path,
-            name,
+            path: `/${paths.join('/')}/`,
+            name: `${category}-${page}`,
             meta: {
-              ...meta,
+              ...parseMeta(route.component),
               layout,
+              category,
+              page,
+              locale,
             },
           }
         },
