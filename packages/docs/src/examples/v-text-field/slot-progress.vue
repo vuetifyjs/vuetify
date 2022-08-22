@@ -14,7 +14,7 @@
       <template v-slot:loader>
         <v-progress-linear
           :active="custom"
-          :value="progress"
+          :model-value="progress"
           :color="color"
           absolute
           height="7"

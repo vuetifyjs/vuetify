@@ -8,7 +8,7 @@
       <v-col cols="8">
         <v-text-field
           label="Amount"
-          value="10.00"
+          model-value="10.00"
           prefix="$"
         ></v-text-field>
       </v-col>
@@ -22,7 +22,7 @@
       <v-col cols="8">
         <v-text-field
           label="Weight"
-          value="28.00"
+          model-value="28.00"
           suffix="lbs"
         ></v-text-field>
       </v-col>
@@ -36,7 +36,7 @@
       <v-col cols="8">
         <v-text-field
           label="Email address"
-          value="example"
+          model-value="example"
           suffix="@gmail.com"
         ></v-text-field>
       </v-col>
@@ -50,7 +50,7 @@
       <v-col cols="8">
         <v-text-field
           label="Label Text"
-          value="12:30:00"
+          model-value="12:30:00"
           type="time"
           suffix="PST"
         ></v-text-field>

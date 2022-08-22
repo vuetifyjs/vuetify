@@ -209,17 +209,11 @@ The **prefix** and **suffix** properties allows you to prepend and append inline
 
 <example file="v-text-field/prop-prefixes-and-suffixes" />
 
-#### Shaped
-
-**shaped** text fields are rounded if they're **outlined** and have higher **border-radius** if **filled**.
-
-<example file="v-text-field/prop-shaped" />
-
-#### Single line
+<!-- #### Single line
 
 **single-line** text fields do not float their label on focus or with data.
 
-<example file="v-text-field/prop-single-line" />
+<example file="v-text-field/prop-single-line" /> -->
 
 #### Validation
 

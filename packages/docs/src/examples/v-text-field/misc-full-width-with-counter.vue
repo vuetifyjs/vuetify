@@ -10,7 +10,6 @@
       label="To"
       multiple
       single-line
-      variant="full-width"
     ></v-autocomplete>
 
     <v-divider></v-divider>
@@ -20,7 +19,6 @@
       hide-details
       label="Subject"
       single-line
-      variant="full-width"
     ></v-text-field>
 
     <v-divider></v-divider>
@@ -31,7 +29,6 @@
       label="Message"
       maxlength="120"
       single-line
-      variant="full-width"
     ></v-textarea>
   </v-form>
 </template>
