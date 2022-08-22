@@ -295,12 +295,18 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         return {
           ...styles,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
+          height:
+            isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)`
+            : elementSize.value ? `${elementSize.value}px`
+            : undefined,
           left: isOppositeHorizontal ? undefined : `${item.left}px`,
           right: isOppositeHorizontal ? `${item.right}px` : undefined,
           top: position.value !== 'bottom' ? `${item.top}px` : undefined,
           bottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : elementSize.value ? `${elementSize.value}px` : undefined,
+          width:
+            !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)`
+            : elementSize.value ? `${elementSize.value}px`
+            : undefined,
         }
       })
 

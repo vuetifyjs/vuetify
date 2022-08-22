@@ -3,6 +3,7 @@
     id="app-toc"
     color="background"
     floating
+    sticky
     location="right"
     width="256"
   >

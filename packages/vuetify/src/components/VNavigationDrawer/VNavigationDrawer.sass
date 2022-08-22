@@ -45,6 +45,10 @@
   &--temporary
     @include tools.elevation($navigation-drawer-temporary-elevation)
 
+  &--sticky
+    height: auto
+    transition: box-shadow, transform, visibility, width, height, left, right
+
   .v-list
     overflow: hidden
 

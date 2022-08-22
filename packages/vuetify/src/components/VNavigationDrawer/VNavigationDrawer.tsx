@@ -15,6 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRouter } from '@/composables/router'
 import { useRtl } from '@/composables'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { useSticky } from './sticky'
 import { useTouch } from './touch'
 
 // Utilities
@@ -61,6 +62,7 @@ export const VNavigationDrawer = defineComponent({
       default: 'start',
       validator: (value: any) => locations.includes(value),
     },
+    sticky: Boolean,
 
     ...makeBorderProps(),
     ...makeElevationProps(),
@@ -75,6 +77,7 @@ export const VNavigationDrawer = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
+    const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -83,14 +86,25 @@ export const VNavigationDrawer = defineComponent({
     const { roundedClasses } = useRounded(props)
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
-    const isHovering = ref(false)
     const { ssrBootStyles } = useSsrBoot()
+
+    const rootEl = ref<HTMLElement>()
+    const isHovering = ref(false)
+
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
         ? Number(props.width)
         : Number(props.rail ? props.railWidth : props.width)
     })
+    const location = computed(() => {
+      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
+    })
     const isTemporary = computed(() => !props.permanent && (mobile.value || props.temporary))
+    const isSticky = computed(() =>
+      props.sticky &&
+      !isTemporary.value &&
+      location.value !== 'bottom'
+    )
 
     if (!props.disableResizeWatcher) {
       watch(isTemporary, val => !props.permanent && (isActive.value = !val))
@@ -108,13 +122,6 @@ export const VNavigationDrawer = defineComponent({
       if (props.modelValue != null || isTemporary.value) return
 
       isActive.value = props.permanent || !mobile.value
-    })
-
-    const rootEl = ref<HTMLElement>()
-
-    const { isRtl } = useRtl()
-    const location = computed(() => {
-      return toPhysical(props.location, isRtl.value) as 'left' | 'right' | 'bottom'
     })
 
     const { isDragging, dragProgress, dragStyles } = useTouch({
@@ -141,8 +148,13 @@ export const VNavigationDrawer = defineComponent({
       elementSize: width,
       active: computed(() => isActive.value || isDragging.value),
       disableTransitions: computed(() => isDragging.value),
-      absolute: toRef(props, 'absolute'),
+      absolute: computed(() =>
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        props.absolute || (isSticky.value && typeof isStuck.value !== 'string')
+      ),
     })
+
+    const { isStuck, stickyStyles } = useSticky({ rootEl, isSticky, layoutItemStyles })
 
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
@@ -186,6 +198,7 @@ export const VNavigationDrawer = defineComponent({
                 'v-navigation-drawer--rail': props.rail,
                 'v-navigation-drawer--temporary': isTemporary.value,
                 'v-navigation-drawer--active': isActive.value,
+                'v-navigation-drawer--sticky': isSticky.value,
               },
               themeClasses.value,
               backgroundColorClasses.value,
@@ -198,6 +211,7 @@ export const VNavigationDrawer = defineComponent({
               layoutItemStyles.value,
               dragStyles.value,
               ssrBootStyles.value,
+              stickyStyles.value,
             ]}
             { ...attrs }
           >
@@ -240,7 +254,9 @@ export const VNavigationDrawer = defineComponent({
       )
     })
 
-    return {}
+    return {
+      isStuck,
+    }
   },
 })
 
