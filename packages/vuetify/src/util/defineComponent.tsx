@@ -25,6 +25,7 @@ import type {
   EffectScope,
   EmitsOptions,
   MethodOptions,
+  PropType,
   VNode,
   VNodeChild,
 } from 'vue'
@@ -106,6 +107,9 @@ type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {
   [K in keyof T]?: Slot<T[K]>
 }
+
+export type EventProp<T = (...args: any[]) => any> = T | T[]
+export const EventProp = [Function, Array] as PropType<EventProp>
 
 export function genericComponent<T extends (new () => {
   $slots?: Record<string, Slot>

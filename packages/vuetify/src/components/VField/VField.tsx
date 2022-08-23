@@ -3,13 +3,12 @@ import './VField.sass'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VFieldLabel } from './VFieldLabel'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
-import { useLocale } from '@/composables/locale'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
@@ -18,6 +17,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { computed, ref, toRef, watch } from 'vue'
 import {
   convertToUnit,
+  EventProp,
   genericComponent,
   getUid,
   isOn,
@@ -86,9 +86,6 @@ export type VFieldSlots = MakeSlots<{
   default: [VFieldSlot]
 }>
 
-type EventProp<T = (...args: any[]) => any> = T | T[]
-const EventProp = [Function, Array] as PropType<EventProp>
-
 export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
@@ -121,7 +118,7 @@ export const VField = genericComponent<new <T>() => {
     const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
-    const { t } = useLocale()
+    const { InputIcon } = useInputIcon(props)
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -194,26 +191,6 @@ export const VField = genericComponent<new <T>() => {
       emit('click:control', e)
     }
 
-    function Icon ({ name }: { name: 'clear' | 'appendInner' | 'prependInner' }) {
-      const localeKey = {
-        prependInner: 'prependAction',
-        appendInner: 'appendAction',
-        clear: 'clear',
-      }[name]
-      const listener = props[`onClick:${name}`]
-      const label = listener && localeKey
-        ? t(`$vuetify.input.${localeKey}`, props.label ?? '')
-        : undefined
-
-      return (
-        <VIcon
-          icon={ props[`${name}Icon`] }
-          aria-label={ label }
-          onClick={ listener }
-        />
-      )
-    }
-
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
@@ -268,7 +245,7 @@ export const VField = genericComponent<new <T>() => {
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <Icon key="prepend-icon" name="prependInner" />
+                <InputIcon key="prepend-icon" name="prependInner" />
               ) }
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -311,7 +288,7 @@ export const VField = genericComponent<new <T>() => {
               >
                 { slots.clear
                   ? slots.clear()
-                  : <Icon name="clear" />
+                  : <InputIcon name="clear" />
                 }
               </div>
             </VExpandXTransition>
@@ -322,7 +299,7 @@ export const VField = genericComponent<new <T>() => {
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <Icon key="append-icon" name="appendInner" />
+                <InputIcon key="append-icon" name="appendInner" />
               ) }
             </div>
           ) }
