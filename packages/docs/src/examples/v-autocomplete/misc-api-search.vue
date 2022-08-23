@@ -18,7 +18,6 @@
       <v-card-text>
         <v-autocomplete
           v-model="model"
-          v-model:search="search"
           :items="items"
           :loading="isLoading"
           hide-no-data
@@ -29,6 +28,7 @@
           placeholder="Start typing to Search"
           prepend-icon="mdi-database-search"
           return-object
+          @update:search="search"
         ></v-autocomplete>
       </v-card-text>
 
