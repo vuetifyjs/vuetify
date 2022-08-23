@@ -93,10 +93,6 @@ export default defineConfig(({ command, mode }) => {
           { dir: 'src/wireframes', baseRoute: 'wireframes' },
         ],
         extendRoute (route) {
-          if (['index', 'all'].includes(route.component)) {
-            return route
-          }
-
           const [base, locale, ...folders] = route.component.split('/').slice(2)
           const paths = [locale]
 
@@ -122,7 +118,7 @@ export default defineConfig(({ command, mode }) => {
           return {
             ...route,
             path: `/${paths.join('/')}/`,
-            name: `${category}-${page}`,
+            name: `${category ?? layout}${page ? '-' : ''}${page ?? ''}`,
             meta: {
               ...parseMeta(route.component),
               layout,

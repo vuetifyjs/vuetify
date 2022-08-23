@@ -11,14 +11,14 @@
         :to="{
           name: `wireframes-${wireframe}`
         }"
-        class="text--primary text-decoration-none"
+        class="text-decoration-none"
         rel="nofollow noopener"
         target="_blank"
       >
         <app-figure
           :alt="`${name} layout`"
           :aspect-ratio="16/9"
-          :name="name"
+          :title="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/wireframes/${wireframe}.svg`"
           outlined
         />
