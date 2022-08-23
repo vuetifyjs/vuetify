@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -56,6 +56,8 @@ export const VTextField = genericComponent<new <T>() => {
     },
 
     'onClick:clear': EventProp,
+    'onClick:append': EventProp,
+    'onClick:prepend': EventProp,
     'onClick:appendInner': EventProp,
     'onClick:prependInner': EventProp,
 
@@ -131,7 +133,7 @@ export const VTextField = genericComponent<new <T>() => {
       nextTick(() => {
         model.value = ''
 
-        props['onClick:clear']?.(e)
+        callEvent(props['onClick:clear'], e)
       })
     }
 
@@ -154,8 +156,8 @@ export const VTextField = genericComponent<new <T>() => {
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
-          onClick:prepend={ attrs['onClick:prepend'] }
-          onClick:append={ attrs['onClick:append'] }
+          onClick:prepend={ props['onClick:prepend'] }
+          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           messages={ messages.value }
