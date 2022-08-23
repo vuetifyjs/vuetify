@@ -55,12 +55,6 @@ export const VTextField = genericComponent<new <T>() => {
       default: 'text',
     },
 
-    'onClick:clear': EventProp,
-    'onClick:append': EventProp,
-    'onClick:prepend': EventProp,
-    'onClick:appendInner': EventProp,
-    'onClick:prependInner': EventProp,
-
     ...makeVInputProps(),
     ...makeVFieldProps(),
   },

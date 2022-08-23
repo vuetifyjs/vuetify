@@ -73,6 +73,10 @@ export const makeVFieldProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
 
+  'onClick:clear': EventProp,
+  'onClick:appendInner': EventProp,
+  'onClick:prependInner': EventProp,
+
   ...makeThemeProps(),
   ...makeLoaderProps(),
 }, 'v-field')
@@ -99,10 +103,6 @@ export const VField = genericComponent<new <T>() => {
 
   props: {
     id: String,
-
-    'onClick:clear': EventProp,
-    'onClick:appendInner': EventProp,
-    'onClick:prependInner': EventProp,
 
     ...makeFocusProps(),
     ...makeVFieldProps(),

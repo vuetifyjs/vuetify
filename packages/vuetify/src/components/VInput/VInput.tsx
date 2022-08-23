@@ -46,6 +46,9 @@ export const makeVInputProps = propsFactory({
     validator: (v: any) => ['horizontal', 'vertical'].includes(v),
   },
 
+  'onClick:prepend': EventProp,
+  'onClick:append': EventProp,
+
   ...makeDensityProps(),
   ...makeValidationProps(),
 })
@@ -64,9 +67,6 @@ export const VInput = genericComponent<new <T>() => {
 
   props: {
     ...makeVInputProps(),
-
-    'onClick:prepend': EventProp,
-    'onClick:append': EventProp,
   },
 
   emits: {

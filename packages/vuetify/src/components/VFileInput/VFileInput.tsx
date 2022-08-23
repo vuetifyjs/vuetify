@@ -9,14 +9,13 @@ import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref } from 'vue'
-import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { callEvent, defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -52,12 +51,8 @@ export const VFileInput = defineComponent({
       },
     },
 
-    ...makeVInputProps(),
+    ...makeVInputProps({ prependIcon: '$file' }),
 
-    prependIcon: {
-      type: IconValue,
-      default: '$file',
-    },
     modelValue: {
       type: Array as PropType<File[]>,
       default: () => ([]),
@@ -70,7 +65,6 @@ export const VFileInput = defineComponent({
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:modelValue': (files: File[]) => true,
   },
@@ -113,6 +107,10 @@ export const VFileInput = defineComponent({
         isFocused.value = true
       }
     }
+    function onClickPrepend (e: MouseEvent) {
+      callEvent(props['onClick:prepend'], e)
+      onControlClick(e)
+    }
     function onControlClick (e: MouseEvent) {
       inputRef.value?.click()
 
@@ -130,7 +128,7 @@ export const VFileInput = defineComponent({
           inputRef.value.value = ''
         }
 
-        emit('click:clear', e)
+        callEvent(props['onClick:clear'], e)
       })
     }
 
@@ -146,9 +144,10 @@ export const VFileInput = defineComponent({
           ref={ vInputRef }
           v-model={ model.value }
           class="v-file-input"
+          onClick:prepend={ onClickPrepend }
+          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
-          onClick:prepend={ onControlClick }
           messages={ messages.value }
         >
           {{
@@ -164,6 +163,8 @@ export const VFileInput = defineComponent({
                 prepend-icon={ props.prependIcon }
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
                 active={ isDirty.value || isFocused.value }
                 dirty={ isDirty.value }
