@@ -7,6 +7,7 @@
 
 // Theme
 .v-slider-thumb
+  touch-action: none
   color: rgb(var(--v-theme-surface-variant))
 
   .v-input--error:not(.v-input--disabled) &
@@ -126,13 +127,10 @@
       left: -$slider-thumb-label-wedge-size
 
 // Modifiers
-.v-slider-thumb--focused, .v-slider-thumb:hover
-  .v-slider-thumb__surface::before
-    transform: scale(2)
-
 .v-slider-thumb--focused
   .v-slider-thumb__surface::before
-      opacity: $slider-thumb-focus-opacity
+    transform: scale(2)
+    opacity: $slider-thumb-focus-opacity
 
 .v-slider-thumb--pressed
   transition: none
@@ -140,6 +138,11 @@
   .v-slider-thumb__surface::before
     opacity: $slider-thumb-pressed-opacity
 
-.v-slider-thumb:hover:not(.v-slider-thumb--focused)
-  .v-slider-thumb__surface::before
-    opacity: $slider-thumb-hover-opacity
+@media (hover: hover)
+  .v-slider-thumb:hover
+    .v-slider-thumb__surface::before
+      transform: scale(2)
+
+  .v-slider-thumb:hover:not(.v-slider-thumb--focused)
+    .v-slider-thumb__surface::before
+      opacity: $slider-thumb-hover-opacity

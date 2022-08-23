@@ -202,9 +202,6 @@ export const VWindow = genericComponent<new () => {
         right: () => {
           isRtlReverse.value ? next() : prev()
         },
-        end: ({ originalEvent }) => {
-          originalEvent.stopPropagation()
-        },
         start: ({ originalEvent }) => {
           originalEvent.stopPropagation()
         },

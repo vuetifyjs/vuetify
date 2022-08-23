@@ -259,20 +259,17 @@ export const useSlider = ({
   }
 
   function onSliderTouchend (e: TouchEvent) {
-    e.stopPropagation()
-    e.preventDefault()
-
     handleStop(e)
 
     window.removeEventListener('touchmove', onMouseMove, moveListenerOptions)
-    window.removeEventListener('touchend', onSliderTouchend)
+    e.target?.removeEventListener('touchend', onSliderTouchend as EventListener)
   }
 
   function onSliderTouchstart (e: TouchEvent) {
     handleStart(e)
 
     window.addEventListener('touchmove', onMouseMove, moveListenerOptions)
-    window.addEventListener('touchend', onSliderTouchend, { passive: false })
+    e.target?.addEventListener('touchend', onSliderTouchend as EventListener, { passive: false })
   }
 
   function onSliderMousedown (e: MouseEvent) {
