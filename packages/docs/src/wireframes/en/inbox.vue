@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
-    <v-system-bar app>
-      <v-spacer></v-spacer>
+    <v-system-bar>
+      <v-spacer />
 
       <v-icon>mdi-square</v-icon>
 
@@ -10,24 +10,21 @@
       <v-icon>mdi-triangle</v-icon>
     </v-system-bar>
 
-    <v-navigation-drawer
-      v-model="drawer"
-      app
-    >
+    <v-navigation-drawer v-model="drawer">
       <v-sheet
-        color="grey lighten-4"
+        color="grey-lighten-4"
         class="pa-4"
       >
         <v-avatar
           class="mb-4"
-          color="grey darken-1"
+          color="grey-darken-1"
           size="64"
-        ></v-avatar>
+        />
 
         <div>john@vuetifyjs.com</div>
       </v-sheet>
 
-      <v-divider></v-divider>
+      <v-divider />
 
       <v-list>
         <v-list-item
@@ -35,13 +32,11 @@
           :key="icon"
           link
         >
-          <v-list-item-icon>
+          <template #prepend>
             <v-icon>{{ icon }}</v-icon>
-          </v-list-item-icon>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ text }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>{{ text }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -58,28 +53,27 @@
             cols="12"
           >
             <v-card>
-              <v-subheader>{{ card }}</v-subheader>
 
-              <v-list two-line>
+              <v-list lines="two">
+                <v-list-subheader>{{ card }}</v-list-subheader>
                 <template v-for="n in 6" :key="n">
                   <v-list-item>
-                    <v-list-item-avatar color="grey darken-1">
-                    </v-list-item-avatar>
+                    <template #prepend>
+                      <v-avatar color="grey-darken-1" />
+                    </template>
 
-                    <v-list-item-content>
-                      <v-list-item-title>Message {{ n }}</v-list-item-title>
+                    <v-list-item-title>Message {{ n }}</v-list-item-title>
 
-                      <v-list-item-subtitle>
-                        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus distinctio similique
-                      </v-list-item-subtitle>
-                    </v-list-item-content>
+                    <v-list-item-subtitle>
+                      Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nihil repellendus distinctio similique
+                    </v-list-item-subtitle>
                   </v-list-item>
 
                   <v-divider
                     v-if="n !== 6"
                     :key="`divider-${n}`"
                     inset
-                  ></v-divider>
+                  />
                 </template>
               </v-list>
             </v-card>
