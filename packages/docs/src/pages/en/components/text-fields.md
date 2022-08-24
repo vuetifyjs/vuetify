@@ -16,7 +16,7 @@ Text field components are used for collecting user provided information.
 
 ![Text-field Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-entry.png)
 
----
+----
 
 ## Usage
 
@@ -199,7 +199,7 @@ The **hint** property on text fields adds the provided string beneath the text f
 
 #### Icons
 
-You can add icons to the text field with **prepend-icon**, **append-icon** and **append-outer-icon** props.
+You can add icons to the text field with **prepend-icon**, **append-icon** and **append-inner-icon** props.
 
 <example file="v-text-field/prop-icon" />
 
@@ -208,12 +208,6 @@ You can add icons to the text field with **prepend-icon**, **append-icon** and *
 The **prefix** and **suffix** properties allows you to prepend and append inline non-modifiable text next to the text field.
 
 <example file="v-text-field/prop-prefixes-and-suffixes" />
-
-<!-- #### Single line
-
-**single-line** text fields do not float their label on focus or with data.
-
-<example file="v-text-field/prop-single-line" /> -->
 
 #### Validation
 
@@ -231,17 +225,30 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 #### Icon events
 
-`click:prepend`, `click:append`, `click:append-outer`, and `click:clear` will be emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead.
+`click:prepend`, `click:append`, `click:append-inner`, and `click:clear` are emitted when you click on the respective icon. Note that these events will not be fired if the slot is used instead.
 
 <example file="v-text-field/event-icons" />
 
 ### Slots
 
+Slots enable you to easily customize the display of many `v-text-field` properties. This gives you the ability to implement component features the way that you want. The slot locations are positioned using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) and correspond to the available slots.
+
+![Text-field Slots](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-slots.png)
+
+| Slot name | Description |
+| - | - |
+| 1. prepend | Provided by `v-input`, positioned before the input field |
+| 2. prepend-inner | Provided by `v-field`, positioned at the start of the input field |
+| 3. label | The form input label |
+| 4. append-inner | Provided by `v-field`, positioned at the end of the input field |
+| 5. append | Provided by `v-input`, positioned after the input field |
+| 6. details | Used for displaying **messages**, **hint**, **error-messages**, and more |
+
 <vuetify slug="vs-vue-3-slots" />
 
 #### Icon slots
 
-Instead of using `prepend`/`append`/`append-outer` icons you can use slots to extend input's functionality.
+Instead of using `prepend`/`append`/`append-inner` icons you can use slots to extend input's functionality.
 
 <example file="v-text-field/slot-icons" />
 
