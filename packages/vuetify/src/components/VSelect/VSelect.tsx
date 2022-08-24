@@ -175,7 +175,7 @@ export const VSelect = genericComponent<new <
               'v-select--active-menu': menu.value,
               'v-select--chips': !!props.chips,
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
-              'v-select--selected': props.modelValue?.length,
+              'v-select--selected': model.value.length,
             },
           ]}
           appendInnerIcon={ props.menuIcon }
