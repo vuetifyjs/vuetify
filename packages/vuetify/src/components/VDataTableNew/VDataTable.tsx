@@ -44,6 +44,7 @@ export const makeVDataTableProps = propsFactory({
   height: [String, Number],
   width: [String, Number],
   fixedHeader: Boolean,
+  fixedFooter: Boolean,
   groupBy: String,
   sortBy: {
     type: Array as PropType<SortItem[]>,
@@ -121,8 +122,9 @@ export const VDataTable = defineComponent({
     useRender(() => (
       <VTable
         class="v-data-table"
-        height={ props.height }
         fixedHeader={ props.fixedHeader }
+        fixedFooter={ props.fixedFooter }
+        height={ props.height }
       >
         {{
           default: slots.default ? slots.default() : () => (

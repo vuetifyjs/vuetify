@@ -45,13 +45,13 @@ export const VDataTableHeaders = defineComponent({
       }, [0])
     })
 
-    const getFixedStyles = (sticky: boolean | undefined, y: number, x: number) => {
-      if (!props.sticky && !sticky) return null
+    const getFixedStyles = (fixed: boolean | undefined, y: number, x: number) => {
+      if (!props.sticky && !fixed) return null
 
       return {
         position: 'sticky',
-        zIndex: sticky ? 4 : props.sticky ? 3 : undefined,
-        left: sticky ? convertToUnit(fixedOffsets.value[x]) : undefined,
+        zIndex: fixed ? 4 : props.sticky ? 3 : undefined, // TODO: This needs to account for possible previous fixed columns.
+        left: fixed ? convertToUnit(fixedOffsets.value[x]) : undefined, // TODO: This needs to account for possible row/colspan of previous columns
         top: props.sticky ? `${props.rowHeight * y}px` : undefined,
       }
     }

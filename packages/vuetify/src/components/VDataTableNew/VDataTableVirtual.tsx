@@ -34,7 +34,7 @@ export const VDataTableVirtual = defineComponent({
     const { headers, columns } = useHeaders(props)
     const { sortBy, toggleSort } = useSort(props)
     const { sortedItems } = useSortedItems(allItems, sortBy)
-    const { items, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
+    const { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
 
     const {
       containerRef,
@@ -44,12 +44,12 @@ export const VDataTableVirtual = defineComponent({
       itemHeight,
       afterHeight,
       beforeHeight,
-    } = useVirtual(props, computed(() => items.value.length + expanded.value.size))
+    } = useVirtual(props, computed(() => flatItems.value.length + expanded.value.size))
 
     const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = useSelection(props, allItems)
 
     const visibleItems = computed(() => {
-      return items.value.slice(startIndex.value, stopIndex.value)
+      return flatItems.value.slice(startIndex.value, stopIndex.value)
     })
 
     provide('v-data-table', {
@@ -67,10 +67,10 @@ export const VDataTableVirtual = defineComponent({
       sortBy,
       page: ref(1),
       startIndex: ref(0),
-      stopIndex: computed(() => items.value.length - 1),
+      stopIndex: computed(() => flatItems.value.length - 1),
       pageCount: ref(1),
       itemsPerPage: ref(-1),
-      itemsLength: computed(() => items.value.length),
+      itemsLength: computed(() => flatItems.value.length),
     })
 
     return () => (
@@ -92,6 +92,7 @@ export const VDataTableVirtual = defineComponent({
                 <thead>
                   <VDataTableHeaders
                     headers={ headers.value }
+                    columns={ columns.value }
                     rowHeight={ itemHeight.value }
                     sticky={ props.fixedHeader }
                     sortBy={ sortBy.value }

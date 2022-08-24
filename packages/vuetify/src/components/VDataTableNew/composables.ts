@@ -17,53 +17,6 @@ export type GroupHeaderItem = { type: 'group-header', groupBy: string, groupByVa
 export type ExpandedItem = { type: 'expanded-item' }
 export type InternalDataTableItem = DataTableItem | GroupHeaderItem | ExpandedItem
 
-// export const useVirtual = (props: { height?: string | number, itemHeight: string | number }, itemsLength: Ref<number>) => {
-//   const { resizeRef: containerRef, contentRect } = useResizeObserver()
-//   const windowSize = computed(() => {
-//     return contentRect.value?.height ?? 0
-//   })
-//   const itemHeight = computed(() => 52)
-//   const visibleItems = computed(() => (windowSize.value / itemHeight.value) * 2)
-//   const startIndex = ref(0)
-//   const stopIndex = computed(() => Math.min(startIndex.value + visibleItems.value, itemsLength.value))
-//   const beforeHeight = computed(() => startIndex.value * itemHeight.value)
-//   const afterHeight = computed(() => (itemsLength.value * itemHeight.value) - beforeHeight.value - (visibleItems.value * itemHeight.value))
-//   const totalHeight = computed(() => itemsLength.value * itemsLength.value)
-//   const offsetStart = computed(() => beforeHeight.value)
-//   const isScrolling = ref(false)
-
-//   const foo = debounce(() => {
-//     const scrollTop = containerRef.value?.scrollTop
-//     startIndex.value = Math.max(0, Math.min(itemsLength.value - visibleItems.value, Math.floor((scrollTop - (visibleItems.value / 2)) / itemHeight.value)))
-//   }, 5)
-
-//   function onScroll () {
-//     console.log(containerRef.value?.scrollTop)
-//     foo()
-//   }
-
-//   onMounted(() => {
-//     console.log(containerRef.value)
-//     containerRef.value?.addEventListener('scroll', onScroll, { passive: true })
-//   })
-
-//   onBeforeUnmount(() => {
-//     containerRef.value?.removeEventListener('scroll', onScroll)
-//   })
-
-//   return {
-//     totalHeight,
-//     containerRef,
-//     offsetStart,
-//     startIndex,
-//     stopIndex,
-//     isScrolling,
-//     itemHeight,
-//     afterHeight,
-//     beforeHeight,
-//   }
-// }
-
 export function useDataTableItems (props: ItemProps, columns: Ref<DataTableHeader[]>) {
   const { items } = useItems(props)
 
@@ -72,7 +25,7 @@ export function useDataTableItems (props: ItemProps, columns: Ref<DataTableHeade
       ...item,
       type: 'item',
       columns: columns.value.reduce((obj, column) => {
-        obj[column.id] = getPropertyFromItem(item.originalItem, column.value ?? column.id)
+        obj[column.id] = getPropertyFromItem(item.raw, column.value ?? column.id)
         return obj
       }, {} as Record<string, unknown>),
     }
@@ -241,8 +194,8 @@ function sortItems<T extends any, K extends keyof T> (
     for (let i = 0; i < sortBy.length; i++) {
       const { key, order } = sortBy[i]
 
-      let sortA = getObjectValueByPath(a.originalItem, key)
-      let sortB = getObjectValueByPath(b.originalItem, key)
+      let sortA = getObjectValueByPath(a.raw, key)
+      let sortB = getObjectValueByPath(b.raw, key)
 
       if (order === 'desc') {
         [sortA, sortB] = [sortB, sortA]
@@ -329,8 +282,6 @@ export const usePagination = (props: {
   'onUpdate:itemsPerPage': ((val: any) => void) | undefined
   itemsLength?: number
 }) => {
-  const vm = getCurrentInstance('usePagination')
-
   const page = useProxiedModel(props, 'page')
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
 
@@ -410,7 +361,7 @@ export const useGroupBy = (items: Ref<DataTableItem[]>, groupBy: Ref<string | un
     if (!groupBy.value) return groups
 
     for (const item of items.value) {
-      const value = getObjectValueByPath(item.originalItem, groupBy.value)
+      const value = getObjectValueByPath(item.raw, groupBy.value)
       const group = groups.get(value) ?? []
       group.push(item)
       groups.set(value, group)
