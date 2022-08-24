@@ -33,9 +33,7 @@
 
         <app-bar-jobs-link />
 
-        <!-- <app-bar-notifications-menu /> -->
-
-        <app-vertical-divider />
+        <app-bar-notifications-menu />
 
         <app-bar-settings-toggle />
 
@@ -51,7 +49,7 @@
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
-  // import AppBarNotificationsMenu from './NotificationsMenu.vue'
+  import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
@@ -73,7 +71,7 @@
       AppBarLanguageMenu,
       AppBarLearnMenu,
       AppBarLogo,
-      // AppBarNotificationsMenu,
+      AppBarNotificationsMenu,
       AppBarSettingsToggle,
       AppBarStoreLink,
       AppBarSupportMenu,

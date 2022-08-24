@@ -1,7 +1,9 @@
 <template>
   <app-menu
     v-model="menu"
-    :max-width="maxWidth"
+    :close-on-content-click="false"
+    :open-on-hover="false"
+    :width="width"
   >
     <template #activator="{ props }">
       <app-tooltip-btn
@@ -13,17 +15,23 @@
             :value="unread.length"
             color="#ED561B"
             dot
-            location="top-end"
+            location="top end"
           >
             <v-icon
-              class="mx-1"
               :icon="`mdi-bell${unread.length === 0 ? '-outline' : '-ring-outline'}`"
+              class="mx-1"
+              color="medium-emphasis"
             />
           </v-badge>
         </template>
       </app-tooltip-btn>
     </template>
-    <div class="d-flex pr-5">
+
+    <v-toolbar
+      class="pl-4 pr-5"
+      color="white"
+      density="compact"
+    >
       <v-btn
         :disabled="showArchived ? unread.length < 1 : read.length < 1"
         class="px-2 ml-n1"
@@ -41,15 +49,16 @@
         :disabled="done"
         :icon="marked.icon"
         :path="`marked-${marked.path}`"
+        color="medium-emphasis"
         size="small"
         @click="toggleAll"
       />
-    </div>
+    </v-toolbar>
 
     <v-divider />
 
     <v-responsive
-      class="overflow-y-scroll"
+      class="overflow-y-auto"
       max-height="340"
     >
       <div
@@ -59,31 +68,62 @@
         <p>{{ t('done') }}</p>
 
         <v-icon
-          color="grey lighten-2"
+          color="grey-lighten-2"
           size="96"
           icon="mdi-vuetify"
         />
       </div>
 
       <template v-else>
-        <v-list>
-          <v-list-item
-            v-for="notification in notifications"
+        <v-list :lines="false">
+          <template
+            v-for="(notification, i) in notifications"
             :key="notification.slug"
-            :ripple="false"
-            :title="`${notification.metadata.emoji} ${notification.title}`"
-            :subtitle="notification.created_at"
-            @click="select(notification)"
           >
-            <template #append>
-              <v-btn
-                :ripple="false"
-                :icon="marked.icon"
-                variant="text"
-                @click.stop.prevent="toggle(notification)"
+
+            <v-divider
+              v-if="i !== 0"
+              class="my-3"
+              inset
+            />
+
+            <v-list-item
+              :ripple="false"
+              class="py-2"
+            >
+              <template #prepend>
+                <div class="mr-3 text-h6 mt-n16">
+                  {{ notification.metadata.emoji }}
+                </div>
+              </template>
+
+              <v-list-item-title
+                class="text-wrap text-h6 mb-1"
+                v-text="notification.title"
               />
-            </template>
-          </v-list-item>
+
+              <v-list-item-subtitle
+                class="text-caption"
+              >
+                {{ notification.metadata.text }}
+
+                <app-link :href="notification.metadata.action">
+                  {{ notification.metadata.action_text }}
+                </app-link>
+              </v-list-item-subtitle>
+
+              <template #append>
+                <v-btn
+                  :ripple="false"
+                  :icon="marked.icon"
+                  class="ml-3"
+                  color="medium-emphasis"
+                  variant="text"
+                  @click.stop.prevent="toggle(notification)"
+                />
+              </template>
+            </v-list-item>
+          </template>
         </v-list>
       </template>
     </v-responsive>
@@ -103,6 +143,7 @@
   type Notification = {
     metadata: {
       emoji: string
+      text: string
     }
     // eslint-disable-next-line camelcase
     created_at: string
@@ -121,13 +162,19 @@
       const { mobile } = useDisplay()
       const user = useUserStore()
       const menu = ref(false)
-      const done = ref(false)
       const all = ref<Notification[]>([])
       const showArchived = ref(false)
 
       const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
       const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
       const notifications = computed(() => showArchived.value ? read.value : unread.value)
+      const done = computed(() => {
+        return (
+          showArchived.value && read.value.length < 1
+        ) || (
+          !showArchived.value && unread.value.length < 1
+        )
+      })
 
       const marked = computed(() => {
         const path = showArchived.value ? 'unread' : 'read'
@@ -136,7 +183,7 @@
         return { icon, path }
       })
 
-      const maxWidth = computed(() => mobile.value ? 296 : 320)
+      const width = computed(() => mobile.value ? 420 : 520)
 
       async function load () {
         const { objects } = await bucket.getObjects<Notification>({
@@ -185,7 +232,7 @@
         notifications,
         marked,
         showArchived,
-        maxWidth,
+        width,
         select,
         toggle,
         toggleAll,
