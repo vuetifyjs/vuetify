@@ -249,7 +249,7 @@ export default baseMixins.extend({
 
       if (force) this.hasInput = this.hasFocused = true
 
-      for (const rule of this.rules) {
+      for (const rule in this.rules) {
         const valid = typeof rule === 'function' ? rule(value) : rule
 
         if (valid === false || typeof valid === 'string') {
