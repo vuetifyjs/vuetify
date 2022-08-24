@@ -1,19 +1,21 @@
 <template>
   <v-app id="inspire">
     <v-app-bar
-      app
+      class="px-3"
       color="white"
       flat
+      density="compact"
     >
       <v-avatar
-        :color="$vuetify.breakpoint.smAndDown ? 'grey darken-1' : 'transparent'"
+        color="grey-darken-1"
         size="32"
-      ></v-avatar>
+      />
+
+      <v-spacer />
 
       <v-tabs
         centered
-        class="ml-n9"
-        color="grey darken-1"
+        color="grey-darken-2"
       >
         <v-tab
           v-for="link in links"
@@ -22,15 +24,16 @@
           {{ link }}
         </v-tab>
       </v-tabs>
+      <v-spacer />
 
       <v-avatar
         class="hidden-sm-and-down"
-        color="grey darken-1 shrink"
+        color="grey-darken-1"
         size="32"
-      ></v-avatar>
+      />
     </v-app-bar>
 
-    <v-main class="grey lighten-3">
+    <v-main class="bg-grey-lighten-3">
       <v-container>
         <v-row>
           <v-col

@@ -37,14 +37,14 @@
           {
             title: t('feature-guides'),
             to: {
-              name: 'en-introduction-why-vuetify',
+              name: 'introduction-why-vuetify',
               hash: '#feature-guides',
             },
           },
           {
             title: t('roadmap'),
             to: {
-              name: 'en-introduction-roadmap',
+              name: 'introduction-roadmap',
             },
           },
           { divider: true },

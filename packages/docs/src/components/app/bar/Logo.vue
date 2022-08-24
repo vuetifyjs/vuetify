@@ -15,10 +15,13 @@
 </template>
 
 <script lang="ts">
-  // Utilities
-  import { computed, defineComponent } from 'vue'
+  // Composables
   import { useI18n } from 'vue-i18n'
   import { useTheme } from 'vuetify'
+
+  // Utilities
+  import { rpath } from '@/util/routes'
+  import { computed, defineComponent } from 'vue'
 
   export default defineComponent({
     name: 'Logo',
@@ -31,11 +34,6 @@
       const { locale, t } = useI18n()
       const theme = useTheme()
 
-      // data
-      const to = {
-        name: locale.value,
-      }
-
       // computed
       const logo = computed(() => {
         return props.alt ? `vuetify-logo-v3-slim-text-${theme.name.value}.svg` : `vuetify-logo-v3-slim-${theme.name.value}.svg`
@@ -47,7 +45,7 @@
       return {
         logo,
         t,
-        to,
+        to: rpath(locale.value),
         width,
       }
     },

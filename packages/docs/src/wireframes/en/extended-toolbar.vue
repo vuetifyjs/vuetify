@@ -2,13 +2,13 @@
   <v-app id="inspire">
     <v-app-bar
       app
-      shrink-on-scroll
+      extended
     >
-      <v-app-bar-nav-icon></v-app-bar-nav-icon>
+      <v-app-bar-nav-icon />
 
       <v-toolbar-title>Application</v-toolbar-title>
 
-      <v-spacer></v-spacer>
+      <v-spacer />
 
       <v-btn icon>
         <v-icon>mdi-dots-vertical</v-icon>
@@ -23,7 +23,7 @@
             :key="n"
             cols="4"
           >
-            <v-card height="200"></v-card>
+            <v-card height="200" />
           </v-col>
         </v-row>
       </v-container>
