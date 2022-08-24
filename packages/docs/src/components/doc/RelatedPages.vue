@@ -1,5 +1,8 @@
 <template>
-  <v-row dense>
+  <v-row
+    v-if="related.length > 0"
+    dense
+  >
     <v-col
       v-for="(to, i) in related"
       :key="i"
