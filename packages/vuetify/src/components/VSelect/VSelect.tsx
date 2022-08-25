@@ -53,6 +53,7 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+  readonly: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'select')
@@ -130,11 +131,16 @@ export const VSelect = genericComponent<new <
       }
     }
     function onClickControl () {
-      if (props.hideNoData && !items.value.length) return
+      if (
+        (props.hideNoData && !items.value.length) ||
+        props.readonly
+      ) return
 
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
+      if (props.readonly) return
+
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
       }

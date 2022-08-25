@@ -164,11 +164,16 @@ export const VCombobox = genericComponent<new <
       }
     }
     function onClickControl () {
-      if (props.hideNoData && !filteredItems.value.length) return
+      if (
+        (props.hideNoData && !items.value.length) ||
+        props.readonly
+      ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
+      if (props.readonly) return
+
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = selected.value.length
 
@@ -298,6 +303,7 @@ export const VCombobox = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
+          readonly={ props.readonly }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }

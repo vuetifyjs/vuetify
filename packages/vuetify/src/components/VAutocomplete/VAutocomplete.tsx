@@ -127,11 +127,16 @@ export const VAutocomplete = genericComponent<new <
       search.value = ''
     }
     function onClickControl () {
-      if (props.hideNoData && !filteredItems.value.length) return
+      if (
+        (props.hideNoData && !items.value.length) ||
+        props.readonly
+      ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
+      if (props.readonly) return
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
       }
@@ -220,6 +225,7 @@ export const VAutocomplete = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
+          readonly={ props.readonly }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onClick:input={ onClickControl }
