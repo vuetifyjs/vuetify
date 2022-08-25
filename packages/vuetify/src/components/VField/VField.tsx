@@ -3,8 +3,8 @@ import './VField.sass'
 
 // Components
 import { VExpandXTransition } from '@/components/transitions'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 import { VFieldLabel } from './VFieldLabel'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -17,8 +17,10 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { computed, ref, toRef, watch } from 'vue'
 import {
   convertToUnit,
+  EventProp,
   genericComponent,
   getUid,
+  isOn,
   nullifyTransforms,
   pick,
   propsFactory,
@@ -71,6 +73,10 @@ export const makeVFieldProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
 
+  'onClick:clear': EventProp,
+  'onClick:appendInner': EventProp,
+  'onClick:prependInner': EventProp,
+
   ...makeThemeProps(),
   ...makeLoaderProps(),
 }, 'v-field')
@@ -103,7 +109,6 @@ export const VField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
@@ -113,6 +118,7 @@ export const VField = genericComponent<new <T>() => {
     const { themeClasses } = provideTheme(props)
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
+    const { InputIcon } = useInputIcon(props)
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -239,11 +245,7 @@ export const VField = genericComponent<new <T>() => {
           { hasPrepend && (
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
-                <VIcon
-                  key="prepend-icon"
-                  onClick={ attrs['onClick:prependInner'] }
-                  icon={ props.prependInnerIcon }
-                />
+                <InputIcon key="prepend-icon" name="prependInner" />
               ) }
 
               { slots['prepend-inner']?.(slotProps.value) }
@@ -257,6 +259,7 @@ export const VField = genericComponent<new <T>() => {
                 ref={ floatingLabelRef }
                 class={[textColorClasses.value]}
                 floating
+                for={ id.value }
               >
                 { label }
               </VFieldLabel>
@@ -285,12 +288,7 @@ export const VField = genericComponent<new <T>() => {
               >
                 { slots.clear
                   ? slots.clear()
-                  : (
-                    <VIcon
-                      onClick={ (e: MouseEvent) => emit('click:clear', e) }
-                      icon={ props.clearIcon }
-                    />
-                  )
+                  : <InputIcon name="clear" />
                 }
               </div>
             </VExpandXTransition>
@@ -301,11 +299,7 @@ export const VField = genericComponent<new <T>() => {
               { slots['append-inner']?.(slotProps.value) }
 
               { props.appendInnerIcon && (
-                <VIcon
-                  key="append-icon"
-                  onClick={ attrs['onClick:appendInner'] }
-                  icon={ props.appendInnerIcon }
-                />
+                <InputIcon key="append-icon" name="appendInner" />
               ) }
             </div>
           ) }
@@ -322,7 +316,7 @@ export const VField = genericComponent<new <T>() => {
 
                 { hasLabel.value && (
                   <div class="v-field__outline__notch">
-                    <VFieldLabel ref={ floatingLabelRef } floating>
+                    <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                       { label }
                     </VFieldLabel>
                   </div>
@@ -333,7 +327,7 @@ export const VField = genericComponent<new <T>() => {
             ) }
 
             { ['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating>
+              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label }
               </VFieldLabel>
             ) }
@@ -352,5 +346,6 @@ export type VField = InstanceType<typeof VField>
 
 // TODO: this is kinda slow, might be better to implicitly inherit props instead
 export function filterFieldProps (attrs: Record<string, unknown>) {
-  return pick(attrs, Object.keys(VField.props))
+  const keys = Object.keys(VField.props).filter(k => !isOn(k))
+  return pick(attrs, keys)
 }
