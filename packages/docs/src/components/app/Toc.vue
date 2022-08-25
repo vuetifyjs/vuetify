@@ -8,7 +8,7 @@
     width="256"
   >
     <template
-      v-if="toc.length"
+      v-if="toc?.length"
       #prepend
     >
       <app-headline
