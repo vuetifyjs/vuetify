@@ -30,7 +30,7 @@ $card-plain-opacity: .62 !default;
 $card-positions: absolute fixed !default;
 $card-prepend-padding-inline-end: 1rem !default;
 $card-transition-duration: 0.28s !default;
-$card-transition-property: box-shadow, opacity !default;
+$card-transition-property: box-shadow, opacity, background !default;
 $card-transition-timing-function: settings.$standard-easing !default;
 
 // VCardHeader
