@@ -27,6 +27,7 @@ Vuetify is a progressive framework that attempts to push web development to the 
 | Internet Explorer               | ⛔ Not supported     |
 
 Safari and some older versions of other browsers require polyfills to work correctly. You can use [babel and core-js](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) for this, or you can use [polyfill.io](https://polyfill.io/v3/) like we do on this site:
+
 ```html
 <script
   src="https://polyfill.io/v3/polyfill.js?features=IntersectionObserver,ResizeObserver,Object.fromEntries,Array.prototype.at"
