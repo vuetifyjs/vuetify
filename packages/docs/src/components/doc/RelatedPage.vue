@@ -29,7 +29,7 @@
   // Utilities
   import { computed } from 'vue'
   import { rpath, trailingSlash } from '@/util/routes'
-  import { upperFirst } from 'lodash'
+  import { upperFirst } from 'lodash-es'
 
   const appStore = useAppStore()
   const props = defineProps({ to: String })
