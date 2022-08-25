@@ -65,7 +65,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   }
 
   return {
-    title: _props.title,
+    title: String(_props.title ?? ''),
     value: _props.value,
     props: _props,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
