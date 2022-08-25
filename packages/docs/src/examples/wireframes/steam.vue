@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-system-bar app>
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
 
@@ -21,9 +21,9 @@
         class="mr-3"
         color="grey lighten-1"
         size="36"
-      />
+      ></v-avatar>
 
-      <div class="mx-2" />
+      <div class="mx-2"></div>
 
       <v-btn
         v-for="n in 4"
@@ -34,9 +34,9 @@
         min-width="96"
         rounded
         small
-      />
+      ></v-btn>
 
-      <v-spacer />
+      <v-spacer></v-spacer>
 
     </v-app-bar>
 
@@ -48,18 +48,18 @@
       width="300"
     >
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow" />
+        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
 
         <v-btn
           min-width="0"
           depressed
           class="ml-3"
           color="grey lighten-3"
-        />
+        ></v-btn>
       </div>
 
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow" />
+        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
 
         <v-btn
           v-for="n in 2"
@@ -69,7 +69,7 @@
           fab
           x-small
           depressed
-        />
+        ></v-btn>
       </div>
 
       <div class="pa-1 mb-4">
@@ -79,7 +79,7 @@
           hide-details
           rounded
           solo-inverted
-        />
+        ></v-text-field>
       </div>
     </v-navigation-drawer>
 
@@ -100,7 +100,7 @@
         hide-details
         rounded
         solo
-      />
+      ></v-text-field>
     </v-footer>
   </v-app>
 </template>

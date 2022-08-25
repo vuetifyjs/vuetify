@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-system-bar>
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
 
@@ -20,9 +20,9 @@
         class="d-block text-center mx-auto mt-4"
         color="grey-darken-1"
         size="36"
-      />
+      ></v-avatar>
 
-      <v-divider class="mx-3 my-5" />
+      <v-divider class="mx-3 my-5"></v-divider>
 
       <v-avatar
         v-for="n in 6"
@@ -30,7 +30,7 @@
         class="d-block text-center mx-auto mb-9"
         color="grey-lighten-1"
         size="28"
-      />
+      ></v-avatar>
     </v-navigation-drawer>
 
     <v-navigation-drawer
@@ -41,7 +41,7 @@
         color="grey-lighten-5"
         height="128"
         width="100%"
-      />
+      ></v-sheet>
 
       <v-list
         class="pl-14"
@@ -65,14 +65,14 @@
       class="px-3"
       color="grey-lighten-4"
     >
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-responsive max-width="156">
         <v-text-field
           density="compact"
           hide-details
           rounded
-        />
+        ></v-text-field>
       </v-responsive>
     </v-app-bar>
 
@@ -107,7 +107,7 @@
         hide-details
         rounded
         solo
-      />
+      ></v-text-field>
     </v-footer>
   </v-app>
 </template>

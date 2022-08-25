@@ -12,7 +12,7 @@
         :color="`grey-${n === 1 ? 'darken' : 'lighten'}-1`"
         :size="n === 1 ? 36 : 20"
         class="d-block text-center mx-auto mb-9"
-      />
+      ></v-avatar>
     </v-navigation-drawer>
 
     <v-main>

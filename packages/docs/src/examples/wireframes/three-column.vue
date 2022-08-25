@@ -9,9 +9,9 @@
       <v-avatar
         color="grey-darken-1"
         size="32"
-      />
+      ></v-avatar>
 
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-tabs
         centered
@@ -24,13 +24,13 @@
           {{ link }}
         </v-tab>
       </v-tabs>
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-avatar
         class="hidden-sm-and-down"
         color="grey-darken-1"
         size="32"
-      />
+      ></v-avatar>
     </v-app-bar>
 
     <v-main class="bg-grey-lighten-3">

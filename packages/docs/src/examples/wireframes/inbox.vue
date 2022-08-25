@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-system-bar>
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
 
@@ -19,12 +19,12 @@
           class="mb-4"
           color="grey-darken-1"
           size="64"
-        />
+        ></v-avatar>
 
         <div>john@vuetifyjs.com</div>
       </v-sheet>
 
-      <v-divider />
+      <v-divider></v-divider>
 
       <v-list>
         <v-list-item
@@ -32,7 +32,7 @@
           :key="icon"
           link
         >
-          <template #prepend>
+          <template v-slot:prepend>
             <v-icon>{{ icon }}</v-icon>
           </template>
 
@@ -58,8 +58,8 @@
                 <v-list-subheader>{{ card }}</v-list-subheader>
                 <template v-for="n in 6" :key="n">
                   <v-list-item>
-                    <template #prepend>
-                      <v-avatar color="grey-darken-1" />
+                    <template v-slot:prepend>
+                      <v-avatar color="grey-darken-1"></v-avatar>
                     </template>
 
                     <v-list-item-title>Message {{ n }}</v-list-item-title>
@@ -73,7 +73,7 @@
                     v-if="n !== 6"
                     :key="`divider-${n}`"
                     inset
-                  />
+                  ></v-divider>
                 </template>
               </v-list>
             </v-card>

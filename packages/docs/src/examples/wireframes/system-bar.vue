@@ -1,7 +1,7 @@
 <template>
   <v-app id="inspire">
     <v-system-bar>
-      <v-spacer />
+      <v-spacer></v-spacer>
 
       <v-icon>mdi-square</v-icon>
 
@@ -11,7 +11,7 @@
     </v-system-bar>
 
     <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer" />
+      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
 
       <v-toolbar-title>Application</v-toolbar-title>
     </v-app-bar>
@@ -40,7 +40,7 @@
               cols="6"
               md="2"
             >
-              <v-sheet height="150" />
+              <v-sheet height="150"></v-sheet>
             </v-col>
           </template>
         </v-row>

@@ -36,7 +36,7 @@
 
     data: () => ({
       wireframes: [
-        'Base',
+        'Baseline',
         'Extended toolbar',
         'System bar',
         'Inbox',

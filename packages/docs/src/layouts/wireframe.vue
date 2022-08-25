@@ -1,16 +1,14 @@
 <template>
-  <div>
-    <router-view />
+  <router-view />
 
-    <v-btn
-      :href="href"
-      color="primary"
-      rel="noopener"
-      target="_blank"
-      icon="mdi-github"
-      style="position: fixed; bottom: 12px; right: 12px;"
-    />
-  </div>
+  <v-btn
+    :href="href"
+    rel="noopener"
+    color="primary"
+    icon="mdi-github"
+    style="position: fixed; bottom: 12px; right: 12px;"
+    target="_blank"
+  />
 </template>
 
 <script lang="ts">
@@ -25,10 +23,10 @@
 
     setup () {
       const route = useRoute()
-      const { locale, page } = route.meta
+      const { page } = route.meta
 
       return {
-        href: `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/wireframes/${locale}/${page}.vue`,
+        href: `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/${page}.vue`,
       }
     },
   })

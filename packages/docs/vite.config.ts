@@ -91,7 +91,6 @@ export default defineConfig(({ command, mode }) => {
         dirs: [
           { dir: 'src/pages', baseRoute: 'pages' },
           { dir: 'src/api', baseRoute: 'api' },
-          { dir: 'src/wireframes', baseRoute: 'wireframes' },
         ],
         extendRoute (route) {
           const [base, locale, ...folders] = route.component.split('/').slice(2)
@@ -107,22 +106,17 @@ export default defineConfig(({ command, mode }) => {
           }
 
           const [category, page] = paths.slice(1)
-
-          let layout = 'default'
-
-          if (paths.length < 3) {
-            layout = 'home'
-          } else if (base === 'wireframes') {
-            layout = 'wireframe'
+          const meta = {
+            layout: 'default',
+            ...parseMeta(route.component),
           }
 
           return {
             ...route,
             path: `/${paths.join('/')}/`,
-            name: `${category ?? layout}${page ? '-' : ''}${page ?? ''}`,
+            name: `${category ?? meta.layout}${page ? '-' : ''}${page ?? ''}`,
             meta: {
-              ...parseMeta(route.component),
-              layout,
+              ...meta,
               category,
               page,
               locale,
