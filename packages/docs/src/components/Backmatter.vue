@@ -26,7 +26,7 @@
 
     <app-divider class="mt-7 mb-5" />
 
-    <!-- <up-next class="mb-4" /> -->
+    <up-next class="mb-4" />
 
     <!-- <exit-ad class="mb-8" /> -->
 
@@ -37,6 +37,7 @@
 <script setup>
   // Components
   import RelatedPages from '@/components/doc/RelatedPages.vue'
+  import UpNext from '@/components/doc/UpNext.vue'
 
   // Composables
   import { useI18n } from 'vue-i18n'
