@@ -1,6 +1,6 @@
 <template>
   <v-row
-    v-if="related.length > 0"
+    v-if="related?.length > 0"
     dense
   >
     <v-col

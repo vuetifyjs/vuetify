@@ -198,7 +198,10 @@ export default defineConfig(({ command, mode }) => {
             : null
           if (!type) return
 
-          return `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``
+          return {
+            code: `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``,
+            map: null,
+          }
         },
       },
 
