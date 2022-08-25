@@ -1,54 +1,40 @@
 <template>
   <router-link
-    class="d-inline-block"
-    :to="to"
+    :to="rpath(locale.value)"
+    class="d-inline-block ms-4 me-2"
   >
     <v-img
       :key="logo"
-      :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
       :alt="t('logo')"
+      :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
+      :width="lgAndUp ? 148 : 34"
       class="shrink"
-      :width="width"
       transition="scale-transition"
     />
   </router-link>
 </template>
 
-<script lang="ts">
+<script setup>
   // Composables
+  import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
 
   // Utilities
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
-  import { computed, defineComponent } from 'vue'
 
-  export default defineComponent({
-    name: 'Logo',
+  defineProps({
+    alt: Boolean,
+  })
 
-    props: {
-      alt: Boolean,
-    },
+  const { lgAndUp } = useDisplay()
+  const { locale, t } = useI18n()
+  const theme = useTheme()
 
-    setup (props) {
-      const { locale, t } = useI18n()
-      const theme = useTheme()
+  const logo = computed(() => {
+    const file = `${theme.name.value}.svg`
+    const logo = 'vuetify-logo-v3-slim'
 
-      // computed
-      const logo = computed(() => {
-        return props.alt ? `vuetify-logo-v3-slim-text-${theme.name.value}.svg` : `vuetify-logo-v3-slim-${theme.name.value}.svg`
-      })
-      const width = computed(() => {
-        return props.alt ? 148 : 34
-      })
-
-      return {
-        logo,
-        t,
-        to: rpath(locale.value),
-        width,
-      }
-    },
-
+    return `${logo}-${lgAndUp.value ? 'text-' : ''}${file}`
   })
 </script>

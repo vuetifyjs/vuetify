@@ -1,14 +1,10 @@
 <template>
   <v-app-bar
     id="app-bar"
-    app
-    class="border-b"
+    border="b"
     flat
   >
-    <app-bar-logo
-      :alt="lgAndUp"
-      class="ms-4 me-2"
-    />
+    <app-bar-logo />
 
     <v-app-bar-nav-icon
       class="hidden-lg-and-up"
@@ -43,7 +39,7 @@
   </v-app-bar>
 </template>
 
-<script lang="ts">
+<script setup>
   // Components
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
@@ -60,40 +56,6 @@
   import { useAppStore } from '@/store/app'
   import { useDisplay } from 'vuetify'
 
-  // Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'AppBar',
-
-    components: {
-      AppBarJobsLink,
-      AppBarLanguageMenu,
-      AppBarLearnMenu,
-      AppBarLogo,
-      AppBarNotificationsMenu,
-      AppBarSettingsToggle,
-      AppBarStoreLink,
-      AppBarSupportMenu,
-      AppBarTeamLink,
-      AppVerticalDivider,
-    },
-
-    setup () {
-      const { lgAndUp, smAndUp, mdAndUp } = useDisplay()
-      const app = useAppStore()
-
-      // data
-      const dark = false
-
-      return {
-        app,
-        dark,
-        lgAndUp,
-        mdAndUp,
-        smAndUp,
-      }
-    },
-
-  })
+  const app = useAppStore()
+  const { smAndUp, mdAndUp } = useDisplay()
 </script>
