@@ -35,6 +35,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@/': `${resolve('src')}/`,
         'node-fetch': 'isomorphic-fetch',
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
       },
     },
     define: {
@@ -168,7 +169,6 @@ export default defineConfig(({ command, mode }) => {
         include: [/\.vue$/, /\.md$/],
         // https://github.com/vuejs/vue-next/issues/3298
         template: {
-          ssr: true,
           compilerOptions: {
             directiveTransforms: {
               ripple: ssrTransformCustomDirective,
@@ -231,6 +231,10 @@ $&`), index)
       exclude: [
         'vue-demi',
       ],
+    },
+
+    ssr: {
+      noExternal: ['vue-i18n'],
     },
 
     server: {
