@@ -204,7 +204,7 @@ export default defineConfig(({ command, mode }) => {
 
     // https://github.com/antfu/vite-ssg
     ssgOptions: {
-      script: 'async',
+      script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
       onAfterClientBuild () {
