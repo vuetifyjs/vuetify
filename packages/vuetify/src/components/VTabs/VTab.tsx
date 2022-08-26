@@ -14,7 +14,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, standardEasing, useRender } from '@/util'
+import { animate, defineComponent, pick, standardEasing, useRender } from '@/util'
 
 // Types
 import { VTabsSymbol } from './shared'
@@ -94,7 +94,7 @@ export const VTab = defineComponent({
         const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
 
         const sigma = 1.5
-        nextEl.animate({
+        animate(nextEl, {
           backgroundColor: [color, ''],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,

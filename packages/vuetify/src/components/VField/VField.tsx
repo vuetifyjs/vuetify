@@ -16,6 +16,7 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
 import {
+  animate,
   convertToUnit,
   EventProp,
   genericComponent,
@@ -161,7 +162,7 @@ export const VField = genericComponent<new <T>() => {
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
 
-        el.animate([
+        animate(el, [
           { transform: 'translate(0)' },
           { transform: `translate(${x}px, ${y}px) scale(${scale})`, ...width },
         ], {
