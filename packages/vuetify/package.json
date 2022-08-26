@@ -45,6 +45,9 @@
   "files": [
     "dist/",
     "lib/",
+    "_settings.scss",
+    "_styles.scss",
+    "_tools.scss",
     "CHANGELOG.md"
   ],
   "exports": {
