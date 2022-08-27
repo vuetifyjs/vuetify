@@ -52,24 +52,24 @@ Breadcrumbs separator can be set using `divider` property.
 
 <example file="v-breadcrumbs/prop-divider" />
 
-#### Large
-
-Large breadcrumbs have larger font size.
-
-<example file="v-breadcrumbs/prop-large" />
-
 ### Slots
 
-#### Icon Dividers
+#### Prepend
 
-For the icon variant, breadcrumbs can use any icon in Material Design Icons.
+Prepend content with the `prepend` slot.
+
+<example file="v-breadcrumbs/slot-prepend" />
+
+#### Dividers
+
+To customize the divider, use the `divider` slot.
 
 <example file="v-breadcrumbs/slot-icon-dividers" />
 
-#### Item
+#### Title
 
-You can use the `item` slot to customize each breadcrumb.
+You can use the `title` slot to customize each breadcrumb title.
 
-<example file="v-breadcrumbs/slot-item" />
+<example file="v-breadcrumbs/slot-title" />
 
 <backmatter />
