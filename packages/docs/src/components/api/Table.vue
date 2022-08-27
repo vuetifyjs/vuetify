@@ -230,6 +230,9 @@
     .v-markdown :deep(p)
       margin-bottom: 0
 
+    :deep(.token.operator)
+      background: none
+
   .name-item
     white-space: nowrap
 
