@@ -1,5 +1,6 @@
 <template>
   <usage-example
+    model-value=""
     :options="options"
     name="v-virtual-scroll"
   >

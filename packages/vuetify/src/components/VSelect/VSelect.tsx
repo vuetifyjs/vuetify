@@ -218,7 +218,7 @@ export const VSelect = genericComponent<new <
 
                     { slots['prepend-item']?.() }
 
-                    <VVirtualScroll items={ items.value } height="50vh" dynamicHeight itemHeight={ 48 }>
+                    <VVirtualScroll items={ items.value } height="50vh" dynamicItemHeight itemHeight={ 48 }>
                       {{
                         default: ({ item, index }) => {
                           if (slots.item) {

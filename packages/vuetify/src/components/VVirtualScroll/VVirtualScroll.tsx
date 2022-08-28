@@ -101,8 +101,8 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       const buffer = Math.round(visibleItems.value / 3)
       if (direction === UP && midPointIndex <= first.value) {
         first.value = Math.max(midPointIndex - buffer, 0)
-      } else if (direction === DOWN && midPointIndex >= first.value + buffer) {
-        first.value = Math.min(midPointIndex, props.items.length - visibleItems.value)
+      } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2)) {
+        first.value = Math.min(Math.max(0, midPointIndex - buffer), props.items.length - visibleItems.value)
       }
 
       lastScrollTop = rootEl.value.scrollTop
