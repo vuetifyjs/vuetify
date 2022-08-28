@@ -149,7 +149,7 @@ export const VInfiniteScroll = defineComponent({
     let previousScrollSize = 0
     async function handleIntersect (side: InfiniteScrollSide) {
       const status = getStatus(side)
-      if (!rootEl.value || status === 'empty' || status === 'loading') return
+      if (!rootEl.value || status === 'loading') return
 
       try {
         previousScrollSize = getScrollSize()
@@ -173,25 +173,28 @@ export const VInfiniteScroll = defineComponent({
     function renderSide (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
       if (props.side !== side && props.side !== 'both') return
 
-      if (status === 'empty') return slots.empty?.({ scroll }) ?? <div>{ t(props.emptyText) }</div>
+      const onClick = () => handleIntersect(side)
+      const slotProps = { side, props: { onClick, color: props.color } }
+
+      if (status === 'error') return slots.error?.(slotProps)
+
+      if (status === 'empty') return slots.empty?.(slotProps) ?? <div>{ t(props.emptyText) }</div>
 
       if (props.mode === 'manual') {
         if (status === 'loading') {
-          return slots.loading?.({ scroll }) ?? (
+          return slots.loading?.(slotProps) ?? (
             <VProgressCircular indeterminate color={ props.color } />
           )
         }
 
-        const onClick = () => handleIntersect(side)
-
-        return slots['load-more']?.({ scroll, props: { onClick, color: props.color } }) ?? (
+        return slots['load-more']?.(slotProps) ?? (
           <VBtn variant="outlined" color={ props.color } onClick={ onClick }>
             { t(props.loadMoreText) }
           </VBtn>
         )
       }
 
-      return slots.loading?.({ scroll }) ?? (
+      return slots.loading?.(slotProps) ?? (
         <VProgressCircular indeterminate color={ props.color } />
       )
     }

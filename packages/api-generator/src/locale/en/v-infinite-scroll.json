@@ -11,6 +11,7 @@
   "slots": {
     "loading": "Shown when content is loading.",
     "load-more": "Shown when scrolled to either side of the content, in manual mode.",
-    "empty": "Shown when there is no more content to load."
+    "empty": "Shown when load returned status 'empty'",
+    "error": "Shown when load returned status 'error'"
   }
 }

@@ -1,6 +1,6 @@
 <template>
   <v-infinite-scroll
-    ref="foo"
+    ref="infinite"
     height="500"
     side="both"
     :load="load"
@@ -37,8 +37,7 @@
           const arr = this.createRange(halfVirtualLength, this.cards[0] - halfVirtualLength)
           this.cards = [...arr, ...this.cards.slice(0, halfVirtualLength)]
           this.$nextTick(() => {
-            console.log('foo')
-            this.$refs.foo.$el.scrollTop = this.$refs.foo.$el.scrollHeight - (halfVirtualLength * this.size) - this.$refs.foo.$el.scrollTop
+            this.$refs.infinite.$el.scrollTop = this.$refs.infinite.$el.scrollHeight - (halfVirtualLength * this.size) - this.$refs.infinite.$el.scrollTop
           })
         } else {
           const arr = this.createRange(halfVirtualLength, this.cards.at(-1) + 1)
