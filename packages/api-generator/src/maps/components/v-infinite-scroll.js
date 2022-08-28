@@ -1,3 +1,11 @@
+const slotProps = {
+  side: 'string',
+  props: {
+    onClick: 'function',
+    color: 'string',
+  },
+}
+
 module.exports = {
   'v-infinite-scroll': {
     slots: [
@@ -7,21 +15,15 @@ module.exports = {
       },
       {
         name: 'loading',
-        props: {
-          side: 'string',
-        },
+        props: slotProps,
       },
       {
         name: 'load-more',
-        props: {
-          side: 'string',
-        },
+        props: slotProps,
       },
       {
         name: 'empty',
-        props: {
-          side: 'string',
-        },
+        props: slotProps,
       },
     ],
   },

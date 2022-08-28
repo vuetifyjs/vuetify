@@ -27,7 +27,7 @@ The **load** function will be called when the component needs to load more conte
 |Status|Description|
 |------|-----------|
 |`'ok'`|Content was added succesfully|
-|`'error'`|Something went wrong when adding content|
+|`'error'`|Something went wrong when adding content. This will display the `error` slot|
 |`'empty'`|There is no more content to fetch. This will display a message that there is no more content|
 |`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be returned from the **load** function|
 
@@ -41,7 +41,7 @@ The **load** function will be called when the component needs to load more conte
 
 #### Mode
 
-The default behaviour of the component is to try to load more content automatically when the scrollbar gets close to the end. However a manual mode is also supported, where the user needs to do some interaction to load the content. By default this a button, but it can be customized with a [slot](#foo)
+The default behaviour of the component is to try to load more content automatically when the scrollbar gets close to the end. However a manual mode is also supported, where the user needs to do some interaction to load the content. By default this a button, but it can be customized with a [slot](#load-more)
 
 <example file="v-infinite-scroll/prop-mode" />
 
@@ -88,6 +88,12 @@ When using **manual** mode you can customize the action required to load more co
 You can customize the empty message with the **empty** slot.
 
 <example file="v-infinite-scroll/slot-empty" />
+
+#### Error
+
+The `error` slot is shown if the status `'error'` is returned from the `load` function.
+
+<example file="v-infinite-scroll/slot-error" />
 
 ### Misc
 
