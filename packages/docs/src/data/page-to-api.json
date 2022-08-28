@@ -93,6 +93,7 @@
   "components/hover": ["v-hover"],
   "components/icons": ["v-icon"],
   "components/images": ["v-img"],
+  "components/infinite-scroller": ["v-infinite-scroll"],
   "components/inputs": ["v-input"],
   "components/item-groups": [
     "v-item",
