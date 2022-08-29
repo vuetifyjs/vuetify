@@ -2,11 +2,12 @@
   <v-btn
     :icon="smAndDown"
     class="px-0 px-md-2 font-weight-regular"
+    color="medium-emphasis"
     variant="text"
   >
     <v-icon
-      color="medium-emphasis"
       icon="mdi-translate"
+      size="large"
     />
 
     <chevron-down />
