@@ -156,16 +156,20 @@ export const VField = genericComponent<new <T>() => {
           ? { maxWidth: convertToUnit(targetWidth) }
           : undefined
 
-        const duration = parseFloat(getComputedStyle(el).transitionDuration) * 1000 || 150
-        const scale = parseFloat(getComputedStyle(targetEl).getPropertyValue('--v-field-label-scale'))
+        const style = getComputedStyle(el)
+        const targetStyle = getComputedStyle(targetEl)
+        const duration = parseFloat(style.transitionDuration) * 1000 || 150
+        const scale = parseFloat(targetStyle.getPropertyValue('--v-field-label-scale'))
+        const color = targetStyle.getPropertyValue('color')
 
         el.style.visibility = 'visible'
         targetEl.style.visibility = 'hidden'
 
-        animate(el, [
-          { transform: 'translate(0)' },
-          { transform: `translate(${x}px, ${y}px) scale(${scale})`, ...width },
-        ], {
+        animate(el, {
+          transform: `translate(${x}px, ${y}px) scale(${scale})`,
+          color,
+          ...width,
+        }, {
           duration,
           easing: standardEasing,
           direction: val ? 'normal' : 'reverse',
