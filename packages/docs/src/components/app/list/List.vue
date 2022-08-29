@@ -13,7 +13,7 @@
     </template>
 
     <template #subheader="{ props }">
-      <v-list-subheader class="text-high-emphasis text-black text-uppercase font-weight-black">
+      <v-list-subheader class="on-surface text-high-emphasis text-uppercase font-weight-black">
         {{ props.title }}
       </v-list-subheader>
     </template>
