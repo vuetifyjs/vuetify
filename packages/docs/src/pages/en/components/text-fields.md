@@ -231,9 +231,7 @@ The **variant** prop provides an easy way to customize the style of your text fi
 
 ### Slots
 
-Slots enable you to easily customize the display of many `v-text-field` properties. This gives you the ability to implement component features the way that you want. The slot locations are positioned using [CSS Grid](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout) and correspond to the available slots.
-
-![Text-field Slots](https://cdn.vuetifyjs.com/docs/images/components-temp/v-text-field/v-text-field-slots.png)
+Slots allow you to customize the display of many `v-text-field` properties to modify what Vuetify does by default. The following slots are available on the `v-text-field` component:
 
 | Slot name | Description |
 | - | - |
@@ -243,6 +241,44 @@ Slots enable you to easily customize the display of many `v-text-field` properti
 | 4. append-inner | Provided by `v-field`, positioned at the end of the input field |
 | 5. append | Provided by `v-input`, positioned after the input field |
 | 6. details | Used for displaying **messages**, **hint**, **error-messages**, and more |
+
+The following example uses the **label**, **prepend**, and **prepend-inner** slots and adds custom elements to the `v-text-field`
+
+```html
+<template>
+  <v-text-field v-model="model">
+    <template v-slot:label>
+      <span>Type something...</span>
+    </template>
+
+    <template v-slot:prepend>
+      <v-icon
+        :color="model ? 'primary' : undefined"
+        icon="mdi-vuetify"
+      />
+    </template>
+
+    <template v-slot:append-inner>
+      <v-icon
+        v-if="model"
+        icon="mdi-success"
+      />
+    </template>
+
+    <template #details>
+      <v-spacer />
+
+      See our <a href="#">Terms and Service</a>
+    </template>
+  </v-text-field>
+</template>
+
+<script>
+  export default {
+    data: () => ({ model: null }),
+  }
+</script>
+```
 
 <vuetify slug="vs-vue-3-slots" />
 
