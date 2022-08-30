@@ -141,7 +141,8 @@ export const VSlideGroup = defineComponent({
 
     function onTouchstart (e: TouchEvent) {
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      startOffset = scrollOffset.value
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      startOffset = sign * scrollOffset.value
       startTouch = e.touches[0][sizeProperty]
       disableTransition.value = true
     }
@@ -150,31 +151,26 @@ export const VSlideGroup = defineComponent({
       if (!isOverflowing.value) return
 
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      scrollOffset.value = startOffset + startTouch - e.touches[0][sizeProperty]
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      scrollOffset.value = sign * (startOffset + startTouch - e.touches[0][sizeProperty])
     }
 
     function onTouchend (e: TouchEvent) {
       const maxScrollOffset = contentSize.value - containerSize.value
 
-      if (isRtl.value) {
-        if (scrollOffset.value > 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value <= -maxScrollOffset) {
-          scrollOffset.value = -maxScrollOffset
-        }
-      } else {
-        if (scrollOffset.value < 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value >= maxScrollOffset) {
-          scrollOffset.value = maxScrollOffset
-        }
+      if (scrollOffset.value < 0 || !isOverflowing.value) {
+        scrollOffset.value = 0
+      } else if (scrollOffset.value >= maxScrollOffset) {
+        scrollOffset.value = maxScrollOffset
       }
 
       disableTransition.value = false
     }
 
     function onScroll () {
-      containerRef.value && (containerRef.value.scrollLeft = 0)
+      if (!containerRef.value) return
+
+      containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
     }
 
     const isFocused = ref(false)
@@ -216,11 +212,21 @@ export const VSlideGroup = defineComponent({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
-      if (e.key === (isHorizontal.value ? 'ArrowRight' : 'ArrowDown')) {
-        focus('next')
-      } else if (e.key === (isHorizontal.value ? 'ArrowLeft' : 'ArrowUp')) {
-        focus('prev')
-      } else if (e.key === 'Home') {
+      if (isHorizontal.value) {
+        if (e.key === 'ArrowRight') {
+          focus(isRtl.value ? 'prev' : 'next')
+        } else if (e.key === 'ArrowLeft') {
+          focus(isRtl.value ? 'next' : 'prev')
+        }
+      } else {
+        if (e.key === 'ArrowDown') {
+          focus('next')
+        } else if (e.key === 'ArrowUp') {
+          focus('prev')
+        }
+      }
+
+      if (e.key === 'Home') {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
@@ -252,22 +258,25 @@ export const VSlideGroup = defineComponent({
     }
 
     function scrollTo (location: 'prev' | 'next') {
-      const sign = isRtl.value ? -1 : 1
-      const newAbosluteOffset = sign * scrollOffset.value +
-        (location === 'prev' ? -1 : 1) * containerSize.value
+      const newAbsoluteOffset = scrollOffset.value + (location === 'prev' ? -1 : 1) * containerSize.value
 
-      scrollOffset.value = sign * clamp(newAbosluteOffset, 0, contentSize.value - containerSize.value)
+      scrollOffset.value = clamp(newAbsoluteOffset, 0, contentSize.value - containerSize.value)
     }
 
     const contentStyles = computed(() => {
-      const scrollAmount = scrollOffset.value <= 0
-        ? bias(-scrollOffset.value)
-        : scrollOffset.value > contentSize.value - containerSize.value
-          ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
-          : -scrollOffset.value
+      // This adds friction when scrolling the 'wrong' way when at max offset
+      let scrollAmount = scrollOffset.value > contentSize.value - containerSize.value
+        ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
+        : -scrollOffset.value
 
+      // This adds friction when scrolling the 'wrong' way when at min offset
+      if (scrollOffset.value <= 0) {
+        scrollAmount = bias(-scrollOffset.value)
+      }
+
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
       return {
-        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${scrollAmount}px)`,
+        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${sign * scrollAmount}px)`,
         transition: disableTransition.value ? 'none' : '',
         willChange: disableTransition.value ? 'transform' : '',
       }
@@ -309,12 +318,10 @@ export const VSlideGroup = defineComponent({
     })
 
     const hasPrev = computed(() => {
-      return hasAffixes.value && scrollOffset.value > 0
+      return Math.abs(scrollOffset.value) > 0
     })
 
     const hasNext = computed(() => {
-      if (!hasAffixes.value) return false
-
       // Check one scroll ahead to know the width of right-most item
       return contentSize.value > Math.abs(scrollOffset.value) + containerSize.value
     })
@@ -343,7 +350,7 @@ export const VSlideGroup = defineComponent({
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.prevIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
             ) }
           </div>
@@ -381,7 +388,7 @@ export const VSlideGroup = defineComponent({
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.nextIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
             ) }
           </div>
