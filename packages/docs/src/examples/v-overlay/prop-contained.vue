@@ -17,12 +17,7 @@
           Show Overlay
         </v-btn>
 
-        <v-overlay
-          v-model="overlay"
-          contained
-          scroll-strategy="none"
-          class="align-center justify-center"
-        >
+        <v-overlay v-model="overlay" contained class="align-center justify-center">
           <v-btn
             color="success"
             @click="overlay = false"

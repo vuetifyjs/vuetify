@@ -29,7 +29,6 @@
       <v-overlay
         :model-value="isHovering"
         contained
-        scroll-strategy="none"
         scrim="#036358"
         class="align-center justify-center"
       >
