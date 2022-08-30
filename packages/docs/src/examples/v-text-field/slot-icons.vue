@@ -11,12 +11,9 @@
             variant="outlined"
           >
             <template v-slot:prepend>
-              <v-tooltip bottom>
+              <v-tooltip location="bottom">
                 <template v-slot:activator="{ props }">
-                  <v-icon
-                    v-bind="props"
-                    icon="mdi-help-circle-outline"
-                  ></v-icon>
+                  <v-icon v-bind="props" icon="mdi-help-circle-outline"></v-icon>
                 </template>
 
                 I'm a tooltip
@@ -43,12 +40,9 @@
             </template>
 
             <template v-slot:append>
-              <v-menu
-                style="top: -12px"
-                offset-y
-              >
+              <v-menu>
                 <template v-slot:activator="{ props }">
-                  <v-btn v-bind="props">
+                  <v-btn v-bind="props" class="mt-n2">
                     <v-icon icon="mdi-menu" start></v-icon>
 
                     Menu
@@ -60,8 +54,8 @@
                     <v-btn
                       color="primary"
                       large
-                      text
-                      @click="onClick"
+                      variant="text"
+                      @click="clickMe"
                     >
                       <v-icon icon="mdi-target" start></v-icon>
 
@@ -86,10 +80,9 @@
     }),
 
     methods: {
-      onClick () {
+      clickMe () {
         this.loading = true
         this.message = 'Wait for it...'
-
         setTimeout(() => {
           this.loading = false
           this.message = `You've clicked me!`
