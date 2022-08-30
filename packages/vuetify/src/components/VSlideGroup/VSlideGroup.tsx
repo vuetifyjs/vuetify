@@ -212,11 +212,21 @@ export const VSlideGroup = defineComponent({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
-      if (e.key === (isHorizontal.value ? 'ArrowRight' : 'ArrowDown')) {
-        focus('next')
-      } else if (e.key === (isHorizontal.value ? 'ArrowLeft' : 'ArrowUp')) {
-        focus('prev')
-      } else if (e.key === 'Home') {
+      if (isHorizontal.value) {
+        if (e.key === 'ArrowRight') {
+          focus(isRtl.value ? 'prev' : 'next')
+        } else if (e.key === 'ArrowLeft') {
+          focus(isRtl.value ? 'next' : 'prev')
+        }
+      } else {
+        if (e.key === 'ArrowDown') {
+          focus('next')
+        } else if (e.key === 'ArrowUp') {
+          focus('prev')
+        }
+      }
+
+      if (e.key === 'Home') {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
