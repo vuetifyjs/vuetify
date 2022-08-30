@@ -89,7 +89,7 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 
 `scroll-strategy="block"`
 
-Scrolling is blocked while the overlay is active, and the scrollbar is hidden.
+Scrolling is blocked while the overlay is active, and the scrollbar is hidden. If `contained` is also set, scrolling will only be blocked up to the overlay's [`offsetParent`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent).
 
 <example file="v-overlay/scroll-block" />
 
