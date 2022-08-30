@@ -41,6 +41,7 @@ type NestedProvide = {
     unregister: (id: string) => void
     open: (id: string, value: boolean, event?: Event) => void
     select: (id: string, value: boolean, event?: Event) => void
+    openOnSelect: (id: string, value: boolean, event?: Event) => void
   }
 }
 
@@ -54,6 +55,7 @@ export const emptyNested: NestedProvide = {
     parents: ref(new Map()),
     children: ref(new Map()),
     open: () => null,
+    openOnSelect: () => null,
     select: () => null,
     opened: ref(new Set()),
     selected: ref(new Map()),
@@ -175,6 +177,18 @@ export const useNested = (props: NestedProps) => {
 
         newOpened && (opened.value = newOpened)
       },
+      openOnSelect: (id, value, event) => {
+        const newOpened = openStrategy.value.select({
+          id,
+          value,
+          selected: new Map(selected.value),
+          opened: new Set(opened.value),
+          children: children.value,
+          parents: parents.value,
+          event,
+        })
+        newOpened && (opened.value = newOpened)
+      },
       select: (id, value, event) => {
         vm.emit('click:select', { id, value, path: getPath(id), event })
 
@@ -188,16 +202,7 @@ export const useNested = (props: NestedProps) => {
         })
         newSelected && (selected.value = newSelected)
 
-        const newOpened = openStrategy.value.select({
-          id,
-          value,
-          selected: new Map(selected.value),
-          opened: new Set(opened.value),
-          children: children.value,
-          parents: parents.value,
-          event,
-        })
-        newOpened && (opened.value = newOpened)
+        nested.root.openOnSelect(id, value, event)
       },
       children,
       parents,
@@ -218,6 +223,7 @@ export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => 
     ...parent,
     id: computedId,
     open: (open: boolean, e: Event) => parent.root.open(computedId.value, open, e),
+    openOnSelect: (open: boolean, e?: Event) => parent.root.openOnSelect(computedId.value, open, e),
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
