@@ -1,7 +1,7 @@
 <template>
   <v-menu
     close-delay="100"
-    location="bottom"
+    location="bottom end"
     max-height="500"
     open-delay="60"
     open-on-hover
