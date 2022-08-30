@@ -1,8 +1,5 @@
 <template>
-  <app-btn
-    color="medium-emphasis"
-    variant="text"
-  >
+  <app-btn color="medium-emphasis">
     {{ title }}
 
     <chevron-down />
@@ -11,7 +8,7 @@
   </app-btn>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   // Components
   import AppMenu from '@/components/app/menu/Menu.vue'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
@@ -20,45 +17,34 @@
   import { useI18n } from 'vue-i18n'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
 
-  export default defineComponent({
-    name: 'LearnMenu',
-
-    components: { ChevronDown, AppMenu },
-
-    setup () {
-      const { t } = useI18n()
-
-      return {
-        title: t('learn'),
-        items: computed(() => ([
-          { heading: t('documentation') },
-          {
-            title: t('feature-guides'),
-            to: {
-              name: 'introduction-why-vuetify',
-              hash: '#feature-guides',
-            },
-          },
-          {
-            title: t('roadmap'),
-            to: {
-              name: 'introduction-roadmap',
-            },
-          },
-          { divider: true },
-          { heading: t('video-courses') },
-          {
-            title: 'Vue Mastery',
-            href: 'https://vuemastery.com',
-          },
-          {
-            title: 'Vue School',
-            href: 'https://vueschool.io?friend=vuetify',
-          },
-        ])),
-      }
+  const { t } = useI18n()
+  const title = t('learn')
+  const items = computed(() => ([
+    { subheader: t('documentation') },
+    {
+      title: t('feature-guides'),
+      to: {
+        name: 'introduction-why-vuetify',
+        hash: '#feature-guides',
+      },
     },
-  })
+    {
+      title: t('roadmap'),
+      to: {
+        name: 'introduction-roadmap',
+      },
+    },
+    { divider: true },
+    { subheader: t('video-courses') },
+    {
+      title: 'Vue Mastery',
+      href: 'https://vuemastery.com',
+    },
+    {
+      title: 'Vue School',
+      href: 'https://vueschool.io?friend=vuetify',
+    },
+  ]))
 </script>
