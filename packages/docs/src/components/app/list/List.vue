@@ -68,7 +68,7 @@
       })
   }
 
-  function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key) {
+  function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
     if (typeof item === 'string') {
       const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
 
