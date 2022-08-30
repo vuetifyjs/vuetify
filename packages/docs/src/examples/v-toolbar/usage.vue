@@ -1,22 +1,24 @@
 <template>
   <usage-example
     v-model="model"
+    v-model:tune-value="tuneModel"
     :options="options"
+    :tune-options="tuneOptions"
     name="v-toolbar"
   >
-    <v-defaults-provider
-      :defaults="{
-        VToolbar: {
-          variant: model === 'elevated' ? 'elevated' : undefined,
-        }
-      }"
+    <v-responsive
+      class="pa-4 mx-auto"
+      max-width="740"
     >
-      <v-layout>
-        <v-toolbar>
-          <v-toolbar-title>Toolbar Title</v-toolbar-title>
-        </v-toolbar>
-      </v-layout>
-    </v-defaults-provider>
+      <v-toolbar
+        :extended="tuneModel.extended"
+        :border="model.prop === 'border'"
+        :elevation="model.prop === 'elevation' ? model.value : undefined"
+        :title="tuneModel.title"
+        :density="tuneModel.density"
+      >
+      </v-toolbar>
+    </v-responsive>
   </usage-example>
 </template>
 
@@ -26,7 +28,20 @@
 
     data: () => ({
       model: 'default',
-      options: ['elevated'],
+      options: [
+        { label: 'Elevated', prop: 'elevation', value: 4 },
+        { label: 'Bordered', prop: 'border', value: false },
+      ],
+      tuneModel: {
+        collapse: false,
+        density: 'default',
+        title: 'Application',
+      },
+      tuneOptions: [
+        { type: 'checkbox', prop: 'extended' },
+        { type: 'text-field', prop: 'title' },
+        { type: 'select', prop: 'density', items: ['default', 'comfortable', 'compact'] },
+      ],
     }),
   }
 </script>

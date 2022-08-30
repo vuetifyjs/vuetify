@@ -41,6 +41,73 @@ We recommend using **yarn**, but any will work just fine. For more information o
 
 Vite is a build tool from the creator of Vue designed to provide faster and leaner development. It offers significantly lower build and compilation times during development and extremely fast Hot Module Replacement (HMR). The following sections cover how you can create a new vite application for Vue and Vuetify 3.
 
+::: npm
+
+<p class="mt-4">Use the following command to check your current version:</p>
+
+```bash
+npm -v
+```
+
+Note the displayed value to determine the correct installation command. For more information on how to upgrade **npm** on your system, visit the official [Upgrade NPM Page](https://docs.npmjs.com/try-the-latest-stable-version-of-npm).
+
+For version **7 and above**, an additional "**- -**" is required before specifying the vite template parameters. Use the following code for newer npm versions:
+
+```bash
+npm create vite my-vue-app -- --template vue
+```
+
+If your npm version is **less than 7**, the extra "**- -**" is not required. Use the following code for older npm versions:
+
+```bash
+npm create vite my-vue-app --template vue
+```
+:::
+
+
+<app-tabs :tabs="['yarn', 'npm', 'pnpm']">
+
+<app-tab-item value="yarn">
+
+```bash
+yarn create vite my-app --template vue
+```
+
+</app-tab-item>
+
+<app-tab-item value="npm">
+
+<p class="mt-4">Use the following command to check your current version:</p>
+
+```bash
+npm -v
+```
+
+Note the displayed value to determine the correct installation command. For more information on how to upgrade **npm** on your system, visit the official [Upgrade NPM Page](https://docs.npmjs.com/try-the-latest-stable-version-of-npm).
+
+For version **7 and above**, an additional "**- -**" is required before specifying the vite template parameters. Use the following code for newer npm versions:
+
+```bash
+npm create vite my-vue-app -- --template vue
+```
+
+If your npm version is **less than 7**, the extra "**- -**" is not required. Use the following code for older npm versions:
+
+```bash
+npm create vite my-vue-app --template vue
+```
+
+</app-tab-item>
+
+<app-tab-item value="pnpm">
+
+```bash
+pnpm create vite my-vue-app -- --template vue
+```
+
+</app-tab-item>
+</app-tabs>
+
 <v-tabs v-model="tab" color="primary">
   <v-tab value="yarn" variant="plain">Yarn</v-tab>
   <v-tab value="npm" variant="plain">NPM</v-tab>
