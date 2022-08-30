@@ -4,18 +4,8 @@
     max-width="344"
   >
     <v-text-field
-      v-model="model"
-      clearable
+      label="First name"
       hide-details="auto"
-      label="Last name"
     ></v-text-field>
   </v-responsive>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      model: 'Leider',
-    }),
-  }
-</script>

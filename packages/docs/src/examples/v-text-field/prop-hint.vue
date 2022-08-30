@@ -8,7 +8,7 @@
         >
           <v-text-field
             label="Your product or service"
-            value="Grocery delivery"
+            model-value="Grocery delivery"
             hint="For example, flowers or used cars"
           ></v-text-field>
         </v-col>
@@ -30,7 +30,7 @@
         >
           <v-text-field
             label="Your product or service"
-            value="Grocery delivery"
+            model-value="Grocery delivery"
             hint="For example, flowers or used cars"
             variant="solo"
           ></v-text-field>
@@ -54,7 +54,7 @@
         >
           <v-text-field
             label="Your product or service"
-            value="Grocery delivery"
+            model-value="Grocery delivery"
             hint="For example, flowers or used cars"
             variant="outlined"
           ></v-text-field>
