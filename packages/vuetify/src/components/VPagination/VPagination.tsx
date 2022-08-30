@@ -135,9 +135,12 @@ export const VPagination = defineComponent({
       if (!firstItem) return
 
       const totalWidth = contentRect.width
-      const itemWidth = firstItem.getBoundingClientRect().width
+      const itemWidth =
+        firstItem.getBoundingClientRect().width +
+        parseFloat(getComputedStyle(firstItem).marginRight) * 2
+      const minButtons = props.showFirstLastPage ? 5 : 3
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - (itemWidth * 3)) / (itemWidth + 10)))
+      maxButtons.value = Math.max(0, Math.floor((totalWidth - (itemWidth * minButtons)) / itemWidth))
     })
 
     const length = computed(() => parseInt(props.length, 10))
