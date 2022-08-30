@@ -85,6 +85,38 @@ The connected strategy is used by [v-menu](/components/menus) and [v-tooltip](/c
 
 ## Scroll Strategies
 
+### Block (default)
+
+`scroll-strategy="block"`
+
+Scrolling is blocked while the overlay is active, and the scrollbar is hidden. If `contained` is also set, scrolling will only be blocked up to the overlay's [`offsetParent`](https://developer.mozilla.org/en-US/docs/Web/API/HTMLElement/offsetParent).
+
+<example file="v-overlay/scroll-block" />
+
+### Close
+
+`scroll-strategy="close"`
+
+Scrolling when the overlay is active will de-activate it.
+
+<example file="v-overlay/scroll-close" />
+
+### Reposition
+
+`scroll-strategy="reposition"`
+
+When using the `connected` location strategy, this scroll strategy will reposition the overlay element to always respect the activator location.
+
+<example file="v-overlay/scroll-reposition" />
+
+### None
+
+`scroll-strategy="none"`
+
+No scroll strategy is used.
+
+<example file="v-overlay/scroll-none" />
+
 ## Examples
 
 ### Props
