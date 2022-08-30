@@ -56,7 +56,13 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
-  const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
+  const itemProps = props.itemProps === true
+    ? typeof item === 'object' && item != null && !Array.isArray(item)
+      ? 'children' in item
+        ? pick(item, ['children'])[1]
+        : item
+      : undefined
+    : getPropertyFromItem(item, props.itemProps)
 
   const _props = {
     title,
