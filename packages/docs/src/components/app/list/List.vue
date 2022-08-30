@@ -86,6 +86,11 @@
         title: t(item.subheader!),
         type: 'subheader',
       }
+    } else if (item.items) {
+      return {
+        title: t(item.title!),
+        children: item.items.map(item => generateListItem(item, path, locale, t)),
+      }
     }
 
     return item
