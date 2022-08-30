@@ -1,23 +1,24 @@
 <template>
   <v-container fluid>
-    <v-checkbox
+    <v-checkbox-btn
       v-model="custom"
-      label="Custom progress bar"
-    ></v-checkbox>
+      label="Loading"
+    ></v-checkbox-btn>
+
     <v-text-field
       v-model="value"
-      color="cyan darken"
-      label="Text field"
-      placeholder="Start typing..."
+      label="Type characters to change the loader color"
       loading
+      placeholder="Start typing..."
     >
-      <template v-slot:progress>
+      <template v-slot:loader>
         <v-progress-linear
-          v-if="custom"
-          :value="progress"
+          :active="custom"
+          :model-value="progress"
           :color="color"
           absolute
           height="7"
+          indeterminate
         ></v-progress-linear>
       </template>
     </v-text-field>
@@ -28,8 +29,9 @@
   export default {
     data: () => ({
       value: '',
-      custom: true,
+      custom: false,
     }),
+
     computed: {
       progress () {
         return Math.min(100, this.value.length * 10)

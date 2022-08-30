@@ -5,9 +5,11 @@
     "activeIcon": "mdi-script-text",
     "items": [
       "why-vuetify",
-      "support",
       "long-term-support",
-      "roadmap"
+      "roadmap",
+      { "divider": true },
+      { "subheader": "professional-support" },
+      "support"
     ]
   },
   {

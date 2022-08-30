@@ -68,9 +68,6 @@ function closeScrollStrategy (data: ScrollStrategyData) {
 
 function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   const offsetParent = data.root.value?.offsetParent
-
-  console.log(offsetParent)
-
   const scrollElements = [...new Set([
     ...getScrollParents(data.activatorEl.value, props.contained ? offsetParent : undefined),
     ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),

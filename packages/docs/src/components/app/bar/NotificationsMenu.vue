@@ -29,7 +29,7 @@
 
     <v-toolbar
       class="pl-4 pr-5"
-      color="white"
+      color="surface"
       density="compact"
     >
       <v-btn
