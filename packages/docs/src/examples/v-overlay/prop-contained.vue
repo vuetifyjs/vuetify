@@ -2,6 +2,7 @@
   <v-row
     align="center"
     justify="center"
+    class="ma-4"
   >
     <v-card
       height="300"

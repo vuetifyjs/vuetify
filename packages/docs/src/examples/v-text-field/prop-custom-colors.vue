@@ -1,84 +1,68 @@
 <template>
-  <v-form>
+  <v-card
+    class="mx-auto"
+    max-width="344"
+    title="User Registration"
+  >
     <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="primary"
-            label="Regular"
-            placeholder="Placeholder"
-          ></v-text-field>
-        </v-col>
+      <v-text-field
+        v-model="first"
+        color="primary"
+        label="First name"
+        variant="underlined"
+      ></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="secondary"
-            label="Solo"
-            variant="solo"
-            placeholder="Placeholder"
-          ></v-text-field>
-        </v-col>
+      <v-text-field
+        v-model="last"
+        color="primary"
+        label="Last name"
+        variant="underlined"
+      ></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="tertiary"
-            label="Filled"
-            placeholder="Placeholder"
-            variant="filled"
-          ></v-text-field>
-        </v-col>
+      <v-text-field
+        v-model="email"
+        color="primary"
+        label="Email"
+        variant="underlined"
+      ></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="success"
-            label="Outlined"
-            placeholder="Placeholder"
-            variant="outlined"
-          ></v-text-field>
-        </v-col>
+      <v-text-field
+        v-model="password"
+        color="primary"
+        label="Password"
+        placeholder="Enter your password"
+        variant="underlined"
+      ></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="warning"
-            label="Plain"
-            placeholder="Placeholder"
-            variant="plain"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            color="error"
-            label="Underlined"
-            placeholder="Placeholder"
-            variant="underlined"
-          ></v-text-field>
-        </v-col>
-      </v-row>
+      <v-checkbox
+        v-model="terms"
+        color="secondary"
+        label="I agree to site terms and conditions"
+      ></v-checkbox>
     </v-container>
-  </v-form>
+
+    <v-divider></v-divider>
+
+    <v-card-actions>
+      <v-spacer></v-spacer>
+
+      <v-btn color="success">
+        Complete Registration
+
+        <v-icon icon="mdi-chevron-right" end></v-icon>
+      </v-btn>
+    </v-card-actions>
+  </v-card>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      first: null,
+      last: null,
+      email: null,
+      password: null,
+      terms: false,
+    }),
+  }
+</script>

@@ -7,14 +7,20 @@
     >
       <v-toolbar
         border="b"
-        :class="[
-          'px-1',
-          !showCode && 'border-opacity-0'
-        ]"
+        class="px-1"
         height="44"
         flat
         rounded="t"
       >
+        <v-fade-transition>
+          <div v-show="showCode">
+            <div class="text-body-2 px-3 text-medium-emphasis">
+              <v-icon icon="mdi-file-tree" />
+
+              {{ file }}.vue
+            </div>
+          </div>
+        </v-fade-transition>
         <v-spacer />
 
         <v-tooltip
@@ -47,19 +53,19 @@
             ]"
           >
             <template
-              v-for="section of sections"
+              v-for="(section, i) of sections"
               :key="section.name"
             >
-              <v-theme-provider
-                v-if="section.content"
-                :theme="theme"
-              >
-                <app-markup
-                  :code="section.content"
-                  class="rounded-0"
-                  :resource="`${file}.vue`"
-                />
-              </v-theme-provider>
+              <template v-if="section.content">
+                <v-divider v-if="i !== 0" />
+
+                <v-theme-provider :theme="theme">
+                  <app-markup
+                    :code="section.content"
+                    class="rounded-0"
+                  />
+                </v-theme-provider>
+              </template>
             </template>
           </div>
         </v-expand-transition>

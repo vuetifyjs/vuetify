@@ -97,7 +97,7 @@ export const VListItem = genericComponent<new () => {
   setup (props, { attrs, slots }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
-    const { select, isSelected, isIndeterminate, isGroupActivator, root, parent } = useNestedItem(id, false)
+    const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
@@ -119,6 +119,10 @@ export const VListItem = genericComponent<new () => {
     watch(() => link.isExactActive?.value, val => {
       if (val && parent.value != null) {
         root.open(parent.value, true)
+      }
+
+      if (val) {
+        openOnSelect(val)
       }
     }, { immediate: true })
 

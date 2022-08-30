@@ -20,6 +20,7 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     drawer: null,
+    items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
     categories: {

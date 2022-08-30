@@ -135,16 +135,19 @@ export const VPagination = defineComponent({
       if (!firstItem) return
 
       const totalWidth = contentRect.width
-      const itemWidth = firstItem.getBoundingClientRect().width + 10
+      const itemWidth =
+        firstItem.getBoundingClientRect().width +
+        parseFloat(getComputedStyle(firstItem).marginRight) * 2
+      const minButtons = props.showFirstLastPage ? 5 : 3
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - 96) / itemWidth))
+      maxButtons.value = Math.max(0, Math.floor((totalWidth - itemWidth * minButtons) / itemWidth))
     })
 
     const length = computed(() => parseInt(props.length, 10))
     const start = computed(() => parseInt(props.start, 10))
 
     const totalVisible = computed(() => {
-      if (props.totalVisible) return Math.min(parseInt(props.totalVisible ?? '', 10), length.value)
+      if (props.totalVisible) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
       return length.value
     })
@@ -152,7 +155,7 @@ export const VPagination = defineComponent({
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
 
-      if (totalVisible.value <= 2) return [page.value]
+      if (totalVisible.value <= 1) return [page.value]
 
       if (length.value <= totalVisible.value) {
         return createRange(length.value, start.value)
@@ -165,7 +168,7 @@ export const VPagination = defineComponent({
 
       if (left - page.value >= 0) {
         return [...createRange(Math.max(1, totalVisible.value - 1), start.value), props.ellipsis, length.value]
-      } else if (page.value - right >= 0) {
+      } else if (page.value - right >= (even ? 1 : 0)) {
         const rangeLength = totalVisible.value - 1
         const rangeStart = length.value - rangeLength + start.value
         return [start.value, props.ellipsis, ...createRange(rangeLength, rangeStart)]

@@ -4,18 +4,11 @@
     max-width="344"
   >
     <v-text-field
-      v-model="model"
+      :rules="[
+        v => !!v || 'Field is required'
+      ]"
       clearable
-      hide-details="auto"
       label="Last name"
     ></v-text-field>
   </v-responsive>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      model: 'Leider',
-    }),
-  }
-</script>

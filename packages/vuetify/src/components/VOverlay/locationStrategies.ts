@@ -201,8 +201,16 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     const observer = new ResizeObserver(() => {
       if (observe) updateLocation()
     })
-    observer.observe(data.activatorEl.value!)
-    observer.observe(data.contentEl.value!)
+
+    watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
+      if (oldActivatorEl) observer.unobserve(oldActivatorEl)
+      if (newActivatorEl) observer.observe(newActivatorEl)
+
+      if (oldContentEl) observer.unobserve(oldContentEl)
+      if (newContentEl) observer.observe(newContentEl)
+    }, {
+      immediate: true,
+    })
 
     onScopeDispose(() => {
       observer.disconnect()
@@ -216,14 +224,16 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       requestAnimationFrame(() => observe = true)
     })
 
-    const targetBox = data.activatorEl.value!.getBoundingClientRect()
-    const contentBox = getIntrinsicSize(data.contentEl.value!)
+    if (!data.activatorEl.value || !data.contentEl.value) return
+
+    const targetBox = data.activatorEl.value.getBoundingClientRect()
+    const contentBox = getIntrinsicSize(data.contentEl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
 
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
-      if (!(data.contentEl.value!.style.top && data.contentEl.value!.style.left)) {
+      if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
         contentBox.x += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
         contentBox.y += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }
