@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} ďalších',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} súborov',
     counterSize: '{0} súborov ({1} celkom)',

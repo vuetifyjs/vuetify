@@ -35,6 +35,7 @@ export default defineConfig(({ command, mode }) => {
       alias: {
         '@/': `${resolve('src')}/`,
         'node-fetch': 'isomorphic-fetch',
+        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
       },
     },
     define: {
@@ -87,31 +88,38 @@ export default defineConfig(({ command, mode }) => {
       // https://github.com/hannoeru/vite-plugin-pages
       Pages({
         extensions: ['vue', 'md'],
-        pagesDir: [
-          { dir: 'src/pages', baseRoute: '' },
+        dirs: [
+          { dir: 'src/pages', baseRoute: 'pages' },
           { dir: 'src/api', baseRoute: 'api' },
         ],
         extendRoute (route) {
-          if (['index', 'all'].includes(route.name)) {
-            return route
+          const [base, locale, ...folders] = route.component.split('/').slice(2)
+          const paths = [locale]
+
+          if (base !== 'pages') paths.push(base)
+
+          for (const folder of folders) {
+            if (folder.match('index')) continue
+
+            // remove file extensions if present
+            paths.push(folder.replace(/\.[a-z]*/, ''))
           }
 
-          const currentPath = route.path.split('/')
-          const layout = currentPath.length === 2 ? 'home' : 'default'
-          const meta = parseMeta(route.component)
-          let path = route.path
-
-          if (path.startsWith('/api')) {
-            const parts = path.split('/')
-            path = ['', parts[2], parts[1], parts.slice(3)].join('/')
+          const [category, page] = paths.slice(1)
+          const meta = {
+            layout: 'default',
+            ...parseMeta(route.component),
           }
 
           return {
             ...route,
-            path,
+            path: `/${paths.join('/')}/`,
+            name: `${category ?? meta.layout}${page ? '-' : ''}${page ?? ''}`,
             meta: {
               ...meta,
-              layout,
+              category,
+              page,
+              locale,
             },
           }
         },
@@ -155,7 +163,6 @@ export default defineConfig(({ command, mode }) => {
         include: [/\.vue$/, /\.md$/],
         // https://github.com/vuejs/vue-next/issues/3298
         template: {
-          ssr: true,
           compilerOptions: {
             directiveTransforms: {
               ripple: ssrTransformCustomDirective,
@@ -185,7 +192,10 @@ export default defineConfig(({ command, mode }) => {
             : null
           if (!type) return
 
-          return `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``
+          return {
+            code: `export default Comp => Comp['${type}'] = \`${code.replace(/`/g, '\\`')}\``,
+            map: null,
+          }
         },
       },
 
@@ -194,7 +204,7 @@ export default defineConfig(({ command, mode }) => {
 
     // https://github.com/antfu/vite-ssg
     ssgOptions: {
-      script: 'async',
+      script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
       onAfterClientBuild () {
@@ -215,6 +225,10 @@ $&`), index)
       exclude: [
         'vue-demi',
       ],
+    },
+
+    ssr: {
+      noExternal: ['vue-i18n'],
     },
 
     server: {

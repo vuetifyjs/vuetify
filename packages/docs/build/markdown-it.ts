@@ -87,6 +87,7 @@ const validate = ajv.compile({
   additionalProperties: false,
   properties: {
     nav: { type: 'string' },
+    layout: { type: 'string' },
     meta: {
       type: 'object',
       additionalProperties: false,

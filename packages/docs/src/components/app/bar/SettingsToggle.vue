@@ -1,12 +1,12 @@
 <template>
   <app-tooltip-btn
     :input-value="app.settings"
+    color="medium-emphasis"
     path="settings"
     @click="app.settings = !app.settings"
   >
     <template #icon>
       <v-icon
-        color="medium-emphasis"
         icon="mdi-cog-outline"
       />
     </template>

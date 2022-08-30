@@ -21,8 +21,9 @@ const scrollStrategies = {
   reposition: repositionScrollStrategy,
 }
 
-interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData) => void)
+export interface StrategyProps {
+  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData, props?: StrategyProps) => void)
+  contained: boolean | undefined
 }
 
 export const makeScrollStrategyProps = propsFactory({
@@ -49,9 +50,9 @@ export function useScrollStrategies (
     await nextTick()
     scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
-        props.scrollStrategy(data)
+        props.scrollStrategy(data, props)
       } else {
-        scrollStrategies[props.scrollStrategy]?.(data)
+        scrollStrategies[props.scrollStrategy]?.(data, props)
       }
     })
   })
@@ -65,14 +66,15 @@ function closeScrollStrategy (data: ScrollStrategyData) {
   bindScroll(data.activatorEl.value ?? data.contentEl.value, onScroll)
 }
 
-function blockScrollStrategy (data: ScrollStrategyData) {
+function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
+  const offsetParent = data.root.value?.offsetParent
   const scrollElements = [...new Set([
-    ...getScrollParents(data.activatorEl.value),
-    ...getScrollParents(data.contentEl.value),
+    ...getScrollParents(data.activatorEl.value, props.contained ? offsetParent : undefined),
+    ...getScrollParents(data.contentEl.value, props.contained ? offsetParent : undefined),
   ])].filter(el => !el.classList.contains('v-overlay-scroll-blocked'))
   const scrollbarWidth = window.innerWidth - document.documentElement.offsetWidth
 
-  const scrollableParent = (el => hasScrollbar(el) && el)(data.root.value?.offsetParent || document.documentElement)
+  const scrollableParent = (el => hasScrollbar(el) && el)(offsetParent || document.documentElement)
   if (scrollableParent) {
     data.root.value!.classList.add('v-overlay--scroll-blocked')
   }

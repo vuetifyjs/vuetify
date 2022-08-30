@@ -54,7 +54,7 @@
             <v-chip
               v-if="message.new"
               :color="`${message.color}-lighten-1`"
-              class="ml-0 mr-2 text-black"
+              class="ml-0 mr-2"
               label
               small
             >
@@ -65,7 +65,7 @@
 
           <v-col
             v-if="message.excerpt"
-            class="text-grey text-truncate hidden-sm-and-down"
+            class="text-medium-emphasis text-truncate hidden-sm-and-down"
           >
             &mdash;
             {{ message.excerpt }}

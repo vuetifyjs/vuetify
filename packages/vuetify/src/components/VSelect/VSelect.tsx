@@ -53,6 +53,7 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+  readonly: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'select')
@@ -130,11 +131,16 @@ export const VSelect = genericComponent<new <
       }
     }
     function onClickControl () {
-      if (props.hideNoData && !items.value.length) return
+      if (
+        (props.hideNoData && !items.value.length) ||
+        props.readonly
+      ) return
 
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
+      if (props.readonly) return
+
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
       }
@@ -168,13 +174,15 @@ export const VSelect = genericComponent<new <
           ref={ vTextFieldRef }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
-          validationValue={ props.modelValue }
+          validationValue={ props.modelValue ?? model.value }
+          dirty={ model.value.length > 0 }
           class={[
             'v-select',
             {
               'v-select--active-menu': menu.value,
               'v-select--chips': !!props.chips,
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
+              'v-select--selected': model.value.length,
             },
           ]}
           appendInnerIcon={ props.menuIcon }

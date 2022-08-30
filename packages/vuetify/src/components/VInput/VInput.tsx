@@ -2,7 +2,6 @@
 import './VInput.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
 import { VMessages } from '@/components/VMessages'
 
 // Composables
@@ -12,11 +11,12 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, getUid, pick, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, PropType, Ref } from 'vue'
+import type { ComputedRef, PropType, Ref } from 'vue'
 import type { MakeSlots } from '@/util'
+import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -46,6 +46,9 @@ export const makeVInputProps = propsFactory({
     validator: (v: any) => ['horizontal', 'vertical'].includes(v),
   },
 
+  'onClick:prepend': EventProp,
+  'onClick:append': EventProp,
+
   ...makeDensityProps(),
   ...makeValidationProps(),
 })
@@ -72,6 +75,7 @@ export const VInput = genericComponent<new <T>() => {
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { InputIcon } = useInputIcon(props)
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
@@ -126,10 +130,9 @@ export const VInput = genericComponent<new <T>() => {
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
               { props.prependIcon && (
-                <VIcon
+                <InputIcon
                   key="prepend-icon"
-                  onClick={ attrs['onClick:prepend'] }
-                  icon={ props.prependIcon }
+                  name="prepend"
                 />
               ) }
 
@@ -148,10 +151,9 @@ export const VInput = genericComponent<new <T>() => {
               { slots.append?.(slotProps.value) }
 
               { props.appendIcon && (
-                <VIcon
+                <InputIcon
                   key="append-icon"
-                  onClick={ attrs['onClick:append'] }
-                  icon={ props.appendIcon }
+                  name="append"
                 />
               ) }
             </div>
@@ -185,6 +187,7 @@ export const VInput = genericComponent<new <T>() => {
 
 export type VInput = InstanceType<typeof VInput>
 
-export function filterInputProps (props: ExtractPropTypes<ReturnType<typeof makeVInputProps>>) {
-  return pick(props, Object.keys(VInput.props) as any)
+export function filterInputProps (props: Record<string, unknown>) {
+  const keys = Object.keys(VInput.props).filter(k => !isOn(k))
+  return pick(props, keys)
 }

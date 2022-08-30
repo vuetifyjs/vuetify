@@ -8,6 +8,9 @@ related:
   - /features/theme/
   - /resources/themes/
 ---
+<script setup>
+  import WireframeExamples from '@/components/getting-started/WireframeExamples.vue'
+</script>
 
 # Wireframes
 
@@ -19,7 +22,7 @@ The Vuetify **layout system** makes it easy to rapidly scaffold an application's
 
 These templates are known as **wireframes** and are designed to provide a consistent approach to layouts, layering, and shadows. They are a starting point that is meant to be modified to meet the specific needs of your application.
 
-<!-- <wireframe-examples /> -->
+<wireframe-examples />
 
 <alert type="info">
 

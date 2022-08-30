@@ -1,10 +1,6 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-@mixin firefox()
-  @-moz-document url-prefix()
-    @content
-
 .v-main
   flex: 1 0 auto
   max-width: 100%
@@ -29,7 +25,3 @@
       --v-layout-right: 0px
       --v-layout-top: 0px
       --v-layout-bottom: 0px
-
-  +firefox()
-    @media print
-      display: block

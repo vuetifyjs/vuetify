@@ -7,7 +7,7 @@
 
       <v-spacer />
 
-      <div class="bg-white px-2 rounded">
+      <div class="bg-white px-2 rounded d-none d-md-block">
         <app-link href="https://vuetifyjs.com/">Vuetify 2 documentation</app-link>
       </div>
     </v-system-bar>

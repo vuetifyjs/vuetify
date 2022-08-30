@@ -1,6 +1,13 @@
 import type { PropType } from 'vue'
 import { Transition } from 'vue'
-import { acceleratedEasing, deceleratedEasing, defineComponent, nullifyTransforms, standardEasing } from '@/util'
+import {
+  acceleratedEasing,
+  animate,
+  deceleratedEasing,
+  defineComponent,
+  nullifyTransforms,
+  standardEasing,
+} from '@/util'
 
 export const VDialogTransition = defineComponent({
   name: 'VDialogTransition',
@@ -22,7 +29,7 @@ export const VDialogTransition = defineComponent({
 
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 
-        const animation = el.animate([
+        const animation = animate(el, [
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
           { transform: '' },
         ], {
@@ -30,7 +37,7 @@ export const VDialogTransition = defineComponent({
           easing: deceleratedEasing,
         })
         getChildren(el)?.forEach(el => {
-          el.animate([
+          animate(el, [
             { opacity: 0 },
             { opacity: 0, offset: 0.33 },
             { opacity: 1 },
@@ -52,7 +59,7 @@ export const VDialogTransition = defineComponent({
 
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 
-        const animation = el.animate([
+        const animation = animate(el, [
           { transform: '' },
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
         ], {
@@ -61,7 +68,7 @@ export const VDialogTransition = defineComponent({
         })
         animation.finished.then(() => done())
         getChildren(el)?.forEach(el => {
-          el.animate([
+          animate(el, [
             {},
             { opacity: 0, offset: 0.2 },
             { opacity: 0 },
