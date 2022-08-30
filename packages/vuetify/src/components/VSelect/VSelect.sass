@@ -16,9 +16,12 @@
     .v-field__input
       > input
         align-self: flex-start
-        opacity: 0
+        opacity: 1
         flex: 0 0
         position: absolute
+        width: 100%
+        transition: none
+        pointer-events: none
 
     .v-field__append-inner
       > .v-icon
@@ -59,3 +62,9 @@
 
       &:first-child
         margin-inline-start: 0
+
+  &--selected
+    .v-field
+      .v-field__input
+        > input
+          opacity: 0

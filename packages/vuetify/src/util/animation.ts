@@ -35,3 +35,22 @@ export function nullifyTransforms (el: HTMLElement): Box {
     return new Box(rect)
   }
 }
+
+export function animate (
+  el: Element,
+  keyframes: Keyframe[] | PropertyIndexedKeyframes | null,
+  options?: number | KeyframeAnimationOptions
+) {
+  if (typeof el.animate === 'undefined') return { finished: Promise.resolve() }
+
+  const animation = el.animate(keyframes, options)
+  if (typeof animation.finished === 'undefined') {
+    (animation as any).finished = new Promise(resolve => {
+      animation.onfinish = () => {
+        resolve(animation)
+      }
+    })
+  }
+
+  return animation
+}

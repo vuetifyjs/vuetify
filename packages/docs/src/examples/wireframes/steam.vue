@@ -34,8 +34,7 @@
         min-width="96"
         rounded
         small
-      >
-      </v-btn>
+      ></v-btn>
 
       <v-spacer></v-spacer>
 
@@ -49,7 +48,6 @@
       width="300"
     >
       <div class="d-flex align-center pa-1">
-
         <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
 
         <v-btn

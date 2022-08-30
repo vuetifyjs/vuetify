@@ -3,7 +3,7 @@ const BreadcrumbsItem = [{
   exact: 'boolean',
   href: 'string',
   link: 'boolean',
-  text: 'string | number',
+  title: 'string | number',
   to: 'string | object',
 }]
 
@@ -23,7 +23,11 @@ module.exports = {
         props: undefined,
       },
       {
-        name: 'item',
+        name: 'prepend',
+        props: undefined,
+      },
+      {
+        name: 'title',
         props: {
           item: 'any[]',
         },

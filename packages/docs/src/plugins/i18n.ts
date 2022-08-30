@@ -3,9 +3,9 @@ import type { I18nPlugin } from '@/types'
 
 const messages = Object.fromEntries(
   Object.entries(
-    import.meta.globEager('../i18n/messages/*.json'))
+    import.meta.glob('../i18n/messages/*.json', { eager: true }))
     .map(([key, value]) => {
-      return [key.slice(key.lastIndexOf('/') + 1, -5), value.default]
+      return [key.slice(key.lastIndexOf('/') + 1, -5), (value as any).default]
     }),
 )
 

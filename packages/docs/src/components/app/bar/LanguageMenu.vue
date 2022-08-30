@@ -1,12 +1,13 @@
 <template>
   <v-btn
-    :icon="smAndDown"
+    :icon="display.smAndDown"
     class="px-0 px-md-2 font-weight-regular"
+    color="medium-emphasis"
     variant="text"
   >
     <v-icon
-      color="medium-emphasis"
       icon="mdi-translate"
+      size="24"
     />
 
     <chevron-down />
@@ -29,7 +30,7 @@
   </v-btn>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   // Components
   import AppMenu from '@/components/app/menu/Menu.vue'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
@@ -41,36 +42,24 @@
   import { useRoute, useRouter } from 'vue-router'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
 
   // Language
   import locales from '@/i18n/locales.json'
 
-  export default defineComponent({
-    name: 'LanguageMenu',
+  const { t } = useI18n()
+  const display = useDisplay()
+  const localeStore = useLocaleStore()
+  const router = useRouter()
+  const route = useRoute()
 
-    components: { ChevronDown, AppMenu },
+  const items = computed(() => ([
+    { subheader: t('translations') },
+    ...locales.filter((locale: { enabled: boolean }) => locale.enabled),
+  ]))
 
-    setup () {
-      const { t } = useI18n()
-      const display = useDisplay()
-      const localeStore = useLocaleStore()
-      const router = useRouter()
-      const route = useRoute()
-
-      return {
-        smAndDown: display.smAndDown,
-        items: computed(() => ([
-          { heading: t('translations') },
-          ...locales.filter((locale: { enabled: boolean }) => locale.enabled),
-        ])),
-        changeLocale: (locale: string) => {
-          console.log('click', locale)
-          localeStore.locale = locale
-          console.log(route.path)
-          router.push({ path: route.path.replace(/^\/[a-zA-Z-]+/, `/${locale}`) })
-        },
-      }
-    },
-  })
+  function changeLocale (locale: string) {
+    localeStore.locale = locale
+    router.push({ path: route.path.replace(/^\/[a-zA-Z-]+/, `/${locale}`) })
+  }
 </script>

@@ -1,13 +1,27 @@
+// Utilities
 import { defineStore } from 'pinia'
 
+// Data
+import data from '@/data/nav-alpha.json'
+
+// Types
 export type RootState = {
   drawer: boolean | null
+}
+
+type NavItem = {
+  title?: string
+  inactiveIcon?: string
+  activeIcon?: string
+  items?: NavItem[]
 }
 
 export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     drawer: null,
+    items: Array.from(data),
+    pages: getPages(data as NavItem[]),
     settings: false,
     categories: {
       api: {
@@ -53,3 +67,22 @@ export const useAppStore = defineStore({
     },
   } as RootState),
 })
+
+function getPage (item: NavItem, parent = ''): string[] {
+  const title = `${parent}${parent ? '/' : ''}${item?.title ?? item}`
+
+  return item?.items?.length ? getPages(
+    item.items,
+    title
+  ) : [title]
+}
+
+function getPages (items: NavItem[] = [], parent = ''): string[] {
+  let array: any = []
+
+  for (const item of items) {
+    array = [...array, ...getPage(item, parent)]
+  }
+
+  return array
+}

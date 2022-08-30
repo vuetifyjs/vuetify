@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -57,7 +57,6 @@ export const VTextarea = defineComponent({
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -126,7 +125,7 @@ export const VTextarea = defineComponent({
       nextTick(() => {
         model.value = ''
 
-        emit('click:clear', e)
+        callEvent(props['onClick:clear'], e)
       })
     }
     function onInput (e: Event) {
@@ -200,6 +199,8 @@ export const VTextarea = defineComponent({
               'v-textarea--no-resize': props.noResize || props.autoGrow,
             },
           ]}
+          onClick:prepend={ props['onClick:prepend'] }
+          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           messages={ messages.value }
@@ -219,6 +220,8 @@ export const VTextarea = defineComponent({
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }

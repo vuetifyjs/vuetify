@@ -48,7 +48,7 @@ export const VTabs = defineComponent({
       default: () => ([]),
     },
     stacked: Boolean,
-    backgroundColor: String,
+    bgColor: String,
     centered: Boolean,
     grow: Boolean,
     height: {
@@ -73,7 +73,7 @@ export const VTabs = defineComponent({
     const model = useProxiedModel(props, 'modelValue')
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'backgroundColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
 
     provideDefaults({
       VTab: {

@@ -40,12 +40,16 @@ export function rpath (path = '') {
   const locale = preferredLocale()
   const [url, hash] = path.split('#')
 
-  return [
+  return leadingSlash(trailingSlash([
     '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
     hash ? `#${hash}` : null,
-  ].filter(v => v != null).join('/')
+  ].filter(v => v != null).join('/')))
+}
+
+export function leadingSlash (str: string) {
+  return str.startsWith('/') ? str : '/' + str
 }
 
 export function trailingSlash (str: string) {

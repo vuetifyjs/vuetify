@@ -9,6 +9,7 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
 }
 
 export const version = __VUETIFY_VERSION__
+createVuetify.version = version
 
 export {
   components,

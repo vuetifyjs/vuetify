@@ -73,7 +73,8 @@ export const VIcon = defineComponent({
           }) : undefined,
           textColorStyles.value,
         ]}
-        aria-hidden="true"
+        role={ attrs.onClick ? 'button' : undefined }
+        aria-hidden={ !attrs.onClick }
       />
     ))
 

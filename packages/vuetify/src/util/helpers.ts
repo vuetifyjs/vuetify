@@ -7,6 +7,7 @@ import type {
   ComponentPublicInstance,
   ComputedGetter,
   InjectionKey,
+  PropType,
   Ref,
   Slots,
   ToRefs,
@@ -590,4 +591,20 @@ export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
 /** Array.includes but value can be any type */
 export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
+}
+
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+export type EventProp<T = (...args: any[]) => any> = T | T[]
+export const EventProp = [Function, Array] as PropType<EventProp>
+
+export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+  if (Array.isArray(handler)) {
+    for (const h of handler) {
+      h(...args)
+    }
+  } else if (typeof handler === 'function') {
+    handler(...args)
+  }
 }

@@ -28,7 +28,7 @@
     name: 'ActionBtns',
 
     setup () {
-      const { locale, t } = useI18n()
+      const { t } = useI18n()
 
       // data
       const buttons = [
@@ -38,7 +38,7 @@
           icon: 'mdi-speedometer',
           text: 'home.get-started',
           to: {
-            name: `${locale.value}-getting-started-installation`,
+            name: 'getting-started-installation',
           },
         },
         {
@@ -47,7 +47,7 @@
           variant: 'outlined',
           text: 'home.why-vuetify',
           to: {
-            name: `${locale.value}-introduction-why-vuetify`,
+            name: 'introduction-why-vuetify',
           },
         },
         {

@@ -23,6 +23,7 @@ export interface ValidationProps {
   errorMessages: string | string[]
   maxErrors: string | number
   name: string | undefined
+  label: string | undefined
   readonly: boolean
   rules: ValidationRule[]
   modelValue: any
@@ -42,6 +43,7 @@ export const makeValidationProps = propsFactory({
     default: 1,
   },
   name: String,
+  label: String,
   readonly: Boolean,
   rules: {
     type: Array as PropType<ValidationRule[]>,

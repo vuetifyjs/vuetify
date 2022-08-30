@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -24,6 +24,9 @@ import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
+
+type EventProp<T = (...args: any[]) => any> = T | T[]
+const EventProp = [Function, Array] as PropType<EventProp>
 
 export const VTextField = genericComponent<new <T>() => {
   $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
@@ -57,7 +60,6 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
     'click:input': (e: MouseEvent) => true,
     'update:modelValue': (val: string) => true,
@@ -125,7 +127,7 @@ export const VTextField = genericComponent<new <T>() => {
       nextTick(() => {
         model.value = ''
 
-        emit('click:clear', e)
+        callEvent(props['onClick:clear'], e)
       })
     }
 
@@ -148,8 +150,8 @@ export const VTextField = genericComponent<new <T>() => {
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
-          onClick:prepend={ attrs['onClick:prepend'] }
-          onClick:append={ attrs['onClick:append'] }
+          onClick:prepend={ props['onClick:prepend'] }
+          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           messages={ messages.value }
@@ -172,8 +174,8 @@ export const VTextField = genericComponent<new <T>() => {
                 }}
                 onClick:control={ onControlClick }
                 onClick:clear={ onClear }
-                onClick:prependInner={ attrs['onClick:prependInner'] }
-                onClick:appendInner={ attrs['onClick:appendInner'] }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
                 id={ id.value }
