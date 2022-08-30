@@ -22,6 +22,7 @@ import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
 import {
+  animate,
   convertToUnit,
   genericComponent,
   getScrollParent,
@@ -213,7 +214,7 @@ export const VOverlay = genericComponent<new () => {
     function animateClick () {
       if (props.noClickAnimation) return
 
-      contentEl.value?.animate([
+      contentEl.value && animate(contentEl.value, [
         { transformOrigin: 'center' },
         { transform: 'scale(1.03)' },
         { transformOrigin: 'center' },

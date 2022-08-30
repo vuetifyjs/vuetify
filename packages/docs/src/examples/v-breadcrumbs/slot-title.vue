@@ -1,7 +1,7 @@
 <template>
   <v-breadcrumbs :items="items">
-    <template v-slot:text="{ item }">
-      {{ item.text.toUpperCase() }}
+    <template v-slot:title="{ item }">
+      {{ item.title.toUpperCase() }}
     </template>
   </v-breadcrumbs>
 </template>
@@ -11,17 +11,17 @@
     data: () => ({
       items: [
         {
-          text: 'Dashboard',
+          title: 'Dashboard',
           disabled: false,
           href: 'breadcrumbs_dashboard',
         },
         {
-          text: 'Link 1',
+          title: 'Link 1',
           disabled: false,
           href: 'breadcrumbs_link_1',
         },
         {
-          text: 'Link 2',
+          title: 'Link 2',
           disabled: true,
           href: 'breadcrumbs_link_2',
         },

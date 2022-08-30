@@ -1,4 +1,5 @@
 ---
+layout: home
 meta:
   title: Vuetify
 ---

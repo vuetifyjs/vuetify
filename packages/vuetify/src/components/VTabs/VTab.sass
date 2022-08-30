@@ -2,8 +2,10 @@
 
 .v-tab
   position: relative
-  max-width: $tab-max-width
   min-width: $tab-min-width
+
+  .v-slide-group--horizontal &
+    max-width: $tab-max-width
 
   // override density specificity
   &.v-tab.v-tab

@@ -227,4 +227,31 @@ describe('VSlideGroup', () => {
     cy.get('.item-1').should('not.be.visible')
     cy.get('.item-7').should('be.visible')
   })
+
+  it('should support rtl', () => {
+    cy.mount(() => (
+      <Application rtl>
+        <CenteredGrid width="400px">
+          <VSlideGroup selectedClass="bg-primary" showArrows>
+            { createRange(8).map(i => (
+              <VSlideGroupItem key={ i } value={ i }>
+                {{
+                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard>,
+                }}
+              </VSlideGroupItem>
+            ))}
+          </VSlideGroup>
+        </CenteredGrid>
+      </Application>
+    ))
+
+    cy.get('.item-7').should('exist').should('not.be.visible')
+
+    cy.get('.v-slide-group__prev--disabled').should('exist')
+    cy.get('.v-slide-group__next--disabled').should('not.exist')
+
+    cy.get('.v-slide-group__next').click().click()
+
+    cy.get('.item-7').should('exist').should('be.visible')
+  })
 })

@@ -111,3 +111,6 @@ export const createVuetify = (vuetify: VuetifyOptions = {}) => {
 
   return { install }
 }
+
+export const version = __VUETIFY_VERSION__
+createVuetify.version = version

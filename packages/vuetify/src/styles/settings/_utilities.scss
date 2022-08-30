@@ -443,12 +443,12 @@ $utilities: () !default;
         values: (break: break-word)
       ),
       "text-opacity": (
-        property: opacity,
+        property: color,
         class: text,
         values: (
-          high-emphasis: var(--v-high-emphasis-opacity),
-          medium-emphasis: var(--v-medium-emphasis-opacity),
-          disabled: var(--v-disabled-opacity)
+          high-emphasis: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity)),
+          medium-emphasis: rgba(var(--v-theme-on-background), var(--v-medium-emphasis-opacity)),
+          disabled: rgba(var(--v-theme-on-background), var(--v-disabled-opacity)),
         )
       ),
       "text-overflow": (

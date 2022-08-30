@@ -10,6 +10,13 @@ related:
   - /getting-started/release-notes/
 ---
 
+<script setup>
+  import { ref } from 'vue'
+  import { version } from 'vuetify'
+
+  const tab = ref('yarn')
+</script>
+
 # Vuetify 3 Beta
 
 Welcome to the Vuetify 3 Beta release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
@@ -34,17 +41,22 @@ We recommend using **yarn**, but any will work just fine. For more information o
 
 Vite is a build tool from the creator of Vue designed to provide faster and leaner development. It offers significantly lower build and compilation times during development and extremely fast Hot Module Replacement (HMR). The following sections cover how you can create a new vite application for Vue and Vuetify 3.
 
-#### Yarn
-
-If you're using [yarn](https://yarnpkg.com/) as your package manager, run the following command in your terminal:
+<v-tabs v-model="tab" color="primary">
+  <v-tab value="yarn" variant="plain">Yarn</v-tab>
+  <v-tab value="npm" variant="plain">NPM</v-tab>
+  <v-tab value="pnpm" variant="plain">PNPM</v-tab>
+</v-tabs>
+<v-window v-model="tab">
+  <v-window-item value="yarn">
 
 ```bash
 yarn create vite my-app --template vue
 ```
 
-#### NPM
+  </v-window-item>
+  <v-window-item value="npm">
 
-If you're using [npm](https://www.npmjs.com/) as your package manager, use the following command to check your current version:
+<p class="mt-4">Use the following command to check your current version:</p>
 
 ```bash
 npm -v
@@ -55,22 +67,24 @@ Note the displayed value to determine the correct installation command. For more
 For version **7 and above**, an additional "**- -**" is required before specifying the vite template parameters. Use the following code for newer npm versions:
 
 ```bash
-npm create vite@latest my-vue-app -- --template vue
+npm create vite my-vue-app -- --template vue
 ```
 
 If your npm version is **less than 7**, the extra "**- -**" is not required. Use the following code for older npm versions:
 
 ```bash
-npm create vite@latest my-vue-app --template vue
+npm create vite my-vue-app --template vue
 ```
 
-#### PNPM
-
-If you're using the [pnpm](https://pnpm.io/) to manage your packages, use the following command to generate a new project:
+  </v-window-item>
+  <v-window-item value="pnpm">
 
 ```bash
 pnpm create vite my-vue-app -- --template vue
 ```
+
+  </v-window-item>
+</v-window>
 
 ----
 
@@ -129,31 +143,27 @@ Once prompted, choose `Vuetify 3 Preview`:
 ❯ Vuetify 3 - Vue CLI (preview 3)
 ```
 
-### CDN
-
-Coming soon™
-
 ## Usage
 
 With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
 
-```js { data-resource="src/plugins/vuetify.js" }
+```js { data-resource="main.js" }
 import 'vuetify/styles' // Global CSS has to be imported
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import App from './App.vue'
 
 const app = createApp(App)
-const vuetify = createVuetify(...) // Replaces new Vuetify(...)
+const vuetify = createVuetify() // Replaces new Vuetify()
 
 app.use(vuetify)
 
 app.mount('#app')
 ```
 
-Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin) or [Webpack](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vuetify-loader) plugin.
+Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://www.npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://www.npmjs.com/package/webpack-plugin-vuetify) plugin. See [treeshaking](/features/treeshaking) for more information.
 
-```js { data-resource="src/plugins/vuetify.js" }
+```js { data-resource="main.js" }
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
 
@@ -161,6 +171,24 @@ const vuetify = createVuetify({
   components,
   directives,
 })
+```
+
+### CDN
+
+We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css`
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js`
+
+```js
+const { createApp } = Vue
+const { createVuetify } = Vuetify
+
+const vuetify = createVuetify()
+
+const app = createApp()
+app.use(vuetify).mount('#app')
 ```
 
 ## Frequently asked questions
