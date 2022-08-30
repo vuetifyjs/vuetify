@@ -30,7 +30,7 @@
             'pl-3 text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': route.hash === to,
-              'text-grey': route.hash !== to,
+              'text-medium-emphasis': route.hash !== to,
               'pl-6': level === 3,
               'pl-9': level === 4,
               'pl-12': level === 5,

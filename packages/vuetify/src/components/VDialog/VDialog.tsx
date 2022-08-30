@@ -115,6 +115,7 @@ export const VDialog = genericComponent<new () => {
         ]}
         style={ dimensionStyles.value }
         transition={ props.transition }
+        scrollStrategy="block"
         ref={ overlay }
         aria-role="dialog"
         aria-modal="true"

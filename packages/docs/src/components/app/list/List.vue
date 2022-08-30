@@ -9,23 +9,36 @@
     item-props
   >
     <template #divider>
-      <v-divider class="my-3 mb-4 mr-n2" />
+      <slot name="divider" />
+
+      <v-divider
+        v-if="!$slots.divider"
+        class="my-3 mb-4 ms-2 me-n2"
+      />
     </template>
 
-    <template #subheader="{ props }">
-      <v-list-subheader class="text-high-emphasis text-black text-uppercase font-weight-black">
-        {{ props.title }}
+    <template #subheader="{ props: subheaderProps }">
+      <slot
+        name="subheader"
+        v-bind="{ subheaderProps }"
+      />
+
+      <v-list-subheader
+        v-if="!$slots.subheader"
+        class="text-high-emphasis text-uppercase font-weight-black"
+      >
+        {{ subheaderProps.title }}
       </v-list-subheader>
     </template>
   </v-list>
 </template>
 
-<script lang="ts">
+<script lang="ts" setup>
   // Composables
   import { useI18n } from 'vue-i18n'
 
   // Utiltities
-  import { computed, defineComponent, ref } from 'vue'
+  import { computed, ref } from 'vue'
   import { generatedRoutes as routes } from '@/util/routes'
   import { RouteLocationRaw, RouteRecordRaw } from 'vue-router'
 
@@ -37,7 +50,7 @@
     activeIcon?: string
     inactiveIcon?: string
     items?: (string | Item)[]
-    heading?: string
+    subheader?: string
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
@@ -55,76 +68,67 @@
       })
   }
 
-  function generateItems (item: Item, path: string, locale: string, t: (key: string) => string): any {
-    if (item.items) {
-      return item.items.map(child => {
-        if (typeof child === 'string') {
-          const route = routes.find((route: { path: string }) => route.path.endsWith(`${locale}/${path}/${child}/`))
-
-          return {
-            title: route?.meta?.nav ?? route?.meta?.title ?? child,
-            to: route?.path,
-            disabled: !route,
-          }
-        } else {
-          return {
-            title: t(child.title!),
-            children: generateItems(child, path, locale, t),
-          }
-        }
-      })
-    }
-
-    return undefined
-  }
-
-  export default defineComponent({
-    name: 'AppList',
-
-    props: {
-      items: {
-        type: Array,
-        default: () => ([]),
-      } as Prop<Item[]>,
-      nav: Boolean,
-    },
-
-    setup (props) {
-      const { t, te, locale } = useI18n()
-      const opened = ref<string[]>([])
-
-      const computedItems = computed(() => props.items?.map(item => {
-        if (item.heading) {
-          return {
-            type: 'subheader',
-            title: item.heading,
-            class: 'on-surface font-weight-black text-uppercase',
-          }
-        }
-
-        if (item.divider) {
-          return {
-            type: 'divider',
-            class: 'my-2 ml-2 mr-n2',
-          }
-        }
-
-        return {
-          title: item.title && te(item.title) ? t(item.title) : item.title,
-          value: item.title,
-          to: item?.to,
-          href: item?.href,
-          target: item.href ? '_blank' : undefined,
-          rel: item.href ? 'noopener noreferrer' : undefined,
-          prependIcon: opened.value.includes(item.title!) ? item.activeIcon : item.inactiveIcon,
-          children: item.title === 'api' ? generateApiItems(locale.value) : generateItems(item, item.title!, locale.value, t),
-        }
-      }))
+  function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
+    if (typeof item === 'string') {
+      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
 
       return {
-        computedItems,
-        opened,
+        title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        to: route?.path,
+        disabled: !route,
       }
-    },
+    } else if (item.divider) {
+      return {
+        type: 'divider',
+      }
+    } else if (item.subheader) {
+      return {
+        title: t(item.subheader!),
+        type: 'subheader',
+      }
+    } else if (item.items) {
+      return {
+        title: t(item.title!),
+        children: item.items.map(item => generateListItem(item, path, locale, t)),
+      }
+    }
+
+    return item
+  }
+
+  function generateListItems (item: Item, path: string, locale: string, t: (key: string) => string): any {
+    if (!item.items) return undefined
+
+    return item.items.map(child => generateListItem(child, path, locale, t))
+  }
+
+  const props = defineProps({
+    items: {
+      type: Array,
+      default: () => ([]),
+    } as Prop<Item[]>,
+    nav: Boolean,
   })
+
+  const { t, te, locale } = useI18n()
+  const opened = ref<string[]>([])
+
+  const computedItems = computed(() => props.items?.map(item => {
+    if (item.divider || item.subheader) return generateListItem(item)
+
+    const title = item.title && te(item.title) ? t(item.title) : item.title
+
+    return {
+      ...generateListItem({
+        title,
+        to: item?.to,
+        href: item?.href,
+      }),
+      rel: item.href ? 'noopener noreferrer' : undefined,
+      target: item.href ? '_blank' : undefined,
+      children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
+      prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
+      value: title,
+    }
+  }))
 </script>
