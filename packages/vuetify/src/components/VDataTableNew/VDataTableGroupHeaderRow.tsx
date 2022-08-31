@@ -1,16 +1,12 @@
 import { defineComponent } from '@/util'
-import { inject, PropType } from 'vue'
 import { VBtn } from '../VBtn'
+import { useGroup, useHeaders } from './composables'
 import { VDataTableColumn } from './VDataTableColumn'
 
 export const VDataTableGroupHeaderRow = defineComponent({
   name: 'VDataTableGroupHeaderRow',
 
   props: {
-    columns: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
     item: {
       type: null,
       required: true,
@@ -18,17 +14,15 @@ export const VDataTableGroupHeaderRow = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { opened, toggleGroup } = inject('v-data-table', {} as any)
+    const { opened, toggleGroup } = useGroup()
+    const { columns } = useHeaders()
 
     return () => (
       <tr
-        class={[
-          'v-data-table__tr',
-          'v-data-table__tr--group-header',
-        ]}
+        class="v-data-table-group-header-row"
       >
         <VDataTableColumn
-          colspan={ props.columns.length }
+          colspan={ columns.value.length }
         >
           <VBtn
             size="small"

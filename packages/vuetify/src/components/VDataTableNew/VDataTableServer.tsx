@@ -7,7 +7,7 @@ import { VDataTableRows } from './VDataTableRows'
 // Utilities
 import { provide, toRef } from 'vue'
 import { defineComponent } from '@/util'
-import { createExpanded, useDataTableItems, useGroupBy, useHeaders, useOptions, usePagination, useSort } from './composables'
+import { createExpanded, createHeaders, createSort, useDataTableItems, useGroupBy, useHeaders, useOptions, usePagination, useSort } from './composables'
 
 // Types
 import type { PropType } from 'vue'
@@ -44,6 +44,7 @@ export const VDataTableServer = defineComponent({
     ...makeItemsProps({
       itemValue: 'id',
     }),
+    expandOnClick: Boolean,
   },
 
   emits: {
@@ -54,13 +55,13 @@ export const VDataTableServer = defineComponent({
   },
 
   setup (props, { slots, emit }) {
-    const { expanded } = createExpanded()
+    const { expanded } = createExpanded(props)
 
-    const { columns, headers } = useHeaders(props)
+    const { columns, headers } = createHeaders(props)
 
     const { items } = useDataTableItems(props, columns)
 
-    const { sortBy, toggleSort } = useSort(props)
+    const { sortBy, toggleSort } = createSort(props)
 
     const { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength } = usePagination(props)
 
@@ -110,7 +111,6 @@ export const VDataTableServer = defineComponent({
               <tbody class="v-data-table__tbody" role="rowgroup">
                 { slots.body ? slots.body() : (
                   <VDataTableRows
-                    columns={ columns.value }
                     items={ items.value }
                     v-slots={ slots }
                   />

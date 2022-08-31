@@ -6,13 +6,14 @@ import { VCheckbox } from '@/components/VCheckbox'
 // Composables
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { DataTableHeader } from './types'
 import type { SortItem } from './composables'
+import { useSelection, useSort } from './composables'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
@@ -37,7 +38,8 @@ export const VDataTableHeaders = defineComponent({
   },
 
   setup (props, { slots, emit }) {
-    const { toggleSort, someSelected, allSelected, selectAll } = inject('v-data-table', {} as any)
+    const { toggleSort } = useSort()
+    const { someSelected, allSelected, selectAll } = useSelection()
 
     const fixedOffsets = computed(() => {
       return props.columns.reduce((offsets, column) => {

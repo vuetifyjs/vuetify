@@ -4,7 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useItems } from '@/composables/items'
 
 // Utilities
-import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, watch } from 'vue'
+import { computed, inject, onBeforeMount, onBeforeUnmount, onMounted, provide, ref, toRef, watch } from 'vue'
 import { createRange, debounce, getCurrentInstance, getObjectValueByPath, getPropertyFromItem } from '@/util'
 
 // Types
@@ -120,22 +120,27 @@ export const useVirtual = (props: { height?: string | number, itemHeight: string
 export const VDataTableExpandedKey: InjectionKey<{
   expand: (item: any, value: boolean) => void
   expanded: Ref<Set<string>>
+  expandOnClick: Ref<boolean | undefined>
 }> = Symbol.for('vuetify:datatable:expanded')
 
-export const createExpanded = () => {
+export const createExpanded = (props: { expandOnClick?: boolean }) => {
+  const expandOnClick = toRef(props, 'expandOnClick')
   const expanded = ref(new Set<string>())
 
   function expand (item: any, value: boolean) {
+    console.log(item, value)
     if (!value) {
-      expanded.value.delete(item.id)
+      expanded.value.delete(item.value)
     } else {
-      expanded.value.add(item.id)
+      expanded.value.add(item.value)
     }
   }
 
-  provide(VDataTableExpandedKey, { expand, expanded })
+  const data = { expand, expanded, expandOnClick }
 
-  return { expanded }
+  provide(VDataTableExpandedKey, data)
+
+  return data
 }
 
 export const useExpanded = () => {
@@ -146,7 +151,12 @@ export const useExpanded = () => {
   return data
 }
 
-export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader[][], showSelect?: boolean }) => {
+export const VDataTableHeadersSymbol: InjectionKey<{
+  headers: Ref<DataTableHeader[][]>
+  columns: Ref<DataTableHeader[]>
+}> = Symbol.for('vuetify:data-table-headers')
+
+export function createHeaders (props: { headers: DataTableHeader[] | DataTableHeader[][], showSelect?: boolean }) {
   const headers = ref<DataTableHeader[][]>([])
   const columns = ref<DataTableHeader[]>([])
 
@@ -175,7 +185,19 @@ export const useHeaders = (props: { headers: DataTableHeader[] | DataTableHeader
     immediate: true,
   })
 
-  return { headers, columns }
+  const data = { headers, columns }
+
+  provide(VDataTableHeadersSymbol, data)
+
+  return data
+}
+
+export function useHeaders () {
+  const data = inject(VDataTableHeadersSymbol)
+
+  if (!data) throw new Error('Missing headers!')
+
+  return data
 }
 
 function sortItems<T extends any, K extends keyof T> (
@@ -231,14 +253,19 @@ function sortItems<T extends any, K extends keyof T> (
   })
 }
 
+export const VDataTableSortSymbol: InjectionKey<{
+  sortBy: Ref<readonly SortItem[]>
+  toggleSort: (key: string) => void
+}> = Symbol.for('vuetify:data-table-sort')
+
 export type SortItem = { key: string, order: 'asc' | 'desc' }
 
-export const useSort = (props: {
+export function createSort (props: {
   sortBy: SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort?: boolean
   multiSort?: boolean
-}) => {
+}) {
   const sortBy = useProxiedModel(props, 'sortBy')
 
   const toggleSort = (key: string) => {
@@ -261,7 +288,19 @@ export const useSort = (props: {
     sortBy.value = newSortBy
   }
 
-  return { sortBy, toggleSort }
+  const data = { sortBy, toggleSort }
+
+  provide(VDataTableSortSymbol, data)
+
+  return data
+}
+
+export function useSort () {
+  const data = inject(VDataTableSortSymbol)
+
+  if (!data) throw new Error('Missing sort!')
+
+  return data
 }
 
 export const useSortedItems = (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>) => {
@@ -352,7 +391,16 @@ export const useOptions = ({
   }, { deep: true })
 }
 
-export const useGroupBy = (items: Ref<DataTableItem[]>, groupBy: Ref<string | undefined>) => {
+export const VDataTableGroupSymbol: InjectionKey<{
+  flatItems: Ref<(DataTableItem | GroupHeaderItem)[]>
+  groupedItems: Ref<Map<string, DataTableItem[]>>
+  numGroups: Ref<number>
+  numHiddenItems: Ref<number>
+  opened: Ref<Set<string>>
+  toggleGroup: (group: string, value?: boolean) => void
+}> = Symbol.for('vuetify:data-table-group')
+
+export function createGroup (items: Ref<DataTableItem[]>, groupBy: Ref<string | undefined>) {
   const opened = ref(new Set<string>())
 
   const groupedItems = computed(() => {
@@ -402,12 +450,33 @@ export const useGroupBy = (items: Ref<DataTableItem[]>, groupBy: Ref<string | un
     return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
   })
 
-  return { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
+  const data = { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems, opened }
+
+  provide(VDataTableGroupSymbol, data)
+
+  return data
 }
+
+export function useGroup () {
+  const data = inject(VDataTableGroupSymbol)
+
+  if (!data) throw new Error('Missing group!')
+
+  return data
+}
+
+export const VDataTableSelectionSymbol: InjectionKey<{
+  toggleSelect: (item: DataTableItem) => void
+  select: (item: DataTableItem, value: boolean) => void
+  selectAll: (value: boolean) => void
+  isSelected: (item: DataTableItem) => boolean
+  someSelected: Ref<boolean>
+  allSelected: Ref<boolean>
+}> = Symbol.for('vuetify:data-table-selection')
 
 type SelectionProps = Pick<ItemProps, 'itemValue'> & { modelValue: any[], 'onUpdate:modelValue': (value: any[]) => void }
 
-export const useSelection = (props: SelectionProps, items: Ref<DataTableItem[]>) => {
+export function createSelection (props: SelectionProps, items: Ref<DataTableItem[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {
@@ -434,5 +503,17 @@ export const useSelection = (props: SelectionProps, items: Ref<DataTableItem[]>)
   const someSelected = computed(() => selected.value.size > 0)
   const allSelected = computed(() => items.value.every(item => isSelected(item)))
 
-  return { toggleSelect, select, selectAll, isSelected, someSelected, allSelected }
+  const data = { toggleSelect, select, selectAll, isSelected, someSelected, allSelected }
+
+  provide(VDataTableSelectionSymbol, data)
+
+  return data
+}
+
+export function useSelection () {
+  const data = inject(VDataTableSelectionSymbol)
+
+  if (!data) throw new Error('Missing selection!')
+
+  return data
 }

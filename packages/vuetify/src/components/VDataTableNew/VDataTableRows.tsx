@@ -16,10 +16,6 @@ export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
 
   props: {
-    columns: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
     items: {
       type: Array as PropType<InternalDataTableItem[]>,
       required: true,
@@ -28,7 +24,7 @@ export const VDataTableRows = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { expanded, expand } = useExpanded()
+    const { expanded, expand, expandOnClick } = useExpanded()
 
     useRender(() => {
       return (
@@ -39,7 +35,6 @@ export const VDataTableRows = defineComponent({
                 <VDataTableGroupHeaderRow
                   key={ `group-header_${item.groupBy}_${item.groupByValue}` }
                   item={ item }
-                  columns={ props.columns }
                   v-slots={ slots }
                 />
               )
@@ -50,12 +45,11 @@ export const VDataTableRows = defineComponent({
                 <>
                   <VDataTableRow
                     key={ `item_${item.value}` }
-                    onClick={ slots['expanded-row'] ? () => expand(item, !expanded.value.has(item.value)) : undefined }
+                    onClick={ expandOnClick.value ? () => expand(item, !expanded.value.has(item.value)) : undefined }
                     item={ item }
-                    columns={ props.columns }
                     v-slots={ slots }
                   />
-                  { expanded.value.has(item.value) && slots['expanded-row']?.({ item }) }
+                  { expanded.value.has(item.value) && slots['expanded-row']?.({ item, columns: props.columns }) }
                 </>
               )
             }

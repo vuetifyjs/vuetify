@@ -11,6 +11,10 @@ import { VDataTableFooter } from './VDataTableFooter'
 import { makeItemsProps } from '@/composables/items'
 import {
   createExpanded,
+  createGroup,
+  createHeaders,
+  createSelection,
+  createSort,
   useDataTableItems,
   useGroupBy,
   useHeaders,
@@ -70,6 +74,7 @@ export const VDataTable = defineComponent({
       type: Number,
       default: 10,
     },
+    expandOnClick: Boolean,
   },
 
   emits: {
@@ -81,33 +86,21 @@ export const VDataTable = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { headers, columns } = useHeaders(props)
+    const { headers, columns } = createHeaders(props)
 
     const { items } = useDataTableItems(props, columns)
 
-    const { sortBy, toggleSort } = useSort(props)
+    const { sortBy } = createSort(props)
     const { sortedItems } = useSortedItems(items, sortBy)
 
     const { page, itemsPerPage, startIndex, stopIndex, itemsLength, pageCount } = usePagination(props)
     const { paginatedItems } = usePaginatedItems(sortedItems, startIndex, stopIndex, itemsPerPage)
 
-    const { flatItems, toggleGroup, opened } = useGroupBy(paginatedItems, toRef(props, 'groupBy'))
+    const { flatItems } = createGroup(paginatedItems, toRef(props, 'groupBy'))
 
-    const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = useSelection(props, paginatedItems)
+    createSelection(props, paginatedItems)
 
-    const { expanded } = createExpanded()
-
-    provide('v-data-table', {
-      toggleGroup,
-      toggleSort,
-      sortBy,
-      opened,
-      toggleSelect,
-      isSelected,
-      someSelected,
-      allSelected,
-      selectAll,
-    })
+    createExpanded(props)
 
     useOptions({
       page,
@@ -144,7 +137,6 @@ export const VDataTable = defineComponent({
               <tbody>
                 { slots.body ? slots.body() : (
                   <VDataTableRows
-                    columns={ columns.value }
                     items={ flatItems.value }
                     v-slots={ slots }
                   />

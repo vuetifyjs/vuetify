@@ -3,15 +3,15 @@ import { VCheckbox } from '../VCheckbox'
 
 // Composables
 import { VDataTableColumn } from './VDataTableColumn'
+import { useHeaders, useSelection } from './composables'
 
 // Utilities
-import { computed, inject } from 'vue'
+import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
-import type { DataTableItem } from './composables'
 import type { PropType } from 'vue'
-import type { DataTableHeader } from './types'
+import type { DataTableItem } from './composables'
 
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
@@ -22,17 +22,14 @@ export const VDataTableRow = defineComponent({
       required: true,
     },
     rowHeight: [String, Number],
-    columns: {
-      type: Array as PropType<DataTableHeader[]>,
-      default: () => ([]),
-    },
   },
 
   setup (props, { emit, slots }) {
-    const { isSelected, toggleSelect } = inject('v-data-table', {} as any)
+    const { isSelected, toggleSelect } = useSelection()
+    const { columns } = useHeaders()
 
     const fixedOffsets = computed(() => {
-      return props.columns.reduce((offsets, column) => {
+      return columns.value.reduce((offsets, column) => {
         return [...offsets, offsets[offsets.length - 1] + (column.width ?? 0)]
       }, [0])
     })
@@ -43,7 +40,7 @@ export const VDataTableRow = defineComponent({
           'v-data-table__tr',
         ]}
       >
-        { props.columns.map((column, i) => (
+        { columns.value.map((column, i) => (
           <VDataTableColumn
             fixed={ column.fixed }
             fixedOffset={ column.fixed ? fixedOffsets.value[i] : undefined }

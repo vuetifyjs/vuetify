@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, provide, ref, toRef } from 'vue'
-import { createExpanded, useGroupBy, useHeaders, useOptions, useSelection, useSort, useSortedItems, useVirtual } from './composables'
+import { createExpanded, createGroup, createHeaders, createSelection, createSort, useOptions, useSortedItems, useVirtual } from './composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -20,6 +20,7 @@ export const VDataTableVirtual = defineComponent({
     },
     showScrollingRow: Boolean,
     ...makeVDataTableProps(),
+    expandOnClick: Boolean,
   },
 
   emits: {
@@ -29,12 +30,12 @@ export const VDataTableVirtual = defineComponent({
 
   setup (props, { slots }) {
     const allItems = toRef(props, 'items')
-    const { expanded } = createExpanded()
+    const { expanded } = createExpanded(props)
 
-    const { headers, columns } = useHeaders(props)
-    const { sortBy, toggleSort } = useSort(props)
+    const { headers, columns } = createHeaders(props)
+    const { sortBy, toggleSort } = createSort(props)
     const { sortedItems } = useSortedItems(allItems, sortBy)
-    const { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems } = useGroupBy(sortedItems, toRef(props, 'groupBy'))
+    const { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems } = createGroup(sortedItems, toRef(props, 'groupBy'))
 
     const {
       containerRef,
@@ -46,7 +47,7 @@ export const VDataTableVirtual = defineComponent({
       beforeHeight,
     } = useVirtual(props, computed(() => flatItems.value.length + expanded.value.size))
 
-    const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = useSelection(props, allItems)
+    const { toggleSelect, selectAll, isSelected, someSelected, allSelected } = createSelection(props, allItems)
 
     const visibleItems = computed(() => {
       return flatItems.value.slice(startIndex.value, stopIndex.value)
