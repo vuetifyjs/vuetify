@@ -7,6 +7,8 @@
       v-if="href"
       :href="href"
       class="text-decoration-none text-right text-md-left"
+      style="user-select: none"
+      aria-hidden="true"
       @click="onClick"
     >
       #
