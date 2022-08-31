@@ -18,8 +18,12 @@
 
   @include avatar-sizes($avatar-sizes)
   @include avatar-density(('height', 'width'), $avatar-density)
+  @include tools.elevation($avatar-elevation)
   @include tools.rounded($avatar-border-radius)
   @include tools.theme($avatar-theme...)
+
+  &--flat
+    box-shadow: none
 
   &--rounded
     @include tools.rounded($avatar-rounded-border-radius)
