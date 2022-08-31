@@ -118,6 +118,7 @@ export interface DataItemProps {
 export interface DataTableItemProps extends DataItemProps {
   headers: DataTableHeader[]
   on: { [key: string]: Function | Function[] }
+  attrs: object;
 }
 
 export interface DataScopeProps {

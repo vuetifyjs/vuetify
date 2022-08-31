@@ -232,9 +232,14 @@ export default mixins(
 
       return Object.assign(props, {
         headers: this.computedHeaders,
+        attrs: {
+          class: {
+            'v-data-table__selected': props.isSelected,
+          },
+        },
         on: {
-        // TODO: for click, the first argument should be the event, and the second argument should be data,
-        // but this is a breaking change so it's for v3
+          // TODO: for click, the first argument should be the event, and the second argument should be data,
+          // but this is a breaking change so it's for v3
           click: () => this.$emit('click:row', item, props),
           contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, props),
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, props),
