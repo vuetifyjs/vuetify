@@ -50,10 +50,12 @@ function addHeadingRules (md: MarkdownIt) {
     const next = tokens[idx + 1]
     const children = next ? next.children : []
     const [, href] = children?.[0].attrs?.[1] ?? []
-    const content = children?.[1].content
+
+    if (next?.children) {
+      next.children = next.children.filter(token => !['link_open', 'link_close'].includes(token.type))
+    }
 
     tokens[idx].tag = 'app-heading'
-    tokens[idx].attrSet('content', content ?? '')
     tokens[idx].attrSet('href', href ?? '')
     tokens[idx].attrSet('level', level.toString())
 

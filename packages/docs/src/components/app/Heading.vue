@@ -12,7 +12,9 @@
       #
     </a>
 
-    {{ content }}
+    <slot>
+      {{ content }}
+    </slot>
   </component>
 </template>
 
