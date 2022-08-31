@@ -23,6 +23,12 @@
     grid-column-gap: $timeline-item-padding
     width: 100%
 
+    @include timeline-first-item()
+      padding-inline-start: $timeline-item-padding
+
+    @include timeline-last-item()
+        padding-inline-end: $timeline-item-padding
+
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
         grid-row: 3
@@ -46,6 +52,12 @@
     grid-template-columns: $timeline-item-grid-template
     grid-row-gap: $timeline-item-padding
     height: 100%
+
+    @include timeline-first-item()
+        padding-block-start: $timeline-item-padding
+
+    @include timeline-last-item()
+        padding-block-end: $timeline-item-padding
 
     .v-timeline-item:nth-child(2n)
       .v-timeline-item__body
@@ -392,16 +404,13 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
     .v-timeline-divider__after
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
-.v-timeline:not(.v-timeline--truncate-line-start)
   @include vertical(true)
-    .v-timeline-item:first-child
-      .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
-        padding-block-start: $timeline-item-padding
+    @include timeline-first-item()
+      padding-block-start: 0
 
   @include horizontal(true)
-    .v-timeline-item:first-child
-      .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
-        padding-inline-start: $timeline-item-padding
+    @include timeline-first-item()
+      padding-inline-start: 0
 
 // Truncate end
 .v-timeline--truncate-line-end
@@ -409,13 +418,10 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
     .v-timeline-divider__before
       --v-timeline-line-size-offset: #{math.div($timeline-item-padding, 2)}
 
-.v-timeline:not(.v-timeline--truncate-line-end)
   @include vertical(true)
-    .v-timeline-item:last-child
-      .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
-          padding-block-end: $timeline-item-padding
+    @include timeline-last-item()
+      padding-block-end: 0
 
   @include horizontal(true)
-    .v-timeline-item:last-child
-      .v-timeline-divider, .v-timeline-item__body, .v-timeline-item__opposite
-        padding-inline-end: $timeline-item-padding
+    @include timeline-last-item()
+      padding-inline-end: 0
