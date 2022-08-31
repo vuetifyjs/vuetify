@@ -1,42 +1,38 @@
 <template>
   <usage-example
     v-model="model"
+    v-model:tune-value="tuneModel"
     :options="options"
+    :tune-options="tuneOptions"
     name="v-alert"
   >
-    <v-defaults-provider
-      :defaults="{
-        VAlert: {
-          border: model === 'border',
-          variant: model === 'elevated' ? 'elevated' : undefined,
-        }
-      }"
+    <v-alert
+      :variant="model.prop === 'variant' ? model.value : undefined"
+      :type="tuneModel.type"
+      :title="tuneModel.title ? 'Alert title' : undefined"
+      :icon="tuneModel.icon ? 'mdi-vuetify' : undefined"
     >
-      <v-alert
-        v-model="alert"
-        icon="mdi-vuetify"
-        title="I'm an Alert Usage Example"
-        text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Aliquam earum, est illo quae fugit voluptatum fuga magni hic maiores ipsa, illum, tenetur accusamus cupiditate? Dolorem ad nisi eveniet officia voluptatibus."
-      ></v-alert>
-    </v-defaults-provider>
-
-    <div
-      v-if="!alert"
-      class="d-flex justify-center"
-    >
-      <v-btn @click="alert= true">Reset Alert</v-btn>
-    </div>
+      <v-alert-text>
+        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+      </v-alert-text>
+    </v-alert>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VAlertUsageExample',
+<script setup>
+  // Utilities
+  import { ref } from 'vue'
 
-    data: () => ({
-      alert: true,
-      model: 'default',
-      options: ['elevated', 'border'],
-    }),
-  }
+  const model = ref('default')
+  const options = [
+    { label: 'Outlined', prop: 'variant', value: 'outlined' },
+  ]
+  const tuneModel = ref({
+    type: 'default',
+  })
+  const tuneOptions = [
+    { type: 'checkbox', prop: 'title', value: 'Alert title' },
+    { label: 'Custom icon', type: 'checkbox', prop: 'icon', value: 'mdi-vuetify' },
+    { type: 'select', prop: 'type', items: ['default', 'success', 'info', 'warning', 'error'] },
+  ]
 </script>

@@ -1,59 +1,48 @@
 <template>
   <usage-example
     v-model="model"
+    v-model:tune-value="tuneModel"
+    :options="options"
+    :tune-options="tuneOptions"
     name="v-tooltip"
   >
-    <v-defaults-provider
-      :defaults="{
-        VTooltip: {}
-      }"
-    >
-      <div class="text-center d-flex align-center justify-space-around">
-        <v-tooltip bottom>
-          <template v-slot:activator="{ props }">
-            <v-btn
-              color="primary"
-              dark
-              v-bind="props"
-            >
-              Button
-            </v-btn>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
+    <div class="text-center">
+      <v-tooltip
+        v-model="tuneModel['model-value']"
+        :text="tuneModel.text"
+        :inline="model.prop === 'inline'"
+        :location="tuneModel.location"
+      >
+        <template v-slot:activator="{ props }">
+          <v-btn v-bind="props">Tooltip</v-btn>
+        </template>
 
-        <v-tooltip bottom>
-          <template v-slot:activator="{ props }">
-            <v-icon
-              color="primary"
-              dark
-              v-bind="props"
-            >
-              mdi-home
-            </v-icon>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
+        {{ tuneModel.text }}
+      </v-tooltip>
+    </div>
 
-        <v-tooltip bottom>
-          <template v-slot:activator="{ props }">
-            <span
-              v-bind="props"
-            >This text has a tooltip</span>
-          </template>
-          <span>Tooltip</span>
-        </v-tooltip>
-      </div>
-    </v-defaults-provider>
+    <template v-slot:example-slot>
+      {{ `
+  <template v-slot:activator="{ props }">
+    <v-btn v-bind="props">Tooltip</v-btn>
+  </template>` }}
+    </template>
   </usage-example>
 </template>
-<script>
-  export default {
-    name: 'TooltipUsageExample',
 
-    data: () => ({
-      model: 'default',
-      options: ['label', 'outlined'],
-    }),
-  }
+<script setup>
+  // Utilities
+  import { ref } from 'vue'
+
+  const model = ref('default')
+  const options = [
+  ]
+  const tuneModel = ref({
+    location: 'default',
+    text: 'Tooltip',
+  })
+  const tuneOptions = [
+    { type: 'select', prop: 'location', items: ['top', 'end', 'bottom', 'start'] },
+    { type: 'text-field', prop: 'text' },
+  ]
 </script>

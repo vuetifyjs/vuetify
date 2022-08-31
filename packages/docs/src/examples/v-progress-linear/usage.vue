@@ -1,26 +1,38 @@
 <template>
   <usage-example
     v-model="model"
+    v-model:tune-value="tuneModel"
+    :options="options"
+    :tune-options="tuneOptions"
     name="v-progress-linear"
   >
-    <v-defaults-provider
-      :defaults="{
-        VProgressLinear: {
-
-        }
-      }"
-    >
-      <v-progress-linear model-value="15"></v-progress-linear>
-    </v-defaults-provider>
+    <div class="text-center">
+      <v-progress-linear
+        v-model="tuneModel.value"
+        :color="tuneModel['color'] ? 'blue-lighten-3' : undefined"
+        :indeterminate="model.prop === 'indeterminate'"
+        :height="tuneModel.height"
+      ></v-progress-linear>
+    </div>
   </usage-example>
 </template>
 <script>
   export default {
-    name: 'ProgressUsageExample',
+    name: 'ProgresslinearExample',
 
     data: () => ({
       model: 'default',
-      line: 15,
+      options: [
+        { prop: 'indeterminate', value: false },
+      ],
+      tuneModel: {
+        color: false,
+      },
+      tuneOptions: [
+        { type: 'checkbox', prop: 'color', value: 'blue-lighten-3' },
+        { type: 'slider', prop: 'height', min: 4, max: 12 },
+        { type: 'slider', prop: 'value' },
+      ],
     }),
   }
 </script>

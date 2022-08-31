@@ -27,9 +27,9 @@
     data: () => ({
       model: 'default',
       options: [
-        { prop: 'variant', value: 'outlined' },
-        { prop: 'variant', value: 'solo' },
-        { prop: 'variant', value: 'underlined' },
+        { label: 'Outlined', prop: 'variant', value: 'outlined' },
+        { label: 'Solo', prop: 'variant', value: 'solo' },
+        { label: 'Underlined', prop: 'variant', value: 'underlined' },
       ],
       tuneModel: {
         label: 'Text field',
