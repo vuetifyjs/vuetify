@@ -77,10 +77,11 @@
         > tr
           > td,
           > th
-            padding: 0 8px
+            padding: $table-column-padding
             transition: height settings.$standard-easing
 
           > th
+            font-weight: $table-header-font-weight
             user-select: none
 
             @include tools.ltr()

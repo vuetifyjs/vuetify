@@ -127,9 +127,10 @@ export const VDataTable = defineComponent({
         height={ props.height }
       >
         {{
+          top: slots.top,
           default: slots.default ? slots.default() : () => (
             <>
-              <thead class="v-data-table__thead">
+              <thead>
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     columns={ columns.value }
@@ -140,7 +141,7 @@ export const VDataTable = defineComponent({
                 ) }
               </thead>
               { slots.thead?.() }
-              <tbody class="v-data-table__tbody">
+              <tbody>
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     columns={ columns.value }

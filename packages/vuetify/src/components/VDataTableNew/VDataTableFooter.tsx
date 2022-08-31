@@ -73,7 +73,7 @@ export const VDataTableFooter = defineComponent({
             modelValue={ props.itemsPerPage }
             onUpdate:modelValue={ v => emit('update:itemsPerPage', v)}
             density="compact"
-            variant="underlined"
+            variant="outlined"
             hide-details
           />
         </div>
@@ -94,7 +94,7 @@ export const VDataTableFooter = defineComponent({
             disabled={ props.page === 1 }
           />
           { props.showCurrentPage && (
-            <div>props.page</div>
+            <div key="page">props.page</div>
           ) }
           <VBtn
             icon={ props.nextIcon }

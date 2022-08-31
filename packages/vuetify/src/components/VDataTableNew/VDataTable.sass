@@ -14,30 +14,29 @@
   &--focus
     border: 1px dotted black
 
-.v-data-table__th
-  align-items: center
-  background: rgb(var(--v-theme-surface))
-
 .v-data-table
   .v-table__wrapper
     > table
       > thead
         > tr
-          th.v-data-table__th--sortable:hover
-            cursor: pointer
-            color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+          > td
+            background: rgb(var(--v-theme-surface))
 
-          th:not(.v-data-table__th--sorted)
-            .v-data-table-header__sort-icon
-              opacity: 0
+          > th
+            align-items: center
+            background: rgb(var(--v-theme-surface))
 
-            &:hover
+          > th.v-data-table__th--sortable:hover
+              cursor: pointer
+              color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+          > th:not(.v-data-table__th--sorted)
               .v-data-table-header__sort-icon
-                opacity: 1
+                opacity: 0
 
-.v-data-table__td
-  height: 52px
-  background: rgb(var(--v-theme-surface))
+              &:hover
+                .v-data-table-header__sort-icon
+                  opacity: 0.5
 
 .v-data-table-column--fixed
   position: sticky
