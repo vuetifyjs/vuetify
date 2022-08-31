@@ -73,12 +73,12 @@
         permanent
         name="tune"
         location="right"
-        width="200"
+        width="250"
       >
         <v-list>
           <v-list-subheader>Configuration</v-list-subheader>
 
-          <div class="px-2">
+          <div class="px-4">
             <v-defaults-provider
               :defaults="{
                 global: { density: 'compact' }
@@ -90,7 +90,7 @@
                   v-model="tuneModel[option.prop]"
                   :input-value="option.value"
                   :label="option.label ?? option.prop.replace('-', ' ')"
-                  class="text-capitalize mb-2"
+                  class="text-capitalize mb-2 d-flex"
                 />
 
                 <v-text-field
@@ -109,6 +109,21 @@
                   class="text-capitalize mb-4"
                   hide-details
                 />
+
+                <v-slider
+                  v-if="option.type === 'slider'"
+                  v-model="tuneModel[option.prop]"
+                  class="text-capitalize mb-4"
+                  hide-details
+                  :min="option.min"
+                  :max="option.max"
+                  step="1"
+                  thumb-label
+                >
+                  <template #prepend>
+                    <v-label>{{ option.label ?? option.prop.replace('-', ' ') }}</v-label>
+                  </template>
+                </v-slider>
               </template>
             </v-defaults-provider>
           </div>
@@ -159,7 +174,7 @@
       'update:tuneValue': val => val,
     },
 
-    setup (props, { emit }) {
+    setup (props, { emit, slots }) {
       const tune = ref(true)
       const code = ref(true)
       const model = computed({
@@ -185,7 +200,7 @@
         for (const toption of props.tuneOptions) {
           const val = tuneModel.value[toption.prop]
 
-          if (!val) continue
+          if (!val || !toption.prop || toption.showProp === false) continue
 
           if (toption.type === 'checkbox') {
             attributeArray.push(
@@ -200,6 +215,14 @@
           }
 
           if (toption.type === 'select') {
+            if (val === 'default') continue
+
+            attributeArray.push(
+              `${toption.prop}="${val}"`
+            )
+          }
+
+          if (toption.type === 'slider') {
             if (val === 'default') continue
 
             attributeArray.push(
@@ -222,7 +245,8 @@
 
         attributeArray = attributeArray.sort()
         const indent = attributeArray.length ? '\r  ' : ''
-        const tail = `${attributeArray.length ? '\r' : ''}></${props.name}>`
+        const slot = slots['example-slot'] ? `\r${slots['example-slot']()[0].children}\r` : ''
+        const tail = `${attributeArray.length ? '\r' : ''}>${slot}</${props.name}>`
 
         return `<${props.name}${indent}${attributeArray.join('\r  ')}${tail}`
       })
