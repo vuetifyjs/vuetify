@@ -1,16 +1,6 @@
 <template>
   <v-app>
-    <v-system-bar color="error" window>
-      <v-icon icon="$warning" class="me-2" />
-
-      This is the Vuetify 3 documentation, examples and information may be broken or outdated.
-
-      <v-spacer />
-
-      <div class="bg-white px-2 rounded d-none d-md-block">
-        <app-link href="https://vuetifyjs.com/">Vuetify 2 documentation</app-link>
-      </div>
-    </v-system-bar>
+    <app-system-bar />
 
     <app-settings-drawer />
 
@@ -35,11 +25,12 @@
   </v-app>
 </template>
 
-<script lang="ts">
+<script setup>
   // Components
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
+  import AppSystemBar from '@/components/app/SystemBar.vue'
   import AppToc from '@/components/app/Toc.vue'
   import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
 
@@ -48,30 +39,16 @@
   import { useAppStore } from '@/store/app'
 
   // Utilities
-  import { computed, defineComponent, onBeforeMount } from 'vue'
+  import { computed, onBeforeMount } from 'vue'
 
-  export default defineComponent({
-    name: 'DefaultLayout',
+  const app = useAppStore()
+  const route = useRoute()
 
-    components: {
-      AppBar,
-      AppDrawer,
-      AppSettingsDrawer,
-      AppToc,
-      AppPwaSnackbar,
-    },
+  const isApi = computed(() => route.name?.toString().startsWith('api-'))
+  const style = { maxWidth: isApi.value ? '1368px' : '960px' }
 
-    setup () {
-      const app = useAppStore()
-      const route = useRoute()
-      const isApi = computed(() => route.name?.toString().startsWith('api-'))
-      const style = { maxWidth: isApi.value ? '1368px' : '960px' }
-
-      onBeforeMount(() => {
-        app.drawer = null
-      })
-
-      return { isApi, style }
-    },
+  onBeforeMount(() => {
+    app.drawer = null
   })
+
 </script>
