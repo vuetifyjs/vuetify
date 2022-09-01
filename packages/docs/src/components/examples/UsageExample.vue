@@ -9,8 +9,8 @@
       <v-btn-toggle
         v-model="model"
         class="py-2"
-        mandatory
         color="primary"
+        mandatory
       >
         <v-btn value="default" rounded="tl">Default</v-btn>
 
@@ -20,20 +20,20 @@
           :value="option"
           class="text-uppercase"
         >
-          {{ option.label ?? option.prop.replace('-', ' ') }}
+          {{ option }}
         </v-btn>
       </v-btn-toggle>
 
       <v-spacer />
 
       <v-tooltip location="bottom">
-        <template #activator="{ props }">
+        <template #activator="{ props: activatorProps }">
           <v-btn
             icon="mdi-code-tags"
             class="mr-1 text-medium-emphasis"
             density="comfortable"
-            v-bind="props"
-            @click="code = !code"
+            v-bind="activatorProps"
+            @click="show = !show"
           />
         </template>
 
@@ -59,7 +59,7 @@
       <v-main>
         <v-sheet
           class="pa-14 d-flex align-center"
-          min-height="250"
+          min-height="300"
           rounded="0"
         >
           <div class="flex-fill">
@@ -69,7 +69,7 @@
       </v-main>
 
       <v-navigation-drawer
-        :model-value="tune"
+        v-model="tune"
         permanent
         name="tune"
         location="right"
@@ -78,53 +78,16 @@
         <v-list>
           <v-list-subheader>Configuration</v-list-subheader>
 
-          <div class="px-4">
+          <div class="px-4 usage-example">
             <v-defaults-provider
               :defaults="{
-                global: { density: 'compact' }
+                global: {
+                  density: 'compact',
+                  hideDetails: true,
+                }
               }"
             >
-              <template v-for="(option, i) of tuneOptions" :key="i">
-                <v-checkbox-btn
-                  v-if="option.type === 'checkbox'"
-                  v-model="tuneModel[option.prop]"
-                  :input-value="option.value"
-                  :label="option.label ?? option.prop.replace('-', ' ')"
-                  class="text-capitalize mb-2 d-flex"
-                />
-
-                <v-text-field
-                  v-if="option.type === 'text-field'"
-                  v-model="tuneModel[option.prop]"
-                  :label="option.label ?? option.prop.replace('-', ' ')"
-                  class="text-capitalize mb-4"
-                  hide-details
-                />
-
-                <v-select
-                  v-if="option.type === 'select'"
-                  v-model="tuneModel[option.prop]"
-                  :items="option.items"
-                  :label="option.label ?? option.prop.replace('-', ' ')"
-                  class="text-capitalize mb-4"
-                  hide-details
-                />
-
-                <v-slider
-                  v-if="option.type === 'slider'"
-                  v-model="tuneModel[option.prop]"
-                  class="text-capitalize mb-4"
-                  hide-details
-                  :min="option.min"
-                  :max="option.max"
-                  step="1"
-                  thumb-label
-                >
-                  <template #prepend>
-                    <v-label>{{ option.label ?? option.prop.replace('-', ' ') }}</v-label>
-                  </template>
-                </v-slider>
-              </template>
+              <slot name="configuration" />
             </v-defaults-provider>
           </div>
         </v-list>
@@ -132,132 +95,51 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="code">
+      <div v-if="show">
         <div class="pa-3">
-          <app-markup :code="formatAttributes" />
+          <app-markup :code="code" />
         </div>
       </div>
     </v-expand-transition>
   </div>
 </template>
 
-<script>
-  // Utilities
+<script setup>
   import { computed, ref } from 'vue'
 
-  export default {
-    name: 'UsageExample',
-
-    props: {
-      name: String,
-      options: {
-        type: Array,
-        default: () => ([]),
-      },
-      modelValue: {
-        type: [Object, String],
-        default: () => ({}),
-        required: true,
-      },
-      tuneOptions: {
-        type: Object,
-        default: () => ({}),
-      },
-      tuneValue: {
-        type: Object,
-        default: () => ({}),
-      },
+  const props = defineProps({
+    name: String,
+    code: String,
+    options: {
+      type: Array,
+      default: () => ([]),
     },
-
-    emits: {
-      'update:modelValue': val => val,
-      'update:tuneValue': val => val,
+    modelValue: {
+      type: [Object, String],
+      default: () => ({}),
+      required: true,
     },
+  })
 
-    setup (props, { emit, slots }) {
-      const tune = ref(true)
-      const code = ref(true)
-      const model = computed({
-        get () {
-          return props.modelValue
-        },
-        set (val) {
-          emit('update:modelValue', val)
-        },
-      })
-      const tuneModel = computed({
-        get () {
-          return props.tuneValue
-        },
-        set (val) {
-          emit('update:tuneValue', val)
-        },
-      })
+  const emit = defineEmits({
+    'update:modelValue': val => val,
+    'update:tuneValue': val => val,
+  })
 
-      const formatAttributes = computed(() => {
-        let attributeArray = []
-
-        for (const toption of props.tuneOptions) {
-          const val = tuneModel.value[toption.prop]
-
-          if (!val || !toption.prop || toption.showProp === false) continue
-
-          if (toption.type === 'checkbox') {
-            attributeArray.push(
-              toption.value
-                ? `${toption.prop}="${toption.value}"`
-                : toption.prop
-            )
-          }
-
-          if (toption.type === 'text-field') {
-            attributeArray.push(`${toption.prop}="${val}"`)
-          }
-
-          if (toption.type === 'select') {
-            if (val === 'default') continue
-
-            attributeArray.push(
-              `${toption.prop}="${val}"`
-            )
-          }
-
-          if (toption.type === 'slider') {
-            if (val === 'default') continue
-
-            attributeArray.push(
-              `${toption.prop}="${val}"`
-            )
-          }
-        }
-
-        const option = props.options.find(o => {
-          return o.value === model.value.value
-        })
-
-        if (option) {
-          attributeArray.push(
-            option.value
-              ? `${option.prop}="${option.value}"`
-              : option.prop
-          )
-        }
-
-        attributeArray = attributeArray.sort()
-        const indent = attributeArray.length ? '\r  ' : ''
-        const slot = slots['example-slot'] ? `\r${slots['example-slot']()[0].children}\r` : ''
-        const tail = `${attributeArray.length ? '\r' : ''}>${slot}</${props.name}>`
-
-        return `<${props.name}${indent}${attributeArray.join('\r  ')}${tail}`
-      })
-
-      return {
-        formatAttributes,
-        model,
-        tuneModel,
-        tune,
-        code,
-      }
+  const tune = ref(true)
+  const show = ref(true)
+  const model = computed({
+    get () {
+      return props.modelValue
     },
-  }
+    set (val) {
+      emit('update:modelValue', val)
+    },
+  })
 </script>
+
+<style lang="sass">
+  .usage-example
+    .v-text-field
+      margin-bottom: 8px
+</style>

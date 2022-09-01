@@ -116,3 +116,23 @@ export function getMatchMedia () {
 
   return window.matchMedia('(prefers-color-scheme: dark)')
 }
+
+export function propsToString (props: Record<string, any>, indent = 1) {
+  const displayedProps =
+    Object.entries(props)
+      .filter(([k, v]) => v !== undefined)
+      .map(([k, v]) => {
+        if (v === true) return k
+
+        return `${k}="${v}"`
+      })
+
+  const propsString = displayedProps.join(' ')
+
+  const shouldWrap = propsString.length > 50
+  if (!shouldWrap) {
+    return ' ' + propsString
+  } else {
+    return '\n' + displayedProps.map(v => '  '.repeat(indent) + v).join('\n') + '\n'
+  }
+}
