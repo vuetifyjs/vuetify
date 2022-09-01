@@ -33,6 +33,11 @@ export const VTimeline = defineComponent({
       default: 'vertical',
       validator: (v: any) => ['vertical', 'horizontal'].includes(v),
     } as Prop<TimelineDirection>,
+    justify: {
+      type: String,
+      default: 'auto',
+      validator: (v: any) => ['auto', 'center'].includes(v),
+    },
     side: {
       type: String,
       validator: (v: any) => v == null || ['start', 'end'].includes(v),
@@ -96,6 +101,7 @@ export const VTimeline = defineComponent({
           'v-timeline',
           `v-timeline--${props.direction}`,
           `v-timeline--align-${props.align}`,
+          `v-timeline--justify-${props.justify}`,
           truncateClasses.value,
           {
             'v-timeline--inset-line': !!props.lineInset,
