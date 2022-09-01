@@ -24,7 +24,7 @@ import {
 } from './composables'
 
 // Utilities
-import { provide, toRef } from 'vue'
+import { computed, provide, toRef } from 'vue'
 import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Typse
@@ -95,7 +95,7 @@ export const VDataTable = defineComponent({
     const { items } = useDataTableItems(props, columns)
 
     const { sortBy } = createSort(props)
-    const { sortByWithGroups, opened } = createGroupBy(props, groupBy, sortBy)
+    const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
 
     const { sortedItems } = useSortedItems(items, sortByWithGroups)
 
@@ -104,7 +104,9 @@ export const VDataTable = defineComponent({
     const { page, itemsPerPage, startIndex, stopIndex, itemsLength, pageCount } = usePagination(props, flatItems)
     const { paginatedItems } = usePaginatedItems(flatItems, startIndex, stopIndex, itemsPerPage)
 
-    createSelection(props, paginatedItems)
+    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
+
+    createSelection(props, paginatedItemsWithoutGroups)
 
     createExpanded(props)
 

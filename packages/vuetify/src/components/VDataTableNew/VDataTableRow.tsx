@@ -50,7 +50,7 @@ export const VDataTableRow = defineComponent({
             {
               slots[`item.${column.id}`]?.() ?? (column.id === 'data-table-select' ? (
                 <VCheckboxBtn
-                  modelValue={ isSelected(props.item) }
+                  modelValue={ isSelected([props.item]) }
                   onClick={ () => toggleSelect(props.item) }
                 />
               ) : props.item.columns[column.id])

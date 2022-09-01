@@ -335,11 +335,23 @@ export const usePagination = (props: PaginationProps, items: Ref<any[]>) => {
   const page = useProxiedModel(props, 'page')
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
 
-  const startIndex = computed(() => itemsPerPage.value * (page.value - 1))
-  const stopIndex = computed(() => Math.min(items.value.length, startIndex.value + itemsPerPage.value))
+  const startIndex = computed(() => {
+    if (itemsPerPage.value === -1) return 0
+
+    return itemsPerPage.value * (page.value - 1)
+  })
+  const stopIndex = computed(() => {
+    if (itemsPerPage.value === -1) return items.value.length
+
+    return Math.min(items.value.length, startIndex.value + itemsPerPage.value)
+  })
 
   const itemsLength = computed(() => props.itemsLength ?? items.value.length)
-  const pageCount = computed(() => Math.ceil(itemsLength.value / itemsPerPage.value))
+  const pageCount = computed(() => {
+    if (itemsPerPage.value === -1) return 1
+
+    return Math.ceil(itemsLength.value / itemsPerPage.value)
+  })
 
   return { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
 }
@@ -411,6 +423,7 @@ export const VDataTableGroupSymbol: InjectionKey<{
   toggleGroup: (group: string, value?: boolean) => void
   sortByWithGroups: Ref<SortItem[]>
   groupBy: Ref<readonly SortItem[]>
+  extractRows: (items: (DataTableItem | GroupHeaderItem)[]) => DataTableItem[]
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
@@ -423,10 +436,26 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
     return groupBy.value.concat(sortBy.value)
   })
 
-  const toggleGroup = (group: string, value?: boolean) => {
+  function toggleGroup (group: string, value?: boolean) {
     const open = value == null ? !opened.value.has(group) : value
     if (open) opened.value.add(group)
     else opened.value.delete(group)
+  }
+
+  function extractRows (items: (DataTableItem | GroupHeaderItem)[]) {
+    function dive (group: GroupHeaderItem): DataTableItem[] {
+      const arr = []
+
+      for (const item of group.items) {
+        if (item.type === 'item') arr.push(item)
+        else {
+          arr.push(...dive(item))
+        }
+      }
+
+      return arr
+    }
+    return dive({ type: 'group-header', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
   }
 
   // onBeforeMount(() => {
@@ -435,14 +464,7 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
   //   }
   // })
 
-  // const numGroups = computed(() => [...groupedItems.value.keys()].length)
-  // const numHiddenItems = computed(() => {
-  //   const hiddenGroups = [...groupedItems.value.keys()].filter(g => !opened.value.has(g))
-
-  //   return hiddenGroups.reduce((curr, group) => curr + groupedItems.value.get(group)!.length, 0)
-  // })
-
-  const data = { sortByWithGroups, toggleGroup, opened, groupBy }
+  const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows }
 
   provide(VDataTableGroupSymbol, data)
 
@@ -457,20 +479,19 @@ export function useGroupBy () {
   return data
 }
 
-function groupItems (items: DataTableItem[], groupBy: string) {
+function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
   if (!items.length) return []
 
   const groups: DataTableItem[][] = [[]]
 
   let current = getObjectValueByPath(items[0].raw, groupBy)
-  for (const item of items.slice(1)) {
+  for (const item of items) {
     const value = getObjectValueByPath(item.raw, groupBy)
-    console.log(groupBy, current, value)
 
     if (current === value) {
       groups.at(-1)?.push(item)
     } else {
-      groups.push([])
+      groups.push([item])
       current = value
     }
   }
@@ -478,26 +499,25 @@ function groupItems (items: DataTableItem[], groupBy: string) {
   return groups
 }
 
-function groupItemsRecursive (items: DataTableItem[], groupBy: string[], depth = 0) {
+function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefix = 'root') {
   if (!groupBy.length) return []
 
-  const groupedItems = groupItems(items, groupBy[0])
+  const groupedItems = groupItemsByProperty(items, groupBy[0])
   const groups: GroupHeaderItem[] = []
 
   const rest = groupBy.slice(1)
   for (let i = 0; i < groupedItems.length; i++) {
     const key = groupBy[0]
     const value = getObjectValueByPath(groupedItems[i][0].raw, groupBy[0])
-    const id = `${key}_${value}`
+    const id = `${prefix}_${key}_${value}`
     groups.push({
       depth,
       id,
       key,
       value,
-      items: rest?.length ? groupItemsRecursive(groupedItems[i], rest, depth + 1) : groupedItems[i],
+      items: rest?.length ? groupItems(groupedItems[i], rest, depth + 1, id) : groupedItems[i],
       type: 'group-header',
     })
-    // groups[i] = groupItemsRecursive(groups[i], groupBy.slice(1))
   }
 
   return groups
@@ -522,37 +542,12 @@ function flattenItems (items: (DataTableItem | GroupHeaderItem)[], opened: Set<s
 }
 
 export function useGroupedItems (items: Ref<DataTableItem[]>, groupBy: Ref<readonly SortItem[]>, opened: Ref<Set<string>>) {
-  const groupedItems = computed(() => {
-    // const groups: GroupHeaderItem[] = []
-
-    if (!groupBy.value.length) return []
-
-    const groups = groupItemsRecursive(items.value, groupBy.value.map(item => item.key))
-
-    console.log(groups)
-
-    // for (const item of items.value) {
-    //   const value = getObjectValueByPath(item.raw, groupBy.value[0].key)
-    //   const group = groups.get(value) ?? []
-    //   group.push(item)
-    //   groups.set(value, group)
-    // }
-
-    return groups
-  })
-
   const flatItems = computed(() => {
     if (!groupBy.value.length) return items.value
 
-    const flatItems: (DataTableItem | GroupHeaderItem)[] = []
+    const groupedItems = groupItems(items.value, groupBy.value.map(item => item.key))
 
-    // for (const [key, value] of groupedItems.value.entries()) {
-    //   flatItems.push({ type: 'group-header', groupBy: groupBy.value[0].key, groupByValue: key, items: value })
-    //   if (opened.value.has(key)) flatItems.push(...value)
-    // }
-    console.log(flattenItems(groupedItems.value, opened.value))
-
-    return flattenItems(groupedItems.value, opened.value)
+    return flattenItems(groupedItems, opened.value)
   })
 
   return { flatItems }
@@ -560,43 +555,50 @@ export function useGroupedItems (items: Ref<DataTableItem[]>, groupBy: Ref<reado
 
 export const VDataTableSelectionSymbol: InjectionKey<{
   toggleSelect: (item: DataTableItem) => void
-  select: (item: DataTableItem, value: boolean) => void
+  select: (items: DataTableItem[], value: boolean) => void
   selectAll: (value: boolean) => void
-  isSelected: (item: DataTableItem) => boolean
+  isSelected: (items: DataTableItem[]) => boolean
+  isSomeSelected: (items: DataTableItem[]) => boolean
   someSelected: Ref<boolean>
   allSelected: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-selection')
 
 type SelectionProps = Pick<ItemProps, 'itemValue'> & { modelValue: any[], 'onUpdate:modelValue': (value: any[]) => void }
 
-export function createSelection (props: SelectionProps, items: Ref<DataTableItem[]>) {
+export function createSelection (props: SelectionProps, allItems: Ref<DataTableItem[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {
     return [...v.values()]
   })
 
-  function isSelected (item: DataTableItem) {
-    return selected.value.has(item.value)
+  function isSelected (items: DataTableItem[]) {
+    return items.every(item => selected.value.has(item.value))
   }
 
-  function select (item: DataTableItem, value: boolean) {
-    if (value) selected.value.add(item.value)
-    else selected.value.delete(item.value)
+  function isSomeSelected (items: DataTableItem[]) {
+    return items.some(item => selected.value.has(item.value))
+  }
+
+  function select (items: DataTableItem[], value: boolean) {
+    for (const item of items) {
+      if (value) selected.value.add(item.value)
+      else selected.value.delete(item.value)
+    }
   }
 
   function toggleSelect (item: DataTableItem) {
-    select(item, !isSelected(item))
+    select([item], !isSelected([item]))
   }
 
   function selectAll (value: boolean) {
-    items.value.forEach(item => select(item, value))
+    select(allItems.value, value)
   }
 
   const someSelected = computed(() => selected.value.size > 0)
-  const allSelected = computed(() => items.value.every(item => isSelected(item)))
+  const allSelected = computed(() => isSelected(allItems.value))
 
-  const data = { toggleSelect, select, selectAll, isSelected, someSelected, allSelected }
+  const data = { toggleSelect, select, selectAll, isSelected, isSomeSelected, someSelected, allSelected }
 
   provide(VDataTableSelectionSymbol, data)
 
