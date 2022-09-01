@@ -4,6 +4,9 @@ import { filterListGroupProps, VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
 
+// Composables
+import { useLocale } from '@/composables'
+
 // Utilities
 import { createList } from './list'
 import { genericComponent } from '@/util'
@@ -31,59 +34,74 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
 
   props: {
     items: Array as Prop<InternalListItem[]>,
+    noDataText: {
+      type: String,
+    },
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     createList()
 
-    return () => slots.default?.() ?? props.items?.map(({ children, props: itemProps, type, raw: item }) => {
-      if (type === 'divider') {
-        return slots.divider?.({ props: itemProps }) ?? (
-          <VDivider { ...itemProps } />
-        )
+    return () => {
+      if (slots.default) return slots.default()
+
+      if (!props.items?.length && props.noDataText) {
+        return slots['no-data']?.({ noDataText: props.noDataText }) ?? <VListItem title={ t(props.noDataText) } />
       }
 
-      if (type === 'subheader') {
-        return slots.subheader?.({ props: itemProps }) ?? (
-          <VListSubheader
-            { ...itemProps }
-            v-slots={{ default: slots.subheader }}
-          />
+      return props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
+        if (type === 'divider') {
+          return slots.divider?.({ props: itemProps }) ?? (
+            <VDivider { ...itemProps } />
+          )
+        }
+
+        if (type === 'subheader') {
+          return slots.subheader?.({ props: itemProps }) ?? (
+            <VListSubheader
+              { ...itemProps }
+              v-slots={{ default: slots.subheader }}
+            />
+          )
+        }
+
+        const slotsWithItem = {
+          subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
+          prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
+          append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
+          default: slots.default ? (slotProps: any) => slots.default?.({ ...slotProps, item }) : undefined,
+          title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
+        }
+
+        const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
+
+        return children ? (
+          <VListGroup
+            value={ itemProps?.value }
+            { ...listGroupProps }
+          >
+            {{
+              activator: ({ props: activatorProps }) => slots.header
+                ? slots.header({ ...itemProps, ...activatorProps })
+                : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
+              default: () => (
+                <VListChildren
+                  items={ children }
+                  v-slots={ slots }
+                />
+              ),
+            }}
+          </VListGroup>
+        ) : (
+          slots.item ? slots.item({ item, props: itemProps, index }) : (
+            <VListItem
+              { ...itemProps }
+              v-slots={ slotsWithItem }
+            />
+          )
         )
-      }
-
-      const slotsWithItem = {
-        subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
-        prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
-        append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
-        default: slots.default ? (slotProps: any) => slots.default?.({ ...slotProps, item }) : undefined,
-        title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
-      }
-
-      const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
-
-      return children ? (
-        <VListGroup
-          value={ itemProps?.value }
-          { ...listGroupProps }
-        >
-          {{
-            activator: ({ props: activatorProps }) => slots.header
-              ? slots.header({ ...itemProps, ...activatorProps })
-              : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
-            default: () => (
-              <VListChildren items={ children } v-slots={ slots } />
-            ),
-          }}
-        </VListGroup>
-      ) : (
-        slots.item ? slots.item(itemProps) : (
-          <VListItem
-            { ...itemProps }
-            v-slots={ slotsWithItem }
-          />
-        )
-      )
-    })
+      })
+    }
   },
 })

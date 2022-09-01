@@ -15,7 +15,6 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/items'
-import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
@@ -29,8 +28,10 @@ import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-function highlightResult (text: string, matches: FilterMatch, length: number) {
+function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
+
+  if (matches == null) return text
 
   return typeof matches === 'number' && ~matches
     ? (
@@ -93,7 +94,6 @@ export const VAutocomplete = genericComponent<new <
   },
 
   setup (props, { slots }) {
-    const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
@@ -110,7 +110,7 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, filteredMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => item.value === v.value) || v
@@ -258,33 +258,36 @@ export const VAutocomplete = genericComponent<new <
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    noDataText={ props.noDataText }
+                    items={ filteredItems.value }
                   >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                      <VListItem title={ t(props.noDataText) } />
-                    )) }
+                    {{
+                      ...slots,
+                      item: ({ item, props, index }: any) => {
+                        const onClick = () => select(item)
 
-                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
-                      item,
-                      index,
-                      props: mergeProps(item.props, { onClick: () => select(item) }),
-                    }) ?? (
-                      <VListItem
-                        key={ index }
-                        { ...item.props }
-                        onClick={ () => select(item) }
-                      >
-                        {{
-                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                          ) : undefined,
-                          title: () => {
-                            return isPristine.value
-                              ? item.title
-                              : highlightResult(item.title, matches.title, search.value?.length ?? 0)
-                          },
-                        }}
-                      </VListItem>
-                    )) }
+                        if (slots.item) return slots.item({ item, props: mergeProps(props, { onClick }), index })
+
+                        return (
+                          <VListItem
+                            key={ index }
+                            { ...props }
+                            onClick={ onClick }
+                          >
+                            {{
+                              prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
+                                <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                              ) : undefined,
+                              title: () => {
+                                return isPristine.value
+                                  ? item.title
+                                  : highlightResult(item.title, filteredMatches.value.get(item.value)?.title, search.value?.length ?? 0)
+                              },
+                            }}
+                          </VListItem>
+                        )
+                      },
+                    }}
                   </VList>
                 </VMenu>
 

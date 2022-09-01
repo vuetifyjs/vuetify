@@ -56,6 +56,10 @@ export const makeSelectProps = propsFactory({
   readonly: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
+  itemType: {
+    type: String,
+    default: 'type',
+  },
 }, 'select')
 
 type Primitive = string | number | boolean | symbol

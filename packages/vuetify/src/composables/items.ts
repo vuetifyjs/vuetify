@@ -24,6 +24,7 @@ export interface ItemProps {
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
+  itemType: SelectItemKey
   returnObject: boolean
 }
 
@@ -49,10 +50,15 @@ export const makeItemsProps = propsFactory({
     type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'props',
   },
+  itemType: {
+    type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
+    default: 'type',
+  },
   returnObject: Boolean,
 }, 'item')
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
+  const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
@@ -71,6 +77,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   }
 
   return {
+    type,
     title: String(_props.title ?? ''),
     value: _props.value,
     props: _props,

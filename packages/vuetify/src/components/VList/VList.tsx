@@ -33,7 +33,7 @@ export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
 }
 
-function transformItem (props: ItemProps & { itemType: string }, item: any): InternalListItem {
+function transformItem (props: ItemProps, item: any): InternalListItem {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = typeof item === 'string' ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
@@ -56,7 +56,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   }
 }
 
-function transformItems (props: ItemProps & { itemType: string }, items: (string | object)[]) {
+function transformItems (props: ItemProps, items: (string | object)[]) {
   const array: InternalListItem[] = []
 
   for (const item of items) {
@@ -66,7 +66,7 @@ function transformItems (props: ItemProps & { itemType: string }, items: (string
   return array
 }
 
-function useListItems (props: ItemProps & { itemType: string }) {
+function useListItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   return { items }
@@ -94,6 +94,10 @@ export const VList = genericComponent<new <T>() => {
       default: 'one',
     },
     nav: Boolean,
+    noDataText: {
+      type: String,
+      default: '$vuetify.noDataText',
+    },
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -103,10 +107,6 @@ export const VList = genericComponent<new <T>() => {
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
-    itemType: {
-      type: String,
-      default: 'type',
-    },
     ...makeItemsProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -175,7 +175,11 @@ export const VList = genericComponent<new <T>() => {
           dimensionStyles.value,
         ]}
       >
-        <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
+        <VListChildren
+          items={ items.value }
+          noDataText={ props.noDataText }
+          v-slots={ slots }
+        ></VListChildren>
       </props.tag>
     ))
 
