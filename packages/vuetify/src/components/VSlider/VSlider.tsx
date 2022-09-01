@@ -12,7 +12,7 @@ import { makeSliderProps, useSlider } from './slider'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Util
-import { computed, ref } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 export const VSlider = defineComponent({
@@ -23,6 +23,7 @@ export const VSlider = defineComponent({
     ...makeSliderProps(),
     ...makeVInputProps(),
 
+    value: [Number, String],
     modelValue: {
       type: [Number, String],
       default: 0,
@@ -60,7 +61,7 @@ export const VSlider = defineComponent({
     const model = useProxiedModel(
       props,
       'modelValue',
-      undefined,
+      toRef(props, 'value'),
       v => {
         const value = typeof v === 'string' ? parseFloat(v) : v == null ? min.value : v
 

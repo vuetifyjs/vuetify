@@ -16,7 +16,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, toRef, watch } from 'vue'
 import { callEvent, clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
 
 // Types
@@ -51,6 +51,7 @@ export const VTextarea = defineComponent({
       validator: (v: any) => !isNaN(parseFloat(v)),
     },
     suffix: String,
+    value: null,
 
     ...makeVInputProps(),
     ...makeVFieldProps(),
@@ -62,7 +63,7 @@ export const VTextarea = defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', toRef(props, 'value'))
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)

@@ -14,7 +14,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { cloneVNode, computed, nextTick, ref } from 'vue'
+import { cloneVNode, computed, nextTick, ref, toRef } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
@@ -54,6 +54,7 @@ export const VTextField = genericComponent<new <T>() => {
       type: String,
       default: 'text',
     },
+    value: null,
 
     ...makeVInputProps(),
     ...makeVFieldProps(),
@@ -66,7 +67,7 @@ export const VTextField = genericComponent<new <T>() => {
   },
 
   setup (props, { attrs, emit, slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', toRef(props, 'value'))
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)

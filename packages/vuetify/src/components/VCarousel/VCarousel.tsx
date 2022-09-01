@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
-import { onMounted, ref, watch } from 'vue'
+import { onMounted, ref, toRef, watch } from 'vue'
 
 // Types
 import type { GroupProvide } from '@/composables/group'
@@ -41,6 +41,7 @@ export const VCarousel = defineComponent({
       default: 6000,
       validator: (value: string | number) => value > 0,
     },
+    value: null,
     modelValue: null,
     progress: [Boolean, String],
     showArrows: {
@@ -56,7 +57,7 @@ export const VCarousel = defineComponent({
   },
 
   setup (props, { slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', toRef(props, 'value'))
     const { t } = useLocale()
     const windowRef = ref<typeof VWindow>()
 

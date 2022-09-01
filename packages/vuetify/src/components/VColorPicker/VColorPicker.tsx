@@ -17,7 +17,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { defineComponent, HSVAtoCSS, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
-import { onMounted, ref } from 'vue'
+import { onMounted, ref, toRef } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -57,9 +57,8 @@ export const VColorPicker = defineComponent({
       type: [Number, String],
       default: 150,
     },
-    modelValue: {
-      type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
-    },
+    value: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
+    modelValue: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
     width: {
       type: [Number, String],
       default: 300,
@@ -81,7 +80,7 @@ export const VColorPicker = defineComponent({
     const currentColor = useProxiedModel(
       props,
       'modelValue',
-      undefined,
+      toRef(props, 'value'),
       v => {
         let c = parseColor(v)
 

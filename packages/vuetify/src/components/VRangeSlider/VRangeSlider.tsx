@@ -12,7 +12,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
@@ -27,6 +27,7 @@ export const VRangeSlider = defineComponent({
     ...makeSliderProps(),
 
     strict: Boolean,
+    value: Array as PropType<number[]>,
     modelValue: {
       type: Array as PropType<number[]>,
       default: () => ([0, 0]),
@@ -93,7 +94,7 @@ export const VRangeSlider = defineComponent({
     const model = useProxiedModel(
       props,
       'modelValue',
-      undefined,
+      toRef(props, 'value'),
       arr => {
         if (!arr || !arr.length) return [0, 0]
 

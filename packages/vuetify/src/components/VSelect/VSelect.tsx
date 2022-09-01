@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -43,6 +43,7 @@ export const makeSelectProps = propsFactory({
   menuProps: {
     type: Object as PropType<VMenu['$props']>,
   },
+  value: null,
   modelValue: {
     type: null,
     default: () => ([]),
@@ -109,7 +110,7 @@ export const VSelect = genericComponent<new <
     const model = useProxiedModel(
       props,
       'modelValue',
-      [],
+      toRef(props, 'value'),
       v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)

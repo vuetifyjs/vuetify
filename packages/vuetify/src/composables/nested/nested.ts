@@ -76,7 +76,7 @@ export const useNested = (props: NestedProps) => {
   const children = ref(new Map<string, string[]>())
   const parents = ref(new Map<string, string>())
 
-  const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
+  const opened = useProxiedModel(props, 'opened', undefined, v => new Set(v), v => [...v.values()])
 
   const selectStrategy = computed(() => {
     if (typeof props.selectStrategy === 'object') return props.selectStrategy
@@ -105,7 +105,7 @@ export const useNested = (props: NestedProps) => {
   const selected = useProxiedModel(
     props,
     'selected',
-    props.selected,
+    undefined,
     v => selectStrategy.value.in(v, children.value, parents.value),
     v => selectStrategy.value.out(v, children.value, parents.value),
   )

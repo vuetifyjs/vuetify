@@ -1,9 +1,10 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, isRef, ref, unref, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
+import type { MaybeRef } from '@/util'
 
 // Composables
 export function useProxiedModel<
@@ -13,7 +14,7 @@ export function useProxiedModel<
 > (
   props: Props,
   prop: Prop,
-  defaultValue?: Props[Prop],
+  defaultValue?: MaybeRef<Props[Prop] | undefined>,
   transformIn: (value?: Props[Prop]) => Inner = (v: any) => v,
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
@@ -26,7 +27,16 @@ export function useProxiedModel<
     )
   })
 
-  const internal = ref(transformIn(props[prop])) as Ref<Inner>
+  const initialValue = unref(defaultValue)
+  const internal = ref(
+    propIsDefined.value ? transformIn(props[prop])
+    : initialValue !== undefined ? transformIn(initialValue)
+    : undefined
+  ) as Ref<Inner>
+
+  if (isRef(defaultValue)) {
+    watch(defaultValue, val => internal.value = transformIn(val))
+  }
 
   return computed<Inner extends any[] ? Readonly<Inner> : Inner>({
     get (): any {

@@ -59,6 +59,7 @@ export const VTabs = defineComponent({
     optional: Boolean,
     end: Boolean,
     sliderColor: String,
+    value: null,
     modelValue: null,
 
     ...makeDensityProps(),
@@ -70,7 +71,7 @@ export const VTabs = defineComponent({
   },
 
   setup (props, { slots }) {
-    const model = useProxiedModel(props, 'modelValue')
+    const model = useProxiedModel(props, 'modelValue', toRef(props, 'value'))
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))

@@ -20,7 +20,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, toRef, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -107,7 +107,7 @@ export const VCombobox = genericComponent<new <
     const model = useProxiedModel(
       props,
       'modelValue',
-      [],
+      toRef(props, 'value'),
       v => transformIn(wrapInArray(v || [])),
       v => {
         const transformed = transformOut(v)

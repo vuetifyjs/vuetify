@@ -19,7 +19,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, toRef, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -102,7 +102,7 @@ export const VAutocomplete = genericComponent<new <
     const model = useProxiedModel(
       props,
       'modelValue',
-      [],
+      toRef(props, 'value'),
       v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
