@@ -1,7 +1,7 @@
 import { VTable } from '@/components'
 import { convertToUnit, defineComponent } from '@/util'
 import { computed, provide, ref, toRef } from 'vue'
-import { createExpanded, createGroup, createHeaders, createSelection, createSort, useOptions, useSortedItems, useVirtual } from './composables'
+import { createExpanded, createGroupBy, createHeaders, createSelection, createSort, useOptions, useSortedItems, useVirtual } from './composables'
 import { makeVDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableVirtualRows } from './VDataTableVirtualRows'
@@ -35,7 +35,7 @@ export const VDataTableVirtual = defineComponent({
     const { headers, columns } = createHeaders(props)
     const { sortBy, toggleSort } = createSort(props)
     const { sortedItems } = useSortedItems(allItems, sortBy)
-    const { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems } = createGroup(sortedItems, toRef(props, 'groupBy'))
+    const { flatItems, groupedItems, toggleGroup, numGroups, numHiddenItems } = createGroupBy(sortedItems, toRef(props, 'groupBy'))
 
     const {
       containerRef,

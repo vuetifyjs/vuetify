@@ -1,7 +1,7 @@
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import { VCheckbox } from '@/components/VCheckbox'
+import { VCheckbox, VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
 
@@ -54,7 +54,7 @@ export const VDataTableHeaders = defineComponent({
         position: 'sticky',
         zIndex: fixed ? 4 : props.sticky ? 3 : undefined, // TODO: This needs to account for possible previous fixed columns.
         left: fixed ? convertToUnit(fixedOffsets.value[x]) : undefined, // TODO: This needs to account for possible row/colspan of previous columns
-        top: props.sticky ? `${props.rowHeight * y}px` : undefined,
+        top: props.sticky ? `calc(var(--v-table-header-height) * ${y})` : undefined,
       }
     }
 
@@ -80,7 +80,8 @@ export const VDataTableHeaders = defineComponent({
           style={{
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.width),
-            height: convertToUnit(props.rowHeight),
+            // height: convertToUnit(props.rowHeight),
+            // height: ''
             ...getFixedStyles(column.fixed, y, x),
           }}
           role="columnheader"
@@ -89,8 +90,7 @@ export const VDataTableHeaders = defineComponent({
           onClick={column.sortable !== false ? () => toggleSort(column.id) : undefined}
         >
           { column.id === 'data-table-select' ? (
-            <VCheckbox
-              hide-details
+            <VCheckboxBtn
               modelValue={ allSelected.value }
               indeterminate={ someSelected.value && !allSelected.value }
               onUpdate:modelValue={ selectAll }

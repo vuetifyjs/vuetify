@@ -65,3 +65,21 @@
     position: absolute
     top: 0
     left: 0
+
+.v-data-table.v-data-table--show-select
+  .v-table__wrapper
+    > table
+      > thead
+        > tr
+          > th:first-child
+            padding: 0
+
+      > tbody,
+        tfoot
+        > tr
+          > td:first-child
+            padding: 0
+
+.v-data-table-group-header-row__column
+  padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
+

@@ -11,18 +11,15 @@ import { VDataTableFooter } from './VDataTableFooter'
 import { makeItemsProps } from '@/composables/items'
 import {
   createExpanded,
-  createGroup,
+  createGroupBy,
   createHeaders,
   createSelection,
   createSort,
   useDataTableItems,
-  useGroupBy,
-  useHeaders,
+  useGroupedItems,
   useOptions,
   usePaginatedItems,
   usePagination,
-  useSelection,
-  useSort,
   useSortedItems,
 } from './composables'
 
@@ -34,6 +31,7 @@ import { defineComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { DataTableHeader } from './types'
 import type { SortItem } from './composables'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // const { itemChildren, ...itemProps } = makeItemsProps()
 
@@ -49,7 +47,10 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
-  groupBy: String,
+  groupBy: {
+    type: Array as PropType<SortItem[]>,
+    default: () => ([]),
+  },
   sortBy: {
     type: Array as PropType<SortItem[]>,
     default: () => ([]),
@@ -83,20 +84,25 @@ export const VDataTable = defineComponent({
     'update:itemsPerPage': (value: number) => true,
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
+    'update:groupBy': (value: any) => true,
   },
 
   setup (props, { slots }) {
-    const { headers, columns } = createHeaders(props)
+    const groupBy = useProxiedModel(props, 'groupBy')
+
+    const { headers, columns } = createHeaders(props, groupBy)
 
     const { items } = useDataTableItems(props, columns)
 
     const { sortBy } = createSort(props)
-    const { sortedItems } = useSortedItems(items, sortBy)
+    const { sortByWithGroups, opened } = createGroupBy(props, groupBy, sortBy)
 
-    const { page, itemsPerPage, startIndex, stopIndex, itemsLength, pageCount } = usePagination(props)
-    const { paginatedItems } = usePaginatedItems(sortedItems, startIndex, stopIndex, itemsPerPage)
+    const { sortedItems } = useSortedItems(items, sortByWithGroups)
 
-    const { flatItems } = createGroup(paginatedItems, toRef(props, 'groupBy'))
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+
+    const { page, itemsPerPage, startIndex, stopIndex, itemsLength, pageCount } = usePagination(props, flatItems)
+    const { paginatedItems } = usePaginatedItems(flatItems, startIndex, stopIndex, itemsPerPage)
 
     createSelection(props, paginatedItems)
 
@@ -114,7 +120,12 @@ export const VDataTable = defineComponent({
 
     useRender(() => (
       <VTable
-        class="v-data-table"
+        class={[
+          'v-data-table',
+          {
+            'v-data-table--show-select': props.showSelect,
+          },
+        ]}
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
         height={ props.height }
@@ -137,7 +148,7 @@ export const VDataTable = defineComponent({
               <tbody>
                 { slots.body ? slots.body() : (
                   <VDataTableRows
-                    items={ flatItems.value }
+                    items={ paginatedItems.value }
                     v-slots={ slots }
                   />
                 ) }

@@ -1,5 +1,5 @@
 // Components
-import { VCheckbox } from '../VCheckbox'
+import { VCheckbox, VCheckboxBtn } from '../VCheckbox'
 
 // Composables
 import { VDataTableColumn } from './VDataTableColumn'
@@ -49,10 +49,9 @@ export const VDataTableRow = defineComponent({
           >
             {
               slots[`item.${column.id}`]?.() ?? (column.id === 'data-table-select' ? (
-                <VCheckbox
+                <VCheckboxBtn
                   modelValue={ isSelected(props.item) }
                   onClick={ () => toggleSelect(props.item) }
-                  hide-details
                 />
               ) : props.item.columns[column.id])
             }

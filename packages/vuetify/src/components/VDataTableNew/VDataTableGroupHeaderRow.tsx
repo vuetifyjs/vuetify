@@ -1,6 +1,6 @@
 import { defineComponent } from '@/util'
 import { VBtn } from '../VBtn'
-import { useGroup, useHeaders } from './composables'
+import { useGroupBy, useHeaders } from './composables'
 import { VDataTableColumn } from './VDataTableColumn'
 
 export const VDataTableGroupHeaderRow = defineComponent({
@@ -14,25 +14,32 @@ export const VDataTableGroupHeaderRow = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { opened, toggleGroup } = useGroup()
+    const { opened, toggleGroup } = useGroupBy()
     const { columns } = useHeaders()
 
     return () => (
       <tr
         class="v-data-table-group-header-row"
+        style={{
+          '--v-data-table-group-header-row-depth': props.item.depth,
+        }}
       >
-        <VDataTableColumn
-          colspan={ columns.value.length }
-        >
-          <VBtn
-            size="small"
-            variant="text"
-            icon={ opened.value.has(props.item.groupByValue) ? '$expand' : '$next' }
-            onClick={ () => toggleGroup(props.item.groupByValue) }
-          />
-          <span>{ props.item.groupByValue }</span>
-          <span>({ props.item.items.length })</span>
-        </VDataTableColumn>
+        { columns.value.map(column => {
+          if (column.id !== 'data-table-group') return <td />
+
+          return (
+            <VDataTableColumn class="v-data-table-group-header-row__column">
+              <VBtn
+                size="small"
+                variant="text"
+                icon={ opened.value.has(props.item.id) ? '$expand' : '$next' }
+                onClick={ () => toggleGroup(props.item.id) }
+              />
+              <span>{ props.item.value }</span>
+              <span>({ props.item.items.length })</span>
+            </VDataTableColumn>
+          )
+        })}
       </tr>
     )
   },

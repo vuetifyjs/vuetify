@@ -33,7 +33,7 @@ export const VDataTableRows = defineComponent({
             if (item.type === 'group-header') {
               return (
                 <VDataTableGroupHeaderRow
-                  key={ `group-header_${item.groupBy}_${item.groupByValue}` }
+                  key={ `group-header_${item.id}` }
                   item={ item }
                   v-slots={ slots }
                 />
