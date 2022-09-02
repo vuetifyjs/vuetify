@@ -9,13 +9,13 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
+import { VListChildren } from '../VList/VListChildren'
 
 // Composables
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { transformItem, useItems } from '@/composables/items'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
@@ -24,26 +24,11 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-
-function highlightResult (text: string, matches: FilterMatch, length: number) {
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-combobox__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-combobox__mask">{ text.substr(matches, length) }</span>
-        <span class="v-combobox__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -95,7 +80,6 @@ export const VCombobox = genericComponent<new <
   },
 
   setup (props, { emit, slots }) {
-    const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
@@ -146,7 +130,7 @@ export const VCombobox = genericComponent<new <
       emit('update:searchInput', value)
     })
 
-    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, filteredMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       return model.value.map(v => {
@@ -332,32 +316,42 @@ export const VCombobox = genericComponent<new <
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                      <VListItem title={ t(props.noDataText) } />
-                    )) }
+                    { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
-                      item,
-                      index,
-                      props: mergeProps(item.props, { onClick: () => select(item) }),
-                    }) ?? (
-                      <VListItem
-                        key={ index }
-                        { ...item.props }
-                        onClick={ () => select(item) }
-                      >
-                        {{
-                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                          ) : undefined,
-                          title: () => {
-                            return isPristine.value
-                              ? item.title
-                              : highlightResult(item.title, matches.title, search.value?.length ?? 0)
-                          },
-                        }}
-                      </VListItem>
-                    )) }
+                    <VListChildren
+                      noDataText={ !props.hideNoData ? props.noDataText : undefined }
+                      items={ filteredItems.value }
+                    >
+                      {{
+                        ...slots,
+                        item: ({ item, index }: any) => {
+                          const onClick = () => select(item)
+
+                          if (slots.item) return slots.item({ item, props: mergeProps(item.props, { onClick }), index })
+
+                          return (
+                            <VListItem
+                              key={ index }
+                              { ...item.props }
+                              onClick={ onClick }
+                            >
+                              {{
+                                prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
+                                  <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                                ) : undefined,
+                                title: () => {
+                                  return isPristine.value
+                                    ? item.title
+                                    : highlightResult(item.title, filteredMatches.value.get(item.value)?.title, search.value?.length ?? 0)
+                                },
+                              }}
+                            </VListItem>
+                          )
+                        },
+                      }}
+                    </VListChildren>
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 

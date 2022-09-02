@@ -17,6 +17,13 @@ import type { ListGroupActivatorSlot } from './VListGroup'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { MakeSlots } from '@/util'
 import type { Prop } from 'vue'
+import type { InternalItem } from '@/composables/items'
+
+type ListItemSlot<T> = {
+  item: T
+  props: InternalItem['props']
+  index: number
+}
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
   $props: {
@@ -25,7 +32,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
   $slots: MakeSlots<{
     default: []
     header: [ListGroupActivatorSlot]
-    item: [T]
+    item: [ListItemSlot<T>]
     title: [ListItemTitleSlot]
     subtitle: [ListItemSubtitleSlot]
   }>
@@ -50,7 +57,9 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
         return slots['no-data']?.({ noDataText: props.noDataText }) ?? <VListItem title={ t(props.noDataText) } />
       }
 
-      return props.items?.map(({ children, props: itemProps, type, raw: item }, index) => {
+      return props.items?.map((internalItem, index) => {
+        const { children, props: itemProps, type, raw: item } = internalItem
+
         if (type === 'divider') {
           return slots.divider?.({ props: itemProps }) ?? (
             <VDivider { ...itemProps } />
@@ -94,7 +103,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
             }}
           </VListGroup>
         ) : (
-          slots.item ? slots.item({ item, props: itemProps, index }) : (
+          slots.item ? slots.item({ item: internalItem, index }) : (
             <VListItem
               { ...itemProps }
               v-slots={ slotsWithItem }

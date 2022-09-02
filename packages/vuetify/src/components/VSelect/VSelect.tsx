@@ -9,12 +9,12 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
+import { VListChildren } from '../VList/VListChildren'
 
 // Composables
 import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
 
@@ -106,7 +106,6 @@ export const VSelect = genericComponent<new <
   },
 
   setup (props, { slots }) {
-    const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
@@ -125,7 +124,7 @@ export const VSelect = genericComponent<new <
         return items.value.find(item => item.value === v.value) || v
       })
     })
-    const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const selected = computed(() => selections.value.map(selection => selection.value))
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -176,7 +175,7 @@ export const VSelect = genericComponent<new <
       return (
         <VTextField
           ref={ vTextFieldRef }
-          modelValue={ model.value.map(v => v.props.value).join(', ') }
+          modelValue={ model.value.map(v => v.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
@@ -215,29 +214,35 @@ export const VSelect = genericComponent<new <
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
                   >
-                    { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                      <VListItem title={ t(props.noDataText) } />
-                    )) }
-
                     { slots['prepend-item']?.() }
 
-                    { items.value.map((item, index) => slots.item?.({
-                      item,
-                      index,
-                      props: mergeProps(item.props, { onClick: () => select(item) }),
-                    }) ?? (
-                      <VListItem
-                        key={ index }
-                        { ...item.props }
-                        onClick={ () => select(item) }
-                      >
-                        {{
-                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                          ) : undefined,
-                        }}
-                      </VListItem>
-                    )) }
+                    <VListChildren
+                      items={ items.value }
+                      noDataText={ !props.hideNoData ? props.noDataText : undefined }
+                    >
+                      {{
+                        ...slots,
+                        item: ({ item, index }) => {
+                          const onClick = () => select(item)
+
+                          if (slots.item) return slots.item({ item, props: mergeProps(item.props, { onClick }), index })
+
+                          return (
+                            <VListItem
+                              key={ index }
+                              { ...item.props }
+                              onClick={ () => select(item) }
+                            >
+                              {{
+                                prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
+                                  <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                                ) : undefined,
+                              }}
+                            </VListItem>
+                          )
+                        },
+                      }}
+                    </VListChildren>
 
                     { slots['append-item']?.() }
                   </VList>
