@@ -227,7 +227,7 @@ export const VCombobox = genericComponent<new <
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
     }
-    function select (item: InternalItem) {
+    function select (item: InternalItem<any>) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => selection === item.value)
 

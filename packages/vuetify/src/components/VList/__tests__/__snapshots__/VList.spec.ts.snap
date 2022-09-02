@@ -2,5 +2,14 @@
 
 exports[`VList should match a snapshot 1`] = `
 <div class="v-list v-theme--light v-list--density-default v-list--one-line">
+  <div class="v-list-item v-theme--light v-list-item--density-default v-list-item--one-line v-list-item--variant-text">
+    <span class="v-list-item__underlay">
+    </span>
+    <div class="v-list-item__content">
+      <div class="v-list-item-title">
+        No data available
+      </div>
+    </div>
+  </div>
 </div>
 `;

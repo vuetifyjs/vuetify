@@ -19,15 +19,15 @@ import type { MakeSlots } from '@/util'
 import type { Prop } from 'vue'
 import type { InternalItem } from '@/composables/items'
 
-type ListItemSlot<T> = {
-  item: T
-  props: InternalItem['props']
+export type ListItemSlot<T> = {
+  item: InternalListItem<T>
+  props: InternalItem<T>['props']
   index: number
 }
 
-export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
+export const VListChildren = genericComponent<new <T>() => {
   $props: {
-    items?: T[]
+    items?: InternalListItem<T>[]
   }
   $slots: MakeSlots<{
     default: []
@@ -40,7 +40,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
   name: 'VListChildren',
 
   props: {
-    items: Array as Prop<InternalListItem[]>,
+    items: Array as Prop<InternalListItem<any>[]>,
     noDataText: {
       type: String,
     },
@@ -103,7 +103,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
             }}
           </VListGroup>
         ) : (
-          slots.item ? slots.item({ item: internalItem, index }) : (
+          slots.item ? slots.item({ item: internalItem, props: itemProps, index }) : (
             <VListItem
               { ...itemProps }
               v-slots={ slotsWithItem }

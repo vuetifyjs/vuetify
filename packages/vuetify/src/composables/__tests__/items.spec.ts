@@ -6,6 +6,7 @@ import { describe, expect, it } from '@jest/globals'
 
 describe('items', () => {
   const defaults = {
+    itemType: 'type',
     itemTitle: 'title',
     itemValue: 'value',
     itemChildren: 'children',
@@ -23,6 +24,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: ['Foo'] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -38,6 +40,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: [{ title: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -53,6 +56,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemTitle: 'text', items: [{ text: 'Foo' }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -68,6 +72,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemValue: 'id', items: [{ title: 'Foo', id: 1 }] })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 1,
         props: {
@@ -82,6 +87,7 @@ describe('items', () => {
   it('should support nested items', () => {
     const rawItems = [
       {
+        type: 'item',
         title: 'Foo',
         children: [
           {
@@ -93,6 +99,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, items: rawItems })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -101,6 +108,7 @@ describe('items', () => {
         },
         children: [
           {
+            type: 'item',
             title: 'Bar',
             value: 'Bar',
             props: {
@@ -129,6 +137,7 @@ describe('items', () => {
     const { items } = useItems({ ...defaults, itemChildren: 'labels', items: rawItems })
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -137,6 +146,7 @@ describe('items', () => {
         },
         children: [
           {
+            type: 'item',
             title: 'Bar',
             value: 'Bar',
             props: {
@@ -170,6 +180,7 @@ describe('items', () => {
 
     expect(items.value).toEqual([
       {
+        type: 'item',
         title: 'Foo',
         value: 'Foo',
         props: {
@@ -181,6 +192,7 @@ describe('items', () => {
         raw: rawItems[0],
       },
       {
+        type: 'item',
         title: 'Bar',
         value: 'Bar',
         props: {

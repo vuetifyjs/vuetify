@@ -54,9 +54,9 @@ export const makeVListGroupProps = propsFactory({
   ...makeTagProps(),
 })
 
-export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
+export const VListGroup = genericComponent<new <T>() => {
   $props: {
-    items?: T[]
+    items?: InternalListItem<T>[]
   }
   $slots: MakeSlots<{
     activator: [ListGroupActivatorSlot]

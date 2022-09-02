@@ -6,7 +6,7 @@ import { getPropertyFromItem, pick, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
-export interface InternalItem<T = any> {
+export interface InternalItem<T> {
   title: string
   value: any
   props: {
@@ -18,8 +18,8 @@ export interface InternalItem<T = any> {
   raw: T
 }
 
-export interface ItemProps {
-  items: any[]
+export interface ItemProps<T> {
+  items: T[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
   itemChildren: SelectItemKey
@@ -31,7 +31,7 @@ export interface ItemProps {
 // Composables
 export const makeItemsProps = propsFactory({
   items: {
-    type: Array as PropType<ItemProps['items']>,
+    type: Array as PropType<ItemProps<any>['items']>,
     default: () => ([]),
   },
   itemTitle: {
@@ -57,7 +57,7 @@ export const makeItemsProps = propsFactory({
   returnObject: Boolean,
 }, 'item')
 
-export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
+export function transformItem <T> (props: Omit<ItemProps<T>, 'items'>, item: T) {
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
@@ -65,7 +65,7 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
       ? 'children' in item
-        ? pick(item, ['children'])[1]
+        ? pick(item as any, ['children'])[1]
         : item
       : undefined
     : getPropertyFromItem(item, props.itemProps)
@@ -86,8 +86,8 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   }
 }
 
-export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProps['items']) {
-  const array: InternalItem[] = []
+export function transformItems <T> (props: Omit<ItemProps<T>, 'items'>, items: ItemProps<T>['items']) {
+  const array: InternalItem<T>[] = []
 
   for (const item of items) {
     array.push(transformItem(props, item))
@@ -96,14 +96,14 @@ export function transformItems (props: Omit<ItemProps, 'items'>, items: ItemProp
   return array
 }
 
-export function useItems (props: ItemProps) {
+export function useItems <T> (props: ItemProps<T>) {
   const items = computed(() => transformItems(props, props.items))
 
-  function transformIn (value: any[]): InternalItem[] {
+  function transformIn <T> (value: any[]): InternalItem<T>[] {
     return value.map(item => transformItem(props, item))
   }
 
-  function transformOut (value: InternalItem[]) {
+  function transformOut <T> (value: InternalItem<T>[]) {
     if (props.returnObject) return value.map(({ raw: item }) => item)
     return value.map(({ props }) => props.value)
   }

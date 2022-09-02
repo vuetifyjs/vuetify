@@ -24,23 +24,29 @@ import { computed, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { InternalItem } from '@/composables/items'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
+import type { ListItemSlot } from './VListChildren'
+import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 
-export interface InternalListItem extends InternalItem {
+export interface InternalListItem<T> extends InternalItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
 export const VList = genericComponent<new <T>() => {
   $props: {
-    items?: T[]
+    items?: readonly T[]
   }
   $slots: MakeSlots<{
-    subheader: []
+    'no-data': [{ noDataText: string }]
+    subheader: [{ props: Record<string, unknown> }]
+    divider: [{ props: Record<string, unknown> }]
     header: [ListGroupActivatorSlot]
-    item: [T]
+    item: [ListItemSlot<T>]
+    title: [ListItemTitleSlot]
+    subtitle: [ListItemSubtitleSlot]
   }>
 }>()({
   name: 'VList',
@@ -59,6 +65,7 @@ export const VList = genericComponent<new <T>() => {
       type: String,
       default: '$vuetify.noDataText',
     },
+    hideNoData: Boolean,
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -138,7 +145,7 @@ export const VList = genericComponent<new <T>() => {
       >
         <VListChildren
           items={ items.value }
-          noDataText={ props.noDataText }
+          noDataText={ !props.hideNoData ? props.noDataText : undefined }
           v-slots={ slots }
         ></VListChildren>
       </props.tag>
