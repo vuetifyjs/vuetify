@@ -13,11 +13,15 @@ import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './compo
 import { createSelection, makeDataTableSelectProps } from './composables/select'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { useOptions } from './composables/options'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utlities
-import { computed, ref } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { convertToUnit, defineComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
+
+// Types
+import type { DataTableItem } from './types'
 
 export const VDataTableVirtual = defineComponent({
   name: 'VDataTableVirtual',
@@ -32,6 +36,7 @@ export const VDataTableVirtual = defineComponent({
     ...makeDataTableSelectProps(),
     ...makeDataTableSortProps(),
     ...makeDataTableVirtualProps(),
+    ...makeFilterProps(),
   },
 
   emits: {
@@ -46,16 +51,18 @@ export const VDataTableVirtual = defineComponent({
     const { columns } = createHeaders(props)
     const { items } = useDataTableItems(props, columns)
 
-    createExpanded(props)
+    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
 
-    const { sortedItems } = useSortedItems(items, sortByWithGroups, columns)
+    const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allRows = computed(() => extractRows(flatItems.value))
 
     createSelection(props, allRows)
+    createExpanded(props)
 
     const {
       containerRef,

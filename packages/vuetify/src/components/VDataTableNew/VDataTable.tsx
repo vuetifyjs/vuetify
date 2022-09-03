@@ -21,6 +21,10 @@ import { useOptions } from './composables/options'
 // Utilities
 import { computed, toRef } from 'vue'
 import { defineComponent, propsFactory, useRender } from '@/util'
+import { makeFilterProps, useFilter } from '@/composables/filter'
+
+// Types
+import type { DataTableItem } from './types'
 
 export const makeVDataTableProps = propsFactory({
   ...makeDataTableItemProps(),
@@ -29,6 +33,7 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
+  search: String,
 }, 'v-data-table')
 
 export const VDataTable = defineComponent({
@@ -41,6 +46,7 @@ export const VDataTable = defineComponent({
     ...makeDataTableSelectProps(),
     ...makeDataTableSortProps(),
     ...makeDataTablePaginateProps(),
+    ...makeFilterProps(),
   },
 
   emits: {
@@ -59,10 +65,12 @@ export const VDataTable = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
+    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
 
-    const { sortedItems } = useSortedItems(items, sortByWithGroups, columns)
+    const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, flatItems)

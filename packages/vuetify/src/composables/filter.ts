@@ -3,7 +3,7 @@
 
 // Utilities
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
-import { computed, unref } from 'vue'
+import { computed, ref, unref, watchEffect } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -49,7 +49,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: any[],
+  items: InternalItem[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -69,7 +69,7 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const item = items[i]
+    const item = items[i].raw
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
@@ -126,7 +126,7 @@ export function filterItems (
   return array
 }
 
-export function useFilter (
+export function useFilter <T> (
   props: FilterProps,
   items: MaybeRef<InternalItem[]>,
   query?: Ref<string | undefined>,
@@ -136,9 +136,15 @@ export function useFilter (
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filteredItems = computed(() => {
+  const filteredItems: Ref<InternalItem[]> = ref([])
+  const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
+
+  watchEffect(() => {
+    filteredItems.value = []
+    filteredMatches.value = new Map()
+
     const transformedItems = unref(items)
-    const matches = filterItems(
+    const results = filterItems(
       transformedItems,
       strQuery.value,
       {
@@ -150,11 +156,12 @@ export function useFilter (
       },
     )
 
-    return matches.map(({ index, matches }) => ({
-      item: transformedItems[index],
-      matches,
-    }))
+    results.forEach(({ index, matches }) => {
+      const item = transformedItems[index]
+      filteredItems.value.push(item)
+      filteredMatches.value.set(item.value, matches)
+    })
   })
 
-  return { filteredItems }
+  return { filteredItems, filteredMatches }
 }
