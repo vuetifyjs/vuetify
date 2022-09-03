@@ -126,9 +126,9 @@ export function filterItems (
   return array
 }
 
-export function useFilter <T> (
+export function useFilter <T extends InternalItem> (
   props: FilterProps,
-  items: MaybeRef<InternalItem[]>,
+  items: MaybeRef<T[]>,
   query?: Ref<string | undefined>,
 ) {
   const strQuery = computed(() => (
@@ -136,7 +136,7 @@ export function useFilter <T> (
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filteredItems: Ref<InternalItem[]> = ref([])
+  const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
 
   watchEffect(() => {
