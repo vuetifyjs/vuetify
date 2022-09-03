@@ -2,7 +2,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { getObjectValueByPath, propsFactory } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
 import { computed, inject, provide } from 'vue'
-import type { DataTableItem } from '../types'
+import type { DataTableCompareFunction, DataTableHeader, DataTableItem } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
@@ -61,46 +61,53 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>) {
+export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<DataTableHeader[]>) {
+  const customSorters = computed(() => {
+    return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
+      if (item.sort) obj[item.id] = item.sort
+
+      return obj
+    }, {})
+  })
+
   const sortedItems = computed(() => {
     if (!sortBy.value?.length) return items.value
 
-    return sortItems(items.value, sortBy.value, 'en')
+    return sortItems(items.value, sortBy.value, 'en', customSorters.value)
   })
 
   return { sortedItems }
 }
 
-function sortItems<T extends any, K extends keyof T> (
-  items: DataTableItem[],
-  sortBy: readonly {
-    key: string
-    order: string
-  }[],
+export function sortItems<T extends any, K extends keyof T> (
+  items: T[],
+  sortByItems: readonly SortItem[],
   locale: string,
-  // customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): DataTableItem[] {
-  if (sortBy === null || !sortBy.length) return items
+  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
+): T[] {
+  if (!sortByItems.length) return items
+
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
-  return [...items].sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const { key, order } = sortBy[i]
+  return items.sort((a, b) => {
+    for (let i = 0; i < sortByItems.length; i++) {
+      const sortKey = sortByItems[i].key
+      const sortOrder = sortByItems[i].order
 
-      let sortA = getObjectValueByPath(a.raw, key)
-      let sortB = getObjectValueByPath(b.raw, key)
+      let sortA = getObjectValueByPath(a, sortKey)
+      let sortB = getObjectValueByPath(b, sortKey)
 
-      if (order === 'desc') {
+      if (sortOrder === 'desc') {
         [sortA, sortB] = [sortB, sortA]
       }
 
-      // if (customSorters?.[sortKey as K]) {
-      //   const customResult = customSorters[sortKey as K](sortA, sortB)
+      if (customSorters?.[sortKey as K]) {
+        const customResult = customSorters[sortKey as K](sortA, sortB)
 
-      //   if (!customResult) continue
+        if (!customResult) continue
 
-      //   return customResult
-      // }
+        return customResult
+      }
 
       // Check if both cannot be evaluated
       if (sortA === null && sortB === null) {

@@ -62,7 +62,7 @@ export const VDataTable = defineComponent({
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
 
-    const { sortedItems } = useSortedItems(items, sortByWithGroups)
+    const { sortedItems } = useSortedItems(items, sortByWithGroups, columns)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, flatItems)

@@ -1,21 +1,24 @@
 import type { InternalItem } from '@/composables/items'
 import type { SelectItemKey } from '@/util'
 
+export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
+
 export type DataTableHeader = {
   id: string
   value?: SelectItemKey
   title: string
+
   colspan?: number
   rowspan?: number
+
+  fixed?: boolean
+
   width?: number
   minWidth?: string
   maxWidth?: string
-  fixed?: boolean
-  sortable?: boolean
-}
 
-export type Column = DataTableHeader & {
-  style: any
+  sortable?: boolean
+  sort?: DataTableCompareFunction
 }
 
 export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }
