@@ -4,6 +4,9 @@ import './VDataTableFooter.sass'
 // Components
 import { VBtn, VSelect } from '@/components'
 
+// Composables
+import { usePagination } from './composables/paginate'
+
 // Utilities
 import { defineComponent } from '@/util'
 
@@ -15,18 +18,6 @@ export const VDataTableFooter = defineComponent({
   name: 'VDataTableFooter',
 
   props: {
-    page: {
-      type: Number,
-      required: true,
-    },
-    itemsPerPage: Number,
-    startIndex: Number,
-    stopIndex: Number,
-    itemsLength: Number,
-    pageCount: {
-      type: Number,
-      required: true,
-    },
     prevIcon: {
       type: String,
       default: '$prev',
@@ -56,12 +47,9 @@ export const VDataTableFooter = defineComponent({
     showCurrentPage: Boolean,
   },
 
-  emits: {
-    'update:itemsPerPage': (v: number) => true,
-    'update:page': (v: number) => true,
-  },
+  setup (props, { slots }) {
+    const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage } = usePagination()
 
-  setup (props, { slots, emit }) {
     return () => (
       <div
         class="v-data-table-footer"
@@ -71,43 +59,43 @@ export const VDataTableFooter = defineComponent({
           <span>Items per page:</span>
           <VSelect
             items={ props.itemsPerPageOptions }
-            modelValue={ props.itemsPerPage }
-            onUpdate:modelValue={ v => emit('update:itemsPerPage', v)}
+            modelValue={ itemsPerPage.value }
+            onUpdate:modelValue={ v => itemsPerPage.value = Number(v) }
             density="compact"
             variant="outlined"
             hide-details
           />
         </div>
         <div class="v-data-table-footer__info">
-          <div>{ (props.startIndex ?? -1) + 1 } - { props.stopIndex ?? 0 } of { props.itemsLength ?? 0 }</div>
+          <div>{ (startIndex.value ?? -1) + 1 } - { stopIndex.value ?? 0 } of { itemsLength.value ?? 0 }</div>
         </div>
         <div class="v-data-table-footer__pagination">
           <VBtn
             icon={ props.firstIcon }
             variant="plain"
-            onClick={ () => emit('update:page', 1) }
-            disabled={ props.page === 1 }
+            onClick={ () => page.value = 1 }
+            disabled={ page.value === 1 }
           />
           <VBtn
             icon={ props.prevIcon }
             variant="plain"
-            onClick={ () => emit('update:page', Math.max(1, props.page - 1)) }
-            disabled={ props.page === 1 }
+            onClick={ () => page.value = Math.max(1, page.value - 1) }
+            disabled={ page.value === 1 }
           />
           { props.showCurrentPage && (
-            <div key="page">props.page</div>
+            <div key="page">page.value</div>
           ) }
           <VBtn
             icon={ props.nextIcon }
             variant="plain"
-            onClick={ () => emit('update:page', Math.min(props.pageCount, props.page + 1)) }
-            disabled={ props.page === props.pageCount }
+            onClick={ () => page.value = Math.min(pageCount.value, page.value + 1) }
+            disabled={ page.value === pageCount.value }
           />
           <VBtn
             icon={ props.lastIcon }
             variant="plain"
-            onClick={ () => emit('update:page', props.pageCount) }
-            disabled={ props.page === props.pageCount }
+            onClick={ () => page.value = pageCount.value }
+            disabled={ page.value === pageCount.value }
           />
         </div>
       </div>

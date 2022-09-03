@@ -1,9 +1,10 @@
 // Components
-import { VCheckbox, VCheckboxBtn } from '../VCheckbox'
+import { VCheckboxBtn } from '../VCheckbox'
 
 // Composables
 import { VDataTableColumn } from './VDataTableColumn'
-import { useHeaders, useSelection } from './composables'
+import { useSelection } from './composables/select'
+import { useHeaders } from './composables/headers'
 
 // Utilities
 import { computed } from 'vue'
@@ -11,7 +12,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { DataTableItem } from './composables'
+import type { DataTableItem } from './types'
 
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',

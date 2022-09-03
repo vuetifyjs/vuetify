@@ -4,66 +4,58 @@ import { VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 
+// Composables
+import { createExpanded, makeDataTableExpandProps } from './composables/expand'
+import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
+import { makeDataTableItemProps, useDataTableItems } from './composables/items'
+import { createSort, makeDataTableSortProps } from './composables/sort'
+import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
+import { createSelection, makeDataTableSelectProps } from './composables/select'
+import { useOptions } from './composables/options'
+
 // Utilities
 import { provide, toRef } from 'vue'
-import { defineComponent } from '@/util'
-import { createExpanded, createHeaders, createSort, useDataTableItems, useGroupBy, useHeaders, useOptions, usePagination, useSort } from './composables'
+import { defineComponent, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import { VProgressLinear } from '@/components/VProgressLinear'
-import { makeItemsProps } from '@/composables/items'
+import { makeVDataTableProps } from './VDataTable'
 
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
 
   props: {
     color: String,
-    headers: {
-      type: Array as PropType<any[]>,
-      required: true,
-    },
     loading: Boolean,
-    itemsPerPage: {
-      type: Number,
-      default: 10,
-    },
-    page: {
-      type: Number,
-      default: 1,
-    },
-    itemsLength: Number,
-    fixedHeader: Boolean,
-    fixedFooter: Boolean,
-    height: [String, Number],
-    sortBy: {
-      type: Array as PropType<any[]>,
-      default: () => ([]),
-    },
-    groupBy: String,
-    ...makeItemsProps({
-      itemValue: 'id',
-    }),
-    expandOnClick: Boolean,
+
+    ...makeVDataTableProps(),
+    ...makeDataTableExpandProps(),
+    ...makeDataTableHeaderProps(),
+    ...makeDataTableItemProps(),
+    ...makeDataTableSelectProps(),
+    ...makeDataTableSortProps(),
+    ...makeDataTablePaginateProps(),
   },
 
   emits: {
+    'update:modelValue': (value: any[]) => true,
     'update:page': (page: number) => true,
     'update:itemsPerPage': (page: number) => true,
     'update:sortBy': (sortBy: any) => true,
     'update:options': (options: any) => true,
   },
 
-  setup (props, { slots, emit }) {
-    const { expanded } = createExpanded(props)
+  setup (props, { slots }) {
+    createExpanded(props)
 
-    const { columns, headers } = createHeaders(props)
+    const { columns } = createHeaders(props, { showSelect: toRef(props, 'showSelect') })
 
     const { items } = useDataTableItems(props, columns)
 
     const { sortBy, toggleSort } = createSort(props)
 
-    const { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength } = usePagination(props)
+    const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, items)
+
+    createSelection(props, items)
 
     useOptions({
       page,
@@ -72,7 +64,6 @@ export const VDataTableServer = defineComponent({
       startIndex,
       stopIndex,
       pageCount,
-      itemsLength,
     })
 
     provide('v-data-table', {
@@ -80,7 +71,7 @@ export const VDataTableServer = defineComponent({
       sortBy,
     })
 
-    return () => (
+    useRender(() => (
       <VTable
         class={[
           'v-data-table',
@@ -98,10 +89,7 @@ export const VDataTableServer = defineComponent({
               <thead class="v-data-table__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
-                    columns={ columns.value }
-                    headers={ headers.value }
                     sticky={ props.fixedHeader }
-                    sortBy={ sortBy.value }
                     loading={ props.loading }
                     color={ props.color }
                   />
@@ -122,14 +110,6 @@ export const VDataTableServer = defineComponent({
           ),
           bottom: slots.footer ? slots.footer() : () => (
             <VDataTableFooter
-              startIndex={ startIndex.value }
-              stopIndex={ stopIndex.value }
-              itemsLength={ itemsLength.value }
-              page={ page.value }
-              pageCount={ pageCount.value }
-              itemsPerPage={ itemsPerPage.value }
-              onUpdate:itemsPerPage={ v => itemsPerPage.value = v }
-              onUpdate:page={ v => page.value = v }
               v-slots={{
                 prepend: slots['footer.prepend'],
               }}
@@ -137,6 +117,6 @@ export const VDataTableServer = defineComponent({
           ),
         }}
       </VTable>
-    )
+    ))
   },
 })

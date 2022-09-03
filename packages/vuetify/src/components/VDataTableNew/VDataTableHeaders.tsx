@@ -1,48 +1,36 @@
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import { VCheckbox, VCheckboxBtn } from '@/components/VCheckbox'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
+import { useSort } from './composables/sort'
+import { useSelection } from './composables/select'
+import { useHeaders } from './composables/headers'
 
 // Utilities
 import { computed } from 'vue'
 import { convertToUnit, defineComponent } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { DataTableHeader } from './types'
-import type { SortItem } from './composables'
-import { useSelection, useSort } from './composables'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
 
   props: {
     color: String,
-    columns: {
-      type: Array as PropType<DataTableHeader[]>,
-      required: true,
-    },
     loading: Boolean,
-    headers: {
-      type: Array as PropType<DataTableHeader[][]>,
-      required: true,
-    },
-    rowHeight: {
-      type: Number,
-      default: 48,
-    },
     sticky: Boolean,
-    sortBy: Array as PropType<readonly SortItem[]>,
   },
 
   setup (props, { slots, emit }) {
-    const { toggleSort } = useSort()
+    const { toggleSort, sortBy } = useSort()
     const { someSelected, allSelected, selectAll } = useSelection()
+    const { columns, headers } = useHeaders()
 
     const fixedOffsets = computed(() => {
-      return props.columns.reduce((offsets, column) => {
+      return columns.value.reduce((offsets, column) => {
         return [...offsets, offsets[offsets.length - 1] + (column.width ?? 0)]
       }, [0])
     })
@@ -59,7 +47,7 @@ export const VDataTableHeaders = defineComponent({
     }
 
     function getSortIcon (id: string) {
-      const item = props.sortBy?.find(item => item.key === id)
+      const item = sortBy.value.find(item => item.key === id)
 
       if (!item) return 'mdi-arrow-up'
 
@@ -73,15 +61,13 @@ export const VDataTableHeaders = defineComponent({
             'v-data-table__th',
             {
               'v-data-table__th--sortable': column.sortable !== false && column.id,
-              'v-data-table__th--sorted': !!props.sortBy?.find(x => x.key === column.id),
+              'v-data-table__th--sorted': !!sortBy.value.find(x => x.key === column.id),
               'v-data-table-column--fixed': column.fixed,
             },
           ]}
           style={{
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.width),
-            // height: convertToUnit(props.rowHeight),
-            // height: ''
             ...getFixedStyles(column.fixed, y, x),
           }}
           role="columnheader"
@@ -113,8 +99,8 @@ export const VDataTableHeaders = defineComponent({
     return () => {
       return (
         <>
-          { props.headers.map((row, y) => (
-            <tr class="v-data-table__tr" role="row">
+          { headers.value.map((row, y) => (
+            <tr>
               { row.map((column, x) => (
                 <VDataTableHeaderCell column={ column} x={ x } y={ y } />
               )) }
@@ -122,7 +108,7 @@ export const VDataTableHeaders = defineComponent({
           )) }
           { props.loading && (
             <tr class="v-data-table__progress">
-              <th colspan={ props.columns?.length }>
+              <th colspan={ columns.value.length }>
                 <VProgressLinear indeterminate color={ props.color } />
               </th>
             </tr>

@@ -4,7 +4,9 @@ import { VCheckboxBtn } from '../VCheckbox'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables
-import { useGroupBy, useHeaders, useSelection } from './composables'
+import { useHeaders } from './composables/headers'
+import { useSelection } from './composables/select'
+import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
@@ -12,7 +14,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { GroupHeaderItem } from './composables'
+import type { GroupHeaderItem } from './types'
 
 export const VDataTableGroupHeaderRow = defineComponent({
   name: 'VDataTableGroupHeaderRow',
@@ -42,13 +44,16 @@ export const VDataTableGroupHeaderRow = defineComponent({
       >
         { columns.value.map(column => {
           if (column.id === 'data-table-group') {
-            return slots['data-table-group']?.() ?? (
+            const icon = opened.value.has(props.item.id) ? '$expand' : '$next'
+            const onClick = () => toggleGroup(props.item.id)
+
+            return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
               <VDataTableColumn class="v-data-table-group-header-row__column">
                 <VBtn
                   size="small"
                   variant="text"
-                  icon={ opened.value.has(props.item.id) ? '$expand' : '$next' }
-                  onClick={ () => toggleGroup(props.item.id) }
+                  icon={ icon }
+                  onClick={ onClick }
                 />
                 <span>{ props.item.value }</span>
                 <span>({ rows.value.length })</span>
@@ -57,13 +62,14 @@ export const VDataTableGroupHeaderRow = defineComponent({
           }
 
           if (column.id === 'data-table-select') {
-            const allSelected = isSelected(rows.value)
-            const someSelected = isSomeSelected(rows.value)
-            return slots['data-table-select']?.() ?? (
+            const modelValue = isSelected(rows.value)
+            const indeterminate = isSomeSelected(rows.value) && !modelValue
+            const selectGroup = (v: boolean) => select(rows.value, v)
+            return slots['data-table-select']?.({ props: { modelValue, indeterminate, 'onUpdate:modelValue': selectGroup } }) ?? (
               <VCheckboxBtn
-                modelValue={allSelected}
-                indeterminate={someSelected && !allSelected}
-                onUpdate:modelValue={v => select(rows.value, v)}
+                modelValue={ modelValue }
+                indeterminate={ indeterminate }
+                onUpdate:modelValue={ selectGroup }
               />
             )
           }

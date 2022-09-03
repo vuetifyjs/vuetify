@@ -3,14 +3,15 @@ import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
-import { useExpanded } from './composables'
+import { useHeaders } from './composables/headers'
+import { useExpanded } from './composables/expand'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalDataTableItem } from './composables'
+import type { InternalDataTableItem } from './types'
 
 export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
@@ -24,12 +25,13 @@ export const VDataTableRows = defineComponent({
   },
 
   setup (props, { slots }) {
+    const { columns } = useHeaders()
     const { expanded, expand, expandOnClick } = useExpanded()
 
     useRender(() => {
       return (
         <>
-          { props.items.map(item => {
+          { props.items.map((item, index) => {
             if (item.type === 'group-header') {
               return (
                 <VDataTableGroupHeaderRow
@@ -40,52 +42,20 @@ export const VDataTableRows = defineComponent({
               )
             }
 
-            if (item.type === 'item') {
-              return (
-                <>
-                  <VDataTableRow
-                    key={ `item_${item.value}` }
-                    onClick={ expandOnClick.value ? () => expand(item, !expanded.value.has(item.value)) : undefined }
-                    item={ item }
-                    v-slots={ slots }
-                  />
-                  { expanded.value.has(item.value) && slots['expanded-row']?.({ item, columns: props.columns }) }
-                </>
-              )
-            }
-
-            // if (item.type === 'expanded-item') {
-            //   return slots['expanded-row']?.({ item })
-            // }
-
-            return null
+            return (
+              <>
+                <VDataTableRow
+                  key={ `item_${item.value}` }
+                  onClick={ expandOnClick.value ? () => expand(item, !expanded.value.has(item.value)) : undefined }
+                  item={ item }
+                  v-slots={ slots }
+                />
+                { expanded.value.has(item.value) && slots['expanded-row']?.({ item, columns: columns.value }) }
+              </>
+            )
           }) }
         </>
       )
-      // (
-      //   <>
-      //     { props.items.map(item => item.type === 'group-header' ? (
-      //       <VDataTableGroupHeaderRow
-      //         key={ `group-header_${item.groupBy}_${item.groupByValue}` }
-      //         item={ item }
-      //         columns={ props.columns }
-      //         v-slots={ slots }
-      //       />
-      //     ) : (
-      //       <>
-      //         <VDataTableRow
-      //           key={ `row_${item.id}` }
-      //           onClick={ slots['expanded-row'] ? () => expand(item, !expanded.value.has(item.value)) : undefined }
-      //           item={ item }
-      //           columns={ props.columns }
-      //           v-slots={ slots }
-      //         />
-
-      //         { expanded.value.has(item.value) && slots['expanded-row']?.() }
-      //       </>
-      //     )) }
-      //   </>
-      // )
     })
 
     return {}
