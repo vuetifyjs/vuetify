@@ -69,7 +69,7 @@ export const VDataTableHeaders = defineComponent({
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.width),
             ...getFixedStyles(column.fixed, y, x),
-          }}
+          } as any} // TODO: fix type
           role="columnheader"
           colspan={column.colspan}
           rowspan={column.rowspan}

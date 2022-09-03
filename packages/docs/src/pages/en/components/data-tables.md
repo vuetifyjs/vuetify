@@ -1,11 +1,12 @@
 ---
+nav: Data tables
 meta:
   title: Data table component
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
 related:
   - /components/data-iterators/
-  - /components/simple-tables/
+  - /components/tables/
   - /components/lists/
 ---
 
@@ -17,9 +18,25 @@ The `v-data-table` component is used for displaying tabular data. Features inclu
 
 ## Usage
 
-The standard data-table will by default render your data as simple rows.
+There are three variants of the data table available depending on your requirements.
+
+### v-data-table
+
+The standard data table presumes that the entire data set is available locally. Sorting, pagination, and filtering is supported and done internally by the component itself.
 
 <example file="v-data-table/usage" />
+
+### v-data-table-server
+
+This variant of the data table is meant to be used when the data set you are displaying comes directly from a server, and you don't want to load all rows at mount. Sorting, pagination, and filtering is supported, but none of it is handled by the component. Instead it is meant to be handled by the server.
+
+<example file="v-data-table/server" />
+
+### v-data-table-virtual
+
+The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for display large data sets. It supports sorting and filtering, but not pagination.
+
+<example file="v-data-table/virtual" />
 
 ## API
 
@@ -46,6 +63,8 @@ v-simple-checkbox description -->
 ## Examples
 
 ### Props
+
+<!--
 
 #### Custom filter
 
@@ -173,6 +192,6 @@ Sorting can also be controlled externally by using the individual props, or by u
 
 If you're loading data already paginated and sorted from a backend, you can use the **server-items-length** prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from your backend. Use the **loading** prop to display a progress bar while fetching data.
 
-<example file="v-data-table/misc-server-side-paginate-and-sort" />
+<example file="v-data-table/misc-server-side-paginate-and-sort" /> -->
 
 <backmatter />

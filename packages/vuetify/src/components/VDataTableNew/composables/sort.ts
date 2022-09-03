@@ -1,3 +1,4 @@
+import { InternalItem } from '@/composables/items'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getObjectValueByPath, propsFactory } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -79,23 +80,21 @@ export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonl
   return { sortedItems }
 }
 
-export function sortItems<T extends any, K extends keyof T> (
+export function sortItems<T extends InternalItem, K extends keyof T> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
   customSorters?: Record<K, DataTableCompareFunction<T[K]>>
 ): T[] {
-  if (!sortByItems.length) return items
-
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
-  return items.sort((a, b) => {
+  return [...items].sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
       const sortKey = sortByItems[i].key
       const sortOrder = sortByItems[i].order
 
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
+      let sortA = getObjectValueByPath(a.raw, sortKey)
+      let sortB = getObjectValueByPath(b.raw, sortKey)
 
       if (sortOrder === 'desc') {
         [sortA, sortB] = [sortB, sortA]

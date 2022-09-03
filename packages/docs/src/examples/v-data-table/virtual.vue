@@ -1,18 +1,17 @@
 <template>
-  <v-data-table
-    v-model:items-per-page="itemsPerPage"
+  <v-data-table-virtual
     :headers="headers"
-    :items="desserts"
+    :items="virtualDesserts"
     item-value="name"
     class="elevation-1"
-  ></v-data-table>
+    height="400"
+  ></v-data-table-virtual>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        itemsPerPage: 5,
         headers: [
           {
             title: 'Dessert (100g serving)',
@@ -36,20 +35,12 @@
             iron: '1',
           },
           {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: '0',
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: '6',
+            name: 'Ice cream sandwich',
+            calories: 237,
+            fat: 9.0,
+            carbs: 37,
+            protein: 4.3,
+            iron: '1',
           },
           {
             name: 'Eclair',
@@ -60,6 +51,14 @@
             iron: '7',
           },
           {
+            name: 'Cupcake',
+            calories: 305,
+            fat: 3.7,
+            carbs: 67,
+            protein: 4.3,
+            iron: '8',
+          },
+          {
             name: 'Gingerbread',
             calories: 356,
             fat: 16.0,
@@ -68,12 +67,12 @@
             iron: '16',
           },
           {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: '1',
+            name: 'Jelly bean',
+            calories: 375,
+            fat: 0.0,
+            carbs: 94,
+            protein: 0.0,
+            iron: '0',
           },
           {
             name: 'Lollipop',
@@ -82,14 +81,6 @@
             carbs: 98,
             protein: 0,
             iron: '2',
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: '8',
           },
           {
             name: 'Honeycomb',
@@ -107,8 +98,26 @@
             protein: 4.9,
             iron: '22',
           },
+          {
+            name: 'KitKat',
+            calories: 518,
+            fat: 26.0,
+            carbs: 65,
+            protein: 7,
+            iron: '6',
+          },
         ],
       }
+    },
+    computed: {
+      virtualDesserts () {
+        return [...Array(10000).keys()].map(i => {
+          const dessert = { ...this.desserts[i % 10] }
+          dessert.name = `${dessert.name} #${i}`
+
+          return dessert
+        })
+      },
     },
   }
 </script>

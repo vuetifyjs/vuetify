@@ -1,4 +1,4 @@
-import { getCurrentInstance } from '@/util'
+import { deepEqual, getCurrentInstance } from '@/util'
 import type { Ref } from 'vue'
 import { computed, watch } from 'vue'
 import type { SortItem } from './sort'
@@ -39,7 +39,10 @@ export function useOptions ({
     page.value = 1
   })
 
+  let oldOptions = options.value
   watch(options, () => {
+    if (deepEqual(oldOptions, options.value)) return
     vm.emit('update:options', options.value)
+    oldOptions = options.value
   }, { deep: true })
 }

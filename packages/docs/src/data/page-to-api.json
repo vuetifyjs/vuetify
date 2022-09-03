@@ -62,10 +62,8 @@
   ],
   "components/data-tables": [
     "v-data-table",
-    "v-data-table-header",
-    "v-data-footer",
-    "v-edit-dialog",
-    "v-simple-checkbox"
+    "v-data-table-server",
+    "v-data-table-virtual"
   ],
   "components/date-pickers-month": ["v-date-picker"],
   "components/date-pickers": ["v-date-picker"],
