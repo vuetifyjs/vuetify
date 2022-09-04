@@ -33,13 +33,14 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
-  search: String,
 }, 'v-data-table')
 
 export const VDataTable = defineComponent({
   name: 'VDataTable',
 
   props: {
+    search: String,
+
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
     ...makeDataTableGroupProps(),

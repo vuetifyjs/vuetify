@@ -12,15 +12,11 @@ import { createSort, makeDataTableSortProps } from './composables/sort'
 import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
 import { createSelection, makeDataTableSelectProps } from './composables/select'
 import { useOptions } from './composables/options'
-import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Utilities
 import { provide, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
-
-// Types
-import type { DataTableItem } from './types'
 
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
@@ -40,7 +36,6 @@ export const VDataTableServer = defineComponent({
     ...makeDataTableSelectProps(),
     ...makeDataTableSortProps(),
     ...makeDataTablePaginateProps(),
-    ...makeFilterProps(),
   },
 
   emits: {
@@ -58,11 +53,9 @@ export const VDataTableServer = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
-
     const { sortBy, toggleSort } = createSort(props)
 
-    const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, filteredItems)
+    const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, items)
 
     createSelection(props, items)
 

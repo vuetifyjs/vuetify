@@ -27,6 +27,8 @@ export const VDataTableVirtual = defineComponent({
   name: 'VDataTableVirtual',
 
   props: {
+    search: String,
+
     ...makeVDataTableProps(),
     ...makeVDataTableProps(),
     ...makeDataTableGroupProps(),
