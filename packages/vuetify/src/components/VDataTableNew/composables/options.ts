@@ -1,6 +1,9 @@
-import { deepEqual, getCurrentInstance } from '@/util'
-import type { Ref } from 'vue'
+// Utilities
 import { computed, watch } from 'vue'
+import { deepEqual, getCurrentInstance } from '@/util'
+
+// Types
+import type { Ref } from 'vue'
 import type { SortItem } from './sort'
 
 export function useOptions ({

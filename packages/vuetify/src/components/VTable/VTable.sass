@@ -85,12 +85,7 @@
           > th
             font-weight: $table-header-font-weight
             user-select: none
-
-            @include tools.ltr()
-              text-align: left
-
-            @include tools.rtl()
-              text-align: right
+            text-align: start
 
   @at-root
     @include tools.density('v-table', $table-density) using ($modifier)

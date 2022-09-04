@@ -12,7 +12,7 @@ related:
 
 # Data tables
 
-The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, content-editing, and row selection.
+The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
 <entry />
 
@@ -63,6 +63,14 @@ v-simple-checkbox description -->
 ## Examples
 
 ### Props
+
+#### Initial values
+
+In Vuetify v3, all v-model props are controlled, meaning that if you just use one-way binding with `:prop="prop"`, then the component will only ever use the value sent in. This means that the v2 behaviour of being able to pass an initial value to props like `sort-by` and `items-per-page` is no longer possible.
+
+Instead you will have to use two-way binding with `v-model:prop="prop"`. The downside of this is that you will need to add variables for each of the props that you want to use, even if you are only passing an initial value. You could also use a single object with your initial values, and pass it with `v-bind`.
+
+<example file="v-data-table/props-initial" />
 
 <!--
 

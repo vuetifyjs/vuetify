@@ -1,8 +1,13 @@
-import type { ItemProps } from '@/composables/items'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { propsFactory } from '@/util'
+
+// Utilities
 import { computed, inject, provide } from 'vue'
+import { propsFactory } from '@/util'
+
+// Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import type { ItemProps } from '@/composables/items'
 import type { DataTableItem } from '../types'
 
 export const makeDataTableSelectProps = propsFactory({

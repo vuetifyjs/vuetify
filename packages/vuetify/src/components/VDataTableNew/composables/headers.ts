@@ -1,7 +1,10 @@
-import type { InjectionKey, PropType, Ref } from 'vue'
+// Utilities
 import { inject, provide, ref, watch } from 'vue'
-import type { DataTableHeader } from '../types'
 import { createRange, propsFactory } from '@/util'
+
+// Types
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { DataTableHeader } from '../types'
 import type { SortItem } from './sort'
 
 export const makeDataTableHeaderProps = propsFactory({
@@ -20,7 +23,14 @@ type HeaderProps = {
   headers: DataTableHeader[] | DataTableHeader[][]
 }
 
-export function createHeaders (props: HeaderProps, options?: { groupBy?: Ref<readonly SortItem[]>, showSelect?: Ref<boolean> }) {
+export function createHeaders (
+  props: HeaderProps,
+  options?: {
+    groupBy?: Ref<readonly SortItem[]>
+    showSelect?: Ref<boolean>
+    showExpand?: Ref<boolean>
+  }
+) {
   const headers = ref<DataTableHeader[][]>([])
   const columns = ref<DataTableHeader[]>([])
 
@@ -40,6 +50,12 @@ export function createHeaders (props: HeaderProps, options?: { groupBy?: Ref<rea
     if (options?.showSelect?.value) {
       const index = flat.findIndex(({ column }) => column.id === 'data-table-select')
       if (index < 0) flat.unshift({ column: { ...defaultHeader, id: 'data-table-select', width: 1, rowspan: rowCount }, row: 0 })
+      else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column, width: 1 }, row: flat[index].row })
+    }
+
+    if (options?.showExpand?.value) {
+      const index = flat.findIndex(({ column }) => column.id === 'data-table-expand')
+      if (index < 0) flat.push({ column: { ...defaultHeader, id: 'data-table-expand', width: 1, rowspan: rowCount }, row: 0 })
       else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column, width: 1 }, row: flat[index].row })
     }
 

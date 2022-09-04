@@ -1,6 +1,9 @@
+// Utilities
 import { computed, ref } from 'vue'
-import type { Ref } from 'vue'
 import { propsFactory } from '@/util'
+
+// Types
+import type { Ref } from 'vue'
 
 export const makeDataTableVirtualProps = propsFactory({
   visibleItems: {

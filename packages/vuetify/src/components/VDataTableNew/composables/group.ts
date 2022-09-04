@@ -1,8 +1,11 @@
+// Utilities
 import { computed, inject, provide, ref } from 'vue'
+import { getObjectValueByPath, propsFactory } from '@/util'
+
+// Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItem, GroupHeaderItem } from '../types'
 import type { SortItem } from './sort'
-import { getObjectValueByPath, propsFactory } from '@/util'
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {

@@ -1,6 +1,11 @@
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { propsFactory } from '@/util'
+
+// Utilities
 import { computed, inject, provide } from 'vue'
+import { propsFactory } from '@/util'
+
+// Types
 import type { InjectionKey, Ref } from 'vue'
 
 export const makeDataTablePaginateProps = propsFactory({

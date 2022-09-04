@@ -61,7 +61,11 @@ export const VDataTable = defineComponent({
   setup (props, { slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
 
-    const { columns } = createHeaders(props, { groupBy, showSelect: toRef(props, 'showSelect') })
+    const { columns } = createHeaders(props, {
+      groupBy,
+      showSelect: toRef(props, 'showSelect'),
+      showExpand: toRef(props, 'showExpand'),
+    })
 
     const { items } = useDataTableItems(props, columns)
 
@@ -111,6 +115,7 @@ export const VDataTable = defineComponent({
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     sticky={ props.fixedHeader }
+                    multiSort={ props.multiSort }
                   />
                 ) }
               </thead>

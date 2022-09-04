@@ -6,6 +6,8 @@ export function VDataTableColumn (props: {
   width?: number | string
   fixedOffset?: number | string
   fixed?: boolean
+  align?: 'start' | 'end'
+  noPadding?: boolean
 }, { slots, attrs }: SetupContext) {
   return (
     <td
@@ -13,7 +15,9 @@ export function VDataTableColumn (props: {
         'v-data-table__td',
         {
           'v-data-table-column--fixed': props.fixed,
+          'v-data-table-column--no-padding': props.noPadding,
         },
+        `v-data-table-column--align-${props.align ?? 'start'}`,
       ]}
       style={{
         height: convertToUnit(props.height),

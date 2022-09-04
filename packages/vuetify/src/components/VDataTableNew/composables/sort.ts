@@ -1,8 +1,13 @@
-import { InternalItem } from '@/composables/items'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getObjectValueByPath, propsFactory } from '@/util'
-import type { InjectionKey, PropType, Ref } from 'vue'
+
+// Utilities
 import { computed, inject, provide } from 'vue'
+import { getObjectValueByPath, propsFactory } from '@/util'
+
+// Types
+import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InternalItem } from '@/composables/items'
 import type { DataTableCompareFunction, DataTableHeader, DataTableItem } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
@@ -10,6 +15,8 @@ export const makeDataTableSortProps = propsFactory({
     type: Array as PropType<SortItem[]>,
     default: () => ([]),
   },
+  multiSort: Boolean,
+  mustSort: Boolean,
 }, 'v-data-table-sort')
 
 const VDataTableSortSymbol: InjectionKey<{

@@ -1,8 +1,13 @@
-import type { ItemProps } from '@/composables/items'
+// Composables
 import { makeItemsProps, useItems } from '@/composables/items'
-import { getPropertyFromItem, propsFactory } from '@/util'
-import type { Ref } from 'vue'
+
+// Utilities
 import { computed } from 'vue'
+import { getPropertyFromItem, propsFactory } from '@/util'
+
+// Types
+import type { Ref } from 'vue'
+import type { ItemProps } from '@/composables/items'
 import type { DataTableHeader, DataTableItem } from '../types'
 
 export const makeDataTableItemProps = propsFactory({

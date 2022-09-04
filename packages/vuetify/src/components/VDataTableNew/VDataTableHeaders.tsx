@@ -7,6 +7,7 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { useSort } from './composables/sort'
 import { useSelection } from './composables/select'
 import { useHeaders } from './composables/headers'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
@@ -22,6 +23,7 @@ export const VDataTableHeaders = defineComponent({
     color: String,
     loading: Boolean,
     sticky: Boolean,
+    multiSort: Boolean,
   },
 
   setup (props, { slots, emit }) {
@@ -54,23 +56,30 @@ export const VDataTableHeaders = defineComponent({
       return item.order === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
     }
 
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: DataTableHeader, x: number, y: number }) => {
+      const isSorted = !!sortBy.value.find(x => x.key === column.id)
+      const isSortable = column.sortable !== false && column.id
+      const noPadding = column.id === 'data-table-select' || column.id === 'data-table-expand'
+
       return (
         <th
           class={[
             'v-data-table__th',
             {
-              'v-data-table__th--sortable': column.sortable !== false && column.id,
-              'v-data-table__th--sorted': !!sortBy.value.find(x => x.key === column.id),
+              'v-data-table__th--sortable': isSortable,
+              'v-data-table__th--sorted': isSorted,
               'v-data-table-column--fixed': column.fixed,
+              'v-data-table-column--no-padding': noPadding,
             },
+            `v-data-table-column--align-${column.align ?? 'start'}`,
           ]}
           style={{
             width: convertToUnit(column.width),
             minWidth: convertToUnit(column.width),
             ...getFixedStyles(column.fixed, y, x),
           } as any} // TODO: fix type
-          role="columnheader"
           colspan={column.colspan}
           rowspan={column.rowspan}
           onClick={column.sortable !== false ? () => toggleSort(column.id) : undefined}
@@ -82,15 +91,28 @@ export const VDataTableHeaders = defineComponent({
               onUpdate:modelValue={ selectAll }
             />
           ) : (
-            <>
+            <div class="v-data-table-header__content">
               <span>{ column.title }</span>
-              { column.id && column.sortable !== false && (
+              { isSortable && (
                 <VIcon
+                  key="icon"
                   class="v-data-table-header__sort-icon"
                   icon={ getSortIcon(column.id) }
                 />
               )}
-            </>
+              { props.multiSort && isSorted && (
+                <div
+                  key="badge"
+                  class={[
+                    'v-data-table-header__sort-badge',
+                    ...backgroundColorClasses.value,
+                  ]}
+                  style={backgroundColorStyles.value}
+                >
+                  {sortBy.value.findIndex(x => x.key === column.id) + 1}
+                </div>
+              ) }
+            </div>
           ) }
         </th>
       )
