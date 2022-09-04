@@ -8,7 +8,7 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 // Types
 import type { Ref } from 'vue'
 import type { ItemProps } from '@/composables/items'
-import type { DataTableHeader, DataTableItem } from '../types'
+import type { DataTableItem, InternalDataTableHeader } from '../types'
 
 export const makeDataTableItemProps = propsFactory({
   // TODO: Worth it to make specific datatable implementation
@@ -18,7 +18,7 @@ export const makeDataTableItemProps = propsFactory({
   }),
 }, 'v-data-table-item')
 
-export function useDataTableItems (props: ItemProps, columns: Ref<DataTableHeader[]>) {
+export function useDataTableItems (props: ItemProps, columns: Ref<InternalDataTableHeader[]>) {
   const { items } = useItems(props)
 
   const dataTableItems = computed<DataTableItem[]>(() => items.value.map(item => {

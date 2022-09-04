@@ -4,7 +4,7 @@ import { createRange, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableHeader } from '../types'
+import type { DataTableHeader, InternalDataTableHeader } from '../types'
 import type { SortItem } from './sort'
 
 export const makeDataTableHeaderProps = propsFactory({
@@ -15,8 +15,8 @@ export const makeDataTableHeaderProps = propsFactory({
 }, 'v-data-table-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
-  headers: Ref<DataTableHeader[][]>
-  columns: Ref<DataTableHeader[]>
+  headers: Ref<InternalDataTableHeader[][]>
+  columns: Ref<InternalDataTableHeader[]>
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
@@ -31,8 +31,8 @@ export function createHeaders (
     showExpand?: Ref<boolean>
   }
 ) {
-  const headers = ref<DataTableHeader[][]>([])
-  const columns = ref<DataTableHeader[]>([])
+  const headers = ref<InternalDataTableHeader[][]>([])
+  const columns = ref<InternalDataTableHeader[]>([])
 
   watch(() => props.headers, () => {
     const wrapped = Array.isArray(props.headers[0]) ? props.headers as DataTableHeader[][] : [props.headers as DataTableHeader[]]
@@ -40,6 +40,7 @@ export function createHeaders (
 
     const rowCount = wrapped.length
     const defaultHeader = { title: '', sortable: false }
+    const defaultActionHeader = { ...defaultHeader, width: 48 }
 
     if (options?.groupBy?.value.length) {
       const index = flat.findIndex(({ column }) => column.id === 'data-table-group')
@@ -49,23 +50,50 @@ export function createHeaders (
 
     if (options?.showSelect?.value) {
       const index = flat.findIndex(({ column }) => column.id === 'data-table-select')
-      if (index < 0) flat.unshift({ column: { ...defaultHeader, id: 'data-table-select', width: 1, rowspan: rowCount }, row: 0 })
-      else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column, width: 1 }, row: flat[index].row })
+      if (index < 0) flat.unshift({ column: { ...defaultActionHeader, id: 'data-table-select', rowspan: rowCount }, row: 0 })
+      else flat.splice(index, 1, { column: { ...defaultActionHeader, ...flat[index].column }, row: flat[index].row })
     }
 
     if (options?.showExpand?.value) {
       const index = flat.findIndex(({ column }) => column.id === 'data-table-expand')
-      if (index < 0) flat.push({ column: { ...defaultHeader, id: 'data-table-expand', width: 1, rowspan: rowCount }, row: 0 })
-      else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column, width: 1 }, row: flat[index].row })
+      if (index < 0) flat.push({ column: { ...defaultActionHeader, id: 'data-table-expand', rowspan: rowCount }, row: 0 })
+      else flat.splice(index, 1, { column: { ...defaultActionHeader, ...flat[index].column }, row: flat[index].row })
     }
 
-    const rows = flat.reduce((arr, item) => {
-      arr[item.row].push(item.column)
-      return arr
-    }, createRange(rowCount).map(() => []) as DataTableHeader[][])
+    const fixedRows: InternalDataTableHeader[][] = createRange(rowCount).map(() => [])
+    const fixedOffsets = createRange(rowCount).fill(0)
 
-    headers.value = rows
-    columns.value = rows.flatMap(row => row.filter(col => col.id != null))
+    let count = 0
+    flat.forEach(({ column, row }) => {
+      const id = column.id ?? `data-table-column-${count++}`
+      for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
+        fixedRows[i].push({ ...column, id, fixedOffset: fixedOffsets[i] })
+        fixedOffsets[i] += column.width ?? 0
+      }
+    })
+
+    fixedRows.forEach(row => {
+      for (let i = row.length; i--; i >= 0) {
+        if (row[i].fixed) {
+          row[i].lastFixed = true
+          return
+        }
+      }
+    })
+
+    const seen = new Set()
+    headers.value = fixedRows.map(row => {
+      const filtered = []
+      for (const column of row) {
+        if (!seen.has(column.id)) {
+          seen.add(column.id)
+          filtered.push(column)
+        }
+      }
+
+      return filtered
+    })
+    columns.value = fixedRows.at(-1)!
   }, {
     deep: true,
     immediate: true,

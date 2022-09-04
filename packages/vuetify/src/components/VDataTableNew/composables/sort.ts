@@ -8,7 +8,7 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { InternalItem } from '@/composables/items'
-import type { DataTableCompareFunction, DataTableHeader, DataTableItem } from '../types'
+import type { DataTableCompareFunction, DataTableItem, InternalDataTableHeader } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
@@ -69,7 +69,8 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<DataTableHeader[]>) {
+export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<InternalDataTableHeader[]>) {
+  // TODO: Put this in separate prop customKeySort to match filter composable?
   const customSorters = computed(() => {
     return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
       if (item.sort) obj[item.id] = item.sort

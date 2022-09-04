@@ -9,7 +9,6 @@ import { useHeaders } from './composables/headers'
 import { useExpanded } from './composables/expand'
 
 // Utilities
-import { computed } from 'vue'
 import { defineComponent } from '@/util'
 
 // Types
@@ -24,19 +23,12 @@ export const VDataTableRow = defineComponent({
       type: Object as PropType<DataTableItem>,
       required: true,
     },
-    rowHeight: [String, Number],
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { slots }) {
     const { isSelected, toggleSelect } = useSelection()
     const { isExpanded, toggleExpand } = useExpanded()
     const { columns } = useHeaders()
-
-    const fixedOffsets = computed(() => {
-      return columns.value.reduce((offsets, column) => {
-        return [...offsets, offsets[offsets.length - 1] + (column.width ?? 0)]
-      }, [0])
-    })
 
     return () => {
       return (
@@ -48,9 +40,9 @@ export const VDataTableRow = defineComponent({
           { columns.value.map((column, i) => (
             <VDataTableColumn
               fixed={ column.fixed }
-              fixedOffset={ column.fixed ? fixedOffsets.value[i] : undefined }
+              fixedOffset={ column.fixedOffset }
+              lastFixed={ column.lastFixed }
               width={ column.width }
-              height={ props.rowHeight }
               align={ column.align }
               noPadding={ column.id === 'data-table-select' || column.id === 'data-table-expand' }
             >

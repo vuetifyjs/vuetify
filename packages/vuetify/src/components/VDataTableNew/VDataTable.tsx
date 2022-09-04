@@ -116,6 +116,7 @@ export const VDataTable = defineComponent({
                   <VDataTableHeaders
                     sticky={ props.fixedHeader }
                     multiSort={ props.multiSort }
+                    v-slots={ slots }
                   />
                 ) }
               </thead>

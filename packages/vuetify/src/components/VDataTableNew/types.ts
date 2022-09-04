@@ -4,7 +4,7 @@ import type { SelectItemKey } from '@/util'
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
 export type DataTableHeader = {
-  id: string
+  id?: string
   value?: SelectItemKey
   title: string
 
@@ -20,6 +20,12 @@ export type DataTableHeader = {
 
   sortable?: boolean
   sort?: DataTableCompareFunction
+}
+
+export type InternalDataTableHeader = DataTableHeader & {
+  id: string
+  fixedOffset?: number
+  lastFixed?: boolean
 }
 
 export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }

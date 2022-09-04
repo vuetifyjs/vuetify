@@ -4,12 +4,32 @@
       <v-text-field v-model="search" variant="outlined" label="Search" />
     </div>
 
+    <h1>header rowspan/colspan</h1>
+    <v-data-table
+      :headers="complex"
+      :items="items"
+    >
+      <template #header.header>
+        foo
+      </template>
+    </v-data-table>
+
     <!-- <v-data-table
       show-select
       :headers="simple"
       :items="items"
       :search="search"
-    /> -->
+      multi-sort
+      show-expand
+    >
+      <template #expanded-row="{ columns }">
+        <tr>
+          <td :colspan="columns.length">
+            hello
+          </td>
+        </tr>
+      </template>
+    </v-data-table> -->
 
     <!-- <div>
       <v-autocomplete
@@ -61,7 +81,7 @@
       @update:options="getItems"
     ></v-data-table-server> -->
 
-    <h1>virtual</h1>
+    <!-- <h1>virtual</h1>
     <v-data-table-virtual
       :headers="simple"
       :items="serverItems"
@@ -72,7 +92,7 @@
       <template #item.four>
         <v-btn>hello</v-btn>
       </template>
-    </v-data-table-virtual>
+    </v-data-table-virtual> -->
 
     <!-- <h1>simple</h1>
     <v-table>
@@ -98,9 +118,9 @@
 <script lang="ts">
   import { defineComponent } from 'vue'
 
-  const serverItems = Array(1000).fill(0).map((_, i) => ({ id: i, name: `Name ${i}`, one: i, two: Math.random() > 0.5 ? 'foo' : 'bar', three: Math.random() > 0.5 ? 'hello' : 'world', four: 'zxc' }))
+  const serverItems = Array(1000).fill(0).map((_, i) => ({ id: i, name: `Name ${i}`, one: i, two: Math.random() > 0.5 ? 'foo' : 'bar', three: Math.random() > 0.5 ? 'hello' : 'world', four: i }))
 
-  const items = Array(20).fill(0).map((_, i) => ({ id: i, name: `Name ${i}`, one: i, two: Math.random() > 0.5 ? 'foo' : 'bar', three: Math.random() > 0.5 ? 'hello' : 'world', four: 'zxc' }))
+  const items = Array(20).fill(0).map((_, i) => ({ id: i, name: `Name ${i}`, one: i, two: Math.random() > 0.5 ? 'foo' : 'bar', three: Math.random() > 0.5 ? 'hello' : 'world', four: i }))
 
   const groupItems = [
     { id: 1, name: 'Name 1', two: 'foo', three: 'hello' },
@@ -149,10 +169,60 @@
         {
           title: 'Four',
           id: 'four',
+          align: 'end',
         },
       ],
-      headers: [
+      test: [
         [
+          {
+            title: 'Group 1',
+            colspan: 1,
+            width: 200,
+            fixed: true,
+          },
+          {
+            title: 'Group 2',
+            colspan: 1,
+            fixed: true,
+          },
+          {
+            title: 'Group 3',
+            colspan: 2,
+          },
+        ],
+        [
+          {
+            title: 'A',
+            id: 'one',
+            fixed: true,
+            width: 200,
+          },
+          {
+            title: 'B',
+            id: 'two',
+            fixed: true,
+            width: 200,
+          },
+          {
+            title: 'C',
+            id: 'three',
+            width: 200,
+          },
+          {
+            title: 'D',
+            id: 'four',
+            width: 200,
+          },
+        ],
+      ],
+      complex: [
+        [
+          {
+            id: 'data-table-select',
+            rowspan: 3,
+            fixed: true,
+            width: 48,
+          },
           {
             title: 'Name',
             id: 'name',
@@ -163,6 +233,7 @@
           {
             title: 'Header',
             colspan: 4,
+            id: 'header',
           },
         ],
         [
@@ -180,6 +251,7 @@
             title: 'One',
             id: 'one',
             width: 200,
+            fixed: true,
           },
           {
             title: 'Two',
@@ -222,7 +294,6 @@
         this.loading = true
         clearTimeout(this.timeout)
         this.timeout = setTimeout(() => {
-          console.log('loading from remote', startIndex, stopIndex)
           this.remoteItems = serverItems.slice(startIndex, stopIndex)
           this.loading = false
         }, 1000)
