@@ -7,6 +7,7 @@ on:
 jobs:
   deploy:
     runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'vuetifyjs' }}
     strategy:
       max-parallel: 1
       fail-fast: false
@@ -67,3 +68,31 @@ jobs:
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
           TAG_NAME: ${{ env.RELEASE_TAG }}
+
+  percy:
+    name: Visual regression tests
+    runs-on: ubuntu-latest
+    if: ${{ github.repository_owner == 'vuetifyjs' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          ref: next
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn cy:run
+        working-directory: ./packages/vuetify
+        env:
+          PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./packages/vuetify/cypress/screenshots/
+          if-no-files-found: ignore
