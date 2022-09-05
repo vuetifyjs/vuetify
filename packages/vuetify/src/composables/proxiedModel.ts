@@ -29,9 +29,9 @@ export function useProxiedModel<
 
   const initialValue = unref(defaultValue)
   const internal = ref(
-    propIsDefined.value ? transformIn(props[prop])
-    : initialValue !== undefined ? transformIn(initialValue)
-    : undefined
+    propIsDefined.value || initialValue === undefined
+      ? transformIn(props[prop])
+      : transformIn(initialValue)
   ) as Ref<Inner>
 
   if (isRef(defaultValue)) {
