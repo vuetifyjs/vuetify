@@ -137,7 +137,7 @@ export const VOverlay = genericComponent<new () => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
-    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop: localTop })
+    const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
 
     watch(() => props.disabled, v => {
@@ -257,6 +257,7 @@ export const VOverlay = genericComponent<new () => {
                 <Scrim
                   color={ scrimColor }
                   modelValue={ isActive.value && !!props.scrim }
+                  { ...toHandlers(scrimEvents.value) }
                 />
                 <MaybeTransition
                   appear

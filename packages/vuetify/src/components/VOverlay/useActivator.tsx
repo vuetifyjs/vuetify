@@ -66,6 +66,7 @@ export function useActivator (
 
   let isHovered = false
   let isFocused = false
+  let firstEnter = true
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
@@ -77,6 +78,9 @@ export function useActivator (
         (openOnFocus.value && isFocused)
       ) && !(props.openOnHover && isActive.value && !isTop.value)
     ) {
+      if (isActive.value !== value) {
+        firstEnter = true
+      }
       isActive.value = value
     }
   })
@@ -159,6 +163,25 @@ export function useActivator (
     return events
   })
 
+  const scrimEvents = computed(() => {
+    const events: Partial<typeof availableEvents> = {}
+    if (props.openOnHover) {
+      events.mouseenter = () => {
+        if (firstEnter) {
+          isHovered = true
+          firstEnter = false
+          runOpenDelay()
+        }
+      }
+      events.mouseleave = () => {
+        isHovered = false
+        runCloseDelay()
+      }
+    }
+
+    return events
+  })
+
   watch(isTop, val => {
     if (val && (
       (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
@@ -191,7 +214,7 @@ export function useActivator (
     }
   }, { flush: 'post', immediate: true })
 
-  return { activatorEl, activatorRef, activatorEvents, contentEvents }
+  return { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents }
 }
 
 function _useActivator (
