@@ -19,7 +19,6 @@
   position: relative
 
   @include horizontal(true)
-    grid-template-rows: $timeline-item-grid-template
     grid-column-gap: $timeline-item-padding
     width: 100%
 
@@ -43,13 +42,13 @@
       .v-timeline-item__body
         grid-row: 1
         padding-block-end: $timeline-item-padding
+        align-self: flex-end
 
       .v-timeline-item__opposite
         grid-row: 3
         padding-block-start: $timeline-item-padding
 
   @include vertical(true)
-    grid-template-columns: $timeline-item-grid-template
     grid-row-gap: $timeline-item-padding
     height: 100%
 
@@ -229,6 +228,21 @@ $timeline-line-size-first-last: calc(var(--v-timeline-line-size-base) - var(--v-
   justify-content: center
 
 /** Modifiers **/
+
+// Justify
+.v-timeline--justify-center
+  @include horizontal(true)
+    grid-template-rows: $timeline-item-grid-template-center
+
+  @include vertical(true)
+    grid-template-columns: $timeline-item-grid-template-center
+
+.v-timeline--justify-auto
+  @include horizontal(true)
+    grid-template-rows: $timeline-item-grid-template-auto
+
+  @include vertical(true)
+    grid-template-columns: $timeline-item-grid-template-auto
 
 // Density
 .v-timeline--density-comfortable

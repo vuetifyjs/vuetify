@@ -3,8 +3,8 @@
 // VTimeline
 $timeline-density-comfortable-grid-template-end: min-content min-content auto !default;
 $timeline-density-comfortable-grid-template-start: auto min-content min-content !default;
-$timeline-density-compact-grid-template-end: min-content auto !default;
-$timeline-density-compact-grid-template-start: auto min-content !default;
+$timeline-density-compact-grid-template-end: 0 min-content auto !default;
+$timeline-density-compact-grid-template-start: auto min-content 0 !default;
 $timeline-dot-border-radius: 50% !default;
 $timeline-dot-divider-background: rgb(var(--v-theme-on-surface-variant)) !default;
 $timeline-dot-size: 38px !default;
@@ -19,7 +19,8 @@ $timeline-divider-line-horizontal-width: var(--v-timeline-line-inset, 0px) !defa
 $timeline-divider-line-thickness: var(--v-timeline-line-thickness) !default;
 
 // VTimelineItem
-$timeline-item-grid-template: auto min-content auto !default;
+$timeline-item-grid-template-center: minmax(auto, 50%) min-content minmax(auto, 50%) !default;
+$timeline-item-grid-template-auto: auto min-content auto !default;
 $timeline-item-padding: 24px !default;
 
 // Lists
