@@ -84,7 +84,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        containers: [1, 2, 3, 4]
+        containers: ${{ fromJSON(github.repository_owner == 'vuetifyjs' && '[1, 2, 3, 4]' || '[1]') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -97,11 +97,14 @@ jobs:
 
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
-        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
         working-directory: ./packages/vuetify
         env:
           CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+      - run: yarn cy:run
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
+        working-directory: ./packages/vuetify
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
