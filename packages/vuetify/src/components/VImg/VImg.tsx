@@ -181,8 +181,8 @@ export const VImg = defineComponent({
       'v-img__img--contain': !props.cover,
     }))
 
-    const __image = computed(() => {
-      if (!normalisedSrc.value.src || state.value === 'idle') return
+    const __image = () => {
+      if (!normalisedSrc.value.src || state.value === 'idle') return null
 
       const img = h('img', {
         class: ['v-img__img', containClasses.value],
@@ -209,9 +209,9 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __preloadImage = computed(() => (
+    const __preloadImage = () => (
       <MaybeTransition transition={ props.transition }>
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
@@ -221,10 +221,10 @@ export const VImg = defineComponent({
           />
         )}
       </MaybeTransition>
-    ))
+    )
 
-    const __placeholder = computed(() => {
-      if (!slots.placeholder) return
+    const __placeholder = () => {
+      if (!slots.placeholder) return null
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -233,10 +233,10 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __error = computed(() => {
-      if (!slots.error) return
+    const __error = () => {
+      if (!slots.error) return null
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -245,13 +245,13 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __gradient = computed(() => {
-      if (!props.gradient) return
+    const __gradient = () => {
+      if (!props.gradient) return null
 
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
-    })
+    }
 
     const isBooted = ref(false)
     {
@@ -282,11 +282,18 @@ export const VImg = defineComponent({
           handler: init,
           options: props.options,
         }, null, ['once']]}
-        v-slots={{
-          additional: () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value],
-          default: slots.default,
-        }}
-      />
+      >{{
+        additional: () => (
+          <>
+            <__image />
+            <__preloadImage />
+            <__gradient />
+            <__placeholder />
+            <__error />
+          </>
+        ),
+        default: slots.default,
+      }}</VResponsive>
     ))
 
     return {
