@@ -12,12 +12,8 @@ nav: Direct support
 
 # Direct support from Vuetify
 
-<alert type="warning">
+John Leider, the creator of Vuetify, and other **Core Team** members are now offering Support Services for your Vuetify based application. Utilize our in-demand services for guidance and advice on advanced implementations, best practices, and procedures.
 
-  To ensure that the team has adequate resources for Vuetify 3, we are currently not accepting any new support requests. If you have any questions, please reach out in ourd [Discord community](https://community.vuetifyjs.com/).
-
-  More information on the status of version 3 on our [roadmap](/introduction/roadmap/).
-
-</alert>
+<iframe style="box-shadow: 0 15px 35px 0 rgba(50, 50, 93, 0.1);" width="300" height="390"  frameborder="0" scrolling="no" src="https://kintell.com/advisors/e792b2a9-74a1-4b26-a15e-f40ce591d533/730daceb-1efc-40af-8afa-0d0f79e3dfe0/embed"></iframe>
 
 <backmatter />
