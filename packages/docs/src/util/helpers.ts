@@ -126,12 +126,13 @@ export function propsToString (props: Record<string, any>, indent = 1) {
 
         return `${k}="${v}"`
       })
+  console.log(displayedProps)
 
   const propsString = displayedProps.join(' ')
 
   const shouldWrap = propsString.length > 50
   if (!shouldWrap) {
-    return ' ' + propsString
+    return !propsString ? '' : ' ' + propsString
   } else {
     return '\n' + displayedProps.map(v => '  '.repeat(indent) + v).join('\n') + '\n'
   }
