@@ -10,7 +10,11 @@
         v-if="alert"
         v-model="alert"
         v-bind="props"
-      ></v-alert>
+      >
+        <template v-slot:text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+        </template>
+      </v-alert>
 
       <div class="text-center">
         <v-btn v-if="!alert" @click="alert = true">
@@ -48,7 +52,7 @@
 
   const name = 'v-alert'
   const model = ref('default')
-  const alert = ref(false)
+  const alert = ref(true)
   const closable = ref(false)
   const icon = ref(false)
   const title = ref(false)
@@ -56,10 +60,10 @@
   const options = ['outlined', 'tonal']
   const props = computed(() => {
     return {
-      closable: closable.value,
+      closable: closable.value || undefined,
       icon: icon.value ? 'mdi-vuetify' : undefined,
       title: title.value ? 'Alert title' : undefined,
-      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!',
+      text: '...',
       type: type.value,
       variant: ['outlined', 'tonal'].includes(model.value) ? model.value : undefined,
     }

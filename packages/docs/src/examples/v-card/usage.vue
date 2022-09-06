@@ -3,48 +3,29 @@
     v-model="model"
     :code="code"
     :options="options"
-    name="v-card"
+    :name="name"
   >
-    <v-card
-      v-bind="props"
-      :text="lorem"
-      class="mx-auto"
-      max-width="448"
-    >
-      <template
-        v-if="actions"
-        v-slot:actions
-      >
-        <v-btn>Click me</v-btn>
-      </template>
-    </v-card>
+    <div>
+
+      <v-card v-bind="props">
+        <template v-slot:text>
+          Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
+        </template>
+
+        <v-card-actions v-if="actions">
+          <v-btn>Click me</v-btn>
+        </v-card-actions>
+      </v-card>
+    </div>
 
     <template v-slot:configuration>
-      <v-text-field
-        v-model="title"
-        label="Title"
-        clearable
-      ></v-text-field>
+      <v-checkbox v-model="title" label="Show title"></v-checkbox>
 
-      <v-checkbox
-        v-model="subtitle"
-        label="Subtitle"
-      ></v-checkbox>
+      <v-checkbox v-model="subtitle" label="Show subtitle"></v-checkbox>
 
-      <v-checkbox
-        v-model="disabled"
-        label="Disabled"
-      ></v-checkbox>
+      <v-checkbox v-model="actions" label="Show actions"></v-checkbox>
 
-      <v-checkbox
-        v-model="loading"
-        label="Loading"
-      ></v-checkbox>
-
-      <v-checkbox
-        v-model="actions"
-        label="Actions"
-      ></v-checkbox>
+      <v-checkbox v-model="loading" label="Loading"></v-checkbox>
     </template>
   </usage-example>
 </template>
@@ -54,33 +35,25 @@
   import { computed, ref } from 'vue'
   import { propsToString } from '@/util/helpers'
 
+  const name = 'v-card'
   const model = ref('default')
   const actions = ref(false)
-  const disabled = ref(false)
   const loading = ref(false)
   const subtitle = ref(false)
-  const title = ref('Label')
-
-  const lorem = 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!'
-  const options = ['outlined', 'flat', 'tonal', 'plain']
-
+  const title = ref(false)
+  const options = ['outlined', 'tonal']
   const props = computed(() => {
-    const props = {}
-
-    if (disabled.value) props.disabled = true
-    if (loading.value) props.loading = true
-    if (title.value) props.title = title.value
-    if (subtitle.value) props.subtitle = 'Subtitle'
-
-    props.text = '...'
-
-    if (options.includes(model.value)) props.variant = model.value
-
-    return props
+    return {
+      loading: loading.value || undefined,
+      title: title.value ? 'Card title' : undefined,
+      subtitle: subtitle.value ? 'Subtitle' : undefined,
+      text: '...',
+      variant: ['outlined', 'tonal'].includes(model.value) ? model.value : undefined,
+    }
   })
 
   const slots = computed(() => {
-    let str = ``
+    let str = ''
 
     if (actions.value) {
       str += `
@@ -94,6 +67,6 @@
   })
 
   const code = computed(() => {
-    return `<v-card${propsToString(props.value)}>${slots.value}</v-card>`
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
   })
 </script>

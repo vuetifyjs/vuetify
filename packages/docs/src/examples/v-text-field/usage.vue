@@ -1,56 +1,54 @@
 <template>
   <usage-example
     v-model="model"
-    v-model:tune-value="tuneModel"
+    :code="code"
     :options="options"
-    :tune-options="tuneOptions"
-    name="v-text-field"
+    :name="name"
   >
-    <v-responsive
-      class="pa-4 mx-auto"
-      max-width="360"
-    >
-      <v-text-field
-        :variant="model.prop === 'variant' ? model.value : undefined"
-        :label="tuneModel.label"
-        :prepend-icon="tuneModel['prepend-icon'] ? 'mdi-vuetify' : undefined"
-        :clearable="tuneModel.clearable"
-      ></v-text-field>
-    </v-responsive>
+    <div>
+      <v-text-field v-bind="props" v-model="field"></v-text-field>
+    </div>
+
+    <template v-slot:configuration>
+      <v-text-field v-model="label" label="Label"></v-text-field>
+
+      <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
+
+      <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
+    </template>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VTextFieldUsageExample',
+<script setup>
+  // Utilities
+  import { computed, ref, watch } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    data: () => ({
-      model: 'default',
-      options: [
-        { label: 'Outlined', prop: 'variant', value: 'outlined' },
-        { label: 'Solo', prop: 'variant', value: 'solo' },
-        { label: 'Underlined', prop: 'variant', value: 'underlined' },
-      ],
-      tuneModel: {
-        label: 'Text field',
-        'prepend-icon': false,
-        clearable: false,
-      },
-      tuneOptions: [
-        {
-          type: 'text-field',
-          prop: 'label',
-        },
-        {
-          type: 'checkbox',
-          prop: 'prepend-icon',
-          value: 'mdi-vuetify',
-        },
-        {
-          type: 'checkbox',
-          prop: 'clearable',
-        },
-      ],
-    }),
-  }
+  const name = 'v-text-field'
+  const model = ref('default')
+  const clearable = ref(false)
+  const field = ref()
+  const label = ref('Label')
+  const prepend = ref(false)
+  const options = ['outlined', 'solo', 'underlined']
+  const props = computed(() => {
+    return {
+      clearable: clearable.value || undefined,
+      label: label.value,
+      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
+      variant: ['outlined', 'solo', 'underlined'].includes(model.value) ? model.value : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
+
+  watch(clearable, () => {
+    if (!field.value) field.value = 'Hover to Clear me'
+  })
 </script>

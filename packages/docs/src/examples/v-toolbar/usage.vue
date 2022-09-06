@@ -1,47 +1,54 @@
 <template>
   <usage-example
     v-model="model"
-    v-model:tune-value="tuneModel"
+    :code="code"
     :options="options"
-    :tune-options="tuneOptions"
-    name="v-toolbar"
+    :name="name"
   >
-    <v-responsive
-      class="pa-4 mx-auto"
-      max-width="740"
-    >
-      <v-toolbar
-        :extended="tuneModel.extended"
-        :border="model.prop === 'border'"
-        :elevation="model.prop === 'elevation' ? model.value : undefined"
-        :title="tuneModel.title"
-        :density="tuneModel.density"
-      >
+    <div>
+      <v-toolbar v-bind="props">
+        <v-spacer></v-spacer>
+        <v-btn icon="mdi-menu"></v-btn>
+        <v-btn icon="mdi-dots-vertical"></v-btn>
       </v-toolbar>
-    </v-responsive>
+    </div>
+
+    <template v-slot:configuration>
+      <v-select v-model="density" label="Density" :items="['default', 'comfortable', 'compact']"></v-select>
+
+      <v-text-field v-model="title" label="Title" clearable></v-text-field>
+
+      <v-checkbox v-model="collapse" label="Collapsed"></v-checkbox>
+    </template>
   </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'VToolbarUsageExample',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    data: () => ({
-      model: 'default',
-      options: [
-        { label: 'Elevated', prop: 'elevation', value: 4 },
-        { label: 'Bordered', prop: 'border', value: false },
-      ],
-      tuneModel: {
-        collapse: false,
-        density: 'default',
-        title: 'Application',
-      },
-      tuneOptions: [
-        { type: 'checkbox', prop: 'extended' },
-        { type: 'text-field', prop: 'title' },
-        { type: 'select', prop: 'density', items: ['default', 'comfortable', 'compact'] },
-      ],
-    }),
-  }
+  const name = 'v-toolbar'
+  const model = ref('default')
+  const collapse = ref()
+  const density = ref('default')
+  const title = ref('Application')
+  const options = ['elevated', 'bordered']
+  const props = computed(() => {
+    return {
+      border: model.value === 'bordered' ? true : undefined,
+      collapse: collapse.value || undefined,
+      density: density.value === 'default' ? undefined : density.value,
+      elevation: model.value === 'elevated' ? 8 : undefined,
+      title: title.value || undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>
