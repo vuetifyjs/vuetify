@@ -1,38 +1,75 @@
 <template>
   <usage-example
     v-model="model"
-    v-model:tune-value="tuneModel"
+    :code="code"
+    :name="name"
     :options="options"
-    :tune-options="tuneOptions"
-    name="v-alert"
   >
-    <v-alert
-      :variant="model.prop === 'variant' ? model.value : undefined"
-      :type="tuneModel.type"
-      :title="tuneModel.title ? 'Alert title' : undefined"
-      :icon="tuneModel.icon ? 'mdi-vuetify' : undefined"
-    >
-      <v-alert-text>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!
-      </v-alert-text>
-    </v-alert>
+    <div>
+      <v-alert
+        v-if="alert"
+        v-model="alert"
+        v-bind="props"
+      ></v-alert>
+
+      <div class="text-center">
+        <v-btn v-if="!alert" @click="alert = true">
+          Show Alert
+        </v-btn>
+      </div>
+    </div>
+
+    <template v-slot:configuration>
+      <v-select
+        v-model="type"
+        :items="[
+          'success',
+          'info',
+          'warning',
+          'error',
+        ]"
+        label="Type"
+        clearable
+      ></v-select>
+
+      <v-checkbox v-model="title" label="Show title"></v-checkbox>
+
+      <v-checkbox v-model="closable" label="Closable"></v-checkbox>
+
+      <v-checkbox v-model="icon" label="Custom icon"></v-checkbox>
+    </template>
   </usage-example>
 </template>
 
 <script setup>
   // Utilities
-  import { ref } from 'vue'
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
+  const name = 'v-alert'
   const model = ref('default')
-  const options = [
-    { label: 'Outlined', prop: 'variant', value: 'outlined' },
-  ]
-  const tuneModel = ref({
-    type: 'default',
+  const alert = ref(false)
+  const closable = ref(false)
+  const icon = ref(false)
+  const title = ref(false)
+  const type = ref(undefined)
+  const options = ['outlined', 'tonal']
+  const props = computed(() => {
+    return {
+      closable: closable.value,
+      icon: icon.value ? 'mdi-vuetify' : undefined,
+      title: title.value ? 'Alert title' : undefined,
+      text: 'Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!',
+      type: type.value,
+      variant: ['outlined', 'tonal'].includes(model.value) ? model.value : undefined,
+    }
   })
-  const tuneOptions = [
-    { type: 'checkbox', prop: 'title', value: 'Alert title' },
-    { label: 'Custom icon', type: 'checkbox', prop: 'icon', value: 'mdi-vuetify' },
-    { type: 'select', prop: 'type', items: ['default', 'success', 'info', 'warning', 'error'] },
-  ]
+
+  const slots = computed(() => {
+    return ''
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>
