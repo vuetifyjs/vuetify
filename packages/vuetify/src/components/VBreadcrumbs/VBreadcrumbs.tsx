@@ -61,7 +61,7 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
     ...makeTagProps({ tag: 'ul' }),
   },
 
-  setup(props, { slots }) {
+  setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { densityClasses } = useDensity(props)
 
