@@ -1,5 +1,5 @@
 <template>
-  <app-sheet class="mb-4">
+  <app-sheet class="mb-4 app-table">
     <v-table
       v-bind="$attrs"
     >
@@ -17,3 +17,9 @@
     inheritAttrs: false,
   })
 </script>
+
+<style lang="sass">
+  .app-table
+    .v-table table tbody > tr > td:first-child
+      white-space: nowrap
+</style>
