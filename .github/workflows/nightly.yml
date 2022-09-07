@@ -86,10 +86,14 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
+      - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
       - run: yarn cy:run
         working-directory: ./packages/vuetify
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
+          PERCY_BRANCH: next
+          PERCY_TARGET_BRANCH: next
+          PERCY_COMMIT: ${{ env.COMMIT }}
       - uses: actions/upload-artifact@v2
         if: failure()
         with:
