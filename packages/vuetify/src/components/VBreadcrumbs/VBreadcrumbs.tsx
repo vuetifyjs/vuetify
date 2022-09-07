@@ -87,9 +87,9 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
             densityClasses.value,
             roundedClasses.value,
           ]}
-          style={backgroundColorStyles.value}
+          style={ backgroundColorStyles.value }
         >
-          {hasPrepend && (
+          { hasPrepend && (
             <VDefaultsProvider
               key="prepend"
               defaults={{
@@ -100,36 +100,36 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
               }}
             >
               <div class="v-breadcrumbs__prepend">
-                {slots.prepend
+                { slots.prepend
                   ? slots.prepend()
                   : props.icon && (<VIcon />)
                 }
               </div>
             </VDefaultsProvider>
-          )}
+          ) }
 
-          {props.items.map((item, index, array) => (
+          { props.items.map((item, index, array) => (
             <>
-              {slots.item
+              { slots.item
                 ? slots.item?.({ item: item })
                 : (<VBreadcrumbsItem
                   key={index}
                   disabled={index >= array.length - 1}
-                  {...(typeof item === 'string' ? { title: item } : item)}
+                  { ...(typeof item === 'string' ? { title: item } : item)}
                   v-slots={{
                     default: slots.title ? () => slots.title?.({ item, index }) : undefined,
-                  }}
+                  } }
                 />)
               }
-              {index < array.length - 1 && (
+              { index < array.length - 1 && (
                 <VBreadcrumbsDivider>
-                  {slots.divider?.({ item, index }) ?? props.divider}
+                  { slots.divider?.({ item, index }) ?? props.divider }
                 </VBreadcrumbsDivider>
-              )}
+              ) }
             </>
-          ))}
+          )) }
 
-          {slots.default?.()}
+          { slots.default?.() }
         </props.tag>
       )
     })
