@@ -12,7 +12,6 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import {
   computed,
-  h,
   nextTick,
   onBeforeMount,
   ref,
@@ -184,16 +183,18 @@ export const VImg = defineComponent({
     const __image = () => {
       if (!normalisedSrc.value.src || state.value === 'idle') return null
 
-      const img = h('img', {
-        class: ['v-img__img', containClasses.value],
-        src: normalisedSrc.value.src,
-        srcset: normalisedSrc.value.srcset,
-        alt: '',
-        sizes: props.sizes,
-        ref: image,
-        onLoad,
-        onError,
-      })
+      const img = (
+        <img
+          class={['v-img__img', containClasses.value]}
+          src={ normalisedSrc.value.src }
+          srcset={ normalisedSrc.value.srcset }
+          alt=""
+          sizes={ props.sizes }
+          ref={ image }
+          onLoad={ onLoad }
+          onError={ onError }
+        />
+      )
 
       const sources = slots.sources?.()
 
