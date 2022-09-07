@@ -69,7 +69,10 @@ export const VSelectionControlGroup = defineComponent({
 
     useRender(() => (
       <div
-        class="v-selection-control-group"
+        class={[
+          'v-selection-control-group',
+          { 'v-selection-control-group--inline': props.inline },
+        ]}
         aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }
       >
