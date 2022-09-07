@@ -65,8 +65,6 @@
     "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the item data that was clicked and the second is the other related data provided by the `item` slot. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "mouseover:row": "Emits when the mouse pointer is moved onto the table row. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
-    "mouseleave:row": "Emits when the mouse pointer leaves the table row. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",
     "page-count": "Emits when the **pageCount** property of the **pagination** prop is updated",
     "pagination": "Emits when something changed to the `pagination` which can be provided via the `pagination` prop",

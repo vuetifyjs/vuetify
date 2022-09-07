@@ -516,8 +516,6 @@ export default mixins(
           click: () => this.$emit('click:row', item, data),
           contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
-          mouseover: (event: MouseEvent) => this.$emit('mouseover:row', event, data),
-          mouseleave: (event: MouseEvent) => this.$emit('mouseleave:row', event, data),
         },
       })
     },
