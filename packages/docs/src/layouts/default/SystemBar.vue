@@ -1,6 +1,6 @@
 <template>
   <v-system-bar
-    v-if="hasPromotion && false"
+    v-if="hasPromotion"
     class="cm-system-bar"
     app
     dark
@@ -8,7 +8,7 @@
   >
     <a
       class="cm-banner"
-      href="https://cutt.ly/0JmRXHr"
+      href="https://vuejsforge.com?friend=vuetify&utm_source=vuetify&utm_medium=website&utm_campaign=affiliate&utm_content=top_banner"
       rel="noopener"
       target="_blank"
       @click="onClick"
@@ -50,7 +50,7 @@
       onClick () {
         this.$gtag.event('click', {
           event_category: 'vuetify-banner',
-          event_label: 'ui-lib-nitro',
+          event_label: 'vs-forge-2',
           value: this.name.toLowerCase(),
         })
       },
@@ -78,12 +78,12 @@
     white-space: nowrap
 
   .cm-banner
-    background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-3.png)
+    background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-forge-2/vs-mobile.png)
     background-size: cover
 
     @media (min-width: 437px)
-      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-2.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-forge-2/vs-tablet.png)
 
     @media (min-width: 992px)
-      background-image: url(https://vuetifyjs.b-cdn.net/store/promotions/road-to-vuetify-3-ui-lib/road-to-vuetify-ui-lib-1.png)
+      background-image: url(https://cdn.vuetifyjs.com/docs/images/promotions/vs-forge-2/vs-desktop.png)
 </style>
