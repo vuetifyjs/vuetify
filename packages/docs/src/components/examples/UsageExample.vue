@@ -2,57 +2,75 @@
   <div>
     <v-toolbar
       border="b"
-      class="ps-2 pe-2"
+      color="surface"
       density="compact"
       flat
     >
-      <v-btn-toggle
+      <v-slide-group
         v-model="model"
-        class="py-2"
-        color="primary"
+        class="flex-grow-1"
         mandatory
+        show-arrows="always"
       >
-        <v-btn value="default" rounded="tl">Default</v-btn>
+        <v-slide-group-item value="default">
+          <template #default="{ isSelected, toggle }">
+            <v-btn
+              :active="isSelected"
+              height="56"
+              @click="toggle"
+            >
+              Default
+            </v-btn>
+          </template>
+        </v-slide-group-item>
 
-        <v-btn
+        <v-slide-group-item
           v-for="(option, i) in options"
           :key="i"
           :value="option"
-          class="text-uppercase"
         >
-          {{ option }}
-        </v-btn>
-      </v-btn-toggle>
+          <template #default="{ isSelected, toggle }">
+            <v-btn
+              :active="isSelected"
+              height="56"
+              @click="toggle"
+            >
+              {{ option }}
+            </v-btn>
+          </template>
+        </v-slide-group-item>
+      </v-slide-group>
 
-      <v-spacer />
+      <v-responsive
+        class="border-s align-center bg-surface"
+        height="48"
+        max-width="250"
+      >
+        <div class="d-flex align-center justify-space-between">
+          <div class="ml-4">
+            <app-headline
+              v-show="tune"
+              path="options"
+            />
+          </div>
 
-      <v-tooltip location="bottom">
-        <template #activator="{ props: activatorProps }">
-          <v-btn
-            icon="mdi-code-tags"
-            class="mr-1 text-medium-emphasis"
-            density="comfortable"
-            v-bind="activatorProps"
-            @click="show = !show"
-          />
-        </template>
+          <div>
+            <v-tooltip location="bottom">
+              <template #activator="{ props: activatorProps }">
+                <v-btn
+                  :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
+                  class="mr-1 text-medium-emphasis"
+                  density="comfortable"
+                  v-bind="activatorProps"
+                  @click="show = !show"
+                />
+              </template>
 
-        <span>Show code</span>
-      </v-tooltip>
-
-      <v-tooltip location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            icon="mdi-tune"
-            class="mr-1 text-medium-emphasis"
-            density="comfortable"
-            v-bind="props"
-            @click="tune = !tune"
-          />
-        </template>
-
-        <span>Configure more options</span>
-      </v-tooltip>
+              <span>{{ show ? 'Hide code' : 'Show code' }}</span>
+            </v-tooltip>
+          </div>
+        </div>
+      </v-responsive>
     </v-toolbar>
 
     <v-layout>
@@ -76,9 +94,7 @@
         width="250"
       >
         <v-list>
-          <v-list-subheader>Configuration</v-list-subheader>
-
-          <div class="px-4 usage-example">
+          <div class="px-4 usage-example pt-2">
             <v-defaults-provider
               :defaults="{
                 global: {
@@ -105,6 +121,7 @@
 </template>
 
 <script setup>
+  // Utilities
   import { computed, ref } from 'vue'
 
   const props = defineProps({
@@ -115,8 +132,8 @@
       default: () => ([]),
     },
     modelValue: {
-      type: [Object, String],
-      default: () => ({}),
+      type: [Array, String],
+      default: () => ([]),
       required: true,
     },
   })
