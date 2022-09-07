@@ -298,8 +298,8 @@ export const useSlider = ({
     }
     if (Array.isArray(props.ticks)) return props.ticks.map(t => ({ value: t, position: position(t), label: t.toString() }))
     return Object.keys(props.ticks).map(key => ({
-      value: parseInt(key, 10),
-      position: position(parseInt(key, 10)),
+      value: parseFloat(key),
+      position: position(parseFloat(key)),
       label: (props.ticks as Record<string, string>)[key],
     }))
   })
