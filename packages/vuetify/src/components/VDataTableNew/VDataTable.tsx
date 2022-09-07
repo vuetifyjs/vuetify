@@ -112,6 +112,7 @@ export const VDataTable = defineComponent({
           top: slots.head,
           default: slots.default ? slots.default() : () => (
             <>
+              { slots.colgroup?.({ columns }) }
               <thead>
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders

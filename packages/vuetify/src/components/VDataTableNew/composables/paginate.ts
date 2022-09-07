@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed, inject, provide, watchEffect } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -56,6 +56,12 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
     if (itemsPerPage.value === -1) return 1
 
     return Math.ceil(itemsLength.value / itemsPerPage.value)
+  })
+
+  watchEffect(() => {
+    if (startIndex.value > itemsLength.value) {
+      page.value = 1
+    }
   })
 
   const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }

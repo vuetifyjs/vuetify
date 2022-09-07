@@ -28,7 +28,8 @@ export interface IconAliases {
   checkboxOff: IconValue
   checkboxIndeterminate: IconValue
   delimiter: IconValue
-  sort: IconValue
+  sortAsc: IconValue
+  sortDesc: IconValue
   expand: IconValue
   menu: IconValue
   subgroup: IconValue

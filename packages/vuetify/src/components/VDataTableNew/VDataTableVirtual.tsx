@@ -50,7 +50,11 @@ export const VDataTableVirtual = defineComponent({
 
   setup (props, { slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
-    const { columns } = createHeaders(props)
+    const { columns } = createHeaders(props, {
+      groupBy,
+      showSelect: toRef(props, 'showSelect'),
+      showExpand: toRef(props, 'showExpand'),
+    })
     const { items } = useDataTableItems(props, columns)
 
     const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
@@ -113,6 +117,8 @@ export const VDataTableVirtual = defineComponent({
                 <thead>
                   <VDataTableHeaders
                     sticky={ props.fixedHeader }
+                    multiSort={ props.multiSort }
+                    v-slots={ slots }
                   />
                 </thead>
                 <tbody>

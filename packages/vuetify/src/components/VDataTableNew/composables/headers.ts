@@ -67,7 +67,14 @@ export function createHeaders (
     flat.forEach(({ column, row }) => {
       const id = column.id ?? `data-table-column-${count++}`
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
-        fixedRows[i].push({ ...column, id, fixedOffset: fixedOffsets[i] })
+        fixedRows[i].push({
+          ...column,
+          id,
+          fixedOffset:
+          fixedOffsets[i],
+          sortable: column.sortable ?? !!column.id,
+        })
+
         fixedOffsets[i] += column.width ?? 0
       }
     })
@@ -93,7 +100,8 @@ export function createHeaders (
 
       return filtered
     })
-    columns.value = fixedRows.at(-1)!
+
+    columns.value = fixedRows.at(-1) ?? []
   }, {
     deep: true,
     immediate: true,

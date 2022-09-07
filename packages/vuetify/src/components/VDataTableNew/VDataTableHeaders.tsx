@@ -2,19 +2,20 @@
 import { VIcon } from '@/components/VIcon'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDataTableColumn } from '.'
 
 // Composables
 import { useSort } from './composables/sort'
 import { useSelection } from './composables/select'
 import { useHeaders } from './composables/headers'
 import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
-import { VDataTableColumn } from '.'
 
 export const VDataTableHeaders = defineComponent({
   name: 'VDataTableHeaders',
@@ -24,6 +25,14 @@ export const VDataTableHeaders = defineComponent({
     loading: Boolean,
     sticky: Boolean,
     multiSort: Boolean,
+    sortAscIcon: {
+      type: IconValue,
+      default: '$sortAsc',
+    },
+    sortDescIcon: {
+      type: IconValue,
+      default: '$sortDesc',
+    },
   },
 
   setup (props, { slots, emit }) {
@@ -45,16 +54,15 @@ export const VDataTableHeaders = defineComponent({
     function getSortIcon (id: string) {
       const item = sortBy.value.find(item => item.key === id)
 
-      if (!item) return 'mdi-arrow-up'
+      if (!item) return props.sortAscIcon
 
-      return item.order === 'asc' ? 'mdi-arrow-up' : 'mdi-arrow-down'
+      return item.order === 'asc' ? props.sortAscIcon : props.sortDescIcon
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const isSorted = !!sortBy.value.find(x => x.key === column.id)
-      const isSortable = column.sortable !== false && column.id
       const noPadding = column.id === 'data-table-select' || column.id === 'data-table-expand'
 
       return (
@@ -63,7 +71,7 @@ export const VDataTableHeaders = defineComponent({
           class={[
             'v-data-table__th',
             {
-              'v-data-table__th--sortable': isSortable,
+              'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted,
             },
           ]}
@@ -74,7 +82,7 @@ export const VDataTableHeaders = defineComponent({
           }}
           colspan={column.colspan}
           rowspan={column.rowspan}
-          onClick={column.sortable !== false ? () => toggleSort(column.id) : undefined}
+          onClick={column.sortable ? () => toggleSort(column.id) : undefined}
           lastFixed={column.lastFixed}
           noPadding={noPadding}
         >
@@ -101,7 +109,7 @@ export const VDataTableHeaders = defineComponent({
               return (
                 <div class="v-data-table-header__content">
                   <span>{ column.title }</span>
-                  { isSortable && (
+                  { column.sortable && (
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
@@ -128,7 +136,7 @@ export const VDataTableHeaders = defineComponent({
       )
     }
 
-    return () => {
+    useRender(() => {
       return (
         <>
           { headers.value.map((row, y) => (
@@ -147,6 +155,6 @@ export const VDataTableHeaders = defineComponent({
           )}
         </>
       )
-    }
+    })
   },
 })
