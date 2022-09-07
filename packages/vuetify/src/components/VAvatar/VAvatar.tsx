@@ -6,19 +6,17 @@ import { VIcon } from '@/components/VIcon'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { defineComponent, propsFactory, useRender } from '@/util'
-import { toRef } from 'vue'
 
 export const makeVAvatarProps = propsFactory({
-  color: String,
   start: Boolean,
   end: Boolean,
   icon: IconValue,
@@ -28,6 +26,7 @@ export const makeVAvatarProps = propsFactory({
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeTagProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
 })
 
 export const VAvatar = defineComponent({
@@ -36,7 +35,7 @@ export const VAvatar = defineComponent({
   props: makeVAvatarProps(),
 
   setup (props, { slots }) {
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
     const { sizeClasses, sizeStyles } = useSize(props)
@@ -49,22 +48,25 @@ export const VAvatar = defineComponent({
             'v-avatar--start': props.start,
             'v-avatar--end': props.end,
           },
-          backgroundColorClasses.value,
+          colorClasses.value,
           densityClasses.value,
           roundedClasses.value,
           sizeClasses.value,
+          variantClasses.value,
         ]}
         style={[
-          backgroundColorStyles.value,
+          colorStyles.value,
           sizeStyles.value,
         ]}
       >
         { props.image
-          ? (<VImg src={ props.image } alt="" />)
+          ? (<VImg key="image" src={ props.image } alt="" />)
           : props.icon
-            ? (<VIcon icon={ props.icon } />)
+            ? (<VIcon key="icon" icon={ props.icon } />)
             : slots.default?.()
         }
+
+        { genOverlays(false, 'v-avatar') }
       </props.tag>
     ))
 
