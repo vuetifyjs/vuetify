@@ -48,25 +48,6 @@
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
-  &--variant-plain,
-  &--variant-underlined
-    border-radius: 0
-    padding: 0
-    --v-field-padding-start: 0px
-    --v-field-padding-end: 0px
-    --v-field-padding-top: 6px
-    --v-field-padding-bottom: 2px
-
-  &--variant-outlined,
-  &--single-line
-    --v-field-padding-top: 0px
-    $root: &
-
-    @at-root
-      @include tools.density('v-input', $input-density) using ($modifier)
-        @at-root #{selector.nest(&, $root)}
-          --v-field-padding-bottom: #{16px + $modifier * .5}
-
   &--variant-solo,
   &--variant-filled
     $root: &
@@ -77,9 +58,28 @@
           --v-input-control-height: #{$field-control-height + $modifier}
           --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
 
+  &--variant-outlined,
+  &--single-line,
+  &--no-label
+    --v-field-padding-top: 0px
+    $root: &
+
+    @at-root
+      @include tools.density('v-input', $input-density) using ($modifier)
+        @at-root #{selector.nest(&, $root)}
+          --v-field-padding-bottom: #{16px + $modifier * .5}
+
   &--variant-plain,
   &--variant-underlined
     $root: &
+    border-radius: 0
+    padding: 0
+
+    &.v-field
+      --v-field-padding-start: 0px
+      --v-field-padding-end: 0px
+      --v-field-padding-top: 6px
+      --v-field-padding-bottom: 2px
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)

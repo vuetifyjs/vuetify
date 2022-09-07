@@ -5,6 +5,9 @@
 @use './variables' as *
 
 .v-textarea
+  .v-field
+    --v-textarea-control-height: var(--v-input-control-height)
+
   .v-field__field
     --v-input-control-height: var(--v-textarea-control-height)
 
@@ -34,15 +37,13 @@
     min-height: 0 !important
     pointer-events: none
 
-  .v-field--has-label
-    textarea
-      opacity: 0
-
+  .v-field--no-label,
   .v-field--active
     textarea
       opacity: 1
 
   textarea
+    opacity: 0
     flex: 1
     min-width: 0
     transition: .15s opacity settings.$standard-easing
