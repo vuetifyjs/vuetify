@@ -197,6 +197,7 @@ export const VTextarea = defineComponent({
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
+              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
           onClick:prepend={ props['onClick:prepend'] }
