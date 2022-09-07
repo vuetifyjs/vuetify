@@ -1,3 +1,4 @@
+
 import Vue from 'vue'
 
 export type MouseHandler = (e: MouseEvent | TouchEvent) => any
