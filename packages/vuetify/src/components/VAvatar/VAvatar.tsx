@@ -59,16 +59,14 @@ export const VAvatar = defineComponent({
           sizeStyles.value,
         ]}
       >
-        <>
-          { props.image
-            ? (<VImg src={ props.image } alt="" />)
-            : props.icon
-              ? (<VIcon icon={ props.icon } />)
-              : slots.default?.()
-          }
+        { props.image
+          ? (<VImg key="image" src={ props.image } alt="" />)
+          : props.icon
+            ? (<VIcon key="icon" icon={ props.icon } />)
+            : slots.default?.()
+        }
 
-          { genOverlays(false, 'v-avatar') }
-        </>
+        { genOverlays(false, 'v-avatar') }
       </props.tag>
     ))
 

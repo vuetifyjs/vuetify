@@ -7,7 +7,7 @@ $avatar-background: var(--v-theme-surface) !default;
 $avatar-border-radius: map.get(variables.$rounded, 'circle') !default;
 $avatar-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $avatar-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
-$avatar-elevation: 4 !default;
+$avatar-elevation: 1 !default;
 $avatar-height: 40px !default;
 $avatar-line-height: normal !default;
 $avatar-plain-opacity: .62 !default;
