@@ -90,7 +90,7 @@ export const VBtn = defineComponent({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { sizeClasses } = useSize(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
@@ -137,6 +137,7 @@ export const VBtn = defineComponent({
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
+            sizeStyles.value,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
