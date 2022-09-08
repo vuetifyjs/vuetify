@@ -70,8 +70,8 @@ export const VDialog = genericComponent<new () => {
         !overlay.value.contentEl.contains(after)
       ) {
         const focusable = [...overlay.value.contentEl.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+          'button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])'
+        )].filter(el => !el.hasAttribute('disabled') && !el.matches('[tabindex="-1"]')) as HTMLElement[]
 
         if (!focusable.length) return
 
