@@ -3,10 +3,10 @@
   "version": "3.0.0-beta.11",
   "private": true,
   "description": "",
-  "main": "src/index.js",
+  "main": "src/index.mjs",
   "scripts": {
     "debug": "babel-node inspect src/index.js",
-    "dev": "node src/index.js",
+    "dev": "node src/index.mjs",
     "build": "node src/export.js",
     "lint": "eslint --ext .js src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"

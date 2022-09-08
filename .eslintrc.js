@@ -6,7 +6,7 @@ module.exports = {
     sourceType: 'module',
     project: './tsconfig.eslint.json',
     tsconfigRootDir: __dirname,
-    extraFileExtensions: ['.vue'],
+    extraFileExtensions: ['.mjs', '.vue'],
   },
   extends: [
     'standard',
