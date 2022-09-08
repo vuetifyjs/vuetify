@@ -234,8 +234,8 @@ export default baseMixins.extend({
         // So we must have focused something outside the dialog and its children
       ) {
         // Find and focus the first available element inside the dialog
-        const focusable = this.$refs.dialog.querySelectorAll('button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])')
-        const el = [...focusable].find(el => !el.hasAttribute('disabled')) as HTMLElement | undefined
+        const focusable = this.$refs.dialog.querySelectorAll('button, [href], input:not([type="hidden"]), select, textarea, [tabindex]:not([tabindex="-1"])')
+        const el = [...focusable].find(el => !el.hasAttribute('disabled') && !el.matches('[tabindex="-1"]')) as HTMLElement | undefined
         el && el.focus()
       }
     },
