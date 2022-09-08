@@ -89,6 +89,15 @@ declare module '@vue/runtime-core' {
     provides: Record<string, unknown>
     setupState: any
   }
+
+  export interface FunctionalComponent {
+    aliasName?: string
+  }
+
+  // eslint-disable-next-line max-len
+  export interface ComponentOptionsBase<Props, RawBindings, D, C extends ComputedOptions, M extends MethodOptions, Mixin extends ComponentOptionsMixin, Extends extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults = {}> {
+    aliasName?: string
+  }
 }
 
 declare module '@vue/runtime-dom' {

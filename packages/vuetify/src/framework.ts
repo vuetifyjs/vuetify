@@ -57,6 +57,7 @@ export const createVuetify = (vuetify: VuetifyOptions = {}) => {
       app.component(key, defineComponent({
         ...aliases[key],
         name: key,
+        aliasName: aliases[key].name,
       }))
     }
 
