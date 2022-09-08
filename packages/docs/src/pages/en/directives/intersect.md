@@ -25,14 +25,6 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 <api-inline />
 
-## Caveats
-
-<alert type="info">
-
-  While the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API) is not available in IE11 by default, it can be implemented using a [polyfill](https://github.com/w3c/IntersectionObserver)
-
-</alert>
-
 ## Examples
 
 ### Props
