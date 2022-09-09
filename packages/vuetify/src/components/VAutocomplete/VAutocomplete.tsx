@@ -214,7 +214,7 @@ export const VAutocomplete = genericComponent<new <
           ref={ vTextFieldRef }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
-          validationValue={ props.modelValue ?? model.value }
+          validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
           onInput={ onInput }
           class={[

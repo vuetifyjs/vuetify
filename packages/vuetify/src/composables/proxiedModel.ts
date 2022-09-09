@@ -5,6 +5,8 @@ import { getCurrentInstance, toKebabCase } from '@/util'
 // Types
 import type { Ref } from 'vue'
 
+type InnerVal<T> = T extends any[] ? Readonly<T> : T
+
 // Composables
 export function useProxiedModel<
   Props extends object & { [key in Prop as `onUpdate:${Prop}`]: ((val: any) => void) | undefined },
@@ -26,19 +28,25 @@ export function useProxiedModel<
     )
   })
 
-  const internal = ref(transformIn(props[prop])) as Ref<Inner>
+  const internal = ref(props[prop]) as Ref<Props[Prop]>
 
-  return computed<Inner extends any[] ? Readonly<Inner> : Inner>({
+  const model = computed({
     get (): any {
-      if (propIsDefined.value) return transformIn(props[prop])
-      else return internal.value
+      return transformIn(propIsDefined.value ? props[prop] : internal.value)
     },
     set (newValue) {
-      if ((propIsDefined.value ? transformIn(props[prop]) : internal.value) === newValue) {
+      if (transformIn(propIsDefined.value ? props[prop] : internal.value) === newValue) {
         return
       }
+      newValue = transformOut(newValue)
       internal.value = newValue
-      vm?.emit(`update:${prop}`, transformOut(newValue))
+      vm?.emit(`update:${prop}`, newValue)
     },
+  }) as any as Ref<InnerVal<Inner>> & { readonly externalValue: Props[Prop] }
+
+  Object.defineProperty(model, 'externalValue', {
+    get: () => propIsDefined.value ? props[prop] : internal.value,
   })
+
+  return model
 }

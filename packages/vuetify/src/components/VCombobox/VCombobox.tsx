@@ -292,7 +292,7 @@ export const VCombobox = genericComponent<new <
           ref={ vTextFieldRef }
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
-          validationValue={ props.modelValue ?? model.value }
+          validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
           class={[
             'v-combobox',
