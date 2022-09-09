@@ -29,3 +29,5 @@ export const VAppBarNavIcon = defineComponent({
     return {}
   },
 })
+
+export type VAppBarNavIcon = InstanceType<typeof VAppBarNavIcon>

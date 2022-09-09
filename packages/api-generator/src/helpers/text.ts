@@ -1,6 +1,8 @@
-const { camelCase, capitalize } = require('lodash')
+import { capitalize } from 'lodash'
 
-const kebabCase = str => {
+export { camelCase, capitalize } from 'lodash'
+
+export const kebabCase = (str: string) => {
   let kebab = ''
   for (let i = 0; i < str.length; i++) {
     const charCode = str.charCodeAt(i)
@@ -13,11 +15,4 @@ const kebabCase = str => {
   return kebab
 }
 
-const pascalize = str => str.split('-').map(capitalize).join('')
-
-module.exports = {
-  camelCase,
-  capitalize,
-  kebabCase,
-  pascalize,
-}
+export const pascalize = (str: string) => str.split('-').map(capitalize).join('')

@@ -115,8 +115,11 @@
   type Item = {
     name: string
     source: string
-    type: string | string[]
-    signature: string
+    type?: string | string[]
+    anyOf: Item[],
+    enum?: string[],
+    parameters?: Item[],
+    returnType?: Item,
     default: any
     description: Record<string, string>,
     snippet: string
@@ -135,7 +138,7 @@
         required: true,
       },
       filter: String,
-      apiData: Array as PropType<Item[]>,
+      apiData: Object as PropType<Record<string, Item>>,
     },
 
     setup (props) {

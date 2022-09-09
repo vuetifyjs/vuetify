@@ -70,3 +70,5 @@ export const VDivider = defineComponent({
     return {}
   },
 })
+
+export type VDivider = InstanceType<typeof VDivider>

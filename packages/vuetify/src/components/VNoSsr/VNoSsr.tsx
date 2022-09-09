@@ -16,3 +16,5 @@ export const VNoSsr = defineComponent({
     return () => show.value && slots.default?.()
   },
 })
+
+export type VNoSsr = InstanceType<typeof VNoSsr>

@@ -78,3 +78,5 @@ export const VColorPickerPreview = defineComponent({
     return {}
   },
 })
+
+export type VColorPickerPreview = InstanceType<typeof VColorPickerPreview>

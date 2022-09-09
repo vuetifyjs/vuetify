@@ -84,8 +84,8 @@ function createMdFile (component: string, data: Record<string, any>, locale: str
   str += genHeader(component)
   str += genApiLinks(component, messages.links)
 
-  for (const section of ['props', 'functions', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
-    if (Array.isArray(data[section]) && data[section].length) {
+  for (const section of ['props', 'exposed', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
+    if (data[section]?.properties) {
       str += `## ${messages[section]} {#${section}}\n\n`
       str += `<api-section name="${component}" section="${section}" />\n\n`
     }
@@ -116,8 +116,26 @@ function writeData (componentName: string, componentApi: Record<string, any>) {
   fs.writeFileSync(resolve(`${folder}/${componentName}.json`), JSON.stringify(componentApi, null, 2))
 }
 
+function getApiData () {
+  const files = fs.readdirSync(resolve('src/api/data'))
+  const data: Record<string, any>[] = []
+
+  for (const file of files) {
+    const name = path.basename(file.slice(file.lastIndexOf('/') + 1), '.json')
+    const obj = JSON.parse(fs.readFileSync(resolve('src/api/data', file), 'utf-8'))
+
+    data.push({
+      name,
+      ...obj,
+    })
+  }
+
+  return data
+}
+
 function generateFiles () {
-  const api: Record<string, any>[] = getCompleteApi(localeList)
+  // const api: Record<string, any>[] = getCompleteApi(localeList)
+  const api = getApiData()
 
   for (const locale of localeList) {
     const pages = {} as Record<string, any>
@@ -132,20 +150,20 @@ function generateFiles () {
     fs.writeFileSync(resolve(`src/api/${locale}.js`), `export default require.context('./${locale}', true, /\\.md$/)`)
   }
 
-  for (const item of api) {
-    writeData(item.name, item)
-  }
+  // for (const item of api) {
+  //   writeData(item.name, item)
+  // }
 
-  fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
-    ...api.filter(item => item && item.sass && item.sass.length > 0).map(item => item.name),
-  ]))
+  // fs.writeFileSync(resolve(`src/api/sass.json`), JSON.stringify([
+  //   ...api.filter(item => item && item.sass && item.sass.length > 0).map(item => item.name),
+  // ]))
 }
 
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
     configResolved () {
-      rimraf.sync(resolve('src/api'))
+      // rimraf.sync(resolve('src/api'))
 
       generateFiles()
     },

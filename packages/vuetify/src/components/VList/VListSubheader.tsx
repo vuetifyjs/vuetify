@@ -48,3 +48,5 @@ export const VListSubheader = defineComponent({
     return {}
   },
 })
+
+export type VListSubheader = InstanceType<typeof VListSubheader>

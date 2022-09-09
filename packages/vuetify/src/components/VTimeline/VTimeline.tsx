@@ -120,3 +120,5 @@ export const VTimeline = defineComponent({
     return {}
   },
 })
+
+export type VTimeline = InstanceType<typeof VTimeline>

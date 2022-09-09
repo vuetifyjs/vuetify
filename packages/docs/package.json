@@ -25,6 +25,7 @@
     "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.14",
+    "prettier": "^2.7.1",
     "prism-theme-vars": "^0.2.3",
     "prismjs": "^1.28.0",
     "roboto-fontface": "^0.10.0",

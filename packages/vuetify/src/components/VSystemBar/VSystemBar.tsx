@@ -65,3 +65,5 @@ export const VSystemBar = defineComponent({
     return {}
   },
 })
+
+export type VSystemBar = InstanceType<typeof VSystemBar>

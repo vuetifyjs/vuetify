@@ -55,3 +55,5 @@ export const VBtnToggle = genericComponent<new <T>() => {
     }
   },
 })
+
+export type VBtnToggle = InstanceType<typeof VBtnToggle>

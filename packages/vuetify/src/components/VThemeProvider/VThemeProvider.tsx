@@ -32,3 +32,5 @@ export const VThemeProvider = defineComponent({
     }
   },
 })
+
+export type VThemeProvider = InstanceType<typeof VThemeProvider>

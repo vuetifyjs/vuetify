@@ -39,7 +39,7 @@ export interface StrategyProps {
   locationStrategy: keyof typeof locationStrategies | (
     (
       data: LocationStrategyData,
-      props: StrategyProps,
+      props: Omit<StrategyProps, 'locationStrategy'>,
       contentStyles: Ref<Record<string, string>>
     ) => undefined | { updateLocation: (e: Event) => void }
   )

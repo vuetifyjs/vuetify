@@ -79,3 +79,5 @@ export const VFooter = defineComponent({
     return {}
   },
 })
+
+export type VFooter = InstanceType<typeof VFooter>

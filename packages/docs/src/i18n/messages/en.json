@@ -17,7 +17,8 @@
     "modifiers": "Modifiers",
     "props": "Props",
     "sass": "SASS Variables",
-    "slots": "Slots"
+    "slots": "Slots",
+    "exposed": "Exposed"
   },
   "application": "Application",
   "apply": "Apply",

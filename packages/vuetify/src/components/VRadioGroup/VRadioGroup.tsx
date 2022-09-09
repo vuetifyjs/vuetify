@@ -115,3 +115,5 @@ export const VRadioGroup = defineComponent({
     return {}
   },
 })
+
+export type VRadioGroup = InstanceType<typeof VRadioGroup>
