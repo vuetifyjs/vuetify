@@ -1,5 +1,5 @@
 // Composables
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'

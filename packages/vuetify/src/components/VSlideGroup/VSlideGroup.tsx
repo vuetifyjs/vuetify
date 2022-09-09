@@ -11,7 +11,7 @@ import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'

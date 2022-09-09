@@ -1,7 +1,7 @@
 import type { ComponentPublicInstance, FunctionalComponent, VNodeChild } from 'vue'
 
 // @skip-build
-import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleAdapter, RtlInstance, ThemeInstance } from './framework'
+import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
 
 declare global {
   namespace JSX {
@@ -30,8 +30,7 @@ declare module '@vue/runtime-core' {
     display: DisplayInstance
     theme: ThemeInstance
     icons: IconOptions
-    locale: LocaleAdapter
-    rtl: RtlInstance
+    locale: LocaleInstance & RtlInstance
   }
 
   export interface ComponentCustomProperties {

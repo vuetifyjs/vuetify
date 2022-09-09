@@ -19,6 +19,6 @@ describe('locale.ts', () => {
     }, {})
     const enUnfilled = unfill(locales.en)
 
-    Object.entries(locales).forEach(([locale, messages]) => locale !== 'rtl' && expect(unfill(messages)).toStrictEqual(enUnfilled))
+    Object.entries(locales).forEach(([locale, messages]) => locale !== 'defaultRtl' && expect(unfill(messages)).toStrictEqual(enUnfilled))
   })
 })

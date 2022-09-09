@@ -15,11 +15,10 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, nextTick, ref, toRef } from 'vue'

@@ -41,7 +41,7 @@ export { default as vi } from './vi'
 export { default as zhHans } from './zh-Hans'
 export { default as zhHant } from './zh-Hant'
 
-export const rtl = {
+export const defaultRtl = {
   af: false,
   ar: true,
   bg: false,

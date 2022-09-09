@@ -159,7 +159,6 @@
     "vue-router": "^4.0.15"
   },
   "peerDependencies": {
-    "@formatjs/intl": "^1.0.0 || ^2.0.0",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
     "vue": "^3.2.0",
     "vue-i18n": "^9.0.0",
@@ -167,9 +166,6 @@
   },
   "peerDependenciesMeta": {
     "vue-i18n": {
-      "optional": true
-    },
-    "@formatjs/intl": {
       "optional": true
     },
     "webpack-plugin-vuetify": {
