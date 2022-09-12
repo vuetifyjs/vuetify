@@ -59,7 +59,7 @@ export function useValidation (
   id: MaybeRef<string | number> = getUid(),
 ) {
   const model = useProxiedModel(props, 'modelValue')
-  const validationModel = computed(() => props.validationValue ?? model.value)
+  const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
   const form = useForm()
   const internalErrorMessages = ref<string[]>([])
   const isPristine = ref(true)
