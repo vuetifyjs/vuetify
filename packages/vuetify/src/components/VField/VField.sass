@@ -87,11 +87,12 @@
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
 
   // These are separate so they can override the default variant styles
-  &--prepended
-    --v-field-padding-start: #{$field-control-affixed-inner-padding}
+  &.v-field
+    &--prepended
+      --v-field-padding-start: #{$field-control-affixed-inner-padding}
 
-  &--appended
-    --v-field-padding-end: #{$field-control-affixed-inner-padding}
+    &--appended
+      --v-field-padding-end: #{$field-control-affixed-inner-padding}
 
 /* endregion */
 /* region ELEMENTS */
