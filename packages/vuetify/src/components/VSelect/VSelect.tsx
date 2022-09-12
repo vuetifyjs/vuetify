@@ -174,7 +174,7 @@ export const VSelect = genericComponent<new <
           ref={ vTextFieldRef }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
-          validationValue={ props.modelValue ?? model.value }
+          validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
           class={[
             'v-select',

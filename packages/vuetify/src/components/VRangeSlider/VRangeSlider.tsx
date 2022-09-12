@@ -99,7 +99,7 @@ export const VRangeSlider = defineComponent({
 
         return arr.map(value => roundValue(value))
       },
-    ) as WritableComputedRef<[number, number]>
+    ) as WritableComputedRef<[number, number]> & { readonly externalValue: number[] }
 
     const { isFocused, focus, blur } = useFocus(props)
     const trackStart = computed(() => position(model.value[0]))
