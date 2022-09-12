@@ -120,7 +120,7 @@ export default mixins(Colorable, Themeable).extend({
       return this.$createElement(VSubheader, { props }, props.header)
     },
     genHighlight (text: string) {
-      return this.$createElement('span', { staticClass: 'v-list__tile__mask' }, text)
+      return this.$createElement('span', { staticClass: 'v-list-item__mask' }, text)
     },
     getMaskedCharacters (text: string): {
       start: string
