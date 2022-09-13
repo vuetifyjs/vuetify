@@ -64,7 +64,7 @@
       icon: icon.value ? 'mdi-vuetify' : undefined,
       title: title.value ? 'Alert title' : undefined,
       text: '...',
-      type: type.value,
+      type: type.value || undefined,
       variant: ['outlined', 'tonal'].includes(model.value) ? model.value : undefined,
     }
   })

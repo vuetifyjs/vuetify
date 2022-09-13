@@ -45,7 +45,7 @@
     return {
       color: color.value || undefined,
       indeterminate: indeterminate.value || undefined,
-      'model-value': !indeterminate.value ? 20 : undefined,
+      'model-value': !indeterminate.value ? '20' : undefined,
       height: height.value !== 4 ? height.value : undefined,
     }
   })

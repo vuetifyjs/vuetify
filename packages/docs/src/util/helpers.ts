@@ -123,8 +123,9 @@ export function propsToString (props: Record<string, any>, indent = 1) {
       .filter(([k, v]) => v !== undefined)
       .map(([k, v]) => {
         if (v === true) return k
+        if (typeof v === 'string') return `${k}="${v}"`
 
-        return `${k}="${v}"`
+        return `:${k}="${v}"`
       })
 
   const propsString = displayedProps.join(' ')

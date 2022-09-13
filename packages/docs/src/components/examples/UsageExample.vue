@@ -6,11 +6,13 @@
       density="compact"
       flat
     >
+      <div v-if="!options.length" class="flex-grow-1" />
       <v-slide-group
+        v-else
         v-model="model"
         class="flex-grow-1"
         mandatory
-        show-arrows="always"
+        show-arrows
       >
         <v-slide-group-item value="default">
           <template #default="{ isSelected, toggle }">
@@ -138,10 +140,7 @@
     },
   })
 
-  const emit = defineEmits({
-    'update:modelValue': val => val,
-    'update:tuneValue': val => val,
-  })
+  const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
   const tune = ref(true)
   const show = ref(true)

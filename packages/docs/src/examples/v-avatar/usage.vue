@@ -40,11 +40,11 @@
   const options = ['tile']
   const props = computed(() => {
     return {
-      rounded: model.value === 'tile' ? 0 : undefined,
+      rounded: model.value === 'tile' ? '0' : undefined,
       color: 'surface-variant',
       icon: icon.value ? 'mdi-vuetify' : undefined,
       image: image.value ? 'smirk.png' : undefined,
-      size: size.value === 40 ? undefined : size.value,
+      size: size.value === 40 ? undefined : `${size.value}`,
     }
   })
 
