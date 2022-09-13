@@ -36,14 +36,14 @@
   const model = ref('default')
   const icon = ref(false)
   const image = ref(false)
-  const size = ref()
+  const size = ref(40)
   const options = ['tile']
   const props = computed(() => {
     return {
-      rounded: model.value === 'tile' ? '0' : undefined,
-      color: 'surface-variant',
+      color: !image.value && !icon.value ? 'surface-variant' : undefined,
       icon: icon.value ? 'mdi-vuetify' : undefined,
       image: image.value ? 'smirk.png' : undefined,
+      rounded: model.value === 'tile' ? '0' : undefined,
       size: size.value === 40 ? undefined : `${size.value}`,
     }
   })
