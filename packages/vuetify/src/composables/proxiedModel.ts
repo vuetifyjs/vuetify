@@ -1,6 +1,7 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { Ref } from 'vue'
@@ -20,22 +21,35 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
-
-  const propIsDefined = computed(() => {
-    void props[prop]
-    return !!(
-      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(toKebabCase(prop)))
-    )
-  })
-
   const internal = ref(props[prop]) as Ref<Props[Prop]>
+  const kebabProp = toKebabCase(prop)
+  const checkKebab = kebabProp !== prop
+
+  const isControlled = checkKebab
+    ? computed(() => {
+      void props[prop]
+      return !!(
+        (vm.vnode.props?.hasOwnProperty(prop) || vm.vnode.props?.hasOwnProperty(kebabProp)) &&
+        (vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`) || vm.vnode.props?.hasOwnProperty(`onUpdate:${kebabProp}`))
+      )
+    })
+    : computed(() => {
+      void props[prop]
+      return !!(vm.vnode.props?.hasOwnProperty(prop) && vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`))
+    })
+
+  useToggleScope(() => !isControlled.value, () => {
+    watch(() => props[prop], val => {
+      internal.value = val
+    })
+  })
 
   const model = computed({
     get (): any {
-      return transformIn(propIsDefined.value ? props[prop] : internal.value)
+      return transformIn(isControlled.value ? props[prop] : internal.value)
     },
     set (newValue) {
-      if (transformIn(propIsDefined.value ? props[prop] : internal.value) === newValue) {
+      if (transformIn(isControlled.value ? props[prop] : internal.value) === newValue) {
         return
       }
       newValue = transformOut(newValue)
@@ -45,7 +59,7 @@ export function useProxiedModel<
   }) as any as Ref<InnerVal<Inner>> & { readonly externalValue: Props[Prop] }
 
   Object.defineProperty(model, 'externalValue', {
-    get: () => propIsDefined.value ? props[prop] : internal.value,
+    get: () => isControlled.value ? props[prop] : internal.value,
   })
 
   return model
