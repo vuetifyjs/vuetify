@@ -4,7 +4,7 @@
     app
     class="d-block px-0"
     dark
-    height="66"
+    height="60"
   >
     <a
       :href="banner.metadata.link"
@@ -17,7 +17,7 @@
       <v-img
         v-if="src"
         :src="src"
-        height="66"
+        height="60"
       />
     </a>
 
@@ -26,7 +26,7 @@
       fab
       right
       small
-      style="top: 12px;"
+      style="top: 8px;"
       @click="onClose"
     >
       <v-icon class="mr-0">$clear</v-icon>
@@ -56,9 +56,9 @@
       src () {
         const { ultrawide, desktop, tablet, mobile } = this.banner?.metadata?.images
 
-        if (this.$vuetify.breakpoint.width > 1547) return ultrawide?.url
-        if (this.$vuetify.breakpoint.width > 992) return desktop?.url
-        if (this.$vuetify.breakpoint.width > 437) return tablet?.url
+        if (this.$vuetify.breakpoint.width > 1480) return ultrawide?.url
+        if (this.$vuetify.breakpoint.width > 720) return desktop?.url
+        if (this.$vuetify.breakpoint.width > 336) return tablet?.url
 
         return mobile?.url
       },
