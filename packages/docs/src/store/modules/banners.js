@@ -14,18 +14,26 @@ const actions = {
   fetch: async ({ commit }) => {
     if (!bucket.available) return
 
-    const { objects } = await bucket.getObjects({
-      type: 'banners',
-      start_date: {
-        $lte: '2022-09-12',
-      },
-      limit: 1,
-      props: 'metadata,slug,title',
-      status: 'published',
-      sort: '-created_at',
-    })
+    try {
+      const today = (new Date()).toISOString().substring(0, 10)
+      const { objects } = await bucket.objects.find({
+        type: 'banners',
+        'metadata.start_date': {
+          $lte: today,
+        },
+        'metadata.end_date': {
+          $gte: today,
+        },
+        sort: 'metadata.start_date',
+      })
+        .props('metadata,slug,title')
+        .status('published')
+        .limit(1)
 
-    commit('banner', objects[0] || null)
+      commit('banner', objects[0] || null)
+    } catch (err) {
+      console.log(err)
+    }
   },
 }
 

@@ -14,7 +14,7 @@ const actions = {
   fetch: async ({ commit }) => {
     if (!bucket.available) return
 
-    const { objects } = await bucket.getObjects({
+    const { objects } = await bucket.objects.find({
       type: 'ads',
       props: 'metadata,slug,title',
       status: 'published',

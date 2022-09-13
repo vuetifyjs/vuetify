@@ -43,7 +43,7 @@
     "@vue/cli-service": "~4.5.19",
     "@vuetify/api-generator": "^2.6.10",
     "@vuetify/vue-cli-plugin-base": "~0.3.5",
-    "cosmicjs": "^3.2.43",
+    "cosmicjs": "^4.2.10",
     "date-fns": "^2.14.0",
     "frontmatter-markdown-loader": "^3.5.0",
     "git-date-extractor": "^3.0.0",
