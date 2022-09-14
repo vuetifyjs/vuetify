@@ -53,10 +53,10 @@ describe('useProxiedModel', () => {
   it('should use default prop value as first value if defined', async () => {
     const wrapper = mount(TestComponentWithPropDefaultValue)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('propDefaultValue,propDefaultValue')
 
     await wrapper.trigger('click')
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('propDefaultValue,internal')
   })
 
   it('should use prop value if defined with kebab case', async () => {
@@ -66,52 +66,71 @@ describe('useProxiedModel', () => {
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('foobar,foobar')
   })
 
-  it('should always use prop value if defined', async () => {
+  it('should use prop as initial value if defined', async () => {
     const wrapper = mount(TestComponent, {
       props: {
         foo: 'bar',
       },
     })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('bar,bar')
+
+    await wrapper.trigger('click')
+    expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
+
+    expect(wrapper.element.textContent).toBe('bar,internal')
+
+    await wrapper.setProps({ foo: 'external' })
+    expect(wrapper.element.textContent).toBe('external,external')
+  })
+
+  it('should always use prop value if update listener defined', async () => {
+    const wrapper = mount(TestComponent, {
+      props: {
+        foo: 'bar',
+        'onUpdate:foo': () => {},
+      },
+    })
+
+    expect(wrapper.element.textContent).toBe('bar,bar')
 
     await wrapper.trigger('click')
     expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
 
     // internal value should not change until prop is updated
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('bar,bar')
 
-    await wrapper.setProps({ foo: 'internal' })
-    expect(wrapper.html()).toMatchSnapshot()
+    await wrapper.setProps({ foo: 'external' })
+    expect(wrapper.element.textContent).toBe('external,external')
   })
 
   it('should use internal value if prop not defined', async () => {
     const wrapper = mount(TestComponent)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe(',')
 
     await wrapper.trigger('click')
     expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
 
     // internal value should have changed since prop is not defined
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe(',internal')
   })
 
   it('should switch to using prop when it is defined', async () => {
     const wrapper = mount(TestComponent)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe(',')
 
     await wrapper.trigger('click')
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe(',internal')
 
     await wrapper.setProps({ foo: 'new' })
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.element.textContent).toBe('new,new')
   })
 
   describe('transforms', () => {
@@ -142,7 +161,7 @@ describe('useProxiedModel', () => {
         },
       })
 
-      expect(wrapper.html()).toMatchSnapshot()
+      expect(wrapper.element.textContent).toBe('["1","2","3"]')
     })
 
     it('should emit transformed value', async () => {
@@ -159,12 +178,12 @@ describe('useProxiedModel', () => {
     it('should use internal value if prop not defined', async () => {
       const wrapper = mount(TestComponentTransformed)
 
-      expect(wrapper.html()).toMatchSnapshot()
+      expect(wrapper.element.textContent).toBe('[]')
 
       await wrapper.trigger('click')
       expect(wrapper.emitted('update:foo')[0]).toStrictEqual([[2, 3, 4]])
 
-      expect(wrapper.html()).toMatchSnapshot()
+      expect(wrapper.element.textContent).toBe('["2","3","4"]')
     })
   })
 })
