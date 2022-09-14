@@ -231,7 +231,7 @@ export default mixins(
         year: { year: 'numeric', timeZone: 'UTC' },
         month: { month: 'long', timeZone: 'UTC' },
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' },
-      }
+      } as const
 
       const titleDateFormatter = createNativeLocaleFormatter(this.currentLocale, titleFormats[this.type], {
         start: 0,
@@ -352,8 +352,11 @@ export default mixins(
       }
     },
     monthClick (value: string) {
-      this.inputYear = parseInt(value.split('-')[0], 10)
-      this.inputMonth = parseInt(value.split('-')[1], 10) - 1
+      const [year, month] = value.split('-')
+
+      this.inputYear = parseInt(year, 10)
+      this.inputMonth = parseInt(month, 10) - 1
+
       if (this.type === 'date') {
         if (this.inputDay) {
           this.inputDay = Math.min(this.inputDay, daysInMonth(this.inputYear, this.inputMonth + 1))
@@ -369,9 +372,12 @@ export default mixins(
       }
     },
     dateClick (value: string) {
-      this.inputYear = parseInt(value.split('-')[0], 10)
-      this.inputMonth = parseInt(value.split('-')[1], 10) - 1
-      this.inputDay = parseInt(value.split('-')[2], 10)
+      const [year, month, day] = value.split('-')
+
+      this.inputYear = parseInt(year, 10)
+      this.inputMonth = parseInt(month, 10) - 1
+      this.inputDay = parseInt(day, 10)
+
       this.emitInput(this.inputDate)
     },
     genPickerTitle (): VNode {

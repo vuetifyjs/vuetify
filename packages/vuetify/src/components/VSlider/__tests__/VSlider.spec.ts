@@ -559,7 +559,7 @@ describe('VSlider.ts', () => {
 
   it('should set value to min value if given a NaN value', () => {
     const input = jest.fn()
-    const wrapper = mountFunction({
+    mountFunction({
       propsData: {
         min: -20,
         max: 20,
@@ -570,7 +570,8 @@ describe('VSlider.ts', () => {
       },
     })
 
-    expect(wrapper.vm.internalValue).toBe(-20)
+    expect(input).toHaveBeenCalledTimes(1)
+    expect(input).toHaveBeenCalledWith(-20)
   })
 
   it('should correctly handle initial value of zero (#7320)', () => {

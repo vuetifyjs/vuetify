@@ -308,15 +308,15 @@ describe('VDialog.ts', () => {
       propsData: { eager: true },
     })
 
-    const content = wrapper.find('.v-dialog__content')
+    const dialog = wrapper.find('.v-dialog')
 
-    expect(content.html()).toMatchSnapshot()
-    expect(content.element.tabIndex).toBe(-1)
+    expect(dialog.html()).toMatchSnapshot()
+    expect(dialog.element.tabIndex).toBe(-1)
 
     wrapper.setData({ isActive: true })
 
-    expect(content.element.tabIndex).toBe(0)
-    expect(content.html()).toMatchSnapshot()
+    expect(dialog.element.tabIndex).toBe(0)
+    expect(dialog.html()).toMatchSnapshot()
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/8697

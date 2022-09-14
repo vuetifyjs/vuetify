@@ -2,6 +2,12 @@
 @import './_variables.scss'
 @import './_mixins.sass'
 
+/**
+ * .v-timeline::before - center divider
+ * .v-card::before - arrow shadow (conflicts with active link overlay)
+ * .v-card::after - arrow
+ */
+
 // Theme
 +theme(v-timeline) using ($material)
   &::before
@@ -12,7 +18,7 @@
       background: map-get($material, 'cards')
 
     .v-card
-      &::before
+      &:not(.v-card--link)::before
         border-right-color: $shadow-key-ambient-opacity
 
 // Elements
@@ -20,7 +26,7 @@
   padding-top: $timeline-item-padding
   position: relative
 
-  &:before
+  &::before
     bottom: 0
     content: ''
     height: 100%
@@ -85,7 +91,8 @@
 // Wedge
 .v-timeline-item__body
   > .v-card:not(.v-card--flat)
-    &:before, &:after
+    &:not(.v-card--link)::before,
+    &::after
       content: ''
       position: absolute
       border-top: $timeline-wedge-size solid transparent
@@ -93,10 +100,10 @@
       border-right: $timeline-wedge-size solid black
       top: calc(50% - #{$timeline-wedge-size})
 
-    &:after
+    &::after
       border-right-color: inherit
 
-    &:before
+    &:not(.v-card--link)::before
       top: calc(50% - #{$timeline-wedge-size} + 2px)
 
 // Modifiers
@@ -106,11 +113,11 @@
 
   .v-timeline-item__body
     > .v-card
-      &:before
-        top: calc(0% + #{$timeline-wedge-size} + 2px)
-
-      &:after
+      &::after
         top: calc(0% + #{$timeline-wedge-size})
+
+      &:not(.v-card--link)::before
+        top: calc(0% + #{$timeline-wedge-size} + 2px)
 
 .v-timeline:not(.v-timeline--dense):not(.v-timeline--reverse)
   +timeline-line-align($timeline-divider-center, left, right)

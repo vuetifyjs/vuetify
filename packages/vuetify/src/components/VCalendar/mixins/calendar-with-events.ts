@@ -10,9 +10,6 @@ import ripple from '../../../directives/ripple'
 // Mixins
 import CalendarBase from './calendar-base'
 
-// Helpers
-import { escapeHTML } from '../../../util/helpers'
-
 // Util
 import props from '../util/props'
 import {
@@ -116,7 +113,7 @@ export default CalendarBase.extend({
     eventNameFunction (): CalendarEventNameFunction {
       return typeof this.eventName === 'function'
         ? this.eventName
-        : (event, timedEvent) => escapeHTML(event.input[this.eventName as string] as string || '')
+        : (event, timedEvent) => event.input[this.eventName as string] as string || ''
     },
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
@@ -303,16 +300,23 @@ export default CalendarBase.extend({
       const eventSummary = () => {
         const name = this.eventNameFunction(event, timedEvent)
         if (event.start.hasTime) {
-          const eventSummaryClass = 'v-event-summary'
           if (timedEvent) {
             const time = timeSummary()
-            const delimiter = singline ? ', ' : '<br>'
+            const delimiter = singline ? ', ' : this.$createElement('br')
 
-            return `<span class="${eventSummaryClass}"><strong>${name}</strong>${delimiter}${time}</span>`
+            return this.$createElement('span', { staticClass: 'v-event-summary' }, [
+              this.$createElement('strong', [name]),
+              delimiter,
+              time,
+            ])
           } else {
             const time = formatTime(event.start, true)
 
-            return `<span class="${eventSummaryClass}"><strong>${time}</strong> ${name}</span>`
+            return this.$createElement('span', { staticClass: 'v-event-summary' }, [
+              this.$createElement('strong', [time]),
+              ' ',
+              name,
+            ])
           }
         }
 
@@ -345,13 +349,10 @@ export default CalendarBase.extend({
           : [this.genName(eventSummary)]
       )
     },
-    genName (eventSummary: () => string): VNode {
+    genName (eventSummary: () => string | VNode): VNode {
       return this.$createElement('div', {
         staticClass: 'pl-1',
-        domProps: {
-          innerHTML: eventSummary(),
-        },
-      })
+      }, [eventSummary()])
     },
     genPlaceholder (day: CalendarTimestamp): VNode {
       const height = this.eventHeight + this.eventMarginBottom

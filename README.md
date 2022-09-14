@@ -50,16 +50,10 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
     <strong><small>(supports the Dev team)</small></strong>
   </li>
   <li>
+    <a href="https://github.com/sponsors/johnleider?frequency=one-time&sponsor=johnleider">Make a one-time payment with GitHub</a> or <a href="https://paypal.me/vuetify">Paypal</a> <small>(supports John and Heather)</small>
+  </li>
+  <li>
     <a href="https://tidelift.com/subscription/request-a-demo?utm_source=npm-vuetify&utm_medium=referral&utm_campaign=enterprise">Become a subscriber on Tidelift</a>
-  </li>
-  <li>
-    <a href="https://github.com/sponsors/johnleider?frequency=one-time&sponsor=johnleider">Make a one-time payment with GitHub</a>
-  </li>
-  <li>
-    <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
-  </li>
-  <li>
-    <a href="https://vuetifyjs.com/introduction/support/?ref=github">Book time with the Team</a>
   </li>
 </ul>
 
@@ -67,11 +61,16 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
 
 Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h3 align="center"><b>Special Sponsors</b></h3>
+### Special Sponsors
 
 <table>
   <tbody>
     <tr>
+      <td>
+        <a href="https://appeggio.com/vuetify?ref=vuetify-github">
+          <img height="50px" src="https://imgix.cosmicjs.com/7658d8f0-9e71-11ec-b20b-ad2fdaf5e1bc-logo-word.svg">
+        </a>
+      </td>
       <td>
         <a href="https://www.qomplx.com/?ref=vuetify-github">
           <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.png">
@@ -81,7 +80,21 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   </tbody>
 </table>
 
-<h3 align="center"><b>Platinum Sponsors</b></h3>
+### Palladium Sponsors
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://vueschool.io/?utm_source=Vuetify&utm_medium=banner&utm_campaign=sponsorship">
+          <img height="48px" src="https://imgix.cosmicjs.com/d82532e0-9fbb-11ec-a634-2f1716dd45af-vue-school-light-lg.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+### Platinum Sponsors
 
 <table>
   <tbody>
@@ -115,7 +128,7 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
   </tbody>
 </table>
 
-<h3 align="center"><b>Gold Sponsors</b></h3>
+### Gold Sponsors
 
 <table>
   <tbody>

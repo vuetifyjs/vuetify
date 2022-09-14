@@ -1,4 +1,4 @@
-import Vue, { Component, PluginFunction, VueConstructor, DirectiveOptions } from 'vue'
+import Vue, { Component, PluginFunction, VueConstructor, DirectiveOptions, VNode } from 'vue'
 import './lib'
 import './alacarte'
 import './colors'
@@ -275,7 +275,7 @@ export type CalendarEventTimedFunction = (event: CalendarEvent) => boolean
 
 export type CalendarEventCategoryFunction = (event: CalendarEvent) => string
 
-export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string
+export type CalendarEventNameFunction = (event: CalendarEventParsed, timedEvent: boolean) => string | VNode
 
 export type DataTableFilterFunction = (value: any, search: string | null, item: any) => boolean
 
