@@ -128,7 +128,7 @@ describe('VWindow', () => {
     // wrap it in a div for now.
     cy.mount(() => (
       <div>
-        <VWindow showArrows modelValue="two">
+        <VWindow showArrows modelValue="two" onUpdate:modelValue="">
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>
