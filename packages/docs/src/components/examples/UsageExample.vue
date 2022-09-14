@@ -6,9 +6,7 @@
       density="compact"
       flat
     >
-      <div v-if="!options.length" class="flex-grow-1" />
       <v-slide-group
-        v-else
         v-model="model"
         class="flex-grow-1"
         mandatory
@@ -44,8 +42,10 @@
       </v-slide-group>
 
       <v-responsive
+        v-if="$slots.configuration && display.mdAndUp.value"
         class="border-s align-center bg-surface"
         height="48"
+        width="100%"
         max-width="250"
       >
         <div class="d-flex align-center justify-space-between">
@@ -89,6 +89,7 @@
       </v-main>
 
       <v-navigation-drawer
+        v-if="display.smAndUp.value"
         v-model="tune"
         permanent
         name="tune"
@@ -102,6 +103,7 @@
                 global: {
                   density: 'compact',
                   hideDetails: true,
+                  step: 1,
                 }
               }"
             >
@@ -113,7 +115,7 @@
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="show">
+      <div v-if="show && display.mdAndUp.value">
         <div class="pa-3">
           <app-markup :code="code" />
         </div>
@@ -123,8 +125,11 @@
 </template>
 
 <script setup>
+  // Composables
+  import { useDisplay } from 'vuetify'
+
   // Utilities
-  import { computed, ref } from 'vue'
+  import { computed, ref, useSlots } from 'vue'
 
   const props = defineProps({
     name: String,
@@ -141,9 +146,10 @@
   })
 
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
-
+  const display = useDisplay()
   const tune = ref(true)
   const show = ref(true)
+  const slots = useSlots()
   const model = computed({
     get () {
       return props.modelValue
