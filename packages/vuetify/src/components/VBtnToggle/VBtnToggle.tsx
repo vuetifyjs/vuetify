@@ -27,7 +27,7 @@ export const VBtnToggle = genericComponent<new <T>() => {
 }>()({
   name: 'VBtnToggle',
 
-  props: makeGroupProps({ selectedClass: 'v-btn--selected' }),
+  props: makeGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
