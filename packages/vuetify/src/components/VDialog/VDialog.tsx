@@ -7,7 +7,6 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTransitionProps } from '@/composables/transition'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
@@ -40,7 +39,6 @@ export const VDialog = genericComponent<new () => {
     scrollable: Boolean,
     modelValue: Boolean,
 
-    ...makeDimensionProps({ width: 'auto' }),
     ...makeTransitionProps({
       transition: { component: VDialogTransition },
     }),
@@ -52,7 +50,6 @@ export const VDialog = genericComponent<new () => {
 
   setup (props, { attrs, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { dimensionStyles } = useDimension(props)
     const { scopeId } = useScopeId()
 
     const overlay = ref<VOverlay>()
@@ -114,7 +111,6 @@ export const VDialog = genericComponent<new () => {
             'v-dialog--scrollable': props.scrollable,
           },
         ]}
-        style={ dimensionStyles.value }
         transition={ props.transition }
         scrollStrategy="block"
         ref={ overlay }
