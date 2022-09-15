@@ -3,6 +3,7 @@ import './VDialog.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
@@ -126,11 +127,16 @@ export const VDialog = genericComponent<new () => {
         z-index={ 2400 }
         { ...scopeId }
         { ...attrs }
-        v-slots={{
-          default: slots.default,
+      >
+        {{
           activator: slots.activator,
+          default: () => (
+            <VDefaultsProvider root>
+              { slots.default?.() }
+            </VDefaultsProvider>
+          ),
         }}
-      />
+      </VOverlay>
     ))
 
     return forwardRefs({}, overlay)

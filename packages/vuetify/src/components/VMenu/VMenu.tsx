@@ -3,6 +3,7 @@ import './VMenu.sass'
 
 // Components
 import { VDialogTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
@@ -100,11 +101,16 @@ export const VMenu = genericComponent<new () => {
         onClick:outside={ onClickOutside }
         { ...scopeId }
         { ...attrs }
-        v-slots={{
-          default: slots.default,
+      >
+        {{
           activator: slots.activator,
+          default: () => (
+            <VDefaultsProvider root>
+              { slots.default?.() }
+            </VDefaultsProvider>
+          ),
         }}
-      />
+      </VOverlay>
     ))
 
     return forwardRefs({ id }, overlay)
