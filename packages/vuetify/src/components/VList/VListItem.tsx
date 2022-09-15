@@ -101,7 +101,7 @@ export const VListItem = genericComponent<new () => {
     const list = useList()
     const isActive = computed(() =>
       props.active !== false &&
-      (props.active || link.isExactActive?.value || isSelected.value)
+      (props.active || link.isActive?.value || isSelected.value)
     )
     const isLink = computed(() => props.link !== false && link.isLink.value)
     const isClickable = computed(() =>
@@ -116,7 +116,7 @@ export const VListItem = genericComponent<new () => {
       variant: props.variant,
     }))
 
-    watch(() => link.isExactActive?.value, val => {
+    watch(() => link.isActive?.value, val => {
       if (val && parent.value != null) {
         root.open(parent.value, true)
       }

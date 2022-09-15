@@ -17,6 +17,7 @@ import type {
   RouteLocationNormalizedLoaded,
   RouteLocationRaw,
   Router,
+  UseLinkOptions,
 } from 'vue-router'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
@@ -30,9 +31,10 @@ export function useRouter (): Router | undefined {
 }
 
 export interface LinkProps {
-  href?: string
-  replace?: boolean
-  to?: RouteLocationRaw
+  href: string | undefined
+  replace: boolean | undefined
+  to: RouteLocationRaw | undefined
+  exact: boolean | undefined
 }
 
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
@@ -57,12 +59,14 @@ export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLin
     }
   }
 
-  const link = props.to ? RouterLink.useLink(props as Required<LinkProps>) : undefined
+  const link = props.to ? RouterLink.useLink(props as UseLinkOptions) : undefined
 
   return {
-    ...link,
     isLink,
     isClickable,
+    route: link?.route,
+    navigate: link?.navigate,
+    isActive: link && computed(() => props.exact ? link.isExactActive?.value : link.isActive?.value),
     href: computed(() => props.to ? link?.route.value.href : props.href),
   }
 }
@@ -71,6 +75,7 @@ export const makeRouterProps = propsFactory({
   href: String,
   replace: Boolean,
   to: [String, Object] as PropType<RouteLocationRaw>,
+  exact: Boolean,
 }, 'router')
 
 let inTransition = false

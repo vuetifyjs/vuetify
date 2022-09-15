@@ -24,7 +24,7 @@ export const VBreadcrumbsItem = defineComponent({
 
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)
-    const isActive = computed(() => props.active || link.isExactActive?.value)
+    const isActive = computed(() => props.active || link.isActive?.value)
     const color = computed(() => isActive.value ? props.activeColor : props.color)
 
     const { textColorClasses, textColorStyles } = useTextColor(color)
