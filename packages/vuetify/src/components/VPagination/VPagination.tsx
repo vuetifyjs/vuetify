@@ -130,17 +130,20 @@ export const VPagination = defineComponent({
 
       const { target, contentRect } = entries[0]
 
-      const firstItem = target.querySelector('.v-pagination__list > *')
+      const firstItem = target.querySelector('.v-pagination__list > *') as HTMLElement
 
       if (!firstItem) return
 
       const totalWidth = contentRect.width
       const itemWidth =
-        firstItem.getBoundingClientRect().width +
+        firstItem.offsetWidth +
         parseFloat(getComputedStyle(firstItem).marginRight) * 2
       const minButtons = props.showFirstLastPage ? 5 : 3
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - itemWidth * minButtons) / itemWidth))
+      maxButtons.value = Math.max(0, Math.floor(
+        // Round to two decimal places to avoid floating point errors
+        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
+      ))
     })
 
     const length = computed(() => parseInt(props.length, 10))
