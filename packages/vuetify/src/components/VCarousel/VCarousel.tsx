@@ -124,7 +124,7 @@ export const VCarousel = defineComponent({
                       { group.items.value.map((item: any) => {
                         const props = {
                           'aria-label': t('$vuetify.carousel.ariaLabel.delimiter'),
-                          class: [group.isSelected(item.id) && 'v-btn--selected'],
+                          class: [group.isSelected(item.id) && 'v-btn--active'],
                           onClick: () => group.select(item.id, true),
                         }
 
