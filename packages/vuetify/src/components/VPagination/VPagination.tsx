@@ -205,6 +205,7 @@ export const VPagination = defineComponent({
         if (typeof item === 'string') {
           return {
             isActive: false,
+            key: `ellipsis-${index}`,
             page: item,
             props: {
               ref,
@@ -217,6 +218,7 @@ export const VPagination = defineComponent({
           const isActive = item === page.value
           return {
             isActive,
+            key: item,
             page: n(item),
             props: {
               ref,
@@ -315,7 +317,7 @@ export const VPagination = defineComponent({
 
           { items.value.map((item, index) => (
             <li
-              key={ item.page }
+              key={ item.key }
               class={[
                 'v-pagination__item',
                 {
