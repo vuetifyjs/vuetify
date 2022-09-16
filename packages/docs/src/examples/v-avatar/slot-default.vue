@@ -12,7 +12,7 @@
     </v-avatar>
 
     <v-avatar color="red">
-      <span class="text-white text-h5">CJ</span>
+      <span class="text-h5">CJ</span>
     </v-avatar>
   </v-row>
 </template>

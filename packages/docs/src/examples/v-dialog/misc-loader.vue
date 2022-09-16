@@ -3,7 +3,6 @@
     <v-btn
       :disabled="dialog"
       :loading="dialog"
-      class="text-white"
       color="purple-darken-2"
       @click="dialog = true"
     >

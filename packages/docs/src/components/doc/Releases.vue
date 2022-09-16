@@ -62,7 +62,6 @@
             :path="tooltip.path"
             :color="tooltip.color ?? 'grey-darken-1'"
             :target="tooltip.href ? '_blank' : undefined"
-            class="text-white"
             variant="flat"
           />
         </div>

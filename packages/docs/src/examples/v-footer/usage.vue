@@ -26,7 +26,7 @@
 
       <v-divider></v-divider>
 
-      <v-card-text class="text-white">
+      <v-card-text>
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-card-text>
     </v-card>
