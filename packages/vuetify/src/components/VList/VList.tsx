@@ -32,7 +32,7 @@ import type { ListItemSlot } from './VListChildren'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 
 export interface InternalListItem<T> extends InternalItem<T> {
-  type?: 'item' | 'subheader' | 'divider'
+  type?: 'item' | 'divider'
 }
 
 export const VList = genericComponent<new <T>() => {
@@ -66,6 +66,11 @@ export const VList = genericComponent<new <T>() => {
       default: '$vuetify.noDataText',
     },
     hideNoData: Boolean,
+    type: {
+      type: String,
+      default: 'list',
+      validator: (v: any) => ['list', 'select'].includes(v),
+    },
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -109,6 +114,7 @@ export const VList = genericComponent<new <T>() => {
       VListGroup: {
         activeColor,
         color,
+        type: toRef(props, 'type'),
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
@@ -143,11 +149,13 @@ export const VList = genericComponent<new <T>() => {
           dimensionStyles.value,
         ]}
       >
-        <VListChildren
-          items={ items.value }
-          noDataText={ !props.hideNoData ? props.noDataText : undefined }
-          v-slots={ slots }
-        ></VListChildren>
+        { slots.default?.() ?? (
+          <VListChildren
+            items={ items.value }
+            noDataText={ !props.hideNoData ? props.noDataText : undefined }
+            v-slots={ slots }
+          ></VListChildren>
+        ) }
       </props.tag>
     ))
 

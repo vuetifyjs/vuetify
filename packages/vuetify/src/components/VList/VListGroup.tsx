@@ -19,7 +19,7 @@ import type { ExtractPropTypes, Ref } from 'vue'
 
 export type ListGroupActivatorSlot = {
   props: {
-    onClick: (e: Event) => void
+    onClick?: (e: Event) => void
     class: string
   }
 }
@@ -67,6 +67,7 @@ export const VListGroup = genericComponent<new <T>() => {
 
   props: {
     title: String,
+    type: String,
 
     ...makeVListGroupProps(),
   },
@@ -80,7 +81,7 @@ export const VListGroup = genericComponent<new <T>() => {
     }
 
     const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
-      onClick,
+      onClick: props.type === 'select' ? undefined : onClick,
       class: 'v-list-group__header',
     }))
 
@@ -101,11 +102,11 @@ export const VListGroup = genericComponent<new <T>() => {
           <VDefaultsProvider
             defaults={{
               VListItem: {
-                active: isOpen.value,
+                active: props.type === 'select' ? false : isOpen.value,
                 activeColor: props.activeColor,
                 color: props.color,
-                prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
-                appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
+                prependIcon: props.type === 'select' ? undefined : (props.prependIcon || (props.subgroup && toggleIcon.value)),
+                appendIcon: props.type === 'select' ? undefined : (props.appendIcon || (!props.subgroup && toggleIcon.value)),
                 title: props.title,
                 value: props.value,
               },

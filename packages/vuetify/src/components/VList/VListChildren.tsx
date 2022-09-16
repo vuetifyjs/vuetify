@@ -2,7 +2,6 @@
 import { VDivider } from '../VDivider'
 import { filterListGroupProps, VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
-import { VListSubheader } from './VListSubheader'
 
 // Composables
 import { useLocale } from '@/composables'
@@ -12,16 +11,15 @@ import { createList } from './list'
 import { genericComponent } from '@/util'
 
 // Types
-import type { InternalListItem } from './VList'
+import type { Prop } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
-import type { MakeSlots } from '@/util'
-import type { Prop } from 'vue'
-import type { InternalItem } from '@/composables/items'
+import type { InternalListItem } from './VList'
 
 export type ListItemSlot<T> = {
   item: InternalListItem<T>
-  props: InternalItem<T>['props']
+  props: InternalListItem<T>['props']
   index: number
 }
 
@@ -31,7 +29,7 @@ export const VListChildren = genericComponent<new <T>() => {
   }
   $slots: MakeSlots<{
     default: []
-    header: [ListGroupActivatorSlot]
+    header: [ListGroupActivatorSlot & { item: InternalListItem<T> }]
     item: [ListItemSlot<T>]
     title: [ListItemTitleSlot]
     subtitle: [ListItemSubtitleSlot]
@@ -66,15 +64,6 @@ export const VListChildren = genericComponent<new <T>() => {
           )
         }
 
-        if (type === 'subheader') {
-          return slots.subheader?.({ props: itemProps }) ?? (
-            <VListSubheader
-              { ...itemProps }
-              v-slots={{ default: slots.subheader }}
-            />
-          )
-        }
-
         const slotsWithItem = {
           subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
           prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
@@ -92,7 +81,7 @@ export const VListChildren = genericComponent<new <T>() => {
           >
             {{
               activator: ({ props: activatorProps }) => slots.header
-                ? slots.header({ ...itemProps, ...activatorProps })
+                ? slots.header({ item: internalItem, props: { ...itemProps, ...activatorProps } })
                 : <VListItem { ...itemProps } { ...activatorProps } v-slots={ slotsWithItem } />,
               default: () => (
                 <VListChildren
