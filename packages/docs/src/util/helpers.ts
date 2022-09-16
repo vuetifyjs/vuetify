@@ -124,7 +124,7 @@ export function propsToString (props: Record<string, any>, indent = 1) {
       .map(([k, v]) => {
         if (v === true) return k
         if (typeof v === 'string') return `${k}="${v}"`
-        if (Array.isArray(v)) return `:${k}="[${v}]"`
+        if (Array.isArray(v)) return `:${k}="['${v.join("', '")}']"`
 
         return `:${k}="${v}"`
       })
