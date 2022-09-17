@@ -23,7 +23,6 @@
     "vuetify": "^3.0.0-beta.13"
   },
   "devDependencies": {
-    "@babel/node": "^7.17.10",
-    "@types/rmfr": "^2.0.1"
+    "@babel/node": "^7.17.10"
   }
 }
