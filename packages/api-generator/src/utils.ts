@@ -57,13 +57,24 @@ export function addPropData (
   for (const [propName, propObj] of Object.entries(componentData.props?.properties ?? {})) {
     const instancePropObj = componentProps[propName]
 
-    propObj.default = getPropDefault(instancePropObj?.default, getPropType(instancePropObj?.type))
+    propObj.default = instancePropObj?.default
     // propObj.source = instancePropObj?.source ?? kebabName
 
     sources.add(instancePropObj?.source ?? kebabName)
   }
 
   return [...sources.values()]
+}
+
+export function stringifyProps (props: any) {
+  return Object.fromEntries(
+    Object.entries<any>(props).map(([key, prop]) => ([key, {
+      // source: prop.source,
+      default: typeof prop === 'object'
+        ? getPropDefault(prop?.default, getPropType(prop?.type))
+        : getPropDefault(undefined, getPropType(prop)),
+    }]))
+  )
 }
 
 const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, Record<string, string>> => {

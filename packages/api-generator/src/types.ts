@@ -54,15 +54,11 @@ export function generateDirectiveDataFromTypes () {
 }
 
 export async function generateComponentDataFromTypes (component: string) {
-  const template = await fs.readFile('./src/template.d.ts', 'utf-8')
-
-  await fs.writeFile('./src/tmp.d.ts', template.replaceAll('__component__', component))
-
   const project = new Project({
     tsConfigFilePath: './tsconfig.json',
   })
 
-  const sourceFile = project.addSourceFileAtPath('./src/tmp.d.ts')
+  const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
 
   const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
   const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))

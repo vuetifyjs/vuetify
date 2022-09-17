@@ -4,7 +4,9 @@ import { components } from 'vuetify'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions } from './utils'
+import { addDescriptions, stringifyProps } from './utils'
+import * as os from 'os'
+import mkdirp from 'mkdirp'
 
 const run = async () => {
   const locales = ['en']
@@ -12,13 +14,26 @@ const run = async () => {
   // Components
   const pool = new Piscina({
     filename: './src/worker.js',
+    niceIncrement: 10,
+    maxThreads: Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
   })
 
-  await Promise.all(Object.entries(components).map(([componentName, componentInstance]) => pool.run(JSON.stringify({
-    componentName,
-    componentProps: (componentInstance as any).props,
-    locales,
-  }))))
+  const template = await fs.readFile('./src/template.d.ts', 'utf-8')
+
+  await mkdirp('./src/tmp')
+  for (const component in components) {
+    await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
+  }
+
+  await Promise.all(
+    Object.entries(components).map(([componentName, componentInstance]) => pool.run(
+      JSON.stringify({
+        componentName,
+        componentProps: stringifyProps(componentInstance.props),
+        locales,
+      })
+    ))
+  )
 
   // Composables
   const composables = await generateComposableDataFromTypes()
