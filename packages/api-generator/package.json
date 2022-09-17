@@ -7,11 +7,9 @@
   "scripts": {
     "debug": "babel-node inspect src/index.js",
     "dev": "node src/index.js",
-    "build": "node src/export.js",
+    "build": "ts-node src/run.ts",
     "lint": "eslint --ext .js src -f codeframe --max-warnings 0",
-    "lint:fix": "yarn lint --fix",
-    "run": "ts-node src/run.ts",
-    "morph": "ts-node src/morph.ts"
+    "lint:fix": "yarn lint --fix"
   },
   "author": "",
   "license": "ISC",

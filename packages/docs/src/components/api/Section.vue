@@ -12,14 +12,14 @@
     <template v-if="section === 'props'">
       <PropsTable :items="items" />
     </template>
-    <template v-else-if="section === 'exposed'">
-      <ExposedTable :items="items" />
-    </template>
     <template v-else-if="section === 'events'">
       <EventsTable :items="items" />
     </template>
     <template v-else-if="section === 'slots'">
       <SlotsTable :items="items" />
+    </template>
+    <template v-else-if="section === 'exposed'">
+      <ExposedTable :items="items" />
     </template>
     <!-- <template v-else>
       <api-table

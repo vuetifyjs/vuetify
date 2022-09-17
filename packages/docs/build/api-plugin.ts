@@ -1,7 +1,7 @@
 // Imports
 import fs from 'fs'
 import path, { resolve } from 'path'
-import { startCase } from 'lodash'
+import { startCase, kebabCase } from 'lodash'
 import rimraf from 'rimraf'
 import { getCompleteApi } from '@vuetify/api-generator'
 import locales from '../src/i18n/locales.json'
@@ -84,8 +84,8 @@ function createMdFile (component: string, data: Record<string, any>, locale: str
   str += genHeader(component)
   str += genApiLinks(component, messages.links)
 
-  for (const section of ['props', 'exposed', 'events', 'slots', 'sass', 'options', 'argument', 'modifiers']) {
-    if (data[section]?.properties) {
+  for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
+    if (Object.keys(data[section]?.properties ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
       str += `<api-section name="${component}" section="${section}" />\n\n`
     }
@@ -143,7 +143,7 @@ function generateFiles () {
     for (const item of api) {
       writeFile(item.name, item, locale)
 
-      pages[`/${locale}/api/${sanitize(item.name)}/`] = item.name
+      pages[`/${locale}/api/${sanitize(kebabCase(item.name))}/`] = item.name
     }
 
     fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))

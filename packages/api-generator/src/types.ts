@@ -2,7 +2,38 @@ import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import fs from 'fs/promises'
 
-export async function generateDataFromTypes (component: string) {
+function inspect (project: Project, node?: Node<ts.Node>) {
+  if (!node) return null
+
+  const kind = node.getKind()
+
+  if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
+    return generateDefinition(node, [], project)
+  }
+
+  return null
+}
+
+export async function generateComposableDataFromTypes () {
+  const project = new Project({
+    tsConfigFilePath: './tsconfig.json',
+  })
+
+  const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
+
+  const composables = inspect(project, sourceFile.getTypeAlias('Composables')) as ObjectDefinition
+
+  return Object.entries(composables.properties).map(([name, data]) => {
+    return {
+      name,
+      data: {
+        exposed: (data as FunctionDefinition).returnType,
+      },
+    }
+  }) as { name: string, data: { exposed: ObjectDefinition } }[]
+}
+
+export async function generateComponentDataFromTypes (component: string) {
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
 
   await fs.writeFile('./src/tmp.d.ts', template.replaceAll('__component__', component))
@@ -13,22 +44,10 @@ export async function generateDataFromTypes (component: string) {
 
   const sourceFile = project.addSourceFileAtPath('./src/tmp.d.ts')
 
-  function inspect (node?: Node<ts.Node>) {
-    if (!node) return null
-
-    const kind = node.getKind()
-
-    if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
-      return generateDefinition(node, [], project)
-    }
-
-    return null
-  }
-
-  const props = inspect(sourceFile.getTypeAlias('ComponentProps'))
-  const events = inspect(sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = inspect(sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = inspect(sourceFile.getTypeAlias('ComponentExposed'))
+  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
+  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
+  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
+  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
 
   const sections = [props, events, slots, exposed]
 
@@ -140,8 +159,13 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
 
   // Some internal typescript types should be processed (Array etc)
   if (filePath?.includes('/typescript/lib/') && (
-    definitionText?.endsWith('[]') || /(Record|Map|Set)<.*?>/.test(definitionText ?? '')
+    definitionText?.endsWith('[]') ||
+    /(Record|Map|Set)<.*?>/.test(definitionText ?? '')
   )) return false
+
+  if (filePath?.includes('/@vue/') && /^ToRefs<.*?>/.test(definitionText)) {
+    return false
+  }
 
   return filePath?.includes('/node_modules/')
 }
@@ -198,7 +222,12 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
     // TODO: Parse this better?
     definition.ref = symbol?.getFullyQualifiedName().replace(/".*"\./, '') ?? ''
-    definition.formatted = definition.text
+
+    if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+      definition.formatted = definition.ref
+    } else {
+      definition.formatted = definition.text
+    }
   } else if (type.isAny() || type.isUnknown() || type.isNever()) {
     // @ts-expect-error asd
     definition.type = type.getText()
@@ -239,7 +268,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     const arrayType = generateDefinition(node, getRecursiveArrayTypes(recursed, type), project, arrayElementType)
 
     definition.items = arrayType.type === 'anyOf' ? arrayType.items : [arrayType]
-    definition.formatted = `${definition.items.length > 1 ? '(' : ''}${definition.items.map(item => item.formatted).join(' | ')}${definition.items.length > 1 ? ')' : ''}[]`
+    definition.formatted = `${definition.items.length > 1 ? '(' : ''}${definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted).join(' | ')}${definition.items.length > 1 ? ')' : ''}[]`
   } else if (type.isIntersection()) {
     definition = definition as IntersectionDefinition
     definition.type = 'allOf'
@@ -275,8 +304,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
         formatted: 'boolean',
       })
     }
-
-    definition.formatted = `${definition.items.map(item => item.type === 'function' ? `(${item.formatted})` : item.formatted).join(' | ')}`
+    definition.formatted = `${definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted).join(' | ')}`
   } else if (type.getConstructSignatures().length) {
     definition = definition as ConstructorDefinition
     definition.type = 'constructor'
@@ -349,11 +377,11 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 }
 
 function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type))
+  return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type)).concat(['SubmitEventPromise'])
 }
 
 function getRecursiveArrayTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type))
+  return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type)).concat(['SubmitEventPromise'])
 }
 
 function findPotentialRecursiveObjectTypes (type: Type<ts.Type>) {

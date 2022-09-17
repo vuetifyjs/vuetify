@@ -1,6 +1,5 @@
 <template>
-  <div
-    class="text-mono"
+  <pre
     v-html="highlight(String(code))"
   />
 </template>

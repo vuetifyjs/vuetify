@@ -30,9 +30,18 @@ function formatObject (obj: object) {
     .replaceAll(',', ', ')
 }
 
-export function getType (item: any) {
+export function getType (item: { formatted: string }) {
+  console.log(item.formatted)
   const prefix = 'type Type = '
-  return prettier.format(prefix + item.formatted, { parser: 'typescript', plugins: [typescriptParser], bracketSpacing: false }).replace(prefix, '')
+  const formatted = prettier.format(prefix + item.formatted, {
+    parser: 'typescript',
+    plugins: [typescriptParser],
+    bracketSpacing: true,
+    semi: false,
+    singleQuote: true,
+    trailingComma: 'all',
+  })
+  return formatted.replace(/type\sType\s=\s?/m, '')
 }
 
 // export function getType (item: Item): string {

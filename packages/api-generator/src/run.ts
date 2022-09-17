@@ -4,7 +4,7 @@ import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { kebabCase } from './helpers/text'
 import type { ObjectDefinition } from './types'
-import { generateDataFromTypes } from './types'
+import { generateComponentDataFromTypes, generateComposableDataFromTypes } from './types'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -48,10 +48,10 @@ function getPropDefault (def: any, type: string | string[]) {
 }
 
 type ComponentData = {
-  props: ObjectDefinition
-  slots: ObjectDefinition
-  events: ObjectDefinition
-  exposed: ObjectDefinition
+  props?: ObjectDefinition
+  slots?: ObjectDefinition
+  events?: ObjectDefinition
+  exposed?: ObjectDefinition
 }
 
 function addPropData (
@@ -88,6 +88,8 @@ function getSources (kebabName: string, sources: string[], locale: string) {
     loadLocale('generic', locale),
   ]
 
+  // console.log(sources, arr)
+
   return {
     find: (section: string, key: string) => {
       return arr.reduce<string | null>((str, source) => {
@@ -123,30 +125,41 @@ const run = async () => {
   const components = app._context.components
   const locales = ['en']
 
-  for (const [componentName, componentInstance] of Object.entries(components)) {
-    try {
-      // if (componentName !== 'VWindow') continue
+  // for (const [componentName, componentInstance] of Object.entries(components)) {
+  //   try {
+  //     // if (componentName !== 'VRadioGroup') continue
 
-      const kebabName = kebabCase(componentName)
-      console.log(componentName)
-      const componentData = await generateDataFromTypes(componentName)
+  //     const kebabName = kebabCase(componentName)
+  //     console.log(componentName)
+  //     const componentData = await generateComponentDataFromTypes(componentName)
 
-      const sources = addPropData(kebabName, componentData as any, componentInstance)
+  //     const sources = addPropData(kebabName, componentData as any, componentInstance)
 
-      addDescriptions(kebabName, componentData as any, sources, locales)
+  //     addDescriptions(kebabName, componentData as any, sources, locales)
 
-      const folder = '../docs/src/api/data/'
+  //     const folder = '../docs/src/api/data/'
 
-      try {
-        await fs.stat(path.resolve(folder))
-      } catch (err) {
-        await fs.mkdir(path.resolve(folder), { recursive: true })
-      }
+  //     try {
+  //       await fs.stat(path.resolve(folder))
+  //     } catch (err) {
+  //       await fs.mkdir(path.resolve(folder), { recursive: true })
+  //     }
 
-      await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(componentData, null, 2))
-    } catch (err) {
-      console.error(err)
-    }
+  //     await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(componentData, null, 2))
+  //   } catch (err) {
+  //     console.error(err)
+  //   }
+  // }
+
+  // Composables
+  const composables = await generateComposableDataFromTypes()
+
+  for (const composable of composables) {
+    const kebabName = kebabCase(composable.name)
+    const source = kebabName.split('-')[1]
+    addDescriptions(composable.name, composable.data, [source], locales)
+
+    await fs.writeFile(path.resolve(`../docs/src/api/data/${composable.name}.json`), JSON.stringify(composable.data, null, 2))
   }
 }
 

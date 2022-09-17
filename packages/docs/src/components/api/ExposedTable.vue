@@ -1,39 +1,22 @@
 <template>
-  <app-sheet>
-    <v-table
-      class="api-table"
-    >
-      <thead>
-        <tr>
-          <th
-            v-for="header in headers"
-            :key="header"
-            :class="header"
-          >
-            <div
-              class="text-capitalize"
-              v-text="header"
-            />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="item in items" :key="item.name">
-          <tr>
-            <td>
-              <NameCell section="exposed" :name="item.name" />
-            </td>
-            <td>
-              <TypescriptCell :code="getType(item)" />
-            </td>
-            <td>
-              <app-markdown v-if="item.description" :content="item.description" />
-            </td>
-          </tr>
+  <div>
+    <template v-for="item in items" :key="item.name">
+      <v-card class="mb-4" variant="outlined" color="grey-lighten-1">
+        <template #title>
+          <div class="d-flex justify-space-between">
+            <NameCell section="exposed" :name="item.name" />
+            <kbd class="text-mono">{{ item.type }}</kbd>
+          </div>
         </template>
-      </tbody>
-    </v-table>
-  </app-sheet>
+        <v-card-text>
+          <app-markdown v-if="item.description" :content="item.description" />
+        </v-card-text>
+        <v-card-text v-if="item.formatted !== 'never'" class="pt-0">
+          <app-markup :code="getType(item)" language="ts" resource="props" />
+        </v-card-text>
+      </v-card>
+    </template>
+  </div>
 </template>
 
 <script lang="ts">
