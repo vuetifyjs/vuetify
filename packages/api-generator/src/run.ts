@@ -170,7 +170,7 @@ const run = async () => {
 
   for (const directive of directives) {
     const kebabName = kebabCase(directive.name)
-    addDescriptions(directive.name, directive.data, [], locales)
+    addDescriptions(directive.name, directive.data, [kebabName], locales)
 
     await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(directive.data, null, 2))
   }
