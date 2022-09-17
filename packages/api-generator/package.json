@@ -15,8 +15,8 @@
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.0.0",
+    "piscina": "^3.2.0",
     "rimraf": "^3.0.2",
-    "rmfr": "^2.0.0",
     "ts-morph": "^16.0.0",
     "ts-node": "^10.9.1",
     "vue": "^3.2.38",

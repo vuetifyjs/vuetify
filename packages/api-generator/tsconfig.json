@@ -4,6 +4,6 @@
     "strict": false,
     "noUnusedLocals": false,
     "module": "commonjs",
-    "noEmitOnError": false
+    "noEmitOnError": false,
   }
 }

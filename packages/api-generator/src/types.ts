@@ -14,7 +14,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   return null
 }
 
-export async function generateComposableDataFromTypes () {
+export function generateComposableDataFromTypes () {
   const project = new Project({
     tsConfigFilePath: './tsconfig.json',
   })
@@ -33,7 +33,7 @@ export async function generateComposableDataFromTypes () {
   }) as { name: string, data: { exposed: ObjectDefinition } }[]
 }
 
-export async function generateDirectiveDataFromTypes () {
+export function generateDirectiveDataFromTypes () {
   const project = new Project({
     tsConfigFilePath: './tsconfig.json',
   })
