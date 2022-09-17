@@ -1,5 +1,5 @@
 import type { AllowedComponentProps, ComponentPublicInstance, FunctionalComponent, RenderFunction, VNodeChild, VNodeProps } from 'vue'
-import type { __component__ } from '../../vuetify/lib/components'
+import type { __component__ } from '@/components'
 
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {

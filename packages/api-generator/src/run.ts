@@ -1,19 +1,12 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
+import { components } from 'vuetify'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
 import { addDescriptions } from './utils'
 
 const run = async () => {
-  const app = createApp({})
-  const vuetify = createVuetify()
-
-  app.use(vuetify)
-
-  const components = app._context.components
   const locales = ['en']
 
   // Components

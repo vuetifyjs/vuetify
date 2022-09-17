@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/index.d.ts",
+  "types": "dist/vuetify.d.ts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
