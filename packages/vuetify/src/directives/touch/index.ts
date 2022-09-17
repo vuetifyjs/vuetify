@@ -1,7 +1,6 @@
 // Types
 import type {
   DirectiveBinding,
-  ObjectDirective,
 } from 'vue'
 
 // Utilities
@@ -148,7 +147,7 @@ function unmounted (el: HTMLElement, binding: TouchDirectiveBinding) {
   delete target._touchHandlers[uid]
 }
 
-export const Touch: ObjectDirective = {
+export const Touch = {
   mounted,
   unmounted,
 }

@@ -33,6 +33,25 @@ export async function generateComposableDataFromTypes () {
   }) as { name: string, data: { exposed: ObjectDefinition } }[]
 }
 
+export async function generateDirectiveDataFromTypes () {
+  const project = new Project({
+    tsConfigFilePath: './tsconfig.json',
+  })
+
+  const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
+
+  const directives = inspect(project, sourceFile.getTypeAlias('Directives')) as ObjectDefinition
+
+  return Object.entries(directives.properties).map(([name, data]) => {
+    return {
+      name,
+      data: {
+        exposed: data,
+      },
+    }
+  }) as { name: string, data: { exposed: ObjectDefinition } }[]
+}
+
 export async function generateComponentDataFromTypes (component: string) {
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
 

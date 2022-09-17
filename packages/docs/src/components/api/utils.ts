@@ -31,7 +31,6 @@ function formatObject (obj: object) {
 }
 
 export function getType (item: { formatted: string }) {
-  console.log(item.formatted)
   const prefix = 'type Type = '
   const formatted = prettier.format(prefix + item.formatted, {
     parser: 'typescript',

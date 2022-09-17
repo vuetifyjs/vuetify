@@ -3,7 +3,7 @@ import path from 'path'
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 import { kebabCase } from './helpers/text'
-import type { ObjectDefinition } from './types'
+import { generateDirectiveDataFromTypes, ObjectDefinition } from './types'
 import { generateComponentDataFromTypes, generateComposableDataFromTypes } from './types'
 
 function parseFunctionParams (func: string) {
@@ -125,31 +125,32 @@ const run = async () => {
   const components = app._context.components
   const locales = ['en']
 
-  // for (const [componentName, componentInstance] of Object.entries(components)) {
-  //   try {
-  //     // if (componentName !== 'VRadioGroup') continue
+  // Components
+  for (const [componentName, componentInstance] of Object.entries(components)) {
+    try {
+      // if (componentName !== 'VRadioGroup') continue
 
-  //     const kebabName = kebabCase(componentName)
-  //     console.log(componentName)
-  //     const componentData = await generateComponentDataFromTypes(componentName)
+      const kebabName = kebabCase(componentName)
+      console.log(componentName)
+      const componentData = await generateComponentDataFromTypes(componentName)
 
-  //     const sources = addPropData(kebabName, componentData as any, componentInstance)
+      const sources = addPropData(kebabName, componentData as any, componentInstance)
 
-  //     addDescriptions(kebabName, componentData as any, sources, locales)
+      addDescriptions(kebabName, componentData as any, sources, locales)
 
-  //     const folder = '../docs/src/api/data/'
+      const folder = '../docs/src/api/data/'
 
-  //     try {
-  //       await fs.stat(path.resolve(folder))
-  //     } catch (err) {
-  //       await fs.mkdir(path.resolve(folder), { recursive: true })
-  //     }
+      try {
+        await fs.stat(path.resolve(folder))
+      } catch (err) {
+        await fs.mkdir(path.resolve(folder), { recursive: true })
+      }
 
-  //     await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(componentData, null, 2))
-  //   } catch (err) {
-  //     console.error(err)
-  //   }
-  // }
+      await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(componentData, null, 2))
+    } catch (err) {
+      console.error(err)
+    }
+  }
 
   // Composables
   const composables = await generateComposableDataFromTypes()
@@ -159,7 +160,19 @@ const run = async () => {
     const source = kebabName.split('-')[1]
     addDescriptions(composable.name, composable.data, [source], locales)
 
-    await fs.writeFile(path.resolve(`../docs/src/api/data/${composable.name}.json`), JSON.stringify(composable.data, null, 2))
+    await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(composable.data, null, 2))
+  }
+
+  // Directives
+  const directives = await generateDirectiveDataFromTypes()
+
+  console.log(directives)
+
+  for (const directive of directives) {
+    const kebabName = kebabCase(directive.name)
+    addDescriptions(directive.name, directive.data, [], locales)
+
+    await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(directive.data, null, 2))
   }
 }
 

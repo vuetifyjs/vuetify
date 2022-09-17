@@ -1,4 +1,4 @@
-import type vuetify from 'vuetify/lib/framework.mjs'
+import type vuetify from '../../vuetify/lib/index'
 
 type IsComposable<T extends string | number | symbol> = T extends `use${Capitalize<infer _>}` ? T : never;
 
