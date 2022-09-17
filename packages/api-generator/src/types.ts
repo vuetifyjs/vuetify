@@ -1,6 +1,7 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 import fs from 'fs/promises'
+import path from 'path'
 
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
@@ -71,8 +72,8 @@ export async function generateComponentDataFromTypes (component: string) {
   const sections = [props, events, slots, exposed]
 
   sections.forEach(item => {
-    item.text = ''
-    item.source = ''
+    item.text = undefined
+    item.source = undefined
   })
 
   return {
@@ -190,8 +191,12 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
 }
 
 function getSource (declaration?: Node<ts.Node>) {
-  const filePath = declaration?.getSourceFile().getFilePath().replace(/.*\/node_modules\//, '')
+  const filePath = declaration?.getSourceFile().getFilePath()
+    .replace(/.*\/node_modules\//, '')
+    .replace(/.*\/packages\/vuetify\//, 'vuetify/')
   const lineNumber = declaration?.getStartLineNumber()
+
+  if (!filePath || !lineNumber || filePath.startsWith(process.cwd())) return undefined
 
   return filePath && lineNumber ? `${filePath}@L${lineNumber}` : undefined
 }
