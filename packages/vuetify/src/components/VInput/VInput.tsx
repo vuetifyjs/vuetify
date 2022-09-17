@@ -129,14 +129,14 @@ export const VInput = genericComponent<new <T>() => {
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
+              { slots.prepend?.(slotProps.value) }
+
               { props.prependIcon && (
                 <InputIcon
                   key="prepend-icon"
                   name="prepend"
                 />
               ) }
-
-              { slots.prepend?.(slotProps.value) }
             </div>
           ) }
 

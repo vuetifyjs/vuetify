@@ -88,7 +88,7 @@ export const VRadioGroup = defineComponent({
             }) => (
               <>
                 { label && (
-                  <VLabel for={ id.value }>
+                  <VLabel for={ id.value } clickable>
                     { label }
                   </VLabel>
                 ) }

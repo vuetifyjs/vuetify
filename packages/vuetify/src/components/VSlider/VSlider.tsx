@@ -5,6 +5,7 @@ import './VSlider.sass'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
@@ -90,6 +91,12 @@ export const VSlider = defineComponent({
         >
           {{
             ...slots,
+            prepend: props.label ? slotProps => (
+              <>
+                <VLabel class="v-slider__label">{ props.label }</VLabel>
+                { slots.prepend?.(slotProps) }
+              </>
+            ) : undefined,
             default: ({ id }) => (
               <div
                 class="v-slider__container"
