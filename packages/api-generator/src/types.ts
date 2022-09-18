@@ -90,8 +90,6 @@ type BaseDefinition = {
 
 export type ObjectDefinition = {
   type: 'object'
-  key?: Definition
-  value?: Definition
   properties: Record<string, Definition>
   optional: string[]
 } & BaseDefinition
@@ -176,12 +174,16 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
   // Some internal typescript types should be processed (Array etc)
   if (filePath?.includes('/typescript/lib/') && (
     definitionText?.endsWith('[]') ||
-    /(Record|Map|Set)<.*?>/.test(definitionText ?? '')
+    /(Record|Map|Set|NonNullable)<.*?>/.test(definitionText ?? '')
   )) return false
 
   if (filePath?.includes('/@vue/') && /^ToRefs<.*?>/.test(definitionText)) {
     return false
   }
+
+  // if (filePath?.includes('/vuetify/') && ['SelectStrategyFn', 'SubmitEventPromise'].includes(definitionText)) {
+  //   return true
+  // }
 
   return filePath?.includes('/node_modules/')
 }
@@ -194,7 +196,7 @@ function getSource (declaration?: Node<ts.Node>) {
 
   if (!filePath || !lineNumber || filePath.startsWith(process.cwd())) return undefined
 
-  return filePath && lineNumber ? `${filePath}@L${lineNumber}` : undefined
+  return filePath && lineNumber ? `${filePath}#L${lineNumber}` : undefined
 }
 
 function listFlags (flags: object, value?: number) {
@@ -220,6 +222,64 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+function formatDefinition (definition: Definition) {
+  let formatted = ''
+
+  switch (definition.type) {
+    case 'allOf':
+      formatted = `${definition.items.map(item => item.formatted).join(' & ')}`
+      break
+    case 'anyOf': {
+      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      formatted = `${formattedItems.join(' | ')}`
+      break
+    }
+    case 'array': {
+      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      if (definition.length) {
+        formatted = `[${formattedItems.join(', ')}]`
+      } else {
+        formatted = `${definition.items.length > 1 ? '(' : ''}${formattedItems.join(' | ')}${definition.items.length > 1 ? ')' : ''}[]`
+      }
+      break
+    }
+    case 'function':
+      const formattedParameters = definition.parameters.map(p => `${p.name}: ${p.formatted}`)
+      formatted = `(${formattedParameters.join(', ')}) => ${definition.returnType.formatted}`
+      break
+    case 'record':
+      formatted = `Record<${definition.key.formatted}, ${definition.value.formatted}>`
+      break
+    case 'object':
+      formatted = `{ ${Object.entries(definition.properties).reduce<string[]>((arr, [name, prop]) => {
+        arr.push(`${name}: ${prop.formatted}`)
+        return arr
+      }, []).join('; ')} }`
+      break
+    case 'ref':
+      if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+        formatted = definition.ref
+      } else {
+        formatted = definition.text
+      }
+      break
+    case 'interface':
+    case 'boolean':
+    case 'number':
+    case 'string':
+    case 'constructor':
+    default:
+      formatted = definition.text
+      break
+  }
+
+  definition.formatted = formatted
+
+  if (['SelectStrategyFn', 'OpenStrategyFn', 'OpenSelectStrategyFn'].includes(definition.text)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/next/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  }
+}
+
 // eslint-disable-next-line complexity
 function generateDefinition (node: Node<ts.Node>, recursed: string[], project: Project, type?: Type<ts.Type>): Definition {
   const tc = project.getTypeChecker()
@@ -242,43 +302,21 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
     // TODO: Parse this better?
     definition.ref = symbol?.getFullyQualifiedName().replace(/".*"\./, '') ?? ''
-
-    if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
-      definition.formatted = definition.ref
-    } else {
-      definition.formatted = definition.text
-    }
   } else if (type.isAny() || type.isUnknown() || type.isNever()) {
     // @ts-expect-error asd
     definition.type = type.getText()
-    definition.formatted = definition.text
-  } else if (type.isBooleanLiteral()) {
+  } else if (type.isBoolean() || type.isBooleanLiteral()) {
     definition = definition as BooleanDefinition
     definition.type = 'boolean'
-    definition.literal = type.getText()
-    definition.formatted = definition.text
-  } else if (type.isBoolean()) {
-    definition = definition as BooleanDefinition
-    definition.type = 'boolean'
-    definition.formatted = definition.text
-  } else if (type.isStringLiteral()) {
+    definition.literal = type.isBooleanLiteral() ? type.getText() : undefined
+  } else if (type.isString() || type.isStringLiteral()) {
     definition = definition as StringDefinition
     definition.type = 'string'
-    definition.literal = type.getText()
-    definition.formatted = definition.text
-  } else if (type.isString()) {
-    definition = definition as StringDefinition
-    definition.type = 'string'
-    definition.formatted = definition.text
-  } else if (type.isNumberLiteral()) {
+    definition.literal = type.isStringLiteral() ? type.getText() : undefined
+  } else if (type.isNumber() || type.isNumberLiteral()) {
     definition = definition as NumberDefinition
     definition.type = 'number'
-    definition.literal = type.getText()
-    definition.formatted = definition.text
-  } else if (type.isNumber()) {
-    definition = definition as NumberDefinition
-    definition.type = 'number'
-    definition.formatted = definition.text
+    definition.literal = type.isNumberLiteral() ? type.getText() : undefined
   } else if (type.isArray()) {
     definition = definition as ArrayDefinition
     definition.type = 'array'
@@ -288,12 +326,10 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     const arrayType = generateDefinition(node, getRecursiveArrayTypes(recursed, type), project, arrayElementType)
 
     definition.items = arrayType.type === 'anyOf' ? arrayType.items : [arrayType]
-    definition.formatted = `${definition.items.length > 1 ? '(' : ''}${definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted).join(' | ')}${definition.items.length > 1 ? ')' : ''}[]`
   } else if (type.isIntersection()) {
     definition = definition as IntersectionDefinition
     definition.type = 'allOf'
     definition.items = type.getIntersectionTypes().map(type => generateDefinition(node, recursed, project, type))
-    definition.formatted = `${definition.items.map(item => item.formatted).join(' & ')}`
 
     // TODO: Should we collapse allOf with only objects to single object?
   } else if (type.isUnion()) {
@@ -324,11 +360,9 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
         formatted: 'boolean',
       })
     }
-    definition.formatted = `${definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted).join(' | ')}`
   } else if (type.getConstructSignatures().length) {
     definition = definition as ConstructorDefinition
     definition.type = 'constructor'
-    definition.formatted = definition.text
   } else if (type.getCallSignatures().length) {
     definition = definition as FunctionDefinition
     definition.type = 'function'
@@ -343,7 +377,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       }
     })
     definition.returnType = generateDefinition(node, recursed, project, signature.getReturnType())
-    definition.formatted = `(${definition.parameters.map(p => `${p.name}: ${p.formatted}`).join(', ')}) => ${definition.returnType.formatted}`
   } else if (targetType && /^(Map|Set)<.*>/.test(definition.text)) { // TODO: Better way to detect Map/Set type
     definition = definition as InterfaceDefinition
     definition.type = 'interface'
@@ -352,20 +385,16 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     definition.parameters = targetType?.getTypeArguments().map((arg, i) => {
       return { name: arg.getText(), ...generateDefinition(node, recursed, project, instanceTypeArguments[i]) }
     })
-    definition.formatted = definition.text // TODO: use resolve parameters
   } else if (/^Record<.*>/.test(definition.text)) { // TODO: Better way to detect Record type
-    definition = definition as ObjectDefinition
-    definition.type = 'object'
+    definition = definition as RecordDefinition
+    definition.type = 'record'
     definition.key = generateDefinition(node, recursed, project, type.getAliasTypeArguments()[0])
     definition.value = generateDefinition(node, recursed, project, type.getAliasTypeArguments()[1])
-    definition.properties = {}
-    definition.formatted = definition.text // TODO: use resolved key/value
   } else if (type.isTuple()) {
     definition = definition as ArrayDefinition
     definition.type = 'array'
     definition.items = type.getTupleElements().map(t => generateDefinition(node, recursed, project, t))
     definition.length = definition.items.length
-    definition.formatted = definition.text // TODO: use resolved items
   } else if (type.isObject()) {
     definition = definition as ObjectDefinition
     definition.type = 'object'
@@ -380,28 +409,25 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
       property.isOptional() && definition.optional.push(propertyName)
     }
-    definition.formatted = `{ ${Object.entries(definition.properties).reduce<string[]>((arr, [name, prop]) => {
-      arr.push(`${name}: ${prop.formatted}`)
-      return arr
-    }, []).join('; ')} }`
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd
     definition.type = 'void'
-    definition.formatted = definition.text
   } else {
     // @ts-expect-error asd
     definition.type = 'UNSUPPORTED'
   }
 
+  formatDefinition(definition)
+
   return definition
 }
 
 function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type)).concat(['SubmitEventPromise'])
+  return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type))
 }
 
 function getRecursiveArrayTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type)).concat(['SubmitEventPromise'])
+  return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type))
 }
 
 function findPotentialRecursiveObjectTypes (type: Type<ts.Type>) {

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <!-- <div>
     <template v-for="item in items" :key="item.name">
       <v-card class="mb-4" variant="outlined" color="grey-lighten-1">
         <template #title>
@@ -16,7 +16,30 @@
         </v-card-text>
       </v-card>
     </template>
-  </div>
+  </div> -->
+  <app-sheet>
+    <v-table
+      class="api-table"
+    >
+      <tbody>
+        <template v-for="item in items" :key="item.name">
+          <tr class="bg-grey-lighten-4">
+            <td>
+              <NameCell section="props" :name="item.name" />
+            </td>
+          </tr>
+          <tr>
+            <app-markup :code="getType(item)" language="ts" :rounded="false" />
+          </tr>
+          <tr>
+            <td colspan="3" class="text-mono">
+              <app-markdown v-if="item.description" :content="item.description" />
+            </td>
+          </tr>
+        </template>
+      </tbody>
+    </v-table>
+  </app-sheet>
 </template>
 
 <script lang="ts">

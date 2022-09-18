@@ -3,7 +3,7 @@
     <v-table
       class="api-table"
     >
-      <thead>
+      <!-- <thead>
         <tr>
           <th
             v-for="header in headers"
@@ -16,10 +16,10 @@
             />
           </th>
         </tr>
-      </thead>
+      </thead> -->
       <tbody>
         <template v-for="item in items" :key="item.name">
-          <tr>
+          <tr class="bg-grey-lighten-4">
             <td>
               <NameCell section="props" :name="kebabCase(item.name)" />
             </td>
@@ -29,7 +29,9 @@
             <td>
               <TypescriptCell :code="item.default" />
             </td>
-            <td>
+          </tr>
+          <tr>
+            <td colspan="3" class="text-mono">
               <app-markdown v-if="item.description" :content="item.description" />
             </td>
           </tr>

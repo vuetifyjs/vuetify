@@ -25,35 +25,38 @@ const run = async () => {
     await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
   }
 
+  const outPath = '../docs/src/api/data/'
+
   await Promise.all(
     Object.entries(components).map(([componentName, componentInstance]) => pool.run(
       JSON.stringify({
         componentName,
         componentProps: stringifyProps(componentInstance.props),
         locales,
+        outPath,
       })
     ))
   )
 
   // Composables
-  const composables = await generateComposableDataFromTypes()
+  const composables = generateComposableDataFromTypes()
 
   for (const composable of composables) {
     const kebabName = kebabCase(composable.name)
     const source = kebabName.split('-')[1]
     addDescriptions(composable.name, composable.data, [source], locales)
 
-    await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(composable.data, null, 2))
+    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(composable.data, null, 2))
   }
 
   // Directives
-  const directives = await generateDirectiveDataFromTypes()
+  const directives = generateDirectiveDataFromTypes()
 
   for (const directive of directives) {
     const kebabName = kebabCase(directive.name)
     addDescriptions(directive.name, directive.data, [kebabName], locales)
 
-    await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(directive.data, null, 2))
+    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(directive.data, null, 2))
   }
 }
 

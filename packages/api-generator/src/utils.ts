@@ -58,7 +58,6 @@ export function addPropData (
     const instancePropObj = componentProps[propName]
 
     propObj.default = instancePropObj?.default
-    // propObj.source = instancePropObj?.source ?? kebabName
 
     sources.add(instancePropObj?.source ?? kebabName)
   }
@@ -68,12 +67,14 @@ export function addPropData (
 
 export function stringifyProps (props: any) {
   return Object.fromEntries(
-    Object.entries<any>(props).map(([key, prop]) => ([key, {
-      // source: prop.source,
-      default: typeof prop === 'object'
-        ? getPropDefault(prop?.default, getPropType(prop?.type))
-        : getPropDefault(undefined, getPropType(prop)),
-    }]))
+    Object.entries<any>(props).map(([key, prop]) => {
+      return [key, {
+        source: prop?.source,
+        default: typeof prop === 'object'
+          ? getPropDefault(prop?.default, getPropType(prop?.type))
+          : getPropDefault(undefined, getPropType(prop)),
+      }]
+    })
   )
 }
 

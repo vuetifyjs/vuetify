@@ -30,9 +30,38 @@ function formatObject (obj: object) {
     .replaceAll(',', ', ')
 }
 
+export function stripLinks (str: string): [string, Record<string, string>] {
+  let out = str.slice()
+  const obj: Record<string, string> = {}
+  const regexp = /<a.*>(.*?)<\/a>/g
+
+  let matches = regexp.exec(str)
+
+  while (matches !== null) {
+    console.log('match!', matches)
+
+    obj[matches[1]] = matches[0]
+    out = out.replace(matches[0], matches[1])
+
+    matches = regexp.exec(str)
+  }
+
+  console.log('strip', out, obj)
+
+  return [out, obj]
+}
+
+export function insertLinks (str: string, stripped: Record<string, string>) {
+  for (const [key, value] of Object.entries(stripped)) {
+    str = str.replace(key, value)
+  }
+  return str
+}
+
 export function getType (item: { formatted: string }) {
   const prefix = 'type Type = '
-  const formatted = prettier.format(prefix + item.formatted, {
+  const [str, stripped] = stripLinks(item.formatted)
+  const formatted = prettier.format(prefix + str, {
     parser: 'typescript',
     plugins: [typescriptParser],
     bracketSpacing: true,
@@ -40,7 +69,8 @@ export function getType (item: { formatted: string }) {
     singleQuote: true,
     trailingComma: 'all',
   })
-  return formatted.replace(/type\sType\s=\s?/m, '')
+
+  return insertLinks(formatted, stripped).replace(/type\sType\s=\s+?/m, '')
 }
 
 // export function getType (item: Item): string {

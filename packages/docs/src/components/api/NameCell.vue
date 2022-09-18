@@ -1,5 +1,5 @@
 <template>
-  <span
+  <kbd
     :id="`${section}-${name.replace('$', '')}`"
     class="name-item text-mono"
   >
@@ -9,7 +9,7 @@
     >
       {{ name }}
     </app-link>
-  </span>
+  </kbd>
 </template>
 
 <script>

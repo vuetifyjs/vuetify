@@ -3,10 +3,11 @@ import path from 'path'
 import { kebabCase } from './helpers/text'
 import { generateComponentDataFromTypes } from './types'
 import { addDescriptions, addPropData } from './utils'
+import mkdirp from 'mkdirp'
 
 export default async (json: string) => {
   try {
-    const { componentName, componentProps, locales } = JSON.parse(json)
+    const { componentName, componentProps, locales, outPath } = JSON.parse(json)
 
     console.log(componentName)
 
@@ -17,15 +18,9 @@ export default async (json: string) => {
 
     addDescriptions(kebabName, componentData as any, sources, locales)
 
-    const folder = '../docs/src/api/data/'
+    await mkdirp(outPath)
 
-    try {
-      await fs.stat(path.resolve(folder))
-    } catch (err) {
-      await fs.mkdir(path.resolve(folder), { recursive: true })
-    }
-
-    await fs.writeFile(path.resolve(`../docs/src/api/data/${kebabName}.json`), JSON.stringify(componentData, null, 2))
+    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(componentData, null, 2))
   } catch (err) {
     console.error(err)
   }
