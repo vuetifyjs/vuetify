@@ -192,11 +192,12 @@ function getSource (declaration?: Node<ts.Node>) {
   const filePath = declaration?.getSourceFile().getFilePath()
     .replace(/.*\/node_modules\//, '')
     .replace(/.*\/packages\/vuetify\//, 'vuetify/')
-  const lineNumber = declaration?.getStartLineNumber()
+  const startLine = declaration?.getStartLineNumber()
+  const endLine = declaration?.getEndLineNumber()
 
-  if (!filePath || !lineNumber || filePath.startsWith(process.cwd())) return undefined
+  if (!filePath || !startLine || filePath.startsWith(process.cwd())) return undefined
 
-  return filePath && lineNumber ? `${filePath}#L${lineNumber}` : undefined
+  return filePath && startLine ? `${filePath}#L${startLine}-L${endLine}` : undefined
 }
 
 function listFlags (flags: object, value?: number) {
