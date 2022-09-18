@@ -181,10 +181,6 @@ function isExternalDeclaration (declaration?: Node<ts.Node>, definitionText?: st
     return false
   }
 
-  // if (filePath?.includes('/vuetify/') && ['SelectStrategyFn', 'SubmitEventPromise'].includes(definitionText)) {
-  //   return true
-  // }
-
   return filePath?.includes('/node_modules/')
 }
 
