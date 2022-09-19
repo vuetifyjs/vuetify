@@ -24,7 +24,7 @@ const actions = {
       state.all.length > 0
     ) return Promise.resolve()
 
-    const { objects } = await bucket.getObjects({
+    const { objects } = await bucket.objects.find({
       limit: 1,
       props: 'slug,title,metadata',
       sort: '-created_at',

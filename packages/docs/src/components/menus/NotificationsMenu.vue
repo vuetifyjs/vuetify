@@ -195,7 +195,7 @@
     async mounted () {
       if (!bucket.available) return
 
-      const { objects: notifications } = await bucket.getObjects({
+      const { objects: notifications } = await bucket.objects.find({
         type: 'notifications',
         props: 'created_at,metadata,slug,title',
         status: 'published',

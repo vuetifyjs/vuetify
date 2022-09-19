@@ -1,32 +1,31 @@
 
-# ------------------------ >8 ------------------------
-|<----   Using a Maximum Of 50 Characters   ---->| Hard limit to 72 -->|
-<type>: <subject>
-
-<description>
-
-fixes #<issue>
-
-----------------------------------------------------
-
-<type> can be
-   feat     (new feature)
-   fix      (bug fix)
-   docs     (documentation only)
-   refactor (refactoring production code)
-   style    (formatting, missing semicolons, etc. no code change)
-   test     (adding or refactoring tests; no production code change)
-   chore    (updating npm scripts etc. no production code change)
-   revert   (revert a commit
-             <subject> must be the reverted commit's title
-             <description> must contain "This reverts commit <hash>.")
-
-Remember to
-   Not capitalize the subject line
-   Use the imperative mood in the subject line
-   Do not end the subject line with a period
-   Separate subject from body with a blank line (comments don't count)
-   Use the body to explain what and why vs. how
-
-If you can't summarize your changes in a single line, they should
-probably be split into multiple commits
+# |<----   Using a Maximum Of 50 Characters   ---->| Hard limit to 72 -->|
+# <type>: <subject>
+#
+# <description>
+#
+# fixes #<issue>
+#
+# ----------------------------------------------------
+#
+# <type> can be
+#    feat     (new feature)
+#    fix      (bug fix)
+#    docs     (documentation only)
+#    refactor (refactoring production code)
+#    style    (formatting, missing semicolons, etc. no code change)
+#    test     (adding or refactoring tests; no production code change)
+#    chore    (updating npm scripts etc. no production code change)
+#    revert   (revert a commit
+#              <subject> must be the reverted commit's title
+#              <description> must contain "This reverts commit <hash>.")
+#
+# Remember to
+#    Not capitalize the subject line
+#    Use the imperative mood in the subject line
+#    Do not end the subject line with a period
+#    Separate subject from body with a blank line (comments don't count)
+#    Use the body to explain what and why vs. how
+#
+# If you can't summarize your changes in a single line, they should
+# probably be split into multiple commits
