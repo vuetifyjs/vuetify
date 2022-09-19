@@ -21,6 +21,7 @@ import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 
 export const VTooltip = genericComponent<new () => {
   $slots: OverlaySlots
+  $props: VOverlay['$props']
 }>()({
   name: 'VTooltip',
 

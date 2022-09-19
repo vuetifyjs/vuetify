@@ -81,11 +81,11 @@ export const VSelect = genericComponent<new <
     multiple?: Multiple
     modelValue?: Readonly<V>
     'onUpdate:modelValue'?: (val: V) => void
-  }
+  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
   $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    item: [{ item: T, index: number, props: Record<string, unknown> }]
-    chip: [{ item: T, index: number, props: Record<string, unknown> }]
-    selection: [{ item: T, index: number }]
+    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: InternalItem<T>, index: number }]
     'no-data': []
   }>
 }>()({

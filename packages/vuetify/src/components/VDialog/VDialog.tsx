@@ -21,6 +21,7 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const VDialog = genericComponent<new () => {
   $slots: OverlaySlots
+  $props: VOverlay['$props']
 }>()({
   name: 'VDialog',
 

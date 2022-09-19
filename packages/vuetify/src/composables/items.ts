@@ -6,7 +6,7 @@ import { getPropertyFromItem, pick, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
-export interface InternalItem {
+export interface InternalItem<T = any> {
   title: string
   value: any
   props: {
@@ -15,7 +15,7 @@ export interface InternalItem {
     value: any
   }
   children?: InternalItem[]
-  raw: any
+  raw: T
 }
 
 export interface ItemProps {

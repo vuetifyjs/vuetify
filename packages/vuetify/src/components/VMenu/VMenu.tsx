@@ -22,6 +22,7 @@ import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const VMenu = genericComponent<new () => {
   $slots: OverlaySlots
+  $props: VOverlay['$props']
 }>()({
   name: 'VMenu',
 

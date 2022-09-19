@@ -17,9 +17,19 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { onMounted, ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VSnackbar = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export const VSnackbar = genericComponent<new () => {
+  $slots: MakeSlots<{
+    activator: [{ isActive: boolean, props: Record<string, any> }]
+    default: []
+    actions: []
+  }>
+  $props: VOverlay['$props']
+}>()({
   name: 'VSnackbar',
 
   props: {
