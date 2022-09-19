@@ -64,6 +64,7 @@ export default baseMixins.extend<options>().extend({
     },
     text: Boolean,
     tile: Boolean,
+    download: Boolean,
     type: {
       type: String,
       default: 'button',
@@ -196,6 +197,11 @@ export default baseMixins.extend<options>().extend({
       data.attrs!.type = this.type
       data.attrs!.disabled = this.disabled
     }
+
+    if (tag === 'a') {
+      data.attrs!.download = this.download
+    }
+
     data.attrs!.value = ['string', 'number'].includes(typeof this.value)
       ? this.value
       : JSON.stringify(this.value)
