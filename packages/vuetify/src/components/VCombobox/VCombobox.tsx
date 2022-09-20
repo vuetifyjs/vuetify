@@ -315,6 +315,8 @@ export const VCombobox = genericComponent<new <
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    opened={ items.value.map(item => item.value) }
+                    type="select"
                   >
                     { slots['prepend-item']?.() }
 
