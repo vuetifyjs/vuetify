@@ -74,6 +74,7 @@ export const VSlider = defineComponent({
 
     useRender(() => {
       const [inputProps, _] = filterInputProps(props)
+      const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
         <VInput
@@ -91,9 +92,14 @@ export const VSlider = defineComponent({
         >
           {{
             ...slots,
-            prepend: props.label ? slotProps => (
+            prepend: hasPrepend ? slotProps => (
               <>
-                <VLabel class="v-slider__label">{ props.label }</VLabel>
+                { slots.label
+                  ? slots.label(slotProps)
+                  : props.label
+                    ? <VLabel class="v-slider__label">{ props.label }</VLabel>
+                    : undefined
+                }
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
