@@ -19,9 +19,9 @@ When bootstrapping your application you can specify available locales and the de
 
 ## Getting started
 
-To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify. You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on **$vuetify.locale**.
+To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify.
 
-```js { resource="src/main.js" }
+```js { resource="main.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -46,6 +46,34 @@ app.use(vuetify)
 app.mount('#app')
 ```
 
+You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+
+```html { resource="Composition.vue" }
+<script>
+  export default {
+    setup () {
+      const { current } = useLocale()
+
+      return {
+        changeLocale: locale => current.value = locale
+      }
+    }
+  }
+</script>
+```
+
+```html { resource="Option.vue" }
+<script>
+  export default {
+    methods: {
+      changeLocale (locale) {
+        this.$vuetify.locale.current.value = locale
+      }
+    }
+  }
+</script>
+```
+
 ## API
 
 <api-inline />
@@ -59,8 +87,8 @@ Using the `v-locale-provider` component it is possible to scope a portion of you
   <v-app>
     <v-select></v-select> <!-- Will use default locale -->
 
-    <v-locale-provider locale="jp">
-      <v-select></v-select> <!-- Will use jp locale -->
+    <v-locale-provider locale="ja">
+      <v-select></v-select> <!-- Will use ja locale -->
     </v-locale-provider>
   </v-app>
 </template>
