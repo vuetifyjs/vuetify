@@ -23,7 +23,6 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
@@ -146,7 +145,7 @@ export const VAutocomplete = genericComponent<new <
 
     const isSelecting = ref(false)
 
-    function select (item: InternalItem) {
+    function select (item: InternalItem<any>) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => selection === item.value)
 
