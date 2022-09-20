@@ -8,8 +8,10 @@ import { VImg } from '@/components/VImg'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 
 // Utilities
-import { defineComponent, getScrollParent, useRender } from '@/util'
-import { onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+import { clamp, defineComponent, getScrollParent, useRender } from '@/util'
+import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+import { useResizeObserver } from '@/composables/resizeObserver'
+import { useDisplay } from '@/composables'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
@@ -21,17 +23,19 @@ export const VParallax = defineComponent({
   props: {
     scale: {
       type: [Number, String],
-      default: 1.3,
+      default: 0.5,
     },
   },
 
   setup (props, { slots }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { resizeRef, contentRect } = useResizeObserver()
+    const { height: displayHeight } = useDisplay()
 
     const root = ref<VImg>()
 
     watchEffect(() => {
-      intersectionRef.value = root.value?.$el
+      intersectionRef.value = resizeRef.value = root.value?.$el
     })
 
     let scrollParent: Element
@@ -50,6 +54,12 @@ export const VParallax = defineComponent({
       scrollParent?.removeEventListener('scroll', onScroll)
     })
 
+    watch(displayHeight, onScroll)
+
+    const scale = computed(() => {
+      return 1 - clamp(+props.scale)
+    })
+
     let frame = -1
     function onScroll () {
       if (!isIntersecting.value) return
@@ -59,14 +69,16 @@ export const VParallax = defineComponent({
         const el: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
         if (!el) return
 
-        const rect = intersectionRef.value!.getBoundingClientRect()
-        const scrollHeight = scrollParent.clientHeight ?? window.innerHeight
+        const scrollHeight = scrollParent.clientHeight ?? document.documentElement.clientHeight
         const scrollPos = scrollParent.scrollTop ?? window.scrollY
-        const top = rect.top + scrollPos
-        const progress = (scrollPos + scrollHeight - top) / (rect.height + scrollHeight)
-        const translate = floor((rect.height * +props.scale - rect.height) * (-progress + 0.5))
+        const top = intersectionRef.value!.offsetTop
+        const height = contentRect.value!.height
 
-        el.style.setProperty('transform', `translateY(${translate}px) scale(${props.scale})`)
+        const center = top + (height - scrollHeight) / 2
+        const translate = floor((scrollPos - center) * scale.value)
+        const sizeScale = Math.max(1, (scale.value * (scrollHeight - height) + height) / height)
+
+        el.style.setProperty('transform', `translateY(${translate}px) scale(${sizeScale})`)
       })
     }
 
