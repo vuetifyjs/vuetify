@@ -113,6 +113,7 @@ export const VBtn = defineComponent({
       const hasColor = !group || group.isSelected.value
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
+      const hasIcon = !!(props.icon && props.icon !== true)
 
       return (
         <Tag
@@ -183,14 +184,12 @@ export const VBtn = defineComponent({
               key="content"
               defaults={{
                 VIcon: {
-                  icon: typeof props.icon === 'string'
-                    ? props.icon
-                    : undefined,
+                  icon: hasIcon ? props.icon : undefined,
                 },
               }}
             >
               { slots.default?.() ?? (
-                typeof props.icon === 'string' && (
+                hasIcon && (
                   <VIcon key="icon" />
                 )
               ) }
