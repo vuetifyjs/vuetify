@@ -183,14 +183,14 @@ export const VBtn = defineComponent({
               key="content"
               defaults={{
                 VIcon: {
-                  icon: typeof props.icon === 'string'
+                  icon: props.icon != null
                     ? props.icon
                     : undefined,
                 },
               }}
             >
               { slots.default?.() ?? (
-                typeof props.icon === 'string' && (
+                props.icon != null && (
                   <VIcon key="icon" />
                 )
               ) }
