@@ -38,7 +38,7 @@ export const VAlert = defineComponent({
 
   props: {
     border: {
-      type: [Boolean, String],
+      type: [Boolean, String] as PropType<boolean | 'top' | 'end' | 'bottom' | 'start'>,
       validator: (val: boolean | string) => {
         return typeof val === 'boolean' || [
           'top',

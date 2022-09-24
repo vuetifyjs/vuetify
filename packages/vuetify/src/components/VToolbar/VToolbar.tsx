@@ -24,9 +24,9 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 import type { ExtractPropTypes, PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 
-export type Density = typeof allowedDensities[number]
-
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
+
+export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
