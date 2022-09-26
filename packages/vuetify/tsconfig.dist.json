@@ -1,7 +1,7 @@
 {
   "extends": "./tsconfig.json",
   "compilerOptions": {
-    "target": "ESNext",
+    "target": "es2018",
     "module": "ESNext",
     "outDir": "./lib-temp",
     "sourceMap": false,

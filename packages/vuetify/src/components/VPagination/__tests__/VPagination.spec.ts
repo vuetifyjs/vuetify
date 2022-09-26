@@ -229,7 +229,7 @@ describe('VPagination.ts', () => {
 
     const pagination = wrapper.find(VPagination.options)
 
-    expect(pagination.vm.maxButtons).toBe(0)
+    expect(pagination.vm.maxButtons).toBe(22)
 
     pagination.vm.onResize()
 
@@ -248,6 +248,8 @@ describe('VPagination.ts', () => {
         totalVisible: 10,
       },
     })
+
+    wrapper.setData({ maxButtons: 4 })
 
     expect(wrapper.vm.items).toHaveLength(4)
 

@@ -173,14 +173,7 @@ describe('VOtpInput.ts', () => {
     expect(change).toHaveBeenCalledTimes(2)
   })
 
-  it('should process input when paste event', async () => {
-    const getData = jest.fn(() => '1337078')
-    const event = {
-      clipboardData: {
-        getData,
-      },
-    }
-
+  it('should process input on paste', async () => {
     const wrapper = mountFunction({})
 
     const input = wrapper.findAll('input').at(0)
@@ -190,28 +183,11 @@ describe('VOtpInput.ts', () => {
     await wrapper.vm.$nextTick()
     expect(document.activeElement === element).toBe(true)
 
-    input.trigger('paste', event)
+    element.value = '1337078'
+    input.trigger('input')
     await wrapper.vm.$nextTick()
 
     expect(wrapper.vm.otp).toStrictEqual('133707'.split(''))
-  })
-
-  it('should process input when paste event with empty event', async () => {
-    const event = {}
-
-    const wrapper = mountFunction({})
-
-    const input = wrapper.findAll('input').at(0)
-
-    const element = input.element as HTMLInputElement
-    input.trigger('focus')
-    await wrapper.vm.$nextTick()
-    expect(document.activeElement === element).toBe(true)
-
-    input.trigger('paste', event)
-    await wrapper.vm.$nextTick()
-
-    expect(wrapper.vm.otp).toStrictEqual(''.split(''))
   })
 
   it('should clear cursor when input typing is done', async () => {

@@ -102,13 +102,12 @@ module.exports = merge(baseWebpackConfig, {
             happyPackMode: true,
           },
         },
-        'eslint-loader?cache=true?emitWarning=true',
       ],
     }),
     new HappyPack({
       id: 'js',
       threadPool: happyThreadPool,
-      loaders: ['babel-loader', 'eslint-loader?cache=true?emitWarning=true'],
+      loaders: ['babel-loader'],
     }),
   ],
 })

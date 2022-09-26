@@ -25,7 +25,6 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Quanted Square](https://analytics.quantedsquare.com/)
 - [HYPE](https://www.hypeinnovation.com/home)
 - [PapersOwl](https://papersowl.com/write-my-essay-please)
-- [Elfo](https://www.elfo.net/)
 - [Cosmic](https://www.cosmicjs.com/)
 - [Dealer Desk](https://www.dealerdesk.de/)
 - [Writers per Hour](https://writersperhour.com/buy-essay/)
@@ -33,9 +32,11 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [sumcumo](https://www.sumcumo.com/)
 - [AussieCasinoHex](https://aussiecasinohex.com/)
 - [Goread.io](https://goread.io/buy-instagram-followers)
-- [CasinoHex Canada](https://onlinecasinohex.ca/)
 - [Casinoonlineaams](https://www.casinoonlineaams.com/)
 - [TM Design](https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071)
+- [NonGamStopWager](https://www.nongamstopwager.com/casinos-not-on-gamstop/)
+- [Crypto Casinos](https://cryptocasinos.com/)
+- [Buy Instagram Likes](https://www.instafollowers.co/buy-instagram-likes)
 
 #### Silver
 

@@ -186,6 +186,9 @@ export default mixins(
 
       return itemsPerPage
     },
+    groupByText (): string {
+      return this.headers?.find(header => header.value === this.internalGroupBy?.[0])?.text ?? ''
+    },
   },
 
   created () {
@@ -380,7 +383,7 @@ export default mixins(
         const column = this.$createElement('td', {
           staticClass: 'text-start',
           attrs: this.colspanAttrs,
-        }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
+        }, [toggle, `${this.groupByText}: ${group}`, remove])
 
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
       }

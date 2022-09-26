@@ -361,6 +361,9 @@ export default CalendarWithEvents.extend({
         weekdays,
         categories,
       },
+      attrs: {
+        role: 'grid',
+      },
       directives: [{
         modifiers: { quiet: true },
         name: 'resize',
@@ -368,6 +371,7 @@ export default CalendarWithEvents.extend({
       }],
       on: {
         ...this.$listeners,
+
         'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
           if (this.$listeners.input) {
             this.$emit('input', day.date)

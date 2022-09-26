@@ -391,7 +391,7 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
     wrapper.setProps({ expandOnHover: false })
     await wrapper.vm.$nextTick()
 
-    expect(calls).toEqual([true, false])
+    expect(calls).toEqual([true])
   })
 
   it('should react to open / close from touch events', async () => {

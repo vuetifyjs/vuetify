@@ -27,8 +27,8 @@ export default Vue.extend({
       const value = getObjectValueByPath(props.item, header.value)
 
       const slotName = header.value
-      const scopedSlot = data.scopedSlots && data.scopedSlots[slotName]
-      const regularSlot = computedSlots[slotName]
+      const scopedSlot = data.scopedSlots && data.scopedSlots.hasOwnProperty(slotName) && data.scopedSlots[slotName]
+      const regularSlot = computedSlots.hasOwnProperty(slotName) && computedSlots[slotName]
 
       if (scopedSlot) {
         children.push(scopedSlot({

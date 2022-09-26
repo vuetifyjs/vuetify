@@ -78,7 +78,6 @@ export default baseMixins.extend<options>().extend({
       default: 0,
     },
     offsetOverflow: Boolean,
-    openOnClick: Boolean,
     positionX: {
       type: Number,
       default: null,
@@ -140,7 +139,8 @@ export default baseMixins.extend<options>().extend({
       const activatorLeft = (this.attach !== false ? a.offsetLeft : a.left) || 0
       const minWidth = Math.max(a.width, c.width)
       let left = 0
-      left += this.left ? activatorLeft - (minWidth - a.width) : activatorLeft
+      left += activatorLeft
+      if (this.left || (this.$vuetify.rtl && !this.right)) left -= (minWidth - a.width)
       if (this.offsetX) {
         const maxWidth = isNaN(Number(this.maxWidth))
           ? a.width
@@ -298,13 +298,15 @@ export default baseMixins.extend<options>().extend({
 
       const onClick = listeners.click
 
-      listeners.click = (e: MouseEvent & KeyboardEvent & FocusEvent) => {
-        if (this.openOnClick) {
-          onClick && onClick(e)
-        }
+      if (onClick) {
+        listeners.click = (e: MouseEvent & KeyboardEvent & FocusEvent) => {
+          if (this.openOnClick) {
+            onClick && onClick(e)
+          }
 
-        this.absoluteX = e.clientX
-        this.absoluteY = e.clientY
+          this.absoluteX = e.clientX
+          this.absoluteY = e.clientY
+        }
       }
 
       return listeners

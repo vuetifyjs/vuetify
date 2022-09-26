@@ -157,7 +157,7 @@ export default baseMixins.extend<options>().extend({
     computedCounterValue (): number {
       const value = this.multiple
         ? this.selectedItems
-        : (this.getText(this.selectedItems[0]) || '').toString()
+        : (this.getText(this.selectedItems[0]) ?? '').toString()
 
       if (typeof this.counterValue === 'function') {
         return this.counterValue(value)
@@ -257,6 +257,12 @@ export default baseMixins.extend<options>().extend({
     internalValue (val) {
       this.initialValue = val
       this.setSelectedItems()
+
+      if (this.multiple) {
+        this.$nextTick(() => {
+          this.$refs.menu?.updateDimensions()
+        })
+      }
     },
     isMenuActive (val) {
       window.setTimeout(() => this.onMenuActiveChange(val))
@@ -325,6 +331,10 @@ export default baseMixins.extend<options>().extend({
       for (let index = 0; index < arr.length; ++index) {
         const item = arr[index]
 
+        // Do not return null values if existant (#14421)
+        if (item == null) {
+          continue
+        }
         // Do not deduplicate headers or dividers (#12517)
         if (item.header || item.divider) {
           uniqueValues.set(item, item)
@@ -640,7 +650,7 @@ export default baseMixins.extend<options>().extend({
       this.keyboardLookupLastTime = now
 
       const index = this.allItems.findIndex(item => {
-        const text = (this.getText(item) || '').toString()
+        const text = (this.getText(item) ?? '').toString()
 
         return text.toLowerCase().startsWith(this.keyboardLookupPrefix)
       })
@@ -831,14 +841,6 @@ export default baseMixins.extend<options>().extend({
         this.setValue(internalValue.map((i: object) => {
           return this.returnObject ? i : this.getValue(i)
         }))
-
-        // When selecting multiple
-        // adjust menu after each
-        // selection
-        this.$nextTick(() => {
-          this.$refs.menu &&
-            (this.$refs.menu as { [key: string]: any }).updateDimensions()
-        })
 
         // There is no item to re-highlight
         // when selections are hidden

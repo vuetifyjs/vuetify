@@ -24,17 +24,16 @@ export default Vue.extend({
 
   methods: {
     getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
+      const listeners = Object.keys(this.$listeners)
+        .filter(key => key.endsWith(suffix))
+        .reduce((acc, key) => {
+          acc[key] = { event: key.slice(0, -suffix.length) }
+          return acc
+        }, {} as MouseEvents)
+
       return this.getMouseEventHandlers({
-        ['click' + suffix]: { event: 'click' },
+        ...listeners,
         ['contextmenu' + suffix]: { event: 'contextmenu', prevent: true, result: false },
-        ['mousedown' + suffix]: { event: 'mousedown' },
-        ['mousemove' + suffix]: { event: 'mousemove' },
-        ['mouseup' + suffix]: { event: 'mouseup' },
-        ['mouseenter' + suffix]: { event: 'mouseenter' },
-        ['mouseleave' + suffix]: { event: 'mouseleave' },
-        ['touchstart' + suffix]: { event: 'touchstart' },
-        ['touchmove' + suffix]: { event: 'touchmove' },
-        ['touchend' + suffix]: { event: 'touchend' },
       }, getEvent)
     },
     getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
@@ -65,11 +64,17 @@ export default Vue.extend({
             // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
             // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
             if (e && 'touches' in e) {
-              const currentTarget = document.elementFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+              const classSeparator = ' '
+
+              const eventTargetClasses = (e.currentTarget as HTMLElement)?.className.split(classSeparator)
+              const currentTargets = document.elementsFromPoint(e.changedTouches[0].clientX, e.changedTouches[0].clientY)
+
+              // Get "the same kind" current hovering target by checking
+              // If element has the same class of initial touch start element (which has touch event listener registered)
+              const currentTarget = currentTargets.find(t => t.className.split(classSeparator).some(c => eventTargetClasses.includes(c)))
 
               if (currentTarget &&
-                !(e.target as HTMLElement)?.isSameNode(currentTarget) &&
-                (e.target as HTMLElement)?.className === currentTarget.className
+                !(e.target as HTMLElement)?.isSameNode(currentTarget)
               ) {
                 currentTarget.dispatchEvent(new TouchEvent(e.type, {
                   changedTouches: e.changedTouches as unknown as Touch[],

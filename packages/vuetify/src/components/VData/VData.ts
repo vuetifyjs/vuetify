@@ -30,12 +30,10 @@ export default Vue.extend({
     } as PropValidator<Partial<DataOptions>>,
     sortBy: {
       type: [String, Array],
-      default: () => [],
-    } as PropValidator<string | string[]>,
+    } as PropValidator<string | string[] | undefined>,
     sortDesc: {
       type: [Boolean, Array],
-      default: () => [],
-    } as PropValidator<boolean | boolean[]>,
+    } as PropValidator<boolean | boolean[] | undefined>,
     customSort: {
       type: Function,
       default: sortItems,

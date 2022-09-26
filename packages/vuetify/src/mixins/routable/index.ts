@@ -80,9 +80,6 @@ export default Vue.extend({
   },
 
   methods: {
-    click (e: MouseEvent): void {
-      this.$emit('click', e)
-    },
     generateRouteLink () {
       let exact = this.exact
       let tag
@@ -100,7 +97,7 @@ export default Vue.extend({
         }],
         [this.to ? 'nativeOn' : 'on']: {
           ...this.$listeners,
-          click: this.click,
+          ...('click' in this ? { click: (this as any).click } : undefined), // #14447
         },
         ref: 'link',
       }
@@ -143,8 +140,8 @@ export default Vue.extend({
     },
     onRouteChange () {
       if (!this.to || !this.$refs.link || !this.$route) return
-      const activeClass = `${this.activeClass} ${this.proxyClass || ''}`.trim()
-      const exactActiveClass = `${this.exactActiveClass} ${this.proxyClass || ''}`.trim() || activeClass
+      const activeClass = `${this.activeClass || ''} ${this.proxyClass || ''}`.trim()
+      const exactActiveClass = `${this.exactActiveClass || ''} ${this.proxyClass || ''}`.trim() || activeClass
 
       const path = '_vnode.data.class.' + (this.exact ? exactActiveClass : activeClass)
 

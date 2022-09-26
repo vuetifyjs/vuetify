@@ -7,7 +7,9 @@
   overflow-y: auto
   pointer-events: auto
   transition: .3s map-get($transition, 'fast-in-fast-out')
+  width: 100%
   z-index: inherit
+  outline: none
   +elevation($dialog-elevation)
 
   &:not(.v-dialog--fullscreen)
@@ -45,7 +47,6 @@
   transition: .2s map-get($transition, 'fast-in-fast-out'), z-index 1ms
   width: 100%
   z-index: 6
-  outline: none
 
 .v-dialog__container
   display: none
@@ -62,7 +63,6 @@
 .v-dialog--fullscreen
   border-radius: 0
   margin: 0
-  width: 100%
   height: 100%
   position: fixed
   overflow-y: auto

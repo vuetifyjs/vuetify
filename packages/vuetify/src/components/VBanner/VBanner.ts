@@ -148,17 +148,23 @@ export default mixins(
   },
 
   render (h): VNode {
+    const data = {
+      staticClass: 'v-banner',
+      attrs: this.attrs$,
+      class: this.classes,
+      style: this.styles,
+      directives: [{
+        name: 'show',
+        value: this.isActive,
+      }],
+    }
+
     return h(VExpandTransition, [
-      h('div', this.setBackgroundColor(this.color, {
-        staticClass: 'v-banner',
-        attrs: this.attrs$,
-        class: this.classes,
-        style: this.styles,
-        directives: [{
-          name: 'show',
-          value: this.isActive,
-        }],
-      }), [this.genWrapper()]),
+      h(
+        'div',
+        this.outlined ? data : this.setBackgroundColor(this.color, data),
+        [this.genWrapper()],
+      ),
     ])
   },
 })

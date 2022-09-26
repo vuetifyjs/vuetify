@@ -127,7 +127,7 @@ export const BaseSlideGroup = mixins<options &
     },
     showArrows: {
       type: [Boolean, String],
-      validator: v => (
+      validator: (v: any) => (
         typeof v === 'boolean' || [
           'always',
           'desktop',
@@ -138,7 +138,6 @@ export const BaseSlideGroup = mixins<options &
   },
 
   data: () => ({
-    internalItemsLength: 0,
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
@@ -216,24 +215,41 @@ export const BaseSlideGroup = mixins<options &
     // and need to be recalculated
     isOverflowing: 'setWidths',
     scrollOffset (val) {
-      const scroll =
+      if (this.$vuetify.rtl) val = -val
+
+      let scroll =
         val <= 0
           ? bias(-val)
           : val > this.widths.content - this.widths.wrapper
             ? -(this.widths.content - this.widths.wrapper) + bias(this.widths.content - this.widths.wrapper - val)
             : -val
 
+      if (this.$vuetify.rtl) scroll = -scroll
+
       this.$refs.content.style.transform = `translateX(${scroll}px)`
     },
   },
 
-  beforeUpdate () {
-    this.internalItemsLength = (this.$children || []).length
-  },
-
-  updated () {
-    if (this.internalItemsLength === (this.$children || []).length) return
-    this.setWidths()
+  mounted () {
+    if (typeof ResizeObserver !== 'undefined') {
+      const obs = new ResizeObserver(() => {
+        this.onResize()
+      })
+      obs.observe(this.$el)
+      obs.observe(this.$refs.content)
+      this.$on('hook:destroyed', () => {
+        obs.disconnect()
+      })
+    } else {
+      let itemsLength = 0
+      this.$on('hook:beforeUpdate', () => {
+        itemsLength = (this.$refs.content?.children || []).length
+      })
+      this.$on('hook:updated', () => {
+        if (itemsLength === (this.$refs.content?.children || []).length) return
+        this.setWidths()
+      })
+    }
   },
 
   methods: {
@@ -475,8 +491,10 @@ export const BaseSlideGroup = mixins<options &
         wrapper: this.$refs.wrapper ? this.$refs.wrapper.clientWidth : 0,
       }, this.$vuetify.rtl, this.scrollOffset)
     },
-    setWidths /* istanbul ignore next */  () {
+    setWidths () {
       window.requestAnimationFrame(() => {
+        if (this._isDestroyed) return
+
         const { content, wrapper } = this.$refs
 
         this.widths = {

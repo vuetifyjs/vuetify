@@ -244,9 +244,9 @@ exports[`VPagination.ts should only render middle of range if length is big and 
     </li>
     <li>
       <button type="button"
+              aria-current="true"
               aria-label="$vuetify.pagination.ariaLabel.currentPage"
               class="v-pagination__item v-pagination__item--active primary"
-              aria-current="true"
       >
         50
       </button>
@@ -628,7 +628,7 @@ exports[`VPagination.ts should render component in RTL mode and match snapshot 1
               class="v-pagination__navigation"
       >
         <i aria-hidden="true"
-           class="v-icon notranslate mdi mdi-chevron-right theme--light"
+           class="v-icon notranslate mdi mdi-chevron-left theme--light"
         >
         </i>
       </button>
@@ -680,7 +680,7 @@ exports[`VPagination.ts should render component in RTL mode and match snapshot 1
               class="v-pagination__navigation"
       >
         <i aria-hidden="true"
-           class="v-icon notranslate mdi mdi-chevron-left theme--light"
+           class="v-icon notranslate mdi mdi-chevron-right theme--light"
         >
         </i>
       </button>

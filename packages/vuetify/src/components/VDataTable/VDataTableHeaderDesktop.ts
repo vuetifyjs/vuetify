@@ -73,7 +73,7 @@ export default mixins(header).extend({
       }
 
       children.push(
-        this.$scopedSlots[header.value]
+        this.$scopedSlots.hasOwnProperty(header.value)
           ? this.$scopedSlots[header.value]!({ header })
           : this.$createElement('span', [header.text])
       )

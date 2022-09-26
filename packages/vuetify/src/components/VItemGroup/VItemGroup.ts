@@ -2,6 +2,7 @@
 import './VItemGroup.sass'
 
 // Mixins
+import Comparable from '../../mixins/comparable'
 import Groupable from '../../mixins/groupable'
 import Proxyable from '../../mixins/proxyable'
 import Themeable from '../../mixins/themeable'
@@ -20,6 +21,7 @@ export type GroupableInstance = InstanceType<typeof Groupable> & {
  }
 
 export const BaseItemGroup = mixins(
+  Comparable,
   Proxyable,
   Themeable
 ).extend({
@@ -83,12 +85,12 @@ export const BaseItemGroup = mixins(
     },
     toggleMethod (): (v: any) => boolean {
       if (!this.multiple) {
-        return (v: any) => this.internalValue === v
+        return (v: any) => this.valueComparator(this.internalValue, v)
       }
 
       const internalValue = this.internalValue
       if (Array.isArray(internalValue)) {
-        return (v: any) => internalValue.includes(v)
+        return (v: any) => internalValue.some(intern => this.valueComparator(intern, v))
       }
 
       return () => false
@@ -114,7 +116,7 @@ export const BaseItemGroup = mixins(
       }
     },
     getValue (item: GroupableInstance, i: number): unknown {
-      return item.value == null || item.value === ''
+      return item.value === undefined
         ? i
         : item.value
     },
@@ -217,7 +219,7 @@ export const BaseItemGroup = mixins(
         ? this.internalValue
         : []
       const internalValue = defaultValue.slice()
-      const index = internalValue.findIndex(val => val === value)
+      const index = internalValue.findIndex(val => this.valueComparator(val, value))
 
       if (
         this.mandatory &&
@@ -243,7 +245,7 @@ export const BaseItemGroup = mixins(
       this.internalValue = internalValue
     },
     updateSingle (value: any) {
-      const isSame = value === this.internalValue
+      const isSame = this.valueComparator(this.internalValue, value)
 
       if (this.mandatory && isSame) return
 

@@ -67,6 +67,8 @@ This will start the Vue User Interface and open a new window in your browser. On
 
 ## Nuxt install
 
+<vuetify-ad slug="vs-video-nuxt" />
+
 Vuetify can be added by installing the Nuxt Vuetify module.
 
 ```bash
@@ -324,5 +326,15 @@ module.exports = {
   ]
 }
 ```
+
+## Nightly Builds
+
+The three development branches (`master`, `dev`, and `next`) are automatically published to NPM at 1200 UTC under the [`@vuetify/nightly`](https://www.npmjs.com/package/@vuetify/nightly?activeTab=versions) namespace. They may be outdated or buggy and are therefore not officially supported and are only supplied for testing puposes. These builds can be installed with a [package alias](https://docs.npmjs.com/cli/v8/commands/npm-install#:~:text=Install%20a%20package%20under%20a%20custom%20alias).
+
+| Branch name | Purpose          | package.json entry                         | Changelog                                                           |
+|-------------|------------------|--------------------------------------------|---------------------------------------------------------------------|
+| `master`    | Bug fixes        | `"vuetify": "npm:@vuetify/nightly@latest"` | [Changelog](https://unpkg.com/@vuetify/nightly@latest/CHANGELOG.md) |
+| `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
+| `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
 
 <backmatter />

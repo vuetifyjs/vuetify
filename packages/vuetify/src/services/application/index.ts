@@ -36,7 +36,7 @@ export class Application extends Service implements IApplication {
     location: TargetProp,
     size: number
   ) {
-    this.application[location] = { [uid]: size }
+    this.application[location][uid] = size
 
     this.update(location)
   }
