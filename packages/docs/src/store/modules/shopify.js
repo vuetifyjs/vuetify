@@ -25,10 +25,11 @@ const actions = {
     ) return Promise.resolve()
 
     const { objects } = await bucket.objects.find({
-      limit: 1,
-      props: 'slug,title,metadata',
-      sort: '-created_at',
+      type: 'products',
     })
+      .props('slug,title,metadata')
+      .sort('-created_at')
+      .limit(1)
 
     const products = objects && objects.length ? JSON.parse(objects[0].metadata.products) : []
 

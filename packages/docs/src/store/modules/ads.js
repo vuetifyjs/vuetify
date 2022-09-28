@@ -16,9 +16,9 @@ const actions = {
 
     const { objects } = await bucket.objects.find({
       type: 'ads',
-      props: 'metadata,slug,title',
-      status: 'published',
     })
+      .props('metadata,slug,title')
+      .status('published')
 
     commit('all', objects || [])
   },
