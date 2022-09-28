@@ -137,6 +137,7 @@ export const VTab = defineComponent({
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
+          active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
           variant="text"
