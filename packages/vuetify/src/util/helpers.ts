@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, computed, Fragment, toRef, watch } from 'vue'
+import { camelize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 
 // Types
 import type {
@@ -575,17 +575,14 @@ type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : neve
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = {} as ToRefs<T>
+  const refs = reactive({}) as T
   const base = computed(getter)
-  for (const key in base.value) {
-    refs[key] = toRef(base.value, key)
-  }
-  watch(base, val => {
-    for (const key in val) {
-      refs[key].value = val[key]
+  watchEffect(() => {
+    for (const key in base.value) {
+      refs[key] = base.value[key]
     }
   }, { flush: 'sync' })
-  return refs
+  return toRefs(refs)
 }
 
 /** Array.includes but value can be any type */
