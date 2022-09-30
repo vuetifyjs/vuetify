@@ -17,6 +17,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and multi select 1`] = 
           <input id="input-112"
                  readonly="readonly"
                  type="text"
+                 role="combobox"
                  aria-readonly="false"
                  autocomplete="off"
           >
@@ -78,6 +79,7 @@ exports[`VSelect.ts should be clearable with prop, dirty and single select 1`] =
           <input id="input-105"
                  readonly="readonly"
                  type="text"
+                 role="combobox"
                  aria-readonly="false"
                  autocomplete="off"
           >
@@ -139,6 +141,7 @@ exports[`VSelect.ts should use scoped slot for selection generation 1`] = `
           <input id="input-26"
                  readonly="readonly"
                  type="text"
+                 role="combobox"
                  aria-readonly="false"
                  autocomplete="off"
           >
