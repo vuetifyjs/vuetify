@@ -24,9 +24,9 @@ const actions = {
         'metadata.end_date': {
           $gte: today,
         },
-        sort: 'metadata.start_date',
       })
         .props('metadata,slug,title')
+        .sort('metadata.start_date')
         .status('published')
         .limit(1)
 
