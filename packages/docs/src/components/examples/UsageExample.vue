@@ -89,7 +89,7 @@
       </v-main>
 
       <v-navigation-drawer
-        v-if="display.smAndUp.value"
+        v-if="display.smAndUp.value && $slots.configuration"
         v-model="tune"
         permanent
         name="tune"
