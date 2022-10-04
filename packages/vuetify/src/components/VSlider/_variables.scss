@@ -1,9 +1,9 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
-$slider-horizontal-left: 8px !default;
+$slider-horizontal-start: 8px !default;
 $slider-horizontal-min-height: 32px !default;
-$slider-horizontal-right: 8px !default;
+$slider-horizontal-end: 8px !default;
 $slider-label-margin-end: 12px !default;
 $slider-label-margin-start: 12px !default;
 $slider-state-track-background-opacity: 0.4 !default;
