@@ -44,6 +44,8 @@ export const VSliderTrack = defineComponent({
       trackFillColor,
       trackSize,
       vertical,
+      min,
+      max,
     } = slider
 
     const { roundedClasses } = useRounded(rounded)
@@ -82,7 +84,8 @@ export const VSliderTrack = defineComponent({
 
       return ticks.map((tick, index) => {
         const directionProperty = vertical.value ? 'bottom' : 'margin-inline-start'
-        const directionValue = (tick.position > 0 && tick.position < 100) ? convertToUnit(tick.position, '%') : undefined
+        const directionValue = tick.value !== min.value && tick.value !== max.value ? convertToUnit(tick.position, '%') : undefined
+
         return (
           <div
             key={ tick.value }
@@ -90,6 +93,8 @@ export const VSliderTrack = defineComponent({
               'v-slider-track__tick',
               {
                 'v-slider-track__tick--filled': tick.position >= props.start && tick.position <= props.stop,
+                'v-slider-track__tick--first': tick.value === min.value,
+                'v-slider-track__tick--last': tick.value === max.value,
               },
             ]}
             style={{ [directionProperty]: directionValue }}
