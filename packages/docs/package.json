@@ -3,7 +3,7 @@
   "description": "A Vue.js project",
   "private": true,
   "author": "John Leider <john@vuetifyjs.com>",
-  "version": "3.0.0-beta.11",
+  "version": "3.0.0-beta.12",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/vuetifyjs/vuetify.git",
@@ -32,7 +32,7 @@
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^9.2.2",
     "vue-prism-component": "^2.0.0",
-    "vuetify": "^3.0.0-beta.11"
+    "vuetify": "^3.0.0-beta.12"
   },
   "devDependencies": {
     "@intlify/vite-plugin-vue-i18n": "^6.0.1",
