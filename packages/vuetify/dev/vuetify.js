@@ -5,6 +5,7 @@ import { fa } from 'vuetify/src/iconsets/fa-svg'
 import { ar, en, ja, sv } from 'vuetify/src/locale'
 
 export default createVuetify({
+  ssr: !!process.env.VITE_SSR,
   locale: {
     messages: {
       en,

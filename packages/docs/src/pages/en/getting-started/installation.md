@@ -173,6 +173,14 @@ const vuetify = createVuetify({
 })
 ```
 
+Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks will need to manually set the `ssr` option to `true` in order to properly render the application.
+
+```js { data-resource="main.js" }
+const vuetify = createVuetify({
+  ssr: true,
+})
+```
+
 ### CDN
 
 We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
