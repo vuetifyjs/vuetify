@@ -2,17 +2,17 @@
 import './VSlider.sass'
 
 // Components
-import { VSliderThumb } from './VSliderThumb'
-import { VSliderTrack } from './VSliderTrack'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
+import { VSliderThumb } from './VSliderThumb'
+import { VSliderTrack } from './VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-// Util
+// Utilities
 import { computed, ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
@@ -94,12 +94,15 @@ export const VSlider = defineComponent({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label
-                  ? slots.label(slotProps)
-                  : props.label
-                    ? <VLabel class="v-slider__label">{ props.label }</VLabel>
-                    : undefined
+                { slots.label?.(slotProps) ?? props.label
+                  ? (
+                    <VLabel
+                      class="v-slider__label"
+                      text={ props.label }
+                    />
+                  ) : undefined
                 }
+
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,

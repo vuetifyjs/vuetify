@@ -2,11 +2,11 @@
 import '../VSlider/VSlider.sass'
 
 // Components
-import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
+import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
-import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
@@ -130,12 +130,15 @@ export const VRangeSlider = defineComponent({
             ...slots,
             prepend: hasPrepend ? slotProps => (
               <>
-                { slots.label
-                  ? slots.label(slotProps)
-                  : props.label
-                    ? <VLabel class="v-slider__label">{ props.label }</VLabel>
-                    : undefined
+                { slots.label?.(slotProps) ?? props.label
+                  ? (
+                    <VLabel
+                      class="v-slider__label"
+                      text={ props.label }
+                    />
+                  ) : undefined
                 }
+
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
