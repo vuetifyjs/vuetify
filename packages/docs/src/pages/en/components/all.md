@@ -18,11 +18,11 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 <v-row>
 
-<components-list-item name="alerts">
+<!-- <components-list-item name="alerts">
 
   The alert component is used to convey important information to the user.
 
-</components-list-item>
+</components-list-item> -->
 
 <components-list-item name="app-bars">
 
@@ -30,11 +30,11 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 </components-list-item>
 
-<components-list-item name="badges">
+<!-- <components-list-item name="badges">
 
   Badges superscript or subscript an avatar-like icon or text onto content.
 
-</components-list-item>
+</components-list-item> -->
 
 <components-list-item name="banners">
 
@@ -42,15 +42,39 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 </components-list-item>
 
-<components-list-item name="breadcrumbs">
+<components-list-item name="bottom-navigations">
 
-  Breadcrumbs are navigational helpers for router pages.
+  The bottom navigation component is used for displaying navigation links on mobile
 
 </components-list-item>
 
-<components-list-item name="buttons">
+<!-- <components-list-item name="breadcrumbs">
+
+  Breadcrumbs are navigational helpers for router pages.
+
+</components-list-item> -->
+
+<!-- <components-list-item name="buttons">
 
   The button component allows users to take actions or make choices with a single tap.
+
+</components-list-item> -->
+
+<components-list-item name="footers">
+
+  The footer component is a simple navigation area with inner site links
+
+</components-list-item>
+
+<components-list-item name="navigation-drawers">
+
+  Navigation drawers contain primary application navigation links
+
+</components-list-item>
+
+<components-list-item name="system-bars">
+
+  The system bar component shows application information with iconography, time, and more
 
 </components-list-item>
 
