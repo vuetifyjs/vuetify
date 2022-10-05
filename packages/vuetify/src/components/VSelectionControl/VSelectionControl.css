@@ -1,0 +1,98 @@
+.v-selection-control {
+  align-items: center;
+  contain: layout;
+  display: flex;
+  flex: 1 0;
+  grid-area: control;
+  position: relative;
+  user-select: none;
+}
+.v-selection-control .v-label {
+  height: 100%;
+  width: 100%;
+}
+.v-selection-control--disabled {
+  opacity: var(--v-disabled-opacity);
+  pointer-events: none;
+}
+.v-selection-control--error .v-label, .v-selection-control--disabled .v-label {
+  opacity: 1;
+}
+.v-selection-control--error:not(.v-selection-control--disabled) .v-label {
+  color: rgb(var(--v-theme-error));
+}
+.v-selection-control--inline {
+  display: inline-flex;
+  flex: 0 0 auto;
+}
+.v-selection-control--inline .v-label {
+  width: auto;
+}
+.v-selection-control--density-default {
+  --v-selection-control-size: 40px;
+}
+
+.v-selection-control--density-comfortable {
+  --v-selection-control-size: 36px;
+}
+
+.v-selection-control--density-compact {
+  --v-selection-control-size: 28px;
+}
+
+.v-selection-control__wrapper {
+  width: var(--v-selection-control-size);
+  height: var(--v-selection-control-size);
+  display: inline-flex;
+  align-items: center;
+  position: relative;
+  justify-content: center;
+  flex: none;
+}
+
+.v-selection-control__input {
+  width: var(--v-selection-control-size);
+  height: var(--v-selection-control-size);
+  align-items: center;
+  display: flex;
+  flex: none;
+  justify-content: center;
+  position: relative;
+  border-radius: 50%;
+}
+.v-selection-control__input input {
+  cursor: pointer;
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+}
+.v-selection-control__input::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border-radius: 100%;
+  background-color: currentColor;
+  opacity: 0;
+  pointer-events: none;
+}
+.v-selection-control__input:hover::before {
+  opacity: calc(0.04 * var(--v-theme-overlay-multiplier));
+}
+.v-selection-control__input > .v-icon {
+  opacity: var(--v-medium-emphasis-opacity);
+}
+.v-selection-control--disabled .v-selection-control__input > .v-icon, .v-selection-control--dirty .v-selection-control__input > .v-icon, .v-selection-control--error .v-selection-control__input > .v-icon {
+  opacity: 1;
+}
+.v-selection-control--error:not(.v-selection-control--disabled) .v-selection-control__input > .v-icon {
+  color: rgb(var(--v-theme-error));
+}
+.v-selection-control--focus-visible .v-selection-control__input::before {
+  opacity: calc(0.12 * var(--v-theme-overlay-multiplier));
+}

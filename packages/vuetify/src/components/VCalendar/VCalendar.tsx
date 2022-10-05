@@ -742,9 +742,9 @@ export const VCalendar = genericComponent<new <T>() => {
 
       const isNode = (input: VNode | false): input is VNode => !!input
       const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
+        console.log(day)
         const events = getter(day)
         const visuals = mode(day, events, timed, categoryMode.value)
-
         if (timed) {
           return visuals.map((visual: CalendarEventVisual) => mapper(visual, day)).filter(isNode)
         }
@@ -796,7 +796,6 @@ export const VCalendar = genericComponent<new <T>() => {
         },
         'day-body': (day: CalendarDayBodySlotScope) => {
           const events = getSlotChildren(day, getEventsForDayTimed, genTimedEvent, true)
-          console.log('events', events)
           let children: VNode[] = [
             ( <div class="v-event-timed-container">{ events }</div> )
           ]

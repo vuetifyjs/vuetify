@@ -1,0 +1,62 @@
+.v-overlay-container {
+  contain: layout;
+  left: 0;
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  display: contents;
+}
+
+.v-overlay-scroll-blocked {
+  padding-inline-end: var(--v-scrollbar-offset);
+  overflow-y: hidden !important;
+}
+html.v-overlay-scroll-blocked {
+  position: fixed;
+  top: var(--v-body-scroll-y);
+  left: var(--v-body-scroll-x);
+  width: 100%;
+  height: 100%;
+}
+
+.v-overlay {
+  border-radius: inherit;
+  display: flex;
+  left: 0;
+  pointer-events: none;
+  position: fixed;
+  top: 0;
+  bottom: 0;
+  right: 0;
+}
+
+.v-overlay__content {
+  outline: none;
+  position: absolute;
+  pointer-events: auto;
+  contain: layout;
+}
+
+.v-overlay__scrim {
+  pointer-events: auto;
+  background: rgb(var(--v-theme-on-surface));
+  border-radius: inherit;
+  bottom: 0;
+  left: 0;
+  opacity: 32%;
+  position: fixed;
+  right: 0;
+  top: 0;
+}
+
+.v-overlay--absolute {
+  position: absolute;
+}
+
+.v-overlay--contained .v-overlay__scrim {
+  position: absolute;
+}
+
+.v-overlay--scroll-blocked {
+  padding-inline-end: var(--v-scrollbar-offset);
+}

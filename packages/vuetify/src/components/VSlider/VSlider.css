@@ -1,0 +1,53 @@
+.v-slider .v-slider__container input {
+  cursor: default;
+  padding: 0;
+  width: 100%;
+  display: none;
+}
+.v-slider .v-input__append, .v-slider .v-input__prepend {
+  padding: 0;
+}
+
+.v-slider__container {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+.v-input--disabled .v-slider__container {
+  opacity: var(--v-disabled-opacity);
+}
+.v-input--error:not(.v-input--disabled) .v-slider__container {
+  color: rgb(var(--v-theme-error));
+}
+
+.v-slider.v-input--horizontal {
+  align-items: center;
+  margin-left: 8px;
+  margin-right: 8px;
+}
+.v-slider.v-input--horizontal .v-input__control {
+  min-height: 32px;
+  display: flex;
+  align-items: center;
+}
+
+.v-slider.v-input--vertical {
+  justify-content: center;
+  margin-top: 12px;
+  margin-bottom: 12px;
+}
+.v-slider.v-input--vertical .v-input__control {
+  min-height: 300px;
+}
+
+.v-slider.v-input--disabled {
+  pointer-events: none;
+}
+
+.v-slider--has-labels .v-input__control {
+  margin-bottom: 4px;
+}

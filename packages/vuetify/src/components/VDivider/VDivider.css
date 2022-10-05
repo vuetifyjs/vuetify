@@ -1,0 +1,30 @@
+.v-divider {
+  display: block;
+  flex: 1 1 100%;
+  height: 0px;
+  max-height: 0px;
+  transition: inherit;
+  border-color: rgba(var(--v-border-color), var(--v-border-opacity));
+  border-style: solid;
+  border-width: thin 0 0 0;
+}
+.v-divider--vertical {
+  align-self: stretch;
+  border-width: 0 thin 0 0;
+  display: inline-flex;
+  height: inherit;
+  margin-left: -1px;
+  max-height: 100%;
+  max-width: 0px;
+  vertical-align: text-bottom;
+  width: 0px;
+}
+.v-divider--inset:not(.v-divider--vertical) {
+  max-width: calc(100% - 72px);
+  margin-inline-start: 72px;
+}
+.v-divider--inset.v-divider--vertical {
+  margin-bottom: 8px;
+  margin-top: 8px;
+  max-height: calc(100% - 16px);
+}

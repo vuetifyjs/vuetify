@@ -1,0 +1,12 @@
+.v-label {
+  align-items: center;
+  cursor: pointer;
+  display: inline-flex;
+  font-size: 1rem;
+  letter-spacing: 0.009375em;
+  min-width: 0;
+  opacity: var(--v-medium-emphasis-opacity);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}

@@ -1,0 +1,8 @@
+.v-layout-item {
+  position: absolute;
+  transition: 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.v-layout-item--absolute {
+  position: absolute;
+}

@@ -1,0 +1,21 @@
+.v-color-picker-canvas {
+  position: relative;
+  overflow: hidden;
+  contain: strict;
+}
+.v-color-picker-canvas__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 15px;
+  height: 15px;
+  background: transparent;
+  border-radius: 50%;
+  box-shadow: 0px 0px 0px 1.5px rgb(255, 255, 255), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3);
+}
+.v-color-picker-canvas__dot--disabled {
+  box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.7), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3);
+}
+.v-color-picker-canvas:hover .v-color-picker-canvas__dot {
+  will-change: transform;
+}

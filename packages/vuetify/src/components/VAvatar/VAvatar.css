@@ -1,0 +1,43 @@
+.v-avatar {
+  align-items: center;
+  display: inline-flex;
+  justify-content: center;
+  line-height: normal;
+  overflow: hidden;
+  position: relative;
+  text-align: center;
+  vertical-align: middle;
+  border-radius: 50%;
+  background: transparent;
+  color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity));
+}
+.v-avatar.v-avatar--size-x-small {
+  --v-avatar-height: 24px;
+}
+.v-avatar.v-avatar--size-small {
+  --v-avatar-height: 32px;
+}
+.v-avatar.v-avatar--size-default {
+  --v-avatar-height: 40px;
+}
+.v-avatar.v-avatar--size-large {
+  --v-avatar-height: 48px;
+}
+.v-avatar.v-avatar--size-x-large {
+  --v-avatar-height: 56px;
+}
+.v-avatar.v-avatar--density-default {
+  height: calc(var(--v-avatar-height) + 0px);
+  width: calc(var(--v-avatar-height) + 0px);
+}
+.v-avatar.v-avatar--density-comfortable {
+  height: calc(var(--v-avatar-height) + -4px);
+  width: calc(var(--v-avatar-height) + -4px);
+}
+.v-avatar.v-avatar--density-compact {
+  height: calc(var(--v-avatar-height) + -8px);
+  width: calc(var(--v-avatar-height) + -8px);
+}
+.v-avatar--rounded {
+  border-radius: 4px;
+}
