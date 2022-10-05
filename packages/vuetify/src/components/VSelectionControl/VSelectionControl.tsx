@@ -284,7 +284,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
           </div>
 
           { label && (
-            <VLabel for={ id.value }>
+            <VLabel for={ id.value } clickable>
               { label }
             </VLabel>
           ) }

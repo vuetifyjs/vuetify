@@ -199,8 +199,7 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
 }
 
 // Composables
-export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
-  const head = app._context.provides.usehead as HeadClient | undefined
+export function createTheme (options?: ThemeOptions): ThemeInstance & { install: (app: App) => void } {
   const parsedOptions = reactive(parseThemeOptions(options))
   const name = ref(parsedOptions.defaultTheme)
   const themes = ref(parsedOptions.themes)
@@ -300,47 +299,52 @@ export function createTheme (app: App, options?: ThemeOptions): ThemeInstance {
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
-  if (head) {
-    head.addHeadObjs(computed(() => {
-      const style: HeadAttrs = {
-        children: styles.value,
-        type: 'text/css',
-        id: 'vuetify-theme-stylesheet',
+  function install (app: App) {
+    const head = app._context.provides.usehead as HeadClient | undefined
+    if (head) {
+      head.addHeadObjs(computed(() => {
+        const style: HeadAttrs = {
+          children: styles.value,
+          type: 'text/css',
+          id: 'vuetify-theme-stylesheet',
+        }
+        if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
+
+        return { style: [style] }
+      }))
+
+      if (IN_BROWSER) {
+        watchEffect(() => head.updateDOM())
       }
-      if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
+    } else {
+      let styleEl = IN_BROWSER
+        ? document.getElementById('vuetify-theme-stylesheet')
+        : null
 
-      return { style: [style] }
-    }))
+      watch(styles, updateStyles, { immediate: true })
 
-    if (IN_BROWSER) {
-      watchEffect(() => head.updateDOM())
-    }
-  } else {
-    let styleEl = IN_BROWSER
-      ? document.getElementById('vuetify-theme-stylesheet')
-      : null
+      function updateStyles () {
+        if (parsedOptions.isDisabled) return
 
-    watch(styles, updateStyles, { immediate: true })
-    function updateStyles () {
-      if (parsedOptions.isDisabled) return
+        if (typeof document !== 'undefined' && !styleEl) {
+          const el = document.createElement('style')
+          el.type = 'text/css'
+          el.id = 'vuetify-theme-stylesheet'
+          if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
 
-      if (typeof document !== 'undefined' && !styleEl) {
-        const el = document.createElement('style')
-        el.type = 'text/css'
-        el.id = 'vuetify-theme-stylesheet'
-        if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
+          styleEl = el
+          document.head.appendChild(styleEl)
+        }
 
-        styleEl = el
-        document.head.appendChild(styleEl)
+        if (styleEl) styleEl.innerHTML = styles.value
       }
-
-      if (styleEl) styleEl.innerHTML = styles.value
     }
   }
 
   const themeClasses = computed(() => parsedOptions.isDisabled ? undefined : `v-theme--${name.value}`)
 
   return {
+    install,
     isDisabled: parsedOptions.isDisabled,
     name,
     themes,

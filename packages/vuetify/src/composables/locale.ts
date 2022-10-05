@@ -71,11 +71,13 @@ export function createLocale (
   options?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions),
 ) {
   const adapter = isLocaleAdapter(options) ? options : createDefaultLocaleAdapter(options)
-  const instance = adapter.createRoot(app)
 
-  app?.provide(RtlSymbol, createRtl(instance, options))
+  function install (app: App) {
+    const instance = adapter.createRoot(app)
+    app.provide(RtlSymbol, createRtl(instance, options))
+  }
 
-  return adapter
+  return { adapter, install }
 }
 
 const LANG_PREFIX = '$vuetify.'

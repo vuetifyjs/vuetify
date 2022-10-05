@@ -1,5 +1,5 @@
 // Utilities
-import { inject, nextTick, reactive, ref, toRefs, watchEffect } from 'vue'
+import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
@@ -149,8 +149,8 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): T
     width.value = getClientWidth()
   }
 
-  if (isHydrate) {
-    nextTick(() => onResize())
+  if (isHydrate && IN_BROWSER) {
+    requestAnimationFrame(() => onResize())
   }
 
   // eslint-disable-next-line max-statements

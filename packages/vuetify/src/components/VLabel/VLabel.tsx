@@ -12,13 +12,21 @@ export const VLabel = defineComponent({
 
   props: {
     text: String,
+    clickable: Boolean,
 
     ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
     useRender(() => (
-      <label class="v-label">
+      <label
+        class={[
+          'v-label',
+          {
+            'v-label--clickable': props.clickable,
+          },
+        ]}
+      >
         { props.text }
 
         { slots.default?.() }

@@ -54,12 +54,6 @@ You can add icons to the slider with the **append-icon** and **prepend-icon** pr
 
 <example file="v-slider/prop-icons" />
 
-#### Inverse label
-
-`v-slider` with **inverse-label** property displays label at the end of it.
-
-<example file="v-slider/prop-inverse-label" />
-
 #### Min and max
 
 You can set **min** and **max** values of sliders.
