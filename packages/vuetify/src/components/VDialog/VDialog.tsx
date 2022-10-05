@@ -127,9 +127,9 @@ export const VDialog = genericComponent<new () => {
       >
         {{
           activator: slots.activator,
-          default: () => (
+          default: (...args) => (
             <VDefaultsProvider root>
-              { slots.default?.() }
+              { slots.default?.(...args) }
             </VDefaultsProvider>
           ),
         }}
