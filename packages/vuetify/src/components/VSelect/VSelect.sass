@@ -6,7 +6,7 @@
 
 @at-root
   @include tools.density('v-input', $select-chips-margin-bottom) using ($modifier)
-    --select-chips-margin-bottom: #{0px + $modifier}
+    --select-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 .v-select
   .v-field
