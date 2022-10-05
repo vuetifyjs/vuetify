@@ -4,6 +4,10 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+@at-root
+  @include tools.density('v-input', $autocomplete-chips-margin-bottom) using ($modifier)
+    --autocomplete-chips-margin-bottom: #{0px + math.div($modifier, 2)}
+
 .v-autocomplete
   .v-field
     .v-text-field__prefix,
@@ -62,6 +66,7 @@
   &--chips
     .v-autocomplete__selection
       margin-top: $autocomplete-chips-margin-top
+      margin-bottom: var(--autocomplete-chips-margin-bottom)
 
       &:first-child
         margin-inline-start: 0
