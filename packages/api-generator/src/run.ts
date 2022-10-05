@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { components } from 'vuetify'
+import { components as componentsInfo } from 'vuetify/dist/json/importMap.json'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
@@ -21,8 +22,11 @@ const run = async () => {
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
 
   await mkdirp('./src/tmp')
-  for (const component in components) {
-    await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
+  for (const name in componentsInfo) {
+    await fs.writeFile(`./src/tmp/${name}.d.ts`,
+      template.replaceAll('__component__', name)
+        .replaceAll('__name__', componentsInfo[name].from.replace('.mjs', '.ts'))
+    )
   }
 
   const outPath = '../docs/src/api/data/'

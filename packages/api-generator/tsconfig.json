@@ -5,10 +5,11 @@
     "noUnusedLocals": false,
     "module": "commonjs",
     "noEmitOnError": false,
+    "resolveJsonModule": true,
     "paths": {
       "@/*": [
         "../vuetify/src/*"
       ]
-    },
+    }
   }
 }
