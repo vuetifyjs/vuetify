@@ -223,7 +223,6 @@ export const VAutocomplete = genericComponent<new <
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
-              'v-autocomplete--slection-slot': !!slots.selection,
             },
           ]}
           appendInnerIcon={ props.menuIcon }
