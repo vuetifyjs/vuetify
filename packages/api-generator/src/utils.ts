@@ -1,4 +1,4 @@
-import type { ObjectDefinition } from './types'
+import type { Definition, ObjectDefinition } from './types'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -42,10 +42,10 @@ function getPropDefault (def: any, type: string | string[]) {
 }
 
 type ComponentData = {
-  props?: ObjectDefinition
-  slots?: ObjectDefinition
-  events?: ObjectDefinition
-  exposed?: ObjectDefinition
+  props?: Record<string, Definition>
+  slots?: Record<string, Definition>
+  events?: Record<string, Definition>
+  exposed?: Record<string, Definition>
 }
 
 export function addPropData (
@@ -78,7 +78,7 @@ export function stringifyProps (props: any) {
   )
 }
 
-const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, Record<string, string>> => {
+const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, string | Record<string, string>> => {
   try {
     const data = require(`./locale/${locale}/${componentName}`)
     return Object.assign(fallback, data)
@@ -95,11 +95,11 @@ function getSources (kebabName: string, sources: string[], locale: string) {
   ]
 
   return {
-    find: (section: string, key: string) => {
+    find: (section: string, key?: string) => {
       return arr.reduce<string | null>((str, source) => {
         if (str) return str
-        return source?.[section]?.[key]
-      }, null)
+        return key ? source?.[section]?.[key] : source?.[section]
+      }, null) ?? 'MISSING DESCRIPTION'
     },
   }
 }
@@ -112,9 +112,34 @@ export function addDescriptions (kebabName: string, componentData: ComponentData
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
         (propObj as any).description = (propObj as any).description ?? {}
 
-        const description = descriptions.find(section, propName)
+        ;(propObj as any).description[locale] = descriptions.find(section, propName)
+      }
+    }
+  }
+}
 
-        ;(propObj as any).description[locale] = description ?? 'MISSING DESCRIPTION'
+export function addDirectiveDescriptions (
+  kebabName: string,
+  componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
+  sources: string[],
+  locales: string[]
+) {
+  for (const locale of locales) {
+    const descriptions = getSources(kebabName, sources, locale)
+
+    if (componentData.argument) {
+      for (const [name, arg] of Object.entries(componentData.argument)) {
+        arg.description = arg.description ?? {}
+
+        arg.description[locale] = descriptions.find('argument', name)
+      }
+    }
+
+    if (componentData.modifiers) {
+      for (const [name, modifier] of Object.entries(componentData.modifiers)) {
+        modifier.description = modifier.description ?? {}
+
+        modifier.description[locale] = descriptions.find('modifiers', name)
       }
     }
   }

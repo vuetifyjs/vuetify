@@ -4,7 +4,7 @@ import { components } from 'vuetify'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, stringifyProps } from './utils'
 import * as os from 'os'
 import mkdirp from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -42,31 +42,31 @@ const run = async () => {
   )
 
   // Composables
-  const composables = generateComposableDataFromTypes()
-
-  console.log(JSON.stringify(composables, null, 2))
-
-  for (const composable of composables) {
+  const composables = generateComposableDataFromTypes().map(composable => {
     const kebabName = kebabCase(composable.name)
     const source = kebabName.split('-')[1]
     addDescriptions(composable.name, composable.data, [source], locales)
+    return { kebabName, ...composable }
+  })
 
-    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(composable.data, null, 2))
+  for (const composable of composables) {
+    await fs.writeFile(path.resolve(outPath, `${composable.kebabName}.json`), JSON.stringify(composable.data, null, 2))
   }
 
   // Directives
   const directives = generateDirectiveDataFromTypes().map(directive => {
     const kebabName = kebabCase(directive.name)
-    addDescriptions(directive.name, directive.data, [kebabName], locales)
+    addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
 
     return { kebabName, ...directive }
   })
 
-  for (const directive of directives) {
-    await fs.writeFile(path.resolve(outPath, `${directive.kebabName}.json`), JSON.stringify(directive.data, null, 2))
+  for (const { kebabName, name, ...directive } of directives) {
+    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(directive, null, 2))
   }
 
   rimraf.sync(path.resolve('./dist'))
+  fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
 }

@@ -15,9 +15,8 @@ type ComponentData = {
 type DirectiveData = {
   name: string
   kebabName: string
-  data: {
-    exposed: ObjectDefinition
-  }
+  argument: { value: Definition }
+  modifiers: Record<string, Definition>
 }
 
 export const createWebTypesApi = (componentData: ComponentData[], directiveData: DirectiveData[]) => {
@@ -37,7 +36,8 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         pattern: undefined,
         description: slot.description.en || '',
         'doc-url': getDocUrl(component.kebabName, 'slots'),
-        'vue-properties': slot.properties && Object.keys(slot.properties).map(key => createTypedEntity(key, slot.properties[key].formatted)),
+        'vue-properties': slot.properties &&
+          Object.entries(slot.properties ?? {}).map(([name, prop]) => createTypedEntity(name, (prop as any).formatted)),
       }
     }
 
@@ -88,11 +88,11 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     }
   }
 
-  const createAttribute = directive => {
+  const createAttribute = (directive: DirectiveData) => {
     const createAttributeVueArgument = argument => {
       return {
         pattern: undefined,
-        description: argument.description && argument.description.en ? argument.description.en : '',
+        description: argument.description.en,
         'doc-url': getDocUrl(directive.name, 'argument'),
         required: undefined,
       }
@@ -121,13 +121,14 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       'doc-url': getDocUrl(directive.name),
       default: '',
       required: false,
-      value: createAttributeValue(directive.data.exposed.value),
+      value: createAttributeValue(directive.argument),
       source: {
         module: './src/directives/index.ts',
         symbol: capitalize(directive.name.slice(2)),
       },
-      'vue-argument': directive.data.exposed.value && createAttributeVueArgument(directive.data.exposed.value), // TODO: how to use this in comparison to value?
-      'vue-modifiers': directive.data.exposed.modifiers && Object.entries(directive.data.exposed.modifiers.properties).map(createAttributeVueModifier),
+      'vue-argument': directive.argument?.value && createAttributeVueArgument(directive.argument?.value), // TODO: how to use this in comparison to value?
+      'vue-modifiers': directive.modifiers &&
+        Object.entries(directive.modifiers ?? {}).map(createAttributeVueModifier),
     }
   }
 

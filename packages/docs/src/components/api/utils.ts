@@ -23,13 +23,6 @@ export type Item = {
   allOf?: Item[]
 }
 
-function formatObject (obj: object) {
-  return JSON.stringify(obj, null, 2)
-    .replaceAll('"', '')
-    .replaceAll(/(\w+:\s\w+),/g, $1 => $1)
-    .replaceAll(',', ', ')
-}
-
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
@@ -45,8 +38,6 @@ export function stripLinks (str: string): [string, Record<string, string>] {
 
     matches = regexp.exec(str)
   }
-
-  console.log('strip', out, obj)
 
   return [out, obj]
 }

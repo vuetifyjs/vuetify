@@ -9,7 +9,7 @@
       />
     </div> -->
     <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
-    <template v-if="section === 'props'">
+    <template v-if="['props', 'argument', 'modifiers'].includes(section)">
       <PropsTable :items="items" />
     </template>
     <template v-else-if="section === 'events'">

@@ -1,7 +1,5 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
-import fs from 'fs/promises'
-import path from 'path'
 
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
@@ -28,10 +26,10 @@ export function generateComposableDataFromTypes () {
     return {
       name,
       data: {
-        exposed: (data as FunctionDefinition).returnType,
+        exposed: ((data as FunctionDefinition).returnType as ObjectDefinition).properties,
       },
     }
-  }) as { name: string, data: { exposed: ObjectDefinition } }[]
+  }) as { name: string, data: { exposed: Record<string, Definition> } }[]
 }
 
 export function generateDirectiveDataFromTypes () {
@@ -46,11 +44,10 @@ export function generateDirectiveDataFromTypes () {
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
       name,
-      data: {
-        exposed: data,
-      },
+      argument: { value: (data as ObjectDefinition).properties.value },
+      modifiers: ((data as ObjectDefinition).properties.modifiers as ObjectDefinition).properties,
     }
-  }) as { name: string, data: { exposed: ObjectDefinition } }[]
+  }) as { name: string, argument: { value: Definition }, modifiers: Record<string, Definition> }[]
 }
 
 export async function generateComponentDataFromTypes (component: string) {
@@ -86,12 +83,12 @@ type BaseDefinition = {
   source?: string
   description?: Record<string, string>
   default?: string
+  optional?: boolean
 }
 
 export type ObjectDefinition = {
   type: 'object'
   properties: Record<string, Definition>
-  optional: string[]
 } & BaseDefinition
 
 type BooleanDefinition = {
@@ -291,8 +288,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     source: getSource(declaration),
   } as Definition
 
-  // console.log(definition.text)
-
   if (count(recursed, type.getText()) > 1 || isExternalDeclaration(declaration, definition.text)) {
     definition = definition as RefDefinition
     definition.type = 'ref'
@@ -370,6 +365,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       const parameterType = tc.getTypeOfSymbolAtLocation(parameter, node)
       return {
         name: parameter.getEscapedName(),
+        optional: parameter.isOptional(),
         ...generateDefinition(node, getRecursiveObjectTypes(recursed, parameterType), project, parameterType),
       }
     })
@@ -396,7 +392,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     definition = definition as ObjectDefinition
     definition.type = 'object'
     definition.properties = {}
-    definition.optional = []
 
     for (const property of type.getProperties()) {
       const propertyName = property.getEscapedName()
@@ -404,7 +399,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
       definition.properties[propertyName] = generateDefinition(node, getRecursiveObjectTypes(recursed, propertyType), project, propertyType)
 
-      property.isOptional() && definition.optional.push(propertyName)
+      definition.properties[propertyName].optional = property.isOptional()
     }
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd
@@ -434,7 +429,7 @@ function findPotentialRecursiveObjectTypes (type: Type<ts.Type>) {
 
   if (type.isUnionOrIntersection()) {
     recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
-  } else if (type.getAliasSymbol() || type.isClassOrInterface()) {
+  } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
     recursiveTypes.push(type.getText())
   }
 
@@ -450,7 +445,7 @@ function findPotentialRecursiveArrayTypes (type: Type<ts.Type>) {
     recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
   } else if (type.isArray()) {
     recursiveTypes.push(...findPotentialRecursiveArrayTypes(type.getArrayElementType()))
-  } else if (type.getAliasSymbol() || type.isClassOrInterface()) {
+  } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
     recursiveTypes.push(type.getText())
   }
 

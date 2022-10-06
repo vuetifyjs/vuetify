@@ -71,12 +71,3 @@ type ExtractExposed<T> = T extends (...args: any[]) => infer R
   : never
 
 export type ComponentExposed = ExtractExposed<__component__['$options']['setup']>
-
-// type StrategyProps = {
-//   title: string
-//   strategy: 'foo' | ((props: StrategyProps) => boolean)
-// }
-
-// export type ComponentExposed = {
-//   foo: StrategyProps
-// }

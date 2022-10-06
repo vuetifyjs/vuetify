@@ -85,7 +85,7 @@ function createMdFile (component: string, data: Record<string, any>, locale: str
   str += genApiLinks(component, messages.links)
 
   for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
-    if (Object.keys(data[section]).length) {
+    if (Object.keys(data[section] ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
       str += `<api-section name="${component}" section="${section}" />\n\n`
     }

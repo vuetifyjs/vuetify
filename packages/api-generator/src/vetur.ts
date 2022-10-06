@@ -3,10 +3,10 @@ import { kebabCase } from './helpers/text'
 import type { Definition } from './types'
 
 type ComponentData = {
-  props: Definition
-  slots: Definition
-  events: Definition
-  exposed: Definition
+  props: Record<string, Definition>
+  slots: Record<string, Definition>
+  events: Record<string, Definition>
+  exposed: Record<string, Definition>
   componentName: string
   kebabName: string
 }

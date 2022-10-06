@@ -6,11 +6,11 @@ import { addDescriptions, addPropData } from './utils'
 import mkdirp from 'mkdirp'
 
 export default async (json: string) => {
+  const { componentName, componentProps, locales, outPath } = JSON.parse(json)
+
+  console.log(componentName)
+
   try {
-    const { componentName, componentProps, locales, outPath } = JSON.parse(json)
-
-    console.log(componentName)
-
     const kebabName = kebabCase(componentName)
     const componentData = await generateComponentDataFromTypes(componentName)
 
@@ -24,7 +24,8 @@ export default async (json: string) => {
 
     return { componentName, kebabName, ...componentData }
   } catch (err) {
-    console.error(err)
+    console.error(`${componentName}: ${err}`)
+    throw err
     return null
   }
 }
