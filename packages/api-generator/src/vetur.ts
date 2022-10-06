@@ -1,38 +1,40 @@
+import fs from 'fs'
+import { kebabCase } from './helpers/text'
 import type { Definition } from './types'
 
-export function createVeturApi (componentDefinitions: Definition) {
-  console.log(componentDefinitions)
-  // const components = getComponentsApi(['en'])
+type ComponentData = {
+  props: Definition
+  slots: Definition
+  events: Definition
+  exposed: Definition
+  componentName: string
+  kebabName: string
+}
 
-  // const tags = components.reduce((obj, component) => {
-  //   return {
-  //     ...obj,
-  //     [component.name]: {
-  //       attributes: component.props.map(p => kebabCase(p.name)).sort(),
-  //       description: '',
-  //     },
-  //   }
-  // }, {})
+export function createVeturApi (componentData: ComponentData[]) {
+  const tags = componentData.reduce((obj, component) => {
+    return {
+      ...obj,
+      [component.kebabName]: {
+        attributes: Object.keys(component.props ?? {}).map(name => kebabCase(name)).sort(),
+        description: '',
+      },
+    }
+  }, {})
 
-  // const attributes = components.reduce((obj, component) => {
-  //   const attrs = component.props.reduce((a, prop) => {
-  //     let type = prop.type || ''
+  const attributes = componentData.reduce((obj, component) => {
+    const attrs = Object.entries(component.props ?? {}).reduce((curr, [name, prop]) => {
+      curr[`${component.kebabName}/${kebabCase(name)}`] = {
+        type: prop.formatted,
+        description: prop.description.en || '',
+      }
 
-  //     if (!type) type = ''
-  //     else if (Array.isArray(type)) type = type.map(t => t.toLowerCase()).join('|')
-  //     else type = type.toLowerCase()
+      return curr
+    }, {})
 
-  //     a[`${component.name}/${kebabCase(prop.name)}`] = {
-  //       type,
-  //       description: prop.description.en || '',
-  //     }
+    return { ...obj, ...attrs }
+  }, {})
 
-  //     return a
-  //   }, {})
-
-  //   return { ...obj, ...attrs }
-  // }, {})
-
-  // writeJsonFile(tags, 'dist/tags.json')
-  // writeJsonFile(attributes, 'dist/attributes.json')
+  fs.writeFileSync('dist/tags.json', JSON.stringify(tags, null, 2))
+  fs.writeFileSync('dist/attributes.json', JSON.stringify(attributes, null, 2))
 }

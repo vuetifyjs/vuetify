@@ -21,7 +21,10 @@ export default async (json: string) => {
     await mkdirp(outPath)
 
     await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(componentData, null, 2))
+
+    return { componentName, kebabName, ...componentData }
   } catch (err) {
     console.error(err)
+    return null
   }
 }

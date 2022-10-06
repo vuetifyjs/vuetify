@@ -75,7 +75,7 @@
           if (!api[props.section]) {
             throw new Error(`API section "${props.section}" for "${props.name}" does not exist`)
           }
-          const section = (api[props.section]?.properties ?? {}) as Record<string, Item>
+          const section = (api[props.section] ?? {}) as Record<string, Item>
           items.value = Object.entries(section).reduce<any>((arr, [name, prop]) => {
             arr.push({
               ...prop,

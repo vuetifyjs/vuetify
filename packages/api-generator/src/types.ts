@@ -60,10 +60,10 @@ export async function generateComponentDataFromTypes (component: string) {
 
   const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
 
-  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
-  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
-  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
-  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
+  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps')) as ObjectDefinition
+  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents')) as ObjectDefinition
+  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots')) as ObjectDefinition
+  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed')) as ObjectDefinition
 
   const sections = [props, events, slots, exposed]
 
@@ -73,10 +73,10 @@ export async function generateComponentDataFromTypes (component: string) {
   })
 
   return {
-    props,
-    events,
-    slots,
-    exposed,
+    props: props.properties,
+    events: events.properties,
+    slots: slots.properties,
+    exposed: exposed.properties,
   }
 }
 

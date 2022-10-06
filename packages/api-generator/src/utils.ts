@@ -54,10 +54,10 @@ export function addPropData (
   componentProps: any
 ) {
   const sources = new Set<string>()
-  for (const [propName, propObj] of Object.entries(componentData.props?.properties ?? {})) {
+  for (const [propName, propObj] of Object.entries(componentData.props ?? {})) {
     const instancePropObj = componentProps[propName]
 
-    propObj.default = instancePropObj?.default
+    ;(propObj as any).default = instancePropObj?.default
 
     sources.add(instancePropObj?.source ?? kebabName)
   }
@@ -109,12 +109,12 @@ export function addDescriptions (kebabName: string, componentData: ComponentData
     const descriptions = getSources(kebabName, sources, locale)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
-      for (const [propName, propObj] of Object.entries(componentData[section]?.properties ?? {})) {
-        propObj.description = propObj.description ?? {}
+      for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
+        (propObj as any).description = (propObj as any).description ?? {}
 
         const description = descriptions.find(section, propName)
 
-        propObj.description[locale] = description ?? 'MISSING DESCRIPTION'
+        ;(propObj as any).description[locale] = description ?? 'MISSING DESCRIPTION'
       }
     }
   }
