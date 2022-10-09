@@ -5,7 +5,7 @@
     height="200px"
     tile
   >
-    <v-toolbar dense>
+    <v-toolbar density="compact">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>Title</v-toolbar-title>
