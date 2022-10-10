@@ -87,10 +87,6 @@ pnpm create vite my-vue-app -- --template vue
 </v-window>
 
 ----
-Vite does provide built-in support for .scss, .sass, .less, .styl and .stylus files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed. Vuetify needs sass as a preprocessor so install it:
-```bash
-npm install -D sass
-```
 
 Once your project is created, navigate to the [Adding Vuetify](#adding-vuetify) section to continue.
 
