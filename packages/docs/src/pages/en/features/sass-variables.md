@@ -13,11 +13,15 @@ related:
 
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
+<entry />
+
 ## installation 
+
 When you do not use SASS/SCSS or vuetify's variables yourself, you don't have to install it. 
 Vuetify works out of the box. But when you do when you want to change SASS/SCSS variables or use it yourself.
 
 ### vite
+
 Vite does provide built-in support for .scss, .sass, .less, .styl and .stylus files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed. Vuetify needs sass as a preprocessor so install it:
 ```bash
 npm install -D sass
@@ -25,13 +29,13 @@ npm install -D sass
 for more information: https://vitejs.dev/guide/features.html#css-pre-processors
 
 ### vue-cli
+
 You can select pre-processors (Sass/Less/Stylus) when creating the project. If you did not do so, the internal webpack config is still pre-configured to handle all of them. You just need to manually install the corresponding webpack loaders:
 ```bash
 npm install -D sass-loader sass
 ```
 for more information: https://cli.vuejs.org/guide/css.html#pre-processors
 
-<entry />
 
 ## Basic usage
 
