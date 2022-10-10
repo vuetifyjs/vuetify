@@ -6,7 +6,7 @@
     :name="name"
   >
     <div class="text-center">
-      <v-chip v-bind="props">
+      <v-chip v-bind="props" v-model="chipModel">
         Chip
       </v-chip>
     </div>
@@ -14,6 +14,13 @@
     <template v-slot:configuration>
       <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
       <v-checkbox v-model="append" label="Append icon"></v-checkbox>
+      <v-checkbox v-model="closable" label="Closable">
+        <template v-slot:append>
+          <v-fade-transition>
+            <v-btn v-if="!chipModel" variant="plain" @click="chipModel = true">Reset</v-btn>
+          </v-fade-transition>
+        </template>
+      </v-checkbox>
     </template>
   </usage-example>
 </template>
@@ -35,12 +42,15 @@
   const props = computed(() => {
     return {
       block: block.value || undefined,
+      closable: closable.value || undefined,
       stacked: stacked.value || undefined,
       'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
       'append-icon': append.value ? 'mdi-vuetify' : undefined,
       variant: variants.includes(model.value) ? model.value : undefined,
     }
   })
+
+  const chipModel = ref(true)
 
   watch(stacked, val => val && (prepend.value = true))
 
