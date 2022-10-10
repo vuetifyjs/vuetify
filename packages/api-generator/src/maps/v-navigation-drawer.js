@@ -31,6 +31,10 @@ module.exports = {
         name: 'update:mini-variant',
         value: 'boolean',
       },
+      {
+        name: 'closed',
+        value: 'undefined',
+      },
     ],
   },
 }

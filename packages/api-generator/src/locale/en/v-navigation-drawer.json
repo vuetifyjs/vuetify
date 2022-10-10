@@ -25,6 +25,7 @@
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",
-    "update:mini-variant": "The `mini-variant.sync` event"
+    "update:mini-variant": "The `mini-variant.sync` event",
+    "closed": "Emitted event when the drawer is closed"
   }
 }
