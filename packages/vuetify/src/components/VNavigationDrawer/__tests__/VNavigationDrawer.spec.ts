@@ -536,4 +536,19 @@ describe('VNavigationDrawer', () => { // eslint-disable-line max-statements
 
     expect(wrapper3.vm.tag).toBe('div')
   })
+
+  it('should emit `close` when drawer are closed', async () => {
+    const wrapper = mountFunction()
+    wrapper.vm.isActive = true
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().closed).toBeFalsy()
+
+    wrapper.vm.isActive = false
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.emitted().closed).toBeTruthy()
+  })
 })
