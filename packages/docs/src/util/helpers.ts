@@ -142,6 +142,6 @@ export function propsToString (props: Record<string, any>, indent = 1) {
   if (!shouldWrap) {
     return !propsString ? '' : ' ' + propsString
   } else {
-    return '\n' + displayedProps.map(v => '  '.repeat(indent) + v).join('\n') + '\n'
+    return '\n' + displayedProps.map(v => '  '.repeat(indent) + v).join('\n') + '\n' + '  '.repeat(indent - 1)
   }
 }
