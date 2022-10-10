@@ -40,6 +40,7 @@
 
     if (active.value) {
       props['model-value'] = true
+      props['onUpdate:model-value'] = true
     }
 
     return props
