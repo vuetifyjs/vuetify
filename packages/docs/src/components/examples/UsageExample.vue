@@ -129,7 +129,7 @@
   import { useDisplay } from 'vuetify'
 
   // Utilities
-  import { computed, ref, useSlots } from 'vue'
+  import { computed, ref } from 'vue'
 
   const props = defineProps({
     name: String,
@@ -144,12 +144,13 @@
       required: true,
     },
   })
-
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
+
   const display = useDisplay()
+
   const tune = ref(true)
   const show = ref(true)
-  const slots = useSlots()
+
   const model = computed({
     get () {
       return props.modelValue

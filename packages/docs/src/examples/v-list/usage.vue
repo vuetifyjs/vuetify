@@ -97,6 +97,6 @@
       avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
     },
   ]
-<\/script>`
+<\/script>` // eslint-disable-line no-useless-escape
   })
 </script>
