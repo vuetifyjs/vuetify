@@ -78,7 +78,7 @@
     methods: {
       async init () {
         this.getPages()
-        this.$load(['https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css'])
+        this.$load(['https://unpkg.com/@mdi/font@6.5.95/css/materialdesignicons.min.css'])
       },
       async getPages () {
         const locale = localeLookup(this.locale)

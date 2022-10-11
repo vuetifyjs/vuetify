@@ -74,6 +74,7 @@ export default baseMixins.extend<options>().extend({
       }
     },
     computedColor (): string | undefined {
+      if (this.isDisabled) return undefined
       return Selectable.options.computed.computedColor.call(this)
     },
     computedIcon (): string {

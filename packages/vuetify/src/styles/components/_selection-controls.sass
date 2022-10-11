@@ -109,6 +109,9 @@
     .v-icon
       color: inherit
 
+  &.v-input--is-disabled:not(.v-input--is-readonly)
+    pointer-events: none
+
 .v-input--selection-controls__input:hover
   .v-input--selection-controls__ripple:before
     background: currentColor

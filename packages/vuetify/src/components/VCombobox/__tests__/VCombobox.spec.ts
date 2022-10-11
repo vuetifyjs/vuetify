@@ -298,7 +298,7 @@ describe('VCombobox.ts', () => {
     expect(wrapper.vm.internalValue).toBe('')
 
     wrapper.vm.setValue(null)
-    expect(wrapper.vm.internalValue).toBeUndefined()
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.vm.setValue(undefined)
     expect(wrapper.vm.internalValue).toBeUndefined()
@@ -306,7 +306,7 @@ describe('VCombobox.ts', () => {
     wrapper.setData({ lazySearch: 'foo' })
 
     wrapper.vm.setValue(null)
-    expect(wrapper.vm.internalValue).toBe('foo')
+    expect(wrapper.vm.internalValue).toBeNull()
 
     wrapper.vm.setValue(undefined)
     expect(wrapper.vm.internalValue).toBe('foo')
