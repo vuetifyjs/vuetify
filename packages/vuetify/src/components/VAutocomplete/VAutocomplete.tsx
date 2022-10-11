@@ -298,7 +298,7 @@ export const VAutocomplete = genericComponent<new <
                   }
 
                   return (
-                    <div key={ index } class="v-autocomplete__selection">
+                    <div key={ item.value } class="v-autocomplete__selection">
                       { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
