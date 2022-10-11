@@ -20,7 +20,7 @@ The `v-tooltip` component is useful for conveying information when a user hovers
 
 Tooltips can wrap any element.
 
-<example file="v-tooltip/usage" />
+<usage name="v-tooltip" />
 
 ## API
 

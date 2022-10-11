@@ -2,63 +2,84 @@
   <div>
     <v-toolbar
       border="b"
-      class="ps-2 pe-2"
+      color="surface"
       density="compact"
       flat
     >
-      <v-btn-toggle
+      <v-slide-group
         v-model="model"
-        class="py-2"
+        class="flex-grow-1"
         mandatory
-        color="primary"
+        show-arrows
       >
-        <v-btn value="default" rounded="tl">Default</v-btn>
+        <v-slide-group-item value="default">
+          <template #default="{ isSelected, toggle }">
+            <v-btn
+              :active="isSelected"
+              height="56"
+              @click="toggle"
+            >
+              Default
+            </v-btn>
+          </template>
+        </v-slide-group-item>
 
-        <v-btn
+        <v-slide-group-item
           v-for="(option, i) in options"
           :key="i"
           :value="option"
         >
-          {{ option }}
-        </v-btn>
-      </v-btn-toggle>
+          <template #default="{ isSelected, toggle }">
+            <v-btn
+              :active="isSelected"
+              height="56"
+              @click="toggle"
+            >
+              {{ option }}
+            </v-btn>
+          </template>
+        </v-slide-group-item>
+      </v-slide-group>
 
-      <v-spacer />
+      <v-responsive
+        v-if="$slots.configuration && display.mdAndUp.value"
+        class="border-s align-center bg-surface"
+        height="48"
+        width="100%"
+        max-width="250"
+      >
+        <div class="d-flex align-center justify-space-between">
+          <div class="ml-4">
+            <app-headline
+              v-show="tune"
+              path="options"
+            />
+          </div>
 
-      <v-tooltip location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            icon="mdi-code-tags"
-            class="mr-1 text-medium-emphasis"
-            density="comfortable"
-            v-bind="props"
-            @click="code = !code"
-          />
-        </template>
+          <div>
+            <v-tooltip location="bottom">
+              <template #activator="{ props: activatorProps }">
+                <v-btn
+                  :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
+                  class="mr-1 text-medium-emphasis"
+                  density="comfortable"
+                  v-bind="activatorProps"
+                  @click="show = !show"
+                />
+              </template>
 
-        <span>Show code</span>
-      </v-tooltip>
-
-      <v-tooltip location="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            icon="mdi-tune"
-            class="mr-1 text-medium-emphasis"
-            density="comfortable"
-            v-bind="props"
-            @click="tune = !tune"
-          />
-        </template>
-
-        <span>Configure more options</span>
-      </v-tooltip>
+              <span>{{ show ? 'Hide code' : 'Show code' }}</span>
+            </v-tooltip>
+          </div>
+        </div>
+      </v-responsive>
     </v-toolbar>
 
     <v-layout>
       <v-main>
         <v-sheet
           class="pa-14 d-flex align-center"
-          min-height="250"
+          min-height="300"
           rounded="0"
         >
           <div class="flex-fill">
@@ -68,84 +89,80 @@
       </v-main>
 
       <v-navigation-drawer
-        :model-value="tune"
+        v-if="display.smAndUp.value && $slots.configuration"
+        v-model="tune"
         permanent
         name="tune"
         location="right"
-        width="200"
+        width="250"
       >
         <v-list>
-          <v-list-subheader>Configuration</v-list-subheader>
-
-          <v-list-item title="Coming soon" />
+          <div class="px-4 usage-example pt-2">
+            <v-defaults-provider
+              :defaults="{
+                global: {
+                  density: 'compact',
+                  hideDetails: true,
+                  step: 1,
+                }
+              }"
+            >
+              <slot name="configuration" />
+            </v-defaults-provider>
+          </div>
         </v-list>
       </v-navigation-drawer>
     </v-layout>
 
     <v-expand-transition>
-      <div v-if="code">
+      <div v-if="show && display.mdAndUp.value">
         <div class="pa-3">
-          <app-markup :code="formatAttributes" />
+          <app-markup :code="code" />
         </div>
       </div>
     </v-expand-transition>
   </div>
 </template>
 
-<script>
+<script setup>
+  // Composables
+  import { useDisplay } from 'vuetify'
+
   // Utilities
   import { computed, ref } from 'vue'
 
-  export default {
-    name: 'UsageExample',
-
-    props: {
-      name: String,
-      options: {
-        type: Array,
-        default: () => ([]),
-      },
-      modelValue: {
-        type: String,
-        required: true,
-      },
+  const props = defineProps({
+    name: String,
+    code: String,
+    options: {
+      type: Array,
+      default: () => ([]),
     },
-
-    emits: {
-      'update:modelValue': val => val,
+    modelValue: {
+      type: [Array, String],
+      default: () => ([]),
+      required: true,
     },
+  })
+  const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
-    setup (props, { emit }) {
-      const tune = ref(false)
-      const code = ref(false)
-      const model = computed({
-        get () {
-          return props.modelValue
-        },
-        set (val) {
-          emit('update:modelValue', val)
-        },
-      })
+  const display = useDisplay()
 
-      const formatAttributes = computed(() => {
-        let attributeArray = []
-        if (props.options.includes(model.value)) {
-          attributeArray.push(model.value)
-        }
+  const tune = ref(true)
+  const show = ref(true)
 
-        attributeArray = attributeArray.sort()
-        const indent = attributeArray.length ? '\r  ' : ''
-        const tail = `${attributeArray.length ? '\r' : ''}></${props.name}>`
-
-        return `<${props.name}${indent}${attributeArray.join('\r  ')}${tail}`
-      })
-
-      return {
-        formatAttributes,
-        model,
-        tune,
-        code,
-      }
+  const model = computed({
+    get () {
+      return props.modelValue
     },
-  }
+    set (val) {
+      emit('update:modelValue', val)
+    },
+  })
 </script>
+
+<style lang="sass">
+  .usage-example
+    .v-text-field
+      margin-bottom: 8px
+</style>

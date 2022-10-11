@@ -22,7 +22,7 @@ The `v-checkbox` component provides users the ability to choose between two dist
 
 A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
-<example file="v-checkbox/usage" />
+<usage name="v-checkbox" />
 
 <entry />
 

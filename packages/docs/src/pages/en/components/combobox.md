@@ -20,7 +20,7 @@ The `v-combobox` component is a [v-text-field](/components/text-fields) that all
 
 With Combobox, you can allow a user to create new values that may not be present in a provided items list.
 
-<!-- <usage name="v-combobox" /> -->
+<usage name="v-combobox" />
 
 ## API
 

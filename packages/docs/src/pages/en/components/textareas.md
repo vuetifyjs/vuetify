@@ -20,7 +20,7 @@ Textarea components are used for collecting large amounts of textual data.
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
-<example file="v-textarea/usage" />
+<usage name="v-textarea" />
 
 ## API
 
