@@ -185,8 +185,12 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
   const themes: Record<string, InternalThemeDefinition> = {}
+  const defaultThemeKey = options.defaultTheme ?? defaultThemeOptions.defaultTheme ?? 'light'
+
   for (const [key, theme] of Object.entries(options.themes ?? {})) {
-    const defaultTheme = theme.dark
+    const isDark = theme.dark ?? defaultThemeOptions?.themes?.[defaultThemeKey]?.dark ?? false
+
+    const defaultTheme = isDark
       ? defaultThemeOptions.themes?.dark
       : defaultThemeOptions.themes?.light
     themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition
@@ -217,6 +221,9 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       if (parsedOptions.variations) {
         for (const name of parsedOptions.variations.colors) {
           const color = theme.colors[name]
+
+          if (!color) continue
+
           for (const variation of (['lighten', 'darken'] as const)) {
             const fn = variation === 'lighten' ? lighten : darken
             for (const amount of createRange(parsedOptions.variations[variation], 1)) {

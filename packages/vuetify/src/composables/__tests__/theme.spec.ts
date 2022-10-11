@@ -109,6 +109,40 @@ describe('createTheme', () => {
     expect(styleElement?.getAttribute('nonce')).toBeNull()
   })
 
+  it('should merge custom theme based upon the supplied dark property', async () => {
+    for (const dark of [true, false, undefined]) {
+      const theme = createTheme({
+        defaultTheme: 'myTheme',
+        themes: { myTheme: { dark } },
+      })
+
+      theme.install(app)
+
+      expect(theme.computedThemes.value.myTheme.dark).toBe(dark)
+      expect(theme.computedThemes.value.myTheme.colors).toHaveProperty('primary')
+    }
+  })
+
+  it('should generate variations for custom color keys', async () => {
+    const theme = createTheme({
+      themes: {
+        light: {
+          colors: { color2: '#1697f6' },
+        },
+      },
+      variations: {
+        colors: ['color2'],
+        lighten: 1,
+        darken: 1,
+      },
+    })
+
+    theme.install(app)
+
+    expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-darken-1')
+    expect(theme.computedThemes.value.light.colors).toHaveProperty('color2-lighten-1')
+  })
+
   // it('should use vue-meta@2.3 functionality', () => {
   //   const theme = createTheme()
   //   const set = jest.fn()
