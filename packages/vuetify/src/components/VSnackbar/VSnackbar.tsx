@@ -104,7 +104,6 @@ export const VSnackbar = genericComponent<new () => {
           },
           positionClasses.value,
         ]}
-        style={[colorStyles.value]}
         contentProps={{
           style: locationStyles.value,
         }}
@@ -124,6 +123,7 @@ export const VSnackbar = genericComponent<new () => {
             roundedClasses.value,
             variantClasses.value,
           ]}
+          style={[colorStyles.value]}
           onPointerenter={ onPointerenter }
           onPointerleave={ startTimeout }
         >

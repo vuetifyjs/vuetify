@@ -142,8 +142,9 @@ export default defineConfig(({ command, mode }) => {
         },
         manifest: {
           name: 'Vuetify',
+          description: 'Vuetify UI Library Documentation',
           short_name: 'Vuetify',
-          theme_color: '#094A7F',
+          theme_color: '#1867C0',
           icons: [
             {
               src: 'img/icons/android-chrome-192x192.png',

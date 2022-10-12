@@ -22,6 +22,8 @@ The `v-breadcrumbs` component is a navigational helper for pages. It can accept 
 
 By default, breadcrumbs use a text divider. This can be any string.
 
+<usage name="v-breadcrumbs" />
+
 <entry />
 
 ## API
