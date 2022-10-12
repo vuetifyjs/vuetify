@@ -1,8 +1,10 @@
-// Utilities
+// Composables
 import { useAdsStore } from '@/store/ads'
-import { kebabCase } from 'lodash-es'
-import { computed } from 'vue'
 import { useI18n } from 'vue-i18n'
+
+// Utilities
+import { computed } from 'vue'
+import { kebabCase } from 'lodash-es'
 
 export const createAdProps = () => ({
   medium: {

@@ -1,7 +1,11 @@
+// Composables
+import { useCosmic } from '@/composables/cosmic'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
-import { useCosmic } from '../composables/cosmic'
 
+// Types
 type Ad = {
   slug: string
   title: string

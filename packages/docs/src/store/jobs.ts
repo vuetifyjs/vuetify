@@ -1,4 +1,4 @@
-// Imports
+// Utilities
 import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 

@@ -1,4 +1,7 @@
+// Imports
 import { createPinia } from 'pinia'
+
+// Types
 import type { PiniaPlugin } from '@/types'
 
 export const pinia = createPinia()

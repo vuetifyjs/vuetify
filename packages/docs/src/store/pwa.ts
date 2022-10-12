@@ -1,6 +1,9 @@
+// Stores
+import { useUserStore } from './user'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
-import { useUserStore } from './user'
 
 export const usePwaStore = defineStore('pwa', () => {
   const user = useUserStore()

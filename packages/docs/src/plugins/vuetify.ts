@@ -1,13 +1,19 @@
+// Styles
 import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
+
+// Imports
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+
+// Icons
 import { fa } from 'vuetify/iconsets/fa'
-import { mdi } from 'vuetify/iconsets/mdi'
 import { md } from 'vuetify/iconsets/md'
+import { mdi } from 'vuetify/iconsets/mdi'
 import { mdi as mdiSvg } from 'vuetify/iconsets/mdi-svg'
 
+// Types
 import type { VuetifyPlugin } from '@/types'
 
 export const useVuetify: VuetifyPlugin = ({ app }) => {

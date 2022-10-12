@@ -1,4 +1,5 @@
 /* eslint-disable camelcase */
+// Imports
 import Cosmic from 'cosmicjs'
 
 export const useCosmic = () => {

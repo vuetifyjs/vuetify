@@ -1,7 +1,11 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+// Composables
 import { useCosmic } from '@/composables/cosmic'
 
+// Utilities
+import { defineStore } from 'pinia'
+import { computed, ref } from 'vue'
+
+// Types
 interface Sponsor {
   metadata: {
     tier: number

@@ -1,6 +1,9 @@
-import type { PwaPlugin } from '@/types'
+// Stores
 import { usePwaStore } from '@/store/pwa'
 import { useUserStore } from '@/store/user'
+
+// Types
+import type { PwaPlugin } from '@/types'
 
 export const usePwa: PwaPlugin = async ({ isClient, router }) => {
   if (!isClient) return
