@@ -35,15 +35,14 @@ export const VCheckboxBtn = defineComponent({
     'update:indeterminate': (val: boolean) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
+    const model = useProxiedModel(props, 'modelValue')
 
     function onChange (v: any) {
       if (indeterminate.value) {
         indeterminate.value = false
       }
-
-      emit('update:modelValue', v)
     }
 
     const falseIcon = computed(() => {
@@ -61,6 +60,7 @@ export const VCheckboxBtn = defineComponent({
     useRender(() => (
       <VSelectionControl
         { ...props }
+        v-model={ model.value }
         class="v-checkbox-btn"
         type="checkbox"
         inline

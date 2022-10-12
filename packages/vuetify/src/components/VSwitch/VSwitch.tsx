@@ -33,11 +33,13 @@ export const VSwitch = defineComponent({
   },
 
   emits: {
+    'update:modelValue': () => true,
     'update:indeterminate': (val: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
     const indeterminate = useProxiedModel(props, 'indeterminate')
+    const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
 
     const loaderColor = computed(() => {
@@ -88,6 +90,7 @@ export const VSwitch = defineComponent({
               <VSelectionControl
                 ref={ control }
                 { ...controlProps }
+                v-model={ model.value }
                 id={ id.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
