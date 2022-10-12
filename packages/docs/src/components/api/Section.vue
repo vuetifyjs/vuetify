@@ -21,14 +21,9 @@
     <template v-else-if="section === 'exposed'">
       <ExposedTable :items="items" />
     </template>
-    <!-- <template v-else>
-      <api-table
-        :api-data="apiData"
-        class="mb-4"
-        :field="section"
-        :filter="filter"
-      />
-    </template> -->
+    <template v-else-if="section === 'sass'">
+      <SassTable :items="items" />
+    </template>
   </div>
 </template>
 
@@ -39,6 +34,7 @@
   import ExposedTable from './ExposedTable.vue'
   import EventsTable from './EventsTable.vue'
   import SlotsTable from './SlotsTable.vue'
+  import SassTable from './SassTable.vue'
   import { Item } from './utils'
 
   const getApi = (name: string) => {
@@ -52,6 +48,7 @@
       ExposedTable,
       EventsTable,
       SlotsTable,
+      SassTable,
     },
     props: {
       name: {
@@ -80,7 +77,7 @@
             arr.push({
               ...prop,
               name,
-              description: prop.description[store.locale],
+              description: prop.description?.[store.locale],
             })
             return arr
           }, []).sort((a: any, b: any) => a.name.localeCompare(b.name))

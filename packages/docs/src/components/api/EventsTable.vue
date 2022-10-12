@@ -3,7 +3,7 @@
     <v-table
       class="api-table"
     >
-      <!-- <thead>
+      <thead>
         <tr>
           <th
             v-for="header in headers"
@@ -16,7 +16,7 @@
             />
           </th>
         </tr>
-      </thead> -->
+      </thead>
       <tbody>
         <template v-for="item in items" :key="item.name">
           <tr class="bg-grey-lighten-4">
@@ -24,7 +24,7 @@
               <NameCell section="exposed" :name="item.name" />
             </td>
             <td>
-              <TypescriptCell :code="getType(item)" />
+              <PrismCell :code="getType(item)" />
             </td>
           </tr>
           <tr>
@@ -43,12 +43,12 @@
   import { defineComponent, PropType } from 'vue'
   import { getType } from './utils'
   import NameCell from './NameCell.vue'
-  import TypescriptCell from './TypescriptCell.vue'
+  import PrismCell from './PrismCell.vue'
 
   export default defineComponent({
     components: {
       NameCell,
-      TypescriptCell,
+      PrismCell,
     },
     props: {
       items: {
@@ -57,7 +57,7 @@
       },
     },
     setup (props) {
-      const headers = ['name', 'type', 'description']
+      const headers = ['name', 'type']
 
       return {
         headers,

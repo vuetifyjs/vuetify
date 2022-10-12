@@ -3,7 +3,7 @@
     <v-table
       class="api-table"
     >
-      <!-- <thead>
+      <thead>
         <tr>
           <th
             v-for="header in headers"
@@ -16,7 +16,7 @@
             />
           </th>
         </tr>
-      </thead> -->
+      </thead>
       <tbody>
         <template v-for="item in items" :key="item.name">
           <tr class="bg-grey-lighten-4">
@@ -24,10 +24,10 @@
               <NameCell section="props" :name="kebabCase(item.name)" />
             </td>
             <td>
-              <TypescriptCell :code="getType(item)" />
+              <PrismCell :code="getType(item)" />
             </td>
             <td>
-              <TypescriptCell :code="item.default" />
+              <PrismCell :code="item.default" />
             </td>
           </tr>
           <tr>
@@ -45,13 +45,13 @@
   // Imports
   import { defineComponent, PropType } from 'vue'
   import { getType } from './utils'
-  import TypescriptCell from './TypescriptCell.vue'
+  import PrismCell from './PrismCell.vue'
   import NameCell from './NameCell.vue'
   import { kebabCase } from 'lodash'
 
   export default defineComponent({
     components: {
-      TypescriptCell,
+      PrismCell,
       NameCell,
     },
     props: {
@@ -61,7 +61,7 @@
       },
     },
     setup (props) {
-      const headers = ['name', 'type', 'default', 'description']
+      const headers = ['name', 'type', 'default']
 
       return {
         headers,
