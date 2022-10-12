@@ -22,7 +22,7 @@
   </app-tooltip-btn>
 </template>
 
-<script lang="ts">
+<script setup>
   // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
@@ -31,39 +31,27 @@
   import { useRoute, useRouter } from 'vue-router'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
-  export default defineComponent({
-    name: 'JobsLink',
+  const { currentRoute } = useRouter()
+  const { event } = useGtag()
+  const { name } = useRoute()
+  const newJobs = []
 
-    components: { AppTooltipBtn },
-
-    setup () {
-      const { currentRoute } = useRouter()
-      const { event } = useGtag()
-      const { name } = useRoute()
-
-      const icon = computed(() => {
-        return currentRoute.value.path.match('resources/jobs-for-vue')
-          ? 'mdi-briefcase-variant'
-          : 'mdi-briefcase-variant-outline'
-      })
-
-      return {
-        icon,
-        onClick () {
-          event('click', {
-            event_category: 'app-bar',
-            event_label: 'jobs',
-            value: name,
-          })
-        },
-        newJobs: [],
-        rpath,
-      }
-    },
+  const icon = computed(() => {
+    return currentRoute.value.path.match('resources/jobs-for-vue')
+      ? 'mdi-briefcase-variant'
+      : 'mdi-briefcase-variant-outline'
   })
+
+  function onClick () {
+    event('click', {
+      event_category: 'app-bar',
+      event_label: 'jobs',
+      value: name,
+    })
+  }
 </script>
 
 <style lang="sass">

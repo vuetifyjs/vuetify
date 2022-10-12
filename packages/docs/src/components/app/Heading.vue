@@ -3,16 +3,16 @@
     :is="component"
     :class="classes"
   >
-    <a
+    <router-link
       v-if="href"
-      :href="href"
+      :to="href"
       class="text-decoration-none text-right text-md-left"
       style="user-select: none"
       aria-hidden="true"
       @click="onClick"
     >
       #
-    </a>
+    </router-link>
 
     <slot>
       {{ content }}
@@ -20,10 +20,9 @@
   </component>
 </template>
 
-<script>
+<script setup>
   // Utilities
-  import { computed, defineComponent } from 'vue'
-  import { useRoute, useRouter } from 'vue-router'
+  import { computed } from 'vue'
 
   const HEADING_CLASSES = {
     1: 'text-h3 text-sm-h3 mb-4',
@@ -33,37 +32,14 @@
     5: 'text-subtitle-1 font-weight-medium mb-2',
   }
 
-  export default defineComponent({
-    name: 'Heading',
-
-    props: {
-      content: String,
-      href: String,
-      level: String,
-    },
-
-    setup (props) {
-      const router = useRouter()
-      const route = useRoute()
-
-      function onClick (e) {
-        e.preventDefault()
-
-        const hash = props.href
-
-        if (route.hash === hash) return
-
-        router.push({ hash })
-        document.querySelector(hash)?.scrollIntoView({ behavior: 'smooth' })
-        // this.$vuetify.goTo(hash)
-      }
-
-      const component = computed(() => `h${props.level}`)
-      const classes = computed(() => ['v-heading', HEADING_CLASSES[props.level]])
-
-      return { component, classes, onClick }
-    },
+  const props = defineProps({
+    content: String,
+    href: String,
+    level: String,
   })
+
+  const component = computed(() => `h${props.level}`)
+  const classes = computed(() => ['v-heading', HEADING_CLASSES[props.level]])
 </script>
 
 <style lang="sass">

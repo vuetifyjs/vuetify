@@ -13,7 +13,7 @@
         variant="flat"
       >
         <v-list-item
-          :prepend-avatar="job.avatar"
+          :prepend-avatar="typeof job.avatar === 'string' ? job.avatar : undefined"
           :title="job.title"
           class="mt-2"
         >
@@ -30,7 +30,7 @@
           <template #append>
             <v-btn
               color="success"
-              class="ml-auto"
+              class="ml-6"
               size="small"
               variant="flat"
             >

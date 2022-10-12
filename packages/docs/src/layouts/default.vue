@@ -50,5 +50,4 @@
   onBeforeMount(() => {
     app.drawer = null
   })
-
 </script>

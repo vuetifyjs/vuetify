@@ -8,9 +8,8 @@
   </app-btn>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
   // Components
-  import AppMenu from '@/components/app/menu/Menu.vue'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
 
   // Composables

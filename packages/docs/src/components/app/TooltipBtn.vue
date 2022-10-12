@@ -17,6 +17,7 @@
       />
 
       <v-tooltip
+        v-if="path"
         activator="parent"
         class="v-app-tooltip-btn__content"
         location="bottom"
@@ -28,33 +29,30 @@
   </span>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
 
-  // Utilities
-  import { defineComponent } from 'vue'
+  // Types
+  import type { PropType } from 'vue'
+  import type { VBtn } from 'vuetify/components'
 
-  export default defineComponent({
-    name: 'AppTooltipBtn',
-
-    inheritAttrs: false,
-
-    props: {
-      icon: String,
-      path: String,
-      variant: {
-        type: String,
-        default: 'text',
-      },
-    },
-
-    setup () {
-      const { t } = useI18n()
-
-      return { t }
+  defineProps({
+    icon: String,
+    path: String,
+    variant: {
+      type: String as PropType<VBtn['$props']['variant']>,
+      default: 'text',
     },
   })
+
+  const { t } = useI18n()
+</script>
+
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
+  }
 </script>
 
 <style lang="sass">

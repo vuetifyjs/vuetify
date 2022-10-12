@@ -12,7 +12,7 @@
       >
         <template #icon>
           <v-badge
-            :value="unread.length"
+            :model-value="unread.length > 0"
             color="#ED561B"
             dot
             location="top end"
@@ -41,18 +41,6 @@
       >
         {{ showArchived ? t('unread', { number: unread.length }) : t('read', { number: read.length }) }}
       </v-btn>
-
-      <v-spacer />
-
-      <app-tooltip-btn
-        v-if="marked"
-        :disabled="done"
-        :icon="marked.icon"
-        :path="`marked-${marked.path}`"
-        color="medium-emphasis"
-        size="small"
-        @click="toggleAll"
-      />
     </v-toolbar>
 
     <v-divider />
@@ -130,18 +118,24 @@
   </app-menu>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-  import { useCosmic } from '@/composables/cosmic'
-  import { formatDate } from '@/util/date.js'
+<script setup lang="ts">
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-  import AppMenu from '@/components/app/menu/Menu.vue'
 
+  // Composables
+  import { useCosmic } from '@/composables/cosmic'
+  import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { computed, onMounted, ref } from 'vue'
+
+  // Types
   type Notification = {
     metadata: {
+      action: string
+      action_text: string
       emoji: string
       text: string
     }
@@ -151,92 +145,53 @@
     title: string
   }
 
-  export default defineComponent({
-    name: 'NotificationsMenu',
+  const { t } = useI18n()
+  const { bucket } = useCosmic()
+  const { mobile } = useDisplay()
+  const user = useUserStore()
+  const menu = ref(false)
+  const all = ref<Notification[]>([])
+  const showArchived = ref(false)
 
-    components: { AppTooltipBtn, AppMenu },
-
-    setup () {
-      const { t } = useI18n()
-      const { bucket } = useCosmic()
-      const { mobile } = useDisplay()
-      const user = useUserStore()
-      const menu = ref(false)
-      const all = ref<Notification[]>([])
-      const showArchived = ref(false)
-
-      const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
-      const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
-      const notifications = computed(() => showArchived.value ? read.value : unread.value)
-      const done = computed(() => {
-        return (
-          showArchived.value && read.value.length < 1
-        ) || (
-          !showArchived.value && unread.value.length < 1
-        )
-      })
-
-      const marked = computed(() => {
-        const path = showArchived.value ? 'unread' : 'read'
-        const icon = showArchived.value ? 'mdi-email-mark-as-unread' : 'mdi-email-open'
-
-        return { icon, path }
-      })
-
-      const width = computed(() => mobile.value ? 420 : 520)
-
-      async function load () {
-        const { objects } = await bucket.getObjects<Notification>({
-          query: {
-            type: 'notifications',
-            status: 'published',
-          },
-          props: 'created_at,metadata,slug,title',
-          limit: 5,
-          sort: '-created_at',
-        })
-
-        all.value = objects ?? []
-      }
-
-      function select (notification: Notification) {
-        // this.snackbar = {
-        //   slug,
-        //   ...metadata,
-        // }
-
-        menu.value = false
-      }
-
-      function toggle ({ slug }: Notification) {
-        user.notifications.read = user.notifications.read.includes(slug)
-          ? user.notifications.read.filter(n => n !== slug)
-          : [...user.notifications.read, slug]
-      }
-
-      function toggleAll () {
-        user.notifications.read = !showArchived.value
-          ? all.value.map(({ slug }) => slug)
-          : []
-      }
-
-      load()
-
-      return {
-        t,
-        formatDate,
-        menu,
-        done,
-        unread,
-        read,
-        notifications,
-        marked,
-        showArchived,
-        width,
-        select,
-        toggle,
-        toggleAll,
-      }
-    },
+  const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
+  const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
+  const notifications = computed(() => showArchived.value ? read.value : unread.value)
+  const done = computed(() => {
+    return (
+      showArchived.value && read.value.length < 1
+    ) || (
+      !showArchived.value && unread.value.length < 1
+    )
   })
+
+  const marked = computed(() => {
+    const path = showArchived.value ? 'unread' : 'read'
+    const icon = showArchived.value ? 'mdi-email-mark-as-unread' : 'mdi-email-open'
+
+    return { icon, path }
+  })
+
+  const width = computed(() => mobile.value ? 420 : 520)
+
+  async function load () {
+    const { objects } = await bucket.getObjects<Notification>({
+      query: {
+        type: 'notifications',
+        status: 'published',
+      },
+      props: 'created_at,metadata,slug,title',
+      limit: 5,
+      sort: '-created_at',
+    })
+
+    all.value = objects ?? []
+  }
+
+  function toggle ({ slug }: Notification) {
+    user.notifications.read = user.notifications.read.includes(slug)
+      ? user.notifications.read.filter(n => n !== slug)
+      : [...user.notifications.read, slug]
+  }
+
+  onMounted(load)
 </script>

@@ -1,6 +1,5 @@
 <template>
   <v-btn
-    :icon="display.smAndDown"
     class="px-0 px-md-2 font-weight-regular"
     color="medium-emphasis"
     variant="text"
@@ -30,13 +29,11 @@
   </v-btn>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
   // Components
-  import AppMenu from '@/components/app/menu/Menu.vue'
   import ChevronDown from '@/components/icons/ChevronDown.vue'
 
   // Composables
-  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
   import { useLocaleStore } from '@/store/locale'
   import { useRoute, useRouter } from 'vue-router'
@@ -48,7 +45,6 @@
   import locales from '@/i18n/locales.json'
 
   const { t } = useI18n()
-  const display = useDisplay()
   const localeStore = useLocaleStore()
   const router = useRouter()
   const route = useRoute()

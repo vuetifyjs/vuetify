@@ -3,31 +3,19 @@
 
   <v-btn
     :href="href"
-    rel="noopener"
     color="primary"
     icon="mdi-github"
+    rel="noopener"
     style="position: fixed; bottom: 12px; right: 12px;"
     target="_blank"
   />
 </template>
 
-<script lang="ts">
+<script setup>
   // Composables
   import { useRoute } from 'vue-router'
 
-  // Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'WireframeLayout',
-
-    setup () {
-      const route = useRoute()
-      const { page } = route.meta
-
-      return {
-        href: `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/${page}.vue`,
-      }
-    },
-  })
+  const route = useRoute()
+  const { page } = route.meta
+  const href = `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/${page}.vue`
 </script>

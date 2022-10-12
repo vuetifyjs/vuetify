@@ -5,7 +5,7 @@
   >
     <v-row align="center">
       <v-col>
-        <h1 class="text-h3 primary--text">
+        <h1 class="text-h3 text-primary">
           Whoops, 404
         </h1>
 
@@ -23,17 +23,6 @@
   </v-container>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup>
   import { rpath } from '@/util/routes'
-
-  export default defineComponent({
-    name: '404Layout',
-
-    setup () {
-      return {
-        rpath,
-      }
-    },
-  })
 </script>

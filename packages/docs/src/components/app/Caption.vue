@@ -1,18 +1,17 @@
 <template>
-  <app-headline color="grey" size="caption" weight="regular" :path="path" />
+  <app-headline
+    :path="path"
+    color="grey"
+    size="caption"
+    weight="regular"
+  />
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'AppCaption',
-
-    props: {
-      path: {
-        type: String,
-        required: true,
-      },
+<script setup>
+  defineProps({
+    path: {
+      type: String,
+      required: true,
     },
   })
 </script>
