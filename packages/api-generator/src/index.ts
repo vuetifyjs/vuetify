@@ -69,6 +69,7 @@ const run = async () => {
   fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
+  rimraf.sync(path.resolve('./src/tmp'))
 }
 
 run()

@@ -1,5 +1,4 @@
 import fs from 'fs'
-import path from 'path'
 
 function processVariableFile (filePath: string) {
   if (fs.existsSync(filePath)) {
