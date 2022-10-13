@@ -1,9 +1,7 @@
 // Imports
 import fs from 'fs'
 import path, { resolve } from 'path'
-import { startCase, kebabCase } from 'lodash'
-import rimraf from 'rimraf'
-import { getCompleteApi } from '@vuetify/api-generator'
+import { kebabCase, startCase } from 'lodash'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
@@ -104,16 +102,6 @@ function writeFile (componentName: string, componentApi: Record<string, any>, lo
   }
 
   fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.md`), createMdFile(componentName, componentApi, locale))
-}
-
-function writeData (componentName: string, componentApi: Record<string, any>) {
-  const folder = `src/api/data`
-
-  if (!fs.existsSync(resolve(folder))) {
-    fs.mkdirSync(resolve(folder), { recursive: true })
-  }
-
-  fs.writeFileSync(resolve(`${folder}/${componentName}.json`), JSON.stringify(componentApi, null, 2))
 }
 
 function getApiData () {
