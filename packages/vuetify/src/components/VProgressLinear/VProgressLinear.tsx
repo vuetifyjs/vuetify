@@ -18,6 +18,8 @@ export const VProgressLinear = defineComponent({
   name: 'VProgressLinear',
 
   props: {
+    absolute: Boolean,
+    bottom: Boolean,
     active: {
       type: Boolean,
       default: true,
@@ -94,6 +96,7 @@ export const VProgressLinear = defineComponent({
         class={[
           'v-progress-linear',
           {
+            'v-progress-linear--absolute': props.absolute,
             'v-progress-linear--active': props.active && isIntersecting.value,
             'v-progress-linear--reverse': isReversed.value,
             'v-progress-linear--rounded': props.rounded,
@@ -104,6 +107,7 @@ export const VProgressLinear = defineComponent({
           themeClasses.value,
         ]}
         style={{
+          bottom: props.bottom ? 0 : undefined,
           height: props.active ? convertToUnit(height.value) : 0,
           '--v-progress-linear-height': convertToUnit(height.value),
         }}
