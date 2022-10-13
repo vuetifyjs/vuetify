@@ -185,12 +185,8 @@ function parseThemeOptions (options: ThemeOptions = defaultThemeOptions): Intern
   if (!options) return { ...defaultThemeOptions, isDisabled: true } as InternalThemeOptions
 
   const themes: Record<string, InternalThemeDefinition> = {}
-  const defaultThemeKey = options.defaultTheme ?? defaultThemeOptions.defaultTheme ?? 'light'
-
   for (const [key, theme] of Object.entries(options.themes ?? {})) {
-    const isDark = theme.dark ?? defaultThemeOptions?.themes?.[defaultThemeKey]?.dark ?? false
-
-    const defaultTheme = isDark
+    const defaultTheme = theme.dark || key === 'dark'
       ? defaultThemeOptions.themes?.dark
       : defaultThemeOptions.themes?.light
     themes[key] = mergeDeep(defaultTheme, theme) as InternalThemeDefinition
