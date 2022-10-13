@@ -8,7 +8,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'

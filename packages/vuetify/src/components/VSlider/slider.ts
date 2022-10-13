@@ -2,7 +2,7 @@
 // Composables
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { clamp, createRange, propsFactory } from '@/util'

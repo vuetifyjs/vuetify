@@ -206,7 +206,9 @@ const i18n = new createI18n({
 })
 
 const vuetify = createVuetify({
-  locale: createVueI18nAdapter({ i18n, useI18n })
+  locale: {
+    adapter: createVueI18nAdapter({ i18n, useI18n })
+  }
 })
 
 const app = createApp()

@@ -11,8 +11,7 @@ import { Touch } from '@/directives/touch'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
-import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
+import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, provide, ref, watch } from 'vue'
