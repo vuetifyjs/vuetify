@@ -4,6 +4,10 @@
 @use '../../styles/tools'
 @use './variables' as *
 
+@at-root
+  @include tools.density('v-input', $select-chips-margin-bottom) using ($modifier)
+    --select-chips-margin-bottom: #{0px + math.div($modifier, 2)}
+
 .v-select
   .v-field
     .v-text-field__prefix,
@@ -59,6 +63,7 @@
   &--chips
     .v-select__selection
       margin-top: $select-chips-margin-top
+      margin-bottom: var(--select-chips-margin-bottom)
 
       &:first-child
         margin-inline-start: 0
@@ -68,3 +73,4 @@
       .v-field__input
         > input
           opacity: 0
+
