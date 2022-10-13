@@ -197,6 +197,8 @@ export const VPagination = defineComponent({
         density: toRef(props, 'density'),
         size: toRef(props, 'size'),
         variant: toRef(props, 'variant'),
+        rounded: toRef(props, 'rounded'),
+        elevation: toRef(props, 'elevation'),
       },
     })
 
@@ -227,8 +229,6 @@ export const VPagination = defineComponent({
               ellipsis: false,
               icon: true,
               disabled: !!props.disabled || props.length < 2,
-              elevation: props.elevation,
-              rounded: props.rounded,
               color: isActive ? props.activeColor : props.color,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
