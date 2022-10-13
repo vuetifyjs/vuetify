@@ -178,7 +178,10 @@ export const VAutocomplete = genericComponent<new <
 
         isSelecting.value = true
 
-        search.value = item.title
+        if (!slots.selection) {
+          search.value = item.title
+        }
+
         menu.value = false
         isPristine.value = true
 
@@ -189,7 +192,7 @@ export const VAutocomplete = genericComponent<new <
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
+        search.value = props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -224,6 +227,7 @@ export const VAutocomplete = genericComponent<new <
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
+              'v-autocomplete--selection-slot': !!slots.selection,
             },
           ]}
           appendInnerIcon={ props.menuIcon }
