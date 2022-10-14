@@ -9,7 +9,6 @@
       class="text-decoration-none text-right text-md-left"
       style="user-select: none"
       aria-hidden="true"
-      @click="onClick"
     >
       #
     </router-link>
