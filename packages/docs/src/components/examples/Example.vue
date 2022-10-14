@@ -2,10 +2,11 @@
   <v-defaults-provider scoped>
     <v-sheet
       border
-      class="mb-9"
+      class="mb-9 overflow-hidden"
       rounded
     >
       <v-toolbar
+        v-if="!preview"
         border="b"
         class="px-1"
         height="44"
@@ -105,6 +106,7 @@
       required: true,
     },
     open: Boolean,
+    preview: Boolean,
   })
 
   function parseTemplate (target: string, template: string) {
