@@ -80,7 +80,7 @@ export const useUserStore = defineStore('user', () => {
   function save () {
     if (!IN_BROWSER) return
 
-    localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
+    localStorage.setItem('vuetify3@user', JSON.stringify(state, null, 2))
   }
 
   load()
