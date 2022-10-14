@@ -23,30 +23,61 @@ Blueprints are a collection of Vuetify configuration options that assign default
 
 ## Usage
 
-More to follow..
+Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
 
-## Core Design systems
+```js { resource=plugins/vuetify.js }
+import { createVuetify } from 'vuetify'
+import { md1 } from 'vuetify/blueprints'
 
-More to follow...
+export default createVuetify({
+  blueprint: md1,
+})
+```
+### White-label concept
 
-### MD1
+While Vuetify is built under the guise of Google's [Material Design](https://material.io/) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
 
-More to follow...
+## Blueprints
+| Name | Release date | Status | Resource |
+| - | - | - | - |
+| [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://material.io/archive/guidelines/) |
+| [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://material.io/) |
+| [Material Design 3](#material-design-3) | 2021 | ⚠️ Development | [Specification](https://m3.material.io/) |
 
-### MD2
+### Material Design 1
 
-More to follow...
+Released in 2014, the original Material Design specification aimed to create a visual language that combined principles and good design with technical and scientific innovation.
 
-### MD3
+```javascript { resource=plugins/vuetify.js }
+import { md1 } from 'vuetify/blueprints'
+```
 
-More to follow...
+### Preview
 
-## Create your own
+<example preview file="blueprints/md1" />
 
-More to follow...
+### Material Design 2
 
-## Material Studies
+Released in 2017, version 2 of Google's design specification received a massive upgrade with new components, guidelines, and improved on the principles that made the first system so successful.
 
-More to follow...
+```javascript { resource=plugins/vuetify.js }
+import { md2 } from 'vuetify/blueprints'
+```
+
+### Preview
+
+<example preview file="blueprints/md2" />
+
+### Material Design 3
+
+Material Design 3 is currently in active development and represents the next chapter of Google's design system.
+
+```javascript { resource=plugins/vuetify.js }
+import { md3 } from 'vuetify/blueprints'
+```
+
+### Preview
+
+<example preview file="blueprints/md3" />
 
 <backmatter />
