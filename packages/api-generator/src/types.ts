@@ -23,10 +23,21 @@ export function generateComposableDataFromTypes () {
   const composables = inspect(project, sourceFile.getTypeAlias('Composables')) as ObjectDefinition
 
   return Object.entries(composables.properties).map(([name, data]) => {
+    const returnType = (data as FunctionDefinition).returnType
+    let exposed
+    if (returnType.type === 'allOf') {
+      exposed = returnType.items.reduce((obj, item) => {
+        const props = (item as ObjectDefinition).properties
+        return { ...obj, ...props }
+      }, {})
+    } else if (returnType.type === 'object') {
+      exposed = returnType.properties
+    }
+
     return {
       name,
       data: {
-        exposed: ((data as FunctionDefinition).returnType as ObjectDefinition).properties,
+        exposed,
       },
     }
   }) as { name: string, data: { exposed: Record<string, Definition> } }[]
@@ -315,19 +326,21 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
     const arrayElementType = type.getArrayElementType()
 
-    const arrayType = generateDefinition(node, getRecursiveArrayTypes(recursed, type), project, arrayElementType)
+    const arrayType = generateDefinition(node, getRecursiveTypes(recursed, type), project, arrayElementType)
 
     definition.items = arrayType.type === 'anyOf' ? arrayType.items : [arrayType]
   } else if (type.isIntersection()) {
     definition = definition as IntersectionDefinition
     definition.type = 'allOf'
-    definition.items = type.getIntersectionTypes().map(type => generateDefinition(node, recursed, project, type))
+    definition.items = type.getIntersectionTypes()
+      .map(intersectionType => generateDefinition(node, recursed, project, intersectionType))
 
     // TODO: Should we collapse allOf with only objects to single object?
   } else if (type.isUnion()) {
     definition = definition as UnionDefinition
     definition.type = 'anyOf'
-    definition.items = type.getUnionTypes().map(type => generateDefinition(node, recursed, project, type))
+    definition.items = type.getUnionTypes()
+      .map(unionType => generateDefinition(node, recursed, project, unionType))
 
     // Ugly hack to get rid of explicit false and true types
     // TODO: Do this some other way
@@ -366,10 +379,11 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       return {
         name: parameter.getEscapedName(),
         optional: parameter.isOptional(),
-        ...generateDefinition(node, getRecursiveObjectTypes(recursed, parameterType), project, parameterType),
+        ...generateDefinition(node, getRecursiveTypes(recursed, parameterType), project, parameterType),
       }
     })
-    definition.returnType = generateDefinition(node, recursed, project, signature.getReturnType())
+    const returnType = signature.getReturnType()
+    definition.returnType = generateDefinition(node, getRecursiveTypes(recursed, returnType), project, returnType)
   } else if (targetType && /^(Map|Set)<.*>/.test(definition.text)) { // TODO: Better way to detect Map/Set type
     definition = definition as InterfaceDefinition
     definition.type = 'interface'
@@ -397,7 +411,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       const propertyName = property.getEscapedName()
       const propertyType = tc.getTypeOfSymbolAtLocation(property, node)
 
-      definition.properties[propertyName] = generateDefinition(node, getRecursiveObjectTypes(recursed, propertyType), project, propertyType)
+      definition.properties[propertyName] = generateDefinition(node, getRecursiveTypes(recursed, propertyType), project, propertyType)
 
       definition.properties[propertyName].optional = property.isOptional()
     }
@@ -414,37 +428,59 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   return definition
 }
 
-function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type))
+// function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
+//   return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type))
+// }
+
+// function getRecursiveArrayTypes (recursiveTypes: string[], type: Type<ts.Type>) {
+//   return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type))
+// }
+
+// function findPotentialRecursiveObjectTypes (type: Type<ts.Type>) {
+//   if (type == null || type.isArray()) return []
+
+//   const recursiveTypes = []
+
+//   if (type.isUnionOrIntersection()) {
+//     recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
+//   } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
+//     recursiveTypes.push(type.getText())
+//   }
+
+//   return recursiveTypes
+// }
+
+// function findPotentialRecursiveArrayTypes (type: Type<ts.Type>) {
+//   if (type == null) return []
+
+//   const recursiveTypes = []
+
+//   if (type.isUnionOrIntersection()) {
+//     recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
+//   } else if (type.isArray()) {
+//     recursiveTypes.push(...findPotentialRecursiveArrayTypes(type.getArrayElementType()))
+//   } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
+//     recursiveTypes.push(type.getText())
+//   }
+
+//   return recursiveTypes
+// }
+
+function getRecursiveTypes (recursiveTypes: string[], type: Type<ts.Type>) {
+  return recursiveTypes.slice().concat(findPotentialRecursiveTypes(type))
 }
 
-function getRecursiveArrayTypes (recursiveTypes: string[], type: Type<ts.Type>) {
-  return recursiveTypes.slice().concat(findPotentialRecursiveArrayTypes(type))
-}
-
-function findPotentialRecursiveObjectTypes (type: Type<ts.Type>) {
-  if (type == null || type.isArray()) return []
-
-  const recursiveTypes = []
-
-  if (type.isUnionOrIntersection()) {
-    recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
-  } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
-    recursiveTypes.push(type.getText())
-  }
-
-  return recursiveTypes
-}
-
-function findPotentialRecursiveArrayTypes (type: Type<ts.Type>) {
+function findPotentialRecursiveTypes (type: Type<ts.Type>) {
   if (type == null) return []
 
   const recursiveTypes = []
 
-  if (type.isUnionOrIntersection()) {
-    recursiveTypes.push(...type.getAliasTypeArguments().map(t => t.getText()))
+  if (type.isUnion()) {
+    recursiveTypes.push(...type.getUnionTypes().map(t => t.getText()))
+  } else if (type.isIntersection()) {
+    recursiveTypes.push(...type.getIntersectionTypes().map(t => t.getText()))
   } else if (type.isArray()) {
-    recursiveTypes.push(...findPotentialRecursiveArrayTypes(type.getArrayElementType()))
+    recursiveTypes.push(...findPotentialRecursiveTypes(type.getArrayElementType()))
   } else if (type.getAliasSymbol() || type.isClassOrInterface() || type.getTypeArguments().length) {
     recursiveTypes.push(type.getText())
   }

@@ -28,7 +28,7 @@ const run = async () => {
     await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
   }
 
-  const outPath = '../docs/src/api/data/'
+  const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
 
   const componentData = await Promise.all(
     Object.entries(components).map(([componentName, componentInstance]) => pool.run(

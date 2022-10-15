@@ -39,7 +39,7 @@
   import { getType } from './utils'
   import PrismCell from './PrismCell.vue'
   import NameCell from './NameCell.vue'
-  import { kebabCase } from 'lodash'
+  import { kebabCase } from 'lodash-es'
 
   export default defineComponent({
     components: {
