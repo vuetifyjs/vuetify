@@ -297,7 +297,7 @@ There are also responsive variations for `order`.
 - **.order-lg-11**
 - **.order-lg-12**
 - **.order-lg-last**
-- **.order-lg-first**
+- **.order-xl-first**
 - **.order-xl-0**
 - **.order-xl-1**
 - **.order-xl-2**
