@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="space-between">
+    <v-row class="py-4" justify="space-between">
       <v-btn
         icon="mdi-heart"
         color="primary"
@@ -22,7 +22,7 @@
       ></v-btn>
     </v-row>
 
-    <v-row justify="space-between">
+    <v-row class="py-4" justify="space-between">
       <v-btn
         icon
         color="primary"
