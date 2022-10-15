@@ -249,3 +249,5 @@ export const VInfiniteScroll = defineComponent({
     })
   },
 })
+
+export type VInfiniteScroll = InstanceType<typeof VInfiniteScroll>
