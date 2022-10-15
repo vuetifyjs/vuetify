@@ -8,7 +8,7 @@
       <v-img src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"></v-img>
 
       <v-card-text>
-        <h2 class="text-h6 primary--text">
+        <h2 class="text-h6 text-primary">
           Magento Forests
         </h2>
         Travel to the best outdoor experience on planet Earth. A vacation you will never forget!
@@ -23,7 +23,7 @@
           hover
           class="mr-2"
         ></v-rating>
-        <span class="primary--text text-subtitle-2">64 Reviews</span>
+        <span class="text-primary text-subtitle-2">64 Reviews</span>
       </v-card-title>
 
       <v-overlay

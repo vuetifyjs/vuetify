@@ -6,7 +6,7 @@
     >
       <v-card>
         <v-card-title class="cyan darken-1">
-          <span class="text-h5 white--text">Sarah Mcbeal</span>
+          <span class="text-h5 text-white">Sarah Mcbeal</span>
 
           <v-spacer></v-spacer>
 

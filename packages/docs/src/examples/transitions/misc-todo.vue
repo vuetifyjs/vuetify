@@ -18,7 +18,7 @@
       </template>
     </v-text-field>
 
-    <h2 class="text-h4 success--text pl-4">
+    <h2 class="text-h4 text-success pl-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">
@@ -33,13 +33,13 @@
       class="my-1"
       align="center"
     >
-      <strong class="mx-4 info--text text--darken-2">
+      <strong class="mx-4 text-info-darken-2">
         Remaining: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
-      <strong class="mx-4 success--text text--darken-2">
+      <strong class="mx-4 text-success-darken-2">
         Completed: {{ completedTasks }}
       </strong>
 
@@ -73,7 +73,7 @@
               >
                 <template v-slot:label>
                   <div
-                    :class="task.done && 'grey--text' || 'primary--text'"
+                    :class="task.done && 'text-grey' || 'text-primary'"
                     class="ml-4"
                     v-text="task.text"
                   ></div>

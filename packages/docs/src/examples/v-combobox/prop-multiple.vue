@@ -35,7 +35,7 @@
               @click:close="data.parent.selectItem(data.item)"
             >
               <v-avatar
-                class="accent white--text"
+                class="accent text-white"
                 left
                 v-text="data.item.slice(0, 1).toUpperCase()"
               ></v-avatar>

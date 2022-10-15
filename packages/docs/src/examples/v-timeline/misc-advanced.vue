@@ -6,31 +6,32 @@
     >
       <v-timeline-item
         fill-dot
-        class="white--text mb-12"
+        class="mb-12"
         dot-color="orange"
         size="large"
       >
         <template v-slot:icon>
           <span>JL</span>
         </template>
-        <v-text-field
-          v-model="input"
-          hide-details
-          label="Leave a comment..."
-          density="compact"
-          @keydown.enter="comment"
-        >
-          <template v-slot:append>
-            <v-btn
-              class="mx-0"
-              variant="text"
-              @click="comment"
-            >
-              Post
-            </v-btn>
-          </template>
-        </v-text-field>
-      </v-timeline-item>
+        <v-row>
+          <v-text-field
+            v-model="input"
+            hide-details
+            label="Leave a comment..."
+            density="compact"
+            @keydown.enter="comment"
+          >
+            <template v-slot:append>
+              <v-btn
+                class="mx-0"
+                variant="text"
+                @click="comment"
+              >
+                Post
+              </v-btn>
+            </template>
+          </v-text-field>
+        </v-row></v-timeline-item>
 
       <v-slide-x-transition
         group
@@ -79,7 +80,7 @@
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
             <v-chip
-              class="white--text ml-0"
+              class="ml-0"
               color="purple"
               label
               size="small"
