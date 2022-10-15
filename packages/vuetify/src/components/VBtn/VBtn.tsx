@@ -97,10 +97,17 @@ export const VBtn = defineComponent({
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
 
-    const isActive = computed(() =>
-      props.active !== false &&
-      (props.active || link.isActive?.value || group?.isSelected.value)
-    )
+    const isActive = computed(() => {
+      if (props.active !== undefined) {
+        return props.active
+      }
+
+      if (link.isLink.value) {
+        return link.isActive?.value
+      }
+
+      return group?.isSelected.value
+    })
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
