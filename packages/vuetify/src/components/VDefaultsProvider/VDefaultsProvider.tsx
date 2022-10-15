@@ -30,3 +30,5 @@ export const VDefaultsProvider = defineComponent({
     return () => slots.default?.()
   },
 })
+
+export type VDefaultsProvider = InstanceType<typeof VDefaultsProvider>

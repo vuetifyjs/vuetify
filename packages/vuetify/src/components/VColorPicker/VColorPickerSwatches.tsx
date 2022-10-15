@@ -89,3 +89,5 @@ export const VColorPickerSwatches = defineComponent({
     return {}
   },
 })
+
+export type VColorPickerSwatches = InstanceType<typeof VColorPickerSwatches>

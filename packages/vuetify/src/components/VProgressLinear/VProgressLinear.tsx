@@ -186,3 +186,5 @@ export const VProgressLinear = defineComponent({
     return {}
   },
 })
+
+export type VProgressLinear = InstanceType<typeof VProgressLinear>

@@ -3,19 +3,19 @@
   "version": "3.0.0-beta.13",
   "private": true,
   "description": "",
-  "main": "src/index.js",
   "scripts": {
-    "debug": "babel-node inspect src/index.js",
-    "dev": "node src/index.js",
-    "build": "node src/export.js",
-    "lint": "eslint --ext .js src -f codeframe --max-warnings 0",
+    "build": "ts-node src/index.ts",
+    "lint": "eslint --ext .ts src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
   "author": "",
   "license": "ISC",
   "dependencies": {
     "deepmerge": "^4.0.0",
+    "piscina": "^3.2.0",
     "rimraf": "^3.0.2",
+    "ts-morph": "^16.0.0",
+    "ts-node": "^10.9.1",
     "vue": "^3.2.38",
     "vuetify": "^3.0.0-beta.13"
   },

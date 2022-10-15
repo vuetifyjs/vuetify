@@ -129,6 +129,8 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   },
 })
 
+export type VListGroup = InstanceType<typeof VListGroup>
+
 export function filterListGroupProps (props: ExtractPropTypes<ReturnType<typeof makeVListGroupProps>>) {
   return pick(props, Object.keys(VListGroup.props) as any)
 }

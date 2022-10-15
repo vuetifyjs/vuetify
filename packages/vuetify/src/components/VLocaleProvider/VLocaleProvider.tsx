@@ -37,3 +37,5 @@ export const VLocaleProvider = defineComponent({
     return {}
   },
 })
+
+export type VLocaleProvider = InstanceType<typeof VLocaleProvider>

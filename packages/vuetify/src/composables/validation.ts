@@ -51,7 +51,7 @@ export const makeValidationProps = propsFactory({
   },
   modelValue: null,
   validationValue: null,
-})
+}, 'validation')
 
 export function useValidation (
   props: ValidationProps,

@@ -101,3 +101,5 @@ export const VColorPickerEdit = defineComponent({
     return {}
   },
 })
+
+export type VColorPickerEdit = InstanceType<typeof VColorPickerEdit>

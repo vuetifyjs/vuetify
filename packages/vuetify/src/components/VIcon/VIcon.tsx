@@ -81,3 +81,5 @@ export const VIcon = defineComponent({
     return {}
   },
 })
+
+export type VIcon = InstanceType<typeof VIcon>

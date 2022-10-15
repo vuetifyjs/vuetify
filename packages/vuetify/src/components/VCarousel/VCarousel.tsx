@@ -155,3 +155,5 @@ export const VCarousel = defineComponent({
     return {}
   },
 })
+
+export type VCarousel = InstanceType<typeof VCarousel>

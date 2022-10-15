@@ -29,3 +29,5 @@ export const VSlideGroupItem = defineComponent({
     })
   },
 })
+
+export type VSlideGroupItem = InstanceType<typeof VSlideGroupItem>

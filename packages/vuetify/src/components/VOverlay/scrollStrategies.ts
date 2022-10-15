@@ -22,7 +22,7 @@ const scrollStrategies = {
 }
 
 export interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData, props?: StrategyProps) => void)
+  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData, props?: Omit<StrategyProps, 'scrollStrategy'>) => void)
   contained: boolean | undefined
 }
 

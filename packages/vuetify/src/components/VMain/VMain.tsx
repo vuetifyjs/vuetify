@@ -47,3 +47,5 @@ export const VMain = defineComponent({
     return {}
   },
 })
+
+export type VMain = InstanceType<typeof VMain>

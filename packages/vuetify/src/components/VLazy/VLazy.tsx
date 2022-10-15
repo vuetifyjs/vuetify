@@ -72,3 +72,5 @@ export const VLazy = defineComponent({
     return {}
   },
 })
+
+export type VLazy = InstanceType<typeof VLazy>
