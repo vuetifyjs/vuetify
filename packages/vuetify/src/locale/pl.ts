@@ -70,7 +70,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Ocena {0}/{1}',
+      item: 'Ocena {0} na {1}',
     },
   },
 }
