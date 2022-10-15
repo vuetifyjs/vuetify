@@ -66,11 +66,6 @@ export const VList = genericComponent<new <T>() => {
       default: '$vuetify.noDataText',
     },
     hideNoData: Boolean,
-    type: {
-      type: String,
-      default: 'list',
-      validator: (v: any) => ['list', 'select'].includes(v),
-    },
 
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
@@ -114,7 +109,6 @@ export const VList = genericComponent<new <T>() => {
       VListGroup: {
         activeColor,
         color,
-        type: toRef(props, 'type'),
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),

@@ -67,7 +67,6 @@ export const VListGroup = genericComponent<new <T>() => {
 
   props: {
     title: String,
-    type: String,
 
     ...makeVListGroupProps(),
   },
@@ -81,7 +80,7 @@ export const VListGroup = genericComponent<new <T>() => {
     }
 
     const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
-      onClick: props.type === 'select' ? undefined : onClick,
+      onClick,
       class: 'v-list-group__header',
     }))
 
@@ -102,11 +101,11 @@ export const VListGroup = genericComponent<new <T>() => {
           <VDefaultsProvider
             defaults={{
               VListItem: {
-                active: props.type === 'select' ? false : isOpen.value,
+                active: isOpen.value,
                 activeColor: props.activeColor,
                 color: props.color,
-                prependIcon: props.type === 'select' ? undefined : (props.prependIcon || (props.subgroup && toggleIcon.value)),
-                appendIcon: props.type === 'select' ? undefined : (props.appendIcon || (!props.subgroup && toggleIcon.value)),
+                prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
+                appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
                 title: props.title,
                 value: props.value,
               },
