@@ -14,6 +14,8 @@ export interface ScrollStrategyData {
   updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
+type ScrollStrategyFn = (data: ScrollStrategyData, props: StrategyProps) => void
+
 const scrollStrategies = {
   none: null,
   close: closeScrollStrategy,
@@ -22,7 +24,7 @@ const scrollStrategies = {
 }
 
 export interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData, props?: Omit<StrategyProps, 'scrollStrategy'>) => void)
+  scrollStrategy: keyof typeof scrollStrategies | ScrollStrategyFn
   contained: boolean | undefined
 }
 

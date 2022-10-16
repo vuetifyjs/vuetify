@@ -227,6 +227,17 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+const allowedRefs = [
+  'Anchor',
+  'LocationStrategyFn',
+  'OpenSelectStrategyFn',
+  'OpenStrategyFn',
+  'ScrollStrategyFn',
+  'SelectItemKey',
+  'SelectStrategyFn',
+  'ValidationRule',
+]
+
 function formatDefinition (definition: Definition) {
   let formatted = ''
 
@@ -280,7 +291,7 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (['SelectStrategyFn', 'OpenStrategyFn', 'OpenSelectStrategyFn'].includes(definition.text)) {
+  if (allowedRefs.includes(definition.text)) {
     definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/next/packages/${definition.source}" target="_blank">${definition.text}</a>`
   }
 }
@@ -299,8 +310,13 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     source: getSource(declaration),
   } as Definition
 
-  if (count(recursed, type.getText()) > 1 || isExternalDeclaration(declaration, definition.text)) {
+  if (
+    count(recursed, type.getText()) > 1 ||
+    ['SelectItemKey', 'ValidationRule', 'Anchor'].includes(type.getAliasSymbol()?.getName()) ||
+    isExternalDeclaration(declaration, definition.text)
+  ) {
     definition = definition as RefDefinition
+    // console.log(definition.text, isExternalDeclaration(declaration, definition.text))
     definition.type = 'ref'
 
     // TODO: Parse this better?
@@ -325,6 +341,8 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     definition.type = 'array'
 
     const arrayElementType = type.getArrayElementType()
+
+    // console.log(arrayElementType.getAliasSymbol()?.getFullyQualifiedName(), arrayElementType.getAliasSymbol()?.getEscapedName())
 
     const arrayType = generateDefinition(node, getRecursiveTypes(recursed, type), project, arrayElementType)
 
