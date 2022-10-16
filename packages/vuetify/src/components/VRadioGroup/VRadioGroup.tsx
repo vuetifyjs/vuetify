@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
+import { defineComponent, excludeProps, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VRadioGroup = defineComponent({
   name: 'VRadioGroup',
@@ -28,7 +28,7 @@ export const VRadioGroup = defineComponent({
     },
 
     ...makeVInputProps(),
-    ...makeSelectionControlProps(),
+    ...excludeProps(makeSelectionControlProps(), ['multiple']),
 
     trueIcon: {
       type: IconValue,
@@ -63,7 +63,10 @@ export const VRadioGroup = defineComponent({
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [controlProps, _2] = filterControlProps({
+        ...props,
+        multiple: false as const,
+      })
       const label = slots.label
         ? slots.label({
           label: props.label,
