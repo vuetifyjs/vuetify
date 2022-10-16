@@ -229,13 +229,36 @@ export function pick<
   return [found, rest]
 }
 
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+const nonBubblingEvents = [
+  'onBlur',
+  'onFocus',
+  'onMouseenter',
+  'onMouseleave',
+  'onScroll',
+  'onLoad',
+  'onLoadstart',
+  'onLoadend',
+  'onUnload',
+  'onProgress',
+  'onAbort',
+  'onError',
+]
+
 /**
  * Filter attributes that should be applied to
- * the root element of a an input component. Remaining
+ * the root element of an input component. Remaining
  * attributes should be passed to the <input> element inside.
  */
 export function filterInputAttrs (attrs: Record<string, unknown>) {
-  return pick(attrs, ['class', 'style', 'id', /^data-/])
+  const [events, props] = pick(attrs, [onRE])
+  const [inputEvents] = pick(events, nonBubblingEvents)
+  const [rootAttrs, inputAttrs] = pick(props, ['class', 'style', 'id', /^data-/])
+  Object.assign(rootAttrs, events)
+  Object.assign(inputAttrs, inputEvents)
+  return [rootAttrs, inputAttrs]
 }
 
 /**
@@ -589,9 +612,6 @@ export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
 export function includes (arr: readonly any[], val: any) {
   return arr.includes(val)
 }
-
-const onRE = /^on[^a-z]/
-export const isOn = (key: string) => onRE.test(key)
 
 export type EventProp<T = (...args: any[]) => any> = T | T[]
 export const EventProp = [Function, Array] as PropType<EventProp>

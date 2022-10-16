@@ -41,6 +41,7 @@ export const VSwitch = defineComponent({
     const indeterminate = useProxiedModel(props, 'indeterminate')
     const model = useProxiedModel(props, 'modelValue')
     const { loaderClasses } = useLoader(props)
+    const control = ref<VSelectionControl>()
 
     const loaderColor = computed(() => {
       return typeof props.loading === 'string' && props.loading !== ''
@@ -56,16 +57,14 @@ export const VSwitch = defineComponent({
         indeterminate.value = false
       }
     }
+    function onTrackClick () {
+      control.value?.input?.click()
+    }
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
-      const control = ref<VSelectionControl>()
-
-      function onClick () {
-        control.value?.input?.click()
-      }
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [inputProps] = filterInputProps(props)
+      const [controlProps] = filterControlProps(props)
 
       return (
         <VInput
@@ -75,7 +74,7 @@ export const VSwitch = defineComponent({
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
           ]}
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           id={ id.value }
         >
@@ -101,7 +100,7 @@ export const VSwitch = defineComponent({
               >
                 {{
                   ...slots,
-                  default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
+                  default: () => (<div class="v-switch__track" onClick={ onTrackClick }></div>),
                   input: ({ textColorClasses }) => (
                     <div
                       class={[
