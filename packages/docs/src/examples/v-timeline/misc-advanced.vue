@@ -13,29 +13,27 @@
         <template v-slot:icon>
           <span>JL</span>
         </template>
-        <v-row>
-          <v-text-field
-            v-model="input"
-            hide-details
-            label="Leave a comment..."
-            density="compact"
-            @keydown.enter="comment"
-          >
-            <template v-slot:append>
-              <v-btn
-                class="mx-0"
-                variant="text"
-                @click="comment"
-              >
-                Post
-              </v-btn>
-            </template>
-          </v-text-field>
-        </v-row></v-timeline-item>
+        <v-text-field
+          v-model="input"
+          class="w-100"
+          hide-details
+          label="Leave a comment..."
+          density="compact"
+          @keydown.enter="comment"
+        >
+          <template v-slot:append>
+            <v-btn
+              class="mx-0"
+              variant="text"
+              @click="comment"
+            >
+              Post
+            </v-btn>
+          </template>
+        </v-text-field>
+      </v-timeline-item>
 
-      <v-slide-x-transition
-        group
-      >
+      <v-slide-x-transition group>
         <v-timeline-item
           v-for="event in timeline"
           :key="event.id"
