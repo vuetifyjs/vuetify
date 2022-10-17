@@ -316,7 +316,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition
-    // console.log(definition.text, isExternalDeclaration(declaration, definition.text))
     definition.type = 'ref'
 
     // TODO: Parse this better?
@@ -342,8 +341,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
     const arrayElementType = type.getArrayElementType()
 
-    // console.log(arrayElementType.getAliasSymbol()?.getFullyQualifiedName(), arrayElementType.getAliasSymbol()?.getEscapedName())
-
     const arrayType = generateDefinition(node, getRecursiveTypes(recursed, type), project, arrayElementType)
 
     definition.items = arrayType.type === 'anyOf' ? arrayType.items : [arrayType]
@@ -368,7 +365,6 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
       if (item.type === 'boolean' && item.literal != null) {
         if (~found) {
-          console.log('found', found, i)
           definition.items.splice(i, 1)
           definition.items.splice(found, 1, {
             text: 'boolean',
