@@ -9,7 +9,8 @@
     "indeterminate": "Constantly animates, use when loading progress is unknown.",
     "reverse": "Displays reversed progress (right to left in LTR mode and left to right in RTL)",
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
-    "striped": "Adds a stripe background to the filled portion of the progress component"
+    "striped": "Adds a stripe background to the filled portion of the progress component",
+    "top": "Aligns the content towards the top"
   },
   "slots": {
     "default": "Provides the current value of the component"
