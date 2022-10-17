@@ -357,31 +357,29 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   } else if (type.isUnion()) {
     definition = definition as UnionDefinition
     definition.type = 'anyOf'
-    definition.items = type.getUnionTypes()
+    definition.items = getUnionTypes(type)
       .map(unionType => generateDefinition(node, recursed, project, unionType))
 
-    // Ugly hack to get rid of explicit false and true types
+    // Replace explicit true|false with boolean
     // TODO: Do this some other way
-    let found: string | undefined
-    const foundIndices: number[] = []
+    let found = -1
     for (let i = 0; i < definition.items.length; i++) {
       const item = definition.items[i]
 
-      if (item.type === 'boolean' && item.literal != null && found == null) {
-        found = item.literal
-        foundIndices.push(i)
-      } else if (item.type === 'boolean' && item.literal != null && found != null && found !== item.literal) {
-        foundIndices.push(i)
+      if (item.type === 'boolean' && item.literal != null) {
+        if (~found) {
+          console.log('found', found, i)
+          definition.items.splice(i, 1)
+          definition.items.splice(found, 1, {
+            text: 'boolean',
+            type: 'boolean',
+            formatted: 'boolean',
+          })
+          break
+        } else {
+          found = i
+        }
       }
-    }
-
-    if (foundIndices.length === 2) {
-      definition.items = definition.items.filter((_, i) => !foundIndices.includes(i))
-      definition.items.splice(foundIndices[0], 0, {
-        text: 'boolean',
-        type: 'boolean',
-        formatted: 'boolean',
-      })
     }
   } else if (type.getConstructSignatures().length) {
     definition = definition as ConstructorDefinition
@@ -446,6 +444,20 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   return definition
 }
 
+/** type.getUnionTypes() but without unwrapping named string unions */
+function getUnionTypes (type: Type<ts.Type>): Type<ts.Type>[] {
+  if (!type.isUnion()) return [type]
+
+  const compilerType = (type as any).compilerType
+
+  if (compilerType.origin) {
+    return compilerType.origin.types
+      .map(unionType => (type as any)._context.compilerFactory.getType(unionType))
+  } else {
+    return type.getUnionTypes()
+  }
+}
+
 // function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
 //   return recursiveTypes.slice().concat(findPotentialRecursiveObjectTypes(type))
 // }
@@ -494,7 +506,7 @@ function findPotentialRecursiveTypes (type: Type<ts.Type>) {
   const recursiveTypes = []
 
   if (type.isUnion()) {
-    recursiveTypes.push(...type.getUnionTypes().map(t => t.getText()))
+    recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))
   } else if (type.isIntersection()) {
     recursiveTypes.push(...type.getIntersectionTypes().map(t => t.getText()))
   } else if (type.isArray()) {
