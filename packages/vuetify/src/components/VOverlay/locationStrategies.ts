@@ -30,19 +30,19 @@ export interface LocationStrategyData {
   isRtl: Ref<boolean>
 }
 
+type LocationStrategyFn = (
+  data: LocationStrategyData,
+  props: StrategyProps,
+  contentStyles: Ref<Record<string, string>>
+) => undefined | { updateLocation: (e: Event) => void }
+
 const locationStrategies = {
   static: staticLocationStrategy, // specific viewport position, usually centered
   connected: connectedLocationStrategy, // connected to a certain element
 }
 
 export interface StrategyProps {
-  locationStrategy: keyof typeof locationStrategies | (
-    (
-      data: LocationStrategyData,
-      props: Omit<StrategyProps, 'locationStrategy'>,
-      contentStyles: Ref<Record<string, string>>
-    ) => undefined | { updateLocation: (e: Event) => void }
-  )
+  locationStrategy: keyof typeof locationStrategies | LocationStrategyFn
   location: Anchor
   origin: Anchor | 'auto' | 'overlap'
   offset?: number | string | number[]
