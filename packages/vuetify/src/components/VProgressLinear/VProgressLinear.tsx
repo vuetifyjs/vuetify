@@ -20,6 +20,7 @@ export const VProgressLinear = defineComponent({
   props: {
     absolute: Boolean,
     bottom: Boolean,
+    top: Boolean,
     active: {
       type: Boolean,
       default: true,
@@ -108,6 +109,7 @@ export const VProgressLinear = defineComponent({
         ]}
         style={{
           bottom: props.bottom ? 0 : undefined,
+          top: props.top ? 0 : undefined,
           height: props.active ? convertToUnit(height.value) : 0,
           '--v-progress-linear-height': convertToUnit(height.value),
         }}
