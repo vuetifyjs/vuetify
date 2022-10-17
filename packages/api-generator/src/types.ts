@@ -301,6 +301,13 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   const tc = project.getTypeChecker()
   type = type ?? node.getType()
 
+  if (type.getAliasSymbol()?.getName() === 'NonNullable') {
+    const typeArguments = type.getAliasTypeArguments()
+    if (typeArguments.length) {
+      type = typeArguments[0]
+    }
+  }
+
   const symbol = type.getAliasSymbol() ?? type.getSymbol()
   const declaration = symbol?.getDeclarations()?.[0]
   const targetType = type.getTargetType()
@@ -312,7 +319,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    ['SelectItemKey', 'ValidationRule', 'Anchor'].includes(type.getAliasSymbol()?.getName()) ||
+    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition
