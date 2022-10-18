@@ -6,9 +6,7 @@
       <tbody>
         <template v-for="item in items" :key="item.name">
           <tr class="bg-grey-lighten-4">
-            <td>
-              <NameCell section="props" :name="item.name" />
-            </td>
+            <NameCell section="props" :name="item.name" />
           </tr>
           <tr v-if="item.formatted !== 'never'">
             <app-markup :code="getType(item)" language="ts" :rounded="false" />

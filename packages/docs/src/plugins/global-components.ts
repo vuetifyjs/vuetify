@@ -3,7 +3,6 @@ import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
 import ApiSection from '@/components/api/Section.vue'
-import ApiTable from '@/components/api/Table.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
@@ -56,7 +55,6 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('ApiInline', ApiInline)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
-  app.component('ApiTable', ApiTable)
   app.component('Backmatter', Backmatter)
   app.component('Carbon', Carbon)
   app.component('Discovery', Discovery)

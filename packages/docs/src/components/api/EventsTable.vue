@@ -20,9 +20,7 @@
       <tbody>
         <template v-for="item in items" :key="item.name">
           <tr class="bg-grey-lighten-4">
-            <td>
-              <NameCell section="exposed" :name="item.name" />
-            </td>
+            <NameCell section="exposed" :name="item.name" />
             <td>
               <PrismCell :code="getType(item)" />
             </td>
