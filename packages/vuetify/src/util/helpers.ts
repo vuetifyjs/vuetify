@@ -68,7 +68,11 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey =
+  | boolean // Ignored
+  | string // Lookup by key, can use dot notation for nested objects
+  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,

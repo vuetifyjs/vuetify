@@ -75,6 +75,7 @@
     "vite-plugin-inspect": "^0.6.0",
     "vue": "^3.2.38",
     "vue-analytics": "^5.16.1",
-    "vue-router": "^4.0.15"
+    "vue-router": "^4.0.15",
+    "yargs": "^17.6.0"
   }
 }

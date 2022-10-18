@@ -10,6 +10,14 @@ import mkdirp from 'mkdirp'
 import { createVeturApi } from './vetur'
 import rimraf from 'rimraf'
 import { createWebTypesApi } from './web-types'
+import inspector from 'inspector'
+import yargs from 'yargs'
+
+const argv = yargs(process.argv.slice(2))
+  .option('components', {
+    type: 'array',
+  })
+  .argv
 
 const run = async () => {
   const locales = ['en']
@@ -18,7 +26,7 @@ const run = async () => {
   const pool = new Piscina({
     filename: './src/worker.js',
     niceIncrement: 10,
-    maxThreads: Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
+    maxThreads: inspector.url() ? 1 : Math.max(1, Math.floor(Math.min(os.cpus().length / 2, os.freemem() / (1.1 * 1024 ** 3)))),
   })
 
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
@@ -31,14 +39,18 @@ const run = async () => {
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
 
   const componentData = await Promise.all(
-    Object.entries(components).map(([componentName, componentInstance]) => pool.run(
-      JSON.stringify({
-        componentName,
-        componentProps: stringifyProps(componentInstance.props),
-        locales,
-        outPath,
-      })
-    ))
+    Object.entries(components).map(([componentName, componentInstance]) => {
+      if (argv.components && !argv.components.includes(componentName)) return null
+
+      return pool.run(
+        JSON.stringify({
+          componentName,
+          componentProps: stringifyProps(componentInstance.props),
+          locales,
+          outPath,
+        })
+      )
+    }).filter(Boolean)
   )
 
   // Composables
