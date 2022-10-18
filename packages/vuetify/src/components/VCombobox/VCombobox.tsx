@@ -90,7 +90,7 @@ export const VCombobox = genericComponent<new <
 
   emits: {
     'update:modelValue': (val: any) => true,
-    'update:searchInput': (val: string) => true,
+    'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
   },
 
@@ -114,7 +114,7 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const _search = ref('')
+    const _search = ref(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
       get: () => {
         return _search.value
@@ -143,7 +143,12 @@ export const VCombobox = genericComponent<new <
       },
     })
     watch(_search, value => {
-      emit('update:searchInput', value)
+      emit('update:search', value)
+    })
+    watch(model, value => {
+      if (!props.multiple) {
+        search.value = value[0]?.title ?? ''
+      }
     })
 
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))

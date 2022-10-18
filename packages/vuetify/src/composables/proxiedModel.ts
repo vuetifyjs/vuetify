@@ -48,11 +48,14 @@ export function useProxiedModel<
     get (): any {
       return transformIn(isControlled.value ? props[prop] : internal.value)
     },
-    set (newValue) {
-      if (transformIn(isControlled.value ? props[prop] : internal.value) === newValue) {
+    set (value) {
+      const newValue = transformOut(value)
+      if (
+        (isControlled.value ? props[prop] : internal.value) === newValue ||
+        transformIn(isControlled.value ? props[prop] : internal.value) === value
+      ) {
         return
       }
-      newValue = transformOut(newValue)
       internal.value = newValue
       vm?.emit(`update:${prop}`, newValue)
     },
