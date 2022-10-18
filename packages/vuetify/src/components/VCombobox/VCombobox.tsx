@@ -90,7 +90,7 @@ export const VCombobox = genericComponent<new <
 
   emits: {
     'update:modelValue': (val: any) => true,
-    'update:searchInput': (val: string) => true,
+    'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
   },
 
@@ -143,7 +143,7 @@ export const VCombobox = genericComponent<new <
       },
     })
     watch(_search, value => {
-      emit('update:searchInput', value)
+      emit('update:search', value)
     })
     watch(model, value => {
       search.value = !props.multiple ? value[0]?.title ?? '' : ''
