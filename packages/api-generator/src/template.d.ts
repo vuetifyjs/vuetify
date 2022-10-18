@@ -7,29 +7,35 @@ export type MakeSlots<T extends Record<string, any[]>> = {
 }
 
 type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '$children'
+type Event = `on${string}`
 
-type OnEvents<K extends string | symbol | number> = K extends `on${infer E}:${infer P}` ? K : never
-
-type ExtractOnEvents<T> = T extends object ? {
-  [K in keyof T as K extends OnEvents<K> ? K : never]: T[K]
-} : never
-
-type OmitOnEvents<T> = T extends object ? {
-  [K in keyof T as K extends OnEvents<K> ? never : K]: T[K]
-} : never
-
-type Props<T> = T extends { $props: infer P }
-  ? P extends object
-    ? {
-      [K in keyof P as K extends StripProps ? never : K]: P[K]
-    }
-    : never
+type Props<T> = T extends { $props: infer P extends object }
+  ? { [K in Exclude<keyof P, StripProps | Event>]: P[K] }
   : never
 
-export type ComponentProps = OmitOnEvents<Props<__component__>>
+type Events<T> = T extends { $props: infer P extends object }
+  ? {
+    [K in Exclude<keyof P, StripProps> as K extends `on${infer N}`
+      ? Uncapitalize<N>
+      : never
+    ]: P[K] extends ((...args: any[]) => any)
+      ? Parameters<P[K]>
+      : never
+  }
+  : never
+
+export type ComponentProps = Props<__component__>
+export type ComponentEvents = Events<__component__>
 
 type RemoveIndex<T> = {
-  [ K in keyof T as string extends K ? never : number extends K ? never : symbol extends K ? never : K]: T[K]
+  [K in keyof T as string extends K
+    ? never
+    : number extends K
+      ? never
+      : symbol extends K
+        ? never
+        : K
+  ]: T[K]
 }
 
 type RemoveSlot<T> = T extends MakeSlots<infer V>
@@ -45,18 +51,6 @@ type Slots<T> = T extends { $slots: infer S }
   : never
 
 export type ComponentSlots = Slots<__component__>
-
-type ExtractEvents<T> = T extends string[]
-  ? never
-  : T extends undefined
-    ? never
-    : T extends object
-      ? {
-        [K in keyof T]: T[K]
-      }
-      : never
-
-export type ComponentEvents = ExtractEvents<__component__['$options']['emits']>
 
 type ExtractExposed<T> = T extends (...args: any[]) => infer R
   ? R extends Promise<any>
