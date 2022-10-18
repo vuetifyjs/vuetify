@@ -146,7 +146,7 @@ export const VChip = defineComponent({
           v-ripple={ [isClickable && props.ripple, null] }
           onClick={ isClickable && onClickFunc }
         >
-          { genOverlays(true, 'v-chip') }
+          { genOverlays(isClickable, 'v-chip') }
 
           { hasFilter && (
             <VDefaultsProvider
