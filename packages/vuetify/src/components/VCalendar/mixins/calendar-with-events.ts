@@ -320,7 +320,7 @@ export default CalendarBase.extend({
           }
         }
 
-        return name
+        return this.$createElement('span', { staticClass: 'v-event-summary' }, [name])
       }
 
       const scope = {
