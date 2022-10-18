@@ -372,11 +372,12 @@ export const VCombobox = genericComponent<new <
                   const slotProps = {
                     'onClick:close': onChipClose,
                     modelValue: true,
+                    'onUpdate:modelValue': undefined,
                   }
 
                   return (
                     <div
-                      key={ index }
+                      key={ item.value }
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [

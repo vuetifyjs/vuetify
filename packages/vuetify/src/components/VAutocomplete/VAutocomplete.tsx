@@ -299,10 +299,11 @@ export const VAutocomplete = genericComponent<new <
                   const slotProps = {
                     'onClick:close': onChipClose,
                     modelValue: true,
+                    'onUpdate:modelValue': undefined,
                   }
 
                   return (
-                    <div key={ index } class="v-autocomplete__selection">
+                    <div key={ item.value } class="v-autocomplete__selection">
                       { hasChips ? (
                         <VDefaultsProvider
                           defaults={{
