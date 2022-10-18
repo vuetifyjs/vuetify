@@ -1,7 +1,7 @@
 <template>
   <v-tabs
     dark
-    background-color="primary"
+    bg="primary"
     grow
   >
     <v-tab>
