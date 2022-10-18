@@ -88,7 +88,7 @@ export default baseMixins.extend({
       type: [Boolean, String],
       default: 'v-menu-transition',
     },
-    contentAttributes: {
+    contentProps: {
       type: Object as PropType<Record<string, string | number>>,
       default: () => ({}),
     },
@@ -350,7 +350,7 @@ export default baseMixins.extend({
       const options = {
         attrs: {
           ...this.getScopeIdAttrs(),
-          ...this.contentAttributes,
+          ...this.contentProps,
           role: 'role' in this.$attrs ? this.$attrs.role : 'menu',
         },
         staticClass: 'v-menu__content',
