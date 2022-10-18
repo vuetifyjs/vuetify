@@ -32,6 +32,6 @@
     "items": "The items to display in the component. This can be an array of strings or objects with a property `title`"
   },
   "events": {
-    "update:modelValue": "Emitted when tab is changed by user interaction. Returns a string if **href** attribute is set and number if it is not."
+    "update:modelValue": "Emitted when tab is changed by user interaction."
   }
 }

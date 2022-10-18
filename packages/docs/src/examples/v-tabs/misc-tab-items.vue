@@ -3,7 +3,6 @@
     <v-tabs
       v-model="tab"
       bg-color="primary"
-      dark
     >
       <v-tab
         v-for="item in items"

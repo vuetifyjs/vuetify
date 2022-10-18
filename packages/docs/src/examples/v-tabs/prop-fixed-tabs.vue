@@ -2,7 +2,6 @@
   <v-tabs
     fixed-tabs
     bg-color="indigo-darken-2"
-    theme="dark"
   >
     <v-tab>
       Option
