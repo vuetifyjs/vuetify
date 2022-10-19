@@ -97,6 +97,7 @@ export const VOverlay = genericComponent<new () => {
     noClickAnimation: Boolean,
     modelValue: Boolean,
     persistent: Boolean,
+    disableGlobalStack: Boolean,
     scrim: {
       type: [String, Boolean],
       default: true,
@@ -136,7 +137,7 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), toRef(props, 'disableGlobalStack'))
     const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
 
