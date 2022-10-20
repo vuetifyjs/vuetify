@@ -12,8 +12,8 @@
     "update:modelValue": "Emitted when the input is changed by user interaction"
   },
   "exposed": {
-    "next": "activates the next button",
-    "prev": "activates the previous button",
-    "select": "selects a button by index, the second parameter is a boolean to indicate if the button should be selected or not"
+    "next": "Activates the next button",
+    "prev": "Activates the previous button",
+    "select": "Selects a button by index, the second parameter is a boolean to indicate if the button should be selected or not"
   }
 }
