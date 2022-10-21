@@ -34,8 +34,10 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
     items?: T[]
   }
   $slots: MakeSlots<{
+    prepend: []
+    title: [{ item: T, index: number }]
+    divider: [{ item: T, index: number }]
     default: []
-    item: [T | number]
   }>
 }>()({
   name: 'VBreadcrumbs',
