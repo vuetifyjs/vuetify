@@ -439,7 +439,7 @@ export default baseMixins.extend({
         !this.$el
       ) return 0
 
-      const width = Number(this.miniVariant ? this.miniVariantWidth : this.width)
+      const width = Number(this.computedWidth)
 
       return isNaN(width) ? this.$el.clientWidth : width
     },
