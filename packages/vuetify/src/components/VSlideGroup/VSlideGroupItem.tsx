@@ -2,12 +2,24 @@
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
-import { defineComponent } from '@/util'
-
-// Types
+import { genericComponent } from '@/util'
 import { VSlideGroupSymbol } from './VSlideGroup'
 
-export const VSlideGroupItem = defineComponent({
+// Types
+import type { UnwrapRef } from 'vue'
+import type { MakeSlots } from '@/util'
+import type { GroupItemProvide } from '@/composables/group'
+
+export const VSlideGroupItem = genericComponent<new () => {
+  $slots: MakeSlots<{
+    default: [{
+      isSelected: UnwrapRef<GroupItemProvide['isSelected']>
+      select: GroupItemProvide['select']
+      toggle: GroupItemProvide['toggle']
+      selectedClass: UnwrapRef<GroupItemProvide['selectedClass']>
+    }]
+  }>
+}>()({
   name: 'VSlideGroupItem',
 
   props: {
