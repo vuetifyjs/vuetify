@@ -1,3 +1,4 @@
+/// <reference types="../../types/cypress" />
 import '../../src/styles/main.sass'
 import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from 'cypress/vue'
@@ -9,11 +10,11 @@ import { mergeDeep } from '../../src/util'
  * cy.mount(<VBtn>My button</VBtn>)
  */
 Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
-  const root = document.getElementById('cy-root');
+  const root = document.getElementById('cy-root')!
 
   // add the v-application class that allows Vuetify styles to work
   if (!root.classList.contains('v-locale--is-rtl')) {
-    root.classList.add('v-locale--is-ltr');
+    root.classList.add('v-locale--is-ltr')
   }
 
   const vuetify = createVuetify(vuetifyOptions)
@@ -27,11 +28,11 @@ Cypress.Commands.add('mount', (component, options, vuetifyOptions) => {
     },
   }
 
-  return cyMount(component, mergeDeep(defaultOptions, options, (a, b) => a.concat(b))).as('wrapper')
+  return cyMount(component, mergeDeep(defaultOptions, options!, (a, b) => a.concat(b))).as('wrapper')
 })
 
 Cypress.Commands.add('vue', () => {
-  return cy.get('@wrapper')
+  return cy.get('@wrapper') as any
 })
 
 /**
@@ -62,10 +63,10 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
 Cypress.Commands.add('emitted', (selector: string, event: string) => {
   return cy.get('@wrapper').then(wrapper => {
     const vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
-    const cmp = vueWrapper.findComponent(selector)
+    const cmp = vueWrapper.findComponent<any>(selector)
 
     if (!cmp) return []
 
     return cmp.emitted(event)
-  })
+  }) as any
 })

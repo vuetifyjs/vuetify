@@ -14,17 +14,15 @@ describe('VSlideGroup', () => {
           <VSlideGroup showArrows="always" selectedClass="bg-primary">
             { createRange(6).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => (
-                    <VCard
-                      class={ ['ma-4', props.selectedClass] }
-                      color="grey"
-                      width="50"
-                      height="100"
-                      onClick={ props.toggle }
-                    >{ i }</VCard>
-                  ),
-                }}
+                { props => (
+                  <VCard
+                    class={ ['ma-4', props.selectedClass] }
+                    color="grey"
+                    width="50"
+                    height="100"
+                    onClick={ props.toggle }
+                  >{ i }</VCard>
+                )}
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -192,9 +190,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup modelValue={ 7 } showArrows="always" selectedClass="bg-primary">
             { createRange(10).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -212,9 +208,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary">
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -235,9 +229,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary" showArrows>
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>

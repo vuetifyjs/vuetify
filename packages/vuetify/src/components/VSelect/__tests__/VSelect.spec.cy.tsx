@@ -3,30 +3,34 @@
 import { VListItem } from '@/components/VList'
 import { VSelect } from '../VSelect'
 
-const items = [
-  { title: 'a' },
-  { title: 'b' },
-  { title: 'c' },
-]
-let model: { title: string }[] = []
-
-const T = (
-  <VSelect
-    multiple
-    returnObject
-    items={ items }
-    modelValue={ model }
-    onUpdate:modelValue={ val => model = val }
-  >
-    {{
-      selection: ({ item, index }) => {
-        item.toUpperCase()
-      },
-    }}
-  </VSelect>
-)
-
 describe('VSelect', () => {
+  it('should render selection slot', () => {
+    const items = [
+      { title: 'a' },
+      { title: 'b' },
+      { title: 'c' },
+    ]
+    let model: { title: string }[] = [{ title: 'b' }]
+
+    cy.mount(() => (
+      <VSelect
+        multiple
+        returnObject
+        items={ items }
+        modelValue={ model }
+        onUpdate:modelValue={ val => model = val }
+      >
+        {{
+          // @ts-expect-error broken slot types
+          selection: ({ item, index }) => {
+            return item.raw.title.toUpperCase()
+          },
+        }}
+      </VSelect>
+    ))
+      .get('.v-select__selection').eq(0).invoke('text').should('equal', 'B')
+  })
+
   it('should render prepend-item slot', () => {
     cy.mount(() => (
       <VSelect menu items={['Item #1', 'Item #2']}>

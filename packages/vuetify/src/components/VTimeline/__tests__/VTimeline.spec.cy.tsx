@@ -38,7 +38,7 @@ describe('VTimeline', () => {
     })
 
     it('should support truncate-line', () => {
-      const truncateLine = ref<TimelineTruncateLine>('none')
+      const truncateLine = ref<TimelineTruncateLine>()
       cy.mount(() => (
         <VTimeline truncateLine={truncateLine.value}>
           <VTimelineItem key="1">
@@ -208,7 +208,7 @@ describe('VTimeline', () => {
     })
 
     it('should support truncate-line', () => {
-      const truncateLine = ref<TimelineTruncateLine>('none')
+      const truncateLine = ref<TimelineTruncateLine>()
       cy.mount(() => (
         <VTimeline direction="horizontal" truncateLine={truncateLine.value}>
           <VTimelineItem key="1">

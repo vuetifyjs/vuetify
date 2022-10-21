@@ -12,7 +12,7 @@ import {
   mergeDeep,
   sortItems,
 } from '../helpers'
-import { isProxy, isReactive, isRef, nextTick, ref } from 'vue'
+import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {

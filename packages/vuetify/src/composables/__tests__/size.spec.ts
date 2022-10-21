@@ -1,3 +1,4 @@
+import { describe, expect, it } from '@jest/globals'
 import { useSize } from '../size'
 
 describe('size', () => {
@@ -10,7 +11,8 @@ describe('size', () => {
     [{ size: '100px' }, undefined],
     [{ size: 100 }, undefined],
     [{ size: undefined }, undefined],
-  ] as const)('should return the correct class given value %p', (input, expected) => {
+  ] as const)('should return the correct class given value %p', (...args) => {
+    const [input, expected] = args
     const { sizeClasses } = useSize(input, 'test')
 
     expect(sizeClasses.value).toStrictEqual(expected)
@@ -25,7 +27,8 @@ describe('size', () => {
     [{ size: '100px' }, { width: '100px', height: '100px' }],
     [{ size: 50 }, { width: '50px', height: '50px' }],
     [{ size: undefined }, undefined],
-  ] as const)('should return the correct styles given value %p', (input, expected) => {
+  ] as const)('should return the correct styles given value %p', (...args) => {
+    const [input, expected] = args
     const { sizeStyles } = useSize(input, 'test')
 
     expect(sizeStyles.value).toStrictEqual(expected)

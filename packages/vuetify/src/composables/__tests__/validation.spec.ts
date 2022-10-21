@@ -7,12 +7,13 @@ import { defineComponent, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { ValidationProps, ValidationRule } from '../validation'
+import type { ValidationProps } from '../validation'
 
 describe('validation', () => {
   function mountFunction (props: Partial<ValidationProps> = {}) {
     return mount(defineComponent({
       props: makeValidationProps(),
+      emits: ['update:modelValue'],
       setup (props) {
         return useValidation(props, 'validation')
       },
@@ -26,14 +27,10 @@ describe('validation', () => {
     ['', [(v: any) => !!v || 'foo'], ['foo']],
     ['', [(v: any) => !!v || ''], ['']],
     ['', [(v: any) => Promise.resolve(!!v || 'fizz')], ['fizz']],
-    ['', [(v: any) => new Promise(resolve => resolve(!!v || 'buzz'))], ['buzz']],
+    ['', [(v: any) => new Promise<boolean | string>(resolve => resolve(!!v || 'buzz'))], ['buzz']],
     ['foo', [(v: any) => v === 'foo' || 'bar'], []],
     ['foo', [(v: any) => v === 'bar' || 'fizz'], ['fizz']],
-  ])('should validate rules and return array of errorMessages %#', async (
-    modelValue: any,
-    rules: ValidationRule[],
-    expected: any
-  ) => {
+  ])('should validate rules and return array of errorMessages %#', async (modelValue, rules, expected) => {
     const props = { rules, modelValue }
     const wrapper = mountFunction(props)
 
@@ -43,16 +40,13 @@ describe('validation', () => {
   })
 
   it.each([
-    [null, 1],
+    [undefined, 1],
     [1, 1],
     [2, 2],
     [3, 3],
     [4, 4],
     [5, 4],
-  ])('only validate up to the maximum error count %s', async (
-    maxErrors: number | string,
-    expected: number,
-  ) => {
+  ])('only validate up to the maximum error count %s', async (maxErrors, expected) => {
     const wrapper = mountFunction({
       maxErrors,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
