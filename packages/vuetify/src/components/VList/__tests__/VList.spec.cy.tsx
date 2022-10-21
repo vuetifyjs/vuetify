@@ -107,7 +107,6 @@ describe('VList', () => {
       <CenteredGrid width="400px">
         <VList items={ items } opened={['group']}>
           {{
-            // @ts-expect-error broken slot types
             item: item => <VListItem {...item} prependIcon="mdi-home" />,
           }}
         </VList>

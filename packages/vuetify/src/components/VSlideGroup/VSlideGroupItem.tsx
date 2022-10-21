@@ -7,11 +7,11 @@ import { VSlideGroupSymbol } from './VSlideGroup'
 
 // Types
 import type { UnwrapRef } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { GroupItemProvide } from '@/composables/group'
 
 export const VSlideGroupItem = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     default: [{
       isSelected: UnwrapRef<GroupItemProvide['isSelected']>
       select: GroupItemProvide['select']

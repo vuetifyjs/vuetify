@@ -21,7 +21,6 @@ describe('VSelect', () => {
         onUpdate:modelValue={ val => model = val }
       >
         {{
-          // @ts-expect-error broken slot types
           selection: ({ item, index }) => {
             return item.raw.title.toUpperCase()
           },

@@ -20,15 +20,14 @@ import { onMounted, ref, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 export const VSnackbar = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: VOverlay['$props'] & SlotsToProps<{
     activator: [{ isActive: boolean, props: Record<string, any> }]
     default: []
     actions: []
   }>
-  $props: VOverlay['$props']
 }>()({
   name: 'VSnackbar',
 

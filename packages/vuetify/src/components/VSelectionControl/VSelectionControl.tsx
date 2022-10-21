@@ -32,7 +32,7 @@ import {
 
 // Types
 import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -155,8 +155,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     default: []
     input: [SelectionControlSlot]
   }>

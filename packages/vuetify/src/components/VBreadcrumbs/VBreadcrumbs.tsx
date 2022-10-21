@@ -21,7 +21,7 @@ import { toRef } from 'vue'
 
 // Types
 import type { LinkProps } from '@/composables/router'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export type BreadcrumbItem = string | (LinkProps & {
@@ -32,8 +32,7 @@ export type BreadcrumbItem = string | (LinkProps & {
 export const VBreadcrumbs = genericComponent<new <T>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     prepend: []
     title: [{ item: T, index: number }]
     divider: [{ item: T, index: number }]

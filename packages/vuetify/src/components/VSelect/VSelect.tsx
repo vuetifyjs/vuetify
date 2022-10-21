@@ -26,7 +26,7 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeSelectProps = propsFactory({
@@ -81,15 +81,16 @@ export const VSelect = genericComponent<new <
     multiple?: Multiple
     modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<T>, index: number }]
-    'prepend-item': []
-    'append-item': []
-    'no-data': []
-  }>
+  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      selection: [{ item: InternalItem<T>, index: number }]
+      'prepend-item': []
+      'append-item': []
+      'no-data': []
+    }>
+  >
 }>()({
   name: 'VSelect',
 

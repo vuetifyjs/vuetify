@@ -26,7 +26,7 @@ import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export interface InternalListItem extends InternalItem {
@@ -75,8 +75,7 @@ function useListItems (props: ItemProps & { itemType: string }) {
 export const VList = genericComponent<new <T>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     subheader: []
     header: [ListGroupActivatorSlot]
     item: [T]

@@ -235,6 +235,7 @@ const allowedRefs = [
   'ScrollStrategyFn',
   'SelectItemKey',
   'SelectStrategyFn',
+  'SubmitEventPromise',
   'ValidationRule',
 ]
 

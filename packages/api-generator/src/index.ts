@@ -13,13 +13,13 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 
-const argv = yargs(process.argv.slice(2))
+const yar = yargs(process.argv.slice(2))
   .option('components', {
     type: 'array',
   })
-  .argv
 
 const run = async () => {
+  const argv = await yar.argv
   const locales = ['en']
 
   // Components
@@ -81,7 +81,7 @@ const run = async () => {
   fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
-  rimraf.sync(path.resolve('./src/tmp'))
+  // rimraf.sync(path.resolve('./src/tmp'))
 }
 
 run()

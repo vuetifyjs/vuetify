@@ -15,12 +15,10 @@ import { computed, ref } from 'vue'
 import { genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { PropType } from 'vue'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 
 export const VTooltip = genericComponent<new () => {
-  $slots: OverlaySlots
   $props: VOverlay['$props']
 }>()({
   name: 'VTooltip',

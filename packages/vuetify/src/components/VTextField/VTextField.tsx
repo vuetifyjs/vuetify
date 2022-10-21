@@ -19,7 +19,7 @@ import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -28,10 +28,10 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 type EventProp<T = (...args: any[]) => any> = T | T[]
 const EventProp = [Function, Array] as PropType<EventProp>
 
-export const VTextField = genericComponent<new <T>() => {
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+export const VTextField = genericComponent<new () => {
+  $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     default: []
-  }>
+  }>>
 }>()({
   name: 'VTextField',
 
