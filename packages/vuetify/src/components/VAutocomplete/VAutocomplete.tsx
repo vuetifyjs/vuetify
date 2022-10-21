@@ -51,7 +51,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
-    ? Val<T, ReturnObject>[]
+    ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
 export const VAutocomplete = genericComponent<new <
@@ -64,7 +64,7 @@ export const VAutocomplete = genericComponent<new <
     items?: readonly T[]
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: Readonly<V>
+    modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
   } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
   $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
