@@ -4,26 +4,22 @@ meta:
   description: Setup your entire application with pre-made or custom styling and designs
   keywords: vuetify blueprints, vuetify presets, vuetify schemas
 related:
-  - /features/defaults/
+  - /features/global-configuration/
   - /features/theme/
-  - /features/presets/
+  - /features/display-and-platform/
 ---
 
 # Blueprints
 
-Vuetify blueprints are a new way to pre-configure your entire application with a complete design system.
+Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprint.png)
+![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprints-entry.png)
 
 ---
 
-## How they work
-
-Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more.
-
 ## Usage
 
-Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
+Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
 
 ```js { resource=plugins/vuetify.js }
 import { createVuetify } from 'vuetify'
@@ -33,11 +29,15 @@ export default createVuetify({
   blueprint: md1,
 })
 ```
+
+<entry />
+
 ### White-label concept
 
 While Vuetify is built under the guise of Google's [Material Design](https://material.io/) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
 
-## Blueprints
+## Available blueprints
+
 | Name | Release date | Status | Resource |
 | - | - | - | - |
 | [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://material.io/archive/guidelines/) |
@@ -52,7 +52,7 @@ Released in 2014, the original Material Design specification aimed to create a v
 import { md1 } from 'vuetify/blueprints'
 ```
 
-### Preview
+**Preview:**
 
 <example preview file="blueprints/md1" />
 
@@ -64,7 +64,7 @@ Released in 2017, version 2 of Google's design specification received a massive 
 import { md2 } from 'vuetify/blueprints'
 ```
 
-### Preview
+**Preview:**
 
 <example preview file="blueprints/md2" />
 
@@ -76,7 +76,7 @@ Material Design 3 is currently in active development and represents the next cha
 import { md3 } from 'vuetify/blueprints'
 ```
 
-### Preview
+**Preview:**
 
 <example preview file="blueprints/md3" />
 
