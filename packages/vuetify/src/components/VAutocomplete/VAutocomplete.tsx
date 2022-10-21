@@ -71,6 +71,8 @@ export const VAutocomplete = genericComponent<new <
     item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
     chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
     selection: [{ item: InternalItem<T>, index: number }]
+    'prepend-item': []
+    'append-item': []
     'no-data': []
   }>
 }>()({
@@ -263,6 +265,8 @@ export const VAutocomplete = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
+                    { slots['prepend-item']?.() }
+
                     { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
                       index,
@@ -285,6 +289,8 @@ export const VAutocomplete = genericComponent<new <
                         }}
                       </VListItem>
                     )) }
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 

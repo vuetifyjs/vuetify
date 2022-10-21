@@ -86,6 +86,8 @@ export const VSelect = genericComponent<new <
     item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
     chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
     selection: [{ item: InternalItem<T>, index: number }]
+    'prepend-item': []
+    'append-item': []
     'no-data': []
   }>
 }>()({
