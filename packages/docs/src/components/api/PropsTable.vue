@@ -31,6 +31,9 @@
           <tr>
             <td colspan="3" class="text-mono">
               <app-markdown v-if="item.description" :content="item.description" />
+              <p v-if="DEV && item.source">
+                source: {{ item.source }}
+              </p>
             </td>
           </tr>
         </template>
@@ -66,6 +69,7 @@
         field: 'props',
         getType,
         kebabCase,
+        DEV: import.meta.env.DEV,
       }
     },
   })

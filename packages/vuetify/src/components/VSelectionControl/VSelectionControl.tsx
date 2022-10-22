@@ -77,7 +77,7 @@ export const makeSelectionControlProps = propsFactory({
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-})
+}, 'VSelectionControl')
 
 export function useSelectionControl (
   props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {

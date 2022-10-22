@@ -28,6 +28,7 @@ import type {
   VNode,
   VNodeChild,
 } from 'vue'
+import { propsFactory } from '@/util/propsFactory'
 
 function propIsDefined (vnode: VNode, prop: string) {
   return vnode.props?.hasOwnProperty(prop) ||
@@ -45,6 +46,9 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
   if (options._setup) {
     options.props = options.props ?? {}
+
+    options.props = propsFactory(options.props, options.name)()
+
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!

@@ -28,7 +28,7 @@ import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
 
 export function propsFactory<
   PropsOptions extends ComponentObjectPropsOptions
-> (props: PropsOptions, source?: string) {
+> (props: PropsOptions, source: string) {
   return <Defaults extends PartialKeys<PropsOptions> = {}>(
     defaults?: Defaults
   ): AppendDefault<PropsOptions, Defaults> => {
@@ -45,7 +45,7 @@ export function propsFactory<
         obj[prop] = definition
       }
 
-      if (source) {
+      if (source && !obj[prop].source) {
         obj[prop].source = source
       }
 

@@ -23,7 +23,7 @@ export const makeVCheckboxBtnProps = propsFactory({
     falseIcon: '$checkboxOff',
     trueIcon: '$checkboxOn',
   }),
-})
+}, 'VCheckboxBtn')
 
 export const VCheckboxBtn = defineComponent({
   name: 'VCheckboxBtn',

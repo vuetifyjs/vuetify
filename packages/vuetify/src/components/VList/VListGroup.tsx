@@ -52,7 +52,7 @@ export const makeVListGroupProps = propsFactory({
   value: null,
 
   ...makeTagProps(),
-})
+}, 'VListGroup')
 
 export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {

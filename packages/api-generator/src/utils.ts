@@ -1,3 +1,4 @@
+import stringifyObject from 'stringify-object'
 import type { Definition, ObjectDefinition } from './types'
 
 function parseFunctionParams (func: string) {
@@ -58,6 +59,7 @@ export function addPropData (
     const instancePropObj = componentProps[propName]
 
     ;(propObj as any).default = instancePropObj?.default
+    ;(propObj as any).source = instancePropObj?.source
 
     sources.add(instancePropObj?.source ?? kebabName)
   }
@@ -68,11 +70,26 @@ export function addPropData (
 export function stringifyProps (props: any) {
   return Object.fromEntries(
     Object.entries<any>(props).map(([key, prop]) => {
+      let def = typeof prop === 'object'
+        ? getPropDefault(prop?.default, getPropType(prop?.type))
+        : getPropDefault(undefined, getPropType(prop))
+
+      if (typeof def === 'object') {
+        def = stringifyObject(def, {
+          indent: '  ',
+          inlineCharacterLimit: 60,
+          filter (obj, property) {
+            if (typeof obj === 'object' && !Array.isArray(obj) && obj != null && 'name' in obj && 'props' in obj && 'setup' in obj) {
+              return property === 'name'
+            }
+            return true
+          },
+        })
+      }
+
       return [key, {
         source: prop?.source,
-        default: typeof prop === 'object'
-          ? getPropDefault(prop?.default, getPropType(prop?.type))
-          : getPropDefault(undefined, getPropType(prop)),
+        default: def,
       }]
     })
   )
