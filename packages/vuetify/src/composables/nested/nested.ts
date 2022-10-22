@@ -13,7 +13,7 @@ import {
 
 // Types
 import type { InjectionKey, Prop, Ref } from 'vue'
-import type { SelectStrategyFn } from './selectStrategies'
+import type { SelectStrategy } from './selectStrategies'
 import type { OpenStrategy } from './openStrategies'
 
 export type SelectStrategyValue =
@@ -23,7 +23,7 @@ export type SelectStrategyValue =
   | 'single-independent'
   | 'classic'
   | 'classic-leaf'
-  | SelectStrategyFn
+  | SelectStrategy
 export type OpenStrategyValue = 'single' | 'multiple' | 'list' | OpenStrategy
 
 export interface NestedProps {
@@ -53,9 +53,9 @@ type NestedProvide = {
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
     emit: (event: string, value: any) => void
     selectedClass: Ref<string | undefined>
-    getPath: (id: string) => string[]
-    getChildren: (id: string) => string[]
-    selectable: (id: string) => boolean
+    getPath: (id: unknown) => unknown[]
+    getChildren: (id: unknown) => unknown[]
+    selectable: (id: unknown) => boolean
   }
 }
 
@@ -99,7 +99,7 @@ export const useNested = (props: NestedProps) => {
   const opened = useProxiedModel(props, 'opened', undefined, v => new Set(v), v => [...v.values()])
 
   const selectStrategy = computed(() => {
-    if (props.selectStrategy && typeof props.selectStrategy !== 'string') return props.selectStrategy(props.mandatory)
+    if (props.selectStrategy && typeof props.selectStrategy !== 'string') return props.selectStrategy
 
     switch (props.selectStrategy) {
       case 'single-leaf': return leafSingleSelectStrategy
@@ -147,7 +147,7 @@ export const useNested = (props: NestedProps) => {
     return path
   }
 
-  function getChildren (id: string) {
+  function getChildren (id: unknown) {
     const arr: unknown[] = []
     const queue = (children.value.get(id) ?? []).slice()
 
@@ -265,7 +265,7 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const computedId = computed(() => id.value ?? getUid().toString())
+  const computedId = computed<unknown>(() => id.value ?? getUid().toString())
 
   const root = parent.root
 

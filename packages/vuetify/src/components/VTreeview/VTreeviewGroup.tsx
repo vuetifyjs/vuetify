@@ -13,7 +13,7 @@ import { VTreeviewSymbol } from './shared'
 
 // Types
 import type { Ref } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { InternalListItem } from '../VList/VList'
 
 export type TreeviewGroupActivatorSlot = {
@@ -39,8 +39,7 @@ const VTreeviewGroupActivator = defineComponent({
 export const VTreeviewGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     activator: [TreeviewGroupActivatorSlot]
     default: []
   }>
@@ -88,7 +87,7 @@ export const VTreeviewGroup = genericComponent<new <T extends InternalListItem>(
           class={[
             'v-treeview-group',
             {
-              'v-treeview-group--filtered': !visibleIds.value.has(id.value),
+              'v-treeview-group--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
           ]}
         >

@@ -1,7 +1,7 @@
 import './VTreeviewItem.sass'
 
 // Components
-import { VBtn, VIcon, VProgressCircular, VCheckboxBtn } from '@/components'
+import { VBtn, VCheckboxBtn, VIcon, VProgressCircular } from '@/components'
 
 // Composables
 import { useNestedItem } from '@/composables/nested/nested'
@@ -12,7 +12,7 @@ import { genOverlays } from '@/composables/variant'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
-import { computed, inject, ref, watch } from 'vue'
+import { computed, inject, ref } from 'vue'
 import { defineComponent } from '@/util'
 import { VTreeviewSymbol } from './shared'
 
@@ -68,6 +68,7 @@ export const VTreeviewItem = defineComponent({
       open,
       isLeaf,
       selectedClass,
+      isGroupActivator,
       root,
     } = useNestedItem(id, false)
     const { visibleIds } = inject(VTreeviewSymbol, { visibleIds: ref(new Set()) })
@@ -83,7 +84,7 @@ export const VTreeviewItem = defineComponent({
     }))
 
     function onItemClick (e: MouseEvent) {
-      props.selectOnClick && select(!isSelected.value, e)
+      props.selectOnClick && !isGroupActivator && select(!isSelected.value, e)
 
       props.openOnClick && !isLeaf.value && open(!isOpen.value, e)
     }
@@ -126,7 +127,7 @@ export const VTreeviewItem = defineComponent({
               'v-treeview-item--prepend': isLeaf.value,
               'v-treeview-item--clickable': (props.openOnClick && !isLeaf.value) || props.selectOnClick,
               'v-treeview-item--disabled': props.disabled,
-              'v-treeview-item--filtered': !visibleIds.value.has(id.value),
+              'v-treeview-item--filtered': visibleIds.value && !visibleIds.value.has(id.value),
             },
             selectedClass.value,
             roundedClasses.value,

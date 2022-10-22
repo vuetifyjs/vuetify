@@ -22,9 +22,9 @@ export type SelectStrategyTransformOutFn = (
 ) => unknown[]
 
 export type SelectableFn = (data: {
-  id: string
-  children: Map<string, string[]>
-  parents: Map<string, string>
+  id: unknown
+  children: Map<unknown, unknown[]>
+  parents: Map<unknown, unknown>
 }) => boolean
 
 export type SelectStrategy = {

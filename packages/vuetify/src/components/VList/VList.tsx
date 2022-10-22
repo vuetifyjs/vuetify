@@ -80,7 +80,7 @@ export const VList = genericComponent<new <T>() => {
   $props: {
     items?: T[]
   } & SlotsToProps<{
-    default: [{ items: InternalListItem[] }]
+    default: [ListDefaultSlot]
     subheader: []
     header: [ListGroupActivatorSlot]
     item: [T]

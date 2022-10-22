@@ -21,7 +21,7 @@ import { VTreeviewSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { TreeviewGroupActivatorSlot } from './VTreeviewGroup'
 import type { ItemProps } from '@/composables/items'
 import type { InternalListItem } from '../VList/VList'
@@ -69,8 +69,10 @@ function flatten (items: InternalListItem[], flat: InternalListItem[] = []) {
   return flat
 }
 
-export const VTreeview = genericComponent<new <T extends InternalListItem>() => {
-  $slots: MakeSlots<{
+export const VTreeview = genericComponent<new <T>() => {
+  $props: {
+    items: T[]
+  } & SlotsToProps<{
     default: []
     activator: [TreeviewGroupActivatorSlot]
     item: [T]
@@ -91,7 +93,7 @@ export const VTreeview = genericComponent<new <T extends InternalListItem>() => 
     },
     showSelect: Boolean,
     ...makeNestedProps({
-      selectedClass: 'v-treeview--selected',
+      selectedClass: 'v-treeview-item--active',
     }),
     ...makeTagProps(),
     ...makeDensityProps(),
@@ -112,8 +114,8 @@ export const VTreeview = genericComponent<new <T extends InternalListItem>() => 
   },
 
   emits: {
-    'update:selected': (val: string[]) => true,
-    'update:opened': (val: string[]) => true,
+    'update:selected': (val: unknown[]) => true,
+    'update:opened': (val: unknown[]) => true,
     'click:open': (value: { id: string, value: unknown }) => true,
     'click:select': (value: { id: string, value: unknown }) => true,
     'click:prepend': (data: { event: MouseEvent, isOpen: boolean, open: (value: boolean, e?: Event) => void }) => true,
@@ -122,19 +124,22 @@ export const VTreeview = genericComponent<new <T extends InternalListItem>() => 
   },
 
   setup (props, { slots, emit }) {
-    const { open, select, getPath, getChildren, children, opened } = useNested(props)
+    const { open, select, getPath, getChildren, children, parents, opened } = useNested(props)
 
     const items = computed(() => transformItems(props, props.items))
     const flatItems = computed(() => flatten(items.value))
 
     onMounted(() => {
       if (props.openOnMount === 'root') {
-        items.value.forEach(item => open(item.props.value, true))
+        parents.value.forEach(parent => {
+          if (!parents.value.has(parent)) {
+            open(parent, true)
+          }
+        })
       } else if (props.openOnMount === 'all') {
-        const parents = flatItems.value.reduce((ids, item) => {
-          return children.value.has(item.props.value) ? [...ids, item.props.value] : ids
-        }, [] as any[])
-        parents.forEach(parent => open(parent, true))
+        parents.value.forEach(parent => {
+          open(parent, true)
+        })
       }
     })
 
@@ -142,7 +147,7 @@ export const VTreeview = genericComponent<new <T extends InternalListItem>() => 
     const { filteredItems } = useFilter(props, flatItems, search)
     const visibleIds = computed(() => {
       if (!search.value) {
-        return new Set(flatItems.value.map(item => item.props.value))
+        return null
       }
 
       return new Set(filteredItems.value.flatMap(({ item }) => {
@@ -150,8 +155,10 @@ export const VTreeview = genericComponent<new <T extends InternalListItem>() => 
       }))
     })
 
-    let previousOpened: Set<string> | null = null
+    let previousOpened: Set<unknown> | null = null
     watch(search, (value, oldValue) => {
+      if (!visibleIds.value) return
+
       // Save current open state so we can
       // restore it when no longer searching
       if (value && !oldValue) {
