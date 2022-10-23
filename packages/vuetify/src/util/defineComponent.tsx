@@ -3,6 +3,7 @@ import {
   defineComponent as _defineComponent,
   effectScope,
   getCurrentInstance,
+  onBeforeUpdate,
   shallowReactive,
   shallowRef,
   toRaw,
@@ -56,6 +57,10 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
       const _subcomponentDefaults = shallowRef()
       const _props = shallowReactive({ ...toRaw(props) })
+      const _attrs = shallowReactive({ ...toRaw(ctx.attrs) })
+      const _slots = shallowReactive({ ...toRaw(ctx.slots) })
+      const attrsKeys = new Set(Object.keys(ctx.attrs))
+      const slotsKeys = new Set(Object.keys(ctx.slots))
       watchEffect(() => {
         const globalDefaults = defaults.value.global
         const componentDefaults = defaults.value[props._as ?? options.name!]
@@ -75,8 +80,32 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
           }
         }
       })
+      onBeforeUpdate(() => {
+        Object.keys(ctx.attrs).forEach(key => attrsKeys.add(key))
+        Object.keys(ctx.slots).forEach(key => slotsKeys.add(key))
+        for (const prop of attrsKeys) {
+          if (!propIsDefined(vm.vnode, prop)) {
+            delete _attrs[prop]
+          } else {
+            const newVal = ctx.attrs[prop]
+            if (_attrs[prop] !== newVal) {
+              _attrs[prop] = newVal
+            }
+          }
+        }
+        for (const prop of slotsKeys) {
+          if (!vm.vnode.children?.hasOwnProperty(prop)) {
+            delete _attrs[prop]
+          } else {
+            const newVal = ctx.slots[prop]
+            if (_slots[prop] !== newVal) {
+              _slots[prop] = newVal
+            }
+          }
+        }
+      })
 
-      const setupBindings = options._setup(_props, ctx)
+      const setupBindings = options._setup(_props, { ...ctx, attrs: _attrs })
 
       let scope: EffectScope
       watch(_subcomponentDefaults, (val, oldVal) => {
