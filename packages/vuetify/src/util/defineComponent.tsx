@@ -66,10 +66,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         }
 
         for (const prop of Object.keys(props)) {
-          let newVal
-          if (propIsDefined(vm.vnode, prop)) {
-            newVal = props[prop]
-          } else {
+          let newVal = props[prop]
+          if (!propIsDefined(vm.vnode, prop)) {
             newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
           }
           if (_props[prop] !== newVal) {
