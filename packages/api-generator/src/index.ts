@@ -78,10 +78,14 @@ const run = async () => {
   }
 
   rimraf.sync(path.resolve('./dist'))
-  fs.mkdir(path.resolve('./dist'))
+  await fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
-  // rimraf.sync(path.resolve('./src/tmp'))
+  await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
+  await fs.copyFile(path.resolve('./dist/tags.json'), path.resolve('../vuetify/dist/json/tags.json'))
+  await fs.copyFile(path.resolve('./dist/attributes.json'), path.resolve('../vuetify/dist/json/attributes.json'))
+  await fs.copyFile(path.resolve('./dist/web-types.json'), path.resolve('../vuetify/dist/json/web-types.json'))
+  rimraf.sync(path.resolve('./src/tmp'))
 }
 
 run()
