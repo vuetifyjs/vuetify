@@ -1,5 +1,6 @@
 {
   "props": {
+    "color": "Applies a color to the navigation dots",
     "continuous": "Determines whether carousel is continuous",
     "cycle": "Determines if the carousel should cycle through images.",
     "delimiterIcon": "Sets icon for carousel delimiter",
@@ -13,9 +14,10 @@
     "progressColor": "Applies specified color to progress bar.",
     "showArrows": "Displays arrows for next/previous navigation.",
     "showArrowsOnHover": "Displays navigation arrows only when the carousel is hovered over.",
-    "verticalDelimiters": "Displays carousel delimiters vertically."
+    "verticalDelimiters": "Displays carousel delimiters vertically.",
+    "modelValue": "The v-model for the carousel."
   },
   "events": {
-    "change": "Emitted when the component value is changed by user interaction"
+    "update:modelValue": "Emitted when the component value is changed by user interaction"
   }
 }

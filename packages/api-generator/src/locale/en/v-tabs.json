@@ -2,7 +2,8 @@
   "props": {
     "activeClass": "The **active-class** applied to children when they are activated.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
-    "backgroundColor": "Changes the background color of the component.",
+    "bgColor": "Changes the background color of the component.",
+    "color": "Changes the color of the tabs.",
     "centered": "Centers the tabs",
     "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
@@ -24,9 +25,13 @@
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
     "touchless": "Disable mobile touch functionality",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
-    "vertical": "Stacks tabs on top of each other vertically."
+    "vertical": "Stacks tabs on top of each other vertically.",
+    "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
+    "end": "Aligns tabs to the end",
+    "modelValue": "The v-model of the component.",
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`"
   },
   "events": {
-    "change": "Emitted when tab is changed by user interaction. Returns a string if **href** attribute is set and number if it is not."
+    "update:modelValue": "Emitted when tab is changed by user interaction."
   }
 }
