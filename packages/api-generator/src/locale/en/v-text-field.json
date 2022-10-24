@@ -1,6 +1,7 @@
 {
   "props": {
-    "appendOuterIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
+    "appendIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
+    "appendInnerIcon": "Appends an icon inside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "filled": "Applies the alternate filled input style",
@@ -15,6 +16,7 @@
     "persistentPlaceholder": "Forces placeholder to always be visible",
     "placeholder": "Sets the input’s placeholder text",
     "prefix": "Displays prefix text",
+    "prependIcon": "Prepends an icon to the outnside the component's input, uses the same syntax as `v-icon`",
     "prependInnerIcon": "Prepends an icon inside the component's input, uses the same syntax as `v-icon`",
     "reverse": "Reverses the input orientation",
     "rounded": "Adds a border radius to the input",
