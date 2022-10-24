@@ -19,12 +19,12 @@
     height: auto
     --v-tabs-height: #{$tabs-height}
 
-.v-tabs--align-with-title:not(.v-slide-group--has-affixes)
+.v-tabs--align-tabs-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
-    margin-inline-start: $tab-align-with-title-margin
+    margin-inline-start: $tab-align-tabs-title-margin
 
 .v-tabs--fixed-tabs,
-.v-tabs--centered
+.v-tabs--align-tabs-center
   .v-slide-group__content > *:last-child
     margin-inline-end: auto
 
@@ -38,7 +38,7 @@
     flex: 1 0 auto
     max-width: none
 
-.v-tabs--end
+.v-tabs--align-tabs-end
   .v-tab:first-child
     margin-inline-start: auto
 

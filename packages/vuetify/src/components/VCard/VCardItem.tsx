@@ -99,3 +99,5 @@ export const VCardItem = defineComponent({
     return {}
   },
 })
+
+export type VCardItem = InstanceType<typeof VCardItem>

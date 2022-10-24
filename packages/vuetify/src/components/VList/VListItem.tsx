@@ -30,7 +30,7 @@ import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
@@ -49,7 +49,7 @@ export type ListItemSubtitleSlot = {
 }
 
 export const VListItem = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     prepend: [ListItemSlot]
     append: [ListItemSlot]
     default: [ListItemSlot]

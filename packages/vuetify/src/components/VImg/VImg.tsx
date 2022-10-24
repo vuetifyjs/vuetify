@@ -70,7 +70,11 @@ export const VImg = defineComponent({
     ...makeTransitionProps(),
   },
 
-  emits: ['loadstart', 'load', 'error'],
+  emits: {
+    loadstart: (event: string | undefined) => true,
+    load: (event: string | undefined) => true,
+    error: (event: string | undefined) => true,
+  },
 
   setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset

@@ -22,11 +22,11 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 
 // Types
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots } from '@/util'
-
-export type Density = typeof allowedDensities[number]
+import type { SlotsToProps } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
+
+export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
@@ -59,7 +59,7 @@ export const makeVToolbarProps = propsFactory({
 }, 'v-toolbar')
 
 export const VToolbar = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     default: []
     image: []
     prepend: []

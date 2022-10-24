@@ -20,3 +20,5 @@ export const VAppBarTitle = defineComponent({
     return {}
   },
 })
+
+export type VAppBarTitle = InstanceType<typeof VAppBarTitle>

@@ -23,3 +23,5 @@ export const VCardActions = defineComponent({
     return {}
   },
 })
+
+export type VCardActions = InstanceType<typeof VCardActions>

@@ -145,3 +145,5 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
     speed,
   }
 }
+
+export type VDialogTransition = InstanceType<typeof VDialogTransition>

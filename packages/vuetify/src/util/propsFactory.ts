@@ -28,7 +28,7 @@ import type { ComponentObjectPropsOptions, Prop, PropType } from 'vue'
 
 export function propsFactory<
   PropsOptions extends ComponentObjectPropsOptions
-> (props: PropsOptions, source?: string) {
+> (props: PropsOptions, source: string) {
   return <Defaults extends PartialKeys<PropsOptions> = {}>(
     defaults?: Defaults
   ): AppendDefault<PropsOptions, Defaults> => {
@@ -45,13 +45,24 @@ export function propsFactory<
         obj[prop] = definition
       }
 
-      if (source) {
+      if (source && !obj[prop].source) {
         obj[prop].source = source
       }
 
       return obj
     }, {})
   }
+}
+
+export function excludeProps<
+  PropsOptions extends ComponentObjectPropsOptions,
+  ExcludeProps extends keyof PropsOptions
+> (props: PropsOptions, exclude: ExcludeProps[]): Omit<PropsOptions, ExcludeProps> {
+  const clone = { ...props }
+
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
 }
 
 type AppendDefault<T extends ComponentObjectPropsOptions, D extends PartialKeys<T>> = {

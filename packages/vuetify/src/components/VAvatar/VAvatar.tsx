@@ -27,7 +27,7 @@ export const makeVAvatarProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-})
+}, 'VAvatar')
 
 export const VAvatar = defineComponent({
   name: 'VAvatar',

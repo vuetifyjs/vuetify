@@ -14,6 +14,8 @@ export interface ScrollStrategyData {
   updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
+type ScrollStrategyFn = (data: ScrollStrategyData, props: StrategyProps) => void
+
 const scrollStrategies = {
   none: null,
   close: closeScrollStrategy,
@@ -22,7 +24,7 @@ const scrollStrategies = {
 }
 
 export interface StrategyProps {
-  scrollStrategy: keyof typeof scrollStrategies | ((data: ScrollStrategyData, props?: StrategyProps) => void)
+  scrollStrategy: keyof typeof scrollStrategies | ScrollStrategyFn
   contained: boolean | undefined
 }
 
@@ -32,7 +34,7 @@ export const makeScrollStrategyProps = propsFactory({
     default: 'block',
     validator: (val: any) => typeof val === 'function' || val in scrollStrategies,
   },
-})
+}, 'VOverlay/scrollStrategies')
 
 export function useScrollStrategies (
   props: StrategyProps,

@@ -53,6 +53,7 @@ app.use(vuetify)
 - **light** and **dark** props have been removed from all components. Use **theme** prop instead
 - **value** prop has been replaced by **model-value** on components that support `v-model` usage
 - **@input** event has been replaced by **@update:model-value** on components that support `v-model` usage
+- color definitions changed to `bg-red` and `text-red` and variations added to same class name `bg-red-darken-2`
 
 ### v-alert
 

@@ -62,7 +62,7 @@ export const makeFormProps = propsFactory({
     type: Boolean as PropType<boolean | null>,
     default: null,
   },
-})
+}, 'form')
 
 export function createForm (props: FormProps) {
   const model = useProxiedModel(props, 'modelValue')

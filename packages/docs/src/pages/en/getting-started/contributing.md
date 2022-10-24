@@ -251,7 +251,7 @@ For more information regarding RFCs, see the official repository: https://github
 
 All commit messages are required to follow the [conventional-changelog](https://github.com/conventional-changelog/conventional-changelog) standard using the _angular_ preset. This standard format consists of 2 types of commits:
 
-- With scope: `\<type\>(scope): \<subject\>`
+- With scope: `<type>(scope): <subject>`
 
   ```bash
   fix(VSelect): don't close when a detachable child is clicked
@@ -259,7 +259,7 @@ All commit messages are required to follow the [conventional-changelog](https://
   fixes #12354
   ```
 
-- Without scope: `\<type\>: \<subject\>`
+- Without scope: `<type>: <subject>`
 
   ```bash
   docs: restructure nav components

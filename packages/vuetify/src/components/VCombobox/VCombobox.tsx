@@ -24,10 +24,10 @@ import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots } from '@/util'
-import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -53,7 +53,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
-    ? Val<T, ReturnObject>[]
+    ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
 export const VCombobox = genericComponent<new <
@@ -66,15 +66,18 @@ export const VCombobox = genericComponent<new <
     items?: readonly T[]
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: Readonly<V>
+    modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<T>, index: number }]
-    'no-data': []
-  }>
+  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      selection: [{ item: InternalItem<T>, index: number }]
+      'prepend-item': []
+      'append-item': []
+      'no-data': []
+    }>
+  >
 }>()({
   name: 'VCombobox',
 
@@ -90,7 +93,7 @@ export const VCombobox = genericComponent<new <
 
   emits: {
     'update:modelValue': (val: any) => true,
-    'update:searchInput': (val: string) => true,
+    'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
   },
 
@@ -114,7 +117,7 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const _search = ref('')
+    const _search = ref(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
       get: () => {
         return _search.value
@@ -143,7 +146,12 @@ export const VCombobox = genericComponent<new <
       },
     })
     watch(_search, value => {
-      emit('update:searchInput', value)
+      emit('update:search', value)
+    })
+    watch(model, value => {
+      if (!props.multiple) {
+        search.value = value[0]?.title ?? ''
+      }
     })
 
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
@@ -336,6 +344,8 @@ export const VCombobox = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
+                    { slots['prepend-item']?.() }
+
                     { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
                       index,
@@ -358,6 +368,8 @@ export const VCombobox = genericComponent<new <
                         }}
                       </VListItem>
                     )) }
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 
@@ -372,11 +384,12 @@ export const VCombobox = genericComponent<new <
                   const slotProps = {
                     'onClick:close': onChipClose,
                     modelValue: true,
+                    'onUpdate:modelValue': undefined,
                   }
 
                   return (
                     <div
-                      key={ index }
+                      key={ item.value }
                       class={[
                         'v-combobox__selection',
                         index === selectionIndex.value && [

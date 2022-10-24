@@ -31,7 +31,7 @@ import {
 
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
@@ -95,8 +95,7 @@ export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  }
-  $slots: VFieldSlots
+  } & SlotsToProps<VFieldSlots>
 }>()({
   name: 'VField',
 

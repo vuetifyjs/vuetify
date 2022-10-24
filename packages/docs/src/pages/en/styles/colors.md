@@ -21,7 +21,7 @@ Each color from the specification gets converted to a **background** and **text*
 
 <example file="color/classes" />
 
-Text colors also support **darken** and **lighten** variants
+Text colors also support **darken** and **lighten** variants using `text-{color}-{lighten|darken}-{n}`
 
 <example file="color/text-classes" />
 

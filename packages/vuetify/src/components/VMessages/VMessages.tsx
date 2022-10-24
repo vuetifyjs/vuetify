@@ -65,3 +65,5 @@ export const VMessages = defineComponent({
     return {}
   },
 })
+
+export type VMessages = InstanceType<typeof VMessages>

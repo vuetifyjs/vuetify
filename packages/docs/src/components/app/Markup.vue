@@ -3,10 +3,10 @@
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
     :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :rounded="rounded"
     class="app-markup overflow-hidden"
     dir="ltr"
     outlined
-    rounded
     v-bind="$attrs"
   >
     <v-toolbar
@@ -89,6 +89,10 @@
       language: {
         type: String,
         default: 'markup',
+      },
+      rounded: {
+        type: Boolean,
+        default: true,
       },
     },
 

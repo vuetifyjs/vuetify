@@ -25,14 +25,19 @@
             th
               border-bottom: $table-border
 
-          &:hover
-            background: $table-hover-color
-
       > tfoot
         > tr
             td,
             th
               border-top: $table-border
+
+
+  &.v-table--hover
+    > table
+      > tbody
+        > tr
+          &:hover
+            background: $table-hover-color
 
   &.v-table--fixed-header
     thead th

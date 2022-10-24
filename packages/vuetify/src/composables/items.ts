@@ -14,7 +14,7 @@ export interface InternalItem<T = any> {
     title: string
     value: any
   }
-  children?: InternalItem[]
+  children?: InternalItem<T>[]
   raw: T
 }
 

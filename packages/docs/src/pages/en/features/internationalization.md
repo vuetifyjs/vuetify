@@ -35,8 +35,8 @@ const app = createApp()
 
 const vuetify = createVuetify({
   locale: {
-    defaultLocale: 'zhHans',
-    fallbackLocale: 'sv',
+    locale: 'zhHans',
+    fallback: 'sv',
     messages: { zhHans, pl, sv }
   }
 })
@@ -128,7 +128,7 @@ import customLocale from './locales/customLocale'
 
 const vuetify = createVuetify({
   locale: {
-    defaultLocale: 'customLocale',
+    locale: 'customLocale',
     messages: { customLocale },
     rtl: {
       customLocale: true,

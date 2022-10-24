@@ -15,7 +15,8 @@ describe('filter', () => {
       ['foo', 'bar', -1],
       [1, '1', 0],
       ['1', 1, 0],
-    ])('should compare %s to %s and return a match result', (text: any, query: any, expected: boolean) => {
+    ])('should compare %s to %s and return a match result', (text, query, expected) => {
+      // @ts-expect-error
       expect(defaultFilter(text, query)).toBe(expected)
     })
   })
@@ -109,8 +110,8 @@ describe('filter', () => {
       itemTitle: 'title',
       itemValue: 'value',
       itemChildren: 'children',
-      itemProps: undefined,
-      returnObject: undefined,
+      itemProps: 'props',
+      returnObject: false,
     }
     const items = Array.from({ length: 50 }, (v, k) => ({
       text: `item-${k}`,
