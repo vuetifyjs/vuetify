@@ -1,9 +1,10 @@
 // Components
-import { makeSelectionControlProps, VSelectionControl } from '../VSelectionControl/VSelectionControl'
+import { VSelectionControl } from '@/components/VSelectionControl'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'

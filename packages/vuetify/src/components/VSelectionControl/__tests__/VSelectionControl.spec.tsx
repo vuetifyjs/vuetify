@@ -1,5 +1,8 @@
 // Components
-import { makeSelectionControlProps, useSelectionControl } from '../VSelectionControl'
+import { useSelectionControl } from '../VSelectionControl'
+
+// Composables
+import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Utilities
 import { createVuetify } from '@/framework'

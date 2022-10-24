@@ -3,47 +3,65 @@ import './VSelectionControlGroup.sass'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeDensityProps } from '@/composables/density'
+import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'
-import { defineComponent, getUid, useRender } from '@/util'
+import { deepEqual, defineComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export interface VSelectionGroupContext {
-  disabled: Ref<boolean>
-  inline: Ref<boolean>
-  name: Ref<string | undefined>
   modelValue: Ref<any>
-  multiple: Ref<boolean>
-  trueIcon: Ref<IconValue | undefined>
-  falseIcon: Ref<IconValue | undefined>
-  readonly: Ref<boolean>
-  type: Ref<string | undefined>
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
 
+export const makeSelectionControlProps = propsFactory({
+  color: String,
+  disabled: Boolean,
+  defaultsTarget: {
+    type: String,
+    default: 'VSelectionControl',
+  },
+  error: Boolean,
+  id: String,
+  inline: Boolean,
+  label: String,
+  falseIcon: IconValue,
+  trueIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  multiple: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
+  name: String,
+  readonly: Boolean,
+  trueValue: null,
+  falseValue: null,
+  modelValue: null,
+  type: String,
+  value: null,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeThemeProps(),
+  ...makeDensityProps(),
+}, 'VSelectionControl')
+
 export const VSelectionControlGroup = defineComponent({
   name: 'VSelectionControlGroup',
 
-  props: {
-    disabled: Boolean,
-    id: String,
-    inline: Boolean,
-    name: String,
-    falseIcon: IconValue,
-    trueIcon: IconValue,
-    multiple: {
-      type: Boolean as PropType<boolean | null>,
-      default: null,
-    },
-    readonly: Boolean,
-    type: String,
-    modelValue: null,
-  },
+  props: makeSelectionControlProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -55,16 +73,27 @@ export const VSelectionControlGroup = defineComponent({
     const id = computed(() => props.id || `v-selection-control-group-${uid}`)
     const name = computed(() => props.name || id.value)
 
-    provide(VSelectionControlGroupSymbol, {
-      disabled: toRef(props, 'disabled'),
-      inline: toRef(props, 'inline'),
-      modelValue,
-      multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
-      name,
-      falseIcon: toRef(props, 'falseIcon'),
-      trueIcon: toRef(props, 'trueIcon'),
-      readonly: toRef(props, 'readonly'),
-      type: toRef(props, 'type'),
+    provide(VSelectionControlGroupSymbol, { modelValue })
+
+    provideDefaults({
+      [props.defaultsTarget]: {
+        color: toRef(props, 'color'),
+        disabled: toRef(props, 'disabled'),
+        density: toRef(props, 'density'),
+        error: toRef(props, 'error'),
+        inline: toRef(props, 'inline'),
+        modelValue,
+        multiple: computed(() => !!props.multiple || (props.multiple == null && Array.isArray(modelValue.value))),
+        name,
+        falseIcon: toRef(props, 'falseIcon'),
+        trueIcon: toRef(props, 'trueIcon'),
+        trueValue: toRef(props, 'trueValue'),
+        falseValue: toRef(props, 'falseValue'),
+        readonly: toRef(props, 'readonly'),
+        ripple: toRef(props, 'ripple'),
+        type: toRef(props, 'type'),
+        valueComparator: toRef(props, 'valueComparator'),
+      },
     })
 
     useRender(() => (

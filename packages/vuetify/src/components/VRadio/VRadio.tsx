@@ -1,5 +1,8 @@
 // Components
-import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { VSelectionControl } from '@/components/VSelectionControl'
+
+// Composables
+import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
