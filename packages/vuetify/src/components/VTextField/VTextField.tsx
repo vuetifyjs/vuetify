@@ -131,7 +131,7 @@ export const VTextField = genericComponent<new <T>() => {
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLTextAreaElement).value
+      model.value = (e.target as HTMLInputElement).value
     }
 
     useRender(() => {
