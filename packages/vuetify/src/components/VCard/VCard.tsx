@@ -146,6 +146,7 @@ export const VCard = defineComponent({
           ) }
 
           <LoaderSlot
+            v-if={props.loading !== undefined || slots.loader}
             name="v-card"
             active={ !!props.loading }
             color={ typeof props.loading === 'boolean' ? undefined : props.loading }
