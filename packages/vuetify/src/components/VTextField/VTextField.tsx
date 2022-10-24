@@ -130,6 +130,9 @@ export const VTextField = genericComponent<new () => {
         callEvent(props['onClick:clear'], e)
       })
     }
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLInputElement).value
+    }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -192,7 +195,8 @@ export const VTextField = genericComponent<new () => {
                     const inputNode = (
                       <input
                         ref={ inputRef }
-                        v-model={ model.value }
+                        value={ model.value }
+                        onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
