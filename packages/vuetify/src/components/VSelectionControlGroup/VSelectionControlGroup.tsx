@@ -5,6 +5,7 @@ import './VSelectionControlGroup.sass'
 import { IconValue } from '@/composables/icons'
 import { makeDensityProps } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -13,7 +14,6 @@ import { deepEqual, defineComponent, getUid, propsFactory, useRender } from '@/u
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
