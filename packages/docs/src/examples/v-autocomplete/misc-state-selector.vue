@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 font-weight-regular blue-grey text-white">
+    <v-card-title class="text-h5 font-weight-regular blue-grey">
       Profile
     </v-card-title>
     <v-card-text>

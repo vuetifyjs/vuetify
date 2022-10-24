@@ -112,9 +112,7 @@
       <v-btn
         :disabled="!form"
         :loading="isLoading"
-        class="text-white"
         color="deep-purple accent-4"
-        depressed
       >
         Submit
       </v-btn>

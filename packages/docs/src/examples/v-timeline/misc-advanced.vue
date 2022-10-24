@@ -15,7 +15,6 @@
         </template>
         <v-text-field
           v-model="input"
-          class="w-100"
           hide-details
           label="Leave a comment..."
           density="compact"

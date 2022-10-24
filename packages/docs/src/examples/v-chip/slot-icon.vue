@@ -31,7 +31,6 @@
       class="ma-2"
       color="green"
       text-color="white"
-      prepend-
     >
       <template v-slot:prepend>
         <v-avatar

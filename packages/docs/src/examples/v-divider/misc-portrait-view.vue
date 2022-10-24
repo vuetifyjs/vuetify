@@ -5,8 +5,8 @@
       sm="8"
     >
       <v-card>
-        <v-card-title class="cyan darken-1">
-          <span class="text-h5 text-white">Sarah Mcbeal</span>
+        <v-card-title class="bg-cyan-darken-1">
+          <span class="text-h5">Sarah Mcbeal</span>
 
           <v-spacer></v-spacer>
 
