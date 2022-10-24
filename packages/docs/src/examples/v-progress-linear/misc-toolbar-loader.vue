@@ -3,13 +3,6 @@
     class="mx-auto mt-6"
     width="344"
   >
-    <v-system-bar>
-      <v-spacer></v-spacer>
-      <v-icon>mdi-square</v-icon>
-      <v-icon>mdi-circle</v-icon>
-      <v-icon>mdi-triangle</v-icon>
-    </v-system-bar>
-
     <v-toolbar>
       <v-btn icon>
         <v-icon>mdi-arrow-left</v-icon>

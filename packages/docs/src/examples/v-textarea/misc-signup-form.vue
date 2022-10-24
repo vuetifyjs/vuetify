@@ -3,27 +3,6 @@
     class="mx-auto"
     style="max-width: 500px;"
   >
-    <v-system-bar
-      color="deep-purple darken-4"
-      dark
-    >
-      <v-spacer></v-spacer>
-      <v-icon small>
-        mdi-square
-      </v-icon>
-      <v-icon
-        class="ml-1"
-        small
-      >
-        mdi-circle
-      </v-icon>
-      <v-icon
-        class="ml-1"
-        small
-      >
-        mdi-triangle
-      </v-icon>
-    </v-system-bar>
     <v-toolbar
       color="deep-purple accent-4"
       cards
