@@ -32,11 +32,19 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 #### Align with title
 
-Make `v-tabs` line up with the `v-toolbar-title` component using the **align-with-title** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
+Make `v-tabs` line up with the `v-toolbar-title` component using the **align** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
 
-<example file="v-tabs/prop-align-with-title" />
+<example file="v-tabs/prop-align-title" />
 
 <promoted slug="vuetify-zero-theme-pro" />
+
+#### Align end
+
+The **align** prop can also align tabs to the center or end.
+
+<example file="v-tabs/prop-align-center" />
+
+<example file="v-tabs/prop-align-end" />
 
 #### Center active
 
@@ -52,7 +60,7 @@ The **center-active** prop will make the active tab always centered
 
 #### Fixed tabs
 
-The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px).
+The **fixed-tabs** prop forces `v-tab` items to take up all available space up to their maximum width (300px), and centers them.
 
 <example file="v-tabs/prop-fixed-tabs" />
 
@@ -74,17 +82,11 @@ If the tab items overflow their container, pagination controls will appear on de
 
 <example file="v-tabs/misc-pagination" />
 
-#### Right
+#### Vertical tabs
 
-The **end** prop aligns the tabs to the right.
+The **direction** prop allows for `v-tab` components to stack vertically.
 
-<example file="v-tabs/prop-end" />
-
-#### Vertical Tabs
-
-The **vertical** prop allows for `v-tab` components to stack vertically.
-
-<example file="v-tabs/prop-vertical" />
+<example file="v-tabs/prop-direction" />
 
 ### Misc
 

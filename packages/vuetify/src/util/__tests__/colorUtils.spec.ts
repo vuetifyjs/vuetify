@@ -86,10 +86,10 @@ describe('transformSRGB', () => {
   it('should convert sRGB to XYZ', () => {
     expect(transformSRGB.toXYZ(0)).toEqual([0, 0, 0])
     expect(transformSRGB.toXYZ(0xffffff)).toEqual([0.9505, 1, 1.0890])
-    expect(transformSRGB.toXYZ(0xfcfbf4)).toEqualCloseTo([0.909712, 0.962215, 0.993659], 6)
-    expect(transformSRGB.toXYZ(0x45a081)).toEqualCloseTo([0.189875, 0.279918, 0.251711], 6)
-    expect(transformSRGB.toXYZ(0x191995)).toEqualCloseTo([0.061733, 0.030719, 0.287013], 6)
-    expect(transformSRGB.toXYZ(0xcd6600)).toEqualCloseTo([0.299282, 0.224819, 0.027620], 6)
+    expect(transformSRGB.toXYZ(0xfcfbf4)).toEqual(closeTo([0.909712, 0.962215, 0.993659], 6))
+    expect(transformSRGB.toXYZ(0x45a081)).toEqual(closeTo([0.189875, 0.279918, 0.251711], 6))
+    expect(transformSRGB.toXYZ(0x191995)).toEqual(closeTo([0.061733, 0.030719, 0.287013], 6))
+    expect(transformSRGB.toXYZ(0xcd6600)).toEqual(closeTo([0.299282, 0.224819, 0.027620], 6))
   })
 
   it('should convert XYZ to sRGB', () => {
@@ -105,20 +105,20 @@ describe('transformSRGB', () => {
 describe('transformCIELAB', () => {
   it('should convert LAB to XYZ', () => {
     expect(transformCIELAB.toXYZ([0, 0, 0])).toEqual([0, 0, 0])
-    expect(transformCIELAB.toXYZ([100, 0.0053, -0.0104])).toEqualCloseTo([0.9505, 1, 1.0890], 4)
-    expect(transformCIELAB.toXYZ([98.5202, -0.8731, 3.4542])).toEqualCloseTo([0.909713, 0.962215, 0.99366], 6)
-    expect(transformCIELAB.toXYZ([59.8813, -34.7853, 8.0829])).toEqualCloseTo([0.189875, 0.279918, 0.251711], 6)
-    expect(transformCIELAB.toXYZ([20.3296, 44.3917, -65.5991])).toEqualCloseTo([0.061733, 0.030719, 0.287014], 6)
-    expect(transformCIELAB.toXYZ([54.5346, 36.1321, 62.8465])).toEqualCloseTo([0.299282, 0.224819, 0.027620], 6)
+    expect(transformCIELAB.toXYZ([100, 0.0053, -0.0104])).toEqual(closeTo([0.9505, 1, 1.0890], 4))
+    expect(transformCIELAB.toXYZ([98.5202, -0.8731, 3.4542])).toEqual(closeTo([0.909713, 0.962215, 0.99366], 6))
+    expect(transformCIELAB.toXYZ([59.8813, -34.7853, 8.0829])).toEqual(closeTo([0.189875, 0.279918, 0.251711], 6))
+    expect(transformCIELAB.toXYZ([20.3296, 44.3917, -65.5991])).toEqual(closeTo([0.061733, 0.030719, 0.287014], 6))
+    expect(transformCIELAB.toXYZ([54.5346, 36.1321, 62.8465])).toEqual(closeTo([0.299282, 0.224819, 0.027620], 6))
   })
 
   it('should convert XYZ to LAB', () => {
     expect(transformCIELAB.fromXYZ([0, 0, 0])).toEqual([0, 0, 0])
-    expect(transformCIELAB.fromXYZ([0.9505, 1, 1.0890])).toEqualCloseTo([100, 0.0053, -0.0104], 4)
-    expect(transformCIELAB.fromXYZ([0.909712, 0.962215, 0.993659])).toEqualCloseTo([98.5202, -0.8731, 3.4542], 4)
-    expect(transformCIELAB.fromXYZ([0.189875, 0.279918, 0.251711])).toEqualCloseTo([59.8813, -34.7853, 8.0829], 4)
-    expect(transformCIELAB.fromXYZ([0.061733, 0.030719, 0.287014])).toEqualCloseTo([20.3296, 44.3917, -65.5991], 4)
-    expect(transformCIELAB.fromXYZ([0.299282, 0.224819, 0.027620])).toEqualCloseTo([54.5346, 36.1321, 62.8465], 4)
+    expect(transformCIELAB.fromXYZ([0.9505, 1, 1.0890])).toEqual(closeTo([100, 0.0053, -0.0104], 4))
+    expect(transformCIELAB.fromXYZ([0.909712, 0.962215, 0.993659])).toEqual(closeTo([98.5202, -0.8731, 3.4542], 4))
+    expect(transformCIELAB.fromXYZ([0.189875, 0.279918, 0.251711])).toEqual(closeTo([59.8813, -34.7853, 8.0829], 4))
+    expect(transformCIELAB.fromXYZ([0.061733, 0.030719, 0.287014])).toEqual(closeTo([20.3296, 44.3917, -65.5991], 4))
+    expect(transformCIELAB.fromXYZ([0.299282, 0.224819, 0.027620])).toEqual(closeTo([54.5346, 36.1321, 62.8465], 4))
   })
 })
 
@@ -178,31 +178,6 @@ describe('APCAcontrast', () => {
   })
 })
 
-expect.extend({
-  toEqualCloseTo (received, expected, precision = 3) {
-    const getType = item => item.constructor.name.toLowerCase()
-
-    function round (obj) {
-      switch (getType(obj)) {
-        case 'array':
-          return obj.map(round)
-
-        case 'object':
-          return Object.keys(obj).reduce((acc, key) => {
-            acc[key] = round(obj[key])
-            return acc
-          }, {})
-
-        case 'number':
-          return +obj.toFixed(precision)
-
-        default:
-          return obj
-      }
-    }
-
-    expect(round(received)).toEqual(expected)
-
-    return { pass: true }
-  },
-})
+function closeTo (arr: number[], precision = 3) {
+  return arr.map(n => expect.closeTo(n, precision))
+}

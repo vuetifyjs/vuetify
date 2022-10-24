@@ -5,10 +5,10 @@ import { makeTagProps } from '@/composables/tag'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 export const VToolbarTitle = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     default: []
     text: []
   }>

@@ -36,7 +36,10 @@ export const VTabs = defineComponent({
   name: 'VTabs',
 
   props: {
-    alignWithTitle: Boolean,
+    alignTabs: {
+      type: String as PropType<'start' | 'title' | 'center' | 'end'>,
+      default: 'start',
+    },
     color: String,
     direction: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -49,17 +52,18 @@ export const VTabs = defineComponent({
     },
     stacked: Boolean,
     bgColor: String,
-    centered: Boolean,
     grow: Boolean,
     height: {
       type: [Number, String],
       default: undefined,
     },
     hideSlider: Boolean,
-    optional: Boolean,
-    end: Boolean,
     sliderColor: String,
     modelValue: null,
+    mandatory: {
+      type: [Boolean, String] as PropType<boolean | 'force'>,
+      default: 'force',
+    },
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -92,12 +96,10 @@ export const VTabs = defineComponent({
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
+          `v-tabs--align-tabs-${props.alignTabs}`,
           {
-            'v-tabs--align-with-title': props.alignWithTitle,
-            'v-tabs--centered': props.centered,
             'v-tabs--fixed-tabs': props.fixedTabs,
             'v-tabs--grow': props.grow,
-            'v-tabs--end': props.end,
             'v-tabs--stacked': props.stacked,
           },
           densityClasses.value,
@@ -106,7 +108,7 @@ export const VTabs = defineComponent({
         style={backgroundColorStyles.value}
         role="tablist"
         symbol={ VTabsSymbol }
-        mandatory="force"
+        mandatory={ props.mandatory }
         direction={ props.direction }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (

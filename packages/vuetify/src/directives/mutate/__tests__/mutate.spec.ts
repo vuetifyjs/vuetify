@@ -3,7 +3,6 @@ import Mutate from '..'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { h } from 'vue'
 
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function
@@ -33,22 +32,20 @@ describe('v-mutate', () => {
   it('should bind event on mounted', () => {
     const callback = jest.fn()
     const el = document.createElement('div')
-    const vnode = h('div') as any
-
     document.body.appendChild(el)
 
-    Mutate.mounted?.(el, {
+    Mutate.mounted(el, {
       value: callback,
       modifiers: {},
       instance,
-    } as any, vnode, null)
+    } as any)
 
     expect(el._mutate).toBeTruthy()
     expect(callback).not.toHaveBeenCalled()
 
     document.body.removeChild(el)
 
-    Mutate.unmounted?.(el, { instance } as any, vnode, vnode)
+    Mutate.unmounted(el, { instance } as any)
 
     expect(el._mutate![1]).toBeUndefined()
   })
@@ -56,15 +53,13 @@ describe('v-mutate', () => {
   it('should invoke callback once and then unmount', async () => {
     const callback = jest.fn()
     const el = document.createElement('div')
-    const vnode = h('div') as any
-
     document.body.appendChild(el)
 
-    Mutate.mounted?.(el, {
+    Mutate.mounted(el, {
       value: callback,
       modifiers: { once: true },
       instance,
-    } as any, vnode, null)
+    } as any)
 
     expect(callback).not.toHaveBeenCalled()
     expect(el._mutate).toBeTruthy()
@@ -78,15 +73,13 @@ describe('v-mutate', () => {
   it('should invoke callback on mount, on mutation and then unmount', async () => {
     const callback = jest.fn()
     const el = document.createElement('div')
-    const vnode = h('div') as any
-
     document.body.appendChild(el)
 
-    Mutate.mounted?.(el, {
+    Mutate.mounted(el, {
       value: callback,
       modifiers: { immediate: true, once: true },
       instance,
-    } as any, vnode, null)
+    } as any)
 
     expect(callback).toHaveBeenCalled()
     expect(el._mutate).toBeTruthy()

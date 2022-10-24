@@ -16,11 +16,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { nextTick, ref, watch } from 'vue'
 import { genericComponent, IN_BROWSER, useRender } from '@/util'
 
-// Types
-import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
-
 export const VDialog = genericComponent<new () => {
-  $slots: OverlaySlots
   $props: VOverlay['$props']
 }>()({
   name: 'VDialog',

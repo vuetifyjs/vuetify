@@ -100,8 +100,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
       expect(emits[0][0]).to.have.length(7)
@@ -123,8 +123,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
       expect(emits[0][0]).to.have.length(9)
@@ -146,8 +146,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
       expect(emits[0][0]).to.have.length(7)
@@ -169,8 +169,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
       expect(emits[0][0]).to.haveOwnProperty('h')
@@ -195,8 +195,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
       expect(emits[0][0]).to.haveOwnProperty('r')
@@ -241,8 +241,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits[0][0]).to.not.equal('#0000ff')
     })
@@ -263,8 +263,8 @@ describe('VColorPicker', () => {
     })
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits[0][0]).to.not.equal('#0000ff')
     })
@@ -282,8 +282,8 @@ describe('VColorPicker', () => {
     cy.get('@color').find('.v-icon').should('exist')
 
     cy.vue().then(wrapper => {
-      const picker = wrapper.findComponent('.v-color-picker')
-      const emits = picker.emitted('update:modelValue')
+      const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
+      const emits = picker.emitted<[string]>('update:modelValue')!
 
       expect(emits).to.have.length(1)
     })

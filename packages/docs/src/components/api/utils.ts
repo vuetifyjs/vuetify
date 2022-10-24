@@ -31,8 +31,6 @@ export function stripLinks (str: string): [string, Record<string, string>] {
   let matches = regexp.exec(str)
 
   while (matches !== null) {
-    console.log('match!', matches)
-
     obj[matches[1]] = matches[0]
     out = out.replace(matches[0], matches[1])
 

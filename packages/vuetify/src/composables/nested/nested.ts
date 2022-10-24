@@ -21,27 +21,27 @@ export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 export interface NestedProps {
   selectStrategy: SelectStrategy | undefined
   openStrategy: OpenStrategyProp | undefined
-  selected: string[] | undefined
-  opened: string[] | undefined
+  selected: unknown[] | undefined
+  opened: unknown[] | undefined
   mandatory: boolean
-  'onUpdate:selected': ((val: string[]) => void) | undefined
-  'onUpdate:opened': ((val: string[]) => void) | undefined
+  'onUpdate:selected': ((val: unknown[]) => void) | undefined
+  'onUpdate:opened': ((val: unknown[]) => void) | undefined
 }
 
 type NestedProvide = {
-  id: Ref<string | undefined>
+  id: Ref<unknown>
   isGroupActivator?: boolean
   root: {
-    children: Ref<Map<string, string[]>>
-    parents: Ref<Map<string, string>>
-    opened: Ref<Set<string>>
-    selected: Ref<Map<string, 'on' | 'off' | 'indeterminate'>>
-    selectedValues: Ref<string[]>
-    register: (id: string, parentId: string | undefined, isGroup?: boolean) => void
-    unregister: (id: string) => void
-    open: (id: string, value: boolean, event?: Event) => void
-    select: (id: string, value: boolean, event?: Event) => void
-    openOnSelect: (id: string, value: boolean, event?: Event) => void
+    children: Ref<Map<unknown, unknown[]>>
+    parents: Ref<Map<unknown, unknown>>
+    opened: Ref<Set<unknown>>
+    selected: Ref<Map<unknown, 'on' | 'off' | 'indeterminate'>>
+    selectedValues: Ref<unknown[]>
+    register: (id: unknown, parentId: unknown, isGroup?: boolean) => void
+    unregister: (id: unknown) => void
+    open: (id: unknown, value: boolean, event?: Event) => void
+    select: (id: unknown, value: boolean, event?: Event) => void
+    openOnSelect: (id: unknown, value: boolean, event?: Event) => void
   }
 }
 
@@ -66,15 +66,15 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as Prop<SelectStrategy>,
   openStrategy: [String, Function] as Prop<OpenStrategyProp>,
-  opened: Array as Prop<string[]>,
-  selected: Array as Prop<string[]>,
+  opened: Array as Prop<unknown[]>,
+  selected: Array as Prop<unknown[]>,
   mandatory: Boolean,
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
   let isUnmounted = false
-  const children = ref(new Map<string, string[]>())
-  const parents = ref(new Map<string, string>())
+  const children = ref(new Map<unknown, unknown[]>())
+  const parents = ref(new Map<unknown, unknown>())
 
   const opened = useProxiedModel(props, 'opened', props.opened, v => new Set(v), v => [...v.values()])
 
@@ -114,9 +114,9 @@ export const useNested = (props: NestedProps) => {
     isUnmounted = true
   })
 
-  function getPath (id: string) {
-    const path: string[] = []
-    let parent: string | undefined = id
+  function getPath (id: unknown) {
+    const path: unknown[] = []
+    let parent: unknown = id
 
     while (parent != null) {
       path.unshift(parent)
@@ -214,7 +214,7 @@ export const useNested = (props: NestedProps) => {
   return nested.root
 }
 
-export const useNestedItem = (id: Ref<string | undefined>, isGroup: boolean) => {
+export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const computedId = computed(() => id.value ?? getUid().toString())
