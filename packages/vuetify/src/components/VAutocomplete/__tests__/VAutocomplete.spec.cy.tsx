@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VAutocomplete } from '..'
+import { VAutocomplete } from '../VAutocomplete'
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
