@@ -4,7 +4,7 @@ import './VDialog.sass'
 // Components
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { filterVOverlayProps, makeVOverlayProps, VOverlay } from '@/components/VOverlay'
+import { VOverlay } from '@/components/VOverlay'
 
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -14,17 +14,16 @@ import { forwardRefs } from '@/composables/forwardRefs'
 // Utilities
 import { nextTick, ref, watch } from 'vue'
 import { genericComponent, IN_BROWSER, useRender } from '@/util'
+import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { SlotsToProps } from '@/util'
-import type { OverlaySlots } from '@/components/VOverlay'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const VDialog = genericComponent<new () => {
   $props: SlotsToProps<OverlaySlots>
 }>()({
   name: 'VDialog',
-
-  inheritAttrs: false,
 
   props: {
     fullscreen: Boolean,
@@ -37,6 +36,7 @@ export const VDialog = genericComponent<new () => {
     ...makeVOverlayProps({
       transition: { component: VDialogTransition },
       origin: 'center center' as const,
+      scrollStrategy: 'block' as const,
     }),
   },
 
@@ -102,7 +102,7 @@ export const VDialog = genericComponent<new () => {
 
       return (
         <VOverlay
-          v-model={ isActive.value }
+          ref={ overlay }
           class={[
             'v-dialog',
             {
@@ -111,13 +111,13 @@ export const VDialog = genericComponent<new () => {
             },
           ]}
           { ...overlayProps }
-          scrollStrategy="block"
-          ref={ overlay }
+          v-model={ isActive.value }
           aria-role="dialog"
           aria-modal="true"
           activatorProps={{
             'aria-haspopup': 'dialog',
             'aria-expanded': String(isActive.value),
+            ...overlayProps.activatorProps,
           }}
           z-index={ 2400 }
           { ...scopeId }

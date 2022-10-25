@@ -1,1 +1,1 @@
-export * from './VOverlay'
+export { VOverlay } from './VOverlay'

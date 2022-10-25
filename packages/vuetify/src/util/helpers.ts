@@ -233,6 +233,23 @@ export function pick<
   return [found, rest]
 }
 
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: U[]): [yes: Omit<T, U>, no: MaybePick<T, U>]
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  const [no, yes] = pick(obj, paths)
+
+  return [yes, no]
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of a an input component. Remaining

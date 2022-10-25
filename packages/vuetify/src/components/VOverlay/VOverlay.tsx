@@ -34,7 +34,6 @@ import {
 } from '@/util'
 import {
   computed,
-  ExtractPropTypes,
   mergeProps,
   ref,
   Teleport,
@@ -47,7 +46,7 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { MakeSlots, SlotsToProps } from '@/util'
-import type { PropType, Ref } from 'vue'
+import type { ExtractPropTypes, PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -309,6 +308,6 @@ export const VOverlay = genericComponent<new () => {
 
 export type VOverlay = InstanceType<typeof VOverlay>
 
-export function filterVOverlayProps (props: ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>) {
+export function filterVOverlayProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>>) {
   return pick(props, Object.keys(VOverlay.props) as any)
 }
