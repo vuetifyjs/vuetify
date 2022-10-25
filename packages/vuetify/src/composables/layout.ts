@@ -20,18 +20,18 @@ import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref 
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
-type Layer = {
+interface Layer {
   top: number
   bottom: number
   left: number
   right: number
 }
 
-type LayoutItem = {
+interface LayoutItem extends Layer {
   id: string
   size: number
   position: Position
-} & Layer
+}
 
 interface LayoutProvide {
   register: (
