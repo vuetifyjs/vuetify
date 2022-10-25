@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VCombobox } from '../VCombobox'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -58,7 +58,8 @@ describe('VCombobox', () => {
         .get('.v-list-item')
         .eq(0)
         .click({ waitForAnimations: false })
-        .then(() => {
+        .then(async () => {
+          await nextTick()
           expect(model.value).to.deep.equal(items[0])
           expect(search.value).to.deep.equal(items[0].title)
         })
@@ -72,7 +73,8 @@ describe('VCombobox', () => {
         .click()
         .clear()
         .type('Item 2')
-        .then(() => {
+        .then(async () => {
+          await nextTick()
           expect(model.value).to.equal('Item 2')
           expect(search.value).to.equal('Item 2')
         })
@@ -85,7 +87,8 @@ describe('VCombobox', () => {
         .click()
         .clear()
         .type('item3')
-        .then(() => {
+        .then(async () => {
+          await nextTick()
           expect(model.value).to.equal('item3')
           expect(search.value).to.equal('item3')
         })
@@ -135,7 +138,8 @@ describe('VCombobox', () => {
         .click()
         .type('Item 2')
         .blur()
-        .then(() => {
+        .then(async () => {
+          await nextTick()
           expect(model.value).to.deep.equal([items[0], 'Item 2'])
           expect(search.value).to.equal('')
         })
@@ -147,7 +151,8 @@ describe('VCombobox', () => {
         .click()
         .type('item3')
         .blur()
-        .then(() => {
+        .then(async () => {
+          await nextTick()
           expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
           expect(search.value).to.equal('')
         })
