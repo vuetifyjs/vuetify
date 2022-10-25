@@ -27,11 +27,14 @@ import {
   genericComponent,
   getScrollParent,
   IN_BROWSER,
+  pick,
+  propsFactory,
   standardEasing,
   useRender,
 } from '@/util'
 import {
   computed,
+  ExtractPropTypes,
   mergeProps,
   ref,
   Teleport,
@@ -74,6 +77,38 @@ export type OverlaySlots = MakeSlots<{
   activator: [{ isActive: boolean, props: Record<string, any> }]
 }>
 
+export const makeVOverlayProps = propsFactory({
+  absolute: Boolean,
+  attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+  closeOnBack: {
+    type: Boolean,
+    default: true,
+  },
+  contained: Boolean,
+  contentClass: null,
+  contentProps: null,
+  disabled: Boolean,
+  noClickAnimation: Boolean,
+  modelValue: Boolean,
+  persistent: Boolean,
+  scrim: {
+    type: [String, Boolean],
+    default: true,
+  },
+  zIndex: {
+    type: [Number, String],
+    default: 2000,
+  },
+
+  ...makeActivatorProps(),
+  ...makeDimensionProps(),
+  ...makeLazyProps(),
+  ...makeLocationStrategyProps(),
+  ...makeScrollStrategyProps(),
+  ...makeThemeProps(),
+  ...makeTransitionProps(),
+}, 'v-overlay')
+
 export const VOverlay = genericComponent<new () => {
   $props: SlotsToProps<OverlaySlots>
 }>()({
@@ -83,37 +118,7 @@ export const VOverlay = genericComponent<new () => {
 
   inheritAttrs: false,
 
-  props: {
-    absolute: Boolean,
-    attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
-    closeOnBack: {
-      type: Boolean,
-      default: true,
-    },
-    contained: Boolean,
-    contentClass: null,
-    contentProps: null,
-    disabled: Boolean,
-    noClickAnimation: Boolean,
-    modelValue: Boolean,
-    persistent: Boolean,
-    scrim: {
-      type: [String, Boolean],
-      default: true,
-    },
-    zIndex: {
-      type: [Number, String],
-      default: 2000,
-    },
-
-    ...makeActivatorProps(),
-    ...makeDimensionProps(),
-    ...makeLazyProps(),
-    ...makeLocationStrategyProps(),
-    ...makeScrollStrategyProps(),
-    ...makeThemeProps(),
-    ...makeTransitionProps(),
-  },
+  props: makeVOverlayProps(),
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
@@ -303,3 +308,7 @@ export const VOverlay = genericComponent<new () => {
 })
 
 export type VOverlay = InstanceType<typeof VOverlay>
+
+export function filterVOverlayProps (props: ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>) {
+  return pick(props, Object.keys(VOverlay.props) as any)
+}
