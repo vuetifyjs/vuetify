@@ -1,6 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VCombobox } from '../VCombobox'
+import { ref } from 'vue'
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -27,6 +28,132 @@ describe('VCombobox', () => {
         .get('input')
         .get('.v-chip')
         .should('have.length', 2)
+    })
+  })
+
+  describe('complex objects', () => {
+    it('single', () => {
+      const items = [
+        { title: 'Item 1', value: 'item1' },
+        { title: 'Item 2', value: 'item2' },
+        { title: 'Item 3', value: 'item3' },
+        { title: 'Item 4', value: 'item4' },
+      ]
+      const model = ref()
+      const search = ref()
+      const updateModel = cy.stub().as('model').callsFake(val => model.value = val)
+      const updateSearch = cy.stub().as('search').callsFake(val => search.value = val)
+
+      cy.mount(() => (
+        <VCombobox
+          modelValue={ model.value }
+          search={ search.value }
+          onUpdate:modelValue={ updateModel }
+          onUpdate:search={ updateSearch }
+          items={ items }
+        />
+      ))
+        .get('input')
+        .click()
+        .get('.v-list-item')
+        .eq(0)
+        .click({ waitForAnimations: false })
+        .then(() => {
+          expect(model.value).to.deep.equal(items[0])
+          expect(search.value).to.deep.equal(items[0].title)
+        })
+        .get('input')
+        .should('have.value', items[0].title)
+        .blur()
+        .get('.v-combobox__selection')
+        .should('contain', items[0].title)
+
+        .get('input')
+        .click()
+        .clear()
+        .type('Item 2')
+        .then(() => {
+          expect(model.value).to.equal('Item 2')
+          expect(search.value).to.equal('Item 2')
+        })
+        .should('have.value', 'Item 2')
+        .blur()
+        .get('.v-combobox__selection')
+        .should('contain', 'Item 2')
+
+        .get('input')
+        .click()
+        .clear()
+        .type('item3')
+        .then(() => {
+          expect(model.value).to.equal('item3')
+          expect(search.value).to.equal('item3')
+        })
+        .should('have.value', 'item3')
+        .blur()
+        .get('.v-combobox__selection')
+        .should('contain', 'item3')
+    })
+
+    it('multiple', () => {
+      const items = [
+        { title: 'Item 1', value: 'item1' },
+        { title: 'Item 2', value: 'item2' },
+        { title: 'Item 3', value: 'item3' },
+        { title: 'Item 4', value: 'item4' },
+      ]
+      const model = ref<(string | typeof items[number])[]>([])
+      const search = ref()
+      const updateModel = cy.stub().as('model').callsFake(val => model.value = val)
+      const updateSearch = cy.stub().as('search').callsFake(val => search.value = val)
+
+      cy.mount(() => (
+        <VCombobox
+          modelValue={ model.value }
+          search={ search.value }
+          onUpdate:modelValue={ updateModel }
+          onUpdate:search={ updateSearch }
+          multiple
+          items={ items }
+        />
+      ))
+        .get('.v-field input')
+        .click()
+        .get('.v-list-item')
+        .eq(0)
+        .click({ waitForAnimations: false })
+        .then(() => {
+          expect(model.value).to.deep.equal([items[0]])
+          expect(search.value).to.be.undefined
+        })
+        .get('.v-field input')
+        .should('have.value', '')
+        .get('.v-combobox__selection')
+        .should('contain', items[0].title)
+
+        .get('.v-field input')
+        .click()
+        .type('Item 2')
+        .blur()
+        .then(() => {
+          expect(model.value).to.deep.equal([items[0], 'Item 2'])
+          expect(search.value).to.equal('')
+        })
+        .should('have.value', '')
+        .get('.v-combobox__selection')
+        .should('contain', 'Item 2')
+
+        .get('.v-field input')
+        .click()
+        .type('item3')
+        .blur()
+        .then(() => {
+          expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
+          expect(search.value).to.equal('')
+        })
+        .should('have.value', '')
+        .get('.v-combobox__selection')
+        .should('contain', 'item3')
     })
   })
 
