@@ -5164,10 +5164,10 @@ conventional-changelog-preset-loader@^2.1.1, conventional-changelog-preset-loade
   resolved "https://registry.yarnpkg.com/conventional-changelog-preset-loader/-/conventional-changelog-preset-loader-2.3.4.tgz#14a855abbffd59027fd602581f1f34d9862ea44c"
   integrity sha512-GEKRWkrSAZeTq5+YjUZOYxdHq+ci4dNwHvpaBC3+ENalzFWuCWa9EZXSuZBpkr72sMdKB+1fyDV4takK1Lf58g==
 
-conventional-changelog-vuetify@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/conventional-changelog-vuetify/-/conventional-changelog-vuetify-1.0.0.tgz#d6956973769501c74be2381834863ea3dde5a6a4"
-  integrity sha512-7YpJJEbwGUUvpsL4OsF59HUaQBw4SZQ70dshT8MwjBn8YhbEzAvAkF+aglbFuDntNIPg3qi0jcUS+RDpGY0zZA==
+conventional-changelog-vuetify@^1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/conventional-changelog-vuetify/-/conventional-changelog-vuetify-1.1.0.tgz#21261872ee5d603dadedca055ed09abeaa968390"
+  integrity sha512-VWNxmXPGsR6MUI7QwKpBSzsdbiNkMOWZ8XSJFAj2ygaZKGTwzdotonlonaZkxgQH3TMKkJua/W2oZanqs1SQWg==
   dependencies:
     compare-func "^2.0.0"
     q "^1.5.1"

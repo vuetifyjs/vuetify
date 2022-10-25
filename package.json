@@ -10,6 +10,10 @@
       "pre-commit": "node scripts/warn-npm-install.js && yarn run lint --since HEAD && yarn lerna run test --since HEAD"
     }
   },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/vuetifyjs/vuetify.git"
+  },
   "scripts": {
     "dev": "node scripts/dev.js",
     "build": "node scripts/build.js",
@@ -44,7 +48,7 @@
     "babel-eslint": "^10.1.0",
     "babel-jest": "^26.6.0",
     "conventional-changelog-cli": "^2.1.1",
-    "conventional-changelog-vuetify": "^1.0.0",
+    "conventional-changelog-vuetify": "^1.1.0",
     "cross-env": "^7.0.2",
     "cross-spawn": "^6.0.5",
     "css-loader": "^3.1.0",
