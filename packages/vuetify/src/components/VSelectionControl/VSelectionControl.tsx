@@ -31,14 +31,13 @@ import {
 } from '@/util'
 
 // Types
-import type { ComputedRef, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
+import type { CSSProperties, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
 import type { SlotsToProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
-  isReadonly: ComputedRef<boolean>
-  isDisabled: ComputedRef<boolean>
   textColorClasses: Ref<string[]>
+  textColorStyles: Ref<CSSProperties>
   props: {
     onBlur: (e: Event) => void
     onFocus: (e: FocusEvent) => void
@@ -273,12 +272,13 @@ export const VSelectionControl = genericComponent<new <T>() => {
               { slots.input?.({
                 model,
                 textColorClasses,
+                textColorStyles,
                 props: {
                   onFocus,
                   onBlur,
                   id: id.value,
                 },
-              }) }
+              } as SelectionControlSlot) }
             </div>
           </div>
 
