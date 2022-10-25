@@ -1,4 +1,4 @@
-import type { ComponentPublicInstance, FunctionalComponent, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
 
 // @skip-build
 import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
@@ -27,7 +27,7 @@ declare module '@vue/runtime-dom' {
 declare module '@vue/runtime-core' {
   interface Vuetify {
     defaults: DefaultsInstance
-    display: DisplayInstance
+    display: UnwrapNestedRefs<DisplayInstance>
     theme: ThemeInstance
     icons: IconOptions
     locale: LocaleInstance & RtlInstance
