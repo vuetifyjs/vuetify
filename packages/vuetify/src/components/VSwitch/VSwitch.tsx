@@ -2,14 +2,13 @@
 import './VSwitch.sass'
 
 // Components
-import { filterControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
 // Composables
 import { LoaderSlot, useLoader } from '@/composables/loader'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Utility
 import { computed, ref } from 'vue'

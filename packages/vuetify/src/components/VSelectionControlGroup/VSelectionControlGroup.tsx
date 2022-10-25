@@ -21,17 +21,12 @@ export interface VSelectionGroupContext {
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
 
-export const makeSelectionControlProps = propsFactory({
+export const makeSelectionControlGroupProps = propsFactory({
   color: String,
   disabled: Boolean,
-  defaultsTarget: {
-    type: String,
-    default: 'VSelectionControl',
-  },
   error: Boolean,
   id: String,
   inline: Boolean,
-  label: String,
   falseIcon: IconValue,
   trueIcon: IconValue,
   ripple: {
@@ -44,11 +39,8 @@ export const makeSelectionControlProps = propsFactory({
   },
   name: String,
   readonly: Boolean,
-  trueValue: null,
-  falseValue: null,
   modelValue: null,
   type: String,
-  value: null,
   valueComparator: {
     type: Function as PropType<typeof deepEqual>,
     default: deepEqual,
@@ -56,12 +48,19 @@ export const makeSelectionControlProps = propsFactory({
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-}, 'VSelectionControl')
+}, 'VSelectionControlGroup')
 
 export const VSelectionControlGroup = defineComponent({
   name: 'VSelectionControlGroup',
 
-  props: makeSelectionControlProps(),
+  props: {
+    defaultsTarget: {
+      type: String,
+      default: 'VSelectionControl',
+    },
+
+    ...makeSelectionControlGroupProps(),
+  },
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -87,8 +86,6 @@ export const VSelectionControlGroup = defineComponent({
         name,
         falseIcon: toRef(props, 'falseIcon'),
         trueIcon: toRef(props, 'trueIcon'),
-        trueValue: toRef(props, 'trueValue'),
-        falseValue: toRef(props, 'falseValue'),
         readonly: toRef(props, 'readonly'),
         ripple: toRef(props, 'ripple'),
         type: toRef(props, 'type'),

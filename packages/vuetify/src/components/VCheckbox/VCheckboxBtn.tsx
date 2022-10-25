@@ -3,7 +3,7 @@ import { VSelectionControl } from '@/components/VSelectionControl'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities

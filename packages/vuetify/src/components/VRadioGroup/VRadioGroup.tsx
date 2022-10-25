@@ -4,7 +4,7 @@ import './VRadioGroup.sass'
 // Components
 import { filterControlProps } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { makeSelectionControlProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
 
 // Composables
@@ -27,7 +27,7 @@ export const VRadioGroup = defineComponent({
     },
 
     ...makeVInputProps(),
-    ...excludeProps(makeSelectionControlProps(), ['multiple']),
+    ...excludeProps(makeSelectionControlGroupProps(), ['multiple']),
 
     trueIcon: {
       type: IconValue,

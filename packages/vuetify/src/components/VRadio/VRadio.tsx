@@ -2,7 +2,7 @@
 import { VSelectionControl } from '@/components/VSelectionControl'
 
 // Composables
-import { makeSelectionControlProps } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'

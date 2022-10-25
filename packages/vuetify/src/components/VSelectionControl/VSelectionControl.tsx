@@ -4,7 +4,7 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { makeSelectionControlProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -21,6 +21,7 @@ import {
   genericComponent,
   getUid,
   pick,
+  propsFactory,
   SUPPORTS_FOCUS_VISIBLE,
   useRender,
   wrapInArray,
@@ -41,6 +42,15 @@ export type SelectionControlSlot = {
     id: string
   }
 }
+
+export const makeSelectionControlProps = propsFactory({
+  label: String,
+  trueValue: null,
+  falseValue: null,
+  value: null,
+
+  ...makeSelectionControlGroupProps(),
+}, 'VSelectionControl')
 
 export function useSelectionControl (
   props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
