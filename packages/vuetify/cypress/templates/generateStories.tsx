@@ -2,7 +2,7 @@
  * Utilities for generating formatted mount functions
  * Some utility functions for mounting these generated examples inside of tests
  */
-import { JSXComponent } from 'vue'
+import { FunctionalComponent, JSXComponent } from 'vue'
 
 const _ = Cypress._
 
@@ -30,7 +30,7 @@ const title = (key: string) => <h4 class="my-4">{ key }</h4>
 const grid = (content: JSX.Element | JSX.Element[]) => <div style="display: flex; grid-gap: 0.8rem;">{ content }</div>
 
 // Spacing between mounted components
-const Wrapper = () => <div class="ma-4"></div>
+const Wrapper: FunctionalComponent = (_, { slots }) => <div class="ma-4">{ slots.default?.() }</div>
 
 /**
  * Generate an array of Examples by iterating over Stories.

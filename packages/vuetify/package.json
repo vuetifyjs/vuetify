@@ -105,7 +105,7 @@
     "test:coverage": "yarn test --coverage",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
-    "cy:open": "cypress open --component -b chrome",
+    "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
   "devDependencies": {
