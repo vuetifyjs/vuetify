@@ -4,22 +4,19 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeThemeProps } from '@/composables/theme'
+import { useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject, ref } from 'vue'
 import {
-  deepEqual,
   filterInputAttrs,
   genericComponent,
   getUid,
@@ -31,7 +28,7 @@ import {
 } from '@/util'
 
 // Types
-import type { CSSProperties, ExtractPropTypes, PropType, Ref, WritableComputedRef } from 'vue'
+import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
 import type { SlotsToProps } from '@/util'
 
 export type SelectionControlSlot = {
@@ -46,36 +43,12 @@ export type SelectionControlSlot = {
 }
 
 export const makeSelectionControlProps = propsFactory({
-  color: String,
-  disabled: Boolean,
-  error: Boolean,
-  id: String,
-  inline: Boolean,
   label: String,
-  falseIcon: IconValue,
-  trueIcon: IconValue,
-  ripple: {
-    type: Boolean,
-    default: true,
-  },
-  multiple: {
-    type: Boolean as PropType<boolean | null>,
-    default: null,
-  },
-  name: String,
-  readonly: Boolean,
   trueValue: null,
   falseValue: null,
-  modelValue: null,
-  type: String,
   value: null,
-  valueComparator: {
-    type: Function as PropType<typeof deepEqual>,
-    default: deepEqual,
-  },
 
-  ...makeThemeProps(),
-  ...makeDensityProps(),
+  ...makeSelectionControlGroupProps(),
 }, 'VSelectionControl')
 
 export function useSelectionControl (
@@ -93,7 +66,6 @@ export function useSelectionControl (
   ))
   const falseValue = computed(() => props.falseValue !== undefined ? props.falseValue : false)
   const isMultiple = computed(() => (
-    group?.multiple.value ||
     !!props.multiple ||
     (props.multiple == null && Array.isArray(modelValue.value))
   ))
@@ -132,11 +104,7 @@ export function useSelectionControl (
       !props.disabled
     ) ? props.color : undefined
   }))
-  const icon = computed(() => {
-    return model.value
-      ? group?.trueIcon.value ?? props.trueIcon
-      : group?.falseIcon.value ?? props.falseIcon
-  })
+  const icon = computed(() => model.value ? props.trueIcon : props.falseIcon)
 
   return {
     group,
@@ -174,7 +142,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
   setup (props, { attrs, slots }) {
     const {
       densityClasses,
-      group,
       icon,
       model,
       textColorClasses,
@@ -213,7 +180,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
           props: { for: id.value },
         })
         : props.label
-      const type = group?.type.value ?? props.type
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
 
       return (
@@ -226,7 +192,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--error': props.error,
               'v-selection-control--focused': isFocused.value,
               'v-selection-control--focus-visible': isFocusVisible.value,
-              'v-selection-control--inline': group?.inline.value || props.inline,
+              'v-selection-control--inline': props.inline,
             },
             densityClasses.value,
           ]}
@@ -262,10 +228,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 onFocus={ onFocus }
                 onInput={ onInput }
                 aria-readonly={ props.readonly }
-                type={ type }
+                type={ props.type }
                 value={ trueValue.value }
-                name={ group?.name.value ?? props.name }
-                aria-checked={ type === 'checkbox' ? model.value : undefined }
+                name={ props.name }
+                aria-checked={ props.type === 'checkbox' ? model.value : undefined }
                 { ...inputAttrs }
               />
 
