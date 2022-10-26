@@ -54,17 +54,6 @@ export function propsFactory<
   }
 }
 
-export function excludeProps<
-  PropsOptions extends ComponentObjectPropsOptions,
-  ExcludeProps extends keyof PropsOptions
-> (props: PropsOptions, exclude: ExcludeProps[]): Omit<PropsOptions, ExcludeProps> {
-  const clone = { ...props }
-
-  exclude.forEach(prop => delete clone[prop])
-
-  return clone
-}
-
 type AppendDefault<T extends ComponentObjectPropsOptions, D extends PartialKeys<T>> = {
   [P in keyof T]-?: unknown extends D[P]
     ? T[P]

@@ -12,8 +12,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, useRender } from '@/util'
+import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { genericComponent, getUid, omit, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
@@ -31,16 +31,15 @@ export const VMenu = genericComponent<new () => {
     // disableKeys: Boolean,
     id: String,
 
-    ...makeVOverlayProps({
-      transition: { component: VDialogTransition },
-      openDelay: 300,
+    ...omit(makeVOverlayProps({
       closeDelay: 250,
-      absolute: true,
       closeOnContentClick: true,
       locationStrategy: 'connected' as const,
-      scrollStrategy: 'reposition' as const,
+      openDelay: 300,
       scrim: false,
-    }),
+      scrollStrategy: 'reposition' as const,
+      transition: { component: VDialogTransition },
+    }), ['absolute']),
   },
 
   emits: {
@@ -94,12 +93,12 @@ export const VMenu = genericComponent<new () => {
           ]}
           { ...overlayProps }
           v-model={ isActive.value }
-          activatorProps={{
+          absolute
+          activatorProps={ mergeProps({
             'aria-haspopup': 'menu',
             'aria-expanded': String(isActive.value),
             'aria-owns': id.value,
-            ...overlayProps.activatorProps,
-          }}
+          }, props.activatorProps) }
           onClick:outside={ onClickOutside }
           { ...scopeId }
         >

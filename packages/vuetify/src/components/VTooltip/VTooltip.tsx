@@ -10,7 +10,7 @@ import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, mergeProps, ref } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
@@ -29,22 +29,22 @@ export const VTooltip = genericComponent<new () => {
     text: String,
 
     ...omit(makeVOverlayProps({
-      transition: false,
-      origin: 'auto' as const,
+      closeOnBack: false,
       location: 'end' as const,
+      locationStrategy: 'connected' as const,
       minWidth: 0,
       offset: 10,
+      openOnClick: false,
+      openOnHover: true,
+      origin: 'auto' as const,
+      scrim: false,
+      scrollStrategy: 'reposition' as const,
+      transition: false,
     }), [
       'absolute',
-      'locationStrategy',
-      'scrollStrategy',
-      'scrim',
       'persistent',
-      'openOnClick',
-      'openOnHover',
-      'closeOnBack',
       'eager',
-    ])[0],
+    ]),
   },
 
   emits: {
@@ -95,21 +95,14 @@ export const VTooltip = genericComponent<new () => {
           v-model={ isActive.value }
           transition={ transition.value }
           absolute
-          locationStrategy="connected"
-          scrollStrategy="reposition"
           location={ location.value }
           origin={ origin.value }
-          scrim={ false }
           persistent
-          open-on-click={ false }
-          open-on-hover
-          close-on-back={ false }
           role="tooltip"
           eager
-          activatorProps={{
+          activatorProps={ mergeProps({
             'aria-describedby': id.value,
-            ...overlayProps.activatorProps,
-          }}
+          }, props.activatorProps) }
           { ...scopeId }
         >
           {{

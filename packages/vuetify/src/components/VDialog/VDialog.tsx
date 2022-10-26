@@ -12,7 +12,7 @@ import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { nextTick, ref, watch } from 'vue'
+import { mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, IN_BROWSER, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
@@ -34,9 +34,9 @@ export const VDialog = genericComponent<new () => {
     scrollable: Boolean,
 
     ...makeVOverlayProps({
-      transition: { component: VDialogTransition },
       origin: 'center center' as const,
       scrollStrategy: 'block' as const,
+      transition: { component: VDialogTransition },
       zIndex: 2400,
     }),
   },
@@ -115,11 +115,10 @@ export const VDialog = genericComponent<new () => {
           v-model={ isActive.value }
           aria-role="dialog"
           aria-modal="true"
-          activatorProps={{
+          activatorProps={ mergeProps({
             'aria-haspopup': 'dialog',
             'aria-expanded': String(isActive.value),
-            ...overlayProps.activatorProps,
-          }}
+          }, props.activatorProps) }
           { ...scopeId }
         >
           {{

@@ -236,18 +236,12 @@ export function pick<
 export function omit<
   T extends object,
   U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: Omit<T, U>, no: MaybePick<T, U>]
-export function omit<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
-export function omit<
-  T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
-  const [no, yes] = pick(obj, paths)
+> (obj: T, exclude: U[]): Omit<T, U> {
+  const clone = { ...obj }
 
-  return [yes, no]
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
 }
 
 /**

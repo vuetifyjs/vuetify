@@ -15,7 +15,7 @@ import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { onMounted, ref, watch } from 'vue'
+import { mergeProps, onMounted, ref, watch } from 'vue'
 import { genericComponent, omit, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
@@ -45,7 +45,7 @@ export const VSnackbar = genericComponent<new () => {
     ...makeVariantProps(),
     ...omit(makeVOverlayProps({
       transition: 'v-snackbar-transition',
-    }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy'])[0],
+    }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
   },
 
   emits: {
@@ -103,10 +103,9 @@ export const VSnackbar = genericComponent<new () => {
           ]}
           { ...overlayProps }
           v-model={ isActive.value }
-          contentProps={{
+          contentProps={ mergeProps({
             style: locationStyles.value,
-            ...overlayProps.contentProps,
-          }}
+          }, overlayProps.contentProps) }
           persistent
           noClickAnimation
           scrim={ false }
