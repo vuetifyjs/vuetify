@@ -37,6 +37,7 @@ export const VDialog = genericComponent<new () => {
       transition: { component: VDialogTransition },
       origin: 'center center' as const,
       scrollStrategy: 'block' as const,
+      zIndex: 2400,
     }),
   },
 
@@ -119,7 +120,6 @@ export const VDialog = genericComponent<new () => {
             'aria-expanded': String(isActive.value),
             ...overlayProps.activatorProps,
           }}
-          z-index={ 2400 }
           { ...scopeId }
         >
           {{

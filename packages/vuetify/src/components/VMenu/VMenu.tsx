@@ -13,7 +13,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { computed, inject, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
+import { genericComponent, getUid, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
@@ -31,17 +31,16 @@ export const VMenu = genericComponent<new () => {
     // disableKeys: Boolean,
     id: String,
 
-    ...omit(makeVOverlayProps({
+    ...makeVOverlayProps({
       transition: { component: VDialogTransition },
       openDelay: 300,
       closeDelay: 250,
-    }), [
-      'absolute',
-      'closeOnContentClick',
-      'locationStrategy',
-      'scrollStrategy',
-      'scrim',
-    ])[0],
+      absolute: true,
+      closeOnContentClick: true,
+      locationStrategy: 'connected' as const,
+      scrollStrategy: 'reposition' as const,
+      scrim: false,
+    }),
   },
 
   emits: {
@@ -95,11 +94,6 @@ export const VMenu = genericComponent<new () => {
           ]}
           { ...overlayProps }
           v-model={ isActive.value }
-          absolute
-          closeOnContentClick
-          locationStrategy="connected"
-          scrollStrategy="reposition"
-          scrim={ false }
           activatorProps={{
             'aria-haspopup': 'menu',
             'aria-expanded': String(isActive.value),
