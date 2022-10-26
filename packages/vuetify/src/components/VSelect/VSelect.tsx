@@ -19,7 +19,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -104,6 +104,8 @@ export const VSelect = genericComponent<new <
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref<VTextField>()
+    const vListRef = ref<VList>()
+    const selectedIndex = ref(-1)
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -141,12 +143,24 @@ export const VSelect = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly) return
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+      if (['Enter', ' '].includes(e.key)) {
+        if (menu.value) return
+
         menu.value = true
       }
 
       if (['Escape', 'Tab'].includes(e.key)) {
+        if (!menu.value) return
+
         menu.value = false
+      }
+
+      if (['ArrowDown'].includes(e.key)) {
+        selectedIndex.value++
+      }
+
+      if (['ArrowUp'].includes(e.key)) {
+        selectedIndex.value--
       }
     }
     function select (item: InternalItem) {
@@ -165,6 +179,24 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+
+    // watch(menu, val => {
+    //   if (!val) return
+
+    //   setTimeout(() => {
+    //     requestAnimationFrame(() => {
+    //       vListRef.value?.$el.querySelector('.v-list-item--active')?.focus()
+    //     })
+    //   }, 50) // value is arbitrary
+    // })
+
+    watch(selectedIndex, index => {
+      const item = items.value[index]
+
+      if (!item) return
+
+      select(item)
+    })
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)

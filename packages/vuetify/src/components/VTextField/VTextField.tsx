@@ -73,7 +73,7 @@ export const VTextField = genericComponent<new <T>() => {
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength
 
       if (
         !props.counter ||
@@ -204,7 +204,7 @@ export const VTextField = genericComponent<new <T>() => {
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        // onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
