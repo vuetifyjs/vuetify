@@ -58,8 +58,7 @@ describe('VCombobox', () => {
         .get('.v-list-item')
         .eq(0)
         .click({ waitForAnimations: false })
-        .then(async () => {
-          await nextTick()
+        .should(() => {
           expect(model.value).to.deep.equal(items[0])
           expect(search.value).to.deep.equal(items[0].title)
         })
@@ -73,8 +72,7 @@ describe('VCombobox', () => {
         .click()
         .clear()
         .type('Item 2')
-        .then(async () => {
-          await nextTick()
+        .should(() => {
           expect(model.value).to.equal('Item 2')
           expect(search.value).to.equal('Item 2')
         })
@@ -87,8 +85,7 @@ describe('VCombobox', () => {
         .click()
         .clear()
         .type('item3')
-        .then(async () => {
-          await nextTick()
+        .should(() => {
           expect(model.value).to.equal('item3')
           expect(search.value).to.equal('item3')
         })
@@ -138,8 +135,7 @@ describe('VCombobox', () => {
         .click()
         .type('Item 2')
         .blur()
-        .then(async () => {
-          await nextTick()
+        .should(() => {
           expect(model.value).to.deep.equal([items[0], 'Item 2'])
           expect(search.value).to.equal('')
         })
@@ -151,8 +147,7 @@ describe('VCombobox', () => {
         .click()
         .type('item3')
         .blur()
-        .then(async () => {
-          await nextTick()
+        .should(() => {
           expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
           expect(search.value).to.equal('')
         })
