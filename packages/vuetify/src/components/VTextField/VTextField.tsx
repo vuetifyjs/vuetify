@@ -157,6 +157,7 @@ export const VTextField = genericComponent<new () => {
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
