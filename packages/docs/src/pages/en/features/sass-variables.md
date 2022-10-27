@@ -15,6 +15,30 @@ Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of t
 
 <entry />
 
+## Installation
+
+Vuetify works out of the box without any additional compilers needing to be installed. Changing or using SASS variables though obviously requires the SASS compiler.
+
+### vite
+
+Vite provides built-in support for sass, less and stylus files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed. Vuetify needs sass as a preprocessor so install it:
+
+```bash
+npm install -D sass
+```
+
+for more information: https://vitejs.dev/guide/features.html#css-pre-processors
+
+### vue-cli
+
+You can select pre-processors (Sass/Less/Stylus) when creating the project. If you did not do so, the internal webpack config is still pre-configured to handle all of them. You just need to manually install the corresponding webpack loaders:
+
+```bash
+npm install -D sass-loader sass
+```
+
+for more information: https://cli.vuejs.org/guide/css.html#pre-processors
+
 ## Basic usage
 
 Some variables are not used by vuetify components and are safe to modify without any additional configuration.

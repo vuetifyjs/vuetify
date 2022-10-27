@@ -14,6 +14,10 @@ related:
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
+![Why Vuetify Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/why-vuetify/why-vuetify-entry.png)
+
+---
+
 <!-- <promoted slug="vuemastery-getting-started" /> -->
 
 ## What is Vuetify?

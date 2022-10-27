@@ -12,14 +12,13 @@ import { genericComponent } from '@/util'
 import type { InternalListItem } from './VList'
 import type { ListGroupActivatorSlot } from './VListGroup'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { Prop } from 'vue'
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     default: []
     header: [ListGroupActivatorSlot]
     item: [T]

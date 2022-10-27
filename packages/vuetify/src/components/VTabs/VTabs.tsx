@@ -58,9 +58,12 @@ export const VTabs = defineComponent({
       default: undefined,
     },
     hideSlider: Boolean,
-    optional: Boolean,
     sliderColor: String,
     modelValue: null,
+    mandatory: {
+      type: [Boolean, String] as PropType<boolean | 'force'>,
+      default: 'force',
+    },
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -105,7 +108,7 @@ export const VTabs = defineComponent({
         style={backgroundColorStyles.value}
         role="tablist"
         symbol={ VTabsSymbol }
-        mandatory="force"
+        mandatory={ props.mandatory }
         direction={ props.direction }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (

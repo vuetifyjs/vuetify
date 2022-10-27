@@ -1,5 +1,6 @@
 /* eslint-disable jest/no-commented-out-tests */
 
+import { describe, expect, it } from '@jest/globals'
 import { createTheme } from '../theme'
 import { createApp } from 'vue'
 import type { App } from 'vue'

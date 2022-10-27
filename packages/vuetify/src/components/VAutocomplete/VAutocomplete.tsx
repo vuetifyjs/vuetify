@@ -25,7 +25,7 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 // Types
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -51,7 +51,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
-    ? Val<T, ReturnObject>[]
+    ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
 export const VAutocomplete = genericComponent<new <
@@ -64,15 +64,18 @@ export const VAutocomplete = genericComponent<new <
     items?: readonly T[]
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: Readonly<V>
+    modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<T>, index: number }]
-    'no-data': []
-  }>
+  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      selection: [{ item: InternalItem<T>, index: number }]
+      'prepend-item': []
+      'append-item': []
+      'no-data': []
+    }>
+  >
 }>()({
   name: 'VAutocomplete',
 
@@ -263,6 +266,8 @@ export const VAutocomplete = genericComponent<new <
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
+                    { slots['prepend-item']?.() }
+
                     { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
                       item,
                       index,
@@ -285,6 +290,8 @@ export const VAutocomplete = genericComponent<new <
                         }}
                       </VListItem>
                     )) }
+
+                    { slots['append-item']?.() }
                   </VList>
                 </VMenu>
 

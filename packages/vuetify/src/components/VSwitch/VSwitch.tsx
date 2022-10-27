@@ -102,12 +102,13 @@ export const VSwitch = defineComponent({
                 {{
                   ...slots,
                   default: () => (<div class="v-switch__track" onClick={ onClick }></div>),
-                  input: ({ textColorClasses }) => (
+                  input: ({ textColorClasses, textColorStyles }) => (
                     <div
                       class={[
                         'v-switch__thumb',
                         textColorClasses.value,
                       ]}
+                      style={ textColorStyles.value }
                     >
                       { props.loading && (
                         <LoaderSlot

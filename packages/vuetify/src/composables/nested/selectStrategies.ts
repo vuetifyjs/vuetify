@@ -1,24 +1,24 @@
 /* eslint-disable sonarjs/no-identical-functions */
 export type SelectStrategyFn = (data: {
-  id: string
+  id: unknown
   value: boolean
-  selected: Map<string, 'on' | 'off' | 'indeterminate'>
-  children: Map<string, string[]>
-  parents: Map<string, string>
+  selected: Map<unknown, 'on' | 'off' | 'indeterminate'>
+  children: Map<unknown, unknown[]>
+  parents: Map<unknown, unknown>
   event?: Event
-}) => Map<string, 'on' | 'off' | 'indeterminate'>
+}) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
-  v: string[] | undefined,
-  children: Map<string, string[]>,
-  parents: Map<string, string>,
-) => Map<string, 'on' | 'off' | 'indeterminate'>
+  v: unknown[] | undefined,
+  children: Map<unknown, unknown[]>,
+  parents: Map<unknown, unknown>,
+) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformOutFn = (
-  v: Map<string, 'on' | 'off' | 'indeterminate'>,
-  children: Map<string, string[]>,
-  parents: Map<string, string>,
-) => any[]
+  v: Map<unknown, 'on' | 'off' | 'indeterminate'>,
+  children: Map<unknown, unknown[]>,
+  parents: Map<unknown, unknown>,
+) => unknown[]
 
 export type SelectStrategy = {
   select: SelectStrategyFn
@@ -32,7 +32,7 @@ export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy =
       // When mandatory and we're trying to deselect when id
       // is the only currently selected item then do nothing
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as string[])
+        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
         if (on.length === 1 && on[0] === id) return selected
       }
 
@@ -158,7 +158,7 @@ export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
       // If mandatory and planned deselect results in no selected
       // items then we can't do it, so return original state
       if (mandatory && !value) {
-        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as string[])
+        const on = Array.from(selected.entries()).reduce((arr, [key, value]) => value === 'on' ? [...arr, key] : arr, [] as unknown[])
         if (on.length === 0) return original
       }
 

@@ -2,18 +2,17 @@
 import './VRadioGroup.sass'
 
 // Components
-import { filterControlProps, makeSelectionControlProps } from '@/components/VSelectionControl/VSelectionControl'
+import { filterControlProps } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
-import { VSelectionControlGroup } from '@/components/VSelectionControlGroup'
 
 // Composables
 import { IconValue } from '@/composables/icons'
-import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed } from 'vue'
 import { defineComponent, excludeProps, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VRadioGroup = defineComponent({
@@ -28,7 +27,7 @@ export const VRadioGroup = defineComponent({
     },
 
     ...makeVInputProps(),
-    ...excludeProps(makeSelectionControlProps(), ['multiple']),
+    ...excludeProps(makeSelectionControlGroupProps(), ['multiple']),
 
     trueIcon: {
       type: IconValue,
@@ -52,13 +51,6 @@ export const VRadioGroup = defineComponent({
     const uid = getUid()
     const id = computed(() => props.id || `radio-group-${uid}`)
     const model = useProxiedModel(props, 'modelValue')
-
-    provideDefaults({
-      VRadio: {
-        color: toRef(props, 'color'),
-        density: toRef(props, 'density'),
-      },
-    })
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -99,6 +91,7 @@ export const VRadioGroup = defineComponent({
                 <VSelectionControlGroup
                   { ...controlProps }
                   id={ id.value }
+                  defaultsTarget="VRadio"
                   trueIcon={ props.trueIcon }
                   falseIcon={ props.falseIcon }
                   type={ props.type }

@@ -13,13 +13,13 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 
-const argv = yargs(process.argv.slice(2))
+const yar = yargs(process.argv.slice(2))
   .option('components', {
     type: 'array',
   })
-  .argv
 
 const run = async () => {
+  const argv = await yar.argv
   const locales = ['en']
 
   // Components
@@ -78,9 +78,13 @@ const run = async () => {
   }
 
   rimraf.sync(path.resolve('./dist'))
-  fs.mkdir(path.resolve('./dist'))
+  await fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
+  await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
+  await fs.copyFile(path.resolve('./dist/tags.json'), path.resolve('../vuetify/dist/json/tags.json'))
+  await fs.copyFile(path.resolve('./dist/attributes.json'), path.resolve('../vuetify/dist/json/attributes.json'))
+  await fs.copyFile(path.resolve('./dist/web-types.json'), path.resolve('../vuetify/dist/json/web-types.json'))
   rimraf.sync(path.resolve('./src/tmp'))
 }
 

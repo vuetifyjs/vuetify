@@ -28,6 +28,7 @@ import type {
   VNode,
   VNodeChild,
 } from 'vue'
+import { propsFactory } from '@/util/propsFactory'
 
 function propIsDefined (vnode: VNode, prop: string) {
   return vnode.props?.hasOwnProperty(prop) ||
@@ -45,6 +46,9 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
   if (options._setup) {
     options.props = options.props ?? {}
+
+    options.props = propsFactory(options.props, options.name)()
+
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!
@@ -62,10 +66,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         }
 
         for (const prop of Object.keys(props)) {
-          let newVal
-          if (propIsDefined(vm.vnode, prop)) {
-            newVal = props[prop]
-          } else {
+          let newVal = props[prop]
+          if (!propIsDefined(vm.vnode, prop)) {
             newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
           }
           if (_props[prop] !== newVal) {
@@ -95,12 +97,17 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 }) as unknown as typeof _defineComponent
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
-export type SlotsToProps<T extends Record<string, Slot>> = {
-  $children: () => (T['default'] | VNodeChild | { [K in keyof T]?: T[K] })
-  'v-slots': new () => { [K in keyof T]?: T[K] | false }
-}/* & { // TODO: individual slots are never converted from the constructor type
-  [K in keyof T as `v-slot:${K & string}`]?: new () => (T[K] | false)
-} */
+
+export type SlotsToProps<T extends Record<string, any>> = T extends Record<string, Slot> ? ({
+  $children?: (
+    | VNodeChild
+    | (keyof T extends 'default' ? T['default'] : {})
+    | { [K in keyof T]?: T[K] }
+  )
+  'v-slots'?: { [K in keyof T]?: T[K] | false }
+} & {
+  [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
+}) : T extends Record<string, any[]> ? SlotsToProps<MakeSlots<T>> : never
 
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {
@@ -108,7 +115,7 @@ export type MakeSlots<T extends Record<string, any[]>> = {
 }
 
 export function genericComponent<T extends (new () => {
-  $slots?: Record<string, Slot>
+  $props?: Record<string, any>
 })> (exposeDefaults = true): <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
@@ -121,11 +128,9 @@ export function genericComponent<T extends (new () => {
   EE extends string = string,
   I = InstanceType<T>,
   Base = DefineComponent<
-    (I extends Record<'$props', any> ? Omit<PropsOptions, keyof I['$props']> : PropsOptions) & (
-      I extends Record<'$slots', any>
-        ? SlotsToProps<I['$slots']>
-        : {}
-    ),
+    I extends Record<'$props', any>
+      ? Omit<PropsOptions, keyof I['$props']>
+      : PropsOptions,
     RawBindings,
     D,
     C,
