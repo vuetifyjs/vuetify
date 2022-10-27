@@ -6,7 +6,7 @@ meta:
 related:
   - /introduction/enterprise/
   - /getting-started/contributing/
-  - /about/meet-the-team/
+  - /introduction/meet-the-team/
 ---
 
 # Long-term support
