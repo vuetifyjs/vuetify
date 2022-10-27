@@ -10,7 +10,7 @@
     "offsetY": "Offset the badge on the y-axis.",
     "overlap": "Overlaps the slotted content on top of the component.",
     "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
-    "location": "Changes the location of the badge. Possible values are **top-right**, **bottom-right**, **bottom-left**, **top-left**.",
+    "location": "Changes the location of the badge. Possible values are **top**, **bottom**, **start**, **end**, **top start**, **top end**, **bottom start**, **bottom end**.",
     "color": "Defines the background color of the badge.",
     "textColor": "Defines the text color of the badge."
   },
