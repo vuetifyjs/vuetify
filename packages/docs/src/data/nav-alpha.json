@@ -7,6 +7,8 @@
       "why-vuetify",
       "long-term-support",
       "roadmap",
+      "meet-the-team",
+      "sponsors-and-backers",
       { "divider": true },
       { "subheader": "professional-support" },
       "support"
@@ -68,23 +70,18 @@
     "items": [
       "all",
       "alerts",
-      "app-bars",
-      "application",
       "aspect-ratios",
       "avatars",
       "badges",
       "banners",
-      "bottom-navigation",
       "breadcrumbs",
       "buttons",
       "cards",
       "carousels",
       "chips",
       "color-pickers",
-      "defaults-providers",
       "dividers",
       "expansion-panels",
-      "footers",
       {
         "title": "form-inputs-and-controls",
         "activeIcon": "",
@@ -119,9 +116,20 @@
       "hover",
       "icons",
       "images",
+      {
+        "title": "layout",
+        "items": [
+          "application",
+          "app-bars",
+          "bottom-navigation",
+          "footers",
+          "navigation-drawers",
+          "system-bars"
+        ]
+      },
       "lazy",
       "lists",
-      "navigation-drawers",
+      "no-ssr",
       {
         "title": "overlays",
         "items": [
@@ -131,7 +139,6 @@
           "tooltips"
         ]
       },
-      "no-ssr",
       "paginations",
       "parallax",
       {
@@ -141,13 +148,19 @@
           "progress-linear"
         ]
       },
+      {
+        "title": "providers",
+        "items": [
+          "defaults-providers",
+          "locale-providers",
+          "theme-providers"
+        ]
+      },
       "ratings",
       "sheets",
       "snackbars",
-      "system-bars",
       "tables",
       "tabs",
-      "theme-providers",
       "timelines",
       "toolbars"
     ]
@@ -185,8 +198,6 @@
     "inactiveIcon": "mdi-vuetify",
     "activeIcon": "mdi-vuetify",
     "items": [
-      "meet-the-team",
-      "sponsors-and-backers",
       "security-disclosure",
       "code-of-conduct"
     ]

@@ -112,6 +112,7 @@
   "laptop": "Laptop",
   "large": "Large",
   "latest-release": "Latest release",
+  "layout": "Layout",
   "layout-link": "Link to layout for {name}",
   "learn": "Learn",
   "light": "Light",
@@ -144,6 +145,7 @@
   "privacy-policy": "Privacy Policy",
   "professional-support": "Professional support",
   "progress": "Progress",
+  "providers": "Providers",
   "published-on": "Published on {date}",
   "pwa": {
     "install": "Install Vuetify Documentation",
