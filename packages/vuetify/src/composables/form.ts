@@ -20,7 +20,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
-  validationType: Ref<FormProps['validationType']>
+  validateOn: Ref<FormProps['validateOn']>
 }
 
 interface FormField {
@@ -52,7 +52,7 @@ export interface FormProps {
   readonly: boolean
   modelValue: boolean | null
   'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
-  validationType: ValidationProps['validationType']
+  validateOn: ValidationProps['validateOn']
 }
 
 export const makeFormProps = propsFactory({
@@ -64,8 +64,8 @@ export const makeFormProps = propsFactory({
     type: Boolean as PropType<boolean | null>,
     default: null,
   },
-  validationType: {
-    type: String as PropType<FormProps['validationType']>,
+  validateOn: {
+    type: String as PropType<FormProps['validateOn']>,
     default: 'input',
   },
 }, 'form')
@@ -172,7 +172,7 @@ export function createForm (props: FormProps) {
     isReadonly,
     isValidating,
     items,
-    validationType: toRef(props, 'validationType'),
+    validateOn: toRef(props, 'validateOn'),
   })
 
   return {

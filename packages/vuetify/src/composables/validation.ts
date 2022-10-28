@@ -31,7 +31,7 @@ export interface ValidationProps {
   rules: ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
-  validationType: 'blur' | 'input' | 'submit'
+  validateOn: 'blur' | 'input' | 'submit'
   validationValue: any
 }
 
@@ -54,7 +54,7 @@ export const makeValidationProps = propsFactory({
     default: () => ([]),
   },
   modelValue: null,
-  validationType: String as PropType<ValidationProps['validationType']>,
+  validateOn: String as PropType<ValidationProps['validateOn']>,
   validationValue: null,
 
   ...makeFocusProps(),
@@ -112,18 +112,18 @@ export function useValidation (
     form?.unregister(uid.value)
   })
 
-  const validationType = computed(() => props.validationType || form?.validationType.value)
+  const validateOn = computed(() => props.validateOn || form?.validateOn.value)
 
   // Set initial valid state, for inputs that might not have rules
   onMounted(() => form?.update(uid.value, isValid.value, errorMessages.value))
 
-  useToggleScope(() => validationType.value === 'input', () => {
+  useToggleScope(() => validateOn.value === 'input', () => {
     watch(validationModel, () => {
       if (validationModel.value != null) validate()
     })
   })
 
-  useToggleScope(() => validationType.value === 'blur', () => {
+  useToggleScope(() => validateOn.value === 'blur', () => {
     watch(() => props.focused, val => {
       if (!val) validate()
     })
