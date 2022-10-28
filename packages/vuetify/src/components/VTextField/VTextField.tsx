@@ -95,7 +95,7 @@ export const VTextField = genericComponent<new () => {
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
-    const isFocused = ref(false)
+    const isFocused = ref(props.focused)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
@@ -125,7 +125,7 @@ export const VTextField = genericComponent<new () => {
       onFocus()
 
       nextTick(() => {
-        model.value = ''
+        model.value = null
 
         callEvent(props['onClick:clear'], e)
       })

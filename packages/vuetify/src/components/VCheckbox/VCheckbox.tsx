@@ -6,7 +6,7 @@ import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/V
 import { filterCheckboxBtnProps, makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
 // Utilities
-import { computed } from 'vue'
+import { computed, ref } from 'vue'
 import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -22,6 +22,7 @@ export const VCheckbox = defineComponent({
   setup (props, { attrs, slots }) {
     const uid = getUid()
     const id = computed(() => props.id || `checkbox-${uid}`)
+    const isFocused = ref(props.focused)
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -34,6 +35,7 @@ export const VCheckbox = defineComponent({
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
+          focused={ isFocused.value }
         >
           {{
             ...slots,
@@ -48,6 +50,8 @@ export const VCheckbox = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                onFocus={ () => isFocused.value = true }
+                onBlur={ () => isFocused.value = false }
                 v-slots={ slots }
               />
             ),

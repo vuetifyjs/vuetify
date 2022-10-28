@@ -50,6 +50,7 @@ export const VSwitch = defineComponent({
 
     const uid = getUid()
     const id = computed(() => props.id || `switch-${uid}`)
+    const isFocused = ref(props.focused)
 
     function onChange () {
       if (indeterminate.value) {
@@ -78,6 +79,7 @@ export const VSwitch = defineComponent({
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
+          focused={ isFocused.value }
         >
           {{
             ...slots,
@@ -97,6 +99,8 @@ export const VSwitch = defineComponent({
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
+                onFocus={ () => isFocused.value = true }
+                onBlur={ () => isFocused.value = false }
                 { ...controlAttrs }
               >
                 {{
