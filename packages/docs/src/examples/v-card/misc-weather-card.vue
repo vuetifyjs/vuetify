@@ -3,10 +3,8 @@
     class="mx-auto"
     max-width="368"
   >
-    <v-card-item>
-      <v-card-title class="text-h5">Florida</v-card-title>
-
-      <v-card-subtitle>
+    <v-card-item title="Florida">
+      <template v-slot:subtitle>
         <v-icon
           icon="mdi-alert"
           size="18"
@@ -15,11 +13,11 @@
         ></v-icon>
 
         Extreme Weather Alert
-      </v-card-subtitle>
+      </template>
     </v-card-item>
 
     <v-card-text class="py-0">
-      <v-row align="center" hide-gutters no-gutters>
+      <v-row align="center" no-gutters>
         <v-col
           class="text-h2"
           cols="6"
@@ -28,41 +26,47 @@
         </v-col>
 
         <v-col cols="6" class="text-right">
-          <v-icon size="88" color="error" icon="mdi-weather-hurricane"></v-icon>
+          <v-icon
+            color="error"
+            icon="mdi-weather-hurricane"
+            size="88"
+          ></v-icon>
         </v-col>
       </v-row>
     </v-card-text>
 
-    <v-list-item density="compact">
-      <v-list-item-avatar left>
-        <v-icon icon="mdi-weather-windy"></v-icon>
-      </v-list-item-avatar>
+    <div class="d-flex py-3 justify-space-between">
+      <v-list-item
+        density="compact"
+        prepend-icon="mdi-weather-windy"
+      >
+        <v-list-item-subtitle>123 km/h</v-list-item-subtitle>
+      </v-list-item>
 
-      <v-list-item-subtitle>123 km/h</v-list-item-subtitle>
-    </v-list-item>
-
-    <v-list-item density="compact">
-      <v-list-item-avatar left>
-        <v-icon icon="mdi-weather-pouring"></v-icon>
-      </v-list-item-avatar>
-
-      <v-list-item-subtitle>48%</v-list-item-subtitle>
-    </v-list-item>
+      <v-list-item
+        density="compact"
+        prepend-icon="mdi-weather-pouring"
+      >
+        <v-list-item-subtitle>48%</v-list-item-subtitle>
+      </v-list-item>
+    </div>
 
     <v-expand-transition>
       <div v-if="expand">
-        <v-slider
-          v-model="time"
-          :max="6"
-          :step="1"
-          :ticks="labels"
-          class="mx-4"
-          color="primary"
-          density="compact"
-          hide-details
-          show-ticks="always"
-          thumb-size="10"
-        ></v-slider>
+        <div class="py-2">
+          <v-slider
+            v-model="time"
+            :max="6"
+            :step="1"
+            :ticks="labels"
+            class="mx-4"
+            color="primary"
+            density="compact"
+            hide-details
+            show-ticks="always"
+            thumb-size="10"
+          ></v-slider>
+        </div>
 
         <v-list class="transparent">
           <v-list-item
@@ -81,7 +85,7 @@
 
     <v-card-actions>
       <v-btn @click="expand = !expand">
-        Full Report
+        {{ !expand ? 'Full Report' : 'Hide Report' }}
       </v-btn>
     </v-card-actions>
   </v-card>
