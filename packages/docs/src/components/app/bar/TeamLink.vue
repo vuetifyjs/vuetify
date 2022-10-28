@@ -1,6 +1,6 @@
 <template>
   <app-btn
-    :to="rpath('/about/meet-the-team')"
+    :to="rpath('/about/meet-the-team/')"
     color="medium-emphasis"
     text="team"
     variant="text"

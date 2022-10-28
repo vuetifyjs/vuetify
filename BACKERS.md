@@ -1,6 +1,6 @@
 # Backers
 
-You can join them in supporting Vuetify by [Sponsoring the Project](https://vuetifyjs.com/en/about/sponsors-and-backers/)
+You can join them in supporting Vuetify by [Sponsoring the Project](https://vuetifyjs.com/en/introduction/sponsors-and-backers/)
 
 ## Special
 
@@ -8,7 +8,7 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 
 ### Diamond
 
-- [Your organization here](https://vuetifyjs.com/en/about/sponsors-and-backers/)
+- [Your organization here](https://vuetifyjs.com/en/introduction/sponsors-and-backers/)
 
 ### Platinum
 
@@ -16,7 +16,6 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Intygrate](http://intygrate.com/)
 - [Vue Mastery](http://vuemastery.com/)
 - [Crossword Solver](http://crossword-solver.io/)
-- [Kintell](https://kintell.com/?utm_source=Vuetify&utm_medium=VuetifyReferral&utm_campaign=Vuetify-logo-click)
 
 ### Gold
 
@@ -25,7 +24,6 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Quanted Square](https://analytics.quantedsquare.com/)
 - [HYPE](https://www.hypeinnovation.com/home)
 - [PapersOwl](https://papersowl.com/write-my-essay-please)
-- [Elfo](https://www.elfo.net/)
 - [Cosmic](https://www.cosmicjs.com/)
 - [Dealer Desk](https://www.dealerdesk.de/)
 - [Writers per Hour](https://writersperhour.com/buy-essay/)
@@ -36,11 +34,3 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [CasinoHex Canada](https://onlinecasinohex.ca/)
 - [Casinoonlineaams](https://www.casinoonlineaams.com/)
 - [TM Design](https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071)
-
-#### Silver
-
-- [Zweidenker](http://zweidenker.de)
-- [Software IDM](https://softwareidm.com/)
-- [Loomio](https://www.loomio.org/)
-- [Toolio](https://www.toolio.com/)
-- [VolleyBall Life](https://volleyballlife.com/)
