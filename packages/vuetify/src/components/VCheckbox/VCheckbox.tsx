@@ -5,8 +5,11 @@ import './VCheckbox.sass'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { filterCheckboxBtnProps, makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
+// Composables
+import { useFocus } from '@/composables/focus'
+
 // Utilities
-import { computed, ref } from 'vue'
+import { computed } from 'vue'
 import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
 
 export const VCheckbox = defineComponent({
@@ -19,10 +22,15 @@ export const VCheckbox = defineComponent({
     ...makeVCheckboxBtnProps(),
   },
 
+  emits: {
+    'update:focused': (focused: boolean) => true,
+  },
+
   setup (props, { attrs, slots }) {
+    const { isFocused, focus, blur } = useFocus(props)
+
     const uid = getUid()
     const id = computed(() => props.id || `checkbox-${uid}`)
-    const isFocused = ref(props.focused)
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
@@ -50,8 +58,8 @@ export const VCheckbox = defineComponent({
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
-                onFocus={ () => isFocused.value = true }
-                onBlur={ () => isFocused.value = false }
+                onFocus={ focus }
+                onBlur={ blur }
                 v-slots={ slots }
               />
             ),
