@@ -36,10 +36,7 @@ export const VNavigationDrawer = defineComponent({
     disableRouteWatcher: Boolean,
     expandOnHover: Boolean,
     floating: Boolean,
-    modelValue: {
-      type: Boolean as PropType<boolean | null>,
-      default: null,
-    },
+    modelValue: Boolean as PropType<boolean | null>,
     permanent: Boolean,
     rail: Boolean,
     railWidth: {
