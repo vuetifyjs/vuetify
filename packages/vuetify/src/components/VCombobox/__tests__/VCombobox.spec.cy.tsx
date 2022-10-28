@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VCombobox } from '../VCombobox'
-import { nextTick, ref } from 'vue'
+import { ref } from 'vue'
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
