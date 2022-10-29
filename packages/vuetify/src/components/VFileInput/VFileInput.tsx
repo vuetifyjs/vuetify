@@ -148,6 +148,7 @@ export const VFileInput = defineComponent({
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{

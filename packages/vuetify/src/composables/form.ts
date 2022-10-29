@@ -1,10 +1,11 @@
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
+import { computed, inject, provide, ref, toRef, watch } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+import type { ValidationProps } from './validation'
 
 export interface FormProvide {
   register: (item: {
@@ -19,6 +20,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  validateOn: Ref<FormProps['validateOn']>
 }
 
 interface FormField {
@@ -47,10 +49,10 @@ export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 export interface FormProps {
   disabled: boolean
   fastFail: boolean
-  lazyValidation: boolean
   readonly: boolean
   modelValue: boolean | null
   'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+  validateOn: ValidationProps['validateOn']
 }
 
 export const makeFormProps = propsFactory({
@@ -61,6 +63,10 @@ export const makeFormProps = propsFactory({
   modelValue: {
     type: Boolean as PropType<boolean | null>,
     default: null,
+  },
+  validateOn: {
+    type: String as PropType<FormProps['validateOn']>,
+    default: 'input',
   },
 }, 'form')
 
@@ -166,6 +172,7 @@ export function createForm (props: FormProps) {
     isReadonly,
     isValidating,
     items,
+    validateOn: toRef(props, 'validateOn'),
   })
 
   return {
