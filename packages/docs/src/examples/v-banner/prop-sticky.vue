@@ -9,13 +9,14 @@
 
       <v-spacer></v-spacer>
 
-      <div>
+      <template v-slot:append>
         <v-switch
           v-model="sticky"
           label="Sticky Banner"
           hide-details
+          color="secondary"
         ></v-switch>
-      </div>
+      </template>
     </v-toolbar>
 
     <v-banner

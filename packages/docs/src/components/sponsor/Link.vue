@@ -2,7 +2,7 @@
   <v-btn
     :aria-label="t('become-a-sponsor')"
     :size="size"
-    :to="rpath('/about/sponsors-and-backers')"
+    :to="rpath('/about/sponsors-and-backers/')"
     color="primary"
     variant="outlined"
     @click="onClick"

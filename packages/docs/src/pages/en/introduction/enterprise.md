@@ -7,7 +7,7 @@ meta:
 related:
   - /introduction/support/
   - /about/security-disclosure/
-  - /about/meet-the-team/
+  - /introduction/meet-the-team/
 ---
 
 # Vuetify for Enterprise

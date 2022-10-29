@@ -21,7 +21,7 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
-  const internal = ref(props[prop]) as Ref<Props[Prop]>
+  const internal = ref(props[prop] !== undefined ? props[prop] : defaultValue) as Ref<Props[Prop]>
   const kebabProp = toKebabCase(prop)
   const checkKebab = kebabProp !== prop
 

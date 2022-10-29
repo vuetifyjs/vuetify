@@ -20,13 +20,17 @@ import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref 
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
-type LayoutItem = {
-  id: string
+interface Layer {
   top: number
   bottom: number
   left: number
   right: number
+}
+
+interface LayoutItem extends Layer {
+  id: string
   size: number
+  position: Position
 }
 
 interface LayoutProvide {
@@ -48,6 +52,7 @@ interface LayoutProvide {
     zIndex: Ref<number>
   }
   unregister: (id: string) => void
+  mainRect: Ref<Layer>
   mainStyles: Ref<CSSProperties>
   getLayoutItem: (id: string) => LayoutItem | undefined
   items: Ref<LayoutItem[]>
@@ -83,9 +88,13 @@ export const makeLayoutItemProps = propsFactory({
 export function useLayout () {
   const layout = inject(VuetifyLayoutKey)
 
-  if (!layout) throw new Error('Could not find injected Vuetify layout')
+  if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
-  return layout
+  return {
+    getLayoutItem: layout.getLayoutItem,
+    mainRect: layout.mainRect,
+    mainStyles: layout.mainStyles,
+  }
 }
 
 export function useLayoutItem (options: {
@@ -100,7 +109,7 @@ export function useLayoutItem (options: {
 }) {
   const layout = inject(VuetifyLayoutKey)
 
-  if (!layout) throw new Error('Could not find injected Vuetify layout')
+  if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
   const id = options.id ?? `layout-item-${getUid()}`
 
@@ -131,8 +140,8 @@ const generateLayers = (
   positions: Map<string, Ref<Position>>,
   layoutSizes: Map<string, Ref<number | string>>,
   activeItems: Map<string, Ref<boolean>>,
-) => {
-  let previousLayer = { top: 0, left: 0, right: 0, bottom: 0 }
+): { id: string, layer: Layer }[] => {
+  let previousLayer: Layer = { top: 0, left: 0, right: 0, bottom: 0 }
   const layers = [{ id: '', layer: { ...previousLayer } }]
   for (const id of layout) {
     const position = positions.get(id)
@@ -202,14 +211,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return !Array.from(disabledTransitions.values()).some(ref => ref.value)
   })
 
-  const mainStyles = computed<CSSProperties>(() => {
-    const layer = layers.value[layers.value.length - 1].layer
+  const mainRect = computed(() => {
+    return layers.value[layers.value.length - 1].layer
+  })
 
+  const mainStyles = computed<CSSProperties>(() => {
     return {
-      '--v-layout-left': convertToUnit(layer.left),
-      '--v-layout-right': convertToUnit(layer.right),
-      '--v-layout-top': convertToUnit(layer.top),
-      '--v-layout-bottom': convertToUnit(layer.bottom),
+      '--v-layout-left': convertToUnit(mainRect.value.left),
+      '--v-layout-right': convertToUnit(mainRect.value.right),
+      '--v-layout-top': convertToUnit(mainRect.value.top),
+      '--v-layout-bottom': convertToUnit(mainRect.value.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     }
   })
@@ -218,11 +229,13 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return layers.value.slice(1).map(({ id }, index) => {
       const { layer } = layers.value[index]
       const size = layoutSizes.get(id)
+      const position = positions.get(id)
 
       return {
         id,
         ...layer,
         size: Number(size!.value),
+        position: position!.value,
       }
     })
   })
@@ -282,11 +295,9 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         if (!isMounted.value) return styles
 
-        if (index.value < 0) throw new Error(`Layout item "${id}" is missing`)
-
         const item = items.value[index.value]
 
-        if (!item) throw new Error(`Could not find layout item "${id}`)
+        if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {
@@ -324,6 +335,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       disabledTransitions.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
+    mainRect,
     mainStyles,
     getLayoutItem,
     items,

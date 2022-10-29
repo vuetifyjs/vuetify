@@ -1,5 +1,5 @@
 ---
-nav: Defaults provider
+nav: Defaults providers
 meta:
   title: Defaults provider component
   description: The defaults provider allows you to provide specific default prop values to components in a section of your application

@@ -11,6 +11,7 @@ import Intersect from '@/directives/intersect'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -62,11 +63,13 @@ export const VTextField = genericComponent<new () => {
   emits: {
     'click:control': (e: MouseEvent) => true,
     'click:input': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -95,7 +98,6 @@ export const VTextField = genericComponent<new () => {
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
-    const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
@@ -112,7 +114,7 @@ export const VTextField = genericComponent<new () => {
         inputRef.value?.focus()
       }
 
-      if (!isFocused.value) isFocused.value = true
+      if (!isFocused.value) focus()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
@@ -125,7 +127,7 @@ export const VTextField = genericComponent<new () => {
       onFocus()
 
       nextTick(() => {
-        model.value = ''
+        model.value = null
 
         callEvent(props['onClick:clear'], e)
       })
@@ -157,6 +159,7 @@ export const VTextField = genericComponent<new () => {
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
@@ -208,7 +211,7 @@ export const VTextField = genericComponent<new () => {
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

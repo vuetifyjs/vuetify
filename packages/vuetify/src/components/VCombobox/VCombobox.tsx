@@ -47,9 +47,9 @@ function highlightResult (text: string, matches: FilterMatch, length: number) {
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = T extends Primitive
+type Val <T, ReturnObject extends boolean> = string | (T extends Primitive
   ? T
-  : (ReturnObject extends true ? T : any)
+  : (ReturnObject extends true ? T : any))
 
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
@@ -150,7 +150,7 @@ export const VCombobox = genericComponent<new <
     })
     watch(model, value => {
       if (!props.multiple) {
-        search.value = value[0]?.title ?? ''
+        _search.value = value[0]?.title ?? ''
       }
     })
 
@@ -265,7 +265,8 @@ export const VCombobox = genericComponent<new <
 
         search.value = ''
       } else {
-        search.value = item.title
+        model.value = [item]
+        _search.value = item.title
 
         // watch for search watcher to trigger
         nextTick(() => {
