@@ -109,7 +109,9 @@ describe('useProxiedModel', () => {
   })
 
   it('should use internal value if prop not defined', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = mount(TestComponent, {
+      props: { foo: '' },
+    })
 
     expect(wrapper.element.textContent).toBe(',')
 
@@ -121,7 +123,9 @@ describe('useProxiedModel', () => {
   })
 
   it('should switch to using prop when it is defined', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = mount(TestComponent, {
+      props: { foo: '' },
+    })
 
     expect(wrapper.element.textContent).toBe(',')
 

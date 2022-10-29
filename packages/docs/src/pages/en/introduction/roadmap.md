@@ -35,7 +35,7 @@ The following releases are currently under development:
   - Greatly improved TypeScript support
   - Better framework coverage with E2E testing using Cypress
 
-Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
+Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/introduction/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
 
 ## Long-term support (LTS)
 

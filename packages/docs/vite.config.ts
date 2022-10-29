@@ -138,7 +138,7 @@ export default defineConfig(({ command, mode }) => {
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
-          maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
+          maximumFileSizeToCacheInBytes: 15 * 1024 ** 2,
         },
         manifest: {
           name: 'Vuetify',
@@ -200,6 +200,18 @@ export default defineConfig(({ command, mode }) => {
         },
       },
 
+      {
+        name: 'vuetify:fallback',
+        enforce: 'post',
+        transformIndexHtml (html) {
+          fs.writeFileSync(join('dist/_fallback.html'), html)
+          fs.writeFileSync(join('dist/_crowdin.html').replace(/<\/head>/, `
+<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
+<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+$&`), html)
+        },
+      },
+
       Inspect(),
     ],
 
@@ -208,14 +220,6 @@ export default defineConfig(({ command, mode }) => {
       script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
-      onAfterClientBuild () {
-        const index = fs.readFileSync(resolve('dist/index.html'), 'utf8')
-        fs.writeFileSync(join('dist/_fallback.html'), index)
-        fs.writeFileSync(join('dist/_crowdin.html').replace(/<\/head>/, `
-<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
-<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-$&`), index)
-      },
     },
 
     optimizeDeps: {
