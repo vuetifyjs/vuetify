@@ -14,7 +14,8 @@
           <v-card>
             <v-toolbar
               color="primary"
-            >Opening from the bottom</v-toolbar>
+              title="Opening from the bottom"
+            ></v-toolbar>
             <v-card-text>
               <div class="text-h2 pa-12">Hello world!</div>
             </v-card-text>
@@ -43,7 +44,8 @@
           <v-card>
             <v-toolbar
               color="primary"
-            >Opening from the top</v-toolbar>
+              title="Opening from the top"
+            ></v-toolbar>
             <v-card-text>
               <div class="text-h2 pa-12">Hello world!</div>
             </v-card-text>

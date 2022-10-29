@@ -26,7 +26,7 @@
       With centered ripple
     </v-btn>
     <v-btn
-      :ripple="{ class: 'red--text' }"
+      :ripple="{ class: 'text-red' }"
       text
     >
       With red ripple

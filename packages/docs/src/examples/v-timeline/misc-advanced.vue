@@ -6,7 +6,7 @@
     >
       <v-timeline-item
         fill-dot
-        class="white--text mb-12"
+        class="mb-12"
         dot-color="orange"
         size="large"
       >
@@ -32,9 +32,7 @@
         </v-text-field>
       </v-timeline-item>
 
-      <v-slide-x-transition
-        group
-      >
+      <v-slide-x-transition group>
         <v-timeline-item
           v-for="event in timeline"
           :key="event.id"
@@ -79,7 +77,7 @@
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
             <v-chip
-              class="white--text ml-0"
+              class="ml-0"
               color="purple"
               label
               size="small"

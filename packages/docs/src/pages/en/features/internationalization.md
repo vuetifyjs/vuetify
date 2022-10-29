@@ -50,6 +50,8 @@ You can change the locale during runtime by using the `useLocale` composable. If
 
 ```html { resource="Composition.vue" }
 <script>
+  import { useLocale } from 'vuetify'
+
   export default {
     setup () {
       const { current } = useLocale()
@@ -158,6 +160,10 @@ If you are building custom Vuetify components that need to hook into the locale 
   export default {
     setup () {
       const { t } = useLocale()
+
+      return {
+        t
+      }
     }
   }
 </script>

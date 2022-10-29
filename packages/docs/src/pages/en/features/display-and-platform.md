@@ -97,6 +97,7 @@ In the following example, we use a switch statement and the current breakpoint n
 </template>
 
 <script>
+  import { computed } from 'vue'
   import { useDisplay } from 'vuetify'
 
   export default {
@@ -114,6 +115,8 @@ In the following example, we use a switch statement and the current breakpoint n
           case 'xl': return 800
           case 'xxl': return 1200
         }
+
+        return undefined
       })
 
       return { height }
