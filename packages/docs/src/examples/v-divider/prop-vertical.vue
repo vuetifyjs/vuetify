@@ -15,19 +15,19 @@
     <v-spacer></v-spacer>
 
     <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn text>
+      <v-btn variant="text">
         News
       </v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn text>
+      <v-btn variant="text">
         Blog
       </v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn text>
+      <v-btn variant="text">
         Music
       </v-btn>
 

@@ -62,14 +62,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="modal2 = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="$refs.dialog.save(time)"
           >

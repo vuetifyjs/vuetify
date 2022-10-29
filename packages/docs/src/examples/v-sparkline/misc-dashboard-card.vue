@@ -22,7 +22,7 @@
       <div class="text-h6 font-weight-light mb-2">
         User Registrations
       </div>
-      <div class="subheading font-weight-light grey--text">
+      <div class="subheading font-weight-light text-grey">
         Last Campaign Performance
       </div>
       <v-divider class="my-2"></v-divider>
@@ -32,7 +32,7 @@
       >
         mdi-clock
       </v-icon>
-      <span class="text-caption grey--text font-weight-light">last registration 26 minutes ago</span>
+      <span class="text-caption text-grey font-weight-light">last registration 26 minutes ago</span>
     </v-card-text>
   </v-card>
 </template>

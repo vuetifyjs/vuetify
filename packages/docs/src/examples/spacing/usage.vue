@@ -63,7 +63,7 @@
       </v-col>
 
       <v-col
-        class="orange lighten-3 pa-0"
+        class="bg-orange-lighten-3 pa-0"
         cols="12"
       >
         <v-sheet
@@ -73,10 +73,10 @@
         >
           <div
             :class="[computedPadding]"
-            class="light-green lighten-3"
+            class="bg-light-green-lighten-3"
           >
             <div
-              class="white text-center py-6"
+              class="bg-white text-center py-6"
               v-text="playgroundText"
             ></div>
           </div>

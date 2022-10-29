@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="overflow-hidden"
-    color="purple lighten-1"
+    color="purple-lighten-1"
     dark
   >
     <v-toolbar
@@ -14,9 +14,9 @@
       </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn
-        color="purple darken-3"
+        color="purple-darken-3"
         fab
-        small
+        size="small"
         @click="isEditing = !isEditing"
       >
         <v-icon v-if="isEditing">
@@ -36,7 +36,7 @@
       <v-autocomplete
         :disabled="!isEditing"
         :items="states"
-        :filter="customFilter"
+        :custom-filter="customFilter"
         color="white"
         item-title="name"
         item-value="abbr"
@@ -58,8 +58,7 @@
       v-model="hasSaved"
       :timeout="2000"
       absolute
-      bottom
-      left
+      location="bottom left"
     >
       Your profile has been updated
     </v-snackbar>

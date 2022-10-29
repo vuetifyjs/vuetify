@@ -5,7 +5,7 @@
     :location="isRtl ? 'left' : 'right'"
     disable-route-watcher
     position="fixed"
-    hide-overlay
+    :scrim="false"
     temporary
     width="300"
   >

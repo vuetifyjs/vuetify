@@ -29,7 +29,7 @@
             <v-chip
               :key="JSON.stringify(data.item)"
               v-bind="data.attrs"
-              :input-value="data.selected"
+              :model-value="data.selected"
               :disabled="data.disabled"
               size="small"
               @click:close="data.parent.selectItem(data.item)"
@@ -37,7 +37,7 @@
               <template v-slot:prepend>
                 <v-avatar
                   class="bg-accent text-uppercase"
-                  left
+                  start
                 >{{ data.item.title.slice(0, 1) }}</v-avatar>
               </template>
               {{ data.item.title }}

@@ -60,7 +60,7 @@
     "eslint-plugin-react": "^7.30.0",
     "eslint-plugin-sonarjs": "^0.13.0",
     "eslint-plugin-vue": "^9.0.1",
-    "eslint-plugin-vuetify": "^1.1.0",
+    "eslint-plugin-vuetify": "^2.0.0-beta.0",
     "husky": "^3.0.1",
     "inquirer": "^6.5.2",
     "jest": "^28.1.3",

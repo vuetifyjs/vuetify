@@ -29,8 +29,8 @@
             <v-list-item-action>
               <v-btn
                 fab
-                small
-                depressed
+                size="small"
+                variant="flat"
                 color="primary"
               >
                 {{ item }}

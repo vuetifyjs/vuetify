@@ -78,7 +78,7 @@
     <v-card-actions>
       <v-btn
         color="deep-purple-lighten-2"
-        text
+        variant="text"
         @click="reserve"
       >
         Reserve

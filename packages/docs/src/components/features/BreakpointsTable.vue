@@ -36,7 +36,7 @@
       <tfoot>
         <tr>
           <td
-            class="text-caption text-center grey--text"
+            class="text-caption text-center text-grey"
             colspan="4"
           >
             <em>{{ t('breakpoints-table.footer', { size: '* -16px' }) }}</em>

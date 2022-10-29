@@ -22,7 +22,7 @@
             pill
             v-on="on"
           >
-            <v-avatar left>
+            <v-avatar start>
               <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
             </v-avatar>
             John Leider

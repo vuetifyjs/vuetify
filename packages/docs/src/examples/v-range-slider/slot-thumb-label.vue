@@ -3,7 +3,7 @@
     <v-col class="pa-12">
       <v-range-slider
         :ticks="seasons"
-        :value="[0, 1]"
+        :model-value="[0, 1]"
         min="0"
         max="3"
         :step="1"

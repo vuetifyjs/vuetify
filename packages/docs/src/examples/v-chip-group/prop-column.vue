@@ -11,8 +11,7 @@
         rounded="xl"
       >
         <v-sheet
-          class="pa-3 primary text-right"
-          dark
+          class="pa-3 bg-primary text-right"
           rounded="t-xl"
         >
           <v-btn icon>

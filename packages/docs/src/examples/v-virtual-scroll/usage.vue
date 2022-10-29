@@ -10,7 +10,7 @@
       {{ items.length }} Total Items
     </div>
 
-    <v-card outlined>
+    <v-card variant="outlined">
       <v-virtual-scroll
         :items="items"
         v-bind="$attrs"

@@ -27,8 +27,8 @@
 
               <v-list-item-action>
                 <v-checkbox
-                  :input-value="active"
-                  color="deep-purple accent-4"
+                  :model-value="active"
+                  color="deep-purple-accent-4"
                 ></v-checkbox>
               </v-list-item-action>
             </template>

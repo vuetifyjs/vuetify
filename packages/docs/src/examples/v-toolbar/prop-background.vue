@@ -3,7 +3,7 @@
     <v-toolbar
       dark
       prominent
-      src="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
+      image="https://cdn.vuetifyjs.com/images/backgrounds/vbanner.jpg"
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
