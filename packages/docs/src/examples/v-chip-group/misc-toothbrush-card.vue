@@ -23,7 +23,7 @@
 
       <v-chip-group
         v-model="selection"
-        selected-class="text-deep-purple"
+        selected-class="text-deep-purple-accent-4"
         mandatory
       >
         <v-chip>Extra Soft</v-chip>
@@ -36,7 +36,7 @@
     <v-card-actions>
       <v-btn
         block
-        color="deep-purple accent-4"
+        color="deep-purple-accent-4"
       >
         Add to Cart
       </v-btn>

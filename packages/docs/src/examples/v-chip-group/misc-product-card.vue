@@ -22,7 +22,7 @@
 
       <v-chip-group
         v-model="selection"
-        selected-class="text-deep-purple"
+        selected-class="text-deep-purple-accent-4"
         mandatory
       >
         <v-chip
