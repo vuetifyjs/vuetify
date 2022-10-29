@@ -6,7 +6,7 @@
       offset-sm="3"
     >
       <v-card height="200px">
-        <v-card-title class="blue white--text">
+        <v-card-title class="bg-blue">
           <span class="text-h5">Menu</span>
 
           <v-spacer></v-spacer>

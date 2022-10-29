@@ -29,7 +29,7 @@
 
         <div class="pa-4">
           <v-chip-group
-            active-class="primary--text"
+            selected-class="text-primary"
             column
           >
             <v-chip

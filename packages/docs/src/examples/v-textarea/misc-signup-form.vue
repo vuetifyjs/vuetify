@@ -91,16 +91,13 @@
       <v-btn
         :disabled="!form"
         :loading="isLoading"
-        class="white--text"
         color="deep-purple accent-4"
-        depressed
       >
         Submit
       </v-btn>
     </v-card-actions>
     <v-dialog
       v-model="dialog"
-      absolute
       max-width="400"
       persistent
     >
@@ -121,8 +118,8 @@
           </v-btn>
           <v-spacer></v-spacer>
           <v-btn
-            class="white--text"
-            color="deep-purple accent-4"
+            color="deep-purple"
+            variant="tonal"
             @click="agreement = true, dialog = false"
           >
             Yes

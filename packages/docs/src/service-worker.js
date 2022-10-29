@@ -1,18 +1,18 @@
 // Imports
 import { matchPrecache, precacheAndRoute } from 'workbox-precaching'
 import { registerRoute, setCatchHandler, setDefaultHandler } from 'workbox-routing'
-import { CacheFirst, NetworkOnly } from 'workbox-strategies'
+import { NetworkFirst, NetworkOnly } from 'workbox-strategies'
 
 const MANIFEST = self.__WB_MANIFEST
 
 precacheAndRoute(MANIFEST)
 
-const cacheFirst = new CacheFirst()
 const networkOnly = new NetworkOnly()
+const networkFirst = new NetworkFirst()
 
 registerRoute(
   ({ request }) => request.destination !== 'document',
-  cacheFirst
+  networkFirst
 )
 
 registerRoute(
@@ -28,7 +28,7 @@ registerRoute(
   }
 )
 
-setDefaultHandler(networkOnly)
+setDefaultHandler(networkFirst)
 
 setCatchHandler(async ({ url, request }) => {
   if (

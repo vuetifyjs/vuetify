@@ -18,7 +18,7 @@
             v-else
             :key="`item-${i}`"
             :value="item"
-            active-class="deep-purple--text text--accent-4"
+            active-class="text-deep-purple"
           >
             <template v-slot:default="{ active }">
               <v-list-item-content>

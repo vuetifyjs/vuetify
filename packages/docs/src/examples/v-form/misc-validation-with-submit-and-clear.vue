@@ -35,7 +35,6 @@
     ></v-checkbox>
 
     <v-btn
-      :disabled="!valid"
       color="success"
       class="mr-4"
       @click="validate"
@@ -85,8 +84,10 @@
     }),
 
     methods: {
-      validate () {
-        this.$refs.form.validate()
+      async validate () {
+        const { valid } = await this.$refs.form.validate()
+
+        if (valid) alert('Form is valid')
       },
       reset () {
         this.$refs.form.reset()

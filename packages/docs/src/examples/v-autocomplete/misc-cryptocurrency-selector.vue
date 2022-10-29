@@ -31,7 +31,6 @@
           v-bind="attr"
           :input-value="selected"
           color="blue-grey"
-          class="white--text"
           v-on="on"
         >
           <v-icon start>
@@ -43,7 +42,7 @@
       <template v-slot:item="{ item }">
         <v-list-item-avatar
           color="indigo"
-          class="text-h5 font-weight-light white--text"
+          class="text-h5 font-weight-light"
         >
           {{ item.name.charAt(0) }}
         </v-list-item-avatar>

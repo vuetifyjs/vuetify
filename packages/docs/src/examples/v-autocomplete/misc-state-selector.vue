@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 font-weight-regular blue-grey white--text">
+    <v-card-title class="text-h5 font-weight-regular blue-grey">
       Profile
     </v-card-title>
     <v-card-text>
@@ -16,15 +16,15 @@
         persistent-hint
         prepend-icon="mdi-city"
       >
-        <template v-slot:append-outer>
+        <template v-slot:append>
           <v-slide-x-reverse-transition
             mode="out-in"
           >
             <v-icon
               :key="`icon-${isEditing}`"
               :color="isEditing ? 'success' : 'info'"
+              :icon="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
               @click="isEditing = !isEditing"
-              v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
             ></v-icon>
           </v-slide-x-reverse-transition>
         </template>

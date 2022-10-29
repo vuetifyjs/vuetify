@@ -43,10 +43,7 @@ export const makeSelectProps = propsFactory({
   menuProps: {
     type: Object as PropType<VMenu['$props']>,
   },
-  modelValue: {
-    type: null,
-    default: () => ([]),
-  },
+  modelValue: null,
   multiple: Boolean,
   noDataText: {
     type: String,

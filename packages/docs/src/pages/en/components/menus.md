@@ -106,11 +106,11 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <example file="v-menu/misc-popover" />
 
-<!-- #### Use In components
+#### Use In components
 
 Menus can be placed within almost any component.
 
-<example file="v-menu/misc-use-in-components" /> -->
+<example file="v-menu/misc-use-in-components" />
 
 ## Accessibility
 

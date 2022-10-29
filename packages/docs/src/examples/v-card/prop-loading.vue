@@ -4,19 +4,19 @@
     class="mx-auto my-12"
     max-width="374"
   >
-    <v-progress-linear
-      v-if="loading"
-      class="position-absolute"
-      style="z-index: 1"
-      color="deep-purple"
-      height="10"
-      indeterminate
-    ></v-progress-linear>
+    <template v-slot:loader="{ isActive }">
+      <v-progress-linear
+        :active="isActive"
+        color="deep-purple"
+        height="4"
+        indeterminate
+      ></v-progress-linear>
+    </template>
 
     <v-img
+      cover
       height="250"
       src="https://cdn.vuetifyjs.com/images/cards/cooking.png"
-      cover
     ></v-img>
 
     <v-card-item>
@@ -41,10 +41,10 @@
         <v-rating
           :model-value="4.5"
           color="amber"
-          dense
+          density="compact"
           half-increments
           readonly
-          size="14"
+          size="small"
         ></v-rating>
 
         <div class="text-grey ms-4">
