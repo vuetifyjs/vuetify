@@ -7,39 +7,46 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, useRender } from '@/util'
+import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { genericComponent, getUid, omit, useRender } from '@/util'
+import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
+// Types
+import type { SlotsToProps } from '@/util'
+import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
+
 export const VMenu = genericComponent<new () => {
-  $props: VOverlay['$props']
+  $props: SlotsToProps<OverlaySlots>
 }>()({
   name: 'VMenu',
-
-  inheritAttrs: false,
 
   props: {
     // TODO
     // disableKeys: Boolean,
-    modelValue: Boolean,
     id: String,
 
-    ...makeTransitionProps({
+    ...omit(makeVOverlayProps({
+      closeDelay: 250,
+      closeOnContentClick: true,
+      locationStrategy: 'connected' as const,
+      openDelay: 300,
+      scrim: false,
+      scrollStrategy: 'reposition' as const,
       transition: { component: VDialogTransition },
-    } as const),
+    }), ['absolute']),
   },
 
   emits: {
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -75,40 +82,37 @@ export const VMenu = genericComponent<new () => {
       parent?.closeParents()
     }
 
-    useRender(() => (
-      <VOverlay
-        ref={ overlay }
-        v-model={ isActive.value }
-        class={[
-          'v-menu',
-        ]}
-        transition={ props.transition }
-        absolute
-        closeOnContentClick
-        locationStrategy="connected"
-        scrollStrategy="reposition"
-        scrim={ false }
-        openDelay="300"
-        closeDelay="250"
-        activatorProps={{
-          'aria-haspopup': 'menu',
-          'aria-expanded': String(isActive.value),
-          'aria-owns': id.value,
-        }}
-        onClick:outside={ onClickOutside }
-        { ...scopeId }
-        { ...attrs }
-      >
-        {{
-          activator: slots.activator,
-          default: (...args) => (
-            <VDefaultsProvider root>
-              { slots.default?.(...args) }
-            </VDefaultsProvider>
-          ),
-        }}
-      </VOverlay>
-    ))
+    useRender(() => {
+      const [overlayProps] = filterVOverlayProps(props)
+
+      return (
+        <VOverlay
+          ref={ overlay }
+          class={[
+            'v-menu',
+          ]}
+          { ...overlayProps }
+          v-model={ isActive.value }
+          absolute
+          activatorProps={ mergeProps({
+            'aria-haspopup': 'menu',
+            'aria-expanded': String(isActive.value),
+            'aria-owns': id.value,
+          }, props.activatorProps) }
+          onClick:outside={ onClickOutside }
+          { ...scopeId }
+        >
+          {{
+            activator: slots.activator,
+            default: (...args) => (
+              <VDefaultsProvider root>
+                { slots.default?.(...args) }
+              </VDefaultsProvider>
+            ),
+          }}
+        </VOverlay>
+      )
+    })
 
     return forwardRefs({ id }, overlay)
   },
