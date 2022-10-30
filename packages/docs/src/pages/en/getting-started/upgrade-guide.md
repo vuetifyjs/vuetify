@@ -11,6 +11,7 @@ meta:
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
+Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
 
 ## Setup
 
@@ -38,7 +39,8 @@ const vuetify = createVuetify({ ... })
 app.use(vuetify)
 ```
 
-- Something about importing styles?
+`import ... from 'vuetify'` is now a-la-carte, import `'vuetify/dist/vuetify.js'` instead to get the complete bundle (not recommended). `'vuetify/lib'` should no longer be used, change to `'vuetify'`/`'vuetify/components'`/`'vuetify/directives'` as appropriate.
+Only component styles are included, global styles must be imported separately from `'vuetify/styles'`.
 
 ## Features
 
@@ -46,23 +48,51 @@ app.use(vuetify)
 
 ### Theme
 
+- Multiple themes are now supported, so `light`/`dark` props have been removed from components. Use `v-theme-provider` to set the theme for a specific component tree.
+- Theme colors set their foreground text color automatically, if you were using `light`/`dark` to get a different text color you probably don't need it anymore.
+- The variant naming scheme has changed slightly, it is now a single word instead of two. For example, `primary darken-1` is now `primary-darken-1`.
+- Color classes have been renamed:
+  - Backgrounds have a `bg-` prefix, for example `.primary` is now `.bg-primary`.
+  - Text colors have a `text-` prefix, for example `.primary--text` is now `.text-primary`.
+  - Variants are no longer a separate class, for example `.primary--text.text--darken-1` is now `.text-primary-darken-1`.
+
 ## Components
 
 ### General changes
 
-- **light** and **dark** props have been removed from all components. Use **theme** prop instead
-- **value** prop has been replaced by **model-value** on components that support `v-model` usage
-- **@input** event has been replaced by **@update:model-value** on components that support `v-model` usage
-- color definitions changed to `bg-red` and `text-red` and variations added to same class name `bg-red-darken-2`
+- `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+- `@input` event has been replaced by **@update:model-value** on components that support `v-model` usage.
+- `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
+- Size props `small`/`medium`/`large` etc. have been combined into a single `size` prop.
+- `background-color` prop has been renamed to `bg-color`.
+
+### Input components
+
+- Affix slots are consistent now:
+  - `prepend` and `prepend-inner` are the same.
+  - `append` has been renamed to `append-inner`.
+  - `append-outer` has been renamed to `append`.
+- Variant props `filled`/`outlined`/`solo` have been combined into a single `variant` prop.
+  - Allowed values are `'underlined'`, `'outlined'`, `'filled'`, `'solo'`, or `'plain'`.
+- `success` and `success-messages` props have been removed.
 
 ### v-alert
 
-- **border** prop values `left` and `right` have been replaced by `start` and `end`
-- **colored-border** prop has been replaced by **border-color**
-- **dismissable** prop has been replaced by **closeable**
-- **outlined** and **text** props have been replaced by single prop **variant**
-- **text** prop has new purpose. It represents the text content of the alert, if default slot is not used
+- `border` prop values `left` and `right` have been renamed to `start` and `end`
+- `colored-border` prop has been renamed to `border-color`
+- `dismissable` prop has been renamed to `closable`
+- `outlined` and `text` props have been combined into a single `variant` prop.
+  - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
+- `text` prop has new purpose. It represents the text content of the alert, if default slot is not used
 
-### v-app
+### v-select/v-combobox/v-autocomplete
 
-- **id** prop has been removed
+- v-model values not present in `items` will now be rendered instead of being ignored.
+- `cache-items` prop has been removed, caching should be handled externally.
+- `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
+- `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
+  - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
+- The `item` object in slots is now an InternalItem object, the original item object is available as `item.raw`.
+- The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
+  - `<template #item="{ props }"><v-list-item v-bind="props"></v-list-item>\</template>`
+- The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
