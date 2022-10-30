@@ -212,18 +212,17 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
 Vuetify is a Vue UI Library with beautifully handcrafted Components using the [Material Design](https://material.io/guidelines/) specification. No design skills required — everything you need to create amazing applications is at your fingertips. Supercharge your development process with all of the tools that you need to succeed:
 
 - WCAG **Accessibility** (a11y) / WCAG / Section 508 / RTL support
-- **30+** supported languages
+- **42+** supported languages
 - _Smaller_ bundle sizes with **automatic** tree-shaking
 - A massive **Discord** [community](https://community.vuetifyjs.com)
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
-- **IE11 / Safari 9** support with [polyfill](https://vuetifyjs.com/getting-started/browser-support/)
 - Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/features/presets/)
 - Responsive support down to _320px_ width
-- [Direct support](https://vuetifyjs.com/introduction/support/) support from Vuetify
+- [Direct support](https://vuetifyjs.com/introduction/support/) from Vuetify core team
 
 ###### Browser Support
 
-Vuetify supports all **modern browsers**, including IE11 and Safari 9+ (using [polyfills](https://vuetifyjs.com/getting-started/quick-start#ie-11-amp-safari-9-support)). Components are designed for a minimum width of _320px_.
+Vuetify supports all **modern browsers**, including Safari 13+ (using [polyfills](https://vuetifyjs.com/getting-started/browser-support)). Components are designed for a minimum width of _320px_.
 
 ### Vuetify Ecosystem
 
