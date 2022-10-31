@@ -1,6 +1,8 @@
 // Composables
 import { useForm } from '@/composables/form'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useToggleScope } from '@/composables/toggleScope'
+import { makeFocusProps } from '@/composables/focus'
 
 // Utilities
 import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
@@ -21,6 +23,7 @@ export interface ValidationProps {
   disabled: boolean
   error: boolean
   errorMessages: string | string[]
+  focused: boolean
   maxErrors: string | number
   name: string | undefined
   label: string | undefined
@@ -28,6 +31,7 @@ export interface ValidationProps {
   rules: ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
+  validateOn?: 'blur' | 'input' | 'submit'
   validationValue: any
 }
 
@@ -50,7 +54,10 @@ export const makeValidationProps = propsFactory({
     default: () => ([]),
   },
   modelValue: null,
+  validateOn: String as PropType<ValidationProps['validateOn']>,
   validationValue: null,
+
+  ...makeFocusProps(),
 }, 'validation')
 
 export function useValidation (
@@ -105,11 +112,29 @@ export function useValidation (
     form?.unregister(uid.value)
   })
 
+  const validateOn = computed(() => props.validateOn || form?.validateOn.value || 'input')
+
   // Set initial valid state, for inputs that might not have rules
   onMounted(() => form?.update(uid.value, isValid.value, errorMessages.value))
 
-  watch(validationModel, () => {
-    if (validationModel.value != null) validate()
+  useToggleScope(() => validateOn.value === 'input', () => {
+    watch(validationModel, () => {
+      if (validationModel.value != null) {
+        validate()
+      } else if (props.focused) {
+        const unwatch = watch(() => props.focused, val => {
+          if (!val) validate()
+
+          unwatch()
+        })
+      }
+    })
+  })
+
+  useToggleScope(() => validateOn.value === 'blur', () => {
+    watch(() => props.focused, val => {
+      if (!val) validate()
+    })
   })
 
   watch(isValid, () => {

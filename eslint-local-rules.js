@@ -1,4 +1,5 @@
 'use strict'
+const path = require('path')
 
 module.exports = {
   'no-render-string-reference': {
@@ -53,6 +54,68 @@ module.exports = {
               })
             }
           })
+        },
+      }
+    },
+  },
+  'jest-global-imports': {
+    meta: {
+      fixable: 'code',
+    },
+    create (context) {
+      return {
+        Program (node) {
+          if (node.comments.some(comment => comment.value.trim() === 'eslint-disable')) return
+
+          const jestGlobalsImport = node.body.find(node => (
+            node.type === 'ImportDeclaration' &&
+            node.source.value === '@jest/globals'
+          ))
+
+          if (!jestGlobalsImport) {
+            context.report({
+              loc: {
+                start: { line: 0, column: 0 },
+                end: { line: 0, column: 0 },
+              },
+              message: 'Missing @jest/globals import',
+              fix (fixer) {
+                const firstImport = node.body.find(node => node.type === 'ImportDeclaration')
+                return fixer.insertTextBefore(firstImport || node, `import { describe, expect, it } from '@jest/globals'\n`)
+              },
+            })
+          }
+        },
+      }
+    },
+  },
+  'cypress-types-reference': {
+    meta: {
+      fixable: 'code',
+    },
+    create (context) {
+      return {
+        Program (node) {
+          const referencePath = path.relative(
+            path.dirname(context.getFilename()),
+            path.resolve(__dirname, 'packages/vuetify/types/cypress')
+          )
+          const cypressTypesReference = node.comments.find(comment => (
+            comment.type === 'Line' &&
+            comment.value.trim() === `/ <reference types="${referencePath}" />`
+          ))
+          if (!cypressTypesReference) {
+            context.report({
+              loc: {
+                start: { line: 0, column: 0 },
+                end: { line: 0, column: 0 },
+              },
+              message: 'Missing Cypress types reference',
+              fix (fixer) {
+                return fixer.insertTextAfterRange([0, 0], `/// <reference types="${referencePath}" />\n`)
+              },
+            })
+          }
         },
       }
     },

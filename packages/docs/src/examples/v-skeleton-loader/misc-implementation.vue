@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey">
+  <v-container class="bg-grey">
     <div class="text-center d-flex justify-center align-center mb-12 flex-wrap">
       <v-btn
         class="mx-12 my-4"

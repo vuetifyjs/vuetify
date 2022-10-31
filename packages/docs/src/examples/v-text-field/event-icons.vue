@@ -5,8 +5,8 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            :append-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
-            :append-outer-icon="message ? 'mdi-send' : 'mdi-microphone'"
+            :append-icon="message ? 'mdi-send' : 'mdi-microphone'"
+            :append-inner-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
             :prepend-icon="icon"
             variant="filled"
             clear-icon="mdi-close-circle"

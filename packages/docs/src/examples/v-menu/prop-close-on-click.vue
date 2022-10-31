@@ -5,7 +5,7 @@
       color="primary"
       label="Close on click"
     ></v-switch>
-    <v-menu :close-on-click="closeOnClick">
+    <v-menu :persistent="!closeOnClick">
       <template v-slot:activator="{ props }">
         <v-btn
           color="primary"

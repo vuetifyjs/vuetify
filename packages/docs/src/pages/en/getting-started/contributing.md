@@ -213,7 +213,7 @@ Vuetify uses the **RFC** (request for comments) process for new feature suggesti
 
 Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.
 
-Some changes though are _substantial_, and we ask that these be put through a bit of a design process and produce a consensus among the Vuetify [Core Team](/about/meet-the-team/) and the [community](https://discord.gg/eXubxyJ).
+Some changes though are _substantial_, and we ask that these be put through a bit of a design process and produce a consensus among the Vuetify [Core Team](/introduction/meet-the-team/) and the [community](https://discord.gg/eXubxyJ).
 
 #### Getting started
 
@@ -303,7 +303,7 @@ The following is a list of **commit types** used in the _angular_ preset:
 
 #### Commitizen
 
-The [Vuetify team](/about/meet-the-team/) uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
+The [Vuetify team](/introduction/meet-the-team/) uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
 
@@ -328,6 +328,6 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 
 [commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /about/meet-the-team/
+[Core Team]: /introduction/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
 [Issues]: https://github.com/vuetifyjs/vuetify/issues

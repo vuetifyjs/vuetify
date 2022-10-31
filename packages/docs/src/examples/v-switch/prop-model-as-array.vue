@@ -5,14 +5,14 @@
       v-model="people"
       color="primary"
       label="John"
-      value="John"
+      model-value="John"
       hide-details
     ></v-switch>
     <v-switch
       v-model="people"
       color="primary"
       label="Jacob"
-      value="Jacob"
+      model-value="Jacob"
       hide-details
     ></v-switch>
   </v-container>

@@ -53,7 +53,7 @@
                   <v-card-text class="pa-6">
                     <v-btn
                       color="primary"
-                      large
+                      size="large"
                       variant="text"
                       @click="clickMe"
                     >

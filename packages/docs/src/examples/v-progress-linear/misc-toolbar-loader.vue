@@ -22,7 +22,7 @@
         :indeterminate="loading"
         absolute
         bottom
-        color="deep-purple accent-4"
+        color="deep-purple-accent-4"
       ></v-progress-linear>
 
       <v-spacer></v-spacer>

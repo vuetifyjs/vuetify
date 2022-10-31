@@ -6,18 +6,18 @@
           flat
         >
           <v-btn
-            outlined
+            variant="outlined"
             class="mr-4"
-            color="grey darken-2"
+            color="grey-darken-2"
             @click="setToday"
           >
             Today
           </v-btn>
           <v-btn
             fab
-            text
-            small
-            color="grey darken-2"
+            variant="text"
+            size="small"
+            color="grey-darken-2"
             @click="prev"
           >
             <v-icon small>
@@ -26,9 +26,9 @@
           </v-btn>
           <v-btn
             fab
-            text
-            small
-            color="grey darken-2"
+            variant="text"
+            size="small"
+            color="grey-darken-2"
             @click="next"
           >
             <v-icon small>
@@ -45,8 +45,8 @@
           >
             <template v-slot:activator="{ on, attrs }">
               <v-btn
-                outlined
-                color="grey darken-2"
+                variant="outlined"
+                color="grey-darken-2"
                 v-bind="attrs"
                 v-on="on"
               >
@@ -93,7 +93,7 @@
           offset-x
         >
           <v-card
-            color="grey lighten-4"
+            color="grey-lighten-4"
             min-width="350px"
             flat
           >
@@ -118,7 +118,7 @@
             </v-card-text>
             <v-card-actions>
               <v-btn
-                text
+                variant="text"
                 color="secondary"
                 @click="selectedOpen = false"
               >

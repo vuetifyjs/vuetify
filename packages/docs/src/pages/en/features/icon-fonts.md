@@ -362,6 +362,7 @@ import { h } from 'vue'
 import type { IconSet, IconAliases, IconProps } from 'vuetify'
 
 const aliases: IconAliases = {
+  collapse: '...',
   complete: '...',
   cancel: '...',
   close: '...',

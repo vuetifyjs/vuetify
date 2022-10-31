@@ -17,14 +17,15 @@ Vuetify 3 is a next generation framework that takes advantage of the latest web 
 
 ## Browsers
 
-| Browser                 | Status                   |
-|-------------------------|--------------------------|
-| Chromium (Chrome, Edge) | ✅ Supported <sup>*</sup> |
-| Firefox                 | ✅ Supported <sup>*</sup> |
-| Safari 15.4+            | ✅ Supported              |
-| Safari 13.1             | ❗ Requires polyfill      |
-| Edge <79                | ⛔ Not supported              |
-| Internet Explorer       | ⛔ Not supported          |
+| Browser                 | Status                     |
+|-------------------------|----------------------------|
+| Chromium (Chrome, Edge) | ✅ Supported <sup>*</sup>   |
+| Firefox                 | ✅ Supported <sup>*</sup>   |
+| Safari 15.4+            | ✅ Supported                |
+| Safari 13.1             | ❗ Requires polyfill        |
+| Edge <79                | ⛔ Not supported            |
+| Internet Explorer       | ⛔ Not supported            |
+| Other Browsers          | ❓ Not officially supported |
 
 <p class="text-caption">* All browsers on iOS use WebKit so have the same support as Safari</p>
 

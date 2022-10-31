@@ -28,11 +28,11 @@
         v-if="isEnabled('header.data-table-select')"
         v-slot:header.data-table-select="{ on, props }"
       >
-        <v-simple-checkbox
+        <v-checkbox-btn
           color="purple"
           v-bind="props"
           v-on="on"
-        ></v-simple-checkbox>
+        ></v-checkbox-btn>
       </template>
 
       <template
@@ -63,11 +63,11 @@
         v-if="isEnabled('item.data-table-select')"
         v-slot:item.data-table-select="{ isSelected, select }"
       >
-        <v-simple-checkbox
+        <v-checkbox-btn
           color="green"
           :value="isSelected"
           @input="select($event)"
-        ></v-simple-checkbox>
+        ></v-checkbox-btn>
       </template>
 
       <template

@@ -21,7 +21,7 @@ import { genericComponent, useRender } from '@/util'
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { TouchHandlers } from '@/directives/touch'
 
 type WindowProvide = {
@@ -43,7 +43,7 @@ export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
 export const VWindow = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     default: [{ group: GroupProvide }]
     additional: [{ group: GroupProvide }]
     prev: [{ props: ControlProps }]

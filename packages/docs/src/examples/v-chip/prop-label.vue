@@ -28,10 +28,9 @@
 
     <v-chip
       class="ma-2"
-      close
+      closable
       color="cyan"
       label
-      text-color="white"
     >
       <v-icon start icon="mdi-twitter"></v-icon>
       New Tweets

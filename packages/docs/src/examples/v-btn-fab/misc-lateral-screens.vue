@@ -18,7 +18,7 @@
       <template v-slot:extension>
         <v-tabs
           v-model="tabs"
-          align-with-title
+          align-tabs="title"
         >
           <v-tab href="#one">
             Item One
@@ -53,10 +53,8 @@
         :key="activeFab.icon"
         :color="activeFab.color"
         fab
-        large
-        dark
-        bottom
-        left
+        size="large"
+        location="bottom left"
         class="v-btn--example"
       >
         <v-icon>{{ activeFab.icon }}</v-icon>

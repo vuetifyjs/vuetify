@@ -19,7 +19,7 @@
         v-for="n in 2"
         :key="`avatar--${n}`"
         class="mr-3"
-        color="grey lighten-1"
+        color="grey-lighten-1"
         size="36"
       ></v-avatar>
 
@@ -29,11 +29,11 @@
         v-for="n in 4"
         :key="n"
         class="mr-3"
-        color="grey lighten-1"
-        depressed
+        color="grey-lighten-1"
+        variant="flat"
         min-width="96"
         rounded
-        small
+        size="small"
       ></v-btn>
 
       <v-spacer></v-spacer>
@@ -48,27 +48,27 @@
       width="300"
     >
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
+        <v-btn rounded variant="flat" color="grey-lighten-3" class="grow"></v-btn>
 
         <v-btn
           min-width="0"
-          depressed
+          variant="flat"
           class="ml-3"
-          color="grey lighten-3"
+          color="grey-lighten-3"
         ></v-btn>
       </div>
 
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
+        <v-btn rounded variant="flat" color="grey-lighten-3" class="grow"></v-btn>
 
         <v-btn
           v-for="n in 2"
           :key="`btn--${n}`"
           class="ml-3"
-          color="grey lighten-1"
+          color="grey-lighten-1"
           fab
-          x-small
-          depressed
+          size="x-small"
+          variant="flat"
         ></v-btn>
       </div>
 
@@ -94,12 +94,12 @@
       inset
     >
       <v-text-field
-        background-color="grey lighten-1"
+        bg-color="grey lighten-1"
         dense
         flat
         hide-details
         rounded
-        solo
+        variant="solo"
       ></v-text-field>
     </v-footer>
   </v-app>

@@ -8,7 +8,7 @@
           <v-autocomplete
             v-model="values"
             :items="items"
-            outlined
+            variant="outlined"
             dense
             chips
             small-chips
@@ -25,7 +25,7 @@
             small-chips
             label="Solo"
             multiple
-            solo
+            variant="solo"
           ></v-autocomplete>
         </v-col>
         <v-col cols="12">
@@ -33,7 +33,7 @@
             v-model="value"
             :items="items"
             dense
-            filled
+            variant="filled"
             label="Filled"
           ></v-autocomplete>
         </v-col>

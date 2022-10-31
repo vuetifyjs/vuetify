@@ -26,7 +26,7 @@ import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeSelectProps = propsFactory({
@@ -43,10 +43,7 @@ export const makeSelectProps = propsFactory({
   menuProps: {
     type: Object as PropType<VMenu['$props']>,
   },
-  modelValue: {
-    type: null,
-    default: () => ([]),
-  },
+  modelValue: null,
   multiple: Boolean,
   noDataText: {
     type: String,
@@ -66,7 +63,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
-    ? Val<T, ReturnObject>[]
+    ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
 export const VSelect = genericComponent<new <
@@ -79,15 +76,18 @@ export const VSelect = genericComponent<new <
     items?: readonly T[]
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: Readonly<V>
+    modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue'>
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<T>, index: number }]
-    'no-data': []
-  }>
+  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+      selection: [{ item: InternalItem<T>, index: number }]
+      'prepend-item': []
+      'append-item': []
+      'no-data': []
+    }>
+  >
 }>()({
   name: 'VSelect',
 
@@ -180,15 +180,15 @@ export const VSelect = genericComponent<new <
       }
     }
 
-    // watch(menu, val => {
-    //   if (!val) return
+    watch(menu, val => {
+      if (!val) return
 
-    //   setTimeout(() => {
-    //     requestAnimationFrame(() => {
-    //       vListRef.value?.$el.querySelector('.v-list-item--active')?.focus()
-    //     })
-    //   }, 50) // value is arbitrary
-    // })
+      setTimeout(() => {
+        requestAnimationFrame(() => {
+          vListRef.value?.$el.querySelector('.v-list-item--active')?.focus()
+        })
+      }, 50) // value is arbitrary
+    })
 
     watch(selectedIndex, index => {
       const item = items.value[index]

@@ -14,7 +14,7 @@
         <v-btn
           :to="rpath('/getting-started/installation/')"
           color="primary"
-          outlined
+          variant="outlined"
         >
           Get me out of here!
         </v-btn>

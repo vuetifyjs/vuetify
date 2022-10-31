@@ -35,7 +35,7 @@
 
   const name = 'v-badge'
   const model = ref('default')
-  const content = ref(false)
+  const content = ref(0)
   const dot = ref(false)
   const options = ['floating', 'inline']
   const props = computed(() => {

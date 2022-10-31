@@ -27,7 +27,7 @@ import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export interface InternalListItem extends InternalItem {
@@ -76,8 +76,7 @@ function useListItems (props: ItemProps & { itemType: string }) {
 export const VList = genericComponent<new <T>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     subheader: []
     header: [ListGroupActivatorSlot]
     item: [T]
@@ -117,10 +116,10 @@ export const VList = genericComponent<new <T>() => {
   },
 
   emits: {
-    'update:selected': (val: string[]) => true,
-    'update:opened': (val: string[]) => true,
-    'click:open': (value: { id: string, value: boolean, path: string[] }) => true,
-    'click:select': (value: { id: string, value: boolean, path: string[] }) => true,
+    'update:selected': (val: unknown[]) => true,
+    'update:opened': (val: unknown[]) => true,
+    'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
   setup (props, { slots }) {

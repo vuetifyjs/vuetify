@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar color="orange accent-1">
+  <v-toolbar color="orange-accent-1">
     <v-app-bar-nav-icon class="hidden-sm-and-down"></v-app-bar-nav-icon>
     <v-toolbar-title class="text-h6 mr-6 hidden-sm-and-down">
       Cryptocurrency
@@ -16,7 +16,7 @@
       item-title="name"
       item-value="symbol"
       label="Search for a coin..."
-      solo
+      variant="solo"
     >
       <template v-slot:no-data>
         <v-list-item>
@@ -29,9 +29,8 @@
       <template v-slot:selection="{ attr, on, item, selected }">
         <v-chip
           v-bind="attr"
-          :input-value="selected"
+          :model-value="selected"
           color="blue-grey"
-          class="white--text"
           v-on="on"
         >
           <v-icon start>
@@ -43,7 +42,7 @@
       <template v-slot:item="{ item }">
         <v-list-item-avatar
           color="indigo"
-          class="text-h5 font-weight-light white--text"
+          class="text-h5 font-weight-light"
         >
           {{ item.name.charAt(0) }}
         </v-list-item-avatar>

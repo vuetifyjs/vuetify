@@ -8,7 +8,7 @@
       >
         <v-sheet
           class="d-flex"
-          color="grey lighten-3"
+          color="grey-lighten-3"
           height="424"
         >
           <sheet-footer>
@@ -25,7 +25,7 @@
           <v-col cols="6">
             <v-sheet
               class="d-flex"
-              color="green lighten-3"
+              color="green-lighten-3"
               height="150"
             >
               <sheet-footer>
@@ -37,7 +37,7 @@
           <v-col cols="6">
             <v-sheet
               class="d-flex"
-              color="yellow lighten-3"
+              color="yellow-lighten-3"
               height="150"
             >
               <sheet-footer>
@@ -49,7 +49,7 @@
           <v-col cols="12">
             <v-sheet
               class="d-flex"
-              color="red lighten-3"
+              color="red-lighten-3"
               height="250"
             >
               <sheet-footer>
@@ -66,7 +66,7 @@
       >
         <v-sheet
           class="d-flex"
-          color="teal lighten-3"
+          color="teal-lighten-3"
           height="300"
         >
           <sheet-footer>
@@ -82,7 +82,7 @@
       >
         <v-sheet
           class="d-flex mt-auto"
-          color="purple lighten-3"
+          color="purple-lighten-3"
           height="300"
         >
           <sheet-footer>

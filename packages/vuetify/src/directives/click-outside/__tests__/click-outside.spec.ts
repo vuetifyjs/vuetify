@@ -6,6 +6,7 @@ import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {
   const el = document.createElement('div')
+  const el2 = document.createElement('div')
 
   const binding = {
     value: {
@@ -31,6 +32,7 @@ function bootstrap (args?: object) {
     binding,
     callback: binding.value.handler,
     el: el as HTMLElement,
+    el2: el2 as HTMLElement,
     clickHandler,
     mousedownHandler,
   }
@@ -75,30 +77,18 @@ describe('v-click-outside', () => {
 
     clickHandler({ target: el })
     await wait()
-    expect(callback).not.toHaveBeenCalledWith()
+    expect(callback).not.toHaveBeenCalled()
   })
 
-  it('should not call the callback when clicked in elements', async () => {
-    const { clickHandler, callback, el } = bootstrap({
+  it('should not call the callback when clicked in included element', async () => {
+    const { clickHandler, callback, el2 } = bootstrap({
       closeConditional: () => true,
-      include: () => [el],
+      include: () => [el2],
     })
 
-    clickHandler({ target: document.createElement('div') })
+    clickHandler({ target: el2 })
     await wait()
-    expect(callback).not.toHaveBeenCalledWith()
-  })
-
-  it('should not call the callback when event is not fired by user action', async () => {
-    const { clickHandler, callback } = bootstrap({ closeConditional: () => true })
-
-    clickHandler({ isTrusted: false })
-    await wait()
-    expect(callback).not.toHaveBeenCalledWith()
-
-    clickHandler({ pointerType: false })
-    await wait()
-    expect(callback).not.toHaveBeenCalledWith()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when mousedown was on the element', async () => {

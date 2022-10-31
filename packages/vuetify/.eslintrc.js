@@ -39,6 +39,8 @@ module.exports = {
       plugins: ['jest'],
       extends: ['plugin:jest/recommended'],
       rules: {
+        'local-rules/jest-global-imports': 'error',
+
         'jest/no-disabled-tests': 'off',
         'jest/no-large-snapshots': 'warn',
         'jest/prefer-spy-on': 'warn',
@@ -58,6 +60,8 @@ module.exports = {
       plugins: ['cypress'],
       extends: ['plugin:cypress/recommended'],
       rules: {
+        'local-rules/cypress-types-reference': 'error',
+
         'no-unused-expressions': 'off',
         'cypress/no-assigning-return-values': 'error',
         'cypress/no-unnecessary-waiting': 'warn',
