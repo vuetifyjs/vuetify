@@ -1,6 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { components } from 'vuetify/dist/vuetify'
+import { components } from 'vuetify/dist/vuetify.js'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
