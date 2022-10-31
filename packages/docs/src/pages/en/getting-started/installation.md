@@ -1,8 +1,8 @@
 ---
 nav: Installation
 meta:
-  title: Get started with Vuetify 3 Beta
-  description: Details for v3 beta release - faq, changes, and upgrading.
+  title: Get started with Vuetify 3
+  description: Details for v3 release - faq, changes, and upgrading.
   keywords: migration, releases, upgrading vuetify, beta, v3
 related:
   - /getting-started/contributing/
@@ -17,15 +17,9 @@ related:
   const tab = ref('yarn')
 </script>
 
-# Vuetify 3 Beta
+# Vuetify 3
 
-Welcome to the Vuetify 3 Beta release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
-
-<alert type="error">
-
-  The Vuetify 3 Beta is for testing purposes only and is not intended for production applications.
-
-</alert>
+Welcome to the Vuetify 3 release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
 
 ## Installation
 
@@ -205,8 +199,6 @@ app.use(vuetify).mount('#app')
 
 ### Table of Contents
 
-* [What is included in the Beta?](#included)
-* [When will Vuetify 3 be released?](#version-3)
 * [Can I use it with Vite?](#use-vite)
 
 ### Questions
@@ -215,30 +207,13 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
 ----
 
-* **What is included in the Beta?** { #included }
-
-  Currently most base functionality of Vuetify is included in the beta. This includes core services such as theme, configuration, and layout. A small subset of base components are also included such as grid system, sheets, and buttons. For full list of available components, visit the **UI Component** and **API** sections.
-
-* **When will Vuetify 3 be released?** { #version-3 }
-
-  Beta could take upwards of 2 months. Immediately following is a Release Candidate and then final release. Follow our progress via our project on [Github](https://github.com/orgs/vuetifyjs/projects/7) or read an overview of what's to come on our [Roadmap](/introduction/roadmap/).
-
 * **Can I use it with Vite?** { #use-vite }
 
   Yes. We recommend creating a new project using the [vite](#vite) installation instructions.
 
 ## How to report an issue or bug
 
-For bugs related to the Beta, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/). At this time we are only accepting bugs for the following:
-
-* Vuetify components and functions available in the Beta
-* Documentation content
-
-<alert type="info">
-
-  We ask that documentation issues remain related to content only. The `next` documentation is a work in progress and not fully updated to Vue 3. Some features may be missing or not functioning and will be constantly worked on as new components and functionality becomes available. We will begin fielding these bugs closer to Phase 3 as things become stable.
-
-</alert>
+For bugs, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/).
 
 ## How to connect with Vuetify team
 
