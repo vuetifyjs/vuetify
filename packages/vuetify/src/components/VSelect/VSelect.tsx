@@ -103,7 +103,7 @@ export const VSelect = genericComponent<new <
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const vTextFieldRef = ref<VTextField>()
+    const vTextFieldRef = ref()
     const menu = useProxiedModel(props, 'menu')
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
@@ -183,12 +183,8 @@ export const VSelect = genericComponent<new <
     }
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
-        console.log(menu.value)
         vTextFieldRef.value?.focus()
       }
-      // if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
-      //   menu.value = false
-      // }
     }
 
     useRender(() => {
