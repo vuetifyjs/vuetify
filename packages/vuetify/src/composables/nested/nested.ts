@@ -11,7 +11,7 @@ import {
 } from './selectStrategies'
 
 // Types
-import type { InjectionKey, Prop, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategy } from './openStrategies'
 
@@ -64,10 +64,10 @@ export const emptyNested: NestedProvide = {
 }
 
 export const makeNestedProps = propsFactory({
-  selectStrategy: [String, Function] as Prop<SelectStrategy>,
-  openStrategy: [String, Function] as Prop<OpenStrategyProp>,
-  opened: Array as Prop<unknown[]>,
-  selected: Array as Prop<unknown[]>,
+  selectStrategy: [String, Function] as PropType<SelectStrategy>,
+  openStrategy: [String, Function] as PropType<OpenStrategyProp>,
+  opened: Array as PropType<unknown[]>,
+  selected: Array as PropType<unknown[]>,
   mandatory: Boolean,
 }, 'nested')
 
@@ -217,7 +217,7 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const computedId = computed(() => id.value ?? getUid().toString())
+  const computedId = computed(() => id.value ?? Symbol(getUid()))
 
   const item = {
     ...parent,

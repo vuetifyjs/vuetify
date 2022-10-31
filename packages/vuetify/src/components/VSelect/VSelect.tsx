@@ -122,6 +122,7 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -148,6 +149,16 @@ export const VSelect = genericComponent<new <
       if (['Escape', 'Tab'].includes(e.key)) {
         menu.value = false
       }
+
+      if (e.key === 'ArrowDown') {
+        listRef.value?.focus('next')
+      } else if (e.key === 'ArrowUp') {
+        listRef.value?.focus('prev')
+      } else if (e.key === 'Home') {
+        listRef.value?.focus('first')
+      } else if (e.key === 'End') {
+        listRef.value?.focus('last')
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -164,6 +175,20 @@ export const VSelect = genericComponent<new <
         model.value = [item]
         menu.value = false
       }
+    }
+    function onBlur (e: FocusEvent) {
+      if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+        menu.value = false
+      }
+    }
+    function onFocusout (e: FocusEvent) {
+      if (e.relatedTarget == null) {
+        console.log(menu.value)
+        vTextFieldRef.value?.focus()
+      }
+      // if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
+      //   menu.value = false
+      // }
     }
 
     useRender(() => {
@@ -189,7 +214,7 @@ export const VSelect = genericComponent<new <
           readonly
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
-          onBlur={ () => menu.value = false }
+          onBlur={ onBlur }
           onKeydown={ onKeydown }
         >
           {{
@@ -207,9 +232,11 @@ export const VSelect = genericComponent<new <
                   { ...props.menuProps }
                 >
                   <VList
+                    ref={ listRef }
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    onFocusout={ onFocusout }
                   >
                     { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />

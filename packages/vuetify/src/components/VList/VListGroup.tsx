@@ -71,16 +71,26 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
   },
 
   setup (props, { slots }) {
-    const { isOpen, open } = useNestedItem(toRef(props, 'value'), true)
+    const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
+    const id = computed(() => `v-list-group--id-${String(id.value)}`)
     const list = useList()
 
-    const onClick = (e: Event) => {
+    function onClick (e: Event) {
       open(!isOpen.value, e)
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e)
+      }
     }
 
     const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
       onClick,
+      onKeydown,
       class: 'v-list-group__header',
+      id: id.value,
     }))
 
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
@@ -117,7 +127,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
         ) }
 
         <VExpandTransition>
-          <div class="v-list-group__items" v-show={ isOpen.value }>
+          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
             { slots.default?.() }
           </div>
         </VExpandTransition>
