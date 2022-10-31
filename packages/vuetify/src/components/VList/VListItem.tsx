@@ -94,6 +94,10 @@ export const VListItem = genericComponent<new () => {
     ...makeVariantProps({ variant: 'text' } as const),
   },
 
+  emits: {
+    click: (e: Event) => true,
+  },
+
   setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
@@ -145,7 +149,7 @@ export const VListItem = genericComponent<new () => {
     function onClick (e: MouseEvent) {
       emit('click', e)
 
-      if (isGroupActivator) return
+      if (isGroupActivator || !isClickable.value) return
 
       link.navigate?.(e)
       props.value != null && select(!isSelected.value, e)
@@ -195,7 +199,7 @@ export const VListItem = genericComponent<new () => {
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }
-          onClick={ isClickable.value && onClick }
+          onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value }
         >
