@@ -27,7 +27,7 @@ Vuetify 3 is a next generation framework that takes advantage of the latest web 
 | Internet Explorer       | ⛔ Not supported            |
 | Other Browsers          | ❓ Not officially supported |
 
-<p class="text-caption">* All browsers on iOS use WebKit so have the same support as Safari</p>
+<p class="text-caption">* All browsers on iOS use WebKit and have the same support as Safari</p>
 
 Safari and some older versions of other browsers require polyfills to work correctly. You can use [babel and core-js](https://babeljs.io/docs/en/babel-preset-env#usebuiltins) for this, or you can use [polyfill.io](https://polyfill.io/v3/) like we do on this site:
 
