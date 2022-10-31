@@ -92,9 +92,11 @@ app.use(vuetify)
   - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
 - The `item` object in slots is now an `InternalItem` object, the original item object is available as `item.raw`.
 - The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
-  - ```html
-    <template #item="{ props }">
-      <v-list-item v-bind="props"></v-list-item>
-    </template>
-    ```
+
+```html
+  <template #item="{ props }">
+    <v-list-item v-bind="props"></v-list-item>
+  </template>
+```
+
 - The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
