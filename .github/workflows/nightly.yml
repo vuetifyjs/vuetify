@@ -4,6 +4,9 @@ on:
   schedule:
     - cron: '0 12 * * *' # 1200 UTC
 
+permissions:
+  contents: read  #  to fetch code (actions/checkout)
+
 jobs:
   deploy:
     runs-on: ubuntu-latest
