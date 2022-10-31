@@ -23,200 +23,63 @@ Welcome to the Vuetify 3 release. To get started, select an installation method 
 
 ## Installation
 
-To get started with Vuetify 3 create a new Vue project using [Vue CLI](#vue-cli). For [Vite preview](#vite), installations, there is an added step you must first use the **create** command using one of the following package managers:
+To get started with Vuetify 3, simply paste the following code into your terminal:
+
+```bash
+yarn create vuetify
+```
+
+This command prompts you with a few options before generating your scaffolded Vue / Vuetify 3 project.
+
+```bash
+success Installed "create-vuetify@x.x.x" with binaries:
+    - create-vuetify
+
+? Project name: ❯ vuetify-project // the folder to generate your application
+? Use TypeScript?: ❯ No / Yes
+? Would you like to install dependencies with yarn, npm, or pnpm?:
+  ❯ yarn
+    npm
+    pnpm
+    none
+```
+
+After making your selections, [vuetify-create](https://github.com/vuetifyjs/create-vuetify) will generate the structure for your new application.
+
+Once the scaffold is complete, start the vite development server by running the following commands:
+
+```bash
+cd vuetify-project
+yarn dev
+```
+
+For more information regarding supported package manages, please visit their official websites:
 
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
 * [pnpm](https://pnpm.io/)
 
-We recommend using **yarn**, but any will work just fine. For more information on different installation options for vite, visit the official [installation guide](https://vitejs.dev/guide/#scaffolding-your-first-vite-project).
+### SSR
 
-### Vite
+Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks must manually set the `ssr` option to `true` in order to properly render the application.
 
-Vite is a build tool from the creator of Vue designed to provide faster and leaner development. It offers significantly lower build and compilation times during development and extremely fast Hot Module Replacement (HMR). The following sections cover how you can create a new vite application for Vue and Vuetify 3.
+```js { data-resource="src/plugins/vuetify.js" }
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
 
-<v-tabs v-model="tab" color="primary">
-  <v-tab value="yarn" variant="plain">Yarn</v-tab>
-  <v-tab value="npm" variant="plain">NPM</v-tab>
-  <v-tab value="pnpm" variant="plain">PNPM</v-tab>
-</v-tabs>
-<v-window v-model="tab">
-  <v-window-item value="yarn">
-
-```bash
-yarn create vite my-app --template vue
-```
-
-  </v-window-item>
-  <v-window-item value="npm">
-
-<p class="mt-4">Use the following command to check your current version:</p>
-
-```bash
-npm -v
-```
-
-Note the displayed value to determine the correct installation command. For more information on how to upgrade **npm** on your system, visit the official [Upgrade NPM Page](https://docs.npmjs.com/try-the-latest-stable-version-of-npm).
-
-For version **7 and above**, an additional "**- -**" is required before specifying the vite template parameters. Use the following code for newer npm versions:
-
-```bash
-npm create vite my-vue-app -- --template vue
-```
-
-If your npm version is **less than 7**, the extra "**- -**" is not required. Use the following code for older npm versions:
-
-```bash
-npm create vite my-vue-app --template vue
-```
-
-  </v-window-item>
-  <v-window-item value="pnpm">
-
-```bash
-pnpm create vite my-vue-app -- --template vue
-```
-
-  </v-window-item>
-</v-window>
-
-----
-
-Once your project is created, navigate to the [Adding Vuetify](#adding-vuetify) section to continue.
-
-### Vue CLI
-
-For more information on how to setup Vue CLI, see the official [installation guide](https://cli.vuejs.org/guide/installation.html).
-
-<alert type="warning">
-
-  Vuetify 3 requires **Vue CLI 5.0** in order to install properly. For more information, visit the Vue CLI [installation guide](https://cli.vuejs.org/guide/installation.html).
-
-</alert>
-
-Generate a new Vue 3 application by entering the following command into your terminal:
-
-```bash
-vue create my-vuetify-app
-```
-
-When prompted, select the **Vue 3 Preview** preset:
-
-```bash
-? Please pick a preset:
-    Default ([Vue 2] babel, eslint)
-  ❯ Default (Vue 3 Preview) ([Vue 3] babel, eslint)
-    Manually select features
-```
-
-After choosing your option, **Vue CLI** generates a new Vue 3 project located in the **my-vuetify-app** folder (or whatever name you provided).
-
-<alert type="info">
-
-  Before installing Vuetify, we **recommend** you commit your changes to `git` or whichever source control software you use. This allows you to rollback changes if you encounter an issue.
-
-</alert>
-
-#### Adding Vuetify
-
-Navigate to your new project's folder, and using **Vue CLI**, add the `vuetify` package:
-
-```bash
-cd my-vuetify-app
-vue add vuetify
-```
-
-Once prompted, choose `Vuetify 3 Preview`:
-
-```bash
-? Choose a preset:
-  Vuetify 2 - Configure Vue CLI (advanced)
-  Vuetify 2 - Vue CLI (recommended)
-  Vuetify 2 - Prototype (rapid development)
-  Vuetify 3 - Vite (preview)
-❯ Vuetify 3 - Vue CLI (preview 3)
-```
-
-## Usage
-
-With Vue 3.0, the initialization process for Vue apps (and by extension Vuetify) has changed. With the new `createVuetify` method, the options passed to it have also changed. Please see the pages in the Features section of the documentation for further details.
-
-```js { data-resource="main.js" }
-import 'vuetify/styles' // Global CSS has to be imported
-import { createApp } from 'vue'
-import { createVuetify } from 'vuetify'
-import App from './App.vue'
-
-const app = createApp(App)
-const vuetify = createVuetify() // Replaces new Vuetify()
-
-app.use(vuetify)
-
-app.mount('#app')
-```
-
-Components and directives are no longer included by default, they either have to imported separately or loaded automatically with the appropriate [Vite](https://www.npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://www.npmjs.com/package/webpack-plugin-vuetify) plugin. See [treeshaking](/features/treeshaking) for more information.
-
-```js { data-resource="main.js" }
-import * as components from 'vuetify/components'
-import * as directives from 'vuetify/directives'
-
-const vuetify = createVuetify({
-  components,
-  directives,
-})
-```
-
-Vue 3 has no way to automatically detect if SSR is used &mdash; so nuxt, gridsome, and other SSR frameworks will need to manually set the `ssr` option to `true` in order to properly render the application.
-
-```js { data-resource="main.js" }
 const vuetify = createVuetify({
   ssr: true,
 })
 ```
 
-### CDN
+## Vue CLI
 
-We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
-
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css`
-
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js`
-
-```js
-const { createApp } = Vue
-const { createVuetify } = Vuetify
-
-const vuetify = createVuetify()
-
-const app = createApp()
-app.use(vuetify).mount('#app')
-```
-
-## Frequently asked questions
-
-<promoted slug="vuetify-discord" />
-
-### Table of Contents
-
-* [Can I use it with Vite?](#use-vite)
+Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite](https://vitejs.dev/). We plan on enabling the Vue CLI installation path in an official guide in the future.
 
 ### Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
-----
-
-* **Can I use it with Vite?** { #use-vite }
-
-  Yes. We recommend creating a new project using the [vite](#vite) installation instructions.
-
-## How to report an issue or bug
-
-For bugs, please create an issue via our [Issue Generator](https://issues.vuetifyjs.com/) using the following [Reproduction Template](https://v3-template.vuetifyjs.com/).
-
-## How to connect with Vuetify team
-
-The Vuetify team can be reached via [Discord Community](https://community.vuetifyjs.com/). If you have questions or would like to discuss Vuetify 3, come visit the #v3-discussion channel.
+<promoted slug="vuetify-discord" />
 
 <backmatter />
