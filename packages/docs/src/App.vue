@@ -79,11 +79,6 @@
   a:not(:hover)
     text-decoration: none
 
-  code
-    padding: 0.1em 0.2em
-    border-radius: 4px
-    background: rgba(var(--v-border-color), var(--v-idle-opacity))
-
   p
     margin-bottom: 1rem
 

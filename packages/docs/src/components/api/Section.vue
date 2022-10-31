@@ -115,7 +115,7 @@
     .v-markdown :deep(p)
       margin-bottom: 0
 
-    :deep(.token.operator)
+    .token.operator
       background: none
 
   .name-item

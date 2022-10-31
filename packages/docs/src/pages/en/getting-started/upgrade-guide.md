@@ -17,8 +17,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 - **Vuetify** class removed, use **createVuetify** function
 
-```js
-// 2.x
+```js { resource="2.x" }
 Vue.use(Vuetify)
 
 const vuetify = new Vuetify({ ... })
@@ -27,11 +26,9 @@ const app = new Vue({
   vuetify,
   ...
 })
-
 ```
 
-```js
-// 3.0
+```js { resource="3.0" }
 const app = createVue()
 
 const vuetify = createVuetify({ ... })
@@ -39,8 +36,9 @@ const vuetify = createVuetify({ ... })
 app.use(vuetify)
 ```
 
-`import ... from 'vuetify'` is now a-la-carte, import `'vuetify/dist/vuetify.js'` instead to get the complete bundle (not recommended). `'vuetify/lib'` should no longer be used, change to `'vuetify'`/`'vuetify/components'`/`'vuetify/directives'` as appropriate.
-Only component styles are included, global styles must be imported separately from `'vuetify/styles'`.
+- `import ... from 'vuetify'` is now a-la-carte, import `'vuetify/dist/vuetify.js'` instead to get the complete bundle (not recommended).
+- `'vuetify/lib'` should no longer be used, change to `'vuetify'` / `'vuetify/components'` / `'vuetify/directives'` as appropriate.
+- Only component styles are included, global styles must be imported separately from `'vuetify/styles'`.
 
 ## Features
 
@@ -48,8 +46,8 @@ Only component styles are included, global styles must be imported separately fr
 
 ### Theme
 
-- Multiple themes are now supported, so `light`/`dark` props have been removed from components. Use `v-theme-provider` to set the theme for a specific component tree.
-- Theme colors set their foreground text color automatically, if you were using `light`/`dark` to get a different text color you probably don't need it anymore.
+- Multiple themes are now supported, so `light` / `dark` props have been removed from components. Use `v-theme-provider` to set the theme for a specific component tree.
+- Theme colors set their foreground text color automatically, if you were using `light` / `dark` to get a different text color you probably don't need it anymore.
 - The variant naming scheme has changed slightly, it is now a single word instead of two. For example, `primary darken-1` is now `primary-darken-1`.
 - Color classes have been renamed:
   - Backgrounds have a `bg-` prefix, for example `.primary` is now `.bg-primary`.
@@ -63,7 +61,7 @@ Only component styles are included, global styles must be imported separately fr
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage.
 - `@input` event has been replaced by **@update:model-value** on components that support `v-model` usage.
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
-- Size props `small`/`medium`/`large` etc. have been combined into a single `size` prop.
+- Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `background-color` prop has been renamed to `bg-color`.
 
 ### Input components
@@ -92,7 +90,11 @@ Only component styles are included, global styles must be imported separately fr
 - `item-text` has been renamed to `item-title`, and now looks up the `title` property on item objects by default. `value` is unchanged.
 - `item-disabled` has been removed, and `disabled`, `header`, `divider`, and `avatar` properties are ignored on item objects.
   - Additional props to pass to `v-list-item` can be specified with the `item-props` prop. `item-props` can be a function that takes the item object and returns an object of props, or set to boolean `true` to spread item objects directly as props.
-- The `item` object in slots is now an InternalItem object, the original item object is available as `item.raw`.
+- The `item` object in slots is now an `InternalItem` object, the original item object is available as `item.raw`.
 - The `item` slot will no longer generate a `v-list-item` component automatically, instead a `props` object is supplied with the required event listeners and props:
-  - `<template #item="{ props }"><v-list-item v-bind="props"></v-list-item>\</template>`
+  - ```html
+    <template #item="{ props }">
+      <v-list-item v-bind="props"></v-list-item>
+    </template>
+    ```
 - The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
