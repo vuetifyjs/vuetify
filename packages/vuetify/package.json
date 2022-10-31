@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "dist/vuetify.d.ts",
+  "types": "lib/index.d.ts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -51,10 +51,7 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": {
-      "import": "./lib/framework.mjs",
-      "require": "./dist/vuetify.js"
-    },
+    ".": "./lib/framework.mjs",
     "./styles": "./lib/styles/main.css",
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
