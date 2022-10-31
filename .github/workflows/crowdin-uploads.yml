@@ -19,6 +19,9 @@ env:
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
   CROWDIN_BRANCH: master
 
+permissions:
+  contents: read  #  to fetch code (actions/checkout)
+
 jobs:
   upload-to-crowdin:
     runs-on: ubuntu-latest
