@@ -11,8 +11,12 @@ env:
   CROWDIN_BRANCH: master
   LOCAL_BRANCH: docs/update-from-crowdin
 
+permissions: {}
 jobs:
   close:
+    permissions:
+      issues: write  #  to close issues (vuetifyjs/close-action)
+
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next') && github.repository_owner == 'vuetifyjs'
     steps:
@@ -21,6 +25,9 @@ jobs:
           token: ${{ secrets.GITHUB_TOKEN }}
 
   lint:
+    permissions:
+      contents: read  #  to fetch code (actions/checkout)
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -36,6 +43,9 @@ jobs:
       - run: yarn run lint
 
   test:
+    permissions:
+      contents: read  #  to fetch code (actions/checkout)
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -51,6 +61,9 @@ jobs:
       - uses: codecov/codecov-action@v1
 
   deploy:
+    permissions:
+      contents: write  #  to create a release (actions/create-release)
+
     needs: [lint, test]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
@@ -93,6 +106,9 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
+    permissions:
+      contents: read  #  to fetch code (actions/checkout)
+
     needs: [lint, test]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
