@@ -301,7 +301,6 @@ export const VCombobox = genericComponent<new <
       if (val) {
         selectionIndex.value = -1
       } else {
-        console.log('out')
         menu.value = false
 
         if (!props.multiple || !search.value) return
