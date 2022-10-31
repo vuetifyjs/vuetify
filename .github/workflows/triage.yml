@@ -3,8 +3,14 @@ on:
   issues:
     types: [opened, labeled]
 
+permissions: {}
+
 jobs:
   triage:
+    permissions:
+      contents: read  #  to fetch code (actions/checkout)
+      issues: write  #  to add labels
+
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
