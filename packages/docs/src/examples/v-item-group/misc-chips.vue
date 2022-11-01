@@ -24,7 +24,7 @@
       <v-divider class="my-2"></v-divider>
 
       <v-item-group multiple selected-class="bg-purple">
-        <v-subheader>Tags</v-subheader>
+        <div class="text-caption mb-2">Tags</div>
         <v-item
           v-for="n in 8"
           :key="n"

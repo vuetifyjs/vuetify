@@ -16,7 +16,7 @@
     </v-toolbar>
 
     <v-list subheader>
-      <v-subheader>Recent chat</v-subheader>
+      <v-list-subheader>Recent chat</v-list-subheader>
 
       <v-list-item
         v-for="chat in recent"
@@ -44,7 +44,7 @@
     <v-divider></v-divider>
 
     <v-list subheader>
-      <v-subheader>Previous chats</v-subheader>
+      <v-list-subheader>Previous chats</v-list-subheader>
 
       <v-list-item
         v-for="chat in previous"
