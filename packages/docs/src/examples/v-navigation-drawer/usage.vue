@@ -8,27 +8,23 @@
     <div>
       <v-navigation-drawer v-bind="props">
         <v-list-item>
-          <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              Application
-            </v-list-item-title>
-            <v-list-item-subtitle>
-              subtext
-            </v-list-item-subtitle>
-          </v-list-item-content>
+          <v-list-item-title class="text-h6">
+            Application
+          </v-list-item-title>
+          <v-list-item-subtitle>
+            subtext
+          </v-list-item-subtitle>
         </v-list-item>
 
         <v-divider></v-divider>
 
         <v-list>
           <v-list-item link>
-            <v-list-item-icon>
+            <template v-slot:prepend>
               <v-icon>mdi-vuetify</v-icon>
-            </v-list-item-icon>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>List Item One</v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>List Item One</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-navigation-drawer>

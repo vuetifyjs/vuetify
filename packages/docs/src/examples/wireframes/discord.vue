@@ -52,9 +52,7 @@
           :key="n"
           link
         >
-          <v-list-item-content>
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>Item {{ n }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
@@ -87,9 +85,7 @@
           :key="n"
           link
         >
-          <v-list-item-content>
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>Item {{ n }}</v-list-item-title>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>

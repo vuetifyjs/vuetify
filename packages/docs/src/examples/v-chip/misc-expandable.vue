@@ -31,28 +31,28 @@
         <v-card width="300">
           <v-list dark>
             <v-list-item>
-              <v-list-item-avatar>
-                <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-              </v-list-item-avatar>
-              <v-list-item-content>
-                <v-list-item-title>John Leider</v-list-item-title>
-                <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
-              </v-list-item-content>
-              <v-list-item-action>
+              <template v-slot:prepend>
+                <v-list-item-avatar>
+                  <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
+                </v-list-item-avatar>
+              </template>
+              <v-list-item-title>John Leider</v-list-item-title>
+              <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+              <template v-slot:append>
                 <v-btn
                   icon
                   @click="menu = false"
                 >
                   <v-icon>mdi-close-circle</v-icon>
                 </v-btn>
-              </v-list-item-action>
+              </template>
             </v-list-item>
           </v-list>
           <v-list>
             <v-list-item @click="() => {}">
-              <v-list-item-action>
+              <template v-slot:prepend>
                 <v-icon>mdi-briefcase</v-icon>
-              </v-list-item-action>
+              </template>
               <v-list-item-subtitle>john@gmail.com</v-list-item-subtitle>
             </v-list-item>
           </v-list>

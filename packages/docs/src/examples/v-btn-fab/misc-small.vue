@@ -53,19 +53,17 @@
               </v-icon>
             </v-list-item-avatar>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
 
-              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
 
-            <v-list-item-action>
+            <template v-slot:append>
               <v-btn icon>
                 <v-icon color="grey-lighten-1">
                   mdi-information
                 </v-icon>
               </v-btn>
-            </v-list-item-action>
+            </template>
           </v-list-item>
 
           <v-divider inset></v-divider>
@@ -79,19 +77,19 @@
             :key="item.title"
             link
           >
-            <v-list-item-avatar>
-              <v-icon :class="[item.iconClass]">
-                {{ item.icon }}
-              </v-icon>
-            </v-list-item-avatar>
+            <template v-slot:prepend>
+              <v-list-item-avatar>
+                <v-icon :class="[item.iconClass]">
+                  {{ item.icon }}
+                </v-icon>
+              </v-list-item-avatar>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>{{ item.title }}</v-list-item-title>
+            <v-list-item-title>{{ item.title }}</v-list-item-title>
 
-              <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-list-item-subtitle>{{ item.subtitle }}</v-list-item-subtitle>
 
-            <v-list-item-action>
+            <template v-slot:append>
               <v-btn
                 icon
                 ripple
@@ -100,7 +98,7 @@
                   mdi-information
                 </v-icon>
               </v-btn>
-            </v-list-item-action>
+            </template>
           </v-list-item>
         </v-list>
 

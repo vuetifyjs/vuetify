@@ -26,7 +26,7 @@
       >
         <template v-slot:default="{ item }">
           <v-list-item :key="item">
-            <v-list-item-action>
+            <template v-slot:prepend>
               <v-btn
                 fab
                 size="small"
@@ -35,19 +35,17 @@
               >
                 {{ item }}
               </v-btn>
-            </v-list-item-action>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>
-                User Database Record <strong>ID {{ item }}</strong>
-              </v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>
+              User Database Record <strong>ID {{ item }}</strong>
+            </v-list-item-title>
 
-            <v-list-item-action>
+            <template v-slot:append>
               <v-icon small>
                 mdi-open-in-new
               </v-icon>
-            </v-list-item-action>
+            </template>
           </v-list-item>
 
           <v-divider></v-divider>

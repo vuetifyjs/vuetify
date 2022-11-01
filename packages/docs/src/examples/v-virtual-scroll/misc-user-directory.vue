@@ -31,7 +31,7 @@
     >
       <template v-slot:default="{ item }">
         <v-list-item>
-          <v-list-item-avatar>
+          <template v-slot:prepend>
             <v-avatar
               :color="item.color"
               size="56"
@@ -39,13 +39,11 @@
             >
               {{ item.initials }}
             </v-avatar>
-          </v-list-item-avatar>
+          </template>
 
-          <v-list-item-content>
-            <v-list-item-title>{{ item.fullName }}</v-list-item-title>
-          </v-list-item-content>
+          <v-list-item-title>{{ item.fullName }}</v-list-item-title>
 
-          <v-list-item-action>
+          <template v-slot:append>
             <v-btn
               variant="flat"
               size="small"
@@ -59,7 +57,7 @@
                 mdi-open-in-new
               </v-icon>
             </v-btn>
-          </v-list-item-action>
+          </template>
         </v-list-item>
       </template>
     </v-virtual-scroll>

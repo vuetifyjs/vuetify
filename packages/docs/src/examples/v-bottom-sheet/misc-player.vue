@@ -19,33 +19,26 @@
 
         <v-list>
           <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>The Walker</v-list-item-title>
-              <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
-            </v-list-item-content>
+            <v-list-item-title>The Walker</v-list-item-title>
+            <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
 
-            <v-spacer></v-spacer>
-
-            <v-list-item-icon>
+            <template v-slot:append>
               <v-btn icon>
                 <v-icon>mdi-rewind</v-icon>
               </v-btn>
-            </v-list-item-icon>
 
-            <v-list-item-icon :class="{ 'mx-5': $vuetify.display.mdAndUp }">
-              <v-btn icon>
+              <v-btn icon :class="{ 'mx-5': $vuetify.display.mdAndUp }">
                 <v-icon>mdi-pause</v-icon>
               </v-btn>
-            </v-list-item-icon>
 
-            <v-list-item-icon
-              class="ml-0"
-              :class="{ 'mr-3': $vuetify.display.mdAndUp }"
-            >
-              <v-btn icon>
+              <v-btn
+                class="ml-0"
+                :class="{ 'mr-3': $vuetify.display.mdAndUp }"
+                icon
+              >
                 <v-icon>mdi-fast-forward</v-icon>
               </v-btn>
-            </v-list-item-icon>
+            </template>
           </v-list-item>
         </v-list>
       </v-card>

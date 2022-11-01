@@ -34,56 +34,49 @@
 
         <v-list>
           <v-list-item>
-            <v-list-item-action>
+            <template v-slot:prepend>
               <v-icon>mdi-phone</v-icon>
-            </v-list-item-action>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>(650) 555-1234</v-list-item-title>
-            </v-list-item-content>
-            <v-list-item-action>
+            <v-list-item-title>(650) 555-1234</v-list-item-title>
+
+            <template v-slot:append>
               <v-icon>mdi-message-text</v-icon>
-            </v-list-item-action>
+            </template>
           </v-list-item>
 
           <v-divider inset></v-divider>
 
           <v-list-item>
-            <v-list-item-action>
+            <template v-slot:prepend>
               <v-icon>mdi-phone</v-icon>
-            </v-list-item-action>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>(323) 555-6789</v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>(323) 555-6789</v-list-item-title>
 
-            <v-list-item-action>
+            <template v-slot:append>
               <v-icon>mdi-message-text</v-icon>
-            </v-list-item-action>
+            </template>
           </v-list-item>
 
           <v-divider inset></v-divider>
 
           <v-list-item>
-            <v-list-item-action>
+            <template v-slot:prepend>
               <v-icon>mdi-email</v-icon>
-            </v-list-item-action>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>mcbeal@example.com</v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>mcbeal@example.com</v-list-item-title>
           </v-list-item>
 
           <v-divider inset></v-divider>
 
           <v-list-item>
-            <v-list-item-action>
+            <template v-slot:prepend>
               <v-icon>mdi-map-marker</v-icon>
-            </v-list-item-action>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title>Orlando, FL 79938</v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title>Orlando, FL 79938</v-list-item-title>
           </v-list-item>
         </v-list>
 

@@ -45,14 +45,14 @@
           min-width="64"
         ></v-img>
 
-        <v-list-item-content>
+        <v-list-item-title>
           <span
             class="text-uppercase font-weight-regular text-caption"
             v-text="item.category"
           ></span>
 
           <div v-text="item.title"></div>
-        </v-list-item-content>
+        </v-list-item-title>
       </v-list-item>
     </v-list>
   </v-card>

@@ -20,17 +20,13 @@
             :value="item"
             active-class="text-deep-purple"
           >
-            <template v-slot:default="{ active }">
-              <v-list-item-content>
-                <v-list-item-title v-text="item"></v-list-item-title>
-              </v-list-item-content>
+            <v-list-item-title v-text="item"></v-list-item-title>
 
-              <v-list-item-action>
-                <v-checkbox
-                  :model-value="active"
-                  color="deep-purple-accent-4"
-                ></v-checkbox>
-              </v-list-item-action>
+            <template v-slot:append="{ active }">
+              <v-checkbox
+                :model-value="active"
+                color="deep-purple-accent-4"
+              ></v-checkbox>
             </template>
           </v-list-item>
         </template>
