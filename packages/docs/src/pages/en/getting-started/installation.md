@@ -76,6 +76,24 @@ const vuetify = createVuetify({
 
 Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite](https://vitejs.dev/). We plan on enabling the Vue CLI installation path in an official guide in the future.
 
+### CDN
+
+We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css`
+
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js`
+
+```js
+const { createApp } = Vue
+const { createVuetify } = Vuetify
+
+const vuetify = createVuetify()
+
+const app = createApp()
+app.use(vuetify).mount('#app')
+```
+
 ### Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
