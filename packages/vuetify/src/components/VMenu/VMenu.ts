@@ -61,6 +61,10 @@ export default baseMixins.extend({
       type: Boolean,
       default: true,
     },
+    allowOverflow: {
+      type: Boolean,
+      default: false,
+    },
     closeOnContentClick: {
       type: Boolean,
       default: true,
@@ -150,7 +154,7 @@ export default baseMixins.extend({
     },
     styles (): object {
       return {
-        maxHeight: this.calculatedMaxHeight,
+        maxHeight: this.allowOverflow ? this.calculatedMaxHeight : 'auto',
         minWidth: this.calculatedMinWidth,
         maxWidth: this.calculatedMaxWidth,
         top: this.calculatedTop,

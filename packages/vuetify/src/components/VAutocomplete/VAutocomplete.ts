@@ -133,6 +133,7 @@ export default VSelect.extend({
       return {
         ...defaultMenuProps,
         ...props,
+        allowOverflow: this.allowOverflow !== undefined ? this.allowOverflow : false,
       }
     },
     searchIsDirty (): boolean {

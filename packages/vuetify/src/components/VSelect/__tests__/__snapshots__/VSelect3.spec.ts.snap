@@ -56,7 +56,7 @@ exports[`VSelect.ts should open the select is multiple and key down is pressed 1
 >
   <div
     class="v-menu__content theme--light menuable__content__active "
-    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
+    style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
   >
     <div
       class="v-list v-select-list v-sheet theme--light theme--light"
@@ -145,7 +145,7 @@ exports[`VSelect.ts should open the select is multiple and key up is pressed 1`]
 >
   <div
     class="v-menu__content theme--light menuable__content__active "
-    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
+    style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
   >
     <div
       class="v-list v-select-list v-sheet theme--light theme--light"
@@ -234,7 +234,7 @@ exports[`VSelect.ts should open the select when enter is pressed 1`] = `
 >
   <div
     class="v-menu__content theme--light menuable__content__active "
-    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
+    style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
   >
     <div
       class="v-list v-select-list v-sheet theme--light theme--light"
@@ -287,7 +287,7 @@ exports[`VSelect.ts should open the select when space is pressed 1`] = `
 >
   <div
     class="v-menu__content theme--light menuable__content__active "
-    style="max-height: 304px; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
+    style="max-height: auto; min-width: 0px; max-width: auto; top: 12px; left: 0px; transform-origin: top left; z-index: 8; display: none;"
   >
     <div
       class="v-list v-select-list v-sheet theme--light theme--light"
