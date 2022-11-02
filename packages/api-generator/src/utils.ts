@@ -59,7 +59,7 @@ export function addPropData (
     const instancePropObj = componentProps[propName]
 
     ;(propObj as any).default = instancePropObj?.default
-    ;(propObj as any).source = instancePropObj?.source
+    ;(propObj as any).source = instancePropObj?.source ?? kebabName
 
     sources.add(instancePropObj?.source ?? kebabName)
   }

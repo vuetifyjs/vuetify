@@ -17,6 +17,12 @@ const yar = yargs(process.argv.slice(2))
   .option('components', {
     type: 'array',
   })
+  .option('skip-directives', {
+    type: 'boolean',
+  })
+  .option('skip-composables', {
+    type: 'boolean',
+  })
 
 const run = async () => {
   const argv = await yar.argv
@@ -54,27 +60,32 @@ const run = async () => {
   )
 
   // Composables
-  const composables = generateComposableDataFromTypes().map(composable => {
-    const kebabName = kebabCase(composable.name)
-    const source = kebabName.split('-')[1]
-    addDescriptions(composable.name, composable.data, [source], locales)
-    return { kebabName, ...composable }
-  })
+  if (!argv.skipComposables) {
+    const composables = generateComposableDataFromTypes().map(composable => {
+      const kebabName = kebabCase(composable.name)
+      const source = kebabName.split('-')[1]
+      addDescriptions(composable.name, composable.data, [source], locales)
+      return { kebabName, ...composable }
+    })
 
-  for (const composable of composables) {
-    await fs.writeFile(path.resolve(outPath, `${composable.kebabName}.json`), JSON.stringify(composable.data, null, 2))
+    for (const composable of composables) {
+      await fs.writeFile(path.resolve(outPath, `${composable.kebabName}.json`), JSON.stringify(composable.data, null, 2))
+    }
   }
 
   // Directives
-  const directives = generateDirectiveDataFromTypes().map(directive => {
-    const kebabName = kebabCase(directive.name)
-    addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
+  let directives: any[] = []
+  if (!argv.skipDirectives) {
+    directives = generateDirectiveDataFromTypes().map(directive => {
+      const kebabName = kebabCase(directive.name)
+      addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
 
-    return { kebabName, ...directive }
-  })
+      return { kebabName, ...directive }
+    })
 
-  for (const { kebabName, name, ...directive } of directives) {
-    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(directive, null, 2))
+    for (const { kebabName, name, ...directive } of directives) {
+      await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(directive, null, 2))
+    }
   }
 
   rimraf.sync(path.resolve('./dist'))

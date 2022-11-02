@@ -16,10 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { ExtractPropTypes, PropType } from 'vue'
 import type { MakeSlots, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -28,6 +28,26 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 
 type EventProp<T = (...args: any[]) => any> = T | T[]
 const EventProp = [Function, Array] as PropType<EventProp>
+
+export const makeVTextFieldProps = propsFactory({
+  autofocus: Boolean,
+  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counterValue: Function as PropType<(value: any) => number>,
+  hint: String,
+  persistentHint: Boolean,
+  prefix: String,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
+  persistentCounter: Boolean,
+  suffix: String,
+  type: {
+    type: String,
+    default: 'text',
+  },
+
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
+}, 'v-text-field')
 
 export const VTextField = genericComponent<new () => {
   $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
@@ -40,25 +60,7 @@ export const VTextField = genericComponent<new () => {
 
   inheritAttrs: false,
 
-  props: {
-    autofocus: Boolean,
-    counter: [Boolean, Number, String] as PropType<true | number | string>,
-    counterValue: Function as PropType<(value: any) => number>,
-    hint: String,
-    persistentHint: Boolean,
-    prefix: String,
-    placeholder: String,
-    persistentPlaceholder: Boolean,
-    persistentCounter: Boolean,
-    suffix: String,
-    type: {
-      type: String,
-      default: 'text',
-    },
-
-    ...makeVInputProps(),
-    ...makeVFieldProps(),
-  },
+  props: makeVTextFieldProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,
@@ -76,7 +78,7 @@ export const VTextField = genericComponent<new () => {
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength as unknown as undefined
 
       if (
         !props.counter ||
@@ -275,3 +277,7 @@ export const VTextField = genericComponent<new () => {
 })
 
 export type VTextField = InstanceType<typeof VTextField>
+
+export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
+  return pick(props, Object.keys(VTextField.props) as any)
+}

@@ -67,7 +67,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
-}, 'VOverlay/locationStrategies')
+}, 'v-overlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
