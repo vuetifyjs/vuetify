@@ -57,6 +57,12 @@ You can use `dense` prop to reduce combobox height and lower max height of list 
 
 <example file="v-combobox/prop-dense" />
 
+#### Allow Overflow
+
+You can use the `allow-overflow` prop to turn on or off scrolling of the list items.
+
+<example file="v-combobox/allow-overflow" />
+
 #### Multiple combobox
 
 Previously known as **tags** - user is allowed to enter more than 1 value
