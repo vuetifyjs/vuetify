@@ -53,7 +53,7 @@ cd vuetify-project
 yarn dev
 ```
 
-For more information regarding supported package manages, please visit their official websites:
+For more information regarding supported package managers, please visit their official websites:
 
 * [yarn](https://yarnpkg.com/)
 * [npm](https://npmjs.org/)
@@ -76,7 +76,7 @@ const vuetify = createVuetify({
 
 Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite](https://vitejs.dev/). We plan on enabling the Vue CLI installation path in an official guide in the future.
 
-### CDN
+## CDN
 
 We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
 
@@ -94,7 +94,7 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
-### Questions
+## Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
