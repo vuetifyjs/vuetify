@@ -76,6 +76,36 @@ const vuetify = createVuetify({
 
 Vue CLI is currently in maintenance mode and no longer the default tooling used to build Vue applications. Vuetify projects are now generated using [vite](https://vitejs.dev/). We plan on enabling the Vue CLI installation path in an official guide in the future.
 
+## Manual steps
+
+Follow these steps if for example you are adding Vuetify to an existing project, or simply do not want to use a scaffolding tool.
+
+`yarn add vuetify@^{{ version }}`
+
+In the file where you create the Vue application, add the following code
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives,
+})
+
+createApp(App).use(vuetify).mount('#app')
+```
+
+This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
+
+Lastly, do not forget to install [icons](https://vuetifyjs.com/en/features/icon-fonts/).
+
 ## CDN
 
 We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
