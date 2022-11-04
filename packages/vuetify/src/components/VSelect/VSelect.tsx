@@ -2,10 +2,11 @@
 import './VSelect.sass'
 
 // Components
-import { VDialogTransition } from '@/components/transitions'
+import { filterVTextFieldProps, makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -21,7 +22,6 @@ import { IconValue } from '@/composables/icons'
 // Utility
 import { computed, mergeProps, ref } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
-import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
