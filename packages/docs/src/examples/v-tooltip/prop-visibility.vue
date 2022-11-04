@@ -19,7 +19,7 @@
       >
         <v-tooltip
           v-model="show"
-          top
+          location="top"
         >
           <template v-slot:activator="{ props }">
             <v-btn

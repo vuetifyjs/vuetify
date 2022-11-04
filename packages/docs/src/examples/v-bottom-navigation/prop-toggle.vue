@@ -12,7 +12,7 @@
 
     <v-bottom-navigation
       v-model="value"
-      :input-value="active"
+      :model-value="active"
       color="indigo"
     >
       <v-btn>

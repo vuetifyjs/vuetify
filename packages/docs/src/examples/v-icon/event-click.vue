@@ -17,7 +17,7 @@
     <v-card-actions>
       <v-spacer></v-spacer>
       <v-icon
-        large
+        size="large"
         @click="next"
       >
         mdi-chevron-right

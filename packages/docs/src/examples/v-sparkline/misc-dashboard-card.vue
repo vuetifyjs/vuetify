@@ -28,7 +28,7 @@
       <v-divider class="my-2"></v-divider>
       <v-icon
         class="mr-2"
-        small
+        size="small"
       >
         mdi-clock
       </v-icon>

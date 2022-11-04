@@ -44,7 +44,7 @@
             </v-list-item-content>
 
             <v-list-item-action>
-              <v-icon small>
+              <v-icon size="small">
                 mdi-open-in-new
               </v-icon>
             </v-list-item-action>

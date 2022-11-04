@@ -58,7 +58,7 @@
             >
               <v-icon
                 start
-                small
+                size="small"
               >
                 mdi-beer
               </v-icon>

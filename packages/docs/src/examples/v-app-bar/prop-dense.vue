@@ -19,10 +19,7 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-menu
-        left
-        bottom
-      >
+      <v-menu>
         <template v-slot:activator="{ props }">
           <v-btn
             icon

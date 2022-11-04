@@ -8,18 +8,18 @@
       dark
     >
       <v-spacer></v-spacer>
-      <v-icon small>
+      <v-icon size="small">
         mdi-square
       </v-icon>
       <v-icon
         class="ml-1"
-        small
+        size="small"
       >
         mdi-circle
       </v-icon>
       <v-icon
         class="ml-1"
-        small
+        size="small"
       >
         mdi-triangle
       </v-icon>

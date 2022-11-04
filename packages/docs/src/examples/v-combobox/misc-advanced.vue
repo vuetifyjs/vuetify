@@ -37,7 +37,7 @@
             {{ item.text }}
           </span>
           <v-icon
-            small
+            size="small"
             @click="parent.selectItem(item)"
           >
             $delete

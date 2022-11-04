@@ -12,8 +12,7 @@
       <span class="mr-4">To</span>
       <v-menu
         v-model="menu"
-        bottom
-        right
+        location="bottom end"
         transition="scale-transition"
         origin="top left"
       >
@@ -64,7 +63,7 @@
 
     <v-text-field
       full-width
-      value="Re: Vacation Request"
+      model-value="Re: Vacation Request"
       label="Subject"
       single-line
     ></v-text-field>

@@ -31,10 +31,7 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
-      <v-menu
-        bottom
-        left
-      >
+      <v-menu>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             icon

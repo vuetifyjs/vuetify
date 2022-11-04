@@ -57,7 +57,7 @@
               >
                 <v-icon
                   class="mr-1"
-                  small
+                  size="small"
                   style="color: inherit;"
                   icon="mdi-material-design"
                 />
