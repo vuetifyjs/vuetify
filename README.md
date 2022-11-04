@@ -60,18 +60,37 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   </li>
 </ul>
 
-### What's the difference between GitHub Sponsors, Patreon, and OpenCollective
+### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
 
 Funds donated through GitHub Sponsors and Patreon go directly to support John and Heather's full-time work on Vuetify. Funds donated via Open Collective are managed with transparent expenses and will be used for compensating work and expenses for Core team members. Your name/logo will receive proper recognition and exposure by donating on either platform.
 
-<h3 align="center"><b>Special Sponsors</b></h3>
+<h3 align="center"><b>Special Sponsor</b></h3>
+
+<table>
+  <tbody>
+    <tr>
+      <td>
+        <a href="https://www.teamwork.com/">
+          <img height="40px" src="https://cdn.cosmicjs.com/29a9d0b0-440a-11ed-8c9b-a1a0c9d2eef2-TWPOSRGB.png">
+        </a>
+      </td>
+    </tr>
+  </tbody>
+</table>
+
+<h3 align="center"><b>Palladium Sponsors</b></h3>
 
 <table>
   <tbody>
     <tr>
       <td>
         <a href="https://www.qomplx.com/?ref=vuetify-github">
-          <img height="50px" src="https://cdn.vuetifyjs.com/images/backers/QOMPLX.png">
+          <img height="40px" src="https://cdn.cosmicjs.com/145bda20-1fe1-11ed-a5bd-ef15a2e468ca-QOMPLX-logo-light.png">
+        </a>
+      </td>
+      <td>
+        <a href="https://www.sanofi.us/en/">
+          <img height="50px" src="https://cdn.cosmicjs.com/82029fc0-e0e7-11ec-bb19-d9085ce408df-c7b04c1c-ad15-452c-883f-2dd802ad7df9.png">
         </a>
       </td>
     </tr>
@@ -85,120 +104,40 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
     <tr>
       <td>
         <a href="https://careers.lmax.com/?utm_source=vuetify&utm_medium=github-link&utm_campaign=lmax-careers">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/lmax-exchange.png">
         </a>
       </td>
       <td>
         <a href="http://intygrate.com/?ref=vuetify-github">
-          <img height="40px" src="https://cdn.vuetifyjs.com/images/backers/intygrate.png">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/intygrate.png">
         </a>
       </td>
       <td>
         <a href="http://vuemastery.com/?ref=vuetify-github">
-          <img height="38px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
+          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/vuemastery.svg">
         </a>
       </td>
       <td>
         <a href="http://crossword-solver.io/">
-          <img height="50px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
-        </a>
-      </td>
-      <td>
-        <a href="https://kintell.com/?utm_source=Vuetify&utm_medium=VuetifyReferral&utm_campaign=Vuetify-logo-click">
-          <img height="50px" src="https://imgix.cosmicjs.com/e13a39e0-ff78-11eb-a3f4-b70be1f3fd88-image.png">
-        </a>
-      </td>
-    </tr>
-  </tbody>
-</table>
-
-<h3 align="center"><b>Gold Sponsors</b></h3>
-
-<table>
-  <tbody>
-    <tr>
-      <td>
-        <a href="https://application.rategenius.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/rate-genius.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.digitalmaas.com/?ref=vuetify-github">
-          <img height="42px" src="https://cdn.vuetifyjs.com/images/backers/digital-maas.svg">
-        </a>
-      </td>
-      <td>
-        <a href="https://analytics.quantedsquare.com/">
-          <img height="36px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/quanted-square-light-sm.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.hypeinnovation.com/home?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/hype-logo-light.svg">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.cosmicjs.com/?ref=vuetify-github">
-          <img height="30px" src="https://cdn.vuetifyjs.com/images/backers/cosmic-logo-light.svg">
+          <img height="35px" src="https://cdn.cosmicjs.com/098aa4e0-9749-11eb-bf6a-1ffd0f06b0f7-crossword-solver-logo-light.svg">
         </a>
       </td>
     </tr>
     <tr></tr>
     <tr>
       <td>
-        <a href="https://papersowl.com/write-my-essay-please">
-          <img height="30px" src="https://cdn.cosmicjs.com/ae13a830-974a-11eb-bf6a-1ffd0f06b0f7-papersowl-logo-light.png">
+        <a href="https://www.slim.ai/">
+          <img height="30px" src="https://cdn.cosmicjs.com/e7d53ff0-4ca5-11ec-9940-53a088b36636-slim-ai.svg">
         </a>
       </td>
       <td>
-        <a href="https://www.elfo.net/?ref=vuetify-github">
-          <img height="26px" src="https://cdn.cosmicjs.com/9e2dd530-974a-11eb-bf6a-1ffd0f06b0f7-elfo-logo-light.png">
+        <a href="https://netticasinohex.com/">
+          <img height="30px" src="https://cdn.cosmicjs.com/4442ad40-1fdc-11ed-a5bd-ef15a2e468ca-hex-ca-light-sm.png">
         </a>
       </td>
       <td>
-        <a href="https://www.dealerdesk.de/?ref=vuetify-github">
-          <img height="42px" src="https://imgix.cosmicjs.com/15326970-c482-11eb-9242-8105a76f57b3-dealerdesklogocmyk20210520-1515-3.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://writersperhour.com/buy-essay">
-          <img height="51px" src="https://cdn.vuetifyjs.com/docs/images/sponsors/logos/writers-per-hour.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.topratedcasinosites.co.uk/">
-          <img height="30px" src="https://cdn.cosmicjs.com/d5a76910-9748-11eb-bf6a-1ffd0f06b0f7-toprated-light.png">
-        </a>
-      </td>
-    </tr>
-    <tr></tr>
-    <tr>
-      <td>
-        <a href="https://aussiecasinohex.com/">
-          <img height="30px" src="https://imgix.cosmicjs.com/5e118ca0-9748-11eb-bf6a-1ffd0f06b0f7-hex-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://www.sumcumo.com/">
-          <img height="26px" src="https://cdn.cosmicjs.com/cd0aa3a0-974b-11eb-bf6a-1ffd0f06b0f7-sun-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://goread.io/buy-instagram-followers">
-          <img height="26px" src="https://cdn.cosmicjs.com/3ab46070-9711-11eb-b593-972a7dbc1054-goread-light.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://onlinecasinohex.ca/">
-          <im
-      <td>
-        <a href="https://www.casinoonlineaams.com/">
-          <img height="30px" src="https://imgix.cosmicjs.com/9d6390c0-c483-11eb-9242-8105a76f57b3-casinoonlineaams-light-md-1.png">
-        </a>
-      </td>
-      <td>
-        <a href="https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071">
-          <img height="55px" src="https://imgix.cosmicjs.com/5a155730-c547-11eb-9242-8105a76f57b3-tm-logo-light-md.png">
+        <a href="https://www.noneedtostudy.com/take-my-online-class/">
+          <img height="30px" src="https://cdn.cosmicjs.com/215133d0-248a-11ed-b52d-a3f33977cd87-medium-logo-alt.png">
         </a>
       </td>
     </tr>
