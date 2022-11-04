@@ -55,6 +55,14 @@ Some variables are not used by vuetify components and are safe to modify without
 );
 ```
 
+<alert type="warning">
+
+`'vuetify/styles'` should not be used in sass files as it resolves to precompiled css ([vitejs/vite#7809](https://github.com/vitejs/vite/issues/7809))
+
+`'vuetify'` and `'vuetify/settings'` are valid and safe to use
+
+</alert>
+
 ## Component specific variables
 
 Customising variables used in components is a bit more complex and requires the use of a build plugin.
