@@ -155,8 +155,10 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (e.key === 'ArrowDown') {
+        e.preventDefault()
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
         listRef.value?.focus('prev')
       }
     }
