@@ -6105,10 +6105,10 @@ eslint-plugin-vue@^9.0.1, eslint-plugin-vue@^9.6.0:
     vue-eslint-parser "^9.0.1"
     xml-name-validator "^4.0.0"
 
-eslint-plugin-vuetify@^2.0.0-beta.1:
-  version "2.0.0-beta.1"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-vuetify/-/eslint-plugin-vuetify-2.0.0-beta.1.tgz#7ed86ba40c352d4c72c868ea1e62d77dd00db0de"
-  integrity sha512-FESiqivsubOLY1ICkEbeLwv40blZ6IjYH6Fgr18GFioeTltJ4G3NoQ1Vu3ssqh+YW67bnHS58MURvvGA0fCf+Q==
+eslint-plugin-vuetify@^2.0.0-beta.2:
+  version "2.0.0-beta.2"
+  resolved "https://registry.yarnpkg.com/eslint-plugin-vuetify/-/eslint-plugin-vuetify-2.0.0-beta.2.tgz#c8a5681ca67acd7f7072757ab24bc33f9a15b88e"
+  integrity sha512-LpVitcHp4qE9eAXr67y180+vsqvh22lQ+FBd04Jfbz6w3TACblUMGm18q4ujF/KcXgDm5RKZjHKM0KVtR6+4kA==
   dependencies:
     eslint-plugin-vue "^9.6.0"
     requireindex "^1.2.0"
