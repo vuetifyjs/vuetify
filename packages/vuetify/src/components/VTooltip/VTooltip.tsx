@@ -40,6 +40,7 @@ export const VTooltip = genericComponent<new () => {
       scrim: false,
       scrollStrategy: 'reposition' as const,
       transition: false,
+      disableGlobalStack: true,
     }), [
       'absolute',
       'persistent',
