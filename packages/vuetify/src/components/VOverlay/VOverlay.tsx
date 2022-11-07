@@ -90,6 +90,7 @@ export const makeVOverlayProps = propsFactory({
   noClickAnimation: Boolean,
   modelValue: Boolean,
   persistent: Boolean,
+  disableGlobalStack: Boolean,
   scrim: {
     type: [String, Boolean],
     default: true,
