@@ -18,14 +18,14 @@
               :key="link.href || link.copyText"
               location="bottom"
             >
-              <template #activator="{ props }">
+              <template #activator="{ props: activatorProps }">
                 <a
                   v-if="link.href"
                   :href="link.href"
                   class="d-inline-flex text-decoration-none mr-1"
                   rel="noopener"
                   target="_blank"
-                  v-bind="props"
+                  v-bind="activatorProps"
                 >
                   <v-icon
                     :color="link.color"
@@ -37,7 +37,7 @@
                 <div
                   v-else
                   class="cursor-pointer"
-                  v-bind="props"
+                  v-bind="activatorProps"
                   @click.prevent="copyTextToClipboard(link.copyText)"
                 >
                   <v-icon
@@ -138,90 +138,79 @@
   </v-lazy>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
 
   // Types
-  import type { PropType } from 'vue'
   import type { Member } from '@/store/team'
+  import type { PropType } from 'vue'
 
-  export default defineComponent({
-    name: 'TeamMember',
-
-    props: {
-      member: {
-        type: Object as PropType<Member>,
-        default: () => ({}),
-      },
-    },
-
-    setup (props) {
-      const { t } = useI18n()
-
-      const links = computed(() => {
-        const links = []
-
-        if (props.member.twitter) {
-          links.push({
-            color: '#40BBF4',
-            href: `https://twitter.com/${props.member.twitter}`,
-            icon: 'mdi-twitter',
-            tooltip: 'Twitter',
-          })
-        }
-
-        if (props.member.github) {
-          links.push({
-            color: '#24292E',
-            href: `https://github.com/${props.member.github}`,
-            icon: 'mdi-github',
-            tooltip: 'GitHub',
-          })
-        }
-
-        if (props.member.linkedin) {
-          links.push({
-            color: '#0077B5',
-            href: `https://linkedin.com/in/${props.member.linkedin}`,
-            icon: 'mdi-linkedin',
-            tooltip: 'LinkedIn',
-          })
-        }
-
-        if (props.member.discord) {
-          links.push({
-            color: '#738ADB',
-            copyText: props.member.discord,
-            icon: 'mdi-discord',
-            tooltip: `Discord: ${props.member.discord} (click to copy)`,
-          })
-        }
-
-        return links
-      })
-
-      function copyTextToClipboard (copyText?: string) {
-        if (!copyText) return
-        navigator.clipboard.writeText(copyText)
-      }
-
-      return {
-        t,
-        icons: {
-          languages: 'mdi-translate',
-          location: 'mdi-map-marker-outline',
-          work: 'mdi-briefcase-variant-outline',
-        },
-        links,
-        copyTextToClipboard,
-        fields: ['work', 'location', 'languages'] as const,
-      }
+  const props = defineProps({
+    member: {
+      type: Object as PropType<Member>,
+      default: () => ({}),
     },
   })
+
+  const { t } = useI18n()
+
+  const icons = {
+    languages: 'mdi-translate',
+    location: 'mdi-map-marker-outline',
+    work: 'mdi-briefcase-variant-outline',
+  }
+  const fields = ['work', 'location', 'languages'] as const
+
+  const links = computed(() => {
+    const links = []
+
+    if (props.member.twitter) {
+      links.push({
+        color: '#40BBF4',
+        href: `https://twitter.com/${props.member.twitter}`,
+        icon: 'mdi-twitter',
+        tooltip: 'Twitter',
+      })
+    }
+
+    if (props.member.github) {
+      links.push({
+        color: '#24292E',
+        href: `https://github.com/${props.member.github}`,
+        icon: 'mdi-github',
+        tooltip: 'GitHub',
+      })
+    }
+
+    if (props.member.linkedin) {
+      links.push({
+        color: '#0077B5',
+        href: `https://linkedin.com/in/${props.member.linkedin}`,
+        icon: 'mdi-linkedin',
+        tooltip: 'LinkedIn',
+      })
+    }
+
+    if (props.member.discord) {
+      links.push({
+        color: '#738ADB',
+        copyText: props.member.discord,
+        icon: 'mdi-discord',
+        tooltip: `Discord: ${props.member.discord} (click to copy)`,
+      })
+    }
+
+    return links
+  })
+
+  function copyTextToClipboard (copyText?: string) {
+    if (!copyText) return
+    navigator.clipboard.writeText(copyText)
+  }
 </script>
 
 <style>

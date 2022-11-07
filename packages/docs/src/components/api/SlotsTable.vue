@@ -22,32 +22,18 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  // Imports
-  import { defineComponent, PropType } from 'vue'
-  import { getType } from './utils'
+<script setup lang="ts">
+  // Components
   import NameCell from './NameCell.vue'
-  // import PrismCell from './PrismCell.vue'
 
-  export default defineComponent({
-    components: {
-      NameCell,
-      // PrismCell,
-    },
-    props: {
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => [],
-      },
-    },
-    setup (props) {
-      const headers = ['name', 'type', 'description']
+  // Utilities
+  import { getType } from './utils'
+  import { PropType } from 'vue'
 
-      return {
-        headers,
-        field: 'props',
-        getType,
-      }
+  defineProps({
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => [],
     },
   })
 </script>

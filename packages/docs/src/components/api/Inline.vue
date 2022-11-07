@@ -14,48 +14,38 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
-  import { useRoute } from 'vue-router'
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
-  import pageToApi from '@/data/page-to-api.json'
-  import { useUserStore } from '../../store/user'
+  import { useRoute } from 'vue-router'
+  import { useUserStore } from '@/store/user'
 
+  // Utilities
+  import { computed, onBeforeMount, ref } from 'vue'
+
+  // Data
+  import pageToApi from '@/data/page-to-api.json'
+
+  const props = defineProps({
+    components: String,
+  })
+
+  const route = useRoute()
+  const { locale } = useI18n()
+  const store = useUserStore()
+  const name = ref()
   const sections = ['props', 'slots', 'events', 'functions']
 
-  export default defineComponent({
-    name: 'ApiInline',
+  const components = computed(() => {
+    if (props.components) return props.components.split(/, ?/)
 
-    props: {
-      components: String,
-    },
+    const path = route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
+    return pageToApi[path as keyof typeof pageToApi]
+  })
 
-    setup (props) {
-      const route = useRoute()
-      const { locale } = useI18n()
-      const store = useUserStore()
-      const name = ref()
+  const showInline = computed(() => store.api === 'inline')
 
-      const components = computed(() => {
-        if (props.components) return props.components.split(/, ?/)
-
-        const path = route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
-        return pageToApi[path as keyof typeof pageToApi]
-      })
-
-      const showInline = computed(() => store.api === 'inline')
-
-      onBeforeMount(() => {
-        name.value = components.value[0]
-      })
-
-      return {
-        name,
-        sections,
-        // eslint-disable-next-line vue/no-dupe-keys
-        components,
-        showInline,
-      }
-    },
+  onBeforeMount(() => {
+    name.value = components.value[0]
   })
 </script>

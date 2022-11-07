@@ -4,7 +4,6 @@
     item-value="text"
     prepend-inner-icon="$mdiDatabaseSearch"
     variant="solo"
-    v-bind="$attrs"
   >
     <template #selection="{ item, selected }">
       <v-chip
@@ -36,9 +35,6 @@
   </v-autocomplete>
 </template>
 
-<script>
-  export default {
-    name: 'ApiSearch',
-    inheritAttrs: false,
-  }
+<script setup>
+  //
 </script>
