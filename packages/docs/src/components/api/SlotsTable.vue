@@ -27,12 +27,12 @@
   import { defineComponent, PropType } from 'vue'
   import { getType } from './utils'
   import NameCell from './NameCell.vue'
-  import PrismCell from './PrismCell.vue'
+  // import PrismCell from './PrismCell.vue'
 
   export default defineComponent({
     components: {
       NameCell,
-      PrismCell,
+      // PrismCell,
     },
     props: {
       items: {

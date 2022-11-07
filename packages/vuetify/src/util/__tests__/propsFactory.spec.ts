@@ -1,4 +1,4 @@
-import { excludeProps, propsFactory } from '../propsFactory'
+import { propsFactory } from '../propsFactory'
 import { describe, expect, it } from '@jest/globals'
 
 describe('propsFactory', () => {
@@ -31,14 +31,5 @@ describe('propsFactory', () => {
       // @ts-expect-error
       propsFactory({ foo: definition }, source)()
     ).toStrictEqual({ foo: result })
-  })
-
-  it('should remove excluded props', () => {
-    const props = propsFactory({ foo: String, bar: Number }, 'test')()
-
-    // @ts-expect-error
-    excludeProps(props, ['baz'])
-
-    expect(excludeProps(props, ['foo'])).toStrictEqual({ bar: { type: Number, source: 'test' } })
   })
 })

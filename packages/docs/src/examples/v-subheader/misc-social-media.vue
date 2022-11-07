@@ -1,7 +1,7 @@
 <template>
   <v-card
     flat
-    tile
+    rounded="0"
   >
     <v-toolbar
       color="cyan"
@@ -21,7 +21,7 @@
     <v-container
       v-for="type in types"
       :key="type"
-      class="grey lighten-4"
+      class="bg-grey-lighten-4"
       fluid
     >
       <v-subheader>{{ type }}</v-subheader>
@@ -41,20 +41,20 @@
               height="300px"
             >
               <span
-                class="text-h5 white--text pl-4 pt-4 d-inline-block"
+                class="text-h5 text-white pl-4 pt-4 d-inline-block"
                 v-text="card"
               ></span>
             </v-img>
 
-            <v-card-actions class="white justify-center">
+            <v-card-actions class="bg-white justify-center">
               <v-btn
                 v-for="(social, i) in socials"
                 :key="i"
                 :color="social.color"
-                class="white--text"
+                class="text-white"
                 fab
                 icon
-                small
+                size="small"
               >
                 <v-icon>{{ social.icon }}</v-icon>
               </v-btn>

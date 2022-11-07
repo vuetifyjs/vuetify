@@ -24,7 +24,7 @@
             prepend-avatar="https://cdn.vuetifyjs.com/images/lists/2.jpg"
           >
             <template v-slot:title>
-              Summer BBQ <span class="grey--text text--lighten-1">4</span>
+              Summer BBQ <span class="text-grey-lighten-1">4</span>
             </template>
             <template v-slot:subtitle>
               <span class="font-weight-bold">to Alex, Scott, Jennifer</span> &mdash; Wish I could come, but I'm out of town this weekend.

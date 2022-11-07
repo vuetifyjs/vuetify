@@ -120,6 +120,7 @@ export const VAutocomplete = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -152,6 +153,12 @@ export const VAutocomplete = genericComponent<new <
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
         isPristine.value = true
       }
+
+      if (e.key === 'ArrowDown') {
+        listRef.value?.focus('next')
+      } else if (e.key === 'ArrowUp') {
+        listRef.value?.focus('prev')
+      }
     }
 
     function onInput (e: InputEvent) {
@@ -160,6 +167,16 @@ export const VAutocomplete = genericComponent<new <
 
     function onAfterLeave () {
       if (isFocused.value) isPristine.value = true
+    }
+
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (e.relatedTarget == null) {
+        vTextFieldRef.value?.focus()
+      }
     }
 
     const isSelecting = ref(false)
@@ -258,9 +275,12 @@ export const VAutocomplete = genericComponent<new <
                   { ...props.menuProps }
                 >
                   <VList
+                    ref={ listRef }
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    onFocusin={ onFocusin }
+                    onFocusout={ onFocusout }
                   >
                     { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />

@@ -163,6 +163,7 @@ export const VCombobox = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
+    const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -197,6 +198,12 @@ export const VCombobox = genericComponent<new <
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
         isPristine.value = true
+      }
+
+      if (e.key === 'ArrowDown') {
+        listRef.value?.focus('next')
+      } else if (e.key === 'ArrowUp') {
+        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -276,6 +283,16 @@ export const VCombobox = genericComponent<new <
       }
     }
 
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (e.relatedTarget == null) {
+        vTextFieldRef.value?.focus()
+      }
+    }
+
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
     })
@@ -337,9 +354,12 @@ export const VCombobox = genericComponent<new <
                   { ...props.menuProps }
                 >
                   <VList
+                    ref={ listRef }
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    onFocusin={ onFocusin }
+                    onFocusout={ onFocusout }
                   >
                     { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />

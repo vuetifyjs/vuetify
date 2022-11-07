@@ -15,20 +15,20 @@
       > thead
         > tr
           &:last-child
-            th
+            > th
               border-bottom: $table-border
 
       > tbody
         > tr
           &:not(:last-child)
-            td,
-            th
+            > td,
+            > th
               border-bottom: $table-border
 
       > tfoot
         > tr
-            td,
-            th
+            > td,
+            > th
               border-top: $table-border
 
 
@@ -41,17 +41,22 @@
               background: $table-hover-color
 
   &.v-table--fixed-header
-    thead th
-      background: $table-background
-      box-shadow: inset 0 -1px 0 $table-border-color
-      z-index: 1
+    > .v-table__wrapper
+      > table
+        > thead
+          > tr
+            > th
+              background: $table-background
+              box-shadow: inset 0 -1px 0 $table-border-color
+              z-index: 1
 
   &.v-table--fixed-footer
-    tfoot
-      th,
-      td
-        background: $table-background
-        box-shadow: inset 0 1px 0 $table-border-color
+    > tfoot
+      > tr
+        > th,
+        > td
+          background: $table-background
+          box-shadow: inset 0 1px 0 $table-border-color
 
 // Block
 .v-table
@@ -137,7 +142,7 @@
                   border-bottom-right-radius: 0
 
 .v-table--fixed-height
-  .v-table__wrapper
+  > .v-table__wrapper
     overflow-y: auto
 
 .v-table--fixed-header

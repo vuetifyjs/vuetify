@@ -14,12 +14,12 @@
             icon
             light
           >
-            <v-icon color="grey darken-2">
+            <v-icon color="grey-darken-2">
               mdi-arrow-left
             </v-icon>
           </v-btn>
 
-          <v-toolbar-title class="grey--text text--darken-4">
+          <v-toolbar-title class="text-grey-darken-4">
             Albums
           </v-toolbar-title>
 
@@ -29,7 +29,7 @@
             icon
             light
           >
-            <v-icon color="grey darken-2">
+            <v-icon color="grey-darken-2">
               mdi-magnify
             </v-icon>
           </v-btn>

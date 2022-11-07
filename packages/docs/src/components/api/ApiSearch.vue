@@ -3,13 +3,13 @@
     clearable
     item-value="text"
     prepend-inner-icon="$mdiDatabaseSearch"
-    solo
+    variant="solo"
     v-bind="$attrs"
   >
     <template #selection="{ item, selected }">
       <v-chip
         :value="selected"
-        class="white--text"
+        class="text-white"
         color="primary"
         label
       >

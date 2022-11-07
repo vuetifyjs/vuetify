@@ -11,8 +11,7 @@
         rounded="xl"
       >
         <v-sheet
-          class="pa-3 primary text-right"
-          dark
+          class="pa-3 bg-primary text-right"
           rounded="t-xl"
         >
           <v-btn icon>
@@ -29,7 +28,7 @@
 
         <div class="pa-4">
           <v-chip-group
-            active-class="primary--text"
+            selected-class="text-primary"
             column
           >
             <v-chip

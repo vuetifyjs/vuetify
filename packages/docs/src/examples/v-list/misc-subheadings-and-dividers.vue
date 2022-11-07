@@ -50,7 +50,7 @@
           <template v-slot:default="{ active, }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
@@ -66,7 +66,7 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
@@ -82,7 +82,7 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
@@ -98,7 +98,7 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>

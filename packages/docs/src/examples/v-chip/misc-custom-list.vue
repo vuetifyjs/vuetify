@@ -34,7 +34,7 @@
             @click:close="selected.splice(i, 1)"
           >
             <v-icon
-              left
+              start
               :icon="selection.icon"
             ></v-icon>
             {{ selection.text }}
@@ -86,7 +86,7 @@
         :disabled="!selected.length"
         :loading="loading"
         color="purple"
-        text
+        variant="text"
         @click="next"
       >
         Next

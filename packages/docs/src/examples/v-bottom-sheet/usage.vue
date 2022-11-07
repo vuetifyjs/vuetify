@@ -23,7 +23,7 @@
         >
           <v-btn
             class="my-6"
-            depressed
+            variant="flat"
             color="error"
             @click="sheet = !sheet"
           >

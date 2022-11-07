@@ -98,6 +98,10 @@ declare module '@vue/runtime-core' {
   export interface ComponentOptionsBase<Props, RawBindings, D, C extends ComputedOptions, M extends MethodOptions, Mixin extends ComponentOptionsMixin, Extends extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults = {}> {
     aliasName?: string
   }
+
+  export interface App {
+    $nuxt?: { hook: (name: string, fn: () => void) => void }
+  }
 }
 
 declare module '@vue/runtime-dom' {

@@ -7,7 +7,7 @@
       >
         <template v-slot:prepend>
           <v-list-item
-            two-line
+            lines="two"
             prepend-avatar="https://randomuser.me/api/portraits/women/81.jpg"
             title="Jane Smith"
             subtitle="Logged in"

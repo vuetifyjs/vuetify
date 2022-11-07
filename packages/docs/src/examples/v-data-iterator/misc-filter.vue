@@ -12,7 +12,7 @@
       <template v-slot:header>
         <v-toolbar
           dark
-          color="blue darken-3"
+          color="blue-darken-3"
           class="mb-1"
         >
           <v-text-field
@@ -41,16 +41,16 @@
               mandatory
             >
               <v-btn
-                large
-                depressed
+                size="large"
+                variant="flat"
                 color="blue"
                 :value="false"
               >
                 <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
               <v-btn
-                large
-                depressed
+                size="large"
+                variant="flat"
                 color="blue"
                 :value="true"
               >
@@ -105,12 +105,12 @@
           align="center"
           justify="center"
         >
-          <span class="grey--text">Items per page</span>
+          <span class="text-grey">Items per page</span>
           <v-menu offset-y>
             <template v-slot:activator="{ on, attrs }">
               <v-btn
                 dark
-                text
+                variant="text"
                 color="primary"
                 class="ml-2"
                 v-bind="attrs"
@@ -134,15 +134,14 @@
           <v-spacer></v-spacer>
 
           <span
-            class="mr-4
-            grey--text"
+            class="mr-4 text-grey"
           >
             Page {{ page }} of {{ numberOfPages }}
           </span>
           <v-btn
             fab
             dark
-            color="blue darken-3"
+            color="blue-darken-3"
             class="mr-1"
             @click="formerPage"
           >
@@ -151,7 +150,7 @@
           <v-btn
             fab
             dark
-            color="blue darken-3"
+            color="blue-darken-3"
             class="ml-1"
             @click="nextPage"
           >

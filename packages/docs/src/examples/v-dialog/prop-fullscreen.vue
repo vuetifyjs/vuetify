@@ -31,8 +31,7 @@
           <v-spacer></v-spacer>
           <v-toolbar-items>
             <v-btn
-              dark
-              text
+              variant="text"
               @click="dialog = false"
             >
               Save

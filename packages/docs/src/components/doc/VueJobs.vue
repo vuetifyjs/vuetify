@@ -39,7 +39,7 @@
               <v-icon
                 icon="mdi-open-in-new"
                 end
-                small
+                size="small"
               />
             </v-btn>
           </template>

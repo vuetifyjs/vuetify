@@ -251,7 +251,6 @@ export const VSlideGroup = genericComponent<new () => {
       if (!contentRef.value) return
 
       if (!location) {
-        contentRef.value.querySelector('[tabindex]')
         const focusable = [...contentRef.value.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]

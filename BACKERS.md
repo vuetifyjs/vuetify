@@ -4,11 +4,12 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 
 ## Special
 
+- [teamwork](https://www.teamwork.com/)
+
+## Palladium
+
 - [QOMPLX](https://www.qomplx.com/)
-
-### Diamond
-
-- [Your organization here](https://vuetifyjs.com/en/introduction/sponsors-and-backers/)
+- [sanofi](https://www.sanofi.us/en/)
 
 ### Platinum
 
@@ -16,10 +17,12 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Intygrate](http://intygrate.com/)
 - [Vue Mastery](http://vuemastery.com/)
 - [Crossword Solver](http://crossword-solver.io/)
+- [slim.ai](https://www.slim.ai/)
+- [HEX Online Casino](https://netticasinohex.com/)
+- [Genius M](https://www.noneedtostudy.com/take-my-online-class/)
 
 ### Gold
 
-- [rateGenius](https://application.rategenius.com/)
 - [DigitalMaas](https://www.digitalmaas.com/)
 - [Quanted Square](https://analytics.quantedsquare.com/)
 - [HYPE](https://www.hypeinnovation.com/home)
@@ -28,9 +31,8 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 - [Dealer Desk](https://www.dealerdesk.de/)
 - [Writers per Hour](https://writersperhour.com/buy-essay/)
 - [Top Rated Casino Sites](https://www.topratedcasinosites.co.uk/)
-- [sumcumo](https://www.sumcumo.com/)
 - [AussieCasinoHex](https://aussiecasinohex.com/)
-- [Goread.io](https://goread.io/buy-instagram-followers)
+- [Goread.io](https://instalab.pro/)
 - [CasinoHex Canada](https://onlinecasinohex.ca/)
 - [Casinoonlineaams](https://www.casinoonlineaams.com/)
 - [TM Design](https://medium.com/theymakedesign/best-web-design-companies-3ecc85b32071)

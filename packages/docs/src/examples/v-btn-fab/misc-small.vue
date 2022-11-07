@@ -12,7 +12,7 @@
           extended
         >
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
-          <v-toolbar-title class="white--text">
+          <v-toolbar-title class="text-white">
             My files
           </v-toolbar-title>
           <v-spacer></v-spacer>
@@ -25,9 +25,8 @@
           <template v-slot:extension>
             <v-btn
               fab
-              color="cyan accent-2"
-              bottom
-              left
+              color="cyan-accent-2"
+              location="bottom left"
               absolute
               @click="dialog = !dialog"
             >
@@ -36,7 +35,7 @@
           </template>
         </v-toolbar>
         <v-list
-          two-line
+          lines="two"
           subheader
         >
           <v-subheader inset>
@@ -62,7 +61,7 @@
 
             <v-list-item-action>
               <v-btn icon>
-                <v-icon color="grey lighten-1">
+                <v-icon color="grey-lighten-1">
                   mdi-information
                 </v-icon>
               </v-btn>
@@ -97,7 +96,7 @@
                 icon
                 ripple
               >
-                <v-icon color="grey lighten-1">
+                <v-icon color="grey-lighten-1">
                   mdi-information
                 </v-icon>
               </v-btn>
@@ -113,14 +112,14 @@
             <v-card-text>
               <v-text-field label="File name"></v-text-field>
 
-              <small class="grey--text">* This doesn't actually save.</small>
+              <small class="text-grey">* This doesn't actually save.</small>
             </v-card-text>
 
             <v-card-actions>
               <v-spacer></v-spacer>
 
               <v-btn
-                text
+                variant="text"
                 color="primary"
                 @click="dialog = false"
               >

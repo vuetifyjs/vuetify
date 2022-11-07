@@ -4,13 +4,13 @@
       <template v-slot:label>
         <div>
           I agree that
-          <v-tooltip bottom>
-            <template v-slot:activator="{ on }">
+          <v-tooltip location="bottom">
+            <template v-slot:activator="{ props }">
               <a
                 target="_blank"
                 href="https://vuetifyjs.com"
+                v-bind="props"
                 @click.stop
-                v-on="on"
               >
                 Vuetify
               </a>

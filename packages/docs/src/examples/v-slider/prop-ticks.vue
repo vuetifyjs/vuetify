@@ -4,7 +4,7 @@
 
     <v-slider
       step="10"
-      ticks
+      show-ticks
     ></v-slider>
 
     <div class="text-caption">Always show ticks</div>

@@ -1,8 +1,7 @@
 <template>
   <v-snackbar
     v-model="pwa.snackbar"
-    bottom
-    right
+    location="bottom right"
     timeout="-1"
     vertical
   >
@@ -14,7 +13,7 @@
         @click="pwa.ignore"
       >
         <i18n-t
-          class="white--text"
+          class="text-white"
           keypath="pwa.ignore"
         />
       </v-btn>
@@ -24,7 +23,7 @@
         @click="pwa.update"
       >
         <i18n-t
-          class="white--text"
+          class="text-white"
           keypath="pwa.refresh"
         />
       </app-btn>

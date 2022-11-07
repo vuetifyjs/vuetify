@@ -3,10 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-toolbar
-      color="deep-purple accent-4"
-      dark
-    >
+    <v-toolbar color="deep-purple-accent-4">
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 
       <v-toolbar-title>New Chat</v-toolbar-title>

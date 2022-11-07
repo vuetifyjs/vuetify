@@ -58,14 +58,14 @@
           <v-spacer></v-spacer>
 
           <v-btn
-            text
+            variant="text"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
             color="primary"
-            text
+            variant="text"
             @click="menu = false"
           >
             Save

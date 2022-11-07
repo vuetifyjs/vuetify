@@ -94,7 +94,11 @@ export const VListItem = genericComponent<new () => {
     ...makeVariantProps({ variant: 'text' } as const),
   },
 
-  setup (props, { attrs, slots }) {
+  emits: {
+    click: (e: Event) => true,
+  },
+
+  setup (props, { attrs, slots, emit }) {
     const link = useLink(props, attrs)
     const id = computed(() => props.value ?? link.href.value)
     const { select, isSelected, isIndeterminate, isGroupActivator, root, parent, openOnSelect } = useNestedItem(id, false)
@@ -142,6 +146,22 @@ export const VListItem = genericComponent<new () => {
       isIndeterminate: isIndeterminate.value,
     }))
 
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+
+      if (isGroupActivator || !isClickable.value) return
+
+      link.navigate?.(e)
+      props.value != null && select(!isSelected.value, e)
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
+    }
+
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
       const hasColor = !list || isSelected.value || isActive.value
@@ -162,7 +182,7 @@ export const VListItem = genericComponent<new () => {
               'v-list-item--link': isClickable.value,
               'v-list-item--nav': props.nav,
               'v-list-item--prepend': !hasPrepend && list?.hasPrepend.value,
-              [`${props.activeClass}`]: isActive.value,
+              [`${props.activeClass}`]: props.activeClass && isActive.value,
             },
             themeClasses.value,
             borderClasses.value,
@@ -179,12 +199,8 @@ export const VListItem = genericComponent<new () => {
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }
-          onClick={ isClickable.value && ((e: MouseEvent) => {
-            if (isGroupActivator) return
-
-            link.navigate?.(e)
-            props.value != null && select(!isSelected.value, e)
-          })}
+          onClick={ onClick }
+          onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }

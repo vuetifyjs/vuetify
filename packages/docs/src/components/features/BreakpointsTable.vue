@@ -36,7 +36,7 @@
       <tfoot>
         <tr>
           <td
-            class="text-caption text-center grey--text"
+            class="text-caption text-center text-grey"
             colspan="4"
           >
             <em>{{ t('breakpoints-table.footer', { size: '* -16px' }) }}</em>
@@ -57,7 +57,7 @@
               >
                 <v-icon
                   class="mr-1"
-                  small
+                  size="small"
                   style="color: inherit;"
                   icon="mdi-material-design"
                 />

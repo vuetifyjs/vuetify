@@ -8,26 +8,22 @@
           cover
           class="text-white"
         >
-          <v-layout full-height>
-            <v-app-bar
-              density="comfortable"
-              color="rgba(0, 0, 0, 0)"
-              flat
-              theme="dark"
-            >
-              <template v-slot:prepend>
-                <v-app-bar-nav-icon></v-app-bar-nav-icon>
-              </template>
+          <v-toolbar
+            color="rgba(0, 0, 0, 0)"
+            theme="dark"
+          >
+            <template v-slot:prepend>
+              <v-btn icon="$menu"></v-btn>
+            </template>
 
-              <v-app-bar-title class="text-h6">
-                Messages
-              </v-app-bar-title>
+            <v-toolbar-title class="text-h6">
+              Messages
+            </v-toolbar-title>
 
-              <template v-slot:append>
-                <v-icon icon="mdi-dots-vertical"></v-icon>
-              </template>
-            </v-app-bar>
-          </v-layout>
+            <template v-slot:append>
+              <v-btn icon="mdi-dots-vertical"></v-btn>
+            </template>
+          </v-toolbar>
         </v-img>
 
         <v-card-text>
@@ -35,10 +31,7 @@
             Today
           </div>
 
-          <v-timeline
-            density="compact"
-            truncate-line="none"
-          >
+          <v-timeline density="compact" align="start">
             <v-timeline-item
               v-for="message in messages"
               :key="message.time"
@@ -67,7 +60,7 @@
           from: 'You',
           message: `Sure, I'll see you later.`,
           time: '10:42am',
-          color: 'deep-purple lighten-1',
+          color: 'deep-purple-lighten-1',
         },
         {
           from: 'John Doe',
@@ -79,7 +72,7 @@
           from: 'You',
           message: 'Did you still want to grab lunch today?',
           time: '9:47am',
-          color: 'deep-purple lighten-1',
+          color: 'deep-purple-lighten-1',
         },
       ],
     }),

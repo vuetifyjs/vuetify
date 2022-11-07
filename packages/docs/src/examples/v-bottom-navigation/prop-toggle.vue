@@ -3,7 +3,7 @@
     <div class="text-center mb-8">
       <v-btn
         color="deep-purple"
-        outlined
+        variant="outlined"
         @click="active = !active"
       >
         Toggle Navigation
@@ -12,7 +12,7 @@
 
     <v-bottom-navigation
       v-model="value"
-      :input-value="active"
+      :model-value="active"
       color="indigo"
     >
       <v-btn>

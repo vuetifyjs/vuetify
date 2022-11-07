@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-grey-lighten-5">
     <!-- Stack the columns on mobile by making one full-width and the other half-width -->
     <v-row>
       <v-col
@@ -8,8 +8,8 @@
       >
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           .col-12 .col-md-8
         </v-card>
@@ -20,8 +20,8 @@
       >
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           .col-6 .col-md-4
         </v-card>
@@ -38,8 +38,8 @@
       >
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           .col-6 .col-md-4
         </v-card>
@@ -55,8 +55,8 @@
       >
         <v-card
           class="pa-2"
-          outlined
-          tile
+          variant="outlined"
+          rounded="0"
         >
           .col-6
         </v-card>

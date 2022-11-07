@@ -116,7 +116,7 @@
       <template v-slot:activator>
         <v-btn
           v-model="fab"
-          color="blue darken-2"
+          color="blue-darken-2"
           dark
           fab
         >
@@ -131,7 +131,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="green"
       >
         <v-icon>mdi-pencil</v-icon>
@@ -139,7 +139,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="indigo"
       >
         <v-icon>mdi-plus</v-icon>
@@ -147,7 +147,7 @@
       <v-btn
         fab
         dark
-        small
+        size="small"
         color="red"
       >
         <v-icon>mdi-delete</v-icon>

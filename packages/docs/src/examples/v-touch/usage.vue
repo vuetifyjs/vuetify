@@ -7,7 +7,7 @@
       down: () => swipe('Down')
     }"
     align="center"
-    class="grey lighten-2"
+    class="bg-grey-lighten-2"
     justify="center"
     style="height: 500px"
   >
