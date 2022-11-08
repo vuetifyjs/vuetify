@@ -30,7 +30,7 @@ import { computed, watch } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
+import type { EventProp, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
@@ -83,6 +83,10 @@ export const VListItem = genericComponent<new () => {
     title: [String, Number, Boolean],
     value: null,
 
+    // declare event as prop to check it has exist
+    onClick: Function as EventProp,
+    onClickOnce: Function as EventProp,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -92,6 +96,10 @@ export const VListItem = genericComponent<new () => {
     ...makeTagProps(),
     ...makeThemeProps(),
     ...makeVariantProps({ variant: 'text' } as const),
+  },
+
+  emits: {
+    click: (e: Event) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
@@ -143,6 +151,8 @@ export const VListItem = genericComponent<new () => {
     }))
 
     function onClick (e: MouseEvent) {
+      emit('click', e)
+
       if (isGroupActivator || !isClickable.value) return
 
       link.navigate?.(e)

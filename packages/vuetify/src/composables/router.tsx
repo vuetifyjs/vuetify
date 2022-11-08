@@ -19,6 +19,7 @@ import type {
   Router,
   UseLinkOptions,
 } from 'vue-router'
+import type { EventProp } from '@/util'
 
 export function useRoute (): Ref<RouteLocationNormalizedLoaded | undefined> {
   const vm = getCurrentInstance('useRoute')
@@ -37,18 +38,23 @@ export interface LinkProps {
   exact: boolean | undefined
 }
 
+export interface LinkListeners {
+  onClick?: EventProp | undefined
+  onClickOnce?: EventProp | undefined
+}
+
 export interface UseLink extends Omit<Partial<ReturnType<typeof _useLink>>, 'href'> {
   isLink: ComputedRef<boolean>
   isClickable: ComputedRef<boolean>
   href: Ref<string | undefined>
 }
 
-export function useLink (props: LinkProps, attrs: SetupContext['attrs']): UseLink {
+export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['attrs']): UseLink {
   const RouterLink = resolveDynamicComponent('RouterLink') as typeof _RouterLink | string
 
   const isLink = computed(() => !!(props.href || props.to))
   const isClickable = computed(() => {
-    return isLink?.value || !!(attrs.onClick || attrs.onClickOnce)
+    return isLink?.value || !!(attrs.onClick || attrs.onClickOnce || props.onClick || props.onClickOnce)
   })
 
   if (typeof RouterLink === 'string') {
