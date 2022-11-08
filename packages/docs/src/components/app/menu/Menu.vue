@@ -18,23 +18,17 @@
   </v-menu>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Components
   import AppList, { Item } from '@/components/app/list/List.vue'
 
   // Utilities
-  import { defineComponent, PropType } from 'vue'
+  import { PropType } from 'vue'
 
-  export default defineComponent({
-    name: 'AppMenu',
-
-    components: { AppList },
-
-    props: {
-      items: {
-        type: Array as PropType<Item[]>,
-        default: () => ([]),
-      },
+  defineProps({
+    items: {
+      type: Array as PropType<Item[]>,
+      default: () => ([]),
     },
   })
 </script>

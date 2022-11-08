@@ -4,12 +4,8 @@
   </app-sheet>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
-
-    props: {
-      name: String,
-    },
-  }
+<script setup>
+  defineProps({
+    name: String,
+  })
 </script>

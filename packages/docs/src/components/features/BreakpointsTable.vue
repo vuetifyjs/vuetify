@@ -4,7 +4,7 @@
       <caption class="pa-4">{{ t('breakpoints-table.caption') }}</caption>
 
       <thead>
-        <tr class="text-left">
+        <tr class="text-start">
           <th v-for="header in headers" :key="header">{{ t(header) }}</th>
         </tr>
       </thead>
@@ -16,8 +16,9 @@
         >
           <td>
             <v-icon
-              start
               :icon="breakpoint.icon"
+              color="medium-emphasis"
+              start
             />
 
             <span>{{ t(breakpoint.device) }}</span>
@@ -36,7 +37,7 @@
       <tfoot>
         <tr>
           <td
-            class="text-caption text-center text-grey"
+            class="text-caption text-center text-medium-emphasis"
             colspan="4"
           >
             <em>{{ t('breakpoints-table.footer', { size: '* -16px' }) }}</em>
@@ -45,10 +46,10 @@
 
         <tr>
           <td
-            class="text-right text--secondary"
+            class="text-end text-medium-emphasis"
             colspan="4"
           >
-            <small class="d-block mr-n1 mb-n6">
+            <small class="d-block me-n1 mb-n6">
               <a
                 class="text-decoration-none d-inline-flex align-center"
                 href="https://material.io/design/layout/responsive-layout-grid.html"
@@ -56,10 +57,10 @@
                 target="_blank"
               >
                 <v-icon
-                  class="mr-1"
+                  class="me-1"
+                  icon="mdi-material-design"
                   size="small"
                   style="color: inherit;"
-                  icon="mdi-material-design"
                 />
 
                 {{ t('breakpoints-table.spec') }}
@@ -72,8 +73,8 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { useI18n } from 'vue-i18n'
 
   const breakpoints = [
@@ -121,17 +122,5 @@
     'range',
   ]
 
-  export default defineComponent({
-    name: 'BreakpointsTable',
-
-    setup () {
-      const { t } = useI18n()
-
-      return {
-        breakpoints,
-        headers,
-        t,
-      }
-    },
-  })
+  const { t } = useI18n()
 </script>

@@ -143,6 +143,7 @@ export const VSelect = genericComponent<new <
       if (props.readonly) return
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+        e.preventDefault()
         menu.value = true
       }
 
@@ -153,10 +154,13 @@ export const VSelect = genericComponent<new <
       if (e.key === 'ArrowDown') {
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
         listRef.value?.focus('prev')
       } else if (e.key === 'Home') {
+        e.preventDefault()
         listRef.value?.focus('first')
       } else if (e.key === 'End') {
+        e.preventDefault()
         listRef.value?.focus('last')
       }
     }

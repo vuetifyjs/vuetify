@@ -82,7 +82,6 @@ export const VChip = defineComponent({
 
   emits: {
     'click:close': (e: Event) => true,
-    'update:active': (value: boolean) => true,
     'update:modelValue': (value: boolean) => true,
     'group:selected': (val: { value: boolean }) => true,
   },

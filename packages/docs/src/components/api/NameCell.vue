@@ -11,14 +11,10 @@
   </td>
 </template>
 
-<script>
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    props: {
-      section: String,
-      name: String,
-    },
+<script setup>
+  defineProps({
+    section: String,
+    name: String,
   })
 </script>
 

@@ -19,56 +19,41 @@
   </v-container>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { useI18n } from 'vue-i18n'
 
-  export default defineComponent({
-    name: 'ActionBtns',
+  const { t } = useI18n()
 
-    setup () {
-      const { t } = useI18n()
-
-      // data
-      const buttons = [
-        {
-          color: 'primary',
-          flat: true,
-          icon: 'mdi-speedometer',
-          text: 'home.get-started',
-          to: {
-            name: 'getting-started-installation',
-          },
-        },
-        {
-          color: 'primary',
-          icon: 'mdi-vuetify',
-          variant: 'outlined',
-          text: 'home.why-vuetify',
-          to: {
-            name: 'introduction-why-vuetify',
-          },
-        },
-        {
-          color: '#212121',
-          theme: 'dark',
-          flat: true,
-          href: 'https://github.com/vuetifyjs/vuetify',
-          icon: 'mdi-github',
-          rel: 'noopener',
-          target: '_blank',
-          text: 'github',
-        },
-      ] as const
-      const btnWidth = 228
-
-      return {
-        buttons,
-        btnWidth,
-        t,
-      }
+  const buttons = [
+    {
+      color: 'primary',
+      flat: true,
+      icon: 'mdi-speedometer',
+      text: 'home.get-started',
+      to: {
+        name: 'getting-started-installation',
+      },
     },
-
-  })
+    {
+      color: 'primary',
+      icon: 'mdi-vuetify',
+      variant: 'outlined',
+      text: 'home.why-vuetify',
+      to: {
+        name: 'introduction-why-vuetify',
+      },
+    },
+    {
+      color: '#212121',
+      theme: 'dark',
+      flat: true,
+      href: 'https://github.com/vuetifyjs/vuetify',
+      icon: 'mdi-github',
+      rel: 'noopener',
+      target: '_blank',
+      text: 'github',
+    },
+  ]
+  const btnWidth = 228
 </script>

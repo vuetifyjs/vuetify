@@ -49,7 +49,7 @@
         max-width="250"
       >
         <div class="d-flex align-center justify-space-between">
-          <div class="ml-4">
+          <div class="ms-4">
             <app-headline
               v-show="tune"
               path="options"
@@ -61,7 +61,7 @@
               <template #activator="{ props: activatorProps }">
                 <v-btn
                   :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
-                  class="mr-1 text-medium-emphasis"
+                  class="me-1 text-medium-emphasis"
                   density="comfortable"
                   v-bind="activatorProps"
                   @click="show = !show"
@@ -91,9 +91,10 @@
       <v-navigation-drawer
         v-if="display.smAndUp.value && $slots.configuration"
         v-model="tune"
-        permanent
-        name="tune"
         location="right"
+        name="tune"
+        permanent
+        touchless
         width="250"
       >
         <v-list>

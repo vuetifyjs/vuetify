@@ -1,34 +1,27 @@
 <template>
-  <component :is="Component" v-bind="$attrs" />
+  <component :is="Component" />
 </template>
 
-<script lang="ts">
-  import { defineComponent, markRaw, onBeforeMount, ref } from 'vue'
+<script setup>
+  // Utilities
+  import { markRaw, onBeforeMount, ref } from 'vue'
 
-  const getComponent = (folder: string, component: string) => {
+  const getComponent = (folder, component) => {
     return import(`../../src/components/${folder}/${component}.vue`)
   }
 
-  export default defineComponent({
-    inheritAttrs: false,
-
-    props: {
-      path: {
-        type: String,
-        required: true,
-      },
+  const props = defineProps({
+    path: {
+      type: String,
+      required: true,
     },
+  })
 
-    setup (props) {
-      const Component = ref()
+  const Component = ref()
 
-      onBeforeMount(async () => {
-        const [folder, component] = props.path.split('/')
-        const template = await getComponent(folder, component)
-        Component.value = markRaw(template.default)
-      })
-
-      return { Component }
-    },
+  onBeforeMount(async () => {
+    const [folder, component] = props.path.split('/')
+    const template = await getComponent(folder, component)
+    Component.value = markRaw(template.default)
   })
 </script>

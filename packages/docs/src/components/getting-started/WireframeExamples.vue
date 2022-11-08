@@ -27,24 +27,18 @@
   </v-row>
 </template>
 
-<script>
+<script setup>
   // Utilities
   import kebabCase from 'lodash/kebabCase'
 
-  export default {
-    name: 'WireframeExamples',
-
-    data: () => ({
-      wireframes: [
-        'Baseline',
-        'Extended toolbar',
-        'System bar',
-        'Inbox',
-        'Constrained',
-        'Side navigation',
-        'Three column',
-        'Discord',
-      ].map(wireframe => ([wireframe, kebabCase(wireframe)])),
-    }),
-  }
+  const wireframes = [
+    'Baseline',
+    'Extended toolbar',
+    'System bar',
+    'Inbox',
+    'Constrained',
+    'Side navigation',
+    'Three column',
+    'Discord',
+  ].map(wireframe => ([wireframe, kebabCase(wireframe)]))
 </script>
