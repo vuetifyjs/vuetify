@@ -181,7 +181,11 @@ export const VList = genericComponent<new <T>() => {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
+      } else {
+        return
       }
+
+      e.preventDefault()
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
