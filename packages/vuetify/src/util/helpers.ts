@@ -81,7 +81,13 @@ export function getPropertyFromItem (
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback
+  if (item !== Object(item)) {
+    if (typeof property !== 'function') return fallback
+
+    const value = property(item, fallback)
+
+    return typeof value === 'undefined' ? fallback : value
+  }
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
