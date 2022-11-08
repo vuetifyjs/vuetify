@@ -61,7 +61,11 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         const componentDefaults = defaults.value[props._as ?? options.name!]
 
         if (componentDefaults) {
-          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith('V'))
+          const subComponents = Object.entries(componentDefaults).filter(([key]) => {
+            const char = key.charAt(0)
+
+            return char.toUpperCase() === char
+          })
           if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
         }
 
