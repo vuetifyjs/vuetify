@@ -104,7 +104,7 @@ createApp(App).use(vuetify).mount('#app')
 
 This will include all components and directives regardless of whether or not you are using them. If you instead only want to include used components, have a look at the [Vite](https://npmjs.com/package/vite-plugin-vuetify) or [Webpack](https://npmjs.com/package/webpack-plugin-vuetify) plugins, depending on your setup. The plugins also makes it possible to customize SCSS variables.
 
-Lastly, do not forget to install [icons](https://vuetifyjs.com/en/features/icon-fonts/).
+Lastly, do not forget to install [icons](/features/icon-fonts/).
 
 ## CDN
 
