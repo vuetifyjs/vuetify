@@ -94,7 +94,7 @@ export const VBottomNavigation = defineComponent({
           class={[
             'v-bottom-navigation',
             {
-              'v-bottom-navigation--active': isActive.value,
+              'v-bottom-navigation--active': isActive.value || !isNaN(isActive.value),
               'v-bottom-navigation--grow': props.grow,
               'v-bottom-navigation--shift': props.mode === 'shift',
             },
@@ -110,7 +110,7 @@ export const VBottomNavigation = defineComponent({
             layoutItemStyles.value,
             {
               height: convertToUnit(height.value),
-              transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
+              transform: `translateY(${convertToUnit(!isActive.value && isNaN(isActive.value) ? 100 : 0, '%')})`,
             },
           ]}
         >
