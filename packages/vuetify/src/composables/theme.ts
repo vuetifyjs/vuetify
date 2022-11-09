@@ -18,7 +18,7 @@ import {
   mergeDeep,
   parseColor,
   propsFactory,
-  RGBAtoHex,
+  RGBtoHex,
 } from '@/util'
 import { APCAcontrast } from '@/util/color/APCA'
 
@@ -224,7 +224,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
           for (const variation of (['lighten', 'darken'] as const)) {
             const fn = variation === 'lighten' ? lighten : darken
             for (const amount of createRange(parsedOptions.variations[variation], 1)) {
-              theme.colors[`${name}-${variation}-${amount}`] = RGBAtoHex(fn(parseColor(color), amount))
+              theme.colors[`${name}-${variation}-${amount}`] = RGBtoHex(fn(parseColor(color), amount))
             }
           }
         }

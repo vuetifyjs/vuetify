@@ -44,7 +44,7 @@ export function parseColor (color: Color): RGB {
       consoleWarn(`'${color}' is not a valid hex(a) color`)
     }
 
-    return HexToRGBA(hex as Hex)
+    return HexToRGB(hex as Hex)
   } else {
     throw new TypeError(`Colors can only be numbers or strings, recieved ${color == null ? color : color.constructor.name} instead`)
   }
@@ -77,7 +77,7 @@ export function classToHex (
 }
 
 /** Converts HSVA to RGBA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV */
-export function HSVAtoRGBA (hsva: HSV): RGB {
+export function HSVtoRGB (hsva: HSV): RGB {
   const { h, s, v, a } = hsva
   const f = (n: number) => {
     const k = (n + (h / 60)) % 6
@@ -90,7 +90,7 @@ export function HSVAtoRGBA (hsva: HSV): RGB {
 }
 
 /** Converts RGBA to HSVA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV */
-export function RGBAtoHSVA (rgba: RGB): HSV {
+export function RGBtoHSV (rgba: RGB): HSV {
   if (!rgba) return { h: 0, s: 1, v: 1, a: 1 }
 
   const r = rgba.r / 255
@@ -119,7 +119,7 @@ export function RGBAtoHSVA (rgba: RGB): HSV {
   return { h: hsv[0], s: hsv[1], v: hsv[2], a: rgba.a }
 }
 
-export function HSVAtoHSLA (hsva: HSV): HSL {
+export function HSVtoHSL (hsva: HSV): HSL {
   const { h, s, v, a } = hsva
 
   const l = v - (v * s / 2)
@@ -129,7 +129,7 @@ export function HSVAtoHSLA (hsva: HSV): HSL {
   return { h, s: sprime, l, a }
 }
 
-export function HSLAtoHSVA (hsl: HSL): HSV {
+export function HSLtoHSV (hsl: HSL): HSV {
   const { h, s, l, a } = hsl
 
   const v = l + s * Math.min(l, 1 - l)
@@ -139,12 +139,12 @@ export function HSLAtoHSVA (hsl: HSL): HSV {
   return { h, s: sprime, v, a }
 }
 
-export function RGBAtoCSS (rgba: RGB): string {
+export function RGBtoCSS (rgba: RGB): string {
   return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
 }
 
-export function HSVAtoCSS (hsva: HSV): string {
-  return RGBAtoCSS(HSVAtoRGBA(hsva))
+export function HSVtoCSS (hsva: HSV): string {
+  return RGBtoCSS(HSVtoRGB(hsva))
 }
 
 function toHex (v: number) {
@@ -152,7 +152,7 @@ function toHex (v: number) {
   return ('00'.substr(0, 2 - h.length) + h).toUpperCase()
 }
 
-export function RGBAtoHex ({ r, g, b, a }: RGB): Hex {
+export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
   return `#${[
     toHex(r),
     toHex(g),
@@ -161,20 +161,20 @@ export function RGBAtoHex ({ r, g, b, a }: RGB): Hex {
   ].join('')}` as Hex
 }
 
-export function HexToRGBA (hex: Hex): RGB {
+export function HexToRGB (hex: Hex): RGB {
   let [r, g, b, a] = chunk(hex, 2).map((c: string) => parseInt(c, 16))
   a = a === undefined ? a : Math.round((a / 255) * 100) / 100
 
   return { r, g, b, a }
 }
 
-export function HexToHSVA (hex: Hex): HSV {
-  const rgb = HexToRGBA(hex)
-  return RGBAtoHSVA(rgb)
+export function HexToHSV (hex: Hex): HSV {
+  const rgb = HexToRGB(hex)
+  return RGBtoHSV(rgb)
 }
 
-export function HSVAtoHex (hsva: HSV): Hex {
-  return RGBAtoHex(HSVAtoRGBA(hsva))
+export function HSVtoHex (hsva: HSV): Hex {
+  return RGBtoHex(HSVtoRGB(hsva))
 }
 
 export function parseHex (hex: string): Hex {
@@ -205,7 +205,7 @@ export function parseGradient (
   return gradient.replace(/([a-z]+(\s[a-z]+-[1-5])?)(?=$|,)/gi, x => {
     return classToHex(x, colors, currentTheme) || x
   }).replace(/(rgba\()#[0-9a-f]+(?=,)/gi, x => {
-    return 'rgba(' + Object.values(HexToRGBA(parseHex(x.replace(/rgba\(/, '')))).slice(0, 3).join(',')
+    return 'rgba(' + Object.values(HexToRGB(parseHex(x.replace(/rgba\(/, '')))).slice(0, 3).join(',')
   })
 }
 

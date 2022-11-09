@@ -5,7 +5,7 @@ import './VColorPickerPreview.sass'
 import { VSlider } from '@/components/VSlider'
 
 // Utilities
-import { defineComponent, HSVAtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
@@ -38,7 +38,7 @@ export const VColorPickerPreview = defineComponent({
         ]}
       >
         <div class="v-color-picker-preview__dot">
-          <div style={{ background: HSVAtoCSS(props.color ?? nullColor) }} />
+          <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
         </div>
 
         <div class="v-color-picker-preview__sliders">

@@ -1,12 +1,12 @@
 // Utilities
 import {
-  HexToHSVA,
-  HSLAtoHSVA,
-  HSVAtoHex,
-  HSVAtoHSLA,
-  HSVAtoRGBA,
+  HexToHSV,
+  HSLtoHSV,
+  HSVtoHex,
+  HSVtoHSL,
+  HSVtoRGB,
   parseHex,
-  RGBAtoHSVA,
+  RGBtoHSV,
 } from '@/util/colorUtils'
 
 // Types
@@ -24,14 +24,14 @@ export function parseColor (color: any): HSV | null {
   if (typeof color === 'string') {
     const hex = parseHex(color)
 
-    hsva = HexToHSVA(hex)
+    hsva = HexToHSV(hex)
   }
 
   if (typeof color === 'object') {
     if (has(color, ['r', 'g', 'b'])) {
-      hsva = RGBAtoHSVA(color)
+      hsva = RGBtoHSV(color)
     } else if (has(color, ['h', 's', 'l'])) {
-      hsva = HSLAtoHSVA(color)
+      hsva = HSLtoHSV(color)
     } else if (has(color, ['h', 's', 'v'])) {
       hsva = color
     }
@@ -52,7 +52,7 @@ function stripAlpha (color: any, stripAlpha: boolean) {
 
 export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
-    const hex = HSVAtoHex(color)
+    const hex = HSVtoHex(color)
 
     if (color.a === 1) return hex.slice(0, 7)
     else return hex
@@ -61,8 +61,8 @@ export function extractColor (color: HSV, input: any) {
   if (typeof input === 'object') {
     let converted
 
-    if (has(input, ['r', 'g', 'b'])) converted = HSVAtoRGBA(color)
-    else if (has(input, ['h', 's', 'l'])) converted = HSVAtoHSLA(color)
+    if (has(input, ['r', 'g', 'b'])) converted = HSVtoRGB(color)
+    else if (has(input, ['h', 's', 'l'])) converted = HSVtoHSL(color)
     else if (has(input, ['h', 's', 'v'])) converted = color
 
     return stripAlpha(converted, !has(input, ['a']))
@@ -133,8 +133,8 @@ const rgba: ColorPickerMode = {
       getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
     },
   ],
-  to: HSVAtoRGBA,
-  from: RGBAtoHSVA,
+  to: HSVtoRGB,
+  from: RGBtoHSV,
 }
 
 const rgb = {
@@ -177,8 +177,8 @@ const hsla: ColorPickerMode = {
       getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
     },
   ],
-  to: HSVAtoHSLA,
-  from: HSLAtoHSVA,
+  to: HSVtoHSL,
+  from: HSLtoHSV,
 }
 
 const hsl = {
@@ -197,8 +197,8 @@ const hexa: ColorPickerMode = {
       getColor: (c: string, v: string) => v,
     },
   ],
-  to: HSVAtoHex,
-  from: HexToHSVA,
+  to: HSVtoHex,
+  from: HexToHSV,
 }
 
 const hex = {
