@@ -27,9 +27,9 @@
   const items = computed(() => ([
     { subheader: t('professional-support') },
     {
-      title: 'direct-support',
+      title: 'enterprise',
       to: {
-        name: 'introduction-support',
+        name: 'introduction-enterprise',
       },
     },
     { divider: true },
