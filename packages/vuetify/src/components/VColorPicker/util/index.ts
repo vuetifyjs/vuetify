@@ -10,20 +10,16 @@ import {
 } from '@/util/colorUtils'
 
 // Types
-import type {
-  HSLA,
-  HSVA,
-  RGBA,
-} from '@/util/colorUtils'
+import type { HSL, HSV, RGB } from '@/util/colorUtils'
 
 function has (obj: object, key: string[]) {
   return key.every(k => obj.hasOwnProperty(k))
 }
 
-export function parseColor (color: any): HSVA | null {
+export function parseColor (color: any): HSV | null {
   if (!color) return null
 
-  let hsva: HSVA | null = null
+  let hsva: HSV | null = null
 
   if (typeof color === 'string') {
     const hex = parseHex(color)
@@ -54,7 +50,7 @@ function stripAlpha (color: any, stripAlpha: boolean) {
   return color
 }
 
-export function extractColor (color: HSVA, input: any) {
+export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
     const hex = HSVAtoHex(color)
 
@@ -98,8 +94,8 @@ export type ColorPickerMode = {
     getValue: (color: any) => number | string
     getColor: (color: any, v: string) => any
   }[]
-  from: (color: any) => HSVA
-  to: (color: HSVA) => any
+  from: (color: any) => HSV
+  to: (color: HSV) => any
 }
 
 const rgba: ColorPickerMode = {
@@ -112,29 +108,29 @@ const rgba: ColorPickerMode = {
       label: 'R',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.r),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, r: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.r),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, r: Number(v) }),
     },
     {
       label: 'G',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.g),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, g: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.g),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, g: Number(v) }),
     },
     {
       label: 'B',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.b),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, b: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.b),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, b: Number(v) }),
     },
     {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: (c: RGBA) => Math.round(c.a * 100) / 100,
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, a: Number(v) }),
+      getValue: ({ a }: RGB) => a ? Math.round(a * 100) / 100 : 1,
+      getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
     },
   ],
   to: HSVAtoRGBA,
@@ -156,29 +152,29 @@ const hsla: ColorPickerMode = {
       label: 'H',
       max: 360,
       step: 1,
-      getValue: (c: HSLA) => Math.round(c.h),
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, h: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.h),
+      getColor: (c: HSL, v: string): HSL => ({ ...c, h: Number(v) }),
     },
     {
       label: 'S',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.s * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, s: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.s * 100) / 100,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, s: Number(v) }),
     },
     {
       label: 'L',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.l * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, l: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.l * 100) / 100,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, l: Number(v) }),
     },
     {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.a * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, a: Number(v) }),
+      getValue: ({ a }: HSL) => a ? Math.round(a * 100) / 100 : 1,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
     },
   ],
   to: HSVAtoHSLA,

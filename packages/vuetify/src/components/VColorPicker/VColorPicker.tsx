@@ -21,7 +21,7 @@ import { onMounted, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
@@ -77,7 +77,7 @@ export const VColorPicker = defineComponent({
 
   setup (props) {
     const mode = useProxiedModel(props, 'mode')
-    const lastPickedColor = ref<HSVA | null>(null)
+    const lastPickedColor = ref<HSV | null>(null)
     const currentColor = useProxiedModel(
       props,
       'modelValue',
@@ -101,7 +101,7 @@ export const VColorPicker = defineComponent({
       }
     )
 
-    const updateColor = (hsva: HSVA) => {
+    const updateColor = (hsva: HSV) => {
       currentColor.value = hsva
       lastPickedColor.value = hsva
     }
