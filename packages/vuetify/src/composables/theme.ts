@@ -15,8 +15,10 @@ import {
   getLuma,
   IN_BROWSER,
   lighten,
-  mergeDeep, parseColor,
-  propsFactory, RGBAtoHex,
+  mergeDeep,
+  parseColor,
+  propsFactory,
+  RGBAtoHex,
 } from '@/util'
 import { APCAcontrast } from '@/util/color/APCA'
 

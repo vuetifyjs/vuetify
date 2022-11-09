@@ -10,21 +10,21 @@ import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
   props: {
     color: {
-      type: Object as PropType<HSVA | null>,
+      type: Object as PropType<HSV | null>,
     },
     disabled: Boolean,
     hideAlpha: Boolean,
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
   },
 
   setup (props, { emit }) {

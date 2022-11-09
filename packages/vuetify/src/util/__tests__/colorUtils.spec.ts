@@ -3,7 +3,8 @@ import {
   classToHex,
   getContrast,
   getLuma,
-  isCssColor, parseColor,
+  isCssColor,
+  parseColor,
   parseGradient,
 } from '../colorUtils'
 import * as transformSRGB from '../color/transformSRGB'
