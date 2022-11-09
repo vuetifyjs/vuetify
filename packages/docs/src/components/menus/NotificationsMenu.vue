@@ -195,13 +195,13 @@
     async mounted () {
       if (!bucket.available) return
 
-      const { objects: notifications } = await bucket.getObjects({
+      const { objects: notifications } = await bucket.objects.find({
         type: 'notifications',
-        props: 'created_at,metadata,slug,title',
-        status: 'published',
-        limit: 10,
-        sort: '-created_at',
       })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(10)
 
       /* eslint-disable-next-line camelcase */
       this.all = (notifications || []).filter(({ created_at }) => {

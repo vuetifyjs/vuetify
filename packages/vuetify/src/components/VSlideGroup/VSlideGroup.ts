@@ -127,7 +127,7 @@ export const BaseSlideGroup = mixins<options &
     },
     showArrows: {
       type: [Boolean, String],
-      validator: v => (
+      validator: (v: any) => (
         typeof v === 'boolean' || [
           'always',
           'desktop',
@@ -138,7 +138,6 @@ export const BaseSlideGroup = mixins<options &
   },
 
   data: () => ({
-    internalItemsLength: 0,
     isOverflowing: false,
     resizeTimeout: 0,
     startX: 0,
@@ -231,13 +230,26 @@ export const BaseSlideGroup = mixins<options &
     },
   },
 
-  beforeUpdate () {
-    this.internalItemsLength = (this.$children || []).length
-  },
-
-  updated () {
-    if (this.internalItemsLength === (this.$children || []).length) return
-    this.setWidths()
+  mounted () {
+    if (typeof ResizeObserver !== 'undefined') {
+      const obs = new ResizeObserver(() => {
+        this.onResize()
+      })
+      obs.observe(this.$el)
+      obs.observe(this.$refs.content)
+      this.$on('hook:destroyed', () => {
+        obs.disconnect()
+      })
+    } else {
+      let itemsLength = 0
+      this.$on('hook:beforeUpdate', () => {
+        itemsLength = (this.$refs.content?.children || []).length
+      })
+      this.$on('hook:updated', () => {
+        if (itemsLength === (this.$refs.content?.children || []).length) return
+        this.setWidths()
+      })
+    }
   },
 
   methods: {

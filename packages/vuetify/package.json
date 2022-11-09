@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "2.6.6",
+  "version": "2.6.12",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -70,6 +70,7 @@
     "@fortawesome/vue-fontawesome": "^0.1.10",
     "@types/jest": "^26.0.14",
     "@types/node": "^14.11.10",
+    "@types/resize-observer-browser": "^0.1.7",
     "@vue/test-utils": "1.0.0-beta.29",
     "autoprefixer": "^9.6.1",
     "babel-loader": "^8.0.6",

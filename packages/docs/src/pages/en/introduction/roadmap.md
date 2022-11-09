@@ -22,7 +22,7 @@ The following releases are currently under development:
 
 ### v3.0 (Titan)
 
-- **Target Release:** June 2022
+- **Target Release:** Soon ™
 - **Alpha:** Complete
 - **Beta:** [Live](https://next.vuetifyjs.com/)
 - **Release Candidate:** [Pending](https://github.com/vuetifyjs/vuetify/issues/14984)

@@ -17,13 +17,13 @@ Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No
 
 Thank you to our special sponsor:
 
-<sponsor height="70" slug="appeggio" />
+<sponsor height="70" slug="teamwork" />
 
 <br>
 <br>
 <br>
 
-### Project Sponsors
+## Project Sponsors
 
 The continued development and maintenance of Vuetify
 <br>

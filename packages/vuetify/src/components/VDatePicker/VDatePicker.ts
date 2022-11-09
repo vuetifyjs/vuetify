@@ -231,7 +231,7 @@ export default mixins(
         year: { year: 'numeric', timeZone: 'UTC' },
         month: { month: 'long', timeZone: 'UTC' },
         date: { weekday: 'short', month: 'short', day: 'numeric', timeZone: 'UTC' },
-      }
+      } as const
 
       const titleDateFormatter = createNativeLocaleFormatter(this.currentLocale, titleFormats[this.type], {
         start: 0,
