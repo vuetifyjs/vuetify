@@ -139,8 +139,8 @@ export function HSLtoHSV (hsl: HSL): HSV {
   return { h, s: sprime, v, a }
 }
 
-export function RGBtoCSS (rgba: RGB): string {
-  return `rgba(${rgba.r}, ${rgba.g}, ${rgba.b}, ${rgba.a})`
+export function RGBtoCSS ({ r, g, b, a }: RGB): string {
+  return a === undefined ? `rgb(${r}, ${g}, ${b})` : `rgba(${r}, ${g}, ${b}, ${a})`
 }
 
 export function HSVtoCSS (hsva: HSV): string {
@@ -157,7 +157,7 @@ export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
     toHex(r),
     toHex(g),
     toHex(b),
-    a ? toHex(Math.round(a * 255)) : 'FF',
+    a !== undefined ? toHex(Math.round(a * 255)) : 'FF',
   ].join('')}` as Hex
 }
 
