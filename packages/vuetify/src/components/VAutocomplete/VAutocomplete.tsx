@@ -20,7 +20,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
@@ -66,7 +67,7 @@ export const VAutocomplete = genericComponent<new <
     multiple?: Multiple
     modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+  } & SlotsToProps<
     Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
       item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
       chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
@@ -86,6 +87,9 @@ export const VAutocomplete = genericComponent<new <
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps(),
+    ...omit(makeVTextFieldProps({
+      modelValue: null,
+    }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: false }),
   },
 
@@ -234,10 +238,12 @@ export const VAutocomplete = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
+      const [textFieldProps] = filterVTextFieldProps(props)
 
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }

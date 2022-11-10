@@ -2,10 +2,11 @@
 import './VSelect.sass'
 
 // Components
-import { VDialogTransition } from '@/components/transitions'
+import { filterVTextFieldProps, makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -20,7 +21,7 @@ import { IconValue } from '@/composables/icons'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -43,17 +44,15 @@ export const makeSelectProps = propsFactory({
   menuProps: {
     type: Object as PropType<VMenu['$props']>,
   },
-  modelValue: null,
   multiple: Boolean,
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
-  readonly: Boolean,
 
   ...makeItemsProps({ itemChildren: false }),
-}, 'select')
+}, 'v-select')
 
 type Primitive = string | number | boolean | symbol
 
@@ -78,7 +77,7 @@ export const VSelect = genericComponent<new <
     multiple?: Multiple
     modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+  } & SlotsToProps<
     Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
       item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
       chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
@@ -93,6 +92,9 @@ export const VSelect = genericComponent<new <
 
   props: {
     ...makeSelectProps(),
+    ...omit(makeVTextFieldProps({
+      modelValue: null,
+    }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: { component: VDialogTransition } }),
   },
 
@@ -193,10 +195,12 @@ export const VSelect = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
+      const [textFieldProps] = filterVTextFieldProps(props)
 
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }

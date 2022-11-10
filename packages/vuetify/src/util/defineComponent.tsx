@@ -47,7 +47,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   if (options._setup) {
     options.props = options.props ?? {}
 
-    options.props = propsFactory(options.props, options.name)()
+    options.props = propsFactory(options.props, toKebabCase(options.name))()
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {

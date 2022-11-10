@@ -29,7 +29,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
-}, 'VExpansionPanelTitle')
+}, 'v-expansion-panel-title')
 
 export const VExpansionPanelTitle = defineComponent({
   name: 'VExpansionPanelTitle',

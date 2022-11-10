@@ -21,7 +21,8 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +69,7 @@ export const VCombobox = genericComponent<new <
     multiple?: Multiple
     modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+  } & SlotsToProps<
     Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
       item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
       chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
@@ -88,6 +89,9 @@ export const VCombobox = genericComponent<new <
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
+    ...omit(makeVTextFieldProps({
+      modelValue: null,
+    }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: false }),
   },
 
@@ -314,10 +318,12 @@ export const VCombobox = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
+      const [textFieldProps] = filterVTextFieldProps(props)
 
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
