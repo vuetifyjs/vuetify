@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 
 // Types
 import type {
@@ -616,6 +616,11 @@ export const isOn = (key: string) => onRE.test(key)
 
 export type EventProp<T = (...args: any[]) => any> = T | T[]
 export const EventProp = [Function, Array] as PropType<EventProp>
+
+export function hasEvent (props: Record<string, any>, name: string) {
+  name = 'on' + capitalize(name)
+  return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
+}
 
 export function callEvent (handler: EventProp | undefined, ...args: any[]) {
   if (Array.isArray(handler)) {

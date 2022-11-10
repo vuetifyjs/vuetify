@@ -27,7 +27,7 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { EventProp, genericComponent, useRender } from '@/util'
 
 // Types
 import type { SlotsToProps } from '@/util'
@@ -83,6 +83,9 @@ export const VListItem = genericComponent<new () => {
     title: [String, Number, Boolean],
     value: null,
 
+    onClick: EventProp,
+    onClickOnce: EventProp,
+
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -95,7 +98,7 @@ export const VListItem = genericComponent<new () => {
   },
 
   emits: {
-    click: (e: Event) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
