@@ -12,8 +12,6 @@
       <default-drawer-prepend />
     </template>
 
-    <default-become-a-sponsor />
-
     <keep-alive>
       <default-list
         :key="key"
@@ -28,7 +26,6 @@
 
 <script>
   // Components
-  import DefaultBecomeASponsor from './BecomeASponsor'
   import DefaultDrawerPrepend from './DrawerPrepend'
   import DefaultList from './List'
 
@@ -42,7 +39,6 @@
     name: 'DefaultDrawer',
 
     components: {
-      DefaultBecomeASponsor,
       DefaultDrawerPrepend,
       DefaultList,
     },
