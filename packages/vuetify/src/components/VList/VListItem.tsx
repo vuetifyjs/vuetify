@@ -27,10 +27,10 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { EventProp, genericComponent, useRender } from '@/util'
 
 // Types
-import type { EventProp, SlotsToProps } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
@@ -83,9 +83,8 @@ export const VListItem = genericComponent<new () => {
     title: [String, Number, Boolean],
     value: null,
 
-    // declare event as prop to check it has exist
-    onClick: Function as EventProp,
-    onClickOnce: Function as EventProp,
+    onClick: EventProp,
+    onClickOnce: EventProp,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
