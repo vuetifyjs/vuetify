@@ -61,7 +61,6 @@
           <v-col
             v-for="sponsor of sponsors"
             :key="sponsor.slug"
-            :cols="sponsor.metadata.tier === -1 ? 12 : 6"
             class="d-inline-flex"
           >
             <sponsor-card
@@ -71,7 +70,7 @@
             />
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" class="mt-3">
             <sponsor-link block size="large" />
           </v-col>
 
@@ -218,7 +217,7 @@
 
   const sponsors = computed(() => (
     sponsorStore.sponsors
-      .filter(sponsor => sponsor.metadata.tier <= 2)
+      .filter(sponsor => sponsor.metadata.tier <= 1)
       .sort((a, b) => {
         const aTier = a.metadata.tier
         const bTier = b.metadata.tier
