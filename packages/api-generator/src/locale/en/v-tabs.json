@@ -29,7 +29,10 @@
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
     "end": "Aligns tabs to the end",
     "modelValue": "The v-model of the component.",
-    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`"
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`",
+    "alignTabs": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
+    "stacked": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
+    "mandatory": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))"
   },
   "events": {
     "update:modelValue": "Emitted when tab is changed by user interaction."

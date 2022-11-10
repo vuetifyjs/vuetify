@@ -15,7 +15,8 @@
     "showArrows": "Displays arrows for next/previous navigation.",
     "showArrowsOnHover": "Displays navigation arrows only when the carousel is hovered over.",
     "verticalDelimiters": "Displays carousel delimiters vertically.",
-    "modelValue": "The v-model for the carousel."
+    "modelValue": "The v-model for the carousel.",
+    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-carousel.json))"
   },
   "events": {
     "update:modelValue": "Emitted when the component value is changed by user interaction"
