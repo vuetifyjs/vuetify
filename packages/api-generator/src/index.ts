@@ -1,6 +1,7 @@
 import fs from 'fs/promises'
 import path from 'path'
 import { components } from 'vuetify/dist/vuetify.js'
+import { components as componentsInfo } from 'vuetify/dist/json/importMap.json'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
@@ -39,7 +40,10 @@ const run = async () => {
 
   await mkdirp('./src/tmp')
   for (const component in components) {
-    await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
+    await fs.writeFile(`./src/tmp/${component}.d.ts`,
+      template.replaceAll('__component__', component)
+        .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
+    )
   }
 
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
