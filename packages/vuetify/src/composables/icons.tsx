@@ -187,8 +187,8 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
     if (typeof icon === 'string') {
       icon = icon.trim()
 
-      if (icon.includes('$')) {
-        icon = icons.aliases?.[icon.slice(icon.indexOf('$') + 1)]
+      if (icon.startsWith('$')) {
+        icon = icons.aliases?.[icon.slice(1)]
       }
     }
 
