@@ -1,5 +1,5 @@
 import type { AllowedComponentProps, ComponentPublicInstance, FunctionalComponent, RenderFunction, VNodeChild, VNodeProps } from 'vue'
-import type { __component__ } from '@/__name__'
+import type { __component__ } from '@/components'
 
 type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '$children' | `v-slot:${string}`
 type Event = `on${string}`

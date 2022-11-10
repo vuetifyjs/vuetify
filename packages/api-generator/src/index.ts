@@ -14,6 +14,12 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 
+type TranslationData = {
+  [type in 'props' | 'events' | 'slots' | 'exposed']?: {
+    [name in string]?: string
+  }
+}
+
 const yar = yargs(process.argv.slice(2))
   .option('components', {
     type: 'array',
@@ -22,6 +28,9 @@ const yar = yargs(process.argv.slice(2))
     type: 'boolean',
   })
   .option('skip-composables', {
+    type: 'boolean',
+  })
+  .option('missing-descriptions', {
     type: 'boolean',
   })
 
@@ -40,10 +49,11 @@ const run = async () => {
 
   await mkdirp('./src/tmp')
   for (const component in components) {
-    await fs.writeFile(`./src/tmp/${component}.d.ts`,
-      template.replaceAll('__component__', component)
-        .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
-    )
+    await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
+    // await fs.writeFile(`./src/tmp/${component}.d.ts`,
+    //   template.replaceAll('__component__', component)
+    //     .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
+    // )
   }
 
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
@@ -62,6 +72,67 @@ const run = async () => {
       )
     }).filter(Boolean)
   )
+
+  // Missing descriptions
+  if (argv.missingDescriptions) {
+    const translations: { [filename in string]?: TranslationData } = {}
+
+    async function readData (filename: string): Promise<TranslationData> {
+      if (!(filename in translations)) {
+        try {
+          const data = JSON.parse(await fs.readFile(filename, 'utf-8'))
+
+          for (const type of ['props', 'events', 'slots', 'exposed']) {
+            for (const item in data[type] ?? {}) {
+              if (data[type][item].startsWith('MISSING DESCRIPTION')) {
+                delete data[type][item]
+              }
+            }
+          }
+
+          translations[filename] = data
+        } catch (e) {
+          translations[filename] = {}
+        }
+      }
+
+      return translations[filename]
+    }
+
+    for (const index in componentData) {
+      const component = componentData[index]
+
+      for (const type of ['props', 'events', 'slots', 'exposed']) {
+        for (const name in component[type]) {
+          if (type === 'props' && !component[type][name].source) {
+            console.warn(`Missing source for ${component.kebabName} ${type}: ${name}`)
+          }
+
+          const filename = type === 'props'
+            ? kebabCase(component[type][name].source ?? componentData[index].componentName)
+            : component.kebabName
+
+          for (const locale of locales) {
+            const sourceData = await readData(`./src/locale/${locale}/${filename}.json`)
+            const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/${locale}/${filename}.json`
+
+            sourceData[type] ??= {}
+            sourceData[type][name] ??= `MISSING DESCRIPTION ([edit in github](${githubUrl}))`
+          }
+        }
+      }
+    }
+
+    for (const filename in translations) {
+      try {
+        await fs.writeFile(filename, JSON.stringify(translations[filename], null, 2) + '\n')
+      } catch (e: unknown) {
+        console.error(filename, e)
+      }
+    }
+
+    process.exit()
+  }
 
   // Composables
   if (!argv.skipComposables) {
