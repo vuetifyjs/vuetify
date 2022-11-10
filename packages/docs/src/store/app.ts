@@ -7,6 +7,7 @@ import data from '@/data/nav-alpha.json'
 // Types
 export type RootState = {
   drawer: boolean | null
+  toc: boolean | null
 }
 
 type NavItem = {
@@ -20,6 +21,7 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     drawer: null,
+    toc: null,
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,

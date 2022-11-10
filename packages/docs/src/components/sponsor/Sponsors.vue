@@ -28,7 +28,7 @@
   import { useSponsorsStore } from '@/store/sponsors'
 
   // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  import { computed } from 'vue'
 
   const props = defineProps({
     tier: {
@@ -38,8 +38,6 @@
   })
 
   const sponsorStore = useSponsorsStore()
-
-  onBeforeMount(sponsorStore.load)
 
   const sponsors = computed(() => {
     return sponsorStore.byTier[props.tier]
