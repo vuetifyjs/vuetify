@@ -1,5 +1,5 @@
 // Utilities
-import { getCurrentInstance, IN_BROWSER, propsFactory } from '@/util'
+import { getCurrentInstance, hasEvent, IN_BROWSER, propsFactory } from '@/util'
 import {
   computed,
   nextTick,
@@ -54,7 +54,7 @@ export function useLink (props: LinkProps & LinkListeners, attrs: SetupContext['
 
   const isLink = computed(() => !!(props.href || props.to))
   const isClickable = computed(() => {
-    return isLink?.value || !!(attrs.onClick || attrs.onClickOnce || props.onClick || props.onClickOnce)
+    return isLink?.value || hasEvent(attrs, 'click') || hasEvent(props, 'click')
   })
 
   if (typeof RouterLink === 'string') {

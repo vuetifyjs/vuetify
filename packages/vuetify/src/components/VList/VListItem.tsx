@@ -98,7 +98,7 @@ export const VListItem = genericComponent<new () => {
   },
 
   emits: {
-    click: (e: Event) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
