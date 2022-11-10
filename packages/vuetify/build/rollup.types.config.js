@@ -40,7 +40,12 @@ function createTypesConfig (input, output, renderChunk, filter) {
             { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../types-temp/$1') },
           ]
         }),
-        renderChunk ? { renderChunk } : undefined,
+        {
+          async renderChunk (code) {
+            if (renderChunk) code = await renderChunk(code)
+            return code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+          }
+        },
       ],
     }
   })
