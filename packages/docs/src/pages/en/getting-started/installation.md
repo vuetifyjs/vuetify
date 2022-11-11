@@ -11,15 +11,16 @@ related:
 ---
 
 <script setup>
-  import { ref } from 'vue'
   import { version } from 'vuetify'
-
-  const tab = ref('yarn')
 </script>
 
 # Vuetify 3
 
-Welcome to the Vuetify 3 release. To get started, select an installation method below or review some of the most [Frequently Asked Questions](#frequently-asked-questions)
+Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
+
+![Installation Entry](https://cdn.vuetifyjs.com/docs/images/entry/installation-entry.png)
+
+----
 
 ## Installation
 
