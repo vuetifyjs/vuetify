@@ -14,6 +14,7 @@ import ClickOutside from '../../directives/click-outside'
 // Helpers
 import { addOnceEventListener, deepEqual, keyCodes, createRange, convertToUnit, passiveSupported } from '../../util/helpers'
 import { consoleWarn } from '../../util/console'
+import { attachedRoot } from '../../util/dom'
 
 // Types
 import Vue, { VNode, VNodeChildrenArrayContents, PropType } from 'vue'
@@ -226,10 +227,10 @@ export default mixins<options &
   },
 
   mounted () {
+    const root = this.$el ? attachedRoot(this.$el) : null
     // Without a v-app, iOS does not work with body selectors
     this.app =
-      (this.$el && this.$el.getRootNode() instanceof ShadowRoot
-        ? (this.$el.getRootNode() as ShadowRoot).querySelector('[data-app]')
+      (root ? root.querySelector('[data-app]')
         : document.querySelector('[data-app]')) ||
       consoleWarn(
         'Missing v-app or a non-body wrapping element with the [data-app] attribute',
