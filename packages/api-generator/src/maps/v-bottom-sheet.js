@@ -13,5 +13,8 @@ module.exports = {
         },
       },
     ],
+    exclude: {
+      props: ['open-on-hover'],
+    },
   },
 }
