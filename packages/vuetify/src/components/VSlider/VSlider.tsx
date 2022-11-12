@@ -87,6 +87,8 @@ export const VSlider = defineComponent({
               'v-slider--disabled': props.disabled,
             },
           ]}
+          onClick:prepend={ props['onClick:prepend'] }
+          onClick:append={ props['onClick:append'] }
           { ...inputProps }
           focused={ isFocused.value }
         >
