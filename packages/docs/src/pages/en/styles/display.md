@@ -73,18 +73,6 @@ The _condition_ applies the class base on:
 
 Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.
 
-### Drawbacks
-
-It is important to note that using any of the display classes above will result in any display style previously added being overwritten.
-
-This is because of the classes using `!important` in their display styling.
-
-#### Example
-
-If you have an element which already has `display: block` in it's style.
-
-If you then were to add the class `d-flex` to it, this would be overwritten and it would now use the style from `d-flex` instead of the original one (`display: flex!important`)
-
 ## Display in print
 
 You can also change the display property when printing.
