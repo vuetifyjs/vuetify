@@ -84,7 +84,7 @@ export function useLocationStrategies (
     if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
 
     scope = effectScope()
-    await nextTick()
+    if (!(props.locationStrategy === 'connected')) { await nextTick() }
     scope.run(() => {
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
