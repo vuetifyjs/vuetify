@@ -146,10 +146,16 @@ export default mixins<options &
       let target
       if (this.attach === false) {
         // Default, detach to app
-        target = document.querySelector('[data-app]')
+        target =
+          (this.$el && this.$el.getRootNode() instanceof ShadowRoot)
+            ? (this.$el.getRootNode() as ShadowRoot).querySelector('[data-app]')
+            : document.querySelector('[data-app]')
       } else if (typeof this.attach === 'string') {
         // CSS selector
-        target = document.querySelector(this.attach)
+        target =
+          (this.$el && this.$el.getRootNode() instanceof ShadowRoot)
+            ? (this.$el.getRootNode() as ShadowRoot).querySelector(this.attach)
+            : document.querySelector(this.attach)
       } else {
         // DOM Element
         target = this.attach

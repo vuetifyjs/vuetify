@@ -74,7 +74,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       const parent = this.absolute
         ? this.$el.parentNode
-        : document.querySelector('[data-app]')
+        : (this.$el && this.$el.getRootNode() instanceof ShadowRoot ? (this.$el.getRootNode() as ShadowRoot).querySelector('[data-app]') : document.querySelector('[data-app]'))
 
       parent && parent.insertBefore(overlay.$el, parent.firstChild)
 
