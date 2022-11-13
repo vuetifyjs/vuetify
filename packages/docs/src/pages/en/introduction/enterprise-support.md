@@ -33,7 +33,7 @@ Simply put, because it protects your investment. At Vuetify, we want you to be s
 
 With hundreds of components, directives, and features, our team can provide a combination of various tools, technologies, programs and resources to proactively help your development team succeed.
 
-<v-btn color="primary" variant="flat" href="#request-service">Request Service Now</v-btn>
+<v-btn color="primary" variant="flat" href="#request-service">Request Support Now</v-btn>
 
 ----
 

@@ -36,6 +36,7 @@
     "vuetify": "^3.0.1"
   },
   "devDependencies": {
+    "@emailjs/browser": "^3.9.1",
     "@intlify/vite-plugin-vue-i18n": "^6.0.1",
     "@types/lodash-es": "^4.17.6",
     "@types/markdown-it": "^12.2.3",
