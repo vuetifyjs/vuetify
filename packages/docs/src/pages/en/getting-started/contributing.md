@@ -198,7 +198,7 @@ git switch master
 # Pull down any upstream changes
 git pull
 
-
+# Create a new branch to work on
 git switch --create fix/1234-some-issue
 ```
 
