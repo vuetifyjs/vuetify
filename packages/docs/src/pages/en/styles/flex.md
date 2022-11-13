@@ -36,6 +36,20 @@ You can also customize flex utilities to apply based upon various breakpoints.
 - **.d-xl-flex**
 - **.d-xl-inline-flex**
 
+### Caveats
+
+<alert type="info">
+
+It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
+
+#### Example
+
+If you have an element which already has `display: block` in it's style.
+
+If you then were to add the class `d-flex` to it, this would be overwritten and it would now use the style from `d-flex` instead of the original one (`display: flex!important`)
+
+</alert>
+
 ## Flex direction
 
 By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to explicitly define it.
