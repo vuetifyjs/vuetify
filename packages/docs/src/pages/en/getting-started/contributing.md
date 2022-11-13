@@ -9,6 +9,13 @@ related:
   - /getting-started/frequently-asked-questions/
 ---
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('https')
+  const tab2 = ref("https")
+</script>
+
 # Contributing
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
@@ -22,10 +29,11 @@ It is our job to enable you to create amazing applications. A lot of the time, y
 The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue:
 
 - Search for similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered already.
+  > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
 - Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and concise
 
-These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).
+These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
 
 When writing an issue please provide as much detail as possible. Note that "reproduction steps" should be a series of actions another developer should take after clicking your reproduction link, not a recollection of how you discovered the bug.
 
@@ -57,13 +65,27 @@ Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#insta
 
 Once you have everything installed, clone the repository:
 
-```bash
-# Using HTTPS
-git clone https://github.com/vuetifyjs/vuetify.git
+<v-tabs v-model="tab" color="primary">
+  <v-tab value="https" variant="plain">Using HTTPS</v-tab>
+  <v-tab value="ssh" variant="plain">Using SSH</v-tab>
+</v-tabs>
 
-# Using SSH
+<v-window v-model="tab">
+  <v-window-item value="https">
+
+```bash
+git clone https://github.com/vuetifyjs/vuetify.git
+```
+
+  </v-window-item>
+  <v-window-item value="ssh">
+
+```bash
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
+
+  </v-window-item>
+</v-window>
 
 <alert type="info">
 
@@ -127,19 +149,35 @@ The documentation is located in `packages/docs` but also uses some files from `p
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
+Please note that Vuetify v3's documentation is located on the `next` branch and not on the `master` branch.
+
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
 
 Then add your fork as a remote in git:
 
-```bash
-# Using HTTPS
-git remote add fork https://github.com/YOUR_USERNAME/vuetify.git
+<v-tabs v-model="tab2" color="primary">
+  <v-tab value="https" variant="plain">Using HTTPS</v-tab>
+  <v-tab value="ssh" variant="plain">Using SSH</v-tab>
+</v-tabs>
 
-# Using SSH
+<v-window v-model="tab2">
+  <v-window-item value="https">
+
+```bash
+git remote add fork https://github.com/YOUR_USERNAME/vuetify.git
+```
+
+  </v-window-item>
+  <v-window-item value="ssh">
+
+```bash
 git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 ```
+
+  </v-window-item>
+</v-window>
 
 #### Choosing a base branch
 
@@ -147,7 +185,8 @@ Before starting development you should know which branch to base your changes on
 
 | Type of change | Branch |
 | --- | --- |
-| Documentation | `master` |
+| Documentation (v2) | `master` |
+| Documentation (v3) | `next` |
 | Bug fixes | `master` |
 | New features | `dev` |
 | Features with breaking changes | `next` |
@@ -159,7 +198,7 @@ git switch master
 # Pull down any upstream changes
 git pull
 
-# Create a new branch to work on
+
 git switch --create fix/1234-some-issue
 ```
 
