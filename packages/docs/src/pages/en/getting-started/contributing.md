@@ -59,10 +59,10 @@ Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#insta
 Once you have everything installed, clone the repository:
 
 ```bash
-# USING HTTPS
+# Using HTTPS
 git clone https://github.com/vuetifyjs/vuetify.git
 
-# USING SSH
+# Using SSH
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
 
@@ -137,10 +137,10 @@ First you should create a fork of the vuetify repository to push your changes to
 Then add your fork as a remote in git:
 
 ```bash
-# USING HTTPS
+# Using HTTPS
 git remote add fork https://github.com/YOUR_USERNAME/vuetify.git
 
-# USING SSH
+# Using SSH
 git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 ```
 
