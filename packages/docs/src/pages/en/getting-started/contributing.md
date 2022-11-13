@@ -9,13 +9,6 @@ related:
   - /getting-started/frequently-asked-questions/
 ---
 
-<script setup>
-  import { ref } from 'vue'
-
-  const tab = ref('https')
-  const tab2 = ref("https")
-</script>
-
 # Contributing
 
 Vuetify is made possible by an amazing community that submits issues, creates pull requests, and provides invaluable feedback.
@@ -41,9 +34,9 @@ Issues that are convoluted and lacking a proper reproduction may be closed by a 
 
 <alert type="success">
 
-  **TIP**
+**TIP**
 
-  When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
+When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
 
 </alert>
 
@@ -65,27 +58,13 @@ Some of our dependencies use [node-gyp](https://github.com/nodejs/node-gyp#insta
 
 Once you have everything installed, clone the repository:
 
-<v-tabs v-model="tab" color="primary">
-  <v-tab value="https" variant="plain">Using HTTPS</v-tab>
-  <v-tab value="ssh" variant="plain">Using SSH</v-tab>
-</v-tabs>
-
-<v-window v-model="tab">
-  <v-window-item value="https">
-
 ```bash
+# USING HTTPS
 git clone https://github.com/vuetifyjs/vuetify.git
-```
 
-  </v-window-item>
-  <v-window-item value="ssh">
-
-```bash
+# USING SSH
 git clone git@github.com:vuetifyjs/vuetify.git
 ```
-
-  </v-window-item>
-</v-window>
 
 <alert type="info">
 
@@ -137,7 +116,7 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
     data: () => ({
       //
     }),
-  }
+  };
 </script>
 ```
 
@@ -157,39 +136,25 @@ First you should create a fork of the vuetify repository to push your changes to
 
 Then add your fork as a remote in git:
 
-<v-tabs v-model="tab2" color="primary">
-  <v-tab value="https" variant="plain">Using HTTPS</v-tab>
-  <v-tab value="ssh" variant="plain">Using SSH</v-tab>
-</v-tabs>
-
-<v-window v-model="tab2">
-  <v-window-item value="https">
-
 ```bash
+# USING HTTPS
 git remote add fork https://github.com/YOUR_USERNAME/vuetify.git
-```
 
-  </v-window-item>
-  <v-window-item value="ssh">
-
-```bash
+# USING SSH
 git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 ```
-
-  </v-window-item>
-</v-window>
 
 #### Choosing a base branch
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Type of change | Branch |
-| --- | --- |
-| Documentation (v2) | `master` |
-| Documentation (v3) | `next` |
-| Bug fixes | `master` |
-| New features | `dev` |
-| Features with breaking changes | `next` |
+| Type of change                 | Branch   |
+| ------------------------------ | -------- |
+| Documentation (v2)             | `master` |
+| Documentation (v3)             | `next`   |
+| Bug fixes                      | `master` |
+| New features                   | `dev`    |
+| Features with breaking changes | `next`   |
 
 ```bash
 # Switch to the desired branch
@@ -208,7 +173,7 @@ Commit your changes following [our guidelines](#commit-guidelines), then push th
 
 <alert type="warning">
 
-  Pull requests that include unrelated commits or your local merges may be **closed** without notice.
+Pull requests that include unrelated commits or your local merges may be **closed** without notice.
 
 </alert>
 
@@ -266,7 +231,7 @@ In order to get a major feature added to Vuetify you must get your RFC merged in
 
   <alert type="error">
 
-    RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
+  RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
 
   </alert>
 
@@ -357,7 +322,7 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 
 <alert type="warning">
 
-  Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
+Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
 
 </alert>
 
@@ -367,6 +332,6 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 
 [commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /introduction/meet-the-team/
+[core team]: /introduction/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
-[Issues]: https://github.com/vuetifyjs/vuetify/issues
+[issues]: https://github.com/vuetifyjs/vuetify/issues
