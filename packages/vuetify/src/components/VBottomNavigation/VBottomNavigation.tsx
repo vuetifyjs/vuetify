@@ -12,7 +12,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -36,6 +35,7 @@ export const VBottomNavigation = defineComponent({
       type: [Number, String],
       default: 56,
     },
+    inputValue: Boolean,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -66,7 +66,7 @@ export const VBottomNavigation = defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = toRef(props, 'inputValue')
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
@@ -94,7 +94,7 @@ export const VBottomNavigation = defineComponent({
           class={[
             'v-bottom-navigation',
             {
-              'v-bottom-navigation--active': isActive.value || !isNaN(isActive.value),
+              'v-bottom-navigation--active': isActive.value,
               'v-bottom-navigation--grow': props.grow,
               'v-bottom-navigation--shift': props.mode === 'shift',
             },
@@ -110,7 +110,7 @@ export const VBottomNavigation = defineComponent({
             layoutItemStyles.value,
             {
               height: convertToUnit(height.value),
-              transform: `translateY(${convertToUnit(!isActive.value && isNaN(isActive.value) ? 100 : 0, '%')})`,
+              transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
           ]}
         >
