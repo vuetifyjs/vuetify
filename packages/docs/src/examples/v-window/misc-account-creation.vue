@@ -62,7 +62,7 @@
     <v-card-actions>
       <v-btn
         v-if="step > 1"
-        text
+        variant="text"
         @click="step--"
       >
         Back
@@ -71,7 +71,7 @@
       <v-btn
         v-if="step < 3"
         color="primary"
-        depressed
+        variant="flat"
         @click="step++"
       >
         Next

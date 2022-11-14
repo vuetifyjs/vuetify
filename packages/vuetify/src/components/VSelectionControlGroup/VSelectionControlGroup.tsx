@@ -48,7 +48,7 @@ export const makeSelectionControlGroupProps = propsFactory({
 
   ...makeThemeProps(),
   ...makeDensityProps(),
-}, 'VSelectionControlGroup')
+}, 'v-selection-control-group')
 
 export const VSelectionControlGroup = defineComponent({
   name: 'VSelectionControlGroup',

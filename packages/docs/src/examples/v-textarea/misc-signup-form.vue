@@ -4,7 +4,7 @@
     style="max-width: 500px;"
   >
     <v-toolbar
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       cards
       dark
       flat
@@ -31,7 +31,7 @@
       <v-text-field
         v-model="password"
         :rules="[rules.password, rules.length(6)]"
-        filled
+        variant="filled"
         color="deep-purple"
         counter="6"
         label="Password"
@@ -40,14 +40,14 @@
       ></v-text-field>
       <v-text-field
         v-model="phone"
-        filled
+        variant="filled"
         color="deep-purple"
         label="Phone number"
       ></v-text-field>
       <v-text-field
         v-model="email"
         :rules="[rules.email]"
-        filled
+        variant="filled"
         color="deep-purple"
         label="Email address"
         type="email"
@@ -55,7 +55,7 @@
       <v-textarea
         v-model="bio"
         auto-grow
-        filled
+        variant="filled"
         color="deep-purple"
         label="Bio"
         rows="1"
@@ -82,7 +82,7 @@
     <v-divider></v-divider>
     <v-card-actions>
       <v-btn
-        text
+        variant="text"
         @click="$refs.form.reset()"
       >
         Clear
@@ -91,7 +91,7 @@
       <v-btn
         :disabled="!form"
         :loading="isLoading"
-        color="deep-purple accent-4"
+        color="deep-purple-accent-4"
       >
         Submit
       </v-btn>
@@ -102,7 +102,7 @@
       persistent
     >
       <v-card>
-        <v-card-title class="text-h5 grey lighten-3">
+        <v-card-title class="text-h5 bg-grey-lighten-3">
           Legal
         </v-card-title>
         <v-card-text>
@@ -111,7 +111,7 @@
         <v-divider></v-divider>
         <v-card-actions>
           <v-btn
-            text
+            variant="text"
             @click="agreement = false, dialog = false"
           >
             No

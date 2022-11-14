@@ -7,7 +7,7 @@
           :items="items"
           label="Combobox"
           multiple
-          outlined
+          variant="outlined"
           dense
         ></v-combobox>
       </v-col>

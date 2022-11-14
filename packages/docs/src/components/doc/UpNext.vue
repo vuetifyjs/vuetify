@@ -10,7 +10,7 @@
     >
       <v-icon
         :icon="arrows.prev"
-        class="mr-1"
+        class="me-1"
         color="primary"
       />
 
@@ -34,7 +34,7 @@
 
       <v-icon
         :icon="arrows.next"
-        class="ml-1"
+        class="ms-1"
         color="primary"
       />
     </router-link>
@@ -45,9 +45,7 @@
   // Composables
   import { useRoute, useRouter } from 'vue-router'
   import { useRtl } from 'vuetify'
-
-  // Stores
-  import { useAppStore } from '../../store/app'
+  import { useAppStore } from '@/store/app'
 
   // Utilities
   import { computed } from 'vue'

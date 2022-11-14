@@ -5,10 +5,8 @@
   >
     <v-row justify="center">
       <v-menu
-        bottom
         min-width="200px"
         rounded
-        offset-y
       >
         <template v-slot:activator="{ props }">
           <v-btn

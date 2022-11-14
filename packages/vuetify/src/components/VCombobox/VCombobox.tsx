@@ -21,7 +21,8 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
 import type { PropType } from 'vue'
@@ -68,7 +69,7 @@ export const VCombobox = genericComponent<new <
     multiple?: Multiple
     modelValue?: V
     'onUpdate:modelValue'?: (val: V) => void
-  } & Omit<VTextField['$props'], 'modelValue' | 'onUpdate:modelValue' | '$children'> & SlotsToProps<
+  } & SlotsToProps<
     Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
       item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
       chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
@@ -88,6 +89,9 @@ export const VCombobox = genericComponent<new <
 
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
+    ...omit(makeVTextFieldProps({
+      modelValue: null,
+    }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: false }),
   },
 
@@ -163,6 +167,7 @@ export const VCombobox = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
+    const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -197,6 +202,14 @@ export const VCombobox = genericComponent<new <
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
         isPristine.value = true
+      }
+
+      if (e.key === 'ArrowDown') {
+        e.preventDefault()
+        listRef.value?.focus('next')
+      } else if (e.key === 'ArrowUp') {
+        e.preventDefault()
+        listRef.value?.focus('prev')
       }
 
       if (!props.multiple) return
@@ -276,6 +289,16 @@ export const VCombobox = genericComponent<new <
       }
     }
 
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
+
+    function onFocusout (e: FocusEvent) {
+      if (e.relatedTarget == null) {
+        vTextFieldRef.value?.focus()
+      }
+    }
+
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
     })
@@ -295,10 +318,12 @@ export const VCombobox = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
+      const [textFieldProps] = filterVTextFieldProps(props)
 
       return (
         <VTextField
           ref={ vTextFieldRef }
+          { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
@@ -337,9 +362,12 @@ export const VCombobox = genericComponent<new <
                   { ...props.menuProps }
                 >
                   <VList
+                    ref={ listRef }
                     selected={ selected.value }
                     selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                    onFocusin={ onFocusin }
+                    onFocusout={ onFocusout }
                   >
                     { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />

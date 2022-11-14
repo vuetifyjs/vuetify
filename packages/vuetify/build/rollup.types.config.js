@@ -40,25 +40,34 @@ function createTypesConfig (input, output, renderChunk, filter) {
             { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../types-temp/$1') },
           ]
         }),
-        renderChunk ? { renderChunk } : undefined,
+        {
+          async renderChunk (code) {
+            if (renderChunk) code = await renderChunk(code)
+            return code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+          }
+        },
       ],
     }
   })
 }
 
+async function getShims () {
+  const components = Object.keys(importMap.components).map(name => (
+    `    ${name}: typeof import('vuetify/components')['${name}']`
+  )).join('\n')
+
+  return (await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' }))
+    .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
+    .replace(/^\s+\/\/ @generate-components$/gm, components)
+}
+
 export default [
   createTypesConfig('framework.d.ts', 'lib/index.d.ts', async code => {
-    const components = Object.keys(importMap.components).map(name => (
-      `    ${name}: typeof import('vuetify/components')['${name}']`
-    )).join('\n')
-
-    const shims = (await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' }))
-      .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
-      .replace(/^\s+\/\/ @generate-components$/gm, components)
-
-    return code += '\n\n' + shims
+    return code + '\n\n' + await getShims()
   }),
-  createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts'),
+  createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts', async code => {
+    return code + '\n\n' + (await getShims()).replace(', VNodeChild } from \'vue\'', ' } from \'vue\'')
+  }),
   createTypesConfig('blueprints/*.d.ts', 'lib/blueprints/*.d.ts'),
   createTypesConfig('components/index.d.ts', 'lib/components/index.d.ts'),
   createTypesConfig('components/*/index.d.ts', 'lib/components/*/index.d.ts', undefined, files => {

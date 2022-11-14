@@ -75,12 +75,18 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(LocaleSymbol, locale)
 
     if (IN_BROWSER && options.ssr) {
-      const { mount } = app
-      app.mount = (...args) => {
-        const vm = mount(...args)
-        nextTick(() => display.update())
-        app.mount = mount
-        return vm
+      if (app.$nuxt) {
+        app.$nuxt.hook('app:suspense:resolve', () => {
+          display.update()
+        })
+      } else {
+        const { mount } = app
+        app.mount = (...args) => {
+          const vm = mount(...args)
+          nextTick(() => display.update())
+          app.mount = mount
+          return vm
+        }
       }
     }
 

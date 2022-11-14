@@ -68,7 +68,7 @@
           ></v-slider>
         </div>
 
-        <v-list class="transparent">
+        <v-list class="bg-transparent">
           <v-list-item
             v-for="item in forecast"
             :key="item.day"

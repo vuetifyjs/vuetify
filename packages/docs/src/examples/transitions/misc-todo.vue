@@ -3,7 +3,7 @@
     <v-text-field
       v-model="newTask"
       label="What are you working on?"
-      solo
+      variant="solo"
       @keydown.enter="create"
     >
       <template v-slot:append>
@@ -46,7 +46,7 @@
       <v-spacer></v-spacer>
 
       <v-progress-circular
-        :value="progress"
+        v-model="progress"
         class="mr-2"
       ></v-progress-circular>
     </v-row>

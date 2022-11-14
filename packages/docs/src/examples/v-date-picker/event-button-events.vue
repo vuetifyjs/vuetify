@@ -20,14 +20,14 @@
       sm="6"
     >
       <div class="text-body-1 mb-2">
-        <v-icon small>
+        <v-icon size="small">
           {{ done[0] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
         Double click on any date
       </div>
 
       <div class="text-body-1">
-        <v-icon small>
+        <v-icon size="small">
           {{ done[1] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
         Move mouse cursor over any month button
@@ -38,7 +38,7 @@
       </div>
 
       <div class="text-body-1">
-        <v-icon small>
+        <v-icon size="small">
           {{ done[2] ? '$checkboxOn' : '$checkboxOff' }}
         </v-icon>
         Right click on any year

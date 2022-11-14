@@ -184,8 +184,12 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
 
     let icon: IconValue | undefined = iconAlias
 
-    if (typeof iconAlias === 'string' && iconAlias.includes('$')) {
-      icon = icons.aliases?.[iconAlias.slice(iconAlias.indexOf('$') + 1)]
+    if (typeof icon === 'string') {
+      icon = icon.trim()
+
+      if (icon.startsWith('$')) {
+        icon = icons.aliases?.[icon.slice(1)]
+      }
     }
 
     if (!icon) throw new Error(`Could not find aliased icon "${iconAlias}"`)

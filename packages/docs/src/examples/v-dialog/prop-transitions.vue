@@ -21,7 +21,7 @@
             </v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                text
+                variant="text"
                 @click="isActive.value = false"
               >Close</v-btn>
             </v-card-actions>
@@ -51,7 +51,7 @@
             </v-card-text>
             <v-card-actions class="justify-end">
               <v-btn
-                text
+                variant="text"
                 @click="isActive.value = false"
               >Close</v-btn>
             </v-card-actions>

@@ -16,7 +16,7 @@
 
       <v-card-title>
         <v-rating
-          :value="4"
+          :model-value="4"
           dense
           color="orange"
           background-color="orange"
@@ -32,7 +32,7 @@
         scrim="#036358"
         class="align-center justify-center"
       >
-        <v-btn flat>See more info</v-btn>
+        <v-btn variant="flat">See more info</v-btn>
       </v-overlay>
     </v-card>
   </v-hover>

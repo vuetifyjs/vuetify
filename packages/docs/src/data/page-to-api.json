@@ -74,8 +74,8 @@
   "components/expansion-panels": [
     "v-expansion-panel",
     "v-expansion-panels",
-    "v-expansion-panel-header",
-    "v-expansion-panel-content"
+    "v-expansion-panel-text",
+    "v-expansion-panel-title"
   ],
   "components/file-inputs": ["v-file-input"],
   "components/floating-action-buttons": [

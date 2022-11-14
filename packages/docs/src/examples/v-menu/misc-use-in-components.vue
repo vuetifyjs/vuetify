@@ -11,18 +11,9 @@
 
           <v-spacer></v-spacer>
 
-          <v-menu
-            bottom
-            left
-          >
+          <v-menu>
             <template v-slot:activator="{ props }">
-              <v-btn
-                dark
-                icon
-                v-bind="props"
-              >
-                <v-icon>mdi-dots-vertical</v-icon>
-              </v-btn>
+              <v-btn icon="mdi-dots-vertical" v-bind="props"></v-btn>
             </template>
 
             <v-list>

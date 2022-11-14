@@ -23,7 +23,7 @@
             :aria-label="social.title"
             :href="social.href"
             :title="t(social.title)"
-            class="ma-3 d-inline-block"
+            class="ma-3 d-inline-block text-decoration-none"
             rel="noopener"
             target="_blank"
           >
@@ -45,7 +45,7 @@
           <div>
             {{ t('released-under-the') }}
             <a
-              class="text-grey-lighten-1 text-decoration-underline"
+              class="text-medium-emphasis text-decoration-underline"
               href="https://opensource.org/licenses/MIT"
               path="mit-license"
               rel="noopener"
@@ -60,7 +60,7 @@
           <template v-for="(link, i) in links" :key="i">
             <a
               :href="link.href"
-              class="text-grey-lighten-1"
+              class="text-medium-emphasis"
               rel="noopener"
               target="_blank"
             >{{ t(link.path) }}</a>
@@ -73,65 +73,45 @@
   </v-footer>
 </template>
 
-<script lang="ts">
+<script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
 
-  // Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'HomeFooter',
-
-    setup () {
-      const { t } = useI18n()
-
-      // data
-      const email = ''
-      const links = [
-        {
-          href: 'https://www.iubenda.com/privacy-policy/76325752',
-          path: 'privacy-policy',
-        },
-        {
-          href: 'https://www.iubenda.com/privacy-policy/76325752/cookie-policy',
-          path: 'cookie-policy',
-        },
-        {
-          href: 'mailto:support@vuetifyjs.com',
-          path: 'contact-us',
-        },
-      ]
-      const socials = [
-        {
-          icon: 'mdi-reddit',
-          href: 'https://www.reddit.com/r/vuetifyjs',
-          title: 'reddit',
-        },
-        {
-          icon: 'mdi-github',
-          href: 'https://github.com/vuetifyjs/vuetify',
-          title: 'github',
-        },
-        {
-          icon: 'mdi-twitter',
-          href: 'https://twitter.com/vuetifyjs',
-          title: 'twitter',
-        },
-        {
-          icon: 'mdi-discord',
-          href: 'https://community.vuetifyjs.com',
-          title: 'discord',
-        },
-      ]
-
-      return {
-        email,
-        links,
-        socials,
-        t,
-      }
+  const { t } = useI18n()
+  const links = [
+    {
+      href: 'https://www.iubenda.com/privacy-policy/76325752',
+      path: 'privacy-policy',
     },
-
-  })
+    {
+      href: 'https://www.iubenda.com/privacy-policy/76325752/cookie-policy',
+      path: 'cookie-policy',
+    },
+    {
+      href: 'mailto:support@vuetifyjs.com',
+      path: 'contact-us',
+    },
+  ]
+  const socials = [
+    {
+      icon: 'mdi-reddit',
+      href: 'https://www.reddit.com/r/vuetifyjs',
+      title: 'reddit',
+    },
+    {
+      icon: 'mdi-github',
+      href: 'https://github.com/vuetifyjs/vuetify',
+      title: 'github',
+    },
+    {
+      icon: 'mdi-twitter',
+      href: 'https://twitter.com/vuetifyjs',
+      title: 'twitter',
+    },
+    {
+      icon: 'mdi-discord',
+      href: 'https://community.vuetifyjs.com',
+      title: 'discord',
+    },
+  ]
 </script>

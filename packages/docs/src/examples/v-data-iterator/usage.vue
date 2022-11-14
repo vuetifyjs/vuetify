@@ -13,7 +13,7 @@
       <template v-slot:header>
         <v-toolbar
           dark
-          color="blue darken-3"
+          color="blue-darken-3"
           class="mb-1"
         >
           <v-text-field
@@ -43,16 +43,16 @@
               mandatory
             >
               <v-btn
-                large
-                depressed
+                size="large"
+                variant="flat"
                 color="blue"
                 :value="false"
               >
                 <v-icon>mdi-arrow-up</v-icon>
               </v-btn>
               <v-btn
-                large
-                depressed
+                size="large"
+                variant="flat"
                 color="blue"
                 :value="true"
               >

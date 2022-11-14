@@ -280,7 +280,7 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
 </script>
 ```
 
-<vuetify slug="vs-vue-3-slots" />
+<vuetify />
 
 #### Icon slots
 

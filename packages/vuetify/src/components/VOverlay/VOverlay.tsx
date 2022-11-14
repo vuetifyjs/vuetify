@@ -12,6 +12,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton, useRouter } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useHydration } from '@/composables/hydration'
 import { useRtl } from '@/composables/locale'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
@@ -143,6 +144,7 @@ export const VOverlay = genericComponent<new () => {
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
     const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
+    const isMounted = useHydration()
 
     watch(() => props.disabled, v => {
       if (v) isActive.value = false
@@ -237,7 +239,7 @@ export const VOverlay = genericComponent<new () => {
           }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
 
-        { IN_BROWSER && (
+        { isMounted.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -291,7 +293,7 @@ export const VOverlay = genericComponent<new () => {
               </div>
             )}
           </Teleport>
-        ) }
+        )}
       </>
     ))
 

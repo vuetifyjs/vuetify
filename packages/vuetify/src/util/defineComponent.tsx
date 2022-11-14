@@ -47,7 +47,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
   if (options._setup) {
     options.props = options.props ?? {}
 
-    options.props = propsFactory(options.props, options.name)()
+    options.props = propsFactory(options.props, toKebabCase(options.name))()
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
@@ -61,7 +61,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
         const componentDefaults = defaults.value[props._as ?? options.name!]
 
         if (componentDefaults) {
-          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith('V'))
+          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith(key[0].toUpperCase()))
           if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
         }
 

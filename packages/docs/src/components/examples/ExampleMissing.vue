@@ -5,8 +5,8 @@
   />
 </template>
 
-<script>
-  export default { name: 'ExampleMissing' }
+<script setup>
+  //
 </script>
 
 <style lang="sass">

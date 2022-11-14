@@ -6,7 +6,7 @@
       variant="tonal"
       closable
       close-label="Close Alert"
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       title="Closable Alert"
     >
       Aenean imperdiet. Quisque id odio. Cras dapibus. Pellentesque ut neque. Cras dapibus.

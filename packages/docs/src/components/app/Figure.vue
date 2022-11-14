@@ -18,6 +18,7 @@
 </template>
 
 <script setup>
+  // Utilities
   import { computed, useAttrs } from 'vue'
 
   const attrs = useAttrs()

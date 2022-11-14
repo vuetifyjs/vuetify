@@ -28,7 +28,7 @@
       </template>
 
       <template v-slot:actions>
-        <v-btn color="deep-purple accent-4">
+        <v-btn color="deep-purple-accent-4">
           Go Online
         </v-btn>
       </template>

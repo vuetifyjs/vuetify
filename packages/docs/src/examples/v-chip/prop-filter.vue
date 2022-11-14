@@ -5,7 +5,7 @@
   >
     <v-chip
       class="ma-2"
-      :input-value="active"
+      :model-value="active"
       filter
     >
       I'm v-chip
@@ -13,7 +13,7 @@
 
     <v-chip
       class="ma-2"
-      :input-value="active"
+      :model-value="active"
       filter
       filter-icon="mdi-plus"
     >
@@ -22,7 +22,7 @@
 
     <v-chip
       class="ma-2"
-      :input-value="active"
+      :model-value="active"
       filter
       filter-icon="mdi-minus"
     >

@@ -3,9 +3,9 @@
     <v-card
       :image="`https://cdn.vuetifyjs.com/docs/images/components-temp/${name}.png`"
       :to="rpath(`/components/${name}`)"
-      height="164"
       class="mb-3"
       elevation="0"
+      height="164"
     />
 
     <h2 class="text-h6">
@@ -16,20 +16,11 @@
   </v-col>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Utilities
-  import { defineComponent } from 'vue'
   import { rpath } from '@/util/routes'
 
-  export default defineComponent({
-    name: 'ComponentsListItem',
-
-    props: {
-      name: String,
-    },
-
-    setup () {
-      return { rpath }
-    },
+  defineProps({
+    name: String,
   })
 </script>

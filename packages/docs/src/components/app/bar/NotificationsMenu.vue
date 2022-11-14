@@ -63,7 +63,7 @@
       </div>
 
       <template v-else>
-        <v-list :lines="false">
+        <v-list lines="three">
           <template
             v-for="(notification, i) in notifications"
             :key="notification.slug"
@@ -71,34 +71,26 @@
 
             <v-divider
               v-if="i !== 0"
-              class="my-3"
-              inset
+              class="my-1"
             />
 
             <v-list-item
               :ripple="false"
               class="py-2"
             >
-              <template #prepend>
-                <div class="mr-3 text-h6 mt-n16">
-                  {{ notification.metadata.emoji }}
-                </div>
-              </template>
+              <v-list-item-title class="text-wrap text-h6 mb-1">
+                <span>{{ notification.metadata.emoji }}</span>
 
-              <v-list-item-title
-                class="text-wrap text-h6 mb-1"
-                v-text="notification.title"
-              />
+                <span class="ps-3"> {{ notification.title }}</span>
+              </v-list-item-title>
 
-              <v-list-item-subtitle
-                class="text-caption"
-              >
+              <div class="text-caption text-medium-emphasis ps-10">
                 {{ notification.metadata.text }}
 
                 <app-link :href="notification.metadata.action">
                   {{ notification.metadata.action_text }}
                 </app-link>
-              </v-list-item-subtitle>
+              </div>
 
               <template #append>
                 <v-btn

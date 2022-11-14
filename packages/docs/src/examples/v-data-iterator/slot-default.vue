@@ -26,10 +26,10 @@
                 <h4>{{ item.name }}</h4>
               </v-card-title>
               <v-switch
-                :input-value="isExpanded(item)"
+                :model-value="isExpanded(item)"
                 :label="isExpanded(item) ? 'Expanded' : 'Closed'"
                 class="pl-4 mt-0"
-                @change="(v) => expand(item, v)"
+                @update:model-value="v => expand(item, v)"
               ></v-switch>
               <v-divider></v-divider>
               <v-list

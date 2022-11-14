@@ -74,7 +74,7 @@
               :items="locations"
               chips
               flat
-              solo
+              variant="solo"
             ></v-select>
           </v-col>
 
@@ -93,13 +93,13 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="secondary"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
           >
             Save
@@ -166,14 +166,14 @@
               >
                 <v-spacer></v-spacer>
                 <v-btn
-                  text
+                  variant="text"
                   color="primary"
                   @click="$refs.startMenu.isActive = false"
                 >
                   Cancel
                 </v-btn>
                 <v-btn
-                  text
+                  variant="text"
                   color="primary"
                   @click="$refs.startMenu.save(date)"
                 >
@@ -208,14 +208,14 @@
               >
                 <v-spacer></v-spacer>
                 <v-btn
-                  text
+                  variant="text"
                   color="primary"
                   @click="$refs.endMenu.isActive = false"
                 >
                   Cancel
                 </v-btn>
                 <v-btn
-                  text
+                  variant="text"
                   color="primary"
                   @click="$refs.endMenu.save(date)"
                 >

@@ -13,8 +13,8 @@
             clearable
             label="Message"
             type="text"
-            @click:append="toggleMarker"
-            @click:append-outer="sendMessage"
+            @click:append-inner="toggleMarker"
+            @click:append="sendMessage"
             @click:prepend="changeIcon"
             @click:clear="clearMessage"
           ></v-text-field>

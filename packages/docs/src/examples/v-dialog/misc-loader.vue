@@ -10,7 +10,7 @@
     </v-btn>
     <v-dialog
       v-model="dialog"
-      hide-overlay
+      :scrim="false"
       persistent
     >
       <v-card
