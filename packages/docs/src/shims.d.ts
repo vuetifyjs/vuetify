@@ -63,3 +63,18 @@ declare module 'virtual:examples' {
     source: string
   }>
 }
+
+declare module '@emailjs/browser' {
+  interface emailjs {
+    sendForm (
+      service_id: string,
+      template_id: string,
+      el: HTMLFormElement,
+      public_key: string
+    ): Promise<EmailJSResponseStatus>
+  }
+
+  const client: emailjs
+
+  export default client
+}
