@@ -127,7 +127,7 @@ export const BaseSlideGroup = mixins<options &
     },
     showArrows: {
       type: [Boolean, String],
-      validator: v => (
+      validator: (v: any) => (
         typeof v === 'boolean' || [
           'always',
           'desktop',

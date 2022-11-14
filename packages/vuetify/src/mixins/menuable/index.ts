@@ -281,7 +281,10 @@ export default baseMixins.extend<options>().extend({
       }
     },
     checkActivatorFixed () {
-      if (this.attach !== false) return
+      if (this.attach !== false) {
+        this.activatorFixed = false
+        return
+      }
       let el = this.getActivator()
       while (el) {
         if (window.getComputedStyle(el).position === 'fixed') {

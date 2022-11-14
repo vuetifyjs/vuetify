@@ -1,7 +1,7 @@
 <template>
   <v-snackbar
     v-model="value"
-    :color="snackbar.color"
+    :color="snackbar.color.value"
     :timeout="-1"
     bottom
     right

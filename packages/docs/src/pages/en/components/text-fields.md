@@ -39,7 +39,7 @@ Use a **counter** prop to inform a user of the character limit. The counter does
 
 #### Clearable
 
-When **clearable**, you can customize the clear icon with **clear-icon**.
+When **clearable**, you can customize the clear icon with **clear-icon**. Note that **readonly** will not remove the clear icon, to prevent readonly inputs from being cleared you should also disable **clearable**.
 
 <example file="v-text-field/prop-clearable" />
 

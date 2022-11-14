@@ -128,8 +128,8 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       showScroll && this.showScroll()
     },
-    scrollListener (e: WheelEvent & KeyboardEvent) {
-      if (e.type === 'keydown') {
+    scrollListener (e: WheelEvent | KeyboardEvent) {
+      if ('key' in e) {
         if (
           ['INPUT', 'TEXTAREA', 'SELECT'].includes((e.target as Element).tagName) ||
           // https://github.com/vuetifyjs/vuetify/issues/4715
@@ -150,7 +150,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       if (e.target === this.overlay ||
         (e.type !== 'keydown' && e.target === document.body) ||
-        this.checkPath(e)) e.preventDefault()
+        this.checkPath(e as WheelEvent)) e.preventDefault()
     },
     hasScrollbar (el?: Element) {
       if (!el || el.nodeType !== Node.ELEMENT_NODE) return false
@@ -224,14 +224,14 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
       if (this.$vuetify.breakpoint.smAndDown) {
         document.documentElement!.classList.add('overflow-y-hidden')
       } else {
-        addPassiveEventListener(window, 'wheel', this.scrollListener as EventHandlerNonNull, { passive: false })
-        window.addEventListener('keydown', this.scrollListener as EventHandlerNonNull)
+        addPassiveEventListener(window, 'wheel', this.scrollListener, { passive: false })
+        window.addEventListener('keydown', this.scrollListener)
       }
     },
     showScroll () {
       document.documentElement!.classList.remove('overflow-y-hidden')
-      window.removeEventListener('wheel', this.scrollListener as EventHandlerNonNull)
-      window.removeEventListener('keydown', this.scrollListener as EventHandlerNonNull)
+      window.removeEventListener('wheel', this.scrollListener)
+      window.removeEventListener('keydown', this.scrollListener)
     },
   },
 })
