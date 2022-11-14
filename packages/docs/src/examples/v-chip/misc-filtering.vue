@@ -3,8 +3,6 @@
     class="mx-auto mt-12"
     max-width="450"
   >
-    <v-system-bar></v-system-bar>
-
     <v-toolbar
       flat
       color="transparent"

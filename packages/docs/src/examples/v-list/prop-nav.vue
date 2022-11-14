@@ -4,8 +4,6 @@
     width="256"
   >
     <v-layout>
-      <v-system-bar></v-system-bar>
-
       <v-navigation-drawer permanent absolute>
         <v-list>
           <v-list-item
