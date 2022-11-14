@@ -102,12 +102,12 @@
               :ripple="false"
             >
               <v-list-item-content>
-                <div class="text-wrap text-h6 mb-1 text--primary">
+                <div class="d-flex text-wrap text-h6 mb-1 text--primary">
                   <span>{{ notification.metadata.emoji }}</span>
 
-                  <span class="ps-2">
+                  <div class="ps-4">
                     {{ notification.title }}
-                  </span>
+                  </div>
                 </div>
 
                 <div class="text-caption text--secondary ps-10">
