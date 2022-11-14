@@ -1,3 +1,4 @@
+// @ts-nocheck
 /* eslint-disable camelcase */
 // Imports
 import Cosmic from 'cosmicjs'
