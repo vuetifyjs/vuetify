@@ -46,20 +46,20 @@ When setting a specific breakpoint for a display helper class, it will apply to 
 
 Conditionally display an element based upon the current **viewport**. Breakpoint utility classes always apply from the bottom up. That means if you have `.d-none`, it will apply to all breakpoints. However, `.d-md-none` will apply to only `md` and up.
 
-| Screen size | Class |
-| ------- | ------ |
-| Hidden on all | `.d-none` |
-| Hidden only on xs | `.d-none .d-sm-flex` |
-| Hidden only on sm | `.d-sm-none .d-md-flex` |
-| Hidden only on md | `.d-md-none .d-lg-flex` |
-| Hidden only on lg | `.d-lg-none .d-xl-flex` |
-| Hidden only on xl | `.d-xl-none` |
-| Visible on all | `.d-flex` |
-| Visible only on xs |`.d-flex .d-sm-none` |
-| Visible only on sm |`.d-none .d-sm-flex .d-md-none` |
-| Visible only on md |`.d-none .d-md-flex .d-lg-none` |
-| Visible only on lg |`.d-none .d-lg-flex .d-xl-none` |
-| Visible only on xl |`.d-none .d-xl-flex` |
+| Screen size        | Class                           |
+| ------------------ | ------------------------------- |
+| Hidden on all      | `.d-none`                       |
+| Hidden only on xs  | `.d-none .d-sm-flex`            |
+| Hidden only on sm  | `.d-sm-none .d-md-flex`         |
+| Hidden only on md  | `.d-md-none .d-lg-flex`         |
+| Hidden only on lg  | `.d-lg-none .d-xl-flex`         |
+| Hidden only on xl  | `.d-xl-none`                    |
+| Visible on all     | `.d-flex`                       |
+| Visible only on xs | `.d-flex .d-sm-none`            |
+| Visible only on sm | `.d-none .d-sm-flex .d-md-none` |
+| Visible only on md | `.d-none .d-md-flex .d-lg-none` |
+| Visible only on lg | `.d-none .d-lg-flex .d-xl-none` |
+| Visible only on xl | `.d-none .d-xl-flex`            |
 
 <example file="display/visibility" />
 
@@ -72,6 +72,14 @@ The _condition_ applies the class base on:
 - `and-up` - hide the element on the specified breakpoint and up `sm` through `lg` breakpoints
 
 Additionally, **media types** can be targeted using the `only` condition. Both `hidden-screen-only` and `hidden-print-only` are currently supported.
+
+### Caveats
+
+<alert type="info">
+
+It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
+
+</alert>
 
 ## Display in print
 
@@ -95,8 +103,8 @@ Print utility classes can also be combined with none print display utilities.
 
 ### Screen readers
 
-Use the `d-sr` utility classes to conditionally hide content on all devices *except* screen readers.
+Use the `d-sr` utility classes to conditionally hide content on all devices _except_ screen readers.
 
 - `d-sr-only` visually hides elements but will still announce to **screen readers**.
-- `d-sr-only-focusable` visually hides an element until it is focused. This is useful when implementing *skip links*.
-<backmatter />
+- `d-sr-only-focusable` visually hides an element until it is focused. This is useful when implementing _skip links_.
+  <backmatter />
