@@ -60,7 +60,7 @@ import AppBtn from '../AppBtn.vue'
 import Vuetify from 'vuetify'
 
 // Utilities
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
   // DO NOT use Vuetify on the localInstance
