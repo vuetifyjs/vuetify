@@ -49,7 +49,7 @@ export const makeSelectionControlProps = propsFactory({
   value: null,
 
   ...makeSelectionControlGroupProps(),
-}, 'VSelectionControl')
+}, 'v-selection-control')
 
 export function useSelectionControl (
   props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {

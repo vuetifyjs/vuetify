@@ -197,6 +197,18 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, ['x.y'])).toBe('comp')
   })
 
+  it('should get property from primitive items', () => {
+    const a = 1
+    const b = 'string'
+    const c = Symbol('symbol')
+    const d = false
+
+    expect(getPropertyFromItem(a, v => v)).toBe(a)
+    expect(getPropertyFromItem(b, v => v)).toBe(b)
+    expect(getPropertyFromItem(c, v => v)).toBe(c)
+    expect(getPropertyFromItem(d, v => v)).toBe(d)
+  })
+
   it('should return proper value in convertToUnit', () => {
     expect(convertToUnit(undefined)).toBeUndefined()
     expect(convertToUnit(null)).toBeUndefined()

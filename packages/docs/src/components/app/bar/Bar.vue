@@ -20,21 +20,19 @@
 
       <app-bar-support-menu />
 
-      <template v-if="mdAndUp">
-        <app-bar-team-link />
+      <app-bar-team-link />
 
-        <app-vertical-divider />
+      <app-vertical-divider v-if="smAndUp" />
 
-        <app-bar-store-link />
+      <app-bar-store-link v-if="mdAndUp" />
 
-        <app-bar-jobs-link />
+      <app-bar-jobs-link v-if="mdAndUp" />
 
-        <app-bar-notifications-menu />
+      <app-bar-notifications-menu v-if="smAndUp" />
 
-        <app-bar-settings-toggle />
+      <app-bar-settings-toggle v-if="smAndUp" />
 
-        <app-bar-language-menu />
-      </template>
+      <app-bar-language-menu v-if="smAndUp" />
     </template>
   </v-app-bar>
 </template>

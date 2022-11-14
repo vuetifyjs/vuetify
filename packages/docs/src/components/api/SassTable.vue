@@ -31,34 +31,21 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  // Imports
-  import { defineComponent, PropType } from 'vue'
-  import { getType } from './utils'
-  import PrismCell from './PrismCell.vue'
+<script setup lang="ts">
+  // Components
   import NameCell from './NameCell.vue'
+  import PrismCell from './PrismCell.vue'
+
+  // Utilities
   import { kebabCase } from 'lodash-es'
+  import { PropType } from 'vue'
 
-  export default defineComponent({
-    components: {
-      PrismCell,
-      NameCell,
-    },
-    props: {
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => [],
-      },
-    },
-    setup (props) {
-      const headers = ['name', 'default']
-
-      return {
-        headers,
-        field: 'props',
-        getType,
-        kebabCase,
-      }
+  defineProps({
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => [],
     },
   })
+
+  const headers = ['name', 'default']
 </script>

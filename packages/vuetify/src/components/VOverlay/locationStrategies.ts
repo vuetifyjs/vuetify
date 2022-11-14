@@ -67,7 +67,7 @@ export const makeLocationStrategyProps = propsFactory({
     default: 'auto',
   },
   offset: [Number, String, Array] as PropType<StrategyProps['offset']>,
-}, 'VOverlay/locationStrategies')
+}, 'v-overlay-location-strategies')
 
 export function useLocationStrategies (
   props: StrategyProps,
@@ -197,25 +197,23 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   })
 
   let observe = false
-  if (IN_BROWSER) {
-    const observer = new ResizeObserver(() => {
-      if (observe) updateLocation()
-    })
+  const observer = new ResizeObserver(() => {
+    if (observe) updateLocation()
+  })
 
-    watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
-      if (oldActivatorEl) observer.unobserve(oldActivatorEl)
-      if (newActivatorEl) observer.observe(newActivatorEl)
+  watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
+    if (oldActivatorEl) observer.unobserve(oldActivatorEl)
+    if (newActivatorEl) observer.observe(newActivatorEl)
 
-      if (oldContentEl) observer.unobserve(oldContentEl)
-      if (newContentEl) observer.observe(newContentEl)
-    }, {
-      immediate: true,
-    })
+    if (oldContentEl) observer.unobserve(oldContentEl)
+    if (newContentEl) observer.observe(newContentEl)
+  }, {
+    immediate: true,
+  })
 
-    onScopeDispose(() => {
-      observer.disconnect()
-    })
-  }
+  onScopeDispose(() => {
+    observer.disconnect()
+  })
 
   // eslint-disable-next-line max-statements
   function updateLocation () {

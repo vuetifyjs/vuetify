@@ -56,7 +56,7 @@ export const makeActivatorProps = propsFactory({
   closeOnContentClick: Boolean,
 
   ...makeDelayProps(),
-}, 'VOverlay/useActivator')
+}, 'v-overlay-activator')
 
 export function useActivator (
   props: ActivatorProps,

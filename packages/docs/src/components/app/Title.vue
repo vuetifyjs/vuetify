@@ -1,9 +1,7 @@
 <template>
-  <app-headline size="subtitle-2" weight="black" v-bind="$attrs" />
+  <app-headline size="subtitle-2" weight="black" />
 </template>
 
-<script>
-  export default {
-    name: 'AppTitle',
-  }
+<script setup>
+  //
 </script>

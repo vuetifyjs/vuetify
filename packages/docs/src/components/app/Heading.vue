@@ -6,7 +6,7 @@
     <router-link
       v-if="href"
       :to="href"
-      class="text-decoration-none text-right text-md-left"
+      class="text-decoration-none text-end text-md-left"
       style="user-select: none"
       aria-hidden="true"
     >

@@ -31,7 +31,7 @@
   </v-snackbar>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { usePwaStore } from '@/store/pwa'
 
   const pwa = usePwaStore()

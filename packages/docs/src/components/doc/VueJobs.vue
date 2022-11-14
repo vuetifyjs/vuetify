@@ -19,7 +19,7 @@
         >
           <template #subtitle>
             <v-icon
-              class="mr-1"
+              class="me-1"
               icon="mdi-map-marker-outline"
               size="14"
             />
@@ -30,7 +30,7 @@
           <template #append>
             <v-btn
               color="success"
-              class="ml-6"
+              class="ms-6"
               size="small"
               variant="flat"
             >
@@ -54,7 +54,7 @@
           <div class="d-flex align-center text-lowercase">
             <v-chip
               v-if="job.isNew"
-              class="mr-1"
+              class="me-1"
               color="#e83e8c"
               label
               size="x-small"
@@ -83,22 +83,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useJobsStore } from '../../store/jobs'
+  import { useJobsStore } from '@/store/jobs'
 
-  // Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'VueJobs',
-
-    setup () {
-      const { jobs } = useJobsStore()
-      const { t } = useI18n()
-
-      return { jobs, t }
-    },
-  })
+  const { jobs } = useJobsStore()
+  const { t } = useI18n()
 </script>

@@ -14,7 +14,7 @@
     />
 
     <v-card
-      flat
+      variant="flat"
       min-height="180"
       rounded="t-0 b"
     >
@@ -53,15 +53,16 @@
           </v-list-item-subtitle>
         </v-list-item>
 
-        <div class="pr-3 d-flex align-center flex-1-0-auto">
+        <div class="pe-3 d-flex align-center flex-1-0-auto">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
-            :color="tooltip.color ?? 'grey-darken-1'"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
+            class="text-white"
             variant="flat"
           />
         </div>
@@ -71,7 +72,8 @@
 
       <div class="pa-4">
         <app-markdown
-          :content="search?.body"
+          v-if="search?.body"
+          :content="search.body"
           class="releases"
         />
       </div>

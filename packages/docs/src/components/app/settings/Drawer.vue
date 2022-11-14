@@ -3,14 +3,14 @@
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
+    :scrim="false"
     disable-route-watcher
     position="fixed"
-    :scrim="false"
     temporary
     width="300"
   >
     <v-toolbar flat>
-      <v-toolbar-title text="Settings" class="pl-0" />
+      <v-toolbar-title text="Settings" class="ps-0" />
 
       <template #append>
         <v-btn icon="mdi-close" @click="app.settings = false" />
@@ -33,7 +33,7 @@
   </v-navigation-drawer>
 </template>
 
-<script>
+<script setup>
   // Components
   import AppSettingsApi from './Api.vue'
   import AppSettingsRtl from './Rtl.vue'
@@ -43,23 +43,6 @@
   import { useAppStore } from '@/store/app'
   import { useRtl } from 'vuetify'
 
-  export default {
-    name: 'AppSettingsDrawer',
-
-    components: {
-      AppSettingsApi,
-      AppSettingsRtl,
-      AppSettingsTheme,
-    },
-
-    setup () {
-      const { isRtl } = useRtl()
-      const app = useAppStore()
-
-      return {
-        app,
-        isRtl,
-      }
-    },
-  }
+  const { isRtl } = useRtl()
+  const app = useAppStore()
 </script>

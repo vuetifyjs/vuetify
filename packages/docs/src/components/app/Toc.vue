@@ -3,8 +3,9 @@
     id="app-toc"
     color="background"
     floating
-    sticky
     location="right"
+    sticky
+    touchless
     width="256"
   >
     <template
@@ -60,7 +61,6 @@
           <v-col
             v-for="sponsor of sponsors"
             :key="sponsor.slug"
-            :cols="sponsor.metadata.tier === -1 ? 12 : 6"
             class="d-inline-flex"
           >
             <sponsor-card
@@ -70,7 +70,7 @@
             />
           </v-col>
 
-          <v-col cols="12">
+          <v-col cols="12" class="mt-3">
             <sponsor-link block size="large" />
           </v-col>
 
@@ -83,18 +83,18 @@
   </v-navigation-drawer>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
   import SponsorLink from '@/components/sponsor/Link.vue'
 
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
-  import { useSponsorsStore } from '../../store/sponsors'
+  import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
+  import { computed, onBeforeMount, ref } from 'vue'
 
   type TocItem = {
     to: string;
@@ -190,57 +190,42 @@
     return { onScroll, scrolling }
   }
 
-  export default defineComponent({
-    name: 'AppToc',
+  const route = useRoute()
+  const router = useRouter()
+  const theme = useTheme()
 
-    components: {
-      SponsorCard,
-      SponsorLink,
-    },
+  const { scrolling } = useUpdateHashOnScroll(route, router)
 
-    setup () {
-      const route = useRoute()
-      const router = useRouter()
-      const theme = useTheme()
+  async function onClick (hash: string) {
+    if (route.hash === hash) return
 
-      const { onScroll, scrolling } = useUpdateHashOnScroll(route, router)
+    scrolling.value = true
 
-      async function onClick (hash: string) {
-        if (route.hash === hash) return
+    router.replace({ path: route.path, hash })
 
-        scrolling.value = true
+    // await this.$vuetify.goTo(hash)
+    // await wait(200)
 
-        router.replace({ path: route.path, hash })
+    scrolling.value = false
+  }
 
-        // await this.$vuetify.goTo(hash)
-        // await wait(200)
+  const sponsorStore = useSponsorsStore()
 
-        scrolling.value = false
-      }
+  onBeforeMount(async () => sponsorStore.load())
 
-      const sponsorStore = useSponsorsStore()
+  const toc = computed(() => route.meta.toc as TocItem[])
 
-      onBeforeMount(async () => sponsorStore.load())
+  const sponsors = computed(() => (
+    sponsorStore.sponsors
+      .filter(sponsor => sponsor.metadata.tier <= 1)
+      .sort((a, b) => {
+        const aTier = a.metadata.tier
+        const bTier = b.metadata.tier
 
-      return {
-        toc: computed(() => route.meta.toc as TocItem[]),
-        onClick,
-        onScroll,
-        sponsors: computed(() => (
-          sponsorStore.sponsors
-            .filter(sponsor => sponsor.metadata.tier <= 2)
-            .sort((a, b) => {
-              const aTier = a.metadata.tier
-              const bTier = b.metadata.tier
-
-              return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
-            })
-        )),
-        dark: computed(() => theme.current.value.dark),
-        route,
-      }
-    },
-  })
+        return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
+      })
+  ))
+  const dark = computed(() => theme.current.value.dark)
 </script>
 
 <style lang="sass">

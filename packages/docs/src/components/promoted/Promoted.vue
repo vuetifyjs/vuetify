@@ -1,8 +1,9 @@
 <template>
   <a
     v-if="ad"
-    v-bind="attrs"
     class="d-flex mb-4"
+    style="max-width: 640px;"
+    v-bind="attrs"
     @click="onClick"
   >
     <promoted-base
@@ -33,8 +34,8 @@
 
           <app-markdown
             v-if="description"
-            class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
             :content="description"
+            class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
           />
         </div>
       </v-img>
@@ -42,61 +43,49 @@
   </a>
 </template>
 
-<script lang="ts">
+<script setup>
+  // Components
+  import PromotedBase from './Base.vue'
+
   // Composables
-  import { createAdProps, useAd } from '../../composables/ad'
+  import { createAdProps, useAd } from '@/composables/ad'
   import { useGtag } from 'vue-gtag-next'
 
   // Utilities
-  import { computed, defineComponent } from 'vue'
+  import { computed } from 'vue'
 
-  import PromotedBase from './Base.vue'
-
-  export default defineComponent({
-    name: 'Promoted',
-
-    components: { PromotedBase },
-
-    inheritAttrs: false,
-
-    props: {
-      ...createAdProps(),
-      medium: {
-        type: String,
-        default: 'promoted',
-      },
-    },
-
-    setup (props) {
-      const { ad, attrs } = useAd(props)
-      const { event } = useGtag()
-
-      const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
-      const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
-      const background = computed(() => ad.value?.metadata?.images?.background?.url)
-
-      function onClick () {
-        const slug = ad.value?.slug
-
-        if (!slug) return
-
-        event('click', {
-          event_category: 'vuetifys',
-          event_label: slug,
-          value: 'promoted',
-        })
-      }
-
-      return {
-        description,
-        logo,
-        ad,
-        attrs,
-        background,
-        onClick,
-      }
+  const props = defineProps({
+    ...createAdProps(),
+    medium: {
+      type: String,
+      default: 'promoted',
     },
   })
+
+  const { ad, attrs } = useAd(props)
+  const { event } = useGtag()
+
+  const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
+  const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
+  const background = computed(() => ad.value?.metadata?.images?.background?.url)
+
+  function onClick () {
+    const slug = ad.value?.slug
+
+    if (!slug) return
+
+    event('click', {
+      event_category: 'vuetifys',
+      event_label: slug,
+      value: 'promoted',
+    })
+  }
+</script>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
 </script>
 
 <style lang="sass">
