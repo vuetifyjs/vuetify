@@ -14,7 +14,7 @@ related:
   import EnterpriseForm from '@/components/introduction/EnterpriseForm.vue'
 </script>
 
-# Direct support from Vuetify
+# Enterprise support from Vuetify
 
 Let the experts at Vuetify help you get the most out of your application with a customized support plan from the the team behind the framework.
 

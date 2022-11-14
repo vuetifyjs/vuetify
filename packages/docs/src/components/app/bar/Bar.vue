@@ -22,6 +22,8 @@
 
       <app-bar-team-link />
 
+      <app-bar-enterprise-link />
+
       <app-vertical-divider v-if="smAndUp" />
 
       <app-bar-store-link v-if="mdAndUp" />
@@ -39,6 +41,7 @@
 
 <script setup>
   // Components
+  import AppBarEnterpriseLink from './EnterpriseLink.vue'
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
