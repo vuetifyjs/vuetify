@@ -1,11 +1,16 @@
 <template>
   <v-defaults-provider
     :defaults="{
-      VCheckbox: {
+      VCheckboxBtn: {
         color: 'primary',
-        density: 'comfortable',
-        hideDetails: true
-      }
+        density: 'compact',
+      },
+      VTextField: {
+        color: 'primary',
+      },
+      VTextarea: {
+        color: 'primary',
+      },
     }"
   >
     <v-card
@@ -31,34 +36,35 @@
         <v-card-text>
           <v-text-field
             v-model="name"
+            :rules="[rules.required]"
             label="Name"
             name="name"
-            :rules="[rules.required]"
           />
 
           <v-text-field
             v-model="email"
+            :rules="[rules.required, rules.email]"
             label="Email address"
             name="email"
-            :rules="[rules.required, rules.email]"
           />
 
+          <v-label>What services are you interested in?</v-label>
+
           <div class="py-2">
-            <v-label>What services are you interested in?</v-label>
-            <v-checkbox
+            <v-checkbox-btn
               v-model="upgrade"
               label="Upgrading an existing project"
               name="upgrade"
             />
 
-            <v-checkbox
+            <v-checkbox-btn
               v-model="review"
               :false-value="false"
               label="Application performance review"
               name="review"
             />
 
-            <v-checkbox
+            <v-checkbox-btn
               v-model="sla"
               label="Direct support or SLA"
               name="sla"
@@ -83,9 +89,9 @@
 
           <v-btn
             :append-icon="!loading && success ? '$success' : undefined"
+            :color="success ? 'success' : valid ? 'primary' : undefined"
             :disabled="loading || !valid"
             :loading="loading"
-            :color="success ? 'success' : valid ? 'primary' : undefined"
             block
             size="large"
             type="submit"
