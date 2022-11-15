@@ -1,3 +1,4 @@
+/// <reference types="..\..\..\..\types\cypress" />
 /// <reference types="../../../../types/cypress" />
 
 import { VApp } from '@/components/VApp'
@@ -161,7 +162,7 @@ describe('VSlider', () => {
 
     cy.get('.mdi-home').should('have.length', 2)
   })
-  
+
   it('should render icons with actions', () => {
     const onClickPrepend = cy.spy().as('onClickPrepend')
     const onClickAppend = cy.spy().as('onClickAppend')
