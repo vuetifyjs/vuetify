@@ -30,6 +30,7 @@ export const makeScrollProps = propsFactory({
   },
   scrollThreshold: {
     type: [String, Number],
+    validator: v => Number(v) >= 0,
   },
 }, 'scroll')
 
@@ -119,5 +120,8 @@ export function useScroll (
     // later (2 chars chlng)
     isScrollingUp,
     savedScroll,
+    computedScrollThreshold,
+    currentThreshold,
+    currentScroll,
   }
 }

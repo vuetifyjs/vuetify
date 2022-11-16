@@ -85,13 +85,13 @@ When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an eleva
 
 The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this.
 
-<example file="v-app-bar/prop-img-fade" />
+<example file="v-app-bar/prop-img-fade" /> -->
 
 #### Hiding on scroll
 
 `v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this.
 
-<example file="v-app-bar/prop-hide" /> -->
+<example file="v-app-bar/prop-hide" />
 
 #### Images
 
@@ -99,11 +99,11 @@ The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-s
 
 <example file="v-app-bar/prop-image" />
 
-<!-- #### Inverted scrolling
+#### Inverted scrolling
 
 When using the **inverted-scroll** property, the bar will hide until the user scrolls past the designated threshold. Once past the threshold, the `v-app-bar` will continue to display until the users scrolls up past the threshold. If no **scroll-threshold** value is supplied a default value of _0_ will be used.
 
-<example file="v-app-bar/prop-inverted-scroll" /> -->
+<example file="v-app-bar/prop-inverted-scroll" />
 
 #### Prominent
 
@@ -111,11 +111,11 @@ An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as th
 
 <example file="v-app-bar/prop-prominent" />
 
-<!-- #### Scroll threshold
+#### Scroll threshold
 
 `v-app-bar` can have scroll threshold. It will start reacting to scroll only after defined via `scroll-threshold` property amount of pixels.
 
-<example file="v-app-bar/prop-scroll-threshold" /> -->
+<example file="v-app-bar/prop-scroll-threshold" />
 
 <!-- ### Misc
 

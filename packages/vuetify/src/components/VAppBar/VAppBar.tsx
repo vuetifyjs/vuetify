@@ -7,6 +7,7 @@ import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VT
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeScrollProps, useScroll } from '@/composables/scroll'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
@@ -24,8 +25,6 @@ export const VAppBar = genericComponent<new () => {
 
   props: {
     // TODO: Implement scrolling techniques
-    // hideOnScroll: Boolean
-    // invertedScroll: Boolean
     // collapseOnScroll: Boolean
     // elevateOnScroll: Boolean
     // shrinkOnScroll: Boolean
@@ -39,9 +38,18 @@ export const VAppBar = genericComponent<new () => {
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
     },
+    hideOnScroll: {
+      type: Boolean,
+      default: false,
+    },
+    invertedScroll: {
+      type: Boolean,
+      default: false,
+    },
 
     ...makeVToolbarProps(),
     ...makeLayoutItemProps(),
+    ...makeScrollProps(),
 
     height: {
       type: [Number, String],
@@ -55,13 +63,26 @@ export const VAppBar = genericComponent<new () => {
 
   setup (props, { slots }) {
     const vToolbarRef = ref()
-    const isActive = useProxiedModel(props, 'modelValue')
+    const modelValue = useProxiedModel(props, 'modelValue')
     const height = computed(() => {
       const height: number = vToolbarRef.value?.contentHeight ?? 0
       const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
 
       return (height + extensionHeight)
     })
+
+    const scroll = useScroll(props, {
+      canScroll: computed(() => props.hideOnScroll),
+    })
+
+    const belowThreshold = computed(() => {
+      return scroll.currentScroll.value > scroll.computedScrollThreshold.value
+    })
+
+    const isActive = computed(() => {
+      return modelValue.value && (!props.hideOnScroll || belowThreshold.value === props.invertedScroll)
+    })
+
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
@@ -77,7 +98,7 @@ export const VAppBar = genericComponent<new () => {
 
       return (
         <VToolbar
-          ref={ vToolbarRef }
+          ref={vToolbarRef}
           class={[
             'v-app-bar',
             {
@@ -88,8 +109,8 @@ export const VAppBar = genericComponent<new () => {
             ...layoutItemStyles.value,
             height: undefined,
           }}
-          { ...toolbarProps }
-          v-slots={ slots }
+          {...toolbarProps}
+          v-slots={slots}
         />
       )
     })

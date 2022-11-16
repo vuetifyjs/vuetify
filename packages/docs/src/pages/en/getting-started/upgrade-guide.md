@@ -74,6 +74,10 @@ app.use(vuetify)
   - Allowed values are `'underlined'`, `'outlined'`, `'filled'`, `'solo'`, or `'plain'`.
 - `success` and `success-messages` props have been removed.
 
+### v-app-bar
+
+- `inverted-scroll` no longer implies `hide-on-scroll`, use `hide-on-scroll` explicitly if you want that behavior.
+
 ### v-alert
 
 - `border` prop values `left` and `right` have been renamed to `start` and `end`
