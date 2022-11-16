@@ -224,8 +224,6 @@ describe('CustomCard.vue', () => {
 })
 ```
 
-<vuetify slug="material-dashboard-pro" />
-
 ### Mocking Vuetify
 
 Many of Vuetify's components utilize the global `$vuetify` object to derive settings such as default text or breakpoint information. When testing these components, you will need to provide `vue-test-utils` with a mock object.

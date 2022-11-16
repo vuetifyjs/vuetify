@@ -18,8 +18,6 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 ---
 
-<!-- <promoted slug="vuemastery-getting-started" /> -->
-
 ## What is Vuetify?
 
 Vuetify is a complete UI framework built on top of Vue.js. The goal of the project is to provide developers with the tools they need to build rich and engaging user experiences. Vuetify is designed from the ground up to be easy to learn and rewarding to master with almost a hundred carefully crafted components from the [Material Design specification](https://material.io/).
@@ -69,6 +67,6 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 Can't find what you're looking for? Help us improve! Please reach out to [john@vuetifyjs.com](mailto:john@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
 
-<!-- <promoted slug="vuetify-discord" /> -->
+<promoted slug="vuetify-discord" />
 
 <backmatter />
