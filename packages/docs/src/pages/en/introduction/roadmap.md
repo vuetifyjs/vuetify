@@ -14,18 +14,44 @@ related:
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.
 
-<promoted-ad slug="vuetify-github-sponsors" />
+----
 
 ## In Development
 
 The following releases are currently under development:
 
+### v3.1 (Valkyrie)
+
+- **Target Release:** Q1 2023
+- **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
+
+Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
+
+<promoted-ad slug="vuetify-github-sponsors" />
+
+## Long-term support (LTS)
+
+The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
+
+### v2.7 (Nirvana)
+
+- **Target Release:** Q2 2023
+- **Support until:** 18 months after release
+- **Overview:** Backports and deprecations from v3.0.0
+
+----
+
+<promoted-ad slug="vuetify-open-collective" />
+
+## Released
+
+The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
 ### v3.0 (Titan)
 
-- **Target Release:** Soon ™
-- **Alpha:** Complete
-- **Beta:** [Live](https://next.vuetifyjs.com/)
-- **Release Candidate:** [Pending](https://github.com/vuetifyjs/vuetify/issues/14984)
+- **Released:** October 2022
+- **Notes:** [v3.0 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v3.0.0)
 - **Overview:**
   - Rebuilt for Vue 3 using the new [composition api](https://vue-composition-api-rfc.netlify.com/)
   - Global properties that allow you to make large overarching changes to your app
@@ -34,41 +60,6 @@ The following releases are currently under development:
   - First party [Vite](https://vitejs.dev/) support for lightning fast development
   - Greatly improved TypeScript support
   - Better framework coverage with E2E testing using Cypress
-
-Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
-
-## Long-term support (LTS)
-
-<alert type="error">
-
-  v1.5 reached end of life on **July 31st, 2020** and is no longer actively maintained. It is recommended to update to the latest stable version of Vuetify using our [Upgrade guide](/getting-started/upgrade-guide/).
-
-</alert>
-
-The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
-
-### v2.7
-
-- **Target Release:** TBD (probably March 2022)
-- **Support until:** Approx. September 2023
-- **Overview:**
-  Backports and deprecations from v3.0.0
-
-### v1.5
-
-- **Released:** February 2019
-- **Support until:** August 1st, 2020
-- **Notes:** [v1.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
-- **Overview:**
-  Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS.
-
----
-
-<promoted-ad slug="vuetify-open-collective" />
-
-## Released
-
-The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
 ### v2.6 (Horizon)
 
@@ -104,7 +95,7 @@ The following are the already released **minor** and **major** version updates. 
   - Support for a globally defined icon components
   - Improved accessibility in the `v-menu` component
 
----
+----
 
 ### v2.3 (Liberator)
 
@@ -118,7 +109,7 @@ The following are the already released **minor** and **major** version updates. 
   - Improve *Date Pickers, Data Tables, and Calendars*
   - Harden framework in preparation for **LTS version**
 
----
+----
 
 ### v2.2 (Tigris)
 
@@ -134,7 +125,7 @@ The following are the already released **minor** and **major** version updates. 
   - Add new features and improve code styling of `v-expansion-panels`
   - new `v-theme-provider` component
 
----
+----
 
 ### v2.1 (Vanguard)
 
@@ -151,7 +142,7 @@ The following are the already released **minor** and **major** version updates. 
     - `v-mutate`
   - Add lazy loading support for `v-img`
 
----
+----
 
 ### v2.0 (Arcadia)
 
@@ -179,6 +170,20 @@ The following are the already released **minor** and **major** version updates. 
 
 The following releases are old and unsupported **minor** and **major** versions:
 
+### v1.5
+
+- **Released:** February 2019
+- **Support until:** August 1st, 2020
+- **Notes:** [v1.5 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v1.5.0)
+- **Overview:**
+  Added new component, `v-calendar`. Improved functionality of `v-sparkline` with new **bar** and **fill** properties. Improved `v-treeview` and prepared for LTS. Navigate to the [Long-term Support Page](/introduction/long-term-support) for more information on LTS.
+
+<alert type="error">
+
+  v1.5 reached end of life on **July 31st, 2020** and is no longer actively maintained. It is recommended to update to the latest stable version of Vuetify using our [Upgrade guide](/getting-started/upgrade-guide/).
+
+</alert>
+
 ### v1.4
 
 - **Released:** December 2018
@@ -186,7 +191,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   Added new components `v-sparkline` and abstracted `v-toolbar`'s functionality into multiple components for easier maintainability and testing. Rebuilt the entire documentation to make it easier for contributors and maintenance from the team.
 
----
+----
 
 ### v1.3
 
@@ -195,7 +200,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   Added new components, `v-treeview`, `v-timeline` and `v-item-group`. Unified the interfaces used in `v-tabs` and `v-carousel`. Improved the **vuetify-loader** to support effortless application tree-shaking of Vuetify components.
 
----
+----
 
 ### v1.2
 
@@ -204,7 +209,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   Added new components, `v-img`, `v-rating` and `v-hover`. Improved theme propagation system and expanded the functionality of the colors used with components such as HEX and RGBA. Als added numerous new locales.
 
----
+----
 
 ### v1.1
 
@@ -213,7 +218,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   A complete rebuild of all form functionality including all inputs and selection controls. Abstracted features from components like `v-select` into new implementations, `v-autocomplete`, `v-combobox` for more scoped functionality and easier testing. This release also marked the first official support of **RTL** languages.
 
----
+----
 
 ### v1.0
 
@@ -222,7 +227,7 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Overview:**
   The official v1.0 release party. After 18 months and Kael's sanity, we rolled into our first **MAJOR** release. This included a multitude of brand new components, features and functionality.
 
----
+----
 
 ### Alpha release
 
