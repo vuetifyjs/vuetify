@@ -20,10 +20,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
+import type { PropType } from 'vue'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots, SlotsToProps } from '@/util'
@@ -84,7 +85,10 @@ export const VAutocomplete = genericComponent<new <
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
     search: String,
-
+    valueComparator: {
+      type: Function as PropType<typeof deepEqual>,
+      default: deepEqual,
+    },
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
@@ -120,7 +124,7 @@ export const VAutocomplete = genericComponent<new <
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => item.value === v.value) || v
+        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
