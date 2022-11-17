@@ -76,7 +76,7 @@ const run = async () => {
 
   // Missing descriptions
   if (argv.missingDescriptions) {
-    const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' })
+    const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' }).trim()
     const translations: { [filename in string]?: TranslationData } = {}
 
     async function readData (filename: string): Promise<TranslationData> {
