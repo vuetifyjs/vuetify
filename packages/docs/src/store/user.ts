@@ -47,7 +47,7 @@ export const useUserStore = defineStore('user', () => {
   function load () {
     if (!IN_BROWSER) return
 
-    const stored = localStorage.getItem('vuetify3@user')
+    const stored = localStorage.getItem('vuetify@user')
     const data = stored ? JSON.parse(stored) : {}
 
     if (!data.v) {
@@ -80,7 +80,7 @@ export const useUserStore = defineStore('user', () => {
   function save () {
     if (!IN_BROWSER) return
 
-    localStorage.setItem('vuetify3@user', JSON.stringify(state, null, 2))
+    localStorage.setItem('vuetify@user', JSON.stringify(state, null, 2))
   }
 
   load()

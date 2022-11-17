@@ -12,6 +12,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
@@ -138,7 +139,7 @@ export default defineConfig(({ command, mode }) => {
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
-          maximumFileSizeToCacheInBytes: 15 * 1024 ** 2,
+          maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {
           name: 'Vuetify',
@@ -213,6 +214,8 @@ $&`), html)
       },
 
       Inspect(),
+
+      process.env.HTTPS === 'true' ? basicSsl() : undefined,
     ],
 
     // https://github.com/antfu/vite-ssg

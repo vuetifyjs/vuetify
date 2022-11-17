@@ -12,6 +12,7 @@
   "scripts": {
     "dev": "vite",
     "build": "vite-ssg build",
+    "build:dev": "vite build",
     "preview": "vite preview",
     "preview-https": "HTTPS=true vite preview",
     "lint": "vue-tsc --noEmit --pretty && yarn lint:md && jest --no-cache",
@@ -42,6 +43,7 @@
     "@types/markdown-it": "^12.2.3",
     "@types/prismjs": "^1.26.0",
     "@types/rimraf": "^3.0.2",
+    "@vitejs/plugin-basic-ssl": "^0.1.2",
     "@vitejs/plugin-vue": "^3.0.3",
     "@vue/compiler-sfc": "^3.2.38",
     "@vuetify/api-generator": "^3.0.1",
@@ -71,10 +73,10 @@
     "vite-plugin-vue-layouts": "^0.7.0",
     "vite-plugin-vuetify": "^1.0.0-alpha.14",
     "vue-tsc": "^0.35.2",
-    "workbox-precaching": "^6.5.3",
-    "workbox-routing": "^6.5.3",
-    "workbox-strategies": "^6.5.3",
-    "workbox-window": "^6.5.3"
+    "workbox-precaching": "^6.5.4",
+    "workbox-routing": "^6.5.4",
+    "workbox-strategies": "^6.5.4",
+    "workbox-window": "^6.5.4"
   },
   "publishConfig": {
     "access": "public"
