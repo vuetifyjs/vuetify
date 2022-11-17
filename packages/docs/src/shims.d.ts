@@ -41,18 +41,21 @@ declare module 'markdown-it-link-attributes' {
 }
 
 declare module 'cosmicjs' {
-  interface Cosmic {
+  interface Cosmic<T> {
     bucket (params: {
       slug: string
       read_key: string
       write_key?: string
-    }): Bucket
+    }): Bucket<T>
   }
-  interface Bucket {
-    getObject<T>(params: Record<string, any>): Promise<{ object: T }>
-    getObjects<T>(params: Record<string, any>): Promise<{ objects: T[] }>
+  interface BucketObjects<T> {
+    [key: string]: (params: Record<string, any> | string | number) => BucketObjects<T>
+    objects?: T[]
   }
-  export default function Cosmic (): Cosmic
+  interface Bucket<T> {
+    objects: BucketObjects<T>
+  }
+  export default function Cosmic<T> (): Cosmic<T>
 }
 
 declare module 'virtual:examples' {

@@ -44,7 +44,7 @@
   const { event } = useGtag()
   const { name } = useRoute()
   const theme = useTheme()
-  const sponsors = useSponsorsStore()
+  const sponsorStore = useSponsorsStore()
   const sponsor = ref(props.sponsor)
 
   const src = computed(() => {
@@ -68,10 +68,10 @@
   })
 
   if (props.slug && !props.sponsor) {
-    watch(() => sponsors.sponsors, val => {
+    watch(() => sponsorStore.sponsors, val => {
       if (sponsor.value || !val.length) return
 
-      sponsor.value = sponsors.bySlug(props.slug)
+      sponsor.value = sponsorStore.bySlug(props.slug)
     })
   }
 

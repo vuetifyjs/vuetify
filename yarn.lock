@@ -4994,13 +4994,15 @@ core-util-is@1.0.2, core-util-is@~1.0.0:
   resolved "https://registry.yarnpkg.com/core-util-is/-/core-util-is-1.0.2.tgz#b5fd54220aa2bc5ab57aab7140c940754503c1a7"
   integrity sha1-tf1UIgqivFq1eqtxQMlAdUUDwac=
 
-cosmicjs@^4.1.5:
-  version "4.1.5"
-  resolved "https://registry.yarnpkg.com/cosmicjs/-/cosmicjs-4.1.5.tgz#abb5bea6ec9bc26066cb512bd0f96f76810d251c"
-  integrity sha512-gsXJ7UDwnGE0l/dRHWutf2plyi7KQA2HPFITvOmFbmq7YKQCO3DKdyeJKoN5jx0Wp719eRftOVw7WvGeMIL2Rg==
+cosmicjs@^4.2.10:
+  version "4.2.10"
+  resolved "https://registry.yarnpkg.com/cosmicjs/-/cosmicjs-4.2.10.tgz#4380d23a4c4ee5e318b0c2de7b8e9c6d01dd3a40"
+  integrity sha512-1w4mbyvkm8UNtME2l2UYsPP1/4/ulU1cRJfeFH82onBkuhQnxh1Gy1kfrjVY0to7V8UGL73UtJqwrxwQGCalbw==
   dependencies:
     axios "^0.21.1"
     form-data "^3.0.0"
+    regenerator-runtime "^0.13.9"
+    typescript "^4.6.3"
 
 cosmiconfig@^5.1.0, cosmiconfig@^5.2.1:
   version "5.2.1"
@@ -11205,6 +11207,11 @@ regenerator-runtime@^0.13.4:
   resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.7.tgz#cac2dacc8a1ea675feaabaeb8ae833898ae46f55"
   integrity sha512-a54FxoJDIr27pgf7IgeQGxmqUNYrcV338lf/6gH456HZ/PhX+5BcwHXG9ajESmwe6WRO0tAzRUrRmNONWgkrew==
 
+regenerator-runtime@^0.13.9:
+  version "0.13.10"
+  resolved "https://registry.yarnpkg.com/regenerator-runtime/-/regenerator-runtime-0.13.10.tgz#ed07b19616bcbec5da6274ebc75ae95634bfc2ee"
+  integrity sha512-KepLsg4dU12hryUO7bp/axHAKvwGOCV0sGloQtpagJ12ai+ojVDqkeGSiRX1zlq+kjIMZ1t7gpze+26QqtdGqw==
+
 regenerator-transform@^0.15.0:
   version "0.15.0"
   resolved "https://registry.yarnpkg.com/regenerator-transform/-/regenerator-transform-0.15.0.tgz#cbd9ead5d77fae1a48d957cf889ad0586adb6537"
@@ -12714,6 +12721,11 @@ typedarray@^0.0.6:
   version "0.0.6"
   resolved "https://registry.yarnpkg.com/typedarray/-/typedarray-0.0.6.tgz#867ac74e3864187b1d3d47d996a78ec5c8830777"
   integrity sha1-hnrHTjhkGHsdPUfZlqeOxciDB3c=
+
+typescript@^4.6.3:
+  version "4.8.4"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.8.4.tgz#c464abca159669597be5f96b8943500b238e60e6"
+  integrity sha512-QCh+85mCy+h0IGff8r5XWzOVSbBO+KfeYrMQh7NJ58QujwcE22u+NUSmUxqF+un70P9GXKxa2HCNiTTMJknyjQ==
 
 typescript@^4.7.2:
   version "4.7.2"
