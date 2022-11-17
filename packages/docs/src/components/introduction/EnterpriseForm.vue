@@ -24,7 +24,7 @@
       <template #append>
         <v-img
           width="96"
-          src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
+          :src="logo"
         />
       </template>
 
@@ -110,7 +110,10 @@
 <script setup lang="ts">
   // Utilities
   import emailjs from '@emailjs/browser'
-  import { ref, watch } from 'vue'
+  import { computed, ref, watch } from 'vue'
+  import { useTheme } from 'vuetify'
+
+  const theme = useTheme()
 
   const name = ref('')
   const email = ref('')
@@ -126,6 +129,12 @@
     required: (v: string) => !!v || 'Field is required',
     email: (v: any) => /.+@.+/.test(v) || 'E-mail must be valid',
   }
+
+  const logo = computed(() => {
+    const color = theme.current.value.dark ? 'dark' : 'light'
+
+    return `https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-${color}.svg`
+  })
 
   watch(success, val => {
     setTimeout(() => {
