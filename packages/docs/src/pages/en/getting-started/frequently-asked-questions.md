@@ -162,7 +162,7 @@ export default {
 
 - **My _/_ link is active when I'm on _/home_ page.**{ #link-active-home }
 
-  Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/en/api/router-link.html).
+  Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/api/#routerlink).
 
 <br>
 
