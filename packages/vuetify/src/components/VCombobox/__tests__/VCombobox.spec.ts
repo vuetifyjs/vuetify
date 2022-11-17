@@ -77,6 +77,24 @@ describe('VCombobox.ts', () => {
     expect(event).toHaveBeenCalledWith(12)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/14874
+  it('should not add chip if the value is an empty string with spaces', async () => {
+    const wrapper = mountFunction({
+      attachToDocument: true,
+      propsData: {
+        multiple: true,
+        smallChips: true,
+      },
+    })
+
+    const item = { text: ' ' }
+    wrapper.vm.selectItem(item)
+
+    await wrapper.vm.$nextTick()
+
+    expect(wrapper.find('.v-chip').exists()).toBeFalsy()
+  })
+
   it('should not use search input if an option is selected from the menu', async () => {
     const item = { value: 123, text: 'Foo' }
     const wrapper = mountFunction({
