@@ -13,6 +13,7 @@ import rimraf from 'rimraf'
 import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
+import { execSync } from 'child_process'
 
 type TranslationData = {
   [type in 'props' | 'events' | 'slots' | 'exposed']?: {
@@ -75,6 +76,7 @@ const run = async () => {
 
   // Missing descriptions
   if (argv.missingDescriptions) {
+    const currentBranch = execSync('git branch --show-current', { encoding: 'utf-8' })
     const translations: { [filename in string]?: TranslationData } = {}
 
     async function readData (filename: string): Promise<TranslationData> {
@@ -99,9 +101,7 @@ const run = async () => {
       return translations[filename]
     }
 
-    for (const index in componentData) {
-      const component = componentData[index]
-
+    for (const component of componentData) {
       for (const type of ['props', 'events', 'slots', 'exposed']) {
         for (const name in component[type]) {
           if (type === 'props' && !component[type][name].source) {
@@ -109,12 +109,12 @@ const run = async () => {
           }
 
           const filename = type === 'props'
-            ? kebabCase(component[type][name].source ?? componentData[index].componentName)
+            ? kebabCase(component[type][name].source ?? component.componentName)
             : component.kebabName
 
           for (const locale of locales) {
             const sourceData = await readData(`./src/locale/${locale}/${filename}.json`)
-            const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/${locale}/${filename}.json`
+            const githubUrl = `https://github.com/vuetifyjs/vuetify/tree/${currentBranch}/packages/api-generator/src/locale/${locale}/${filename}.json`
 
             sourceData[type] ??= {}
             sourceData[type][name] ??= `MISSING DESCRIPTION ([edit in github](${githubUrl}))`
