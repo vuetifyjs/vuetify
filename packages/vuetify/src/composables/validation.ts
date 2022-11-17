@@ -12,7 +12,7 @@ import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/uti
 import type { PropType } from 'vue'
 import type { MaybeRef } from '@/util'
 
-export type ValidationResult = string | boolean
+export type ValidationResult = string | true
 export type ValidationRule =
   | ValidationResult
   | PromiseLike<ValidationResult>

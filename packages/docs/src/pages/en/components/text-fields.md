@@ -211,7 +211,7 @@ The **prefix** and **suffix** properties allows you to prepend and append inline
 
 #### Validation
 
-Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` / `false` or a `string` containing an error message.
+Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` or a `string` containing an error message.
 
 <example file="v-text-field/prop-validation" />
 

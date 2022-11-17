@@ -27,7 +27,7 @@ describe('validation', () => {
     ['', [(v: any) => !!v || 'foo'], ['foo']],
     ['', [(v: any) => !!v || ''], ['']],
     ['', [(v: any) => Promise.resolve(!!v || 'fizz')], ['fizz']],
-    ['', [(v: any) => new Promise<boolean | string>(resolve => resolve(!!v || 'buzz'))], ['buzz']],
+    ['', [(v: any) => new Promise<true | string>(resolve => resolve(!!v || 'buzz'))], ['buzz']],
     ['foo', [(v: any) => v === 'foo' || 'bar'], []],
     ['foo', [(v: any) => v === 'bar' || 'fizz'], ['fizz']],
   ])('should validate rules and return array of errorMessages %#', async (modelValue, rules, expected) => {
