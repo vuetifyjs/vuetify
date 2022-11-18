@@ -16,20 +16,16 @@
       lines="two"
       subheader
     >
-      <v-subheader>General</v-subheader>
+      <v-list-subheader>General</v-list-subheader>
 
       <v-list-item>
-        <v-list-item-header>
-          <v-list-item-title>Profile photo</v-list-item-title>
-          <v-list-item-subtitle>Change your Google+ profile photo</v-list-item-subtitle>
-        </v-list-item-header>
+        <v-list-item-title>Profile photo</v-list-item-title>
+        <v-list-item-subtitle>Change your Google+ profile photo</v-list-item-subtitle>
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-header>
-          <v-list-item-title>Show your status</v-list-item-title>
-          <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
-        </v-list-item-header>
+        <v-list-item-title>Show your status</v-list-item-title>
+        <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
       </v-list-item>
     </v-list>
 
@@ -40,7 +36,7 @@
       lines="two"
       flat
     >
-      <v-subheader>Hangout notifications</v-subheader>
+      <v-list-subheader>Hangout notifications</v-list-subheader>
 
       <v-list-item-group
         v-model="settings"

@@ -22,10 +22,11 @@ It is our job to enable you to create amazing applications. A lot of the time, y
 The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue:
 
 - Search for similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered already.
+  > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
 - Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
 - Make sure that the reproduction is **MINIMAL** and concise
 
-These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/).
+These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
 
 When writing an issue please provide as much detail as possible. Note that "reproduction steps" should be a series of actions another developer should take after clicking your reproduction link, not a recollection of how you discovered the bug.
 
@@ -33,9 +34,9 @@ Issues that are convoluted and lacking a proper reproduction may be closed by a 
 
 <alert type="success">
 
-  **TIP**
+**TIP**
 
-  When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
+When you create a reproduction, exclude all **elements, properties, and data variables** that are not needed for the reproduction. This helps drastically reduce the time it takes to triage the issue and ultimately resolve it.
 
 </alert>
 
@@ -127,6 +128,12 @@ The documentation is located in `packages/docs` but also uses some files from `p
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
+<alert type="info">
+  
+Please note that Vuetify v3's documentation is located on the `next` branch and not on the `master` branch.
+
+</alert>
+  
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).
@@ -145,12 +152,13 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Type of change | Branch |
-| --- | --- |
-| Documentation | `master` |
-| Bug fixes | `master` |
-| New features | `dev` |
-| Features with breaking changes | `next` |
+| Type of change                 | Branch   |
+| ------------------------------ | -------- |
+| Documentation (v2)             | `master` |
+| Documentation (v3)             | `next`   |
+| Bug fixes                      | `master` |
+| New features                   | `dev`    |
+| Features with breaking changes | `next`   |
 
 ```bash
 # Switch to the desired branch
@@ -169,7 +177,7 @@ Commit your changes following [our guidelines](#commit-guidelines), then push th
 
 <alert type="warning">
 
-  Pull requests that include unrelated commits or your local merges may be **closed** without notice.
+Pull requests that include unrelated commits or your local merges may be **closed** without notice.
 
 </alert>
 
@@ -227,7 +235,7 @@ In order to get a major feature added to Vuetify you must get your RFC merged in
 
   <alert type="error">
 
-    RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
+  RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
 
   </alert>
 
@@ -318,7 +326,7 @@ echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
 
 <alert type="warning">
 
-  Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
+Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
 
 </alert>
 
@@ -328,6 +336,6 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 
 [commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
-[Core Team]: /introduction/meet-the-team/
+[core team]: /introduction/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
-[Issues]: https://github.com/vuetifyjs/vuetify/issues
+[issues]: https://github.com/vuetifyjs/vuetify/issues

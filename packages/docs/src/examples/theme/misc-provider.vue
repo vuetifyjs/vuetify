@@ -18,7 +18,7 @@
 
     <v-card-text>
       <v-list>
-        <v-subheader>I inherit dark from my parent</v-subheader>
+        <v-list-subheader>I inherit dark from my parent</v-list-subheader>
 
         <v-list-item
           v-for="item in items"
@@ -32,11 +32,11 @@
 
       <v-theme-provider root>
         <v-list rounded="b">
-          <v-subheader>
+          <v-list-subheader>
             <span>I inherit from the root</span>
 
             <strong>&nbsp;$vuetify.theme.dark</strong>
-          </v-subheader>
+          </v-list-subheader>
 
           <v-list-item
             v-for="item in items"

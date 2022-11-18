@@ -24,7 +24,7 @@ The `v-card` component is a stylish way to wrap different types of content; such
 
 <usage name="v-card" />
 
-<entry slug="vuetify-zero-theme-pro" />
+<entry />
 
 ## Anatomy
 

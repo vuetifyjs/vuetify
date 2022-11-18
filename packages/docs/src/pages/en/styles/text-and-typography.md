@@ -6,7 +6,6 @@ meta:
 related:
   - /styles/display/
   - /styles/content/
-  - /components/subheaders/
 ---
 
 # Text and typography
