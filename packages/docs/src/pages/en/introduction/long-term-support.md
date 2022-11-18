@@ -13,8 +13,6 @@ related:
 
 As a component framework, we understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and business peace of mind, we offer **Long-term Support** for the latest _minor_ of the last _major_ release. This means with each _major_ release you can have peace of mind in knowing that for **12 months** after a new major release, your existing version will be updated for critical bugs and security vulnerabilities.
 
-<promoted-ad slug="business-support" />
-
 ## Vuetify 2.0
 
 The latest version of Vuetify, based on the Material Design 2 specification. It includes multiple advancements over v1.5 and is the recommended version for the most up-to-date features and bug fixes. This version is actively maintained and has a [roadmap](/introduction/roadmap/) of upcoming features.

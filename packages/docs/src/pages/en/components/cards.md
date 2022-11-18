@@ -51,8 +51,6 @@ Primarily used for **text content** in a card. Applies padding for text, reduces
 
 Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 ## Examples
 
 ### Props
