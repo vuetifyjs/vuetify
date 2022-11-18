@@ -9,12 +9,6 @@ related:
   - /getting-started/wireframes/
 ---
 
-<script setup>
-  import { ref } from 'vue'
-
-  const tab = ref('js')
-</script>
-
 # Theme configuration
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
@@ -27,16 +21,11 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 ## Setup
 
-<v-tabs v-model="tab" color="primary">
-  <v-tab value="js" variant="plain">Javascript</v-tab>
-  <v-tab value="ts" variant="plain">Typescript</v-tab>
-</v-tabs>
-<br>
-
-<v-window v-model="tab">
-  <v-window-item value="js">
-
 Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
+
+### Javascript
+
+Example with only the **defaultTheme** value
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -49,9 +38,8 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
-
-Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
+Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation.
+This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createApp } from 'vue'
@@ -83,11 +71,9 @@ export default createVuetify({
 })
 ```
 
-  </v-window-item>
-  
-  <v-window-item value="ts">
+### Typescript
 
-Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
+Example with only the **defaultTheme** value
 
 ```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
@@ -100,7 +86,7 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the `theme.themes` object. A theme is a collection of colors and options that effects the overall look and feel of your application. You can use the **dark** property to designate the theme as being a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+Adding new themes is as easy as defining a new property in the `theme.themes` object. A theme is a collection of colors and options that effects the overall look and feel of your application. You can use the **dark** property to designate the theme as being a **light** or **dark** variation.This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
 When using Typescript, the `ThemeDefinition` type can be used to get type hints for the structure of the theme object.
 
@@ -134,12 +120,9 @@ export default createVuetify({
 })
 ```
 
-  </v-window-item>
-</v-windows>
-
 ## Changing theme
 
-To dynamically change theme during runtime.
+This can be used to dynamically change the theme during runtime instead of having it statically chosen.
 
 ```html
 <template>
@@ -165,7 +148,7 @@ export default {
 </script>
 ```
 
-Most components support the **theme** prop. When used, a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme applied by its parent [v-card](/components/cards/).
+Although it is note worthy that most components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 
 ```html
 <template>
