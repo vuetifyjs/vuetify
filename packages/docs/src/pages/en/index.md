@@ -1,7 +1,9 @@
 ---
 layout: home
 meta:
-  title: Vuetify
+  title: Vuetify — A UI Component Framework for Vue
+  description: Vuetify is a no design skills required UI Component Framework for Vue. It provides you with all of the tools necessary to create beautiful content rich web applications.
+  keywords: vue, vue components, vue ui components, material design components, vuetify, component framework, component library
 ---
 <script setup>
   import HomeLogo from '@/components/home/Logo.vue'
@@ -14,9 +16,9 @@ meta:
 
 <br>
 
-# Material Design Framework
+# UI Component Framework
 
-Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips.
+Vuetify is a no design skills required UI Component Framework with beautifully handcrafted Vue Components.
 {style="max-width: 568px" .mx-auto}
 
 <br>

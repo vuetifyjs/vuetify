@@ -78,7 +78,7 @@ function genLink () {
 function genOpenGraphMetaInfo (args: Metadata) {
   return parseMeta('og', {
     description: args.description,
-    image: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     site_name: 'Vuetify',
     title: args.title,
     type: 'website',
@@ -118,7 +118,7 @@ function genMeta () {
 
 function genTwitterMetaInfo () {
   return parseMeta('twitter', {
-    card: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    card: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     domain: 'https://vuetifyjs.com/',
     site: 'Vuetify',
   })
