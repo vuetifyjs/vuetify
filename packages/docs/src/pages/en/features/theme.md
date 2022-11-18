@@ -9,6 +9,12 @@ related:
   - /getting-started/wireframes/
 ---
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('js')
+</script>
+
 # Theme configuration
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
@@ -21,9 +27,69 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 ## Setup
 
+<v-tabs v-model="tab" color="primary">
+  <v-tab value="js" variant="plain">Javascript</v-tab>
+  <v-tab value="ts" variant="plain">Typescript</v-tab>
+</v-tabs>
+<br>
+
+<v-window v-model="tab">
+  <v-window-item value="js">
+
 Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
 
 ```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'dark'
+  }
+})
+```
+
+Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+
+Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify, ThemeDefinition } from 'vuetify'
+
+const myCustomLightTheme = {
+  dark: false,
+  colors: {
+    background: '#FFFFFF',
+    surface: '#FFFFFF',
+    primary: '#6200EE',
+    'primary-darken-1': '#3700B3',
+    secondary: '#03DAC6',
+    'secondary-darken-1': '#018786',
+    error: '#B00020',
+    info: '#2196F3',
+    success: '#4CAF50',
+    warning: '#FB8C00',
+  }
+}
+
+export default createVuetify({
+  theme: {
+    defaultTheme: 'myCustomLightTheme',
+    themes: {
+      myCustomLightTheme,
+    }
+  }
+})
+```
+
+  </v-window-item>
+  
+  <v-window-item value="ts">
+
+Vuetify comes with two themes pre-installed, `light` and `dark`. To set the default theme of your application, use the **defaultTheme** option.
+
+```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -67,6 +133,9 @@ export default createVuetify({
   }
 })
 ```
+
+  </v-window-item>
+</v-windows>
 
 ## Changing theme
 
