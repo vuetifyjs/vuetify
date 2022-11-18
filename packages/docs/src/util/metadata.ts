@@ -17,6 +17,7 @@ export function genMetaInfo (
   title: string,
   description: string,
   keywords: string,
+  assets: string[] = [],
 ) {
   const length = (description ?? '').length
 
@@ -31,7 +32,7 @@ export function genMetaInfo (
   }
 
   return {
-    link: [] as (Record<string, any>[]),
+    link: assets.map(href => ({ rel: 'stylesheet', href })),
     meta: [
       { key: 'description', name: 'description', content: description },
       { key: 'keywords', name: 'keywords', content: keywords },

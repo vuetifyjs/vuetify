@@ -34,6 +34,7 @@
       title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
       description: route.meta.description,
       keywords: route.meta.keywords,
+      assets: route.meta.assets,
     })
   })
 
