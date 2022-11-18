@@ -7,7 +7,7 @@ meta:
 related:
   - /getting-started/installation
   - /introduction/roadmap
-  - /about/meet-the-team
+  - /introduction/meet-the-team
 ---
 
 # Introduction

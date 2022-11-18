@@ -28,7 +28,7 @@ The following releases are currently under development:
 - **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
 
-Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
+Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/introduction/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
 
 <promoted slug="vuetify-github-sponsors" />
 
