@@ -3,7 +3,7 @@ nav: Why Vuetify?
 meta:
   title: Why you should be using Vuetify
   description: Vuetify has an extremely active community, provides easy to use Material Design components and is consistently updated.
-  keywords: why vuetify, why choose vuetify, best vue framework, best ui framework
+  keywords: why vuetify, best vue framework, best ui framework, best component framework, best ui library, best component library
 related:
   - /getting-started/installation
   - /introduction/roadmap
@@ -20,25 +20,67 @@ Learn more about what Vuetify is, how to create an application from scratch, bro
 
 ## What is Vuetify?
 
-Vuetify is a complete UI framework built on top of Vue.js. The goal of the project is to provide developers with the tools they need to build rich and engaging user experiences. Vuetify is designed from the ground up to be easy to learn and rewarding to master with almost a hundred carefully crafted components from the [Material Design specification](https://material.io/).
+Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be among the most popular JavaScript frameworks in the world. One of the reasons for this popularity is the wide use of [components](https://vuejs.org/guide/essentials/component-basics.html) which enable developers to create small modules to be used and re-used throughout an application. Vuetify is a collection of Vue components paired with powerful features such [dynamic themes](/features/theme/), [global defaults](/features/global-configuration/), [application layouts](/features/application-layout/), and more. Its goal is to provide developers with all of the necessary tools to build rich and engaging user experiences.
 
-Vuetify takes a mobile first approach to design which means your application just works out of the box — whether it's on a phone, tablet, or desktop computer.
-
-If you are an experienced developer and want to compare Vuetify to other libraries/frameworks, check out our [Vue Framework Comparison Chart](#comparison).
+* [Why you should use it?](#why-vuetify)
+* [Features at a glance](#feature-guides)
+* [Framework comparison](#comparison)
 
 ## Getting started
 
-The easiest way to try Vuetify is to use our [Codepen template](https://template.vuetifyjs.com/). This template is used by all examples within the documentation and is the perfect sandbox to play around with the framework. If you prefer to use a local `index.html` file, we have a guide on how to use Vuetify [via CDN](/getting-started/installation/#cdn).
+The easiest way to try Vuetify is in the browser at [play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
-## Why Vuetify?
+## Why Vuetify? { id="why-vuetify" }
 
-Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be one of the most popular JavaScript frameworks in the world. One of the reasons for this popularity is the wide use of _components_ which enable developers to create concise modules to be used and re-used throughout their application. UI libraries are collections of these modules that implement a specific style guideline and provide the necessary tools to build expansive web applications.
+Vuetify is a powerful UI Component Framework built from the ground up to make front-end development as simple as possible.
 
-Vuetify is developed exactly according to [Material Design specification](https://material.io/) with every component meticulously crafted to be modular, responsive, and performant. Customize your application with unique and dynamic [Layouts](/features/application-layout/) and customize the styles of your components using [SASS variables](/features/sass-variables/).
+Vuetify is built from the ground up to be easy to learn and rewarding to master. Maintain a consistent style throughout your application and be as verbose or concise as you want using **props**, **slots**, or individual **components**. Build complex.
 
-Vuetify has a very active development cycle and is patched weekly, responding to community issues and reports at breakneck speed, allowing you to get your hands on bug fixes and enhancements more often. In addition, every major release is accompanied with 18 months of [Long-term support](/introduction/long-term-support/) for the previous minor version.
+### Flexible components
+
+Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options to can fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exlusively or a combination of:
+
+* Properties
+* Slots
+* Components
+
+Write the bare minimum by using API properties and no additional elements:
+
+<example file="why-vuetify/card-props" open preview />
+
+Or use slots to gain control over the content areas:
+
+<example file="why-vuetify/card-slots" open preview />
+
+Or write your own markup using individual components:
+
+<example file="why-vuetify/card-components" open preview />
+
+This is the power of Vuetify; it just works. There is no one right way, just yours.
+
+### Tooling
+
+Create breathtaking applications at lightning speed using one of our installation presets.
+
+### Community
 
 When you develop with Vuetify, you are never alone. Stuck on a problem? Take advantage of our massive [Discord community](https://community.vuetifyjs.com/) and collaborate with other Vuetify developers in one of our public help channels. Need a more personalized support solution? Vuetify offers **elite support** through [GitHub sponsorship](https://github.com/sponsors/johnleider) with options tailored to individuals and businesses. Check out some other ways to [Sponsor Vuetify development](/introduction/sponsors-and-backers/).
+
+### Professional and Enterprise support
+
+TODO
+
+### Active development
+
+Vuetify has been in active development since 2016 and is constantly responding to community issues and reports at breakneck speed, allowing you to get your hands on bug fixes and enhancements more often. Our overall release cadence typically follows:
+
+* PATCH **(Weekly)**
+* MINOR **(Semi-annual)**
+* MAJOR **(Bi-yearly)**
+
+In addition, after every MAJOR release, the previous version is still maintained with with 18 months of [Long-term support](/introduction/long-term-support/).
+
+### Framework comparison
 
 Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
 
