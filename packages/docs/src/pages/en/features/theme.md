@@ -100,7 +100,7 @@ export default createVuetify({
 })
 ```
 
-Adding new themes is as easy as defining a new property in the **theme.themes** object. A theme is a collection of colors and options that change the overall look and feel of your application. One of these options designates the theme as being either a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
+Adding new themes is as easy as defining a new property in the `theme.themes` object. A theme is a collection of colors and options that effects the overall look and feel of your application. You can use the **dark** property to designate the theme as being a **light** or **dark** variation. This makes it possible for Vuetify to implement Material Design concepts such as elevated surfaces having a lighter overlay color the higher up they are. Find out more about dark themes on the official [Material Design](https://material.io/design/color/dark-theme.html) page.
 
 Use the `ThemeDefinition` type to get type hints for the structure of the theme object.
 
