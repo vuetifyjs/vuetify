@@ -9,9 +9,7 @@
     <promoted-base
       v-bind="$attrs"
       class="v-vuetify--promoted"
-      compact
-      color="transparent"
-      dark
+      density="compact"
       max-width="640"
       outlined
     >
@@ -56,6 +54,7 @@
 
   const props = defineProps({
     ...createAdProps(),
+
     medium: {
       type: String,
       default: 'promoted',

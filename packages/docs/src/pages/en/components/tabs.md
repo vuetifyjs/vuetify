@@ -36,8 +36,6 @@ Make `v-tabs` line up with the `v-toolbar-title` component using the **align** p
 
 <example file="v-tabs/prop-align-title" />
 
-<promoted slug="vuetify-zero-theme-pro" />
-
 #### Align end
 
 The **align** prop can also align tabs to the center or end.

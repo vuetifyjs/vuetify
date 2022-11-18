@@ -22,7 +22,7 @@
     height="100"
   >
     <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
-    <v-sheet class="ma-2 pa-2 align-self-center">align-self-start</v-sheet>
+    <v-sheet class="ma-2 pa-2 align-self-center">align-self-center</v-sheet>
     <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
   </v-sheet>
 

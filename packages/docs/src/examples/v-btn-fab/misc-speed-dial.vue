@@ -7,7 +7,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Options</v-subheader>
+          <div class="text-subheader-2 pa-2">Options</div>
           <v-checkbox
             v-model="hover"
             label="Open on hover"
@@ -19,7 +19,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>FAB location</v-subheader>
+          <div class="text-subheader-2 pa-2">FAB location</div>
           <v-checkbox
             v-model="top"
             label="Top"
@@ -46,7 +46,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Speed dial direction</v-subheader>
+          <div class="text-subheader-2 pa-2">Speed dial direction</div>
           <v-radio-group
             v-model="direction"
             hide-details
@@ -74,7 +74,7 @@
           sm="6"
           md="4"
         >
-          <v-subheader>Transition</v-subheader>
+          <div class="text-subheader-2 pa-2">Transition</div>
           <v-radio-group
             v-model="transition"
             hide-details

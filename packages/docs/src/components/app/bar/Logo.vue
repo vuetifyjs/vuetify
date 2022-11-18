@@ -9,7 +9,7 @@
       :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
       :width="lgAndUp ? 148 : 34"
       class="shrink"
-      transition="scale-transition"
+      :transition="false"
     />
   </router-link>
 </template>

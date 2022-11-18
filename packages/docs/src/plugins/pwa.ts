@@ -14,20 +14,43 @@ export const usePwa: PwaPlugin = async ({ isClient, router }) => {
 
   const pwa = usePwaStore()
   const user = useUserStore()
-  const updateSW = pwa.updateSW = registerSW({
+  pwa.updateSW = registerSW({
     async onNeedRefresh () {
       const registration = await navigator.serviceWorker.getRegistration()
       if (registration?.active && registration?.waiting) {
-        await messageSW(registration.active, { type: 'CLEAN_CACHE' })
+        const manifest = await messageSW(registration.active, { type: 'GET_MANIFEST' })
+        await messageSW(registration.waiting, { type: 'SET_MANIFEST', manifest })
       }
 
       if (user.pwaRefresh) pwa.snackbar = true
     },
   })
 
-  router.afterEach(async (to, from) => {
+  let registration: ServiceWorkerRegistration | undefined
+  router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      updateSW(true)
+      navigator.serviceWorker.getRegistration().then(reg => {
+        registration = reg
+        reg?.update()
+      })
+
+      if (!user.pwaRefresh && registration?.active && registration?.waiting) {
+        pwa.loading = true
+        const promise = new Promise<void>(resolve => {
+          registration!.waiting?.addEventListener('statechange', e => {
+            const sw = e.target as ServiceWorker
+            console.log('SW state change:', sw.state)
+            if (sw.state === 'activated') {
+              window.location.pathname = to.fullPath
+              resolve()
+            } else if (sw.state === 'redundant') {
+              resolve()
+            }
+          })
+        })
+        await messageSW(registration.waiting, { type: 'SKIP_WAITING' })
+        await promise
+      }
     }
   })
 }

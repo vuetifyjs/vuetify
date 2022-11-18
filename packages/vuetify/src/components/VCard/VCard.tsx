@@ -128,6 +128,7 @@ export const VCard = defineComponent({
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }
           v-ripple={ isClickable.value }
+          tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (
             <VDefaultsProvider

@@ -23,6 +23,22 @@
   </v-container>
 </template>
 
-<script setup>
+<script setup lang="ts">
+  import { onMounted } from 'vue'
   import { rpath } from '@/util/routes'
+  import { usePwaStore } from '@/store/pwa'
+  import { useHead } from '@vueuse/head'
+
+  const pwa = usePwaStore()
+  useHead({
+    title: 'Page not found',
+  })
+
+  onMounted(async () => {
+    const sw = await navigator.serviceWorker.getRegistration()
+    await sw?.update()
+    if (sw?.waiting) {
+      pwa.update()
+    }
+  })
 </script>

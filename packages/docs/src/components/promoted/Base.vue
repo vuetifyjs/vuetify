@@ -20,8 +20,10 @@
   import { computed } from 'vue'
 
   const props = defineProps({
-    compact: Boolean,
-    comfortable: Boolean,
+    density: {
+      type: String,
+      default: 'default',
+    },
     minHeight: [Number, String],
   })
 
@@ -30,8 +32,8 @@
 
   const minHeight = computed(() => {
     if (props.minHeight) return props.minHeight
-    if (props.compact) return 52
-    if (props.comfortable) return 74
+    if (props.density === 'compact') return 52
+    if (props.density === 'comfortable') return 74
 
     return 118
   })

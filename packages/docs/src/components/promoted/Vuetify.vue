@@ -1,8 +1,8 @@
 <template>
   <promoted-base
     class="v-vuetify mb-4"
-    comfortable
     border
+    density="comfortable"
   >
     <v-list-item
       v-if="ad"

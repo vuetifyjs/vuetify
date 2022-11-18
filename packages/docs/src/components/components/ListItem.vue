@@ -1,7 +1,7 @@
 <template>
   <v-col cols="4">
     <v-card
-      :image="`https://cdn.vuetifyjs.com/docs/images/components-temp/${name}.png`"
+      :image="`https://cdn.vuetifyjs.com/docs/images/preview/${name}.png`"
       :to="rpath(`/components/${name}`)"
       class="mb-3"
       elevation="0"
