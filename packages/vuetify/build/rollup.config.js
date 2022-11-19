@@ -107,8 +107,7 @@ export default {
           )
           await Promise.all(importedIds.map(async id => {
             // Fix for Windows
-            id = id.replace(/.*:\\/, '\\').replaceAll('\\', '/')
-            const importFrom = path.relative(path.resolve(__dirname, '../src'), id).replace(/\.ts$/, '.mjs')
+            const importFrom = path.relative(path.resolve(__dirname, '../src'), id.replace(/.*:\\/, '\\').replaceAll('\\', '/')).replace(/\.ts$/, '.mjs')
 
             if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
               variables.push(id)
