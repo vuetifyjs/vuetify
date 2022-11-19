@@ -15,11 +15,11 @@ The `v-scroll` directive allows you to provide callbacks when the window, specif
 
 <entry />
 
-## Usage
+<!-- ## Usage
 
 The default behavior is to bind to the window. If no additional configuration options are needed, you can simply pass your callback function.
 
-<example file="v-scroll/usage" />
+<example file="v-scroll/usage" /> -->
 
 ## API
 
