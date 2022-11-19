@@ -50,11 +50,11 @@ const run = async () => {
 
   await mkdirp('./src/tmp')
   for (const component in components) {
-    await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
-    // await fs.writeFile(`./src/tmp/${component}.d.ts`,
-    //   template.replaceAll('__component__', component)
-    //     .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
-    // )
+    // await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
+    await fs.writeFile(`./src/tmp/${component}.d.ts`,
+      template.replaceAll('__component__', component)
+        .replaceAll('__name__', componentsInfo[component].from.replace('.mjs', '.js'))
+    )
   }
 
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
