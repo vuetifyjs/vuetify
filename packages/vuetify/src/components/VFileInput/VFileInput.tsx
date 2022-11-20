@@ -26,7 +26,6 @@ export const VFileInput = defineComponent({
   inheritAttrs: false,
 
   props: {
-    chips: Boolean,
     counter: Boolean,
     counterSizeString: {
       type: String,

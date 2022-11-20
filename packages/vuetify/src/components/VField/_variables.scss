@@ -21,16 +21,19 @@ $field-control-solo-elevation: 2 !default;
 $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;
-$field-control-padding-top: 10px !default;
-$field-control-padding-bottom: 6px !default;
+$field-control-padding-top: 16px !default;
+$field-control-padding-bottom: 16px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
 $field-control-underlined-height: 48px !default;
 $field-control-underlined-padding-bottom: 2px !default;
 $field-control-height: 56px !default;
+$field-control-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
+$field-chips-margin-top: ('default': 1, 'comfortable': 0, 'compact': 0) !default;
+$field-chips-margin-bottom: ('default': 3, 'comfortable': 3, 'compact': 2) !default;
+$field-chip-height: 20px;
 
 // INPUT
-$field-input-padding-top: 32px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 
 // LABEL

@@ -1,7 +1,13 @@
+@use 'sass:selector'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-input
+  @at-root
+    @include tools.density('v-input', $input-control-density) using ($modifier)
+      --v-input-control-height: #{$input-control-height + $modifier * .5}
+      --v-prepend-append-padding-top: #{$input-control-padding-top + $modifier * .25}
+      
   display: grid
   flex: 1 1 auto
   font-size: $input-font-size
@@ -10,11 +16,6 @@
 
   &--disabled
     pointer-events: none
-
-  @at-root
-    @include tools.density('v-input', $input-density) using ($modifier)
-      --v-input-control-height: #{$input-control-height + $modifier}
-      --v-input-padding-top: #{16px + $modifier * .5}
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"
@@ -74,7 +75,7 @@
 .v-input__prepend,
 .v-input__append
   display: flex
-  padding-top: var(--v-input-padding-top)
+  padding-top: var(--v-prepend-append-padding-top)
 
 .v-input__prepend
   grid-area: prepend

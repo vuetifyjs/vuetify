@@ -4,10 +4,6 @@
 @use '../../styles/tools'
 @use './variables' as *
 
-@at-root
-  @include tools.density('v-input', $combobox-chips-margin-bottom) using ($modifier)
-    --combobox-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-
 .v-combobox
   .v-field
     .v-text-field__prefix,
@@ -62,14 +58,6 @@
       > .v-icon
         opacity: var(--v-high-emphasis-opacity)
         transform: rotate(180deg)
-
-  &--chips
-    .v-combobox__selection
-      margin-top: $combobox-chips-margin-top
-      margin-bottom: var(--combobox-chips-margin-bottom)
-
-      &:first-child
-        margin-inline-start: 0
 
   &--selecting-index
     .v-combobox__selection
