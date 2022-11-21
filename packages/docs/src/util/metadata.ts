@@ -114,13 +114,15 @@ function genMeta () {
       name: 'viewport',
       content: 'width=device-width, initial-scale=1, maximum-scale=5, minimal-ui',
     },
+    { name: 'theme-color', content: '#1867c0' },
   ]
 }
 
 function genTwitterMetaInfo () {
   return parseMeta('twitter', {
-    card: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    card: 'summary_large_image',
     domain: 'https://vuetifyjs.com/',
-    site: 'Vuetify',
+    site: '@vuetifyjs',
   })
 }
