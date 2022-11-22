@@ -73,6 +73,14 @@
           &:not(.v-textarea) #{$root}
             --v-field-padding-top: #{$field-control-padding-top + $modifier + 10px}
             --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier - 10px}
+    &.v-field--no-label.v-field--chips
+      $root: &
+      @at-root
+        @include tools.density('v-input', $field-control-density) using ($modifier)
+          #{$root}
+            --v-field-padding-top: #{$field-control-padding-top + $modifier * .75}
+            --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier}
+      
 
   &--variant-outlined
     $root: &
@@ -128,6 +136,7 @@
         &:not(.v-field--no-label)
           --v-field-padding-top: #{$field-control-padding-top + $modifier - 2px}
           --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier + 2px}
+
   $root: & 
   @at-root
     @include tools.density('v-input', $field-chips-margin-top) using ($modifier)
