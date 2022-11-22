@@ -26,7 +26,14 @@ The following releases are currently under development:
 - **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
 
-Track our progress in the [Vuetify GitHub Issues](https://github.com/vuetifyjs/vuetify/issues?q=is%3Aissue+is%3Aopen+sort%3Aupdated-desc+label%3ATask) or connect with the [Team](/about/meet-the-team/) on [Discord](https://community.vuetifyjs.com/).
+----
+
+### 🧪 Labs { id="labs" }
+
+- **Target Release:** Q4 2022
+- **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state. Tentative list of components to be released:
+  - `v-data-table`
+  - `v-date-picker`
 
 <promoted-ad slug="vuetify-github-sponsors" />
 
@@ -61,12 +68,16 @@ The following are the already released **minor** and **major** version updates. 
   - Greatly improved TypeScript support
   - Better framework coverage with E2E testing using Cypress
 
+----
+
 ### v2.6 (Horizon)
 
 - **Released**: November 2021
 - **Notes**: [v2.6 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v2.6.0)
 - **Overview**:
   New [v-otp-input](/components/otp-input/) component, calendar event and scrolling improvements, minor features for other components.
+
+----
 
 ### v2.5 (Avalon)
 
@@ -78,6 +89,8 @@ The following are the already released **minor** and **major** version updates. 
   - Expand functionality of `v-data-table`
   - Quality of life improvements
   - General bug fixes
+
+----
 
 ### v2.4 (Endurance)
 
