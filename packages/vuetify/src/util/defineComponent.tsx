@@ -1,6 +1,6 @@
 // Utils
 import {
-  defineComponent as _defineComponent,
+  defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
   effectScope,
   getCurrentInstance,
   shallowReactive,
