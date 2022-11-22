@@ -22,6 +22,10 @@ const banner = `/*!
 * Released under the MIT License.
 */\n`
 
+function fixWindowsPath(path) {
+  return path.replace(/^[^:]+:\\/, '\\').replaceAll('\\', '/')
+}
+
 export default {
   input: 'src/entry-bundler.ts',
   output: [
@@ -80,7 +84,7 @@ export default {
 
         // Individual CSS files
         for (const { id, content } of styleNodes) {
-          const out = path.parse(id.replace(
+          const out = path.parse(fixWindowsPath(id).replace(
             path.resolve(__dirname, '../src'),
             path.resolve(__dirname, '../lib')
           ))
@@ -106,7 +110,8 @@ export default {
             (await this.resolve('src/components/index.ts')).id
           )
           await Promise.all(importedIds.map(async id => {
-            const importFrom = path.relative(path.resolve(__dirname, '../src'), id).replace(/\.ts$/, '.mjs')
+            // Fix for Windows
+            const importFrom = path.relative(path.resolve(__dirname, '../src'), fixWindowsPath(id)).replace(/\.ts$/, '.mjs')
 
             if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
               variables.push(id)
