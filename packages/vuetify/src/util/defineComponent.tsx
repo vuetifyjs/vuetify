@@ -1,18 +1,17 @@
 // Utils
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
-  effectScope,
   getCurrentInstance,
   shallowReactive,
   shallowRef,
   toRaw,
-  watch,
   watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
 import { mergeDeep, toKebabCase } from '@/util/helpers'
 import { injectSelf } from '@/util/injectSelf'
 import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defaults'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type {
@@ -22,7 +21,6 @@ import type {
   ComponentPropsOptions,
   ComputedOptions,
   DefineComponent,
-  EffectScope,
   EmitsOptions,
   MethodOptions,
   VNode,
@@ -78,16 +76,9 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
       const setupBindings = options._setup(_props, ctx)
 
-      let scope: EffectScope
-      watch(_subcomponentDefaults, (val, oldVal) => {
-        if (!val && scope) scope.stop()
-        else if (val && !oldVal) {
-          scope = effectScope()
-          scope.run(() => {
-            provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, val))
-          })
-        }
-      }, { immediate: true })
+      useToggleScope(_subcomponentDefaults, () => {
+        provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, _subcomponentDefaults.value))
+      })
 
       return setupBindings
     }

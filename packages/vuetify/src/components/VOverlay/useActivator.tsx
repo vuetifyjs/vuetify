@@ -214,6 +214,10 @@ export function useActivator (
     }
   }, { flush: 'post', immediate: true })
 
+  onScopeDispose(() => {
+    scope?.stop()
+  })
+
   return { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents }
 }
 
