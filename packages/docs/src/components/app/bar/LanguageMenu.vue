@@ -1,38 +1,32 @@
 <template>
-  <v-btn
-    class="px-0 px-md-2 font-weight-regular"
-    color="medium-emphasis"
-    variant="text"
+  <app-menu
+    key="language-menu"
+    :close-on-content-click="false"
+    :open-on-hover="false"
+    :items="items"
   >
-    <v-icon
-      icon="mdi-translate"
-      size="24"
-    />
+    <template #activator="{ props }">
+      <app-tooltip-btn
+        color="medium-emphasis"
+        icon="mdi-translate"
+        path="languages"
+        v-bind="props"
+      />
+    </template>
 
-    <chevron-down />
-
-    <app-menu
-      key="language-menu"
-      :items="items"
-      activator="parent"
-    >
-      <template #item="{ item }">
-        <v-list-item
-          :key="item.locale"
-          link
-          @click="changeLocale(item.locale)"
-        >
-          <v-list-item-title v-text="item.title" />
-        </v-list-item>
-      </template>
-    </app-menu>
-  </v-btn>
+    <template #item="{ item }">
+      <v-list-item
+        :key="item.locale"
+        link
+        @click="changeLocale(item.locale)"
+      >
+        <v-list-item-title v-text="item.title" />
+      </v-list-item>
+    </template>
+  </app-menu>
 </template>
 
 <script setup lang="ts">
-  // Components
-  import ChevronDown from '@/components/icons/ChevronDown.vue'
-
   // Composables
   import { useI18n } from 'vue-i18n'
   import { useLocaleStore } from '@/store/locale'
