@@ -86,8 +86,7 @@ export default createVuetify({
 })
 ```
 
-
-When using Typescript, the `ThemeDefinition` type can be used to get type hints for the structure of the theme object.
+When using Typescript you may use the `ThemeDefinition` type to get type hints for the structure of the theme object.
 
 ```ts { resource="src/plugins/vuetify.ts" }
 import { createApp } from 'vue'
@@ -121,7 +120,7 @@ export default createVuetify({
 
 ## Changing theme
 
-This can be used to dynamically change the theme during runtime instead of having it statically chosen.
+This is used when you need to change the theme during runtime
 
 ```html
 <template>
@@ -147,7 +146,7 @@ export default {
 </script>
 ```
 
-Although it is note worthy that most components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
+You should keep in mind that most of the Vuetify components support the **theme** prop. When used a new context is created for _that_ specific component and **all** of its children. In the following example, the [v-btn](/components/buttons/) uses the **dark** theme because it is applied to its parent [v-card](/components/cards/).
 
 ```html
 <template>
