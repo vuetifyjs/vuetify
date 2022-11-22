@@ -220,6 +220,7 @@
         --v-field-label-padding-top: #{$field-control-padding-top + $modifier}
         --v-field-label-padding-bottom: #{$field-control-padding-bottom + $modifier}
         
+        
   contain: layout paint
   margin-inline-start: var(--v-field-padding-start)
   margin-inline-end: var(--v-field-padding-end)
@@ -242,6 +243,12 @@
     color: rgb(var(--v-theme-error))
   
   &--floating
+    $root: &
+    @at-root
+      @include tools.density('v-input', $field-control-density) using ($modifier)
+        #{$root}
+          --v-field-label-padding-top: #{6px + $modifier * .75}
+
     --v-field-label-scale: #{$field-label-floating-scale}em
     font-size: var(--v-field-label-scale)
     visibility: hidden
