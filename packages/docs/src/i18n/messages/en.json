@@ -45,7 +45,7 @@
     "a11y": "Accessibility and section 508 support",
     "caption": "Vue Framework Comparison {year}",
     "enterprise": "Business and enterprise support",
-    "lts": "Long-term Support",
+    "lts": "18 months LTS (Long-term support)",
     "release": "Release cadence**",
     "rtl": "RTL support",
     "themes": "Premium themes",
