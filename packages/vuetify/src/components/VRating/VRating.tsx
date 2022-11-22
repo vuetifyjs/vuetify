@@ -90,7 +90,7 @@ export const VRating = genericComponent<new <T>() => {
   },
 
   emits: {
-    'update:modelValue': (value: number|string) => true,
+    'update:modelValue': (value: number | string) => true,
   },
 
   setup (props, { slots }) {
