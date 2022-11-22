@@ -16,7 +16,10 @@
     "image": "The `src` used for `v-img`. For additional customization options, use the **image** slot."
   },
   "slots": {
-    "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop.",
-    "image": "Expects the [`v-img`](/components/images/) component."
+    "append": "Adds an item before the app bar content",
+    "extension": "Slot positioned directly under the main content of the app bar. Height of this slot can be set explicitly with the **extension-height** prop.",
+    "image": "Expects the [`v-img`](/components/images/) component.",
+    "prepend": "Adds an item after the app bar content",
+    "title": "Slot containing the app bar title"
   }
 }
