@@ -12,6 +12,7 @@ related:
 <script setup>
   import Comparison from '@/components/introduction/Comparison.vue'
 </script>
+
 # Introduction
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
@@ -30,7 +31,7 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 ## Getting started
 
-The fastest way to try Vuetify is in the browser at [play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
+The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](https://play.vuetifyjs.com/). For a complete list of installation options please navigate to the [Installation page](/getting-started/installation/).
 
 ## Why Vuetify? { id="why-vuetify" }
 
@@ -38,35 +39,17 @@ Vuetify is a powerful UI Component Framework built from the ground up to be easy
 
 ### Flexible components
 
-Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exlusively or a combination of:
-
-* Properties
-* Slots
-* Components
-
-Write the bare minimum by using API properties and no additional elements:
-
-<example file="why-vuetify/card-props" open preview />
-
-Or use slots to gain explicit control over the rendered content areas:
-
-<example file="why-vuetify/card-slots" open preview />
-
-Or write your own markup using individual components:
-
-<example file="why-vuetify/card-components" open preview />
-
-This is the power of Vuetify; it just works. **There is no one right way, just your way.**
+Every component in Vuetify is handcrafted under the guise of Google's [Material Design specification](https://material.io/) and comes with hundreds of customization options that fit any style or design; even if it's not Material. Write Vue templates that are as concise or verbose as you want using exlusively or a combination of **props**, **slots**, and **components**.
 
 ### Tooling
 
 Vuetify has a large ecosystem of supporting tools that enrich the development experience that range from project creation to design UI kits.
 
-* [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
-* [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
-* Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
-* [Wireframe examples](/getting-started/wireframes/)
+* 🎨 [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
+* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
+* 🏗️ [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
+* ⌨️ Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
+* 🖼️ [Wireframe examples](/getting-started/wireframes/)
 
 ### Community
 
@@ -78,9 +61,9 @@ When you develop with Vuetify, you are never alone. Stuck on a problem? Take adv
 
 Vuetify offers an array of support services designed to help you get the most out of your application. Let our experience team provide you with the tools that you need to succeed with:
 
-* Vuetify version upgrades
-* Performance review & analysis
-* SLA & direct support
+* ↗️ Vuetify version upgrades
+* 📊 Performance review & analysis
+* ⛑️ SLA & direct support
 
 For more information regarding our professional support options, navigate to our [Enterprise support](/introduction/enterprise-support/) page.
 
@@ -88,9 +71,9 @@ For more information regarding our professional support options, navigate to our
 
 Vuetify has been in active development since 2016 and is constantly responding to community issues and reports at breakneck speed, allowing you to get your hands on bug fixes and enhancements more often. Our overall release cadence typically follows:
 
-* PATCH **(Weekly)**
-* MINOR **(Semi-annual)**
-* MAJOR **(Bi-yearly)**
+* 🔨 PATCH **(Weekly)**
+* ⛏️ MINOR **(Quarterly)**
+* ⚒️ MAJOR **(Bi-yearly to Yearly)**
 
 In addition, after every MAJOR release, the previous version is still maintained with with 18 months of [Long-term support](/introduction/long-term-support/).
 
