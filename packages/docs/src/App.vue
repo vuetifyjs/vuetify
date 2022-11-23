@@ -20,9 +20,6 @@
   // Globals
   import { IN_BROWSER } from '@/util/globals'
 
-  // Data
-  import metadata from '@/data/metadata.json'
-
   const user = useUserStore()
   const pwa = usePwaStore()
   const router = useRouter()
@@ -33,10 +30,11 @@
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
-    return genAppMetaInfo(path.value === '' ? metadata : {
-      title: `${route.meta.title} — Vuetify`,
+    return genAppMetaInfo({
+      title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
       description: route.meta.description,
       keywords: route.meta.keywords,
+      assets: route.meta.assets,
     })
   })
 
@@ -93,7 +91,8 @@
       font-size: 1.25rem
       font-weight: 300
 
-  ul:not([class])
+  ul:not([class]),
+  ol:not([class])
     padding-left: 20px
     margin-bottom: 16px
 </style>

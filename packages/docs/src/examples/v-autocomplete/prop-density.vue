@@ -1,40 +1,28 @@
 <template>
   <v-card>
     <v-container fluid>
-      <v-row
-        align="center"
-      >
+      <v-row>
         <v-col cols="12">
           <v-autocomplete
             v-model="values"
             :items="items"
-            variant="outlined"
-            dense
-            chips
-            small-chips
-            label="Outlined"
-            multiple
+            label="Default"
           ></v-autocomplete>
         </v-col>
         <v-col cols="12">
           <v-autocomplete
             v-model="values"
             :items="items"
-            dense
-            chips
-            small-chips
-            label="Solo"
-            multiple
-            variant="solo"
+            density="comfortable"
+            label="Comfortable"
           ></v-autocomplete>
         </v-col>
         <v-col cols="12">
           <v-autocomplete
-            v-model="value"
+            v-model="values"
             :items="items"
-            dense
-            variant="filled"
-            label="Filled"
+            density="compact"
+            label="Compact"
           ></v-autocomplete>
         </v-col>
       </v-row>
@@ -46,7 +34,7 @@
   export default {
     data: () => ({
       items: ['foo', 'bar', 'fizz', 'buzz'],
-      values: ['foo', 'bar'],
+      values: 'foo',
       value: null,
     }),
   }

@@ -18,7 +18,7 @@ related:
 
 Let the experts at Vuetify help you get the most out of your application with a customized support plan from the the team behind the framework.
 
-<!-- ![Enterprise support Entry](https://cdn.vuetifyjs.com/docs/images/entry/enterprise-support-entry.png) -->
+![Enterprise support Entry](https://cdn.vuetifyjs.com/docs/images/entry/enterprise-support-entry.png)
 
 ----
 

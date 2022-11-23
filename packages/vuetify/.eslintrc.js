@@ -21,6 +21,14 @@ module.exports = {
     // 'local-rules/no-render-string-reference': 'error',
     'local-rules/jsx-condition-key': 'error',
 
+    'no-restricted-imports': ['error', {
+      paths: [{
+        name: 'vue',
+        importNames: ['defineComponent'],
+        message: 'Please use wrapped function from @/util instead'
+      }]
+    }]
+
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',
   },
@@ -40,6 +48,8 @@ module.exports = {
       extends: ['plugin:jest/recommended'],
       rules: {
         'local-rules/jest-global-imports': 'error',
+
+        'no-restricted-imports': 'off',
 
         'jest/no-disabled-tests': 'off',
         'jest/no-large-snapshots': 'warn',
@@ -61,6 +71,8 @@ module.exports = {
       extends: ['plugin:cypress/recommended'],
       rules: {
         'local-rules/cypress-types-reference': 'error',
+
+        'no-restricted-imports': 'off',
 
         'no-unused-expressions': 'off',
         'cypress/no-assigning-return-values': 'error',

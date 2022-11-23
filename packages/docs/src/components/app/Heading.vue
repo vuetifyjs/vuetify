@@ -6,11 +6,11 @@
     <router-link
       v-if="href"
       :to="href"
-      class="text-decoration-none text-end text-md-left"
+      class="text-decoration-none text-end text-md-start"
       style="user-select: none"
       aria-hidden="true"
     >
-      #
+      <span class="text-primary">#</span>
     </router-link>
 
     <slot>

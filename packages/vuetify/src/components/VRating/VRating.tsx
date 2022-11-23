@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { createRange, genericComponent, getUid, useRender } from '@/util'
+import { clamp, createRange, genericComponent, getUid, useRender } from '@/util'
 
 // Types
 import type { SlotsToProps } from '@/util'
@@ -72,7 +72,7 @@ export const VRating = genericComponent<new <T>() => {
     },
     readonly: Boolean,
     modelValue: {
-      type: Number,
+      type: [Number, String],
       default: 0,
     },
     itemLabels: Array as Prop<string[]>,
@@ -90,13 +90,14 @@ export const VRating = genericComponent<new <T>() => {
   },
 
   emits: {
-    'update:modelValue': (value: number) => true,
+    'update:modelValue': (value: number | string) => true,
   },
 
   setup (props, { slots }) {
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const rating = useProxiedModel(props, 'modelValue')
+    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, +props.length))
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
@@ -107,7 +108,7 @@ export const VRating = genericComponent<new <T>() => {
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
-      const isFilled = rating.value >= value
+      const isFilled = normalizedValue.value >= value
       const isHovered = hoverIndex.value >= value
       const isFullIcon = isHovering ? isHovered : isFilled
       const icon = isFullIcon ? props.fullIcon : props.emptyIcon
@@ -127,7 +128,7 @@ export const VRating = genericComponent<new <T>() => {
       }
 
       function onFocus () {
-        if (value === 0 && rating.value === 0) {
+        if (value === 0 && normalizedValue.value === 0) {
           firstRef.value?.focus()
         } else {
           focusIndex.value = value
@@ -140,7 +141,7 @@ export const VRating = genericComponent<new <T>() => {
 
       function onClick () {
         if (props.disabled || props.readonly) return
-        rating.value = rating.value === value && props.clearable ? 0 : value
+        rating.value = normalizedValue.value === value && props.clearable ? 0 : value
       }
 
       return {
@@ -210,7 +211,7 @@ export const VRating = genericComponent<new <T>() => {
             id={ id }
             type="radio"
             value={ value }
-            checked={ rating.value === value }
+            checked={ normalizedValue.value === value }
             onClick={ onClick }
             onFocus={ onFocus }
             onBlur={ onBlur }
