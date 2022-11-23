@@ -6,7 +6,6 @@
         <div>VChip bug reproduction</div>
         <p>Click on a chip with a `to` prop should not cause a full page reload.</p>
 
-        
         <!-- Causes full page reload -->
         <v-chip :to="{ name: 'page1' }">page1</v-chip>
 
