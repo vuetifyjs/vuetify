@@ -35,7 +35,7 @@
   })
 
   onMounted(async () => {
-    const sw = await navigator.serviceWorker.getRegistration()
+    const sw = await navigator.serviceWorker?.getRegistration()
     await sw?.update()
     if (sw?.waiting) {
       pwa.update()
