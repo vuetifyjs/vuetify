@@ -1,17 +1,16 @@
 <template>
   <v-app>
-    <!-- <Playground /> -->
-    <VChipRepro />
+    <Playground />
   </v-app>
 </template>
 
 <script>
-  import VChipRepro from './VChipRepro.vue'
+  import Playground from './Playground.vue'
 
   export default {
     name: 'App',
     components: {
-      VChipRepro,
+      Playground,
     },
   }
 </script>
