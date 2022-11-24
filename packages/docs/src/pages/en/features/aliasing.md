@@ -43,11 +43,9 @@ export default createVuetify({
   aliases: {
     MyButton: VBtn,
   },
-  {
-    defaults: {
-      VBtn: { variant: 'flat' },
-      MyButton: { variant: 'tonal' },
-    },
+  defaults: {
+    VBtn: { variant: 'flat' },
+    MyButton: { variant: 'tonal' },
   }
 })
 ```
@@ -64,21 +62,19 @@ export default createVuetify({
   aliases: {
     MyButton: VBtn,
   },
-  {
-    defaults: {
-      MyButton: {
-        color: 'primary',
-        variant: 'tonal',
-      },
-      VBtn: {
-        color: 'secondary',
-        variant: 'flat'
-      },
-      VCard: {
-        MyButton: { color: 'secondary' },
-        VBtn: { color: 'primary' },
-      }
+  defaults: {
+    MyButton: {
+      color: 'primary',
+      variant: 'tonal',
     },
+    VBtn: {
+      color: 'secondary',
+      variant: 'flat'
+    },
+    VCard: {
+      MyButton: { color: 'secondary' },
+      VBtn: { color: 'primary' },
+    }
   }
 })
 ```
