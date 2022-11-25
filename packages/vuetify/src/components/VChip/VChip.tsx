@@ -124,7 +124,6 @@ export const VChip = defineComponent({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const hasColor = !group || group.isSelected.value
-      const onClickFunc = onClick
 
       return isActive.value && (
         <Tag
@@ -154,7 +153,7 @@ export const VChip = defineComponent({
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={ [isClickable.value && props.ripple, null] }
-          onClick={ isClickable.value && onClickFunc }
+          onClick={ isClickable.value && onClick }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
