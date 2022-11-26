@@ -133,13 +133,9 @@ Use this tool to search for any Material Design Icons and copy them to your clip
 
 ### Material Design Icons - JS SVG
 
-Use the SVG paths as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js). This is the recommended installation when optimizing your application for production.
-
-```bash
-$ yarn add @mdi/js -D
-// OR
-$ npm install @mdi/js -D
-```
+This is the recommended installation when optimizing your application for production, as only icons used for
+Vuetify components internally will be imported into your application bundle. You will need to provide your
+own icons for the rest of the app.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -156,7 +152,18 @@ export default createVuetify({
 })
 ```
 
-To reduce bundle size, only import the icons that you need. The following example shows how to use an imported icon within a `.vue` template:
+`@mdi/js` or [unplugin-icons](https://github.com/antfu/unplugin-icons) are two alternatives to get the
+rest of the icons that you will need in your application.
+
+If you want to stick with `@mdi/js`, use the SVG paths as designated in [@mdi/js](https://www.npmjs.com/package/@mdi/js) and
+only import the icons that you need.
+The following example shows how to use an imported icon within a `.vue` SFC template:
+
+```bash
+$ yarn add @mdi/js -D
+// OR
+$ npm install @mdi/js -D
+```
 
 ```html
 <template>
