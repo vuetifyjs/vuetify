@@ -50,7 +50,7 @@ export interface IconAliases {
 
 export interface IconProps {
   tag: string
-  icon: IconValue
+  icon?: IconValue
   disabled?: Boolean
 }
 
@@ -68,7 +68,7 @@ export type IconOptions = {
 
 type IconInstance = {
   component: IconComponent
-  icon: IconValue
+  icon?: IconValue
 }
 
 export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
@@ -76,7 +76,6 @@ export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 export const makeIconProps = propsFactory({
   icon: {
     type: IconValue,
-    required: true,
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
@@ -90,11 +89,11 @@ export const VComponentIcon = defineComponent({
 
   props: makeIconProps(),
 
-  setup (props) {
+  setup (props, { slots }) {
     return () => {
       return (
         <props.tag>
-          <props.icon />
+          { props.icon ? <props.icon /> : slots.default?.() }
         </props.tag>
       )
     }
@@ -180,7 +179,7 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
   const iconData: Ref<IconInstance> = computed(() => {
     const iconAlias = isRef(props) ? props.value : props.icon
 
-    if (!iconAlias) throw new Error('Icon value is undefined or null')
+    if (!iconAlias) return { component: VComponentIcon }
 
     let icon: IconValue | undefined = iconAlias
 
