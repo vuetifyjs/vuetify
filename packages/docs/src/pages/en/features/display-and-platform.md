@@ -8,18 +8,23 @@ related:
   - /styles/display/
   - /styles/text-and-typography/
 ---
+<script setup>
+  import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
+</script>
 
 # Display & Platform
+
+The display composable provides a multitude of information about the current device
+
+![Why Vuetify Entry](https://cdn.vuetifyjs.com/docs/images/entry/display-entry.png)
+
+----
+
+## Usage
 
 The **useDisplay** composable provides information on multiple aspects of the current device.
 
 This enables you to control various aspects of your application based upon the window size, device type, and SSR state. This composable works in conjunction with [grids](/components/grids/) and other responsive utility classes (e.g. [display](/styles/display/)).
-
-<entry />
-
-<page-component path="features/BreakpointsTable" />
-
-## Usage
 
 The following shows how to access the application's display information:
 
@@ -52,9 +57,13 @@ If you are still using the Options API, you can access the display information o
 </script>
 ```
 
+<entry />
+
 ## API
 
 <api-inline />
+
+<breakpoints-table />
 
 ## Options
 
