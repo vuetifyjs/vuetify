@@ -24,7 +24,7 @@ import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { HeadAttrs, HeadClient } from '@vueuse/head'
+import type { HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -307,7 +307,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const head = app.config.globalProperties.$head as HeadClient | undefined
     if (head) {
       function updateStyles() {
-        head.push(computed(() => {
+        head!.push(computed(() => {
           const style = {
             children: styles.value,
             id: 'vuetify-theme-stylesheet'
