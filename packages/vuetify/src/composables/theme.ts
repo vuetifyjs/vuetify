@@ -6,7 +6,6 @@ import {
   reactive,
   ref,
   watch,
-  watchEffect,
 } from 'vue'
 import {
   colorToInt,
@@ -311,20 +310,15 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         head.push(computed(() => {
           const style = {
             children: styles.value,
-            type: 'text/css',
             id: 'vuetify-theme-stylesheet'
-          };
-          if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce;
-          return {
-            style: [style]
-          };
+          }
+          if (parsedOptions.cspNonce) style['nonce'] = parsedOptions.cspNonce;
+          return { style: [style] }
         }))
       }
 
       if (IN_BROWSER) {
-        watch(styles, updateStyles, {
-          immediate: true
-        });
+        watch(styles, updateStyles, { immediate: true });
       }
     } else {
       let styleEl = IN_BROWSER
@@ -338,7 +332,6 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
 
         if (typeof document !== 'undefined' && !styleEl) {
           const el = document.createElement('style')
-          el.type = 'text/css'
           el.id = 'vuetify-theme-stylesheet'
           if (parsedOptions.cspNonce) el.setAttribute('nonce', parsedOptions.cspNonce)
 
