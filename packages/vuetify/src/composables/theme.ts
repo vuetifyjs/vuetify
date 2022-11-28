@@ -307,12 +307,12 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     const head = app.config.globalProperties.$head as HeadClient | undefined
     if (head) {
       function updateStyles() {
-        head!.push(computed(() => {
+        head!.addHeadObjs(computed(() => {
           const style = {
             children: styles.value,
             id: 'vuetify-theme-stylesheet'
           }
-          if (parsedOptions.cspNonce) style['nonce'] = parsedOptions.cspNonce;
+          if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce;
           return { style: [style] }
         }))
       }
