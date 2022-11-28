@@ -305,21 +305,26 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   })
 
   function install (app: App) {
-    const head = app._context.provides.usehead as HeadClient | undefined
+    const head = app.config.globalProperties.$head as HeadClient | undefined
     if (head) {
-      head.addHeadObjs(computed(() => {
-        const style: HeadAttrs = {
-          children: styles.value,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
-        }
-        if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
-
-        return { style: [style] }
-      }))
+      function updateStyles() {
+        head.push(computed(() => {
+          const style = {
+            children: styles.value,
+            type: 'text/css',
+            id: 'vuetify-theme-stylesheet'
+          };
+          if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce;
+          return {
+            style: [style]
+          };
+        }))
+      }
 
       if (IN_BROWSER) {
-        watchEffect(() => head.updateDOM())
+        watch(styles, updateStyles, {
+          immediate: true
+        });
       }
     } else {
       let styleEl = IN_BROWSER
