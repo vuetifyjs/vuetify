@@ -17,10 +17,10 @@ const globalStack = reactive<[uid: number, zIndex: number][]>([])
 export function useStack (
   isActive: Readonly<Ref<boolean>>,
   zIndex: Readonly<Ref<string | number>>,
-  disableGlobalStack: Readonly<Ref<boolean>>
+  disableGlobalStack: boolean
 ) {
   const vm = getCurrentInstance('useStack')
-  const createStackEntry = computed(() => !disableGlobalStack.value)
+  const createStackEntry = !disableGlobalStack
 
   const parent = inject(StackSymbol, undefined)
   const stack: StackProvide = reactive({
@@ -33,14 +33,14 @@ export function useStack (
     const lastZIndex = globalStack.at(-1)?.[1]
     _zIndex.value = lastZIndex ? lastZIndex + 10 : +zIndex.value
 
-    if (createStackEntry.value) {
+    if (createStackEntry) {
       globalStack.push([vm.uid, _zIndex.value])
     }
 
     parent?.activeChildren.add(vm.uid)
 
     onScopeDispose(() => {
-      if (createStackEntry.value) {
+      if (createStackEntry) {
         const idx = globalStack.findIndex(v => v[0] === vm.uid)
         globalStack.splice(idx, 1)
       }
@@ -51,7 +51,7 @@ export function useStack (
 
   const globalTop = ref(true)
   watchEffect(() => {
-    if (createStackEntry.value) {
+    if (createStackEntry) {
       const _isTop = globalStack.at(-1)?.[0] === vm.uid
       setTimeout(() => globalTop.value = _isTop)
 
