@@ -142,7 +142,7 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), toRef(props, 'disableGlobalStack'))
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props.disableGlobalStack)
     const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
