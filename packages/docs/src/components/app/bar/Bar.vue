@@ -4,35 +4,39 @@
     border="b"
     flat
   >
-    <app-bar-logo />
+    <template #prepend>
+      <app-bar-logo />
 
-    <v-app-bar-nav-icon
-      class="hidden-lg-and-up"
-      @click="app.drawer = !app.drawer"
-    />
+      <v-app-bar-nav-icon
+        class="hidden-lg-and-up"
+        @click="app.drawer = !app.drawer"
+      />
+
+      <app-bar-releases-menu v-if="smAndUp" />
+    </template>
 
     <v-spacer />
 
-    <template v-if="smAndUp">
-      <app-vertical-divider />
+    <!-- <app-vertical-divider /> -->
 
-      <app-bar-learn-menu />
+    <template #append>
+      <app-bar-learn-menu v-if="mdAndUp" />
 
-      <app-bar-support-menu />
+      <app-bar-support-menu v-if="mdAndUp" />
 
-      <app-bar-team-link />
+      <app-bar-team-link v-if="mdAndUp" />
 
-      <app-bar-enterprise-link />
+      <app-bar-enterprise-link v-if="mdAndUp" />
 
-      <app-vertical-divider v-if="smAndUp" />
+      <app-vertical-divider v-if="mdAndUp" />
 
-      <app-bar-store-link v-if="mdAndUp" />
+      <app-bar-store-link />
 
-      <app-bar-jobs-link v-if="mdAndUp" />
+      <app-bar-jobs-link />
 
-      <app-bar-notifications-menu v-if="smAndUp" />
+      <app-bar-notifications-menu />
 
-      <app-bar-settings-toggle v-if="smAndUp" />
+      <app-bar-settings-toggle />
 
       <app-bar-language-menu v-if="smAndUp" />
     </template>
@@ -47,6 +51,7 @@
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
+  import AppBarReleasesMenu from './ReleasesMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'

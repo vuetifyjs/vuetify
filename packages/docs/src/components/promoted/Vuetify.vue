@@ -1,22 +1,22 @@
 <template>
   <promoted-base
-    class="v-vuetify mb-4"
     border
+    class="v-vuetify mb-4"
     density="comfortable"
   >
     <v-list-item
       v-if="ad"
-      class="rounded px-2"
-      style="min-height: inherit; width: 100%"
-      v-bind="attrs"
       :prepend-avatar="src"
       :title="ad.title"
+      append-icon="mdi-open-in-new"
+      style="min-height: inherit; width: 100%"
+      v-bind="attrs"
     >
       <template #subtitle>
         <app-markdown
           v-if="description"
-          class="text-caption text-high-emphasis"
           :content="description"
+          class="text-caption"
         />
       </template>
     </v-list-item>

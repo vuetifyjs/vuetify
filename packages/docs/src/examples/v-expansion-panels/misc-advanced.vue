@@ -142,87 +142,19 @@
           no-gutters
         >
           <v-col cols="3">
-            <v-menu
-              ref="startMenu"
-              v-model:return-value="trip.start"
-              :close-on-content-click="false"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="trip.start"
-                  label="Start date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="date"
-                no-title
-                scrollable
-              >
-                <v-spacer></v-spacer>
-                <v-btn
-                  variant="text"
-                  color="primary"
-                  @click="$refs.startMenu.isActive = false"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                  variant="text"
-                  color="primary"
-                  @click="$refs.startMenu.save(date)"
-                >
-                  OK
-                </v-btn>
-              </v-date-picker>
-            </v-menu>
+            <v-text-field
+              v-model="trip.start"
+              label="Start date"
+              type="date"
+            ></v-text-field>
           </v-col>
 
           <v-col cols="3">
-            <v-menu
-              ref="endMenu"
-              v-model:return-value="trip.end"
-              :close-on-content-click="false"
-              offset-y
-              min-width="290px"
-            >
-              <template v-slot:activator="{ on, attrs }">
-                <v-text-field
-                  v-model="trip.end"
-                  label="End date"
-                  prepend-icon="mdi-calendar"
-                  readonly
-                  v-bind="attrs"
-                  v-on="on"
-                ></v-text-field>
-              </template>
-              <v-date-picker
-                v-model="date"
-                no-title
-                scrollable
-              >
-                <v-spacer></v-spacer>
-                <v-btn
-                  variant="text"
-                  color="primary"
-                  @click="$refs.endMenu.isActive = false"
-                >
-                  Cancel
-                </v-btn>
-                <v-btn
-                  variant="text"
-                  color="primary"
-                  @click="$refs.endMenu.save(date)"
-                >
-                  OK
-                </v-btn>
-              </v-date-picker>
-            </v-menu>
+            <v-text-field
+              v-model="trip.end"
+              label="End date"
+              type="date"
+            ></v-text-field>
           </v-col>
         </v-row>
       </v-expansion-panel-text>

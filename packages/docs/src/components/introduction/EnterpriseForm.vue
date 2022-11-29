@@ -73,6 +73,14 @@
           <!-- <v-checkbox label="Training & workshops" /> -->
           </div>
 
+          <v-radio-group
+            :rules="[rules.required]"
+            label="Are you a sponsor?"
+          >
+            <v-radio label="Yes" value="yes" />
+            <v-radio label="No" value="no" />
+          </v-radio-group>
+
           <v-textarea
             v-model="questions"
             label="Questions and comments"
@@ -120,6 +128,7 @@
   const upgrade = ref(false)
   const review = ref(false)
   const sla = ref(false)
+  const sponsor = ref(false)
   const loading = ref(false)
   const questions = ref('')
   const valid = ref<boolean | null>(null)
@@ -145,6 +154,7 @@
         upgrade.value = false
         review.value = false
         sla.value = false
+        sponsor.value = false
       }
 
       success.value = false

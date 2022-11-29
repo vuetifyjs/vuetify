@@ -6,7 +6,6 @@
           v-model="value"
           disabled
           label="Disabled"
-          model-value="30"
         ></v-range-slider>
       </v-col>
     </v-row>

@@ -14,7 +14,6 @@
 <script setup>
   // Composables
   import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed } from 'vue'
@@ -27,7 +26,6 @@
     minHeight: [Number, String],
   })
 
-  const user = useUserStore()
   const theme = useTheme()
 
   const minHeight = computed(() => {
@@ -39,7 +37,7 @@
   })
 
   const isDark = computed(() => {
-    return user.mixedTheme || theme.current.value.dark
+    return theme.current.value.dark
   })
 </script>
 

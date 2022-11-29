@@ -74,7 +74,7 @@
 
       <div class="pa-1 mb-4">
         <v-text-field
-          dense
+          density="compact"
           flat
           hide-details
           rounded
@@ -95,7 +95,7 @@
     >
       <v-text-field
         bg-color="grey lighten-1"
-        dense
+        density="compact"
         flat
         hide-details
         rounded

@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <template v-for="item in items" :key="item.name">
-          <tr class="bg-grey-lighten-4">
+          <tr :class="theme.dark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'">
             <NameCell section="exposed" :name="item.name" />
             <td>
               <PrismCell :code="getType(item)" />
@@ -43,6 +43,7 @@
 
   // Utilities
   import { PropType } from 'vue'
+  import { useTheme } from 'vuetify'
   import { getType } from './utils'
 
   defineProps({
@@ -51,6 +52,8 @@
       default: () => [],
     },
   })
+
+  const { current: theme } = useTheme()
 
   const headers = ['name', 'type']
 </script>

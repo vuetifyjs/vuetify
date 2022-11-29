@@ -1,4 +1,4 @@
-import { effectScope, watch } from 'vue'
+import { effectScope, onScopeDispose, watch } from 'vue'
 import type { EffectScope, WatchSource } from 'vue'
 
 export function useToggleScope (source: WatchSource<boolean>, cb: () => void) {
@@ -7,9 +7,13 @@ export function useToggleScope (source: WatchSource<boolean>, cb: () => void) {
     if (active && !scope) {
       scope = effectScope()
       scope.run(cb)
-    } else {
+    } else if (!active) {
       scope?.stop()
       scope = undefined
     }
   }, { immediate: true })
+
+  onScopeDispose(() => {
+    scope?.stop()
+  })
 }

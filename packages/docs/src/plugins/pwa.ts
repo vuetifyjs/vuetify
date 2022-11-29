@@ -16,7 +16,7 @@ export const usePwa: PwaPlugin = async ({ isClient, router }) => {
   const user = useUserStore()
   pwa.updateSW = registerSW({
     async onNeedRefresh () {
-      const registration = await navigator.serviceWorker.getRegistration()
+      const registration = await navigator.serviceWorker?.getRegistration()
       if (registration?.active && registration?.waiting) {
         const manifest = await messageSW(registration.active, { type: 'GET_MANIFEST' })
         await messageSW(registration.waiting, { type: 'SET_MANIFEST', manifest })
@@ -29,7 +29,7 @@ export const usePwa: PwaPlugin = async ({ isClient, router }) => {
   let registration: ServiceWorkerRegistration | undefined
   router.beforeEach(async (to, from) => {
     if (to.path !== from.path) {
-      navigator.serviceWorker.getRegistration().then(reg => {
+      navigator.serviceWorker?.getRegistration().then(reg => {
         registration = reg
         reg?.update()
       })

@@ -58,6 +58,10 @@ export function useScrollStrategies (
       }
     })
   })
+
+  onScopeDispose(() => {
+    scope?.stop()
+  })
 }
 
 function closeScrollStrategy (data: ScrollStrategyData) {

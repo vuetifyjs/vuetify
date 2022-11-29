@@ -14,7 +14,7 @@ related:
   import { version } from 'vuetify'
 </script>
 
-# Vuetify 3
+# Get started with Vuetify 3
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 

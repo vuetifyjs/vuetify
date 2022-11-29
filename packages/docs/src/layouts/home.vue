@@ -38,7 +38,7 @@
 </script>
 
 <style lang="sass">
-#material-design-framework
+#ui-component-framework
   h1, h2, h3, h4, h5, h6
     > a
       display: none
