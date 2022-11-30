@@ -7,6 +7,7 @@
     >
       <v-toolbar
         v-if="!preview"
+        :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
         border="b"
         class="px-1"
         flat
@@ -170,6 +171,10 @@
     set: val => _theme.value = val,
   })
   const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
+
+  const isDark = computed(() => {
+    return parentTheme.current.value.dark
+  })
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
