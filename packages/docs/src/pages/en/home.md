@@ -2,9 +2,10 @@
 
 <br>
 
-# Material Design Framework
+# Vue Component Framework
 
-Vuetify is a Vue UI Library with beautifully handcrafted Material Components. No design skills required — everything you need to create amazing applications is at your fingertips. {style="max-width: 568px" .mx-auto}
+Vuetify is a no design skills required UI Framework with beautifully handcrafted Vue Components.
+{style="max-width: 568px" .mx-auto}
 
 <br>
 
