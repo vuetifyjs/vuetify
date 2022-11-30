@@ -21,7 +21,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
@@ -86,7 +86,10 @@ export const VCombobox = genericComponent<new <
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
     delimiters: Array as PropType<string[]>,
-
+    valueComparator: {
+      type: Function as PropType<typeof deepEqual>,
+      default: deepEqual,
+    },
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...omit(makeVTextFieldProps({
@@ -162,7 +165,7 @@ export const VCombobox = genericComponent<new <
 
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => item.value === v.value) || v
+        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
