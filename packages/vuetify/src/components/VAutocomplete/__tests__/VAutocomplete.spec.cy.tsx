@@ -27,6 +27,39 @@ describe('VAutocomplete', () => {
       .should('have.length', 2)
   })
 
+  it('should have selected chip with array of strings', () => {
+    const items = ref(['California', 'Colorado', 'Florida'])
+
+    const selectedItems = ref(['California', 'Colorado'])
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={selectedItems.value}
+        items={items.value}
+        chips
+        multiple
+        closableChips
+      />
+    ))
+
+    cy.get('.mdi-menu-down').click()
+
+    cy.get('.v-list-item--active').should('have.length', 2)
+    cy.get('.v-list-item--active input').eq(0).click().then(() => {
+      expect(selectedItems.value).to.deep.equal(['Colorado'])
+    })
+
+    cy.get('.v-list-item--active').should('have.length', 1)
+
+    cy
+      .get('.v-chip__close')
+      .eq(0)
+      .click()
+      .get('.v-chip')
+      .should('have.length', 0)
+      .should(() => expect(selectedItems.value).to.be.empty)
+  })
+
   it('should have selected chip with return-object', () => {
     const items = ref([
       {
