@@ -12,6 +12,20 @@
     "prependIcon": "Prepends a [v-icon](/components/icons/) component to the header",
     "title": "Generates a `v-list-item-title` component with the supplied value",
     "subtitle": "Generates a `v-list-item-subtitle` component with the supplied value",
-    "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
+    "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups).",
+    "nav": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "link": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "lines": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))"
+  },
+  "events": {
+    "click": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))"
+  },
+  "slots": {
+    "prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "title": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))",
+    "subtitle": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-list-item.json))"
   }
 }
