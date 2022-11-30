@@ -52,7 +52,7 @@ Vue.use(Vuetify)
 
 ## Spec Tests
 
-Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
+Creating unit tests in Vuetify is similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
 
 ```js
 // Imports
@@ -60,7 +60,7 @@ import AppBtn from '../AppBtn.vue'
 import Vuetify from 'vuetify'
 
 // Utilities
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
   // DO NOT use Vuetify on the localInstance
