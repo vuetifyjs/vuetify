@@ -34,7 +34,7 @@
   const items = computed(() => ([
     { subheader: t('documentation') },
     {
-      title: '3.0.0 (next)',
+      title: '3.0.x (next)',
       href: 'https://v3.vuetifyjs.com/',
     },
     {
