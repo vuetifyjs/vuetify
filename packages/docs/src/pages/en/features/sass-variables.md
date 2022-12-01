@@ -111,6 +111,7 @@ There are many SASS/SCSS variables that can be customized across the entire Vuet
 
 You can access [global](/api/vuetify/) and per-component variables in Vue templates simply by importing the settings file:
 
+
 ```html { resource="component.vue" }
 <style lang="scss">
   @use './settings';
@@ -121,6 +122,12 @@ You can access [global](/api/vuetify/) and per-component variables in Vue templa
 </style>
 ```
 
+ Take in mind that in order to obtain settings from vuetify, you should forward vuetify's variables in your own `settings.scss`:
+
+```diff { resource="settings.scss" }
+- @use 'vuetify/settings' with (
++ @forward 'vuetify/settings' with (
+```
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
