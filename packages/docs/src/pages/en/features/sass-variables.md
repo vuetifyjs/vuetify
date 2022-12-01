@@ -126,6 +126,8 @@ You can access [global](/api/vuetify/) and per-component variables in Vue templa
 ```diff { resource="settings.scss" }
 - @use 'vuetify/settings' with (
 + @forward 'vuetify/settings' with (
+```
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
