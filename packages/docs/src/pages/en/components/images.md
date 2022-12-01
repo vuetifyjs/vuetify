@@ -57,12 +57,6 @@ The `gradient` prop can be used to apply a simple gradient overlay to the image.
 
 <example file="v-img/prop-gradient" />
 
-#### Height
-
-`v-img` will automatically grow to the size of its `src`, preserving the correct aspect ratio. You can limit this with the `height` and `max-height` props.
-
-<example file="v-img/prop-max-height" />
-
 ### Slots
 
 #### Placeholder

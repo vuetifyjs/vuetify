@@ -3,8 +3,7 @@
     <v-img
       src="https://bad.src/not/valid"
       lazy-src="https://picsum.photos/id/11/100/60"
-      max-width="500"
-      max-height="300"
+      width="500"
     >
       <template v-slot:placeholder>
         <v-row
