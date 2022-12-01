@@ -57,6 +57,24 @@ describe('validation', () => {
     expect(wrapper.vm.errorMessages).toHaveLength(expected)
   })
 
+  it.each([
+    [undefined, 1],
+    [1, 1],
+    [2, 2],
+    [3, 3],
+    [4, 4],
+    [5, 4],
+  ])('only display up to the maximum error count %s', async (maxErrors, expected) => {
+    const wrapper = mountFunction({
+      maxErrors,
+      errorMessages: ['foo', 'bar', 'fizz', 'buzz'],
+    })
+
+    await wrapper.vm.validate()
+
+    expect(wrapper.vm.errorMessages).toHaveLength(expected)
+  })
+
   it('should warn the user when using an improper rule fn', async () => {
     const rule = (v: any) => !!v || 1234
     const wrapper = mountFunction({
