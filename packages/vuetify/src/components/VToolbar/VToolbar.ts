@@ -39,6 +39,7 @@ export default VSheet.extend({
       type: [String, Object] as PropType<string | srcObject>,
       default: '',
     },
+    sticky: Boolean,
     tag: {
       type: String,
       default: 'header',
@@ -83,6 +84,7 @@ export default VSheet.extend({
         'v-toolbar--flat': this.flat,
         'v-toolbar--floating': this.floating,
         'v-toolbar--prominent': this.isProminent,
+        'v-toolbar--sticky': this.sticky,
       }
     },
     isCollapsed (): boolean {

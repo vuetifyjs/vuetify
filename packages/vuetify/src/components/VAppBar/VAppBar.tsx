@@ -113,6 +113,7 @@ export const VAppBar = defineComponent({
               'v-app-bar--is-active': isActive.value,
               'v-app-bar--prominent': props.prominent,
               'v-app-bar--absolute': props.absolute,
+              'v-app-bar--sticky': props.sticky,
             },
             backgroundColorClasses.value,
             borderClasses.value,

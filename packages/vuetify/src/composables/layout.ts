@@ -51,6 +51,7 @@ export const makeLayoutItemProps = propsFactory({
     default: 0,
   },
   absolute: Boolean,
+  sticky: Boolean,
 }, 'layout-item')
 
 export function useMain () {
