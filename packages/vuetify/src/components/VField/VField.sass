@@ -141,10 +141,10 @@
   @at-root
     @include tools.density('v-input', $field-chips-margin-top) using ($modifier)
       @at-root #{selector.nest(&, $root)}
-        --v-field-chips-margin-top: #{$modifier * .25}
+        --v-field-chips-margin-top: #{$modifier * .25 + 1px}
     @include tools.density('v-input', $field-chips-margin-bottom) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-chips-margin-bottom: #{$modifier * .25}
+          --v-field-chips-margin-bottom: #{$modifier * .25 - 1px}
 
 
   .v-chip.v-chip--size-small
@@ -256,7 +256,7 @@
     @at-root
       @include tools.density('v-input', $field-control-density) using ($modifier)
         #{$root}
-          --v-field-label-padding-top: #{6px + $modifier * .75}
+          --v-field-label-padding-top: #{9px + $modifier * .75}
 
     --v-field-label-scale: #{$field-label-floating-scale}em
     font-size: var(--v-field-label-scale)
