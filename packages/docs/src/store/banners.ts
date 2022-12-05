@@ -84,7 +84,7 @@ export const useBannersStore = defineStore('banners', {
     banner: state => {
       const name = state.router.currentRoute.value.name
 
-      const banner = state.banners.find(({ metadata: { visible }, status }) => {
+      return state.banners.find(({ metadata: { visible }, status }) => {
         if (IS_PROD && status !== 'published') return false
 
         if (visible.key === 'both') return true
@@ -92,10 +92,6 @@ export const useBannersStore = defineStore('banners', {
 
         return visible.key === 'docs' && name !== 'home'
       })
-
-      console.log(banner)
-
-      return banner
     },
   },
 })

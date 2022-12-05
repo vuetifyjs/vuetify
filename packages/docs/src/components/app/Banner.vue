@@ -5,7 +5,7 @@
     :height="height"
     :image="banner?.metadata.images.bg.url"
     :theme="banner?.metadata.theme.key"
-    :model-value="!!(hasPromotion && banner)"
+    :model-value="hasPromotion"
     flat
   >
     <a
@@ -73,8 +73,9 @@
   import { useBannersStore } from '@/store/banners'
 
   // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  import { computed } from 'vue'
   import { differenceInHours } from 'date-fns'
+  import { waitForReadystate } from '@/util/helpers'
 
   const { notifications } = useUserStore()
   const banners = useBannersStore()
@@ -84,6 +85,8 @@
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.subtext ? 80 : 64)
   const hasPromotion = computed(() => {
+    if (!banner.value) return false
+
     const now = Date.now()
 
     return differenceInHours(now, Number(notifications.last.banner)) > 1
@@ -101,7 +104,7 @@
     notifications.last.banner = Date.now()
   }
 
-  onBeforeMount(banners.fetch)
+  waitForReadystate().then(banners.fetch)
 </script>
 
 <style lang="sass">
