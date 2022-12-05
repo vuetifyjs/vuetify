@@ -8,6 +8,12 @@ meta:
 
 # Upgrade Guide
 
+<alert type="warning">
+
+  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing.
+
+</alert>
+
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
@@ -39,6 +45,7 @@ app.use(vuetify)
 - `import ... from 'vuetify'` is now a-la-carte, import `'vuetify/dist/vuetify.js'` instead to get the complete bundle (not recommended).
 - `'vuetify/lib'` should no longer be used, change to `'vuetify'` / `'vuetify/components'` / `'vuetify/directives'` as appropriate.
 - Only component styles are included, global styles must be imported separately from `'vuetify/styles'`.
+- [vuetify-loader](https://npmjs.com/package/vuetify-loader) has been renamed to [webpack-plugin-vuetify](https://npmjs.com/package/webpack-plugin-vuetify), and we also have a new plugin for vite [vite-plugin-vuetify](https://npmjs.com/package/vite-plugin-vuetify).
 
 ## Features
 
@@ -53,15 +60,20 @@ app.use(vuetify)
   - Backgrounds have a `bg-` prefix, for example `.primary` is now `.bg-primary`.
   - Text colors have a `text-` prefix, for example `.primary--text` is now `.text-primary`.
   - Variants are no longer a separate class, for example `.primary--text.text--darken-1` is now `.text-primary-darken-1`.
+- The theme system now uses CSS variables internally, so `customProperties` is no longer required.
+  - If you were using `customProperties` in v2, the naming scheme has changed from `--v-primary-base` to `--v-theme-primary`.
+  - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
 
 ## Components
 
 ### General changes
 
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage.
-- `@input` event has been replaced by **@update:model-value** on components that support `v-model` usage.
+- `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
+- `absolute` and `fixed` props have been combined into a single `position` prop.
+- `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
 - `background-color` prop has been renamed to `bg-color`.
 
 ### Input components
@@ -73,15 +85,30 @@ app.use(vuetify)
 - Variant props `filled`/`outlined`/`solo` have been combined into a single `variant` prop.
   - Allowed values are `'underlined'`, `'outlined'`, `'filled'`, `'solo'`, or `'plain'`.
 - `success` and `success-messages` props have been removed.
+- `validate-on-blur` prop has been renamed to `validate-on="blur"`.
 
 ### v-alert
 
-- `border` prop values `left` and `right` have been renamed to `start` and `end`
-- `colored-border` prop has been renamed to `border-color`
-- `dismissable` prop has been renamed to `closable`
+- `border` prop values `left` and `right` have been renamed to `start` and `end`.
+- `colored-border` prop has been renamed to `border-color`.
+- `dismissable` prop has been renamed to `closable`.
 - `outlined` and `text` props have been combined into a single `variant` prop.
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
-- `text` prop has new purpose. It represents the text content of the alert, if default slot is not used
+- `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
+
+### v-btn
+
+- `active-class` prop has been renamed to `selected-class`.
+- `fab` is no longer supported.
+- `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
+- `depressed` has been renamed to `variant="flat"`.
+- `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
+
+### v-checkbox/v-radio/v-switch
+
+- `input-value` prop has been renamed to `model-value`.
+- `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
+- `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
 
 ### v-select/v-combobox/v-autocomplete
 
@@ -100,3 +127,10 @@ app.use(vuetify)
 ```
 
 - The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
+- Non-`multiple` combobox will now update its model as you type (like a text field) instead of only on blur.
+
+### v-slider/v-range-slider
+
+- `ticks` has been renamed to `show-ticks`.
+- `tick-labels` has been renamed to `ticks`.
+- `vertical` has been renamed to `direction="vertical"`.
