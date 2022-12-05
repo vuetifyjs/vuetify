@@ -78,7 +78,7 @@ export function useValidation (
   const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
   const errorMessages = computed(() => {
     return props.errorMessages.length
-      ? wrapInArray(props.errorMessages)
+      ? wrapInArray(props.errorMessages.slice(0, Math.max(0, +props.maxErrors)))
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
