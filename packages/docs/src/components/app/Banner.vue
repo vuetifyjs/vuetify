@@ -41,10 +41,14 @@
         <template #default="{ isHovering, props }">
           <v-btn
             :color="banner?.metadata.link_color"
+            :href="banner?.metadata.link"
             :elevation="isHovering ? 8 : 0"
-            v-bind="props"
-            class="text-none"
+            v-bind="{ ...props, ...banner?.metadata.attributes }"
             append-icon="mdi-open-in-new"
+            class="text-none"
+            rel="noopener"
+            target="_blank"
+            @click="onClick"
           >
             {{ banner?.metadata.link_text }}
           </v-btn>
