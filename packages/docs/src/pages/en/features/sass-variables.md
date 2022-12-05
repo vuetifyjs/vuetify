@@ -121,6 +121,13 @@ You can access [global](/api/vuetify/) and per-component variables in Vue templa
 </style>
 ```
 
+Keep in mind that to obtain settings from Vuetify, you must forward its variables from within your local stylesheet. In the following example we modify `settings.scss` to **forward** instead of **use**:
+
+```diff { resource="settings.scss" }
+- @use 'vuetify/settings' with (
++ @forward 'vuetify/settings' with (
+```
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
