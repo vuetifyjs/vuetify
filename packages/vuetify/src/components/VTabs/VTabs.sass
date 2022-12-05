@@ -19,9 +19,6 @@
     height: auto
     --v-tabs-height: #{$tabs-height}
 
-  .v-toolbar &
-    height: inherit
-
 .v-tabs--align-tabs-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
     margin-inline-start: $tab-align-tabs-title-margin
@@ -54,3 +51,8 @@
       margin-inline-start: 52px
     .v-tab:last-child
       margin-inline-end: 52px
+
+.v-toolbar__content
+  > .v-tabs,
+  .v-tab
+    height: inherit
