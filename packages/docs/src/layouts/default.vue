@@ -1,7 +1,5 @@
 <template>
   <v-app>
-    <!-- <app-system-bar /> -->
-
     <app-settings-drawer />
 
     <app-bar />
@@ -30,7 +28,6 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  // import AppSystemBar from '@/components/app/SystemBar.vue'
   import AppToc from '@/components/app/Toc.vue'
   import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
 
