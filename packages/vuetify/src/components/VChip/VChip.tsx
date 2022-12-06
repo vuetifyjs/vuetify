@@ -153,7 +153,7 @@ export const VChip = defineComponent({
           draggable={ props.draggable }
           href={ link.href.value }
           v-ripple={ [isClickable.value && props.ripple, null] }
-          onClick={ isClickable.value && onClick }
+          onClick={ onClick }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
