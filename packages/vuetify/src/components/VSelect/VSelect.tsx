@@ -50,6 +50,10 @@ export const makeSelectProps = propsFactory({
     default: '$vuetify.noDataText',
   },
   openOnClear: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
 
   ...makeItemsProps({ itemChildren: false }),
 }, 'v-select')
@@ -91,10 +95,6 @@ export const VSelect = genericComponent<new <
   name: 'VSelect',
 
   props: {
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
       modelValue: null,

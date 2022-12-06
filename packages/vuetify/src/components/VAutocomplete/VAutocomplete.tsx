@@ -20,11 +20,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { deepEqual, genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
-import type { PropType } from 'vue'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots, SlotsToProps } from '@/util'
@@ -85,10 +84,6 @@ export const VAutocomplete = genericComponent<new <
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
     search: String,
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
