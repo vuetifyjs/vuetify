@@ -12,7 +12,7 @@ related:
 
 Sizing utility classes are used to modify the dimensions of an element.
 
-<entry-ad />
+<entry />
 
 ## Height
 
