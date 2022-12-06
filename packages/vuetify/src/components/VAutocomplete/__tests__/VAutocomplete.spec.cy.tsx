@@ -1,4 +1,3 @@
-/// <reference types="..\..\..\..\types\cypress" />
 /// <reference types="../../../../types/cypress" />
 
 import { ref } from 'vue'
