@@ -84,6 +84,7 @@ export const VAutocomplete = genericComponent<new <
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
     search: String,
+
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
