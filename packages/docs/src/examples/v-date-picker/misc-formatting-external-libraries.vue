@@ -60,9 +60,7 @@
 
 <script>
   import moment from 'moment'
-  import dateFns from 'date-fns'
-
-  const { format, parseISO } = dateFns
+  import { format, parseISO } from 'date-fns'
 
   export default {
     data: () => ({
