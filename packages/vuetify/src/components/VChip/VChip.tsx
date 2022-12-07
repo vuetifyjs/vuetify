@@ -28,6 +28,7 @@ import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { defineComponent } from '@/util'
+import { computed } from 'vue'
 
 export const VChip = defineComponent({
   name: 'VChip',
@@ -84,6 +85,7 @@ export const VChip = defineComponent({
     'click:close': (e: Event) => true,
     'update:modelValue': (value: boolean) => true,
     'group:selected': (val: { value: boolean }) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -98,11 +100,21 @@ export const VChip = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
+    const isClickable = computed(() => !props.disabled && (!!group || link.isClickable.value || props.link))
 
     function onCloseClick (e: Event) {
       isActive.value = false
 
       emit('click:close', e)
+    }
+
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+
+      if (!isClickable.value) return
+
+      link.navigate?.(e)
+      group?.toggle()
     }
 
     return () => {
@@ -112,8 +124,6 @@ export const VChip = defineComponent({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const hasColor = !group || group.isSelected.value
-      const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
-      const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
@@ -142,10 +152,10 @@ export const VChip = defineComponent({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
-          v-ripple={ [isClickable && props.ripple, null] }
-          onClick={ isClickable && onClickFunc }
+          v-ripple={ [isClickable.value && props.ripple, null] }
+          onClick={ onClick }
         >
-          { genOverlays(isClickable, 'v-chip') }
+          { genOverlays(isClickable.value, 'v-chip') }
 
           { hasFilter && (
             <VDefaultsProvider

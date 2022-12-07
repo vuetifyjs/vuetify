@@ -33,7 +33,10 @@
         v-model="valid"
         @submit.prevent="onSubmit"
       >
+
         <v-card-text>
+          <v-label class="mb-2">Contact Information</v-label>
+
           <v-text-field
             v-model="name"
             :rules="[rules.required]"
@@ -73,9 +76,13 @@
           <!-- <v-checkbox label="Training & workshops" /> -->
           </div>
 
+          <v-label class="mb-2">Are you currently a sponsor?</v-label>
+
           <v-radio-group
-            :rules="[rules.required]"
-            label="Are you a sponsor?"
+            v-model="sponsor"
+            color="primary"
+            density="compact"
+            name="sponsor"
           >
             <v-radio label="Yes" value="yes" />
             <v-radio label="No" value="no" />
@@ -110,6 +117,12 @@
             <span v-else-if="!loading">Successful</span>
           </v-btn>
         </v-card-actions>
+
+        <div class="text-center text-caption text-center pb-2">
+          <small>
+            Issues with this form? <a href="mailto:support@vuetifyjs.com?subject=Enterprise Support" target="_blank">Contact Us</a>
+          </small>
+        </div>
       </v-form>
     </v-card>
   </v-defaults-provider>
@@ -148,13 +161,13 @@
   watch(success, val => {
     setTimeout(() => {
       if (val) {
-        form.value?.reset()
-
         // TODO: bug with resetting checkbox
         upgrade.value = false
         review.value = false
         sla.value = false
         sponsor.value = false
+
+        // form.value?.reset()
       }
 
       success.value = false

@@ -239,7 +239,7 @@ export const VListItem = genericComponent<new () => {
             </VDefaultsProvider>
           ) }
 
-          <div class="v-list-item__content">
+          <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
                 { slots.title?.({ title: props.title }) ?? props.title}
