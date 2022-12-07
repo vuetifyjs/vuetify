@@ -4,6 +4,7 @@ import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createDate, DateAdapterSymbol } from './composables/date'
 
 // Utilities
 import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
@@ -16,7 +17,6 @@ import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import { createDate, DateAdapterSymbol } from './composables/date'
 import type { DateAdapter } from './adapters/date-adapter'
 
 export * from './composables'
