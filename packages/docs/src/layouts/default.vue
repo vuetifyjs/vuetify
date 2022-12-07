@@ -1,5 +1,7 @@
 <template>
   <v-app>
+    <app-banner />
+
     <app-settings-drawer />
 
     <app-bar />
@@ -25,6 +27,7 @@
 
 <script setup>
   // Components
+  import AppBanner from '@/components/app/Banner.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'

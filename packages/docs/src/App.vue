@@ -1,19 +1,9 @@
 <template>
   <v-progress-linear v-if="pwa.loading" indeterminate color="primary" height="3" class="pwa-loader" />
-
-  <v-layout>
-    <AppBanner />
-
-    <v-main>
-      <router-view />
-    </v-main>
-  </v-layout>
+  <router-view />
 </template>
 
 <script setup lang="ts">
-  // Components
-  import AppBanner from '@/components/app/Banner.vue'
-
   // Composables
   import { useHead } from '@vueuse/head'
   import { useI18n } from 'vue-i18n'

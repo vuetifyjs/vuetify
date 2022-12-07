@@ -54,6 +54,9 @@
   import { useAppStore } from '@/store/app'
   import { useRtl } from 'vuetify'
 
+  // Globals
+  import { IS_PROD } from '@/util/globals'
+
   const { isRtl } = useRtl()
   const app = useAppStore()
 </script>
