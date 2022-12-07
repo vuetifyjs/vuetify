@@ -10,6 +10,7 @@ export const usePwaStore = defineStore('pwa', () => {
 
   const state = reactive({
     snackbar: false,
+    loading: false,
     updateSW: null as null | ((reload?: boolean) => void),
   })
 
@@ -20,6 +21,7 @@ export const usePwaStore = defineStore('pwa', () => {
 
   function update () {
     state.snackbar = false
+    state.loading = true
     state.updateSW?.(true)
   }
 

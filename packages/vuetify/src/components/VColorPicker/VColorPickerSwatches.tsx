@@ -10,7 +10,7 @@ import { parseColor } from './util'
 import colors from '@/util/colors'
 
 // Types
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 import type { PropType } from 'vue'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
@@ -44,12 +44,12 @@ export const VColorPickerSwatches = defineComponent({
       default: () => parseDefaultColors(colors),
     },
     disabled: Boolean,
-    color: Object as PropType<HSVA | null>,
+    color: Object as PropType<HSV | null>,
     maxHeight: [Number, String],
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
   },
 
   setup (props, { emit }) {

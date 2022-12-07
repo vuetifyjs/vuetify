@@ -1,41 +1,37 @@
 // Utilities
 import {
-  HexToHSVA,
-  HSLAtoHSVA,
-  HSVAtoHex,
-  HSVAtoHSLA,
-  HSVAtoRGBA,
+  HexToHSV,
+  HSLtoHSV,
+  HSVtoHex,
+  HSVtoHSL,
+  HSVtoRGB,
   parseHex,
-  RGBAtoHSVA,
+  RGBtoHSV,
 } from '@/util/colorUtils'
 
 // Types
-import type {
-  HSLA,
-  HSVA,
-  RGBA,
-} from '@/util/colorUtils'
+import type { HSL, HSV, RGB } from '@/util/colorUtils'
 
 function has (obj: object, key: string[]) {
   return key.every(k => obj.hasOwnProperty(k))
 }
 
-export function parseColor (color: any): HSVA | null {
+export function parseColor (color: any): HSV | null {
   if (!color) return null
 
-  let hsva: HSVA | null = null
+  let hsva: HSV | null = null
 
   if (typeof color === 'string') {
     const hex = parseHex(color)
 
-    hsva = HexToHSVA(hex)
+    hsva = HexToHSV(hex)
   }
 
   if (typeof color === 'object') {
     if (has(color, ['r', 'g', 'b'])) {
-      hsva = RGBAtoHSVA(color)
+      hsva = RGBtoHSV(color)
     } else if (has(color, ['h', 's', 'l'])) {
-      hsva = HSLAtoHSVA(color)
+      hsva = HSLtoHSV(color)
     } else if (has(color, ['h', 's', 'v'])) {
       hsva = color
     }
@@ -54,9 +50,9 @@ function stripAlpha (color: any, stripAlpha: boolean) {
   return color
 }
 
-export function extractColor (color: HSVA, input: any) {
+export function extractColor (color: HSV, input: any) {
   if (input == null || typeof input === 'string') {
-    const hex = HSVAtoHex(color)
+    const hex = HSVtoHex(color)
 
     if (color.a === 1) return hex.slice(0, 7)
     else return hex
@@ -65,8 +61,8 @@ export function extractColor (color: HSVA, input: any) {
   if (typeof input === 'object') {
     let converted
 
-    if (has(input, ['r', 'g', 'b'])) converted = HSVAtoRGBA(color)
-    else if (has(input, ['h', 's', 'l'])) converted = HSVAtoHSLA(color)
+    if (has(input, ['r', 'g', 'b'])) converted = HSVtoRGB(color)
+    else if (has(input, ['h', 's', 'l'])) converted = HSVtoHSL(color)
     else if (has(input, ['h', 's', 'v'])) converted = color
 
     return stripAlpha(converted, !has(input, ['a']))
@@ -98,8 +94,8 @@ export type ColorPickerMode = {
     getValue: (color: any) => number | string
     getColor: (color: any, v: string) => any
   }[]
-  from: (color: any) => HSVA
-  to: (color: HSVA) => any
+  from: (color: any) => HSV
+  to: (color: HSV) => any
 }
 
 const rgba: ColorPickerMode = {
@@ -112,33 +108,33 @@ const rgba: ColorPickerMode = {
       label: 'R',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.r),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, r: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.r),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, r: Number(v) }),
     },
     {
       label: 'G',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.g),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, g: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.g),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, g: Number(v) }),
     },
     {
       label: 'B',
       max: 255,
       step: 1,
-      getValue: (c: RGBA) => Math.round(c.b),
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, b: Number(v) }),
+      getValue: (c: RGB) => Math.round(c.b),
+      getColor: (c: RGB, v: string): RGB => ({ ...c, b: Number(v) }),
     },
     {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: (c: RGBA) => Math.round(c.a * 100) / 100,
-      getColor: (c: RGBA, v: string): RGBA => ({ ...c, a: Number(v) }),
+      getValue: ({ a }: RGB) => a ? Math.round(a * 100) / 100 : 1,
+      getColor: (c: RGB, v: string): RGB => ({ ...c, a: Number(v) }),
     },
   ],
-  to: HSVAtoRGBA,
-  from: RGBAtoHSVA,
+  to: HSVtoRGB,
+  from: RGBtoHSV,
 }
 
 const rgb = {
@@ -156,33 +152,33 @@ const hsla: ColorPickerMode = {
       label: 'H',
       max: 360,
       step: 1,
-      getValue: (c: HSLA) => Math.round(c.h),
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, h: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.h),
+      getColor: (c: HSL, v: string): HSL => ({ ...c, h: Number(v) }),
     },
     {
       label: 'S',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.s * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, s: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.s * 100) / 100,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, s: Number(v) }),
     },
     {
       label: 'L',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.l * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, l: Number(v) }),
+      getValue: (c: HSL) => Math.round(c.l * 100) / 100,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, l: Number(v) }),
     },
     {
       label: 'A',
       max: 1,
       step: 0.01,
-      getValue: (c: HSLA) => Math.round(c.a * 100) / 100,
-      getColor: (c: HSLA, v: string): HSLA => ({ ...c, a: Number(v) }),
+      getValue: ({ a }: HSL) => a ? Math.round(a * 100) / 100 : 1,
+      getColor: (c: HSL, v: string): HSL => ({ ...c, a: Number(v) }),
     },
   ],
-  to: HSVAtoHSLA,
-  from: HSLAtoHSVA,
+  to: HSVtoHSL,
+  from: HSLtoHSV,
 }
 
 const hsl = {
@@ -201,8 +197,8 @@ const hexa: ColorPickerMode = {
       getColor: (c: string, v: string) => v,
     },
   ],
-  to: HSVAtoHex,
-  from: HexToHSVA,
+  to: HSVtoHex,
+  from: HexToHSV,
 }
 
 const hex = {

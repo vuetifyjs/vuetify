@@ -20,7 +20,7 @@
       >
         <v-btn
           class="mt-6"
-          text
+          variant="text"
           color="error"
           @click="sheet = !sheet"
         >

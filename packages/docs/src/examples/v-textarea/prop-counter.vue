@@ -4,7 +4,7 @@
       counter
       label="Text"
       :rules="rules"
-      :value="value"
+      :model-value="value"
     ></v-textarea>
   </v-container>
 </template>

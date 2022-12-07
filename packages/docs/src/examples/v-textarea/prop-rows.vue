@@ -8,7 +8,7 @@
         <v-textarea
           label="One row"
           auto-grow
-          outlined
+          variant="outlined"
           rows="1"
           row-height="15"
         ></v-textarea>
@@ -18,7 +18,7 @@
         sm="6"
       >
         <v-textarea
-          filled
+          variant="filled"
           auto-grow
           label="Two rows"
           rows="2"
@@ -32,7 +32,7 @@
         <v-textarea
           label="Three rows"
           auto-grow
-          outlined
+          variant="outlined"
           rows="3"
           row-height="25"
           shaped
@@ -43,7 +43,7 @@
         sm="6"
       >
         <v-textarea
-          filled
+          variant="filled"
           auto-grow
           label="Four rows"
           rows="4"

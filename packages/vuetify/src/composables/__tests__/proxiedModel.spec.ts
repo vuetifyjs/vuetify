@@ -26,6 +26,7 @@ const TestComponentWithPropDefaultValue = defineComponent({
       default: 'propDefaultValue',
     },
   },
+  emits: ['update:foo'],
   // eslint-disable-next-line sonarjs/no-identical-functions
   setup (props) {
     const proxiedModel = useProxiedModel(props, 'foo', 'syncDefaultValue')
@@ -79,7 +80,7 @@ describe('useProxiedModel', () => {
     expect(wrapper.element.textContent).toBe('bar,bar')
 
     await wrapper.trigger('click')
-    expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
+    expect(wrapper.emitted('update:foo')).toStrictEqual([['internal']])
 
     expect(wrapper.element.textContent).toBe('bar,internal')
 
@@ -98,7 +99,7 @@ describe('useProxiedModel', () => {
     expect(wrapper.element.textContent).toBe('bar,bar')
 
     await wrapper.trigger('click')
-    expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
+    expect(wrapper.emitted('update:foo')).toStrictEqual([['internal']])
 
     // internal value should not change until prop is updated
     expect(wrapper.element.textContent).toBe('bar,bar')
@@ -108,19 +109,23 @@ describe('useProxiedModel', () => {
   })
 
   it('should use internal value if prop not defined', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = mount(TestComponent, {
+      props: { foo: '' },
+    })
 
     expect(wrapper.element.textContent).toBe(',')
 
     await wrapper.trigger('click')
-    expect(wrapper.emitted('update:foo')[0]).toStrictEqual(['internal'])
+    expect(wrapper.emitted('update:foo')).toStrictEqual([['internal']])
 
     // internal value should have changed since prop is not defined
     expect(wrapper.element.textContent).toBe(',internal')
   })
 
   it('should switch to using prop when it is defined', async () => {
-    const wrapper = mount(TestComponent)
+    const wrapper = mount(TestComponent, {
+      props: { foo: '' },
+    })
 
     expect(wrapper.element.textContent).toBe(',')
 
@@ -138,6 +143,7 @@ describe('useProxiedModel', () => {
       props: {
         foo: Array,
       },
+      emits: ['update:foo'],
       setup (props) {
         const proxiedModel = useProxiedModel(props, 'foo', [],
           arr => {
@@ -172,7 +178,7 @@ describe('useProxiedModel', () => {
       })
 
       await wrapper.trigger('click')
-      expect(wrapper.emitted('update:foo')[0]).toStrictEqual([[2, 3, 4]])
+      expect(wrapper.emitted('update:foo')).toStrictEqual([[[2, 3, 4]]])
     })
 
     it('should use internal value if prop not defined', async () => {
@@ -181,7 +187,7 @@ describe('useProxiedModel', () => {
       expect(wrapper.element.textContent).toBe('[]')
 
       await wrapper.trigger('click')
-      expect(wrapper.emitted('update:foo')[0]).toStrictEqual([[2, 3, 4]])
+      expect(wrapper.emitted('update:foo')).toStrictEqual([[[2, 3, 4]]])
 
       expect(wrapper.element.textContent).toBe('["2","3","4"]')
     })

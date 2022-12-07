@@ -25,14 +25,6 @@
   const { t } = useI18n()
   const title = t('support')
   const items = computed(() => ([
-    { subheader: t('professional-support') },
-    {
-      title: 'direct-support',
-      to: {
-        name: 'introduction-support',
-      },
-    },
-    { divider: true },
     { subheader: t('community-support') },
     {
       title: 'Discord',

@@ -10,12 +10,16 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
+import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
-export const VAppBar = defineComponent({
+export const VAppBar = genericComponent<new () => {
+  $props: SlotsToProps<VToolbarSlots>
+}>()({
   name: 'VAppBar',
 
   props: {

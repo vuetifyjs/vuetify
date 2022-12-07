@@ -4,8 +4,10 @@
       justify="center"
       align="center"
     >
-      <v-subheader>Offset Top</v-subheader>
-      {{ offsetTop }}
+      <v-col class="text-center">
+        <div class="text-subtitle-2">Offset Top</div>
+        {{ offsetTop }}
+      </v-col>
     </v-row>
     <v-container
       id="scroll-target"

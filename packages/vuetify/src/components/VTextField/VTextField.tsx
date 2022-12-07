@@ -11,15 +11,16 @@ import Intersect from '@/directives/intersect'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { ExtractPropTypes, PropType } from 'vue'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -28,10 +29,30 @@ const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 
 type EventProp<T = (...args: any[]) => any> = T | T[]
 const EventProp = [Function, Array] as PropType<EventProp>
 
-export const VTextField = genericComponent<new <T>() => {
-  $slots: Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+export const makeVTextFieldProps = propsFactory({
+  autofocus: Boolean,
+  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counterValue: Function as PropType<(value: any) => number>,
+  hint: String,
+  persistentHint: Boolean,
+  prefix: String,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
+  persistentCounter: Boolean,
+  suffix: String,
+  type: {
+    type: String,
+    default: 'text',
+  },
+
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
+}, 'v-text-field')
+
+export const VTextField = genericComponent<new () => {
+  $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
     default: []
-  }>
+  }>>
 }>()({
   name: 'VTextField',
 
@@ -39,41 +60,25 @@ export const VTextField = genericComponent<new <T>() => {
 
   inheritAttrs: false,
 
-  props: {
-    autofocus: Boolean,
-    counter: [Boolean, Number, String] as PropType<true | number | string>,
-    counterValue: Function as PropType<(value: any) => number>,
-    hint: String,
-    persistentHint: Boolean,
-    prefix: String,
-    placeholder: String,
-    persistentPlaceholder: Boolean,
-    persistentCounter: Boolean,
-    suffix: String,
-    type: {
-      type: String,
-      default: 'text',
-    },
-
-    ...makeVInputProps(),
-    ...makeVFieldProps(),
-  },
+  props: makeVTextFieldProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,
     'click:input': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
         : (model.value ?? '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength as unknown as undefined
 
       if (
         !props.counter ||
@@ -95,7 +100,6 @@ export const VTextField = genericComponent<new <T>() => {
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VField>()
-    const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
@@ -112,7 +116,7 @@ export const VTextField = genericComponent<new <T>() => {
         inputRef.value?.focus()
       }
 
-      if (!isFocused.value) isFocused.value = true
+      if (!isFocused.value) focus()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
@@ -125,10 +129,13 @@ export const VTextField = genericComponent<new <T>() => {
       onFocus()
 
       nextTick(() => {
-        model.value = ''
+        model.value = null
 
         callEvent(props['onClick:clear'], e)
       })
+    }
+    function onInput (e: Event) {
+      model.value = (e.target as HTMLInputElement).value
     }
 
     useRender(() => {
@@ -154,6 +161,7 @@ export const VTextField = genericComponent<new <T>() => {
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
@@ -192,7 +200,8 @@ export const VTextField = genericComponent<new <T>() => {
                     const inputNode = (
                       <input
                         ref={ inputRef }
-                        v-model={ model.value }
+                        value={ model.value }
+                        onInput={ onInput }
                         v-intersect={[{
                           handler: onIntersect,
                         }, null, ['once']]}
@@ -204,7 +213,7 @@ export const VTextField = genericComponent<new <T>() => {
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -268,3 +277,7 @@ export const VTextField = genericComponent<new <T>() => {
 })
 
 export type VTextField = InstanceType<typeof VTextField>
+
+export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
+  return pick(props, Object.keys(VTextField.props) as any)
+}

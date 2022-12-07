@@ -13,7 +13,6 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -22,7 +21,7 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 
 // Types
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
 
@@ -58,15 +57,17 @@ export const makeVToolbarProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-toolbar')
 
+export type VToolbarSlots = MakeSlots<{
+  default: []
+  image: []
+  prepend: []
+  append: []
+  title: []
+  extension: []
+}>
+
 export const VToolbar = genericComponent<new () => {
-  $slots: MakeSlots<{
-    default: []
-    image: []
-    prepend: []
-    append: []
-    title: []
-    extension: []
-  }>
+  $props: SlotsToProps<VToolbarSlots>
 }>()({
   name: 'VToolbar',
 
@@ -95,12 +96,6 @@ export const VToolbar = genericComponent<new () => {
       ), 10)
       : 0
     )
-
-    provideDefaults({
-      VBtn: {
-        variant: 'text',
-      },
-    })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
@@ -145,41 +140,57 @@ export const VToolbar = genericComponent<new () => {
             </div>
           ) }
 
-          <div
-            class="v-toolbar__content"
-            style={{ height: convertToUnit(contentHeight.value) }}
+          <VDefaultsProvider
+            defaults={{
+              VTabs: {
+                height: convertToUnit(contentHeight.value),
+              },
+            }}
           >
-            { slots.prepend && (
-              <div class="v-toolbar__prepend">
-                { slots.prepend?.() }
-              </div>
-            ) }
+            <div
+              class="v-toolbar__content"
+              style={{ height: convertToUnit(contentHeight.value) }}
+            >
+              { slots.prepend && (
+                <div class="v-toolbar__prepend">
+                  { slots.prepend?.() }
+                </div>
+              ) }
 
-            { hasTitle && (
-              <VToolbarTitle key="title" text={ props.title }>
-                {{ text: slots.title }}
-              </VToolbarTitle>
-            ) }
+              { hasTitle && (
+                <VToolbarTitle key="title" text={ props.title }>
+                  {{ text: slots.title }}
+                </VToolbarTitle>
+              ) }
 
-            { slots.default?.() }
+              { slots.default?.() }
 
-            { slots.append && (
-              <div class="v-toolbar__append">
-                { slots.append?.() }
-              </div>
-            ) }
-          </div>
+              { slots.append && (
+                <div class="v-toolbar__append">
+                  { slots.append?.() }
+                </div>
+              ) }
+            </div>
+          </VDefaultsProvider>
 
-          <VExpandTransition>
-            { isExtended.value && (
-              <div
-                class="v-toolbar__extension"
-                style={{ height: convertToUnit(extensionHeight.value) }}
-              >
-                { extension }
-              </div>
-            ) }
-          </VExpandTransition>
+          <VDefaultsProvider
+            defaults={{
+              VTabs: {
+                height: convertToUnit(extensionHeight.value),
+              },
+            }}
+          >
+            <VExpandTransition>
+              { isExtended.value && (
+                <div
+                  class="v-toolbar__extension"
+                  style={{ height: convertToUnit(extensionHeight.value) }}
+                >
+                  { extension }
+                </div>
+              ) }
+            </VExpandTransition>
+          </VDefaultsProvider>
         </props.tag>
       )
     })

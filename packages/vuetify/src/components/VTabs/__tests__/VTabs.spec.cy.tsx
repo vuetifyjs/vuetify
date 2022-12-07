@@ -18,7 +18,7 @@ describe('VTabs', () => {
     cy.get('.v-tab').eq(1).click()
 
     cy.vue().then(wrapper => {
-      const tabs = wrapper.findComponent('.v-tabs')
+      const tabs = wrapper.findComponent<VTabs>('.v-tabs')
       const emits = tabs.emitted('update:modelValue')
 
       expect(emits).to.deep.equal([

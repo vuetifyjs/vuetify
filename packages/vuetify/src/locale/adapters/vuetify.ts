@@ -93,7 +93,7 @@ function createProvideFunction (state: { current: Ref<string>, fallback: Ref<str
 export function createVuetifyAdapter (options?: LocaleOptions): LocaleInstance {
   const current = ref(options?.locale ?? 'en')
   const fallback = ref(options?.fallback ?? 'en')
-  const messages = ref(options?.messages ?? { en })
+  const messages = ref({ en, ...options?.messages })
 
   return {
     name: 'vuetify',

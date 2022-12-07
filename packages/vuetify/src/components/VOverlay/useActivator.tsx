@@ -56,7 +56,7 @@ export const makeActivatorProps = propsFactory({
   closeOnContentClick: Boolean,
 
   ...makeDelayProps(),
-})
+}, 'v-overlay-activator')
 
 export function useActivator (
   props: ActivatorProps,
@@ -213,6 +213,10 @@ export function useActivator (
       scope.stop()
     }
   }, { flush: 'post', immediate: true })
+
+  onScopeDispose(() => {
+    scope?.stop()
+  })
 
   return { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents }
 }

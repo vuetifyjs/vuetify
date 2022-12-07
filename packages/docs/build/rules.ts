@@ -10,6 +10,11 @@ function addCodeRules (md: MarkdownIt) {
 
     return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
   }
+  md.renderer.rules.code_inline = function (tokens, idx) {
+    const token = tokens[idx]
+
+    return `<code class="v-code">${md.utils.escapeHtml(token.content)}</code>`
+  }
 }
 
 function addImageRules (md: MarkdownIt) {

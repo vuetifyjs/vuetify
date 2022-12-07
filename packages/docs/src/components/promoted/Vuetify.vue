@@ -1,55 +1,42 @@
 <template>
   <promoted-base
-    class="v-vuetify mb-4"
-    v-bind="$attrs"
-    comfortable
     border
+    class="v-vuetify mb-4"
+    density="comfortable"
   >
     <v-list-item
       v-if="ad"
-      class="rounded px-2"
-      style="min-height: inherit; width: 100%"
-      v-bind="attrs"
       :prepend-avatar="src"
       :title="ad.title"
+      append-icon="mdi-open-in-new"
+      style="min-height: inherit; width: 100%"
+      v-bind="attrs"
     >
       <template #subtitle>
         <app-markdown
           v-if="description"
-          class="text-caption text--secondary"
           :content="description"
+          class="text-caption"
         />
       </template>
     </v-list-item>
   </promoted-base>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-  import { useI18n } from 'vue-i18n'
-  import { createAdProps, useAd } from '../../composables/ad'
-
+<script setup>
+  // Components
   import PromotedBase from './Base.vue'
 
-  // Mixins
-  export default defineComponent({
-    name: 'PromotedVuetify',
+  // Composables
+  import { createAdProps, useAd } from '@/composables/ad'
 
-    components: { PromotedBase },
+  const props = defineProps({
+    color: String,
 
-    props: {
-      color: String,
-
-      ...createAdProps(),
-    },
-
-    setup (props) {
-      const { t } = useI18n()
-      const { ad, attrs, src, description } = useAd(props)
-
-      return { t, ad, attrs, src, description }
-    },
+    ...createAdProps(),
   })
+
+  const { ad, attrs, src, description } = useAd(props)
 </script>
 
 <style lang="sass">

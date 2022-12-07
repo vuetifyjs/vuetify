@@ -14,7 +14,7 @@
       >
         <v-btn
           class="mt-6"
-          text
+          variant="text"
           color="red"
           @click="sheet = !sheet"
         >

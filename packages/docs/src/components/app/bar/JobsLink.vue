@@ -1,6 +1,6 @@
 <template>
   <app-tooltip-btn
-    :to="rpath('/resources/jobs-for-vue')"
+    :to="rpath('/resources/jobs-for-vue/')"
     class="jobs-link"
     path="jobs"
     @click="onClick"

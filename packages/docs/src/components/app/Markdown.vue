@@ -2,11 +2,11 @@
   <component :is="tag" class="v-markdown" v-html="markdown" />
 </template>
 
-<script>
+<script setup>
   // Utilities
   import { computed } from 'vue'
-  import MarkdownIt from 'markdown-it'
   import Emoji from 'markdown-it-emoji/bare.js'
+  import MarkdownIt from 'markdown-it'
 
   const md = MarkdownIt({
     html: true,
@@ -103,21 +103,13 @@
     }
   })
 
-  export default {
-    name: 'AppMarkdown',
-
-    props: {
-      tag: {
-        type: String,
-        default: 'div',
-      },
-      content: String,
+  const props = defineProps({
+    tag: {
+      type: String,
+      default: 'div',
     },
+    content: String,
+  })
 
-    setup (props) {
-      return {
-        markdown: computed(() => md.render(props.content, {})),
-      }
-    },
-  }
+  const markdown = computed(() => md.render(props.content, {}))
 </script>

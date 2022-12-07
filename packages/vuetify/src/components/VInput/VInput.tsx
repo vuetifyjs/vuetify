@@ -15,7 +15,7 @@ import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRende
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
@@ -51,7 +51,7 @@ export const makeVInputProps = propsFactory({
 
   ...makeDensityProps(),
   ...makeValidationProps(),
-})
+}, 'v-input')
 
 export type VInputSlots = MakeSlots<{
   default: [VInputSlot]
@@ -60,8 +60,8 @@ export type VInputSlots = MakeSlots<{
   details: [VInputSlot]
 }>
 
-export const VInput = genericComponent<new <T>() => {
-  $slots: VInputSlots
+export const VInput = genericComponent<new () => {
+  $props: SlotsToProps<VInputSlots>
 }>()({
   name: 'VInput',
 

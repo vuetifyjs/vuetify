@@ -5,19 +5,19 @@ import { makeSelectionControlProps, useSelectionControl } from '../VSelectionCon
 import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
-import { nextTick } from 'vue'
+import { defineComponent, nextTick } from 'vue'
 
 describe('VSelectionControl', () => {
   const vuetify = createVuetify()
 
   function mountFunction (options = {}) {
-    return mount({
+    return mount(defineComponent({
       props: makeSelectionControlProps(),
       setup (props) {
         return useSelectionControl(props as any)
       },
-      render: () => {},
-    }, {
+      render: () => undefined,
+    }), {
       global: { plugins: [vuetify] },
       ...options,
     })

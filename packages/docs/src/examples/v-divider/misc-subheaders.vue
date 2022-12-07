@@ -7,7 +7,7 @@
     >
       <v-card>
         <v-toolbar
-          color="orange lighten-1"
+          color="orange-lighten-1"
           dark
         >
           <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -23,15 +23,13 @@
 
         <v-list lines="two">
           <template v-for="(item, index) in items">
-            <v-subheader
+            <v-list-subheader
               v-if="item.header"
               :key="item.header"
               inset
             >
-              {{
-                item.header
-              }}
-            </v-subheader>
+              {{ item.header }}
+            </v-list-subheader>
 
             <v-divider
               v-else-if="item.divider"
@@ -76,7 +74,7 @@
           },
           {
             avatar: 'https://picsum.photos/250/300?image=821',
-            title: 'Summer BBQ <span class="grey--text text--lighten-1"></span>',
+            title: 'Summer BBQ <span class="text-grey-lighten-1"></span>',
             subtitle:
               '<span class="font-weight-bold">to Operations support</span> &mdash; Wish I could come.',
           },
@@ -115,7 +113,7 @@
           {
             avatar: 'https://picsum.photos/250/300?image=839',
             title:
-              'Winter Porridge <span class="grey--text text--lighten-1"></span>',
+              'Winter Porridge <span class="text-grey-lighten-1"></span>',
             subtitle:
               '<span class="font-weight-bold">cc: Daniel</span> &mdash; Tell me more...',
           },

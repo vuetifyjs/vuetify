@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
+import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 
 // Types
 import type {
@@ -68,7 +68,11 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey =
+  | boolean // Ignored
+  | string // Lookup by key, can use dot notation for nested objects
+  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
@@ -77,7 +81,13 @@ export function getPropertyFromItem (
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback
+  if (item !== Object(item)) {
+    if (typeof property !== 'function') return fallback
+
+    const value = property(item, fallback)
+
+    return typeof value === 'undefined' ? fallback : value
+  }
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
@@ -227,6 +237,17 @@ export function pick<
   }
 
   return [found, rest]
+}
+
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, exclude: U[]): Omit<T, U> {
+  const clone = { ...obj }
+
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
 }
 
 /**
@@ -595,6 +616,11 @@ export const isOn = (key: string) => onRE.test(key)
 
 export type EventProp<T = (...args: any[]) => any> = T | T[]
 export const EventProp = [Function, Array] as PropType<EventProp>
+
+export function hasEvent (props: Record<string, any>, name: string) {
+  name = 'on' + capitalize(name)
+  return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
+}
 
 export function callEvent (handler: EventProp | undefined, ...args: any[]) {
   if (Array.isArray(handler)) {

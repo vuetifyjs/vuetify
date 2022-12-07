@@ -4,7 +4,10 @@
       caption ? 'mb-6' : 'mb-10'
     ]"
   >
-    <v-img v-bind="$attrs" />
+    <v-img
+      class="rounded"
+      v-bind="$attrs"
+    />
 
     <figcaption
       v-if="caption"
@@ -15,6 +18,7 @@
 </template>
 
 <script setup>
+  // Utilities
   import { computed, useAttrs } from 'vue'
 
   const attrs = useAttrs()

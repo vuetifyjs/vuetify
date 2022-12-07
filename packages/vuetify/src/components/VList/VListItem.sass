@@ -239,6 +239,6 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-.v-list-group__header.v-list-item--active
+.v-list-group__header.v-list-item--active:not(:focus-visible)
   .v-list-item__overlay
-    display: none
+    opacity: 0

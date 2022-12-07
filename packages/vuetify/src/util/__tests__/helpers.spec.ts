@@ -12,7 +12,7 @@ import {
   mergeDeep,
   sortItems,
 } from '../helpers'
-import { isProxy, isReactive, isRef, nextTick, ref } from 'vue'
+import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {
@@ -195,6 +195,18 @@ describe('helpers', () => {
     expect(getPropertyFromItem(obj, 'x.y')).toBe('comp')
     expect(getPropertyFromItem(obj, ['x', 'y'])).toBe('nested')
     expect(getPropertyFromItem(obj, ['x.y'])).toBe('comp')
+  })
+
+  it('should get property from primitive items', () => {
+    const a = 1
+    const b = 'string'
+    const c = Symbol('symbol')
+    const d = false
+
+    expect(getPropertyFromItem(a, v => v)).toBe(a)
+    expect(getPropertyFromItem(b, v => v)).toBe(b)
+    expect(getPropertyFromItem(c, v => v)).toBe(c)
+    expect(getPropertyFromItem(d, v => v)).toBe(d)
   })
 
   it('should return proper value in convertToUnit', () => {

@@ -11,7 +11,7 @@
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
     "expandIcon": "Icon used for expand toggle button.",
-    "fixedHeader": "Fixed header to top of table. **NOTE:** Does not work in IE11",
+    "fixedHeader": "Fixed header to top of table",
     "groupBy": "Changes which item property should be used for grouping items. Currently only supports a single grouping in the format: `group` or `['group']`. When using an array, only the first element is considered. Can be used with `.sync` modifier",
     "groupDesc": "Changes which direction grouping is done. Can be used with `.sync` modifier",
     "headerProps": "Pass props to the default header. See [`v-data-table-header` API](/api/v-data-table-header) for more information",

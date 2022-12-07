@@ -1,4 +1,4 @@
-import { ref } from 'vue'
+import { defineComponent, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 
@@ -35,13 +35,13 @@ describe('scrollProps', () => {
 
 describe('useScroll', () => {
   function mountFunction (args?: ScrollArguments, options?: any) {
-    return mount({
+    return mount(defineComponent({
       props: makeScrollProps(),
       setup (props) {
         return useScroll(props, args)
       },
       template: '<div />',
-    }, options)
+    }), options)
   }
 
   beforeEach(() => {

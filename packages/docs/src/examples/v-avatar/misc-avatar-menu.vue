@@ -5,10 +5,8 @@
   >
     <v-row justify="center">
       <v-menu
-        bottom
         min-width="200px"
         rounded
-        offset-y
       >
         <template v-slot:activator="{ props }">
           <v-btn
@@ -19,7 +17,7 @@
               color="brown"
               size="large"
             >
-              <span class="white--text text-h5">{{ user.initials }}</span>
+              <span class="text-h5">{{ user.initials }}</span>
             </v-avatar>
           </v-btn>
         </template>
@@ -29,7 +27,7 @@
               <v-avatar
                 color="brown"
               >
-                <span class="white--text text-h5">{{ user.initials }}</span>
+                <span class="text-h5">{{ user.initials }}</span>
               </v-avatar>
               <h3>{{ user.fullName }}</h3>
               <p class="text-caption mt-1">

@@ -20,13 +20,13 @@ import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef } from 'vue'
 import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { ListGroupActivatorSlot } from './VListGroup'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 export interface InternalListItem extends InternalItem {
@@ -75,8 +75,7 @@ function useListItems (props: ItemProps & { itemType: string }) {
 export const VList = genericComponent<new <T>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     subheader: []
     header: [ListGroupActivatorSlot]
     item: [T]
@@ -115,10 +114,10 @@ export const VList = genericComponent<new <T>() => {
   },
 
   emits: {
-    'update:selected': (val: string[]) => true,
-    'update:opened': (val: string[]) => true,
-    'click:open': (value: { id: string, value: boolean, path: string[] }) => true,
-    'click:select': (value: { id: string, value: boolean, path: string[] }) => true,
+    'update:selected': (val: unknown[]) => true,
+    'update:opened': (val: unknown[]) => true,
+    'click:open': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
+    'click:select': (value: { id: unknown, value: boolean, path: unknown[] }) => true,
   },
 
   setup (props, { slots }) {
@@ -154,34 +153,106 @@ export const VList = genericComponent<new <T>() => {
       },
     })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-list',
-          {
-            'v-list--disabled': props.disabled,
-            'v-list--nav': props.nav,
-          },
-          themeClasses.value,
-          backgroundColorClasses.value,
-          borderClasses.value,
-          densityClasses.value,
-          elevationClasses.value,
-          lineClasses.value,
-          roundedClasses.value,
-        ]}
-        style={[
-          backgroundColorStyles.value,
-          dimensionStyles.value,
-        ]}
-      >
-        <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
-      </props.tag>
-    ))
+    const isFocused = ref(false)
+    const contentRef = ref<HTMLElement>()
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
+
+    function onFocusout (e: FocusEvent) {
+      isFocused.value = false
+    }
+
+    function onFocus (e: FocusEvent) {
+      if (
+        !isFocused.value &&
+        !(e.relatedTarget && contentRef.value?.contains(e.relatedTarget as Node))
+      ) focus()
+    }
+
+    function onKeydown (e: KeyboardEvent) {
+      if (!contentRef.value) return
+
+      if (e.key === 'ArrowDown') {
+        focus('next')
+      } else if (e.key === 'ArrowUp') {
+        focus('prev')
+      } else if (e.key === 'Home') {
+        focus('first')
+      } else if (e.key === 'End') {
+        focus('last')
+      } else {
+        return
+      }
+
+      e.preventDefault()
+    }
+
+    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+      if (!contentRef.value) return
+
+      const focusable = [...contentRef.value.querySelectorAll(
+        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
+      )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+      const idx = focusable.indexOf(document.activeElement as HTMLElement)
+
+      if (!location) {
+        focusable[0]?.focus()
+      } else if (location === 'first') {
+        focusable[0]?.focus()
+      } else if (location === 'last') {
+        focusable.at(-1)?.focus()
+      } else {
+        let el
+        let idxx = idx
+        const inc = location === 'next' ? 1 : -1
+        do {
+          idxx += inc
+          el = focusable[idxx]
+        } while ((!el || el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
+        if (el) el.focus()
+        else focus(location === 'next' ? 'first' : 'last')
+      }
+    }
+
+    useRender(() => {
+      return (
+        <props.tag
+          ref={ contentRef }
+          class={[
+            'v-list',
+            {
+              'v-list--disabled': props.disabled,
+              'v-list--nav': props.nav,
+            },
+            themeClasses.value,
+            backgroundColorClasses.value,
+            borderClasses.value,
+            densityClasses.value,
+            elevationClasses.value,
+            lineClasses.value,
+            roundedClasses.value,
+          ]}
+          style={[
+            backgroundColorStyles.value,
+            dimensionStyles.value,
+          ]}
+          role="listbox"
+          aria-activedescendant={ undefined }
+          onFocusin={ onFocusin }
+          onFocusout={ onFocusout }
+          onFocus={ onFocus }
+          onKeydown={ onKeydown }
+        >
+          <VListChildren items={ items.value } v-slots={ slots }></VListChildren>
+        </props.tag>
+      )
+    })
 
     return {
       open,
       select,
+      focus,
     }
   },
 })

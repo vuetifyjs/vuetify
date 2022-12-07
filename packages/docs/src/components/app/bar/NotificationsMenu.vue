@@ -63,7 +63,7 @@
       </div>
 
       <template v-else>
-        <v-list :lines="false">
+        <v-list lines="three">
           <template
             v-for="(notification, i) in notifications"
             :key="notification.slug"
@@ -71,34 +71,26 @@
 
             <v-divider
               v-if="i !== 0"
-              class="my-3"
-              inset
+              class="my-1"
             />
 
             <v-list-item
               :ripple="false"
               class="py-2"
             >
-              <template #prepend>
-                <div class="mr-3 text-h6 mt-n16">
-                  {{ notification.metadata.emoji }}
-                </div>
-              </template>
+              <v-list-item-title class="text-wrap text-h6 mb-1">
+                <span>{{ notification.metadata.emoji }}</span>
 
-              <v-list-item-title
-                class="text-wrap text-h6 mb-1"
-                v-text="notification.title"
-              />
+                <span class="ps-3"> {{ notification.title }}</span>
+              </v-list-item-title>
 
-              <v-list-item-subtitle
-                class="text-caption"
-              >
+              <div class="text-caption text-medium-emphasis ps-10">
                 {{ notification.metadata.text }}
 
                 <app-link :href="notification.metadata.action">
                   {{ notification.metadata.action_text }}
                 </app-link>
-              </v-list-item-subtitle>
+              </div>
 
               <template #append>
                 <v-btn
@@ -132,7 +124,7 @@
   import { computed, onMounted, ref } from 'vue'
 
   // Types
-  type Notification = {
+  interface Notification {
     metadata: {
       action: string
       action_text: string
@@ -146,7 +138,7 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic()
+  const { bucket } = useCosmic<Notification>()
   const { mobile } = useDisplay()
   const user = useUserStore()
   const menu = ref(false)
@@ -173,25 +165,24 @@
 
   const width = computed(() => mobile.value ? 420 : 520)
 
-  async function load () {
-    const { objects } = await bucket.getObjects<Notification>({
-      query: {
-        type: 'notifications',
-        status: 'published',
-      },
-      props: 'created_at,metadata,slug,title',
-      limit: 5,
-      sort: '-created_at',
-    })
-
-    all.value = objects ?? []
-  }
-
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
       ? user.notifications.read.filter(n => n !== slug)
       : [...user.notifications.read, slug]
   }
 
-  onMounted(load)
+  onMounted(async () => {
+    if (all.value.length) return
+
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'notifications' })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(5)
+    ) || {}
+
+    all.value = objects
+  })
 </script>

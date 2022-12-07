@@ -103,18 +103,18 @@ There may be times where your callback should only fire once. In these scenarios
     mounted () {
       this.content = 'Bar'
 
-      console.log(mutations) // 2
+      console.log(this.mutations) // 2
 
       setTimeout(() => {
         this.content = 'Foobar'
 
-        console.log(mutations) // 3
+        console.log(this.mutations) // 3
       }, 200)
     },
 
     methods: {
       onMutate (mutations, observer) {
-        mutations++
+        this.mutations++
       },
     },
   }
@@ -137,12 +137,12 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
     data: () => ({ mutations: 0 }),
 
     mounted () {
-      console.log(mutations) // 1
+      console.log(this.mutations) // 1
     },
 
     methods: {
       onMutate (mutations, observer) {
-        mutations++
+        this.mutations++
       },
     },
   }

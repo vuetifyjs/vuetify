@@ -3,8 +3,6 @@
     class="mx-auto mt-12"
     max-width="450"
   >
-    <v-system-bar></v-system-bar>
-
     <v-toolbar
       flat
       color="transparent"
@@ -31,7 +29,7 @@
       </v-chip>
     </v-card-text>
 
-    <v-list three-line>
+    <v-list lines="three">
       <v-list-item
         v-for="(item, i) in searching"
         :key="i"

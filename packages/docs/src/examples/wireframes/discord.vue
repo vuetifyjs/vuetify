@@ -101,12 +101,12 @@
       inset
     >
       <v-text-field
-        background-color="grey lighten-1"
-        dense
+        bg-color="grey lighten-1"
+        density="compact"
         flat
         hide-details
         rounded
-        solo
+        variant="solo"
       ></v-text-field>
     </v-footer>
   </v-app>

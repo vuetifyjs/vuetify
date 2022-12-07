@@ -29,7 +29,7 @@
           <v-card-actions>
             <v-btn
               color="primary"
-              text
+              variant="text"
               @click="dialog = false"
             >
               Close
@@ -56,7 +56,7 @@
           <v-card-actions>
             <v-btn
               color="primary"
-              text
+              variant="text"
               @click="dialog2 = false"
             >
               Close
@@ -75,7 +75,7 @@
           <v-card-actions>
             <v-btn
               color="primary"
-              text
+              variant="text"
               @click="dialog3 = false"
             >
               Close

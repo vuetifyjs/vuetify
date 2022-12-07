@@ -50,11 +50,11 @@ With Combobox, you can allow a user to create new values that may not be present
 
 ### Props
 
-#### Dense
+#### Density
 
-You can use `dense` prop to reduce combobox height and lower max height of list items.
+You can use `density` prop to adjusts vertical spacing within the component.
 
-<example file="v-combobox/prop-dense" />
+<example file="v-combobox/prop-density" />
 
 #### Multiple combobox
 

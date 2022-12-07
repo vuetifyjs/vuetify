@@ -35,15 +35,11 @@
         name: 'introduction-roadmap',
       },
     },
-    { divider: true },
-    { subheader: t('video-courses') },
     {
-      title: 'Vue Mastery',
-      href: 'https://vuemastery.com',
-    },
-    {
-      title: 'Vue School',
-      href: 'https://vueschool.io?friend=vuetify',
+      title: t('components'),
+      to: {
+        name: 'components-all',
+      },
     },
   ]))
 </script>

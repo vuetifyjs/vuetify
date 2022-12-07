@@ -2,7 +2,7 @@
   <v-card
     theme="dark"
     flat
-    tile
+    rounded="0"
   >
     <v-window v-model="onboarding">
       <v-window-item

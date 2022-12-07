@@ -36,13 +36,21 @@ You can also customize flex utilities to apply based upon various breakpoints.
 - **.d-xl-flex**
 - **.d-xl-inline-flex**
 
+### Caveats
+
+<alert type="info">
+
+It is important to note that using any of the display classes above will result in any display style previously added being overwritten. This is because of the classes using `!important` in their display styling.
+
+</alert>
+
 ## Flex direction
 
 By default, `d-flex` applies `flex-direction: row` and can generally be omitted. However, there may be situations where you need to explicitly define it.
 
 <example file="flex/flex-direction" />
 
-The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container. Keep in mind that **IE11** and **Safari** may have issues with the column direction.
+The `flex-column` and `flex-column-reverse` utility classes can be used to change the orientation of the flexbox container.
 
 <example file="flex/flex-column" />
 
@@ -106,12 +114,6 @@ There are also responsive variations for `justify-content`.
 ## Flex align
 
 The `align-items` flex setting can be changed using the flex align classes. This by default will modify the flexbox items on the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, or `stretch` (browser default).
-
-<alert type="info">
-
-  When using flex align with IE11 you will need to set an explicit `height` as `min-height` will not suffice and cause undesired results.
-
-</alert>
 
 <example file="flex/flex-align" />
 
@@ -185,12 +187,6 @@ There are also responsive variations for `align-self-items`.
 ## Auto margins
 
 Using the margin helper classes in a flexbox container, you can control the positioning of flex items on the **x-axis** or **y-axis** when using `flex-row` or `flex-column` respectively.
-
-<alert type="error">
-
-  **IE11** does not properly support auto margins on flex items that have a parent with a non-default `justify-content` value. [See this StackOverflow answer](https://stackoverflow.com/a/37535548) for more details.
-
-</alert>
 
 <example file="flex/margins" />
 
@@ -297,7 +293,7 @@ There are also responsive variations for `order`.
 - **.order-lg-11**
 - **.order-lg-12**
 - **.order-lg-last**
-- **.order-lg-first**
+- **.order-xl-first**
 - **.order-xl-0**
 - **.order-xl-1**
 - **.order-xl-2**

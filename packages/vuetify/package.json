@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-beta.13",
+  "version": "3.0.3",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "dist/vuetify.d.ts",
+  "types": "lib/index.d.ts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -51,10 +51,7 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": {
-      "import": "./lib/framework.mjs",
-      "require": "./dist/vuetify.js"
-    },
+    ".": "./lib/framework.mjs",
     "./styles": "./lib/styles/main.css",
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
@@ -97,7 +94,6 @@
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
     "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.js && rimraf types-temp",
-    "build:json": "node build/build-json.js",
     "tsc": "tsc",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
     "test": "node build/run-tests.js",
@@ -106,7 +102,7 @@
     "test:coverage": "yarn test --coverage",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
-    "cy:open": "cypress open --component -b chrome",
+    "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
   "devDependencies": {
@@ -120,7 +116,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^28.1.8",
     "@types/node": "^16.11.26",
     "@types/resize-observer-browser": "^0.1.7",
     "@vitejs/plugin-vue": "^3.0.3",

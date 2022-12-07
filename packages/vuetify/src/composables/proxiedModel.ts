@@ -21,7 +21,7 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
-  const internal = ref(props[prop]) as Ref<Props[Prop]>
+  const internal = ref(props[prop] !== undefined ? props[prop] : defaultValue) as Ref<Props[Prop]>
   const kebabProp = toKebabCase(prop)
   const checkKebab = kebabProp !== prop
 
@@ -48,11 +48,14 @@ export function useProxiedModel<
     get (): any {
       return transformIn(isControlled.value ? props[prop] : internal.value)
     },
-    set (newValue) {
-      if (transformIn(isControlled.value ? props[prop] : internal.value) === newValue) {
+    set (value) {
+      const newValue = transformOut(value)
+      if (
+        (isControlled.value ? props[prop] : internal.value) === newValue ||
+        transformIn(isControlled.value ? props[prop] : internal.value) === value
+      ) {
         return
       }
-      newValue = transformOut(newValue)
       internal.value = newValue
       vm?.emit(`update:${prop}`, newValue)
     },

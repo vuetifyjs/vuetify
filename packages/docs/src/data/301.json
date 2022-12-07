@@ -110,5 +110,7 @@
   "customization/presets": "/features/presets",
   "customization/sass-variables": "/features/sass-variables",
   "customization/theme": "/features/theme",
-  "introduction/consulting": "/introduction/support"
+  "introduction/consulting": "/introduction/support",
+  "about/meet-the-team": "/introduction/meet-the-team",
+  "about/sponsors-and-backers": "/introduction/sponsors-and-backers"
 }

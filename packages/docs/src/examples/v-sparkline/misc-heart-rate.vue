@@ -1,7 +1,7 @@
 <template>
   <v-card
     class="mx-auto"
-    color="grey lighten-4"
+    color="grey-lighten-4"
     max-width="600"
   >
     <v-card-title>
@@ -14,7 +14,7 @@
         mdi-heart-pulse
       </v-icon>
       <v-row align="start">
-        <div class="text-caption grey--text text-uppercase">
+        <div class="text-caption text-grey text-uppercase">
           Heart rate
         </div>
         <div>

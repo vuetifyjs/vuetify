@@ -1,11 +1,22 @@
 <template>
-  <app-settings-group ref="group" v-model="model" title="theme" :items="items" multiple />
+  <app-settings-group
+    ref="group"
+    v-model="model"
+    :items="items"
+    multiple
+    title="theme"
+  />
 </template>
 
 <script setup lang="ts">
-  import { computed, getCurrentInstance, nextTick, ref } from 'vue'
-  import { useUserStore } from '@/store/user'
+  // Components
   import AppSettingsGroup from './Group.vue'
+
+  // Composables
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { computed, getCurrentInstance, nextTick, ref } from 'vue'
 
   const group = ref<InstanceType<typeof AppSettingsGroup>>()
   const user = useUserStore()

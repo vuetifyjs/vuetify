@@ -22,6 +22,10 @@ const banner = `/*!
 * Released under the MIT License.
 */\n`
 
+function fixWindowsPath(path) {
+  return path.replace(/^[^:]+:\\/, '\\').replaceAll('\\', '/')
+}
+
 export default {
   input: 'src/entry-bundler.ts',
   output: [
@@ -45,24 +49,24 @@ export default {
       format: 'umd',
       globals: { vue: 'Vue' },
       plugins: [terser({
-        format: { comments: /^!/, ecma: 2015, semicolons: false }
+        format: { comments: /^!/, ecma: 2015, semicolons: false },
       })],
       sourcemap: true,
       banner,
-    }
+    },
   ],
   external: ['vue'],
   plugins: [
     nodeResolve({ extensions }),
     babel({
       extensions,
-      babelHelpers: 'inline'
+      babelHelpers: 'inline',
     }),
     sass({
       options: {
         charset: false,
       },
-      output(styles, styleNodes) {
+      output (styles, styleNodes) {
         // Complete CSS bundle
         mkdirp(path.resolve(__dirname, '../dist')).then(() => {
           return Promise.all([
@@ -70,8 +74,8 @@ export default {
             postcss([autoprefixer, cssnano({
               preset: 'default',
               postcssZindex: false,
-              reduceIdents: false
-            })]).process(styles, { from: 'src' })
+              reduceIdents: false,
+            })]).process(styles, { from: 'src' }),
           ])
         }).then(result => {
           writeFile(path.resolve(__dirname, '../dist/vuetify.css'), banner + result[0].css, 'utf8')
@@ -80,7 +84,7 @@ export default {
 
         // Individual CSS files
         for (const { id, content } of styleNodes) {
-          const out = path.parse(id.replace(
+          const out = path.parse(fixWindowsPath(id).replace(
             path.resolve(__dirname, '../src'),
             path.resolve(__dirname, '../lib')
           ))
@@ -93,7 +97,7 @@ export default {
     alias({
       entries: [
         { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../src/$1') },
-      ]
+      ],
     }),
     {
       async buildEnd () {
@@ -106,7 +110,8 @@ export default {
             (await this.resolve('src/components/index.ts')).id
           )
           await Promise.all(importedIds.map(async id => {
-            const importFrom = path.relative(path.resolve(__dirname, '../src'), id).replace(/\.ts$/, '.mjs')
+            // Fix for Windows
+            const importFrom = path.relative(path.resolve(__dirname, '../src'), fixWindowsPath(id)).replace(/\.ts$/, '.mjs')
 
             if (await this.resolve(path.join(id, '../_variables.scss')) != null) {
               variables.push(id)
@@ -165,9 +170,9 @@ export default {
               path.relative(path.resolve(__dirname, '../src'), id),
               '../_variables.scss'
             ) + `'`
-          }).sort().join('\n')
+          }).sort().join('\n'),
         })
-      }
-    }
+      },
+    },
   ],
 }

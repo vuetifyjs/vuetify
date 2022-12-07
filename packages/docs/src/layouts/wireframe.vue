@@ -17,5 +17,5 @@
 
   const route = useRoute()
   const { page } = route.meta
-  const href = `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/${page}.vue`
+  const href = `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/wireframes/${page}.vue`
 </script>
