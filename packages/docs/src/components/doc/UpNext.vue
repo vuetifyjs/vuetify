@@ -4,7 +4,7 @@
     class="d-flex"
   >
     <router-link
-      v-if="prev"
+      v-if="(prev && prev.name !== 'home')"
       :to="prev.path"
       class="text-decoration-none text-body-1 d-inline-flex align-center"
     >
@@ -57,11 +57,17 @@
   const routes = computed(() => useRouter().getRoutes())
   const currentIndex = computed(() => pages.indexOf(path.value.join('/')))
   const prev = computed(() => {
+    if (currentIndex.value === -1) return false
+
     const prevPath = rpath(pages[currentIndex.value - 1])
+
+    if (prevPath == null) return false
 
     return routes.value.find(r => r.path === prevPath)
   })
   const next = computed(() => {
+    if (currentIndex.value === -1) return false
+
     const nextPath = rpath(pages[currentIndex.value + 1])
 
     return routes.value.find(r => r.path === nextPath)
