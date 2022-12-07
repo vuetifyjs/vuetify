@@ -36,12 +36,18 @@ The Vuetify UI Kit is a free component plugin for Figma that streamlines buildin
 6. Access components within your projects by selecting **Assets** and then searching for the desired component:
   ![UI Kit Search Assets](https://cdn.vuetifyjs.com/docs/images/ui-kits/ui-kit-search-assets.png)
 
+<entry />
+
+## All kits
+
+Below is a collection of all UI Kits available on our store:
+
+<vuetify-ui-kits />
+
 <alert type="info">
 
-  Whenever a new version is released we will send you a new download link with the latest update.
+  Whenever a new version is released you will receive a new download link with the latest update via email.
 
 </alert>
-
-<entry />
 
 <backmatter />
