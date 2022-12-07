@@ -86,7 +86,7 @@ export const VCombobox = genericComponent<new <
     // TODO: implement post keyboard support
     // autoSelectFirst: Boolean,
     delimiters: Array as PropType<string[]>,
-    
+
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...omit(makeVTextFieldProps({
