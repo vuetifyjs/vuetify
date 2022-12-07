@@ -6,10 +6,11 @@ import Cosmic from 'cosmicjs'
 // Types
 import type { Bucket } from 'cosmicjs'
 
-export function useCosmic<T> () {
+export function useCosmic<T> (
+  slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG as string | undefined,
+  read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY as string | undefined,
+) {
   const api = Cosmic<T>()
-  const read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY as string | undefined
-  const slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG as string | undefined
 
   let bucket: Bucket<T> | undefined
 

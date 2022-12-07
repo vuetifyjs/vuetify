@@ -191,7 +191,8 @@
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",
     "items": [
-      "jobs-for-vue"
+      "jobs-for-vue",
+      "ui-kits"
     ]
   },
   {

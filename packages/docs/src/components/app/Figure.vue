@@ -14,6 +14,8 @@
       class="text-caption font-weight-bold text-center text-capitalize font-italic"
       v-text="caption"
     />
+
+    <slot v-else />
   </figure>
 </template>
 

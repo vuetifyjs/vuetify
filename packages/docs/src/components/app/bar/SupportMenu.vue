@@ -21,6 +21,7 @@
 
   // Utilities
   import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
   const title = t('support')
@@ -31,14 +32,26 @@
       href: 'https://community.vuetifyjs.com/',
     },
     {
+      title: 'file-a-bug-report',
+      href: 'https://issues.vuetifyjs.com/',
+    },
+    {
       title: 'github-discussions',
       href: 'https://discussions.vuetifyjs.com/',
+    },
+    {
+      title: 'stack-overflow',
+      href: 'https://stackoverflow.com/search?q=vuetify',
     },
     { divider: true },
     { subheader: t('resources-and-tools') },
     {
-      title: 'file-a-bug-report',
-      href: 'https://issues.vuetifyjs.com/',
+      title: 'jobs',
+      to: rpath('/resources/jobs-for-vue/'),
+    },
+    {
+      title: 'ui-kits',
+      to: rpath('/resources/ui-kits/'),
     },
     {
       title: 'codepen-template',
@@ -51,10 +64,6 @@
     {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
-    },
-    {
-      title: 'stack-overflow',
-      href: 'https://stackoverflow.com/search?q=vuetify',
     },
   ]))
 </script>
