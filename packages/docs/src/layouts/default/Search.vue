@@ -124,7 +124,7 @@
     },
 
     beforeDestroy () {
-      if (IN_BROWSER) return
+      if (!IN_BROWSER) return
 
       document.removeEventListener('keydown', this.onDocumentKeydown)
     },

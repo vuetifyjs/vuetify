@@ -162,16 +162,6 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-} as any
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
 export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
   const filtered = {} as { [N in K]: T[N] }
 

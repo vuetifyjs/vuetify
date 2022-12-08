@@ -15,11 +15,11 @@
       leave-absolute
     >
       <div
-        v-for="job in jobs"
-        :key="job.id"
+        v-for="(job, i) in jobs"
+        :key="`${job.title}-${i}`"
       >
         <v-card
-          :href="job.url"
+          :href="job.link"
           class="mb-4 transition-swing"
           outlined
           rel="sponsored"
@@ -28,7 +28,7 @@
           <v-list-item>
             <v-list-item-avatar>
               <v-img
-                :src="job.avatar"
+                :src="job.organization.avatar"
                 contain
               />
             </v-list-item-avatar>
@@ -39,7 +39,10 @@
                 v-text="job.title"
               />
 
-              <v-list-item-subtitle class="d-flex">
+              <v-list-item-subtitle
+                v-if="job.locations.length > 0"
+                class="d-flex"
+              >
                 <v-icon
                   class="mr-1"
                   size="14"
@@ -47,7 +50,7 @@
                   $mdiMapMarkerOutline
                 </v-icon>
 
-                {{ job.location }}
+                {{ job.locations.join(', ') }}
               </v-list-item-subtitle>
             </v-list-item-content>
 
@@ -87,12 +90,13 @@
               </v-chip>
 
               <v-chip
+                v-if="job.remote"
                 class="px-2"
                 color="primary"
                 label
                 x-small
               >
-                <span class="font-weight-bold">#{{ job.type }}</span>
+                <span class="font-weight-bold">#remote {{ job.remote }}</span>
               </v-chip>
 
               <v-spacer />

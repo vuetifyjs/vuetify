@@ -22,7 +22,7 @@ To set the available locales or the current locale, supply the `lang` option whe
 Currently Vuetify provides translations in the following languages:
 
 - **af** - Afrikaans (Afrikaans)
-- **ar** - Arabic (اللغة العربية)
+- **ar** - Arabic (العربية)
 - **az** - Azerbaijani (Azərbaycan)
 - **bg** - Bulgarian (български)
 - **ca** - Catalan (català)

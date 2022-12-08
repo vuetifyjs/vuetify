@@ -12,5 +12,8 @@ module.exports = {
         value: 'MouseEvent',
       },
     ],
+    exclude: {
+      props: ['type', 'hide-spin-buttons'],
+    },
   },
 }
