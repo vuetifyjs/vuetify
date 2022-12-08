@@ -20,6 +20,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
   id: ComputedRef<string>
+  messagesId: ComputedRef<string>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
@@ -79,6 +80,7 @@ export const VInput = genericComponent<new () => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const messagesId = computed(() => `${id.value}-messages`)
 
     const {
       errorMessages,
@@ -96,6 +98,7 @@ export const VInput = genericComponent<new () => {
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
+      messagesId,
       isDirty,
       isDisabled,
       isReadonly,
@@ -162,6 +165,7 @@ export const VInput = genericComponent<new () => {
           { hasDetails && (
             <div class="v-input__details">
               <VMessages
+                id={ messagesId.value }
                 active={ hasMessages }
                 messages={ errorMessages.value.length > 0
                   ? errorMessages.value
