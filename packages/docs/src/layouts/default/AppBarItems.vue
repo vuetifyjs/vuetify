@@ -9,6 +9,8 @@
 
       <support-menu />
 
+      <enterprise-link />
+
       <template v-if="$vuetify.breakpoint.mdAndUp">
         <team-link />
 
