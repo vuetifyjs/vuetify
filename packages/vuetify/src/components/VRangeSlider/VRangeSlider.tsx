@@ -142,7 +142,7 @@ export const VRangeSlider = defineComponent({
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
-            default: ({ id }) => (
+            default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
@@ -176,6 +176,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ startThumbRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused && activeThumbRef.value === startThumbRef.value?.$el }
                   modelValue={ model.value[0] }
                   onUpdate:modelValue={ v => (model.value = [v, model.value[1]]) }
@@ -209,6 +210,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ stopThumbRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused && activeThumbRef.value === stopThumbRef.value?.$el }
                   modelValue={ model.value[1] }
                   onUpdate:modelValue={ v => (model.value = [model.value[0], v]) }
