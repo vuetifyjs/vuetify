@@ -17,6 +17,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useForm } from '@/composables/form'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
@@ -118,6 +119,7 @@ export const VAutocomplete = genericComponent<new <
       }
     )
     const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const form = useForm()
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => item.value === v.value) || v
@@ -138,13 +140,13 @@ export const VAutocomplete = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly
+        props.readonly || form?.isReadonly
       ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly) return
+      if (props.readonly || form?.isReadonly) return
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true

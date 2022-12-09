@@ -18,6 +18,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { useForm } from '@/composables/form'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
@@ -121,6 +122,7 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const form = useForm()
     const _search = ref(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
       get: () => {
@@ -179,13 +181,13 @@ export const VCombobox = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly
+        props.readonly || form?.isReadonly
       ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly) return
+      if (props.readonly || form?.isReadonly) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = selected.value.length

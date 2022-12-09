@@ -17,6 +17,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useForm } from '@/composables/form'
 import { IconValue } from '@/composables/icons'
 
 // Utility
@@ -118,6 +119,7 @@ export const VSelect = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const form = useForm()
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => item.value === v.value) || v
@@ -136,13 +138,13 @@ export const VSelect = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly
+        props.readonly || form?.isReadonly
       ) return
 
       menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly) return
+      if (props.readonly || form?.isReadonly) return
 
       if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         e.preventDefault()
@@ -215,7 +217,7 @@ export const VSelect = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
-          readonly
+          readonly={ props.readonly }
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onBlur={ onBlur }
