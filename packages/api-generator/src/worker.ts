@@ -27,7 +27,7 @@ export default async (json: string) => {
 
     return { componentName, kebabName, ...componentData }
   } catch (err) {
-    console.error(`${componentName}: ${err}`)
+    console.error(`${componentName}: ${err}`, err.stack)
     return null
   }
 }

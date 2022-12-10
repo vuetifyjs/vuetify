@@ -8,8 +8,11 @@ function inspect (project: Project, node?: Node<ts.Node>) {
 
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
-    // Exclude private properties
-    definition.properties = Object.fromEntries(Object.entries(definition.properties).filter(([name]) => !name.startsWith('_')))
+    if (definition.properties) {
+      // Exclude private properties
+      definition.properties = Object.fromEntries(Object.entries(definition.properties)
+        .filter(([name]) => !name.startsWith('_')))
+    }
     return definition
   }
 
