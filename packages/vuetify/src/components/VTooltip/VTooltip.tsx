@@ -40,7 +40,6 @@ export const VTooltip = genericComponent<new () => {
       scrim: false,
       scrollStrategy: 'reposition' as const,
       transition: false,
-      disableGlobalStack: true,
     }), [
       'absolute',
       'persistent',
@@ -104,6 +103,7 @@ export const VTooltip = genericComponent<new () => {
           activatorProps={ mergeProps({
             'aria-describedby': id.value,
           }, props.activatorProps) }
+          _disableGlobalStack
           { ...scopeId }
         >
           {{
