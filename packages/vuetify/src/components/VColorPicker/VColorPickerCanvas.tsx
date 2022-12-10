@@ -6,7 +6,7 @@ import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender }
 import { computed, onMounted, ref, watch } from 'vue'
 
 // Types
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 import type { PropType } from 'vue'
 
 export const VColorPickerCanvas = defineComponent({
@@ -14,7 +14,7 @@ export const VColorPickerCanvas = defineComponent({
 
   props: {
     color: {
-      type: Object as PropType<HSVA | null>,
+      type: Object as PropType<HSV | null>,
     },
     disabled: Boolean,
     dotSize: {
@@ -32,7 +32,7 @@ export const VColorPickerCanvas = defineComponent({
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
     'update:position': (hue: any) => true,
   },
 

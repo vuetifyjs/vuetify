@@ -128,8 +128,8 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
   const tsx = targetBox.width / elBox.width
   const tsy = targetBox.height / elBox.height
   const maxs = Math.max(1, tsx, tsy)
-  const sx = tsx / maxs
-  const sy = tsy / maxs
+  const sx = tsx / maxs || 0
+  const sy = tsy / maxs || 0
 
   // Animate elements larger than 12% of the screen area up to 1.5x slower
   const asa = (elBox.width * elBox.height) / (window.innerWidth * window.innerHeight)

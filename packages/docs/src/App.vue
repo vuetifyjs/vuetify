@@ -1,4 +1,5 @@
 <template>
+  <v-progress-linear v-if="pwa.loading" indeterminate color="primary" height="3" class="pwa-loader" />
   <router-view />
 </template>
 
@@ -9,6 +10,7 @@
   import { useRoute, useRouter } from 'vue-router'
   import { useTheme } from 'vuetify'
   import { useUserStore } from '@/store/user'
+  import { usePwaStore } from '@/store/pwa'
 
   // Utilities
   import { computed, onBeforeMount, ref, watch, watchEffect } from 'vue'
@@ -18,10 +20,8 @@
   // Globals
   import { IN_BROWSER } from '@/util/globals'
 
-  // Data
-  import metadata from '@/data/metadata.json'
-
   const user = useUserStore()
+  const pwa = usePwaStore()
   const router = useRouter()
   const route = useRoute()
   const theme = useTheme()
@@ -30,10 +30,11 @@
   const path = computed(() => route.path.replace(`/${locale.value}/`, ''))
 
   const meta = computed(() => {
-    return genAppMetaInfo(path.value === '' ? metadata : {
-      title: `${route.meta.title} — Vuetify`,
+    return genAppMetaInfo({
+      title: `${route.meta.title}${path.value === '' ? '' : ' — Vuetify'}`,
       description: route.meta.description,
       keywords: route.meta.keywords,
+      assets: route.meta.assets,
     })
   })
 
@@ -90,7 +91,17 @@
       font-size: 1.25rem
       font-weight: 300
 
-  ul:not([class])
+  ul:not([class]),
+  ol:not([class])
     padding-left: 20px
     margin-bottom: 16px
+</style>
+
+<style lang="sass" scoped>
+  .pwa-loader
+    position: fixed
+    top: 0
+    left: 0
+    right: 0
+    z-index: 1010
 </style>

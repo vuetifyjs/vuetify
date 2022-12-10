@@ -4,7 +4,8 @@
     "mandatory": "Forces at least one item to always be selected (if available).",
     "max": "Sets a maximum number of selections that can be made.",
     "multiple": "Allows one to select mulitple items.",
-    "selectedClass": "Configure the selected CSS class."
+    "selectedClass": "Configure the selected CSS class.",
+    "disabled": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/group.json))"
   },
   "events": {
     "update:modelValue": "Emitted when selection changes"

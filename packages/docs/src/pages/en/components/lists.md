@@ -7,7 +7,6 @@ meta:
 related:
   - /components/item-groups/
   - /components/list-item-groups/
-  - /components/subheaders/
 ---
 
 # Lists

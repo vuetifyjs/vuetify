@@ -3,8 +3,6 @@
     max-width="400"
     class="mx-auto"
   >
-    <v-system-bar></v-system-bar>
-
     <v-row
       class="px-6 py-3"
       align="center"

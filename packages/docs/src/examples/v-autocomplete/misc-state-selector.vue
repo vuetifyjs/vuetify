@@ -4,9 +4,9 @@
       Profile
     </v-card-title>
     <v-card-text>
-      <v-subheader class="pa-0">
+      <div class="text-caption pa-3">
         Where do you live?
-      </v-subheader>
+      </div>
       <v-autocomplete
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"

@@ -4,7 +4,7 @@
     v-if="!error"
     class="d-flex"
   >
-    <promoted-base max-width="360">
+    <promoted-base border max-width="360">
       <promoted-script
         id="carbonads"
         script-id="_carbonads_js"

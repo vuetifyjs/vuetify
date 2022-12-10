@@ -1,0 +1,8 @@
+{
+  "props": {
+    "locationStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))",
+    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))",
+    "origin": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))",
+    "offset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-overlay-location-strategies.json))"
+  }
+}

@@ -102,7 +102,7 @@
     >
       <v-text-field
         bg-color="grey lighten-1"
-        dense
+        density="compact"
         flat
         hide-details
         rounded

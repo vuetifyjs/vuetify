@@ -5,7 +5,7 @@
       :key="job.id"
     >
       <v-card
-        :href="job.url"
+        :href="job.link"
         border
         class="mb-4 transition-swing"
         rel="sponsored"
@@ -13,18 +13,18 @@
         variant="flat"
       >
         <v-list-item
-          :prepend-avatar="typeof job.avatar === 'string' ? job.avatar : undefined"
+          :prepend-avatar="typeof job.organization.avatar === 'string' ? job.organization.avatar : undefined"
           :title="job.title"
           class="mt-2"
         >
-          <template #subtitle>
+          <template v-if="job.locations.length > 0" #subtitle>
             <v-icon
               class="me-1"
               icon="mdi-map-marker-outline"
               size="14"
             />
 
-            {{ job.location }}
+            {{ job.locations.join(', ') }}
           </template>
 
           <template #append>
@@ -63,12 +63,13 @@
             </v-chip>
 
             <v-chip
+              v-if="job.remote"
               class="px-2"
               color="primary"
               label
               size="x-small"
             >
-              <span class="font-weight-bold">#{{ job.type }}</span>
+              <span class="font-weight-bold">#remote {{ job.remote }}</span>
             </v-chip>
 
             <v-spacer />

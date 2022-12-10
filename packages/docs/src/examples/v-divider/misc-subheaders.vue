@@ -23,15 +23,13 @@
 
         <v-list lines="two">
           <template v-for="(item, index) in items">
-            <v-subheader
+            <v-list-subheader
               v-if="item.header"
               :key="item.header"
               inset
             >
-              {{
-                item.header
-              }}
-            </v-subheader>
+              {{ item.header }}
+            </v-list-subheader>
 
             <v-divider
               v-else-if="item.divider"

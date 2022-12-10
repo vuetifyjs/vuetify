@@ -241,7 +241,7 @@ export const VField = genericComponent<new <T>() => {
 
           <LoaderSlot
             name="v-field"
-            active={ props.loading }
+            active={ !!props.loading }
             color={ props.error ? 'error' : props.color }
             v-slots={{ default: slots.loader }}
           />

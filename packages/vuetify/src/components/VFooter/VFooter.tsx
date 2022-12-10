@@ -69,7 +69,7 @@ export const VFooter = defineComponent({
           roundedClasses.value,
         ]}
         style={[
-          backgroundColorStyles,
+          backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}
         v-slots={ slots }

@@ -19,7 +19,7 @@
       </thead>
       <tbody>
         <template v-for="item in items" :key="item.name">
-          <tr class="bg-grey-lighten-4">
+          <tr :class="theme.dark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'">
             <NameCell section="props" :name="kebabCase(item.name)" />
             <td>
               <PrismCell :code="item.default" language="scss" />
@@ -39,6 +39,7 @@
   // Utilities
   import { kebabCase } from 'lodash-es'
   import { PropType } from 'vue'
+  import { useTheme } from 'vuetify'
 
   defineProps({
     items: {
@@ -46,6 +47,8 @@
       default: () => [],
     },
   })
+
+  const { current: theme } = useTheme()
 
   const headers = ['name', 'default']
 </script>
