@@ -7,7 +7,10 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   const kind = node.getKind()
 
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
-    return generateDefinition(node, [], project)
+    const definition = generateDefinition(node, [], project) as ObjectDefinition
+    // Exclude private properties
+    definition.properties = Object.fromEntries(Object.entries(definition.properties).filter(([name]) => !name.startsWith('_')))
+    return definition
   }
 
   return null
@@ -20,7 +23,7 @@ export function generateComposableDataFromTypes () {
 
   const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
 
-  const composables = inspect(project, sourceFile.getTypeAlias('Composables')) as ObjectDefinition
+  const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
 
   return Object.entries(composables.properties).map(([name, data]) => {
     const returnType = (data as FunctionDefinition).returnType
@@ -50,7 +53,7 @@ export function generateDirectiveDataFromTypes () {
 
   const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
 
-  const directives = inspect(project, sourceFile.getTypeAlias('Directives')) as ObjectDefinition
+  const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
 
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
@@ -68,10 +71,10 @@ export async function generateComponentDataFromTypes (component: string) {
 
   const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
 
-  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps')) as ObjectDefinition
-  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents')) as ObjectDefinition
-  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots')) as ObjectDefinition
-  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed')) as ObjectDefinition
+  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
+  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
+  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
+  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
 
   const sections = [props, events, slots, exposed]
 
