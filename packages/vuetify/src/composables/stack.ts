@@ -50,16 +50,12 @@ export function useStack (
   })
 
   const globalTop = ref(true)
-  watchEffect(() => {
-    if (createStackEntry) {
+  if (createStackEntry) {
+    watchEffect(() => {
       const _isTop = globalStack.at(-1)?.[0] === vm.uid
       setTimeout(() => globalTop.value = _isTop)
-
-      return
-    }
-
-    globalTop.value = true
-  })
+    })
+  }
 
   const localTop = computed(() => !stack.activeChildren.size)
 
