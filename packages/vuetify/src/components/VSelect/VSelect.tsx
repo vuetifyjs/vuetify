@@ -217,7 +217,7 @@ export const VSelect = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
-          readonly={ props.readonly }
+          readonly
           onClick:clear={ onClear }
           onClick:control={ onClickControl }
           onBlur={ onBlur }
