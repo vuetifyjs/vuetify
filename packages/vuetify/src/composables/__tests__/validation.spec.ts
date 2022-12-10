@@ -41,6 +41,7 @@ describe('validation', () => {
 
   it.each([
     [undefined, 1],
+    [0, 0],
     [1, 1],
     [2, 2],
     [3, 3],
@@ -59,6 +60,7 @@ describe('validation', () => {
 
   it.each([
     [undefined, 1],
+    [0, 0],
     [1, 1],
     [2, 2],
     [3, 3],
@@ -73,6 +75,22 @@ describe('validation', () => {
     await wrapper.vm.validate()
 
     expect(wrapper.vm.errorMessages).toHaveLength(expected)
+  })
+
+  it.each([
+    [undefined, ['foo']],
+    [0, []],
+    [1, ['foo']],
+    [2, ['foo']],
+  ])('should not trim error message if passed as text', async (maxErrors, expected) => {
+    const wrapper = mountFunction({
+      maxErrors,
+      errorMessages: 'foo',
+    })
+
+    await wrapper.vm.validate()
+
+    expect(wrapper.vm.errorMessages).toStrictEqual(expected)
   })
 
   it('should warn the user when using an improper rule fn', async () => {
