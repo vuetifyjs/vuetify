@@ -13,6 +13,7 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -96,6 +97,12 @@ export const VToolbar = genericComponent<new () => {
       ), 10)
       : 0
     )
+
+    provideDefaults({
+      VBtn: {
+        variant: 'text',
+      },
+    })
 
     useRender(() => {
       const hasTitle = !!(props.title || slots.title)
