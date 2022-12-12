@@ -181,6 +181,33 @@ $ npm install @mdi/js -D
 </script>
 ```
 
+Or the icons you want to use can be added as aliases to simplify reuse:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { aliases, mdi } from 'vuetify/iconsets/mdi-svg'
+import { mdiAccount } from '@mdi/js'
+
+export default createVuetify({
+  icons: {
+    defaultSet: 'mdi',
+    aliases: {
+      ...aliases,
+      account: mdiAccount,
+    },
+    sets: {
+      mdi,
+    },
+  },
+})
+```
+
+```html
+<template>
+  <v-icon icon="$account" />
+</template>
+```
+
 ### Material Icons
 
 For projects without a build process, it is recommended to import the icons from CDN.
