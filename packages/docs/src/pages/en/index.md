@@ -1,7 +1,7 @@
 ---
 layout: home
 meta:
-  title: Vuetify — A UI Component Framework for Vue
+  title: Vuetify — A Vue Component Framework
   description: Vuetify is a no design skills required UI Component Framework for Vue. It provides you with all of the tools necessary to create beautiful content rich web applications.
   keywords: vue, vue components, vue ui components, material design components, vuetify, component framework, component library
 ---
@@ -16,9 +16,9 @@ meta:
 
 <br>
 
-# UI Component Framework
+# Vue Component Framework
 
-Vuetify is a no design skills required UI Component Framework with beautifully handcrafted Vue Components.
+Vuetify is a no design skills required UI Framework with beautifully handcrafted Vue Components.
 {style="max-width: 568px" .mx-auto}
 
 <br>

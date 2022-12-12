@@ -19,7 +19,7 @@ import { useSticky } from './sticky'
 import { useTouch } from './touch'
 
 // Utilities
-import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
 import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 
 // Types
@@ -107,7 +107,7 @@ export const VNavigationDrawer = defineComponent({
     )
 
     if (!props.disableResizeWatcher) {
-      watch(isTemporary, val => !props.permanent && (isActive.value = !val))
+      watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)))
     }
 
     if (!props.disableRouteWatcher && router) {

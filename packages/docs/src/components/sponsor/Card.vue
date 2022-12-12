@@ -72,7 +72,7 @@
       if (sponsor.value || !val.length) return
 
       sponsor.value = sponsorStore.bySlug(props.slug)
-    })
+    }, { immediate: true })
   }
 
   function onClick () {

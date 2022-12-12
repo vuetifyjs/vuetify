@@ -62,7 +62,7 @@ export const VLazy = defineComponent({
         style={ dimensionStyles.value }
       >
         { isActive.value && (
-          <MaybeTransition transition={ props.transition }>
+          <MaybeTransition transition={ props.transition } appear>
             { slots.default?.() }
           </MaybeTransition>
         )}

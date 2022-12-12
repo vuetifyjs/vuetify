@@ -28,9 +28,9 @@ declare module '@vue/runtime-core' {
   interface Vuetify {
     defaults: DefaultsInstance
     display: UnwrapNestedRefs<DisplayInstance>
-    theme: ThemeInstance
+    theme: UnwrapNestedRefs<ThemeInstance>
     icons: IconOptions
-    locale: LocaleInstance & RtlInstance
+    locale: UnwrapNestedRefs<LocaleInstance & RtlInstance>
   }
 
   export interface ComponentCustomProperties {
