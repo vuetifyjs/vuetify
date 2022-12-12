@@ -11,7 +11,7 @@ related:
 
 <alert type="error">
 
-  You are currently on the **Vuetify 2** documentation. For Vuetify 3, please navigate [here](https://next.vuetifyjs.com/)
+  You are viewing documentation for **Vuetify 2**. For instructions on installing **Vuetify 3**, navigate to the [Version 3 Installation Guide](https://next.vuetifyjs.com/introduction/guide/)
 
 </alert>
 
