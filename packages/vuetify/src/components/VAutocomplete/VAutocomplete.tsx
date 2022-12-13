@@ -122,7 +122,7 @@ export const VAutocomplete = genericComponent<new <
     const form = useForm()
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => item.value === v.value) || v
+        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
