@@ -140,7 +140,7 @@ export const VAutocomplete = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly
+        props.readonly || form?.isReadonly.value
       ) return
 
       menu.value = true
