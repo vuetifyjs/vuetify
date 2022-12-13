@@ -68,6 +68,9 @@ export interface DisplayInstance {
   platform: Ref<DisplayPlatform>
   thresholds: Ref<DisplayThresholds>
 
+  /** @internal */
+  ssr: boolean
+
   update (): void
 }
 
@@ -138,13 +141,13 @@ function getPlatform (): DisplayPlatform {
   }
 }
 
-export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): DisplayInstance {
+export function createDisplay (options?: DisplayOptions, ssr?: boolean): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight(isHydrate))
+  const height = ref(getClientHeight(ssr))
   const platform = getPlatform()
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth(isHydrate))
+  const width = ref(getClientWidth(ssr))
 
   function update () {
     height.value = getClientHeight()
@@ -198,7 +201,7 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): D
     window.addEventListener('resize', update, { passive: true })
   }
 
-  return { ...toRefs(state), update }
+  return { ...toRefs(state), update, ssr: !!ssr }
 }
 
 export function useDisplay () {
