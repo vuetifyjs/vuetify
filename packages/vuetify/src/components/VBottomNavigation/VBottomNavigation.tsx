@@ -35,7 +35,10 @@ export const VBottomNavigation = defineComponent({
       type: [Number, String],
       default: 56,
     },
-    inputValue: Boolean,
+    active: {
+      type: Boolean,
+      default: true,
+    },
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -66,7 +69,7 @@ export const VBottomNavigation = defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = toRef(props, 'inputValue')
+    const isActive = toRef(props, 'active')
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
