@@ -187,7 +187,7 @@ export const VCombobox = genericComponent<new <
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly) return
+      if (props.readonly || form?.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = selected.value.length

@@ -146,7 +146,7 @@ export const VAutocomplete = genericComponent<new <
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly || form?.isReadonly) return
+      if (props.readonly || form?.isReadonly.value) return
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
