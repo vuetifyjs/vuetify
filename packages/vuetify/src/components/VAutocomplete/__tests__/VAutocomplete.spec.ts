@@ -428,28 +428,26 @@ describe('VAutocomplete.ts', () => {
   })
 
   it('should not respond to click', () => {
-    const onFocus = jest.fn()
     const wrapper = mountFunction({
       propsData: { disabled: true },
-      methods: { onFocus },
     })
     const slot = wrapper.find('.v-input__slot')
 
     slot.trigger('click')
 
-    expect(onFocus).not.toHaveBeenCalled()
+    expect(wrapper.emitted('focus')).toBeUndefined()
 
     wrapper.setProps({ disabled: false, readonly: true })
 
     slot.trigger('click')
 
-    expect(onFocus).not.toHaveBeenCalled()
+    expect(wrapper.emitted('focus')).toBeUndefined()
 
     wrapper.setProps({ readonly: false })
 
     slot.trigger('click')
 
-    expect(onFocus).toHaveBeenCalled()
+    expect(wrapper.emitted('focus')).toHaveLength(1)
   })
 
   it('should react to keydown', () => {

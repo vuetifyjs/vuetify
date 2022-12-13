@@ -49,7 +49,7 @@ exports[`VOverflowBtn.js should show label with persistentPlaceholder property s
 `;
 
 exports[`VOverflowBtn.js should show label with persistentPlaceholder property set to true 2`] = `
-<div class="v-input theme--light v-text-field v-text-field--single-line v-select v-select--is-menu-active v-autocomplete v-overflow-btn">
+<div class="v-input v-input--is-focused theme--light v-text-field v-text-field--single-line v-select v-select--is-menu-active v-autocomplete v-overflow-btn">
   <div class="v-input__control">
     <div role="combobox"
          aria-haspopup="listbox"
