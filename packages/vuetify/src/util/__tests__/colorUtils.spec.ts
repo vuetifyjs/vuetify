@@ -1,11 +1,10 @@
 import { describe, expect, it } from '@jest/globals'
 import {
   classToHex,
-  colorToInt,
   getContrast,
   getLuma,
-  intToHex,
   isCssColor,
+  parseColor,
   parseGradient,
 } from '../colorUtils'
 import * as transformSRGB from '../color/transformSRGB'
@@ -35,34 +34,30 @@ describe('isCssColor', () => {
   })
 })
 
-describe('colorToInt', () => {
+describe('parseColor', () => {
   it('should convert a hex string to a number', () => {
-    expect(colorToInt('#123456')).toBe(0x123456)
-    expect(colorToInt('#abc')).toBe(0xaabbcc)
-    expect(colorToInt('876543')).toBe(0x876543)
-    expect(colorToInt('669')).toBe(0x666699)
-    expect(colorToInt('fff')).toBe(0xffffff)
-  })
-
-  it('should keep existing numbers', () => {
-    expect(colorToInt(0xabcdef)).toBe(0xabcdef)
+    expect(parseColor('#123456')).toEqual({ r: 0x12, g: 0x34, b: 0x56, a: undefined })
+    expect(parseColor('#abc')).toEqual({ r: 0xaa, g: 0xbb, b: 0xcc, a: undefined })
+    expect(parseColor('876543')).toEqual({ r: 0x87, g: 0x65, b: 0x43, a: undefined })
+    expect(parseColor('669')).toEqual({ r: 0x66, g: 0x66, b: 0x99, a: undefined })
+    expect(parseColor('fff')).toEqual({ r: 0xff, g: 0xff, b: 0xff, a: undefined })
   })
 
   it('should reject invalid formats', async () => {
-    expect(() => colorToInt([])).toThrow('Colors can only be numbers or strings, recieved Array instead')
-    expect(() => colorToInt(() => {})).toThrow('Colors can only be numbers or strings, recieved Function instead')
+    expect(() => parseColor([])).toThrow('Colors can only be numbers or strings, recieved Array instead')
+    expect(() => parseColor(() => {})).toThrow('Colors can only be numbers or strings, recieved Function instead')
 
-    colorToInt(-1)
-    colorToInt('#1000000')
-    colorToInt('#13')
-    colorToInt('#6')
-    colorToInt('red')
+    parseColor(-1)
+    parseColor('#1000000')
+    parseColor('#13')
+    parseColor('#6')
+    parseColor('red')
 
-    expect(`Colors cannot be negative: '-1'`).toHaveBeenTipped()
-    expect(`'#1000000' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'#13' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'#6' is not a valid rgb color`).toHaveBeenTipped()
-    expect(`'red' is not a valid rgb color`).toHaveBeenTipped()
+    expect(`'-1' is not a valid hex color`).toHaveBeenTipped()
+    expect(`'#1000000' is not a valid hex(a) color`).toHaveBeenTipped()
+    expect(`'#13' is not a valid hex(a) color`).toHaveBeenTipped()
+    expect(`'#6' is not a valid hex(a) color`).toHaveBeenTipped()
+    expect(`'red' is not a valid hex(a) color`).toHaveBeenTipped()
   })
 })
 
@@ -74,31 +69,23 @@ describe('classToHex', () => {
   })
 })
 
-// TODO
-describe('intToHex', () => {
-  it('should convert', () => {
-    expect(intToHex(0)).toBe('#000000')
-    expect(intToHex(0xffffff)).toBe('#ffffff')
-  })
-})
-
 describe('transformSRGB', () => {
   it('should convert sRGB to XYZ', () => {
-    expect(transformSRGB.toXYZ(0)).toEqual([0, 0, 0])
-    expect(transformSRGB.toXYZ(0xffffff)).toEqual([0.9505, 1, 1.0890])
-    expect(transformSRGB.toXYZ(0xfcfbf4)).toEqual(closeTo([0.909712, 0.962215, 0.993659], 6))
-    expect(transformSRGB.toXYZ(0x45a081)).toEqual(closeTo([0.189875, 0.279918, 0.251711], 6))
-    expect(transformSRGB.toXYZ(0x191995)).toEqual(closeTo([0.061733, 0.030719, 0.287013], 6))
-    expect(transformSRGB.toXYZ(0xcd6600)).toEqual(closeTo([0.299282, 0.224819, 0.027620], 6))
+    expect(transformSRGB.toXYZ({ r: 0, g: 0, b: 0 })).toEqual([0, 0, 0])
+    expect(transformSRGB.toXYZ({ r: 0xff, g: 0xff, b: 0xff })).toEqual([0.9505, 1, 1.0890])
+    expect(transformSRGB.toXYZ({ r: 0xfc, g: 0xfb, b: 0xf4 })).toEqual(closeTo([0.909712, 0.962215, 0.993659], 6))
+    expect(transformSRGB.toXYZ({ r: 0x45, g: 0xa0, b: 0x81 })).toEqual(closeTo([0.189875, 0.279918, 0.251711], 6))
+    expect(transformSRGB.toXYZ({ r: 0x19, g: 0x19, b: 0x95 })).toEqual(closeTo([0.061733, 0.030719, 0.287013], 6))
+    expect(transformSRGB.toXYZ({ r: 0xcd, g: 0x66, b: 0x00 })).toEqual(closeTo([0.299282, 0.224819, 0.027620], 6))
   })
 
   it('should convert XYZ to sRGB', () => {
-    expect(transformSRGB.fromXYZ([0, 0, 0])).toBe(0)
-    expect(transformSRGB.fromXYZ([0.9505, 1, 1.0890])).toBe(0xffffff)
-    expect(transformSRGB.fromXYZ([0.909712, 0.962215, 0.993659])).toBe(0xfcfbf4)
-    expect(transformSRGB.fromXYZ([0.189875, 0.279918, 0.251711])).toBe(0x45a081)
-    expect(transformSRGB.fromXYZ([0.061733, 0.030719, 0.287013])).toBe(0x191995)
-    expect(transformSRGB.fromXYZ([0.299282, 0.224819, 0.027620])).toBe(0xcd6600)
+    expect(transformSRGB.fromXYZ([0, 0, 0])).toEqual({ r: 0, g: 0, b: 0, a: undefined })
+    expect(transformSRGB.fromXYZ([0.9505, 1, 1.0890])).toEqual({ r: 0xff, g: 0xff, b: 0xff, a: undefined })
+    expect(transformSRGB.fromXYZ([0.909712, 0.962215, 0.993659])).toEqual({ r: 0xfc, g: 0xfb, b: 0xf4, a: undefined })
+    expect(transformSRGB.fromXYZ([0.189875, 0.279918, 0.251711])).toEqual({ r: 0x45, g: 0xa0, b: 0x81, a: undefined })
+    expect(transformSRGB.fromXYZ([0.061733, 0.030719, 0.287013])).toEqual({ r: 0x19, g: 0x19, b: 0x95, a: undefined })
+    expect(transformSRGB.fromXYZ([0.299282, 0.224819, 0.027620])).toEqual({ r: 0xcd, g: 0x66, b: 0x00, a: undefined })
   })
 })
 
@@ -174,7 +161,7 @@ describe('APCAcontrast', () => {
     ['#def', '#123', -98.44863435731264],
     ['#123', '#234', 1.276075977788573],
   ])('%s on %s', (text, bg, expected) => {
-    expect(APCAcontrast(colorToInt(text), colorToInt(bg))).toBe(expected)
+    expect(APCAcontrast(parseColor(text), parseColor(bg))).toBe(expected)
   })
 })
 

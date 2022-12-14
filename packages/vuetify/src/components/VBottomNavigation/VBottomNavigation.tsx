@@ -12,7 +12,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -35,6 +34,10 @@ export const VBottomNavigation = defineComponent({
     height: {
       type: [Number, String],
       default: 56,
+    },
+    active: {
+      type: Boolean,
+      default: true,
     },
 
     ...makeBorderProps(),
@@ -66,7 +69,7 @@ export const VBottomNavigation = defineComponent({
       (props.density === 'comfortable' ? 8 : 0) -
       (props.density === 'compact' ? 16 : 0)
     ))
-    const isActive = useProxiedModel(props, 'modelValue')
+    const isActive = toRef(props, 'active')
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),

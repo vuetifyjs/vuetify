@@ -11,7 +11,7 @@ import { modes } from './util'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util/colorUtils'
+import type { HSV } from '@/util/colorUtils'
 
 const VColorPickerInput = ({ label, ...rest }: any) => {
   return (
@@ -28,7 +28,7 @@ export const VColorPickerEdit = defineComponent({
   name: 'VColorPickerEdit',
 
   props: {
-    color: Object as PropType<HSVA | null>,
+    color: Object as PropType<HSV | null>,
     disabled: Boolean,
     mode: {
       type: String,
@@ -43,7 +43,7 @@ export const VColorPickerEdit = defineComponent({
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
     'update:mode': (mode: string) => true,
   },
 

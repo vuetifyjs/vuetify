@@ -14,6 +14,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useHydration } from '@/composables/hydration'
 import { useRtl } from '@/composables/locale'
+import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
 import { useToggleScope } from '@/composables/toggleScope'
@@ -118,7 +119,11 @@ export const VOverlay = genericComponent<new () => {
 
   inheritAttrs: false,
 
-  props: makeVOverlayProps(),
+  props: {
+    _disableGlobalStack: Boolean,
+
+    ...makeVOverlayProps(),
+  },
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
@@ -141,10 +146,11 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
     const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
+    const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
       if (v) isActive.value = false
@@ -258,7 +264,8 @@ export const VOverlay = genericComponent<new () => {
                 ]}
                 style={[stackStyles.value, { top: convertToUnit(top.value) }]}
                 ref={ root }
-                {...attrs}
+                { ...scopeId }
+                { ...attrs }
               >
                 <Scrim
                   color={ scrimColor }

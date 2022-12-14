@@ -75,7 +75,7 @@
             <sponsor-link block size="large" />
           </v-col>
 
-          <v-col cols="12">
+          <v-col v-if="IS_PROD" cols="12">
             <carbon />
           </v-col>
         </v-row>
@@ -97,6 +97,9 @@
 
   // Utilities
   import { computed, ref } from 'vue'
+
+  // Globals
+  import { IS_PROD } from '@/util/globals'
 
   type TocItem = {
     to: string;

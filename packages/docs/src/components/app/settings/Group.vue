@@ -24,12 +24,14 @@
               <v-card
                 :ref="'item-' + text"
                 :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
-                class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
+                class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center"
                 rounded
                 variant="flat"
                 @click="toggle"
               >
                 {{ t(text) }}
+
+                <v-spacer />
 
                 <v-icon :icon="icon" />
               </v-card>

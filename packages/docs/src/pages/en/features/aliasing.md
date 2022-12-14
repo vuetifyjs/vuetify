@@ -46,7 +46,7 @@ export default createVuetify({
   defaults: {
     VBtn: { variant: 'flat' },
     MyButton: { variant: 'tonal' },
-  }
+  },
 })
 ```
 
@@ -69,13 +69,13 @@ export default createVuetify({
     },
     VBtn: {
       color: 'secondary',
-      variant: 'flat'
+      variant: 'flat',
     },
     VCard: {
       MyButton: { color: 'secondary' },
       VBtn: { color: 'primary' },
-    }
-  }
+    },
+  },
 })
 ```
 
