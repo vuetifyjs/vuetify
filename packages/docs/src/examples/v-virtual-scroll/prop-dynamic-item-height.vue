@@ -2,8 +2,6 @@
   <v-virtual-scroll
     :items="items"
     height="400"
-    item-height="48"
-    dynamic-item-height
   >
     <template v-slot:default="{ item, index }">
       <div
@@ -21,13 +19,9 @@
 
 <script>
   export default {
-    data: () => ({
-      count: 10000,
-    }),
-
     computed: {
       items () {
-        return Array.from({ length: this.count }, (k, v) => v + 1)
+        return Array.from({ length: 10000 }, (k, v) => v + 1)
       },
     },
   }

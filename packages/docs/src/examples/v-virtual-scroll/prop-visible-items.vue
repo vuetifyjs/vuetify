@@ -1,22 +1,22 @@
 <template>
   <div>
     <v-responsive
-      max-width="400"
       class="mx-auto mb-4"
+      max-width="400"
     >
       <v-text-field
         v-model="visibleItems"
-        type="number"
         label="Visible items"
-        min="10"
         max="30"
+        min="10"
+        type="number"
       ></v-text-field>
     </v-responsive>
 
     <v-card
+      class="mx-auto"
       elevation="4"
       max-width="400"
-      class="mx-auto"
     >
       <v-virtual-scroll
         :visible-items="visibleItems"
@@ -50,15 +50,8 @@
 <script>
   export default {
     data: () => ({
+      items: Array.from({ length: 7000 }, (k, v) => v + 1),
       visibleItems: 30,
     }),
-    computed: {
-      items () {
-        return Array.from({ length: this.length }, (k, v) => v + 1)
-      },
-      length () {
-        return 7000
-      },
-    },
   }
 </script>
