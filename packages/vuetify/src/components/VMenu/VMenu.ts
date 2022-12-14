@@ -58,7 +58,7 @@ export default baseMixins.extend({
   props: {
     auto: Boolean,
     closeOnClick: {
-      type: Boolean,
+      type: [Boolean, Function],
       default: true,
     },
     closeOnContentClick: {
@@ -327,7 +327,7 @@ export default baseMixins.extend({
         directives.push({
           name: 'click-outside',
           value: {
-            handler: () => { this.isActive = false },
+            handler: () => { typeof this.closeOnClick === 'function' ? this.closeOnClick() : ( () => { this.isActive = false } )() },
             closeConditional: this.closeConditional,
             include: () => [this.$el, ...this.getOpenDependentElements()],
           },
