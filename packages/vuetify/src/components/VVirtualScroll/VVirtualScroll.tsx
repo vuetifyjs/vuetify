@@ -30,17 +30,13 @@ export const VVirtualScroll = genericComponent<new <T>() => {
   props: {
     items: {
       type: Array,
-      required: true,
+      default: () => ([]),
     },
     itemKey: {
       type: String,
       default: 'value',
     },
-    itemHeight: {
-      type: [Number, String],
-      required: true,
-    },
-    dynamicItemHeight: Boolean,
+    itemHeight: [Number, String],
     visibleItems: {
       type: [Number, String],
       default: 30,
@@ -51,7 +47,13 @@ export const VVirtualScroll = genericComponent<new <T>() => {
 
   setup (props, { slots }) {
     const first = ref(0)
-    const itemHeight = computed(() => parseInt(props.itemHeight, 10))
+    const baseItemHeight = ref(props.itemHeight)
+    const itemHeight = computed({
+      get: () => parseInt(baseItemHeight.value ?? 0, 10),
+      set (val) {
+        baseItemHeight.value = val
+      },
+    })
     const visibleItems = computed(() => parseInt(props.visibleItems, 10))
     const rootEl = ref<HTMLDivElement>()
 
@@ -64,10 +66,12 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       if (!index) return
 
       sizes[index] = height
+
+      if (!itemHeight.value) itemHeight.value = height
     }
 
     function calculateOffset (index: number) {
-      return sizes.slice(0, index).reduce((curr, value) => curr + value, 0)
+      return sizes.slice(0, index).reduce((curr, value) => curr + (value || itemHeight.value), 0)
     }
 
     function calculateMidPointIndex (scrollTop: number) {
@@ -133,7 +137,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
           { computedItems.value.map((item, index) => (
             <VVirtualScrollItem
               key={ index }
-              dynamicHeight={ props.dynamicItemHeight }
+              dynamicHeight={ !props.itemHeight }
               onUpdate:height={ height => handleItemResize(item, height) }
             >
               { slots.default?.({ item, index: index + first.value }) }
