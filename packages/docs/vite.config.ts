@@ -43,7 +43,7 @@ export default defineConfig(({ command, mode }) => {
       'process.env': {}, // This is so that 3rd party packages don't crap out
     },
     build: {
-      sourcemap: true,
+      sourcemap: mode === 'development',
       rollupOptions: {
         output: {
           inlineDynamicImports: true,
