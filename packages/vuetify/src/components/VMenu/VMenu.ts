@@ -327,7 +327,7 @@ export default baseMixins.extend({
         directives.push({
           name: 'click-outside',
           value: {
-            handler: () => { typeof this.closeOnClick === 'function' ? this.closeOnClick() : ( () => { this.isActive = false } )() },
+            handler: () => { typeof this.closeOnClick === 'function' ? this.closeOnClick() : (() => { this.isActive = false })() },
             closeConditional: this.closeConditional,
             include: () => [this.$el, ...this.getOpenDependentElements()],
           },
