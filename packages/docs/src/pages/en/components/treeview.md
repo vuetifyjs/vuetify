@@ -5,7 +5,6 @@ meta:
   keywords: treeview, vuetify treeview component, vue treeview component
 related:
   - /components/lists/
-  - /components/list-item-groups/
   - /components/timelines/
 
 ---

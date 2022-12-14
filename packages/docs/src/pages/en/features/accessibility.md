@@ -6,7 +6,6 @@ meta:
 related:
   - /features/bidirectionality/
   - /components/menus/
-  - /components/list-item-groups/
 ---
 
 # Accessibility (a11y)
@@ -199,49 +198,6 @@ When the `v-menu` component is rendered it will resemble the following:
     >
       ...
     </div>
-  </div>
-</div>
-```
-
-### v-list-item-group
-
-The `v-list-item-group` component makes `v-list-item` interactable and navigatable when pressing the <kbd>tab</kbd> key. It also configures `v-list-item` to have a role of **listitem**. Navigate to the [List-item group](/components/list-item-groups) for more information on the components features.
-
-<example file="accessibility/list-item-group" />
-
-When the `v-list-item-group` component is rendered it have all the necessary a11y attributes. The following is an example of the rendered component:
-
-```html
-<!-- Rendered `v-list-group` content HTML Output -->
-
-<div
-  class="v-list-item-group"
-  role="listbox"
->
-  <div
-    aria-selected="true"
-    class="v-list-item"
-    role="listitem"
-    tabindex="0"
-  >
-    ...
-  </div>
-  <div
-    aria-disabled="true"
-    aria-selected="true"
-    class="v-list-item"
-    role="listitem"
-    tabindex="-1"
-  >
-    ...
-  </div>
-  <div
-    aria-selected="false"
-    class="v-list-item"
-    role="listitem"
-    tabindex="0"
-  >
-    ...
   </div>
 </div>
 ```
