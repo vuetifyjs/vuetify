@@ -32,7 +32,7 @@
         </ais-instant-search>
       </v-card-text>
 
-      <AisPoweredBy />
+      <AisPoweredBy class="ml-2" />
     </v-card>
   </v-dialog>
 </template>
