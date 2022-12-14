@@ -157,5 +157,3 @@ The date picker supports internationalization through the JavaScript Date object
 Date pickers come in two orientation variations, portrait **(default)** and landscape.
 
 <example file="v-date-picker/misc-orientation" />
-
-<backmatter />

@@ -477,5 +477,3 @@ export default createVuetify({
   <v-icon icon="$support" />
 </template>
 ```
-
-<backmatter />

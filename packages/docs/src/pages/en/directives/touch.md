@@ -23,5 +23,3 @@ On a mobile device, try swiping in various directions.
 ## API
 
 <api-inline />
-
-<backmatter />

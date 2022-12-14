@@ -73,5 +73,3 @@ To customize the divider, use the `divider` slot.
 You can use the `title` slot to customize each breadcrumb title.
 
 <example file="v-breadcrumbs/slot-title" />
-
-<backmatter />

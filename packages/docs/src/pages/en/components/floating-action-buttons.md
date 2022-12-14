@@ -59,5 +59,3 @@ For better visual appeal, we use a small button to match our list avatars.
 The speed-dial component has a very robust api for customizing your FAB experience exactly how you want.
 
 <example file="v-btn-fab/misc-speed-dial" />
-
-<backmatter />

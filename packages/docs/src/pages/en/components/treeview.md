@@ -123,5 +123,3 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <example file="v-treeview/misc-selectable-icons" />
-
-<backmatter />

@@ -97,5 +97,3 @@ The `v-autocomplete` component is extremely flexible and can fit in just about a
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
-
-<backmatter />

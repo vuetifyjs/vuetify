@@ -145,5 +145,3 @@ Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), w
 Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
 
 <example file="v-card/prop-loading" />
-
-<backmatter />

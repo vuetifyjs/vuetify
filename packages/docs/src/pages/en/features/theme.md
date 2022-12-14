@@ -325,5 +325,3 @@ export const vuetify = createVuetify({
 ## Implementation
 
 Vuetify generates theme styles at runtime according to the given configuration. The generated styles are injected into the `<head>` section of the DOM in a `<style>` tag with an **id** of `vuetify-theme-stylesheet`.
-
-<backmatter />

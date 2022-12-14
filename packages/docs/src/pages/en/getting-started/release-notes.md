@@ -19,5 +19,3 @@ The Vuetify team performs releases on a weekly basis.
 All release notes can be found through [GitHub](https://www.github.com/vuetifyjs/vuetify/releases) and can be viewed below for your convenience. Between major releases there can be many breaking changes, which you can read about in the [upgrade guide](/getting-started/upgrade-guide)
 
 <releases />
-
-<backmatter />

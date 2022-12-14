@@ -57,5 +57,3 @@ The `v-color-picker` uses the `v-model` prop to control the color displayed. It 
 Using the `show-swatches` prop you can display an array of color swatches that users can pick from. It is also possible to customize what colors are shown using the `swatches` prop. This prop accepts a two-dimensional array, where the first dimension defines a column, and second dimension defines the swatches from top to bottom by providing rgba hex strings. You can also set the max height of the swatches section with the `swatches-max-height` prop.
 
 <example file="v-color-picker/prop-swatches" />
-
-<backmatter />

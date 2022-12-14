@@ -75,5 +75,3 @@ If you need to place checkboxes in line with other components, you can use the `
 This component renders just checkbox, without the trapping of a form input such as validation, a label, and messages.
 
 <example file="v-checkbox/misc-inline-textfield" />
-
-<backmatter />

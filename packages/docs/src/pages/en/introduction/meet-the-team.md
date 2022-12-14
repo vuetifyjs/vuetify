@@ -28,5 +28,3 @@ The core development team are Open Source developers that help guide the directi
 <promoted slug="vuetify-open-collective" />
 
 <page-component path="about/TeamMembers" team="core" />
-
-<backmatter />

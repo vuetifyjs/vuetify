@@ -57,5 +57,3 @@ The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create c
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
 <example file="v-sparkline/misc-heart-rate" />
-
-<backmatter />

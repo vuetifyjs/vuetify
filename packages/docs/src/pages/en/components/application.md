@@ -126,5 +126,3 @@ The following components are compatible with the [Application layout](/features/
   More information on how to interact with the root sizing and styling is on the [Application](/features/application-layout/) page.
 
 </alert>
-
-<backmatter />

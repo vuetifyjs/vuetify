@@ -93,5 +93,3 @@ Navigation drawers can be customized to fit any application's design. Here we ap
 In this example we define two navigation-drawers, one using **rail** and one without.
 
 <example file="v-navigation-drawer/misc-combined" />
-
-<backmatter />

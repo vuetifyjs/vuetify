@@ -51,5 +51,3 @@ By default the `v-virtual-scroll` does not pre-render additional items outside o
 The `v-virtual-scroll` component can render an unlimited amount of items by rendering only what it needs to fill the scroller's viewport.
 
 <example file="v-virtual-scroll/misc-user-directory" />
-
-<backmatter />

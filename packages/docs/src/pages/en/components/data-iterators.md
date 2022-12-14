@@ -49,5 +49,3 @@ The `v-data-iterator` has both a header and footer slot for adding extra content
 Order, filters and pagination can be controlled externally by using the individual props
 
 <example file="v-data-iterator/misc-filter" />
-
-<backmatter />

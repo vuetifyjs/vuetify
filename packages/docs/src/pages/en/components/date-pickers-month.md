@@ -101,5 +101,3 @@ The month picker supports internationalization through the JavaScript Date objec
 Month pickers come in two orientation variations, portrait **(default)** and landscape.
 
 <example file="v-date-picker-month/misc-orientation" />
-
-<backmatter />

@@ -209,5 +209,3 @@ While Vuetify attempts to make a11y as easy as possible in your application, the
 - [W3C Web Accessibility Initiative](https://www.w3.org/WAI/)
 - [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
 - [The A11Y Project](https://a11yproject.com/)"
-
-<backmatter />

@@ -77,5 +77,3 @@ Easily integrate customized button solutions with a `v-toolbar`
 Group similar actions and design your own WYSIWYG component.
 
 <example file="v-btn-toggle/misc-wysiwyg" />
-
-<backmatter />

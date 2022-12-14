@@ -147,5 +147,3 @@ Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line
 Lists can contain multiple subheaders and dividers.
 
 <example file="v-list/misc-subheadings-and-dividers" /> -->
-
-<backmatter />

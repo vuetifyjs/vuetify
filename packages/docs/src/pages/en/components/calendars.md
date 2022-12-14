@@ -91,5 +91,3 @@ Using the `day-body` slot you can customize the calendar content for the day. In
 This is an example of an event calendar where you can drag events, extend their length, and create events.
 
 <example file="v-calendar/misc-drag-and-drop" />
-
-<backmatter />

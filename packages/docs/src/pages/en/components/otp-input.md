@@ -47,5 +47,3 @@ You can easily compose a loader to process the OTP input when completed insertio
 The entered value can be hidden with `type="password"`
 
 <example file="v-otp-input/prop-type" />
-
-<backmatter />

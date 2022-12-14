@@ -119,5 +119,3 @@ In this example we offset our card onto the extended content area of a toolbar u
 A `v-toolbar` has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.
 
 <example file="v-toolbar/misc-variations" />
-
-<backmatter />

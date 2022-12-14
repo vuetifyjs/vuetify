@@ -55,5 +55,3 @@ Delay `v-hover` events by using **open-delay** and **close-delay** props in comb
 Create highly customized components that respond to user interaction.
 
 <example file="v-hover/misc-transition" />
-
-<backmatter />

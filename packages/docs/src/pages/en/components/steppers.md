@@ -121,5 +121,3 @@ An optional step can be called out with sub-text.
 The same state also applies to Vertical steppers.
 
 <example file="v-stepper/misc-vertical-error" />
-
-<backmatter />

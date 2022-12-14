@@ -120,5 +120,3 @@ If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on th
 #### Advanced
 
 <example file="v-timeline/misc-advanced" />
-
-<backmatter />

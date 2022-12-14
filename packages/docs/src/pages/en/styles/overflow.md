@@ -44,5 +44,3 @@ here is a list of properties:
 **overflow-x** can be used to specify horizontal overflows to an element if needed.
 
 <example file="overflow/overflow-x" />
-
-<backmatter />

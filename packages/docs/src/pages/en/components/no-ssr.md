@@ -29,5 +29,3 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
   </v-no-ssr>
 </template>
 ```
-
-<backmatter />
