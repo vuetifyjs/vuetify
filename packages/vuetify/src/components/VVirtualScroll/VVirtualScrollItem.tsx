@@ -1,6 +1,9 @@
+// Composables
 import { useResizeObserver } from '@/composables/resizeObserver'
+
+// Utilities
+import { defineComponent } from '@/util/defineComponent'
 import { useRender } from '@/util'
-import { defineComponent } from 'vue'
 
 export const VVirtualScrollItem = defineComponent({
   name: 'VVirtualScrollItem',
