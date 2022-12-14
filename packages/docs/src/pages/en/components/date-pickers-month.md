@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Month picker component
   description: The month picker component is a stand-alone interface that allows the selection of month or both month and year.

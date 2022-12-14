@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Overflow button component
   description: The overflow button component creates an interface for a select that contains additional features and functionality.

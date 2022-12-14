@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Data iterator component
   description: The data iterator component is used for filter and displaying data including sorting, searching, pagination, and selection.

@@ -112,6 +112,10 @@ export default defineConfig(({ command, mode }) => {
             ...parseMeta(route.component),
           }
 
+          if (meta.disabled) {
+            return null
+          }
+
           return {
             ...route,
             path: `/${paths.join('/')}/`,

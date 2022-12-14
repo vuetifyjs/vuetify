@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Virtual scroller component,
   description: The Virtual scroll component is a container that renders only visible elements. It is useful when in need to display large amount of uniform data.,

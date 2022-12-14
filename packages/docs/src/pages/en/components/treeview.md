@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Treeview component
   description: The treeview component is a user interface that is used to represent hierarchical data in a tree structure.

@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Sparkline component
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.

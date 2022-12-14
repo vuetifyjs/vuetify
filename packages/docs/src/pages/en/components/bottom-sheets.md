@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.

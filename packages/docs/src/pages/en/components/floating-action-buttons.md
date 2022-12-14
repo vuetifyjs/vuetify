@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: FAB component
   description: The floating action button (or FAB) component is a promoted action that is elevated above the UI or attached to an element such as a card.

@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: OTP Input component
   description: The OTP input component is used for MFA authentication via input field.

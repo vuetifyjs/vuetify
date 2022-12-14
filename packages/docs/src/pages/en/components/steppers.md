@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Stepper component
   description: The stepper component provides a linear progression process for gathering and displaying information to a user, similar to a form wizard.

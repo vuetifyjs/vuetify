@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Time picker component
   description: The time picker component is a stand-alone interface that allows the selection of hours and minutes in AM/PM and 24hr formats.

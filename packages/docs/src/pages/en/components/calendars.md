@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Calendar component
   description: The calendar component is a clean and simple adaptation to the popular Google Calendar application.

@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Skeleton loader component
   description: The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.
