@@ -164,5 +164,3 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 <example file="v-mutate/usage" />
 
 <example file="v-mutate/option-modifiers" />
-
-<backmatter />

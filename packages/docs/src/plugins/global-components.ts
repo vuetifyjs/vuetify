@@ -48,6 +48,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('AppTable', AppTable)
   app.component('AppTitle', AppTitle)
   app.component('AppTooltipBtn', AppTooltipBtn)
+  app.component('UnwrapMarkdown', (props, { slots }) => slots.default?.()?.[0].children)
 
   // Used by markdown files
   app.component('Alert', Alert)

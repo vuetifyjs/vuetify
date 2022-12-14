@@ -87,5 +87,3 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 You can control carousel with **v-model**.
 
 <example file="v-carousel/prop-model" />
-
-<backmatter />

@@ -107,4 +107,3 @@ Use the `d-sr` utility classes to conditionally hide content on all devices _exc
 
 - `d-sr-only` visually hides elements but will still announce to **screen readers**.
 - `d-sr-only-focusable` visually hides an element until it is focused. This is useful when implementing _skip links_.
-  <backmatter />

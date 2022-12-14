@@ -81,3 +81,5 @@ declare module '@emailjs/browser' {
 
   export default client
 }
+
+declare module 'vue-instantsearch/vue3/es/src/instantsearch.js'

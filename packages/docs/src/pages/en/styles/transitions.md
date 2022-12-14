@@ -116,5 +116,3 @@ The **createSimpleTransition** function accepts 1 argument, name. This will be t
   &-enter, &-leave-to
     opacity: 0
 ```
-
-<backmatter />

@@ -60,5 +60,3 @@ Here is a list of all the available support classes:
 - **.float-xl-start**
 - **.float-xl-end**
 - **.float-xl-none**
-
-<backmatter />

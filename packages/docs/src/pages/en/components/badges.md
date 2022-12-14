@@ -77,5 +77,3 @@ You can do many things with visibility control, for example, show badge on hover
 Badges help convey information to the user in a variety of ways.
 
 <example file="v-badge/misc-tabs" /> -->
-
-<backmatter />

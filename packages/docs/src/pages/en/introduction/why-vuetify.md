@@ -109,5 +109,3 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 <!-- | [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min | -->
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
-
-<backmatter />

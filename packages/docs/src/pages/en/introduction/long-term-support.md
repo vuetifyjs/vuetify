@@ -51,5 +51,3 @@ Upgrading to v1.5? Check out the available upgrade guides:
 - [Vuetify v1.1](https://github.com/vuetifyjs/vuetify/releases/tag/v1.1.0)
 
 If you have any additional questions, please join our [Discord community](https://community.vuetifyjs.com).
-
-<backmatter />

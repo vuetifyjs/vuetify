@@ -178,5 +178,3 @@ The power and flexibility of the Vuetify grid system allows you to create amazin
 Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content.
 
 <example file="grid/misc-variable-content" /> -->
-
-<backmatter />

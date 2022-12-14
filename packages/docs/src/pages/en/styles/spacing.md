@@ -100,5 +100,3 @@ Using the margin helper classes you can easily center content horizontally.
 Margin can also be applied negatively at the same **1 to 16** intervals.
 
 <example file="spacing/negative-margin" />
-
-<backmatter />

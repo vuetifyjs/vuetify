@@ -29,5 +29,3 @@ The `v-lazy` component by default will not render its contents until it has been
 ## API
 
 <api-inline />
-
-<backmatter />

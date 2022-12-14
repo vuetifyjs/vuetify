@@ -11,7 +11,9 @@ export type RootState = {
 }
 
 type NavItem = {
+  divider?: boolean
   title?: string
+  subheader?: string
   inactiveIcon?: string
   activeIcon?: string
   items?: NavItem[]
@@ -83,6 +85,8 @@ function getPages (items: NavItem[] = [], parent = ''): string[] {
   let array: any = []
 
   for (const item of items) {
+    if (item?.divider || item?.subheader) continue
+
     array = [...array, ...getPage(item, parent)]
   }
 

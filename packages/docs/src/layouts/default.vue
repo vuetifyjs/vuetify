@@ -16,6 +16,8 @@
         tag="section"
       >
         <router-view />
+
+        <backmatter v-if="!isApi" />
       </v-container>
     </v-main>
 

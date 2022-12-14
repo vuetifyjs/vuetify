@@ -123,5 +123,3 @@ The `v-rating` component fits right in with existing components. Build truly com
 The rating component pairs well with products allowing you to gather and display customer feedback.
 
 <example file="v-rating/misc-card" />
-
-<backmatter />

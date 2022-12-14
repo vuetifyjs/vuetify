@@ -107,19 +107,7 @@
     "v-list-item-action-text",
     "v-list-item-avatar",
     "v-list-item-content",
-    "v-list-item-group",
     "v-list-item-icon",
-    "v-list-item-subtitle",
-    "v-list-item-title"
-  ],
-  "components/list-item-groups": [
-    "v-list-group",
-    "v-list-item",
-    "v-list-item-group",
-    "v-list-item-action",
-    "v-list-item-action-text",
-    "v-list-item-avatar",
-    "v-list-item-content",
     "v-list-item-subtitle",
     "v-list-item-title"
   ],

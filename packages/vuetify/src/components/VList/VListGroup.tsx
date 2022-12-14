@@ -95,6 +95,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
             'v-list-group--prepend': list?.hasPrepend.value,
             'v-list-group--fluid': props.fluid,
             'v-list-group--subgroup': props.subgroup,
+            'v-list-group--open': isOpen.value,
           },
         ]}
       >

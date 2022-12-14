@@ -1,6 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VListItem } from '@/components/VList'
+import { ref } from 'vue'
 import { VSelect } from '../VSelect'
 
 describe('VSelect', () => {
@@ -76,5 +77,110 @@ describe('VSelect', () => {
       .get('input')
       .get('.v-chip')
       .should('have.length', 2)
+  })
+
+  describe('prefilled data', () => {
+    it('should work with array of strings when using multiple', () => {
+      const items = ref(['California', 'Colorado', 'Florida'])
+
+      const selectedItems = ref(['California', 'Colorado'])
+
+      cy.mount(() => (
+        <VSelect v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+      ))
+
+      cy.get('.v-select').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-list-item input').eq(2).click().should(() => {
+        expect(selectedItems.value).to.deep.equal(['California', 'Colorado', 'Florida'])
+      })
+
+      cy
+        .get('.v-chip__close')
+        .eq(0)
+        .click()
+        .get('.v-chip')
+        .should('have.length', 2)
+        .should(() => expect(selectedItems.value).to.deep.equal(['Colorado', 'Florida']))
+    })
+
+    it('should work with objects when using multiple', () => {
+      const items = ref([
+        {
+          title: 'Item 1',
+          value: 'item1',
+        },
+        {
+          title: 'Item 2',
+          value: 'item2',
+        },
+        {
+          title: 'Item 3',
+          value: 'item3',
+        },
+      ])
+
+      const selectedItems = ref(
+        [
+          {
+            title: 'Item 1',
+            value: 'item1',
+          },
+          {
+            title: 'Item 2',
+            value: 'item2',
+          },
+        ]
+      )
+
+      cy.mount(() => (
+        <VSelect
+          v-model={selectedItems.value}
+          items={items.value}
+          multiple
+          chips
+          closableChips
+          returnObject
+        />
+      ))
+
+      cy.get('.v-select').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('.v-list-item input').eq(2).click().should(() => {
+        expect(selectedItems.value).to.deep.equal([
+          {
+            title: 'Item 1',
+            value: 'item1',
+          },
+          {
+            title: 'Item 2',
+            value: 'item2',
+          },
+          {
+            title: 'Item 3',
+            value: 'item3',
+          },
+        ])
+      })
+
+      cy
+        .get('.v-chip__close')
+        .eq(0)
+        .click()
+        .get('.v-chip')
+        .should('have.length', 2)
+        .should(() => expect(selectedItems.value).to.deep.equal([
+          {
+            title: 'Item 2',
+            value: 'item2',
+          },
+          {
+            title: 'Item 3',
+            value: 'item3',
+          },
+        ]))
+    })
   })
 })

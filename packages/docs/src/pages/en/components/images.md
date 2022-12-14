@@ -86,5 +86,3 @@ This will behave similarly to:
 You can use `v-img` to make, for example, a picture gallery.
 
 <example file="v-img/misc-grid" />
-
-<backmatter />

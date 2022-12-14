@@ -385,5 +385,3 @@ These helper classes can also be applied in the format `flex-{breakpoint}-{condi
 - **flex-md-shrink-1**
 - **flex-lg-shrink-1**
 - **flex-xl-shrink-1**
-
-<backmatter />

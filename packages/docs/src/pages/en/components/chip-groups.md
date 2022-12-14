@@ -71,5 +71,3 @@ The `v-chip` component can have an explicit value used for its model. This gets 
 Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different.
 
 <example file="v-chip-group/misc-toothbrush-card" />
-
-<backmatter />

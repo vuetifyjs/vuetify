@@ -130,5 +130,3 @@ app.use(vuetify).mount('#app')
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).
 
 <promoted slug="vuetify-discord" />
-
-<backmatter />

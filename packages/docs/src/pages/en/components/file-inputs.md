@@ -93,5 +93,3 @@ Using the `selection` slot, you can customize the appearance of your input selec
 The flexibility of the selection slot allows you accommodate complex use-cases. In this example we show the first 2 selections as chips while adding a number indicator for the remaining amount.
 
 <example file="v-file-input/misc-complex-selection" />
-
-<backmatter />

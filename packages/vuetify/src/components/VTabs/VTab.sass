@@ -1,9 +1,10 @@
 @use './variables' as *
 
 .v-tab
-  --v-btn-height: var(--v-tabs-height)
-  position: relative
-  min-width: $tab-min-width
+  // override v-btn size specificity
+  &.v-tab
+    --v-btn-height: var(--v-tabs-height)
+    min-width: $tab-min-width
 
   .v-slide-group--horizontal &
     max-width: $tab-max-width

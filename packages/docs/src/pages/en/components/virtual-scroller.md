@@ -47,5 +47,3 @@ The `v-virtual-scroll` renders a set amount of visible items, meant to cover the
 Depending on the size of the scroll container, the size of the items, and the complexity of what you are rendering, adjusting the **visible-items** might improve the performance of the scrolling.
 
 <example file="v-virtual-scroll/prop-visible-items" />
-
-<backmatter />
