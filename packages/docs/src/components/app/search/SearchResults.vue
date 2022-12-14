@@ -17,7 +17,7 @@
         <v-list-item
           v-if="child.items[0]._highlightResult.hierarchy.lvl1.matchLevel === 'full'"
           :key="`search-${i}-${ci}`"
-          :to="new URL(location.origin + child.items[0].url).pathname"
+          :to="getPathname(child)"
         >
           <v-list-item-title>
             <div class="d-inline-block" v-html="child.items[0]._highlightResult.hierarchy.lvl1.value" />
@@ -66,12 +66,7 @@
   const props = defineProps<{ groups: any[] }>()
 
   const rootEl = ref<VList>()
-  const location = window.location
-  const URL = window.URL
-
-  defineExpose({
-    rootEl,
-  })
+  defineExpose({ rootEl })
 
   function makeBreadcrumbs (item: any) {
     const hierarchy = item._highlightResult.hierarchy
@@ -98,6 +93,9 @@
     const continues = val.length > length
 
     return val.slice(0, length) + (continues ? '&mldr;' : '')
+  }
+  function getPathname (group: any) {
+    return new URL(location.origin + group.items[0].url).pathname
   }
 </script>
 
