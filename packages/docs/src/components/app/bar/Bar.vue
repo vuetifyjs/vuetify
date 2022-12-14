@@ -15,6 +15,8 @@
       <app-bar-releases-menu v-if="smAndUp" />
     </template>
 
+    <app-search />
+
     <v-spacer />
 
     <!-- <app-vertical-divider /> -->
@@ -57,6 +59,7 @@
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
   import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
+  import AppSearch from '@/components/app/search/Search.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'

@@ -22,6 +22,7 @@
   },
   "dependencies": {
     "@vueuse/head": "~0.7.6",
+    "algoliasearch": "^4.14.2",
     "cosmicjs": "^4.2.10",
     "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
@@ -33,6 +34,7 @@
     "vue": "^3.2.38",
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^9.2.2",
+    "vue-instantsearch": "^4.6.0",
     "vue-prism-component": "^2.0.0",
     "vuetify": "^3.0.5"
   },
