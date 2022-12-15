@@ -15,6 +15,7 @@ import { useTextColor } from '@/composables/color'
 // Utilities
 import { computed, inject } from 'vue'
 import { convertToUnit, defineComponent, keyValues, useRender } from '@/util'
+import { useRtl } from '@/composables'
 
 export const VSliderThumb = defineComponent({
   name: 'VSliderThumb',
@@ -107,10 +108,14 @@ export const VSliderThumb = defineComponent({
       newValue != null && emit('update:modelValue', newValue)
     }
 
+    const { isRtl } = useRtl()
+
     useRender(() => {
       const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
       const inset = vertical.value ? 'block' : 'inline'
       const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
+      const supportsLogicalPositioning = CSS.supports('inset-inline-start: 0px')
+      const insetAlt = vertical.value ? 'top' : (isRtl.value ? 'right' : 'left')
 
       return (
         <div
@@ -122,7 +127,7 @@ export const VSliderThumb = defineComponent({
             },
           ]}
           style={{
-            [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
+            [supportsLogicalPositioning ? `inset-${inset}-start` : insetAlt]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
             '--v-slider-thumb-size': convertToUnit(thumbSize.value),
             direction: !vertical.value ? horizontalDirection.value : undefined,
           }}
