@@ -17,7 +17,7 @@
         <v-card-text>
           <v-text-field
             label="Email"
-            placeholder="john@vuetifyjs.com"
+            placeholder="john@google.com"
           ></v-text-field>
           <span class="text-caption text-grey-darken-1">
             This is the email you will use to login to your Vuetify account
