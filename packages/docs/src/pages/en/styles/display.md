@@ -15,7 +15,7 @@ The display helpers allow you to control the display of content. This includes b
 
 <entry />
 
-<page-component path="features/BreakpointsTable" />
+<breakpoints-table" />
 
 ## Display
 
