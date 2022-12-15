@@ -9,6 +9,10 @@ related:
   - /introduction/roadmap/
 ---
 
+<script setup>
+  import TeamMembers from '@/components/about/TeamMembers.vue'
+</script>
+
 # Meet the team
 
 Vuetify is _not_ a one person show. We have a very active and engaged team that is **constantly striving** to bring developers a better experience. Keep in mind the below is not an exhaustive list of all the individuals that help make Vuetify great. **Thank you** for your support and thank you for using Vuetify!
@@ -19,7 +23,7 @@ While Vuetify (the framework) is [MIT Licensed](https://opensource.org/licenses/
 
 <promoted slug="vuetify-github-sponsors" />
 
-<page-component path="about/TeamMembers" team="company" />
+<team-members team="company" />
 
 ## Core Team
 
@@ -27,4 +31,4 @@ The core development team are Open Source developers that help guide the directi
 
 <promoted slug="vuetify-open-collective" />
 
-<page-component path="about/TeamMembers" team="core" />
+<team-members team="core" />
