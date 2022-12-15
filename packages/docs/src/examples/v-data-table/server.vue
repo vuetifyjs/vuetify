@@ -2,11 +2,11 @@
   <v-data-table-server
     v-model:items-per-page="itemsPerPage"
     :headers="headers"
+    :items-length="totalItems"
     :items="serverItems"
     :loading="loading"
-    :items-length="totalItems"
-    item-value="name"
     class="elevation-1"
+    item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>
 </template>
@@ -120,27 +120,25 @@
   }
 
   export default {
-    data () {
-      return {
-        itemsPerPage: 5,
-        headers: [
-          {
-            title: 'Dessert (100g serving)',
-            align: 'start',
-            sortable: false,
-            id: 'name',
-          },
-          { title: 'Calories', id: 'calories', align: 'right' },
-          { title: 'Fat (g)', id: 'fat', align: 'right' },
-          { title: 'Carbs (g)', id: 'carbs', align: 'right' },
-          { title: 'Protein (g)', id: 'protein', align: 'right' },
-          { title: 'Iron (%)', id: 'iron', align: 'right' },
-        ],
-        serverItems: [],
-        loading: true,
-        totalItems: 0,
-      }
-    },
+    data: () => ({
+      itemsPerPage: 5,
+      headers: [
+        {
+          title: 'Dessert (100g serving)',
+          align: 'start',
+          sortable: false,
+          id: 'name',
+        },
+        { title: 'Calories', id: 'calories', align: 'right' },
+        { title: 'Fat (g)', id: 'fat', align: 'right' },
+        { title: 'Carbs (g)', id: 'carbs', align: 'right' },
+        { title: 'Protein (g)', id: 'protein', align: 'right' },
+        { title: 'Iron (%)', id: 'iron', align: 'right' },
+      ],
+      serverItems: [],
+      loading: true,
+      totalItems: 0,
+    }),
     beforeMount () {
       this.loadItems({ page: 1, itemsPerPage: 5, sortBy: [] })
     },
