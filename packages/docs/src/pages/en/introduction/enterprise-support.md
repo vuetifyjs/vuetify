@@ -11,6 +11,7 @@ related:
 ---
 
 <script setup>
+  import DirectSupport from '@/components/introduction/DirectSupport.vue'
   import EnterpriseForm from '@/components/introduction/EnterpriseForm.vue'
 </script>
 
@@ -20,9 +21,11 @@ Let the experts at Vuetify help you get the most out of your application with a 
 
 ![Enterprise support Entry](https://cdn.vuetifyjs.com/docs/images/entry/enterprise-support-entry.png)
 
-----
+<enterprise-form />
 
-## Why do I need support?
+<br>
+
+## Why do I need support? { id="why-do-i-need-support" }
 
 Simply put, because it protects your investment. At Vuetify, we want you to be successful. Our services are designed to provide the right mix of support and access to expertise so that you can be successful while optimizing performance, managing risk, and keeping costs under control. Available services include:
 
@@ -73,6 +76,8 @@ Our team provides custom workshops for all skill levels that are designed to hel
 
 <small>*United States only</small> -->
 
-<br>
+## Are there other support options? { id="are-there-other-support-options" }
 
-<enterprise-form />
+Sometimes you only need a few hours of help and that's okay; we've got you covered. Below is a list of Core Team members currently accepting consulting requests:
+
+<direct-support />
