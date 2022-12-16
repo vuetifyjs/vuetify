@@ -172,14 +172,15 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
 
     const { filteredItems } = useFilter(props, items, computed(() => {
+      let hideSelectedQuery
       if (props.hideSelected) {
-        return items.value.map(t => t.value).filter(item => !selected.value.some(s => s === item))
+        hideSelectedQuery = items.value.map(t => t.value).filter(item => !selected.value.some(s => s === item))
       }
       if (isPristine.value) {
-        return undefined
+        return hideSelectedQuery
       }
 
-      return search.value
+      return hideSelectedQuery ? [...hideSelectedQuery, search.value] : search.value
     }))
 
     function onClear (e: MouseEvent) {
