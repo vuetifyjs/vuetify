@@ -17,7 +17,7 @@ import type { InternalItem } from './items'
  * - multiple matches (start, end), probably shouldn't overlap
  */
 export type FilterMatch = boolean | number | [number, number] | [number, number][]
-export type FilterFunction = (value: string, query: string, item?: any) => FilterMatch
+export type FilterFunction = (value: string, query: string | string[], item?: any) => FilterMatch
 export type FilterKeyFunctions = Record<string, FilterFunction>
 export type FilterKeys = string | string[]
 export type FilterMode = 'some' | 'every' | 'union' | 'intersection'
@@ -31,10 +31,16 @@ export interface FilterProps {
 }
 
 // Composables
-export const defaultFilter: FilterFunction = (value, query, item) => {
+export const defaultFilter: FilterFunction = (value, query: string | string[]) => {
   if (value == null || query == null) return -1
 
-  return value.toString().toLocaleLowerCase().indexOf(query.toString().toLocaleLowerCase())
+  const lowerCaseValue = value.toString().toLocaleLowerCase()
+
+  if (Array.isArray(query)) {
+    return query.some(q => lowerCaseValue.includes(q.toLocaleLowerCase()))
+  }
+
+  return lowerCaseValue.indexOf(query.toString().toLocaleLowerCase())
 }
 
 export const makeFilterProps = propsFactory({
@@ -131,10 +137,16 @@ export function useFilter <T extends InternalItem> (
   items: MaybeRef<T[]>,
   query?: Ref<string | undefined>,
 ) {
-  const strQuery = computed(() => (
-    typeof query?.value !== 'string' &&
-    typeof query?.value !== 'number'
-  ) ? '' : String(query.value))
+  const strQuery = computed(() => {
+    if (Array.isArray(query?.value)) {
+      return query?.value
+    }
+
+    return (
+      typeof query?.value !== 'string' &&
+      typeof query?.value !== 'number'
+    ) ? '' : String(query.value)
+  })
 
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
