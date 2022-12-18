@@ -160,28 +160,24 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
+
+    const displayItems = computed(() => {
+      if (props.hideSelected) {
+        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s === filteredItem.item))
+      }
+      return filteredItems.value
+    })
+
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
     const listRef = ref<VList>()
-
-    const { filteredItems } = useFilter(props, items, computed(() => {
-      let hideSelectedQuery
-      if (props.hideSelected) {
-        hideSelectedQuery = items.value.map(t => t.value).filter(item => !selected.value.some(s => s === item))
-      }
-      if (isPristine.value) {
-        return hideSelectedQuery
-      }
-
-      return hideSelectedQuery ? [...hideSelectedQuery, search.value] : search.value
-    }))
 
     function onClear (e: MouseEvent) {
       model.value = []
@@ -383,13 +379,13 @@ export const VCombobox = genericComponent<new <
                     onFocusin={ onFocusin }
                     onFocusout={ onFocusout }
                   >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                    { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
                     { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map((item, index) => slots.item?.({
+                    { displayItems.value.map((item, index) => slots.item?.({
                       item,
                       index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),

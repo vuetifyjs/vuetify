@@ -125,6 +125,14 @@ export const VAutocomplete = genericComponent<new <
         return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
+
+    const displayItems = computed(() => {
+      if (props.hideSelected) {
+        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s === filteredItem.item))
+      }
+      return filteredItems.value
+    })
+
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const listRef = ref<VList>()
 
@@ -292,13 +300,13 @@ export const VAutocomplete = genericComponent<new <
                     onFocusin={ onFocusin }
                     onFocusout={ onFocusout }
                   >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                    { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
                     { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map((item, index) => slots.item?.({
+                    { displayItems.value.map((item , index) => slots.item?.({
                       item,
                       index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),

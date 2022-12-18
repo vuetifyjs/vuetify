@@ -48,7 +48,7 @@ describe('filter', () => {
 
     it('should filter by mode using customKeyFilter', () => {
       const customKeyFilter = {
-        title: (s: string, q: string | string[]) => s === q,
+        title: (s: string, q: string) => s === q,
         value: (s: string) => s === '1',
       }
       const items = transformItems({} as any, [
@@ -158,20 +158,6 @@ describe('filter', () => {
       await nextTick()
 
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
-    })
-
-    it('should allow string array query', () => {
-      const items = ref(transformItems(itemProps, [
-        { title: 'foo' },
-        { title: 'bar' },
-        { title: 'fizz' },
-        { title: 'buzz' },
-      ]))
-      const props = { }
-      const query = ref(['fizz', 'buzz'])
-      const { filteredItems } = useFilter(props, items, query)
-      expect(filteredItems.value).toHaveLength(2)
-      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['fizz', 'buzz'])
     })
   })
 })

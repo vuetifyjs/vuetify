@@ -18,7 +18,6 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
-import { useFilter } from '@/composables/filter'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
@@ -130,12 +129,12 @@ export const VSelect = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
-    const { filteredItems } = useFilter({}, items, computed(() => {
+    const displayItems = computed(() => {
       if (props.hideSelected) {
-        return items.value.map(t => t.value).filter(item => !selected.value.some(s => s === item))
+        return items.value.filter(item => !selections.value.some(s => s === item))
       }
-      return undefined
-    }))
+      return items.value
+    })
 
     const listRef = ref<VList>()
 
@@ -255,13 +254,13 @@ export const VSelect = genericComponent<new <
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     onFocusout={ onFocusout }
                   >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                    { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
                     { slots['prepend-item']?.() }
 
-                    { items.value.map((item, index) => {
+                    { displayItems.value.map((item, index) => {
                       if (slots.item) {
                         return slots.item?.({
                           item,
