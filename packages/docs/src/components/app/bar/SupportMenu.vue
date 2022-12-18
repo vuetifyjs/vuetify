@@ -1,5 +1,8 @@
 <template>
-  <app-btn color="medium-emphasis">
+  <app-btn
+    color="medium-emphasis"
+    class="ml-1"
+  >
     {{ title }}
 
     <chevron-down />

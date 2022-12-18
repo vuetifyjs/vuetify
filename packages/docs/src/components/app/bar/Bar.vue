@@ -19,18 +19,26 @@
 
     <v-spacer />
 
-    <!-- <app-vertical-divider /> -->
-
     <template #append>
-      <app-bar-learn-menu v-if="mdAndUp" />
+      <template v-if="mdAndUp">
+        <app-bar-learn-menu />
 
-      <app-bar-support-menu v-if="mdAndUp" />
+        <app-bar-support-menu />
 
-      <app-bar-team-link v-if="mdAndUp" />
+        <app-bar-team-link />
 
-      <app-bar-enterprise-link v-if="mdAndUp" />
+        <app-bar-playground-link />
 
-      <app-vertical-divider v-if="mdAndUp" />
+        <app-bar-sponsor-link />
+
+        <app-bar-enterprise-link />
+
+        <app-vertical-divider />
+      </template>
+
+      <app-bar-theme-toggle />
+
+      <app-vertical-divider />
 
       <app-bar-store-link />
 
@@ -48,18 +56,21 @@
 <script setup>
   // Components
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
+  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
+  import AppBarPlaygroundLink from './PlaygroundLink.vue'
   import AppBarReleasesMenu from './ReleasesMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
+  import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
-  import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
   import AppSearch from '@/components/app/search/Search.vue'
+  import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
