@@ -48,6 +48,7 @@
             class="text-none"
             rel="noopener"
             target="_blank"
+            variant="elevated"
             @click="onClick"
           >
             {{ banner?.metadata.link_text }}
@@ -108,7 +109,9 @@
     notifications.last.banner = Date.now()
   }
 
-  waitForReadystate().then(banners.fetch)
+  waitForReadystate().then(() => {
+    setTimeout(banners.fetch, 1000)
+  })
 </script>
 
 <style lang="sass">
