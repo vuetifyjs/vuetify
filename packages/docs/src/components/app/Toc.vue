@@ -53,9 +53,11 @@
       <v-container>
         <app-headline
           v-if="sponsors.length"
-          class="mb-1 mt-n1"
+          class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
           path="sponsors"
           size="subtitle-1"
+          tag="router-link"
+          to="/introduction/sponsors-and-backers"
         />
 
         <v-row dense>
@@ -72,10 +74,6 @@
           </v-col>
 
           <v-col cols="12" class="mt-3">
-            <sponsor-link block size="large" />
-          </v-col>
-
-          <v-col v-if="IS_PROD" cols="12">
             <carbon />
           </v-col>
         </v-row>
@@ -87,7 +85,6 @@
 <script setup lang="ts">
   // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
 
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
@@ -97,9 +94,6 @@
 
   // Utilities
   import { computed, ref } from 'vue'
-
-  // Globals
-  import { IS_PROD } from '@/util/globals'
 
   type TocItem = {
     to: string;

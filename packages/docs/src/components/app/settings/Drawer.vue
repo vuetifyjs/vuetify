@@ -34,11 +34,9 @@
 
       <app-settings-api />
 
-      <template v-if="!IS_PROD">
-        <v-divider class="mt-4 mb-3 mx-n3" />
+      <v-divider class="mt-4 mb-3 mx-n3" />
 
-        <app-settings-dev />
-      </template>
+      <app-settings-dev />
     </v-container>
   </v-navigation-drawer>
 </template>
@@ -53,9 +51,6 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useRtl } from 'vuetify'
-
-  // Globals
-  import { IS_PROD } from '@/util/globals'
 
   const { isRtl } = useRtl()
   const app = useAppStore()
