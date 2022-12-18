@@ -18,6 +18,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { useFilter } from '@/composables/filter'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
@@ -128,6 +129,14 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+
+    const { filteredItems } = useFilter({}, items, computed(() => {
+      if (props.hideSelected) {
+        return items.value.map(t => t.value).filter(item => !selected.value.some(s => s === item))
+      }
+      return undefined
+    }))
+
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -246,7 +255,7 @@ export const VSelect = genericComponent<new <
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     onFocusout={ onFocusout }
                   >
-                    { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
                     )) }
 
