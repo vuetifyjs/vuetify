@@ -10,6 +10,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeThemeProps, provideTheme } from "@/composables/theme"
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
@@ -43,6 +44,7 @@ export const VSnackbar = genericComponent<new () => {
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeVariantProps(),
+    ...makeThemeProps(),
     ...omit(makeVOverlayProps({
       transition: 'v-snackbar-transition',
     }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
@@ -57,7 +59,7 @@ export const VSnackbar = genericComponent<new () => {
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
-
+    const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
 
@@ -116,6 +118,7 @@ export const VSnackbar = genericComponent<new () => {
           <div
             class={[
               'v-snackbar__wrapper',
+              themeClasses.value,
               colorClasses.value,
               roundedClasses.value,
               variantClasses.value,
