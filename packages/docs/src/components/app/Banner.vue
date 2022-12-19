@@ -36,7 +36,7 @@
       <v-spacer />
     </a>
 
-    <template #append>
+    <template v-if="mdAndUp" #append>
       <v-hover>
         <template #default="{ isHovering, props }">
           <v-btn
@@ -72,20 +72,22 @@
 
 <script setup lang="ts">
   // Composables
+  import { useBannersStore } from '@/store/banners'
+  import { useDisplay } from 'vuetify'
   import { useGtag } from 'vue-gtag-next'
   import { useRoute } from 'vue-router'
   import { useUserStore } from '@/store/user'
-  import { useBannersStore } from '@/store/banners'
 
   // Utilities
   import { computed } from 'vue'
   import { differenceInHours } from 'date-fns'
   import { waitForReadystate } from '@/util/helpers'
 
+  const { event } = useGtag()
+  const { mdAndUp } = useDisplay()
+  const { name } = useRoute()
   const { notifications } = useUserStore()
   const banners = useBannersStore()
-  const { event } = useGtag()
-  const { name } = useRoute()
 
   const banner = computed(() => banners.banner)
   const height = computed(() => banner.value?.metadata.subtext ? 80 : 64)
