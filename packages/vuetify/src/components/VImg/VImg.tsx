@@ -89,7 +89,7 @@ export const VImg = defineComponent({
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,
           lazySrc: props.lazySrc || props.src.lazySrc,
-          aspect: Number(props.aspectRatio || props.src.aspect),
+          aspect: Number(props.aspectRatio || props.src.aspect || 0),
         } : {
           src: props.src,
           srcset: props.srcset,
