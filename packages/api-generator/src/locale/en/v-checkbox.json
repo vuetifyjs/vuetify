@@ -12,7 +12,8 @@
     "name": "Sets the component's name attribute",
     "falseIcon": "The icon used when inactive",
     "trueIcon": "The icon used when active",
-    "row": "Displays radio buttons in row"
+    "row": "Displays radio buttons in row",
+    "menu": "Makes the item selection menu visible (true) or hidden (false)"
   },
   "events": {
     "update:indeterminate": "The **indeterminate.sync** event.",
