@@ -203,7 +203,7 @@ export const VFileInput = defineComponent({
                       />
 
                       <div class={ fieldClass }>
-                        { model.value.length > 0 && (
+                        { !!model.value?.length && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
@@ -233,7 +233,7 @@ export const VFileInput = defineComponent({
                     <span />
 
                     <VCounter
-                      active={ !!model.value.length }
+                      active={ !!model.value?.length }
                       value={ counterValue.value }
                       v-slots={ slots.counter }
                     />
