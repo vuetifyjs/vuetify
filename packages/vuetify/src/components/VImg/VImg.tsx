@@ -104,6 +104,12 @@ export const VImg = defineComponent({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+    watch(aspectRatio, (val, oldVal) => {
+      if (!val && oldVal && image.value) {
+        pollForSize(image.value)
+      }
+    })
+
     // TODO: getSrc when window width changes
 
     onBeforeMount(() => init())
@@ -161,15 +167,17 @@ export const VImg = defineComponent({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
+    let timer = -1
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
+        clearTimeout(timer)
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          setTimeout(poll, timeout)
+          timer = window.setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
