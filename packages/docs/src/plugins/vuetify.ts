@@ -39,6 +39,14 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
             accent: '#005CAF',
           },
         },
+        dark: {
+          colors: {
+            primary: '#2196F3',
+            secondary: '#424242',
+            tertiary: '#E57373',
+            accent: '#FF4081',
+          },
+        },
       },
     },
   })
