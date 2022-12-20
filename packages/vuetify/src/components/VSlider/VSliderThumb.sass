@@ -92,6 +92,11 @@
     top: 50%
     transform: translateY(-50%)
 
+    +tools.ltr()
+      left: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+    +tools.rtl()
+      right: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+
   .v-slider-thumb__label-container
     left: calc(var(--v-slider-thumb-size) / 2)
     top: 0
@@ -112,6 +117,9 @@
 
 // Vertical
 .v-slider.v-input--vertical
+  .v-slider-thumb
+    top: calc(var(--v-slider-thumb-position) - var(--v-slider-thumb-size) / 2)
+
   .v-slider-thumb__label-container
     top: calc(var(--v-slider-thumb-size) / 2)
     right: 0
