@@ -141,8 +141,10 @@
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
 
-    &--last
+    &--first
       bottom: calc(0% + var(--v-slider-tick-size) + 1px)
+    &--last
+      bottom: calc(100% - var(--v-slider-tick-size) - 1px)
 
     .v-slider-track__tick-label
       margin-inline-start: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-start})
