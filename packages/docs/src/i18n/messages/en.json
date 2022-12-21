@@ -171,8 +171,9 @@
   "rtl": "RTL",
   "scroll-to-top": "Scroll to top",
   "search": {
-    "placeholder": "Search Vuetify",
-    "key-hint": "(press /)"
+    "label": "Search",
+    "looking": "Looking for",
+    "key-hint": "Press /"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",

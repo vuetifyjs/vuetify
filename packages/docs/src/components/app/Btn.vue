@@ -1,12 +1,20 @@
 <template>
   <v-btn
     :variant="variant"
-    class="text-capitalize px-2 font-weight-regular"
+    :icon="!!icon"
+    class="text-body-2 text-capitalize px-3 app-btn"
+    color="medium-emphasis"
   >
-    <slot v-if="$slots.default" />
+    <slot />
 
-    <template v-else-if="text">
+    <template v-if="text">
       {{ t(text) }}
+    </template>
+
+    <template v-else-if="icon || $slots.icon">
+      <slot v-if="$slots.icon" name="icon" />
+
+      <v-icon v-else :icon="icon" size="24" />
     </template>
   </v-btn>
 </template>
@@ -16,6 +24,7 @@
   import { useI18n } from 'vue-i18n'
 
   defineProps({
+    icon: String,
     text: String,
     variant: {
       type: String,

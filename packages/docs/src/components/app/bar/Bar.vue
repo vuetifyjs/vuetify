@@ -7,12 +7,11 @@
     <template #prepend>
       <app-bar-logo />
 
-      <v-app-bar-nav-icon
-        class="hidden-lg-and-up"
+      <v-btn
+        v-if="name !== 'home' && mdAndDown"
+        icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
-
-      <app-bar-releases-menu v-if="smAndUp" />
     </template>
 
     <app-search />
@@ -27,7 +26,7 @@
 
         <app-bar-team-link />
 
-        <app-bar-playground-link />
+        <app-bar-playground-link v-if="lgAndUp" />
 
         <app-bar-sponsor-link />
 
@@ -63,7 +62,6 @@
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
-  import AppBarReleasesMenu from './ReleasesMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
@@ -75,7 +73,9 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay } from 'vuetify'
+  import { useRoute } from 'vue-router'
 
   const app = useAppStore()
-  const { smAndUp, mdAndUp } = useDisplay()
+  const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const { name } = useRoute()
 </script>
