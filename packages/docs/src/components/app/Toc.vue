@@ -53,11 +53,11 @@
       <v-container>
         <app-headline
           v-if="sponsors.length"
+          :to="rpath('/introduction/sponsors-and-backers/')"
           class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
           path="sponsors"
           size="subtitle-1"
           tag="router-link"
-          to="/introduction/sponsors-and-backers"
         />
 
         <v-row dense>
