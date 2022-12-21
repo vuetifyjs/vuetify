@@ -38,7 +38,7 @@ export default {
     prev: 'المعروض السابق',
     next: 'المعروض التالي',
     ariaLabel: {
-      delimiter: 'المعروض رقم {0} من أصل {1}',
+      delimiter: 'المعروض رقم {0} من {1}',
     },
   },
   calendar: {
@@ -63,7 +63,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      icon: 'القييم {0} من أصل {1}',
+      icon: 'القييم {0} من {1}',
     },
   },
 }
