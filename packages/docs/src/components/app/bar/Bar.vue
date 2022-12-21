@@ -24,6 +24,8 @@
 
         <app-bar-support-menu />
 
+        <app-bar-ecosystem-menu />
+
         <app-bar-team-link />
 
         <app-bar-playground-link v-if="lgAndUp" />
@@ -62,6 +64,7 @@
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
+  import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'

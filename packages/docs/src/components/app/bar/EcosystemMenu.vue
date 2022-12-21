@@ -1,11 +1,6 @@
 <template>
-  <app-btn
-    class="ml-8"
-    color="medium-emphasis"
-  >
-    <span class="text-none">
-      v{{ title }}
-    </span>
+  <app-btn>
+    Ecosystem
 
     <chevron-down />
 
@@ -20,7 +15,6 @@
 <script setup>
   // Components
   import ChevronDown from '@/components/icons/ChevronDown.vue'
-  import { version } from 'vuetify'
 
   // Composables
   import { useI18n } from 'vue-i18n'
@@ -30,7 +24,6 @@
   import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
-  const title = version
   const items = computed(() => ([
     { subheader: t('documentation') },
     {
