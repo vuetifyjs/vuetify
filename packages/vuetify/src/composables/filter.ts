@@ -163,5 +163,9 @@ export function useFilter <T extends InternalItem> (
     })
   })
 
-  return { filteredItems, filteredMatches }
+  function getMatches (item: T) {
+    return filteredMatches.value.get(item.value)
+  }
+
+  return { filteredItems, filteredMatches, getMatches }
 }
