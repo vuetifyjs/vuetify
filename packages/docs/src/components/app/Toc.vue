@@ -73,7 +73,19 @@
             />
           </v-col>
 
-          <v-col cols="12" class="mt-3">
+          <v-col class="d-inline-flex">
+            <v-card
+              :color="dark ? undefined : 'grey-lighten-5'"
+              :to="rpath('/introduction/sponsors-and-backers/')"
+              class="py-2 px-3 text-center"
+              variant="flat"
+              width="100%"
+            >
+              <small class="text-disabled">Your logo here</small>
+            </v-card>
+          </v-col>
+
+          <v-col cols="12">
             <carbon />
           </v-col>
         </v-row>
@@ -94,6 +106,7 @@
 
   // Utilities
   import { computed, ref } from 'vue'
+  import { rpath } from '@/util/routes'
 
   type TocItem = {
     to: string;
