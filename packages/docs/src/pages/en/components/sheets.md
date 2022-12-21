@@ -49,5 +49,3 @@ Sheets and components based on them can have different sizes and colors.
 The `v-sheet` component accepts custom [Material Design Color](/styles/colors/) values such as `warning`, `amber darken-3`, and `deep-purple accent`—as well as _rgb, rgba, and hexadecimal_ values.
 
 <example file="v-sheet/prop-color" />
-
-<backmatter />

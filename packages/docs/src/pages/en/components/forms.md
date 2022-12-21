@@ -55,5 +55,3 @@ The `v-form` component has **three** functions that can be accessed by setting a
 **vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://vuelidate.netlify.com/)
 
 <example file="v-form/misc-vuelidate" />
-
-<backmatter />

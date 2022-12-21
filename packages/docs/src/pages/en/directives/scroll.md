@@ -40,5 +40,3 @@ The default behavior is to bind to the window. If no additional configuration op
 For a more fine tuned approach, you can designate the target to bind the scroll event listener.
 
 <example file="v-scroll/option-target" />
-
-<backmatter />

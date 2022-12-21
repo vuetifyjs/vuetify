@@ -283,5 +283,3 @@ For example, the [v-banner](/components/banners/) component implements different
   }
 </script>
 ```
-
-<backmatter />

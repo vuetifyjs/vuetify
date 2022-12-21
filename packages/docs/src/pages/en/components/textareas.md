@@ -85,5 +85,3 @@ The `rows` prop allows you to define how many rows the textarea has, when combin
 Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.
 
 <example file="v-textarea/misc-signup-form" />
-
-<backmatter />

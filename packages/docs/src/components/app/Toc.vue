@@ -53,9 +53,11 @@
       <v-container>
         <app-headline
           v-if="sponsors.length"
-          class="mb-1 mt-n1"
+          :to="rpath('/introduction/sponsors-and-backers/')"
+          class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
           path="sponsors"
           size="subtitle-1"
+          tag="router-link"
         />
 
         <v-row dense>
@@ -71,11 +73,19 @@
             />
           </v-col>
 
-          <v-col cols="12" class="mt-3">
-            <sponsor-link block size="large" />
+          <v-col class="d-inline-flex">
+            <v-card
+              :color="dark ? undefined : 'grey-lighten-5'"
+              :to="rpath('/introduction/sponsors-and-backers/')"
+              class="py-2 px-3 text-center"
+              variant="flat"
+              width="100%"
+            >
+              <small class="text-disabled">Your logo here</small>
+            </v-card>
           </v-col>
 
-          <v-col v-if="IS_PROD" cols="12">
+          <v-col cols="12">
             <carbon />
           </v-col>
         </v-row>
@@ -87,7 +97,6 @@
 <script setup lang="ts">
   // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
 
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
@@ -97,9 +106,7 @@
 
   // Utilities
   import { computed, ref } from 'vue'
-
-  // Globals
-  import { IS_PROD } from '@/util/globals'
+  import { rpath } from '@/util/routes'
 
   type TocItem = {
     to: string;

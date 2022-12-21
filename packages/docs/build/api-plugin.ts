@@ -49,14 +49,6 @@ function genHeader (component: string) {
   return `${header.join('\n\n')}\n\n`
 }
 
-function genFooter () {
-  const footer = [
-    '<backmatter />',
-  ]
-
-  return `${footer.join('\n\n')}\n`
-}
-
 const sanitize = (str: string) => str.replace(/\$/g, '')
 
 function loadMessages (locale: string) {
@@ -88,8 +80,6 @@ function createMdFile (component: string, data: Record<string, any>, locale: str
       str += `<api-section name="${component}" section="${section}" />\n\n`
     }
   }
-
-  str += genFooter()
 
   return str
 }

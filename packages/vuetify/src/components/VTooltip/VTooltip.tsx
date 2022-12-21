@@ -103,6 +103,7 @@ export const VTooltip = genericComponent<new () => {
           activatorProps={ mergeProps({
             'aria-describedby': id.value,
           }, props.activatorProps) }
+          _disableGlobalStack
           { ...scopeId }
         >
           {{

@@ -148,5 +148,3 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 </components-list-item>
 
 </v-row>
-
-<backmatter />

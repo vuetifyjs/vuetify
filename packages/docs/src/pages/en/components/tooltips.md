@@ -41,5 +41,3 @@ Use the **location** prop to specify on which side of the element the tooltip sh
 Tooltip visibility can be programmatically changed using `v-model`.
 
 <example file="v-tooltip/prop-visibility" />
-
-<backmatter />

@@ -20,5 +20,3 @@ Find top Vue.js developers, ready to join your team; or browse available opening
 <promoted slug="vue-jobs" />
 
 <vue-jobs />
-
-<backmatter />

@@ -132,7 +132,7 @@ export const VChip = defineComponent({
             {
               'v-chip--disabled': props.disabled,
               'v-chip--label': props.label,
-              'v-chip--link': isClickable,
+              'v-chip--link': isClickable.value,
               'v-chip--filter': hasFilter,
               'v-chip--pill': props.pill,
             },

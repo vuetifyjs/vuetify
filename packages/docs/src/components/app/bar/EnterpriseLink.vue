@@ -1,6 +1,7 @@
 <template>
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
+    class="ml-1"
     color="medium-emphasis"
     variant="text"
     @click="onClick"

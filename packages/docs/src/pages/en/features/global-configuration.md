@@ -43,5 +43,3 @@ When creating and mounting a component, Vuetify uses the following priority in d
 2. Value defined in component specific section of defaults configuration object
 3. Value defined in global section of defaults configuration object
 4. Value defined in the prop definition of the Vueitfy component itself.
-
-<backmatter />

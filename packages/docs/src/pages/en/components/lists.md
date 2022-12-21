@@ -6,7 +6,6 @@ meta:
   keywords: lists, vuetify list component, vue list component
 related:
   - /components/item-groups/
-  - /components/list-item-groups/
 ---
 
 # Lists
@@ -24,14 +23,6 @@ Lists come in three main variations. **single-line** (default), **two-line** and
 ## API
 
 <api-inline />
-
-<!-- ## Caveats
-
-<alert type="info">
-
-  If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
-
-</alert> -->
 
 ## Examples
 
@@ -156,5 +147,3 @@ Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line
 Lists can contain multiple subheaders and dividers.
 
 <example file="v-list/misc-subheadings-and-dividers" /> -->
-
-<backmatter />

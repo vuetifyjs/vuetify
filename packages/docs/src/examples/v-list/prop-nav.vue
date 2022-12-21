@@ -9,7 +9,7 @@
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
             title="John Leider"
-            subtitle="john@vuetifyjs.com"
+            subtitle="john@google.com"
           >
             <template v-slot:append>
               <v-btn

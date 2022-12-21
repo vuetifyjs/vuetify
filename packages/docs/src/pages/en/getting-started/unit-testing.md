@@ -338,5 +338,3 @@ describe('Test With Attribute', () => {
 ```
 
 <promoted type="theme" />
-
-<backmatter />

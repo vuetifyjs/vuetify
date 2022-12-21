@@ -101,5 +101,3 @@ Modals that do not fit within the available window space will scroll the contain
 If for some reason you are unable to use the activator slot, be sure to add the `.stop` modifier to the event that triggers the dialog.
 
 <example file="v-dialog/misc-without-activator" /> -->
-
-<backmatter />

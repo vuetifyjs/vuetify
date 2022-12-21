@@ -130,5 +130,3 @@ You can easily extend the functionality of app bar by adding `VMenu` there. Clic
 Using the functional component `v-app-bar-nav-icon` you can toggle the state of other components such as a [v-navigation-drawer](/components/navigation-drawers).
 
 <example file="v-app-bar/misc-app-bar-nav" />-->
-
-<backmatter />

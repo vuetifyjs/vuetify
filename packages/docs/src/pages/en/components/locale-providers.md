@@ -21,5 +21,3 @@ The locale provider allows you to provide specific default prop values to compon
 ### Locale
 
 The `v-locale-provider` expects a prop **locale** which looks the same as the **locale** object that you can pass to `createVuetify` when creating your application.
-
-<backmatter />

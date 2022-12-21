@@ -77,5 +77,3 @@ The expansion panel component provides a rich playground to build truly advanced
 Expand action icon can be customized with **expand-icon** prop or the `actions` slot.
 
 <example file="v-expansion-panels/misc-custom-icons" />
-
-<backmatter />
