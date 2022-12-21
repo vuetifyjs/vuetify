@@ -10,7 +10,7 @@ import type { SortItem } from './sort'
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
     type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
-    required: true,
+    default: () => ([]),
   },
 }, 'v-data-table-header')
 
@@ -35,7 +35,11 @@ export function createHeaders (
   const columns = ref<InternalDataTableHeader[]>([])
 
   watch(() => props.headers, () => {
-    const wrapped = Array.isArray(props.headers[0]) ? props.headers as DataTableHeader[][] : [props.headers as DataTableHeader[]]
+    const wrapped = !props.headers.length
+      ? []
+      : Array.isArray(props.headers[0])
+        ? props.headers as DataTableHeader[][]
+        : [props.headers as DataTableHeader[]]
     const flat = wrapped.flatMap((row, index) => row.map(column => ({ column, row: index })))
 
     const rowCount = wrapped.length
