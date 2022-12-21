@@ -60,7 +60,9 @@
 
           <br>
 
-          <v-subheader>Your search results will appear here</v-subheader>
+          <v-list-subheader class="d-inline-flex">
+            {{ t('search.results') }}
+          </v-list-subheader>
         </div>
 
         <ais-instant-search

@@ -173,7 +173,8 @@
   "search": {
     "label": "Search",
     "looking": "Looking for",
-    "key-hint": "Press /"
+    "key-hint": "Press /",
+    "results": "Your search results will appear here"
   },
   "search-api": "Search API",
   "search-jobs": "Search Jobs",
