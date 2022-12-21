@@ -12,7 +12,7 @@ export const makeDataTableGroupProps = propsFactory({
     type: Array as PropType<SortItem[]>,
     default: () => ([]),
   },
-})
+}, 'data-table-group')
 
 const VDataTableGroupSymbol: InjectionKey<{
   opened: Ref<Set<string>>

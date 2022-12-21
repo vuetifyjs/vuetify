@@ -14,7 +14,7 @@ export const makeDataTableVirtualProps = propsFactory({
     type: [String, Number],
     default: 52,
   },
-})
+}, 'virtual')
 
 type VirtualProps = {
   itemHeight: string | number

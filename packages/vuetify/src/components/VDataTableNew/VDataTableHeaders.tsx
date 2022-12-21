@@ -2,7 +2,7 @@
 import { VIcon } from '@/components/VIcon'
 import { VProgressLinear } from '@/components/VProgressLinear'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDataTableColumn } from '.'
+import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables
 import { useSort } from './composables/sort'
