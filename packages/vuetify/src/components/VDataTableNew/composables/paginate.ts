@@ -20,12 +20,12 @@ export const makeDataTablePaginateProps = propsFactory({
 }, 'v-data-table-paginate')
 
 const VDataTablePaginationSymbol: InjectionKey<{
-  page: Ref<number | string>
-  itemsPerPage: Ref<number | string>
-  startIndex: Ref<number | string>
-  stopIndex: Ref<number | string>
-  pageCount: Ref<number | string>
-  itemsLength: Ref<number | string>
+  page: Ref<number>
+  itemsPerPage: Ref<number>
+  startIndex: Ref<number>
+  stopIndex: Ref<number>
+  pageCount: Ref<number>
+  itemsLength: Ref<number>
 }> = Symbol.for('vuetify:data-table-pagination')
 
 type PaginationProps = {
@@ -49,7 +49,6 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
   const stopIndex = computed(() => {
     if (itemsPerPage.value === -1) return itemsLength.value
 
-    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     return Math.min(itemsLength.value, startIndex.value + itemsPerPage.value)
   })
 
