@@ -1,15 +1,15 @@
 // Components
-import { VIcon } from '@/components/VIcon'
-import { VProgressLinear } from '@/components/VProgressLinear'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VDataTableColumn } from './VDataTableColumn'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { useSort } from './composables/sort'
-import { useSelection } from './composables/select'
-import { useHeaders } from './composables/headers'
-import { useBackgroundColor } from '@/composables/color'
 import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useBackgroundColor } from '@/composables/color'
+import { useHeaders } from './composables/headers'
+import { useSelection } from './composables/select'
+import { useSort } from './composables/sort'
 
 // Utilities
 import { convertToUnit, defineComponent, useRender } from '@/util'
@@ -22,7 +22,6 @@ export const VDataTableHeaders = defineComponent({
 
   props: {
     color: String,
-    loading: Boolean,
     sticky: Boolean,
     multiSort: Boolean,
     sortAscIcon: {
@@ -33,12 +32,15 @@ export const VDataTableHeaders = defineComponent({
       type: IconValue,
       default: '$sortDesc',
     },
+
+    ...makeLoaderProps(),
   },
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy } = useSort()
     const { someSelected, allSelected, selectAll } = useSelection()
     const { columns, headers } = useHeaders()
+    const { loaderClasses } = useLoader(props)
 
     const getFixedStyles = (column: InternalDataTableHeader, y: number) => {
       if (!props.sticky && !column.fixed) return null
@@ -75,6 +77,7 @@ export const VDataTableHeaders = defineComponent({
               'v-data-table__th--sortable': column.sortable,
               'v-data-table__th--sorted': isSorted,
             },
+            loaderClasses.value,
           ]}
           style={{
             width: convertToUnit(column.width),
@@ -137,25 +140,31 @@ export const VDataTableHeaders = defineComponent({
       )
     }
 
-    useRender(() => {
-      return (
-        <>
-          { headers.value.map((row, y) => (
-            <tr>
-              { row.map((column, x) => (
-                <VDataTableHeaderCell column={ column} x={ x } y={ y } />
-              )) }
-            </tr>
-          )) }
-          { props.loading && (
-            <tr class="v-data-table__progress">
-              <th colspan={ columns.value.length }>
-                <VProgressLinear indeterminate color={ props.color } />
-              </th>
-            </tr>
-          )}
-        </>
-      )
-    })
+    useRender(() => (
+      <>
+        { headers.value.map((row, y) => (
+          <tr>
+            { row.map((column, x) => (
+              <VDataTableHeaderCell column={ column} x={ x } y={ y } />
+            )) }
+          </tr>
+        )) }
+
+        { props.loading && (
+          <tr class="v-data-table__progress">
+            <th colspan={ columns.value.length }>
+
+            <LoaderSlot
+              name="v-data-table-headers"
+              active
+              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+              indeterminate
+              v-slots={{ default: slots.loader }}
+            />
+            </th>
+          </tr>
+        )}
+      </>
+    ))
   },
 })

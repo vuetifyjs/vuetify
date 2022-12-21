@@ -73,11 +73,6 @@
     border: none !important
     height: auto !important
 
-  .v-progress-linear
-    position: absolute
-    top: 0
-    left: 0
-
 .v-data-table-group-header-row__column
   padding-left: calc(var(--v-data-table-group-header-row-depth) * 16px) !important
 
@@ -97,3 +92,15 @@
   min-height: $data-table-header-sort-badge-size
   width: $data-table-header-sort-badge-size
   height: $data-table-header-sort-badge-size
+
+.v-data-table-headers__loader
+  bottom: auto
+  top: 0
+  left: 0
+  position: absolute
+  right: 0
+  width: 100%
+  z-index: 1
+
+.v-data-table-rows-no-data
+  text-align: center

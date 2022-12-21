@@ -3,13 +3,13 @@ import { VBtn } from '../VBtn'
 import { VCheckboxBtn } from '../VCheckbox'
 
 // Composables
-import { VDataTableColumn } from './VDataTableColumn'
-import { useSelection } from './composables/select'
-import { useHeaders } from './composables/headers'
 import { useExpanded } from './composables/expand'
+import { useHeaders } from './composables/headers'
+import { useSelection } from './composables/select'
+import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -19,10 +19,7 @@ export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
 
   props: {
-    item: {
-      type: Object as PropType<DataTableItem>,
-      required: true,
-    },
+    item: Object as PropType<DataTableItem>,
   },
 
   setup (props, { slots }) {
@@ -30,63 +27,69 @@ export const VDataTableRow = defineComponent({
     const { isExpanded, toggleExpand } = useExpanded()
     const { columns } = useHeaders()
 
-    return () => {
-      return (
-        <tr
-          class={[
-            'v-data-table__tr',
-          ]}
-        >
-          { columns.value.map((column, i) => (
-            <VDataTableColumn
-              fixed={ column.fixed }
-              fixedOffset={ column.fixedOffset }
-              lastFixed={ column.lastFixed }
-              width={ column.width }
-              align={ column.align }
-              noPadding={ column.id === 'data-table-select' || column.id === 'data-table-expand' }
-            >
-              {{
-                default: () => {
-                  const slotName = `item.${column.id}`
-                  const slotProps = {
-                    item: props.item,
-                    columns: columns.value,
-                    isSelected,
-                    toggleSelect,
-                    isExpanded,
-                    toggleExpand,
-                  }
+    useRender(() => (
+      <tr
+        class={[
+          'v-data-table__tr',
+        ]}
+      >
+        { !columns.value.length && (
+          <VDataTableColumn
+            key="no-data"
+            v-slots={ slots }
+          />
+        ) }
 
-                  if (slots[slotName]) return slots[slotName]!(slotProps)
+        { props.item && columns.value.map((column, i) => (
+          <VDataTableColumn
+            align={ column.align }
+            fixed={ column.fixed }
+            fixedOffset={ column.fixedOffset }
+            lastFixed={ column.lastFixed }
+            noPadding={ column.id === 'data-table-select' || column.id === 'data-table-expand' }
+            width={ column.width }
+          >
+            {{
+              default: () => {
+                const item = props.item!
+                const slotName = `item.${column.id}`
+                const slotProps = {
+                  item: props.item,
+                  columns: columns.value,
+                  isSelected,
+                  toggleSelect,
+                  isExpanded,
+                  toggleExpand,
+                }
 
-                  if (column.id === 'data-table-select') {
-                    return slots['item.data-table-select']?.(slotProps) ?? (
-                      <VCheckboxBtn
-                        modelValue={ isSelected([props.item]) }
-                        onClick={ () => toggleSelect(props.item) }
-                      />
-                    )
-                  }
+                if (slots[slotName]) return slots[slotName]!(slotProps)
 
-                  if (column.id === 'data-table-expand') {
-                    return slots['item.data-table-expand']?.(slotProps) ?? (
-                      <VBtn
-                        variant="text"
-                        size="small"
-                        icon={isExpanded(props.item) ? '$collapse' : '$expand' }
-                        onClick={ () => toggleExpand(props.item) }
-                      />
-                    )
-                  }
+                if (column.id === 'data-table-select') {
+                  return slots['item.data-table-select']?.(slotProps) ?? (
+                    <VCheckboxBtn
+                      modelValue={ isSelected([item]) }
+                      onClick={ () => toggleSelect(item) }
+                    />
+                  )
+                }
 
-                  return props.item.columns[column.id]
-                },
-              }}
-            </VDataTableColumn>
-          )) }
-        </tr>
-      )
-    }
+                if (column.id === 'data-table-expand') {
+                  return slots['item.data-table-expand']?.(slotProps) ?? (
+                    <VBtn
+                      icon={isExpanded(item) ? '$collapse' : '$expand' }
+                      size="small"
+                      variant="text"
+                      onClick={ () => toggleExpand(item) }
+                    />
+                  )
+                }
+
+                return item.columns[column.id]
+              },
+            }}
+          </VDataTableColumn>
+        )) }
+      </tr>
+    ))
   },
 })
