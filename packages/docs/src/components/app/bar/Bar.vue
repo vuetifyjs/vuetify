@@ -26,7 +26,7 @@
 
         <app-bar-ecosystem-menu />
 
-        <app-bar-team-link />
+        <app-bar-team-link v-if="lgAndUp" />
 
         <app-bar-playground-link v-if="lgAndUp" />
 
@@ -56,20 +56,20 @@
 
 <script setup>
   // Components
+  import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
-  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
-  import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
+  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppSearch from '@/components/app/search/Search.vue'
   import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
 
