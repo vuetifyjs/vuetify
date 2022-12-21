@@ -1,21 +1,72 @@
 <!-- eslint-disable vue/attribute-hyphenation  -->
 <template>
-  <v-dialog v-model="model" scrollable width="500" height="700" @after-leave="searchString = ''">
+  <v-dialog
+    v-model="model"
+    height="700"
+    scrollable
+    width="500"
+    @after-leave="searchString = ''"
+  >
     <template #activator="{ props }">
-      <v-text-field v-bind="props" readonly variant="solo" :placeholder="placeholder" hide-details />
+      <app-btn
+        :active="model"
+        prepend-icon="mdi-magnify"
+        v-bind="props"
+      >
+        <span class="mr-n1">
+          {{ t('search.label') }}
+
+          <span class="border rounded px-2 py-1 text-disabled text-caption ms-2">{{ t('search.key-hint') }}</span>
+        </span>
+      </app-btn>
     </template>
+
     <v-card height="100%">
+      <v-card-title class="bg-primary d-flex align-centen py-4">
+        {{ t('search.label') }} Vuetify
+
+        <v-spacer />
+
+        <v-btn
+          class="me-n2"
+          icon="mdi-close"
+          size="x-small"
+          variant="text"
+          @click="model = false"
+        />
+      </v-card-title>
+
       <v-text-field
         v-model="searchString"
-        class="flex-grow-0"
-        variant="solo"
+        :placeholder="`${t('search.looking') }...`"
         autofocus
-        :placeholder="t('search.placeholder')"
+        class="flex-grow-0 mx-2"
+        density="comfortable"
         hide-details
+        prepend-inner-icon="mdi-magnify"
+        single-line
+        variant="solo"
       />
 
-      <v-card-text class="pa-0">
+      <v-divider />
+
+      <v-card-text class="pa-4">
+        <div v-if="!searchString" class="mt-16 pt-16 text-center">
+          <v-icon
+            class="mb-6 mx-auto text-disabled"
+            icon="mdi-text-box-search-outline"
+            size="150"
+          />
+
+          <br>
+
+          <v-list-subheader class="d-inline-flex">
+            {{ t('search.results') }}
+          </v-list-subheader>
+        </div>
+
         <ais-instant-search
+          v-else
           :search-client="searchClient"
           :search-function="searchFunction"
           index-name="vuetifyjs-next"
@@ -32,43 +83,37 @@
         </ais-instant-search>
       </v-card-text>
 
-      <AisPoweredBy class="ml-2" />
+      <AisPoweredBy class="ms-auto me-4 mb-2" />
     </v-card>
   </v-dialog>
 </template>
 
 <script setup lang="ts">
-  import algoliasearch from 'algoliasearch'
-  import { computed, onBeforeUnmount, onMounted, ref } from 'vue'
-  import { onBeforeRouteLeave } from 'vue-router'
-  import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify'
-  import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
+  // Components
   import SearchResults from './SearchResults.vue'
+
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
+  // Utilities
+  import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
+  import { onBeforeRouteLeave } from 'vue-router'
+  import { onBeforeUnmount, onMounted, ref } from 'vue'
+  import algoliasearch from 'algoliasearch'
 
   // Types
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
 
   const { t } = useI18n()
-  const { mobile } = useDisplay()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)
   const searchString = ref('')
   const searchClient = algoliasearch(
-    'NHT6C0IV19', // docsearch app ID
-    'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
+    import.meta.env.VITE_DOCSEARCH_APP_ID,
+    import.meta.env.VITE_DOCSEARCH_API_KEY,
   )
 
-  const placeholder = computed(() => {
-    let placeholder = t('search.placeholder')
-
-    if (!mobile.value) {
-      placeholder += ' ' + t('search.key-hint')
-    }
-
-    return placeholder
-  })
   const locale = 'en'
 
   onMounted(() => {

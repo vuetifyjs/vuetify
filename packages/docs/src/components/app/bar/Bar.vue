@@ -7,12 +7,11 @@
     <template #prepend>
       <app-bar-logo />
 
-      <v-app-bar-nav-icon
-        class="hidden-lg-and-up"
+      <v-btn
+        v-if="name !== 'home' && mdAndDown"
+        icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
-
-      <app-bar-releases-menu v-if="smAndUp" />
     </template>
 
     <app-search />
@@ -25,9 +24,11 @@
 
         <app-bar-support-menu />
 
-        <app-bar-team-link />
+        <app-bar-ecosystem-menu />
 
-        <app-bar-playground-link />
+        <app-bar-team-link v-if="lgAndUp" />
+
+        <app-bar-playground-link v-if="lgAndUp" />
 
         <app-bar-sponsor-link />
 
@@ -55,27 +56,29 @@
 
 <script setup>
   // Components
+  import AppBarEcosystemMenu from './EcosystemMenu.vue'
   import AppBarEnterpriseLink from './EnterpriseLink.vue'
-  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppBarJobsLink from './JobsLink.vue'
   import AppBarLanguageMenu from './LanguageMenu.vue'
   import AppBarLearnMenu from './LearnMenu.vue'
   import AppBarLogo from './Logo.vue'
   import AppBarNotificationsMenu from './NotificationsMenu.vue'
   import AppBarPlaygroundLink from './PlaygroundLink.vue'
-  import AppBarReleasesMenu from './ReleasesMenu.vue'
   import AppBarSettingsToggle from './SettingsToggle.vue'
   import AppBarSponsorLink from './SponsorLink.vue'
   import AppBarStoreLink from './StoreLink.vue'
   import AppBarSupportMenu from './SupportMenu.vue'
   import AppBarTeamLink from './TeamLink.vue'
+  import AppBarThemeToggle from './ThemeToggle.vue'
   import AppSearch from '@/components/app/search/Search.vue'
   import AppVerticalDivider from '@/components/app/VerticalDivider.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay } from 'vuetify'
+  import { useRoute } from 'vue-router'
 
   const app = useAppStore()
-  const { smAndUp, mdAndUp } = useDisplay()
+  const { smAndUp, mdAndUp, lgAndUp, mdAndDown } = useDisplay()
+  const { name } = useRoute()
 </script>

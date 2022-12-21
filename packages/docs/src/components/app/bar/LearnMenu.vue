@@ -1,5 +1,5 @@
 <template>
-  <app-btn color="medium-emphasis">
+  <app-btn>
     {{ title }}
 
     <chevron-down />

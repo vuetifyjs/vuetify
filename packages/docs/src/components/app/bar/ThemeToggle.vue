@@ -1,5 +1,5 @@
 <template>
-  <app-tooltip-btn
+  <app-btn
     :icon="icon"
     color="medium-emphasis"
     path="theme"
@@ -8,16 +8,16 @@
 </template>
 
 <script setup>
-  // Components
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-
   // Composables
+  import { useRoute } from 'vue-router'
   import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed } from 'vue'
+  import { gtagClick } from '@/util/analytics'
 
   const user = useUserStore()
+  const { name } = useRoute()
 
   const icon = computed(() => user.theme === 'dark'
     ? 'mdi-weather-night'
@@ -25,6 +25,7 @@
   )
 
   function onClick () {
+    gtagClick('app-bar', 'theme-toggle', name)
     user.theme = user.theme === 'dark' ? 'light' : 'dark'
   }
 </script>
