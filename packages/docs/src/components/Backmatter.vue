@@ -28,7 +28,7 @@
 
     <up-next class="mb-4" />
 
-    <!-- <exit-ad class="mb-8" /> -->
+    <vuetify />
 
     <!-- <contribute /> -->
   </section>
