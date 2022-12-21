@@ -10,36 +10,36 @@ import type { InjectionKey, Ref } from 'vue'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
-    type: Number,
+    type: [Number, String],
     default: 1,
   },
   itemsPerPage: {
-    type: Number,
+    type: [Number, String],
     default: 10,
   },
 }, 'v-data-table-paginate')
 
 const VDataTablePaginationSymbol: InjectionKey<{
-  page: Ref<number>
-  itemsPerPage: Ref<number>
-  startIndex: Ref<number>
-  stopIndex: Ref<number>
-  pageCount: Ref<number>
-  itemsLength: Ref<number>
+  page: Ref<number | string>
+  itemsPerPage: Ref<number | string>
+  startIndex: Ref<number | string>
+  stopIndex: Ref<number | string>
+  pageCount: Ref<number | string>
+  itemsLength: Ref<number | string>
 }> = Symbol.for('vuetify:data-table-pagination')
 
 type PaginationProps = {
-  page: number
+  page: number | string
   'onUpdate:page': ((val: any) => void) | undefined
-  itemsPerPage: number
+  itemsPerPage: number | string
   'onUpdate:itemsPerPage': ((val: any) => void) | undefined
-  itemsLength?: number
+  itemsLength?: number | string
 }
 
 export function createPagination (props: PaginationProps, items: Ref<any[]>) {
-  const page = useProxiedModel(props, 'page')
-  const itemsPerPage = useProxiedModel(props, 'itemsPerPage')
-  const itemsLength = computed(() => props.itemsLength ?? items.value.length)
+  const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
+  const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
+  const itemsLength = computed(() => +(props.itemsLength ?? items.value.length))
 
   const startIndex = computed(() => {
     if (itemsPerPage.value === -1) return 0
@@ -49,6 +49,7 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
   const stopIndex = computed(() => {
     if (itemsPerPage.value === -1) return itemsLength.value
 
+    // eslint-disable-next-line @typescript-eslint/restrict-plus-operands
     return Math.min(itemsLength.value, startIndex.value + itemsPerPage.value)
   })
 
