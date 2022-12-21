@@ -15,7 +15,7 @@ export default {
       activateDescending: 'نشط للترتيب تنازلياً.',
       activateAscending: 'نشط للترتيب تصاعدياً.',
     },
-    sortBy: 'الترتيب حسب',
+    sortBy: 'رتب حسب',
   },
   dataFooter: {
     itemsPerPageText: 'عدد العناصر لكل صفحة:',
@@ -58,7 +58,7 @@ export default {
       next: 'الصفحة التالية',
       previous: 'الصفحة السابقة',
       page: '{0} انتقل إلى الصفحة',
-      currentPage: '{0} الصفحة الحالية هي رقم',
+      currentPage: '{0} الصفحة الحالية رقمها',
     },
   },
   rating: {
