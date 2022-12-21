@@ -17,6 +17,7 @@ import { createPagination, makeDataTablePaginateProps, usePaginatedItems } from 
 import { createSelection, makeDataTableSelectProps } from './composables/select'
 import { createExpanded, makeDataTableExpandProps } from './composables/expand'
 import { useOptions } from './composables/options'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -29,6 +30,11 @@ import type { DataTableItem } from './types'
 export const makeVDataTableProps = propsFactory({
   ...makeDataTableItemProps(),
   ...makeDataTableHeaderProps(),
+  hideNoData: Boolean,
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
   height: [String, Number],
   width: [String, Number],
   fixedHeader: Boolean,
@@ -94,6 +100,13 @@ export const VDataTable = defineComponent({
       pageCount,
       startIndex,
       stopIndex,
+    })
+
+    provideDefaults({
+      VDataTableRows: {
+        hideNoData: toRef(props, 'hideNoData'),
+        noDataText: toRef(props, 'noDataText'),
+      },
     })
 
     useRender(() => (

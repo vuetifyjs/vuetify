@@ -14,6 +14,7 @@ import { createSelection, makeDataTableSelectProps } from './composables/select'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { useOptions } from './composables/options'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utlities
 import { computed, ref, toRef } from 'vue'
@@ -91,6 +92,13 @@ export const VDataTableVirtual = defineComponent({
       stopIndex: computed(() => flatItems.value.length - 1),
       pageCount: ref(1),
       itemsPerPage: ref(-1),
+    })
+
+    provideDefaults({
+      VDataTableRows: {
+        hideNoData: toRef(props, 'hideNoData'),
+        noDataText: toRef(props, 'noDataText'),
+      },
     })
 
     useRender(() => (

@@ -12,6 +12,7 @@ import { createSort, makeDataTableSortProps } from './composables/sort'
 import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
 import { createSelection, makeDataTableSelectProps } from './composables/select'
 import { useOptions } from './composables/options'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { provide, toRef } from 'vue'
@@ -68,6 +69,13 @@ export const VDataTableServer = defineComponent({
     provide('v-data-table', {
       toggleSort,
       sortBy,
+    })
+
+    provideDefaults({
+      VDataTableRows: {
+        hideNoData: toRef(props, 'hideNoData'),
+        noDataText: toRef(props, 'noDataText'),
+      },
     })
 
     useRender(() => (
