@@ -1,6 +1,6 @@
 <template>
   <v-data-table
-    dense
+    density="compact"
     :headers="headers"
     :items="desserts"
     item-key="name"

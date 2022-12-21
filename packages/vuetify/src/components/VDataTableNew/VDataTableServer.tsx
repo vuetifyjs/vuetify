@@ -24,7 +24,11 @@ export const VDataTableServer = defineComponent({
 
   props: {
     color: String,
-    loading: Boolean,
+    loading: [Boolean, String],
+    loadingText: {
+      type: String,
+      default: '$vuetify.dataIterator.loadingText',
+    },
     itemsLength: [Number, String],
 
     ...makeVDataTableProps(),
@@ -75,6 +79,8 @@ export const VDataTableServer = defineComponent({
       VDataTableRows: {
         hideNoData: toRef(props, 'hideNoData'),
         noDataText: toRef(props, 'noDataText'),
+        loading: toRef(props, 'loading'),
+        loadingText: toRef(props, 'loadingText'),
       },
     })
 

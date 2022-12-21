@@ -64,53 +64,43 @@ v-simple-checkbox description -->
 
 ### Props
 
-#### Initial values
+<!-- #### Custom filter
 
-In Vuetify v3, all v-model props are controlled, meaning that if you just use one-way binding with `:prop="prop"`, then the component will only ever use the value sent in. This means that the v2 behaviour of being able to pass an initial value to props like `sort-by` and `items-per-page` is no longer possible.
+You can override the default filtering used with **search** prop by supplying a function to the **custom-filter** prop. If you need to customize the filtering of a specific column, you can supply a function to the **filter** property on header items. The signature is (value: any, search: string | null, item: any) boolean. This function will always be run even if **search** prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied.
 
-Instead you will have to use two-way binding with `v-model:prop="prop"`. The downside of this is that you will need to add variables for each of the props that you want to use, even if you are only passing an initial value. You could also use a single object with your initial values, and pass it with `v-bind`.
+<example file="v-data-table/prop-custom-filter" /> -->
 
-<example file="v-data-table/props-initial" />
+#### Density
 
-<!--
-
-#### Custom filter
-
-You can override the default filtering used with **search** prop by supplying a function to the **custom-filter** prop. If you need to customize the filtering of a specific column, you can supply a function to the **filter** property on header items. The signature is `(value: any, search: string | null, item: any) => boolean`. This function will always be run even if **search** prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied.
-
-<example file="v-data-table/prop-custom-filter" />
-
-#### Dense
-
-Using the **dense** prop you are able to give your data tables an alternate style.
+Using the **density** prop you are able to give your data tables an alternate, more compact, style.
 
 <example file="v-data-table/prop-dense" />
 
-#### Filterable
+<!-- #### Filterable
 
 You can easily disable specific columns from being included when searching through table rows by setting the property **filterable** to false on the header item(s). In the example below the dessert name column is no longer searchable.
 
-<example file="v-data-table/prop-filterable" />
+<example file="v-data-table/prop-filterable" /> -->
 
-#### Footer props
+<!-- #### Footer props
 
 The `v-data-table` renders a default footer using the `v-data-footer` component. You can pass props to this component using **footer-props**.
 
-<example file="v-data-table/prop-footer-props" />
+<example file="v-data-table/prop-footer-props" /> -->
 
-#### Grouping
+<!-- #### Grouping
 
 Using the **group-by** and **group-desc** props you can group rows on an item property. The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button.
 
-<example file="v-data-table/prop-grouping" />
+<example file="v-data-table/prop-grouping" /> -->
 
-#### Hide default header and footer
+<!-- #### Hide default header and footer
 
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
-<example file="v-data-table/prop-hide-header-footer" />
+<example file="v-data-table/prop-hide-header-footer" /> -->
 
-#### Loading
+#### Loading <v-chip size="small">server</v-chip>
 
 You can use the **loading** prop to indicate that data in the table is currently loading. If there is no data in the table, a loading message will also be displayed. This message can be customized using the **loading-text** prop or the `loading` slot.
 
@@ -201,5 +191,3 @@ Sorting can also be controlled externally by using the individual props, or by u
 If you're loading data already paginated and sorted from a backend, you can use the **server-items-length** prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from your backend. Use the **loading** prop to display a progress bar while fetching data.
 
 <example file="v-data-table/misc-server-side-paginate-and-sort" />
-
--->

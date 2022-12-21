@@ -18,6 +18,11 @@ export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
 
   props: {
+    loading: [Boolean, String],
+    loadingText: {
+      type: String,
+      default: '$vuetify.dataIterator.loadingText',
+    },
     hideNoData: Boolean,
     items: {
       type: Array as PropType<InternalDataTableItem[]>,
@@ -37,7 +42,16 @@ export const VDataTableRows = defineComponent({
 
     useRender(() => (
       <>
-        { !props.items.length && !props.hideNoData && (slots['no-data']?.() ?? (
+        { props.loading ? slots.loading?.() ?? (
+          <VDataTableRow
+            class="v-data-table-rows-no-data"
+            key="loading"
+          >
+            { t(props.loadingText) }
+          </VDataTableRow>
+        ) : undefined }
+
+        { !props.loading && !props.items.length && !props.hideNoData && (slots['no-data']?.() ?? (
           <VDataTableRow
             class="v-data-table-rows-no-data"
             key="no-data"
