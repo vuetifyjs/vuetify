@@ -24,10 +24,7 @@ export const VDataTableServer = defineComponent({
   props: {
     color: String,
     loading: Boolean,
-    itemsLength: {
-      type: Number,
-      required: true,
-    },
+    itemsLength: [Number, String],
 
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
