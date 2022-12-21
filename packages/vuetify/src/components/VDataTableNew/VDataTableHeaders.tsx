@@ -68,6 +68,7 @@ export const VDataTableHeaders = defineComponent({
       return (
         <VDataTableColumn
           tag="th"
+          align={ column.align }
           class={[
             'v-data-table__th',
             {
