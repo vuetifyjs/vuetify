@@ -128,7 +128,7 @@ export function filterItems (
 
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
-  items: MaybeRef<InternalItem[]>,
+  items: MaybeRef<T[]>,
   query?: Ref<string | undefined>,
 ) {
   const strQuery = computed(() => (

@@ -160,7 +160,7 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       return model.value.map(v => {
@@ -170,7 +170,7 @@ export const VCombobox = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s === filteredItem.item))
+        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s.value === filteredItem.value))
       }
       return filteredItems.value
     })

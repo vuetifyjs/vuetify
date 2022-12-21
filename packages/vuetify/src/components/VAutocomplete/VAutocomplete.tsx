@@ -128,7 +128,7 @@ export const VAutocomplete = genericComponent<new <
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
-        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s === filteredItem.item))
+        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s.value === filteredItem.value))
       }
       return filteredItems.value
     })
@@ -306,7 +306,7 @@ export const VAutocomplete = genericComponent<new <
 
                     { slots['prepend-item']?.() }
 
-                    { displayItems.value.map((item , index) => slots.item?.({
+                    { displayItems.value.map((item, index) => slots.item?.({
                       item,
                       index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
