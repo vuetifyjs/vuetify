@@ -111,7 +111,7 @@ export const VDataTableVirtual = defineComponent({
         fixedHeader={ props.fixedHeader }
       >
         {{
-          top: slots.head,
+          top: slots.top,
           wrapper: () => (
             <div
               ref={ containerRef }
@@ -146,7 +146,7 @@ export const VDataTableVirtual = defineComponent({
               </table>
             </div>
           ),
-          bottom: slots.footer,
+          bottom: slots.bottom,
         }}
       </VTable>
     ))
