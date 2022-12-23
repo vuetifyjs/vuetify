@@ -7,7 +7,7 @@
     <app-menu
       :items="items"
       activator="parent"
-      min-width="180"
+      width="200"
     />
   </app-btn>
 </template>
@@ -25,28 +25,65 @@
 
   const { t } = useI18n()
   const items = computed(() => ([
+    { subheader: t('social') },
+    {
+      title: 'Discord',
+      href: 'https://community.vuetifyjs.com/',
+      appendIcon: 'mdi-discord',
+    },
+    {
+      title: 'github',
+      href: 'https://github.com/vuetifyjs/vuetify',
+      appendIcon: 'mdi-github',
+    },
+    {
+      title: 'twitter',
+      href: 'https://twitter.com/vuetifyjs',
+      appendIcon: 'mdi-twitter',
+    },
+    {
+      title: 'reddit',
+      href: 'https://reddit.com/r/vuetifyjs',
+      appendIcon: 'mdi-reddit',
+    },
+    { divider: true },
+    { subheader: t('tools') },
+    {
+      title: 'jobs',
+      to: rpath('/resources/jobs-for-vue/'),
+      appendIcon: 'mdi-school',
+    },
+    {
+      title: 'themes',
+      href: 'https://store.vuetifyjs.com/collections/vuetify-3',
+      appendIcon: 'mdi-shopping',
+    },
+    {
+      title: 'ui-kits',
+      to: rpath('/resources/ui-kits/'),
+      appendIcon: 'mdi-palette',
+    },
+    {
+      title: 'playground',
+      href: 'https://playground.vuetifyjs.com/',
+      appendIcon: 'mdi-play-circle',
+    },
+    { divider: true },
     { subheader: t('documentation') },
     {
       title: '3.0.x (next)',
       href: 'https://v3.vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-3-box',
     },
     {
       title: '2.6.x (latest)',
       href: 'https://vuetifyjs.com/',
+      appendIcon: 'mdi-numeric-2-box',
     },
     {
       title: '1.5.x (stable)',
       href: 'https://v15.vuetifyjs.com/',
-    },
-    { divider: true },
-    { subheader: t('releases') },
-    {
-      title: 'release-notes',
-      to: rpath('/getting-started/release-notes/'),
-    },
-    {
-      title: 'github-releases',
-      href: 'https://github.com/vuetifyjs/vuetify/releases',
+      appendIcon: 'mdi-numeric-1-box',
     },
   ]))
 </script>

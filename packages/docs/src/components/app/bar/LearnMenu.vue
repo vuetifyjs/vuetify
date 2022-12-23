@@ -4,7 +4,11 @@
 
     <chevron-down />
 
-    <app-menu :items="items" activator="parent" />
+    <app-menu
+      :items="items"
+      activator="parent"
+      width="200"
+    />
   </app-btn>
 </template>
 
@@ -17,6 +21,7 @@
 
   // Utilities
   import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
   const title = t('learn')
@@ -24,22 +29,18 @@
     { subheader: t('documentation') },
     {
       title: t('feature-guides'),
-      to: {
-        name: 'introduction-why-vuetify',
-        hash: '#feature-guides',
-      },
+      to: rpath('/introduction/why-vuetify/#feature-guides'),
+      appendIcon: 'mdi-star-circle-outline',
     },
     {
       title: t('roadmap'),
-      to: {
-        name: 'introduction-roadmap',
-      },
+      to: rpath('/introduction/roadmap/'),
+      appendIcon: 'mdi-road-variant',
     },
     {
       title: t('components'),
-      to: {
-        name: 'components-all',
-      },
+      to: rpath('/components/all/'),
+      appendIcon: 'mdi-view-dashboard',
     },
   ]))
 </script>

@@ -47,6 +47,7 @@
 
   export type Item = {
     title?: string
+    appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
     items?: (string | Item)[]
@@ -129,6 +130,7 @@
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
+      appendIcon: item.appendIcon,
     }
   }))
 </script>

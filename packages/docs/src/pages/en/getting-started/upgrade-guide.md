@@ -1,5 +1,5 @@
 ---
-nav: Upgrade Guide
+nav: Upgrade guide
 meta:
   title: Guide to upgrading Vuetify
   description: Detailed instruction on how to upgrade Vuetify to 3.0
