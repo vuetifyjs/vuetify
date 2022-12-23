@@ -10,13 +10,23 @@
     <template #activator="{ props }">
       <app-btn
         :active="model"
-        prepend-icon="mdi-magnify"
+        :icon="xs ? 'mdi-magnify' : undefined"
+        :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
         v-bind="props"
       >
-        <span class="mr-n1">
-          {{ t('search.label') }}
+        <span :class="mdAndUp && 'mr-n1'">
+          <span v-if="smAndUp">
+            {{ t('search.label') }}
+          </span>
 
-          <span class="border rounded px-2 py-1 text-disabled text-caption ms-2">{{ t('search.key-hint') }}</span>
+          <span
+            :class="[
+              mdAndDown ? 'border-opacity-0' : 'py-1 px-2 ms-2',
+              'border rounded text-disabled text-caption'
+            ]"
+          >
+            <span v-if="lgAndUp">{{ t('search.key-hint') }}</span>
+          </span>
         </span>
       </app-btn>
     </template>
@@ -93,6 +103,7 @@
   import SearchResults from './SearchResults.vue'
 
   // Composables
+  import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
@@ -105,6 +116,7 @@
   import type { AlgoliaSearchHelper } from 'algoliasearch-helper'
 
   const { t } = useI18n()
+  const { smAndUp, mdAndUp, xs, lgAndUp, mdAndDown } = useDisplay()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)

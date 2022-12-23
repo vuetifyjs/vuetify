@@ -78,7 +78,7 @@
               :ripple="false"
               class="py-2"
             >
-              <v-list-item-title class="text-wrap text-h6 mb-1">
+              <v-list-item-title class="text-wrap text-h6 mb-1 text-truncate">
                 <span>{{ notification.metadata.emoji }}</span>
 
                 <span class="ps-3"> {{ notification.title }}</span>

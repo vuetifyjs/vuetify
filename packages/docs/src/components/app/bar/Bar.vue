@@ -12,11 +12,9 @@
         icon="mdi-menu"
         @click="app.drawer = !app.drawer"
       />
+
+      <app-search />
     </template>
-
-    <app-search />
-
-    <v-spacer />
 
     <template #append>
       <template v-if="mdAndUp">
@@ -33,9 +31,9 @@
         <app-bar-sponsor-link />
 
         <app-bar-enterprise-link />
-
-        <app-vertical-divider />
       </template>
+
+      <app-vertical-divider />
 
       <app-bar-theme-toggle />
 
@@ -43,7 +41,7 @@
 
       <app-bar-store-link />
 
-      <app-bar-jobs-link />
+      <app-bar-jobs-link v-if="lgAndUp" />
 
       <app-bar-notifications-menu />
 
