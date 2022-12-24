@@ -220,8 +220,6 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
-          VITE_DOCSEARCH_APP_ID: ${{ secrets.DOCSEARCH_APP_ID }}
-          VITE_DOCSEARCH_API_KEY: ${{ secrets.DOCSEARCH_API_KEY }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

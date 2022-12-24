@@ -122,8 +122,8 @@
   const model = ref(false)
   const searchString = ref('')
   const searchClient = algoliasearch(
-    import.meta.env.VITE_DOCSEARCH_APP_ID,
-    import.meta.env.VITE_DOCSEARCH_API_KEY,
+    'NHT6C0IV19', // docsearch app ID
+    'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
   )
 
   const locale = 'en'
