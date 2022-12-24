@@ -28,14 +28,15 @@
 
     <up-next class="mb-4" />
 
-    <vuetify />
+    <vuetify class="mb-6" />
 
-    <!-- <contribute /> -->
+    <contribute />
   </section>
 </template>
 
 <script setup>
   // Components
+  import Contribute from '@/components/doc/Contribute.vue'
   import RelatedPages from '@/components/doc/RelatedPages.vue'
   import UpNext from '@/components/doc/UpNext.vue'
 
