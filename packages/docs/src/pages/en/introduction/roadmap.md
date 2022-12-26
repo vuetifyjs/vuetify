@@ -34,6 +34,8 @@ The following releases are currently under development:
 - **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state. Tentative list of components to be released:
   - `v-data-table`
   - `v-date-picker`
+- **Up Next:**
+  - `v-calendar`
 
 <promoted-ad slug="vuetify-github-sponsors" />
 
