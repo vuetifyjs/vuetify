@@ -3,7 +3,7 @@
     :group-by="groupBy"
     :headers="headers"
     :items="desserts"
-    :sort-by="['name']"
+    :sort-by="[{ key: 'name', order: 'asc' }]"
     class="elevation-1"
     item-key="name"
   ></v-data-table>

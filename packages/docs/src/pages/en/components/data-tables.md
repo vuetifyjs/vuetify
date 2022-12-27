@@ -58,12 +58,7 @@ The virtual variant of the data table relies, like the standard variant, on all 
 
 You can override the default filtering used with **search** prop by supplying a function to the **custom-filter** prop. If you need to customize the filtering of a specific column, you can supply a function to the **filter** property on header items. The signature is (value: any, search: string | null, item: any) boolean. This function will always be run even if **search** prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied.
 
-<example file="v-data-table/prop-custom-filter" /> -->
-
-#### Density
-
-Using the **density** prop you are able to give your data tables an alternate, more compact, style.
-<example file="v-data-table/props-initial" />
+<example file="v-data-table/props-initial" /> -->
 
 #### Custom filter
 
@@ -93,7 +88,7 @@ The `v-data-table` renders a default footer using the `v-data-footer` component.
 
 Using the **group-by** and **group-desc** props you can group rows on an item property.
 
-<!-- The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button. -->
+The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button.
 
 <example file="v-data-table/prop-grouping" /> -->
 
@@ -172,11 +167,11 @@ When wanting to use a checkbox component inside of a slot template in your data 
 
 <example file="v-data-table/misc-crud" />
 
-#### Edit dialog
+<!-- #### Edit dialog
 
 The `v-edit-dialog` component can be used for editing data directly within a `v-data-table`. You can block the closing of the `v-edit-dialog` when clicked outside by adding the **persistent** prop.
 
-<example file="v-data-table/misc-edit-dialog" />
+<example file="v-data-table/misc-edit-dialog" /> -->
 
 #### Expandable rows
 

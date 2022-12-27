@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    sort-by="calories"
+    :sort-by="[{ key: 'calories', order: 'asc' }]"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -20,13 +20,12 @@
           v-model="dialog"
           max-width="500px"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-btn
               color="primary"
               dark
               class="mb-2"
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
             >
               New Item
             </v-btn>

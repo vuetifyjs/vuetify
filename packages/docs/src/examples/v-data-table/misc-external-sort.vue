@@ -2,7 +2,6 @@
   <div>
     <v-data-table
       v-model:sort-by="sortBy"
-      v-model:sort-desc="sortDesc"
       :headers="headers"
       :items="desserts"
       class="elevation-1"
@@ -29,8 +28,7 @@
   export default {
     data () {
       return {
-        sortBy: 'fat',
-        sortDesc: false,
+        sortBy: [{ key: 'fat', order: 'asc' }],
         headers: [
           {
             text: 'Dessert (100g serving)',
@@ -134,7 +132,7 @@
       nextSort () {
         let index = this.headers.findIndex(h => h.value === this.sortBy)
         index = (index + 1) % this.headers.length
-        this.sortBy = this.headers[index].value
+        this.sortBy = [{ key: this.headers[index].value, order: 'asc' }]
       },
     },
   }
