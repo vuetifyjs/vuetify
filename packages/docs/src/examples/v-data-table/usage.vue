@@ -20,11 +20,11 @@
             sortable: false,
             id: 'name',
           },
-          { title: 'Calories', id: 'calories' },
-          { title: 'Fat (g)', id: 'fat' },
-          { title: 'Carbs (g)', id: 'carbs' },
-          { title: 'Protein (g)', id: 'protein' },
-          { title: 'Iron (%)', id: 'iron' },
+          { title: 'Calories', align: 'end', id: 'calories' },
+          { title: 'Fat (g)', align: 'end', id: 'fat' },
+          { title: 'Carbs (g)', align: 'end', id: 'carbs' },
+          { title: 'Protein (g)', align: 'end', id: 'protein' },
+          { title: 'Iron (%)', align: 'end', id: 'iron' },
         ],
         desserts: [
           {

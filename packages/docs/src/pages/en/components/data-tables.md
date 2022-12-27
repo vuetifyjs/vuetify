@@ -14,7 +14,7 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-<entry />
+<!-- <entry /> -->
 
 ## Usage
 
@@ -40,31 +40,21 @@ The virtual variant of the data table relies, like the standard variant, on all 
 
 ## API
 
-<api-inline />
-
-<!-- ## Sub-components
-
-### v-data-table-header
-
-v-data-table-header description
-
-### v-data-footer
-
-v-data-footer description
-
-### v-edit-dialog
-
-v-edit-dialog description
-
-### v-simple-checkbox
-
-v-simple-checkbox description -->
+| Component | Description |
+| - | - |
+| [v-data-table](/api/v-data-table/) | Primary Component |
+| [v-data-table-server](/api/v-data-table-server/) | Specialized Data-table for displaying results from a server |
+| [v-data-table-virtual](/api/v-data-table-virtual/) | Data-table with built in row virtualization |
+| [v-data-table-header](/api/v-data-table-header/) | Functional Component used to display Data-table headers |
+| [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
+| [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 ## Examples
 
 ### Props
 
-<!-- #### Custom filter
+<!--
+#### Initial values
 
 You can override the default filtering used with **search** prop by supplying a function to the **custom-filter** prop. If you need to customize the filtering of a specific column, you can supply a function to the **filter** property on header items. The signature is (value: any, search: string | null, item: any) boolean. This function will always be run even if **search** prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied.
 
@@ -73,6 +63,17 @@ You can override the default filtering used with **search** prop by supplying a 
 #### Density
 
 Using the **density** prop you are able to give your data tables an alternate, more compact, style.
+<example file="v-data-table/props-initial" />
+
+#### Custom filter
+
+You can override the default filtering used with **search** prop by supplying a function to the **custom-filter** prop. If you need to customize the filtering of a specific column, you can supply a function to the **filter** property on header items. The signature is `(value: any, search: string | null, item: any) => boolean`. This function will always be run even if **search** prop has not been provided. Thus you need to make sure to exit early with a value of `true` if filter should not be applied.
+
+<example file="v-data-table/prop-custom-filter" />
+
+#### Density
+
+Using the **dense** prop you are able to give your data tables an alternate style.
 
 <example file="v-data-table/prop-dense" />
 
@@ -90,7 +91,9 @@ The `v-data-table` renders a default footer using the `v-data-footer` component.
 
 <!-- #### Grouping
 
-Using the **group-by** and **group-desc** props you can group rows on an item property. The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button.
+Using the **group-by** and **group-desc** props you can group rows on an item property.
+
+<!-- The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button. -->
 
 <example file="v-data-table/prop-grouping" /> -->
 
@@ -99,6 +102,13 @@ Using the **group-by** and **group-desc** props you can group rows on an item pr
 You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
 
 <example file="v-data-table/prop-hide-header-footer" /> -->
+<!--
+#### Hide default header and footer
+
+You can apply the **hide-default-header** and **hide-default-footer** props to remove the default header and footer respectively.
+
+<example file="v-data-table/prop-hide-header-footer" />
+-->
 
 #### Loading <v-chip size="small">server</v-chip>
 

@@ -6,6 +6,7 @@
     :items="serverItems"
     :loading="loading"
     class="elevation-1"
+    item-title="name"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>
@@ -129,11 +130,11 @@
           sortable: false,
           id: 'name',
         },
-        { title: 'Calories', id: 'calories', align: 'right' },
-        { title: 'Fat (g)', id: 'fat', align: 'right' },
-        { title: 'Carbs (g)', id: 'carbs', align: 'right' },
-        { title: 'Protein (g)', id: 'protein', align: 'right' },
-        { title: 'Iron (%)', id: 'iron', align: 'right' },
+        { title: 'Calories', id: 'calories', align: 'end' },
+        { title: 'Fat (g)', id: 'fat', align: 'end' },
+        { title: 'Carbs (g)', id: 'carbs', align: 'end' },
+        { title: 'Protein (g)', id: 'protein', align: 'end' },
+        { title: 'Iron (%)', id: 'iron', align: 'end' },
       ],
       serverItems: [],
       loading: true,
