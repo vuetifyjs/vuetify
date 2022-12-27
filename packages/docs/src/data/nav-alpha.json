@@ -81,7 +81,22 @@
       "carousels",
       "chips",
       "color-pickers",
-      "data-tables",
+      {
+        "title": "data-tables",
+        "subfolder": "true",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "basics",
+          "headers",
+          "sorting",
+          "pagination",
+          "filtering",
+          "grouping",
+          "virtual-tables",
+          "server-side-tables"
+        ]
+      },
       "dividers",
       "expansion-panels",
       {

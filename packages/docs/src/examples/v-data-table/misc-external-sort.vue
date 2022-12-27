@@ -31,15 +31,15 @@
         sortBy: [{ key: 'fat', order: 'asc' }],
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
-            value: 'name',
+            id: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', id: 'calories' },
+          { title: 'Fat (g)', id: 'fat' },
+          { title: 'Carbs (g)', id: 'carbs' },
+          { title: 'Protein (g)', id: 'protein' },
+          { title: 'Iron (%)', id: 'iron' },
         ],
         desserts: [
           {
@@ -127,12 +127,12 @@
     },
     methods: {
       toggleOrder () {
-        this.sortDesc = !this.sortDesc
+        this.sortBy = [{ key: this.sortBy[0].key, order: this.sortBy[0].order === 'asc' ? 'desc' : 'asc' }]
       },
       nextSort () {
-        let index = this.headers.findIndex(h => h.value === this.sortBy)
+        let index = this.headers.findIndex(h => h.id === this.sortBy[0].key)
         index = (index + 1) % this.headers.length
-        this.sortBy = [{ key: this.headers[index].value, order: 'asc' }]
+        this.sortBy = [{ key: this.headers[index].id, order: 'asc' }]
       },
     },
   }

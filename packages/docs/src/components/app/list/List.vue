@@ -54,6 +54,7 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
+    subfolder?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -87,9 +88,10 @@
         type: 'subheader',
       }
     } else if (item.items) {
+      const p = item.subfolder ? `${path}/${item.title}` : path
       return {
         title: t(item.title!),
-        children: item.items.map(item => generateListItem(item, path, locale, t)),
+        children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
 
@@ -112,6 +114,8 @@
 
   const { t, te, locale } = useI18n()
   const opened = ref<string[]>([])
+
+  console.log(routes)
 
   const computedItems = computed(() => props.items?.map(item => {
     if (item.divider || item.subheader) return generateListItem(item)
