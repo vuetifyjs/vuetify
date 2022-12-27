@@ -9,6 +9,12 @@ related:
   - /getting-started/browser-support/
 ---
 
+<alert type="error">
+
+  You are viewing documentation for **Vuetify 2**. For instructions on installing **Vuetify 3**, navigate to the [Version 3 Installation Guide](https://next.vuetifyjs.com/getting-started/installation/)
+
+</alert>
+
 # Installation
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
@@ -16,12 +22,6 @@ Get started with Vuetify, the world’s most popular Vue.js framework for buildi
 <entry-ad />
 
 ## Vue CLI Install
-
-<alert type="error">
-
-  The current version of Vuetify does not support Vue 3. Support for Vue 3 will come with the release of [Vuetify v3](/introduction/roadmap/#v30-titan). When creating a new project, please ensure you selected Vue 2 from the Vue CLI prompts, or that you are installing to an existing Vue 2 project.
-
-</alert>
 
 <alert type="warning">
 

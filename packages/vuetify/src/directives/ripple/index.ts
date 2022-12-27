@@ -139,7 +139,7 @@ const ripples = {
           delete el.dataset.previousPosition
         }
 
-        animation.parentNode && el.removeChild(animation.parentNode)
+        if (animation.parentNode?.parentNode === el) el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
   },

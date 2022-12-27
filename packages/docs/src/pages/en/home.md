@@ -21,14 +21,10 @@ Thank you to our special sponsor:
 <sponsor height="70" slug="teamwork" />
 
 <br>
-<br>
-<br>
 
 ## Project Sponsors
 
-The continued development and maintenance of Vuetify
-<br>
-is made possible by these generous sponsors:
+The continued development and maintenance of Vuetify is made possible by these generous sponsors:
 
 <br>
 

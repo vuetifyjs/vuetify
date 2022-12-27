@@ -27,7 +27,7 @@
     "changelog": "conventional-changelog -u -p vuetify"
   },
   "engines": {
-    "node": ">=12",
+    "node": ">=12 <18",
     "yarn": "^1.19"
   },
   "devDependencies": {

@@ -21,7 +21,8 @@
             :key="sponsor.slug"
             :md="sponsor.metadata.tier > 1 ? 3 : 5"
             class="d-flex align-center justify-center"
-            cols="auto"
+            sm="auto"
+            cols="6"
           >
             <sponsor
               :comfortable="comfortable || Number(sponsor.metadata.tier) === 2"
