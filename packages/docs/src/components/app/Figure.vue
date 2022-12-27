@@ -11,7 +11,7 @@
 
     <figcaption
       v-if="caption"
-      class="text-caption font-weight-bold text-center text-capitalize font-italic"
+      class="text-caption font-weight-bold text-center text-capitalize text-medium-emphasis"
       v-text="caption"
     />
 
