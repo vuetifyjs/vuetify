@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, toRef } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
@@ -49,6 +49,7 @@ export const makeVListGroupProps = propsFactory({
   subgroup: Boolean,
   title: String,
   value: null,
+  lazy: Boolean,
 
   ...makeComponentProps(),
   ...makeTagProps(),
@@ -64,6 +65,16 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
     const { isBooted } = useSsrBoot()
+
+    const rendered = ref(!props.lazy || isOpen.value) // If not lazy or displayed, render instantly
+    if (!rendered.value) { // If not rendered, watch when we'll need to
+      const stopWatch = watch(isOpen, open => {
+        if (open) {
+          rendered.value = true
+          stopWatch() // No need to keep watching
+        }
+      })
+    }
 
     function onClick (e: Event) {
       open(!isOpen.value, e)
@@ -113,7 +124,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
 
         <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
           <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { slots.default?.() }
+            { rendered.value && slots.default?.() }
           </div>
         </MaybeTransition>
       </props.tag>

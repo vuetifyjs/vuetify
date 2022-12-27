@@ -125,3 +125,9 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
 
 <example file="v-list/misc-action-and-item-groups" />
+
+#### Lazy rendering
+
+A big list rendered instantly using *lazy* option.
+
+<example file="v-list/misc-lazy-rendering" />
