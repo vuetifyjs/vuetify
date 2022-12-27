@@ -43,7 +43,7 @@ export const VDataTableGroupHeaderRow = defineComponent({
         }}
       >
         { columns.value.map(column => {
-          if (column.id === 'data-table-group') {
+          if (column.key === 'data-table-group') {
             const icon = opened.value.has(props.item.id) ? '$expand' : '$next'
             const onClick = () => toggleGroup(props.item.id)
 
@@ -61,7 +61,7 @@ export const VDataTableGroupHeaderRow = defineComponent({
             )
           }
 
-          if (column.id === 'data-table-select') {
+          if (column.key === 'data-table-select') {
             const modelValue = isSelected(rows.value)
             const indeterminate = isSomeSelected(rows.value) && !modelValue
             const selectGroup = (v: boolean) => select(rows.value, v)

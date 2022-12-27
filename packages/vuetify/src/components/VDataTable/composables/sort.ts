@@ -73,7 +73,7 @@ export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonl
   // TODO: Put this in separate prop customKeySort to match filter composable?
   const customSorters = computed(() => {
     return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
-      if (item.sort) obj[item.id] = item.sort
+      if (item.sort) obj[item.key] = item.sort
 
       return obj
     }, {})

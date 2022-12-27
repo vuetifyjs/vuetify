@@ -47,20 +47,20 @@ export function createHeaders (
     const defaultActionHeader = { ...defaultHeader, width: 48 }
 
     if (options?.groupBy?.value.length) {
-      const index = flat.findIndex(({ column }) => column.id === 'data-table-group')
-      if (index < 0) flat.unshift({ column: { ...defaultHeader, id: 'data-table-group', title: 'Group', rowspan: rowCount }, row: 0 })
+      const index = flat.findIndex(({ column }) => column.key === 'data-table-group')
+      if (index < 0) flat.unshift({ column: { ...defaultHeader, key: 'data-table-group', title: 'Group', rowspan: rowCount }, row: 0 })
       else flat.splice(index, 1, { column: { ...defaultHeader, ...flat[index].column }, row: flat[index].row })
     }
 
     if (options?.showSelect?.value) {
-      const index = flat.findIndex(({ column }) => column.id === 'data-table-select')
-      if (index < 0) flat.unshift({ column: { ...defaultActionHeader, id: 'data-table-select', rowspan: rowCount }, row: 0 })
+      const index = flat.findIndex(({ column }) => column.key === 'data-table-select')
+      if (index < 0) flat.unshift({ column: { ...defaultActionHeader, key: 'data-table-select', rowspan: rowCount }, row: 0 })
       else flat.splice(index, 1, { column: { ...defaultActionHeader, ...flat[index].column }, row: flat[index].row })
     }
 
     if (options?.showExpand?.value) {
-      const index = flat.findIndex(({ column }) => column.id === 'data-table-expand')
-      if (index < 0) flat.push({ column: { ...defaultActionHeader, id: 'data-table-expand', rowspan: rowCount }, row: 0 })
+      const index = flat.findIndex(({ column }) => column.key === 'data-table-expand')
+      if (index < 0) flat.push({ column: { ...defaultActionHeader, key: 'data-table-expand', rowspan: rowCount }, row: 0 })
       else flat.splice(index, 1, { column: { ...defaultActionHeader, ...flat[index].column }, row: flat[index].row })
     }
 
@@ -69,14 +69,14 @@ export function createHeaders (
 
     let count = 0
     flat.forEach(({ column, row }) => {
-      const id = column.id ?? `data-table-column-${count++}`
+      const id = column.key ?? `data-table-column-${count++}`
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
-          id,
+          key: id,
           fixedOffset:
           fixedOffsets[i],
-          sortable: column.sortable ?? !!column.id,
+          sortable: column.sortable ?? !!column.key,
         })
 
         fixedOffsets[i] += column.width ?? 0
@@ -96,8 +96,8 @@ export function createHeaders (
     headers.value = fixedRows.map(row => {
       const filtered = []
       for (const column of row) {
-        if (!seen.has(column.id)) {
-          seen.add(column.id)
+        if (!seen.has(column.key)) {
+          seen.add(column.key)
           filtered.push(column)
         }
       }

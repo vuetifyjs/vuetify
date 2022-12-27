@@ -129,22 +129,22 @@
             title: 'Dessert (100g serving)',
             align: 'start',
             sortable: false,
-            id: 'name',
+            key: 'name',
           },
           {
             title: 'Calories',
             align: 'end',
-            id: 'calories',
+            key: 'calories',
             filter: value => {
               if (!this.calories) return true
 
               return value < parseInt(this.calories)
             },
           },
-          { title: 'Fat (g)', align: 'end', id: 'fat' },
-          { title: 'Carbs (g)', align: 'end', id: 'carbs' },
-          { title: 'Protein (g)', align: 'end', id: 'protein' },
-          { title: 'Iron (%)', align: 'end', id: 'iron' },
+          { title: 'Fat (g)', align: 'end', key: 'fat' },
+          { title: 'Carbs (g)', align: 'end', key: 'carbs' },
+          { title: 'Protein (g)', align: 'end', key: 'protein' },
+          { title: 'Iron (%)', align: 'end', key: 'iron' },
         ]
       },
     },

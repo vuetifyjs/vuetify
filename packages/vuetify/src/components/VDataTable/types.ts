@@ -4,7 +4,7 @@ import type { SelectItemKey } from '@/util'
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
 export type DataTableHeader = {
-  id: string
+  key: string
   value?: SelectItemKey
   title: string
 

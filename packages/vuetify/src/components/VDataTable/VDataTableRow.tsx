@@ -46,13 +46,13 @@ export const VDataTableRow = defineComponent({
             fixed={ column.fixed }
             fixedOffset={ column.fixedOffset }
             lastFixed={ column.lastFixed }
-            noPadding={ column.id === 'data-table-select' || column.id === 'data-table-expand' }
+            noPadding={ column.key === 'data-table-select' || column.key === 'data-table-expand' }
             width={ column.width }
           >
             {{
               default: () => {
                 const item = props.item!
-                const slotName = `item.${column.id}`
+                const slotName = `item.${column.key}`
                 const slotProps = {
                   item: props.item,
                   columns: columns.value,
@@ -64,7 +64,7 @@ export const VDataTableRow = defineComponent({
 
                 if (slots[slotName]) return slots[slotName]!(slotProps)
 
-                if (column.id === 'data-table-select') {
+                if (column.key === 'data-table-select') {
                   return slots['item.data-table-select']?.(slotProps) ?? (
                     <VCheckboxBtn
                       modelValue={ isSelected([item]) }
@@ -73,7 +73,7 @@ export const VDataTableRow = defineComponent({
                   )
                 }
 
-                if (column.id === 'data-table-expand') {
+                if (column.key === 'data-table-expand') {
                   return slots['item.data-table-expand']?.(slotProps) ?? (
                     <VBtn
                       icon={isExpanded(item) ? '$collapse' : '$expand' }
@@ -84,7 +84,7 @@ export const VDataTableRow = defineComponent({
                   )
                 }
 
-                return item.columns[column.id]
+                return item.columns[column.key]
               },
             }}
           </VDataTableColumn>

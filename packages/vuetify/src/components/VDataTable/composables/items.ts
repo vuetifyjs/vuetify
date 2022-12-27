@@ -26,7 +26,7 @@ export function useDataTableItems (props: ItemProps, columns: Ref<InternalDataTa
       ...item,
       type: 'item',
       columns: columns.value.reduce((obj, column) => {
-        obj[column.id] = getPropertyFromItem(item.raw, column.value ?? column.id)
+        obj[column.key] = getPropertyFromItem(item.raw, column.value ?? column.key)
         return obj
       }, {} as Record<string, unknown>),
     }

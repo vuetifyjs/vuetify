@@ -64,8 +64,8 @@ export const VDataTableHeaders = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
-      const isSorted = !!sortBy.value.find(x => x.key === column.id)
-      const noPadding = column.id === 'data-table-select' || column.id === 'data-table-expand'
+      const isSorted = !!sortBy.value.find(x => x.key === column.key)
+      const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
 
       return (
         <VDataTableColumn
@@ -86,13 +86,13 @@ export const VDataTableHeaders = defineComponent({
           }}
           colspan={column.colspan}
           rowspan={column.rowspan}
-          onClick={column.sortable ? () => toggleSort(column.id) : undefined}
+          onClick={column.sortable ? () => toggleSort(column.key) : undefined}
           lastFixed={column.lastFixed}
           noPadding={noPadding}
         >
           {{
             default: () => {
-              const slotName = `header.${column.id}`
+              const slotName = `header.${column.key}`
               const slotProps = {
                 column,
                 selectAll,
@@ -100,7 +100,7 @@ export const VDataTableHeaders = defineComponent({
 
               if (slots[slotName]) return slots[slotName]!(slotProps)
 
-              if (column.id === 'data-table-select') {
+              if (column.key === 'data-table-select') {
                 return slots['header.data-table-select']?.(slotProps) ?? (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
@@ -117,7 +117,7 @@ export const VDataTableHeaders = defineComponent({
                     <VIcon
                       key="icon"
                       class="v-data-table-header__sort-icon"
-                      icon={ getSortIcon(column.id) }
+                      icon={ getSortIcon(column.key) }
                     />
                   )}
                   { props.multiSort && isSorted && (
@@ -129,7 +129,7 @@ export const VDataTableHeaders = defineComponent({
                       ]}
                       style={backgroundColorStyles.value}
                     >
-                      {sortBy.value.findIndex(x => x.key === column.id) + 1}
+                      {sortBy.value.findIndex(x => x.key === column.key) + 1}
                     </div>
                   ) }
                 </div>
