@@ -90,3 +90,5 @@ export const VDataTableRows = defineComponent({
     return {}
   },
 })
+
+export type VDataTableRows = InstanceType<typeof VDataTableRows>

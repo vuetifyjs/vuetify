@@ -1,6 +1,6 @@
 // Components
-import { VBtn } from '../VBtn'
-import { VCheckboxBtn } from '../VCheckbox'
+import { VBtn } from '@/components/VBtn'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables

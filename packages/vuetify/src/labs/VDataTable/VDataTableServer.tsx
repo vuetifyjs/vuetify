@@ -135,3 +135,5 @@ export const VDataTableServer = defineComponent({
     ))
   },
 })
+
+export type VDataTableServer = InstanceType<typeof VDataTableServer>

@@ -1,6 +1,6 @@
 // Components
-import { VBtn } from '../VBtn'
-import { VCheckboxBtn } from '../VCheckbox'
+import { VBtn } from '@/components/VBtn'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 
 // Composables
 import { useExpanded } from './composables/expand'
@@ -93,3 +93,5 @@ export const VDataTableRow = defineComponent({
     ))
   },
 })
+
+export type VDataTableRow = InstanceType<typeof VDataTableRow>

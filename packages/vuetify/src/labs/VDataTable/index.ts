@@ -1,6 +1,5 @@
 export { VDataTable } from './VDataTable'
 export { VDataTableRows } from './VDataTableRows'
 export { VDataTableRow } from './VDataTableRow'
-export { VDataTableColumn } from './VDataTableColumn'
 export { VDataTableVirtual } from './VDataTableVirtual'
 export { VDataTableServer } from './VDataTableServer'
