@@ -116,8 +116,6 @@
   const { t, te, locale } = useI18n()
   const opened = ref<string[]>([])
 
-  console.log(routes)
-
   const computedItems = computed(() => props.items?.map(item => {
     if (item.divider || item.subheader) return generateListItem(item)
 
