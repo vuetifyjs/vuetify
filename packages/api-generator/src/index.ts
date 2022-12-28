@@ -1,7 +1,9 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { components } from 'vuetify/dist/vuetify.js'
-import { components as componentsInfo } from 'vuetify/dist/json/importMap.json'
+import { components as _components } from 'vuetify/dist/vuetify.js'
+import { components as labsComponents } from 'vuetify/dist/vuetify-labs.js'
+import { components as _componentsInfo } from 'vuetify/dist/json/importMap.json'
+import { components as labsComponentsInfo } from 'vuetify/dist/json/importMap-labs.json'
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
@@ -34,6 +36,15 @@ const yar = yargs(process.argv.slice(2))
   .option('missing-descriptions', {
     type: 'boolean',
   })
+
+const components = {
+  ..._components,
+  ...labsComponents,
+}
+const componentsInfo = {
+  ..._componentsInfo,
+  ...labsComponentsInfo,
+}
 
 const run = async () => {
   const argv = await yar.argv

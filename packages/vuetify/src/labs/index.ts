@@ -1,1 +1,5 @@
-export * from '../components/VDataTable'
+import * as components from './components'
+
+export {
+  components,
+}
