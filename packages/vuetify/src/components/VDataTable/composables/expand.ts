@@ -1,14 +1,21 @@
 // Utilities
-import { inject, provide, ref, toRef } from 'vue'
+import { inject, provide, toRef } from 'vue'
 import { propsFactory } from '@/util'
 
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Types
-import type { InjectionKey, Ref } from 'vue'
+import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItem } from '../types'
 
 export const makeDataTableExpandProps = propsFactory({
   expandOnClick: Boolean,
   showExpand: Boolean,
+  expanded: {
+    type: Array as PropType<string[]>,
+    default: () => ([]),
+  },
 }, 'v-data-table-expand')
 
 export const VDataTableExpandedKey: InjectionKey<{
@@ -21,18 +28,28 @@ export const VDataTableExpandedKey: InjectionKey<{
 
 type ExpandProps = {
   expandOnClick: boolean
+  expanded: string[]
+  'onUpdate:expanded': ((value: any[]) => void) | undefined
 }
 
 export function createExpanded (props: ExpandProps) {
   const expandOnClick = toRef(props, 'expandOnClick')
-  const expanded = ref(new Set<string>())
+  const expanded = useProxiedModel(props, 'expanded', props.expanded, v => {
+    return new Set(v)
+  }, v => {
+    return [...v.values()]
+  })
 
   function expand (item: DataTableItem, value: boolean) {
+    const newExpanded = new Set(expanded.value)
+
     if (!value) {
-      expanded.value.delete(item.value)
+      newExpanded.delete(item.value)
     } else {
-      expanded.value.add(item.value)
+      newExpanded.add(item.value)
     }
+
+    expanded.value = newExpanded
   }
 
   function isExpanded (item: DataTableItem) {

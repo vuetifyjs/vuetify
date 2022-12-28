@@ -46,6 +46,7 @@ export const VDataTableServer = defineComponent({
     'update:itemsPerPage': (page: number) => true,
     'update:sortBy': (sortBy: any) => true,
     'update:options': (options: any) => true,
+    'update:expanded': (options: any) => true,
   },
 
   setup (props, { slots }) {

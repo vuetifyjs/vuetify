@@ -63,6 +63,7 @@ export const VDataTable = defineComponent({
     'update:sortBy': (value: any) => true,
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
+    'update:expanded': (value: any) => true,
   },
 
   setup (props, { slots }) {
