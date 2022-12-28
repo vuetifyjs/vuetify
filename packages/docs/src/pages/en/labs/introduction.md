@@ -22,21 +22,21 @@ Labs is a new way for developers to use unfinished components in an alpha state.
 
 <alert type="error">
 
-Components available through Labs are considered **NOT** production ready and only to be used for testing purposes.
+Components available through Labs are considered **NOT** production ready and only to be used for testing purposes. Breaking changes will be introduced in patch releases and no support will be provided.
 
 </alert>
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs/components`. The following example shows how to import and bootstrap the `v-data-table` component with your Vuetify instance:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap the `v-data-table` component with your Vuetify instance:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import * as VDataTable from 'vuetify/labs/components/VDataTable'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 
 export default createVuetify({
   components: {
-    ...VDataTable,
+    VDataTable,
   }
 })
 ```
@@ -47,12 +47,12 @@ The following example configures the default values for the **fixedHeader** and 
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import * as VDataTable from 'vuetify/labs/components/VDataTable'
+import { VDataTable } from 'vuetify/labs/VDataTable'
 
 export default createVuetify({
   components: {
-    ...VDataTable,
-  },
+    VDataTable,
+  }
   defaults: {
     VDataTable: {
       fixedHeader: true,
@@ -101,6 +101,6 @@ The following is a list of available and up-and-coming components for use with L
 
 <alert type="warning">
 
-Lab component API's are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
+Lab component APIs are **NOT** finalized and can and will change. You should **EXPECT** for things to break during the course of development.
 
 </alert>
