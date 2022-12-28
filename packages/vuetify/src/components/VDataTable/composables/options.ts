@@ -42,10 +42,10 @@ export function useOptions ({
     page.value = 1
   })
 
-  let oldOptions = options.value
+  let oldOptions: unknown = null
   watch(options, () => {
     if (deepEqual(oldOptions, options.value)) return
     vm.emit('update:options', options.value)
     oldOptions = options.value
-  }, { deep: true })
+  }, { deep: true, immediate: true })
 }
