@@ -73,7 +73,6 @@
         {
           name: 'KitKat',
           category: 'Candy',
-          dairy: 'Yes',
         },
       ],
     }),

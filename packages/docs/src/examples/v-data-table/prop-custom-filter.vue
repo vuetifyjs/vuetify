@@ -5,31 +5,14 @@
     :items="desserts"
     :search="search"
     class="elevation-1"
-    item-key="name"
     item-value="name"
   >
     <template v-slot:top>
       <v-text-field
         v-model="search"
         label="Search (UPPER CASE ONLY)"
-        class="mx-4"
+        class="pa-4"
       ></v-text-field>
-    </template>
-
-    <template v-slot:body.append>
-      <tr>
-        <td></td>
-
-        <td>
-          <v-text-field
-            v-model="calories"
-            label="Less than"
-            type="number"
-          ></v-text-field>
-        </td>
-
-        <td colspan="4"></td>
-      </tr>
     </template>
   </v-data-table>
 </template>
@@ -135,11 +118,6 @@
             title: 'Calories',
             align: 'end',
             key: 'calories',
-            filter: value => {
-              if (!this.calories) return true
-
-              return value < parseInt(this.calories)
-            },
           },
           { title: 'Fat (g)', align: 'end', key: 'fat' },
           { title: 'Carbs (g)', align: 'end', key: 'carbs' },
@@ -149,11 +127,11 @@
       },
     },
     methods: {
-      filterOnlyCapsText (value, search, item) {
+      filterOnlyCapsText (value, query, item) {
         return value != null &&
-          search != null &&
+          query != null &&
           typeof value === 'string' &&
-          value.toString().toLocaleUpperCase().indexOf(search) !== -1
+          value.toString().toLocaleUpperCase().indexOf(query) !== -1
       },
     },
   }

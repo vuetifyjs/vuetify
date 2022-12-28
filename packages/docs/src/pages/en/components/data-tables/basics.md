@@ -77,31 +77,21 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 #### Row selection
 
-The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each default row. You can customize these with the slots `header.data-table-select` and `item.data-table-select` respectively. You can also switch between allowing multiple selected rows at the same time or just one with the **single-select** prop.
+The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row. If you need to, you can render your own checkboxes using the `column.data-table-select` and `item.data-table-select` slots respectively.
+
+<!-- You can also switch between allowing multiple selected rows at the same time or just one with the **single-select** prop. -->
 
 <example file="v-data-table/prop-row-selection" />
 
-### Slots
-
-The `v-data-table` provides a large number of slots for customizing the table. This example showcases some of these slots and what you can do with each. It is important to note some slot (eg: `item`/`body`/`header`) will completely takes over the internal rendering of the component which will require you to re-implement functionalities such as selection and expansion. Some slots will override each other such as: `body` > `item` > `item.<name>` and `header`/`header.<name>`.
-
-<alert type="info">
-
-  Some slots such as `item.<name>` and `header.<name>` use modifiers to target more scoped slots. Eslint by default will throw errors when slots use modifiers. To disable these errors, add the following rule to your eslint configuration: `"vue/valid-v-slot": ["error", { "allowModifiers": true }]`.
-
-</alert>
-
-<example file="v-data-table/slot-main" />
-
 #### Item
 
-You can use the dynamic slots `item.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to **headers**. So to customize the calories column we're using the `item.calories` slot.
+You can use the dynamic slots `item.<key>` to customize only certain columns. `<key>` is the name of the **key** property in header items sent to **headers**. So to customize the calories column we're using the `item.calories` slot.
 
 <example file="v-data-table/slot-item" />
 
 #### Simple checkbox
 
-When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-simple-checkbox` component rather than the `v-checkbox` component. The `v-simple-checkbox` component is used internally and will respect header alignment.
+When wanting to use a checkbox component inside of a slot template in your data tables, use the `v-checkbox-btn` component rather than the `v-checkbox` component. The `v-checkbox-btn` component is used internally and will respect header alignment.
 
 <example file="v-data-table/slot-simple-checkbox" />
 
@@ -121,6 +111,10 @@ The `v-edit-dialog` component can be used for editing data directly within a `v-
 
 #### Expandable rows
 
-The **show-expand** prop will render an expand icon on each default row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be customized by adding a column with `value: 'data-table-expand'` to the headers array. You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`. Row items require a unique key property for expansion to work. The default is `id`, but you can use the **item-key** prop to specify a different item property.
+The **show-expand** prop will render an expand icon on each row. You can customize this with the `item.data-table-expand` slot. The position of this slot can be changed by adding a column with `key: 'data-table-expand'` to the headers array.
+
+Just like selection, row items require a unique property on each item for expansion to work. The default is `id`, but you can use the **item-value** prop to specify a different item property.
+
+<!-- You can also switch between allowing multiple expanded rows at the same time or just one with the **single-expand** prop. The expanded rows are available on the synced prop `expanded.sync`.  -->
 
 <example file="v-data-table/misc-expand" />

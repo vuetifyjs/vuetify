@@ -15,14 +15,19 @@ Lorem ipsum etc etc
 
 ## Examples
 
+### Basic sorting
+
+The sorting of your table can be controlled by the **sort-by** prop. This prop takes an array of objects, where each object has a **key** and **order** property, describing how the table is to be sorted.
+
+The **key** corresponds to a column defined in the **headers** array, and **order** is either the string `'asc'` or `'desc'` indicating the order in which the items are sorted.
+
+Unless you are using the **multi-sort** prop seen below, this array will almost always just have a single object in it.
+
+<example file="v-data-table/prop-sort-by" />
+
 ### Multi sort
 
-Using the **multi-sort** prop will enable you to sort on multiple columns at the same time. When enabled, you can pass arrays to both **sort-by** and **sort-desc** to programmatically control the sorting, instead of single values.
+Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
 
 <example file="v-data-table/prop-multi-sort" />
 
-### External sorting
-
-Sorting can also be controlled externally by using the individual props, or by using the the **options** prop. Remember that you must apply the **.sync** modifier.
-
-<example file="v-data-table/misc-external-sort" />

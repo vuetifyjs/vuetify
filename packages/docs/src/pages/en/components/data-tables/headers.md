@@ -11,12 +11,15 @@ related:
 
 # Data table - Headers
 
-Lorem ipsum etc etc
+## TODO:
+
+- Headers is the entire section above body (but below top), possibly multiple rows
+- Columns are addressable (has key) and show data and/or other rendered content. Is always a 1-dimensional array.
 
 ## Examples
 
-### Header
+### Column slot
 
-You can use the dynamic slots `header.<name>` to customize only certain columns. `<name>` is the name of the `value` property in the corresponding header item sent to **headers**.
+You can use the dynamic slots `column.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
 
 <example file="v-data-table/slot-header" />

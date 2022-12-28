@@ -1,60 +1,37 @@
 <template>
   <v-data-table
-    v-model:page="page"
     :headers="headers"
     :items="desserts"
-    :items-per-page="itemsPerPage"
-    hide-default-footer
+    v-model:sort-by="sortBy"
     class="elevation-1"
-    @update:options="options = $event"
-  >
-    <template v-slot:bottom>
-      <div class="text-center pt-2">
-        <v-pagination
-          v-model="page"
-          :length="options.pageCount"
-        ></v-pagination>
-        <v-text-field
-          :model-value="itemsPerPage"
-          class="pa-2"
-          label="Items per page"
-          type="number"
-          min="-1"
-          max="15"
-          hide-details
-          @update:model-value="itemsPerPage = parseInt($event, 10)"
-        ></v-text-field>
-      </div>
-    </template>
-  </v-data-table>
+  ></v-data-table>
+  <v-code class="mt-4">
+    <pre>{{ sortBy }}</pre>
+  </v-code>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        options: {
-          pageCount: 1,
-        },
-        page: 1,
-        itemsPerPage: 5,
+        sortBy: [{ key: 'calories', order: 'asc' }],
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
             sortable: false,
-            value: 'name',
+            key: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {
             name: 'Frozen Yogurt',
-            calories: 159,
+            calories: 200,
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
@@ -62,7 +39,7 @@
           },
           {
             name: 'Ice cream sandwich',
-            calories: 237,
+            calories: 200,
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
@@ -70,7 +47,7 @@
           },
           {
             name: 'Eclair',
-            calories: 262,
+            calories: 300,
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
@@ -78,7 +55,7 @@
           },
           {
             name: 'Cupcake',
-            calories: 305,
+            calories: 300,
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
@@ -86,7 +63,7 @@
           },
           {
             name: 'Gingerbread',
-            calories: 356,
+            calories: 400,
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
@@ -94,7 +71,7 @@
           },
           {
             name: 'Jelly bean',
-            calories: 375,
+            calories: 400,
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
@@ -102,7 +79,7 @@
           },
           {
             name: 'Lollipop',
-            calories: 392,
+            calories: 400,
             fat: 0.2,
             carbs: 98,
             protein: 0,
@@ -110,7 +87,7 @@
           },
           {
             name: 'Honeycomb',
-            calories: 408,
+            calories: 400,
             fat: 3.2,
             carbs: 87,
             protein: 6.5,
@@ -118,7 +95,7 @@
           },
           {
             name: 'Donut',
-            calories: 452,
+            calories: 500,
             fat: 25.0,
             carbs: 51,
             protein: 4.9,
@@ -126,7 +103,7 @@
           },
           {
             name: 'KitKat',
-            calories: 518,
+            calories: 500,
             fat: 26.0,
             carbs: 65,
             protein: 7,
