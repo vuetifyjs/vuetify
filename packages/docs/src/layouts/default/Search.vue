@@ -60,7 +60,6 @@
 <script>
   // Utilities
   import { get } from 'vuex-pathify'
-  import { groupItems, sortItems } from 'vuetify/lib/util/helpers'
   import algoliasearch from 'algoliasearch'
   import SearchResults from './SearchResults'
 
@@ -139,25 +138,42 @@
         helper.state.query && helper.search()
       },
       transformItems (items) {
-        const sorted = sortItems([...items], ['hierarchy.lvl0', 'hierarchy.lvl1'], [false, false], this.locale)
-          .map(item => {
-            const url = new URL(item.url)
+        items = items.map(item => {
+          const url = new URL(item.url)
 
-            return {
-              ...item,
-              url: url.href.split(url.origin).pop(),
-            }
-          })
-        const groups = groupItems(sorted, ['hierarchy.lvl0'])
+          return {
+            ...item,
+            url: url.href.split(url.origin).pop(),
+          }
+        })
+        const groups = this.groupItems(items, 'lvl0')
 
         groups.forEach(group => {
-          group.items = groupItems(group.items, ['hierarchy.lvl1'])
+          group.items = this.groupItems(group.items, 'lvl1')
         })
 
-        const uiIndex = groups.findIndex(val => val.name === 'UI Components')
-        if (uiIndex > 0) {
-          groups.unshift(groups.splice(uiIndex, 1)[0])
-        }
+        // const uiIndex = groups.findIndex(val => val.name === 'UI Components')
+        // if (uiIndex > 0) {
+        //   groups.unshift(groups.splice(uiIndex, 1)[0])
+        // }
+
+        return groups
+      },
+      groupItems (items, attribute) {
+        const groups = []
+
+        items.forEach(item => {
+          const group = groups.find(val => val.name === item.hierarchy[attribute])
+
+          if (group) {
+            group.items.push(item)
+          } else {
+            groups.push({
+              name: item.hierarchy[attribute],
+              items: [item],
+            })
+          }
+        })
 
         return groups
       },
