@@ -11,14 +11,16 @@ related:
 
 # Data table - Grouping
 
-Lorem ipsum etc etc
+Data table has basic support for grouping rows by a column value.
+
+<v-alert type="info">
+  v-data-table-server does not currently support grouping rows
+</v-alert>
 
 ## Examples
 
-<!-- #### Grouping
+### Group by
 
-Using the **group-by** and **group-desc** props you can group rows on an item property.
+Using the **group-by** prop you can group rows by one or more columns.
 
-The **show-group-by** prop will show a group button in the default header. You can use the **groupable** property on header items to disable the group button.
-
-<example file="v-data-table/prop-grouping" /> -->
+<example file="v-data-table/prop-grouping" />

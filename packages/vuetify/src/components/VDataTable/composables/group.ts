@@ -123,10 +123,13 @@ function flattenItems (items: (DataTableItem | GroupHeaderItem)[], opened: Set<s
   const flatItems: (DataTableItem | GroupHeaderItem)[] = []
 
   for (const item of items) {
+    // TODO: make this better
     if (item.type === 'group-header') {
-      flatItems.push(item)
+      if (item.value != null) {
+        flatItems.push(item)
+      }
 
-      if (opened.has(item.id)) {
+      if (opened.has(item.id) || item.value == null) {
         flatItems.push(...flattenItems(item.items, opened))
       }
     } else {

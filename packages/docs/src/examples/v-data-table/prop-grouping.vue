@@ -3,16 +3,17 @@
     :group-by="groupBy"
     :headers="headers"
     :items="desserts"
-    :sort-by="[{ key: 'name', order: 'asc' }]"
+    :sort-by="sortBy"
     class="elevation-1"
-    item-key="name"
+    item-value="name"
   ></v-data-table>
 </template>
 
 <script>
   export default {
     data: () => ({
-      groupBy: [{ key: 'name', order: 'asc' }],
+      sortBy: [{ key: 'name', order: 'asc' }],
+      groupBy: [{ key: 'dairy', order: 'asc' }],
       headers: [
         {
           title: 'Dessert (100g serving)',
