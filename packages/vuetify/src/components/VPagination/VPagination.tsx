@@ -26,6 +26,7 @@ import { createRange, defineComponent, keyValues, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
+import { useDisplay } from '@/composables'
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -120,6 +121,7 @@ export const VPagination = defineComponent({
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
+    const { width } = useDisplay()
     const maxButtons = ref(-1)
 
     provideDefaults(undefined, { scoped: true })
@@ -137,12 +139,8 @@ export const VPagination = defineComponent({
       const itemWidth =
         firstItem.offsetWidth +
         parseFloat(getComputedStyle(firstItem).marginRight) * 2
-      const minButtons = props.showFirstLastPage ? 5 : 3
 
-      maxButtons.value = Math.max(0, Math.floor(
-        // Round to two decimal places to avoid floating point errors
-        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
-      ))
+      maxButtons.value = getMax(totalWidth, itemWidth)
     })
 
     const length = computed(() => parseInt(props.length, 10))
@@ -151,8 +149,16 @@ export const VPagination = defineComponent({
     const totalVisible = computed(() => {
       if (props.totalVisible) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
-      return length.value
+      return getMax(width.value, 58)
     })
+
+    function getMax (totalWidth: number, itemWidth: number) {
+      const minButtons = props.showFirstLastPage ? 5 : 3
+      return Math.max(0, Math.floor(
+        // Round to two decimal places to avoid floating point errors
+        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
+      ))
+    }
 
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
