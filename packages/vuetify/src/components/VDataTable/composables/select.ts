@@ -46,10 +46,14 @@ export function createSelection (props: SelectionProps, allItems: Ref<DataTableI
   }
 
   function select (items: DataTableItem[], value: boolean) {
+    const newSelected = new Set(selected.value)
+
     for (const item of items) {
-      if (value) selected.value.add(item.value)
-      else selected.value.delete(item.value)
+      if (value) newSelected.add(item.value)
+      else newSelected.delete(item.value)
     }
+
+    selected.value = newSelected
   }
 
   function toggleSelect (item: DataTableItem) {
