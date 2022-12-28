@@ -6,7 +6,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
-// import * as labs from 'vuetify/labs/components'
+import * as labs from 'vuetify/labs/components'
 
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
@@ -21,7 +21,7 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
   const vuetify = createVuetify({
     components: {
       ...components,
-      // ...labs,
+      ...labs,
     },
     directives,
     icons: {
