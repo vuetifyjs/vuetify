@@ -92,7 +92,7 @@ export const VDataTableHeaders = defineComponent({
         >
           {{
             default: () => {
-              const slotName = `header.${column.key}`
+              const slotName = `column.${column.key}`
               const slotProps = {
                 column,
                 selectAll,
@@ -101,7 +101,7 @@ export const VDataTableHeaders = defineComponent({
               if (slots[slotName]) return slots[slotName]!(slotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['header.data-table-select']?.(slotProps) ?? (
+                return slots['column.data-table-select']?.(slotProps) ?? (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
