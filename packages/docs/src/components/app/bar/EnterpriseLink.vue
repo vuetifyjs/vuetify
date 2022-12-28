@@ -4,38 +4,29 @@
     class="ml-1"
     color="medium-emphasis"
     variant="text"
-    @click="onClick"
+    @click="gtagClick('app-bar', 'enterprise', name)"
   >
-    <v-badge inline color="success">
-      <template #badge>
-        <small>NEW</small>
-      </template>
 
-      <span class="me-1">
-        {{ t('enterprise') }}
-      </span>
-    </v-badge>
+    {{ t('enterprise') }}
+
+    <v-badge
+      class="ms-n1 mb-4"
+      color="success"
+      dot
+      inline
+    />
   </app-btn>
 </template>
 
 <script setup>
   // Composables
-  import { useGtag } from 'vue-gtag-next'
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
 
   // Utilities
   import { rpath } from '@/util/routes'
+  import { gtagClick } from '@/util/analytics'
 
-  const { event } = useGtag()
-  const { name } = useRoute()
   const { t } = useI18n()
-
-  function onClick () {
-    event('click', {
-      event_category: 'app-bar',
-      event_label: 'enterprise',
-      value: name,
-    })
-  }
+  const { name } = useRoute()
 </script>

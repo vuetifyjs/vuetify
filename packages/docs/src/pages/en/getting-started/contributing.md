@@ -21,10 +21,10 @@ It is our job to enable you to create amazing applications. A lot of the time, y
 
 The issue list of this repo is exclusively for bug reports and feature requests. Non-conforming issues will be closed immediately. Before reporting an issue:
 
-- Search for similar [issues](https://github.com/vuetifyjs/vuetify/issues), it may have been answered already.
+- Search for similar [issues], it may have been answered already.
   > If a similar issue already exists, you do not need to open another issue for this, if you want to help with it in any way, you can help by giving appropriate information in the already existing issue.
-- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in a [codepen](https://template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
-- Make sure that the reproduction is **MINIMAL** and concise
+- Try to reproduce with the [latest](https://github.com/vuetifyjs/vuetify/releases/latest) version in [🎮 Vuetify Play](https://play.vuetifyjs.com/) or a [codepen](https://v3-template.vuetifyjs.com/) or repository that can be cloned to produce the expected behavior.
+- Make sure that the reproduction is **MINIMAL** and **CONCISE**
 
 These steps ensure that we have all the information necessary to quickly triage and resolve your issue. Once your reproduction is complete, submit a new issue using the [Vuetify Issue Creator](https://issues.vuetifyjs.com/). Using this issue creator is required, otherwise the issue will be closed automatically.
 
@@ -89,9 +89,9 @@ The build process compiles all the Vuetify packages for development and may take
 
 ### Vuetify
 
-The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on [localhost:8080](http://localhost:8080/) with this file loaded. You can test your changes in the playground then copy its contents into your pull request when you're ready.
+The Vuetify library is located in `packages/vuetify`. In `packages/vuetify/dev` you will find a `Playground.vue` file; running `yarn dev` from the project root will start a dev server on [localhost:5173](http://localhost:5173/) with this file loaded. Test your changes in the Playground.vue file you copied, then paste its contents into your pull request when you're ready.
 
-You can also test vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
+You can also test Vuetify in your own project using [`yarn link`](https://classic.yarnpkg.com/en/docs/cli/link/):
 
 - Navigate to `packages/vuetify`
 - Run `yarn link`
@@ -111,12 +111,8 @@ The **Playground** file is a cleanroom used for Vuetify development and is the r
   </v-container>
 </template>
 
-<script>
-  export default {
-    data: () => ({
-      //
-    }),
-  }
+<script setup>
+  //
 </script>
 ```
 
@@ -152,16 +148,21 @@ git remote add fork git@github.com:YOUR_USERNAME/vuetify.git
 
 Before starting development you should know which branch to base your changes on. If in doubt use master as changes to master can usually be merged into a different branch without rebasing.
 
-| Type of change                 | Branch   |
-| ------------------------------ | -------- |
-| Documentation (v2)             | `master` |
-| Documentation (v3)             | `next`   |
-| Bug fixes                      | `master` |
-| New features                   | `dev`    |
-| Features with breaking changes | `next`   |
+| Version | Type of change | Branch |
+| - | - | - |
+| Vuetify 3 | Documentation | `next` |
+| Vuetify 3 | New features | `dev` |
+| Vuetify 3 | Bug fixes | `next` |
+| Vuetify 3 | Features with breaking changes| `next` |
+| Vuetify 2 | Documentation|  `master` |
+| Vuetify 2 | New features | `v2-dev` |
+| Vuetify 2 | Bug fixes | `master` |
 
 ```bash
 # Switch to the desired branch
+# v3
+git switch next
+# v2
 git switch master
 
 # Pull down any upstream changes
@@ -175,15 +176,15 @@ git switch --create fix/1234-some-issue
 
 Commit your changes following [our guidelines](#commit-guidelines), then push the branch to your fork with `git push -u fork` and open a pull request on the Vuetify repository following the provided template.
 
-<alert type="warning">
+<alert type="error">
 
-Pull requests that include unrelated commits or your local merges may be **closed** without notice.
+Pull requests that include unrelated commits or your local merges will be **CLOSED** without notice
 
 </alert>
 
 ## Working with GitHub
 
-Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information. In addition, we have a public GitHub project with a detailed overview of what we are currently working on in [Vuetify 3](https://titan.vuetifyjs.com).
+Vuetify's repository lives on [GitHub](https://github.com/vuetifyjs/vuetify) and is the primary location for all development related information.
 
 Some of the more notable links within these services include:
 
@@ -191,10 +192,8 @@ Some of the more notable links within these services include:
 
 - [Issues]
 - [Discussions](https://github.com/vuetifyjs/vuetify/discussions)
-- [Projects](https://github.com/vuetifyjs/vuetify/projects)
-- [Coding Guidelines](https://github.com/vuetifyjs/vuetify/wiki/coding-guidelines)
 
----
+----
 
 The following sections are designed to familiarize you with our standard operating procedures for Vuetify development.
 
@@ -217,43 +216,7 @@ We **do not** accept PRs for any documentation changes pertaining to languages o
 
 ### Requesting new features
 
-Vuetify uses the **RFC** (request for comments) process for new feature suggestions. It is intended to provide a consistent and controlled path for new features to enter the framework.
-
-Many changes, including bug fixes and documentation improvements can be implemented and reviewed via the normal GitHub pull request workflow.
-
-Some changes though are _substantial_, and we ask that these be put through a bit of a design process and produce a consensus among the Vuetify [Core Team](/introduction/meet-the-team/) and the [community](https://discord.gg/eXubxyJ).
-
-#### Getting started
-
-In order to get a major feature added to Vuetify you must get your RFC merged into this repository as a `.md` file. The following is a guide on how to get started:
-
-- Fork the Vuetify RFC repo https://github.com/vuetifyjs/rfcs
-
-- Copy `0000-template.md` to `active-rfcs/0000-my-feature.md` (where **my-feature** is descriptive. **do not** assign an RFC number yet).
-
-- Fill in the RFC. Be detailed and put care into the details.
-
-  <alert type="error">
-
-  RFCs that do not present convincing motivation, demonstrate understanding of the impact of the design, or are disingenuous about the drawbacks or alternatives tend to be poorly-received
-
-  </alert>
-
-- Submit a pull request. As a pull request the RFC will receive design feedback from the larger community, and the author should be prepared to revise it in response. New RFC pull requests start in the **Pending** stage.
-
-- Build consensus and integrate feedback. RFCs that have broad support are much more likely to make progress than those that don't receive any comments.
-
-- Eventually, the [Core Team] will decide whether the RFC is a candidate for inclusion in Vuetify.
-
-- An RFC can be modified based upon feedback from the [Core Team] and [community]. Significant modifications may trigger a new _final comment_ period.
-
-- An RFC may be rejected after public discussion has settled and comments have been made summarizing the rationale for rejection. A [Core Team] member will close the RFCs associated pull request, at which point the RFC will enter the **Rejected** stage.
-
-- An RFC may be accepted at the close of its _final comment_ period. A [Core Team] member will merge the RFCs associated pull request, at which point the RFC will enter the **Active** stage.
-
-Once an RFC is merged and the corresponding functionality implemented within the Vuetify repository, it will be part of the next _major_ or _minor_ release. Once released, the RFC will enter the **Released** stage and be locked.
-
-For more information regarding RFCs, see the official repository: https://github.com/vuetifyjs/rfcs
+Pending
 
 ### Commit guidelines
 
@@ -311,7 +274,7 @@ The following is a list of **commit types** used in the _angular_ preset:
 
 #### Commitizen
 
-The [Vuetify team](/introduction/meet-the-team/) uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
+The [Vuetify team] uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
 
 To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
 
@@ -337,3 +300,4 @@ Once complete, instead of using <kbd>git commit</kbd> you will run the command <
 [core team]: /introduction/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls
 [issues]: https://github.com/vuetifyjs/vuetify/issues
+[Vuetify team]: /introduction/meet-the-team/

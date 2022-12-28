@@ -3,8 +3,10 @@
     <v-col
       v-for="(person, index) in direct"
       :key="index"
-      cols="6"
-      md="4"
+      cols="12"
+      sm="6"
+      md="5"
+      xl="4"
     >
       <app-sheet class="text-center px-10 py-8">
         <v-avatar size="x-large" :image="person.image" />

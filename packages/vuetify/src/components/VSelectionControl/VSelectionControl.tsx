@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, inject, ref } from 'vue'
+import { computed, inject, nextTick, ref } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -141,6 +141,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
 
   setup (props, { attrs, slots }) {
     const {
+      group,
       densityClasses,
       icon,
       model,
@@ -153,6 +154,12 @@ export const VSelectionControl = genericComponent<new <T>() => {
     const isFocused = ref(false)
     const isFocusVisible = ref(false)
     const input = ref<HTMLInputElement>()
+
+    group?.onForceUpdate(() => {
+      if (input.value) {
+        input.value.checked = model.value
+      }
+    })
 
     function onFocus (e: FocusEvent) {
       isFocused.value = true
@@ -170,6 +177,9 @@ export const VSelectionControl = genericComponent<new <T>() => {
     }
 
     function onInput (e: Event) {
+      if (props.readonly && group) {
+        nextTick(() => group.forceUpdate())
+      }
       model.value = (e.target as HTMLInputElement).checked
     }
 
@@ -227,7 +237,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                 onBlur={ onBlur }
                 onFocus={ onFocus }
                 onInput={ onInput }
-                aria-readonly={ props.readonly }
+                aria-disabled={ props.readonly }
                 type={ props.type }
                 value={ trueValue.value }
                 name={ props.name }

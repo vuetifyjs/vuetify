@@ -1,5 +1,5 @@
 ---
-nav: Upgrade Guide
+nav: Upgrade guide
 meta:
   title: Guide to upgrading Vuetify
   description: Detailed instruction on how to upgrade Vuetify to 3.0
@@ -10,7 +10,7 @@ meta:
 
 <alert type="warning">
 
-  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing.
+  This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
 
 </alert>
 
