@@ -64,6 +64,8 @@
     "./locale": "./lib/locale/index.mjs",
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
+    "./labs/components": "./lib/labs/components.mjs",
+    "./labs/*": "./lib/labs/*/index.mjs",
     "./*": "./*"
   },
   "typesVersions": {
