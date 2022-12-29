@@ -2,7 +2,7 @@
 import './VDataTable.sass'
 
 // Components
-import { VTable } from '@/components'
+import { VTable } from '@/components/VTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import { VDataTableFooter } from './VDataTableFooter'

@@ -101,6 +101,7 @@ export const VComponentIcon = defineComponent({
     }
   },
 })
+export type VComponentIcon = InstanceType<typeof VComponentIcon>
 
 export const VSvgIcon = defineComponent({
   name: 'VSvgIcon',
@@ -127,6 +128,7 @@ export const VSvgIcon = defineComponent({
     }
   },
 })
+export type VSvgIcon = InstanceType<typeof VSvgIcon>
 
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
@@ -139,6 +141,7 @@ export const VLigatureIcon = defineComponent({
     }
   },
 })
+export type VLigatureIcon = InstanceType<typeof VLigatureIcon>
 
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
@@ -151,6 +154,7 @@ export const VClassIcon = defineComponent({
     }
   },
 })
+export type VClassIcon = InstanceType<typeof VClassIcon>
 
 export const defaultSets: Record<string, IconSet> = {
   svg: {

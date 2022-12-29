@@ -1,5 +1,5 @@
 // Components
-import { VTable } from '@/components'
+import { VTable } from '@/components/VTable'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'

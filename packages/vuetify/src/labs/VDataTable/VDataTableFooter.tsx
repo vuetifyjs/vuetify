@@ -2,7 +2,8 @@
 import './VDataTableFooter.sass'
 
 // Components
-import { VBtn, VSelect } from '@/components'
+import { VBtn } from '@/components/VBtn'
+import { VSelect } from '@/components/VSelect'
 
 // Composables
 import { usePagination } from './composables/paginate'
