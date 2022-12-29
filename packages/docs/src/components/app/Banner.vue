@@ -81,7 +81,6 @@
   // Utilities
   import { computed } from 'vue'
   import { differenceInHours } from 'date-fns'
-  import { waitForReadystate } from '@/util/helpers'
 
   const { event } = useGtag()
   const { mdAndUp } = useDisplay()
@@ -111,9 +110,7 @@
     notifications.last.banner = Date.now()
   }
 
-  waitForReadystate().then(() => {
-    setTimeout(banners.fetch, 1000)
-  })
+  setTimeout(banners.fetch, 1000)
 </script>
 
 <style lang="sass">
