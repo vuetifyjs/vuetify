@@ -14,7 +14,7 @@ related:
 
 The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
-![Bottom Navigation Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-bottom-navigation/v-bottom-navigation-entry.png)
+<!-- ![Bottom Navigation Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-bottom-navigation/v-bottom-navigation-entry.png) -->
 
 ---
 

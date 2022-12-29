@@ -14,7 +14,7 @@ related:
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png)
+<!-- ![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png) -->
 
 ---
 

@@ -14,7 +14,7 @@ related:
 
 The `v-lazy` component is used to dynamically load components based upon an elements visibility.
 
-![Lazy Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-lazy/v-lazy-entry.png)
+<!-- ![Lazy Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-lazy/v-lazy-entry.png) -->
 
 ---
 
