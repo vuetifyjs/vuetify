@@ -1,25 +1,33 @@
 <template>
   <v-card
-    class="mx-auto mt-12"
+    class="mx-auto"
     max-width="450"
   >
     <v-toolbar
+      color="primary"
+      height="88"
       flat
-      color="transparent"
     >
-      <v-btn icon>
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
+      <template v-slot:prepend>
+        <v-btn icon="mdi-arrow-left">
+        </v-btn>
+      </template>
 
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
+        clearable
+        hide-details
         label="Search News"
+        prepend-inner-icon="mdi-magnify"
         single-line
       ></v-text-field>
+
+      <template v-slot:append>
+        <v-btn icon="mdi-dots-vertical"></v-btn>
+      </template>
     </v-toolbar>
 
-    <v-card-text class="py-0">
+    <div v-if="keywords.length > 0" class="py-3 px-4">
       <v-chip
         v-for="(keyword, i) in keywords"
         :key="i"
@@ -27,37 +35,38 @@
       >
         {{ keyword }}
       </v-chip>
-    </v-card-text>
+
+    </div>
+
+    <v-divider></v-divider>
 
     <v-list lines="three">
       <v-list-item
         v-for="(item, i) in searching"
         :key="i"
-        ripple
-        @click="() => {}"
+        link
       >
-        <v-img
-          :src="item.image"
-          class="mr-4"
-          max-width="64"
-          min-width="64"
-        ></v-img>
+        <template v-slot:prepend>
+          <v-avatar
+            class="mr-4 mt-2"
+            rounded="0"
+          >
+            <v-img :src="item.image" cover></v-img>
+          </v-avatar>
+        </template>
 
-        <v-list-item-content>
-          <span
-            class="text-uppercase font-weight-regular text-caption"
-            v-text="item.category"
-          ></span>
+        <v-list-item-title
+          class="text-uppercase font-weight-regular text-caption"
+          v-text="item.category"
+        ></v-list-item-title>
 
-          <div v-text="item.title"></div>
-        </v-list-item-content>
+        <div v-text="item.title"></div>
       </v-list-item>
     </v-list>
   </v-card>
 </template>
 
 <script>
-
   export default {
     data: () => ({
       items: [

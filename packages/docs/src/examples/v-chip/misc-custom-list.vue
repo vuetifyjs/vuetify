@@ -4,21 +4,23 @@
     max-width="500"
   >
     <v-toolbar
-      flat
       color="transparent"
+      flat
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
+
       <v-toolbar-title>Photo Info</v-toolbar-title>
+
       <v-spacer></v-spacer>
+
       <v-btn
-        icon
+        icon="mdi-magnify"
         @click="$refs.search.focus()"
       >
-        <v-icon icon="mdi-magnify"></v-icon>
       </v-btn>
     </v-toolbar>
 
-    <v-container class="py-0">
+    <v-container>
       <v-row
         align="center"
         justify="start"
@@ -26,7 +28,8 @@
         <v-col
           v-for="(selection, i) in selections"
           :key="selection.text"
-          class="shrink"
+          cols="auto"
+          class="py-1 pr-0"
         >
           <v-chip
             :disabled="loading"
@@ -34,9 +37,10 @@
             @click:close="selected.splice(i, 1)"
           >
             <v-icon
-              start
               :icon="selection.icon"
+              start
             ></v-icon>
+
             {{ selection.text }}
           </v-chip>
         </v-col>
@@ -48,7 +52,6 @@
           <v-text-field
             ref="search"
             v-model="search"
-            full-width
             hide-details
             label="Search"
             single-line
@@ -67,12 +70,13 @@
           :disabled="loading"
           @click="selected.push(item)"
         >
-          <v-list-item-avatar>
+          <template v-slot:prepend>
             <v-icon
               :disabled="loading"
               :icon="item.icon"
             ></v-icon>
-          </v-list-item-avatar>
+          </template>
+
           <v-list-item-title v-text="item.text"></v-list-item-title>
         </v-list-item>
       </template>
@@ -82,6 +86,7 @@
 
     <v-card-actions>
       <v-spacer></v-spacer>
+
       <v-btn
         :disabled="!selected.length"
         :loading="loading"
