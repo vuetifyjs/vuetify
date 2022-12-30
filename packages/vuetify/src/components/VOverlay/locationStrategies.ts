@@ -77,14 +77,13 @@ export function useLocationStrategies (
   const updateLocation = ref<(e: Event) => void>()
 
   let scope: EffectScope | undefined
-  watchEffect(async () => {
+  watchEffect(() => {
     scope?.stop()
     updateLocation.value = undefined
 
     if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
 
     scope = effectScope()
-    if (!(props.locationStrategy === 'connected')) { await nextTick() }
     scope.run(() => {
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
@@ -407,13 +406,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       props.maxHeight,
     ],
     () => updateLocation(),
-    { immediate: !activatorFixed }
   )
 
-  if (activatorFixed) nextTick(() => updateLocation())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updateLocation()
-  })
+  nextTick(() => updateLocation())
 
   return { updateLocation }
 }
