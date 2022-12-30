@@ -193,6 +193,7 @@ export const VCombobox = genericComponent<new <
       if (selectionIndex.value > -1) e.preventDefault()
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
+        e.preventDefault()
         menu.value = true
       }
 
