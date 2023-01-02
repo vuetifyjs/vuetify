@@ -1,8 +1,8 @@
 <template>
   <v-data-table
+    v-model:sort-by="sortBy"
     :headers="headers"
     :items="desserts"
-    v-model:sort-by="sortBy"
     class="elevation-1"
   ></v-data-table>
   <v-code class="mt-4">
