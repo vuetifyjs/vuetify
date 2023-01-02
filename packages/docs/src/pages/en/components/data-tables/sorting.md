@@ -30,4 +30,3 @@ Unless you are using the **multi-sort** prop seen below, this array will almost 
 Using the **multi-sort** prop will enable you to sort on multiple columns at the same time.
 
 <example file="v-data-table/prop-multi-sort" />
-
