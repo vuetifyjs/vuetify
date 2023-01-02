@@ -74,8 +74,7 @@ export function createHeaders (
         fixedRows[i].push({
           ...column,
           key: id,
-          fixedOffset:
-          fixedOffsets[i],
+          fixedOffset: fixedOffsets[i],
           sortable: column.sortable ?? !!column.key,
         })
 
