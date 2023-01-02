@@ -1,7 +1,7 @@
 // Utilities
 import { defaultFilter, filterItems, useFilter } from '../filter'
 import { describe, expect, it } from '@jest/globals'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { transformItem, transformItems } from '../items'
 
 describe('filter', () => {
@@ -22,7 +22,7 @@ describe('filter', () => {
   })
 
   describe('filterItems', () => {
-    const items = Array.from({ length: 5 }, (v, k) => ({
+    const items = Array.from({ length: 5 }, (v, k) => transformItem({} as any, {
       title: `Foo-${k}`,
       value: `fizz-${k}`,
     }))
@@ -51,7 +51,7 @@ describe('filter', () => {
         title: (s: string, q: string) => s === q,
         value: (s: string) => s === '1',
       }
-      const items = [
+      const items = transformItems({} as any, [
         {
           title: 'foo',
           subtitle: 'bar',
@@ -76,7 +76,7 @@ describe('filter', () => {
           value: '1',
           custom: 'buzz',
         },
-      ]
+      ])
       const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
       expect(filterItems(items, 'foo', {
@@ -132,7 +132,7 @@ describe('filter', () => {
       expect(filteredItems.value).toHaveLength(expected)
     })
 
-    it('should accept a custom filter function', () => {
+    it('should accept a custom filter function', async () => {
       function filterFn (text: string, query?: string, item?: any) {
         if (typeof query !== 'string') return true
         return item.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
@@ -147,18 +147,17 @@ describe('filter', () => {
       ]))
       const { filteredItems } = useFilter(props, items, query)
 
-      expect(filteredItems.value).toHaveLength(2)
-      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['fizz', 'buzz'])
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['fizz', 'buzz'])
 
       query.value = 'foo'
+      await nextTick()
 
-      expect(filteredItems.value).toHaveLength(1)
-      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['foo'])
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo'])
 
       items.value.push(transformItem(itemProps, { title: 'foobar' }))
+      await nextTick()
 
-      expect(filteredItems.value).toHaveLength(2)
-      expect(filteredItems.value.map(({ item }) => item.raw.title)).toEqual(['foo', 'foobar'])
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
     })
   })
 })

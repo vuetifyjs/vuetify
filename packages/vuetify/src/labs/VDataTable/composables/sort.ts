@@ -88,11 +88,11 @@ export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonl
   return { sortedItems }
 }
 
-export function sortItems<T extends InternalItem, K extends keyof T> (
+export function sortItems<T extends InternalItem> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
+  customSorters?: Record<string, DataTableCompareFunction>
 ): T[] {
   const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
 
@@ -108,8 +108,8 @@ export function sortItems<T extends InternalItem, K extends keyof T> (
         [sortA, sortB] = [sortB, sortA]
       }
 
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
+      if (customSorters?.[sortKey]) {
+        const customResult = customSorters[sortKey](sortA, sortB)
 
         if (!customResult) continue
 
