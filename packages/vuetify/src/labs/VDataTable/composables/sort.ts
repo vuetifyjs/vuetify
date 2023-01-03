@@ -119,7 +119,7 @@ export function sortItems<T extends InternalItem> (
       }
 
       // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
+      if (sortA == null || sortB == null) {
         continue
       }
 
