@@ -7,7 +7,7 @@
     >
       <v-btn
         color="error"
-        flat
+        variant="flat"
       >
         Lock Account
       </v-btn>

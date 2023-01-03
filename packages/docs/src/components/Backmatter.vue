@@ -16,7 +16,7 @@
       tag="div"
     >
       <template #team>
-        <app-link :href="rpath('/about/meet-the-team')">
+        <app-link :href="rpath('/introduction/meet-the-team/')">
           {{ t('team') }}
         </app-link>
       </template>
@@ -28,14 +28,15 @@
 
     <up-next class="mb-4" />
 
-    <!-- <exit-ad class="mb-8" /> -->
+    <vuetify class="mb-6" />
 
-    <!-- <contribute /> -->
+    <contribute />
   </section>
 </template>
 
 <script setup>
   // Components
+  import Contribute from '@/components/doc/Contribute.vue'
   import RelatedPages from '@/components/doc/RelatedPages.vue'
   import UpNext from '@/components/doc/UpNext.vue'
 

@@ -5,7 +5,7 @@
       :key="job.id"
     >
       <v-card
-        :href="job.url"
+        :href="job.link"
         border
         class="mb-4 transition-swing"
         rel="sponsored"
@@ -13,24 +13,24 @@
         variant="flat"
       >
         <v-list-item
-          :prepend-avatar="typeof job.avatar === 'string' ? job.avatar : undefined"
+          :prepend-avatar="typeof job.organization.avatar === 'string' ? job.organization.avatar : undefined"
           :title="job.title"
           class="mt-2"
         >
-          <template #subtitle>
+          <template v-if="job.locations.length > 0" #subtitle>
             <v-icon
-              class="mr-1"
+              class="me-1"
               icon="mdi-map-marker-outline"
               size="14"
             />
 
-            {{ job.location }}
+            {{ job.locations.join(', ') }}
           </template>
 
           <template #append>
             <v-btn
               color="success"
-              class="ml-6"
+              class="ms-6"
               size="small"
               variant="flat"
             >
@@ -39,7 +39,7 @@
               <v-icon
                 icon="mdi-open-in-new"
                 end
-                small
+                size="small"
               />
             </v-btn>
           </template>
@@ -54,7 +54,7 @@
           <div class="d-flex align-center text-lowercase">
             <v-chip
               v-if="job.isNew"
-              class="mr-1"
+              class="me-1"
               color="#e83e8c"
               label
               size="x-small"
@@ -63,12 +63,13 @@
             </v-chip>
 
             <v-chip
+              v-if="job.remote"
               class="px-2"
               color="primary"
               label
               size="x-small"
             >
-              <span class="font-weight-bold">#{{ job.type }}</span>
+              <span class="font-weight-bold">#remote {{ job.remote }}</span>
             </v-chip>
 
             <v-spacer />
@@ -83,22 +84,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useJobsStore } from '../../store/jobs'
+  import { useJobsStore } from '@/store/jobs'
 
-  // Utilities
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'VueJobs',
-
-    setup () {
-      const { jobs } = useJobsStore()
-      const { t } = useI18n()
-
-      return { jobs, t }
-    },
-  })
+  const { jobs } = useJobsStore()
+  const { t } = useI18n()
 </script>

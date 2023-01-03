@@ -18,7 +18,7 @@ The grid is used to create specific layouts within an application's content.  It
 
 <promoted slug="vuemastery-grids" />
 
-<page-component path="features/BreakpointsTable" />
+<breakpoints-table" />
 
 ## Usage
 
@@ -178,5 +178,3 @@ The power and flexibility of the Vuetify grid system allows you to create amazin
 Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content.
 
 <example file="grid/misc-variable-content" /> -->
-
-<backmatter />

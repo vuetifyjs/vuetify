@@ -6,36 +6,31 @@
   </div>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
   import { useRoute } from 'vue-router'
+
+  // Utilities
+  import { computed } from 'vue'
+
+  // Data
   import pageToApi from '@/data/page-to-api.json'
 
-  export default defineComponent({
-    name: 'ApiLinks',
+  const props = defineProps({
+    path: String,
+  })
 
-    props: {
-      path: String,
-    },
+  const route = useRoute()
+  const { locale } = useI18n()
 
-    setup (props) {
-      const route = useRoute()
-      const { locale } = useI18n()
+  const links = computed(() => {
+    const path = props.path || route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
+    const apis = pageToApi[path as keyof typeof pageToApi]
 
-      const links = computed(() => {
-        const path = props.path || route.path.replace(`/${locale.value}/`, '').replace(/\/$/, '')
-        const apis = pageToApi[path as keyof typeof pageToApi]
-
-        return apis.map(name => ({
-          name,
-          href: `/${locale.value}/api/${name}`,
-        }))
-      })
-
-      return {
-        links,
-      }
-    },
+    return apis.map(name => ({
+      name,
+      href: `/${locale.value}/api/${name}`,
+    }))
   })
 </script>

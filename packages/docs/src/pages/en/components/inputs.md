@@ -95,5 +95,3 @@ As any validatable Vuetify component, `v-input` can be set to success state usin
 `v-input` has `append` and `prepend` slots. You can place custom icons in them.
 
 <example file="v-input/slot-append-and-prepend" />
-
-<backmatter />

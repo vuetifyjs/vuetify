@@ -74,8 +74,8 @@
   "components/expansion-panels": [
     "v-expansion-panel",
     "v-expansion-panels",
-    "v-expansion-panel-header",
-    "v-expansion-panel-content"
+    "v-expansion-panel-text",
+    "v-expansion-panel-title"
   ],
   "components/file-inputs": ["v-file-input"],
   "components/floating-action-buttons": [
@@ -108,19 +108,7 @@
     "v-list-item-action-text",
     "v-list-item-avatar",
     "v-list-item-content",
-    "v-list-item-group",
     "v-list-item-icon",
-    "v-list-item-subtitle",
-    "v-list-item-title"
-  ],
-  "components/list-item-groups": [
-    "v-list-group",
-    "v-list-item",
-    "v-list-item-group",
-    "v-list-item-action",
-    "v-list-item-action-text",
-    "v-list-item-avatar",
-    "v-list-item-content",
     "v-list-item-subtitle",
     "v-list-item-title"
   ],
@@ -164,7 +152,6 @@
     "v-stepper-items",
     "v-stepper-step"
   ],
-  "components/subheaders": ["v-subheader"],
   "components/switches": ["v-switch"],
   "components/system-bars": ["v-system-bar"],
   "components/tables": ["v-table"],

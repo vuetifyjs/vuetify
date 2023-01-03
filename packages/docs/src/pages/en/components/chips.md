@@ -123,5 +123,3 @@ Chips are great for providing supplementary actions to a particular task. In thi
 Selects can use chips to display the selected data. Try adding your own tags below.
 
 <example file="v-chip/misc-in-selects" />
-
-<backmatter />

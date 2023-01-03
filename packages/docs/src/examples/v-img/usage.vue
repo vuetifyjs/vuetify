@@ -4,7 +4,7 @@
     justify="center"
   >
     <v-img
-      class="grey lighten-2"
+      class="bg-grey-lighten-2"
       v-bind="$attrs"
     ></v-img>
   </v-row>

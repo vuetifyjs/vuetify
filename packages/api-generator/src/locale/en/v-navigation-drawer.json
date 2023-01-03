@@ -15,7 +15,16 @@
     "src": "Specifies a [v-img](/components/images) as the component's background.",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
-    "value": "Controls whether the component is visible or hidden."
+    "value": "Controls whether the component is visible or hidden.",
+    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "railWidth": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "image": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "width": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
@@ -24,6 +33,10 @@
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",
-    "update:mini-variant": "The `mini-variant.sync` event"
+    "update:mini-variant": "The `mini-variant.sync` event",
+    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
+  },
+  "exposed": {
+    "isStuck": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   }
 }

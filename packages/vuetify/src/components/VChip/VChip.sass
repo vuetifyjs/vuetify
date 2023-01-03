@@ -19,6 +19,7 @@
     @include chip-density('height', $chip-density)
 
   @include tools.border($chip-border...)
+  @include tools.states('.v-chip__overlay')
   @include tools.rounded($chip-border-radius)
   @include tools.variant($chip-variants...)
 

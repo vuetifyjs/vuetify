@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="400"
   >
-    <v-card-title class="white--text orange darken-4">
+    <v-card-title class="text-white bg-orange-darken-4">
       User Directory
 
       <v-spacer></v-spacer>
@@ -12,7 +12,7 @@
         color="white"
         class="text--primary"
         fab
-        small
+        size="small"
       >
         <v-icon>mdi-plus</v-icon>
       </v-btn>
@@ -35,7 +35,7 @@
             <v-avatar
               :color="item.color"
               size="56"
-              class="white--text"
+              class="text-white"
             >
               {{ item.initials }}
             </v-avatar>
@@ -47,13 +47,13 @@
 
           <v-list-item-action>
             <v-btn
-              depressed
-              small
+              variant="flat"
+              size="small"
             >
               View User
 
               <v-icon
-                color="orange darken-4"
+                color="orange-darken-4"
                 end
               >
                 mdi-open-in-new

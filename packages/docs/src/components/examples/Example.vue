@@ -7,10 +7,11 @@
     >
       <v-toolbar
         v-if="!preview"
+        :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
         border="b"
         class="px-1"
-        height="44"
         flat
+        height="44"
         rounded="t"
       >
         <v-fade-transition>
@@ -31,7 +32,7 @@
         >
           <template #activator="{ props: tooltip }">
             <v-btn
-              class="ml-2 text-medium-emphasis"
+              class="ms-2 text-medium-emphasis"
               density="comfortable"
               variant="text"
               v-bind="mergeProps(action as any, tooltip)"
@@ -63,7 +64,7 @@
                 <v-theme-provider :theme="theme">
                   <app-markup
                     :code="section.content"
-                    class="rounded-0"
+                    :rounded="false"
                   />
                 </v-theme-provider>
               </template>
@@ -170,6 +171,10 @@
     set: val => _theme.value = val,
   })
   const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
+
+  const isDark = computed(() => {
+    return parentTheme.current.value.dark
+  })
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 

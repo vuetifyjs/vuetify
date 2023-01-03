@@ -31,10 +31,7 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
-      <v-menu
-        bottom
-        left
-      >
+      <v-menu>
         <template v-slot:activator="{ on, attrs }">
           <v-btn
             icon
@@ -57,7 +54,7 @@
       </v-menu>
 
       <template v-slot:extension>
-        <v-tabs align-with-title>
+        <v-tabs align-tabs="title">
           <v-tab>Tab 1</v-tab>
           <v-tab>Tab 2</v-tab>
           <v-tab>Tab 3</v-tab>

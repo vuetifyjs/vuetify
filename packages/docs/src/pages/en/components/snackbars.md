@@ -53,5 +53,3 @@ Apply different styles to the snackbar using props such as **text**, **shaped**,
 The **vertical** property allows you to stack the content of your `v-snackbar`.
 
 <example file="v-snackbar/prop-vertical" />
-
-<backmatter />

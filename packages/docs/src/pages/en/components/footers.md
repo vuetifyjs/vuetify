@@ -47,5 +47,3 @@ The footer component with Indigo background color and social media icons and but
 The footer component with a Teal color header and columns and rows of links.
 
 <example file="v-footer/misc-teal-footer" />
-
-<backmatter />

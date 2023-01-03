@@ -11,7 +11,7 @@
         <v-card-title :class="['text-h6', `bg-${item.color}`]">
           Lorem Ipsum Dolor
         </v-card-title>
-        <v-card-text class="white text--primary">
+        <v-card-text class="bg-white text--primary">
           <p>Lorem ipsum dolor sit amet, no nam oblique veritus. Commune scaevola imperdiet nec ut, sed euismod convenire principes at. Est et nobis iisque percipit, an vim zril disputando voluptatibus, vix an salutandi sententiae.</p>
           <v-btn
             :color="item.color"

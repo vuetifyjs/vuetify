@@ -13,6 +13,7 @@ import Intersect from '@/directives/intersect'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -58,11 +59,13 @@ export const VTextarea = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
@@ -91,7 +94,6 @@ export const VTextarea = defineComponent({
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const isFocused = ref(false)
     const controlHeight = ref('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
@@ -110,7 +112,7 @@ export const VTextarea = defineComponent({
         textareaRef.value?.focus()
       }
 
-      if (!isFocused.value) isFocused.value = true
+      if (!isFocused.value) focus()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
@@ -204,6 +206,7 @@ export const VTextarea = defineComponent({
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
@@ -257,7 +260,7 @@ export const VTextarea = defineComponent({
                         rows={ props.rows }
                         name={ props.name }
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

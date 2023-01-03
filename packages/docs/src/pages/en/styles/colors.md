@@ -21,7 +21,7 @@ Each color from the specification gets converted to a **background** and **text*
 
 <example file="color/classes" />
 
-Text colors also support **darken** and **lighten** variants
+Text colors also support **darken** and **lighten** variants using `text-{color}-{lighten|darken}-{n}`
 
 <example file="color/text-classes" />
 
@@ -88,6 +88,4 @@ This can also be done within your main **App.vue** file. Keep in mind, depending
 
 Below is a list of the Material design color palette grouped by primary color
 
-[//]: # (<page-component path="features/ColorPalette" />)
-
-<backmatter />
+[//]: # (<color-palette />)

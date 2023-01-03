@@ -9,8 +9,7 @@ related:
   - /components/buttons/
   - /components/cards/
 assets:
-  - https://use.fontawesome.com/releases/v5.0.8/css/all.css
-  - https://fonts.googleapis.com/css?family=Material+Icons
+  - https://use.fontawesome.com/releases/v5.0.13/css/all.css
 ---
 
 # Icons
@@ -150,5 +149,3 @@ export default {
 };
 </script>
 ```
-
-<backmatter />

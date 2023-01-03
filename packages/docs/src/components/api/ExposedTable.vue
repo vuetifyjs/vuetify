@@ -5,10 +5,8 @@
     >
       <tbody>
         <template v-for="item in items" :key="item.name">
-          <tr class="bg-grey-lighten-4">
-            <td>
-              <NameCell section="props" :name="item.name" />
-            </td>
+          <tr :class="theme.dark ? 'bg-grey-darken-3' : 'bg-grey-lighten-4'">
+            <NameCell section="props" :name="item.name" />
           </tr>
           <tr>
             <app-markup :code="getType(item)" language="ts" :rounded="false" />
@@ -24,32 +22,21 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  // Imports
-  import { defineComponent, PropType } from 'vue'
-  import { getType } from './utils'
+<script setup lang="ts">
+  // Components
   import NameCell from './NameCell.vue'
-  import PrismCell from './PrismCell.vue'
 
-  export default defineComponent({
-    components: {
-      NameCell,
-      PrismCell,
-    },
-    props: {
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => [],
-      },
-    },
-    setup (props) {
-      const headers = ['name', 'type', 'description']
+  // Utilities
+  import { getType } from './utils'
+  import { PropType } from 'vue'
+  import { useTheme } from 'vuetify'
 
-      return {
-        headers,
-        field: 'props',
-        getType,
-      }
+  defineProps({
+    items: {
+      type: Array as PropType<any[]>,
+      default: () => [],
     },
   })
+
+  const { current: theme } = useTheme()
 </script>

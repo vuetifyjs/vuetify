@@ -74,3 +74,5 @@ The layout system exposes a function `getLayoutItem` that allows you to get size
 </alert>
 
 <example file="application-layout/layout-information-composable" />
+
+The combined size of all layout components is also available under `layout.mainRect`. This is used internally by the **v-main** component to determine the size of the main content area.

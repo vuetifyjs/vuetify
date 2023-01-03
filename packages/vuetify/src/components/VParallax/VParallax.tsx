@@ -55,6 +55,7 @@ export const VParallax = defineComponent({
     })
 
     watch(displayHeight, onScroll)
+    watch(() => contentRect.value?.height, onScroll)
 
     const scale = computed(() => {
       return 1 - clamp(+props.scale)

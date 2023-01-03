@@ -36,8 +36,6 @@ You can set a fixed aspect ratio if you want to change aspect ratio of the image
 
 <example file="v-img/prop-aspect-ratio" />
 
-<promoted slug="vuetify-zero-theme-pro" />
-
 #### Cover
 
 If the provided aspect ratio doesn't match that of the actual image, the default behavior is to fill as much space as possible without cropping. To fill the entire available space use the `cover` prop.
@@ -88,5 +86,3 @@ This will behave similarly to:
 You can use `v-img` to make, for example, a picture gallery.
 
 <example file="v-img/misc-grid" />
-
-<backmatter />

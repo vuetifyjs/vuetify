@@ -21,7 +21,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').type('Something')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
         [false],
@@ -31,7 +31,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').type(' and something else')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
         [false],
@@ -53,7 +53,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').eq(0).type('Valid')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.be.undefined
     })
@@ -61,7 +61,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').eq(1).type('Valid')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
         [true],
@@ -100,7 +100,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false]])
     })
@@ -112,7 +112,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', '')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false], [null]])
     })
@@ -131,7 +131,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false]])
     })
@@ -143,7 +143,7 @@ describe('VForm', () => {
     cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', 'Something')
 
     cy.vue().then(wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('update:modelValue')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false], [null]])
     })
@@ -177,9 +177,9 @@ describe('VForm', () => {
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
     cy.vue().then(async wrapper => {
-      const emits = wrapper.findComponent('.v-form').emitted('submit')
+      const emits = wrapper.findComponent<VForm>('.v-form').emitted<[SubmitEventPromise]>('submit')
 
-      expect(await emits[0][0]).to.deep.equal({ valid: true, errors: [] })
+      expect(await emits![0][0]).to.deep.equal({ valid: true, errors: [] })
     })
   })
 

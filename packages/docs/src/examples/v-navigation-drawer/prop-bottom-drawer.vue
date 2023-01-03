@@ -22,7 +22,7 @@
 
       <v-navigation-drawer
         v-model="drawer"
-        bottom
+        location="bottom"
         temporary
       >
         <v-list

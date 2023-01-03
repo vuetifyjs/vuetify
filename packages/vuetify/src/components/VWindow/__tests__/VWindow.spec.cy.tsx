@@ -128,7 +128,7 @@ describe('VWindow', () => {
     // wrap it in a div for now.
     cy.mount(() => (
       <div>
-        <VWindow showArrows modelValue="two" onUpdate:modelValue="">
+        <VWindow showArrows modelValue="two" onUpdate:modelValue={ undefined }>
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>
@@ -155,13 +155,9 @@ describe('VWindow', () => {
     cy.get('@arrows').eq(1).click()
 
     cy.vue().then(wrapper => {
-      const window = wrapper.findComponent('.v-window')
+      const window = wrapper.findComponent<VWindow>('.v-window')
 
-      const emits = window.emitted('update:modelValue')
-
-      expect(emits).to.have.length(2)
-      expect(emits![0]).to.deep.equal(['one'])
-      expect(emits![1]).to.deep.equal(['three'])
+      expect(window.emitted('update:modelValue')).to.deep.equal([['one'], ['three']])
     })
   })
 

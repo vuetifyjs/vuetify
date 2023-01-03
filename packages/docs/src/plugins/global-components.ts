@@ -3,7 +3,6 @@ import Alert from '@/components/Alert.vue'
 import ApiInline from '@/components/api/Inline.vue'
 import ApiLinks from '@/components/api/Links.vue'
 import ApiSection from '@/components/api/Section.vue'
-import ApiTable from '@/components/api/Table.vue'
 import AppBtn from '@/components/app/Btn.vue'
 import AppCaption from '@/components/app/Caption.vue'
 import AppDivider from '@/components/app/Divider.vue'
@@ -19,14 +18,18 @@ import AppTable from '@/components/app/Table.vue'
 import AppTitle from '@/components/app/Title.vue'
 import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 import Backmatter from '@/components/Backmatter.vue'
+import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
+import Bsa from '@/components/promoted/Bsa.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
+// import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
 import Inline from '@/components/promoted/Inline.vue'
-import PageComponent from '@/components/PageComponent.vue'
 import Promoted from '@/components/promoted/Promoted.vue'
 import Random from '@/components/promoted/Random.vue'
+import Sponsors from '@/components//sponsor/Sponsors.vue'
+import TeamMembers from '@/components//about/TeamMembers.vue'
 import Usage from '@/components/examples/Usage.vue'
 import UsageExample from '@/components/examples/UsageExample.vue'
 import VueFile from '@/components/examples/VueFile.vue'
@@ -49,6 +52,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('AppTable', AppTable)
   app.component('AppTitle', AppTitle)
   app.component('AppTooltipBtn', AppTooltipBtn)
+  app.component('UnwrapMarkdown', (props, { slots }) => slots.default?.()?.[0].children)
 
   // Used by markdown files
   app.component('Alert', Alert)
@@ -56,16 +60,19 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
   app.component('ApiInline', ApiInline)
   app.component('ApiLinks', ApiLinks)
   app.component('ApiSection', ApiSection)
-  app.component('ApiTable', ApiTable)
   app.component('Backmatter', Backmatter)
+  app.component('BreakpointsTable', BreakpointsTable)
+  app.component('Bsa', Bsa)
+  // app.component('ColorPalette', ColorPalette)
   app.component('Carbon', Carbon)
   app.component('Discovery', Discovery)
   app.component('Entry', Entry)
   app.component('Example', Example)
   app.component('Inline', Inline)
-  app.component('PageComponent', PageComponent)
   app.component('Promoted', Promoted)
   app.component('Random', Random)
+  app.component('Sponsors', Sponsors)
+  app.component('TeamMembers', TeamMembers)
   app.component('Usage', Usage)
   app.component('UsageExample', UsageExample)
   app.component('VueFile', VueFile)

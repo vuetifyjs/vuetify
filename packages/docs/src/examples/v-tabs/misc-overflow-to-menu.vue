@@ -48,7 +48,7 @@
               </v-btn>
             </template>
 
-            <v-list class="grey lighten-3">
+            <v-list class="bg-grey-lighten-3">
               <v-list-item
                 v-for="item in more"
                 :key="item"

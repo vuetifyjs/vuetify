@@ -6,8 +6,6 @@
     :rounded="rounded"
     class="app-markup overflow-hidden"
     dir="ltr"
-    outlined
-    v-bind="$attrs"
   >
     <v-toolbar
       v-if="resource"
@@ -28,13 +26,13 @@
     </v-toolbar>
 
     <v-tooltip location="bottom">
-      <template #activator="{ props }">
+      <template #activator="{ props: activatorProps }">
         <v-btn
           :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
           class="mr-1 text-disabled me-2 mt-2 app-markup-btn"
           density="compact"
           style="position: absolute; right: 0; top: 0;"
-          v-bind="props"
+          v-bind="activatorProps"
           variant="text"
           @click="copy"
         />
@@ -55,18 +53,8 @@
   </v-sheet>
 </template>
 
-<script lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
-  import { IN_BROWSER } from '@/util/globals'
-  import { wait } from '@/util/helpers'
-
-  // Imports
+<script setup lang="ts">
+// Styles
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash.js'
@@ -77,78 +65,69 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  export default defineComponent({
-    name: 'Markup',
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
 
-    inheritAttrs: false,
+  // Utilities
+  import { ComponentPublicInstance, computed, ref } from 'vue'
+  import { IN_BROWSER } from '@/util/globals'
+  import { wait } from '@/util/helpers'
 
-    props: {
-      resource: String,
-      code: String,
-      inline: Boolean,
-      language: {
-        type: String,
-        default: 'markup',
-      },
-      rounded: {
-        type: Boolean,
-        default: true,
-      },
+  const props = defineProps({
+    resource: String,
+    code: String,
+    inline: Boolean,
+    language: {
+      type: String,
+      default: 'markup',
     },
-
-    setup (props) {
-      const user = useUserStore()
-      const theme = useTheme()
-      const clicked = ref(false)
-      const root = ref<ComponentPublicInstance>()
-      const type = ref('js')
-      const { t } = useI18n()
-
-      const highlighted = computed(() => (
-        props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
-      ))
-      const className = computed(() => `langauge-${props.language}`)
-
-      async function copy () {
-        if (!IN_BROWSER || !root.value) return
-
-        const el = root.value.$el.querySelector('code')
-
-        if (!el) return
-
-        el.setAttribute('contenteditable', 'true')
-        el.focus()
-
-        document.execCommand('selectAll', false, undefined)
-        document.execCommand('copy')
-
-        el.removeAttribute('contenteditable')
-
-        clicked.value = true
-
-        await wait(500)
-
-        window.getSelection()?.removeAllRanges()
-
-        clicked.value = false
-      }
-
-      const isDark = computed(() => {
-        return user.mixedTheme || theme.current.value.dark
-      })
-
-      return {
-        root,
-        isDark,
-        highlighted,
-        className,
-        clicked,
-        copy,
-        type,
-        t,
-      }
+    rounded: {
+      type: Boolean,
+      default: true,
     },
   })
+
+  const user = useUserStore()
+  const theme = useTheme()
+  const { t } = useI18n()
+  const clicked = ref(false)
+  const root = ref<ComponentPublicInstance>()
+
+  const highlighted = computed(() => (
+    props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
+  ))
+  const className = computed(() => `langauge-${props.language}`)
+
+  async function copy () {
+    if (!IN_BROWSER || !root.value) return
+
+    const el = root.value.$el.querySelector('code')
+
+    if (!el) return
+
+    el.setAttribute('contenteditable', 'true')
+    el.focus()
+
+    document.execCommand('selectAll', false, undefined)
+    document.execCommand('copy')
+
+    el.removeAttribute('contenteditable')
+
+    clicked.value = true
+
+    await wait(500)
+
+    window.getSelection()?.removeAllRanges()
+
+    clicked.value = false
+  }
+
+  const isDark = computed(() => {
+    return user.mixedTheme || theme.current.value.dark
+  })
+
 </script>
 
 <style lang="sass">

@@ -103,5 +103,3 @@ Use slots such as `append` and `prepend` to easily customize the `v-slider` to f
 Sliders can be combined with other components in its `append` slot, such as `v-text-field`, to add additional functionality to the component.
 
 <example file="v-slider/slot-append-text-field" />
-
-<backmatter />

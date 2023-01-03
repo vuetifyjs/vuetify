@@ -50,5 +50,3 @@ export default new Router({
   ],
 })
 ```
-
-<backmatter />

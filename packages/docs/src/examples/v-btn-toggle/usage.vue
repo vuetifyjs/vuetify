@@ -35,7 +35,6 @@
 
       <v-btn-toggle
         v-model="toggle_multiple"
-        dense
         background-color="primary"
         dark
         multiple
@@ -121,8 +120,8 @@
 
       <v-btn-toggle
         v-model="text"
-        tile
-        color="deep-purple accent-3"
+        rounded="0"
+        color="deep-purple-accent-3"
         group
       >
         <v-btn value="left">

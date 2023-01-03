@@ -6,7 +6,7 @@
     <v-toolbar-title>State selection</v-toolbar-title>
     <v-autocomplete
       v-model="select"
-      v-model:search-input="search"
+      v-model:search="search"
       :loading="loading"
       :items="items"
       cache-items

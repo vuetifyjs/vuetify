@@ -55,5 +55,3 @@ Use the **height** prop to set the height of the table.
 Use the **fixed-header** prop together with the **height** prop to fix the header to the top of the table.
 
 <example file="v-table/prop-fixed-header" />
-
-<backmatter />

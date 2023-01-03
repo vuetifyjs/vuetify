@@ -33,7 +33,7 @@
     <v-card-actions class="justify-center">
       <v-btn
         block
-        text
+        variant="text"
       >
         Go to Report
       </v-btn>

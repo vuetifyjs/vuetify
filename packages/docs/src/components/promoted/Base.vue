@@ -1,48 +1,43 @@
 <template>
   <v-sheet
-    :style="styles"
+    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :min-height="minHeight"
+    :theme="isDark ? 'dark' : 'light'"
     class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
-    :color="dark ? undefined : 'grey-lighten-5'"
     rounded
     width="100%"
-    v-bind="$attrs"
   >
     <slot />
   </v-sheet>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { useTheme } from 'vuetify'
 
-  export default defineComponent({
-    name: 'PromotedBase',
+  // Utilities
+  import { computed } from 'vue'
 
-    inheritAttrs: false,
-
-    props: {
-      compact: Boolean,
-      comfortable: Boolean,
+  const props = defineProps({
+    density: {
+      type: String,
+      default: 'default',
     },
+    minHeight: [Number, String],
+  })
 
-    computed: {
-      minHeight () {
-        if (this.compact) return 52
-        if (this.comfortable) return 74
+  const theme = useTheme()
 
-        return 118
-      },
-      styles () {
-        return {
-          minHeight: `${this.minHeight}px`,
-        }
-      },
-      dark () {
-        const theme = useTheme()
+  const minHeight = computed(() => {
+    if (props.minHeight) return props.minHeight
+    if (props.density === 'compact') return 52
+    if (props.density === 'comfortable') return 74
 
-        return theme.current.value.dark
-      },
-    },
+    return 118
+  })
+
+  const isDark = computed(() => {
+    return theme.current.value.dark
   })
 </script>
 

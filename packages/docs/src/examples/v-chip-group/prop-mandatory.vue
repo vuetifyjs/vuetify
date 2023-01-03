@@ -11,7 +11,7 @@
       >
         <v-chip-group
           mandatory
-          active-class="primary--text"
+          selected-class="text-primary"
         >
           <v-chip
             v-for="tag in tags"

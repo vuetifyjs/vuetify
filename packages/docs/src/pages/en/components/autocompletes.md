@@ -52,11 +52,11 @@ Below is a collection of simple to complex examples.
 
 ### Props
 
-#### Dense
+#### Density
 
-You can use `dense` prop to reduce autocomplete height and lower max height of list items.
+You can use `density` prop to adjusts vertical spacing within the component.
 
-<example file="v-autocomplete/prop-dense" />
+<example file="v-autocomplete/prop-density" />
 
 #### Filter
 
@@ -97,5 +97,3 @@ The `v-autocomplete` component is extremely flexible and can fit in just about a
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
-
-<backmatter />
