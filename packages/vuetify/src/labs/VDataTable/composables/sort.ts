@@ -24,7 +24,7 @@ const VDataTableSortSymbol: InjectionKey<{
   toggleSort: (key: string) => void
 }> = Symbol.for('vuetify:data-table-sort')
 
-export type SortItem = { key: string, order: 'asc' | 'desc' }
+export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
 
 export function createSort (props: {
   sortBy: SortItem[]
@@ -100,6 +100,8 @@ export function sortItems<T extends InternalItem> (
     for (let i = 0; i < sortByItems.length; i++) {
       const sortKey = sortByItems[i].key
       const sortOrder = sortByItems[i].order
+
+      if (sortOrder === false) continue
 
       let sortA = getObjectValueByPath(a.raw, sortKey)
       let sortB = getObjectValueByPath(b.raw, sortKey)

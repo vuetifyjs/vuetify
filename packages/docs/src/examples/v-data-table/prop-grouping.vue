@@ -12,8 +12,8 @@
 <script>
   export default {
     data: () => ({
-      sortBy: [{ key: 'name', order: 'asc' }],
-      groupBy: [{ key: 'dairy', order: 'asc' }],
+      sortBy: [{ key: 'name' }],
+      groupBy: [{ key: 'dairy' }],
       headers: [
         {
           title: 'Dessert (100g serving)',

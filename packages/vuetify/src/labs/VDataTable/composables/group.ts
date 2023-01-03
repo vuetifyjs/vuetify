@@ -29,7 +29,10 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
   const opened = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
-    return groupBy.value.concat(sortBy.value)
+    return groupBy.value.map<SortItem>(val => ({
+      ...val,
+      order: val.order ?? false,
+    })).concat(sortBy.value)
   })
 
   function toggleGroup (group: string, value?: boolean) {
@@ -78,18 +81,14 @@ export function useGroupBy () {
 function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
   if (!items.length) return []
 
-  const groups: DataTableItem[][] = [[]]
-
-  let current = getObjectValueByPath(items[0].raw, groupBy)
+  const groups = new Map<any, DataTableItem[]>()
   for (const item of items) {
     const value = getObjectValueByPath(item.raw, groupBy)
 
-    if (current === value) {
-      groups.at(-1)?.push(item)
-    } else {
-      groups.push([item])
-      current = value
+    if (!groups.has(value)) {
+      groups.set(value, [])
     }
+    groups.get(value)!.push(item)
   }
 
   return groups
@@ -102,19 +101,18 @@ function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefi
   const groups: GroupHeaderItem[] = []
 
   const rest = groupBy.slice(1)
-  for (let i = 0; i < groupedItems.length; i++) {
+  groupedItems.forEach((items, value) => {
     const key = groupBy[0]
-    const value = getObjectValueByPath(groupedItems[i][0].raw, groupBy[0])
     const id = `${prefix}_${key}_${value}`
     groups.push({
       depth,
       id,
       key,
       value,
-      items: rest?.length ? groupItems(groupedItems[i], rest, depth + 1, id) : groupedItems[i],
+      items: rest.length ? groupItems(items, rest, depth + 1, id) : items,
       type: 'group-header',
     })
-  }
+  })
 
   return groups
 }
