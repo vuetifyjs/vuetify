@@ -1,5 +1,20 @@
-import { createSimpleFunctional } from '@/util'
+// Utility
+import { defineComponent, useRender } from '@/util'
 
-export const VBreadcrumbsDivider = createSimpleFunctional('v-breadcrumbs-divider', 'li')
+export const VBreadcrumbsDivider = defineComponent({
+  name: 'VBreadcrumbsDivider',
 
-export type VBreadcrumbsDivider = InstanceType<typeof VBreadcrumbsDivider>
+  props: {
+    divider: [Number, String],
+  },
+
+  setup (props, { slots }) {
+    useRender(() => (
+      <li class="v-breadcrumbs-divider">
+        { slots?.default?.() ?? props.divider }
+      </li>
+    ))
+
+    return {}
+  },
+})

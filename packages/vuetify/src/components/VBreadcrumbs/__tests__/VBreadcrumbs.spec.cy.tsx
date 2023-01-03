@@ -164,4 +164,21 @@ describe('VBreadcrumbs', () => {
 
     cy.get('.v-breadcrumbs-item').last().should('not.have.class', 'v-breadcrumbs-item--disabled')
   })
+
+  it('should provide default divider', () => {
+    cy.mount(() => (
+      <Application>
+        <VBreadcrumbs>
+          <VBreadcrumbsItem title="foo"></VBreadcrumbsItem>
+          <VBreadcrumbsDivider></VBreadcrumbsDivider>
+          <VBreadcrumbsItem title="bar"></VBreadcrumbsItem>
+          <VBreadcrumbsDivider divider="-"></VBreadcrumbsDivider>
+          <VBreadcrumbsItem title="fizz"></VBreadcrumbsItem>
+        </VBreadcrumbs>
+      </Application>
+    ))
+
+    cy.get('.v-breadcrumbs-divider').first().should('have.text', '/')
+    cy.get('.v-breadcrumbs-divider').last().should('have.text', '-')
+  })
 })
