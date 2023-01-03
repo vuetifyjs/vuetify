@@ -1,19 +1,24 @@
 // Styles
 import './VInfiniteScroll.sass'
 
+// Components
+import { VBtn } from '@/components/VBtn'
+import { VProgressCircular } from '@/components/VProgressCircular'
+
 // Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { computed, defineComponent, nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, useRender } from '@/util'
+import { computed, nextTick, onMounted, ref, watch } from 'vue'
+import { convertToUnit, defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VProgressCircular } from '../VProgressCircular'
-import { VBtn } from '../VBtn'
-import { useLocale } from '@/composables'
+
+export type InfiniteScrollSide = 'start' | 'end' | 'both'
+export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
 const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',
@@ -38,10 +43,8 @@ const VInfiniteScrollIntersect = defineComponent({
       rootMargin: props.rootMargin,
     } : undefined)
 
-    watch(isIntersecting, async () => {
-      if (isIntersecting.value) {
-        emit('intersect', props.side)
-      }
+    watch(isIntersecting, async val => {
+      if (val) emit('intersect', props.side)
     })
 
     useRender(() => (
@@ -49,9 +52,6 @@ const VInfiniteScrollIntersect = defineComponent({
     ))
   },
 })
-
-export type InfiniteScrollSide = 'start' | 'end' | 'both'
-export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
 export const VInfiniteScroll = defineComponent({
   name: 'VInfiniteScroll',
@@ -222,6 +222,7 @@ export const VInfiniteScroll = defineComponent({
           <div class="v-infinite-scroll__side">
             { renderSide('start', startStatus.value) }
           </div>
+
           { rootEl.value && hasStartIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="start"
@@ -231,7 +232,9 @@ export const VInfiniteScroll = defineComponent({
               rootMargin={ margin.value }
             />
           ) }
+
           { slots.default?.() }
+
           { rootEl.value && hasEndIntersect && intersectMode && (
             <VInfiniteScrollIntersect
               key="end"
@@ -241,6 +244,7 @@ export const VInfiniteScroll = defineComponent({
               rootMargin={ margin.value }
             />
           ) }
+
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }
           </div>
