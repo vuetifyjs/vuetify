@@ -1,1 +1,1 @@
-export * from './VInfiniteScroll'
+export { VInfiniteScroll } from './VInfiniteScroll'
