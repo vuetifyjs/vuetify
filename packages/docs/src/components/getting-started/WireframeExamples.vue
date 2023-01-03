@@ -20,7 +20,7 @@
           :aspect-ratio="16/9"
           :title="name"
           :src="`https://cdn.vuetifyjs.com/docs/images/wireframes/${wireframe}.svg`"
-          outlined
+          class="border"
         />
       </router-link>
     </v-col>

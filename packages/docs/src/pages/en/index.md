@@ -12,16 +12,12 @@ meta:
   import SponsorCard from '@/components/sponsor/Card.vue'
 </script>
 
-<home-logo size="300px" />
-
-<br>
+<home-logo size="300" />
 
 # Vue Component Framework
 
 Vuetify is a no design skills required UI Framework with beautifully handcrafted Vue Components.
 {style="max-width: 568px" .mx-auto}
-
-<br>
 
 <home-action-btns />
 
@@ -32,16 +28,15 @@ Vuetify is a no design skills required UI Framework with beautifully handcrafted
 
 Thank you to our special sponsor:
 
-<sponsor-card height="70" slug="teamwork" />
+<sponsor-card slug="teamwork" />
 
 <br>
 <br>
+<v-divider class="mx-auto" width="55%" />
 <br>
 
 ## Project Sponsors
 
-The continued development and maintenance of Vuetify
-<br>
-is made possible by these generous sponsors:
+The continued development and maintenance of Vuetify is made possible by these generous sponsors:{style="max-width: 568px" .mx-auto}
 
 <home-sponsors />

@@ -1,29 +1,23 @@
-<!-- eslint-disable vue/no-unused-vars -->
 <template>
   <v-data-table
     v-model:expanded="expanded"
     :headers="dessertHeaders"
     :items="desserts"
-    :single-expand="singleExpand"
-    item-key="name"
+    item-value="name"
     show-expand
     class="elevation-1"
   >
     <template v-slot:top>
       <v-toolbar flat>
         <v-toolbar-title>Expandable Table</v-toolbar-title>
-        <v-spacer></v-spacer>
-        <v-switch
-          v-model="singleExpand"
-          label="Single expand"
-          class="mt-2"
-        ></v-switch>
       </v-toolbar>
     </template>
-    <template v-slot:expanded-item="{ headers, item }">
-      <td :colspan="headers.length">
-        More info about {{ item.name }}
-      </td>
+    <template v-slot:expanded-row="{ columns, item }">
+      <tr>
+        <td :colspan="columns.length">
+          More info about {{ item.raw.name }}
+        </td>
+      </tr>
     </template>
   </v-data-table>
 </template>
@@ -36,17 +30,17 @@
         singleExpand: false,
         dessertHeaders: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
             sortable: false,
-            value: 'name',
+            key: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
-          { text: '', value: 'data-table-expand' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
+          { title: '', key: 'data-table-expand' },
         ],
         desserts: [
           {

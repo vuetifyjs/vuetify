@@ -296,8 +296,4 @@ If you need help with an issue, please use one of our help channels:
 - [Discord Community](https://community.vuetifyjs.com/)
 - [GitHub Discussions](https://discussions.vuetifyjs.com/)
 
-<br>
-
-For additional inquiries, please reach out to [John Leider](mailto:john@vuetifyjs.com) or [Heather Leider](mailto:heather@vuetifyjs.com).
-
 <promoted type="theme" />

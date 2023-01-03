@@ -18,7 +18,7 @@ The grid is used to create specific layouts within an application's content.  It
 
 <promoted slug="vuemastery-grids" />
 
-<page-component path="features/BreakpointsTable" />
+<breakpoints-table" />
 
 ## Usage
 

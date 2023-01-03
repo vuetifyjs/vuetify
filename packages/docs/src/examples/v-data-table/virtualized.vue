@@ -1,12 +1,12 @@
 <template>
   <v-data-table
     :headers="headers"
-    :items="items"
     :items-per-page="-1"
-    virtual-rows
-    hide-default-footer
-    height="500px"
+    :items="items"
     class="elevation-1"
+    height="500"
+    hide-default-footer
+    virtual-rows
   ></v-data-table>
 </template>
 
@@ -95,23 +95,21 @@
   ]
 
   export default {
-    data () {
-      return {
-        headers: [
-          {
-            text: 'Dessert (100g serving)',
-            align: 'start',
-            sortable: false,
-            value: 'name',
-          },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
-        ],
-      }
-    },
+    data: () => ({
+      headers: [
+        {
+          title: 'Dessert (100g serving)',
+          align: 'start',
+          sortable: false,
+          key: 'name',
+        },
+        { title: 'Calories', key: 'calories' },
+        { title: 'Fat (g)', key: 'fat' },
+        { title: 'Carbs (g)', key: 'carbs' },
+        { title: 'Protein (g)', key: 'protein' },
+        { title: 'Iron (%)', key: 'iron' },
+      ],
+    }),
     computed: {
       items () {
         return [...new Array(100)].reduce(items => {

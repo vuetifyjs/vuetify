@@ -1,0 +1,23 @@
+@forward './variables'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-data-table-footer
+  display: flex
+  align-items: center
+  flex-wrap: wrap
+  padding: $data-table-footer-padding
+  justify-content: flex-end
+
+.v-data-table-footer__items-per-page
+  padding-inline-end: 24px
+  display: flex
+  align-items: center
+  justify-content: space-between
+
+  > span
+    padding-inline-end: 24px
+
+.v-data-table-footer__info
+  display: flex
+  padding-inline-end: 24px

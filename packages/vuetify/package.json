@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.5",
+  "version": "3.0.6",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -64,6 +64,8 @@
     "./locale": "./lib/locale/index.mjs",
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
+    "./labs/components": "./lib/labs/components.mjs",
+    "./labs/*": "./lib/labs/*/index.mjs",
     "./*": "./*"
   },
   "typesVersions": {

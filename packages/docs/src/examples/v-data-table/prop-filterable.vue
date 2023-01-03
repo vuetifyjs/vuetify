@@ -1,14 +1,16 @@
 <template>
   <v-card>
-    <v-card-title>
+    <v-card-title class="bg-primary pb-6">
       <v-text-field
         v-model="search"
-        append-icon="mdi-magnify"
+        prepend-icon="mdi-magnify"
         label="Search"
         single-line
         hide-details
+        variant="underlined"
       ></v-text-field>
     </v-card-title>
+
     <v-data-table
       :headers="headers"
       :items="desserts"
@@ -24,16 +26,15 @@
         search: '',
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
-            filterable: false,
-            value: 'name',
+            key: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', align: 'end', key: 'calories' },
+          { title: 'Fat (g)', align: 'end', key: 'fat' },
+          { title: 'Carbs (g)', align: 'end', key: 'carbs' },
+          { title: 'Protein (g)', align: 'end', key: 'protein' },
+          { title: 'Iron (%)', align: 'end', key: 'iron' },
         ],
         desserts: [
           {

@@ -140,6 +140,11 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
           <img height="30px" src="https://cdn.cosmicjs.com/215133d0-248a-11ed-b52d-a3f33977cd87-medium-logo-alt.png">
         </a>
       </td>
+      <td>
+        <a href="https://crosswordanswers911.net/">
+          <img height="30px" src="https://cdn.cosmicjs.com/ef6ea2a0-7ee1-11ed-8730-d9eebcd39d9f-crossword-answers-911.jpg">
+        </a>
+      </td>
     </tr>
   </tbody>
 </table>

@@ -107,7 +107,7 @@ export default defineConfig(({ command, mode }) => {
             paths.push(folder.replace(/\.[a-z]*/, ''))
           }
 
-          const [category, page] = paths.slice(1)
+          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
             ...parseMeta(route.component),
@@ -120,11 +120,11 @@ export default defineConfig(({ command, mode }) => {
           return {
             ...route,
             path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${page ? '-' : ''}${page ?? ''}`,
+            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
             meta: {
               ...meta,
               category,
-              page,
+              page: rest?.join('-'),
               locale,
             },
           }
