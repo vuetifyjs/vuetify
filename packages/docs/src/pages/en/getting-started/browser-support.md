@@ -36,5 +36,3 @@ Safari and some older versions of other browsers require polyfills to work corre
 ```
 
 Support for even older browsers may be possible with additional polyfills and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2.
-
-<backmatter />

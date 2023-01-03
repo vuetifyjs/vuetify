@@ -67,5 +67,3 @@ You can use the **vertical** prop to switch sliders to a vertical orientation. I
 Using the **tick-labels** prop along with the `thumb-label` slot, you can create a very customized solution.
 
 <example file="v-range-slider/slot-thumb-label" />
-
-<backmatter />

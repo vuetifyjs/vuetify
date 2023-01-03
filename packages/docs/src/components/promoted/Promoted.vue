@@ -65,7 +65,13 @@
   const { event } = useGtag()
 
   const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
-  const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
+  const logo = computed(() => {
+    if (props.medium === 'promoted') {
+      return ad.value?.metadata?.images?.preview?.url || ad.value?.metadata?.images?.logo?.url
+    }
+
+    return ad.value?.metadata?.images?.logo?.url
+  })
   const background = computed(() => ad.value?.metadata?.images?.background?.url)
 
   function onClick () {

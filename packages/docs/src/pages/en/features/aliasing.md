@@ -78,5 +78,3 @@ export default createVuetify({
   },
 })
 ```
-
-<backmatter />

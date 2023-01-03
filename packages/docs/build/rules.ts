@@ -22,9 +22,20 @@ function addImageRules (md: MarkdownIt) {
     const token = tokens[idx]
     const alt = token.content
     const src = token.attrGet('src')
-    const title = token.attrGet('title')
+    const title = token.attrGet('title') ?? ''
+    const isEntry = alt.toLowerCase().includes('entry')
+    const height = token.attrGet('height') ?? (isEntry ? 305 : '')
 
-    return `<div><app-figure src="${src}" alt="${alt}" title="${title}" /></div>`
+    return `
+<div>
+  <app-figure
+    ${alt ? `alt="${alt}"` : ''}
+    ${src ? `src="${src}"` : ''}
+    ${title ? `title="${title}"` : ''}
+    ${height ? `height="${height}"` : ''}
+  />
+</div>
+`
   }
 }
 

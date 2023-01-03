@@ -14,7 +14,7 @@ related:
 
 The `v-carousel` component is used to display large numbers of visual content on a rotating timer.
 
-![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png)
+<!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
 
 ---
 
@@ -87,5 +87,3 @@ You can show a linear progress bar with the **progress** prop. It will indicate 
 You can control carousel with **v-model**.
 
 <example file="v-carousel/prop-model" />
-
-<backmatter />

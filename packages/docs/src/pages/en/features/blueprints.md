@@ -79,5 +79,3 @@ import { md3 } from 'vuetify/blueprints'
 **Preview:**
 
 <example preview file="blueprints/md3" />
-
-<backmatter />

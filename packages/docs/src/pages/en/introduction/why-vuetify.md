@@ -75,7 +75,7 @@ Vuetify has been in active development since 2016 and is constantly responding t
 * ⛏️ MINOR **(Quarterly)**
 * ⚒️ MAJOR **(Bi-yearly to Yearly)**
 
-In addition, after every MAJOR release, the previous version is still maintained with with 18 months of [Long-term support](/introduction/long-term-support/).
+In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
 
 ### Framework comparison
 
@@ -109,5 +109,3 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 <!-- | [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min | -->
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
-
-<backmatter />

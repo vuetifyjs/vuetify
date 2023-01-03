@@ -140,5 +140,3 @@ Using the [v-hover](/components/hover), we are able to add a nice scrim over the
 Using the `v-overlay` as a background, add a progress component to easily create a custom loader.
 
 <example file="v-overlay/misc-loader" />
-
-<backmatter />

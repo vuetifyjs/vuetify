@@ -108,6 +108,7 @@ const validate = ajv.compile({
       uniqueItems: true,
       items: { type: 'string' },
     },
+    disabled: { type: 'boolean' },
   },
 })
 

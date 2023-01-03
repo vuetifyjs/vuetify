@@ -24,5 +24,3 @@ Specify a custom aspect-ratio
 ## API
 
 <api-inline />
-
-<backmatter />

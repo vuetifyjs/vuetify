@@ -115,5 +115,3 @@ Menus can be placed within almost any component.
 ## Accessibility
 
 By default, `v-menu` components are _detached_ and moved to the root of your application. In order to properly support [inserting dynamic content into the DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26), you _must_ use the **attach** prop. This will ensure that focus transfers from the activator to the content when pressing the <kbd>tab</kbd> key.
-
-<backmatter />

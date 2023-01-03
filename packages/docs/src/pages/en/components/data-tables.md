@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Data table component
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
@@ -174,5 +175,3 @@ Sorting can also be controlled externally by using the individual props, or by u
 If you're loading data already paginated and sorted from a backend, you can use the **server-items-length** prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from your backend. Use the **loading** prop to display a progress bar while fetching data.
 
 <example file="v-data-table/misc-server-side-paginate-and-sort" />
-
-<backmatter />

@@ -49,5 +49,3 @@ Below is a collection of all UI Kits available on our store:
   Whenever a new version is released you will receive a new download link with the latest update via email.
 
 </alert>
-
-<backmatter />

@@ -109,5 +109,3 @@ The `v-select` components can be optionally expanded with prepended and appended
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <example file="v-select/slot-selection" />
-
-<backmatter />

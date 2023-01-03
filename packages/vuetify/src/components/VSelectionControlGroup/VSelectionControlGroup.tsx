@@ -9,7 +9,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, provide, toRef } from 'vue'
+import { computed, onScopeDispose, provide, toRef } from 'vue'
 import { deepEqual, defineComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
@@ -17,6 +17,8 @@ import type { InjectionKey, PropType, Ref } from 'vue'
 
 export interface VSelectionGroupContext {
   modelValue: Ref<any>
+  forceUpdate: () => void
+  onForceUpdate: (fn: () => void) => void
 }
 
 export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> = Symbol.for('vuetify:selection-control-group')
@@ -72,7 +74,19 @@ export const VSelectionControlGroup = defineComponent({
     const id = computed(() => props.id || `v-selection-control-group-${uid}`)
     const name = computed(() => props.name || id.value)
 
-    provide(VSelectionControlGroupSymbol, { modelValue })
+    const updateHandlers = new Set<() => void>()
+    provide(VSelectionControlGroupSymbol, {
+      modelValue,
+      forceUpdate: () => {
+        updateHandlers.forEach(fn => fn())
+      },
+      onForceUpdate: cb => {
+        updateHandlers.add(cb)
+        onScopeDispose(() => {
+          updateHandlers.delete(cb)
+        })
+      },
+    })
 
     provideDefaults({
       [props.defaultsTarget]: {
@@ -99,7 +113,6 @@ export const VSelectionControlGroup = defineComponent({
           'v-selection-control-group',
           { 'v-selection-control-group--inline': props.inline },
         ]}
-        aria-labelled-by={ props.type === 'radio' ? id.value : undefined }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }
       >
         { slots.default?.() }

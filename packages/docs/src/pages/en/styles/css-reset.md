@@ -63,5 +63,3 @@ Below is a list of additional *features* that ress provides over the default **n
 - Hide content from screens but not screen readers.
 
 For a complete list of all applied styles, see the [ress css stylesheet](https://github.com/filipelinhares/ress/blob/master/ress.css).
-
-<backmatter />

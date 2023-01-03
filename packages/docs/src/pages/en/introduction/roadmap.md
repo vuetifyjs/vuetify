@@ -249,5 +249,3 @@ The following releases are old and unsupported **minor** and **major** versions:
 - **Released:** December 2016
 - **Overview:**
   Vuetify is officially announced to the public. The framework initially shipped with 40 components and came in at a whopping 46kb.
-
-<backmatter />

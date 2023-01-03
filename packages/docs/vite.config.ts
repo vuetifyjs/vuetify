@@ -81,7 +81,8 @@ export default defineConfig(({ command, mode }) => {
 
       // https://github.com/antfu/vite-plugin-md
       Markdown({
-        wrapperClasses: 'prose prose-sm m-auto',
+        wrapperComponent: 'unwrap-markdown',
+        wrapperClasses: '',
         headEnabled: true,
         markdownItSetup: configureMarkdown,
       }),
@@ -110,6 +111,10 @@ export default defineConfig(({ command, mode }) => {
           const meta = {
             layout: 'default',
             ...parseMeta(route.component),
+          }
+
+          if (meta.disabled) {
+            return null
           }
 
           return {
