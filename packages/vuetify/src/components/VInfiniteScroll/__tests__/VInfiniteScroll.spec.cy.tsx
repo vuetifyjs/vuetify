@@ -18,7 +18,7 @@ describe('VInfiniteScroll', () => {
       </VInfiniteScroll>
     ))
       .get('.v-infinite-scroll').scrollTo('bottom')
-      .wait(1)
+      .wait(150)
       .get('.v-infinite-scroll .v-progress-circular').should('exist')
       .then(() => {
         expect(load).to.be.calledOnce
@@ -39,7 +39,7 @@ describe('VInfiniteScroll', () => {
       </VInfiniteScroll>
     ))
       .get('.v-infinite-scroll').scrollTo('top')
-      .wait(1)
+      .wait(150)
       .get('.v-infinite-scroll .v-progress-circular').should('exist')
       .then(() => {
         expect(load).to.be.calledOnce
@@ -60,13 +60,13 @@ describe('VInfiniteScroll', () => {
       </VInfiniteScroll>
     ))
       .get('.v-infinite-scroll').scrollTo('top')
-      .wait(1)
+      .wait(150)
       .get('.v-infinite-scroll .v-progress-circular').eq(0).should('exist')
       .then(() => {
         expect(load).to.be.calledOnce
       })
       .get('.v-infinite-scroll').scrollTo('bottom')
-      .wait(1)
+      .wait(150)
       .get('.v-infinite-scroll .v-progress-circular').eq(1).should('exist')
       .then(() => {
         expect(load).to.be.calledTwice
@@ -87,7 +87,7 @@ describe('VInfiniteScroll', () => {
       </VInfiniteScroll>
     ))
       .get('.v-infinite-scroll').scrollTo('right')
-      .wait(1)
+      .wait(150)
       .get('.v-infinite-scroll .v-progress-circular').should('exist')
       .then(() => {
         expect(load).to.be.calledOnce
