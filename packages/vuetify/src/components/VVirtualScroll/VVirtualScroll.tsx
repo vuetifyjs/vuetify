@@ -8,8 +8,14 @@ import { VVirtualScrollItem } from './VVirtualScrollItem'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
-import { convertToUnit, createRange, genericComponent, getPropertyFromItem, useRender } from '@/util'
 import { computed, ref } from 'vue'
+import {
+  convertToUnit,
+  createRange,
+  genericComponent,
+  getPropertyFromItem,
+  useRender,
+} from '@/util'
 
 // Types
 import type { MakeSlots, SlotsToProps } from '@/util'
