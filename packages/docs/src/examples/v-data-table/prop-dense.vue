@@ -1,10 +1,10 @@
 <template>
   <v-data-table
-    dense
     :headers="headers"
     :items="desserts"
-    item-key="name"
     class="elevation-1"
+    density="compact"
+    item-key="name"
   ></v-data-table>
 </template>
 
@@ -95,16 +95,16 @@
       ],
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          title: 'Dessert (100g serving)',
           align: 'start',
           sortable: false,
           value: 'name',
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' },
+        { title: 'Calories', align: 'end', key: 'calories' },
+        { title: 'Fat (g)', align: 'end', key: 'fat' },
+        { title: 'Carbs (g)', align: 'end', key: 'carbs' },
+        { title: 'Protein (g)', align: 'end', key: 'protein' },
+        { title: 'Iron (%)', align: 'end', key: 'iron' },
       ],
     }),
   }

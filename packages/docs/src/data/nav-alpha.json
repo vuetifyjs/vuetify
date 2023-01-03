@@ -191,7 +191,23 @@
     "inactiveIcon": "mdi-beaker-outline",
     "activeIcon": "mdi-beaker",
     "items": [
-      "introduction"
+      "introduction",
+      {
+        "title": "data-tables",
+        "subfolder": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "basics",
+          "headers",
+          "sorting",
+          "pagination",
+          "filtering",
+          "grouping",
+          "virtual-tables",
+          "server-side-tables"
+        ]
+      }
     ]
   },
   {

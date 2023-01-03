@@ -1,3 +1,1 @@
-// export * from './VDataTable'
-
-export {}
+export * from './VDataTable'

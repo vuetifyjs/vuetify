@@ -2,10 +2,11 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    item-value="name"
     class="elevation-1"
   >
-    <template v-slot:header.name="{ header }">
-      {{ header.text.toUpperCase() }}
+    <template v-slot:column.name="{ column }">
+      {{ column.title.toUpperCase() }}
     </template>
   </v-data-table>
 </template>
@@ -15,15 +16,16 @@
     data: () => ({
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          title: 'Dessert (100g serving)',
           align: 'start',
-          value: 'name',
+          key: 'name',
+          sortable: false,
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Iron (%)', value: 'iron' },
+        { title: 'Calories', key: 'calories' },
+        { title: 'Fat (g)', key: 'fat' },
+        { title: 'Carbs (g)', key: 'carbs' },
+        { title: 'Protein (g)', key: 'protein' },
+        { title: 'Iron (%)', key: 'iron' },
       ],
       desserts: [
         {

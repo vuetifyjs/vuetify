@@ -6,8 +6,7 @@
       :items="items"
       :page="page"
       :search="search"
-      :sort-by="sortBy.toLowerCase()"
-      :sort-desc="sortDesc"
+      :sort-by="sortBy"
       v-bind="$attrs"
     >
       <template v-slot:header>
@@ -28,7 +27,7 @@
           <template v-if="$vuetify.breakpoint.mdAndUp">
             <v-spacer></v-spacer>
             <v-select
-              v-model="sortBy"
+              v-model="sortKey"
               class="mx-2"
               flat
               solo-inverted
@@ -164,10 +163,10 @@
     data: () => ({
       itemsPerPageOptions: [4, 8, 12],
       search: '',
+      sortKey: 'name',
       sortDesc: false,
       page: 1,
       itemsPerPage: 4,
-      sortBy: 'name',
       keys: [
         'Name',
         'Calories',
@@ -296,5 +295,11 @@
       },
       tabs: [],
     }),
+
+    computed: {
+      sortBy () {
+        return [{ key: this.sortKey, order: this.sortDesc ? 'desc' : 'asc' }]
+      },
+    },
   }
 </script>

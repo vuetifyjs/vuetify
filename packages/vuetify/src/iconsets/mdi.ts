@@ -24,7 +24,8 @@ const aliases: IconAliases = {
   checkboxOff: 'mdi-checkbox-blank-outline',
   checkboxIndeterminate: 'mdi-minus-box',
   delimiter: 'mdi-circle', // for carousel
-  sort: 'mdi-arrow-up',
+  sortAsc: 'mdi-arrow-up',
+  sortDesc: 'mdi-arrow-down',
   expand: 'mdi-chevron-down',
   menu: 'mdi-menu',
   subgroup: 'mdi-menu-down',

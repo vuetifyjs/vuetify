@@ -77,7 +77,7 @@
           class="pa-4 rounded-b"
           with-background
         >
-          <component :is="ExampleComponent" v-if="isLoaded" />
+          <component :is="ExampleComponent" v-if="isLoaded" :file="file" />
         </v-theme-provider>
       </div>
     </v-sheet>

@@ -305,58 +305,6 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
-type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
-  if (sortBy === null || !sortBy.length) return items
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-
-  return items.sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const sortKey = sortBy[i]
-
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
-
-      if (sortDesc[i]) {
-        [sortA, sortB] = [sortB, sortA]
-      }
-
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
-
-        if (!customResult) continue
-
-        return customResult
-      }
-
-      // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
-        continue
-      }
-
-      // Dates should be compared numerically
-      if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
-      }
-
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-      if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return stringCollator.compare(sortA, sortB)
-      }
-    }
-
-    return 0
-  })
-}
-
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
