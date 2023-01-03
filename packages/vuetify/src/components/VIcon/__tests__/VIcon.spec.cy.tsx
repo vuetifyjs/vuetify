@@ -80,7 +80,7 @@ describe('VIcon', () => {
       cy.get('.v-icon').should('have.class', 'bar')
     })
 
-    it.only('should render default slot if no icon value found', () => {
+    it('should render default slot if no icon value found', () => {
       const Foo = defineComponent({
         setup () {
           return () => (
