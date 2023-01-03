@@ -12,18 +12,24 @@ import { convertToUnit, createRange, genericComponent, getPropertyFromItem, useR
 import { computed, ref } from 'vue'
 
 // Types
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 
 const UP = -1
 const DOWN = 1
 
+export interface VVirtualScrollSlot<T> {
+  item: T
+  index: number
+}
+
 export const VVirtualScroll = genericComponent<new <T>() => {
   $props: {
     items: readonly T[]
-  }
-  $slots: MakeSlots<{
-    default: [{ item: T, index: number }]
-  }>
+  } & SlotsToProps<
+    MakeSlots<{
+      default: [VVirtualScrollSlot<T>]
+    }>
+  >
 }>()({
   name: 'VVirtualScroll',
 
