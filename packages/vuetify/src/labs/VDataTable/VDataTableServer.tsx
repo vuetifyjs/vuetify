@@ -52,7 +52,10 @@ export const VDataTableServer = defineComponent({
   setup (props, { slots }) {
     createExpanded(props)
 
-    const { columns } = createHeaders(props, { showSelect: toRef(props, 'showSelect') })
+    const { columns } = createHeaders(props, {
+      showSelect: toRef(props, 'showSelect'),
+      showExpand: toRef(props, 'showExpand'),
+    })
 
     const { items } = useDataTableItems(props, columns)
 
