@@ -45,7 +45,7 @@ export const VTable = defineComponent({
       >
         { slots.top?.() }
 
-        { slots.default && (
+        { slots.wrapper ? slots.wrapper() : slots.default && (
           <div
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}

@@ -1,50 +1,55 @@
 <template>
-  <div>
-    <v-data-table
-      v-model:page="page"
-      :headers="headers"
-      :items="desserts"
-      :items-per-page="itemsPerPage"
-      hide-default-footer
-      class="elevation-1"
-      @page-count="pageCount = $event"
-    ></v-data-table>
-    <div class="text-center pt-2">
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-      ></v-pagination>
-      <v-text-field
-        :model-value="itemsPerPage"
-        label="Items per page"
-        type="number"
-        min="-1"
-        max="15"
-        @update:model-value="itemsPerPage = parseInt($event, 10)"
-      ></v-text-field>
-    </div>
-  </div>
+  <v-data-table
+    v-model:page="page"
+    :headers="headers"
+    :items="desserts"
+    :items-per-page="itemsPerPage"
+    hide-default-footer
+    class="elevation-1"
+    @update:options="options = $event"
+  >
+    <template v-slot:bottom>
+      <div class="text-center pt-2">
+        <v-pagination
+          v-model="page"
+          :length="options.pageCount"
+        ></v-pagination>
+        <v-text-field
+          :model-value="itemsPerPage"
+          class="pa-2"
+          label="Items per page"
+          type="number"
+          min="-1"
+          max="15"
+          hide-details
+          @update:model-value="itemsPerPage = parseInt($event, 10)"
+        ></v-text-field>
+      </div>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        options: {
+          pageCount: 1,
+        },
         page: 1,
-        pageCount: 0,
-        itemsPerPage: 10,
+        itemsPerPage: 5,
         headers: [
           {
-            text: 'Dessert (100g serving)',
             align: 'start',
+            key: 'name',
             sortable: false,
-            value: 'name',
+            title: 'Dessert (100g serving)',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {

@@ -32,7 +32,9 @@ import type { InternalItem } from '@/composables/items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-function highlightResult (text: string, matches: FilterMatch, length: number) {
+function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
+  if (matches == null) return text
+
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
 
   return typeof matches === 'number' && ~matches
@@ -158,7 +160,7 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       return model.value.map(v => {
@@ -375,7 +377,7 @@ export const VCombobox = genericComponent<new <
 
                     { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
+                    { filteredItems.value.map((item, index) => slots.item?.({
                       item,
                       index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
@@ -392,7 +394,7 @@ export const VCombobox = genericComponent<new <
                           title: () => {
                             return isPristine.value
                               ? item.title
-                              : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                              : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
                           },
                         }}
                       </VListItem>

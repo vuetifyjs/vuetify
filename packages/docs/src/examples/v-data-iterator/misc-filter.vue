@@ -5,8 +5,7 @@
       v-model:page="page"
       :items="items"
       :search="search"
-      :sort-by="sortBy.toLowerCase()"
-      :sort-desc="sortDesc"
+      :sort-by="sortBy"
       hide-default-footer
     >
       <template v-slot:header>
@@ -172,7 +171,7 @@
         sortDesc: false,
         page: 1,
         itemsPerPage: 4,
-        sortBy: 'name',
+        sortBy: [{ key: 'name', order: 'asc' }],
         keys: [
           'Name',
           'Calories',

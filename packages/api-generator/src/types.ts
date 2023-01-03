@@ -243,6 +243,7 @@ const allowedRefs = [
   'SelectStrategyFn',
   'SubmitEventPromise',
   'ValidationRule',
+  'SortItem',
 ]
 
 function formatDefinition (definition: Definition) {

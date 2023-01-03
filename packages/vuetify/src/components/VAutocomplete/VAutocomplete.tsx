@@ -30,7 +30,9 @@ import type { MakeSlots, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-function highlightResult (text: string, matches: FilterMatch, length: number) {
+function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
+  if (matches == null) return text
+
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
 
   return typeof matches === 'number' && ~matches
@@ -117,7 +119,7 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const { filteredItems } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => props.valueComparator(item.value, v.value)) || v
@@ -296,7 +298,7 @@ export const VAutocomplete = genericComponent<new <
 
                     { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map(({ item, matches }, index) => slots.item?.({
+                    { filteredItems.value.map((item, index) => slots.item?.({
                       item,
                       index,
                       props: mergeProps(item.props, { onClick: () => select(item) }),
@@ -313,7 +315,7 @@ export const VAutocomplete = genericComponent<new <
                           title: () => {
                             return isPristine.value
                               ? item.title
-                              : highlightResult(item.title, matches.title, search.value?.length ?? 0)
+                              : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
                           },
                         }}
                       </VListItem>

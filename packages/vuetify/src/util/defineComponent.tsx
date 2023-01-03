@@ -15,6 +15,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type {
+  ComponentObjectPropsOptions,
   ComponentOptions,
   ComponentOptionsMixin,
   ComponentOptionsWithObjectProps,
@@ -22,6 +23,9 @@ import type {
   ComputedOptions,
   DefineComponent,
   EmitsOptions,
+  ExtractDefaultPropTypes,
+  ExtractPropTypes,
+  FunctionalComponent,
   MethodOptions,
   VNode,
   VNodeChild,
@@ -133,4 +137,14 @@ export function genericComponent<T extends (new () => {
   >
 >(options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>) => Base & T {
   return options => (exposeDefaults ? defineComponent : _defineComponent)(options) as any
+}
+
+export function defineFunctionalComponent<
+  T extends FunctionalComponent<Props>,
+  PropsOptions = ComponentObjectPropsOptions,
+  Defaults = ExtractDefaultPropTypes<PropsOptions>,
+  Props = Readonly<ExtractPropTypes<PropsOptions>>,
+> (props: PropsOptions, render: T): FunctionalComponent<Partial<Defaults> & Omit<Props, keyof Defaults>> {
+  render.props = props as any
+  return render as any
 }

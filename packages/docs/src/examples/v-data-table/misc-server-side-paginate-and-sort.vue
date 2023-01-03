@@ -1,13 +1,21 @@
 <template>
   <div>
-    <v-data-table
-      v-model:options="options"
+    <v-data-table-server
       :headers="headers"
       :items="desserts"
-      :server-items-length="totalDesserts"
+      :items-length="totalDesserts"
       :loading="loading"
+      :items-per-page="2"
+      item-value="name"
+      show-select
+      show-expand
       class="elevation-1"
-    ></v-data-table>
+      @update:options="options = $event"
+    >
+      <template v-slot:expanded-row>
+        This is an expanded row
+      </template>
+    </v-data-table-server>
   </div>
 </template>
 
@@ -56,17 +64,17 @@
        */
       fakeApiCall () {
         return new Promise((resolve, reject) => {
-          const { sortBy, sortDesc, page, itemsPerPage } = this.options
+          const { sortBy = [], page, itemsPerPage } = this.options
 
           let items = this.getDesserts()
           const total = items.length
 
-          if (sortBy.length === 1 && sortDesc.length === 1) {
+          if (sortBy.length) {
             items = items.sort((a, b) => {
-              const sortA = a[sortBy[0]]
-              const sortB = b[sortBy[0]]
+              const sortA = a[sortBy[0].key]
+              const sortB = b[sortBy[0].key]
 
-              if (sortDesc[0]) {
+              if (sortBy[0].order) {
                 if (sortA < sortB) return 1
                 if (sortA > sortB) return -1
                 return 0
