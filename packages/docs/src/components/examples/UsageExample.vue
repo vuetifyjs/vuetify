@@ -120,6 +120,10 @@
         <div class="pa-3">
           <app-markup :code="code" />
         </div>
+
+        <div v-if="script" class="pa-3">
+          <app-markup :code="script" language="js" />
+        </div>
       </div>
     </v-expand-transition>
   </div>
@@ -144,6 +148,7 @@
       default: () => ([]),
       required: true,
     },
+    script: String,
   })
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
