@@ -14,7 +14,7 @@ related:
 
 The `v-infinite-scroll` component displays a potentially infinite list, by loading more items of the list when scrolling. It supports either vertical or horizontal scrolling.
 
-<entry />
+----
 
 ## Usage
 
@@ -31,9 +31,13 @@ The **load** function will be called when the component needs to load more conte
 |`'empty'`|There is no more content to fetch. This will display a message that there is no more content|
 |`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be returned from the **load** function|
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
 ## Examples
 
@@ -102,5 +106,3 @@ The `error` slot is shown if the status `'error'` is returned from the `load` fu
 If the items in your infinite list are of a uniform size, you can quite easily virtualize the list to only render a small amount of items regardless of how far you scroll in either direction.
 
 <example file="v-infinite-scroll/misc-virtual" />
-
-<backmatter />
