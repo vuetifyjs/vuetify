@@ -11,7 +11,7 @@ interface HTMLExpandElement extends HTMLElement {
   }
 }
 
-export default function (expandedParentClass = '', x = false) {
+export function ExpandTransitionGenerator (expandedParentClass = '', x = false) {
   const sizeProperty = x ? 'width' : 'height' as 'width' | 'height'
   const offsetProperty = camelize(`offset-${sizeProperty}`) as 'offsetHeight' | 'offsetWidth'
 

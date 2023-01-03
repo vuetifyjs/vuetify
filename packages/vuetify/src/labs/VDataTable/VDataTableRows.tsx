@@ -1,6 +1,7 @@
 // Components
 import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
+import { VTableExpandTransition } from '@/components/transitions'
 
 // Composables
 import { useLocale } from '@/composables/locale'
@@ -122,7 +123,9 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                 />
               ) }
 
-              { isExpanded(item) && slots['expanded-row']?.({ item, columns: columns.value }) }
+              <VTableExpandTransition columns={ columns.value.length }>
+                { isExpanded(item) && slots['expanded-row']?.({ item, columns: columns.value }) }
+              </VTableExpandTransition>
             </>
           )
         }) }
