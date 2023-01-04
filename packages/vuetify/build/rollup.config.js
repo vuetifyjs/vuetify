@@ -198,7 +198,19 @@ export default [
         options: {
           charset: false,
         },
-        output () {},
+        output (styles, styleNodes) {
+          // Individual CSS files
+          styleNodes = styleNodes.filter(node => node.id.includes('src/labs'))
+          for (const { id, content } of styleNodes) {
+            const out = path.parse(fixWindowsPath(id).replace(
+              path.resolve(__dirname, '../src'),
+              path.resolve(__dirname, '../lib')
+            ))
+            mkdirp(out.dir).then(() => {
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
+            })
+          }
+        },
       }),
       alias({
         entries: [
