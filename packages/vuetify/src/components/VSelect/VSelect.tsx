@@ -10,7 +10,6 @@ import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
-import { VVirtualScroll } from '../VVirtualScroll'
 
 // Composables
 import { makeItemsProps, useItems } from '@/composables/items'
@@ -253,33 +252,29 @@ export const VSelect = genericComponent<new <
 
                     { slots['prepend-item']?.() }
 
-                    <VVirtualScroll items={ items.value } height="50vh" dynamicItemHeight itemHeight={ 48 }>
-                      {{
-                        default: ({ item, index }) => {
-                          if (slots.item) {
-                            return slots.item?.({
-                              item,
-                              index,
-                              props: mergeProps(item.props, { onClick: () => select(item) }),
-                            })
-                          }
+                    { items.value.map((item, index) => {
+                      if (slots.item) {
+                        return slots.item?.({
+                          item,
+                          index,
+                          props: mergeProps(item.props, { onClick: () => select(item) }),
+                        })
+                      }
 
-                          return (
-                            <VListItem
-                              key={ index }
-                              { ...item.props }
-                              onClick={ () => select(item) }
-                            >
-                              {{
-                                prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                                  <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                                ) : undefined,
-                              }}
-                            </VListItem>
-                          )
-                        },
-                      }}
-                    </VVirtualScroll>
+                      return (
+                        <VListItem
+                          key={ index }
+                          { ...item.props }
+                          onClick={ () => select(item) }
+                        >
+                          {{
+                            prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
+                              <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                            ) : undefined,
+                          }}
+                        </VListItem>
+                      )
+                    })}
 
                     { slots['append-item']?.() }
                   </VList>
