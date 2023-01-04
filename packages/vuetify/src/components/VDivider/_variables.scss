@@ -1,13 +1,14 @@
 @use '../../styles/settings';
 
 // VDivider
-$divider-border-color: settings.$border-color-root !default;
+$divider-border-color: null !default;
 $divider-border-style: settings.$border-style-root !default;
 $divider-border-width: thin 0 0 0 !default;
 $divider-flex: 1 1 100% !default;
 $divider-inset-margin: 72px !default;
 $divider-inset-max-width: calc(100% - #{$divider-inset-margin}) !default;
 $divider-margin: 8px !default;
+$divider-opacity: var(--v-border-opacity) !default;
 $divider-vertical-border-width: 0 thin 0 0 !default;
 $divider-vertical-inset-margin-bottom: $divider-margin !default;
 $divider-vertical-inset-margin-top: $divider-margin !default;
