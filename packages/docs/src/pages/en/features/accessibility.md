@@ -147,14 +147,12 @@ When providing a `v-list-item` component in a slot, the aria attributes are pass
         v-bind="attrs"
         v-on="on"
       >
-        <v-list-item-content>
-          <v-list-item-title
-            :id="attrs['aria-labelledby']"
-            v-text="item.title"
-          ></v-list-item-title>
+        <v-list-item-title
+          :id="attrs['aria-labelledby']"
+          v-text="item.title"
+        ></v-list-item-title>
 
-          <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
-        </v-list-item-content>
+        <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
       </v-list-item>
     </template>
   </v-select>
