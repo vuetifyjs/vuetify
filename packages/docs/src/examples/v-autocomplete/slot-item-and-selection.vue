@@ -1,8 +1,9 @@
 <template>
   <v-card
-    color="blue-grey-darken-1"
-    dark
     :loading="isUpdating"
+    color="blue-grey-darken-1"
+    class="mx-auto"
+    max-width="420"
   >
     <template v-slot:progress>
       <v-progress-linear
@@ -12,73 +13,83 @@
         indeterminate
       ></v-progress-linear>
     </template>
-    <v-img height="200" src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg">
-      <v-row>
-        <v-col class="text-end" cols="12">
-          <v-menu location="bottom start" origin="overlap" transition="slide-y-transition">
+
+    <v-img
+      cover
+      height="200"
+      src="https://cdn.vuetifyjs.com/images/cards/dark-beach.jpg"
+    >
+      <v-row class="pa-3">
+        <v-col cols="12">
+          <v-menu
+            location="bottom start"
+            origin="overlap"
+            transition="slide-y-transition"
+          >
             <template v-slot:activator="{ props }">
-              <v-btn v-bind="props" icon="mdi-dots-vertical" variant="text"></v-btn>
+              <v-btn
+                v-bind="props"
+                icon="mdi-dots-vertical"
+                density="comfortable"
+                variant="tonal"
+              ></v-btn>
             </template>
-            <v-list>
-              <v-list-item @click="isUpdating = true">
-                <v-list-item-action>
-                  <v-icon>mdi-cog</v-icon>
-                </v-list-item-action>
-                <v-list-item-content>
-                  <v-list-item-title>Update</v-list-item-title>
-                </v-list-item-content>
-              </v-list-item>
+
+            <v-list :lines="false">
+              <v-list-item
+                title="Update"
+                @click="isUpdating = true"
+              ></v-list-item>
             </v-list>
           </v-menu>
         </v-col>
-        <v-row
-          class="pa-4"
-          align="center"
-          justify="center"
-        >
+
+        <v-row>
           <v-col class="text-center">
-            <h3 class="text-h5">
-              {{ name }}
-            </h3>
+            <h3 class="text-h5">{{ name }}</h3>
+
             <span class="text-grey-lighten-1">{{ title }}</span>
           </v-col>
         </v-row>
       </v-row>
     </v-img>
+
     <v-form>
       <v-container>
-        <v-row>
+        <v-row dense>
           <v-col cols="12" md="6">
             <v-text-field
               v-model="name"
               :disabled="isUpdating"
-              variant="filled"
               color="blue-grey-lighten-2"
               label="Name"
+              variant="filled"
             ></v-text-field>
           </v-col>
+
           <v-col cols="12" md="6">
             <v-text-field
               v-model="title"
               :disabled="isUpdating"
-              variant="filled"
               color="blue-grey-lighten-2"
               label="Title"
+              variant="filled"
             ></v-text-field>
           </v-col>
+
           <v-col cols="12">
             <v-autocomplete
               v-model="friends"
               :disabled="isUpdating"
               :items="people"
-              variant="filled"
               chips
               closable-chips
               color="blue-grey-lighten-2"
-              label="Select"
               item-title="name"
               item-value="name"
+              label="Select"
               multiple
+              variant="filled"
             >
               <template v-slot:chip="{ props, item }">
                 <v-chip
@@ -87,14 +98,13 @@
                   :text="item.raw.name"
                 ></v-chip>
               </template>
+
               <template v-slot:item="{ props, item }">
-                <v-list-item v-if="typeof item.raw !== 'object'" v-bind="props"></v-list-item>
                 <v-list-item
-                  v-else
                   v-bind="props"
-                  :prepend-avatar="item.raw.avatar"
-                  :title="item.raw.name"
-                  :subtitle="item.raw.group"
+                  :prepend-avatar="item?.raw?.avatar"
+                  :title="item?.raw?.name"
+                  :subtitle="item?.raw?.group"
                 ></v-list-item>
               </template>
             </v-autocomplete>
@@ -102,17 +112,21 @@
         </v-row>
       </v-container>
     </v-form>
+
     <v-divider></v-divider>
+
     <v-card-actions>
       <v-switch
         v-model="autoUpdate"
         :disabled="isUpdating"
-        class="mt-0"
+        class="mt-0 ms-3"
         color="green-lighten-2"
         hide-details
         label="Auto Update"
       ></v-switch>
+
       <v-spacer></v-spacer>
+
       <v-btn
         :disabled="autoUpdate"
         :loading="isUpdating"
