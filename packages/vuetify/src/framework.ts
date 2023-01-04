@@ -92,19 +92,21 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
 
     getUid.reset()
 
-    app.mixin({
-      computed: {
-        $vuetify () {
-          return reactive({
-            defaults: inject.call(this, DefaultsSymbol),
-            display: inject.call(this, DisplaySymbol),
-            theme: inject.call(this, ThemeSymbol),
-            icons: inject.call(this, IconSymbol),
-            locale: inject.call(this, LocaleSymbol),
-          })
+    if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
+      app.mixin({
+        computed: {
+          $vuetify () {
+            return reactive({
+              defaults: inject.call(this, DefaultsSymbol),
+              display: inject.call(this, DisplaySymbol),
+              theme: inject.call(this, ThemeSymbol),
+              icons: inject.call(this, IconSymbol),
+              locale: inject.call(this, LocaleSymbol),
+            })
+          },
         },
-      },
-    })
+      })
+    }
   }
 
   return {
