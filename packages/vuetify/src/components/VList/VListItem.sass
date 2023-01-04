@@ -157,22 +157,28 @@
         $one-line-padding: (list.nth($list-item-padding, 1) + $modifier)
 
         min-height: $list-item-one-line-min-height + $modifier
-        padding-top: $one-line-padding
-        padding-bottom: $one-line-padding
+
+        @if ($one-line-padding > 0)
+          padding-top: $one-line-padding
+          padding-bottom: $one-line-padding
 
       &.v-list-item--two-line
         $two-line-padding: (list.nth($list-item-two-line-padding, 1) + $modifier)
 
         min-height: $list-item-two-line-min-height + $modifier
-        padding-top: $two-line-padding
-        padding-bottom: $two-line-padding
+
+        @if ($two-line-padding > 0)
+          padding-top: $two-line-padding
+          padding-bottom: $two-line-padding
 
       &.v-list-item--three-line
         $three-line-padding: (list.nth($list-item-three-line-padding, 1) + $modifier)
 
         min-height: $list-item-three-line-min-height + $modifier
-        padding-top: $three-line-padding
-        padding-bottom: $three-line-padding
+
+        @if ($three-line-padding > 0)
+          padding-top: $three-line-padding
+          padding-bottom: $three-line-padding
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line
