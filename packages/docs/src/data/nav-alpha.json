@@ -163,7 +163,8 @@
       "tables",
       "tabs",
       "timelines",
-      "toolbars"
+      "toolbars",
+      "virtual-scroller"
     ]
   },
   {
