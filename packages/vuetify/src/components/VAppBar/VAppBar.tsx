@@ -17,6 +17,7 @@ import { genericComponent, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { SlotsToProps } from '@/util'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
+import { useToggleScope } from '@/composables/toggleScope'
 
 export const VAppBar = genericComponent<new () => {
   $props: SlotsToProps<VToolbarSlots>
@@ -24,13 +25,7 @@ export const VAppBar = genericComponent<new () => {
   name: 'VAppBar',
 
   props: {
-    hideOnScroll: Boolean,
-    invertedScroll: Boolean,
-    collapseOnScroll: Boolean,
-    elevateOnScroll: Boolean,
-    // shrinkOnScroll: Boolean,
-    fadeImageOnScroll: Boolean,
-    scrollOffScreen: Boolean,
+    scrollBehavior: String,
     modelValue: {
       type: Boolean,
       default: true,
@@ -56,16 +51,30 @@ export const VAppBar = genericComponent<new () => {
   },
 
   setup (props, { slots }) {
-    const vToolbarRef = ref()
+    const vToolbarRef = ref<VToolbar>()
     const isActive = useProxiedModel(props, 'modelValue')
+    const scrollBehavior = computed(() => {
+      const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
+      return {
+        hide: behavior.has('hide'),
+        fullyHide: behavior.has('fully-hide'),
+        inverted: behavior.has('inverted'),
+        collapse: behavior.has('collapse'),
+        elevate: behavior.has('elevate'),
+        fadeImage: behavior.has('fade-image'),
+        // shrink: behavior.has('shrink'),
+      }
+    })
     const canScroll = computed(() => {
+      const behavior = scrollBehavior.value
       return (
-        props.invertedScroll ||
-        props.elevateOnScroll ||
-        props.hideOnScroll ||
-        props.collapseOnScroll ||
-        props.fadeImageOnScroll ||
-        // props.shrinkOnScroll ||
+        behavior.hide ||
+        behavior.fullyHide ||
+        behavior.inverted ||
+        behavior.collapse ||
+        behavior.elevate ||
+        behavior.fadeImage ||
+        // behavior.shrink ||
         !isActive.value
       )
     })
@@ -77,40 +86,46 @@ export const VAppBar = genericComponent<new () => {
     } = useScroll(props, { canScroll })
 
     const isCollapsed = computed(() => props.collapse || (
-      props.collapseOnScroll &&
-      currentScroll.value > 0
+      scrollBehavior.value.collapse &&
+      (scrollBehavior.value.inverted ? currentScroll.value < 1 : currentScroll.value > 0)
     ))
     const isFlat = computed(() => props.flat || (
-      props.elevateOnScroll &&
-      currentScroll.value === 0
+      scrollBehavior.value.elevate &&
+      currentScroll.value === (scrollBehavior.value.inverted ? 1 : 0)
     ))
     const scrollRatio = computed(() => Math.max(
       ((currentThreshold.value - currentScroll.value) / currentThreshold.value) || 0,
       0
     ))
-    const opacity = computed(() => props.fadeImageOnScroll ? scrollRatio.value : undefined)
+    const opacity = computed(() => (
+      scrollBehavior.value.fadeImage
+        ? (scrollBehavior.value.inverted ? 1 - scrollRatio.value : scrollRatio.value)
+        : undefined
+    ))
     const height = computed(() => {
-      if (props.invertedScroll) return 0
+      if (scrollBehavior.value.hide && scrollBehavior.value.inverted) return 0
 
-      const height: number = vToolbarRef.value?.contentHeight ?? 0
-      const extensionHeight: number = vToolbarRef.value?.extensionHeight ?? 0
+      const height = vToolbarRef.value?.contentHeight ?? 0
+      const extensionHeight = vToolbarRef.value?.extensionHeight ?? 0
 
       return (height + extensionHeight)
     })
 
     watch(currentScroll, val => {
-      if (props.invertedScroll) {
-        isActive.value = val > computedScrollThreshold.value
-      }
-
-      if (props.hideOnScroll) {
-        isActive.value = isScrollingUp.value || (val < computedScrollThreshold.value)
+      if (scrollBehavior.value.hide) {
+        if (scrollBehavior.value.inverted) {
+          isActive.value = val > computedScrollThreshold.value
+        } else {
+          isActive.value = isScrollingUp.value || (val < computedScrollThreshold.value)
+        }
       }
     }, { immediate: true })
 
-    watch(() => props.invertedScroll, val => {
-      if (val && currentScroll.value === 0) isActive.value = false
-      else if (!val) isActive.value = true
+    useToggleScope(() => scrollBehavior.value.hide || scrollBehavior.value.fullyHide, () => {
+      watch(() => scrollBehavior.value.inverted, val => {
+        if (val && currentScroll.value === 0) isActive.value = false
+        else if (!val) isActive.value = true
+      })
     })
 
     const { layoutItemStyles } = useLayoutItem({
@@ -118,7 +133,7 @@ export const VAppBar = genericComponent<new () => {
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
       layoutSize: height,
-      elementSize: height,
+      elementSize: ref(undefined),
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })
@@ -137,7 +152,6 @@ export const VAppBar = genericComponent<new () => {
           ]}
           style={{
             ...layoutItemStyles.value,
-            height: undefined,
             '--v-toolbar-image-opacity': opacity.value,
           }}
           { ...toolbarProps }
