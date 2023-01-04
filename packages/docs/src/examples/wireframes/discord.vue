@@ -11,7 +11,6 @@
     </v-system-bar>
 
     <v-navigation-drawer
-      v-model="drawer"
       absolute
       color="grey-lighten-3"
       rail
@@ -34,8 +33,7 @@
     </v-navigation-drawer>
 
     <v-navigation-drawer
-      v-model="drawer"
-      width="300"
+      width="244"
     >
       <v-sheet
         color="grey-lighten-5"
@@ -43,69 +41,59 @@
         width="100%"
       ></v-sheet>
 
-      <v-list
-        class="pl-14"
-        shaped
-      >
+      <v-list>
         <v-list-item
           v-for="n in 5"
           :key="n"
+          :title="`Item ${ n }`"
           link
         >
-          <v-list-item-content>
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
-          </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-app-bar
-      flat
-      height="72"
       class="px-3"
       color="grey-lighten-4"
+      flat
+      height="72"
     >
       <v-spacer></v-spacer>
 
       <v-responsive max-width="156">
         <v-text-field
+          bg-color="grey-lighten-2"
+          class="rounded-pill overflow-hidden"
           density="compact"
           hide-details
-          rounded
+          variant="solo"
         ></v-text-field>
       </v-responsive>
     </v-app-bar>
 
-    <v-main>
-      <!--  -->
-    </v-main>
+    <v-main><!--  --></v-main>
 
     <v-navigation-drawer location="right">
       <v-list>
         <v-list-item
           v-for="n in 5"
           :key="n"
+          :title="`Item ${ n }`"
           link
         >
-          <v-list-item-content>
-            <v-list-item-title>Item {{ n }}</v-list-item-title>
-          </v-list-item-content>
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
 
     <v-footer
       app
-      color="transparent"
       height="72"
-      inset
     >
       <v-text-field
-        bg-color="grey lighten-1"
+        bg-color="grey-lighten-1"
+        class="rounded-pill overflow-hidden"
         density="compact"
-        flat
         hide-details
-        rounded
         variant="solo"
       ></v-text-field>
     </v-footer>
@@ -114,6 +102,6 @@
 
 <script>
   export default {
-    data: () => ({ drawer: null }),
+    //
   }
 </script>
