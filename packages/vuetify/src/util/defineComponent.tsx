@@ -33,8 +33,8 @@ import type {
 import { propsFactory } from '@/util/propsFactory'
 
 function propIsDefined (vnode: VNode, prop: string) {
-  return vnode.props?.hasOwnProperty(prop) ||
-  vnode.props?.hasOwnProperty(toKebabCase(prop))
+  return typeof vnode.props?.[prop] !== 'undefined' ||
+    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
 }
 
 export const defineComponent = (function defineComponent (options: ComponentOptions) {
