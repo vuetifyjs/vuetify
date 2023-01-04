@@ -19,6 +19,9 @@ import { provide, toRef } from 'vue'
 import { defineComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
+// Types
+import type { DataTableItem } from './types'
+
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
 
@@ -47,9 +50,10 @@ export const VDataTableServer = defineComponent({
     'update:sortBy': (sortBy: any) => true,
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
+    'click:row': (event: Event, value: { item: DataTableItem }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     createExpanded(props)
 
     const { columns } = createHeaders(props, {
@@ -118,6 +122,7 @@ export const VDataTableServer = defineComponent({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ items.value }
+                    onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
                 ) }

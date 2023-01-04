@@ -48,9 +48,10 @@ export const VDataTableVirtual = defineComponent({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
+    'click:row': (event: Event, value: { item: DataTableItem }) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
     const { columns } = createHeaders(props, {
       groupBy,
@@ -137,6 +138,7 @@ export const VDataTableVirtual = defineComponent({
 
                   <VDataTableRows
                     items={visibleItems.value}
+                    onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
 

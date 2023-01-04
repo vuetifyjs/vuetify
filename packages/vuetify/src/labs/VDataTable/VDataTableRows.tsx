@@ -12,7 +12,7 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalDataTableItem } from './types'
+import type { DataTableItem, InternalDataTableItem } from './types'
 
 export const VDataTableRows = defineComponent({
   name: 'VDataTableRows',
@@ -35,7 +35,11 @@ export const VDataTableRows = defineComponent({
     rowHeight: Number,
   },
 
-  setup (props, { slots }) {
+  emits: {
+    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+  },
+
+  setup (props, { emit, slots }) {
     const { columns } = useHeaders()
     const { expanded, expand, expandOnClick } = useExpanded()
     const { t } = useLocale()
@@ -75,7 +79,13 @@ export const VDataTableRows = defineComponent({
             <>
               <VDataTableRow
                 key={ `item_${item.value}` }
-                onClick={ expandOnClick.value ? () => expand(item, !expanded.value.has(item.value)) : undefined }
+                onClick={ (event: Event) => {
+                  if (expandOnClick.value) {
+                    expand(item, !expanded.value.has(item.value))
+                  }
+
+                  emit('click:row', event, { item })
+                } }
                 item={ item }
                 v-slots={ slots }
               />
