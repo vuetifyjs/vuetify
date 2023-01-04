@@ -64,7 +64,7 @@ export const VAvatar = defineComponent({
         ]}
       >
         { props.image
-          ? (<VImg key="image" src={ props.image } alt="" />)
+          ? (<VImg key="image" src={ props.image } alt="" cover />)
           : props.icon
             ? (<VIcon key="icon" icon={ props.icon } />)
             : slots.default?.()
