@@ -9,7 +9,7 @@
       label="Add some tags"
       multiple
       persistent-hint
-      small-chips
+      chips
     >
       <template v-slot:no-data>
         <v-list-item>
