@@ -246,11 +246,11 @@ export const VSelect = genericComponent<new <
                     onMousedown={ (e: MouseEvent) => e.preventDefault() }
                     onFocusout={ onFocusout }
                   >
+                    { slots['prepend-item']?.() }
+
                     { !items.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                       <VListItem title={ t(props.noDataText) } />
                     )) }
-
-                    { slots['prepend-item']?.() }
 
                     { items.value.map((item, index) => {
                       if (slots.item) {
