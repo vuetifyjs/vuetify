@@ -78,7 +78,7 @@ export const VDataTable = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'), true)
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
