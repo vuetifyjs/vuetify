@@ -121,10 +121,10 @@ export const VCarousel = defineComponent({
                       }}
                       scoped
                     >
-                      { group.items.value.map((item: any) => {
+                      { group.items.value.map((item, index) => {
                         const props = {
-                          'aria-label': t('$vuetify.carousel.ariaLabel.delimiter'),
-                          class: [group.isSelected(item.id) && 'v-btn--selected'],
+                          'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
+                          class: [group.isSelected(item.id) && 'v-btn--active'],
                           onClick: () => group.select(item.id, true),
                         }
 
@@ -155,3 +155,5 @@ export const VCarousel = defineComponent({
     return {}
   },
 })
+
+export type VCarousel = InstanceType<typeof VCarousel>

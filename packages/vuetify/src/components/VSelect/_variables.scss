@@ -7,3 +7,4 @@ $select-line-height: 1.75 !default;
 $select-transition: .2s settings.$standard-easing !default;
 $select-chips-control-min-height: 64px !default;
 $select-chips-margin-top: 2px !default;
+$select-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;

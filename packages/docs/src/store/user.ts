@@ -17,6 +17,7 @@ export type RootState = {
   notifications: {
     read: string[]
     last: {
+      banner: null | number
       install: null | number
       notification: null | number
       promotion: null | number
@@ -36,6 +37,7 @@ export const useUserStore = defineStore('user', () => {
     notifications: {
       read: [],
       last: {
+        banner: null,
         install: null,
         notification: null,
         promotion: null,
@@ -59,9 +61,6 @@ export const useUserStore = defineStore('user', () => {
         data.direction = data.rtl ? 'rtl' : 'ltr'
         delete data.rtl
       }
-      if (Array.isArray(data.notifications)) {
-        data.notifications = { read: data.notifications }
-      }
       if (typeof data.theme === 'object') {
         data.mixedTheme = data.theme.mixed
         data.theme = data.theme.system ? 'system'
@@ -72,6 +71,10 @@ export const useUserStore = defineStore('user', () => {
         data.notifications.last = data.last
         delete data.last
       }
+    }
+
+    if (Array.isArray(data.notifications)) {
+      data.notifications = { read: data.notifications }
     }
 
     Object.assign(state, merge(state, data))

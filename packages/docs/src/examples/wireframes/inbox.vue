@@ -21,7 +21,7 @@
           size="64"
         ></v-avatar>
 
-        <div>john@vuetifyjs.com</div>
+        <div>john@google.com</div>
       </v-sheet>
 
       <v-divider></v-divider>

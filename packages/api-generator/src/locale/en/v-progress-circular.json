@@ -5,6 +5,8 @@
     "rotate": "Rotates the circle start point in degrees",
     "size": "Sets the diameter of the circle in pixels",
     "modelValue": "The percentage value for current progress",
-    "width": "Sets the stroke of the circle in pixels"
+    "width": "Sets the stroke of the circle in pixels",
+    "bgColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-circular.json))",
+    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-circular.json))"
   }
 }

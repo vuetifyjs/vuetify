@@ -1,4 +1,4 @@
-/// <reference types='../../../../types/cypress' />
+/// <reference types="../../../../types/cypress" />
 
 import { VApp } from '@/components/VApp'
 import { CenteredGrid } from '@/../cypress/templates'

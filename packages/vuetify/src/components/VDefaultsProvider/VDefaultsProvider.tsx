@@ -2,7 +2,7 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { defineComponent, toRefs } from 'vue'
+import { defineComponent, toRefs } from 'vue' // eslint-disable-line no-restricted-imports
 
 // Types
 import type { DefaultsOptions } from '@/composables/defaults'
@@ -30,3 +30,5 @@ export const VDefaultsProvider = defineComponent({
     return () => slots.default?.()
   },
 })
+
+export type VDefaultsProvider = InstanceType<typeof VDefaultsProvider>

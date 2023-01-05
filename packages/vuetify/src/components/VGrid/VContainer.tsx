@@ -33,3 +33,5 @@ export const VContainer = defineComponent({
     return {}
   },
 })
+
+export type VContainer = InstanceType<typeof VContainer>

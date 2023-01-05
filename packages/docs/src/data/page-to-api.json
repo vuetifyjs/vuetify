@@ -62,10 +62,8 @@
   ],
   "components/data-tables": [
     "v-data-table",
-    "v-data-table-header",
-    "v-data-footer",
-    "v-edit-dialog",
-    "v-simple-checkbox"
+    "v-data-table-server",
+    "v-data-table-virtual"
   ],
   "components/date-pickers-month": ["v-date-picker"],
   "components/date-pickers": ["v-date-picker"],
@@ -74,8 +72,8 @@
   "components/expansion-panels": [
     "v-expansion-panel",
     "v-expansion-panels",
-    "v-expansion-panel-header",
-    "v-expansion-panel-content"
+    "v-expansion-panel-text",
+    "v-expansion-panel-title"
   ],
   "components/file-inputs": ["v-file-input"],
   "components/floating-action-buttons": [
@@ -107,19 +105,7 @@
     "v-list-item-action-text",
     "v-list-item-avatar",
     "v-list-item-content",
-    "v-list-item-group",
     "v-list-item-icon",
-    "v-list-item-subtitle",
-    "v-list-item-title"
-  ],
-  "components/list-item-groups": [
-    "v-list-group",
-    "v-list-item",
-    "v-list-item-group",
-    "v-list-item-action",
-    "v-list-item-action-text",
-    "v-list-item-avatar",
-    "v-list-item-content",
     "v-list-item-subtitle",
     "v-list-item-title"
   ],
@@ -163,7 +149,6 @@
     "v-stepper-items",
     "v-stepper-step"
   ],
-  "components/subheaders": ["v-subheader"],
   "components/switches": ["v-switch"],
   "components/system-bars": ["v-system-bar"],
   "components/tables": ["v-table"],
@@ -186,21 +171,25 @@
     "v-window",
     "v-window-item"
   ],
-  "directives/click-outside": ["v-click-outside"],
-  "directives/intersect": ["v-intersect"],
-  "directives/mutate": ["v-mutate"],
-  "directives/resize": ["v-resize"],
-  "directives/ripple": ["v-ripple"],
-  "directives/scroll": ["v-scroll"],
-  "directives/touch": ["v-touch"],
+  "directives/click-outside": ["click-outside"],
+  "directives/intersect": ["intersect"],
+  "directives/mutate": ["mutate"],
+  "directives/resize": ["resize"],
+  "directives/ripple": ["ripple"],
+  "directives/scroll": ["scroll"],
+  "directives/touch": ["touch"],
   "features/internationalization": ["internationalization"],
   "features/scrolling": ["$vuetify"],
   "features/theme": ["v-theme-provider"],
   "features/display-and-platform": ["display"],
   "styles/transitions": [
+    "v-dialog-bottom-transition",
+    "v-dialog-top-transition",
+    "v-dialog-transition",
+    "v-expand-transition",
+    "v-expand-x-transition",
     "v-fab-transition",
     "v-fade-transition",
-    "v-expand-transition",
     "v-scale-transition",
     "v-scroll-x-transition",
     "v-scroll-x-reverse-transition",

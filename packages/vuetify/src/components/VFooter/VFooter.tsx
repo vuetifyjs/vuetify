@@ -69,7 +69,7 @@ export const VFooter = defineComponent({
           roundedClasses.value,
         ]}
         style={[
-          backgroundColorStyles,
+          backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}
         v-slots={ slots }
@@ -79,3 +79,5 @@ export const VFooter = defineComponent({
     return {}
   },
 })
+
+export type VFooter = InstanceType<typeof VFooter>

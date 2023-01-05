@@ -50,3 +50,5 @@ export const VLayoutItem = defineComponent({
     )
   },
 })
+
+export type VLayoutItem = InstanceType<typeof VLayoutItem>

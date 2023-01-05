@@ -1,4 +1,7 @@
+// Utilities
 import { computed, h, onMounted, ref } from 'vue'
+
+// Types
 import type { Ref } from 'vue'
 
 let _version: Promise<string>

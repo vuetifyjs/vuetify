@@ -15,18 +15,16 @@ import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent, HSVAtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
 import { onMounted, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
-
-  inheritAttrs: false,
 
   props: {
     canvasHeight: {
@@ -77,7 +75,7 @@ export const VColorPicker = defineComponent({
 
   setup (props) {
     const mode = useProxiedModel(props, 'mode')
-    const lastPickedColor = ref<HSVA | null>(null)
+    const lastPickedColor = ref<HSV | null>(null)
     const currentColor = useProxiedModel(
       props,
       'modelValue',
@@ -101,7 +99,7 @@ export const VColorPicker = defineComponent({
       }
     )
 
-    const updateColor = (hsva: HSVA) => {
+    const updateColor = (hsva: HSV) => {
       currentColor.value = hsva
       lastPickedColor.value = hsva
     }
@@ -119,7 +117,7 @@ export const VColorPicker = defineComponent({
           'v-color-picker',
         ]}
         style={{
-          '--v-color-picker-color-hsv': HSVAtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
+          '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
         }}
         maxWidth={ props.width }
       >

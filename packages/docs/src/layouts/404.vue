@@ -5,7 +5,7 @@
   >
     <v-row align="center">
       <v-col>
-        <h1 class="text-h3 primary--text">
+        <h1 class="text-h3 text-primary">
           Whoops, 404
         </h1>
 
@@ -14,7 +14,7 @@
         <v-btn
           :to="rpath('/getting-started/installation/')"
           color="primary"
-          outlined
+          variant="outlined"
         >
           Get me out of here!
         </v-btn>
@@ -23,17 +23,22 @@
   </v-container>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup lang="ts">
+  import { onMounted } from 'vue'
   import { rpath } from '@/util/routes'
+  import { usePwaStore } from '@/store/pwa'
+  import { useHead } from '@vueuse/head'
 
-  export default defineComponent({
-    name: '404Layout',
+  const pwa = usePwaStore()
+  useHead({
+    title: 'Page not found',
+  })
 
-    setup () {
-      return {
-        rpath,
-      }
-    },
+  onMounted(async () => {
+    const sw = await navigator.serviceWorker?.getRegistration()
+    await sw?.update()
+    if (sw?.waiting) {
+      pwa.update()
+    }
   })
 </script>

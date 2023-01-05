@@ -12,7 +12,6 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import {
   computed,
-  h,
   nextTick,
   onBeforeMount,
   ref,
@@ -71,7 +70,11 @@ export const VImg = defineComponent({
     ...makeTransitionProps(),
   },
 
-  emits: ['loadstart', 'load', 'error'],
+  emits: {
+    loadstart: (event: string | undefined) => true,
+    load: (event: string | undefined) => true,
+    error: (event: string | undefined) => true,
+  },
 
   setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
@@ -86,7 +89,7 @@ export const VImg = defineComponent({
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,
           lazySrc: props.lazySrc || props.src.lazySrc,
-          aspect: Number(props.aspectRatio || props.src.aspect),
+          aspect: Number(props.aspectRatio || props.src.aspect || 0),
         } : {
           src: props.src,
           srcset: props.srcset,
@@ -101,6 +104,12 @@ export const VImg = defineComponent({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+    watch(aspectRatio, (val, oldVal) => {
+      if (!val && oldVal && image.value) {
+        pollForSize(image.value)
+      }
+    })
+
     // TODO: getSrc when window width changes
 
     onBeforeMount(() => init())
@@ -158,15 +167,17 @@ export const VImg = defineComponent({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
+    let timer = -1
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
+        clearTimeout(timer)
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          setTimeout(poll, timeout)
+          timer = window.setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
@@ -184,16 +195,18 @@ export const VImg = defineComponent({
     const __image = () => {
       if (!normalisedSrc.value.src || state.value === 'idle') return null
 
-      const img = h('img', {
-        class: ['v-img__img', containClasses.value],
-        src: normalisedSrc.value.src,
-        srcset: normalisedSrc.value.srcset,
-        alt: '',
-        sizes: props.sizes,
-        ref: image,
-        onLoad,
-        onError,
-      })
+      const img = (
+        <img
+          class={['v-img__img', containClasses.value]}
+          src={ normalisedSrc.value.src }
+          srcset={ normalisedSrc.value.srcset }
+          alt=""
+          sizes={ props.sizes }
+          ref={ image }
+          onLoad={ onLoad }
+          onError={ onError }
+        />
+      )
 
       const sources = slots.sources?.()
 

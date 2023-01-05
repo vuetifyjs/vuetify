@@ -1,8 +1,12 @@
-import { defineStore } from 'pinia'
-import { computed, ref } from 'vue'
+// Composables
 import { useCosmic } from '@/composables/cosmic'
 
-interface Sponsor {
+// Utilities
+import { defineStore } from 'pinia'
+import { computed, onBeforeMount, ref } from 'vue'
+
+// Types
+export interface Sponsor {
   metadata: {
     tier: number
   }
@@ -17,20 +21,19 @@ export type RootState = {
 export const useSponsorsStore = defineStore('sponsors', () => {
   const sponsors = ref<Sponsor[]>([])
 
-  async function load () {
+  onBeforeMount(async () => {
     if (sponsors.value.length) return
 
-    const { bucket } = useCosmic()
-    const { objects } = await bucket.getObjects<Sponsor>({
-      query: {
-        type: 'sponsors',
-      },
-      props: 'slug,title,metadata',
-      sort: 'created_at',
-    })
+    const { bucket } = useCosmic<Sponsor>()
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'sponsors' })
+        .props('slug,title,metadata')
+        .sort('created_at')
+    ) || {}
 
-    sponsors.value = objects ?? []
-  }
+    sponsors.value = objects
+  })
 
   const byTier = computed(() => {
     const tiers: Record<string, Sponsor[]> = {}
@@ -54,5 +57,5 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     })
   }
 
-  return { sponsors, bySlug, byTier, load }
+  return { sponsors, bySlug, byTier }
 })

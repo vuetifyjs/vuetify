@@ -1,5 +1,5 @@
 // Utilities
-import { camelize, computed, Fragment, toRef, watch } from 'vue'
+import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 
 // Types
 import type {
@@ -68,7 +68,11 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-export type SelectItemKey = boolean | string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey =
+  | boolean // Ignored
+  | string // Lookup by key, can use dot notation for nested objects
+  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
   item: any,
@@ -77,7 +81,13 @@ export function getPropertyFromItem (
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback
+  if (item !== Object(item)) {
+    if (typeof property !== 'function') return fallback
+
+    const value = property(item, fallback)
+
+    return typeof value === 'undefined' ? fallback : value
+  }
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
@@ -229,6 +239,17 @@ export function pick<
   return [found, rest]
 }
 
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, exclude: U[]): Omit<T, U> {
+  const clone = { ...obj }
+
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
+}
+
 /**
  * Filter attributes that should be applied to
  * the root element of a an input component. Remaining
@@ -282,58 +303,6 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
     ? []
     : Array.isArray(v)
       ? v : [v]
-}
-
-type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
-  if (sortBy === null || !sortBy.length) return items
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-
-  return items.sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const sortKey = sortBy[i]
-
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
-
-      if (sortDesc[i]) {
-        [sortA, sortB] = [sortB, sortA]
-      }
-
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
-
-        if (!customResult) continue
-
-        return customResult
-      }
-
-      // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
-        continue
-      }
-
-      // Dates should be compared numerically
-      if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
-      }
-
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-      if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return stringCollator.compare(sortA, sortB)
-      }
-    }
-
-    return 0
-  })
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -575,17 +544,14 @@ type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : neve
  */
 export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
 export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
-  const refs = {} as ToRefs<T>
+  const refs = reactive({}) as T
   const base = computed(getter)
-  for (const key in base.value) {
-    refs[key] = toRef(base.value, key)
-  }
-  watch(base, val => {
-    for (const key in val) {
-      refs[key].value = val[key]
+  watchEffect(() => {
+    for (const key in base.value) {
+      refs[key] = base.value[key]
     }
   }, { flush: 'sync' })
-  return refs
+  return toRefs(refs)
 }
 
 /** Array.includes but value can be any type */
@@ -598,6 +564,11 @@ export const isOn = (key: string) => onRE.test(key)
 
 export type EventProp<T = (...args: any[]) => any> = T | T[]
 export const EventProp = [Function, Array] as PropType<EventProp>
+
+export function hasEvent (props: Record<string, any>, name: string) {
+  name = 'on' + capitalize(name)
+  return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
+}
 
 export function callEvent (handler: EventProp | undefined, ...args: any[]) {
   if (Array.isArray(handler)) {

@@ -20,7 +20,7 @@ The `v-switch` component provides users the ability to choose between two distin
 
 A `v-switch` in its simplest form provides a toggle between 2 values.
 
-<example file="v-switch/usage" />
+<usage name="v-switch" />
 
 ## API
 
@@ -73,5 +73,3 @@ The switch can use custom values for its v-model, using the props **true-value**
 If you need to render a switch label with more complex markup than plain text, you can use the **label** slot.
 
 <example file="v-switch/slot-label" />
-
-<backmatter />

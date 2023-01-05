@@ -19,10 +19,8 @@ The `v-responsive` component can be used to fix any section to a specific aspect
 
 Specify a custom aspect-ratio
 
-<example file="v-responsive/usage" />
+<usage name="v-responsive" />
 
 ## API
 
 <api-inline />
-
-<backmatter />

@@ -31,3 +31,5 @@ export const VListItemAction = defineComponent({
     return {}
   },
 })
+
+export type VListItemAction = InstanceType<typeof VListItemAction>

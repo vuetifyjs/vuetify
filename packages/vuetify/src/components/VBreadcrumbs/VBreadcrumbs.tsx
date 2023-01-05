@@ -21,8 +21,8 @@ import { toRef } from 'vue'
 
 // Types
 import type { LinkProps } from '@/composables/router'
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
 export type BreadcrumbItem = string | (LinkProps & {
   text: string
@@ -32,10 +32,11 @@ export type BreadcrumbItem = string | (LinkProps & {
 export const VBreadcrumbs = genericComponent<new <T>() => {
   $props: {
     items?: T[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
+    prepend: []
+    title: [{ item: T, index: number }]
+    divider: [{ item: T, index: number }]
     default: []
-    item: [T | number]
   }>
 }>()({
   name: 'VBreadcrumbs',
@@ -64,10 +65,12 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { densityClasses } = useDensity(props)
-
     const { roundedClasses } = useRounded(props)
 
     provideDefaults({
+      VBreadcrumbsDivider: {
+        divider: toRef(props, 'divider'),
+      },
       VBreadcrumbsItem: {
         activeClass: toRef(props, 'activeClass'),
         activeColor: toRef(props, 'activeColor'),
@@ -122,9 +125,11 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
                 />)
               }
               { index < array.length - 1 && (
-                <VBreadcrumbsDivider>
-                  { slots.divider?.({ item, index }) ?? props.divider }
-                </VBreadcrumbsDivider>
+                <VBreadcrumbsDivider
+                  v-slots={{
+                    default: slots.divider ? () => slots.divider?.({ item, index }) : undefined,
+                  }}
+                />
               ) }
             </>
           )) }

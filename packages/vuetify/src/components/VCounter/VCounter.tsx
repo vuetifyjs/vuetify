@@ -55,3 +55,5 @@ export const VCounter = defineComponent({
     return {}
   },
 })
+
+export type VCounter = InstanceType<typeof VCounter>

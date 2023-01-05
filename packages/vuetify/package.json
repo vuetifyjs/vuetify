@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.0.0-beta.10",
+  "version": "3.1.0",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -51,10 +51,7 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": {
-      "import": "./lib/framework.mjs",
-      "require": "./dist/vuetify.js"
-    },
+    ".": "./lib/framework.mjs",
     "./styles": "./lib/styles/main.css",
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
@@ -67,6 +64,8 @@
     "./locale": "./lib/locale/index.mjs",
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
+    "./labs/components": "./lib/labs/components.mjs",
+    "./labs/*": "./lib/labs/*/index.mjs",
     "./*": "./*"
   },
   "typesVersions": {
@@ -92,12 +91,11 @@
   "scripts": {
     "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
-    "dev:ssr": "cross-env NODE_ENV=development vite-ssr",
-    "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:json && yarn build:types",
+    "dev:ssr": "cross-env NODE_ENV=development VITE_SSR=true vite-ssr",
+    "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
     "build:types": "rimraf types-temp && tsc --pretty --emitDeclarationOnly -p tsconfig.dist.json && rollup --config build/rollup.types.config.js && rimraf types-temp",
-    "build:json": "node build/build-json.js",
     "tsc": "tsc",
     "debug:test": "cross-env NODE_ENV=test node --inspect --inspect-brk ../../node_modules/jest/bin/jest.js --no-cache -i --verbose",
     "test": "node build/run-tests.js",
@@ -106,7 +104,7 @@
     "test:coverage": "yarn test --coverage",
     "lint": "concurrently -n \"tsc,eslint\" --kill-others-on-fail \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint src -f codeframe --max-warnings 0\"",
     "lint:fix": "concurrently -n \"tsc,eslint\" \"tsc -p tsconfig.checks.json --noEmit --pretty\" \"eslint --fix src\"",
-    "cy:open": "cypress open --component -b chrome",
+    "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
   "devDependencies": {
@@ -120,7 +118,7 @@
     "@rollup/plugin-babel": "^5.3.1",
     "@rollup/plugin-node-resolve": "^13.3.0",
     "@rollup/plugin-typescript": "^8.3.2",
-    "@types/jest": "^26.0.24",
+    "@types/jest": "^28.1.8",
     "@types/node": "^16.11.26",
     "@types/resize-observer-browser": "^0.1.7",
     "@vitejs/plugin-vue": "^3.0.3",
@@ -153,13 +151,13 @@
     "rollup-plugin-sass": "^1.2.12",
     "rollup-plugin-sourcemaps": "^0.6.3",
     "rollup-plugin-terser": "^7.0.2",
+    "ts-json-schema-generator": "^1.0.0",
     "vite": "^3.0.9",
     "vite-ssr": "^0.16.0",
     "vue-i18n": "^9.2.2",
     "vue-router": "^4.0.15"
   },
   "peerDependencies": {
-    "@formatjs/intl": "^1.0.0 || ^2.0.0",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
     "vue": "^3.2.0",
     "vue-i18n": "^9.0.0",
@@ -167,9 +165,6 @@
   },
   "peerDependenciesMeta": {
     "vue-i18n": {
-      "optional": true
-    },
-    "@formatjs/intl": {
       "optional": true
     },
     "webpack-plugin-vuetify": {

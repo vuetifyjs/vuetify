@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row class="light--text">
+    <v-row>
       <v-col cols="4">
         on
       </v-col>
@@ -26,7 +26,7 @@
         ></v-checkbox>
       </v-col>
     </v-row>
-    <v-row class="light--text">
+    <v-row>
       <v-col cols="4">
         on disabled
       </v-col>

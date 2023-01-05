@@ -7,7 +7,6 @@ import { isObject, keyCodes } from '@/util'
 // Types
 import type {
   DirectiveBinding,
-  ObjectDirective,
 } from 'vue'
 
 const stopSymbol = Symbol('rippleStop')
@@ -333,7 +332,7 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('blur', focusRippleHide)
 }
 
-function mounted (el: HTMLElement, binding: DirectiveBinding) {
+function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {
   updateRipple(el, binding, false)
 }
 
@@ -342,7 +341,7 @@ function unmounted (el: HTMLElement) {
   removeListeners(el)
 }
 
-function updated (el: HTMLElement, binding: DirectiveBinding) {
+function updated (el: HTMLElement, binding: RippleDirectiveBinding) {
   if (binding.value === binding.oldValue) {
     return
   }
@@ -351,7 +350,7 @@ function updated (el: HTMLElement, binding: DirectiveBinding) {
   updateRipple(el, binding, wasEnabled)
 }
 
-export const Ripple: ObjectDirective = {
+export const Ripple = {
   mounted,
   unmounted,
   updated,

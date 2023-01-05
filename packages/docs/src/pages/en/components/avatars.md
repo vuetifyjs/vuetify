@@ -88,5 +88,3 @@ Another example combining avatar with menu.
 Using the **tile** prop, we can create a sleek hard-lined profile card.
 
 <example file="v-avatar/misc-profile-card" />
-
-<backmatter />

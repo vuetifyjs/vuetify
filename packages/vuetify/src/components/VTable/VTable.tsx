@@ -16,6 +16,7 @@ export const VTable = defineComponent({
     fixedHeader: Boolean,
     fixedFooter: Boolean,
     height: [Number, String],
+    hover: Boolean,
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -36,6 +37,7 @@ export const VTable = defineComponent({
             'v-table--fixed-footer': props.fixedFooter,
             'v-table--has-top': !!slots.top,
             'v-table--has-bottom': !!slots.bottom,
+            'v-table--hover': props.hover,
           },
           themeClasses.value,
           densityClasses.value,
@@ -43,7 +45,7 @@ export const VTable = defineComponent({
       >
         { slots.top?.() }
 
-        { slots.default && (
+        { slots.default ? (
           <div
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}
@@ -52,7 +54,7 @@ export const VTable = defineComponent({
               { slots.default() }
             </table>
           </div>
-        ) }
+        ) : slots.wrapper?.() }
 
         { slots.bottom?.() }
       </props.tag>

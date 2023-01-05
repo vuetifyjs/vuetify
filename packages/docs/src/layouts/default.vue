@@ -1,6 +1,6 @@
 <template>
   <v-app>
-    <app-system-bar />
+    <app-banner />
 
     <app-settings-drawer />
 
@@ -16,6 +16,8 @@
         tag="section"
       >
         <router-view />
+
+        <backmatter v-if="!isApi" :key="route.name" />
       </v-container>
     </v-main>
 
@@ -27,10 +29,10 @@
 
 <script setup>
   // Components
+  import AppBanner from '@/components/app/Banner.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
-  import AppSystemBar from '@/components/app/SystemBar.vue'
   import AppToc from '@/components/app/Toc.vue'
   import AppPwaSnackbar from '@/components/app/PwaSnackbar.vue'
 
@@ -50,5 +52,4 @@
   onBeforeMount(() => {
     app.drawer = null
   })
-
 </script>

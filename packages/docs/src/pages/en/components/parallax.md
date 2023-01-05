@@ -41,5 +41,3 @@ You can also place any content inside of the parallax. This allows you to use th
 You can specify a custom height on a parallax. Keep in mind this can break the parallax if your image is not sized properly
 
 <example file="v-parallax/misc-custom-height" />
-
-<backmatter />

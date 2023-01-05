@@ -41,7 +41,10 @@ export const VBtn = defineComponent({
   directives: { Ripple },
 
   props: {
-    active: Boolean,
+    active: {
+      type: Boolean,
+      default: undefined,
+    },
     symbol: {
       type: null,
       default: VBtnToggleSymbol,
@@ -90,9 +93,14 @@ export const VBtn = defineComponent({
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
-    const { sizeClasses } = useSize(props)
+    const { sizeClasses, sizeStyles } = useSize(props)
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
+
+    const isActive = computed(() =>
+      props.active !== false &&
+      (props.active || link.isActive?.value || group?.isSelected.value)
+    )
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
@@ -105,6 +113,7 @@ export const VBtn = defineComponent({
       const hasColor = !group || group.isSelected.value
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
+      const hasIcon = !!(props.icon && props.icon !== true)
 
       return (
         <Tag
@@ -113,7 +122,7 @@ export const VBtn = defineComponent({
             'v-btn',
             group?.selectedClass.value,
             {
-              'v-btn--active': props.active,
+              'v-btn--active': isActive.value,
               'v-btn--block': props.block,
               'v-btn--disabled': isDisabled.value,
               'v-btn--elevated': isElevated.value,
@@ -137,6 +146,7 @@ export const VBtn = defineComponent({
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
+            sizeStyles.value,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
@@ -174,14 +184,12 @@ export const VBtn = defineComponent({
               key="content"
               defaults={{
                 VIcon: {
-                  icon: typeof props.icon === 'string'
-                    ? props.icon
-                    : undefined,
+                  icon: hasIcon ? props.icon : undefined,
                 },
               }}
             >
               { slots.default?.() ?? (
-                typeof props.icon === 'string' && (
+                hasIcon && (
                   <VIcon key="icon" />
                 )
               ) }

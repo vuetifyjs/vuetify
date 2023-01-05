@@ -20,7 +20,7 @@ Textarea components are used for collecting large amounts of textual data.
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
-<example file="v-textarea/usage" />
+<usage name="v-textarea" />
 
 ## API
 
@@ -85,5 +85,3 @@ The `rows` prop allows you to define how many rows the textarea has, when combin
 Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.
 
 <example file="v-textarea/misc-signup-form" />
-
-<backmatter />

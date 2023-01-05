@@ -1,12 +1,16 @@
+// Stores
+import { useUserStore } from './user'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
-import { useUserStore } from './user'
 
 export const usePwaStore = defineStore('pwa', () => {
   const user = useUserStore()
 
   const state = reactive({
     snackbar: false,
+    loading: false,
     updateSW: null as null | ((reload?: boolean) => void),
   })
 
@@ -17,6 +21,7 @@ export const usePwaStore = defineStore('pwa', () => {
 
   function update () {
     state.snackbar = false
+    state.loading = true
     state.updateSW?.(true)
   }
 

@@ -21,3 +21,5 @@ export const VValidation = defineComponent({
     return () => slots.default?.(validation)
   },
 })
+
+export type VValidation = InstanceType<typeof VValidation>

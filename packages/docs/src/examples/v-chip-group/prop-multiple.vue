@@ -11,7 +11,7 @@
       >
         <v-chip-group
           multiple
-          active-class="primary--text"
+          selected-class="text-primary"
         >
           <v-chip
             v-for="tag in tags"

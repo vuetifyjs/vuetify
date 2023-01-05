@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: FAB component
   description: The floating action button (or FAB) component is a promoted action that is elevated above the UI or attached to an element such as a card.
@@ -58,5 +59,3 @@ For better visual appeal, we use a small button to match our list avatars.
 The speed-dial component has a very robust api for customizing your FAB experience exactly how you want.
 
 <example file="v-btn-fab/misc-speed-dial" />
-
-<backmatter />

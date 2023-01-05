@@ -20,7 +20,7 @@ The `v-tooltip` component is useful for conveying information when a user hovers
 
 Tooltips can wrap any element.
 
-<example file="v-tooltip/usage" />
+<usage name="v-tooltip" />
 
 ## API
 
@@ -41,5 +41,3 @@ Use the **location** prop to specify on which side of the element the tooltip sh
 Tooltip visibility can be programmatically changed using `v-model`.
 
 <example file="v-tooltip/prop-visibility" />
-
-<backmatter />

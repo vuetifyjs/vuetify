@@ -15,11 +15,10 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
-import { useLocale } from '@/composables/locale'
+import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useRtl } from '@/composables/rtl'
 
 // Utilities
 import { computed, nextTick, ref, toRef } from 'vue'
@@ -27,6 +26,7 @@ import { createRange, defineComponent, keyValues, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
+import { useDisplay } from '@/composables'
 
 export const VPagination = defineComponent({
   name: 'VPagination',
@@ -121,6 +121,7 @@ export const VPagination = defineComponent({
     const { t, n } = useLocale()
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
+    const { width } = useDisplay()
     const maxButtons = ref(-1)
 
     provideDefaults(undefined, { scoped: true })
@@ -130,17 +131,16 @@ export const VPagination = defineComponent({
 
       const { target, contentRect } = entries[0]
 
-      const firstItem = target.querySelector('.v-pagination__list > *')
+      const firstItem = target.querySelector('.v-pagination__list > *') as HTMLElement
 
       if (!firstItem) return
 
       const totalWidth = contentRect.width
       const itemWidth =
-        firstItem.getBoundingClientRect().width +
+        firstItem.offsetWidth +
         parseFloat(getComputedStyle(firstItem).marginRight) * 2
-      const minButtons = props.showFirstLastPage ? 5 : 3
 
-      maxButtons.value = Math.max(0, Math.floor((totalWidth - itemWidth * minButtons) / itemWidth))
+      maxButtons.value = getMax(totalWidth, itemWidth)
     })
 
     const length = computed(() => parseInt(props.length, 10))
@@ -149,8 +149,16 @@ export const VPagination = defineComponent({
     const totalVisible = computed(() => {
       if (props.totalVisible) return parseInt(props.totalVisible, 10)
       else if (maxButtons.value >= 0) return maxButtons.value
-      return length.value
+      return getMax(width.value, 58)
     })
+
+    function getMax (totalWidth: number, itemWidth: number) {
+      const minButtons = props.showFirstLastPage ? 5 : 3
+      return Math.max(0, Math.floor(
+        // Round to two decimal places to avoid floating point errors
+        +((totalWidth - itemWidth * minButtons) / itemWidth).toFixed(2)
+      ))
+    }
 
     const range = computed(() => {
       if (length.value <= 0 || isNaN(length.value) || length.value > Number.MAX_SAFE_INTEGER) return []
@@ -195,6 +203,8 @@ export const VPagination = defineComponent({
         density: toRef(props, 'density'),
         size: toRef(props, 'size'),
         variant: toRef(props, 'variant'),
+        rounded: toRef(props, 'rounded'),
+        elevation: toRef(props, 'elevation'),
       },
     })
 
@@ -205,6 +215,7 @@ export const VPagination = defineComponent({
         if (typeof item === 'string') {
           return {
             isActive: false,
+            key: `ellipsis-${index}`,
             page: item,
             props: {
               ref,
@@ -217,14 +228,13 @@ export const VPagination = defineComponent({
           const isActive = item === page.value
           return {
             isActive,
+            key: item,
             page: n(item),
             props: {
               ref,
               ellipsis: false,
               icon: true,
               disabled: !!props.disabled || props.length < 2,
-              elevation: props.elevation,
-              rounded: props.rounded,
               color: isActive ? props.activeColor : props.color,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, index + 1),
@@ -315,7 +325,7 @@ export const VPagination = defineComponent({
 
           { items.value.map((item, index) => (
             <li
-              key={ item.page }
+              key={ item.key }
               class={[
                 'v-pagination__item',
                 {

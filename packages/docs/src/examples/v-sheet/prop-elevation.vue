@@ -9,7 +9,7 @@
       >
         <v-sheet
           class="pa-12"
-          color="grey lighten-3"
+          color="grey-lighten-3"
         >
           <v-sheet
             :elevation="elevation"

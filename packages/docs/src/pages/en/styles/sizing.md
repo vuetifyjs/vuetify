@@ -12,7 +12,7 @@ related:
 
 Sizing utility classes are used to modify the dimensions of an element.
 
-<entry-ad />
+<entry />
 
 ## Height
 
@@ -44,5 +44,3 @@ Specify the `width` property of **block level elements** with a utility class. T
 | **w-100**    | `width: 100%`  |
 
 <example file="sizing/width" />
-
-<backmatter />

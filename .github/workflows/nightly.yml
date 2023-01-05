@@ -58,6 +58,7 @@ jobs:
           )"
         working-directory: ./packages/vuetify
       - run: yarn lerna run build --scope @vuetify/nightly
+      - run: yarn lerna run build --scope @vuetify/api-generator
       - name: NPM Release
         run: |
           npm config set //registry.npmjs.org/:_authToken ${NPM_API_KEY:?}

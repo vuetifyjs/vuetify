@@ -49,3 +49,5 @@ export const VResponsive = defineComponent({
     return {}
   },
 })
+
+export type VResponsive = InstanceType<typeof VResponsive>

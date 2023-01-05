@@ -30,3 +30,5 @@ export const VBannerActions = defineComponent({
     return {}
   },
 })
+
+export type VBannerActions = InstanceType<typeof VBannerActions>

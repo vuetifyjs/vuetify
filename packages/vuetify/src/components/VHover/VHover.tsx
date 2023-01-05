@@ -35,3 +35,5 @@ export const VHover = defineComponent({
     })
   },
 })
+
+export type VHover = InstanceType<typeof VHover>

@@ -7,3 +7,4 @@ $autocomplete-line-height: 1.75 !default;
 $autocomplete-transition: .2s settings.$standard-easing !default;
 $autocomplete-chips-control-min-height: 64px !default;
 $autocomplete-chips-margin-top: 2px !default;
+$autocomplete-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;

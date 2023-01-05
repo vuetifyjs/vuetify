@@ -4,7 +4,7 @@ import './VApp.sass'
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'

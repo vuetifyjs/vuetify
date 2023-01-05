@@ -1,4 +1,7 @@
+// Imports
 import { createI18n } from 'vue-i18n'
+
+// Types
 import type { I18nPlugin } from '@/types'
 
 const messages = Object.fromEntries(

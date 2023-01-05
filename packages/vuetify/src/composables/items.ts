@@ -6,7 +6,7 @@ import { getPropertyFromItem, pick, propsFactory } from '@/util'
 import type { PropType } from 'vue'
 import type { SelectItemKey } from '@/util'
 
-export interface InternalItem {
+export interface InternalItem<T = any> {
   title: string
   value: any
   props: {
@@ -14,8 +14,8 @@ export interface InternalItem {
     title: string
     value: any
   }
-  children?: InternalItem[]
-  raw: any
+  children?: InternalItem<T>[]
+  raw: T
 }
 
 export interface ItemProps {
@@ -54,7 +54,7 @@ export const makeItemsProps = propsFactory({
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
-  const value = getPropertyFromItem(item, props.itemValue, title)
+  const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
@@ -97,7 +97,6 @@ export function useItems (props: ItemProps) {
   }
 
   function transformOut (value: InternalItem[]) {
-    if (props.returnObject) return value.map(({ raw: item }) => item)
     return value.map(({ props }) => props.value)
   }
 

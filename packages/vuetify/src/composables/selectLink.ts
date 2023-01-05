@@ -5,8 +5,8 @@ import { nextTick, watch } from 'vue'
 import type { UseLink } from './router'
 
 export function useSelectLink (link: UseLink, select?: (value: boolean, e?: Event) => void) {
-  watch(() => link.isExactActive?.value, isExactActive => {
-    if (link.isLink.value && isExactActive && select) {
+  watch(() => link.isActive?.value, isActive => {
+    if (link.isLink.value && isActive && select) {
       nextTick(() => {
         select(true)
       })

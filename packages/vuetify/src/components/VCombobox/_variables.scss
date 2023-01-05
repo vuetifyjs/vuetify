@@ -7,3 +7,4 @@ $combobox-line-height: 1.75 !default;
 $combobox-transition: .2s settings.$standard-easing !default;
 $combobox-chips-control-min-height: 64px !default;
 $combobox-chips-margin-top: 2px !default;
+$combobox-chips-margin-bottom: ('default': 0, 'comfortable': 1, 'compact': 2) !default;

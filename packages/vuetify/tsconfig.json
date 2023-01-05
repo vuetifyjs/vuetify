@@ -16,6 +16,7 @@
         "node",
         "vue-router"
       ]
-    }
+    },
+    "stripInternal": true
   }
 }

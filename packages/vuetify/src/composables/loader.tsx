@@ -15,12 +15,12 @@ export interface LoaderSlotProps {
 }
 
 export interface LoaderProps {
-  loading: boolean | string
+  loading?: boolean | string
 }
 
 // Composables
 export const makeLoaderProps = propsFactory({
-  loading: Boolean,
+  loading: [Boolean, String],
 }, 'loader')
 
 export function useLoader (

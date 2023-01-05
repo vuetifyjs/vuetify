@@ -8,6 +8,6 @@
   </v-sheet>
 </template>
 
-<script>
-  export default { name: 'AppSheet' }
+<script setup>
+  //
 </script>

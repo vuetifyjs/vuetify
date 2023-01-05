@@ -25,6 +25,7 @@
         <v-slider
           v-model="max"
           label="Max characters"
+          step="1"
         >
         </v-slider>
 

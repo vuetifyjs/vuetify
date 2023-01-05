@@ -1,21 +1,29 @@
-import { ViteSSG } from '@vuetify/vite-ssg'
-// import 'virtual:api'
-import { setupLayouts } from 'virtual:generated-layouts'
+// Styles
+import 'prism-theme-vars/base.css'
+
+// App
 import App from './App.vue'
 
-// plugins
-import { useGtag } from './plugins/gtag'
-import { useI18n } from './plugins/i18n'
-import { usePwa } from './plugins/pwa'
-import { pinia, usePinia } from './plugins/pinia'
-import { useVuetify } from './plugins/vuetify'
-import { useLocaleStore } from './store/locale'
+// Virtual
+// import 'virtual:api'
+import { setupLayouts } from 'virtual:generated-layouts'
 
-// styles
-import 'prism-theme-vars/base.css'
-import { useUserStore } from './store/user'
-import { useGlobalComponents } from './plugins/global-components'
+// Plugins
+import { pinia, usePinia } from '@/plugins/pinia'
+import { useGlobalComponents } from '@/plugins/global-components'
+import { useGtag } from '@/plugins/gtag'
+import { useI18n } from '@/plugins/i18n'
+import { useLocaleStore } from '@/store/locale'
+import { usePwa } from '@/plugins/pwa'
+import { useUserStore } from '@/store/user'
+import { useVuetify } from '@/plugins/vuetify'
+import { ViteSSG } from '@vuetify/vite-ssg'
+
+// Utilities
 import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+
+// Globals
+import { IN_BROWSER } from '@/util/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -23,12 +31,10 @@ const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
 localeStore.$subscribe((_, state) => {
-  console.log('updating locale storage', state.locale)
   window.localStorage.setItem('currentLocale', state.locale)
 })
 
-userStore.$subscribe((_, state) => {
-  console.log('updating user store', state)
+userStore.$subscribe(() => {
   userStore.save()
 })
 
@@ -56,9 +62,16 @@ export const createApp = ViteSSG(
       },
     ],
     scrollBehavior (to, from, savedPosition) {
+      const main = IN_BROWSER && document.querySelector('main')
+
       if (savedPosition) return savedPosition
-      if (to.hash) return { el: to.hash }
-      else return { top: 0 }
+      if (to.hash) {
+        return {
+          el: to.hash,
+          behavior: 'smooth',
+          top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+        }
+      } else return { top: 0 }
     },
   },
   ctx => {

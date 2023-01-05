@@ -88,5 +88,3 @@ The icon slot allows you to to explicitly control the content and functionality 
 The prepend slot allows you to to explicitly control the content and functionality within it. Icons also help to emphasize a banner's message.
 
 <example file="v-banner/slot-prepend" />
-
-<backmatter />

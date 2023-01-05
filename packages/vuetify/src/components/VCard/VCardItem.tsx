@@ -9,8 +9,7 @@ import { IconValue } from '@/composables/icons'
 import { makeDensityProps } from '@/composables/density'
 
 // Utility
-import { defineComponent } from 'vue'
-import { useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
 
 export const VCardItem = defineComponent({
   name: 'VCardItem',
@@ -99,3 +98,5 @@ export const VCardItem = defineComponent({
     return {}
   },
 })
+
+export type VCardItem = InstanceType<typeof VCardItem>

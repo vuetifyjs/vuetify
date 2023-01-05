@@ -10,6 +10,11 @@ function addCodeRules (md: MarkdownIt) {
 
     return `<app-markup resource="${token?.attrs?.[0][1] ?? ''}" class="mb-4">${handler(tokens, idx, options, env, self)}</app-markup>`
   }
+  md.renderer.rules.code_inline = function (tokens, idx) {
+    const token = tokens[idx]
+
+    return `<code class="v-code">${md.utils.escapeHtml(token.content)}</code>`
+  }
 }
 
 function addImageRules (md: MarkdownIt) {
@@ -17,9 +22,20 @@ function addImageRules (md: MarkdownIt) {
     const token = tokens[idx]
     const alt = token.content
     const src = token.attrGet('src')
-    const title = token.attrGet('title')
+    const title = token.attrGet('title') ?? ''
+    const isEntry = alt.toLowerCase().includes('entry')
+    const height = token.attrGet('height') ?? (isEntry ? 305 : '')
 
-    return `<div><app-figure src="${src}" alt="${alt}" title="${title}" /></div>`
+    return `
+<div>
+  <app-figure
+    ${alt ? `alt="${alt}"` : ''}
+    ${src ? `src="${src}"` : ''}
+    ${title ? `title="${title}"` : ''}
+    ${height ? `height="${height}"` : ''}
+  />
+</div>
+`
   }
 }
 

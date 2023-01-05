@@ -1,9 +1,12 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Types
 import type { Ref } from 'vue'
+
+type InnerVal<T> = T extends any[] ? Readonly<T> : T
 
 // Composables
 export function useProxiedModel<
@@ -18,27 +21,49 @@ export function useProxiedModel<
   transformOut: (value: Inner) => Props[Prop] = (v: any) => v,
 ) {
   const vm = getCurrentInstance('useProxiedModel')
+  const internal = ref(props[prop] !== undefined ? props[prop] : defaultValue) as Ref<Props[Prop]>
+  const kebabProp = toKebabCase(prop)
+  const checkKebab = kebabProp !== prop
 
-  const propIsDefined = computed(() => {
-    void props[prop]
-    return !!(
-      (vm?.vnode.props?.hasOwnProperty(prop) || vm?.vnode.props?.hasOwnProperty(toKebabCase(prop)))
-    )
+  const isControlled = checkKebab
+    ? computed(() => {
+      void props[prop]
+      return !!(
+        (vm.vnode.props?.hasOwnProperty(prop) || vm.vnode.props?.hasOwnProperty(kebabProp)) &&
+        (vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`) || vm.vnode.props?.hasOwnProperty(`onUpdate:${kebabProp}`))
+      )
+    })
+    : computed(() => {
+      void props[prop]
+      return !!(vm.vnode.props?.hasOwnProperty(prop) && vm.vnode.props?.hasOwnProperty(`onUpdate:${prop}`))
+    })
+
+  useToggleScope(() => !isControlled.value, () => {
+    watch(() => props[prop], val => {
+      internal.value = val
+    })
   })
 
-  const internal = ref(transformIn(props[prop])) as Ref<Inner>
-
-  return computed<Inner extends any[] ? Readonly<Inner> : Inner>({
+  const model = computed({
     get (): any {
-      if (propIsDefined.value) return transformIn(props[prop])
-      else return internal.value
+      return transformIn(isControlled.value ? props[prop] : internal.value)
     },
-    set (newValue) {
-      if ((propIsDefined.value ? transformIn(props[prop]) : internal.value) === newValue) {
+    set (value) {
+      const newValue = transformOut(value)
+      if (
+        (isControlled.value ? props[prop] : internal.value) === newValue ||
+        transformIn(isControlled.value ? props[prop] : internal.value) === value
+      ) {
         return
       }
       internal.value = newValue
-      vm?.emit(`update:${prop}`, transformOut(newValue))
+      vm?.emit(`update:${prop}`, newValue)
     },
+  }) as any as Ref<InnerVal<Inner>> & { readonly externalValue: Props[Prop] }
+
+  Object.defineProperty(model, 'externalValue', {
+    get: () => isControlled.value ? props[prop] : internal.value,
   })
+
+  return model
 }

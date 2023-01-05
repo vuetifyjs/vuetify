@@ -6,10 +6,10 @@
   >
     <template v-slot:item.calories="{ item }">
       <v-chip
-        :color="getColor(item.calories)"
+        :color="getColor(item.raw.calories)"
         dark
       >
-        {{ item.calories }}
+        {{ item.raw.calories }}
       </v-chip>
     </template>
   </v-data-table>
@@ -21,16 +21,16 @@
       return {
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
             sortable: false,
-            value: 'name',
+            key: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {

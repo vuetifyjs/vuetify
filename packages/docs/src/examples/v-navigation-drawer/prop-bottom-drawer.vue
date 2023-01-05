@@ -22,7 +22,7 @@
 
       <v-navigation-drawer
         v-model="drawer"
-        bottom
+        location="bottom"
         temporary
       >
         <v-list
@@ -30,7 +30,7 @@
         ></v-list>
       </v-navigation-drawer>
 
-      <v-main>
+      <v-main style="height: 500px;">
         <v-card-text>
           The navigation drawer will appear from the bottom on smaller size screens.
         </v-card-text>

@@ -1,55 +1,46 @@
 <template>
-  <v-container class="fill-height">
-    <v-row
-      align="center"
-      justify="center"
-    >
-      <v-color-picker
-        v-bind="$attrs"
-      ></v-color-picker>
-    </v-row>
-  </v-container>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div class="d-flex justify-center">
+      <v-color-picker v-bind="props"></v-color-picker>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="hideCanvas" label="Hide canvas"></v-checkbox>
+
+      <v-checkbox v-model="hideInputs" label="Hide inputs"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-color-picker'
+  const model = ref('default')
+  const options = ['Disabled', 'Show swatches']
+  const hideCanvas = ref()
+  const hideInputs = ref()
+  const props = computed(() => {
+    return {
+      disabled: model.value === 'Disabled' ? true : undefined,
+      'hide-canvas': hideCanvas.value || undefined,
+      'hide-inputs': hideInputs.value || undefined,
+      'show-swatches': model.value === 'Show swatches' ? true : undefined,
+    }
+  })
 
-    data: () => ({
-      defaults: {
-        disabled: false,
-        'dot-size': 25,
-        'hide-canvas': false,
-        'hide-inputs': false,
-        'hide-mode-switch': false,
-        mode: null,
-        'show-swatches': false,
-        'swatches-max-height': 200,
-      },
-      options: {
-        booleans: [
-          'disabled',
-          'hide-canvas',
-          'hide-sliders',
-          'hide-inputs',
-          'hide-mode-switch',
-          'show-swatches',
-        ],
-        selects: {
-          mode: [
-            'rgba',
-            'hsla',
-            'hexa',
-          ],
-        },
-        sliders: {
-          'dot-size': [0, 50],
-          'swatches-max-height': [100, 250],
-        },
-      },
-      tabs: [],
-    }),
-  }
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

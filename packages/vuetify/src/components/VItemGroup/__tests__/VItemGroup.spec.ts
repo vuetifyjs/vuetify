@@ -85,7 +85,7 @@ describe('VItemGroup', () => {
 
     expect(events).toEqual([
       [[]],
-      [['foo', 'bar']],
+      [['bar']],
     ])
   })
 

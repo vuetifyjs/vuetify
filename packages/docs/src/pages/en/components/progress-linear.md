@@ -20,7 +20,7 @@ The `v-progress-linear` component is used to convey data visually to users. It s
 
 In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the **value** prop to control the progress.
 
-<example file="v-progress-linear/usage" />
+<usage name="v-progress-linear" />
 
 ## API
 
@@ -105,5 +105,3 @@ The `v-progress-linear` component is good for communicating to the user that the
 Using the **absolute** prop we are able to position the `v-progress-linear` component at the bottom of the `v-toolbar`. We also use the **active** prop which allows us to control the visibility of the progress.
 
 <example file="v-progress-linear/misc-toolbar-loader" />
-
-<backmatter />

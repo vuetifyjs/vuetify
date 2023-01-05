@@ -47,14 +47,14 @@
   height: var(--v-slider-tick-size)
   transform: translate(calc(var(--v-slider-tick-size) / -2), calc(var(--v-slider-tick-size) / -2))
 
-  &:first-child .v-slider-track__tick-label
+  &--first .v-slider-track__tick-label
     @include tools.ltr()
       transform: none
 
     @include tools.rtl()
       transform: translateX(100%)
 
-  &:last-child .v-slider-track__tick-label
+  &--last .v-slider-track__tick-label
     @include tools.ltr()
       transform: translateX(-100%)
 
@@ -87,7 +87,16 @@
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / -2))
 
-    &:first-child
+    .v-slider-track__tick-label
+      margin-top: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-top})
+
+      @include tools.ltr()
+        transform: translateX(-50%)
+
+      @include tools.rtl()
+        transform: translateX(50%)
+
+    &--first
       margin-inline-start: calc(var(--v-slider-tick-size) + 1px)
 
       .v-slider-track__tick-label
@@ -97,7 +106,7 @@
         @include tools.rtl()
           transform: translateX(0%)
 
-    &:last-child
+    &--last
       margin-inline-start: calc(100% - var(--v-slider-tick-size) - 1px)
 
       .v-slider-track__tick-label
@@ -106,15 +115,6 @@
 
         @include tools.rtl()
           transform: translateX(100%)
-
-    .v-slider-track__tick-label
-      margin-top: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-top})
-
-      @include tools.ltr()
-        transform: translateX(-50%)
-
-      @include tools.rtl()
-        transform: translateX(50%)
 
 // Vertical
 .v-slider.v-input--vertical
@@ -141,8 +141,10 @@
     @include tools.rtl()
       transform: translate(calc(var(--v-slider-tick-size) / 2), calc(var(--v-slider-tick-size) / 2))
 
-    &:last-child
+    &--first
       bottom: calc(0% + var(--v-slider-tick-size) + 1px)
+    &--last
+      bottom: calc(100% - var(--v-slider-tick-size) - 1px)
 
     .v-slider-track__tick-label
       margin-inline-start: calc(var(--v-slider-track-size) / 2 + #{$slider-tick-label-margin-start})

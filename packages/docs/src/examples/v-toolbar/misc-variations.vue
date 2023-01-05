@@ -9,7 +9,7 @@
       class="my-4"
     >
       <v-card
-        color="grey lighten-4"
+        color="grey-lighten-4"
         flat
         height="200px"
       >

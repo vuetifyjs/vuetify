@@ -6,6 +6,7 @@
 .v-text-field
   input
     color: inherit
+    opacity: 0
     flex: $text-field-input-flex
     transition: $text-field-input-transition
     min-width: 0
@@ -32,10 +33,7 @@
     padding-inline-start: $text-field-details-padding-inline
     padding-inline-end: $text-field-details-padding-inline
 
-  .v-field--has-label
-    input
-      opacity: 0
-
+  .v-field--no-label,
   .v-field--active
     input
       opacity: 1

@@ -16,7 +16,10 @@
     "required": "Designates the input as required; Adds an asterisk to the end of the label; Does not perform any validation.",
     "tabindex": "Tab index of input",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
-    "value": "The input's value"
+    "value": "The input's value",
+    "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "messages": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "direction": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))"
   },
   "events": {
     "change": "Emitted when the input is changed by user interaction",
@@ -24,6 +27,18 @@
     "click:append": "Emitted when appended icon is clicked",
     "click:prepend": "Emitted when prepended icon is clicked",
     "mousedown": "Emitted when click is pressed",
-    "mouseup": "Emitted when click is released"
+    "mouseup": "Emitted when click is released",
+    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))"
+  },
+  "slots": {
+    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "details": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))"
+  },
+  "exposed": {
+    "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "resetValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",
+    "validate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))"
   }
 }

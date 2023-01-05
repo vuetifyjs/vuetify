@@ -488,6 +488,13 @@ $utilities: () !default;
         class: font,
         values: italic
       ),
+      "text-mono": (
+        property: font-family,
+        class: text,
+        values: (
+          mono: monospace
+        )
+      ),
       // Position
       "position": (
         property: position,

@@ -1,6 +1,10 @@
+// Utilities
 import { defineStore } from 'pinia'
+
+// Globals
 import { IN_BROWSER } from '@/util/globals'
 
+// Types
 export type RootState = {
   locale: string
 }

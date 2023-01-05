@@ -6,7 +6,7 @@ function createMessage (message: string, vm?: any, parent?: any): string | void 
 
   if (parent) {
     vm = {
-      _isVue: true,
+      __isVue: true,
       $parent: parent,
       $options: vm,
     }
@@ -64,7 +64,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
   }
   const options = typeof vm === 'function' && vm.cid != null
     ? vm.options
-    : vm._isVue
+    : vm.__isVue
       ? vm.$options || vm.constructor.options
       : vm || {}
   let name = options.name || options._componentTag
@@ -81,7 +81,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
 }
 
 function generateComponentTrace (vm: any): string {
-  if (vm._isVue && vm.$parent) {
+  if (vm.__isVue && vm.$parent) {
     const tree: any[] = []
     let currentRecursiveSequence = 0
     while (vm) {

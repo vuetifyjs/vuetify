@@ -11,8 +11,7 @@ import { Touch } from '@/directives/touch'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
-import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
+import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, provide, ref, watch } from 'vue'
@@ -22,7 +21,7 @@ import { genericComponent, useRender } from '@/util'
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
 import type { IconValue } from '@/composables/icons'
-import type { MakeSlots } from '@/util'
+import type { SlotsToProps } from '@/util'
 import type { TouchHandlers } from '@/directives/touch'
 
 type WindowProvide = {
@@ -44,7 +43,7 @@ export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
 export const VWindow = genericComponent<new () => {
-  $slots: MakeSlots<{
+  $props: SlotsToProps<{
     default: [{ group: GroupProvide }]
     additional: [{ group: GroupProvide }]
     prev: [{ props: ControlProps }]

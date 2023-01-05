@@ -4,14 +4,12 @@
     width="256"
   >
     <v-layout>
-      <v-system-bar></v-system-bar>
-
       <v-navigation-drawer permanent absolute>
         <v-list>
           <v-list-item
             prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
             title="John Leider"
-            subtitle="john@vuetifyjs.com"
+            subtitle="john@google.com"
           >
             <template v-slot:append>
               <v-btn

@@ -14,13 +14,15 @@ related:
 
 The `v-bottom-navigation` component is an alternative to the sidebar. It is primarily used for mobile applications and comes in three variants, **icons** and **text**, and **shift**.
 
-![Bottom Navigation Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-bottom-navigation/v-bottom-navigation-entry.png)
+<!-- ![Bottom Navigation Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-bottom-navigation/v-bottom-navigation-entry.png) -->
 
 ---
 
 ## Usage
 
 While `v-bottom navigation` is meant to be used with [vue-router](https://router.vuejs.org/), you can also programmatically control the active state of the buttons by using the **value** property. A button is given a default value of its _index_ with `v-bottom-navigation`.
+
+<usage name="v-bottom-navigation" />
 
 <entry />
 
@@ -79,5 +81,3 @@ The **shift** prop hides button text when not active. This provides an alternati
 The display state of `v-bottom-navigation` can be toggled using the **input-value** prop. You can also control the currently active button using **v-model**.
 
 <!-- <example file="v-bottom-navigation/prop-toggle" /> -->
-
-<backmatter />

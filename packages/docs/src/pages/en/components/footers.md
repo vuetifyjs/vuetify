@@ -20,7 +20,7 @@ The `v-footer` component is used for displaying general information that a user 
 
 The `v-footer` component in its simplest form is a container.
 
-<example file="v-footer/usage" />
+<usage name="v-footer" />
 
 ## API
 
@@ -47,5 +47,3 @@ The footer component with Indigo background color and social media icons and but
 The footer component with a Teal color header and columns and rows of links.
 
 <example file="v-footer/misc-teal-footer" />
-
-<backmatter />

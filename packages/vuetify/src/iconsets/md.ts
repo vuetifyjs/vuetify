@@ -24,7 +24,8 @@ const aliases: IconAliases = {
   checkboxOff: 'check_box_outline_blank',
   checkboxIndeterminate: 'indeterminate_check_box',
   delimiter: 'fiber_manual_record', // for carousel
-  sort: 'arrow_upward',
+  sortAsc: 'arrow_upward',
+  sortDesc: 'arrow_downward',
   expand: 'keyboard_arrow_down',
   menu: 'menu',
   subgroup: 'arrow_drop_down',

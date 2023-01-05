@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Time picker component
   description: The time picker component is a stand-alone interface that allows the selection of hours and minutes in AM/PM and 24hr formats.
@@ -108,5 +109,3 @@ You can specify the picker's width or make it full width.
 Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.
 
 <example file="v-time-picker/misc-dialog-and-menu" />
-
-<backmatter />

@@ -93,5 +93,3 @@ E.g. `.rounded-br-xl` and `.rounded-tr`.
 Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-te-0`.
 
 <example file="border-radius/misc-removing-border-radius" />
-
-<backmatter />
