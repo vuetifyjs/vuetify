@@ -91,8 +91,8 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 | Feature | Skill level | Time to read |
 | ------- | ----------- | ------------ |
-| [Bidirectionality (LTR/RTL)](/features/bidirectionality/) | Beginner | 1 min |
-| [Global configuration](/features/global-config/) | Beginner | 1 min |
+| [Bidirectionality (LTR/RTL)](/features/internationalization/) | Beginner | 1 min |
+| [Global configuration](/features/global-configuration/) | Beginner | 1 min |
 | [Icon Fonts](/features/icon-fonts/) | Beginner | 15 min |
 | [Layouts](/features/application-layout/) | Beginner | 5 min |
 | [Theme](/features/theme/) | Beginner | 15 min |
