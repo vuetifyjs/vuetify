@@ -76,8 +76,8 @@ export default [
     const block = Array.from(index.matchAll(/^\/\/ export \* from '\.\/(.*)'$/gm), m => m[1])
     return files.filter(file => !block.some(name => file.includes(`/${name}/`)))
   }),
-  createTypesConfig('labs/index.d.ts', 'dist/vuetify-labs.d.ts', code => {
-    return code.replaceAll(/type components_d_V(\w+) = V(\w+);/gm, 'declare const components_d_V$1: typeof V$2;')
+  createTypesConfig('labs/entry-bundler.d.ts', 'dist/vuetify-labs.d.ts', code => {
+    return code.replaceAll(/type allComponents_d_V(\w+) = V(\w+);/gm, 'declare const allComponents_d_V$1: typeof V$2;')
   }),
   createTypesConfig('labs/components.d.ts', 'lib/labs/components.d.ts'),
   createTypesConfig('labs/*/index.d.ts', 'lib/labs/*/index.d.ts'),

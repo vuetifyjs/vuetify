@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { components as _components } from 'vuetify/dist/vuetify.js'
-import { components as labsComponents } from 'vuetify/dist/vuetify-labs.js'
+import { components } from 'vuetify/dist/vuetify-labs.js'
 import { components as _componentsInfo } from 'vuetify/dist/json/importMap.json'
 import { components as labsComponentsInfo } from 'vuetify/dist/json/importMap-labs.json'
 import { kebabCase } from './helpers/text'
@@ -37,10 +36,6 @@ const yar = yargs(process.argv.slice(2))
     type: 'boolean',
   })
 
-const components = {
-  ..._components,
-  ...labsComponents,
-}
 const componentsInfo = {
   ..._componentsInfo,
   ...labsComponentsInfo,
