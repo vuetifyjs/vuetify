@@ -27,5 +27,8 @@ module.exports = {
         value: 'KeyboardEvent',
       },
     ],
+    exclude: {
+      props: ['open-on-hover'],
+    },
   },
 }

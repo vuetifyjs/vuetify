@@ -61,7 +61,7 @@
           cols="12"
           md="4"
         >
-          <div class="d-flex align-center">
+          <div class="d-flex align-center" style="height: 44px">
             <v-divider vertical />
 
             <headline
@@ -69,7 +69,7 @@
               path="options"
             />
 
-            <div class="pa-1 ms-auto">
+            <div v-if="!$vuetify.theme.dark" class="pa-1 ms-auto">
               <app-tooltip-btn
                 :disabled="hasError"
                 icon="$mdiInvertColors"
