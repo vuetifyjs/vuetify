@@ -268,7 +268,7 @@ export const VCombobox = genericComponent<new <
     }
     function select (item: InternalItem) {
       if (props.multiple) {
-        const index = selected.value.findIndex(selection => selection === item.value)
+        const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 
         if (index === -1) {
           model.value = [...model.value, item]
