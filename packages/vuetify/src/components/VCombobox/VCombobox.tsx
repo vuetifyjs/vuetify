@@ -11,10 +11,11 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { transformItem, useItems } from '@/composables/items'
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useForm } from '@/composables/form'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
@@ -123,6 +124,7 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const form = useForm()
     const _search = ref(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
       get: () => {
@@ -189,13 +191,13 @@ export const VCombobox = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly
+        props.readonly || form?.isReadonly.value
       ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly) return
+      if (props.readonly || form?.isReadonly.value) return
 
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = selected.value.length

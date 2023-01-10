@@ -11,9 +11,10 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useForm } from '@/composables/form'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -119,6 +120,7 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const form = useForm()
     const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
@@ -148,13 +150,13 @@ export const VAutocomplete = genericComponent<new <
     function onClickControl () {
       if (
         (props.hideNoData && !items.value.length) ||
-        props.readonly
+        props.readonly || form?.isReadonly.value
       ) return
 
       menu.value = true
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.readonly) return
+      if (props.readonly || form?.isReadonly.value) return
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
