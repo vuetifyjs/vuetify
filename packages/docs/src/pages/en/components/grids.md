@@ -16,15 +16,17 @@ Vuetify comes with a 12 point grid system built using flexbox.
 
 The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. These breakpoints are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
-<promoted slug="vuemastery-grids" />
-
-<page-component path="features/BreakpointsTable" />
+----
 
 ## Usage
 
 The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is implemented by using a series of containers, rows, and columns to layout and align content. If you are new to flexbox, read the [CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets.
 
 <example file="grid/usage" />
+
+<breakpoints-table />
+
+<promoted slug="vuemastery-grids" />
 
 ## API
 
@@ -178,5 +180,3 @@ The power and flexibility of the Vuetify grid system allows you to create amazin
 Assigning breakpoint width for columns can be configured to resize based upon the nature width of their content.
 
 <example file="grid/misc-variable-content" /> -->
-
-<backmatter />

@@ -14,7 +14,7 @@ related:
 
 The `v-expansion-panel` component is useful for reducing vertical space with large amounts of information. The default functionality of the component is to only display one expansion-panel body at a time; however, with the `multiple` property, the expansion-panel can remain open until explicitly closed.
 
-![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png)
+<!-- ![expansion-panels Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-expansion-panels/v-expansion-panels-entry.png) -->
 
 ---
 
@@ -77,5 +77,3 @@ The expansion panel component provides a rich playground to build truly advanced
 Expand action icon can be customized with **expand-icon** prop or the `actions` slot.
 
 <example file="v-expansion-panels/misc-custom-icons" />
-
-<backmatter />

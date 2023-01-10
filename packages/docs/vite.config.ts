@@ -43,7 +43,7 @@ export default defineConfig(({ command, mode }) => {
       'process.env': {}, // This is so that 3rd party packages don't crap out
     },
     build: {
-      sourcemap: true,
+      sourcemap: mode === 'development',
       rollupOptions: {
         output: {
           inlineDynamicImports: true,
@@ -81,7 +81,8 @@ export default defineConfig(({ command, mode }) => {
 
       // https://github.com/antfu/vite-plugin-md
       Markdown({
-        wrapperClasses: 'prose prose-sm m-auto',
+        wrapperComponent: 'unwrap-markdown',
+        wrapperClasses: '',
         headEnabled: true,
         markdownItSetup: configureMarkdown,
       }),
@@ -106,20 +107,24 @@ export default defineConfig(({ command, mode }) => {
             paths.push(folder.replace(/\.[a-z]*/, ''))
           }
 
-          const [category, page] = paths.slice(1)
+          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
             ...parseMeta(route.component),
           }
 
+          if (meta.disabled) {
+            return null
+          }
+
           return {
             ...route,
             path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${page ? '-' : ''}${page ?? ''}`,
+            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
             meta: {
               ...meta,
               category,
-              page,
+              page: rest?.join('-'),
               locale,
             },
           }

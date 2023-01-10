@@ -2,7 +2,7 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
-    sort-by="calories"
+    :sort-by="[{ key: 'calories', order: 'asc' }]"
     class="elevation-1"
   >
     <template v-slot:top>
@@ -20,13 +20,12 @@
           v-model="dialog"
           max-width="500px"
         >
-          <template v-slot:activator="{ on, attrs }">
+          <template v-slot:activator="{ props }">
             <v-btn
               color="primary"
               dark
               class="mb-2"
-              v-bind="attrs"
-              v-on="on"
+              v-bind="props"
             >
               New Item
             </v-btn>
@@ -129,13 +128,13 @@
       <v-icon
         size="small"
         class="mr-2"
-        @click="editItem(item)"
+        @click="editItem(item.raw)"
       >
         mdi-pencil
       </v-icon>
       <v-icon
         size="small"
-        @click="deleteItem(item)"
+        @click="deleteItem(item.raw)"
       >
         mdi-delete
       </v-icon>
@@ -158,16 +157,16 @@
       dialogDelete: false,
       headers: [
         {
-          text: 'Dessert (100g serving)',
+          title: 'Dessert (100g serving)',
           align: 'start',
           sortable: false,
-          value: 'name',
+          key: 'name',
         },
-        { text: 'Calories', value: 'calories' },
-        { text: 'Fat (g)', value: 'fat' },
-        { text: 'Carbs (g)', value: 'carbs' },
-        { text: 'Protein (g)', value: 'protein' },
-        { text: 'Actions', value: 'actions', sortable: false },
+        { title: 'Calories', key: 'calories' },
+        { title: 'Fat (g)', key: 'fat' },
+        { title: 'Carbs (g)', key: 'carbs' },
+        { title: 'Protein (g)', key: 'protein' },
+        { title: 'Actions', key: 'actions', sortable: false },
       ],
       desserts: [],
       editedIndex: -1,

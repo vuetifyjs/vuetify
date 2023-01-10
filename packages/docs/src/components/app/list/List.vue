@@ -47,6 +47,7 @@
 
   export type Item = {
     title?: string
+    appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
     items?: (string | Item)[]
@@ -54,6 +55,7 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
+    subfolder?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -87,9 +89,10 @@
         type: 'subheader',
       }
     } else if (item.items) {
+      const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
-        children: item.items.map(item => generateListItem(item, path, locale, t)),
+        children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
 
@@ -129,6 +132,7 @@
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
+      appendIcon: item.appendIcon,
     }
   }))
 </script>

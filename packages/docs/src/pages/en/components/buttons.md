@@ -112,5 +112,3 @@ Use the **rounded** prop to control the border radius of buttons.
 Buttons can be given different sizing options to fit a multitude of scenarios.
 
 <example file="v-btn/prop-sizing" />
-
-<backmatter />

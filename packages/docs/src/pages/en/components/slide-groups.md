@@ -73,5 +73,3 @@ You can select multiple items by setting the **multiple** prop.
 Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.
 
 <example file="v-slide-group/misc-pseudo-carousel" />
-
-<backmatter />

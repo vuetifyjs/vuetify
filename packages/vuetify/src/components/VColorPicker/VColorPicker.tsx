@@ -26,8 +26,6 @@ import type { HSV } from '@/util'
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
 
-  inheritAttrs: false,
-
   props: {
     canvasHeight: {
       type: [String, Number],

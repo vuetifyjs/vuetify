@@ -59,5 +59,3 @@ Using the **length** prop you can set the length of `v-pagination`, if the numbe
 You can also manually set the maximum number of visible page buttons with the **total-visible** prop.
 
 <example file="v-pagination/prop-total-visible" />
-
-<backmatter />

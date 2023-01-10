@@ -28,7 +28,8 @@ export interface IconAliases {
   checkboxOff: IconValue
   checkboxIndeterminate: IconValue
   delimiter: IconValue
-  sort: IconValue
+  sortAsc: IconValue
+  sortDesc: IconValue
   expand: IconValue
   menu: IconValue
   subgroup: IconValue
@@ -50,7 +51,7 @@ export interface IconAliases {
 
 export interface IconProps {
   tag: string
-  icon: IconValue
+  icon?: IconValue
   disabled?: Boolean
 }
 
@@ -68,7 +69,7 @@ export type IconOptions = {
 
 type IconInstance = {
   component: IconComponent
-  icon: IconValue
+  icon?: IconValue
 }
 
 export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
@@ -76,7 +77,6 @@ export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
 export const makeIconProps = propsFactory({
   icon: {
     type: IconValue,
-    required: true,
   },
   // Could not remove this and use makeTagProps, types complained because it is not required
   tag: {
@@ -90,16 +90,17 @@ export const VComponentIcon = defineComponent({
 
   props: makeIconProps(),
 
-  setup (props) {
+  setup (props, { slots }) {
     return () => {
       return (
         <props.tag>
-          <props.icon />
+          { props.icon ? <props.icon /> : slots.default?.() }
         </props.tag>
       )
     }
   },
 })
+export type VComponentIcon = InstanceType<typeof VComponentIcon>
 
 export const VSvgIcon = defineComponent({
   name: 'VSvgIcon',
@@ -126,6 +127,7 @@ export const VSvgIcon = defineComponent({
     }
   },
 })
+export type VSvgIcon = InstanceType<typeof VSvgIcon>
 
 export const VLigatureIcon = defineComponent({
   name: 'VLigatureIcon',
@@ -138,6 +140,7 @@ export const VLigatureIcon = defineComponent({
     }
   },
 })
+export type VLigatureIcon = InstanceType<typeof VLigatureIcon>
 
 export const VClassIcon = defineComponent({
   name: 'VClassIcon',
@@ -150,6 +153,7 @@ export const VClassIcon = defineComponent({
     }
   },
 })
+export type VClassIcon = InstanceType<typeof VClassIcon>
 
 export const defaultSets: Record<string, IconSet> = {
   svg: {
@@ -180,7 +184,7 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
   const iconData: Ref<IconInstance> = computed(() => {
     const iconAlias = isRef(props) ? props.value : props.icon
 
-    if (!iconAlias) throw new Error('Icon value is undefined or null')
+    if (!iconAlias) return { component: VComponentIcon }
 
     let icon: IconValue | undefined = iconAlias
 

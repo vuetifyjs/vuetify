@@ -197,7 +197,9 @@ export const VList = genericComponent<new <T>() => {
       const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
       if (!location) {
-        focusable[0]?.focus()
+        if (!contentRef.value.contains(document.activeElement)) {
+          focusable[0]?.focus()
+        }
       } else if (location === 'first') {
         focusable[0]?.focus()
       } else if (location === 'last') {

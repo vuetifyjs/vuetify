@@ -76,21 +76,35 @@
           <!-- <v-checkbox label="Training & workshops" /> -->
           </div>
 
-          <v-label class="mb-2">Are you currently a sponsor?</v-label>
+          <v-label>
+            Are you currently a sponsor?
+          </v-label>
 
-          <v-radio-group
-            v-model="sponsor"
-            color="primary"
-            density="compact"
-            name="sponsor"
+          <a
+            :href="rpath('/introduction/sponsors-and-backers/')"
+            class="ml-2"
+            target="_blank text-caption"
           >
-            <v-radio label="Yes" value="yes" />
-            <v-radio label="No" value="no" />
-          </v-radio-group>
+            <small class="text-primary">More Information</small>
+          </a>
+
+          <div class="py-2">
+            <v-switch
+              v-model="sponsor"
+              density="compact"
+              color="primary"
+              inset
+              hide-details
+              label="Yes"
+              name="sponsor"
+            />
+          </div>
+
+          <v-label class="mb-2">Questions or comments</v-label>
 
           <v-textarea
             v-model="questions"
-            label="Questions and comments"
+            label="My project..."
             name="questions"
           />
 
@@ -118,9 +132,16 @@
           </v-btn>
         </v-card-actions>
 
-        <div class="text-center text-caption text-center pb-2">
+        <div class="text-center text-caption pb-2">
           <small>
-            Issues with this form? <a href="mailto:support@vuetifyjs.com?subject=Enterprise Support" target="_blank">Contact Us</a>
+            Issues with this form?
+            <a
+              href="mailto:support@vuetifyjs.com?subject=Enterprise Support"
+              class="text-primary"
+              target="_blank"
+            >
+              Contact Us
+            </a>
           </small>
         </div>
       </v-form>
@@ -130,9 +151,10 @@
 
 <script setup lang="ts">
   // Utilities
-  import emailjs from '@emailjs/browser'
   import { computed, ref, watch } from 'vue'
+  import { rpath } from '@/util/routes'
   import { useTheme } from 'vuetify'
+  import emailjs from '@emailjs/browser'
 
   const theme = useTheme()
 

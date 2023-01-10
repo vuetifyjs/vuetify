@@ -75,7 +75,7 @@ Vuetify has been in active development since 2016 and is constantly responding t
 * ⛏️ MINOR **(Quarterly)**
 * ⚒️ MAJOR **(Bi-yearly to Yearly)**
 
-In addition, after every MAJOR release, the previous version is still maintained with with 18 months of [Long-term support](/introduction/long-term-support/).
+In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
 
 ### Framework comparison
 
@@ -91,8 +91,8 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 | Feature | Skill level | Time to read |
 | ------- | ----------- | ------------ |
-| [Bidirectionality (LTR/RTL)](/features/bidirectionality/) | Beginner | 1 min |
-| [Global configuration](/features/global-config/) | Beginner | 1 min |
+| [Bidirectionality (LTR/RTL)](/features/internationalization/) | Beginner | 1 min |
+| [Global configuration](/features/global-configuration/) | Beginner | 1 min |
 | [Icon Fonts](/features/icon-fonts/) | Beginner | 15 min |
 | [Layouts](/features/application-layout/) | Beginner | 5 min |
 | [Theme](/features/theme/) | Beginner | 15 min |
@@ -109,5 +109,3 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 <!-- | [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min | -->
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).
-
-<backmatter />

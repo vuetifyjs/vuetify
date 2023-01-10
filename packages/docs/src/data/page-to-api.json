@@ -62,10 +62,8 @@
   ],
   "components/data-tables": [
     "v-data-table",
-    "v-data-table-header",
-    "v-data-footer",
-    "v-edit-dialog",
-    "v-simple-checkbox"
+    "v-data-table-server",
+    "v-data-table-virtual"
   ],
   "components/date-pickers-month": ["v-date-picker"],
   "components/date-pickers": ["v-date-picker"],
@@ -107,19 +105,7 @@
     "v-list-item-action-text",
     "v-list-item-avatar",
     "v-list-item-content",
-    "v-list-item-group",
     "v-list-item-icon",
-    "v-list-item-subtitle",
-    "v-list-item-title"
-  ],
-  "components/list-item-groups": [
-    "v-list-group",
-    "v-list-item",
-    "v-list-item-group",
-    "v-list-item-action",
-    "v-list-item-action-text",
-    "v-list-item-avatar",
-    "v-list-item-content",
     "v-list-item-subtitle",
     "v-list-item-title"
   ],

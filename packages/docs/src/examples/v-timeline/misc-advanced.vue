@@ -99,7 +99,7 @@
       >
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
-            Order confirmation email was sent to John Leider (john@vuetifyjs.com).
+            Order confirmation email was sent to John Leider (john@google.com).
           </div>
           <div class="flex-shrink-0">
             15:25 EDT

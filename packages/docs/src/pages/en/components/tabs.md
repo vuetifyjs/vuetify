@@ -111,5 +111,3 @@ Tabs can be dynamically added and removed. In this example when we add a new tab
 You can use a menu to hold additional tabs, swapping them out on the fly.
 
 <example file="v-tabs/misc-overflow-to-menu" />
-
-<backmatter />

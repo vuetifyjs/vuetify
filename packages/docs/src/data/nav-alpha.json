@@ -187,6 +187,31 @@
     ]
   },
   {
+    "title": "labs",
+    "inactiveIcon": "mdi-beaker-outline",
+    "activeIcon": "mdi-beaker",
+    "items": [
+      "introduction",
+      {
+        "title": "data-tables",
+        "subfolder": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "basics",
+          "headers",
+          "sorting",
+          "pagination",
+          "filtering",
+          "grouping",
+          "virtual-tables",
+          "server-side-tables"
+        ]
+      },
+      "virtual-scroller"
+    ]
+  },
+  {
     "title": "resources",
     "inactiveIcon": "mdi-human-male-board",
     "activeIcon": "mdi-human-male-board",

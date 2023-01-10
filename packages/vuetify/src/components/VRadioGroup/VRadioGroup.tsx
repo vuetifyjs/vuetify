@@ -83,7 +83,7 @@ export const VRadioGroup = defineComponent({
             }) => (
               <>
                 { label && (
-                  <VLabel for={ id.value }>
+                  <VLabel id={ id.value }>
                     { label }
                   </VLabel>
                 ) }
@@ -97,6 +97,7 @@ export const VRadioGroup = defineComponent({
                   type={ props.type }
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
+                  aria-labelledby={ label ? id.value : undefined }
                   { ...controlAttrs }
                   v-model={ model.value }
                   v-slots={ slots }

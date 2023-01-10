@@ -149,5 +149,3 @@ PNPM and Yarn 2+ create symlinks to library files instead of copying them to nod
 ### sass-loader with `api: 'modern'`
 
 You might have to write a custom importer plugin to load the settings file.
-
-<backmatter />
