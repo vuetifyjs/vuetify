@@ -48,6 +48,8 @@ export const VMessages = defineComponent({
           textColorClasses.value,
         ]}
         style={ textColorStyles.value }
+        role="alert"
+        aria-live="polite"
       >
         { props.active && (
           messages.value.map((message, i) => (

@@ -78,6 +78,7 @@ export const VRadioGroup = defineComponent({
             ...slots,
             default: ({
               id,
+              messagesId,
               isDisabled,
               isReadonly,
             }) => (
@@ -91,6 +92,7 @@ export const VRadioGroup = defineComponent({
                 <VSelectionControlGroup
                   { ...controlProps }
                   id={ id.value }
+                  aria-describedby={ messagesId.value }
                   defaultsTarget="VRadio"
                   trueIcon={ props.trueIcon }
                   falseIcon={ props.falseIcon }

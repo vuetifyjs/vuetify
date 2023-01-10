@@ -87,6 +87,7 @@ export const VSwitch = defineComponent({
             ...slots,
             default: ({
               id,
+              messagesId,
               isDisabled,
               isReadonly,
               isValid,
@@ -96,6 +97,7 @@ export const VSwitch = defineComponent({
                 { ...controlProps }
                 v-model={ model.value }
                 id={ id.value }
+                aria-describedby={ messagesId.value }
                 type="checkbox"
                 onUpdate:modelValue={ onChange }
                 aria-checked={ indeterminate.value ? 'mixed' : undefined }

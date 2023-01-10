@@ -125,6 +125,7 @@ export const VField = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const messagesId = computed(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -278,6 +279,7 @@ export const VField = genericComponent<new <T>() => {
               props: {
                 id: id.value,
                 class: 'v-field__input',
+                'aria-describedby': messagesId.value,
               },
               focus,
               blur,
