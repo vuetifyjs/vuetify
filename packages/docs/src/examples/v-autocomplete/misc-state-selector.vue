@@ -3,10 +3,10 @@
     <v-card-title class="text-h5 font-weight-regular bg-blue-grey">
       Profile
     </v-card-title>
+
     <v-card-text>
-      <div class="text-caption pa-3">
-        Where do you live?
-      </div>
+      <div class="text-caption pa-3">Where do you live?</div>
+
       <v-autocomplete
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
@@ -17,9 +17,7 @@
         prepend-icon="mdi-city"
       >
         <template v-slot:append>
-          <v-slide-x-reverse-transition
-            mode="out-in"
-          >
+          <v-slide-x-reverse-transition mode="out-in">
             <v-icon
               :key="`icon-${isEditing}`"
               :color="isEditing ? 'success' : 'info'"
