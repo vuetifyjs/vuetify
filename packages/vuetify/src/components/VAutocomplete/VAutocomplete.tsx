@@ -11,13 +11,13 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useForm } from '@/composables/form'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useForm } from '@/composables/form'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
