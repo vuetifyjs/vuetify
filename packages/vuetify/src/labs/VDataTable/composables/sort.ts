@@ -8,13 +8,14 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { InternalItem } from '@/composables/items'
-import type { DataTableCompareFunction, DataTableItem, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
     type: Array as PropType<SortItem[]>,
     default: () => ([]),
   },
+  customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
 }, 'v-data-table-sort')
@@ -85,20 +86,15 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<InternalDataTableHeader[]>) {
-  // TODO: Put this in separate prop customKeySort to match filter composable?
-  const customSorters = computed(() => {
-    return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
-      if (item.sort) obj[item.key] = item.sort
-
-      return obj
-    }, {})
-  })
-
+export function useSortedItems <T extends InternalItem = InternalItem> (
+  props: { customKeySort?: Record<string, DataTableCompareFunction> },
+  items: Ref<T[]>,
+  sortBy: Ref<readonly SortItem[]>,
+) {
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, 'en', customSorters.value)
+    return sortItems(items.value, sortBy.value, 'en', props.customKeySort)
   })
 
   return { sortedItems }

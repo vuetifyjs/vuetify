@@ -99,7 +99,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 

@@ -62,11 +62,11 @@ export const makeVListItemProps = propsFactory({
     default: undefined,
   },
   activeClass: String,
-    /* @deprecated */
+  /* @deprecated */
   activeColor: String,
   appendAvatar: String,
   appendIcon: IconValue,
-    baseColor: String,
+  baseColor: String,
   disabled: Boolean,
   lines: String as PropType<'one' | 'two' | 'three'>,
   link: {
