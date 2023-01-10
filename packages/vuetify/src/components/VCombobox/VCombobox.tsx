@@ -167,6 +167,14 @@ export const VCombobox = genericComponent<new <
         return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
+
+    const displayItems = computed(() => {
+      if (props.hideSelected) {
+        return filteredItems.value.filter(filteredItem => !selections.value.some(s => s.value === filteredItem.value))
+      }
+      return filteredItems.value
+    })
+
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
     const listRef = ref<VList>()
@@ -320,6 +328,7 @@ export const VCombobox = genericComponent<new <
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
+      const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
       const [textFieldProps] = filterVTextFieldProps(props)
 
       return (
@@ -363,45 +372,47 @@ export const VCombobox = genericComponent<new <
                   onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
-                  <VList
-                    ref={ listRef }
-                    selected={ selected.value }
-                    selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
-                    onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                    onFocusin={ onFocusin }
-                    onFocusout={ onFocusout }
-                  >
-                    { !filteredItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
-                      <VListItem title={ t(props.noDataText) } />
-                    )) }
+                  { hasList && (
+                    <VList
+                      ref={ listRef }
+                      selected={ selected.value }
+                      selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
+                      onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onFocusin={ onFocusin }
+                      onFocusout={ onFocusout }
+                    >
+                      { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
+                        <VListItem title={ t(props.noDataText) } />
+                      )) }
 
-                    { slots['prepend-item']?.() }
+                      { slots['prepend-item']?.() }
 
-                    { filteredItems.value.map((item, index) => slots.item?.({
-                      item,
-                      index,
-                      props: mergeProps(item.props, { onClick: () => select(item) }),
-                    }) ?? (
-                      <VListItem
-                        key={ index }
-                        { ...item.props }
-                        onClick={ () => select(item) }
-                      >
-                        {{
-                          prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                            <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                          ) : undefined,
-                          title: () => {
-                            return isPristine.value
-                              ? item.title
-                              : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
-                          },
-                        }}
-                      </VListItem>
-                    )) }
+                      { displayItems.value.map((item, index) => slots.item?.({
+                        item,
+                        index,
+                        props: mergeProps(item.props, { onClick: () => select(item) }),
+                      }) ?? (
+                        <VListItem
+                          key={ index }
+                          { ...item.props }
+                          onClick={ () => select(item) }
+                        >
+                          {{
+                            prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
+                              <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                            ) : undefined,
+                            title: () => {
+                              return isPristine.value
+                                ? item.title
+                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                            },
+                          }}
+                        </VListItem>
+                      )) }
 
-                    { slots['append-item']?.() }
-                  </VList>
+                      { slots['append-item']?.() }
+                    </VList>
+                  ) }
                 </VMenu>
 
                 { selections.value.map((item, index) => {

@@ -96,4 +96,27 @@ describe('VAutocomplete', () => {
     })
     cy.get('.v-list-item--active').should('have.length', 0)
   })
+
+  describe('hide-selected', () => {
+    it('should hide selected item(s)', () => {
+      const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+
+      const selectedItems = ['Item 1', 'Item 2']
+
+      cy.mount(() => (
+        <VAutocomplete
+          items={items}
+          modelValue={selectedItems}
+          hideSelected
+          multiple
+        />
+      ))
+
+      cy.get('.mdi-menu-down').click()
+
+      cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
+    })
+  })
 })

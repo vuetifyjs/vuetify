@@ -292,4 +292,30 @@ describe('VCombobox', () => {
         }]))
     })
   })
+
+  describe('hide-selected', () => {
+    it('should hide selected item(s)', () => {
+      const items = [
+        'Item 1',
+        'Item 2',
+        'Item 3',
+        'Item 4',
+      ]
+
+      const selectedItems = [
+        'Item 1',
+        'Item 2',
+      ]
+
+      cy.mount(() => (
+        <VCombobox items={items} modelValue={selectedItems} multiple hideSelected />
+      ))
+
+      cy.get('.v-combobox input').click()
+
+      cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
+    })
+  })
 })
