@@ -25,6 +25,7 @@ import { genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
+import type { ComputedRef } from 'vue'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { MakeSlots, SlotsToProps } from '@/util'
@@ -120,8 +121,15 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+
+    const filterKeys: ComputedRef<string | string[]> =
+      computed(() => typeof props.itemTitle === 'string' ? [props.itemTitle] : props.filterKeys)
+
     const form = useForm()
-    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+
+    const { filteredItems, getMatches } =
+      useFilter({ ...props, filterKeys: filterKeys.value }, items, computed(() => isPristine.value ? undefined : search.value))
+
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => props.valueComparator(item.value, v.value)) || v
@@ -325,9 +333,13 @@ export const VAutocomplete = genericComponent<new <
                               <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                             ) : undefined,
                             title: () => {
+                              const matchesObj = getMatches(item)
+                              const matches =
+                                matchesObj ? matchesObj[typeof props.itemTitle === 'string' ? props.itemTitle : 'title'] : undefined
+
                               return isPristine.value
                                 ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                : highlightResult(item.title, matches, search.value?.length ?? 0)
                             },
                           }}
                         </VListItem>

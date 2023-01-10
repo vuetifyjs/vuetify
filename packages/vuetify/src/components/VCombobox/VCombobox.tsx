@@ -26,7 +26,7 @@ import { genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
-import type { PropType } from 'vue'
+import type { ComputedRef, PropType } from 'vue'
 import type { MakeSlots, SlotsToProps } from '@/util'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
@@ -124,6 +124,9 @@ export const VCombobox = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
+    const filterKeys: ComputedRef<string | string[]> =
+      computed(() => typeof props.itemTitle === 'string' ? [props.itemTitle] : props.filterKeys)
+
     const form = useForm()
     const _search = ref(!props.multiple ? model.value[0]?.title ?? '' : '')
     const search = computed<string>({
@@ -162,7 +165,8 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, getMatches } =
+      useFilter({ ...props, filterKeys: filterKeys.value }, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {
       return model.value.map(v => {
@@ -404,9 +408,13 @@ export const VCombobox = genericComponent<new <
                               <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
                             ) : undefined,
                             title: () => {
+                              const matchesObj = getMatches(item)
+                              const matches =
+                                matchesObj ? matchesObj[typeof props.itemTitle === 'string' ? props.itemTitle : 'title'] : undefined
+
                               return isPristine.value
                                 ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                : highlightResult(item.title, matches, search.value?.length ?? 0)
                             },
                           }}
                         </VListItem>
