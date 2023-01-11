@@ -16,7 +16,8 @@ export const makeDataTableGroupProps = propsFactory({
 
 const VDataTableGroupSymbol: InjectionKey<{
   opened: Ref<Set<string>>
-  toggleGroup: (group: string, value?: boolean) => void
+  toggleGroup: (group: GroupHeaderItem) => void
+  isGroupOpen: (group: GroupHeaderItem) => boolean
   sortByWithGroups: Ref<SortItem[]>
   groupBy: Ref<readonly SortItem[]>
   extractRows: (items: (DataTableItem | GroupHeaderItem)[]) => DataTableItem[]
@@ -35,10 +36,16 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
     })).concat(sortBy.value)
   })
 
-  function toggleGroup (group: string, value?: boolean) {
-    const open = value == null ? !opened.value.has(group) : value
-    if (open) opened.value.add(group)
-    else opened.value.delete(group)
+  function isGroupOpen (group: GroupHeaderItem) {
+    return opened.value.has(group.id)
+  }
+
+  function toggleGroup (group: GroupHeaderItem) {
+    const newOpened = new Set(opened.value)
+    if (!isGroupOpen(group)) newOpened.add(group.id)
+    else newOpened.delete(group.id)
+
+    opened.value = newOpened
   }
 
   function extractRows (items: (DataTableItem | GroupHeaderItem)[]) {
@@ -63,7 +70,7 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
   //   }
   // })
 
-  const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows }
+  const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows, isGroupOpen }
 
   provide(VDataTableGroupSymbol, data)
 
