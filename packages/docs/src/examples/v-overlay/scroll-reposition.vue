@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex justify-center">
     <v-btn>
-      reposition
+      Reposition
+
       <v-overlay
         activator="parent"
         location-strategy="connected"
