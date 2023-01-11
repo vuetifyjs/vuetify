@@ -40,7 +40,7 @@
 
   // Utilities
   import { Item } from './utils'
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
 
   const getApi = (name: string) => {
     return import(`../../api/data/${name}.json`)
@@ -82,8 +82,6 @@
   }
 
   fetchApiData()
-
-  watch(() => props.name, fetchApiData)
 </script>
 
 <style lang="sass">
