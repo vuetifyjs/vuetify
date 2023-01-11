@@ -15,7 +15,13 @@
         fluid
         tag="section"
       >
-        <router-view />
+        <router-view v-slot="{ Component }">
+          <v-fade-transition hide-on-leave>
+            <div :key="route.name">
+              <component :is="Component" />
+            </div>
+          </v-fade-transition>
+        </router-view>
 
         <backmatter v-if="!isApi" :key="route.name" />
       </v-container>
