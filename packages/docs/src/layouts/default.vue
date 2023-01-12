@@ -53,7 +53,7 @@
   const route = useRoute()
 
   const isApi = computed(() => route.name?.toString().startsWith('api-'))
-  const style = { maxWidth: isApi.value ? '1368px' : '960px' }
+  const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
 
   onBeforeMount(() => {
     app.drawer = null
