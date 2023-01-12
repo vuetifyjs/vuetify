@@ -84,7 +84,7 @@ E.g. `.rounded-b-xl` and `.rounded-t`.
 
 Border radius is configurable on a per-corner basis using the infix classes, `-ts`, `-te`, `-be`, `-bs` (corresponding respectively to the corners **top-start**, **top-end**, **bottom-end**, **bottom-start**)
 
-E.g. `.rounded-br-xl` and `.rounded-tr`.
+E.g. `.rounded-be-xl` and `.rounded-te`.
 
 <example file="border-radius/misc-rounding-by-corner" />
 
