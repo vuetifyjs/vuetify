@@ -1,10 +1,10 @@
 {
   "props": {
-    "disabled": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "fastFail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "lazyValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "readonly": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "validateOn": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))"
+    "disabled": "Puts all children inputs into a disabled state.",
+    "fastFail": "Stop validation as soon as any rules fail.",
+    "lazyValidation": "If enabled, value will always be true unless there are visible validation errors. You can still call validate() to manually trigger validation.",
+    "readonly": "Puts all children inputs into a readonly state.",
+    "modelValue": "A boolean value representing the validity of the form.",
+    "validateOn": "Changes the events in which validation occurs."
   }
 }
