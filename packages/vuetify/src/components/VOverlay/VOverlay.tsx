@@ -147,7 +147,13 @@ export const VOverlay = genericComponent<new () => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
     const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
-    const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
+    const {
+      activatorEl, activatorRef,
+      targetEl, targetRef,
+      activatorEvents,
+      contentEvents,
+      scrimEvents,
+    } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
     const { scopeId } = useScopeId()
@@ -161,13 +167,13 @@ export const VOverlay = genericComponent<new () => {
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
       isRtl,
       contentEl,
-      activatorEl,
+      targetEl,
       isActive,
     })
     useScrollStrategies(props, {
       root,
       contentEl,
-      activatorEl,
+      targetEl,
       isActive,
       updateLocation,
     })
@@ -242,6 +248,7 @@ export const VOverlay = genericComponent<new () => {
           isActive: isActive.value,
           props: mergeProps({
             ref: activatorRef,
+            targetRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
         }) }
 
@@ -306,6 +313,7 @@ export const VOverlay = genericComponent<new () => {
 
     return {
       activatorEl,
+      targetEl,
       animateClick,
       contentEl,
       globalTop,

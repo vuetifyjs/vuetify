@@ -25,7 +25,7 @@ import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
   contentEl: Ref<HTMLElement | undefined>
-  activatorEl: Ref<HTMLElement | undefined>
+  targetEl: Ref<HTMLElement | undefined>
   isActive: Ref<boolean>
   isRtl: Ref<boolean>
 }
@@ -148,7 +148,7 @@ function getIntrinsicSize (el: HTMLElement) {
 }
 
 function connectedLocationStrategy (data: LocationStrategyData, props: StrategyProps, contentStyles: Ref<Record<string, string>>) {
-  const activatorFixed = isFixedPosition(data.activatorEl.value)
+  const activatorFixed = isFixedPosition(data.targetEl.value)
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
@@ -201,9 +201,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (observe) updateLocation()
   })
 
-  watch([data.activatorEl, data.contentEl], ([newActivatorEl, newContentEl], [oldActivatorEl, oldContentEl]) => {
-    if (oldActivatorEl) observer.unobserve(oldActivatorEl)
-    if (newActivatorEl) observer.observe(newActivatorEl)
+  watch([data.targetEl, data.contentEl], ([newTargetEl, newContentEl], [oldTargetEl, oldContentEl]) => {
+    if (oldTargetEl) observer.unobserve(oldTargetEl)
+    if (newTargetEl) observer.observe(newTargetEl)
 
     if (oldContentEl) observer.unobserve(oldContentEl)
     if (newContentEl) observer.observe(newContentEl)
@@ -222,9 +222,9 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       requestAnimationFrame(() => observe = true)
     })
 
-    if (!data.activatorEl.value || !data.contentEl.value) return
+    if (!data.targetEl.value || !data.contentEl.value) return
 
-    const targetBox = data.activatorEl.value.getBoundingClientRect()
+    const targetBox = data.targetEl.value.getBoundingClientRect()
     const contentBox = getIntrinsicSize(data.contentEl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
