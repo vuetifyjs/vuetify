@@ -90,6 +90,6 @@ E.g. `.rounded-be-xl` and `.rounded-te`.
 
 #### Removing Border Radius
 
-Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-te-0`.
+Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-s-0` and `.rounded-te-0`.
 
 <example file="border-radius/misc-removing-border-radius" />
