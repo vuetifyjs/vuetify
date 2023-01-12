@@ -74,7 +74,7 @@ You can create pills with the `.rounded-pill` class and circles with the `.round
 
 #### Rounding by side
 
-Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **left**).
+Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **start**).
 
 E.g. `.rounded-b-xl` and `.rounded-t`.
 
