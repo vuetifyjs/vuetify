@@ -39,6 +39,10 @@ export const VSliderThumb = defineComponent({
       type: Number,
       required: true,
     },
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
   },
 
   emits: {
@@ -149,7 +153,7 @@ export const VSliderThumb = defineComponent({
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
-            v-ripple={[true, null, ['circle', 'center']]}
+            v-ripple={[props.ripple, null, ['circle', 'center']]}
           />
           <VScaleTransition origin="bottom center">
             <div

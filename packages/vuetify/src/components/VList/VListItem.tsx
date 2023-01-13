@@ -79,6 +79,10 @@ export const VListItem = genericComponent<new () => {
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     subtitle: [String, Number, Boolean],
     title: [String, Number, Boolean],
     value: null,
@@ -204,7 +208,7 @@ export const VListItem = genericComponent<new () => {
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ isClickable.value }
+          v-ripple={ isClickable.value && props.ripple }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
