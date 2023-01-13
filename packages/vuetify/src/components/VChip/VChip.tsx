@@ -27,7 +27,7 @@ import { IconValue } from '@/composables/icons'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, EventProp } from '@/util'
 import { computed } from 'vue'
 
 export const VChip = defineComponent({
@@ -55,7 +55,10 @@ export const VChip = defineComponent({
       default: '$complete',
     },
     label: Boolean,
-    link: Boolean,
+    link: {
+      type: Boolean,
+      default: undefined,
+    },
     pill: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
@@ -68,6 +71,9 @@ export const VChip = defineComponent({
       type: Boolean,
       default: true,
     },
+
+    onClick: EventProp,
+    onClickOnce: EventProp,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -100,7 +106,12 @@ export const VChip = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
-    const isClickable = computed(() => !props.disabled && (!!group || link.isClickable.value || props.link))
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (!!group || props.link || link.isClickable.value)
+    )
 
     function onCloseClick (e: Event) {
       isActive.value = false
@@ -115,6 +126,13 @@ export const VChip = defineComponent({
 
       link.navigate?.(e)
       group?.toggle()
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
     }
 
     return () => {
@@ -152,8 +170,10 @@ export const VChip = defineComponent({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
-          v-ripple={ [isClickable.value && props.ripple, null] }
+          tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
+          onKeydown={ isClickable.value && !isLink.value && onKeyDown }
+          v-ripple={ [isClickable.value && props.ripple, null] }
         >
           { genOverlays(isClickable.value, 'v-chip') }
 

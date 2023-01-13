@@ -125,7 +125,7 @@ export const VDataTable = defineComponent({
       >
         {{
           top: slots.top,
-          default: slots.default ? slots.default() : () => (
+          default: slots.default ?? (() => (
             <>
               { slots.colgroup?.({ columns }) }
               <thead>
@@ -150,14 +150,14 @@ export const VDataTable = defineComponent({
               { slots.tbody?.() }
               { slots.tfoot?.() }
             </>
-          ),
-          bottom: slots.bottom ? slots.bottom() : () => (
+          )),
+          bottom: slots.bottom ?? (() => (
             <VDataTableFooter
               v-slots={{
                 prepend: slots['footer.prepend'],
               }}
             />
-          ),
+          )),
         }}
       </VTable>
     ))

@@ -29,13 +29,13 @@ export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
 export function createSort (props: {
   sortBy: SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
-  mustSort?: boolean
-  multiSort?: boolean
+  mustSort: boolean
+  multiSort: boolean
 }) {
   const sortBy = useProxiedModel(props, 'sortBy')
 
   const toggleSort = (key: string) => {
-    let newSortBy = sortBy.value?.map(x => ({ ...x })) ?? []
+    let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === key)
 
     if (!item) {
@@ -80,7 +80,7 @@ export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonl
   })
 
   const sortedItems = computed(() => {
-    if (!sortBy.value?.length) return items.value
+    if (!sortBy.value.length) return items.value
 
     return sortItems(items.value, sortBy.value, 'en', customSorters.value)
   })
