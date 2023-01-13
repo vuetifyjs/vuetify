@@ -34,15 +34,15 @@ export default createVuetify({
 
 ### White-label concept
 
-While Vuetify is built under the guise of Google's [Material Design](https://material.io/) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
+While Vuetify is built under the guise of Google's [Material Design](https://material.io) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
 
 ## Available blueprints
 
 | Name | Release date | Status | Resource |
 | - | - | - | - |
-| [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://material.io/archive/guidelines/) |
-| [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://material.io/) |
-| [Material Design 3](#material-design-3) | 2021 | ⚠️ Development | [Specification](https://m3.material.io/) |
+| [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://m1.material.io) |
+| [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://m2.material.io) |
+| [Material Design 3](#material-design-3) | 2022 | ✅ Available | [Specification](https://m3.material.io) |
 
 ### Material Design 1
 
