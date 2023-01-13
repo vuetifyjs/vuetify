@@ -245,6 +245,7 @@ export const VSelect = genericComponent<new <
                   activator="parent"
                   contentClass="v-select__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }

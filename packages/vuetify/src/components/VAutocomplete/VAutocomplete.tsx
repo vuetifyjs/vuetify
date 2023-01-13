@@ -289,6 +289,7 @@ export const VAutocomplete = genericComponent<new <
                   activator="parent"
                   contentClass="v-autocomplete__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }

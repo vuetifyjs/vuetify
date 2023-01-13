@@ -368,6 +368,7 @@ export const VCombobox = genericComponent<new <
                   activator="parent"
                   contentClass="v-combobox__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
