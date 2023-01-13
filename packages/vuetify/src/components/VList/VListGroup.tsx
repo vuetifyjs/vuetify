@@ -6,13 +6,14 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { useList } from './list'
 import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
@@ -49,9 +50,9 @@ export const makeVListGroupProps = propsFactory({
   subgroup: Boolean,
   title: String,
   value: null,
-  lazy: Boolean,
 
   ...makeComponentProps(),
+  ...makeLazyProps(),
   ...makeTagProps(),
 }, 'VListGroup')
 
@@ -66,15 +67,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const list = useList()
     const { isBooted } = useSsrBoot()
 
-    const rendered = ref(!props.lazy || isOpen.value) // If not lazy or displayed, render instantly
-    if (!rendered.value) { // If not rendered, watch when we'll need to
-      const stopWatch = watch(isOpen, open => {
-        if (open) {
-          rendered.value = true
-          stopWatch() // No need to keep watching
-        }
-      })
-    }
+    const { hasContent, onAfterLeave } = useLazy(props, isOpen)
 
     function onClick (e: Event) {
       open(!isOpen.value, e)
@@ -122,9 +115,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
           </VDefaultsProvider>
         )}
 
-        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
+        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value } onAfterLeave={ onAfterLeave }>
           <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
-            { rendered.value && slots.default?.() }
+            { hasContent.value && slots.default?.() }
           </div>
         </MaybeTransition>
       </props.tag>
