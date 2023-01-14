@@ -1,2 +1,5 @@
 export * from './VDataTable'
 export * from './VVirtualScroll'
+export * from './VDateField'
+export * from './VDatePicker'
+export * from './VDateRangePicker'

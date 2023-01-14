@@ -2,8 +2,8 @@
 import './VDatePickerControls.sass'
 
 // Components
-import { VSpacer } from '../VGrid'
-import { VIcon } from '../VIcon'
+import { VSpacer } from '@/components/VGrid'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { useDatePicker } from './composables'

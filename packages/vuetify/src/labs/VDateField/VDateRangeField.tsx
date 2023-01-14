@@ -1,17 +1,24 @@
+// Styles
 import './VDateRangeField.sass'
+
+// Components
+import { VMenu } from '@/components/VMenu'
+import { VTextField } from '@/components/VTextField'
+import { VDialog } from '@/components/VDialog'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
+
+// Composables
 import { useDate } from '@/composables/date'
-import { provideDefaults } from '@/composables/defaults'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { defineComponent, useRender } from '@/util'
-import type { PropType } from 'vue'
-import { computed, ref, watch } from 'vue'
-import { VDateRangeCard } from '../VDatePicker'
-import { VMenu } from '../VMenu'
-import { VTextField } from '../VTextField'
-import { VDialog } from '../VDialog'
-import { VDateRangePicker } from '../VDatePicker/VDateRangePicker'
 import { useDisplay } from '@/composables'
-import { VDefaultsProvider } from '../VDefaultsProvider'
+import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { computed, ref, watch } from 'vue'
+import { defineComponent, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VDateRangeField = defineComponent({
   name: 'VDateRangeField',

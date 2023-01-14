@@ -2,7 +2,7 @@
 import './VDatePickerYears.sass'
 
 // Components
-import { VBtn } from '../VBtn'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDatePicker } from './composables'

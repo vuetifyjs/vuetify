@@ -1,8 +1,15 @@
+// Styles
 import './VDateRangePickerMonth.sass'
-import { createRange, defineComponent, useRender } from '@/util'
+
+// Components
+import { VDatePickerMonth } from '../VDatePicker/VDatePickerMonth'
+
+// Composables
+import { useDatePicker } from '../VDatePicker/composables'
+
+// Utilities
 import { computed, onMounted, ref } from 'vue'
-import { useDatePicker } from './composables'
-import { VDatePickerMonth } from './VDatePickerMonth'
+import { createRange, defineComponent, useRender } from '@/util'
 
 export const VDateRangePickerMonth = defineComponent({
   name: 'VDateRangePickerMonth',

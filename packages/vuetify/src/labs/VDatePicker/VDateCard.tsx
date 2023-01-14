@@ -1,13 +1,21 @@
+// Styles
 import './VDateCard.sass'
-import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { defineComponent, useRender } from '@/util'
-import type { PropType } from 'vue'
-import { VCard } from '../VCard'
-import { VDivider } from '../VDivider'
-import { createDatePicker } from './composables'
+
+// Components
+import { VCard } from '@/components/VCard'
 import { VDatePickerControls } from './VDatePickerControls'
 import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
+
+// Composables
+import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { createDatePicker } from './composables'
+
+// Utilities
+import { defineComponent, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VDateCard = defineComponent({
   name: 'VDateCard',

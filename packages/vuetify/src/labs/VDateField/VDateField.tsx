@@ -1,15 +1,21 @@
+// Styles
 import './VDateField.sass'
-import { useDisplay } from '@/composables'
-import { useDate } from '@/composables/date'
-import { provideDefaults } from '@/composables/defaults'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { defineComponent, useRender } from '@/util'
-import { computed, ref, watch } from 'vue'
+
+// Components
+import { VDialog } from '@/components/VDialog'
+import { VMenu } from '@/components/VMenu'
+import { VTextField } from '@/components/VTextField'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDateCard, VDatePicker } from '../VDatePicker'
-import { VDialog } from '../VDialog'
-import { VMenu } from '../VMenu'
-import { VTextField } from '../VTextField'
-import { VDefaultsProvider } from '../VDefaultsProvider'
+
+// Composables
+import { useDate } from '@/composables/date'
+import { useDisplay } from '@/composables'
+import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { computed, ref, watch } from 'vue'
+import { defineComponent, useRender } from '@/util'
 
 export const VDateField = defineComponent({
   name: 'VDateField',

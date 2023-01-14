@@ -6,7 +6,7 @@ import { VBtn } from '@/components'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
-import { useDatePicker } from './composables'
+import { useDatePicker } from '../VDatePicker/composables'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'

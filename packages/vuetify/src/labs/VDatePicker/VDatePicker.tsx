@@ -6,8 +6,8 @@ import { VDatePickerControls } from './VDatePickerControls'
 import { VDatePickerHeader } from './VDatePickerHeader'
 import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
-import { VPicker } from '../VPicker'
-import { VTextField } from '../VTextField'
+import { VPicker } from '@/components/VPicker'
+import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -19,7 +19,7 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VBtn } from '../VBtn'
+import { VBtn } from '@/components/VBtn'
 
 export const VDatePicker = defineComponent({
   name: 'VDatePicker',

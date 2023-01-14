@@ -1,4 +1,4 @@
-import { getWeek } from '@/components/VDatePicker/utils'
+import { getWeek } from '@/labs/VDatePicker/utils'
 import DateIODateFnsAdapter from '@date-io/date-fns'
 import type { DateAdapter } from './date-adapter'
 
