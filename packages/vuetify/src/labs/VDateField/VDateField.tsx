@@ -21,7 +21,7 @@ export const VDateField = defineComponent({
   name: 'VDateField',
 
   props: {
-    prependIcon: {
+    prependInnerIcon: {
       type: String,
       default: '$calendar',
     },
@@ -37,6 +37,7 @@ export const VDateField = defineComponent({
 
   emits: {
     'update:modelValue': (date: any) => true,
+    'update:displayDate': (date: any) => true,
   },
 
   setup (props, { slots, emit }) {
@@ -71,7 +72,7 @@ export const VDateField = defineComponent({
         <div { ...slotProps }>
           <VTextField
             v-model={ inputModel.value }
-            prependInnerIcon={ props.prependIcon }
+            prependInnerIcon={ props.prependInnerIcon }
             placeholder={ props.placeholder }
             label={ props.label }
             ref={ textFieldRef }
@@ -79,28 +80,32 @@ export const VDateField = defineComponent({
         </div>
       )
 
-      return mobile.value ? (
-        <VDialog
-          contentClass="v-date-field__dialog-content"
-          v-slots={{
-            activator,
-            default: ({ isActive }) => (
-              <VDatePicker
-                v-model={ selected.value }
-                showActions
-                onSave={() => {
-                  model.value = selected.value
-                  isActive.value = false
-                }}
-                onCancel={() => {
-                  isActive.value = false
-                  selected.value = model.value
-                }}
-              />
-            ),
-          }}
-        />
-      ) : (
+      if (mobile.value) {
+        return (
+          <VDialog
+            contentClass="v-date-field__dialog-content"
+            v-slots={{
+              activator,
+              default: ({ isActive }) => (
+                <VDatePicker
+                  v-model={ selected.value }
+                  showActions
+                  onSave={() => {
+                    model.value = selected.value
+                    isActive.value = false
+                  }}
+                  onCancel={() => {
+                    isActive.value = false
+                    selected.value = model.value
+                  }}
+                />
+              ),
+            }}
+          />
+        )
+      }
+
+      return (
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <VMenu
             closeOnContentClick={ false }

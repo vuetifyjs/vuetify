@@ -46,6 +46,10 @@ export const VDatePicker = defineComponent({
   emits: {
     save: () => true,
     cancel: () => true,
+    'update:modelValue': (date: any) => true,
+    'update:displayDate': (date: any) => true,
+    'update:mode': (mode: 'month' | 'years') => true,
+    'update:input': (mode: 'keyboard' | 'calendar') => true,
   },
 
   setup (props, { emit }) {
@@ -59,6 +63,15 @@ export const VDatePicker = defineComponent({
       inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
     })
 
+    const handleCancel = () => emit('cancel')
+    const handleSave = () => {
+      if (adapter.value.isValid(inputModel.value)) {
+        model.value = [adapter.value.date(inputModel.value)]
+      }
+
+      emit('save')
+    }
+
     useRender(() => (
       <VPicker
         class="v-date-picker"
@@ -66,8 +79,6 @@ export const VDatePicker = defineComponent({
           header: () => (
             <VDatePickerHeader
               color={ props.color }
-              // title={ props.title }
-              // header={ props.header }
             />
           ),
           default: () => input.value === 'calendar' ? (
@@ -91,12 +102,7 @@ export const VDatePicker = defineComponent({
           ) : (
             <div class="v-date-picker__input">
               <VTextField
-                modelValue={ inputModel.value }
-                onUpdate:modelValue={ (value: any) => {
-                  if (value.length === 10 && adapter.value.isValid(value)) {
-                    model.value = [adapter.value.date(value)]
-                  }
-                } }
+                v-model={ inputModel.value }
                 label="Enter date"
                 placeholder="yyyy/mm/dd"
               />
@@ -104,8 +110,8 @@ export const VDatePicker = defineComponent({
           ),
           actions: props.showActions && (() => (
             <div>
-              <VBtn variant="text" color={props.color} onClick={() => emit('cancel')}>Cancel</VBtn>
-              <VBtn variant="text" color={props.color} onClick={() => emit('save')}>Ok</VBtn>
+              <VBtn variant="text" color={props.color} onClick={handleCancel}>Cancel</VBtn>
+              <VBtn variant="text" color={props.color} onClick={handleSave}>Ok</VBtn>
             </div>
           )),
         }}

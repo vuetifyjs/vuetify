@@ -12,6 +12,7 @@ import { makeTransitionProps } from '@/composables/transition'
 import { createDatePicker } from '../VDatePicker/composables'
 
 // Utilities
+import { ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
@@ -41,8 +42,17 @@ export const VDateRangeCard = defineComponent({
     }),
   },
 
+  emits: {
+    'update:modelValue': (date: any) => true,
+    'update:displayDate': (date: any) => true,
+    'update:mode': (mode: 'month' | 'years') => true,
+    'update:input': (mode: 'keyboard' | 'calendar') => true,
+  },
+
   setup (props) {
     const { mode, displayDate, adapter } = createDatePicker(props, true)
+
+    const hoverDate = ref(null)
 
     useRender(() => (
       <VCard
@@ -55,6 +65,7 @@ export const VDateRangeCard = defineComponent({
               <VDatePickerMonth
                 displayDate={ displayDate.value }
                 locale={ props.locale }
+                v-model:hoverDate={ hoverDate.value }
                 range="start"
               />
             </div>
@@ -64,6 +75,7 @@ export const VDateRangeCard = defineComponent({
               <VDatePickerMonth
                 displayDate={ adapter.value.addMonths(displayDate.value, 1) }
                 locale={ props.locale }
+                v-model:hoverDate={ hoverDate.value }
                 range="end"
               />
             </div>

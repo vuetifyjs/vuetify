@@ -14,16 +14,18 @@ import { useDisplay } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, toRef, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { provideDefaults } from '@/composables/defaults'
 
 export const VDateRangeField = defineComponent({
   name: 'VDateRangeField',
 
   props: {
+    color: String,
     prependIcon: {
       type: String,
       default: '$calendar',
@@ -80,47 +82,58 @@ export const VDateRangeField = defineComponent({
 
     const { mobile } = useDisplay()
 
+    provideDefaults({
+      VTextField: {
+        color: toRef(props, 'color'),
+      },
+    })
+
     useRender(() => {
-      return mobile.value ? (
-        <VDialog
-          fullscreen={ input.value === 'calendar' }
-          v-slots={{
-            activator: ({ props: slotProps }) => (
-              <div class="v-date-range-field" { ...slotProps }>
-                <VTextField
-                  v-model={ startInput.value }
-                  prependInnerIcon={ props.prependIcon }
-                  placeholder={ props.placeholder }
-                  label={ props.fromLabel }
+      if (mobile.value) {
+        return (
+          <VDialog
+            fullscreen={ input.value === 'calendar' }
+            v-slots={{
+              activator: ({ props: slotProps }) => (
+                <div class="v-date-range-field" { ...slotProps }>
+                  <VTextField
+                    v-model={ startInput.value }
+                    prependInnerIcon={ props.prependIcon }
+                    placeholder={ props.placeholder }
+                    label={ props.fromLabel }
+                  />
+                  <div class="v-date-range-field__divider">to</div>
+                  <VTextField
+                    v-model={ endInput.value }
+                    prependInnerIcon={ props.prependIcon }
+                    placeholder={ props.placeholder }
+                    label={ props.toLabel }
+                  />
+                </div>
+              ),
+              default: ({ isActive }) => (
+                <VDateRangePicker
+                  onUpdate:input={ v => input.value = v }
+                  v-model={ selected.value }
+                  onSave={() => {
+                    isActive.value = false
+                    model.value = selected.value
+                  }}
+                  onCancel={() => {
+                    isActive.value = false
+                  }}
                 />
-                <div class="v-date-range-field__divider">to</div>
-                <VTextField
-                  v-model={ endInput.value }
-                  prependInnerIcon={ props.prependIcon }
-                  placeholder={ props.placeholder }
-                  label={ props.toLabel }
-                />
-              </div>
-            ),
-            default: ({ isActive }) => (
-              <VDateRangePicker
-                onUpdate:input={ v => input.value = v }
-                v-model={ selected.value }
-                onSave={() => {
-                  isActive.value = false
-                  model.value = selected.value
-                }}
-                onCancel={() => {
-                  isActive.value = false
-                }}
-              />
-            ),
-          }}
-        />
-      ) : (
+              ),
+            }}
+          />
+        )
+      }
+
+      return (
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <VMenu
             offset={ [-30, 0] }
+            closeOnContentClick={ false }
             v-slots={{
               activator: ({ props: slotProps }) => (
                 <div class="v-date-range-field" { ...slotProps }>
