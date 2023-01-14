@@ -2,17 +2,21 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    :group-by="groupBy"
     item-value="name"
     class="elevation-1"
   >
-    <template v-slot:item="{ item }">
+    <template v-slot:group-header="{ item, columns, toggleGroup, isGroupOpen }">
       <tr>
-        <td>{{ item.columns.name }}</td>
-        <td>{{ item.columns.calories }}</td>
-        <td>{{ item.columns.fat }}</td>
-        <td>{{ item.columns.carbs }}</td>
-        <td>{{ item.columns.protein }}</td>
-        <td>{{ item.columns.iron }}</td>
+        <td :colspan="columns.length">
+          <VBtn
+            size="small"
+            variant="text"
+            :icon="isGroupOpen(item) ? '$expand' : '$next'"
+            @click="toggleGroup(item)"
+          ></VBtn>
+          {{ item.value ? 'Contains gluten' : 'Gluten free' }}
+        </td>
       </tr>
     </template>
   </v-data-table>
@@ -22,7 +26,12 @@
   export default {
     data () {
       return {
-        selected: [],
+        groupBy: [
+          {
+            key: 'gluten',
+            order: 'asc',
+          },
+        ],
         headers: [
           {
             title: 'Dessert (100g serving)',
@@ -44,6 +53,7 @@
             carbs: 24,
             protein: 4.0,
             iron: '1%',
+            gluten: false,
           },
           {
             name: 'Ice cream sandwich',
@@ -52,6 +62,7 @@
             carbs: 37,
             protein: 4.3,
             iron: '1%',
+            gluten: false,
           },
           {
             name: 'Eclair',
@@ -60,6 +71,7 @@
             carbs: 23,
             protein: 6.0,
             iron: '7%',
+            gluten: true,
           },
           {
             name: 'Cupcake',
@@ -68,6 +80,7 @@
             carbs: 67,
             protein: 4.3,
             iron: '8%',
+            gluten: true,
           },
           {
             name: 'Gingerbread',
@@ -76,6 +89,7 @@
             carbs: 49,
             protein: 3.9,
             iron: '16%',
+            gluten: true,
           },
           {
             name: 'Jelly bean',
@@ -84,6 +98,7 @@
             carbs: 94,
             protein: 0.0,
             iron: '0%',
+            gluten: false,
           },
           {
             name: 'Lollipop',
@@ -92,6 +107,7 @@
             carbs: 98,
             protein: 0,
             iron: '2%',
+            gluten: false,
           },
           {
             name: 'Honeycomb',
@@ -100,6 +116,7 @@
             carbs: 87,
             protein: 6.5,
             iron: '45%',
+            gluten: true,
           },
           {
             name: 'Donut',
@@ -108,6 +125,7 @@
             carbs: 51,
             protein: 4.9,
             iron: '22%',
+            gluten: true,
           },
           {
             name: 'KitKat',
@@ -116,6 +134,7 @@
             carbs: 65,
             protein: 7,
             iron: '6%',
+            gluten: true,
           },
         ],
       }
