@@ -210,6 +210,36 @@ describe('VCombobox', () => {
         .type('Item 3')
         .should('have.length', 1)
     })
+
+    // issue #16403
+    it('should use item-title as filter keys', () => {
+      const items = [
+        {
+          id: 1,
+          name: 'Test1',
+        },
+        {
+          id: 2,
+          name: 'Antonsen PK',
+        },
+      ]
+
+      cy.mount(() => (
+        <VCombobox
+          items={items}
+          item-value="id"
+          item-title="name"
+        />
+      ))
+        .get('input')
+        .type('test')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .get('input')
+        .clear()
+        .type('antonsen')
+        .should('have.length', 1)
+    })
   })
 
   describe('prefilled data', () => {
