@@ -49,13 +49,14 @@ export default CalendarBase.extend({
       return this.parsedIntervalCount * this.parsedIntervalHeight
     },
     days (): CalendarTimestamp[] {
-      return createDayList(
+      const days = createDayList(
         this.parsedStart,
         this.parsedEnd,
         this.times.today,
         this.weekdaySkips,
         this.maxDays
       )
+      return days
     },
     intervals (): CalendarTimestamp[][] {
       const days: CalendarTimestamp[] = this.days
@@ -63,7 +64,6 @@ export default CalendarBase.extend({
       const minutes: number = this.parsedIntervalMinutes
       const count: number = this.parsedIntervalCount
       const now: CalendarTimestamp = this.times.now
-
       return days.map(d => createIntervalList(d, first, minutes, count, now))
     },
     intervalFormatter (): CalendarFormatter {
@@ -99,10 +99,10 @@ export default CalendarBase.extend({
       const mouseEvent: MouseEvent = e as MouseEvent
       const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
       const clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
+
       const addIntervals: number = (clientY - bounds.top) / this.parsedIntervalHeight
       const addMinutes: number = Math.floor(addIntervals * this.parsedIntervalMinutes)
       const minutes: number = baseMinutes + addMinutes
-
       return updateMinutes(timestamp, minutes, this.times.now)
     },
     getSlotScope (timestamp: CalendarTimestamp): CalendarDayBodySlotScope {

@@ -24,24 +24,22 @@ export default Vue.extend({
 
   methods: {
     getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
+      // 找到包含该后缀的所有监听事件
       const listeners = Object.keys(this.$listeners)
         .filter(key => key.endsWith(suffix))
         .reduce((acc, key) => {
           acc[key] = { event: key.slice(0, -suffix.length) }
           return acc
         }, {} as MouseEvents)
-
       return this.getMouseEventHandlers({
         ...listeners,
         ['contextmenu' + suffix]: { event: 'contextmenu', prevent: true, result: false },
       }, getEvent)
     },
     getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
-      const on: MouseEventsMap = {}
-
+      const on: MouseEventsMap = { }
       for (const event in events) {
         const eventOptions = events[event]
-
         if (!this.$listeners[event]) continue
 
         // TODO somehow pull in modifiers
@@ -54,6 +52,7 @@ export default Vue.extend({
           if (eventOptions.button === undefined || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
             if (eventOptions.prevent) {
               e.preventDefault()
+              e.stopPropagation()
             }
             if (eventOptions.stop) {
               e.stopPropagation()
@@ -64,6 +63,7 @@ export default Vue.extend({
             // Ref: https://developer.mozilla.org/en-US/docs/Web/API/Touch/target
             // This block of code aims to make sure touchEvent is always dispatched from the element that is being pointed at
             if (e && 'touches' in e) {
+
               const classSeparator = ' '
 
               const eventTargetClasses = (e.currentTarget as HTMLElement)?.className.split(classSeparator)
@@ -84,7 +84,6 @@ export default Vue.extend({
                 return
               }
             }
-
             this.$emit(event, getEvent(e), e)
           }
 
@@ -102,7 +101,6 @@ export default Vue.extend({
           on[key] = handler
         }
       }
-
       return on
     },
   },

@@ -135,7 +135,6 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
   // YYYY-MM-DD hh:mm:ss
   const parts = PARSE_REGEX.exec(input)
-
   if (!parts) {
     if (required) {
       throw new Error(`${input} is not a valid timestamp. It must be a Date, number of milliseconds since Epoch, or a string in the format of YYYY-MM-DD or YYYY-MM-DD hh:mm. Zero-padding is optional and seconds are ignored.`)
@@ -143,7 +142,6 @@ export function parseTimestamp (input: VTimestampInput, required = false, now?: 
 
     return null
   }
-
   const timestamp: CalendarTimestamp = {
     date: input,
     time: '',
@@ -187,7 +185,7 @@ export function parseDate (date: Date): CalendarTimestamp {
     future: false,
   })
 }
-
+// 将日期转换为数字形式的年月日 2020-01-01 转变为 20200101
 export function getDayIdentifier (timestamp: { year: number, month: number, day: number }): number {
   return timestamp.year * OFFSET_YEAR + timestamp.month * OFFSET_MONTH + timestamp.day
 }
@@ -264,14 +262,21 @@ export function updateFormatted (timestamp: CalendarTimestamp): CalendarTimestam
 }
 
 export function getWeekday (timestamp: CalendarTimestamp): number {
+  // 蔡勒公式求具体一天的周几
+
+
   if (timestamp.hasDay) {
     const _ = Math.floor
+    // 当天的日
     const k = timestamp.day
+    // 月（m大于等于3，小于等于14，即在蔡勒公式中，
+    // 某年的1、2月要看作上一年的13、14月来计算，比如2003年1月1日要看作2002年的13月1日来计算）
     const m = ((timestamp.month + 9) % MONTH_MAX) + 1
+    // 世纪减1（年份前两位数）
     const C = _(timestamp.year / 100)
+    // 年（后两位数）
     const Y = (timestamp.year % 100) - (timestamp.month <= 2 ? 1 : 0)
-
-    return (((k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7) + 7) % 7
+    return ((k + _(2.6 * m - 0.2) - 2 * C + Y + _(Y / 4) + _(C / 4)) % 7)
   }
 
   return timestamp.weekday

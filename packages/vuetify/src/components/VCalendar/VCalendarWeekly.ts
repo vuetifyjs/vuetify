@@ -120,14 +120,19 @@ export default CalendarBase.extend({
       }), this.weekdayFormatter(day, this.shortWeekdays))
     },
     genWeeks (): VNode[] {
+      // 解析出来当月的42天的视图
       const days = this.days
+      // 每周有7天的时间
       const weekDays = this.parsedWeekdays.length
       const weeks: VNode[] = []
-
       for (let i = 0; i < days.length; i += weekDays) {
-        weeks.push(this.genWeek(days.slice(i, i + weekDays), this.getWeekNumber(days[i])))
+        // 截取一周的日期  直到把所有日期截取完成
+        // 通常会截取为六组
+        const week = days.slice(i, i + weekDays)
+        // 计算本周是在当年的第几周
+        const weekNumber = this.getWeekNumber(days[i])
+        weeks.push(this.genWeek(week, weekNumber))
       }
-
       return weeks
     },
     genWeek (week: CalendarTimestamp[], weekNumber: number): VNode {
@@ -163,7 +168,8 @@ export default CalendarBase.extend({
     },
     genDay (day: CalendarTimestamp, index: number, week: CalendarTimestamp[]): VNode {
       const outside = this.isOutside(day)
-
+      // 渲染当日中的日历事件
+      const daySlot = getSlot(this, 'day', () => ({ outside, index, week, ...day }))
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-weekly__day',
@@ -176,7 +182,7 @@ export default CalendarBase.extend({
         }),
       }, [
         this.genDayLabel(day),
-        ...(getSlot(this, 'day', () => ({ outside, index, week, ...day })) || []),
+        ...(daySlot || []),
       ])
     },
     genDayLabel (day: CalendarTimestamp): VNode {
@@ -214,6 +220,9 @@ export default CalendarBase.extend({
   },
 
   render (h): VNode {
+    const header = !this.hideHeader ? this.genHead() : ''
+    // 每月五周
+    const weeks = this.genWeeks()
     return h('div', {
       staticClass: this.staticClass,
       class: this.classes,
@@ -223,8 +232,8 @@ export default CalendarBase.extend({
         },
       },
     }, [
-      !this.hideHeader ? this.genHead() : '',
-      ...this.genWeeks(),
+      header,
+      ...weeks,
     ])
   },
 })

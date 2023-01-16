@@ -162,21 +162,32 @@ export default CalendarWithIntervals.extend({
     genDays (): VNode[] {
       return this.days.map(this.genDay)
     },
+    // 有多少天就执行多少天
     genDay (day: CalendarTimestamp, index: number): VNode {
+      // 这里返回了mousedown mousemove mouseup事件对象
+      // 再上述事件中，会使用$emit触发绑定的事件，
+      // 传回参数 鼠标坐标点的时间值
+      // getTimestampAtEvent 计算时间坐标在日历上的时间值
+      // getSlotScope 只会为计算出来的时间坐标加上对应的时间转换为坐标点的方法
+      const on = this.getDefaultMouseEventHandlers(':time', nativeEvent => {
+        const time = this.getTimestampAtEvent(nativeEvent, day)
+        return { nativeEvent, ...this.getSlotScope(time) }
+      })
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-daily__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':time', nativeEvent => {
-          return { nativeEvent, ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)) }
-        }),
+        on,
       }, [
         ...this.genDayIntervals(index),
         ...this.genDayBody(day),
       ])
     },
     genDayBody (day: CalendarTimestamp): VNode[] {
-      return getSlot(this, 'day-body', () => this.getSlotScope(day)) || []
+      // 给这个日期对象加上对应的方法 timeToY  timeDelta minutesToPixels
+      const obj = this.getSlotScope(day)
+      // 这里主要是为了将日期传到day-body这个插槽中，这里的day-body渲染的是日历事件
+      return getSlot(this, 'day-body', obj) || []
     },
     genDayIntervals (index: number): VNode[] {
       return this.intervals[index].map(this.genDayInterval)
@@ -201,14 +212,16 @@ export default CalendarWithIntervals.extend({
     },
     genBodyIntervals (): VNode {
       const width: string | undefined = convertToUnit(this.intervalWidth)
+      // 只返回了一个mousedown事件
+      const on = this.getDefaultMouseEventHandlers(':interval', nativeEvent => {
+        return { nativeEvent, ...this.getTimestampAtEvent(nativeEvent, this.parsedStart) }
+      })
       const data = {
         staticClass: 'v-calendar-daily__intervals-body',
         style: {
           width,
         },
-        on: this.getDefaultMouseEventHandlers(':interval', nativeEvent => {
-          return { nativeEvent, ...this.getTimestampAtEvent(nativeEvent, this.parsedStart) }
-        }),
+        on,
       }
 
       return this.$createElement('div', data, this.genIntervalLabels())
@@ -240,12 +253,9 @@ export default CalendarWithIntervals.extend({
   },
 
   render (h): VNode {
-    return h('div', {
+    return this.$createElement('div', {
       class: this.classes,
       on: {
-        dragstart: (e: MouseEvent) => {
-          e.preventDefault()
-        },
       },
       directives: [{
         modifiers: { quiet: true },

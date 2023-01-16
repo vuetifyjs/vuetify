@@ -73,13 +73,16 @@ export default CalendarWithEvents.extend({
       return parseInt(this.categoryDays) || 1
     },
     renderProps (): VCalendarRenderProps {
+      // 默认时当前日
       const around = this.parsedValue
       let component: any = null
+      // 默认七天
       let maxDays = this.maxDays
       let weekdays = this.parsedWeekdays
       let categories = this.parsedCategories
       let start = around
       let end = around
+
       switch (this.type) {
         case 'month':
           component = VCalendarMonthly
@@ -347,7 +350,7 @@ export default CalendarWithEvents.extend({
 
   render (h): VNode {
     const { start, end, maxDays, component, weekdays, categories } = this.renderProps
-
+    const scopedSlots = this.getScopedSlots()
     return h(component, {
       staticClass: 'v-calendar',
       class: {
@@ -373,6 +376,7 @@ export default CalendarWithEvents.extend({
         ...this.$listeners,
 
         'click:date': (day: CalendarTimestamp, e?: MouseEvent) => {
+          console.log('*********click:date*********',day)
           if (this.$listeners.input) {
             this.$emit('input', day.date)
           }
@@ -381,7 +385,7 @@ export default CalendarWithEvents.extend({
           }
         },
       },
-      scopedSlots: this.getScopedSlots(),
+      scopedSlots,
     })
   },
 })

@@ -15,6 +15,8 @@ export function getVisuals (events: CalendarEventParsed[], minStart = 0): Calend
   }))
 
   visuals.sort((a, b) => {
+    // 按照结束时间越晚 越靠前
+    // 开始时间越早 越靠前
     return (Math.max(minStart, a.event.startTimestampIdentifier) - Math.max(minStart, b.event.startTimestampIdentifier)) ||
            (b.event.endTimestampIdentifier - a.event.endTimestampIdentifier)
   })

@@ -95,6 +95,7 @@ export default CalendarBase.extend({
     parsedEventOverlapThreshold (): number {
       return parseInt(this.eventOverlapThreshold)
     },
+    // 事件是否是跨天的或者全天的事件(属性标志位的值)
     eventTimedFunction (): CalendarEventTimedFunction {
       return typeof this.eventTimed === 'function'
         ? this.eventTimed
@@ -115,6 +116,7 @@ export default CalendarBase.extend({
         ? this.eventName
         : (event, timedEvent) => event.input[this.eventName as string] as string || ''
     },
+    // 事件的显示模式 堆叠或者列模式
     eventModeFunction (): CalendarEventOverlapMode {
       return typeof this.eventOverlapMode === 'function'
         ? this.eventOverlapMode
@@ -134,14 +136,15 @@ export default CalendarBase.extend({
         ? this.eventColor(e)
         : e.color || this.eventColor
     },
+    // 输入的是最原始的事件对象
     parseEvent (input: CalendarEvent, index = 0): CalendarEventParsed {
       return parseEvent(
-        input,
+        input, // 最原始的事件输入值
         index,
-        this.eventStart,
-        this.eventEnd,
-        this.eventTimedFunction(input),
-        this.categoryMode ? this.eventCategoryFunction(input) : false,
+        this.eventStart, // 时间开始的属性 start
+        this.eventEnd, // 时间的结束属性 end
+        this.eventTimedFunction(input), // 全天属性标志位的值
+        this.categoryMode ? this.eventCategoryFunction(input) : false, // 堆叠模式还是列模式
       )
     },
     formatTime (withTime: CalendarTimestamp, ampm: boolean): string {
@@ -225,8 +228,10 @@ export default CalendarBase.extend({
       return eventsMap
     },
     genDayEvent ({ event }: CalendarEventVisual, day: CalendarDaySlotScope): VNode {
+      // 这是为了在月视图中生成
       const eventHeight = this.eventHeight
       const eventMarginBottom = this.eventMarginBottom
+      // 当天的日期标识符
       const dayIdentifier = getDayIdentifier(day)
       const week = day.week
       const start = dayIdentifier === event.startIdentifier
@@ -270,7 +275,6 @@ export default CalendarBase.extend({
       if (day.timeDelta(event.end) < 0 || day.timeDelta(event.start) >= 1 || isEventHiddenOn(event, day)) {
         return false
       }
-
       const dayIdentifier = getDayIdentifier(day)
       const start = event.startIdentifier >= dayIdentifier
       const end = event.endIdentifier > dayIdentifier
@@ -414,6 +418,7 @@ export default CalendarBase.extend({
         (typeof event.category !== 'string' && category === null)
     },
     getEventsForDay (day: CalendarDaySlotScope): CalendarEventParsed[] {
+      // day 是那天的日期
       const identifier = getDayIdentifier(day)
       const firstWeekday = this.eventWeekdays[0]
 
@@ -424,7 +429,6 @@ export default CalendarBase.extend({
     getEventsForDayAll (day: CalendarDaySlotScope): CalendarEventParsed[] {
       const identifier = getDayIdentifier(day)
       const firstWeekday = this.eventWeekdays[0]
-
       return this.parsedEvents.filter(
         event => event.allDay &&
           (this.categoryMode ? isEventOn(event, identifier) : isEventStart(event, day, identifier, firstWeekday)) &&
@@ -443,29 +447,34 @@ export default CalendarBase.extend({
       if (this.noEvents) {
         return { ...this.$scopedSlots }
       }
-
+      //  选择堆叠模式还是列模式（此处传参无用啊）
       const mode = this.eventModeFunction(
         this.parsedEvents,
         this.eventWeekdays[0],
         this.parsedEventOverlapThreshold
       )
-
       const isNode = (input: VNode | false): input is VNode => !!input
-      const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
-        const events = getter(day)
-        const visuals = mode(day, events, timed, this.categoryMode)
 
+      const getSlotChildren: VEventsToNodes = (day, getter, mapper, timed) => {
+        // day 是当天的日期
+        // getter 过滤出当日的事件
+        // mapper 生成当日的事件布局
+        const events = getter(day) // 过滤出当日的事件
+        const visuals = mode(day, events, timed, this.categoryMode) // 根据当天日期信息 计算这些事件(堆叠效果下)的 left和width
+        // 在day和day-header 这两个作用域插槽中，timed是false
         if (timed) {
-          return visuals.map(visual => mapper(visual, day)).filter(isNode)
+          return visuals.map(visual => mapper(visual, day)).filter(isNode) // 根据视图数据生成视图节点布局
         }
 
         const children: VNode[] = []
-
+        // day 是月视图中的插槽
+        // day-header 是在日视图和周视图中存在的header部分
+        // 在day和day-header 这两个作用域插槽中 执行到此处
         visuals.forEach((visual, index) => {
           while (children.length < visual.column) {
             children.push(this.genPlaceholder(day))
           }
-
+          // 开始生成当日的日历事件节点
           const mapped = mapper(visual, day)
           if (mapped) {
             children.push(mapped)
@@ -479,9 +488,9 @@ export default CalendarBase.extend({
       const slotDay = slots.day
       const slotDayHeader = slots['day-header']
       const slotDayBody = slots['day-body']
-
       return {
         ...slots,
+        // 这里的插槽用在月视图中，渲染当日的事件
         day: (day: CalendarDaySlotScope) => {
           let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
@@ -506,7 +515,13 @@ export default CalendarBase.extend({
           }
           return children
         },
+        // day-body插槽用在日视图和周视图中
         'day-body': (day: CalendarDayBodySlotScope) => {
+          // getSlotChildren 将事件属性转换为 VNode
+          // getSlotChildren 生成对应的日历事件dom
+          // day 是当天的日期
+          // getEventsForDayTimed 过滤出当日的事件
+          // genTimedEvent 生成当日的事件布局
           const events = getSlotChildren(day, this.getEventsForDayTimed, this.genTimedEvent, true)
           let children: VNode[] = [
             this.$createElement('div', {
