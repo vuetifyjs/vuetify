@@ -228,21 +228,28 @@ export default CalendarBase.extend({
       return eventsMap
     },
     genDayEvent ({ event }: CalendarEventVisual, day: CalendarDaySlotScope): VNode {
-      // 这是为了在月视图中生成
+      // 这是为了在月视图中生成当天的日历事件
       const eventHeight = this.eventHeight
       const eventMarginBottom = this.eventMarginBottom
       // 当天的日期标识符
       const dayIdentifier = getDayIdentifier(day)
+      // 该日所在的周日历
       const week = day.week
+
       const start = dayIdentifier === event.startIdentifier
       let end = dayIdentifier === event.endIdentifier
+      // 过滤出来的事件一定是在该日的，默认宽度95%
       let width = WIDTH_START
-
       if (!this.categoryMode) {
+        // 这里使用day.index做了一个优化 这样就不必将比较该日之前的周日日历
         for (let i = day.index + 1; i < week.length; i++) {
+          // 获取到周日历中某日的日期标识
           const weekdayIdentifier = getDayIdentifier(week[i])
+          // 将该事件的结束标识符与周日历中进行对比
           if (event.endIdentifier >= weekdayIdentifier) {
+            // 对于结束标识符大于等于该周某日，就会长度延长100%
             width += WIDTH_FULL
+            // 这里是为了记录某个很长的日历事件，end的结束时间可能远大于本周的结束时间
             end = end || weekdayIdentifier === event.endIdentifier
           } else {
             end = true
@@ -294,6 +301,7 @@ export default CalendarBase.extend({
       })
     },
     genEvent (event: CalendarEventParsed, scopeInput: VEventScopeInput, timedEvent: boolean, data: VNodeData): VNode {
+
       const slot = this.$scopedSlots.event
       const text = this.eventTextColorFunction(event.input)
       const background = this.eventColorFunction(event.input)
@@ -337,11 +345,14 @@ export default CalendarBase.extend({
         timeSummary,
         eventSummary,
       }
-
+      const color = this.setTextColor(text)
+      console.log(color,'*********color***********')
+      const on = this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })
       return this.$createElement('div',
         this.setTextColor(text,
           this.setBackgroundColor(background, {
-            on: this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })),
+            // 此处添加月视图的日历事件的点击事件
+            on,
             directives: [{
               name: 'ripple',
               value: this.eventRipple ?? true,
@@ -492,6 +503,8 @@ export default CalendarBase.extend({
         ...slots,
         // 这里的插槽用在月视图中，渲染当日的事件
         day: (day: CalendarDaySlotScope) => {
+          // getEventsForDay获取当天的事件
+          // genDayEvent 生成当天的节点页面
           let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
             children.push(this.genMore(day))

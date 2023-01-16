@@ -52,7 +52,6 @@ export default Vue.extend({
           if (eventOptions.button === undefined || (mouseEvent.buttons > 0 && mouseEvent.button === eventOptions.button)) {
             if (eventOptions.prevent) {
               e.preventDefault()
-              e.stopPropagation()
             }
             if (eventOptions.stop) {
               e.stopPropagation()

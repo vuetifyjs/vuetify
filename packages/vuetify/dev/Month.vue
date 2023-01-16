@@ -4,6 +4,7 @@
     type="month"
     :weekdays="[1,2,3,4,5,6,0]"
     :events="events"
+    @mouseenter:day="mouseenterDay"
     @mousedown:event="startDrag"
     @mousedown:day="startTime"
     @mousemove:day="mouseMove"
@@ -21,6 +22,10 @@ const week = {
   start: start + 24 * 60 * 60 * 1000,
   end: end + 2*24 * 60 * 60 * 1000
 }
+const month = {
+  start: start,
+  end: end + 9*24 * 60 * 60 * 1000
+}
 
 export default {
   mounted() {
@@ -28,6 +33,13 @@ export default {
   },
   data: () => ({
     events: [
+      {
+        name: `red`,
+        color: 'red',
+        start:  month.start,
+        end: month.end,
+        timed: true,
+      },
       {
         name: `red`,
         color: 'red',
@@ -56,17 +68,27 @@ export default {
     extendOriginal: null,
   }),
   methods: {
+
+    mouseenterDay(a,b){
+      console.log(a,b,'****mouseenterDay')
+    },
+    clickDay(a,b){
+      console.log(a,b,'****clickDay')
+    },
+    stop(){},
     startDrag (tms) {
       const { event, timed } = tms
       console.log(tms,'==========startDrag======')
       // 在月视图中如何将timed转换为true
-      if (event && timed) {
+      if (event) {
         this.dragEvent = event
         this.dragTime = null
         this.extendOriginal = null
       }
     },
     startTime (tms) {
+
+      console.log(tms.date,'*******startTime*********startTime**************startTime****')
       // 将日期转换为时间戳，精确到分钟
       const mouse = this.toTime(tms)
       if (this.dragEvent && this.dragTime === null) {
@@ -88,6 +110,7 @@ export default {
     },
     mouseMove (tms) {
       const mouse = this.toTime(tms)
+      console.log(tms.date,'*******mouseMove*********mouseMove**************mouseMove****')
       if (this.dragEvent && this.dragTime !== null) {
         const start = this.dragEvent.start
         const end = this.dragEvent.end

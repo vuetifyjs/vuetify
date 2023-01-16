@@ -170,6 +170,7 @@ export default CalendarBase.extend({
       const outside = this.isOutside(day)
       // 渲染当日中的日历事件
       const daySlot = getSlot(this, 'day', () => ({ outside, index, week, ...day }))
+
       return this.$createElement('div', {
         key: day.date,
         staticClass: 'v-calendar-weekly__day',
