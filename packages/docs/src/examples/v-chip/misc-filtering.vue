@@ -31,7 +31,7 @@
       <v-chip
         v-for="(keyword, i) in keywords"
         :key="i"
-        class="mr-2"
+        class="me-2"
       >
         {{ keyword }}
       </v-chip>
@@ -48,7 +48,7 @@
       >
         <template v-slot:prepend>
           <v-avatar
-            class="mr-4 mt-2"
+            class="me-4 mt-2"
             rounded="0"
           >
             <v-img :src="item.image" cover></v-img>

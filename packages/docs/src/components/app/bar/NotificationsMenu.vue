@@ -28,13 +28,13 @@
     </template>
 
     <v-toolbar
-      class="pl-4 pr-5"
+      class="ps-4 pe-5"
       color="surface"
       density="compact"
     >
       <v-btn
         :disabled="showArchived ? unread.length < 1 : read.length < 1"
-        class="px-2 ml-n1"
+        class="px-2 ms-n1"
         size="small"
         variant="text"
         @click="showArchived = !showArchived"
@@ -96,7 +96,7 @@
                 <v-btn
                   :ripple="false"
                   :icon="marked.icon"
-                  class="ml-3"
+                  class="ms-3"
                   color="medium-emphasis"
                   variant="text"
                   @click.stop.prevent="toggle(notification)"

@@ -36,7 +36,7 @@
 
     <v-btn
       color="success"
-      class="mr-4"
+      class="me-4"
       @click="validate"
     >
       Validate
@@ -44,7 +44,7 @@
 
     <v-btn
       color="error"
-      class="mr-4"
+      class="me-4"
       @click="reset"
     >
       Reset Form

@@ -14,7 +14,7 @@
         :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
         v-bind="props"
       >
-        <span :class="mdAndUp && 'mr-n1'">
+        <span :class="mdAndUp && 'me-n1'">
           <span v-if="smAndUp">
             {{ t('search.label') }}
           </span>

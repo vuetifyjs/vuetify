@@ -76,7 +76,7 @@
       </validation-provider>
 
       <v-btn
-        class="mr-4"
+        class="me-4"
         type="submit"
         :disabled="invalid"
       >

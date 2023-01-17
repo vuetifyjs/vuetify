@@ -111,7 +111,7 @@
                 dark
                 variant="text"
                 color="primary"
-                class="ml-2"
+                class="ms-2"
                 v-bind="attrs"
                 v-on="on"
               >
@@ -133,7 +133,7 @@
           <v-spacer></v-spacer>
 
           <span
-            class="mr-4 text-grey"
+            class="me-4 text-grey"
           >
             Page {{ page }} of {{ numberOfPages }}
           </span>
@@ -141,7 +141,7 @@
             fab
             dark
             color="blue-darken-3"
-            class="mr-1"
+            class="me-1"
             @click="formerPage"
           >
             <v-icon>mdi-chevron-left</v-icon>
@@ -150,7 +150,7 @@
             fab
             dark
             color="blue-darken-3"
-            class="ml-1"
+            class="ms-1"
             @click="nextPage"
           >
             <v-icon>mdi-chevron-right</v-icon>

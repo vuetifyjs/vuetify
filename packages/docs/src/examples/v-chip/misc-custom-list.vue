@@ -29,7 +29,7 @@
           v-for="(selection, i) in selections"
           :key="selection.text"
           cols="auto"
-          class="py-1 pr-0"
+          class="py-1 pe-0"
         >
           <v-chip
             :disabled="loading"

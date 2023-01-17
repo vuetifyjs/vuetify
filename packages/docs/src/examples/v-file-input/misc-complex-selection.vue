@@ -17,7 +17,7 @@
           color="deep-purple-accent-4"
           label
           size="small"
-          class="mr-2"
+          class="me-2"
         >
           {{ fileName }}
         </v-chip>

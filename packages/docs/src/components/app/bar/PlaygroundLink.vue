@@ -3,7 +3,7 @@
     href="https://play.vuetifyjs.com"
     target="_blank"
     rel="noopener noreferrer"
-    class="ml-1"
+    class="ms-1"
     color="medium-emphasis"
     variant="text"
     text="playground"
