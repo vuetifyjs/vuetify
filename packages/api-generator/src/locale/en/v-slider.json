@@ -13,13 +13,18 @@
     "tickSize": "Controls the size of **ticks**",
     "trackColor": "Sets the track's color",
     "trackFillColor": "Sets the track's fill color",
-    "vertical": "Changes slider direction to vertical"
+    "vertical": "Changes slider direction to vertical",
+    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))"
   },
   "slots": {
     "thumb-label": "Replaces the content inside the thumb label"
   },
   "events": {
     "end": "Slider value emitted at the end of slider movement",
-    "start": "Slider value emitted at start of slider movement"
+    "start": "Slider value emitted at start of slider movement",
+    "click:prepend": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))",
+    "click:append": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))",
+    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))",
+    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))"
   }
 }

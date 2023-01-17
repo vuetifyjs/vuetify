@@ -9,6 +9,9 @@ export const md1: Blueprint = {
     global: {
       rounded: 'sm',
     },
+    VAvatar: {
+      rounded: 'circle',
+    },
     VAutocomplete: {
       variant: 'underlined',
     },

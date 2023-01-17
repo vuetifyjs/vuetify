@@ -27,7 +27,8 @@ import { IconValue } from '@/composables/icons'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { defineComponent, EventProp } from '@/util'
+import { computed } from 'vue'
 
 export const VChip = defineComponent({
   name: 'VChip',
@@ -54,7 +55,10 @@ export const VChip = defineComponent({
       default: '$complete',
     },
     label: Boolean,
-    link: Boolean,
+    link: {
+      type: Boolean,
+      default: undefined,
+    },
     pill: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
@@ -67,6 +71,9 @@ export const VChip = defineComponent({
       type: Boolean,
       default: true,
     },
+
+    onClick: EventProp,
+    onClickOnce: EventProp,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -82,9 +89,9 @@ export const VChip = defineComponent({
 
   emits: {
     'click:close': (e: Event) => true,
-    'update:active': (value: boolean) => true,
     'update:modelValue': (value: boolean) => true,
     'group:selected': (val: { value: boolean }) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -99,11 +106,33 @@ export const VChip = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (!!group || props.link || link.isClickable.value)
+    )
 
     function onCloseClick (e: Event) {
       isActive.value = false
 
       emit('click:close', e)
+    }
+
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+
+      if (!isClickable.value) return
+
+      link.navigate?.(e)
+      group?.toggle()
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
     }
 
     return () => {
@@ -113,8 +142,6 @@ export const VChip = defineComponent({
       const hasFilter = !!(slots.filter || props.filter) && group
       const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
       const hasColor = !group || group.isSelected.value
-      const isClickable = !props.disabled && (!!group || link.isClickable.value || props.link)
-      const onClickFunc = props.link ? props.link : group?.toggle
 
       return isActive.value && (
         <Tag
@@ -123,7 +150,7 @@ export const VChip = defineComponent({
             {
               'v-chip--disabled': props.disabled,
               'v-chip--label': props.label,
-              'v-chip--link': isClickable,
+              'v-chip--link': isClickable.value,
               'v-chip--filter': hasFilter,
               'v-chip--pill': props.pill,
             },
@@ -143,10 +170,12 @@ export const VChip = defineComponent({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
-          v-ripple={ [isClickable && props.ripple, null] }
-          onClick={ isClickable && onClickFunc }
+          tabindex={ isClickable.value ? 0 : undefined }
+          onClick={ onClick }
+          onKeydown={ isClickable.value && !isLink.value && onKeyDown }
+          v-ripple={ [isClickable.value && props.ripple, null] }
         >
-          { genOverlays(isClickable, 'v-chip') }
+          { genOverlays(isClickable.value, 'v-chip') }
 
           { hasFilter && (
             <VDefaultsProvider

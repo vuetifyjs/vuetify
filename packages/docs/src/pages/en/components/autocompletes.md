@@ -52,11 +52,11 @@ Below is a collection of simple to complex examples.
 
 ### Props
 
-#### Dense
+#### Density
 
-You can use `dense` prop to reduce autocomplete height and lower max height of list items.
+You can use `density` prop to adjusts vertical spacing within the component.
 
-<example file="v-autocomplete/prop-dense" />
+<example file="v-autocomplete/prop-density" />
 
 #### Filter
 
@@ -74,28 +74,14 @@ With the power of slots, you can customize the visual output of the select. In t
 
 ### Misc
 
-#### API search
-
-Easily hook up dynamic data and create a unique experience. The `v-autocomplete`'s expansive prop list makes it easy to fine tune every aspect of the input.
-
-<example file="v-autocomplete/misc-api-search" />
-
 #### Asynchronous items
 
 Sometimes you need to load data externally based upon a search query. Use the `search-input` prop with the **.sync** modifier when using the `autocomplete` prop. We also make use of the new `cache-items` prop. This will keep a unique list of all items that have been passed to the `items` prop and is **REQUIRED** when using asynchronous items and the **multiple** prop.
 
 <example file="v-autocomplete/misc-asynchronous-items" />
 
-#### Cryptocurrency selector
-
-The `v-autocomplete` component is extremely flexible and can fit in just about any use-case. Create custom displays for **no-data**, **item** and **selection** slots to provide a unique user experience. Using _slots_ enables you to easily customize the desired look for your application.
-
-<example file="v-autocomplete/misc-cryptocurrency-selector" />
-
 #### State selector
 
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
-
-<backmatter />

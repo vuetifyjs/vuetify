@@ -1,7 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VLayout } from '@/components/VLayout'
+import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '..'
+import { ref } from 'vue'
 
 describe('VNavigationDrawer', () => {
   beforeEach(() => {
@@ -46,6 +48,31 @@ describe('VNavigationDrawer', () => {
     cy.get('.v-navigation-drawer').trigger('mouseleave')
 
     cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
+  })
+
+  it('should change width when using bound and unbound rail and expandOnHover', () => {
+    const rail = ref(true)
+
+    cy.mount(() => (
+      <VLayout>
+        <VNavigationDrawer expand-on-hover v-model:rail={ rail.value } />
+
+        <VMain />
+      </VLayout>
+    ))
+
+    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
+    cy.get('.v-main').should('have.css', 'padding-left', '56px')
+
+    cy.get('.v-navigation-drawer').trigger('mouseenter')
+
+    cy.get('.v-navigation-drawer').should('have.css', 'width', '256px')
+    cy.get('.v-main').should('have.css', 'padding-left', '256px')
+
+    cy.get('.v-navigation-drawer').trigger('mouseleave')
+
+    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
+    cy.get('.v-main').should('have.css', 'padding-left', '56px')
   })
 
   it('should hide drawer if window resizes below mobile breakpoint', () => {

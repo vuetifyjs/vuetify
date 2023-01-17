@@ -14,7 +14,7 @@ related:
 
 The `v-lazy` component is used to dynamically load components based upon an elements visibility.
 
-![Lazy Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-lazy/v-lazy-entry.png)
+<!-- ![Lazy Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-lazy/v-lazy-entry.png) -->
 
 ---
 
@@ -29,13 +29,3 @@ The `v-lazy` component by default will not render its contents until it has been
 ## API
 
 <api-inline />
-
-## Caveats
-
-<alert type="info">
-
-  The `v-lazy` component uses the [v-intersect](/directives/intersect) directive which requires a [Polyfill](/directives/intersect#polyfill) in order to work on IE11 / Safari. It's possible some iOS versions will also require the use of this polyfill.
-
-</alert>
-
-<backmatter />

@@ -80,23 +80,6 @@
   const code = computed(() => {
     return `<${name}${propsToString(props.value)}>
   <v-list-item${propsToString(itemProps.value, 2)}></v-list-item>
-</${name}>
-
-<script setup>
-  const items = [
-    {
-      title: 'Item One',
-      avatar: 'https://randomuser.me/api/portraits/women/8.jpg',
-    },
-    {
-      title: 'Item Two',
-      avatar: 'https://randomuser.me/api/portraits/men/2.jpg',
-    },
-    {
-      title: 'Item Three',
-      avatar: 'https://randomuser.me/api/portraits/men/22.jpg',
-    },
-  ]
-<\/script>` // eslint-disable-line no-useless-escape
+</${name}>`
   })
 </script>

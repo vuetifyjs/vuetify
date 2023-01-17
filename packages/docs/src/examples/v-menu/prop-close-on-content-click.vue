@@ -5,7 +5,7 @@
       label="Close on content click"
     ></v-switch>
     <v-menu
-      top
+      location="top"
       :close-on-content-click="closeOnContentClick"
     >
       <template v-slot:activator="{ props }">

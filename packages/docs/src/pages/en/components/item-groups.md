@@ -67,5 +67,3 @@ Easily hook up a custom chip group.
 Icons can be used as toggle buttons when they allow selection, or deselection, of a single choice, such as marking an item as a favorite.
 
 <example file="v-item-group/misc-selection" />
-
-<backmatter />

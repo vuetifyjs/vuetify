@@ -1,10 +1,10 @@
 <template>
   <v-alert
     :border-color="type"
+    :type="type"
     border="start"
     class="v-alert--doc mb-4 border-opacity-100"
     variant="tonal"
-    :type="type"
   >
     <template #prepend>
       <v-icon :color="type" :icon="`$${type}`" />

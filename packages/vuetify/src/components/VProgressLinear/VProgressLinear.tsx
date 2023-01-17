@@ -114,6 +114,7 @@ export const VProgressLinear = defineComponent({
           '--v-progress-linear-height': convertToUnit(height.value),
         }}
         role="progressbar"
+        aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"
         aria-valuemax={ props.max }
         aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
@@ -192,3 +193,5 @@ export const VProgressLinear = defineComponent({
     return {}
   },
 })
+
+export type VProgressLinear = InstanceType<typeof VProgressLinear>

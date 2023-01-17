@@ -14,7 +14,7 @@ related:
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png)
+<!-- ![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png) -->
 
 ---
 
@@ -77,5 +77,3 @@ Easily integrate customized button solutions with a `v-toolbar`
 Group similar actions and design your own WYSIWYG component.
 
 <example file="v-btn-toggle/misc-wysiwyg" />
-
-<backmatter />

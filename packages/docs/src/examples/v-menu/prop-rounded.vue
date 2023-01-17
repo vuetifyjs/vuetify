@@ -9,7 +9,7 @@
       <template v-slot:activator="{ props }">
         <v-btn
           :color="colors[index]"
-          class="white--text ma-5"
+          class="text-white ma-5"
           v-bind="props"
         >
           {{ text }} Radius

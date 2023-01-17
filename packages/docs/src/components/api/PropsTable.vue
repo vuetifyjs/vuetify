@@ -1,0 +1,30 @@
+<template>
+  <ApiTable :headers="headers">
+    <template #row="{ props, ...item }">
+      <tr v-bind="props">
+        <NameCell section="props" :name="kebabCase(item.name)" />
+
+        <td>
+          <PrismCell :code="getType(item)" />
+        </td>
+
+        <td>
+          <PrismCell :code="item.default" />
+        </td>
+      </tr>
+    </template>
+  </ApiTable>
+</template>
+
+<script setup lang="ts">
+  // Components
+  import ApiTable from './ApiTable.vue'
+  import NameCell from './NameCell.vue'
+  import PrismCell from './PrismCell.vue'
+
+  // Utilities
+  import { getType } from './utils'
+  import { kebabCase } from 'lodash-es'
+
+  const headers = ['name', 'type', 'default']
+</script>

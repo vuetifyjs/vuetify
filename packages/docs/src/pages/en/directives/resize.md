@@ -25,5 +25,3 @@ Resize your window and observe the values change..
 ## API
 
 <api-inline />
-
-<backmatter />

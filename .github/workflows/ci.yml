@@ -126,6 +126,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build vuetify
+      - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
@@ -169,6 +170,7 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add vercel
+      - run: yarn --frozen-lockfile --non-interactive
 
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
@@ -215,6 +217,9 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
           VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

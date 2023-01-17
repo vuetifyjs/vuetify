@@ -144,7 +144,7 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
-  const isReversed = computed(() => isRtl.value !== props.reverse)
+  const isReversed = toRef(props, 'reverse')
   const horizontalDirection = computed(() => {
     let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
 
@@ -206,7 +206,7 @@ export const useSlider = ({
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || isReversed.value) clickPos = 1 - clickPos
+    if (vertical || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }

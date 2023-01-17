@@ -27,3 +27,19 @@ export const VExpandTransition = createJavascriptTransition('expand-transition',
 export const VExpandXTransition = createJavascriptTransition('expand-x-transition', ExpandTransitionGenerator('', true))
 
 export { VDialogTransition } from './dialog-transition'
+
+export type VFabTransition = InstanceType<typeof VFabTransition>
+export type VDialogBottomTransition = InstanceType<typeof VDialogBottomTransition>
+export type VDialogTopTransition = InstanceType<typeof VDialogTopTransition>
+export type VFadeTransition = InstanceType<typeof VFadeTransition>
+export type VScaleTransition = InstanceType<typeof VScaleTransition>
+export type VScrollXTransition = InstanceType<typeof VScrollXTransition>
+export type VScrollXReverseTransition = InstanceType<typeof VScrollXReverseTransition>
+export type VScrollYTransition = InstanceType<typeof VScrollYTransition>
+export type VScrollYReverseTransition = InstanceType<typeof VScrollYReverseTransition>
+export type VSlideXTransition = InstanceType<typeof VSlideXTransition>
+export type VSlideXReverseTransition = InstanceType<typeof VSlideXReverseTransition>
+export type VSlideYTransition = InstanceType<typeof VSlideYTransition>
+export type VSlideYReverseTransition = InstanceType<typeof VSlideYReverseTransition>
+export type VExpandTransition = InstanceType<typeof VExpandTransition>
+export type VExpandXTransition = InstanceType<typeof VExpandXTransition>

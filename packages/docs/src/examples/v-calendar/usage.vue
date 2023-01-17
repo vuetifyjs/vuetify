@@ -16,7 +16,7 @@
         v-model="type"
         :items="types"
         dense
-        outlined
+        variant="outlined"
         hide-details
         class="ma-2"
         label="type"
@@ -25,7 +25,7 @@
         v-model="mode"
         :items="modes"
         dense
-        outlined
+        variant="outlined"
         hide-details
         label="event-overlap-mode"
         class="ma-2"
@@ -34,7 +34,7 @@
         v-model="weekday"
         :items="weekdays"
         dense
-        outlined
+        variant="outlined"
         hide-details
         label="weekdays"
         class="ma-2"

@@ -31,7 +31,7 @@ export const VDialogTransition = defineComponent({
 
         const animation = animate(el, [
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
-          { transform: '' },
+          {},
         ], {
           duration: 225 * speed,
           easing: deceleratedEasing,
@@ -40,7 +40,7 @@ export const VDialogTransition = defineComponent({
           animate(el, [
             { opacity: 0 },
             { opacity: 0, offset: 0.33 },
-            { opacity: 1 },
+            {},
           ], {
             duration: 225 * 2 * speed,
             easing: standardEasing,
@@ -60,7 +60,7 @@ export const VDialogTransition = defineComponent({
         const { x, y, sx, sy, speed } = getDimensions(props.target!, el as HTMLElement)
 
         const animation = animate(el, [
-          { transform: '' },
+          {},
           { transform: `translate(${x}px, ${y}px) scale(${sx}, ${sy})`, opacity: 0 },
         ], {
           duration: 125 * speed,
@@ -128,8 +128,8 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
   const tsx = targetBox.width / elBox.width
   const tsy = targetBox.height / elBox.height
   const maxs = Math.max(1, tsx, tsy)
-  const sx = tsx / maxs
-  const sy = tsy / maxs
+  const sx = tsx / maxs || 0
+  const sy = tsy / maxs || 0
 
   // Animate elements larger than 12% of the screen area up to 1.5x slower
   const asa = (elBox.width * elBox.height) / (window.innerWidth * window.innerHeight)
@@ -145,3 +145,5 @@ function getDimensions (target: HTMLElement, el: HTMLElement) {
     speed,
   }
 }
+
+export type VDialogTransition = InstanceType<typeof VDialogTransition>

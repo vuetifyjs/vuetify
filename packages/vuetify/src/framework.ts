@@ -6,8 +6,8 @@ import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, getUid, mergeDeep } from '@/util'
-import { reactive } from 'vue'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
@@ -74,21 +74,39 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
 
+    if (IN_BROWSER && options.ssr) {
+      if (app.$nuxt) {
+        app.$nuxt.hook('app:suspense:resolve', () => {
+          display.update()
+        })
+      } else {
+        const { mount } = app
+        app.mount = (...args) => {
+          const vm = mount(...args)
+          nextTick(() => display.update())
+          app.mount = mount
+          return vm
+        }
+      }
+    }
+
     getUid.reset()
 
-    app.mixin({
-      computed: {
-        $vuetify () {
-          return reactive({
-            defaults: inject.call(this, DefaultsSymbol),
-            display: inject.call(this, DisplaySymbol),
-            theme: inject.call(this, ThemeSymbol),
-            icons: inject.call(this, IconSymbol),
-            locale: inject.call(this, LocaleSymbol),
-          })
+    if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
+      app.mixin({
+        computed: {
+          $vuetify () {
+            return reactive({
+              defaults: inject.call(this, DefaultsSymbol),
+              display: inject.call(this, DisplaySymbol),
+              theme: inject.call(this, ThemeSymbol),
+              icons: inject.call(this, IconSymbol),
+              locale: inject.call(this, LocaleSymbol),
+            })
+          },
         },
-      },
-    })
+      })
+    }
   }
 
   return {

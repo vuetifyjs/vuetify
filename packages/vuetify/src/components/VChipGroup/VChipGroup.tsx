@@ -45,6 +45,7 @@ export const VChipGroup = defineComponent({
     provideDefaults({
       VChip: {
         color: toRef(props, 'color'),
+        disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
         variant: toRef(props, 'variant'),
       },

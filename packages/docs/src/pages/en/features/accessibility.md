@@ -6,7 +6,6 @@ meta:
 related:
   - /features/bidirectionality/
   - /components/menus/
-  - /components/list-item-groups/
 ---
 
 # Accessibility (a11y)
@@ -91,7 +90,7 @@ The `v-select` component will automatically configure all required a11y attribut
 When rendered, the `v-select` component's content will look similar to this:
 
 ```html
-<!-- Rendered `v-select-list` content HTML Output -->
+<!-- Rendered `v-select` list content HTML Output -->
 
 <div
   role="listbox"
@@ -110,6 +109,7 @@ When rendered, the `v-select` component's content will look similar to this:
     >
       Foo
     </div>
+  </div>
   <div
     aria-labelledby="bar-list-item-13"
     aria-selected="false"
@@ -148,14 +148,12 @@ When providing a `v-list-item` component in a slot, the aria attributes are pass
         v-bind="attrs"
         v-on="on"
       >
-        <v-list-item-content>
-          <v-list-item-title
-            :id="attrs['aria-labelledby']"
-            v-text="item.title"
-          ></v-list-item-title>
+        <v-list-item-title
+          :id="attrs['aria-labelledby']"
+          v-text="item.title"
+        ></v-list-item-title>
 
-          <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
-        </v-list-item-content>
+        <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
       </v-list-item>
     </template>
   </v-select>
@@ -203,49 +201,6 @@ When the `v-menu` component is rendered it will resemble the following:
 </div>
 ```
 
-### v-list-item-group
-
-The `v-list-item-group` component makes `v-list-item` interactable and navigatable when pressing the <kbd>tab</kbd> key. It also configures `v-list-item` to have a role of **listitem**. Navigate to the [List-item group](/components/list-item-groups) for more information on the components features.
-
-<example file="accessibility/list-item-group" />
-
-When the `v-list-item-group` component is rendered it have all the necessary a11y attributes. The following is an example of the rendered component:
-
-```html
-<!-- Rendered `v-list-group` content HTML Output -->
-
-<div
-  class="v-list-item-group"
-  role="listbox"
->
-  <div
-    aria-selected="true"
-    class="v-list-item"
-    role="listitem"
-    tabindex="0"
-  >
-    ...
-  </div>
-  <div
-    aria-disabled="true"
-    aria-selected="true"
-    class="v-list-item"
-    role="listitem"
-    tabindex="-1"
-  >
-    ...
-  </div>
-  <div
-    aria-selected="false"
-    class="v-list-item"
-    role="listitem"
-    tabindex="0"
-  >
-    ...
-  </div>
-</div>
-```
-
 ## Additional Resources
 
 While Vuetify attempts to make a11y as easy as possible in your application, there are times where additional information is needed. Below you can find a list of helpful resources.
@@ -253,5 +208,3 @@ While Vuetify attempts to make a11y as easy as possible in your application, the
 - [W3C Web Accessibility Initiative](https://www.w3.org/WAI/)
 - [WAI-ARIA Authoring Practices](https://www.w3.org/TR/wai-aria-practices-1.1/)
 - [The A11Y Project](https://a11yproject.com/)"
-
-<backmatter />

@@ -16,49 +16,88 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 <entry />
 
+<br>
+<br>
+
 <v-row>
 
-<!-- <components-list-item name="alerts">
+<components-list-item name="alerts">
 
-  The alert component is used to convey important information to the user.
+  Alerts convey important information to the user
 
-</components-list-item> -->
+</components-list-item>
+
+<components-list-item name="avatars">
+
+  Avatars are used in numerous components to display avatars and profile pictures
+
+</components-list-item>
 
 <components-list-item name="app-bars">
 
-  The app bar is used for top level navigation items and current page actions.
+  The app bar is used for top level navigation items and current page actions
 
 </components-list-item>
 
-<!-- <components-list-item name="badges">
+<components-list-item name="application">
+
+  Optional root component used to easily modify theme
+
+</components-list-item>
+
+<components-list-item name="aspect-ratios">
+
+  The aspect ratio component enforces a defined ratio
+
+</components-list-item>
+
+<components-list-item name="badges">
 
   Badges superscript or subscript an avatar-like icon or text onto content.
 
-</components-list-item> -->
+</components-list-item>
 
 <components-list-item name="banners">
 
-  Banners are used to communicate important information to the user.
+  Banners are used to communicate important information to the user
 
 </components-list-item>
 
-<components-list-item name="bottom-navigations">
+<components-list-item name="bottom-navigation">
 
   The bottom navigation component is used for displaying navigation links on mobile
 
 </components-list-item>
 
-<!-- <components-list-item name="breadcrumbs">
+<components-list-item name="breadcrumbs">
 
   Breadcrumbs are navigational helpers for router pages.
 
-</components-list-item> -->
+</components-list-item>
 
-<!-- <components-list-item name="buttons">
+<components-list-item name="carousels">
 
-  The button component allows users to take actions or make choices with a single tap.
+  Carousels are used to display multiple forms of visual content
 
-</components-list-item> -->
+</components-list-item>
+
+<components-list-item name="chips">
+
+  Chips are useful for displaying small pieces of information
+
+</components-list-item>
+
+<components-list-item name="dialogs">
+
+  The dialog component is used for displaying critical information
+
+</components-list-item>
+
+<components-list-item name="buttons">
+
+  The button component allows users to take actions or make choices with a single tap
+
+</components-list-item>
 
 <components-list-item name="footers">
 
@@ -66,9 +105,39 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 </components-list-item>
 
+<components-list-item name="lists">
+
+  The list component is a display interface for items
+
+</components-list-item>
+
 <components-list-item name="navigation-drawers">
 
   Navigation drawers contain primary application navigation links
+
+</components-list-item>
+
+<components-list-item name="pagination">
+
+  The Pagination component is used to separate long sets of data
+
+</components-list-item>
+
+<components-list-item name="radios">
+
+  The radio component is a replacement for its native counterpart
+
+</components-list-item>
+
+<components-list-item name="ratings">
+
+  Ratings are useful for collecting user feedback
+
+</components-list-item>
+
+<components-list-item name="toolbars">
+
+  Typically used to hold navigation items or actions
 
 </components-list-item>
 
@@ -79,5 +148,3 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 </components-list-item>
 
 </v-row>
-
-<backmatter />

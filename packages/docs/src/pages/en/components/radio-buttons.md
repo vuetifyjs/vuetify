@@ -55,5 +55,3 @@ Radio-groups are by default not mandatory. This can be changed with the **mandat
 Radio Group labels can be defined in `label` slot - that will allow to use HTML content.
 
 <example file="v-radio-group/slot-label" />
-
-<backmatter />

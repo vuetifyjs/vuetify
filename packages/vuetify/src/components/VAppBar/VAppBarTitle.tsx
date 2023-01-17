@@ -9,9 +9,10 @@ export const VAppBarTitle = defineComponent({
 
   props: { ...VToolbarTitle.props },
 
-  setup (_, { slots }) {
+  setup (props, { slots }) {
     useRender(() => (
       <VToolbarTitle
+        { ... props }
         class="v-app-bar-title"
         v-slots={ slots }
       />
@@ -20,3 +21,5 @@ export const VAppBarTitle = defineComponent({
     return {}
   },
 })
+
+export type VAppBarTitle = InstanceType<typeof VAppBarTitle>

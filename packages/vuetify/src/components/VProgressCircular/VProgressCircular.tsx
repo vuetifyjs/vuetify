@@ -141,3 +141,5 @@ export const VProgressCircular = defineComponent({
     return {}
   },
 })
+
+export type VProgressCircular = InstanceType<typeof VProgressCircular>

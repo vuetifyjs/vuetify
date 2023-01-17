@@ -37,10 +37,9 @@ export default createVuetify({
 
 ## Priority
 
-When creating and mounting a component, Vuetify uses the following priority in determining which default prop value to use:
+When creating and mounting a component, Vuetify uses the following priority in determining which prop value to use:
 
-1. Value defined in component specific section of `defaults` configuration object
-2. Value defined in global section of `defaults` configuration object
-3. Value defined in the component definition
-
-<backmatter />
+1. Value set as prop value to the component itself
+2. Value defined in component specific section of defaults configuration object
+3. Value defined in global section of defaults configuration object
+4. Value defined in the prop definition of the Vuetify component itself.

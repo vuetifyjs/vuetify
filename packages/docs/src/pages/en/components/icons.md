@@ -9,8 +9,7 @@ related:
   - /components/buttons/
   - /components/cards/
 assets:
-  - https://use.fontawesome.com/releases/v5.0.8/css/all.css
-  - https://fonts.googleapis.com/css?family=Material+Icons
+  - https://use.fontawesome.com/releases/v5.0.13/css/all.css
 ---
 
 # Icons
@@ -23,7 +22,7 @@ The `v-icon` component provides a large set of glyphs to provide context to vari
 
 Icons come in two themes (light and dark), and five different sizes (x-small, small, medium (default), large, and x-large).
 
-<!-- <usage name="v-icon" /> -->
+<usage name="v-icon" />
 
 ## API
 
@@ -150,5 +149,3 @@ export default {
 };
 </script>
 ```
-
-<backmatter />

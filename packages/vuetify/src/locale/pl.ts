@@ -38,16 +38,16 @@ export default {
     prev: 'Poprzedni obraz',
     next: 'Następny obraz',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Obraz {0} z {1}',
     },
   },
   calendar: {
     moreEvents: '{0} więcej',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'Wyczyść {0}',
+    prependAction: '{0} dodatkowa akcja',
+    appendAction: '{0} dodatkowa akcja',
   },
   fileInput: {
     counter: 'Liczba plików: {0}',
@@ -64,13 +64,13 @@ export default {
       previous: 'Poprzednia strona',
       page: 'Idź do strony {0}',
       currentPage: 'Bieżąca strona, strona {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Pierwsza strona',
+      last: 'Ostatnia strona',
     },
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Ocena {0} na {1}',
     },
   },
 }

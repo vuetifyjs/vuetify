@@ -148,11 +148,13 @@ export const VFileInput = defineComponent({
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -166,6 +168,7 @@ export const VFileInput = defineComponent({
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isDirty.value || isFocused.value }
                 dirty={ isDirty.value }
                 focused={ isFocused.value }
@@ -202,7 +205,7 @@ export const VFileInput = defineComponent({
                       />
 
                       <div class={ fieldClass }>
-                        { model.value.length > 0 && (
+                        { !!model.value?.length && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
@@ -232,7 +235,7 @@ export const VFileInput = defineComponent({
                     <span />
 
                     <VCounter
-                      active={ !!model.value.length }
+                      active={ !!model.value?.length }
                       value={ counterValue.value }
                       v-slots={ slots.counter }
                     />

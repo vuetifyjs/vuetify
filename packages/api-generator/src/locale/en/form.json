@@ -1,0 +1,10 @@
+{
+  "props": {
+    "disabled": "Puts all children inputs into a disabled state.",
+    "fastFail": "Stop validation as soon as any rules fail.",
+    "lazyValidation": "If enabled, value will always be true unless there are visible validation errors. You can still call validate() to manually trigger validation.",
+    "readonly": "Puts all children inputs into a readonly state.",
+    "modelValue": "A boolean value representing the validity of the form.",
+    "validateOn": "Changes the events in which validation occurs."
+  }
+}

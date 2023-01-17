@@ -63,3 +63,5 @@ export const VSheet = defineComponent({
     )
   },
 })
+
+export type VSheet = InstanceType<typeof VSheet>

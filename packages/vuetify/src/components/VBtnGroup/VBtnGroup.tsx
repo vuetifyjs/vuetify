@@ -67,3 +67,5 @@ export const VBtnGroup = defineComponent({
     })
   },
 })
+
+export type VBtnGroup = InstanceType<typeof VBtnGroup>

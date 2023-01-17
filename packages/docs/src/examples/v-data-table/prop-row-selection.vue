@@ -3,39 +3,29 @@
     v-model="selected"
     :headers="headers"
     :items="desserts"
-    :single-select="singleSelect"
-    item-key="name"
+    item-value="name"
     show-select
     class="elevation-1"
-  >
-    <template v-slot:top>
-      <v-switch
-        v-model="singleSelect"
-        label="Single select"
-        class="pa-3"
-      ></v-switch>
-    </template>
-  </v-data-table>
+  ></v-data-table>
 </template>
 
 <script>
   export default {
     data () {
       return {
-        singleSelect: false,
         selected: [],
         headers: [
           {
-            text: 'Dessert (100g serving)',
+            title: 'Dessert (100g serving)',
             align: 'start',
             sortable: false,
-            value: 'name',
+            key: 'name',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {

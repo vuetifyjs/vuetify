@@ -19,7 +19,7 @@ import { useSticky } from './sticky'
 import { useTouch } from './touch'
 
 // Utilities
-import { computed, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
 import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 
 // Types
@@ -41,7 +41,10 @@ export const VNavigationDrawer = defineComponent({
       default: null,
     },
     permanent: Boolean,
-    rail: Boolean,
+    rail: {
+      type: Boolean as PropType<boolean | null>,
+      default: null,
+    },
     railWidth: {
       type: [Number, String],
       default: 56,
@@ -74,9 +77,10 @@ export const VNavigationDrawer = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean) => true,
+    'update:rail': (val: boolean) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
@@ -106,8 +110,12 @@ export const VNavigationDrawer = defineComponent({
       location.value !== 'bottom'
     )
 
+    if (props.expandOnHover && props.rail != null) {
+      watch(isHovering, val => emit('update:rail', !val))
+    }
+
     if (!props.disableResizeWatcher) {
-      watch(isTemporary, val => !props.permanent && (isActive.value = !val))
+      watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)))
     }
 
     if (!props.disableRouteWatcher && router) {

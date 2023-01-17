@@ -73,5 +73,3 @@ The switch can use custom values for its v-model, using the props **true-value**
 If you need to render a switch label with more complex markup than plain text, you can use the **label** slot.
 
 <example file="v-switch/slot-label" />
-
-<backmatter />

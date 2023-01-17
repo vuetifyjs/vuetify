@@ -1,12 +1,21 @@
 <template>
-  <app-md
+  <app-markdown
     class="v-example-missing text-center"
-    v-text="parent.$t('missing', data.attrs)"
+    v-text="t('missing', { file })"
   />
 </template>
 
-<script>
-  export default { name: 'ExampleMissing' }
+<script setup>
+  import { useI18n } from 'vue-i18n'
+
+  defineProps({
+    file: {
+      type: String,
+      required: true,
+    },
+  })
+
+  const { t } = useI18n()
 </script>
 
 <style lang="sass">

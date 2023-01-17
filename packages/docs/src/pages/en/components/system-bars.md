@@ -62,5 +62,3 @@ You can optionally change the color of the `v-system-bar` by using the `color` p
 A window bar with window controls and status info.
 
 <example file="v-system-bar/prop-window" />
-
-<backmatter />

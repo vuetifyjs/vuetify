@@ -33,3 +33,5 @@ export const VListItemMedia = defineComponent({
     return {}
   },
 })
+
+export type VListItemMedia = InstanceType<typeof VListItemMedia>

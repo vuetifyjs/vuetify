@@ -10,10 +10,6 @@
         {{ new Date().getFullYear() }} — <strong>Vuetify, LLC</strong>
       </v-footer>
     </div>
-
-    <template v-slot:configuration>
-
-    </template>
   </usage-example>
 </template>
 

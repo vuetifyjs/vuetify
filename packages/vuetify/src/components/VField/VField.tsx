@@ -31,7 +31,7 @@ import {
 
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
@@ -95,8 +95,7 @@ export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  }
-  $slots: VFieldSlots
+  } & SlotsToProps<VFieldSlots>
 }>()({
   name: 'VField',
 
@@ -126,6 +125,7 @@ export const VField = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const messagesId = computed(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -242,7 +242,7 @@ export const VField = genericComponent<new <T>() => {
 
           <LoaderSlot
             name="v-field"
-            active={ props.loading }
+            active={ !!props.loading }
             color={ props.error ? 'error' : props.color }
             v-slots={{ default: slots.loader }}
           />
@@ -279,6 +279,7 @@ export const VField = genericComponent<new <T>() => {
               props: {
                 id: id.value,
                 class: 'v-field__input',
+                'aria-describedby': messagesId.value,
               },
               focus,
               blur,

@@ -1,8 +1,6 @@
 <template>
   <div>
-    <div
-      class="d-flex justify-start mb-6 bg-surface-variant"
-    >
+    <div class="d-flex justify-start mb-6 bg-surface-variant">
       <v-sheet
         v-for="n in 3"
         :key="n"
@@ -12,9 +10,7 @@
       </v-sheet>
     </div>
 
-    <div
-      class="d-flex justify-end mb-6 bg-surface-variant"
-    >
+    <div class="d-flex justify-end mb-6 bg-surface-variant">
       <v-sheet
         v-for="n in 3"
         :key="n"
@@ -24,9 +20,7 @@
       </v-sheet>
     </div>
 
-    <div
-      class="d-flex justify-center mb-6 bg-surface-variant"
-    >
+    <div class="d-flex justify-center mb-6 bg-surface-variant">
       <v-sheet
         v-for="n in 3"
         :key="n"
@@ -36,9 +30,7 @@
       </v-sheet>
     </div>
 
-    <div
-      class="d-flex justify-space-between mb-6 bg-surface-variant"
-    >
+    <div class="d-flex justify-space-between mb-6 bg-surface-variant">
       <v-sheet
         v-for="n in 3"
         :key="n"
@@ -48,9 +40,7 @@
       </v-sheet>
     </div>
 
-    <div
-      class="d-flex justify-space-around mb-6 bg-surface-variant"
-    >
+    <div class="d-flex justify-space-around mb-6 bg-surface-variant">
       <v-sheet
         v-for="n in 3"
         :key="n"

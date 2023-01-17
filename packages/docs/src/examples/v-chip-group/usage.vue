@@ -1,57 +1,47 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-chip-group
-      active-class="primary--text"
-      v-bind="$attrs"
-    >
-      <v-chip
-        v-for="tag in tags"
-        :key="tag"
-      >
-        {{ tag }}
-      </v-chip>
-    </v-chip-group>
-  </v-row>
+    <div>
+      <v-chip-group v-bind="props">
+        <v-chip>Chip 1</v-chip>
+
+        <v-chip>Chip 2</v-chip>
+
+        <v-chip>Chip 3</v-chip>
+      </v-chip-group>
+    </div>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-chip-group'
+  const model = ref('default')
+  const options = ['filter']
+  const props = computed(() => {
+    return {
+      filter: model.value === 'filter' || undefined,
+    }
+  })
 
-    data: () => ({
-      tags: [
-        'Work',
-        'Home Improvement',
-        'Vacation',
-        'Food',
-        'Drawers',
-        'Shopping',
-        'Art',
-        'Tech',
-        'Creative Writing',
-      ],
+  const slots = computed(() => {
+    return `
+  <v-chip>Chip 1</v-chip>
 
-      defaults: {
-        'center-active': false,
-        column: false,
-        mandatory: false,
-        multiple: false,
-        'show-arrows': false,
-      },
-      options: {
-        booleans: [
-          'center-active',
-          'mandatory',
-          'multiple',
-          'show-arrows',
-        ],
-      },
-      tabs: ['column'],
-    }),
-  }
+  <v-chip>Chip 2</v-chip>
+
+  <v-chip>Chip 3</v-chip>
+`
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

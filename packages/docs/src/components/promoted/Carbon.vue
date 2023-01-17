@@ -4,9 +4,14 @@
     v-if="!error"
     class="d-flex"
   >
-    <promoted-base max-width="360">
+    <promoted-base
+      :key="route.path"
+      border
+      max-width="360"
+    >
       <promoted-script
         id="carbonads"
+
         script-id="_carbonads_js"
         src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
         @script:error="error = true"
@@ -20,10 +25,14 @@
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
+  // Composables
+  import { useRoute } from 'vue-router'
+
   // Utiltlies
   import { ref } from 'vue'
 
   const error = ref(false)
+  const route = useRoute()
 </script>
 
 <style lang="sass">

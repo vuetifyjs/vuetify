@@ -1,3 +1,4 @@
 /dist/
 /src/locale/*
+/src/tmp/
 !/src/locale/en
