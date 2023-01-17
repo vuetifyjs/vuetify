@@ -137,15 +137,12 @@ export const VTextarea = defineComponent({
     const sizerRef = ref<HTMLTextAreaElement>()
     function calculateInputHeight () {
       if (!props.autoGrow) return
-
       nextTick(() => {
         if (!sizerRef.value || !vFieldRef.value) return
-
         const style = getComputedStyle(sizerRef.value)
         const fieldStyle = getComputedStyle(vFieldRef.value.$el)
 
         const padding = parseFloat(style.getPropertyValue('--v-field-padding-top')) +
-          parseFloat(style.getPropertyValue('--v-input-padding-top')) +
           parseFloat(style.getPropertyValue('--v-field-padding-bottom'))
 
         const height = sizerRef.value.scrollHeight

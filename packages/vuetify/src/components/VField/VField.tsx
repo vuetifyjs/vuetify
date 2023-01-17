@@ -73,6 +73,7 @@ export const makeVFieldProps = propsFactory({
     default: 'filled',
     validator: (v: any) => allowedVariants.includes(v),
   },
+  chips: Boolean,
 
   'onClick:clear': EventProp,
   'onClick:appendInner': EventProp,
@@ -224,6 +225,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
               'v-field--no-label': !label,
+              'v-field--chips': !!props.chips,
               [`v-field--variant-${props.variant}`]: true,
             },
             themeClasses.value,
@@ -258,7 +260,7 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           <div class="v-field__field" data-no-activator="">
-            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
+            { ['solo', 'filled', 'plain', 'underlined'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -332,11 +334,6 @@ export const VField = genericComponent<new <T>() => {
               </>
             ) }
 
-            { ['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
-              <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
-                { label }
-              </VFieldLabel>
-            ) }
           </div>
         </div>
       )

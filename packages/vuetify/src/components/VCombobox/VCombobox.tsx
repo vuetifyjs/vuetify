@@ -345,7 +345,6 @@ export const VCombobox = genericComponent<new <
             'v-combobox',
             {
               'v-combobox--active-menu': menu.value,
-              'v-combobox--chips': !!props.chips,
               'v-combobox--selecting-index': selectionIndex.value > -1,
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
