@@ -346,7 +346,6 @@ export default CalendarBase.extend({
         eventSummary,
       }
       const color = this.setTextColor(text)
-      console.log(color,'*********color***********')
       const on = this.getDefaultMouseEventHandlers(':event', nativeEvent => ({ ...scope, nativeEvent })
       return this.$createElement('div',
         this.setTextColor(text,
@@ -357,6 +356,7 @@ export default CalendarBase.extend({
               name: 'ripple',
               value: this.eventRipple ?? true,
             }],
+            // 类属性 style（宽度）
             ...data,
           })
         ), slot
@@ -472,6 +472,7 @@ export default CalendarBase.extend({
         // mapper 生成当日的事件布局
         const events = getter(day) // 过滤出当日的事件
         const visuals = mode(day, events, timed, this.categoryMode) // 根据当天日期信息 计算这些事件(堆叠效果下)的 left和width
+        console.log(visuals,'**********visuals')
         // 在day和day-header 这两个作用域插槽中，timed是false
         if (timed) {
           return visuals.map(visual => mapper(visual, day)).filter(isNode) // 根据视图数据生成视图节点布局
@@ -505,6 +506,7 @@ export default CalendarBase.extend({
         day: (day: CalendarDaySlotScope) => {
           // getEventsForDay获取当天的事件
           // genDayEvent 生成当天的节点页面
+
           let children = getSlotChildren(day, this.getEventsForDay, this.genDayEvent, false)
           if (children && children.length > 0 && this.eventMore) {
             children.push(this.genMore(day))
