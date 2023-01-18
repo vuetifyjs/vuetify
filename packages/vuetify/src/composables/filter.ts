@@ -69,7 +69,7 @@ export function filterItems (
 
   loop:
   for (let i = 0; i < items.length; i++) {
-    const item = items[i].raw
+    const item = items[i]
     const customMatches: Record<string, FilterMatch> = {}
     const defaultMatches: Record<string, FilterMatch> = {}
     let match: FilterMatch = -1
@@ -129,7 +129,10 @@ export function filterItems (
 export function useFilter <T extends InternalItem> (
   props: FilterProps,
   items: MaybeRef<T[]>,
-  query?: Ref<string | undefined>,
+  query: Ref<string | undefined>,
+  options?: {
+    filterKeys?: MaybeRef<FilterKeys>
+  }
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
@@ -150,7 +153,7 @@ export function useFilter <T extends InternalItem> (
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
-        filterKeys: props.filterKeys,
+        filterKeys: unref(options?.filterKeys) ?? props.filterKeys,
         filterMode: props.filterMode,
         noFilter: props.noFilter,
       },
