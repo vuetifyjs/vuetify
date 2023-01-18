@@ -14,6 +14,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps, useComponent } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -62,6 +63,7 @@ export const VBtn = defineComponent({
       default: true,
     },
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeRoundedProps(),
     ...makeDensityProps(),
@@ -83,6 +85,7 @@ export const VBtn = defineComponent({
   },
 
   setup (props, { attrs, slots }) {
+    const { componentClasses, componentStyles } = useComponent(props)
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
@@ -119,7 +122,7 @@ export const VBtn = defineComponent({
         <Tag
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
-            'v-btn',
+            componentClasses.value,
             group?.selectedClass.value,
             {
               'v-btn--active': isActive.value,
@@ -143,6 +146,7 @@ export const VBtn = defineComponent({
             variantClasses.value,
           ]}
           style={[
+            componentStyles.value,
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
