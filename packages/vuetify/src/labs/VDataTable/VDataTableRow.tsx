@@ -1,12 +1,13 @@
 // Components
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
+import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables
+import { highlightResult } from '@/composables/filter'
 import { useExpanded } from './composables/expand'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
@@ -20,6 +21,7 @@ export const VDataTableRow = defineComponent({
 
   props: {
     item: Object as PropType<DataTableItem>,
+    getMatches: Function,
   },
 
   setup (props, { slots }) {
@@ -84,7 +86,7 @@ export const VDataTableRow = defineComponent({
                   )
                 }
 
-                return item.columns[column.key]
+                return highlightResult('v-data-table', String(item.columns[column.key]), props.getMatches!(item)?.[column.key])
               },
             }}
           </VDataTableColumn>

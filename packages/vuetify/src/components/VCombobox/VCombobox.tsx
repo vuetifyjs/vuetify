@@ -12,7 +12,7 @@ import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { transformItem, useItems } from '@/composables/items'
 import { useForm } from '@/composables/form'
@@ -28,26 +28,9 @@ import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextF
 // Types
 import type { PropType } from 'vue'
 import type { MakeSlots, SlotsToProps } from '@/util'
-import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-
-function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
-  if (matches == null) return text
-
-  if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
-
-  return typeof matches === 'number' && ~matches
-    ? (
-      <>
-        <span class="v-combobox__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-combobox__mask">{ text.substr(matches, length) }</span>
-        <span class="v-combobox__unmask">{ text.substr(matches + length) }</span>
-      </>
-    )
-    : text
-}
 
 type Primitive = string | number | boolean | symbol
 
@@ -407,7 +390,7 @@ export const VCombobox = genericComponent<new <
                             title: () => {
                               return isPristine.value
                                 ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                : highlightResult('v-combobox', item.title, getMatches(item)?.title)
                             },
                           }}
                         </VListItem>

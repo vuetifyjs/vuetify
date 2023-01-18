@@ -35,6 +35,7 @@ export const VDataTableRows = defineComponent({
       default: '$vuetify.noDataText',
     },
     rowHeight: Number,
+    getMatches: Function,
   },
 
   emits: {
@@ -110,6 +111,7 @@ export const VDataTableRows = defineComponent({
                     emit('click:row', event, { item })
                   } }
                   item={ item }
+                  getMatches={ props.getMatches }
                   v-slots={ slots }
                 />
               ) }

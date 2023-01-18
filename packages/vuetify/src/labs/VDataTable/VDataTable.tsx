@@ -78,7 +78,7 @@ export const VDataTable = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+    const { filteredItems, getMatches } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -142,6 +142,7 @@ export const VDataTable = defineComponent({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ paginatedItems.value }
+                    getMatches={ getMatches }
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />

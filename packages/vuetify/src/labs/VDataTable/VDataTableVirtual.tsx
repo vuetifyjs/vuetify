@@ -60,7 +60,7 @@ export const VDataTableVirtual = defineComponent({
     })
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+    const { filteredItems, getMatches } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -133,11 +133,12 @@ export const VDataTableVirtual = defineComponent({
                 </thead>
                 <tbody>
                   <tr style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                    <td colspan={columns.value.length} style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
+                    <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
                   </tr>
 
                   <VDataTableRows
-                    items={visibleItems.value}
+                    items={ visibleItems.value }
+                    getMatches={ getMatches }
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
