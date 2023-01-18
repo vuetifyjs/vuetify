@@ -7,26 +7,23 @@ import type { PropType } from 'vue'
 
 export interface ComponentProps {
   _as?: String
-  defaultClass?: string | string[]
-  defaultStyles?: string | string[] | Record<string, any>
+  class?: string | string[]
+  style?: string | string[] | Record<string, any>
 }
 
 // Composables
 export const makeComponentProps = propsFactory({
   _as: String,
-  defaultClass: [String, Array] as PropType<ComponentProps['defaultClass']>,
-  defaultStyles: [String, Array, Object] as PropType<ComponentProps['defaultStyles']>,
+  class: [String, Array] as PropType<ComponentProps['class']>,
+  style: [String, Array, Object] as PropType<ComponentProps['style']>,
 }, 'component')
 
 export function useComponent (
   props: ComponentProps,
   name = getCurrentInstanceName(),
 ) {
-  const componentClasses = computed(() => [
-    name,
-    ...wrapInArray(props.defaultClass),
-  ])
-  const componentStyles = computed(() => props.defaultStyles)
+  const componentClasses = computed(() => [name, ...wrapInArray(props.class)])
+  const componentStyles = computed(() => props.style)
 
   return { componentClasses, componentStyles }
 }
