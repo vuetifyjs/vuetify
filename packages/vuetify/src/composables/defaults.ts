@@ -1,9 +1,12 @@
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Utilities
-import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util'
+import { computed, inject, provide, ref, shallowReactive, shallowRef, toRaw, unref, watchEffect } from 'vue'
+import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
-import type { ComputedRef, InjectionKey, Ref } from 'vue'
+import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
 import type { MaybeRef } from '@/util'
 
 export interface DefaultsInstance {
@@ -19,7 +22,7 @@ export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstanc
   return ref(options ?? {})
 }
 
-export function useDefaults () {
+export function injectDefaults () {
   const defaults = inject(DefaultsSymbol)
 
   if (!defaults) throw new Error('[Vuetify] Could not find defaults instance')
@@ -35,7 +38,7 @@ export function provideDefaults (
     scoped?: MaybeRef<boolean | undefined>
   }
 ) {
-  const injectedDefaults = useDefaults()
+  const injectedDefaults = injectDefaults()
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
@@ -65,4 +68,49 @@ export function provideDefaults (
   provide(DefaultsSymbol, newDefaults)
 
   return newDefaults
+}
+
+function propIsDefined (vnode: VNode, prop: string) {
+  return typeof vnode.props?.[prop] !== 'undefined' ||
+    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
+}
+
+export function useDefaults (props: Record<string, any>, name?: string) {
+  const vm = getCurrentInstance('useDefaults')
+  const defaults = injectDefaults()
+
+  name = name ?? vm.type.name ?? vm.type.__name
+  if (!name) {
+    throw new Error('[Vuetify] Could not determine component name')
+  }
+
+  const _subcomponentDefaults = shallowRef()
+  const _props = shallowReactive({ ...toRaw(props) })
+  watchEffect(() => {
+    const globalDefaults = defaults.value.global
+    const componentDefaults = defaults.value[name!]
+
+    if (componentDefaults) {
+      const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith(key[0].toUpperCase()))
+      if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
+    }
+
+    for (const prop of Object.keys(props)) {
+      let newVal = props[prop]
+      if (!propIsDefined(vm.vnode, prop)) {
+        newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
+      }
+      if (_props[prop] !== newVal) {
+        _props[prop] = newVal
+      }
+    }
+  })
+
+  function provideSubDefaults () {
+    useToggleScope(_subcomponentDefaults, () => {
+      provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, _subcomponentDefaults.value))
+    })
+  }
+
+  return { props: _props, provideSubDefaults }
 }

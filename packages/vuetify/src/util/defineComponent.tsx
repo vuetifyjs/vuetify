@@ -1,17 +1,10 @@
 // Utils
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
-  getCurrentInstance,
-  shallowReactive,
-  shallowRef,
-  toRaw,
-  watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { mergeDeep, toKebabCase } from '@/util/helpers'
-import { injectSelf } from '@/util/injectSelf'
-import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defaults'
-import { useToggleScope } from '@/composables/toggleScope'
+import { toKebabCase } from '@/util/helpers'
+import { useDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -27,15 +20,9 @@ import type {
   ExtractPropTypes,
   FunctionalComponent,
   MethodOptions,
-  VNode,
   VNodeChild,
 } from 'vue'
 import { propsFactory } from '@/util/propsFactory'
-
-function propIsDefined (vnode: VNode, prop: string) {
-  return typeof vnode.props?.[prop] !== 'undefined' ||
-    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
-}
 
 export const defineComponent = (function defineComponent (options: ComponentOptions) {
   options._setup = options._setup ?? options.setup
@@ -53,36 +40,11 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
-      const vm = getCurrentInstance()!
-      const defaults = useDefaults()
-
-      const _subcomponentDefaults = shallowRef()
-      const _props = shallowReactive({ ...toRaw(props) })
-      watchEffect(() => {
-        const globalDefaults = defaults.value.global
-        const componentDefaults = defaults.value[props._as ?? options.name!]
-
-        if (componentDefaults) {
-          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
-        }
-
-        for (const prop of Object.keys(props)) {
-          let newVal = props[prop]
-          if (!propIsDefined(vm.vnode, prop)) {
-            newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
-          }
-          if (_props[prop] !== newVal) {
-            _props[prop] = newVal
-          }
-        }
-      })
+      const { props: _props, provideSubDefaults } = useDefaults(props, props._as ?? options.name)
 
       const setupBindings = options._setup(_props, ctx)
 
-      useToggleScope(_subcomponentDefaults, () => {
-        provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, _subcomponentDefaults.value))
-      })
+      provideSubDefaults()
 
       return setupBindings
     }
