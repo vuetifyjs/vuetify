@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-main>
-      <Month>
-      </Month>
+      <Playground>
+      </Playground>
     </v-main>
   </v-app>
 </template>
