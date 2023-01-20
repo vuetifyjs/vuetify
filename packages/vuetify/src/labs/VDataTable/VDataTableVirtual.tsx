@@ -95,6 +95,7 @@ export const VDataTableVirtual = defineComponent({
       stopIndex: computed(() => flatItems.value.length - 1),
       pageCount: ref(1),
       itemsPerPage: ref(-1),
+      groupBy,
     })
 
     provideDefaults({
