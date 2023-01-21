@@ -1,5 +1,5 @@
 <template>
-  <div v-if="items?.length">
+  <div v-if="items?.length" class="mb-4">
     <!-- <div class="d-flex mb-2">
       <app-text-field
         clearable

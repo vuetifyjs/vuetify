@@ -1,7 +1,7 @@
 // Imports
 import fs from 'fs'
 import path, { resolve } from 'path'
-import { kebabCase, startCase } from 'lodash'
+import { startCase } from 'lodash'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
@@ -10,9 +10,9 @@ const localeList = locales
   .filter(item => item.enabled)
   .map(item => item.alternate || item.locale)
 
-function genApiLinks (component: string, header: string) {
+function genApiLinks (componentName: string, header: string) {
   const links = (Object.keys(pageToApi) as (keyof typeof pageToApi)[])
-    .filter(page => pageToApi[page].includes(component))
+    .filter(page => pageToApi[page].includes(componentName))
     .reduce<string[]>((acc, href) => {
       const name = href.split('/')[1]
       acc.push(`- [${startCase(name)}](/${href})`)
@@ -39,10 +39,10 @@ function genFrontMatter (component: string) {
   return `---\nmeta:\n${fm.map(s => '  ' + s).join('\n')}\n---`
 }
 
-function genHeader (component: string) {
+function genHeader (componentName: string) {
   const header = [
-    genFrontMatter(component),
-    `# ${component} API`,
+    genFrontMatter(componentName),
+    `# ${componentName} API`,
     // '<entry />', TODO: enable when component exists
   ]
 
@@ -67,31 +67,31 @@ function loadMessages (locale: string) {
   }
 }
 
-function createMdFile (component: string, data: Record<string, any>, locale: string) {
+function createMdFile (component: Record<string, any>, locale: string) {
   const messages = loadMessages(locale)
   let str = ''
 
-  str += genHeader(component)
-  str += genApiLinks(component, messages.links)
+  str += genHeader(component.displayName)
+  str += genApiLinks(component.fileName, messages.links)
 
   for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
-    if (Object.keys(data[section] ?? {}).length) {
+    if (Object.keys(component[section] ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
-      str += `<api-section name="${component}" section="${section}" />\n\n`
+      str += `<api-section name="${component.fileName}" section="${section}" />\n\n`
     }
   }
 
   return str
 }
 
-function writeFile (componentName: string, componentApi: Record<string, any>, locale: string) {
+function writeFile (componentApi: Record<string, any>, locale: string) {
   const folder = `src/api/${locale}`
 
   if (!fs.existsSync(resolve(folder))) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${sanitize(componentName)}.md`), createMdFile(componentName, componentApi, locale))
+  fs.writeFileSync(resolve(`${folder}/${sanitize(componentApi.fileName)}.md`), createMdFile(componentApi, locale))
 }
 
 function getApiData () {
@@ -104,6 +104,7 @@ function getApiData () {
 
     data.push({
       name,
+      displayName: name,
       ...obj,
     })
   }
@@ -116,15 +117,15 @@ function generateFiles () {
   const api = getApiData()
 
   for (const locale of localeList) {
-    const pages = {} as Record<string, any>
+    // const pages = {} as Record<string, any>
 
     for (const item of api) {
-      writeFile(item.name, item, locale)
+      writeFile(item, locale)
 
-      pages[`/${locale}/api/${sanitize(kebabCase(item.name))}/`] = item.name
+      // pages[`/${locale}/api/${sanitize(kebabCase(item.name))}/`] = item.name
     }
 
-    fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
+    // fs.writeFileSync(resolve(`src/api/${locale}/pages.json`), JSON.stringify(pages, null, 2))
     fs.writeFileSync(resolve(`src/api/${locale}.js`), `export default require.context('./${locale}', true, /\\.md$/)`)
   }
 
