@@ -61,7 +61,7 @@ const run = async () => {
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
 
   await mkdirp('./src/tmp')
-  for (const component in components) {
+  for (const component in allComponents) {
     // await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
     await fs.writeFile(`./src/tmp/${component}.d.ts`,
       template.replaceAll('__component__', component)
@@ -72,7 +72,7 @@ const run = async () => {
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
 
   const componentData = await Promise.all(
-    Object.entries(components).map(([componentName, componentInstance]) => {
+    Object.entries(allComponents).map(([componentName, componentInstance]) => {
       if (argv.components && !argv.components.includes(componentName)) return null
 
       return pool.run(
