@@ -75,7 +75,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     function handleItemResize (item: unknown, height: number) {
       const index = ids.get(getPropertyFromItem(item, props.itemKey, item))
 
-      if (!index) return
+      if (index == null) return
 
       sizes[index] = height
 
@@ -114,15 +114,29 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       const direction = scrollTop < lastScrollTop ? UP : DOWN
 
       const midPointIndex = calculateMidPointIndex(scrollTop)
-
       const buffer = Math.round(visibleItems.value / 3)
       if (direction === UP && midPointIndex <= first.value) {
         first.value = Math.max(midPointIndex - buffer, 0)
-      } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2)) {
+      } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2) - 1) {
         first.value = Math.min(Math.max(0, midPointIndex - buffer), props.items.length - visibleItems.value)
       }
 
       lastScrollTop = rootEl.value.scrollTop
+    }
+
+    function scrollToIndex (index: number) {
+      if (!rootEl.value) return
+
+      const offset = calculateOffset(index)
+      rootEl.value.scrollTop = offset
+    }
+
+    function scrollToItem (item: unknown) {
+      const index = ids.get(getPropertyFromItem(item, props.itemKey, item))
+
+      if (index == null) return
+
+      scrollToIndex(index)
     }
 
     const last = computed(() => Math.min(props.items.length, first.value + visibleItems.value))
@@ -148,7 +162,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         >
           { computedItems.value.map((item, index) => (
             <VVirtualScrollItem
-              key={ index }
+              key={ getPropertyFromItem(item, props.itemKey, item) }
               dynamicHeight={ !props.itemHeight }
               onUpdate:height={ height => handleItemResize(item, height) }
             >
@@ -158,6 +172,11 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         </div>
       </div>
     ))
+
+    return {
+      scrollToIndex,
+      scrollToItem,
+    }
   },
 })
 
