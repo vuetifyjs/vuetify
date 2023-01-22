@@ -4,7 +4,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 // Utilities
 import { defineComponent } from '@/util/defineComponent'
 import { useRender } from '@/util'
-import { onMounted } from 'vue'
+import { onMounted, onUpdated } from 'vue'
 
 export const VVirtualScrollItem = defineComponent({
   name: 'VVirtualScrollItem',
@@ -25,11 +25,14 @@ export const VVirtualScrollItem = defineComponent({
       emit('update:height', contentRect.height)
     })
 
-    onMounted(() => {
+    function updateHeight () {
       if (props.dynamicHeight && resizeRef.value) {
         emit('update:height', resizeRef.value.clientHeight)
       }
-    })
+    }
+
+    onMounted(updateHeight)
+    onUpdated(updateHeight)
 
     useRender(() => (
       <div

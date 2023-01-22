@@ -8,12 +8,11 @@ import { VVirtualScrollItem } from './VVirtualScrollItem'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, onMounted, ref } from 'vue'
 import {
   convertToUnit,
   createRange,
   genericComponent,
-  getPropertyFromItem,
   useRender,
 } from '@/util'
 
@@ -44,10 +43,6 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       type: Array,
       default: () => ([]),
     },
-    itemKey: {
-      type: String,
-      default: 'value',
-    },
     itemHeight: [Number, String],
     visibleItems: {
       type: [Number, String],
@@ -69,17 +64,10 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     const visibleItems = computed(() => parseInt(props.visibleItems, 10))
     const rootEl = ref<HTMLDivElement>()
 
-    const ids = new Map<unknown, number>(props.items.map((item, index) => [getPropertyFromItem(item, props.itemKey, item), index]))
     const sizes = createRange(props.items.length).map(() => itemHeight.value)
 
-    function handleItemResize (item: unknown, height: number) {
-      const index = ids.get(getPropertyFromItem(item, props.itemKey, item))
-
-      if (index == null) return
-
+    function handleItemResize (index: number, height: number) {
       sizes[index] = height
-
-      if (!itemHeight.value) itemHeight.value = height
     }
 
     function calculateOffset (index: number) {
@@ -131,20 +119,19 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       rootEl.value.scrollTop = offset
     }
 
-    function scrollToItem (item: unknown) {
-      const index = ids.get(getPropertyFromItem(item, props.itemKey, item))
-
-      if (index == null) return
-
-      scrollToIndex(index)
-    }
-
     const last = computed(() => Math.min(props.items.length, first.value + visibleItems.value))
     const computedItems = computed(() => props.items.slice(first.value, last.value))
     const paddingTop = computed(() => calculateOffset(first.value))
     const paddingBottom = computed(() => calculateOffset(props.items.length) - calculateOffset(last.value))
 
     const { dimensionStyles } = useDimension(props)
+
+    onMounted(() => {
+      if (!itemHeight.value) {
+        // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
+        itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
+      }
+    })
 
     useRender(() => (
       <div
@@ -162,9 +149,9 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         >
           { computedItems.value.map((item, index) => (
             <VVirtualScrollItem
-              key={ getPropertyFromItem(item, props.itemKey, item) }
+              key={ index }
               dynamicHeight={ !props.itemHeight }
-              onUpdate:height={ height => handleItemResize(item, height) }
+              onUpdate:height={ height => handleItemResize(index + first.value, height) }
             >
               { slots.default?.({ item, index: index + first.value }) }
             </VVirtualScrollItem>
@@ -175,7 +162,6 @@ export const VVirtualScroll = genericComponent<new <T>() => {
 
     return {
       scrollToIndex,
-      scrollToItem,
     }
   },
 })
