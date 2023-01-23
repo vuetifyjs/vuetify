@@ -85,6 +85,8 @@ function createMdFile (component: Record<string, any>, locale: string) {
 }
 
 function writeFile (componentApi: Record<string, any>, locale: string) {
+  if (!componentApi?.fileName) return
+
   const folder = `src/api/${locale}`
 
   if (!fs.existsSync(resolve(folder))) {
