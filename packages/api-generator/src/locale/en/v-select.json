@@ -1,6 +1,5 @@
 {
   "props": {
-    "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This will attach to the root `v-app` component by default.",
     "autocomplete": "Filter the items in the list based on user input",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips",

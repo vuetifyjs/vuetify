@@ -1,18 +1,20 @@
 {
   "props": {
+    "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attachs to the root `v-app` component by default",
     "auto": "Centers list on selected element",
     "bgColor": "Applies specified color to the control's background. Used on components that also support the **color** prop. - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "clearable": "Add input clear functionality, default icon is Material Design Icons **mdi-clear**",
     "color": "Applies specified color to the control - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
-    "height": "Sets the height for the component",
+    "contentClass": "Applies a custom class to the detached element. This is useful because the content is moved to the beginning of the `v-app` component (unless the **attach** prop is provided) and is not targetable by classes passed directly on the component",
     "falseValue": "Sets value for falsy state",
     "fullWidth": "Forces 100% width",
+    "height": "Sets the height for the component",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "size": "Sets the height and width of the component.",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "trueValue": "Sets value for truthy state",
-    "width": "Sets the width for the component.",
-    "valueComparator": "Apply a custom comparison algorithm used for values"
+    "valueComparator": "Apply a custom comparison algorithm used for values",
+    "width": "Sets the width for the component"
   },
   "slots": {
     "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",
