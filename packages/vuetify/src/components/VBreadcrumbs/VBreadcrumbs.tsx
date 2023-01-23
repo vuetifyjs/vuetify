@@ -113,12 +113,10 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
 
           { props.items.map((item, index, array) => (
             <>
-              { slots.item
-                ? slots.item.({ item, index })
-                : (
+             { slots.item?.({ item, index }) ?? (
                   <VBreadcrumbsItem
-                    key={index}
-                    disabled={index >= array.length - 1}
+                    key={ index }
+                    disabled={ index >= array.length - 1 }
                     { ...(typeof item === 'string' ? { title: item } : item)}
                     v-slots={{
                       default: slots.title ? () => slots.title.({ item, index }) : undefined,
