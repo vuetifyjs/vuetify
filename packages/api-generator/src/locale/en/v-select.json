@@ -31,7 +31,6 @@
     "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "smallChips": "Changes display of selections to chips with the **small** property",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",
-    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)",
     "closableChips": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",
     "hideNoData": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",
     "menu": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",

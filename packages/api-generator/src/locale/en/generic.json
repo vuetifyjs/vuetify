@@ -11,7 +11,8 @@
     "size": "Sets the height and width of the component.",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "trueValue": "Sets value for truthy state",
-    "width": "Sets the width for the component."
+    "width": "Sets the width for the component.",
+    "valueComparator": "Apply a custom comparison algorithm used for values"
   },
   "slots": {
     "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",
