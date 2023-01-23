@@ -5,7 +5,6 @@
     "closable": "Adds a close icon that can hide the alert.",
     "closeIcon": "Change the default icon used for **closable** alerts.",
     "closeLabel": "Text used for *aria-label* on **closable** alerts. Can also be customized globally in [Internationalization](/customization/internationalization).",
-    "color": "Applies specified color to the control - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). You can find a list of built-in classes on the [colors page](/styles/colors#material-colors).",
     "dense": "Decreases component's height.",
     "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).",
     "height": "Sets the height for the component.",

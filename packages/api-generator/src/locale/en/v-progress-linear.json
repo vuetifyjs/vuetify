@@ -2,7 +2,6 @@
   "props": {
     "absolute": "Applies position: absolute to the component",
     "active": "Reduce the height to 0, hiding component",
-    "bgColor": "Background color, set to component's color if null",
     "bgOpacity": "Background opacity, if null it defaults to 0.3 if background color is not specified or 1 otherwise",
     "bottom": "Aligns the component towards the bottom",
     "bufferValue": "The percentage value for the buffer",
@@ -12,7 +11,6 @@
     "striped": "Adds a stripe background to the filled portion of the progress component",
     "top": "Aligns the content towards the top",
     "clickable": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-linear.json))",
-    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-linear.json))",
     "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-linear.json))",
     "max": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-linear.json))",
     "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-progress-linear.json))",
