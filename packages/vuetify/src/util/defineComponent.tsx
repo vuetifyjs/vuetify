@@ -51,6 +51,7 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
     options.props = propsFactory(options.props, toKebabCase(options.name))()
 
+    options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
       const vm = getCurrentInstance()!
       const defaults = useDefaults()
