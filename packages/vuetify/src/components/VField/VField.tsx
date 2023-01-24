@@ -145,37 +145,41 @@ export const VField = genericComponent<new <T>() => {
       if (hasLabel.value) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
-        const rect = nullifyTransforms(el)
-        const targetRect = targetEl.getBoundingClientRect()
 
-        const x = targetRect.x - rect.x
-        const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
+        requestAnimationFrame(() => {
+          const rect = nullifyTransforms(el)
+          const targetRect = targetEl.getBoundingClientRect()
 
-        const targetWidth = targetRect.width / 0.75
-        const width = Math.abs(targetWidth - rect.width) > 1
-          ? { maxWidth: convertToUnit(targetWidth) }
-          : undefined
+          const x = targetRect.x - rect.x
+          const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
 
-        const style = getComputedStyle(el)
-        const targetStyle = getComputedStyle(targetEl)
-        const duration = parseFloat(style.transitionDuration) * 1000 || 150
-        const scale = parseFloat(targetStyle.getPropertyValue('--v-field-label-scale'))
-        const color = targetStyle.getPropertyValue('color')
+          const targetWidth = targetRect.width / 0.75
+          const width = Math.abs(targetWidth - rect.width) > 1
+            ? { maxWidth: convertToUnit(targetWidth) }
+            : undefined
 
-        el.style.visibility = 'visible'
-        targetEl.style.visibility = 'hidden'
+          const style = getComputedStyle(el)
+          const targetStyle = getComputedStyle(targetEl)
+          const duration = parseFloat(style.transitionDuration) * 1000 || 150
+          const scale = parseFloat(targetStyle.getPropertyValue('--v-field-label-scale'))
+          const color = targetStyle.getPropertyValue('color')
 
-        animate(el, {
-          transform: `translate(${x}px, ${y}px) scale(${scale})`,
-          color,
-          ...width,
-        }, {
-          duration,
-          easing: standardEasing,
-          direction: val ? 'normal' : 'reverse',
-        }).finished.then(() => {
-          el.style.removeProperty('visibility')
-          targetEl.style.removeProperty('visibility')
+          el.style.visibility = 'visible'
+          targetEl.style.visibility = 'hidden'
+
+          animate(el, {
+            transform: `translate(${x}px, ${y}px) scale(${scale})`,
+            color,
+            ...width,
+          }, {
+            duration,
+            easing: standardEasing,
+            direction: val ? 'normal' : 'reverse',
+            fill: 'both',
+          }).finished.then(() => {
+            el.style.removeProperty('visibility')
+            targetEl.style.removeProperty('visibility')
+          })
         })
       }
     }, { flush: 'post' })
