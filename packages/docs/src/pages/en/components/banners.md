@@ -48,10 +48,8 @@ The recommended placement of elements inside of `v-banner` is:
 | Component | Description |
 | - | - |
 | [v-banner](/api/v-banner/) | Primary Component |
-| [v-banner-avatar](/api/v-banner-avatar/) | A custom component that uses [v-avatar](/components/avatars/) as its base |
-| [v-banner-icon](/api/v-banner-icon/) | A custom component that uses [v-icon](/components/icons/) as its base |
-| **v-banner-text** | Functional component used to display the Banner's subtitle. Wraps the `#text` slot |
-| **v-banner-actions** | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
+| [v-banner-text](/api/v-banner-text/) | Functional component used to display the Banner's subtitle. Wraps the `#text` slot |
+| [v-banner-actions](/api/v-banner-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
 ## Examples
 
