@@ -219,7 +219,7 @@ export const VListItem = genericComponent<new () => {
               ) }
 
               { props.prependIcon && (
-                <VIcon key="prepend-icon" density={ props.density } image={ props.prependIcon } />
+                <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } />
               ) }
 
               { slots.prepend && (
@@ -285,7 +285,7 @@ export const VListItem = genericComponent<new () => {
               )}
 
               { props.appendIcon && (
-                <VIcon key="append-icon" density={ props.density } image={ props.appendIcon } />
+                <VIcon key="append-icon" density={ props.density } icon={ props.appendIcon } />
               )}
 
               { props.appendAvatar && (
