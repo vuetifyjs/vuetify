@@ -193,4 +193,25 @@ describe('VSlider', () => {
       </VApp>
     ))
   })
+
+  it('should emit start and end events', () => {
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    cy.mount(() => (
+      <VApp>
+        <CenteredGrid width="300px">
+          <VSlider />
+        </CenteredGrid>
+      </VApp>
+    ))
+
+    cy.get('.v-slider-thumb').swipe([100, 15], [200, 15])
+
+    cy.vue().then(wrapper => {
+      const slider = wrapper.getComponent(VSlider)
+      const start = slider.emitted('start')
+      expect(start).to.have.length(1)
+      const end = slider.emitted('end')
+      expect(end).to.have.length(1)
+    })
+  })
 })

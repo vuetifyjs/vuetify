@@ -132,15 +132,47 @@ export const makeSliderProps = propsFactory({
 
 type SliderProps = ExtractPropTypes<ReturnType<typeof makeSliderProps>>
 
+type SliderData = {
+  value: number
+}
+
+export const useSteps = (props: SliderProps) => {
+  const min = computed(() => parseFloat(props.min))
+  const max = computed(() => parseFloat(props.max))
+  const step = computed(() => props.step > 0 ? parseFloat(props.step) : 0)
+  const decimals = computed(() => {
+    const trimmedStep = step.value.toString().trim()
+    return trimmedStep.includes('.')
+      ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
+      : 0
+  })
+
+  function roundValue (value: number) {
+    if (step.value <= 0) return value
+
+    const clamped = clamp(value, min.value, max.value)
+    const offset = min.value % step.value
+    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
+
+    return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
+  }
+
+  return { min, max, step, decimals, roundValue }
+}
+
 export const useSlider = ({
   props,
-  handleSliderMouseUp,
-  handleMouseMove,
+  steps,
+  onSliderStart,
+  onSliderMove,
+  onSliderEnd,
   getActiveThumb,
 }: {
   props: SliderProps
-  handleSliderMouseUp: (v: number) => void
-  handleMouseMove: (v: number) => void
+  steps: ReturnType<typeof useSteps>
+  onSliderEnd: (data: SliderData) => void
+  onSliderStart: (data: SliderData) => void
+  onSliderMove: (data: SliderData) => void
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
@@ -154,15 +186,8 @@ export const useSlider = ({
 
     return hd
   })
-  const min = computed(() => parseFloat(props.min))
-  const max = computed(() => parseFloat(props.max))
-  const step = computed(() => props.step > 0 ? parseFloat(props.step) : 0)
-  const decimals = computed(() => {
-    const trimmedStep = step.value.toString().trim()
-    return trimmedStep.includes('.')
-      ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
-      : 0
-  })
+
+  const { min, max, step, decimals, roundValue } = steps
 
   const thumbSize = computed(() => parseInt(props.thumbSize, 10))
   const tickSize = computed(() => parseInt(props.tickSize, 10))
@@ -180,16 +205,6 @@ export const useSlider = ({
   const startOffset = ref(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
-
-  function roundValue (value: number) {
-    if (step.value <= 0) return value
-
-    const clamped = clamp(value, min.value, max.value)
-    const offset = min.value % step.value
-    const newValue = Math.round((clamped - offset) / step.value) * step.value + offset
-
-    return parseFloat(Math.min(newValue, max.value).toFixed(decimals.value))
-  }
 
   function parseMouseMove (e: MouseEvent | TouchEvent): number {
     const vertical = props.direction === 'vertical'
@@ -211,16 +226,10 @@ export const useSlider = ({
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
 
-  let thumbMoved = false
-
   const handleStop = (e: MouseEvent | TouchEvent) => {
-    if (!thumbMoved) {
-      startOffset.value = 0
-      handleSliderMouseUp(parseMouseMove(e))
-    }
+    onSliderEnd({ value: parseMouseMove(e) })
 
     mousePressed.value = false
-    thumbMoved = false
     startOffset.value = 0
   }
 
@@ -233,19 +242,19 @@ export const useSlider = ({
     mousePressed.value = true
 
     if (activeThumbRef.value.contains(e.target as Node)) {
-      thumbMoved = true
       startOffset.value = getOffset(e, activeThumbRef.value, props.direction)
     } else {
       startOffset.value = 0
-      handleMouseMove(parseMouseMove(e))
+      onSliderMove({ value: parseMouseMove(e) })
     }
+
+    onSliderStart({ value: parseMouseMove(e) })
   }
 
   const moveListenerOptions = { passive: true, capture: true }
 
   function onMouseMove (e: MouseEvent | TouchEvent) {
-    thumbMoved = true
-    handleMouseMove(parseMouseMove(e))
+    onSliderMove({ value: parseMouseMove(e) })
   }
 
   function onSliderMouseUp (e: MouseEvent) {
