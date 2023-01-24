@@ -112,6 +112,12 @@ export const VBtn = defineComponent({
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
+    const valueAttr = computed(() => {
+      if (props.value === undefined) return undefined
+
+      return Object(props.value) === props.value
+        ? JSON.stringify(props.value, null, 0) : props.value
+    })
 
     useSelectLink(link, group?.select)
 
@@ -171,6 +177,7 @@ export const VBtn = defineComponent({
             link.navigate?.(e)
             group?.toggle()
           } }
+          value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
 
