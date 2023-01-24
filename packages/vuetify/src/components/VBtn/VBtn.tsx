@@ -117,10 +117,13 @@ export const VBtn = defineComponent({
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasColor = !group || isActive.value
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
+      const hasColor = (
+        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (!group || link.isActive?.value)
+      )
 
       return (
         <Tag
