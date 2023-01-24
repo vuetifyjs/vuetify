@@ -1,10 +1,9 @@
 // Utils
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
+  computed,
   getCurrentInstance,
-  shallowReactive,
   shallowRef,
-  toRaw,
   watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
@@ -53,35 +52,40 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
-      const vm = getCurrentInstance()!
       const defaults = useDefaults()
 
-      const _subcomponentDefaults = shallowRef()
-      const _props = shallowReactive({ ...toRaw(props) })
-      watchEffect(() => {
-        const globalDefaults = defaults.value.global
-        const componentDefaults = defaults.value[props._as ?? options.name!]
+      // Skip props proxy if defaults are not provided
+      if (!defaults.value) return options._setup(props, ctx)
 
-        if (componentDefaults) {
-          const subComponents = Object.entries(componentDefaults).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
-        }
-
-        for (const prop of Object.keys(props)) {
-          let newVal = props[prop]
+      const vm = getCurrentInstance()!
+      const componentDefaults = computed(() => defaults.value![props._as ?? options.name!])
+      const _props = new Proxy(props, {
+        get (target, prop: string) {
           if (!propIsDefined(vm.vnode, prop)) {
-            newVal = componentDefaults?.[prop] ?? globalDefaults?.[prop] ?? props[prop]
+            return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? target[prop]
           }
-          if (_props[prop] !== newVal) {
-            _props[prop] = newVal
-          }
+          return Reflect.get(target, prop)
+        },
+      })
+
+      const _subcomponentDefaults = shallowRef()
+      watchEffect(() => {
+        if (componentDefaults.value) {
+          const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
+          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
         }
       })
 
       const setupBindings = options._setup(_props, ctx)
 
+      // If subcomponent defaults are provided, override any
+      // subcomponents provided by the component's setup function.
+      // This uses injectSelf so must be done after the original setup to work.
       useToggleScope(_subcomponentDefaults, () => {
-        provideDefaults(mergeDeep(injectSelf(DefaultsSymbol)?.value ?? {}, _subcomponentDefaults.value))
+        provideDefaults(mergeDeep(
+          injectSelf(DefaultsSymbol)?.value ?? {},
+          _subcomponentDefaults.value
+        ))
       })
 
       return setupBindings
