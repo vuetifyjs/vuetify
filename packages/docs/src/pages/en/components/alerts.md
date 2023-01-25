@@ -50,7 +50,7 @@ The recommended placement of elements inside of `v-alert` is:
 | Component | Description |
 | - | - |
 | [v-alert](/api/v-alert/) | Primary Component |
-| **v-alert-title** | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
+| [v-alert-title](/api/v-alert-title/) | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
 ## Implementation
 
@@ -88,7 +88,7 @@ The **density** prop supports 3 levels of component height; **default**, **comfo
 
 #### Closable
 
-The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visilibity of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
+The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
 
 <example file="v-alert/prop-closable" />
 

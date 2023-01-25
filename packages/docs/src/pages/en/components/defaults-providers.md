@@ -14,7 +14,7 @@ The defaults provider allows you to provide specific default prop values to comp
 
 ## API
 
-- [v-defaults-provider](/api/v-defaults-provider)
+<api-inline />
 
 ## Examples
 
