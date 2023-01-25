@@ -66,54 +66,39 @@
   </section>
 </template>
 
-<script>
+<script setup lang="ts">
   // Utilities
   import kebabCase from 'lodash/kebabCase'
-  import colors from 'vuetify/lib/util/colors'
+  import { colors as vuetifyColors } from 'vuetify/lib/util/colors'
+  import { computed } from 'vue'
 
-  export default {
-    name: 'ColorPalette',
+  type Colors = Record<string, Record<string, string>>
 
-    data: () => ({
-      colors,
-      search: '',
-    }),
+  const colors: Colors = vuetifyColors
+  const search = ""
 
-    computed: {
-      computedColors () {
-        const colors = {}
-        const search = this.search.toLowerCase()
+  const computedColors: Colors = computed(() => {
+    const matchingColors: Colors = {}
+    const colorSearch = search.toLowerCase()
 
-        Object.keys(this.colors).forEach(key => {
-          const kebabKey = kebabCase(key).toLowerCase()
+    Object.keys(colors).forEach(key => {
+      const kebabKey = kebabCase(key).toLowerCase()
 
-          if (kebabKey.indexOf(search) > -1) {
-            colors[kebabKey] = this.colors[key]
-          }
-        })
+      if (kebabKey.indexOf(colorSearch) > -1) {
+        matchingColors[kebabKey] = colors[key]
+      }
+    })
 
-        return colors
-      },
-    },
+    return colors
+  })
 
-    methods: {
-      convertToClass (base, variant) {
-        if (variant === 'base') return base
+  function convertToClass (base: string, variant: string): string {
+    if (variant === 'base') return base
 
-        const lastChar = variant.at(-1)
+    const lastChar = variant.at(-1)
 
-        if (isNaN(Number(lastChar))) return variant
+    if (isNaN(Number(lastChar))) return variant
 
-        return `${base}-${variant.slice(0, -1)}-${lastChar}`
-      },
-      getColorClass (key) {
-        if (['white', 'transparent'].includes(key) ||
-          key.indexOf('light') > -1 ||
-          key.indexOf('accent') > -1
-        ) return 'black--text'
-
-        return 'white--text'
-      },
-    },
+    return `${base}-${variant.slice(0, -1)}-${lastChar}`
   }
 </script>
