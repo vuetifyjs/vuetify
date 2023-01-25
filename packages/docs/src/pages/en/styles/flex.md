@@ -79,7 +79,7 @@ There are also responsive variations for `flex-direction`.
 
 ## Flex justify
 
-The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, or `space-around`.
+The `justify-content` flex setting can be changed using the flex justify classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `space-between`, `space-around`, or `space-evenly`.
 
 <example file="flex/flex-justify" />
 
@@ -90,26 +90,31 @@ There are also responsive variations for `justify-content`.
 - **.justify-center**
 - **.justify-space-between**
 - **.justify-space-around**
+- **.justify-space-evenly**
 - **.justify-sm-start**
 - **.justify-sm-end**
 - **.justify-sm-center**
 - **.justify-sm-space-between**
 - **.justify-sm-space-around**
+- **.justify-sm-space-evenly**
 - **.justify-md-start**
 - **.justify-md-end**
 - **.justify-md-center**
 - **.justify-md-space-between**
 - **.justify-md-space-around**
+- **.justify-md-space-evenly**
 - **.justify-lg-start**
 - **.justify-lg-end**
 - **.justify-lg-center**
 - **.justify-lg-space-between**
 - **.justify-lg-space-around**
+- **.justify-lg-space-evenly**
 - **.justify-xl-start**
 - **.justify-xl-end**
 - **.justify-xl-center**
 - **.justify-xl-space-between**
 - **.justify-xl-space-around**
+- **.justify-xl-space-evenly**
 
 ## Flex align
 
