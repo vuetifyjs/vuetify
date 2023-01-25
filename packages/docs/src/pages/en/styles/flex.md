@@ -316,7 +316,7 @@ There are also responsive variations for `order`.
 
 ## Flex align content
 
-The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the flexbox items on the **x-axis** but is reversed when using `flex-direction: column`, modifying the **y-axis**. Choose from `start` (browser default), `end`, `center`, `between`, `around` or `stretch`.
+The `align-content` flex setting can be changed using the flex align-content classes. This by default will modify the wrapped flexbox content across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `space-between`, `space-around`, `space-evenly` or `stretch` (browser default).
 
 <example file="flex/flex-align-content-start" />
 
@@ -335,31 +335,36 @@ There are also responsive variations for `align-content`.
 - **align-content-center**
 - **align-content-space-between**
 - **align-content-space-around**
+- **align-content-space-evenly**
 - **align-content-stretch**
-- **align-sm-content-start**
-- **align-sm-content-end**
-- **align-sm-content-center**
-- **align-sm-content-space-between**
-- **align-sm-content-space-around**
-- **align-sm-content-stretch**
-- **align-md-content-start**
-- **align-md-content-end**
-- **align-md-content-center**
-- **align-md-content-space-between**
-- **align-md-content-space-around**
-- **align-md-content-stretch**
-- **align-lg-content-start**
-- **align-lg-content-end**
-- **align-lg-content-center**
-- **align-lg-content-space-between**
-- **align-lg-content-space-around**
-- **align-lg-content-stretch**
-- **align-xl-content-start**
-- **align-xl-content-end**
-- **align-xl-content-center**
-- **align-xl-content-space-between**
-- **align-xl-content-space-around**
-- **align-xl-content-stretch**
+- **align-content-sm-start**
+- **align-content-sm-end**
+- **align-content-sm-center**
+- **align-content-sm-space-between**
+- **align-content-sm-space-around**
+- **align-content-sm-space-evenly**
+- **align-content-sm-stretch**
+- **align-content-md-start**
+- **align-content-md-end**
+- **align-content-md-center**
+- **align-content-md-space-between**
+- **align-content-md-space-around**
+- **align-content-md-space-evenly**
+- **align-content-md-stretch**
+- **align-content-lg-start**
+- **align-content-lg-end**
+- **align-content-lg-center**
+- **align-content-lg-space-between**
+- **align-content-lg-space-around**
+- **align-content-lg-space-evenly**
+- **align-content-lg-stretch**
+- **align-content-xl-start**
+- **align-content-xl-end**
+- **align-content-xl-center**
+- **align-content-xl-space-between**
+- **align-content-xl-space-around**
+- **align-content-xl-space-evenly**
+- **align-content-xl-stretch**
 
 ## Flex grow and shrink
 
