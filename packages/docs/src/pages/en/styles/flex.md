@@ -152,7 +152,7 @@ There are also responsive variations for `align-items`.
 
 ## Flex align self
 
-The `align-self` flex setting can be changed using the flex align-self classes. This by default will modify individual flexbox items across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, `stretch`, or `auto` (browser default, inherits align-items property from flex container).
+The `align-self` flex setting can be changed using the flex align-self classes. This by default will modify individual flexbox items across the **y-axis** but is reversed when using `flex-direction: column`, modifying the **x-axis**. Choose from `start`, `end`, `center`, `baseline`, `stretch`, or `auto` (browser default, applies align-items property from flex container).
 
 <example file="flex/flex-align-self" />
 
