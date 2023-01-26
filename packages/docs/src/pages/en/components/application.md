@@ -19,9 +19,9 @@ The `v-app` component is an optional feature that serves as the root layout comp
 
 ----
 
-In Vuetify, the `v-app` component is a convenient way to dynamically modify your application's current theme and provide an entry point for your layouts. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. When an appliction is mounted, each layout child registers itself with the closest layout parent and is then automatically placed in your window.
+In Vuetify, the `v-app` component is a convenient way to dynamically modify your application's current theme and provide an entry point for your layouts. This allows you to create truly unique interfaces without the hassle of managing your layout sizing. When an application is mounted, each layout child registers itself with the closest layout parent and is then automatically placed in your window.
 
-The order of your layout components will dictate the order in which they are registered, and ultimately placed, within your application. The following example demonstrates how the `v-app-bar` component takes priority over `v-navigation-drawer` because of it's rendering order:
+The order of your layout components will dictate the order in which they are registered, and ultimately placed, within your application. The following example demonstrates how the `v-app-bar` component takes priority over `v-navigation-drawer` because of its rendering order:
 
 ``` html
 <template>
@@ -55,7 +55,7 @@ If we swap `v-app-bar` and `v-navigation-drawer`, the registration order changes
 
 ## Theme
 
-The `v-app` component makes it easy to enable one of your application defined themes. By default, Vuetify comes with 2 themes, **light** and **dark**. Each one is a collection of various colors used to style the each individual component. Because `v-app` acts as an interface for [theme](/features/theme/) functionality, you have the ability to change it dynamically within your template.
+The `v-app` component makes it easy to enable one of your application defined themes. By default, Vuetify comes with 2 themes, **light** and **dark**. Each one is a collection of various colors used to style each individual component. Because `v-app` acts as an interface for [theme](/features/theme/) functionality, you have the ability to change it dynamically within your template.
 
 The following example demonstrates how to use the **theme** prop to toggle the theme from dark to light.
 
@@ -111,7 +111,7 @@ The following components are compatible with the [Application layout](/features/
 
 | Component | Default location | Default orientation | Description |
 | - | :-: | :-: | - |
-| [v-system-bar](/api/v-system-bar/) | top | horizontal | Used to similate the system bar on phones and desktop applications |{data-toggle=modal}
+| [v-system-bar](/api/v-system-bar/) | top | horizontal | Used to simulate the system bar on phones and desktop applications |{data-toggle=modal}
 | [v-app-bar](/api/v-app-bar/) | top | horizontal | Top level application actions and navigation links |
 | [v-navigation-drawer](/api/v-navigation-drawer/) | start | vertical | The primary component used for application navigation |
 | [v-footer](/api/v-footer/) | bottom | horizontal | The only application component that is not bound to the current layout by default. Must explicity specify the **app** prop |
