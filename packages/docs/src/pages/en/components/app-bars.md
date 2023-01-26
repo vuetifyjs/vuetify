@@ -95,7 +95,7 @@ The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-s
 
 #### Images
 
-`v-app-bar` can contain background images. You can set source via the `src` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **img** slot.
+`v-app-bar` can contain background images. You can set source via the `image` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **image** slot.
 
 <example file="v-app-bar/prop-image" />
 
@@ -107,7 +107,7 @@ When using the **inverted-scroll** property, the bar will hide until the user sc
 
 #### Prominent
 
-An `v-app-bar` with the `prominent` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **dense** (48px) and **short** (56px) sizes.
+An `v-app-bar` with the `density="prominent"` prop can opt to have its height shrunk as the user scrolls down. This provides a smooth transition to taking up less visual space when the user is scrolling through content. Shrink height has 2 possible options, **compact** (48px) and **comfortable** (56px) sizes.
 
 <example file="v-app-bar/prop-prominent" />
 
