@@ -10,11 +10,13 @@
 <script>
   import Playground from './Playground'
   import Month from "./Month";
+  import OperateCalendar from './OperateCalendar'
 
   export default {
     components: {
       Playground,
-      Month
+      Month,
+      OperateCalendar
     },
   }
 </script>
