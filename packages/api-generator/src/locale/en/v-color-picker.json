@@ -1,7 +1,6 @@
 {
   "props": {
     "canvasHeight": "Height of canvas",
-    "disabled": "Disables picker",
     "dotSize": "Changes the size of the selection dot on the canvas",
     "flat": "Removes elevation",
     "hideCanvas": "Hides canvas",

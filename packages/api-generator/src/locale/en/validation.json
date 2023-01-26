@@ -1,6 +1,5 @@
 {
   "props": {
-    "disabled": "Disable the input",
     "error": "Puts the input in a manual error state",
     "errorCount": "The total number of errors that should display at once",
     "errorMessages": "Puts the input in an error state and passes through custom error messages. Will be combined with any validations that occur from the **rules** prop. This field will not trigger validation",

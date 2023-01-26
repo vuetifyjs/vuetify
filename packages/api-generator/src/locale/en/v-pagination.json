@@ -1,6 +1,5 @@
 {
   "props": {
-    "disabled": "Disables component",
     "start": "Specify the starting page",
     "length": "The number of pages",
     "totalVisible": "Specify the total visible pagination numbers",

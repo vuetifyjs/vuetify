@@ -3,7 +3,6 @@
     "closeOnClick": "Designates if menu should close on outside-activator click",
     "closeOnContentClick": "Designates if menu should close when its content is clicked",
     "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop",
-    "disabled": "Disables the menu",
     "disableKeys": "Removes all keyboard interaction",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "maxHeight": "Sets the max height of the menu content",

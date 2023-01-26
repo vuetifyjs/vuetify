@@ -2,7 +2,6 @@
   "props": {
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
     "debounce": "Duration before tooltip is shown and hidden when hovered",
-    "disabled": "Disables the tooltip",
     "internalActivator": "Designates whether to use an internal activator",
     "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**)",
     "openOnClick": "Designates whether the tooltip should open on activator click",

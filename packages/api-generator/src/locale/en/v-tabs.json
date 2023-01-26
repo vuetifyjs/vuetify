@@ -1,6 +1,5 @@
 {
   "props": {
-    "activeClass": "The **active-class** applied to children when they are activated.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
     "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "centered": "Centers the tabs",

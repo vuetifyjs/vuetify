@@ -8,8 +8,7 @@
     "prependIcon": "This icon used in the prepend slot (if shown)",
     "prevIcon": "Specify the icon to use for the prev icon",
     "showArrows": "Force the display of the pagination arrows",
-    "filter": "Applies an checkmark icon in front of every chip for using it like a filter",
-    "disabled": "Disable the events emitted by the component",
+    "filter": "Applies an checkmark icon in front of every chip for using it like a filter"
   },
   "events": {
     "update:modelValue": "Emitted when the component value is changed by user interaction"

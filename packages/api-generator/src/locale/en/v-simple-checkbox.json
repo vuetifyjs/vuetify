@@ -1,7 +1,6 @@
 {
   "props": {
     "dark": "Applies the dark theme variant to the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
-    "disabled": "Disables simple checkbox.",
     "indeterminate": "Sets an indeterminate state for the simple checkbox.",
     "indeterminateIcon": "The icon used when in an indeterminate state.",
     "light": "Applies the light theme variant to the component.",

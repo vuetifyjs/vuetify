@@ -1,6 +1,6 @@
 {
   "props": {
-    "disabled": "Turns off hover functionality",
+    "disabled": "Removes hover functionality",
     "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-hover.json))"
   },
   "events": {
