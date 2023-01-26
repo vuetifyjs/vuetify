@@ -8,13 +8,13 @@ type ComponentData = {
   slots: Definition
   events: Definition
   exposed: Definition
-  componentName: string
-  kebabName: string
+  displayName: string
+  fileName: string
 }
 
 type DirectiveData = {
   name: string
-  kebabName: string
+  fileName: string
   argument: { value: Definition }
   modifiers: Record<string, Definition>
 }
@@ -35,7 +35,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
         name,
         pattern: undefined,
         description: slot.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'slots'),
+        'doc-url': getDocUrl(component.fileName, 'slots'),
         'vue-properties': slot.properties &&
           Object.entries(slot.properties ?? {}).map(([name, prop]) => createTypedEntity(name, (prop as any).formatted)),
       }
@@ -45,7 +45,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       return {
         name,
         description: event.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'events'),
+        'doc-url': getDocUrl(component.fileName, 'events'),
         arguments: [createTypedEntity('argument', event.formatted)],
       }
     }
@@ -61,7 +61,7 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
       return {
         name,
         description: prop.description.en || '',
-        'doc-url': getDocUrl(component.kebabName, 'props'),
+        'doc-url': getDocUrl(component.fileName, 'props'),
         default: typeof prop.default !== 'string' ? JSON.stringify(prop.default) : prop.default,
         required: undefined, // TODO: implement this
         value: createTagValue(prop.formatted),
@@ -70,14 +70,14 @@ export const createWebTypesApi = (componentData: ComponentData[], directiveData:
     }
 
     return {
-      name: component.componentName,
+      name: component.displayName,
       source: {
         module: './src/components/index.ts',
-        symbol: component.componentName,
+        symbol: component.displayName,
       },
       aliases: undefined, // TODO: are we using this? deprecated name changes?
       description: '', // TODO: we should probably include component description in locale files
-      'doc-url': getDocUrl(component.kebabName),
+      'doc-url': getDocUrl(component.fileName),
       attributes: Object.entries(component.props ?? {}).map(createTagAttribute),
       events: Object.entries(component.events ?? {}).map(createTagEvent),
       slots: Object.entries(component.slots ?? {}).map(createTagSlot),

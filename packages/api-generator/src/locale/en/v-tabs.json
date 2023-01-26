@@ -2,8 +2,7 @@
   "props": {
     "activeClass": "The **active-class** applied to children when they are activated.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
-    "bgColor": "Changes the background color of the component.",
-    "color": "Changes the color of the tabs.",
+    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "centered": "Centers the tabs",
     "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",

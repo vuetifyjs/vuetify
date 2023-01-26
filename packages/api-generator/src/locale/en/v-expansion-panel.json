@@ -4,8 +4,7 @@
     "readonly": "Makes the expansion-panel content read only.",
     "value": "Controls the opened/closed state of content",
     "title": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-expansion-panel.json))",
-    "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-expansion-panel.json))",
-    "bgColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-expansion-panel.json))"
+    "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-expansion-panel.json))"
   },
   "events": {
     "change": "Toggles the value of the selected panel",

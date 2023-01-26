@@ -1,7 +1,7 @@
 <template>
   <app-btn
     color="medium-emphasis"
-    class="ml-1"
+    class="ms-1"
   >
     {{ title }}
 

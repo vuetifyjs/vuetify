@@ -9,7 +9,7 @@
     <div class="text-center pt-2">
       <v-btn
         color="primary"
-        class="mr-2"
+        class="me-2"
         @click="toggleOrder"
       >
         Toggle sort order

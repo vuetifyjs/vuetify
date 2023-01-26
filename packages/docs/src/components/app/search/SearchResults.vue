@@ -6,7 +6,7 @@
     <template v-for="(group, i) in props.groups">
       <v-divider
         v-if="i !== 0"
-        class="mb-2 mt-2 ml-2 mr-n2"
+        class="mb-2 mt-2 ms-2 me-n2"
       />
 
       <div class="text-high-emphasis font-weight-black text-uppercase">
@@ -22,7 +22,7 @@
           <v-list-item-title>
             <div class="d-inline-block" v-html="child.items[0]._highlightResult.hierarchy.lvl1.value" />
 
-            <v-list-item-subtitle class="d-inline-flex pl-1">
+            <v-list-item-subtitle class="d-inline-flex ps-1">
               &rsaquo; Home
             </v-list-item-subtitle>
           </v-list-item-title>
@@ -40,7 +40,7 @@
             v-for="(item, it) in child.items"
             :key="`search-${i}-${ci}-${it}-children`"
             :to="item.url"
-            class="pl-4 mb-0"
+            class="ps-4 mb-0"
           >
             <v-list-item-subtitle
               class="text-wrap font-weight-medium"
@@ -49,7 +49,7 @@
 
             <v-list-item-subtitle
               v-if="item.content"
-              class="text-caption text-wrap text-high-emphasis font-weight-regular pl-2"
+              class="text-caption text-wrap text-high-emphasis font-weight-regular ps-2"
               v-html="truncateContent(item)"
             />
           </v-list-item>

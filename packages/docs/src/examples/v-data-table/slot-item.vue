@@ -2,15 +2,18 @@
   <v-data-table
     :headers="headers"
     :items="desserts"
+    item-value="name"
     class="elevation-1"
   >
-    <template v-slot:item.calories="{ item }">
-      <v-chip
-        :color="getColor(item.raw.calories)"
-        dark
-      >
-        {{ item.raw.calories }}
-      </v-chip>
+    <template v-slot:item="{ item }">
+      <tr>
+        <td>{{ item.columns.name }}</td>
+        <td>{{ item.columns.calories }}</td>
+        <td>{{ item.columns.fat }}</td>
+        <td>{{ item.columns.carbs }}</td>
+        <td>{{ item.columns.protein }}</td>
+        <td>{{ item.columns.iron }}</td>
+      </tr>
     </template>
   </v-data-table>
 </template>
@@ -19,6 +22,7 @@
   export default {
     data () {
       return {
+        selected: [],
         headers: [
           {
             title: 'Dessert (100g serving)',
@@ -115,13 +119,6 @@
           },
         ],
       }
-    },
-    methods: {
-      getColor (calories) {
-        if (calories > 400) return 'red'
-        else if (calories > 200) return 'orange'
-        else return 'green'
-      },
     },
   }
 </script>

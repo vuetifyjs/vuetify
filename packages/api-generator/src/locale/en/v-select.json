@@ -1,6 +1,5 @@
 {
   "props": {
-    "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This will attach to the root `v-app` component by default.",
     "autocomplete": "Filter the items in the list based on user input",
     "cacheItems": "Keeps a local _unique_ copy of all items that have been passed through the **items** prop.",
     "chips": "Changes display of selections to chips",
@@ -31,7 +30,6 @@
     "segmented": "Creates a segmented button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "smallChips": "Changes display of selections to chips with the **small** property",
     "tags": "Tagging functionality, allows the user to create new values not available from the **items** prop",
-    "valueComparator": "The comparison algorithm used for values. [More info](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/util/helpers.ts)",
     "closableChips": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",
     "hideNoData": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",
     "menu": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-select.json))",

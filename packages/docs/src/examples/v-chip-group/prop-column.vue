@@ -19,7 +19,7 @@
           </v-btn>
 
           <v-btn
-            class="ml-2"
+            class="ms-2"
             icon
           >
             <v-icon>mdi-check-bold</v-icon>

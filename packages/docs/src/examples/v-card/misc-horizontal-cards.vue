@@ -67,7 +67,7 @@
 
                 <v-card-actions>
                   <v-btn
-                    class="ml-2"
+                    class="ms-2"
                     variant="outlined"
                     size="small"
                   >
@@ -102,7 +102,7 @@
 
                 <v-card-actions>
                   <v-btn
-                    class="ml-2"
+                    class="ms-2"
                     icon="mdi-play"
                     variant="text"
                   ></v-btn>

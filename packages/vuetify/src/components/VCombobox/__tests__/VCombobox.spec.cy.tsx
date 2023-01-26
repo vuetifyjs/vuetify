@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VForm } from '@/components'
 import { VCombobox } from '../VCombobox'
 import { ref } from 'vue'
 
@@ -209,6 +210,40 @@ describe('VCombobox', () => {
         .type('Item 3')
         .should('have.length', 1)
     })
+
+    it('should filter with custom item shape', () => {
+      const items = [
+        {
+          id: 1,
+          name: 'Test1',
+        },
+        {
+          id: 2,
+          name: 'Antonsen PK',
+        },
+      ]
+
+      cy.mount(() => (
+        <VCombobox
+          items={items}
+          item-value="id"
+          item-title="name"
+        />
+      ))
+        .get('input')
+        .type('test')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Test1')
+        .get('input')
+        .clear()
+        .type('antonsen')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Antonsen PK')
+    })
   })
 
   describe('prefilled data', () => {
@@ -290,6 +325,88 @@ describe('VCombobox', () => {
           title: 'Item 2',
           value: 'item2',
         }]))
+    })
+  })
+
+  describe('readonly', () => {
+    it('should not be clickable when in readonly', () => {
+      const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+
+      const selectedItems = 'Item 1'
+
+      cy.mount(() => (
+        <VCombobox
+          items={items}
+          modelValue={selectedItems}
+          readonly
+        />
+      ))
+
+      cy.get('.v-combobox')
+        .click()
+        .get('.v-list-item').should('have.length', 0)
+        .get('.v-select--active-menu').should('have.length', 0)
+
+      cy
+        .get('.v-combobox input')
+        .focus()
+        .type('{downarrow}', { force: true })
+        .get('.v-list-item').should('have.length', 0)
+        .get('.v-select--active-menu').should('have.length', 0)
+    })
+
+    it('should not be clickable when in readonly form', () => {
+      const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+
+      const selectedItems = 'Item 1'
+
+      cy.mount(() => (
+        <VForm readonly>
+          <VCombobox
+            items={items}
+            modelValue={selectedItems}
+            readonly
+          />
+        </VForm>
+      ))
+
+      cy.get('.v-combobox')
+        .click()
+        .get('.v-list-item').should('have.length', 0)
+        .get('.v-select--active-menu').should('have.length', 0)
+
+      cy
+        .get('.v-combobox input')
+        .focus()
+        .type('{downarrow}', { force: true })
+        .get('.v-list-item').should('have.length', 0)
+        .get('.v-select--active-menu').should('have.length', 0)
+    })
+  })
+
+  describe('hide-selected', () => {
+    it('should hide selected item(s)', () => {
+      const items = [
+        'Item 1',
+        'Item 2',
+        'Item 3',
+        'Item 4',
+      ]
+
+      const selectedItems = [
+        'Item 1',
+        'Item 2',
+      ]
+
+      cy.mount(() => (
+        <VCombobox items={items} modelValue={selectedItems} multiple hideSelected />
+      ))
+
+      cy.get('.v-combobox input').click()
+
+      cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
 })

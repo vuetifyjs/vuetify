@@ -7,7 +7,6 @@
     <promoted-base
       :key="route.path"
       border
-      height="225"
       max-width="360"
     >
       <promoted-script

@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     id="comparison"
-    class="mb-12 text-body-2 mx-auto"
+    class="mb-5 text-body-2 mx-auto"
     border
     rounded
   >

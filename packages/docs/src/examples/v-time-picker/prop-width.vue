@@ -4,7 +4,7 @@
       v-model="time"
       type="month"
       width="290"
-      class="ml-4"
+      class="ms-4"
     ></v-time-picker>
     <v-col class="pa-0 mx-4 mt-4 mt-sm-0">
       <v-time-picker

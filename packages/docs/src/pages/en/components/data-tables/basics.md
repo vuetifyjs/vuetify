@@ -87,7 +87,7 @@ The **show-select** prop will render a checkbox in the default header to toggle 
 
 You can use the dynamic slots `item.<key>` to customize only certain columns. `<key>` is the name of the **key** property in header items sent to **headers**. So to customize the calories column we're using the `item.calories` slot.
 
-<example file="v-data-table/slot-item" />
+<example file="v-data-table/slot-item-key" />
 
 #### Simple checkbox
 
