@@ -18,8 +18,5 @@
   },
   "slots": {
     "default": "Provides the current value of the component"
-  },
-  "events": {
-    "update:modelValue": "Emitted when the component value is changed by user interaction"
   }
 }

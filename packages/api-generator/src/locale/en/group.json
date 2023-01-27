@@ -7,8 +7,5 @@
     "multiple": "Allows one to select mulitple items.",
     "selectedClass": "Configure the selected CSS class.",
     "value": "The value used when the component is selected within a group. If not provided, the render index is used"
-  },
-  "events": {
-    "update:modelValue": "Emitted when selection changes"
   }
 }

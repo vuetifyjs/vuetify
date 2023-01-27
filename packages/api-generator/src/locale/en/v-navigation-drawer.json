@@ -32,8 +32,7 @@
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",
-    "update:mini-variant": "The `mini-variant.sync` event",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
+    "update:rail": "Event that is emitted when the rail model changes"
   },
   "exposed": {
     "isStuck": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"

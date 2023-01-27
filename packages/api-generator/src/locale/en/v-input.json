@@ -27,8 +27,7 @@
     "click:append": "Emitted when appended icon is clicked",
     "click:prepend": "Emitted when prepended icon is clicked",
     "mousedown": "Emitted when click is pressed",
-    "mouseup": "Emitted when click is released",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))"
+    "mouseup": "Emitted when click is released"
   },
   "slots": {
     "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-input.json))",

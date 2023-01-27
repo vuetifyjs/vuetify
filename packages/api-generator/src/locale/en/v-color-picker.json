@@ -18,8 +18,7 @@
   },
   "events": {
     "input": "Selected color. Depending on what you passed to the `value` prop this is either a string or an object",
-    "update:color": "Selected color. This is the internal representation of the color, containing all values.",
-    "update:mode": "Selected mode",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-color-picker.json))"
+    "update:color": "Selected color. This is the internal representation of the color, containing all values."
+    "update:mode": "Selected mode"
   }
 }

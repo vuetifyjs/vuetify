@@ -21,8 +21,5 @@
   "slots": {
     "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop.",
     "image": "Expects the [`v-img`](/components/images/) component."
-  },
-  "events": {
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-app-bar.json))"
   }
 }

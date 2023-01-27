@@ -21,8 +21,5 @@
   "slots": {
     "item": "The slot for each item",
     "item-label": "The slot for each item label"
-  },
-  "events": {
-    "update:modelValue": "Emits the rating number when this value changes"
   }
 }

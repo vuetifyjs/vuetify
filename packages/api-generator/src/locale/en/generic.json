@@ -15,6 +15,7 @@
     "noDataText": "Text shown when no items are provided to the component",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "size": "Sets the height and width of the component.",
+    "tag": "Specify a custom tag used on the root element",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "trueValue": "Sets value for truthy state",
     "valueComparator": "Apply a custom comparison algorithm used for values",
@@ -30,6 +31,7 @@
   },
   "events": {
     "click": "Event that is emitted when the component is clicked",
-    "input": "The updated bound model"
+    "input": "The updated bound model",
+    "update:modelValue": "Event that is emitted when the component's model changes"
   }
 }

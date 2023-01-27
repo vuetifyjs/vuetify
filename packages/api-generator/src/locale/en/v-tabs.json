@@ -31,8 +31,5 @@
     "alignTabs": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
     "stacked": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
     "mandatory": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))"
-  },
-  "events": {
-    "update:modelValue": "Emitted when tab is changed by user interaction."
   }
 }
