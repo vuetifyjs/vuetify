@@ -37,7 +37,7 @@
               <v-btn
                 variant="plain"
                 rounded="0"
-                class="align-self-center mr-4"
+                class="align-self-center me-4"
                 height="100%"
                 v-bind="props"
               >

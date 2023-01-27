@@ -36,7 +36,7 @@
     ></v-checkbox>
 
     <v-btn
-      class="mr-4"
+      class="me-4"
       @click="submit"
     >
       submit

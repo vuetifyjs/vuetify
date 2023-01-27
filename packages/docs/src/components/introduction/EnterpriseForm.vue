@@ -82,7 +82,7 @@
 
           <a
             :href="rpath('/introduction/sponsors-and-backers/')"
-            class="ml-2"
+            class="ms-2"
             target="_blank text-caption"
           >
             <small class="text-primary">More Information</small>

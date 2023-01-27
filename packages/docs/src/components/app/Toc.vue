@@ -14,12 +14,12 @@
       #prepend
     >
       <app-headline
-        class="mt-4 mb-2 ml-4"
+        class="mt-4 mb-2 ms-4"
         path="contents"
       />
     </template>
 
-    <ul class="ml-5">
+    <ul class="ms-5">
       <router-link
         v-for="{ to, level, text } in toc"
         v-slot="{ href }"
@@ -29,13 +29,13 @@
       >
         <li
           :class="[
-            'pl-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': route.hash === to,
               'text-medium-emphasis': route.hash !== to,
-              'pl-6': level === 3,
-              'pl-9': level === 4,
-              'pl-12': level === 5,
+              'ps-6': level === 3,
+              'ps-9': level === 4,
+              'ps-12': level === 5,
             }
           ]"
         >

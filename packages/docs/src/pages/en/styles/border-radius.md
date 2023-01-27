@@ -74,7 +74,7 @@ You can create pills with the `.rounded-pill` class and circles with the `.round
 
 #### Rounding by side
 
-Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **left**).
+Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **start**).
 
 E.g. `.rounded-b-xl` and `.rounded-t`.
 
@@ -84,12 +84,12 @@ E.g. `.rounded-b-xl` and `.rounded-t`.
 
 Border radius is configurable on a per-corner basis using the infix classes, `-ts`, `-te`, `-be`, `-bs` (corresponding respectively to the corners **top-start**, **top-end**, **bottom-end**, **bottom-start**)
 
-E.g. `.rounded-br-xl` and `.rounded-tr`.
+E.g. `.rounded-be-xl` and `.rounded-te`.
 
 <example file="border-radius/misc-rounding-by-corner" />
 
 #### Removing Border Radius
 
-Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-l-0` and `.rounded-te-0`.
+Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-s-0` and `.rounded-te-0`.
 
 <example file="border-radius/misc-removing-border-radius" />

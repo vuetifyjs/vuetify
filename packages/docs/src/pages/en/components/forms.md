@@ -24,7 +24,9 @@ The internal `v-form` component makes it easy to add validation to form inputs. 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-form](/api/v-form/) | Primary Component |
 
 ## Examples
 
@@ -44,7 +46,7 @@ The `v-form` component has **three** functions that can be accessed by setting a
 
 <example file="v-form/misc-validation-with-submit-and-clear" />
 
-#### Vee-validate
+<!-- #### Vee-validate
 
 **vee-validate** is a template Based Validation Framework for Vue.js. [Documentation](https://vee-validate.logaretm.com/v3)
 
@@ -54,4 +56,4 @@ The `v-form` component has **three** functions that can be accessed by setting a
 
 **vuelidate** is a simple, lightweight model-based validation for Vue.js. [Documentation](https://vuelidate.netlify.com/)
 
-<example file="v-form/misc-vuelidate" />
+<example file="v-form/misc-vuelidate" /> -->

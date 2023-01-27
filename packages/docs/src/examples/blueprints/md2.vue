@@ -2,7 +2,7 @@
   <div>
     <v-defaults-provider :defaults="md2.defaults">
       <div class="d-flex align-center">
-        <v-btn class="mr-6 text-white" :color="color">Button</v-btn>
+        <v-btn class="me-6 text-white" :color="color">Button</v-btn>
 
         <v-tabs :color="color">
           <v-tab>Tab One</v-tab>

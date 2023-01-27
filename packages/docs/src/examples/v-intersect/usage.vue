@@ -4,7 +4,7 @@
       <v-avatar
         :color="isIntersecting ? 'green-lighten-1' : 'red-darken-2'"
         variant="flat"
-        class="mr-3 swing-transition"
+        class="me-3 swing-transition"
         size="32"
       ></v-avatar>
     </div>

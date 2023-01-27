@@ -78,7 +78,8 @@ export const VDataTable = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+    const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
+    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'), { filterKeys })
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -125,7 +126,7 @@ export const VDataTable = defineComponent({
       >
         {{
           top: slots.top,
-          default: slots.default ? slots.default() : () => (
+          default: slots.default ?? (() => (
             <>
               { slots.colgroup?.({ columns }) }
               <thead>
@@ -150,14 +151,14 @@ export const VDataTable = defineComponent({
               { slots.tbody?.() }
               { slots.tfoot?.() }
             </>
-          ),
-          bottom: slots.bottom ? slots.bottom() : () => (
+          )),
+          bottom: slots.bottom ?? (() => (
             <VDataTableFooter
               v-slots={{
                 prepend: slots['footer.prepend'],
               }}
             />
-          ),
+          )),
         }}
       </VTable>
     ))

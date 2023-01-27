@@ -69,7 +69,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
   export default {
     methods: {
       changeLocale (locale) {
-        this.$vuetify.locale.current.value = locale
+        this.$vuetify.locale.current = locale
       }
     }
   }

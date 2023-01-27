@@ -18,7 +18,7 @@
       </template>
     </v-text-field>
 
-    <h2 class="text-h4 text-success pl-4">
+    <h2 class="text-h4 text-success ps-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">
@@ -47,7 +47,7 @@
 
       <v-progress-circular
         v-model="progress"
-        class="mr-2"
+        class="me-2"
       ></v-progress-circular>
     </v-row>
 
@@ -74,7 +74,7 @@
                 <template v-slot:label>
                   <div
                     :class="task.done && 'text-grey' || 'text-primary'"
-                    class="ml-4"
+                    class="ms-4"
                     v-text="task.text"
                   ></div>
                 </template>

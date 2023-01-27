@@ -1,11 +1,9 @@
 <template>
-  <section
-    id="ready-for-more"
-    class="mt-12"
-  >
+  <section id="ready-for-more">
     <app-heading
       :content="t('ready')"
       level="2"
+      class="mb-2"
     />
 
     <!-- https://vue-i18n.intlify.dev/guide/advanced/component.html#scope-resolving -->
@@ -26,7 +24,7 @@
 
     <app-divider class="mt-7 mb-5" />
 
-    <up-next class="mb-4" />
+    <up-next class="mb-5" />
 
     <vuetify class="mb-6" />
 

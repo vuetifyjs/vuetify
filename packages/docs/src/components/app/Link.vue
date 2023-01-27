@@ -53,7 +53,7 @@
 
     return {
       icon: icon.value,
-      class: `m${isSamePage.value ? 'r' : 'l'}-1`,
+      class: `m${isSamePage.value ? 'e' : 's'}-1`,
       color: 'primary',
       size: '.875rem',
     }

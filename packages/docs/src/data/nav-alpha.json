@@ -204,6 +204,7 @@
           "pagination",
           "filtering",
           "grouping",
+          "slots",
           "virtual-tables",
           "server-side-tables"
         ]

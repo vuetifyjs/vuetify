@@ -18,7 +18,7 @@ Experiment and use in-development components before they're released.
 
 ----
 
-## What is Labs? {id=what-is-labs}
+## What is Labs? { id=what-is-labs }
 
 Labs is a new way for developers to use unfinished components in an alpha state.
 
@@ -39,7 +39,7 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 export default createVuetify({
   components: {
     VDataTable,
-  }
+  },
 })
 ```
 
@@ -54,7 +54,7 @@ import { VDataTable } from 'vuetify/labs/VDataTable'
 export default createVuetify({
   components: {
     VDataTable,
-  }
+  },
   defaults: {
     VDataTable: {
       fixedHeader: true,
@@ -64,16 +64,16 @@ export default createVuetify({
 })
 ```
 
-If you wish to install all Labs components, use the following code snippet:
+If you wish to install all Labs components - use the following code snippet:
 
-```js { resource="src/plugins/vuetify.js"}
+```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 import * as labs from 'vuetify/labs/components'
 
 export default createVuetify({
   components: {
     ...labs,
-  }
+  },
 })
 ```
 
@@ -83,23 +83,25 @@ export default createVuetify({
 
 The following is a list of available and up-and-coming components for use with Labs:
 
-### Data Table
-
 | Component | Description |
 | - | - |
-| v-data-table | Primary Component |
-| v-data-table-server | Data table component for handling data from a remote server |
-| v-data-table-virtual | Data table component for handling large amounts of rows |
-| v-data-table-row | ... |
-| v-data-table-rows | ... |
-| v-data-table-column | ... |
+| **Data table** | [Basics](/components/data-tables/basics/) - [Headers](/components/data-tables/headers/) - [Sorting](/components/data-tables/sorting/) - [Pagination](/components/data-tables/pagination/) - [Filtering](/components/data-tables/filtering/) - [Grouping](/components/data-tables/grouping/) |
+| [v-data-table](/api/v-data-table/) | Primary Component |
+| [v-data-table-server](/api/v-data-table-server/) | Data table component for handling data from a remote server |
+| [v-data-table-virtual](/api/v-data-table-virtual/) | Data table component for handling large amounts of rows |
+| [v-data-table-row](/api/v-data-table-row/) | Data table reusable row component |
+| [v-data-table-rows](/api/v-data-table-rows/) | Data table reusable rows component |
+| [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component |
+| **Virtual scroll** | [Usage](/components/virtual-scrollers/) |
+| [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
 
 ### Up Next
 
 | Component | Release Target |
-| - | --: |
+| - | - |
+| v-calendar | Q1 2023 |
+| v-infinite-scroll | Q1 2023 |
 | v-date-picker | Q2 2023 |
-| v-calendar | Q1 2023
 
 <alert type="warning">
 

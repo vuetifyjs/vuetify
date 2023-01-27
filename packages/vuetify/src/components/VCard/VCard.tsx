@@ -50,7 +50,10 @@ export const VCard = defineComponent({
     },
     prependAvatar: String,
     prependIcon: IconValue,
-    ripple: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     subtitle: String,
     text: String,
     title: String,
@@ -127,7 +130,7 @@ export const VCard = defineComponent({
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }
-          v-ripple={ isClickable.value }
+          v-ripple={ isClickable.value && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (

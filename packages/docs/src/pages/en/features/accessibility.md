@@ -90,7 +90,7 @@ The `v-select` component will automatically configure all required a11y attribut
 When rendered, the `v-select` component's content will look similar to this:
 
 ```html
-<!-- Rendered `v-select-list` content HTML Output -->
+<!-- Rendered `v-select` list content HTML Output -->
 
 <div
   role="listbox"
@@ -109,6 +109,7 @@ When rendered, the `v-select` component's content will look similar to this:
     >
       Foo
     </div>
+  </div>
   <div
     aria-labelledby="bar-list-item-13"
     aria-selected="false"

@@ -3,7 +3,7 @@
     <app-title
       v-if="title"
       :path="title"
-      class="mb-0 pl-1"
+      class="mb-0 ps-1"
     />
 
     <v-item-group

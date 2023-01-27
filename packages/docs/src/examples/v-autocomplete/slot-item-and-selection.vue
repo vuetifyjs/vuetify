@@ -5,9 +5,9 @@
     class="mx-auto"
     max-width="420"
   >
-    <template v-slot:progress>
+    <template v-slot:loader="{ isActive }">
       <v-progress-linear
-        absolute
+        :active="isActive"
         color="green-lighten-3"
         height="4"
         indeterminate
@@ -63,7 +63,6 @@
               :disabled="isUpdating"
               color="blue-grey-lighten-2"
               label="Name"
-              variant="filled"
             ></v-text-field>
           </v-col>
 
@@ -73,7 +72,6 @@
               :disabled="isUpdating"
               color="blue-grey-lighten-2"
               label="Title"
-              variant="filled"
             ></v-text-field>
           </v-col>
 
@@ -89,7 +87,6 @@
               item-value="name"
               label="Select"
               multiple
-              variant="filled"
             >
               <template v-slot:chip="{ props, item }">
                 <v-chip
@@ -119,8 +116,9 @@
       <v-switch
         v-model="autoUpdate"
         :disabled="isUpdating"
-        class="mt-0 ms-3"
+        class="mt-0 ms-2"
         color="green-lighten-2"
+        density="compact"
         hide-details
         label="Auto Update"
       ></v-switch>
@@ -130,6 +128,7 @@
       <v-btn
         :disabled="autoUpdate"
         :loading="isUpdating"
+        :variant="isUpdating ? 'tonal' : undefined"
         color="blue-grey-lighten-3"
         prepend-icon="mdi-update"
         @click="isUpdating = true"
@@ -170,13 +169,16 @@
           { name: 'Sandra Williams', group: 'Group 2', avatar: srcs[3] },
         ],
         title: 'The summer breeze',
+        timeout: null,
       }
     },
 
     watch: {
       isUpdating (val) {
+        clearTimeout(this.timeout)
+
         if (val) {
-          setTimeout(() => (this.isUpdating = false), 3000)
+          this.timeout = setTimeout(() => (this.isUpdating = false), 3000)
         }
       },
     },

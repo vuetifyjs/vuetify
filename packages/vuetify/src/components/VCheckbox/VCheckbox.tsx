@@ -49,12 +49,14 @@ export const VCheckbox = defineComponent({
             ...slots,
             default: ({
               id,
+              messagesId,
               isDisabled,
               isReadonly,
             }) => (
               <VCheckboxBtn
                 { ...checkboxProps }
                 id={ id.value }
+                aria-describedby={ messagesId.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }

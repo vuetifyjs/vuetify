@@ -154,6 +154,7 @@ export const VFileInput = defineComponent({
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -167,6 +168,7 @@ export const VFileInput = defineComponent({
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isDirty.value || isFocused.value }
                 dirty={ isDirty.value }
                 focused={ isFocused.value }
