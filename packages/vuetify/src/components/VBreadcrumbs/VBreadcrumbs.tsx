@@ -122,7 +122,7 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
                       default: slots.title ? () => slots.title?.({ item, index }) : undefined,
                     }}
                   />
-          )
+             )
               }
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider
