@@ -472,7 +472,7 @@ export default CalendarBase.extend({
         // mapper 生成当日的事件布局
         const events = getter(day) // 过滤出当日的事件
         const visuals = mode(day, events, timed, this.categoryMode) // 根据当天日期信息 计算这些事件(堆叠效果下)的 left和width
-        console.log(visuals,'**********visuals')
+
         // 在day和day-header 这两个作用域插槽中，timed是false
         if (timed) {
           return visuals.map(visual => mapper(visual, day)).filter(isNode) // 根据视图数据生成视图节点布局

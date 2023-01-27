@@ -24,11 +24,11 @@ import {
 import { CalendarTimestamp, CalendarFormatter } from 'vuetify/types'
 
 export default mixins(
-  Colorable,
-  Localable,
-  Mouse,
-  Themeable,
-  Times
+  Colorable, // 无必要
+  Localable, // 无必要
+  Mouse, // 无必要
+  Themeable, // 暂无必要
+  Times // 暂无必要
 /* @vue/component */
 ).extend({
   name: 'calendar-base',

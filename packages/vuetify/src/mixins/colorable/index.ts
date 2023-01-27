@@ -2,7 +2,7 @@ import Vue from 'vue'
 import { VNodeData } from 'vue/types/vnode'
 import { consoleError } from '../../util/console'
 import { isCssColor } from '../../util/colorUtils'
-
+window.vue = Vue
 export default Vue.extend({
   name: 'colorable',
 

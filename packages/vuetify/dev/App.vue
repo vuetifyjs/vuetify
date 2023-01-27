@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <v-main>
-      <Playground>
-      </Playground>
+      <OperateCalendar>
+      </OperateCalendar>
     </v-main>
   </v-app>
 </template>
@@ -11,12 +11,14 @@
   import Playground from './Playground'
   import Month from "./Month";
   import OperateCalendar from './OperateCalendar'
+  import CreateEvent from './CreateEvent'
 
   export default {
     components: {
       Playground,
       Month,
-      OperateCalendar
+      OperateCalendar,
+      CreateEvent
     },
   }
 </script>

@@ -349,7 +349,14 @@ export default CalendarWithEvents.extend({
   },
 
   render (h): VNode {
-    const { start, end, maxDays, component, weekdays, categories } = this.renderProps
+    const {
+      start,
+      end,
+      maxDays,
+      component,
+      weekdays,
+      categories,
+    } = this.renderProps
     const scopedSlots = this.getScopedSlots()
     return h(component, {
       staticClass: 'v-calendar',

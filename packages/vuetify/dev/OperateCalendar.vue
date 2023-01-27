@@ -1,5 +1,6 @@
 <template>
   <v-row class="fill-height">
+    <button @click="handleClick">查看事件</button>
     <v-col>
       <v-sheet height="64">
         <v-toolbar
@@ -80,7 +81,6 @@
           @click:event="showEvent"
           @click:more="viewDay"
           @click:date="viewDay"
-          @change="updateRange"
         ></v-calendar>
         <v-menu
           v-model="selectedOpen"
@@ -98,7 +98,9 @@
               dark
             >
               <v-btn icon>
-                <v-icon>mdi-pencil</v-icon>
+                <v-icon>
+                  mdi-pencil
+                </v-icon>
               </v-btn>
               <v-toolbar-title v-html="selectedEvent.name"></v-toolbar-title>
               <v-spacer></v-spacer>
@@ -128,6 +130,7 @@
   </v-row>
 </template>
 <script>
+import { creatEvents } from './util'
 export default {
   data: () => ({
     focus: '',
@@ -141,11 +144,14 @@ export default {
     selectedEvent: {},
     selectedElement: null,
     selectedOpen: false,
-    events: [],
+    events: creatEvents(),
     colors: ['blue', 'indigo', 'deep-purple', 'cyan', 'green', 'orange', 'grey darken-1'],
     names: ['Meeting', 'Holiday', 'PTO', 'Travel', 'Event', 'Birthday', 'Conference', 'Party'],
   }),
   methods: {
+    handleClick(){
+      console.log(this.events)
+    },
     viewDay ({ date }) {
       this.focus = date
       this.type = 'day'
