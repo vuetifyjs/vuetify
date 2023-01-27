@@ -14,7 +14,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
+import { computed, nextTick, ref, watch } from 'vue'
 import { callEvent, defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -131,6 +131,14 @@ export const VFileInput = defineComponent({
         callEvent(props['onClick:clear'], e)
       })
     }
+
+    watch(model, updatedModel => {
+      const hasModelReset = !Array.isArray(updatedModel) || updatedModel.length === 0
+
+      if (hasModelReset && inputRef.value) {
+        inputRef.value.value = ''
+      }
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
