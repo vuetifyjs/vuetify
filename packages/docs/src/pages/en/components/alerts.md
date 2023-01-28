@@ -12,7 +12,7 @@ related:
 
 # Alerts
 
-The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors.
+The `v-alert` component is used to convey important information to the user through the use of contextual types, icons and colors.
 
 ![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
 
