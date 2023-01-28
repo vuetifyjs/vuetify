@@ -38,7 +38,7 @@ export default {
     prev: 'Föregående vy',
     next: 'Nästa vy',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Karusell vy {0} av {1}',
     },
   },
   calendar: {
@@ -51,7 +51,7 @@ export default {
   },
   fileInput: {
     counter: '{0} filer',
-    counterSize: '{0} filer (av {1} totalt)',
+    counterSize: '{0} filer ({1})',
   },
   timePicker: {
     am: 'AM',
@@ -59,18 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      root: 'Pagination Navigation',
+      root: 'Paginering',
       next: 'Nästa sida',
       previous: 'Föregående sida',
-      page: 'Gå till sidan {0}',
+      page: 'Gå till sida {0}',
       currentPage: 'Aktuell sida, sida {0}',
-      first: 'First page',
-      last: 'Last page',
+      first: 'Första sidan',
+      last: 'Sista sidan',
     },
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Betyg {0} av {1}',
     },
   },
 }
