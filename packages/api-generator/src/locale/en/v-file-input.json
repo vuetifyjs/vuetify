@@ -10,7 +10,6 @@
     "smallChips": "Changes display of selections to chips with the **small** property",
     "truncateLength": "The length of a filename before it is truncated with ellipsis",
     "value": "A single or array of [File objects](https://developer.mozilla.org/en-US/docs/Web/API/File).",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-file-input.json))",
     "counter": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-file-input.json))",
     "hint": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-file-input.json))",
     "persistentHint": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-file-input.json))",

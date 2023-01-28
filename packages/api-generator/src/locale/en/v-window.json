@@ -10,7 +10,6 @@
     "touch": "Provide a custom **left** and **right** function when swiped left or right.",
     "touchless": "Disable touch support.",
     "vertical": "Uses a vertical transition when changing windows.",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-window.json))",
     "direction": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-window.json))",
     "selectedClass": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-window.json))",
     "mandatory": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-window.json))"

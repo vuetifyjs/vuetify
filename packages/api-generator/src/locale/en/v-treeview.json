@@ -35,7 +35,6 @@
   },
   "slots": {
     "append": "Appends content after label",
-    "label": "Label content",
     "prepend": "Prepends content before label"
   },
   "events": {

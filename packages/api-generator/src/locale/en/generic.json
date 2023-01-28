@@ -1,10 +1,11 @@
 {
   "props": {
     "activeClass": "The class applied to the component when it is in an active state",
+    "appendIcon": "Creates a [v-icon](/api/v-icon/) component in the **append** slot",
     "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attachs to the root `v-app` component by default",
     "auto": "Centers list on selected element",
     "bgColor": "Applies specified color to the control's background. Used on components that also support the **color** prop. - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
-    "clearable": "Add input clear functionality, default icon is Material Design Icons **mdi-clear**",
+    "clearable": "Allows for the component to be cleared",
     "color": "Applies specified color to the control - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "contentClass": "Applies a custom class to the detached element. This is useful because the content is moved to the beginning of the `v-app` component (unless the **attach** prop is provided) and is not targetable by classes passed directly on the component",
     "disabled": "Removes the ability to click or target the component",
@@ -12,20 +13,24 @@
     "fullWidth": "Sets the component width to 100%",
     "height": "Sets the height for the component",
     "items": "An array of strings or objects used for automatically generating children components",
+    "label": "Sets the text of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "noDataText": "Text shown when no items are provided to the component",
+    "modelValue": "The v-model value of the component. If component supports the **multiple** prop, this defaults to an empty array",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
+    "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot",
     "size": "Sets the height and width of the component.",
     "tag": "Specify a custom tag used on the root element",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "trueValue": "Sets value for truthy state",
     "valueComparator": "Apply a custom comparison algorithm used for values",
+    "variant": "Applies a distinct style to the component",
     "width": "Sets the width for the component"
   },
   "slots": {
     "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",
     "append": "Adds an item inside the input and after input content",
     "default": "The default Vue slot.",
-    "label": "Replaces the default label",
+    "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "prepend": "Adds an item outside the input and before input content",
     "progress": "Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)"
   },

@@ -13,8 +13,7 @@
     "tickSize": "Controls the size of **ticks**",
     "trackColor": "Sets the track's color",
     "trackFillColor": "Sets the track's fill color",
-    "vertical": "Changes slider direction to vertical",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slider.json))"
+    "vertical": "Changes slider direction to vertical"
   },
   "slots": {
     "thumb-label": "Replaces the content inside the thumb label"

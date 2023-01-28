@@ -8,7 +8,7 @@
     "filter": "Displays a selection icon when selected",
     "filterIcon": "Change the default icon used for **filter** chips",
     "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component",
-    "label": "Removes circle edges",
+    "label": "Applies a medium size border radius",
     "link": "Explicitly define the chip as a link",
     "outlined": "Removes background and applies border and text color",
     "pill": "Remove `v-avatar` padding",
@@ -19,8 +19,7 @@
     "closable": "Adds remove button and then a chip can be closed",
     "prependAvatar": "Prepends a v-avatar component to the header",
     "prependIcon": "Adds an icon before the default slot content",
-    "ripple": "Applies the v-ripple directive",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-chip.json))"
+    "ripple": "Applies the v-ripple directive"
   },
   "events": {
     "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",

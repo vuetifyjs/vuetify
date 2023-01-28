@@ -17,7 +17,6 @@
     "color": "Applies specified color to the selected page button - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "ellipsis": "Text to show between page buttons when truncating the list",
     "showFirstLastPage": "Show buttons for going to first and last page",
-    "modelValue": "Current selected page",
     "activeColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-pagination.json))"
   },
   "events": {

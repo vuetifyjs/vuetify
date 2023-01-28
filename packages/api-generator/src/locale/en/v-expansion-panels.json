@@ -9,7 +9,6 @@
     "popout": "Makes the expansion-panel open with an popout style",
     "readonly": "Makes the entire expansion-panel read only.",
     "tile": "Removes the border-radius",
-    "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If the `multiple` prop (previously `expand` in 1.5.x) is used then it is an array of numbers where each entry corresponds to the index of the opened content.  The index order is not relevant.",
-    "variant": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-expansion-panels.json))"
+    "value": "Controls the opened/closed state of content in the expansion-panel. Corresponds to a zero-based index of the currently opened content. If the `multiple` prop (previously `expand` in 1.5.x) is used then it is an array of numbers where each entry corresponds to the index of the opened content.  The index order is not relevant."
   }
 }

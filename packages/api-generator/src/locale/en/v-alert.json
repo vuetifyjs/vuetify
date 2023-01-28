@@ -20,8 +20,7 @@
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "type": "Specify a **success**, **info**, **warning** or **error** alert. Uses the contextual color and has a pre-defined icon.",
     "model-value": "Controls whether the component is visible or hidden.",
-    "width": "Sets the width for the component.",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-alert.json))"
+    "width": "Sets the width for the component."
   },
   "slots": {
     "append": "Slot for icon at end of alert.",
