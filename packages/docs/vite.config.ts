@@ -27,18 +27,18 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode, ssrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   return {
     logLevel: 'info',
     resolve: {
-      alias: {
-        '@/': `${resolve('src')}/`,
-        'node-fetch': 'isomorphic-fetch',
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
-        vue: 'vue/dist/vue.esm-bundler.js',
-      },
+      alias: [
+        { find: '@', replacement: `${resolve('src')}/` },
+        { find: 'node-fetch', replacement: 'isomorphic-fetch' },
+        { find: 'vue-i18n', replacement: 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs' },
+        { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+      ],
     },
     define: {
       'process.env': {}, // This is so that 3rd party packages don't crap out
@@ -242,7 +242,7 @@ $&`), html)
     },
 
     ssr: {
-      noExternal: ['vue-i18n'],
+      noExternal: ['vue-i18n', '@vuelidate/core'],
     },
 
     server: {
