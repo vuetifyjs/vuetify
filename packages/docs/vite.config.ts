@@ -37,6 +37,7 @@ export default defineConfig(({ command, mode }) => {
         '@/': `${resolve('src')}/`,
         'node-fetch': 'isomorphic-fetch',
         'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
+        vue: 'vue/dist/vue.esm-bundler.js',
       },
     },
     define: {
