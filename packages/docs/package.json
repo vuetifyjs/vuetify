@@ -21,6 +21,8 @@
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
   "dependencies": {
+    "@vuelidate/core": "^2.0.0",
+    "@vuelidate/validators": "^2.0.0",
     "@vueuse/head": "~0.7.6",
     "algoliasearch": "^4.14.2",
     "cosmicjs": "^4.2.10",
@@ -31,6 +33,7 @@
     "prism-theme-vars": "^0.2.3",
     "prismjs": "^1.28.0",
     "roboto-fontface": "^0.10.0",
+    "vee-validate": "^4.7.3",
     "vue": "^3.2.38",
     "vue-gtag-next": "^1.14.0",
     "vue-i18n": "^9.2.2",
