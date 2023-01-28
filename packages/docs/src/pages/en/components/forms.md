@@ -64,9 +64,9 @@ When the **fast-fail** prop is set, validation will short-circuit after the firs
 
 #### Exposed properties
 
-The `v-form` component has a number of exposed properties that can be accessed by setting a **ref** on the component. A ref allows us to access internal methods on a component. You can find all of them on the API page, but some of the more commonly useful ones are `validate()`, `reset()`, and `resetValidation()`.
+The `v-form` component has a number of exposed properties that can be accessed by setting a **ref** on the component. A ref allows us to access internal methods on a component. You can find all of them on the API page, but some of the more commonly used ones are `validate()`, `reset()`, and `resetValidation()`.
 
-The difference between `reset()` and `resetValidation()` is that the form resets both input values and validation state, while the latter only resets validation state.
+The difference between `reset()` and `resetValidation()` is that the former resets both input values and validation state, while the latter only resets validation state.
 
 <example file="v-form/misc-exposed" />
 
