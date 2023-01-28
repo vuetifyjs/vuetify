@@ -175,7 +175,6 @@ export const VField = genericComponent<new <T>() => {
             duration,
             easing: standardEasing,
             direction: val ? 'normal' : 'reverse',
-            fill: 'both',
           }).finished.then(() => {
             el.style.removeProperty('visibility')
             targetEl.style.removeProperty('visibility')
