@@ -25,15 +25,15 @@ The following components are compatible with the layout system:
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 
-## Placing components
-
-By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
-
 <alert type="info">
 
   In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
 
 </alert>
+
+## Placing components
+
+By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
 <example file="application-layout/app-bar-first" />
 
