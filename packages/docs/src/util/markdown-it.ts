@@ -46,6 +46,7 @@ export const configureMarkdown = (md: MarkdownIt) => {
         microscope: '🔬',
         arrows_counterclockwise: '🔄',
         fire: '🔥',
+        test_tube: '🧪',
       },
     })
 
