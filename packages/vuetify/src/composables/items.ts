@@ -54,7 +54,7 @@ export const makeItemsProps = propsFactory({
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
-  const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue, title)
+  const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
@@ -97,7 +97,7 @@ export function useItems (props: ItemProps) {
   }
 
   function transformOut (value: InternalItem[]) {
-    return value.map(({ props }) => props.value)
+    return value.map(item => props.returnObject ? item.raw : item.value)
   }
 
   return { items, transformIn, transformOut }
