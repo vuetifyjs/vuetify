@@ -4,7 +4,7 @@ function addDay(num) {
 }
 
 export function creatEvents() {
-  const dateStr = '2023-01-26 00:43:00'
+  const dateStr = '2023-01-29 00:43:00'
   const eventStart = new Date(dateStr)
     .valueOf()
   const eventEnd = eventStart + (2 * 60 * 60 * 1000)
