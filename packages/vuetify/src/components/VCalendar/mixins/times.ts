@@ -17,12 +17,17 @@ export default Vue.extend({
     },
   },
 
-  data: () => ({
-    times: {
-      now: parseTimestamp('0000-00-00 00:00', true),
-      today: parseTimestamp('0000-00-00', true),
-    },
-  }),
+  data: () => {
+      const times = {
+        now: parseTimestamp('0000-00-00 00:00', true),
+        today: parseTimestamp('0000-00-00', true),
+      }
+
+    window.times = times
+    return {
+      times:times,
+    }
+  },
 
   computed: {
     parsedNow (): CalendarTimestamp | null {

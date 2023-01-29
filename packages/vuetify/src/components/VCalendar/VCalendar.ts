@@ -140,7 +140,6 @@ export default CalendarWithEvents.extend({
         default:
           throw new Error(this.type + ' is not a valid Calendar type')
       }
-
       return { component, start, end, maxDays, weekdays, categories }
     },
     eventWeekdays (): number[] {
@@ -210,7 +209,6 @@ export default CalendarWithEvents.extend({
       const mover = forward ? nextDay : prevDay
       const limit = forward ? DAYS_IN_MONTH_MAX : DAY_MIN
       let times = forward ? amount : -amount
-
       while (--times >= 0) {
         switch (this.type) {
           case 'month':

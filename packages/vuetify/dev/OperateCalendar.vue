@@ -134,7 +134,7 @@ import { creatEvents } from './util'
 export default {
   data: () => ({
     focus: '',
-    type: 'month',
+    type: 'week',
     typeToLabel: {
       month: 'Month',
       week: 'Week',
