@@ -11,7 +11,6 @@
     "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
-    "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
     "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-menu.json))"

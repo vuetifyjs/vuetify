@@ -1,9 +1,12 @@
 {
   "props": {
+    "active": "Controls the **active** state of the item. This is typically used to highlight the component",
     "activeClass": "The class applied to the component when it is in an active state",
-    "appendIcon": "Creates a [v-icon](/api/v-icon/) component in the **append** slot",
+    "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot",
     "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attachs to the root `v-app` component by default",
     "auto": "Centers list on selected element",
+    "appendAvatar": "Appends a [v-avatar](/components/avatars/) component after default content in the **append** slot",
+    "prependAvatar": "Prepends a [v-avatar](/components/avatars/) component in the **prepend** slot before default content",
     "bgColor": "Applies specified color to the control's background. Used on components that also support the **color** prop. - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "clearable": "Allows for the component to be cleared",
     "color": "Applies specified color to the control - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
@@ -17,14 +20,19 @@
     "noDataText": "Text shown when no items are provided to the component",
     "modelValue": "The v-model value of the component. If component supports the **multiple** prop, this defaults to an empty array",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
-    "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot",
+    "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot before default content",
     "size": "Sets the height and width of the component.",
     "tag": "Specify a custom tag used on the root element",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "trueValue": "Sets value for truthy state",
     "valueComparator": "Apply a custom comparison algorithm used for values",
     "variant": "Applies a distinct style to the component",
-    "width": "Sets the width for the component"
+    "width": "Sets the width for the component",
+    "mode": "Sets the transition mode (does not apply to transition-group). You can find more information on the Vue documentation [for transition modes](https://vuejs.org/v2/api/#transition).",
+    "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
+    "group": "Creates a `transition-group` component. [vue docs](https://vuejs.org/v2/api/#transition-group)",
+    "hideOnLeave": "Hides the leaving element (no exit animation)",
+    "leaveAbsolute": "Absolutely positions the leaving element (useful for [FLIP](https://aerotwist.com/blog/flip-your-animations/))"
   },
   "slots": {
     "activator": "When used, will activate the component when clicked (or hover for specific components). This manually stops the event propagation. Without this slot, if you open the component through its model, you will need to manually stop the event propagation",

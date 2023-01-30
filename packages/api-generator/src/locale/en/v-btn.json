@@ -1,15 +1,12 @@
 {
   "props": {
-    "appendIcon": "Adds an icon after the default slot content.",
     "block": "Expands the button to 100% of available space.",
     "flat": "Removes the button box shadow.",
     "icon": "Designates the button as icon. Button will become _round_ and applies the **text** prop.",
     "plain": "Removes the default background change applied when hovering over the button.",
-    "prependIcon": "Adds an icon before the default slot content.",
     "stacked": "Displays the button as a flex-column.",
     "text": "Makes the background transparent. When using the **color** prop, the color will be applied to the button text instead of the background.",
     "symbol": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-btn.json))",
-    "active": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-btn.json))",
     "ripple": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-btn.json))"
   },
   "events": {

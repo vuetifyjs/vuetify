@@ -14,11 +14,7 @@
     "pill": "Remove `v-avatar` padding",
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)",
     "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-chip.json))",
-    "appendAvatar": "Appends a v-avatar component to the header",
-    "appendIcon": "Adds an icon after the default slot content",
     "closable": "Adds remove button and then a chip can be closed",
-    "prependAvatar": "Prepends a v-avatar component to the header",
-    "prependIcon": "Adds an icon before the default slot content",
     "ripple": "Applies the v-ripple directive"
   },
   "events": {
