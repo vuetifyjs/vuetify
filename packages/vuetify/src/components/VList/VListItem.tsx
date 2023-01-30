@@ -103,6 +103,10 @@ export const VListItem = genericComponent<new () => {
 
   emits: {
     click: (e: MouseEvent | KeyboardEvent) => true,
+    'click:prependIcon': (e: MouseEvent | KeyboardEvent) => true,
+    'click:prependAvatar': (e: MouseEvent | KeyboardEvent) => true,
+    'click:appendIcon': (e: MouseEvent | KeyboardEvent) => true,
+    'click:appendAvatar': (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { attrs, slots, emit }) {
@@ -162,6 +166,27 @@ export const VListItem = genericComponent<new () => {
       props.value != null && select(!isSelected.value, e)
     }
 
+    function onPrependAvatarClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:prependAvatar', e)
+    }
+    
+    function onPrependIconClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:prependIcon', e)
+    }
+
+    function onAppendAvatarClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:appendAvatar', e)
+    }
+
+    function onAppendIconClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:appendIcon', e)
+    }
+
+
     function onKeyDown (e: KeyboardEvent) {
       if (e.key === 'Enter' || e.key === ' ') {
         e.preventDefault()
@@ -215,11 +240,11 @@ export const VListItem = genericComponent<new () => {
           { hasPrepend && (
             <div key="prepend" class="v-list-item__prepend">
               { props.prependAvatar && (
-                <VAvatar key="prepend-avatar" density={ props.density } image={ props.prependAvatar } />
+                <VAvatar key="prepend-avatar" density={ props.density } image={ props.prependAvatar } onClick={ onPrependAvatarClick } />
               ) }
 
               { props.prependIcon && (
-                <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } />
+                <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } onClick={ onPrependIconClick } />
               ) }
 
               { slots.prepend && (
@@ -285,11 +310,11 @@ export const VListItem = genericComponent<new () => {
               )}
 
               { props.appendIcon && (
-                <VIcon key="append-icon" density={ props.density } icon={ props.appendIcon } />
+                <VIcon key="append-icon" density={ props.density } icon={ props.appendIcon } onClick={ onAppendIconClick } />
               )}
 
               { props.appendAvatar && (
-                <VAvatar key="append-avatar" density={ props.density } image={ props.appendAvatar } />
+                <VAvatar key="append-avatar" density={ props.density } image={ props.appendAvatar } onClick={ onAppendAvatarClick } />
               )}
             </div>
           )}
