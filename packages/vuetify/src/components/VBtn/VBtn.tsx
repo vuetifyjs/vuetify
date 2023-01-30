@@ -191,7 +191,7 @@ export const VBtn = defineComponent({
               }}
             >
               <span class="v-btn__prepend">
-                { slots.prepend?.() ?? (<VIcon />) }
+                {slots.prepend?.() ?? (<VIcon size={ props.iconSize } />) }
               </span>
             </VDefaultsProvider>
           ) }
@@ -207,7 +207,7 @@ export const VBtn = defineComponent({
             >
               { slots.default?.() ?? (
                 hasIcon && (
-                  <VIcon key="icon" />
+                  <VIcon key="icon" size={ props.iconSize } />
                 )
               ) }
             </VDefaultsProvider>
@@ -223,7 +223,7 @@ export const VBtn = defineComponent({
               }}
             >
               <span class="v-btn__append">
-                { slots.append?.() ?? (<VIcon />) }
+                { slots.append?.() ?? (<VIcon size={ props.iconSize } />) }
               </span>
             </VDefaultsProvider>
           ) }

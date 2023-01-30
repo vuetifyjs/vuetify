@@ -5,8 +5,11 @@ import { convertToUnit, destructComputed, getCurrentInstanceName, includes, prop
 const predefinedSizes = ['x-small', 'small', 'default', 'large', 'x-large']
 
 export interface SizeProps {
-  size?: string | number
+  size?: number | string
+  iconSize?: number | string
 }
+
+type Prop = 'size' | 'iconSize'
 
 // Composables
 export const makeSizeProps = propsFactory({
@@ -14,21 +17,25 @@ export const makeSizeProps = propsFactory({
     type: [String, Number],
     default: 'default',
   },
+  iconSize: {
+    type: [String, Number],
+  },
 }, 'size')
 
 export function useSize (
   props: SizeProps,
+  prop: Prop = 'size',
   name = getCurrentInstanceName(),
 ) {
   return destructComputed(() => {
     let sizeClasses
     let sizeStyles
-    if (includes(predefinedSizes, props.size)) {
-      sizeClasses = `${name}--size-${props.size}`
-    } else if (props.size) {
+    if (includes(predefinedSizes, props[prop])) {
+      sizeClasses = `${name}--size-${props[prop]}`
+    } else if (props[prop]) {
       sizeStyles = {
-        width: convertToUnit(props.size),
-        height: convertToUnit(props.size),
+        width: convertToUnit(props[prop]),
+        height: convertToUnit(props[prop]),
       }
     }
     return { sizeClasses, sizeStyles }

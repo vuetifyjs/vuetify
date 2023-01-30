@@ -3,6 +3,7 @@
 import { VBtn } from '../VBtn'
 import { generate, gridOn } from '@/../cypress/templates'
 import { createRouter, createWebHistory } from 'vue-router'
+import { VIcon } from '@/components/VIcon'
 
 const anchor = {
   href: '#my-anchor',
@@ -83,6 +84,30 @@ describe('VBtn', () => {
       cy.mount(<VBtn icon><span style="font-size: 1.5rem;">🐻</span></VBtn>)
         .get('button')
         .should('have.text', '🐻')
+    })
+
+    it('renders an icon as default slot and pass the iconSize prop to it', () => {
+      cy.mount(<VBtn icon="$ratingEmpty" iconSize={100}></VBtn>)
+        .get('.v-btn__content > i')
+        .should('have.css', 'font-size', '100px')
+    })
+
+    it('renders a VIcon with the correct size', () => {
+      cy.mount(<VBtn><VIcon size={58}>mdi-heart</VIcon></VBtn>)
+        .get('.v-btn__content > i')
+        .should('have.css', 'font-size', '58px')
+    })
+
+    it('renders a prepended icon and pass the size prop to it', () => {
+      cy.mount(<VBtn prependIcon="$ratingEmpty" iconSize={210}>Click Me</VBtn>)
+        .get('.mdi-star-outline')
+        .should('have.css', 'font-size', '210px')
+    })
+
+    it('renders an appended icon and pass the size prop to it', () => {
+      cy.mount(<VBtn iconSize={200} appendIcon="$ratingEmpty">Click Me</VBtn>)
+        .get('.mdi-star-outline')
+        .should('have.css', 'font-size', '200px')
     })
   })
 
