@@ -133,7 +133,6 @@ export const VFileInput = defineComponent({
 
       if (hasModelReset && inputRef.value) {
         inputRef.value.value = ''
-        console.log('cleared')
       }
     })
 
