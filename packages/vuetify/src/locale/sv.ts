@@ -2,18 +2,18 @@ export default {
   badge: 'Bricka',
   close: 'Stäng',
   dataIterator: {
-    noResultsText: 'Inga poster funna',
+    noResultsText: 'Hittade inga poster',
     loadingText: 'Laddar data...',
   },
   dataTable: {
     itemsPerPageText: 'Rader per sida:',
     ariaLabel: {
-      sortDescending: 'Sorterat fallande.',
-      sortAscending: 'Sorterat stigande.',
+      sortDescending: 'Fallande sortering.',
+      sortAscending: 'Stigande sortering.',
       sortNone: 'Osorterat.',
       activateNone: 'Aktivera för att ta bort sortering.',
-      activateDescending: 'Aktivera för sortering fallande.',
-      activateAscending: 'Aktivera för sortering stigande.',
+      activateDescending: 'Aktivera för att sortera fallande.',
+      activateAscending: 'Aktivera för att sortera stigande.',
     },
     sortBy: 'Sortera efter',
   },
@@ -38,14 +38,14 @@ export default {
     prev: 'Föregående vy',
     next: 'Nästa vy',
     ariaLabel: {
-      delimiter: 'Karusell vy {0} av {1}',
+      delimiter: 'Karusellvy {0} av {1}',
     },
   },
   calendar: {
     moreEvents: '{0} fler',
   },
   input: {
-    clear: 'Clear {0}',
+    clear: 'Rensa {0}',
     prependAction: '{0} prepended action',
     appendAction: '{0} appended action',
   },
