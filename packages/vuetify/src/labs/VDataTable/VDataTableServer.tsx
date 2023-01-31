@@ -5,14 +5,16 @@ import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 
 // Composables
+import { provideDefaults } from '@/composables/defaults'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { createExpanded, makeDataTableExpandProps } from './composables/expand'
+import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
-import { createSort, makeDataTableSortProps } from './composables/sort'
+import { useOptions } from './composables/options'
 import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
 import { createSelection, makeDataTableSelectProps } from './composables/select'
-import { useOptions } from './composables/options'
-import { provideDefaults } from '@/composables/defaults'
+import { createSort, makeDataTableSortProps } from './composables/sort'
 
 // Utilities
 import { provide, toRef } from 'vue'
@@ -21,8 +23,6 @@ import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
 
 export const VDataTableServer = defineComponent({
   name: 'VDataTableServer',
