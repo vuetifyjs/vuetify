@@ -25,7 +25,7 @@ import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-const locations = ['start', 'end', 'left', 'right', 'bottom'] as const
+const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
 export const VNavigationDrawer = defineComponent({
   name: 'VNavigationDrawer',
