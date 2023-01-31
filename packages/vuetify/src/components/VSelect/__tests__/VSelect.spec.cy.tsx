@@ -239,6 +239,28 @@ describe('VSelect', () => {
       .get('.v-select--active-menu').should('have.length', 0)
   })
 
+  // issue #16442
+  it('should allow null as legit itemValue', () => {
+    const items = [
+      { name: 'Default Language', code: null },
+      { code: 'en-US', name: 'English' },
+      { code: 'de-DE', name: 'German' },
+    ]
+
+    const selectedItems = null
+
+    cy.mount(() => (
+      <VSelect
+        items={items}
+        modelValue={selectedItems}
+        itemTitle="name"
+        itemValue="code"
+      />
+    ))
+
+    cy.get('.v-select__selection').eq(0).invoke('text').should('equal', 'Default Language')
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ref(['Item 1',
