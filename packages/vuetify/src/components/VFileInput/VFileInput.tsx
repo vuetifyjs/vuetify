@@ -124,19 +124,16 @@ export const VFileInput = defineComponent({
       nextTick(() => {
         model.value = []
 
-        if (inputRef?.value) {
-          inputRef.value.value = ''
-        }
-
         callEvent(props['onClick:clear'], e)
       })
     }
 
-    watch(model, updatedModel => {
-      const hasModelReset = !Array.isArray(updatedModel) || updatedModel.length === 0
+    watch(model, newValue => {
+      const hasModelReset = !Array.isArray(newValue) || !newValue.length
 
       if (hasModelReset && inputRef.value) {
         inputRef.value.value = ''
+        console.log('cleared')
       }
     })
 
