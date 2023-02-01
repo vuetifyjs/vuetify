@@ -6,9 +6,11 @@ import { VVirtualScrollItem } from './VVirtualScrollItem'
 
 // Composables
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { useDisplay } from '@/composables/display'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref } from 'vue'
+import { computed, onMounted, ref, watchEffect } from 'vue'
 import {
   convertToUnit,
   createRange,
@@ -44,10 +46,6 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       default: () => ([]),
     },
     itemHeight: [Number, String],
-    visibleItems: {
-      type: [Number, String],
-      default: 30,
-    },
 
     ...makeDimensionProps(),
   },
@@ -61,12 +59,20 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         baseItemHeight.value = val
       },
     })
-    const visibleItems = computed(() => parseInt(props.visibleItems, 10))
     const rootEl = ref<HTMLDivElement>()
+    const { resizeRef, contentRect } = useResizeObserver()
+    watchEffect(() => {
+      resizeRef.value = rootEl.value
+    })
+    const display = useDisplay()
 
     const sizes = createRange(props.items.length).map(() => itemHeight.value)
+    const visibleItems = computed(() => Math.max(12,
+      Math.ceil(((contentRect.value?.height ?? display.height.value) / itemHeight.value) * 1.6666 + 1)
+    ))
 
     function handleItemResize (index: number, height: number) {
+      itemHeight.value = Math.max(itemHeight.value, height)
       sizes[index] = height
     }
 
@@ -96,14 +102,15 @@ export const VVirtualScroll = genericComponent<new <T>() => {
 
     let lastScrollTop = 0
     function handleScroll () {
-      if (!rootEl.value) return
+      if (!rootEl.value || !contentRect.value) return
 
+      const height = contentRect.value.height
       const scrollTop = rootEl.value.scrollTop
       const direction = scrollTop < lastScrollTop ? UP : DOWN
 
-      const midPointIndex = calculateMidPointIndex(scrollTop)
+      const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
       const buffer = Math.round(visibleItems.value / 3)
-      if (direction === UP && midPointIndex <= first.value) {
+      if (direction === UP && midPointIndex <= first.value + (buffer * 2) - 1) {
         first.value = Math.max(midPointIndex - buffer, 0)
       } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2) - 1) {
         first.value = Math.min(Math.max(0, midPointIndex - buffer), props.items.length - visibleItems.value)
