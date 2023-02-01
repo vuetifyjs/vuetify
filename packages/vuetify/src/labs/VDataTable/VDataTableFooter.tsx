@@ -90,13 +90,13 @@ export const VDataTableFooter = defineComponent({
             icon={ props.nextIcon }
             variant="plain"
             onClick={ () => page.value = Math.min(pageCount.value, page.value + 1) }
-            disabled={ page.value === pageCount.value }
+            disabled={ page.value >= pageCount.value }
           />
           <VBtn
             icon={ props.lastIcon }
             variant="plain"
             onClick={ () => page.value = pageCount.value }
-            disabled={ page.value === pageCount.value }
+            disabled={ page.value >= pageCount.value }
           />
         </div>
       </div>
