@@ -213,7 +213,7 @@ export const VTextField = genericComponent<new () => {
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         name={ props.name }
-                        placeholder={ props.placeholder }
+                        placeholder={ isDirty.value ? '' : props.placeholder }
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
