@@ -55,9 +55,6 @@ Vuetify is a MIT licensed project that is developed and maintained full-time by 
   <li>
     <a href="https://paypal.me/vuetify">Make a one-time payment with Paypal</a>
   </li>
-  <li>
-    <a href="https://vuetifyjs.com/introduction/support/?ref=github">Book time with the Team</a>
-  </li>
 </ul>
 
 ### What's the difference between GitHub Sponsors, Patreon, and OpenCollective?
@@ -162,7 +159,6 @@ Vuetify is a Vue UI Library with beautifully handcrafted Components using the [M
 - **18 months** Long-term support for [Major releases](https://vuetifyjs.com/introduction/long-term-support/)
 - Extensive customization options with **SASS/SCSS** and [Presets](https://vuetifyjs.com/features/presets/)
 - Responsive support down to _320px_ width
-- [Direct support](https://vuetifyjs.com/introduction/support/) from Vuetify core team
 
 ###### Browser Support
 
