@@ -14,6 +14,8 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { InternalItem } from '@/composables/items'
+import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from '../VDataTable/composables/group'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const VDataIterator = defineComponent({
   name: 'VDataIterator',
@@ -25,12 +27,14 @@ export const VDataIterator = defineComponent({
     ...makeDataTableSortProps(),
     ...makeDataTablePaginateProps(),
     ...makeDataTableExpandProps(),
+    ...makeDataTableGroupProps(),
     ...makeFilterProps(),
     search: String,
   },
 
   emits: {
     'update:modelValue': (value: any[]) => true,
+    'update:groupBy': (value: any) => true,
     'update:page': (value: number) => true,
     'update:itemsPerPage': (value: number) => true,
     'update:sortBy': (value: any) => true,
@@ -39,12 +43,15 @@ export const VDataIterator = defineComponent({
   },
 
   setup (props, { slots }) {
+    const groupBy = useProxiedModel(props, 'groupBy')
+
     const { items } = useItems(props)
 
     const { filteredItems } = useFilter<InternalItem>(props, items, toRef(props, 'search'))
 
     const { sortBy, toggleSort } = createSort(props)
-    const { sortedItems } = useSortedItems(props, filteredItems, sortBy)
+    const { sortByWithGroups, opened, isGroupOpen, toggleGroup } = createGroupBy(props, groupBy, sortBy)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
 
     const {
       page,
@@ -57,8 +64,9 @@ export const VDataIterator = defineComponent({
       setPage,
       setItemsPerPage,
     } = createPagination(props, sortedItems)
-
     const { paginatedItems } = usePaginatedItems(sortedItems, startIndex, stopIndex, itemsPerPage)
+
+    const { flatItems } = useGroupedItems(paginatedItems, groupBy, opened)
 
     const { isSelected, select, selectAll, toggleSelect } = createSelection(props, items)
 
@@ -71,6 +79,7 @@ export const VDataIterator = defineComponent({
       pageCount,
       startIndex,
       stopIndex,
+      groupBy,
     })
 
     const slotProps = computed(() => ({
@@ -91,6 +100,8 @@ export const VDataIterator = defineComponent({
       toggleSelect,
       isExpanded,
       toggleExpand,
+      isGroupOpen,
+      toggleGroup,
     }))
 
     useRender(() => (
@@ -99,7 +110,7 @@ export const VDataIterator = defineComponent({
         { !paginatedItems.value.length
           ? slots['no-data']?.()
           : slots.default
-            ? slots.default({ items: paginatedItems.value, ...slotProps.value })
+            ? slots.default({ items: paginatedItems.value, groupedItems: flatItems.value, ...slotProps.value })
             : undefined
         }
         { slots.footer?.(slotProps.value) }

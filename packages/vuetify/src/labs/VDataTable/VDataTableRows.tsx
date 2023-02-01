@@ -13,7 +13,7 @@ import { useGroupBy } from './composables/group'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DataTableItem, GroupHeaderItem, InternalDataTableHeader, InternalDataTableItem } from './types'
+import type { DataTableItem, GroupHeaderItem, InternalDataTableHeader } from './types'
 import type { PropType } from 'vue'
 
 type GroupHeaderSlot = {

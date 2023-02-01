@@ -18,6 +18,10 @@ export const makeDataTableSortProps = propsFactory({
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
+  locale: {
+    type: String,
+    default: 'en',
+  },
 }, 'v-data-table-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
@@ -87,14 +91,14 @@ export function useSort () {
 }
 
 export function useSortedItems <T extends InternalItem = InternalItem> (
-  props: { customKeySort?: Record<string, DataTableCompareFunction> },
+  props: { customKeySort?: Record<string, DataTableCompareFunction>, locale: string },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
 ) {
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, 'en', props.customKeySort)
+    return sortItems(items.value, sortBy.value, props.locale, props.customKeySort)
   })
 
   return { sortedItems }
@@ -111,7 +115,7 @@ export function sortItems<T extends InternalItem> (
   return [...items].sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
       const sortKey = sortByItems[i].key
-      const sortOrder = sortByItems[i].order
+      const sortOrder = sortByItems[i].order ?? 'asc'
 
       if (sortOrder === false) continue
 

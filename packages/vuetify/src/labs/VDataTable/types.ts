@@ -31,13 +31,11 @@ export type InternalDataTableHeader = DataTableHeader & {
 
 export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }
 
-export type GroupHeaderItem = {
+export type GroupHeaderItem<T extends InternalItem = DataTableItem> = {
   type: 'group-header'
   id: string
   key: string
   value: string
   depth: number
-  items: (GroupHeaderItem | DataTableItem)[]
+  items: (GroupHeaderItem<T> | T)[]
 }
-
-export type InternalDataTableItem = DataTableItem | GroupHeaderItem
