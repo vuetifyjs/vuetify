@@ -179,6 +179,10 @@ export const VAutocomplete = genericComponent<new <
       } else if (e.key === 'ArrowUp') {
         listRef.value?.focus('prev')
       }
+
+      if (e.key === 'Backspace' && search.value === '') {
+        model.value = model.value.slice(0, -1)
+      }
     }
 
     function onInput (e: InputEvent) {
@@ -195,6 +199,12 @@ export const VAutocomplete = genericComponent<new <
 
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
+        vTextFieldRef.value?.focus()
+      }
+    }
+
+    function onListKeydown (e: KeyboardEvent) {
+      if (/^.$/u.test(e.key)) {
         vTextFieldRef.value?.focus()
       }
     }
@@ -218,7 +228,7 @@ export const VAutocomplete = genericComponent<new <
 
         isSelecting.value = true
 
-        if (!slots.selection) {
+        if (!slots.selection && !props.chips) {
           search.value = item.title
         }
 
@@ -232,7 +242,7 @@ export const VAutocomplete = genericComponent<new <
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
+        search.value = props.chips || props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -266,10 +276,10 @@ export const VAutocomplete = genericComponent<new <
           onInput={ onInput }
           class={[
             'v-autocomplete',
+            `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
-              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-autocomplete--selection-slot': !!slots.selection,
             },
           ]}
@@ -304,6 +314,7 @@ export const VAutocomplete = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onKeydown={ onListKeydown }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
@@ -363,6 +374,7 @@ export const VAutocomplete = genericComponent<new <
                             VChip: {
                               closable: props.closableChips,
                               size: 'small',
+                              density: 'comfortable',
                               text: item.title,
                             },
                           }}

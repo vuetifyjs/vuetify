@@ -85,15 +85,11 @@
       input
         transition: none
 
-    .v-field--dirty:not(.v-field--focused)
-      input
-        opacity: 0
-
     .v-field--focused
       .v-autocomplete__selection-text
         opacity: 0
 
-  &--selection-slot
+  &--selection-slot,&--chips.v-input--dirty
     &.v-text-field input
       position: relative
       padding-inline-start: 0
