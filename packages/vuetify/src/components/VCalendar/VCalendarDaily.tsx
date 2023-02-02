@@ -1,9 +1,9 @@
 import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { convertToUnit } from '@/util'
+import { convertToUnit, defineComponent } from '@/util'
 import type { ComputedRef } from 'vue'
-import { computed, defineComponent, nextTick, onMounted, ref } from 'vue'
+import { computed, nextTick, onMounted, ref } from 'vue'
 import { VBtn } from '../VBtn'
 import { makeBaseProps, makeEventsProps, makeIntervalProps, makeTimesProps, makeWeeksProps } from './composables/props'
 import { useBaseCalendar } from './composables/base'
@@ -59,7 +59,7 @@ export const VCalendarDaily = defineComponent({
 
     let scrollPush = 0
 
-    const classes: ComputedRef<object> = computed(() => ({'v-calendar-daily': true, ...themeClasses}))
+    const classes: ComputedRef<object> = computed(() => ({ 'v-calendar-daily': true, ...themeClasses }))
 
     const getScrollPush = (): number => {
       const scrollArea = ref(null) as unknown as HTMLElement
@@ -138,7 +138,7 @@ export const VCalendarDaily = defineComponent({
     })
     // Methods
     const showIntervalLabelDefault = (interval: CalendarTimestamp): boolean => {
-      const first: CalendarTimestamp = intervals.value[ 0 ][ 0 ]
+      const first: CalendarTimestamp = intervals.value[0][0]
       const isFirst: boolean = first.hour === interval.hour && first.minute === interval.minute
       return !isFirst
     }
@@ -154,7 +154,7 @@ export const VCalendarDaily = defineComponent({
       const touchEvent: TouchEvent = e as TouchEvent
       const mouseEvent: MouseEvent = e as MouseEvent
       const touches: TouchList = touchEvent.changedTouches || touchEvent.touches
-      const clientY: number = touches && touches[ 0 ] ? touches[ 0 ].clientY : mouseEvent.clientY
+      const clientY: number = touches && touches[0] ? touches[0].clientY : mouseEvent.clientY
       const addIntervals: number = (clientY - bounds.top) / parsedIntervalHeight.value
       const addMinutes: number = Math.floor(addIntervals * parsedIntervalMinutes.value)
       const minutes: number = baseMinutes + addMinutes
@@ -289,8 +289,8 @@ export const VCalendarDaily = defineComponent({
                         return (
                           <div
                             class="v-calendar-daily__interval"
-                            key = { interval.time }
-                            style = {`height: ${convertToUnit(props.intervalHeight)}`}
+                            key={ interval.time }
+                            style={`height: ${convertToUnit(props.intervalHeight)}`}
                           >
                             <div class="v-calendar-daily__interval-text">
                               { (props.showIntervalLabel || showIntervalLabelDefault)(interval)
@@ -307,7 +307,7 @@ export const VCalendarDaily = defineComponent({
                             class={['v-calendar-daily__day', getRelativeClasses(day)]}
                             // TODO: On
                           >
-                            { intervals.value[index].map(interval => 
+                            { intervals.value[index].map(interval =>
                               (
                                 <div
                                   key={interval.time}

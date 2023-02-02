@@ -3,7 +3,7 @@
 import './withEvents.sass'
 import { useLocale } from '@/composables/locale'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { 
+import {
   makeBaseProps,
   makeCalendarProps,
   makeCategoryProps,
@@ -18,17 +18,58 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 // import { computed, toRef } from 'vue'
-import { genericComponent, MakeSlots } from '@/util'
+import type { MakeSlots } from '@/util'
+import { escapeHTML, genericComponent } from '@/util'
 
 // Types1
-import { Component, computed, onMounted, onUpdated, ref, watch } from 'vue'
-import type { ComputedRef } from 'vue'
+import { computed, onMounted, onUpdated, ref, watch } from 'vue'
+import type { Component, ComputedRef, VNode } from 'vue'
 import { useTimes } from './composables/times'
-import { CalendarFormatter, CalendarTimestamp, copyTimestamp, DAYS_IN_MONTH_MAX, DAYS_IN_WEEK, DAY_MIN, getEndOfMonth, getStartOfMonth, nextDay, parseTimestamp, prevDay, relativeDays, timestampToDate, updateFormatted, updateRelative, updateWeekday, validateTimestamp } from '@/composables/calendar/timestamp'
+import {
+  CalendarFormatter,
+  copyTimestamp,
+  DAY_MIN,
+  DAYS_IN_MONTH_MAX,
+  DAYS_IN_WEEK,
+  diffMinutes,
+  getDayIdentifier,
+  getEndOfMonth,
+  getStartOfMonth,
+  nextDay,
+  parseTimestamp,
+  prevDay,
+  relativeDays,
+  timestampToDate,
+  updateFormatted,
+  updateRelative,
+  updateWeekday,
+  validateTimestamp,
+} from '@/composables/calendar/timestamp'
+
 import { getParsedCategories } from './composables/parser'
 import { VCalendarWeekly } from './VCalendarWeekly'
 import { VCalendarMonthly } from './VCalendarMonthly'
 import { VCalendarDaily } from './VCalendarDaily'
+
+// Events
+import type {
+  CalendarCategory,
+  CalendarDayBodySlotScope,
+  CalendarDaySlotScope,
+  CalendarEvent,
+
+  CalendarEventCategoryFunction,
+  CalendarEventColorFunction,
+  CalendarEventNameFunction,
+  CalendarEventOverlapMode,
+  CalendarEventParsed,
+  CalendarEventTimedFunction,
+  CalendarEventVisual, CalendarTimestamp,
+} from '@/composables/calendar/timestamp'
+
+// import './calendar-with-events.sass'
+import { CalendarEventOverlapModes } from './composables/modes'
+import { doParseEvent, isEventHiddenOn, isEventOn, isEventStart } from './composables/events'
 
 // Types
 interface VCalendarRenderProps {
@@ -39,32 +80,6 @@ interface VCalendarRenderProps {
   weekdays: number[]
   categories: CalendarCategory[]
 }
-
-// Events
-import {
-  CalendarDayBodySlotScope,
-  CalendarDaySlotScope,
-  CalendarEventCategoryFunction,
-  CalendarEventColorFunction,
-  CalendarEventNameFunction,
-  CalendarEventOverlapMode,
-  CalendarEventTimedFunction,
-  diffMinutes,
-  getDayIdentifier,
-} from '@/composables/calendar/timestamp'
-
-import type {
-  CalendarCategory,
-  CalendarEvent,
-  CalendarEventParsed,
-  CalendarEventVisual,
-} from '@/composables/calendar/timestamp'
-
-import { escapeHTML } from '@/util'
-import type { VNode } from 'vue'
-// import './calendar-with-events.sass'
-import { CalendarEventOverlapModes } from './composables/modes'
-import { doParseEvent, isEventHiddenOn, isEventOn, isEventStart } from './composables/events'
 
 // Types
 type VEventGetter<D> = (day: D) => CalendarEventParsed[]
@@ -99,7 +114,7 @@ const MINUTES_IN_DAY = 1440
 
 export const VCalendar = genericComponent<new <T>() => {
   $props: {
-  },
+  }
   $slots: MakeSlots<{}>
 }>()({
   name: 'VCalendar',
@@ -113,10 +128,10 @@ export const VCalendar = genericComponent<new <T>() => {
     ...makeThemeProps(),
     ...makeTimesProps(),
     ...makeWeeksProps(),
-    modelValue: null
+    modelValue: null,
   },
 
-  setup(props, { attrs, slots, emit, expose }) {
+  setup (props, { attrs, slots, emit, expose }) {
     const { current, t } = useLocale()
     const { themeClasses } = provideTheme(props)
     const {
@@ -132,14 +147,14 @@ export const VCalendar = genericComponent<new <T>() => {
       parsedEnd,
       getStartOfWeek,
       getEndOfWeek,
-      getFormatter
+      getFormatter,
     } = useBaseCalendar(props, current.value, null, times, null)
-    
+
     const model = useProxiedModel(props, 'modelValue')
-    
+
     const lastStart = ref({})
     const lastEnd = ref({})
-    
+
     // computeds
     const parsedValue: ComputedRef<CalendarTimestamp> = computed(() => {
       return (validateTimestamp(model.value)
@@ -154,7 +169,7 @@ export const VCalendar = genericComponent<new <T>() => {
     const parsedCategoryDays: ComputedRef<number> = computed(() => {
       return parseInt(props.categoryDays) || 1
     })
-    
+
     const renderProps: ComputedRef<VCalendarRenderProps> = computed(() => {
       const around = parsedValue.value
       let component: any = null
@@ -280,7 +295,7 @@ export const VCalendar = genericComponent<new <T>() => {
       }
       return categories
     }
-    
+
     const move = (amount = 1): void => {
       const moved = copyTimestamp(parsedValue.value)
       const forward = amount > 0
@@ -318,7 +333,7 @@ export const VCalendar = genericComponent<new <T>() => {
       } else if (typeof props.modelValue === 'number') {
         emit('input', timestampToDate(moved).getTime())
       } else {
-      emit('input', moved.date)
+        emit('input', moved.date)
       }
 
       emit('moved', moved)
@@ -365,13 +380,13 @@ export const VCalendar = genericComponent<new <T>() => {
     // })
 
     // Methods
-    onMounted (() => {
+    onMounted(() => {
       updateTimes()
       setPresent()
       updateEventVisibility()
     })
 
-    onUpdated (() => {
+    onUpdated(() => {
       window.requestAnimationFrame(updateEventVisibility)
     })
 
@@ -404,13 +419,13 @@ export const VCalendar = genericComponent<new <T>() => {
     const eventTimedFunction: ComputedRef<CalendarEventTimedFunction> = computed(() => {
       return typeof props.eventTimed === 'function'
         ? props.eventTimed
-        : event => !!event[ props.eventTimed as string ]
+        : event => !!event[props.eventTimed as string]
     })
 
     const eventCategoryFunction: ComputedRef<CalendarEventCategoryFunction> = computed(() => {
       return typeof props.eventCategory === 'function'
         ? props.eventCategory
-        : event => event[ props.eventCategory as string ]
+        : event => event[props.eventCategory as string]
     })
 
     const eventTextColorFunction: ComputedRef<CalendarEventColorFunction> = computed(() => {
@@ -422,13 +437,13 @@ export const VCalendar = genericComponent<new <T>() => {
     const eventNameFunction: ComputedRef<CalendarEventNameFunction> = computed(() => {
       return typeof props.eventName === 'function'
         ? props.eventName
-        : (event) => escapeHTML(event.input[ props.eventName as string ] as string || '')
+        : event => escapeHTML(event.input[props.eventName as string] as string || '')
     })
 
     const eventModeFunction: ComputedRef<CalendarEventOverlapMode> = computed(() => {
       return typeof props.eventOverlapMode === 'function'
         ? props.eventOverlapMode
-        : CalendarEventOverlapModes[ props.eventOverlapMode ]
+        : CalendarEventOverlapModes[props.eventOverlapMode]
     })
 
     const eventWeekdays: ComputedRef<number[]> = computed(() => {
@@ -477,16 +492,16 @@ export const VCalendar = genericComponent<new <T>() => {
         const date = el.getAttribute('data-date')
         if (el.parentElement && date) {
           if (!(date in eventsMap)) {
-            eventsMap[ date ] = {
+            eventsMap[date] = {
               parent: el.parentElement,
               more: null,
               events: [],
             }
           }
           if (el.getAttribute('data-more')) {
-            eventsMap[ date ].more = el
+            eventsMap[date].more = el
           } else {
-            eventsMap[ date ].events.push(el)
+            eventsMap[date].events.push(el)
             el.style.display = ''
           }
         }
@@ -503,7 +518,7 @@ export const VCalendar = genericComponent<new <T>() => {
       const eventsMap = getEventsMap()
 
       for (const date in eventsMap) {
-        const { parent, events, more } = eventsMap[ date ]
+        const { parent, events, more } = eventsMap[date]
         if (!more) {
           break
         }
@@ -517,13 +532,13 @@ export const VCalendar = genericComponent<new <T>() => {
         let hidden = 0
 
         for (let i = 0; i <= last; i++) {
-          const bottom = eventsSorted[ i ].bottom
+          const bottom = eventsSorted[i].bottom
           const hide = i === last
             ? (bottom > parentBounds.bottom)
             : (bottom + props.eventHeight > parentBounds.bottom)
 
           if (hide) {
-            eventsSorted[ i ].event.style.display = 'none'
+            eventsSorted[i].event.style.display = 'none'
             hidden++
           }
         }
@@ -549,23 +564,23 @@ export const VCalendar = genericComponent<new <T>() => {
       const background = eventColorFunction(event.input)
       const overlapsNoon = event.start.hour < 12 && event.end.hour >= 12
       const singline = diffMinutes(event.start, event.end) <= parsedEventOverlapThreshold.value
-      const timeSummary = () => `${ formatTime(event.start, overlapsNoon) } - ${ formatTime(event.end, true) }`
+      const timeSummary = () => `${formatTime(event.start, overlapsNoon)} - ${formatTime(event.end, true)}`
       const eventSummary = () => {
         const name = eventNameFunction.value(event, timedEvent)
         if (event.start.hasTime) {
           if (timedEvent) {
             const time = timeSummary()
-            const delimiter = singline ? ', ' : ( <br /> )
+            const delimiter = singline ? ', ' : (<br />)
 
-            return ( <span class="v-event-summary"><strong>{ name }</strong>{ delimiter }{ time }</span> )
+            return (<span class="v-event-summary"><strong>{ name }</strong>{ delimiter }{ time }</span>)
           } else {
             const time = formatTime(event.start, true)
 
-            return ( <span class="v-event-summary"><strong>{ time }</strong> { name }</span> )
+            return (<span class="v-event-summary"><strong>{ time }</strong> { name }</span>)
           }
         }
 
-        return ( <span>{ name }</span> )
+        return (<span>{ name }</span>)
       }
 
       const scope = {
@@ -580,7 +595,7 @@ export const VCalendar = genericComponent<new <T>() => {
       }
 
       return (
-        <div {...data} style={{color: text, background }}>{ slot ? slot(scope) : genName( eventSummary() ) }</div>
+        <div {...data} style={{ color: text, background }}>{ slot ? slot(scope) : genName(eventSummary()) }</div>
       )
       // return this.$createElement('div',
       //   this.setTextColor(text,
@@ -607,7 +622,7 @@ export const VCalendar = genericComponent<new <T>() => {
 
       if (!categoryMode.value && week) {
         for (let i = day.index + 1; i < week.length; i++) {
-          const weekdayIdentifier = getDayIdentifier(week[ i ])
+          const weekdayIdentifier = getDayIdentifier(week[i])
           if (event.endIdentifier >= weekdayIdentifier) {
             width += WIDTH_FULL
             end = end || weekdayIdentifier === event.endIdentifier
@@ -626,9 +641,9 @@ export const VCalendar = genericComponent<new <T>() => {
           'v-event-end': end,
         },
         style: {
-          height: `${ props.eventHeight }px`,
-          width: `${ width }%`,
-          'margin-bottom': `${ props.eventMarginBottom }px`,
+          height: `${props.eventHeight}px`,
+          width: `${width}%`,
+          'margin-bottom': `${props.eventMarginBottom}px`,
         },
         'data-date': day.date,
         key: event.index,
@@ -652,10 +667,10 @@ export const VCalendar = genericComponent<new <T>() => {
       return genEvent(event, scope, true, {
         class: 'v-event-timed',
         style: {
-          top: `${ top }px`,
-          height: `${ height }px`,
-          left: `${ left }%`,
-          width: `${ width }%`,
+          top: `${top}px`,
+          height: `${height}px`,
+          left: `${left}%`,
+          width: `${width}%`,
         },
       })
     }
@@ -670,12 +685,12 @@ export const VCalendar = genericComponent<new <T>() => {
     const genMore = (day: CalendarDaySlotScope): VNode => {
       return (
         <div
-          class={['v-event-more', 'pl-1', {'v-outside': day.outside}]}
+          class={['v-event-more', 'pl-1', { 'v-outside': day.outside }]}
           data-date={ day.date }
           data-more={ 1 }
-          v-ripple={ props.eventRipple ?? true }
+          // v-ripple={ props.eventRipple ?? true }
           // onClick
-          style={`display: none; height: ${ props.eventHeight }px; margin-bottom: ${ props.eventMarginBottom }px`}
+          style={`display: none; height: ${props.eventHeight}px; margin-bottom: ${props.eventMarginBottom}px`}
           ref="events"
         >
         </div>
@@ -702,7 +717,7 @@ export const VCalendar = genericComponent<new <T>() => {
 
     const getEventsForDay = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
       const identifier = getDayIdentifier(day)
-      const firstWeekday = eventWeekdays.value[ 0 ]
+      const firstWeekday = eventWeekdays.value[0]
 
       return parsedEvents.value.filter(
         event => isEventStart(event, day, identifier, firstWeekday)
@@ -711,7 +726,7 @@ export const VCalendar = genericComponent<new <T>() => {
 
     const getEventsForDayAll = (day: CalendarDaySlotScope): CalendarEventParsed[] => {
       const identifier = getDayIdentifier(day)
-      const firstWeekday = eventWeekdays.value[ 0 ]
+      const firstWeekday = eventWeekdays.value[0]
 
       return parsedEvents.value.filter(
         event => event.allDay &&
@@ -736,7 +751,7 @@ export const VCalendar = genericComponent<new <T>() => {
 
       const mode = eventModeFunction.value(
         parsedEvents.value,
-        eventWeekdays.value[ 0 ],
+        eventWeekdays.value[0],
         parsedEventOverlapThreshold.value
       )
 
@@ -766,8 +781,8 @@ export const VCalendar = genericComponent<new <T>() => {
       }
       // const slots = this.$scopedSlots
       const slotDay = slots.day
-      const slotDayHeader = slots[ 'day-header' ]
-      const slotDayBody = slots[ 'day-body' ]
+      const slotDayHeader = slots['day-header']
+      const slotDayBody = slots['day-body']
       return {
         ...slots,
         day: (day: CalendarDaySlotScope) => {
@@ -775,9 +790,9 @@ export const VCalendar = genericComponent<new <T>() => {
           if (children && children.length > 0 && props.eventMore) {
             children.push(genMore(day))
           }
-          if (!!slotDay) {
+          if (slotDay) {
             const slot = slotDay(day)
-            if (!!slot) {
+            if (slot) {
               children = children ? children.concat(slot) : slot
             }
           }
@@ -797,7 +812,7 @@ export const VCalendar = genericComponent<new <T>() => {
         'day-body': (day: CalendarDayBodySlotScope) => {
           const events = getSlotChildren(day, getEventsForDayTimed, genTimedEvent, true)
           let children: VNode[] = [
-            ( <div class="v-event-timed-container">{ events }</div> )
+            (<div class="v-event-timed-container">{ events }</div>),
           ]
 
           if (slotDayBody) {
@@ -820,15 +835,14 @@ export const VCalendar = genericComponent<new <T>() => {
     return () => (
       <div
         class={[
-          themeClasses.value
+          themeClasses.value,
         ]}
       >
-        <renderProps.value.component { ...{...renderProps.value, start: renderProps.value.start.date, end: renderProps.value.end.date} } v-slots={ getScopedSlots() }>
+        <renderProps.value.component { ...{ ...renderProps.value, start: renderProps.value.start.date, end: renderProps.value.end.date } } v-slots={ getScopedSlots() }>
         </renderProps.value.component>
       </div>
     )
-
-  }
+  },
 
 })
 

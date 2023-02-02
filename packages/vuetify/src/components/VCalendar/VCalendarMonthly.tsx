@@ -1,11 +1,13 @@
-import { computed, defineComponent } from "vue";
+import { computed } from 'vue'
+
+import { defineComponent } from '@/util'
 import type { ComputedRef } from 'vue'
 
-import { VCalendarWeekly } from "./VCalendarWeekly";
+import { VCalendarWeekly } from './VCalendarWeekly'
 // import type { CalendarCategory } from '@/composables/calendar/timestamp'
-import { makeBaseProps, makeTimesProps, makeWeeksProps } from "./composables/props";
-import { makeThemeProps } from "@/composables/theme";
-import { makeVariantProps } from "@/composables/variant";
+import { makeBaseProps, makeTimesProps, makeWeeksProps } from './composables/props'
+import { makeThemeProps } from '@/composables/theme'
+import { makeVariantProps } from '@/composables/variant'
 
 export const VCalendarMonthly = defineComponent({
   name: 'VCalendarMonthly',
@@ -18,7 +20,7 @@ export const VCalendarMonthly = defineComponent({
     ...makeVariantProps(),
     ...makeWeeksProps(),
   },
-  setup(props, { attrs, slots }) {
+  setup (props, { attrs, slots }) {
     // Computeds
     const staticClass: ComputedRef<string> = computed(() => {
       return 'v-calendar-monthly v-calendar-weekly'
@@ -26,9 +28,7 @@ export const VCalendarMonthly = defineComponent({
     return () => (
       <VCalendarWeekly class={staticClass.value} { ...props} v-slots={ slots }></VCalendarWeekly>
     )
-   
-    
-  }
+  },
 
 })
 

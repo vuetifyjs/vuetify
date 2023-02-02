@@ -1,20 +1,22 @@
-import { CalendarFormatter, CalendarTimestamp, createDayList, createNativeLocaleFormatter, getDayIdentifier } from "@/composables/calendar/timestamp"
-import { genericComponent, MakeSlots } from "@/util"
-import { ComputedRef } from "vue"
+import type { CalendarFormatter, CalendarTimestamp } from '@/composables/calendar/timestamp'
+import { createDayList, createNativeLocaleFormatter, getDayIdentifier } from '@/composables/calendar/timestamp'
+import type { MakeSlots } from '@/util'
+import { genericComponent } from '@/util'
 import { computed } from 'vue'
+import type { ComputedRef } from 'vue'
 import { useLocale } from '@/composables/locale'
-import { useBaseCalendar } from "./composables/base"
-import { makeBaseProps, makeEventsProps, makeTimesProps, makeWeeksProps } from "./composables/props"
-import { useTimes } from "./composables/times"
+import { useBaseCalendar } from './composables/base'
+import { makeBaseProps, makeEventsProps, makeTimesProps, makeWeeksProps } from './composables/props'
+import { useTimes } from './composables/times'
 
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
-import { weekNumber } from "@/util/dateTimeUtils"
-import { VBtn } from "../VBtn"
+import { weekNumber } from '@/util/dateTimeUtils'
+import { VBtn } from '../VBtn'
 
 // Styles
 import './VCalendarWeekly.sass'
-import { VCalendarDaily } from "./VCalendarDaily"
+import { VCalendarDaily } from './VCalendarDaily'
 
 export const VCalendarWeekly = genericComponent<new <T>() => {
   $props: {}
@@ -31,11 +33,11 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     ...makeWeeksProps(),
   },
 
-  setup(props, { slots }) {
+  setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { current } = useLocale()
     const {
-      times
+      times,
     } = useTimes(props)
     const {
       parsedWeekdays,
@@ -46,7 +48,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       weekdayFormatter,
       getRelativeClasses,
       getStartOfWeek,
-      getEndOfWeek
+      getEndOfWeek,
     } = useBaseCalendar(props, current.value, null, times, null)
 
     const staticClass: ComputedRef<string> = computed(() => {
@@ -100,7 +102,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
         (_tms, short) => short ? shortOptions : longOptions
       )
     })
-    
+
     // methods
     const isOutside = (day: CalendarTimestamp): boolean => {
       const dayIdentifier = getDayIdentifier(day)
@@ -110,7 +112,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     }
 
     interface WeekObject {
-      days: CalendarTimestamp[],
+      days: CalendarTimestamp[]
       weekIndex: Number
     }
 
@@ -119,7 +121,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       const weeks: WeekObject[] = []
 
       for (let i = 0; i < days.value.length; i += weekDays) {
-        weeks.push({days: days.value.slice(i, i + weekDays), weekIndex: i})
+        weeks.push({ days: days.value.slice(i, i + weekDays), weekIndex: i })
       }
 
       return weeks
@@ -135,64 +137,71 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
       )
     }
 
-    return (() => {
+    return () => {
       return (
         <div
           class={[
-            staticClass.value, classes.value
+            staticClass.value, classes.value,
           ]}
         >
-          {!props.hideHeader ? 
-            <div class="v-calendar-weekly__head">
-              { props.showWeek ? <div class="v-calendar-weekly__head-weeknumber"></div> : ''}
-              { todayWeek.value.map((day, index) => {
-                return <div
-                  style={ `color: ${day.present ? props.color : undefined}` }
-                  key={ day.date }
-                  class={[
-                    'v-calendar-weekly__head-weekday',
-                    getRelativeClasses(day, isOutside(days.value[index]))
-                  ]}
-                >
-                  { weekdayFormatter.value(day, props.shortWeekdays) }
-                </div>
-              })}
-            </div> : '' }
-            
-            { genWeeks.value.map((week: WeekObject) => {
-              return <div key={week.days[0].date} class="v-calendar-weekly__week">
-                { props.showWeek ? <div class="v-calendar-weekly__weeknumber"><small>{ getWeekNumber(week.days[0]) }</small></div> : ''}
-                { week.days.map((day, index: number) => {
-                  return <div
-                  key={ day.date }
-                  class={['v-calendar-weekly__day', getRelativeClasses(day, isOutside(day))]}
-                  // on: getDefaultMouseEventHandlers(':day', _e => day),
-                >
-                  <div class="v-calendar-weekly__day-label">
-                    <slot name="day-label" day={ day }>
-                        <VBtn
-                          icon
-                          color={day.present ? props.color : 'transparent'}
-                          flat
-                          small
-                          // TODO: on: getMouseEventHandlers({
-                          //   'click:date': { event: 'click', stop: true },
-                          //   'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-                          // }, _e => day),
-                        >
-                          { day.day === 1 && props.showMonthOnFirst ? `${monthFormatter.value(day, props.shortMonths)} ${dayFormatter.value(day, false)}` : `${dayFormatter.value(day, false)}`}
-                        </VBtn>
-                    </slot>
+          {!props.hideHeader
+            ? (
+              <div class="v-calendar-weekly__head" key="v-calendar-weekly__head">
+                { props.showWeek ? <div class="v-calendar-weekly__head-weeknumber" key="v-calendar-weekly__head-weeknumber"></div> : ''}
+                { todayWeek.value.map((day, index) => {
+                  return (
+                  <div
+                    style={ `color: ${day.present ? props.color : undefined}` }
+                    key={ day.date }
+                    class={[
+                      'v-calendar-weekly__head-weekday',
+                      getRelativeClasses(day, isOutside(days.value[index])),
+                    ]}
+                  >
+                    { weekdayFormatter.value(day, props.shortWeekdays) }
                   </div>
-                  { slots.day && slots.day({outside: isOutside(day), index, ...day }) }
-                </div>
+                  )
                 })}
               </div>
-            })}
-        </div>
+            )
+            : '' }
+              { genWeeks.value.map((week: WeekObject) => {
+                return (
+                  <div key={week.days[0].date} class="v-calendar-weekly__week">
+                    { props.showWeek ? <div class="v-calendar-weekly__weeknumber"><small>{ getWeekNumber(week.days[0]) }</small></div> : ''}
+                    { week.days.map((day, index: number) => {
+                      return (
+                        <div
+                          key={ day.date }
+                          class={['v-calendar-weekly__day', getRelativeClasses(day, isOutside(day))]}
+                        >
+                        <div class="v-calendar-weekly__day-label">
+                          <slot name="day-label" day={ day }>
+                              <VBtn
+                                icon
+                                color={day.present ? props.color : 'transparent'}
+                                flat
+                                small
+                                // TODO: on: getMouseEventHandlers({
+                                //   'click:date': { event: 'click', stop: true },
+                                //   'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
+                                // }, _e => day),
+                              >
+                                { day.day === 1 && props.showMonthOnFirst ? `${monthFormatter.value(day, props.shortMonths)} ${dayFormatter.value(day, false)}` : `${dayFormatter.value(day, false)}`}
+                              </VBtn>
+                          </slot>
+                        </div>
+                        { slots.day?.({ outside: isOutside(day), index, ...day }) }
+                      </div>
+                      )
+                    })}
+                  </div>
+                )
+              })}
+          </div>
       )
-    })
-  }
+    }
+  },
 })
 
 export type VCalendarWeekly = InstanceType<typeof VCalendarWeekly>
