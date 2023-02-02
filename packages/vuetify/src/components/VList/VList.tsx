@@ -132,7 +132,7 @@ export const VList = genericComponent<new <T>() => {
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
-    const { open, select } = useNested(props)
+    const { open, select, getPath } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
     const color = toRef(props, 'color')
@@ -258,6 +258,7 @@ export const VList = genericComponent<new <T>() => {
       open,
       select,
       focus,
+      getPath,
     }
   },
 })

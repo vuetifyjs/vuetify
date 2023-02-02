@@ -229,4 +229,82 @@ describe('VList', () => {
 
     cy.get('.v-list-item').eq(1).should('not.have.class', 'v-list-item--active')
   })
+
+  it('should open selected items on mount', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        children: [
+          {
+            title: 'Child',
+            subtitle: 'Subtitle',
+            value: 'child',
+            children: [
+              {
+                title: 'Another Child',
+                value: 'another_child',
+              },
+            ],
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="200px">
+        <VList items={items} selected={['another_child']} openOnMount="selected" />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-list-item')
+      .should('have.length', 4)
+      .contains('Another Child')
+      .should('be.visible')
+  })
+
+  it('should open all items on mount', () => {
+    const items = [
+      {
+        title: 'Foo',
+        subtitle: 'Bar',
+        value: 'foo',
+        children: [
+          {
+            title: 'First',
+            value: 'first',
+          },
+        ],
+      },
+      {
+        title: 'Group',
+        value: 'group',
+        children: [
+          {
+            title: 'Second',
+            value: 'second',
+          },
+        ],
+      },
+    ]
+
+    const wrapper = mountFunction((
+      <CenteredGrid width="200px">
+        <VList items={items} openOnMount="all" />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-list-item')
+      .should('have.length', 4)
+      .contains('First')
+      .should('be.visible')
+      .get('.v-list-item')
+      .contains('Second')
+      .should('be.visible')
+  })
 })
