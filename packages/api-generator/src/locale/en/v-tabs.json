@@ -28,7 +28,6 @@
     "end": "Aligns tabs to the end",
     "items": "The items to display in the component. This can be an array of strings or objects with a property `title`",
     "alignTabs": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
-    "stacked": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))",
-    "mandatory": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))"
+    "stacked": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tabs.json))"
   }
 }

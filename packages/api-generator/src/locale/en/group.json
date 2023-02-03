@@ -1,10 +1,8 @@
 {
   "props": {
     "disabled": "Puts all children components into a disabled state",
-    "mandatory": "Forces at least one item to always be selected (if available).",
     "max": "Sets a maximum number of selections that can be made.",
     "multiple": "Allows one to select mulitple items.",
-    "selectedClass": "Configure the selected CSS class.",
     "value": "The value used when the component is selected within a group. If not provided, the render index is used"
   }
 }

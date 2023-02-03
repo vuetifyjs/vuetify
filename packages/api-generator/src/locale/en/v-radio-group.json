@@ -1,6 +1,5 @@
 {
   "props": {
-    "name": "Sets the component's name attribute",
     "column": "Displays radio buttons in column",
     "inline": "Displays radio buttons in row",
     "type": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-radio-group.json))",

@@ -13,7 +13,6 @@
     "scrollOffScreen": "Hides the component when scrolling. Will **NOT** show the `extension` slot.",
     "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one when scrolling.",
     "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
-    "image": "The `src` used for `v-img`. For additional customization options, use the **image** slot.",
     "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-app-bar.json))",
     "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-app-bar.json))"
   },

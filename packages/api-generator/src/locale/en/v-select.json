@@ -8,7 +8,6 @@
     "debounceSearch": "Debounces the search input value being emitted",
     "deletableChips": "Adds a remove icon to selected chips",
     "disableLookup": "Disables keyboard lookup",
-    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO.",
     "editable": " Creates an editable button - [spec](https://material.io/guidelines/components/buttons.html#buttons-dropdown-buttons)",
     "filter": "The function used for filtering items",
     "hideSelected": "Do not display in the select menu items that are already selected",
