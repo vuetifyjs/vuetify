@@ -59,7 +59,7 @@ export const VCalendarDaily = defineComponent({
 
     let scrollPush = 0
 
-    const classes: ComputedRef<object> = computed(() => ({ 'v-calendar-daily': true, ...themeClasses }))
+    const classes: ComputedRef<object> = computed(() => ({ 'v-calendar': true, 'v-calendar-daily': true, ...themeClasses }))
 
     const getScrollPush = (): number => {
       const scrollArea = ref(null) as unknown as HTMLElement
@@ -241,7 +241,7 @@ export const VCalendarDaily = defineComponent({
           >
             { !props.hideHeader
               ? (
-                <div class="v-calendar-daily__head" style={`margin-right: ${scrollPush}`}>
+                <div class="v-calendar-daily__head" style={`margin-right: ${scrollPush}`} key="v-calendar-daily__head">
                   <div class="v-calendar-daily__intervals-head" style={`width: ${convertToUnit(props.intervalWidth)}`}>
                     <slot name="interval-header"></slot>
                     </div>
@@ -300,32 +300,32 @@ export const VCalendarDaily = defineComponent({
                           </div>
                         )
                       })}
-                      { days.value.map((day, index) =>
-                        (
-                          <div
-                            key={day.date}
-                            class={['v-calendar-daily__day', getRelativeClasses(day)]}
-                            // TODO: On
-                          >
-                            { intervals.value[index].map(interval =>
-                              (
-                                <div
-                                  key={interval.time}
-                                  class="v-calendar-daily__day-interval"
-                                  style={
-                                    `height: ${convertToUnit(props.intervalHeight)}`
-                                    // TODO: Interval Styles
-                                  }
-                                >
-                                  { slots.interval?.(interval) }
-                                </div>
-                              )
-                            )}
+                    </div>
+                    { days.value.map((day, index) =>
+                      (
+                        <div
+                          key={day.date}
+                          class={['v-calendar-daily__day', getRelativeClasses(day)]}
+                          // TODO: On
+                        >
+                          { intervals.value[index].map(interval =>
+                            (
+                              <div
+                                key={interval.time}
+                                class="v-calendar-daily__day-interval"
+                                style={{
+                                  height: convertToUnit(props.intervalHeight),
+                                  ...(props.intervalStyle || intervalStyleDefault),
+                                }}
+                              >
+                                { slots.interval?.(interval) }
+                              </div>
+                            )
+                          )}
                           { slots['day-body']?.(getSlotScope(day)) }
                         </div>
-                        )
-                      )}
-                    </div>
+                      )
+                    )}
                   </div>
                 </div>
               </div>

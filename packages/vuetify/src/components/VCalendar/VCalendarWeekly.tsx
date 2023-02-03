@@ -52,7 +52,7 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
     } = useBaseCalendar(props, current.value, null, times, null)
 
     const staticClass: ComputedRef<string> = computed(() => {
-      return 'v-calendar-weekly'
+      return 'v-calendar v-calendar-weekly'
     })
     const classes: ComputedRef<object> = computed(() => {
       return themeClasses

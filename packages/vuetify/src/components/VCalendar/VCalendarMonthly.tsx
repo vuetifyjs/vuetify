@@ -23,7 +23,7 @@ export const VCalendarMonthly = defineComponent({
   setup (props, { attrs, slots }) {
     // Computeds
     const staticClass: ComputedRef<string> = computed(() => {
-      return 'v-calendar-monthly v-calendar-weekly'
+      return 'v-calendar v-calendar-monthly v-calendar-weekly'
     })
     return () => (
       <VCalendarWeekly class={staticClass.value} { ...props} v-slots={ slots }></VCalendarWeekly>
