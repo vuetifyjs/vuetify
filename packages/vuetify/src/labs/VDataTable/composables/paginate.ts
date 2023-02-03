@@ -53,7 +53,7 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
   })
 
   const pageCount = computed(() => {
-    if (itemsPerPage.value === -1) return 1
+    if (itemsPerPage.value === -1 || itemsLength.value === 0) return 1
 
     return Math.ceil(itemsLength.value / itemsPerPage.value)
   })
