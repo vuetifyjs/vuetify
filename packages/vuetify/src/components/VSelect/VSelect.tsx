@@ -158,8 +158,11 @@ export const VSelect = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+      if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
+      }
+
+      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
       }
 
@@ -170,13 +173,10 @@ export const VSelect = genericComponent<new <
       if (e.key === 'ArrowDown') {
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
       } else if (e.key === 'Home') {
-        e.preventDefault()
         listRef.value?.focus('first')
       } else if (e.key === 'End') {
-        e.preventDefault()
         listRef.value?.focus('last')
       }
     }

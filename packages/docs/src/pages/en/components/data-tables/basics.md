@@ -53,6 +53,8 @@ You can find more information and examples [here](/components/data-tables/virtua
 | [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
 | [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props

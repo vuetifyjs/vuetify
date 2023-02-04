@@ -103,6 +103,7 @@ export const VDataTable = defineComponent({
       pageCount,
       startIndex,
       stopIndex,
+      groupBy,
     })
 
     provideDefaults({

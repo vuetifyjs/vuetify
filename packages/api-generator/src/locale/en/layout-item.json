@@ -1,7 +1,7 @@
 {
   "props": {
     "absolute": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))",
-    "name": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))",
+    "name": "Assign a specific name for layout registration.",
     "order": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))"
   }
 }

@@ -68,7 +68,7 @@
                 />
               </template>
 
-              <span>{{ show ? 'Hide code' : 'Show code' }}</span>
+              <span>{{ show ? t('hide-source') : t('view-source') }}</span>
             </v-tooltip>
           </div>
         </div>
@@ -128,6 +128,7 @@
 <script setup>
   // Composables
   import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { computed, ref } from 'vue'
@@ -148,6 +149,7 @@
   const emit = defineEmits(['update:modelValue', 'update:tuneValue'])
 
   const display = useDisplay()
+  const { t } = useI18n()
 
   const tune = ref(true)
   const show = ref(true)

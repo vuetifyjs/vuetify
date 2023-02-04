@@ -202,7 +202,12 @@ export const VCombobox = genericComponent<new <
       const selectionStart = vTextFieldRef.value.selectionStart
       const length = selected.value.length
 
-      if (selectionIndex.value > -1) e.preventDefault()
+      if (
+        selectionIndex.value > -1 ||
+        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
+      ) {
+        e.preventDefault()
+      }
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
@@ -217,10 +222,8 @@ export const VCombobox = genericComponent<new <
       }
 
       if (e.key === 'ArrowDown') {
-        e.preventDefault()
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
       }
 

@@ -52,6 +52,8 @@ The recommended placement of elements inside of `v-alert` is:
 | [v-alert](/api/v-alert/) | Primary Component |
 | [v-alert-title](/api/v-alert-title/) | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
+<api-inline hide-links />
+
 ## Guide
 
 The `v-alert` component is a callout element designed to attact the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alerts color is derived from it's **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
@@ -85,6 +87,7 @@ With a basic alert rendered, add your choice of contextual type. The following e
 <example file="v-alert/prop-type" />
 
 ##### Type reference
+
 | Type | Color | Icon alias | Icon |
 | - | - | - | :---: |
 | Success | **success** { .text-success } | $success | <v-icon icon="$success" /> |
@@ -133,35 +136,27 @@ The close icon automatically applies a default `aria-label` and is configurable 
 
 </alert>
 
-### Slots
+## Additional Examples
 
-TODO
+The following is a collection of `v-alert` examples that demonstrate how different the properties work in an application.
 
-### More Examples
-
-TODO
-
-#### Colored border
+### Colored border
 
 The **colored-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
 
 <example file="v-alert/prop-colored-border" />
 
-#### Icon
+### Icon
 
 The **icon** prop allows you to add an icon to the beginning of the alert component. If a **type** is provided, this will override the default type icon. Additionally, setting the **icon** prop to _false_ will remove the icon altogether.
 
 <example file="v-alert/prop-icon" />
 
-#### Outlined
+### Outlined
 
 The **outlined** prop inverts the style of an alert, inheriting the currently applied **color**, applying it to the text and border, and making its background transparent.
 
 <example file="v-alert/prop-outlined" />
-
-#### Grid
-
-![Alert Grid](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-grid.png)
 
 ## Accessibility
 

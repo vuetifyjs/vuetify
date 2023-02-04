@@ -68,7 +68,7 @@ export const VDataTableFooter = defineComponent({
           />
         </div>
         <div class="v-data-table-footer__info">
-          <div>{ (startIndex.value ?? -1) + 1 } - { stopIndex.value ?? 0 } of { itemsLength.value ?? 0 }</div>
+          <div>{ !itemsLength.value ? 0 : startIndex.value + 1 } - { stopIndex.value } of { itemsLength.value }</div>
         </div>
         <div class="v-data-table-footer__pagination">
           <VBtn

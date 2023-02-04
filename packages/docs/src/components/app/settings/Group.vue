@@ -19,23 +19,19 @@
           :key="text"
           cols="6"
         >
-          <v-item :value="text">
-            <template #default="{ isSelected, toggle }">
-              <v-card
-                :ref="'item-' + text"
-                :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
-                class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center"
-                rounded
-                variant="flat"
-                @click="toggle"
-              >
-                {{ t(text) }}
-
-                <v-spacer />
-
-                <v-icon :icon="icon" />
-              </v-card>
-            </template>
+          <v-item v-slot="{ isSelected, toggle }" :value="text">
+            <v-btn
+              :ref="'item-' + text"
+              :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
+              :append-icon="icon"
+              class="px-4 text-capitalize justify-space-between"
+              block
+              variant="flat"
+              size="large"
+              @click="toggle"
+            >
+              {{ t(text) }}
+            </v-btn>
           </v-item>
         </v-col>
       </v-row>
@@ -67,9 +63,3 @@
 
   const isDark = computed(() => theme.current.value.dark)
 </script>
-
-<style lang="sass">
-  // Bug in Vuetify, ripple isn't inheriting border-radius
-  .v-card--group::before
-    border-radius: inherit
-</style>

@@ -12,21 +12,20 @@
     "miniVariant": "Condenses navigation drawer width, also accepts the **.sync** modifier. With this, the drawer will re-open when clicking it",
     "permanent": "The drawer remains visible regardless of screen size",
     "right": "Places the navigation drawer on the right",
-    "src": "Specifies a [v-img](/components/images) as the component's background.",
+    "image": "Apply a specific background image to the component.",
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
     "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "railWidth": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "image": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "width": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   },
   "slots": {
     "append": "A slot at the bottom of the drawer",
-    "img": "Used to modify `v-img` properties when using the **src** prop",
+    "image": "Used to modify `v-img` properties when using the **src** prop",
     "prepend": "A slot at the top of the drawer"
   },
   "events": {

@@ -12,7 +12,7 @@ related:
 
 # The Vuetify roadmap
 
-Vuetify is always under development. We are constantly working towards improving the existing codebase, as well as adding new features and functionality that help make building applications even easier. Below is a tentative list of planned features. This is not an exhaustive list and is subject to change at any time without notice.
+Vuetify is always under development. We are constantly working towards improving the existing codebase, adding new features, and expanding the ecosystem with developer tooling that makes building applications even easier.
 
 ![Roadmap Entry](https://cdn.vuetifyjs.com/docs/images/entry/roadmap.png)
 
@@ -22,40 +22,53 @@ Vuetify is always under development. We are constantly working towards improving
 
 The following releases are currently under development:
 
-### v3.1 (Valkyrie)
+<alert type="warning">
 
-- **Target Release:** Q1 2023
-- **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
+  This is not an exhaustive list and is subject to change at any time without notice
 
-----
+</alert>
 
-### 🧪 Labs { id="labs" }
+### v3.2 (Orion)
 
-- **Target Release:** Q4 2022
-- **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state. Tentative list of components to be released:
-  - `v-data-table`
-  - `v-date-picker`
-
-<promoted slug="vuetify-github-sponsors" />
-
-## Long-term support (LTS)
-
-The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
+- **Target Release:** Q2 2023
+- **Overview:** New and ported components from v2. Exposing defaults system for public use, allowing you to hook into the global default configuration with your components.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/53)
 
 ### v2.7 (Nirvana)
 
 - **Target Release:** Q2 2023
 - **Support until:** 18 months after release
-- **Overview:** Backports and deprecations from v3.0.0
+- **Overview:** Backports and deprecations from v3.0.0 to help developers prepare for v3 upgrade
 
 ----
+
+## Long-term support (LTS)
+
+The following versions have continued maintenance for backwards compatible fixes, major bugs, and security vulnerabilities. More information is located on the [Long-term support](/introduction/long-term-support/) page.
+
+<promoted slug="vuetify-github-sponsors" />
 
 <promoted slug="vuetify-open-collective" />
 
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.1 (Valkyrie)
+
+- **Released:** January 2023
+- **Target Release:** Q1 2023
+- **Notes:** [v3.1 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v3.1.0)
+- **Overview:** First post v3 release that will focus on porting remaining missing v2 components and general bug fixing.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/56)
+
+### Vuetify Labs { id="labs" }
+
+- **Released:** January 2023
+- **Target Release:** Q4 2022
+- **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state:
+  - [v-data-table](/components/data-tables/basics/)
+  - [v-virtual-scroll](/labs/virtual-scroller/)
 
 ### v3.0 (Titan)
 
@@ -180,6 +193,10 @@ The following are the already released **minor** and **major** version updates. 
   - Convert from Javascript to Typescript
   - Convert from Stylus to Sass
   - Convert from avoriaz to vue-test-utils
+
+## Contributing
+
+If you'd like to help contribute to Vuetify, head to our [Contribution guide](/getting-started/contributing/) for more information on how to get started.
 
 ## Archived
 

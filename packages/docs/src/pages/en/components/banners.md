@@ -51,6 +51,8 @@ The recommended placement of elements inside of `v-banner` is:
 | [v-banner-text](/api/v-banner-text/) | Functional component used to display the Banner's subtitle. Wraps the `#text` slot |
 | [v-banner-actions](/api/v-banner-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props

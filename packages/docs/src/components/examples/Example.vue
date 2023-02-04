@@ -14,13 +14,22 @@
         height="44"
         rounded="t"
       >
-        <v-fade-transition>
-          <div v-show="showCode">
-            <div class="text-body-2 px-3 text-medium-emphasis">
-              <v-icon icon="mdi-file-tree" />
 
-              {{ file }}.vue
-            </div>
+        <v-fade-transition>
+          <div v-if="showCode">
+            <v-btn
+              v-for="(section, i) of sections"
+              :key="section.name"
+              :active="template === i"
+              class="ma-1 text-none"
+              variant="text"
+              size="small"
+              @click="template = i"
+            >
+              <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
+                {{ section.name }}
+              </span>
+            </v-btn>
           </div>
         </v-fade-transition>
         <v-spacer />
@@ -47,18 +56,12 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition>
-          <div
-            v-if="showCode"
-            :class="[
-              'border-b',
-              inline && 'order-1'
-            ]"
-          >
-            <template
-              v-for="(section, i) of sections"
-              :key="section.name"
-            >
-              <template v-if="section.content">
+          <div v-if="showCode">
+            <v-window v-model="template">
+              <v-window-item
+                v-for="(section, i) of sections"
+                :key="section.name"
+              >
                 <v-divider v-if="i !== 0" />
 
                 <v-theme-provider :theme="theme">
@@ -67,8 +70,8 @@
                     :rounded="false"
                   />
                 </v-theme-provider>
-              </template>
-            </template>
+              </v-window-item>
+            </v-window>
           </div>
         </v-expand-transition>
 
@@ -121,6 +124,7 @@
   const isLoaded = ref(false)
   const isError = ref(false)
   const showCode = ref(props.inline || props.open)
+  const template = ref(0)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -141,21 +145,21 @@
       code.value = _code
       sections.value = [
         {
-          name: 'template',
+          name: 'Template',
           language: 'html',
           content: parseTemplate('template', _code),
         },
         {
-          name: 'script',
+          name: 'Script',
           language: 'javascript',
           content: parseTemplate('script', _code),
         },
         {
-          name: 'style',
+          name: 'Style',
           language: 'css',
           content: parseTemplate('style', _code),
         },
-      ]
+      ].filter(v => v.content)
       isLoaded.value = true
       isError.value = false
     } catch (e) {
@@ -196,9 +200,11 @@
       target: '_blank',
     },
     {
-      icon: 'mdi-code-tags',
-      path: 'view-source',
-      onClick: () => (showCode.value = !showCode.value),
+      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+      path: !showCode.value ? 'view-source' : 'hide-source',
+      onClick: () => {
+        showCode.value = !showCode.value
+      },
     },
   ])
 </script>
