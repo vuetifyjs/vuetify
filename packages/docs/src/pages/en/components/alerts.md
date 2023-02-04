@@ -52,6 +52,8 @@ The recommended placement of elements inside of `v-alert` is:
 | [v-alert](/api/v-alert/) | Primary Component |
 | [v-alert-title](/api/v-alert-title/) | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
+<api-inline hide-links />
+
 ## Implementation
 
 Unlike the `v-banner` component, `v-alert` is intended to be re-used throughout your application as callouts that draw a user's attention.

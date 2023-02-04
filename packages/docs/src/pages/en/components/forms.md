@@ -30,6 +30,8 @@ Whenever the value of an input is changed, each rule will receive the new value 
 | - | - |
 | [v-form](/api/v-form/) | Primary Component |
 
+<api-inline hide-links />
+
 ## Rules
 
 Rules allow you to apply custom validation on all form components. These are validated sequentially, and components will display a *maximum* of 1 error at a time, so make sure you order your rules accordingly.

@@ -50,6 +50,8 @@ The recommended placement of elements inside of `v-text-field` is:
 | - | - |
 | [v-text-field](/api/v-text-field/) | Primary Component |
 
+<api-inline hide-links />
+
 ## Guide
 
 The `v-text-field` component is a versatile `<input type="text">` field which combines both the `v-input` and `v-field` components into a single offering. It is a commonly used element that provides the baseline for other form inputs; such as [v-select](/components/selects/), [v-autocomplete](/components/autocompletes/), [v-combobox](/components/combobox/). In this guide you learn the basic fundamentals of `v-text-field` and how its various properties interact with each other.

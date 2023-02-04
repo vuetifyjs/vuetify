@@ -105,6 +105,8 @@ The following example demonstrates how to use the **theme** prop to toggle the t
 | [v-app](/api/v-app/) | Primary Component |
 | [v-main](/api/v-main/) | Content area |
 
+<api-inline hide-links />
+
 ### Layout components
 
 The following components are compatible with the [Application layout](/features/application-layout/) system:

@@ -55,6 +55,8 @@ The recommended placement of elements inside of `v-card` is:
 | [v-card-text](/api/v-card-text/) | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
 | [v-card-actions](/api/v-card-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
+<api-inline hide-links />
+
 ## Basics
 
 There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
