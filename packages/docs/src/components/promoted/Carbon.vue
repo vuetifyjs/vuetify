@@ -12,7 +12,6 @@
     >
       <promoted-script
         id="carbonads"
-
         script-id="_carbonads_js"
         src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
         @script:error="error = true"
@@ -31,8 +30,9 @@
 
   // Utiltlies
   import { ref } from 'vue'
+  import { IN_BROWSER } from '@/util/globals'
 
-  const error = ref(!!document.getElementById('carbonads'))
+  const error = ref(IN_BROWSER && !!document.getElementById('carbonads'))
   const route = useRoute()
 </script>
 
