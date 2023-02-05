@@ -5,7 +5,6 @@ meta:
   keywords: frequently asked questions, faq
 related:
   - /getting-started/contributing/
-  - /introduction/support/
   - /features/treeshaking/
 ---
 
@@ -292,7 +291,7 @@ export default {
 
 If you need help with an issue, please use one of our help channels:
 
-- [Vuetify Professional Support](/introduction/support/)
+- [Vuetify Professional Support](https://next.vuetifyjs.com/en/introduction/enterprise-support/)
 - [Discord Community](https://community.vuetifyjs.com/)
 - [GitHub Discussions](https://discussions.vuetifyjs.com/)
 

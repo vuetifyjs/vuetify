@@ -8,8 +8,10 @@
       "roadmap",
       { "divider": true },
       { "heading": "professional-support" },
-      "support",
-      "enterprise"
+      {
+        "title": "enterprise",
+        "href": "https://next.vuetifyjs.com/en/introduction/enterprise-support/"
+      }
     ]
   },
   {

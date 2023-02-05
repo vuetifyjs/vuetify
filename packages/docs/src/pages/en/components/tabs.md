@@ -70,7 +70,7 @@ The **grow** prop will make the tab items take up all available space with no li
 
 #### Stacked
 
-Using **stacked** prop you can have buttons that use both icons and text.
+Using **stacked** increases the `v-tabs` height to 72px to allow for both icons and text to be displayed.
 
 <example file="v-tabs/prop-stacked" />
 
