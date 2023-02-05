@@ -12,7 +12,6 @@
     "prominent": "Increases the height of the toolbar content to 128px.",
     "short": "Reduce the height of the toolbar content to 56px (112px when using the **prominent** prop).",
     "src": "Specifies a [v-img](/components/images) as the component's background.",
-    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-toolbar.json))",
     "density": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-toolbar.json))",
     "image": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-toolbar.json))",
     "title": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-toolbar.json))"

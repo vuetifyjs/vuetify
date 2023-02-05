@@ -1,0 +1,7 @@
+{
+  "exposed": {
+    "getLayoutItem": "Function that returns position and size information about a specific layout item",
+    "mainRect": "Position and size information for the v-main area.",
+    "mainStyles": "CSS styles applied to the v-main area."
+  }
+}

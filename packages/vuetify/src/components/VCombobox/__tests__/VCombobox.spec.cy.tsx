@@ -210,6 +210,40 @@ describe('VCombobox', () => {
         .type('Item 3')
         .should('have.length', 1)
     })
+
+    it('should filter with custom item shape', () => {
+      const items = [
+        {
+          id: 1,
+          name: 'Test1',
+        },
+        {
+          id: 2,
+          name: 'Antonsen PK',
+        },
+      ]
+
+      cy.mount(() => (
+        <VCombobox
+          items={items}
+          item-value="id"
+          item-title="name"
+        />
+      ))
+        .get('input')
+        .type('test')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Test1')
+        .get('input')
+        .clear()
+        .type('antonsen')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Antonsen PK')
+    })
   })
 
   describe('prefilled data', () => {

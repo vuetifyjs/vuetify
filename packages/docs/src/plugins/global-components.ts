@@ -21,7 +21,7 @@ import Backmatter from '@/components/Backmatter.vue'
 import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
 import Bsa from '@/components/promoted/Bsa.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
-// import ColorPalette from '@/components/features/ColorPalette.vue'
+import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
 import Entry from '@/components/promoted/Entry.vue'
 import Example from '@/components/examples/Example.vue'
@@ -64,7 +64,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
     .component('Bsa', Bsa)
-    //  .component('ColorPalette', ColorPalette)
+    .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)
     .component('Entry', Entry)

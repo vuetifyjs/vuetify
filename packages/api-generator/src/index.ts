@@ -144,13 +144,12 @@ const run = async () => {
   if (!argv.skipComposables) {
     const composables = generateComposableDataFromTypes().map(composable => {
       const kebabName = kebabCase(composable.name)
-      const source = kebabName.split('-')[1]
-      addDescriptions(composable.name, composable.data, [source], locales)
-      return { kebabName, ...composable }
+      addDescriptions(composable.name, composable.data, [kebabName], locales)
+      return { fileName: kebabName, displayName: composable.name, ...composable }
     })
 
-    for (const composable of composables) {
-      await fs.writeFile(path.resolve(outPath, `${composable.kebabName}.json`), JSON.stringify(composable.data, null, 2))
+    for (const { displayName, fileName, data } of composables) {
+      await fs.writeFile(path.resolve(outPath, `${fileName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
     }
   }
 
@@ -161,11 +160,11 @@ const run = async () => {
       const kebabName = kebabCase(directive.name)
       addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
 
-      return { kebabName, ...directive }
+      return { fileName: kebabName, displayName: `v-${kebabName}`, ...directive }
     })
 
-    for (const { kebabName, name, ...directive } of directives) {
-      await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify(directive, null, 2))
+    for (const { displayName, fileName, ...directive } of directives) {
+      await fs.writeFile(path.resolve(outPath, `${fileName}.json`), JSON.stringify({ displayName, fileName, ...directive }, null, 2))
     }
   }
 

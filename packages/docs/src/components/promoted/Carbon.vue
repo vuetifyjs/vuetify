@@ -7,6 +7,7 @@
     <promoted-base
       :key="route.path"
       border
+      min-height="208"
       max-width="360"
     >
       <promoted-script
@@ -31,7 +32,7 @@
   // Utiltlies
   import { ref } from 'vue'
 
-  const error = ref(false)
+  const error = ref(!!document.getElementById('carbonads'))
   const route = useRoute()
 </script>
 

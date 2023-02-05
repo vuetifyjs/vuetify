@@ -14,7 +14,7 @@ The theme provider allows you to style a section of your application in a differ
 
 ## API
 
-- [v-theme-provider](/api/v-theme-provider)
+<api-inline />
 
 ## Examples
 

@@ -13,6 +13,7 @@ export function useOptions ({
   startIndex,
   stopIndex,
   pageCount,
+  groupBy,
 }: {
   page: Ref<number>
   itemsPerPage: Ref<number>
@@ -20,6 +21,7 @@ export function useOptions ({
   startIndex: Ref<number>
   stopIndex: Ref<number>
   pageCount: Ref<number>
+  groupBy: Ref<readonly SortItem[]>
 }) {
   const vm = getCurrentInstance('VDataTable')
 
@@ -30,6 +32,7 @@ export function useOptions ({
     stopIndex: stopIndex.value,
     pageCount: pageCount.value,
     sortBy: sortBy.value,
+    groupBy: groupBy.value,
   }))
 
   // Reset page when sorting changes

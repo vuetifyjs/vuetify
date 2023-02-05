@@ -78,7 +78,8 @@ export const VDataTable = defineComponent({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'))
+    const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
+    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'), { filterKeys })
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -102,6 +103,7 @@ export const VDataTable = defineComponent({
       pageCount,
       startIndex,
       stopIndex,
+      groupBy,
     })
 
     provideDefaults({

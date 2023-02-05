@@ -158,6 +158,10 @@ export const VAutocomplete = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
+        e.preventDefault()
+      }
+
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
       }
@@ -171,10 +175,8 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (e.key === 'ArrowDown') {
-        e.preventDefault()
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
       }
     }

@@ -1,7 +1,6 @@
 {
   "props": {
     "canvasHeight": "Height of canvas",
-    "disabled": "Disables picker",
     "dotSize": "Changes the size of the selection dot on the canvas",
     "flat": "Removes elevation",
     "hideCanvas": "Hides canvas",
@@ -14,13 +13,11 @@
     "swatchesMaxHeight": "Sets the maximum height of the swatches section",
     "value": "Current color. This can be either a string representing a hex color, or an object representing a RGBA, HSLA, or HSVA value",
     "width": "Sets the width of the color picker",
-    "modes": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-color-picker.json))",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-color-picker.json))"
+    "modes": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-color-picker.json))"
   },
   "events": {
     "input": "Selected color. Depending on what you passed to the `value` prop this is either a string or an object",
     "update:color": "Selected color. This is the internal representation of the color, containing all values.",
-    "update:mode": "Selected mode",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-color-picker.json))"
+    "update:mode": "Selected mode"
   }
 }

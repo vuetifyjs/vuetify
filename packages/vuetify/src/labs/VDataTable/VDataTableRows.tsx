@@ -114,7 +114,7 @@ export const VDataTableRows = defineComponent({
                 />
               ) }
 
-              { isExpanded(item.value) && slots['expanded-row']?.({ item, columns: columns.value }) }
+              { isExpanded(item) && slots['expanded-row']?.({ item, columns: columns.value }) }
             </>
           )
         }) }

@@ -3,7 +3,6 @@
     "closeOnClick": "Designates if menu should close on outside-activator click",
     "closeOnContentClick": "Designates if menu should close when its content is clicked",
     "closeDelay": "Milliseconds to wait before closing component. Only works with the **open-on-hover** prop",
-    "disabled": "Disables the menu",
     "disableKeys": "Removes all keyboard interaction",
     "internalActivator": "Detaches the menu content inside of the component as opposed to the document.",
     "maxHeight": "Sets the max height of the menu content",
@@ -12,13 +11,9 @@
     "openDelay": "Milliseconds to wait before opening component. Only works with the **open-on-hover** prop",
     "openOnClick": "Designates whether menu should open on activator click",
     "openOnHover": "Designates whether menu should open on activator hover",
-    "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
     "returnValue": "The value that is updated when the menu is closed - must be primitive. Dot notation is supported",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-menu.json))"
-  },
-  "events": {
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-menu.json))"
   },
   "slots": {
     "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-menu.json))",

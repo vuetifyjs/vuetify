@@ -1,43 +1,46 @@
 <template>
   <form>
     <v-text-field
-      v-model="name"
-      :error-messages="nameErrors"
+      v-model="state.name"
+      :error-messages="v$.name.$errors.map(e => e.$message)"
       :counter="10"
       label="Name"
       required
-      @input="$v.name.$touch()"
-      @blur="$v.name.$touch()"
+      @input="v$.name.$touch"
+      @blur="v$.name.$touch"
     ></v-text-field>
+
     <v-text-field
-      v-model="email"
-      :error-messages="emailErrors"
+      v-model="state.email"
+      :error-messages="v$.email.$errors.map(e => e.$message)"
       label="E-mail"
       required
-      @input="$v.email.$touch()"
-      @blur="$v.email.$touch()"
+      @input="v$.email.$touch"
+      @blur="v$.email.$touch"
     ></v-text-field>
+
     <v-select
-      v-model="select"
+      v-model="state.select"
       :items="items"
-      :error-messages="selectErrors"
+      :error-messages="v$.select.$errors.map(e => e.$message)"
       label="Item"
       required
-      @change="$v.select.$touch()"
-      @blur="$v.select.$touch()"
+      @change="v$.select.$touch"
+      @blur="v$.select.$touch"
     ></v-select>
+
     <v-checkbox
-      v-model="checkbox"
-      :error-messages="checkboxErrors"
+      v-model="state.checkbox"
+      :error-messages="v$.checkbox.$errors.map(e => e.$message)"
       label="Do you agree?"
       required
-      @change="$v.checkbox.$touch()"
-      @blur="$v.checkbox.$touch()"
+      @change="v$.checkbox.$touch"
+      @blur="v$.checkbox.$touch"
     ></v-checkbox>
 
     <v-btn
       class="me-4"
-      @click="submit"
+      @click="v$.$validate"
     >
       submit
     </v-btn>
@@ -48,91 +51,58 @@
 </template>
 
 <script>
-  // import { validationMixin } from 'vuelidate'
-  // import { required, maxLength, email } from 'vuelidate/lib/validators'
+  import { reactive, ref } from 'vue'
+  import { useVuelidate } from '@vuelidate/core'
+  import { email, required } from '@vuelidate/validators'
 
   export default {
-    // mixins: [validationMixin],
+    setup () {
+      const initialState = {
+        name: '',
+        email: '',
+        select: null,
+        checkbox: null,
+      }
 
-    // validations: {
-    //   name: { required, maxLength: maxLength(10) },
-    //   email: { required, email },
-    //   select: { required },
-    //   checkbox: {
-    //     checked (val) {
-    //       return val
-    //     },
-    //   },
-    // },
+      const state = reactive({
+        ...initialState,
+      })
 
-    data: () => ({
-      name: '',
-      email: '',
-      select: null,
-      items: [
+      const items = ref([
         'Item 1',
         'Item 2',
         'Item 3',
         'Item 4',
-      ],
-      checkbox: false,
-    }),
+      ])
 
-    computed: {
-      checkboxErrors () {
-        const errors = []
-        if (!this.$v.checkbox.$dirty) return errors
-        !this.$v.checkbox.checked && errors.push('You must agree to continue!')
-        return errors
-      },
-      selectErrors () {
-        const errors = []
-        if (!this.$v.select.$dirty) return errors
-        !this.$v.select.required && errors.push('Item is required')
-        return errors
-      },
-      nameErrors () {
-        const errors = []
-        if (!this.$v.name.$dirty) return errors
-        !this.$v.name.maxLength && errors.push('Name must be at most 10 characters long')
-        !this.$v.name.required && errors.push('Name is required.')
-        return errors
-      },
-      emailErrors () {
-        const errors = []
-        if (!this.$v.email.$dirty) return errors
-        !this.$v.email.email && errors.push('Must be valid e-mail')
-        !this.$v.email.required && errors.push('E-mail is required')
-        return errors
-      },
-    },
+      const rules = {
+        name: { required },
+        email: { required, email },
+        select: { required },
+        items: { required },
+        checkbox: { required },
+      }
 
-    methods: {
-      submit () {
-        this.$v.$touch()
-      },
-      clear () {
-        this.$v.$reset()
-        this.name = ''
-        this.email = ''
-        this.select = null
-        this.checkbox = false
-      },
+      const v$ = useVuelidate(rules, state)
+
+      function clear () {
+        v$.value.$reset()
+
+        for (const [key, value] of Object.entries(initialState)) {
+          state[key] = value
+        }
+      }
+
+      return { state, items, clear, v$ }
     },
   }
-  // <codepen-resources lang="json">
-  //   {
-  //     "js": [
-  //       "https://cdn.jsdelivr.net/npm/vuelidate/dist/vuelidate.min.js",
-  //       "https://cdn.jsdelivr.net/npm/vuelidate/dist/validators.min.js"
-  //     ]
-  //   }
-  // </codepen-resources>
-
-  // <codepen-additional>
-  //   const { required, maxLength, email } = validators
-  //   const validationMixin = vuelidate.validationMixin
-
-  //   Vue.use(vuelidate.default)
-  // </codepen-additional>
 </script>
+
+<codepen-resources lang="json">
+  {
+    "js": [
+      "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.js",
+      "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.js"
+    ]
+  }
+</codepen-resources>

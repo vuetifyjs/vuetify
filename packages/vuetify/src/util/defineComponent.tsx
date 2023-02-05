@@ -4,7 +4,7 @@ import {
 } from 'vue'
 import { consoleWarn } from '@/util/console'
 import { toKebabCase } from '@/util/helpers'
-import { useDefaults } from '@/composables/defaults'
+import { injectDefaults, useDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -40,7 +40,11 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
-      const { props: _props, provideSubDefaults } = useDefaults(props, props._as ?? options.name)
+      const defaults = injectDefaults()
+      // Skip props proxy if defaults are not provided
+      if (!defaults.value) return options._setup(props, ctx)
+
+      const { props: _props, provideSubDefaults } = useDefaults(props, props._as ?? options.name, defaults)
 
       const setupBindings = options._setup(_props, ctx)
 

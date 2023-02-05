@@ -1,7 +1,6 @@
 {
   "props": {
     "appendIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
-    "appendInnerIcon": "Appends an icon inside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "filled": "Applies the alternate filled input style",
@@ -22,7 +21,6 @@
     "rounded": "Adds a border radius to the input",
     "rows": "Controls the number of rows in a textarea",
     "rowHeight": "Designate a custom _row-height_. Used for determining input height when using **multi-line** or **textarea** props",
-    "singleLine": "Label does not move on focus/dirty",
     "solo": "Changes the style of the input",
     "soloInverted": "Reduces element opacity until focused",
     "suffix": "Displays suffix text",
@@ -43,7 +41,6 @@
     "details": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "clear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "append-inner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
-    "label": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "loader": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))"
   },
@@ -61,8 +58,7 @@
     "click:prependInner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "click:control": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
     "click:input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
-    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",
-    "update:modelValue": "The update:modelValue event is emitted when the value of the input field changes. This event is emitted with the updated value as its argument, which can be used to update the value of the corresponding variable in your Vue component's data."
+    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))"
   },
   "exposed": {
     "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-text-field.json))",

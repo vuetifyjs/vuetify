@@ -40,6 +40,8 @@ declare module 'markdown-it-link-attributes' {
   export default MarkdownItLinkAttributes
 }
 
+declare module 'markdown-it-emoji/bare.js'
+
 declare module 'cosmicjs' {
   interface Cosmic<T> {
     bucket (params: {

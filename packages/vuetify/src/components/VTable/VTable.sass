@@ -60,7 +60,7 @@
 
 // Block
 .v-table
-  --v-table-header-height: $table-header-height
+  --v-table-header-height: #{$table-header-height}
 
   border-radius: inherit
   // Do not inherit line-height
@@ -95,7 +95,7 @@
           > tfoot
             > tr
               > th
-                height: $table-header-height + $modifier
+                height: calc(var(--v-table-header-height) + $modifier)
 
               > td
                 height: calc($table-row-height + $modifier)

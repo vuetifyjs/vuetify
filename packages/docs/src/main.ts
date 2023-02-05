@@ -20,7 +20,7 @@ import { useVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
-import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+import { generatedRoutes, languagePattern, rpath, trailingSlash } from '@/util/routes'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -51,7 +51,7 @@ export const createApp = ViteSSG(
       },
       ...routes,
       {
-        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
+        path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
         component: () => import('@/layouts/404.vue'),
       },
       {

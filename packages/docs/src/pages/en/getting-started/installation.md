@@ -125,6 +125,33 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Exposed exports
+
+### JS
+
+| Name                             | Description                                                                                                                                        |
+|----------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| `vuetify`                        | Main entry point. Contains `createVuetify()` and public composables.                                                                               |
+| `vuetify/styles`                 | Precompiled global CSS (reset, utilities, etc.), no component styles. Will be redirected to SASS if `styles.configFile` is set in vite or webpack. |
+| `vuetify/components`             | All components. Not recommended as it will include all components during development, slowing down your build.                                     |
+| `vuetify/components/<name>`      | Individual components. Grouped by top-level name, for example VListItem, VListGroup, and VListItemTitle are all in `vuetify/components/VList`.     |
+| `vuetify/directives`             | All directives.                                                                                                                                    |
+| `vuetify/directives/<name>`      | Individual directives.                                                                                                                             |
+| `vuetify/blueprints/<name>`      | Preset collections of prop defaults.                                                                                                               |
+| `vuetify/locale`                 | Translations for strings in vuetify components. Each language is a named export.                                                                   |
+| `vuetify/locale/adapters/<name>` | Adapters to retrieve translations from other libraries such as vue-i18n.                                                                           |
+| `vuetify/iconsets/<name>`        | Icon presets, see [Icon Fonts](/features/icon-fonts/)                                                                                              |
+
+### SASS
+
+See [SASS Variables](/features/sass-variables/) for more information.
+
+| Name               | Description                                                                                     |
+|--------------------|-------------------------------------------------------------------------------------------------|
+| `vuetify`          | Global CSS (reset, utilities, etc.), no component styles. Equivalent to `vuetify/styles` in JS. |
+| `vuetify/settings` | All SASS variables, including component variables.                                              |
+| `vuetify/tools`    | Mixins and functions.                                                                           |
+
 ## Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).

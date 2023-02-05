@@ -58,7 +58,6 @@ export interface FormProps {
 export const makeFormProps = propsFactory({
   disabled: Boolean,
   fastFail: Boolean,
-  lazyValidation: Boolean,
   readonly: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,

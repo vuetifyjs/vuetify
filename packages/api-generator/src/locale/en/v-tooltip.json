@@ -2,7 +2,6 @@
   "props": {
     "closeDelay": "Delay (in ms) after which menu closes (when open-on-hover prop is set to true)",
     "debounce": "Duration before tooltip is shown and hidden when hovered",
-    "disabled": "Disables the tooltip",
     "internalActivator": "Designates whether to use an internal activator",
     "openDelay": "Delay (in ms) after which tooltip opens (when `open-on-hover` prop is set to **true**)",
     "openOnClick": "Designates whether the tooltip should open on activator click",
@@ -11,9 +10,6 @@
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tooltip.json))",
     "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tooltip.json))"
-  },
-  "events": {
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tooltip.json))"
   },
   "slots": {
     "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-tooltip.json))",

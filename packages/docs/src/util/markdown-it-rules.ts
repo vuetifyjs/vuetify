@@ -85,12 +85,7 @@ function addHeadingRules (md: MarkdownIt) {
 }
 
 function addLinkRules (md: MarkdownIt) {
-  md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-link'
-
-    return self.renderToken(tokens, idx, options)
-  }
-  md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
+  md.renderer.rules.link_open = md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-link'
 
     return self.renderToken(tokens, idx, options)
@@ -98,13 +93,7 @@ function addLinkRules (md: MarkdownIt) {
 }
 
 function addTableRules (md: MarkdownIt) {
-  md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-table'
-
-    return self.renderToken(tokens, idx, options)
-  }
-
-  md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
+  md.renderer.rules.table_open = md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-table'
 
     return self.renderToken(tokens, idx, options)

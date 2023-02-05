@@ -16,8 +16,7 @@
   "events": {
     "change": "Emitted when the component value is changed by user interaction",
     "click:prev": "Emitted when the prev is clicked",
-    "click:next": "Emitted when the next is clicked",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slide-group.json))"
+    "click:next": "Emitted when the next is clicked"
   },
   "exposed": {
     "selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-slide-group.json))",

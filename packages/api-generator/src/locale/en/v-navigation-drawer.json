@@ -16,8 +16,6 @@
     "temporary": "A temporary drawer sits above its application and uses a scrim (overlay) to darken the background",
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
-    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "railWidth": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
@@ -33,8 +31,7 @@
   },
   "events": {
     "transitionend": "Emits event object when transition is complete.",
-    "update:mini-variant": "The `mini-variant.sync` event",
-    "update:modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
+    "update:rail": "Event that is emitted when the rail model changes"
   },
   "exposed": {
     "isStuck": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
