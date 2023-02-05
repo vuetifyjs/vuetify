@@ -10,11 +10,12 @@ import { useDatePicker } from './composables'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent } from '@/util'
+import { defineComponent, omit } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { useDate } from '@/composables/date'
+import { dateEmits, makeDateProps } from '../VDateField/composables'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
@@ -32,15 +33,13 @@ export const VDatePickerMonth = defineComponent({
       type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
       validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
     },
-    displayDate: null,
     hoverDate: null,
-    modelValue: null,
     multiple: Boolean,
+    ...omit(makeDateProps(), ['inputMode', 'viewMode']),
   },
 
   emits: {
-    'update:displayDate': (date: any) => true,
-    'update:modelValue': (date: any) => true,
+    ...omit(dateEmits, ['update:inputMode', 'update:viewMode']),
     'update:hoverDate': (date: any) => true,
   },
 
@@ -50,7 +49,7 @@ export const VDatePickerMonth = defineComponent({
 
     const month = computed(() => props.displayDate)
 
-    const findClosestDate = (date: any, dates: readonly any[]) => {
+    const findClosestDate = (date: any, dates: any[]) => {
       const { isSameDay, getDiff } = adapter.value
       const [startDate, endDate] = dates
 
@@ -100,7 +99,7 @@ export const VDatePickerMonth = defineComponent({
     })
 
     const daysInMonth = computed(() => {
-      const { format, getYear, getMonth, isWithinRange, isSameMonth, isEqual, isSameDay } = adapter.value
+      const { format, getYear, getMonth, isWithinRange, isSameMonth, isSameDay } = adapter.value
       const validDates = props.modelValue.filter(v => !!v)
       const isRange = validDates.length > 1
 
@@ -114,7 +113,7 @@ export const VDatePickerMonth = defineComponent({
         const isStart = isSameDay(date, startDate)
         const isEnd = isSameDay(date, endDate)
         const isAdjacent = !isSameMonth(date, month.value)
-        const isSame = validDates.length === 2 && isEqual(startDate, endDate)
+        const isSame = validDates.length === 2 && isSameDay(startDate, endDate)
 
         return {
           date,
@@ -182,7 +181,7 @@ export const VDatePickerMonth = defineComponent({
         newModel = [date]
       }
 
-      emit('update:modelValue', newModel)
+      emit('update:modelValue', newModel.filter(v => !!v))
     }
 
     const daysRef = ref()
@@ -226,7 +225,7 @@ export const VDatePickerMonth = defineComponent({
       }
 
       window.addEventListener('touchend', handleTouchend, { passive: false })
-      window.addEventListener('mouseup', handleTouchend, { passive: true })
+      window.addEventListener('mouseup', handleTouchend, { passive: false })
     }
 
     function handleTouchmove (e: MouseEvent | TouchEvent) {

@@ -8,48 +8,34 @@ import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
 import { VPicker } from '@/components/VPicker'
 import { VTextField } from '@/components/VTextField'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+import { useDate } from '@/composables/date'
+import { dateEmits, makeDateProps } from '../VDateField/composables'
 import { createDatePicker } from './composables'
 
 // Utilites
 import { ref, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
-// Types
-import type { PropType } from 'vue'
-import { VBtn } from '@/components/VBtn'
-import { useDate } from '@/composables/date'
-
 export const VDatePicker = defineComponent({
   name: 'VDatePicker',
 
   props: {
     color: String,
-    inputMode: {
-      type: String as PropType<'keyboard' | 'calendar'>,
-      default: 'calendar',
-    },
-    viewMode: {
-      type: String as PropType<'month' | 'years'>,
-      default: 'month',
-    },
-    modelValue: null,
-    displayDate: null,
     ...makeTransitionProps({
       transition: 'fade',
     }),
     showActions: Boolean,
+    ...makeDateProps(),
   },
 
   emits: {
     save: (date: any) => true,
     cancel: () => true,
-    'update:modelValue': (date: any) => true,
-    'update:displayDate': (date: any) => true,
-    'update:viewMode': (mode: 'month' | 'years') => true,
-    'update:inputMode': (mode: 'keyboard' | 'calendar') => true,
+    ...dateEmits,
   },
 
   setup (props, { emit }) {

@@ -8,10 +8,11 @@ import { VBtn } from '@/components'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, omit, pick, useRender } from '@/util'
 import { computed } from 'vue'
 import { useLocale } from '@/composables/locale'
 import { useDate } from '@/composables/date'
+import { dateEmits, makeDateProps } from '../VDateField/composables'
 
 export const VDatePickerHeader = defineComponent({
   name: 'VDatePickerHeader',
@@ -30,13 +31,11 @@ export const VDatePickerHeader = defineComponent({
     },
     showInputSwitch: Boolean,
     range: Boolean,
-    inputMode: String,
-    modelValue: null,
+    ...omit(makeDateProps(), ['displayDate', 'viewMode']),
   },
 
   emits: {
-    'update:inputMode': (input: 'keyboard' | 'calendar') => true,
-    'update:displayDate': (date: any) => true,
+    ...omit(dateEmits, ['update:modelValue', 'update:viewMode', 'update:modelValue']),
   },
 
   setup (props, { emit }) {

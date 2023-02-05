@@ -9,15 +9,15 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDateCard, VDatePicker } from '../VDatePicker'
 
 // Composables
-import { useDate } from '@/composables/date'
 import { useDisplay } from '@/composables'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { createDateField, dateEmits, makeDateProps } from './composables'
 
 // Utilities
-import { InjectionKey, nextTick, onBeforeMount } from 'vue'
-import { computed, provide, ref, watch } from 'vue'
-import { defineComponent, useRender, wrapInArray } from '@/util'
-import { createDateField } from './composables'
+import { ref, watch } from 'vue'
+import { defineComponent, useRender } from '@/util'
+
+// Types
+import type { PropType } from 'vue'
 
 export const VDateField = defineComponent({
   name: 'VDateField',
@@ -32,43 +32,34 @@ export const VDateField = defineComponent({
       default: 'mm/dd/yyyy',
     },
     label: String,
-    modelValue: null,
     mobile: Boolean,
-    displayDate: null,
+    ...makeDateProps(),
+    modelValue: {
+      type: null as unknown as PropType<any>,
+    },
+    displayDate: {
+      type: null as unknown as PropType<any>,
+    },
+    format: {
+      type: String,
+    },
   },
 
   emits: {
-    'update:modelValue': (date: any) => true,
-    'update:displayDate': (date: any) => true,
-    'update:inputMode': (mode: string) => true,
+    ...dateEmits,
   },
 
-  setup (props, { slots, emit }) {
-    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, false)
-    const inputModel = ref('')
-    const textFieldRef = ref<VTextField>()
-
-    // watch(inputModel, (newValue, oldValue) => {
-    //   if (!newValue) model.value = null
-
-    //   if (oldValue === newValue) return
-
-    //   console.log(newValue)
-
-    //   // TODO: Better valid check here
-    //   if (newValue.length === 10 && adapter.value.isValid(newValue)) {
-    //     model.value = adapter.value.date(newValue)
-    //   }
-    // })
+  setup (props) {
+    const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateField(props, false)
+    const inputModel = ref(model.value.length ? adapter.value.format(model.value[0], 'keyboardDate') : '')
 
     function handleBlur () {
-      if (adapter.value.isValid(inputModel.value)) {
-        const date = adapter.value.date(inputModel.value)
+      const { isEqual } = adapter.value
+      const date = parseKeyboardDate(inputModel.value)
 
-        if (!adapter.value.isEqual(date, model.value)) {
-          model.value = date
-          displayDate.value = date
-        }
+      if (date && !isEqual(date, model.value)) {
+        model.value = date
+        displayDate.value = date
       }
     }
 
@@ -89,7 +80,6 @@ export const VDateField = defineComponent({
             prependInnerIcon={ props.prependInnerIcon }
             placeholder={ props.placeholder }
             label={ props.label }
-            ref={ textFieldRef }
           />
         </div>
       )
@@ -132,9 +122,6 @@ export const VDateField = defineComponent({
                   modelValue={ model.value }
                   onUpdate:modelValue={(value: any) => {
                     model.value = value
-                    nextTick(() => {
-                      textFieldRef.value?.focus()
-                    })
                   }}
                   v-model:displayDate={ displayDate.value }
                   v-model:viewMode={ viewMode.value }

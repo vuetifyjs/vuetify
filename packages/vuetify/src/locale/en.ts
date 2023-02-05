@@ -33,6 +33,9 @@ export default {
   //   prevMonthAriaLabel: 'Previous month',
   //   prevYearAriaLabel: 'Previous year',
   // },
+  dateRangeField: {
+    divider: 'to',
+  },
   datePicker: {
     range: {
       title: {

@@ -9,9 +9,9 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
 
 // Composables
-import { useDisplay } from '@/composables'
+import { useDisplay, useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
-import { createDateField } from './composables'
+import { createDateField, dateEmits, makeDateProps } from './composables'
 
 // Utilities
 import { ref, toRef, watch } from 'vue'
@@ -35,36 +35,45 @@ export const VDateRangeField = defineComponent({
     },
     fromLabel: String,
     toLabel: String,
-    modelValue: {
-      type: Array as PropType<any[]>,
-      default: () => ([]),
+    dividerText: {
+      type: String,
+      default: '$vuetify.dateRangeField.divider',
     },
     mobile: Boolean,
-    inputMode: {
-      type: String,
-      default: 'calendar',
+    ...makeDateProps(),
+    modelValue: {
+      type: null as unknown as PropType<any[]>,
     },
   },
 
   emits: {
-    'update:modelValue': (dates: any[]) => true,
+    ...dateEmits,
   },
 
-  setup (props, { slots, emit }) {
-    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, false)
+  setup (props) {
+    const { t } = useLocale()
+    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, true)
 
-    const startInput = ref('')
-    const endInput = ref('')
+    const startInput = ref(model.value.length ? adapter.value.format(model.value[0], 'keyboardDate') : '')
+    const endInput = ref(model.value.length > 1 ? adapter.value.format(model.value[1], 'keyboardDate') : '')
 
-    watch([startInput, endInput], ([newStart, newEnd], [oldStart, oldEnd]) => {
-      if (newStart != null && newStart !== oldStart && /\d{1,2}\/\d{1,2}\/\d{4}/.test(newStart)) {
-        model.value = [adapter.value.date(newStart), model.value[1] ?? null]
+    function handleBlur (index: number) {
+      const { isValid, isSameDay, date } = adapter.value
+
+      if (index === 0 && isValid(startInput.value)) {
+        const newDate = date(startInput.value)
+        if (!isSameDay(newDate, model.value[0])) {
+          model.value = [newDate, model.value[1]]
+          displayDate.value = newDate
+        }
+      } else if (index === 1 && isValid(endInput.value)) {
+        const newDate = date(endInput.value)
+        if (!isSameDay(newDate, model.value[1])) {
+          model.value = [model.value[0], newDate]
+          displayDate.value = newDate
+        }
       }
-
-      if (newEnd != null && newEnd !== oldEnd && /\d{1,2}\/\d{1,2}\/\d{4}/.test(newEnd)) {
-        model.value = [model.value[0] ?? null, adapter.value.date(newEnd)]
-      }
-    })
+    }
 
     watch(model, newValue => {
       if (!newValue.length) return
@@ -96,14 +105,16 @@ export const VDateRangeField = defineComponent({
               activator: ({ props: slotProps }) => (
                 <div class="v-date-range-field" { ...slotProps }>
                   <VTextField
-                    v-model={ startInput.value }
+                    modelValue={ startInput.value }
+                    onBlur={ () => handleBlur(0) }
                     prependInnerIcon={ props.prependIcon }
                     placeholder={ props.placeholder }
                     label={ props.fromLabel }
                   />
-                  <div class="v-date-range-field__divider">to</div>
+                  <div class="v-date-range-field__divider">{ t(props.dividerText) }</div>
                   <VTextField
-                    v-model={ endInput.value }
+                    modelValue={ endInput.value }
+                    onBlur={ () => handleBlur(1) }
                     prependInnerIcon={ props.prependIcon }
                     placeholder={ props.placeholder }
                     label={ props.toLabel }
@@ -129,52 +140,60 @@ export const VDateRangeField = defineComponent({
         )
       }
 
-      const card = (
-        <VDateRangeCard
-          v-model={ model.value }
-          v-model:displayDate={ displayDate.value }
-          v-model:viewMode={ viewMode.value }
-          v-model:inputMode={ inputMode.value }
-        />
-      )
-
       return (
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <div class="v-date-range-field">
             <VMenu
-              offset={ [-30, 0] }
+              offset={ [-28, 0] }
               closeOnContentClick={ false }
+              contentClass="foo"
               v-slots={{
                 activator: ({ props: slotProps }) => (
                   <div { ...slotProps } style="flex: 1 1 auto;">
                     <VTextField
-                      { ...slotProps }
                       v-model={ startInput.value }
+                      onBlur={ () => handleBlur(0) }
                       prependInnerIcon={ props.prependIcon }
                       placeholder={ props.placeholder }
                       label={ props.fromLabel }
                     />
                   </div>
                 ),
-                default: () => card,
+                default: () => (
+                  <VDateRangeCard
+                    v-model={ model.value }
+                    v-model:displayDate={ displayDate.value }
+                    v-model:viewMode={ viewMode.value }
+                    v-model:inputMode={ inputMode.value }
+                  />
+                ),
               }}
             />
-            <div class="v-date-range-field__divider">to</div>
+            <div class="v-date-range-field__divider">{ t(props.dividerText) }</div>
             <VMenu
-              offset={ [-30, 0] }
+              key="bar"
+              offset={ [-28, 0] }
               closeOnContentClick={ false }
               v-slots={{
                 activator: ({ props: slotProps }) => (
                   <div { ...slotProps } style="flex: 1 1 auto;">
                     <VTextField
                       v-model={ endInput.value }
+                      onBlur={ () => handleBlur(1) }
                       prependInnerIcon={ props.prependIcon }
                       placeholder={ props.placeholder }
                       label={ props.toLabel }
                     />
                   </div>
                 ),
-                default: () => card,
+                default: () => (
+                  <VDateRangeCard
+                    v-model={ model.value }
+                    v-model:displayDate={ displayDate.value }
+                    v-model:viewMode={ viewMode.value }
+                    v-model:inputMode={ inputMode.value }
+                  />
+                ),
               }}
             />
           </div>

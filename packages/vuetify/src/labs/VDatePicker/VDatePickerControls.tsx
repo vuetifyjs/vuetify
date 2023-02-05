@@ -3,14 +3,15 @@ import './VDatePickerControls.sass'
 
 // Components
 import { VSpacer } from '@/components/VGrid'
-import { VIcon } from '@/components/VIcon'
+import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, omit, useRender } from '@/util'
+import { dateEmits, makeDateProps } from '../VDateField/composables'
 
 export const VDatePickerControls = defineComponent({
   name: 'VDatePickerControls',
@@ -37,13 +38,11 @@ export const VDatePickerControls = defineComponent({
       type: [String, Boolean],
       validator: (v: any) => v === false || ['start', 'end'].includes(v),
     },
-    viewMode: String,
-    displayDate: null,
+    ...omit(makeDateProps(), ['modelValue', 'inputMode']),
   },
 
   emits: {
-    'update:displayDate': (date: any) => true,
-    'update:viewMode': (viewMode: any) => true,
+    ...omit(dateEmits, ['update:modelValue', 'update:inputMode']),
   },
 
   setup (props, { emit }) {
@@ -55,14 +54,18 @@ export const VDatePickerControls = defineComponent({
 
     useRender(() => {
       const prevBtn = (
-        <VIcon
+        <VBtn
+          variant="text"
+          size="small"
           icon={ props.prevIcon }
           onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, -1)) }
         />
       )
 
       const nextBtn = (
-        <VIcon
+        <VBtn
+          variant="text"
+          size="small"
           icon={ props.nextIcon }
           onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, 1)) }
         />
@@ -73,10 +76,12 @@ export const VDatePickerControls = defineComponent({
           { props.viewMode === 'month' && props.range === 'start' && prevBtn }
           { !!props.range && <VSpacer key="range-spacer" /> }
           <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
-          <VIcon
+          <VBtn
             key="expand-btn"
+            variant="text"
+            size="small"
             icon={ props.viewMode === 'month' ? props.expandIcon : props.collapseIcon }
-            onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'years' : 'month') }
+            onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'year' : 'month') }
           />
           <VSpacer />
           { (props.viewMode === 'month' && !props.range) && (
