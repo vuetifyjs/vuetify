@@ -34,7 +34,7 @@ export default new Vuetify({
 })
 ```
 
-Using a predefined option will pre-fill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons/presets).
+Using a predefined option will pre-fill defaults based upon the selected preset. This will overwrite the defaults of components that have default **icon** values. For more information, view the default [icon preset values](https://github.com/vuetifyjs/vuetify/tree/v2-stable/packages/vuetify/src/services/icons/presets).
 
 ## Installing icon fonts
 
