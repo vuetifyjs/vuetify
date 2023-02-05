@@ -105,10 +105,10 @@
   // Composables
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+  import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeRouteLeave } from 'vue-router'
   import { onBeforeUnmount, onMounted, ref } from 'vue'
   import algoliasearch from 'algoliasearch'
 
@@ -117,6 +117,7 @@
 
   const { t } = useI18n()
   const { smAndUp, mdAndUp, xs, lgAndUp, mdAndDown } = useDisplay()
+  const { query } = useRoute()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)
@@ -130,6 +131,10 @@
 
   onMounted(() => {
     document.addEventListener('keydown', onDocumentKeydown)
+    if (query?.search) {
+      searchString.value = query.search as string
+      model.value = true
+    }
   })
   onBeforeUnmount(() => {
     document.removeEventListener('keydown', onDocumentKeydown)
