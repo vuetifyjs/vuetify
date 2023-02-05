@@ -150,20 +150,20 @@ Before starting development you should know which branch to base your changes on
 
 | Version | Type of change | Branch |
 | - | - | - |
-| Vuetify 3 | Documentation | `next` |
+| Vuetify 3 | Documentation | `master` |
+| Vuetify 3 | Bug fixes | `master` |
 | Vuetify 3 | New features | `dev` |
-| Vuetify 3 | Bug fixes | `next` |
 | Vuetify 3 | Features with breaking changes| `next` |
-| Vuetify 2 | Documentation|  `master` |
+| Vuetify 2 | Documentation|  `v2-stable` |
+| Vuetify 2 | Bug fixes | `v2-stable` |
 | Vuetify 2 | New features | `v2-dev` |
-| Vuetify 2 | Bug fixes | `master` |
 
 ```bash
 # Switch to the desired branch
 # v3
-git switch next
-# v2
 git switch master
+# v2
+git switch v2-stable
 
 # Pull down any upstream changes
 git pull
@@ -272,30 +272,6 @@ The following is a list of **commit types** used in the _angular_ preset:
 
 <promoted slug="vuetify-reddit" />
 
-#### Commitizen
-
-The [Vuetify team] uses [commitizen] for all repository commits. This allows for easy to read and organized commits with minimal change to normal commit functions. Commitizen provides a fluid interface for handling semantic versioning and makes it easier to write [release notes](https://github.com/vuetifyjs/vuetify/releases).
-
-To get started, [globally install the commitizen package](https://github.com/commitizen/cz-cli#conventional-commit-messages-as-a-global-utility) using [yarn](https://yarnpkg.com/) by running the following commands in your terminal:
-
-```bash
-# Install commitizen and the conventional changelog adapter
-yarn global add commitizen cz-conventional-changelog
-
-# Then create a .czrc file that tells commitizen
-# which adapter to use globally.
-echo '{ "path": "cz-conventional-changelog" }' > ~/.czrc
-```
-
-<alert type="warning">
-
-Sometimes creating a `.czrc` file does not work using the **command prompt**. If you get unexpected results, create the file in your user folder located in the home directory. This is typically located on your primary harddrive in the `Users` folder.
-
-</alert>
-
-Once complete, instead of using <kbd>git commit</kbd> you will run the command <kbd>git cz</kbd> in your terminal. From here, you are presented with a series of prompts used to build the commit message. For additional information, please review our guidlines on [commits](#commit-guidelines).
-
-[commitizen]: https://github.com/commitizen/cz-cli
 [community]: https://community.vuetifyjs.com/
 [core team]: /introduction/meet-the-team/
 [pull request]: https://github.com/vuetifyjs/vuetify/pulls

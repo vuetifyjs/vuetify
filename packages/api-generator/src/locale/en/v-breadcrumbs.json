@@ -5,13 +5,13 @@
     "justifyCenter": "Align the breadcrumbs center.",
     "justifyEnd": "Align the breadcrumbs at the end.",
     "large": "Increase the font-size of the breadcrumb item text to 16px (14px default).",
-    "activeColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-breadcrumbs.json))",
-    "icon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-breadcrumbs.json))"
+    "activeColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-breadcrumbs.json))",
+    "icon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-breadcrumbs.json))"
   },
   "slots": {
     "prepend": "The slot used for prepend content.",
     "divider": "The slot used for dividers.",
     "title": "The slot used to display the title of each breadcrumb.",
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-breadcrumbs.json))"
+    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-breadcrumbs.json))"
   }
 }

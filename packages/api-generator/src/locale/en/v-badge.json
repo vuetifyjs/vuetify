@@ -11,7 +11,7 @@
     "overlap": "Overlaps the slotted content on top of the component.",
     "max": "Sets the maximum number allowed when using the **content** prop with a `number` like value. If the content number exceeds the maximum value, a `+` suffix is added.",
     "location": "Changes the location of the badge. Possible values are **top**, **bottom**, **start**, **end**, **top start**, **top end**, **bottom start**, **bottom end**.",
-    "floating": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-badge.json))"
+    "floating": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-badge.json))"
   },
   "slots": {
     "badge": "The slot used for the badge's content."

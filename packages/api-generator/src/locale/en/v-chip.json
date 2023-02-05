@@ -13,13 +13,13 @@
     "outlined": "Removes background and applies border and text color",
     "pill": "Remove `v-avatar` padding",
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)",
-    "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-chip.json))",
+    "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-chip.json))",
     "closable": "Adds remove button and then a chip can be closed",
     "ripple": "Applies the v-ripple directive"
   },
   "events": {
     "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",
     "click:close": "Emitted when close icon is clicked",
-    "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-chip.json))"
+    "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-chip.json))"
   }
 }

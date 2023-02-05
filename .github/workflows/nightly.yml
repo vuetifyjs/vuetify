@@ -12,17 +12,23 @@ jobs:
       max-parallel: 1
       fail-fast: false
       matrix:
-        branch: ['master', 'dev', 'next']
+        branch: ['master', 'dev', 'v2-stable', 'v2-dev']
         include:
           - branch: 'master'
-            tag: 'latest'
+            tag: 'next'
             preid: 'prepatch'
           - branch: 'dev'
             tag: 'dev'
             preid: 'preminor'
-          - branch: 'next'
-            tag: 'next'
-            preid: 'premajor'
+          - branch: 'v2-stable'
+            tag: 'v2-stable'
+            preid: 'prepatch'
+          - branch: 'v2-dev'
+            tag: 'v2-dev'
+            preid: 'preminor'
+#          - branch: 'next'
+#            tag: 'next'
+#            preid: 'premajor'
     env:
       RELEASE_BRANCH: ${{ matrix.branch }}
       RELEASE_TAG: ${{ matrix.tag }}
@@ -77,7 +83,7 @@ jobs:
     steps:
       - uses: actions/checkout@v2
         with:
-          ref: next
+          ref: master
           fetch-depth: 0
       - run: |
           last=$(git show -s --format=%ct HEAD)
@@ -100,8 +106,8 @@ jobs:
         working-directory: ./packages/vuetify
         env:
           PERCY_TOKEN: ${{ secrets.PERCY_TOKEN }}
-          PERCY_BRANCH: next
-          PERCY_TARGET_BRANCH: next
+          PERCY_BRANCH: master
+          PERCY_TARGET_BRANCH: master
           PERCY_COMMIT: ${{ env.COMMIT }}
       - uses: actions/upload-artifact@v2
         if: failure()

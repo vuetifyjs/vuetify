@@ -15,6 +15,6 @@
     "showArrows": "Displays arrows for next/previous navigation.",
     "showArrowsOnHover": "Displays navigation arrows only when the carousel is hovered over.",
     "verticalDelimiters": "Displays carousel delimiters vertically.",
-    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-carousel.json))"
+    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-carousel.json))"
   }
 }
