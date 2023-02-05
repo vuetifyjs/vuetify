@@ -1,10 +1,11 @@
 <template>
   <div>
     <v-toolbar
+      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
       border="b"
-      color="surface"
-      density="compact"
+      class="ps-1"
       flat
+      height="44"
     >
       <v-slide-group
         v-model="model"
@@ -16,7 +17,9 @@
           <template #default="{ isSelected, toggle }">
             <v-btn
               :active="isSelected"
-              height="56"
+              class="ma-1 text-none"
+              size="small"
+              variant="text"
               @click="toggle"
             >
               Default
@@ -32,50 +35,33 @@
           <template #default="{ isSelected, toggle }">
             <v-btn
               :active="isSelected"
-              height="56"
+              class="ma-1 text-none"
+              size="small"
+              variant="text"
               @click="toggle"
             >
-              {{ option }}
+              {{ upperFirst(option) }}
             </v-btn>
           </template>
         </v-slide-group-item>
       </v-slide-group>
 
-      <v-responsive
-        v-if="$slots.configuration && display.mdAndUp.value"
-        class="border-s align-center bg-surface"
-        height="48"
-        width="100%"
-        max-width="250"
-      >
-        <div class="d-flex align-center justify-space-between">
-          <div class="ms-4">
-            <app-headline
-              v-show="tune"
-              path="options"
-            />
-          </div>
+      <v-tooltip location="bottom">
+        <template #activator="{ props: activatorProps }">
+          <v-btn
+            :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
+            class="me-1 text-medium-emphasis"
+            density="comfortable"
+            v-bind="activatorProps"
+            @click="show = !show"
+          />
+        </template>
 
-          <div>
-            <v-tooltip location="bottom">
-              <template #activator="{ props: activatorProps }">
-                <v-btn
-                  :icon="!show ? 'mdi-code-tags' : 'mdi-chevron-up'"
-                  class="me-1 text-medium-emphasis"
-                  density="comfortable"
-                  v-bind="activatorProps"
-                  @click="show = !show"
-                />
-              </template>
-
-              <span>{{ show ? t('hide-source') : t('view-source') }}</span>
-            </v-tooltip>
-          </div>
-        </div>
-      </v-responsive>
+        <span>{{ show ? t('hide-source') : t('view-source') }}</span>
+      </v-tooltip>
     </v-toolbar>
 
-    <v-layout>
+    <v-layout :class="['border-b', !show && 'border-opacity-0']">
       <v-main>
         <v-sheet
           class="pa-14 d-flex align-center"
@@ -127,11 +113,12 @@
 
 <script setup>
   // Composables
-  import { useDisplay } from 'vuetify'
+  import { useDisplay, useTheme } from 'vuetify'
   import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { computed, ref } from 'vue'
+  import { upperFirst } from 'lodash-es'
 
   const props = defineProps({
     name: String,
@@ -150,9 +137,13 @@
 
   const display = useDisplay()
   const { t } = useI18n()
+  const theme = useTheme()
 
   const tune = ref(true)
   const show = ref(true)
+  const isDark = computed(() => {
+    return theme.current.value.dark
+  })
 
   const model = computed({
     get () {

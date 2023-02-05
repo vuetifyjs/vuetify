@@ -5,14 +5,13 @@
       class="mb-9 overflow-hidden"
       rounded
     >
-      <v-lazy v-if="!preview" height="44">
+      <v-lazy v-if="!preview" min-height="44">
         <v-toolbar
           :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
           class="px-1"
           flat
           height="44"
-          rounded="t"
         >
 
           <v-fade-transition>
@@ -27,7 +26,7 @@
                 @click="template = i"
               >
                 <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
-                  {{ section.name }}
+                  {{ upperFirst(section.name) }}
                 </span>
               </v-btn>
             </div>
@@ -60,11 +59,9 @@
           <div v-if="showCode">
             <v-window v-model="template">
               <v-window-item
-                v-for="(section, i) of sections"
+                v-for="section of sections"
                 :key="section.name"
               >
-                <v-divider v-if="i !== 0" />
-
                 <v-theme-provider :theme="theme">
                   <app-markup
                     :code="section.content"
@@ -77,6 +74,7 @@
         </v-expand-transition>
 
         <v-theme-provider
+          :class="showCode && 'border-t'"
           :theme="theme"
           class="pa-4 rounded-b"
           with-background
@@ -101,6 +99,7 @@
   import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
+  import { upperFirst } from 'lodash-es'
 
   const { t } = useI18n()
 
