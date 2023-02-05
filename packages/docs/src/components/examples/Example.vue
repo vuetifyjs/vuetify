@@ -5,54 +5,55 @@
       class="mb-9 overflow-hidden"
       rounded
     >
-      <v-toolbar
-        v-if="!preview"
-        :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
-        border="b"
-        class="px-1"
-        flat
-        height="44"
-        rounded="t"
-      >
-
-        <v-fade-transition>
-          <div v-if="showCode">
-            <v-btn
-              v-for="(section, i) of sections"
-              :key="section.name"
-              :active="template === i"
-              class="ma-1 text-none"
-              variant="text"
-              size="small"
-              @click="template = i"
-            >
-              <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
-                {{ section.name }}
-              </span>
-            </v-btn>
-          </div>
-        </v-fade-transition>
-        <v-spacer />
-
-        <v-tooltip
-          v-for="{ path, ...action } in actions"
-          :key="path"
-          location="top"
+      <v-lazy v-if="!preview" height="44">
+        <v-toolbar
+          :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+          border="b"
+          class="px-1"
+          flat
+          height="44"
+          rounded="t"
         >
-          <template #activator="{ props: tooltip }">
-            <v-btn
-              class="ms-2 text-medium-emphasis"
-              density="comfortable"
-              variant="text"
-              v-bind="mergeProps(action as any, tooltip)"
-            />
-          </template>
 
-          <span>{{ t(path) }}</span>
-        </v-tooltip>
+          <v-fade-transition>
+            <div v-if="showCode">
+              <v-btn
+                v-for="(section, i) of sections"
+                :key="section.name"
+                :active="template === i"
+                class="ma-1 text-none"
+                variant="text"
+                size="small"
+                @click="template = i"
+              >
+                <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
+                  {{ section.name }}
+                </span>
+              </v-btn>
+            </div>
+          </v-fade-transition>
+          <v-spacer />
 
-        <Codepen v-if="isLoaded" />
-      </v-toolbar>
+          <v-tooltip
+            v-for="{ path, ...action } in actions"
+            :key="path"
+            location="top"
+          >
+            <template #activator="{ props: tooltip }">
+              <v-btn
+                class="ms-2 text-medium-emphasis"
+                density="comfortable"
+                variant="text"
+                v-bind="mergeProps(action as any, tooltip)"
+              />
+            </template>
+
+            <span>{{ t(path) }}</span>
+          </v-tooltip>
+
+          <Codepen v-if="isLoaded" />
+        </v-toolbar>
+      </v-lazy>
 
       <div class="d-flex flex-column">
         <v-expand-transition>
