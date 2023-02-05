@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { ref } from 'vue'
 import { VDataTableServer } from '..'
 
 const DESSERT_HEADERS = [
@@ -108,5 +109,39 @@ describe('VDataTableServer', () => {
 
     cy.get('.v-data-table thead th').should('have.length', DESSERT_HEADERS.length)
     cy.get('.v-data-table tbody tr').should('have.length', itemsLength)
+  })
+
+  it('should only trigger update event once on mount', () => {
+    const items = ref<any[]>([])
+    const options = ref({
+      itemsLength: 0,
+      page: 1,
+      itemsPerPage: 2,
+    })
+
+    function load (opts: { page: number, itemsPerPage: number }) {
+      setTimeout(() => {
+        const start = (opts.page - 1) * opts.itemsPerPage
+        const end = start + opts.itemsPerPage
+        items.value = DESSERT_ITEMS.slice(start, end)
+      }, 10)
+    }
+
+    cy.mount(() => (
+      <VDataTableServer
+        headers={ DESSERT_HEADERS }
+        items={ items.value }
+        { ...options.value }
+        onUpdate:options={ load }
+      ></VDataTableServer>
+    ))
+
+    cy.get('.v-data-table tbody tr')
+      .vue()
+      .then(wrapper => {
+        const table = wrapper.findComponent(VDataTableServer)
+        const emits = table.emitted('update:options')
+        expect(emits).to.have.length(1)
+      })
   })
 })

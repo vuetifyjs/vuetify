@@ -10,17 +10,11 @@ export function useOptions ({
   page,
   itemsPerPage,
   sortBy,
-  startIndex,
-  stopIndex,
-  pageCount,
   groupBy,
 }: {
   page: Ref<number>
   itemsPerPage: Ref<number>
   sortBy: Ref<readonly SortItem[]>
-  startIndex: Ref<number>
-  stopIndex: Ref<number>
-  pageCount: Ref<number>
   groupBy: Ref<readonly SortItem[]>
 }) {
   const vm = getCurrentInstance('VDataTable')
@@ -28,9 +22,6 @@ export function useOptions ({
   const options = computed(() => ({
     page: page.value,
     itemsPerPage: itemsPerPage.value,
-    startIndex: startIndex.value,
-    stopIndex: stopIndex.value,
-    pageCount: pageCount.value,
     sortBy: sortBy.value,
     groupBy: groupBy.value,
   }))
