@@ -17,17 +17,18 @@ import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useDate } from '@/composables/date'
 
 export const VDateRangeCard = defineComponent({
   name: 'VDateRangeCard',
 
   props: {
     color: String,
-    input: {
+    inputMode: {
       type: String as PropType<'keyboard' | 'calendar'>,
       default: 'calendar',
     },
-    mode: {
+    viewMode: {
       type: String as PropType<'month' | 'years'>,
       default: 'month',
     },
@@ -36,7 +37,6 @@ export const VDateRangeCard = defineComponent({
       default: () => ([]),
     },
     displayDate: null,
-    locale: null,
     ...makeTransitionProps({
       transition: 'fade',
     }),
@@ -45,12 +45,13 @@ export const VDateRangeCard = defineComponent({
   emits: {
     'update:modelValue': (date: any) => true,
     'update:displayDate': (date: any) => true,
-    'update:mode': (mode: 'month' | 'years') => true,
-    'update:input': (mode: 'keyboard' | 'calendar') => true,
+    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:inputMode': (mode: 'keyboard' | 'calendar') => true,
   },
 
-  setup (props) {
-    const { mode, displayDate, adapter } = createDatePicker(props, true)
+  setup (props, { emit }) {
+    const { adapter } = useDate()
+    createDatePicker(props)
 
     const hoverDate = ref(null)
 
@@ -58,36 +59,56 @@ export const VDateRangeCard = defineComponent({
       <VCard
         class="v-date-range-card"
       >
-        { mode.value === 'month' ? (
+        { props.viewMode === 'month' ? (
           <>
             <div class="v-date-range-card__start">
-              <VDatePickerControls range="start" />
-              <VDatePickerMonth
-                displayDate={ displayDate.value }
-                locale={ props.locale }
-                v-model:hoverDate={ hoverDate.value }
+              <VDatePickerControls
+                displayDate={ props.displayDate }
+                onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                viewMode={ props.viewMode }
+                onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                 range="start"
+              />
+              <VDatePickerMonth
+                modelValue={ props.modelValue }
+                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue)}
+                displayDate={ props.displayDate }
+                v-model:hoverDate={ hoverDate.value }
+                multiple
               />
             </div>
             <div class="v-date-range-card__divider" />
             <div class="v-date-range-card__end">
-              <VDatePickerControls range="end" />
-              <VDatePickerMonth
-                displayDate={ adapter.value.addMonths(displayDate.value, 1) }
-                locale={ props.locale }
-                v-model:hoverDate={ hoverDate.value }
+              <VDatePickerControls
+                displayDate={ props.displayDate }
+                onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                viewMode={ props.viewMode }
+                onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                 range="end"
+              />
+              <VDatePickerMonth
+                modelValue={ props.modelValue }
+                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue)}
+                displayDate={ adapter.value.addMonths(props.displayDate, 1) }
+                v-model:hoverDate={ hoverDate.value }
+                multiple
               />
             </div>
           </>
         ) : (
           <div class="v-date-range-card__years">
-            <div>
-              <VDatePickerControls range="start" />
-              <div class="v-date-range-card__divider" />
-              <VDatePickerControls range="end" />
-            </div>
-            <VDatePickerYears />
+            <VDatePickerControls
+              displayDate={ props.displayDate }
+              onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+              viewMode={ props.viewMode }
+              onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+            />
+            <VDatePickerYears
+              displayDate={ props.displayDate }
+              onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+              viewMode={ props.viewMode }
+              onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+            />
           </div>
         )}
       </VCard>

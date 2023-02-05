@@ -6,7 +6,7 @@ import { VSpacer } from '@/components/VGrid'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { useDatePicker } from './composables'
+import { useDate } from '@/composables/date'
 
 // Utilities
 import { computed } from 'vue'
@@ -37,12 +37,19 @@ export const VDatePickerControls = defineComponent({
       type: [String, Boolean],
       validator: (v: any) => v === false || ['start', 'end'].includes(v),
     },
+    viewMode: String,
+    displayDate: null,
+  },
+
+  emits: {
+    'update:displayDate': (date: any) => true,
+    'update:viewMode': (viewMode: any) => true,
   },
 
   setup (props, { emit }) {
-    const { displayDate, mode, adapter } = useDatePicker()
+    const { adapter } = useDate()
     const monthAndYear = computed(() => {
-      const month = props.range === 'end' ? adapter.value.addMonths(displayDate.value, 1) : displayDate.value
+      const month = props.range === 'end' ? adapter.value.addMonths(props.displayDate, 1) : props.displayDate
       return adapter.value.format(month, 'monthAndYear')
     })
 
@@ -50,35 +57,35 @@ export const VDatePickerControls = defineComponent({
       const prevBtn = (
         <VIcon
           icon={ props.prevIcon }
-          onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, -1) }
+          onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, -1)) }
         />
       )
 
       const nextBtn = (
         <VIcon
           icon={ props.nextIcon }
-          onClick={ () => displayDate.value = adapter.value.addMonths(displayDate.value, 1) }
+          onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, 1)) }
         />
       )
 
       return (
         <div class="v-date-picker-controls">
-          { mode.value === 'month' && props.range === 'start' && prevBtn }
+          { props.viewMode === 'month' && props.range === 'start' && prevBtn }
           { !!props.range && <VSpacer key="range-spacer" /> }
           <div class="v-date-picker-controls__date">{ monthAndYear.value }</div>
           <VIcon
             key="expand-btn"
-            icon={ mode.value === 'month' ? props.expandIcon : props.collapseIcon }
-            onClick={ () => mode.value = mode.value === 'month' ? 'years' : 'month' }
+            icon={ props.viewMode === 'month' ? props.expandIcon : props.collapseIcon }
+            onClick={ () => emit('update:viewMode', props.viewMode === 'month' ? 'years' : 'month') }
           />
           <VSpacer />
-          { (mode.value === 'month' && !props.range) && (
+          { (props.viewMode === 'month' && !props.range) && (
             <div key="month-buttons">
               { prevBtn }
               { nextBtn }
             </div>
           ) }
-          { mode.value === 'month' && props.range === 'end' && nextBtn }
+          { props.viewMode === 'month' && props.range === 'end' && nextBtn }
         </div>
       )
     })

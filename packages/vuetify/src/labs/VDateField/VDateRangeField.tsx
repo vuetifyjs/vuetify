@@ -9,17 +9,16 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
 
 // Composables
-import { useDate } from '@/composables/date'
 import { useDisplay } from '@/composables'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideDefaults } from '@/composables/defaults'
+import { createDateField } from './composables'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { ref, toRef, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
 
 export const VDateRangeField = defineComponent({
   name: 'VDateRangeField',
@@ -40,8 +39,11 @@ export const VDateRangeField = defineComponent({
       type: Array as PropType<any[]>,
       default: () => ([]),
     },
-    locale: null,
     mobile: Boolean,
+    inputMode: {
+      type: String,
+      default: 'calendar',
+    },
   },
 
   emits: {
@@ -49,11 +51,7 @@ export const VDateRangeField = defineComponent({
   },
 
   setup (props, { slots, emit }) {
-    const locale = computed(() => props.locale)
-    const { adapter } = useDate(locale)
-    const model = useProxiedModel(props, 'modelValue')
-    const selected = ref()
-    const input = ref('calendar')
+    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, false)
 
     const startInput = ref('')
     const endInput = ref('')
@@ -92,7 +90,8 @@ export const VDateRangeField = defineComponent({
       if (mobile.value) {
         return (
           <VDialog
-            fullscreen={ input.value === 'calendar' }
+            fullscreen={ inputMode.value === 'calendar' }
+            contentClass="v-date-range-field__dialog-content"
             v-slots={{
               activator: ({ props: slotProps }) => (
                 <div class="v-date-range-field" { ...slotProps }>
@@ -113,11 +112,12 @@ export const VDateRangeField = defineComponent({
               ),
               default: ({ isActive }) => (
                 <VDateRangePicker
-                  onUpdate:input={ v => input.value = v }
-                  v-model={ selected.value }
+                  v-model={ model.value }
+                  v-model:displayDate={ displayDate.value }
+                  v-model:viewMode={ viewMode.value }
+                  v-model:inputMode={ inputMode.value }
                   onSave={() => {
                     isActive.value = false
-                    model.value = selected.value
                   }}
                   onCancel={() => {
                     isActive.value = false
@@ -129,34 +129,55 @@ export const VDateRangeField = defineComponent({
         )
       }
 
+      const card = (
+        <VDateRangeCard
+          v-model={ model.value }
+          v-model:displayDate={ displayDate.value }
+          v-model:viewMode={ viewMode.value }
+          v-model:inputMode={ inputMode.value }
+        />
+      )
+
       return (
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
-          <VMenu
-            offset={ [-30, 0] }
-            closeOnContentClick={ false }
-            v-slots={{
-              activator: ({ props: slotProps }) => (
-                <div class="v-date-range-field" { ...slotProps }>
-                  <VTextField
-                    v-model={ startInput.value }
-                    prependInnerIcon={ props.prependIcon }
-                    placeholder={ props.placeholder }
-                    label={ props.fromLabel }
-                  />
-                  <div class="v-date-range-field__divider">to</div>
-                  <VTextField
-                    v-model={ endInput.value }
-                    prependInnerIcon={ props.prependIcon }
-                    placeholder={ props.placeholder }
-                    label={ props.toLabel }
-                  />
-                </div>
-              ),
-              default: () => (
-                <VDateRangeCard v-model={ model.value } />
-              ),
-            }}
-          />
+          <div class="v-date-range-field">
+            <VMenu
+              offset={ [-30, 0] }
+              closeOnContentClick={ false }
+              v-slots={{
+                activator: ({ props: slotProps }) => (
+                  <div { ...slotProps } style="flex: 1 1 auto;">
+                    <VTextField
+                      { ...slotProps }
+                      v-model={ startInput.value }
+                      prependInnerIcon={ props.prependIcon }
+                      placeholder={ props.placeholder }
+                      label={ props.fromLabel }
+                    />
+                  </div>
+                ),
+                default: () => card,
+              }}
+            />
+            <div class="v-date-range-field__divider">to</div>
+            <VMenu
+              offset={ [-30, 0] }
+              closeOnContentClick={ false }
+              v-slots={{
+                activator: ({ props: slotProps }) => (
+                  <div { ...slotProps } style="flex: 1 1 auto;">
+                    <VTextField
+                      v-model={ endInput.value }
+                      prependInnerIcon={ props.prependIcon }
+                      placeholder={ props.placeholder }
+                      label={ props.toLabel }
+                    />
+                  </div>
+                ),
+                default: () => card,
+              }}
+            />
+          </div>
         </VDefaultsProvider>
       )
     })

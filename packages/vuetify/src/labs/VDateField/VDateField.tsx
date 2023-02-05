@@ -14,8 +14,10 @@ import { useDisplay } from '@/composables'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { InjectionKey, nextTick, onBeforeMount } from 'vue'
+import { computed, provide, ref, watch } from 'vue'
+import { defineComponent, useRender, wrapInArray } from '@/util'
+import { createDateField } from './composables'
 
 export const VDateField = defineComponent({
   name: 'VDateField',
@@ -31,38 +33,49 @@ export const VDateField = defineComponent({
     },
     label: String,
     modelValue: null,
-    locale: null,
     mobile: Boolean,
+    displayDate: null,
   },
 
   emits: {
     'update:modelValue': (date: any) => true,
     'update:displayDate': (date: any) => true,
+    'update:inputMode': (mode: string) => true,
   },
 
   setup (props, { slots, emit }) {
-    const locale = computed(() => props.locale)
-    const { adapter } = useDate(locale)
-    const model = useProxiedModel(props, 'modelValue')
+    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, false)
     const inputModel = ref('')
     const textFieldRef = ref<VTextField>()
-    const selected = ref()
 
-    watch(inputModel, (newValue, oldValue) => {
-      if (!newValue) model.value = null
+    // watch(inputModel, (newValue, oldValue) => {
+    //   if (!newValue) model.value = null
 
-      if (oldValue === newValue) return
+    //   if (oldValue === newValue) return
 
-      // TODO: Better valid check here
-      if (newValue.length === 10 && adapter.value.isValid(newValue)) {
-        model.value = adapter.value.date(newValue)
+    //   console.log(newValue)
+
+    //   // TODO: Better valid check here
+    //   if (newValue.length === 10 && adapter.value.isValid(newValue)) {
+    //     model.value = adapter.value.date(newValue)
+    //   }
+    // })
+
+    function handleBlur () {
+      if (adapter.value.isValid(inputModel.value)) {
+        const date = adapter.value.date(inputModel.value)
+
+        if (!adapter.value.isEqual(date, model.value)) {
+          model.value = date
+          displayDate.value = date
+        }
       }
-    })
+    }
 
     watch(model, newValue => {
-      if (!newValue) return
+      if (!newValue.length) return
 
-      inputModel.value = adapter.value.format(newValue, 'keyboardDate')
+      inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
     })
 
     const { mobile } = useDisplay()
@@ -72,6 +85,7 @@ export const VDateField = defineComponent({
         <div { ...slotProps }>
           <VTextField
             v-model={ inputModel.value }
+            onBlur={ handleBlur }
             prependInnerIcon={ props.prependInnerIcon }
             placeholder={ props.placeholder }
             label={ props.label }
@@ -88,15 +102,16 @@ export const VDateField = defineComponent({
               activator,
               default: ({ isActive }) => (
                 <VDatePicker
-                  v-model={ selected.value }
+                  v-model={ model.value }
+                  v-model:inputMode={ inputMode.value }
+                  v-model:viewMode={ viewMode.value }
+                  v-model:displayDate={ displayDate.value }
                   showActions
                   onSave={() => {
-                    model.value = selected.value
                     isActive.value = false
                   }}
                   onCancel={() => {
                     isActive.value = false
-                    selected.value = model.value
                   }}
                 />
               ),
@@ -116,10 +131,14 @@ export const VDateField = defineComponent({
                 <VDateCard
                   modelValue={ model.value }
                   onUpdate:modelValue={(value: any) => {
-                    isActive.value = false
                     model.value = value
-                    textFieldRef.value?.focus()
+                    nextTick(() => {
+                      textFieldRef.value?.focus()
+                    })
                   }}
+                  v-model:displayDate={ displayDate.value }
+                  v-model:viewMode={ viewMode.value }
+                  v-model:inputMode={ inputMode.value }
                 />
               ),
             }}

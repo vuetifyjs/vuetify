@@ -20,23 +20,23 @@ import { defineComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VBtn } from '@/components/VBtn'
+import { useDate } from '@/composables/date'
 
 export const VDatePicker = defineComponent({
   name: 'VDatePicker',
 
   props: {
     color: String,
-    input: {
+    inputMode: {
       type: String as PropType<'keyboard' | 'calendar'>,
       default: 'calendar',
     },
-    mode: {
+    viewMode: {
       type: String as PropType<'month' | 'years'>,
       default: 'month',
     },
     modelValue: null,
     displayDate: null,
-    locale: null,
     ...makeTransitionProps({
       transition: 'fade',
     }),
@@ -44,79 +44,98 @@ export const VDatePicker = defineComponent({
   },
 
   emits: {
-    save: () => true,
+    save: (date: any) => true,
     cancel: () => true,
     'update:modelValue': (date: any) => true,
     'update:displayDate': (date: any) => true,
-    'update:mode': (mode: 'month' | 'years') => true,
-    'update:input': (mode: 'keyboard' | 'calendar') => true,
+    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:inputMode': (mode: 'keyboard' | 'calendar') => true,
   },
 
   setup (props, { emit }) {
-    const { mode, input, model, adapter, displayDate } = createDatePicker(props)
+    const { adapter } = useDate()
+    createDatePicker(props)
 
-    const inputModel = ref(model.value[0] ? adapter.value.format(model.value[0], 'keyboardDate') : '')
+    const inputModel = ref(props.modelValue?.length ? adapter.value.format(props.modelValue[0], 'keyboardDate') : '')
+    const selected = ref<any[]>(props.modelValue ?? [])
 
-    watch(model, newValue => {
-      if (!newValue?.length) return
+    watch(inputModel, () => {
+      const { isValid, date } = adapter.value
 
-      inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
+      selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
+    })
+
+    watch(selected, () => {
+      if (!props.showActions) {
+        emit('update:modelValue', selected.value)
+      }
     })
 
     const handleCancel = () => emit('cancel')
     const handleSave = () => {
-      if (adapter.value.isValid(inputModel.value)) {
-        model.value = [adapter.value.date(inputModel.value)]
-      }
-
-      emit('save')
+      emit('update:modelValue', selected.value)
+      emit('save', selected.value)
     }
 
-    useRender(() => (
-      <VPicker
-        class="v-date-picker"
-        v-slots={{
-          header: () => (
-            <VDatePickerHeader
-              color={ props.color }
-            />
-          ),
-          default: () => input.value === 'calendar' ? (
-            <>
-              <VDatePickerControls />
-              <MaybeTransition transition={ props.transition } mode="out-in">
-                { mode.value === 'month' ? (
-                  <VDatePickerMonth
-                    locale={ props.locale }
-                    v-model:displayDate={ displayDate.value }
-                    v-model={ model.value }
-                  />
-                ) : (
-                  <VDatePickerYears
-                    height="300"
-                    locale={ props.locale }
-                  />
-                ) }
-              </MaybeTransition>
-            </>
-          ) : (
-            <div class="v-date-picker__input">
-              <VTextField
-                v-model={ inputModel.value }
-                label="Enter date"
-                placeholder="yyyy/mm/dd"
+    useRender(() => {
+      return (
+        <VPicker
+          class="v-date-picker"
+          v-slots={{
+            header: () => (
+              <VDatePickerHeader
+                modelValue={ selected.value }
+                inputMode={ props.inputMode }
+                onUpdate:inputMode={ inputMode => emit('update:inputMode', inputMode) }
+                onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                color={ props.color }
               />
-            </div>
-          ),
-          actions: props.showActions && (() => (
-            <div>
-              <VBtn variant="text" color={props.color} onClick={handleCancel}>Cancel</VBtn>
-              <VBtn variant="text" color={props.color} onClick={handleSave}>Ok</VBtn>
-            </div>
-          )),
-        }}
-      />
-    ))
+            ),
+            default: () => props.inputMode === 'calendar' ? (
+              <>
+                <VDatePickerControls
+                  displayDate={ props.displayDate }
+                  onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                  viewMode={ props.viewMode }
+                  onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+                />
+                <MaybeTransition transition={ props.transition } mode="out-in">
+                  { props.viewMode === 'month' ? (
+                    <VDatePickerMonth
+                      v-model={ selected.value }
+                      displayDate={ props.displayDate }
+                      onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                    />
+                  ) : (
+                    <VDatePickerYears
+                      height="300"
+                      displayDate={ props.displayDate }
+                      onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                      viewMode={ props.viewMode }
+                      onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+                    />
+                  ) }
+                </MaybeTransition>
+              </>
+            ) : (
+              <div class="v-date-picker__input">
+                <VTextField
+                  v-model={ inputModel.value }
+                  label="Enter date"
+                  placeholder="yyyy/mm/dd"
+                />
+              </div>
+            ),
+            actions: props.showActions && (() => (
+              <div>
+                <VBtn variant="text" color={props.color} onClick={handleCancel}>Cancel</VBtn>
+                <VBtn variant="text" color={props.color} onClick={handleSave}>Ok</VBtn>
+              </div>
+            )),
+          }}
+        />
+      )
+    })
 
     return {}
   },

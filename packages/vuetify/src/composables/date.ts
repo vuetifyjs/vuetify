@@ -1,21 +1,20 @@
 import type { DateAdapter } from '@/adapters/date-adapter'
+import { enUS } from 'date-fns/locale'
 import type { InjectionKey, Ref } from 'vue'
-import { computed, inject } from 'vue'
+import { shallowRef, inject } from 'vue'
+import { useLocale } from './locale'
 
-export const DateAdapterSymbol: InjectionKey<{ adapter: DateAdapter<any> }> = Symbol.for('vuetify:date-adapter')
+export const DateAdapterSymbol: InjectionKey<{ adapter: Ref<DateAdapter<any>> }> = Symbol.for('vuetify:date-adapter')
 
 export function createDate (options: { adapter: DateAdapter<any> }) {
-  return options
+  return { adapter: shallowRef(new options.adapter({ locale: enUS })) }
 }
 
-export function useDate (locale: Ref<string>) {
+export function useDate () {
+  const { current } = useLocale()
   const date = inject(DateAdapterSymbol)
 
   if (!date) throw new Error('foo')
 
-  const adapter = computed<DateAdapter<any>>(() => {
-    return new date.adapter({ locale: locale.value })
-  })
-
-  return { adapter }
+  return date
 }

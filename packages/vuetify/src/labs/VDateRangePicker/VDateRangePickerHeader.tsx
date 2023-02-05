@@ -6,12 +6,12 @@ import { VBtn } from '@/components'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
-import { useDatePicker } from '../VDatePicker/composables'
 
 // Utilities
 import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
 import { useLocale } from '@/composables/locale'
+import { useDate } from '@/composables/date'
 
 export const VDateRangePickerHeader = defineComponent({
   name: 'VDateRangePickerHeader',
@@ -33,43 +33,48 @@ export const VDateRangePickerHeader = defineComponent({
       default: '$close',
     },
     showInputSwitch: Boolean,
+    inputMode: String,
+    modelValue: null,
+    displayDate: null,
+    range: null,
   },
 
   emits: {
     cancel: () => true,
     save: () => true,
-    'update:input': (input: string) => true,
+    'update:inputMode': (input: string) => true,
+    'update:displayDate': (date: any) => true,
   },
 
   setup (props, { emit }) {
     const { t } = useLocale()
-    const { input, model, adapter, displayDate } = useDatePicker()
+    const { adapter } = useDate()
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const headerText = computed(() => {
       if (props.header) return props.header
 
-      if (!model.value.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
+      if (!props.modelValue.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}header.placeholder`)
 
-      if (model.value.length === 1) return adapter.value.format(model.value[0], 'normalDateWithWeekday')
+      if (props.modelValue.length === 1) return adapter.value.format(props.modelValue[0], 'normalDateWithWeekday')
 
-      return model.value.map(date => adapter.value.format(date, 'shortDate')).join(' - ')
+      return props.modelValue.map(date => adapter.value.format(date, 'shortDate')).join(' - ')
     })
 
     const titleText = computed(() => {
       if (props.title) return props.title
 
-      if (!model.value.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
+      if (!props.modelValue.length) return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.placeholder`)
 
       return t(`$vuetify.datePicker.${props.range ? 'range.' : ''}title.selected`)
     })
 
-    function scrollToDisplayDate () {
-      if (!model.value.length) return
+    function handleHeaderClick () {
+      if (!props.modelValue.length) return
 
-      const date = model.value[0]
+      const date = props.modelValue[0]
 
-      displayDate.value = date
+      emit('update:displayDate', date)
     }
 
     useRender(() => (
@@ -77,11 +82,11 @@ export const VDateRangePickerHeader = defineComponent({
         class={[
           'v-date-range-picker-header',
           backgroundColorClasses.value,
-          `v-date-range-picker-header--${input.value}`,
+          `v-date-range-picker-header--${props.inputMode}`,
         ]}
         style={backgroundColorStyles.value}
       >
-        { input.value === 'calendar' && (
+        { props.inputMode === 'calendar' && (
           <div key="calendar-buttons" class="v-date-range-picker-header__buttons">
             <VBtn
               variant="text"
@@ -103,14 +108,14 @@ export const VDateRangePickerHeader = defineComponent({
           <div class="v-date-range-picker-header__text">
             <div
               class="v-date-range-picker-header__date"
-              onClick={ scrollToDisplayDate }
+              onClick={ handleHeaderClick }
             >
               { headerText.value }
             </div>
             <VBtn
               variant="text"
-              icon={ input.value === 'keyboard' ? props.calendarIcon : props.keyboardIcon }
-              onClick={ () => input.value = input.value === 'keyboard' ? 'calendar' : 'keyboard' }
+              icon={ props.inputMode === 'keyboard' ? props.calendarIcon : props.keyboardIcon }
+              onClick={ () => emit('update:inputMode', props.inputMode === 'keyboard' ? 'calendar' : 'keyboard') }
             />
           </div>
         </div>

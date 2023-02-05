@@ -14,6 +14,7 @@ import { defineComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { useDate } from '@/composables/date'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
@@ -33,6 +34,8 @@ export const VDatePickerMonth = defineComponent({
     },
     displayDate: null,
     hoverDate: null,
+    modelValue: null,
+    multiple: Boolean,
   },
 
   emits: {
@@ -42,25 +45,29 @@ export const VDatePickerMonth = defineComponent({
   },
 
   setup (props, { emit, slots }) {
-    const { adapter, model } = useDatePicker()
+    const { adapter } = useDate()
+    const { isDragging, dragHandle, hasScrolled } = useDatePicker()
 
     const month = computed(() => props.displayDate)
 
     const findClosestDate = (date: any, dates: readonly any[]) => {
-      if (!dates?.length) return null
+      const { isSameDay, getDiff } = adapter.value
+      const [startDate, endDate] = dates
 
-      return dates.reduce((prev, curr) => {
-        const distCurr = Math.abs(adapter.value.getDiff(date, curr, 'days'))
-        const distPrev = Math.abs(adapter.value.getDiff(date, prev, 'days'))
+      if (isSameDay(startDate, endDate)) {
+        return getDiff(date, startDate, 'days') > 0 ? endDate : startDate
+      }
 
-        return distCurr < distPrev ? curr : prev
-      })
+      const distStart = Math.abs(getDiff(date, startDate))
+      const distEnd = Math.abs(getDiff(date, endDate))
+
+      return distStart < distEnd ? startDate : endDate
     }
 
     const hoverRange = computed<[any, any] | null>(() => {
       if (!props.hoverDate) return null
 
-      const closestDate = findClosestDate(props.hoverDate, model.value)
+      const closestDate = findClosestDate(props.hoverDate, props.modelValue)
 
       if (!closestDate) return null
 
@@ -92,38 +99,41 @@ export const VDatePickerMonth = defineComponent({
       return weeks
     })
 
-    const isSameCalendarDate = (a: any, b: any) => {
-      const { isSameYear, isSameDay, isSameMonth } = adapter.value
-      return isSameYear(a, b) && isSameMonth(a, b) && isSameDay(a, b)
-    }
-
     const daysInMonth = computed(() => {
-      const { format, getYear, getMonth, isWithinRange, isSameMonth } = adapter.value
-      const validDates = model.value.filter(v => !!v)
+      const { format, getYear, getMonth, isWithinRange, isSameMonth, isEqual, isSameDay } = adapter.value
+      const validDates = props.modelValue.filter(v => !!v)
       const isRange = validDates.length > 1
 
       const days = weeksInMonth.value.flat()
       const today = adapter.value.date()
 
-      return days.map((date, index) => {
-        const modelIndex = model.value.findIndex(modelDate => isSameCalendarDate(date, modelDate))
+      const startDate = validDates[0]
+      const endDate = validDates[1]
 
+      return days.map((date, index) => {
+        const isStart = isSameDay(date, startDate)
+        const isEnd = isSameDay(date, endDate)
         const isAdjacent = !isSameMonth(date, month.value)
+        const isSame = validDates.length === 2 && isEqual(startDate, endDate)
 
         return {
           date,
+          formatted: adapter.value.format(date, 'keyboardDate'),
           year: getYear(date),
           month: getMonth(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
-          isSelected: modelIndex > -1 && !isAdjacent,
-          isStart: modelIndex === 0,
-          isEnd: modelIndex === 1,
-          isToday: adapter.value.isSameDay(date, today),
+          isSelected: isStart || isEnd,
+          isStart,
+          isEnd,
+          isToday: isSameDay(date, today),
           isAdjacent,
-          inRange: isRange && (modelIndex === 0 || (validDates.length === 2 && isWithinRange(date, validDates as [any, any]))),
-          isHovered: props.hoverDate === date,
-          inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
+          isHidden: isAdjacent && props.hideAdjacentMonths,
+          inRange: isRange && !isSame && (isStart || (validDates.length === 2 && isWithinRange(date, validDates as [any, any]))),
+          // isHovered: props.hoverDate === date,
+          // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
+          isHovered: false,
+          inHover: false,
           localized: format(date, 'dayOfMonth'),
         }
       })
@@ -138,34 +148,121 @@ export const VDatePickerMonth = defineComponent({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     function selectDate (date: any) {
-      const value = model.value.slice()
+      let newModel = props.modelValue.slice()
 
-      if (props.range) {
-        if (value.find(d => isSameCalendarDate(d, date))) {
-          model.value = model.value.filter(v => !isSameCalendarDate(v, date))
-        } else if (value.length === 2) {
-          const closest = findClosestDate(date, value)
-
-          const index = value.indexOf(closest)
-
-          model.value = value.map((v, i) => i === index ? date : v)
-        } else {
-          if (adapter.value.isBefore(value[0], date)) {
-            model.value = [value[0], date]
+      if (props.multiple) {
+        if (isDragging.value && dragHandle.value != null) {
+          const otherIndex = (dragHandle.value + 1) % 2
+          const fn = otherIndex === 0 ? 'isBefore' : 'isAfter'
+          if (adapter.value[fn](date, newModel[otherIndex])) {
+            newModel[dragHandle.value] = newModel[otherIndex]
+            newModel[otherIndex] = date
+            dragHandle.value = otherIndex
           } else {
-            model.value = [date, value[0]]
+            newModel[dragHandle.value] = date
+          }
+        } else {
+          if (newModel.find(d => adapter.value.isSameDay(d, date))) {
+            newModel = newModel.filter(v => !adapter.value.isSameDay(v, date))
+          } else if (newModel.length === 2) {
+            const closest = findClosestDate(date, newModel)
+
+            const index = newModel.indexOf(closest)
+
+            newModel = newModel.map((v, i) => i === index ? date : v)
+          } else {
+            if (adapter.value.isBefore(newModel[0], date)) {
+              newModel = [newModel[0], date]
+            } else {
+              newModel = [date, newModel[0]]
+            }
           }
         }
       } else {
-        if (!adapter.value.isSameMonth(month.value, date)) {
-          emit('update:displayDate', date)
-        }
-
-        model.value = [date]
+        newModel = [date]
       }
+
+      emit('update:modelValue', newModel)
     }
 
-    let hoverTimeout: NodeJS.Timeout
+    const daysRef = ref()
+
+    function findElement (el: HTMLElement | null): any {
+      if (!el || el === daysRef.value) return null
+
+      if ('vDate' in el.dataset) {
+        return adapter.value.date(el.dataset.vDate)
+      }
+
+      return findElement(el.parentElement)
+    }
+
+    function findDate (e: MouseEvent | TouchEvent) {
+      const x = 'changedTouches' in e ? e.changedTouches[0]?.clientX : e.clientX
+      const y = 'changedTouches' in e ? e.changedTouches[0]?.clientY : e.clientY
+      const el = document.elementFromPoint(x, y) as HTMLElement
+
+      return findElement(el)
+    }
+
+    let canDrag = false
+    function handleMousedown (e: MouseEvent | TouchEvent) {
+      hasScrolled.value = false
+
+      const selected = findDate(e)
+
+      if (!selected) return
+
+      const modelIndex = props.modelValue.findIndex(d => adapter.value.isEqual(d, selected))
+
+      if (modelIndex >= 0) {
+        canDrag = true
+        dragHandle.value = modelIndex
+
+        window.addEventListener('touchmove', handleTouchmove, { passive: false })
+        window.addEventListener('mousemove', handleTouchmove, { passive: false })
+
+        e.preventDefault()
+      }
+
+      window.addEventListener('touchend', handleTouchend, { passive: false })
+      window.addEventListener('mouseup', handleTouchend, { passive: true })
+    }
+
+    function handleTouchmove (e: MouseEvent | TouchEvent) {
+      if (!canDrag) return
+
+      e.preventDefault()
+
+      isDragging.value = true
+
+      const over = findDate(e)
+
+      if (!over) return
+
+      selectDate(over)
+    }
+
+    function handleTouchend (e: MouseEvent | TouchEvent) {
+      if (e.cancelable) e.preventDefault()
+
+      window.removeEventListener('touchmove', handleTouchmove)
+      window.removeEventListener('mousemove', handleTouchmove)
+      window.removeEventListener('touchend', handleTouchend)
+      window.removeEventListener('mouseup', handleTouchend)
+
+      const end = findDate(e)
+
+      if (!end) return
+
+      if (!hasScrolled.value) {
+        selectDate(end)
+      }
+
+      isDragging.value = false
+      dragHandle.value = null
+      canDrag = false
+    }
 
     return () => (
       <div class="v-date-picker-month">
@@ -185,7 +282,12 @@ export const VDatePickerMonth = defineComponent({
           </div>
         ) }
 
-        <div class="v-date-picker-month__days">
+        <div
+          ref={ daysRef }
+          class="v-date-picker-month__days"
+          onMousedown={ handleMousedown }
+          onTouchstart={ handleMousedown }
+        >
           { !props.hideWeekdays && adapter.value.getWeekdays().map(weekDay => (
             <div
               class={[
@@ -195,7 +297,7 @@ export const VDatePickerMonth = defineComponent({
             >{ weekDay }</div>
           )) }
 
-          { daysInMonth.value.map(item => (
+          { daysInMonth.value.map((item, index) => (
             <div
               class={[
                 'v-date-picker-month__day',
@@ -204,12 +306,13 @@ export const VDatePickerMonth = defineComponent({
                   'v-date-picker-month__day--start': item.isStart,
                   'v-date-picker-month__day--end': item.isEnd,
                   'v-date-picker-month__day--adjacent': item.isAdjacent,
-                  'v-date-picker-month__day--hide-adjacent': item.isAdjacent && props.hideAdjacentMonths,
+                  'v-date-picker-month__day--hide-adjacent': item.isHidden,
                   'v-date-picker-month__day--week-start': item.isWeekStart,
                   'v-date-picker-month__day--week-end': item.isWeekEnd,
                   'v-date-picker-month__day--hovered': item.isHovered,
                 },
               ]}
+              data-v-date={ !item.isHidden ? item.formatted : undefined }
             >
               { item.inRange && (
                 <div
@@ -232,18 +335,9 @@ export const VDatePickerMonth = defineComponent({
               { (!props.hideAdjacentMonths || (props.hideAdjacentMonths && !item.isAdjacent)) && (
                 <VBtn
                   icon
+                  ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
                   variant={ (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
                   color={ item.isSelected ? props.color : (item.isToday || item.isHovered) ? undefined : 'transparent' }
-                  onClick={ () => selectDate(item.date) }
-                  onMouseenter={ () => {
-                    clearTimeout(hoverTimeout)
-                    emit('update:hoverDate', item.date)
-                  }}
-                  onMouseleave={ () => {
-                    hoverTimeout = setTimeout(() => {
-                      emit('update:hoverDate', null)
-                    }, 200)
-                  }}
                 >
                   { item.localized }
                 </VBtn>

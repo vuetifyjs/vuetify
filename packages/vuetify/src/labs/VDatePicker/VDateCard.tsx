@@ -22,17 +22,16 @@ export const VDateCard = defineComponent({
 
   props: {
     color: String,
-    input: {
+    inputMode: {
       type: String as PropType<'keyboard' | 'calendar'>,
       default: 'calendar',
     },
-    mode: {
+    viewMode: {
       type: String as PropType<'month' | 'years'>,
       default: 'month',
     },
     modelValue: null,
     displayDate: null,
-    locale: null,
     ...makeTransitionProps({
       transition: 'fade',
     }),
@@ -41,26 +40,40 @@ export const VDateCard = defineComponent({
 
   emits: {
     'update:modelValue': (value: any) => true,
+    'update:displayDate': (value: any) => true,
+    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:inputMode': (value: any) => true,
   },
 
   setup (props, { emit }) {
-    const { mode, displayDate } = createDatePicker(props)
+    createDatePicker(props)
+
     useRender(() => (
       <VCard
         class="v-date-card"
       >
-        <VDatePickerControls />
+        <VDatePickerControls
+          displayDate={ props.displayDate }
+          onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+          viewMode={ props.viewMode }
+          onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+        />
         <MaybeTransition transition={ props.transition } mode="out-in">
-          { mode.value === 'month' ? (
+          { props.viewMode === 'month' ? (
             <div class="v-date-card__month">
               <VDatePickerMonth
-                v-model:displayDate={ displayDate.value }
-                locale={ props.locale }
+                modelValue={ props.modelValue }
+                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
+                displayDate={ props.displayDate }
+                onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
               />
             </div>
           ) : (
             <VDatePickerYears
-              locale={ props.locale }
+              displayDate={ props.displayDate }
+              onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+              viewMode={ props.viewMode }
+              onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
             />
           ) }
         </MaybeTransition>
