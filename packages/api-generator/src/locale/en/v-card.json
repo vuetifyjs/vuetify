@@ -5,7 +5,6 @@
     "image": "Apply a specific background image to the component.",
     "prependIcon": "Prepends a [v-icon](/components/icons/) component to the header",
     "subtitle": "Generates a `v-card-subtitle` component with the supplied value",
-    "text": "Generates a `v-card-text` component with the supplied value",
     "title": "Generates a `v-card-title` component with the supplied value",
     "link": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-card.json))"
   },

@@ -49,7 +49,8 @@
     "default": "The default Vue slot.",
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "prepend": "Adds an item outside the input and before input content",
-    "progress": "Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)"
+    "progress": "Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)",
+    "text": "Slot for the component's text content"
   },
   "events": {
     "click": "Event that is emitted when the component is clicked",

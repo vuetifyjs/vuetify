@@ -14,7 +14,6 @@
     "minHeight": "Sets the minimum height for the component.",
     "minWidth": "Sets the minimum width for the component.",
     "prominent": "Displays a larger vertically centered icon to draw more attention.",
-    "text": "Specify subtitle/body text for the alert.",
     "tile": "Removes the component's border-radius.",
     "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "type": "Create a specialized alert that uses a contextual color and has a pre-defined icon.",
