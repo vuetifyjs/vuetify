@@ -1,14 +1,17 @@
 <template>
-  <v-sheet
-    :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
-    :min-height="minHeight"
-    :theme="isDark ? 'dark' : 'light'"
-    class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
-    rounded
-    width="100%"
-  >
-    <slot />
-  </v-sheet>
+  <v-lazy :min-height="minHeight">
+    <v-sheet
+      v-bind="$attrs"
+      :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+      :min-height="minHeight"
+      :theme="isDark ? 'dark' : 'light'"
+      class="v-app-ad d-inline-flex flex-child-1 grow-shrink-0"
+      rounded
+      width="100%"
+    >
+      <slot />
+    </v-sheet>
+  </v-lazy>
 </template>
 
 <script setup>
@@ -39,6 +42,12 @@
   const isDark = computed(() => {
     return theme.current.value.dark
   })
+</script>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
 </script>
 
 <style lang="sass">
