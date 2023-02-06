@@ -22,6 +22,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -95,6 +96,7 @@ export const VChip = defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { t } = useLocale()
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
@@ -266,6 +268,7 @@ export const VChip = defineComponent({
             >
               <div
                 class="v-chip__close"
+                aria-label={ t(props.closeLabel) }
                 onClick={ onCloseClick }
               >
                 { slots.close ? slots.close() : (<VIcon />) }
