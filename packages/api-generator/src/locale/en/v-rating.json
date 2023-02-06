@@ -13,7 +13,6 @@
     "itemLabels": "Array of labels to display next to each item.",
     "itemLabelPosition": "Position of item labels. Accepts 'top' and 'bottom'.",
     "activeColor": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-rating.json))",
-    "ripple": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-rating.json))",
     "itemAriaLabel": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-rating.json))"
   },
   "slots": {

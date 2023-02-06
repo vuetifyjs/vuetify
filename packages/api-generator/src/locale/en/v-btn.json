@@ -6,8 +6,7 @@
     "plain": "Removes the default background change applied when hovering over the button.",
     "stacked": "Displays the button as a flex-column.",
     "text": "Makes the background transparent. When using the **color** prop, the color will be applied to the button text instead of the background.",
-    "symbol": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))",
-    "ripple": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"
+    "symbol": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"
   },
   "events": {
     "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"

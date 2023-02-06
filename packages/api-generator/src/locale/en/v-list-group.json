@@ -1,11 +1,9 @@
 {
   "props": {
-    "appendIcon": "Appends an icon to the component, uses the same syntax as `v-icon`",
     "disabled": "Puts all children inputs into a disabled state",
     "group": "Assign a route namespace. Accepts a string or regexp for determining active state",
     "noAction": "Removes left padding assigned for action icons from group items",
     "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
-    "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "subGroup": "Designate the component as nested list group",
     "value": "Expands / Collapse the list-group",
     "title": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-group.json))",
@@ -17,8 +15,6 @@
     "items": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-group.json))"
   },
   "slots": {
-    "appendIcon": "Appends an icon to the component, uses the same syntax as `v-icon`",
-    "prependIcon": "Prepends an icon to the component, uses the same syntax as `v-icon`",
     "activator": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-group.json))",
     "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-group.json))"
   }

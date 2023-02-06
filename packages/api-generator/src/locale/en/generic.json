@@ -2,7 +2,7 @@
   "props": {
     "active": "Controls the **active** state of the item. This is typically used to highlight the component",
     "activeClass": "The class applied to the component when it is in an active state",
-    "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot",
+    "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot.",
     "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attachs to the root `v-app` component by default",
     "auto": "Centers list on selected element",
     "appendAvatar": "Appends a [v-avatar](/components/avatars/) component after default content in the **append** slot",
@@ -26,6 +26,7 @@
     "modelValue": "The v-model value of the component. If component supports the **multiple** prop, this defaults to an empty array",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot before default content",
+    "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "selectedClass": "Configure the active CSS class applied when an item is selected.",
     "size": "Sets the height and width of the component.",
     "tag": "Specify a custom tag used on the root element",

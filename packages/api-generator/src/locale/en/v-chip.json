@@ -14,8 +14,7 @@
     "pill": "Remove `v-avatar` padding",
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)",
     "text": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-chip.json))",
-    "closable": "Adds remove button and then a chip can be closed",
-    "ripple": "Applies the v-ripple directive"
+    "closable": "Adds remove button and then a chip can be closed"
   },
   "events": {
     "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",

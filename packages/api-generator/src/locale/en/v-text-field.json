@@ -1,6 +1,5 @@
 {
   "props": {
-    "appendIcon": "Appends an icon to the outside the component's input, uses same syntax as `v-icon`",
     "autoGrow": "Auto-grows the input. This option requires the use of **v-model**",
     "autofocus": "Enables autofocus",
     "filled": "Applies the alternate filled input style",
