@@ -5,7 +5,7 @@
     "fillDot": "Remove outer border of item dot, making the color fill the entire dot",
     "hideDot": "Hide the timeline item dot",
     "hideOpposite": "Hide opposite content if it exists",
-    "icon": "Specify icon to display inside dot",
+    "icon": "Apply a specific icon to the inside dot using the [v-icon](/components/icons/) component.",
     "iconColor": "Color of the icon",
     "index": "Used to allow dynamically shown items to be re-inserted in the correct position",
     "side": "Show the item either **before** or **after** the timeline. This will override the implicit ordering of items, but will in turn be overriden by the `v-timeline` **single-side** prop",

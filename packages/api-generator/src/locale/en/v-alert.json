@@ -8,7 +8,6 @@
     "dense": "Decreases component's height.",
     "elevation": "Designates an elevation applied to the component between 0 and 24. You can find more information on the [elevation page](/styles/elevation).",
     "height": "Sets the height for the component.",
-    "icon": "Designates a specific icon.",
     "maxHeight": "Sets the maximum height for the component.",
     "maxWidth": "Sets the maximum width for the component.",
     "minHeight": "Sets the minimum height for the component.",

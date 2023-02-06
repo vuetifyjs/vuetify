@@ -2,7 +2,7 @@
   "props": {
     "block": "Expands the button to 100% of available space.",
     "flat": "Removes the button box shadow.",
-    "icon": "Designates the button as icon. Button will become _round_ and applies the **text** prop.",
+    "icon": "Apply a specific icon using the [v-icon](/components/icons/) component. The button will become _round_.",
     "plain": "Removes the default background change applied when hovering over the button.",
     "stacked": "Displays the button as a flex-column.",
     "symbol": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"
