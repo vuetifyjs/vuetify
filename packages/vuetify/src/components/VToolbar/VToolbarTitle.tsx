@@ -2,10 +2,16 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { SlotsToProps } from '@/util'
+
+export const makeVToolbarTitleProps = propsFactory({
+  text: String,
+
+  ...makeTagProps(),
+}, 'v-toolbar-title')
 
 export const VToolbarTitle = genericComponent<new () => {
   $props: SlotsToProps<{
@@ -15,11 +21,7 @@ export const VToolbarTitle = genericComponent<new () => {
 }>()({
   name: 'VToolbarTitle',
 
-  props: {
-    text: String,
-
-    ...makeTagProps(),
-  },
+  props: makeVToolbarTitleProps(),
 
   setup (props, { slots }) {
     useRender(() => {
