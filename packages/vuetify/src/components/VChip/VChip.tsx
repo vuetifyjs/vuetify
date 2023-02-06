@@ -22,7 +22,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
-import { useLocale } from '@/composables'
+import { useLocale } from '@/composables/locale'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
