@@ -79,7 +79,7 @@
   import { useUserStore } from '@/store/user'
 
   // Utilities
-  import { computed } from 'vue'
+  import { computed, onBeforeMount, onServerPrefetch } from 'vue'
   import { differenceInHours } from 'date-fns'
 
   const { event } = useGtag()
@@ -110,7 +110,8 @@
     notifications.last.banner = Date.now()
   }
 
-  setTimeout(banners.fetch, 1000)
+  onServerPrefetch(banners.fetch)
+  onBeforeMount(banners.fetch)
 </script>
 
 <style lang="sass">
