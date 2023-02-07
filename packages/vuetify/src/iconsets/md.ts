@@ -47,7 +47,7 @@ const aliases: IconAliases = {
 
 const md: IconSet = {
   // Not using mergeProps here, functional components merge props by default (?)
-  component: props => h(VLigatureIcon, { ...props, class: 'material-icons' }),
+  component: props => h(VLigatureIcon, { ...props, class: props.variant ? `material-icons-${props.variant}` : 'material-icons' }),
 }
 
 export { aliases, md }

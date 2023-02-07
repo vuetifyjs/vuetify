@@ -53,6 +53,7 @@ export interface IconProps {
   tag: string
   icon?: IconValue
   disabled?: Boolean
+  variant?: string
 }
 
 type IconComponent = JSXComponent<IconProps>
