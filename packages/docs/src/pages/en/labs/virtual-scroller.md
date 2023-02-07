@@ -49,35 +49,19 @@ The `v-virtual-scroll` component has a small API mainly used to configure the ro
 
 #### Height
 
-An initial height value is required in order to calculate which items to display.
+The `v-virtual-scroll` component does not have any initial height set on itself.
 
-The following code snippet is an example of a basic `v-virtual-scroll` component:
-
-```html
-<template>
-  <v-virtual-scroll :items="items" height="200">
-    <template v-slot:default="{ item }">
-      Virtual Item {{ item }}
-    </template>
-  </v-virtual-scroll>
-</template>
-
-<script>
-  export default {
-    data: () => ({
-      items: Array.from({ length: 1000 }, (k, v) => v + 1)
-    })
-  }
-</script>
-```
-
-Alternatively, wrap `v-virtual-scroll` with any element that has a defined height and achieve the same result. The following example uses a regular div with a custom style:
+The following code snippet uses the **height** prop:
 
 <example file="v-virtual-scroll/prop-height" />
 
+Another way of making sure that the component has height is to place it inside an element with `display: flex`.
+
+<example file="v-virtual-scroll/prop-height-parent" />
+
 #### Item Height
 
-For uniform lists, it's recommended that you define a specific **item-height**. This value is used for `v-virtual-scroll`'s calculations.
+For lists where the item height is static and uniform for all items, it's recommended that you define a specific **item-height**. This value is used for `v-virtual-scroll`'s calculations.
 
 <example file="v-virtual-scroll/prop-item-height" />
 
@@ -85,13 +69,9 @@ If your items are not of a uniform size, omit the **item-height** prop to have `
 
 <example file="v-virtual-scroll/prop-dynamic-item-height" />
 
-If the items you are rendering are objects, you must set the **item-key** prop. By default `v-virtual-scroll` looks for the **value** key. This should point to a unique property on the objects.
-
-<example file="v-virtual-scroll/prop-item-key" />
-
 #### Visible items
 
-The `v-virtual-scroll` component renders a set amount of visible items, meant to cover the viewport of the scroller, plus some amount of buffer below and beneath it so that scrolling looks and feels smooth. Modify this value by using the **visible-items** prop.
+The `v-virtual-scroll` component renders a set amount of visible items, meant to cover the viewport of the scroller, plus some amount of buffer above and below it so that scrolling looks and feels smooth. Modify this value by using the **visible-items** prop.
 
 <example file="v-virtual-scroll/prop-visible-items" />
 
@@ -107,6 +87,6 @@ The following is a collection of `v-virtual-scroll` examples that demonstrate ho
 
 #### User Directory
 
-The v-virtual-scroll component can render an unlimited amount of items by rendering only what it needs to fill the scroller’s viewport.
+The v-virtual-scroll component can render an large amount of items by rendering only what it needs to fill the scroller’s viewport.
 
 <example file="v-virtual-scroll/misc-user-directory" />
