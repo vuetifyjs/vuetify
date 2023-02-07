@@ -2,7 +2,7 @@
 import { defineStore } from 'pinia'
 
 // Data
-import data from '@/data/nav-alpha.json'
+import data from '@/data/nav.json'
 
 // Types
 export type RootState = {

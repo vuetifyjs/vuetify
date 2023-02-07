@@ -3,7 +3,7 @@ import './VDivider.sass'
 
 // Composables
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -28,7 +28,7 @@ export const VDivider = defineComponent({
 
   setup (props, { attrs }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
@@ -52,11 +52,11 @@ export const VDivider = defineComponent({
             'v-divider--vertical': props.vertical,
           },
           themeClasses.value,
-          backgroundColorClasses.value,
+          textColorClasses.value,
         ]}
         style={[
           dividerStyles.value,
-          backgroundColorStyles.value,
+          textColorStyles.value,
         ]}
         aria-orientation={
           !attrs.role || attrs.role === 'separator'

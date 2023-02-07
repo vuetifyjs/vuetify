@@ -112,15 +112,24 @@ export const VBtn = defineComponent({
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
     })
+    const valueAttr = computed(() => {
+      if (props.value === undefined) return undefined
+
+      return Object(props.value) === props.value
+        ? JSON.stringify(props.value, null, 0) : props.value
+    })
 
     useSelectLink(link, group?.select)
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasColor = !group || isActive.value
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
+      const hasColor = (
+        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (!group || link.isActive?.value)
+      )
 
       return (
         <Tag
@@ -168,6 +177,7 @@ export const VBtn = defineComponent({
             link.navigate?.(e)
             group?.toggle()
           } }
+          value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
 

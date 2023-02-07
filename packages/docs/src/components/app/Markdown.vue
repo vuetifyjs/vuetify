@@ -1,28 +1,20 @@
 <template>
-  <component :is="tag" class="v-markdown" v-html="markdown" />
+  <component :is="tag" class="v-markdown">
+    <component :is="{ template: markdown }" />
+  </component>
 </template>
 
 <script setup>
   // Utilities
   import { computed } from 'vue'
-  import Emoji from 'markdown-it-emoji/bare.js'
   import MarkdownIt from 'markdown-it'
+  import { configureMarkdown } from '@/util/markdown-it'
 
-  const md = MarkdownIt({
+  const md = configureMarkdown(MarkdownIt({
     html: true,
     linkify: true,
     typographer: true,
-  })
-
-  md.use(Emoji, {
-    defs: {
-      rocket: '🚀',
-      wrench: '🔧',
-      microscope: '🔬',
-      arrows_counterclockwise: '🔄',
-      fire: '🔥',
-    },
-  })
+  }))
 
   md.core.ruler.after('linkify', 'gh_links', state => {
     const blockTokens = state.tokens

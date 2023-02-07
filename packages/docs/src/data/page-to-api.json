@@ -47,7 +47,7 @@
   ],
   "components/checkboxes": [
     "v-checkbox",
-    "v-simple-checkbox"
+    "v-checkbox-btn"
   ],
   "components/chip-groups": [
     "v-chip",
@@ -102,12 +102,11 @@
     "v-list-group",
     "v-list-item",
     "v-list-item-action",
-    "v-list-item-action-text",
-    "v-list-item-avatar",
-    "v-list-item-content",
-    "v-list-item-icon",
+    "v-list-item-media",
     "v-list-item-subtitle",
-    "v-list-item-title"
+    "v-list-item-title",
+    "v-list-subheader",
+    "v-list-img"
   ],
   "components/menus": ["v-menu"],
   "components/navigation-drawers": ["v-navigation-drawer"],

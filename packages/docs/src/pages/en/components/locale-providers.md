@@ -14,7 +14,7 @@ The locale provider allows you to provide specific default prop values to compon
 
 ## API
 
-- [v-locale-provider](/api/v-locale-provider)
+<api-inline />
 
 ## Examples
 

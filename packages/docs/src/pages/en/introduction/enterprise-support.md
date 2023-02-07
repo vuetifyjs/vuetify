@@ -72,7 +72,7 @@ We offer live support for your Vue / Vuetify application on a variety of areas a
 
 <!-- ### Training & workshops { id="training-workshops" }
 
-Our team provides custom workshops for all skill levels that are designed to help you get the most out of your Vuetify application. We will travel* to your place of business and conduct a hands-on 3 day workshop where your team works with our engineers to fine tune your development process and hone your effeciency skills.
+Our team provides custom workshops for all skill levels that are designed to help you get the most out of your Vuetify application. We will travel* to your place of business and conduct a hands-on 3 day workshop where your team works with our engineers to fine tune your development process and hone your efficiency skills.
 
 <small>*United States only</small> -->
 

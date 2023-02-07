@@ -219,18 +219,40 @@ describe('VBtn', () => {
     })
   })
 
-  describe.skip('value', () => {
-    // none of the "value" props are implemented yet
-    it('should stringify non string|number values', () => {
-      const objectValue = { value: { hello: 'world' } }
-      const numberValue = { value: 2 }
+  describe('value', () => {
+    it('should pass string values', () => {
+      const stringValue = 'Foobar'
 
-      cy.mount(<VBtn value={ objectValue }></VBtn>)
+      cy.mount(<VBtn value={stringValue}></VBtn>)
         .get('button')
-        .should('contain.text', JSON.stringify(objectValue, null, 0))
-        .mount(<VBtn value={ numberValue } />)
+        .should('have.value', stringValue)
+    })
+
+    it('should stringify object', () => {
+      const objectValue = { value: {} }
+      cy.mount(<VBtn value={objectValue}></VBtn>)
         .get('button')
-        .should('contain.text', numberValue.value)
+        .should('have.value', JSON.stringify(objectValue, null, 0))
+    })
+
+    it('should stringify number', () => {
+      const numberValue = 15
+      cy.mount(<VBtn value={numberValue}></VBtn>)
+        .get('button')
+        .should('have.value', JSON.stringify(numberValue, null, 0))
+    })
+
+    it('should stringify array', () => {
+      const arrayValue = ['foo', 'bar']
+      cy.mount(<VBtn value={arrayValue}></VBtn>)
+        .get('button')
+        .should('have.value', JSON.stringify(arrayValue, null, 0))
+    })
+
+    it('should not generate a fallback value when not provided', () => {
+      cy.mount(<VBtn></VBtn>)
+        .get('button')
+        .should('not.have.value')
     })
   })
 

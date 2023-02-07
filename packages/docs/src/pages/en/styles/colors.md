@@ -88,4 +88,4 @@ This can also be done within your main **App.vue** file. Keep in mind, depending
 
 Below is a list of the Material design color palette grouped by primary color
 
-[//]: # (<color-palette />)
+<color-palette />

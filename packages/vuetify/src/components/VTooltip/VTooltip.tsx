@@ -81,6 +81,12 @@ export const VTooltip = genericComponent<new () => {
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-describedby': id.value,
+      }, props.activatorProps)
+    )
+
     useRender(() => {
       const [overlayProps] = filterVOverlayProps(props)
 
@@ -100,9 +106,7 @@ export const VTooltip = genericComponent<new () => {
           persistent
           role="tooltip"
           eager
-          activatorProps={ mergeProps({
-            'aria-describedby': id.value,
-          }, props.activatorProps) }
+          activatorProps={ activatorProps.value }
           _disableGlobalStack
           { ...scopeId }
         >

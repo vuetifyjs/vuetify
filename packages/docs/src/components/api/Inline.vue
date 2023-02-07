@@ -1,16 +1,31 @@
 <template>
-  <api-links :components="components" />
-  <div v-if="showInline">
-    <div class="d-flex justify-space-between align-center">
-      <select v-model="name">
-        <template v-for="component of components" :key="component">
-          <option :value="component">{{ component }}</option>
-        </template>
-      </select>
+  <div>
+    <api-links v-if="!showInline && !hideLinks" :components="components" />
+
+    <div v-if="showInline">
+      <div class="d-flex justify-space-between align-center">
+        <v-autocomplete
+          v-model="name"
+          :items="components"
+          :readonly="components.length === 1"
+          class="mb-2"
+          color="primary"
+          hide-details
+          label="Component API"
+          prepend-inner-icon="mdi-view-dashboard"
+          style="max-width: 250px;"
+          variant="outlined"
+        />
+      </div>
+
+      <template v-for="section of sections" :key="section">
+        <api-section
+          :name="name"
+          :section="section"
+          show-headline
+        />
+      </template>
     </div>
-    <template v-for="section of sections" :key="section">
-      <api-section :name="name" :section="section" show-headline />
-    </template>
   </div>
 </template>
 
@@ -28,6 +43,7 @@
 
   const props = defineProps({
     components: String,
+    hideLinks: Boolean,
   })
 
   const route = useRoute()

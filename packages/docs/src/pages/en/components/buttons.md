@@ -47,6 +47,8 @@ The recommended placement of elements inside of `v-btn` is:
 | - | - |
 | [v-btn](/api/v-btn) | Primary Component |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props

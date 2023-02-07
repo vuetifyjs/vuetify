@@ -36,7 +36,7 @@ Badges in their simplest form display to the upper right of the content that it 
 
 #### Dot
 
-The **dot** property removes badge's content and reduces its overall size. This is useful when you need to draw a user's attention subtlely.
+The **dot** property removes badge's content and reduces its overall size. This is useful when you need to draw a user's attention subtly.
 
 <example file="v-badge/prop-dot" />
 

@@ -82,6 +82,14 @@ export const VMenu = genericComponent<new () => {
       parent?.closeParents()
     }
 
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-haspopup': 'menu',
+        'aria-expanded': String(isActive.value),
+        'aria-owns': id.value,
+      }, props.activatorProps)
+    )
+
     useRender(() => {
       const [overlayProps] = filterVOverlayProps(props)
 
@@ -94,11 +102,7 @@ export const VMenu = genericComponent<new () => {
           { ...overlayProps }
           v-model={ isActive.value }
           absolute
-          activatorProps={ mergeProps({
-            'aria-haspopup': 'menu',
-            'aria-expanded': String(isActive.value),
-            'aria-owns': id.value,
-          }, props.activatorProps) }
+          activatorProps={ activatorProps.value }
           onClick:outside={ onClickOutside }
           { ...scopeId }
         >

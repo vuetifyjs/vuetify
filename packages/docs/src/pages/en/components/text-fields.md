@@ -50,6 +50,8 @@ The recommended placement of elements inside of `v-text-field` is:
 | - | - |
 | [v-text-field](/api/v-text-field/) | Primary Component |
 
+<api-inline hide-links />
+
 ## Guide
 
 The `v-text-field` component is a versatile `<input type="text">` field which combines both the `v-input` and `v-field` components into a single offering. It is a commonly used element that provides the baseline for other form inputs; such as [v-select](/components/selects/), [v-autocomplete](/components/autocompletes/), [v-combobox](/components/combobox/). In this guide you learn the basic fundamentals of `v-text-field` and how its various properties interact with each other.
@@ -124,6 +126,8 @@ In addition to **persistent-hint**, there are 3 other properties that support a 
 The **clearable** prop appends an inner [v-icon](/components/icons/) that clears the `v-text-field` when clicked. When an input is cleared, it resets the current `v-text-field` value. The following example displays an interactive icon when the mouse hovers over the input:
 
 <example file="v-text-field/prop-clearable" open />
+
+Note that **readonly** will not remove the clear icon, to prevent readonly inputs from being cleared you should also disable **clearable**.
 
 Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
 

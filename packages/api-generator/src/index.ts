@@ -1,7 +1,6 @@
 import fs from 'fs/promises'
 import path from 'path'
-import { components } from 'vuetify/dist/vuetify.js'
-import { components as labsComponents } from 'vuetify/dist/vuetify-labs.js'
+import { components } from 'vuetify/dist/vuetify-labs.js'
 import { components as _componentsInfo } from 'vuetify/dist/json/importMap.json'
 import { components as labsComponentsInfo } from 'vuetify/dist/json/importMap-labs.json'
 import { kebabCase } from './helpers/text'
@@ -42,11 +41,6 @@ const componentsInfo = {
   ...labsComponentsInfo,
 }
 
-const allComponents = {
-  ...components,
-  ...labsComponents,
-}
-
 const run = async () => {
   const argv = await yar.argv
   const locales = ['en']
@@ -61,7 +55,7 @@ const run = async () => {
   const template = await fs.readFile('./src/template.d.ts', 'utf-8')
 
   await mkdirp('./src/tmp')
-  for (const component in allComponents) {
+  for (const component in components) {
     // await fs.writeFile(`./src/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
     await fs.writeFile(`./src/tmp/${component}.d.ts`,
       template.replaceAll('__component__', component)
@@ -72,7 +66,7 @@ const run = async () => {
   const outPath = path.resolve(__dirname, '../../docs/src/api/data/')
 
   const componentData = await Promise.all(
-    Object.entries(allComponents).map(([componentName, componentInstance]) => {
+    Object.entries(components).map(([componentName, componentInstance]) => {
       if (argv.components && !argv.components.includes(componentName)) return null
 
       return pool.run(

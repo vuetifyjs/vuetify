@@ -16,8 +16,7 @@
     <v-card
       id="request-service"
       border
-      class="mx-auto pa-2"
-      max-width="440"
+      class="pa-2"
       title="Request Support"
       variant="flat"
     >
@@ -33,27 +32,34 @@
         v-model="valid"
         @submit.prevent="onSubmit"
       >
-
         <v-card-text>
-          <v-label class="mb-2">Contact Information</v-label>
+          <v-label class="mb-2 font-weight-bold">Contact Information</v-label>
 
-          <v-text-field
-            v-model="name"
-            :rules="[rules.required]"
-            label="Name"
-            name="name"
-          />
+          <v-row class="mb-4">
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="name"
+                :rules="[rules.required]"
+                label="Name"
+                hide-details
+                name="name"
+              />
+            </v-col>
 
-          <v-text-field
-            v-model="email"
-            :rules="[rules.required, rules.email]"
-            label="Email address"
-            name="email"
-          />
+            <v-col cols="12" md="6">
+              <v-text-field
+                v-model="email"
+                :rules="[rules.required, rules.email]"
+                label="Email address"
+                hide-details
+                name="email"
+              />
+            </v-col>
+          </v-row>
 
-          <v-label>What services are you interested in?</v-label>
+          <v-label class="mb-2 font-weight-bold">What services are you interested in?</v-label>
 
-          <div class="py-2">
+          <div class="mb-4">
             <v-checkbox-btn
               v-model="upgrade"
               label="Upgrading an existing project"
@@ -76,7 +82,7 @@
           <!-- <v-checkbox label="Training & workshops" /> -->
           </div>
 
-          <v-label>
+          <v-label class="font-weight-bold">
             Are you currently a sponsor?
           </v-label>
 
@@ -88,24 +94,14 @@
             <small class="text-primary">More Information</small>
           </a>
 
-          <div class="py-2">
-            <v-switch
-              v-model="sponsor"
-              density="compact"
-              color="primary"
-              inset
-              hide-details
-              label="Yes"
-              name="sponsor"
-            />
-          </div>
-
-          <v-label class="mb-2">Questions or comments</v-label>
-
-          <v-textarea
-            v-model="questions"
-            label="My project..."
-            name="questions"
+          <v-switch
+            v-model="sponsor"
+            density="compact"
+            color="primary"
+            inset
+            hide-details
+            label="Yes"
+            name="sponsor"
           />
 
           <small class="text-medium-emphasis">
@@ -165,7 +161,6 @@
   const sla = ref(false)
   const sponsor = ref(false)
   const loading = ref(false)
-  const questions = ref('')
   const valid = ref<boolean | null>(null)
   const success = ref(false)
   const form = ref<HTMLFormElement>()

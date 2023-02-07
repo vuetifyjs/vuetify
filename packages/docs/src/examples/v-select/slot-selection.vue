@@ -11,7 +11,7 @@
           <span>{{ item }}</span>
         </v-chip>
         <span
-          v-if="index >= 2"
+          v-if="index === 2"
           class="text-grey text-caption align-self-center"
         >
           (+{{ value.length - 2 }} others)

@@ -37,6 +37,8 @@ The `v-virtual-scroll` component contains only a default slot with no styling op
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
 | [v-virtual-scroll-item](/api/v-virtual-scroll-item) | Wraps content and communicates height to parent |
 
+<api-inline hide-links />
+
 ## Guide
 
 The `v-virtual-scroll` allows you to display thousands of records on a single page without the performance hit of actually showing all of them at once. `v-virtual-scroll` is devoid of styling and pairs well with components such as [v-card](/components/cards/) to provide a better visual experience.
