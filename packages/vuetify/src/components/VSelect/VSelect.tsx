@@ -287,7 +287,7 @@ export const VSelect = genericComponent<new <
                             }}
                           </VListItem>
                         )
-                      }) }
+                      })}
 
                       { slots['append-item']?.() }
                     </VList>
