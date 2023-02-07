@@ -68,7 +68,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
 
     const sizes = createRange(props.items.length).map(() => itemHeight.value)
     const visibleItems = computed(() => Math.max(12,
-      Math.ceil(((contentRect.value?.height ?? display.height.value) / itemHeight.value) * 1.6666 + 1)
+      Math.ceil(((contentRect.value?.height ?? display.height.value) / itemHeight.value) * 1.7 + 1)
     ))
 
     function handleItemResize (index: number, height: number) {
