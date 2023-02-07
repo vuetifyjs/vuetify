@@ -599,3 +599,15 @@ export interface CalendarEventVisual {
   left: number
   width: number
 }
+
+export type CalendarCategory =
+  | string
+  | {
+      name?: string
+      categoryName?: string
+      [key: string]: any
+    }
+
+export type CalendarCategoryTextFunction = (
+  category: CalendarCategory
+) => string

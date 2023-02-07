@@ -28,17 +28,17 @@ export const makeTimesProps = propsFactory({
 
 export const makeBaseProps = propsFactory({
   start: {
-    type: [ String, Number, Date ],
+    type: [String, Number, Date],
     validate: validateTimestamp,
     default: () => parseDate(new Date()).date,
   },
   end: {
-    type: [ String, Number, Date ],
+    type: [String, Number, Date],
     validate: validateTimestamp,
   },
   weekdays: {
-    type: [ Array, String ] as PropType<number[] | string>,
-    default: () => [ 0, 1, 2, 3, 4, 5, 6 ],
+    type: [Array, String] as PropType<number[] | string>,
+    default: () => [0, 1, 2, 3, 4, 5, 6],
     validate: validateWeekdays,
   },
   hideHeader: {
@@ -72,11 +72,11 @@ export const makeEventsProps = propsFactory({
     default: 'end',
   },
   eventTimed: {
-    type: [ String, Function ] as PropType<string | CalendarEventTimedFunction>,
+    type: [String, Function] as PropType<string | CalendarEventTimedFunction>,
     default: 'timed',
   },
   eventCategory: {
-    type: [ String, Function ] as PropType<string | CalendarEventCategoryFunction>,
+    type: [String, Function] as PropType<string | CalendarEventCategoryFunction>,
     default: 'category',
   },
   eventHeight: {
@@ -84,23 +84,23 @@ export const makeEventsProps = propsFactory({
     default: 20,
   },
   eventColor: {
-    type: [ String, Function ] as PropType<string | CalendarEventColorFunction>,
+    type: [String, Function] as PropType<string | CalendarEventColorFunction>,
     default: 'primary',
   },
   eventTextColor: {
-    type: [ String, Function ] as PropType<string | CalendarEventColorFunction>,
+    type: [String, Function] as PropType<string | CalendarEventColorFunction>,
     default: 'white',
   },
   eventName: {
-    type: [ String, Function ] as PropType<string | CalendarEventNameFunction>,
+    type: [String, Function] as PropType<string | CalendarEventNameFunction>,
     default: 'name',
   },
   eventOverlapThreshold: {
-    type: [ String, Number ],
+    type: [String, Number],
     default: 60,
   },
   eventOverlapMode: {
-    type: [ String, Function ] as 'stack' | 'column' | CalendarEventOverlapMode,
+    type: [String, Function] as 'stack' | 'column' | CalendarEventOverlapMode,
     default: 'stack',
     validate: (mode: any) => mode in CalendarEventOverlapModes || typeof mode === 'function',
   },
@@ -113,7 +113,7 @@ export const makeEventsProps = propsFactory({
     default: '$vuetify.calendar.moreEvents',
   },
   eventRipple: {
-    type: [ Boolean, Object ],
+    type: [Boolean, Object],
     default: null,
   },
   eventMarginBottom: {
@@ -128,18 +128,18 @@ export const makeCalendarProps = propsFactory({
     default: 'month',
   },
   value: {
-    type: [ String, Number, Date ] as PropType<string | number | Date>,
+    type: [String, Number, Date] as PropType<string | number | Date>,
     validate: validateTimestamp,
   },
 })
 
 export const makeCategoryProps = propsFactory({
   categories: {
-    type: [ Array, String ] as PropType<CalendarCategory[] | string>,
+    type: [Array, String] as PropType<CalendarCategory[] | string>,
     default: '',
   },
   categoryText: {
-    type: [ String, Function ] as PropType<string | CalendarCategoryTextFunction>,
+    type: [String, Function] as PropType<string | CalendarCategoryTextFunction>,
   },
   categoryHideDynamic: {
     type: Boolean,
@@ -152,7 +152,7 @@ export const makeCategoryProps = propsFactory({
     default: '',
   },
   categoryDays: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 1,
     validate: (x: any) => isFinite(parseInt(x)) && parseInt(x) > 0,
   },
@@ -168,31 +168,31 @@ export const makeIntervalProps = propsFactory({
     default: true,
   },
   intervalHeight: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 48,
     validate: validateNumber,
   },
   intervalWidth: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 60,
     validate: validateNumber,
   },
   intervalMinutes: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 60,
     validate: validateNumber,
   },
   firstInterval: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 0,
     validate: validateNumber,
   },
   firstTime: {
-    type: [ Number, String, Object ],
+    type: [Number, String, Object],
     validate: validateTime,
   },
   intervalCount: {
-    type: [ Number, String ],
+    type: [Number, String],
     default: 24,
     validate: validateNumber,
   },
@@ -212,7 +212,7 @@ export const makeIntervalProps = propsFactory({
 
 export const makeWeeksProps = propsFactory({
   localeFirstDayOfYear: {
-    type: [ String, Number ],
+    type: [String, Number],
     default: 0,
   },
   minWeeks: {

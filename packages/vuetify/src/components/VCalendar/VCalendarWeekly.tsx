@@ -16,7 +16,6 @@ import { VBtn } from '../VBtn'
 
 // Styles
 import './VCalendarWeekly.sass'
-import { VCalendarDaily } from './VCalendarDaily'
 
 export const VCalendarWeekly = genericComponent<new <T>() => {
   $props: {}
@@ -168,7 +167,16 @@ export const VCalendarWeekly = genericComponent<new <T>() => {
               { genWeeks.value.map((week: WeekObject) => {
                 return (
                   <div key={week.days[0].date} class="v-calendar-weekly__week">
-                    { props.showWeek ? <div class="v-calendar-weekly__weeknumber"><small>{ getWeekNumber(week.days[0]) }</small></div> : ''}
+                    { props.showWeek
+                      ? (
+                        <div
+                          class="v-calendar-weekly__weeknumber"
+                          key={`v-calendar-weekly__weeknumber${getWeekNumber(week.days[0])}`}
+                        >
+                            <small>{ getWeekNumber(week.days[0]) }</small>
+                          </div>
+                      )
+                      : ''}
                     { week.days.map((day, index: number) => {
                       return (
                         <div

@@ -23,7 +23,7 @@ import { escapeHTML, genericComponent } from '@/util'
 
 // Types1
 import { computed, onMounted, onUpdated, ref, watch } from 'vue'
-import type { Component, ComputedRef, VNode } from 'vue'
+import type { Component, ComputedRef, VNode, VNodeChild } from 'vue'
 import { useTimes } from './composables/times'
 import {
   CalendarFormatter,
@@ -47,9 +47,10 @@ import {
 } from '@/composables/calendar/timestamp'
 
 import { getParsedCategories } from './composables/parser'
-import { VCalendarWeekly } from './VCalendarWeekly'
-import { VCalendarMonthly } from './VCalendarMonthly'
+import { VCalendarCategory } from './VCalendarCategory'
 import { VCalendarDaily } from './VCalendarDaily'
+import { VCalendarMonthly } from './VCalendarMonthly'
+import { VCalendarWeekly } from './VCalendarWeekly'
 
 // Events
 import type {
@@ -57,7 +58,6 @@ import type {
   CalendarDayBodySlotScope,
   CalendarDaySlotScope,
   CalendarEvent,
-
   CalendarEventCategoryFunction,
   CalendarEventColorFunction,
   CalendarEventNameFunction,
@@ -170,6 +170,94 @@ export const VCalendar = genericComponent<new <T>() => {
       return parseInt(props.categoryDays) || 1
     })
 
+    const eventCategoryFunction: ComputedRef<CalendarEventCategoryFunction> = computed(() => {
+      return typeof props.eventCategory === 'function'
+        ? props.eventCategory
+        : event => event[props.eventCategory as string]
+    })
+
+    const eventTimedFunction: ComputedRef<CalendarEventTimedFunction> = computed(() => {
+      return typeof props.eventTimed === 'function'
+        ? props.eventTimed
+        : event => !!event[props.eventTimed as string]
+    })
+
+    const noEvents: ComputedRef<boolean> = computed(() => {
+      return props.events.length === 0
+    })
+
+    const categoryMode: ComputedRef<boolean> = computed(() => {
+      return props.type === 'category'
+    })
+
+    const parseEvent = (input: CalendarEvent, index = 0): CalendarEventParsed => {
+      return doParseEvent(
+        input,
+        index,
+        props.eventStart,
+        props.eventEnd,
+        eventTimedFunction.value(input),
+        categoryMode.value ? eventCategoryFunction.value(input) : false,
+      )
+    }
+
+    const parsedEvents: ComputedRef<CalendarEventParsed[]> = computed(() => {
+      return props.events.map(parseEvent)
+    })
+
+    const getCategoryList = (categories: CalendarCategory[]): CalendarCategory[] => {
+      if (!noEvents.value) {
+        const categoryMap: any = categories.reduce((map: any, category, index) => {
+          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
+          else if (typeof category === 'string') map[category] = { index, count: 0 }
+          return map
+        }, {})
+
+        if (!props.categoryHideDynamic || !props.categoryShowAll) {
+          let categoryLength = categories.length
+
+          parsedEvents.value.forEach(ev => {
+            let category = ev.category
+
+            if (typeof category !== 'string') {
+              category = props.categoryForInvalid
+            }
+
+            if (!category) {
+              return
+            }
+
+            if (category in categoryMap) {
+              categoryMap[category].count++
+            } else if (!props.categoryHideDynamic) {
+              categoryMap[category] = {
+                index: categoryLength++,
+                count: 1,
+              }
+            }
+          })
+        }
+
+        if (!props.categoryShowAll) {
+          for (const category in categoryMap) {
+            if (categoryMap[category].count === 0) {
+              delete categoryMap[category]
+            }
+          }
+        }
+
+        categories = categories.filter((category: CalendarCategory) => {
+          if (typeof category === 'object' && category.categoryName) {
+            return categoryMap.hasOwnProperty(category.categoryName)
+          } else if (typeof category === 'string') {
+            return categoryMap.hasOwnProperty(category)
+          }
+          return false
+        })
+      }
+      return categories
+    }
+
     const renderProps: ComputedRef<VCalendarRenderProps> = computed(() => {
       const around = parsedValue.value
       let component: any = null
@@ -236,65 +324,8 @@ export const VCalendar = genericComponent<new <T>() => {
           throw new Error(props.type + ' is not a valid Calendar type')
       }
 
-      return { component, start, end, maxDays, weekdays, categories }
+      return { component, start, end, maxDays, weekdays, categories, type: props.type }
     })
-
-    const categoryMode: ComputedRef<boolean> = computed(() => {
-      return props.type === 'category'
-    })
-
-    const getCategoryList = (categories: CalendarCategory[]): CalendarCategory[] => {
-      if (!noEvents.value) {
-        const categoryMap: any = categories.reduce((map: any, category, index) => {
-          if (typeof category === 'object' && category.categoryName) map[category.categoryName] = { index, count: 0 }
-          else if (typeof category === 'string') map[category] = { index, count: 0 }
-          return map
-        }, {})
-
-        if (!props.categoryHideDynamic || !props.categoryShowAll) {
-          let categoryLength = categories.length
-
-          parsedEvents.value.forEach(ev => {
-            let category = ev.category
-
-            if (typeof category !== 'string') {
-              category = props.categoryForInvalid
-            }
-
-            if (!category) {
-              return
-            }
-
-            if (category in categoryMap) {
-              categoryMap[category].count++
-            } else if (!props.categoryHideDynamic) {
-              categoryMap[category] = {
-                index: categoryLength++,
-                count: 1,
-              }
-            }
-          })
-        }
-
-        if (!props.categoryShowAll) {
-          for (const category in categoryMap) {
-            if (categoryMap[category].count === 0) {
-              delete categoryMap[category]
-            }
-          }
-        }
-
-        categories = categories.filter((category: CalendarCategory) => {
-          if (typeof category === 'object' && category.categoryName) {
-            return categoryMap.hasOwnProperty(category.categoryName)
-          } else if (typeof category === 'string') {
-            return categoryMap.hasOwnProperty(category)
-          }
-          return false
-        })
-      }
-      return categories
-    }
 
     const move = (amount = 1): void => {
       const moved = copyTimestamp(parsedValue.value)
@@ -379,107 +410,6 @@ export const VCalendar = genericComponent<new <T>() => {
     //   })
     // })
 
-    // Methods
-    onMounted(() => {
-      updateTimes()
-      setPresent()
-      updateEventVisibility()
-    })
-
-    onUpdated(() => {
-      window.requestAnimationFrame(updateEventVisibility)
-    })
-
-    const checkChange = () => {
-      const { start, end } = renderProps.value
-      if (!lastStart.value || !lastEnd.value ||
-        start.date !== lastStart.value.date ||
-        end.date !== lastEnd.value.date) {
-        lastStart.value = start
-        lastEnd.value = end
-        emit('change', { start, end })
-        updateEventVisibility()
-      }
-    }
-
-    // Events
-    // Computeds
-    const noEvents: ComputedRef<boolean> = computed(() => {
-      return props.events.length === 0
-    })
-
-    const parsedEvents: ComputedRef<CalendarEventParsed[]> = computed(() => {
-      return props.events.map(parseEvent)
-    })
-
-    const parsedEventOverlapThreshold: ComputedRef<number> = computed(() => {
-      return parseInt(props.eventOverlapThreshold)
-    })
-
-    const eventTimedFunction: ComputedRef<CalendarEventTimedFunction> = computed(() => {
-      return typeof props.eventTimed === 'function'
-        ? props.eventTimed
-        : event => !!event[props.eventTimed as string]
-    })
-
-    const eventCategoryFunction: ComputedRef<CalendarEventCategoryFunction> = computed(() => {
-      return typeof props.eventCategory === 'function'
-        ? props.eventCategory
-        : event => event[props.eventCategory as string]
-    })
-
-    const eventTextColorFunction: ComputedRef<CalendarEventColorFunction> = computed(() => {
-      return typeof props.eventTextColor === 'function'
-        ? props.eventTextColor
-        : () => props.eventTextColor as string
-    })
-
-    const eventNameFunction: ComputedRef<CalendarEventNameFunction> = computed(() => {
-      return typeof props.eventName === 'function'
-        ? props.eventName
-        : event => escapeHTML(event.input[props.eventName as string] as string || '')
-    })
-
-    const eventModeFunction: ComputedRef<CalendarEventOverlapMode> = computed(() => {
-      return typeof props.eventOverlapMode === 'function'
-        ? props.eventOverlapMode
-        : CalendarEventOverlapModes[props.eventOverlapMode]
-    })
-
-    const eventWeekdays: ComputedRef<number[]> = computed(() => {
-      return parsedWeekdays.value
-    })
-
-    // methods
-    const eventColorFunction = (e: CalendarEvent): string => {
-      return typeof props.eventColor === 'function'
-        ? props.eventColor(e)
-        : e.color || props.eventColor
-    }
-
-    const parseEvent = (input: CalendarEvent, index = 0): CalendarEventParsed => {
-      return doParseEvent(
-        input,
-        index,
-        props.eventStart,
-        props.eventEnd,
-        eventTimedFunction.value(input),
-        categoryMode.value ? eventCategoryFunction.value(input) : false,
-      )
-    }
-
-    const formatTime = (withTime: CalendarTimestamp, ampm: boolean): string => {
-      const formatter = getFormatter({
-        timeZone: 'UTC',
-        hour: 'numeric',
-        minute: withTime.minute > 0 ? 'numeric' : undefined,
-      })
-
-      return formatter(withTime, true)
-    }
-
-    const events = ref([])
-
     const getEventsMap = (): VDailyEventsMap => {
       const eventsMap: VDailyEventsMap = {}
       const elements = events.value
@@ -552,9 +482,80 @@ export const VCalendar = genericComponent<new <T>() => {
       }
     }
 
-    const genName = (eventSummary: () => Element): JSX.Element => {
+    // Methods
+    onMounted(() => {
+      updateTimes()
+      setPresent()
+      updateEventVisibility()
+    })
+
+    onUpdated(() => {
+      window.requestAnimationFrame(updateEventVisibility)
+    })
+
+    const checkChange = () => {
+      const { start, end } = renderProps.value
+      if (!lastStart.value || !lastEnd.value ||
+        start.date !== lastStart.value.date ||
+        end.date !== lastEnd.value.date) {
+        lastStart.value = start
+        lastEnd.value = end
+        emit('change', { start, end })
+        updateEventVisibility()
+      }
+    }
+
+    // Events
+    // Computeds
+
+    const parsedEventOverlapThreshold: ComputedRef<number> = computed(() => {
+      return parseInt(props.eventOverlapThreshold)
+    })
+
+    const eventTextColorFunction: ComputedRef<CalendarEventColorFunction> = computed(() => {
+      return typeof props.eventTextColor === 'function'
+        ? props.eventTextColor
+        : () => props.eventTextColor as string
+    })
+
+    const eventNameFunction: ComputedRef<CalendarEventNameFunction> = computed(() => {
+      return typeof props.eventName === 'function'
+        ? props.eventName
+        : event => escapeHTML(event.input[props.eventName as string] as string || '')
+    })
+
+    const eventModeFunction: ComputedRef<CalendarEventOverlapMode> = computed(() => {
+      return typeof props.eventOverlapMode === 'function'
+        ? props.eventOverlapMode
+        : CalendarEventOverlapModes[props.eventOverlapMode]
+    })
+
+    const eventWeekdays: ComputedRef<number[]> = computed(() => {
+      return parsedWeekdays.value
+    })
+
+    // methods
+    const eventColorFunction = (e: CalendarEvent): string => {
+      return typeof props.eventColor === 'function'
+        ? props.eventColor(e)
+        : e.color || props.eventColor
+    }
+
+    const formatTime = (withTime: CalendarTimestamp, ampm: boolean): string => {
+      const formatter = getFormatter({
+        timeZone: 'UTC',
+        hour: 'numeric',
+        minute: withTime.minute > 0 ? 'numeric' : undefined,
+      })
+
+      return formatter(withTime, true)
+    }
+
+    const events = ref([])
+
+    const genName = (eventSummary: () => VNodeChild): JSX.Element => {
       return (
-        <div class="pl-1">{ eventSummary }</div>
+        <div class="pl-1">{ eventSummary() }</div>
       )
     }
 
@@ -595,7 +596,7 @@ export const VCalendar = genericComponent<new <T>() => {
       }
 
       return (
-        <div {...data} style={{ color: text, background }}>{ slot ? slot(scope) : genName(eventSummary()) }</div>
+        <div {...data} style={{ color: text, background }}>{ slot ? slot(scope) : genName(eventSummary) }</div>
       )
       // return this.$createElement('div',
       //   this.setTextColor(text,
@@ -837,7 +838,17 @@ export const VCalendar = genericComponent<new <T>() => {
           themeClasses.value,
         ]}
       >
-        <renderProps.value.component { ...{ ...renderProps.value, start: renderProps.value.start.date, end: renderProps.value.end.date } } v-slots={ getScopedSlots() }>
+        <renderProps.value.component
+          {
+            ...{
+              ...renderProps.value,
+              start: renderProps.value.start.date,
+              end: renderProps.value.end.date,
+              type: props.type,
+            }
+          }
+          v-slots={ getScopedSlots() }
+        >
         </renderProps.value.component>
       </div>
     )
