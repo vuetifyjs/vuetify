@@ -10,8 +10,7 @@
   },
   "slots": {
     "next": "The next slot",
-    "prev": "The prev slot",
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-slide-group.json))"
+    "prev": "The prev slot"
   },
   "events": {
     "change": "Emitted when the component value is changed by user interaction",

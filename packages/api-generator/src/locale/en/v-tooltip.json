@@ -7,12 +7,7 @@
     "openOnClick": "Designates whether the tooltip should open on activator click",
     "openOnHover": "Designates whether the tooltip should open on activator hover",
     "tag": "Specifies a custom tag for the activator wrapper",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))"
-  },
-  "slots": {
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",
-    "activator": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))"
   },
   "exposed": {
     "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tooltip.json))",

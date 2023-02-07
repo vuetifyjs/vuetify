@@ -12,8 +12,5 @@
     "next": "Activates the next button",
     "prev": "Activates the previous button",
     "select": "Selects a button by index, the second parameter is a boolean to indicate if the button should be selected or not"
-  },
-  "slots": {
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn-toggle.json))"
   }
 }

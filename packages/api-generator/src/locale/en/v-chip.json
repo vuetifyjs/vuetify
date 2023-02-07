@@ -9,7 +9,6 @@
     "filterIcon": "Change the default icon used for **filter** chips",
     "inputValue": "Controls the **active** state of the item. This is typically used to highlight the component",
     "label": "Applies a medium size border radius",
-    "link": "Explicitly define the chip as a link",
     "outlined": "Removes background and applies border and text color",
     "pill": "Remove `v-avatar` padding",
     "value": "The value used when a child of a [v-chip-group](/components/chip-groups)",
@@ -17,7 +16,6 @@
   },
   "events": {
     "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",
-    "click:close": "Emitted when close icon is clicked",
-    "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-chip.json))"
+    "click:close": "Emitted when close icon is clicked"
   }
 }

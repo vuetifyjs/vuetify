@@ -22,10 +22,8 @@
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
     "touchless": "Disable mobile touch functionality",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
     "vertical": "Stacks tabs on top of each other vertically.",
     "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
-    "end": "Aligns tabs to the end",
     "items": "The items to display in the component. This can be an array of strings or objects with a property `title`",
     "alignTabs": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tabs.json))",
     "stacked": "Apply the stacked prop to all children v-tab components."

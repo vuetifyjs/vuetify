@@ -4,10 +4,6 @@
     "flat": "Removes the button box shadow.",
     "icon": "Apply a specific icon using the [v-icon](/components/icons/) component. The button will become _round_.",
     "plain": "Removes the default background change applied when hovering over the button.",
-    "stacked": "Displays the button as a flex-column.",
-    "symbol": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"
-  },
-  "events": {
-    "group:selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-btn.json))"
+    "stacked": "Displays the button as a flex-column."
   }
 }

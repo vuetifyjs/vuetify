@@ -5,6 +5,7 @@
     "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot.",
     "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attachs to the root `v-app` component by default",
     "auto": "Centers list on selected element",
+    "activeColor": "The applied color when the component is in an active state",
     "appendAvatar": "Appends a [v-avatar](/components/avatars/) component after default content in the **append** slot",
     "prependAvatar": "Prepends a [v-avatar](/components/avatars/) component in the **prepend** slot before default content",
     "bgColor": "Applies specified color to the control's background. Used on components that also support the **color** prop. - supports utility colors (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
@@ -21,7 +22,10 @@
     "items": "An array of strings or objects used for automatically generating children components",
     "label": "Sets the text of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "mandatory": "Forces at least one item to always be selected (if available).",
+    "link": "Designates that the component is a link. This is automatic when using the href or to prop.",
     "name": "Sets the component's name attribute.",
+    "start": "Applies margin at the end of the component.",
+    "end": "Applies margin at the start of the component.",
     "noDataText": "Text shown when no items are provided to the component",
     "modelValue": "The v-model value of the component. If component supports the **multiple** prop, this defaults to an empty array",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
@@ -29,10 +33,12 @@
     "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "selectedClass": "Configure the active CSS class applied when an item is selected.",
     "size": "Sets the height and width of the component.",
+    "symbol": "The [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) used to hook into group functionality for components like [v-btn-toggle](/components/btn-toggle) and [v-bottom-navigation](/components/bottom-navigations/) ",
     "tag": "Specify a custom tag used on the root element",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "text": "Specify content text for the component.",
     "title": "Specify a title text for the component.",
+    "subtitle": "Specify a subtitle text for the component.",
     "trueValue": "Sets value for truthy state",
     "valueComparator": "Apply a custom comparison algorithm used for values",
     "variant": "Applies a distinct style to the component",
@@ -50,11 +56,14 @@
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "prepend": "Adds an item outside the input and before input content",
     "progress": "Slot for custom progress linear (displayed when **loading** prop is not equal to Boolean False)",
-    "text": "Slot for the component's text content"
+    "text": "Slot for the component's text content",
+    "title": "Slot for the component's title content",
+    "subtitle": "Slot for the component's subtitle content"
   },
   "events": {
     "click": "Event that is emitted when the component is clicked",
     "input": "The updated bound model",
-    "update:modelValue": "Event that is emitted when the component's model changes"
+    "update:modelValue": "Event that is emitted when the component's model changes",
+    "group:selected": "Event that is emitted when an item is selected within a group."
   }
 }

@@ -10,16 +10,11 @@
     "openOnHover": "Designates whether component should activate when its activator is hovered.",
     "persistent": "Clicking outside of the element or pressing **esc** key will not deactivate it.",
     "retainFocus": "Tab focus will return to the first child of the dialog by default. Disable this when using external tools that require focus such as TinyMCE or vue-clipboard.",
-    "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollable example](/components/dialogs#scrollable).",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."
+    "scrollable": "When set to true, expects a `v-card` and a `v-card-text` component with a designated height. For more information, check out the [scrollable example](/components/dialogs#scrollable)."
   },
   "events": {
     "click:outside": "Event that fires when clicking outside an active dialog.",
     "keydown": "Event that fires when key is pressed. If dialog is active and not using the **persistent** prop, the **esc** key will deactivate it."
-  },
-  "slots": {
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
-    "activator": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))"
   },
   "exposed": {
     "activatorEl": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-dialog.json))",
