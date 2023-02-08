@@ -1,13 +1,14 @@
-// Composables
+// Components
 import { VToolbarTitle } from '@/components/VToolbar'
 
 // Utilities
+import { makeVToolbarTitleProps } from '@/components/VToolbar/VToolbarTitle'
 import { defineComponent, useRender } from '@/util'
 
 export const VAppBarTitle = defineComponent({
   name: 'VAppBarTitle',
 
-  props: { ...VToolbarTitle.props },
+  props: makeVToolbarTitleProps(),
 
   setup (props, { slots }) {
     useRender(() => (

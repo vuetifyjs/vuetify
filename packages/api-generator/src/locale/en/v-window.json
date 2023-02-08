@@ -18,7 +18,6 @@
   "slots": {
     "next": "Slot displaying the arrow switching to the next item",
     "prev": "Slot displaying the arrow switching to the previous item",
-    "default": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-window.json))",
     "additional": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-window.json))"
   },
   "exposed": {

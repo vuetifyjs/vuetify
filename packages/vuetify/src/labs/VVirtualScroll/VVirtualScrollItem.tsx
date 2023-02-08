@@ -1,9 +1,10 @@
 // Composables
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { defineComponent } from '@/util/defineComponent'
-import { useRender } from '@/util'
+import { defineComponent, useRender } from '@/util'
+import { onUpdated, watch } from 'vue'
 
 export const VVirtualScrollItem = defineComponent({
   name: 'VVirtualScrollItem',
@@ -17,12 +18,21 @@ export const VVirtualScrollItem = defineComponent({
   },
 
   setup (props, { emit, slots }) {
-    const { resizeRef } = useResizeObserver(entries => {
-      if (!entries.length) return
+    const { resizeRef, contentRect } = useResizeObserver()
 
-      const contentRect = entries[0].contentRect
-      emit('update:height', contentRect.height)
+    useToggleScope(() => props.dynamicHeight, () => {
+      watch(() => contentRect.value?.height, height => {
+        if (height != null) emit('update:height', height)
+      })
     })
+
+    function updateHeight () {
+      if (props.dynamicHeight && contentRect.value) {
+        emit('update:height', contentRect.value.height)
+      }
+    }
+
+    onUpdated(updateHeight)
 
     useRender(() => (
       <div
