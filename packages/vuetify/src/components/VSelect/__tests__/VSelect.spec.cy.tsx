@@ -263,4 +263,77 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
+
+  describe('return-object', () => {
+    it('should return whole object', () => {
+      const items = ref([
+        {
+          title: 'Item 1',
+          value: 1,
+        },
+        {
+          title: 'Item 2',
+          value: 2,
+        },
+        {
+          title: 'Item 3',
+          value: 3,
+        },
+      ])
+
+      const selected = ref([])
+
+      cy.mount(() => (
+        <div class="ma-10">
+          <VSelect label="Select" v-model={selected.value} items={items.value} multiple returnObject />
+        </div>
+      ))
+        .get('.v-select')
+        .click()
+        .get('.v-list-item')
+        .eq(1)
+        .click()
+        .then(() => {
+          expect(selected.value).deep.equal([{ title: 'Item 2', value: 2 }])
+        })
+        .find('.v-checkbox-btn input')
+        .should('be.checked')
+    })
+
+    // https://github.com/vuetifyjs/vuetify/issues/16512
+    it('should work with plain items array', () => {
+      const items = [
+        {
+          title: 'Item 1',
+          value: 1,
+        },
+        {
+          title: 'Item 2',
+          value: 2,
+        },
+        {
+          title: 'Item 3',
+          value: 3,
+        },
+      ]
+
+      const selected = ref([])
+
+      cy.mount(() => (
+        <div class="ma-10">
+          <VSelect label="Select" v-model={selected.value} items={items} multiple returnObject />
+        </div>
+      ))
+        .get('.v-select')
+        .click()
+        .get('.v-list-item')
+        .eq(1)
+        .click()
+        .then(() => {
+          expect(selected.value).deep.equal([{ title: 'Item 2', value: 2 }])
+        })
+        .find('.v-checkbox-btn input')
+        .should('be.checked')
+    })
+  })
 })
