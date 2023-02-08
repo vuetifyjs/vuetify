@@ -2,9 +2,14 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBannerActions = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VBannerActions = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VBannerActions',
 
   props: {

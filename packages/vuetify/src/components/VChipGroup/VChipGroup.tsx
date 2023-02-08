@@ -9,15 +9,18 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, defineComponent, useRender } from '@/util'
+import { deepEqual, genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
+import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = defineComponent({
+export const VChipGroup = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VChipGroup',
 
   props: {

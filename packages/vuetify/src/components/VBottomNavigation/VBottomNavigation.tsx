@@ -15,12 +15,15 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
-import { VBtnToggleSymbol } from '../VBtnToggle/VBtnToggle'
+import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
+import type { GenericSlot } from '@/util'
 
-export const VBottomNavigation = defineComponent({
+export const VBottomNavigation = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VBottomNavigation',
 
   props: {

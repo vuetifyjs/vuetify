@@ -5,9 +5,14 @@ import { VBtn } from '@/components/VBtn'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VAppBarNavIcon = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VAppBarNavIcon = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VAppBarNavIcon',
 
   props: {

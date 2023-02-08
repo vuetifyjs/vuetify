@@ -12,11 +12,12 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ExtractPropTypes } from 'vue'
+import type { GenericSlot } from '@/util'
 
 export const makeVBtnGroupProps = propsFactory({
   divided: Boolean,
@@ -30,7 +31,9 @@ export const makeVBtnGroupProps = propsFactory({
   ...makeVariantProps(),
 }, 'v-btn-group')
 
-export const VBtnGroup = defineComponent({
+export const VBtnGroup = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VBtnGroup',
 
   props: makeVBtnGroupProps(),

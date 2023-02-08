@@ -29,10 +29,27 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
-export const VCard = defineComponent({
+// Types
+import type { MakeSlots, SlotsToProps } from '@/util'
+
+export type VCardSlots = MakeSlots<{
+  default: []
+  actions: []
+  title: []
+  subtitle: []
+  text: []
+  loader: []
+  image: []
+  prepend: []
+  append: []
+}>
+
+export const VCard = genericComponent<new () => {
+  $props: SlotsToProps<VCardSlots>
+}>()({
   name: 'VCard',
 
   directives: { Ripple },

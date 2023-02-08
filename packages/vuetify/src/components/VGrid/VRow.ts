@@ -6,9 +6,10 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
+import type { GenericSlot } from '@/util'
 import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
@@ -75,7 +76,9 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
   return className.toLowerCase()
 }
 
-export const VRow = defineComponent({
+export const VRow = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VRow',
 
   props: {

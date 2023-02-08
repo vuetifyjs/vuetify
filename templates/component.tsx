@@ -6,11 +6,18 @@ import './NAME.sass'
 // Composables
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { MakeSlots, SlotsToProps } from '@/util'
 
-export const NAME = defineComponent({
+export type ComponentSlots = MakeSlots<{
+  default: []
+}>
+
+export const NAME = genericComponent<new () => {
+  $props: SlotsToProps<ComponentSlots>
+}>()({
   name: 'NAME',
 
   props: {},
@@ -21,7 +28,7 @@ export const NAME = defineComponent({
     useRender(() => (
       <div class="NAME"></div>
     ))
-  }
+  },
 })
 
 export type NAME = InstanceType<typeof NAME>

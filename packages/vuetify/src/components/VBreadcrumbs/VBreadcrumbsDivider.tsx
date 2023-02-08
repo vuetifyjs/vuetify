@@ -1,7 +1,12 @@
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBreadcrumbsDivider = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VBreadcrumbsDivider = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VBreadcrumbsDivider',
 
   props: {

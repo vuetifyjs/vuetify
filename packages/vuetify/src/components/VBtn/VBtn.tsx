@@ -30,12 +30,22 @@ import { useSelectLink } from '@/composables/selectLink'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
-export const VBtn = defineComponent({
+export type VBtnSlots = MakeSlots<{
+  default: []
+  prepend: []
+  append: []
+  loader: []
+}>
+
+export const VBtn = genericComponent<new () => {
+  $props: SlotsToProps<VBtnSlots>
+}>()({
   name: 'VBtn',
 
   directives: { Ripple },

@@ -113,6 +113,8 @@ export type MakeSlots<T extends Record<string, any[]>> = {
   [K in keyof T]?: Slot<T[K]>
 }
 
+export type GenericSlot = SlotsToProps<MakeSlots<{ default: [] }>>
+
 export function genericComponent<T extends (new () => {
   $props?: Record<string, any>
 })> (exposeDefaults = true): <

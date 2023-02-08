@@ -3,9 +3,14 @@ import { VImg } from '@/components/VImg'
 import { VWindowItem } from '@/components/VWindow'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VCarouselItem = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VCarouselItem = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VCarouselItem',
 
   inheritAttrs: false,

@@ -24,16 +24,28 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
 
-export const VAlert = defineComponent({
+export type VAlertSlots = MakeSlots<{
+  default: []
+  prepend: []
+  title: []
+  text: []
+  append: []
+  close: []
+}>
+
+export const VAlert = genericComponent<new () => {
+  $props: SlotsToProps<VAlertSlots>
+}>()({
   name: 'VAlert',
 
   props: {
