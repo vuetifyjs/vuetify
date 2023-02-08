@@ -147,7 +147,7 @@ export const VAutocomplete = genericComponent<new <
 
       search.value = ''
     }
-    function onClickControl () {
+    function onMousedownControl () {
       if (
         (props.hideNoData && !items.value.length) ||
         props.readonly || form?.isReadonly.value
@@ -276,8 +276,7 @@ export const VAutocomplete = genericComponent<new <
           appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           onClick:clear={ onClear }
-          onClick:control={ onClickControl }
-          onClick:input={ onClickControl }
+          onMousedown:control={ onMousedownControl }
           onFocus={ () => isFocused.value = true }
           onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }

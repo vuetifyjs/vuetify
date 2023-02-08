@@ -64,7 +64,7 @@ export const VTextField = genericComponent<new () => {
 
   emits: {
     'click:control': (e: MouseEvent) => true,
-    'click:input': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -117,6 +117,14 @@ export const VTextField = genericComponent<new () => {
       }
 
       if (!isFocused.value) focus()
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+
+      if (e.target === inputRef.value) return
+
+      onFocus()
+      e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
@@ -175,12 +183,8 @@ export const VTextField = genericComponent<new () => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                onMousedown={ (e: MouseEvent) => {
-                  if (e.target === inputRef.value) return
-
-                  e.preventDefault()
-                }}
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
@@ -230,7 +234,6 @@ export const VTextField = genericComponent<new () => {
                         { slots.default ? (
                           <div
                             class={ fieldClass }
-                            onClick={ e => emit('click:input', e) }
                             data-no-activator=""
                           >
                             { slots.default() }

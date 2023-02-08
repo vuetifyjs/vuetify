@@ -66,6 +66,7 @@ export const VFileInput = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
@@ -110,6 +111,9 @@ export const VFileInput = defineComponent({
     function onClickPrepend (e: MouseEvent) {
       callEvent(props['onClick:prepend'], e)
       onControlClick(e)
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
     }
     function onControlClick (e: MouseEvent) {
       inputRef.value?.click()
@@ -167,7 +171,8 @@ export const VFileInput = defineComponent({
               <VField
                 ref={ vFieldRef }
                 prepend-icon={ props.prependIcon }
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }

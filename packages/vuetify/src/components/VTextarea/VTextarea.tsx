@@ -59,6 +59,7 @@ export const VTextarea = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -118,6 +119,9 @@ export const VTextarea = defineComponent({
       onFocus()
 
       emit('click:control', e)
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
     }
     function onClear (e: MouseEvent) {
       e.stopPropagation()
@@ -222,7 +226,8 @@ export const VTextarea = defineComponent({
                 style={{
                   '--v-textarea-control-height': controlHeight.value,
                 }}
-                onClick:control={ onControlClick }
+                onClick={ onControlClick }
+                onMousedown={ onControlMousedown }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
