@@ -166,7 +166,7 @@ export const VCombobox = genericComponent<new <
 
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.title, v.title)) || v
+        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
       })
     })
 
