@@ -65,6 +65,7 @@ export const VAutocomplete = genericComponent<new <
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
 >() => {
   $props: {
+    autoSelectFirst: Boolean
     items?: readonly T[]
     returnObject?: ReturnObject
     multiple?: Multiple
@@ -84,8 +85,7 @@ export const VAutocomplete = genericComponent<new <
   name: 'VAutocomplete',
 
   props: {
-    // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
+    autoSelectFirst: Boolean,
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
@@ -135,7 +135,23 @@ export const VAutocomplete = genericComponent<new <
       return filteredItems.value
     })
 
-    const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const autoSelected = computed(() => {
+      if (isPristine.value || props.multiple) {
+        return undefined
+      }
+      return displayItems.value[0]
+    })
+
+    const selected = computed(() => {
+      const result = selections.value.map(selection => selection.props.value)
+      if (props.autoSelectFirst && autoSelected.value) {
+        const autoSelectedValue = autoSelected.value.props.value
+        if (result.indexOf(autoSelectedValue) < 0) {
+          result.unshift(autoSelectedValue)
+        }
+      }
+      return result
+    })
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -168,6 +184,10 @@ export const VAutocomplete = genericComponent<new <
 
       if (['Escape'].includes(e.key)) {
         menu.value = false
+      }
+
+      if (e.key === 'Enter' && props.autoSelectFirst && autoSelected.value) {
+        select(autoSelected.value)
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
