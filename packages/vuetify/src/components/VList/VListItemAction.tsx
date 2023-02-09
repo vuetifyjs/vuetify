@@ -2,9 +2,14 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VListItemAction = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VListItemAction = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VListItemAction',
 
   props: {

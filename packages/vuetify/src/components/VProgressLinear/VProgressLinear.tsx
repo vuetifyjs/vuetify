@@ -13,9 +13,14 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VProgressLinear = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VProgressLinear = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VProgressLinear',
 
   props: {

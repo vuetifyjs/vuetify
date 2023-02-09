@@ -3,9 +3,10 @@ import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
 import { computed, inject, isRef } from 'vue'
-import { defineComponent, mergeDeep, propsFactory } from '@/util'
+import { genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
+import type { GenericSlot } from '@/util'
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
 export type IconValue = string | JSXComponent
@@ -85,7 +86,9 @@ export const makeIconProps = propsFactory({
   },
 }, 'icon')
 
-export const VComponentIcon = defineComponent({
+export const VComponentIcon = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VComponentIcon',
 
   props: makeIconProps(),
@@ -102,7 +105,9 @@ export const VComponentIcon = defineComponent({
 })
 export type VComponentIcon = InstanceType<typeof VComponentIcon>
 
-export const VSvgIcon = defineComponent({
+export const VSvgIcon = genericComponent<new () => {
+  //
+}>()({
   name: 'VSvgIcon',
 
   inheritAttrs: false,
@@ -129,7 +134,9 @@ export const VSvgIcon = defineComponent({
 })
 export type VSvgIcon = InstanceType<typeof VSvgIcon>
 
-export const VLigatureIcon = defineComponent({
+export const VLigatureIcon = genericComponent<new () => {
+  //
+}>()({
   name: 'VLigatureIcon',
 
   props: makeIconProps(),
@@ -142,7 +149,9 @@ export const VLigatureIcon = defineComponent({
 })
 export type VLigatureIcon = InstanceType<typeof VLigatureIcon>
 
-export const VClassIcon = defineComponent({
+export const VClassIcon = genericComponent<new () => {
+  //
+}>()({
   name: 'VClassIcon',
 
   props: makeIconProps(),

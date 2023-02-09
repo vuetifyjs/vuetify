@@ -10,9 +10,18 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VSliderTrack = defineComponent({
+// Types
+import type { SlotsToProps } from '@/util'
+
+export type VSliderTrackSlot = {
+  'tick-label': []
+}
+
+export const VSliderTrack = genericComponent<new () => {
+  $props: SlotsToProps<VSliderTrackSlot>
+}>()({
   name: 'VSliderTrack',
 
   props: {

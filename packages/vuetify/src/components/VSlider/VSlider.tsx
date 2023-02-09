@@ -14,9 +14,20 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VSlider = defineComponent({
+// Types
+import type { SlotsToProps } from '@/util'
+import type { VInputSlots } from '@/components/VInput/VInput'
+
+export type VSliderSlots = VInputSlots & {
+  'tick-label': []
+  'thumb-label': []
+}
+
+export const VSlider = genericComponent<new () => {
+  $props: SlotsToProps<VSliderSlots>
+}>()({
   name: 'VSlider',
 
   props: {

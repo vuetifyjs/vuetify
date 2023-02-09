@@ -5,7 +5,7 @@ import './VColorPickerSwatches.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Utilities
-import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
+import { convertToUnit, deepEqual, genericComponent, getContrast, useRender } from '@/util'
 import { parseColor } from './util'
 import colors from '@/util/colors'
 
@@ -35,7 +35,9 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   })
 }
 
-export const VColorPickerSwatches = defineComponent({
+export const VColorPickerSwatches = genericComponent<new () => {
+  //
+}>()({
   name: 'VColorPickerSwatches',
 
   props: {

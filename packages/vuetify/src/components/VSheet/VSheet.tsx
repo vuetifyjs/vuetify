@@ -13,10 +13,15 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 import { toRef } from 'vue'
 
-export const VSheet = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VSheet = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VSheet',
 
   props: {

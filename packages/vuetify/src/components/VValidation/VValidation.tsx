@@ -2,9 +2,14 @@
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
-export const VValidation = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VValidation = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VValidation',
 
   props: {

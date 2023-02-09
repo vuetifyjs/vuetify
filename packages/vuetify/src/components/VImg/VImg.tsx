@@ -21,13 +21,14 @@ import {
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -37,7 +38,16 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: []
+  placeholder: []
+  error: []
+  sources: []
+}
+
+export const VImg = genericComponent<new () => {
+  $props: SlotsToProps<VImgSlots>
+}>()({
   name: 'VImg',
 
   directives: { intersect },

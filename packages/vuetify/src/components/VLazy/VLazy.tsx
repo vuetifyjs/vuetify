@@ -8,12 +8,15 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import intersect from '@/directives/intersect'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VLazy = defineComponent({
+export const VLazy = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VLazy',
 
   directives: { intersect },

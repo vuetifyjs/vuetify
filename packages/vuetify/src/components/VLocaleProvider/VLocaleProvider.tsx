@@ -5,9 +5,14 @@ import './VLocaleProvider.sass'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VLocaleProvider = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VLocaleProvider = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VLocaleProvider',
 
   props: {

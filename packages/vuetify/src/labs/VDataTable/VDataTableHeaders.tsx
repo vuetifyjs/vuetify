@@ -12,12 +12,22 @@ import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
+import type { LoaderSlotProps } from '@/composables/loader'
+import type { SlotsToProps } from '@/util'
 
-export const VDataTableHeaders = defineComponent({
+export type VDataTableHeadersSlots = {
+  default: []
+  loader: [LoaderSlotProps]
+  'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
+}
+
+export const VDataTableHeaders = genericComponent<new () => {
+  $props: SlotsToProps<VDataTableHeadersSlots>
+}>()({
   name: 'VDataTableHeaders',
 
   props: {

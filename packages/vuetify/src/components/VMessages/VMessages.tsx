@@ -10,12 +10,23 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
-export const VMessages = defineComponent({
+export type VMessageSlot = {
+  message: string
+}
+
+export type VMessagesSlots = {
+  message: [VMessageSlot]
+}
+
+export const VMessages = genericComponent<new () => {
+  $props: SlotsToProps<VMessagesSlots>
+}>()({
   name: 'VMessages',
 
   props: {

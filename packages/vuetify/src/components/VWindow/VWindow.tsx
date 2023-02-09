@@ -24,6 +24,13 @@ import type { IconValue } from '@/composables/icons'
 import type { SlotsToProps } from '@/util'
 import type { TouchHandlers } from '@/directives/touch'
 
+export type VWindowSlots = {
+  default: [{ group: GroupProvide }]
+  additional: [{ group: GroupProvide }]
+  prev: [{ props: ControlProps }]
+  next: [{ props: ControlProps }]
+}
+
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
   transitionCount: Ref<number>
@@ -43,12 +50,7 @@ export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
 export const VWindow = genericComponent<new () => {
-  $props: SlotsToProps<{
-    default: [{ group: GroupProvide }]
-    additional: [{ group: GroupProvide }]
-    prev: [{ props: ControlProps }]
-    next: [{ props: ControlProps }]
-  }>
+  $props: SlotsToProps<VWindowSlots>
 }>()({
   name: 'VWindow',
 

@@ -6,7 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { modes } from './util'
 
 // Types
@@ -24,7 +24,9 @@ const VColorPickerInput = ({ label, ...rest }: any) => {
   )
 }
 
-export const VColorPickerEdit = defineComponent({
+export const VColorPickerEdit = genericComponent<new () => {
+  //
+}>()({
   name: 'VColorPickerEdit',
 
   props: {

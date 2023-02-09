@@ -7,9 +7,14 @@ import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VMain = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VMain = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VMain',
 
   props: {

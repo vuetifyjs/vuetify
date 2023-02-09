@@ -7,13 +7,17 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
+import type { GenericSlot } from '@/util'
+
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = defineComponent({
+export const VDivider = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VDivider',
 
   props: {

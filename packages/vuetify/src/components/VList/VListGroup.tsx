@@ -17,6 +17,11 @@ import type { InternalListItem } from './VList'
 import type { SlotsToProps } from '@/util'
 import type { ExtractPropTypes, Ref } from 'vue'
 
+export type VListGroupSlots = {
+  default: []
+  activator: [ListGroupActivatorSlot]
+}
+
 export type ListGroupActivatorSlot = {
   props: {
     onClick: (e: Event) => void
@@ -57,10 +62,7 @@ export const makeVListGroupProps = propsFactory({
 export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
   $props: {
     items?: T[]
-  } & SlotsToProps<{
-    activator: [ListGroupActivatorSlot]
-    default: []
-  }>
+  } & SlotsToProps<VListGroupSlots>
 }>()({
   name: 'VListGroup',
 

@@ -6,12 +6,15 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
+import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VLayoutItem = defineComponent({
+export const VLayoutItem = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VLayoutItem',
 
   props: {

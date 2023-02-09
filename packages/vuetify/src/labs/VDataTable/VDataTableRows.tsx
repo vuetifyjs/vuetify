@@ -10,13 +10,24 @@ import { useSelection } from './composables/select'
 import { useGroupBy } from './composables/group'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { DataTableItem, InternalDataTableItem } from './types'
+import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
-export const VDataTableRows = defineComponent({
+export type VDataTableRowsSlots = {
+  default: []
+  item: [InternalDataTableItem]
+  loading: []
+  'group-header': [InternalDataTableItem]
+  'no-data': []
+}
+
+export const VDataTableRows = genericComponent<new () => {
+  $props: SlotsToProps<VDataTableRowsSlots>
+}>()({
   name: 'VDataTableRows',
 
   props: {

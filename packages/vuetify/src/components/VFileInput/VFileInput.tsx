@@ -15,12 +15,21 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, ref, watch } from 'vue'
-import { callEvent, defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, humanReadableFileSize, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VFileInput = defineComponent({
+export type VFileInputSlots = VInputSlots & VFieldSlots & {
+  counter: []
+}
+
+export const VFileInput = genericComponent<new () => {
+  $props: SlotsToProps<VFileInputSlots>
+}>()({
   name: 'VFileInput',
 
   inheritAttrs: false,

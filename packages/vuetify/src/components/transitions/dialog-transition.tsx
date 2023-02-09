@@ -1,15 +1,23 @@
-import type { PropType } from 'vue'
+// Components
 import { Transition } from 'vue'
+
+// Utilities
 import {
   acceleratedEasing,
   animate,
   deceleratedEasing,
-  defineComponent,
+  genericComponent,
   nullifyTransforms,
   standardEasing,
 } from '@/util'
 
-export const VDialogTransition = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+import type { PropType } from 'vue'
+
+export const VDialogTransition = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VDialogTransition',
 
   props: {

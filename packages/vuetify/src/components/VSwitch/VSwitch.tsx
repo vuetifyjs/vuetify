@@ -13,9 +13,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 
-export const VSwitch = defineComponent({
+// Types
+import type { SlotsToProps } from '@/util'
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+
+export type VSwitchSlots = VInputSlots & VSelectionControlSlots
+
+export const VSwitch = genericComponent<new () => {
+  $props: SlotsToProps<VSwitchSlots>
+}>()({
   name: 'VSwitch',
 
   inheritAttrs: false,

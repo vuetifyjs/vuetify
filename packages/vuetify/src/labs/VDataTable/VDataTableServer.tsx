@@ -2,6 +2,7 @@
 import { VTable } from '@/components/VTable'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
+import type { VDataTableRowsSlots } from './VDataTableRows'
 import { VDataTableRows } from './VDataTableRows'
 
 // Composables
@@ -18,13 +19,17 @@ import { createSort, makeDataTableSortProps } from './composables/sort'
 
 // Utilities
 import { provide, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
+import type { SlotsToProps } from '@/util'
+import type { VDataTableSlots } from './VDataTable'
 
-export const VDataTableServer = defineComponent({
+export const VDataTableServer = genericComponent<new () => {
+  $props: SlotsToProps<VDataTableSlots>
+}>()({
   name: 'VDataTableServer',
 
   props: {

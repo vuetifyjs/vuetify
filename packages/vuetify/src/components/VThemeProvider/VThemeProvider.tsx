@@ -6,9 +6,14 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
-export const VThemeProvider = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VThemeProvider = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VThemeProvider',
 
   props: {

@@ -10,10 +10,11 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, Text, toRef } from 'vue'
-import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef } from 'vue'
+import type { GenericSlot } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -26,7 +27,9 @@ export const makeVIconProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-icon')
 
-export const VIcon = defineComponent({
+export const VIcon = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VIcon',
 
   props: makeVIconProps(),

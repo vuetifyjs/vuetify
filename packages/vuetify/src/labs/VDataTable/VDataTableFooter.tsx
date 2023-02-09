@@ -9,13 +9,18 @@ import { VSelect } from '@/components/VSelect'
 import { usePagination } from './composables/paginate'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { InternalItem } from '@/composables/items'
+import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
-export const VDataTableFooter = defineComponent({
+export const VDataTableFooter = genericComponent<new () => {
+  $props: SlotsToProps<{
+    prepend: []
+  }>
+}>()({
   name: 'VDataTableFooter',
 
   props: {

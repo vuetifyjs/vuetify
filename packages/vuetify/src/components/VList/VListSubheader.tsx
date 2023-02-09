@@ -4,9 +4,14 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VListSubheader = defineComponent({
+// Types
+import type { GenericSlot } from '@/util'
+
+export const VListSubheader = genericComponent<new () => {
+  $props: GenericSlot
+}>()({
   name: 'VListSubheader',
 
   props: {

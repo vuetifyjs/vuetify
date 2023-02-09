@@ -7,9 +7,21 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VTable = defineComponent({
+// Types
+import type { SlotsToProps } from '@/util'
+
+export type VTableSlots = {
+  default: []
+  top: []
+  bottom: []
+  wrapper: []
+}
+
+export const VTable = genericComponent<new () => {
+  $props: SlotsToProps<VTableSlots>
+}>()({
   name: 'VTable',
 
   props: {
