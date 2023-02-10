@@ -18,12 +18,9 @@ import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VO
 import { VMenuSymbol } from './shared'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VMenu = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
 
   props: {

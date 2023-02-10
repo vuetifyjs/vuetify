@@ -33,7 +33,7 @@ import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
 export type VBtnSlots = MakeSlots<{
@@ -43,9 +43,7 @@ export type VBtnSlots = MakeSlots<{
   loader: []
 }>
 
-export const VBtn = genericComponent<new () => {
-  $props: SlotsToProps<VBtnSlots>
-}>()({
+export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
 
   directives: { Ripple },

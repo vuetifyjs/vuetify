@@ -11,12 +11,7 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VCounter = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VCounter = genericComponent()({
   name: 'VCounter',
 
   functional: true,

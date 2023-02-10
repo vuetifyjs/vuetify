@@ -6,15 +6,10 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
 import { inject } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VExpansionPanelText = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',
 
   props: {

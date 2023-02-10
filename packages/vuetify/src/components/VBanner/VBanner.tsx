@@ -26,7 +26,7 @@ import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
 export type VBannerSlots = MakeSlots<{
@@ -36,9 +36,7 @@ export type VBannerSlots = MakeSlots<{
   actions: []
 }>
 
-export const VBanner = genericComponent<new () => {
-  $props: SlotsToProps<VBannerSlots>
-}>()({
+export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',
 
   props: {

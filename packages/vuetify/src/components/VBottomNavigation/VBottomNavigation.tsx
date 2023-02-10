@@ -19,11 +19,8 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import { VBtnToggleSymbol } from '@/components/VBtnToggle/VBtnToggle'
-import type { GenericSlot } from '@/util'
 
-export const VBottomNavigation = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VBottomNavigation = genericComponent()({
   name: 'VBottomNavigation',
 
   props: {

@@ -13,17 +13,14 @@ import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
 import { computed, ref } from 'vue'
+import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
 
 // Types
-import { VTabsSymbol } from './shared'
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
-export const VTab = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VTab = genericComponent()({
   name: 'VTab',
 
   props: {

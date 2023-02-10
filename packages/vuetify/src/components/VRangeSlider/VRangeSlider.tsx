@@ -18,12 +18,9 @@ import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { VSliderSlots } from '../VSlider/VSlider'
 
-export const VRangeSlider = genericComponent<new () => {
-  $props: SlotsToProps<VSliderSlots>
-}>()({
+export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
   props: {

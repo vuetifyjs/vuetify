@@ -8,11 +8,9 @@ import { IconValue } from '@/composables/icons'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
+import type { VBtnSlots } from '@/components/VBtn/VBtn'
 
-export const VAppBarNavIcon = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VAppBarNavIcon = genericComponent<VBtnSlots>()({
   name: 'VAppBarNavIcon',
 
   props: {

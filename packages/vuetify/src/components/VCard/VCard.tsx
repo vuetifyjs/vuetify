@@ -33,7 +33,7 @@ import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 export type VCardSlots = MakeSlots<{
   default: []
@@ -47,9 +47,7 @@ export type VCardSlots = MakeSlots<{
   append: []
 }>
 
-export const VCard = genericComponent<new () => {
-  $props: SlotsToProps<VCardSlots>
-}>()({
+export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
   directives: { Ripple },

@@ -11,12 +11,9 @@ import intersect from '@/directives/intersect'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VLazy = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VLazy = genericComponent()({
   name: 'VLazy',
 
   directives: { intersect },

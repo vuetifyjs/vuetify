@@ -5,12 +5,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { genericComponent } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
+type VHoverSlots = {
+  default: [{
+    isHovering: boolean
+    props: Record<string, unknown>
+  }]
+}
 
-export const VHover = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VHover = genericComponent<VHoverSlots>()({
   name: 'VHover',
 
   props: {

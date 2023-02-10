@@ -17,9 +17,8 @@ import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
-import { VTabsSymbol } from './shared'
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
 export type TabItem = string | Record<string, any>
 
@@ -33,9 +32,7 @@ function parseItems (items: TabItem[] | undefined) {
   })
 }
 
-export const VTabs = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VTabs = genericComponent()({
   name: 'VTabs',
 
   props: {

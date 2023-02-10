@@ -2,16 +2,14 @@
 import './VColorPickerCanvas.sass'
 
 // Utilities
-import { clamp, convertToUnit, genericComponent, getEventCoordinates, useRender } from '@/util'
+import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender } from '@/util'
 import { computed, onMounted, ref, watch } from 'vue'
 
 // Types
 import type { HSV } from '@/util'
 import type { PropType } from 'vue'
 
-export const VColorPickerCanvas = genericComponent<new () => {
-  //
-}>()({
+export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
 
   props: {

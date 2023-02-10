@@ -6,11 +6,9 @@ import { VWindowItem } from '@/components/VWindow'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
+import type { VImgSlots } from '@/components/VImg/VImg'
 
-export const VCarouselItem = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VCarouselItem = genericComponent<VImgSlots>()({
   name: 'VCarouselItem',
 
   inheritAttrs: false,

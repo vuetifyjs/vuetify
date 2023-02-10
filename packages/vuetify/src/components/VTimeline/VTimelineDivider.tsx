@@ -13,12 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VTimelineDivider = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',
 
   props: {

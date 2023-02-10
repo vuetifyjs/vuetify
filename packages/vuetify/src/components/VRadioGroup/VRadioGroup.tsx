@@ -16,15 +16,12 @@ import { computed } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
 export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
 
-export const VRadioGroup = genericComponent<new () => {
-  $props: SlotsToProps<VRadioGroupSlots>
-}>()({
+export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,

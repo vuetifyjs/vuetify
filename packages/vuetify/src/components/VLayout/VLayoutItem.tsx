@@ -9,12 +9,9 @@ import { computed, toRef } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VLayoutItem = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VLayoutItem = genericComponent()({
   name: 'VLayoutItem',
 
   props: {

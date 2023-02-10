@@ -17,17 +17,15 @@ import { computed, ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VSliderSlots = VInputSlots & {
+export type VSliderSlots = VInputSlots & MakeSlots<{
   'tick-label': []
   'thumb-label': []
-}
+}>
 
-export const VSlider = genericComponent<new () => {
-  $props: SlotsToProps<VSliderSlots>
-}>()({
+export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
   props: {

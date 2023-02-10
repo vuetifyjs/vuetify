@@ -27,7 +27,6 @@ import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
 import type { DataTableItem } from './types'
-import type { SlotsToProps } from '@/util'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
   default: []
@@ -55,9 +54,7 @@ export const makeVDataTableProps = propsFactory({
   fixedFooter: Boolean,
 }, 'v-data-table')
 
-export const VDataTable = genericComponent<new () => {
-  $props: SlotsToProps<VDataTableSlots & { colgroup: [] }>
-}>()({
+export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()({
   name: 'VDataTable',
 
   props: {

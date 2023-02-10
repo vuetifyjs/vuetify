@@ -17,9 +17,6 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
 export const makeVAvatarProps = propsFactory({
   start: Boolean,
   end: Boolean,
@@ -34,9 +31,7 @@ export const makeVAvatarProps = propsFactory({
   ...makeVariantProps({ variant: 'flat' } as const),
 }, 'v-avatar')
 
-export const VAvatar = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VAvatar = genericComponent()({
   name: 'VAvatar',
 
   props: makeVAvatarProps(),

@@ -9,15 +9,10 @@ import { useTextColor } from '@/composables/color'
 import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VDivider = genericComponent()({
   name: 'VDivider',
 
   props: {

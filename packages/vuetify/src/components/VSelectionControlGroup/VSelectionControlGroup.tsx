@@ -13,7 +13,6 @@ import { computed, onScopeDispose, provide, toRef } from 'vue'
 import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
 
 export interface VSelectionGroupContext {
@@ -53,9 +52,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   ...makeDensityProps(),
 }, 'v-selection-control-group')
 
-export const VSelectionControlGroup = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
   props: {

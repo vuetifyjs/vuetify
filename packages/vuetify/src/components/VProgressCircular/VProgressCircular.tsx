@@ -14,12 +14,9 @@ import { computed, ref, toRef, watchEffect } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VProgressCircular = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VProgressCircular = genericComponent()({
   name: 'VProgressCircular',
 
   props: {

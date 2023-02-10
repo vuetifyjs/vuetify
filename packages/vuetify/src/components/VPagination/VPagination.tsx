@@ -27,7 +27,6 @@ import { createRange, genericComponent, keyValues, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 export type VPaginationSlots = {
   item: []
@@ -37,9 +36,7 @@ export type VPaginationSlots = {
   last: []
 }
 
-export const VPagination = genericComponent<new () => {
-  $props: SlotsToProps<VPaginationSlots>
-}>()({
+export const VPagination = genericComponent<VPaginationSlots>()({
   name: 'VPagination',
 
   props: {

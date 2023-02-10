@@ -15,7 +15,6 @@ import { ref, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 // Types
 export type VTimelineItemSlots = {
@@ -24,9 +23,7 @@ export type VTimelineItemSlots = {
   opposite: []
 }
 
-export const VTimelineItem = genericComponent<new () => {
-  $props: SlotsToProps<VTimelineItemSlots>
-}>()({
+export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   name: 'VTimelineItem',
 
   props: {

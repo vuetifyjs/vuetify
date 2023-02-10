@@ -1,16 +1,16 @@
 // Utilities
 import { h, Transition, TransitionGroup } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
-import type { FunctionalComponent, Prop } from 'vue'
+import type { FunctionalComponent, PropType } from 'vue'
 
 export function createCssTransition (
   name: string,
   origin = 'top center 0',
   mode?: string
 ) {
-  return defineComponent({
+  return genericComponent()({
     name,
 
     props: {
@@ -80,14 +80,14 @@ export function createJavascriptTransition (
   functions: Record<string, any>,
   mode = 'in-out'
 ) {
-  return defineComponent({
+  return genericComponent()({
     name,
 
     props: {
       mode: {
-        type: String,
+        type: String as PropType<'in-out' | 'out-in' | 'default'>,
         default: mode,
-      } as Prop<'in-out' | 'out-in' | 'default'>,
+      },
     },
 
     setup (props, { slots }) {

@@ -7,12 +7,7 @@ import { provideLocale } from '@/composables/locale'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VLocaleProvider = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VLocaleProvider = genericComponent()({
   name: 'VLocaleProvider',
 
   props: {

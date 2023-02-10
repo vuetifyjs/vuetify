@@ -12,12 +12,9 @@ import {
 } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
-export const VDialogTransition = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VDialogTransition = genericComponent()({
   name: 'VDialogTransition',
 
   props: {

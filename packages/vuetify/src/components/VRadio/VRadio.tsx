@@ -5,12 +5,9 @@ import { makeSelectionControlProps, VSelectionControl } from '@/components/VSele
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
-export const VRadio = genericComponent<new () => {
-  $props: SlotsToProps<VSelectionControlSlots>
-}>()({
+export const VRadio = genericComponent<VSelectionControlSlots>()({
   name: 'VRadio',
 
   props: {

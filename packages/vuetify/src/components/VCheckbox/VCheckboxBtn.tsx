@@ -12,7 +12,6 @@ import { genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ExtractPropTypes } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -27,9 +26,7 @@ export const makeVCheckboxBtnProps = propsFactory({
   }),
 }, 'v-checkbox-btn')
 
-export const VCheckboxBtn = genericComponent<new () => {
-  $props: SlotsToProps<VSelectionControlSlots>
-}>()({
+export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
   name: 'VCheckboxBtn',
 
   props: makeVCheckboxBtnProps(),

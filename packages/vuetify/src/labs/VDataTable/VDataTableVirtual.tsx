@@ -23,7 +23,6 @@ import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
-import type { SlotsToProps } from '@/util'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 
 export type VDataTableVirtualSlots = VDataTableRowsSlots & {
@@ -32,9 +31,7 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & {
   bottom: []
 }
 
-export const VDataTableVirtual = genericComponent<new () => {
-  $props: SlotsToProps<VDataTableVirtualSlots>
-}>()({
+export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
   name: 'VDataTableVirtual',
 
   props: {

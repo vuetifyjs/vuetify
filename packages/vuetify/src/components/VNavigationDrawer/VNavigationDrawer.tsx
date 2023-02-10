@@ -24,7 +24,6 @@ import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 export type VNavigationDrawerImageSlot = {
   image: string
@@ -39,9 +38,7 @@ export type VNavigationDrawerSlots = {
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
-export const VNavigationDrawer = genericComponent<new () => {
-  $props: SlotsToProps<VNavigationDrawerSlots>
-}>()({
+export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
 
   props: {

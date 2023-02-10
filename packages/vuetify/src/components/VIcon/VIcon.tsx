@@ -14,7 +14,6 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { ComputedRef } from 'vue'
-import type { GenericSlot } from '@/util'
 
 export const makeVIconProps = propsFactory({
   color: String,
@@ -27,9 +26,7 @@ export const makeVIconProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-icon')
 
-export const VIcon = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VIcon = genericComponent()({
   name: 'VIcon',
 
   props: makeVIconProps(),

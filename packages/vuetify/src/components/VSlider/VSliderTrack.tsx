@@ -12,16 +12,11 @@ import { useRounded } from '@/composables/rounded'
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
-
-export type VSliderTrackSlot = {
+export type VSliderTrackSlots = {
   'tick-label': []
 }
 
-export const VSliderTrack = genericComponent<new () => {
-  $props: SlotsToProps<VSliderTrackSlot>
-}>()({
+export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',
 
   props: {

@@ -9,7 +9,6 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
@@ -76,9 +75,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
 
 const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
 
-export const VCol = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VCol = genericComponent()({
   name: 'VCol',
 
   props: {

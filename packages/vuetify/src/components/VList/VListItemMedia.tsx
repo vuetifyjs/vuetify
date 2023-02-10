@@ -4,12 +4,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VListItemMedia = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VListItemMedia = genericComponent()({
   name: 'VListItemMedia',
 
   props: {

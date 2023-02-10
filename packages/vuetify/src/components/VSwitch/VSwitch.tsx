@@ -16,15 +16,12 @@ import { computed, ref } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
 export type VSwitchSlots = VInputSlots & VSelectionControlSlots
 
-export const VSwitch = genericComponent<new () => {
-  $props: SlotsToProps<VSwitchSlots>
-}>()({
+export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
 
   inheritAttrs: false,

@@ -6,12 +6,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VToolbarItems = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VToolbarItems = genericComponent()({
   name: 'VToolbarItems',
 
   props: makeVariantProps({ variant: 'text' }),

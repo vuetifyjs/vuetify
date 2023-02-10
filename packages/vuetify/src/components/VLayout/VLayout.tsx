@@ -7,12 +7,7 @@ import { createLayout, makeLayoutProps } from '@/composables/layout'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VLayout = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VLayout = genericComponent()({
   name: 'VLayout',
 
   props: makeLayoutProps(),

@@ -28,7 +28,6 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 // not intended for public use, this is passed in by vuetify-loader
 export interface srcObject {
@@ -45,9 +44,7 @@ export type VImgSlots = {
   sources: []
 }
 
-export const VImg = genericComponent<new () => {
-  $props: SlotsToProps<VImgSlots>
-}>()({
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },

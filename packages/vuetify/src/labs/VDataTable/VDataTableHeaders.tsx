@@ -17,7 +17,6 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 // Types
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { SlotsToProps } from '@/util'
 
 export type VDataTableHeadersSlots = {
   default: []
@@ -25,9 +24,7 @@ export type VDataTableHeadersSlots = {
   'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
 }
 
-export const VDataTableHeaders = genericComponent<new () => {
-  $props: SlotsToProps<VDataTableHeadersSlots>
-}>()({
+export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
 
   props: {

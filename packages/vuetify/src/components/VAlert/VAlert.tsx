@@ -27,8 +27,8 @@ import { computed, toRef } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
@@ -43,9 +43,7 @@ export type VAlertSlots = MakeSlots<{
   close: []
 }>
 
-export const VAlert = genericComponent<new () => {
-  $props: SlotsToProps<VAlertSlots>
-}>()({
+export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',
 
   props: {

@@ -19,16 +19,14 @@ import { genericComponent, pick, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 export type VBadgeSlots = MakeSlots<{
   default: []
   badge: []
 }>
 
-export const VBadge = genericComponent<new () => {
-  $props: SlotsToProps<VBadgeSlots>
-}>()({
+export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',
 
   inheritAttrs: false,

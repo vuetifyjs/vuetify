@@ -15,7 +15,6 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { DataTableItem, InternalDataTableItem } from './types'
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 export type VDataTableRowsSlots = {
   default: []
@@ -25,9 +24,7 @@ export type VDataTableRowsSlots = {
   'no-data': []
 }
 
-export const VDataTableRows = genericComponent<new () => {
-  $props: SlotsToProps<VDataTableRowsSlots>
-}>()({
+export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',
 
   props: {

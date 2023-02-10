@@ -13,12 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { computed, ref, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VSystemBar = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VSystemBar = genericComponent()({
   name: 'VSystemBar',
 
   props: {

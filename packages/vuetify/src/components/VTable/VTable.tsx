@@ -9,9 +9,6 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
-
 export type VTableSlots = {
   default: []
   top: []
@@ -19,9 +16,7 @@ export type VTableSlots = {
   wrapper: []
 }
 
-export const VTable = genericComponent<new () => {
-  $props: SlotsToProps<VTableSlots>
-}>()({
+export const VTable = genericComponent<VTableSlots>()({
   name: 'VTable',
 
   props: {

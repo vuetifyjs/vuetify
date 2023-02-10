@@ -9,12 +9,7 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VMain = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VMain = genericComponent()({
   name: 'VMain',
 
   props: {

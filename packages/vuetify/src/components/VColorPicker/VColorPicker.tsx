@@ -15,7 +15,7 @@ import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { genericComponent, HSVtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
 import { onMounted, ref } from 'vue'
 
@@ -23,9 +23,7 @@ import { onMounted, ref } from 'vue'
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
-export const VColorPicker = genericComponent<new () => {
-  //
-}>()({
+export const VColorPicker = defineComponent({
   name: 'VColorPicker',
 
   props: {

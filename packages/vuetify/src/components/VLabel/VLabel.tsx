@@ -7,12 +7,7 @@ import { makeThemeProps } from '@/composables/theme'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VLabel = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VLabel = genericComponent()({
   name: 'VLabel',
 
   props: {

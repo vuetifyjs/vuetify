@@ -7,12 +7,7 @@ import { useTextColor } from '@/composables/color'
 import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VBreadcrumbsItem = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
 
   props: {

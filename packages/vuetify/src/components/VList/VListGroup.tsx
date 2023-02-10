@@ -13,20 +13,11 @@ import { computed, toRef } from 'vue'
 import { defineComponent, genericComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
-import type { InternalListItem } from './VList'
-import type { SlotsToProps } from '@/util'
-import type { ExtractPropTypes, Ref } from 'vue'
+import type { ExtractPropTypes } from 'vue'
 
 export type VListGroupSlots = {
   default: []
-  activator: [ListGroupActivatorSlot]
-}
-
-export type ListGroupActivatorSlot = {
-  props: {
-    onClick: (e: Event) => void
-    class: string
-  }
+  activator: [{ isOpen: boolean, props: Record<string, unknown> }]
 }
 
 const VListGroupActivator = defineComponent({
@@ -59,11 +50,7 @@ export const makeVListGroupProps = propsFactory({
   ...makeTagProps(),
 }, 'v-list-group')
 
-export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<VListGroupSlots>
-}>()({
+export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',
 
   props: {
@@ -81,7 +68,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
       open(!isOpen.value, e)
     }
 
-    const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
+    const activatorProps = computed(() => ({
       onClick,
       class: 'v-list-group__header',
       id: id.value,
@@ -116,7 +103,7 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
             }}
           >
             <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen }) }
+              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
         ) }

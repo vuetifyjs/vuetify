@@ -19,12 +19,9 @@ import { onMounted, ref, watch } from 'vue'
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { VWindowSlots } from '../VWindow/VWindow'
 
-export const VCarousel = genericComponent<new () => {
-  $props: SlotsToProps<VWindowSlots>
-}>()({
+export const VCarousel = genericComponent<VWindowSlots>()({
   name: 'VCarousel',
 
   props: {

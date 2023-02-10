@@ -13,14 +13,11 @@ import { deepEqual, genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VChipGroup = genericComponent()({
   name: 'VChipGroup',
 
   props: {

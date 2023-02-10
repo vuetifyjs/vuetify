@@ -9,18 +9,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { genericComponent } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
-
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export type VItemGroupSlot = {
-  default: []
-}
-
-export const VItemGroup = genericComponent<new () => {
-  $props: SlotsToProps<VItemGroupSlot>
-}>()({
+export const VItemGroup = genericComponent()({
   name: 'VItemGroup',
 
   props: {

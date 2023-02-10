@@ -12,7 +12,7 @@ import { makeDensityProps } from '@/composables/density'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 export type VCardItemSlots = MakeSlots<{
   default: []
@@ -22,9 +22,7 @@ export type VCardItemSlots = MakeSlots<{
   subtitle: []
 }>
 
-export const VCardItem = genericComponent<new () => {
-  $props: SlotsToProps<VCardItemSlots>
-}>()({
+export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
 
   props: {

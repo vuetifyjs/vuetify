@@ -32,7 +32,7 @@ import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 export type VChipSlots = MakeSlots<{
   default: []
@@ -41,9 +41,7 @@ export type VChipSlots = MakeSlots<{
   append: []
 }>
 
-export const VChip = genericComponent<new () => {
-  $props: SlotsToProps<VChipSlots>
-}>()({
+export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },

@@ -9,7 +9,6 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
@@ -76,9 +75,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: string)
   return className.toLowerCase()
 }
 
-export const VRow = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VRow = genericComponent()({
   name: 'VRow',
 
   props: {

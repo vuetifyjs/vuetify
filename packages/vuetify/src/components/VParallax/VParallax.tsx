@@ -14,16 +14,13 @@ import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { VImgSlots } from '../VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
 }
 
-export const VParallax = genericComponent<new () => {
-  $props: SlotsToProps<VImgSlots>
-}>()({
+export const VParallax = genericComponent<VImgSlots>()({
   name: 'VParallax',
 
   props: {

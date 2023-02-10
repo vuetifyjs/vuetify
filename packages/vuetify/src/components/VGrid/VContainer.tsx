@@ -7,12 +7,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VContainer = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VContainer = genericComponent()({
   name: 'VContainer',
 
   props: {

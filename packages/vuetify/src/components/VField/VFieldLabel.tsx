@@ -4,12 +4,7 @@ import { VLabel } from '@/components/VLabel'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VFieldLabel = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VFieldLabel = genericComponent()({
   name: 'VFieldLabel',
 
   props: {

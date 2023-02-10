@@ -12,7 +12,6 @@ import { computed, toRef } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
-import type { GenericSlot } from '@/util'
 import type { Prop } from 'vue'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
@@ -20,9 +19,7 @@ export type TimelineSide = 'start' | 'end' | undefined
 export type TimelineAlign = 'center' | 'start'
 export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
-export const VTimeline = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VTimeline = genericComponent()({
   name: 'VTimeline',
 
   props: {

@@ -15,12 +15,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { computed, ref, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VFooter = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VFooter = genericComponent()({
   name: 'VFooter',
 
   props: {

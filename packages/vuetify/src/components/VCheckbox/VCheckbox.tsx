@@ -14,14 +14,11 @@ import { computed } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 
 export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
 
-export const VCheckbox = genericComponent<new () => {
-  $props: SlotsToProps<VCheckboxSlots>
-}>()({
+export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,

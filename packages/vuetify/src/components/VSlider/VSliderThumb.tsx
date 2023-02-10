@@ -16,16 +16,11 @@ import { useTextColor } from '@/composables/color'
 import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
 
-// Types
-import type { SlotsToProps } from '@/util'
-
-export type VSliderThumbSlot = {
+export type VSliderThumbSlots = {
   'thumb-label': []
 }
 
-export const VSliderThumb = genericComponent<new () => {
-  $props: SlotsToProps<VSliderThumbSlot>
-}>()({
+export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },

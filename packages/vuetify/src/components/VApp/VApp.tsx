@@ -9,12 +9,7 @@ import { useRtl } from '@/composables/locale'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VApp = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VApp = genericComponent()({
   name: 'VApp',
 
   props: {

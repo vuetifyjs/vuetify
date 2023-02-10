@@ -6,12 +6,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { genericComponent, useRender } from '@/util'
 import { onUpdated, watch } from 'vue'
 
-// Types
-import type { GenericSlot } from '@/util'
-
-export const VVirtualScrollItem = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VVirtualScrollItem = genericComponent()({
   name: 'VVirtualScrollItem',
 
   props: {

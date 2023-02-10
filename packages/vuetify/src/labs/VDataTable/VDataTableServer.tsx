@@ -2,7 +2,6 @@
 import { VTable } from '@/components/VTable'
 import { VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
-import type { VDataTableRowsSlots } from './VDataTableRows'
 import { VDataTableRows } from './VDataTableRows'
 
 // Composables
@@ -24,12 +23,9 @@ import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
-import type { SlotsToProps } from '@/util'
 import type { VDataTableSlots } from './VDataTable'
 
-export const VDataTableServer = genericComponent<new () => {
-  $props: SlotsToProps<VDataTableSlots>
-}>()({
+export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',
 
   props: {

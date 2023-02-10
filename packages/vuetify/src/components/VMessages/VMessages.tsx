@@ -14,7 +14,6 @@ import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 
 export type VMessageSlot = {
   message: string
@@ -24,9 +23,7 @@ export type VMessagesSlots = {
   message: [VMessageSlot]
 }
 
-export const VMessages = genericComponent<new () => {
-  $props: SlotsToProps<VMessagesSlots>
-}>()({
+export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',
 
   props: {

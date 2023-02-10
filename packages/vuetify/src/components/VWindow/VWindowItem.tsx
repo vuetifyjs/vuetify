@@ -13,11 +13,8 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
-import type { GenericSlot } from '@/util'
 
-export const VWindowItem = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
 
   directives: {

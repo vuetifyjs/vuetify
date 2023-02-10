@@ -2,17 +2,14 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
+import { toRefs } from 'vue'
 import { genericComponent } from '@/util'
-import { toRefs } from 'vue' // eslint-disable-line no-restricted-imports
 
 // Types
-import type { DefaultsOptions } from '@/composables/defaults'
-import type { GenericSlot } from '@/util'
 import type { PropType } from 'vue'
+import type { DefaultsOptions } from '@/composables/defaults'
 
-export const VDefaultsProvider = genericComponent<new () => {
-  $props: GenericSlot
-}>()({
+export const VDefaultsProvider = genericComponent(false)({
   name: 'VDefaultsProvider',
 
   props: {
