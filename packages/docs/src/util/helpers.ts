@@ -121,11 +121,12 @@ const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 export const eventName = (name: string) => name.slice(2, 3).toLowerCase() + name.slice(3)
 
-export function propsToString (props: Record<string, any>, indent = 1) {
+export function propsToString (props: Record<string, any>, indent = 1, bound: string[] = []) {
   const displayedProps =
     Object.entries(props)
       .filter(([k, v]) => v !== undefined)
       .map(([k, v]) => {
+        if (bound.includes(k)) return `:${k}="${v}"`
         if (isOn(k)) {
           return v === true ? `@${eventName(k)}` : `@${eventName(k)}="${v}"`
         }
