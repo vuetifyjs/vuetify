@@ -1,10 +1,10 @@
 <template>
   <v-system-bar
-    class="px-4 py-1"
+    class="px-4 py-1 "
     color="#e7f0f6"
     height="52"
   >
-    <div class="text-blue-darken-3">
+    <div class="text-blue-darken-3 text-start">
       <div class="text-caption">
         You are currently viewing the documentation for <strong>Vuetify 3</strong>
       </div>
