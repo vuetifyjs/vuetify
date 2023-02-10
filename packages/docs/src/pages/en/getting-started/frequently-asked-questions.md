@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Frequently asked questions
   description: Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.
