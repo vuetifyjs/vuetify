@@ -204,7 +204,9 @@ export const VAutocomplete = genericComponent<new <
 
         select(selection.value)
 
-        nextTick(() => !selection.value && (selectionIndex.value = length - 2))
+        if (selectionIndex.value >= length - 1) {
+          selectionIndex.value = length - 2
+        }
       }
 
       if (e.key === 'ArrowLeft') {
