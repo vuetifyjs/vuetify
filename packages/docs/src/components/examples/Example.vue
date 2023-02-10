@@ -13,7 +13,6 @@
           flat
           height="44"
         >
-
           <v-fade-transition>
             <div v-if="showCode">
               <v-btn
@@ -34,8 +33,8 @@
           <v-spacer />
 
           <v-tooltip
-            v-for="{ path, ...action } in actions"
-            :key="path"
+            v-for="({ path, ...action }, i) of actions"
+            :key="i"
             location="top"
           >
             <template #activator="{ props: tooltip }">
