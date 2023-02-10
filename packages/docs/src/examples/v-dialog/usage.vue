@@ -2,6 +2,7 @@
   <div class="text-center">
     <v-dialog
       v-model="dialog"
+      width="auto"
     >
       <template v-slot:activator="{ props }">
         <v-btn
