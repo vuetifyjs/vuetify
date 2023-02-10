@@ -6,7 +6,6 @@
     floating
     location="right"
     sticky
-    touchless
     width="256"
   >
     <template
