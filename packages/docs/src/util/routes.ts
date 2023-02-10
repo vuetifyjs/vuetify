@@ -1,6 +1,7 @@
 // Imports
 import locales from '@/i18n/locales.json'
 import generatedPages from 'virtual:generated-pages'
+import redirects from '@/data/301.json'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -9,6 +10,7 @@ import { IN_BROWSER } from '@/util/globals'
 // const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
 export const languagePattern = locales.filter(l => l.enabled).map(lang => lang.alternate || lang.locale).join('|')
 export const disabledLanguagePattern = locales.filter(l => !l.enabled).map(lang => lang.alternate || lang.locale).join('|')
+export const anyLanguagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
 
 export function preferredLocale (locale = 'en') {
   if (!IN_BROWSER) return locale
@@ -42,3 +44,14 @@ export const generatedRoutes = generatedPages.map(route => ({
   ...route,
   path: trailingSlash(route.path),
 }))
+
+export const redirectRoutes = Object.entries(redirects).flatMap(([from, to]) => [
+  {
+    path: `/${from}`,
+    redirect: to,
+  },
+  {
+    path: `/:locale(${anyLanguagePattern})/${from}`,
+    redirect: to,
+  },
+])

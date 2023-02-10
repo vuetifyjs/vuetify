@@ -20,7 +20,14 @@ import { useVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
-import { disabledLanguagePattern, generatedRoutes, languagePattern, rpath, trailingSlash } from '@/util/routes'
+import {
+  disabledLanguagePattern,
+  generatedRoutes,
+  languagePattern,
+  redirectRoutes,
+  rpath,
+  trailingSlash,
+} from '@/util/routes'
 import { wrapInArray } from '@/util/helpers'
 
 // Globals
@@ -51,6 +58,7 @@ export const createApp = ViteSSG(
         },
       },
       ...routes,
+      ...redirectRoutes,
       {
         path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
         redirect: to => {
