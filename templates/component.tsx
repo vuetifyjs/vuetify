@@ -9,15 +9,13 @@ import './NAME.sass'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 export type ComponentSlots = MakeSlots<{
   default: []
 }>
 
-export const NAME = genericComponent<new () => {
-  $props: SlotsToProps<ComponentSlots>
-}>()({
+export const NAME = genericComponent<ComponentSlots>()({
   name: 'NAME',
 
   props: {},
