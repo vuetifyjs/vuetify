@@ -28,7 +28,7 @@ Vuetify is a no design skills required UI Library with beautifully handcrafted V
 
 Thank you to our special sponsor:
 
-<sponsor-card slug="teamwork" />
+<sponsor-card slug="teamwork" min-height="60" />
 
 <br>
 <br>
