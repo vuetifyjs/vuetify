@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Frequently asked questions
   description: Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.
@@ -139,7 +140,7 @@ export default {
 
 - **My application does not look correct.**{ #my-application-does-not-look-correct }
 
-  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application/) page.
+  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/features/application-layout/) page.
 
 <br>
 

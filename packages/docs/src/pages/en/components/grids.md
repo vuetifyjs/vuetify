@@ -6,7 +6,7 @@ meta:
   keywords: grids, vuetify grid component, layout component, flex component
 related:
   - /styles/flex
-  - /features/breakpoints
+  - /features/display-and-platform/
   - /styles/display
 ---
 

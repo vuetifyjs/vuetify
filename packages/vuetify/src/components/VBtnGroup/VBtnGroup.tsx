@@ -12,8 +12,8 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent, pick, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ExtractPropTypes } from 'vue'
@@ -30,7 +30,7 @@ export const makeVBtnGroupProps = propsFactory({
   ...makeVariantProps(),
 }, 'v-btn-group')
 
-export const VBtnGroup = defineComponent({
+export const VBtnGroup = genericComponent()({
   name: 'VBtnGroup',
 
   props: makeVBtnGroupProps(),

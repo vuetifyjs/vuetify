@@ -18,13 +18,20 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utlities
 import { computed, ref, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
+import type { VDataTableRowsSlots } from './VDataTableRows'
 
-export const VDataTableVirtual = defineComponent({
+export type VDataTableVirtualSlots = VDataTableRowsSlots & {
+  top: []
+  headers: []
+  bottom: []
+}
+
+export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
   name: 'VDataTableVirtual',
 
   props: {

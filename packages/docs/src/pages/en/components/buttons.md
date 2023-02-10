@@ -7,7 +7,7 @@ meta:
 related:
   - /components/button-groups/
   - /components/icons/
-  - /components/floating-action-buttons/
+  - /components/cards/
 ---
 
 # Buttons

@@ -4,6 +4,10 @@ meta:
   title: Guide to upgrading Vuetify
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
+related:
+  - /introduction/roadmap/
+  - /introduction/long-term-support/
+  - /introduction/enterprise-support/
 ---
 
 # Upgrade Guide

@@ -1,7 +1,7 @@
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBreadcrumbsDivider = defineComponent({
+export const VBreadcrumbsDivider = genericComponent()({
   name: 'VBreadcrumbsDivider',
 
   props: {

@@ -14,12 +14,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
+import type { VSliderSlots } from '../VSlider/VSlider'
 
-export const VRangeSlider = defineComponent({
+export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
   props: {

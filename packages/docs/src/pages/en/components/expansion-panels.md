@@ -6,7 +6,7 @@ meta:
   keywords: expansion panels, vuetify expansion panel component, vue expansion panel component
 related:
   - /components/cards/
-  - /components/data-tables/
+  - /components/data-tables/basics/
   - /components/lists/
 ---
 

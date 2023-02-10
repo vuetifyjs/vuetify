@@ -3,10 +3,10 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { onUpdated, watch } from 'vue'
 
-export const VVirtualScrollItem = defineComponent({
+export const VVirtualScrollItem = genericComponent()({
   name: 'VVirtualScrollItem',
 
   props: {

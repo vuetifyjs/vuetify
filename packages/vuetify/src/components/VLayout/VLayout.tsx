@@ -1,13 +1,13 @@
 // Styles
 import './VLayout.sass'
 
-// Utilities
-import { defineComponent, useRender } from '@/util'
-
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
 
-export const VLayout = defineComponent({
+// Utilities
+import { genericComponent, useRender } from '@/util'
+
+export const VLayout = genericComponent()({
   name: 'VLayout',
 
   props: makeLayoutProps(),

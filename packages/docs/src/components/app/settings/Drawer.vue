@@ -7,6 +7,7 @@
     disable-route-watcher
     position="fixed"
     temporary
+    touchless
     width="350"
   >
     <v-toolbar flat>

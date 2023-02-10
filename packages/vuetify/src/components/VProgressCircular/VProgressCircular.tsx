@@ -11,12 +11,12 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VProgressCircular = defineComponent({
+export const VProgressCircular = genericComponent()({
   name: 'VProgressCircular',
 
   props: {

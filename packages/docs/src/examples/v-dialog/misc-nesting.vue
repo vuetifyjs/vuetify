@@ -12,6 +12,7 @@
       </v-btn>
       <v-dialog
         v-model="dialog"
+        width="auto"
       >
         <v-card>
           <v-card-title>
@@ -40,6 +41,7 @@
 
       <v-dialog
         v-model="dialog2"
+        width="auto"
       >
         <v-card>
           <v-card-title>
@@ -67,6 +69,7 @@
 
       <v-dialog
         v-model="dialog3"
+        width="auto"
       >
         <v-card>
           <v-card-title>

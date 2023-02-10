@@ -13,9 +13,9 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VFooter = defineComponent({
+export const VFooter = genericComponent()({
   name: 'VFooter',
 
   props: {

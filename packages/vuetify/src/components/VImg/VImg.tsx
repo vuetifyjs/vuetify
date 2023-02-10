@@ -21,7 +21,7 @@ import {
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -37,7 +37,14 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: []
+  placeholder: []
+  error: []
+  sources: []
+}
+
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },

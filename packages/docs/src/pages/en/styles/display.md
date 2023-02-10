@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/text-and-typography/
   - /directives/resize/
-  - /features/breakpoints/
+  - /features/display-and-platform/
 ---
 
 # Display helpers

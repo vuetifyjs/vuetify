@@ -58,12 +58,6 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
     return Math.ceil(itemsLength.value / itemsPerPage.value)
   })
 
-  watchEffect(() => {
-    if (startIndex.value > itemsLength.value) {
-      page.value = 1
-    }
-  })
-
   const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
 
   provide(VDataTablePaginationSymbol, data)

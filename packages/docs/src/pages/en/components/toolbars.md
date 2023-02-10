@@ -6,7 +6,7 @@ meta:
   keywords: toolbars, vuetify toolbar component, vue toolbar component
 related:
   - /components/buttons/
-  - /components/footer/
+  - /components/footers/
   - /components/tabs/
 ---
 

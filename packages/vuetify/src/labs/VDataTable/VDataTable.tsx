@@ -4,6 +4,7 @@ import './VDataTable.sass'
 // Components
 import { VTable } from '@/components/VTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
+import type { VDataTableRowsSlots } from './VDataTableRows'
 import { VDataTableRows } from './VDataTableRows'
 import { VDataTableFooter } from './VDataTableFooter'
 
@@ -21,11 +22,23 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
 import type { DataTableItem } from './types'
+
+export type VDataTableSlots = VDataTableRowsSlots & {
+  default: []
+  top: []
+  headers: []
+  body: []
+  tbody: []
+  thead: []
+  tfoot: []
+  bottom: []
+  'footer.prepend': []
+}
 
 export const makeVDataTableProps = propsFactory({
   ...makeDataTableItemProps(),
@@ -41,7 +54,7 @@ export const makeVDataTableProps = propsFactory({
   fixedFooter: Boolean,
 }, 'v-data-table')
 
-export const VDataTable = defineComponent({
+export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()({
   name: 'VDataTable',
 
   props: {

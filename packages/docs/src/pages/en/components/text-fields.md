@@ -5,7 +5,7 @@ meta:
   description: The text field component accepts textual input from users.
   keywords: text fields, vuetify text field component, vue text field component
 related:
-  - /components/textarea/
+  - /components/textareas/
   - /components/selects/
   - /components/forms/
 ---

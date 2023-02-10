@@ -47,7 +47,7 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, PropType, Ref } from 'vue'
 
 interface ScrimProps {
@@ -110,9 +110,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeTransitionProps(),
 }, 'v-overlay')
 
-export const VOverlay = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },

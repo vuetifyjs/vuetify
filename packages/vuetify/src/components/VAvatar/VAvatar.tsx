@@ -15,7 +15,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVAvatarProps = propsFactory({
   start: Boolean,
@@ -31,7 +31,7 @@ export const makeVAvatarProps = propsFactory({
   ...makeVariantProps({ variant: 'flat' } as const),
 }, 'v-avatar')
 
-export const VAvatar = defineComponent({
+export const VAvatar = genericComponent()({
   name: 'VAvatar',
 
   props: makeVAvatarProps(),

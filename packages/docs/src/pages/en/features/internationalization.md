@@ -5,8 +5,8 @@ meta:
   keywords: i18n, language, internationalization
 related:
   - /features/accessibility/
-  - /features/bidirectionality/
-  - /introduction/why-vuetify/
+  - /components/locale-providers/
+  - /getting-started/browser-support/
 ---
 
 # Internationalization (i18n)

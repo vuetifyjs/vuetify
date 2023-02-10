@@ -5,7 +5,9 @@ meta:
   description: The touch directive provides an interface for responding to various user touch actions.
   keywords: touch, vuetify touch directive, vue touch directive, mobile touch directive
 related:
-  - /styles/scroll/
+  - /components/navigation-drawers/
+  - /components/slide-groups/
+  - /components/windows/
 ---
 
 # Touch directive

@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div v-if="components">
     <api-links v-if="!showInline && !hideLinks" :components="components" />
 
     <div v-if="showInline">
@@ -62,6 +62,6 @@
   const showInline = computed(() => store.api === 'inline')
 
   onBeforeMount(() => {
-    name.value = components.value[0]
+    name.value = components.value?.[0] ?? ''
   })
 </script>
