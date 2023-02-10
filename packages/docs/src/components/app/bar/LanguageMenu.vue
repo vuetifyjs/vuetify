@@ -38,5 +38,6 @@
         to: route.fullPath.replace(/^\/[a-zA-Z-]+/, `/${locale.alternate || locale.locale}`),
       }
     }),
+    { title: t('more-coming-soon'), disabled: true },
   ]))
 </script>
