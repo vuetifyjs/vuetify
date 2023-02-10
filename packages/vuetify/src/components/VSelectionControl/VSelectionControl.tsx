@@ -44,7 +44,7 @@ export type SelectionControlSlot = {
 
 export type VSelectionControlSlots = MakeSlots<{
   default: []
-  label: [] // TODO: add props
+  label: [{ label: string | undefined, props: Record<string, unknown> }]
   input: [SelectionControlSlot]
 }>
 
