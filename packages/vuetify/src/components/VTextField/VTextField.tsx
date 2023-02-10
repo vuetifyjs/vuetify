@@ -20,7 +20,7 @@ import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useR
 
 // Types
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -49,11 +49,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<new () => {
-  $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    default: []
-  }>>
-}>()({
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+  default: []
+}>>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -264,7 +262,7 @@ export const VTextField = genericComponent<new () => {
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
                 ) }

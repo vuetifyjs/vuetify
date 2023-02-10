@@ -18,12 +18,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VTextarea = defineComponent({
+export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
   name: 'VTextarea',
 
   directives: { Intersect },
@@ -305,7 +307,7 @@ export const VTextarea = defineComponent({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
                 ) }

@@ -2,6 +2,7 @@
 import './VCheckbox.sass'
 
 // Components
+import type { VInputSlots } from '@/components/VInput/VInput'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { filterCheckboxBtnProps, makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
@@ -10,9 +11,14 @@ import { useFocus } from '@/composables/focus'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 
-export const VCheckbox = defineComponent({
+// Types
+import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
+
+export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+
+export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,

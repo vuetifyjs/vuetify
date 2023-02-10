@@ -9,9 +9,9 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VCounter = defineComponent({
+export const VCounter = genericComponent()({
   name: 'VCounter',
 
   functional: true,
