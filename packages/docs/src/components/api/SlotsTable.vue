@@ -5,7 +5,7 @@
         <NameCell section="slots" :name="item.name" />
       </tr>
 
-      <tr v-if="item.formatted !== 'never'">
+      <tr v-if="item.formatted !== 'never' && item.text !== 'undefined'">
         <app-markup :code="getType(item)" language="ts" :rounded="false" />
       </tr>
     </template>
