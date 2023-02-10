@@ -69,13 +69,3 @@ Previously known as **tags** - user is allowed to enter more than 1 value
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
 <example file="v-combobox/slot-no-data" />
-
-<!-- TODO: Busted
-### Misc
-
-#### Advanced custom options
-
-The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items.
-
-<example file="v-combobox/misc-advanced" />
--->

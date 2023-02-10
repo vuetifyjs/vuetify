@@ -6,8 +6,8 @@ meta:
 nav: Roadmap
 related:
   - /introduction/long-term-support/
-  - /introduction/support/
-  - /getting-started/frequently-asked-questions/
+  - /introduction/enterprise-support/
+  - /getting-started/browser-support/
 ---
 
 # The Vuetify roadmap

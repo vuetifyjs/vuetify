@@ -6,7 +6,7 @@ meta:
 related:
   - /features/accessibility/
   - /features/treeshaking/
-  - /features/presets/
+  - /features/blueprints/
 ---
 
 # Global configuration

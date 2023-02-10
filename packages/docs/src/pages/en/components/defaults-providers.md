@@ -5,7 +5,9 @@ meta:
   description: The defaults provider allows you to provide specific default prop values to components in a section of your application
   keywords: defaults provider, vuetify defaults provider component, vue defaults provider component
 related:
-  - /features/global-config/
+  - /features/aliasing/
+  - /features/blueprints/
+  - /features/global-configuration/
 ---
 
 # Defaults providers

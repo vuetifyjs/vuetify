@@ -6,7 +6,7 @@ meta:
 related:
   - /getting-started/unit-testing/
   - /about/code-of-conduct/
-  - /getting-started/frequently-asked-questions/
+  - /introduction/roadmap/
 ---
 
 # Contributing

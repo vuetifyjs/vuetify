@@ -5,8 +5,9 @@ meta:
   description: Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.
   keywords: sponsor, backer, donations, patron, supporting vuetify, vuetify support
 related:
-  - /introduction/support/
-  - /introduction/enterprise/
+  - /introduction/enterprise-support/
+  - /introduction/roadmap/
+  - /introduction/meet-the-team/
 ---
 
 # Sponsor Vuetify development

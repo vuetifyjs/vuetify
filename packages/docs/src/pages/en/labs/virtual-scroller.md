@@ -6,6 +6,8 @@ meta:
   keywords: virtual scroll, vuetify virtual scroll component, vue virtual scroll component, v-virtual-scroll component
 related:
   - /components/lists/
+  - /components/data-tables/virtual-tables/
+  - /components/combobox/
 ---
 
 # Virtual scrollers
