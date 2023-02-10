@@ -145,3 +145,10 @@ export function propsToString (props: Record<string, any>, indent = 1) {
     return '\n' + displayedProps.map(v => '  '.repeat(indent) + v).join('\n') + '\n' + '  '.repeat(indent - 1)
   }
 }
+
+export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+  return v == null
+    ? []
+    : Array.isArray(v)
+      ? v : [v]
+}

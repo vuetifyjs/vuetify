@@ -20,7 +20,8 @@ import { useVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
-import { generatedRoutes, languagePattern, rpath, trailingSlash } from '@/util/routes'
+import { disabledLanguagePattern, generatedRoutes, languagePattern, rpath, trailingSlash } from '@/util/routes'
+import { wrapInArray } from '@/util/helpers'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -50,6 +51,12 @@ export const createApp = ViteSSG(
         },
       },
       ...routes,
+      {
+        path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
+        redirect: to => {
+          return rpath(wrapInArray(to.params.pathMatch).join('/'))
+        },
+      },
       {
         path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
         component: () => import('@/layouts/404.vue'),

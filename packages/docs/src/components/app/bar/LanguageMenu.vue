@@ -13,24 +13,13 @@
         v-bind="props"
       />
     </template>
-
-    <template #item="{ item }">
-      <v-list-item
-        :key="item.locale"
-        link
-        @click="changeLocale(item.locale)"
-      >
-        <v-list-item-title v-text="item.title" />
-      </v-list-item>
-    </template>
   </app-menu>
 </template>
 
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useLocaleStore } from '@/store/locale'
-  import { useRoute, useRouter } from 'vue-router'
+  import { useRoute } from 'vue-router'
 
   // Utilities
   import { computed } from 'vue'
@@ -39,17 +28,15 @@
   import locales from '@/i18n/locales.json'
 
   const { t } = useI18n()
-  const localeStore = useLocaleStore()
-  const router = useRouter()
   const route = useRoute()
 
   const items = computed(() => ([
     { subheader: t('translations') },
-    ...locales.filter((locale: { enabled: boolean }) => locale.enabled),
+    ...locales.filter(locale => locale.enabled).map(locale => {
+      return {
+        title: locale.title,
+        to: route.fullPath.replace(/^\/[a-zA-Z-]+/, `/${locale.alternate || locale.locale}`),
+      }
+    }),
   ]))
-
-  function changeLocale (locale: string) {
-    localeStore.locale = locale
-    router.push({ path: route.path.replace(/^\/[a-zA-Z-]+/, `/${locale}`) })
-  }
 </script>

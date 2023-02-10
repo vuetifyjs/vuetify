@@ -7,7 +7,8 @@ import { IN_BROWSER } from '@/util/globals'
 
 // Regexp
 // const genericLocaleRegexp = /[a-z]{2,3}|[a-z]{2,3}-[a-zA-Z]{4}|[a-z]{2,3}-[A-Z]{2,3}/
-export const languagePattern = locales.map(lang => lang.alternate || lang.locale).join('|')
+export const languagePattern = locales.filter(l => l.enabled).map(lang => lang.alternate || lang.locale).join('|')
+export const disabledLanguagePattern = locales.filter(l => !l.enabled).map(lang => lang.alternate || lang.locale).join('|')
 
 export function preferredLocale (locale = 'en') {
   if (!IN_BROWSER) return locale
