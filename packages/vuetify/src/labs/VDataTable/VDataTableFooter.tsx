@@ -6,14 +6,16 @@ import { VBtn } from '@/components/VBtn'
 import { VSelect } from '@/components/VSelect'
 
 // Composables
+import { useLocale } from '@/composables/locale'
 import { usePagination } from './composables/paginate'
 
 // Utilities
+import { computed } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { InternalItem } from '@/composables/items'
 import type { PropType } from 'vue'
+import type { InternalItem } from '@/composables/items'
 
 export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
   name: 'VDataTableFooter',
@@ -35,6 +37,30 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
       type: String,
       default: '$last',
     },
+    itemsPerPageText: {
+      type: String,
+      default: '$vuetify.dataFooter.itemsPerPageText',
+    },
+    pageText: {
+      type: String,
+      default: '$vuetify.dataFooter.pageText',
+    },
+    firstPageLabel: {
+      type: String,
+      default: '$vuetify.dataFooter.firstPage',
+    },
+    prevPageLabel: {
+      type: String,
+      default: '$vuetify.dataFooter.prevPage',
+    },
+    nextPageLabel: {
+      type: String,
+      default: '$vuetify.dataFooter.nextPage',
+    },
+    lastPageLabel: {
+      type: String,
+      default: '$vuetify.dataFooter.lastPage',
+    },
     itemsPerPageOptions: {
       type: Array as PropType<InternalItem[]>,
       default: () => ([
@@ -42,14 +68,22 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
         { value: 25, title: '25' },
         { value: 50, title: '50' },
         { value: 100, title: '100' },
-        { value: -1, title: 'All' },
+        { value: -1, title: '$vuetify.dataFooter.itemsPerPageAll' },
       ]),
     },
     showCurrentPage: Boolean,
   },
 
   setup (props, { slots }) {
+    const { t } = useLocale()
     const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage } = usePagination()
+
+    const itemsPerPageOptions = computed(() => (
+      props.itemsPerPageOptions.map(option => ({
+        ...option,
+        title: t(option.title),
+      }))
+    ))
 
     return () => (
       <div
@@ -57,9 +91,9 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
       >
         { slots.prepend?.() }
         <div class="v-data-table-footer__items-per-page">
-          <span>Items per page:</span>
+          <span>{ t(props.itemsPerPageText) }</span>
           <VSelect
-            items={ props.itemsPerPageOptions }
+            items={ itemsPerPageOptions.value }
             modelValue={ itemsPerPage.value }
             onUpdate:modelValue={ v => itemsPerPage.value = Number(v) }
             density="compact"
@@ -68,7 +102,9 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
           />
         </div>
         <div class="v-data-table-footer__info">
-          <div>{ !itemsLength.value ? 0 : startIndex.value + 1 } - { stopIndex.value } of { itemsLength.value }</div>
+          <div>
+            { t(props.pageText, !itemsLength.value ? 0 : startIndex.value + 1, stopIndex.value, itemsLength.value) }
+          </div>
         </div>
         <div class="v-data-table-footer__pagination">
           <VBtn
@@ -76,27 +112,31 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
             variant="plain"
             onClick={ () => page.value = 1 }
             disabled={ page.value === 1 }
+            aria-label={ t(props.firstPageLabel) }
           />
           <VBtn
             icon={ props.prevIcon }
             variant="plain"
             onClick={ () => page.value = Math.max(1, page.value - 1) }
             disabled={ page.value === 1 }
+            aria-label={ t(props.prevPageLabel) }
           />
           { props.showCurrentPage && (
-            <div key="page">page.value</div>
+            <span key="page" class="v-data-table-footer__page">{ page.value }</span>
           ) }
           <VBtn
             icon={ props.nextIcon }
             variant="plain"
             onClick={ () => page.value = Math.min(pageCount.value, page.value + 1) }
             disabled={ page.value === pageCount.value }
+            aria-label={ t(props.nextPageLabel) }
           />
           <VBtn
             icon={ props.lastIcon }
             variant="plain"
             onClick={ () => page.value = pageCount.value }
             disabled={ page.value === pageCount.value }
+            aria-label={ t(props.lastPageLabel) }
           />
         </div>
       </div>
