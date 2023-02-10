@@ -119,7 +119,6 @@
       {
         "title": "layout",
         "items": [
-          "application",
           "app-bars",
           "bottom-navigation",
           "footers",
