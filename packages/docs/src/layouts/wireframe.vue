@@ -6,7 +6,7 @@
     color="primary"
     icon="mdi-github"
     rel="noopener"
-    style="position: fixed; bottom: 12px; right: 12px;"
+    style="position: fixed; bottom: 12px; right: 12px; z-index: 2000;"
     target="_blank"
   />
 </template>
