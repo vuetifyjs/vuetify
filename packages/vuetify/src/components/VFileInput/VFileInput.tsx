@@ -260,7 +260,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                     <VCounter
                       active={ !!model.value?.length }
                       value={ counterValue.value }
-                      v-slot:default={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
                 ) }
