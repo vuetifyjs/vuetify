@@ -31,6 +31,8 @@
 
     <app-toc />
 
+    <app-back-to-top />
+
     <app-pwa-snackbar />
   </v-app>
 </template>
@@ -38,6 +40,7 @@
 <script setup>
   // Components
   import AppBanner from '@/components/app/Banner.vue'
+  import AppBackToTop from '@/components/app/BackToTop.vue'
   import AppV2Banner from '@/components/app/V2Banner.vue'
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppDrawer from '@/components/app/drawer/Drawer.vue'
