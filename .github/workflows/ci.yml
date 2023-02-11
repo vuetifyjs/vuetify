@@ -103,7 +103,7 @@ jobs:
             node_modules
             **/node_modules
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
+      - run: yarn global add vercel
 
       - name: Download eo-UY
         uses: crowdin/github-action@1.1.2
