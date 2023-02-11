@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide, watchEffect } from 'vue'
+import { computed, inject, provide } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
