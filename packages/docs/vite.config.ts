@@ -36,7 +36,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       alias: [
         { find: '@', replacement: `${resolve('src')}/` },
         { find: 'node-fetch', replacement: 'isomorphic-fetch' },
-        { find: 'vue-i18n', replacement: 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs' },
         { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
       ],
     },
