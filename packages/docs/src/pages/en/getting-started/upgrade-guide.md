@@ -123,6 +123,7 @@ app.use(vuetify)
 - `v-list-group` can now be nested arbitrarily deep, `sub-group` prop should be removed.
 - `v-list-item` `input-value` prop has been replaced with `active`.
 - `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
+- `v-subheader`  has been renamed to `v-list-subheader`.
 
 ### v-select/v-combobox/v-autocomplete
 
@@ -143,8 +144,16 @@ app.use(vuetify)
 - The `chip` slot should be used instead of `selection` if the `chips` prop is set, this will provide some default values to the chips automatically.
 - Non-`multiple` combobox will now update its model as you type (like a text field) instead of only on blur.
 
+### v-simple-table
+
+- `v-simple-table` has been renamed to `v-table`
+
 ### v-slider/v-range-slider
 
 - `ticks` has been renamed to `show-ticks`.
 - `tick-labels` has been renamed to `ticks`.
 - `vertical` has been renamed to `direction="vertical"`.
+
+### v-tabs
+
+- `v-tab-item` has been removed, use `v-window-item`
