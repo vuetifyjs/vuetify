@@ -3631,10 +3631,10 @@
     find-cache-dir "^3.3.2"
     upath "^2.0.1"
 
-"@vuetify/vite-ssg@^0.19.0":
-  version "0.19.0"
-  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.19.0.tgz#7ed7e7999e095fc4c81a63559ae1a8640937f386"
-  integrity sha512-zYhU+af2DI/AjPvG6iP2MMdaqIZL+feB5qD7qe3zELZmJgijU183KZSwww5ZzyrytFqRiWtiqH0egKd4F/Sfpg==
+"@vuetify/vite-ssg@^0.20.2":
+  version "0.20.2"
+  resolved "https://registry.yarnpkg.com/@vuetify/vite-ssg/-/vite-ssg-0.20.2.tgz#a021397a88dd287b9f1332e8e5de75289a5af860"
+  integrity sha512-Mk7cUoxiwiIAEO2AWsu81tFUrh5CGKPoohSA4waCtT77nT33PSEekdNZgWaaw3/bhn8LiLW9jHj2Bf2FfVbpvg==
   dependencies:
     chalk "^4.1.2"
     fs-extra "^10.0.0"
