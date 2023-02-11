@@ -156,7 +156,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -176,7 +176,7 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 

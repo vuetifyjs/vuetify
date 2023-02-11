@@ -75,7 +75,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
         : (model.value || '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength as string | number
 
       if (
         !props.counter ||

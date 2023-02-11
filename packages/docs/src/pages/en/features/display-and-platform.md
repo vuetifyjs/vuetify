@@ -250,7 +250,7 @@ Using the _dynamic_ display values, we are able to adjust the minimum height of 
 
 ## Component Mobile Breakpoints
 
-Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global [mobileBreakpoint](#mobile-breakpoint) value that is generated at runtime using the provided options in the `vuetify.js` file. By default, **mobileBreakpoint** is set to `md`, which means that if the window is less than _1280_ pixels in width (which is the default value for the **md** [threshold](#thresholds)), then the **useDisplay** composable will update its **mobile** value to `true`.
+Some components within Vuetify have a **mobile-breakpoint** property which allows you to override the default value. These components reference the global mobileBreakpoint value that is generated at runtime using the provided options in the `vuetify.js` file. By default, **mobileBreakpoint** is set to `md`, which means that if the window is less than _1280_ pixels in width (which is the default value for the **md** threshold), then the **useDisplay** composable will update its **mobile** value to `true`.
 
 For example, the [v-banner](/components/banners/) component implements different styling based upon the value of **mobile** on the **useDisplay** composable. In the following example, The first banner uses the global **mobile-breakpoint** value of `md` while the second overrides this default with `580`. If the screen width is 1024 pixels, the second banner would not convert into its mobile state:
 

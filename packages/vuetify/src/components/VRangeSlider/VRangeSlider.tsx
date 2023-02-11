@@ -97,6 +97,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       'modelValue',
       undefined,
       arr => {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (!arr || !arr.length) return [0, 0]
 
         return arr.map(value => roundValue(value))

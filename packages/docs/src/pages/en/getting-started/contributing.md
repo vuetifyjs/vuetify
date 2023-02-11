@@ -274,6 +274,4 @@ The following is a list of **commit types** used in the _angular_ preset:
 
 [community]: https://community.vuetifyjs.com/
 [core team]: /introduction/meet-the-team/
-[pull request]: https://github.com/vuetifyjs/vuetify/pulls
 [issues]: https://github.com/vuetifyjs/vuetify/issues
-[Vuetify team]: /introduction/meet-the-team/
