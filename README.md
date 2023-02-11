@@ -18,7 +18,7 @@
     <img src="https://img.shields.io/npm/dm/vuetify.svg" alt="Downloads">
   </a>
   <br>
-  <a href="https://github.com/vuetifyjs/vuetify/blob/master/LICENSE.md">
+  <a href="https://github.com/vuetifyjs/vuetify/blob/v2-stable/LICENSE.md">
     <img src="https://img.shields.io/npm/l/vuetify.svg" alt="License">
   </a>
   <a href="https://app.zenhub.com/workspace/o/vuetifyjs/vuetify/boards">
