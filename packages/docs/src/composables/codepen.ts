@@ -14,7 +14,7 @@ export function useCodepen ({ code, sections, component }: {
   const version = ref()
   onMounted(async () => {
     if (!_version) {
-      _version = fetch('https://unpkg.com/@vuetify/nightly@next/', { method: 'HEAD' })
+      _version = fetch('https://unpkg.com/@vuetify/nightly/', { method: 'HEAD' })
         .then(r => new URL(r.url).pathname.split(/[/@]/).filter(Boolean).at(-1)!)
     }
 
@@ -29,7 +29,7 @@ export function useCodepen ({ code, sections, component }: {
   ])
 
   const jsResources = computed(() => [
-    'https://unpkg.com/vue@next/dist/vue.global.js',
+    'https://unpkg.com/vue@3/dist/vue.global.js',
     `https://unpkg.com/${version.value}/dist/vuetify.js`,
   ])
 
