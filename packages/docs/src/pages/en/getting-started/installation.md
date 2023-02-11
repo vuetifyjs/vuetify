@@ -103,9 +103,9 @@ Once installed, update your nuxt.config.js file to include the Vuetify module in
 To install Vuetify into a Webpack project you need to add a few dependencies:
 
 ```bash
-yarn add vuetify
+yarn add vuetify@v2-stable
 # OR
-npm install vuetify
+npm install vuetify@v2-stable
 ```
 
 ```bash
