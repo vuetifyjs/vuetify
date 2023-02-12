@@ -50,18 +50,12 @@
 
   // Composables
   import { useRoute } from 'vue-router'
-  import { useAppStore } from '@/store/app'
 
   // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  import { computed } from 'vue'
 
-  const app = useAppStore()
   const route = useRoute()
 
   const isApi = computed(() => route.name?.toString().startsWith('api-'))
   const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
-
-  onBeforeMount(() => {
-    app.drawer = null
-  })
 </script>
