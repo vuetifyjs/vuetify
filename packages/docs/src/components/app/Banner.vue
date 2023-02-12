@@ -1,36 +1,37 @@
 <template>
   <v-app-bar
+    v-if="banner"
     id="app-banner-bar"
-    :color="banner?.metadata.color"
+    :color="banner.metadata.color"
     :height="height"
-    :image="banner?.metadata.images.bg.url"
-    :theme="banner?.metadata.theme.key"
+    :image="banner.metadata.images.bg.url"
+    :theme="banner.metadata.theme.key"
     :model-value="hasPromotion"
     flat
   >
     <a
-      :href="banner?.metadata.link"
+      :href="banner.metadata.link"
       class="d-flex align-center flex-grow-1 text-decoration-none"
       rel="noopener"
       target="_blank"
-      v-bind="banner?.metadata.attributes"
+      v-bind="banner.metadata.attributes"
       @click="onClick"
     >
       <v-list-item lines="three">
         <template #prepend>
-          <v-avatar :image="banner?.metadata.images.logo.url" size="x-large" />
+          <v-avatar :image="banner.metadata.images.logo.url" size="x-large" />
         </template>
 
         <v-list-item-title class="text-subtitle-1 text-md-h6 font-weight-medium mb-1">
           <app-markdown
-            v-if="banner?.metadata.text"
-            :content="banner?.metadata.text"
+            v-if="banner.metadata.text"
+            :content="banner.metadata.text"
           />
         </v-list-item-title>
 
         <v-list-item-subtitle
-          v-if="banner?.metadata.subtext"
-          v-text="banner?.metadata.subtext"
+          v-if="banner.metadata.subtext"
+          v-text="banner.metadata.subtext"
         />
       </v-list-item>
       <v-spacer />
@@ -40,10 +41,10 @@
       <v-hover>
         <template #default="{ isHovering, props }">
           <v-btn
-            :color="banner?.metadata.link_color"
-            :href="banner?.metadata.link"
+            :color="banner.metadata.link_color"
+            :href="banner.metadata.link"
             :elevation="isHovering ? 8 : 0"
-            v-bind="{ ...props, ...banner?.metadata.attributes }"
+            v-bind="{ ...props, ...banner.metadata.attributes }"
             append-icon="mdi-open-in-new"
             class="text-none"
             rel="noopener"
@@ -51,14 +52,14 @@
             variant="elevated"
             @click="onClick"
           >
-            {{ banner?.metadata.link_text }}
+            {{ banner.metadata.link_text }}
           </v-btn>
 
         </template>
       </v-hover>
 
       <v-btn
-        v-if="banner?.metadata.closable"
+        v-if="banner.metadata.closable"
         class="ms-6 me-2"
         density="comfortable"
         size="small"
