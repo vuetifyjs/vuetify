@@ -156,13 +156,14 @@
         isUpdating: false,
         name: 'Midnight Crew',
         people: [
-          { header: 'Group 1' },
+          // TODO: https://github.com/vuetifyjs/vuetify/issues/15721
+          // { header: 'Group 1' },
           { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
           { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
           { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
           { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
-          { divider: true },
-          { header: 'Group 2' },
+          // { divider: true },
+          // { header: 'Group 2' },
           { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
           { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
           { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },

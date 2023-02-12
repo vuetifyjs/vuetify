@@ -5,9 +5,9 @@ meta:
   keywords: windows, vuetify window component, vue window component
 nav: Windows
 related:
-    - /components/carousels
-    - /components/steppers
-    - /components/tabs
+    - /components/carousels/
+    - /components/sheets/
+    - /components/tabs/
 ---
 
 # Windows

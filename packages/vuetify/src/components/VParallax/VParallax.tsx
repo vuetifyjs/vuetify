@@ -5,19 +5,22 @@ import './VParallax.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { useDisplay } from '@/composables'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { clamp, defineComponent, getScrollParent, useRender } from '@/util'
+import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import { useResizeObserver } from '@/composables/resizeObserver'
-import { useDisplay } from '@/composables'
+
+// Types
+import type { VImgSlots } from '../VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
 }
 
-export const VParallax = defineComponent({
+export const VParallax = genericComponent<VImgSlots>()({
   name: 'VParallax',
 
   props: {

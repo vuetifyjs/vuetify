@@ -4,9 +4,9 @@ meta:
   description: Vuetify provides functionality to create complex layouts using components such as app bars and navigation drawers
   keywords: application, layout, default layout
 related:
-  - /components/application/
   - /components/app-bars/
   - /components/navigation-drawers/
+  - /components/footers/
 ---
 
 # Application layout

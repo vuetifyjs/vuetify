@@ -3,9 +3,12 @@ import { VToolbarTitle } from '@/components/VToolbar'
 
 // Utilities
 import { makeVToolbarTitleProps } from '@/components/VToolbar/VToolbarTitle'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VAppBarTitle = defineComponent({
+// Types
+import type { VToolbarTitleSlots } from '@/components/VToolbar/VToolbarTitle'
+
+export const VAppBarTitle = genericComponent<VToolbarTitleSlots>()({
   name: 'VAppBarTitle',
 
   props: makeVToolbarTitleProps(),
@@ -13,7 +16,7 @@ export const VAppBarTitle = defineComponent({
   setup (props, { slots }) {
     useRender(() => (
       <VToolbarTitle
-        { ... props }
+        { ...props }
         class="v-app-bar-title"
         v-slots={ slots }
       />

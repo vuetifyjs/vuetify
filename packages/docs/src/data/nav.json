@@ -50,8 +50,13 @@
     "activeIcon": "mdi-palette",
     "items": [
       "css-reset",
-      "border-radius",
+      "transitions",
       "colors",
+      { "divider": true },
+      {
+        "subheader": "utility-classes"
+      },
+      "border-radius",
       "content",
       "display",
       "elevation",
@@ -60,8 +65,7 @@
       "overflow",
       "sizing",
       "spacing",
-      "text-and-typography",
-      "transitions"
+      "text-and-typography"
     ]
   },
   {
@@ -69,7 +73,6 @@
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
     "items": [
-      "all",
       "alerts",
       "aspect-ratios",
       "avatars",
@@ -120,7 +123,6 @@
       {
         "title": "layout",
         "items": [
-          "application",
           "app-bars",
           "bottom-navigation",
           "footers",

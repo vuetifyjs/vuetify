@@ -19,7 +19,7 @@ import {
 } from '@/util'
 
 // Types
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { SlotsToProps } from '@/util'
 
 const UP = -1
 const DOWN = 1
@@ -32,11 +32,9 @@ export interface VVirtualScrollSlot<T> {
 export const VVirtualScroll = genericComponent<new <T>() => {
   $props: {
     items: readonly T[]
-  } & SlotsToProps<
-    MakeSlots<{
-      default: [VVirtualScrollSlot<T>]
-    }>
-  >
+  } & SlotsToProps<{
+    default: [VVirtualScrollSlot<T>]
+  }>
 }>()({
   name: 'VVirtualScroll',
 

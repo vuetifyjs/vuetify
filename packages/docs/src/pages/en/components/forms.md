@@ -6,7 +6,7 @@ meta:
   keywords: forms, vuetify form component, vue form component, form validation
 related:
   - /components/selects/
-  - /components/selection-controls/
+  - /components/switches/
   - /components/text-fields/
 ---
 

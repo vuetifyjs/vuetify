@@ -28,10 +28,20 @@ import { useLocale } from '@/composables/locale'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent, EventProp } from '@/util'
+import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
-export const VChip = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VChipSlots = MakeSlots<{
+  default: []
+  label: []
+  prepend: []
+  append: []
+}>
+
+export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },

@@ -6,6 +6,8 @@ meta:
   keywords: lists, vuetify list component, vue list component
 related:
   - /components/item-groups/
+  - /components/avatars/
+  - /components/sheets/
 ---
 
 # Lists
@@ -111,39 +113,3 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
 
 <example file="v-list/misc-action-and-item-groups" />
-
-<!-- #### Action stack
-
-A list can contain a stack within an action. This is useful when you need to display meta text next to your action item.
-
-<example file="v-list/misc-action-stack" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Simple avatar list
-
-A simple list utilizing `v-list-item-icon`, `v-list-item-title` and `v-list-item-avatar`.
-
-<example file="v-list/misc-simple-avatar-list" />
-
-#### Single line list
-
-Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line list.
-
-<example file="v-list/misc-single-line-list" />
-
-#### Subheadings and dividers
-
-Lists can contain multiple subheaders and dividers.
-
-<example file="v-list/misc-subheadings-and-dividers" /> -->

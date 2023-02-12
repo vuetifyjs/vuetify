@@ -8,6 +8,7 @@
       <v-dialog
         v-model="dialog"
         activator="parent"
+        width="auto"
       >
         <v-card>
           <v-card-text>

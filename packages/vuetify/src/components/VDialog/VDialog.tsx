@@ -17,12 +17,9 @@ import { genericComponent, IN_BROWSER, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VDialog = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',
 
   props: {

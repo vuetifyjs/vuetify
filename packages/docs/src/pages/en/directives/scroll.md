@@ -5,8 +5,9 @@ meta:
   description: The scroll directive gives you the ability to conditionally invoke methods when the screen or an element are scrolled.
   keywords: scroll, vuetify scroll directive, vue scroll directive, window scroll directive
 related:
-  - /styles/scroll/
-  - /directives/touch-support/
+  - /components/app-bars/
+  - /components/bottom-navigation/
+  - /directives/touch/
 ---
 
 # Scroll directive

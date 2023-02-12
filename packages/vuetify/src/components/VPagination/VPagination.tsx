@@ -15,6 +15,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
+import { useDisplay } from '@/composables'
 import { useLocale, useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRefs } from '@/composables/refs'
@@ -22,13 +23,20 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, nextTick, ref, toRef } from 'vue'
-import { createRange, defineComponent, keyValues, useRender } from '@/util'
+import { createRange, genericComponent, keyValues, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
-import { useDisplay } from '@/composables'
 
-export const VPagination = defineComponent({
+export type VPaginationSlots = {
+  item: []
+  first: []
+  next: []
+  prev: []
+  last: []
+}
+
+export const VPagination = genericComponent<VPaginationSlots>()({
   name: 'VPagination',
 
   props: {

@@ -11,7 +11,12 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export type VExpansionPanelTitleSlots = {
+  default: []
+  actions: []
+}
 
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
@@ -31,7 +36,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   readonly: Boolean,
 }, 'v-expansion-panel-title')
 
-export const VExpansionPanelTitle = defineComponent({
+export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
   directives: { Ripple },

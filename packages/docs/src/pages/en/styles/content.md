@@ -1,6 +1,6 @@
 ---
 meta:
-  title: Content styles
+  title: Content
   description: Vuetify provides custom styling for various HTML elements.
   keywords: content, html, markup
 related:

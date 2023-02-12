@@ -159,4 +159,9 @@
   .usage-example
     .v-text-field
       margin-bottom: 8px
+
+  // Hack to get around navigation-drawer default bgColor
+  // TODO: find a better way
+  .v-select__content .v-list
+    background: rgb(var(--v-theme-surface)) !important
 </style>

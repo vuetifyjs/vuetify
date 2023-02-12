@@ -18,13 +18,14 @@ import { createSort, makeDataTableSortProps } from './composables/sort'
 
 // Utilities
 import { provide, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
+import type { VDataTableSlots } from './VDataTable'
 
-export const VDataTableServer = defineComponent({
+export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',
 
   props: {

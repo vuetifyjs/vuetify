@@ -20,14 +20,25 @@ import { useTouch } from './touch'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
+import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
+export type VNavigationDrawerImageSlot = {
+  image: string
+}
+
+export type VNavigationDrawerSlots = {
+  default: []
+  prepend: []
+  append: []
+  image: [VNavigationDrawerImageSlot]
+}
+
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
-export const VNavigationDrawer = defineComponent({
+export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
 
   props: {

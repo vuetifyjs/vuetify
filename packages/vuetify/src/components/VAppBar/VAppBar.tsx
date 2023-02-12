@@ -14,12 +14,9 @@ import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
-export const VAppBar = genericComponent<new () => {
-  $props: SlotsToProps<VToolbarSlots>
-}>()({
+export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
   props: {

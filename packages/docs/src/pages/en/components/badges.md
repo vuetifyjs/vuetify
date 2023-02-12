@@ -51,29 +51,3 @@ Inline badges can be placed anywhere with content and can render without a *defa
 For simple text, use the **content** property to display a *value* on the badge.
 
 <example file="v-badge/prop-content" />
-
-<!-- ### Misc
-
-#### Customization options
-
-The `v-badge` component is flexible and can be used in a variety of use-cases over numerous elements. Options to tweak the location are also available through the **offset-x** and **offset-y** props."
-
-<example file="v-badge/misc-customization" />
-
-#### Dynamic notifications
-
-You can incorporate badges with dynamic content to make things such as a notification system.
-
-<example file="v-badge/misc-dynamic" />
-
-#### Show on hover
-
-You can do many things with visibility control, for example, show badge on hover.
-
-<example file="v-badge/misc-hover" />
-
-#### Tabs
-
-Badges help convey information to the user in a variety of ways.
-
-<example file="v-badge/misc-tabs" /> -->
