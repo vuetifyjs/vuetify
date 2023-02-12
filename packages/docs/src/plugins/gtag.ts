@@ -1,13 +1,15 @@
 // Imports
-import VueGtag from 'vue-gtag-next'
+import VueGtag, { trackRouter } from 'vue-gtag-next'
 
 // Types
-import type { App } from 'vue'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
-export const useGtag = ({ app }: { app: App<Element> }) => {
+export const useGtag = (ctx: ViteSSGContext) => {
   // vue-gtag-next doesn't support esm properly
   const install = VueGtag.install ?? (VueGtag as any).default.install
-  app.use(install, {
+  ctx.app.use(install, {
     property: { id: 'UA-75262397-11' },
   })
+
+  trackRouter(ctx.router)
 }
