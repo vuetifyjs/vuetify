@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Elevation helpers
+  title: Elevation
   description: Elevation helper classes allow you to control relative depth, or distance, between two surfaces along the z-axis.
   keywords: elevation helper classes, elevation classes, vuetify elevation
 related:
