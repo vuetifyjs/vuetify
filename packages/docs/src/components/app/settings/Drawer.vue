@@ -4,7 +4,6 @@
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
-    :scrim="false"
     disable-route-watcher
     position="fixed"
     temporary

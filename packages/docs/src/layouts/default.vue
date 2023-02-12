@@ -1,14 +1,20 @@
 <template>
   <v-app>
+    <app-settings-drawer />
+
     <app-banner />
 
     <app-v2-banner />
 
-    <app-settings-drawer />
-
     <app-bar />
 
     <app-drawer />
+
+    <app-toc />
+
+    <app-back-to-top />
+
+    <app-pwa-snackbar />
 
     <v-main>
       <v-container
@@ -28,12 +34,6 @@
         <backmatter v-if="!isApi" :key="route.name" />
       </v-container>
     </v-main>
-
-    <app-toc />
-
-    <app-back-to-top />
-
-    <app-pwa-snackbar />
   </v-app>
 </template>
 
