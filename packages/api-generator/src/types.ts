@@ -1,6 +1,10 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 
+const project = new Project({
+  tsConfigFilePath: './tsconfig.json',
+})
+
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
 
@@ -20,11 +24,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
 }
 
 export function generateComposableDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
   const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
 
@@ -50,11 +50,7 @@ export function generateComposableDataFromTypes () {
 }
 
 export function generateDirectiveDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
   const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
 
@@ -68,11 +64,7 @@ export function generateDirectiveDataFromTypes () {
 }
 
 export async function generateComponentDataFromTypes (component: string) {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
+  const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
   const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
   const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))

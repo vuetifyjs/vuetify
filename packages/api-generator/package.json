@@ -4,7 +4,9 @@
   "private": true,
   "description": "",
   "scripts": {
-    "build": "ts-node src/index.ts",
+    "build": "yarn pre-build && yarn start",
+    "pre-build": "babel src --out-dir lib --source-maps --extensions \".ts\" --out-file-extension .mjs",
+    "start": "node --no-warnings lib/index.mjs",
     "lint": "eslint --ext .ts src -f codeframe --max-warnings 0",
     "lint:fix": "yarn lint --fix"
   },
@@ -15,7 +17,6 @@
     "piscina": "^3.2.0",
     "rimraf": "^3.0.2",
     "ts-morph": "^16.0.0",
-    "ts-node": "^10.9.1",
     "vue": "^3.2.47",
     "vuetify": "^3.1.4"
   },

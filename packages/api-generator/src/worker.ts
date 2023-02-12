@@ -17,7 +17,7 @@ export default async (json: string) => {
 
     const sources = addPropData(kebabName, componentData as any, componentProps)
 
-    addDescriptions(kebabName, componentData as any, sources, locales)
+    await addDescriptions(kebabName, componentData as any, sources, locales)
 
     const sass = parseSassVariables(componentName)
 
