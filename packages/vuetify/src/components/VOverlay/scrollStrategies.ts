@@ -125,7 +125,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
     })
   }
 
-  ric = requestIdleCallback(() => {
+  ric = (typeof requestIdleCallback === 'undefined' ? (cb: Function) => cb() : requestIdleCallback)(() => {
     scope.run(() => {
       bindScroll(data.activatorEl.value ?? data.contentEl.value, e => {
         if (slow) {
