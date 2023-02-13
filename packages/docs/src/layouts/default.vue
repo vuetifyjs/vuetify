@@ -17,22 +17,24 @@
     <app-pwa-snackbar />
 
     <v-main>
-      <v-container
-        :style="style"
-        class="pa-4 pa-sm-6 pa-md-8"
-        fluid
-        tag="section"
-      >
-        <router-view v-slot="{ Component }">
-          <v-fade-transition hide-on-leave>
-            <div :key="route.name">
-              <component :is="Component" />
-            </div>
-          </v-fade-transition>
-        </router-view>
+      <slot>
+        <v-container
+          :style="style"
+          class="pa-4 pa-sm-6 pa-md-8"
+          fluid
+          tag="section"
+        >
+          <router-view v-slot="{ Component }">
+            <v-fade-transition hide-on-leave>
+              <div :key="route.name">
+                <component :is="Component" />
+              </div>
+            </v-fade-transition>
+          </router-view>
 
-        <backmatter v-if="!isApi" :key="route.name" />
-      </v-container>
+          <backmatter v-if="!isApi" :key="route.name" />
+        </v-container>
+      </slot>
     </v-main>
   </v-app>
 </template>
