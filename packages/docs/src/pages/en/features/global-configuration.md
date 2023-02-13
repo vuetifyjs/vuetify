@@ -55,7 +55,7 @@ This is used internally by some components already:
 - `<v-list>` has `bg-color="transparent"` when nested within a `<v-navigation-drawer>`
 - Lists, chip groups, expansion panels, tabs, and forms all use this system to propagate certain props to their children, for example `<v-tabs disabled>` will set the default value of `disabled` to `true` for all `<v-tab>` components inside it.
 
-[v-defaults-provider](/components/default-provider/) can be used to set defaults for components within a specific scope.
+[v-defaults-provider](/api/v-defaults-provider/) can be used to set defaults for components within a specific scope.
 
 ## Priority
 
