@@ -162,7 +162,11 @@
     "v-timeline",
     "v-timeline-item"
   ],
-  "components/toolbars": ["v-toolbar"],
+  "components/toolbars": [
+    "v-toolbar",
+    "v-toolbar-items",
+    "v-toolbar-title"
+  ],
   "components/tooltips": ["v-tooltip"],
   "components/treeview": ["v-treeview"],
   "components/virtual-scroller": ["v-virtual-scroll"],
