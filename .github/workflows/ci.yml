@@ -141,7 +141,7 @@ jobs:
         id: create_release
         run: yarn conventional-github-releaser -p vuetify
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
