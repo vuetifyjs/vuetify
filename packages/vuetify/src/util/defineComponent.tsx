@@ -64,8 +64,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
       const vm = getCurrentInstance()!
       const componentDefaults = computed(() => defaults.value![props._as ?? options.name!])
       const _props = new Proxy(props, {
-        get (target, prop: string) {
-          if (!propIsDefined(vm.vnode, prop)) {
+        get (target, prop) {
+          if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
             return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? target[prop]
           }
           return Reflect.get(target, prop)

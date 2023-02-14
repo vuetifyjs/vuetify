@@ -4,6 +4,7 @@ import type { VueWrapper } from '@vue/test-utils'
 import { mount as cyMount } from 'cypress/vue'
 import { createVuetify } from '../../src/framework'
 import { mergeDeep } from '../../src/util'
+import Chainable = Cypress.Chainable
 
 /**
  * @example
@@ -49,7 +50,7 @@ Cypress.Commands.add('vue', () => {
  */
 
 Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
-  return cy.get('@wrapper').then(async (wrapper) => {
+  return (cy.get('@wrapper') as Chainable).then(async ({ wrapper }) => {
     // `wrapper` in inferred as JQuery<HTMLElement> since custom commands
     // generally receive a Cypress.Chainable as the first arg (the "subject").
     // the custom `mount` command defined above returns a
@@ -61,7 +62,7 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
 })
 
 Cypress.Commands.add('emitted', (selector: string, event: string) => {
-  return cy.get('@wrapper').then(wrapper => {
+  return (cy.get('@wrapper') as Chainable).then(({ wrapper }) => {
     const vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
     const cmp = vueWrapper.findComponent<any>(selector)
 

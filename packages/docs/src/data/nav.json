@@ -50,8 +50,13 @@
     "activeIcon": "mdi-palette",
     "items": [
       "css-reset",
-      "border-radius",
+      "transitions",
       "colors",
+      { "divider": true },
+      {
+        "subheader": "utility-classes"
+      },
+      "border-radius",
       "content",
       "display",
       "elevation",
@@ -60,8 +65,7 @@
       "overflow",
       "sizing",
       "spacing",
-      "text-and-typography",
-      "transitions"
+      "text-and-typography"
     ]
   },
   {

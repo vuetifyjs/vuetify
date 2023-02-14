@@ -3,7 +3,8 @@
   "compilerOptions": {
     "strict": false,
     "noUnusedLocals": false,
-    "module": "commonjs",
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
     "noEmitOnError": false,
     "resolveJsonModule": true,
     "paths": {

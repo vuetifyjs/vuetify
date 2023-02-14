@@ -1,39 +1,41 @@
 <template>
   <v-app>
+    <app-settings-drawer />
+
     <app-banner />
 
     <app-v2-banner />
 
-    <app-settings-drawer />
-
     <app-bar />
 
     <app-drawer />
-
-    <v-main>
-      <v-container
-        :style="style"
-        class="pa-4 pa-sm-6 pa-md-8"
-        fluid
-        tag="section"
-      >
-        <router-view v-slot="{ Component }">
-          <v-fade-transition hide-on-leave>
-            <div :key="route.name">
-              <component :is="Component" />
-            </div>
-          </v-fade-transition>
-        </router-view>
-
-        <backmatter v-if="!isApi" :key="route.name" />
-      </v-container>
-    </v-main>
 
     <app-toc />
 
     <app-back-to-top />
 
     <app-pwa-snackbar />
+
+    <v-main>
+      <slot>
+        <v-container
+          :style="style"
+          class="pa-4 pa-sm-6 pa-md-8"
+          fluid
+          tag="section"
+        >
+          <router-view v-slot="{ Component }">
+            <v-fade-transition hide-on-leave>
+              <div :key="route.name">
+                <component :is="Component" />
+              </div>
+            </v-fade-transition>
+          </router-view>
+
+          <backmatter v-if="!isApi" :key="route.name" />
+        </v-container>
+      </slot>
+    </v-main>
   </v-app>
 </template>
 
@@ -50,18 +52,12 @@
 
   // Composables
   import { useRoute } from 'vue-router'
-  import { useAppStore } from '@/store/app'
 
   // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  import { computed } from 'vue'
 
-  const app = useAppStore()
   const route = useRoute()
 
   const isApi = computed(() => route.name?.toString().startsWith('api-'))
   const style = computed(() => ({ maxWidth: isApi.value ? '1368px' : '960px' }))
-
-  onBeforeMount(() => {
-    app.drawer = null
-  })
 </script>

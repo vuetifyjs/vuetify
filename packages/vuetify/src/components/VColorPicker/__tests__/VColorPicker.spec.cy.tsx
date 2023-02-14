@@ -99,7 +99,7 @@ describe('VColorPicker', () => {
       cy.wrap(canvas).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -122,7 +122,7 @@ describe('VColorPicker', () => {
       cy.wrap(canvas).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -145,7 +145,7 @@ describe('VColorPicker', () => {
       cy.wrap(canvas).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -168,7 +168,7 @@ describe('VColorPicker', () => {
       cy.wrap(canvas).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -194,7 +194,7 @@ describe('VColorPicker', () => {
       cy.wrap(canvas).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -240,7 +240,7 @@ describe('VColorPicker', () => {
       cy.wrap(slider).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -262,7 +262,7 @@ describe('VColorPicker', () => {
       cy.wrap(slider).click(width / 2, height / 2)
     })
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 
@@ -281,7 +281,7 @@ describe('VColorPicker', () => {
 
     cy.get('@color').find('.v-icon').should('exist')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const picker = wrapper.findComponent<VColorPicker>('.v-color-picker')
       const emits = picker.emitted<[string]>('update:modelValue')!
 

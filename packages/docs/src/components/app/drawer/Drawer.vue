@@ -4,6 +4,30 @@
     v-model="app.drawer"
     width="300"
   >
+    <template #append>
+      <v-divider />
+
+      <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
+        <div class="d-inline-flex align-center">
+          <v-icon start>mdi-label</v-icon>
+          Latest release:
+        </div>
+
+        <v-btn
+          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
+          class="text-none px-2 ms-auto"
+          density="compact"
+          rel="noopener noreferrer"
+          target="_blank"
+          variant="text"
+        >
+          v{{ version }}
+
+          <v-icon size="xs" end>mdi-open-in-new</v-icon>
+        </v-btn>
+      </div>
+    </template>
+
     <app-list :items="app.items" nav>
       <template #divider>
         <v-divider class="my-3 mb-4 ms-16" />
@@ -21,6 +45,7 @@
 
   // Utilities
   import { onMounted } from 'vue'
+  import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
   const app = useAppStore()

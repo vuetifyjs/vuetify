@@ -210,7 +210,7 @@ function rippleStop (e: VuetifyRippleEvent) {
 
 function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
-  if (!element || !element._ripple) return
+  if (!element?._ripple) return
 
   window.clearTimeout(element._ripple.showTimer)
 
@@ -238,7 +238,7 @@ function rippleHide (e: Event) {
 function rippleCancelShow (e: MouseEvent | TouchEvent) {
   const element = e.currentTarget as HTMLElement | undefined
 
-  if (!element || !element._ripple) return
+  if (!element?._ripple) return
 
   if (element._ripple.showTimerCommit) {
     element._ripple.showTimerCommit = null

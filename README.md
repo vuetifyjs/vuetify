@@ -303,7 +303,7 @@ We also have a list of [help wanted](https://github.com/vuetifyjs/vuetify/labels
 
 ### 📝 Changelog
 
-Detailed changes for each release are documented in the [release notes](https://next.vuetifyjs.com/getting-started/release-notes/).
+Detailed changes for each release are documented in the [release notes](https://vuetifyjs.com/getting-started/release-notes/).
 
 ### 📑 License
 

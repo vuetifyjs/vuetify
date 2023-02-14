@@ -13,7 +13,7 @@ describe('VSystemBar', () => {
     ))
       .get('.v-system-bar')
       .should('have.class', 'v-theme--light')
-      .vue().then(wrapper => {
+      .vue().then(({ wrapper }) => {
         wrapper.setProps({ theme: 'dark' })
       })
       .get('.v-system-bar')

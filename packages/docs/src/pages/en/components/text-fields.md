@@ -76,7 +76,7 @@ The following code snippet is an example of a simple form for for collecting a u
 
 #### Placeholders
 
-Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label][#labeling] or [hint](#hints) properties.
+Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label](#labeling) or [hint](#hint) properties.
 
 In the following snippet, we improve the user experience of a `v-text-field` that is capturing an email address:
 

@@ -8,6 +8,7 @@ import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
@@ -33,6 +34,7 @@ export const VSystemBar = genericComponent()({
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const { ssrBootStyles } = useSsrBoot()
     const height = computed(() => props.height ?? (props.window ? 32 : 24))
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
@@ -57,6 +59,7 @@ export const VSystemBar = genericComponent()({
         style={[
           backgroundColorStyles.value,
           layoutItemStyles.value,
+          ssrBootStyles.value,
         ]}
         v-slots={ slots }
       />

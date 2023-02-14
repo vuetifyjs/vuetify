@@ -45,7 +45,7 @@ export const generatedRoutes = generatedPages.map(route => ({
   path: trailingSlash(route.path),
 }))
 
-export const redirectRoutes = Object.entries(redirects).flatMap(([from, to]) => [
+export const redirectRoutes = IN_BROWSER ? Object.entries(redirects).flatMap(([from, to]) => [
   {
     path: `/${from}`,
     redirect: to,
@@ -54,4 +54,4 @@ export const redirectRoutes = Object.entries(redirects).flatMap(([from, to]) => 
     path: `/:locale(${anyLanguagePattern})/${from}`,
     redirect: to,
   },
-])
+]) : []

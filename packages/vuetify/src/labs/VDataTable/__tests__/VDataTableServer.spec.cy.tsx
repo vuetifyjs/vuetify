@@ -138,7 +138,7 @@ describe('VDataTableServer', () => {
 
     cy.get('.v-data-table tbody tr')
       .vue()
-      .then(wrapper => {
+      .then(({ wrapper }) => {
         const table = wrapper.findComponent(VDataTableServer)
         const emits = table.emitted('update:options')
         expect(emits).to.have.length(1)

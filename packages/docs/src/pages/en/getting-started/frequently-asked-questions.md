@@ -292,7 +292,7 @@ export default {
 
 If you need help with an issue, please use one of our help channels:
 
-- [Vuetify Professional Support](https://next.vuetifyjs.com/en/introduction/enterprise-support/)
+- [Vuetify Professional Support](/introduction/enterprise-support/)
 - [Discord Community](https://community.vuetifyjs.com/)
 - [GitHub Discussions](https://discussions.vuetifyjs.com/)
 

@@ -111,9 +111,9 @@ Lastly, do not forget to install [icons](/features/icon-fonts/).
 
 We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
 
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css`
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
 
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js`
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
 
 ```js
 const { createApp } = Vue

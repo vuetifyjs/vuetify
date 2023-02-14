@@ -139,12 +139,9 @@ jobs:
           TAG_NAME: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        uses: actions/create-release@v1
+        run: yarn conventional-github-releaser -p vuetify
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: ${{ env.RELEASE_TAG }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:

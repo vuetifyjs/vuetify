@@ -12,23 +12,23 @@ jobs:
       max-parallel: 1
       fail-fast: false
       matrix:
-        branch: ['master', 'dev', 'v2-stable', 'v2-dev']
+        branch: ['master', 'dev', 'next', 'v2-stable', 'v2-dev']
         include:
           - branch: 'master'
-            tag: 'next'
+            tag: 'latest'
             preid: 'prepatch'
           - branch: 'dev'
             tag: 'dev'
             preid: 'preminor'
+          - branch: 'next'
+            tag: 'next'
+            preid: 'premajor'
           - branch: 'v2-stable'
             tag: 'v2-stable'
             preid: 'prepatch'
           - branch: 'v2-dev'
             tag: 'v2-dev'
             preid: 'preminor'
-#          - branch: 'next'
-#            tag: 'next'
-#            preid: 'premajor'
     env:
       RELEASE_BRANCH: ${{ matrix.branch }}
       RELEASE_TAG: ${{ matrix.tag }}
