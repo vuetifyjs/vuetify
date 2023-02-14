@@ -208,12 +208,16 @@ export const VAutocomplete = genericComponent<new <
           return
         }
 
+        const originalSelectionIndex = selectionIndex.value
+
         if (selection.value) {
           select(selection.value)
         }
 
-        if (selectionIndex.value >= length - 1) {
+        if (originalSelectionIndex >= length - 1) {
           selectionIndex.value = length - 2
+        } else {
+          selectionIndex.value = originalSelectionIndex
         }
       }
 
