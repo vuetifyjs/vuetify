@@ -1,5 +1,5 @@
 {
   "props": {
-    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/location.json))"
+    "location": "Sets the location using block and inline. Use top or bottom for vertical location and start, end, left or right for horizontal location."
   }
 }
