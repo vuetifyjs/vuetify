@@ -144,17 +144,17 @@
       code.value = _code
       sections.value = [
         {
-          name: 'Template',
+          name: 'template',
           language: 'html',
           content: parseTemplate('template', _code),
         },
         {
-          name: 'Script',
+          name: 'script',
           language: 'javascript',
           content: parseTemplate('script', _code),
         },
         {
-          name: 'Style',
+          name: 'style',
           language: 'css',
           content: parseTemplate('style', _code),
         },
