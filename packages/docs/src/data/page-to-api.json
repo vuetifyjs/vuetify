@@ -67,6 +67,7 @@
   ],
   "components/date-pickers-month": ["v-date-picker"],
   "components/date-pickers": ["v-date-picker"],
+  "components/defaults-providers": ["v-defaults-provider"],
   "components/dialogs": ["v-dialog"],
   "components/dividers": ["v-divider"],
   "components/expansion-panels": [
@@ -108,6 +109,7 @@
     "v-list-subheader",
     "v-list-img"
   ],
+  "components/locale-providers": ["v-locale-provider"],
   "components/menus": ["v-menu"],
   "components/navigation-drawers": ["v-navigation-drawer"],
   "components/no-ssr": ["v-no-ssr"],
@@ -157,6 +159,7 @@
   ],
   "components/text-fields": ["v-text-field"],
   "components/textareas": ["v-textarea"],
+  "components/theme-providers": ["v-theme-provider"],
   "components/time-pickers": ["v-time-picker"],
   "components/timelines": [
     "v-timeline",
@@ -181,10 +184,11 @@
   "directives/ripple": ["ripple"],
   "directives/scroll": ["scroll"],
   "directives/touch": ["touch"],
-  "features/internationalization": ["internationalization"],
+  "features/display-and-platform": ["display"],
+  "features/global-configuration": ["v-defaults-provider"],
+  "features/internationalization": ["internationalization", "v-locale-provider"],
   "features/scrolling": ["$vuetify"],
   "features/theme": ["v-theme-provider"],
-  "features/display-and-platform": ["display"],
   "styles/transitions": [
     "v-dialog-bottom-transition",
     "v-dialog-top-transition",
