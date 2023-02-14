@@ -51,7 +51,9 @@ export function provideDefaults (
       const len = Number(reset || Infinity)
 
       for (let i = 0; i <= len; i++) {
-        if (!properties.prev) break
+        if (!properties || !('prev' in properties)) {
+          break
+        }
 
         properties = properties.prev
       }
