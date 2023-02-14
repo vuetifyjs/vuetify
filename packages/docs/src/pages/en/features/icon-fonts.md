@@ -127,7 +127,7 @@ export default createVuetify({
 
 </alert>
 
-Use this tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
+Use [this](https://icones.js.org/collection/mdi) tool to search for any Material Design Icons and copy them to your clipboard by clicking the item.
 
 <!-- <icon-list /> -->
 
