@@ -15,7 +15,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
     if (definition.properties) {
       // Exclude private properties
       definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('_')))
+        .filter(([name]) => !name.startsWith('_') && !name.startsWith('Ψ')))
     }
     return definition
   }
