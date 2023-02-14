@@ -7,6 +7,7 @@ import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VT
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
@@ -59,6 +60,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
 
       return (height + extensionHeight)
     })
+    const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
@@ -84,6 +86,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
           style={{
             ...layoutItemStyles.value,
             height: undefined,
+            ...ssrBootStyles.value,
           }}
           { ...toolbarProps }
           v-slots={ slots }

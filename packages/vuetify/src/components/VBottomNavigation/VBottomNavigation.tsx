@@ -12,6 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -64,6 +65,7 @@ export const VBottomNavigation = genericComponent()({
     const { densityClasses } = useDensity(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
+    const { ssrBootStyles } = useSsrBoot()
     const height = computed(() => (
       Number(props.height) -
       (props.density === 'comfortable' ? 8 : 0) -
@@ -115,6 +117,7 @@ export const VBottomNavigation = genericComponent()({
               height: convertToUnit(height.value),
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
+            ssrBootStyles.value,
           ]}
         >
           { slots.default && (
