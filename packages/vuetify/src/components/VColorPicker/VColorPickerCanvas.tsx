@@ -8,6 +8,7 @@ import { computed, onMounted, ref, watch } from 'vue'
 // Types
 import type { HSV } from '@/util'
 import type { PropType } from 'vue'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
@@ -53,6 +54,9 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const canvasRef = ref<HTMLCanvasElement | null>()
+    const { resizeRef, contentRect } = useResizeObserver()
+    const canvasWidth = computed(() => contentRect.value?.width ?? parseFloat(props.width))
+    const canvasHeight = computed(() => contentRect.value?.height ?? parseFloat(props.height))
 
     function updateDotPosition (x: number, y: number, rect: DOMRect) {
       const { left, top, width, height } = rect
@@ -107,13 +111,12 @@ export const VColorPickerCanvas = defineComponent({
 
       if (!canvasRef.value) return
 
-      const { width, height } = canvasRef.value.getBoundingClientRect()
       const { x, y } = dotPosition.value
 
       emit('update:color', {
         h: props.color?.h ?? 0,
-        s: clamp(x, 0, width) / width,
-        v: 1 - clamp(y, 0, height) / height,
+        s: clamp(x, 0, canvasWidth.value) / canvasWidth.value,
+        v: 1 - clamp(y, 0, canvasHeight.value) / canvasHeight.value,
         a: props.color?.a ?? 1,
       })
     })
@@ -139,7 +142,14 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
-    watch(() => props.color?.h, updateCanvas, { immediate: true })
+    watch(() => props.color?.h, updateCanvas, { immediate: true, flush: 'post' })
+    watch(() => [canvasWidth.value, canvasHeight.value], (newVal, oldVal) => {
+      updateCanvas()
+      dotPosition.value = {
+        x: dotPosition.value.x * newVal[0] / oldVal[0],
+        y: dotPosition.value.y * newVal[1] / oldVal[1],
+      }
+    }, { flush: 'post' })
 
     watch(() => props.color, () => {
       if (isInteracting.value) {
@@ -150,8 +160,8 @@ export const VColorPickerCanvas = defineComponent({
       isOutsideUpdate.value = true
 
       dotPosition.value = props.color ? {
-        x: props.color.s * parseInt(props.width, 10),
-        y: (1 - props.color.v) * parseInt(props.height, 10),
+        x: props.color.s * canvasWidth.value,
+        y: (1 - props.color.v) * canvasHeight.value,
       } : { x: 0, y: 0 }
     }, { deep: true, immediate: true })
 
@@ -159,19 +169,16 @@ export const VColorPickerCanvas = defineComponent({
 
     useRender(() => (
       <div
+        ref={ resizeRef }
         class="v-color-picker-canvas"
-        style={{
-          width: convertToUnit(props.width),
-          height: convertToUnit(props.height),
-        }}
         onClick={ handleClick }
         onMousedown={ handleMouseDown }
         onTouchstart={ handleMouseDown }
       >
         <canvas
           ref={ canvasRef }
-          width={ props.width }
-          height={ props.height }
+          width={ canvasWidth.value }
+          height={ canvasHeight.value }
         />
         <div
           class={[
