@@ -30,12 +30,20 @@ import { useSelectLink } from '@/composables/selectLink'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export const VBtn = defineComponent({
+export type VBtnSlots = MakeSlots<{
+  default: []
+  prepend: []
+  append: []
+  loader: []
+}>
+
+export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
 
   directives: { Ripple },
@@ -97,23 +105,39 @@ export const VBtn = defineComponent({
     const group = useGroupItem(props, props.symbol, false)
     const link = useLink(props, attrs)
 
-    const isActive = computed(() =>
-      props.active !== false &&
-      (props.active || link.isActive?.value || group?.isSelected.value)
-    )
+    const isActive = computed(() => {
+      if (props.active !== undefined) {
+        return props.active
+      }
+
+      if (link.isLink.value) {
+        return link.isActive?.value
+      }
+
+      return group?.isSelected.value
+    })
     const isDisabled = computed(() => group?.disabled.value || props.disabled)
     const isElevated = computed(() => {
       return props.variant === 'elevated' && !(props.disabled || props.flat || props.border)
+    })
+    const valueAttr = computed(() => {
+      if (props.value === undefined) return undefined
+
+      return Object(props.value) === props.value
+        ? JSON.stringify(props.value, null, 0) : props.value
     })
 
     useSelectLink(link, group?.select)
 
     useRender(() => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasColor = !group || group.isSelected.value
       const hasPrepend = !!(props.prependIcon || slots.prepend)
       const hasAppend = !!(props.appendIcon || slots.append)
       const hasIcon = !!(props.icon && props.icon !== true)
+      const hasColor = (
+        (group?.isSelected.value && (!link.isLink.value || link.isActive?.value)) ||
+        (!group || link.isActive?.value)
+      )
 
       return (
         <Tag
@@ -161,6 +185,7 @@ export const VBtn = defineComponent({
             link.navigate?.(e)
             group?.toggle()
           } }
+          value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
 

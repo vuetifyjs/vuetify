@@ -20,7 +20,7 @@ import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useR
 
 // Types
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -49,11 +49,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<new () => {
-  $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    default: []
-  }>>
-}>()({
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+  default: []
+}>>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -64,7 +62,7 @@ export const VTextField = genericComponent<new () => {
 
   emits: {
     'click:control': (e: MouseEvent) => true,
-    'click:input': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -117,6 +115,14 @@ export const VTextField = genericComponent<new () => {
       }
 
       if (!isFocused.value) focus()
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+
+      if (e.target === inputRef.value) return
+
+      onFocus()
+      e.preventDefault()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
@@ -175,12 +181,8 @@ export const VTextField = genericComponent<new () => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                onMousedown={ (e: MouseEvent) => {
-                  if (e.target === inputRef.value) return
-
-                  e.preventDefault()
-                }}
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
@@ -230,7 +232,6 @@ export const VTextField = genericComponent<new () => {
                         { slots.default ? (
                           <div
                             class={ fieldClass }
-                            onClick={ e => emit('click:input', e) }
                             data-no-activator=""
                           >
                             { slots.default() }
@@ -261,7 +262,7 @@ export const VTextField = genericComponent<new () => {
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
                 ) }

@@ -18,7 +18,6 @@ import { computed, ref } from 'vue'
 import { clamp, createRange, genericComponent, getUid, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { Prop } from 'vue'
 import type { Variant } from '@/composables/variant'
 
@@ -38,12 +37,12 @@ type VRatingItemLabelSlot = {
   label?: string
 }
 
-export const VRating = genericComponent<new <T>() => {
-  $props: SlotsToProps<{
-    item: [VRatingItemSlot]
-    'item-label': [VRatingItemLabelSlot]
-  }>
-}>()({
+type VRatingSlots = {
+  item: [VRatingItemSlot]
+  'item-label': [VRatingItemLabelSlot]
+}
+
+export const VRating = genericComponent<VRatingSlots>()({
   name: 'VRating',
 
   props: {

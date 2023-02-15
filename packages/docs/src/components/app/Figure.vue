@@ -1,11 +1,8 @@
 <template>
-  <figure
-    :class="[
-      caption ? 'mb-6' : 'mb-10'
-    ]"
-  >
+  <figure class="mb-6">
     <v-img
-      class="rounded"
+      class="rounded bg-surface"
+      cover
       v-bind="$attrs"
     />
 

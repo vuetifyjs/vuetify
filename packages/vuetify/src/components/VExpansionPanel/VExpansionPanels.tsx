@@ -9,11 +9,11 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { GroupItemProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
+import type { GroupItemProvide } from '@/composables/group'
 
 export const VExpansionPanelSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-expansion-panel')
 
@@ -21,7 +21,7 @@ const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
-export const VExpansionPanels = defineComponent({
+export const VExpansionPanels = genericComponent()({
   name: 'VExpansionPanels',
 
   props: {

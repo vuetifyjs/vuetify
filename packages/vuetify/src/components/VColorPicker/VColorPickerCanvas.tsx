@@ -147,14 +147,12 @@ export const VColorPickerCanvas = defineComponent({
         return
       }
 
-      if (!props.color) return
-
       isOutsideUpdate.value = true
 
-      dotPosition.value = {
+      dotPosition.value = props.color ? {
         x: props.color.s * parseInt(props.width, 10),
         y: (1 - props.color.v) * parseInt(props.height, 10),
-      }
+      } : { x: 0, y: 0 }
     }, { deep: true, immediate: true })
 
     onMounted(() => updateCanvas())

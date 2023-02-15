@@ -29,7 +29,7 @@
       <template #activator="{ props: activatorProps }">
         <v-btn
           :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-          class="mr-1 text-disabled me-2 mt-2 app-markup-btn"
+          class="me-1 text-disabled me-2 mt-2 app-markup-btn"
           density="compact"
           style="position: absolute; right: 0; top: 0;"
           v-bind="activatorProps"

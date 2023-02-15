@@ -12,23 +12,28 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
-export const VBtnGroup = defineComponent({
+// Types
+import type { ExtractPropTypes } from 'vue'
+
+export const makeVBtnGroupProps = propsFactory({
+  divided: Boolean,
+
+  ...makeBorderProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps(),
+}, 'v-btn-group')
+
+export const VBtnGroup = genericComponent()({
   name: 'VBtnGroup',
 
-  props: {
-    divided: Boolean,
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps(),
-  },
+  props: makeVBtnGroupProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -69,3 +74,7 @@ export const VBtnGroup = defineComponent({
 })
 
 export type VBtnGroup = InstanceType<typeof VBtnGroup>
+
+export function filterVBtnGroupProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVBtnGroupProps>>>) {
+  return pick(props, Object.keys(VBtnGroup.props) as any)
+}

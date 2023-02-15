@@ -15,10 +15,18 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, pick, useRender } from '@/util'
+import { genericComponent, pick, useRender } from '@/util'
 import { toRef } from 'vue'
 
-export const VBadge = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VBadgeSlots = MakeSlots<{
+  default: []
+  badge: []
+}>
+
+export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',
 
   inheritAttrs: false,

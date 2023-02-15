@@ -1,12 +1,13 @@
 <template>
   <v-navigation-drawer
+    v-if="app.settingsCanShow"
     id="settings-drawer"
     v-model="app.settings"
     :location="isRtl ? 'left' : 'right'"
-    :scrim="false"
     disable-route-watcher
     position="fixed"
     temporary
+    touchless
     width="350"
   >
     <v-toolbar flat>

@@ -13,9 +13,15 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VExpansionPanel = defineComponent({
+export type VExpansionPanelSlots = {
+  default: []
+  title: []
+  text: []
+}
+
+export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',
 
   props: {

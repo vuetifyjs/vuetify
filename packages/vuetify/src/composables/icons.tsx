@@ -3,7 +3,7 @@ import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
 import { computed, inject, isRef } from 'vue'
-import { defineComponent, mergeDeep, propsFactory } from '@/util'
+import { defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
@@ -85,7 +85,7 @@ export const makeIconProps = propsFactory({
   },
 }, 'icon')
 
-export const VComponentIcon = defineComponent({
+export const VComponentIcon = genericComponent()({
   name: 'VComponentIcon',
 
   props: makeIconProps(),

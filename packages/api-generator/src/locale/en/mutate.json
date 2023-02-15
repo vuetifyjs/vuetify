@@ -1,0 +1,13 @@
+{
+  "argument": {
+    "value": "By default takes a handler function that is invoked when the element that the directive is attached to is mutated. It can also take an object, which allows you to pass along [MutationObserver options](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)."
+  },
+  "modifiers": {
+    "attr": "See `attributes` option [here](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe).",
+    "char": "See `characterData` option [here](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe).",
+    "child": "See `childList` option [here](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe).",
+    "immediate": "The provided handler function is invoked immediately when directive is attached to element.",
+    "once": "The provided handler function is only invoked once.",
+    "sub": "See `subtree` option [here](https://developer.mozilla.org/en-US/docs/Web/API/MutationObserver/observe)."
+  }
+}

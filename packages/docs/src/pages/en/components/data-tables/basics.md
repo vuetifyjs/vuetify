@@ -5,7 +5,7 @@ meta:
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
 related:
-  - /components/data-iterators/
+  - /components/paginations/
   - /components/tables/
   - /components/lists/
 ---
@@ -52,6 +52,8 @@ You can find more information and examples [here](/components/data-tables/virtua
 | [v-data-table-header](/api/v-data-table-header/) | Functional Component used to display Data-table headers |
 | [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
 | [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
+
+<api-inline hide-links />
 
 ## Examples
 

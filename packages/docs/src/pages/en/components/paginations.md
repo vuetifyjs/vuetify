@@ -5,9 +5,9 @@ meta:
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
   keywords: pagination, vuetify pagination component, vue pagination component
 related:
-  - /components/data-iterator/
-  - /components/data-tables/
-  - /components/lists/
+  - /components/data-tables/basics/
+  - /components/data-tables/pagination/
+  - /components/tables/
 ---
 
 # Pagination

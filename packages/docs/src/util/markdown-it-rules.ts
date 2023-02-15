@@ -13,7 +13,14 @@ function addCodeRules (md: MarkdownIt) {
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
 
-    return `<code class="v-code">${md.utils.escapeHtml(token.content)}</code>`
+    const attrs = Object.entries(
+      (token.attrs || []).reduce((acc, [key, value]) => {
+        acc[key] = acc[key] ? acc[key] + ' ' + value : value
+        return acc
+      }, { class: 'v-code' } as Record<string, string>)
+    ).map(([key, value]) => `${key}="${value}"`).join(' ')
+
+    return `<code ${attrs}>${md.utils.escapeHtml(token.content)}</code>`
   }
 }
 
@@ -85,12 +92,7 @@ function addHeadingRules (md: MarkdownIt) {
 }
 
 function addLinkRules (md: MarkdownIt) {
-  md.renderer.rules.link_open = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-link'
-
-    return self.renderToken(tokens, idx, options)
-  }
-  md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
+  md.renderer.rules.link_open = md.renderer.rules.link_close = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-link'
 
     return self.renderToken(tokens, idx, options)
@@ -98,13 +100,7 @@ function addLinkRules (md: MarkdownIt) {
 }
 
 function addTableRules (md: MarkdownIt) {
-  md.renderer.rules.table_open = (tokens, idx, options, env, self) => {
-    tokens[idx].tag = 'app-table'
-
-    return self.renderToken(tokens, idx, options)
-  }
-
-  md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
+  md.renderer.rules.table_open = md.renderer.rules.table_close = (tokens, idx, options, env, self) => {
     tokens[idx].tag = 'app-table'
 
     return self.renderToken(tokens, idx, options)

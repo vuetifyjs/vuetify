@@ -11,10 +11,10 @@
     >
       <v-system-bar v-bind="props">
         <v-icon icon="mdi-wifi-strength-4"></v-icon>
-        <v-icon icon="mdi-signal" class="ml-2"></v-icon>
-        <v-icon icon="mdi-battery" class="ml-2"></v-icon>
+        <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+        <v-icon icon="mdi-battery" class="ms-2"></v-icon>
 
-        <span class="ml-2">3:13PM</span>
+        <span class="ms-2">3:13PM</span>
       </v-system-bar>
 
       <v-main></v-main>
@@ -39,10 +39,10 @@
   const code = computed(() => {
     return `<${name}${propsToString(props.value)}>
   <v-icon icon="mdi-wifi-strength-4"></v-icon>
-  <v-icon icon="mdi-signal" class="ml-2"></v-icon>
-  <v-icon icon="mdi-battery" class="ml-2"></v-icon>
+  <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+  <v-icon icon="mdi-battery" class="ms-2"></v-icon>
 
-  <span class="ml-2">3:13PM</span>
+  <span class="ms-2">3:13PM</span>
 </${name}>`
   })
 </script>

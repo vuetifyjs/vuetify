@@ -3,7 +3,7 @@ import { useCosmic } from '@/composables/cosmic'
 
 // Utilities
 import { defineStore } from 'pinia'
-import { computed, onBeforeMount, ref } from 'vue'
+import { computed, onBeforeMount, onServerPrefetch, ref } from 'vue'
 
 // Types
 export interface Sponsor {
@@ -21,7 +21,7 @@ export type RootState = {
 export const useSponsorsStore = defineStore('sponsors', () => {
   const sponsors = ref<Sponsor[]>([])
 
-  onBeforeMount(async () => {
+  async function fetchSponsors () {
     if (sponsors.value.length) return
 
     const { bucket } = useCosmic<Sponsor>()
@@ -33,7 +33,10 @@ export const useSponsorsStore = defineStore('sponsors', () => {
     ) || {}
 
     sponsors.value = objects
-  })
+  }
+
+  onServerPrefetch(fetchSponsors)
+  onBeforeMount(fetchSponsors)
 
   const byTier = computed(() => {
     const tiers: Record<string, Sponsor[]> = {}

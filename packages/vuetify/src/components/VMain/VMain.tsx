@@ -7,9 +7,9 @@ import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VMain = defineComponent({
+export const VMain = genericComponent()({
   name: 'VMain',
 
   props: {

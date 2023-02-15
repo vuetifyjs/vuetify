@@ -55,6 +55,8 @@ The recommended placement of elements inside of `v-card` is:
 | [v-card-text](/api/v-card-text/) | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
 | [v-card-actions](/api/v-card-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
 
+<api-inline hide-links />
+
 ## Basics
 
 There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
@@ -89,7 +91,7 @@ A card with the **variant** prop set to `outlined` has zero elevation.
 
 #### Card Reveal
 
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <example file="v-card/misc-card-reveal" />
 

@@ -28,7 +28,7 @@
               <v-switch
                 :model-value="isExpanded(item)"
                 :label="isExpanded(item) ? 'Expanded' : 'Closed'"
-                class="pl-4 mt-0"
+                class="ps-4 mt-0"
                 @update:model-value="v => expand(item, v)"
               ></v-switch>
               <v-divider></v-divider>

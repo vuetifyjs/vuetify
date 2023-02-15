@@ -1,0 +1,5 @@
+{
+  "argument": {
+    "value": "By default takes a function that is invoked when user clicks outside of the element the directive is attached to. It can also be an object, which allows you to provide `closeConditional` and `include` callbacks."
+  }
+}

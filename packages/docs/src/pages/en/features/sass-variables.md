@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/colors/
   - /features/theme/
-  - /features/presets/
+  - /features/treeshaking/
 ---
 
 # SASS variables

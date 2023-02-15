@@ -7,7 +7,7 @@ meta:
 related:
   - /components/buttons/
   - /components/icons/
-  - /components/selection-controls/
+  - /components/toolbars/
 ---
 
 # Button toggles
