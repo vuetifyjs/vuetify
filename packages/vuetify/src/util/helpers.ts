@@ -336,6 +336,13 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
+export function getDecimals (value: string) {
+  const trimmedStr = value.trim()
+  return trimmedStr.includes('.')
+    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+    : 0
+}
+
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
 }
