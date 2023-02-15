@@ -17,7 +17,6 @@ import { genericComponent, useRender } from '@/util'
 import type { PropType } from 'vue'
 import type { SlotsToProps } from '@/util'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
-import { useToggleScope } from '@/composables/toggleScope'
 
 export const VAppBar = genericComponent<new () => {
   $props: SlotsToProps<VToolbarSlots>
@@ -69,7 +68,7 @@ export const VAppBar = genericComponent<new () => {
       const behavior = scrollBehavior.value
       return (
         behavior.hide ||
-        behavior.fullyHide ||
+        // behavior.fullyHide ||
         behavior.inverted ||
         behavior.collapse ||
         behavior.elevate ||
@@ -110,23 +109,21 @@ export const VAppBar = genericComponent<new () => {
 
       return (height + extensionHeight)
     })
-
-    watch(currentScroll, val => {
+    function setActive () {
+      const val = currentScroll.value
       if (scrollBehavior.value.hide) {
         if (scrollBehavior.value.inverted) {
           isActive.value = val > computedScrollThreshold.value
         } else {
           isActive.value = isScrollingUp.value || (val < computedScrollThreshold.value)
         }
+      } else if (scrollBehavior.value.inverted) {
+        isActive.value = currentScroll.value === 0
       }
-    }, { immediate: true })
+    }
 
-    useToggleScope(() => scrollBehavior.value.hide || scrollBehavior.value.fullyHide, () => {
-      watch(() => scrollBehavior.value.inverted, val => {
-        if (val && currentScroll.value === 0) isActive.value = false
-        else if (!val) isActive.value = true
-      })
-    })
+    watch(currentScroll, setActive, { immediate: true })
+    watch(scrollBehavior, setActive)
 
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
