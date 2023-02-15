@@ -1,3 +1,6 @@
+// Styles
+import './_transitions.scss'
+
 // Utilities
 import { h, Transition, TransitionGroup } from 'vue'
 import { genericComponent } from '@/util'

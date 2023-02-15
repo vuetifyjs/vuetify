@@ -1,4 +1,5 @@
-@use '../settings';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
 @mixin transition-default() {
   &-enter-active {
@@ -11,6 +12,20 @@
 
   &-move {
     transition: transform .5s settings.$standard-easing;
+  }
+}
+
+@keyframes v-shake {
+  59% {
+    margin-left: 0;
+  }
+
+  60%, 80% {
+    margin-left: 2px;
+  }
+
+  70%, 90% {
+    margin-left: -2px;
   }
 }
 
