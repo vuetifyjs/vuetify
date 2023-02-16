@@ -65,7 +65,7 @@
     },
     {
       title: 'playground',
-      href: 'https://playground.vuetifyjs.com/',
+      href: 'https://play.vuetifyjs.com/',
       appendIcon: 'mdi-play-circle',
     },
     { divider: true },
