@@ -288,4 +288,23 @@ describe('VColorPicker', () => {
       expect(emits).to.have.length(1)
     })
   })
+
+  it('should not use global defaults for slider color', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker />
+      </Application>
+    ), null, {
+      defaults: {
+        VSlider: {
+          color: 'primary',
+          trackColor: 'primary',
+          trackFillColor: 'primary',
+        },
+      },
+    })
+
+    cy.get('.bg-primary').should('not.exist')
+    cy.get('.text-primary').should('not.exist')
+  })
 })
