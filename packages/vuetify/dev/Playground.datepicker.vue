@@ -96,9 +96,14 @@
 </template>
 
 <script>
+  import { VDateField, VDateRangeField } from '../src/labs/VDateField'
   import sv from 'date-fns/locale/sv'
 
   export default {
+    components: {
+      VDateField,
+      VDateRangeField,
+    },
     data: () => ({
       date: '2022-01-01',
       displayDate: '2022-06',
