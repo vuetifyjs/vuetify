@@ -88,7 +88,7 @@
         v-model="multiple"
         :locale="locale"
       /> -->
-        <!-- <v-date-field label="Date" v-model="foo" /> -->
+      <!-- <v-date-field label="Date" v-model="foo" /> -->
 
       <v-date-range-field from-label="From" to-label="To" v-model="multiple" />
     </div>
@@ -96,8 +96,6 @@
 </template>
 
 <script>
-  import { changeMonth } from '../src/components/VDatePicker/utils'
-  import enUS from 'date-fns/locale/en-US'
   import sv from 'date-fns/locale/sv'
 
   export default {
@@ -109,18 +107,6 @@
       multiple: [],
       foo: null,
     }),
-    methods: {
-      prev () {
-        const [year, month] = changeMonth(this.year, this.month, -1)
-        this.year = year
-        this.month = month
-      },
-      next () {
-        const [year, month] = changeMonth(this.year, this.month, 1)
-        this.year = year
-        this.month = month
-      },
-    },
   }
 </script>
 
