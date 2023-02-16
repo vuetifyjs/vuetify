@@ -59,7 +59,7 @@ export const VColorPickerPreview = defineComponent({
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
-              modelValue={ props.color?.a }
+              modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
               step={ 0 }
               min={ 0 }

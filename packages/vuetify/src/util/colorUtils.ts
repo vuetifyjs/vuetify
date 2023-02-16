@@ -12,7 +12,7 @@ export type LAB = [number, number, number]
 export type HSV = { h: number, s: number, v: number, a?: number }
 export type RGB = { r: number, g: number, b: number, a?: number }
 export type HSL = { h: number, s: number, l: number, a?: number }
-export type Hex = string & { __hexBrand: never }
+export type Hex = string
 export type Color = string | number | {}
 
 export function isCssColor (color?: string | null | false): boolean {
@@ -162,6 +162,7 @@ export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
 }
 
 export function HexToRGB (hex: Hex): RGB {
+  hex = hex.startsWith('#') ? hex.slice(1) : hex
   let [r, g, b, a] = chunk(hex, 2).map((c: string) => parseInt(c, 16))
   a = a === undefined ? a : Math.round((a / 255) * 100) / 100
 

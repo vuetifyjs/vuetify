@@ -57,19 +57,19 @@ export const VColorPickerEdit = defineComponent({
 
       if (!mode) return []
 
-      const color = props.color ? mode.to(props.color) : {}
+      const color = props.color ? mode.to(props.color) : null
 
       return mode.inputs?.map(({ getValue, getColor, ...inputProps }) => {
+        const value = getValue(color)
         return {
           ...mode.inputProps,
           ...inputProps,
           disabled: props.disabled,
-          value: getValue(color),
+          value: props.color && !value ? 0 : value,
           onChange: (e: InputEvent) => {
             const target = e.target as HTMLInputElement | null
 
             if (!target) return
-
             emit('update:color', mode.from(getColor(color, target.value)))
           },
         }
