@@ -13,23 +13,30 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-import { genericComponent } from '@/util'
+
+// Types
+import type { ExtractPropTypes } from 'vue'
+
+export const makeVSheetProps = propsFactory({
+  color: String,
+
+  ...makeBorderProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-sheet')
 
 export const VSheet = genericComponent()({
   name: 'VSheet',
 
   props: {
-    color: String,
-
-    ...makeBorderProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
+    ...makeVSheetProps(),
   },
 
   setup (props, { slots }) {
@@ -42,7 +49,7 @@ export const VSheet = genericComponent()({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-sheet',
@@ -60,8 +67,14 @@ export const VSheet = genericComponent()({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
 
 export type VSheet = InstanceType<typeof VSheet>
+
+export function filterSheetProps (props: ExtractPropTypes<ReturnType<typeof makeVSheetProps>>) {
+  return pick(props, Object.keys(VSheet?.props ?? {}) as any)
+}
