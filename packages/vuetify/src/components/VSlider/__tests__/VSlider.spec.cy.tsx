@@ -202,12 +202,13 @@ describe('VSlider', () => {
 
       cy.mount(() => (
         <VApp>
-          <CenteredGrid width="300px">
+          <CenteredGrid width="360px">
             <VSlider
               v-model={ currentValue.value }
               step={1.001}
               min={1.0001}
               max={10}
+              thumb-label
             />
           </CenteredGrid>
         </VApp>
@@ -216,15 +217,15 @@ describe('VSlider', () => {
       cy.get('.v-slider-thumb')
         .trigger('mouseover')
         .trigger('mousedown', { which: 1 })
-        .trigger('mousemove', 50, 0, { force: true }) // move to second step
+        .trigger('mousemove', 35, 0, { force: true }) // move to second step
         .should(_ => {
           expect(currentValue.value).equal(2.0011)
         })
-        .trigger('mousemove', 160, 0, { force: true }) // move to sixth step
+        .trigger('mousemove', 190, 0, { force: true }) // move to sixth step
         .should(_ => {
           expect(currentValue.value).equal(6.0051)
         })
-        .trigger('mousemove', 300, 0, { force: true }) // move to the final step
+        .trigger('mousemove', 360, 0, { force: true }) // move to the final step
         .should(_ => {
           expect(currentValue.value).equal(10)
         })
