@@ -54,9 +54,16 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const canvasRef = ref<HTMLCanvasElement | null>()
-    const { resizeRef, contentRect } = useResizeObserver()
-    const canvasWidth = computed(() => contentRect.value?.width ?? parseFloat(props.width))
-    const canvasHeight = computed(() => contentRect.value?.height ?? parseFloat(props.height))
+    const canvasWidth = ref(parseFloat(props.width))
+    const canvasHeight = ref(parseFloat(props.height))
+    const { resizeRef } = useResizeObserver(entries => {
+      if (!resizeRef.value?.offsetParent) return
+
+      const { width, height } = entries[0].contentRect
+
+      canvasWidth.value = width
+      canvasHeight.value = height
+    })
 
     function updateDotPosition (x: number, y: number, rect: DOMRect) {
       const { left, top, width, height } = rect
