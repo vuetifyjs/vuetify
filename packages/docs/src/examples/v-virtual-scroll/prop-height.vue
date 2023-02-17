@@ -1,11 +1,9 @@
 <template>
-  <div style="height: 200px;">
-    <v-virtual-scroll :items="items">
-      <template v-slot:default="{ item }">
-        Virtual Item {{ item }}
-      </template>
-    </v-virtual-scroll>
-  </div>
+  <v-virtual-scroll :items="items" height="200">
+    <template v-slot:default="{ item }">
+      Virtual Item {{ item }}
+    </template>
+  </v-virtual-scroll>
 </template>
 
 <script>

@@ -1,10 +1,9 @@
 {
   "props": {
-    "disabled": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "fastFail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "lazyValidation": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "readonly": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "modelValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))",
-    "validateOn": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/form.json))"
+    "disabled": "Puts all children inputs into a disabled state",
+    "fastFail": "Stop validation as soon as any rules fail.",
+    "readonly": "Puts all children inputs into a readonly state.",
+    "modelValue": "The value representing the validity of the form. If the value is `null` then no validation has taken place yet, or the form has been reset. Otherwise the value will be a `boolean` that indicates if validation has passed or not.",
+    "validateOn": "Changes the events in which validation occurs."
   }
 }

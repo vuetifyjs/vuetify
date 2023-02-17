@@ -27,20 +27,22 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode, ssrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   return {
     logLevel: 'info',
     resolve: {
-      alias: {
-        '@/': `${resolve('src')}/`,
-        'node-fetch': 'isomorphic-fetch',
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
-      },
+      alias: [
+        { find: '@', replacement: `${resolve('src')}/` },
+        { find: 'node-fetch', replacement: 'isomorphic-fetch' },
+        { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+        { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
+      ],
     },
     define: {
-      'process.env': {}, // This is so that 3rd party packages don't crap out
+      'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
+      __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
     build: {
       sourcemap: mode === 'development',
@@ -114,7 +116,7 @@ export default defineConfig(({ command, mode }) => {
           }
 
           if (meta.disabled) {
-            return null
+            return { disabled: true }
           }
 
           return {
@@ -128,6 +130,9 @@ export default defineConfig(({ command, mode }) => {
               locale,
             },
           }
+        },
+        onRoutesGenerated (routes) {
+          return routes.filter(route => !route.disabled)
         },
       }),
 
@@ -241,7 +246,7 @@ $&`), html)
     },
 
     ssr: {
-      noExternal: ['vue-i18n'],
+      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
     },
 
     server: {

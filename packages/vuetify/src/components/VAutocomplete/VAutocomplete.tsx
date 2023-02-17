@@ -107,7 +107,15 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = useProxiedModel(props, 'menu')
+    const vMenuRef = ref<VMenu>()
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        _menu.value = v
+      },
+    })
     const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
@@ -139,15 +147,13 @@ export const VAutocomplete = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
-      model.value = []
-
       if (props.openOnClear) {
         menu.value = true
       }
 
       search.value = ''
     }
-    function onClickControl () {
+    function onMousedownControl () {
       if (
         (props.hideNoData && !items.value.length) ||
         props.readonly || form?.isReadonly.value
@@ -157,6 +163,10 @@ export const VAutocomplete = genericComponent<new <
     }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
+
+      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
+        e.preventDefault()
+      }
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
@@ -171,10 +181,8 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (e.key === 'ArrowDown') {
-        e.preventDefault()
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
       }
     }
@@ -274,8 +282,7 @@ export const VAutocomplete = genericComponent<new <
           appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           onClick:clear={ onClear }
-          onClick:control={ onClickControl }
-          onClick:input={ onClickControl }
+          onMousedown:control={ onMousedownControl }
           onFocus={ () => isFocused.value = true }
           onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
@@ -285,10 +292,12 @@ export const VAutocomplete = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }

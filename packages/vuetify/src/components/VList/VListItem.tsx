@@ -30,7 +30,6 @@ import { computed, watch } from 'vue'
 import { EventProp, genericComponent, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
@@ -48,15 +47,15 @@ export type ListItemSubtitleSlot = {
   subtitle?: string
 }
 
-export const VListItem = genericComponent<new () => {
-  $props: SlotsToProps<{
-    prepend: [ListItemSlot]
-    append: [ListItemSlot]
-    default: [ListItemSlot]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+type VListItemSlots = {
+  prepend: [ListItemSlot]
+  append: [ListItemSlot]
+  default: [ListItemSlot]
+  title: [ListItemTitleSlot]
+  subtitle: [ListItemSubtitleSlot]
+}
+
+export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
   directives: { Ripple },
@@ -79,6 +78,10 @@ export const VListItem = genericComponent<new () => {
     nav: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     subtitle: [String, Number, Boolean],
     title: [String, Number, Boolean],
     value: null,
@@ -204,39 +207,41 @@ export const VListItem = genericComponent<new () => {
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ isClickable.value }
+          v-ripple={ isClickable.value && props.ripple }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VAvatar: {
-                  density: props.density,
-                  image: props.prependAvatar,
-                },
-                VIcon: {
-                  density: props.density,
-                  icon: props.prependIcon,
-                },
-                VListItemAction: {
-                  start: true,
-                },
-              }}
-            >
-              <div class="v-list-item__prepend">
-                { props.prependAvatar && (
-                  <VAvatar key="prepend-avatar" />
-                ) }
+            <div key="prepend" class="v-list-item__prepend">
+              { props.prependAvatar && (
+                <VAvatar key="prepend-avatar" density={ props.density } image={ props.prependAvatar } />
+              ) }
 
-                { props.prependIcon && (
-                  <VIcon key="prepend-icon" />
-                ) }
+              { props.prependIcon && (
+                <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } />
+              ) }
 
-                { slots.prepend?.(slotProps.value) }
-              </div>
-            </VDefaultsProvider>
+              { slots.prepend && (
+                <VDefaultsProvider
+                  key="prepend"
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      image: props.prependAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.prependIcon,
+                    },
+                    VListItemAction: {
+                      start: true,
+                    },
+                  }}
+                >
+                  { slots.prepend(slotProps.value) }
+                </VDefaultsProvider>
+              ) }
+            </div>
           ) }
 
           <div class="v-list-item__content" data-no-activator="">
@@ -256,35 +261,37 @@ export const VListItem = genericComponent<new () => {
           </div>
 
           { hasAppend && (
-            <VDefaultsProvider
-              key="append"
-              defaults={{
-                VAvatar: {
-                  density: props.density,
-                  image: props.appendAvatar,
-                },
-                VIcon: {
-                  density: props.density,
-                  icon: props.appendIcon,
-                },
-                VListItemAction: {
-                  end: true,
-                },
-              }}
-            >
-              <div class="v-list-item__append">
-                { slots.append?.(slotProps.value) }
+            <div key="append" class="v-list-item__append">
+              { slots.append && (
+                <VDefaultsProvider
+                  key="append"
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                    },
+                    VListItemAction: {
+                      end: true,
+                    },
+                  }}
+                >
+                  { slots.append(slotProps.value) }
+                </VDefaultsProvider>
+              )}
 
-                { props.appendIcon && (
-                  <VIcon key="append-icon" />
-                ) }
+              { props.appendIcon && (
+                <VIcon key="append-icon" density={ props.density } icon={ props.appendIcon } />
+              )}
 
-                { props.appendAvatar && (
-                  <VAvatar key="append-avatar" />
-                ) }
-              </div>
-            </VDefaultsProvider>
-          ) }
+              { props.appendAvatar && (
+                <VAvatar key="append-avatar" density={ props.density } image={ props.appendAvatar } />
+              )}
+            </div>
+          )}
         </Tag>
       )
     })

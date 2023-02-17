@@ -22,13 +22,21 @@ import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export const VBanner = defineComponent({
+export type VBannerSlots = MakeSlots<{
+  default: []
+  prepend: []
+  text: []
+  actions: []
+}>
+
+export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',
 
   props: {

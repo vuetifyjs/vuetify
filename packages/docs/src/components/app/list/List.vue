@@ -56,6 +56,7 @@
     to?: RouteLocationRaw
     href?: string
     subfolder?: boolean
+    disabled?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -133,6 +134,7 @@
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
       appendIcon: item.appendIcon,
+      disabled: item.disabled,
     }
   }))
 </script>

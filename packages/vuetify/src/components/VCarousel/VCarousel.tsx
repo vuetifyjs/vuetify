@@ -13,14 +13,15 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
 
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
+import type { VWindowSlots } from '../VWindow/VWindow'
 
-export const VCarousel = defineComponent({
+export const VCarousel = genericComponent<VWindowSlots>()({
   name: 'VCarousel',
 
   props: {

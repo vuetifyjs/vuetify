@@ -1,5 +1,5 @@
 // Utilities
-import { computed, effectScope, nextTick, onScopeDispose, ref, watch, watchEffect } from 'vue'
+import { computed, nextTick, onScopeDispose, ref, watch } from 'vue'
 import {
   clamp,
   consoleError,
@@ -19,8 +19,11 @@ import {
 import { Box, getOverflow } from '@/util/box'
 import { anchorToPoint, getOffset } from './util/point'
 
+// Composables
+import { useToggleScope } from '@/composables/toggleScope'
+
 // Types
-import type { EffectScope, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { Anchor } from '@/util'
 
 export interface LocationStrategyData {
@@ -76,31 +79,27 @@ export function useLocationStrategies (
   const contentStyles = ref({})
   const updateLocation = ref<(e: Event) => void>()
 
-  let scope: EffectScope | undefined
-  watchEffect(async () => {
-    scope?.stop()
-    updateLocation.value = undefined
+  if (IN_BROWSER) {
+    useToggleScope(() => !!(data.isActive.value && props.locationStrategy), reset => {
+      watch(() => props.locationStrategy, reset)
+      onScopeDispose(() => {
+        updateLocation.value = undefined
+      })
 
-    if (!(IN_BROWSER && data.isActive.value && props.locationStrategy)) return
-
-    scope = effectScope()
-    if (!(props.locationStrategy === 'connected')) { await nextTick() }
-    scope.run(() => {
       if (typeof props.locationStrategy === 'function') {
         updateLocation.value = props.locationStrategy(data, props, contentStyles)?.updateLocation
       } else {
         updateLocation.value = locationStrategies[props.locationStrategy](data, props, contentStyles)?.updateLocation
       }
     })
-  })
 
-  IN_BROWSER && window.addEventListener('resize', onResize, { passive: true })
+    window.addEventListener('resize', onResize, { passive: true })
 
-  onScopeDispose(() => {
-    IN_BROWSER && window.removeEventListener('resize', onResize)
-    updateLocation.value = undefined
-    scope?.stop()
-  })
+    onScopeDispose(() => {
+      window.removeEventListener('resize', onResize)
+      updateLocation.value = undefined
+    })
+  }
 
   function onResize (e: Event) {
     updateLocation.value?.(e)
@@ -394,6 +393,11 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
       maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),
     })
+
+    return {
+      available,
+      contentBox,
+    }
   }
 
   watch(
@@ -407,12 +411,23 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       props.maxHeight,
     ],
     () => updateLocation(),
-    { immediate: !activatorFixed }
   )
 
-  if (activatorFixed) nextTick(() => updateLocation())
-  requestAnimationFrame(() => {
-    if (contentStyles.value.maxHeight) updateLocation()
+  nextTick(() => {
+    const result = updateLocation()
+
+    // TODO: overflowing content should only require a single updateLocation call
+    // Icky hack to make sure the content is positioned consistently
+    if (!result) return
+    const { available, contentBox } = result
+    if (contentBox.height > available.y) {
+      requestAnimationFrame(() => {
+        updateLocation()
+        requestAnimationFrame(() => {
+          updateLocation()
+        })
+      })
+    }
   })
 
   return { updateLocation }

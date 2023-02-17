@@ -5,10 +5,10 @@
         <v-img v-if="member.avatar" :src="member.avatar" />
       </v-avatar>
 
-      <div class="pl-6 font-weight-medium">
+      <div class="ps-6 font-weight-medium">
         <div class="text-h5 mb-1 font-weight-bold d-flex align-center">
           <span
-            class="mr-3"
+            class="me-3"
             v-text="member.name"
           />
 
@@ -22,7 +22,7 @@
                 <a
                   v-if="link.href"
                   :href="link.href"
-                  class="d-inline-flex text-decoration-none mr-1"
+                  class="d-inline-flex text-decoration-none me-1"
                   rel="noopener"
                   target="_blank"
                   v-bind="activatorProps"

@@ -10,7 +10,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, Text, toRef } from 'vue'
-import { convertToUnit, defineComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef } from 'vue'
@@ -26,7 +26,7 @@ export const makeVIconProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-icon')
 
-export const VIcon = defineComponent({
+export const VIcon = genericComponent()({
   name: 'VIcon',
 
   props: makeVIconProps(),

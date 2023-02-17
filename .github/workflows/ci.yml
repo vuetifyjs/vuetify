@@ -8,8 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: next
-  LOCAL_BRANCH: docs/update-from-crowdin
+  CROWDIN_BRANCH: v3
 
 jobs:
   close:
@@ -140,12 +139,9 @@ jobs:
           TAG_NAME: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        uses: actions/create-release@v1
+        run: yarn conventional-github-releaser -p vuetify
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: ${{ env.RELEASE_TAG }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
@@ -182,7 +178,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: eo
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 
@@ -195,7 +190,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: ja
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 #
@@ -208,7 +202,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: zh-CN
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 

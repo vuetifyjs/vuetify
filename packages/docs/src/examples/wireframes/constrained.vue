@@ -3,7 +3,7 @@
     <v-app-bar flat>
       <v-container class="fill-height d-flex align-center">
         <v-avatar
-          class="mr-10 ml-4"
+          class="me-10 ms-4"
           color="grey-darken-1"
           size="32"
         ></v-avatar>

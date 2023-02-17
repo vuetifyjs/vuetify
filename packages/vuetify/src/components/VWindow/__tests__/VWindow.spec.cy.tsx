@@ -154,7 +154,7 @@ describe('VWindow', () => {
 
     cy.get('@arrows').eq(1).click()
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const window = wrapper.findComponent<VWindow>('.v-window')
 
       expect(window.emitted('update:modelValue')).to.deep.equal([['one'], ['three']])

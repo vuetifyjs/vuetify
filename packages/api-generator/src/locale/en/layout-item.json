@@ -1,7 +1,7 @@
 {
   "props": {
-    "absolute": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))",
-    "name": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))",
-    "order": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/layout-item.json))"
+    "absolute": "Applies **position: absolute** to the component.",
+    "name": "Assign a specific name for layout registration.",
+    "order": "Adjust the order of the component in relation to its registration order."
   }
 }

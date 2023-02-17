@@ -2,13 +2,14 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { defineComponent, toRefs } from 'vue' // eslint-disable-line no-restricted-imports
+import { toRefs } from 'vue'
+import { genericComponent } from '@/util'
 
 // Types
-import type { DefaultsOptions } from '@/composables/defaults'
 import type { PropType } from 'vue'
+import type { DefaultsOptions } from '@/composables/defaults'
 
-export const VDefaultsProvider = defineComponent({
+export const VDefaultsProvider = genericComponent(false)({
   name: 'VDefaultsProvider',
 
   props: {

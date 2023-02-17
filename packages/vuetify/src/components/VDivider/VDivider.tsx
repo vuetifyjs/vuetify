@@ -3,17 +3,16 @@ import './VDivider.sass'
 
 // Composables
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-// Types
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = defineComponent({
+export const VDivider = genericComponent()({
   name: 'VDivider',
 
   props: {
@@ -28,7 +27,7 @@ export const VDivider = defineComponent({
 
   setup (props, { attrs }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
@@ -52,11 +51,11 @@ export const VDivider = defineComponent({
             'v-divider--vertical': props.vertical,
           },
           themeClasses.value,
-          backgroundColorClasses.value,
+          textColorClasses.value,
         ]}
         style={[
           dividerStyles.value,
-          backgroundColorStyles.value,
+          textColorStyles.value,
         ]}
         aria-orientation={
           !attrs.role || attrs.role === 'separator'

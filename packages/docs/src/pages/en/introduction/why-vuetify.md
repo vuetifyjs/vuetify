@@ -9,9 +9,6 @@ related:
   - /introduction/roadmap/
   - /introduction/enterprise-support/
 ---
-<script setup>
-  import Comparison from '@/components/introduction/Comparison.vue'
-</script>
 
 # Introduction
 
@@ -27,7 +24,6 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 * [Why you should use it](#why-vuetify)
 * [Features at a glance](#feature-guides)
-* [Framework comparison](#comparison)
 
 ## Getting started
 
@@ -35,7 +31,11 @@ The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](htt
 
 ## Why Vuetify? { id="why-vuetify" }
 
-Vuetify is a powerful UI Component Framework built from the ground up to be easy to learn and rewarding to master. Our collection of UI components maintain a consistent style throughout your application with enough customization options to meet any use-case.
+Vuetify is a powerful Vue Component Framework built from the ground up to be easy to learn and rewarding to master. Our collection of UI components maintain a consistent style throughout your application with enough customization options to meet any use-case.
+
+### It's free { id="its-free" }
+
+Vuetify is an Open Source project available for free under the [MIT licensed](http://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
 
 ### Flexible components
 
@@ -77,12 +77,6 @@ Vuetify has been in active development since 2016 and is constantly responding t
 
 In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
 
-### Framework comparison
-
-Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
-
-<comparison />
-
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 
 ## Feature Guides
@@ -104,8 +98,5 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
 | [Blueprints](/features/blueprints/) | Advanced | 10 min |
 | [Treeshaking](/features/treeshaking/) | Advanced | 15 min |
-
-<!-- | [Presets](/features/presets/) | Advanced | 15 min | -->
-<!-- | [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min | -->
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).

@@ -9,12 +9,21 @@ import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import type { PropType } from 'vue'
-import { ref, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { ref, watch } from 'vue'
 
-export const VTimelineItem = defineComponent({
+// Types
+import type { PropType } from 'vue'
+
+// Types
+export type VTimelineItemSlots = {
+  default: []
+  icon: []
+  opposite: []
+}
+
+export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   name: 'VTimelineItem',
 
   props: {

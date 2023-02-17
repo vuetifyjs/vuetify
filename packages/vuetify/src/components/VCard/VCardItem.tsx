@@ -9,9 +9,20 @@ import { IconValue } from '@/composables/icons'
 import { makeDensityProps } from '@/composables/density'
 
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VCardItem = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VCardItemSlots = MakeSlots<{
+  default: []
+  prepend: []
+  append: []
+  title: []
+  subtitle: []
+}>
+
+export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
 
   props: {

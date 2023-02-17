@@ -5,7 +5,7 @@ meta:
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
 related:
-  - /components/data-iterators/
+  - /components/paginations/
   - /components/tables/
   - /components/lists/
 ---
@@ -53,6 +53,8 @@ You can find more information and examples [here](/components/data-tables/virtua
 | [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
 | [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props
@@ -87,7 +89,7 @@ The **show-select** prop will render a checkbox in the default header to toggle 
 
 You can use the dynamic slots `item.<key>` to customize only certain columns. `<key>` is the name of the **key** property in header items sent to **headers**. So to customize the calories column we're using the `item.calories` slot.
 
-<example file="v-data-table/slot-item" />
+<example file="v-data-table/slot-item-key" />
 
 #### Simple checkbox
 

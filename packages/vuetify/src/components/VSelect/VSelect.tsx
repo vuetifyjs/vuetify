@@ -111,7 +111,15 @@ export const VSelect = genericComponent<new <
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const menu = useProxiedModel(props, 'menu')
+    const vMenuRef = ref<VMenu>()
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        _menu.value = v
+      },
+    })
     const { items, transformIn, transformOut } = useItems(props)
     const model = useProxiedModel(
       props,
@@ -141,13 +149,11 @@ export const VSelect = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
-      model.value = []
-
       if (props.openOnClear) {
         menu.value = true
       }
     }
-    function onClickControl () {
+    function onMousedownControl () {
       if (
         (props.hideNoData && !items.value.length) ||
         props.readonly || form?.isReadonly.value
@@ -158,8 +164,11 @@ export const VSelect = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
-      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
+      if (['Enter', ' ', 'ArrowDown', 'ArrowUp', 'Home', 'End'].includes(e.key)) {
         e.preventDefault()
+      }
+
+      if (['Enter', 'ArrowDown', ' '].includes(e.key)) {
         menu.value = true
       }
 
@@ -170,13 +179,10 @@ export const VSelect = genericComponent<new <
       if (e.key === 'ArrowDown') {
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
       } else if (e.key === 'Home') {
-        e.preventDefault()
         listRef.value?.focus('first')
       } else if (e.key === 'End') {
-        e.preventDefault()
         listRef.value?.focus('last')
       }
     }
@@ -232,7 +238,7 @@ export const VSelect = genericComponent<new <
           appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }
-          onClick:control={ onClickControl }
+          onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
         >
@@ -241,10 +247,12 @@ export const VSelect = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-select__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }

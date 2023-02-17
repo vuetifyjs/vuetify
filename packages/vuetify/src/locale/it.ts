@@ -22,8 +22,8 @@ export default {
     itemsPerPageAll: 'Tutti',
     nextPage: 'Pagina seguente',
     prevPage: 'Pagina precedente',
-    firstPage: 'Pagina prima',
-    lastPage: 'Pagina ultima',
+    firstPage: 'Prima pagina',
+    lastPage: 'Ultima pagina',
     pageText: '{0}-{1} di {2}',
   },
   datePicker: {
@@ -38,7 +38,7 @@ export default {
     prev: 'Vista precedente',
     next: 'Prossima vista',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'Carousel slide {0} di {1}',
     },
   },
   calendar: {
@@ -50,8 +50,8 @@ export default {
     appendAction: '{0} appended action',
   },
   fileInput: {
-    counter: '{0} files',
-    counterSize: '{0} files ({1} in totale)',
+    counter: '{0} file',
+    counterSize: '{0} file ({1} in totale)',
   },
   timePicker: {
     am: 'AM',
@@ -70,7 +70,7 @@ export default {
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Valutazione {0} di {1}',
     },
   },
 }

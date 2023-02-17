@@ -1,5 +1,5 @@
 <template>
-  <div class="border rounded mt-12">
+  <div class="border rounded my-6">
     <v-autocomplete
       v-model="search"
       :items="releases"

@@ -95,25 +95,28 @@ export function stringifyProps (props: any) {
   )
 }
 
-const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, string | Record<string, string>> => {
+async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
   try {
-    const data = require(`./locale/${locale}/${componentName}`)
-    return Object.assign(fallback, data)
+    const data = await import(new URL(`../src/locale/${locale}/${componentName}.json`, import.meta.url).pathname, {
+      assert: { type: 'json' },
+    })
+    return Object.assign(fallback, data.default)
   } catch (err) {
+    console.error(err.message?.split('imported from')[0] ?? err.message)
     return fallback
   }
 }
 
-function getSources (kebabName: string, sources: string[], locale: string) {
-  const arr = [
+async function getSources (kebabName: string, sources: string[], locale: string) {
+  const arr = await Promise.all([
     loadLocale(kebabName, locale),
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
-  ]
+  ])
 
   return {
     find: (section: string, key?: string) => {
-      return arr.reduce<string | null>((str, source) => {
+      return arr.reduce((str, source) => {
         if (str) return str
         return key ? source?.[section]?.[key] : source?.[section]
       }, null) ?? 'MISSING DESCRIPTION'
@@ -121,9 +124,9 @@ function getSources (kebabName: string, sources: string[], locale: string) {
   }
 }
 
-export function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
+export async function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
@@ -135,14 +138,14 @@ export function addDescriptions (kebabName: string, componentData: ComponentData
   }
 }
 
-export function addDirectiveDescriptions (
+export async function addDirectiveDescriptions (
   kebabName: string,
   componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
   sources: string[],
   locales: string[]
 ) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     if (componentData.argument) {
       for (const [name, arg] of Object.entries(componentData.argument)) {
