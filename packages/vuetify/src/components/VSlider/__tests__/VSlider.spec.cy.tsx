@@ -220,7 +220,7 @@ describe('VSlider', () => {
         .should(_ => {
           expect(currentValue.value).equal(2.0011)
         })
-        .trigger('mousemove', 150, 0, { force: true }) // move to sixth step
+        .trigger('mousemove', 160, 0, { force: true }) // move to sixth step
         .should(_ => {
           expect(currentValue.value).equal(6.0051)
         })
