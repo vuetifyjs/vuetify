@@ -173,15 +173,17 @@ export const VColorPickerCanvas = defineComponent({
           width={ props.width }
           height={ props.height }
         />
-        <div
-          class={[
-            'v-color-picker-canvas__dot',
-            {
-              'v-color-picker-canvas__dot--disabled': props.disabled,
-            },
-          ]}
-          style={ dotStyles.value }
-        />
+        { props.color && (
+          <div
+            class={[
+              'v-color-picker-canvas__dot',
+              {
+                'v-color-picker-canvas__dot--disabled': props.disabled,
+              },
+            ]}
+            style={ dotStyles.value }
+          />
+        )}
       </div>
     ))
 
