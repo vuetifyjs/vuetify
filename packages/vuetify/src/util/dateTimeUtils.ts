@@ -1,7 +1,11 @@
 import { createRange, padStart } from '@/util'
 
-export function getFirstWeekdayOfMonth (year: number, month: number) {
-  return new Date(`${year}-${month}-01`).getDay()
+export function getFirstDayOfMonth (year: number, month: number) {
+  return new Date(year, month, 1)
+}
+
+export function getLastDayOfMonth (year: number, month: number) {
+  return new Date(year, month + 1, 0)
 }
 
 function getNumberOfDaysInMonth (year: number, month: number) {

@@ -4,7 +4,7 @@ import { createVuetify } from 'vuetify/src/framework'
 import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
 import { fa } from 'vuetify/src/iconsets/fa-svg'
 import { ar, en, ja, sv } from 'vuetify/src/locale'
-import DateFnsAdapter from 'vuetify/src/adapters/date-fns'
+import DateFnsAdapter from 'vuetify/src/adapters/vuetify'
 
 export default createVuetify({
   ssr: !!process.env.VITE_SSR,
