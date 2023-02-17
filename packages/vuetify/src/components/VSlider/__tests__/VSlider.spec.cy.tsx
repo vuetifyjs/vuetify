@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { ref } from 'vue'
 import { VApp } from '@/components/VApp'
 import { CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
@@ -192,5 +193,43 @@ describe('VSlider', () => {
         </CenteredGrid>
       </VApp>
     ))
+  })
+ 
+  // #16634
+  describe('rouding & decimals', () => {
+    it('should respect the decimals from both step and min', () => {
+
+      const currentValue = ref(1.001)
+
+      cy.mount(() => (
+        <VApp>
+          <CenteredGrid width="300px">
+            <VSlider 
+              v-model={ currentValue.value }
+              step={1.001}
+              min={1.0001}
+              max={10} 
+            />
+          </CenteredGrid>
+        </VApp>
+      ))
+
+      cy.get('.v-slider-thumb')
+        .trigger('mouseover')
+        .trigger('mousedown', { which: 1 })
+        .trigger('mousemove', 50, 0, { force: true }) // move to second step
+        .should( _ => {
+          expect(currentValue.value).equal(2.0011)
+        })
+        .trigger('mousemove', 150, 0, { force: true }) // move to sixth step
+        .should( _ => {
+          expect(currentValue.value).equal(6.0051)
+        })
+        .trigger('mousemove', 300, 0, { force: true }) // move to the final step
+        .should( _ => {
+          expect(currentValue.value).equal(10)
+        })
+        .trigger('mouseup')
+    })
   })
 })
