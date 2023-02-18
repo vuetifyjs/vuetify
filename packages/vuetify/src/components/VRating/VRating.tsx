@@ -102,9 +102,6 @@ export const VRating = genericComponent<VRatingSlots>()({
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
     const hoverIndex = ref(-1)
-    const focusIndex = ref(-1)
-    const firstRef = ref<HTMLElement>()
-    let isClicking = false
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
@@ -127,18 +124,6 @@ export const VRating = genericComponent<VRatingSlots>()({
         hoverIndex.value = -1
       }
 
-      function onFocus () {
-        if (value === 0 && normalizedValue.value === 0) {
-          firstRef.value?.focus()
-        } else {
-          focusIndex.value = value
-        }
-      }
-
-      function onBlur () {
-        if (!isClicking) focusIndex.value = -1
-      }
-
       function onClick () {
         if (props.disabled || props.readonly) return
         rating.value = normalizedValue.value === value && props.clearable ? 0 : value
@@ -147,24 +132,14 @@ export const VRating = genericComponent<VRatingSlots>()({
       return {
         onMouseenter: props.hover ? onMouseenter : undefined,
         onMouseleave: props.hover ? onMouseleave : undefined,
-        onFocus,
-        onBlur,
         onClick,
       }
     }))
 
-    function onMousedown () {
-      isClicking = true
-    }
-
-    function onMouseup () {
-      isClicking = false
-    }
-
     const name = computed(() => props.name ?? `v-rating-${getUid()}`)
 
     function VRatingItem ({ value, index, showStar = true }: { value: number, index: number, showStar?: boolean }) {
-      const { onMouseenter, onMouseleave, onFocus, onBlur, onClick } = eventState.value[index + 1]
+      const { onMouseenter, onMouseleave, onClick } = eventState.value[index + 1]
       const id = `${name.value}-${String(value).replace('.', '-')}`
       const btnProps = {
         color: itemState.value[index]?.color,
@@ -173,7 +148,6 @@ export const VRating = genericComponent<VRatingSlots>()({
         icon: itemState.value[index]?.icon,
         ripple: props.ripple,
         size: props.size,
-        tag: 'span',
         variant: 'plain' as Variant,
       }
 
@@ -185,8 +159,6 @@ export const VRating = genericComponent<VRatingSlots>()({
               'v-rating__item--half': props.halfIncrements && value % 1 > 0,
               'v-rating__item--full': props.halfIncrements && value % 1 === 0,
             }}
-            onMousedown={ onMousedown }
-            onMouseup={ onMouseup }
             onMouseenter={ onMouseenter }
             onMouseleave={ onMouseleave }
             onClick={ onClick }
@@ -214,9 +186,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             type="radio"
             value={ value }
             checked={ normalizedValue.value === value }
-            onFocus={ onFocus }
-            onBlur={ onBlur }
-            ref={ index === 0 ? firstRef : undefined }
+            tabindex={-1}
             readonly={ props.readonly }
             disabled={ props.disabled }
           />
@@ -255,14 +225,7 @@ export const VRating = genericComponent<VRatingSlots>()({
                   ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
                   : undefined
               }
-              <div
-                class={[
-                  'v-rating__item',
-                  {
-                    'v-rating__item--focused': Math.ceil(focusIndex.value) === value,
-                  },
-                ]}
-              >
+              <div class="v-rating__item">
                 { props.halfIncrements ? (
                   <>
                     <VRatingItem value={ value - 0.5 } index={ i * 2 } />
