@@ -1,5 +1,6 @@
 <template>
   <v-system-bar
+    v-if="showBanner"
     class="px-4 py-1 "
     color="#e7f0f6"
     height="52"
@@ -22,9 +23,32 @@
     >
       Go to Vuetify 2
     </v-btn>
+
+    <v-btn
+      class="ms-6 me-2"
+      density="comfortable"
+      size="small"
+      icon="$clear"
+      variant="plain"
+      @click="onClose"
+    />
   </v-system-bar>
 </template>
 
 <script setup>
-  //
+  import { useUserStore } from '@/store/user'
+  import { computed } from 'vue'
+  import { differenceInHours } from 'date-fns'
+
+  const user = useUserStore()
+
+  const showBanner = computed(() => {
+    const now = Date.now()
+
+    return differenceInHours(now, Number(user.notifications.last.v2banner)) > 1
+  })
+
+  function onClose () {
+    user.notifications.last.v2banner = Date.now()
+  }
 </script>
