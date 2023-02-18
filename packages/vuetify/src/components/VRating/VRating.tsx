@@ -29,6 +29,7 @@ type VRatingItemSlot = {
   icon: IconValue
   color?: string
   props: Record<string, unknown>
+  rating: number
 }
 
 type VRatingItemLabelSlot = {
@@ -188,6 +189,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             onMouseup={ onMouseup }
             onMouseenter={ onMouseenter }
             onMouseleave={ onMouseleave }
+            onClick={ onClick }
           >
             <span class="v-rating__hidden">{ t(props.itemAriaLabel, value, props.length) }</span>
             {
@@ -197,6 +199,7 @@ export const VRating = genericComponent<VRatingSlots>()({
                 props: btnProps,
                 value,
                 index,
+                rating: normalizedValue.value,
               })
               : (
                 <VBtn { ...btnProps } />
@@ -211,7 +214,6 @@ export const VRating = genericComponent<VRatingSlots>()({
             type="radio"
             value={ value }
             checked={ normalizedValue.value === value }
-            onClick={ onClick }
             onFocus={ onFocus }
             onBlur={ onBlur }
             ref={ index === 0 ? firstRef : undefined }

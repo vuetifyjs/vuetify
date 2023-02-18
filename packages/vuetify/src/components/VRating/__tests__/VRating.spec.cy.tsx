@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VBtn } from '@/components/VBtn'
 import { Application } from '../../../../cypress/templates'
 import { VRating } from '../VRating'
 
@@ -147,5 +148,24 @@ describe('VRating', () => {
     cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
 
     cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
+  })
+
+  it('should work with item slot', () => {
+    cy.mount(() => (
+      <Application>
+        <VRating>
+          {{
+            item: ({ value, rating }) => (
+              <VBtn variant="tonal" class="mx-1" color={rating === value ? 'primary' : undefined}>{ value }</VBtn>
+            ),
+          }}
+        </VRating>
+      </Application>
+    ))
+
+    cy.get('.v-btn')
+      .eq(2)
+      .click()
+      .should('have.class', 'text-primary')
   })
 })
