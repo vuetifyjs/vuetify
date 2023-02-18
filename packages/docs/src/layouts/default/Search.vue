@@ -39,7 +39,7 @@
       <ais-instant-search
         :search-client="searchClient"
         :search-function="searchFunction"
-        index-name="vuetifyjs"
+        index-name="vuetifyjs-v2"
       >
         <ais-configure
           :facetFilters="[`lang:${locale}`]"
