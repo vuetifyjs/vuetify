@@ -60,6 +60,7 @@ export const makeVFieldProps = propsFactory({
   },
   active: Boolean,
   color: String,
+  baseColor: String,
   dirty: Boolean,
   disabled: Boolean,
   error: Boolean,
@@ -132,12 +133,9 @@ export const VField = genericComponent<new <T>() => {
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return (
-        isActive.value &&
-        isFocused.value &&
-        !props.error &&
-        !props.disabled
-      ) ? props.color : undefined
+      return props.error || props.disabled ? undefined
+        : isActive.value && isFocused.value ? props.color
+        : props.baseColor
     }))
 
     watch(isActive, val => {
