@@ -1,6 +1,9 @@
 // Styles
 import './VColorPickerCanvas.sass'
 
+// Composables
+import { useResizeObserver } from '@/composables/resizeObserver'
+
 // Utilities
 import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender } from '@/util'
 import { computed, onMounted, ref, watch } from 'vue'
@@ -8,7 +11,6 @@ import { computed, onMounted, ref, watch } from 'vue'
 // Types
 import type { HSV } from '@/util'
 import type { PropType } from 'vue'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
@@ -149,7 +151,7 @@ export const VColorPickerCanvas = defineComponent({
       ctx.fillRect(0, 0, canvas.width, canvas.height)
     }
 
-    watch(() => props.color?.h, updateCanvas, { immediate: true, flush: 'post' })
+    watch(() => props.color?.h, updateCanvas, { immediate: true })
     watch(() => [canvasWidth.value, canvasHeight.value], (newVal, oldVal) => {
       updateCanvas()
       dotPosition.value = {
