@@ -20,6 +20,7 @@ import {
 
 // Types
 import type { SlotsToProps } from '@/util'
+import { watch } from 'vue'
 
 const UP = -1
 const DOWN = 1
@@ -142,6 +143,8 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
       }
     })
+
+    watch(props.items, handleScroll)
 
     useRender(() => (
       <div
