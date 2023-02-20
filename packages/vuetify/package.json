@@ -125,7 +125,6 @@
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/test-utils": "2.0.0",
-    "@vueuse/head": "~0.7.6",
     "acorn-walk": "^8.2.0",
     "autoprefixer": "^10.4.13",
     "babel-plugin-add-import-extension": "1.5.1",

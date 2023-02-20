@@ -24,7 +24,7 @@ import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { HeadAttrs, HeadClient } from '@vueuse/head'
+import type { HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -306,19 +306,30 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
   function install (app: App) {
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
-      head.addHeadObjs(computed(() => {
-        const style: HeadAttrs = {
-          children: styles.value,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
+      if (head.push) {
+        head.push({
+          style: [{
+            children: styles,
+            id: 'vuetify-theme-stylesheet',
+            nonce: parsedOptions.cspNonce || false as never,
+          }],
+        })
+      } else {
+        function getHead () {
+          return {
+            style: [{
+              children: styles.value,
+              id: 'vuetify-theme-stylesheet',
+              nonce: parsedOptions.cspNonce || false as never,
+            }],
+          }
         }
-        if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
-
-        return { style: [style] }
-      }))
-
-      if (IN_BROWSER) {
-        watchEffect(() => head.updateDOM())
+        if (IN_BROWSER) {
+          head.addHeadObjs(computed(getHead))
+          watchEffect(() => head.updateDOM())
+        } else {
+          head.addHeadObjs(getHead())
+        }
       }
     } else {
       let styleEl = IN_BROWSER
