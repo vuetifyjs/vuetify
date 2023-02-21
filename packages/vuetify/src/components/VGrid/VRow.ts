@@ -3,7 +3,7 @@ import './VGrid.sass'
 
 // Composables
 import { makeTagProps } from '@/composables/tag'
-import { breakpoints } from '@/composables/breakpoint'
+import { breakpoints } from './breakpoints'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
@@ -11,49 +11,50 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { Prop, PropType } from 'vue'
-import type { BreakPoint } from '@/composables/breakpoint'
+import type { Breakpoint } from './breakpoints'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 
-type BreakPointAlign = `align${Capitalize<BreakPoint>}`
-type BreakPointJustify = `justify${Capitalize<BreakPoint>}`
-type BreakPointAlignContent = `alignContent${Capitalize<BreakPoint>}`
+type BreakpointAlign = `align${Capitalize<Breakpoint>}`
+type BreakpointJustify = `justify${Capitalize<Breakpoint>}`
+type BreakpointAlignContent = `alignContent${Capitalize<Breakpoint>}`
 
 const SPACE = ['space-between', 'space-around', 'space-evenly'] as const
 
 function makeRowProps <
-  U extends BreakPointAlign | BreakPointJustify | BreakPointAlignContent, T
-> (prefix: string, def: () => Prop<T, null>) {
+  Name extends BreakpointAlign | BreakpointJustify | BreakpointAlignContent,
+  Type,
+> (prefix: string, def: () => Prop<Type, null>) {
   return breakpoints.reduce((props, val) => {
-    const prefixKey = prefix + capitalize(val) as U
+    const prefixKey = prefix + capitalize(val) as Name
     props[prefixKey] = def()
     return props
-  }, {} as Record<U, Prop<T, null>>)
+  }, {} as Record<Name, Prop<Type, null>>)
 }
 
 const ALIGN_VALUES = [...ALIGNMENT, 'baseline', 'stretch'] as const
-type AlignProp = typeof ALIGN_VALUES[number]
+type AlignValue = typeof ALIGN_VALUES[number]
 const alignValidator = (str: any) => ALIGN_VALUES.includes(str)
-const alignProps = makeRowProps<BreakPointAlign, AlignProp>('align', () => ({
-  type: String as PropType<AlignProp>,
+const alignProps = makeRowProps<BreakpointAlign, AlignValue>('align', () => ({
+  type: String as PropType<AlignValue>,
   default: null,
   validator: alignValidator,
 }))
 
 const JUSTIFY_VALUES = [...ALIGNMENT, ...SPACE] as const
-type JustifyProp = typeof JUSTIFY_VALUES[number]
+type JustifyValue = typeof JUSTIFY_VALUES[number]
 const justifyValidator = (str: any) => JUSTIFY_VALUES.includes(str)
-const justifyProps = makeRowProps<BreakPointJustify, JustifyProp>('justify', () => ({
-  type: String as PropType<JustifyProp>,
+const justifyProps = makeRowProps<BreakpointJustify, JustifyValue>('justify', () => ({
+  type: String as PropType<JustifyValue>,
   default: null,
   validator: justifyValidator,
 }))
 
 const ALIGN_CONTENT_VALUES = [...ALIGNMENT, ...SPACE, 'stretch'] as const
-type AlignContentProp = typeof ALIGN_CONTENT_VALUES[number]
+type AlignContentValue = typeof ALIGN_CONTENT_VALUES[number]
 const alignContentValidator = (str: any) => ALIGN_CONTENT_VALUES.includes(str)
-const alignContentProps = makeRowProps<BreakPointAlignContent, AlignContentProp>('alignContent', () => ({
-  type: String as PropType<AlignContentProp>,
+const alignContentProps = makeRowProps<BreakpointAlignContent, AlignContentValue>('alignContent', () => ({
+  type: String as PropType<AlignContentValue>,
   default: null,
   validator: alignContentValidator,
 }))
