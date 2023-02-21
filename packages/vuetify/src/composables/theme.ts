@@ -303,27 +303,23 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
+  function getHead () {
+    return {
+      style: [{
+        children: styles.value,
+        id: 'vuetify-theme-stylesheet',
+        nonce: parsedOptions.cspNonce || false as never,
+      }],
+    }
+  }
+
   function install (app: App) {
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
       if (head.push) {
-        head.push({
-          style: [{
-            children: styles,
-            id: 'vuetify-theme-stylesheet',
-            nonce: parsedOptions.cspNonce || false as never,
-          }],
-        })
+        const entry = head.push(getHead)
+        watch(styles, () => { entry.patch(getHead) })
       } else {
-        function getHead () {
-          return {
-            style: [{
-              children: styles.value,
-              id: 'vuetify-theme-stylesheet',
-              nonce: parsedOptions.cspNonce || false as never,
-            }],
-          }
-        }
         if (IN_BROWSER) {
           head.addHeadObjs(computed(getHead))
           watchEffect(() => head.updateDOM())
