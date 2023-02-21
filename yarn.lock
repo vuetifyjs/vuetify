@@ -14551,6 +14551,6 @@ yocto-queue@^0.1.0:
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
 zhead@^2.0.0:
-  version "2.0.4"
-  resolved "https://registry.yarnpkg.com/zhead/-/zhead-2.0.4.tgz#42509bbe85b790de9121301eac47d440d9073876"
-  integrity sha512-V4R94t3ifk9AURym6OskbKcnowzgp5Z88tkoL/NF67vyryNxC62u6mx5F1Ux4oh4+YN7FFmKYEyWy6m5kfPH6g==
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/zhead/-/zhead-2.0.2.tgz#sha1-TdNk0IYKBwxdnZIPOlzjr7ckKxE="
+  integrity sha512-a+Ye1MpwTpTSfJQnE6Rbc0P96fLLROpDHXowZwh8xwKyj+V3QFXkT1HKegLf1gBls9Eqj2IfyJvWwn7C9FuObQ==
