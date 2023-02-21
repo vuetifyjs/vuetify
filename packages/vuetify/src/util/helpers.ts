@@ -336,8 +336,8 @@ export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
 
-export function getDecimals (value: string) {
-  const trimmedStr = value.trim()
+export function getDecimals (value: number) {
+  const trimmedStr = value.toString().trim()
   return trimmedStr.includes('.')
     ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
     : 0
