@@ -37,7 +37,7 @@ export function parseColor (color: any): HSV | null {
     }
   }
 
-  return hsva != null ? { ...hsva, a: hsva.a ?? 1 } : null
+  return hsva
 }
 
 function stripAlpha (color: any, stripAlpha: boolean) {
@@ -65,7 +65,7 @@ export function extractColor (color: HSV, input: any) {
     else if (has(input, ['h', 's', 'l'])) converted = HSVtoHSL(color)
     else if (has(input, ['h', 's', 'v'])) converted = color
 
-    return stripAlpha(converted, !has(input, ['a']))
+    return stripAlpha(converted, !has(input, ['a']) && color.a === 1)
   }
 
   return color

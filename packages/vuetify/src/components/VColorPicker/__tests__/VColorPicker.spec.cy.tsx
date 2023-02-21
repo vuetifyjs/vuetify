@@ -307,4 +307,41 @@ describe('VColorPicker', () => {
     cy.get('.bg-primary').should('not.exist')
     cy.get('.text-primary').should('not.exist')
   })
+
+  it('should not show dot or input values if no color is set', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker />
+      </Application>
+    ))
+
+    cy.get('.v-color-picker-canvas__dot').should('not.exist')
+      .get('.v-color-picker-edit__input input').should('have.value', '')
+      .get('.v-color-picker-canvas canvas').then(canvas => {
+        const width = canvas.width() ?? 0
+        const height = canvas.height() ?? 0
+
+        cy.wrap(canvas).click(width / 2, height / 2)
+      })
+      .get('.v-color-picker-canvas__dot').should('exist')
+      .get('.v-color-picker-edit__input input').invoke('val').should('not.be.empty')
+  })
+
+  it('should emit correct color when typing in hex field', () => {
+    cy.mount(() => (
+      <Application>
+        <VColorPicker mode="hexa" />
+      </Application>
+    ))
+
+    cy.get('.v-color-picker-edit__input input')
+      .type('FF00CC')
+      .blur()
+      .vue()
+      .then(({ wrapper }) => {
+        const picker = wrapper.findComponent(VColorPicker)
+        const emitted = picker.emitted('update:modelValue')
+        expect(emitted).to.deep.equal([['#FF00CC']])
+      })
+  })
 })
