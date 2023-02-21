@@ -302,12 +302,8 @@ describe('CustomNavigationDrawer.vue', () => {
 
 A complete list of all services available are listed below:
 
-- [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
-- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
+- [composables](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/composables)
 - [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
-- [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
-- [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
-- [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
 
 ## E2E tests
 
