@@ -39,7 +39,7 @@ const app = new Vue({
 ```
 
 ```js { resource="3.0" }
-const app = createVue()
+const app = createApp()
 
 const vuetify = createVuetify({ ... })
 
