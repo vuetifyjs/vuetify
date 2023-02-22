@@ -124,6 +124,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                     sticky={ props.fixedHeader }
                     loading={ props.loading }
                     color={ props.color }
+                    v-slots={ slots }
                   />
                 ) }
               </thead>
