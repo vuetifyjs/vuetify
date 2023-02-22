@@ -7,25 +7,30 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { defineComponent, useRender } from '@/util'
+
+// Utilities
+import { genericComponent, useRender } from '@/util'
 
 const rootTypes = ['heading', 'subheading', 'image', 'text']
 
-export const VSkeletonBone = defineComponent({
+export const VSkeletonBone = genericComponent()({
   name: 'VSkeletonBone',
+
   props: {
     boilerplate: Boolean,
     loading: Boolean,
     type: {
       type: String,
-      validator: (val: string) => val in rootTypes,
-      default: '',
+      validator: (val: string) => rootTypes.includes(val),
+      default: 'image',
     },
+
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeThemeProps(),
     ...makeDimensionProps(),
   },
+
   setup (props) {
     const { themeClasses } = provideTheme(props)
     const { dimensionStyles } = useDimension(props)
@@ -35,13 +40,8 @@ export const VSkeletonBone = defineComponent({
     useRender(() => (
       <div
         class={[
-          'v-skeleton-loader',
-          'v-skeleton-loader__bone',
-          {
-            'v-skeleton-loader--boilerplate': props.boilerplate,
-            'v-skeleton-loader--is-loading': props.loading,
-          },
-          `v-skeleton-loader__${props.type}`,
+          'v-skeleton-bone',
+          `v-skeleton-bone__${props.type}`,
           themeClasses.value,
           elevationClasses.value,
           roundedClasses.value,
@@ -54,5 +54,7 @@ export const VSkeletonBone = defineComponent({
         role="alert"
       />
     ))
+
+    return {}
   },
 })
