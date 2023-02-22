@@ -29,9 +29,15 @@
   height: $skeleton-button-height
   width: $skeleton-button-width
 
+  + .v-skeleton-bone__button
+    margin-left: 8px
+
 .v-skeleton-bone__heading
   height: $skeleton-heading-height
   width: 45%
+
+  + .v-skeleton-bone__subheading
+    margin-top: 4px
 
 .v-skeleton-bone__subheading
   height: $skeleton-heading-height * 0.8
@@ -39,6 +45,13 @@
 
 .v-skeleton-bone__image
   height: $skeleton-image-height
+
+.v-skeleton-bone__sheet
+  background: white
+  display: flex
+  align-items: center
+  padding: .5rem 1rem
+  min-height: 56px
 
 .v-skeleton-bone__text
   flex: 1 0 auto

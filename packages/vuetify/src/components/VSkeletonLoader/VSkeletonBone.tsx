@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-const rootTypes = ['avatar', 'button', 'heading', 'subheading', 'image', 'text']
+export const rootTypes = ['avatar', 'button', 'heading', 'subheading', 'image', 'sheet', 'text']
 
 export const VSkeletonBone = genericComponent()({
   name: 'VSkeletonBone',
@@ -31,7 +31,7 @@ export const VSkeletonBone = genericComponent()({
     ...makeDimensionProps(),
   },
 
-  setup (props) {
+  setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
@@ -52,7 +52,9 @@ export const VSkeletonBone = genericComponent()({
         aria-busy="true"
         aria-live="polite"
         role="alert"
-      />
+      >
+        { slots.default?.() }
+    </div>
     ))
 
     return {}
