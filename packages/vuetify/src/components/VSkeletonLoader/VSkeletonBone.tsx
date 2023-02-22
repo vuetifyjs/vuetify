@@ -11,7 +11,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
-const rootTypes = ['heading', 'subheading', 'image', 'text']
+const rootTypes = ['avatar', 'button', 'heading', 'subheading', 'image', 'text']
 
 export const VSkeletonBone = genericComponent()({
   name: 'VSkeletonBone',

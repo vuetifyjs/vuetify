@@ -4,41 +4,45 @@
 @use './variables' as *
 
 .v-skeleton-bone
+  background: $skeleton-text-background
   overflow: hidden
   position: relative
 
   &--rounded
-    @include tools.rounded($skeleton-loader-heading-border-radius)
-
+    @include tools.rounded($skeleton-heading-border-radius)
 
   &::after
     @include tools.absolute(true)
 
-    animation: $skeleton-loader-loading-animation
-    background: $skeleton-loader-background
-    transform: $skeleton-loader-loading-transform
+    animation: $skeleton-loading-animation
+    background: $skeleton-background
+    transform: $skeleton-loading-transform
     z-index: 1
 
-.v-skeleton-bone__heading,
-.v-skeleton-bone__subheading,
-.v-skeleton-bone__image,
-.v-skeleton-bone__text
-  background: $skeleton-loader-text-background
+.v-skeleton-bone__avatar
+  height: $skeleton-avatar-size
+  width: $skeleton-avatar-size
+
+  @include tools.rounded($skeleton-avatar-border-radius)
+
+.v-skeleton-bone__button
+  height: $skeleton-button-height
+  width: $skeleton-button-width
 
 .v-skeleton-bone__heading
-  height: $skeleton-loader-heading-height
+  height: $skeleton-heading-height
   width: 45%
 
 .v-skeleton-bone__subheading
-  height: $skeleton-loader-heading-height * 0.8
+  height: $skeleton-heading-height * 0.8
   width: 35%
 
 .v-skeleton-bone__image
-  height: $skeleton-loader-image-height
+  height: $skeleton-image-height
 
 .v-skeleton-bone__text
   flex: 1 0 auto
-  height: $skeleton-loader-text-height
+  height: $skeleton-text-height
 
   + &
     margin-bottom: 6px
