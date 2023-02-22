@@ -1,11 +1,10 @@
 <template>
   <v-system-bar
     v-if="showBanner"
-    class="px-4 py-1 "
     color="#e7f0f6"
     height="52"
   >
-    <div class="text-blue-darken-3 text-start">
+    <div class="text-blue-darken-3 text-start ms-4">
       <div class="text-caption">
         You are currently viewing the documentation for <strong>Vuetify 3</strong>
       </div>
@@ -25,7 +24,7 @@
     </v-btn>
 
     <v-btn
-      class="ms-6 me-2"
+      class="ms-6 me-6"
       density="comfortable"
       size="small"
       icon="$clear"
