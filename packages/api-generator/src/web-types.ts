@@ -1,7 +1,7 @@
 import fs from 'fs'
 import { capitalize } from './helpers/text'
 import type { Definition, ObjectDefinition } from './types'
-const pkg = require('../package.json')
+import pkg from '../package.json' assert { type: 'json' }
 
 type ComponentData = {
   props: Definition

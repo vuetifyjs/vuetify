@@ -60,17 +60,17 @@ export default {
   pagination: {
     ariaLabel: {
       root: 'Pagination Navigation',
-      next: 'Next page',
-      previous: 'Previous page',
-      page: 'Goto Page {0}',
-      currentPage: 'Current Page, Page {0}',
+      next: 'Seuraava sivu',
+      previous: 'Edellinen sivu',
+      page: 'Mene sivulle {0}',
+      currentPage: 'Nykyinen sivu, Sivu {0}',
       first: 'First page',
       last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      item: 'Rating {0} of {1}',
+      item: 'Luokitus {0}/{1}',
     },
   },
 }

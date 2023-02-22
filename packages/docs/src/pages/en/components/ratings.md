@@ -24,7 +24,11 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-rating](/api/v-rating/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -56,7 +60,7 @@ For ratings that are not meant to be changed you can use **readonly** prop.
 
 #### Hover effect
 
-TODO
+When using the **hover** prop, the rating icons will become a solid color and slightly increase its scale when the mouse is hovered over them.
 
 <example file="v-rating/prop-hover" />
 

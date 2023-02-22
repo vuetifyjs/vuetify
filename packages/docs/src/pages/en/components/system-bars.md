@@ -47,6 +47,8 @@ The recommended placement of elements inside of `v-system-bar` is:
 | - | - |
 | [v-system-bar](/api/v-system-bar/) | Primary component |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props

@@ -9,5 +9,6 @@
   "no-inline-html": false,
   "no-emphasis-as-heading": false,
   "no-bare-urls": false,
-  "emphasis-style": false
+  "emphasis-style": false,
+  "link-fragments": false
 }

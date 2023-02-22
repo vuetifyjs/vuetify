@@ -22,15 +22,26 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent, EventProp } from '@/util'
+import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
-export const VChip = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VChipSlots = MakeSlots<{
+  default: []
+  label: []
+  prepend: []
+  append: []
+}>
+
+export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },
@@ -95,6 +106,7 @@ export const VChip = defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { t } = useLocale()
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
@@ -266,6 +278,7 @@ export const VChip = defineComponent({
             >
               <div
                 class="v-chip__close"
+                aria-label={ t(props.closeLabel) }
                 onClick={ onCloseClick }
               >
                 { slots.close ? slots.close() : (<VIcon />) }

@@ -30,7 +30,6 @@ import { computed, watch } from 'vue'
 import { EventProp, genericComponent, useRender } from '@/util'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
@@ -48,15 +47,15 @@ export type ListItemSubtitleSlot = {
   subtitle?: string
 }
 
-export const VListItem = genericComponent<new () => {
-  $props: SlotsToProps<{
-    prepend: [ListItemSlot]
-    append: [ListItemSlot]
-    default: [ListItemSlot]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+type VListItemSlots = {
+  prepend: [ListItemSlot]
+  append: [ListItemSlot]
+  default: [ListItemSlot]
+  title: [ListItemTitleSlot]
+  subtitle: [ListItemSubtitleSlot]
+}
+
+export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
   directives: { Ripple },

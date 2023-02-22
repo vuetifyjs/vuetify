@@ -13,9 +13,15 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
 
-export const VRadioGroup = defineComponent({
+// Types
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+
+export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
+
+export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,

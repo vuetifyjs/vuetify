@@ -18,6 +18,7 @@
             <v-item v-slot="{ isSelected, toggle }">
               <v-img
                 :src="`https://cdn.vuetifyjs.com/images/${item.src}`"
+                cover
                 height="150"
                 class="text-right pa-2"
                 @click="toggle"

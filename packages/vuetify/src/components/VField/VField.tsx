@@ -109,7 +109,6 @@ export const VField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
@@ -195,8 +194,6 @@ export const VField = genericComponent<new <T>() => {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
-
-      emit('click:control', e)
     }
 
     useRender(() => {

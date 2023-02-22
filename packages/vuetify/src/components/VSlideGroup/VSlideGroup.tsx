@@ -20,7 +20,6 @@ import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers
 
 // Types
 import type { InjectionKey } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
@@ -32,13 +31,13 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
-export const VSlideGroup = genericComponent<new () => {
-  $props: SlotsToProps<{
-    default: [SlideGroupSlot]
-    prev: [SlideGroupSlot]
-    next: [SlideGroupSlot]
-  }>
-}>()({
+type VSlideGroupSlots = {
+  default: [SlideGroupSlot]
+  prev: [SlideGroupSlot]
+  next: [SlideGroupSlot]
+}
+
+export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
 
   props: {

@@ -1,6 +1,5 @@
 {
   "props": {
-    "appendIcon": "The icon used in the append slot (if shown)",
     "centerActive": "Forces the selected chip to be centered",
     "column": "Remove horizontal pagination and wrap items as needed",
     "mobileBreakpoint": "Sets the designated mobile breakpoint for the component.",

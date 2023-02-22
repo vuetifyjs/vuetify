@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col
-        v-for="(m, n) in 25"
+        v-for="(_, n) in 25"
         :key="n"
         cols="auto"
       >

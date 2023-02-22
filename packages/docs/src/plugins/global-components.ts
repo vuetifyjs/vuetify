@@ -19,7 +19,6 @@ import AppTitle from '@/components/app/Title.vue'
 import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 import Backmatter from '@/components/Backmatter.vue'
 import BreakpointsTable from '@/components/features/BreakpointsTable.vue'
-import Bsa from '@/components/promoted/Bsa.vue'
 import Carbon from '@/components/promoted/Carbon.vue'
 import ColorPalette from '@/components/features/ColorPalette.vue'
 import Discovery from '@/components/promoted/Discovery.vue'
@@ -63,7 +62,6 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('ApiSection', ApiSection)
     .component('Backmatter', Backmatter)
     .component('BreakpointsTable', BreakpointsTable)
-    .component('Bsa', Bsa)
     .component('ColorPalette', ColorPalette)
     .component('Carbon', Carbon)
     .component('Discovery', Discovery)

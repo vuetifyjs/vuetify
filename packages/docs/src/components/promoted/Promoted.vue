@@ -1,7 +1,7 @@
 <template>
   <a
     v-if="ad"
-    class="d-flex mb-4"
+    class="d-block mb-4"
     style="max-width: 640px;"
     v-bind="attrs"
     @click="onClick"

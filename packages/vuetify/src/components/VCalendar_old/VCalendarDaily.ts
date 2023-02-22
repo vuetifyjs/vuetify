@@ -85,8 +85,8 @@ export default CalendarWithIntervals.extend({
         key: day.date,
         staticClass: 'v-calendar-daily_head-day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':day', _e => {
-          return this.getSlotScope(day)
+        on: this.getDefaultMouseEventHandlers(':day', nativeEvent => {
+          return { nativeEvent, ...this.getSlotScope(day) }
         }),
       }, [
         this.genHeadWeekday(day),
@@ -123,8 +123,8 @@ export default CalendarWithIntervals.extend({
         on: this.getMouseEventHandlers({
           'click:date': { event: 'click', stop: true },
           'contextmenu:date': { event: 'contextmenu', stop: true, prevent: true, result: false },
-        }, _e => {
-          return day
+        }, nativeEvent => {
+          return { nativeEvent, ...day }
         }),
       }, this.dayFormatter(day, false))
     },
@@ -170,8 +170,8 @@ export default CalendarWithIntervals.extend({
         key: day.date,
         staticClass: 'v-calendar-daily__day',
         class: this.getRelativeClasses(day),
-        on: this.getDefaultMouseEventHandlers(':time', e => {
-          return this.getSlotScope(this.getTimestampAtEvent(e, day))
+        on: this.getDefaultMouseEventHandlers(':time', nativeEvent => {
+          return { nativeEvent, ...this.getSlotScope(this.getTimestampAtEvent(nativeEvent, day)) }
         }),
       }, [
         ...this.genDayIntervals(index),
@@ -195,6 +195,7 @@ export default CalendarWithIntervals.extend({
           height,
           ...styler(interval),
         },
+
       }
 
       const children = getSlot(this, 'interval', () => this.getSlotScope(interval))
@@ -208,8 +209,8 @@ export default CalendarWithIntervals.extend({
         style: {
           width,
         },
-        on: this.getDefaultMouseEventHandlers(':interval', e => {
-          return this.getTimestampAtEvent(e, this.parsedStart)
+        on: this.getDefaultMouseEventHandlers(':interval', nativeEvent => {
+          return { nativeEvent, ...this.getTimestampAtEvent(nativeEvent, this.parsedStart) }
         }),
       }
 

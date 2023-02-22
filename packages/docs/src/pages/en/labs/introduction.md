@@ -7,7 +7,7 @@ meta:
 related:
   - /getting-started/installation/
   - /getting-started/browser-support/
-  - /components/all/
+  - /introduction/sponsors-and-backers/
 ---
 
 # Vuetify Labs

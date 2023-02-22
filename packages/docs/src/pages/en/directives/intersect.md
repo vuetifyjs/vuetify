@@ -7,6 +7,7 @@ meta:
 related:
   - /components/cards/
   - /components/images/
+  - /components/text-fields/
 ---
 
 # Intersection observer

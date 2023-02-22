@@ -1,103 +1,96 @@
 [
   {
     "title": "introduction",
-    "icon": "$mdiScriptTextOutline:$mdiScriptText",
+    "inactiveIcon": "mdi-script-text-outline",
+    "activeIcon": "mdi-script-text",
     "items": [
       "why-vuetify",
       "long-term-support",
       "roadmap",
+      "meet-the-team",
+      "sponsors-and-backers",
       { "divider": true },
-      { "heading": "professional-support" },
-      "support",
-      "enterprise"
+      { "subheader": "professional-support" },
+      "enterprise-support"
     ]
   },
   {
     "title": "getting-started",
-    "icon": "$mdiSpeedometerMedium:$mdiSpeedometer",
+    "inactiveIcon": "mdi-speedometer-medium",
+    "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
-      "browser-support",
-      "frequently-asked-questions",
       "wireframes",
-      "unit-testing",
-      "release-notes",
+      "browser-support",
       "upgrade-guide",
+      "release-notes",
       "contributing"
     ]
   },
   {
     "title": "features",
-    "icon": "$mdiImageEditOutline:$mdiImageEdit",
+    "inactiveIcon": "mdi-image-edit-outline",
+    "activeIcon": "mdi-image-edit",
     "items": [
-      "accessibility",
-      "bidirectionality",
-      "breakpoints",
-      "global-config",
+      "aliasing",
+      "application-layout",
+      "blueprints",
+      "display-and-platform",
+      "global-configuration",
       "icon-fonts",
       "internationalization",
-      "layouts",
-      "presets",
       "sass-variables",
-      "scrolling",
       "theme",
       "treeshaking"
     ]
   },
   {
     "title": "styles",
-    "icon": "$mdiPaletteOutline:$mdiPalette",
+    "inactiveIcon": "mdi-palette-outline",
+    "activeIcon": "mdi-palette",
     "items": [
       "css-reset",
-      "border-radius",
+      "transitions",
       "colors",
+      { "divider": true },
+      {
+        "subheader": "utility-classes"
+      },
+      "border-radius",
       "content",
       "display",
       "elevation",
       "flex",
       "float",
       "overflow",
+      "sizing",
       "spacing",
-      "text-and-typography",
-      "transitions"
+      "text-and-typography"
     ]
   },
   {
-    "title": "ui-components",
-    "icon": "$mdiViewDashboardOutline:$mdiViewDashboard",
-    "group": "components",
+    "title": "components",
+    "inactiveIcon": "mdi-view-dashboard-outline",
+    "activeIcon": "mdi-view-dashboard",
     "items": [
+      "all",
       "alerts",
-      "application",
       "aspect-ratios",
       "avatars",
       "badges",
       "banners",
-      {
-        "title": "bars",
-        "group": "components",
-        "items": [
-          "app-bars",
-          "toolbars",
-          "system-bars"
-        ]
-      },
-      "bottom-navigation",
-      "bottom-sheets",
       "breadcrumbs",
       "buttons",
-      "floating-action-buttons",
-      "calendars",
       "cards",
       "carousels",
       "chips",
-      "dialogs",
+      "color-pickers",
       "dividers",
       "expansion-panels",
-      "footer",
       {
         "title": "form-inputs-and-controls",
-        "group": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
         "items": [
           "autocompletes",
           "checkboxes",
@@ -105,12 +98,10 @@
           "file-inputs",
           "forms",
           "inputs",
-          "otp-input",
-          "overflow-btns",
           "radio-buttons",
-          "range-sliders",
           "selects",
           "sliders",
+          "range-sliders",
           "switches",
           "textareas",
           "text-fields"
@@ -119,12 +110,10 @@
       "grids",
       {
         "title": "groups",
-        "group": "components",
         "items": [
           "button-groups",
           "chip-groups",
           "item-groups",
-          "list-item-groups",
           "slide-groups",
           "windows"
         ]
@@ -132,61 +121,64 @@
       "hover",
       "icons",
       "images",
+      {
+        "title": "layout",
+        "items": [
+          "app-bars",
+          "bottom-navigation",
+          "footers",
+          "navigation-drawers",
+          "system-bars"
+        ]
+      },
       "lazy",
       "lists",
-      "menus",
-      "navigation-drawers",
-      "overlays",
+      "no-ssr",
+      {
+        "title": "overlays",
+        "items": [
+          "overlays",
+          "dialogs",
+          "menus",
+          "tooltips"
+        ]
+      },
       "paginations",
       "parallax",
       {
-        "title": "pickers",
-        "group": "components",
-        "items": [
-          "color-pickers",
-          "date-pickers",
-          "date-pickers-month",
-          "time-pickers"
-        ]
-      },
-      {
         "title": "progress",
-        "group": "components",
         "items": [
           "progress-circular",
           "progress-linear"
         ]
       },
-      "ratings",
-      "sheets",
-      "skeleton-loaders",
-      "snackbars",
-      "sparklines",
-      "steppers",
       {
-        "title": "tables",
-        "group": "components",
+        "title": "providers",
         "items": [
-          "data-iterators",
-          "simple-tables",
-          "data-tables"
+          "defaults-providers",
+          "locale-providers",
+          "theme-providers"
         ]
       },
+      "ratings",
+      "sheets",
+      "snackbars",
+      "tables",
       "tabs",
       "timelines",
-      "tooltips",
-      "treeview",
-      "virtual-scroller"
+      "toolbars"
     ]
   },
   {
     "title": "api",
-    "icon": "$mdiFlaskEmptyOutline:$mdiFlaskOutline",
-    "group": "api"
+    "inactiveIcon": "mdi-flask-empty-outline",
+    "activeIcon": "mdi-flask-outline",
+    "items": []
   },
   {
     "title": "directives",
-    "icon": "$mdiFunction",
+    "inactiveIcon": "mdi-function",
+    "activeIcon": "mdi-function",
     "items": [
       "click-outside",
       "intersect",
@@ -198,20 +190,45 @@
     ]
   },
   {
+    "title": "labs",
+    "inactiveIcon": "mdi-beaker-outline",
+    "activeIcon": "mdi-beaker",
+    "items": [
+      "introduction",
+      {
+        "title": "data-tables",
+        "subfolder": "components",
+        "activeIcon": "",
+        "inactiveIcon": "",
+        "items": [
+          "basics",
+          "headers",
+          "sorting",
+          "pagination",
+          "filtering",
+          "grouping",
+          "slots",
+          "virtual-tables",
+          "server-side-tables"
+        ]
+      },
+      "virtual-scroller"
+    ]
+  },
+  {
     "title": "resources",
-    "icon": "$mdiHumanMaleBoard",
+    "inactiveIcon": "mdi-human-male-board",
+    "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "themes",
       "ui-kits"
     ]
   },
   {
     "title": "about",
-    "icon": "$mdiVuetify",
+    "inactiveIcon": "mdi-vuetify",
+    "activeIcon": "mdi-vuetify",
     "items": [
-      "meet-the-team",
-      "sponsors-and-backers",
       "security-disclosure",
       "code-of-conduct"
     ]

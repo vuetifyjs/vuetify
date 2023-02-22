@@ -1,6 +1,5 @@
 <template>
   <v-sheet
-    v-if="sponsors.length"
     id="home-sponsors"
     class="mx-auto pa-3"
     color="transparent"

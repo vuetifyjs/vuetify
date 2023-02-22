@@ -7,7 +7,7 @@ meta:
 related:
   - /components/button-groups/
   - /components/icons/
-  - /components/floating-action-buttons/
+  - /components/cards/
 ---
 
 # Buttons
@@ -46,6 +46,8 @@ The recommended placement of elements inside of `v-btn` is:
 | Component | Description |
 | - | - |
 | [v-btn](/api/v-btn) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

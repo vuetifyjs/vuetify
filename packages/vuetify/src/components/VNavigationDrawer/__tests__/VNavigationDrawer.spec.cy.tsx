@@ -21,7 +21,7 @@ describe('VNavigationDrawer', () => {
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--temporary')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       wrapper.setProps({ permanent: true })
     })
 
@@ -35,7 +35,7 @@ describe('VNavigationDrawer', () => {
       </VLayout>
     ))
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       wrapper.setProps({ rail: true, expandOnHover: true })
     })
 
@@ -129,7 +129,7 @@ describe('VNavigationDrawer', () => {
 
     cy.get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--active')
 
-    cy.vue().then(wrapper => wrapper.setProps({ active: true }))
+    cy.vue().then(({ wrapper }) => wrapper.setProps({ active: true }))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
   })

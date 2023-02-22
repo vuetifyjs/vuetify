@@ -109,7 +109,15 @@ export const VCombobox = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = useProxiedModel(props, 'menu')
+    const vMenuRef = ref<VMenu>()
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        _menu.value = v
+      },
+    })
     const selectionIndex = ref(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
@@ -182,13 +190,11 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
-      model.value = []
-
       if (props.openOnClear) {
         menu.value = true
       }
     }
-    function onClickControl () {
+    function onMousedownControl () {
       if (
         (props.hideNoData && !items.value.length) ||
         props.readonly || form?.isReadonly.value
@@ -356,8 +362,7 @@ export const VCombobox = genericComponent<new <
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           readonly={ props.readonly }
           onClick:clear={ onClear }
-          onClick:control={ onClickControl }
-          onClick:input={ onClickControl }
+          onMousedown:control={ onMousedownControl }
           onFocus={ () => isFocused.value = true }
           onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
@@ -367,6 +372,7 @@ export const VCombobox = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-combobox__content"

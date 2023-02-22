@@ -6,6 +6,8 @@ meta:
   keywords: theme provider, vuetify theme provider component, vue theme provider component
 related:
   - /features/theme/
+  - /styles/colors/
+  - /features/application-layout/
 ---
 
 # Theme providers

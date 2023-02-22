@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, ref, toRaw, watch } from 'vue'
 import { getCurrentInstance, toKebabCase } from '@/util'
 import { useToggleScope } from '@/composables/toggleScope'
 
@@ -46,14 +46,12 @@ export function useProxiedModel<
 
   const model = computed({
     get (): any {
-      return transformIn(isControlled.value ? props[prop] : internal.value)
+      return transformIn(toRaw(isControlled.value ? props[prop] : internal.value))
     },
-    set (value) {
-      const newValue = transformOut(value)
-      if (
-        (isControlled.value ? props[prop] : internal.value) === newValue ||
-        transformIn(isControlled.value ? props[prop] : internal.value) === value
-      ) {
+    set (internalValue) {
+      const newValue = transformOut(internalValue)
+      const value = toRaw(isControlled.value ? props[prop] : internal.value)
+      if (value === newValue || transformIn(value) === internalValue) {
         return
       }
       internal.value = newValue

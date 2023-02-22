@@ -18,13 +18,14 @@ import { createSort, makeDataTableSortProps } from './composables/sort'
 
 // Utilities
 import { provide, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
+import type { VDataTableSlots } from './VDataTable'
 
-export const VDataTableServer = defineComponent({
+export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',
 
   props: {
@@ -74,7 +75,7 @@ export const VDataTableServer = defineComponent({
 
     const { opened } = createGroupBy(props, groupBy, sortBy)
 
-    const { page, itemsPerPage, startIndex, stopIndex, pageCount } = createPagination(props, items)
+    const { page, itemsPerPage } = createPagination(props, items)
 
     const { flatItems } = useGroupedItems(items, groupBy, opened)
 
@@ -84,9 +85,6 @@ export const VDataTableServer = defineComponent({
       page,
       itemsPerPage,
       sortBy,
-      startIndex,
-      stopIndex,
-      pageCount,
       groupBy,
     })
 

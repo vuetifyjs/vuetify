@@ -19,7 +19,7 @@ Vuetify blueprints are a new way to pre-configure your entire application with a
 
 ## Usage
 
-Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
+Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#material-design-1) preset:
 
 ```js { resource=plugins/vuetify.js }
 import { createVuetify } from 'vuetify'

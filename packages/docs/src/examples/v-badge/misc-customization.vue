@@ -15,7 +15,7 @@
 
     <v-badge
       bordered
-      location="bottom-end"
+      location="bottom end"
       color="deep-purple-accent-4"
       dot
       offset-x="2"

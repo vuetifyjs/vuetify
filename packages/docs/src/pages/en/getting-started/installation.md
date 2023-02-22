@@ -111,9 +111,9 @@ Lastly, do not forget to install [icons](/features/icon-fonts/).
 
 We recommend using the latest version of Vuetify 3 from [jsdelivr](https://www.jsdelivr.com/). All components and styles are included.
 
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css`
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.css` { .text-truncate }
 
-`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js`
+`https://cdn.jsdelivr.net/npm/vuetify@{{ version }}/dist/vuetify.min.js` { .text-truncate }
 
 ```js
 const { createApp } = Vue
@@ -151,6 +151,16 @@ See [SASS Variables](/features/sass-variables/) for more information.
 | `vuetify`          | Global CSS (reset, utilities, etc.), no component styles. Equivalent to `vuetify/styles` in JS. |
 | `vuetify/settings` | All SASS variables, including component variables.                                              |
 | `vuetify/tools`    | Mixins and functions.                                                                           |
+
+## Nightly Builds
+
+The three development branches (`master`, `dev`, and `next`) are automatically published to NPM at 1200 UTC under the [`@vuetify/nightly`](https://www.npmjs.com/package/@vuetify/nightly?activeTab=versions) namespace. They may be outdated or buggy and are therefore not officially supported and are only supplied for testing puposes. These builds can be installed with a [package alias](https://docs.npmjs.com/cli/v8/commands/npm-install#:~:text=Install%20a%20package%20under%20a%20custom%20alias).
+
+| Branch name | Purpose          | package.json entry                         | Changelog                                                           |
+|-------------|------------------|--------------------------------------------|---------------------------------------------------------------------|
+| `master`    | Bug fixes        | `"vuetify": "npm:@vuetify/nightly@latest"` | [Changelog](https://unpkg.com/@vuetify/nightly@latest/CHANGELOG.md) |
+| `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
+| `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
 
 ## Questions
 

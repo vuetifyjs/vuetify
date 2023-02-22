@@ -45,6 +45,8 @@ The recommended placement of elements inside of `v-avatar` is:
 | - | - |
 | [v-avatar](/api/v-avatar/) | Primary Component |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props

@@ -14,13 +14,13 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { animate, defineComponent, pick, standardEasing, useRender } from '@/util'
+import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
 
 // Types
-import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
-export const VTab = defineComponent({
+export const VTab = genericComponent()({
   name: 'VTab',
 
   props: {
