@@ -180,64 +180,68 @@ export const VCalendarCategory = defineComponent({
 
     return () =>
       (
-        <VCalendarDaily { ...props }>
-          {
-            {
-              'day-category-header': () =>
+        <VCalendarDaily
+          { ...props }
+          v-slots={{
+            'day-category-header': slotData =>
+              (
+                <div class="v-calendar-category__columns">
+                  { parsedCategories.value.map(category => {
+                    return (
+                      <div class="v-calendar-category__column-header">
+                        { slots.category?.(category) || (
+                          <div class="v-calendar-category__category">
+                            { typeof category === 'object'
+                              ? props.categoryName
+                              : category === null
+                                ? props.categoryForInvalid
+                                : typeof category === 'object'
+                                  ? category.categoryName
+                                  : category
+                            }
+                          </div>
+                        )}
+                        { slots['day-header']?.(category) }
+                      </div>
+                    )
+                  }) }
+                </div>
+              ),
+            'category-columns': ({ intervals }) =>
+              days.value.map((day, index) =>
                 (
-                  <div class="v-calendar-category__columns">
-                    { parsedCategories.value.map(category => {
-                      return (
-                        <div class="v-calendar-category__column-header">
-                          { slots.category?.(category) || (
-                            <div class="v-calendar-category__category">
-                              { typeof category === 'object'
-                                ? props.categoryName
-                                : category === null
-                                  ? props.categoryForInvalid
-                                  : typeof category === 'object'
-                                    ? category.categoryName
-                                    : category
-                              }
-                            </div>
-                          )}
-                          { slots['day-header']?.(category) }
+                  <div
+                    key={day.date}
+                    class={['v-calendar-daily__day', getRelativeClasses(day)]}
+                  >
+                    { intervals[index].map(interval =>
+                      (
+                        <div
+                          key={interval.time}
+                          class="v-calendar-daily__day-interval"
+                          style={{
+                            height: convertToUnit(props.intervalHeight),
+                            ...(props.intervalStyle || intervalStyleDefault),
+                          }}
+                        >
+                          { slots.interval?.(getCategoryScope(getSlotScope(interval), category))}
                         </div>
                       )
-                    }) }
-                  </div>
-                ),
-              'category-columns': ({ intervals }) =>
-                days.value.forEach((day, index) =>
-                  (
-                    <div
-                      key={day.date}
-                      class={['v-calendar-daily__day', getRelativeClasses(day)]}
-                    >
-                      { intervals[index].map(interval =>
-                        (
-                          <div
-                            key={interval.time}
-                            class="v-calendar-daily__day-interval"
-                            style={{
-                              height: convertToUnit(props.intervalHeight),
-                              ...(props.intervalStyle || intervalStyleDefault),
-                            }}
-                          >
-                            { slots.interval?.(getCategoryScope(getSlotScope(interval), day.category))}
+                    ) }
+                    <div class="v-calendar-category__columns">
+                      { parsedCategories.value.map(category => {
+                        return (
+                          <div class="v-calendar-category__column" >
+                            { slots['day-body']?.(getCategoryScope(getSlotScope(day), category))}
                           </div>
                         )
-                      )}
-                      <div class="v-calendar-category__columns">
-                        <div class="v-calendar-category__column" >
-                          { slots['day-body']?.(getCategoryScope(getSlotScope(day), day.category))}
-                        </div>
-                      </div>
+                      })}
                     </div>
-                  )
-                ),
-            }
-          }
+                  </div>
+                )
+              ),
+          }}
+        >
         </VCalendarDaily>
       )
   },

@@ -270,8 +270,8 @@ export const VCalendarDaily = defineComponent({
                           </slot>
                         </div>
                         <div>
-                          <slot name="day-category-header" { ...{ week: days.value, ...day, index } }></slot>
-                          <slot name="day-header" { ...{ week: days.value, ...day, index } }></slot>
+                          { slots['day-category-header']?.({ ...{ week: days.value, ...day, index } })}
+                          { slots['day-header']?.({ ...{ week: days.value, ...day, index } }) }
                         </div>
                       </div>
                     )
