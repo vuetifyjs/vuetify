@@ -12,7 +12,7 @@ import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
@@ -85,6 +85,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               'v-data-table__th--sorted': isSorted,
             },
             loaderClasses.value,
+            ...wrapInArray(column.class),
           ]}
           style={{
             width: convertToUnit(column.width),
