@@ -5,6 +5,11 @@ import './VSkeletonLoader.sass'
 // Components
 import { VSkeletonBone } from './VSkeletonBone'
 
+// Composables
+
+import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
 // Utilities
 import { genericComponent, useRender, wrapInArray } from '@/util'
 import type { PropType } from 'vue'
@@ -76,34 +81,47 @@ export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
 
   props: {
+    boilerplate: Boolean,
+    loading: Boolean,
     type: {
       type: [String, Array] as PropType<string | string[]>,
       validator: (val: string) => rootTypes.includes(val),
       default: 'card',
     },
+
+    ...makeElevationProps(),
+    ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
-    const items = computed(() => {
-      return flattenTypes(props.type as any)
+    const { themeClasses } = provideTheme(props)
+    const { elevationClasses } = useElevation(props)
+
+    useRender(() => {
+      return (
+        <div
+          class={[
+            'v-skeleton-loader',
+            themeClasses.value,
+            elevationClasses.value,
+          ]}
+        >
+          { props.type === 'card' && (
+            <VSkeletonBone
+              class="v-skeleton-loader-card"
+              key="card"
+              type="sheet"
+            >
+              <VSkeletonBone type="image" />
+
+              <VSkeletonBone type="heading" />
+            </VSkeletonBone>
+          )}
+
+          { slots.default?.() }
+        </div>
+      )
     })
-
-    useRender(() => (
-      <div
-        class={[
-          'v-skeleton-loader',
-        ]}
-      >
-        { items.value.map((item, i) => (
-          <VSkeletonBone
-            key={i}
-            type={item.type}
-          />
-        )) }
-
-        { slots.default?.() }
-      </div>
-    ))
 
     return {}
   },
