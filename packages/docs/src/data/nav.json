@@ -72,6 +72,18 @@
     ]
   },
   {
+    "title": "concepts",
+    "inactiveIcon": "mdi-hammer-sickle",
+    "activeIcon": "mdi-hammer-sickle",
+    "items": [
+      "density-and-sizing",
+      "items",
+      "routing",
+      "v-model",
+      "variants"
+    ]
+  },
+  {
     "title": "components",
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
