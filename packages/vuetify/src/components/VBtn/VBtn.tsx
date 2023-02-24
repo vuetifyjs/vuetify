@@ -1,3 +1,4 @@
+/* eslint-disable complexity */
 // Styles
 import './VBtn.sass'
 
@@ -190,50 +191,64 @@ export const VBtn = genericComponent<VBtnSlots>()({
           { genOverlays(true, 'v-btn') }
 
           { !props.icon && hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VIcon: {
-                  icon: props.prependIcon,
-                },
-              }}
-            >
-              <span class="v-btn__prepend">
-                { slots.prepend?.() ?? (<VIcon />) }
-              </span>
-            </VDefaultsProvider>
+            <span key="prepend" class="v-btn__prepend">
+              { !slots.prepend && (
+                <VIcon key="prepend-icon" icon={ props.prependIcon } />
+              ) }
+
+              { slots.prepend && (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !props.prependIcon }
+                  defaults={{
+                    VIcon: {
+                      icon: props.prependIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              ) }
+            </span>
           ) }
 
           <span class="v-btn__content" data-no-activator="">
-            <VDefaultsProvider
-              key="content"
-              defaults={{
-                VIcon: {
-                  icon: hasIcon ? props.icon : undefined,
-                },
-              }}
-            >
-              { slots.default?.() ?? (
-                hasIcon && (
-                  <VIcon key="icon" />
-                )
-              ) }
-            </VDefaultsProvider>
+            { slots.default && (
+              <VDefaultsProvider
+                key="content-defaults"
+                disabled={ !hasIcon }
+                defaults={{
+                  VIcon: {
+                    icon: props.icon,
+                  },
+                }}
+                v-slots:default={ slots.default }
+              />
+            ) }
+
+            { !slots.default && hasIcon && (
+              <VIcon key="content-icon" icon={ props.icon } />
+            ) }
           </span>
 
           { !props.icon && hasAppend && (
-            <VDefaultsProvider
-              key="append"
-              defaults={{
-                VIcon: {
-                  icon: props.appendIcon,
-                },
-              }}
-            >
-              <span class="v-btn__append">
-                { slots.append?.() ?? (<VIcon />) }
-              </span>
-            </VDefaultsProvider>
+            <span key="append" class="v-btn__append">
+              { slots.append && (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !props.appendIcon }
+                  defaults={{
+                    VIcon: {
+                      icon: props.appendIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.append }
+                />
+              ) }
+
+              { !slots.append && (
+                <VIcon key="append-icon" icon={ props.appendIcon } />
+              ) }
+            </span>
           ) }
 
           { !!props.loading && (

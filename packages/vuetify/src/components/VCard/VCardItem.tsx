@@ -1,8 +1,9 @@
 // Components
-import { VAvatar } from '../VAvatar'
+import { VAvatar } from '@/components/VAvatar'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
-import { VDefaultsProvider } from '../VDefaultsProvider'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -38,32 +39,56 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
 
   setup (props, { slots }) {
     useRender(() => {
-      const hasPrepend = !!(props.prependAvatar || props.prependIcon || slots.prepend)
-      const hasAppend = !!(props.appendAvatar || props.appendIcon || slots.append)
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
+      const hasAppendMedia = !!(props.appendAvatar || props.appendIcon)
+      const hasAppend = !!(hasAppendMedia || slots.append)
       const hasTitle = !!(props.title || slots.title)
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
         <div class="v-card-item">
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VAvatar: {
-                  density: props.density,
-                  icon: props.prependIcon,
-                  image: props.prependAvatar,
-                },
-                VIcon: {
-                  density: props.density,
-                  icon: props.prependIcon,
-                },
-              }}
-            >
-              <div class="v-card-item__prepend">
-                { slots.prepend?.() ?? (<VAvatar />) }
-              </div>
-            </VDefaultsProvider>
+            <div key="prepend" class="v-card-item__prepend">
+              { !slots.prepend && (
+                <>
+                  { props.prependAvatar && (
+                    <VAvatar
+                      key="prepend-avatar"
+                      density={ props.density }
+                      image={ props.prependAvatar }
+                    />
+                  ) }
+
+                  { props.prependIcon && (
+                    <VIcon
+                      key="prepend-icon"
+                      density={ props.density }
+                      icon={ props.prependIcon }
+                    />
+                  ) }
+                </>
+              ) }
+
+              { slots.prepend && (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      icon: props.prependIcon,
+                      image: props.prependAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.prependIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              ) }
+            </div>
           ) }
 
           <div class="v-card-item__content">
@@ -83,24 +108,46 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           </div>
 
           { hasAppend && (
-            <VDefaultsProvider
-              key="append"
-              defaults={{
-                VAvatar: {
-                  density: props.density,
-                  icon: props.appendIcon,
-                  image: props.appendAvatar,
-                },
-                VIcon: {
-                  density: props.density,
-                  icon: props.appendIcon,
-                },
-              }}
-            >
-              <div class="v-card-item__append">
-                { slots.append?.() ?? (<VAvatar />) }
-              </div>
-            </VDefaultsProvider>
+            <div key="append" class="v-card-item__append">
+              { slots.append && (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.append }
+                />
+              ) }
+
+              { !slots.append && (
+                <>
+                  { props.appendIcon && (
+                    <VIcon
+                      key="append-icon"
+                      density={ props.density }
+                      icon={ props.appendIcon }
+                    />
+                  ) }
+
+                  { props.appendAvatar && (
+                    <VAvatar
+                      key="append-avatar"
+                      density={ props.density }
+                      image={ props.appendAvatar }
+                    />
+                  ) }
+                </>
+              ) }
+           </div>
           ) }
         </div>
       )

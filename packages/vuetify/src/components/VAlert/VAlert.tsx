@@ -96,10 +96,12 @@ export const VAlert = genericComponent<VAlertSlots>()({
   },
 
   emits: {
+    'click:close': (e: Event) => true,
     'update:modelValue': (value: boolean) => true,
+    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
@@ -125,8 +127,10 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
     const closeProps = computed(() => ({
       'aria-label': t(props.closeLabel),
-      onClick (e: MouseEvent) {
+      onClick (e: Event) {
         isActive.value = false
+
+        emit('click:close', e)
       },
     }))
 
@@ -176,23 +180,31 @@ export const VAlert = genericComponent<VAlertSlots>()({
           ) }
 
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VIcon: {
-                  density: props.density,
-                  icon: icon.value,
-                  size: props.prominent ? 44 : 28,
-                },
-              }}
-            >
-              <div class="v-alert__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : icon.value && (<VIcon />)
-                }
-              </div>
-            </VDefaultsProvider>
+            <div key="prepend" class="v-alert__prepend">
+              { !slots.prepend && (
+                <VIcon
+                  key="prepend-icon"
+                  density={ props.density }
+                  icon={ icon.value }
+                  size={ props.prominent ? 44 : 28 }
+                />
+              ) }
+
+              { slots.prepend && (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !icon.value }
+                  defaults={{
+                    VIcon: {
+                      density: props.density,
+                      icon: icon.value,
+                      size: props.prominent ? 44 : 28,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              ) }
+            </div>
           ) }
 
           <div class="v-alert__content">
@@ -202,9 +214,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               </VAlertTitle>
             ) }
 
-            { hasText && (
-              slots.text ? slots.text() : props.text
-            ) }
+            { hasText && (slots.text?.() ?? props.text) }
 
             { slots.default?.() }
           </div>
@@ -216,20 +226,32 @@ export const VAlert = genericComponent<VAlertSlots>()({
           ) }
 
           { hasClose && (
-            <VDefaultsProvider
-              key="close"
-              defaults={{
-                VBtn: {
-                  icon: props.closeIcon,
-                  size: 'x-small',
-                  variant: 'text',
-                },
-              }}
-            >
-              <div class="v-alert__close">
-                { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
-              </div>
-            </VDefaultsProvider>
+            <div key="close" class="v-alert__close">
+              { slots.close && (
+                <VDefaultsProvider
+                  key="close-defaults"
+                  defaults={{
+                    VBtn: {
+                      icon: props.closeIcon,
+                      size: 'x-small',
+                      variant: 'text',
+                    },
+                  }}
+                >
+                  { slots.close({ props: closeProps.value }) }
+                </VDefaultsProvider>
+              ) }
+
+              { !slots.close && (
+                <VBtn
+                  key="close-btn"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                  variant="text"
+                  { ...closeProps.value }
+                />
+              ) }
+            </div>
           ) }
         </props.tag>
       )

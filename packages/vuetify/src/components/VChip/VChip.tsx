@@ -124,12 +124,14 @@ export const VChip = genericComponent<VChipSlots>()({
       props.link !== false &&
       (!!group || props.link || link.isClickable.value)
     )
+    const closeProps = computed(() => ({
+      'aria-label': t(props.closeLabel),
+      onClick (e: Event) {
+        isActive.value = false
 
-    function onCloseClick (e: Event) {
-      isActive.value = false
-
-      emit('click:close', e)
-    }
+        emit('click:close', e)
+      },
+    }))
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -149,10 +151,12 @@ export const VChip = genericComponent<VChipSlots>()({
 
     return () => {
       const Tag = (link.isLink.value) ? 'a' : props.tag
-      const hasAppend = !!(slots.append || props.appendIcon || props.appendAvatar)
+      const hasAppendMedia = !!(props.appendIcon || props.appendAvatar)
+      const hasAppend = !!(hasAppendMedia || slots.append)
       const hasClose = !!(slots.close || props.closable)
       const hasFilter = !!(slots.filter || props.filter) && group
-      const hasPrepend = !!(slots.prepend || props.prependIcon || props.prependAvatar)
+      const hasPrependMedia = !!(props.prependIcon || props.prependAvatar)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
       const hasColor = !group || group.isSelected.value
 
       return isActive.value && (
@@ -208,28 +212,37 @@ export const VChip = genericComponent<VChipSlots>()({
           ) }
 
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VAvatar: {
-                  image: props.prependAvatar,
-                },
-                VIcon: {
-                  icon: props.prependIcon,
-                },
-              }}
-            >
-              { slots.prepend
-                ? (
-                  <div class="v-chip__prepend">
-                    { slots.prepend() }
-                  </div>
-                )
-                : props.prependAvatar ? (<VAvatar start />)
-                : props.prependIcon ? (<VIcon start />)
-                : undefined
-              }
-            </VDefaultsProvider>
+            <div key="prepend" class="v-chip__prepend">
+              { !slots.prepend && (
+                <>
+                  { props.prependIcon && (
+                    <VIcon key="prepend-icon" start icon={ props.prependIcon } />
+                  ) }
+
+                  { props.prependAvatar && (
+                    <VAvatar key="prepend-avatar" start icon={ props.prependAvatar } />
+                  ) }
+                </>
+              ) }
+
+              { slots.prepend && (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      image: props.prependAvatar,
+                      start: true,
+                    },
+                    VIcon: {
+                      icon: props.prependIcon,
+                      start: true,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              ) }
+            </div>
           ) }
 
           { slots.default?.({
@@ -242,48 +255,64 @@ export const VChip = genericComponent<VChipSlots>()({
           }) ?? props.text }
 
           { hasAppend && (
-            <VDefaultsProvider
-              key="append"
-              defaults={{
-                VAvatar: {
-                  image: props.appendAvatar,
-                },
-                VIcon: {
-                  icon: props.appendIcon,
-                },
-              }}
-            >
-              { slots.append
-                ? (
-                  <div class="v-chip__append">
-                    { slots.append() }
-                  </div>
-                )
-                : props.appendAvatar ? (<VAvatar end />)
-                : props.appendIcon ? (<VIcon end />)
-                : undefined
-              }
-            </VDefaultsProvider>
+            <div key="append" class="v-chip__append">
+              { slots.append && (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      end: true,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      end: true,
+                      icon: props.appendIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.append }
+                />
+              ) }
+
+              { !slots.append && (
+                <>
+                  { props.appendIcon && (
+                    <VIcon key="append-icon" end icon={ props.appendIcon } />
+                  ) }
+
+                  { props.appendAvatar && (
+                    <VAvatar key="append-avatar" end icon={ props.appendAvatar } />
+                  ) }
+                </>
+              ) }
+            </div>
           ) }
 
           { hasClose && (
-            <VDefaultsProvider
-              key="close"
-              defaults={{
-                VIcon: {
-                  icon: props.closeIcon,
-                  size: 'x-small',
-                },
-              }}
-            >
-              <div
-                class="v-chip__close"
-                aria-label={ t(props.closeLabel) }
-                onClick={ onCloseClick }
-              >
-                { slots.close ? slots.close() : (<VIcon />) }
-              </div>
-            </VDefaultsProvider>
+            <div key="close" class="v-chip__close">
+              { slots.close && (
+                <VDefaultsProvider
+                  key="close-defaults"
+                  defaults={{
+                    VIcon: {
+                      icon: props.closeIcon,
+                      size: 'x-small',
+                    },
+                  }}
+                >
+                  { slots.close({ props: closeProps.value }) }
+                </VDefaultsProvider>
+              ) }
+
+              { !slots.close && (
+                <VIcon
+                  key="close-icon"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                  { ...closeProps.value }
+                />
+              ) }
+            </div>
           ) }
         </Tag>
       )
