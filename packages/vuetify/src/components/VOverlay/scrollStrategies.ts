@@ -147,7 +147,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
   })
 
   onScopeDispose(() => {
-    cancelIdleCallback(ric)
+    typeof cancelIdleCallback !== 'undefined' && cancelIdleCallback(ric)
     cancelAnimationFrame(raf)
   })
 }

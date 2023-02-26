@@ -46,7 +46,7 @@ export function useProxiedModel<
 
   const model = computed({
     get (): any {
-      return transformIn(toRaw(isControlled.value ? props[prop] : internal.value))
+      return transformIn(isControlled.value ? props[prop] : internal.value)
     },
     set (internalValue) {
       const newValue = transformOut(internalValue)

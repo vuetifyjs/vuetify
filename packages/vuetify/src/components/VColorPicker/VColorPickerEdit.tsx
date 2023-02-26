@@ -7,7 +7,7 @@ import { VBtn } from '@/components/VBtn'
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, useRender } from '@/util'
-import { modes } from './util'
+import { modes, nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
@@ -57,20 +57,20 @@ export const VColorPickerEdit = defineComponent({
 
       if (!mode) return []
 
-      const color = props.color ? mode.to(props.color) : {}
+      const color = props.color ? mode.to(props.color) : null
 
       return mode.inputs?.map(({ getValue, getColor, ...inputProps }) => {
         return {
           ...mode.inputProps,
           ...inputProps,
           disabled: props.disabled,
-          value: getValue(color),
+          value: color && getValue(color),
           onChange: (e: InputEvent) => {
             const target = e.target as HTMLInputElement | null
 
             if (!target) return
 
-            emit('update:color', mode.from(getColor(color, target.value)))
+            emit('update:color', mode.from(getColor(color ?? nullColor, target.value)))
           },
         }
       })

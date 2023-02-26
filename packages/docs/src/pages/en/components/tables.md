@@ -26,7 +26,11 @@ The `v-table` component is a simple wrapper component around the `<table>` eleme
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-table](/api/v-table/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
