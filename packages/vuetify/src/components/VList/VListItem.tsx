@@ -170,7 +170,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
     useRender(() => {
       const Tag = isLink.value ? 'a' : props.tag
-      const hasColor = (list && (!isSelected.value || isActive.value)) || !list || isSelected.value || isActive.value
+      const hasColor = (list && !isSelected.value) || !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
       const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
