@@ -44,11 +44,22 @@
 
     @include tools.elevation($field-control-solo-elevation)
 
+  &--variant-solo-inverted
+    background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity))
+    border-color: transparent
+    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+
+    @include tools.elevation($field-control-solo-elevation)
+
+    &.v-field--focused
+      color: rgb(var(--v-theme-on-surface-variant))
+
   &--variant-filled
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
   &--variant-solo,
+  &--variant-solo-inverted,
   &--variant-filled
     $root: &
 
@@ -224,6 +235,7 @@
       visibility: visible
 
     .v-field--variant-solo &,
+    .v-field--variant-solo-inverted &,
     .v-field--variant-filled &
       $root: &
 
@@ -362,14 +374,16 @@
 
 /* endregion */
 /* region OVERLAY */
+.v-field__overlay
+  border-radius: inherit
+  pointer-events: none
+  @include tools.absolute()
+
 .v-field--variant-filled
   .v-field__overlay
     background-color: currentColor
-    border-radius: inherit
     opacity: $field-overlay-filled-opacity
-    pointer-events: none
     transition: opacity $field-subtle-transition-timing
-    @include tools.absolute()
 
   &.v-field--has-background .v-field__overlay
     opacity: 0
@@ -380,6 +394,25 @@
 
   &.v-field--focused .v-field__overlay
     opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+.v-field--variant-solo-inverted
+  .v-field__overlay
+    background-color: currentColor
+    opacity: .04
+    transition: opacity $field-subtle-transition-timing
+
+  &.v-field--has-background .v-field__overlay
+    opacity: 0
+
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc((#{.04} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
+
+  &.v-field--focused .v-field__overlay
+    background-color: rgb(var(--v-theme-surface-variant))
+    opacity: 1
+
+    // opacity: calc((#{1} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
 
 /* endregion */
 /* region MODIFIERS */

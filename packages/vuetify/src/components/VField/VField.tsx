@@ -35,7 +35,7 @@ import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -258,7 +258,7 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           <div class="v-field__field" data-no-activator="">
-            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
+            { ['solo', 'solo-inverted', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
