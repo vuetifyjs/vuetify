@@ -99,7 +99,7 @@ export const VChip = genericComponent<VChipSlots>()({
   },
 
   emits: {
-    'click:close': (e: Event) => true,
+    'click:close': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
     'group:selected': (val: { value: boolean }) => true,
     click: (e: MouseEvent | KeyboardEvent) => true,
@@ -126,7 +126,7 @@ export const VChip = genericComponent<VChipSlots>()({
     )
     const closeProps = computed(() => ({
       'aria-label': t(props.closeLabel),
-      onClick (e: Event) {
+      onClick (e: MouseEvent) {
         isActive.value = false
 
         emit('click:close', e)
@@ -301,13 +301,16 @@ export const VChip = genericComponent<VChipSlots>()({
           ) }
 
           { hasClose && (
-            <div key="close" class="v-chip__close">
+            <div
+              key="close"
+              class="v-chip__close"
+              { ...closeProps.value }
+            >
               { !slots.close ? (
                 <VIcon
                   key="close-icon"
                   icon={ props.closeIcon }
                   size="x-small"
-                  { ...closeProps.value }
                 />
               ) : (
                 <VDefaultsProvider
@@ -318,7 +321,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       size: 'x-small',
                     },
                   }}
-                  v-slots:default={ () => slots.close?.({ props: closeProps.value }) }
+                  v-slots:default={ slots.close }
                 />
               ) }
             </div>
