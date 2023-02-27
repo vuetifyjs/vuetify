@@ -213,19 +213,25 @@ export const VChip = genericComponent<VChipSlots>()({
 
           { hasPrepend && (
             <div key="prepend" class="v-chip__prepend">
-              { !slots.prepend && (
+              { !slots.prepend ? (
                 <>
                   { props.prependIcon && (
-                    <VIcon key="prepend-icon" start icon={ props.prependIcon } />
+                    <VIcon
+                      key="prepend-icon"
+                      icon={ props.prependIcon }
+                      start
+                    />
                   ) }
 
                   { props.prependAvatar && (
-                    <VAvatar key="prepend-avatar" start icon={ props.prependAvatar } />
+                    <VAvatar
+                      key="prepend-avatar"
+                      icon={ props.prependAvatar }
+                      start
+                    />
                   ) }
                 </>
-              ) }
-
-              { slots.prepend && (
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !hasPrependMedia }
@@ -256,7 +262,25 @@ export const VChip = genericComponent<VChipSlots>()({
 
           { hasAppend && (
             <div key="append" class="v-chip__append">
-              { slots.append && (
+              { !slots.append ? (
+                <>
+                  { props.appendIcon && (
+                    <VIcon
+                      key="append-icon"
+                      end
+                      icon={ props.appendIcon }
+                    />
+                  ) }
+
+                  { props.appendAvatar && (
+                    <VAvatar
+                      key="append-avatar"
+                      end
+                      icon={ props.appendAvatar }
+                    />
+                  ) }
+                </>
+              ) : (
                 <VDefaultsProvider
                   key="append-defaults"
                   disabled={ !hasAppendMedia }
@@ -273,24 +297,19 @@ export const VChip = genericComponent<VChipSlots>()({
                   v-slots:default={ slots.append }
                 />
               ) }
-
-              { !slots.append && (
-                <>
-                  { props.appendIcon && (
-                    <VIcon key="append-icon" end icon={ props.appendIcon } />
-                  ) }
-
-                  { props.appendAvatar && (
-                    <VAvatar key="append-avatar" end icon={ props.appendAvatar } />
-                  ) }
-                </>
-              ) }
             </div>
           ) }
 
           { hasClose && (
             <div key="close" class="v-chip__close">
-              { slots.close && (
+              { !slots.close ? (
+                <VIcon
+                  key="close-icon"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                  { ...closeProps.value }
+                />
+              ) : (
                 <VDefaultsProvider
                   key="close-defaults"
                   defaults={{
@@ -299,17 +318,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       size: 'x-small',
                     },
                   }}
-                >
-                  { slots.close({ props: closeProps.value }) }
-                </VDefaultsProvider>
-              ) }
-
-              { !slots.close && (
-                <VIcon
-                  key="close-icon"
-                  icon={ props.closeIcon }
-                  size="x-small"
-                  { ...closeProps.value }
+                  v-slots:default={ () => slots.close?.({ props: closeProps.value }) }
                 />
               ) }
             </div>

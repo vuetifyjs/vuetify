@@ -105,7 +105,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
         >
           { hasPrepend && (
             <div key="prepend" class="v-banner__prepend">
-              { !slots.prepend && (
+              { !slots.prepend ? (
                 <VAvatar
                   key="prepend-avatar"
                   color={ color.value }
@@ -113,9 +113,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
                   icon={ props.icon }
                   image={ props.avatar }
                 />
-              ) }
-
-              { slots.prepend && (
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !hasPrependMedia }

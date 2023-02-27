@@ -50,7 +50,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
         <div class="v-card-item">
           { hasPrepend && (
             <div key="prepend" class="v-card-item__prepend">
-              { !slots.prepend && (
+              { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
                     <VAvatar
@@ -68,9 +68,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                     />
                   ) }
                 </>
-              ) }
-
-              { slots.prepend && (
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !hasPrependMedia }
@@ -109,26 +107,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
 
           { hasAppend && (
             <div key="append" class="v-card-item__append">
-              { slots.append && (
-                <VDefaultsProvider
-                  key="append-defaults"
-                  disabled={ !hasAppendMedia }
-                  defaults={{
-                    VAvatar: {
-                      density: props.density,
-                      icon: props.appendIcon,
-                      image: props.appendAvatar,
-                    },
-                    VIcon: {
-                      density: props.density,
-                      icon: props.appendIcon,
-                    },
-                  }}
-                  v-slots:default={ slots.append }
-                />
-              ) }
-
-              { !slots.append && (
+              { !slots.append ? (
                 <>
                   { props.appendIcon && (
                     <VIcon
@@ -146,6 +125,23 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                     />
                   ) }
                 </>
+              ) : (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                    },
+                  }}
+                  v-slots:default={ slots.append }
+                />
               ) }
            </div>
           ) }

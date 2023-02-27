@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 // Styles
 import './VListItem.sass'
 
@@ -216,7 +215,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
           { hasPrepend && (
             <div key="prepend" class="v-list-item__prepend">
-              { !slots.prepend && (
+              { !slots.prepend ? (
                 <>
                   { props.prependAvatar && (
                     <VAvatar
@@ -234,9 +233,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     />
                   ) }
                 </>
-              ) }
-
-              { slots.prepend && (
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !hasPrependMedia }
@@ -253,9 +250,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       start: true,
                     },
                   }}
-                >
-                  { slots.prepend(slotProps.value) }
-                </VDefaultsProvider>
+                  v-slots:default={ () => slots.prepend?.(slotProps.value) }
+                />
               ) }
             </div>
           ) }
@@ -278,29 +274,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
           { hasAppend && (
             <div key="append" class="v-list-item__append">
-              { slots.append && (
-                <VDefaultsProvider
-                  key="append-defaults"
-                  disabled={ !hasAppendMedia }
-                  defaults={{
-                    VAvatar: {
-                      density: props.density,
-                      image: props.appendAvatar,
-                    },
-                    VIcon: {
-                      density: props.density,
-                      icon: props.appendIcon,
-                    },
-                    VListItemAction: {
-                      end: true,
-                    },
-                  }}
-                >
-                  { slots.append(slotProps.value) }
-                </VDefaultsProvider>
-              ) }
-
-              { !slots.append && (
+              { !slots.append ? (
                 <>
                   { props.appendIcon && (
                     <VIcon
@@ -318,6 +292,25 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     />
                   ) }
                 </>
+              ) : (
+                <VDefaultsProvider
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
+                  defaults={{
+                    VAvatar: {
+                      density: props.density,
+                      image: props.appendAvatar,
+                    },
+                    VIcon: {
+                      density: props.density,
+                      icon: props.appendIcon,
+                    },
+                    VListItemAction: {
+                      end: true,
+                    },
+                  }}
+                  v-slots:default={ () => slots.append?.(slotProps.value) }
+                />
               ) }
             </div>
           ) }

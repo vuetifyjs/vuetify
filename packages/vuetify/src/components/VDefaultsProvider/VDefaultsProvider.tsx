@@ -21,9 +21,9 @@ export const VDefaultsProvider = genericComponent(false)({
   },
 
   setup (props, { slots }) {
-    const { defaults, disabled, reset, root, scoped } = toRefs(props)
+    const { defaults, reset, root, scoped } = toRefs(props)
 
-    if (!disabled.value) {
+    if (!props.disabled) {
       provideDefaults(defaults, {
         reset,
         root,

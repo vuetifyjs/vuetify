@@ -1,4 +1,3 @@
-/* eslint-disable complexity */
 // Styles
 import './VBtn.sass'
 
@@ -192,11 +191,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
           { !props.icon && hasPrepend && (
             <span key="prepend" class="v-btn__prepend">
-              { !slots.prepend && (
-                <VIcon key="prepend-icon" icon={ props.prependIcon } />
-              ) }
-
-              { slots.prepend && (
+              { !slots.prepend ? (
+                <VIcon
+                  key="prepend-icon"
+                  icon={ props.prependIcon }
+                />
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !props.prependIcon }
@@ -212,7 +212,12 @@ export const VBtn = genericComponent<VBtnSlots>()({
           ) }
 
           <span class="v-btn__content" data-no-activator="">
-            { slots.default && (
+            { (!slots.default && hasIcon) ? (
+              <VIcon
+                key="content-icon"
+                icon={ props.icon }
+              />
+            ) : (
               <VDefaultsProvider
                 key="content-defaults"
                 disabled={ !hasIcon }
@@ -224,15 +229,16 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 v-slots:default={ slots.default }
               />
             ) }
-
-            { !slots.default && hasIcon && (
-              <VIcon key="content-icon" icon={ props.icon } />
-            ) }
           </span>
 
           { !props.icon && hasAppend && (
             <span key="append" class="v-btn__append">
-              { slots.append && (
+              { !slots.append ? (
+                <VIcon
+                  key="append-icon"
+                  icon={ props.appendIcon }
+                />
+              ) : (
                 <VDefaultsProvider
                   key="append-defaults"
                   disabled={ !props.appendIcon }
@@ -243,10 +249,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
                   }}
                   v-slots:default={ slots.append }
                 />
-              ) }
-
-              { !slots.append && (
-                <VIcon key="append-icon" icon={ props.appendIcon } />
               ) }
             </span>
           ) }

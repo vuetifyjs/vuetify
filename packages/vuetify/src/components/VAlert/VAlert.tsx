@@ -96,7 +96,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
   },
 
   emits: {
-    'click:close': (e: Event) => true,
+    'click:close': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
     click: (e: MouseEvent | KeyboardEvent) => true,
   },
@@ -127,7 +127,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
     const closeProps = computed(() => ({
       'aria-label': t(props.closeLabel),
-      onClick (e: Event) {
+      onClick (e: MouseEvent) {
         isActive.value = false
 
         emit('click:close', e)
@@ -181,16 +181,14 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
           { hasPrepend && (
             <div key="prepend" class="v-alert__prepend">
-              { !slots.prepend && (
+              { !slots.prepend ? (
                 <VIcon
                   key="prepend-icon"
                   density={ props.density }
                   icon={ icon.value }
                   size={ props.prominent ? 44 : 28 }
                 />
-              ) }
-
-              { slots.prepend && (
+              ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
                   disabled={ !icon.value }
@@ -210,7 +208,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
           <div class="v-alert__content">
             { hasTitle && (
               <VAlertTitle key="title">
-                { slots.title ? slots.title() : props.title }
+                { slots.title?.() ?? props.title }
               </VAlertTitle>
             ) }
 
@@ -227,7 +225,15 @@ export const VAlert = genericComponent<VAlertSlots>()({
 
           { hasClose && (
             <div key="close" class="v-alert__close">
-              { slots.close && (
+              { !slots.close ? (
+                <VBtn
+                  key="close-btn"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                  variant="text"
+                  { ...closeProps.value }
+                />
+              ) : (
                 <VDefaultsProvider
                   key="close-defaults"
                   defaults={{
@@ -237,18 +243,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                       variant: 'text',
                     },
                   }}
-                >
-                  { slots.close({ props: closeProps.value }) }
-                </VDefaultsProvider>
-              ) }
-
-              { !slots.close && (
-                <VBtn
-                  key="close-btn"
-                  icon={ props.closeIcon }
-                  size="x-small"
-                  variant="text"
-                  { ...closeProps.value }
+                  v-slots:default={ () => slots.close?.({ props: closeProps.value }) }
                 />
               ) }
             </div>
