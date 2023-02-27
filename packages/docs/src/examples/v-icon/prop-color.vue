@@ -3,32 +3,32 @@
     <v-icon
       size="large"
       color="green-darken-2"
-      icon = "mdi-domain"
+      icon="mdi-domain"
     />
     <v-icon
       size="large"
       color="blue-darken-2"
-      icon = "mdi-message-text"
+      icon="mdi-message-text"
     />
     <v-icon
       size="large"
       color="purple-darken-2"
-      icon = "mdi-dialpad"
+      icon="mdi-dialpad"
     />
     <v-icon
       size="large"
       color="teal-darken-2"
-      icon = "mdi-email"
+      icon="mdi-email"
     />
     <v-icon
       size="large"
       color="blue-grey-darken-2"
-      icon = "mdi-call-split"
+      icon="mdi-call-split"
     />
     <v-icon
       size="large"
       color="orange-darken-2"
-      icon = "mdi-arrow-up-bold-box-outline"
+      icon="mdi-arrow-up-bold-box-outline"
     />
   </v-row>
 </template>
