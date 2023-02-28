@@ -140,7 +140,7 @@ app.use(vuetify)
 
 ### v-form
 
-- `validate()` now always returns a Promise that needs to be awaited. It also resolves on validation errors! Use `valid` and `errors` properties returned to determine form state
+- `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state. 
 
 ### v-list
 
