@@ -182,7 +182,7 @@ app.use(vuetify)
 - `ticks` has been renamed to `show-ticks`.
 - `tick-labels` has been renamed to `ticks`.
 - `vertical` has been renamed to `direction="vertical"`.
-- `v-slider`'s `step` prop is now 0 by default instead of 1 in v2
+- `step` default value is now 0 instead of 1.
 
 ### v-tabs
 
