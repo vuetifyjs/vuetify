@@ -235,7 +235,14 @@ const allowedRefs = [
   'SelectStrategyFn',
   'SubmitEventPromise',
   'ValidationRule',
+  'FormValidationResult',
   'SortItem',
+  'InternalItem',
+  'InternalDataTableItem',
+  'DataTableItem',
+  'DataTableHeader',
+  'InternalDataTableHeader',
+  'FilterFunction',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -251,7 +258,7 @@ function formatDefinition (definition: Definition) {
       break
     }
     case 'array': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
       if (definition.length) {
         formatted = `[${formattedItems.join(', ')}]`
       } else {
