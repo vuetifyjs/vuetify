@@ -96,7 +96,7 @@ app.use(vuetify)
 - `absolute` and `fixed` props have been combined into a single `position` prop.
 - `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
 - `background-color` prop has been renamed to `bg-color`.
-- `dense` prop on components such as v-select, v-btn-toggle, v-alert, v-text-field, v-list and v-list-item has been changed to `density` prop with the variants `default`, `compact`, `comfortable`
+- `dense` prop on components such as v-select, v-btn-toggle, v-alert, v-text-field, v-list and v-list-item has been changed to `density` prop with the variants `default`, `comfortable`, `compact`
 - Activator slots work slightly different. Replace `#activator={ attrs, on }` with `#activator={ props }`, then remove `v-on="on"` and replace `v-bind="attrs"` with `v-bind="props"`
 
 ### Input components
