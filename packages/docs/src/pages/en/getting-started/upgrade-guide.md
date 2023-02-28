@@ -89,7 +89,7 @@ app.use(vuetify)
 ### General changes
 
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage.
-  - `v-btn`'s within `v-btn-toggle` still need a `value` prop though, do not rename
+  - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
 - `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
