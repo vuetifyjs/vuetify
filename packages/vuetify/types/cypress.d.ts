@@ -27,7 +27,7 @@ declare global {
         component: VueWrapper<ComponentPublicInstance>['vm']
       }>
       swipe (...path: Swipe[]): Chainable<void>
-      emitted (selector: string, event: string): Chainable<unknown[]>
+      emitted (selector: Parameters<VueWrapper<any>['findComponent']>[0], event: string): Chainable<unknown[]>
     }
   }
 }
