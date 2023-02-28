@@ -98,7 +98,6 @@ export const VAlert = genericComponent<VAlertSlots>()({
   emits: {
     'click:close': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
-    click: (e: MouseEvent | KeyboardEvent) => true,
   },
 
   setup (props, { emit, slots }) {
