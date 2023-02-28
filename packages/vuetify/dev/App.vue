@@ -5,7 +5,7 @@
 </template>
 
 <script>
-  import Playground from './Playground.vue'
+  import Playground from './Playground.calendar.vue'
 
   export default {
     name: 'App',
