@@ -107,6 +107,7 @@ export type SlotsToProps<T extends Record<string, any>> = T extends Record<strin
     | (keyof T extends 'default' ? T['default'] : {})
     | { [K in keyof T]?: T[K] }
   )
+  $slots?: { [K in keyof T]?: T[K] }
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
