@@ -73,7 +73,7 @@ app.use(vuetify)
   - If you were using `customProperties` in v2, the naming scheme has changed from `--v-primary-base` to `--v-theme-primary`.
   - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
 - Theme colors in the theme config are now nested inside a `colors` property, e.g. `const myTheme = { theme: { themes: { light: { colors: { primary: '#ccc' } } } } }`
-- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look
+- `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
 
 ### SCSS
 
@@ -82,7 +82,7 @@ app.use(vuetify)
 - Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too
 - `$displayBreakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead
 - The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
-- `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
+- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look
 
 ## Components
 
@@ -98,6 +98,7 @@ app.use(vuetify)
 - `background-color` prop has been renamed to `bg-color`.
 - `dense` prop on components such as v-select, v-btn-toggle, v-alert, v-text-field, v-list and v-list-item has been changed to `density` prop with the variants `default`, `comfortable`, `compact`
 - Activator slots work slightly different. Replace `#activator={ attrs, on }` with `#activator={ props }`, then remove `v-on="on"` and replace `v-bind="attrs"` with `v-bind="props"`
+- Some components have structural changes in their markup. Which means you may have to change how you query and assert them in tests. `v-switch` now uses an `<input type="checkbox" />` under the hood, which is why the `aria-checked` and `aria-role="switch"` attributes were removed.
 
 ### Input components
 
@@ -127,20 +128,17 @@ app.use(vuetify)
 - `depressed` has been renamed to `variant="flat"`.
 - `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
 - `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2
-- `v-btn` has a new size `x-large`, which is why you have to down-shift previously used sizes by one to get the same size as in v2. E.g. `small` becomes `x-small`
 
 ### v-checkbox/v-radio/v-switch
 
 - `input-value` prop has been renamed to `model-value`.
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
-- `v-switch` now uses an input of type "checkbox", it does no longer have an `aria-checked` attribute to assert in tests.
-- `v-switch` no longer has `aria-role="switch"`, use `aria-role="checkbox"` to match in tests
 - `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
 
 ### v-form
 
-- `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state. 
+- `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state.
 
 ### v-list
 
@@ -198,7 +196,6 @@ app.use(vuetify)
 - `internal-activator` prop has been removed without replacement
 - `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
 - `absolute` variant has been removed. For absolute positioning use css instead
-- `window.requestIdleCallback` and `window.cancelIdleCallback` need to be stubbed in tests, because `v-menu` uses them
 
 ### v-skeleton-loader
 
