@@ -114,7 +114,7 @@ export type SlotsToProps<T extends Record<string, any>> = T extends Record<strin
 
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]>> = {
-  [K in keyof T]?: Slot<T[K]>
+  [K in keyof T]: Slot<T[K]>
 }
 
 export type GenericSlot = SlotsToProps<{ default: [] }>
