@@ -14,8 +14,11 @@
         </div>
 
         <v-btn
-          density="compact"
+          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
           class="text-none px-2 ms-auto"
+          density="compact"
+          rel="noopener noreferrer"
+          target="_blank"
           variant="text"
         >
           v{{ version }}

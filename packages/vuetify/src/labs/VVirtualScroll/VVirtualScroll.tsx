@@ -12,6 +12,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 // Utilities
 import { computed, onMounted, ref, watchEffect } from 'vue'
 import {
+  clamp,
   convertToUnit,
   createRange,
   genericComponent,
@@ -114,9 +115,9 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
       const buffer = Math.round(visibleItems.value / 3)
       if (direction === UP && midPointIndex <= first.value + (buffer * 2) - 1) {
-        first.value = Math.max(midPointIndex - buffer, 0)
+        first.value = clamp(midPointIndex - buffer, 0, props.items.length)
       } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2) - 1) {
-        first.value = Math.min(Math.max(0, midPointIndex - buffer), props.items.length - visibleItems.value)
+        first.value = clamp(midPointIndex - buffer, 0, props.items.length - visibleItems.value)
       }
 
       lastScrollTop = rootEl.value.scrollTop

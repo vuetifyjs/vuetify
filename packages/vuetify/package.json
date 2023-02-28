@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.1.4",
+  "version": "3.1.6",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -125,7 +125,6 @@
     "@vitejs/plugin-vue-jsx": "^2.0.0",
     "@vue/babel-plugin-jsx": "^1.1.1",
     "@vue/test-utils": "2.0.0",
-    "@vueuse/head": "~0.7.6",
     "acorn-walk": "^8.2.0",
     "autoprefixer": "^10.4.13",
     "babel-plugin-add-import-extension": "1.5.1",
@@ -135,7 +134,7 @@
     "concurrently": "^4.1.1",
     "cssnano": "^5.1.14",
     "cy-mobile-commands": "^0.3.0",
-    "cypress": "^12.5.1",
+    "cypress": "^12.6.0",
     "cypress-file-upload": "^5.0.8",
     "cypress-real-events": "^1.7.0",
     "dotenv": "^8.6.0",

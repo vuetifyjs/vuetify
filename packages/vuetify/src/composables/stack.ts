@@ -1,6 +1,6 @@
 import { useToggleScope } from '@/composables/toggleScope'
 
-import { computed, inject, onScopeDispose, provide, reactive, readonly, ref, watchEffect } from 'vue'
+import { computed, inject, onScopeDispose, provide, reactive, readonly, ref, toRaw, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
@@ -41,7 +41,7 @@ export function useStack (
 
     onScopeDispose(() => {
       if (createStackEntry) {
-        const idx = globalStack.findIndex(v => v[0] === vm.uid)
+        const idx = toRaw(globalStack).findIndex(v => v[0] === vm.uid)
         globalStack.splice(idx, 1)
       }
 
