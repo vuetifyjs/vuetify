@@ -434,6 +434,14 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
       definition.properties[propertyName].optional = property.isOptional()
     }
+    if (type.compilerType.indexInfos.length) {
+      for (const index of type.compilerType.indexInfos) {
+        const indexName = '[' + type._context.compilerFactory.getType(index.keyType).getText() + ']'
+        const indexType = type._context.compilerFactory.getType(index.type)
+        definition.properties[indexName] = generateDefinition(node, getRecursiveTypes(recursed, indexType), project, indexType)
+        definition.properties[indexName].optional = true
+      }
+    }
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd
     definition.type = 'void'
