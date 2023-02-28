@@ -190,7 +190,7 @@ app.use(vuetify)
 
 ### v-img
 
-- `contain` has been removed. It is the default behaviour now
+- `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
 
 ### v-menu
 
