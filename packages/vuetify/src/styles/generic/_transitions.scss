@@ -17,6 +17,14 @@
     transition-timing-function: settings.$standard-easing !important;
   }
 }
+@mixin fade-out() {
+  &-leave-to {
+    opacity: 0;
+  }
+  &-leave-active {
+    transition-duration: 100ms !important;
+  }
+}
 
 // Component specific transitions
 .dialog-transition,
@@ -128,8 +136,9 @@
 
 .scale-transition {
   @include transition-default();
+  @include fade-out();
 
-  &-enter-from, &-leave-from, &-leave-to {
+  &-enter-from {
     opacity: 0;
     transform: scale(0);
   }
@@ -142,8 +151,9 @@
 
 .scale-rotate-transition {
   @include transition-default();
+  @include fade-out();
 
-  &-enter-from, &-leave, &-leave-to {
+  &-enter-from {
     opacity: 0;
     transform: scale(0) rotate(-45deg);
   }
@@ -156,8 +166,9 @@
 
 .scale-rotate-reverse-transition {
   @include transition-default();
+  @include fade-out();
 
-  &-enter-from, &-leave-from, &-leave-to {
+  &-enter-from {
     opacity: 0;
     transform: scale(0) rotate(45deg);
   }
