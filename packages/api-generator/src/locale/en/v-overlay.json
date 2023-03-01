@@ -6,7 +6,7 @@
     "opacity": "Sets the overlay opacity",
     "zIndex": "The z-index used for the component",
     "contentProps": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))",
-    "noClickAnimation": "Disables the bounce effect when clicking outside of a `v-dialog`'s content when using the persistent prop.",
+    "noClickAnimation": "Disables the bounce effect when clicking outside of the content element when using the persistent prop.",
     "persistent": "Clicking outside of the element or pressing esc key will not deactivate it.",
     "scrim": "Accepts true/false to enable background, and string to define color."
   },
