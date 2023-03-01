@@ -1,12 +1,11 @@
 <template>
   <div class="text-center d-flex align-center justify-space-around">
     <v-tooltip bottom color="primary">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           primary
         </v-btn>
@@ -15,12 +14,11 @@
     </v-tooltip>
 
     <v-tooltip bottom color="success">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="success"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           success
         </v-btn>
@@ -29,12 +27,11 @@
     </v-tooltip>
 
     <v-tooltip bottom color="warning">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="warning"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           warning
         </v-btn>
@@ -43,12 +40,11 @@
     </v-tooltip>
 
     <v-tooltip bottom color="error">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="error"
           dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           error
         </v-btn>
