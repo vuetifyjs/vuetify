@@ -2,15 +2,19 @@
 
 @mixin transition-default() {
   &-enter-active {
-    transition: 0.3s settings.$standard-easing;
+    transition-duration: 0.3s;
+    transition-timing-function: settings.$standard-easing;
   }
 
   &-leave-active {
-    transition: 0.3s settings.$standard-easing;
+    transition-duration: 0.3s;
+    transition-timing-function: settings.$standard-easing;
   }
 
   &-move {
-    transition: transform .5s settings.$standard-easing;
+    transition-duration: 0.5s;
+    transition-property: transform;
+    transition-timing-function: settings.$standard-easing;
   }
 }
 
@@ -19,11 +23,13 @@
 .dialog-bottom-transition,
 .dialog-top-transition {
   &-enter-active {
-    transition: 225ms settings.$decelerated-easing
+    transition-duration: 225ms;
+    transition-timing-function: settings.$decelerated-easing;
   }
 
   &-leave-active {
-    transition: 125ms settings.$accelerated-easing
+    transition-duration: 125ms;
+    transition-timing-function: settings.$accelerated-easing;
   }
 
   &-enter-active,
@@ -70,6 +76,11 @@
   &-leave-to {
     position: absolute !important;
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .picker-transition {
@@ -99,10 +110,20 @@
 // Generic transitions
 .expand-transition {
   @include transition-default();
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: height;
+  }
 }
 
 .expand-x-transition {
   @include transition-default();
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: width;
+  }
 }
 
 .scale-transition {
@@ -111,6 +132,11 @@
   &-enter-from, &-leave-from, &-leave-to {
     opacity: 0;
     transform: scale(0);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
   }
 }
 
@@ -121,6 +147,11 @@
     opacity: 0;
     transform: scale(0) rotate(-45deg);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .scale-rotate-reverse-transition {
@@ -129,6 +160,11 @@
   &-enter-from, &-leave-from, &-leave-to {
     opacity: 0;
     transform: scale(0) rotate(45deg);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
   }
 }
 
@@ -143,6 +179,11 @@
   &-leave-from, &-leave-active {
     position: absolute;
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .slide-y-transition {
@@ -152,6 +193,11 @@
     opacity: 0;
     transform: translateY(-15px);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .slide-y-reverse-transition {
@@ -160,6 +206,11 @@
   &-enter-from, &-leave-to {
     opacity: 0;
     transform: translateY(15px);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
   }
 }
 
@@ -177,6 +228,11 @@
   &-leave-to {
     transform: translateY(15px);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .scroll-y-reverse-transition {
@@ -192,6 +248,11 @@
 
   &-leave-to {
     transform: translateY(-15px);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
   }
 }
 
@@ -209,6 +270,11 @@
   &-leave-to {
     transform: translateX(15px);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .scroll-x-reverse-transition {
@@ -225,6 +291,11 @@
   &-leave-to {
     transform: translateX(-15px);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .slide-x-transition {
@@ -233,6 +304,11 @@
   &-enter-from, &-leave-to {
     opacity: 0;
     transform: translateX(-15px);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
   }
 }
 
@@ -243,6 +319,11 @@
     opacity: 0;
     transform: translateX(15px);
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform, opacity;
+  }
 }
 
 .fade-transition {
@@ -251,6 +332,11 @@
   &-enter-from, &-leave-to {
     opacity: 0 !important;
   }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: opacity;
+  }
 }
 
 .fab-transition {
@@ -258,5 +344,10 @@
 
   &-enter-from, &-leave-to {
     transform: scale(0) rotate(-45deg);
+  }
+
+  &-enter-active,
+  &-leave-active {
+    transition-property: transform;
   }
 }
