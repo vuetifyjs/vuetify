@@ -2,6 +2,7 @@
   <v-navigation-drawer
     id="app-drawer"
     v-model="app.drawer"
+    :order="mobile ? -1 : undefined"
     width="300"
   >
     <template #append>
@@ -42,13 +43,14 @@
 
   // Composables
   import { useAppStore } from '@/store/app'
+  import { useDisplay, version } from 'vuetify'
 
   // Utilities
   import { onMounted } from 'vue'
-  import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
   const app = useAppStore()
+  const { mobile } = useDisplay()
 
   onMounted(async () => {
     await wait(1000)
