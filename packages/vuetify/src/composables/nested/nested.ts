@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getCurrentInstance, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
+import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
