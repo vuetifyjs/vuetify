@@ -7,22 +7,17 @@ import { isObject, keyCodes } from '@/util'
 // Types
 import type {
   DirectiveBinding,
-  ObjectDirective,
 } from 'vue'
 
-const rippleStop = Symbol('rippleStop')
+const stopSymbol = Symbol('rippleStop')
 
-type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [rippleStop]?: boolean }
+type VuetifyRippleEvent = (MouseEvent | TouchEvent | KeyboardEvent) & { [stopSymbol]?: boolean }
 
 const DELAY_RIPPLE = 80
 
 function transform (el: HTMLElement, value: string) {
   el.style.transform = value
   el.style.webkitTransform = value
-}
-
-function opacity (el: HTMLElement, value: number) {
-  el.style.opacity = `calc(${value} * var(--v-theme-overlay-multiplier))`
 }
 
 interface RippleOptions {
@@ -36,6 +31,7 @@ export interface RippleDirectiveBinding extends Omit<DirectiveBinding, 'modifier
   modifiers: {
     center?: boolean
     circle?: boolean
+    stop?: boolean
   }
 }
 
@@ -121,14 +117,12 @@ const ripples = {
     animation.classList.add('v-ripple__animation--enter')
     animation.classList.add('v-ripple__animation--visible')
     transform(animation, `translate(${x}, ${y}) scale3d(${scale},${scale},${scale})`)
-    opacity(animation, 0)
     animation.dataset.activated = String(performance.now())
 
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--enter')
       animation.classList.add('v-ripple__animation--in')
       transform(animation, `translate(${centerX}, ${centerY}) scale3d(1,1,1)`)
-      opacity(animation, 0.08)
     }, 0)
   },
 
@@ -149,7 +143,6 @@ const ripples = {
     setTimeout(() => {
       animation.classList.remove('v-ripple__animation--in')
       animation.classList.add('v-ripple__animation--out')
-      opacity(animation, 0)
 
       setTimeout(() => {
         const ripples = el.getElementsByClassName('v-ripple__animation')
@@ -158,7 +151,7 @@ const ripples = {
           delete el.dataset.previousPosition
         }
 
-        animation.parentNode && el.removeChild(animation.parentNode)
+        if (animation.parentNode?.parentNode === el) el.removeChild(animation.parentNode)
       }, 300)
     }, delay)
   },
@@ -172,10 +165,10 @@ function rippleShow (e: VuetifyRippleEvent) {
   const value: RippleOptions = {}
   const element = e.currentTarget as HTMLElement | undefined
 
-  if (!element?._ripple || element._ripple.touched || e[rippleStop]) return
+  if (!element?._ripple || element._ripple.touched || e[stopSymbol]) return
 
   // Don't allow the event to trigger ripples on any other elements
-  e[rippleStop] = true
+  e[stopSymbol] = true
 
   if (isTouchEvent(e)) {
     element._ripple.touched = true
@@ -211,9 +204,13 @@ function rippleShow (e: VuetifyRippleEvent) {
   }
 }
 
+function rippleStop (e: VuetifyRippleEvent) {
+  e[stopSymbol] = true
+}
+
 function rippleHide (e: Event) {
   const element = e.currentTarget as HTMLElement | null
-  if (!element || !element._ripple) return
+  if (!element?._ripple) return
 
   window.clearTimeout(element._ripple.showTimer)
 
@@ -241,7 +238,7 @@ function rippleHide (e: Event) {
 function rippleCancelShow (e: MouseEvent | TouchEvent) {
   const element = e.currentTarget as HTMLElement | undefined
 
-  if (!element || !element._ripple) return
+  if (!element?._ripple) return
 
   if (element._ripple.showTimerCommit) {
     element._ripple.showTimerCommit = null
@@ -287,6 +284,12 @@ function updateRipple (el: HTMLElement, binding: RippleDirectiveBinding, wasEnab
   }
 
   if (enabled && !wasEnabled) {
+    if (modifiers.stop) {
+      el.addEventListener('touchstart', rippleStop, { passive: true })
+      el.addEventListener('mousedown', rippleStop)
+      return
+    }
+
     el.addEventListener('touchstart', rippleShow, { passive: true })
     el.addEventListener('touchend', rippleHide, { passive: true })
     el.addEventListener('touchmove', rippleCancelShow, { passive: true })
@@ -322,7 +325,7 @@ function removeListeners (el: HTMLElement) {
   el.removeEventListener('blur', focusRippleHide)
 }
 
-function mounted (el: HTMLElement, binding: DirectiveBinding) {
+function mounted (el: HTMLElement, binding: RippleDirectiveBinding) {
   updateRipple(el, binding, false)
 }
 
@@ -331,7 +334,7 @@ function unmounted (el: HTMLElement) {
   removeListeners(el)
 }
 
-function updated (el: HTMLElement, binding: DirectiveBinding) {
+function updated (el: HTMLElement, binding: RippleDirectiveBinding) {
   if (binding.value === binding.oldValue) {
     return
   }
@@ -340,7 +343,7 @@ function updated (el: HTMLElement, binding: DirectiveBinding) {
   updateRipple(el, binding, wasEnabled)
 }
 
-export const Ripple: ObjectDirective = {
+export const Ripple = {
   mounted,
   unmounted,
   updated,

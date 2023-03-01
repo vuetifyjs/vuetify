@@ -1,11 +1,11 @@
 ---
+disabled: true
 meta:
   title: Frequently asked questions
   description: Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.
   keywords: frequently asked questions, faq
 related:
   - /getting-started/contributing/
-  - /introduction/support/
   - /features/treeshaking/
 ---
 
@@ -115,8 +115,7 @@ Have a question that belongs here? Tell us in our [Discord Community](https://co
 
   Vuetify components are easily extendable by importing it and using the `extends` option in vue. [Codepen Example](https://codepen.io/whoistobias/pen/yLNgjwy)
 
-```js
-// src/components/ActivateBtn
+```js { resource="src/components/ActivateBtn" }
 import { VBtn } from 'vuetify/lib'
 
 export default {
@@ -141,7 +140,7 @@ export default {
 
 - **My application does not look correct.**{ #my-application-does-not-look-correct }
 
-  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application/) page.
+  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/features/application-layout/) page.
 
 <br>
 
@@ -163,7 +162,7 @@ export default {
 
 - **My _/_ link is active when I'm on _/home_ page.**{ #link-active-home }
 
-  Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/en/api/router-link.html).
+  Add the **exact** to the link that points to absolute /. For more information on this, you can visit the official Vue router [documentation](https://router.vuejs.org/api/#routerlink).
 
 <br>
 
@@ -281,8 +280,7 @@ export default {
 
   Update the `compilerOptions` key in `tsconfig.json` with the vuetify type:
 
-```json
-// tsconfig.json
+```json { resource="tsconfig.json" }
 {
   "compilerOptions": {
     "types": ["vuetify"]
@@ -294,14 +292,8 @@ export default {
 
 If you need help with an issue, please use one of our help channels:
 
-- [Vuetify Professional Support](/introduction/support/)
+- [Vuetify Professional Support](/introduction/enterprise-support/)
 - [Discord Community](https://community.vuetifyjs.com/)
 - [GitHub Discussions](https://discussions.vuetifyjs.com/)
 
-<br>
-
-For additional inquiries, please reach out to [John Leider](mailto:john@vuetifyjs.com) or [Heather Leider](mailto:heather@vuetifyjs.com).
-
 <promoted type="theme" />
-
-<backmatter />

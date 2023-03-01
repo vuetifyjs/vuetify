@@ -1,93 +1,68 @@
 <template>
   <div>
-    <v-card
-      class="d-flex align-start mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex align-start mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
+      <v-sheet
         v-for="n in 3"
         :key="n"
-        class="pa-2"
-        outlined
-        tile
+        class="ma-2 pa-2"
       >
         align-start
-      </v-card>
-    </v-card>
+      </v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex align-end mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex align-end mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
+      <v-sheet
         v-for="n in 3"
         :key="n"
-        class="pa-2"
-        outlined
-        tile
+        class="ma-2 pa-2"
       >
         align-end
-      </v-card>
-    </v-card>
+      </v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex align-center mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex align-center mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
+      <v-sheet
         v-for="n in 3"
         :key="n"
-        class="pa-2"
-        outlined
-        tile
+        class="ma-2 pa-2"
       >
         align-center
-      </v-card>
-    </v-card>
+      </v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex align-baseline mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex align-baseline mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
+      <v-sheet
         v-for="n in 3"
         :key="n"
-        class="pa-2"
-        outlined
-        tile
+        class="ma-2 pa-2"
       >
         align-baseline
-      </v-card>
-    </v-card>
+      </v-sheet>
+    </v-sheet>
 
-    <v-card
-      class="d-flex align-stretch mb-6"
-      color="grey lighten-2"
-      flat
+    <v-sheet
+      class="d-flex align-stretch mb-6 bg-surface-variant"
       height="100"
-      tile
     >
-      <v-card
+      <v-sheet
         v-for="n in 3"
         :key="n"
-        class="pa-2"
-        outlined
-        tile
+        class="ma-2 pa-2"
       >
         align-stretch
-      </v-card>
-    </v-card>
+      </v-sheet>
+    </v-sheet>
   </div>
 </template>

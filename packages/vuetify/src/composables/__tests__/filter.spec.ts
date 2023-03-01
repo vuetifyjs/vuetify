@@ -1,9 +1,10 @@
 // Utilities
 import { defaultFilter, filterItems, useFilter } from '../filter'
 import { describe, expect, it } from '@jest/globals'
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
+import { transformItem, transformItems } from '../items'
 
-describe('filter.ts', () => {
+describe('filter', () => {
   describe('defaultFilter', () => {
     it.each([
       [null, null, -1],
@@ -14,23 +15,26 @@ describe('filter.ts', () => {
       ['foo', 'bar', -1],
       [1, '1', 0],
       ['1', 1, 0],
-    ])('should compare %s to %s and return a match result', (text: any, query: any, expected: boolean) => {
+    ])('should compare %s to %s and return a match result', (text, query, expected) => {
+      // @ts-expect-error
       expect(defaultFilter(text, query)).toBe(expected)
     })
   })
 
   describe('filterItems', () => {
-    const items = Array.from({ length: 5 }, (v, k) => ({
+    const items = Array.from({ length: 5 }, (v, k) => transformItem({} as any, {
       title: `Foo-${k}`,
       value: `fizz-${k}`,
     }))
 
     it.each([
-      [['title'], 'foo', 5],
-      [['title', 'value'], 'fizz', 5],
-      [['title', 'value'], 'foo-0', 1],
-    ])('should filter items by some with %s filterKeys with query %s', (filterKeys: string[], query, expected) => {
-      expect(filterItems(items, query, { filterKeys })).toHaveLength(expected)
+      [['title'], 'foo', 5, [0, 1, 2, 3, 4]],
+      [['title', 'value'], 'fizz', 5, [0, 1, 2, 3, 4]],
+      [['title', 'value'], 'foo-0', 1, [0]],
+    ])('should filter items by some with %s filterKeys with query %s', (filterKeys: string[], query, expectedLength, expectedMatches) => {
+      const matches = filterItems(items, query, { filterKeys, filterMode: 'some' })
+      expect(matches).toHaveLength(expectedLength)
+      expect(matches.map(match => match.index)).toEqual(expectedMatches)
     })
 
     it.each([
@@ -72,7 +76,7 @@ describe('filter.ts', () => {
           value: '1',
           custom: 'buzz',
         },
-      ]
+      ] as any
       const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
       expect(filterItems(items, 'foo', {
@@ -102,50 +106,58 @@ describe('filter.ts', () => {
   })
 
   describe('useFilter', () => {
-    const items = ref(Array.from({ length: 50 }, (v, k) => ({
+    const itemProps = {
+      itemTitle: 'title',
+      itemValue: 'value',
+      itemChildren: 'children',
+      itemProps: 'props',
+      returnObject: false,
+    }
+    const items = Array.from({ length: 50 }, (v, k) => ({
       text: `item-${k}`,
       value: k,
-    })))
+    }))
 
     it.each([
-      ['', items.value.length],
-      [null, items.value.length],
+      ['', items.length],
+      [null, items.length],
       ['1', 14],
       [1, 14],
       ['0', 5],
       ['14', 1],
       ['foo', 0],
-    ])('should return a array of filtered items from value %s', (text: any, expected: number) => {
-      const { filteredItems } = useFilter({}, items, ref(text))
+    ])('should return an array of filtered items from value %s', (text: any, expected: number) => {
+      const { filteredItems } = useFilter({}, ref(transformItems(itemProps, items)), ref(text))
 
       expect(filteredItems.value).toHaveLength(expected)
     })
 
-    it('should accept a custom filter function', () => {
+    it('should accept a custom filter function', async () => {
       function filterFn (text: string, query?: string, item?: any) {
         if (typeof query !== 'string') return true
-
-        return item.text.toLocaleLowerCase().includes(query.toLocaleLowerCase())
+        return item.title.toLocaleLowerCase().includes(query.toLocaleLowerCase())
       }
       const query = ref('zz')
-      const props = { filterFn, filterKeys: ['text'] }
-      const items = ref([
-        { text: 'foo' },
-        { text: 'bar' },
-        { text: 'fizz' },
-        { text: 'buzz' },
-      ])
+      const props = { filterFn, filterKeys: ['title'] }
+      const items = ref(transformItems(itemProps, [
+        { title: 'foo' },
+        { title: 'bar' },
+        { title: 'fizz' },
+        { title: 'buzz' },
+      ]))
       const { filteredItems } = useFilter(props, items, query)
 
-      expect(filteredItems.value).toHaveLength(2)
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['fizz', 'buzz'])
 
       query.value = 'foo'
+      await nextTick()
 
-      expect(filteredItems.value).toHaveLength(1)
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo'])
 
-      items.value.push({ text: 'foobar' })
+      items.value.push(transformItem(itemProps, { title: 'foobar' }))
+      await nextTick()
 
-      expect(filteredItems.value).toHaveLength(2)
+      expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
     })
   })
 })

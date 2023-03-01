@@ -1,10 +1,12 @@
-@forward './variables'
 @use 'sass:selector'
 @use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VInput/variables' as *
+
+@at-root
+  @include tools.density('v-input', $autocomplete-chips-margin-bottom) using ($modifier)
+    --autocomplete-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 .v-autocomplete
   .v-field
@@ -33,6 +35,12 @@
     .v-autocomplete__selection
       margin-inline-end: 2px
 
+  .v-field--single-line
+    .v-autocomplete__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
 .v-autocomplete
   &__content
     overflow: hidden
@@ -47,6 +55,7 @@
     display: inline-flex
     letter-spacing: inherit
     line-height: inherit
+    max-width: 100%
 
   &--active-menu
     .v-field__append-inner
@@ -56,6 +65,9 @@
 
   &--chips
     .v-autocomplete__selection
+      margin-top: $autocomplete-chips-margin-top
+      margin-bottom: var(--autocomplete-chips-margin-bottom)
+
       &:first-child
         margin-inline-start: 0
 
@@ -65,6 +77,7 @@
       position: absolute
       left: 0
       right: 0
+      width: 100%
       padding-inline-start: inherit
       padding-inline-end: inherit
 
@@ -77,5 +90,10 @@
         opacity: 0
 
     .v-field--focused
-      .v-autocomplete__selection
+      .v-autocomplete__selection-text
         opacity: 0
+
+  &--selection-slot
+    &.v-text-field input
+      position: relative
+      padding-inline-start: 0

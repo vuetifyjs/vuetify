@@ -1,14 +1,12 @@
-@forward './variables'
 @use 'sass:math'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-banner
-  align-items: center
   display: grid
   flex: 1 1
   font-size: $banner-font-size
-  grid-template-areas: "prepend text actions"
+  grid-template-areas: "prepend content actions"
   grid-template-columns: max-content auto max-content
   grid-template-rows: max-content max-content
   line-height: $banner-line-height
@@ -31,7 +29,7 @@
 
   &--stacked
     &:not(.v-banner--one-line)
-      grid-template-areas: "prepend text" ". actions"
+      grid-template-areas: "prepend content" ". actions"
 
     .v-banner-text
       padding-inline-end: $banner-stacked-padding-inline-end
@@ -69,8 +67,9 @@
   &--sticky
     top: $banner-sticky-top
 
-.v-banner-avatar,
-.v-banner-icon,
+.v-banner__content
+  grid-area: content
+
 .v-banner__prepend
   align-self: flex-start
   grid-area: prepend
@@ -90,9 +89,8 @@
 .v-banner-text
   -webkit-box-orient: vertical
   display: -webkit-box
-  grid-area: text
-  overflow: hidden
   padding-inline-end: $banner-text-padding-end
+  overflow: hidden
 
   .v-banner--one-line &
     -webkit-line-clamp: 1

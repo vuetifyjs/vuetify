@@ -1,4 +1,5 @@
 ---
+nav: Chip groups
 meta:
   title: Chip group component
   description: The chip group component combines numerous selectable chips into single or multiple lines.
@@ -13,13 +14,17 @@ related:
 
 The `v-chip-group` supercharges the `v-chip` component by providing groupable functionality. It is used for creating groups of selections using chips.
 
-<entry />
+<!-- ![chip-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chip-groups/v-chip-groups-entry.png) -->
+
+---
 
 ## Usage
 
 Chip groups make it easy for users to select filtering options for more complex implementations. By default `v-chip-group` will overflow to the right but can be changed to a **column** only mode.
 
 <usage name="v-chip-group" />
+
+<entry />
 
 ## API
 
@@ -66,5 +71,3 @@ The `v-chip` component can have an explicit value used for its model. This gets 
 Chip groups allow the creation of custom interfaces that perform the same actions as an item group or radio controls, but are stylistically different.
 
 <example file="v-chip-group/misc-toothbrush-card" />
-
-<backmatter />

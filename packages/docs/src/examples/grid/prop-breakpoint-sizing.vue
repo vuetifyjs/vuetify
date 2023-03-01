@@ -1,22 +1,46 @@
 <template>
-  <v-container class="grey lighten-5">
-    <v-row
-      v-for="n in 2"
-      :key="n"
-      :class="n === 1 ? 'mb-6' : ''"
-      no-gutters
-    >
-      <v-col
-        v-for="k in n + 1"
-        :key="k"
-      >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          {{ k }} of {{ n + 1 }}
-        </v-card>
+  <v-container class="bg-surface-variant">
+    <v-row no-gutters>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+    </v-row>
+
+    <v-row no-gutters>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+    </v-row>
+
+    <v-row no-gutters>
+      <v-col cols="2">
+        <v-sheet class="pa-2 ma-2">
+          .v-col-2
+        </v-sheet>
+      </v-col>
+      <v-col>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

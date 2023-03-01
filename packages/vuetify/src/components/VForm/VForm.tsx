@@ -1,11 +1,15 @@
 // Composables
 import { createForm, makeFormProps } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VForm = defineComponent({
+// Types
+import type { SubmitEventPromise } from '@/composables/form'
+
+export const VForm = genericComponent()({
   name: 'VForm',
 
   props: {
@@ -14,7 +18,7 @@ export const VForm = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean | null) => true,
-    submit: (e: Event) => true,
+    submit: (e: SubmitEventPromise) => true,
   },
 
   setup (props, { slots, emit }) {
@@ -26,13 +30,25 @@ export const VForm = defineComponent({
       form.reset()
     }
 
-    function onSubmit (e: Event) {
+    function onSubmit (_e: Event) {
+      const e = _e as SubmitEventPromise
+
+      const ready = form.validate()
+      e.then = ready.then.bind(ready)
+      e.catch = ready.catch.bind(ready)
+      e.finally = ready.finally.bind(ready)
+
+      emit('submit', e)
+
+      if (!e.defaultPrevented) {
+        ready.then(({ valid }) => {
+          if (valid) {
+            formRef.value?.submit()
+          }
+        })
+      }
+
       e.preventDefault()
-      form.validate().then(({ valid }) => {
-        if (valid) {
-          emit('submit', e)
-        }
-      })
     }
 
     useRender(() => ((
@@ -47,7 +63,7 @@ export const VForm = defineComponent({
       </form>
     )))
 
-    return form
+    return forwardRefs(form, formRef)
   },
 })
 

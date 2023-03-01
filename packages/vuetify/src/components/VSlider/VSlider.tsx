@@ -2,7 +2,8 @@
 import './VSlider.sass'
 
 // Components
-import { VInput } from '../VInput'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 
@@ -11,14 +12,20 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider } from './slider'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
-// Helpers
-import { defineComponent } from '@/util'
+// Utilities
+import { computed, ref } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
 // Types
-import { computed, ref } from 'vue'
-import { filterInputProps, makeVInputProps } from '../VInput/VInput'
+import type { MakeSlots } from '@/util'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VSlider = defineComponent({
+export type VSliderSlots = VInputSlots & MakeSlots<{
+  'tick-label': []
+  'thumb-label': []
+}>
+
+export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
   props: {
@@ -37,7 +44,7 @@ export const VSlider = defineComponent({
     'update:modelValue': (v: number) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const thumbContainerRef = ref()
 
     const {
@@ -74,8 +81,9 @@ export const VSlider = defineComponent({
     const { isFocused, focus, blur } = useFocus(props)
     const trackStop = computed(() => position(model.value))
 
-    return () => {
+    useRender(() => {
       const [inputProps, _] = filterInputProps(props)
+      const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
         <VInput
@@ -93,7 +101,22 @@ export const VSlider = defineComponent({
         >
           {{
             ...slots,
-            default: ({ id }) => (
+            prepend: hasPrepend ? slotProps => (
+              <>
+                { slots.label?.(slotProps) ?? props.label
+                  ? (
+                    <VLabel
+                      id={ slotProps.id }
+                      class="v-slider__label"
+                      text={ props.label }
+                    />
+                  ) : undefined
+                }
+
+                { slots.prepend?.(slotProps) }
+              </>
+            ) : undefined,
+            default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }
@@ -118,6 +141,7 @@ export const VSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
                   min={ min.value }
                   max={ max.value }
@@ -135,7 +159,9 @@ export const VSlider = defineComponent({
           }}
         </VInput>
       )
-    }
+    })
+
+    return {}
   },
 })
 

@@ -2,7 +2,7 @@
 
 import { CenteredGrid } from '@/../cypress/templates'
 import { createVuetify } from '@/framework'
-import { VBtn } from '@/components'
+import { VBtn } from '@/components/VBtn'
 import { VThemeProvider } from '..'
 
 describe('VThemeProvider', () => {

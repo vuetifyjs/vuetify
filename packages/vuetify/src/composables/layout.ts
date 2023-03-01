@@ -2,21 +2,35 @@
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, inject, onActivated, onBeforeUnmount, onDeactivated, onMounted, provide, reactive, ref } from 'vue'
+import {
+  computed,
+  inject,
+  onActivated,
+  onBeforeUnmount,
+  onDeactivated,
+  onMounted,
+  provide,
+  reactive,
+  ref,
+} from 'vue'
 import { convertToUnit, findChildrenWithProvide, getCurrentInstance, getUid, propsFactory } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey, Prop, Ref } from 'vue'
+import type { ComponentInternalInstance, CSSProperties, InjectionKey, Prop, Ref } from 'vue'
 
 type Position = 'top' | 'left' | 'right' | 'bottom'
 
-type LayoutItem = {
-  id: string
+interface Layer {
   top: number
   bottom: number
   left: number
   right: number
+}
+
+interface LayoutItem extends Layer {
+  id: string
   size: number
+  position: Position
 }
 
 interface LayoutProvide {
@@ -24,21 +38,22 @@ interface LayoutProvide {
     vm: ComponentInternalInstance,
     options: {
       id: string
-      priority: Ref<number>
+      order: Ref<number>
       position: Ref<Position>
       layoutSize: Ref<number | string>
-      elementSize: Ref<number | string>
+      elementSize: Ref<number | string | undefined>
       active: Ref<boolean>
       disableTransitions?: Ref<boolean>
       absolute: Ref<boolean | undefined>
     }
   ) => {
-    layoutItemStyles: Ref<Record<string, unknown>>
-    layoutItemScrimStyles: Ref<Record<string, unknown>>
+    layoutItemStyles: Ref<CSSProperties>
+    layoutItemScrimStyles: Ref<CSSProperties>
     zIndex: Ref<number>
   }
   unregister: (id: string) => void
-  mainStyles: Ref<Record<string, unknown>>
+  mainRect: Ref<Layer>
+  mainStyles: Ref<CSSProperties>
   getLayoutItem: (id: string) => LayoutItem | undefined
   items: Ref<LayoutItem[]>
   layoutRect: Ref<DOMRectReadOnly | undefined>
@@ -63,7 +78,7 @@ export const makeLayoutItemProps = propsFactory({
   name: {
     type: String,
   },
-  priority: {
+  order: {
     type: [Number, String],
     default: 0,
   },
@@ -73,24 +88,28 @@ export const makeLayoutItemProps = propsFactory({
 export function useLayout () {
   const layout = inject(VuetifyLayoutKey)
 
-  if (!layout) throw new Error('Could not find injected Vuetify layout')
+  if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
-  return layout
+  return {
+    getLayoutItem: layout.getLayoutItem,
+    mainRect: layout.mainRect,
+    mainStyles: layout.mainStyles,
+  }
 }
 
 export function useLayoutItem (options: {
   id: string | undefined
-  priority: Ref<number>
+  order: Ref<number>
   position: Ref<Position>
   layoutSize: Ref<number | string>
-  elementSize: Ref<number | string>
+  elementSize: Ref<number | string | undefined>
   active: Ref<boolean>
   disableTransitions?: Ref<boolean>
   absolute: Ref<boolean | undefined>
 }) {
   const layout = inject(VuetifyLayoutKey)
 
-  if (!layout) throw new Error('Could not find injected Vuetify layout')
+  if (!layout) throw new Error('[Vuetify] Could not find injected layout')
 
   const id = options.id ?? `layout-item-${getUid()}`
 
@@ -121,8 +140,8 @@ const generateLayers = (
   positions: Map<string, Ref<Position>>,
   layoutSizes: Map<string, Ref<number | string>>,
   activeItems: Map<string, Ref<boolean>>,
-) => {
-  let previousLayer = { top: 0, left: 0, right: 0, bottom: 0 }
+): { id: string, layer: Layer }[] => {
+  let previousLayer: Layer = { top: 0, left: 0, right: 0, bottom: 0 }
   const layers = [{ id: '', layer: { ...previousLayer } }]
   for (const id of layout) {
     const position = positions.get(id)
@@ -192,15 +211,16 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return !Array.from(disabledTransitions.values()).some(ref => ref.value)
   })
 
-  const mainStyles = computed(() => {
-    const layer = layers.value[layers.value.length - 1].layer
+  const mainRect = computed(() => {
+    return layers.value[layers.value.length - 1].layer
+  })
 
+  const mainStyles = computed<CSSProperties>(() => {
     return {
-      position: 'relative',
-      paddingLeft: convertToUnit(layer.left),
-      paddingRight: convertToUnit(layer.right),
-      paddingTop: convertToUnit(layer.top),
-      paddingBottom: convertToUnit(layer.bottom),
+      '--v-layout-left': convertToUnit(mainRect.value.left),
+      '--v-layout-right': convertToUnit(mainRect.value.right),
+      '--v-layout-top': convertToUnit(mainRect.value.top),
+      '--v-layout-bottom': convertToUnit(mainRect.value.bottom),
       ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
     }
   })
@@ -209,11 +229,13 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
     return layers.value.slice(1).map(({ id }, index) => {
       const { layer } = layers.value[index]
       const size = layoutSizes.get(id)
+      const position = positions.get(id)
 
       return {
         id,
         ...layer,
         size: Number(size!.value),
+        position: position!.value,
       }
     })
   })
@@ -234,7 +256,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       vm: ComponentInternalInstance,
       {
         id,
-        priority,
+        order,
         position,
         layoutSize,
         elementSize,
@@ -243,7 +265,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
         absolute,
       }
     ) => {
-      priorities.set(id, priority)
+      priorities.set(id, order)
       positions.set(id, position)
       layoutSizes.set(id, layoutSize)
       activeItems.set(id, active)
@@ -258,7 +280,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       const index = computed(() => items.value.findIndex(i => i.id === id))
       const zIndex = computed(() => rootZIndex.value + (layers.value.length * 2) - (index.value * 2))
 
-      const layoutItemStyles = computed(() => {
+      const layoutItemStyles = computed<CSSProperties>(() => {
         const isHorizontal = position.value === 'left' || position.value === 'right'
         const isOppositeHorizontal = position.value === 'right'
         const isOppositeVertical = position.value === 'bottom'
@@ -269,15 +291,13 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
           transform: `translate${isHorizontal ? 'X' : 'Y'}(${(active.value ? 0 : -110) * (isOppositeHorizontal || isOppositeVertical ? -1 : 1)}%)`,
           position: absolute.value || rootZIndex.value !== ROOT_ZINDEX ? 'absolute' : 'fixed',
           ...(transitionsEnabled.value ? undefined : { transition: 'none' }),
-        }
+        } as const
 
         if (!isMounted.value) return styles
 
-        if (index.value < 0) throw new Error(`Layout item "${id}" is missing`)
-
         const item = items.value[index.value]
 
-        if (!item) throw new Error(`Could not find layout item "${id}`)
+        if (!item) throw new Error(`[Vuetify] Could not find layout item "${id}"`)
 
         const overlap = computedOverlaps.value.get(id)
         if (overlap) {
@@ -286,18 +306,23 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
         return {
           ...styles,
-          height: isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)` : `${elementSize.value}px`,
-          marginLeft: isOppositeHorizontal ? undefined : `${item.left}px`,
-          marginRight: isOppositeHorizontal ? `${item.right}px` : undefined,
-          marginTop: position.value !== 'bottom' ? `${item.top}px` : undefined,
-          marginBottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
-          width: !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)` : `${elementSize.value}px`,
+          height:
+            isHorizontal ? `calc(100% - ${item.top}px - ${item.bottom}px)`
+            : elementSize.value ? `${elementSize.value}px`
+            : undefined,
+          left: isOppositeHorizontal ? undefined : `${item.left}px`,
+          right: isOppositeHorizontal ? `${item.right}px` : undefined,
+          top: position.value !== 'bottom' ? `${item.top}px` : undefined,
+          bottom: position.value !== 'top' ? `${item.bottom}px` : undefined,
+          width:
+            !isHorizontal ? `calc(100% - ${item.left}px - ${item.right}px)`
+            : elementSize.value ? `${elementSize.value}px`
+            : undefined,
         }
       })
 
-      const layoutItemScrimStyles = computed(() => ({
+      const layoutItemScrimStyles = computed<CSSProperties>(() => ({
         zIndex: zIndex.value - 1,
-        position: rootZIndex.value === ROOT_ZINDEX ? 'fixed' : 'absolute',
       }))
 
       return { layoutItemStyles, layoutItemScrimStyles, zIndex }
@@ -310,6 +335,7 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
       disabledTransitions.delete(id)
       registered.value = registered.value.filter(v => v !== id)
     },
+    mainRect,
     mainStyles,
     getLayoutItem,
     items,
@@ -324,6 +350,8 @@ export function createLayout (props: { overlaps?: string[], fullHeight?: boolean
 
   const layoutStyles = computed(() => ({
     zIndex: rootZIndex.value,
+    position: parentLayout ? 'relative' as const : undefined,
+    overflow: parentLayout ? 'hidden' : undefined,
   }))
 
   return {

@@ -1,10 +1,12 @@
-import { VApp, VLocaleProvider } from '@/components'
+import { VApp } from '@/components/VApp'
+import { VLocaleProvider } from '@/components/VLocaleProvider'
+import { FunctionalComponent } from 'vue'
 
-export const Application = (_, { slots, attrs }) => {
+export const Application: FunctionalComponent<{ rtl?: boolean }> = (props, { slots, attrs }) => {
   return (
-    <VApp { ...attrs }>
-      <VLocaleProvider rtl={attrs.rtl}>
-        { slots.default() }
+    <VApp { ...attrs } rtl={ props.rtl }>
+      <VLocaleProvider rtl={ props.rtl }>
+        { slots.default?.() }
       </VLocaleProvider>
     </VApp>
   )

@@ -1,5 +1,5 @@
 <template>
-  <v-app ref="app">
+  <v-layout ref="app">
     <v-app-bar color="grey-lighten-2" name="app-bar" class="justify-center">
       <div class="d-flex justify-center align-center w-100">
         <v-btn @click="print('app-bar')">Get data</v-btn>
@@ -13,7 +13,7 @@
     <v-main>
       <v-card height="200px"></v-card>
     </v-main>
-  </v-app>
+  </v-layout>
 </template>
 
 <script>

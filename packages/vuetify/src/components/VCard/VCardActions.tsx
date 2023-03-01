@@ -1,10 +1,13 @@
 // Composables
 import { provideDefaults } from '@/composables/defaults'
 
-// Utility
+// Utilities
 import { defineComponent, useRender } from '@/util'
 
-export const VCardActions = defineComponent({
+// Types
+import type { SlotsToProps } from '@/util'
+
+export const VCardActions = defineComponent<SlotsToProps<{ default: [] }>>({
   name: 'VCardActions',
 
   setup (_, { slots }) {
@@ -16,10 +19,12 @@ export const VCardActions = defineComponent({
 
     useRender(() => (
       <div class="v-card-actions">
-        { slots?.default?.() }
+        { slots.default?.() }
       </div>
     ))
 
     return {}
   },
 })
+
+export type VCardActions = InstanceType<typeof VCardActions>

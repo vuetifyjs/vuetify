@@ -1,32 +1,20 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row no-gutters>
       <v-col order="last">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
+        <v-sheet class="pa-2 ma-2">
           First, but last
-        </v-card>
+        </v-sheet>
       </v-col>
       <v-col>
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
+        <v-sheet class="pa-2 ma-2">
           Second, but unordered
-        </v-card>
+        </v-sheet>
       </v-col>
       <v-col order="first">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
+        <v-sheet class="pa-2 ma-2">
           Third, but first
-        </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

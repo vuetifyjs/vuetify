@@ -2,7 +2,7 @@
   <v-container>
     <v-row justify="center">
       <v-col
-        v-for="n in 25"
+        v-for="(_, n) in 25"
         :key="n"
         cols="auto"
       >
@@ -11,7 +11,7 @@
           width="100"
           :class="['d-flex justify-center align-center bg-secondary', `elevation-${n}`]"
         >
-          <div>{{ n - 1 }}</div>
+          <div>{{ n }}</div>
         </v-card>
       </v-col>
     </v-row>

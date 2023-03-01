@@ -1,19 +1,19 @@
-import { makeValidationProps } from '@/composables/validation'
-import { defineComponent, nextTick, ref } from 'vue'
 // Composables
-import { useValidation } from '../validation'
+import { makeValidationProps, useValidation } from '../validation'
 
 // Utilites
 import { describe, expect, it } from '@jest/globals'
+import { defineComponent, nextTick } from 'vue'
 import { mount } from '@vue/test-utils'
 
 // Types
-import type { ValidationProps, ValidationRule } from './../validation'
+import type { ValidationProps } from '../validation'
 
-describe('validation.ts', () => {
+describe('validation', () => {
   function mountFunction (props: Partial<ValidationProps> = {}) {
     return mount(defineComponent({
       props: makeValidationProps(),
+      emits: ['update:modelValue'],
       setup (props) {
         return useValidation(props, 'validation')
       },
@@ -27,15 +27,10 @@ describe('validation.ts', () => {
     ['', [(v: any) => !!v || 'foo'], ['foo']],
     ['', [(v: any) => !!v || ''], ['']],
     ['', [(v: any) => Promise.resolve(!!v || 'fizz')], ['fizz']],
-    ['', [(v: any) => new Promise(resolve => resolve(!!v || 'buzz'))], ['buzz']],
+    ['', [(v: any) => new Promise<boolean | string>(resolve => resolve(!!v || 'buzz'))], ['buzz']],
     ['foo', [(v: any) => v === 'foo' || 'bar'], []],
     ['foo', [(v: any) => v === 'bar' || 'fizz'], ['fizz']],
-  ])('should validate rules and return array of errorMessages', async (
-    value: any,
-    rules: ValidationRule[],
-    expected: any
-  ) => {
-    const modelValue = ref(value)
+  ])('should validate rules and return array of errorMessages %#', async (modelValue, rules, expected) => {
     const props = { rules, modelValue }
     const wrapper = mountFunction(props)
 
@@ -45,16 +40,14 @@ describe('validation.ts', () => {
   })
 
   it.each([
-    [null, 1],
+    [undefined, 1],
+    [0, 0],
     [1, 1],
     [2, 2],
     [3, 3],
     [4, 4],
     [5, 4],
-  ])('only validate up to the maximum error count', async (
-    maxErrors: number | string,
-    expected: number,
-  ) => {
+  ])('only validate up to the maximum error count %s', async (maxErrors, expected) => {
     const wrapper = mountFunction({
       maxErrors,
       rules: ['foo', 'bar', 'fizz', 'buzz'],
@@ -63,6 +56,41 @@ describe('validation.ts', () => {
     await wrapper.vm.validate()
 
     expect(wrapper.vm.errorMessages).toHaveLength(expected)
+  })
+
+  it.each([
+    [undefined, 1],
+    [0, 0],
+    [1, 1],
+    [2, 2],
+    [3, 3],
+    [4, 4],
+    [5, 4],
+  ])('only display up to the maximum error count %s', async (maxErrors, expected) => {
+    const wrapper = mountFunction({
+      maxErrors,
+      errorMessages: ['foo', 'bar', 'fizz', 'buzz'],
+    })
+
+    await wrapper.vm.validate()
+
+    expect(wrapper.vm.errorMessages).toHaveLength(expected)
+  })
+
+  it.each([
+    [undefined, ['foo']],
+    [0, []],
+    [1, ['foo']],
+    [2, ['foo']],
+  ])('should not trim error message if passed as text', async (maxErrors, expected) => {
+    const wrapper = mountFunction({
+      maxErrors,
+      errorMessages: 'foo',
+    })
+
+    await wrapper.vm.validate()
+
+    expect(wrapper.vm.errorMessages).toStrictEqual(expected)
   })
 
   it('should warn the user when using an improper rule fn', async () => {
@@ -77,10 +105,9 @@ describe('validation.ts', () => {
   })
 
   it('should update isPristine when using the validate and reset methods', async () => {
-    const modelValue = ref('')
     const wrapper = mountFunction({
       rules: [(v: any) => v === 'foo' || 'bar'],
-      modelValue,
+      modelValue: '',
     })
 
     expect(wrapper.vm.isPristine).toBe(true)
@@ -91,7 +118,7 @@ describe('validation.ts', () => {
     expect(wrapper.vm.isPristine).toBe(false)
     expect(wrapper.vm.isValid).toBe(false)
 
-    modelValue.value = 'fizz'
+    await wrapper.setProps({ modelValue: 'fizz' })
 
     await nextTick()
     await wrapper.vm.validate()
@@ -99,7 +126,7 @@ describe('validation.ts', () => {
     expect(wrapper.vm.isPristine).toBe(false)
     expect(wrapper.vm.isValid).toBe(false)
 
-    modelValue.value = 'foo'
+    await wrapper.setProps({ modelValue: 'foo' })
 
     await nextTick()
     await wrapper.vm.validate()
@@ -111,5 +138,35 @@ describe('validation.ts', () => {
 
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()
+  })
+
+  it('should return valid if no rules are set', async () => {
+    const wrapper = mountFunction()
+
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({ rules: [] })
+
+    expect(wrapper.vm.isValid).toBe(true)
+
+    await wrapper.setProps({ error: true })
+
+    expect(wrapper.vm.isValid).toBe(false)
+  })
+
+  it('should return invalid if error is manually set', async () => {
+    const wrapper = mountFunction({
+      error: true,
+    })
+
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({ error: false, errorMessages: ['error'] })
+
+    expect(wrapper.vm.isValid).toBe(false)
+
+    await wrapper.setProps({ errorMessages: [] })
+
+    expect(wrapper.vm.isValid).toBe(true)
   })
 })

@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -42,11 +41,11 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
-    > :first-child:not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+    > :first-child:not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
 
-    > :last-child:not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+    > :last-child:not(:first-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
@@ -113,6 +112,7 @@
 
 .v-expansion-panel-title
   align-items: center
+  text-align: start
   border-radius: inherit
   display: flex
   font-size: $expansion-panel-title-font-size

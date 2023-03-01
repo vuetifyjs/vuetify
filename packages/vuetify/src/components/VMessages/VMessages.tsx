@@ -9,11 +9,21 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, wrapInArray } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, useRender, wrapInArray } from '@/util'
+
+// Types
 import type { PropType } from 'vue'
 
-export const VMessages = defineComponent({
+export type VMessageSlot = {
+  message: string
+}
+
+export type VMessagesSlots = {
+  message: [VMessageSlot]
+}
+
+export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',
 
   props: {
@@ -37,7 +47,7 @@ export const VMessages = defineComponent({
     const messages = computed(() => wrapInArray(props.messages))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => props.color))
 
-    return () => (
+    useRender(() => (
       <MaybeTransition
         transition={ props.transition }
         tag="div"
@@ -46,6 +56,8 @@ export const VMessages = defineComponent({
           textColorClasses.value,
         ]}
         style={ textColorStyles.value }
+        role="alert"
+        aria-live="polite"
       >
         { props.active && (
           messages.value.map((message, i) => (
@@ -58,6 +70,10 @@ export const VMessages = defineComponent({
           ))
         ) }
       </MaybeTransition>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VMessages = InstanceType<typeof VMessages>

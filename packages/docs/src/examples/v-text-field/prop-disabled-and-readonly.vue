@@ -7,7 +7,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="Regular"
             disabled
           ></v-text-field>
@@ -18,7 +18,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="Regular"
             readonly
           ></v-text-field>
@@ -29,9 +29,9 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
-            label="Contained"
-            variant="contained"
+            model-value="John Doe"
+            label="Solo"
+            variant="solo"
             disabled
           ></v-text-field>
         </v-col>
@@ -41,9 +41,9 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
-            label="Contained"
-            variant="contained"
+            model-value="John Doe"
+            label="Solo"
+            variant="solo"
             readonly
           ></v-text-field>
         </v-col>
@@ -53,7 +53,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="Outlined"
             variant="outlined"
             disabled
@@ -65,7 +65,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="Outlined"
             variant="outlined"
             readonly
@@ -77,7 +77,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="underlined"
             variant="underlined"
             disabled
@@ -89,7 +89,7 @@
           sm="6"
         >
           <v-text-field
-            value="John Doe"
+            model-value="John Doe"
             label="underlined"
             variant="underlined"
             readonly

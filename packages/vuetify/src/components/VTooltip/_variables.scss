@@ -1,5 +1,6 @@
 @use '../../styles/settings';
 
+// VTooltip
 $tooltip-background-color: rgba(var(--v-theme-surface-variant), .7) !default;
 $tooltip-text-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $tooltip-border-radius: settings.$border-radius-root !default;

@@ -9,7 +9,7 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -21,7 +21,7 @@ const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
-export const VExpansionPanels = defineComponent({
+export const VExpansionPanels = genericComponent()({
   name: 'VExpansionPanels',
 
   props: {
@@ -31,6 +31,7 @@ export const VExpansionPanels = defineComponent({
       default: 'default',
       validator: (v: any) => allowedVariants.includes(v),
     },
+    readonly: Boolean,
 
     ...makeGroupProps(),
     ...makeTagProps(),
@@ -51,6 +52,9 @@ export const VExpansionPanels = defineComponent({
     provideDefaults({
       VExpansionPanel: {
         color: toRef(props, 'color'),
+      },
+      VExpansionPanelTitle: {
+        readonly: toRef(props, 'readonly'),
       },
     })
 

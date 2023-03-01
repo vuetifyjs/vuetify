@@ -2,7 +2,7 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="deep-purple-accent-4"
+      bg-color="deep-purple-accent-4"
       centered
       stacked
     >

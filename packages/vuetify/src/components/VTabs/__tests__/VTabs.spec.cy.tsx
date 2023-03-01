@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VTab, VTabs } from '../'
 
@@ -16,8 +17,8 @@ describe('VTabs', () => {
 
     cy.get('.v-tab').eq(1).click()
 
-    cy.vue().then(wrapper => {
-      const tabs = wrapper.findComponent('.v-tabs')
+    cy.vue().then(({ wrapper }) => {
+      const tabs = wrapper.findComponent<VTabs>('.v-tabs')
       const emits = tabs.emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
@@ -54,16 +55,20 @@ describe('VTabs', () => {
   })
 
   it('should respond to v-model changes', () => {
-    cy.mount(({ modelValue }: any) => (
+    cy.mount(({ modelValue }: { modelValue: string }) => (
       <VTabs modelValue={ modelValue }>
         <VTab value="foo">foo</VTab>
         <VTab value="bar">bar</VTab>
       </VTabs>
-    ))
+    ), {
+      props: {
+        modelValue: 'foo',
+      },
+    })
 
     cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       wrapper.setProps({ modelValue: 'bar' })
     })
 
@@ -120,5 +125,33 @@ describe('VTabs', () => {
     cy.get('.v-tabs').should('have.class', 'v-tabs--vertical')
 
     cy.get('.v-tab').eq(1).click().should('have.class', 'v-tab--selected')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/15237
+  it('should not change model value if tab items are hidden with v-show', () => {
+    const model = ref('B')
+    cy.mount(({ show = true }: { show?: boolean }) => (
+      <div v-show={ show }>
+        <VTabs modelValue={model.value} onUpdate:modelValue={v => model.value = v as string}>
+          <VTab value="A">A</VTab>
+          <VTab value="B">B</VTab>
+          <VTab value="C">C</VTab>
+        </VTabs>
+      </div>
+    ))
+      .get('.v-tabs').should('be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
+      .setProps({ show: false })
+      .get('.v-tabs').should('not.be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
+      .setProps({ show: true })
+      .get('.v-tabs').should('be.visible')
+      .then(() => {
+        expect(model.value).to.equal('B')
+      })
   })
 })

@@ -5,16 +5,16 @@
         <v-col cols="12">
           <v-text-field
             v-model="message"
-            :append-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
-            :append-outer-icon="message ? 'mdi-send' : 'mdi-microphone'"
+            :append-icon="message ? 'mdi-send' : 'mdi-microphone'"
+            :append-inner-icon="marker ? 'mdi-map-marker' : 'mdi-map-marker-off'"
             :prepend-icon="icon"
             variant="filled"
             clear-icon="mdi-close-circle"
             clearable
             label="Message"
             type="text"
-            @click:append="toggleMarker"
-            @click:append-outer="sendMessage"
+            @click:append-inner="toggleMarker"
+            @click:append="sendMessage"
             @click:prepend="changeIcon"
             @click:clear="clearMessage"
           ></v-text-field>

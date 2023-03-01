@@ -6,17 +6,17 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useTextColor } from '@/composables/color'
 import { useResizeObserver } from '@/composables/resizeObserver'
+import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VProgressCircular = defineComponent({
+export const VProgressCircular = genericComponent()({
   name: 'VProgressCircular',
 
   props: {
@@ -73,7 +73,7 @@ export const VProgressCircular = defineComponent({
       resizeRef.value = root.value
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ root }
         class={[
@@ -129,12 +129,17 @@ export const VProgressCircular = defineComponent({
             stroke-dashoffset={ strokeDashOffset.value }
           />
         </svg>
+
         { slots.default && (
           <div class="v-progress-circular__content">
             { slots.default({ value: normalizedValue.value }) }
           </div>
         ) }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VProgressCircular = InstanceType<typeof VProgressCircular>

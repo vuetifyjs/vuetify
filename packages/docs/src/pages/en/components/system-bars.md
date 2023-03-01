@@ -47,6 +47,8 @@ The recommended placement of elements inside of `v-system-bar` is:
 | - | - |
 | [v-system-bar](/api/v-system-bar/) | Primary component |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props
@@ -62,5 +64,3 @@ You can optionally change the color of the `v-system-bar` by using the `color` p
 A window bar with window controls and status info.
 
 <example file="v-system-bar/prop-window" />
-
-<backmatter />

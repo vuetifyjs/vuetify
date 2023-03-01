@@ -2,31 +2,39 @@
 import './VTable.sass'
 
 // Composables
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, defineComponent } from '@/util'
-import { makeDensityProps, useDensity } from '@/composables/density'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VTable = defineComponent({
+export type VTableSlots = {
+  default: []
+  top: []
+  bottom: []
+  wrapper: []
+}
+
+export const VTable = genericComponent<VTableSlots>()({
   name: 'VTable',
 
   props: {
     fixedHeader: Boolean,
     fixedFooter: Boolean,
     height: [Number, String],
+    hover: Boolean,
 
     ...makeDensityProps(),
-    ...makeThemeProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-table',
@@ -36,6 +44,7 @@ export const VTable = defineComponent({
             'v-table--fixed-footer': props.fixedFooter,
             'v-table--has-top': !!slots.top,
             'v-table--has-bottom': !!slots.bottom,
+            'v-table--hover': props.hover,
           },
           themeClasses.value,
           densityClasses.value,
@@ -43,19 +52,23 @@ export const VTable = defineComponent({
       >
         { slots.top?.() }
 
-        { slots.default && (
+        { slots.default ? (
           <div
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}
           >
             <table>
-              { slots.default?.() }
+              { slots.default() }
             </table>
           </div>
-        ) }
+        ) : slots.wrapper?.() }
 
         { slots.bottom?.() }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VTable = InstanceType<typeof VTable>

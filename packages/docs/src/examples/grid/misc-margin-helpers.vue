@@ -1,78 +1,54 @@
 <template>
-  <div class="ma-5 pa-5">
-    <v-container class="grey lighten-5">
-      <v-row>
-        <v-col md="4">
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-md-4
-          </v-card>
-        </v-col>
-        <v-col
-          md="4"
-          class="ml-auto"
-        >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-md-4 .ml-auto
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          md="3"
-          class="ml-md-auto"
-        >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-md-3 .ml-md-auto
-          </v-card>
-        </v-col>
-        <v-col
-          md="3"
-          class="ml-md-auto"
-        >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-md-3 .ml-md-auto
-          </v-card>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col
-          cols="auto"
-          class="mr-auto"
-        >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-auto .mr-auto
-          </v-card>
-        </v-col>
-        <v-col cols="auto">
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            .col-auto
-          </v-card>
-        </v-col>
-      </v-row>
-    </v-container>
-  </div>
+  <v-container class="bg-surface-variant">
+    <v-row>
+      <v-col md="4">
+        <v-sheet class="pa-2 ma-2">
+          .v-col-md-4
+        </v-sheet>
+      </v-col>
+      <v-col
+        md="4"
+        class="ms-auto"
+      >
+        <v-sheet class="pa-2 ma-2">
+          .v-col-md-4 .ms-auto
+        </v-sheet>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col
+        md="4"
+        class="ms-md-auto"
+      >
+        <v-sheet class="pa-2 ma-2">
+          .v-col-md-4 .ms-md-auto
+        </v-sheet>
+      </v-col>
+      <v-col
+        md="4"
+        class="ms-md-auto"
+      >
+        <v-sheet class="pa-2 ma-2">
+          .v-col-md-4 .ms-md-auto
+        </v-sheet>
+      </v-col>
+    </v-row>
+
+    <v-row>
+      <v-col
+        cols="auto"
+        class="me-auto"
+      >
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto .me-auto
+        </v-sheet>
+      </v-col>
+      <v-col cols="auto">
+        <v-sheet class="pa-2 ma-2">
+          .v-col-auto
+        </v-sheet>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>

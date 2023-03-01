@@ -6,8 +6,8 @@ meta:
   keywords: lists, vuetify list component, vue list component
 related:
   - /components/item-groups/
-  - /components/list-item-groups/
-  - /components/subheaders/
+  - /components/avatars/
+  - /components/sheets/
 ---
 
 # Lists
@@ -20,23 +20,35 @@ The `v-list` component is used to display information. It can contain an avatar,
 
 Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop.
 
-<example file="v-list/usage" />
+<usage name="v-list" />
 
 ## API
 
 <api-inline />
 
-## Caveats
-
-<alert type="info">
-
-  If you are looking for stateful list items, please check out [v-list-item-group](/components/list-item-groups).
-
-</alert>
-
 ## Examples
 
 ### Props
+
+#### Items
+
+Lists can either be created by markup using the many sub-components that are available, or by using the **items** prop.
+
+<example file="v-list/prop-items" />
+
+To customize which properties will be used for the title and value of each item, use the **item-title** and **item-value** props.
+
+<example file="v-list/prop-items-custom" />
+
+If you need to render subheaders or dividers, add an item with a **type** property. Which property to use can be customized using the **item-type** prop.
+
+<example file="v-list/prop-items-type" />
+
+To customize individual items, you can use the **item-props** prop. It defaults to looking for a **props** property on the items. The value should be an object, and if found it will be spread on the **v-list-item** component.
+
+If **item-props** is set to **true** then the whole item will be spread.
+
+<example file="v-list/prop-items-prop" />
 
 #### Density
 
@@ -101,41 +113,3 @@ Lists can contain subheaders, dividers, and can contain 1 or more lines. The sub
 A **three-line** list with actions. Utilizing **v-list-group**, easily connect actions to your tiles.
 
 <example file="v-list/misc-action-and-item-groups" />
-
-<!-- #### Action stack
-
-A list can contain a stack within an action. This is useful when you need to display meta text next to your action item.
-
-<example file="v-list/misc-action-stack" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Card list
-
-A list can be combined with a card.
-
-<example file="v-list/misc-card-list" />
-
-#### Simple avatar list
-
-A simple list utilizing `v-list-item-icon`, `v-list-item-title` and `v-list-item-avatar`.
-
-<example file="v-list/misc-simple-avatar-list" />
-
-#### Single line list
-
-Here we combine **v-list-item-avatar** and **v-list-item-icon** in a single-line list.
-
-<example file="v-list/misc-single-line-list" />
-
-#### Subheadings and dividers
-
-Lists can contain multiple subheaders and dividers.
-
-<example file="v-list/misc-subheadings-and-dividers" /> -->
-
-<backmatter />

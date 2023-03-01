@@ -5,14 +5,15 @@ meta:
   keywords: css height, css width, sizing elements, element dimensions
 related:
   - /styles/content/
-  - /styles/contenttext-and-typography/
+  - /styles/flex/
+  - /styles/text-and-typography/
 ---
 
 # Sizing
 
 Sizing utility classes are used to modify the dimensions of an element.
 
-<entry-ad />
+<entry />
 
 ## Height
 
@@ -44,5 +45,3 @@ Specify the `width` property of **block level elements** with a utility class. T
 | **w-100**    | `width: 100%`  |
 
 <example file="sizing/width" />
-
-<backmatter />

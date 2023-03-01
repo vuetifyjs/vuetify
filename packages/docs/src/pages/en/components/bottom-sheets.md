@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
@@ -60,5 +61,3 @@ Using a inset bottom sheet, you can make practical components such as this simpl
 By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
 <example file="v-bottom-sheet/misc-open-in-list" />
-
-<backmatter />

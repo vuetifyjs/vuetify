@@ -1,5 +1,4 @@
 @use 'sass:math'
-@forward './variables'
 @use 'sass:map'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -7,26 +6,25 @@
 
 .v-tabs
   display: flex
+  height: var(--v-tabs-height)
 
   @at-root
     @include tools.density('v-tabs', $tabs-density) using ($modifier)
-      height: $tabs-height + $modifier
+      --v-tabs-height: #{$tabs-height + $modifier}
 
       &.v-tabs--stacked
-        height: $tabs-stacked-height + $modifier
+        --v-tabs-height: #{$tabs-stacked-height + $modifier}
 
   &.v-slide-group--vertical
     height: auto
+    --v-tabs-height: #{$tabs-height}
 
-    .v-tab
-      --v-btn-height: #{$tabs-height}
-
-.v-tabs--align-with-title:not(.v-slide-group--has-affixes)
+.v-tabs--align-tabs-title:not(.v-slide-group--has-affixes)
   .v-tab:first-child
-    margin-inline-start: $tab-align-with-title-margin
+    margin-inline-start: $tab-align-tabs-title-margin
 
 .v-tabs--fixed-tabs,
-.v-tabs--centered
+.v-tabs--align-tabs-center
   .v-slide-group__content > *:last-child
     margin-inline-end: auto
 
@@ -40,7 +38,7 @@
     flex: 1 0 auto
     max-width: none
 
-.v-tabs--right
+.v-tabs--align-tabs-end
   .v-tab:first-child
     margin-inline-start: auto
 
@@ -48,13 +46,8 @@
     margin-inline-end: 0
 
 @media #{map-get(settings.$display-breakpoints, 'md-and-down')}
-  .v-tabs.v-slide-group--is-overflowing:not(.v-slide-group--has-affixes)
+  .v-tabs.v-slide-group--is-overflowing.v-slide-group--horizontal:not(.v-slide-group--has-affixes)
     .v-tab:first-child
       margin-inline-start: 52px
     .v-tab:last-child
       margin-inline-end: 52px
-
-.v-toolbar__content
-  > .v-tabs,
-  .v-tab
-    height: inherit

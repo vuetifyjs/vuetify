@@ -1,23 +1,24 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
+    v-model="app.toc"
     color="background"
-    class="py-4 pr-3"
     floating
+    location="right"
+    sticky
     width="256"
-    position="right"
   >
     <template
-      v-if="toc.length"
+      v-if="toc?.length"
       #prepend
     >
       <app-headline
-        class="mb-2"
+        class="mt-4 mb-2 ms-4"
         path="contents"
       />
     </template>
 
-    <ul class="mb-4 ml-5">
+    <ul class="ms-5">
       <router-link
         v-for="{ to, level, text } in toc"
         v-slot="{ href }"
@@ -27,13 +28,13 @@
       >
         <li
           :class="[
-            'pl-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': route.hash === to,
-              'text-grey': route.hash !== to,
-              'pl-6': level === 3,
-              'pl-9': level === 4,
-              'pl-12': level === 5,
+              'text-medium-emphasis': route.hash !== to,
+              'ps-6': level === 3,
+              'ps-9': level === 4,
+              'ps-12': level === 5,
             }
           ]"
         >
@@ -49,36 +50,40 @@
 
     <template #append>
       <v-container>
-        <v-card
-          :color="dark ? undefined : 'grey-lighten-5'"
-          variant="contained-flat"
-        >
+        <app-headline
+          v-if="sponsors.length"
+          :to="rpath('/introduction/sponsors-and-backers/')"
+          class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
+          path="sponsors"
+          size="subtitle-1"
+          tag="router-link"
+        />
 
-          <v-container class="pa-2">
-            <app-caption
-              v-if="sponsors.length"
-              path="sponsors"
-              class="mt-n1 mb-1 ml-2"
+        <v-row dense>
+          <v-col
+            v-for="sponsor of sponsors"
+            :key="sponsor.slug"
+            class="d-inline-flex"
+          >
+            <sponsor-card
+              :max-height="sponsor.metadata.tier === -1 ? 52 : 40"
+              :sponsor="sponsor"
+              :color="dark ? undefined : 'grey-lighten-5'"
             />
+          </v-col>
 
-            <v-row dense>
-              <v-col
-                v-for="sponsor of sponsors"
-                :key="sponsor.slug"
-                :cols="sponsor.metadata.tier === -1 ? 12 : 6"
-                class="text-center"
-              >
-                <sponsor-card
-                  :max-height="sponsor.metadata.tier === -1 ? 52 : undefined"
-                  :sponsor="sponsor"
-                  style="width: 100%; height: 100%;"
-                />
-              </v-col>
-            </v-row>
-          </v-container>
-        </v-card>
+          <v-col class="d-inline-flex">
+            <v-card
+              :color="dark ? undefined : 'grey-lighten-5'"
+              :to="rpath('/introduction/sponsors-and-backers/')"
+              class="py-2 px-3 text-center"
+              variant="flat"
+              width="100%"
+            >
+              <small class="text-disabled">Your logo here</small>
+            </v-card>
+          </v-col>
 
-        <v-row>
           <v-col cols="12">
             <carbon />
           </v-col>
@@ -88,20 +93,27 @@
   </v-navigation-drawer>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent, onBeforeMount, ref } from 'vue'
+<script setup lang="ts">
+  // Components
+  import SponsorCard from '@/components/sponsor/Card.vue'
+
+  // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
-  import { useSponsorsStore } from '../../store/sponsors'
+  import { useAppStore } from '@/store/app'
+  import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
-  import SponsorCard from '@/components/sponsor/Card.vue'
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { rpath } from '@/util/routes'
 
   type TocItem = {
     to: string;
     text: string;
     level: number;
   }
+
+  const app = useAppStore()
 
   function useUpdateHashOnScroll (route: RouteLocation, router: Router) {
     const scrolling = ref(false)
@@ -191,56 +203,40 @@
     return { onScroll, scrolling }
   }
 
-  export default defineComponent({
-    name: 'AppToc',
+  const route = useRoute()
+  const router = useRouter()
+  const theme = useTheme()
 
-    components: {
-      SponsorCard,
-    },
+  const { scrolling } = useUpdateHashOnScroll(route, router)
 
-    setup () {
-      const route = useRoute()
-      const router = useRouter()
-      const theme = useTheme()
+  async function onClick (hash: string) {
+    if (route.hash === hash) return
 
-      const { onScroll, scrolling } = useUpdateHashOnScroll(route, router)
+    scrolling.value = true
 
-      async function onClick (hash: string) {
-        if (route.hash === hash) return
+    router.replace({ path: route.path, hash })
 
-        scrolling.value = true
+    // await this.$vuetify.goTo(hash)
+    // await wait(200)
 
-        router.replace({ path: route.path, hash })
+    scrolling.value = false
+  }
 
-        // await this.$vuetify.goTo(hash)
-        // await wait(200)
+  const sponsorStore = useSponsorsStore()
 
-        scrolling.value = false
-      }
+  const toc = computed(() => route.meta.toc as TocItem[])
 
-      const sponsorStore = useSponsorsStore()
+  const sponsors = computed(() => (
+    sponsorStore.sponsors
+      .filter(sponsor => sponsor.metadata.tier <= 1)
+      .sort((a, b) => {
+        const aTier = a.metadata.tier
+        const bTier = b.metadata.tier
 
-      onBeforeMount(async () => sponsorStore.load())
-
-      return {
-        toc: computed(() => route.meta.toc as TocItem[]),
-        onClick,
-        onScroll,
-        sponsors: computed(() => (
-          sponsorStore.sponsors
-            .filter(sponsor => sponsor.metadata.tier <= 2)
-            .sort((a, b) => {
-              const aTier = a.metadata.tier
-              const bTier = b.metadata.tier
-
-              return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
-            })
-        )),
-        dark: computed(() => theme.getTheme(theme.current.value).dark),
-        route,
-      }
-    },
-  })
+        return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
+      })
+  ))
+  const dark = computed(() => theme.current.value.dark)
 </script>
 
 <style lang="sass">
@@ -263,4 +259,5 @@
 
     .v-navigation-drawer__content
       height: auto
+      margin-right: 12px
 </style>

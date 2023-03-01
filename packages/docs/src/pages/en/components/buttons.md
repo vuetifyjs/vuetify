@@ -7,32 +7,47 @@ meta:
 related:
   - /components/button-groups/
   - /components/icons/
-  - /components/floating-action-buttons/
+  - /components/cards/
 ---
 
 # Buttons
 
 The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
 
-<entry />
+![Button Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-entry.png)
+
+---
 
 ## Usage
 
 Buttons in their simplest form contain uppercase text, a slight elevation, hover effect, and a ripple effect on click.
 
-<!-- <usage name="v-btn" /> -->
+<usage name="v-btn" />
+
+<entry />
+
+## Anatomy
+
+The recommended placement of elements inside of `v-btn` is:
+
+* Place text in the center
+* Place visual content around container text
+
+![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | In addition to text, the Button container typically holds a [v-icon](/components/icons/) component |
+| 2. Icon (optional) | Leading media content intended to improve visual context |
+| 3. Text | A content area for displaying text and other inline elements |
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-btn](/api/v-btn) | Primary Component |
 
-## Caveats
-
-<alert type="warning">
-
-  `v-btn` is the only component that behaves differently when using the **dark** prop. Normally components use the **dark** prop to denote that they have a dark colored background and need their text to be white. While this will work for `v-btn`, it is advised to only use the prop when the button **IS ON** a colored background due to the disabled state blending in with white backgrounds. If you need white text, simply add the `white--text` class.
-
-</alert>
+<api-inline hide-links />
 
 ## Examples
 
@@ -40,7 +55,13 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 #### Variant
 
-The **variant** prop gives you easy access to several different button styles
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
+
+<alert type="warning">
+
+  When a `v-btn` is used inside of `v-toolbar` and `v-app-bar` the default variant **text** is applied instead of **elevated**.
+
+</alert>
 
 <example file="v-btn/prop-variant" />
 
@@ -62,15 +83,11 @@ Icons can be used for the primary content of a button. Use the **icon** prop to 
 
 <example file="v-btn/prop-icon" />
 
-<!--
-
 #### Loaders
 
-Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized.
+Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
 
 <example file="v-btn/prop-loaders" />
-
---->
 
 <random />
 
@@ -97,5 +114,3 @@ Use the **rounded** prop to control the border radius of buttons.
 Buttons can be given different sizing options to fit a multitude of scenarios.
 
 <example file="v-btn/prop-sizing" />
-
-<backmatter />

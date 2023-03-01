@@ -20,7 +20,7 @@ The `v-tooltip` component is useful for conveying information when a user hovers
 
 Tooltips can wrap any element.
 
-<example file="v-tooltip/usage" />
+<usage name="v-tooltip" />
 
 ## API
 
@@ -30,16 +30,22 @@ Tooltips can wrap any element.
 
 ### Props
 
-#### Anchor
+#### Location
 
-Use the **anchor** prop to specify on which side of the element the tooltip should show. Read more about **anchor** [here](/components/overlays).
+Use the **location** prop to specify on which side of the element the tooltip should show. Read more about **location** [here](/components/overlays/#location).
 
-<example file="v-tooltip/prop-anchor" />
+<example file="v-tooltip/prop-location" />
+
+<!-- TODO: not supported
+#### Color
+
+Tooltip color can be set with the `color` prop.
+
+<example file="v-tooltip/prop-color" />
+-->
 
 #### Visibility
 
 Tooltip visibility can be programmatically changed using `v-model`.
 
 <example file="v-tooltip/prop-visibility" />
-
-<backmatter />

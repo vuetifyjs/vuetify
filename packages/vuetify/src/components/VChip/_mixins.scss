@@ -11,24 +11,35 @@
     $height: map.get($chip-sizes, "height") + (6 * $multiplier);
     $padding: math.round(math.div($height, $chip-padding-ratio));
 
-    .v-chip--size-#{$sizeName} {
+    .v-chip.v-chip--size-#{$sizeName} {
       --v-chip-size: #{$size};
       --v-chip-height: #{$height};
       font-size: $size;
       padding: 0 $padding;
 
       .v-avatar {
-        --v-avatar-height: #{$height - 8};
+        --v-avatar-height: #{$height - 6};
 
         @at-root #{selector.append('.v-chip--pill', &)} {
           --v-avatar-height: #{$height};
         }
       }
 
+      .v-chip__filter,
       .v-chip__prepend,
-      .v-chip__filter {
-        margin-inline-start: -$padding * .5;
+      > .v-avatar--start,
+      > .v-icon--start {
         margin-inline-end: $padding * .5;
+      }
+
+      .v-chip__filter,
+      .v-chip__prepend,
+      .v-icon--start {
+        margin-inline-start: -$padding * .5;
+      }
+
+      .v-avatar--start {
+        margin-inline-start: -$padding * .7;
 
         @at-root #{selector.append('.v-chip--pill', &)} {
           margin-inline-start: -$padding;
@@ -36,12 +47,21 @@
       }
 
       .v-chip__append,
-      .v-chip__close {
-        margin-inline-end: -$padding * .5;
+      .v-chip__close,
+      > .v-avatar--end,
+      > .v-icon--end {
         margin-inline-start: $padding * .5;
+        margin-inline-end: -$padding * .5;
+      }
 
+      .v-avatar--end,
+      .v-icon--end {
         @at-root #{selector.append('.v-chip--pill', &)} {
           margin-inline-end: -$padding;
+
+          + .v-chip__close {
+            margin-inline-start: $padding;
+          }
         }
       }
     }

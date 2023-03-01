@@ -8,12 +8,12 @@
       .rounded-b-xl
     </div>
 
-    <div class="pa-4 bg-secondary rounded-l-xl">
-      .rounded-l-xl
+    <div class="pa-4 bg-secondary rounded-s-xl">
+      .rounded-s-xl
     </div>
 
-    <div class="pa-4 bg-secondary rounded-r-xl">
-      .rounded-r-xl
+    <div class="pa-4 bg-secondary rounded-e-xl">
+      .rounded-e-xl
     </div>
   </div>
 </template>

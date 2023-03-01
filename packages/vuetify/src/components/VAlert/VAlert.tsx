@@ -3,37 +3,52 @@ import './VAlert.sass'
 
 // Components
 import { VAlertTitle } from './VAlertTitle'
+import { VBtn } from '@/components/VBtn'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import type { MakeSlots } from '@/util'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
 
-export const VAlert = defineComponent({
+export type VAlertSlots = MakeSlots<{
+  default: []
+  prepend: []
+  title: []
+  text: []
+  append: []
+  close: []
+}>
+
+export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',
 
   props: {
     border: {
-      type: [Boolean, String],
+      type: [Boolean, String] as PropType<boolean | 'top' | 'end' | 'bottom' | 'start'>,
       validator: (val: boolean | string) => {
         return typeof val === 'boolean' || [
           'top',
@@ -46,7 +61,7 @@ export const VAlert = defineComponent({
     borderColor: String,
     closable: Boolean,
     closeIcon: {
-      type: String,
+      type: IconValue,
       default: '$close',
     },
     closeLabel: {
@@ -54,7 +69,7 @@ export const VAlert = defineComponent({
       default: '$vuetify.close',
     },
     icon: {
-      type: [Boolean, String] as PropType<false | string>,
+      type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
       default: null,
     },
     modelValue: {
@@ -72,11 +87,12 @@ export const VAlert = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-flat' } as const),
+    ...makeVariantProps({ variant: 'flat' } as const),
   },
 
   emits: {
@@ -101,18 +117,24 @@ export const VAlert = defineComponent({
     const { densityClasses } = useDensity(props)
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
     const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'borderColor'))
+    const { t } = useLocale()
 
-    function onCloseClick (e: MouseEvent) {
-      isActive.value = false
-    }
+    const closeProps = computed(() => ({
+      'aria-label': t(props.closeLabel),
+      onClick (e: MouseEvent) {
+        isActive.value = false
+      },
+    }))
 
     return () => {
-      const hasClose = !!(slots.close || props.closable)
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
+      const hasText = !!(props.text || slots.text)
+      const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
         <props.tag
@@ -136,7 +158,7 @@ export const VAlert = defineComponent({
           style={[
             colorStyles.value,
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           role="alert"
         >
@@ -144,6 +166,7 @@ export const VAlert = defineComponent({
 
           { props.border && (
             <div
+              key="border"
               class={[
                 'v-alert__border',
                 textColorClasses.value,
@@ -153,52 +176,60 @@ export const VAlert = defineComponent({
           ) }
 
           { hasPrepend && (
-            <div class="v-alert__prepend">
-              { slots.prepend
-                ? slots.prepend()
-                : (
-                  <VIcon
-                    icon={ icon.value }
-                    size={ props.prominent ? 'large' : 'default' }
-                  />
-                )
-              }
-            </div>
+            <VDefaultsProvider
+              key="prepend"
+              defaults={{
+                VIcon: {
+                  density: props.density,
+                  icon: icon.value,
+                  size: props.prominent ? 44 : 28,
+                },
+              }}
+            >
+              <div class="v-alert__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : icon.value && (<VIcon />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
           <div class="v-alert__content">
             { hasTitle && (
-              <VAlertTitle>
+              <VAlertTitle key="title">
                 { slots.title ? slots.title() : props.title }
               </VAlertTitle>
             ) }
 
-            { slots.text ? slots.text() : props.text }
+            { hasText && (
+              slots.text ? slots.text() : props.text
+            ) }
 
             { slots.default?.() }
           </div>
 
           { slots.append && (
-            <div class="v-alert__append">
+            <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
           ) }
 
           { hasClose && (
-            <div
-              class="v-alert__close"
-              onClick={ onCloseClick }
+            <VDefaultsProvider
+              key="close"
+              defaults={{
+                VBtn: {
+                  icon: props.closeIcon,
+                  size: 'x-small',
+                  variant: 'text',
+                },
+              }}
             >
-              { slots.close
-                ? slots.close()
-                : (
-                  <VIcon
-                    icon={ props.closeIcon }
-                    size="small"
-                  />
-                )
-              }
-            </div>
+              <div class="v-alert__close">
+                { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
+              </div>
+            </VDefaultsProvider>
           ) }
         </props.tag>
       )

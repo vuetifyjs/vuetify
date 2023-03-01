@@ -6,18 +6,19 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
-import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
+import { provideDefaults } from '@/composables/defaults'
+import { useBackgroundColor } from '@/composables/color'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
-import { VTabsSymbol } from './shared'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
 export type TabItem = string | Record<string, any>
 
@@ -31,11 +32,14 @@ function parseItems (items: TabItem[] | undefined) {
   })
 }
 
-export const VTabs = defineComponent({
+export const VTabs = genericComponent()({
   name: 'VTabs',
 
   props: {
-    alignWithTitle: Boolean,
+    alignTabs: {
+      type: String as PropType<'start' | 'title' | 'center' | 'end'>,
+      default: 'start',
+    },
     color: String,
     direction: {
       type: String as PropType<'horizontal' | 'vertical'>,
@@ -47,18 +51,19 @@ export const VTabs = defineComponent({
       default: () => ([]),
     },
     stacked: Boolean,
-    backgroundColor: String,
-    centered: Boolean,
+    bgColor: String,
     grow: Boolean,
     height: {
       type: [Number, String],
       default: undefined,
     },
     hideSlider: Boolean,
-    optional: Boolean,
-    right: Boolean,
     sliderColor: String,
     modelValue: null,
+    mandatory: {
+      type: [Boolean, String] as PropType<boolean | 'force'>,
+      default: 'force',
+    },
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -68,10 +73,11 @@ export const VTabs = defineComponent({
     'update:modelValue': (v: unknown) => true,
   },
 
-  setup (props, { slots, emit }) {
+  setup (props, { slots }) {
+    const model = useProxiedModel(props, 'modelValue')
     const parsedItems = computed(() => parseItems(props.items))
     const { densityClasses } = useDensity(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'backgroundColor'))
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
 
     provideDefaults({
       VTab: {
@@ -84,35 +90,37 @@ export const VTabs = defineComponent({
       },
     })
 
-    return () => (
+    useRender(() => (
       <VSlideGroup
+        v-model={ model.value }
         class={[
           'v-tabs',
           `v-tabs--${props.direction}`,
+          `v-tabs--align-tabs-${props.alignTabs}`,
           {
-            'v-tabs--align-with-title': props.alignWithTitle,
-            'v-tabs--centered': props.centered,
             'v-tabs--fixed-tabs': props.fixedTabs,
             'v-tabs--grow': props.grow,
-            'v-tabs--right': props.right,
             'v-tabs--stacked': props.stacked,
           },
           densityClasses.value,
           backgroundColorClasses.value,
         ]}
-        style={backgroundColorStyles.value}
+        style={[
+          { '--v-tabs-height': convertToUnit(props.height) },
+          backgroundColorStyles.value,
+        ]}
         role="tablist"
         symbol={ VTabsSymbol }
-        mandatory="force"
+        mandatory={ props.mandatory }
         direction={ props.direction }
-        modelValue={ props.modelValue }
-        onUpdate:modelValue={ v => emit('update:modelValue', v) }
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />
         )) }
       </VSlideGroup>
-    )
+    ))
+
+    return {}
   },
 })
 

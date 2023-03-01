@@ -1,20 +1,37 @@
-import { ViteSSG } from '@vuetify/vite-ssg'
-// import 'virtual:api'
-import { setupLayouts } from 'virtual:generated-layouts'
+// Styles
+import 'prism-theme-vars/base.css'
+
+// App
 import App from './App.vue'
 
-// plugins
-import { useI18n } from './plugins/i18n'
-// import { usePwa } from './plugins/pwa'
-import { pinia, usePinia } from './plugins/pinia'
-import { useVuetify } from './plugins/vuetify'
-import { useLocaleStore } from './store/locale'
+// Virtual
+// import 'virtual:api'
+import { setupLayouts } from 'virtual:generated-layouts'
 
-// styles
-import 'prism-theme-vars/base.css'
-import { useUserStore } from './store/user'
-import { useGlobalComponents } from './plugins/global-components'
-import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+// Plugins
+import { pinia, usePinia } from '@/plugins/pinia'
+import { useGlobalComponents } from '@/plugins/global-components'
+import { useGtag } from '@/plugins/gtag'
+import { useI18n } from '@/plugins/i18n'
+import { useLocaleStore } from '@/store/locale'
+import { usePwa } from '@/plugins/pwa'
+import { useUserStore } from '@/store/user'
+import { useVuetify } from '@/plugins/vuetify'
+import { ViteSSG } from '@vuetify/vite-ssg'
+
+// Utilities
+import {
+  disabledLanguagePattern,
+  generatedRoutes,
+  languagePattern,
+  redirectRoutes,
+  rpath,
+  trailingSlash,
+} from '@/util/routes'
+import { wrapInArray } from '@/util/helpers'
+
+// Globals
+import { IN_BROWSER } from '@/util/globals'
 
 const routes = setupLayouts(generatedRoutes)
 
@@ -22,12 +39,10 @@ const localeStore = useLocaleStore(pinia)
 const userStore = useUserStore(pinia)
 
 localeStore.$subscribe((_, state) => {
-  console.log('updating locale storage', state.locale)
   window.localStorage.setItem('currentLocale', state.locale)
 })
 
-userStore.$subscribe((_, state) => {
-  console.log('updating user store', state)
+userStore.$subscribe(() => {
   userStore.save()
 })
 
@@ -43,8 +58,15 @@ export const createApp = ViteSSG(
         },
       },
       ...routes,
+      ...redirectRoutes,
       {
-        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
+        path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
+        redirect: to => {
+          return rpath(wrapInArray(to.params.pathMatch).join('/'))
+        },
+      },
+      {
+        path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
         component: () => import('@/layouts/404.vue'),
       },
       {
@@ -54,9 +76,21 @@ export const createApp = ViteSSG(
         },
       },
     ],
-    scrollBehavior (to, from, savedPosition) {
-      if (savedPosition) return savedPosition
-      if (to.hash) return { el: to.hash }
+    async scrollBehavior (to, from, savedPosition) {
+      let main = IN_BROWSER && document.querySelector('main')
+
+      if (!main) {
+        await (new Promise(resolve => setTimeout(resolve, 1000)))
+        main = document.querySelector('main')
+      }
+
+      if (to.hash) {
+        return {
+          el: to.hash,
+          behavior: 'smooth',
+          top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
+        }
+      } else if (savedPosition) return savedPosition
       else return { top: 0 }
     },
   },
@@ -71,10 +105,14 @@ export const createApp = ViteSSG(
     ctx.router.beforeEach(({ path, hash }, from, next) => {
       return path.endsWith('/') ? next() : next(`${trailingSlash(path)}` + hash)
     })
+    ctx.router.onError(err => {
+      console.error(err)
+    })
 
     useGlobalComponents(ctx)
+    useGtag(ctx)
     useI18n(ctx)
-    // usePwa(ctx)
+    usePwa(ctx)
     usePinia(ctx)
     useVuetify(ctx)
   },

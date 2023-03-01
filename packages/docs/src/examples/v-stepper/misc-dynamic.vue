@@ -35,7 +35,7 @@
         >
           <v-card
             class="mb-12"
-            color="grey lighten-1"
+            color="grey-lighten-1"
             height="200px"
           ></v-card>
 
@@ -46,7 +46,7 @@
             Continue
           </v-btn>
 
-          <v-btn text>
+          <v-btn variant="text">
             Cancel
           </v-btn>
         </v-stepper-content>

@@ -3,19 +3,18 @@
     ref="root"
     :theme="isDark ? 'dark' : 'light'"
     :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+    :rounded="rounded"
     class="app-markup overflow-hidden"
     dir="ltr"
-    outlined
-    rounded
-    v-bind="$attrs"
   >
     <v-toolbar
+      v-if="resource"
       class="px-1"
       height="44"
     >
       <v-sheet
         v-if="resource"
-        class="text-body-2 px-3 pt-3 text-disabled"
+        class="text-body-2 px-3 pt-3 text-medium-emphasis"
         color="transparent"
         height="44"
         rounded="tl"
@@ -24,25 +23,25 @@
 
         {{ resource }}
       </v-sheet>
-
-      <v-spacer />
-
-      <v-tooltip anchor="bottom">
-        <template #activator="{ props }">
-          <v-btn
-            :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
-            class="mr-1 text-disabled"
-            density="comfortable"
-            v-bind="props"
-            @click="copy"
-          />
-        </template>
-
-        <span>{{ t('copy-example-source') }}</span>
-      </v-tooltip>
     </v-toolbar>
 
-    <div class="pa-4">
+    <v-tooltip location="bottom">
+      <template #activator="{ props: activatorProps }">
+        <v-btn
+          :icon="clicked ? 'mdi-check' : 'mdi-clipboard-text'"
+          class="me-1 text-disabled me-2 mt-2 app-markup-btn"
+          density="compact"
+          style="position: absolute; right: 0; top: 0;"
+          v-bind="activatorProps"
+          variant="text"
+          @click="copy"
+        />
+      </template>
+
+      <span>{{ t('copy-example-source') }}</span>
+    </v-tooltip>
+
+    <div class="pa-4 pe-12">
       <slot>
         <pre v-if="inline" :class="className">
           <code :class="className" v-html="highlighted" />
@@ -54,18 +53,8 @@
   </v-sheet>
 </template>
 
-<script lang="ts">
-  // Composables
-  import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-
-  // Utilities
-  import { ComponentPublicInstance, computed, defineComponent, ref } from 'vue'
-  import { IN_BROWSER } from '@/util/globals'
-  import { wait } from '@/util/helpers'
-
-  // Imports
+<script setup lang="ts">
+// Styles
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash.js'
@@ -76,80 +65,94 @@
   import 'prismjs/components/prism-scss.js'
   import 'prismjs/components/prism-typescript.js'
 
-  export default defineComponent({
-    name: 'Markup',
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
 
-    inheritAttrs: false,
+  // Utilities
+  import { ComponentPublicInstance, computed, ref } from 'vue'
+  import { IN_BROWSER } from '@/util/globals'
+  import { wait } from '@/util/helpers'
+  import { stripLinks } from '@/components/api/utils'
 
-    props: {
-      resource: String,
-      code: String,
-      inline: Boolean,
-      language: {
-        type: String,
-        default: 'markup',
-      },
+  const props = defineProps({
+    resource: String,
+    code: String,
+    inline: Boolean,
+    language: {
+      type: String,
+      default: 'markup',
     },
-
-    setup (props) {
-      const user = useUserStore()
-      const theme = useTheme()
-      const clicked = ref(false)
-      const root = ref<ComponentPublicInstance>()
-      const type = ref('js')
-      const { t } = useI18n()
-
-      const highlighted = computed(() => (
-        props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
-      ))
-      const className = computed(() => `langauge-${props.language}`)
-
-      async function copy () {
-        if (!IN_BROWSER || !root.value) return
-
-        const el = root.value.$el.querySelector('code')
-
-        if (!el) return
-
-        el.setAttribute('contenteditable', 'true')
-        el.focus()
-
-        document.execCommand('selectAll', false, undefined)
-        document.execCommand('copy')
-
-        el.removeAttribute('contenteditable')
-
-        clicked.value = true
-
-        await wait(500)
-
-        window.getSelection()?.removeAllRanges()
-
-        clicked.value = false
-      }
-
-      const isDark = computed(() => {
-        return user.mixedTheme || theme.getTheme(theme.current.value).dark
-      })
-
-      return {
-        root,
-        isDark,
-        highlighted,
-        className,
-        clicked,
-        copy,
-        type,
-        t,
-      }
+    rounded: {
+      type: Boolean,
+      default: true,
     },
   })
+
+  // Transform inline links in typescript into actual links
+  Prism.languages.insertBefore('typescript', 'string', {
+    hyperlink: /<a.*?>(.*?)<\/a>/g,
+  })
+  Prism.hooks.add('wrap', env => {
+    if (env.type === 'hyperlink' && env.tag !== 'a') {
+      env.tag = 'a'
+      env.content = env.content.replaceAll('&lt;', '<')
+      env.attributes.href = /href="(.*?)"/.exec(env.content)?.[1] || ''
+      env.attributes.target = '_blank'
+      env.content = stripLinks(env.content)[0]
+    }
+  })
+
+  const user = useUserStore()
+  const theme = useTheme()
+  const { t } = useI18n()
+  const clicked = ref(false)
+  const root = ref<ComponentPublicInstance>()
+
+  const highlighted = computed(() => (
+    props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
+  ))
+  const className = computed(() => `langauge-${props.language}`)
+
+  async function copy () {
+    if (!IN_BROWSER || !root.value) return
+
+    const el = root.value.$el.querySelector('code')
+
+    if (!el) return
+
+    el.setAttribute('contenteditable', 'true')
+    el.focus()
+
+    document.execCommand('selectAll', false, undefined)
+    document.execCommand('copy')
+
+    el.removeAttribute('contenteditable')
+
+    clicked.value = true
+
+    await wait(500)
+
+    window.getSelection()?.removeAllRanges()
+
+    clicked.value = false
+  }
+
+  const isDark = computed(() => {
+    return user.mixedTheme || theme.current.value.dark
+  })
+
 </script>
 
 <style lang="sass">
   .v-sheet.app-markup
     // margin: 16px 0
     position: relative
+
+    &:not(:hover)
+      .app-markup-btn
+        opacity: 0 !important
 
     &:not(:hover) .v-btn--copy .v-icon
       opacity: .4
@@ -183,8 +186,9 @@
         font-family: inherit
         font-size: 0.7rem
         font-weight: 700
+        pointer-events: none
         position: absolute
-        right: 12px
+        right: .5rem
         text-transform: uppercase
 
     pre.language-bash::after

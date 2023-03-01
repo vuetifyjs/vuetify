@@ -6,9 +6,9 @@ import { makeLazyProps, useLazy } from '@/composables/lazy'
 
 // Utilities
 import { toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VExpansionPanelText = defineComponent({
+export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',
 
   props: {

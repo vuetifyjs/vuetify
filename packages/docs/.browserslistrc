@@ -1,5 +1,7 @@
->0.5%
-last 2 versions
-safari >=10
+>0.25% and last 2 major versions
+safari >= 12
+ios >= 12
 not dead
 not op_mini all
+not ie 11
+not and_uc 1

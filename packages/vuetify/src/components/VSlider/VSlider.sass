@@ -1,5 +1,3 @@
-// Imports
-@forward './variables'
 @use 'sass:map'
 @use 'sass:selector'
 @use '../../styles/settings'
@@ -21,6 +19,7 @@
 // Elements
 .v-slider__container
   position: relative
+  min-height: inherit
   width: 100%
   height: 100%
   display: flex
@@ -37,8 +36,8 @@
 // Modifiers
 .v-slider.v-input--horizontal
   align-items: center
-  margin-left: $slider-horizontal-left
-  margin-right: $slider-horizontal-right
+  margin-inline-start: $slider-horizontal-start
+  margin-inline-end: $slider-horizontal-end
 
   .v-input__control
     min-height: $slider-horizontal-min-height
@@ -57,4 +56,7 @@
   pointer-events: none
 
 .v-slider--has-labels .v-input__control
-  margin-bottom: $slider-tick-label-margin-bottom * .5
+  margin-bottom: $slider-tick-label-margin-top * .5
+
+.v-slider__label
+  margin-inline-end: $slider-label-margin-end

@@ -6,25 +6,30 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makePositionProps, usePosition } from '@/composables/position'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { makeTransitionProps } from '@/composables/transition'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { makeLocationProps, useLocation } from '@/composables/location'
+import { makePositionProps, usePosition } from '@/composables/position'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
+import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { onMounted, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { mergeProps, onMounted, ref, watch } from 'vue'
+import { genericComponent, omit, useRender } from '@/util'
+import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
-export const VSnackbar = defineComponent({
+type VSnackbarSlots = {
+  activator: [{ isActive: boolean, props: Record<string, any> }]
+  default: []
+  actions: []
+}
+
+export const VSnackbar = genericComponent<VSnackbarSlots>()({
   name: 'VSnackbar',
 
   props: {
-    app: Boolean,
-    centered: Boolean,
-    contentClass: {
-      type: String,
-      default: '',
-    },
     multiLine: Boolean,
     timeout: {
       type: [Number, String],
@@ -32,11 +37,14 @@ export const VSnackbar = defineComponent({
     },
     vertical: Boolean,
 
-    modelValue: Boolean,
-
+    ...makeLocationProps({ location: 'bottom' } as const),
     ...makePositionProps(),
+    ...makeRoundedProps(),
     ...makeVariantProps(),
-    ...makeTransitionProps({ transition: 'v-snackbar-transition' }),
+    ...makeThemeProps(),
+    ...omit(makeVOverlayProps({
+      transition: 'v-snackbar-transition',
+    }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
   },
 
   emits: {
@@ -45,9 +53,14 @@ export const VSnackbar = defineComponent({
 
   setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
-    const { positionClasses, positionStyles } = usePosition(props)
-
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
+    const { scopeId } = useScopeId()
+    const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
+    const { roundedClasses } = useRounded(props)
+
+    const overlay = ref<VOverlay>()
 
     watch(isActive, startTimeout)
     watch(() => props.timeout, startTimeout)
@@ -72,75 +85,77 @@ export const VSnackbar = defineComponent({
       window.clearTimeout(activeTimeout)
     }
 
-    useRender(() => (
-      <VOverlay
-        v-model={ isActive.value }
-        class={[
-          'v-snackbar',
-          {
-            'v-snackbar--active': isActive.value,
-            'v-snackbar--bottom': props.bottom || !props.top,
-            'v-snackbar--centered': props.centered,
-            'v-snackbar--end': props.right,
-            'v-snackbar--multi-line': props.multiLine && !props.vertical,
-            'v-snackbar--start': props.left,
-            'v-snackbar--top': props.top,
-            'v-snackbar--vertical': props.vertical,
-          },
-          positionClasses.value,
-        ]}
-        style={[
-          colorStyles.value,
-          positionStyles.value,
-        ]}
-        persistent
-        noClickAnimation
-        scrim={ false }
-        scrollStrategy="none"
-        transition={ props.transition }
-        v-slots={{ activator: slots.activator }}
-      >
-        <div
+    useRender(() => {
+      const [overlayProps] = filterVOverlayProps(props)
+
+      return (
+        <VOverlay
+          ref={ overlay }
           class={[
-            'v-snackbar__wrapper',
-            colorClasses.value,
-            variantClasses.value,
+            'v-snackbar',
+            {
+              'v-snackbar--active': isActive.value,
+              'v-snackbar--multi-line': props.multiLine && !props.vertical,
+              'v-snackbar--vertical': props.vertical,
+            },
+            positionClasses.value,
           ]}
-          onPointerenter={ onPointerenter }
-          onPointerleave={ startTimeout }
+          { ...overlayProps }
+          v-model={ isActive.value }
+          contentProps={ mergeProps({
+            style: locationStyles.value,
+          }, overlayProps.contentProps) }
+          persistent
+          noClickAnimation
+          scrim={ false }
+          scrollStrategy="none"
+          { ...scopeId }
+          v-slots={{ activator: slots.activator }}
         >
-          { genOverlays(false, 'v-snackbar') }
+          <div
+            class={[
+              'v-snackbar__wrapper',
+              themeClasses.value,
+              colorClasses.value,
+              roundedClasses.value,
+              variantClasses.value,
+            ]}
+            style={[colorStyles.value]}
+            onPointerenter={ onPointerenter }
+            onPointerleave={ startTimeout }
+          >
+            { genOverlays(false, 'v-snackbar') }
 
-          { slots.default && (
-            <div
-              class={[
-                'v-snackbar__content',
-                props.contentClass,
-              ]}
-              role="status"
-              aria-live="polite"
-            >
-              { slots.default?.() }
-            </div>
-          ) }
-
-          { slots.actions && (
-            <VDefaultsProvider
-              defaults={{
-                VBtn: {
-                  variant: 'text',
-                  ripple: false,
-                },
-              }}
-            >
-              <div class="v-snackbar__actions">
-                { slots.actions?.() }
+            { slots.default && (
+              <div
+                class="v-snackbar__content"
+                role="status"
+                aria-live="polite"
+              >
+                { slots.default() }
               </div>
-            </VDefaultsProvider>
-          ) }
-        </div>
-      </VOverlay>
-    ))
+            ) }
+
+            { slots.actions && (
+              <VDefaultsProvider
+                defaults={{
+                  VBtn: {
+                    variant: 'text',
+                    ripple: false,
+                  },
+                }}
+              >
+                <div class="v-snackbar__actions">
+                  { slots.actions() }
+                </div>
+              </VDefaultsProvider>
+            ) }
+          </div>
+        </VOverlay>
+      )
+    })
+
+    return forwardRefs({}, overlay)
   },
 })
 

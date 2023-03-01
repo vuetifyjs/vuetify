@@ -2,7 +2,7 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="primary"
+      bg-color="primary"
     >
       <v-tab value="one">Item One</v-tab>
       <v-tab value="two">Item Two</v-tab>

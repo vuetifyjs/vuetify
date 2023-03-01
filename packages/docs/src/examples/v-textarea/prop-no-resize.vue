@@ -4,7 +4,7 @@
       label="Text"
       no-resize
       rows="1"
-      :value="value"
+      :model-value="value"
     ></v-textarea>
   </v-container>
 </template>

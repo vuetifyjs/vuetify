@@ -1,7 +1,9 @@
 <template>
   <app-menu
     v-model="menu"
-    :max-width="maxWidth"
+    :close-on-content-click="false"
+    :open-on-hover="false"
+    :width="width"
   >
     <template #activator="{ props }">
       <app-tooltip-btn
@@ -10,46 +12,41 @@
       >
         <template #icon>
           <v-badge
-            :value="unread.length"
+            :model-value="unread.length > 0"
             color="#ED561B"
             dot
-            location="top-end"
+            location="top end"
           >
             <v-icon
-              class="mx-1"
               :icon="`mdi-bell${unread.length === 0 ? '-outline' : '-ring-outline'}`"
+              class="mx-1"
+              color="medium-emphasis"
             />
           </v-badge>
         </template>
       </app-tooltip-btn>
     </template>
-    <div class="d-flex pr-5">
+
+    <v-toolbar
+      class="ps-4 pe-5"
+      color="surface"
+      density="compact"
+    >
       <v-btn
         :disabled="showArchived ? unread.length < 1 : read.length < 1"
-        class="px-2 ml-n1"
+        class="px-2 ms-n1"
         size="small"
         variant="text"
         @click="showArchived = !showArchived"
       >
         {{ showArchived ? t('unread', { number: unread.length }) : t('read', { number: read.length }) }}
       </v-btn>
-
-      <v-spacer />
-
-      <app-tooltip-btn
-        v-if="marked"
-        :disabled="done"
-        :icon="marked.icon"
-        :path="`marked-${marked.path}`"
-        size="small"
-        @click="toggleAll"
-      />
-    </div>
+    </v-toolbar>
 
     <v-divider />
 
     <v-responsive
-      class="overflow-y-scroll"
+      class="overflow-y-auto"
       max-height="340"
     >
       <div
@@ -59,50 +56,80 @@
         <p>{{ t('done') }}</p>
 
         <v-icon
-          color="grey lighten-2"
+          color="grey-lighten-2"
           size="96"
           icon="mdi-vuetify"
         />
       </div>
 
       <template v-else>
-        <v-list>
-          <v-list-item
-            v-for="notification in notifications"
+        <v-list lines="three">
+          <template
+            v-for="(notification, i) in notifications"
             :key="notification.slug"
-            :ripple="false"
-            :title="`${notification.metadata.emoji} ${notification.title}`"
-            :subtitle="notification.created_at"
-            @click="select(notification)"
           >
-            <template #append>
-              <v-btn
-                :ripple="false"
-                :icon="marked.icon"
-                variant="text"
-                @click.stop.prevent="toggle(notification)"
-              />
-            </template>
-          </v-list-item>
+
+            <v-divider
+              v-if="i !== 0"
+              class="my-1"
+            />
+
+            <v-list-item
+              :ripple="false"
+              class="py-2"
+            >
+              <v-list-item-title class="text-wrap text-h6 mb-1 text-truncate">
+                <span>{{ notification.metadata.emoji }}</span>
+
+                <span class="ps-3"> {{ notification.title }}</span>
+              </v-list-item-title>
+
+              <div class="text-caption text-medium-emphasis ps-10">
+                {{ notification.metadata.text }}
+
+                <app-link :href="notification.metadata.action">
+                  {{ notification.metadata.action_text }}
+                </app-link>
+              </div>
+
+              <template #append>
+                <v-btn
+                  :ripple="false"
+                  :icon="marked.icon"
+                  class="ms-3"
+                  color="medium-emphasis"
+                  variant="text"
+                  @click.stop.prevent="toggle(notification)"
+                />
+              </template>
+            </v-list-item>
+          </template>
         </v-list>
       </template>
     </v-responsive>
   </app-menu>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent, ref } from 'vue'
-  import { useI18n } from 'vue-i18n'
-  import { useDisplay } from 'vuetify'
-  import { useUserStore } from '@/store/user'
-  import { useCosmic } from '@/composables/cosmic'
-  import { formatDate } from '@/util/date.js'
+<script setup lang="ts">
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
-  import AppMenu from '@/components/app/menu/Menu.vue'
 
-  type Notification = {
+  // Composables
+  import { useCosmic } from '@/composables/cosmic'
+  import { useDisplay } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
+  import { useUserStore } from '@/store/user'
+
+  // Utilities
+  import { computed, onMounted, ref } from 'vue'
+
+  // Types
+  interface Notification {
     metadata: {
+      action: string
+      action_text: string
       emoji: string
+      text: string
     }
     // eslint-disable-next-line camelcase
     created_at: string
@@ -110,86 +137,52 @@
     title: string
   }
 
-  export default defineComponent({
-    name: 'NotificationsMenu',
+  const { t } = useI18n()
+  const { bucket } = useCosmic<Notification>()
+  const { mobile } = useDisplay()
+  const user = useUserStore()
+  const menu = ref(false)
+  const all = ref<Notification[]>([])
+  const showArchived = ref(false)
 
-    components: { AppTooltipBtn, AppMenu },
+  const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
+  const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
+  const notifications = computed(() => showArchived.value ? read.value : unread.value)
+  const done = computed(() => {
+    return (
+      showArchived.value && read.value.length < 1
+    ) || (
+      !showArchived.value && unread.value.length < 1
+    )
+  })
 
-    setup () {
-      const { t } = useI18n()
-      const { bucket } = useCosmic()
-      const { mobile } = useDisplay()
-      const user = useUserStore()
-      const menu = ref(false)
-      const done = ref(false)
-      const all = ref<Notification[]>([])
-      const showArchived = ref(false)
+  const marked = computed(() => {
+    const path = showArchived.value ? 'unread' : 'read'
+    const icon = showArchived.value ? 'mdi-email-mark-as-unread' : 'mdi-email-open'
 
-      const unread = computed(() => all.value.filter(({ slug }) => !user.notifications.read.includes(slug)))
-      const read = computed(() => all.value.filter(({ slug }) => user.notifications.read.includes(slug)))
-      const notifications = computed(() => showArchived.value ? read.value : unread.value)
+    return { icon, path }
+  })
 
-      const marked = computed(() => {
-        const path = showArchived.value ? 'unread' : 'read'
-        const icon = showArchived.value ? 'mdi-email-mark-as-unread' : 'mdi-email-open'
+  const width = computed(() => mobile.value ? 420 : 520)
 
-        return { icon, path }
-      })
+  function toggle ({ slug }: Notification) {
+    user.notifications.read = user.notifications.read.includes(slug)
+      ? user.notifications.read.filter(n => n !== slug)
+      : [...user.notifications.read, slug]
+  }
 
-      const maxWidth = computed(() => mobile.value ? 296 : 320)
+  onMounted(async () => {
+    if (all.value.length) return
 
-      async function load () {
-        const { objects } = await bucket.getObjects<Notification>({
-          query: {
-            type: 'notifications',
-            status: 'published',
-          },
-          props: 'created_at,metadata,slug,title',
-          limit: 5,
-          sort: '-created_at',
-        })
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'notifications' })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(5)
+    ) || {}
 
-        all.value = objects ?? []
-      }
-
-      function select (notification: Notification) {
-        // this.snackbar = {
-        //   slug,
-        //   ...metadata,
-        // }
-
-        menu.value = false
-      }
-
-      function toggle ({ slug }: Notification) {
-        user.notifications.read = user.notifications.read.includes(slug)
-          ? user.notifications.read.filter(n => n !== slug)
-          : [...user.notifications.read, slug]
-      }
-
-      function toggleAll () {
-        user.notifications.read = !showArchived.value
-          ? all.value.map(({ slug }) => slug)
-          : []
-      }
-
-      load()
-
-      return {
-        t,
-        formatDate,
-        menu,
-        done,
-        unread,
-        read,
-        notifications,
-        marked,
-        showArchived,
-        maxWidth,
-        select,
-        toggle,
-        toggleAll,
-      }
-    },
+    all.value = objects
   })
 </script>

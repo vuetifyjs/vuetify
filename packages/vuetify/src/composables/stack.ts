@@ -1,37 +1,67 @@
-import { effectScope, onScopeDispose, readonly, ref, toRaw, watch, watchEffect } from 'vue'
+import { useToggleScope } from '@/composables/toggleScope'
+
+import { computed, inject, onScopeDispose, provide, reactive, readonly, ref, toRaw, watchEffect } from 'vue'
 import { getCurrentInstance } from '@/util'
 
 // Types
-import type { ComponentInternalInstance, EffectScope, Ref } from 'vue'
+import type { InjectionKey, Ref } from 'vue'
 
-const stack = ref<ComponentInternalInstance[]>([])
+const StackSymbol: InjectionKey<StackProvide> = Symbol.for('vuetify:stack')
 
-export function useStack (isActive: Ref<boolean>) {
+interface StackProvide {
+  activeChildren: Set<number>
+}
+
+const globalStack = reactive<[uid: number, zIndex: number][]>([])
+
+export function useStack (
+  isActive: Readonly<Ref<boolean>>,
+  zIndex: Readonly<Ref<string | number>>,
+  disableGlobalStack: boolean
+) {
   const vm = getCurrentInstance('useStack')
-  let scope: EffectScope | undefined
-  watch(isActive, val => {
-    if (val) {
-      scope = effectScope()
-      scope.run(() => {
-        stack.value.push(vm)
+  const createStackEntry = !disableGlobalStack
 
-        onScopeDispose(() => {
-          const idx = stack.value.indexOf(vm)
-          stack.value.splice(idx, 1)
-        })
-      })
-    } else {
-      scope?.stop()
+  const parent = inject(StackSymbol, undefined)
+  const stack: StackProvide = reactive({
+    activeChildren: new Set<number>(),
+  })
+  provide(StackSymbol, stack)
+
+  const _zIndex = ref(+zIndex.value)
+  useToggleScope(isActive, () => {
+    const lastZIndex = globalStack.at(-1)?.[1]
+    _zIndex.value = lastZIndex ? lastZIndex + 10 : +zIndex.value
+
+    if (createStackEntry) {
+      globalStack.push([vm.uid, _zIndex.value])
     }
-  }, { immediate: true })
 
-  const isTop = ref(true)
-  watchEffect(() => {
-    const _isTop = toRaw(stack.value[stack.value.length - 1]) === vm
-    setTimeout(() => isTop.value = _isTop)
+    parent?.activeChildren.add(vm.uid)
+
+    onScopeDispose(() => {
+      if (createStackEntry) {
+        const idx = toRaw(globalStack).findIndex(v => v[0] === vm.uid)
+        globalStack.splice(idx, 1)
+      }
+
+      parent?.activeChildren.delete(vm.uid)
+    })
   })
 
+  const globalTop = ref(true)
+  if (createStackEntry) {
+    watchEffect(() => {
+      const _isTop = globalStack.at(-1)?.[0] === vm.uid
+      setTimeout(() => globalTop.value = _isTop)
+    })
+  }
+
+  const localTop = computed(() => !stack.activeChildren.size)
+
   return {
-    isTop: readonly(isTop),
+    globalTop: readonly(globalTop),
+    localTop,
+    stackStyles: computed(() => ({ zIndex: _zIndex.value })),
   }
 }

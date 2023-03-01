@@ -2,24 +2,25 @@
 import '../VSlider/VSlider.sass'
 
 // Components
-import { VInput } from '../VInput'
-import { VSliderThumb } from '../VSlider/VSliderThumb'
-import { VSliderTrack } from '../VSlider/VSliderTrack'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
+import { VLabel } from '@/components/VLabel'
+import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
+import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
-import { getOffset, makeSliderProps, useSlider } from '../VSlider/slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
-import { filterInputProps, makeVInputProps } from '../VInput/VInput'
+import type { VSliderSlots } from '../VSlider/VSlider'
 
-export const VRangeSlider = defineComponent({
+export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
   props: {
@@ -39,7 +40,7 @@ export const VRangeSlider = defineComponent({
     'update:modelValue': (value: [number, number]) => true,
   },
 
-  setup (props, { slots, attrs }) {
+  setup (props, { slots }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
@@ -57,16 +58,16 @@ export const VRangeSlider = defineComponent({
     }
 
     const {
-      min,
+      activeThumbRef,
+      hasLabels,
       max,
+      min,
       mousePressed,
-      roundValue,
       onSliderMousedown,
       onSliderTouchstart,
-      trackContainerRef,
       position,
-      hasLabels,
-      activeThumbRef,
+      roundValue,
+      trackContainerRef,
     } = useSlider({
       /* eslint-disable @typescript-eslint/no-use-before-define */
       props,
@@ -96,18 +97,20 @@ export const VRangeSlider = defineComponent({
       'modelValue',
       undefined,
       arr => {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (!arr || !arr.length) return [0, 0]
 
         return arr.map(value => roundValue(value))
       },
-    ) as WritableComputedRef<[number, number]>
+    ) as WritableComputedRef<[number, number]> & { readonly externalValue: number[] }
 
     const { isFocused, focus, blur } = useFocus(props)
     const trackStart = computed(() => position(model.value[0]))
     const trackStop = computed(() => position(model.value[1]))
 
-    return () => {
+    useRender(() => {
       const [inputProps, _] = filterInputProps(props)
+      const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
         <VInput
@@ -127,7 +130,21 @@ export const VRangeSlider = defineComponent({
         >
           {{
             ...slots,
-            default: ({ id }) => (
+            prepend: hasPrepend ? slotProps => (
+              <>
+                { slots.label?.(slotProps) ?? props.label
+                  ? (
+                    <VLabel
+                      class="v-slider__label"
+                      text={ props.label }
+                    />
+                  ) : undefined
+                }
+
+                { slots.prepend?.(slotProps) }
+              </>
+            ) : undefined,
+            default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ onSliderMousedown }
@@ -161,6 +178,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ startThumbRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused && activeThumbRef.value === startThumbRef.value?.$el }
                   modelValue={ model.value[0] }
                   onUpdate:modelValue={ v => (model.value = [v, model.value[1]]) }
@@ -194,6 +212,7 @@ export const VRangeSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ stopThumbRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused && activeThumbRef.value === stopThumbRef.value?.$el }
                   modelValue={ model.value[1] }
                   onUpdate:modelValue={ v => (model.value = [model.value[0], v]) }
@@ -229,7 +248,9 @@ export const VRangeSlider = defineComponent({
           }}
         </VInput>
       )
-    }
+    })
+
+    return {}
   },
 })
 

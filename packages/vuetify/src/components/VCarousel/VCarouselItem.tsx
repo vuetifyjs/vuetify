@@ -3,9 +3,12 @@ import { VImg } from '@/components/VImg'
 import { VWindowItem } from '@/components/VWindow'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VCarouselItem = defineComponent({
+// Types
+import type { VImgSlots } from '@/components/VImg/VImg'
+
+export const VCarouselItem = genericComponent<VImgSlots>()({
   name: 'VCarouselItem',
 
   inheritAttrs: false,
@@ -17,10 +20,7 @@ export const VCarouselItem = defineComponent({
   setup (props, { slots, attrs }) {
     useRender(() => (
       <VWindowItem class="v-carousel-item" value={ props.value }>
-        <VImg
-          { ...attrs }
-          v-slots={ slots }
-        />
+        <VImg { ...attrs } v-slots={ slots } />
       </VWindowItem>
     ))
   },

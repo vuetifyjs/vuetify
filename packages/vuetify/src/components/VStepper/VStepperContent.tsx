@@ -20,7 +20,7 @@ export const VStepperContent = defineComponent({
 
   props: {
     step: {
-      type: Number,
+      type: [Number, String],
       required: true,
     },
     value: null,
@@ -28,6 +28,9 @@ export const VStepperContent = defineComponent({
   },
 
   setup (props, { slots, emit }) {
+    // console.log('VStepperContent --- Setup')// Can be removed after approval
+    // console.log(props)// Can be removed after approval
+
     const group = inject(VStepperGroupProvideSymbol)
     const stepper = inject(VStepperProvideSymbol)
 
@@ -51,7 +54,7 @@ export const VStepperContent = defineComponent({
     return () => {
       const content = slots[`content.${props.value}`]
         ? slots[`content.${props.value}`]!(slotProps.value)
-        : null
+        : slots.default?.()
 
       if (stepper.direction.value === 'vertical') {
         return (

@@ -1,19 +1,18 @@
 // Styles
 import './VDivider.sass'
 
-// Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
-
 // Composables
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
+import { useTextColor } from '@/composables/color'
 
-// Types
+// Utilities
+import { computed, toRef } from 'vue'
+import { convertToUnit, genericComponent, useRender } from '@/util'
+
 type DividerKey = 'borderRightWidth' | 'borderTopWidth' | 'maxHeight' | 'maxWidth'
 type DividerStyles = Partial<Record<DividerKey, string>>
 
-export const VDivider = defineComponent({
+export const VDivider = genericComponent()({
   name: 'VDivider',
 
   props: {
@@ -22,12 +21,13 @@ export const VDivider = defineComponent({
     length: [Number, String],
     thickness: [Number, String],
     vertical: Boolean,
+
     ...makeThemeProps(),
   },
 
   setup (props, { attrs }) {
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { textColorClasses, textColorStyles } = useTextColor(toRef(props, 'color'))
     const dividerStyles = computed(() => {
       const styles: DividerStyles = {}
 
@@ -42,30 +42,32 @@ export const VDivider = defineComponent({
       return styles
     })
 
-    return () => {
-      return (
-        <hr
-          class={[
-            {
-              'v-divider': true,
-              'v-divider--inset': props.inset,
-              'v-divider--vertical': props.vertical,
-            },
-            themeClasses.value,
-            backgroundColorClasses.value,
-          ]}
-          style={[
-            dividerStyles.value,
-            backgroundColorStyles.value,
-          ]}
-          aria-orientation={
-            !attrs.role || attrs.role === 'separator'
-              ? props.vertical ? 'vertical' : 'horizontal'
-              : undefined
-          }
-          role={`${attrs.role || 'separator'}`}
-        />
-      )
-    }
+    useRender(() => (
+      <hr
+        class={[
+          {
+            'v-divider': true,
+            'v-divider--inset': props.inset,
+            'v-divider--vertical': props.vertical,
+          },
+          themeClasses.value,
+          textColorClasses.value,
+        ]}
+        style={[
+          dividerStyles.value,
+          textColorStyles.value,
+        ]}
+        aria-orientation={
+          !attrs.role || attrs.role === 'separator'
+            ? props.vertical ? 'vertical' : 'horizontal'
+            : undefined
+        }
+        role={`${attrs.role || 'separator'}`}
+      />
+    ))
+
+    return {}
   },
 })
+
+export type VDivider = InstanceType<typeof VDivider>

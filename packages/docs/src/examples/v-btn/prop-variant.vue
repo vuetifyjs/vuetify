@@ -1,9 +1,10 @@
 <template>
   <div class="d-flex justify-space-between">
-    <v-btn>default</v-btn>
+    <v-btn>elevated (default)</v-btn>
+    <v-btn variant="flat">flat</v-btn>
+    <v-btn variant="tonal">tonal</v-btn>
     <v-btn variant="outlined">outlined</v-btn>
     <v-btn variant="text">text</v-btn>
     <v-btn variant="plain">plain</v-btn>
-    <v-btn variant="contained-text">contained-text</v-btn>
   </div>
 </template>

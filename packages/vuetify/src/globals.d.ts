@@ -1,6 +1,5 @@
 import type { TouchStoredHandlers } from './directives/touch'
-import type { VNode } from 'vue'
-import type { Events } from '@vue/runtime-dom'
+import type { Events, VNode } from 'vue'
 
 declare global {
   interface HTMLCollection {
@@ -71,6 +70,7 @@ declare global {
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
+  export const __VUE_OPTIONS_API__: boolean | undefined
 
   namespace JSX {
     interface Element extends VNode {}
@@ -81,9 +81,27 @@ declare global {
 }
 
 declare module '@vue/runtime-core' {
+  export interface ComponentCustomProperties {
+    _: ComponentInternalInstance
+  }
+
   export interface ComponentInternalInstance {
     ctx: Record<string, unknown>
     provides: Record<string, unknown>
+    setupState: any
+  }
+
+  export interface FunctionalComponent {
+    aliasName?: string
+  }
+
+  // eslint-disable-next-line max-len
+  export interface ComponentOptionsBase<Props, RawBindings, D, C extends ComputedOptions, M extends MethodOptions, Mixin extends ComponentOptionsMixin, Extends extends ComponentOptionsMixin, E extends EmitsOptions, EE extends string = string, Defaults = {}> {
+    aliasName?: string
+  }
+
+  export interface App {
+    $nuxt?: { hook: (name: string, fn: () => void) => void }
   }
 }
 
@@ -114,4 +132,14 @@ declare module '@vue/runtime-dom' {
   }
 
   export interface CSSProperties extends CustomProperties {}
+}
+
+declare module 'expect' {
+  interface Matchers<R> {
+    /** console.warn */
+    toHaveBeenTipped(): R
+
+    /** console.error */
+    toHaveBeenWarned(): R
+  }
 }

@@ -10,9 +10,13 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VSliderTrack = defineComponent({
+export type VSliderTrackSlots = {
+  'tick-label': []
+}
+
+export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',
 
   props: {
@@ -34,16 +38,18 @@ export const VSliderTrack = defineComponent({
     if (!slider) throw new Error('[Vuetify] v-slider-track must be inside v-slider or v-range-slider')
 
     const {
+      color,
+      horizontalDirection,
+      parsedTicks,
+      rounded,
+      showTicks,
+      tickSize,
       trackColor,
       trackFillColor,
-      vertical,
-      tickSize,
-      showTicks,
       trackSize,
-      color,
-      rounded,
-      parsedTicks,
-      horizontalDirection,
+      vertical,
+      min,
+      max,
     } = slider
 
     const { roundedClasses } = useRounded(rounded)
@@ -81,7 +87,9 @@ export const VSliderTrack = defineComponent({
       const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
 
       return ticks.map((tick, index) => {
-        const directionProperty = vertical.value ? 'inset-block-end' : 'margin-inline-start'
+        const directionProperty = vertical.value ? 'bottom' : 'margin-inline-start'
+        const directionValue = tick.value !== min.value && tick.value !== max.value ? convertToUnit(tick.position, '%') : undefined
+
         return (
           <div
             key={ tick.value }
@@ -89,11 +97,11 @@ export const VSliderTrack = defineComponent({
               'v-slider-track__tick',
               {
                 'v-slider-track__tick--filled': tick.position >= props.start && tick.position <= props.stop,
+                'v-slider-track__tick--first': tick.value === min.value,
+                'v-slider-track__tick--last': tick.value === max.value,
               },
             ]}
-            style={{
-              [directionProperty]: (tick.position > 0 && tick.position < 100) && convertToUnit(tick.position, '%'),
-            }}
+            style={{ [directionProperty]: directionValue }}
           >
             {
               (tick.label || slots['tick-label']) && (
@@ -107,7 +115,7 @@ export const VSliderTrack = defineComponent({
       })
     })
 
-    return () => {
+    useRender(() => {
       return (
         <div
           class={[
@@ -158,7 +166,9 @@ export const VSliderTrack = defineComponent({
           ) }
         </div>
       )
-    }
+    })
+
+    return {}
   },
 })
 

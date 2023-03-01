@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'Daugiau {0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} failų',
     counterSize: '{0} failų ({1} iš viso)',

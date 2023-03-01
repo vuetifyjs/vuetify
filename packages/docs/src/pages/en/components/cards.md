@@ -24,7 +24,7 @@ The `v-card` component is a stylish way to wrap different types of content; such
 
 <usage name="v-card" />
 
-<entry slug="vuetify-zero-theme-pro" />
+<entry />
 
 ## Anatomy
 
@@ -38,7 +38,7 @@ The recommended placement of elements inside of `v-card` is:
 
 | Element / Area | Description |
 | - | - |
-| 1. Container | The Card container holds all `v-card` components |
+| 1. Container | The Card container holds all `v-card` components. Composed of 3 major parts: `v-card-item`, `v-card-text`, and `v-card-actions` |
 | 2. Title (optional) | A heading with increased **font-size** |
 | 3. Subtitle (optional) | A subheading with a lower emphasis text color |
 | 4. Text (optional) | A content area with a lower emphasis text color |
@@ -49,10 +49,13 @@ The recommended placement of elements inside of `v-card` is:
 | Component | Description |
 | - | - |
 | [v-card](/api/v-card/) | Primary Component |
-| **v-card-title** | Functional component used to display the Card's title. Wraps the `#title` slot |
-| **v-card-subtitle** | Functional component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
-| **v-card-text** | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
-| **v-card-actions** | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
+| [v-card-item](/api/v-card-item/) | Functional component used to wrap the Card's `v-card-title` and `v-card-subtitle` components. |
+| [v-card-title](/api/v-card-title/) | Functional component used to display the Card's title. Wraps the `#title` slot |
+| [v-card-subtitle](/api/v-card-subtitle/) | Functional component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
+| [v-card-text](/api/v-card-text/) | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
+| [v-card-actions](/api/v-card-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
+
+<api-inline hide-links />
 
 ## Basics
 
@@ -88,7 +91,7 @@ A card with the **variant** prop set to `outlined` has zero elevation.
 
 #### Card Reveal
 
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <example file="v-card/misc-card-reveal" />
 
@@ -145,5 +148,3 @@ Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), w
 Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
 
 <example file="v-card/prop-loading" />
-
-<backmatter />

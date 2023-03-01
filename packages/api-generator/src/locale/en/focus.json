@@ -1,0 +1,5 @@
+{
+  "props": {
+    "focused": "Forces a focused state styling on the component."
+  }
+}

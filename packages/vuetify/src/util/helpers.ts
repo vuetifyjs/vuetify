@@ -1,8 +1,19 @@
 // Utilities
-import { camelize, Fragment } from 'vue'
+import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect } from 'vue'
 
 // Types
-import type { ComponentInternalInstance, ComponentPublicInstance, InjectionKey, Ref, Slots, VNode, VNodeChild } from 'vue'
+import type {
+  ComponentInternalInstance,
+  ComponentPublicInstance,
+  ComputedGetter,
+  InjectionKey,
+  PropType,
+  Ref,
+  Slots,
+  ToRefs,
+  VNode,
+  VNodeChild,
+} from 'vue'
 
 export function getNestedValue (obj: any, path: (string | number)[], fallback?: any): any {
   const last = path.length - 1
@@ -57,16 +68,26 @@ export function getObjectValueByPath (obj: any, path: string, fallback?: any): a
   return getNestedValue(obj, path.split('.'), fallback)
 }
 
-type SelectItemKey = string | (string | number)[] | ((item: Record<string, any>, fallback?: any) => any)
+export type SelectItemKey =
+  | boolean // Ignored
+  | string // Lookup by key, can use dot notation for nested objects
+  | (string | number)[] // Nested lookup by key, each array item is a key in the next level
+  | ((item: Record<string, any>, fallback?: any) => any)
 
 export function getPropertyFromItem (
-  item: object,
+  item: any,
   property: SelectItemKey,
   fallback?: any
 ): any {
   if (property == null) return item === undefined ? fallback : item
 
-  if (item !== Object(item)) return fallback === undefined ? item : fallback
+  if (item !== Object(item)) {
+    if (typeof property !== 'function') return fallback
+
+    const value = property(item, fallback)
+
+    return typeof value === 'undefined' ? fallback : value
+  }
 
   if (typeof property === 'string') return getObjectValueByPath(item, property, fallback)
 
@@ -90,29 +111,6 @@ export function getZIndex (el?: Element | null): number {
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
-}
-
-const tagsToReplace: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-}
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
-export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
-  const filtered = {} as { [N in K]: T[N] }
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    if (typeof obj[key] !== 'undefined') {
-      filtered[key] = obj[key]
-    }
-  }
-
-  return filtered
 }
 
 export function convertToUnit (str: number, unit?: string): string
@@ -158,7 +156,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -178,7 +176,7 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
@@ -216,6 +214,17 @@ export function pick<
   }
 
   return [found, rest]
+}
+
+export function omit<
+  T extends object,
+  U extends Extract<keyof T, string>
+> (obj: T, exclude: U[]): Omit<T, U> {
+  const clone = { ...obj }
+
+  exclude.forEach(prop => delete clone[prop])
+
+  return clone
 }
 
 /**
@@ -273,58 +282,6 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
       ? v : [v]
 }
 
-type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
-  if (sortBy === null || !sortBy.length) return items
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-
-  return items.sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const sortKey = sortBy[i]
-
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
-
-      if (sortDesc[i]) {
-        [sortA, sortB] = [sortB, sortA]
-      }
-
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
-
-        if (!customResult) continue
-
-        return customResult
-      }
-
-      // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
-        continue
-      }
-
-      // Dates should be compared numerically
-      if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
-      }
-
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-      if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return stringCollator.compare(sortA, sortB)
-      }
-    }
-
-    return 0
-  })
-}
-
 export function defaultFilter (value: any, search: string | null, item: any) {
   return value != null &&
     search != null &&
@@ -361,6 +318,24 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
 
 type Writable<T> = {
   -readonly [P in keyof T]: T[P]
+}
+
+// For some reason, recursively returning array and adding the content via concat did not work, therefore passing the array as parameter!
+export function addNodesInSlots (name: string, slots: Slots, nodes?: VNode[]) {
+  if (nodes === undefined) { nodes = [] }
+  if (Array.isArray(slots.default?.()) || Array.isArray(slots)) {
+    const arr: any = slots?.default?.() ?? slots
+    if (arr !== undefined) {
+      (arr).map((curItem: any) => {
+        if (curItem.type.name === name) {
+          nodes?.push(curItem)
+        }
+        if (curItem.children) {
+          addNodesInSlots(name, curItem.children, nodes)
+        }
+      })
+    }
+  }
 }
 
 /**
@@ -458,11 +433,6 @@ export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
 }
 
-export function getUid () {
-  return getUid._uid++
-}
-getUid._uid = 0
-
 export function flattenFragments (nodes: VNode[]): VNode[] {
   return nodes.map(node => {
     if (node.type === Fragment) {
@@ -479,11 +449,15 @@ export const randomHexColor = () => {
 }
 
 export function toKebabCase (str = '') {
-  return str
+  if (toKebabCase.cache.has(str)) return toKebabCase.cache.get(str)!
+  const kebab = str
     .replace(/[^a-z]/gi, '-')
     .replace(/\B([A-Z])/g, '-$1')
     .toLowerCase()
+  toKebabCase.cache.set(str, kebab)
+  return kebab
 }
+toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 
@@ -557,4 +531,50 @@ export function getEventCoordinates (e: MouseEvent | TouchEvent) {
   }
 
   return { clientX: e.clientX, clientY: e.clientY }
+}
+
+// Only allow a single return type
+type NotAUnion<T> = [T] extends [infer U] ? _NotAUnion<U, U> : never
+type _NotAUnion<T, U> = U extends any ? [T] extends [U] ? unknown : never : never
+
+/**
+ * Convert a computed ref to a record of refs.
+ * The getter function must always return an object with the same keys.
+ */
+export function destructComputed<T extends object> (getter: ComputedGetter<T & NotAUnion<T>>): ToRefs<T>
+export function destructComputed<T extends object> (getter: ComputedGetter<T>) {
+  const refs = reactive({}) as T
+  const base = computed(getter)
+  watchEffect(() => {
+    for (const key in base.value) {
+      refs[key] = base.value[key]
+    }
+  }, { flush: 'sync' })
+  return toRefs(refs)
+}
+
+/** Array.includes but value can be any type */
+export function includes (arr: readonly any[], val: any) {
+  return arr.includes(val)
+}
+
+const onRE = /^on[^a-z]/
+export const isOn = (key: string) => onRE.test(key)
+
+export type EventProp<T = (...args: any[]) => any> = T | T[]
+export const EventProp = [Function, Array] as PropType<EventProp>
+
+export function hasEvent (props: Record<string, any>, name: string) {
+  name = 'on' + capitalize(name)
+  return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
+}
+
+export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+  if (Array.isArray(handler)) {
+    for (const h of handler) {
+      h(...args)
+    }
+  } else if (typeof handler === 'function') {
+    handler(...args)
+  }
 }

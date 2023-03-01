@@ -1,35 +1,34 @@
 <template>
   <v-col cols="4">
     <v-card
-      :image="`https://cdn.vuetifyjs.com/docs/images/components-temp/${name}.png`"
-      :to="rpath(`/components/${name}`)"
-      height="164"
+      :image="image"
+      :to="rpath(`/components/${name}/`)"
       class="mb-3"
       elevation="0"
+      height="164"
     />
 
     <h2 class="text-h6">
-      <span class="text-capitalize">{{ name }}</span>
+      <span class="text-capitalize">{{ name?.replace(/-/g, ' ') }}</span>
     </h2>
 
     <slot />
   </v-col>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
   // Utilities
-  import { defineComponent } from 'vue'
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
-  export default defineComponent({
-    name: 'ComponentsListItem',
+  const props = defineProps({
+    name: String,
+    placeholder: Boolean,
+  })
 
-    props: {
-      name: String,
-    },
+  const image = computed(() => {
+    if (props.placeholder) return 'https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png'
 
-    setup () {
-      return { rpath }
-    },
+    return `https://cdn.vuetifyjs.com/docs/images/preview/${props.name}.png`
   })
 </script>

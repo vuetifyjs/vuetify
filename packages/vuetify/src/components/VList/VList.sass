@@ -1,4 +1,3 @@
-@forward './variables'
 @use 'sass:list'
 @use '../../styles/tools'
 @use './variables' as *
@@ -10,7 +9,6 @@
 
   @include tools.border($list-border...)
   @include tools.elevation($list-elevation)
-  @include tools.position($list-positions)
   @include tools.rounded($list-border-radius)
   @include tools.theme($list-theme...)
 
@@ -21,6 +19,10 @@
   &--nav
     padding-inline-start: $list-nav-padding
     padding-inline-end: $list-nav-padding
+
+  .v-navigation-drawer--rail:not(.v-navigation-drawer--is-hovering) &
+    .v-avatar
+      --v-avatar-height: 24px
 
   &--rounded
     @include tools.rounded($list-rounded-border-radius)
@@ -44,6 +46,7 @@
 
   align-items: center
   background: inherit
+  color: $list-subheader-color
   display: flex
   font-size: $list-subheader-font-size
   font-weight: $list-subheader-font-weight
@@ -53,7 +56,6 @@
   transition: $list-subheader-transition
 
   &__text
-    opacity: $list-subheader-text-opacity
     overflow: hidden
     text-overflow: ellipsis
     white-space: nowrap
@@ -67,7 +69,7 @@
         padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
   &--inset
-    padding-inline-start: $list-subheader-inset-padding-start
+    --indent-padding: #{$list-subheader-inset-padding-start}
 
   .v-list--nav &
     font-size: $list-nav-subheader-font-size

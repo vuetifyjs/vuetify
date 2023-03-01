@@ -1,50 +1,55 @@
 <template>
-  <div>
-    <v-data-table
-      v-model:page="page"
-      :headers="headers"
-      :items="desserts"
-      :items-per-page="itemsPerPage"
-      hide-default-footer
-      class="elevation-1"
-      @page-count="pageCount = $event"
-    ></v-data-table>
-    <div class="text-center pt-2">
-      <v-pagination
-        v-model="page"
-        :length="pageCount"
-      ></v-pagination>
-      <v-text-field
-        :value="itemsPerPage"
-        label="Items per page"
-        type="number"
-        min="-1"
-        max="15"
-        @input="itemsPerPage = parseInt($event, 10)"
-      ></v-text-field>
-    </div>
-  </div>
+  <v-data-table
+    v-model:page="page"
+    :headers="headers"
+    :items="desserts"
+    :items-per-page="itemsPerPage"
+    hide-default-footer
+    class="elevation-1"
+    @update:options="options = $event"
+  >
+    <template v-slot:bottom>
+      <div class="text-center pt-2">
+        <v-pagination
+          v-model="page"
+          :length="options.pageCount"
+        ></v-pagination>
+        <v-text-field
+          :model-value="itemsPerPage"
+          class="pa-2"
+          label="Items per page"
+          type="number"
+          min="-1"
+          max="15"
+          hide-details
+          @update:model-value="itemsPerPage = parseInt($event, 10)"
+        ></v-text-field>
+      </div>
+    </template>
+  </v-data-table>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        options: {
+          pageCount: 1,
+        },
         page: 1,
-        pageCount: 0,
-        itemsPerPage: 10,
+        itemsPerPage: 5,
         headers: [
           {
-            text: 'Dessert (100g serving)',
             align: 'start',
+            key: 'name',
             sortable: false,
-            value: 'name',
+            title: 'Dessert (100g serving)',
           },
-          { text: 'Calories', value: 'calories' },
-          { text: 'Fat (g)', value: 'fat' },
-          { text: 'Carbs (g)', value: 'carbs' },
-          { text: 'Protein (g)', value: 'protein' },
-          { text: 'Iron (%)', value: 'iron' },
+          { title: 'Calories', key: 'calories' },
+          { title: 'Fat (g)', key: 'fat' },
+          { title: 'Carbs (g)', key: 'carbs' },
+          { title: 'Protein (g)', key: 'protein' },
+          { title: 'Iron (%)', key: 'iron' },
         ],
         desserts: [
           {
@@ -53,7 +58,7 @@
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
-            iron: '1%',
+            iron: 1,
           },
           {
             name: 'Ice cream sandwich',
@@ -61,7 +66,7 @@
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
-            iron: '1%',
+            iron: 1,
           },
           {
             name: 'Eclair',
@@ -69,7 +74,7 @@
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
-            iron: '7%',
+            iron: 7,
           },
           {
             name: 'Cupcake',
@@ -77,7 +82,7 @@
             fat: 3.7,
             carbs: 67,
             protein: 4.3,
-            iron: '8%',
+            iron: 8,
           },
           {
             name: 'Gingerbread',
@@ -85,7 +90,7 @@
             fat: 16.0,
             carbs: 49,
             protein: 3.9,
-            iron: '16%',
+            iron: 16,
           },
           {
             name: 'Jelly bean',
@@ -93,7 +98,7 @@
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
-            iron: '0%',
+            iron: 0,
           },
           {
             name: 'Lollipop',
@@ -101,7 +106,7 @@
             fat: 0.2,
             carbs: 98,
             protein: 0,
-            iron: '2%',
+            iron: 2,
           },
           {
             name: 'Honeycomb',
@@ -109,7 +114,7 @@
             fat: 3.2,
             carbs: 87,
             protein: 6.5,
-            iron: '45%',
+            iron: 45,
           },
           {
             name: 'Donut',
@@ -117,7 +122,7 @@
             fat: 25.0,
             carbs: 51,
             protein: 4.9,
-            iron: '22%',
+            iron: 22,
           },
           {
             name: 'KitKat',
@@ -125,7 +130,7 @@
             fat: 26.0,
             carbs: 65,
             protein: 7,
-            iron: '6%',
+            iron: 6,
           },
         ],
       }

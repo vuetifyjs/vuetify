@@ -2,37 +2,47 @@
 import './VBanner.sass'
 
 // Components
+import { VAvatar } from '@/components/VAvatar'
 import { VBannerActions } from './VBannerActions'
-import { VBannerAvatar } from './VBannerAvatar'
-import { VBannerIcon } from './VBannerIcon'
 import { VBannerText } from './VBannerText'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useDisplay } from '@/composables/display'
+import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export const VBanner = defineComponent({
+export type VBannerSlots = MakeSlots<{
+  default: []
+  prepend: []
+  text: []
+  actions: []
+}>
+
+export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',
 
   props: {
     avatar: String,
     color: String,
-    icon: String,
+    icon: IconValue,
     lines: String as PropType<'one' | 'two' | 'three'>,
     stacked: Boolean,
     sticky: Boolean,
@@ -42,6 +52,7 @@ export const VBanner = defineComponent({
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeLocationProps(),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -54,7 +65,8 @@ export const VBanner = defineComponent({
     const { mobile } = useDisplay()
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { positionClasses, positionStyles } = usePosition(props)
+    const { locationStyles } = useLocation(props)
+    const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
     const { themeClasses } = provideTheme(props)
@@ -62,11 +74,7 @@ export const VBanner = defineComponent({
     const color = toRef(props, 'color')
     const density = toRef(props, 'density')
 
-    provideDefaults({
-      VBannerActions: { color, density },
-      VBannerAvatar: { density, image: toRef(props, 'avatar') },
-      VBannerIcon: { color, density, icon: toRef(props, 'icon') },
-    })
+    provideDefaults({ VBannerActions: { color, density } })
 
     useRender(() => {
       const hasText = !!(props.text || slots.text)
@@ -90,32 +98,40 @@ export const VBanner = defineComponent({
           ]}
           style={[
             dimensionStyles.value,
-            positionStyles.value,
+            locationStyles.value,
           ]}
           role="banner"
         >
           { hasPrepend && (
-            <>
-              { slots.prepend
-                ? (
-                  <div class="v-banner__prepend">
-                    { slots.prepend() }
-                  </div>
-                )
-                : props.avatar ? (<VBannerAvatar />)
-                : props.icon ? (<VBannerIcon />)
-                : undefined
-              }
-            </>
+            <VDefaultsProvider
+              key="prepend"
+              defaults={{
+                VAvatar: {
+                  color: color.value,
+                  density: density.value,
+                  icon: props.icon,
+                  image: props.avatar,
+                },
+              }}
+            >
+              <div class="v-banner__prepend">
+                { slots.prepend
+                  ? slots.prepend()
+                  : (props.avatar || props.icon) && (<VAvatar />)
+                }
+              </div>
+            </VDefaultsProvider>
           ) }
 
-          { hasText && (
-            <VBannerText>
-              { slots.text ? slots.text() : props.text }
-            </VBannerText>
-          ) }
+          <div class="v-banner__content">
+            { hasText && (
+              <VBannerText key="text">
+                { slots.text ? slots.text() : props.text }
+              </VBannerText>
+            ) }
 
-          { slots.default?.() }
+            { slots.default?.() }
+          </div>
 
           { slots.actions && (
             <VBannerActions>

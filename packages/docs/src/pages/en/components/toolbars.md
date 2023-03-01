@@ -6,7 +6,7 @@ meta:
   keywords: toolbars, vuetify toolbar component, vue toolbar component
 related:
   - /components/buttons/
-  - /components/footer/
+  - /components/footers/
   - /components/tabs/
 ---
 
@@ -14,13 +14,17 @@ related:
 
 The `v-toolbar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).
 
-<entry />
+<!-- ![Toolbar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-toolbar/v-toolbar-entry.png) -->
+
+---
 
 ## Usage
 
 A toolbar is a flexible container that can be used in a number of ways. By default, the toolbar is 64px high on desktop and 56px high on mobile. There are a number of helper components available to use with the toolbar. The `v-toolbar-title` is used for displaying a title and `v-toolbar-items` allow [v-btn](/components/buttons) to extend full height.
 
-<!-- <usage name="v-toolbar" /> -->
+<usage name="v-toolbar" />
+
+<entry />
 
 ## API
 
@@ -92,7 +96,7 @@ Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted
 
 #### Prominent toolbars
 
-Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
+Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app-bar](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
 
 <example file="v-toolbar/prop-prominent" />
 
@@ -115,5 +119,3 @@ In this example we offset our card onto the extended content area of a toolbar u
 A `v-toolbar` has multiple variations that can be applied with themes and helper classes. These range from light and dark themes, colored and transparent.
 
 <example file="v-toolbar/misc-variations" />
-
-<backmatter />

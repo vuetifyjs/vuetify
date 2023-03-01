@@ -1,11 +1,12 @@
 {
   "props": {
-    "bench": "The number of items **outside** the user view that are rendered (even if they are **not** viewable); to help prevent empty white space when scrolling *fast*.",
     "height": "Height of the component as a css value",
-    "itemHeight": "Height in pixels of the items to display",
+    "itemHeight": "Height in pixels of each item to display. When using **dynamic-item-height** this should be an average initial size.",
+    "itemKey": "Required when using **dynamic-item-height** together with object items. Should point to a property with a unique value for each item.",
+    "dynamicItemHeight": "Allows the scroller to support items with different and/or dynamic heights.",
     "items": "The array of items to display"
   },
   "slots": {
-    "default": "Default slot to customize items appearance"
+    "default": "Default slot to render a single item"
   }
 }

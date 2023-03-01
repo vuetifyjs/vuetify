@@ -20,7 +20,7 @@ The `v-progress-circular` component is used to convey data circularly to users. 
 
 In its simplest form, v-progress-circular displays a circular progress bar. Use the value prop to control the progress.
 
-<example file="v-progress-circular/usage" />
+<usage name="v-progress-circular" />
 
 ## API
 
@@ -53,5 +53,3 @@ The `rotate` prop gives you the ability to customize the `v-progress-circular`'s
 The `size` and `width` props allow you to easily alter the size and width of the `v-progress-circular` component.
 
 <example file="v-progress-circular/prop-size-and-width" />
-
-<backmatter />

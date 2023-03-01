@@ -1,18 +1,29 @@
+// Stores
+import { useUserStore } from './user'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
-export type RootState = {
-  sw: {
-    install: any
-  }
-}
-
 export const usePwaStore = defineStore('pwa', () => {
+  const user = useUserStore()
+
   const state = reactive({
-    sw: {
-      install: true,
-    },
+    snackbar: false,
+    loading: false,
+    updateSW: null as null | ((reload?: boolean) => void),
   })
 
-  return { ...toRefs(state) }
+  function ignore () {
+    state.snackbar = false
+    user.pwaRefresh = false
+  }
+
+  function update () {
+    state.snackbar = false
+    state.loading = true
+    state.updateSW?.(true)
+  }
+
+  return { ...toRefs(state), ignore, update }
 })

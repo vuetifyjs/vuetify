@@ -1,5 +1,5 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row no-gutters>
       <v-col
         v-for="n in 3"
@@ -7,13 +7,9 @@
         cols="12"
         sm="4"
       >
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
+        <v-sheet class="ma-2 pa-2">
           One of three columns
-        </v-card>
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

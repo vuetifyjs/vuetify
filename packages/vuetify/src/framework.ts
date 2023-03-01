@@ -1,46 +1,55 @@
-import { createDisplay, DisplaySymbol } from '@/composables/display'
-import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { defaultSets, IconSymbol } from '@/composables/icons'
+// Composables
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
-import { createLocaleAdapter, LocaleAdapterSymbol } from '@/composables/locale'
-import { createRtl, RtlSymbol } from '@/composables/rtl'
-import { aliases as iconAliases, mdi } from '@/iconsets/mdi'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createIcons, IconSymbol } from '@/composables/icons'
+import { createLocale, LocaleSymbol } from '@/composables/locale'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
-import { reactive } from 'vue'
-import { defineComponent, mergeDeep } from '@/util'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
-import type { DisplayOptions } from '@/composables/display'
-import type { ThemeOptions } from '@/composables/theme'
-import type { IconOptions } from '@/composables/icons'
-import type { LocaleAdapter, LocaleOptions } from '@/composables/locale'
-import type { RtlOptions } from '@/composables/rtl'
 import type { DefaultsOptions } from '@/composables/defaults'
+import type { DisplayOptions } from '@/composables/display'
+import type { IconOptions } from '@/composables/icons'
+import type { LocaleOptions, RtlOptions } from '@/composables/locale'
+import type { ThemeOptions } from '@/composables/theme'
 
 export * from './composables'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
+  blueprint?: Blueprint
   components?: Record<string, any>
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
   theme?: ThemeOptions
   icons?: IconOptions
-  locale?: (LocaleOptions & RtlOptions) | (LocaleAdapter & RtlOptions)
+  locale?: LocaleOptions & RtlOptions
+  ssr?: boolean
 }
 
-export const createVuetify = (options: VuetifyOptions = {}) => {
-  const install = (app: App) => {
-    const {
-      aliases = {},
-      components = {},
-      directives = {},
-      icons = {},
-    } = options
+export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
+export function createVuetify (vuetify: VuetifyOptions = {}) {
+  const { blueprint, ...rest } = vuetify
+  const options = mergeDeep(blueprint, rest)
+  const {
+    aliases = {},
+    components = {},
+    directives = {},
+  } = options
+
+  const defaults = createDefaults(options.defaults)
+  const display = createDisplay(options.display, options.ssr)
+  const theme = createTheme(options.theme)
+  const icons = createIcons(options.icons)
+  const locale = createLocale(options.locale)
+
+  const install = (app: App) => {
     for (const key in directives) {
       app.directive(key, directives[key])
     }
@@ -53,50 +62,73 @@ export const createVuetify = (options: VuetifyOptions = {}) => {
       app.component(key, defineComponent({
         ...aliases[key],
         name: key,
+        aliasName: aliases[key].name,
       }))
     }
 
-    app.provide(DefaultsSymbol, createDefaults(options.defaults))
-    app.provide(DisplaySymbol, createDisplay(options.display))
-    app.provide(ThemeSymbol, createTheme(app, options.theme))
-    app.provide(IconSymbol, mergeDeep({
-      defaultSet: 'mdi',
-      sets: {
-        ...defaultSets,
-        mdi,
-      },
-      aliases: iconAliases,
-    }, icons))
-    const { adapter, rootInstance } = createLocaleAdapter(app, options?.locale)
-    app.provide(LocaleAdapterSymbol, adapter)
-    app.provide(RtlSymbol, createRtl(rootInstance, options?.locale))
+    theme.install(app)
 
-    // Vue's inject() can only be used in setup
-    function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
-      const vm = this.$
+    app.provide(DefaultsSymbol, defaults)
+    app.provide(DisplaySymbol, display)
+    app.provide(ThemeSymbol, theme)
+    app.provide(IconSymbol, icons)
+    app.provide(LocaleSymbol, locale)
 
-      const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
-
-      if (provides && (key as any) in provides) {
-        return provides[(key as string)]
+    if (IN_BROWSER && options.ssr) {
+      if (app.$nuxt) {
+        app.$nuxt.hook('app:suspense:resolve', () => {
+          display.update()
+        })
+      } else {
+        const { mount } = app
+        app.mount = (...args) => {
+          const vm = mount(...args)
+          nextTick(() => display.update())
+          app.mount = mount
+          return vm
+        }
       }
     }
 
-    app.mixin({
-      computed: {
-        $vuetify () {
-          return reactive({
-            defaults: inject.call(this, DefaultsSymbol),
-            display: inject.call(this, DisplaySymbol),
-            theme: inject.call(this, ThemeSymbol),
-            icons: inject.call(this, IconSymbol),
-            locale: inject.call(this, LocaleAdapterSymbol),
-            rtl: inject.call(this, RtlSymbol),
-          })
+    getUid.reset()
+
+    if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
+      app.mixin({
+        computed: {
+          $vuetify () {
+            return reactive({
+              defaults: inject.call(this, DefaultsSymbol),
+              display: inject.call(this, DisplaySymbol),
+              theme: inject.call(this, ThemeSymbol),
+              icons: inject.call(this, IconSymbol),
+              locale: inject.call(this, LocaleSymbol),
+            })
+          },
         },
-      },
-    })
+      })
+    }
   }
 
-  return { install }
+  return {
+    install,
+    defaults,
+    display,
+    theme,
+    icons,
+    locale,
+  }
+}
+
+export const version = __VUETIFY_VERSION__
+createVuetify.version = version
+
+// Vue's inject() can only be used in setup
+function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
+  const vm = this.$
+
+  const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
+
+  if (provides && (key as any) in provides) {
+    return provides[(key as string)]
+  }
 }

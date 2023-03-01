@@ -5,6 +5,7 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeGroupItemProps } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
@@ -13,20 +14,20 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, standardEasing, useRender } from '@/util'
-import { VTabsSymbol } from './shared'
+import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
-export const VTab = defineComponent({
+export const VTab = genericComponent()({
   name: 'VTab',
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String],
-    prependIcon: String,
-    appendIcon: String,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
 
     stacked: Boolean,
     title: String,
@@ -93,7 +94,7 @@ export const VTab = defineComponent({
         const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
 
         const sigma = 1.5
-        nextEl.animate({
+        animate(nextEl, {
           backgroundColor: [color, ''],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
@@ -136,6 +137,7 @@ export const VTab = defineComponent({
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
+          active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
           variant="text"

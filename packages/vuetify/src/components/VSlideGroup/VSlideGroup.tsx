@@ -6,24 +6,38 @@ import { VFadeTransition } from '@/components/transitions'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
 import { useResizeObserver } from '@/composables/resizeObserver'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
+import { computed, ref, watch } from 'vue'
+import { clamp, genericComponent, IN_BROWSER, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
-import { clamp, defineComponent, useRender } from '@/util'
-import { computed, ref, watch, watchEffect } from 'vue'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
-export const VSlideGroup = defineComponent({
+interface SlideGroupSlot {
+  next: GroupProvide['next']
+  prev: GroupProvide['prev']
+  select: GroupProvide['select']
+  isSelected: GroupProvide['isSelected']
+}
+
+type VSlideGroupSlots = {
+  default: [SlideGroupSlot]
+  prev: [SlideGroupSlot]
+  next: [SlideGroupSlot]
+}
+
+export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
 
   props: {
@@ -37,11 +51,11 @@ export const VSlideGroup = defineComponent({
       default: VSlideGroupSymbol,
     },
     nextIcon: {
-      type: String,
+      type: IconValue,
       default: '$next',
     },
     prevIcon: {
-      type: String,
+      type: IconValue,
       default: '$prev',
     },
     showArrows: {
@@ -54,6 +68,7 @@ export const VSlideGroup = defineComponent({
         ].includes(v)
       ),
     },
+
     ...makeTagProps(),
     ...makeGroupProps({
       selectedClass: 'v-slide-group-item--active',
@@ -75,18 +90,7 @@ export const VSlideGroup = defineComponent({
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
-    const contentRef = ref<HTMLElement>()
-
-    watchEffect(() => {
-      if (!containerRect.value || !contentRef.value) return
-
-      const sizeProperty = isHorizontal.value ? 'width' : 'height'
-
-      containerSize.value = containerRect.value[sizeProperty]
-      contentSize.value = contentRef.value.getBoundingClientRect()[sizeProperty]
-
-      isOverflowing.value = containerSize.value + 1 < contentSize.value
-    })
+    const { resizeRef: contentRef, contentRect } = useResizeObserver()
 
     const firstSelectedIndex = computed(() => {
       if (!group.selected.value.length) return -1
@@ -100,51 +104,48 @@ export const VSlideGroup = defineComponent({
       return group.items.value.findIndex(item => item.id === group.selected.value[group.selected.value.length - 1])
     })
 
-    watch(group.selected, () => {
-      if (firstSelectedIndex.value < 0 || !contentRef.value) return
+    if (IN_BROWSER) {
+      let frame = -1
+      watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => {
+          if (containerRect.value && contentRect.value) {
+            const sizeProperty = isHorizontal.value ? 'width' : 'height'
 
-      // TODO: Is this too naive? Should we store element references in group composable?
-      const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+            containerSize.value = containerRect.value[sizeProperty]
+            contentSize.value = contentRect.value[sizeProperty]
 
-      if (firstSelectedIndex.value === 0 || !isOverflowing.value) {
-        scrollOffset.value = 0
-      } else if (props.centerActive) {
-        scrollOffset.value = calculateCenteredOffset({
-          selectedElement,
-          containerSize: containerSize.value,
-          contentSize: contentSize.value,
-          isRtl: isRtl.value,
-          isHorizontal: isHorizontal.value,
+            isOverflowing.value = containerSize.value + 1 < contentSize.value
+          }
+
+          if (firstSelectedIndex.value >= 0 && contentRef.value) {
+            // TODO: Is this too naive? Should we store element references in group composable?
+            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+
+            if (firstSelectedIndex.value === 0 || !isOverflowing.value) {
+              scrollOffset.value = 0
+            } else if (props.centerActive) {
+              scrollOffset.value = calculateCenteredOffset({
+                selectedElement,
+                containerSize: containerSize.value,
+                contentSize: contentSize.value,
+                isRtl: isRtl.value,
+                isHorizontal: isHorizontal.value,
+              })
+            } else if (isOverflowing.value) {
+              scrollOffset.value = calculateUpdatedOffset({
+                selectedElement,
+                containerSize: containerSize.value,
+                contentSize: contentSize.value,
+                isRtl: isRtl.value,
+                currentScrollOffset: scrollOffset.value,
+                isHorizontal: isHorizontal.value,
+              })
+            }
+          }
         })
-      } else if (isOverflowing.value) {
-        scrollOffset.value = calculateUpdatedOffset({
-          selectedElement,
-          containerSize: containerSize.value,
-          contentSize: contentSize.value,
-          isRtl: isRtl.value,
-          currentScrollOffset: scrollOffset.value,
-          isHorizontal: isHorizontal.value,
-        })
-      }
-    })
-
-    let firstOverflow = true
-    watch(isOverflowing, () => {
-      if (!firstOverflow || !contentRef.value || firstSelectedIndex.value < 0) return
-
-      firstOverflow = false
-
-      // TODO: Is this too naive? Should we store element references in group composable?
-      const selectedElement = contentRef.value.children[firstSelectedIndex.value] as HTMLElement
-
-      scrollOffset.value = calculateCenteredOffset({
-        selectedElement,
-        containerSize: containerSize.value,
-        contentSize: contentSize.value,
-        isRtl: isRtl.value,
-        isHorizontal: isHorizontal.value,
       })
-    })
+    }
 
     const disableTransition = ref(false)
 
@@ -153,7 +154,8 @@ export const VSlideGroup = defineComponent({
 
     function onTouchstart (e: TouchEvent) {
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      startOffset = scrollOffset.value
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      startOffset = sign * scrollOffset.value
       startTouch = e.touches[0][sizeProperty]
       disableTransition.value = true
     }
@@ -162,31 +164,26 @@ export const VSlideGroup = defineComponent({
       if (!isOverflowing.value) return
 
       const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      scrollOffset.value = startOffset + startTouch - e.touches[0][sizeProperty]
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
+      scrollOffset.value = sign * (startOffset + startTouch - e.touches[0][sizeProperty])
     }
 
     function onTouchend (e: TouchEvent) {
       const maxScrollOffset = contentSize.value - containerSize.value
 
-      if (isRtl.value) {
-        if (scrollOffset.value > 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value <= -maxScrollOffset) {
-          scrollOffset.value = -maxScrollOffset
-        }
-      } else {
-        if (scrollOffset.value < 0 || !isOverflowing.value) {
-          scrollOffset.value = 0
-        } else if (scrollOffset.value >= maxScrollOffset) {
-          scrollOffset.value = maxScrollOffset
-        }
+      if (scrollOffset.value < 0 || !isOverflowing.value) {
+        scrollOffset.value = 0
+      } else if (scrollOffset.value >= maxScrollOffset) {
+        scrollOffset.value = maxScrollOffset
       }
 
       disableTransition.value = false
     }
 
     function onScroll () {
-      containerRef.value && (containerRef.value.scrollLeft = 0)
+      if (!containerRef.value) return
+
+      containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
     }
 
     const isFocused = ref(false)
@@ -228,11 +225,21 @@ export const VSlideGroup = defineComponent({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
-      if (e.key === (isHorizontal.value ? 'ArrowRight' : 'ArrowDown')) {
-        focus('next')
-      } else if (e.key === (isHorizontal.value ? 'ArrowLeft' : 'ArrowUp')) {
-        focus('prev')
-      } else if (e.key === 'Home') {
+      if (isHorizontal.value) {
+        if (e.key === 'ArrowRight') {
+          focus(isRtl.value ? 'prev' : 'next')
+        } else if (e.key === 'ArrowLeft') {
+          focus(isRtl.value ? 'next' : 'prev')
+        }
+      } else {
+        if (e.key === 'ArrowDown') {
+          focus('next')
+        } else if (e.key === 'ArrowUp') {
+          focus('prev')
+        }
+      }
+
+      if (e.key === 'Home') {
         focus('first')
       } else if (e.key === 'End') {
         focus('last')
@@ -243,7 +250,6 @@ export const VSlideGroup = defineComponent({
       if (!contentRef.value) return
 
       if (!location) {
-        contentRef.value.querySelector('[tabindex]')
         const focusable = [...contentRef.value.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
@@ -264,22 +270,25 @@ export const VSlideGroup = defineComponent({
     }
 
     function scrollTo (location: 'prev' | 'next') {
-      const sign = isRtl.value ? -1 : 1
-      const newAbosluteOffset = sign * scrollOffset.value +
-        (location === 'prev' ? -1 : 1) * containerSize.value
+      const newAbsoluteOffset = scrollOffset.value + (location === 'prev' ? -1 : 1) * containerSize.value
 
-      scrollOffset.value = sign * clamp(newAbosluteOffset, 0, contentSize.value - containerSize.value)
+      scrollOffset.value = clamp(newAbsoluteOffset, 0, contentSize.value - containerSize.value)
     }
 
     const contentStyles = computed(() => {
-      const scrollAmount = scrollOffset.value <= 0
-        ? bias(-scrollOffset.value)
-        : scrollOffset.value > contentSize.value - containerSize.value
-          ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
-          : -scrollOffset.value
+      // This adds friction when scrolling the 'wrong' way when at max offset
+      let scrollAmount = scrollOffset.value > contentSize.value - containerSize.value
+        ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
+        : -scrollOffset.value
 
+      // This adds friction when scrolling the 'wrong' way when at min offset
+      if (scrollOffset.value <= 0) {
+        scrollAmount = bias(-scrollOffset.value)
+      }
+
+      const sign = isRtl.value && isHorizontal.value ? -1 : 1
       return {
-        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${scrollAmount}px)`,
+        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${sign * scrollAmount}px)`,
         transition: disableTransition.value ? 'none' : '',
         willChange: disableTransition.value ? 'transform' : '',
       }
@@ -321,12 +330,10 @@ export const VSlideGroup = defineComponent({
     })
 
     const hasPrev = computed(() => {
-      return hasAffixes.value && scrollOffset.value > 0
+      return Math.abs(scrollOffset.value) > 0
     })
 
     const hasNext = computed(() => {
-      if (!hasAffixes.value) return false
-
       // Check one scroll ahead to know the width of right-most item
       return contentSize.value > Math.abs(scrollOffset.value) + containerSize.value
     })
@@ -346,6 +353,7 @@ export const VSlideGroup = defineComponent({
       >
         { hasAffixes.value && (
           <div
+            key="prev"
             class={[
               'v-slide-group__prev',
               { 'v-slide-group__prev--disabled': !hasPrev.value },
@@ -354,13 +362,14 @@ export const VSlideGroup = defineComponent({
           >
             { slots.prev?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.prevIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
             ) }
           </div>
         ) }
 
         <div
+          key="container"
           ref={ containerRef }
           class="v-slide-group__container"
           onScroll={ onScroll }
@@ -382,6 +391,7 @@ export const VSlideGroup = defineComponent({
 
         { hasAffixes.value && (
           <div
+            key="next"
             class={[
               'v-slide-group__next',
               { 'v-slide-group__next--disabled': !hasNext.value },
@@ -390,7 +400,7 @@ export const VSlideGroup = defineComponent({
           >
             { slots.next?.(slotProps.value) ?? (
               <VFadeTransition>
-                <VIcon icon={ props.nextIcon }></VIcon>
+                <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
             ) }
           </div>

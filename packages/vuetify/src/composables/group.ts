@@ -28,7 +28,7 @@ export interface GroupProvide {
   register: (item: GroupItem, cmp: ComponentInternalInstance) => void
   unregister: (id: number) => void
   select: (id: number, value: boolean) => void
-  selected: Ref<any[]>
+  selected: Ref<Readonly<number[]>>
   isSelected: (id: number) => boolean
   prev: () => void
   next: () => void
@@ -72,7 +72,9 @@ export const makeGroupItemProps = propsFactory({
   selectedClass: String,
 }, 'group-item')
 
-export type GroupItemProps = ExtractPropTypes<ReturnType<typeof makeGroupItemProps>>
+export interface GroupItemProps extends ExtractPropTypes<ReturnType<typeof makeGroupItemProps>> {
+  'onGroup:selected': ((val: { value: boolean }) => void) | undefined
+}
 
 // Composables
 export function useGroupItem (

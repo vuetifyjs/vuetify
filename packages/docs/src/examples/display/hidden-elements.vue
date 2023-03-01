@@ -7,7 +7,7 @@
       :key="item.text"
       class="hidden-sm-and-down"
     >
-      <v-btn text>
+      <v-btn variant="text">
         {{ item.text }}
       </v-btn>
     </v-toolbar-items>

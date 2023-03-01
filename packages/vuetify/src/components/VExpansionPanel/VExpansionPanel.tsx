@@ -1,21 +1,27 @@
 // Components
 import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
-import { VExpansionPanelText } from './VExpansionPanelText'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpansionPanelText } from './VExpansionPanelText'
 
 // Composables
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { useBackgroundColor } from '@/composables/color'
-import { makeTagProps } from '@/composables/tag'
 import { makeLazyProps } from '@/composables/lazy'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
+import { makeTagProps } from '@/composables/tag'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VExpansionPanel = defineComponent({
+export type VExpansionPanelSlots = {
+  default: []
+  title: []
+  text: []
+}
+
+export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',
 
   props: {
@@ -31,6 +37,10 @@ export const VExpansionPanel = defineComponent({
     ...makeVExpansionPanelTitleProps(),
   },
 
+  emits: {
+    'group:selected': (val: { value: boolean }) => true,
+  },
+
   setup (props, { slots }) {
     const groupItem = useGroupItem(props, VExpansionPanelSymbol)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'bgColor')
@@ -38,20 +48,25 @@ export const VExpansionPanel = defineComponent({
     const { roundedClasses } = useRounded(props)
     const isDisabled = computed(() => groupItem?.disabled.value || props.disabled)
 
+    const selectedIndices = computed(() => groupItem.group.items.value.reduce<number[]>((arr, item, index) => {
+      if (groupItem.group.selected.value.includes(item.id)) arr.push(index)
+      return arr
+    }, []))
+
     const isBeforeSelected = computed(() => {
       const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === 1)
+        selectedIndices.value.some(selectedIndex => selectedIndex - index === 1)
     })
 
     const isAfterSelected = computed(() => {
       const index = groupItem.group.items.value.findIndex(item => item.id === groupItem.id)
       return !groupItem.isSelected.value &&
-        groupItem.group.selected.value.some(id => groupItem.group.items.value.indexOf(id) - index === -1)
+        selectedIndices.value.some(selectedIndex => selectedIndex - index === -1)
     })
 
     provide(VExpansionPanelSymbol, groupItem)
-
+    /*
     const slotProps = computed(() => ({
       open: groupItem.isSelected.value,
       disabled: groupItem.disabled.value,
@@ -60,7 +75,7 @@ export const VExpansionPanel = defineComponent({
       toggle: groupItem.toggle,
       eager: props.eager,
       color: props.color,
-    }))
+    })) */
 
     useRender(() => {
       const hasText = !!(slots.text || props.text)
@@ -88,30 +103,26 @@ export const VExpansionPanel = defineComponent({
               ...elevationClasses.value,
             ]}
           />
-          { slots.default?.(slotProps.value) ?? (
-            <>
-              { hasTitle && (
-                <VExpansionPanelTitle
-                  collapseIcon={ props.collapseIcon }
-                  color={ props.color }
-                  expandIcon={ props.expandIcon }
-                  hideActions={ props.hideActions }
-                  ripple={ props.ripple }
-                  disabled={ groupItem.disabled.value }
-                  open={ groupItem.isSelected.value }
-                  onUpdate:open={ groupItem.toggle }
-                >
-                  { slots.title ? slots.title() : props.title }
-                </VExpansionPanelTitle>
-              ) }
+          { hasTitle && (
+            <VExpansionPanelTitle
+              key="title"
+              collapseIcon={ props.collapseIcon }
+              color={ props.color }
+              expandIcon={ props.expandIcon }
+              hideActions={ props.hideActions }
+              ripple={ props.ripple }
+            >
+              { slots.title ? slots.title() : props.title }
+            </VExpansionPanelTitle>
+          ) }
 
-              { hasText && (
-                <VExpansionPanelText eager={ props.eager }>
-                  { slots.text ? slots.text() : props.text }
-                </VExpansionPanelText>
-              )}
-            </>
-          )}
+          { hasText && (
+            <VExpansionPanelText key="text" eager={ props.eager }>
+              { slots.text ? slots.text() : props.text }
+            </VExpansionPanelText>
+          ) }
+
+          { slots.default?.() }
         </props.tag>
       )
     })

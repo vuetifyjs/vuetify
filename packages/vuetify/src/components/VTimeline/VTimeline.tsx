@@ -1,34 +1,43 @@
 // Styles
 import './VTimeline.sass'
 
-// Components
-import { VTimelineItem } from './VTimelineItem'
-
 // Composables
-import { makeTagProps } from '@/composables/tag'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 
-// Helpers
-import { computed, provide, toRef } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
-import { VTimelineSymbol } from './shared'
+// Utilities
+import { computed, toRef } from 'vue'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
 
 export type TimelineDirection = 'vertical' | 'horizontal'
-export type TimelineSide = 'before' | 'after' | undefined
+export type TimelineSide = 'start' | 'end' | undefined
+export type TimelineAlign = 'center' | 'start'
+export type TimelineTruncateLine = 'start' | 'end' | 'both' | undefined
 
-export const VTimeline = defineComponent({
+export const VTimeline = genericComponent()({
   name: 'VTimeline',
 
   props: {
+    align: {
+      type: String,
+      default: 'center',
+      validator: (v: any) => ['center', 'start'].includes(v),
+    } as Prop<TimelineAlign>,
     direction: {
       type: String,
       default: 'vertical',
       validator: (v: any) => ['vertical', 'horizontal'].includes(v),
     } as Prop<TimelineDirection>,
+    justify: {
+      type: String,
+      default: 'auto',
+      validator: (v: any) => ['auto', 'center'].includes(v),
+    },
     side: {
       type: String,
       validator: (v: any) => v == null || ['start', 'end'].includes(v),
@@ -44,9 +53,8 @@ export const VTimeline = defineComponent({
     lineColor: String,
     truncateLine: {
       type: String,
-      default: 'start',
-      validator: (v: any) => ['none', 'start', 'end', 'both'].includes(v),
-    },
+      validator: (v: any) => ['start', 'end', 'both'].includes(v),
+    } as Prop<TimelineTruncateLine>,
 
     ...makeDensityProps(),
     ...makeTagProps(),
@@ -57,41 +65,60 @@ export const VTimeline = defineComponent({
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
 
-    provide(VTimelineSymbol, {
-      density: toRef(props, 'density'),
-      lineColor: toRef(props, 'lineColor'),
+    provideDefaults({
+      VTimelineDivider: {
+        lineColor: toRef(props, 'lineColor'),
+      },
+      VTimelineItem: {
+        density: toRef(props, 'density'),
+        lineInset: toRef(props, 'lineInset'),
+      },
     })
 
-    const sideClass = computed(() => {
+    const sideClasses = computed(() => {
       const side = props.side ? props.side : props.density !== 'default' ? 'end' : null
 
       return side && `v-timeline--side-${side}`
     })
 
-    return () => (
+    const truncateClasses = computed(() => {
+      const classes = [
+        'v-timeline--truncate-line-start',
+        'v-timeline--truncate-line-end',
+      ]
+
+      switch (props.truncateLine) {
+        case 'both': return classes
+        case 'start': return classes[0]
+        case 'end': return classes[1]
+        default: return null
+      }
+    })
+
+    useRender(() => (
       <props.tag
         class={[
           'v-timeline',
           `v-timeline--${props.direction}`,
+          `v-timeline--align-${props.align}`,
+          `v-timeline--justify-${props.justify}`,
+          truncateClasses.value,
           {
             'v-timeline--inset-line': !!props.lineInset,
-            'v-timeline--truncate-line-end': props.truncateLine === 'end' || props.truncateLine === 'both',
           },
           themeClasses.value,
           densityClasses.value,
-          sideClass.value,
+          sideClasses.value,
         ]}
         style={{
           '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-          '--v-timeline-line-inset': convertToUnit(props.lineInset),
         }}
-      >
-        { (props.truncateLine === 'none' || props.truncateLine === 'end') && (
-          <VTimelineItem hideDot />
-        ) }
+        v-slots={ slots }
+      />
+    ))
 
-        { slots.default?.() }
-      </props.tag>
-    )
+    return {}
   },
 })
+
+export type VTimeline = InstanceType<typeof VTimeline>

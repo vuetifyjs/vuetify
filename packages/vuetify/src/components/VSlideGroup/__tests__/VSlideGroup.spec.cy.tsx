@@ -2,7 +2,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { Application, CenteredGrid } from '../../../../cypress/templates'
-import { VCard } from '@/components'
+import { VCard } from '@/components/VCard'
 import { VSlideGroup, VSlideGroupItem } from '../'
 import { createRange } from '@/util'
 
@@ -14,17 +14,15 @@ describe('VSlideGroup', () => {
           <VSlideGroup showArrows="always" selectedClass="bg-primary">
             { createRange(6).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => (
-                    <VCard
-                      class={ ['ma-4', props.selectedClass] }
-                      color="grey"
-                      width="50"
-                      height="100"
-                      onClick={ props.toggle }
-                    >{ i }</VCard>
-                  ),
-                }}
+                { props => (
+                  <VCard
+                    class={ ['ma-4', props.selectedClass] }
+                    color="grey"
+                    width="50"
+                    height="100"
+                    onClick={ props.toggle }
+                  >{ i }</VCard>
+                )}
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -120,6 +118,8 @@ describe('VSlideGroup', () => {
       },
     })
 
+    cy.viewport(500, 600)
+
     cy.get('.v-slide-group__prev').should('not.exist')
     cy.get('.v-slide-group__next').should('not.exist')
 
@@ -190,9 +190,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup modelValue={ 7 } showArrows="always" selectedClass="bg-primary">
             { createRange(10).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass] }>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -210,9 +208,7 @@ describe('VSlideGroup', () => {
           <VSlideGroup selectedClass="bg-primary">
             { createRange(8).map(i => (
               <VSlideGroupItem key={ i } value={ i }>
-                {{
-                  default: props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard>,
-                }}
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
               </VSlideGroupItem>
             ))}
           </VSlideGroup>
@@ -224,5 +220,30 @@ describe('VSlideGroup', () => {
 
     cy.get('.item-1').should('not.be.visible')
     cy.get('.item-7').should('be.visible')
+  })
+
+  it('should support rtl', () => {
+    cy.mount(() => (
+      <Application rtl>
+        <CenteredGrid width="400px">
+          <VSlideGroup selectedClass="bg-primary" showArrows>
+            { createRange(8).map(i => (
+              <VSlideGroupItem key={ i } value={ i }>
+                { props => <VCard color="grey" width="50" height="100" class={ ['ma-4', props.selectedClass, `item-${i}`] }>{ i }</VCard> }
+              </VSlideGroupItem>
+            ))}
+          </VSlideGroup>
+        </CenteredGrid>
+      </Application>
+    ))
+
+    cy.get('.item-7').should('exist').should('not.be.visible')
+
+    cy.get('.v-slide-group__prev--disabled').should('exist')
+    cy.get('.v-slide-group__next--disabled').should('not.exist')
+
+    cy.get('.v-slide-group__next').click().click()
+
+    cy.get('.item-7').should('exist').should('be.visible')
   })
 })

@@ -1,5 +1,6 @@
 <template>
   <app-tooltip-btn
+    color="medium-emphasis"
     href="https://store.vuetifyjs.com/?utm_source=vuetifyjs.com&utm_medium=toolbar"
     icon="mdi-shopping-outline"
     path="store"
@@ -9,31 +10,22 @@
   />
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { defineComponent } from 'vue'
-  // import { useRoute } from 'vue-router'
+<script setup>
+  // Components
   import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 
-  export default defineComponent({
-    name: 'TeamLink',
+  // Composables
+  import { useGtag } from 'vue-gtag-next'
+  import { useRoute } from 'vue-router'
 
-    components: { AppTooltipBtn },
+  const { event } = useGtag()
+  const { name } = useRoute()
 
-    setup () {
-      // const route = useRoute()
-
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'toolbar',
-        //   event_label: 'store',
-        //   value: route.name,
-        // })
-      }
-
-      return {
-        onClick,
-      }
-    },
-  })
+  function onClick () {
+    event('click', {
+      event_category: 'app-bar',
+      event_label: 'store',
+      value: name,
+    })
+  }
 </script>

@@ -4,15 +4,14 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Directives
+import { Touch } from '@/directives/touch'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
-import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
-
-// Directives
-import { Touch } from '@/directives/touch'
+import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, provide, ref, watch } from 'vue'
@@ -21,8 +20,15 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
+import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
-import type { MakeSlots } from '@/util'
+
+export type VWindowSlots = {
+  default: [{ group: GroupProvide }]
+  additional: [{ group: GroupProvide }]
+  prev: [{ props: ControlProps }]
+  next: [{ props: ControlProps }]
+}
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -33,7 +39,7 @@ type WindowProvide = {
 }
 
 type ControlProps = {
-  icon: string
+  icon: IconValue
   class: string
   onClick: () => void
   ariaLabel: string
@@ -42,14 +48,7 @@ type ControlProps = {
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
-export const VWindow = genericComponent<new () => {
-  $slots: MakeSlots<{
-    default: [{ group: GroupProvide }]
-    additional: [{ group: GroupProvide }]
-    prev: [{ props: ControlProps }]
-    next: [{ props: ControlProps }]
-  }>
-}>()({
+export const VWindow = genericComponent<VWindowSlots>()({
   name: 'VWindow',
 
   directives: {
@@ -59,11 +58,11 @@ export const VWindow = genericComponent<new () => {
   props: {
     continuous: Boolean,
     nextIcon: {
-      type: [Boolean, String],
+      type: [Boolean, String, Function, Object] as PropType<IconValue>,
       default: '$next',
     },
     prevIcon: {
-      type: [Boolean, String],
+      type: [Boolean, String, Function, Object] as PropType<IconValue>,
       default: '$prev',
     },
     reverse: Boolean,
@@ -200,9 +199,6 @@ export const VWindow = genericComponent<new () => {
         },
         right: () => {
           isRtlReverse.value ? next() : prev()
-        },
-        end: ({ originalEvent }) => {
-          originalEvent.stopPropagation()
         },
         start: ({ originalEvent }) => {
           originalEvent.stopPropagation()

@@ -10,6 +10,7 @@
         <v-list-item
           prepend-avatar="https://randomuser.me/api/portraits/men/85.jpg"
           title="John Leider"
+          nav
         >
           <template v-slot:append>
             <v-btn

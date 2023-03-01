@@ -1,0 +1,77 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VVirtualTable.ts should re-render when items change 1`] = `
+<div class="v-data-table v-virtual-table theme--light">
+  <div class="v-virtual-table__wrapper">
+    <div class="v-virtual-table__table">
+      <table>
+        <tbody>
+          <tr style="height: 0px;">
+          </tr>
+          <div>
+            <div>
+              a
+            </div>
+            <div>
+              b
+            </div>
+            <div>
+              c
+            </div>
+          </div>
+          <tr style="height: 0px;">
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualTable.ts should re-render when items change 2`] = `
+<div class="v-data-table v-virtual-table theme--light">
+  <div class="v-virtual-table__wrapper">
+    <div class="v-virtual-table__table">
+      <table>
+        <tbody>
+          <tr style="height: 0px;">
+          </tr>
+          <div>
+            <div>
+              d
+            </div>
+            <div>
+              e
+            </div>
+            <div>
+              f
+            </div>
+          </div>
+          <tr style="height: 0px;">
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;
+
+exports[`VVirtualTable.ts should render 1`] = `
+<div class="v-data-table v-virtual-table theme--light">
+  <div class="v-virtual-table__wrapper">
+    <div class="v-virtual-table__table">
+      <table>
+        <tbody>
+          <tr style="height: 0px;">
+          </tr>
+          <div class="test">
+            {"items":["a","b","c"]}
+          </div>
+          <tr style="height: 0px;">
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+`;

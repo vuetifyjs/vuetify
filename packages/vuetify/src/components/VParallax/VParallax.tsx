@@ -5,32 +5,40 @@ import './VParallax.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { useDisplay } from '@/composables'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { onBeforeUnmount, ref, watch, watchEffect } from 'vue'
-import { defineComponent, getScrollParent } from '@/util'
+import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
+import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
+
+// Types
+import type { VImgSlots } from '../VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
 }
 
-export const VParallax = defineComponent({
+export const VParallax = genericComponent<VImgSlots>()({
   name: 'VParallax',
 
   props: {
     scale: {
       type: [Number, String],
-      default: 1.3,
+      default: 0.5,
     },
   },
 
-  setup (props, { attrs, slots }) {
-    const root = ref<VImg>()
+  setup (props, { slots }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver()
+    const { resizeRef, contentRect } = useResizeObserver()
+    const { height: displayHeight } = useDisplay()
+
+    const root = ref<VImg>()
 
     watchEffect(() => {
-      intersectionRef.value = root.value?.$el
+      intersectionRef.value = resizeRef.value = root.value?.$el
     })
 
     let scrollParent: Element
@@ -49,6 +57,13 @@ export const VParallax = defineComponent({
       scrollParent?.removeEventListener('scroll', onScroll)
     })
 
+    watch(displayHeight, onScroll)
+    watch(() => contentRect.value?.height, onScroll)
+
+    const scale = computed(() => {
+      return 1 - clamp(+props.scale)
+    })
+
     let frame = -1
     function onScroll () {
       if (!isIntersecting.value) return
@@ -58,18 +73,20 @@ export const VParallax = defineComponent({
         const el: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
         if (!el) return
 
-        const rect = intersectionRef.value!.getBoundingClientRect()
-        const scrollHeight = scrollParent.clientHeight ?? window.innerHeight
+        const scrollHeight = scrollParent.clientHeight ?? document.documentElement.clientHeight
         const scrollPos = scrollParent.scrollTop ?? window.scrollY
-        const top = rect.top + scrollPos
-        const progress = (scrollPos + scrollHeight - top) / (rect.height + scrollHeight)
-        const translate = floor((rect.height * +props.scale - rect.height) * (-progress + 0.5))
+        const top = intersectionRef.value!.offsetTop
+        const height = contentRect.value!.height
 
-        el.style.setProperty('transform', `translateY(${translate}px) scale(${props.scale})`)
+        const center = top + (height - scrollHeight) / 2
+        const translate = floor((scrollPos - center) * scale.value)
+        const sizeScale = Math.max(1, (scale.value * (scrollHeight - height) + height) / height)
+
+        el.style.setProperty('transform', `translateY(${translate}px) scale(${sizeScale})`)
       })
     }
 
-    return () => (
+    useRender(() => (
       <VImg
         class={[
           'v-parallax',
@@ -81,7 +98,9 @@ export const VParallax = defineComponent({
         onLoad={ onScroll }
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
 

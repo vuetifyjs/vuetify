@@ -1,39 +1,35 @@
 <template>
-  <v-toolbar
-    color="purple"
-    dark
-  >
-    <v-toolbar-title>Title</v-toolbar-title>
+  <v-toolbar color="purple">
+    <template v-slot:prepend>
+      <div class="text-h5">Title</div>
+    </template>
 
     <v-divider
-      class="mx-4"
+      class="ms-3"
+      inset
       vertical
     ></v-divider>
 
-    <span class="subheading">My Home</span>
+    <v-toolbar-title>My Home</v-toolbar-title>
 
     <v-spacer></v-spacer>
 
-    <v-toolbar-items class="hidden-sm-and-down">
-      <v-btn text>
-        News
-      </v-btn>
+    <v-spacer></v-spacer>
+
+    <v-toolbar-items>
+      <v-btn variant="text">News</v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn text>
-        Blog
-      </v-btn>
+      <v-btn variant="text">Blog</v-btn>
 
       <v-divider vertical></v-divider>
 
-      <v-btn text>
-        Music
-      </v-btn>
-
-      <v-divider vertical></v-divider>
+      <v-btn variant="text">Music</v-btn>
     </v-toolbar-items>
 
-    <v-app-bar-nav-icon></v-app-bar-nav-icon>
+    <v-divider vertical></v-divider>
+
+    <v-app-bar-nav-icon class="ms-2"></v-app-bar-nav-icon>
   </v-toolbar>
 </template>

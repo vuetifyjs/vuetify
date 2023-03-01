@@ -1,12 +1,15 @@
+import { describe, expect, it } from '@jest/globals'
 import { allowedVariants, makeVariantProps, useVariant } from '../variant'
 
-describe('size', () => {
+describe('variant', () => {
   it.each([
     [{ variant: 'default' }, 'test--variant-default'],
     [{ variant: 'contained' }, 'test--variant-contained'],
     [{ variant: 'outlined' }, 'test--variant-outlined'],
     [{ variant: 'text' }, 'test--variant-text'],
-  ] as const)('should return the correct class given value %p', (input, expected) => {
+  ] as const)('should return the correct class given value %p', (...args) => {
+    const [input, expected] = args
+    // @ts-expect-error invalid variant
     const { variantClasses } = useVariant(input, 'test')
 
     expect(variantClasses.value).toStrictEqual(expected)
@@ -28,10 +31,12 @@ describe('size', () => {
   it.each([
     [{ color: 'primary' }, 'text-primary'],
     [{ variant: 'default', color: 'primary' }, 'text-primary'],
-    [{ variant: 'contained', color: 'primary' }, 'bg-primary'],
+    [{ variant: 'elevated', color: 'primary' }, 'bg-primary'],
     [{ variant: 'outlined', color: 'primary' }, 'text-primary'],
     [{ variant: 'text', color: 'primary' }, 'text-primary'],
-  ] as const)('should return correct classes for %s props', (props, expected) => {
+  ] as const)('should return correct classes for %s props', (...args) => {
+    const [props, expected] = args
+    // @ts-expect-error invalid variant
     const { colorClasses } = useVariant(props, 'test')
 
     expect(colorClasses.value).toContain(expected)

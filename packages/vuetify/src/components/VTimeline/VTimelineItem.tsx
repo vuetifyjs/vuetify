@@ -1,22 +1,33 @@
 // Components
-import { VTimelineSymbol } from './shared'
 import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
-import { makeSizeProps } from '@/composables/size'
+import { IconValue } from '@/composables/icons'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
+import { makeSizeProps } from '@/composables/size'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { inject, ref, watch } from 'vue'
-import { convertToUnit, defineComponent } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { ref, watch } from 'vue'
 
-export const VTimelineItem = defineComponent({
+// Types
+import type { PropType } from 'vue'
+
+// Types
+export type VTimelineItemSlots = {
+  default: []
+  icon: []
+  opposite: []
+}
+
+export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   name: 'VTimelineItem',
 
   props: {
+    density: String as PropType<'default' | 'compact'>,
     dotColor: String,
     fillDot: Boolean,
     hideDot: Boolean,
@@ -24,8 +35,9 @@ export const VTimelineItem = defineComponent({
       type: Boolean,
       default: undefined,
     },
-    icon: String,
+    icon: IconValue,
     iconColor: String,
+    lineInset: [Number, String],
 
     ...makeRoundedProps(),
     ...makeElevationProps(),
@@ -35,10 +47,6 @@ export const VTimelineItem = defineComponent({
   },
 
   setup (props, { slots }) {
-    const timeline = inject(VTimelineSymbol)
-
-    if (!timeline) throw new Error('[Vuetify] Could not find v-timeline provider')
-
     const { dimensionStyles } = useDimension(props)
 
     const dotSize = ref(0)
@@ -50,7 +58,7 @@ export const VTimelineItem = defineComponent({
       flush: 'post',
     })
 
-    return () => (
+    useRender(() => (
       <div
         class={[
           'v-timeline-item',
@@ -60,6 +68,7 @@ export const VTimelineItem = defineComponent({
         ]}
         style={{
           '--v-timeline-dot-size': convertToUnit(dotSize.value),
+          '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),
         }}
       >
         <div
@@ -82,12 +91,16 @@ export const VTimelineItem = defineComponent({
           v-slots={{ default: slots.icon }}
         />
 
-        { timeline.density.value !== 'compact' && (
+        { props.density !== 'compact' && (
           <div class="v-timeline-item__opposite">
             { !props.hideOpposite && slots.opposite?.() }
           </div>
         ) }
       </div>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VTimelineItem = InstanceType<typeof VTimelineItem>

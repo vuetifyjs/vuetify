@@ -2,31 +2,30 @@
 import './VColorPicker.sass'
 
 // Components
-import { VSheet } from '@/components/VSheet'
-import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
+import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
+import { VSheet } from '@/components/VSheet'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps } from '@/composables/theme'
+import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { onMounted, ref } from 'vue'
-import { defineComponent, HSVAtoCSS } from '@/util'
+import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
+import { onMounted, ref } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
-
-  inheritAttrs: false,
 
   props: {
     canvasHeight: {
@@ -77,7 +76,7 @@ export const VColorPicker = defineComponent({
 
   setup (props) {
     const mode = useProxiedModel(props, 'mode')
-    const lastPickedColor = ref<HSVA | null>(null)
+    const lastPickedColor = ref<HSV | null>(null)
     const currentColor = useProxiedModel(
       props,
       'modelValue',
@@ -101,7 +100,7 @@ export const VColorPicker = defineComponent({
       }
     )
 
-    const updateColor = (hsva: HSVA) => {
+    const updateColor = (hsva: HSV) => {
       currentColor.value = hsva
       lastPickedColor.value = hsva
     }
@@ -110,7 +109,15 @@ export const VColorPicker = defineComponent({
       if (!props.modes.includes(mode.value)) mode.value = props.modes[0]
     })
 
-    return () => (
+    provideDefaults({
+      VSlider: {
+        color: undefined,
+        trackColor: undefined,
+        trackFillColor: undefined,
+      },
+    })
+
+    useRender(() => (
       <VSheet
         rounded={ props.rounded }
         elevation={ props.elevation }
@@ -119,12 +126,13 @@ export const VColorPicker = defineComponent({
           'v-color-picker',
         ]}
         style={{
-          '--v-color-picker-color-hsv': HSVAtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
+          '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
         }}
         maxWidth={ props.width }
       >
         { !props.hideCanvas && (
           <VColorPickerCanvas
+            key="canvas"
             color={ currentColor.value }
             onUpdate:color={ updateColor }
             disabled={ props.disabled }
@@ -133,18 +141,22 @@ export const VColorPicker = defineComponent({
             height={ props.canvasHeight }
           />
         ) }
+
         { (!props.hideSliders || !props.hideInputs) && (
-          <div class="v-color-picker__controls">
+          <div key="controls" class="v-color-picker__controls">
             { !props.hideSliders && (
               <VColorPickerPreview
+                key="preview"
                 color={ currentColor.value }
                 onUpdate:color={ updateColor }
                 hideAlpha={ !mode.value.endsWith('a') }
                 disabled={ props.disabled }
               />
             ) }
+
             { !props.hideInputs && (
               <VColorPickerEdit
+                key="edit"
                 modes={ props.modes }
                 mode={ mode.value }
                 onUpdate:mode={ m => mode.value = m }
@@ -155,8 +167,10 @@ export const VColorPicker = defineComponent({
             ) }
           </div>
         ) }
+
         { props.showSwatches && (
           <VColorPickerSwatches
+            key="swatches"
             color={ currentColor.value }
             onUpdate:color={ updateColor }
             maxHeight={ props.swatchesMaxHeight }
@@ -165,7 +179,9 @@ export const VColorPicker = defineComponent({
           />
         ) }
       </VSheet>
-    )
+    ))
+
+    return {}
   },
 })
 

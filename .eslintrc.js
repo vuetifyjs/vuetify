@@ -118,6 +118,10 @@ module.exports = {
         'vue/multiline-html-element-content-newline': 'off',
         'vue/valid-v-slot': ['error', { allowModifiers: true }],
         'vue/multi-word-component-names': 'off',
+
+        /* TODO: this really should be enabled,
+            we just do it so much I didn't have time to fix them all */
+        'vue/no-v-text-v-html-on-component': 'off',
       },
     },
     {

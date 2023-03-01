@@ -24,7 +24,11 @@ a `v-snackbar` in its simplest form displays a temporary and closable notificati
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-snackbar](/api/v-snackbar/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -53,5 +57,3 @@ Apply different styles to the snackbar using props such as **text**, **shaped**,
 The **vertical** property allows you to stack the content of your `v-snackbar`.
 
 <example file="v-snackbar/prop-vertical" />
-
-<backmatter />

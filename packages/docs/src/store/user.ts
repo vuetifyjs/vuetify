@@ -8,6 +8,7 @@ import { defineStore } from 'pinia'
 import { reactive, toRefs } from 'vue'
 
 export type RootState = {
+  v: number
   api: 'link-only' | 'inline'
   pwaRefresh: boolean
   theme: string
@@ -16,6 +17,8 @@ export type RootState = {
   notifications: {
     read: string[]
     last: {
+      banner: null | number
+      v2banner: null | number
       install: null | number
       notification: null | number
       promotion: null | number
@@ -26,14 +29,17 @@ export type RootState = {
 
 export const useUserStore = defineStore('user', () => {
   const state = reactive<RootState>({
+    v: 1,
     api: 'link-only',
-    pwaRefresh: false,
+    pwaRefresh: true,
     theme: 'system',
     mixedTheme: true,
     direction: 'ltr',
     notifications: {
       read: [],
       last: {
+        banner: null,
+        v2banner: null,
         install: null,
         notification: null,
         promotion: null,
@@ -48,25 +54,29 @@ export const useUserStore = defineStore('user', () => {
     const stored = localStorage.getItem('vuetify@user')
     const data = stored ? JSON.parse(stored) : {}
 
-    if (typeof data.api === 'boolean') {
-      data.api = data.api ? 'inline' : 'link-only'
+    if (!data.v) {
+      data.pwaRefresh = true
+      if (typeof data.api === 'boolean') {
+        data.api = data.api ? 'inline' : 'link-only'
+      }
+      if (typeof data.rtl === 'boolean') {
+        data.direction = data.rtl ? 'rtl' : 'ltr'
+        delete data.rtl
+      }
+      if (typeof data.theme === 'object') {
+        data.mixedTheme = data.theme.mixed
+        data.theme = data.theme.system ? 'system'
+          : data.theme.dark ? 'dark'
+          : 'light'
+      }
+      if (typeof data.last === 'object') {
+        data.notifications.last = data.last
+        delete data.last
+      }
     }
-    if (typeof data.rtl === 'boolean') {
-      data.direction = data.rtl ? 'rtl' : 'ltr'
-      delete data.rtl
-    }
+
     if (Array.isArray(data.notifications)) {
       data.notifications = { read: data.notifications }
-    }
-    if (typeof data.theme === 'object') {
-      data.mixedTheme = data.theme.mixed
-      data.theme = data.theme.system ? 'system'
-        : data.theme.dark ? 'dark'
-        : 'light'
-    }
-    if (typeof data.last === 'object') {
-      data.notifications.last = data.last
-      delete data.last
     }
 
     Object.assign(state, merge(state, data))

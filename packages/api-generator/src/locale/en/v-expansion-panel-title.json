@@ -1,0 +1,8 @@
+{
+  "props": {
+    "expandIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-expansion-panel-title.json))",
+    "collapseIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-expansion-panel-title.json))",
+    "hideActions": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-expansion-panel-title.json))",
+    "readonly": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-expansion-panel-title.json))"
+  }
+}

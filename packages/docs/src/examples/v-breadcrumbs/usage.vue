@@ -1,50 +1,51 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-breadcrumbs
-      :items="items"
-      v-bind="$attrs"
-    ></v-breadcrumbs>
-  </v-row>
+    <div>
+      <v-breadcrumbs v-bind="props">
+        <!-- <v-breadcrumbs-item>Item</v-breadcrumbs-item>
+
+        <v-breadcrumbs-divider></v-breadcrumbs-divider>
+
+        <v-breadcrumbs-item active>Item 2</v-breadcrumbs-item>
+
+        <v-breadcrumbs-divider></v-breadcrumbs-divider>
+
+        <v-breadcrumbs-item disabled>Item 3</v-breadcrumbs-item> -->
+      </v-breadcrumbs>
+    </div>
+
+    <template v-slot:configuration>
+      <v-select v-model="color" label="Background color" :items="['primary', 'success', 'info']" clearable></v-select>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-breadcrumbs'
+  const model = ref('default')
+  const options = []
+  const color = ref()
+  const props = computed(() => {
+    return {
+      'bg-color': color.value || undefined,
+      items: ['Foo', 'Bar', 'Fizz'],
+    }
+  })
 
-    data: () => ({
-      items: [
-        {
-          text: 'Dashboard',
-          disabled: false,
-          href: 'breadcrumbs_dashboard',
-        },
-        {
-          text: 'Link 1',
-          disabled: false,
-          href: 'breadcrumbs_link_1',
-        },
-        {
-          text: 'Link 2',
-          disabled: true,
-          href: 'breadcrumbs_link_2',
-        },
-      ],
-      defaults: {
-        large: false,
-        divider: undefined,
-      },
-      options: {
-        selects: {
-          divider: ['/', '\\', '.', ';', '>', '-'],
-        },
-      },
-      tabs: ['large'],
-    }),
+  const slots = computed(() => {
+    return ``
+  })
 
-  }
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

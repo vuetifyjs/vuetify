@@ -1,23 +1,26 @@
 // Utilities
-import { computed, inject, provide, ref } from 'vue'
+import { computed, inject, provide, ref, toRef, watch } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+import type { ValidationProps } from './validation'
 
 export interface FormProvide {
-  register: (
-    id: number | string,
-    validate: () => Promise<string[]>,
-    reset: () => void,
+  register: (item: {
+    id: number | string
+    validate: () => Promise<string[]>
+    reset: () => void
     resetValidation: () => void
-  ) => void
+  }) => void
   unregister: (id: number | string) => void
+  update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
   items: Ref<FormField[]>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  validateOn: Ref<FormProps['validateOn']>
 }
 
 interface FormField {
@@ -25,34 +28,46 @@ interface FormField {
   validate: () => Promise<string[]>
   reset: () => void
   resetValidation: () => void
+  isValid: boolean | null
+  errorMessages: string[]
 }
 
-interface FormValidationResult {
+interface FieldValidationResult {
   id: number | string
   errorMessages: string[]
 }
+
+interface FormValidationResult {
+  valid: boolean
+  errors: FieldValidationResult[]
+}
+
+export interface SubmitEventPromise extends SubmitEvent, Promise<FormValidationResult> {}
 
 export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 
 export interface FormProps {
   disabled: boolean
   fastFail: boolean
-  lazyValidation: boolean
   readonly: boolean
   modelValue: boolean | null
   'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+  validateOn: ValidationProps['validateOn']
 }
 
 export const makeFormProps = propsFactory({
   disabled: Boolean,
   fastFail: Boolean,
-  lazyValidation: Boolean,
   readonly: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,
     default: null,
   },
-})
+  validateOn: {
+    type: String as PropType<FormProps['validateOn']>,
+    default: 'input',
+  },
+}, 'form')
 
 export function createForm (props: FormProps) {
   const model = useProxiedModel(props, 'modelValue')
@@ -61,14 +76,13 @@ export function createForm (props: FormProps) {
   const isReadonly = computed(() => props.readonly)
   const isValidating = ref(false)
   const items = ref<FormField[]>([])
-  const errorMessages = ref<FormValidationResult[]>([])
+  const errors = ref<FieldValidationResult[]>([])
 
   async function validate () {
     const results = []
     let valid = true
 
-    errorMessages.value = []
-    model.value = null
+    errors.value = []
     isValidating.value = true
 
     for (const item of items.value) {
@@ -86,11 +100,10 @@ export function createForm (props: FormProps) {
       if (!valid && props.fastFail) break
     }
 
-    errorMessages.value = results
-    model.value = valid
+    errors.value = results
     isValidating.value = false
 
-    return { valid, errorMessages: errorMessages.value }
+    return { valid, errors: errors.value }
   }
 
   function reset () {
@@ -100,12 +113,34 @@ export function createForm (props: FormProps) {
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errorMessages.value = []
+    errors.value = []
     model.value = null
   }
 
+  watch(items, () => {
+    let valid = 0
+    let invalid = 0
+    const results = []
+
+    for (const item of items.value) {
+      if (item.isValid === false) {
+        invalid++
+        results.push({
+          id: item.id,
+          errorMessages: item.errorMessages,
+        })
+      } else if (item.isValid === true) valid++
+    }
+
+    errors.value = results
+    model.value =
+      invalid > 0 ? false
+      : valid === items.value.length ? true
+      : null
+  }, { deep: true })
+
   provide(FormKey, {
-    register: (id, validate, reset, resetValidation) => {
+    register: ({ id, validate, reset, resetValidation }) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -115,6 +150,8 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
+        isValid: null,
+        errorMessages: [],
       })
     },
     unregister: id => {
@@ -122,14 +159,23 @@ export function createForm (props: FormProps) {
         return item.id !== id
       })
     },
+    update: (id, isValid, errorMessages) => {
+      const found = items.value.find(item => item.id === id)
+
+      if (!found) return
+
+      found.isValid = isValid
+      found.errorMessages = errorMessages
+    },
     isDisabled,
     isReadonly,
     isValidating,
     items,
+    validateOn: toRef(props, 'validateOn'),
   })
 
   return {
-    errorMessages,
+    errors,
     isDisabled,
     isReadonly,
     isValidating,

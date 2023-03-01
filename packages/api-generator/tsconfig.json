@@ -1,0 +1,16 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "strict": false,
+    "noUnusedLocals": false,
+    "module": "ESNext",
+    "moduleResolution": "NodeNext",
+    "noEmitOnError": false,
+    "resolveJsonModule": true,
+    "paths": {
+      "@/*": [
+        "../vuetify/src/*"
+      ]
+    }
+  }
+}

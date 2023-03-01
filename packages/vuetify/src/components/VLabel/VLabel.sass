@@ -1,11 +1,9 @@
-@forward './variables'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-label
   align-items: center
-  cursor: pointer
   display: $label-display
   font-size: $label-font-size
   letter-spacing: $label-letter-spacing
@@ -14,3 +12,6 @@
   overflow: hidden
   text-overflow: ellipsis
   white-space: nowrap
+
+.v-label--clickable
+  cursor: pointer

@@ -1,20 +1,27 @@
+// VColorPicker
 $color-picker-border-radius: 4px !default;
-$color-picker-elevation: 2 !default;
 $color-picker-checkerboard: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAgAAAAICAYAAADED76LAAAAAXNSR0IArs4c6QAAACRJREFUKFNjPHTo0H8GJGBnZ8eIzGekgwJk+0BsdCtRHEQbBQBbbh0dIGKknQAAAABJRU5ErkJggg==) repeat !default;
-$color-picker-swatch-color-width: 45px !default;
+$color-picker-controls-padding: 16px !default;
+$color-picker-elevation: 2 !default;
+$color-picker-input-font-size: 0.75rem !default;
+$color-picker-input-height: 32px !default;
+$color-picker-input-margin: 8px !default;
+$color-picker-preview-margin-bottom: 24px !default;
+$color-picker-input-margin-bottom: 8px !default;
+
+// VColorPickerSwatch
+$color-picker-swatch-color-border-radius: 2px !default;
 $color-picker-swatch-color-height: 18px !default;
 $color-picker-swatch-color-margin: 2px 4px !default;
-$color-picker-swatch-color-border-radius: 2px !default;
+$color-picker-swatch-color-width: 45px !default;
 $color-picker-swatch-margin-bottom: 10px !default;
 $color-picker-swatches-border-radius: 8px !default;
-$color-picker-canvas-dot-size: 15px !default;
+
+// VColorCanvas
 $color-picker-canvas-dot-box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 1), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3) !default;
 $color-picker-canvas-dot-disabled-box-shadow: 0px 0px 0px 1.5px rgba(255, 255, 255, 0.7), inset 0px 0px 1px 1.5px rgba(0, 0, 0, 0.3) !default;
-$color-picker-controls-padding: 16px !default;
-$color-picker-preview-margin-bottom: 24px !default;
-$color-picker-input-height: 32px !default;
-$color-picker-input-font-size: 0.75rem !default;
-$color-picker-input-margin: 8px !default;
-$color-picker-input-margin-bottom: 8px !default;
+$color-picker-canvas-dot-size: 15px !default;
+
+// VColorPickerPreview
 $color-picker-preview-dot-size: 30px !default;
 $color-picker-preview-dot-margin: 24px !default;

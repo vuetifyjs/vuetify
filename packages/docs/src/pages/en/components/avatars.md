@@ -45,6 +45,8 @@ The recommended placement of elements inside of `v-avatar` is:
 | - | - |
 | [v-avatar](/api/v-avatar/) | Primary Component |
 
+<api-inline hide-links />
+
 ## Examples
 
 ### Props
@@ -88,5 +90,3 @@ Another example combining avatar with menu.
 Using the **tile** prop, we can create a sleek hard-lined profile card.
 
 <example file="v-avatar/misc-profile-card" />
-
-<backmatter />

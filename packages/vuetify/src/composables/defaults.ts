@@ -1,12 +1,12 @@
 // Utilities
 import { computed, inject, provide, ref, unref } from 'vue'
-import { mergeDeep } from '@/util/helpers'
+import { mergeDeep } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
 
-export interface DefaultsInstance {
+export type DefaultsInstance = undefined | {
   [key: string]: undefined | Record<string, unknown>
   global?: Record<string, unknown>
 }
@@ -16,7 +16,7 @@ export type DefaultsOptions = Partial<DefaultsInstance>
 export const DefaultsSymbol: InjectionKey<Ref<DefaultsInstance>> = Symbol.for('vuetify:defaults')
 
 export function createDefaults (options?: DefaultsInstance): Ref<DefaultsInstance> {
-  return ref(options ?? {})
+  return ref(options)
 }
 
 export function useDefaults () {
@@ -51,7 +51,9 @@ export function provideDefaults (
       const len = Number(reset || Infinity)
 
       for (let i = 0; i <= len; i++) {
-        if (!properties.prev) break
+        if (!properties || !('prev' in properties)) {
+          break
+        }
 
         properties = properties.prev
       }

@@ -6,7 +6,7 @@
         :disabled="loading"
         @finish="onFinish"
       ></v-otp-input>
-      <v-overlay absolute :value="loading">
+      <v-overlay absolute :model-value="loading">
         <v-progress-circular
           indeterminate
           color="primary"

@@ -1,25 +1,15 @@
+@use './variables' as *
+
 .v-application
   display: flex
-  background: rgb(var(--v-theme-background))
-  color: rgba(var(--v-theme-on-background), var(--v-high-emphasis-opacity))
-
-  a
-    cursor: pointer
+  background: $application-background
+  color: $application-color
 
 .v-application__wrap
-    flex: 1 1 auto
-    backface-visibility: hidden
-    display: flex
-    flex-direction: column
-    min-height: 100vh
-    max-width: 100%
-    position: relative
-
-// Firefox overrides
-@-moz-document url-prefix()
-  @media print
-    .v-application
-      display: block
-
-      &__wrap
-        display: block
+  backface-visibility: hidden
+  display: flex
+  flex-direction: column
+  flex: 1 1 auto
+  max-width: 100%
+  min-height: 100vh
+  position: relative

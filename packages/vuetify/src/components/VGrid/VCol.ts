@@ -6,10 +6,10 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
-import type { Prop } from 'vue'
+import type { Prop, PropType } from 'vue'
 
 const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
@@ -73,7 +73,9 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
   return className.toLowerCase()
 }
 
-export const VCol = defineComponent({
+const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
+
+export const VCol = genericComponent()({
   name: 'VCol',
 
   props: {
@@ -93,10 +95,11 @@ export const VCol = defineComponent({
     },
     ...orderProps,
     alignSelf: {
-      type: String,
+      type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
       default: null,
-      validator: (str: any) => ['auto', 'start', 'end', 'center', 'baseline', 'stretch'].includes(str),
+      validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
     },
+
     ...makeTagProps(),
   },
 
@@ -133,3 +136,5 @@ export const VCol = defineComponent({
     }, slots.default?.())
   },
 })
+
+export type VCol = InstanceType<typeof VCol>

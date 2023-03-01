@@ -1,6 +1,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
+// VBtnGroup
 $btn-group-background: transparent !default;
 $btn-group-border-color: settings.$border-color-root !default;
 $btn-group-border-radius: settings.$border-radius-root !default;
@@ -12,6 +13,7 @@ $btn-group-height: 48px !default;
 $btn-group-elevation: 0 !default;
 $btn-group-tile-border-radius: 0 !default;
 
+// Lists
 $btn-group-border: (
   $btn-group-border-color,
   $btn-group-border-style,

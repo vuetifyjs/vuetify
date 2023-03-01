@@ -5,9 +5,9 @@ meta:
   keywords: windows, vuetify window component, vue window component
 nav: Windows
 related:
-    - /components/carousels
-    - /components/steppers
-    - /components/tabs
+    - /components/carousels/
+    - /components/sheets/
+    - /components/tabs/
 ---
 
 # Windows
@@ -67,5 +67,3 @@ Create rich forms with smooth animations. `v-window` automatically tracks the cu
 `v-window` makes it easy to create custom components such as a differently styled stepper.
 
 <example file="v-window/misc-onboarding" />
-
-<backmatter />

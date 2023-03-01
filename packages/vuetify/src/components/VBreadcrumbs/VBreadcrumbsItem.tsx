@@ -5,9 +5,9 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBreadcrumbsItem = defineComponent({
+export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
 
   props: {
@@ -16,7 +16,7 @@ export const VBreadcrumbsItem = defineComponent({
     activeColor: String,
     color: String,
     disabled: Boolean,
-    text: String,
+    title: String,
 
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
@@ -24,14 +24,13 @@ export const VBreadcrumbsItem = defineComponent({
 
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)
-    const isActive = computed(() => props.active || link.isExactActive?.value)
+    const isActive = computed(() => props.active || link.isActive?.value)
     const color = computed(() => isActive.value ? props.activeColor : props.color)
 
     const { textColorClasses, textColorStyles } = useTextColor(color)
 
     useRender(() => {
       const Tag = link.isLink.value ? 'a' : props.tag
-      const hasText = !!(slots.default || props.text)
 
       return (
         <Tag
@@ -51,10 +50,9 @@ export const VBreadcrumbsItem = defineComponent({
           href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }
           onClick={ link.navigate }
-          v-slots={{
-            default: hasText ? () => slots.default?.() ?? props.text : undefined,
-          }}
-        />
+        >
+          { slots.default?.() ?? props.title }
+        </Tag>
       )
     })
 

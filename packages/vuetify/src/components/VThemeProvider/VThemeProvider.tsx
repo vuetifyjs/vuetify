@@ -6,9 +6,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
-export const VThemeProvider = defineComponent({
+export const VThemeProvider = genericComponent()({
   name: 'VThemeProvider',
 
   props: {
@@ -32,3 +32,5 @@ export const VThemeProvider = defineComponent({
     }
   },
 })
+
+export type VThemeProvider = InstanceType<typeof VThemeProvider>

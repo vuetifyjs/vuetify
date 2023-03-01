@@ -1,6 +1,5 @@
 <template>
   <v-sheet
-    v-if="sponsors.length"
     id="home-sponsors"
     class="mx-auto pa-3"
     color="transparent"
@@ -35,44 +34,35 @@
   </v-sheet>
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent, onBeforeMount } from 'vue'
-  import { useSponsorsStore } from '../../store/sponsors'
-
+<script setup>
+  // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
   import SponsorLink from '@/components/sponsor/Link.vue'
 
-  export default defineComponent({
-    name: 'Sponsors',
+  // Composables
+  import { useSponsorsStore } from '@/store/sponsors'
 
-    components: {
-      SponsorCard,
-      SponsorLink,
-    },
+  // Utilities
+  import { computed } from 'vue'
 
-    setup () {
-      const sponsorStore = useSponsorsStore()
+  const sponsorStore = useSponsorsStore()
 
-      onBeforeMount(async () => sponsorStore.load())
+  const sponsors = computed(() => {
+    return Object.values(sponsorStore.byTier)
+      .reduce((tiers, tier) => {
+        for (const sponsor of tier) {
+          if (Number(sponsor.metadata.tier) < 0) continue
 
-      const sponsors = computed(() => {
-        return Object.values(sponsorStore.byTier)
-          .reduce((tiers, tier) => {
-            for (const sponsor of tier) {
-              if (Number(sponsor.metadata.tier) < 0) continue
+          tiers.push(sponsor)
+        }
 
-              tiers.push(sponsor)
-            }
-
-            return tiers
-          }, [] as any[])
-      })
-
-      return {
-        sponsors,
-      }
-    },
-
+        return tiers
+      }, [])
   })
+</script>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
 </script>

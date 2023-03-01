@@ -1,8 +1,12 @@
+// Composables
+import { useCosmic } from '@/composables/cosmic'
+
+// Utilities
 import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
-import { useCosmic } from '../composables/cosmic'
 
-type Ad = {
+// Types
+interface Ad {
   slug: string
   title: string
   metadata?: {
@@ -34,15 +38,16 @@ export const useAdsStore = defineStore('ads', () => {
   onBeforeMount(async () => {
     if (ads.value.length) return
 
-    const { bucket } = useCosmic()
+    const { bucket } = useCosmic<Ad>()
 
-    const { objects } = await bucket.getObjects<Ad>({
-      type: 'ads',
-      props: 'metadata,slug,title',
-      status: 'published',
-    })
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'ads' })
+        .props('slug,title,metadata')
+        .status('published')
+    ) || {}
 
-    if (objects) { ads.value = objects }
+    ads.value = objects
   })
 
   return { ads }

@@ -1,6 +1,5 @@
 {
   "props": {
-    "name": "Sets the component's name attribute",
     "falseIcon": "The icon used when inactive",
     "trueIcon": "The icon used when active"
   },

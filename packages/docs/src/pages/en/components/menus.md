@@ -66,11 +66,11 @@ You can disable the menu. Disabled menus can't be opened.
 
 <example file="v-menu/prop-disabled" /> -->
 
-#### Anchor
+#### Location
 
-Menu can be offset relative to the activator by using the **anchor** prop. Read more about **anchor** [here](/components/overlays).
+Menu can be offset relative to the activator by using the **location** prop. Read more about **location** [here](/components/overlays/#location).
 
-<example file="v-menu/prop-anchor" />
+<example file="v-menu/prop-location" />
 
 #### Open on hover
 
@@ -106,14 +106,12 @@ A menu can be configured to be static when opened, allowing it to function as a 
 
 <example file="v-menu/misc-popover" />
 
-<!-- #### Use In components
+#### Use In components
 
 Menus can be placed within almost any component.
 
-<example file="v-menu/misc-use-in-components" /> -->
+<example file="v-menu/misc-use-in-components" />
 
 ## Accessibility
 
 By default, `v-menu` components are _detached_ and moved to the root of your application. In order to properly support [inserting dynamic content into the DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26), you _must_ use the **attach** prop. This will ensure that focus transfers from the activator to the content when pressing the <kbd>tab</kbd> key.
-
-<backmatter />

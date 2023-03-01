@@ -1,9 +1,13 @@
+// Composables
+import { makeDelayProps, useDelay } from '@/composables/delay'
+import { VMenuSymbol } from '@/components/VMenu/shared'
+
 // Utilities
 import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
-import { makeDelayProps, useDelay } from '@/composables/delay'
 import {
   computed,
   effectScope,
+  inject,
   nextTick,
   onScopeDispose,
   ref,
@@ -18,7 +22,6 @@ import type {
   ComponentPublicInstance,
   EffectScope,
   PropType,
-
   Ref,
 } from 'vue'
 
@@ -29,6 +32,8 @@ interface ActivatorProps extends DelayProps {
   openOnClick: boolean | undefined
   openOnHover: boolean
   openOnFocus: boolean | undefined
+
+  closeOnContentClick: boolean
 }
 
 export const makeActivatorProps = propsFactory({
@@ -48,26 +53,34 @@ export const makeActivatorProps = propsFactory({
     default: undefined,
   },
 
+  closeOnContentClick: Boolean,
+
   ...makeDelayProps(),
-})
+}, 'v-overlay-activator')
 
 export function useActivator (
   props: ActivatorProps,
-  isActive: Ref<boolean>
+  { isActive, isTop }: { isActive: Ref<boolean>, isTop: Ref<boolean> }
 ) {
   const activatorEl = ref<HTMLElement>()
 
   let isHovered = false
   let isFocused = false
+  let firstEnter = true
 
   const openOnFocus = computed(() => props.openOnFocus || (props.openOnFocus == null && props.openOnHover))
   const openOnClick = computed(() => props.openOnClick || (props.openOnClick == null && !props.openOnHover && !openOnFocus.value))
 
   const { runOpenDelay, runCloseDelay } = useDelay(props, value => {
-    if (value === (
-      (props.openOnHover && isHovered) ||
-      (openOnFocus.value && isFocused)
-    )) {
+    if (
+      value === (
+        (props.openOnHover && isHovered) ||
+        (openOnFocus.value && isFocused)
+      ) && !(props.openOnHover && isActive.value && !isTop.value)
+    ) {
+      if (isActive.value !== value) {
+        firstEnter = true
+      }
       isActive.value = value
     }
   })
@@ -125,6 +138,59 @@ export function useActivator (
     return events
   })
 
+  const contentEvents = computed(() => {
+    const events: Partial<typeof availableEvents> = {}
+
+    if (props.openOnHover) {
+      events.mouseenter = () => {
+        isHovered = true
+        runOpenDelay()
+      }
+      events.mouseleave = () => {
+        isHovered = false
+        runCloseDelay()
+      }
+    }
+
+    if (props.closeOnContentClick) {
+      const menu = inject(VMenuSymbol, null)
+      events.click = () => {
+        isActive.value = false
+        menu?.closeParents()
+      }
+    }
+
+    return events
+  })
+
+  const scrimEvents = computed(() => {
+    const events: Partial<typeof availableEvents> = {}
+    if (props.openOnHover) {
+      events.mouseenter = () => {
+        if (firstEnter) {
+          isHovered = true
+          firstEnter = false
+          runOpenDelay()
+        }
+      }
+      events.mouseleave = () => {
+        isHovered = false
+        runCloseDelay()
+      }
+    }
+
+    return events
+  })
+
+  watch(isTop, val => {
+    if (val && (
+      (props.openOnHover && !isHovered && (!openOnFocus.value || !isFocused)) ||
+      (openOnFocus.value && !isFocused && (!props.openOnHover || !isHovered))
+    )) {
+      isActive.value = false
+    }
+  })
+
   const activatorRef = ref()
   watchEffect(() => {
     if (!activatorRef.value) return
@@ -141,20 +207,24 @@ export function useActivator (
     if (val && IN_BROWSER) {
       scope = effectScope()
       scope.run(() => {
-        _useActivator(props, vm, { activatorEl, activatorRef, activatorEvents })
+        _useActivator(props, vm, { activatorEl, activatorEvents })
       })
     } else if (scope) {
       scope.stop()
     }
   }, { flush: 'post', immediate: true })
 
-  return { activatorEl, activatorRef, activatorEvents }
+  onScopeDispose(() => {
+    scope?.stop()
+  })
+
+  return { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents }
 }
 
 function _useActivator (
   props: ActivatorProps,
   vm: ComponentInternalInstance,
-  { activatorEl, activatorEvents }: ReturnType<typeof useActivator>
+  { activatorEl, activatorEvents }: Pick<ReturnType<typeof useActivator>, 'activatorEl' | 'activatorEvents'>
 ) {
   watch(() => props.activator, (val, oldVal) => {
     if (oldVal && val !== oldVal) {
@@ -206,7 +276,11 @@ function _useActivator (
     let activator
     if (selector) {
       if (selector === 'parent') {
-        activator = vm?.proxy?.$el?.parentNode
+        let el = vm?.proxy?.$el?.parentNode
+        while (el.hasAttribute('data-no-activator')) {
+          el = el.parentNode
+        }
+        activator = el
       } else if (typeof selector === 'string') {
         // Selector
         activator = document.querySelector(selector)

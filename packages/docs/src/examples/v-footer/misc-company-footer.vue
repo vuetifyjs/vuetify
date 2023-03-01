@@ -1,11 +1,6 @@
 <template>
-  <v-footer
-    class="bg-grey-lighten-1"
-  >
-    <v-row
-      justify="center"
-      no-gutters
-    >
+  <v-footer class="bg-grey-lighten-1">
+    <v-row justify="center" no-gutters>
       <v-btn
         v-for="link in links"
         :key="link"
@@ -16,10 +11,7 @@
       >
         {{ link }}
       </v-btn>
-      <v-col
-        class="text-center text-white mt-4"
-        cols="12"
-      >
+      <v-col class="text-center mt-4" cols="12">
         {{ new Date().getFullYear() }} — <strong>Vuetify</strong>
       </v-col>
     </v-row>

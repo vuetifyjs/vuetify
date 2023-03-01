@@ -7,15 +7,17 @@ import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VT
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
-export const VAppBar = defineComponent({
+export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
   props: {
@@ -30,7 +32,7 @@ export const VAppBar = defineComponent({
       type: Boolean,
       default: true,
     },
-    position: {
+    location: {
       type: String as PropType<'top' | 'bottom'>,
       default: 'top',
       validator: (value: any) => ['top', 'bottom'].includes(value),
@@ -58,17 +60,18 @@ export const VAppBar = defineComponent({
 
       return (height + extensionHeight)
     })
+    const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
-      priority: computed(() => parseInt(props.priority, 10)),
-      position: toRef(props, 'position'),
+      order: computed(() => parseInt(props.order, 10)),
+      position: toRef(props, 'location'),
       layoutSize: height,
       elementSize: height,
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })
 
-    return () => {
+    useRender(() => {
       const [toolbarProps] = filterToolbarProps(props)
 
       return (
@@ -77,18 +80,21 @@ export const VAppBar = defineComponent({
           class={[
             'v-app-bar',
             {
-              'v-app-bar--bottom': props.position === 'bottom',
+              'v-app-bar--bottom': props.location === 'bottom',
             },
           ]}
           style={{
             ...layoutItemStyles.value,
             height: undefined,
+            ...ssrBootStyles.value,
           }}
           { ...toolbarProps }
           v-slots={ slots }
         />
       )
-    }
+    })
+
+    return {}
   },
 })
 

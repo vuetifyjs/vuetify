@@ -4,7 +4,6 @@
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-
 // +theme(v-stepper) using ($material)
 //   background: map-get($material, 'bg-color')
 
@@ -63,8 +62,7 @@
 //       +rtl()
 //         border-right: 1px solid rgba(map-get($material, 'fg-color'), map-get($material, 'divider-percent'))
 
-// +sheet(v-stepper, $stepper-elevation, $stepper-border-radius, $stepper-shaped-border-radius)
-
+// +sheet(v-stepper, $stepper-elevation, $stepper-border-radius, $stepper-shaped-border-radius)+theme(v-stepper) using ($material)
 .v-stepper
   overflow: hidden
   position: relative
@@ -88,7 +86,125 @@
     display: flex
     min-height: $stepper-header-height
     align-items: center
+  &__step__step
+    align-items: center
+    border-radius: 50%
+    display: inline-flex
+    font-size: $stepper-step-step-font-size
+    justify-content: center
+    height: $stepper-step-step-height
+    min-width: $stepper-step-step-min-width
+    width: $stepper-step-step-width
+    //transition: .3s map-get($transition, 'fast-in-fast-out') need to be checked
+    // Below gives undefined mixin
+    //+ltr()
+    //  margin-right: $stepper-step-step-margin
+    //+rtl()
+    //  margin-left: $stepper-step-step-margin
 
+    .v-icon.v-icon
+      font-size: $stepper-step-step-icon-font-size
+
+      &.v-icon--svg
+        height: $stepper-step-step-icon-font-size
+        width: $stepper-step-step-icon-font-size
+
+  &--flat
+    +tools.elevation(0)
+
+  //&--non-linear
+  //  .v-stepper__step:not(.v-stepper__step--complete):not(.v-stepper__step--error)
+  //    .v-stepper__label
+  //      color: rgba(map-get($material, 'fg-color'), map-get($material, 'secondary-text-percent'))
+  &-step
+    cursor: default
+    align-items: left
+    display: flex
+    flex-direction: row
+    padding: $stepper-step-padding
+    position: relative
+    text-transform: none !important
+
+    &--active
+      .v-stepper__label
+        //transition: .3s map-get($transition, 'ease-in-out')
+
+    &--editable
+      cursor: pointer
+
+    &.v-stepper__step--error
+      .v-stepper__step__step
+        background: transparent
+        color: inherit
+
+        .v-icon
+          font-size: $stepper-step-error-icon-font-size
+          color: inherit
+
+      .v-stepper & .v-stepper__label
+        color: inherit
+        text-shadow: none
+        font-weight: 500
+
+        small
+          color: inherit
+
+    &__label
+      //margin-top: 20px
+      display: block
+      flex-grow: 1
+      line-height: $stepper-label-line-height
+
+    // Below gives undefined mixin
+    //+ltr()
+    //    text-align: left
+
+    //  +rtl()
+    //    text-align: right
+
+      small
+        display: block
+        font-size: $stepper-label-small-font-size
+        font-weight: $stepper-label-small-font-weight
+        text-shadow: none
+
+
+  &--alt-labels
+
+      .v-stepper-header
+       height: auto 
+
+      .v-stepper-line
+        margin: $stepper-alt-labels-header-divider
+        align-self: flex-start
+
+      .v-stepper-step
+        margin-top: 30px
+        display: inline-block
+        flex-direction: column
+        justify-content: center
+        align-items: center
+        flex-basis: $stepper-alt-labels-flex-basis
+        .v-btn__prepend
+            justify-content: center
+        .v-avatar
+          line-height: 18px
+          margin-bottom: 11px
+          height: 24px
+
+        &__label
+          display: flexbox
+          flex-grow: 1
+          line-height: 1
+          tab-size: 4
+        small
+          text-align: center
+          display: block
+
+      .v-stepper-step--horizontal
+        margin-bottom: $stepper-alt-labels-step-step-margin-bottom
+        margin-left: 0
+        margin-right: 0
 
   // &__header
   //   height: $stepper-header-height
