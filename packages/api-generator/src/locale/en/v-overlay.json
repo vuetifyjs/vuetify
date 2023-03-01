@@ -11,7 +11,7 @@
     "scrim": "Accepts true/false to enable background, and string to define color."
   },
   "events": {
-    "click:outside": "Event that fires when clicking outside an active dialog.",
+    "click:outside": "Event that fires when clicking outside an active overlay.",
     "afterLeave": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-overlay.json))"
   },
   "exposed": {
