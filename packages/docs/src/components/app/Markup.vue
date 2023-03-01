@@ -74,6 +74,7 @@
   import { ComponentPublicInstance, computed, ref } from 'vue'
   import { IN_BROWSER } from '@/util/globals'
   import { wait } from '@/util/helpers'
+  import { stripLinks } from '@/components/api/utils'
 
   const props = defineProps({
     resource: String,
@@ -87,6 +88,20 @@
       type: Boolean,
       default: true,
     },
+  })
+
+  // Transform inline links in typescript into actual links
+  Prism.languages.insertBefore('typescript', 'string', {
+    hyperlink: /<a.*?>(.*?)<\/a>/g,
+  })
+  Prism.hooks.add('wrap', env => {
+    if (env.type === 'hyperlink' && env.tag !== 'a') {
+      env.tag = 'a'
+      env.content = env.content.replaceAll('&lt;', '<')
+      env.attributes.href = /href="(.*?)"/.exec(env.content)?.[1] || ''
+      env.attributes.target = '_blank'
+      env.content = stripLinks(env.content)[0]
+    }
   })
 
   const user = useUserStore()
