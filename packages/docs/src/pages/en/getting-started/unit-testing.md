@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.

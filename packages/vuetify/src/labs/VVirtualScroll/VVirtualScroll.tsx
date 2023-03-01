@@ -10,7 +10,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import {
   clamp,
   convertToUnit,
@@ -66,7 +66,8 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     })
     const display = useDisplay()
 
-    const sizes = createRange(props.items.length).map(() => itemHeight.value)
+    const sizeMap = new Map<any, number>()
+    let sizes = createRange(props.items.length).map(() => itemHeight.value)
     const visibleItems = computed(() => {
       return props.visibleItems
         ? parseInt(props.visibleItems, 10)
@@ -78,6 +79,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     function handleItemResize (index: number, height: number) {
       itemHeight.value = Math.max(itemHeight.value, height)
       sizes[index] = height
+      sizeMap.set(props.items[index], height)
     }
 
     function calculateOffset (index: number) {
@@ -142,6 +144,18 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
         itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
       }
+    })
+
+    watch(() => props.items.length, () => {
+      sizes = createRange(props.items.length).map(() => itemHeight.value)
+      sizeMap.forEach((height, item) => {
+        const index = props.items.indexOf(item)
+        if (index === -1) {
+          sizeMap.delete(item)
+        } else {
+          sizes[index] = height
+        }
+      })
     })
 
     useRender(() => (
