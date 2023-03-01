@@ -17,7 +17,7 @@
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
     "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "railWidth": "Designates the width assigned when the `rail` prop is turned on",
+    "railWidth": "Sets the width for the component when `rail` is enabled.",
     "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "width": "Sets the width for the component.",
     "location": "Apply the position navigation drawer on the screen.",
