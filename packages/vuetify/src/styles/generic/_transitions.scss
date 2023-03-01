@@ -2,19 +2,19 @@
 
 @mixin transition-default() {
   &-enter-active {
-    transition-duration: 0.3s;
-    transition-timing-function: settings.$standard-easing;
+    transition-duration: 0.3s !important;
+    transition-timing-function: settings.$standard-easing !important;
   }
 
   &-leave-active {
-    transition-duration: 0.3s;
-    transition-timing-function: settings.$standard-easing;
+    transition-duration: 0.3s !important;
+    transition-timing-function: settings.$standard-easing !important;
   }
 
   &-move {
-    transition-duration: 0.5s;
-    transition-property: transform;
-    transition-timing-function: settings.$standard-easing;
+    transition-duration: 0.5s !important;
+    transition-property: transform !important;
+    transition-timing-function: settings.$standard-easing !important;
   }
 }
 
@@ -23,18 +23,18 @@
 .dialog-bottom-transition,
 .dialog-top-transition {
   &-enter-active {
-    transition-duration: 225ms;
-    transition-timing-function: settings.$decelerated-easing;
+    transition-duration: 225ms !important;
+    transition-timing-function: settings.$decelerated-easing !important;
   }
 
   &-leave-active {
-    transition-duration: 125ms;
-    transition-timing-function: settings.$accelerated-easing;
+    transition-duration: 125ms !important;
+    transition-timing-function: settings.$accelerated-easing !important;
   }
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
     pointer-events: none;
   }
 }
@@ -79,7 +79,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -113,7 +113,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: height;
+    transition-property: height !important;
   }
 }
 
@@ -122,7 +122,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: width;
+    transition-property: width !important;
   }
 }
 
@@ -136,7 +136,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -150,7 +150,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -164,7 +164,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -182,7 +182,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -196,7 +196,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -210,7 +210,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -231,7 +231,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -252,7 +252,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -273,7 +273,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -294,7 +294,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -308,7 +308,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -322,7 +322,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform, opacity;
+    transition-property: transform, opacity !important;
   }
 }
 
@@ -335,7 +335,7 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: opacity;
+    transition-property: opacity !important;
   }
 }
 
@@ -348,6 +348,6 @@
 
   &-enter-active,
   &-leave-active {
-    transition-property: transform;
+    transition-property: transform !important;
   }
 }
