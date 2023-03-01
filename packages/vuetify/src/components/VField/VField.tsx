@@ -12,6 +12,7 @@ import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -35,7 +36,7 @@ import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -63,6 +64,7 @@ export const makeVFieldProps = propsFactory({
   dirty: Boolean,
   disabled: Boolean,
   error: Boolean,
+  flat: Boolean,
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
@@ -79,6 +81,7 @@ export const makeVFieldProps = propsFactory({
   'onClick:prependInner': EventProp,
 
   ...makeThemeProps(),
+  ...makeRoundedProps(),
   ...makeLoaderProps(),
 }, 'v-field')
 
@@ -115,6 +118,7 @@ export const VField = genericComponent<new <T>() => {
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
+    const { roundedClasses } = useRounded(props)
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
@@ -218,6 +222,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
+              'v-field--flat': props.flat,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
@@ -228,6 +233,7 @@ export const VField = genericComponent<new <T>() => {
             },
             themeClasses.value,
             backgroundColorClasses.value,
+            roundedClasses.value,
             focusClasses.value,
             loaderClasses.value,
           ]}
@@ -258,7 +264,7 @@ export const VField = genericComponent<new <T>() => {
           ) }
 
           <div class="v-field__field" data-no-activator="">
-            { ['solo', 'solo-inverted', 'filled'].includes(props.variant) && hasLabel.value && (
+            { ['solo', 'solo-inverted', 'filled', 'solo-filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
