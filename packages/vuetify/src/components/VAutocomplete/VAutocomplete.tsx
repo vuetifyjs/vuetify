@@ -131,9 +131,9 @@ export const VAutocomplete = genericComponent<new <
     const form = useForm()
     const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
-      return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
-      })
+      return model.value
+        .map(v => items.value.find(item => props.valueComparator(item.value, v.value)))
+        .filter(v => v) as InternalItem[]
     })
 
     const displayItems = computed(() => {
@@ -268,7 +268,7 @@ export const VAutocomplete = genericComponent<new <
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
-          dirty={ model.value.length > 0 }
+          dirty={ selections.value.length > 0 }
           onInput={ onInput }
           class={[
             'v-autocomplete',
