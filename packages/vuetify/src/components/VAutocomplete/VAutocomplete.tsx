@@ -364,32 +364,40 @@ export const VAutocomplete = genericComponent<new <
                   return (
                     <div key={ item.value } class="v-autocomplete__selection">
                       { hasChips ? (
-                        <VDefaultsProvider
-                          defaults={{
-                            VChip: {
-                              closable: props.closableChips,
-                              size: 'small',
-                              text: item.title,
-                            },
-                          }}
-                        >
-                          { slots.chip
-                            ? slots.chip({ item, index, props: slotProps })
-                            : (<VChip { ...slotProps } />)
-                          }
-                        </VDefaultsProvider>
+                        <>
+                          { !slots.chip ? (
+                            <VChip
+                              key="chip"
+                              { ...slotProps }
+                            />
+                          ) : (
+                            <VDefaultsProvider
+                              key="chip-defaults"
+                              defaults={{
+                                VChip: {
+                                  closable: props.closableChips,
+                                  size: 'small',
+                                  text: item.title,
+                                },
+                              }}
+                              v-slots:default={ () => slots.chip?.({
+                                item,
+                                index,
+                                props: slotProps,
+                              }) }
+                            />
+                          ) }
+                        </>
                       ) : (
-                        slots.selection
-                          ? slots.selection({ item, index })
-                          : (
-                            <span class="v-autocomplete__selection-text">
-                              { item.title }
-                              { props.multiple && (index < selections.value.length - 1) && (
-                                <span class="v-autocomplete__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
-                      )}
+                        slots.selection?.({ item, index }) ?? (
+                          <span class="v-autocomplete__selection-text">
+                            { item.title }
+                            { props.multiple && (index < selections.value.length - 1) && (
+                              <span class="v-autocomplete__selection-comma">,</span>
+                            ) }
+                          </span>
+                        )
+                      ) }
                     </div>
                   )
                 }) }

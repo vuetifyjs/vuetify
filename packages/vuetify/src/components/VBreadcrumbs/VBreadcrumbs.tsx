@@ -94,13 +94,15 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
         >
           { hasPrepend && (
             <div key="prepend" class="v-breadcrumbs__prepend">
-              { !slots.prepend && (
-                <VIcon key="prepend-icon" start icon={ props.icon } />
-              ) }
-
-              { slots.prepend && (
+              { !slots.prepend ? (
+                <VIcon
+                  key="prepend-icon"
+                  start
+                  icon={ props.icon }
+                />
+              ) : (
                 <VDefaultsProvider
-                  key="prepend-default"
+                  key="prepend-defaults"
                   disabled={ !props.icon }
                   defaults={{
                     VIcon: {

@@ -194,21 +194,28 @@ export const VChip = genericComponent<VChipSlots>()({
           { genOverlays(isClickable.value, 'v-chip') }
 
           { hasFilter && (
-            <VDefaultsProvider
-              key="filter"
-              defaults={{
-                VIcon: { icon: props.filterIcon },
-              }}
-            >
-              <VExpandXTransition>
-                <div
-                  class="v-chip__filter"
-                  v-show={ group.isSelected.value }
-                >
-                  { slots.filter ? slots.filter() : (<VIcon />) }
-                </div>
-              </VExpandXTransition>
-            </VDefaultsProvider>
+            <VExpandXTransition key="filter">
+              <div
+                class="v-chip__filter"
+                v-show={ group.isSelected.value }
+              >
+                { !slots.filter ? (
+                  <VIcon
+                    key="filter-icon"
+                    icon={ props.filterIcon }
+                  />
+                ) : (
+                  <VDefaultsProvider
+                    key="filter-defaults"
+                    disabled={ !props.filterIcon }
+                    defaults={{
+                      VIcon: { icon: props.filterIcon },
+                    }}
+                    v-slot:default={ slots.filter }
+                  />
+                ) }
+              </div>
+            </VExpandXTransition>
           ) }
 
           { hasPrepend && (
