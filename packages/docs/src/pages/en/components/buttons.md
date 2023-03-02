@@ -49,37 +49,79 @@ The recommended placement of elements inside of `v-btn` is:
 
 <api-inline hide-links />
 
-## Examples
+## Guide
+
+The `v-btn` component is commonly used throughout Vuetify and is a staple for any application. It is used for everything from navigation to form submission; and can be styled in a multitude of ways.
+
+The following code snippet is an example of a basic `v-btn` component only containing text:
+
+```html
+<v-btn>Button</v-btn>
+```
 
 ### Props
 
-#### Variant
+There are a multitude of props that can be used to customize the `v-btn` appearance and behavior. Props such as **prepend-icon** and **append-icon** are a simple interface for adding positioned icons while props such as **block** and **stacked** are used to control the component's shape.
 
-The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
+#### Density
 
-<alert type="warning">
+The **density** prop is used to control the vertical space that the button takes up.
 
-  When a `v-btn` is used inside of `v-toolbar` and `v-app-bar` the default variant **text** is applied instead of **elevated**.
+<example file="v-btn/prop-density" />
 
-</alert>
+#### Size
 
-<example file="v-btn/prop-variant" />
+The **size** property is used to control the size of the button and scales with density. The default size is **undefined** which essentially translates to **medium**.
+
+<example file="v-btn/prop-size" />
 
 #### Block
 
-**block** buttons extend the full available width.
+Block buttons extend the full available width of their container. This is useful for creating buttons that span the full width of a card or dialog.
 
 <example file="v-btn/prop-block" />
 
-#### Flat
+#### Rounded
 
-**flat** buttons still maintain their background color, but have no box shadow.
+Use the **rounded** prop to control the border radius of a button.
 
-<example file="v-btn/prop-flat" />
+<example file="v-btn/prop-rounded" />
+
+#### Elevation
+
+The **elevation** property provides up to 24 levels of shadow depth. By default, buttons rest at 2dp.
+
+<example file="v-btn/prop-elevation" />
+
+#### Ripple
+
+The **ripple** property determines whether the [v-ripple](/directives/ripple/) directive is used.
+
+<example file="v-btn/prop-ripple" />
+
+#### Variants
+
+The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
+
+| Value | Example | Description |
+| - | - | - |
+| **elevated** | <v-btn variant="elevated">Button</v-btn> | Elevates the button with a shadow |
+| **flat** | <v-btn variant="flat">Button</v-btn> | Removes button shadow |{ .bg-surface-variant }
+| **tonal** | <v-btn variant="tonal">Button</v-btn> | Background color is a lowered opacity of the current text color |
+| **outlined** | <v-btn variant="outlined">Button</v-btn> | Applies a thin border with the current text color |
+| **text** | <v-btn variant="text">Button</v-btn> | Removes the background and removes shadow |
+| **plain** | <v-btn variant="plain">Button</v-btn> | Removes the background and lowers the opacity until hovered |
+
+
+<alert type="info">
+
+  The block applies **width: 100%** which can have overflow issues when inside of a flex container.
+
+</alert>
 
 #### Icon
 
-Icons can be used for the primary content of a button. Use the **icon** prop to either supply an icon in the default slot, or to directly use an icon.
+Icons can be used for the primary content of a button. They are commonly used in the [v-toolbar](/components/toolbars/) and [v-app-bar](/components/app-bars/) components.
 
 <example file="v-btn/prop-icon" />
 
@@ -91,26 +133,33 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 <random />
 
-#### Outlined
+## Defaults Side Effects
 
-**outlined** buttons inherit their borders from the current color applied.
+There are instances where a set of default properties are injected or custom styling is applied to the `v-btn`. This can be for a variety of reasons, but the most common are:
 
-<example file="v-btn/prop-outlined" />
+* to match a design specification
+* to provide a better visual appearance based upon context
+* to avoid creating proprietary components; e.g. `v-bottom-navigation-btn` and `v-card-btn`
 
-#### Plain
+#### Bottom navigation
 
-**plain** buttons have a lower baseline opacity that reacts to **hover** and **focus**.
+The `v-bottom-navigation` component **scopes** out all previously provided defaults and applies its own. This is to avoid changes made to `v-btn` in the [Global configuration](/features/global-configuration/). Buttons automatically register with `v-bottom-navigation`'s' group and will update the **model** when clicked.
 
-<example file="v-btn/prop-plain" />
+| Documentation | API |
+| - | - |
+| [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/) |
 
-#### Rounded
+| Property | Value |
+| - | - |
+| **variant** | `text` |
 
-Use the **rounded** prop to control the border radius of buttons.
+| Documentation | API |
+| - | - |
+| [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
 
-<example file="v-btn/prop-rounded" />
-
-#### Sizing
-
-Buttons can be given different sizing options to fit a multitude of scenarios.
-
-<example file="v-btn/prop-sizing" />
+| Property | Value |
+| - | - |
+| **color** | provided by `v-bottom-navigation` |
+| **density** | provided by `v-bottom-navigation` |
+| **stacked** | `true` when **mode** is `shift` |
+| **variant** | `text` |

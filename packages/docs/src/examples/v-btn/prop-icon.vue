@@ -1,47 +1,28 @@
 <template>
-  <v-container>
-    <v-row justify="space-between" class="text-center">
-      <v-col>
-        <v-btn icon="mdi-heart" color="primary"></v-btn>
-      </v-col>
+  <v-toolbar>
+    <template v-slot:prepend>
+      <v-btn icon="mdi-arrow-left"></v-btn>
+    </template>
 
-      <v-col>
-        <v-btn icon="mdi-star" color="secondary"></v-btn>
-      </v-col>
+    <v-btn icon="mdi-archive-plus-outline" class="ms-5"></v-btn>
 
-      <v-col>
-        <v-btn icon="mdi-cached" color="info"></v-btn>
-      </v-col>
+    <v-btn icon="mdi-alert-circle-outline"></v-btn>
 
-      <v-col>
-        <v-btn icon="mdi-thumb-up" color="success"></v-btn>
-      </v-col>
-    </v-row>
+    <v-btn icon="mdi-delete-outline"></v-btn>
 
-    <v-row justify="space-between" class="text-center">
-      <v-col>
-        <v-btn icon color="primary">
-          <v-icon icon="mdi-heart"></v-icon>
-        </v-btn>
-      </v-col>
+    <template v-if="$vuetify.display.smAndUp">
+      <v-divider
+        class="mx-3 align-self-center"
+        length="24"
+        thickness="2"
+        vertical
+      ></v-divider>
 
-      <v-col>
-        <v-btn icon color="secondary">
-          <v-icon icon="mdi-star"></v-icon>
-        </v-btn>
-      </v-col>
+      <v-btn icon="mdi-folder-outline"></v-btn>
 
-      <v-col>
-        <v-btn icon color="info">
-          <v-icon icon="mdi-cached"></v-icon>
-        </v-btn>
-      </v-col>
+      <v-btn icon="mdi-tag-outline"></v-btn>
 
-      <v-col>
-        <v-btn icon color="success">
-          <v-icon icon="mdi-thumb-up"></v-icon>
-        </v-btn>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-btn icon="mdi-dots-vertical"></v-btn>
+    </template>
+  </v-toolbar>
 </template>
