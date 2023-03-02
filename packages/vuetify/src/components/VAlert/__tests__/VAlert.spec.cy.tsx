@@ -1,6 +1,4 @@
 /// <reference types="..\..\..\..\types\cypress" />
-/// <reference types="cypress" />
-
 import { VAlert } from '..'
 import { generate } from '@/../cypress/templates'
 
