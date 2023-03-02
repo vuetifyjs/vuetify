@@ -13,6 +13,7 @@ import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { defineComponent, HSVtoCSS, useRender } from '@/util'
@@ -106,6 +107,14 @@ export const VColorPicker = defineComponent({
 
     onMounted(() => {
       if (!props.modes.includes(mode.value)) mode.value = props.modes[0]
+    })
+
+    provideDefaults({
+      VSlider: {
+        color: undefined,
+        trackColor: undefined,
+        trackFillColor: undefined,
+      },
     })
 
     useRender(() => (

@@ -10,8 +10,9 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watchEffect } from 'vue'
+import { computed, onMounted, ref, watch, watchEffect } from 'vue'
 import {
+  clamp,
   convertToUnit,
   createRange,
   genericComponent,
@@ -65,7 +66,8 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     })
     const display = useDisplay()
 
-    const sizes = createRange(props.items.length).map(() => itemHeight.value)
+    const sizeMap = new Map<any, number>()
+    let sizes = createRange(props.items.length).map(() => itemHeight.value)
     const visibleItems = computed(() => {
       return props.visibleItems
         ? parseInt(props.visibleItems, 10)
@@ -77,6 +79,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     function handleItemResize (index: number, height: number) {
       itemHeight.value = Math.max(itemHeight.value, height)
       sizes[index] = height
+      sizeMap.set(props.items[index], height)
     }
 
     function calculateOffset (index: number) {
@@ -114,9 +117,9 @@ export const VVirtualScroll = genericComponent<new <T>() => {
       const midPointIndex = calculateMidPointIndex(scrollTop + height / 2)
       const buffer = Math.round(visibleItems.value / 3)
       if (direction === UP && midPointIndex <= first.value + (buffer * 2) - 1) {
-        first.value = Math.max(midPointIndex - buffer, 0)
+        first.value = clamp(midPointIndex - buffer, 0, props.items.length)
       } else if (direction === DOWN && midPointIndex >= first.value + (buffer * 2) - 1) {
-        first.value = Math.min(Math.max(0, midPointIndex - buffer), props.items.length - visibleItems.value)
+        first.value = clamp(midPointIndex - buffer, 0, props.items.length - visibleItems.value)
       }
 
       lastScrollTop = rootEl.value.scrollTop
@@ -141,6 +144,18 @@ export const VVirtualScroll = genericComponent<new <T>() => {
         // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
         itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
       }
+    })
+
+    watch(() => props.items.length, () => {
+      sizes = createRange(props.items.length).map(() => itemHeight.value)
+      sizeMap.forEach((height, item) => {
+        const index = props.items.indexOf(item)
+        if (index === -1) {
+          sizeMap.delete(item)
+        } else {
+          sizes[index] = height
+        }
+      })
     })
 
     useRender(() => (

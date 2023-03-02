@@ -157,13 +157,14 @@ export function RGBtoHex ({ r, g, b, a }: RGB): Hex {
     toHex(r),
     toHex(g),
     toHex(b),
-    a !== undefined ? toHex(Math.round(a * 255)) : 'FF',
+    a !== undefined ? toHex(Math.round(a * 255)) : '',
   ].join('')}` as Hex
 }
 
 export function HexToRGB (hex: Hex): RGB {
+  hex = parseHex(hex)
   let [r, g, b, a] = chunk(hex, 2).map((c: string) => parseInt(c, 16))
-  a = a === undefined ? a : Math.round((a / 255) * 100) / 100
+  a = a === undefined ? a : (a / 255)
 
   return { r, g, b, a }
 }
@@ -188,9 +189,7 @@ export function parseHex (hex: string): Hex {
     hex = hex.split('').map(x => x + x).join('')
   }
 
-  if (hex.length === 6) {
-    hex = padEnd(hex, 8, 'F')
-  } else {
+  if (hex.length !== 6) {
     hex = padEnd(padEnd(hex, 6), 8, 'F')
   }
 

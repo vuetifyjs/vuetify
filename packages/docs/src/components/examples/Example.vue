@@ -5,7 +5,11 @@
       class="mb-9 overflow-hidden"
       rounded
     >
-      <v-lazy v-if="!preview" min-height="44">
+      <v-lazy
+        v-if="!preview"
+        v-model="hasRendered"
+        min-height="44"
+      >
         <v-toolbar
           :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
@@ -54,7 +58,7 @@
       </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition>
+        <v-expand-transition v-if="hasRendered">
           <div v-if="showCode">
             <v-window v-model="template">
               <v-window-item
@@ -124,6 +128,7 @@
   const isError = ref(false)
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
+  const hasRendered = ref(false)
 
   const component = shallowRef()
   const code = ref<string>()

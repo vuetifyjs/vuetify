@@ -14,27 +14,27 @@ related:
 
 The `v-img` component is packed with features to support rich media. Combined with the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader), you can add dynamic progressive images to provide a better user experience.
 
-<entry />
+----
 
 ## Usage
 
 `v-img` component is used to display a responsive image with lazy-load and placeholder.
 
-<!-- <usage name="v-img" /> -->
+<usage name="v-img" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-img](/api/v-img/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
 ### Props
-
-#### Aspect ratio
-
-You can set a fixed aspect ratio if you want to change aspect ratio of the image.
-
-<example file="v-img/prop-aspect-ratio" />
 
 #### Cover
 

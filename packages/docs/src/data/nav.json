@@ -73,6 +73,7 @@
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
     "items": [
+      "all",
       "alerts",
       "aspect-ratios",
       "avatars",

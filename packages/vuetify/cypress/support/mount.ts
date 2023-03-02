@@ -61,7 +61,7 @@ Cypress.Commands.add('setProps', (props: Record<string, unknown> = {}) => {
   })
 })
 
-Cypress.Commands.add('emitted', (selector: string, event: string) => {
+Cypress.Commands.add('emitted', (selector: Parameters<VueWrapper<any>['findComponent']>[0], event: string) => {
   return (cy.get('@wrapper') as Chainable).then(({ wrapper }) => {
     const vueWrapper = (wrapper || Cypress.vueWrapper) as unknown as VueWrapper<any>
     const cmp = vueWrapper.findComponent<any>(selector)

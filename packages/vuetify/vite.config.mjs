@@ -59,6 +59,9 @@ export default defineConfig(({ mode }) => {
       __VUETIFY_VERSION__: JSON.stringify(vuetifyPackage.version),
       'process.env.BABEL_TYPES_8_BREAKING': 'false',
       'process.env.VITE_SSR': process.env.VITE_SSR,
+    },
+    build: {
+      minify: false,
     }
   }
 })

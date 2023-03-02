@@ -79,7 +79,7 @@
           v-else
           :search-client="searchClient"
           :search-function="searchFunction"
-          index-name="vuetifyjs-next"
+          index-name="vuetifyjs-v3"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
