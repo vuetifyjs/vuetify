@@ -3,6 +3,6 @@
     "selectStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
     "openStrategy": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
     "opened": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))",
-    "selected": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/nested.json))"
+    "selected": "Set selected values of component. Depending on the structure, the children will appear selected on your UI. This prop accepts an array of objects, each object should contain a key specified with the item-value prop, if such prop isn't declared by default the objects have to contain the key \"value\""
   }
 }
