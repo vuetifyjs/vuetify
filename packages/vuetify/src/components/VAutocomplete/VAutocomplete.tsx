@@ -368,6 +368,9 @@ export const VAutocomplete = genericComponent<new <
                           { !slots.chip ? (
                             <VChip
                               key="chip"
+                              closable={ props.closableChips }
+                              size="small"
+                              text={ item.title }
                               { ...slotProps }
                             />
                           ) : (
