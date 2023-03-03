@@ -104,8 +104,10 @@ function getClientHeight (isHydrate?: boolean) {
     : 0
 }
 
-function getPlatform (): DisplayPlatform {
-  const userAgent = IN_BROWSER ? window.navigator.userAgent : 'ssr'
+function getPlatform (isHydrate?: boolean): DisplayPlatform {
+  const userAgent = IN_BROWSER && !isHydrate
+    ? window.navigator.userAgent
+    : 'ssr'
 
   function match (regexp: RegExp) {
     return Boolean(userAgent.match(regexp))
@@ -137,7 +139,7 @@ function getPlatform (): DisplayPlatform {
     mac,
     linux,
     touch: SUPPORTS_TOUCH,
-    ssr,
+    ssr: ssr || userAgent === 'ssr',
   }
 }
 
@@ -145,7 +147,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: boolean): Display
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
   const height = ref(getClientHeight(ssr))
-  const platform = getPlatform()
+  const platform = getPlatform(ssr)
   const state = reactive({} as DisplayInstance)
   const width = ref(getClientWidth(ssr))
 
