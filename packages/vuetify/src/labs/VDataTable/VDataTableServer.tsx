@@ -30,11 +30,6 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
   props: {
     color: String,
-    loading: [Boolean, String],
-    loadingText: {
-      type: String,
-      default: '$vuetify.dataIterator.loadingText',
-    },
     itemsLength: [Number, String],
 
     ...makeVDataTableProps(),

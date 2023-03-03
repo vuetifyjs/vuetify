@@ -52,6 +52,11 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
+  loading: [Boolean, String],
+  loadingText: {
+    type: String,
+    default: '$vuetify.dataIterator.loadingText',
+  },
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()({
@@ -120,6 +125,8 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
       VDataTableRows: {
         hideNoData: toRef(props, 'hideNoData'),
         noDataText: toRef(props, 'noDataText'),
+        loading: toRef(props, 'loading'),
+        loadingText: toRef(props, 'loadingText'),
       },
     })
 
@@ -129,6 +136,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
           'v-data-table',
           {
             'v-data-table--show-select': props.showSelect,
+            'v-data-table--loading': props.loading,
           },
         ]}
         fixedHeader={ props.fixedHeader }
@@ -144,6 +152,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
                     sticky={ props.fixedHeader }
+                    loading={ props.loading }
                     multiSort={ props.multiSort }
                     v-slots={ slots }
                   />
