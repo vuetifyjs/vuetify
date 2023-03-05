@@ -1,8 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
 import { VApp } from '@/components/VApp'
-import { CenteredGrid } from '@/../cypress/templates'
+import { Application, CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
 
 describe('VSlider', () => {
@@ -195,41 +194,39 @@ describe('VSlider', () => {
     ))
   })
 
-  // #16634
-  describe('rouding & decimals', () => {
-    it('should respect the decimals from both step and min', () => {
-      const currentValue = ref(1.001)
+  // https://github.com/vuetifyjs/vuetify/issues/16634
+  it('should respect the decimals from both step and min', () => {
 
-      cy.mount(() => (
-        <VApp>
-          <CenteredGrid width="360px">
-            <VSlider
-              v-model={ currentValue.value }
-              step={1.001}
-              min={1.0001}
-              max={10}
-              thumb-label
-            />
-          </CenteredGrid>
-        </VApp>
-      ))
+    cy.mount(() => (
+      <Application>
+        <CenteredGrid width="360px">
+          <VSlider
+            modelValue={1.001}
+            step={1.001}
+            min={1.0001}
+            max={10}
+            thumb-label
+          />
+        </CenteredGrid>
+      </Application>
+    ))
 
-      cy.get('.v-slider-thumb')
-        .trigger('mouseover')
-        .trigger('mousedown', { which: 1 })
-        .trigger('mousemove', 35, 0, { force: true }) // move to second step
-        .should(_ => {
-          expect(currentValue.value).equal(2.0011)
-        })
-        .trigger('mousemove', 190, 0, { force: true }) // move to fifth step
-        .should(_ => {
-          expect(currentValue.value).equal(6.0051)
-        })
-        .trigger('mousemove', 360, 0, { force: true }) // move to the final step
-        .should(_ => {
-          expect(currentValue.value).equal(10)
-        })
-        .trigger('mouseup')
+    cy.get('.v-slider-thumb')
+      .trigger('mouseover')
+      .trigger('mousedown', { which: 1 })
+      .trigger('mousemove', 35, 0, { force: true }) // move to second step
+      .trigger('mousemove', 190, 0, { force: true }) // move to fifth step
+      .trigger('mousemove', 360, 0, { force: true }) // move to the final step
+      .trigger('mouseup')
+
+    cy.vue().then(({ wrapper }) => {
+      const slider = wrapper.getComponent(VSlider)
+      const emits = slider.emitted('update:modelValue')
+      expect(emits).to.deep.equal([
+        [2.0011],
+        [6.0051],
+        [10],
+      ])
     })
   })
 })
