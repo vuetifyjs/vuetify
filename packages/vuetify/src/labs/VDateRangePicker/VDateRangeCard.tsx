@@ -61,6 +61,7 @@ export const VDateRangeCard = defineComponent({
                   displayDate={ props.displayDate }
                   v-model:hoverDate={ hoverDate.value }
                   multiple
+                  side="start"
                 />
               </div>
               <div class="v-date-range-card__divider" />
@@ -78,6 +79,7 @@ export const VDateRangeCard = defineComponent({
                   displayDate={ adapter.value.addMonths(props.displayDate, 1) }
                   v-model:hoverDate={ hoverDate.value }
                   multiple
+                  side="end"
                 />
               </div>
             </>

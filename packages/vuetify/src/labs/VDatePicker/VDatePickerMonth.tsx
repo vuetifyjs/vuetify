@@ -16,6 +16,7 @@ import { defineComponent, omit } from '@/util'
 import type { PropType } from 'vue'
 import { useDate } from '@/composables/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { isSameDay, isSameMonth } from 'date-fns'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
@@ -35,6 +36,9 @@ export const VDatePickerMonth = defineComponent({
     },
     hoverDate: null,
     multiple: Boolean,
+    side: {
+      type: String,
+    },
     ...omit(makeDateProps(), ['inputMode', 'viewMode']),
   },
 
@@ -164,9 +168,13 @@ export const VDatePickerMonth = defineComponent({
           if (newModel.find(d => adapter.value.isSameDay(d, date))) {
             newModel = newModel.filter(v => !adapter.value.isSameDay(v, date))
           } else if (newModel.length === 2) {
-            const closest = findClosestDate(date, newModel)
-
-            const index = newModel.indexOf(closest)
+            let index: number | undefined
+            if (!props.side || isSameMonth(newModel[0], newModel[1])) {
+              const closest = findClosestDate(date, newModel)
+              index = newModel.indexOf(closest)
+            } else {
+              index = props.side === 'start' ? 0 : props.side === 'end' ? 1 : undefined
+            }
 
             newModel = newModel.map((v, i) => i === index ? date : v)
           } else {

@@ -44,6 +44,9 @@ export const VDateRangeField = defineComponent({
     modelValue: {
       type: null as unknown as PropType<any[]>,
     },
+    displayDate: {
+      type: null as unknown as PropType<any>,
+    },
   },
 
   emits: {
