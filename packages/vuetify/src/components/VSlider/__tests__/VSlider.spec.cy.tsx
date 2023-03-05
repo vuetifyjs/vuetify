@@ -196,7 +196,6 @@ describe('VSlider', () => {
 
   // https://github.com/vuetifyjs/vuetify/issues/16634
   it('should respect the decimals from both step and min', () => {
-
     cy.mount(() => (
       <Application>
         <CenteredGrid width="360px">
