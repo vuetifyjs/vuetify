@@ -204,3 +204,7 @@ app.use(vuetify)
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
+
+### v-expansion-panel
+
+- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title` and `v-expansion-panel-content` into `v-expansion-panel-text` also you can use new props in `v-expansion-panel` `text` and `title`.
