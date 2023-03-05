@@ -29,6 +29,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
       closeOnBack: false,
       location: 'end' as const,
       locationStrategy: 'connected' as const,
+      eager: true,
       minWidth: 0,
       offset: 10,
       openOnClick: false,
@@ -40,7 +41,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     }), [
       'absolute',
       'persistent',
-      'eager',
     ]),
   },
 
@@ -102,7 +102,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           origin={ origin.value }
           persistent
           role="tooltip"
-          eager
           activatorProps={ activatorProps.value }
           _disableGlobalStack
           { ...scopeId }
