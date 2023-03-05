@@ -15,7 +15,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { clamp, createRange, genericComponent, getUid, useRender } from '@/util'
+import { createRange, genericComponent, getUid, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
@@ -73,7 +73,6 @@ export const VRating = genericComponent<VRatingSlots>()({
     readonly: Boolean,
     modelValue: {
       type: [Number, String],
-      default: 0,
     },
     itemLabels: Array as Prop<string[]>,
     itemLabelPosition: {
@@ -82,6 +81,11 @@ export const VRating = genericComponent<VRatingSlots>()({
       validator: (v: any) => ['top', 'bottom'].includes(v),
     },
     ripple: Boolean,
+    showZero: Boolean,
+    zeroEmptyValue: {
+      type: Boolean,
+      default: true,
+    },
 
     ...makeDensityProps(),
     ...makeSizeProps(),
@@ -96,16 +100,15 @@ export const VRating = genericComponent<VRatingSlots>()({
   setup (props, { slots }) {
     const { t } = useLocale()
     const { themeClasses } = provideTheme(props)
-    const rating = useProxiedModel(props, 'modelValue')
-    const normalizedValue = computed(() => clamp(parseFloat(rating.value), 0, +props.length))
+    const rating = useProxiedModel(props, 'modelValue', props.zeroEmptyValue ? 0 : undefined)
 
-    const range = computed(() => createRange(Number(props.length), 1))
+    const range = computed(() => createRange(Number(props.length) + (props.showZero ? 1 : 0), props.showZero ? 0 : 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
     const hoverIndex = ref(-1)
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
-      const isFilled = normalizedValue.value >= value
+      const isFilled = rating.value && rating.value >= value
       const isHovered = hoverIndex.value >= value
       const isFullIcon = isHovering ? isHovered : isFilled
       const icon = isFullIcon ? props.fullIcon : props.emptyIcon
@@ -126,7 +129,7 @@ export const VRating = genericComponent<VRatingSlots>()({
 
       function onClick () {
         if (props.disabled || props.readonly) return
-        rating.value = normalizedValue.value === value && props.clearable ? 0 : value
+        rating.value = rating.value === value && props.clearable ? props.zeroEmptyValue ? 0 : undefined : value
       }
 
       return {
@@ -171,7 +174,7 @@ export const VRating = genericComponent<VRatingSlots>()({
                 props: btnProps,
                 value,
                 index,
-                rating: normalizedValue.value,
+                rating: rating.value,
               })
               : (
                 <VBtn { ...btnProps } />
@@ -185,7 +188,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             id={ id }
             type="radio"
             value={ value }
-            checked={ normalizedValue.value === value }
+            checked={ rating.value === value }
             tabindex={-1}
             readonly={ props.readonly }
             disabled={ props.disabled }
@@ -216,10 +219,10 @@ export const VRating = genericComponent<VRatingSlots>()({
             themeClasses.value,
           ]}
         >
-          <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
+          { !props.showZero && <VRatingItem key="zero" value={ 0 } index={ -1 } showStar={ false } /> }
 
           { range.value.map((value, i) => (
-            <div class="v-rating__wrapper">
+            <div class="v-rating__wrapper" key={value}>
               {
                 hasLabels && props.itemLabelPosition === 'top'
                   ? createLabel({ value, index: i, label: props.itemLabels?.[i] })
@@ -228,7 +231,7 @@ export const VRating = genericComponent<VRatingSlots>()({
               <div class="v-rating__item">
                 { props.halfIncrements ? (
                   <>
-                    <VRatingItem value={ value - 0.5 } index={ i * 2 } />
+                    { !(i === 0 && props.showZero) && <VRatingItem value={ value - 0.5 } index={ i * 2 } /> }
                     <VRatingItem value={ value } index={ (i * 2) + 1 } />
                   </>
                 ) : (
