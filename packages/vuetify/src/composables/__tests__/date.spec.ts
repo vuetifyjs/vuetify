@@ -1,5 +1,5 @@
 // Composables
-import { createDate, makeDateProps, useDate } from '../date'
+import { makeDateProps, useDate } from '../date'
 import { createVuetify } from '@/framework'
 
 // Utilities
@@ -7,7 +7,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 
 // Types
-import DateFnsAdapter from '@/adapters/vuetify'
+import VuetifyDateAdapter from '@/adapters/vuetify'
 import { defineComponent, h } from 'vue'
 
 describe('date.ts', () => {
@@ -27,7 +27,7 @@ describe('date.ts', () => {
 
   const vuetify = createVuetify({
     date: {
-      adapter: new DateFnsAdapter(),
+      adapter: VuetifyDateAdapter,
     },
   })
 
@@ -37,8 +37,6 @@ describe('date.ts', () => {
         plugins: [vuetify],
       },
     })
-
-    console.log(wrapper.vm.date)
 
     expect(wrapper).toBeTruthy()
   })

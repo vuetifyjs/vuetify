@@ -26,7 +26,7 @@ export interface VuetifyOptions {
   blueprint?: Blueprint
   components?: Record<string, any>
   date?: {
-    adapter: DateAdapter<any>
+    adapter: { new(locale: string): DateAdapter<any> }
   }
   directives?: Record<string, any>
   defaults?: DefaultsOptions

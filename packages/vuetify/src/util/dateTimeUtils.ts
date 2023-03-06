@@ -8,11 +8,11 @@ export function getLastDayOfMonth (year: number, month: number) {
   return new Date(year, month + 1, 0)
 }
 
-function getNumberOfDaysInMonth (year: number, month: number) {
+export function getNumberOfDaysInMonth (year: number, month: number) {
   return new Date(year, month, 0).getDate()
 }
 
-function getMonthName (month: number, locale = 'en-US') {
+export function getMonthName (month: number, locale = 'en-US') {
   const date = new Date(`2022-${month}-01`)
   return date.toLocaleString(locale, { month: 'long' })
 }

@@ -1,12 +1,13 @@
 // Utilities
-import { computed, inject, shallowRef } from 'vue'
+import { inject, shallowRef, watch } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
+import { useLocale } from './locale'
 
-export const DateAdapterSymbol: InjectionKey<{ adapter: Ref<DateAdapter<any>> }> = Symbol.for('vuetify:date-adapter')
+export const DateAdapterSymbol: InjectionKey<{ adapter: { new(locale: string): DateAdapter<any> } }> = Symbol.for('vuetify:date-adapter')
 
 export interface DateProps {
   displayDate: Date
@@ -14,9 +15,8 @@ export interface DateProps {
   modelValue: any[]
 }
 
-export function createDate (options: { adapter: DateAdapter<any> }) {
-  // eslint-disable-next-line new-cap
-  return { adapter: shallowRef(new options.adapter()) }
+export function createDate (options: { adapter: { new(locale: string): DateAdapter<any> } }) {
+  return options
 }
 
 export const makeDateProps = propsFactory({
@@ -33,22 +33,17 @@ export const makeDateProps = propsFactory({
 
 export function useDate (props: DateProps) {
   const date = inject(DateAdapterSymbol)
+  const locale = useLocale()
 
   if (!date) throw new Error('[Vuetify] Could not find injected date')
 
-  const weeksInMonth = computed(() => {
-    const { getWeekArray } = date.adapter.value
+  // eslint-disable-next-line new-cap
+  const instance = shallowRef(new date.adapter(locale.current.value))
 
-    return getWeekArray(props.displayDate)
+  watch(locale.current, () => {
+    // eslint-disable-next-line new-cap
+    instance.value = new date.adapter(locale.current.value)
   })
 
-  const daysInMonth = computed(() => {
-    return weeksInMonth.value.flat()
-  })
-
-  return {
-    date,
-    daysInMonth,
-    weeksInMonth,
-  }
+  return instance
 }
