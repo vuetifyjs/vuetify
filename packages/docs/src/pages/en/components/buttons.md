@@ -131,7 +131,35 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 <example file="v-btn/prop-loaders" />
 
+### Inside of bars
+
+A common use-case is to use the `v-btn` with the **icon** property within a [v-toolbar](/components/toolbars/) or [v-app-bar](/components/app-bars/) component.
+
+<example file="v-btn/misc-toolbar" />
+
 <random />
+
+## Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-btn` component.
+
+### Discord event
+
+In this example we utilize multiple different button variants and styles.
+
+<example file="v-btn/misc-discord-event" />
+
+### Tax form comfirmation
+
+This example utilizes the [v-text-field](/components/text-fields/) component the **loading** prop.
+
+<example file="v-btn/misc-tax-form" />
+
+### Dialog action
+
+Buttons are often used to trigger actions within a [v-dialog](/components/dialogs/). In this example we use the **outlined** variant and the **color** prop to create a button that is visually distinct from the other buttons.
+
+<example file="v-btn/misc-dialog-action" />
 
 ## Defaults Side Effects
 

@@ -1,28 +1,39 @@
 <template>
-  <v-toolbar>
-    <template v-slot:prepend>
-      <v-btn icon="mdi-arrow-left"></v-btn>
-    </template>
+  <v-container>
+    <v-row justify="center" align="center">
+      <v-col cols="auto">
+        <v-btn density="compact" icon="mdi-plus"></v-btn>
+      </v-col>
 
-    <v-btn icon="mdi-archive-plus-outline" class="ms-5"></v-btn>
+      <v-col cols="auto">
+        <v-btn density="comfortable" icon="mdi-vuetify"></v-btn>
+      </v-col>
 
-    <v-btn icon="mdi-alert-circle-outline"></v-btn>
+      <v-col cols="auto">
+        <v-btn density="default" icon="mdi-open-in-new"></v-btn>
+      </v-col>
+    </v-row>
 
-    <v-btn icon="mdi-delete-outline"></v-btn>
+    <v-row justify="center" align="center">
+      <v-col cols="auto">
+        <v-btn size="x-small" icon="mdi-account"></v-btn>
+      </v-col>
 
-    <template v-if="$vuetify.display.smAndUp">
-      <v-divider
-        class="mx-3 align-self-center"
-        length="24"
-        thickness="2"
-        vertical
-      ></v-divider>
+      <v-col cols="auto">
+        <v-btn size="small" icon="mdi-plus"></v-btn>
+      </v-col>
 
-      <v-btn icon="mdi-folder-outline"></v-btn>
+      <v-col cols="auto">
+        <v-btn icon="mdi-vuetify"></v-btn>
+      </v-col>
 
-      <v-btn icon="mdi-tag-outline"></v-btn>
+      <v-col cols="auto">
+        <v-btn size="large" icon="mdi-open-in-new"></v-btn>
+      </v-col>
 
-      <v-btn icon="mdi-dots-vertical"></v-btn>
-    </template>
-  </v-toolbar>
+      <v-col cols="auto">
+        <v-btn size="x-large" icon="mdi-calendar"></v-btn>
+      </v-col>
+    </v-row>
+  </v-container>
 </template>
