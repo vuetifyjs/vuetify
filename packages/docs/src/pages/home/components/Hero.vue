@@ -4,7 +4,6 @@
     style="background: linear-gradient(to bottom, #1867c0, #5CBBF6)"
     min-height="50vh"
   >
-    <tidelift />
     <v-container>
       <v-layout
         align-center
@@ -79,8 +78,7 @@
 <script>
   export default {
     components: {
-      Feature: () => import('./Feature'),
-      Tidelift: () => import('./Tidelift')
+      Feature: () => import('./Feature')
     }
   }
 </script>

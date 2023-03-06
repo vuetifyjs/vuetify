@@ -1,5 +1,8 @@
 <template>
-  <div id="home">
+  <div
+    id="home"
+    class="fill-height grey darken-4"
+  >
     <v-content>
       <v-container
         fluid

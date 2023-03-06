@@ -2,6 +2,8 @@
   <v-app>
     <router-view />
 
+    <core-explore-system-bar />
+
     <core-toolbar v-if="hasToolbar" />
   </v-app>
 </template>

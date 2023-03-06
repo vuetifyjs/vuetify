@@ -1,14 +1,14 @@
 <template>
   <v-toolbar
     id="app-toolbar"
-    :class="`elevation-${isHome ? 0 : 6}`"
+    :class="`elevation-${isHome ? 0 : 0}`"
     app
+    color="white"
     clipped-left
     clipped-right
-    color="primary"
-    dark
     fixed
     height="58"
+    style="border-bottom: thin solid rgba(0, 0, 0, 0.12) !important"
   >
     <v-toolbar-side-icon
       v-if="!isHome"
@@ -20,37 +20,19 @@
     <router-link :to="{ name: 'home/Home' }">
       <v-img
         alt="Vuetify Logo"
-        src="https://cdn.vuetifyjs.com/images/logos/v-alt.svg"
+        src="https://cdn.vuetifyjs.com/docs/images/logos/vuetify-logo-v3-slim-text-light.svg"
         contain
         transition="scale-transition"
-        height="38px"
-        width="38px"
+        :width="$vuetify.breakpoint.lgAndUp ? 148 : 96"
       />
     </router-link>
-    <v-toolbar-title class="hidden-xs-only">Vuetify</v-toolbar-title>
+    <!-- <v-toolbar-title class="hidden-xs-only">Vuetify</v-toolbar-title> -->
     <v-spacer />
 
     <v-toolbar-items>
-      <v-btn
-        v-show="isHome"
-        :aria-label="$t('Vuetify.AppToolbar.documentation')"
-        :to="{
-          name: 'Documentation',
-          params: {
-            lang: $route.params.lang,
-            namespace: 'getting-started',
-            page: 'quick-start'
-          }
-        }"
-        flat
-        style="min-width: 48px;"
-      >
-        <span class="hidden-sm-and-down">{{ $t('Vuetify.AppToolbar.documentation' ) }}</span>
-        <v-icon class="hidden-md-and-up">mdi-file-document-box</v-icon>
-      </v-btn>
       <core-store />
-      <core-supports />
-      <core-ecosystems />
+      <core-sponsor />
+      <core-enterprise />
       <core-versions />
       <core-locales />
     </v-toolbar-items>

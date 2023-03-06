@@ -9,8 +9,6 @@
     </v-content>
 
     <core-fab />
-
-    <core-snackbar />
   </div>
 </template>
 

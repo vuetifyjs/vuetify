@@ -4,39 +4,6 @@
     clipped
     app
   >
-    <v-container
-      fluid
-      pb-0
-    >
-      <div class="text-xs-center">
-        <supporters-sponsor-btn
-          large
-          class="mb-3"
-          href="https://github.com/users/johnleider/sponsorship"
-        />
-      </div>
-    </v-container>
-
-    <v-divider class="mt-3" />
-
-    <v-layout pa-3>
-      <a
-        href="https://vuejobs.com/?utm_source=vuejobs&utm_medium=banner&utm_campaign=linking&ref=vuetifyjs.com"
-        target="_blank"
-        rel="noopener"
-        class="d-inline-block"
-        @click="$ga.event('drawer', 'click', 'vuejobs')"
-      >
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/affiliates/vuejobs-logo.svg"
-          alt="VueJobs"
-          title="VueJobs"
-          contain
-          height="18"
-          width="60"
-        />
-      </a>
-    </v-layout>
     <v-list
       class="pa-0"
       dense

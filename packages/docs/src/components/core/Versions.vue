@@ -3,6 +3,7 @@
     bottom
     left
     offset-y
+    disabled
     max-height="500"
   >
     <template #activator="{ on: menu }">
@@ -12,10 +13,9 @@
         v-on="menu"
       >
         <span
-          class="text-lowercase mr-1"
+          class="text-lowercase"
           v-text="version"
         />
-        <v-icon class="hidden-sm-and-down">mdi-menu-down</v-icon>
       </v-btn>
     </template>
 

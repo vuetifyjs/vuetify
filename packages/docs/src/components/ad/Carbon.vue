@@ -11,7 +11,7 @@
       },
       src: {
         type: String,
-        default: '//cdn.carbonads.com/carbon.js?zoneid=1673&serve=C6AILKT&placement=vuetifyjscom'
+        default: '//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=nextvuetifyjscom'
       }
     },
 
@@ -112,13 +112,14 @@
       }
 
       .carbon-poweredby {
+        font-size: 8px;
         white-space: nowrap;
       }
 
       a {
         &.carbon-text {
           display: block;
-          font-size: 12px;
+          font-size: 11px;
           margin-bottom: .5em;
         }
       }

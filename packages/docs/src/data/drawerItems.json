@@ -7,10 +7,8 @@
       { "text": "quickStart", "to": "quick-start" },
       { "text": "whyVuetify", "to": "why-vuetify" },
       { "text": "faq", "to": "frequently-asked-questions" },
-      { "text": "meetTheTeam", "to": "meet-the-team" },
       { "text": "contributing", "to": "contributing" },
-      { "text": "roadmap", "href": "https://vuetifyjs.com/en/getting-started/roadmap" },
-      { "text": "consulting", "href": "https://vuetifyjs.com/en/getting-started/consulting-and-support" }
+      { "text": "roadmap", "href": "https://vuetifyjs.com/getting-started/roadmap/" }
     ]
   },
   {
@@ -153,10 +151,5 @@
       { "text": "scrolling", "to": "scrolling" },
       { "text": "touchSupport", "to": "touch-support" }
     ]
-  },
-  {
-    "text": "premiumThemes",
-    "icon": "mdi-palette",
-    "href": "https://vuetifyjs.com/en/themes/premium"
   }
 ]

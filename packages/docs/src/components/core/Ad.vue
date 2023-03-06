@@ -22,16 +22,12 @@
             text-xs-center
           >
             <core-toc />
-            <div class="my-3">
-              <supporters-sponsor-btn small />
-            </div>
-          </v-flex>
 
-          <ad-shown
-            :viewport="viewport"
-            class="mt-auto"
-            style="margin-bottom: 72px;"
-          />
+            <ad-shown
+              :viewport="viewport"
+              style="margin-bottom: 72px;"
+            />
+          </v-flex>
         </v-layout>
       </ad-drawer>
     </template>
