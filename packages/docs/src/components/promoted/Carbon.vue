@@ -7,7 +7,7 @@
     <promoted-script
       id="carbonads-script"
       script-id="_carbonads_js"
-      src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
+      src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
       @script:error="error = true"
     />
   </promoted-base>
