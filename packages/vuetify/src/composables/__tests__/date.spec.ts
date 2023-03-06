@@ -7,7 +7,7 @@ import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 
 // Types
-import DateFnsAdapter from '@/adapters/vuetify'
+import VuetifyDateAdapter from '@/adapters/vuetify'
 import { defineComponent, h } from 'vue'
 
 describe('date.ts', () => {
@@ -27,7 +27,7 @@ describe('date.ts', () => {
 
   const vuetify = createVuetify({
     date: {
-      adapter: new DateFnsAdapter(),
+      adapter: VuetifyDateAdapter,
     },
   })
 
