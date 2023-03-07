@@ -97,12 +97,13 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
     const isFocused = ref(false)
@@ -246,6 +247,7 @@ export const VAutocomplete = genericComponent<new <
         menu.value = false
         search.value = ''
       }
+      emit('update:focused', val)
     })
 
     watch(search, val => {
