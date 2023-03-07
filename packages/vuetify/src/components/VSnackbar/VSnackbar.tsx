@@ -103,7 +103,19 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({
-            style: locationStyles.value,
+            class: [
+              'v-snackbar__wrapper',
+              themeClasses.value,
+              colorClasses.value,
+              roundedClasses.value,
+              variantClasses.value,
+            ],
+            style: [
+              locationStyles.value,
+              colorStyles.value,
+            ],
+            onPointerenter,
+            onPointerleave: startTimeout,
           }, overlayProps.contentProps) }
           persistent
           noClickAnimation
@@ -112,45 +124,32 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
-          <div
-            class={[
-              'v-snackbar__wrapper',
-              themeClasses.value,
-              colorClasses.value,
-              roundedClasses.value,
-              variantClasses.value,
-            ]}
-            style={[colorStyles.value]}
-            onPointerenter={ onPointerenter }
-            onPointerleave={ startTimeout }
-          >
-            { genOverlays(false, 'v-snackbar') }
+          { genOverlays(false, 'v-snackbar') }
 
-            { slots.default && (
-              <div
-                class="v-snackbar__content"
-                role="status"
-                aria-live="polite"
-              >
-                { slots.default() }
+          { slots.default && (
+            <div
+              class="v-snackbar__content"
+              role="status"
+              aria-live="polite"
+            >
+              { slots.default() }
+            </div>
+          ) }
+
+          { slots.actions && (
+            <VDefaultsProvider
+              defaults={{
+                VBtn: {
+                  variant: 'text',
+                  ripple: false,
+                },
+              }}
+            >
+              <div class="v-snackbar__actions">
+                { slots.actions() }
               </div>
-            ) }
-
-            { slots.actions && (
-              <VDefaultsProvider
-                defaults={{
-                  VBtn: {
-                    variant: 'text',
-                    ripple: false,
-                  },
-                }}
-              >
-                <div class="v-snackbar__actions">
-                  { slots.actions() }
-                </div>
-              </VDefaultsProvider>
-            ) }
-          </div>
+            </VDefaultsProvider>
+          )}
         </VOverlay>
       )
     })
