@@ -9,6 +9,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -48,6 +49,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
     sticky: Boolean,
     text: String,
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -84,6 +86,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
         <props.tag
           class={[
             'v-banner',
+            props.class,
             {
               'v-banner--stacked': props.stacked || mobile.value,
               'v-banner--sticky': props.sticky,
@@ -97,6 +100,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
             themeClasses.value,
           ]}
           style={[
+            props.style,
             dimensionStyles.value,
             locationStyles.value,
           ]}

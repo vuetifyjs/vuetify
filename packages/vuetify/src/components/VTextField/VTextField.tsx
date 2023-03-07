@@ -11,6 +11,7 @@ import Intersect from '@/directives/intersect'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { makeComponentProps } from '@/composables/component'
 import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -45,6 +46,7 @@ export const makeVTextFieldProps = propsFactory({
     default: 'text',
   },
 
+  ...makeComponentProps(),
   ...makeVInputProps(),
   ...makeVFieldProps(),
 }, 'v-text-field')
@@ -157,6 +159,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
           v-model={ model.value }
           class={[
             'v-text-field',
+            props.class,
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
@@ -169,6 +172,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
           { ...inputProps }
           focused={ isFocused.value }
           messages={ messages.value }
+          style={ props.style }
         >
           {{
             ...slots,

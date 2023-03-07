@@ -1,3 +1,4 @@
+import { makeComponentProps } from '@/composables/component'
 import { camelize, capitalize, h } from 'vue'
 import { genericComponent } from './defineComponent'
 
@@ -10,6 +11,7 @@ export function createSimpleFunctional (
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
     props: {
+      ...makeComponentProps(),
       tag: {
         type: String,
         default: tag,
@@ -17,9 +19,11 @@ export function createSimpleFunctional (
     },
 
     setup (props, { slots }) {
-      return () => h(props.tag, {
-        class: klass,
-      }, slots.default?.())
+      return () => {
+        return h(props.tag, {
+        class: [klass, props.class],
+        style: props.style
+      }, slots.default?.())}
     },
   })
 }
