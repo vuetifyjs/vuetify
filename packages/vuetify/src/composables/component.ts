@@ -1,5 +1,5 @@
 // Utilities
-import { propsFactory } from '@/util'
+import { propsFactory } from '@/util/propsFactory'
 
 // Types
 import type { PropType } from 'vue'
