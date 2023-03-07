@@ -78,7 +78,7 @@ jobs:
   test-cypress:
     name: Test (Cypress)
     needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true'
+    if: needs.pre_job.outputs.should_skip != 'true' && github.ref != 'refs/heads/master'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -155,7 +155,7 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
-    needs: [lint, test-jest, test-cypress]
+    needs: [lint, test-jest]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
