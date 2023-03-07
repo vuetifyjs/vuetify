@@ -81,6 +81,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
   emits: {
     'click:control': (e: MouseEvent) => true,
     'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
@@ -153,6 +154,8 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         inputRef.value.value = ''
       }
     })
+
+    watch(isFocused, val => emit('update:focused', val))
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)

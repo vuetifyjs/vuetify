@@ -21,7 +21,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, watch } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -104,13 +104,15 @@ export const VSelect = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
+    const isFocused = ref(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -206,12 +208,17 @@ export const VSelect = genericComponent<new <
       if (!listRef.value?.$el.contains(e.relatedTarget as HTMLElement)) {
         menu.value = false
       }
+      isFocused.value = false
     }
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
         vTextFieldRef.value?.focus()
       }
     }
+
+    watch(isFocused, val => {
+      emit('update:focused', val)
+    })
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -240,6 +247,7 @@ export const VSelect = genericComponent<new <
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
+          onFocus={ () => isFocused.value = true }
           onKeydown={ onKeydown }
         >
           {{
@@ -355,6 +363,7 @@ export const VSelect = genericComponent<new <
     })
 
     return forwardRefs({
+      isFocused,
       menu,
       select,
     }, vTextFieldRef)

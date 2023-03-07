@@ -99,6 +99,7 @@ export const VCombobox = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
@@ -325,6 +326,7 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(isFocused, val => {
+      emit('update:focused', val)
       if (val) {
         selectionIndex.value = -1
       } else {
