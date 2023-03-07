@@ -8,6 +8,7 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
@@ -84,6 +85,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
       validator: (val: ContextualType) => allowedTypes.includes(val),
     },
 
+    ...makeComponentProps(), 
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -140,6 +142,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
         <props.tag
           class={[
             'v-alert',
+            props.class,
             props.border && {
               'v-alert--border': !!props.border,
               [`v-alert--border-${props.border === true ? 'start' : props.border}`]: true,
@@ -156,6 +159,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
             variantClasses.value,
           ]}
           style={[
+            props.style,
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
