@@ -68,7 +68,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { items } = useDataTableItems(props, columns)
 
     const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'), { filterKeys })
+    const search = toRef(props, 'search')
+    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -100,6 +101,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       page: ref(1),
       itemsPerPage: ref(-1),
       groupBy,
+      search,
     })
 
     provideDefaults({

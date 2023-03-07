@@ -10,7 +10,7 @@
   "components/navbars": "/components/toolbars",
   "components/toasts": "/components/snackbars",
   "components/carousel": "/components/carousels",
-  "components/datatables": "/components/data-tables",
+  "components/datatables": "/components/data-tables/basics",
   "components/expansion-panel": "/components/expansion-panels",
   "components/footer": "/components/footers",
   "directives/badges": "/components/badges",
