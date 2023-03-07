@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import {genericComponent, getPropertyFromItem, omit, useRender, wrapInArray} from '@/util';
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
@@ -132,7 +132,10 @@ export const VAutocomplete = genericComponent<new <
     const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
-        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+        return items.value.find(item => {
+          if(props.itemValue !== 'value') return props.valueComparator(getPropertyFromItem(item.value, props.itemValue), getPropertyFromItem(v.value, props.itemValue))
+          return props.valueComparator(item.value, v.value)
+        }) || v
       })
     })
 
