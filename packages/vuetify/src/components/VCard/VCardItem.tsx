@@ -3,7 +3,6 @@ import { VAvatar } from '@/components/VAvatar'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -52,19 +51,12 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (
                 <>
-                  { props.prependAvatar && (
+                  { hasPrependMedia && (
                     <VAvatar
                       key="prepend-avatar"
                       density={ props.density }
-                      image={ props.prependAvatar }
-                    />
-                  ) }
-
-                  { props.prependIcon && (
-                    <VIcon
-                      key="prepend-icon"
-                      density={ props.density }
                       icon={ props.prependIcon }
+                      image={ props.prependAvatar }
                     />
                   ) }
                 </>
@@ -77,10 +69,6 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                       density: props.density,
                       icon: props.prependIcon,
                       image: props.prependAvatar,
-                    },
-                    VIcon: {
-                      density: props.density,
-                      icon: props.prependIcon,
                     },
                   }}
                   v-slots:default={ slots.prepend }
@@ -109,18 +97,11 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
             <div key="append" class="v-card-item__append">
               { !slots.append ? (
                 <>
-                  { props.appendIcon && (
-                    <VIcon
-                      key="append-icon"
-                      density={ props.density }
-                      icon={ props.appendIcon }
-                    />
-                  ) }
-
-                  { props.appendAvatar && (
+                  { hasAppendMedia && (
                     <VAvatar
                       key="append-avatar"
                       density={ props.density }
+                      icon={ props.appendIcon }
                       image={ props.appendAvatar }
                     />
                   ) }
@@ -134,10 +115,6 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                       density: props.density,
                       icon: props.appendIcon,
                       image: props.appendAvatar,
-                    },
-                    VIcon: {
-                      density: props.density,
-                      icon: props.appendIcon,
                     },
                   }}
                   v-slots:default={ slots.append }
