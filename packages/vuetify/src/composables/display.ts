@@ -175,9 +175,7 @@ export function createDisplay (options?: DisplayOptions, ssr?: boolean): Display
       : xl ? 'xl'
       : 'xxl'
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = !platform.value.ssr
-      ? width.value < breakpointValue
-      : platform.value.android || platform.value.ios || platform.value.opera
+    const mobile = width.value < breakpointValue
 
     state.xs = xs
     state.sm = sm
