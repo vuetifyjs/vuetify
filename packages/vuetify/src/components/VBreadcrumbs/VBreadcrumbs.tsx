@@ -112,9 +112,9 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
                   }}
                   v-slots:default={ slots.prepend }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { props.items.map((item, index, array) => (
             <>
@@ -133,9 +133,9 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
                     default: slots.divider ? () => slots.divider?.({ item, index }) : undefined,
                   }}
                 />
-              ) }
+              )}
             </>
-          )) }
+          ))}
 
           { slots.default?.() }
         </props.tag>

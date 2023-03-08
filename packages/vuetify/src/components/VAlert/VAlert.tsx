@@ -200,7 +200,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                   }}
                   v-slots:default={ slots.prepend }
                 />
-              ) }
+              )}
             </div>
           )}
 
@@ -209,7 +209,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               <VAlertTitle key="title">
                 { slots.title?.() ?? props.title }
               </VAlertTitle>
-            ) }
+            )}
 
             { hasText && (slots.text?.() ?? props.text) }
 
@@ -247,7 +247,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          ) }
+          )}
         </props.tag>
       )
     }

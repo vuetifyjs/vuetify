@@ -38,7 +38,7 @@ export const VDataTableRow = defineComponent({
             key="no-data"
             v-slots={ slots }
           />
-        ) }
+        )}
 
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
@@ -76,7 +76,7 @@ export const VDataTableRow = defineComponent({
                 if (column.key === 'data-table-expand') {
                   return slots['item.data-table-expand']?.(slotProps) ?? (
                     <VBtn
-                      icon={isExpanded(item) ? '$collapse' : '$expand' }
+                      icon={ isExpanded(item) ? '$collapse' : '$expand' }
                       size="small"
                       variant="text"
                       onClick={ () => toggleExpand(item) }
@@ -88,7 +88,7 @@ export const VDataTableRow = defineComponent({
               },
             }}
           </VDataTableColumn>
-        )) }
+        ))}
       </tr>
     ))
   },

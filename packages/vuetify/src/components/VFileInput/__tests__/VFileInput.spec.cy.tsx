@@ -54,7 +54,7 @@ describe('VFileInput', () => {
     const model = ref([oneMBFile, twoMBFile])
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" v-model={model.value} />
+        <VFileInput label="foo" v-model={ model.value } />
       </CenteredGrid>
     ))
       .get('.v-field__clearable > .v-icon')
@@ -66,7 +66,7 @@ describe('VFileInput', () => {
   it('should support removing clearable icon', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={false} />
+        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
       </CenteredGrid>
     ))
       .get('.v-field__append-inner > .v-btn')

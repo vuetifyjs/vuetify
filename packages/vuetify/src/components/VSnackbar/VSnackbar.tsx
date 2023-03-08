@@ -116,7 +116,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             onPointerenter,
             onPointerleave: startTimeout,
-          }, overlayProps.contentProps) }
+          }, overlayProps.contentProps)}
           persistent
           noClickAnimation
           scrim={ false }
@@ -134,7 +134,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             >
               { slots.default() }
             </div>
-          ) }
+          )}
 
           { slots.actions && (
             <VDefaultsProvider

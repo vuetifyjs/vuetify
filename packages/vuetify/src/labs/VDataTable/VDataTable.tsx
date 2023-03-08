@@ -149,7 +149,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
                     multiSort={ props.multiSort }
                     v-slots={ slots }
                   />
-                ) }
+                )}
               </thead>
               { slots.thead?.() }
               <tbody>
@@ -159,7 +159,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
-                ) }
+                )}
               </tbody>
               { slots.tbody?.() }
               { slots.tfoot?.() }

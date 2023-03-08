@@ -223,7 +223,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       density={ props.density }
                       image={ props.prependAvatar }
                     />
-                  ) }
+                  )}
 
                   { props.prependIcon && (
                     <VIcon
@@ -231,7 +231,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       density={ props.density }
                       icon={ props.prependIcon }
                     />
-                  ) }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -253,22 +253,22 @@ export const VListItem = genericComponent<VListItemSlots>()({
                 >
                   { slots.prepend?.(slotProps.value) }
                 </VDefaultsProvider>
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
-                { slots.title?.({ title: props.title }) ?? props.title}
+                { slots.title?.({ title: props.title }) ?? props.title }
               </VListItemTitle>
-            ) }
+            )}
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
                 { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
               </VListItemSubtitle>
-            ) }
+            )}
 
             { slots.default?.(slotProps.value) }
           </div>
@@ -283,7 +283,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       density={ props.density }
                       icon={ props.appendIcon }
                     />
-                  ) }
+                  )}
 
                   { props.appendAvatar && (
                     <VAvatar
@@ -291,7 +291,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       density={ props.density }
                       image={ props.appendAvatar }
                     />
-                  ) }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -315,7 +315,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                 </VDefaultsProvider>
               )}
             </div>
-          ) }
+          )}
         </Tag>
       )
     })

@@ -131,7 +131,7 @@ export const VTabs = genericComponent()({
             }}
             v-slots:default={ slots.default }
           />
-        ) }
+        )}
       </VSlideGroup>
     ))
 

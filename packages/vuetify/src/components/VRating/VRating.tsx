@@ -268,7 +268,7 @@ export const VRating = genericComponent<VRatingSlots>()({
                   </>
                 ) : (
                   <VRatingItem value={ value } index={ i } />
-                ) }
+                )}
               </div>
               {
                 hasLabels && props.itemLabelPosition === 'bottom'
@@ -276,7 +276,7 @@ export const VRating = genericComponent<VRatingSlots>()({
                   : undefined
               }
             </div>
-          )) }
+          ))}
         </props.tag>
       )
     })

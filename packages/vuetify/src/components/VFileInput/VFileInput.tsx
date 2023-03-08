@@ -215,13 +215,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           e.stopPropagation()
 
                           onFocus()
-                        } }
+                        }}
                         onChange={ e => {
                           if (!e.target) return
 
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
-                        } }
+                        }}
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }
@@ -264,7 +264,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

@@ -189,7 +189,7 @@ export const VChip = genericComponent<VChipSlots>()({
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ [isClickable.value && props.ripple, null] }
+          v-ripple={[isClickable.value && props.ripple, null]}
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
@@ -213,10 +213,10 @@ export const VChip = genericComponent<VChipSlots>()({
                     }}
                     v-slot:default={ slots.filter }
                   />
-                ) }
+                )}
               </div>
             </VExpandXTransition>
-          ) }
+          )}
 
           { hasPrepend && (
             <div key="prepend" class="v-chip__prepend">
@@ -228,7 +228,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       icon={ props.prependIcon }
                       start
                     />
-                  ) }
+                  )}
 
                   { props.prependAvatar && (
                     <VAvatar
@@ -236,7 +236,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       icon={ props.prependAvatar }
                       start
                     />
-                  ) }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -254,9 +254,9 @@ export const VChip = genericComponent<VChipSlots>()({
                   }}
                   v-slots:default={ slots.prepend }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default?.({
             isSelected: group?.isSelected.value,
@@ -277,7 +277,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       end
                       icon={ props.appendIcon }
                     />
-                  ) }
+                  )}
 
                   { props.appendAvatar && (
                     <VAvatar
@@ -285,7 +285,7 @@ export const VChip = genericComponent<VChipSlots>()({
                       end
                       icon={ props.appendAvatar }
                     />
-                  ) }
+                  )}
                 </>
               ) : (
                 <VDefaultsProvider
@@ -303,9 +303,9 @@ export const VChip = genericComponent<VChipSlots>()({
                   }}
                   v-slots:default={ slots.append }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { hasClose && (
             <div
@@ -330,9 +330,9 @@ export const VChip = genericComponent<VChipSlots>()({
                   }}
                   v-slots:default={ slots.close }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
         </Tag>
       )
     }

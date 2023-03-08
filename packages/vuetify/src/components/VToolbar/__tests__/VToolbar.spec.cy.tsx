@@ -24,7 +24,7 @@ describe('VToolbar', () => {
       <>
         { colors.map(color => (
           <VToolbar color={ color } title={ color } />
-        )) }
+        ))}
       </>
     ))
       .get('.v-toolbar')

@@ -127,23 +127,23 @@ export const VBanner = genericComponent<VBannerSlots>()({
                   }}
                   v-slots:default={ slots.prepend }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div class="v-banner__content">
             { hasText && (
               <VBannerText key="text">
                 { slots.text?.() ?? props.text }
               </VBannerText>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
 
           { slots.actions && (
             <VBannerActions key="actions" v-slots:default={ slots.actions } />
-          ) }
+          )}
         </props.tag>
       )
     })

@@ -78,15 +78,15 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title?.() ?? props.title}
+                { slots.title?.() ?? props.title }
               </VCardTitle>
-            ) }
+            )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
                 { slots.subtitle?.() ?? props.subtitle }
               </VCardSubtitle>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>

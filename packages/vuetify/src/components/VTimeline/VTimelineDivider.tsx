@@ -95,10 +95,10 @@ export const VTimelineDivider = genericComponent()({
                   }}
                   v-slots:default={ slots.default }
                 />
-              ) }
+              )}
             </div>
           </div>
-        ) }
+        )}
 
         <div
           class={[
