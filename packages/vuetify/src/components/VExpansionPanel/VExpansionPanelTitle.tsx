@@ -13,9 +13,17 @@ import { useBackgroundColor } from '@/composables/color'
 import { computed, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+interface ExpansionPanelTitleSlot {
+  collapseIcon: IconValue
+  disabled: boolean | undefined
+  expanded: boolean
+  expandIcon: IconValue
+  readonly: boolean
+}
+
 export type VExpansionPanelTitleSlots = {
-  default: []
-  actions: []
+  default: [ExpansionPanelTitleSlot]
+  actions: [ExpansionPanelTitleSlot]
 }
 
 export const makeVExpansionPanelTitleProps = propsFactory({

@@ -55,11 +55,17 @@ app.use(vuetify)
 
 ### Layout
 
+- Global styles previously included as `.v-application p` or `.v-application ul` are no longer included. If you need margin for `p`, or padding-left for `ul` and `ol`, set it manually in your root component's `<style>` tag
+- `stateless`, `clipped`, `clipped-right` and `app` props have been removed from v-navigation-drawer, v-app-bar and v-system-bar. The position in the markup determines the appearance. Use the `order="number"` prop to influence it manually.
+- `$vuetify.breakpoint` has been renamed to `$vuetify.display` and extended with [new properties](/features/display-and-platform/)
+
 ### Theme
 
 - Multiple themes are now supported, so `light` / `dark` props have been removed from components. Use `v-theme-provider` to set the theme for a specific component tree.
+  - Components that previously had a `dark` prop, such as v-app-bar, now accept `theme="dark"` prop
 - Theme colors set their foreground text color automatically, if you were using `light` / `dark` to get a different text color you probably don't need it anymore.
 - The variant naming scheme has changed slightly, it is now a single word instead of two. For example, `primary darken-1` is now `primary-darken-1`.
+  - To use variant namings as value for `color` props, the variant you intend to use needs to be enabled in the theme under `theme.variations.colors`. e.g: `colors: ['primary']`
 - Color classes have been renamed:
   - Backgrounds have a `bg-` prefix, for example `.primary` is now `.bg-primary`.
   - Text colors have a `text-` prefix, for example `.primary--text` is now `.text-primary`.
@@ -67,18 +73,32 @@ app.use(vuetify)
 - The theme system now uses CSS variables internally, so `customProperties` is no longer required.
   - If you were using `customProperties` in v2, the naming scheme has changed from `--v-primary-base` to `--v-theme-primary`.
   - Custom properties are now also an rgb list instead of hex so `rgb()` or `rgba()` must be used to access them, for example `color: rgb(var(--v-theme-primary))` instead of `color: var(--v-primary-base)`.
+- Theme colors in the theme config are now nested inside a `colors` property, e.g. `const myTheme = { theme: { themes: { light: { colors: { primary: '#ccc' } } } } }`
+
+### SCSS
+
+- `$headings` was merged with `$typography`: Access font-size of subtitle-2 with `map-get($typography, 'subtitle-2', 'size')`
+- If you imported variables from `~vuetify/src/styles/settings/_variables` in v2, you have to replace it with `vuetify/settings`
+- Component variables that previously lived in e.g. `~/vuetify/src/components/VIcon/VIcon.sass` can now be imported from `vuetify/settings` directly too
+- `$displayBreakpoints` no longer includes `{breakpoint}-only` variables (e.g. xs-only), use `@media #{map-get(v.$display-breakpoints, 'xs')}` instead
+- The `$transition` map has been removed, replaced with individual `$standard-easing`, `$decelerated-easing`, `$accelerated-easing` variables.
+- `$container-padding-x` is now 16px instead of 12px as in v2. You can replace it with `$spacer * 3` to get to the previous look
 
 ## Components
 
 ### General changes
 
 - `value` prop has been replaced by `model-value` on components that support `v-model` usage.
+  - Note that this does not apply to `value` used as a *selection value*, for example `v-btn` within `v-btn-toggle`.
 - `@input` event has been replaced by `@update:model-value` on components that support `v-model` usage.
 - `left` and `right` have been replaced by `start` and `end` respectively. This applies to utility classes too, for example `.border-r` is now `.border-e`.
 - Size props `small` / `medium` / `large` etc. have been combined into a single `size` prop.
 - `absolute` and `fixed` props have been combined into a single `position` prop.
 - `top` / `bottom` / `left` / `right` props have been combined into a single `location` prop.
 - `background-color` prop has been renamed to `bg-color`.
+- `dense` prop on components such as v-select, v-btn-toggle, v-alert, v-text-field, v-list and v-list-item has been changed to `density` prop with the variants `default`, `comfortable`, `compact`
+- Activator slots work slightly different. Replace `#activator={ attrs, on }` with `#activator={ props }`, then remove `v-on="on"` and replace `v-bind="attrs"` with `v-bind="props"`
+- Some components have structural changes in their markup. Which means you may have to change how you query and assert them in tests. `v-switch` for example now uses an `<input type="checkbox" />` under the hood, which is why the `aria-checked` and `aria-role="switch"` attributes were removed.
 
 ### Input components
 
@@ -100,19 +120,25 @@ app.use(vuetify)
   - Allowed values are `'elevated'`, `'flat'`, `'tonal'`, `'outlined'`, `'text'`, or `'plain'`.
 - `text` prop has new purpose. It represents the text content of the alert, if default slot is not used.
 
-### v-btn
+### v-btn/v-btn-toggle
 
 - `active-class` prop has been renamed to `selected-class`.
-- `fab` is no longer supported.
+- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class
 - `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
 - `depressed` has been renamed to `variant="flat"`.
 - `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
+- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2
 
 ### v-checkbox/v-radio/v-switch
 
 - `input-value` prop has been renamed to `model-value`.
 - `on-icon` and `off-icon` props have been renamed to `true-icon` and `false-icon`.
 - `on-value` and `off-value` props have been renamed to `true-value` and `false-value`.
+- `v-checkbox`'s label slot should no longer contain a `<label>` as it is already wrapped with one
+
+### v-form
+
+- `validate()` now returns a [`Promise<FormValidationResult>`](/api/v-form/#exposed-validate) instead of a boolean. Await the promise then check `result.valid` to determine form state.
 
 ### v-list
 
@@ -124,6 +150,7 @@ app.use(vuetify)
 - `v-list-item` `input-value` prop has been replaced with `active`.
 - `v-list-item` `inactive` prop has been replaced with `:active="false" :link="false"`.
 - `v-subheader`  has been renamed to `v-list-subheader`.
+- `v-list-item`'s `active` scoped slot prop has been renamed to `isActive`
 
 ### v-select/v-combobox/v-autocomplete
 
@@ -153,7 +180,27 @@ app.use(vuetify)
 - `ticks` has been renamed to `show-ticks`.
 - `tick-labels` has been renamed to `ticks`.
 - `vertical` has been renamed to `direction="vertical"`.
+- `step` default value is now 0 instead of 1.
 
 ### v-tabs
 
 - `v-tab-item` has been removed, use `v-window-item`
+
+### v-img
+
+- `contain` has been removed and is now the default behaviour. Use `cover` to fill the entire container.
+
+### v-menu
+
+- `rounded` prop has been removed. Apply a rounded css class to the menu content element instead. e.g. `.rounded-te`
+- `internal-activator` prop has been removed without replacement
+- `offset-y` and `offset-x` props have been removed. Use `offset` prop instead
+- `absolute` variant has been removed. For absolute positioning use css instead
+
+### v-skeleton-loader
+
+- This component hasn't been migrated to vuetify 3
+
+### v-snackbar
+
+- `action` slot was renamed to `actions`

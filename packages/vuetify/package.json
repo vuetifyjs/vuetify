@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.1.6",
+  "version": "3.1.7",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -51,9 +51,22 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": "./lib/framework.mjs",
-    "./styles": "./lib/styles/main.css",
+    ".": {
+      "sass": "./lib/styles/main.sass",
+      "style": "./lib/styles/main.css",
+      "default": "./lib/framework.mjs"
+    },
+    "./styles": {
+      "sass": "./lib/styles/main.sass",
+      "default": "./lib/styles/main.css"
+    },
     "./styles/*": "./lib/styles/*",
+    "./settings": {
+      "sass": "./_settings.scss"
+    },
+    "./tools": {
+      "sass": "./_tools.scss"
+    },
     "./framework": "./lib/framework.mjs",
     "./blueprints": "./lib/blueprints/index.mjs",
     "./blueprints/*": "./lib/blueprints/*.mjs",
@@ -92,6 +105,7 @@
     "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
     "dev:ssr": "cross-env NODE_ENV=development VITE_SSR=true vite-ssr",
+    "dev:prod": "concurrently \"cross-env NODE_ENV=production vite build -w\" \"vite preview\"",
     "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
