@@ -162,7 +162,7 @@ export const VCard = genericComponent<VCardSlots>()({
                 { slots.image?.() ?? <VImg /> }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <LoaderSlot
             name="v-card"
@@ -189,19 +189,19 @@ export const VCard = genericComponent<VCardSlots>()({
                 append: slots.append,
               }}
             </VCardItem>
-          ) }
+          )}
 
           { hasText && (
             <VCardText key="text">
               { slots.text?.() ?? props.text }
             </VCardText>
-          ) }
+          )}
 
           { slots.default?.() }
 
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
-          ) }
+          )}
 
           { genOverlays(isClickable.value, 'v-card') }
         </Tag>

@@ -241,7 +241,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           props: mergeProps({
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
-        }) }
+        })}
 
         { isMounted.value && (
           <Teleport
@@ -275,7 +275,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
-                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
+                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
                 >
                   <div
                     ref={ contentEl }

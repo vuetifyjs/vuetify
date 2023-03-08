@@ -68,7 +68,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { items } = useDataTableItems(props, columns)
 
     const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
-    const { filteredItems } = useFilter<DataTableItem>(props, items, toRef(props, 'search'), { filterKeys })
+    const search = toRef(props, 'search')
+    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
 
     const { sortBy } = createSort(props)
     const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
@@ -100,6 +101,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       page: ref(1),
       itemsPerPage: ref(-1),
       groupBy,
+      search,
     })
 
     provideDefaults({
@@ -139,17 +141,17 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                 </thead>
                 <tbody>
                   <tr style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                    <td colspan={columns.value.length} style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
+                    <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
                   </tr>
 
                   <VDataTableRows
-                    items={visibleItems.value}
+                    items={ visibleItems.value }
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
 
                   <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
-                    <td colspan={columns.value.length} style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>
+                    <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>
                   </tr>
                 </tbody>
               </table>

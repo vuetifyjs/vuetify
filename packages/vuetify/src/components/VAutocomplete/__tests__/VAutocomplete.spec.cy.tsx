@@ -12,8 +12,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         chips
         closableChips
         multiple
@@ -34,8 +34,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        v-model={selectedItems.value}
-        items={items.value}
+        v-model={ selectedItems.value }
+        items={ items.value }
         chips
         multiple
         closableChips
@@ -81,8 +81,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        v-model={selectedItems.value}
-        items={items.value}
+        v-model={ selectedItems.value }
+        items={ items.value }
         returnObject
         chips
         multiple
@@ -105,8 +105,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         readonly
       />
     ))
@@ -132,8 +132,8 @@ describe('VAutocomplete', () => {
     cy.mount(() => (
       <VForm readonly>
         <VAutocomplete
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       </VForm>
@@ -160,8 +160,8 @@ describe('VAutocomplete', () => {
 
       cy.mount(() => (
         <VAutocomplete
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           hideSelected
           multiple
         />

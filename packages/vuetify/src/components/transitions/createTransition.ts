@@ -7,7 +7,7 @@ import type { FunctionalComponent, PropType } from 'vue'
 
 export function createCssTransition (
   name: string,
-  origin = 'top center 0',
+  origin = 'center center',
   mode?: string
 ) {
   return genericComponent()({

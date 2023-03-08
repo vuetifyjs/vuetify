@@ -156,7 +156,7 @@ export const VTab = genericComponent()({
               ]}
               style={ sliderColorStyles.value }
             />
-          ) }
+          )}
         </VBtn>
       )
     })

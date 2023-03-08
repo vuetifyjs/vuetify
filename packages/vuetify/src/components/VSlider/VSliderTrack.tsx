@@ -163,7 +163,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             >
               { computedTicks.value }
             </div>
-          ) }
+          )}
         </div>
       )
     })

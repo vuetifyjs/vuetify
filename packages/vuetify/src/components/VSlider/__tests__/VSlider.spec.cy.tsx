@@ -48,7 +48,7 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider max={20} step={1} />
+          <VSlider max={ 20 } step={ 1 } />
         </CenteredGrid>
       </VApp>
     ))
@@ -118,7 +118,7 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider step={2} min={0} max={10} />
+          <VSlider step={ 2 } min={ 0 } max={ 10 } />
         </CenteredGrid>
       </VApp>
     ))
@@ -139,9 +139,9 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider ticks={[0, 2, 8, 10]} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={[0, 2, 8, 10]} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
 
-          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
         </CenteredGrid>
       </VApp>
     ))
