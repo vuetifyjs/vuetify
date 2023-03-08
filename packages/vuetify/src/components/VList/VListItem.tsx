@@ -250,8 +250,9 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       start: true,
                     },
                   }}
-                  v-slots:default={ () => slots.prepend?.(slotProps.value) }
-                />
+                >
+                  { slots.prepend?.(slotProps.value) }
+                </VDefaultsProvider>
               ) }
             </div>
           ) }
@@ -309,9 +310,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
                       end: true,
                     },
                   }}
-                  v-slots:default={ () => slots.append?.(slotProps.value) }
-                />
-              ) }
+                >
+                  { slots.append?.(slotProps.value) }
+                </VDefaultsProvider>
+              )}
             </div>
           ) }
         </Tag>
