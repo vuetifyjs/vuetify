@@ -233,7 +233,7 @@ export const VChip = genericComponent<VChipSlots>()({
                   { props.prependAvatar && (
                     <VAvatar
                       key="prepend-avatar"
-                      icon={ props.prependAvatar }
+                      image={ props.prependAvatar }
                       start
                     />
                   )}
@@ -283,7 +283,7 @@ export const VChip = genericComponent<VChipSlots>()({
                     <VAvatar
                       key="append-avatar"
                       end
-                      icon={ props.appendAvatar }
+                      image={ props.appendAvatar }
                     />
                   )}
                 </>
