@@ -7,10 +7,10 @@ declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     RouterLink: typeof import('vue-router')['RouterLink']
     RouterView: typeof import('vue-router')['RouterView']
-    VApp: typeof import('@/components/VApp')['VApp']
-    VAutocomplete: typeof import('@/components/VAutocomplete')['VAutocomplete']
-    VBtn: typeof import('@/components/VBtn')['VBtn']
-    VMain: typeof import('@/components/VMain')['VMain']
+    VApp: typeof import('@/components/VApp/index')['VApp']
+    VAutocomplete: typeof import('@/components/VAutocomplete/index')['VAutocomplete']
+    VBtn: typeof import('@/components/VBtn/index')['VBtn']
+    VMain: typeof import('@/components/VMain/index')['VMain']
   }
 }
 

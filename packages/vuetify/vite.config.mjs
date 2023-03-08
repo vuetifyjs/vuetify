@@ -20,7 +20,7 @@ const components = files.filter(file => file.startsWith('src/labs') || !block.so
 const map = new Map(components.flatMap(file => {
   const src = readFileSync(file, { encoding: 'utf8' })
   const matches = src.matchAll(/export const (V\w+)|export { (V\w+) }/gm)
-  return Array.from(matches, m => [m[1] || m[2], file.replace('src/', '@/').replace('/index.ts', '')])
+  return Array.from(matches, m => [m[1] || m[2], file.replace('src/', '@/').replace('.ts', '')])
 }))
 
 export default defineConfig(({ mode }) => {
