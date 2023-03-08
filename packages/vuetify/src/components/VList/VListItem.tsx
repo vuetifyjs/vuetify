@@ -215,11 +215,11 @@ export const VListItem = genericComponent<VListItemSlots>()({
             <div key="prepend" class="v-list-item__prepend">
               { props.prependAvatar && (
                 <VAvatar key="prepend-avatar" density={ props.density } image={ props.prependAvatar } />
-              ) }
+              )}
 
               { props.prependIcon && (
                 <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } />
-              ) }
+              )}
 
               { slots.prepend && (
                 <VDefaultsProvider
@@ -240,22 +240,22 @@ export const VListItem = genericComponent<VListItemSlots>()({
                 >
                   { slots.prepend(slotProps.value) }
                 </VDefaultsProvider>
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div class="v-list-item__content" data-no-activator="">
             { hasTitle && (
               <VListItemTitle key="title">
-                { slots.title?.({ title: props.title }) ?? props.title}
+                { slots.title?.({ title: props.title }) ?? props.title }
               </VListItemTitle>
-            ) }
+            )}
 
             { hasSubtitle && (
               <VListItemSubtitle key="subtitle">
                 { slots.subtitle?.({ subtitle: props.subtitle }) ?? props.subtitle }
               </VListItemSubtitle>
-            ) }
+            )}
 
             { slots.default?.(slotProps.value) }
           </div>

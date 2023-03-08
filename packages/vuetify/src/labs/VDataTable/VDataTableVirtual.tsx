@@ -141,17 +141,17 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                 </thead>
                 <tbody>
                   <tr style={{ height: convertToUnit(paddingTop.value), border: 0 }}>
-                    <td colspan={columns.value.length} style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
+                    <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingTop.value), border: 0 }}></td>
                   </tr>
 
                   <VDataTableRows
-                    items={visibleItems.value}
+                    items={ visibleItems.value }
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
 
                   <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
-                    <td colspan={columns.value.length} style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>
+                    <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>
                   </tr>
                 </tbody>
               </table>

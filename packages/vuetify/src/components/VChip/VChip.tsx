@@ -185,7 +185,7 @@ export const VChip = genericComponent<VChipSlots>()({
           tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
-          v-ripple={ [isClickable.value && props.ripple, null] }
+          v-ripple={[isClickable.value && props.ripple, null]}
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
@@ -205,7 +205,7 @@ export const VChip = genericComponent<VChipSlots>()({
                 </div>
               </VExpandXTransition>
             </VDefaultsProvider>
-          ) }
+          )}
 
           { hasPrepend && (
             <VDefaultsProvider
@@ -230,7 +230,7 @@ export const VChip = genericComponent<VChipSlots>()({
                 : undefined
               }
             </VDefaultsProvider>
-          ) }
+          )}
 
           { slots.default?.({
             isSelected: group?.isSelected.value,
@@ -264,7 +264,7 @@ export const VChip = genericComponent<VChipSlots>()({
                 : undefined
               }
             </VDefaultsProvider>
-          ) }
+          )}
 
           { hasClose && (
             <VDefaultsProvider
@@ -284,7 +284,7 @@ export const VChip = genericComponent<VChipSlots>()({
                 { slots.close ? slots.close() : (<VIcon />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
         </Tag>
       )
     }

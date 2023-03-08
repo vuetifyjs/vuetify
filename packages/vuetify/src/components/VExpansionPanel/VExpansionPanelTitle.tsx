@@ -96,7 +96,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
           </span>
-        ) }
+        )}
       </button>
     ))
 

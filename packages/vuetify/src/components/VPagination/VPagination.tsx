@@ -320,15 +320,15 @@ export const VPagination = genericComponent<VPaginationSlots>()({
           { props.showFirstLastPage && (
             <li key="first" class="v-pagination__first" data-test="v-pagination-first">
               { slots.first ? slots.first(controls.value.first) : (
-                <VBtn _as="VPaginationBtn" {...controls.value.first} />
-              ) }
+                <VBtn _as="VPaginationBtn" { ...controls.value.first } />
+              )}
             </li>
-          ) }
+          )}
 
           <li key="prev" class="v-pagination__prev" data-test="v-pagination-prev">
             { slots.prev ? slots.prev(controls.value.prev) : (
-              <VBtn _as="VPaginationBtn" {...controls.value.prev} />
-            ) }
+              <VBtn _as="VPaginationBtn" { ...controls.value.prev } />
+            )}
           </li>
 
           { items.value.map((item, index) => (
@@ -343,10 +343,10 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               data-test="v-pagination-item"
             >
               { slots.item ? slots.item(item) : (
-                <VBtn _as="VPaginationBtn" {...item.props}>{ item.page }</VBtn>
-              ) }
+                <VBtn _as="VPaginationBtn" { ...item.props }>{ item.page }</VBtn>
+              )}
             </li>
-          )) }
+          ))}
 
           <li
             key="next"
@@ -354,8 +354,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
             data-test="v-pagination-next"
           >
             { slots.next ? slots.next(controls.value.next) : (
-              <VBtn _as="VPaginationBtn" {...controls.value.next} />
-            ) }
+              <VBtn _as="VPaginationBtn" { ...controls.value.next } />
+            )}
           </li>
 
           { props.showFirstLastPage && (
@@ -365,10 +365,10 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               data-test="v-pagination-last"
             >
               { slots.last ? slots.last(controls.value.last) : (
-                <VBtn _as="VPaginationBtn" {...controls.value.last} />
-              ) }
+                <VBtn _as="VPaginationBtn" { ...controls.value.last } />
+              )}
             </li>
-          ) }
+          )}
         </ul>
       </props.tag>
     ))
