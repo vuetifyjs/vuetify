@@ -176,7 +176,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               ]}
               style={ textColorStyles.value }
             />
-          ) }
+          )}
 
           { hasPrepend && (
             <div key="prepend" class="v-alert__prepend">
@@ -202,7 +202,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
                 />
               ) }
             </div>
-          ) }
+          )}
 
           <div class="v-alert__content">
             { hasTitle && (
@@ -220,7 +220,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
             <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
-          ) }
+          )}
 
           { hasClose && (
             <div key="close" class="v-alert__close">
@@ -242,9 +242,10 @@ export const VAlert = genericComponent<VAlertSlots>()({
                       variant: 'text',
                     },
                   }}
-                  v-slots:default={ () => slots.close?.({ props: closeProps.value }) }
-                />
-              ) }
+                >
+                  { slots.close?.({ props: closeProps.value }) }
+                </VDefaultsProvider>
+              )}
             </div>
           ) }
         </props.tag>
