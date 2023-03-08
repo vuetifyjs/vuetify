@@ -79,8 +79,8 @@
       isFocused: false,
       menuModel: false,
       searchClient: algoliasearch(
-        'BH4D9OD16A', // docsearch app ID
-        '259d4615e283a1bbaa3313b4eff7881c' // vuetify API key
+        'NHT6C0IV19', // docsearch app ID
+        'ffa344297924c76b0f4155384aff7ef2' // vuetify API key
       ),
       searchString: '',
     }),
