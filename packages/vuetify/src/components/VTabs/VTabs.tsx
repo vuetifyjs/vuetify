@@ -121,12 +121,12 @@ export const VTabs = genericComponent()({
             key="tabs-defaults"
             defaults={{
               VTab: {
-                color: toRef(props, 'color'),
-                direction: toRef(props, 'direction'),
-                fixed: toRef(props, 'fixedTabs'),
-                hideSlider: toRef(props, 'hideSlider'),
-                sliderColor: toRef(props, 'sliderColor'),
-                stacked: toRef(props, 'stacked'),
+                color: props.color,
+                direction: props.direction,
+                fixed: props.fixedTabs,
+                hideSlider: props.hideSlider,
+                sliderColor: props.sliderColor,
+                stacked: props.stacked,
               },
             }}
             v-slots:default={ slots.default }
