@@ -5,18 +5,38 @@
     max-width="360"
   >
     <promoted-script
-      id="carbonads"
+      id="carbonads-script"
       script-id="_carbonads_js"
-      src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
+      src="//cdn.carbonads.com/carbon.js?serve=CWYDC27W&placement=v3vuetifyjscom"
       @script:error="error = true"
     />
   </promoted-base>
 </template>
 
-<script setup>
+<script setup lang="ts">
   // Components
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
+
+  // Composables
+  import { useRoute } from 'vue-router'
+
+  // Utilities
+  import { ref, watch } from 'vue'
+
+  // Globals
+  import { IN_BROWSER } from '@/util/globals'
+
+  const route = useRoute()
+  const error = ref(false)
+
+  function refresh () {
+    if (!IN_BROWSER || typeof (window as any)._carbonads === 'undefined') return
+
+    (window as any)._carbonads.refresh()
+  }
+
+  watch(route, refresh)
 </script>
 
 <style lang="sass">
