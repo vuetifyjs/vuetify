@@ -207,4 +207,6 @@ app.use(vuetify)
 
 ### v-expansion-panel
 
-- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title` and `v-expansion-panel-content` into `v-expansion-panel-text` also you can use new props in `v-expansion-panel` `text` and `title`.
+- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
+- `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
+- `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
