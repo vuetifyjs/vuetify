@@ -50,16 +50,14 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           { hasPrepend && (
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (
-                <>
-                  { hasPrependMedia && (
-                    <VAvatar
-                      key="prepend-avatar"
-                      density={ props.density }
-                      icon={ props.prependIcon }
-                      image={ props.prependAvatar }
-                    />
-                  ) }
-                </>
+                hasPrependMedia && (
+                  <VAvatar
+                    key="prepend-avatar"
+                    density={ props.density }
+                    icon={ props.prependIcon }
+                    image={ props.prependAvatar }
+                  />
+                )
               ) : (
                 <VDefaultsProvider
                   key="prepend-defaults"
@@ -73,9 +71,9 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                   }}
                   v-slots:default={ slots.prepend }
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div class="v-card-item__content">
             { hasTitle && (
@@ -96,16 +94,14 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           { hasAppend && (
             <div key="append" class="v-card-item__append">
               { !slots.append ? (
-                <>
-                  { hasAppendMedia && (
-                    <VAvatar
-                      key="append-avatar"
-                      density={ props.density }
-                      icon={ props.appendIcon }
-                      image={ props.appendAvatar }
-                    />
-                  ) }
-                </>
+                hasAppendMedia && (
+                  <VAvatar
+                    key="append-avatar"
+                    density={ props.density }
+                    icon={ props.appendIcon }
+                    image={ props.appendAvatar }
+                  />
+                )
               ) : (
                 <VDefaultsProvider
                   key="append-defaults"
@@ -119,9 +115,9 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                   }}
                   v-slots:default={ slots.append }
                 />
-              ) }
+              )}
            </div>
-          ) }
+          )}
         </div>
       )
     })
