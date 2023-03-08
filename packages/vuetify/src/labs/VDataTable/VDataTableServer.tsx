@@ -126,7 +126,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                     color={ props.color }
                     v-slots={ slots }
                   />
-                ) }
+                )}
               </thead>
               { slots.thead?.() }
               <tbody class="v-data-table__tbody" role="rowgroup">
@@ -136,7 +136,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                     onClick:row={ (event, value) => emit('click:row', event, value) }
                     v-slots={ slots }
                   />
-                ) }
+                )}
               </tbody>
               { slots.tbody?.() }
               { slots.tfoot?.() }

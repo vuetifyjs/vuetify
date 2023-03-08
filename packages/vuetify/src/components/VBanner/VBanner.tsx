@@ -121,14 +121,14 @@ export const VBanner = genericComponent<VBannerSlots>()({
                 }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <div class="v-banner__content">
             { hasText && (
               <VBannerText key="text">
                 { slots.text ? slots.text() : props.text }
               </VBannerText>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
@@ -137,7 +137,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
             <VBannerActions>
               { slots.actions() }
             </VBannerActions>
-          ) }
+          )}
         </props.tag>
       )
     })

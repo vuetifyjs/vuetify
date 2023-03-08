@@ -32,7 +32,7 @@ describe('VIcon', () => {
           defaultSet: 'mdi',
           sets: {
             foo: {
-              component: props => <VClassIcon {...props} />,
+              component: props => <VClassIcon { ...props } />,
             },
           },
         },
@@ -71,7 +71,7 @@ describe('VIcon', () => {
           defaultSet: 'mdi',
           sets: {
             foo: {
-              component: props => <VClassIcon {...props} />,
+              component: props => <VClassIcon { ...props } />,
             },
           },
         },

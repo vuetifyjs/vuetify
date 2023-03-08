@@ -228,7 +228,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                           <span class="v-text-field__prefix">
                             { props.prefix }
                           </span>
-                        ) }
+                        )}
 
                         { slots.default ? (
                           <div
@@ -238,13 +238,13 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                             { slots.default() }
                             { inputNode }
                           </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass }) }
+                        ) : cloneVNode(inputNode, { class: fieldClass })}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
                             { props.suffix }
                           </span>
-                        ) }
+                        )}
                       </>
                     )
                   },
@@ -266,7 +266,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

@@ -123,7 +123,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
           />
           { props.showCurrentPage && (
             <span key="page" class="v-data-table-footer__page">{ page.value }</span>
-          ) }
+          )}
           <VBtn
             icon={ props.nextIcon }
             variant="plain"
