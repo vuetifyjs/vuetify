@@ -6,6 +6,7 @@ import { VMessages } from '@/components/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
@@ -50,6 +51,7 @@ export const makeVInputProps = propsFactory({
   'onClick:prepend': EventProp,
   'onClick:append': EventProp,
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeValidationProps(),
 }, 'v-input')
@@ -123,10 +125,12 @@ export const VInput = genericComponent<VInputSlots>()({
       return (
         <div class={[
           'v-input',
+          props.class,
           `v-input--${props.direction}`,
           densityClasses.value,
           validationClasses.value,
         ]}
+        style={ props.style }
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">

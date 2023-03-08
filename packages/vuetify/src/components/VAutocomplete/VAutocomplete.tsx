@@ -12,7 +12,6 @@ import { VTextField } from '@/components/VTextField'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
@@ -89,7 +88,6 @@ export const VAutocomplete = genericComponent<new <
     // autoSelectFirst: Boolean,
     search: String,
 
-    ...makeComponentProps(),
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({

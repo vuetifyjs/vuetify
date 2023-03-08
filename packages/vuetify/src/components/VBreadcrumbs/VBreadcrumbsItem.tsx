@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
@@ -18,6 +19,7 @@ export const VBreadcrumbsItem = genericComponent()({
     disabled: Boolean,
     title: String,
 
+    ...makeComponentProps(),
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
   },
@@ -36,6 +38,7 @@ export const VBreadcrumbsItem = genericComponent()({
         <Tag
           class={[
             'v-breadcrumbs-item',
+            props.class,
             {
               'v-breadcrumbs-item--active': isActive.value,
               'v-breadcrumbs-item--disabled': props.disabled,
@@ -45,6 +48,7 @@ export const VBreadcrumbsItem = genericComponent()({
             textColorClasses.value,
           ]}
           style={[
+            props.style,
             textColorStyles.value,
           ]}
           href={ link.href.value }
