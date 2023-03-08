@@ -454,46 +454,41 @@ export const VCombobox = genericComponent<new <
                       style={ index === selectionIndex.value ? textColorStyles.value : {} }
                     >
                       { hasChips ? (
-                        <>
-                          { !slots.chip ? (
-                            <VChip
-                              key="chip"
-                              closable={ props.closableChips }
-                              size="small"
-                              text={ item.title }
-                              { ...slotProps }
-                            />
-                          ) : (
-                            <VDefaultsProvider
-                              key="chip-defaults"
-                              defaults={{
-                                VChip: {
-                                  closable: props.closableChips,
-                                  size: 'small',
-                                  text: item.title,
-                                },
-                              }}
-                              v-slots:default={ () => slots.chip?.({
-                                item,
-                                index,
-                                props: slotProps,
-                              }) }
-                            />
-                          ) }
-                        </>
+                        !slots.chip ? (
+                          <VChip
+                            key="chip"
+                            closable={ props.closableChips }
+                            size="small"
+                            text={ item.title }
+                            { ...slotProps }
+                          />
+                        ) : (
+                          <VDefaultsProvider
+                            key="chip-defaults"
+                            defaults={{
+                              VChip: {
+                                closable: props.closableChips,
+                                size: 'small',
+                                text: item.title,
+                              },
+                            }}
+                          >
+                            { slots.chip?.({ item, index, props: slotProps }) }
+                          </VDefaultsProvider>
+                        )
                       ) : (
                         slots.selection?.({ item, index }) ?? (
                           <span class="v-combobox__selection-text">
                             { item.title }
                             { props.multiple && (index < selections.value.length - 1) && (
                               <span class="v-combobox__selection-comma">,</span>
-                            ) }
+                            )}
                           </span>
                         )
-                      ) }
+                      )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}
