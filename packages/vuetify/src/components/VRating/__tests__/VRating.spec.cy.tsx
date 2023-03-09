@@ -176,4 +176,34 @@ describe('VRating', () => {
       .emitted(VRating, 'update:modelValue')
       .should('deep.equal', [[1], [3], [2]])
   })
+
+  it('should show zero rating', () => {
+    cy.mount(() => (
+      <Application>
+        <VRating showZero clearable zeroEmptyValue={false}>
+          {{
+            item: ({ rating, value }) => (
+              <VBtn
+                variant="tonal"
+                class="mx-1 px-1"
+                min-width="36"
+                max-width="36"
+                color={value === rating ? 'primary' : undefined}
+              >{ value }</VBtn>
+            ),
+          }}
+        </VRating>
+      </Application>
+    ))
+
+    cy.get('.v-btn')
+      .eq(1)
+      .click()
+      .get('.v-btn')
+      .eq(0)
+      .click()
+      .click()
+      .emitted(VRating, 'update:modelValue')
+      .should('deep.equal', [[1], [0], [undefined]])
+  })
 })
