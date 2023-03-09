@@ -2,6 +2,7 @@
 import './VColorPickerEdit.sass'
 
 // Components
+import { makeComponentProps } from '@/composables/component'
 import { VBtn } from '@/components/VBtn'
 
 // Utilities
@@ -40,6 +41,8 @@ export const VColorPickerEdit = defineComponent({
       default: () => Object.keys(modes),
       validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
     },
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -78,7 +81,11 @@ export const VColorPickerEdit = defineComponent({
 
     useRender(() => (
       <div
-        class="v-color-picker-edit"
+        class={[
+          'v-color-picker-edit',
+          props.class,
+        ]}
+        style={ props.style }
       >
         { inputs.value?.map(props => (
           <VColorPickerInput {...props} />

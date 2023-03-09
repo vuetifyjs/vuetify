@@ -12,6 +12,7 @@ import { VIcon } from '@/components/VIcon'
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -86,6 +87,7 @@ export const VChip = genericComponent<VChipSlots>()({
     onClick: EventProp,
     onClickOnce: EventProp,
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -159,6 +161,7 @@ export const VChip = genericComponent<VChipSlots>()({
         <Tag
           class={[
             'v-chip',
+            props.class,
             {
               'v-chip--disabled': props.disabled,
               'v-chip--label': props.label,
@@ -177,6 +180,7 @@ export const VChip = genericComponent<VChipSlots>()({
             group?.selectedClass.value,
           ]}
           style={[
+            props.style,
             hasColor ? colorStyles.value : undefined,
           ]}
           disabled={ props.disabled || undefined }

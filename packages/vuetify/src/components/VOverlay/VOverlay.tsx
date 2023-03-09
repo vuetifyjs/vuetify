@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
@@ -101,6 +102,7 @@ export const makeVOverlayProps = propsFactory({
     default: 2000,
   },
 
+  ...makeComponentProps(),
   ...makeActivatorProps(),
   ...makeDimensionProps(),
   ...makeLazyProps(),
@@ -252,6 +254,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               <div
                 class={[
                   'v-overlay',
+                  props.class,
                   {
                     'v-overlay--absolute': props.absolute || props.contained,
                     'v-overlay--active': isActive.value,
@@ -260,7 +263,11 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   themeClasses.value,
                   rtlClasses.value,
                 ]}
-                style={[stackStyles.value, { top: convertToUnit(top.value) }]}
+                style={[
+                  props.style ?? {},
+                  stackStyles.value,
+                  { top: convertToUnit(top.value) },
+                ]}
                 ref={ root }
                 { ...scopeId }
                 { ...attrs }
