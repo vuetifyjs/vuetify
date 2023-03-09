@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
@@ -83,6 +84,7 @@ export const VRating = genericComponent<VRatingSlots>()({
     },
     ripple: Boolean,
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
@@ -209,12 +211,14 @@ export const VRating = genericComponent<VRatingSlots>()({
         <props.tag
           class={[
             'v-rating',
+            props.class,
             {
               'v-rating--hover': props.hover,
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
           ]}
+          style={ props.style }
         >
           <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
 

@@ -2,6 +2,7 @@
 import './VMain.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
@@ -15,6 +16,7 @@ export const VMain = genericComponent()({
   props: {
     scrollable: Boolean,
 
+    ...makeComponentProps(),
     ...makeTagProps({ tag: 'main' }),
   },
 
@@ -26,9 +28,11 @@ export const VMain = genericComponent()({
       <props.tag
         class={[
           'v-main',
+          props.class,
           { 'v-main--scrollable': props.scrollable },
         ]}
         style={[
+          props.style,
           mainStyles.value,
           ssrBootStyles.value,
         ]}

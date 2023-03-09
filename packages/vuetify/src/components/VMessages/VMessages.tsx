@@ -5,6 +5,7 @@ import './VMessages.sass'
 import { VSlideYTransition } from '@/components/transitions'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useTextColor } from '@/composables/color'
 
@@ -34,6 +35,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
       default: () => ([]),
     },
 
+    ...makeComponentProps(),
     ...makeTransitionProps({
       transition: {
         component: VSlideYTransition,
@@ -53,9 +55,13 @@ export const VMessages = genericComponent<VMessagesSlots>()({
         tag="div"
         class={[
           'v-messages',
+          props.class,
           textColorClasses.value,
         ]}
-        style={ textColorStyles.value }
+        style={[
+          props.style,
+          textColorStyles.value,
+        ]}
         role="alert"
         aria-live="polite"
       >

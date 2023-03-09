@@ -9,6 +9,7 @@ import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -24,6 +25,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
   props: {
+    ...makeComponentProps(),
     ...makeFocusProps(),
     ...makeVInputProps(),
     ...makeSliderProps(),
@@ -117,6 +119,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
           class={[
             'v-slider',
             'v-range-slider',
+            props.class,
             {
               'v-slider--has-labels': !!slots['tick-label'] || hasLabels.value,
               'v-slider--focused': isFocused.value,
@@ -124,6 +127,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--disabled': props.disabled,
             },
           ]}
+          style={ props.style }
           ref={ inputRef }
           { ...inputProps }
           focused={ isFocused.value }

@@ -2,6 +2,7 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -36,6 +37,7 @@ export const VProgressCircular = genericComponent()({
       default: 4,
     },
 
+    ...makeComponentProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
     ...makeThemeProps(),
@@ -78,6 +80,7 @@ export const VProgressCircular = genericComponent()({
         ref={ root }
         class={[
           'v-progress-circular',
+          props.class,
           {
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
@@ -88,6 +91,7 @@ export const VProgressCircular = genericComponent()({
           textColorClasses.value,
         ]}
         style={[
+          props.style,
           sizeStyles.value,
           textColorStyles.value,
         ]}

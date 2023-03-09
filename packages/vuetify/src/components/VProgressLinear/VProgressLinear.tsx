@@ -2,6 +2,7 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -54,6 +55,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     striped: Boolean,
     roundedBar: Boolean,
 
+    ...makeComponentProps(),
     ...makeLocationProps({ location: 'top' } as const),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -101,6 +103,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         ref={ intersectionRef }
         class={[
           'v-progress-linear',
+          props.class,
           {
             'v-progress-linear--absolute': props.absolute,
             'v-progress-linear--active': props.active && isIntersecting.value,
@@ -112,13 +115,16 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           roundedClasses.value,
           themeClasses.value,
         ]}
-        style={{
-          bottom: props.location === 'bottom' ? 0 : undefined,
-          top: props.location === 'top' ? 0 : undefined,
-          height: props.active ? convertToUnit(height.value) : 0,
-          '--v-progress-linear-height': convertToUnit(height.value),
-          ...locationStyles.value,
-        }}
+        style={[
+          props.style,
+          {
+            bottom: props.location === 'bottom' ? 0 : undefined,
+            top: props.location === 'top' ? 0 : undefined,
+            height: props.active ? convertToUnit(height.value) : 0,
+            '--v-progress-linear-height': convertToUnit(height.value),
+            ...locationStyles.value,
+          },
+        ]}
         role="progressbar"
         aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"

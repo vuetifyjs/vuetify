@@ -3,6 +3,7 @@ import './VSheet.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLocationProps, useLocation } from '@/composables/location'
@@ -22,6 +23,7 @@ import type { ExtractPropTypes } from 'vue'
 export const makeVSheetProps = propsFactory({
   color: String,
 
+  ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -53,6 +55,7 @@ export const VSheet = genericComponent()({
       <props.tag
         class={[
           'v-sheet',
+          props.class,
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
@@ -61,6 +64,7 @@ export const VSheet = genericComponent()({
           roundedClasses.value,
         ]}
         style={[
+          props.style,
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
