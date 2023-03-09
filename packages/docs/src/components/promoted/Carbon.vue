@@ -36,7 +36,7 @@
     (window as any)._carbonads.refresh()
   }
 
-  watch(route, refresh)
+  watch(() => route.name, refresh)
 </script>
 
 <style lang="sass">
