@@ -5,6 +5,7 @@ import { VExpandTransition } from '@/components/transitions'
 // Composables
 import { useList } from './list'
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 
@@ -47,6 +48,7 @@ export const makeVListGroupProps = propsFactory({
   subgroup: Boolean,
   value: null,
 
+  ...makeComponentProps(),
   ...makeTagProps(),
 }, 'v-list-group')
 
@@ -80,6 +82,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       <props.tag
         class={[
           'v-list-group',
+          props.class,
           {
             'v-list-group--prepend': list?.hasPrepend.value,
             'v-list-group--fluid': props.fluid,
@@ -87,6 +90,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
             'v-list-group--open': isOpen.value,
           },
         ]}
+        style={ props.style }
       >
         { slots.activator && (
           <VDefaultsProvider

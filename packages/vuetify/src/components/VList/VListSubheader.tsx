@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
@@ -15,6 +16,7 @@ export const VListSubheader = genericComponent()({
     sticky: Boolean,
     title: String,
 
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -28,13 +30,17 @@ export const VListSubheader = genericComponent()({
         <props.tag
           class={[
             'v-list-subheader',
+            props.class,
             {
               'v-list-subheader--inset': props.inset,
               'v-list-subheader--sticky': props.sticky,
             },
             textColorClasses.value,
           ]}
-          style={{ textColorStyles }}
+          style={[
+            props.style,
+            { textColorStyles },
+          ]}
         >
           { hasText && (
             <div class="v-list-subheader__text">

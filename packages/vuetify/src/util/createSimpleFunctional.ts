@@ -21,9 +21,10 @@ export function createSimpleFunctional (
     setup (props, { slots }) {
       return () => {
         return h(props.tag, {
-        class: [klass, props.class],
-        style: props.style
-      }, slots.default?.())}
+          class: [klass, props.class],
+          style: props.style,
+        }, slots.default?.())
+      }
     },
   })
 }

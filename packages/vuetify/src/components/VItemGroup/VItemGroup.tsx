@@ -2,6 +2,7 @@
 import './VItemGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -15,6 +16,7 @@ export const VItemGroup = genericComponent()({
   name: 'VItemGroup',
 
   props: {
+    ...makeComponentProps(),
     ...makeGroupProps({
       selectedClass: 'v-item--selected',
     }),
@@ -34,8 +36,10 @@ export const VItemGroup = genericComponent()({
       <props.tag
         class={[
           'v-item-group',
+          props.class,
           themeClasses.value,
         ]}
+        style={ props.style }
       >
         { slots.default?.({
           isSelected,

@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -11,6 +12,7 @@ export const VListItemMedia = genericComponent()({
     start: Boolean,
     end: Boolean,
 
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -20,11 +22,13 @@ export const VListItemMedia = genericComponent()({
         <props.tag
           class={[
             'v-list-item-media',
+            props.class,
             {
               'v-list-item-media--start': props.start,
               'v-list-item-media--end': props.end,
             },
           ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )
