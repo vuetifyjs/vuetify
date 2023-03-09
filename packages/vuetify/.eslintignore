@@ -1,5 +1,4 @@
 /build/
-/dev/*.d.ts
 
 # Built files
 /es5/
