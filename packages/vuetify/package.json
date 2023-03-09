@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.1.7",
+  "version": "3.1.8",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -51,9 +51,22 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": "./lib/framework.mjs",
-    "./styles": "./lib/styles/main.css",
+    ".": {
+      "sass": "./lib/styles/main.sass",
+      "style": "./lib/styles/main.css",
+      "default": "./lib/framework.mjs"
+    },
+    "./styles": {
+      "sass": "./lib/styles/main.sass",
+      "default": "./lib/styles/main.css"
+    },
     "./styles/*": "./lib/styles/*",
+    "./settings": {
+      "sass": "./_settings.scss"
+    },
+    "./tools": {
+      "sass": "./_tools.scss"
+    },
     "./framework": "./lib/framework.mjs",
     "./blueprints": "./lib/blueprints/index.mjs",
     "./blueprints/*": "./lib/blueprints/*.mjs",

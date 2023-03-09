@@ -31,8 +31,8 @@ describe('VListItem', () => {
 
         return () => (
           <CenteredGrid width="200px">
-            <VListItem title="foo" subtitle="bar" active-color="success" active={model.value} onClick={onClick} />
-            <VListItem title="foo" subtitle="bar" active-color="success" active={!model.value} onClick={onClick} />
+            <VListItem title="foo" subtitle="bar" active-color="success" active={ model.value } onClick={ onClick } />
+            <VListItem title="foo" subtitle="bar" active-color="success" active={ !model.value } onClick={ onClick } />
           </CenteredGrid>
         )
       },

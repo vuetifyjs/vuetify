@@ -132,7 +132,7 @@ describe('VTabs', () => {
     const model = ref('B')
     cy.mount(({ show = true }: { show?: boolean }) => (
       <div v-show={ show }>
-        <VTabs modelValue={model.value} onUpdate:modelValue={v => model.value = v as string}>
+        <VTabs modelValue={ model.value } onUpdate:modelValue={ v => model.value = v as string }>
           <VTab value="A">A</VTab>
           <VTab value="B">B</VTab>
           <VTab value="C">C</VTab>

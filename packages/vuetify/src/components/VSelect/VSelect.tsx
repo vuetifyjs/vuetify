@@ -268,7 +268,7 @@ export const VSelect = genericComponent<new <
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      )) }
+                      ))}
 
                       { slots['prepend-item']?.() }
 
@@ -298,7 +298,7 @@ export const VSelect = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) }
+                  )}
                 </VMenu>
 
                 { selections.value.map((item, index) => {
@@ -340,13 +340,13 @@ export const VSelect = genericComponent<new <
                               { item.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-select__selection-comma">,</span>
-                              ) }
+                              )}
                             </span>
                           )
                       )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}

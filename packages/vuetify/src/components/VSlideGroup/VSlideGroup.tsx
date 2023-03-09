@@ -364,9 +364,9 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         <div
           key="container"
@@ -402,9 +402,9 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

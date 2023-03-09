@@ -35,7 +35,7 @@ export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({
 
               { slots.default?.() }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })
