@@ -123,14 +123,15 @@ export const VInput = genericComponent<VInputSlots>()({
       )
 
       return (
-        <div class={[
-          'v-input',
-          props.class,
-          `v-input--${props.direction}`,
-          densityClasses.value,
-          validationClasses.value,
-        ]}
-        style={ props.style }
+        <div
+          class={[
+            'v-input',
+            props.class,
+            `v-input--${props.direction}`,
+            densityClasses.value,
+            validationClasses.value,
+          ]}
+          style={ props.style }
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">

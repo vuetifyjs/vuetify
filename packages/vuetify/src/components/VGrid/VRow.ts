@@ -2,6 +2,7 @@
 import './VGrid.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -100,6 +101,7 @@ export const VRow = genericComponent()({
     },
 
     ...alignContentProps,
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -129,7 +131,8 @@ export const VRow = genericComponent()({
     })
 
     return () => h(props.tag, {
-      class: ['v-row', classes.value],
+      class: ['v-row', props.class, classes.value],
+      style: props.style,
     }, slots.default?.())
   },
 })
