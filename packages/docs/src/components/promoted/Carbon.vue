@@ -1,7 +1,8 @@
 <template>
   <promoted-base
     border
-    min-height="230"
+    class="mb-4"
+    min-height="116"
     max-width="360"
   >
     <promoted-script
@@ -18,48 +19,34 @@
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
-  // Composables
-  import { useRoute } from 'vue-router'
-
   // Utilities
-  import { ref, watch } from 'vue'
+  import { ref } from 'vue'
 
-  // Globals
-  import { IN_BROWSER } from '@/util/globals'
-
-  const route = useRoute()
   const error = ref(false)
-
-  function refresh () {
-    if (!IN_BROWSER || typeof (window as any)._carbonads === 'undefined') return
-
-    (window as any)._carbonads.refresh()
-  }
-
-  watch(() => route.name, refresh)
 </script>
 
 <style lang="sass">
-  #carbonads
+  #carbonads,
+  #carbonads_1,
+  #carbonads_2
     width: 100%
 
     > span
       display: flex
       position: relative
-      flex-wrap: wrap
 
     .carbon-wrap
       display: flex
-      flex-wrap: wrap
 
     .carbon-text,
     .carbon-poweredby
       max-width: 200px
+      padding: 0 0 0 16px
       text-decoration: none
 
     .carbon-img
       display: inline-flex
-      margin: 1rem auto
+      margin: 0.5rem
 
       img
         border-radius: 4px 0 0 4px
@@ -67,20 +54,16 @@
 
     .carbon-text
       color: inherit
-      font-size: 0.70rem
-      padding: 0 0.475rem
-      margin: 0 auto
-      text-align: center
+      font-size: 0.75rem
+      padding: 0.475rem
 
     .carbon-poweredby
-      color: inherit
+      bottom: 0.5rem
       font-size: 0.625rem
       font-weight: 400
-      letter-spacing: 0.075rem
-      margin: 0 auto
-      opacity: .56
-      padding: 8px 0 16px 0
-      text-align: center
+      letter-spacing: 0.09375rem
+      position: absolute
+      right: 0.5rem
       text-transform: uppercase
 
   .v-app-ad.theme--light
