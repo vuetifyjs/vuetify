@@ -14,7 +14,6 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeComponentProps } from '@/composables/component'
 import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
@@ -97,7 +96,6 @@ export const VSelect = genericComponent<new <
   name: 'VSelect',
 
   props: {
-    ...makeComponentProps(),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
       modelValue: null,
@@ -230,7 +228,6 @@ export const VSelect = genericComponent<new <
           dirty={ model.value.length > 0 }
           class={[
             'v-select',
-            props.class,
             {
               'v-select--active-menu': menu.value,
               'v-select--chips': !!props.chips,
@@ -238,7 +235,6 @@ export const VSelect = genericComponent<new <
               'v-select--selected': model.value.length,
             },
           ]}
-          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly
           onClick:clear={ onClear }

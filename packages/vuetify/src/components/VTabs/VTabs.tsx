@@ -19,6 +19,7 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
+import { makeComponentProps } from '@/composables/component'
 
 export type TabItem = string | Record<string, any>
 
@@ -65,6 +66,7 @@ export const VTabs = genericComponent()({
       default: 'force',
     },
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeTagProps(),
   },
@@ -95,6 +97,7 @@ export const VTabs = genericComponent()({
         v-model={ model.value }
         class={[
           'v-tabs',
+          props.class,
           `v-tabs--${props.direction}`,
           `v-tabs--align-tabs-${props.alignTabs}`,
           {
@@ -106,6 +109,7 @@ export const VTabs = genericComponent()({
           backgroundColorClasses.value,
         ]}
         style={[
+          props.style,
           { '--v-tabs-height': convertToUnit(props.height) },
           backgroundColorStyles.value,
         ]}

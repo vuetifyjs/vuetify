@@ -2,6 +2,7 @@
 import './VSystemBar.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -22,6 +23,7 @@ export const VSystemBar = genericComponent()({
     height: [Number, String],
     window: Boolean,
 
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -50,6 +52,7 @@ export const VSystemBar = genericComponent()({
       <props.tag
         class={[
           'v-system-bar',
+          props.class,
           { 'v-system-bar--window': props.window },
           themeClasses.value,
           backgroundColorClasses.value,
@@ -57,6 +60,7 @@ export const VSystemBar = genericComponent()({
           roundedClasses.value,
         ]}
         style={[
+          props.style,
           backgroundColorStyles.value,
           layoutItemStyles.value,
           ssrBootStyles.value,

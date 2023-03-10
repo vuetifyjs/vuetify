@@ -32,8 +32,8 @@ export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({
       return (
         <props.tag
           class={[props.class, 'v-toolbar-title']}
-          style={props.style} 
-          >
+          style={ props.style }
+        >
           { hasText && (
             <div class="v-toolbar-title__placeholder">
               { slots.text ? slots.text() : props.text }

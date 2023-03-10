@@ -52,7 +52,7 @@ export const makeVToolbarProps = propsFactory({
   image: String,
   title: String,
 
-  ...makeComponentProps(), 
+  ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
