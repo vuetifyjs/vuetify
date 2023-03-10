@@ -24,7 +24,12 @@ The navigation drawer is primarily used to house links to the pages in your appl
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-navigation-drawer](/api/v-navigation-drawer/) | Primary Component |
+| [v-list-item](/api/v-list-item/) | Component used to create navigation links |
+
+<api-inline hide-links />
 
 ## Caveats
 

@@ -24,13 +24,12 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-slide-group](/api/v-slide-group/) | Primary Component |
+| [v-slide-item](/api/v-slide-item/) | Sub-component used for modifying the `v-slide-group` state |
 
-<!-- ## Sub-components
-
-### v-slide-item
-
-v-slide-item description -->
+<api-inline hide-links />
 
 ## Examples
 

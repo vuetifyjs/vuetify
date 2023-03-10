@@ -24,7 +24,11 @@ The `v-hover` component provides a simple interface for handling hover states fo
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-hover](/api/v-hover/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -28,4 +28,12 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
 </template>
 ```
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-no-ssr](/api/v-no-ssr/) | Primary Component |
+
+<api-inline hide-links />
+
 <entry />

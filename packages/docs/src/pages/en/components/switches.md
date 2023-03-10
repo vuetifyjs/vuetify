@@ -24,7 +24,11 @@ A `v-switch` in its simplest form provides a toggle between 2 values.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-switch](/api/v-switch/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

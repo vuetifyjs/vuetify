@@ -24,7 +24,11 @@ The autocomplete component extends `v-select` and adds the ability to filter ite
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-autocomplete](/api/v-autocomplete/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Caveats
 

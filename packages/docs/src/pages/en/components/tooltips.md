@@ -24,7 +24,11 @@ Tooltips can wrap any element.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tooltip](/api/v-tooltip/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

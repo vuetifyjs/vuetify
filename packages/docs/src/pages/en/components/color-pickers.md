@@ -22,7 +22,11 @@ The `v-color-picker` allows you to select a color using a variety of input metho
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-color-picker](/api/v-color-picker/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

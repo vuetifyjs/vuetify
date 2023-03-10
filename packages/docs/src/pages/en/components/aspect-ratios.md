@@ -23,4 +23,8 @@ Specify a custom aspect-ratio
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-responsive](/api/v-responsive/) | Primary component |
+
+<api-inline hide-links />

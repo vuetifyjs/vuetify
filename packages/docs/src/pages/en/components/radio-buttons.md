@@ -24,7 +24,12 @@ Although `v-radio` can be used on its own, it is best used in conjunction with `
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-radio-group](/api/v-radio-group/) | Primary Component |
+| [v-radio](/api/v-radio/) | Sub-component used for modifying the `v-radio-group` state |
+
+<api-inline hide-links />
 
 ## Examples
 

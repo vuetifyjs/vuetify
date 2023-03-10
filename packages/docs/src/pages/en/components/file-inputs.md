@@ -24,7 +24,11 @@ At its core, the `v-file-input` component is a basic container that extends [v-t
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-file-input](/api/v-file-input/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

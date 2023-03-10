@@ -24,7 +24,11 @@ Textarea components are used for collecting large amounts of textual data.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-textarea](/api/v-textarea/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

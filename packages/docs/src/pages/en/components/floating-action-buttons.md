@@ -24,7 +24,11 @@ Floating action buttons can be attached to material to signify a promoted action
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-btn](/api/v-btn/) | Primary Component |
+
+<api-inline hide-links />
 
 <!-- ## Sub-components
 

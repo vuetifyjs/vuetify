@@ -24,13 +24,12 @@ The core usage of the `v-item-group` is to create groups of anything that should
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-item-group](/api/v-item-group/) | The item group component. |
+| [v-item](/api/v-item/) | Sub-component used for modifying the `v-item-group` state |
 
-<!-- ## Sub-components
-
-### v-item
-
-v-item description -->
+<api-inline hide-links />
 
 ## Examples
 

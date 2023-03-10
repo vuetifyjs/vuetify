@@ -22,7 +22,11 @@ Select fields components are used for collecting user provided information from 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-select](/api/v-select/) | The select component. |
+
+<api-inline hide-links />
 
 ## Caveats
 

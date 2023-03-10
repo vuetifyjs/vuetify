@@ -24,7 +24,11 @@ Sliders reflect a range of values along a track, from which users may select a s
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-slider](/api/v-slider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -24,7 +24,11 @@ A parallax causes a shift in a background image when the user scrolls the page.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-parallax](/api/v-parallax/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -30,7 +30,13 @@ The third one is to supply a CSS selector string to **activator** prop. This all
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-menu](/api/v-menu/) | Primary Component |
+| [v-btn](/api/v-btn/) | Sub-component often used for the `v-menu` activator |
+| [v-list-item](/api/v-list-item/) | Sub-component often used for the `v-menu` content |
+
+<api-inline hide-links />
 
 ## Examples
 

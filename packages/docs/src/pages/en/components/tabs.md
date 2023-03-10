@@ -24,7 +24,12 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tabs](/api/v-tabs/) | Primary Component |
+| [v-tab](/api/v-tab/) | Sub-component used for modifying the `v-tabs` state |
+
+<api-inline hide-links />
 
 ## Examples
 

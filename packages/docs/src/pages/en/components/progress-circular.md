@@ -24,7 +24,11 @@ In its simplest form, v-progress-circular displays a circular progress bar. Use 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-progress-circular](/api/v-progress-circular/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

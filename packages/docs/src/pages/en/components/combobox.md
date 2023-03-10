@@ -24,7 +24,11 @@ With Combobox, you can allow a user to create new values that may not be present
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-combobox](/api/v-combobox/) | Primary component |
+
+<api-inline hide-links />
 
 ## Caveats
 

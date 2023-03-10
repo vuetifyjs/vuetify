@@ -24,7 +24,12 @@ Designed to easily cycle through content, `v-window` provides a simple interface
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-window](/api/v-window/) | Primary Component |
+| [v-window-item](/api/v-window-item/) | Sub-component used to display a single window item |
+
+<api-inline hide-links />
 
 ## Examples
 

@@ -24,7 +24,11 @@ The `v-footer` component in its simplest form is a container.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-footer](/api/v-footer/) | The footer component. |
+
+<api-inline hide-links />
 
 ## Examples
 
