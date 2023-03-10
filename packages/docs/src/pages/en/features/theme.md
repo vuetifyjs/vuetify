@@ -13,6 +13,8 @@ related:
 
 Customize your application's default text colors, surfaces, and more. Easily modify your theme programmatically in real time. Vuetify comes with standard support for light and dark variants.
 
+<entry />
+
 <promoted slug="vuemastery-themes" />
 
 ## API

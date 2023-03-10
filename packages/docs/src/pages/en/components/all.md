@@ -16,8 +16,6 @@ Vuetify Components are interactive building blocks for creating user interfaces.
 
 <entry />
 
-----
-
 ## Containment
 
 Containment components wrap other components and provide additional functionality. They are typically used to provide a consistent layout or styling.

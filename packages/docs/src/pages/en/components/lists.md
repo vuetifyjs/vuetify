@@ -14,13 +14,13 @@ related:
 
 The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.
 
-<entry />
-
 ## Usage
 
 Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop.
 
 <usage name="v-list" />
+
+<entry />
 
 ## API
 

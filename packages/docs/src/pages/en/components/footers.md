@@ -14,13 +14,13 @@ related:
 
 The `v-footer` component is used for displaying general information that a user might want to access from any page within your site.
 
-<entry />
-
 ## Usage
 
 The `v-footer` component in its simplest form is a container.
 
 <usage name="v-footer" />
+
+<entry />
 
 ## API
 

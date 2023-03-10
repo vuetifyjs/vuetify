@@ -14,13 +14,13 @@ related:
 
 The `v-autocomplete` component offers simple and flexible type-ahead functionality. This is useful when searching large sets of data or even dynamically requesting information from an API.
 
-<entry />
-
 ## Usage
 
 The autocomplete component extends `v-select` and adds the ability to filter items.
 
 <usage name="v-autocomplete" />
+
+<entry />
 
 ## API
 

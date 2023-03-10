@@ -14,11 +14,11 @@ related:
 
 Select fields components are used for collecting user provided information from a list of options.
 
-<entry />
-
 ## Usage
 
 <usage name="v-select" />
+
+<entry />
 
 ## API
 

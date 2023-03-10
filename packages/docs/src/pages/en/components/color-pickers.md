@@ -14,11 +14,11 @@ related:
 
 The `v-color-picker` allows you to select a color using a variety of input methods.
 
-<entry />
-
 ## Usage
 
 <usage name="v-color-picker" />
+
+<entry />
 
 ## API
 

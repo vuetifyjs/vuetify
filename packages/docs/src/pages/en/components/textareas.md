@@ -14,13 +14,13 @@ related:
 
 Textarea components are used for collecting large amounts of textual data.
 
-<entry />
-
 ## Usage
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
 <usage name="v-textarea" />
+
+<entry />
 
 ## API
 

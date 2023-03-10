@@ -14,13 +14,13 @@ related:
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
 
-<entry />
-
 ## Usage
 
 a `v-snackbar` in its simplest form displays a temporary and closable notification to the user.
 
 <example file="v-snackbar/usage" />
+
+<entry />
 
 ## API
 

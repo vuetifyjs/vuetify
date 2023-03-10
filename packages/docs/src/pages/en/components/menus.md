@@ -14,8 +14,6 @@ related:
 
 The `v-menu` component shows a menu at the position of the element used to activate it.
 
-<entry />
-
 ## Usage
 
 There are three main ways that menus can be defined in markup.
@@ -27,6 +25,8 @@ The second one is by using the **activator** prop with value `parent`. This will
 The third one is to supply a CSS selector string to **activator** prop. This allows you to place the menu and its activator in separate parts of the markup.
 
 <example file="v-menu/usage" />
+
+<entry />
 
 ## API
 

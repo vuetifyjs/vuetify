@@ -16,9 +16,7 @@ related:
 
 The display composable provides a multitude of information about the current device
 
-![Why Vuetify Entry](https://cdn.vuetifyjs.com/docs/images/entry/display-entry.png)
-
-----
+<entry />
 
 ## Usage
 
@@ -56,8 +54,6 @@ If you are still using the Options API, you can access the display information o
   }
 </script>
 ```
-
-<entry />
 
 ## API
 

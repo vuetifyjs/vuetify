@@ -18,9 +18,7 @@ related:
 
 Get started with Vuetify, the world’s most popular Vue.js framework for building feature rich, blazing fast applications.
 
-![Installation Entry](https://cdn.vuetifyjs.com/docs/images/entry/installation-entry.png)
-
-----
+<entry />
 
 ## Installation
 

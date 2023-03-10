@@ -14,6 +14,8 @@ related:
 
 The locale provider allows you to provide specific default prop values to components in a section of your application
 
+<entry />
+
 ## API
 
 <api-inline />

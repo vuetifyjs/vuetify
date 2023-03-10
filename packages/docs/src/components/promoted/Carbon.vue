@@ -1,8 +1,12 @@
 <template>
   <promoted-base
+    ref="script"
+    :class="[
+      'mb-4',
+      isDark ? 'theme--dark' : 'theme--light',
+    ]"
     border
-    class="mb-4"
-    min-height="116"
+    min-height="118"
     max-width="360"
   >
     <promoted-script
@@ -19,10 +23,24 @@
   import PromotedBase from './Base.vue'
   import PromotedScript from './Script.vue'
 
+  // Composables
+  import { useTheme } from 'vuetify'
+
   // Utilities
-  import { ref } from 'vue'
+  import { computed, onBeforeUnmount, ref } from 'vue'
 
   const error = ref(false)
+  const script = ref(null)
+
+  onBeforeUnmount(() => {
+    const script = document.getElementById('carbonads-script')
+
+    script?.remove()
+  })
+
+  const theme = useTheme()
+
+  const isDark = computed(() => theme.current.value.dark)
 </script>
 
 <style lang="sass">

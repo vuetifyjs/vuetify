@@ -13,13 +13,13 @@ related:
 
 The `v-responsive` component can be used to fix any section to a specific aspect ratio
 
-<entry />
-
 ## Usage
 
 Specify a custom aspect-ratio
 
 <usage name="v-responsive" />
+
+<entry />
 
 ## API
 

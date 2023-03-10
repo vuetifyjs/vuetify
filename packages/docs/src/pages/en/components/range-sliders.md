@@ -14,13 +14,13 @@ related:
 
 The `v-range-slider` component complements the `v-slider` component nicely when you are in need of representing a range of values.
 
-<entry />
-
 ## Usage
 
 Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
 <usage name="v-range-slider" />
+
+<entry />
 
 ## API
 

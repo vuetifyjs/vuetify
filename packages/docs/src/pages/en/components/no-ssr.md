@@ -13,8 +13,6 @@ The `v-no-ssr` component is a simple wrapper that allows a developer to designat
 
 ---
 
-<entry />
-
 ## Usage
 
 The `v-no-ssr` component prevents its content from rendering on the server side.
@@ -29,3 +27,5 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
   </v-no-ssr>
 </template>
 ```
+
+<entry />
