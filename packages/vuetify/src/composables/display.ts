@@ -8,15 +8,14 @@ import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 // Types
 import type { InjectionKey, Ref } from 'vue'
 
-export type DisplayBreakpoint = keyof DisplayThresholds
+export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
-export interface DisplayThresholds {
-  xs: number
-  sm: number
-  md: number
-  lg: number
-  xl: number
-  xxl: number
+export type Breakpoint = typeof breakpoints[number]
+
+export type DisplayBreakpoint = 'xs' | Breakpoint
+
+export type DisplayThresholds = {
+  [key in DisplayBreakpoint]: number
 }
 
 export interface DisplayOptions {
