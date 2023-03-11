@@ -6,6 +6,7 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItem, GroupHeaderItem } from '../types'
 import type { SortItem } from './sort'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
@@ -24,9 +25,18 @@ const VDataTableGroupSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
+  groupBy: SortItem[]
+  'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
 }
 
-export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem[]>, sortBy: Ref<readonly SortItem[]>) {
+export function createGroupBy (props: GroupProps) {
+  const groupBy = useProxiedModel(props, 'groupBy')
+
+  return { groupBy }
+}
+
+export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, sortBy: Ref<readonly SortItem[]> }) {
+  const { groupBy, sortBy } = options
   const opened = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
