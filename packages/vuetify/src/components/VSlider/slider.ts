@@ -286,7 +286,10 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
+  const showTicks = toRef(props, 'showTicks')
   const parsedTicks = computed<Tick[]>(() => {
+    if (!showTicks.value) return []
+
     if (!props.ticks) {
       return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => {
         const value = min.value + (t * step.value)
@@ -328,7 +331,7 @@ export const useSlider = ({
     readonly: toRef(props, 'readonly'),
     rounded: toRef(props, 'rounded'),
     roundValue,
-    showTicks: toRef(props, 'showTicks'),
+    showTicks,
     startOffset,
     step,
     thumbSize,
