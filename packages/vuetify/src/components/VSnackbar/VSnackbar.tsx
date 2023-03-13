@@ -121,6 +121,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
           noClickAnimation
           scrim={ false }
           scrollStrategy="none"
+          _disableGlobalStack
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
