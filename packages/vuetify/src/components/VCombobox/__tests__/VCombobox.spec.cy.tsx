@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VForm } from '@/components'
 import { VCombobox } from '../VCombobox'
 import { Application } from '@/../cypress/templates'
@@ -414,7 +415,17 @@ describe('VCombobox', () => {
   it('should render v-combobox class only and apply global class', () => {
     cy.mount(() => (
       <Application>
-        <VCombobox />
+        <VDefaultsProvider defaults={ {
+          global: {
+            class: 'v-global-class',
+            style: {
+              opacity: 0.5,
+            },
+          },
+        } }
+        >
+          <VCombobox />
+        </VDefaultsProvider>
       </Application>
     ))
 
