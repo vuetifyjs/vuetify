@@ -4,9 +4,9 @@
 
 .v-snackbar
   justify-content: center
-  padding-inline-end: var(--v-scrollbar-offset)
   z-index: $snackbar-z-index
   margin: $snackbar-wrapper-margin
+  margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
 
   &:not(.v-snackbar--centered):not(.v-snackbar--top)
     align-items: flex-end
