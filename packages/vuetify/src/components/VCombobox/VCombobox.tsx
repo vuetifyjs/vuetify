@@ -22,7 +22,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import {genericComponent, getPropertyFromItem, omit, useRender, wrapInArray} from '@/util';
+import { genericComponent, getPropertyFromItem, omit, useRender, wrapInArray } from '@/util'
 import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
 
 // Types
@@ -175,7 +175,12 @@ export const VCombobox = genericComponent<new <
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => {
-          if(props.itemValue !== 'value') return props.valueComparator(getPropertyFromItem(item.value, props.itemValue), getPropertyFromItem(v.value, props.itemValue))
+          if (props.itemValue !== 'value' && props.returnObject) {
+            return props.valueComparator(
+              getPropertyFromItem(item.value, props.itemValue),
+              getPropertyFromItem(v.value, props.itemValue)
+            )
+          }
           return props.valueComparator(item.value, v.value)
         }) || v
       })

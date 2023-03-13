@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
-import {deepEqual, genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray} from '@/util';
+import { deepEqual, genericComponent, getPropertyFromItem, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -135,7 +135,12 @@ export const VSelect = genericComponent<new <
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => {
-          if(props.itemValue !== 'value') return props.valueComparator(getPropertyFromItem(item.value, props.itemValue), getPropertyFromItem(v.value, props.itemValue))
+          if (props.itemValue !== 'value' && props.returnObject) {
+            return props.valueComparator(
+              getPropertyFromItem(item.value, props.itemValue),
+              getPropertyFromItem(v.value, props.itemValue)
+            )
+          }
           return props.valueComparator(item.value, v.value)
         }) || v
       })

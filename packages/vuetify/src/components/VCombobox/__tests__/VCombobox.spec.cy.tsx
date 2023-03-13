@@ -1,3 +1,4 @@
+/// <reference types="..\..\..\..\types\cypress" />
 /// <reference types="../../../../types/cypress" />
 
 import { VForm } from '@/components'
@@ -324,6 +325,65 @@ describe('VCombobox', () => {
         .should(() => expect(selectedItems.value).to.deep.equal([{
           title: 'Item 2',
           value: 'item2',
+        }]))
+    })
+
+    it('should work with objects when using multiple and item-value', () => {
+      const items = ref([
+        {
+          text: 'Item 1',
+          id: 'item1',
+        },
+        {
+          text: 'Item 2',
+          id: 'item2',
+        },
+        {
+          text: 'Item 3',
+          id: 'item3',
+        },
+      ])
+
+      const selectedItems = ref(
+        [
+          {
+            text: 'Item 1',
+            id: 'item1',
+          },
+          {
+            text: 'Item 2',
+            id: 'item2',
+          },
+        ]
+      )
+
+      cy.mount(() => (
+        <VCombobox
+          v-model={selectedItems.value}
+          items={items.value}
+          multiple
+          chips
+          closableChips
+          item-title="text"
+          item-value="value"
+          return-object
+        />
+      ))
+
+      cy.get('.v-combobox input').click()
+
+      cy.get('.v-list-item--active').should('have.length', 2)
+      cy.get('input').get('.v-chip').should('have.length', 2)
+
+      cy.get('.v-chip__close')
+        .eq(0)
+        .click()
+        .get('input')
+        .get('.v-chip')
+        .should('have.length', 1)
+        .should(() => expect(selectedItems.value).to.deep.equal([{
+          text: 'Item 2',
+          id: 'item2',
         }]))
     })
   })
