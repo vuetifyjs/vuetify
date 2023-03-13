@@ -14,17 +14,29 @@ related:
 
 The `v-list` component is used to display information. It can contain an avatar, content, actions, subheaders and much more. Lists present content in a way that makes it easy to identify a specific item in a collection. They provide a consistent styling for organizing groups of text and images.
 
-<entry />
-
 ## Usage
 
 Lists come in three main variations. **single-line** (default), **two-line** and **three-line**. The line declaration specifies the minimum height of the item and can also be controlled from `v-list` with the same prop.
 
 <usage name="v-list" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-list](/api/v-list/) | Primary Component |
+| [v-list-group](/api/v-list-group/) | Sub-component used to display or hide groups of items |
+| [v-list-subheader](/api/v-list-subheader/) | Sub-component used to separate groups of items |
+| [v-list-item](/api/v-list-item/) | Sub-component used to display a single item or modify the `v-list` state |
+| [v-list-item-title](/api/v-list-item-title/) | Sub-component used to display the title of a list item. Wraps the `#title` slot |
+| [v-list-item-subtitle](/api/v-list-item-subtitle/) | Sub-component used to display the subtitle of a list item. Wraps the `#subtitle` slot |
+| [v-list-item-action](/api/v-list-item-action/) | Sub-component used to display [v-checkbox](/components/checkboxes/) or [v-switch](/components/switches/) |
+| [v-list-img](/api/v-list-img/) | Sub-component that is used to wrap a the [v-img](/components/images/) component |
+| [v-list-item-media](/api/v-list-item-media/) | Sub-component that is used to wrap a the [v-img](/components/images/) component |
+
+<api-inline hide-links />
 
 ## Examples
 

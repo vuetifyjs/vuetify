@@ -13,6 +13,8 @@ related:
 
 Data table has basic support for grouping rows by a column value.
 
+<entry />
+
 <v-alert type="info">
   v-data-table-server does not currently support grouping rows
 </v-alert>

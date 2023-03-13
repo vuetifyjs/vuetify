@@ -1,5 +1,5 @@
 <template>
-  <vuetify medium="entry" />
+  <carbon />
 </template>
 
 <script setup>

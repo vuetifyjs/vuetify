@@ -12,16 +12,18 @@ related:
 
 # Upgrade Guide
 
+## Introduction
+
+This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
+Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
+
+<entry />
+
 <alert type="warning">
 
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
 
 </alert>
-
-## Introduction
-
-This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
 
 ## Setup
 
@@ -204,3 +206,9 @@ app.use(vuetify)
 ### v-snackbar
 
 - `action` slot was renamed to `actions`
+
+### v-expansion-panel
+
+- `v-expansion-panel-header` has been renamed to `v-expansion-panel-title`.
+- `v-expansion-panel-content` has been renamed to `v-expansion-panel-text`.
+- `v-expansion-panel` now has `text` and `title` props that can be used instead of subcomponents.
