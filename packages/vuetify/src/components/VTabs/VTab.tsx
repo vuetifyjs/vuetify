@@ -126,7 +126,6 @@ export const VTab = genericComponent()({
         'selectedClass',
         'value',
         'color',
-        'class',
         'style',
       ])
 
@@ -137,6 +136,7 @@ export const VTab = genericComponent()({
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
