@@ -1,13 +1,24 @@
 import { VApp } from '@/components/VApp'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
-import { FunctionalComponent } from 'vue'
+import type { FunctionalComponent } from 'vue'
 
 export const Application: FunctionalComponent<{ rtl?: boolean }> = (props, { slots, attrs }) => {
   return (
     <VApp { ...attrs } rtl={ props.rtl }>
-      <VLocaleProvider rtl={ props.rtl }>
-        { slots.default?.() }
-      </VLocaleProvider>
+      <VDefaultsProvider defaults={ {
+        global: {
+          class: 'v-global-class',
+          style: {
+            opacity: 0.5,
+          },
+        },
+      } }
+      >
+        <VLocaleProvider rtl={ props.rtl }>
+          { slots.default?.() }
+        </VLocaleProvider>
+      </VDefaultsProvider>
     </VApp>
   )
 }

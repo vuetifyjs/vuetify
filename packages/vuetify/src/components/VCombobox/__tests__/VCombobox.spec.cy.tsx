@@ -2,6 +2,7 @@
 
 import { VForm } from '@/components'
 import { VCombobox } from '../VCombobox'
+import { Application } from '@/../cypress/templates'
 import { ref } from 'vue'
 
 describe('VCombobox', () => {
@@ -408,5 +409,16 @@ describe('VCombobox', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  it('should render v-combobox class only and apply global class', () => {
+    cy.mount(() => (
+      <Application>
+        <VCombobox />
+      </Application>
+    ))
+
+    cy.get('.v-combobox').should('have.length', 1)
+    cy.get('.v-combobox').should('have.class', 'v-global-class')
   })
 })
