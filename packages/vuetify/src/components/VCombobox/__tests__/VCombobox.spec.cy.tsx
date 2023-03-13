@@ -21,7 +21,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple closableChips chips />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple closableChips chips />
       ))
         .get('.v-chip__close')
         .eq(0)
@@ -168,7 +168,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} />
+        <VCombobox items={ items } />
       ))
         .get('input')
         .type('Item')
@@ -194,7 +194,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} multiple />
+        <VCombobox items={ items } multiple />
       ))
         .get('input')
         .type('Item')
@@ -225,7 +225,7 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          items={items}
+          items={ items }
           item-value="id"
           item-title="name"
         />
@@ -253,7 +253,7 @@ describe('VCombobox', () => {
       const selectedItems = ref(['California', 'Colorado'])
 
       cy.mount(() => (
-        <VCombobox v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+        <VCombobox v-model={ selectedItems.value } items={ items.value } multiple chips closableChips />
       ))
 
       cy.get('.v-combobox input').click()
@@ -301,8 +301,8 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          v-model={selectedItems.value}
-          items={items.value}
+          v-model={ selectedItems.value }
+          items={ items.value }
           multiple
           chips
           closableChips
@@ -336,8 +336,8 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       ))
@@ -363,8 +363,8 @@ describe('VCombobox', () => {
       cy.mount(() => (
         <VForm readonly>
           <VCombobox
-            items={items}
-            modelValue={selectedItems}
+            items={ items }
+            modelValue={ selectedItems }
             readonly
           />
         </VForm>
@@ -399,7 +399,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple hideSelected />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple hideSelected />
       ))
 
       cy.get('.v-combobox input').click()

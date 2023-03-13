@@ -246,7 +246,7 @@ describe('VWindow', () => {
   it('should disable touch support', () => {
     cy.mount(() => (
       <div>
-        <VWindow touch={false}>
+        <VWindow touch={ false }>
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>

@@ -106,7 +106,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
               { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
-        ) }
+        )}
 
         <VExpandTransition>
           <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>

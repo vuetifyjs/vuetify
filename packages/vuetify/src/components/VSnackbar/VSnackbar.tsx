@@ -116,11 +116,12 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             ],
             onPointerenter,
             onPointerleave: startTimeout,
-          }, overlayProps.contentProps) }
+          }, overlayProps.contentProps)}
           persistent
           noClickAnimation
           scrim={ false }
           scrollStrategy="none"
+          _disableGlobalStack
           { ...scopeId }
           v-slots={{ activator: slots.activator }}
         >
@@ -134,7 +135,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
             >
               { slots.default() }
             </div>
-          ) }
+          )}
 
           { slots.actions && (
             <VDefaultsProvider

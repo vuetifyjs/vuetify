@@ -105,13 +105,13 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             >
               { slots.title ? slots.title() : props.title }
             </VExpansionPanelTitle>
-          ) }
+          )}
 
           { hasText && (
             <VExpansionPanelText key="text" eager={ props.eager }>
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
-          ) }
+          )}
 
           { slots.default?.() }
         </props.tag>

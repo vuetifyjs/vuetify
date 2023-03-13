@@ -52,7 +52,7 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
             prev,
             select,
             selected,
-          } as DefaultBtnToggleSlot) }
+          } as DefaultBtnToggleSlot)}
         </VBtnGroup>
       )
     })

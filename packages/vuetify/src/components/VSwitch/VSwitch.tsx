@@ -144,7 +144,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
                               )
                           )}
                         </LoaderSlot>
-                      ) }
+                      )}
                     </div>
                   ),
                 }}

@@ -6,7 +6,7 @@ import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composable
 import type { I18n, useI18n } from 'vue-i18n'
 
 type VueI18nAdapterParams = {
-  i18n: I18n<{}, {}, {}, string, false>
+  i18n: I18n<any, {}, {}, string, false>
   useI18n: typeof useI18n
 }
 

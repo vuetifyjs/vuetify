@@ -116,7 +116,7 @@ export const VTabs = genericComponent()({
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />
-        )) }
+        ))}
       </VSlideGroup>
     ))
 

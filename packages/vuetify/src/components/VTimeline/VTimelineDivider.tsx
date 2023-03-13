@@ -86,7 +86,7 @@ export const VTimelineDivider = genericComponent()({
               { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
             </div>
           </div>
-        ) }
+        )}
 
         <div
           class={[

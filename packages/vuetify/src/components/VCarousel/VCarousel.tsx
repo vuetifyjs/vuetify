@@ -132,9 +132,9 @@ export const VCarousel = genericComponent<VWindowSlots>()({
                         return slots.item
                           ? slots.item({ props, item })
                           : (<VBtn { ...item } { ...props } />)
-                      }) }
+                      })}
                     </VDefaultsProvider>
-                  ) }
+                  )}
                 </div>
               )}
 

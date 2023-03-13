@@ -184,7 +184,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
 
             link.navigate?.(e)
             group?.toggle()
-          } }
+          }}
           value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
@@ -202,7 +202,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 { slots.prepend?.() ?? (<VIcon />) }
               </span>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <span class="v-btn__content" data-no-activator="">
             <VDefaultsProvider
@@ -217,7 +217,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 hasIcon && (
                   <VIcon key="icon" />
                 )
-              ) }
+              )}
             </VDefaultsProvider>
           </span>
 
@@ -234,7 +234,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
                 { slots.append?.() ?? (<VIcon />) }
               </span>
             </VDefaultsProvider>
-          ) }
+          )}
 
           { !!props.loading && (
             <span key="loader" class="v-btn__loader">
@@ -245,9 +245,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
                   size="23"
                   width="2"
                 />
-              ) }
+              )}
             </span>
-          ) }
+          )}
         </Tag>
       )
     })

@@ -140,7 +140,7 @@ export const VColorPicker = defineComponent({
             width={ props.width }
             height={ props.canvasHeight }
           />
-        ) }
+        )}
 
         { (!props.hideSliders || !props.hideInputs) && (
           <div key="controls" class="v-color-picker__controls">
@@ -152,7 +152,7 @@ export const VColorPicker = defineComponent({
                 hideAlpha={ !mode.value.endsWith('a') }
                 disabled={ props.disabled }
               />
-            ) }
+            )}
 
             { !props.hideInputs && (
               <VColorPickerEdit
@@ -164,9 +164,9 @@ export const VColorPicker = defineComponent({
                 onUpdate:color={ updateColor }
                 disabled={ props.disabled }
               />
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         { props.showSwatches && (
           <VColorPickerSwatches
@@ -177,7 +177,7 @@ export const VColorPicker = defineComponent({
             swatches={ props.swatches }
             disabled={ props.disabled }
           />
-        ) }
+        )}
       </VSheet>
     ))
 
