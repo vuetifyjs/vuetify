@@ -84,7 +84,8 @@ cd vuetify
 yarn
 
 # Build the packages
-yarn build
+yarn build vuetify
+yarn build api
 ```
 
 The build process compiles all the Vuetify packages for development and may take a while (grab some ☕). Once the packages are built, you can start developing.
