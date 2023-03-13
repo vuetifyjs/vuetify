@@ -33,6 +33,8 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
     return options
   }
 
+  options.inheritAttrs = false
+
   if (options._setup) {
     options.props = options.props ?? {}
 
@@ -44,9 +46,9 @@ export const defineComponent = (function defineComponent (options: ComponentOpti
       // Skip props proxy if defaults are not provided
       if (!defaults.value) return options._setup(props, ctx)
 
-      const { props: _props, provideSubDefaults } = useDefaults(props, props._as ?? options.name, defaults)
+      const { props: _props, attrs: _attrs, provideSubDefaults } = useDefaults(props, props._as ?? options.name, ctx.attrs, defaults)
 
-      const setupBindings = options._setup(_props, ctx)
+      const setupBindings = options._setup(_props, { ...ctx, attrs: _attrs })
 
       provideSubDefaults()
 

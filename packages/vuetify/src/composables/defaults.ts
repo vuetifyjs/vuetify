@@ -3,7 +3,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
-import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
+import { getCurrentInstance, injectSelf, mergeDeep, removeDuplicate, toKebabCase } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, Ref, VNode } from 'vue'
@@ -66,7 +66,6 @@ export function provideDefaults (
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)
-
   return newDefaults
 }
 
@@ -75,7 +74,7 @@ function propIsDefined (vnode: VNode, prop: string) {
     typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
 }
 
-export function useDefaults (props: Record<string, any>, name?: string, defaults = injectDefaults()) {
+export function useDefaults (props: Record<string, any>, name?: string, attrs?: any, defaults = injectDefaults()) {
   const vm = getCurrentInstance('useDefaults')
 
   name = name ?? vm.type.name ?? vm.type.__name
@@ -86,10 +85,20 @@ export function useDefaults (props: Record<string, any>, name?: string, defaults
   const componentDefaults = computed(() => defaults.value![props._as ?? name])
   const _props = new Proxy(props, {
     get (target, prop: string) {
-      if (!propIsDefined(vm.vnode, prop)) {
+      if (!propIsDefined(vm.vnode, prop) && prop !== 'class') {
         return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? target[prop]
       }
       return Reflect.get(target, prop)
+    },
+  })
+
+  const _attrs = new Proxy(attrs, {
+    get (target, attr: string) {
+      if (attr === 'class') {
+        const classStr = `${componentDefaults.value?.[attr] ?? defaults.value!.global?.[attr]} ${target[attr]}`
+        return removeDuplicate(classStr.replace('undefined', ''))
+      }
+      return Reflect.get(target, attr)
     },
   })
 
@@ -113,5 +122,5 @@ export function useDefaults (props: Record<string, any>, name?: string, defaults
     })
   }
 
-  return { props: _props, provideSubDefaults }
+  return { props: _props, attrs: _attrs, provideSubDefaults }
 }

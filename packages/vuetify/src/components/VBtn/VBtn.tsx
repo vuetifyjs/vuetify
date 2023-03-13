@@ -136,6 +136,7 @@ export const VBtn = defineComponent({
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
+            attrs.class,
             group?.selectedClass.value,
             {
               'v-btn--active': isActive.value,

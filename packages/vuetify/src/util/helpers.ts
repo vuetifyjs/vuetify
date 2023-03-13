@@ -453,6 +453,8 @@ export const randomHexColor = () => {
   return '#' + n.slice(0, 6)
 }
 
+export const removeDuplicate = (str: string) => [...new Set(str.split(' '))].join(' ')
+
 export function toKebabCase (str = '') {
   if (toKebabCase.cache.has(str)) return toKebabCase.cache.get(str)!
   const kebab = str

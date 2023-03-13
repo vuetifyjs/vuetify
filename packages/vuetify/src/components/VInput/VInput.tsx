@@ -125,6 +125,7 @@ export const VInput = genericComponent<new () => {
       return (
         <div class={[
           'v-input',
+          attrs.class,
           `v-input--${props.direction}`,
           densityClasses.value,
           validationClasses.value,
