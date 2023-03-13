@@ -51,7 +51,7 @@ export const VCarousel = genericComponent<VWindowSlots>()({
       validator: (v: any) => typeof v === 'boolean' || v === 'hover',
     },
     verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
-  
+
     ...makeComponentProps(),
   },
 
@@ -99,7 +99,7 @@ export const VCarousel = genericComponent<VWindowSlots>()({
         ]}
         style={[
           props.style,
-          { height: convertToUnit(props.height) }
+          { height: convertToUnit(props.height) },
         ]}
         continuous
         mandatory="force"

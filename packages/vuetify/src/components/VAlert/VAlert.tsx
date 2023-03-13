@@ -85,7 +85,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
       validator: (val: ContextualType) => allowedTypes.includes(val),
     },
 
-    ...makeComponentProps(), 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),

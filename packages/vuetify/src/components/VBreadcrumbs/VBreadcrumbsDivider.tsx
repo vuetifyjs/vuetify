@@ -14,7 +14,7 @@ export const VBreadcrumbsDivider = genericComponent()({
 
   setup (props, { slots }) {
     useRender(() => (
-      <li 
+      <li
         class={[
           'v-breadcrumbs-divider',
           props.class,

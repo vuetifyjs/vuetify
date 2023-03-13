@@ -49,7 +49,7 @@ export const VAvatar = genericComponent()({
       <props.tag
         class={[
           'v-avatar',
-          props.class, 
+          props.class,
           {
             'v-avatar--start': props.start,
             'v-avatar--end': props.end,

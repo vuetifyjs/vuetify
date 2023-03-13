@@ -16,13 +16,13 @@ export const VCarouselItem = genericComponent<VImgSlots>()({
 
   props: {
     value: null,
-  
+
     ...makeComponentProps(),
   },
 
   setup (props, { slots, attrs }) {
     useRender(() => (
-      <VWindowItem 
+      <VWindowItem
         class={[
           'v-carousel-item',
           props.class,

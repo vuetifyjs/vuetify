@@ -46,10 +46,10 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
-        <div 
+        <div
           class={[
             'v-card-item',
-            props.class
+            props.class,
           ]}
           style={ props.style }
         >

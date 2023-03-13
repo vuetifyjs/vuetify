@@ -93,9 +93,9 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
             densityClasses.value,
             roundedClasses.value,
           ]}
-          style={[ 
+          style={[
             props.style,
-            backgroundColorStyles.value 
+            backgroundColorStyles.value,
           ]}
         >
           { hasPrepend && (

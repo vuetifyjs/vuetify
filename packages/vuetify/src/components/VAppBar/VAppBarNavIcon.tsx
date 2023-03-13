@@ -19,7 +19,7 @@ export const VAppBarNavIcon = genericComponent<VBtnSlots>()({
       type: IconValue,
       default: '$menu',
     },
-    ...makeComponentProps(), 
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {

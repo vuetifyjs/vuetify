@@ -37,7 +37,7 @@ export const VApp = genericComponent()({
         ]}
         style={[
           props.style ?? [],
-          layoutStyles.value
+          layoutStyles.value,
         ]}
       >
         <div class="v-application__wrap">
