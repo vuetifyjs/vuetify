@@ -14,17 +14,21 @@ related:
 
 The `v-tooltip` component is useful for conveying information when a user hovers over an element. You can also programmatically control the display of tooltips through a `v-model`. When activated, tooltips display a text label identifying an element, such as a description of its function.
 
-<entry />
-
 ## Usage
 
 Tooltips can wrap any element.
 
 <usage name="v-tooltip" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tooltip](/api/v-tooltip/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

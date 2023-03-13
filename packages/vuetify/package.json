@@ -61,12 +61,6 @@
       "default": "./lib/styles/main.css"
     },
     "./styles/*": "./lib/styles/*",
-    "./settings": {
-      "sass": "./_settings.scss"
-    },
-    "./tools": {
-      "sass": "./_tools.scss"
-    },
     "./framework": "./lib/framework.mjs",
     "./blueprints": "./lib/blueprints/index.mjs",
     "./blueprints/*": "./lib/blueprints/*.mjs",

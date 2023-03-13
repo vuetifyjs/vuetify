@@ -11,11 +11,13 @@ related:
 
 # Browser support
 
-Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function. This is not an exhaustive list of compatible browsers, but the main targeted ones.
+Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
 
 <entry />
 
 ## Browsers
+
+This is not an exhaustive list of compatible browsers, but the main targeted ones. If you are using a browser that is not listed here, it is not officially supported.
 
 | Browser                 | Status                     |
 |-------------------------|----------------------------|
