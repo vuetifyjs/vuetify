@@ -412,24 +412,30 @@ describe('VCombobox', () => {
     })
   })
 
-  it('should render v-combobox class only and apply global class', () => {
-    cy.mount(() => (
-      <Application>
-        <VDefaultsProvider defaults={ {
-          global: {
-            class: 'v-global-class',
-            style: {
-              opacity: 0.5,
+  describe('global configuration', () => {
+    it('should apply v-combobox class only on root element and also apply global class', () => {
+      cy.mount(() => (
+        <Application>
+          <VDefaultsProvider defaults={ {
+            global: {
+              class: 'v-global-class',
+              style: {
+                opacity: 0.5,
+              },
             },
-          },
-        } }
-        >
-          <VCombobox />
-        </VDefaultsProvider>
-      </Application>
-    ))
+          } }
+          >
+            <VCombobox />
+          </VDefaultsProvider>
+        </Application>
+      ))
 
-    cy.get('.v-combobox').should('have.length', 1)
-    cy.get('.v-combobox').should('have.class', 'v-global-class')
+      cy.get('.v-combobox')
+        .should('have.length', 1)
+        // assert it's the root element
+        .should('have.class', 'v-input')
+        .should('have.class', 'v-global-class')
+        .should('have.css', 'opacity', '0.5')
+    })
   })
 })
