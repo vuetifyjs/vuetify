@@ -413,7 +413,7 @@ describe('VCombobox', () => {
   })
 
   describe('global configuration', () => {
-    it('should apply v-combobox class only on root element and also apply global class', () => {
+    it('should only apply \'v-combobox\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <Application>
           <VDefaultsProvider defaults={ {
