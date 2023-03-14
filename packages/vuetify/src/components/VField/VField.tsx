@@ -356,6 +356,6 @@ export type VField = InstanceType<typeof VField>
 
 // TODO: this is kinda slow, might be better to implicitly inherit props instead
 export function filterFieldProps (attrs: Record<string, unknown>) {
-  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class')
+  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class' && k !== 'style')
   return pick(attrs, keys)
 }
