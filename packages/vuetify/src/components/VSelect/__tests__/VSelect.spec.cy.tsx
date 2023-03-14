@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VDefaultsProvider, VForm } from '@/components'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'
@@ -261,6 +261,32 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
+    })
+  })
+
+  describe('global configuration', () => {
+    it('should only apply \'v-select\' class to root element and also apply global config class/style', () => {
+      cy.mount(() => (
+        <VDefaultsProvider defaults={ {
+          global: {
+            class: 'v-global-class',
+            style: {
+              opacity: 0.5,
+            },
+          },
+        } }
+        >
+
+          <VSelect />
+        </VDefaultsProvider>
+      ))
+
+      cy.get('.v-select')
+        .should('have.length', 1)
+        // assert it's the root element
+        .should('have.class', 'v-input')
+        .should('have.class', 'v-global-class')
+        .should('have.css', 'opacity', '0.5')
     })
   })
 })
