@@ -173,8 +173,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
       const hasColor = !list || isSelected.value || isActive.value
       const hasTitle = (slots.title || props.title)
       const hasSubtitle = (slots.subtitle || props.subtitle)
-      const hasAppend = !!(slots.append || props.appendAvatar || props.appendIcon)
-      const hasPrepend = !!(slots.prepend || props.prependAvatar || props.prependIcon)
+      const hasAppendMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasAppend = !!(hasAppendMedia || slots.append)
+      const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
       list?.updateHasPrepend(hasPrepend)
 
@@ -213,17 +215,28 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
           { hasPrepend && (
             <div key="prepend" class="v-list-item__prepend">
-              { props.prependAvatar && (
-                <VAvatar key="prepend-avatar" density={ props.density } image={ props.prependAvatar } />
-              )}
+              { !slots.prepend ? (
+                <>
+                  { props.prependAvatar && (
+                    <VAvatar
+                      key="prepend-avatar"
+                      density={ props.density }
+                      image={ props.prependAvatar }
+                    />
+                  )}
 
-              { props.prependIcon && (
-                <VIcon key="prepend-icon" density={ props.density } icon={ props.prependIcon } />
-              )}
-
-              { slots.prepend && (
+                  { props.prependIcon && (
+                    <VIcon
+                      key="prepend-icon"
+                      density={ props.density }
+                      icon={ props.prependIcon }
+                    />
+                  )}
+                </>
+              ) : (
                 <VDefaultsProvider
-                  key="prepend"
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -238,7 +251,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { slots.prepend(slotProps.value) }
+                  { slots.prepend?.(slotProps.value) }
                 </VDefaultsProvider>
               )}
             </div>
@@ -262,9 +275,28 @@ export const VListItem = genericComponent<VListItemSlots>()({
 
           { hasAppend && (
             <div key="append" class="v-list-item__append">
-              { slots.append && (
+              { !slots.append ? (
+                <>
+                  { props.appendIcon && (
+                    <VIcon
+                      key="append-icon"
+                      density={ props.density }
+                      icon={ props.appendIcon }
+                    />
+                  )}
+
+                  { props.appendAvatar && (
+                    <VAvatar
+                      key="append-avatar"
+                      density={ props.density }
+                      image={ props.appendAvatar }
+                    />
+                  )}
+                </>
+              ) : (
                 <VDefaultsProvider
-                  key="append"
+                  key="append-defaults"
+                  disabled={ !hasAppendMedia }
                   defaults={{
                     VAvatar: {
                       density: props.density,
@@ -279,16 +311,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
                     },
                   }}
                 >
-                  { slots.append(slotProps.value) }
+                  { slots.append?.(slotProps.value) }
                 </VDefaultsProvider>
-              )}
-
-              { props.appendIcon && (
-                <VIcon key="append-icon" density={ props.density } icon={ props.appendIcon } />
-              )}
-
-              { props.appendAvatar && (
-                <VAvatar key="append-avatar" density={ props.density } image={ props.appendAvatar } />
               )}
             </div>
           )}
