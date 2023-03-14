@@ -64,20 +64,20 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                 { slots.prepend?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title?.() ?? props.title}
+                { slots.title?.() ?? props.title }
               </VCardTitle>
-            ) }
+            )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
                 { slots.subtitle?.() ?? props.subtitle }
               </VCardSubtitle>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
@@ -101,7 +101,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
                 { slots.append?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
         </div>
       )
     })

@@ -13,7 +13,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -44,8 +44,8 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={ [v => v.length < 10 || 'Name should be longer than 10 characters'] }></VTextField>
-          <VTextField label="Email" rules={ [v => v.length < 10 || 'E-mail should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length < 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Email" rules={[v => v.length < 10 || 'E-mail should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -74,7 +74,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => !!v || 'Name required'] }></VTextField>
+          <VTextField label="Name" rules={[v => !!v || 'Name required']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -92,7 +92,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -123,7 +123,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -152,7 +152,7 @@ describe('VForm', () => {
   it('should not submit form if validation fails', () => {
     cy.mount(() => (
       <VForm action="/action">
-        <VTextField rules={ [v => !!v || 'Field required'] } />
+        <VTextField rules={[v => !!v || 'Field required']} />
         <VBtn type="submit">Submit</VBtn>
       </VForm>
     ))
@@ -165,7 +165,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm action="/action" onSubmit={ onSubmit }>
-          <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+          <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
           <VBtn type="submit">Submit</VBtn>
         </VForm>
       </Application>
@@ -189,7 +189,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField rules={ [v => v.length < 4 || 'Error'] } />
+          <VTextField rules={[v => v.length < 4 || 'Error']} />
         </VForm>
       </Application>
     ))
@@ -212,7 +212,7 @@ describe('VForm', () => {
   it.only('should submit form if validation passes', () => {
     cy.mount(() => (
       <VForm action="/__cypress/src/action">
-        <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+        <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
         <VBtn type="submit">Submit</VBtn>
       </VForm>
     ))

@@ -28,17 +28,14 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-toolbar](/api/v-toolbar/) | Primary Component |
+| [v-toolbar-items](/api/v-toolbar-items/) | Sub-component used to modify the styling of [v-btn](/components/buttons) |
+| [v-toolbar-title](/api/v-toolbar-title/) | Sub-component used to display the title of the toolbar |
+| [v-btn](/api/v-btn/) | Sub-component commonly used in `v-toolbar` |
 
-<!-- ## Sub-components
-
-### v-toolbar-items
-
-v-toolbar-items description
-
-### v-toolbar-title
-
-v-toolbar-title description -->
+<api-inline hide-links />
 
 ## Caveats
 

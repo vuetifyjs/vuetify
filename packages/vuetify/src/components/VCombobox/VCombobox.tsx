@@ -403,7 +403,7 @@ export const VCombobox = genericComponent<new <
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      )) }
+                      ))}
 
                       { slots['prepend-item']?.() }
 
@@ -428,11 +428,11 @@ export const VCombobox = genericComponent<new <
                             },
                           }}
                         </VListItem>
-                      )) }
+                      ))}
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) }
+                  )}
                 </VMenu>
 
                 { selections.value.map((item, index) => {
@@ -484,13 +484,13 @@ export const VCombobox = genericComponent<new <
                               { item.title }
                               { props.multiple && (index < selections.value.length - 1) && (
                                 <span class="v-combobox__selection-comma">,</span>
-                              ) }
+                              )}
                             </span>
                           )
-                      ) }
+                      )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}

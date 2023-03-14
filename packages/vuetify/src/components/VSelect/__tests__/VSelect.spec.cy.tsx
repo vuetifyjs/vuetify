@@ -65,8 +65,8 @@ describe('VSelect', () => {
 
     cy.mount(() => (
       <VSelect
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         chips
         closableChips
         multiple
@@ -87,7 +87,7 @@ describe('VSelect', () => {
       const selectedItems = ref(['California', 'Colorado'])
 
       cy.mount(() => (
-        <VSelect v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+        <VSelect v-model={ selectedItems.value } items={ items.value } multiple chips closableChips />
       ))
 
       cy.get('.v-select').click()
@@ -137,8 +137,8 @@ describe('VSelect', () => {
 
       cy.mount(() => (
         <VSelect
-          v-model={selectedItems.value}
-          items={items.value}
+          v-model={ selectedItems.value }
+          items={ items.value }
           multiple
           chips
           closableChips
@@ -192,8 +192,8 @@ describe('VSelect', () => {
 
     cy.mount(() => (
       <VSelect
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         readonly
       />
     ))
@@ -219,8 +219,8 @@ describe('VSelect', () => {
     cy.mount(() => (
       <VForm readonly>
         <VSelect
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       </VForm>
@@ -253,7 +253,7 @@ describe('VSelect', () => {
       ])
 
       cy.mount(() => (
-        <VSelect v-model={selectedItems.value} items={items.value} multiple hideSelected />
+        <VSelect v-model={ selectedItems.value } items={ items.value } multiple hideSelected />
       ))
 
       cy.get('.v-select').click()

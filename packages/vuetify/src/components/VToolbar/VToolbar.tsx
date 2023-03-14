@@ -143,7 +143,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 { slots.image ? slots.image?.() : (<VImg />) }
               </VDefaultsProvider>
             </div>
-          ) }
+          )}
 
           <VDefaultsProvider
             defaults={{
@@ -160,13 +160,13 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 <div class="v-toolbar__prepend">
                   { slots.prepend?.() }
                 </div>
-              ) }
+              )}
 
               { hasTitle && (
                 <VToolbarTitle key="title" text={ props.title }>
                   {{ text: slots.title }}
                 </VToolbarTitle>
-              ) }
+              )}
 
               { slots.default?.() }
 
@@ -174,7 +174,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 <div class="v-toolbar__append">
                   { slots.append?.() }
                 </div>
-              ) }
+              )}
             </div>
           </VDefaultsProvider>
 
@@ -193,7 +193,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 >
                   { extension }
                 </div>
-              ) }
+              )}
             </VExpandTransition>
           </VDefaultsProvider>
         </props.tag>

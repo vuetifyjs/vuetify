@@ -11,7 +11,9 @@ related:
 
 # Data table - Sorting
 
-Lorem ipsum etc etc
+Data tables can sort rows by a column value.
+
+<entry />
 
 ## Examples
 

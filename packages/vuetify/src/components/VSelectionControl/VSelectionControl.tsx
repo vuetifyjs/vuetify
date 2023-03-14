@@ -257,7 +257,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                   onBlur,
                   id: id.value,
                 },
-              } as SelectionControlSlot) }
+              } as SelectionControlSlot)}
             </div>
           </div>
 
@@ -265,7 +265,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             <VLabel for={ id.value } clickable>
               { label }
             </VLabel>
-          ) }
+          )}
         </div>
       )
     })

@@ -93,7 +93,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
                   <VLabel id={ id.value }>
                     { label }
                   </VLabel>
-                ) }
+                )}
 
                 <VSelectionControlGroup
                   { ...controlProps }
