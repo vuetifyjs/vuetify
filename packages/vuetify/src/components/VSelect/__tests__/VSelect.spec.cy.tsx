@@ -274,6 +274,24 @@ describe('VSelect', () => {
               opacity: 0.5,
             },
           },
+          VSelect: {
+            class: 'v-select-alt',
+            style: {
+              margin: '1px',
+            },
+          },
+          VTextField: {
+            class: 'v-textfield-alt',
+            style: {
+              padding: '1px',
+            },
+          },
+          VInput: {
+            class: 'v-input-alt',
+            style: {
+              color: 'black',
+            },
+          },
         } }
         >
 
@@ -285,8 +303,13 @@ describe('VSelect', () => {
         .should('have.length', 1)
         // assert it's the root element
         .should('have.class', 'v-input')
-        .should('have.class', 'v-global-class')
-        .should('have.css', 'opacity', '0.5')
+        .should('have.class', 'v-select-alt') // VSelect class takes highest priority
+        .should('have.css', 'margin', '1px') // VSelect style takes highest priority
+        .should('have.css', 'padding', '0px') // Ignore VTextField global style
+        .should('have.css', 'color', 'rgb(0, 0, 0)') // Ignore VInput global style
+
+      cy.get('.v-textfield-alt').should('not.exist') // Ignore VTextField global class
+      cy.get('.v-input-alt').should('not.exist') // Ignore VInput global style
     })
   })
 })
