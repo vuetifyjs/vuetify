@@ -1,9 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBtn, VDefaultsProvider } from '@/components'
-import { VDialog } from '../VDialog'
+import { VMenu } from '../VMenu'
 
-describe('VDialog', () => {
+describe('VMenu', () => {
   describe('global configuration', () => {
     it('should only apply \'v-dialog\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
@@ -16,17 +16,19 @@ describe('VDialog', () => {
           },
         } }
         >
-          <VBtn>
-            Open Dialog
-            <VDialog activator="parent">
-            </VDialog>
+          <VBtn
+            id="menu-activator"
+          >
+            Open Menu
           </VBtn>
+          <VMenu activator="#menu-activator">
+          </VMenu>
         </VDefaultsProvider>
       ))
 
       cy.get('.v-btn').click()
 
-      cy.get('.v-dialog')
+      cy.get('.v-menu')
         .should('have.length', 1)
         // assert it's the root element
         .should('have.class', 'v-overlay')
