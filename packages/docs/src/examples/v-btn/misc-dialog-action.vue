@@ -8,7 +8,9 @@
         size="x-large"
         color="deep-purple-darken-2"
         @click="dialog = !dialog"
-      >Open Dialog</v-btn>
+      >
+        Open Dialog
+      </v-btn>
     </div>
 
     <v-fade-transition hide-on-leave>
@@ -59,5 +61,5 @@
 <script setup>
   import { ref } from 'vue'
 
-  const dialog = ref(false)
+  const dialog = ref(true)
 </script>

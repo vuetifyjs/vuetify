@@ -1,5 +1,5 @@
 <template>
-  <v-toolbar rounded="t-xl">
+  <v-toolbar>
     <template v-slot:prepend>
       <v-btn icon="mdi-arrow-left"></v-btn>
     </template>

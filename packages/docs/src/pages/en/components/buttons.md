@@ -148,6 +148,12 @@ In this example we utilize multiple different button variants and styles.
 
 <example file="v-btn/misc-discord-event" />
 
+### Survey group
+
+In addition to [Button groups](/components/button-groups/), the `v-btn` component cant hook into a [v-item-group](/components/item-groups/) using a special symbol. In the next example we create a group of buttons that are used to select a survey answer and add custom **active** state styling.
+
+<example file="v-btn/misc-group-survey" />
+
 ### Tax form comfirmation
 
 This example utilizes the [v-text-field](/components/text-fields/) component the **loading** prop.
@@ -174,14 +180,6 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 
 | Documentation | API |
 | - | - |
-| [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/) |
-
-| Property | Value |
-| - | - |
-| **variant** | `text` |
-
-| Documentation | API |
-| - | - |
 | [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
 
 | Property | Value |
@@ -189,4 +187,16 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 | **color** | provided by `v-bottom-navigation` |
 | **density** | provided by `v-bottom-navigation` |
 | **stacked** | `true` when **mode** is `shift` |
+| **variant** | `text` |
+
+### Toolbars
+
+The `v-toolbar` component applies the **text** variant to all `v-btn` components. In addition, the [v-toolbar-items](/api/v-toolbar-items/) component is used to create a grouping of buttons that fill the height of the toolbar.
+
+| Documentation | API |
+| - | - |
+| [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/)  |
+
+| Property | Value |
+| - | - |
 | **variant** | `text` |
