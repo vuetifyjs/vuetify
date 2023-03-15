@@ -307,9 +307,11 @@ describe('VSelect', () => {
         .should('have.css', 'margin', '1px') // VSelect style takes highest priority
         .should('have.css', 'padding', '0px') // Ignore VTextField global style
         .should('have.css', 'color', 'rgb(0, 0, 0)') // Ignore VInput global style
+        .should('have.css', 'opacity', '1') // Ignore global style
 
-      cy.get('.v-textfield-alt').should('not.exist') // Ignore VTextField global class
-      cy.get('.v-input-alt').should('not.exist') // Ignore VInput global style
+      cy.get('.v-select.v-global-class').should('not.exist') // Ignore global class
+      cy.get('.v-select.v-textfield-alt').should('not.exist') // Ignore VTextField global class
+      cy.get('.v-select.v-input-alt').should('not.exist') // Ignore VInput global style
     })
   })
 })
