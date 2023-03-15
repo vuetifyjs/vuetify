@@ -185,6 +185,24 @@ describe('VAutocomplete', () => {
               opacity: 0.5,
             },
           },
+          VAutocomplete: {
+            class: 'v-autocomplete-alt',
+            style: {
+              margin: '1px',
+            },
+          },
+          VTextField: {
+            class: 'v-textfield-alt',
+            style: {
+              padding: '1px',
+            },
+          },
+          VInput: {
+            class: 'v-input-alt',
+            style: {
+              color: 'black',
+            },
+          },
         } }
         >
 
@@ -196,8 +214,15 @@ describe('VAutocomplete', () => {
         .should('have.length', 1)
         // assert it's the root element
         .should('have.class', 'v-input')
-        .should('have.class', 'v-global-class')
-        .should('have.css', 'opacity', '0.5')
+        .should('have.class', 'v-autocomplete-alt') // VAutocomplete class takes highest priority
+        .should('have.css', 'margin', '1px') // VAutocomplete style takes highest priority
+        .should('have.css', 'padding', '0px') // Ignore VTextField global style
+        .should('have.css', 'color', 'rgb(0, 0, 0)') // Ignore VInput global style
+        .should('have.css', 'opacity', '1') // Ignore global style
+
+      cy.get('.v-autocomplete.v-global-class').should('not.exist') // Ignore global class
+      cy.get('.v-autocomplete.v-textfield-alt').should('not.exist') // Ignore VTextField global class
+      cy.get('.v-autocomplete.v-input-alt').should('not.exist') // Ignore VInput global style
     })
   })
 })
