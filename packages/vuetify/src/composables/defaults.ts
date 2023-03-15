@@ -42,7 +42,7 @@ export function provideDefaults (
   const newDefaults = computed(() => {
     const disabled = unref(options?.disabled)
 
-    if (disabled) return {}
+    if (disabled) return injectedDefaults.value
 
     const scoped = unref(options?.scoped)
     const reset = unref(options?.reset)
