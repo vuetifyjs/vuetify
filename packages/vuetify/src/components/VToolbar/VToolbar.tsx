@@ -132,16 +132,25 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         >
           { hasImage && (
             <div key="image" class="v-toolbar__image">
-              <VDefaultsProvider
-                defaults={{
-                  VImg: {
-                    cover: true,
-                    src: props.image,
-                  },
-                }}
-              >
-                { slots.image ? slots.image?.() : (<VImg />) }
-              </VDefaultsProvider>
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
             </div>
           )}
 

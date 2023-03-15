@@ -2,13 +2,13 @@
 import './VTabs.sass'
 
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -79,17 +79,6 @@ export const VTabs = genericComponent()({
     const { densityClasses } = useDensity(props)
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
 
-    provideDefaults({
-      VTab: {
-        color: toRef(props, 'color'),
-        direction: toRef(props, 'direction'),
-        stacked: toRef(props, 'stacked'),
-        fixed: toRef(props, 'fixedTabs'),
-        sliderColor: toRef(props, 'sliderColor'),
-        hideSlider: toRef(props, 'hideSlider'),
-      },
-    })
-
     useRender(() => (
       <VSlideGroup
         v-model={ model.value }
@@ -114,9 +103,35 @@ export const VTabs = genericComponent()({
         mandatory={ props.mandatory }
         direction={ props.direction }
       >
-        { slots.default ? slots.default() : parsedItems.value.map(item => (
-          <VTab { ...item } key={ item.title } />
-        ))}
+        { !slots.default ? (
+          parsedItems.value.map(item => (
+            <VTab
+              key={ item.title }
+              color={ props.color }
+              direction={ props.direction }
+              fixed={ props.fixedTabs }
+              hideSlider={ props.hideSlider }
+              sliderColor={ props.sliderColor }
+              stacked={ props.stacked }
+              { ...item }
+            />
+          ))
+        ) : (
+          <VDefaultsProvider
+            key="tabs-defaults"
+            defaults={{
+              VTab: {
+                color: props.color,
+                direction: props.direction,
+                fixed: props.fixedTabs,
+                hideSlider: props.hideSlider,
+                sliderColor: props.sliderColor,
+                stacked: props.stacked,
+              },
+            }}
+            v-slots:default={ slots.default }
+          />
+        )}
       </VSlideGroup>
     ))
 
