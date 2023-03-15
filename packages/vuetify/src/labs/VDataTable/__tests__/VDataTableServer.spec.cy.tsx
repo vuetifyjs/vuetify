@@ -138,12 +138,8 @@ describe('VDataTableServer', () => {
     ))
 
     cy.get('.v-data-table tbody tr')
-      .vue()
-      .then(({ wrapper }) => {
-        const table = wrapper.findComponent(VDataTableServer)
-        const emits = table.emitted('update:options')
-        expect(emits).to.have.length(1)
-      })
+      .emitted(VDataTableServer, 'update:options')
+      .should('have.length', 1)
   })
 
   it('should only trigger update event once when changing itemsPerPage', () => {
@@ -182,7 +178,7 @@ describe('VDataTableServer', () => {
       .get('.v-list-item')
       .eq(0)
       .click()
-      .emitted('.v-data-table', 'update:options')
+      .emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
         [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
         [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
@@ -224,7 +220,7 @@ describe('VDataTableServer', () => {
       .get('th')
       .eq(0)
       .click()
-      .emitted('.v-data-table', 'update:options')
+      .emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
         [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
         [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
