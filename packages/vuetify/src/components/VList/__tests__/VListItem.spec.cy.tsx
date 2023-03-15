@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { ref } from 'vue'
+import { nextTick, ref } from 'vue'
 import { CenteredGrid } from '@/../cypress/templates'
 import { VListItem } from '../'
 
@@ -37,5 +37,25 @@ describe('VListItem', () => {
         )
       },
     }).get('.v-list-item').eq(0).click().should('have.class', 'text-success')
+  })
+
+  it('should render prepend and append slots', async () => {
+    const wrapper = mountFunction((
+      <CenteredGrid width="200px">
+        <VListItem
+          title="foo"
+          subtitle="bar"
+          prepend-icon="$success"
+        />
+      </CenteredGrid>
+    ))
+
+    wrapper.get('.v-list-item__prepend').should('exist')
+
+    wrapper.setProps({ appendIcon: '$success', prependIcon: undefined })
+
+    await nextTick()
+
+    wrapper.get('.v-list-item__append').should('exist')
   })
 })
