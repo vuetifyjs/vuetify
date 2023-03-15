@@ -91,11 +91,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
             minWidth: convertToUnit(column.width),
             ...getFixedStyles(column, y),
           }}
-          colspan={column.colspan}
-          rowspan={column.rowspan}
-          onClick={column.sortable ? () => toggleSort(column.key) : undefined}
-          lastFixed={column.lastFixed}
-          noPadding={noPadding}
+          colspan={ column.colspan }
+          rowspan={ column.rowspan }
+          onClick={ column.sortable ? () => toggleSort(column.key) : undefined }
+          lastFixed={ column.lastFixed }
+          noPadding={ noPadding }
         >
           {{
             default: () => {
@@ -134,11 +134,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                         'v-data-table-header__sort-badge',
                         ...backgroundColorClasses.value,
                       ]}
-                      style={backgroundColorStyles.value}
+                      style={ backgroundColorStyles.value }
                     >
-                      {sortBy.value.findIndex(x => x.key === column.key) + 1}
+                      { sortBy.value.findIndex(x => x.key === column.key) + 1 }
                     </div>
-                  ) }
+                  )}
                 </div>
               )
             },
@@ -152,10 +152,10 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         { headers.value.map((row, y) => (
           <tr>
             { row.map((column, x) => (
-              <VDataTableHeaderCell column={ column} x={ x } y={ y } />
-            )) }
+              <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+            ))}
           </tr>
-        )) }
+        ))}
 
         { props.loading && (
           <tr class="v-data-table__progress">

@@ -26,6 +26,14 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-btn](/api/v-btn/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-btn` is:
@@ -40,14 +48,6 @@ The recommended placement of elements inside of `v-btn` is:
 | 1. Container | In addition to text, the Button container typically holds a [v-icon](/components/icons/) component |
 | 2. Icon (optional) | Leading media content intended to improve visual context |
 | 3. Text | A content area for displaying text and other inline elements |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-btn](/api/v-btn) | Primary Component |
-
-<api-inline hide-links />
 
 ## Guide
 
@@ -112,7 +112,6 @@ The **variant** prop gives you easy access to several different button styles. A
 | **text** | <v-btn variant="text">Button</v-btn> | Removes the background and removes shadow |
 | **plain** | <v-btn variant="plain">Button</v-btn> | Removes the background and lowers the opacity until hovered |
 
-
 <alert type="info">
 
   The block applies **width: 100%** which can have overflow issues when inside of a flex container.
@@ -169,7 +168,7 @@ There are instances where a set of default properties are injected or custom sty
 * to provide a better visual appearance based upon context
 * to avoid creating proprietary components; e.g. `v-bottom-navigation-btn` and `v-card-btn`
 
-#### Bottom navigation
+### Bottom navigation
 
 The `v-bottom-navigation` component **scopes** out all previously provided defaults and applies its own. This is to avoid changes made to `v-btn` in the [Global configuration](/features/global-configuration/). Buttons automatically register with `v-bottom-navigation`'s' group and will update the **model** when clicked.
 

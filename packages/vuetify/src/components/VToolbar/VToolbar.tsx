@@ -132,18 +132,27 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         >
           { hasImage && (
             <div key="image" class="v-toolbar__image">
-              <VDefaultsProvider
-                defaults={{
-                  VImg: {
-                    cover: true,
-                    src: props.image,
-                  },
-                }}
-              >
-                { slots.image ? slots.image?.() : (<VImg />) }
-              </VDefaultsProvider>
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
             </div>
-          ) }
+          )}
 
           <VDefaultsProvider
             defaults={{
@@ -160,13 +169,13 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 <div class="v-toolbar__prepend">
                   { slots.prepend?.() }
                 </div>
-              ) }
+              )}
 
               { hasTitle && (
                 <VToolbarTitle key="title" text={ props.title }>
                   {{ text: slots.title }}
                 </VToolbarTitle>
-              ) }
+              )}
 
               { slots.default?.() }
 
@@ -174,7 +183,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 <div class="v-toolbar__append">
                   { slots.append?.() }
                 </div>
-              ) }
+              )}
             </div>
           </VDefaultsProvider>
 
@@ -193,7 +202,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
                 >
                   { extension }
                 </div>
-              ) }
+              )}
             </VExpandTransition>
           </VDefaultsProvider>
         </props.tag>

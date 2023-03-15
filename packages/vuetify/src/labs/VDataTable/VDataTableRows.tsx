@@ -99,7 +99,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
           >
             { t(props.noDataText) }
           </VDataTableRow>
-        )) }
+        ))}
 
         { props.items.map((item, index) => {
           if (item.type === 'group-header') {
@@ -139,20 +139,20 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
                   key={ `item_${item.value}` }
                   onClick={ (event: Event) => {
                     if (expandOnClick.value) {
-                      toggleExpand(item.value)
+                      toggleExpand(item)
                     }
 
                     emit('click:row', event, { item })
-                  } }
+                  }}
                   item={ item }
                   v-slots={ slots }
                 />
-              ) }
+              )}
 
               { isExpanded(item) && slots['expanded-row']?.(slotProps) }
             </>
           )
-        }) }
+        })}
       </>
     ))
 

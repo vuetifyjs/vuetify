@@ -28,7 +28,11 @@ In this basic example we use the **activator** slot to render a button that is u
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-dialog](/api/v-dialog/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 
