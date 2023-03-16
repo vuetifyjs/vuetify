@@ -27,10 +27,9 @@ Vuetify uses activator slots for many components such as `v-menu`, `v-dialog` an
 
 <template>
   <v-menu>
-    <template v-slot:activator="{ on, attrs }">
+    <template v-slot:activator="{ props }">
       <v-btn
-        v-bind="attrs"
-        v-on="on"
+        v-bind="props"
       >
         Click me
       </v-btn>
