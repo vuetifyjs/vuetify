@@ -1,11 +1,11 @@
 <template>
   <v-card
-    title="SURVEY"
-    text="How satisfied are you with developing using Vuetify?"
-    max-width="300"
     class="px-2 mx-auto"
-    theme="dark"
+    max-width="300"
     rounded="lg"
+    text="How satisfied are you with developing using Vuetify?"
+    theme="dark"
+    title="SURVEY"
     variant="flat"
   >
     <template v-slot:append>
@@ -29,11 +29,11 @@
         <template v-slot:default="{ toggle }">
           <v-btn
             :icon="`mdi-numeric-${n}`"
-            :active="model + 1 >= n"
-            width="40"
+            :active="model != null && model + 1 >= n"
             border
             height="40"
             variant="text"
+            width="40"
             @click="toggle"
           ></v-btn>
         </template>
@@ -43,7 +43,6 @@
 </template>
 
 <script>
-
   export default {
     data: () => ({
       model: null,

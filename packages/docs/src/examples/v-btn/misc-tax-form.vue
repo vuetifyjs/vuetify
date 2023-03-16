@@ -13,10 +13,50 @@
     <v-card-text>
       <div class="text-subtitle-2 font-weight-black mb-1">Last 4 digits of your SSN</div>
 
-      <v-text-field variant="outlined" label="Enter value here" single-line></v-text-field>
+      <v-text-field
+        label="Enter value here"
+        single-line
+        variant="outlined"
+      ></v-text-field>
 
-      <v-btn block color="indigo-darken-3" class="text-none mb-4" variant="flat" size="x-large">Verify and continue</v-btn>
-      <v-btn block color="grey-lighten-3" variant="flat" size="x-large" class="text-none">Cancel</v-btn>
+      <v-btn
+        :loading="loading"
+        :disabled="loading"
+        block
+        class="text-none mb-4"
+        color="indigo-darken-3"
+        size="x-large"
+        variant="flat"
+        @click="loading = !loading"
+      >
+        Verify and continue
+      </v-btn>
+
+      <v-btn
+        block
+        class="text-none"
+        color="grey-lighten-3"
+        size="x-large"
+        variant="flat"
+      >
+        Cancel
+      </v-btn>
     </v-card-text>
   </v-card>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      loading: false,
+    }),
+
+    watch: {
+      loading (val) {
+        if (!val) return
+
+        setTimeout(() => (this.loading = false), 2000)
+      },
+    },
+  }
+</script>

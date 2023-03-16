@@ -14,7 +14,7 @@ related:
 
 The `v-btn` component replaces the standard html button with a material design theme and a multitude of options. Any color helper class can be used to alter the background or text color. <inline slug="scrimba-buttons" />
 
-![Button Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-entry.png)
+![Button Entry](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-entry.png)
 
 ---
 
@@ -41,7 +41,7 @@ The recommended placement of elements inside of `v-btn` is:
 * Place text in the center
 * Place visual content around container text
 
-![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn/v-btn-anatomy.png)
+![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-anatomy.png)
 
 | Element / Area | Description |
 | - | - |
@@ -130,11 +130,24 @@ Using the loading prop, you can notify a user that there is processing taking pl
 
 <example file="v-btn/prop-loaders" />
 
-### Inside of bars
+#### Inside of bars
 
 A common use-case is to use the `v-btn` with the **icon** property within a [v-toolbar](/components/toolbars/) or [v-app-bar](/components/app-bars/) component.
 
 <example file="v-btn/misc-toolbar" />
+
+### Slots
+
+The `v-btn` component provides slots that enable you to customize content created by its props or to add additional content.
+
+![Button Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-btn/v-btn-slots.png)
+
+| Slot | Description |
+| - | - |
+| 1. Default | In addition to text, the Button container typically holds a [v-icon](/components/icons/) component |
+| 2. Icon (optional) | Leading media content intended to improve visual context |
+| 3. Text | A content area for displaying text and other inline elements |
+| 4. Loader | A content area for displaying a loading indicator |
 
 <random />
 
@@ -144,19 +157,19 @@ The following are a collection of examples that demonstrate more advanced and re
 
 ### Discord event
 
-In this example we utilize multiple different button variants and styles.
+In this example we utilize multiple different button variants and styles to create a copy of the Discord event card.
 
-<example file="v-btn/misc-discord-event" />
+<example file="v-btn/misc-discord-event" hide-invert />
 
 ### Survey group
 
 In addition to [Button groups](/components/button-groups/), the `v-btn` component cant hook into a [v-item-group](/components/item-groups/) using a special symbol. In the next example we create a group of buttons that are used to select a survey answer and add custom **active** state styling.
 
-<example file="v-btn/misc-group-survey" />
+<example file="v-btn/misc-group-survey" hide-invert />
 
 ### Tax form comfirmation
 
-This example utilizes the [v-text-field](/components/text-fields/) component the **loading** prop.
+This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
 <example file="v-btn/misc-tax-form" />
 
