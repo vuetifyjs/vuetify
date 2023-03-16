@@ -19,6 +19,7 @@ export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
 
   props: {
+    index: Number as PropType<Number>,
     item: Object as PropType<DataTableItem>,
     onClick: Function as PropType<(e: MouseEvent) => void>,
   },
@@ -59,6 +60,7 @@ export const VDataTableRow = defineComponent({
                 const item = props.item!
                 const slotName = `item.${column.key}`
                 const slotProps = {
+                  index: props.index,
                   item: props.item,
                   columns: columns.value,
                   isSelected,

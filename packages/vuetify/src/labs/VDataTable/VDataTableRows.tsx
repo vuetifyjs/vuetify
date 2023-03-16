@@ -144,6 +144,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
 
                     emit('click:row', event, { item })
                   }}
+                  index={ index }
                   item={ item }
                   v-slots={ slots }
                 />
