@@ -300,6 +300,7 @@ describe('VSelect', () => {
       ))
 
       cy.get('.v-select')
+        // prevent https://github.com/vuetifyjs/vuetify/pull/16459#issuecomment-1465040852
         .should('have.length', 1)
         // assert it's the root element
         .should('have.class', 'v-input')
