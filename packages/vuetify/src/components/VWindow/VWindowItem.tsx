@@ -2,6 +2,7 @@
 import Touch from '@/directives/touch'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { MaybeTransition } from '@/composables/transition'
@@ -31,6 +32,7 @@ export const VWindowItem = genericComponent()({
       default: undefined,
     },
 
+    ...makeComponentProps(),
     ...makeGroupItemProps(),
     ...makeLazyProps(),
   },
@@ -126,8 +128,10 @@ export const VWindowItem = genericComponent()({
         <div
           class={[
             'v-window-item',
+            props.class,
             groupItem.selectedClass.value,
           ]}
+          style={ props.style }
           v-show={ groupItem.isSelected.value }
         >
           { hasContent.value && slots.default?.() }
