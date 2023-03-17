@@ -124,6 +124,8 @@ Icons can be used for the primary content of a button. They are commonly used in
 
 <example file="v-btn/prop-icon" />
 
+<random />
+
 #### Loaders
 
 Using the loading prop, you can notify a user that there is processing taking place. The default behavior is to use a `v-progress-circular` component but this can be customized with the **loader** slot.
@@ -149,7 +151,19 @@ The `v-btn` component provides slots that enable you to customize content create
 | 3. Text | A content area for displaying text and other inline elements |
 | 4. Loader | A content area for displaying a loading indicator |
 
-<random />
+Slots give you greater control to customize the content of the `v-btn` component while still taking advantage of the easy-to-use props.
+
+#### Icon color
+
+When you use the **prepend-icon** and **append-icon** props in conjunction with the corresponding slot, **prepend** or **append**, you are able to place a [v-icon](/components/icons/) that automatically injects the designated icon.
+
+<example file="v-btn/slot-prepend-append" />
+
+#### Custom loader
+
+The **loader** slot allows you to customize the loading indicator. In this example we use a [v-progress-linear](/components/progress-linear/) component to create a loading bar that spans the full width of the button.
+
+<example file="v-btn/slot-loader" />
 
 ## Examples
 
@@ -172,6 +186,8 @@ In addition to [Button groups](/components/button-groups/), the `v-btn` componen
 This example utilizes the [v-text-field](/components/text-fields/) component to collect data from the user and the **loading** prop of `v-btn` when submitting the form.
 
 <example file="v-btn/misc-tax-form" />
+
+<random />
 
 ### Dialog action
 
@@ -202,6 +218,8 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 | **stacked** | `true` when **mode** is `shift` |
 | **variant** | `text` |
 
+<example file="v-btn/defaults-bottom-navigation" />
+
 ### Toolbars
 
 The `v-toolbar` component applies the **text** variant to all `v-btn` components. In addition, the [v-toolbar-items](/api/v-toolbar-items/) component is used to create a grouping of buttons that fill the height of the toolbar.
@@ -212,4 +230,44 @@ The `v-toolbar` component applies the **text** variant to all `v-btn` components
 
 | Property | Value |
 | - | - |
+| **height** | provided by `v-toolbar-items` |
 | **variant** | `text` |
+
+<example file="v-btn/defaults-toolbar" />
+
+## Accessibility
+
+The `v-btn` component is an extension of the native `button` element and supports all of the same accessibility features.
+
+### ARIA Attributes
+
+By default, the `v-btn` component includes relevant [WAI-ARIA(https://www.w3.org/WAI/standards-guidelines/aria/)] attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
+
+### Keyboard Navigation
+
+The `v-btn` component is natively focusable and responds to keyboard events, such as pressing the <v-kbd>Enter</v-kbd> or <v-kbd>Space</v-kbd> key to trigger the button's action. This ensures that users can navigate and interact with your application using just the keyboard.
+
+### Accessible Labels
+
+When using a [v-icon](/components/icons/) within the `v-btn` component (e.g., with the **icon** prop), it is essential to provide a text alternative for screen reader users. You can add an `aria-label` attribute with a descriptive label to ensure that the button's purpose is clear to all users.
+
+```html
+<v-btn
+  aria-label="Refresh"
+  icon="mdi-refresh"
+></v-btn>
+```
+
+### Touch Target Size
+
+Make sure your buttons have an adequate touch target size, especially on touch devices. A larger touch target can improve the usability of your buttons for users with motor impairments or those using small screens. You can use **large** or **x-large** values for the size prop to increase the button size:
+
+```html
+<v-btn size="large">
+  Large Button
+</v-btn>
+
+<v-btn size="x-large">
+  Extra Large Button
+</v-btn>
+```
