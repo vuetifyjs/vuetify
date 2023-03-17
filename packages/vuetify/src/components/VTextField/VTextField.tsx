@@ -16,10 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -279,7 +279,3 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 })
 
 export type VTextField = InstanceType<typeof VTextField>
-
-export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
-  return pick(props, Object.keys(VTextField.props) as any)
-}
