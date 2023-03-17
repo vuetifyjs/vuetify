@@ -185,10 +185,12 @@ type MaybePick<
   U extends Extract<keyof T, string>
 > = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
+// Array of keys
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
 > (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+// Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
