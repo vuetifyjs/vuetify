@@ -1,5 +1,6 @@
 ---
 nav: All Components
+emphasized: true
 meta:
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.
@@ -260,6 +261,40 @@ Layout components are used to create responsive layouts.
 
 ----
 
+## Selection
+
+These components allow a user to select one or multiple items from a list of options.
+
+<v-row>
+
+<components-list-item name="carousels">
+
+  Carousels are used to display multiple forms of visual content
+
+</components-list-item>
+
+<components-list-item name="button-toggles" placeholder>
+
+  Button toggles are used to select between multiple options using the button component
+
+</components-list-item>
+
+<components-list-item name="chip-groups" placeholder>
+
+  Chip group is a wrapper component that makes chips interactive and allows them to be selected
+
+</components-list-item>
+
+<components-list-item name="windows" placeholder>
+
+  The window component is used to display a block of content based upon a model
+
+</components-list-item>
+
+</v-row>
+
+----
+
 ## Data and display
 
 These components are used to display data and information in a variety of ways.
@@ -413,40 +448,6 @@ These components are used to select a value from a specifically styled set of op
 <components-list-item name="color-pickers" placeholder>
 
   The color picker component is used to select a color from a palette
-
-</components-list-item>
-
-</v-row>
-
-----
-
-## Selection
-
-These components allow a user to select one or multiple items from a list of options.
-
-<v-row>
-
-<components-list-item name="carousels">
-
-  Carousels are used to display multiple forms of visual content
-
-</components-list-item>
-
-<components-list-item name="button-toggles" placeholder>
-
-  Button toggles are used to select between multiple options using the button component
-
-</components-list-item>
-
-<components-list-item name="chip-groups" placeholder>
-
-  Chip group is a wrapper component that makes chips interactive and allows them to be selected
-
-</components-list-item>
-
-<components-list-item name="windows" placeholder>
-
-  The window component is used to display a block of content based upon a model
 
 </components-list-item>
 
