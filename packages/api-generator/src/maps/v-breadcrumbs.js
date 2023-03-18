@@ -25,7 +25,7 @@ module.exports = {
       {
         name: 'item',
         props: {
-          item: 'any[]',
+          item: 'any',
         },
       },
     ],
