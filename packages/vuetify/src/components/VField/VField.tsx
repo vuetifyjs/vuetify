@@ -291,6 +291,7 @@ export const VField = genericComponent<new <T>() => {
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }
+                onMousedown={ (e: MouseEvent) => e.stopPropagation() }
               >
                 { slots.clear
                   ? slots.clear()
