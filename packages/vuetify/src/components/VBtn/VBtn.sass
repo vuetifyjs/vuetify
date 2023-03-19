@@ -211,17 +211,10 @@
   @include tools.absolute()
   pointer-events: none
 
-// VAppBar
-.v-btn
-  .v-app-bar &
-    @include tools.elevation($button-app-bar-elevation)
-
 // VCard
 .v-btn
   .v-card-actions &
     padding: $button-card-actions-padding
-
-    @include tools.elevation($button-card-actions-elevation)
 
   ~ .v-btn
     .v-card-actions &
