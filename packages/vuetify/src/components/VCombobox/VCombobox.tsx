@@ -310,6 +310,10 @@ export const VCombobox = genericComponent<new <
       }
     }
 
+    function onInput (e: InputEvent) {
+      search.value = (e.target as HTMLInputElement).value
+    }
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
@@ -346,10 +350,11 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          v-model={ search.value }
+          modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
+          onInput={ onInput }
           class={[
             'v-combobox',
             {
