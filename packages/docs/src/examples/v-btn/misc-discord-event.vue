@@ -2,10 +2,10 @@
   <v-card
     class="mx-auto mt-5"
     color="#36393f"
+    max-width="650"
     min-height="350"
     theme="dark"
     variant="flat"
-    max-width="650"
   >
     <v-sheet color="#202225">
       <v-card-item>
@@ -59,7 +59,10 @@
 
           <v-spacer></v-spacer>
 
-          <v-avatar size="x-small" image="https://vuetifyjs.b-cdn.net/images/john-smirk.png"></v-avatar>
+          <v-avatar
+            image="https://cdn.vuetifyjs.com/images/john-smirk.png"
+            size="x-small"
+          ></v-avatar>
 
           <v-chip
             class="ms-2 text-medium-emphasis"

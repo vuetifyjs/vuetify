@@ -146,10 +146,10 @@ The `v-btn` component provides slots that enable you to customize content create
 
 | Slot | Description |
 | - | - |
-| 1. Default | In addition to text, the Button container typically holds a [v-icon](/components/icons/) component |
-| 2. Icon (optional) | Leading media content intended to improve visual context |
-| 3. Text | A content area for displaying text and other inline elements |
-| 4. Loader | A content area for displaying a loading indicator |
+| 1. Default | The default slot |
+| 2. Prepend | Content area before the default slot |
+| 3. Append | Content area after the default slot |
+| 4. Loader | Content area shown when **loading** is set to `true` |
 
 Slots give you greater control to customize the content of the `v-btn` component while still taking advantage of the easy-to-use props.
 
@@ -195,6 +195,67 @@ Buttons are often used to trigger actions within a [v-dialog](/components/dialog
 
 <example file="v-btn/misc-dialog-action" />
 
+## Global Configuration
+
+Modify the default values and set a default style for all `v-btn` components using the [Global configuration](/features/global-configuration/). This helps keep your application consistent and allows you to change it in the future with minimal effort.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetifyjs'
+
+export default createVuetify({
+  defaults: {
+    VBtn: {
+      color: 'primary',
+      variant: 'outlined',
+      rounded: true,
+    },
+  },
+})
+```
+
+## Aliasing
+
+Use [aliasing](/features/aliasing/) functionality to create virtual components based off of the `v-btn` component. This is useful when you have multiple button variants as part of a design specification or when creating a custom library based of of Vuetify.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetifyjs'
+import { VBtn } from 'vuetifyjs/components'
+
+export createVuetify({
+  aliases: {
+    VBtnSecondary: VBtn,
+    VBtnTertiary: VBtn,
+  },
+  defaults: {
+    VBtn: {
+      color: 'primary',
+      variant: 'text',
+    },
+    VBtnSecondary: {
+      color: 'secondary',
+      variant: 'flat',
+    },
+    VBtnTertiary: {
+      rounded: true,
+      variant: 'plain',
+    },
+  },
+})
+```
+
+## SASS Variables
+
+Make fine tuned changes by modifying the `v-btn` [SASS variables](/features/sass-variables). This is useful when you want to change the default button height or padding.
+
+```scss { resource="src/settings.scss" }
+@use 'vuetify/settings' with (
+  $button-banner-actions-padding: 16px,
+  $button-height: 32px,
+);
+```
+
+Some of these values can be modified using the [Global configuration](/features/global-configuration/) as well and will take precedence over the SASS variables. For example, the **height** prop can be used to change the default button height without modifying the SASS variables.
+
 ## Defaults Side Effects
 
 There are instances where a set of default properties are injected or custom styling is applied to the `v-btn`. This can be for a variety of reasons, but the most common are:
@@ -202,6 +263,24 @@ There are instances where a set of default properties are injected or custom sty
 * to match a design specification
 * to provide a better visual appearance based upon context
 * to avoid creating proprietary components; e.g. `v-bottom-navigation-btn` and `v-card-btn`
+
+### Banners
+
+The `v-banner-actions` component applies the **text** variant and reduces button x-axis padding to **8px**.
+
+| Documentation | API |
+| - | - |
+| [Banners](/components/banners/) | [v-banner-actions](/api/v-banner-actions/) |  |
+
+<!-- <example file="v-btn/defaults-card-actions" /> -->
+
+The following properties are modified when used within a `v-banner-actions` component:
+
+| Property | Value |
+| - | - |
+| **color** | provided by `v-banner-actions` |
+| **density** | provided by `v-banner-actions` |
+| **variant** | `text` |
 
 ### Bottom navigation
 
@@ -211,6 +290,10 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 | - | - |
 | [Bottom navigation](/components/bottom-navigation/) | [v-bottom-navigation](/api/v-bottom-navigation/) |  |
 
+<example file="v-btn/defaults-bottom-navigation" />
+
+The following properties are modified when used within a `v-bottom-navigation` component:
+
 | Property | Value |
 | - | - |
 | **color** | provided by `v-bottom-navigation` |
@@ -218,7 +301,58 @@ The `v-bottom-navigation` component **scopes** out all previously provided defau
 | **stacked** | `true` when **mode** is `shift` |
 | **variant** | `text` |
 
-<example file="v-btn/defaults-bottom-navigation" />
+### Button groups
+
+The `v-btn-group` component makes multiple changes to the `v-btn` component.
+
+| Documentation | API |
+| - | - |
+| [Button groups](/components/button-groups/) | [v-btn-group](/api/v-btn-group/) |  |
+
+<example file="v-btn/defaults-btn-group" />
+
+The following properties are modified when used within a `v-btn-group` component:
+
+| Property | Value |
+| - | - |
+| **color** | provided by `v-btn-group` |
+| **height** | `auto` |
+| **density** | provided by `v-btn-group` |
+| **flat** | `true` |
+| **variant** | provided by `v-btn-group` |
+
+### Cards
+
+The `v-card-actions` component applies the **text** variant, reduces button x-axis padding to **8px**, and applies a start margin for all siblings. This is to ensure the text from the button lines up with the text and title of the card and that there is space between its actions.
+
+| Documentation | API |
+| - | - |
+| [Cards](/components/cards/) | [v-card-actions](/api/v-card-actions/) |  |
+
+<example file="v-btn/defaults-card-actions" />
+
+The following properties are modified when used within a `v-card-actions` component:
+
+| Property | Value |
+| - | - |
+| **variant** | `text` |
+
+### Snackbars
+
+The `v-snackbar` component applies the **text** variant and removes ripples from all `v-btn` components.
+
+| Documentation | API |
+| - | - |
+| [Snackbars](/components/snackbars/) | [v-snackbar](/api/v-snackbar/) |  |
+
+<example file="v-btn/defaults-snackbar" />
+
+The following properties are modified when used within the **actions** slot of the `v-snackbar` component:
+
+| Property | Value |
+| - | - |
+| **ripple** | `false` |
+| **variant** | `text` |
 
 ### Toolbars
 
@@ -228,12 +362,14 @@ The `v-toolbar` component applies the **text** variant to all `v-btn` components
 | - | - |
 | [Toolbars](/components/toolbars/) | [v-toolbar](/api/v-toolbar/)  |
 
+<example file="v-btn/defaults-toolbar" />
+
+The following properties are modified when used within a `v-toolbar` or `v-toolbar-items` component:
+
 | Property | Value |
 | - | - |
 | **height** | provided by `v-toolbar-items` |
 | **variant** | `text` |
-
-<example file="v-btn/defaults-toolbar" />
 
 ## Accessibility
 
@@ -241,7 +377,7 @@ The `v-btn` component is an extension of the native `button` element and support
 
 ### ARIA Attributes
 
-By default, the `v-btn` component includes relevant [WAI-ARIA(https://www.w3.org/WAI/standards-guidelines/aria/)] attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
+By default, the `v-btn` component includes relevant [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) attributes to enhance accessibility. The component is automatically assigned the `role="button"` attribute, which indicates its purpose as a button to assistive technologies.
 
 ### Keyboard Navigation
 
