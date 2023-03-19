@@ -32,6 +32,7 @@ export interface ValidationProps {
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
   validateOn?: 'blur' | 'input' | 'submit'
+  validateImmediately?: boolean
   validationValue: any
 }
 
@@ -55,6 +56,10 @@ export const makeValidationProps = propsFactory({
   },
   modelValue: null,
   validateOn: String as PropType<ValidationProps['validateOn']>,
+  validateImmediately: {
+    type: Boolean,
+    default: false,
+  },
   validationValue: null,
 
   ...makeFocusProps(),
@@ -128,13 +133,13 @@ export function useValidation (
           unwatch()
         })
       }
-    })
+    }, { immediate: props.validateImmediately })
   })
 
   useToggleScope(() => validateOn.value === 'blur', () => {
     watch(() => props.focused, val => {
       if (!val) validate()
-    })
+    }, { immediate: props.validateImmediately })
   })
 
   watch(isValid, () => {
@@ -157,7 +162,7 @@ export function useValidation (
     isValidating.value = true
 
     for (const rule of props.rules) {
-      if (results.length >= (props.maxErrors ?? 1)) {
+      if (results.length >= +(props.maxErrors ?? 1)) {
         break
       }
 

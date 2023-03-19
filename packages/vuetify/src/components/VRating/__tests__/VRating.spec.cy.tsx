@@ -100,7 +100,7 @@ describe('VRating', () => {
         <VRating>
           {{
             item: ({ value, rating }) => (
-              <VBtn variant="tonal" class="mx-1" color={rating === value ? 'primary' : undefined}>{ value }</VBtn>
+              <VBtn variant="tonal" class="mx-1" color={ rating === value ? 'primary' : undefined }>{ value }</VBtn>
             ),
           }}
         </VRating>
