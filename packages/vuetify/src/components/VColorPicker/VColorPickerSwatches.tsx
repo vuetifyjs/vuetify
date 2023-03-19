@@ -69,17 +69,17 @@ export const VColorPickerSwatches = defineComponent({
                 return (
                   <div
                     class="v-color-picker-swatches__color"
-                    onClick={() => hsva && emit('update:color', hsva)}
+                    onClick={ () => hsva && emit('update:color', hsva) }
                   >
                     <div style={{ background: color }}>
                       { props.color && deepEqual(props.color, hsva)
-                        ? <VIcon size="x-small" icon="$success" color={getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
+                        ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined
                       }
                     </div>
                   </div>
                 )
-              }) }
+              })}
             </div>
           ))}
         </div>

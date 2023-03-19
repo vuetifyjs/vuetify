@@ -15,12 +15,8 @@ describe('VSlider', () => {
     ))
 
     cy.get('.v-slider').click(100, 15)
-
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.have.length(1)
-    })
+      .emitted(VSlider, 'update:modelValue')
+      .should('have.length', 1)
   })
 
   it('should allow user to drag thumb', () => {
@@ -33,47 +29,40 @@ describe('VSlider', () => {
       </VApp>
     ))
 
-    cy.get('.v-slider-thumb').swipe([100, 15], [200, 15])
-
-    // eslint-disable-next-line sonarjs/no-identical-functions
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-
-      expect(emits).length.to.be.gt(0)
-    })
+    cy.get('.v-slider-thumb')
+      .swipe([100, 15], [200, 15])
+      .emitted(VSlider, 'update:modelValue')
+      .should('have.length.gt', 0)
   })
 
   it('should allow user to interact using keyboard', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider max={20} step={1} />
+          <VSlider max={ 20 } step={ 1 } />
         </CenteredGrid>
       </VApp>
     ))
 
     cy.realPress('Tab')
 
-    cy.realPress('ArrowRight')
-    cy.realPress('ArrowLeft')
+      .realPress('ArrowRight')
+      .realPress('ArrowLeft')
 
-    cy.realPress(['Control', 'ArrowRight'])
-    cy.realPress(['Control', 'ArrowLeft'])
+      .realPress(['Control', 'ArrowRight'])
+      .realPress(['Control', 'ArrowLeft'])
 
-    cy.realPress(['Shift', 'ArrowRight'])
-    cy.realPress(['Shift', 'ArrowLeft'])
+      .realPress(['Shift', 'ArrowRight'])
+      .realPress(['Shift', 'ArrowLeft'])
 
-    cy.realPress('PageUp')
-    cy.realPress('PageDown')
+      .realPress('PageUp')
+      .realPress('PageDown')
 
-    cy.realPress('End')
-    cy.realPress('Home')
+      .realPress('End')
+      .realPress('Home')
 
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.deep.equal([
+      .emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
         [1],
         [0],
         [2],
@@ -85,7 +74,6 @@ describe('VSlider', () => {
         [20],
         [0],
       ])
-    })
   })
 
   it('should show thumb-label when focused', () => {
@@ -98,8 +86,7 @@ describe('VSlider', () => {
     ))
 
     cy.get('.v-slider-thumb').focus()
-
-    cy.get('.v-slider-thumb__label').should('be.visible')
+      .get('.v-slider-thumb__label').should('be.visible')
   })
 
   it('should always show thumb-label', () => {
@@ -118,36 +105,32 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider step={2} min={0} max={10} />
+          <VSlider step={ 2 } min={ 0 } max={ 10 } />
         </CenteredGrid>
       </VApp>
     ))
 
     cy.realPress('Tab')
-    cy.realPress('ArrowRight')
-
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.deep.equal([
+      .realPress('ArrowRight')
+      .emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
         [2],
       ])
-    })
   })
 
   it('should show custom ticks', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider ticks={[0, 2, 8, 10]} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={[0, 2, 8, 10]} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
 
-          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
         </CenteredGrid>
       </VApp>
     ))
 
     cy.get('.v-slider').eq(0).find('.v-slider-track__tick-label').invoke('text').should('equal', '02810')
-    cy.get('.v-slider').eq(1).find('.v-slider-track__tick-label').invoke('text').should('equal', 'abc')
+      .get('.v-slider').eq(1).find('.v-slider-track__tick-label').invoke('text').should('equal', 'abc')
   })
 
   it('should render icons', () => {

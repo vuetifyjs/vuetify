@@ -16,7 +16,7 @@ The `v-chip` component is used to convey small pieces of information. Using the 
 
 <!-- ![chips Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chips/v-chips-entry.png) -->
 
----
+----
 
 ## Usage
 
@@ -28,7 +28,11 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-chip](/api/v-chip/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

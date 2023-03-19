@@ -26,6 +26,14 @@ Buttons in their simplest form contain uppercase text, a slight elevation, hover
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-btn](/api/v-btn/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-btn` is:
@@ -40,14 +48,6 @@ The recommended placement of elements inside of `v-btn` is:
 | 1. Container | In addition to text, the Button container typically holds a [v-icon](/components/icons/) component |
 | 2. Icon (optional) | Leading media content intended to improve visual context |
 | 3. Text | A content area for displaying text and other inline elements |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-btn](/api/v-btn) | Primary Component |
-
-<api-inline hide-links />
 
 ## Examples
 
