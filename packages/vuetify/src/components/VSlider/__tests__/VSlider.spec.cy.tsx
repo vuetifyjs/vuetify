@@ -183,10 +183,10 @@ describe('VSlider', () => {
       <Application>
         <CenteredGrid width="360px">
           <VSlider
-            modelValue={1.001}
-            step={1.001}
-            min={1.0001}
-            max={10}
+            modelValue={ 1.001 }
+            step={ 1.001 }
+            min={ 1.0001 }
+            max={ 10 }
             thumb-label
           />
         </CenteredGrid>
@@ -201,14 +201,11 @@ describe('VSlider', () => {
       .trigger('mousemove', 360, 0, { force: true }) // move to the final step
       .trigger('mouseup')
 
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.deep.equal([
+    cy.emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
         [2.0011],
         [6.0051],
         [10],
       ])
-    })
   })
 })
