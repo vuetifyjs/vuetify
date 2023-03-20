@@ -141,7 +141,13 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLInputElement).value
+      const el = e.target as HTMLInputElement
+      const caretPosition = [el.selectionStart, el.selectionEnd]
+      model.value = el.value
+      nextTick(() => {
+        el.selectionStart = caretPosition[0]
+        el.selectionEnd = caretPosition[1]
+      })
     }
 
     useRender(() => {
