@@ -12,7 +12,7 @@ related:
 
 # Data table - Server side tables
 
-Server-side Data tables are optimized for showing data coming from an API.
+Server-side Data tables are used for showing data coming from an API.
 
 <entry />
 
@@ -20,9 +20,15 @@ Server-side Data tables are optimized for showing data coming from an API.
 
 ### Server-side paginate and sort
 
-If you're loading data already paginated and sorted from a backend, you can use the **server-items-length** prop. Defining this prop will disable the built-in sorting and pagination, and you will instead need to use the available events (`update:page`, `update:sortBy`, `update:options`, etc) to know when to request new pages from your backend. Use the **loading** prop to display a progress bar while fetching data.
+To use data from an API, listen to the **@update:options** event to know when to fetch new data. Use the **loading** prop to display a progress bar while fetching the data.
 
 <example file="v-data-table/misc-server-side-paginate-and-sort" />
+
+### Server-side search
+
+If you need to support search functionality, you can use the **search** prop to let the table know when new search input is available. Since the table does not actually do any filtering on its own, the **search** input does not need to be the actual value being searched for. In this example we have multiple values searchable, so we just make sure to set **search** to _anything_ when we need to fetch new data.
+
+<example file="v-data-table/server-search" />
 
 ### Loading
 

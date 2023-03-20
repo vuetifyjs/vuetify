@@ -34,8 +34,6 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
   name: 'VDataTableVirtual',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeVDataTableProps(),
     ...makeDataTableGroupProps(),

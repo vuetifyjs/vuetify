@@ -55,14 +55,13 @@ export const makeVDataTableProps = propsFactory({
   fixedHeader: Boolean,
   fixedFooter: Boolean,
   'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+  search: String,
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
     ...makeDataTableGroupProps(),

@@ -91,6 +91,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       itemsPerPage,
       sortBy,
       groupBy,
+      search: toRef(props, 'search'),
     })
 
     provide('v-data-table', {
