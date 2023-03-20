@@ -14,11 +14,11 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-<!-- <entry /> -->
-
 ## Usage
 
 There are three variants of the data table available depending on your requirements.
+
+<entry />
 
 ### v-data-table
 

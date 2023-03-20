@@ -10,12 +10,10 @@ describe('VChip', () => {
 
     cy.get('.v-chip__close')
       .click()
-      .vue()
-      .then(({ wrapper }) => {
-        const chip = wrapper.findComponent(VChip)
-        const emits = chip.emitted()
-        expect(emits).to.have.property('click:close')
-        expect(emits).to.have.property('update:modelValue')
+      .emitted(VChip)
+      .then(emitted => {
+        expect(emitted).to.have.property('click:close')
+        expect(emitted).to.have.property('update:modelValue')
       })
   })
 

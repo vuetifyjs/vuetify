@@ -13,9 +13,7 @@ related:
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprints-entry.png)
-
----
+<entry />
 
 ## Usage
 
@@ -29,8 +27,6 @@ export default createVuetify({
   blueprint: md1,
 })
 ```
-
-<entry />
 
 ### White-label concept
 

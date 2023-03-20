@@ -33,7 +33,7 @@ export const VExpansionPanelText = genericComponent()({
             <div class="v-expansion-panel-text__wrapper">
               { slots.default?.() }
             </div>
-          ) }
+          )}
         </div>
       </VExpandTransition>
     ))

@@ -22,13 +22,9 @@ describe('VBottomNavigation', () => {
     ))
 
     cy.get('.v-bottom-navigation').should('have.css', 'height', '56px')
-
-    cy.vue().then(({ wrapper }) => wrapper.setProps({ density: 'comfortable' }))
-
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '48px')
-
-    cy.vue().then(({ wrapper }) => wrapper.setProps({ density: 'compact' }))
-
-    cy.get('.v-bottom-navigation').should('have.css', 'height', '40px')
+      .setProps({ density: 'comfortable' })
+      .get('.v-bottom-navigation').should('have.css', 'height', '48px')
+      .setProps({ density: 'compact' })
+      .get('.v-bottom-navigation').should('have.css', 'height', '40px')
   })
 })

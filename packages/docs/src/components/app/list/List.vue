@@ -17,6 +17,18 @@
       />
     </template>
 
+    <template #title="{ item }">
+      {{ item.title }}
+
+      <v-badge
+        v-if="item.emphasized"
+        class="ms-n1"
+        color="success"
+        dot
+        inline
+      />
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -77,6 +89,7 @@
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,
       }

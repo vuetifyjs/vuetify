@@ -12,8 +12,7 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(3).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[4]])
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[4]])
   })
 
   it('should respond to prop value changes', () => {
@@ -24,8 +23,7 @@ describe('VRating', () => {
     ))
 
     cy.setProps({ rating: 4 })
-
-    cy.get('.v-rating__item i.mdi-star').should('have.length', 4)
+      .get('.v-rating__item i.mdi-star').should('have.length', 4)
   })
 
   it('should clear value if using clearable prop', () => {
@@ -36,18 +34,12 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2]])
-
-    cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2]])
-
-    cy.setProps({ clearable: true })
-
-    cy.get('.v-rating__item .v-btn').eq(1).click()
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[2], [0]])
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2]])
+      .get('.v-rating__item .v-btn').eq(1).click()
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2]])
+      .setProps({ clearable: true })
+      .get('.v-rating__item .v-btn').eq(1).click()
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[2], [0]])
   })
 
   it('should not react to events when readonly', done => {
@@ -79,8 +71,7 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item .v-btn').eq(2).realHover()
-
-    cy.get('.v-rating__item i.mdi-star').should('have.length', 3)
+      .get('.v-rating__item i.mdi-star').should('have.length', 3)
   })
 
   it('should show item-labels', () => {
@@ -129,10 +120,8 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item input').should('have.length', 10)
-
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
+      .get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[3.5]])
   })
 
   it('should support half-increments and custom size', () => {
@@ -143,9 +132,7 @@ describe('VRating', () => {
     ))
 
     cy.get('.v-rating__item input').should('have.length', 10)
-
-    cy.get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
-
-    cy.emitted('.v-rating', 'update:modelValue').should('deep.equal', [[3.5]])
+      .get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
+      .emitted(VRating, 'update:modelValue').should('deep.equal', [[3.5]])
   })
 })

@@ -1,6 +1,6 @@
 // Components
 import { VDivider } from '../VDivider'
-import { filterListGroupProps, VListGroup } from './VListGroup'
+import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
 
@@ -58,7 +58,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>()
         title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
       }
 
-      const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
+      const [listGroupProps, _1] = VListGroup.filterProps(itemProps)
 
       return children ? (
         <VListGroup
