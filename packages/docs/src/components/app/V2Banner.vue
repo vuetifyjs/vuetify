@@ -37,15 +37,10 @@
 <script setup>
   import { useUserStore } from '@/store/user'
   import { computed } from 'vue'
-  import { differenceInHours } from 'date-fns'
 
   const user = useUserStore()
 
-  const showBanner = computed(() => {
-    const now = Date.now()
-
-    return differenceInHours(now, Number(user.notifications.last.v2banner)) > 1
-  })
+  const showBanner = computed(() => !user.notifications.last.v2banner)
 
   function onClose () {
     user.notifications.last.v2banner = Date.now()

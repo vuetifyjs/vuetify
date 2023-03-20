@@ -243,6 +243,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -256,7 +257,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                         <span class="v-text-field__prefix">
                           { props.prefix }
                         </span>
-                      ) }
+                      )}
 
                       <textarea
                         ref={ textareaRef }
@@ -295,7 +296,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                         <span class="v-text-field__suffix">
                           { props.suffix }
                         </span>
-                      ) }
+                      )}
                     </>
                   ),
                 }}
@@ -316,7 +317,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

@@ -6,7 +6,7 @@ import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composable
 import type { I18n, useI18n } from 'vue-i18n'
 
 type VueI18nAdapterParams = {
-  i18n: I18n<{}, {}, {}, string, false>
+  i18n: I18n<any, {}, {}, string, false>
   useI18n: typeof useI18n
 }
 
@@ -53,7 +53,6 @@ function createProvideFunction (data: {
       current,
       fallback,
       messages,
-      // @ts-expect-error Type instantiation is excessively deep and possibly infinite
       t: (key: string, ...params: unknown[]) => i18n.t(key, params),
       n: i18n.n,
       provide: createProvideFunction({ current, fallback, messages, useI18n: data.useI18n }),
@@ -71,6 +70,7 @@ export function createVueI18nAdapter ({ i18n, useI18n }: VueI18nAdapterParams): 
     current,
     fallback,
     messages,
+    // @ts-expect-error Type instantiation is excessively deep and possibly infinite
     t: (key: string, ...params: unknown[]) => i18n.global.t(key, params),
     n: i18n.global.n,
     provide: createProvideFunction({ current, fallback, messages, useI18n }),

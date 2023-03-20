@@ -54,11 +54,11 @@ describe('VBtn', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {colors.map(color => (
+          { colors.map(color => (
             <VBtn color={ color } class="text-capitalize">
               { color } button
             </VBtn>
-          )) }
+          ))}
         </>
       ))
         .get('button')
@@ -223,28 +223,28 @@ describe('VBtn', () => {
     it('should pass string values', () => {
       const stringValue = 'Foobar'
 
-      cy.mount(<VBtn value={stringValue}></VBtn>)
+      cy.mount(<VBtn value={ stringValue }></VBtn>)
         .get('button')
         .should('have.value', stringValue)
     })
 
     it('should stringify object', () => {
       const objectValue = { value: {} }
-      cy.mount(<VBtn value={objectValue}></VBtn>)
+      cy.mount(<VBtn value={ objectValue }></VBtn>)
         .get('button')
         .should('have.value', JSON.stringify(objectValue, null, 0))
     })
 
     it('should stringify number', () => {
       const numberValue = 15
-      cy.mount(<VBtn value={numberValue}></VBtn>)
+      cy.mount(<VBtn value={ numberValue }></VBtn>)
         .get('button')
         .should('have.value', JSON.stringify(numberValue, null, 0))
     })
 
     it('should stringify array', () => {
       const arrayValue = ['foo', 'bar']
-      cy.mount(<VBtn value={arrayValue}></VBtn>)
+      cy.mount(<VBtn value={ arrayValue }></VBtn>)
         .get('button')
         .should('have.value', JSON.stringify(arrayValue, null, 0))
     })
