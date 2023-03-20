@@ -93,6 +93,7 @@ export const VCombobox = genericComponent<new <
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...omit(makeVTextFieldProps({
+      focusOnClear: false,
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: false }),
@@ -119,6 +120,7 @@ export const VCombobox = genericComponent<new <
       },
     })
     const selectionIndex = ref(-1)
+    const cleared = ref(false)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -156,12 +158,19 @@ export const VCombobox = genericComponent<new <
         }
 
         if (!val) selectionIndex.value = -1
-        if (isFocused.value) menu.value = true
 
         isPristine.value = !val
       },
     })
     watch(_search, value => {
+      if (cleared.value) {
+        // wait for clear to finish, VTextField sets _search to null
+        // then search computed triggers and updates _search to ''
+        nextTick(() => (cleared.value = false))
+      } else if (isFocused.value && !menu.value) {
+        menu.value = true
+      }
+
       emit('update:search', value)
     })
     watch(model, value => {
@@ -190,6 +199,8 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
+      cleared.value = true
+
       if (props.openOnClear) {
         menu.value = true
       }
@@ -310,10 +321,6 @@ export const VCombobox = genericComponent<new <
       }
     }
 
-    function onInput (e: InputEvent) {
-      search.value = (e.target as HTMLInputElement).value
-    }
-
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
@@ -350,11 +357,10 @@ export const VCombobox = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ search.value }
+          v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
-          onInput={ onInput }
           class={[
             'v-combobox',
             {
