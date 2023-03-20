@@ -117,7 +117,7 @@ Navigation components are used to navigate between different views or pages.
 
 </components-list-item>
 
-<components-list-item name="pagination">
+<components-list-item name="paginations">
 
   The Pagination component is used to separate long sets of data
 
