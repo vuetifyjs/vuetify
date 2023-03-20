@@ -14,7 +14,7 @@ related:
 
 The `v-dialog` component inform users about a specific task and may contain critical information, require decisions, or involve multiple tasks. Use dialogs sparingly because they are interruptive.
 
-![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png)
+<!-- ![dialog Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-dialog/v-dialog-entry.png) -->
 
 ---
 

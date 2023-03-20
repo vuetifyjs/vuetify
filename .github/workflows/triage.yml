@@ -2,6 +2,8 @@ name: Issue triage
 on:
   issues:
     types: [opened, labeled]
+  pull_request:
+    types: [opened, labeled]
 
 jobs:
   triage:

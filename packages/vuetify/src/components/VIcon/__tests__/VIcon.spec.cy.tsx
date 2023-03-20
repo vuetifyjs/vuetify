@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { defineComponent } from 'vue'
 import { VClassIcon } from '..'
 import { VIcon } from '../VIcon'
 
@@ -31,7 +32,7 @@ describe('VIcon', () => {
           defaultSet: 'mdi',
           sets: {
             foo: {
-              component: props => <VClassIcon {...props} />,
+              component: props => <VClassIcon { ...props } />,
             },
           },
         },
@@ -70,13 +71,33 @@ describe('VIcon', () => {
           defaultSet: 'mdi',
           sets: {
             foo: {
-              component: props => <VClassIcon {...props} />,
+              component: props => <VClassIcon { ...props } />,
             },
           },
         },
       })
 
       cy.get('.v-icon').should('have.class', 'bar')
+    })
+
+    it('should render default slot if no icon value found', () => {
+      const Foo = defineComponent({
+        setup () {
+          return () => (
+            <svg style="width: 100%; height: 100%;" class="foo">
+              <path d="M7,10L12,15L17,10H7Z"></path>
+            </svg>
+          )
+        },
+      })
+
+      cy.mount(() => (
+        <VIcon>
+          <Foo>bar</Foo>
+        </VIcon>
+      ))
+
+      cy.get('.v-icon > svg.foo').should('exist')
     })
   })
 

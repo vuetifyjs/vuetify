@@ -20,7 +20,15 @@ import { useVuetify } from '@/plugins/vuetify'
 import { ViteSSG } from '@vuetify/vite-ssg'
 
 // Utilities
-import { fallbackLocale, generatedRoutes, rpath, trailingSlash } from '@/util/routes'
+import {
+  disabledLanguagePattern,
+  generatedRoutes,
+  languagePattern,
+  redirectRoutes,
+  rpath,
+  trailingSlash,
+} from '@/util/routes'
+import { wrapInArray } from '@/util/helpers'
 
 // Globals
 import { IN_BROWSER } from '@/util/globals'
@@ -50,8 +58,15 @@ export const createApp = ViteSSG(
         },
       },
       ...routes,
+      ...redirectRoutes,
       {
-        path: `/:locale(${fallbackLocale})/:pathMatch(.*)*`,
+        path: `/:locale(${disabledLanguagePattern})/:pathMatch(.*)*`,
+        redirect: to => {
+          return rpath(wrapInArray(to.params.pathMatch).join('/'))
+        },
+      },
+      {
+        path: `/:locale(${languagePattern})/:pathMatch(.*)*`,
         component: () => import('@/layouts/404.vue'),
       },
       {
@@ -61,17 +76,22 @@ export const createApp = ViteSSG(
         },
       },
     ],
-    scrollBehavior (to, from, savedPosition) {
-      const main = IN_BROWSER && document.querySelector('main')
+    async scrollBehavior (to, from, savedPosition) {
+      let main = IN_BROWSER && document.querySelector('main')
 
-      if (savedPosition) return savedPosition
+      if (!main) {
+        await (new Promise(resolve => setTimeout(resolve, 1000)))
+        main = document.querySelector('main')
+      }
+
       if (to.hash) {
         return {
           el: to.hash,
           behavior: 'smooth',
           top: main ? parseInt(getComputedStyle(main).getPropertyValue('--v-layout-top')) : 0,
         }
-      } else return { top: 0 }
+      } else if (savedPosition) return savedPosition
+      else return { top: 0 }
     },
   },
   ctx => {

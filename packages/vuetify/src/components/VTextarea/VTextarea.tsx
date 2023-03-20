@@ -18,12 +18,14 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VTextarea = defineComponent({
+export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
   name: 'VTextarea',
 
   directives: { Intersect },
@@ -59,6 +61,7 @@ export const VTextarea = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -72,7 +75,7 @@ export const VTextarea = defineComponent({
         : (model.value || '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength as string | number
 
       if (
         !props.counter ||
@@ -118,6 +121,9 @@ export const VTextarea = defineComponent({
       onFocus()
 
       emit('click:control', e)
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
     }
     function onClear (e: MouseEvent) {
       e.stopPropagation()
@@ -222,7 +228,8 @@ export const VTextarea = defineComponent({
                 style={{
                   '--v-textarea-control-height': controlHeight.value,
                 }}
-                onClick:control={ onControlClick }
+                onClick={ onControlClick }
+                onMousedown={ onControlMousedown }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
@@ -230,6 +237,7 @@ export const VTextarea = defineComponent({
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -243,7 +251,7 @@ export const VTextarea = defineComponent({
                         <span class="v-text-field__prefix">
                           { props.prefix }
                         </span>
-                      ) }
+                      )}
 
                       <textarea
                         ref={ textareaRef }
@@ -282,7 +290,7 @@ export const VTextarea = defineComponent({
                         <span class="v-text-field__suffix">
                           { props.suffix }
                         </span>
-                      ) }
+                      )}
                     </>
                   ),
                 }}
@@ -300,10 +308,10 @@ export const VTextarea = defineComponent({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

@@ -5,7 +5,8 @@ meta:
   keywords: css height, css width, sizing elements, element dimensions
 related:
   - /styles/content/
-  - /styles/contenttext-and-typography/
+  - /styles/flex/
+  - /styles/text-and-typography/
 ---
 
 # Sizing

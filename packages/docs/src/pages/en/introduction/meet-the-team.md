@@ -4,7 +4,7 @@ meta:
   description: Meet the team responsible for building Vuetify. These are the core individuals who drive the vision of the framework.
   keywords: vuetify dev team, vuetify core team
 related:
-  - /introduction/support/
+  - /introduction/enterprise-support/
   - /introduction/long-term-support/
   - /introduction/roadmap/
 ---

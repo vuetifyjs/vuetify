@@ -1,11 +1,11 @@
 ---
+disabled: true
 meta:
   title: Frequently asked questions
   description: Stuck on a problem? Check out the most frequently asked questions by the Vuetify community.
   keywords: frequently asked questions, faq
 related:
   - /getting-started/contributing/
-  - /introduction/support/
   - /features/treeshaking/
 ---
 
@@ -140,7 +140,7 @@ export default {
 
 - **My application does not look correct.**{ #my-application-does-not-look-correct }
 
-  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/components/application/) page.
+  Vuetify requires the use of the `v-app` component. It should wrap your entire application and is the center point for much of the framework functionality including themes. Ensure that you are following the proper markup documented in the [Application](/features/application-layout/) page.
 
 <br>
 
@@ -292,7 +292,7 @@ export default {
 
 If you need help with an issue, please use one of our help channels:
 
-- [Vuetify Professional Support](/introduction/support/)
+- [Vuetify Professional Support](/introduction/enterprise-support/)
 - [Discord Community](https://community.vuetifyjs.com/)
 - [GitHub Discussions](https://discussions.vuetifyjs.com/)
 

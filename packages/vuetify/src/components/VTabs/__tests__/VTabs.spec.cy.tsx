@@ -17,7 +17,7 @@ describe('VTabs', () => {
 
     cy.get('.v-tab').eq(1).click()
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const tabs = wrapper.findComponent<VTabs>('.v-tabs')
       const emits = tabs.emitted('update:modelValue')
 
@@ -68,7 +68,7 @@ describe('VTabs', () => {
 
     cy.get('.v-tab').eq(0).should('have.class', 'v-tab--selected')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       wrapper.setProps({ modelValue: 'bar' })
     })
 
@@ -132,7 +132,7 @@ describe('VTabs', () => {
     const model = ref('B')
     cy.mount(({ show = true }: { show?: boolean }) => (
       <div v-show={ show }>
-        <VTabs modelValue={model.value} onUpdate:modelValue={v => model.value = v as string}>
+        <VTabs modelValue={ model.value } onUpdate:modelValue={ v => model.value = v as string }>
           <VTab value="A">A</VTab>
           <VTab value="B">B</VTab>
           <VTab value="C">C</VTab>

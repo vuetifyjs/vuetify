@@ -1,0 +1,5 @@
+{
+  "argument": {
+    "value": "The value is always an object. The `start`, `end`, `move`, `left`, `right`, `up` and `down` functions can be used to invoke a function when the corresponding touch action occurs. If the `parent` option attaches the touch listeners to the parent element instead of the element the directive is used on. The `options` object is described [here](https://developer.mozilla.org/en-US/docs/Web/API/EventTarget/addEventListener)."
+  }
+}

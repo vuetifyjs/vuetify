@@ -6,6 +6,7 @@ meta:
 related:
   - /styles/display/
   - /styles/content/
+  - /features/internationalization/
 ---
 
 # Text and typography

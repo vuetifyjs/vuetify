@@ -6,7 +6,7 @@ meta:
   keywords: grids, vuetify grid component, layout component, flex component
 related:
   - /styles/flex
-  - /features/breakpoints
+  - /features/display-and-platform/
   - /styles/display
 ---
 
@@ -16,15 +16,17 @@ Vuetify comes with a 12 point grid system built using flexbox.
 
 The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. These breakpoints are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
-<promoted slug="vuemastery-grids" />
-
-<breakpoints-table" />
+----
 
 ## Usage
 
 The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstrap.com/docs/4.0/layout/grid/). It is implemented by using a series of containers, rows, and columns to layout and align content. If you are new to flexbox, read the [CSS Tricks flexbox guide](https://css-tricks.com/snippets/css/a-guide-to-flexbox/#flexbox-background) for background, terminology, guidelines, and code snippets.
 
 <example file="grid/usage" />
+
+<breakpoints-table />
+
+<promoted slug="vuemastery-grids" />
 
 ## API
 
@@ -34,7 +36,7 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ### v-container
 
-`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied
+`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied.
 
 ### v-col
 

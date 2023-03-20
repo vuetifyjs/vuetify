@@ -1,0 +1,6 @@
+export { VDataTable } from './VDataTable'
+export { VDataTableRows } from './VDataTableRows'
+export { VDataTableRow } from './VDataTableRow'
+export { VDataTableVirtual } from './VDataTableVirtual'
+export { VDataTableServer } from './VDataTableServer'
+export { VDataTableFooter } from './VDataTableFooter'

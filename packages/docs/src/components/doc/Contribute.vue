@@ -1,6 +1,6 @@
 <template>
   <div>
-    <span class="font-weight-bold mr-1 text-medium-emphasis">
+    <span class="font-weight-bold me-1 text-medium-emphasis">
       {{ t('edit-this-page') }}
     </span>
     <app-link :href="href">

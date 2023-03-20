@@ -22,7 +22,7 @@ import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '
 
 // Types
 import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
 
@@ -67,9 +67,7 @@ export type VToolbarSlots = MakeSlots<{
   extension: []
 }>
 
-export const VToolbar = genericComponent<new () => {
-  $props: SlotsToProps<VToolbarSlots>
-}>()({
+export const VToolbar = genericComponent<VToolbarSlots>()({
   name: 'VToolbar',
 
   props: makeVToolbarProps(),
@@ -145,7 +143,7 @@ export const VToolbar = genericComponent<new () => {
                 { slots.image ? slots.image?.() : (<VImg />) }
               </VDefaultsProvider>
             </div>
-          ) }
+          )}
 
           <VDefaultsProvider
             defaults={{
@@ -162,13 +160,13 @@ export const VToolbar = genericComponent<new () => {
                 <div class="v-toolbar__prepend">
                   { slots.prepend?.() }
                 </div>
-              ) }
+              )}
 
               { hasTitle && (
                 <VToolbarTitle key="title" text={ props.title }>
                   {{ text: slots.title }}
                 </VToolbarTitle>
-              ) }
+              )}
 
               { slots.default?.() }
 
@@ -176,7 +174,7 @@ export const VToolbar = genericComponent<new () => {
                 <div class="v-toolbar__append">
                   { slots.append?.() }
                 </div>
-              ) }
+              )}
             </div>
           </VDefaultsProvider>
 
@@ -195,7 +193,7 @@ export const VToolbar = genericComponent<new () => {
                 >
                   { extension }
                 </div>
-              ) }
+              )}
             </VExpandTransition>
           </VDefaultsProvider>
         </props.tag>

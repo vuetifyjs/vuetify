@@ -15,13 +15,10 @@ import { genericComponent, getUid, omit, useRender } from '@/util'
 import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 
-export const VTooltip = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VTooltip = genericComponent<OverlaySlots>()({
   name: 'VTooltip',
 
   props: {
@@ -32,6 +29,7 @@ export const VTooltip = genericComponent<new () => {
       closeOnBack: false,
       location: 'end' as const,
       locationStrategy: 'connected' as const,
+      eager: true,
       minWidth: 0,
       offset: 10,
       openOnClick: false,
@@ -43,7 +41,6 @@ export const VTooltip = genericComponent<new () => {
     }), [
       'absolute',
       'persistent',
-      'eager',
     ]),
   },
 
@@ -81,6 +78,12 @@ export const VTooltip = genericComponent<new () => {
       return isActive.value ? 'scale-transition' : 'fade-transition'
     })
 
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-describedby': id.value,
+      }, props.activatorProps)
+    )
+
     useRender(() => {
       const [overlayProps] = filterVOverlayProps(props)
 
@@ -99,10 +102,7 @@ export const VTooltip = genericComponent<new () => {
           origin={ origin.value }
           persistent
           role="tooltip"
-          eager
-          activatorProps={ mergeProps({
-            'aria-describedby': id.value,
-          }, props.activatorProps) }
+          activatorProps={ activatorProps.value }
           _disableGlobalStack
           { ...scopeId }
         >

@@ -178,15 +178,22 @@ export default [
     ],
   },
   {
-    input: 'src/labs/index.ts',
-    output: {
-      file: 'dist/vuetify-labs.js',
-      name: 'Vuetify',
-      format: 'umd',
-      globals: {
-        vue: 'Vue',
+    input: 'src/labs/entry-bundler.ts',
+    output: [
+      {
+        file: 'dist/vuetify-labs.js',
+        name: 'Vuetify',
+        format: 'umd',
+        globals: { vue: 'Vue' },
+        banner,
       },
-    },
+      {
+        file: 'dist/vuetify-labs.esm.js',
+        format: 'es',
+        sourcemap: true,
+        banner,
+      },
+    ],
     external: ['vue'],
     plugins: [
       nodeResolve({ extensions }),
@@ -198,7 +205,33 @@ export default [
         options: {
           charset: false,
         },
-        output () {},
+        output (styles, styleNodes) {
+          mkdirp(path.resolve(__dirname, '../dist')).then(() => {
+            return Promise.all([
+              postcss([autoprefixer]).process(styles, { from: 'src' }),
+              postcss([autoprefixer, cssnano({
+                preset: 'default',
+                postcssZindex: false,
+                reduceIdents: false,
+              })]).process(styles, { from: 'src' }),
+            ])
+          }).then(result => {
+            writeFile(path.resolve(__dirname, '../dist/vuetify-labs.css'), banner + result[0].css, 'utf8')
+            writeFile(path.resolve(__dirname, '../dist/vuetify-labs.min.css'), banner + result[1].css, 'utf8')
+          })
+
+          // Individual CSS files
+          styleNodes = styleNodes.filter(node => node.id.includes('src/labs'))
+          for (const { id, content } of styleNodes) {
+            const out = path.parse(fixWindowsPath(id).replace(
+              path.resolve(__dirname, '../src'),
+              path.resolve(__dirname, '../lib')
+            ))
+            mkdirp(out.dir).then(() => {
+              writeFile(path.join(out.dir, out.name + '.css'), content, 'utf8')
+            })
+          }
+        },
       }),
       alias({
         entries: [

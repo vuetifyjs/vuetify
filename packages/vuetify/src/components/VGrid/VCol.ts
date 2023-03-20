@@ -6,7 +6,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { Prop, PropType } from 'vue'
@@ -75,7 +75,7 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
 
 const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
 
-export const VCol = defineComponent({
+export const VCol = genericComponent()({
   name: 'VCol',
 
   props: {

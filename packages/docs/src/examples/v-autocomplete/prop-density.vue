@@ -9,6 +9,7 @@
             label="Default"
           ></v-autocomplete>
         </v-col>
+
         <v-col cols="12">
           <v-autocomplete
             v-model="values"
@@ -17,6 +18,7 @@
             label="Comfortable"
           ></v-autocomplete>
         </v-col>
+
         <v-col cols="12">
           <v-autocomplete
             v-model="values"

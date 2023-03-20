@@ -22,13 +22,21 @@ import { useDisplay } from '@/composables/display'
 import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
+import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export const VBanner = defineComponent({
+export type VBannerSlots = MakeSlots<{
+  default: []
+  prepend: []
+  text: []
+  actions: []
+}>
+
+export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',
 
   props: {
@@ -113,14 +121,14 @@ export const VBanner = defineComponent({
                 }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <div class="v-banner__content">
             { hasText && (
               <VBannerText key="text">
                 { slots.text ? slots.text() : props.text }
               </VBannerText>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
@@ -129,7 +137,7 @@ export const VBanner = defineComponent({
             <VBannerActions>
               { slots.actions() }
             </VBannerActions>
-          ) }
+          )}
         </props.tag>
       )
     })

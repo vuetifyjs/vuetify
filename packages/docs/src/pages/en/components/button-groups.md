@@ -7,14 +7,14 @@ meta:
 related:
   - /components/buttons/
   - /components/icons/
-  - /components/selection-controls/
+  - /components/toolbars/
 ---
 
 # Button toggles
 
 The `v-btn-toggle` component is a simple wrapper for `v-item-group` built specifically to work with `v-btn`.
 
-![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png)
+<!-- ![btn-groups Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-btn-groups/v-btn-groups-entry.png) -->
 
 ---
 

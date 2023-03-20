@@ -15,7 +15,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
       expect(parseColor('FF00FF00')).toEqual(expect.objectContaining({
         h: expect.any(Number),
@@ -31,7 +30,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const rgba = { r: 128, g: 0, b: 255, a: 0.2 }
@@ -49,7 +47,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const hsla = { h: 220, s: 0.5, l: 1, a: 0.4 }
@@ -67,7 +64,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const hsva = { h: 220, s: 0.5, v: 1, a: 0.4 }

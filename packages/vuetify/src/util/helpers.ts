@@ -113,29 +113,6 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-}
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
-export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
-  const filtered = {} as { [N in K]: T[N] }
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    if (typeof obj[key] !== 'undefined') {
-      filtered[key] = obj[key]
-    }
-  }
-
-  return filtered
-}
-
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
@@ -179,7 +156,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -199,7 +176,7 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
@@ -303,58 +280,6 @@ export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
     ? []
     : Array.isArray(v)
       ? v : [v]
-}
-
-type DataTableCompareFunction<T = any> = (a: T, b: T) => number
-export function sortItems<T extends any, K extends keyof T> (
-  items: T[],
-  sortBy: string[],
-  sortDesc: boolean[],
-  locale: string,
-  customSorters?: Record<K, DataTableCompareFunction<T[K]>>
-): T[] {
-  if (sortBy === null || !sortBy.length) return items
-  const stringCollator = new Intl.Collator(locale, { sensitivity: 'accent', usage: 'sort' })
-
-  return items.sort((a, b) => {
-    for (let i = 0; i < sortBy.length; i++) {
-      const sortKey = sortBy[i]
-
-      let sortA = getObjectValueByPath(a, sortKey)
-      let sortB = getObjectValueByPath(b, sortKey)
-
-      if (sortDesc[i]) {
-        [sortA, sortB] = [sortB, sortA]
-      }
-
-      if (customSorters?.[sortKey as K]) {
-        const customResult = customSorters[sortKey as K](sortA, sortB)
-
-        if (!customResult) continue
-
-        return customResult
-      }
-
-      // Check if both cannot be evaluated
-      if (sortA === null && sortB === null) {
-        continue
-      }
-
-      // Dates should be compared numerically
-      if (sortA instanceof Date && sortB instanceof Date) {
-        return sortA.getTime() - sortB.getTime()
-      }
-
-      [sortA, sortB] = [sortA, sortB].map(s => (s || '').toString().toLocaleLowerCase())
-
-      if (sortA !== sortB) {
-        if (!isNaN(sortA) && !isNaN(sortB)) return Number(sortA) - Number(sortB)
-        return stringCollator.compare(sortA, sortB)
-      }
-    }
-
-    return 0
-  })
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -506,11 +431,15 @@ export const randomHexColor = () => {
 }
 
 export function toKebabCase (str = '') {
-  return str
+  if (toKebabCase.cache.has(str)) return toKebabCase.cache.get(str)!
+  const kebab = str
     .replace(/[^a-z]/gi, '-')
     .replace(/\B([A-Z])/g, '-$1')
     .toLowerCase()
+  toKebabCase.cache.set(str, kebab)
+  return kebab
 }
+toKebabCase.cache = new Map<string, string>()
 
 export type MaybeRef<T> = T | Ref<T>
 

@@ -20,14 +20,25 @@ import { useTouch } from './touch'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
+import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-const locations = ['start', 'end', 'left', 'right', 'bottom'] as const
+export type VNavigationDrawerImageSlot = {
+  image: string
+}
 
-export const VNavigationDrawer = defineComponent({
+export type VNavigationDrawerSlots = {
+  default: []
+  prepend: []
+  append: []
+  image: [VNavigationDrawerImageSlot]
+}
+
+const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
+
+export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
 
   props: {
@@ -41,7 +52,10 @@ export const VNavigationDrawer = defineComponent({
       default: null,
     },
     permanent: Boolean,
-    rail: Boolean,
+    rail: {
+      type: Boolean as PropType<boolean | null>,
+      default: null,
+    },
     railWidth: {
       type: [Number, String],
       default: 56,
@@ -74,9 +88,10 @@ export const VNavigationDrawer = defineComponent({
 
   emits: {
     'update:modelValue': (val: boolean) => true,
+    'update:rail': (val: boolean) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { borderClasses } = useBorder(props)
@@ -105,6 +120,10 @@ export const VNavigationDrawer = defineComponent({
       !isTemporary.value &&
       location.value !== 'bottom'
     )
+
+    if (props.expandOnHover && props.rail != null) {
+      watch(isHovering, val => emit('update:rail', !val))
+    }
 
     if (!props.disableResizeWatcher) {
       watch(isTemporary, val => !props.permanent && (nextTick(() => isActive.value = !val)))

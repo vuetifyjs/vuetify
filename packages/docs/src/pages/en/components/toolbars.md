@@ -6,7 +6,7 @@ meta:
   keywords: toolbars, vuetify toolbar component, vue toolbar component
 related:
   - /components/buttons/
-  - /components/footer/
+  - /components/footers/
   - /components/tabs/
 ---
 
@@ -14,7 +14,7 @@ related:
 
 The `v-toolbar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The toolbar component works great in conjunction with [v-navigation-drawer](/components/navigation-drawers) and [v-card](/components/cards).
 
-![Toolbar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-toolbar/v-toolbar-entry.png)
+<!-- ![Toolbar Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-toolbar/v-toolbar-entry.png) -->
 
 ---
 
@@ -96,7 +96,7 @@ Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted
 
 #### Prominent toolbars
 
-Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
+Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app-bar](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
 
 <example file="v-toolbar/prop-prominent" />
 

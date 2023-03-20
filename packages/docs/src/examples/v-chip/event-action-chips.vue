@@ -19,7 +19,7 @@
       <div class="d-flex align-center">
         <v-avatar
           size="24"
-          class="mr-4"
+          class="me-4"
         >
           <v-img
             src="https://cdn.vuetifyjs.com/images/weather/part-cloud-48px.png"

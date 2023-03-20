@@ -12,7 +12,7 @@
         <v-select
           v-model="paddingDirection"
           :items="directions"
-          class="pr-2"
+          class="pe-2"
           label="Padding"
         >
           <template v-slot:prepend>
@@ -41,7 +41,7 @@
         <v-select
           v-model="marginDirection"
           :items="directions"
-          class="pr-2"
+          class="pe-2"
           label="Margin"
         >
           <template v-slot:prepend>

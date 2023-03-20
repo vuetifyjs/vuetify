@@ -3,7 +3,7 @@ import 'cypress-real-events'
 import type { mount as cyMount } from 'cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'
-import type { FunctionalComponent } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent } from 'vue'
 import type { VuetifyOptions } from '@/framework'
 
 type Swipe = number[] | string
@@ -16,15 +16,18 @@ declare global {
       ) & (
         (component: JSX.Element, options?: MountingOptions<any> | null, vuetifyOptions?: VuetifyOptions) => Chainable
       )
-      setProps (props: Record<string, unknown>): Chainable<VueWrapper<any>>
+      setProps (props: Record<string, unknown>): Chainable<VueWrapper<ComponentPublicInstance>>
       getBySel (dataTestAttribute: string, args?: any): Chainable<Element>
       percySnapshot (
         name?: string,
         options?: SnapshotOptions
       ): Chainable
-      vue (): Chainable<VueWrapper<any>>
+      vue (): Chainable<{
+        wrapper: VueWrapper<ComponentPublicInstance>
+        component: VueWrapper<ComponentPublicInstance>['vm']
+      }>
       swipe (...path: Swipe[]): Chainable<void>
-      emitted (selector: string, event: string): Chainable<unknown[]>
+      emitted (selector: Parameters<VueWrapper<any>['findComponent']>[0], event: string): Chainable<unknown[]>
     }
   }
 }

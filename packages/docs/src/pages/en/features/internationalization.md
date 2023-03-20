@@ -5,8 +5,8 @@ meta:
   keywords: i18n, language, internationalization
 related:
   - /features/accessibility/
-  - /features/bidirectionality/
-  - /introduction/why-vuetify/
+  - /components/locale-providers/
+  - /getting-started/browser-support/
 ---
 
 # Internationalization (i18n)
@@ -69,7 +69,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
   export default {
     methods: {
       changeLocale (locale) {
-        this.$vuetify.locale.current.value = locale
+        this.$vuetify.locale.current = locale
       }
     }
   }
@@ -230,7 +230,7 @@ app.mount('#app')
 Currently Vuetify provides translations in the following languages:
 
 - **af** - Afrikaans (Afrikaans)
-- **ar** - Arabic (اللغة العربية)
+- **ar** - Arabic (العربية)
 - **az** - Azerbaijani (Azərbaycan)
 - **bg** - Bulgarian (български)
 - **ca** - Catalan (català)

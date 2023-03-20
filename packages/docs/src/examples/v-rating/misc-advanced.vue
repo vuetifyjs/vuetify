@@ -12,7 +12,7 @@
       </v-col>
 
       <v-col cols="6">
-        <v-container class="pa-0 pl-2 my-n1">
+        <v-container class="pa-0 ps-2 my-n1">
           <v-row>
             <v-col
               class="d-flex"
@@ -113,7 +113,7 @@
     <v-divider></v-divider>
 
     <v-card-actions>
-      <span class="pl-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
+      <span class="ps-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
 
       <v-spacer></v-spacer>
 

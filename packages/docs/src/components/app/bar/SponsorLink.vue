@@ -1,7 +1,7 @@
 <template>
   <app-btn
     :to="rpath('/introduction/sponsors-and-backers/')"
-    class="ml-1"
+    class="ms-1"
     color="medium-emphasis"
     variant="text"
     text="sponsor"

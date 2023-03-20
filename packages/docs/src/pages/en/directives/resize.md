@@ -5,7 +5,7 @@ meta:
   description: The resize directive provides the ability to conditionally invoke functions when the screen is resized.
   keywords: resize, vuetify resize directive, vue resize directive, window resize directive
 related:
-  - /features/breakpoints/
+  - /features/display-and-platform/
   - /components/grids/
   - /styles/flex/
 ---

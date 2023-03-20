@@ -47,7 +47,7 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, PropType, Ref } from 'vue'
 
 interface ScrimProps {
@@ -110,9 +110,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeTransitionProps(),
 }, 'v-overlay')
 
-export const VOverlay = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -243,7 +241,7 @@ export const VOverlay = genericComponent<new () => {
           props: mergeProps({
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
-        }) }
+        })}
 
         { isMounted.value && (
           <Teleport
@@ -277,7 +275,7 @@ export const VOverlay = genericComponent<new () => {
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
-                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
+                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
                 >
                   <div
                     ref={ contentEl }

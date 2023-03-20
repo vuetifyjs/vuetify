@@ -4,9 +4,9 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VListSubheader = defineComponent({
+export const VListSubheader = genericComponent()({
   name: 'VListSubheader',
 
   props: {
@@ -40,7 +40,7 @@ export const VListSubheader = defineComponent({
             <div class="v-list-subheader__text">
               { slots.default?.() ?? props.title }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })

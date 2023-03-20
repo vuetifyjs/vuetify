@@ -1,0 +1,10 @@
+{
+  "argument": {
+    "value": "A boolean can be used to control if the ripple directive should be active or not. You can provide an object with a `class` property to have that class applied to the ripple container element."
+  },
+  "modifiers": {
+    "center": "Makes it so that the ripple originates from the center of the element, instead where the user clicked on it.",
+    "circle": "Changes the ripple behavior to better match circular elements.",
+    "stop": "Prevents ripples from being triggered on any other elements when the click event is bubbling up."
+  }
+}

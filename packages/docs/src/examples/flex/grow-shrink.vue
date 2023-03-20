@@ -12,6 +12,7 @@
           I'm 2 column wide
         </v-sheet>
       </v-col>
+
       <v-col
         cols="1"
         style="min-width: 100px; max-width: 100%;"
@@ -21,6 +22,7 @@
           I'm 1 column wide and I grow to take all the space
         </v-sheet>
       </v-col>
+
       <v-col
         cols="5"
         style="min-width: 100px;"

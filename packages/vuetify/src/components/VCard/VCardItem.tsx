@@ -9,9 +9,20 @@ import { IconValue } from '@/composables/icons'
 import { makeDensityProps } from '@/composables/density'
 
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VCardItem = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VCardItemSlots = MakeSlots<{
+  default: []
+  prepend: []
+  append: []
+  title: []
+  subtitle: []
+}>
+
+export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
 
   props: {
@@ -53,20 +64,20 @@ export const VCardItem = defineComponent({
                 { slots.prepend?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <div class="v-card-item__content">
             { hasTitle && (
               <VCardTitle key="title">
-                { slots.title?.() ?? props.title}
+                { slots.title?.() ?? props.title }
               </VCardTitle>
-            ) }
+            )}
 
             { hasSubtitle && (
               <VCardSubtitle key="subtitle">
                 { slots.subtitle?.() ?? props.subtitle }
               </VCardSubtitle>
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
@@ -90,7 +101,7 @@ export const VCardItem = defineComponent({
                 { slots.append?.() ?? (<VAvatar />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
         </div>
       )
     })

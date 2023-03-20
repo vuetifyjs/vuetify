@@ -29,10 +29,25 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
+import { genericComponent, useRender } from '@/util'
 
-export const VCard = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VCardSlots = MakeSlots<{
+  default: []
+  actions: []
+  title: []
+  subtitle: []
+  text: []
+  loader: []
+  image: []
+  prepend: []
+  append: []
+}>
+
+export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
   directives: { Ripple },
@@ -50,7 +65,10 @@ export const VCard = defineComponent({
     },
     prependAvatar: String,
     prependIcon: IconValue,
-    ripple: Boolean,
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
     subtitle: String,
     text: String,
     title: String,
@@ -127,7 +145,7 @@ export const VCard = defineComponent({
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }
-          v-ripple={ isClickable.value }
+          v-ripple={ isClickable.value && props.ripple }
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (
@@ -144,7 +162,7 @@ export const VCard = defineComponent({
                 { slots.image?.() ?? <VImg /> }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <LoaderSlot
             name="v-card"
@@ -171,19 +189,19 @@ export const VCard = defineComponent({
                 append: slots.append,
               }}
             </VCardItem>
-          ) }
+          )}
 
           { hasText && (
             <VCardText key="text">
               { slots.text?.() ?? props.text }
             </VCardText>
-          ) }
+          )}
 
           { slots.default?.() }
 
           { slots.actions && (
             <VCardActions v-slots={{ default: slots.actions }} />
-          ) }
+          )}
 
           { genOverlays(isClickable.value, 'v-card') }
         </Tag>

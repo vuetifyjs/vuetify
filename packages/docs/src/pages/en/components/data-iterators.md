@@ -5,7 +5,7 @@ meta:
   description: The data iterator component is used for filter and displaying data including sorting, searching, pagination, and selection.
   keywords: data iterators, vuetify data iterator component, vue data iterator component
 related:
-  - /components/data-tables/
+  - /components/data-tables/basics/
   - /components/simple-tables/
   - /components/toolbars/
 ---

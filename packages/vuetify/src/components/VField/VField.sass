@@ -376,10 +376,10 @@
 
   @media (hover: hover)
     &:hover .v-field__overlay
-      opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'hover')} * var(--v-theme-overlay-multiplier))
+      opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
 
   &.v-field--focused .v-field__overlay
-    opacity: calc(#{$field-overlay-filled-opacity + map.get(settings.$states, 'focus')} * var(--v-theme-overlay-multiplier))
+    opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
 
 /* endregion */
 /* region MODIFIERS */

@@ -14,9 +14,13 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
 
-export const VSliderThumb = defineComponent({
+export type VSliderThumbSlots = {
+  'thumb-label': []
+}
+
+export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
@@ -38,6 +42,10 @@ export const VSliderThumb = defineComponent({
     position: {
       type: Number,
       required: true,
+    },
+    ripple: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -149,7 +157,7 @@ export const VSliderThumb = defineComponent({
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
-            v-ripple={[true, null, ['circle', 'center']]}
+            v-ripple={[props.ripple, null, ['circle', 'center']]}
           />
           <VScaleTransition origin="bottom center">
             <div

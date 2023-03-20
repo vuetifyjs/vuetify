@@ -1,5 +1,5 @@
 {
   "props": {
-    "transition": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/transition.json))"
+    "transition": "Sets the component transition. Can be one of the [built in](/styles/transitions/) or custom transition."
   }
 }

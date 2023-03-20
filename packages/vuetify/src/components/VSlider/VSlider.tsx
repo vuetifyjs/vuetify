@@ -14,9 +14,18 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VSlider = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+import type { VInputSlots } from '@/components/VInput/VInput'
+
+export type VSliderSlots = VInputSlots & MakeSlots<{
+  'tick-label': []
+  'thumb-label': []
+}>
+
+export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
   props: {
@@ -97,6 +106,7 @@ export const VSlider = defineComponent({
                 { slots.label?.(slotProps) ?? props.label
                   ? (
                     <VLabel
+                      id={ slotProps.id }
                       class="v-slider__label"
                       text={ props.label }
                     />
@@ -106,7 +116,7 @@ export const VSlider = defineComponent({
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
-            default: ({ id }) => (
+            default: ({ id, messagesId }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }
@@ -131,6 +141,7 @@ export const VSlider = defineComponent({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
+                  aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
                   min={ min.value }
                   max={ max.value }

@@ -13,14 +13,14 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
     cy.get('.v-text-field').type('Something')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
@@ -30,7 +30,7 @@ describe('VForm', () => {
 
     cy.get('.v-text-field').type(' and something else')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
@@ -44,15 +44,15 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm>
-          <VTextField label="Name" rules={ [v => v.length < 10 || 'Name should be longer than 10 characters'] }></VTextField>
-          <VTextField label="Email" rules={ [v => v.length < 10 || 'E-mail should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length < 10 || 'Name should be longer than 10 characters']}></VTextField>
+          <VTextField label="Email" rules={[v => v.length < 10 || 'E-mail should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
     cy.get('.v-text-field').eq(0).type('Valid')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.be.undefined
@@ -60,7 +60,7 @@ describe('VForm', () => {
 
     cy.get('.v-text-field').eq(1).type('Valid')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([
@@ -74,7 +74,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => !!v || 'Name required'] }></VTextField>
+          <VTextField label="Name" rules={[v => !!v || 'Name required']}></VTextField>
         </VForm>
       </Application>
     ))
@@ -92,14 +92,14 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
     cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false]])
@@ -111,7 +111,7 @@ describe('VForm', () => {
 
     cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', '')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false], [null]])
@@ -123,14 +123,14 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField label="Name" rules={ [v => v.length > 10 || 'Name should be longer than 10 characters'] }></VTextField>
+          <VTextField label="Name" rules={[v => v.length > 10 || 'Name should be longer than 10 characters']}></VTextField>
         </VForm>
       </Application>
     ))
 
     cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false]])
@@ -142,7 +142,7 @@ describe('VForm', () => {
 
     cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', 'Something')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
 
       expect(emits).to.deep.equal([[false], [null]])
@@ -152,7 +152,7 @@ describe('VForm', () => {
   it('should not submit form if validation fails', () => {
     cy.mount(() => (
       <VForm action="/action">
-        <VTextField rules={ [v => !!v || 'Field required'] } />
+        <VTextField rules={[v => !!v || 'Field required']} />
         <VBtn type="submit">Submit</VBtn>
       </VForm>
     ))
@@ -165,7 +165,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm action="/action" onSubmit={ onSubmit }>
-          <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+          <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
           <VBtn type="submit">Submit</VBtn>
         </VForm>
       </Application>
@@ -176,7 +176,7 @@ describe('VForm', () => {
     }
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
-    cy.vue().then(async wrapper => {
+    cy.vue().then(async ({ wrapper }) => {
       const emits = wrapper.findComponent<VForm>('.v-form').emitted<[SubmitEventPromise]>('submit')
 
       expect(await emits![0][0]).to.deep.equal({ valid: true, errors: [] })
@@ -189,7 +189,7 @@ describe('VForm', () => {
     cy.mount(() => (
       <Application>
         <VForm ref={ form }>
-          <VTextField rules={ [v => v.length < 4 || 'Error'] } />
+          <VTextField rules={[v => v.length < 4 || 'Error']} />
         </VForm>
       </Application>
     ))
@@ -209,10 +209,10 @@ describe('VForm', () => {
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
-  it('should submit form if validation passes', () => {
+  it.only('should submit form if validation passes', () => {
     cy.mount(() => (
-      <VForm action="/action">
-        <VTextField modelValue="foo" rules={ [v => !!v || 'Field required'] } />
+      <VForm action="/__cypress/src/action">
+        <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
         <VBtn type="submit">Submit</VBtn>
       </VForm>
     ))

@@ -24,16 +24,26 @@ import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
 
-export const VAlert = defineComponent({
+export type VAlertSlots = MakeSlots<{
+  default: []
+  prepend: []
+  title: []
+  text: []
+  append: []
+  close: []
+}>
+
+export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',
 
   props: {
@@ -163,7 +173,7 @@ export const VAlert = defineComponent({
               ]}
               style={ textColorStyles.value }
             />
-          ) }
+          )}
 
           { hasPrepend && (
             <VDefaultsProvider
@@ -183,18 +193,18 @@ export const VAlert = defineComponent({
                 }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
 
           <div class="v-alert__content">
             { hasTitle && (
               <VAlertTitle key="title">
                 { slots.title ? slots.title() : props.title }
               </VAlertTitle>
-            ) }
+            )}
 
             { hasText && (
               slots.text ? slots.text() : props.text
-            ) }
+            )}
 
             { slots.default?.() }
           </div>
@@ -203,7 +213,7 @@ export const VAlert = defineComponent({
             <div key="append" class="v-alert__append">
               { slots.append() }
             </div>
-          ) }
+          )}
 
           { hasClose && (
             <VDefaultsProvider
@@ -220,7 +230,7 @@ export const VAlert = defineComponent({
                 { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
         </props.tag>
       )
     }

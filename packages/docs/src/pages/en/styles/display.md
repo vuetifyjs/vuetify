@@ -1,12 +1,12 @@
 ---
 meta:
-  title: Display helpers
+  title: Display
   description: Display helper classes allow you to control when elements should display based upon viewport.
   keywords: display helper classes, display classes, vuetify display
 related:
   - /styles/text-and-typography/
   - /directives/resize/
-  - /features/breakpoints/
+  - /features/display-and-platform/
 ---
 
 # Display helpers
@@ -15,11 +15,11 @@ The display helpers allow you to control the display of content. This includes b
 
 <entry />
 
-<breakpoints-table" />
+<breakpoints-table />
 
 ## Display
 
-Specify the elements `display` property. These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.d-{value}`, it is inferred to be `.d-${value}-xs`.
+Specify the elements `display` property. These classes can be applied to all breakpoints from `xs` to `xl`. When using a base class,`.d-{value}`, it is inferred to be `.d-xs-{value}`.
 
 - `.d-{value}` for `xs`
 - `.d-{breakpoint}-{value}` for `sm`, `md`, `lg` and `xl`

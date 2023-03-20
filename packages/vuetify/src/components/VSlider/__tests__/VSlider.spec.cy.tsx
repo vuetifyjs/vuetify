@@ -16,7 +16,7 @@ describe('VSlider', () => {
 
     cy.get('.v-slider').click(100, 15)
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.have.length(1)
@@ -36,7 +36,7 @@ describe('VSlider', () => {
     cy.get('.v-slider-thumb').swipe([100, 15], [200, 15])
 
     // eslint-disable-next-line sonarjs/no-identical-functions
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
 
@@ -48,7 +48,7 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider max={20} step={1} />
+          <VSlider max={ 20 } step={ 1 } />
         </CenteredGrid>
       </VApp>
     ))
@@ -70,7 +70,7 @@ describe('VSlider', () => {
     cy.realPress('End')
     cy.realPress('Home')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.deep.equal([
@@ -118,7 +118,7 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider step={2} min={0} max={10} />
+          <VSlider step={ 2 } min={ 0 } max={ 10 } />
         </CenteredGrid>
       </VApp>
     ))
@@ -126,7 +126,7 @@ describe('VSlider', () => {
     cy.realPress('Tab')
     cy.realPress('ArrowRight')
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const slider = wrapper.getComponent(VSlider)
       const emits = slider.emitted('update:modelValue')
       expect(emits).to.deep.equal([
@@ -139,9 +139,9 @@ describe('VSlider', () => {
     cy.mount(() => (
       <VApp>
         <CenteredGrid width="300px">
-          <VSlider ticks={[0, 2, 8, 10]} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={[0, 2, 8, 10]} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
 
-          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={0} max={10} step={1} showTicks="always" />
+          <VSlider ticks={{ 0: 'a', 5: 'b', 10: 'c' }} min={ 0 } max={ 10 } step={ 1 } showTicks="always" />
         </CenteredGrid>
       </VApp>
     ))

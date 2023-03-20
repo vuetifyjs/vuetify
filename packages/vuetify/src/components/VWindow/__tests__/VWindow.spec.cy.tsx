@@ -154,7 +154,7 @@ describe('VWindow', () => {
 
     cy.get('@arrows').eq(1).click()
 
-    cy.vue().then(wrapper => {
+    cy.vue().then(({ wrapper }) => {
       const window = wrapper.findComponent<VWindow>('.v-window')
 
       expect(window.emitted('update:modelValue')).to.deep.equal([['one'], ['three']])
@@ -246,7 +246,7 @@ describe('VWindow', () => {
   it('should disable touch support', () => {
     cy.mount(() => (
       <div>
-        <VWindow touch={false}>
+        <VWindow touch={ false }>
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>

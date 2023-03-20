@@ -10,9 +10,11 @@
     </div>
 
     <template v-slot:configuration>
-      <v-select v-model="icon" label="Icon" :items="icons" clearable></v-select>
+      <v-select v-model="size" label="Size" :items="sizes"></v-select>
 
-      <v-select v-model="size" label="Size" :items="sizes" clearable></v-select>
+      <v-select v-model="color" label="Color" :items="colors"></v-select>
+
+      <v-select v-model="icon" label="Icon" :items="icons" clearable></v-select>
     </template>
   </usage-example>
 </template>
@@ -26,16 +28,28 @@
   const model = ref('default')
   const icon = ref()
   const size = ref()
+  const color = ref()
   const options = []
   const props = computed(() => {
     return {
+      color: color.value || undefined,
       icon: icon.value || 'mdi-vuetify',
       size: ['', 'medium'].includes(size.value) ? undefined : size.value,
     }
   })
+  const colors = [
+    'success',
+    'info',
+    'warning',
+    'error',
+  ]
   const icons = [
     'mdi-plus',
-    'mdi-minus',
+    'mdi-success',
+    'mdi-information',
+    'mdi-alert',
+    'mdi-alert-circle',
+    'mdi-wifi',
     'mdi-access-point',
     'mdi-antenna',
   ]

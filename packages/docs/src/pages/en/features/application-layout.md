@@ -4,9 +4,9 @@ meta:
   description: Vuetify provides functionality to create complex layouts using components such as app bars and navigation drawers
   keywords: application, layout, default layout
 related:
-  - /components/application/
   - /components/app-bars/
   - /components/navigation-drawers/
+  - /components/footers/
 ---
 
 # Application layout
@@ -17,23 +17,25 @@ The system is built around an outside-in principle, where each application layou
 
 The following components are compatible with the layout system:
 
-- [v-app-bar](/components/app-bars)
-- [v-system-bar](/components/system-bars)
-- [v-navigation-drawer](/components/navigation-drawers)
-- [v-footer](/components/footers)
-- [v-bottom-navigation](/components/bottom-navigation)
+| Component | Description |
+| - | - |
+| [v-app-bar](/components/app-bars/) | A container that is used navigation, branding, search, and actions |
+| [v-system-bar](/components/system-bars/) | A system bar replaces the native phone system bar |
+| [v-navigation-drawer](/components/navigation-drawers/) | A persistent or temporary container that holds site navigation links |
+| [v-footer](/components/footers/) | A generic component used to replace the default html footer |
+| [v-bottom-navigation](/components/bottom-navigation/) | A persistent or temporary container that holds navigation links and is typically used for smaller devices |
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
-
-## Placing components
-
-By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
 <alert type="info">
 
   In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
 
 </alert>
+
+## Placing components
+
+By default, the order in which layout components will attempt to reserve space is simply the order that they appear in your markup. To illustrate this concept, see the following two examples where a single **v-app-bar** and **v-navigation-drawer** have changed places in the markup.
 
 <example file="application-layout/app-bar-first" />
 

@@ -9,7 +9,7 @@
           icon="mdi-alert"
           size="18"
           color="error"
-          class="mr-1 pb-1"
+          class="me-1 pb-1"
         ></v-icon>
 
         Extreme Weather Alert

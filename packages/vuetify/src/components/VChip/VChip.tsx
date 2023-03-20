@@ -22,15 +22,26 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
-export const VChip = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VChipSlots = MakeSlots<{
+  default: []
+  label: []
+  prepend: []
+  append: []
+}>
+
+export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },
@@ -55,7 +66,10 @@ export const VChip = defineComponent({
       default: '$complete',
     },
     label: Boolean,
-    link: Boolean,
+    link: {
+      type: Boolean,
+      default: undefined,
+    },
     pill: Boolean,
     prependAvatar: String,
     prependIcon: IconValue,
@@ -68,6 +82,9 @@ export const VChip = defineComponent({
       type: Boolean,
       default: true,
     },
+
+    onClick: EventProp,
+    onClickOnce: EventProp,
 
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -89,6 +106,7 @@ export const VChip = defineComponent({
   },
 
   setup (props, { attrs, emit, slots }) {
+    const { t } = useLocale()
     const { borderClasses } = useBorder(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
@@ -100,7 +118,12 @@ export const VChip = defineComponent({
     const isActive = useProxiedModel(props, 'modelValue')
     const group = useGroupItem(props, VChipGroupSymbol, false)
     const link = useLink(props, attrs)
-    const isClickable = computed(() => !props.disabled && (!!group || link.isClickable.value || props.link))
+    const isLink = computed(() => props.link !== false && link.isLink.value)
+    const isClickable = computed(() =>
+      !props.disabled &&
+      props.link !== false &&
+      (!!group || props.link || link.isClickable.value)
+    )
 
     function onCloseClick (e: Event) {
       isActive.value = false
@@ -115,6 +138,13 @@ export const VChip = defineComponent({
 
       link.navigate?.(e)
       group?.toggle()
+    }
+
+    function onKeyDown (e: KeyboardEvent) {
+      if (e.key === 'Enter' || e.key === ' ') {
+        e.preventDefault()
+        onClick(e as any as MouseEvent)
+      }
     }
 
     return () => {
@@ -152,8 +182,10 @@ export const VChip = defineComponent({
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
           href={ link.href.value }
-          v-ripple={ [isClickable.value && props.ripple, null] }
+          tabindex={ isClickable.value ? 0 : undefined }
           onClick={ onClick }
+          onKeydown={ isClickable.value && !isLink.value && onKeyDown }
+          v-ripple={[isClickable.value && props.ripple, null]}
         >
           { genOverlays(isClickable.value, 'v-chip') }
 
@@ -173,7 +205,7 @@ export const VChip = defineComponent({
                 </div>
               </VExpandXTransition>
             </VDefaultsProvider>
-          ) }
+          )}
 
           { hasPrepend && (
             <VDefaultsProvider
@@ -198,7 +230,7 @@ export const VChip = defineComponent({
                 : undefined
               }
             </VDefaultsProvider>
-          ) }
+          )}
 
           { slots.default?.({
             isSelected: group?.isSelected.value,
@@ -232,7 +264,7 @@ export const VChip = defineComponent({
                 : undefined
               }
             </VDefaultsProvider>
-          ) }
+          )}
 
           { hasClose && (
             <VDefaultsProvider
@@ -246,12 +278,13 @@ export const VChip = defineComponent({
             >
               <div
                 class="v-chip__close"
+                aria-label={ t(props.closeLabel) }
                 onClick={ onCloseClick }
               >
                 { slots.close ? slots.close() : (<VIcon />) }
               </div>
             </VDefaultsProvider>
-          ) }
+          )}
         </Tag>
       )
     }
