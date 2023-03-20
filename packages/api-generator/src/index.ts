@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import path from 'path'
+import * as path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' assert { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type: 'json' }
@@ -15,6 +15,7 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 import { execSync } from 'child_process'
+import { fileURLToPath } from 'url'
 
 type TranslationData = {
   [type in 'props' | 'events' | 'slots' | 'exposed']?: {
@@ -63,7 +64,7 @@ const run = async () => {
     )
   }
 
-  const outPath = new URL('../../docs/src/api/data/', import.meta.url).pathname
+  const outPath = fileURLToPath(new URL('../../docs/src/api/data/', import.meta.url))
 
   const componentData = await Promise.all(
     Object.entries(components).map(([componentName, componentInstance]) => {
