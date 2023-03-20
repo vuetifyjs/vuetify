@@ -195,6 +195,12 @@ Buttons are often used to trigger actions within a [v-dialog](/components/dialog
 
 <example file="v-btn/misc-dialog-action" />
 
+### Cookie settings
+
+In this example we use a [v-banner](/components/banners/) component to display a custom cookie consent banner. Clicking the "Manage Cookies" button will prompt a [v-dialog](/components/dialogs/) component.
+
+<example file="v-btn/misc-cookie-settings" />
+
 ## Global Configuration
 
 Modify the default values and set a default style for all `v-btn` components using the [Global configuration](/features/global-configuration/). This helps keep your application consistent and allows you to change it in the future with minimal effort.
