@@ -2,7 +2,7 @@
 import './VAppBar.sass'
 
 // Components
-import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
+import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
@@ -72,7 +72,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
 
     useRender(() => {
-      const [toolbarProps] = filterToolbarProps(props)
+      const [toolbarProps] = VToolbar.filterProps(props)
 
       return (
         <VToolbar
