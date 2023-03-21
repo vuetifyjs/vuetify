@@ -98,7 +98,7 @@ export function stringifyProps (props: any) {
 
 async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
   try {
-    const data = await import(fileURLToPath(new URL(`../src/locale/${locale}/${componentName}.json`, import.meta.url)), {
+    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
       assert: { type: 'json' },
     })
     return Object.assign(fallback, data.default)
