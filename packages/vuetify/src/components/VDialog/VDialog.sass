@@ -9,7 +9,7 @@
   &.v-overlay--scroll-blocked
     margin-inline-end: calc(#{$dialog-margin} + var(--v-scrollbar-offset))
 
-  .v-overlay__content
+  > .v-overlay__content
     max-height: 100%
     width: 100%
     max-width: 100%
@@ -48,7 +48,7 @@
   margin-inline-end: 0
   --v-scrollbar-offset: 0px
 
-  .v-overlay__content
+  > .v-overlay__content
     border-radius: 0
     margin: 0
     padding: 0
@@ -67,8 +67,8 @@
       min-width: 100%
       border-radius: 0
 
-.v-dialog--scrollable .v-overlay__content,
-.v-dialog--scrollable .v-overlay__content > form
+.v-dialog--scrollable > .v-overlay__content,
+.v-dialog--scrollable > .v-overlay__content > form
   display: flex
 
   > .v-card
