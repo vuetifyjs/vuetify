@@ -20,7 +20,6 @@ import {
   filterInputAttrs,
   genericComponent,
   getUid,
-  pick,
   propsFactory,
   SUPPORTS_FOCUS_VISIBLE,
   useRender,
@@ -257,7 +256,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                   onBlur,
                   id: id.value,
                 },
-              } as SelectionControlSlot) }
+              } as SelectionControlSlot)}
             </div>
           </div>
 
@@ -265,7 +264,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             <VLabel for={ id.value } clickable>
               { label }
             </VLabel>
-          ) }
+          )}
         </div>
       )
     })
@@ -278,7 +277,3 @@ export const VSelectionControl = genericComponent<new <T>() => {
 })
 
 export type VSelectionControl = InstanceType<typeof VSelectionControl>
-
-export function filterControlProps (props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>>) {
-  return pick(props, Object.keys(VSelectionControl.props) as any)
-}

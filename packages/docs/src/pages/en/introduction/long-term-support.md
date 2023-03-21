@@ -11,11 +11,9 @@ related:
 
 # Long-term support
 
-Bug fixes and security patches for **18 months** on older versions of Vuetify
+Vuetify provides long-term support to the last major release for 18 months for critical bugs and security vulnerabilities.
 
-![Long-term support Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/long-term-support/long-term-support-entry.png)
-
-----
+<entry />
 
 We understand that many projects that utilize Vuetify have development cycles that prevent upgrading to the latest version. In order to provide developers and businesses peace of mind when adopting Vuetify, we commit to at minimum of **18 months** for critical bugs and security vulnerabilities for the latest _minor_ of the last _major_ release.
 

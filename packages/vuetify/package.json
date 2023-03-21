@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.1.6",
+  "version": "3.1.10",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -51,8 +51,15 @@
     "CHANGELOG.md"
   ],
   "exports": {
-    ".": "./lib/framework.mjs",
-    "./styles": "./lib/styles/main.css",
+    ".": {
+      "sass": "./lib/styles/main.sass",
+      "style": "./lib/styles/main.css",
+      "default": "./lib/framework.mjs"
+    },
+    "./styles": {
+      "sass": "./lib/styles/main.sass",
+      "default": "./lib/styles/main.css"
+    },
     "./styles/*": "./lib/styles/*",
     "./framework": "./lib/framework.mjs",
     "./blueprints": "./lib/blueprints/index.mjs",
@@ -92,6 +99,7 @@
     "watch": "yarn build:lib --watch",
     "dev": "cross-env NODE_ENV=development vite",
     "dev:ssr": "cross-env NODE_ENV=development VITE_SSR=true vite-ssr",
+    "dev:prod": "concurrently \"cross-env NODE_ENV=production vite build -w\" \"vite preview\"",
     "build": "rimraf lib dist && concurrently \"yarn build:dist\" \"yarn build:lib\" -n \"dist,lib\" --kill-others-on-fail -r && yarn build:types",
     "build:dist": "rollup --config build/rollup.config.js",
     "build:lib": "cross-env NODE_ENV=lib babel src --out-dir lib --source-maps --extensions \".ts\",\".tsx\",\".snap\" --copy-files --no-copy-ignored --out-file-extension .mjs",
@@ -112,7 +120,7 @@
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/vue-fontawesome": "^3.0.3",
-    "@percy/cli": "^1.18.0",
+    "@percy/cli": "^1.20.3",
     "@percy/cypress": "^3.1.2",
     "@rollup/plugin-alias": "^3.1.9",
     "@rollup/plugin-babel": "^5.3.1",
@@ -134,9 +142,9 @@
     "concurrently": "^4.1.1",
     "cssnano": "^5.1.14",
     "cy-mobile-commands": "^0.3.0",
-    "cypress": "^12.6.0",
+    "cypress": "^12.7.0",
     "cypress-file-upload": "^5.0.8",
-    "cypress-real-events": "^1.7.0",
+    "cypress-real-events": "^1.7.6",
     "dotenv": "^8.6.0",
     "eslint-plugin-cypress": "^2.12.1",
     "eslint-plugin-jest": "^25.7.0",

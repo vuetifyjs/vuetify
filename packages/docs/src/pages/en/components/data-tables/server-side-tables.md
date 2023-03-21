@@ -12,7 +12,9 @@ related:
 
 # Data table - Server side tables
 
-Lorem ipsum etc etc
+Server-side Data tables are optimized for showing data coming from an API.
+
+<entry />
 
 ## Examples
 

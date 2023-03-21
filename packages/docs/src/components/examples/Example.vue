@@ -5,7 +5,11 @@
       class="mb-9 overflow-hidden"
       rounded
     >
-      <v-lazy v-if="!preview" min-height="44">
+      <v-lazy
+        v-if="!preview"
+        v-model="hasRendered"
+        min-height="44"
+      >
         <v-toolbar
           :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
           border="b"
@@ -30,6 +34,7 @@
               </v-btn>
             </div>
           </v-fade-transition>
+
           <v-spacer />
 
           <v-tooltip
@@ -54,7 +59,7 @@
       </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition>
+        <v-expand-transition v-if="hasRendered">
           <div v-if="showCode">
             <v-window v-model="template">
               <v-window-item
@@ -104,6 +109,7 @@
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -124,6 +130,7 @@
   const isError = ref(false)
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
+  const hasRendered = ref(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -181,29 +188,37 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  const actions = computed(() => [
-    {
-      icon: 'mdi-theme-light-dark',
-      path: 'invert-example-colors',
-      onClick: toggleTheme,
-    },
-    {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
-    },
-    {
-      icon: 'mdi-github',
-      path: 'view-in-github',
-      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-      target: '_blank',
-    },
-    {
-      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-      path: !showCode.value ? 'view-source' : 'hide-source',
-      onClick: () => {
-        showCode.value = !showCode.value
+  const actions = computed(() => {
+    const array = []
+
+    if (!props.hideInvert) {
+      array.push({
+        icon: 'mdi-theme-light-dark',
+        path: 'invert-example-colors',
+        onClick: toggleTheme,
+      })
+    }
+
+    return [
+      ...array,
+      {
+        icon: 'mdi-codepen',
+        path: 'edit-in-codepen',
+        onClick: openCodepen,
       },
-    },
-  ])
+      {
+        icon: 'mdi-github',
+        path: 'view-in-github',
+        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+        target: '_blank',
+      },
+      {
+        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+        path: !showCode.value ? 'view-source' : 'hide-source',
+        onClick: () => {
+          showCode.value = !showCode.value
+        },
+      },
+    ]
+  })
 </script>
