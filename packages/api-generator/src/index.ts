@@ -1,5 +1,5 @@
 import fs from 'fs/promises'
-import * as path from 'upath'
+import path from 'upath'
 import { components } from 'vuetify/dist/vuetify-labs.js'
 import importMap from 'vuetify/dist/json/importMap.json' assert { type: 'json' }
 import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type: 'json' }
