@@ -14,17 +14,30 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
-import { clamp, defineComponent, IN_BROWSER, useRender } from '@/util'
 import { computed, ref, watch } from 'vue'
+import { clamp, genericComponent, IN_BROWSER, useRender } from '@/util'
+import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey } from 'vue'
+import type { GroupProvide } from '@/composables/group'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
-export const VSlideGroup = defineComponent({
+interface SlideGroupSlot {
+  next: GroupProvide['next']
+  prev: GroupProvide['prev']
+  select: GroupProvide['select']
+  isSelected: GroupProvide['isSelected']
+}
+
+type VSlideGroupSlots = {
+  default: [SlideGroupSlot]
+  prev: [SlideGroupSlot]
+  next: [SlideGroupSlot]
+}
+
+export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
 
   props: {
@@ -237,7 +250,6 @@ export const VSlideGroup = defineComponent({
       if (!contentRef.value) return
 
       if (!location) {
-        contentRef.value.querySelector('[tabindex]')
         const focusable = [...contentRef.value.querySelectorAll(
           'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
         )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
@@ -352,9 +364,9 @@ export const VSlideGroup = defineComponent({
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         <div
           key="container"
@@ -390,9 +402,9 @@ export const VSlideGroup = defineComponent({
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

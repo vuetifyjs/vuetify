@@ -9,10 +9,12 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
+
+// Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
-export const VWindowItem = defineComponent({
+export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
 
   directives: {

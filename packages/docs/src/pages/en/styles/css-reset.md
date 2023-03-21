@@ -25,22 +25,7 @@ ress is a modern CSS reset that applies a solid base for stylesheets. It is buil
 
 </alert>
 
-These styles are automatically imported within `src/styles/generic/_reset.scss` and bootstrapped as **Generic** styles within `src/styles/generic/_index.scss`:
-
-```scss { resource="styles/generic/_index.scss" }
-// Generic styling for bare HTML elements (like H1, A, etc.).
-// These come with default styling from the browser so that
-// we can redefine them here.
-@import './reset.scss';
-
-@import './animations.scss';
-
-@import './colors.scss';
-
-@import './elevation.scss';
-
-@import './transitions.scss';
-```
+It can be disabled with [sass variables](/styles/sass-variables/#sass-variables) by setting `$utilities: false`, but you may have to manually reset some styles for components to display correctly.
 
 ## Reset Features
 
@@ -64,4 +49,15 @@ Below is a list of additional *features* that ress provides over the default **n
 
 For a complete list of all applied styles, see the [ress css stylesheet](https://github.com/filipelinhares/ress/blob/master/ress.css).
 
-<backmatter />
+These styles are automatically imported within `src/styles/generic/_reset.scss` and bootstrapped as **Generic** styles within `src/styles/generic/_index.scss`:
+
+```scss { resource="styles/generic/_index.scss" }
+// Generic styling for bare HTML elements (like H1, A, etc.).
+// These come with default styling from the browser so that
+// we can redefine them here.
+@import './reset.scss';
+@import './animations.scss';
+@import './colors.scss';
+@import './elevation.scss';
+@import './transitions.scss';
+```

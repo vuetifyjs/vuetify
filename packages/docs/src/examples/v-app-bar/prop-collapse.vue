@@ -4,7 +4,7 @@
       :collapse="!collapseOnScroll"
       :collapse-on-scroll="collapseOnScroll"
       absolute
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       dark
       scroll-target="#scrolling-techniques-6"
     >

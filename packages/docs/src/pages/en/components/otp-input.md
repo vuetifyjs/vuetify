@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: OTP Input component
   description: The OTP input component is used for MFA authentication via input field.
@@ -46,5 +47,3 @@ You can easily compose a loader to process the OTP input when completed insertio
 The entered value can be hidden with `type="password"`
 
 <example file="v-otp-input/prop-type" />
-
-<backmatter />

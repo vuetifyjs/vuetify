@@ -5,78 +5,85 @@
       class="mb-9 overflow-hidden"
       rounded
     >
-      <v-toolbar
+      <v-lazy
         v-if="!preview"
-        border="b"
-        class="px-1"
-        height="44"
-        flat
-        rounded="t"
+        v-model="hasRendered"
+        min-height="44"
       >
-        <v-fade-transition>
-          <div v-show="showCode">
-            <div class="text-body-2 px-3 text-medium-emphasis">
-              <v-icon icon="mdi-file-tree" />
-
-              {{ file }}.vue
-            </div>
-          </div>
-        </v-fade-transition>
-        <v-spacer />
-
-        <v-tooltip
-          v-for="{ path, ...action } in actions"
-          :key="path"
-          location="top"
+        <v-toolbar
+          :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
+          border="b"
+          class="px-1"
+          flat
+          height="44"
         >
-          <template #activator="{ props: tooltip }">
-            <v-btn
-              class="ml-2 text-medium-emphasis"
-              density="comfortable"
-              variant="text"
-              v-bind="mergeProps(action as any, tooltip)"
-            />
-          </template>
+          <v-fade-transition>
+            <div v-if="showCode">
+              <v-btn
+                v-for="(section, i) of sections"
+                :key="section.name"
+                :active="template === i"
+                class="ma-1 text-none"
+                variant="text"
+                size="small"
+                @click="template = i"
+              >
+                <span :class="template === i ? 'text-high-emphasis' : 'text-medium-emphasis'">
+                  {{ upperFirst(section.name) }}
+                </span>
+              </v-btn>
+            </div>
+          </v-fade-transition>
 
-          <span>{{ t(path) }}</span>
-        </v-tooltip>
+          <v-spacer />
 
-        <Codepen v-if="isLoaded" />
-      </v-toolbar>
+          <v-tooltip
+            v-for="({ path, ...action }, i) of actions"
+            :key="i"
+            location="top"
+          >
+            <template #activator="{ props: tooltip }">
+              <v-btn
+                class="ms-2 text-medium-emphasis"
+                density="comfortable"
+                variant="text"
+                v-bind="mergeProps(action as any, tooltip)"
+              />
+            </template>
+
+            <span>{{ t(path) }}</span>
+          </v-tooltip>
+
+          <Codepen v-if="isLoaded" />
+        </v-toolbar>
+      </v-lazy>
 
       <div class="d-flex flex-column">
-        <v-expand-transition>
-          <div
-            v-if="showCode"
-            :class="[
-              'border-b',
-              inline && 'order-1'
-            ]"
-          >
-            <template
-              v-for="(section, i) of sections"
-              :key="section.name"
-            >
-              <template v-if="section.content">
-                <v-divider v-if="i !== 0" />
-
+        <v-expand-transition v-if="hasRendered">
+          <div v-if="showCode">
+            <v-window v-model="template">
+              <v-window-item
+                v-for="section of sections"
+                :key="section.name"
+              >
                 <v-theme-provider :theme="theme">
                   <app-markup
                     :code="section.content"
-                    class="rounded-0"
+                    :rounded="false"
                   />
                 </v-theme-provider>
-              </template>
-            </template>
+              </v-window-item>
+            </v-window>
           </div>
         </v-expand-transition>
 
         <v-theme-provider
+          :class="showCode && 'border-t'"
           :theme="theme"
           class="pa-4 rounded-b"
           with-background
         >
-          <component :is="ExampleComponent" v-if="isLoaded" />
+          <component :is="ExampleComponent" v-if="isLoaded" :file="file" />
         </v-theme-provider>
       </div>
     </v-sheet>
@@ -96,11 +103,13 @@
   import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
+  import { upperFirst } from 'lodash-es'
 
   const { t } = useI18n()
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -120,6 +129,8 @@
   const isLoaded = ref(false)
   const isError = ref(false)
   const showCode = ref(props.inline || props.open)
+  const template = ref(0)
+  const hasRendered = ref(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -154,7 +165,7 @@
           language: 'css',
           content: parseTemplate('style', _code),
         },
-      ]
+      ].filter(v => v.content)
       isLoaded.value = true
       isError.value = false
     } catch (e) {
@@ -171,29 +182,43 @@
   })
   const toggleTheme = () => theme.value = theme.value === 'light' ? 'dark' : 'light'
 
+  const isDark = computed(() => {
+    return parentTheme.current.value.dark
+  })
+
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  const actions = computed(() => [
-    {
-      icon: 'mdi-theme-light-dark',
-      path: 'invert-example-colors',
-      onClick: toggleTheme,
-    },
-    {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
-    },
-    {
-      icon: 'mdi-github',
-      path: 'view-in-github',
-      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-      target: '_blank',
-    },
-    {
-      icon: 'mdi-code-tags',
-      path: 'view-source',
-      onClick: () => (showCode.value = !showCode.value),
-    },
-  ])
+  const actions = computed(() => {
+    const array = []
+
+    if (!props.hideInvert) {
+      array.push({
+        icon: 'mdi-theme-light-dark',
+        path: 'invert-example-colors',
+        onClick: toggleTheme,
+      })
+    }
+
+    return [
+      ...array,
+      {
+        icon: 'mdi-codepen',
+        path: 'edit-in-codepen',
+        onClick: openCodepen,
+      },
+      {
+        icon: 'mdi-github',
+        path: 'view-in-github',
+        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+        target: '_blank',
+      },
+      {
+        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+        path: !showCode.value ? 'view-source' : 'hide-source',
+        onClick: () => {
+          showCode.value = !showCode.value
+        },
+      },
+    ]
+  })
 </script>

@@ -21,16 +21,16 @@ export function useTeleport (target: Ref<boolean | string | Element>) {
       return undefined
     }
 
-    if (!useTeleport.cache.has(targetElement)) {
-      const el = document.createElement('div')
-      el.className = 'v-overlay-container'
-      targetElement.appendChild(el)
-      useTeleport.cache.set(targetElement, el)
+    let container = targetElement.querySelector(':scope > .v-overlay-container')
+
+    if (!container) {
+      container = document.createElement('div')
+      container.className = 'v-overlay-container'
+      targetElement.appendChild(container)
     }
 
-    return useTeleport.cache.get(targetElement)
+    return container
   })
 
   return { teleportTarget }
 }
-useTeleport.cache = new WeakMap<Element, Element>()

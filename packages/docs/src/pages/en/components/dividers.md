@@ -14,9 +14,9 @@ related:
 
 The `v-divider` component is used to separate sections of lists or layouts.
 
-![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png)
+<!-- ![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png) -->
 
----
+----
 
 ## Usage
 
@@ -24,11 +24,21 @@ Dividers in their simplest form display a horizontal line.
 
 <usage name="v-divider" />
 
+<alert type="info">
+
+  This example uses the **border-opacity** utility class and not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+
+</alert>
+
 <entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-divider](/api/v-divider/) | The divider component. |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -67,5 +77,3 @@ Dividers and subheaders can help break up content and can optionally line up wit
 ## Accessibility
 
 By default, `v-divider` components are assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**separator**](https://www.w3.org/TR/wai-aria/#separator) which denotes that the divider "separates and distinguishes sections of content or groups of menu items." However, sometimes a divider is just a way to make an interface look nice. In those cases, the role of [**presentation**](https://www.w3.org/TR/wai-aria/#presentation) should be used which denotes "an element whose implicit native role semantics will not be mapped to the accessibility API." To override the default **separator** role in a `v-divider`, simply add a `role="presentation"` prop to your component. In addition, `v-divider` components have an `aria-orientation="horizontal"`. If `vertical="true"`, then `aria-orientation="vertical"` will be set automatically as well. If `role="presentation"`, `aria-orientation="undefined"`, its default value.
-
-<backmatter />

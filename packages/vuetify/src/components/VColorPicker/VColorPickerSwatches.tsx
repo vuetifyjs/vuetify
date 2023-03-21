@@ -10,7 +10,7 @@ import { parseColor } from './util'
 import colors from '@/util/colors'
 
 // Types
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 import type { PropType } from 'vue'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
@@ -44,12 +44,12 @@ export const VColorPickerSwatches = defineComponent({
       default: () => parseDefaultColors(colors),
     },
     disabled: Boolean,
-    color: Object as PropType<HSVA | null>,
+    color: Object as PropType<HSV | null>,
     maxHeight: [Number, String],
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
   },
 
   setup (props, { emit }) {
@@ -69,17 +69,17 @@ export const VColorPickerSwatches = defineComponent({
                 return (
                   <div
                     class="v-color-picker-swatches__color"
-                    onClick={() => hsva && emit('update:color', hsva)}
+                    onClick={ () => hsva && emit('update:color', hsva) }
                   >
                     <div style={{ background: color }}>
                       { props.color && deepEqual(props.color, hsva)
-                        ? <VIcon size="x-small" icon="$success" color={getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
+                        ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined
                       }
                     </div>
                   </div>
                 )
-              }) }
+              })}
             </div>
           ))}
         </div>

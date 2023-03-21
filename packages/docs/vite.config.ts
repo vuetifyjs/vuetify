@@ -1,4 +1,4 @@
-import path, { join } from 'path'
+import path from 'upath'
 import fs from 'fs'
 
 import { defineConfig, loadEnv } from 'vite'
@@ -12,6 +12,7 @@ import { VitePWA } from 'vite-plugin-pwa'
 import VueI18n from '@intlify/vite-plugin-vue-i18n'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
+import basicSsl from '@vitejs/plugin-basic-ssl'
 
 import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
@@ -26,23 +27,25 @@ const ssrTransformCustomDirective = () => {
   }
 }
 
-export default defineConfig(({ command, mode }) => {
+export default defineConfig(({ command, mode, ssrBuild }) => {
   Object.assign(process.env, loadEnv(mode, process.cwd(), ''))
 
   return {
     logLevel: 'info',
     resolve: {
-      alias: {
-        '@/': `${resolve('src')}/`,
-        'node-fetch': 'isomorphic-fetch',
-        'vue-i18n': 'vue-i18n/dist/vue-i18n.runtime.esm-bundler.mjs',
-      },
+      alias: [
+        { find: '@', replacement: `${resolve('src')}/` },
+        { find: 'node-fetch', replacement: 'isomorphic-fetch' },
+        { find: /^vue$/, replacement: ssrBuild ? 'vue' : 'vue/dist/vue.esm-bundler.js' },
+        { find: /^pinia$/, replacement: 'pinia/dist/pinia.mjs' },
+      ],
     },
     define: {
-      'process.env': {}, // This is so that 3rd party packages don't crap out
+      'process.env.NODE_ENV': mode === 'production' || ssrBuild ? '"production"' : '"development"',
+      __INTLIFY_PROD_DEVTOOLS__: 'false',
     },
     build: {
-      sourcemap: true,
+      sourcemap: mode === 'development',
       rollupOptions: {
         output: {
           inlineDynamicImports: true,
@@ -80,7 +83,8 @@ export default defineConfig(({ command, mode }) => {
 
       // https://github.com/antfu/vite-plugin-md
       Markdown({
-        wrapperClasses: 'prose prose-sm m-auto',
+        wrapperComponent: 'unwrap-markdown',
+        wrapperClasses: '',
         headEnabled: true,
         markdownItSetup: configureMarkdown,
       }),
@@ -105,23 +109,30 @@ export default defineConfig(({ command, mode }) => {
             paths.push(folder.replace(/\.[a-z]*/, ''))
           }
 
-          const [category, page] = paths.slice(1)
+          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
             ...parseMeta(route.component),
           }
 
+          if (meta.disabled) {
+            return { disabled: true }
+          }
+
           return {
             ...route,
             path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${page ? '-' : ''}${page ?? ''}`,
+            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
             meta: {
               ...meta,
               category,
-              page,
+              page: rest?.join('-'),
               locale,
             },
           }
+        },
+        onRoutesGenerated (routes) {
+          return routes.filter(route => !route.disabled)
         },
       }),
 
@@ -138,7 +149,7 @@ export default defineConfig(({ command, mode }) => {
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
-          maximumFileSizeToCacheInBytes: 5 * 1024 ** 2,
+          maximumFileSizeToCacheInBytes: 24 * 1024 ** 2,
         },
         manifest: {
           name: 'Vuetify',
@@ -200,7 +211,22 @@ export default defineConfig(({ command, mode }) => {
         },
       },
 
+      {
+        name: 'vuetify:fallback',
+        enforce: 'post',
+        transformIndexHtml (html) {
+          fs.mkdirSync('dist', { recursive: true })
+          fs.writeFileSync(path.join('dist/_fallback.html'), html)
+          fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
+<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
+<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
+$&`), html)
+        },
+      },
+
       Inspect(),
+
+      process.env.HTTPS === 'true' ? basicSsl() : undefined,
     ],
 
     // https://github.com/antfu/vite-ssg
@@ -208,14 +234,6 @@ export default defineConfig(({ command, mode }) => {
       script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
-      onAfterClientBuild () {
-        const index = fs.readFileSync(resolve('dist/index.html'), 'utf8')
-        fs.writeFileSync(join('dist/_fallback.html'), index)
-        fs.writeFileSync(join('dist/_crowdin.html').replace(/<\/head>/, `
-<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
-<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-$&`), index)
-      },
     },
 
     optimizeDeps: {
@@ -229,7 +247,7 @@ $&`), index)
     },
 
     ssr: {
-      noExternal: ['vue-i18n'],
+      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
     },
 
     server: {

@@ -9,7 +9,7 @@ describe('VProgressLinear', () => {
   it('supports modelValue prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} />
+        <VProgressLinear modelValue={ 25 } />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__determinate')
@@ -21,7 +21,7 @@ describe('VProgressLinear', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
         <VLocaleProvider rtl>
-          <VProgressLinear modelValue={25} />
+          <VProgressLinear modelValue={ 25 } />
         </VLocaleProvider>
       </CenteredGrid>
     ))
@@ -33,7 +33,7 @@ describe('VProgressLinear', () => {
   it('supports reverse prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} reverse />
+        <VProgressLinear modelValue={ 25 } reverse />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__determinate')
@@ -45,7 +45,7 @@ describe('VProgressLinear', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
         <VLocaleProvider rtl>
-          <VProgressLinear modelValue={25} reverse />
+          <VProgressLinear modelValue={ 25 } reverse />
         </VLocaleProvider>
       </CenteredGrid>
     ))
@@ -57,7 +57,7 @@ describe('VProgressLinear', () => {
   it('supports color props', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} color="secondary" bgColor="error" />
+        <VProgressLinear modelValue={ 25 } color="secondary" bgColor="error" />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__determinate')
@@ -69,7 +69,7 @@ describe('VProgressLinear', () => {
   it('supports indeterminate prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} indeterminate />
+        <VProgressLinear modelValue={ 25 } indeterminate />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__indeterminate')
@@ -79,7 +79,7 @@ describe('VProgressLinear', () => {
   it('supports bufferValue prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} stream bufferValue={50} />
+        <VProgressLinear modelValue={ 25 } stream bufferValue={ 50 } />
       </CenteredGrid>
     ))
       .get('.v-progress-linear__background')
@@ -89,7 +89,7 @@ describe('VProgressLinear', () => {
   it('supports height prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} height={50} />
+        <VProgressLinear modelValue={ 25 } height={ 50 } />
       </CenteredGrid>
     ))
       .get('.v-progress-linear')
@@ -99,7 +99,7 @@ describe('VProgressLinear', () => {
   it('supports active prop', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} active={false} />
+        <VProgressLinear modelValue={ 25 } active={ false } />
       </CenteredGrid>
     ))
       .get('.v-progress-linear')
@@ -124,7 +124,7 @@ describe('VProgressLinear', () => {
   it('supports default slot', () => {
     cy.mount(() => (
       <CenteredGrid width="100px">
-        <VProgressLinear modelValue={25} height={20}>
+        <VProgressLinear modelValue={ 25 } height={ 20 }>
           {{
             default: (props: any) => <div>{ props.value }%</div>,
           }}

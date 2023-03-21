@@ -18,8 +18,8 @@
       <v-avatar
         v-for="n in 2"
         :key="`avatar--${n}`"
-        class="mr-3"
-        color="grey lighten-1"
+        class="me-3"
+        color="grey-lighten-1"
         size="36"
       ></v-avatar>
 
@@ -28,12 +28,12 @@
       <v-btn
         v-for="n in 4"
         :key="n"
-        class="mr-3"
-        color="grey lighten-1"
-        depressed
+        class="me-3"
+        color="grey-lighten-1"
+        variant="flat"
         min-width="96"
         rounded
-        small
+        size="small"
       ></v-btn>
 
       <v-spacer></v-spacer>
@@ -48,33 +48,33 @@
       width="300"
     >
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
+        <v-btn rounded variant="flat" color="grey-lighten-3" class="grow"></v-btn>
 
         <v-btn
           min-width="0"
-          depressed
-          class="ml-3"
-          color="grey lighten-3"
+          variant="flat"
+          class="ms-3"
+          color="grey-lighten-3"
         ></v-btn>
       </div>
 
       <div class="d-flex align-center pa-1">
-        <v-btn rounded depressed color="grey lighten-3" class="grow"></v-btn>
+        <v-btn rounded variant="flat" color="grey-lighten-3" class="grow"></v-btn>
 
         <v-btn
           v-for="n in 2"
           :key="`btn--${n}`"
-          class="ml-3"
-          color="grey lighten-1"
+          class="ms-3"
+          color="grey-lighten-1"
           fab
-          x-small
-          depressed
+          size="x-small"
+          variant="flat"
         ></v-btn>
       </div>
 
       <div class="pa-1 mb-4">
         <v-text-field
-          dense
+          density="compact"
           flat
           hide-details
           rounded
@@ -94,12 +94,12 @@
       inset
     >
       <v-text-field
-        background-color="grey lighten-1"
-        dense
+        bg-color="grey lighten-1"
+        density="compact"
         flat
         hide-details
         rounded
-        solo
+        variant="solo"
       ></v-text-field>
     </v-footer>
   </v-app>

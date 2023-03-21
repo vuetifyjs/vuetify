@@ -6,7 +6,7 @@
     color="primary"
     icon="mdi-github"
     rel="noopener"
-    style="position: fixed; bottom: 12px; right: 12px;"
+    style="position: fixed; bottom: 12px; right: 12px; z-index: 2000;"
     target="_blank"
   />
 </template>
@@ -17,5 +17,5 @@
 
   const route = useRoute()
   const { page } = route.meta
-  const href = `https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/examples/${page}.vue`
+  const href = `https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/examples/wireframes/${page}.vue`
 </script>

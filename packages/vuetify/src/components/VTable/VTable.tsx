@@ -7,9 +7,16 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VTable = defineComponent({
+export type VTableSlots = {
+  default: []
+  top: []
+  bottom: []
+  wrapper: []
+}
+
+export const VTable = genericComponent<VTableSlots>()({
   name: 'VTable',
 
   props: {
@@ -45,7 +52,7 @@ export const VTable = defineComponent({
       >
         { slots.top?.() }
 
-        { slots.default && (
+        { slots.default ? (
           <div
             class="v-table__wrapper"
             style={{ height: convertToUnit(props.height) }}
@@ -54,7 +61,7 @@ export const VTable = defineComponent({
               { slots.default() }
             </table>
           </div>
-        ) }
+        ) : slots.wrapper?.()}
 
         { slots.bottom?.() }
       </props.tag>

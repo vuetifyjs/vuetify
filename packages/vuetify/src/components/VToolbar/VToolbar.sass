@@ -13,6 +13,7 @@
   position: relative
   transition: $toolbar-transition
   transition-property: height, width, transform, max-width, left, right, top, bottom
+  width: 100%
 
   @include tools.border($toolbar-border...)
   @include tools.elevation($toolbar-elevation)
@@ -73,6 +74,7 @@
 
 .v-toolbar__prepend,
 .v-toolbar__append
+  align-items: center
   display: flex
 
 .v-toolbar__prepend

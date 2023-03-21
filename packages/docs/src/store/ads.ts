@@ -6,7 +6,7 @@ import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
 // Types
-type Ad = {
+interface Ad {
   slug: string
   title: string
   metadata?: {
@@ -38,17 +38,16 @@ export const useAdsStore = defineStore('ads', () => {
   onBeforeMount(async () => {
     if (ads.value.length) return
 
-    const { bucket } = useCosmic()
+    const { bucket } = useCosmic<Ad>()
 
-    const { objects } = await bucket.getObjects<Ad>({
-      query: {
-        type: 'ads',
-      },
-      props: 'slug,title,metadata',
-      status: 'published',
-    })
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'ads' })
+        .props('slug,title,metadata')
+        .status('published')
+    ) || {}
 
-    if (objects) { ads.value = objects }
+    ads.value = objects
   })
 
   return { ads }

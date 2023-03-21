@@ -213,5 +213,3 @@ Dynamic components using `<component>` can be registered locally:
 ### Import groups
 
 All components are available at both `vuetify/components` and `vuetify/components/<group>`. Use of the latter is preferred however as it only loads files that are needed. Treeshaking will still work in production builds if you use `vuetify/components`, but during development it will cause a performance hit by loading styles even for components you aren't using.
-
-<backmatter />

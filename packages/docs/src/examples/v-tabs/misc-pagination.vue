@@ -1,7 +1,7 @@
 <template>
   <v-card>
     <v-tabs
-      background-color="teal-darken-3"
+      bg-color="teal-darken-3"
       show-arrows
       slider-color="teal-lighten-3"
     >

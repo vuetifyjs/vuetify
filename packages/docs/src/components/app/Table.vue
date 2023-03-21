@@ -1,5 +1,5 @@
 <template>
-  <app-sheet class="mb-4">
+  <app-sheet class="mb-4 app-table">
     <v-table
       v-bind="$attrs"
     >
@@ -8,12 +8,14 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
-
-  export default defineComponent({
-    name: 'AppTable',
-
+<script>
+  export default {
     inheritAttrs: false,
-  })
+  }
 </script>
+
+<style lang="sass">
+  .app-table
+    tbody > tr > td:first-child
+      white-space: nowrap
+</style>

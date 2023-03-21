@@ -1,0 +1,9 @@
+{
+  "props": {
+    "disabled": "Puts all children inputs into a disabled state",
+    "fastFail": "Stop validation as soon as any rules fail.",
+    "readonly": "Puts all children inputs into a readonly state.",
+    "modelValue": "The value representing the validity of the form. If the value is `null` then no validation has taken place yet, or the form has been reset. Otherwise the value will be a `boolean` that indicates if validation has passed or not.",
+    "validateOn": "Changes the events in which validation occurs."
+  }
+}

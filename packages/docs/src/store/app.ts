@@ -2,15 +2,20 @@
 import { defineStore } from 'pinia'
 
 // Data
-import data from '@/data/nav-alpha.json'
+import data from '@/data/nav.json'
 
 // Types
 export type RootState = {
   drawer: boolean | null
+  settings: boolean
+  settingsCanShow: boolean
+  toc: boolean | null
 }
 
 type NavItem = {
+  divider?: boolean
   title?: string
+  subheader?: string
   inactiveIcon?: string
   activeIcon?: string
   items?: NavItem[]
@@ -20,9 +25,11 @@ export const useAppStore = defineStore({
   id: 'app',
   state: () => ({
     drawer: null,
+    toc: null,
     items: Array.from(data),
     pages: getPages(data as NavItem[]),
     settings: false,
+    settingsCanShow: false,
     categories: {
       api: {
         icon: 'mdi-flask-outline',
@@ -81,6 +88,8 @@ function getPages (items: NavItem[] = [], parent = ''): string[] {
   let array: any = []
 
   for (const item of items) {
+    if (item?.divider || item?.subheader) continue
+
     array = [...array, ...getPage(item, parent)]
   }
 

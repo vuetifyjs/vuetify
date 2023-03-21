@@ -6,6 +6,7 @@ meta:
   keywords: click outside, click directive, vue click directive, vuetify click directives
 related:
   - /components/dialogs/
+  - /components/navigation-drawers/
   - /directives/intersect/
 ---
 
@@ -40,5 +41,3 @@ Optionally provide a `closeConditional` handler that returns `true` or `false`. 
 Optionally provide an `include` function in the `options` object that returns an array of `HTMLElement`s. This function determines which additional elements that the click must be outside of, for the handler to be called.
 
 <example file="v-click-outside/option-include" />
-
-<backmatter />

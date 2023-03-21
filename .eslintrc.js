@@ -23,6 +23,7 @@ module.exports = {
     '@typescript-eslint',
     'sonarjs',
     'react',
+    'eslint-plugin-local-rules',
   ],
   rules: {
     'no-var': 'error',
@@ -200,6 +201,16 @@ module.exports = {
 
         // https://github.com/yannickcr/eslint-plugin-react/issues/2415
         // 'react/jsx-curly-spacing': ['error', { when: 'always', spacing: { objectLiterals: 'never' } }],
+        'local-rules/jsx-condition-key': 'error',
+        'local-rules/jsx-curly-spacing': ['error', {
+          when: 'always',
+          spacing: {
+            objectLiterals: 'never',
+            arrayLiterals: 'never',
+            multilineClose: 'never',
+          },
+          children: true,
+        }],
 
         'react/jsx-equals-spacing': 'error',
         'react/jsx-first-prop-new-line': 'error',

@@ -1,7 +1,7 @@
 <template>
   <v-sheet
     id="comparison"
-    class="mb-12 text-body-2 mx-auto"
+    class="mb-5 text-body-2 mx-auto"
     border
     rounded
   >
@@ -25,7 +25,7 @@
               <v-img
                 v-if="framework.src"
                 :src="framework.src"
-                class="mr-2"
+                class="me-2"
                 contain
                 height="24"
                 max-width="24"
@@ -43,7 +43,7 @@
           v-for="(key, i) in features"
           :key="i"
         >
-          <td class="text--secondary text-left">{{ t(`comparison.${key}`) }}</td>
+          <td class="text--secondary text-start">{{ t(`comparison.${key}`) }}</td>
 
           <td
             v-for="(framework, j) in frameworks"
@@ -71,7 +71,7 @@
       <tfoot class="text-center">
         <tr>
           <td
-            class="text-caption font-italic text--disabled"
+            class="text-caption font-italic text-disabled"
             colspan="7"
           >
             <div>{{ t('comparison.average') }}</div>
@@ -82,10 +82,11 @@
   </v-sheet>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
 
+  // Types
   type Framework = {
     a11y?: boolean,
     enterprise?: boolean,
@@ -152,17 +153,5 @@
     },
   ]
 
-  export default defineComponent({
-    name: 'Comparison',
-
-    setup () {
-      const { t } = useI18n()
-
-      return {
-        t,
-        features,
-        frameworks,
-      }
-    },
-  })
+  const { t } = useI18n()
 </script>

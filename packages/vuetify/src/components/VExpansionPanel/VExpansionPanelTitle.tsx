@@ -11,7 +11,20 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+interface ExpansionPanelTitleSlot {
+  collapseIcon: IconValue
+  disabled: boolean | undefined
+  expanded: boolean
+  expandIcon: IconValue
+  readonly: boolean
+}
+
+export type VExpansionPanelTitleSlots = {
+  default: [ExpansionPanelTitleSlot]
+  actions: [ExpansionPanelTitleSlot]
+}
 
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
@@ -29,9 +42,9 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
-})
+}, 'v-expansion-panel-title')
 
-export const VExpansionPanelTitle = defineComponent({
+export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
   directives: { Ripple },
@@ -83,7 +96,7 @@ export const VExpansionPanelTitle = defineComponent({
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
           </span>
-        ) }
+        )}
       </button>
     ))
 

@@ -20,6 +20,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
   id: ComputedRef<string>
+  messagesId: ComputedRef<string>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
@@ -51,7 +52,7 @@ export const makeVInputProps = propsFactory({
 
   ...makeDensityProps(),
   ...makeValidationProps(),
-})
+}, 'v-input')
 
 export type VInputSlots = MakeSlots<{
   default: [VInputSlot]
@@ -60,9 +61,7 @@ export type VInputSlots = MakeSlots<{
   details: [VInputSlot]
 }>
 
-export const VInput = genericComponent<new <T>() => {
-  $slots: VInputSlots
-}>()({
+export const VInput = genericComponent<VInputSlots>()({
   name: 'VInput',
 
   props: {
@@ -79,6 +78,7 @@ export const VInput = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const messagesId = computed(() => `${id.value}-messages`)
 
     const {
       errorMessages,
@@ -96,6 +96,7 @@ export const VInput = genericComponent<new <T>() => {
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
+      messagesId,
       isDirty,
       isDisabled,
       isReadonly,
@@ -136,15 +137,15 @@ export const VInput = genericComponent<new <T>() => {
                   key="prepend-icon"
                   name="prepend"
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default && (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
@@ -153,15 +154,16 @@ export const VInput = genericComponent<new <T>() => {
                   key="append-icon"
                   name="append"
                 />
-              ) }
+              )}
 
               { slots.append?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasDetails && (
             <div class="v-input__details">
               <VMessages
+                id={ messagesId.value }
                 active={ hasMessages }
                 messages={ errorMessages.value.length > 0
                   ? errorMessages.value
@@ -172,7 +174,7 @@ export const VInput = genericComponent<new <T>() => {
 
               { slots.details?.(slotProps.value) }
             </div>
-          ) }
+          )}
         </div>
       )
     })

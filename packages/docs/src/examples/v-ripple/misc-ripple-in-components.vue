@@ -20,14 +20,8 @@
       Without ripple
     </v-btn>
     <v-btn
-      :ripple="{ center: true }"
-      color="primary"
-    >
-      With centered ripple
-    </v-btn>
-    <v-btn
-      :ripple="{ class: 'red--text' }"
-      text
+      :ripple="{ class: 'text-red' }"
+      variant="text"
     >
       With red ripple
     </v-btn>

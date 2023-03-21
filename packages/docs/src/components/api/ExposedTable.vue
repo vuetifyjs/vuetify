@@ -1,55 +1,26 @@
 <template>
-  <app-sheet>
-    <v-table
-      class="api-table"
-    >
-      <tbody>
-        <template v-for="item in items" :key="item.name">
-          <tr class="bg-grey-lighten-4">
-            <td>
-              <NameCell section="props" :name="item.name" />
-            </td>
-          </tr>
-          <tr>
-            <app-markup :code="getType(item)" language="ts" :rounded="false" />
-          </tr>
-          <tr>
-            <td colspan="3" class="text-mono">
-              <app-markdown v-if="item.description" :content="item.description" />
-            </td>
-          </tr>
-        </template>
-      </tbody>
-    </v-table>
-  </app-sheet>
+  <ApiTable>
+    <template #row="{ props, ...item }">
+      <tr v-bind="props">
+        <NameCell section="exposed" :name="item.name" />
+      </tr>
+
+      <tr>
+        <app-markup
+          :code="getType(item)"
+          :rounded="false"
+          language="ts"
+        />
+      </tr>
+    </template>
+  </ApiTable>
 </template>
 
-<script lang="ts">
-  // Imports
-  import { defineComponent, PropType } from 'vue'
-  import { getType } from './utils'
+<script setup lang="ts">
+  // Components
+  import ApiTable from './ApiTable.vue'
   import NameCell from './NameCell.vue'
-  import PrismCell from './PrismCell.vue'
 
-  export default defineComponent({
-    components: {
-      NameCell,
-      PrismCell,
-    },
-    props: {
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => [],
-      },
-    },
-    setup (props) {
-      const headers = ['name', 'type', 'description']
-
-      return {
-        headers,
-        field: 'props',
-        getType,
-      }
-    },
-  })
+  // Utilities
+  import { getType } from './utils'
 </script>

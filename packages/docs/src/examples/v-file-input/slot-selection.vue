@@ -12,7 +12,7 @@
           size="small"
           label
           color="primary"
-          class="mr-2"
+          class="me-2"
         >
           {{ fileName }}
         </v-chip>

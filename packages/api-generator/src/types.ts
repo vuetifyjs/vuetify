@@ -1,26 +1,32 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 
+const project = new Project({
+  tsConfigFilePath: './tsconfig.json',
+})
+
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
 
   const kind = node.getKind()
 
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
-    return generateDefinition(node, [], project)
+    const definition = generateDefinition(node, [], project) as ObjectDefinition
+    if (definition.properties) {
+      // Exclude private properties
+      definition.properties = Object.fromEntries(Object.entries(definition.properties)
+        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
+    }
+    return definition
   }
 
   return null
 }
 
 export function generateComposableDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
+  const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
-  const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
-
-  const composables = inspect(project, sourceFile.getTypeAlias('Composables')) as ObjectDefinition
+  const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
 
   return Object.entries(composables.properties).map(([name, data]) => {
     const returnType = (data as FunctionDefinition).returnType
@@ -44,13 +50,9 @@ export function generateComposableDataFromTypes () {
 }
 
 export function generateDirectiveDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
+  const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
-  const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
-
-  const directives = inspect(project, sourceFile.getTypeAlias('Directives')) as ObjectDefinition
+  const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
 
   return Object.entries(directives.properties).map(([name, data]) => {
     return {
@@ -62,16 +64,12 @@ export function generateDirectiveDataFromTypes () {
 }
 
 export async function generateComponentDataFromTypes (component: string) {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
+  const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
-  const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
-
-  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps')) as ObjectDefinition
-  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents')) as ObjectDefinition
-  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots')) as ObjectDefinition
-  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed')) as ObjectDefinition
+  const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
+  const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
+  const slots = inspect(project, sourceFile.getTypeAlias('ComponentSlots'))
+  const exposed = inspect(project, sourceFile.getTypeAlias('ComponentExposed'))
 
   const sections = [props, events, slots, exposed]
 
@@ -227,6 +225,26 @@ function count (arr: string[], needle: string) {
   }, 0)
 }
 
+const allowedRefs = [
+  'Anchor',
+  'LocationStrategyFn',
+  'OpenSelectStrategyFn',
+  'OpenStrategyFn',
+  'ScrollStrategyFn',
+  'SelectItemKey',
+  'SelectStrategyFn',
+  'SubmitEventPromise',
+  'ValidationRule',
+  'FormValidationResult',
+  'SortItem',
+  'InternalItem',
+  'InternalDataTableItem',
+  'DataTableItem',
+  'DataTableHeader',
+  'InternalDataTableHeader',
+  'FilterFunction',
+]
+
 function formatDefinition (definition: Definition) {
   let formatted = ''
 
@@ -240,7 +258,7 @@ function formatDefinition (definition: Definition) {
       break
     }
     case 'array': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
       if (definition.length) {
         formatted = `[${formattedItems.join(', ')}]`
       } else {
@@ -280,8 +298,8 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (['SelectStrategyFn', 'OpenStrategyFn', 'OpenSelectStrategyFn'].includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/next/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  if (allowedRefs.includes(definition.text)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${definition.text}</a>`
   }
 }
 
@@ -289,6 +307,13 @@ function formatDefinition (definition: Definition) {
 function generateDefinition (node: Node<ts.Node>, recursed: string[], project: Project, type?: Type<ts.Type>): Definition {
   const tc = project.getTypeChecker()
   type = type ?? node.getType()
+
+  if (type.getAliasSymbol()?.getName() === 'NonNullable') {
+    const typeArguments = type.getAliasTypeArguments()
+    if (typeArguments.length) {
+      type = typeArguments[0]
+    }
+  }
 
   const symbol = type.getAliasSymbol() ?? type.getSymbol()
   const declaration = symbol?.getDeclarations()?.[0]
@@ -299,7 +324,11 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
     source: getSource(declaration),
   } as Definition
 
-  if (count(recursed, type.getText()) > 1 || isExternalDeclaration(declaration, definition.text)) {
+  if (
+    count(recursed, type.getText()) > 1 ||
+    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
+    isExternalDeclaration(declaration, definition.text)
+  ) {
     definition = definition as RefDefinition
     definition.type = 'ref'
 
@@ -339,31 +368,28 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   } else if (type.isUnion()) {
     definition = definition as UnionDefinition
     definition.type = 'anyOf'
-    definition.items = type.getUnionTypes()
+    definition.items = getUnionTypes(type)
       .map(unionType => generateDefinition(node, recursed, project, unionType))
 
-    // Ugly hack to get rid of explicit false and true types
+    // Replace explicit true|false with boolean
     // TODO: Do this some other way
-    let found: string | undefined
-    const foundIndices: number[] = []
+    let found = -1
     for (let i = 0; i < definition.items.length; i++) {
       const item = definition.items[i]
 
-      if (item.type === 'boolean' && item.literal != null && found == null) {
-        found = item.literal
-        foundIndices.push(i)
-      } else if (item.type === 'boolean' && item.literal != null && found != null && found !== item.literal) {
-        foundIndices.push(i)
+      if (item.type === 'boolean' && item.literal != null) {
+        if (~found) {
+          definition.items.splice(i, 1)
+          definition.items.splice(found, 1, {
+            text: 'boolean',
+            type: 'boolean',
+            formatted: 'boolean',
+          })
+          break
+        } else {
+          found = i
+        }
       }
-    }
-
-    if (foundIndices.length === 2) {
-      definition.items = definition.items.filter((_, i) => !foundIndices.includes(i))
-      definition.items.splice(foundIndices[0], 0, {
-        text: 'boolean',
-        type: 'boolean',
-        formatted: 'boolean',
-      })
     }
   } else if (type.getConstructSignatures().length) {
     definition = definition as ConstructorDefinition
@@ -415,6 +441,14 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
       definition.properties[propertyName].optional = property.isOptional()
     }
+    if (type.compilerType.indexInfos.length) {
+      for (const index of type.compilerType.indexInfos) {
+        const indexName = '[' + type._context.compilerFactory.getType(index.keyType).getText() + ']'
+        const indexType = type._context.compilerFactory.getType(index.type)
+        definition.properties[indexName] = generateDefinition(node, getRecursiveTypes(recursed, indexType), project, indexType)
+        definition.properties[indexName].optional = true
+      }
+    }
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd
     definition.type = 'void'
@@ -426,6 +460,20 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
   formatDefinition(definition)
 
   return definition
+}
+
+/** type.getUnionTypes() but without unwrapping named string unions */
+function getUnionTypes (type: Type<ts.Type>): Type<ts.Type>[] {
+  if (!type.isUnion()) return [type]
+
+  const compilerType = (type as any).compilerType
+
+  if (compilerType.origin) {
+    return compilerType.origin.types
+      .map(unionType => (type as any)._context.compilerFactory.getType(unionType))
+  } else {
+    return type.getUnionTypes()
+  }
 }
 
 // function getRecursiveObjectTypes (recursiveTypes: string[], type: Type<ts.Type>) {
@@ -476,7 +524,7 @@ function findPotentialRecursiveTypes (type: Type<ts.Type>) {
   const recursiveTypes = []
 
   if (type.isUnion()) {
-    recursiveTypes.push(...type.getUnionTypes().map(t => t.getText()))
+    recursiveTypes.push(...getUnionTypes(type).map(t => t.getText()))
   } else if (type.isIntersection()) {
     recursiveTypes.push(...type.getIntersectionTypes().map(t => t.getText()))
   } else if (type.isArray()) {

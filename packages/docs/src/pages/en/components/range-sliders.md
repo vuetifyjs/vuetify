@@ -14,17 +14,21 @@ related:
 
 The `v-range-slider` component complements the `v-slider` component nicely when you are in need of representing a range of values.
 
-<entry />
-
 ## Usage
 
 Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
 <usage name="v-range-slider" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-range-slider](/api/v-range-slider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -67,5 +71,3 @@ You can use the **vertical** prop to switch sliders to a vertical orientation. I
 Using the **tick-labels** prop along with the `thumb-label` slot, you can create a very customized solution.
 
 <example file="v-range-slider/slot-thumb-label" />
-
-<backmatter />

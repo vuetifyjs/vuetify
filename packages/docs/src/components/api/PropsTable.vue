@@ -1,74 +1,30 @@
 <template>
-  <app-sheet>
-    <v-table
-      class="api-table"
-    >
-      <thead>
-        <tr>
-          <th
-            v-for="header in headers"
-            :key="header"
-            :class="header"
-          >
-            <div
-              class="text-capitalize"
-              v-text="header"
-            />
-          </th>
-        </tr>
-      </thead>
-      <tbody>
-        <template v-for="item in items" :key="item.name">
-          <tr class="bg-grey-lighten-4">
-            <td>
-              <NameCell section="props" :name="kebabCase(item.name)" />
-            </td>
-            <td>
-              <PrismCell :code="getType(item)" />
-            </td>
-            <td>
-              <PrismCell :code="item.default" />
-            </td>
-          </tr>
-          <tr>
-            <td colspan="3" class="text-mono">
-              <app-markdown v-if="item.description" :content="item.description" />
-            </td>
-          </tr>
-        </template>
-      </tbody>
-    </v-table>
-  </app-sheet>
+  <ApiTable :headers="headers">
+    <template #row="{ props, ...item }">
+      <tr v-bind="props">
+        <NameCell section="props" :name="kebabCase(item.name)" />
+
+        <td>
+          <PrismCell :code="getType(item)" />
+        </td>
+
+        <td>
+          <PrismCell :code="item.default" />
+        </td>
+      </tr>
+    </template>
+  </ApiTable>
 </template>
 
-<script lang="ts">
-  // Imports
-  import { defineComponent, PropType } from 'vue'
-  import { getType } from './utils'
-  import PrismCell from './PrismCell.vue'
+<script setup lang="ts">
+  // Components
+  import ApiTable from './ApiTable.vue'
   import NameCell from './NameCell.vue'
+  import PrismCell from './PrismCell.vue'
+
+  // Utilities
+  import { getType } from './utils'
   import { kebabCase } from 'lodash-es'
 
-  export default defineComponent({
-    components: {
-      PrismCell,
-      NameCell,
-    },
-    props: {
-      items: {
-        type: Array as PropType<any[]>,
-        default: () => [],
-      },
-    },
-    setup (props) {
-      const headers = ['name', 'type', 'default']
-
-      return {
-        headers,
-        field: 'props',
-        getType,
-        kebabCase,
-      }
-    },
-  })
+  const headers = ['name', 'type', 'default']
 </script>

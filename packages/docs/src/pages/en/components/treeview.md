@@ -1,11 +1,11 @@
 ---
+disabled: true
 meta:
   title: Treeview component
   description: The treeview component is a user interface that is used to represent hierarchical data in a tree structure.
   keywords: treeview, vuetify treeview component, vue treeview component
 related:
   - /components/lists/
-  - /components/list-item-groups/
   - /components/timelines/
 
 ---
@@ -24,7 +24,12 @@ A basic example
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-treeview](/api/v-treeview/) | Primary Component |
+| [v-treeview-node](/api/v-treeview-node/) | Sub-component used to display a single treeview node |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -123,5 +128,3 @@ Easily filter your treeview by using the **search** prop. You can easily apply y
 Customize the **on**, **off** and **indeterminate** icons for your selectable tree. Combine with other advanced functionality like API loaded items.
 
 <example file="v-treeview/misc-selectable-icons" />
-
-<backmatter />

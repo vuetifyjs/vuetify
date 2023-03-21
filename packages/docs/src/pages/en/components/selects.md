@@ -14,15 +14,19 @@ related:
 
 Select fields components are used for collecting user provided information from a list of options.
 
-<entry />
-
 ## Usage
 
 <usage name="v-select" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-select](/api/v-select/) | The select component. |
+
+<api-inline hide-links />
 
 ## Caveats
 
@@ -109,5 +113,3 @@ The `v-select` components can be optionally expanded with prepended and appended
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <example file="v-select/slot-selection" />
-
-<backmatter />

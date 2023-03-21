@@ -2,8 +2,7 @@
   <v-card>
     <v-tabs
       v-model="tab"
-      background-color="primary"
-      dark
+      bg-color="primary"
     >
       <v-tab
         v-for="item in items"

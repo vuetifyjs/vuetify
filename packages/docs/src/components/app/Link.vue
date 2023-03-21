@@ -32,7 +32,7 @@
   const isSamePage = computed(() => !isExternal.value && props.href.startsWith('#'))
   const attrs = computed(() => {
     return isExternal.value
-      ? { to: props.href, target: '_blank', rel: 'noopener' }
+      ? { href: props.href, target: '_blank', rel: 'noopener' }
       : {
         to: isSamePage.value ? props.href : {
           path: rpath(props.href),
@@ -53,7 +53,7 @@
 
     return {
       icon: icon.value,
-      class: `m${isSamePage.value ? 'r' : 'l'}-1`,
+      class: `m${isSamePage.value ? 'e' : 's'}-1`,
       color: 'primary',
       size: '.875rem',
     }

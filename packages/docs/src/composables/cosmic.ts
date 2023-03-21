@@ -1,15 +1,20 @@
+// @ts-nocheck
 /* eslint-disable camelcase */
 // Imports
 import Cosmic from 'cosmicjs'
 
-export const useCosmic = () => {
-  const api = Cosmic()
-  const read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY as string | undefined
-  const slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG as string | undefined
+// Types
+import type { Bucket } from 'cosmicjs'
 
-  const bucket = read_key && slug
-    ? api.bucket({ slug, read_key })
-    : { getObjects: () => Promise.resolve([]) } as never
+export function useCosmic<T> (
+  slug = import.meta.env.VITE_COSMIC_BUCKET_SLUG as string | undefined,
+  read_key = import.meta.env.VITE_COSMIC_BUCKET_READ_KEY as string | undefined,
+) {
+  const api = Cosmic<T>()
+
+  let bucket: Bucket<T> | undefined
+
+  if (read_key && slug) bucket = api.bucket({ slug, read_key })
 
   return { bucket }
 }

@@ -1,5 +1,8 @@
 <template>
-  <app-btn color="medium-emphasis">
+  <app-btn
+    color="medium-emphasis"
+    class="ms-1"
+  >
     {{ title }}
 
     <chevron-down />
@@ -7,7 +10,7 @@
     <app-menu
       :items="items"
       activator="parent"
-      min-width="180"
+      width="220"
     />
   </app-btn>
 </template>
@@ -21,48 +24,58 @@
 
   // Utilities
   import { computed } from 'vue'
+  import { rpath } from '@/util/routes'
 
   const { t } = useI18n()
   const title = t('support')
   const items = computed(() => ([
-    { subheader: t('professional-support') },
+    { subheader: t('help-and-support') },
     {
-      title: 'direct-support',
-      to: {
-        name: 'introduction-support',
-      },
+      title: 'for-enterprise',
+      to: rpath('/introduction/enterprise-support/'),
+      appendIcon: 'mdi-shield-star-outline',
     },
-    { divider: true },
-    { subheader: t('community-support') },
-    {
-      title: 'Discord',
-      href: 'https://community.vuetifyjs.com/',
-    },
-    {
-      title: 'github-discussions',
-      href: 'https://discussions.vuetifyjs.com/',
-    },
-    { divider: true },
-    { subheader: t('resources-and-tools') },
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
+      appendIcon: 'mdi-spider',
     },
     {
-      title: 'codepen-template',
-      href: 'https://template.vuetifyjs.com/',
+      title: 'github-discussions',
+      href: 'https://github.com/vuetifyjs/vuetify/discussions',
+      appendIcon: 'mdi-message-text',
+    },
+    { divider: true },
+    { subheader: t('resources') },
+    {
+      title: 'upgrade-guide',
+      to: rpath('/getting-started/upgrade-guide/'),
+      appendIcon: 'mdi-update',
     },
     {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
+      appendIcon: 'mdi-alert-circle-outline',
+    },
+    {
+      title: 'codepen-template',
+      href: 'https://template.vuetifyjs.com/',
+      appendIcon: 'mdi-codepen',
     },
     {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
+      appendIcon: 'mdi-server',
     },
     {
       title: 'stack-overflow',
       href: 'https://stackoverflow.com/search?q=vuetify',
+      appendIcon: 'mdi-stack-overflow',
+    },
+    {
+      title: 'latest-releases',
+      href: 'https://github.com/vuetifyjs/vuetify/releases',
+      appendIcon: 'mdi-package-variant',
     },
   ]))
 </script>

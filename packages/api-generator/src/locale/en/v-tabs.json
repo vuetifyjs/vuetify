@@ -1,8 +1,7 @@
 {
   "props": {
-    "activeClass": "The **active-class** applied to children when they are activated.",
     "alignWithTitle": "Make `v-tabs` lined up with the toolbar title",
-    "backgroundColor": "Changes the background color of the component.",
+    "color": "Applies specified color to the selected tab - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "centered": "Centers the tabs",
     "centerActive": "Forces the selected tab to be centered",
     "cycle": "Will reset to first or last tab when swiping left or right if at the end of indexes",
@@ -23,10 +22,10 @@
     "sliderColor": "Changes the background color of an auto-generated `v-tabs-slider`",
     "sliderSize": "Changes the size of the slider, **height** for horizontal, **width** for vertical.",
     "touchless": "Disable mobile touch functionality",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own.",
-    "vertical": "Stacks tabs on top of each other vertically."
-  },
-  "events": {
-    "change": "Emitted when tab is changed by user interaction. Returns a string if **href** attribute is set and number if it is not."
+    "vertical": "Stacks tabs on top of each other vertically.",
+    "direction": "Changes the direction of the tabs. Can be either `horizontal` or `vertical`.",
+    "items": "The items to display in the component. This can be an array of strings or objects with a property `title`",
+    "alignTabs": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-tabs.json))",
+    "stacked": "Apply the stacked prop to all children v-tab components."
   }
 }

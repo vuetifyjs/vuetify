@@ -6,6 +6,7 @@
   max-width: 100%
   overflow: hidden
   position: absolute
+  transition: $bottom-navigation-transition
 
   @include tools.border($bottom-navigation-border...)
   @include tools.rounded($bottom-navigation-border-radius)
@@ -19,7 +20,7 @@
   flex: none
   font-size: $bottom-navigation-content-font-size
   justify-content: center
-  transition: $bottom-navigation-transition
+  transition: inherit
   width: 100%
 
   .v-bottom-navigation &

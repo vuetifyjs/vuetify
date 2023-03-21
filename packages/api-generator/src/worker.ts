@@ -17,17 +17,19 @@ export default async (json: string) => {
 
     const sources = addPropData(kebabName, componentData as any, componentProps)
 
-    addDescriptions(kebabName, componentData as any, sources, locales)
+    await addDescriptions(kebabName, componentData as any, sources, locales)
 
     const sass = parseSassVariables(componentName)
 
     await mkdirp(outPath)
 
-    await fs.writeFile(path.resolve(outPath, `${kebabName}.json`), JSON.stringify({ ...componentData, sass }, null, 2))
+    const component = { displayName: kebabName, fileName: kebabName, ...componentData, sass }
 
-    return { componentName, kebabName, ...componentData }
+    await fs.writeFile(path.resolve(outPath, `${component.fileName}.json`), JSON.stringify(component, null, 2))
+
+    return component
   } catch (err) {
-    console.error(`${componentName}: ${err}`)
+    console.error(`${componentName}: ${err}`, err.stack)
     return null
   }
 }

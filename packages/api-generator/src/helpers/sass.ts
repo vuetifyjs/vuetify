@@ -9,12 +9,11 @@ function processVariableFile (filePath: string) {
       const varArr = variable.split(':')
       if (varArr.length >= 2 && varArr[0].startsWith('$')) {
         const varName = varArr.shift().trim()
-        let varDefault = (vars[index + 1].startsWith('@'))
+        const varDefault = (vars[index + 1].startsWith('@'))
           ? vars[index + 1]
           : varArr.join(':')
-        varDefault = `${varDefault.trim()};`
         varValues[varName] = {
-          default: varDefault,
+          default: varDefault.replace('!default', '').trim(),
         }
       }
     }

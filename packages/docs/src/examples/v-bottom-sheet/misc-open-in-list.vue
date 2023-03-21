@@ -12,7 +12,7 @@
         </v-btn>
       </template>
       <v-list>
-        <v-subheader>Open in</v-subheader>
+        <v-list-subheader>Open in</v-list-subheader>
         <v-list-item
           v-for="tile in tiles"
           :key="tile.title"
