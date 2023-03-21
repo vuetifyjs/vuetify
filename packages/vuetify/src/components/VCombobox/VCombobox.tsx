@@ -93,7 +93,6 @@ export const VCombobox = genericComponent<new <
     ...makeFilterProps({ filterKeys: ['title'] }),
     ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...omit(makeVTextFieldProps({
-      focusOnClear: false,
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),
     ...makeTransitionProps({ transition: false }),
