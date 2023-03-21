@@ -3,7 +3,7 @@ import { describe, expect, it } from '@jest/globals'
 import { defineComponent } from 'vue'
 
 // Directives
-import Ripple from '../'
+import Ripple from '../ripple'
 
 // Utilities
 import { keyCodes } from '@/util'

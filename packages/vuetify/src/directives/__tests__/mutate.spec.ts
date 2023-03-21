@@ -1,5 +1,5 @@
 // Directives
-import Mutate from '..'
+import Mutate from '../mutate'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'

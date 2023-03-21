@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 
 // Directives
-import Intersect from '../'
+import Intersect from '../intersect'
 
 describe('v-intersect', () => {
   it('should bind event on mounted', () => {

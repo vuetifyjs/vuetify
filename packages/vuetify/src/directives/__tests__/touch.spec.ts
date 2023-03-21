@@ -1,9 +1,9 @@
 // Directives
-import Touch from '../'
+import Touch from '../touch'
 
 // Types
 import { nextTick } from 'vue'
-import type { TouchValue } from '../'
+import type { TouchValue } from '../touch'
 
 // Utilities
 import { mount } from '@vue/test-utils'

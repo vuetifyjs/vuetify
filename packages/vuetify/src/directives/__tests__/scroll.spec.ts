@@ -7,8 +7,8 @@ import {
 } from 'vue'
 
 // Directives
-import Scroll from '../'
-import { scrollWindow } from '../../../../test'
+import Scroll from '../scroll'
+import { scrollWindow } from '../../../test'
 
 describe('v-scroll', () => {
   const instance = {

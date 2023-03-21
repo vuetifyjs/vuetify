@@ -1,7 +1,7 @@
 import { describe, expect, it } from '@jest/globals'
 
 // Directives
-import Resize from '../'
+import Resize from '../resize'
 
 const instance = {
   $: { uid: 1 },

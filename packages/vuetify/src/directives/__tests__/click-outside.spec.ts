@@ -1,8 +1,8 @@
 import { describe, expect, it } from '@jest/globals'
 
 // Directives
-import ClickOutside from '../'
-import { wait } from '../../../../test'
+import ClickOutside from '../click-outside'
+import { wait } from '../../../test'
 
 function bootstrap (args?: object) {
   const el = document.createElement('div')

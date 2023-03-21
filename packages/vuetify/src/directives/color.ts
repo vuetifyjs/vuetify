@@ -6,8 +6,8 @@ import {
   classToHex,
   isCssColor,
   parseGradient,
-} from '../../util/colorUtils'
-import colors from '../../util/colors'
+} from '../util/colorUtils'
+import colors from '../util/colors'
 
 // Types
 import { VuetifyThemeVariant } from 'types/services/theme'
