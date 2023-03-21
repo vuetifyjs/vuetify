@@ -28,7 +28,11 @@ A `v-checkbox` in its simplest form provides a toggle between 2 values.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-checkbox](/api/v-checkbox/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

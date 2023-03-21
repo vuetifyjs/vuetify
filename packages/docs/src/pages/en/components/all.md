@@ -1,5 +1,6 @@
 ---
 nav: All Components
+emphasized: true
 meta:
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.
@@ -15,8 +16,6 @@ meta:
 Vuetify Components are interactive building blocks for creating user interfaces.
 
 <entry />
-
-----
 
 ## Containment
 
@@ -72,7 +71,7 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
-<components-list-item name="custom-overlays" placeholder>
+<components-list-item name="overlays" placeholder>
 
   The overlay component is used to display a custom scrim that sits on top of the application
 
@@ -118,7 +117,7 @@ Navigation components are used to navigate between different views or pages.
 
 </components-list-item>
 
-<components-list-item name="pagination">
+<components-list-item name="paginations">
 
   The Pagination component is used to separate long sets of data
 
@@ -170,7 +169,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="comboboxes" placeholder>
+<components-list-item name="combobox" placeholder>
 
   The combobox component is used to select a value from a list of options with the ability to enter a custom value
 
@@ -194,7 +193,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="radios" placeholder>
+<components-list-item name="radio-buttons" placeholder>
 
   The radio component is a replacement for its native counterpart
 
@@ -212,7 +211,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="custom-inputs" placeholder>
+<components-list-item name="inputs" placeholder>
 
   Create custom inputs that can be used with the v-model directive
 
@@ -255,6 +254,40 @@ Layout components are used to create responsive layouts.
 <components-list-item name="grids" placeholder>
 
   The grid component is used to create responsive layouts
+
+</components-list-item>
+
+</v-row>
+
+----
+
+## Selection
+
+These components allow a user to select one or multiple items from a list of options.
+
+<v-row>
+
+<components-list-item name="carousels">
+
+  Carousels are used to display multiple forms of visual content
+
+</components-list-item>
+
+<components-list-item name="button-groups" placeholder>
+
+  Button groups are used to select between multiple options using the button component
+
+</components-list-item>
+
+<components-list-item name="chip-groups" placeholder>
+
+  Chip group is a wrapper component that makes chips interactive and allows them to be selected
+
+</components-list-item>
+
+<components-list-item name="windows" placeholder>
+
+  The window component is used to display a block of content based upon a model
 
 </components-list-item>
 
@@ -422,45 +455,11 @@ These components are used to select a value from a specifically styled set of op
 
 ----
 
-## Selection
-
-These components allow a user to select one or multiple items from a list of options.
-
-<v-row>
-
-<components-list-item name="carousels">
-
-  Carousels are used to display multiple forms of visual content
-
-</components-list-item>
-
-<components-list-item name="button-toggles" placeholder>
-
-  Button toggles are used to select between multiple options using the button component
-
-</components-list-item>
-
-<components-list-item name="chip-groups" placeholder>
-
-  Chip group is a wrapper component that makes chips interactive and allows them to be selected
-
-</components-list-item>
-
-<components-list-item name="windows" placeholder>
-
-  The window component is used to display a block of content based upon a model
-
-</components-list-item>
-
-</v-row>
-
-----
-
 ## Providers
 
 <v-row>
 
-<components-list-item name="defaults-provider" placeholder>
+<components-list-item name="defaults-providers" placeholder>
 
   The defaults provider component is used to set default values for all components within a template
 

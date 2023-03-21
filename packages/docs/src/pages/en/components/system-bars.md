@@ -26,6 +26,14 @@ The `v-system-bar` component can be used for displaying statuses to the user. It
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-system-bar](/api/v-system-bar/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-system-bar` is:
@@ -40,12 +48,6 @@ The recommended placement of elements inside of `v-system-bar` is:
 | 1. Container | The System Bar container has a default slot with content justified right |
 | 2. Icon items (optional) | Used to convey information through the use of icons |
 | 3. Text (optional) | Textual content that is typically used to show time |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-system-bar](/api/v-system-bar/) | Primary component |
 
 <api-inline hide-links />
 

@@ -10,7 +10,7 @@ describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world']}>
+        <VBreadcrumbs items={['hello', 'world']}>
           {{
             title: ({ item }: any) => `${item}!`,
           }}
@@ -24,7 +24,7 @@ describe('VBreadcrumbs', () => {
   it('should use divider slot', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] }>
+        <VBreadcrumbs items={['hello', 'world']}>
           {{
             divider: () => '-',
           }}
@@ -38,7 +38,7 @@ describe('VBreadcrumbs', () => {
   it('should render icon', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } icon="mdi-home"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} icon="mdi-home"></VBreadcrumbs>
       </Application>
     ))
 
@@ -48,7 +48,7 @@ describe('VBreadcrumbs', () => {
   it('should use bg-color', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } bgColor="primary"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} bgColor="primary"></VBreadcrumbs>
       </Application>
     ))
 
@@ -58,7 +58,7 @@ describe('VBreadcrumbs', () => {
   it('should use color', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['hello', 'world'] } color="primary"></VBreadcrumbs>
+        <VBreadcrumbs items={['hello', 'world']} color="primary"></VBreadcrumbs>
       </Application>
     ))
 
@@ -68,7 +68,7 @@ describe('VBreadcrumbs', () => {
   it('should render link if href is set', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ [{ text: 'hello', href: '/hello' }, { text: 'world', href: '/world' }] }></VBreadcrumbs>
+        <VBreadcrumbs items={[{ text: 'hello', href: '/hello' }, { text: 'world', href: '/world' }]}></VBreadcrumbs>
       </Application>
     ))
 
@@ -92,7 +92,7 @@ describe('VBreadcrumbs', () => {
 
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ [{ text: 'about', to: '/about' }, { text: 'something', to: '/something' }] }></VBreadcrumbs>
+        <VBreadcrumbs items={[{ text: 'about', to: '/about' }, { text: 'something', to: '/something' }]}></VBreadcrumbs>
       </Application>
     ), {
       global: {
@@ -148,7 +148,7 @@ describe('VBreadcrumbs', () => {
   it('should disabled last item by default if using items prop', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['foo', 'bar'] }></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', 'bar']}></VBreadcrumbs>
       </Application>
     ))
 
@@ -158,7 +158,7 @@ describe('VBreadcrumbs', () => {
   it('should be possible to override last item disabled by default', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={ ['foo', { text: 'bar', disabled: false }] }></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', { text: 'bar', disabled: false }]}></VBreadcrumbs>
       </Application>
     ))
 

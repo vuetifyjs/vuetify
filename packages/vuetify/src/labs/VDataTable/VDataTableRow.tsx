@@ -19,7 +19,9 @@ export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
 
   props: {
+    index: Number as PropType<Number>,
     item: Object as PropType<DataTableItem>,
+    onClick: Function as PropType<(e: MouseEvent) => void>,
   },
 
   setup (props, { slots }) {
@@ -31,14 +33,18 @@ export const VDataTableRow = defineComponent({
       <tr
         class={[
           'v-data-table__tr',
+          {
+            'v-data-table__tr--clickable': !!props.onClick,
+          },
         ]}
+        onClick={ props.onClick }
       >
         { !columns.value.length && (
           <VDataTableColumn
             key="no-data"
             v-slots={ slots }
           />
-        ) }
+        )}
 
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
@@ -54,6 +60,7 @@ export const VDataTableRow = defineComponent({
                 const item = props.item!
                 const slotName = `item.${column.key}`
                 const slotProps = {
+                  index: props.index,
                   item: props.item,
                   columns: columns.value,
                   isSelected,
@@ -76,7 +83,7 @@ export const VDataTableRow = defineComponent({
                 if (column.key === 'data-table-expand') {
                   return slots['item.data-table-expand']?.(slotProps) ?? (
                     <VBtn
-                      icon={isExpanded(item) ? '$collapse' : '$expand' }
+                      icon={ isExpanded(item) ? '$collapse' : '$expand' }
                       size="small"
                       variant="text"
                       onClick={ () => toggleExpand(item) }
@@ -88,7 +95,7 @@ export const VDataTableRow = defineComponent({
               },
             }}
           </VDataTableColumn>
-        )) }
+        ))}
       </tr>
     ))
   },

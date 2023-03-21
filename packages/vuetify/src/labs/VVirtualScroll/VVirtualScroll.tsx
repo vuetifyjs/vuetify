@@ -180,7 +180,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
             >
               { slots.default?.({ item, index: index + first.value }) }
             </VVirtualScrollItem>
-          )) }
+          ))}
         </div>
       </div>
     ))

@@ -143,7 +143,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />
-        ) }
+        )}
 
         <div
           class={[
@@ -173,7 +173,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
-              { ['long', 'short'].map(bar => (
+              {['long', 'short'].map(bar => (
                 <div
                   key={ bar }
                   class={[
@@ -183,16 +183,16 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                   ]}
                   style={ barColorStyles.value }
                 />
-              )) }
+              ))}
             </div>
-          ) }
+          )}
         </Transition>
 
         { slots.default && (
           <div class="v-progress-linear__content">
             { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

@@ -99,7 +99,7 @@ describe('VDataTable', () => {
   it('should reset page when searching', () => {
     cy.mount(({ search }: { search: string }) => (
       <Application>
-        <VDataTable items={DESSERT_ITEMS} headers={DESSERT_HEADERS} search={search} items-per-page={5} />
+        <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } search={ search } items-per-page={ 5 } />
       </Application>
     ))
 
@@ -108,7 +108,7 @@ describe('VDataTable', () => {
       .click()
       .setProps({ search: 'a' })
       .vue()
-      .emitted('.v-data-table', 'update:page')
+      .emitted(VDataTable, 'update:page')
       .should('deep.equal', [[2], [1]])
   })
 })
