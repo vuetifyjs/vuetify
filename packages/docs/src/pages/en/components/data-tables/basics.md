@@ -14,11 +14,11 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-<!-- <entry /> -->
-
 ## Usage
 
 There are three variants of the data table available depending on your requirements.
+
+<entry />
 
 ### v-data-table
 
@@ -36,7 +36,7 @@ You can find more information and examples [here](/components/data-tables/server
 
 ### v-data-table-virtual
 
-The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for display large data sets. It supports sorting and filtering, but not pagination.
+The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
 
 You can find more information and examples [here](/components/data-tables/virtual-tables).
 

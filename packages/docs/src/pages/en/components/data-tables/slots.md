@@ -13,6 +13,8 @@ related:
 
 The data-table components provide a number of slots that can be used to customize the look and function of the component.
 
+<entry />
+
 ## Examples
 
 ### Item slot

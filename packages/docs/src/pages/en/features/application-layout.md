@@ -13,6 +13,8 @@ related:
 
 Vuetify features an application layout system that allows you to easily create complex website designs.
 
+<entry />
+
 The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
 
 The following components are compatible with the layout system:
@@ -29,7 +31,7 @@ The final part of the layout system is the **v-main** component. Inside this is 
 
 <alert type="info">
 
-  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
+  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100dvh`. In your own application you would always use **v-app** for the root layout.
 
 </alert>
 

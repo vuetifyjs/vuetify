@@ -198,11 +198,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                       startThumbRef.value?.$el.blur()
                       stopThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
@@ -232,11 +232,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                       stopThumbRef.value?.$el.blur()
                       startThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
