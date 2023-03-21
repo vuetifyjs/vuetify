@@ -215,6 +215,7 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         name: 'vuetify:fallback',
         enforce: 'post',
         transformIndexHtml (html) {
+          fs.mkdirSync('dist', { recursive: true })
           fs.writeFileSync(path.join('dist/_fallback.html'), html)
           fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
 <script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
