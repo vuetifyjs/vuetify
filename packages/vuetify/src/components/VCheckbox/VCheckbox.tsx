@@ -39,14 +39,14 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
     const id = computed(() => props.id || `checkbox-${uid}`)
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
       const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
 
       return (
         <VInput
           class="v-checkbox"
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }

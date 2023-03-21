@@ -59,7 +59,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
     const model = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
-      const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
+      const [rootAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
@@ -72,7 +72,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
       return (
         <VInput
           class="v-radio-group"
-          { ...inputAttrs }
+          { ...rootAttrs }
           { ...inputProps }
           v-model={ model.value }
           id={ id.value }
