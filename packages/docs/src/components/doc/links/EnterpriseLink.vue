@@ -1,6 +1,6 @@
 <template>
   <app-btn
-    href="https://next.vuetifyjs.com/en/introduction/enterprise-support/"
+    href="https://vuetifyjs.com/en/introduction/enterprise-support/"
     path="enterprise"
     @click="onClick"
   >

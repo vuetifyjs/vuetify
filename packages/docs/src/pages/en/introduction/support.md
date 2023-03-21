@@ -5,7 +5,6 @@ meta:
   keywords: vuetify live support, vuetify consulting, vuetify support, vuetify help
 related:
   - /getting-started/installation/
-  - /introduction/enterprise/
   - /resources/jobs-for-vue/
 nav: Direct support
 ---
