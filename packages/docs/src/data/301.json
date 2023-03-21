@@ -130,6 +130,8 @@
   "components/otp-input": "/introduction/roadmap",
   "components/overflow-btns": "/introduction/roadmap",
   "components/sparklines": "/introduction/roadmap",
+  "components/server-side-data-tables": "/labs/introduction",
   "components/skeleton-loaders": "/introduction/roadmap",
-  "components/speed-dials": "/introduction/roadmap"
+  "components/speed-dials": "/introduction/roadmap",
+  "components/virtual-data-tables": "/labs/introduction"
 }

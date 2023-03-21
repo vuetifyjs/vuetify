@@ -71,7 +71,7 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
-<components-list-item name="custom-overlays" placeholder>
+<components-list-item name="overlays" placeholder>
 
   The overlay component is used to display a custom scrim that sits on top of the application
 
@@ -169,7 +169,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="comboboxes" placeholder>
+<components-list-item name="combobox" placeholder>
 
   The combobox component is used to select a value from a list of options with the ability to enter a custom value
 
@@ -193,7 +193,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="radios" placeholder>
+<components-list-item name="radio-buttons" placeholder>
 
   The radio component is a replacement for its native counterpart
 
@@ -211,7 +211,7 @@ Form components are used to collect user input in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="custom-inputs" placeholder>
+<components-list-item name="inputs" placeholder>
 
   Create custom inputs that can be used with the v-model directive
 
@@ -273,9 +273,9 @@ These components allow a user to select one or multiple items from a list of opt
 
 </components-list-item>
 
-<components-list-item name="button-toggles" placeholder>
+<components-list-item name="button-groups" placeholder>
 
-  Button toggles are used to select between multiple options using the button component
+  Button groups are used to select between multiple options using the button component
 
 </components-list-item>
 
@@ -459,7 +459,7 @@ These components are used to select a value from a specifically styled set of op
 
 <v-row>
 
-<components-list-item name="defaults-provider" placeholder>
+<components-list-item name="defaults-providers" placeholder>
 
   The defaults provider component is used to set default values for all components within a template
 
