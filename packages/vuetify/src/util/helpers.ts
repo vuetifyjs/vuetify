@@ -185,10 +185,12 @@ type MaybePick<
   U extends Extract<keyof T, string>
 > = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
+// Array of keys
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
 > (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+// Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
@@ -334,6 +336,13 @@ export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
 
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
+}
+
+export function getDecimals (value: number) {
+  const trimmedStr = value.toString().trim()
+  return trimmedStr.includes('.')
+    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+    : 0
 }
 
 export function padEnd (str: string, length: number, char = '0') {

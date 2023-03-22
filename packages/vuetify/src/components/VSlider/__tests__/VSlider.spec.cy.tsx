@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VApp } from '@/components/VApp'
-import { CenteredGrid } from '@/../cypress/templates'
+import { Application, CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
 
 describe('VSlider', () => {
@@ -175,5 +175,37 @@ describe('VSlider', () => {
         </CenteredGrid>
       </VApp>
     ))
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16634
+  it('should respect the decimals from both step and min', () => {
+    cy.mount(() => (
+      <Application>
+        <CenteredGrid width="360px">
+          <VSlider
+            modelValue={ 1.001 }
+            step={ 1.001 }
+            min={ 1.0001 }
+            max={ 10 }
+            thumb-label
+          />
+        </CenteredGrid>
+      </Application>
+    ))
+
+    cy.get('.v-slider-thumb')
+      .trigger('mouseover')
+      .trigger('mousedown', { which: 1 })
+      .trigger('mousemove', 35, 0, { force: true }) // move to second step
+      .trigger('mousemove', 190, 0, { force: true }) // move to fifth step
+      .trigger('mousemove', 360, 0, { force: true }) // move to the final step
+      .trigger('mouseup')
+
+    cy.emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
+        [2.0011],
+        [6.0051],
+        [10],
+      ])
   })
 })

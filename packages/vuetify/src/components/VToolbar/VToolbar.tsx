@@ -18,10 +18,10 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
@@ -217,7 +217,3 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
 })
 
 export type VToolbar = InstanceType<typeof VToolbar>
-
-export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
-  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
-}

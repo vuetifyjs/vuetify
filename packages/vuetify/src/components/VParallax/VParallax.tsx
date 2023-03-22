@@ -41,11 +41,11 @@ export const VParallax = genericComponent<VImgSlots>()({
       intersectionRef.value = resizeRef.value = root.value?.$el
     })
 
-    let scrollParent: Element
+    let scrollParent: Element | Document
     watch(isIntersecting, val => {
       if (val) {
         scrollParent = getScrollParent(intersectionRef.value)
-        scrollParent = scrollParent === document.scrollingElement ? document as any : scrollParent
+        scrollParent = scrollParent === document.scrollingElement ? document : scrollParent
         scrollParent.addEventListener('scroll', onScroll, { passive: true })
         onScroll()
       } else {
@@ -73,9 +73,9 @@ export const VParallax = genericComponent<VImgSlots>()({
         const el: HTMLElement | null = (root.value?.$el as Element).querySelector('.v-img__img')
         if (!el) return
 
-        const scrollHeight = scrollParent.clientHeight ?? document.documentElement.clientHeight
-        const scrollPos = scrollParent.scrollTop ?? window.scrollY
-        const top = intersectionRef.value!.offsetTop
+        const scrollHeight = scrollParent instanceof Document ? document.documentElement.clientHeight : scrollParent.clientHeight
+        const scrollPos = scrollParent instanceof Document ? window.scrollY : scrollParent.scrollTop
+        const top = intersectionRef.value!.getBoundingClientRect().top + scrollPos
         const height = contentRect.value!.height
 
         const center = top + (height - scrollHeight) / 2

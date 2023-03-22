@@ -5,16 +5,12 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeGroupItemProps } from '@/composables/group'
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { animate, genericComponent, pick, standardEasing, useRender } from '@/util'
+import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
+import { makeVBtnProps } from '@/components/VBtn/VBtn'
 
 // Types
 import type { PropType } from 'vue'
@@ -25,18 +21,8 @@ export const VTab = genericComponent()({
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
-
-    stacked: Boolean,
     title: String,
 
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    color: String,
     sliderColor: String,
     hideSlider: Boolean,
 
@@ -45,12 +31,17 @@ export const VTab = genericComponent()({
       default: 'horizontal',
     },
 
-    ...makeTagProps(),
-    ...makeRouterProps(),
-    ...makeGroupItemProps({
+    ...omit(makeVBtnProps({
       selectedClass: 'v-tab--selected',
-    }),
-    ...makeThemeProps(),
+      variant: 'text' as const,
+    }), [
+      'active',
+      'block',
+      'flat',
+      'location',
+      'position',
+      'symbol',
+    ]),
   },
 
   setup (props, { slots, attrs }) {
@@ -110,21 +101,7 @@ export const VTab = genericComponent()({
     }
 
     useRender(() => {
-      const [btnProps] = pick(props, [
-        'href',
-        'to',
-        'replace',
-        'icon',
-        'stacked',
-        'prependIcon',
-        'appendIcon',
-        'ripple',
-        'theme',
-        'disabled',
-        'selectedClass',
-        'value',
-        'color',
-      ])
+      const [btnProps] = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -140,7 +117,6 @@ export const VTab = genericComponent()({
           active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
-          variant="text"
           rounded={ 0 }
           { ...btnProps }
           { ...attrs }

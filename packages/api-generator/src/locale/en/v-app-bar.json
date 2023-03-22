@@ -13,7 +13,7 @@
     "scrollOffScreen": "Hides the component when scrolling. Will **NOT** show the `extension` slot.",
     "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one when scrolling.",
     "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
-    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-app-bar.json))"
+    "location": "Aligns the component towards the top or bottom."
   },
   "slots": {
     "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop.",

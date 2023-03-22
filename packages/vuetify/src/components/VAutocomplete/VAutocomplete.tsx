@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, omit, useRender, wrapInArray } from '@/util'
-import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
@@ -259,7 +259,7 @@ export const VAutocomplete = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
-      const [textFieldProps] = filterVTextFieldProps(props)
+      const [textFieldProps] = VTextField.filterProps(props)
 
       return (
         <VTextField
