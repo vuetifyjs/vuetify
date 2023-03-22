@@ -18,7 +18,7 @@
             location="top end"
           >
             <v-icon
-              :icon="`mdi-bell${menu ? '-ring' : unread.length === 0 ? '-outline' : '-ring-outline'}`"
+              :icon="icon"
               class="mx-1"
               color="medium-emphasis"
             />
@@ -161,6 +161,12 @@
     const icon = showArchived.value ? 'mdi-email-mark-as-unread' : 'mdi-email-open'
 
     return { icon, path }
+  })
+  const icon = computed(() => {
+    if (menu.value && unread.value.length > 0) return 'mdi-bell-ring'
+    else if (menu.value) return 'mdi-bell'
+    else if (unread.value.length > 0) return 'mdi-bell-ring-outline'
+    else return 'mdi-bell-outline'
   })
 
   const width = computed(() => mobile.value ? 420 : 520)

@@ -6,7 +6,6 @@
 
     <app-menu
       :items="items"
-      model-value
       activator="parent"
       width="200"
     />
