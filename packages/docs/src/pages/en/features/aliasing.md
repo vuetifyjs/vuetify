@@ -33,7 +33,7 @@ export default createVuetify({
 
 <alert type="info">
 
-Even though treeshaking in a production build is automatic, by importing a component using its full path in `dev` i.e `vuetify/components/VBtn` as opossed to `vuetify/components` will result in fewer componentes loaded by the compiler.
+Although treeshaking is automatically applied during production builds, it is advantageous to import components by specifying their full path in development mode. For instance, using 'vuetify/components/VBtn' instead of 'vuetify/components' ensures that the compiler loads fewer components, thus optimizing performance.
 
 </alert>
 
