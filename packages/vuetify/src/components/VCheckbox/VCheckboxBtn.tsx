@@ -8,7 +8,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -55,20 +55,23 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
         : props.trueIcon
     })
 
-    useRender(() => (
-      <VSelectionControl
-        { ...props }
-        v-model={ model.value }
-        class="v-checkbox-btn"
-        type="checkbox"
-        inline
-        onUpdate:modelValue={ onChange }
-        falseIcon={ falseIcon.value }
-        trueIcon={ trueIcon.value }
-        aria-checked={ props.indeterminate ? 'mixed' : undefined }
-        v-slots={ slots }
-      />
-    ))
+    useRender(() => {
+      const controlProps = omit(VSelectionControl.filterProps(props)[0], ['modelValue'])
+      return (
+        <VSelectionControl
+          { ...controlProps }
+          v-model={ model.value }
+          class="v-checkbox-btn"
+          type="checkbox"
+          inline
+          onUpdate:modelValue={ onChange }
+          falseIcon={ falseIcon.value }
+          trueIcon={ trueIcon.value }
+          aria-checked={ props.indeterminate ? 'mixed' : undefined }
+          v-slots={ slots }
+        />
+      )
+    })
 
     return {}
   },
