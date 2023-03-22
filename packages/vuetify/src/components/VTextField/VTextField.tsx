@@ -16,10 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -141,7 +141,13 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLInputElement).value
+      const el = e.target as HTMLInputElement
+      const caretPosition = [el.selectionStart, el.selectionEnd]
+      model.value = el.value
+      nextTick(() => {
+        el.selectionStart = caretPosition[0]
+        el.selectionEnd = caretPosition[1]
+      })
     }
 
     useRender(() => {
@@ -279,7 +285,3 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 })
 
 export type VTextField = InstanceType<typeof VTextField>
-
-export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
-  return pick(props, Object.keys(VTextField.props) as any)
-}

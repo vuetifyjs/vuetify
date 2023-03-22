@@ -12,7 +12,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -85,7 +85,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay

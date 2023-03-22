@@ -43,7 +43,13 @@ export function animate (
 ) {
   if (typeof el.animate === 'undefined') return { finished: Promise.resolve() }
 
-  const animation = el.animate(keyframes, options)
+  let animation: Animation
+  try {
+    animation = el.animate(keyframes, options)
+  } catch (err) {
+    return { finished: Promise.resolve() }
+  }
+
   if (typeof animation.finished === 'undefined') {
     (animation as any).finished = new Promise(resolve => {
       animation.onfinish = () => {

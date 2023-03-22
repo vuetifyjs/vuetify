@@ -96,10 +96,11 @@ export const VAlert = genericComponent<VAlertSlots>()({
   },
 
   emits: {
+    'click:close': (e: MouseEvent) => true,
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { emit, slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const icon = computed(() => {
       if (props.icon === false) return undefined
@@ -127,6 +128,8 @@ export const VAlert = genericComponent<VAlertSlots>()({
       'aria-label': t(props.closeLabel),
       onClick (e: MouseEvent) {
         isActive.value = false
+
+        emit('click:close', e)
       },
     }))
 
@@ -176,35 +179,39 @@ export const VAlert = genericComponent<VAlertSlots>()({
           )}
 
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VIcon: {
-                  density: props.density,
-                  icon: icon.value,
-                  size: props.prominent ? 44 : 28,
-                },
-              }}
-            >
-              <div class="v-alert__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : icon.value && (<VIcon />)
-                }
-              </div>
-            </VDefaultsProvider>
+            <div key="prepend" class="v-alert__prepend">
+              { !slots.prepend ? (
+                <VIcon
+                  key="prepend-icon"
+                  density={ props.density }
+                  icon={ icon.value }
+                  size={ props.prominent ? 44 : 28 }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !icon.value }
+                  defaults={{
+                    VIcon: {
+                      density: props.density,
+                      icon: icon.value,
+                      size: props.prominent ? 44 : 28,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              )}
+            </div>
           )}
 
           <div class="v-alert__content">
             { hasTitle && (
               <VAlertTitle key="title">
-                { slots.title ? slots.title() : props.title }
+                { slots.title?.() ?? props.title }
               </VAlertTitle>
             )}
 
-            { hasText && (
-              slots.text ? slots.text() : props.text
-            )}
+            { hasText && (slots.text?.() ?? props.text) }
 
             { slots.default?.() }
           </div>
@@ -216,20 +223,30 @@ export const VAlert = genericComponent<VAlertSlots>()({
           )}
 
           { hasClose && (
-            <VDefaultsProvider
-              key="close"
-              defaults={{
-                VBtn: {
-                  icon: props.closeIcon,
-                  size: 'x-small',
-                  variant: 'text',
-                },
-              }}
-            >
-              <div class="v-alert__close">
-                { slots.close?.({ props: closeProps.value }) ?? <VBtn { ...closeProps.value } /> }
-              </div>
-            </VDefaultsProvider>
+            <div key="close" class="v-alert__close">
+              { !slots.close ? (
+                <VBtn
+                  key="close-btn"
+                  icon={ props.closeIcon }
+                  size="x-small"
+                  variant="text"
+                  { ...closeProps.value }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="close-defaults"
+                  defaults={{
+                    VBtn: {
+                      icon: props.closeIcon,
+                      size: 'x-small',
+                      variant: 'text',
+                    },
+                  }}
+                >
+                  { slots.close?.({ props: closeProps.value }) }
+                </VDefaultsProvider>
+              )}
+            </div>
           )}
         </props.tag>
       )

@@ -186,7 +186,7 @@ export const VRating = genericComponent<VRatingSlots>()({
             type="radio"
             value={ value }
             checked={ normalizedValue.value === value }
-            tabindex={-1}
+            tabindex={ -1 }
             readonly={ props.readonly }
             disabled={ props.disabled }
           />
