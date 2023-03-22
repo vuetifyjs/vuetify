@@ -45,9 +45,29 @@
     }
   })
 
-  watch(stacked, val => val && (prepend.value = true, append.value = false, icon.value = false))
-  watch(prepend, val => val && (icon.value = false))
-  watch(append, val => val && (icon.value = false))
+  watch(stacked, val => {
+    if (val) {
+      prepend.value = true
+      append.value = false
+      icon.value = false
+    }
+  })
+
+  watch(prepend, val => {
+    if (val) {
+      icon.value = false
+
+      if (stacked.value) (append.value = false)
+    }
+  })
+
+  watch(append, val => {
+    if (val) {
+      icon.value = false
+
+      if (stacked.value) (prepend.value = false)
+    }
+  })
   watch(icon, val => val && (prepend.value = false, append.value = false, stacked.value = false))
 
   const slots = computed(() => {

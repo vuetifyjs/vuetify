@@ -20,8 +20,8 @@
       ></v-text-field>
 
       <v-btn
-        :loading="loading"
         :disabled="loading"
+        :loading="loading"
         block
         class="text-none mb-4"
         color="indigo-darken-3"

@@ -30,10 +30,10 @@
 
         <div class="py-12 text-center">
           <v-icon
-            icon="mdi-check-circle-outline"
-            size="128"
             class="mb-6"
             color="success"
+            icon="mdi-check-circle-outline"
+            size="128"
           ></v-icon>
 
           <div class="text-h4 font-weight-bold">This receipt was sent</div>

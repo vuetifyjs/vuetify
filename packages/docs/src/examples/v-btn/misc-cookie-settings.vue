@@ -105,6 +105,5 @@
       advertising: true,
       performance: true,
     }),
-
   }
 </script>

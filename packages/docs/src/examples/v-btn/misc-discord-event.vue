@@ -93,9 +93,9 @@
         ></v-icon>
 
         <v-icon
-          size="x-small"
           color="#949cf7"
           icon="mdi-video-vintage"
+          size="x-small"
         ></v-icon>
 
         <span class="text-caption text-medium-emphasis ms-1 font-weight-light">

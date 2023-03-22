@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row justify="center" align="center">
+    <v-row align="center" justify="center">
       <v-col cols="auto">
         <v-btn density="compact" icon="mdi-plus"></v-btn>
       </v-col>
@@ -14,13 +14,13 @@
       </v-col>
     </v-row>
 
-    <v-row justify="center" align="center">
+    <v-row align="center" justify="center">
       <v-col cols="auto">
-        <v-btn size="x-small" icon="mdi-account"></v-btn>
+        <v-btn icon="mdi-account" size="x-small"></v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn size="small" icon="mdi-plus"></v-btn>
+        <v-btn icon="mdi-plus" size="small"></v-btn>
       </v-col>
 
       <v-col cols="auto">
@@ -28,11 +28,11 @@
       </v-col>
 
       <v-col cols="auto">
-        <v-btn size="large" icon="mdi-open-in-new"></v-btn>
+        <v-btn icon="mdi-open-in-new" size="large"></v-btn>
       </v-col>
 
       <v-col cols="auto">
-        <v-btn size="x-large" icon="mdi-calendar"></v-btn>
+        <v-btn icon="mdi-calendar" size="x-large"></v-btn>
       </v-col>
     </v-row>
   </v-container>

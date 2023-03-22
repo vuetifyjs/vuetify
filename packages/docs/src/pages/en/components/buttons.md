@@ -61,7 +61,7 @@ The following code snippet is an example of a basic `v-btn` component only conta
 
 ### Props
 
-There are a multitude of props that can be used to customize the `v-btn` appearance and behavior. Props such as **prepend-icon** and **append-icon** are a simple interface for adding positioned icons while props such as **block** and **stacked** are used to control the component's shape.
+A wide array of props can be employed to modify the `v-btn` component's look and functionality. Props like **prepend-icon** and **append-icon** offer a straightforward approach to incorporate positioned icons, whereas **block** and **stacked** props are utilized to manage the component's form.
 
 #### Density
 
@@ -221,7 +221,7 @@ export default createVuetify({
 
 ## Aliasing
 
-Use [aliasing](/features/aliasing/) functionality to create virtual components based off of the `v-btn` component. This is useful when you have multiple button variants as part of a design specification or when creating a custom library based of of Vuetify.
+Utilize the [component aliasing](/features/aliasing/) feature to generate virtual components derived from the v-btn component. This proves valuable when dealing with numerous button variations within design specifications or when developing a custom library based on Vuetify.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetifyjs'
