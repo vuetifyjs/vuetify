@@ -38,12 +38,12 @@
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
-      appendIcon: 'mdi-spider',
+      appendIcon: 'mdi-alert-circle-outline',
     },
     {
       title: 'github-discussions',
       href: 'https://github.com/vuetifyjs/vuetify/discussions',
-      appendIcon: 'mdi-message-text',
+      appendIcon: 'mdi-message-text-outline',
     },
     { divider: true },
     { subheader: t('resources') },
@@ -60,17 +60,17 @@
     {
       title: 'codepen-template',
       href: 'https://template.vuetifyjs.com/',
-      appendIcon: 'mdi-codepen',
+      appendIcon: 'mdi-file-document-outline',
     },
     {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
-      appendIcon: 'mdi-server',
+      appendIcon: 'mdi-cloud-outline',
     },
     {
       title: 'stack-overflow',
       href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-stack-overflow',
+      appendIcon: 'mdi-layers-outline',
     },
     {
       title: 'latest-releases',
