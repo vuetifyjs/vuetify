@@ -161,12 +161,12 @@ export default mixins(
 
   methods: {
     onKeyDown (e: KeyboardEvent): void {
-      if (e.keyCode !== keyCodes.shift) return
-      this.shiftKeyDown = true
+      this.shiftKeyDown = e.keyCode === keyCodes.shift || e.shiftKey
     },
     onKeyUp (e: KeyboardEvent): void {
-      if (e.keyCode !== keyCodes.shift) return
-      this.shiftKeyDown = false
+      if (e.keyCode === keyCodes.shift || !e.shiftKey) {
+        this.shiftKeyDown = false
+      }
     },
     toggleSelectAll (value: boolean): void {
       const selection = Object.assign({}, this.selection)
