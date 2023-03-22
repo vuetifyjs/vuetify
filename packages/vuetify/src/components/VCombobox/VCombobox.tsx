@@ -119,7 +119,7 @@ export const VCombobox = genericComponent<new <
       },
     })
     const selectionIndex = ref(-1)
-    const cleared = ref(false)
+    let cleared = false
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -162,11 +162,10 @@ export const VCombobox = genericComponent<new <
       },
     })
     watch(_search, value => {
-      if (cleared.value) {
-        // Implement open-on-clear (https://github.com/vuetifyjs/vuetify/issues/16925)
+      if (cleared) {
         // wait for clear to finish, VTextField sets _search to null
         // then search computed triggers and updates _search to ''
-        nextTick(() => (cleared.value = false))
+        nextTick(() => (cleared = false))
       } else if (isFocused.value && !menu.value) {
         menu.value = true
       }
@@ -199,7 +198,7 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
-      cleared.value = true
+      cleared = true
 
       if (props.openOnClear) {
         menu.value = true
