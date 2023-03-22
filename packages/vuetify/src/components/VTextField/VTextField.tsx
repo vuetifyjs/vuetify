@@ -142,12 +142,14 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
-      const caretPosition = [el.selectionStart, el.selectionEnd]
       model.value = el.value
-      nextTick(() => {
-        el.selectionStart = caretPosition[0]
-        el.selectionEnd = caretPosition[1]
-      })
+      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+        const caretPosition = [el.selectionStart, el.selectionEnd]
+        nextTick(() => {
+          el.selectionStart = caretPosition[0]
+          el.selectionEnd = caretPosition[1]
+        })
+      }
     }
 
     useRender(() => {
