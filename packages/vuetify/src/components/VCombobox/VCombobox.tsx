@@ -163,6 +163,7 @@ export const VCombobox = genericComponent<new <
     })
     watch(_search, value => {
       if (cleared.value) {
+        // Implement open-on-clear (https://github.com/vuetifyjs/vuetify/issues/16925)
         // wait for clear to finish, VTextField sets _search to null
         // then search computed triggers and updates _search to ''
         nextTick(() => (cleared.value = false))
