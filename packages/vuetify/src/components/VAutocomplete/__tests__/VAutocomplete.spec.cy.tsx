@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 import { VAutocomplete } from '../VAutocomplete'
 

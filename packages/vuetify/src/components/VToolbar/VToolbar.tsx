@@ -18,10 +18,10 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
@@ -132,16 +132,25 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         >
           { hasImage && (
             <div key="image" class="v-toolbar__image">
-              <VDefaultsProvider
-                defaults={{
-                  VImg: {
-                    cover: true,
-                    src: props.image,
-                  },
-                }}
-              >
-                { slots.image ? slots.image?.() : (<VImg />) }
-              </VDefaultsProvider>
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
             </div>
           )}
 
@@ -208,7 +217,3 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
 })
 
 export type VToolbar = InstanceType<typeof VToolbar>
-
-export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
-  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
-}

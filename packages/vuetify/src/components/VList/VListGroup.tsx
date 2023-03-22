@@ -10,10 +10,7 @@ import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nes
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, genericComponent, pick, propsFactory, useRender } from '@/util'
-
-// Types
-import type { ExtractPropTypes } from 'vue'
+import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
   default: []
@@ -121,7 +118,3 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
 })
 
 export type VListGroup = InstanceType<typeof VListGroup>
-
-export function filterListGroupProps (props: ExtractPropTypes<ReturnType<typeof makeVListGroupProps>>) {
-  return pick(props, Object.keys(VListGroup.props) as any)
-}

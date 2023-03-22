@@ -108,7 +108,7 @@ describe('VDataTable', () => {
       .click()
       .setProps({ search: 'a' })
       .vue()
-      .emitted('.v-data-table', 'update:page')
+      .emitted(VDataTable, 'update:page')
       .should('deep.equal', [[2], [1]])
   })
 })

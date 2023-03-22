@@ -2,7 +2,7 @@
 import './VBtnToggle.sass'
 
 // Components
-import { filterVBtnGroupProps, makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
+import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
@@ -39,7 +39,7 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
     const { isSelected, next, prev, select, selected } = useGroup(props, VBtnToggleSymbol)
 
     useRender(() => {
-      const [btnGroupProps] = filterVBtnGroupProps(props)
+      const [btnGroupProps] = VBtnGroup.filterProps(props)
 
       return (
         <VBtnGroup

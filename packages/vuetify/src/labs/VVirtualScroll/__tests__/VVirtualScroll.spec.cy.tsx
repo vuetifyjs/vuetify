@@ -18,11 +18,7 @@ describe('VVirtualScroll', () => {
     ))
 
     cy.get('.v-virtual-scroll__item').should('have.length', 30)
-
-    cy.vue().then(({ wrapper }) => {
-      wrapper.setProps({ visibleItems: 20 })
-    })
-
-    cy.get('.v-virtual-scroll__item').should('have.length', 20)
+      .setProps({ visibleItems: 20 })
+      .get('.v-virtual-scroll__item').should('have.length', 20)
   })
 })

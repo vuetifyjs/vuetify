@@ -55,8 +55,11 @@ export const VLazy = genericComponent()({
       <props.tag
         class="v-lazy"
         v-intersect={[
-          onIntersect,
-          props.options,
+          {
+            handler: onIntersect,
+            options: props.options,
+          },
+          null,
           isActive.value ? [] : ['once'],
         ]}
         style={ dimensionStyles.value }

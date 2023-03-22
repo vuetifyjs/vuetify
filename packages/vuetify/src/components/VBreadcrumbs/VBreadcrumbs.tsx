@@ -93,22 +93,27 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
           style={ backgroundColorStyles.value }
         >
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VIcon: {
-                  icon: props.icon,
-                  start: true,
-                },
-              }}
-            >
-              <div class="v-breadcrumbs__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : props.icon && (<VIcon />)
-                }
-              </div>
-            </VDefaultsProvider>
+            <div key="prepend" class="v-breadcrumbs__prepend">
+              { !slots.prepend ? (
+                <VIcon
+                  key="prepend-icon"
+                  start
+                  icon={ props.icon }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !props.icon }
+                  defaults={{
+                    VIcon: {
+                      icon: props.icon,
+                      start: true,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              )}
+            </div>
           )}
 
           { props.items.map((item, index, array) => (
