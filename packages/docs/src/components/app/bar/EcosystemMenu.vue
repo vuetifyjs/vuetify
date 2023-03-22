@@ -6,6 +6,7 @@
 
     <app-menu
       :items="items"
+      model-value
       activator="parent"
       width="200"
     />
@@ -51,22 +52,22 @@
     {
       title: 'jobs',
       to: rpath('/resources/jobs-for-vue/'),
-      appendIcon: 'mdi-school',
+      appendIcon: 'mdi-briefcase-variant-outline',
     },
     {
       title: 'themes',
       href: 'https://store.vuetifyjs.com/collections/vuetify-3',
-      appendIcon: 'mdi-shopping',
+      appendIcon: 'mdi-shape-outline',
     },
     {
       title: 'ui-kits',
       to: rpath('/resources/ui-kits/'),
-      appendIcon: 'mdi-palette',
+      appendIcon: 'mdi-vector-difference-ab',
     },
     {
       title: 'playground',
       href: 'https://play.vuetifyjs.com/',
-      appendIcon: 'mdi-play-circle',
+      appendIcon: 'mdi-play-circle-outline',
     },
     { divider: true },
     { subheader: t('documentation') },
