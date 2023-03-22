@@ -245,6 +245,7 @@ const nonBubblingEvents = [
   'onProgress',
   'onAbort',
   'onError',
+  /^onUpdate:.+/,
 ]
 
 /**
