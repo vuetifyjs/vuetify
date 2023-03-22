@@ -117,9 +117,9 @@ export const VDialog = genericComponent<OverlaySlots>()({
           ]}
           { ...overlayProps }
           v-model={ isActive.value }
-          aria-role="dialog"
           aria-modal="true"
           activatorProps={ activatorProps.value }
+          role="dialog"
           { ...scopeId }
         >
           {{
