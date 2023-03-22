@@ -21,7 +21,7 @@ Aliasing allows you to use built-in Vuetify components as a baseline for your cu
 
 ```js { resource="src/plugins/vuetify.js"}
 import { createVuetify } from 'vuetify'
-import { VBtn } from 'vuetify/components'
+import { VBtn } from 'vuetify/components/VBtn'
 
 export default createVuetify({
   aliases: {
@@ -31,13 +31,19 @@ export default createVuetify({
 })
 ```
 
+<alert type="info">
+
+Even though treeshaking in a production build is automatic, by importing a component using its full path in `dev` i.e `vuetify/components/VBtn` as opossed to `vuetify/components` will result in fewer componentes loaded by the compiler.
+
+</alert>
+
 ## Virtual component defaults
 
 Virtual components have access to the Vuetify [Global configuration](/features/global-configuration/). Default settings for aliases are defined the same as built-in components with no extra steps required by you. In the following example, **MyButton** uses [v-btn props](/api/v-btn/#props) to change it's default **variant**:
 
 ```js { resource="src/plugins/vuetify.js"}
 import { createVuetify } from 'vuetify'
-import { VBtn } from 'vuetify/components'
+import { VBtn } from 'vuetify/components/VBtn'
 
 export default createVuetify({
   aliases: {
@@ -56,7 +62,7 @@ Prop defaults accept component key references to apply style changes based upon 
 
 ```js { resource="src/plugins/vuetify.js"}
 import { createVuetify } from 'vuetify'
-import { VBtn } from 'vuetify/components'
+import { VBtn } from 'vuetify/components/VBtn'
 
 export default createVuetify({
   aliases: {
