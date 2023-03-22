@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { Application } from '../../../../cypress/templates'
 import { ref } from 'vue'
 import { VDataTableServer } from '..'
 
@@ -103,7 +104,7 @@ describe('VDataTableServer', () => {
       <VDataTableServer
         headers={ DESSERT_HEADERS }
         items={ DESSERT_ITEMS.slice(0, itemsLength) }
-        items-length={ itemsLength }
+        itemsLength={ itemsLength }
       ></VDataTableServer>
     ))
 
@@ -137,11 +138,93 @@ describe('VDataTableServer', () => {
     ))
 
     cy.get('.v-data-table tbody tr')
-      .vue()
-      .then(({ wrapper }) => {
-        const table = wrapper.findComponent(VDataTableServer)
-        const emits = table.emitted('update:options')
-        expect(emits).to.have.length(1)
-      })
+      .emitted(VDataTableServer, 'update:options')
+      .should('have.length', 1)
+  })
+
+  it('should only trigger update event once when changing itemsPerPage', () => {
+    const items = ref<any[]>([])
+    const options = ref({
+      itemsLength: DESSERT_ITEMS.length,
+      page: 1,
+      itemsPerPage: 2,
+    })
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    function load (opts: { page: number, itemsPerPage: number }) {
+      setTimeout(() => {
+        const start = (opts.page - 1) * opts.itemsPerPage
+        const end = start + opts.itemsPerPage
+        items.value = DESSERT_ITEMS.slice(start, end)
+      }, 10)
+    }
+
+    cy.mount(() => (
+      <Application>
+        <VDataTableServer
+          headers={ DESSERT_HEADERS }
+          items={ items.value }
+          { ...options.value }
+          onUpdate:options={ load }
+        ></VDataTableServer>
+      </Application>
+    ))
+
+    cy
+      .get('.v-btn[aria-label="Next page"]')
+      .click()
+      .get('.v-select')
+      .click()
+      .get('.v-list-item')
+      .eq(0)
+      .click()
+      .emitted(VDataTableServer, 'update:options')
+      .should('deep.equal', [
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
+        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
+        [{ page: 1, itemsPerPage: 10, sortBy: [], groupBy: [] }],
+      ])
+  })
+
+  it('should only trigger update event once when changing sort', () => {
+    const items = ref<any[]>([])
+    const options = ref({
+      itemsLength: DESSERT_ITEMS.length,
+      page: 1,
+      itemsPerPage: 2,
+    })
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    function load (opts: { page: number, itemsPerPage: number }) {
+      setTimeout(() => {
+        const start = (opts.page - 1) * opts.itemsPerPage
+        const end = start + opts.itemsPerPage
+        items.value = DESSERT_ITEMS.slice(start, end)
+      }, 10)
+    }
+
+    cy.mount(() => (
+      <Application>
+        <VDataTableServer
+          headers={ DESSERT_HEADERS }
+          items={ items.value }
+          { ...options.value }
+          onUpdate:options={ load }
+        ></VDataTableServer>
+      </Application>
+    ))
+
+    cy
+      .get('.v-btn[aria-label="Next page"]')
+      .click()
+      .get('th')
+      .eq(0)
+      .click()
+      .emitted(VDataTableServer, 'update:options')
+      .should('deep.equal', [
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
+        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
+        [{ page: 1, itemsPerPage: 2, sortBy: [{ key: 'name', order: 'asc' }], groupBy: [] }],
+      ])
   })
 })

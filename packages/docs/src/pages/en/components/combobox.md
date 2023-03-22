@@ -14,17 +14,21 @@ related:
 
 The `v-combobox` component is a [v-text-field](/components/text-fields) that allows the user to select values from a provided **items** array, or to enter their own value. Created items will be returned as strings.
 
-<entry />
-
 ## Usage
 
 With Combobox, you can allow a user to create new values that may not be present in a provided items list.
 
 <usage name="v-combobox" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-combobox](/api/v-combobox/) | Primary component |
+
+<api-inline hide-links />
 
 ## Caveats
 

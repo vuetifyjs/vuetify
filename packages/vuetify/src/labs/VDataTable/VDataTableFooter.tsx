@@ -76,7 +76,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage } = usePagination()
+    const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
       props.itemsPerPageOptions.map(option => ({
@@ -95,7 +95,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
           <VSelect
             items={ itemsPerPageOptions.value }
             modelValue={ itemsPerPage.value }
-            onUpdate:modelValue={ v => itemsPerPage.value = Number(v) }
+            onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
             density="compact"
             variant="outlined"
             hide-details

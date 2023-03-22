@@ -9,14 +9,13 @@ import { VDataTableRows } from './VDataTableRows'
 import { VDataTableFooter } from './VDataTableFooter'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
-import { createSort, makeDataTableSortProps, useSortedItems } from './composables/sort'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
-import { createPagination, makeDataTablePaginateProps, usePaginatedItems } from './composables/paginate'
-import { createSelection, makeDataTableSelectProps } from './composables/select'
-import { createExpanded, makeDataTableExpandProps } from './composables/expand'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
+import { makeDataTableSelectProps, provideSelection } from './composables/select'
+import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { useOptions } from './composables/options'
 import { provideDefaults } from '@/composables/defaults'
 
@@ -81,7 +80,9 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
   },
 
   setup (props, { emit, slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy } = createGroupBy(props)
+    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { page, itemsPerPage } = createPagination(props)
 
     const { columns } = createHeaders(props, {
       groupBy,
@@ -95,20 +96,21 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
 
-    const { sortBy } = createSort(props)
-    const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
+    provideSort({ sortBy, multiSort, mustSort, page })
+    const { sortByWithGroups, opened, extractRows } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+    const itemsLength = computed(() => flatItems.value.length)
 
-    const { page, itemsPerPage, startIndex, stopIndex } = createPagination(props, flatItems)
-    const { paginatedItems } = usePaginatedItems(flatItems, startIndex, stopIndex, itemsPerPage)
+    const { startIndex, stopIndex } = providePagination({ page, itemsPerPage, itemsLength })
+    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    createSelection(props, paginatedItemsWithoutGroups)
+    provideSelection(props, paginatedItemsWithoutGroups)
 
-    createExpanded(props)
+    provideExpanded(props)
 
     useOptions({
       page,

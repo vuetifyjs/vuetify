@@ -30,6 +30,7 @@ export function useDefaults () {
 export function provideDefaults (
   defaults?: MaybeRef<DefaultsInstance | undefined>,
   options?: {
+    disabled?: MaybeRef<boolean | undefined>
     reset?: MaybeRef<number | string | undefined>
     root?: MaybeRef<boolean | undefined>
     scoped?: MaybeRef<boolean | undefined>
@@ -39,6 +40,10 @@ export function provideDefaults (
   const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
+    const disabled = unref(options?.disabled)
+
+    if (disabled) return injectedDefaults.value
+
     const scoped = unref(options?.scoped)
     const reset = unref(options?.reset)
     const root = unref(options?.root)

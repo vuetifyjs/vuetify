@@ -2,7 +2,7 @@
 import './VSwitch.sass'
 
 // Components
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
@@ -69,7 +69,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [controlProps, _2] = VSelectionControl.filterProps(props)
       const control = ref<VSelectionControl>()
 
       function onClick () {

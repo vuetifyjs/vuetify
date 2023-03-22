@@ -3,17 +3,21 @@
 
 // Block
 .v-dialog
-  align-items: center
-  justify-content: center
-  margin: auto
+  margin: $dialog-margin
+  margin-inline-end: $dialog-margin
 
-  .v-overlay__content
-    max-height: calc(100% - #{$dialog-margin * 2})
-    width: calc(100% - #{$dialog-margin * 2})
-    max-width: calc(100% - #{$dialog-margin * 2})
-    margin: $dialog-margin
+  &.v-overlay--scroll-blocked
+    margin-inline-end: calc(#{$dialog-margin} + var(--v-scrollbar-offset))
+
+  > .v-overlay__content
+    max-height: 100%
+    width: 100%
+    max-width: 100%
     display: flex
     flex-direction: column
+    top: 50%
+    left: 50%
+    transform: translate(-50%, -50%)
 
     > .v-card,
     > .v-sheet
@@ -39,10 +43,12 @@
         line-height: inherit
         padding: $dialog-card-text-padding
 
-.v-dialog--fullscreen
+.v-dialog.v-dialog--fullscreen
+  margin: 0
+  margin-inline-end: 0
   --v-scrollbar-offset: 0px
 
-  .v-overlay__content
+  > .v-overlay__content
     border-radius: 0
     margin: 0
     padding: 0
@@ -53,6 +59,7 @@
     overflow-y: auto
     top: 0
     left: 0
+    transform: none
 
     > .v-card,
     > .v-sheet
@@ -60,8 +67,8 @@
       min-width: 100%
       border-radius: 0
 
-.v-dialog--scrollable .v-overlay__content,
-.v-dialog--scrollable .v-overlay__content > form
+.v-dialog--scrollable > .v-overlay__content,
+.v-dialog--scrollable > .v-overlay__content > form
   display: flex
 
   > .v-card

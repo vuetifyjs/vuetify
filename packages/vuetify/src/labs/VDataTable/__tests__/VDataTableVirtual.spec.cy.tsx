@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { Application } from '../../../../cypress/templates'
-import { VDataTable } from '..'
+import { VDataTableVirtual } from '..'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
@@ -96,19 +96,11 @@ const DESSERT_ITEMS = [
 ]
 
 describe('VDataTable', () => {
-  it('should reset page when searching', () => {
-    cy.mount(({ search }: { search: string }) => (
+  it('should render', () => {
+    cy.mount(() => (
       <Application>
-        <VDataTable items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } search={ search } items-per-page={ 5 } />
+        <VDataTableVirtual items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
       </Application>
     ))
-
-    cy
-      .get('.v-btn[aria-label="Next page"]')
-      .click()
-      .setProps({ search: 'a' })
-      .vue()
-      .emitted(VDataTable, 'update:page')
-      .should('deep.equal', [[2], [1]])
   })
 })

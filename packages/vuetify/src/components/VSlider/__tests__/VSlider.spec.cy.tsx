@@ -1,7 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VApp } from '@/components/VApp'
-import { CenteredGrid } from '@/../cypress/templates'
+import { Application, CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
 
 describe('VSlider', () => {
@@ -15,12 +15,8 @@ describe('VSlider', () => {
     ))
 
     cy.get('.v-slider').click(100, 15)
-
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.have.length(1)
-    })
+      .emitted(VSlider, 'update:modelValue')
+      .should('have.length', 1)
   })
 
   it('should allow user to drag thumb', () => {
@@ -33,15 +29,10 @@ describe('VSlider', () => {
       </VApp>
     ))
 
-    cy.get('.v-slider-thumb').swipe([100, 15], [200, 15])
-
-    // eslint-disable-next-line sonarjs/no-identical-functions
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-
-      expect(emits).length.to.be.gt(0)
-    })
+    cy.get('.v-slider-thumb')
+      .swipe([100, 15], [200, 15])
+      .emitted(VSlider, 'update:modelValue')
+      .should('have.length.gt', 0)
   })
 
   it('should allow user to interact using keyboard', () => {
@@ -55,25 +46,23 @@ describe('VSlider', () => {
 
     cy.realPress('Tab')
 
-    cy.realPress('ArrowRight')
-    cy.realPress('ArrowLeft')
+      .realPress('ArrowRight')
+      .realPress('ArrowLeft')
 
-    cy.realPress(['Control', 'ArrowRight'])
-    cy.realPress(['Control', 'ArrowLeft'])
+      .realPress(['Control', 'ArrowRight'])
+      .realPress(['Control', 'ArrowLeft'])
 
-    cy.realPress(['Shift', 'ArrowRight'])
-    cy.realPress(['Shift', 'ArrowLeft'])
+      .realPress(['Shift', 'ArrowRight'])
+      .realPress(['Shift', 'ArrowLeft'])
 
-    cy.realPress('PageUp')
-    cy.realPress('PageDown')
+      .realPress('PageUp')
+      .realPress('PageDown')
 
-    cy.realPress('End')
-    cy.realPress('Home')
+      .realPress('End')
+      .realPress('Home')
 
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.deep.equal([
+      .emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
         [1],
         [0],
         [2],
@@ -85,7 +74,6 @@ describe('VSlider', () => {
         [20],
         [0],
       ])
-    })
   })
 
   it('should show thumb-label when focused', () => {
@@ -98,8 +86,7 @@ describe('VSlider', () => {
     ))
 
     cy.get('.v-slider-thumb').focus()
-
-    cy.get('.v-slider-thumb__label').should('be.visible')
+      .get('.v-slider-thumb__label').should('be.visible')
   })
 
   it('should always show thumb-label', () => {
@@ -124,15 +111,11 @@ describe('VSlider', () => {
     ))
 
     cy.realPress('Tab')
-    cy.realPress('ArrowRight')
-
-    cy.vue().then(({ wrapper }) => {
-      const slider = wrapper.getComponent(VSlider)
-      const emits = slider.emitted('update:modelValue')
-      expect(emits).to.deep.equal([
+      .realPress('ArrowRight')
+      .emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
         [2],
       ])
-    })
   })
 
   it('should show custom ticks', () => {
@@ -147,7 +130,7 @@ describe('VSlider', () => {
     ))
 
     cy.get('.v-slider').eq(0).find('.v-slider-track__tick-label').invoke('text').should('equal', '02810')
-    cy.get('.v-slider').eq(1).find('.v-slider-track__tick-label').invoke('text').should('equal', 'abc')
+      .get('.v-slider').eq(1).find('.v-slider-track__tick-label').invoke('text').should('equal', 'abc')
   })
 
   it('should render icons', () => {
@@ -192,5 +175,37 @@ describe('VSlider', () => {
         </CenteredGrid>
       </VApp>
     ))
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16634
+  it('should respect the decimals from both step and min', () => {
+    cy.mount(() => (
+      <Application>
+        <CenteredGrid width="360px">
+          <VSlider
+            modelValue={ 1.001 }
+            step={ 1.001 }
+            min={ 1.0001 }
+            max={ 10 }
+            thumb-label
+          />
+        </CenteredGrid>
+      </Application>
+    ))
+
+    cy.get('.v-slider-thumb')
+      .trigger('mouseover')
+      .trigger('mousedown', { which: 1 })
+      .trigger('mousemove', 35, 0, { force: true }) // move to second step
+      .trigger('mousemove', 190, 0, { force: true }) // move to fifth step
+      .trigger('mousemove', 360, 0, { force: true }) // move to the final step
+      .trigger('mouseup')
+
+    cy.emitted(VSlider, 'update:modelValue')
+      .should('deep.equal', [
+        [2.0011],
+        [6.0051],
+        [10],
+      ])
   })
 })
