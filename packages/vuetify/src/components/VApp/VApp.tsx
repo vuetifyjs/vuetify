@@ -35,7 +35,7 @@ export const VApp = genericComponent()({
           rtlClasses.value,
         ]}
         style={[
-          props.style ?? [],
+          props.style,
           layoutStyles.value,
         ]}
       >
