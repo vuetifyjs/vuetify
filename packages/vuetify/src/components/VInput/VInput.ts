@@ -185,7 +185,7 @@ export default baseMixins.extend<options>().extend({
         clear: 'clear',
       }[type]
       const label = hasListener && localeKey
-        ? this.$vuetify.lang.t(`$vuetify.input.${localeKey}`, this.label)
+        ? this.$vuetify.lang.t(`$vuetify.input.${localeKey}`, this.label ?? '')
         : undefined
 
       const data = mergeData({
