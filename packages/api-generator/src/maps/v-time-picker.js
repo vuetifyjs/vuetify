@@ -31,6 +31,10 @@ module.exports = {
         name: 'update:period',
         value: 'string',
       },
+      {
+        name: 'update:active-picker',
+        value: 'string',
+      },
     ],
   },
 }
