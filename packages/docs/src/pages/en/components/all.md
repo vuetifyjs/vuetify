@@ -11,7 +11,7 @@ meta:
   import ComponentsListItem from '@/components/components/ListItem.vue'
 </script>
 
-# Components
+# All Components
 
 Vuetify Components are interactive building blocks for creating user interfaces.
 
