@@ -10,8 +10,8 @@
     >
       <div class="text-end pa-2">
         <app-tooltip-btn
-          v-for="(tooltip, i) in tooltips"
-          :key="i"
+          v-for="tooltip in tooltips"
+          :key="tooltip.path"
           :disabled="hasError"
           :href="tooltip.href ? tooltip.href : undefined"
           :icon="tooltip.icon"
@@ -125,12 +125,13 @@
         ].filter(section => this.pen[section])
       },
       tooltips () {
-        return [
-          {
+        return (
+          this.$vuetify.theme.dark ? [] : [{
             icon: '$mdiInvertColors',
             path: 'invert-example-colors',
             onClick: () => (this.dark = !this.dark),
-          },
+          }]
+        ).concat([
           {
             icon: '$mdiCodepen',
             path: 'edit-in-codepen',
@@ -147,7 +148,7 @@
             path: 'view-source',
             onClick: () => (this.expand = !this.expand),
           },
-        ]
+        ])
       },
     },
   }

@@ -17,6 +17,7 @@
 
     data: () => ({
       defaults: {
+        dark: false,
         elevation: null,
         icon: null,
         color: null,
@@ -24,6 +25,7 @@
         outlined: false,
         rounded: false,
         shaped: false,
+        sticky: false,
         tile: false,
       },
       options: {

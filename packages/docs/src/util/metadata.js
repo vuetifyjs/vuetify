@@ -113,7 +113,7 @@ export function genMetaInfo (
 export function genTwitterMetaInfo () {
   return parseMeta('twitter', {
     card: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
-    domain: 'https://vuetifyjs.com/',
+    domain: 'https://v2.vuetifyjs.com/',
     site: 'Vuetify',
   })
 }

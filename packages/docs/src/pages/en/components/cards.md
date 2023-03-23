@@ -51,8 +51,6 @@ Primarily used for **text content** in a card. Applies padding for text, reduces
 
 Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 ## Examples
 
 ### Props
@@ -73,7 +71,7 @@ An **outlined** card has 0 elevation and contains a soft border.
 
 #### Card Reveal
 
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <example file="v-card/misc-card-reveal" />
 

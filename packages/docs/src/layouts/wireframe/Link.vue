@@ -1,6 +1,6 @@
 <template>
   <v-btn
-    :href="`https://github.com/vuetifyjs/vuetify/blob/master/packages/docs/src/examples/wireframes/${wireframe}.vue`"
+    :href="`https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/docs/src/examples/wireframes/${wireframe}.vue`"
     bottom
     color="primary"
     fab
