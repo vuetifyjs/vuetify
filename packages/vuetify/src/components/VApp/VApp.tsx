@@ -29,7 +29,6 @@ export const VApp = genericComponent()({
         ref={ layoutRef }
         class={[
           props.class,
-          undefined,
           'v-application',
           theme.themeClasses.value,
           layoutClasses.value,
