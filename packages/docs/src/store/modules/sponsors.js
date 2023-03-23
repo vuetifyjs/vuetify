@@ -14,11 +14,11 @@ const actions = {
   fetch: async ({ commit }) => {
     if (!bucket.available) return
 
-    const { objects: items } = await bucket.getObjects({
+    const { objects: items } = await bucket.objects.find({
       type: 'sponsors',
-      props: 'slug,title,metadata',
-      sort: 'created_at',
     })
+      .props('slug,title,metadata')
+      .sort('created_at')
 
     commit('all', items || [])
   },

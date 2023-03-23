@@ -232,7 +232,7 @@ Vue.use(Vuetify, {
 ```
 
 ### Goto (scrolling helper)
-Import location has changed. Must be explicitly bootstrapped with the Vuetify instance to use in **vue-router** scroll-behavior. Example of how to do this [here](https://github.com/vuetifyjs/vuetify/blob/next/packages/docs/src/vuetify/index.js#L33). Reference documentation for scroll-behavior usage [here](https://next.vuetifyjs.com/en/framework/scroll#using-with-router).
+Import location has changed. Must be explicitly bootstrapped with the Vuetify instance to use in **vue-router** scroll-behavior. Example of how to do this [here](https://github.com/vuetifyjs/vuetify/blob/v2-stable/packages/docs/src/vuetify/index.js#L33). Reference documentation for scroll-behavior usage [here](https://v2.vuetifyjs.com/en/framework/scroll#using-with-router).
 
 ```js
 // v1.5

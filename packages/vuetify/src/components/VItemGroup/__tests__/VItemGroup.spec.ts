@@ -217,6 +217,18 @@ describe('VItemGroup', () => {
     wrapper.vm.updateSingle('foo')
     expect(wrapper.vm.internalValue).toBeUndefined()
 
+    // Toggling on and off object references
+    wrapper.vm.updateSingle({ foo: 'foo' })
+    expect(wrapper.vm.internalValue).toEqual({ foo: 'foo' })
+    wrapper.vm.updateSingle({ foo: 'foo' })
+    expect(wrapper.vm.internalValue).toBeUndefined()
+
+    // Toggling on and off with custom comparator
+    wrapper.setProps({ valueComparator: (a: any, b: any) => a?.startsWith(b?.[0]), value: 'foo' })
+    expect(wrapper.vm.internalValue).toBe('foo')
+    wrapper.vm.updateSingle('foobar')
+    expect(wrapper.vm.internalValue).toBeUndefined()
+
     wrapper.setProps({ mandatory: true })
 
     // Toggling off single mandatory
@@ -237,6 +249,12 @@ describe('VItemGroup', () => {
     wrapper.vm.updateMultiple('foo')
     expect(wrapper.vm.internalValue).toEqual([])
 
+    // Toggling on and off object references
+    wrapper.vm.updateMultiple({ foo: 'foo' })
+    expect(wrapper.vm.internalValue).toEqual([{ foo: 'foo' }])
+    wrapper.vm.updateMultiple({ foo: 'foo' })
+    expect(wrapper.vm.internalValue).toEqual([])
+
     wrapper.setProps({ mandatory: true })
 
     // Toggling off single mandatory
@@ -254,6 +272,17 @@ describe('VItemGroup', () => {
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar', 'fizz'])
     wrapper.vm.updateMultiple('buzz')
     expect(wrapper.vm.internalValue).toEqual(['foo', 'bar', 'fizz'])
+  })
+
+  it('should update a multiple item group with a custom comparator', () => {
+    const wrapper = mountFunction({
+      propsData: { multiple: true },
+    })
+
+    wrapper.setProps({ valueComparator: (a: any, b: any) => a?.startsWith(b?.[0]), value: ['foo'] })
+    expect(wrapper.vm.internalValue).toEqual(['foo'])
+    wrapper.vm.updateMultiple('foobar')
+    expect(wrapper.vm.internalValue).toEqual([])
   })
 
   it('should update value if mandatory and dynamic items', async () => {

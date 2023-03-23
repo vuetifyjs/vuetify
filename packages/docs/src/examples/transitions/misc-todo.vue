@@ -12,7 +12,7 @@
             v-if="newTask"
             @click="create"
           >
-            add_circle
+            mdi-plus-circle
           </v-icon>
         </v-fade-transition>
       </template>

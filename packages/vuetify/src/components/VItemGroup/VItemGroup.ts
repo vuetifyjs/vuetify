@@ -219,7 +219,7 @@ export const BaseItemGroup = mixins(
         ? this.internalValue
         : []
       const internalValue = defaultValue.slice()
-      const index = internalValue.findIndex(val => val === value)
+      const index = internalValue.findIndex(val => this.valueComparator(val, value))
 
       if (
         this.mandatory &&
@@ -245,7 +245,7 @@ export const BaseItemGroup = mixins(
       this.internalValue = internalValue
     },
     updateSingle (value: any) {
-      const isSame = value === this.internalValue
+      const isSame = this.valueComparator(this.internalValue, value)
 
       if (this.mandatory && isSame) return
 

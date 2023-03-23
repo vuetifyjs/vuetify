@@ -5,7 +5,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VRangeSlider.ts', () => {
+describe('VRangeSlider', () => {
   type Instance = InstanceType<typeof VRangeSlider>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 
@@ -33,7 +33,7 @@ describe('VRangeSlider.ts', () => {
     document.body.removeChild(el)
   })
 
-  it('should provide a default value if non provided', async () => {
+  it('should provide a default value if none provided', async () => {
     const wrapper = mountFunction()
 
     expect(wrapper.vm.lazyValue).toEqual([0, 0])

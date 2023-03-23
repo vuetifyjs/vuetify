@@ -23,28 +23,6 @@
     computed: {
       items () {
         return [
-          { heading: this.$t('professional-support') },
-          {
-            title: this.$t('direct-support'),
-            to: {
-              name: 'Documentation',
-              params: {
-                category: 'introduction',
-                page: 'support',
-              },
-            },
-          },
-          {
-            title: this.$t('enterprise'),
-            to: {
-              name: 'Documentation',
-              params: {
-                category: 'introduction',
-                page: 'enterprise',
-              },
-            },
-          },
-          { divider: true },
           { heading: this.$t('community-support') },
           {
             title: 'Discord',

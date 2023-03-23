@@ -2,23 +2,23 @@ export default {
   badge: 'شارة',
   close: 'إغلاق',
   dataIterator: {
-    noResultsText: 'لا توجد سجلات مطابقة',
-    loadingText: 'تحميل العنصر...',
+    noResultsText: 'لم يتم إيجاد نتائج',
+    loadingText: 'يتم جلب العناصر...',
   },
   dataTable: {
-    itemsPerPageText: 'الصفوف لكل صفحة:',
+    itemsPerPageText: 'عدد الصفوف لكل صفحة:',
     ariaLabel: {
-      sortDescending: 'مفروز تنازلي. تنشيط لإزالة الفرز.',
-      sortAscending: 'مفروز تصاعدي. تنشيط للفرز التنازلي.',
-      sortNone: 'غير مفروزة. تفعيل لفرز تصاعدي.',
-      activateNone: 'Activate to remove sorting.',
-      activateDescending: 'Activate to sort descending.',
-      activateAscending: 'Activate to sort ascending.',
+      sortDescending: 'مرتب تنازلياً.',
+      sortAscending: 'مرتب تصاعدياً.',
+      sortNone: 'غير مرتب.',
+      activateNone: 'نشط لإزالة الترتيب.',
+      activateDescending: 'نشط للترتيب تنازلياً.',
+      activateAscending: 'نشط للترتيب تصاعدياً.',
     },
-    sortBy: 'مفروزة حسب',
+    sortBy: 'رتب حسب',
   },
   dataFooter: {
-    itemsPerPageText: 'العناصر لكل صفحة:',
+    itemsPerPageText: 'عدد العناصر لكل صفحة:',
     itemsPerPageAll: 'الكل',
     nextPage: 'الصفحة التالية',
     prevPage: 'الصفحة السابقة',
@@ -27,18 +27,18 @@ export default {
     pageText: '{0}-{1} من {2}',
   },
   datePicker: {
-    itemsSelected: '{0} مختارة',
+    itemsSelected: 'تم تحديد {0}',
     nextMonthAriaLabel: 'الشهر القادم',
     nextYearAriaLabel: 'العام القادم',
     prevMonthAriaLabel: 'الشهر الماضى',
     prevYearAriaLabel: 'السنة الماضية',
   },
-  noDataText: 'لا توجد بيانات متاحة',
+  noDataText: 'لا توجد بيانات',
   carousel: {
-    prev: 'البصري السابق',
-    next: 'البصري التالي',
+    prev: 'المعروض السابق',
+    next: 'المعروض التالي',
     ariaLabel: {
-      delimiter: 'Carousel slide {0} of {1}',
+      delimiter: 'المعروض رقم {0} من {1}',
     },
   },
   calendar: {
@@ -54,16 +54,16 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ترقيم الصفحات الملاحة',
+      wrapper: 'الإنتقال بين الصفحات',
       next: 'الصفحة التالية',
       previous: 'الصفحة السابقة',
-      page: '{0} انتقل إلى صفحة',
-      currentPage: '{0} الصفحة الحالية ، الصفحة',
+      page: '{0} انتقل إلى الصفحة',
+      currentPage: '{0} الصفحة الحالية رقمها',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      icon: 'القييم {0} من {1}',
     },
   },
 }

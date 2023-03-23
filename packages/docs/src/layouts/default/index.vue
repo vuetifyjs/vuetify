@@ -1,6 +1,8 @@
 <template>
   <v-app>
-    <default-system-bar />
+    <default-system-bar v-if="false" />
+
+    <default-explore-system-bar />
 
     <default-bar />
 
@@ -31,6 +33,7 @@
   import DefaultPwaSnackbar from './PwaSnackbar'
   import DefaultSettings from './settings/Settings'
   import DefaultSnackbar from './Snackbar'
+  import DefaultExploreSystemBar from '@/layouts/default/ExploreSystemBar'
   import DefaultSystemBar from '@/layouts/default/SystemBar'
   import DefaultToc from './Toc'
   import DefaultView from './View'
@@ -50,6 +53,7 @@
       DefaultPwaSnackbar,
       DefaultSettings,
       DefaultSnackbar,
+      DefaultExploreSystemBar,
       DefaultSystemBar,
       DefaultToc,
       DefaultView,
@@ -78,7 +82,7 @@
     methods: {
       async init () {
         this.getPages()
-        this.$load(['https://cdn.jsdelivr.net/npm/@mdi/font@6.x/css/materialdesignicons.min.css'])
+        this.$load(['https://unpkg.com/@mdi/font@6.5.95/css/materialdesignicons.min.css'])
       },
       async getPages () {
         const locale = localeLookup(this.locale)

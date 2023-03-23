@@ -1,6 +1,6 @@
 import './VSimpleCheckbox.sass'
 
-import ripple from '../../directives/ripple'
+import Ripple from '../../directives/ripple'
 
 import Vue, { VNode, VNodeDirective } from 'vue'
 import { VIcon } from '../VIcon'
@@ -19,7 +19,7 @@ export default Vue.extend({
   functional: true,
 
   directives: {
-    ripple,
+    Ripple,
   },
 
   props: {
@@ -64,6 +64,7 @@ export default Vue.extend({
       const ripple = h('div', Colorable.options.methods.setTextColor(props.color, {
         staticClass: 'v-input--selection-controls__ripple',
         directives: [{
+          def: Ripple,
           name: 'ripple',
           value: { center: true },
         }] as VNodeDirective[],

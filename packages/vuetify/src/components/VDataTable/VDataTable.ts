@@ -181,6 +181,9 @@ export default mixins(
 
       return itemsPerPage
     },
+    groupByText (): string {
+      return this.headers?.find(header => header.value === this.internalGroupBy?.[0])?.text ?? ''
+    },
   },
 
   created () {
@@ -375,7 +378,7 @@ export default mixins(
         const column = this.$createElement('td', {
           staticClass: 'text-start',
           attrs: this.colspanAttrs,
-        }, [toggle, `${props.options.groupBy[0]}: ${group}`, remove])
+        }, [toggle, `${this.groupByText}: ${group}`, remove])
 
         children.unshift(this.$createElement('template', { slot: 'column.header' }, [column]))
       }
@@ -510,7 +513,7 @@ export default mixins(
         on: {
           // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
-          click: () => this.$emit('click:row', item, data),
+          click: (event: MouseEvent) => this.$emit('click:row', item, data, event),
           contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },

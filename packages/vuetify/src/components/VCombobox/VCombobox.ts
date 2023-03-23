@@ -261,6 +261,7 @@ export default VAutocomplete.extend({
       this.internalSearch = null
     },
     onPaste (event: ClipboardEvent) {
+      this.$emit('paste', event)
       if (!this.multiple || this.searchIsDirty) return
 
       const pastedItemText = event.clipboardData?.getData('text/vnd.vuetify.autocomplete.item+plain')

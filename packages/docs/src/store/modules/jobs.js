@@ -15,24 +15,17 @@ const actions = {
   fetch: async ({ commit }) => {
     if (!IN_BROWSER) return
 
-    const jobs = await fetch('https://vuejobs.com/api/jobs', {
+    const jobs = await fetch('https://app.vuejobs.com/feed/vuetify?format=json', {
       method: 'get',
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
 
-    const all = jobs.map(job => {
-      const {
-        company,
-        published_at: publishedAt = { for_humans: '' },
-        ...values
-      } = job
-
+    const all = jobs.data.map(job => {
       return {
-        ...values,
-        ...company,
-        isNew: publishedAt.for_humans.indexOf('day') > -1,
-        via: 'VueJobs',
+        ...job,
+        isNew: false,
+        via: 'vue-jobs',
       }
     })
 

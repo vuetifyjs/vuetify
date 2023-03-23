@@ -231,6 +231,9 @@ const VSelect = {
       source: 'v-select',
     },
   ],
+  exclude: {
+    props: ['type', 'hide-spin-buttons'],
+  },
 }
 
 const VAutocomplete = {
@@ -282,8 +285,10 @@ const VSlider = {
       },
       source: 'v-slider',
     },
-
   ],
+  exclude: {
+    props: ['type', 'hide-spin-buttons'],
+  },
 }
 
 const VRangeSlider = {

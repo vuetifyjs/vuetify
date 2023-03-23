@@ -29,10 +29,6 @@ export default VSelect.extend({
   name: 'v-autocomplete',
 
   props: {
-    allowOverflow: {
-      type: Boolean,
-      default: true,
-    },
     autoSelectFirst: {
       type: Boolean,
       default: false,
