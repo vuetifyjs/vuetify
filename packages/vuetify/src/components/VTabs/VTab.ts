@@ -58,7 +58,7 @@ export default baseMixins.extend<options>().extend(
       }
     },
     value (): any {
-      if (this.tabValue) return this.tabValue
+      if (this.tabValue != null) return this.tabValue
 
       let to = this.to || this.href
 
