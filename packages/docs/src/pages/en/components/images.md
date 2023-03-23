@@ -89,6 +89,6 @@ You can use `v-img` to make, for example, a picture gallery.
 
 #### Complex Grid Layout
 
-Build a more complex picture gallery layout using ` flex-box` classes.
+Build a more complex picture gallery layout using `flex-box` classes.
 
 <example file="v-img/complex-grid" />
