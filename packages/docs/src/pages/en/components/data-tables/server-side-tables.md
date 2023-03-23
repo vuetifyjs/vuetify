@@ -26,7 +26,9 @@ To use data from an API, listen to the **@update:options** event to know when to
 
 ### Server-side search
 
-If you need to support search functionality, you can use the **search** prop to let the table know when new search input is available. Since the table does not actually do any filtering on its own, the **search** input does not need to be the actual value being searched for. In this example we have multiple values searchable, so we just make sure to set **search** to _anything_ when we need to fetch new data.
+If you need to support search functionality, use the **search** prop to let the table know when new search input is available. Since the table does not actually do any filtering on its own, the **search** input does not need to be the actual value being searched for. In this example we have multiple values searchable, so we just make sure to set **search** to _anything_ when we need to fetch new data.
+
+To enable search functionality, utilize the **search** property to inform the table of the availability of new **search** input. As the table itself does not perform any filtering, the search input is not required to be the exact value being searched. In this instance, multiple values can be searched, so it is essential to assign anything to the **search** property when new data needs to be fetched.
 
 <example file="v-data-table/server-search" />
 
