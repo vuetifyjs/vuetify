@@ -130,6 +130,7 @@ export const BaseSlideGroup = mixins<options &
       validator: (v: any) => (
         typeof v === 'boolean' || [
           'always',
+          'never',
           'desktop',
           'mobile',
         ].includes(v)
@@ -185,6 +186,9 @@ export const BaseSlideGroup = mixins<options &
           this.isMobile ||
           (this.isOverflowing || Math.abs(this.scrollOffset) > 0)
         )
+
+        // Always hide arrows
+        case 'never': return false
 
         // https://material.io/components/tabs#scrollable-tabs
         // Always show arrows when
