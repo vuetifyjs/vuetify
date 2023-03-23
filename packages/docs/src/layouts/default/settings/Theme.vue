@@ -74,7 +74,7 @@
     },
 
     created () {
-      const matchMedia = this.getMatchMedia()
+      const matchMedia = this.mql = this.getMatchMedia()
       if (!matchMedia) return
 
       if (this.internalValue === 'system') {
@@ -86,6 +86,13 @@
           this.dark = matches
         }
       }
+    },
+
+    beforeDestroy () {
+      if (!this.mql) return
+
+      this.mql.onchange = null
+      this.mql = null
     },
 
     methods: {

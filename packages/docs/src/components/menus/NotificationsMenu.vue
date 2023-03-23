@@ -4,6 +4,7 @@
     v-model="menu"
     :close-on-content-click="false"
     :max-width="maxWidth"
+    :open-on-hover="false"
     bottom
     content-class="overflow-hidden"
     left
@@ -87,39 +88,53 @@
       </div>
 
       <template v-else>
-        <v-list-item
-          v-for="({
-            created_at_formated: created_at,
-            metadata,
-            slug,
-            title
-          }) in filtered"
-          :key="slug"
-          :ripple="false"
-          @click="select(slug)"
-        >
-          <v-list-item-content>
-            <div
-              class="grey--text text--darken-1 text-caption font-weight-light text-uppercase"
-              v-text="created_at"
+        <v-list three-line>
+          <template v-for="(notification, i) in filtered">
+
+            <v-divider
+              v-if="i !== 0"
+              :key="`divider-${i}`"
+              class="my-1"
             />
 
-            <v-list-item-title
-              class="text-subtitle-1"
-              v-text="`${metadata.emoji} ${title}`"
-            />
-          </v-list-item-content>
-
-          <v-list-item-action>
-            <v-btn
+            <v-list-item
+              :key="i"
               :ripple="false"
-              icon
-              @click.stop.prevent="toggle(slug)"
             >
-              <v-icon v-text="marked.icon" />
-            </v-btn>
-          </v-list-item-action>
-        </v-list-item>
+              <v-list-item-content>
+                <div class="d-flex text-wrap text-h6 mb-1 text--primary">
+                  <span>{{ notification.metadata.emoji }}</span>
+
+                  <div class="ps-4">
+                    {{ notification.title }}
+                  </div>
+                </div>
+
+                <div class="text-caption text--secondary ps-10">
+                  {{ notification.metadata.text }}
+
+                  <app-link :href="notification.metadata.action">
+                    {{ notification.metadata.action_text }}
+                  </app-link>
+                </div>
+              </v-list-item-content>
+
+              <v-list-item-action>
+                <v-btn
+                  :ripple="false"
+                  class="ml-3"
+                  color="medium-emphasis"
+                  text
+                  icon
+                  min-width="0"
+                  @click.stop.prevent="toggle(notification.slug)"
+                >
+                  <v-icon>{{ marked.icon }}</v-icon>
+                </v-btn>
+              </v-list-item-action>
+            </v-list-item>
+          </template>
+        </v-list>
       </template>
     </v-responsive>
   </app-menu>
@@ -182,7 +197,7 @@
         return { icon, path }
       },
       maxWidth () {
-        return this.$vuetify.breakpoint.mobile ? 296 : 320
+        return this.$vuetify.breakpoint.mobile ? 420 : 520
       },
       read () {
         return this.mapped.filter(n => n.viewed)
@@ -195,13 +210,13 @@
     async mounted () {
       if (!bucket.available) return
 
-      const { objects: notifications } = await bucket.getObjects({
+      const { objects: notifications } = await bucket.objects.find({
         type: 'notifications',
-        props: 'created_at,metadata,slug,title',
-        status: 'published',
-        limit: 10,
-        sort: '-created_at',
       })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(5)
 
       /* eslint-disable-next-line camelcase */
       this.all = (notifications || []).filter(({ created_at }) => {

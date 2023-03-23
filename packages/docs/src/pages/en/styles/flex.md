@@ -15,6 +15,10 @@ Control the layout of flex containers with alignment, justification and more wit
 
 <entry-ad />
 
+## Caveats
+
+The `d-flex` sets the CSS of the according element to `display: flex !important`. As a result, it overrides any other settings.
+
 ## Enabling flexbox
 
 Using `display` utilities you can turn any element into a flexbox container transforming **direct children elements** into flex items. Using additional flex property utilities, you can customize their interaction even further.

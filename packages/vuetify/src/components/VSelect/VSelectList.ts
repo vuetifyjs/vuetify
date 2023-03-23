@@ -18,10 +18,7 @@ import Colorable from '../../mixins/colorable'
 import Themeable from '../../mixins/themeable'
 
 // Helpers
-import {
-  escapeHTML,
-  getPropertyFromItem,
-} from '../../util/helpers'
+import { getPropertyFromItem } from '../../util/helpers'
 
 // Types
 import mixins from '../../util/mixins'
@@ -113,17 +110,17 @@ export default mixins(Colorable, Themeable).extend({
     genFilteredText (text: string) {
       text = text || ''
 
-      if (!this.searchInput || this.noFilter) return escapeHTML(text)
+      if (!this.searchInput || this.noFilter) return text
 
       const { start, middle, end } = this.getMaskedCharacters(text)
 
-      return `${escapeHTML(start)}${this.genHighlight(middle)}${escapeHTML(end)}`
+      return [start, this.genHighlight(middle), end]
     },
     genHeader (props: { [key: string]: any }): VNode {
       return this.$createElement(VSubheader, { props }, props.header)
     },
-    genHighlight (text: string): string {
-      return `<span class="v-list-item__mask">${escapeHTML(text)}</span>`
+    genHighlight (text: string) {
+      return this.$createElement('span', { staticClass: 'v-list-item__mask' }, text)
     },
     getMaskedCharacters (text: string): {
       start: string
@@ -202,13 +199,11 @@ export default mixins(Colorable, Themeable).extend({
         : scopedSlot
     },
     genTileContent (item: any, index = 0): VNode {
-      const innerHTML = this.genFilteredText(this.getText(item))
-
-      return this.$createElement(VListItemContent,
-        [this.$createElement(VListItemTitle, {
-          domProps: { innerHTML },
-        })]
-      )
+      return this.$createElement(VListItemContent, [
+        this.$createElement(VListItemTitle, [
+          this.genFilteredText(this.getText(item)),
+        ]),
+      ])
     },
     hasItem (item: object) {
       return this.parsedItems.indexOf(this.getValue(item)) > -1

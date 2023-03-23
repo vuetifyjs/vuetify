@@ -89,7 +89,7 @@ export default mixins(
     items (): (string | number)[] {
       const totalVisible = parseInt(this.totalVisible, 10)
 
-      if (totalVisible === 0) {
+      if (totalVisible === 0 || isNaN(this.length) || this.length > Number.MAX_SAFE_INTEGER) {
         return []
       }
 
@@ -138,7 +138,7 @@ export default mixins(
     },
   },
 
-  mounted () {
+  beforeMount () {
     this.init()
   },
 
@@ -146,6 +146,7 @@ export default mixins(
     init () {
       this.selected = null
 
+      this.onResize()
       this.$nextTick(this.onResize)
       // TODO: Change this (f75dee3a, cbdf7caa)
       setTimeout(() => (this.selected = this.value), 100)

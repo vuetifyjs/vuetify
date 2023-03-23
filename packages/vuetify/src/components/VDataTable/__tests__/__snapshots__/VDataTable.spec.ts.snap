@@ -6911,7 +6911,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Frozen Yogurt
+            Dessert (100g serving): Frozen Yogurt
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -6941,7 +6941,7 @@ exports[`VDataTable.ts should render item slot when using group-by function 1`] 
                 </i>
               </span>
             </button>
-            name: Ice cream sandwich
+            Dessert (100g serving): Ice cream sandwich
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8477,7 +8477,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 159
+            Calories: 159
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8551,7 +8551,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 237
+            Calories: 237
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8625,7 +8625,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 262
+            Calories: 262
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8699,7 +8699,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 305
+            Calories: 305
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8773,7 +8773,7 @@ exports[`VDataTable.ts should render with group.summary scoped slot 1`] = `
                 </i>
               </span>
             </button>
-            calories: 356
+            Calories: 356
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -8988,7 +8988,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 0
+            Protein (g): 0
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9099,7 +9099,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 3.9
+            Protein (g): 3.9
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9168,7 +9168,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4
+            Protein (g): 4
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -9237,7 +9237,7 @@ exports[`VDataTable.ts should render with grouped rows 1`] = `
                 </i>
               </span>
             </button>
-            protein: 4.3
+            Protein (g): 4.3
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11644,7 +11644,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Assistance
+            Name: Assistance
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11681,7 +11681,7 @@ exports[`VDataTable.ts should search group-by column 1`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >
@@ -11856,7 +11856,7 @@ exports[`VDataTable.ts should search group-by column 2`] = `
                 </i>
               </span>
             </button>
-            name: Candidat
+            Name: Candidat
             <button type="button"
                     class="ma-0 v-btn v-btn--icon v-btn--round theme--light v-size--small"
             >

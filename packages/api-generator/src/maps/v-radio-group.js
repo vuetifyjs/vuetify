@@ -7,5 +7,10 @@ VInput.events.splice(ClickIndex, 1, {
 })
 
 module.exports = {
-  'v-radio-group': VInput,
+  'v-radio-group': {
+    ...VInput,
+    exclude: {
+      props: ['type', 'hide-spin-buttons'],
+    },
+  },
 }

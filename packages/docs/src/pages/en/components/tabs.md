@@ -73,8 +73,6 @@ Make `v-tabs` lined up with the `v-toolbar-title` component using the **align-wi
 
 <example file="v-tabs/prop-align-with-title" />
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
-
 #### Center active
 
 The **center-active** prop will make the active tab always centered
@@ -101,7 +99,7 @@ The **grow** prop will make the tab items take up all available space up to a ma
 
 #### Icons and text
 
-Using **icons-with-text** prop increases the `v-tabs` height to 72px to allow for both icons as well as text to be used.
+Using **icons-and-text** prop increases the `v-tabs` height to 72px to allow for both icons as well as text to be used.
 
 <example file="v-tabs/prop-icons-and-text" />
 

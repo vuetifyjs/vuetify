@@ -49,10 +49,46 @@ const createWebTypesApi = () => {
   const getDocUrl = (cmp, heading = null) => `https://www.vuetifyjs.com/api/${cmp}${heading ? `#${heading}` : ''}`
 
   const createTag = component => {
+    const createTagSlotPattern = slot => {
+      const patternIndex = slot.name.indexOf('<name>')
+      if (patternIndex < 0) { return {} }
+
+      let itemName
+      const slotPrefix = slot.name.substring(0, patternIndex)
+      if (slotPrefix === 'header.') {
+        // VDataTable header.<name>
+        itemName = 'header column'
+      } else if (slotPrefix === 'item.') {
+        // VDataTable item.<name>
+        itemName = 'column'
+      } else {
+        // Fallback
+        itemName = 'item'
+      }
+
+      const itemsPath = itemName.replace(' ', '-') + 's'
+      return {
+        pattern: {
+          items: itemsPath,
+          template: [
+            slotPrefix,
+            '#item:' + itemName,
+          ],
+        },
+        [itemsPath]: {
+          name: itemName[0].toUpperCase() + itemName.substring(1),
+          pattern: {
+            regex: '.+',
+          },
+          'doc-hide-pattern': true,
+        },
+      }
+    }
+
     const createTagSlot = slot => {
       return {
         name: slot.name,
-        pattern: undefined,
+        ...createTagSlotPattern(slot),
         description: slot.description.en || '',
         'doc-url': getDocUrl(component.name, 'slots'),
         'vue-properties': slot.props && Object.keys(slot.props).map(key => createTypedEntity(key, slot.props[key])),

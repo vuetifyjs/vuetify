@@ -59,7 +59,7 @@ try {
       get: () => {
         passiveSupported = true
       },
-    })
+    }) as EventListener & EventListenerOptions
 
     window.addEventListener('testListener', testListenerOpts, testListenerOpts)
     window.removeEventListener('testListener', testListenerOpts, testListenerOpts)
@@ -70,7 +70,7 @@ export { passiveSupported }
 export function addPassiveEventListener (
   el: EventTarget,
   event: string,
-  cb: EventHandlerNonNull | (() => void),
+  cb: (event: any) => void,
   options: {}
 ): void {
   el.addEventListener(event, cb, passiveSupported ? options : false)
@@ -160,16 +160,6 @@ export function getZIndex (el?: Element | null): number {
 
   if (!index) return getZIndex(el.parentNode as Element)
   return index
-}
-
-const tagsToReplace = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-} as any
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
 }
 
 export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
