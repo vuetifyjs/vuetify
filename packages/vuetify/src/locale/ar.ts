@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} أكثر',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} ملفات',
     counterSize: '{0} ملفات ({1} في المجموع)',

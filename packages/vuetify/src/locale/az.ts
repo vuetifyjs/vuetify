@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} ədad daha',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fayl',
     counterSize: '{0} fayl (cəmi {1})',
