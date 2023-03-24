@@ -30,7 +30,7 @@ import { useSelectLink } from '@/composables/selectLink'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
@@ -43,48 +43,50 @@ export type VBtnSlots = MakeSlots<{
   loader: []
 }>
 
+export const makeVBtnProps = propsFactory({
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
+  symbol: {
+    type: null,
+    default: VBtnToggleSymbol,
+  },
+  flat: Boolean,
+  icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+  prependIcon: IconValue,
+  appendIcon: IconValue,
+
+  block: Boolean,
+  stacked: Boolean,
+
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+
+  ...makeBorderProps(),
+  ...makeRoundedProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeLoaderProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRouterProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'button' }),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'elevated' } as const),
+}, 'VBtn')
+
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
 
   directives: { Ripple },
 
-  props: {
-    active: {
-      type: Boolean,
-      default: undefined,
-    },
-    symbol: {
-      type: null,
-      default: VBtnToggleSymbol,
-    },
-    flat: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
-
-    block: Boolean,
-    stacked: Boolean,
-
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-
-    ...makeBorderProps(),
-    ...makeRoundedProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeLoaderProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRouterProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'button' }),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'elevated' } as const),
-  },
+  props: makeVBtnProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,

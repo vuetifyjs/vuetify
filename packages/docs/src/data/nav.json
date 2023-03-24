@@ -121,6 +121,14 @@
       { "subheader": "grids" },
       "grids",
       { "divider": true },
+      { "subheader": "selection" },
+      "button-groups",
+      "carousels",
+      "chip-groups",
+      "item-groups",
+      "slide-groups",
+      "windows",
+      { "divider": true },
       { "subheader": "feedback" },
       "alerts",
       "badges",
@@ -141,14 +149,6 @@
       { "divider": true },
       { "subheader": "pickers" },
       "color-pickers",
-      { "divider": true },
-      { "subheader": "selection" },
-      "button-groups",
-      "carousels",
-      "chip-groups",
-      "item-groups",
-      "slide-groups",
-      "windows",
       { "divider": true },
       { "subheader": "providers" },
       "defaults-providers",
@@ -212,7 +212,8 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "ui-kits"
+      "ui-kits",
+      "themes"
     ]
   },
   {

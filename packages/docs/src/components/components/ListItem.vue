@@ -2,7 +2,7 @@
   <v-col cols="4">
     <v-card
       :image="image"
-      :to="rpath(`/components/${name}/`)"
+      :to="rpath(`/components/${src}/`)"
       class="mb-3"
       elevation="0"
       height="164"
@@ -23,12 +23,13 @@
 
   const props = defineProps({
     name: String,
+    src: String,
     placeholder: Boolean,
   })
 
   const image = computed(() => {
     if (props.placeholder) return 'https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png'
 
-    return `https://cdn.vuetifyjs.com/docs/images/preview/${props.name}.png`
+    return `https://cdn.vuetifyjs.com/docs/images/preview/${props.src}.png`
   })
 </script>

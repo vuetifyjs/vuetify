@@ -18,7 +18,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 // Utilities
 import { mergeProps, onMounted, ref, watch } from 'vue'
 import { genericComponent, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 type VSnackbarSlots = {
   activator: [{ isActive: boolean, props: Record<string, any> }]
@@ -86,7 +86,7 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
     }
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay

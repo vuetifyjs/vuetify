@@ -34,6 +34,7 @@
               </v-btn>
             </div>
           </v-fade-transition>
+
           <v-spacer />
 
           <v-tooltip
@@ -108,6 +109,7 @@
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -186,29 +188,37 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  const actions = computed(() => [
-    {
-      icon: 'mdi-theme-light-dark',
-      path: 'invert-example-colors',
-      onClick: toggleTheme,
-    },
-    {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
-    },
-    {
-      icon: 'mdi-github',
-      path: 'view-in-github',
-      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-      target: '_blank',
-    },
-    {
-      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-      path: !showCode.value ? 'view-source' : 'hide-source',
-      onClick: () => {
-        showCode.value = !showCode.value
+  const actions = computed(() => {
+    const array = []
+
+    if (!props.hideInvert) {
+      array.push({
+        icon: 'mdi-theme-light-dark',
+        path: 'invert-example-colors',
+        onClick: toggleTheme,
+      })
+    }
+
+    return [
+      ...array,
+      {
+        icon: 'mdi-codepen',
+        path: 'edit-in-codepen',
+        onClick: openCodepen,
       },
-    },
-  ])
+      {
+        icon: 'mdi-github',
+        path: 'view-in-github',
+        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+        target: '_blank',
+      },
+      {
+        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+        path: !showCode.value ? 'view-source' : 'hide-source',
+        onClick: () => {
+          showCode.value = !showCode.value
+        },
+      },
+    ]
+  })
 </script>

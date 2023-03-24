@@ -2,7 +2,7 @@
 import './VSelect.sass'
 
 // Components
-import { filterVTextFieldProps, makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -216,7 +216,7 @@ export const VSelect = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
-      const [textFieldProps] = filterVTextFieldProps(props)
+      const [textFieldProps] = VTextField.filterProps(props)
 
       return (
         <VTextField
