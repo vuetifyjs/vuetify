@@ -1,15 +1,15 @@
 <template>
   <v-col cols="4">
     <v-card
-      :image="`https://cdn.vuetifyjs.com/docs/images/preview/${name}.png`"
-      :to="rpath(`/components/${name}`)"
+      :image="image"
+      :to="rpath(`/components/${src}/`)"
       class="mb-3"
       elevation="0"
       height="164"
     />
 
     <h2 class="text-h6">
-      <span class="text-capitalize">{{ name }}</span>
+      <span class="text-capitalize">{{ name?.replace(/-/g, ' ') }}</span>
     </h2>
 
     <slot />
@@ -18,9 +18,18 @@
 
 <script setup lang="ts">
   // Utilities
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
-  defineProps({
+  const props = defineProps({
     name: String,
+    src: String,
+    placeholder: Boolean,
+  })
+
+  const image = computed(() => {
+    if (props.placeholder) return 'https://cdn.vuetifyjs.com/docs/images/graphics/img-placeholder.png'
+
+    return `https://cdn.vuetifyjs.com/docs/images/preview/${props.src}.png`
   })
 </script>

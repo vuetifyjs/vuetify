@@ -54,7 +54,7 @@ describe('VFileInput', () => {
     const model = ref([oneMBFile, twoMBFile])
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" v-model={model.value} />
+        <VFileInput label="foo" v-model={ model.value } />
       </CenteredGrid>
     ))
       .get('.v-field__clearable > .v-icon')
@@ -66,7 +66,7 @@ describe('VFileInput', () => {
   it('should support removing clearable icon', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={false} />
+        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
       </CenteredGrid>
     ))
       .get('.v-field__append-inner > .v-btn')
@@ -135,5 +135,58 @@ describe('VFileInput', () => {
     ))
       .get('.v-file-input input')
       .should('have.attr', 'accept', 'image/*')
+  })
+
+  /**
+   * https://github.com/vuetifyjs/vuetify/issues/16486
+   */
+  it('should reset the underlying HTMLInput when model is controlled input', () => {
+    function TestWrapper () {
+      const files = ref<File[]>([])
+      const onReset = () => {
+        files.value = []
+      }
+      return (
+        <CenteredGrid width="400px">
+          <VFileInput modelValue={ files.value } />
+          <button onClick={ onReset }>Reset Model Value</button>
+        </CenteredGrid>
+      )
+    }
+
+    cy.mount(() => (
+      <TestWrapper />
+    ))
+      .get('.v-file-input input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
+    // add file
+      .attachFile('text.txt')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(1)
+      })
+    // reset input from wrapper/parent component
+      .get('button').click()
+      .get('.v-file-input input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
+    // add same file again
+      .attachFile('text.txt')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(1)
+      })
+    // reset input from wrapper/parent component
+      .get('button').click()
+      .get('.v-file-input input')
+      .should($res => {
+        const input = $res[0] as HTMLInputElement
+        expect(input.files).to.have.length(0)
+      })
   })
 })

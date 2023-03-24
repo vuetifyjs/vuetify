@@ -6,7 +6,6 @@
     floating
     location="right"
     sticky
-    touchless
     width="256"
   >
     <template
@@ -83,10 +82,6 @@
             >
               <small class="text-disabled">Your logo here</small>
             </v-card>
-          </v-col>
-
-          <v-col cols="12">
-            <carbon />
           </v-col>
         </v-row>
       </v-container>

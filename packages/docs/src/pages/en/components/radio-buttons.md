@@ -14,17 +14,22 @@ related:
 
 The `v-radio` component is a simple radio button. When combined with  the `v-radio-group` component you can provide groupable functionality to allow users to select from a predefined set of options.
 
-<entry />
-
 ## Usage
 
 Although `v-radio` can be used on its own, it is best used in conjunction with `v-radio-group`. Using the **v-model** on the `v-radio-group` you can access the value of the selected radio button inside the group.
 
 <usage name="v-radio-group" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-radio-group](/api/v-radio-group/) | Primary Component |
+| [v-radio](/api/v-radio/) | Sub-component used for modifying the `v-radio-group` state |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -41,12 +46,6 @@ Radios can be colored by using any of the builtin colors and contextual names us
 Radio-groups can be presented either as a row or a column, using their respective props. The default is as a column.
 
 <example file="v-radio-group/prop-direction" />
-
-#### Mandatory
-
-Radio-groups are by default not mandatory. This can be changed with the **mandatory** prop.
-
-<example file="v-radio-group/prop-mandatory" />
 
 ### Slots
 

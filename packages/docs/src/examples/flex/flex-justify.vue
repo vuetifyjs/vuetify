@@ -49,5 +49,15 @@
         justify-space-around
       </v-sheet>
     </div>
+
+    <div class="d-flex justify-space-evenly mb-6 bg-surface-variant">
+      <v-sheet
+        v-for="n in 3"
+        :key="n"
+        class="ma-2 pa-2"
+      >
+        justify-space-evenly
+      </v-sheet>
+    </div>
   </div>
 </template>

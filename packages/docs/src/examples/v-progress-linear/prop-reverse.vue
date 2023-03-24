@@ -30,7 +30,7 @@
 
     <v-progress-linear
       model-value="15"
-      :reverse="!!$vuetify?.rtl?.isRtl"
+      :reverse="$vuetify.locale.isRtl"
     ></v-progress-linear>
   </div>
 </template>

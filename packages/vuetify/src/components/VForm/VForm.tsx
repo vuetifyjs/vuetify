@@ -4,12 +4,12 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { SubmitEventPromise } from '@/composables/form'
 
-export const VForm = defineComponent({
+export const VForm = genericComponent()({
   name: 'VForm',
 
   props: {

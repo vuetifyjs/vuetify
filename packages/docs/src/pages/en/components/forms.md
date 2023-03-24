@@ -6,7 +6,7 @@ meta:
   keywords: forms, vuetify form component, vue form component, form validation
 related:
   - /components/selects/
-  - /components/selection-controls/
+  - /components/switches/
   - /components/text-fields/
 ---
 
@@ -24,11 +24,15 @@ Whenever the value of an input is changed, each rule will receive the new value 
 
 <example file="v-form/usage" />
 
+<entry />
+
 ## API
 
 | Component | Description |
 | - | - |
 | [v-form](/api/v-form/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Rules
 

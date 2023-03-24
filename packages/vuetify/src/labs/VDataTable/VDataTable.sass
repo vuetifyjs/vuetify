@@ -14,6 +14,9 @@
   &--focus
     border: 1px dotted black
 
+  &--clickable
+    cursor: pointer
+
 .v-data-table
   .v-table__wrapper
     > table
@@ -29,6 +32,12 @@
 
               .v-data-table-header__content
                 flex-direction: row-reverse
+            
+            &.v-data-table-column--align-center
+              text-align: center
+
+              .v-data-table-header__content
+                justify-content: center
 
             &.v-data-table-column--no-padding
               padding: 0 8px

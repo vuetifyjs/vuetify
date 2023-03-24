@@ -9,10 +9,9 @@
     "success": "Puts the input in a manual success state",
     "successMessages": "Puts the input in a success state and passes through custom success messages.",
     "validateOnBlur": "Delays validation until blur event",
-    "name": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/validation.json))",
-    "maxErrors": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/validation.json))",
-    "validateOn": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/validation.json))",
-    "validationValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/validation.json))"
+    "maxErrors": "Control the maximum number of shown errors from validation.",
+    "validateOn": "Change what type of event triggers validation to run.",
+    "validationValue": "The value used when applying validation rules."
   },
   "events": {
     "update:error": "The `error.sync` event"

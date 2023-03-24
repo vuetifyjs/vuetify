@@ -24,12 +24,14 @@ function isCustomComponent (node) {
     !allowedStrings.includes(node.arguments[0].value)
 }
 
-module.exports = function (context) {
-  return {
-    CallExpression (node) {
-      if (isCreateElementCall(node) && isStringRender(node) && isCustomComponent(node)) {
-        context.report(node.arguments[0], 'Do not render components by a string reference')
-      }
-    },
-  }
+module.exports = {
+  create (context) {
+    return {
+      CallExpression (node) {
+        if (isCreateElementCall(node) && isStringRender(node) && isCustomComponent(node)) {
+          context.report(node.arguments[0], 'Do not render components by a string reference')
+        }
+      },
+    }
+  },
 }

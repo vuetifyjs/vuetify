@@ -109,7 +109,6 @@ export const VField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
@@ -195,8 +194,6 @@ export const VField = genericComponent<new <T>() => {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
-
-      emit('click:control', e)
     }
 
     useRender(() => {
@@ -254,14 +251,14 @@ export const VField = genericComponent<new <T>() => {
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon key="prepend-icon" name="prependInner" />
-              ) }
+              )}
 
               { slots['prepend-inner']?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           <div class="v-field__field" data-no-activator="">
-            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
+            {['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -271,7 +268,7 @@ export const VField = genericComponent<new <T>() => {
               >
                 { label }
               </VFieldLabel>
-            ) }
+            )}
 
             <VFieldLabel ref={ labelRef } for={ id.value }>
               { label }
@@ -286,7 +283,7 @@ export const VField = genericComponent<new <T>() => {
               },
               focus,
               blur,
-            } as VFieldSlot) }
+            } as VFieldSlot)}
           </div>
 
           { hasClear && (
@@ -301,7 +298,7 @@ export const VField = genericComponent<new <T>() => {
                 }
               </div>
             </VExpandXTransition>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
@@ -309,9 +306,9 @@ export const VField = genericComponent<new <T>() => {
 
               { props.appendInnerIcon && (
                 <InputIcon key="append-icon" name="appendInner" />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div
             class={[
@@ -329,17 +326,17 @@ export const VField = genericComponent<new <T>() => {
                       { label }
                     </VFieldLabel>
                   </div>
-                ) }
+                )}
 
                 <div class="v-field__outline__end" />
               </>
-            ) }
+            )}
 
-            { ['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
+            {['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label }
               </VFieldLabel>
-            ) }
+            )}
           </div>
         </div>
       )

@@ -113,29 +113,6 @@ export function getZIndex (el?: Element | null): number {
   return index
 }
 
-const tagsToReplace: Record<string, string> = {
-  '&': '&amp;',
-  '<': '&lt;',
-  '>': '&gt;',
-}
-
-export function escapeHTML (str: string): string {
-  return str.replace(/[&<>]/g, tag => tagsToReplace[tag] || tag)
-}
-
-export function filterObjectOnKeys<T, K extends keyof T> (obj: T, keys: K[]): { [N in K]: T[N] } {
-  const filtered = {} as { [N in K]: T[N] }
-
-  for (let i = 0; i < keys.length; i++) {
-    const key = keys[i]
-    if (typeof obj[key] !== 'undefined') {
-      filtered[key] = obj[key]
-    }
-  }
-
-  return filtered
-}
-
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
@@ -179,7 +156,7 @@ export const keyCodes = Object.freeze({
   shift: 16,
 })
 
-export const keyValues = Object.freeze({
+export const keyValues: Record<string, string> = Object.freeze({
   enter: 'Enter',
   tab: 'Tab',
   delete: 'Delete',
@@ -199,7 +176,7 @@ export const keyValues = Object.freeze({
   shift: 'Shift',
 })
 
-export function keys<O> (o: O) {
+export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
@@ -208,10 +185,12 @@ type MaybePick<
   U extends Extract<keyof T, string>
 > = Record<string, unknown> extends T ? Partial<Pick<T, U>> : Pick<T, U>
 
+// Array of keys
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
 > (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+// Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
   U extends Extract<keyof T, string>
@@ -357,6 +336,13 @@ export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
 
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
+}
+
+export function getDecimals (value: number) {
+  const trimmedStr = value.toString().trim()
+  return trimmedStr.includes('.')
+    ? (trimmedStr.length - trimmedStr.indexOf('.') - 1)
+    : 0
 }
 
 export function padEnd (str: string, length: number, char = '0') {

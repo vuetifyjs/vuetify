@@ -24,6 +24,7 @@ function genApiLinks (componentName: string, header: string) {
   const section = [
     `## ${header} {#links}`,
     links.join('\n'),
+    '<entry />',
   ]
 
   return `${section.join('\n\n')}\n\n`

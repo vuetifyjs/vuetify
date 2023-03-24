@@ -6,7 +6,6 @@
     "light": "Applies the light theme variant to the component.",
     "falseIcon": "The icon used when inactive.",
     "trueIcon": "The icon used when active.",
-    "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "value": "A boolean value that represents whether the simple checkbox is checked."
   },
   "events": {

@@ -7,7 +7,7 @@ meta:
 related:
   - /getting-started/installation/
   - /getting-started/browser-support/
-  - /components/all/
+  - /introduction/sponsors-and-backers/
 ---
 
 # Vuetify Labs
@@ -17,6 +17,8 @@ Experiment and use in-development components before they're released.
 ![Labs Entry](https://cdn.vuetifyjs.com/docs/images/entry/labs-entry.png)
 
 ----
+
+<entry />
 
 ## What is Labs? { id=what-is-labs }
 

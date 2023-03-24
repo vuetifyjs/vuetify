@@ -17,6 +17,18 @@
       />
     </template>
 
+    <template #title="{ item }">
+      {{ item.title }}
+
+      <v-badge
+        v-if="item.emphasized"
+        class="ms-n1"
+        color="success"
+        dot
+        inline
+      />
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -56,6 +68,7 @@
     to?: RouteLocationRaw
     href?: string
     subfolder?: boolean
+    disabled?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -76,6 +89,7 @@
 
       return {
         title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,
       }
@@ -133,6 +147,7 @@
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
       appendIcon: item.appendIcon,
+      disabled: item.disabled,
     }
   }))
 </script>

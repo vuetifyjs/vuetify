@@ -1,10 +1,6 @@
 <template>
   <v-row justify="space-around">
-    <v-col
-      cols="12"
-      sm="10"
-      md="8"
-    >
+    <v-col cols="auto">
       <v-sheet
         elevation="10"
         class="py-4 px-1"

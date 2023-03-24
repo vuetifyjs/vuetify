@@ -10,13 +10,18 @@ import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { GroupHeaderItem } from './types'
 
-export const VDataTableGroupHeaderRow = defineComponent({
+type VDataTableGroupHeaderRowSlots = {
+  'data-table-group': [{ item: GroupHeaderItem, count: number, props: Record<string, unknown> }]
+  'data-table-select': [{ props: Record<string, unknown> }]
+}
+
+export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
   name: 'VDataTableGroupHeaderRow',
 
   props: {
