@@ -83,11 +83,14 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
               'v-app-bar--bottom': props.location === 'bottom',
             },
           ]}
-          style={{
-            ...layoutItemStyles.value,
-            height: undefined,
-            ...ssrBootStyles.value,
-          }}
+          style={[
+            props.style,
+            {
+              ...layoutItemStyles.value,
+              height: undefined,
+              ...ssrBootStyles.value,
+            },
+          ]}
           { ...toolbarProps }
           v-slots={ slots }
         />
