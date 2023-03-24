@@ -44,6 +44,7 @@ export const makeVDataTableProps = propsFactory({
   ...makeDataTableItemProps(),
   ...makeDataTableHeaderProps(),
   hideNoData: Boolean,
+  hover: Boolean,
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
