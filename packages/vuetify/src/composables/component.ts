@@ -2,11 +2,11 @@
 import { propsFactory } from '@/util/propsFactory'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, StyleValue } from 'vue'
 
 export interface ComponentProps {
   class?: string | any[] | Record<string, any>
-  style: string | any[] | Record<string, any>
+  style: StyleValue
 }
 
 // Composables
