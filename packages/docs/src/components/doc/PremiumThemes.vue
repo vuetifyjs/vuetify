@@ -2,7 +2,7 @@
   <v-row>
     <template v-if="products.length === 0">
       <v-col>
-        <app-alert type="error">Problem fetching themes</app-alert>
+        <alert type="error">Problem fetching themes</alert>
       </v-col>
     </template>
 
