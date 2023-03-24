@@ -6,6 +6,7 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
@@ -19,7 +20,6 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
-import { makeComponentProps } from '@/composables/component'
 
 export type TabItem = string | Record<string, any>
 

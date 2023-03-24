@@ -26,7 +26,10 @@ export const VLayout = genericComponent()({
           layoutClasses.value,
           props.class,
         ]}
-        style={ layoutStyles.value }
+        style={[
+          props.style,
+          layoutStyles.value,
+        ]}
       >
         { slots.default?.() }
       </div>

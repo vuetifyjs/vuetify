@@ -11,11 +11,12 @@ export function createSimpleFunctional (
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
     props: {
-      ...makeComponentProps(),
       tag: {
         type: String,
         default: tag,
       },
+
+      ...makeComponentProps(),
     },
 
     setup (props, { slots }) {

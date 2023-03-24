@@ -2,12 +2,12 @@
 import './VThemeProvider.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { genericComponent } from '@/util'
-import { makeComponentProps } from '@/composables/component'
 
 export const VThemeProvider = genericComponent()({
   name: 'VThemeProvider',
