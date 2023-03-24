@@ -30,7 +30,7 @@ $button-stacked-height: 72px !default;
 $button-stacked-icon-margin: 4px !default;
 $button-icon-border-radius: map.get(settings.$rounded, 'circle') !default;
 $button-icon-font-size: 1rem !default;
-$button-line-height: normal !default;
+$button-line-height: tools.map-deep-get(settings.$typography, 'button', 'line-height') !default;
 $button-stacked-line-height: 1.25 !default;
 $button-plain-opacity: .62 !default;
 $button-padding-ratio: 2.25 !default;
