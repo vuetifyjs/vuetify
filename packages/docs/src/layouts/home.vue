@@ -26,11 +26,14 @@
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import HomeFooter from '@/components/home/Footer.vue'
 
+  import { onMounted } from 'vue'
   import { useShopifyStore } from '@/store/shopify'
 
   const store = useShopifyStore()
 
-  store.fetch()
+  onMounted(() => {
+    store.fetch()
+  })
 </script>
 
 <style lang="sass">
