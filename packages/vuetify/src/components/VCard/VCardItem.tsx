@@ -36,7 +36,27 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
     ...makeDensityProps(),
   },
 
-  setup (props, { slots }) {
+  emits: {
+    click: (e: MouseEvent | KeyboardEvent) => true,
+    'click:prepend': (e: MouseEvent | KeyboardEvent) => true,
+    'click:append': (e: MouseEvent | KeyboardEvent) => true,
+  },
+
+  setup (props, { slots, emit }) {
+    function onClick (e: MouseEvent) {
+      emit('click', e)
+    }
+
+    function onPrependClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:prepend', e)
+    }
+
+    function onAppendClick (e: MouseEvent) {
+      e.stopImmediatePropagation()
+      emit('click:append', e)
+    }
+
     useRender(() => {
       const hasPrependMedia = !!(props.prependAvatar || props.prependIcon)
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
@@ -46,9 +66,9 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
-        <div class="v-card-item">
+        <div class="v-card-item" onClick={ onClick } >
           { hasPrepend && (
-            <div key="prepend" class="v-card-item__prepend">
+            <div key="prepend" class="v-card-item__prepend" onClick={ onPrependClick }>
               { !slots.prepend ? (
                 hasPrependMedia && (
                   <VAvatar
@@ -92,7 +112,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
           </div>
 
           { hasAppend && (
-            <div key="append" class="v-card-item__append">
+            <div key="append" class="v-card-item__append" onClick={ onAppendClick }>
               { !slots.append ? (
                 hasAppendMedia && (
                   <VAvatar
