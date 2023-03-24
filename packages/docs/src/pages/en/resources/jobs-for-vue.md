@@ -17,6 +17,6 @@ related:
 
 Find top Vue.js developers, ready to join your team; or browse available openings and land your next job!
 
-<promoted slug="vue-jobs" />
+<entry />
 
 <vue-jobs />

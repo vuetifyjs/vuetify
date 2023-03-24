@@ -137,7 +137,13 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLTextAreaElement).value
+      const el = e.target as HTMLTextAreaElement
+      const caretPosition = [el.selectionStart, el.selectionEnd]
+      model.value = el.value
+      nextTick(() => {
+        el.selectionStart = caretPosition[0]
+        el.selectionEnd = caretPosition[1]
+      })
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
@@ -237,6 +243,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -250,7 +257,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                         <span class="v-text-field__prefix">
                           { props.prefix }
                         </span>
-                      ) }
+                      )}
 
                       <textarea
                         ref={ textareaRef }
@@ -289,7 +296,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                         <span class="v-text-field__suffix">
                           { props.suffix }
                         </span>
-                      ) }
+                      )}
                     </>
                   ),
                 }}
@@ -310,7 +317,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

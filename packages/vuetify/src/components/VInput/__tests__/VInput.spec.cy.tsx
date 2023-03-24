@@ -20,7 +20,7 @@ const stories = Object.fromEntries(Object.entries({
         { cloneVNode(v, { density }) }
         { cloneVNode(v, { density, modelValue: 'Value' }) }
       </div>
-    )) }
+    ))}
   </div>
 )]))
 

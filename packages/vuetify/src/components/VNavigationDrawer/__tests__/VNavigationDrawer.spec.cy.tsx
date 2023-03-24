@@ -12,20 +12,15 @@ describe('VNavigationDrawer', () => {
 
   it('should open when changed to permanent on mobile', () => {
     cy.viewport(400, 800)
-
-    cy.mount(({ permanent }: any) => (
-      <VLayout>
-        <VNavigationDrawer permanent={ permanent } />
-      </VLayout>
-    ))
+      .mount(({ permanent }: any) => (
+        <VLayout>
+          <VNavigationDrawer permanent={ permanent } />
+        </VLayout>
+      ))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--temporary')
-
-    cy.vue().then(({ wrapper }) => {
-      wrapper.setProps({ permanent: true })
-    })
-
-    cy.get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--temporary')
+      .setProps({ permanent: true })
+      .get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--temporary')
   })
 
   it('should change width when using rail, expandOnHover, and hovering', () => {
@@ -35,19 +30,12 @@ describe('VNavigationDrawer', () => {
       </VLayout>
     ))
 
-    cy.vue().then(({ wrapper }) => {
-      wrapper.setProps({ rail: true, expandOnHover: true })
-    })
-
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
-
-    cy.get('.v-navigation-drawer').trigger('mouseenter')
-
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '256px')
-
-    cy.get('.v-navigation-drawer').trigger('mouseleave')
-
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
+    cy.setProps({ rail: true, expandOnHover: true })
+      .get('.v-navigation-drawer').should('have.css', 'width', '56px')
+      .get('.v-navigation-drawer').trigger('mouseenter')
+      .get('.v-navigation-drawer').should('have.css', 'width', '256px')
+      .get('.v-navigation-drawer').trigger('mouseleave')
+      .get('.v-navigation-drawer').should('have.css', 'width', '56px')
   })
 
   it('should change width when using bound and unbound rail and expandOnHover', () => {
@@ -62,17 +50,13 @@ describe('VNavigationDrawer', () => {
     ))
 
     cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
-    cy.get('.v-main').should('have.css', 'padding-left', '56px')
-
-    cy.get('.v-navigation-drawer').trigger('mouseenter')
-
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '256px')
-    cy.get('.v-main').should('have.css', 'padding-left', '256px')
-
-    cy.get('.v-navigation-drawer').trigger('mouseleave')
-
-    cy.get('.v-navigation-drawer').should('have.css', 'width', '56px')
-    cy.get('.v-main').should('have.css', 'padding-left', '56px')
+      .get('.v-main').should('have.css', 'padding-left', '56px')
+      .get('.v-navigation-drawer').trigger('mouseenter')
+      .get('.v-navigation-drawer').should('have.css', 'width', '256px')
+      .get('.v-main').should('have.css', 'padding-left', '256px')
+      .get('.v-navigation-drawer').trigger('mouseleave')
+      .get('.v-navigation-drawer').should('have.css', 'width', '56px')
+      .get('.v-main').should('have.css', 'padding-left', '56px')
   })
 
   it('should hide drawer if window resizes below mobile breakpoint', () => {
@@ -83,10 +67,8 @@ describe('VNavigationDrawer', () => {
     ))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
-
-    cy.viewport(400, 800)
-
-    cy.get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--active')
+      .viewport(400, 800)
+      .get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--active')
   })
 
   it('should not hide drawer if window resizes below mobile breakpoint and disable-resize-watcher is used', () => {
@@ -97,10 +79,8 @@ describe('VNavigationDrawer', () => {
     ))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
-
-    cy.viewport(400, 800)
-
-    cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
+      .viewport(400, 800)
+      .get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
   })
 
   it('should always show drawer if using permanent', () => {
@@ -111,27 +91,22 @@ describe('VNavigationDrawer', () => {
     ))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
-
-    cy.viewport(400, 800)
-
-    cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
-    cy.get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--temporary')
+      .viewport(400, 800)
+      .get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
+      .get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--temporary')
   })
 
   it('should show temporary drawer', () => {
-    cy.mount(({ active }: any) => (
+    cy.mount(props => (
       <VLayout>
-        <VNavigationDrawer temporary model-value={ active } />
+        <VNavigationDrawer temporary { ...props } />
       </VLayout>
     ))
 
     cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--temporary')
-
-    cy.get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--active')
-
-    cy.vue().then(({ wrapper }) => wrapper.setProps({ active: true }))
-
-    cy.get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
+      .get('.v-navigation-drawer').should('not.have.class', 'v-navigation-drawer--active')
+      .setProps({ modelValue: true })
+      .get('.v-navigation-drawer').should('have.class', 'v-navigation-drawer--active')
   })
 
   it('should allow custom widths', () => {

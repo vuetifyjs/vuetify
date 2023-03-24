@@ -83,10 +83,6 @@
               <small class="text-disabled">Your logo here</small>
             </v-card>
           </v-col>
-
-          <v-col cols="12">
-            <carbon />
-          </v-col>
         </v-row>
       </v-container>
     </template>

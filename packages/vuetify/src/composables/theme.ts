@@ -264,19 +264,12 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 
+    createCssClass(lines, ':root', genCssVariables(current.value))
+
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
-      const { variables, dark } = theme
-
       createCssClass(lines, `.v-theme--${themeName}`, [
-        `color-scheme: ${dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
         ...genCssVariables(theme),
-        ...Object.keys(variables).map(key => {
-          const value = variables[key]
-          const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
-          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
-
-          return `--v-${key}: ${rgb ?? value}`
-        }),
       ])
     }
 
@@ -423,6 +416,12 @@ function genCssVariables (theme: InternalThemeDefinition) {
     if (!key.startsWith('on-')) {
       variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
+  }
+
+  for (const [key, value] of Object.entries(theme.variables)) {
+    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    variables.push(`--v-${key}: ${rgb ?? value}`)
   }
 
   return variables

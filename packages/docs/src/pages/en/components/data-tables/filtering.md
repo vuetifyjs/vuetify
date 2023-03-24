@@ -12,7 +12,9 @@ related:
 
 # Data table - Filtering
 
-Lorem ipsum etc etc
+Data table filtering is key feature that allows users to quickly find the data they are looking for.
+
+<entry />
 
 ## Examples
 

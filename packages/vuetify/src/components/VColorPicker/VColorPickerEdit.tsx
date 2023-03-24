@@ -18,7 +18,7 @@ const VColorPickerInput = ({ label, ...rest }: any) => {
     <div
       class="v-color-picker-edit__input"
     >
-      <input {...rest} />
+      <input { ...rest } />
       <span>{ label }</span>
     </div>
   )
@@ -81,8 +81,8 @@ export const VColorPickerEdit = defineComponent({
         class="v-color-picker-edit"
       >
         { inputs.value?.map(props => (
-          <VColorPickerInput {...props} />
-        )) }
+          <VColorPickerInput { ...props } />
+        ))}
         { enabledModes.value.length > 1 && (
           <VBtn
             icon="$unfold"
@@ -92,9 +92,9 @@ export const VColorPickerEdit = defineComponent({
               const mi = enabledModes.value.findIndex(m => m.name === props.mode)
 
               emit('update:mode', enabledModes.value[(mi + 1) % enabledModes.value.length].name)
-            } }
+            }}
           />
-        ) }
+        )}
       </div>
     ))
 

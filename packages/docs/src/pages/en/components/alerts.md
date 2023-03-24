@@ -26,6 +26,13 @@ An alert is a [v-sheet](/components/sheets/) that specializes in getting the use
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-alert](/api/v-alert/) | Primary Component |
+| [v-alert-title](/api/v-alert-title/) | Sub-component used to display the `v-alert` title. Wraps the `#title` slot |
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-alert` is:
@@ -44,13 +51,6 @@ The recommended placement of elements inside of `v-alert` is:
 | 3. Title | A heading with increased font-size |
 | 4. Text | A content area for displaying text and other inline elements |
 | 5. Close Icon (optional) | Used to hide the `v-alert` component |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-alert](/api/v-alert/) | Primary Component |
-| [v-alert-title](/api/v-alert-title/) | Functional Component used to display the `v-alert` title. Wraps the `#title` slot |
 
 <api-inline hide-links />
 

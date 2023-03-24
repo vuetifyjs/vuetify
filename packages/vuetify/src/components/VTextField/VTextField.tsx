@@ -16,10 +16,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -141,7 +141,15 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLInputElement).value
+      const el = e.target as HTMLInputElement
+      model.value = el.value
+      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+        const caretPosition = [el.selectionStart, el.selectionEnd]
+        nextTick(() => {
+          el.selectionStart = caretPosition[0]
+          el.selectionEnd = caretPosition[1]
+        })
+      }
     }
 
     useRender(() => {
@@ -191,6 +199,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -231,7 +240,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                           <span class="v-text-field__prefix">
                             { props.prefix }
                           </span>
-                        ) }
+                        )}
 
                         { slots.default ? (
                           <div
@@ -241,13 +250,13 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                             { slots.default() }
                             { inputNode }
                           </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass }) }
+                        ) : cloneVNode(inputNode, { class: fieldClass })}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
                             { props.suffix }
                           </span>
-                        ) }
+                        )}
                       </>
                     )
                   },
@@ -269,7 +278,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                       v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}
@@ -282,7 +291,3 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 })
 
 export type VTextField = InstanceType<typeof VTextField>
-
-export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
-  return pick(props, Object.keys(VTextField.props) as any)
-}

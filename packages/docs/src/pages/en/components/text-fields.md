@@ -26,6 +26,14 @@ A simple text field with placeholder and/or label.
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-text-field](/api/v-text-field/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-text-field` is:
@@ -43,14 +51,6 @@ The recommended placement of elements inside of `v-text-field` is:
 | 4. Label | A content area for displaying text to users that correlates to the input |
 | 5. Append-inner icon | A custom icon that is located at the end of `v-field` component |
 | 6. Append icon | A custom icon that is located after `v-field` component |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-text-field](/api/v-text-field/) | Primary Component |
-
-<api-inline hide-links />
 
 ## Guide
 
