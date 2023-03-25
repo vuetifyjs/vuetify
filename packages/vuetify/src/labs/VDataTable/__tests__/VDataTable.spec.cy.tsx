@@ -152,4 +152,32 @@ describe('VDataTable', () => {
       .invoke('text')
       .should('equal', 'hello')
   })
+
+  it('should not emit click:row event when clicking select or expand', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
+      </Application>
+    ))
+
+    cy.get('tbody tr')
+      .eq(2)
+      .find('.v-checkbox-btn')
+      .click()
+
+    cy.get('tbody tr')
+      .eq(3)
+      .find('.v-btn')
+      .click()
+
+    cy.emitted(VDataTable, 'click:row')
+      .should('not.exist')
+
+    cy.get('tbody tr')
+      .eq(1)
+      .click()
+
+    cy.emitted(VDataTable, 'click:row')
+      .should('have.length', 1)
+  })
 })
