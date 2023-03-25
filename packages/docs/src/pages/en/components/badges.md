@@ -28,7 +28,11 @@ Badges in their simplest form display to the upper right of the content that it 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-badge](/api/v-badge/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

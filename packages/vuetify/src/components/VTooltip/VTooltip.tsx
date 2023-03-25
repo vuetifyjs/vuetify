@@ -12,7 +12,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
@@ -29,6 +29,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
       closeOnBack: false,
       location: 'end' as const,
       locationStrategy: 'connected' as const,
+      eager: true,
       minWidth: 0,
       offset: 10,
       openOnClick: false,
@@ -40,7 +41,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     }), [
       'absolute',
       'persistent',
-      'eager',
     ]),
   },
 
@@ -85,7 +85,7 @@ export const VTooltip = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay
@@ -102,7 +102,6 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           origin={ origin.value }
           persistent
           role="tooltip"
-          eager
           activatorProps={ activatorProps.value }
           _disableGlobalStack
           { ...scopeId }

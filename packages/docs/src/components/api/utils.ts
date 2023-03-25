@@ -26,7 +26,7 @@ export type Item = {
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*>(.*?)<\/a>/g
+  const regexp = /<a.*?>(.*?)<\/a>/g
 
   let matches = regexp.exec(str)
 
@@ -42,7 +42,7 @@ export function stripLinks (str: string): [string, Record<string, string>] {
 
 export function insertLinks (str: string, stripped: Record<string, string>) {
   for (const [key, value] of Object.entries(stripped)) {
-    str = str.replace(key, value)
+    str = str.replaceAll(new RegExp(`(^|\\W)(${key})(\\W|$)`, 'g'), `$1${value}$3`)
   }
   return str
 }

@@ -6,9 +6,6 @@ module.exports = {
     __VUETIFY_VERSION__: true,
     __REQUIRED_VUE__: true,
   },
-  plugins: [
-    'eslint-plugin-local-rules',
-  ],
   extends: [
     // 'plugin:import/typescript', // slow, only enable if needed
   ],
@@ -19,7 +16,6 @@ module.exports = {
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
-    'local-rules/jsx-condition-key': 'error',
 
     'no-restricted-imports': ['error', {
       paths: [{

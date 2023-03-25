@@ -1,5 +1,8 @@
 <template>
-  <section id="ready-for-more">
+  <section
+    id="ready-for-more"
+    class="mt-16"
+  >
     <app-heading
       :content="t('ready')"
       level="2"

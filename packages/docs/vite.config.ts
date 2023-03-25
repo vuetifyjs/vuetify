@@ -1,4 +1,4 @@
-import path, { join } from 'path'
+import path from 'upath'
 import fs from 'fs'
 
 import { defineConfig, loadEnv } from 'vite'
@@ -215,8 +215,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         name: 'vuetify:fallback',
         enforce: 'post',
         transformIndexHtml (html) {
-          fs.writeFileSync(join('dist/_fallback.html'), html)
-          fs.writeFileSync(join('dist/_crowdin.html').replace(/<\/head>/, `
+          fs.mkdirSync('dist', { recursive: true })
+          fs.writeFileSync(path.join('dist/_fallback.html'), html)
+          fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
 <script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
 <script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
 $&`), html)

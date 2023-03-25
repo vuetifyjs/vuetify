@@ -24,4 +24,8 @@ On a mobile device, try swiping in various directions.
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-touch](/api/v-touch/) | The touch directive |
+
+<api-inline hide-links />

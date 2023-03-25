@@ -133,6 +133,7 @@ export function propsToString (props: Record<string, any>, indent = 1, bound: st
         if (v === true) return k
         if (typeof v === 'string') return `${k}="${v}"`
         if (Array.isArray(v)) return `:${k}="['${v.join("', '")}']"`
+        if (Object(v) === v) return `:${k}="${JSON.stringify(v).replace(/"/g, "'")}"`
 
         return `:${k}="${v}"`
       })

@@ -4,8 +4,10 @@ import { readFileSync } from 'fs'
 
 import dts from 'rollup-plugin-dts'
 import alias from '@rollup/plugin-alias'
+// import sourcemaps from 'rollup-plugin-sourcemaps'
 import fg from 'fast-glob'
 import mm from 'micromatch'
+import MagicString from 'magic-string'
 
 import importMap from '../dist/json/importMap.json'
 
@@ -31,7 +33,7 @@ function createTypesConfig (input, output, renderChunk, filter) {
     const outputFile = output.replace('*', mm.capture(input, file)[0])
     return {
       input: file,
-      output: [{ file: outputFile, format: 'es' }],
+      output: [{ file: outputFile, format: 'es', sourcemap: false }],
       plugins: [
         dts(),
         externalsPlugin(),
@@ -42,10 +44,23 @@ function createTypesConfig (input, output, renderChunk, filter) {
         }),
         {
           async renderChunk (code) {
-            if (renderChunk) code = await renderChunk(code)
-            return code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+            code = new MagicString(code)
+
+            if (renderChunk) await renderChunk(code)
+            code.replaceAll(/import([^;])*?from 'vue-router'/gm, '// @ts-ignore\n$&')
+
+            const map = code.generateMap({
+              // source: 'source.js',
+              // file: 'converted.js.map',
+              includeContent: false,
+            })
+            return {
+              code: code.toString(),
+              map: null,
+            }
           }
         },
+        // sourcemaps(),
       ],
     }
   })
@@ -63,11 +78,13 @@ async function getShims () {
 
 export default [
   createTypesConfig('framework.d.ts', 'lib/index.d.ts', async code => {
-    return code + '\n\n' + await getShims()
+    code.append('\n\n')
+    code.append(await getShims())
   }),
   createTypesConfig('entry-bundler.d.ts', 'dist/vuetify.d.ts', async code => {
-    code = code.replaceAll(/type index_d\$1_V(\w+) = V(\w+);/gm, 'declare const index_d$$1_V$1: typeof V$2;')
-    return code + '\n\n' + (await getShims()).replace(', VNodeChild } from \'vue\'', ' } from \'vue\'')
+    code.replaceAll(/type index_d\$1_V(\w+) = V(\w+);/gm, 'declare const index_d$$1_V$1: typeof V$2;')
+    code.append('\n\n')
+    code.append((await getShims()).replace(', VNodeChild } from \'vue\'', ' } from \'vue\''))
   }),
   createTypesConfig('blueprints/*.d.ts', 'lib/blueprints/*.d.ts'),
   createTypesConfig('components/index.d.ts', 'lib/components/index.d.ts'),
@@ -77,7 +94,7 @@ export default [
     return files.filter(file => !block.some(name => file.includes(`/${name}/`)))
   }),
   createTypesConfig('labs/entry-bundler.d.ts', 'dist/vuetify-labs.d.ts', code => {
-    return code.replaceAll(/type allComponents_d_V(\w+) = V(\w+);/gm, 'declare const allComponents_d_V$1: typeof V$2;')
+    code.replaceAll(/type allComponents_d_V(\w+) = V(\w+);/gm, 'declare const allComponents_d_V$1: typeof V$2;')
   }),
   createTypesConfig('labs/components.d.ts', 'lib/labs/components.d.ts'),
   createTypesConfig('labs/*/index.d.ts', 'lib/labs/*/index.d.ts'),
