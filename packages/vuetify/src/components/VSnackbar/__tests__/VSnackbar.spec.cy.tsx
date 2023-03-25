@@ -5,7 +5,7 @@ import { VSnackbar } from '../VSnackbar'
 
 describe('VSnackbar', () => {
   describe('global configuration', () => {
-    it('should only apply \'v-dialog\' class to root element and also apply global config class/style', () => {
+    it('should only apply \'v-snackbar\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <VDefaultsProvider defaults={ {
           global: {

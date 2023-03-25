@@ -5,7 +5,7 @@ import { VCarousel } from '../VCarousel'
 
 describe('VCarousel', () => {
   describe('global configuration', () => {
-    it('should only apply \'v-autocomplete\' class to root element and also apply global config class/style', () => {
+    it('should only apply \'v-carousel\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <VDefaultsProvider defaults={ {
           global: {
