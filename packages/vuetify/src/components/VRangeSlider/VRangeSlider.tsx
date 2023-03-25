@@ -14,12 +14,13 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
+import type { VSliderSlots } from '../VSlider/VSlider'
 
-export const VRangeSlider = defineComponent({
+export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
   props: {
@@ -96,6 +97,7 @@ export const VRangeSlider = defineComponent({
       'modelValue',
       undefined,
       arr => {
+        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
         if (!arr || !arr.length) return [0, 0]
 
         return arr.map(value => roundValue(value))
@@ -196,11 +198,11 @@ export const VRangeSlider = defineComponent({
                       startThumbRef.value?.$el.blur()
                       stopThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
@@ -230,11 +232,11 @@ export const VRangeSlider = defineComponent({
                       stopThumbRef.value?.$el.blur()
                       startThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }

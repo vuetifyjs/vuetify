@@ -13,13 +13,11 @@ related:
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprints-entry.png)
-
----
+<entry />
 
 ## Usage
 
-Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
+Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#material-design-1) preset:
 
 ```js { resource=plugins/vuetify.js }
 import { createVuetify } from 'vuetify'
@@ -29,8 +27,6 @@ export default createVuetify({
   blueprint: md1,
 })
 ```
-
-<entry />
 
 ### White-label concept
 

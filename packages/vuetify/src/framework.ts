@@ -1,4 +1,5 @@
 // Composables
+import { createDate, DateAdapterSymbol } from './composables/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
@@ -25,6 +26,9 @@ export interface VuetifyOptions {
   aliases?: Record<string, any>
   blueprint?: Blueprint
   components?: Record<string, any>
+  date?: {
+    adapter: { new(locale: string): DateAdapter<any> }
+  }
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions

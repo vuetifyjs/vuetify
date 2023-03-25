@@ -13,6 +13,7 @@ import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { defineComponent, HSVtoCSS, useRender } from '@/util'
@@ -108,6 +109,14 @@ export const VColorPicker = defineComponent({
       if (!props.modes.includes(mode.value)) mode.value = props.modes[0]
     })
 
+    provideDefaults({
+      VSlider: {
+        color: undefined,
+        trackColor: undefined,
+        trackFillColor: undefined,
+      },
+    })
+
     useRender(() => (
       <VSheet
         rounded={ props.rounded }
@@ -131,7 +140,7 @@ export const VColorPicker = defineComponent({
             width={ props.width }
             height={ props.canvasHeight }
           />
-        ) }
+        )}
 
         { (!props.hideSliders || !props.hideInputs) && (
           <div key="controls" class="v-color-picker__controls">
@@ -143,7 +152,7 @@ export const VColorPicker = defineComponent({
                 hideAlpha={ !mode.value.endsWith('a') }
                 disabled={ props.disabled }
               />
-            ) }
+            )}
 
             { !props.hideInputs && (
               <VColorPickerEdit
@@ -155,9 +164,9 @@ export const VColorPicker = defineComponent({
                 onUpdate:color={ updateColor }
                 disabled={ props.disabled }
               />
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         { props.showSwatches && (
           <VColorPickerSwatches
@@ -168,7 +177,7 @@ export const VColorPicker = defineComponent({
             swatches={ props.swatches }
             disabled={ props.disabled }
           />
-        ) }
+        )}
       </VSheet>
     ))
 

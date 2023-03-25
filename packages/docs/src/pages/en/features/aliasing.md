@@ -6,7 +6,7 @@ meta:
 related:
 - /features/blueprints/
 - /features/global-configuration/
-- /components/all/
+- /features/treeshaking/
 ---
 
 # Aliasing & virtual components

@@ -51,7 +51,7 @@ describe('filter', () => {
         title: (s: string, q: string) => s === q,
         value: (s: string) => s === '1',
       }
-      const items = transformItems({} as any, [
+      const items = [
         {
           title: 'foo',
           subtitle: 'bar',
@@ -76,7 +76,7 @@ describe('filter', () => {
           value: '1',
           custom: 'buzz',
         },
-      ])
+      ] as any
       const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
       expect(filterItems(items, 'foo', {

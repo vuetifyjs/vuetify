@@ -12,12 +12,19 @@ import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 
 // Utilities
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
+import type { LoaderSlotProps } from '@/composables/loader'
 
-export const VDataTableHeaders = defineComponent({
+export type VDataTableHeadersSlots = {
+  default: []
+  loader: [LoaderSlotProps]
+  'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
+}
+
+export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
 
   props: {
@@ -84,11 +91,11 @@ export const VDataTableHeaders = defineComponent({
             minWidth: convertToUnit(column.width),
             ...getFixedStyles(column, y),
           }}
-          colspan={column.colspan}
-          rowspan={column.rowspan}
-          onClick={column.sortable ? () => toggleSort(column.key) : undefined}
-          lastFixed={column.lastFixed}
-          noPadding={noPadding}
+          colspan={ column.colspan }
+          rowspan={ column.rowspan }
+          onClick={ column.sortable ? () => toggleSort(column.key) : undefined }
+          lastFixed={ column.lastFixed }
+          noPadding={ noPadding }
         >
           {{
             default: () => {
@@ -127,11 +134,11 @@ export const VDataTableHeaders = defineComponent({
                         'v-data-table-header__sort-badge',
                         ...backgroundColorClasses.value,
                       ]}
-                      style={backgroundColorStyles.value}
+                      style={ backgroundColorStyles.value }
                     >
-                      {sortBy.value.findIndex(x => x.key === column.key) + 1}
+                      { sortBy.value.findIndex(x => x.key === column.key) + 1 }
                     </div>
-                  ) }
+                  )}
                 </div>
               )
             },
@@ -145,10 +152,10 @@ export const VDataTableHeaders = defineComponent({
         { headers.value.map((row, y) => (
           <tr>
             { row.map((column, x) => (
-              <VDataTableHeaderCell column={ column} x={ x } y={ y } />
-            )) }
+              <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+            ))}
           </tr>
-        )) }
+        ))}
 
         { props.loading && (
           <tr class="v-data-table__progress">

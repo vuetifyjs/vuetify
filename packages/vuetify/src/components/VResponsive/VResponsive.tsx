@@ -6,7 +6,12 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
+
+export type VResponsiveSlots = {
+  default: []
+  additional: []
+}
 
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
   return {
@@ -20,7 +25,7 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
   }
 }
 
-export const VResponsive = defineComponent({
+export const VResponsive = genericComponent<VResponsiveSlots>()({
   name: 'VResponsive',
 
   props: {

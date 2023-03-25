@@ -19,6 +19,10 @@ export const md3: Blueprint = {
       color: 'primary',
       rounded: 'xl',
     },
+    VBtnGroup: {
+      rounded: 'xl',
+      VBtn: { rounded: null },
+    },
     VCard: {
       rounded: 'lg',
     },

@@ -1,6 +1,10 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
 
+const project = new Project({
+  tsConfigFilePath: './tsconfig.json',
+})
+
 function inspect (project: Project, node?: Node<ts.Node>) {
   if (!node) return null
 
@@ -11,7 +15,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
     if (definition.properties) {
       // Exclude private properties
       definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('_')))
+        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
     }
     return definition
   }
@@ -20,11 +24,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
 }
 
 export function generateComposableDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/composables.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/composables.d.ts')
 
   const composables = inspect(project, sourceFile.getTypeAlias('Composables'))
 
@@ -50,11 +50,7 @@ export function generateComposableDataFromTypes () {
 }
 
 export function generateDirectiveDataFromTypes () {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath('./src/directives.d.ts')
+  const sourceFile = project.addSourceFileAtPath('./templates/directives.d.ts')
 
   const directives = inspect(project, sourceFile.getTypeAlias('Directives'))
 
@@ -68,11 +64,7 @@ export function generateDirectiveDataFromTypes () {
 }
 
 export async function generateComponentDataFromTypes (component: string) {
-  const project = new Project({
-    tsConfigFilePath: './tsconfig.json',
-  })
-
-  const sourceFile = project.addSourceFileAtPath(`./src/tmp/${component}.d.ts`)
+  const sourceFile = project.addSourceFileAtPath(`./templates/tmp/${component}.d.ts`)
 
   const props = inspect(project, sourceFile.getTypeAlias('ComponentProps'))
   const events = inspect(project, sourceFile.getTypeAlias('ComponentEvents'))
@@ -243,7 +235,14 @@ const allowedRefs = [
   'SelectStrategyFn',
   'SubmitEventPromise',
   'ValidationRule',
+  'FormValidationResult',
   'SortItem',
+  'InternalItem',
+  'InternalDataTableItem',
+  'DataTableItem',
+  'DataTableHeader',
+  'InternalDataTableHeader',
+  'FilterFunction',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -259,7 +258,7 @@ function formatDefinition (definition: Definition) {
       break
     }
     case 'array': {
-      const formattedItems = definition.items.map(item => ['function', 'constructor'].includes(item.type) ? `(${item.formatted})` : item.formatted)
+      const formattedItems = definition.items.map(item => ['function', 'constructor', 'allOf', 'anyOf'].includes(item.type) ? `(${item.formatted})` : item.formatted)
       if (definition.length) {
         formatted = `[${formattedItems.join(', ')}]`
       } else {
@@ -300,7 +299,7 @@ function formatDefinition (definition: Definition) {
   definition.formatted = formatted
 
   if (allowedRefs.includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/next/packages/${definition.source}" target="_blank">${definition.text}</a>`
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${definition.text}</a>`
   }
 }
 
@@ -441,6 +440,14 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
       definition.properties[propertyName] = generateDefinition(node, getRecursiveTypes(recursed, propertyType), project, propertyType)
 
       definition.properties[propertyName].optional = property.isOptional()
+    }
+    if (type.compilerType.indexInfos.length) {
+      for (const index of type.compilerType.indexInfos) {
+        const indexName = '[' + type._context.compilerFactory.getType(index.keyType).getText() + ']'
+        const indexType = type._context.compilerFactory.getType(index.type)
+        definition.properties[indexName] = generateDefinition(node, getRecursiveTypes(recursed, indexType), project, indexType)
+        definition.properties[indexName].optional = true
+      }
     }
   } else if (ts.TypeFlags.Void & type.getFlags()) {
     // @ts-expect-error asd

@@ -22,7 +22,7 @@
             color="orange"
             background-color="orange"
             hover
-            class="mr-2"
+            class="me-2"
           ></v-rating>
           <span class="text-primary text-subtitle-2">64 Reviews</span>
         </v-card-title>

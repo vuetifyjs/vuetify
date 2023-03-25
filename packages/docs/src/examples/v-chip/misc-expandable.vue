@@ -7,7 +7,7 @@
       align="center"
       class="pa-6"
     >
-      <span class="mr-4">To</span>
+      <span class="me-4">To</span>
 
       <v-menu
         v-model="menu"

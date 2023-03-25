@@ -24,11 +24,11 @@
   import { computed } from 'vue'
 
   const HEADING_CLASSES = {
-    1: 'text-h3 text-sm-h3 mb-4',
-    2: 'text-h4 text-sm-h4 mb-4 mt-4',
-    3: 'text-h5 mb-2',
-    4: 'text-h6 mb-2',
-    5: 'text-subtitle-1 font-weight-medium mb-2',
+    1: 'text-h3 text-sm-h3',
+    2: 'text-h4 text-sm-h4',
+    3: 'text-h5',
+    4: 'text-h6',
+    5: 'text-subtitle-1 font-weight-medium',
   }
 
   const props = defineProps({
@@ -38,7 +38,7 @@
   })
 
   const component = computed(() => `h${props.level}`)
-  const classes = computed(() => ['v-heading', HEADING_CLASSES[props.level]])
+  const classes = computed(() => ['v-heading', 'mb-2', HEADING_CLASSES[props.level]])
 </script>
 
 <style lang="sass">

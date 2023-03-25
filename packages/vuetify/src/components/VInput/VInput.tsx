@@ -15,7 +15,7 @@ import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRende
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
@@ -61,9 +61,7 @@ export type VInputSlots = MakeSlots<{
   details: [VInputSlot]
 }>
 
-export const VInput = genericComponent<new () => {
-  $props: SlotsToProps<VInputSlots>
-}>()({
+export const VInput = genericComponent<VInputSlots>()({
   name: 'VInput',
 
   props: {
@@ -139,15 +137,15 @@ export const VInput = genericComponent<new () => {
                   key="prepend-icon"
                   name="prepend"
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default && (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
@@ -156,11 +154,11 @@ export const VInput = genericComponent<new () => {
                   key="append-icon"
                   name="append"
                 />
-              ) }
+              )}
 
               { slots.append?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasDetails && (
             <div class="v-input__details">
@@ -176,7 +174,7 @@ export const VInput = genericComponent<new () => {
 
               { slots.details?.(slotProps.value) }
             </div>
-          ) }
+          )}
         </div>
       )
     })

@@ -14,11 +14,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
-import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
 export type TabItem = string | Record<string, any>
 
@@ -32,7 +32,7 @@ function parseItems (items: TabItem[] | undefined) {
   })
 }
 
-export const VTabs = defineComponent({
+export const VTabs = genericComponent()({
   name: 'VTabs',
 
   props: {
@@ -116,7 +116,7 @@ export const VTabs = defineComponent({
       >
         { slots.default ? slots.default() : parsedItems.value.map(item => (
           <VTab { ...item } key={ item.title } />
-        )) }
+        ))}
       </VSlideGroup>
     ))
 

@@ -16,11 +16,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
-import { callEvent, filterInputAttrs, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { ExtractPropTypes, PropType } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -49,11 +49,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<new () => {
-  $props: SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-    default: []
-  }>>
-}>()({
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+  default: []
+}>>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -64,7 +62,7 @@ export const VTextField = genericComponent<new () => {
 
   emits: {
     'click:control': (e: MouseEvent) => true,
-    'click:input': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
@@ -118,6 +116,14 @@ export const VTextField = genericComponent<new () => {
 
       if (!isFocused.value) focus()
     }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+
+      if (e.target === inputRef.value) return
+
+      onFocus()
+      e.preventDefault()
+    }
     function onControlClick (e: MouseEvent) {
       onFocus()
 
@@ -135,7 +141,13 @@ export const VTextField = genericComponent<new () => {
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLInputElement).value
+      const el = e.target as HTMLInputElement
+      const caretPosition = [el.selectionStart, el.selectionEnd]
+      model.value = el.value
+      nextTick(() => {
+        el.selectionStart = caretPosition[0]
+        el.selectionEnd = caretPosition[1]
+      })
     }
 
     useRender(() => {
@@ -175,12 +187,8 @@ export const VTextField = genericComponent<new () => {
             }) => (
               <VField
                 ref={ vFieldRef }
-                onMousedown={ (e: MouseEvent) => {
-                  if (e.target === inputRef.value) return
-
-                  e.preventDefault()
-                }}
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
@@ -189,6 +197,7 @@ export const VTextField = genericComponent<new () => {
                 id={ id.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -225,24 +234,23 @@ export const VTextField = genericComponent<new () => {
                           <span class="v-text-field__prefix">
                             { props.prefix }
                           </span>
-                        ) }
+                        )}
 
                         { slots.default ? (
                           <div
                             class={ fieldClass }
-                            onClick={ e => emit('click:input', e) }
                             data-no-activator=""
                           >
                             { slots.default() }
                             { inputNode }
                           </div>
-                        ) : cloneVNode(inputNode, { class: fieldClass }) }
+                        ) : cloneVNode(inputNode, { class: fieldClass })}
 
                         { props.suffix && (
                           <span class="v-text-field__suffix">
                             { props.suffix }
                           </span>
-                        ) }
+                        )}
                       </>
                     )
                   },
@@ -261,10 +269,10 @@ export const VTextField = genericComponent<new () => {
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}
@@ -277,7 +285,3 @@ export const VTextField = genericComponent<new () => {
 })
 
 export type VTextField = InstanceType<typeof VTextField>
-
-export function filterVTextFieldProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVTextFieldProps>>>) {
-  return pick(props, Object.keys(VTextField.props) as any)
-}

@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { VCombobox } from '../VCombobox'
 import { ref } from 'vue'
 
@@ -21,7 +21,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple closableChips chips />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple closableChips chips />
       ))
         .get('.v-chip__close')
         .eq(0)
@@ -168,7 +168,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} />
+        <VCombobox items={ items } />
       ))
         .get('input')
         .type('Item')
@@ -194,7 +194,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} multiple />
+        <VCombobox items={ items } multiple />
       ))
         .get('input')
         .type('Item')
@@ -210,6 +210,40 @@ describe('VCombobox', () => {
         .type('Item 3')
         .should('have.length', 1)
     })
+
+    it('should filter with custom item shape', () => {
+      const items = [
+        {
+          id: 1,
+          name: 'Test1',
+        },
+        {
+          id: 2,
+          name: 'Antonsen PK',
+        },
+      ]
+
+      cy.mount(() => (
+        <VCombobox
+          items={ items }
+          item-value="id"
+          item-title="name"
+        />
+      ))
+        .get('input')
+        .type('test')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Test1')
+        .get('input')
+        .clear()
+        .type('antonsen')
+        .get('.v-list-item')
+        .should('have.length', 1)
+        .eq(0)
+        .should('have.text', 'Antonsen PK')
+    })
   })
 
   describe('prefilled data', () => {
@@ -219,7 +253,7 @@ describe('VCombobox', () => {
       const selectedItems = ref(['California', 'Colorado'])
 
       cy.mount(() => (
-        <VCombobox v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+        <VCombobox v-model={ selectedItems.value } items={ items.value } multiple chips closableChips />
       ))
 
       cy.get('.v-combobox input').click()
@@ -267,8 +301,8 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          v-model={selectedItems.value}
-          items={items.value}
+          v-model={ selectedItems.value }
+          items={ items.value }
           multiple
           chips
           closableChips
@@ -302,8 +336,8 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       ))
@@ -329,8 +363,8 @@ describe('VCombobox', () => {
       cy.mount(() => (
         <VForm readonly>
           <VCombobox
-            items={items}
-            modelValue={selectedItems}
+            items={ items }
+            modelValue={ selectedItems }
             readonly
           />
         </VForm>
@@ -365,7 +399,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple hideSelected />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple hideSelected />
       ))
 
       cy.get('.v-combobox input').click()

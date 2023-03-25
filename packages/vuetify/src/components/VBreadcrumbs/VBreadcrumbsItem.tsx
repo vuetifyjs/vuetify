@@ -5,9 +5,9 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBreadcrumbsItem = defineComponent({
+export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
 
   props: {
