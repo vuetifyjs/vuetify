@@ -5,7 +5,7 @@ import { VMenu } from '../VMenu'
 
 describe('VMenu', () => {
   describe('global configuration', () => {
-    it('should only apply \'v-dialog\' class to root element and also apply global config class/style', () => {
+    it('should only apply \'v-menu\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <VDefaultsProvider defaults={ {
           global: {
