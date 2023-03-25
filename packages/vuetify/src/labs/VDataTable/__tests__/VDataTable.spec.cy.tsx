@@ -111,4 +111,45 @@ describe('VDataTable', () => {
       .emitted(VDataTable, 'update:page')
       .should('deep.equal', [[2], [1]])
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16999
+  it('should search in nested keys', () => {
+    const nestedItems = [
+      {
+        foo: {
+          bar: 'hello',
+        },
+      },
+      {
+        foo: {
+          bar: 'world',
+        },
+      },
+    ]
+
+    const headers = [
+      {
+        key: 'foo.bar',
+        title: 'Column',
+      },
+    ]
+
+    cy.mount(props => (
+      <Application>
+        <VDataTable items={ nestedItems } headers={ headers } { ...props } />
+      </Application>
+    ))
+
+    cy.get('tbody tr')
+      .should('have.length', 2)
+      .invoke('text')
+      .should('equal', 'helloworld')
+      .setProps({
+        search: 'hello',
+      })
+      .get('tbody tr')
+      .should('have.length', 1)
+      .invoke('text')
+      .should('equal', 'hello')
+  })
 })

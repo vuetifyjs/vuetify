@@ -9,7 +9,7 @@ import { useSelection } from './composables/select'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, getPropertyFromItem, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -91,7 +91,7 @@ export const VDataTableRow = defineComponent({
                   )
                 }
 
-                return item.columns[column.key]
+                return getPropertyFromItem(item.columns, column.key)
               },
             }}
           </VDataTableColumn>
