@@ -1,0 +1,30 @@
+@forward './variables'
+@use 'sass:math'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper-content
+  // top: 0
+  // padding: $stepper-content-padding
+  // flex: 1 0 auto
+  // Chrome has an issue with overflow hidden for rendering
+  // Originally used translateZ but this messes up fixed
+  // elements within the stepper
+  // Fix for #512 and #620
+  // overflow: hidden
+  width: 100%
+
+  &--vertical
+    margin-left: 24px
+    margin-right: 24px
+
+  &--horizontal
+    padding: 24px
+
+  // &--vertical
+  //   min-height: 24px
+  //   border-left: 1px solid rgba(0,0,0,.12)
+  //   margin: -16px -36px -16px 36px
+  //   padding: 16px 60px 16px 24px

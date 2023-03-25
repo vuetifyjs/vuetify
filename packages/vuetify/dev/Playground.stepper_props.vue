@@ -1,0 +1,76 @@
+<template>
+  <v-app>
+    <v-locale-provider :rtl="rtl">
+      <v-btn @click="rtl = !rtl">rtl</v-btn>
+      <p style="padding: 20px;">Below all the steps were provided via the property items only, the contents are defined via the slot name contained in the 'value' attribute of the provided items array </p>
+      <v-stepper :items="items"  direction="vertical">
+        <template #content.foo="props">
+          <v-card>
+            <v-card-text>
+              hello
+            </v-card-text>
+          </v-card>
+        </template>
+        <template #content.bar="props">
+          <v-card>
+            <v-card-text>
+              hello
+            </v-card-text>
+          </v-card>
+        </template>
+      </v-stepper>
+
+      <hr class="ma-10">
+
+      <v-stepper :items="items"  stacked-labels >
+        <template #content.foo="props">
+          <v-card>
+            <v-card-text>
+              hello
+            </v-card-text>
+          </v-card>
+        </template>
+        <template #content.bar="props">
+          <v-card>
+            <v-card-text>
+              hello
+            </v-card-text>
+          </v-card>
+        </template>
+      </v-stepper>
+    </v-locale-provider>
+  </v-app>
+</template>
+
+<script>
+  export default {
+    name: 'Playground',
+    data: () => ({
+      rtl: false,
+      open: null,
+      active: null,
+      items: [
+        {
+          title: 'Foo',
+          subtitle: 'Subtitle',
+          value: 'foo',
+        },
+        {
+          title: 'Bar',
+          value: 'bar',
+        },
+      ],
+      loadedItems: [
+        {
+          value: 'root',
+          text: 'root',
+          loaded: false,
+          children: [],
+        },
+      ],
+      opened: [],
+      isCtrl: false,
+      count: 1,
+    }),
+  }
+</script>

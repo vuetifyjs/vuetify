@@ -1,0 +1,61 @@
+<template>
+  <v-app>
+    <p style="padding: 20px;">Same Markup for Vuetify 2 Stepper page , example 2 </p>
+        <v-stepper  alt-labels>
+          <v-stepper-header>
+            <v-stepper-step step="1" complete>
+              Ad unit details
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step step="2">
+              Ad sizes
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step step="3">
+              Ad templates
+            </v-stepper-step>
+          </v-stepper-header>
+        </v-stepper>
+
+        <v-stepper
+          alt-labels
+          class="mt-12"
+        >
+          <v-stepper-header>
+            <v-stepper-step step="1">
+              Ad unit details
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step step="2" title="Ad Sizes" subtitle="Optional">
+              Ad sizes
+              <small>Optional</small>
+            </v-stepper-step>
+
+            <v-divider></v-divider>
+
+            <v-stepper-step step="3">
+              Ad templates
+            </v-stepper-step>
+          </v-stepper-header>
+        </v-stepper>
+      
+
+  </v-app>
+</template>
+
+<script>
+  export default {
+    name: 'Playground',
+    setup () {
+      return {
+        //
+      }
+    },
+  }
+</script>

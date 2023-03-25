@@ -322,6 +322,28 @@ type Writable<T> = {
   -readonly [P in keyof T]: T[P]
 }
 
+/*
+ Collects the VNodes insdie the provided slots that holds the name specified
+Note: for some reason, recursively returning array and adding the content via concat did not work, therefore passing the array as parameter!
+ */
+export function addNodesInSlots (name: string, slots: Slots, nodes?: VNode[]) {
+  if (nodes === undefined) { nodes = [] }
+  if (Array.isArray(slots.default?.()) || Array.isArray(slots)) {
+    const arr: any = slots?.default?.() ?? slots
+    if (arr !== undefined) {
+      // eslint-disable-next-line array-callback-return
+      (arr).map((curItem: any) => {
+        if (curItem.type.name === name) {
+          nodes?.push(curItem)
+        }
+        if (curItem.children) {
+          addNodesInSlots(name, curItem.children, nodes)
+        }
+      })
+    }
+  }
+}
+
 /**
  * Filters slots to only those starting with `prefix`, removing the prefix
  */

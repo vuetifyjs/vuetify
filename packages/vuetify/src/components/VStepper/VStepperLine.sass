@@ -1,0 +1,52 @@
+/* @forward './variables'
+@use 'sass:math'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+.v-stepper-line--vertical
+  position: relative
+  width: 36px
+  flex-shrink: 0
+
+  > div
+    height: calc(100% + 24px)
+    border-left: 1px solid rgba(0, 0, 0, var(--v-border-opacity))
+    position: absolute
+    margin-inline-start: 35px
+
+    transform: translateY(calc(-12px - 2px))
+
+.v-stepper-line--horizontal
+  width: 100%
+  position: relative
+  // height: 1px
+  // line-height: 24px
+  // margin-block-end: 0px
+  // margin-block-start: 35px
+  // margin-bottom: 0px
+  // margin-inline-end: -67px
+  // margin-inline-start: -67px
+  // margin-left: -67px
+  // margin-right: -67px
+  // margin-top: 35px
+  // align-self: flex-start
+  // flex-grow: 1
+  // flex-basis: auto
+  // flex-shrink: 1
+  // height: 1px
+  // line-height: 24px
+  // max-height: 0px
+  // max-width: 100%
+  // overflow-x: visible
+  // overflow-y: visible
+  
+
+  
+  div
+    height: calc(100% + 8px)
+    border-bottom: 1px solid rgba(0, 0, 0, var(--v-border-opacity))
+    transform: translateY(-50%)
+    margin-inline-start: -8px
+    margin-inline-end: -8px 
