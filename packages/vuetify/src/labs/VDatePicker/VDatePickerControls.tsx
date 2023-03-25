@@ -46,7 +46,7 @@ export const VDatePickerControls = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     const monthAndYear = computed(() => {
       const month = props.range === 'end' ? adapter.value.addMonths(props.displayDate, 1) : props.displayDate
       return adapter.value.format(month, 'monthAndYear')

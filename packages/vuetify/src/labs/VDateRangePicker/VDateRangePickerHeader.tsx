@@ -48,7 +48,7 @@ export const VDateRangePickerHeader = defineComponent({
 
   setup (props, { emit }) {
     const { t } = useLocale()
-    const { adapter } = useDate()
+    const adapter = useDate()
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
     const headerText = computed(() => {

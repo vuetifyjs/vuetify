@@ -28,7 +28,7 @@ export const VDatePickerYears = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     const displayYear = computed(() => adapter.value.getYear(props.displayDate))
     const years = computed(() => {
       const min = props.min ?? displayYear.value - 50 - 2

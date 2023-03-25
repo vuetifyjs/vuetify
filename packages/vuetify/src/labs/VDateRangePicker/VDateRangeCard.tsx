@@ -35,7 +35,7 @@ export const VDateRangeCard = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     createDatePicker(props)
 
     const hoverDate = ref(null)

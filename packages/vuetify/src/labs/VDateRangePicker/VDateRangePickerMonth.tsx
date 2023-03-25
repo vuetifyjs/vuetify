@@ -25,7 +25,7 @@ export const VDateRangePickerMonth = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     const { hasScrolled } = useDatePicker()
 
     const months = computed(() => {

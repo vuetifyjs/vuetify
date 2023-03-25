@@ -57,7 +57,7 @@ export const VDateField = defineComponent({
       const { isEqual } = adapter.value
       const date = parseKeyboardDate(inputModel.value)
 
-      if (date && !isEqual(date, model.value)) {
+      if (date && (!model.value[0] || !isEqual(date, model.value[0]))) {
         model.value = date
         displayDate.value = date
       }
@@ -97,10 +97,10 @@ export const VDateField = defineComponent({
                   v-model:viewMode={ viewMode.value }
                   v-model:displayDate={ displayDate.value }
                   showActions
-                  onSave={() => {
+                  onSave={ () => {
                     isActive.value = false
                   }}
-                  onCancel={() => {
+                  onCancel={ () => {
                     isActive.value = false
                   }}
                 />
@@ -114,13 +114,13 @@ export const VDateField = defineComponent({
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <VMenu
             closeOnContentClick={ false }
-            offset={ [-30, 0] }
+            offset={[-30, 0]}
             v-slots={{
               activator,
               default: ({ isActive }) => (
                 <VDateCard
                   modelValue={ model.value }
-                  onUpdate:modelValue={(value: any) => {
+                  onUpdate:modelValue={ (value: any) => {
                     model.value = value
                   }}
                   v-model:displayDate={ displayDate.value }

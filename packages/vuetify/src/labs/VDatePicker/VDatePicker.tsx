@@ -39,7 +39,7 @@ export const VDatePicker = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     createDatePicker(props)
 
     const inputModel = ref(props.modelValue?.length ? adapter.value.format(props.modelValue[0], 'keyboardDate') : '')
@@ -100,7 +100,7 @@ export const VDatePicker = defineComponent({
                       viewMode={ props.viewMode }
                       onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                     />
-                  ) }
+                  )}
                 </MaybeTransition>
               </>
             ) : (
@@ -114,8 +114,8 @@ export const VDatePicker = defineComponent({
             ),
             actions: props.showActions && (() => (
               <div>
-                <VBtn variant="text" color={props.color} onClick={handleCancel}>Cancel</VBtn>
-                <VBtn variant="text" color={props.color} onClick={handleSave}>Ok</VBtn>
+                <VBtn variant="text" color={ props.color } onClick={ handleCancel }>Cancel</VBtn>
+                <VBtn variant="text" color={ props.color } onClick={ handleSave }>Ok</VBtn>
               </div>
             )),
           }}

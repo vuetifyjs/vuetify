@@ -50,7 +50,7 @@ export const VDateRangePicker = defineComponent({
   },
 
   setup (props, { emit }) {
-    const { adapter } = useDate()
+    const adapter = useDate()
     createDatePicker(props)
 
     const selected = ref(props.modelValue)

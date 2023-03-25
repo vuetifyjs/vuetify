@@ -2,60 +2,6 @@
 import { createRange } from '@/util'
 import type { DateAdapter } from './date-adapter'
 
-function getWeekArray (date: Date) {
-  const weeks = []
-  let currentWeek = []
-  const firstDayOfMonth = startOfMonth(date)
-  const lastDayOfMonth = endOfMonth(date)
-
-  for (let i = 0; i < firstDayOfMonth.getDay(); i++) {
-    currentWeek.push(null)
-  }
-
-  for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
-    const day = new Date(date.getFullYear(), date.getMonth(), i)
-
-    // Add the day to the current week
-    currentWeek.push(day)
-
-    // If the current week has 7 days, add it to the weeks array and start a new week
-    if (currentWeek.length === 7) {
-      weeks.push(currentWeek)
-      currentWeek = []
-    }
-  }
-
-  for (let i = currentWeek.length; i < 7; i++) {
-    currentWeek.push(null)
-  }
-
-  weeks.push(currentWeek)
-
-  return weeks
-}
-
-function startOfMonth (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth(), 1)
-}
-
-function endOfMonth (date: Date) {
-  return new Date(date.getFullYear(), date.getMonth() + 1, 0)
-}
-
-function date (value?: any): Date | null {
-  if (value == null) return null
-
-  if (value instanceof Date) return value
-
-  if (typeof value === 'string') {
-    const parsed = Date.parse(value)
-
-    if (!isNaN(parsed)) return new Date(parsed)
-  }
-
-  return null
-}
-
 const firstDay: Record<string, number> = {
   '001': 1,
   AD: 1,
@@ -69,7 +15,7 @@ const firstDay: Record<string, number> = {
   AR: 1,
   AS: 0,
   AT: 1,
-  AU: 0,
+  AU: 1,
   AX: 1,
   AZ: 1,
   BA: 1,
@@ -89,7 +35,7 @@ const firstDay: Record<string, number> = {
   CH: 1,
   CL: 1,
   CM: 1,
-  CN: 0,
+  CN: 1,
   CO: 0,
   CR: 1,
   CY: 1,
@@ -210,15 +156,75 @@ const firstDay: Record<string, number> = {
   ZW: 0,
 }
 
+function getWeekArray (date: Date, locale: string, includeAdjacentMonths?: boolean) {
+  const weeks = []
+  let currentWeek = []
+  const firstDayOfMonth = startOfMonth(date)
+  const lastDayOfMonth = endOfMonth(date)
+  const firstDayWeekIndex = firstDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()]
+  const lastDayWeekIndex = lastDayOfMonth.getDay() - firstDay[locale.slice(-2).toUpperCase()]
+
+  for (let i = 0; i < firstDayWeekIndex; i++) {
+    const adjacentDay = new Date(firstDayOfMonth)
+    adjacentDay.setDate(adjacentDay.getDate() - (firstDayWeekIndex - i))
+    currentWeek.push(adjacentDay)
+  }
+
+  for (let i = 1; i <= lastDayOfMonth.getDate(); i++) {
+    const day = new Date(date.getFullYear(), date.getMonth(), i)
+
+    // Add the day to the current week
+    currentWeek.push(day)
+
+    // If the current week has 7 days, add it to the weeks array and start a new week
+    if (currentWeek.length === 7) {
+      weeks.push(currentWeek)
+      currentWeek = []
+    }
+  }
+
+  for (let i = 1; i < 7 - lastDayWeekIndex; i++) {
+    const adjacentDay = new Date(lastDayOfMonth)
+    adjacentDay.setDate(adjacentDay.getDate() + i)
+    currentWeek.push(adjacentDay)
+  }
+
+  weeks.push(currentWeek)
+
+  return weeks
+}
+
+function startOfMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth(), 1)
+}
+
+function endOfMonth (date: Date) {
+  return new Date(date.getFullYear(), date.getMonth() + 1, 0)
+}
+
+function toDate (value?: any): Date {
+  if (value == null) return new Date()
+
+  if (value instanceof Date) return value
+
+  if (typeof value === 'string') {
+    const parsed = Date.parse(value)
+
+    if (!isNaN(parsed)) return new Date(parsed)
+  }
+
+  return new Date(NaN)
+}
+
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
-function getWeekdays (locale: string) {
+function getWeekdays (options: { weekday: 'long' | 'short' }, locale: string) {
   const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
 
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
-    return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(weekday)
+    return new Intl.DateTimeFormat(locale, options).format(weekday)
   })
 }
 
@@ -242,11 +248,18 @@ function format (value: Date, formatString: string, locale: string): string {
     case 'monthAndYear':
       options = { month: 'long', year: 'numeric' }
       break
+    case 'dayOfMonth':
+      options = { day: 'numeric' }
+      break
     default:
       options = { timeZone: 'UTC', timeZoneName: 'short' }
   }
 
   return new Intl.DateTimeFormat(locale, options).format(date)
+}
+
+function parse (value: string, formatString: string, locale: string) {
+  return format(toDate(value), formatString, locale)
 }
 
 function addDays (date: Date, amount: number) {
@@ -356,7 +369,11 @@ export default class VuetifyDateAdapter implements DateAdapter<Date> {
   constructor (private locale: string) {}
 
   date (value?: any) {
-    return date(value)
+    return toDate(value)
+  }
+
+  parse (value: string, format: string) {
+    return parse(value, format, this.locale)
   }
 
   addDays (date: Date, amount: number) {
@@ -367,8 +384,8 @@ export default class VuetifyDateAdapter implements DateAdapter<Date> {
     return addMonths(date, amount)
   }
 
-  getWeekArray (date: Date) {
-    return getWeekArray(date)
+  getWeekArray (date: Date, includeAdjacentMonths?: boolean) {
+    return getWeekArray(date, this.locale, includeAdjacentMonths)
   }
 
   startOfMonth (date: Date) {
@@ -395,6 +412,10 @@ export default class VuetifyDateAdapter implements DateAdapter<Date> {
     return isWithinRange(date, range)
   }
 
+  isBefore (date: Date, comparing: Date) {
+    return isBefore(date, comparing)
+  }
+
   isAfter (date: Date, comparing: Date) {
     return isAfter(date, comparing)
   }
@@ -419,8 +440,8 @@ export default class VuetifyDateAdapter implements DateAdapter<Date> {
     return getWeek(date)
   }
 
-  getWeekdays () {
-    return getWeekdays(this.locale)
+  getWeekdays (options: { weekday: 'long' | 'short' } = { weekday: 'short' }) {
+    return getWeekdays(options, this.locale)
   }
 
   getYear (date: Date) {

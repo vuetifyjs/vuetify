@@ -31,7 +31,7 @@ export const makeDateProps = propsFactory({
   },
 }, 'date')
 
-export function useDate (props: DateProps) {
+export function useDate () {
   const date = inject(DateAdapterSymbol)
   const locale = useLocale()
 

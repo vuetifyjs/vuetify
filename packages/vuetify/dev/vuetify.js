@@ -11,10 +11,11 @@ export default createVuetify({
   directives,
   ssr: !!process.env.VITE_SSR,
   locale: {
+    locale: 'sv-SE',
     messages: {
-      en,
+      'en-US': en,
       ar,
-      sv,
+      'sv-SE': sv,
       ja,
     },
   },

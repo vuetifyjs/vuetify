@@ -49,7 +49,7 @@ type DateFieldProps = {
 }
 
 export function createDateField (props: DateFieldProps, isRange: boolean) {
-  const { adapter } = useDate()
+  const adapter = useDate()
   const pub = useProxiedModel(
     props,
     'modelValue',
@@ -80,7 +80,7 @@ export function createDateField (props: DateFieldProps, isRange: boolean) {
   const displayDate = useProxiedModel(props, 'displayDate', model.value.length ? model.value[0] : adapter.value.date())
 
   function parseKeyboardDate (input: string, fallback?: any) {
-    const date = adapter.value.parse(input, adapter.value.formats.keyboardDate)
+    const date = adapter.value.date(input)
 
     return adapter.value.isValid(date) ? date : fallback
   }
