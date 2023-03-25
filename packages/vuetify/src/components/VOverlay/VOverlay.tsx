@@ -264,7 +264,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   rtlClasses.value,
                 ]}
                 style={[
-                  props.style ?? {},
+                  props.style,
                   stackStyles.value,
                   { top: convertToUnit(top.value) },
                 ]}

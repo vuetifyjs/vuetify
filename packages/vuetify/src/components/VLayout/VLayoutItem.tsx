@@ -47,7 +47,7 @@ export const VLayoutItem = genericComponent()({
           props.class,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           layoutItemStyles.value,
         ]}
       >

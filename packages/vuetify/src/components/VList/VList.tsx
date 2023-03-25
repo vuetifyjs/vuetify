@@ -242,7 +242,7 @@ export const VList = genericComponent<new <T>() => {
             roundedClasses.value,
           ]}
           style={[
-            props.style ?? {},
+            props.style,
             backgroundColorStyles.value,
             dimensionStyles.value,
           ]}

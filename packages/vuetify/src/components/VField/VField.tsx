@@ -235,7 +235,7 @@ export const VField = genericComponent<new <T>() => {
             loaderClasses.value,
           ]}
           style={[
-            props.style ?? {},
+            props.style,
             backgroundColorStyles.value,
             textColorStyles.value,
           ]}

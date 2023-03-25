@@ -133,7 +133,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
             },
           ]}
           style={[
-            props.style ?? {},
+            props.style,
             {
               '--v-slider-thumb-position': positionPercentage,
               '--v-slider-thumb-size': convertToUnit(thumbSize.value),

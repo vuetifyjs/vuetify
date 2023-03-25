@@ -298,7 +298,7 @@ export const VImg = genericComponent<VImgSlots>()({
           { 'v-img--booting': !isBooted.value },
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
         ]}
         aspectRatio={ aspectRatio.value }

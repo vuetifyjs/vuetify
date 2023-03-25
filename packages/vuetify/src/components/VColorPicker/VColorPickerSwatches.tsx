@@ -63,7 +63,7 @@ export const VColorPickerSwatches = defineComponent({
           props.class,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           { maxHeight: convertToUnit(props.maxHeight) },
         ]}
       >

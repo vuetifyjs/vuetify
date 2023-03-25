@@ -114,7 +114,7 @@ export const VTimeline = genericComponent()({
           sideClasses.value,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           {
             '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
           },

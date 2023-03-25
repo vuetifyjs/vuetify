@@ -70,7 +70,7 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           },
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           {
             '--v-timeline-dot-size': convertToUnit(dotSize.value),
             '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),

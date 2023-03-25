@@ -72,7 +72,7 @@ export const VFooter = genericComponent()({
           roundedClasses.value,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}

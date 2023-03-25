@@ -42,7 +42,7 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
     const { dimensionStyles } = useDimension(props)
 
     useRender(() => (
-      <div class={['v-responsive', props.class]} style={[props.style ?? {}, dimensionStyles.value]}>
+      <div class={['v-responsive', props.class]} style={[props.style, dimensionStyles.value]}>
         <div class="v-responsive__sizer" style={ aspectStyles.value } />
 
         { slots.additional?.() }

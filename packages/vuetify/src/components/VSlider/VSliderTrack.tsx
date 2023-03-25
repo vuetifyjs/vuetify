@@ -127,7 +127,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             roundedClasses.value,
           ]}
           style={[
-            props.style ?? {},
+            props.style,
             {
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),

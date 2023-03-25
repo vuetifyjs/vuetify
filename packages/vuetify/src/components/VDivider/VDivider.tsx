@@ -57,7 +57,7 @@ export const VDivider = genericComponent()({
           textColorClasses.value,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           dividerStyles.value,
           textColorStyles.value,
         ]}

@@ -81,7 +81,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
           backgroundColorClasses.value,
         ]}
         style={[
-          props.style ?? {},
+          props.style,
           backgroundColorStyles.value,
         ]}
         type="button"
