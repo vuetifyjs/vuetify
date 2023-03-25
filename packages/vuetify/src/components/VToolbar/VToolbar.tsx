@@ -213,6 +213,9 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
 
 export type VToolbar = InstanceType<typeof VToolbar>
 
-export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
-  return pick(props, Object.keys(VToolbar?.props ?? {}) as any).filter(k => k !== 'style')
+type VToobarProps = ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>
+
+export function filterToolbarProps (props: VToobarProps) {
+  const keys = Object.keys(VToolbar?.props ?? {}).filter(k => k !== 'style')
+  return pick<VToobarProps, any>(props, keys)
 }
