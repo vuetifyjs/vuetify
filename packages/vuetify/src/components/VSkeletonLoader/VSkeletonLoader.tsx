@@ -3,14 +3,17 @@
 import './VSkeletonLoader.sass'
 
 // Composables
-
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeThemeProps, useTheme } from '@/composables/theme'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { computed, h, toRef } from 'vue'
 import { genericComponent } from '@/util'
-import type { PropType } from 'vue'
-import { computed, h } from 'vue'
+
+// Types
+import type { PropType, VNode } from 'vue'
 
 export const rootTypes = {
   actions: 'button@2',
@@ -43,9 +46,9 @@ export const rootTypes = {
   'table-cell': 'text',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
-} as const
+} as Record<string, string>
 
-function genBone (text: string, children: string[] = []) {
+function genBone (text: string, children: VNode[] = []) {
   return h('div', {
     class: [
       'v-skeleton-loader__bone',
@@ -57,16 +60,18 @@ function genBone (text: string, children: string[] = []) {
 function genBones (bone: string) {
   // e.g. 'text@3'
   const [type, length] = bone.split('@') as [string, number]
-  const generator = () => genStructure(type)
 
   // Generate a length array based upon
   // value after @ in the bone string
-  return Array.from({ length }).map(generator)
+  return Array.from({ length }).map(() => genStructure(type))
 }
 
-function genStructure (type: any) {
-  let children = []
-  const bone = rootTypes[type] || ''
+function genStructure (type?: string): any {
+  let children: VNode[] = []
+
+  if (!type) return children
+
+  const bone = type in rootTypes ? rootTypes[type] : 'card'
 
   // End of recursion, do nothing
   /* eslint-disable-next-line no-empty, brace-style */
@@ -85,7 +90,7 @@ function genStructure (type: any) {
   return [genBone(type, children)]
 }
 
-function mapBones (bones: string) {
+function mapBones (bones: string): VNode[] {
   // Remove spaces and return array of structures
   return bones.replace(/\s/g, '').split(',').map(genStructure)
 }
@@ -95,26 +100,39 @@ export const VSkeletonLoader = genericComponent()({
 
   props: {
     boilerplate: Boolean,
+    color: String,
     loading: Boolean,
-    type: {
-      type: [String, Array] as PropType<string | string[]>,
-      default: 'card',
-    },
+    type: [String, Array] as PropType<string | string[]>,
 
+    ...makeDimensionProps(),
     ...makeElevationProps(),
     ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
+    const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { themeClasses } = useTheme()
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
+    const { themeClasses } = provideTheme(props)
 
     const items = computed(() => {
       return genStructure(props.type as any)
     })
 
     return () => h('div', {
-      class: ['v-skeleton-loader', themeClasses.value, elevationClasses.value],
+      class: [
+        'v-skeleton-loader',
+        {
+          'v-skeleton-loader--boilerplate': props.boilerplate,
+        },
+        themeClasses.value,
+        elevationClasses.value,
+        backgroundColorClasses.value,
+      ],
+      style: [
+        dimensionStyles.value,
+        backgroundColorStyles.value,
+      ],
     }, [items.value, slots.default?.()])
   },
 })
