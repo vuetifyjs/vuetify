@@ -1,9 +1,10 @@
 ---
-disabled: true
+emphasized: true
+nav: Skeleton loaders
 meta:
   title: Skeleton loader component
-  description: The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.
-  keywords: skeleton-loader, material loader, bar loader
+  description:  The skeleton loader component provides a placeholder loading state for when content is being fetched from a server or loaded asynchronously. It can be used in a variety of contexts, including cards, lists, and tables.
+  keywords: skeleton loaders, vuetify skeleton loader component, vue skeleton loader
 related:
   - /components/cards/
   - /components/progress-circular/
@@ -12,7 +13,7 @@ related:
 
 # Skeleton loaders
 
-The `v-skeleton-loader` component is a versatile tool that can fill many roles within a project.  At its heart, the component provides an indication to the user that something is coming but not yet available. There are over 30 pre-defined options available that can be combined to make custom examples.
+Skeleton loaders provide a simple way to display loading placeholders in your application.
 
 <entry />
 
@@ -20,7 +21,7 @@ The `v-skeleton-loader` component is a versatile tool that can fill many roles w
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.
 
-<example file="v-skeleton-loader/usage" />
+<usage name="v-skeleton-loader" />
 
 ## API
 
@@ -36,11 +37,11 @@ The `v-skeleton-loader` can be used as boilerplate designs when creating mockups
 
 <example file="v-skeleton-loader/misc-boilerplate" />
 
-<!-- #### Implementation methods
+#### Implementation methods
 
 There are 2 ways that you can utilize the `v-skeleton-component`. The **default slot** or a **v-if** conditional. The built in slot is the most convenient and easiest to use, but generates an extra div once rendered. If the extra div is an issue in your setup, you can utilize a **v-if** conditional with a Vuetify [transition component](/styles/transitions) or a custom one.
 
-<example file="v-skeleton-loader/misc-implementation" /> -->
+<example file="v-skeleton-loader/misc-implementation" />
 
 ## Accessibility
 

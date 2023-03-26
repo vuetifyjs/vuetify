@@ -1,5 +1,5 @@
 <template>
-  <v-container class="bg-grey">
+  <v-container>
     <div class="text-center d-flex justify-center align-center mb-12 flex-wrap">
       <v-btn
         class="mx-12 my-4"
@@ -10,9 +10,9 @@
 
       <v-select
         v-model="transition"
-        label="Transition"
-        hide-details
         :items="transitions"
+        hide-details
+        label="Transition"
         style="max-width: 200px;"
       ></v-select>
     </div>
@@ -35,13 +35,14 @@
         <v-skeleton-loader
           :loading="loading"
           :transition="transition"
-          height="94"
           type="list-item-two-line"
         >
-          <v-card>
-            <v-card-title>Title</v-card-title>
-            <v-card-text>Card Text</v-card-text>
-          </v-card>
+          <v-list-item
+            title="Title"
+            subtitle="Subtitle"
+            lines="two"
+            rounded
+          ></v-list-item>
         </v-skeleton-loader>
       </v-col>
 
@@ -64,17 +65,16 @@
         >
           <v-skeleton-loader
             v-if="loading"
-            height="94"
             type="list-item-two-line"
-          >
-          </v-skeleton-loader>
+          ></v-skeleton-loader>
 
-          <v-card
+          <v-list-item
             v-else
-          >
-            <v-card-title>Title</v-card-title>
-            <v-card-text>Card Text</v-card-text>
-          </v-card>
+            title="Title"
+            subtitle="Subtitle"
+            lines="two"
+            rounded
+          ></v-list-item>
         </component>
       </v-col>
     </v-row>
@@ -85,18 +85,18 @@
   export default {
     data: () => ({
       loading: true,
-      transition: 'scale-transition',
+      transition: 'fade-transition',
       transitions: [
         {
-          text: 'None',
+          title: 'None',
           value: undefined,
         },
         {
-          text: 'Fade Transition',
+          title: 'Fade Transition',
           value: 'fade-transition',
         },
         {
-          text: 'Scale Transition',
+          title: 'Scale Transition',
           value: 'scale-transition',
         },
       ],

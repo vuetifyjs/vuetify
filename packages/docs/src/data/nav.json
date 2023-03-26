@@ -203,6 +203,7 @@
           "server-side-tables"
         ]
       },
+      "skeleton-loaders",
       "virtual-scroller"
     ]
   },

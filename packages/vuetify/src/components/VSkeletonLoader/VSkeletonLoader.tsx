@@ -1,4 +1,3 @@
-
 // Styles
 import './VSkeletonLoader.sass'
 
@@ -10,7 +9,7 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, h, toRef } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -102,7 +101,10 @@ export const VSkeletonLoader = genericComponent()({
     boilerplate: Boolean,
     color: String,
     loading: Boolean,
-    type: [String, Array] as PropType<string | string[]>,
+    type: {
+      type: [String, Array] as PropType<string | string[]>,
+      default: 'image',
+    },
 
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -119,20 +121,28 @@ export const VSkeletonLoader = genericComponent()({
       return genStructure(props.type as any)
     })
 
-    return () => h('div', {
-      class: [
-        'v-skeleton-loader',
-        {
-          'v-skeleton-loader--boilerplate': props.boilerplate,
-        },
-        themeClasses.value,
-        elevationClasses.value,
-        backgroundColorClasses.value,
-      ],
-      style: [
-        dimensionStyles.value,
-        backgroundColorStyles.value,
-      ],
-    }, [items.value, slots.default?.()])
+    useRender(() => {
+      const isLoading = !slots.default || props.loading
+
+      return h('div', {
+        class: [
+          'v-skeleton-loader',
+          {
+            'v-skeleton-loader--boilerplate': props.boilerplate,
+          },
+          themeClasses.value,
+          backgroundColorClasses.value,
+          elevationClasses.value,
+        ],
+        style: [
+          backgroundColorStyles.value,
+          isLoading ? dimensionStyles.value : undefined,
+        ],
+      }, [
+        isLoading ? items.value : slots.default?.(),
+      ])
+    })
+
+    return {}
   },
 })
