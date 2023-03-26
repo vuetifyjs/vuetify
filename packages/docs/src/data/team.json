@@ -112,5 +112,23 @@
     "location": "USA",
     "name": "Elijah Kotyluk",
     "team": "core"
+  },
+  "santiagoaloi": {
+    "discord": "lannister#9474",
+    "focus": [
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/santiagoaloi/)"
+    ],
+    "languages": [
+      "Swedish",
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "santiagoaloi",
+    "location": "Stockholm, Sweden",
+    "name": "Santiago Aloi",
+    "team": "core"
   }
 }
