@@ -311,7 +311,9 @@
     border-radius: $skeleton-loader-text-border-radius
     flex: 1 0 auto
     height: $skeleton-loader-text-height
-    margin-bottom: 6px
+
+    &:not(:last-child)
+      margin-bottom: 6px
 
   &--boilerplate
     .v-skeleton-loader__bone:after
