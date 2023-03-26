@@ -1,23 +1,32 @@
-@import './_variables.scss'
+@use '../../styles/tools'
+@use './variables' as *
 
 // Transition
 .bottom-sheet-transition
-  &-enter
+  &-enter-from
     transform: translateY(100%)
 
   &-leave-to
     transform: translateY(100%)
 
 // Block
-.v-bottom-sheet.v-dialog
-  align-self: flex-end
-  border-radius: 0
-  flex: 0 1 auto
-  margin: 0
-  overflow: visible
+.v-bottom-sheet
+  > .v-bottom-sheet__content.v-overlay__content
+    align-self: flex-end
+    border-radius: 0
+    flex: 0 1 auto
+    left: 0
+    right: 0
+    margin-inline-start: 0
+    margin-inline-end: 0
+    margin-bottom: 0
+    transition-duration: .3s
+    width: 100%
+    max-width: 100%
+    overflow: visible
 
   &.v-bottom-sheet--inset
     max-width: none
 
-    @media #{map-get($display-breakpoints, 'sm-and-up')}
-      max-width: $bottom-sheet-inset-width
+    // @media #{map-get(variables.$display-breakpoints, 'sm-and-up')}
+    //   max-width: $bottom-sheet-inset-width

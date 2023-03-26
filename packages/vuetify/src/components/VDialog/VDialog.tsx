@@ -13,30 +13,32 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, IN_BROWSER, useRender } from '@/util'
+import { genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
+export const makeVDialogProps = propsFactory({
+  fullscreen: Boolean,
+  retainFocus: {
+    type: Boolean,
+    default: true,
+  },
+  scrollable: Boolean,
+
+  ...makeVOverlayProps({
+    origin: 'center center' as const,
+    scrollStrategy: 'block' as const,
+    transition: { component: VDialogTransition },
+    zIndex: 2400,
+  }),
+}, 'VDialog')
+
 export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',
 
-  props: {
-    fullscreen: Boolean,
-    retainFocus: {
-      type: Boolean,
-      default: true,
-    },
-    scrollable: Boolean,
-
-    ...makeVOverlayProps({
-      origin: 'center center' as const,
-      scrollStrategy: 'block' as const,
-      transition: { component: VDialogTransition },
-      zIndex: 2400,
-    }),
-  },
+  props: makeVDialogProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
