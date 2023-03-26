@@ -1,5 +1,9 @@
 <template>
-  <v-col cols="4">
+  <v-col
+    cols="12"
+    md="6"
+    lg="4"
+  >
     <v-card
       :image="image"
       :to="rpath(`/components/${src}/`)"
