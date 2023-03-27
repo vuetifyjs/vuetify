@@ -30,7 +30,7 @@ import { useSelectLink } from '@/composables/selectLink'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
@@ -43,50 +43,50 @@ export type VBtnSlots = MakeSlots<{
   loader: []
 }>
 
-export const makeVBtnProps = propsFactory({
-  active: {
-    type: Boolean,
-    default: undefined,
-  },
-  symbol: {
-    type: null,
-    default: VBtnToggleSymbol,
-  },
-  flat: Boolean,
-  icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-  prependIcon: IconValue,
-  appendIcon: IconValue,
-
-  block: Boolean,
-  stacked: Boolean,
-
-  ripple: {
-    type: Boolean,
-    default: true,
-  },
-
-  ...makeBorderProps(),
-  ...makeRoundedProps(),
-  ...makeDensityProps(),
-  ...makeDimensionProps(),
-  ...makeElevationProps(),
-  ...makeGroupItemProps(),
-  ...makeLoaderProps(),
-  ...makeLocationProps(),
-  ...makePositionProps(),
-  ...makeRouterProps(),
-  ...makeSizeProps(),
-  ...makeTagProps({ tag: 'button' }),
-  ...makeThemeProps(),
-  ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'VBtn')
-
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
 
   directives: { Ripple },
 
-  props: makeVBtnProps(),
+  props: {
+    active: {
+      type: Boolean,
+      default: undefined,
+    },
+    symbol: {
+      type: null,
+      default: VBtnToggleSymbol,
+    },
+    flat: Boolean,
+    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
+    prependIcon: IconValue,
+    appendIcon: IconValue,
+
+    block: Boolean,
+    stacked: Boolean,
+
+    ripple: {
+      type: Boolean,
+      default: true,
+    },
+
+    text: String,
+
+    ...makeBorderProps(),
+    ...makeRoundedProps(),
+    ...makeDensityProps(),
+    ...makeDimensionProps(),
+    ...makeElevationProps(),
+    ...makeGroupItemProps(),
+    ...makeLoaderProps(),
+    ...makeLocationProps(),
+    ...makePositionProps(),
+    ...makeRouterProps(),
+    ...makeSizeProps(),
+    ...makeTagProps({ tag: 'button' }),
+    ...makeThemeProps(),
+    ...makeVariantProps({ variant: 'elevated' } as const),
+  },
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
@@ -192,67 +192,50 @@ export const VBtn = genericComponent<VBtnSlots>()({
           { genOverlays(true, 'v-btn') }
 
           { !props.icon && hasPrepend && (
-            <span key="prepend" class="v-btn__prepend">
-              { !slots.prepend ? (
-                <VIcon
-                  key="prepend-icon"
-                  icon={ props.prependIcon }
-                />
-              ) : (
-                <VDefaultsProvider
-                  key="prepend-defaults"
-                  disabled={ !props.prependIcon }
-                  defaults={{
-                    VIcon: {
-                      icon: props.prependIcon,
-                    },
-                  }}
-                  v-slots:default={ slots.prepend }
-                />
-              )}
-            </span>
+            <VDefaultsProvider
+              key="prepend"
+              defaults={{
+                VIcon: {
+                  icon: props.prependIcon,
+                },
+              }}
+            >
+              <span class="v-btn__prepend">
+                { slots.prepend?.() ?? (<VIcon />) }
+              </span>
+            </VDefaultsProvider>
           )}
 
           <span class="v-btn__content" data-no-activator="">
-            { (!slots.default && hasIcon) ? (
-              <VIcon
-                key="content-icon"
-                icon={ props.icon }
-              />
-            ) : (
-              <VDefaultsProvider
-                key="content-defaults"
-                disabled={ !hasIcon }
-                defaults={{
-                  VIcon: {
-                    icon: props.icon,
-                  },
-                }}
-                v-slots:default={ slots.default }
-              />
-            )}
+            <VDefaultsProvider
+              key="content"
+              defaults={{
+                VIcon: {
+                  icon: hasIcon ? props.icon : undefined,
+                },
+              }}
+            >
+              { slots.default?.() ?? (
+                hasIcon
+                  ? (<VIcon key="icon" />)
+                  : props.text
+              )}
+            </VDefaultsProvider>
           </span>
 
           { !props.icon && hasAppend && (
-            <span key="append" class="v-btn__append">
-              { !slots.append ? (
-                <VIcon
-                  key="append-icon"
-                  icon={ props.appendIcon }
-                />
-              ) : (
-                <VDefaultsProvider
-                  key="append-defaults"
-                  disabled={ !props.appendIcon }
-                  defaults={{
-                    VIcon: {
-                      icon: props.appendIcon,
-                    },
-                  }}
-                  v-slots:default={ slots.append }
-                />
-              )}
-            </span>
+            <VDefaultsProvider
+              key="append"
+              defaults={{
+                VIcon: {
+                  icon: props.appendIcon,
+                },
+              }}
+            >
+              <span class="v-btn__append">
+                { slots.append?.() ?? (<VIcon />) }
+              </span>
+            </VDefaultsProvider>
           )}
 
           { !!props.loading && (
