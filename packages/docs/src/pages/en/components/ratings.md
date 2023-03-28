@@ -24,8 +24,8 @@ The `v-rating` component provides a simple interface for gathering user feedback
 
 ## API
 
-| Component                  | Description       |
-| -------------------------- | ----------------- |
+| Component | Description |
+| - | - |
 | [v-rating](/api/v-rating/) | Primary Component |
 
 <api-inline hide-links />
