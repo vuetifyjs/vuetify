@@ -48,7 +48,7 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       // Check each ref's own properties
       for (const ref of refs) {
         if (!ref.value) continue
-        const descriptor = getDescriptor(ref.value, key) ?? getDescriptor(ref.value._?.setupState, key)
+        const descriptor = getDescriptor(ref.value, key) ?? ('_' in ref.value ? getDescriptor(ref.value._?.setupState, key) : undefined)
         if (descriptor) return descriptor
       }
 
