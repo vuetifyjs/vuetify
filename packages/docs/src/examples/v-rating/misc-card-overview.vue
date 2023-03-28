@@ -53,7 +53,6 @@
 </template>
 
 <style>
-
 .rating-values {
    width: 25px;
 }
