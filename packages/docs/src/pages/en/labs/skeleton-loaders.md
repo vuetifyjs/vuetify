@@ -15,7 +15,7 @@ related:
 
 Skeleton loaders provide a simple way to display loading placeholders in your application.
 
-<entry />
+----
 
 ## Usage
 
@@ -23,9 +23,25 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 <usage name="v-skeleton-loader" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
+
+<api-inline hide-links />
+
+## Anatomy
+
+Skeleton loaders are used as placeholders for content that is being loaded. They are typically used in a variety of contexts, including cards, lists, and tables.
+
+![Skeleton loader Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The container is the root element of the component. |
 
 ## Examples
 
