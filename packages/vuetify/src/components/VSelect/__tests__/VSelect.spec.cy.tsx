@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'

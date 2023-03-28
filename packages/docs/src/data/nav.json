@@ -212,7 +212,8 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "ui-kits"
+      "ui-kits",
+      "themes"
     ]
   },
   {

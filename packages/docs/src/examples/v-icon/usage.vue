@@ -45,7 +45,7 @@
   ]
   const icons = [
     'mdi-plus',
-    'mdi-success',
+    'mdi-check-circle',
     'mdi-information',
     'mdi-alert',
     'mdi-alert-circle',

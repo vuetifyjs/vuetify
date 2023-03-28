@@ -119,6 +119,7 @@ export const VCombobox = genericComponent<new <
       },
     })
     const selectionIndex = ref(-1)
+    let cleared = false
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -156,12 +157,19 @@ export const VCombobox = genericComponent<new <
         }
 
         if (!val) selectionIndex.value = -1
-        if (isFocused.value) menu.value = true
 
         isPristine.value = !val
       },
     })
     watch(_search, value => {
+      if (cleared) {
+        // wait for clear to finish, VTextField sets _search to null
+        // then search computed triggers and updates _search to ''
+        nextTick(() => (cleared = false))
+      } else if (isFocused.value && !menu.value) {
+        menu.value = true
+      }
+
       emit('update:search', value)
     })
     watch(model, value => {
@@ -190,6 +198,8 @@ export const VCombobox = genericComponent<new <
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
+      cleared = true
+
       if (props.openOnClear) {
         menu.value = true
       }
@@ -399,13 +409,12 @@ export const VCombobox = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map((item, index) => slots.item?.({
+                      { displayItems.value.map(item => slots.item?.({
                         item,
-                        index,
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem
-                          key={ index }
+                          key={ item.value }
                           { ...item.props }
                           onClick={ () => select(item) }
                         >

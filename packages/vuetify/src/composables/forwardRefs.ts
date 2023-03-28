@@ -8,6 +8,16 @@ type OmitPrefix<T, P extends string> = [Extract<keyof T, `${P}${any}`>] extends 
 
 type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : never
 
+function getDescriptor (obj: any, key: PropertyKey) {
+  let currentObj = obj
+  while (currentObj) {
+    const descriptor = Reflect.getOwnPropertyDescriptor(currentObj, key)
+    if (descriptor) return descriptor
+    currentObj = Object.getPrototypeOf(currentObj)
+  }
+  return undefined
+}
+
 export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit'> | undefined>[]> (
   target: T,
   ...refs: U
@@ -38,35 +48,24 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       // Check each ref's own properties
       for (const ref of refs) {
         if (!ref.value) continue
-        const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
+        const descriptor = getDescriptor(ref.value, key) ?? ('_' in ref.value ? getDescriptor(ref.value._?.setupState, key) : undefined)
         if (descriptor) return descriptor
-        if ('_' in ref.value && 'setupState' in ref.value._) {
-          const descriptor = Reflect.getOwnPropertyDescriptor(ref.value._.setupState, key)
-          if (descriptor) return descriptor
-        }
       }
+
       // Recursive search up each ref's prototype
-      for (const ref of refs) {
-        let obj = ref.value && Object.getPrototypeOf(ref.value)
-        while (obj) {
-          const descriptor = Reflect.getOwnPropertyDescriptor(obj, key)
-          if (descriptor) return descriptor
-          obj = Object.getPrototypeOf(obj)
-        }
-      }
-      // Call forwarded refs' proxies
       for (const ref of refs) {
         const childRefs = ref.value && (ref.value as any)[Refs]
         if (!childRefs) continue
         const queue = childRefs.slice()
         while (queue.length) {
           const ref = queue.shift()
-          const descriptor = Reflect.getOwnPropertyDescriptor(ref.value, key)
+          const descriptor = getDescriptor(ref.value, key)
           if (descriptor) return descriptor
           const childRefs = ref.value && (ref.value as any)[Refs]
           if (childRefs) queue.push(...childRefs)
         }
       }
+
       return undefined
     },
   }) as any
