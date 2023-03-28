@@ -1,4 +1,1 @@
-import VBottomNavigation from './VBottomNavigation'
-
-export { VBottomNavigation }
-export default VBottomNavigation
+export { VBottomNavigation } from './VBottomNavigation'

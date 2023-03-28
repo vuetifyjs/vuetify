@@ -4,6 +4,7 @@
       v-for="(item,i) in items"
       :key="i"
       :src="item.src"
+      cover
       reverse-transition="fade-transition"
       transition="fade-transition"
     ></v-carousel-item>

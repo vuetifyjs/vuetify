@@ -39,9 +39,9 @@
         sm="6"
       >
         <v-textarea
-          append-outer-icon="mdi-comment"
+          append-inner-icon="mdi-comment"
           class="mx-2"
-          label="append-outer-icon"
+          label="append-inner-icon"
           rows="1"
         ></v-textarea>
       </v-col>

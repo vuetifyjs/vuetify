@@ -1,11 +1,4 @@
 {
   "extends": "./tsconfig.json",
-  "compilerOptions": {
-    "target": "es2018",
-    "module": "ESNext",
-    "outDir": "./lib-temp",
-    "sourceMap": false,
-    "inlineSourceMap": true,
-    "inlineSources": true
-  }
+  "exclude": ["dev", "**/*.spec.*", "cypress"]
 }

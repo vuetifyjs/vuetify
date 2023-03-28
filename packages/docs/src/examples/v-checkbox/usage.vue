@@ -1,21 +1,35 @@
 <template>
-  <v-container
-    class="px-0"
-    fluid
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-checkbox
-      v-model="checkbox"
-      :label="`Checkbox 1: ${checkbox.toString()}`"
-    ></v-checkbox>
-  </v-container>
+    <div>
+      <v-checkbox v-bind="props"></v-checkbox>
+    </div>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    data () {
-      return {
-        checkbox: true,
-      }
-    },
-  }
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-checkbox'
+  const model = ref('default')
+  const options = []
+  const props = computed(() => {
+    return {
+      label: 'Checkbox',
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

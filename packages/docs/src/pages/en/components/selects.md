@@ -1,4 +1,5 @@
 ---
+nav: Selects
 meta:
   title: Select component
   description: The select component provides a list of options that a user can make selections from.
@@ -13,17 +14,19 @@ related:
 
 Select fields components are used for collecting user provided information from a list of options.
 
-<entry-ad />
-
 ## Usage
 
-<example file="v-select/usage" />
+<usage name="v-select" />
+
+<entry />
 
 ## API
 
-- [v-select](/api/v-select)
+| Component | Description |
+| - | - |
+| [v-select](/api/v-select/) | The select component. |
 
-<inline-api page="components/selects" />
+<api-inline hide-links />
 
 ## Caveats
 
@@ -41,7 +44,7 @@ Select fields components are used for collecting user provided information from 
 
 <alert type="error">
 
-  When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **text** and **value** and can be changed.
+  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 
 </alert>
 
@@ -49,15 +52,15 @@ Select fields components are used for collecting user provided information from 
 
 ### Props
 
-#### Custom text and value
+#### Custom title and value
 
-You can specify the specific properties within your items array correspond to the text and value fields. By default, this is **text** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
+You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
 
-<example file="v-select/prop-custom-text-and-value" />
+<example file="v-select/prop-custom-title-and-value" />
 
-#### Dense
+#### Density
 
-You can use **dense** prop to reduce the field height and lower max height of list items.
+You can use **density** prop to reduce the field height and lower max height of list items.
 
 <example file="v-select/prop-dense" />
 
@@ -73,29 +76,29 @@ Use a custom prepended or appended icon.
 
 <example file="v-select/prop-icons" />
 
-#### Light
-
-A standard single select has a multitude of configuration options.
-
-<example file="v-select/prop-light" />
-
-#### Menu props
+<!-- #### Menu props
 
 Custom props can be passed directly to `v-menu` using **menuProps** prop. In this example menu is force directed to top and shifted to top.
 
-<example file="v-select/prop-menu-props" />
+<example file="v-select/prop-menu-props" /> -->
 
 #### Multiple
 
-A multi-select can utilize `v-chip` as the display for selected items.
+The **multiple** prop allows for multiple selections.
 
 <example file="v-select/prop-multiple" />
 
-#### Readonly
+#### Chips
 
-You can use the **read-only** prop on `v-select` which will prevent a user from changing its value.
+Display selected items as chips with the **chips** prop.
 
-<example file="v-select/prop-readonly" />
+<example file="v-select/prop-chips" />
+
+<!-- #### Readonly
+
+You can use the **readonly** prop on `v-select` which will prevent a user from changing its value.
+
+<example file="v-select/prop-readonly" /> -->
 
 ### Slots
 
@@ -107,8 +110,6 @@ The `v-select` components can be optionally expanded with prepended and appended
 
 #### Selection
 
-The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you want something like `foo (+20 others)` or don't want the selection to occupy multiple lines.
+The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <example file="v-select/slot-selection" />
-
-<backmatter />

@@ -1,131 +1,161 @@
-// Imports
-@import './_variables.scss'
+@use 'sass:math'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
-// Theme
-.v-btn:not(.v-btn--outlined)
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    color: map-deep-get($material-dark, 'text', 'primary')
-
-+theme(v-btn) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  &.v-btn--disabled
-    color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    .v-icon,
-    .v-btn__loading
-      color: map-deep-get($material, 'buttons', 'disabled') !important
-
-    &.v-btn--has-bg
-      background-color: map-deep-get($material, 'buttons', 'focused') !important
-
-  &.v-btn--has-bg
-    background-color: map-get($material, 'app-bar')
-
-  &.v-btn--outlined.v-btn--text
-    border-color: map-get($material, 'dividers')
-
-  &.v-btn--icon
-    color: map-deep-get($material, 'icons', 'active')
-
-  +states(map-deep-merge($material, $btn-states))
-
-// Block
 .v-btn
   align-items: center
-  border-radius: $btn-border-radius
-  display: inline-flex
-  flex: 0 0 auto
-  font-weight: $btn-font-weight
-  letter-spacing: $btn-letter-spacing
+  border-radius: $button-border-radius
+  display: inline-grid
+  grid-template-areas: "prepend content append"
+  grid-template-columns: max-content auto max-content
+  font-weight: $button-font-weight
   justify-content: center
-  outline: 0
+  letter-spacing: $button-text-letter-spacing
+  line-height: $button-line-height
+  max-width: $button-max-width
+  outline: none
   position: relative
   text-decoration: none
-  text-indent: $btn-letter-spacing
-  text-transform: $btn-text-transform
-  transition-duration: $btn-transition-duration
-  transition-property: box-shadow, transform, opacity
-  transition-timing-function: $btn-transition-fn
+  text-indent: $button-text-letter-spacing
+  text-transform: $button-text-transform
+  transition-property: $button-transition-property
+  transition-duration: 0.28s
+  transition-timing-function: settings.$standard-easing
   user-select: none
-  vertical-align: middle
-  white-space: nowrap
+  vertical-align: $button-vertical-align
+  flex-shrink: 0
 
-  @each $name, $size in $btn-font-sizes
-    &.v-size--#{$name}
-      font-size: $size
+  @at-root
+    @include button-sizes()
+    @include button-density('height', $button-density)
 
-  &:before
-    background-color: currentColor
-    border-radius: inherit
-    bottom: 0
-    color: inherit
-    content: ''
-    left: 0
-    opacity: 0
+  @include tools.border($button-border...)
+  @include tools.position($button-positions)
+  @include tools.states('.v-btn__overlay')
+  @include tools.variant($button-variants...)
+
+  @supports selector(:focus-visible)
+    &::after
+      @include tools.absolute(true)
+      pointer-events: none
+      border: 2px solid currentColor
+      border-radius: inherit
+      opacity: 0
+      transition: opacity .2s ease-in-out
+
+    &:focus-visible::after
+      opacity: calc(.25 * var(--v-theme-overlay-multiplier))
+
+  &--icon
+    border-radius: $button-icon-border-radius
+    min-width: 0
+    padding: 0
+
+    // ensure that default
+    // v-icon size is 24px
+    &.v-btn--size-default
+      font-size: $button-icon-font-size
+
+    @at-root &
+      @include button-density(('width', 'height'), $button-icon-density)
+
+  &--elevated
+    &:hover,
+    &:focus
+      +tools.elevation(map.get($button-elevation, 'hover'))
+
+    &:active
+      +tools.elevation(map.get($button-elevation, 'active'))
+
+  &--flat
+    box-shadow: none
+
+  &--block
+    display: flex
+    flex: 1 0 auto
+    min-width: 100%
+
+  &--disabled
     pointer-events: none
-    position: absolute
-    right: 0
-    top: 0
-    transition: $btn-transition
 
-  &:not(.v-btn--round)
-    @each $name, $size in $btn-sizes
-      &.v-size--#{$name}
-        height: #{$size}px
-        min-width: #{round($size * 1.777777777777778)}px // default ratio
-        padding: 0 #{$size / 2.25}px
+    @if ($button-colored-disabled)
+      opacity: $button-disabled-opacity
+    @else
+      opacity: 1
+      &.v-btn
+        // specificity has to be higher to override theme !important
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity) !important
 
-  > .v-btn__content .v-icon
-    color: inherit
+    &.v-btn--variant-elevated,
+    &.v-btn--variant-flat
+      box-shadow: none
 
-// Elements
-.v-btn__content
-  align-items: center
-  color: inherit
-  display: flex
-  // https://github.com/vuetifyjs/vuetify/issues/7580
-  flex: 1 0 auto
-  justify-content: inherit
-  line-height: normal
-  // Fixes bug where IE11 moves
-  // button content when clicked
-  // https://stackoverflow.com/questions/10305658/prevent-button-from-shifting-during-click-in-ie
-  position: relative
-  transition: inherit
-  transition-property: opacity
+      @if ($button-colored-disabled)
+        opacity: 1
+        color: rgba(var(--v-theme-on-surface), $button-disabled-opacity)
+        background: rgb(var(--v-theme-surface))
+      @else
+        background: rgb(var(--v-theme-surface)) !important
 
-  // Increased specificity to overwrite in VIcon.sass
-  // iconfont css interference
-  .v-icon.v-icon--left,
-  .v-icon.v-icon--right
-    font-size: $btn-icon-font-size
-    height: $btn-icon-font-size
-    width: $btn-icon-font-size
+      .v-btn__overlay
+        // __overlay uses currentColor, so we need to divide
+        // by the text opacity to get the correct value
+        opacity: math.div($button-disabled-overlay, $button-disabled-opacity)
 
-  .v-icon--left
-    +ltr()
-      margin-left: -4px
-      margin-right: 8px
+  &--loading
+    pointer-events: none
 
-    +rtl()
-      margin-left: 8px
-      margin-right: -4px
+    .v-btn__content,
+    .v-btn__prepend,
+    .v-btn__append
+      opacity: 0
 
-  .v-icon--right
-    +ltr()
-      margin-left: 8px
-      margin-right: -4px
+  &--stacked
+    grid-template-areas: "prepend" "content" "append"
+    grid-template-columns: auto
+    grid-template-rows: max-content max-content max-content
+    justify-items: center
+    align-content: center
 
-    +rtl()
-      margin-left: -4px
-      margin-right: 8px
+    .v-btn__content
+      flex-direction: column
+      line-height: $button-stacked-line-height
+
+    .v-btn__prepend,
+    .v-btn__append,
+    .v-btn__content > .v-icon--start,
+    .v-btn__content > .v-icon--end
+      margin-inline-start: 0
+      margin-inline-end: 0
+
+    .v-btn__prepend,
+    .v-btn__content > .v-icon--start
+      margin-bottom: $button-stacked-icon-margin
+
+    .v-btn__append,
+    .v-btn__content > .v-icon--end
+      margin-top: $button-stacked-icon-margin
+
+    @at-root
+      @include button-sizes($button-stacked-sizes, true)
+      @include button-density('height', $button-stacked-density)
+
+  &--rounded
+    @include tools.rounded($button-rounded-border-radius)
+
+  .v-icon
+    --v-icon-size-multiplier: #{calc(18/21)}
+
+  &--icon
+    .v-icon
+      --v-icon-size-multiplier: 1
+
+  &--stacked
+    .v-icon
+      --v-icon-size-multiplier: #{calc(24/21)}
 
 .v-btn__loader
   align-items: center
@@ -137,113 +167,76 @@
   top: 0
   width: 100%
 
-// Modifiers
-.v-btn--absolute,
-.v-btn--fixed
-  &.v-btn--right
-    right: map-get($grid-gutters, 'lg')
-
-  &.v-btn--left
-    left: map-get($grid-gutters, 'lg')
-
-  &.v-btn--top
-    top: map-get($grid-gutters, 'lg')
-
-  &.v-btn--bottom
-    bottom: map-get($grid-gutters, 'lg')
-
-.v-btn--absolute
-  position: absolute
-
-.v-btn--fixed
-  position: fixed
-
-.v-btn--block
+.v-btn__content,
+.v-btn__prepend,
+.v-btn__append
+  align-items: center
   display: flex
-  flex: 1 0 auto
-  min-width: 100% !important
-  max-width: none
+  transition: $button-content-transition
 
-.v-btn--is-elevated
-  +elevation(2)
+.v-btn__prepend
+  grid-area: prepend
+  margin-inline-start: $button-margin-start
+  margin-inline-end: $button-margin-end
 
-  &:after
-    +elevation(4)
+.v-btn__append
+  grid-area: append
+  margin-inline-start: $button-margin-end
+  margin-inline-end: $button-margin-start
 
-  &:active
-    +elevation(8)
+.v-btn__content
+  grid-area: content
+  justify-content: center
+  white-space: $button-white-space
 
-  &.v-btn--fab
-    +elevation(6)
+  > .v-icon--start
+    margin-inline-start: $button-margin-start
+    margin-inline-end: $button-margin-end
 
-    &:after
-      +elevation(8)
+  > .v-icon--end
+    margin-inline-start: $button-margin-end
+    margin-inline-end: $button-margin-start
 
-    &:active
-      +elevation(12)
+  .v-btn--stacked &
+    white-space: normal
 
-.v-btn--disabled
+.v-btn__overlay
+  background-color: currentColor
+  border-radius: inherit
+  opacity: 0
+  transition: opacity .2s ease-in-out
+
+.v-btn__overlay,
+.v-btn__underlay
+  @include tools.absolute()
   pointer-events: none
 
-.v-btn--icon,
-.v-btn--fab
-  min-height: 0
-  min-width: 0
-  padding: 0
+// VCard
+.v-btn
+  .v-card-actions &
+    padding: $button-card-actions-padding
 
-  @each $name, $size in $fab-icon-sizes
-    &.v-size--#{$name}
-      .v-icon
-        height: #{$size}px
-        font-size: #{$size}px
-        width: #{$size}px
+  ~ .v-btn
+    .v-card-actions &
+      margin-inline-start: $button-card-actions-margin
 
-.v-btn--icon
-  @each $name, $size in $btn-sizes
-    &.v-size--#{$name}
-      height: #{$size}px
-      width: #{$size}px
+// VBanner
+.v-btn
+  .v-banner-actions &
+    padding: $button-banner-actions-padding
 
-.v-btn--fab
-  &.v-btn--absolute,
-  &.v-btn--fixed
-    z-index: 4
+// VPagination
+.v-btn
+  .v-pagination &
+    @include tools.rounded($button-pagination-border-radius)
 
-  @each $name, $size in $fab-sizes
-    &.v-size--#{$name}
-      height: #{$size}px
-      width: #{$size}px
+  &__overlay
+    transition: none
 
-      &.v-btn--absolute
-        &.v-btn--bottom
-          bottom: -#{$size / 2}px
+    .v-pagination__item--is-active &
+      opacity: $button-pagination-active-overlay-opacity
 
-        &.v-btn--top
-          top: -#{$size / 2}px
-
-.v-btn--loading
-  pointer-events: none
-  transition: none
-
-  .v-btn__content
-    opacity: 0
-
-.v-btn--outlined
-  border: $btn-outline-border-width solid currentColor
-
-.v-btn--plain
-  &::before
-    display: none
-
-  &:not(.v-btn--active):not(.v-btn--loading):not(:focus):not(:hover)
-    .v-btn__content
-      opacity: .62
-
-.v-btn--round
-  +radius($btn-round-border-radius)
-
-.v-btn--rounded
-  +radius($btn-rounded-border-radius)
-
-.v-btn--tile
-  +radius($btn-tile-border-radius)
+// VSnackbar
+.v-btn
+  .v-snackbar-actions &
+    padding: $button-snackbar-action-padding

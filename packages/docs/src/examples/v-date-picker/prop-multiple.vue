@@ -16,8 +16,8 @@
       <v-menu
         ref="menu"
         v-model="menu"
+        v-model:return-value="dates"
         :close-on-content-click="false"
-        :return-value.sync="dates"
         transition="scale-transition"
         offset-y
         min-width="auto"
@@ -43,14 +43,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="$refs.menu.save(dates)"
           >

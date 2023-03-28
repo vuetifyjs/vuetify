@@ -15,13 +15,16 @@ class SitemapPlugin {
 
       paths.push({
         path: route.fullPath,
-        lastmod: new Date(),
+        lastmod: new Date().toISOString(),
         priority,
         changefreq: 'daily',
       })
     }
 
-    const plugin = new SitemapWebpackPlugin('https://vuetifyjs.com', paths)
+    const plugin = new SitemapWebpackPlugin({
+      base: 'https://vuetifyjs.com',
+      paths,
+    })
 
     plugin.apply(compiler)
   }

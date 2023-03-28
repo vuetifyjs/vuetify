@@ -1,132 +1,87 @@
-@import './_variables.scss'
-
-/* Theme */
-+theme(v-input) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
-
-  input,
-  textarea
-    color: map-deep-get($material, 'text', 'primary')
-
-  input::placeholder,
-  textarea::placeholder
-    color: map-deep-get($material, 'text', 'disabled')
-
-  &--is-disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-    input,
-    textarea
-      color: map-deep-get($material, 'text', 'disabled')
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-input
-  align-items: flex-start
-  display: flex
+  display: grid
   flex: 1 1 auto
   font-size: $input-font-size
-  letter-spacing: $input-letter-spacing
-  max-width: 100%
-  text-align: $input-text-align
+  font-weight: $input-font-weight
+  line-height: 1.5
 
-  .v-progress-linear
-    top: calc(100% - 1px)
-    left: 0
+  &--disabled
+    pointer-events: none
 
-  input
-    max-height: $input-max-height
+  @at-root
+    @include tools.density('v-input', $input-density) using ($modifier)
+      --v-input-control-height: #{$input-control-height + $modifier}
+      --v-input-padding-top: #{16px + $modifier * .5}
 
-  input,
-  textarea
-    // Remove Firefox red outline
-    &:invalid
-      box-shadow: none
+.v-input--vertical
+  grid-template-areas: "append" "control" "prepend"
+  grid-template-rows: max-content auto max-content
+  grid-template-columns: min-content
 
-    &:focus,
-    &:active
-      outline: none
+  .v-input__prepend
+    margin-block-start: $input-affix-margin-inside
 
-  .v-label
-    height: $input-label-height
-    line-height: $input-label-height
-    letter-spacing: $input-label-letter-spacing
+  .v-input__append
+    margin-block-end: $input-affix-margin-inside
 
-  &__append-outer,
-  &__prepend-outer
-    display: inline-flex
-    margin-bottom: 4px
-    margin-top: 4px
-    line-height: 1
+.v-input--horizontal
+  grid-template-areas: "prepend control append" "a messages b"
+  grid-template-columns: max-content minmax(0, 1fr) max-content
+  grid-template-rows: auto auto
 
-    .v-icon
-      user-select: none
+  .v-input__prepend
+    margin-inline-end: $input-affix-margin-inside
 
-  &__append-outer
-    +ltr()
-      margin-left: $input-prepend-append-outer-margin
+  .v-input__append
+    margin-inline-start: $input-affix-margin-inside
 
-    +rtl()
-      margin-right: $input-prepend-append-outer-margin
+.v-input__details
+  align-items: flex-end
+  display: flex
+  font-size: $input-details-font-size
+  font-weight: $input-details-font-weight
+  grid-area: messages
+  letter-spacing: $input-details-letter-spacing
+  line-height: $input-details-line-height
+  min-height: $input-details-min-height
+  padding-top: $input-details-padding-above
+  overflow: hidden
+  justify-content: space-between
 
-  &__prepend-outer
-    +ltr()
-      margin-right: $input-prepend-append-outer-margin
+.v-input__details,
+.v-input__prepend,
+.v-input__append
+  > .v-icon
+    opacity: var(--v-medium-emphasis-opacity)
 
-    +rtl()
-      margin-left: $input-prepend-append-outer-margin
+  .v-input--disabled &,
+  .v-input--error &
+    > .v-icon,
+    .v-messages
+      opacity: 1
 
-  &__control
-    display: flex
-    flex-direction: column
-    height: auto
-    flex-grow: 1
-    flex-wrap: wrap
-    min-width: 0
-    width: 100% // For IE11
+  .v-input--disabled &
+    opacity: var(--v-disabled-opacity)
 
-  &__icon
-    align-items: center
-    display: inline-flex
-    height: $input-icon-height
-    flex: 1 0 auto
-    justify-content: center
-    min-width: $input-icon-min-width
-    width: $input-icon-width
+  .v-input--error:not(.v-input--disabled) &
+    > .v-icon,
+    .v-messages
+      color: rgb(var(--v-theme-error))
 
-    &--clear
-      border-radius: 50%
+.v-input__prepend,
+.v-input__append
+  display: flex
+  padding-top: var(--v-input-padding-top)
 
-      .v-icon--disabled
-        visibility: hidden
+.v-input__prepend
+  grid-area: prepend
 
-  &__slot
-    align-items: center
-    display: flex
-    margin-bottom: $input-slot-margin-bottom
-    min-height: inherit
-    position: relative
-    transition: $primary-transition
-    transition-property: height, min-height
-    width: 100%
+.v-input__append
+  grid-area: append
 
-  &--dense > .v-input__control > .v-input__slot
-    margin-bottom: $input-dense-slot-margin-bottom
-
-  &--is-loading > .v-input__control > .v-input__slot
-    &:before,
-    &:after
-      display: none
-
-  &--hide-details > .v-input__control > .v-input__slot
-    margin-bottom: 0
-
-  &--has-state
-    &.error--text .v-label
-      animation: v-shake .6s map-get($transition, 'swing')
-
-  &--hide-spin-buttons
-    input::-webkit-outer-spin-button,
-    input::-webkit-inner-spin-button
-      -webkit-appearance: none
-      margin: 0
-    input[type=number]
-      -moz-appearance: textfield
+.v-input__control
+  display: flex
+  grid-area: control

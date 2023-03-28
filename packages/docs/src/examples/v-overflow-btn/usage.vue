@@ -6,7 +6,6 @@
       label="Overflow Btn"
       target="#dropdown-playground"
       v-bind="$attrs"
-      v-on="$listeners"
     ></v-overflow-btn>
   </v-container>
 </template>

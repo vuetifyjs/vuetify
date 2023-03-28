@@ -1,4 +1,5 @@
 ---
+nav: Slide groups
 meta:
   title: Slide group component
   description: The slide group component is similar to item groups in that you can make selectable content out of elements but does so in a single line fashion.
@@ -13,26 +14,22 @@ related:
 
 The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).
 
-<entry-ad />
-
 ## Usage
 
 Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.
 
 <example file="v-slide-group/usage" />
 
+<entry />
+
 ## API
 
-- [v-slide-group](/api/v-slide-group)
-- [v-slide-item](/api/v-slide-item)
+| Component | Description |
+| - | - |
+| [v-slide-group](/api/v-slide-group/) | Primary Component |
+| [v-slide-item](/api/v-slide-item/) | Sub-component used for modifying the `v-slide-group` state |
 
-<inline-api page="components/slide-groups" />
-
-<!-- ## Sub-components
-
-### v-slide-item
-
-v-slide-item description -->
+<api-inline hide-links />
 
 ## Examples
 
@@ -75,5 +72,3 @@ You can select multiple items by setting the **multiple** prop.
 Customize the slide group to creatively display information on sheets. Using the selection, we can display auxillary information easily for the user.
 
 <example file="v-slide-group/misc-pseudo-carousel" />
-
-<backmatter />

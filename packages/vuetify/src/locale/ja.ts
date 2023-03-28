@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'さらに{0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} ファイル',
     counterSize: '{0} ファイル (合計 {1})',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ページネーションナビゲーション',
+      root: 'ページネーションナビゲーション',
       next: '次のページ',
       previous: '前のページ',
       page: '{0}ページ目に移動',
       currentPage: '現在のページ、ページ {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: '評価 {1} のうち {0}',
+      item: '評価 {1} のうち {0}',
     },
   },
 }

@@ -1,4 +1,3 @@
-import VBanner from './VBanner'
-
-export { VBanner }
-export default VBanner
+export { VBanner } from './VBanner'
+export { VBannerActions } from './VBannerActions'
+export { VBannerText } from './VBannerText'

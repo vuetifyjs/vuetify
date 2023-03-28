@@ -1,18 +1,37 @@
-@import '../../styles/styles.sass';
+@use '../../styles/tools';
 
-$timeline-divider-center: 50% !default;
-$timeline-divider-width: 96px !default;
+// VTimeline
+$timeline-density-comfortable-grid-template-end: min-content min-content auto !default;
+$timeline-density-comfortable-grid-template-start: auto min-content min-content !default;
+$timeline-density-compact-grid-template-end: 0 min-content auto !default;
+$timeline-density-compact-grid-template-start: auto min-content 0 !default;
+$timeline-dot-border-radius: 50% !default;
+$timeline-dot-divider-background: rgb(var(--v-theme-on-surface-variant)) !default;
+$timeline-dot-size: 38px !default;
+$timeline-inner-dot-divider-background: rgb(var(--v-theme-on-surface)) !default;
+$timeline-inset-divider-line: var(--v-timeline-line-inset) !default;
+$timeline-inset-line-size: 4px !default;
 
+// VTimelineDivider
+$timeline-divider-dot-elevation: 0 !default;
+$timeline-divider-line-background: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$timeline-divider-line-horizontal-width: var(--v-timeline-line-inset, 0px) !default;
+$timeline-divider-line-thickness: var(--v-timeline-line-thickness) !default;
+
+// VTimelineItem
+$timeline-item-grid-template-center: minmax(auto, 50%) min-content minmax(auto, 50%) !default;
+$timeline-item-grid-template-auto: auto min-content auto !default;
 $timeline-item-padding: 24px !default;
 
-$timeline-line-width: 2px !default;
-
-$timeline-wedge-size: 10px !default;
-
-$timeline-dot-small-size: 24px !default;
-$timeline-dot-regular-size: 38px !default;
-$timeline-dot-large-size: 52px !default;
-
-$timeline-inner-dot-small-size: 18px !default;
-$timeline-inner-dot-regular-size: 30px !default;
-$timeline-inner-dot-large-size: 42px !default;
+// Lists
+$timeline-dot-border-sizes: () !default;
+$timeline-dot-border-sizes: tools.map-deep-merge(
+  (
+    'x-small': 6px,
+    'small': 8px,
+    'default': 8px,
+    'large': 8px,
+    'x-large': 10px,
+  ),
+  $timeline-dot-border-sizes
+);

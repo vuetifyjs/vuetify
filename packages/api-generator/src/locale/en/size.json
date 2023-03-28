@@ -1,0 +1,5 @@
+{
+  "props": {
+    "size": "Sets the height and width of the component. Default unit is px. Can also use the following predefined sizes: **x-small**, **small**, **default**, **large**, and **x-large**."
+  }
+}

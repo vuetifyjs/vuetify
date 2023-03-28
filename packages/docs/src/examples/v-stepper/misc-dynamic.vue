@@ -11,9 +11,8 @@
     </v-card>
     <v-stepper v-model="e1">
       <v-stepper-header>
-        <template v-for="n in steps">
+        <template v-for="n in steps" :key="`${n}-step`">
           <v-stepper-step
-            :key="`${n}-step`"
             :complete="e1 > n"
             :step="n"
             editable
@@ -36,7 +35,7 @@
         >
           <v-card
             class="mb-12"
-            color="grey lighten-1"
+            color="grey-lighten-1"
             height="200px"
           ></v-card>
 
@@ -47,7 +46,7 @@
             Continue
           </v-btn>
 
-          <v-btn text>
+          <v-btn variant="text">
             Cancel
           </v-btn>
         </v-stepper-content>

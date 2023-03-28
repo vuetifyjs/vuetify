@@ -1,0 +1,6 @@
+{
+  "extends": "./tsconfig.dev.json",
+  "compilerOptions": {
+    "skipLibCheck": true
+  }
+}

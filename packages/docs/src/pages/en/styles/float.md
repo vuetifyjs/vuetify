@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Float helpers
+  title: Float
   description: Float helper classes allow you to control the float property of an element based upon the viewport size.
   keywords: float helper classes, float classes, vuetify float
 related:
@@ -13,7 +13,7 @@ related:
 
 Applies a custom float across any breakpoint with responsive float utilities.
 
-<entry-ad />
+<entry />
 
 ## Overview
 
@@ -60,5 +60,3 @@ Here is a list of all the available support classes:
 - **.float-xl-start**
 - **.float-xl-end**
 - **.float-xl-none**
-
-<backmatter />

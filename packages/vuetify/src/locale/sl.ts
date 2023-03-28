@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'Še {0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} datotek',
     counterSize: '{0} datotek ({1} skupno)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigacija po strani po strani',
+      root: 'Navigacija po strani po strani',
       next: 'Naslednja stran',
       previous: 'Prejšnja stran',
       page: 'Pojdi na stran {0}',
       currentPage: 'Trenutna stran, stran {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { getObjectValueByPath } from '../../../util/helpers'
 import { TreeviewItemFunction } from 'vuetify/types'
 

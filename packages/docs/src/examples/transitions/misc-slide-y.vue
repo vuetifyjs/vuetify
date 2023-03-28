@@ -3,12 +3,11 @@
     justify="center"
   >
     <v-menu transition="slide-y-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
           class="ma-2"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Slide Y Transition
         </v-btn>
@@ -27,12 +26,11 @@
     <div class="mx-4 hidden-sm-and-down"></div>
 
     <v-menu transition="slide-y-reverse-transition">
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="secondary"
           class="ma-2"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Slide Y Reverse Transition
         </v-btn>

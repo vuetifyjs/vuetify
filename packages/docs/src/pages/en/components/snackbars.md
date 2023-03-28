@@ -1,4 +1,5 @@
 ---
+nav: Snackbars
 meta:
   title: Snackbar component
   description: The snackbar component informs user of a process that your application has performed is will perform. It can be temporary and often contains actions. Timer will stop when user hovers over the snackbar.
@@ -13,19 +14,22 @@ related:
 
 The `v-snackbar` component is used to display a quick message to a user. Snackbars support positioning, removal delay, and callbacks.
 
-<entry-ad />
-
 ## Usage
 
 a `v-snackbar` in its simplest form displays a temporary and closable notification to the user.
 
 <example file="v-snackbar/usage" />
 
+<entry />
+
 ## API
 
-- [v-snackbar](/api/v-snackbar)
+| Component | Description |
+| - | - |
+| [v-snackbar](/api/v-snackbar/) | Primary Component |
+| [v-btn](/api/v-btn/) | Sub-component typically used for actions |
 
-<inline-api page="components/snackbars" />
+<api-inline hide-links />
 
 ## Examples
 
@@ -54,5 +58,3 @@ Apply different styles to the snackbar using props such as **text**, **shaped**,
 The **vertical** property allows you to stack the content of your `v-snackbar`.
 
 <example file="v-snackbar/prop-vertical" />
-
-<backmatter />

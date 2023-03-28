@@ -1,29 +1,46 @@
-import Vue from 'vue'
-import Router from 'vue-router'
+import { h } from 'vue'
 
-Vue.use(Router)
-
-const component1 = {
-  template: `<div class="title">Page 1</div>`,
+const home = {
+  setup: () => () => h('div', 'hello'),
 }
-const component2 = {
-  template: `<div class="title">Page 2</div>`,
+const page1 = {
+  setup: () => () => h('div', 'page1'),
+}
+const page2 = {
+  setup: () => () => h('div', 'page2'),
+}
+const nested1 = {
+  setup: () => () => h('div', 'nested1'),
+}
+const nested2 = {
+  setup: () => () => h('div', 'nested2'),
 }
 
-const router = new Router({
-  routes: [
-    {
-      path: '/page1',
-      name: 'Page 1',
-      component: component1,
-    },
-    {
-      path: '/page2',
-      name: 'Page 2',
-      component: component2,
-    },
-    { path: '*', redirect: '/page1' },
-  ],
-})
-
-export default router
+export const routes = [
+  {
+    path: '/',
+    name: 'home',
+    component: home,
+  },
+  {
+    path: '/page1',
+    name: 'page1',
+    component: page1,
+  },
+  {
+    path: '/page2',
+    name: 'page2',
+    component: page2,
+  },
+  {
+    path: '/nested/page1',
+    name: 'Nested 1',
+    component: nested1,
+  },
+  {
+    path: '/nested/page2',
+    name: 'Nested 2',
+    component: nested2,
+  },
+  { path: '/:pathMatch(.*)*', redirect: '/' },
+]

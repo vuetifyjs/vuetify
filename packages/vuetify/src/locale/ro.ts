@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'încă {0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} fișiere',
     counterSize: '{0} fișiere ({1} în total)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigare prin paginare',
+      root: 'Navigare prin paginare',
       next: 'Pagina următoare',
       previous: 'Pagina anterioară',
       page: 'Mergeți la pagina {0}',
       currentPage: 'Pagina curentă, pagina {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating de {0} din {1}',
+      item: 'Rating de {0} din {1}',
     },
   },
 }

@@ -1,8 +1,8 @@
 <template>
   <v-container fluid>
     <v-data-iterator
+      v-model:items-per-page="itemsPerPage"
       :items="items"
-      :items-per-page.sync="itemsPerPage"
       hide-default-footer
     >
       <template v-slot:header>

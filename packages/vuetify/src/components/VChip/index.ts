@@ -1,4 +1,1 @@
-import VChip from './VChip'
-
-export { VChip }
-export default VChip
+export { VChip } from './VChip'

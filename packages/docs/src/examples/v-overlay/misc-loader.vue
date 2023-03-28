@@ -1,18 +1,19 @@
 <template>
   <div class="text-center">
     <v-btn
-      color="deep-purple accent-4"
-      class="white--text"
+      append-icon="mdi-open-in-new"
+      color="deep-purple-accent-4"
       @click="overlay = !overlay"
     >
       Launch Application
-      <v-icon right>
-        mdi-open-in-new
-      </v-icon>
     </v-btn>
 
-    <v-overlay :value="overlay">
+    <v-overlay
+      :model-value="overlay"
+      class="align-center justify-center"
+    >
       <v-progress-circular
+        color="primary"
         indeterminate
         size="64"
       ></v-progress-circular>

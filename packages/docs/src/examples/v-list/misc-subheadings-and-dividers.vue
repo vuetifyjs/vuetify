@@ -13,23 +13,19 @@
     </v-toolbar>
 
     <v-list
-      two-line
+      lines="two"
       subheader
     >
-      <v-subheader>General</v-subheader>
+      <v-list-subheader>General</v-list-subheader>
 
       <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Profile photo</v-list-item-title>
-          <v-list-item-subtitle>Change your Google+ profile photo</v-list-item-subtitle>
-        </v-list-item-content>
+        <v-list-item-title>Profile photo</v-list-item-title>
+        <v-list-item-subtitle>Change your Google+ profile photo</v-list-item-subtitle>
       </v-list-item>
 
       <v-list-item>
-        <v-list-item-content>
-          <v-list-item-title>Show your status</v-list-item-title>
-          <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
-        </v-list-item-content>
+        <v-list-item-title>Show your status</v-list-item-title>
+        <v-list-item-subtitle>Your status is visible to everyone</v-list-item-subtitle>
       </v-list-item>
     </v-list>
 
@@ -37,10 +33,10 @@
 
     <v-list
       subheader
-      two-line
+      lines="two"
       flat
     >
-      <v-subheader>Hangout notifications</v-subheader>
+      <v-list-subheader>Hangout notifications</v-list-subheader>
 
       <v-list-item-group
         v-model="settings"
@@ -50,15 +46,15 @@
           <template v-slot:default="{ active, }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
 
-            <v-list-item-content>
+            <v-list-item-header>
               <v-list-item-title>Notifications</v-list-item-title>
               <v-list-item-subtitle>Allow notifications</v-list-item-subtitle>
-            </v-list-item-content>
+            </v-list-item-header>
           </template>
         </v-list-item>
 
@@ -66,15 +62,15 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
 
-            <v-list-item-content>
+            <v-list-item-header>
               <v-list-item-title>Sound</v-list-item-title>
               <v-list-item-subtitle>Hangouts message</v-list-item-subtitle>
-            </v-list-item-content>
+            </v-list-item-header>
           </template>
         </v-list-item>
 
@@ -82,15 +78,15 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
 
-            <v-list-item-content>
+            <v-list-item-header>
               <v-list-item-title>Video sounds</v-list-item-title>
               <v-list-item-subtitle>Hangouts video call</v-list-item-subtitle>
-            </v-list-item-content>
+            </v-list-item-header>
           </template>
         </v-list-item>
 
@@ -98,15 +94,15 @@
           <template v-slot:default="{ active }">
             <v-list-item-action>
               <v-checkbox
-                :input-value="active"
+                :model-value="active"
                 color="primary"
               ></v-checkbox>
             </v-list-item-action>
 
-            <v-list-item-content>
+            <v-list-item-header>
               <v-list-item-title>Invites</v-list-item-title>
               <v-list-item-subtitle>Notify when receiving invites</v-list-item-subtitle>
-            </v-list-item-content>
+            </v-list-item-header>
           </template>
         </v-list-item>
       </v-list-item-group>

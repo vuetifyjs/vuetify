@@ -1,23 +1,21 @@
 // Components
-import VResponsive from '../VResponsive'
+import { VResponsive } from '..'
 
 // Utilities
-import {
-  mount,
-  Wrapper,
-} from '@vue/test-utils'
+import { createVuetify } from '@/framework'
+import { h } from 'vue'
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
-describe('VResponsive.ts', () => {
-  type Instance = InstanceType<typeof VResponsive>
-  let mountFunction: (options?: object) => Wrapper<Instance>
+describe('VResponsive', () => {
+  const vuetify = createVuetify()
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VResponsive, {
-        ...options,
-      })
-    }
-  })
+  function mountFunction (options = {}) {
+    return mount(VResponsive, {
+      global: { plugins: [vuetify] },
+      ...options,
+    })
+  }
 
   it('should force aspect ratio', () => {
     const wrapper = mountFunction({
@@ -30,7 +28,7 @@ describe('VResponsive.ts', () => {
   it('should render content', () => {
     const wrapper = mountFunction({
       slots: {
-        default: { render: h => h('div', ['content']) },
+        default: () => h('div', ['content']),
       },
     })
 

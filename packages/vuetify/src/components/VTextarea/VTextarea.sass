@@ -1,104 +1,57 @@
-@import './_variables.scss'
-
-+theme(v-textarea) using ($material)
-  &.v-text-field--solo-inverted
-    &.v-input--is-focused
-      textarea
-        color: map-deep-get($material, 'inputs', 'solo-inverted-focused-text')
-
-      textarea::placeholder
-        color: map-deep-get($material, 'inputs', 'solo-inverted-focused-placeholder')
+@use 'sass:math'
+@use 'sass:selector'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
 .v-textarea
-  textarea
-    align-self: stretch
+  .v-field
+    --v-textarea-control-height: var(--v-input-control-height)
+
+  .v-field__field
+    --v-input-control-height: var(--v-textarea-control-height)
+
+  .v-field__input
+    $a: calc((var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0)) - 6px)
+    $b: calc(var(--v-field-padding-top, 0) + var(--v-input-padding-top, 0) + 4px)
+
     flex: 1 1 auto
-    line-height: $textarea-line-height
-    max-width: 100%
-    min-height: $textarea-min-height
     outline: none
-    padding: $textarea-padding
-    width: 100%
-
-  .v-text-field__prefix,
-  .v-text-field__suffix
-    padding-top: $textarea-prefix-padding-top
-    align-self: start
-
-  &.v-text-field--box,
-  &.v-text-field--enclosed
-    .v-text-field__prefix,
-    textarea
-      margin-top: $textarea-box-enclosed-prefix-margin-top
-
-    &.v-text-field--single-line,
-    &.v-text-field--outlined
-      &:not(.v-input--dense)
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-box-enclosed-single-outlined-margin-top
-
-        .v-label
-          top: $textarea-box-enclosed-single-outlined-label-top
-
-      &.v-input--dense
-        .v-text-field__prefix,
-        .v-text-field__suffix,
-        textarea
-          margin-top: $textarea-dense-box-enclosed-single-outlined-margin-top
-
-        .v-input__prepend-inner,
-        .v-input__prepend-outer,
-        .v-input__append-inner,
-        .v-input__append-outer
-          align-self: flex-start
-          margin-top: $textarea-dense-append-prepend-margin-top
-
-  &.v-text-field--solo
-    align-items: flex-start
-
-    .v-input__control
-      textarea
-        caret-color: auto
-
-    // Essentially revert styles
-    // applied by v-text-field
-    .v-input__prepend-inner,
-    .v-input__prepend-outer,
-    .v-input__append-inner,
-    .v-input__append-outer
-      align-self: flex-start
-      margin-top: $textarea-solo-append-prepend-margin-top
-
-    .v-input__append-inner
-      +ltr()
-        padding-left: $textarea-solo-append-padding
-
-      +rtl()
-        padding-right: $textarea-solo-append-padding
+    -webkit-mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
+    mask-image: linear-gradient(to bottom, transparent, transparent $a, black $b)
 
   &--auto-grow
-    textarea
+    .v-field__input
       overflow: hidden
 
   &--no-resize
-    textarea
+    .v-field__input
       resize: none
 
-  &.v-text-field--enclosed
-    .v-text-field__slot
-      align-self: stretch
+  &__sizer
+    visibility: hidden
+    position: absolute
+    top: 0
+    left: 0
+    height: 0 !important
+    min-height: 0 !important
+    pointer-events: none
 
-      +ltr()
-        margin-right: $textarea-enclosed-text-slot-margin
+  .v-field--no-label,
+  .v-field--active
+    textarea
+      opacity: 1
 
-      +rtl()
-        margin-left: $textarea-enclosed-text-slot-margin
+  textarea
+    opacity: 0
+    flex: 1
+    min-width: 0
+    transition: .15s opacity settings.$standard-easing
 
-      textarea
-        +ltr()
-          padding-right: $textarea-enclosed-text-slot-padding
+    &:focus,
+    &:active
+      outline: none
 
-        +rtl()
-          padding-left: $textarea-enclosed-text-slot-padding
+    // Remove Firefox red outline
+    &:invalid
+      box-shadow: none

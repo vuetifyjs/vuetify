@@ -1,20 +1,22 @@
-import Vue from 'vue'
-import App from './App'
-import router from './router'
+import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
+import { library } from '@fortawesome/fontawesome-svg-core'
+import { fas } from '@fortawesome/free-solid-svg-icons'
+
+import viteSSR from 'vite-ssr/vue'
+import { createHead } from '@vueuse/head'
+import App from './App.vue'
 import vuetify from './vuetify'
+import { routes } from './router'
 
-Vue.config.performance = true
+library.add(fas)
 
-const vm = new Vue({
-  data: () => ({ isLoaded: document.readyState === 'complete' }),
-  vuetify,
-  router,
-  render (h) {
-    return this.isLoaded ? h(App) : undefined
-  },
-}).$mount('#app')
+viteSSR(App, { routes }, ({ app }) => {
+  const head = createHead()
 
-// Prevent layout jump while waiting for styles
-vm.isLoaded || window.addEventListener('load', () => {
-  vm.isLoaded = true
+  // app.config.performance = true
+  app.use(head)
+  app.use(vuetify)
+  app.component('FontAwesomeIcon', FontAwesomeIcon)
+
+  return { head }
 })

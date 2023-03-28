@@ -1,5 +1,1 @@
-import VOverlay from './VOverlay'
-
-export { VOverlay }
-
-export default VOverlay
+export { VOverlay } from './VOverlay'

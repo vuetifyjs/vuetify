@@ -1,60 +1,22 @@
-@import './_variables'
-@import '../../styles/styles.sass'
+@use './variables' as *
+@use '../../styles/tools'
+@use 'sass:math'
 
-+theme(v-file-input) using ($material)
-  .v-file-input__text
-    color: map-deep-get($material, 'text', 'primary')
-
-    &--placeholder
-      color: map-deep-get($material, 'text', 'secondary')
-
-  &.v-input--is-disabled
-    .v-file-input__text
-      color: map-deep-get($material, 'text', 'disabled')
-
-      .v-file-input__text--placeholder
-        color: map-deep-get($material, 'text', 'disabled')
+@at-root
+  @include tools.density('v-input', $file-input-chips-margin-bottom) using ($modifier)
+    --file-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 // Block
 .v-file-input
   input[type="file"]
+    height: 100%
     left: 0
     opacity: 0
-    pointer-events: none
     position: absolute
-    max-width: 0
-    width: 0
-
-// Element
-.v-file-input .v-file-input__text
-  align-items: center
-  align-self: stretch
-  display: flex
-  flex-wrap: wrap
-  width: 100%
-
-  &.v-file-input__text--chips
-    flex-wrap: wrap
-
+    top: 0
+    width: 100%
+    z-index: 1
+  
   .v-chip
-    margin: $file-input-chip-margin
-
-.v-file-input .v-text-field__slot
-  min-height: $file-input-slot-min-height
-
-.v-file-input
-  &.v-input--dense
-    .v-text-field__slot
-      min-height: $file-input-slot-dense-min-height
-
-.v-file-input.v-text-field--filled:not(.v-text-field--single-line)
-  .v-file-input__text
-    padding-top: $file-input-filled-padding-top
-
-.v-file-input.v-text-field--outlined
-  .v-text-field__slot
-    padding: $file-input-outlined-padding
-
-  &.v-input--dense
-    .v-text-field__slot
-      padding: $file-input-outlined-dense-padding
+    margin-top: $file-input-chips-margin-top
+    margin-bottom: var(--file-input-chips-margin-bottom)

@@ -8,8 +8,8 @@
       <v-menu
         ref="menu"
         v-model="menu"
+        v-model:return-value="date"
         :close-on-content-click="false"
-        :return-value.sync="date"
         transition="scale-transition"
         offset-y
         min-width="auto"
@@ -31,14 +31,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="menu = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="$refs.menu.save(date)"
           >
@@ -56,7 +56,7 @@
       <v-dialog
         ref="dialog"
         v-model="modal"
-        :return-value.sync="date"
+        v-model:return-value="date"
         persistent
         width="290px"
       >
@@ -76,14 +76,14 @@
         >
           <v-spacer></v-spacer>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="modal = false"
           >
             Cancel
           </v-btn>
           <v-btn
-            text
+            variant="text"
             color="primary"
             @click="$refs.dialog.save(date)"
           >

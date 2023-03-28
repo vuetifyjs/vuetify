@@ -1,6 +1,6 @@
 {
   "props": {
-    "inset": "Positions the toolbar offset from an application `v-navigation-drawer`",
-    "padless": "Remove all padding from the footer"
+    "app": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-footer.json))",
+    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-footer.json))"
   }
 }

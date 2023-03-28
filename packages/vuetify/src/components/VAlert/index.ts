@@ -1,4 +1,2 @@
-import VAlert from './VAlert'
-
-export { VAlert }
-export default VAlert
+export { VAlert } from './VAlert'
+export { VAlertTitle } from './VAlertTitle'

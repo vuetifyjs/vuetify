@@ -1,4 +1,1 @@
-import VApp from './VApp'
-
-export { VApp }
-export default VApp
+export { VApp } from './VApp'

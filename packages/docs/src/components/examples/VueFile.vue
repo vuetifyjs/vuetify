@@ -2,53 +2,31 @@
   <component
     :is="component"
     v-if="component"
-    v-bind="{
-      ...$attrs,
-      ...$props,
-    }"
-    v-on="$listeners"
   />
 </template>
 
-<script>
-  export default {
-    name: 'VueFile',
+<script setup>
+  // Utilities
+  import { getExample } from 'virtual:examples'
+  import { onBeforeMount, shallowRef } from 'vue'
 
-    inheritAttrs: false,
-
-    props: {
-      file: {
-        type: String,
-        required: true,
-      },
+  const props = defineProps({
+    file: {
+      type: String,
+      required: true,
     },
+  })
 
-    data: () => ({ component: undefined }),
+  const component = shallowRef()
 
-    created () {
-      this.load()
-    },
+  onBeforeMount(load)
 
-    methods: {
-      async load () {
-        let component = {}
-
-        try {
-          component = await import(
-            /* webpackChunkName: "examples" */
-            /* webpackMode: "lazy-once" */
-            `../../examples/${this.file}.vue`
-          )
-
-          this.$emit('loaded', component.default)
-        } catch (err) {
-          component = await import('./ExampleMissing')
-
-          this.$emit('error', err)
-        }
-
-        this.component = component.default
-      },
-    },
+  async function load () {
+    try {
+      const { component: example } = await getExample(props.file)
+      component.value = example
+    } catch (e) {
+      console.error(e)
+    }
   }
 </script>

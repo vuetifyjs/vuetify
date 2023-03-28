@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Overflow button component
   description: The overflow button component creates an interface for a select that contains additional features and functionality.
@@ -13,7 +14,7 @@ related:
 
 `v-overflow-btn` is used to give the user the ability to select items from the list. It has 3 variations: `editable`, `overflow` and `segmented`
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,9 +24,7 @@ related:
 
 ## API
 
-- [v-overflow-btn](/api/v-overflow-btn)
-
-<inline-api page="components/overflow-btns" />
+<api-inline />
 
 ## Examples
 
@@ -90,5 +89,3 @@ You can set underlying `v-menu` props using `menu-props` property
 `segmented` `v-overflow-btn` has and additional divider between the content and the icon
 
 <example file="v-overflow-btn/prop-segmented" />
-
-<backmatter />

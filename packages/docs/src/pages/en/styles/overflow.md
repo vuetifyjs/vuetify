@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Overflow helpers
+  title: Overflow
   description: Overflow helper classes allow you to configure how content overflows when it beocomes too large.
   keywords: overflow helper classes, overflow classes, vuetify overflow
 related:
@@ -13,7 +13,7 @@ related:
 
 Configure how content overflows when it becomes out of container bounds.
 
-<entry-ad />
+<entry />
 
 ## How it works
 
@@ -44,5 +44,3 @@ here is a list of properties:
 **overflow-x** can be used to specify horizontal overflows to an element if needed.
 
 <example file="overflow/overflow-x" />
-
-<backmatter />

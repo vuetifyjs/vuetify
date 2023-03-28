@@ -1,41 +1,45 @@
-import { VNodeDirective } from 'vue/types/vnode'
-import { VNode } from 'vue'
+import type { DirectiveBinding } from 'vue'
 
-interface ResizeVNodeDirective extends VNodeDirective {
-  value?: () => void
-  options?: boolean | AddEventListenerOptions
+interface ResizeDirectiveBinding extends Omit<DirectiveBinding, 'modifiers'> {
+  value: () => void
+  modifiers?: {
+    active?: boolean
+    quiet?: boolean
+  }
 }
 
-function inserted (el: HTMLElement, binding: ResizeVNodeDirective, vnode: VNode) {
-  const callback = binding.value!
-  const options = binding.options || { passive: true }
+function mounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
+  const handler = binding.value
+  const options: AddEventListenerOptions = {
+    passive: !binding.modifiers?.active,
+  }
 
-  window.addEventListener('resize', callback, options)
+  window.addEventListener('resize', handler, options)
 
   el._onResize = Object(el._onResize)
-  el._onResize![vnode.context!._uid] = {
-    callback,
+  el._onResize![binding.instance!.$.uid] = {
+    handler,
     options,
   }
 
-  if (!binding.modifiers || !binding.modifiers.quiet) {
-    callback()
+  if (!binding.modifiers?.quiet) {
+    handler()
   }
 }
 
-function unbind (el: HTMLElement, binding: ResizeVNodeDirective, vnode: VNode) {
-  if (!el._onResize?.[vnode.context!._uid]) return
+function unmounted (el: HTMLElement, binding: ResizeDirectiveBinding) {
+  if (!el._onResize?.[binding.instance!.$.uid]) return
 
-  const { callback, options } = el._onResize[vnode.context!._uid]!
+  const { handler, options } = el._onResize[binding.instance!.$.uid]!
 
-  window.removeEventListener('resize', callback, options)
+  window.removeEventListener('resize', handler, options)
 
-  delete el._onResize[vnode.context!._uid]
+  delete el._onResize[binding.instance!.$.uid]
 }
 
 export const Resize = {
-  inserted,
-  unbind,
+  mounted,
+  unmounted,
 }
 
 export default Resize

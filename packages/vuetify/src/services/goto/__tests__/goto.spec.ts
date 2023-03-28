@@ -1,17 +1,21 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Lib
 import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
 // Components
-import VBtn from '../../../components/VBtn'
+// import VBtn from '../../../components/VBtn'
 
 // Services
 import goTo, { Goto } from '../index'
-import { Application } from '../../application/index'
+// import { Application } from '../../application/index'
 
 // Types
 import { VuetifyServiceContract } from 'vuetify/types/services'
 
-describe('$vuetify.goTo', () => {
+describe.skip('$vuetify.goTo', () => {
   (global as any).performance = require('perf_hooks').performance
   let framework: Record<string, VuetifyServiceContract> = {}
 

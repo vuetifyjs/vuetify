@@ -1,12 +1,12 @@
 /* eslint-disable no-console */
-import Vuetify from '../framework'
+// import Vuetify from '../framework'
 
 function createMessage (message: string, vm?: any, parent?: any): string | void {
-  if (Vuetify.config.silent) return
+  // if (Vuetify.config.silent) return
 
   if (parent) {
     vm = {
-      _isVue: true,
+      __isVue: true,
       $parent: parent,
       $options: vm,
     }
@@ -64,14 +64,14 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
   }
   const options = typeof vm === 'function' && vm.cid != null
     ? vm.options
-    : vm._isVue
+    : vm.__isVue
       ? vm.$options || vm.constructor.options
       : vm || {}
   let name = options.name || options._componentTag
   const file = options.__file
   if (!name && file) {
     const match = file.match(/([^/\\]+)\.vue$/)
-    name = match && match[1]
+    name = match?.[1]
   }
 
   return (
@@ -81,7 +81,7 @@ function formatComponentName (vm: any, includeFile?: boolean): string {
 }
 
 function generateComponentTrace (vm: any): string {
-  if (vm._isVue && vm.$parent) {
+  if (vm.__isVue && vm.$parent) {
     const tree: any[] = []
     let currentRecursiveSequence = 0
     while (vm) {
@@ -104,6 +104,7 @@ function generateComponentTrace (vm: any): string {
         i === 0 ? '---> ' : ' '.repeat(5 + i * 2)
       }${
         Array.isArray(vm)
+          // eslint-disable-next-line sonarjs/no-nested-template-literals
           ? `${formatComponentName(vm[0])}... (${vm[1]} recursive calls)`
           : formatComponentName(vm)
       }`)

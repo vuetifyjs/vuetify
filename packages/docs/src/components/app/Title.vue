@@ -1,20 +1,7 @@
-<script>
-  import Headline from './Headline'
+<template>
+  <app-headline size="subtitle-2" weight="black" />
+</template>
 
-  export default {
-    name: 'AppTitle',
-
-    extends: Headline,
-
-    props: {
-      size: {
-        type: String,
-        default: 'subtitle-2',
-      },
-      weight: {
-        type: String,
-        default: 'black',
-      },
-    },
-  }
+<script setup>
+  //
 </script>

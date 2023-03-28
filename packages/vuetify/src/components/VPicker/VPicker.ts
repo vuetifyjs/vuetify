@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import './VPicker.sass'
 import '../VCard/VCard.sass'
 

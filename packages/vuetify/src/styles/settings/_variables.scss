@@ -1,40 +1,93 @@
-@import '../tools/_functions.sass';
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../tools/functions' as *;
 
 $color-pack: true !default;
+$reset: true !default;
 
 $body-font-family: 'Roboto', sans-serif !default;
-$font-size-root: 16px !default;
+$font-size-root: 1rem !default;
 $line-height-root: 1.5 !default;
+$border-color-root: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
 $border-radius-root: 4px !default;
+$border-style-root: solid !default;
+
+$borders: () !default;
+$borders: map-deep-merge(
+  (
+    0: 0,
+    null: thin,
+    sm: 1px,
+    md: 2px,
+    lg: 4px,
+    xl: 8px
+  ),
+  $borders
+);
+
+@each $key, $border in $borders {
+  $borders: map-deep-merge(
+    $borders,
+    ( $key: $border $border-style-root $border-color-root )
+  )
+}
+
+$border-opacities: () !default;
+$border-opacities: map-deep-merge(
+  (
+    0: 0,
+    null: .12,
+    25: .25,
+    50: .50,
+    75: .75,
+    100: 1
+  ),
+  $border-opacities
+);
+
+$states: () !default;
+$states: map-deep-merge(
+    (
+    'hover': var(--v-hover-opacity),
+    'focus': var(--v-focus-opacity),
+    'selected': var(--v-selected-opacity),
+    'activated': var(--v-activated-opacity),
+    'pressed': var(--v-pressed-opacity),
+    'dragged': var(--v-dragged-opacity)
+  ),
+  $states
+);
 
 $rounded: () !default;
 $rounded: map-deep-merge(
   (
     0: 0,
-    'sm': $border-radius-root / 2,
+    'sm': $border-radius-root * .5,
     null: $border-radius-root,
     'lg': $border-radius-root * 2,
     'xl': $border-radius-root * 6,
     'pill': 9999px,
-    'circle': 50%
+    'circle': 50%,
+    'shaped': $border-radius-root * 6 0
   ),
   $rounded
 );
 
 $spacer: 4px !default;
-$spacers-steps: 16 !default; 
+$spacers-steps: 16 !default;
 
 $spacers: () !default;
-@if (type-of($spacers) == list) {
+@if (meta.type-of($spacers) == list) {
   @for $i from 0 through $spacers-steps {
-    $spacers: map-merge($spacers, ($i: $spacer * $i))
+    $spacers: map.merge($spacers, ($i: $spacer * $i))
   }
 }
 
 $negative-spacers: () !default;
-@if (type-of($negative-spacers) == list) {
+@if (meta.type-of($negative-spacers) == list) {
   @for $i from 1 through $spacers-steps {
-    $negative-spacers: map-merge($negative-spacers, ("n" + $i: -$spacer * $i))
+    $negative-spacers: map.merge($negative-spacers, ("n" + $i: -$spacer * $i))
   }
 }
 
@@ -44,8 +97,9 @@ $grid-breakpoints: map-deep-merge(
     'xs': 0,
     'sm': 600px,
     'md': 960px,
-    'lg': 1280px - 16px,
-    'xl': 1920px - 16px
+    'lg': 1280px,
+    'xl': 1920px,
+    'xxl': 2560px,
   ),
   $grid-breakpoints
 );
@@ -53,17 +107,16 @@ $grid-breakpoints: map-deep-merge(
 $grid-gutter: $spacer * 6 !default;
 $form-grid-gutter: $spacer * 2 !default;
 $grid-columns: 12 !default;
-
-$container-padding-x: $grid-gutter / 2 !default;
+$container-padding-x: $spacer * 4 !default;
 
 $grid-gutters: () !default;
 $grid-gutters: map-deep-merge(
   (
-    'xs': $grid-gutter / 12,
-    'sm': $grid-gutter / 6,
-    'md': $grid-gutter / 3,
-    'lg': $grid-gutter * 2/3,
-    'xl': $grid-gutter
+    'xs': math.div($grid-gutter, 12),
+    'sm': math.div($grid-gutter, 6),
+    'md': math.div($grid-gutter, 3),
+    'lg': math.div($grid-gutter * 2, 3),
+    'xl': $grid-gutter,
   ),
   $grid-gutters
 );
@@ -71,29 +124,36 @@ $grid-gutters: map-deep-merge(
 $container-max-widths: () !default;
 $container-max-widths: map-deep-merge(
   (
-    'md': map-get($grid-breakpoints, 'md') * 0.9375,
-    'lg': map-get($grid-breakpoints, 'lg') * 0.9375,
-    'xl': map-get($grid-breakpoints, 'xl') * 0.9375
+    'xs': null,
+    'sm': null,
+    'md': map.get($grid-breakpoints, 'md') * 0.9375,
+    'lg': map.get($grid-breakpoints, 'lg') * 0.9375,
+    'xl': map.get($grid-breakpoints, 'xl') * 0.9375,
+    'xxl': map.get($grid-breakpoints, 'xxl') * 0.9375,
   ),
   $container-max-widths
 );
 
+// Avoid using *-and-down where possible
 $display-breakpoints: () !default;
 $display-breakpoints: map-deep-merge(
   (
     'print-only': 'only print',
     'screen-only': 'only screen',
-    'xs-only': 'only screen and (max-width: #{map-get($grid-breakpoints, 'sm') - 0.02})',
-    'sm-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')}) and (max-width: #{map-get($grid-breakpoints, 'md') - 0.02})',
-    'sm-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'md') - 0.02})',
-    'sm-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'sm')})',
-    'md-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')}) and (max-width: #{map-get($grid-breakpoints, 'lg') - 0.02})',
-    'md-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'lg') - 0.02})',
-    'md-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'md')})',
-    'lg-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')}) and (max-width: #{map-get($grid-breakpoints, 'xl') - 0.02})',
-    'lg-and-down': 'only screen and (max-width: #{map-get($grid-breakpoints, 'xl') - 0.02})',
-    'lg-and-up': 'only screen and (min-width: #{map-get($grid-breakpoints, 'lg')})',
-    'xl-only': 'only screen and (min-width: #{map-get($grid-breakpoints, 'xl')})'
+    'xs': '(max-width: #{map.get($grid-breakpoints, 'sm') - 0.02})',
+    'sm': '(min-width: #{map.get($grid-breakpoints, 'sm')}) and (max-width: #{map.get($grid-breakpoints, 'md') - 0.02})',
+    'md': '(min-width: #{map.get($grid-breakpoints, 'md')}) and (max-width: #{map.get($grid-breakpoints, 'lg') - 0.02})',
+    'lg': '(min-width: #{map.get($grid-breakpoints, 'lg')}) and (max-width: #{map.get($grid-breakpoints, 'xl') - 0.02})',
+    'xl': '(min-width: #{map.get($grid-breakpoints, 'xl')}) and (max-width: #{map.get($grid-breakpoints, 'xxl') - 0.02})',
+    'xxl': '(min-width: #{map.get($grid-breakpoints, 'xxl')})',
+    'sm-and-up': '(min-width: #{map.get($grid-breakpoints, 'sm')})',
+    'md-and-up': '(min-width: #{map.get($grid-breakpoints, 'md')})',
+    'lg-and-up': '(min-width: #{map.get($grid-breakpoints, 'lg')})',
+    'xl-and-up': '(min-width: #{map.get($grid-breakpoints, 'xl')})',
+    'sm-and-down': '(max-width: #{map.get($grid-breakpoints, 'md') - 0.02})',
+    'md-and-down': '(max-width: #{map.get($grid-breakpoints, 'lg') - 0.02})',
+    'lg-and-down': '(max-width: #{map.get($grid-breakpoints, 'xl') - 0.02})',
+    'xl-and-down': '(max-width: #{map.get($grid-breakpoints, 'xxl') - 0.02})',
   ),
   $display-breakpoints
 );
@@ -113,8 +173,8 @@ $font-weights: map-deep-merge(
 
 $heading-font-family: $body-font-family !default;
 
-$headings: () !default;
-$headings: map-deep-merge(
+$typography: () !default;
+$typography: map-deep-merge(
   (
     'h1': (
       'size': 6rem,
@@ -122,7 +182,7 @@ $headings: map-deep-merge(
       'line-height': 6rem,
       'letter-spacing': -.015625em,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'h2': (
       'size': 3.75rem,
@@ -130,7 +190,7 @@ $headings: map-deep-merge(
       'line-height': 3.75rem,
       'letter-spacing': -.0083333333em,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'h3': (
       'size': 3rem,
@@ -138,7 +198,7 @@ $headings: map-deep-merge(
       'line-height': 3.125rem,
       'letter-spacing': normal,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'h4': (
       'size': 2.125rem,
@@ -146,7 +206,7 @@ $headings: map-deep-merge(
       'line-height': 2.5rem,
       'letter-spacing': .0073529412em,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'h5': (
       'size': 1.5rem,
@@ -154,7 +214,7 @@ $headings: map-deep-merge(
       'line-height': 2rem,
       'letter-spacing': normal,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'h6': (
       'size': 1.25rem,
@@ -162,7 +222,7 @@ $headings: map-deep-merge(
       'line-height': 2rem,
       'letter-spacing': .0125em,
       'font-family': $heading-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'subtitle-1': (
       'size': 1rem,
@@ -170,7 +230,7 @@ $headings: map-deep-merge(
       'line-height': 1.75rem,
       'letter-spacing': .009375em,
       'font-family': $body-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'subtitle-2': (
       'size': .875rem,
@@ -178,7 +238,7 @@ $headings: map-deep-merge(
       'line-height': 1.375rem,
       'letter-spacing': .0071428571em,
       'font-family': $body-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'body-1': (
       'size': 1rem,
@@ -186,7 +246,7 @@ $headings: map-deep-merge(
       'line-height': 1.5rem,
       'letter-spacing': .03125em,
       'font-family': $body-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'body-2': (
       'size': .875rem,
@@ -194,7 +254,7 @@ $headings: map-deep-merge(
       'line-height': 1.25rem,
       'letter-spacing': .0178571429em,
       'font-family': $body-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'button': (
       'size': .875rem,
@@ -210,7 +270,7 @@ $headings: map-deep-merge(
       'line-height': 1.25rem,
       'letter-spacing': .0333333333em,
       'font-family': $body-font-family,
-      'text-transform': false
+      'text-transform': none
     ),
     'overline': (
       'size': .75rem,
@@ -221,45 +281,47 @@ $headings: map-deep-merge(
       'text-transform': uppercase
     )
   ),
-  $headings
+  $typography
 );
 
-$typography: () !default;
-@each $type, $values in $headings {
-  $typography: map-deep-merge(
-    $typography,
-    (#{$type}: map-values($values))
+$flat-typography: () !default;
+@each $type, $values in $typography {
+  $flat-typography: map-deep-merge(
+    $flat-typography,
+    (#{$type}: map.values($values))
   );
 }
 
-$transition: () !default;
-$transition: map-deep-merge(
-  (
-    'fast-out-slow-in': cubic-bezier(0.4, 0, 0.2, 1),
-    'linear-out-slow-in': cubic-bezier(0, 0, 0.2, 1),
-    'fast-out-linear-in': cubic-bezier(0.4, 0, 1, 1),
-    'ease-in-out': cubic-bezier(0.4, 0, 0.6, 1),
-    'fast-in-fast-out': cubic-bezier(0.25, 0.8, 0.25, 1),
-    'swing': cubic-bezier(0.25, 0.8, 0.5, 1)
-  ),
-  $transition
-);
-$primary-transition: 0.3s map-get($transition, 'swing') !default;
-$secondary-transition: 0.2s map-get($transition, 'ease-in-out') !default;
+// Mapping from transition to easings:
+// fast-out-slow-in -> standard
+// linear-out-slow-in -> decelerated
+// fast-out-linear-in -> accelerated
+// ease-in-out -> standard or accelerated depending on usage
+// fast-in-fast-out -> accelerated
+// swing -> standard
 
-// Ripples //;
-$ripple-animation-transition-in: transform 0.25s map-get($transition, 'fast-out-slow-in'), opacity 0.1s map-get($transition, 'fast-out-slow-in') !default;
-$ripple-animation-transition-out: opacity 0.3s map-get($transition, 'fast-out-slow-in') !default;
-$ripple-animation-visible-opacity: 0.25 !default;
+$standard-easing: cubic-bezier(0.4, 0, 0.2, 1);
+$decelerated-easing: cubic-bezier(0.0, 0, 0.2, 1); // Entering
+$accelerated-easing: cubic-bezier(0.4, 0, 1, 1); // Leaving
 
-// Elements //;
-$bootable-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
+// Elements
+$bootable-transition: 0.2s $decelerated-easing !default;
 $blockquote-font-size: 18px !default;
 $blockquote-font-weight: 300 !default;
-$code-kbd-border-radius: 3px !default;
-$code-kbd-font-size: 85% !default;
-$code-kbd-font-weight: normal !default;
-$code-padding: .2em .4em !default;
-$kbd-padding: .2em .4rem !default;
-$input-top-spacing: 16px !default;
-$text-field-active-label-height: 12px !default;
+
+$sizes: (
+  'x-small',
+  'small',
+  'default',
+  'large',
+  'x-large'
+) !default;
+
+$size-scale: $spacer * 2 !default;
+$size-scales: (
+  'x-small': -2,
+  'small': -1,
+  'default': 0,
+  'large': 1,
+  'x-large': 2
+) !default;

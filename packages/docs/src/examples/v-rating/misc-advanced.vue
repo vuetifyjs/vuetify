@@ -1,80 +1,74 @@
 <template>
   <v-card
     class="mx-auto overflow-hidden"
-    style="max-width: 600px;"
+    max-width="600"
   >
     <v-row>
       <v-col
         class="d-flex"
         cols="6"
       >
-        <v-img
-          src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"
-        ></v-img>
+        <v-img src="https://cdn.vuetifyjs.com/images/ratings/fortnite1.png"></v-img>
       </v-col>
+
       <v-col cols="6">
-        <v-container
-          class="pa-0 pl-2"
-          style="margin: -4px 0"
-        >
+        <v-container class="pa-0 ps-2 my-n1">
           <v-row>
             <v-col
               class="d-flex"
               cols="7"
             >
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"
-              ></v-img>
+              <v-img src="https://cdn.vuetifyjs.com/images/ratings/fortnite2.png"></v-img>
             </v-col>
+
             <v-col
               class="d-flex"
               cols="5"
             >
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"
-              ></v-img>
+              <v-img src="https://cdn.vuetifyjs.com/images/ratings/fortnite3.png"></v-img>
             </v-col>
+
             <v-col
               class="d-flex"
               cols="5"
             >
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"
-              ></v-img>
+              <v-img src="https://cdn.vuetifyjs.com/images/ratings/fortnite4.png"></v-img>
             </v-col>
+
             <v-col
               class="d-flex"
               cols="7"
             >
-              <v-img
-                src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"
-              ></v-img>
+              <v-img src="https://cdn.vuetifyjs.com/images/ratings/fortnite5.png"></v-img>
             </v-col>
           </v-row>
         </v-container>
       </v-col>
     </v-row>
+
     <v-card-title class="align-start">
       <div>
         <span class="text-h5">FORTNITE</span>
-        <div class="grey--text font-weight-light">
+        <div class="text-grey font-weight-light">
           Video game
         </div>
       </div>
+
       <v-spacer></v-spacer>
+
       <v-dialog
         v-model="dialog"
         width="400"
       >
-        <template v-slot:activator="{ on }">
-          <v-icon v-on="on">
-            mdi-share-variant
-          </v-icon>
+        <template v-slot:activator="{ props }">
+          <v-icon v-bind="props" icon="mdi-share-variant"></v-icon>
         </template>
+
         <v-card>
           <v-card-title>
             <span class="text-h6 font-weight-bold">Share</span>
             <v-spacer></v-spacer>
+
             <v-btn
               class="mx-0"
               icon
@@ -83,45 +77,46 @@
               <v-icon>mdi-close-circle-outline</v-icon>
             </v-btn>
           </v-card-title>
+
           <v-list>
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon color="indigo">
-                  mdi-facebook
-                </v-icon>
-              </v-list-item-action>
-              <v-card-title>Facebook</v-card-title>
+            <v-list-item title="Facebook">
+              <template v-slot:prepend>
+                <v-icon color="indigo" icon="mdi-facebook"></v-icon>
+              </template>
             </v-list-item>
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon color="cyan">
-                  mdi-twitter
-                </v-icon>
-              </v-list-item-action>
-              <v-card-title>Twitter</v-card-title>
+
+            <v-list-item title="Twitter">
+              <template v-slot:prepend>
+                <v-icon color="cyan" icon="mdi-twitter"></v-icon>
+              </template>
             </v-list-item>
-            <v-list-item>
-              <v-list-item-action>
-                <v-icon>mdi-email</v-icon>
-              </v-list-item-action>
-              <v-card-title>Email</v-card-title>
+
+            <v-list-item title="Email">
+              <template v-slot:prepend>
+                <v-icon icon="mdi-email"></v-icon>
+              </template>
             </v-list-item>
           </v-list>
+
           <v-text-field
             ref="link"
             :label="copied ? 'Link copied' : 'Click to copy link'"
             class="pa-4"
             readonly
-            value="https://g.co/kgs/nkrK43"
+            model-value="https://g.co/kgs/nkrK43"
             @click="copy"
           ></v-text-field>
         </v-card>
       </v-dialog>
     </v-card-title>
+
     <v-divider></v-divider>
+
     <v-card-actions>
-      <span class="pl-2 grey--text text--darken-2 font-weight-light text-caption">16,544 reviews</span>
+      <span class="ps-2 text-grey-darken-2 font-weight-light text-caption">16,544 reviews</span>
+
       <v-spacer></v-spacer>
+
       <v-rating
         v-model="rating"
         length="10"
@@ -129,9 +124,9 @@
       >
         <template v-slot:item="props">
           <v-icon
-            large
-            :color="props.isFilled ? 'purple darken-4' : ''"
-            v-text="`mdi-numeric-${props.index}-box`"
+            size="large"
+            :color="props.isFilled ? 'purple-darken-4' : ''"
+            :icon="`mdi-numeric-${props.index}-box`"
           ></v-icon>
         </template>
       </v-rating>
@@ -152,9 +147,10 @@
 
     methods: {
       copy () {
-        const markup = this.$refs.link
-        markup.focus()
+        this.$refs.link.focus()
+
         document.execCommand('selectAll', false, null)
+
         this.copied = document.execCommand('copy')
       },
     },

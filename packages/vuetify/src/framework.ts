@@ -1,78 +1,134 @@
-import { install } from './install'
+// Composables
+import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
+import { createDisplay, DisplaySymbol } from '@/composables/display'
+import { createIcons, IconSymbol } from '@/composables/icons'
+import { createLocale, LocaleSymbol } from '@/composables/locale'
+import { createTheme, ThemeSymbol } from '@/composables/theme'
+
+// Utilities
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
+import { nextTick, reactive } from 'vue'
 
 // Types
-import Vue from 'vue'
-import {
-  UserVuetifyPreset,
-  VuetifyPreset,
-} from 'vuetify/types/services/presets'
-import {
-  VuetifyService,
-  VuetifyServiceContract,
-} from 'vuetify/types/services'
+import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DefaultsOptions } from '@/composables/defaults'
+import type { DisplayOptions } from '@/composables/display'
+import type { IconOptions } from '@/composables/icons'
+import type { LocaleOptions, RtlOptions } from '@/composables/locale'
+import type { ThemeOptions } from '@/composables/theme'
 
-// Services
-import * as services from './services'
+export * from './composables'
 
-export default class Vuetify {
-  static install = install
+export interface VuetifyOptions {
+  aliases?: Record<string, any>
+  blueprint?: Blueprint
+  components?: Record<string, any>
+  directives?: Record<string, any>
+  defaults?: DefaultsOptions
+  display?: DisplayOptions
+  theme?: ThemeOptions
+  icons?: IconOptions
+  locale?: LocaleOptions & RtlOptions
+  ssr?: boolean
+}
 
-  static installed = false
+export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
-  static version = __VUETIFY_VERSION__
+export function createVuetify (vuetify: VuetifyOptions = {}) {
+  const { blueprint, ...rest } = vuetify
+  const options = mergeDeep(blueprint, rest)
+  const {
+    aliases = {},
+    components = {},
+    directives = {},
+  } = options
 
-  static config = {
-    silent: false,
+  const defaults = createDefaults(options.defaults)
+  const display = createDisplay(options.display, options.ssr)
+  const theme = createTheme(options.theme)
+  const icons = createIcons(options.icons)
+  const locale = createLocale(options.locale)
+
+  const install = (app: App) => {
+    for (const key in directives) {
+      app.directive(key, directives[key])
+    }
+
+    for (const key in components) {
+      app.component(key, components[key])
+    }
+
+    for (const key in aliases) {
+      app.component(key, defineComponent({
+        ...aliases[key],
+        name: key,
+        aliasName: aliases[key].name,
+      }))
+    }
+
+    theme.install(app)
+
+    app.provide(DefaultsSymbol, defaults)
+    app.provide(DisplaySymbol, display)
+    app.provide(ThemeSymbol, theme)
+    app.provide(IconSymbol, icons)
+    app.provide(LocaleSymbol, locale)
+
+    if (IN_BROWSER && options.ssr) {
+      if (app.$nuxt) {
+        app.$nuxt.hook('app:suspense:resolve', () => {
+          display.update()
+        })
+      } else {
+        const { mount } = app
+        app.mount = (...args) => {
+          const vm = mount(...args)
+          nextTick(() => display.update())
+          app.mount = mount
+          return vm
+        }
+      }
+    }
+
+    getUid.reset()
+
+    if (typeof __VUE_OPTIONS_API__ !== 'boolean' || __VUE_OPTIONS_API__) {
+      app.mixin({
+        computed: {
+          $vuetify () {
+            return reactive({
+              defaults: inject.call(this, DefaultsSymbol),
+              display: inject.call(this, DisplaySymbol),
+              theme: inject.call(this, ThemeSymbol),
+              icons: inject.call(this, IconSymbol),
+              locale: inject.call(this, LocaleSymbol),
+            })
+          },
+        },
+      })
+    }
   }
 
-  public framework: Dictionary<VuetifyServiceContract> = {
-    isHydrating: false,
-  } as any
-
-  public installed: string[] = []
-
-  public preset = {} as VuetifyPreset
-
-  public userPreset: UserVuetifyPreset = {}
-
-  constructor (userPreset: UserVuetifyPreset = {}) {
-    this.userPreset = userPreset
-
-    this.use(services.Presets)
-    this.use(services.Application)
-    this.use(services.Breakpoint)
-    this.use(services.Goto)
-    this.use(services.Icons)
-    this.use(services.Lang)
-    this.use(services.Theme)
+  return {
+    install,
+    defaults,
+    display,
+    theme,
+    icons,
+    locale,
   }
+}
 
-  // Called on the new vuetify instance
-  // bootstrap in install beforeCreate
-  // Exposes ssrContext if available
-  init (root: Vue, ssrContext?: object) {
-    this.installed.forEach(property => {
-      const service = this.framework[property]
+export const version = __VUETIFY_VERSION__
+createVuetify.version = version
 
-      service.framework = this.framework
+// Vue's inject() can only be used in setup
+function inject (this: ComponentPublicInstance, key: InjectionKey<any> | string) {
+  const vm = this.$
 
-      service.init(root, ssrContext)
-    })
+  const provides = vm.parent?.provides ?? vm.vnode.appContext?.provides
 
-    // rtl is not installed and
-    // will never be called by
-    // the init process
-    this.framework.rtl = Boolean(this.preset.rtl) as any
-  }
-
-  // Instantiate a VuetifyService
-  use (Service: VuetifyService) {
-    const property = Service.property
-
-    if (this.installed.includes(property)) return
-
-    // TODO maybe a specific type for arg 2?
-    this.framework[property] = new Service(this.preset, this as any)
-    this.installed.push(property)
+  if (provides && (key as any) in provides) {
+    return provides[(key as string)]
   }
 }

@@ -10,7 +10,6 @@
             v-model="otp"
             v-bind="$attrs"
             @finish="onOtpFinished"
-            v-on="$listeners"
           ></v-otp-input>
         </div>
       </div>

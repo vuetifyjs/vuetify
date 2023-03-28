@@ -8,11 +8,16 @@ related:
   - /getting-started/contributing/
   - /introduction/roadmap/
 ---
+<script setup>
+  import Releases from '@/components/doc/Releases.vue'
+</script>
 
 # Release notes
 
-The Vuetify team performs releases on a weekly basis. All release notes can be found through the GitHub and can be viewed below for your convenience. Furthermore between major releases there can be many breaking changes in which you can follow the latest migration guide below to help easy your transition.
+The Vuetify team performs releases on a weekly basis.
+
+<entry />
+
+All release notes can be found through [GitHub](https://www.github.com/vuetifyjs/vuetify/releases) and can be viewed below for your convenience. Between major releases there can be many breaking changes, which you can read about in the [upgrade guide](/getting-started/upgrade-guide)
 
 <releases />
-
-<backmatter />

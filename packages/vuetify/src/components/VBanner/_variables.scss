@@ -1,19 +1,46 @@
-@import '../../styles/styles.sass';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
 
-$banner-actions-start-margin: 90px !default;
-$banner-actions-margin: 8px !default;
-$banner-border-radius: 0 !default;
+// Defaults
+$banner-action-margin: 20px !default;
+$banner-actions-line-margin-top: 20px !default;
+$banner-background: rgb(var(--v-theme-surface)) !default;
+$banner-border-color: settings.$border-color-root !default;
+$banner-border-radius: map.get(settings.$rounded, 0) !default;
+$banner-border-style: settings.$border-style-root !default;
+$banner-border-thin-width: thin !default;
+$banner-border-width: 0 0 thin 0 !default;
+$banner-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$banner-density: ('default': 0, 'comfortable': -1, 'compact': -2) !default;
 $banner-elevation: 0 !default;
-$banner-line-height: 20px !default;
-$banner-start-padding: 24px !default;
-$banner-end-padding: 8px !default;
-$banner-y-padding: 16px !default;
-$banner-icon-padding: 16px !default;
-$banner-content-padding: 8px !default;
-$banner-mobile-padding: 10px !default;
-$banner-mobile-multiline-padding: 24px !default;
-$banner-mobile-start-padding: 16px !default;
-$banner-mobile-top-padding: 16px !default;
-$banner-mobile-actions-top-padding: 12px !default;
-$banner-mobile-singleline-padding: 36px !default;
-$banner-shaped-border-radius: map-get($rounded, 'xl') $banner-border-radius !default;
+$banner-font-size: tools.map-deep-get(settings.$typography, 'body-2', 'size') !default;
+$banner-line-height: tools.map-deep-get(settings.$typography, 'subtitle-2', 'line-height') !default;
+$banner-padding-inline-start: 16px !default;
+$banner-padding-inline-end: 8px !default;
+$banner-padding: 8px !default;
+$banner-positions: absolute fixed sticky !default;
+$banner-prepend-margin-end: 24px !default;
+$banner-rounded-border-radius: settings.$border-radius-root !default;
+$banner-stacked-padding-inline-end: 36px !default;
+$banner-sticky-top: 0 !default;
+$banner-text-padding-end: 90px !default;
+$banner-width: 100% !default;
+
+// Mobile
+$banner-mobile-avatar-margin-end: 16px !default;
+$banner-mobile-content-padding-end: 8px !default;
+$banner-mobile-padding-end: 8px !default;
+$banner-mobile-padding-start: 16px !default;
+
+$banner-border: (
+  $banner-border-color,
+  $banner-border-style,
+  $banner-border-width,
+  $banner-border-thin-width
+) !default;
+
+$banner-theme: (
+  $banner-background,
+  $banner-color
+) !default;

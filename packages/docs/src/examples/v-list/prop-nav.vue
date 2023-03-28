@@ -2,54 +2,49 @@
   <v-card
     class="mx-auto"
     width="256"
-    tile
   >
-    <v-navigation-drawer permanent>
-      <v-system-bar></v-system-bar>
-      <v-list>
-        <v-list-item>
-          <v-list-item-avatar>
-            <v-img src="https://cdn.vuetifyjs.com/images/john.png"></v-img>
-          </v-list-item-avatar>
-        </v-list-item>
+    <v-layout>
+      <v-navigation-drawer permanent absolute>
+        <v-list>
+          <v-list-item
+            prepend-avatar="https://cdn.vuetifyjs.com/images/john.png"
+            title="John Leider"
+            subtitle="john@google.com"
+          >
+            <template v-slot:append>
+              <v-btn
+                size="small"
+                variant="text"
+                icon="mdi-menu-down"
+              ></v-btn>
+            </template>
+          </v-list-item>
+        </v-list>
 
-        <v-list-item link>
-          <v-list-item-content>
-            <v-list-item-title class="text-h6">
-              John Leider
-            </v-list-item-title>
-            <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
-          </v-list-item-content>
+        <v-divider></v-divider>
 
-          <v-list-item-action>
-            <v-icon>mdi-menu-down</v-icon>
-          </v-list-item-action>
-        </v-list-item>
-      </v-list>
-      <v-divider></v-divider>
-      <v-list
-        nav
-        dense
-      >
-        <v-list-item-group
-          v-model="selectedItem"
-          color="primary"
+        <v-list
+          :lines="false"
+          density="compact"
+          nav
         >
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
+            :value="item"
+            active-color="primary"
           >
-            <v-list-item-icon>
-              <v-icon v-text="item.icon"></v-icon>
-            </v-list-item-icon>
+            <template v-slot:prepend>
+              <v-icon :icon="item.icon"></v-icon>
+            </template>
 
-            <v-list-item-content>
-              <v-list-item-title v-text="item.text"></v-list-item-title>
-            </v-list-item-content>
+            <v-list-item-title v-text="item.text"></v-list-item-title>
           </v-list-item>
-        </v-list-item-group>
-      </v-list>
-    </v-navigation-drawer>
+        </v-list>
+      </v-navigation-drawer>
+
+      <v-main style="height: 354px;"></v-main>
+    </v-layout>
   </v-card>
 </template>
 

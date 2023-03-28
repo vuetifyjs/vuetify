@@ -26,18 +26,18 @@
         v-for="item in items"
         :key="item.title"
       >
-        <v-list-item-icon>
+        <v-list-item-avatar>
           <v-icon
             v-if="item.icon"
             color="pink"
           >
             mdi-star
           </v-icon>
-        </v-list-item-icon>
+        </v-list-item-avatar>
 
-        <v-list-item-content>
+        <v-list-item-header>
           <v-list-item-title v-text="item.title"></v-list-item-title>
-        </v-list-item-content>
+        </v-list-item-header>
 
         <v-list-item-avatar>
           <v-img :src="item.avatar"></v-img>

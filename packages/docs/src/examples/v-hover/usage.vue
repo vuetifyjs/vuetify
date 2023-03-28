@@ -1,54 +1,51 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-hover
-      v-slot="{ hover }"
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <v-card
-        :elevation="hover ? 12 : 2"
-        :class="{ 'on-hover': hover }"
-        height="200"
-        max-width="350"
-        class="mx-auto"
-      >
-        <v-card-text class="my-4 text-center text-h6">
-          Hover over me!
-        </v-card-text>
-      </v-card>
-    </v-hover>
-  </v-row>
+    <div>
+      <v-hover v-bind="props">
+        <template v-slot:default="{ isHovering, props: hoverProps }">
+          <v-card
+            v-bind="hoverProps"
+            :color="isHovering ? 'primary' : undefined"
+            title="Hover over me"
+            text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus! Eaque cupiditate minima, at placeat totam, magni doloremque veniam neque porro libero rerum unde voluptatem!"
+          ></v-card>
+        </template>
+      </v-hover>
+    </div>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-hover'
+  const model = ref('default')
+  const options = []
+  const props = computed(() => {
+    return {}
+  })
 
-    data: () => ({
-      defaults: {
-        'close-delay': 0,
-        disabled: false,
-        'open-delay': 0,
-      },
-      options: {
-        sliders: {
-          'close-delay': [0, 1000],
-          'open-delay': [0, 1000],
-        },
-      },
-      tabs: ['disabled'],
-    }),
-  }
+  const slots = computed(() => {
+    return `
+  <template v-slot:default="{ isHovering, props }">
+    <v-card
+      v-bind="props"
+      :color="isHovering ? 'primary' : undefined"
+      title="Hover over me"
+      text="..."
+    ></v-card>
+  </template>
+`
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>
-
-<style lang="sass" scoped>
-.v-card.on-hover.theme--dark
-  background-color: rgba(#FFF, 0.8)
-  >.v-card__text
-    color: #000
-</style>

@@ -1,27 +1,19 @@
 <template>
-  <v-row>
-    <v-col cols="12" md="3">
-      <div class="pa-4 text-center secondary text-no-wrap rounded-t-xl">
-        .rounded-t-xl
-      </div>
-    </v-col>
+  <div class="d-flex justify-space-around">
+    <div class="pa-4 bg-secondary rounded-t-xl">
+      .rounded-t-xl
+    </div>
 
-    <v-col cols="12" md="3">
-      <div class="pa-4 text-center secondary text-no-wrap rounded-r-xl">
-        .rounded-r-xl
-      </div>
-    </v-col>
+    <div class="pa-4 bg-secondary rounded-b-xl">
+      .rounded-b-xl
+    </div>
 
-    <v-col cols="12" md="3">
-      <div class="pa-4 text-center secondary text-no-wrap rounded-b-xl">
-        .rounded-b-xl
-      </div>
-    </v-col>
+    <div class="pa-4 bg-secondary rounded-s-xl">
+      .rounded-s-xl
+    </div>
 
-    <v-col cols="12" md="3">
-      <div class="pa-4 text-center secondary text-no-wrap rounded-l-xl">
-        .rounded-l-xl
-      </div>
-    </v-col>
-  </v-row>
+    <div class="pa-4 bg-secondary rounded-e-xl">
+      .rounded-e-xl
+    </div>
+  </div>
 </template>

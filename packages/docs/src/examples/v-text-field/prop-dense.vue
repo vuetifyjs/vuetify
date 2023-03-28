@@ -1,81 +1,40 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            dense
-            label="Regular"
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Filled"
-            filled
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Filled"
-            placeholder="Dense & Rounded"
-            filled
-            rounded
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Solo"
-            solo
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Outlined"
-            outlined
-            dense
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="4"
-        >
-          <v-text-field
-            label="Outlined"
-            placeholder="Placeholder"
-            outlined
-            dense
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+  <v-card
+    class="mx-auto"
+    color="grey-lighten-3"
+    max-width="400"
+  >
+    <v-card-text>
+      <v-text-field
+        :loading="loading"
+        density="compact"
+        variant="solo"
+        label="Search templates"
+        append-inner-icon="mdi-magnify"
+        single-line
+        hide-details
+        @click:append-inner="onClick"
+      ></v-text-field>
+    </v-card-text>
+  </v-card>
 </template>
+
+<script>
+  export default {
+    data: () => ({
+      loaded: false,
+      loading: false,
+    }),
+
+    methods: {
+      onClick () {
+        this.loading = true
+
+        setTimeout(() => {
+          this.loading = false
+          this.loaded = true
+        }, 2000)
+      },
+    },
+  }
+</script>

@@ -1,41 +1,46 @@
 ---
+nav: Pagination
 meta:
   title: Pagination component
   description: The pagination component is used to separate long sets of data so that it is easier for a user to consume information.
   keywords: pagination, vuetify pagination component, vue pagination component
 related:
-  - /components/data-iterator/
-  - /components/data-tables/
-  - /components/lists/
+  - /components/data-tables/basics/
+  - /components/data-tables/pagination/
+  - /components/tables/
 ---
 
 # Pagination
 
 The `v-pagination` component is used to separate long sets of data so that it is easier for a user to consume information. Depending on the length provided, the pagination component will automatically scale. To maintain the current page, simply supply a **v-model** attribute.
 
-<entry-ad />
+----
 
 ## Usage
 
 Pagination by default displays the number of pages based on the set **length** prop, with **prev** and **next** buttons surrounding to help you navigate.
 
-<example file="v-pagination/usage" />
+<usage name="v-pagination" />
+
+<entry />
 
 ## API
 
-- [v-pagination](/api/v-pagination)
+| Component | Description |
+| - | - |
+| [v-pagination](/api/v-pagination/) | Primary Component |
 
-<inline-api page="components/paginations" />
+<api-inline hide-links />
 
 ## Examples
 
 ### Props
 
-#### Circle
+#### Rounded
 
-The **circle** prop gives you an alternate style for pagination buttons.
+The **rounded** prop allows you to render pagination buttons with alternative styles.
 
-<example file="v-pagination/prop-circle" />
+<example file="v-pagination/prop-rounded" />
 
 #### Disabled
 
@@ -60,5 +65,3 @@ Using the **length** prop you can set the length of `v-pagination`, if the numbe
 You can also manually set the maximum number of visible page buttons with the **total-visible** prop.
 
 <example file="v-pagination/prop-total-visible" />
-
-<backmatter />

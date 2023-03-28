@@ -1,4 +1,5 @@
 ---
+nav: Alerts
 meta:
   title: Alert component
   description: The v-alert component is used to convey information to the user. Designed to stand out, the alerts come in four contextual styles.
@@ -11,104 +12,152 @@ related:
 
 # Alerts
 
-The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors. These default types come in 4 variations: **success**, **info**, **warning**, and **error**. Default icons are assigned which help represent different actions each type portrays. Many parts of an alert such as `border`, `icon`, and `color` can also be customized to fit almost any situation.
+The `v-alert` component is used to convey important information to the user through the use of contextual types, icons, and colors.
 
-<entry-ad />
+![Alert Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-entry.png)
+
+----
 
 ## Usage
 
-Alerts in their simplest form are flat [sheets of paper](/components/sheets) that display a message.
+An alert is a [v-sheet](/components/sheets/) that specializes in getting the user's attention. While similar to [v-banner](/components/banners/) in functionality, `v-alert` is typically inline with content and used multiple times throughout an application.
 
 <usage name="v-alert" />
 
+<entry />
+
 ## API
 
-- [v-alert](/api/v-alert)
+| Component | Description |
+| - | - |
+| [v-alert](/api/v-alert/) | Primary Component |
+| [v-alert-title](/api/v-alert-title/) | Sub-component used to display the `v-alert` title. Wraps the `#title` slot |
 
-<inline-api page="components/alerts" />
+## Anatomy
 
-## Examples
+The recommended placement of elements inside of `v-alert` is:
+
+* Place a `v-icon` on the far left
+* Place `v-alert-title` to the right of the contextual icon
+* Place textual content below the title
+* Place closing actions to the far right
+
+![Alert Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-alert/v-alert-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Alert container holds all `v-alert` components |
+| 2. Icon | An icon that correlates to the contextual state of the alert; **success, info, warning, error** |
+| 3. Title | A heading with increased font-size |
+| 4. Text | A content area for displaying text and other inline elements |
+| 5. Close Icon (optional) | Used to hide the `v-alert` component |
+
+<api-inline hide-links />
+
+## Guide
+
+The `v-alert` component is a callout element designed to attact the attention of a user. Unlike [v-banner](/components/banners/), the `v-alert` component is intended to be used and re-used throughout your application. An alert's color is derived from its **type** property which corresponds to your application's contextual [theme colors](/features/theme/#custom-theme-colors) and [iconfont aliases](/features/icon-fonts/#creating-a-custom-icon-set).
 
 ### Props
 
-#### Border
+In addition to the standard [v-sheet](/components/sheets/) properties such as elevation, dimension, and border-radius, the `v-alert` component supports **v-model**, **variants**, and **density**.
 
-The **border** prop adds a simple border to one of the 4 sides of the alert. This can be combined with props like **color**, **dark**, and **type** to provide unique accents to the alert.
+#### Content
 
-<example file="v-alert/prop-border" />
+The `v-alert` component supports simple content using the **title** and **text** props. This approach is best for strings that do not need custom styling.
 
-#### Colored border
+The following code snippet is an example of a basic `v-alert` component only containing text:
+
+```html
+<v-alert text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus..."></v-alert>
+```
+
+Adding a title is as easy as defining its value. The next example adds a string title to accompany the content text:
+
+<example file="v-alert/prop-content" />
+
+Notice how the alert does not have a color or icon. This is defined using the **type** property.
+
+#### Type
+
+Alerts have 4 contextual states: **success**, **info**, **warning**, and **error**. Each state has a default _color_ and _icon_ associated with it. When a **type** is not provided, the `v-alert` component defaults to a greyish background.
+
+With a basic alert rendered, add your choice of contextual type. The following example puts the `v-alert` component in a success state:
+
+<example file="v-alert/prop-type" />
+
+##### Type reference
+
+| Type | Color | Icon alias | Icon |
+| - | - | - | :---: |
+| Success | **success** { .text-success } | $success | <v-icon icon="$success" /> |
+| Info | **info** { .text-info } | $info | <v-icon icon="$info" /> |
+| Warning | **warning** { .text-warning } | $warning | <v-icon icon="$warning" /> |
+| Error | **error** { .text-error } | $error | <v-icon icon="$error" /> |
+
+#### Color and icon
+
+The **type** property acts as a shorthand for a **color** and **icon** combination, you can use both props individually to achieve the same effect. The following example produces the same result as using **type="success"** by defining a custom color and using the icon lookup table to get the globally defined success icon:
+
+```html
+<v-alert
+  color="success"
+  icon="$success"
+  title="Alert title"
+  text="Lorem ipsum dolor sit amet consectetur adipisicing elit. Commodi, ratione debitis quis est labore voluptatibus..."
+></v-alert>
+```
+
+#### Density
+
+The `v-alert` component has the ability to reduce its height in intervals using the density prop. This is useful when you need to reduce the vertical space a component needs. The following example reduces the vertical space by using **density="compact"**:
+
+<example file="v-alert/prop-density" />
+
+The **density** prop supports 3 levels of component height; **default**, **comfortable**, and **compact**.
+
+#### Variants
+
+The `v-alert` has 6 style variants, **elevated**, **flat**, **tonal**, **outlined**, **text**, and **plain**. By default, the `v-alert` component is **flat**; which means that it has a solid background and no box-shadow (elevation). The following example modifies the overall styling of the alert with a custom variant:
+
+<example file="v-alert/prop-variant" />
+
+#### Closable
+
+The **closable** prop adds a [v-icon](/components/icons) on the far right, after the main content. This control hides the `v-alert` when clicked, setting it's internal model to **false**. Manually control the visibility of the alert by binding **v-model** or using **model-value**. The following example uses a dynamic model that shows and hides the `v-alert` component:
+
+<example file="v-alert/prop-closable" />
+
+The close icon automatically applies a default `aria-label` and is configurable by using the **close-label** prop or changing **close** value in your locale.
+
+<alert type="info">
+
+  For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
+
+</alert>
+
+## Additional Examples
+
+The following is a collection of `v-alert` examples that demonstrate how different the properties work in an application.
+
+### Colored border
 
 The **colored-border** prop removes the alert background in order to accent the **border** prop. If a **type** is set, it will use the type's default color. If no **color** or **type** is set, the color will default to the inverted color of the applied theme (black for light and white/gray for dark).
 
 <example file="v-alert/prop-colored-border" />
 
-#### Dense
-
-The **dense** prop decreases the height of the alert to create a simple and compact style. When combined with the **border** prop, the border thickness will be decreased to stay consistent with the style.
-
-<example file="v-alert/prop-dense" />
-
-#### Dismissible
-
-The **dismissible** prop adds a close button to the end of the alert component. Clicking this button will set its value to false and effectively hide the alert. You can restore the alert by binding **v-model** and setting it to true. The close icon automatically has an `aria-label` applied that can be changed by modifying the **close-label** prop or changing **close** value in your locale. For more information on how to global modify your locale settings, navigate to the [Internationalization page](/features/internationalization).
-
-<example file="v-alert/prop-dismissible" />
-
-#### Icon
+### Icon
 
 The **icon** prop allows you to add an icon to the beginning of the alert component. If a **type** is provided, this will override the default type icon. Additionally, setting the **icon** prop to _false_ will remove the icon altogether.
 
 <example file="v-alert/prop-icon" />
 
-#### Outlined
+### Outlined
 
 The **outlined** prop inverts the style of an alert, inheriting the currently applied **color**, applying it to the text and border, and making its background transparent.
 
 <example file="v-alert/prop-outlined" />
 
-<discovery-ad />
-
-#### Prominent
-
-The **prominent** prop provides a more pronounced alert by increasing the height and applying a halo to the icon. When applying both **prominent** and **dense** together, the alert will take on the appearance of a normal alert but with the **prominent** icon effects.
-
-<example file="v-alert/prop-prominent" />
-
-#### Text
-
-The **text** prop is a simple alert variant that applies a reduced opacity background of the provided **color**. Similar to other styled props, **text** can be combined with other props like **dense**, **prominent**, **outlined**, and **shaped** to create a unique and customized component.
-
-<example file="v-alert/prop-text" />
-
-#### Shaped
-
-The **shaped** prop will add **border-radius**  at the top-left and bottom-right of the alert. Similar to other styled props, **shaped** can be combined with other props like **dense**, **prominent**, **outlined** and **text** to create a unique and customized component
-
-<example file="v-alert/prop-shaped" />
-
-#### Transition
-
-The **transition** prop allows you to apply a transition to the alert which is viewable when the component hides and shows. For more information, you can check out any of [Vuetify's prebuilt transitions](/styles/transitions#motion) or review how to [create your own](/styles/transitions#create-your-own).
-
-<example file="v-alert/prop-transition" />
-
-#### Twitter
-
-By combining **color**, **dismissible**, **border**, **elevation**, **icon**, and **colored-border** props, you can create stylish custom alerts such as this Twitter notification.
-
-<example file="v-alert/misc-twitter" />
-
-#### Type
-
-The **type** prop provides 4 default `v-alert` styles: **success**, **info**, **warning**, and **error**. Each of these styles provides a default icon and color. The default colors can be configured globally by customizing [Vuetify's theme](/features/theme).
-
-<example file="v-alert/prop-type" />
-
 ## Accessibility
 
-<vuetify-ad slug="vs-video-accessibility" />
-
-By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert) which denotes that the alert \"is a live region with important and usually time-sensitive information.\" When using the **dismissible** prop, the close icon will receive a corresponding `aria-label`. This value can be modified by changing either the **close-label** prop or globally through customizing the [Internationalization](/features/internationalization)'s default value for the _close_ property.
-
-<backmatter />
+By default, `v-alert` components are assigned the [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert) which denotes that the alert \"is a live region with important and usually time-sensitive information.\" When using the **closable** prop, the close icon will receive a corresponding `aria-label`. This value can be modified by changing either the **close-label** prop or globally through customizing the [Internationalization](/features/internationalization)'s default value for the _close_ property.

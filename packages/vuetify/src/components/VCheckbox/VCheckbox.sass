@@ -1,9 +1,8 @@
-@import './_variables.scss'
+@use 'sass:map'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
 
-.v-input--checkbox
-  &.v-input--indeterminate
-    &.v-input--is-disabled
-      opacity: $checkbox-disabled-opacity
-
-  &.v-input--dense
-    margin-top: $checkbox-dense-margin-top
+.v-checkbox
+  .v-selection-control
+    min-height: var(--v-input-control-height)

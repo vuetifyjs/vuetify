@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
@@ -13,7 +14,7 @@ related:
 
 Unit tests are an important (and sometimes ignored) part of developing applications. They help us secure our processes and workflows, ensuring that the most critical parts of our projects are protected from accidental mistakes or oversights in our development. Because of this, Vue has its own testing utility called [vue-test-utils](https://vue-test-utils.vuejs.org/). It provides useful features for interacting with Vue components and works with many popular test runners.
 
-<entry-ad />
+<entry />
 
 <alert type="warning">
 
@@ -35,9 +36,7 @@ Information on how to setup a test runner with Vue CLI can be found on the [offi
 In order to properly utilize Typescript, Vuetify components extend the Vue object. This has the potential to [cause issues](https://github.com/vuetifyjs/vuetify/issues/4068) as noted in the above alert. Instead of using a [localVue instance](https://vue-test-utils.vuejs.org/api/options.html#localvue) we must instead install Vuetify globally in the unit tests setup file.
 This can vary between test runners. Make sure to reference the appropriate documentation on setup files.
 
-```js
-// tests/setup.js
-
+```js { resource="tests/setup.js" }
 import Vue from 'vue'
 import Vuetify from 'vuetify'
 
@@ -52,15 +51,14 @@ Vue.use(Vuetify)
 
 ## Spec Tests
 
-Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
+Creating unit tests in Vuetify is similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
 
-```js
-// Imports
+```js { resource="Imports" }
 import AppBtn from '../AppBtn.vue'
 import Vuetify from 'vuetify'
 
 // Utilities
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
   // DO NOT use Vuetify on the localInstance
@@ -126,9 +124,7 @@ Let's create an example test use-case that we might find in our application.
 
 In the example above we have created a custom component with a **title** prop and a `v-btn` that emits a custom event when clicked. We now want to create tests that ensure this behavior works correctly and continues to do so through future changes. The below examples are created with with the [Jest](https://jestjs.io/) test runner.
 
-```js
-// test/CustomCard.spec.js
-
+```js { resource="test/CustomCard.spec.js" }
 // Libraries
 import Vuetify from 'vuetify'
 
@@ -201,9 +197,7 @@ When writing tests you will often find yourself repeating the same things over a
 
 One of the most common duplicated code written in unit tests are the mount functions. This can easily be compacted into a reusable function for each run.
 
-```js
-// test/CustomCard.spec.js
-
+```js { resource="test/CustomCard.spec.js" }
 describe('CustomCard.vue', () => {
   const localVue = createLocalVue()
   let vuetify
@@ -230,15 +224,11 @@ describe('CustomCard.vue', () => {
 })
 ```
 
-<vuetify-ad slug="material-dashboard-pro" />
-
 ### Mocking Vuetify
 
 Many of Vuetify's components utilize the global `$vuetify` object to derive settings such as default text or breakpoint information. When testing these components, you will need to provide `vue-test-utils` with a mock object.
 
-```js
-// test/CustomAlert.spec.js
-
+```js { resource="test/CustomAlert.spec.js" }
 // Libraries
 import Vuetify from 'vuetify'
 
@@ -278,9 +268,7 @@ describe('CustomAlert.vue', () => {
 
 Keep in mind, you **only need to stub** the services that are being used. such as **lang** or **application**. You can also import these services manually.
 
-```js
-// test/CustomNavigationDrawer.spec.js
-
+```js { resource="test/CustomNavigationDrawer.spec.js" }
 // Libraries
 import Vuetify from 'vuetify'
 
@@ -315,12 +303,8 @@ describe('CustomNavigationDrawer.vue', () => {
 
 A complete list of all services available are listed below:
 
-- [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
-- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
+- [composables](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/composables)
 - [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
-- [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
-- [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
-- [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
 
 ## E2E tests
 
@@ -338,9 +322,7 @@ For example, [Cypress](https://docs.cypress.io/guides/references/best-practices.
 </template>
 ```
 
-```js
-// cypress/integration/test.spec.js
-
+```js { resource="cypress/integration/test.spec.js" }
 describe('Test With Attribute', () => {
   it('Find by data-cy', () => {
     cy.visit('/')
@@ -349,6 +331,4 @@ describe('Test With Attribute', () => {
 })
 ```
 
-<promoted-ad type="theme" />
-
-<backmatter />
+<promoted type="theme" />

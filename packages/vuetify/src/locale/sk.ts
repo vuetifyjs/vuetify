@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} ďalších',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} súborov',
     counterSize: '{0} súborov ({1} celkom)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Navigácia stránkovania',
+      root: 'Navigácia stránkovania',
       next: 'Ďalšia stránka',
       previous: 'Predchádzajúca stránka',
       page: 'Ísť na stránku {0}',
       currentPage: 'Aktuálna stránka, stránka {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Hodnotenie {0} z {1}',
+      item: 'Hodnotenie {0} z {1}',
     },
   },
 }

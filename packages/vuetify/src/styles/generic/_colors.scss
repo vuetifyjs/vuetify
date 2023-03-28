@@ -1,41 +1,69 @@
+@use 'sass:map';
+@use '../settings';
+@use '../settings/colors';
+@use '../tools/functions' as *;
+
 @mixin background-color($color_value) {
   background-color: $color_value !important;
-  border-color: $color_value !important;
 }
 @mixin text-color($color_value) {
   color: $color_value !important;
-  caret-color: $color_value !important;
+}
+@mixin background-text-color($color_name, $color_type) {
+  $map_value: map-deep-get(colors.$text-on-colors, $color_name, $color_type);
+
+  color: $map_value !important;
 }
 
-// Put the loop in a function so it can't leak
-@each $color_name, $color_value in $shades {
-  .v-application .#{$color_name} {
-    @include background-color($color_value);
+@if (settings.$color-pack) {
+  @each $color_name, $color_value in colors.$shades {
+    .bg-#{$color_name} {
+      @include background-color($color_value);
+
+      @if (map.has-key(colors.$text-on-colors, 'shades')) {
+        @include background-text-color('shades', $color_name);
+      }
+    }
   }
 
-  .v-application .#{$color_name}--text {
-    @include text-color($color_value);
-  }
-}
-
-@if ($color-pack) {
-  @each $color_name, $color_color in $colors {
+  @each $color_name, $color_color in colors.$colors {
     @each $color_type, $color_value in $color_color {
       @if ($color_type == 'base') {
-        .v-application .#{$color_name} {
+        .bg-#{$color_name} {
           @include background-color($color_value);
-        }
 
-        .v-application .#{$color_name}--text {
+          @if (map.has-key(colors.$text-on-colors, $color_name)) {
+            @include background-text-color($color_name, $color_type);
+          }
+        }
+      }
+      @else if ($color_type != 'shades') {
+        .bg-#{$color_name}-#{$color_type} {
+          @include background-color($color_value);
+
+          @if (map.has-key(colors.$text-on-colors, $color_name)) {
+            @include background-text-color($color_name, $color_type);
+          }
+        }
+      }
+    }
+  }
+
+  @each $color_name, $color_value in colors.$shades {
+    .text-#{$color_name} {
+      @include text-color($color_value);
+    }
+  }
+
+  @each $color_name, $color_color in colors.$colors {
+    @each $color_type, $color_value in $color_color {
+      @if ($color_type == 'base') {
+        .text-#{$color_name} {
           @include text-color($color_value);
         }
       }
       @else if ($color_type != 'shades') {
-        .v-application .#{$color_name}.#{$color_type} {
-          @include background-color($color_value);
-        }
-
-        .v-application .#{$color_name}--text.text--#{$color_type} {
+        .text-#{$color_name}-#{$color_type} {
           @include text-color($color_value);
         }
       }

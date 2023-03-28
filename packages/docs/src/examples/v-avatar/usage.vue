@@ -1,40 +1,58 @@
 <template>
-  <div
-    style="width: 100%"
-    class="text-center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    name="v-avatar"
   >
-    <v-avatar
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <span class="white--text">VJ</span>
-    </v-avatar>
-  </div>
+    <div class="text-center">
+      <v-avatar
+        v-bind="props"
+        :image="image ? 'https://cdn.vuetifyjs.com/images/john-smirk.png' : undefined"
+      ></v-avatar>
+    </div>
+
+    <template v-slot:configuration>
+      <v-checkbox v-model="icon" label="Icon"></v-checkbox>
+
+      <v-checkbox v-model="image" label="Image"></v-checkbox>
+
+      <v-slider
+        v-model="size"
+        min="40"
+        max="80"
+        step="1"
+        label="Size"
+      ></v-slider>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const model = ref('default')
+  const icon = ref(false)
+  const image = ref(false)
+  const size = ref(40)
+  const options = ['tile']
+  const props = computed(() => {
+    return {
+      color: !image.value && !icon.value ? 'surface-variant' : undefined,
+      icon: icon.value ? 'mdi-vuetify' : undefined,
+      image: image.value ? 'smirk.png' : undefined,
+      rounded: model.value === 'tile' ? '0' : undefined,
+      size: size.value === 40 ? undefined : `${size.value}`,
+    }
+  })
 
-    data: () => ({
-      defaults: {
-        color: 'primary',
-        rounded: false,
-        size: 56,
-        tile: false,
-      },
-      options: {
-        selects: {
-          color: ['primary', 'accent', 'warning lighten-2', 'teal', 'grey lighten-2'],
-        },
-        booleans: [],
-        sliders: {
-          size: [25, 128],
-        },
-      },
-      tabs: ['rounded', 'tile'],
-    }),
-  }
+  const slots = computed(() => {
+    return ''
+  })
+
+  const code = computed(() => {
+    return `<v-avatar${propsToString(props.value)}>${slots.value}</v-avatar>`
+  })
 </script>

@@ -1,41 +1,49 @@
+import { describe, expect, it } from '@jest/globals'
+
 // Directives
 import Intersect from '../'
 
-describe('intersect', () => {
-  it('should bind event on inserted', () => {
+describe('v-intersect', () => {
+  it('should bind event on mounted', () => {
     const callback = jest.fn()
     const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Intersect.inserted(el, {
+    Intersect.mounted(el, {
       value: callback,
       modifiers: { quiet: true },
-    } as any, { context: { _uid: 1 } } as any)
+      instance: {
+        $: { uid: 1 },
+      },
+    } as any)
 
     expect((el as any)._observe).toBeTruthy()
     expect(callback).not.toHaveBeenCalled()
 
     document.body.removeChild(el)
 
-    Intersect.unbind(el, {
-      value: callback,
-      modifiers: { quiet: true },
-    } as any, { context: { _uid: 1 } } as any)
+    Intersect.unmounted(el, {
+      instance: {
+        $: { uid: 1 },
+      },
+    } as any)
 
-    expect((el as any)._observe[1]).toBeFalsy()
+    expect((el as any)._observe[1]).toBeUndefined()
   })
 
-  it('should invoke callback once and unbind', () => {
+  it('should invoke callback once and unmount', () => {
     const el = document.createElement('div')
-
     document.body.appendChild(el)
 
     const callback = jest.fn()
 
-    Intersect.inserted(el, {
+    Intersect.mounted(el, {
       value: callback,
       modifiers: { once: true },
-    } as any, { context: { _uid: 1 } } as any)
+      instance: {
+        $: { uid: 1 },
+      },
+    } as any)
 
     expect(callback).toHaveBeenCalledTimes(0)
     expect((el as any)._observe[1]).toBeTruthy()
@@ -48,6 +56,6 @@ describe('intersect', () => {
     ;(el as any)._observe[1].observer.callback([{ isIntersecting: true }])
 
     expect(callback).toHaveBeenCalledTimes(2)
-    expect((el as any)._observe[1]).toBeFalsy()
+    expect((el as any)._observe[1]).toBeUndefined()
   })
 })

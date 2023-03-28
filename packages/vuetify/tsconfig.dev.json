@@ -2,6 +2,13 @@
   "extends": "./tsconfig.json",
   "include": [
     "src",
-    "dev"
-  ]
+    "dev",
+    "cypress"
+  ],
+  "compilerOptions": {
+    "allowJs": true
+  },
+  "vueCompilerOptions": {
+    "strictTemplates": true
+  }
 }

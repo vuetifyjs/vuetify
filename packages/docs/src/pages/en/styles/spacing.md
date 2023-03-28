@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Spacing helpers
+  title: Spacing
   description: Spacing helper classes allow you to apply margin or padding to any element in increments from 1 to 5.
   keywords: spacing helper classes, spacing classes, vuetify spacing
 related:
@@ -11,9 +11,9 @@ related:
 
 # Spacing
 
-Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.<inline-ad slug="scrimba-spacing" />
+Update your layout without creating new classes. Spacing helpers are useful for modifying the padding and margin of an element.<inline slug="scrimba-spacing" />
 
-<entry-ad />
+<entry />
 
 Use the playground to get a feel for what the different helper classes can do. For an explanation of **how they work**, see the How it works section below.
 
@@ -81,7 +81,7 @@ The **size** controls the increment of the property in 4px intervals:
 
 ### Breakpoints
 
-Vuetify comes with a 12 point grid system built using Flexbox. Spacing is used to create specific layouts within an application's content. It consists of 5 media breakpoints used to target specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. The default resolutions are defined below in the *Viewport Breakpoints* table and can be modified by customizing the [breakpoint service config](/features/breakpoints).
+Vuetify comes with a 12 point grid system built using Flexbox. Spacing is used to create specific layouts within an application's content. It consists of 5 media breakpoints used to target specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. The default resolutions are defined below in the *Viewport Breakpoints* table and can be modified by customizing the [breakpoint service config](/features/display-and-platform/).
 
 <breakpoints-table />
 
@@ -100,5 +100,3 @@ Using the margin helper classes you can easily center content horizontally.
 Margin can also be applied negatively at the same **1 to 16** intervals.
 
 <example file="spacing/negative-margin" />
-
-<backmatter />

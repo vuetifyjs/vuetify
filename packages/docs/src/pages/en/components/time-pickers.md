@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Time picker component
   description: The time picker component is a stand-alone interface that allows the selection of hours and minutes in AM/PM and 24hr formats.
@@ -13,7 +14,7 @@ related:
 
 The `v-time-picker` is stand-alone component that can be utilized in many existing Vuetify components. It offers the user a visual representation for selecting the time.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,9 +24,7 @@ Time pickers have the light theme enabled by default.
 
 ## API
 
-- [v-time-picker](/api/v-time-picker)
-
-<inline-api page="components/time-pickers" />
+<api-inline />
 
 ## Examples
 
@@ -110,5 +109,3 @@ You can specify the picker's width or make it full width.
 Due to the flexibility of pickers, you can really dial in the experience exactly how you want it.
 
 <example file="v-time-picker/misc-dialog-and-menu" />
-
-<backmatter />

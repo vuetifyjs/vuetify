@@ -1,4 +1,1 @@
-import VBtn from './VBtn'
-
-export { VBtn }
-export default VBtn
+export { VBtn } from './VBtn'

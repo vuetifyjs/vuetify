@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
@@ -13,19 +14,17 @@ related:
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.
 
-<entry-ad />
-
 ## Usage
 
 Here we display an example list of actions that could be present in an application.
 
 <usage name="v-bottom-sheet" />
 
+<entry />
+
 ## API
 
-- [v-bottom-sheet](/api/v-bottom-sheet)
-
-<inline-api page="components/bottom-sheets" />
+<api-inline />
 
 ## Examples
 
@@ -62,5 +61,3 @@ Using a inset bottom sheet, you can make practical components such as this simpl
 By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
 <example file="v-bottom-sheet/misc-open-in-list" />
-
-<backmatter />

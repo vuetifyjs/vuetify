@@ -5,7 +5,6 @@
   >
     <v-btn
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <v-icon v-if="$attrs.fab || $attrs.icon">
         $mdiVuetify

@@ -13,7 +13,7 @@ related:
 
 Use border utilities to quickly style the border-radius of any element.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,7 +23,7 @@ Use border utilities to quickly style the border-radius of any element.
 
 <alert type="info">
 
-  The infixes **sm**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
+  The values **sm**, **md**, **lg**, and **xl** correlate to the border radius *size* and are not affected by breakpoints.
 
 </alert>
 
@@ -60,34 +60,36 @@ $rounded: (
 
 ### Misc
 
+<alert type="info">
+
+  Logical values `start` and `end` are only used in the inline direction (left and right) to avoid confusion
+
+</alert>
+
 #### Pill and circle
 
 You can create pills with the `.rounded-pill` class and circles with the `.rounded-circle` class.
 
 <example file="border-radius/misc-pill-and-circle" />
 
-#### Removing Border Radius
-
-Use the `.rounded-0` helper class to *remove* all of an elements radius or select by side or corner; e.g. `.rounded-l-0` and `.rounded-tr-0`.
-
-<example file="border-radius/misc-removing-border-radius" />
-
-#### Rounding all corners
-
-The **rounded** helper classes allow you to modify the *border radius* of an element. Use the `.rounded-sm`, `.rounded`, `.rounded-lg`, and `.rounded-xl` to add a border radius of varying size.
-
-<example file="border-radius/misc-rounding-all-corners" />
-
 #### Rounding by side
 
-Border radius is configurable on a per side basis using the infix classes, **t, r, b, l**; e.g. `.rounded-b-xl` and `.rounded-t`.
+Border radius is configurable on a per-side basis using the infix classes `-t`, `-e`, `-b`, and `-s` (corresponding respectively to the sides **top**, **end**, **bottom** and **start**).
+
+E.g. `.rounded-b-xl` and `.rounded-t`.
 
 <example file="border-radius/misc-rounding-by-side" />
 
 #### Rounding by corner
 
-Border radius is configurable on a per corner basis using the infix classes, **tl, tr, br, bl**; e.g. `.rounded-br-xl` and `.rounded-tr`.
+Border radius is configurable on a per-corner basis using the infix classes, `-ts`, `-te`, `-be`, `-bs` (corresponding respectively to the corners **top-start**, **top-end**, **bottom-end**, **bottom-start**)
+
+E.g. `.rounded-be-xl` and `.rounded-te`.
 
 <example file="border-radius/misc-rounding-by-corner" />
 
-<backmatter />
+#### Removing Border Radius
+
+Use the `.rounded-0` helper class to remove all border radius on an element, or select by side or corner; e.g. `.rounded-s-0` and `.rounded-te-0`.
+
+<example file="border-radius/misc-removing-border-radius" />

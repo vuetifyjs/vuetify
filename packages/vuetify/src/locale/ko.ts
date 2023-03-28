@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} 더보기',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Pagination Navigation',
+      root: 'Pagination Navigation',
       next: '다음 페이지',
       previous: '이전 페이지',
       page: '고토 페이지 {0}',
       currentPage: '현재 페이지, 페이지 {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

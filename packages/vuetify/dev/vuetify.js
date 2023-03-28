@@ -1,22 +1,28 @@
-import Vue from 'vue'
-import Vuetify from 'vuetify'
-import * as locales from '../src/locale'
 import '@mdi/font/css/materialdesignicons.css'
-import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome'
-import { library } from '@fortawesome/fontawesome-svg-core'
-import { faTimesCircle } from '@fortawesome/free-solid-svg-icons/faTimesCircle'
+import 'vuetify/src/styles/main.sass'
+import { createVuetify } from 'vuetify/src/framework'
+import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
+import { fa } from 'vuetify/src/iconsets/fa-svg'
+import { ar, en, ja, sv } from 'vuetify/src/locale'
+import * as directives from 'vuetify/src/directives'
 
-Vue.component('font-awesome-icon', FontAwesomeIcon)
-library.add(faTimesCircle)
-
-Vue.use(Vuetify)
-
-export default new Vuetify({
-  lang: {
-    locales,
+export default createVuetify({
+  directives,
+  ssr: !!process.env.VITE_SSR,
+  locale: {
+    messages: {
+      en,
+      ar,
+      sv,
+      ja,
+    },
   },
   icons: {
-    iconfont: 'mdi',
-    // iconfont: 'faSvg',
+    defaultSet: 'mdi',
+    aliases,
+    sets: {
+      mdi,
+      fa,
+    },
   },
 })

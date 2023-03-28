@@ -1,24 +1,15 @@
 <template>
-  <v-row justify="space-around">
-    <v-avatar
-      color="indigo"
-      size="36"
-    >
-      <span class="white--text text-h5">36</span>
+  <div class="d-flex align-center justify-space-around">
+    <v-avatar color="primary" size="x-small">
+      32
     </v-avatar>
 
-    <v-avatar
-      color="teal"
-      size="48"
-    >
-      <span class="white--text text-h5">48</span>
+    <v-avatar color="secondary">
+      48
     </v-avatar>
 
-    <v-avatar
-      color="orange"
-      size="62"
-    >
-      <span class="white--text text-h5">62</span>
+    <v-avatar color="info" size="x-large">
+      64
     </v-avatar>
-  </v-row>
+  </div>
 </template>

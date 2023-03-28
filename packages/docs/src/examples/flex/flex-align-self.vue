@@ -1,87 +1,57 @@
 <template>
   <div>
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-start">align-self-start</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-      <v-card class="pa-2 align-self-start" outlined tile>
-        Aligned start
-      </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-end">align-self-end</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-center">align-self-center</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-baseline">align-self-baseline</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-      <v-card class="pa-2 align-self-center" outlined tile>
-        Aligned center
-      </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-auto">align-self-auto</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
 
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
-
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-
-      <v-card class="pa-2 align-self-end" outlined tile>
-        Aligned end
-      </v-card>
-
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
-
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-
-      <v-card class="pa-2 align-self-baseline" outlined tile>
-        Aligned baseline
-      </v-card>
-
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
-
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-
-      <v-card class="pa-2 align-self-auto" outlined tile>
-        Aligned auto
-      </v-card>
-
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
-
-    <v-card class="d-flex mb-6" color="grey lighten-2" flat height="100" tile>
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-
-      <v-card class="pa-2 align-self-stretch" outlined tile>
-        Aligned stretch
-      </v-card>
-
-      <v-card class="pa-2" outlined tile>
-        flex item
-      </v-card>
-    </v-card>
+    <v-sheet
+      class="d-flex mb-6 bg-surface-variant"
+      height="100"
+    >
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+      <v-sheet class="ma-2 pa-2 align-self-stretch">align-self-stretch</v-sheet>
+      <v-sheet class="ma-2 pa-2">Flex item</v-sheet>
+    </v-sheet>
   </div>
 </template>

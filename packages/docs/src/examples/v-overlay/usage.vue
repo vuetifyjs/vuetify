@@ -7,7 +7,7 @@
       Show Overlay
     </v-btn>
 
-    <v-overlay :value="overlay"></v-overlay>
+    <v-overlay v-model="overlay"></v-overlay>
   </div>
 </template>
 

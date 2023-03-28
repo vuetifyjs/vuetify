@@ -1,5 +1,9 @@
+@use '../settings'
+
 html
-  font-size: $font-size-root
+  font-family: settings.$body-font-family
+  line-height: settings.$line-height-root
+  font-size: settings.$font-size-root
   overflow-x: hidden
   text-rendering: optimizeLegibility
   -webkit-font-smoothing: antialiased
@@ -9,13 +13,9 @@ html
 html.overflow-y-hidden
   overflow-y: hidden !important
 
-.v-application
-  font-family: $body-font-family
-  line-height: $line-height-root
-
-  ::-ms-clear,
-  ::-ms-reveal
-    display: none
+:root
+  --v-theme-overlay-multiplier: 1
+  --v-scrollbar-offset: 0px
 
 // iOS Safari hack to allow click events on body
 @supports (-webkit-touch-callout: none)

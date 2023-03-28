@@ -1,5 +1,5 @@
 {
-  "argument": "The function to invoke on window resize",
+  "argument": "The function to invoke on window resize.",
   "modifiers": {
     "quiet": "Will **not** automatically invoke the provided callback on bind."
   }

@@ -1,6 +1,6 @@
 <template>
   <v-container fluid>
-    <v-row class="light--text">
+    <v-row>
       <v-col cols="4">
         on
       </v-col>
@@ -14,21 +14,19 @@
     <v-row>
       <v-col cols="4">
         <v-checkbox
-          input-value="true"
-          value
+          :model-value="true"
         ></v-checkbox>
       </v-col>
       <v-col cols="4">
-        <v-checkbox value></v-checkbox>
+        <v-checkbox :model-value="false"></v-checkbox>
       </v-col>
       <v-col cols="4">
         <v-checkbox
-          value
           indeterminate
         ></v-checkbox>
       </v-col>
     </v-row>
-    <v-row class="light--text">
+    <v-row>
       <v-col cols="4">
         on disabled
       </v-col>
@@ -39,15 +37,20 @@
     <v-row>
       <v-col cols="4">
         <v-checkbox
-          input-value="true"
-          value
+          :model-value="true"
           disabled
         ></v-checkbox>
       </v-col>
       <v-col cols="4">
         <v-checkbox
-          value
+          :model-value="false"
           disabled
+        ></v-checkbox>
+      </v-col>
+      <v-col cols="4">
+        <v-checkbox
+          disabled
+          indeterminate
         ></v-checkbox>
       </v-col>
     </v-row>

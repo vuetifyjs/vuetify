@@ -1,15 +1,4 @@
-import VExpansionPanels from './VExpansionPanels'
-import VExpansionPanel from './VExpansionPanel'
-import VExpansionPanelContent from './VExpansionPanelContent'
-import VExpansionPanelHeader from './VExpansionPanelHeader'
-
-export { VExpansionPanels, VExpansionPanel, VExpansionPanelHeader, VExpansionPanelContent }
-
-export default {
-  $_vuetify_subcomponents: {
-    VExpansionPanels,
-    VExpansionPanel,
-    VExpansionPanelHeader,
-    VExpansionPanelContent,
-  },
-}
+export { VExpansionPanels } from './VExpansionPanels'
+export { VExpansionPanel } from './VExpansionPanel'
+export { VExpansionPanelText } from './VExpansionPanelText'
+export { VExpansionPanelTitle } from './VExpansionPanelTitle'

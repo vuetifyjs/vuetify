@@ -1,20 +1,13 @@
 <template>
   <v-tabs
     fixed-tabs
-    background-color="indigo"
-    dark
+    bg-color="indigo-darken-2"
   >
     <v-tab>
       Option
     </v-tab>
     <v-tab>
-      Another Selection
-    </v-tab>
-    <v-tab>
-      Items
-    </v-tab>
-    <v-tab>
-      Another Screen
+      Another Option
     </v-tab>
   </v-tabs>
 </template>

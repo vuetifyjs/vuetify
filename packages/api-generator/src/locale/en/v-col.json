@@ -1,7 +1,7 @@
 {
   "props": {
-    "alignSelf": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
-    "cols": "Sets the default number of columns the component extends. Available options are **1 -> 12** and **auto**.",
+    "alignSelf": "Applies the [align-items](https://developer.mozilla.org/en-US/docs/Web/CSS/align-items) css property. Available options are: **start**, **center**, **end**, **auto**, **baseline** and **stretch**.",
+    "cols": "Sets the default number of columns the component extends. Available options are: **1 -> 12** and **auto**.",
     "sm": "Changes the number of columns on small and greater breakpoints.",
     "md": "Changes the number of columns on medium and greater breakpoints.",
     "lg": "Changes the number of columns on large and greater breakpoints.",

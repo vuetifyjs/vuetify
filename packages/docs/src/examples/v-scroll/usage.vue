@@ -93,7 +93,7 @@
 </template>
 
 <script>
-  import * as easings from 'vuetify/lib/services/goto/easing-patterns'
+  // import * as easings from 'vuetify/lib/services/goto/easing-patterns'
 
   export default {
     data () {
@@ -106,7 +106,7 @@
         duration: 300,
         offset: 0,
         easing: 'easeInOutCubic',
-        easings: Object.keys(easings),
+        easings: [], // TODO: fix import? Object.keys(easings),
       }
     },
     computed: {
@@ -129,22 +129,21 @@
       },
     },
   }
+  // <codepen-additional>
+  //   const easings = {
+  //     linear: '',
+  //     easeInQuad: '',
+  //     easeOutQuad: '',
+  //     easeInOutQuad: '',
+  //     easeInCubic: '',
+  //     easeOutCubic: '',
+  //     easeInOutCubic: '',
+  //     easeInQuart: '',
+  //     easeOutQuart: '',
+  //     easeInOutQuart: '',
+  //     easeInQuint: '',
+  //     easeOutQuint: '',
+  //     easeInOutQuint: ''
+  //   }
+  // </codepen-additional>
 </script>
-
-<codepen-additional>
-  const easings = {
-    linear: '',
-    easeInQuad: '',
-    easeOutQuad: '',
-    easeInOutQuad: '',
-    easeInCubic: '',
-    easeOutCubic: '',
-    easeInOutCubic: '',
-    easeInQuart: '',
-    easeOutQuart: '',
-    easeInOutQuart: '',
-    easeInQuint: '',
-    easeOutQuint: '',
-    easeInOutQuint: ''
-  }
-</codepen-additional>

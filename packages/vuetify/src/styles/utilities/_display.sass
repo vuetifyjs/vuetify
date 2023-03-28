@@ -1,5 +1,7 @@
-.v-application
-  @each $size, $media_query in $display-breakpoints
+@use '../settings'
+
+@if (settings.$utilities != false and length(settings.$utilities) > 0)
+  @each $size, $media_query in settings.$display-breakpoints
     .hidden
       &-#{$size}
         @media #{$media_query}

@@ -1,7 +1,6 @@
 <template>
   <div class="text-center ma-2">
     <v-btn
-      dark
       @click="snackbar = true"
     >
       Open Snackbar
@@ -11,11 +10,10 @@
     >
       {{ text }}
 
-      <template v-slot:action="{ attrs }">
+      <template v-slot:actions>
         <v-btn
           color="pink"
-          text
-          v-bind="attrs"
+          variant="text"
           @click="snackbar = false"
         >
           Close

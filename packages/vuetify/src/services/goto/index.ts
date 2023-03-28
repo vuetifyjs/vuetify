@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Extensions
-import { Service } from '../service'
+// import { Service } from '../service'
 
 // Utilities
 import * as easingPatterns from './easing-patterns'
@@ -13,7 +16,7 @@ import { GoToOptions, VuetifyGoToTarget } from 'vuetify/types/services/goto'
 
 import { VuetifyServiceContract } from 'vuetify/types/services'
 
-export default function goTo (
+function goTo (
   _target: VuetifyGoToTarget,
   _settings: GoToOptions = {}
 ): Promise<number> {
@@ -78,15 +81,14 @@ export default function goTo (
   }))
 }
 
-goTo.framework = {} as Record<string, VuetifyServiceContract>
-goTo.init = () => {}
+// goTo.framework = {} as Record<string, VuetifyServiceContract>
 
-export class Goto extends Service {
-  public static property: 'goTo' = 'goTo'
+// export class Goto extends Service {
+//   public static property: 'goTo' = 'goTo'
 
-  constructor () {
-    super()
+//   constructor () {
+//     super()
 
-    return goTo
-  }
-}
+//     return goTo
+//   }
+// }

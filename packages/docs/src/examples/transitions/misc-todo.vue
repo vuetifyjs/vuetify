@@ -3,7 +3,7 @@
     <v-text-field
       v-model="newTask"
       label="What are you working on?"
-      solo
+      variant="solo"
       @keydown.enter="create"
     >
       <template v-slot:append>
@@ -18,7 +18,7 @@
       </template>
     </v-text-field>
 
-    <h2 class="text-h4 success--text pl-4">
+    <h2 class="text-h4 text-success ps-4">
       Tasks:&nbsp;
       <v-fade-transition leave-absolute>
         <span :key="`tasks-${tasks.length}`">
@@ -33,21 +33,21 @@
       class="my-1"
       align="center"
     >
-      <strong class="mx-4 info--text text--darken-2">
+      <strong class="mx-4 text-info-darken-2">
         Remaining: {{ remainingTasks }}
       </strong>
 
       <v-divider vertical></v-divider>
 
-      <strong class="mx-4 success--text text--darken-2">
+      <strong class="mx-4 text-success-darken-2">
         Completed: {{ completedTasks }}
       </strong>
 
       <v-spacer></v-spacer>
 
       <v-progress-circular
-        :value="progress"
-        class="mr-2"
+        v-model="progress"
+        class="me-2"
       ></v-progress-circular>
     </v-row>
 
@@ -59,13 +59,13 @@
         group
         tag="v-list"
       >
-        <template v-for="(task, i) in tasks">
+        <template v-for="(task, i) in tasks" :key="`${i}-${task.text}`">
           <v-divider
             v-if="i !== 0"
             :key="`${i}-divider`"
           ></v-divider>
 
-          <v-list-item :key="`${i}-${task.text}`">
+          <v-list-item>
             <v-list-item-action>
               <v-checkbox
                 v-model="task.done"
@@ -73,8 +73,8 @@
               >
                 <template v-slot:label>
                   <div
-                    :class="task.done && 'grey--text' || 'primary--text'"
-                    class="ml-4"
+                    :class="task.done && 'text-grey' || 'text-primary'"
+                    class="ms-4"
                     v-text="task.text"
                   ></div>
                 </template>

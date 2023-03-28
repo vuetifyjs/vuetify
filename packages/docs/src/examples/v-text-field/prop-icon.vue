@@ -22,8 +22,8 @@
           ></v-text-field>
 
           <v-text-field
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
           ></v-text-field>
         </v-col>
 
@@ -32,27 +32,27 @@
           sm="6"
         >
           <v-text-field
-            solo
             label="Prepend"
             prepend-icon="mdi-map-marker"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
-            solo
             label="Prepend inner"
             prepend-inner-icon="mdi-map-marker"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
-            solo
             label="Append"
             append-icon="mdi-map-marker"
+            variant="solo"
           ></v-text-field>
 
           <v-text-field
-            solo
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
+            variant="solo"
           ></v-text-field>
         </v-col>
 
@@ -61,27 +61,27 @@
           sm="6"
         >
           <v-text-field
-            filled
             label="Prepend"
             prepend-icon="mdi-map-marker"
+            variant="outlined"
           ></v-text-field>
 
           <v-text-field
-            filled
             label="Prepend inner"
             prepend-inner-icon="mdi-map-marker"
+            variant="outlined"
           ></v-text-field>
 
           <v-text-field
-            filled
             label="Append"
             append-icon="mdi-map-marker"
+            variant="outlined"
           ></v-text-field>
 
           <v-text-field
-            filled
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
+            variant="outlined"
           ></v-text-field>
         </v-col>
 
@@ -90,27 +90,27 @@
           sm="6"
         >
           <v-text-field
-            outlined
+            variant="underlined"
             label="Prepend"
             prepend-icon="mdi-map-marker"
           ></v-text-field>
 
           <v-text-field
-            outlined
+            variant="underlined"
             label="Prepend inner"
             prepend-inner-icon="mdi-map-marker"
           ></v-text-field>
 
           <v-text-field
-            outlined
+            variant="underlined"
             label="Append"
             append-icon="mdi-map-marker"
           ></v-text-field>
 
           <v-text-field
-            outlined
-            label="Append outer"
-            append-outer-icon="mdi-map-marker"
+            variant="underlined"
+            label="Append inner"
+            append-inner-icon="mdi-map-marker"
           ></v-text-field>
         </v-col>
       </v-row>

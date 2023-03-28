@@ -2,23 +2,15 @@
   <v-row>
     <v-col>
       <v-sheet height="400">
-        <v-calendar
-          color="primary"
-          type="day"
-        >
+        <v-calendar color="primary" type="day">
           <template v-slot:day-header="{ present }">
-            <template
-              v-if="present"
-              class="text-center"
-            >
+            <div v-if="present" class="text-center">
               Today
-            </template>
+            </div>
           </template>
 
           <template v-slot:interval="{ hour }">
-            <div
-              class="text-center"
-            >
+            <div class="text-center">
               {{ hour }} o'clock
             </div>
           </template>

@@ -1,19 +1,20 @@
 <template>
   <v-alert
-    border="left"
-    class="v-alert--doc"
-    text
-    v-bind="$attrs"
-    v-on="$listeners"
+    :border-color="type"
+    :type="type"
+    border="start"
+    class="v-alert--doc mb-4 border-opacity-100"
+    variant="tonal"
   >
+    <template #prepend>
+      <v-icon :color="type" :icon="`$${type}`" />
+    </template>
     <slot />
   </v-alert>
 </template>
 
-<script>
-  export default {
-    name: 'Alert',
-  }
+<script setup>
+  defineProps({ type: String })
 </script>
 
 <style lang="sass">

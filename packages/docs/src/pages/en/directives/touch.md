@@ -1,17 +1,20 @@
 ---
+nav: Touch
 meta:
   title: Touch directive
   description: The touch directive provides an interface for responding to various user touch actions.
   keywords: touch, vuetify touch directive, vue touch directive, mobile touch directive
 related:
-  - /styles/scroll/
+  - /components/navigation-drawers/
+  - /components/slide-groups/
+  - /components/windows/
 ---
 
 # Touch directive
 
 The `v-touch` directive allows you to capture swipe gestures and apply directional callbacks.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -21,8 +24,8 @@ On a mobile device, try swiping in various directions.
 
 ## API
 
-- [v-touch](/api/v-touch)
+| Directive | Description |
+| - | - |
+| [v-touch](/api/v-touch/) | The touch directive |
 
-<inline-api page="directives/touch" />
-
-<backmatter />
+<api-inline hide-links />

@@ -24,7 +24,7 @@
       this.queryAndIndeterminate()
     },
 
-    beforeDestroy () {
+    beforeUnmount () {
       clearInterval(this.interval)
     },
 

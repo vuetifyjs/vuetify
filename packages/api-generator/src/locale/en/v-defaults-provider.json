@@ -1,0 +1,9 @@
+{
+  "props": {
+    "defaults": "Specify new default prop values for components. Keep in mind that this will be merged with previously defined values",
+    "disabled": "Turns off all calcuations of new default values for improved performance in situations where defaults propagation isn't necessary",
+    "reset": "Reset the default values up the nested chain by {n} amount",
+    "root": "Force current defaults to match the application root defaults",
+    "scoped": "Prevents the ability for default values to be inherited from parent components"
+  }
+}

@@ -1,18 +1,21 @@
 // Directives
-import Mutate from '../'
+import Mutate from '..'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 
 (global as any).MutationObserver = class { // Mock MutationObserver
   _callback: Function
 
   _observe = jest.fn()
 
-  constructor (callback) {
+  constructor (callback: () => {}) {
     this._callback = callback
   }
 
   disconnect () {}
 
-  observe (_, options) {
+  observe (_: any, options = {}) {
     this._observe(options)
   }
 
@@ -21,129 +24,69 @@ import Mutate from '../'
   }
 }
 
-describe('mutate.ts', () => {
-  it('should bind event on inserted', () => {
+const instance = {
+  $: { uid: 1 },
+}
+
+describe('v-mutate', () => {
+  it('should bind event on mounted', () => {
     const callback = jest.fn()
-    const el = document.createElement('div') as any
+    const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Mutate.inserted(el, {
+    Mutate.mounted(el, {
       value: callback,
-    } as any, { context: { _uid: 1 } } as any)
+      modifiers: {},
+      instance,
+    } as any)
 
     expect(el._mutate).toBeTruthy()
     expect(callback).not.toHaveBeenCalled()
 
     document.body.removeChild(el)
 
-    Mutate.unbind(el, {
-      value: callback,
-    } as any, { context: { _uid: 1 } } as any)
+    Mutate.unmounted(el, { instance } as any)
 
-    expect(el._mutate[1]).toBeFalsy()
+    expect(el._mutate![1]).toBeUndefined()
   })
 
-  it('should fire event on mutation', () => {
+  it('should invoke callback once and then unmount', async () => {
     const callback = jest.fn()
-    const el = document.createElement('div') as any
+    const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Mutate.inserted(el, {
+    Mutate.mounted(el, {
       value: callback,
-    } as any, { context: { _uid: 1 } } as any)
+      modifiers: { once: true },
+      instance,
+    } as any)
 
-    el._mutate[1].observer.trigger([{}])
+    expect(callback).not.toHaveBeenCalled()
+    expect(el._mutate).toBeTruthy()
+
+    ;(el._mutate![1]!.observer as any)?.trigger([])
 
     expect(callback).toHaveBeenCalledTimes(1)
-
-    document.body.removeChild(el)
-
-    Mutate.unbind(el, {
-      value: callback,
-    } as any, { context: { _uid: 1 } } as any)
+    expect(el._mutate![1]).toBeUndefined()
   })
 
-  it('should fire event once', () => {
+  it('should invoke callback on mount, on mutation and then unmount', async () => {
     const callback = jest.fn()
-    const el = document.createElement('div') as any
+    const el = document.createElement('div')
     document.body.appendChild(el)
 
-    Mutate.inserted(el, {
+    Mutate.mounted(el, {
       value: callback,
-      modifiers: {
-        once: true,
-      },
-    } as any, { context: { _uid: 1 } } as any)
+      modifiers: { immediate: true, once: true },
+      instance,
+    } as any)
 
-    el._mutate[1].observer.trigger([{}])
+    expect(callback).toHaveBeenCalled()
+    expect(el._mutate).toBeTruthy()
 
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect(el._mutate[1]).toBeFalsy()
+    ;(el._mutate![1]!.observer as any)?.trigger([])
 
-    document.body.removeChild(el)
-  })
-
-  it('should work with object value', () => {
-    const callback = jest.fn()
-    const el = document.createElement('div') as any
-    document.body.appendChild(el)
-
-    Mutate.inserted(el, {
-      value: {
-        options: {
-          attributes: false,
-          subtree: true,
-        },
-        handler: callback,
-      },
-    } as any, { context: { _uid: 1 } } as any)
-
-    el._mutate[1].observer.trigger([{}])
-
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect(el._mutate[1].observer._observe).toHaveBeenLastCalledWith({ attributes: false, subtree: true })
-
-    document.body.removeChild(el)
-
-    Mutate.unbind(el, {
-      value: {
-        options: {
-          attributes: false,
-          subtree: true,
-        },
-        handler: callback,
-      },
-    } as any, { context: { _uid: 1 } } as any)
-  })
-
-  it('should work with observer modifiers', () => {
-    const callback = jest.fn()
-    const el = document.createElement('div') as any
-    document.body.appendChild(el)
-
-    Mutate.inserted(el, {
-      value: callback,
-      modifiers: {
-        attr: true,
-        child: true,
-        sub: true,
-      },
-    } as any, { context: { _uid: 1 } } as any)
-
-    el._mutate[1].observer.trigger([{}])
-
-    expect(callback).toHaveBeenCalledTimes(1)
-    expect(el._mutate[1].observer._observe).toHaveBeenLastCalledWith({ attributes: true, childList: true, subtree: true })
-
-    document.body.removeChild(el)
-
-    Mutate.unbind(el, {
-      value: callback,
-      modifiers: {
-        attr: true,
-        child: true,
-        sub: true,
-      },
-    } as any, { context: { _uid: 1 } } as any)
+    expect(callback).toHaveBeenCalledTimes(2)
+    expect(el._mutate![1]).toBeUndefined()
   })
 })

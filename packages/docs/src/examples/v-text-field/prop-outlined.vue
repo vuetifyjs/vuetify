@@ -9,7 +9,7 @@
           <v-text-field
             v-model="first"
             label="First Name"
-            outlined
+            variant="outlined"
           ></v-text-field>
         </v-col>
 
@@ -20,7 +20,7 @@
           <v-text-field
             v-model="last"
             label="Last Name"
-            outlined
+            variant="outlined"
           ></v-text-field>
         </v-col>
       </v-row>

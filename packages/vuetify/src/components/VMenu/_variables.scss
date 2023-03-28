@@ -1,4 +1,4 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
 
-$menu-content-border-radius: $border-radius-root !default;
-$menu-content-elevation: 8 !default;
+$menu-elevation: 8 !default;
+$menu-content-border-radius: settings.$border-radius-root !default;

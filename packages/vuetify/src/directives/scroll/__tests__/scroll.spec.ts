@@ -1,130 +1,99 @@
+import { describe, expect, it } from '@jest/globals'
+import {
+  createApp,
+  defineComponent,
+  h,
+  withDirectives,
+} from 'vue'
+
 // Directives
 import Scroll from '../'
-import { DirectiveBinding } from 'vue/types/options'
+import { scrollWindow } from '../../../../test'
 
-describe('scroll.ts', () => {
-  const { inserted, unbind } = Scroll
+describe('v-scroll', () => {
+  const instance = {
+    $: { uid: 1 },
+  }
+  const el = document.createElement('div')
+  const mountFunction = (value: EventListenerOrEventListenerObject, selector = ''): HTMLElement => {
+    const Test = defineComponent(() => () => withDirectives(h('div', { class: 'test' }), [[Scroll, value, selector]]))
 
-  let binding
-  let el
-  let options
-  let passive
-  let vnode
+    createApp(Test).mount(el)
+    return el.querySelector('.test')!
+  }
 
-  beforeEach(() => {
-    vnode = { context: { _uid: 1 } } as any
-    options = { passive: true }
-    binding = {
-      value: jest.fn(),
-      modifiers: {},
-      arg: null,
-    } as DirectiveBinding
-    el = {
-      addEventListener: jest.fn(),
-      removeEventListener: jest.fn(),
-    }
+  it('shoud bind event on inserted (selector)', () => {
+    const value = () => {}
+    const targetElement = { addEventListener: jest.fn(), removeEventListener: jest.fn() } as any as Element
+    const el = {} as HTMLElement
+    const querySelector = jest.spyOn(window.document, 'querySelector').mockImplementation(
+      selector => selector === '.selector' ? targetElement : null
+    )
+
+    Scroll.mounted(el, { value, arg: '.selector', instance } as any)
+    expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+    Scroll.unmounted(el, { instance } as any)
+    expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+
+    Scroll.mounted(el, { value, arg: '.selector', instance } as any)
+    expect(targetElement.addEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+    Scroll.unmounted(el, { instance } as any)
+    expect(targetElement.removeEventListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+
+    querySelector.mockRestore()
   })
 
-  it('should work with no provided scroll target (window)', () => {
-    const spyOnWindowAddListener = jest.spyOn(window, 'addEventListener')
-    const spyOnWindowRemoveListener = jest.spyOn(window, 'removeEventListener')
+  it('shoud bind event on inserted (window)', () => {
+    const value = () => {}
+    const addListener = jest.spyOn(window, 'addEventListener')
+    const removeListener = jest.spyOn(window, 'removeEventListener')
+    const el = {}
 
-    inserted(el, binding, vnode, vnode)
+    Scroll.mounted(el as HTMLElement, { value, instance } as any)
+    expect(addListener).toHaveBeenCalledWith('scroll', value, { passive: true })
+    Scroll.unmounted(el as HTMLElement, { instance } as any)
+    expect(removeListener).toHaveBeenCalledWith('scroll', value, { passive: true })
 
-    expect(spyOnWindowAddListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toEqual({
-      handler: binding.value,
-      options,
-      target: window,
-    })
-
-    unbind(el, binding, vnode, vnode)
-
-    expect(spyOnWindowRemoveListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toBeUndefined()
+    addListener.mockRestore()
+    removeListener.mockRestore()
   })
 
-  it('should work with a provided valid querySelector string', () => {
-    // Query selector searches the document
-    const target = document.createElement('div')
-    const spyOnFooAddListener = jest.spyOn(target, 'addEventListener')
-    const spyOnFooRemoveListener = jest.spyOn(target, 'removeEventListener')
+  it('shoud rebind event on updated', () => {
+    const value1 = () => {}
+    const value2 = () => {}
+    const addListener = jest.spyOn(window, 'addEventListener')
+    const removeListener = jest.spyOn(window, 'removeEventListener')
+    const el = {}
 
-    target.id = 'foo'
-    document.body.appendChild(target)
+    Scroll.mounted(el as HTMLElement, { value: value1, instance } as any)
+    expect(addListener).toHaveBeenCalledTimes(1)
+    expect(addListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
 
-    binding.arg = '#bar'
+    Scroll.updated(el as HTMLElement, { value: value2, oldValue: value1, instance } as any)
+    expect(removeListener).toHaveBeenCalledTimes(1)
+    expect(removeListener).toHaveBeenCalledWith('scroll', value1, { passive: true })
+    expect(addListener).toHaveBeenCalledTimes(2)
+    expect(addListener).toHaveBeenCalledWith('scroll', value2, { passive: true })
 
-    // Binds nothing if element not found
-    inserted(el, binding, vnode, vnode)
-
-    expect(spyOnFooAddListener).not.toHaveBeenCalled()
-    expect(el._onScroll).toBeUndefined()
-
-    binding.arg = '#foo'
-
-    inserted(el, binding, vnode, vnode)
-
-    expect(spyOnFooAddListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toEqual({
-      handler: binding.value,
-      options,
-      target,
-    })
-
-    unbind(el, binding, vnode, vnode)
-
-    expect(spyOnFooRemoveListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toBeUndefined()
-
-    document.body.removeChild(target)
+    addListener.mockRestore()
+    removeListener.mockRestore()
   })
 
-  it('should work with the self modifier', () => {
-    binding.modifiers = { self: true }
-
-    inserted(el, binding, vnode, vnode)
-
-    expect(el.addEventListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toEqual({
-      handler: binding.value,
-      options,
-      target: undefined,
-    })
-
-    unbind(el, binding, vnode, vnode)
-
-    expect(el.removeEventListener).toHaveBeenCalledWith('scroll', binding.value, options)
-    expect(el._onScroll[1]).toBeUndefined()
+  it('should not fail when unbinding element without _onScroll', () => {
+    expect(() => {
+      Scroll.unmounted({} as HTMLElement, { instance } as any)
+    }).not.toThrow()
   })
 
-  it('should not remove listeners if no _onScroll property present', () => {
-    unbind(el, binding, vnode, vnode)
+  it('should call the callback on scroll', async () => {
+    const callback = jest.fn()
 
-    expect(el.removeEventListener).not.toHaveBeenCalled()
-  })
+    mountFunction(event => callback(event.target))
 
-  it('should accept an object for the value with handler and/or options', () => {
-    const handler = binding.value
+    expect(callback).not.toHaveBeenCalled()
 
-    binding.value = { handler }
+    await scrollWindow(400)
 
-    inserted(el, binding, vnode, vnode)
-
-    expect(el._onScroll[1]).toEqual({
-      handler,
-      target: window,
-      options: { passive: true },
-    })
-
-    binding.value = { handler, options: { passive: false } }
-
-    inserted(el, binding, vnode, vnode)
-
-    expect(el._onScroll[1]).toEqual({
-      handler,
-      target: window,
-      options: { passive: false },
-    })
+    expect(callback).toHaveBeenCalledWith(window)
   })
 })

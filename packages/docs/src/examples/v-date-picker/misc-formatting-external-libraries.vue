@@ -12,7 +12,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-              :value="computedDateFormattedMomentjs"
+              :model-value="computedDateFormattedMomentjs"
               clearable
               label="Formatted with Moment.js"
               readonly
@@ -39,7 +39,7 @@
         >
           <template v-slot:activator="{ on, attrs }">
             <v-text-field
-              :value="computedDateFormattedDatefns"
+              :model-value="computedDateFormattedDatefns"
               clearable
               label="Formatted with datefns"
               readonly

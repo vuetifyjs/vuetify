@@ -1,23 +1,8 @@
 <template>
-
   <v-row>
-    <template v-if="!products">
-      <v-col
-        v-for="n in 10"
-        :key="n"
-        cols="12"
-        md="6"
-      >
-        <v-skeleton-loader
-          min-height="185"
-          type="image"
-        />
-      </v-col>
-    </template>
-
-    <template v-else-if="products.length === 0">
+    <template v-if="products.length === 0">
       <v-col>
-        <v-alert type="error">Problem fetching themes</v-alert>
+        <alert type="error">Problem fetching themes</alert>
       </v-col>
     </template>
 
@@ -30,47 +15,45 @@
       >
         <a
           :href="`https://store.vuetifyjs.com/products/${product.handle}?utm_source=vuetifyjs.com&utm_medium=themes`"
-          class="text--primary text-decoration-none"
+          class="text-high-emphasis text-decoration-none"
           rel="noopener"
           target="_blank"
         >
           <app-figure
-            :alt="product.title"
+            :alt="product.alt"
             :name="product.title"
-            :src="product.variant.image"
+            :src="product.src"
             height="185"
             max-height="185"
             min-height="185"
-            outlined
           >
             <figcaption class="d-flex text-subtitle-2 align-center text-capitalize mt-3">
               <span v-text="product.title" />
 
               <v-chip
                 v-if="product.isOnSale"
-                class="text-uppercase px-1 ml-2"
-                color="red lighten-2"
-                dark
+                class="text-uppercase px-1 ms-2"
+                color="red-lighten-2"
                 label
-                x-small
+                size="x-small"
               >
                 On Sale
               </v-chip>
 
               <v-chip
                 v-if="product.isFree"
-                class="text-uppercase px-1 ml-2"
+                class="text-uppercase px-1 ms-2"
                 color="primary"
                 label
-                x-small
+                size="x-small"
               >
                 Free
               </v-chip>
 
               <span
                 v-else
-                class="ml-auto"
-                v-text="`$${product.variant.price}`"
+                class="ms-auto"
+                v-text="`$${product.price}`"
               />
             </figcaption>
           </app-figure>
@@ -80,48 +63,41 @@
   </v-row>
 </template>
 
-<script>
-  // Utilities
-  import { call, get } from 'vuex-pathify'
+<script setup>
+  import { useShopifyStore } from '@/store/shopify'
+  import { computed, onMounted } from 'vue'
 
-  export default {
-    name: 'PremiumThemes',
+  const store = useShopifyStore()
 
-    data: () => ({ products: null }),
+  // const products = computed(() => [])
+  const products = computed(() => {
+    const all = []
 
-    computed: {
-      all: get('shopify/all'),
-    },
+    for (const product of store.products) {
+      if (product.productType !== 'Themes') continue
+      const variant = product.variants[0]
+      const price = variant.price
 
-    async beforeMount () {
-      await this.fetch()
-      const products = []
+      all.push({
+        alt: product.images[0].alt,
+        src: product.images[0].src,
+        handle: product.handle,
+        isFree: Number(variant.price) === 0,
+        isOnSale: Number(variant.price) < Number(variant.compareAtPrice ?? 0),
+        title: product.title,
+        price,
+        variant,
+      })
+    }
 
-      for (const product of this.all) {
-        if (product.productType !== 'Themes') continue
+    return all.sort((a, b) => {
+      const aPrice = parseFloat(a.variants?.[0].price ?? a.variant?.price)
+      const bPrice = parseFloat(b.variants?.[0].price ?? b.variant?.price)
+      return aPrice < bPrice ? -1 : aPrice > bPrice ? 1 : 0
+    })
+  })
 
-        const variant = product.variants[0]
-
-        products.push({
-          handle: product.handle,
-          isFree: Number(variant.price) === 0,
-          isOnSale: Number(variant.price) < Number(variant.compareAtPrice),
-          title: product.title,
-          variant,
-        })
-      }
-
-      this.products = products
-        .sort((a, b) => {
-          const aPrice = parseFloat(a.variant.price)
-          const bPrice = parseFloat(b.variant.price)
-
-          return aPrice < bPrice ? 1 : aPrice > bPrice ? -1 : 0
-        })
-    },
-
-    methods: {
-      fetch: call('shopify/fetch'),
-    },
-  }
+  onMounted(async () => {
+    await store.fetch()
+  })
 </script>

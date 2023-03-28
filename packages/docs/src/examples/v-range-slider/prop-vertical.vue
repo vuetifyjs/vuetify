@@ -1,13 +1,8 @@
 <template>
-  <v-container>
-    <v-row>
-      <v-range-slider
-        v-model="value"
-        vertical
-        label="Range"
-      ></v-range-slider>
-    </v-row>
-  </v-container>
+  <v-range-slider
+    v-model="value"
+    direction="vertical"
+  ></v-range-slider>
 </template>
 
 <script>

@@ -1,32 +1,17 @@
-import Vue from 'vue/dist/vue.common.js'
-import {
-  deepEqual,
-  getNestedValue,
-  getPropertyFromItem,
-  convertToUnit,
-  getSlotType,
-  arrayDiff,
-  getObjectValueByPath,
-  humanReadableFileSize,
-  sortItems,
-  createSimpleFunctional,
-} from '../helpers'
-import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
 
-describe('createSimpleFunctional', () => {
-  it('should render with a custom tag', () => {
-    const component = createSimpleFunctional('v-test', 'pre')
-    const wrapper = mount(component)
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-  it('should render with a user-defined tag', () => {
-    const component = createSimpleFunctional('v-test', 'pre')
-    const wrapper = mount(component, {
-      propsData: { tag: 'h1' },
-    })
-    expect(wrapper.html()).toMatchSnapshot()
-  })
-})
+import {
+  arrayDiff,
+  convertToUnit,
+  deepEqual,
+  destructComputed,
+  getNestedValue,
+  getObjectValueByPath,
+  getPropertyFromItem,
+  humanReadableFileSize,
+  mergeDeep,
+} from '../helpers'
+import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {
   it('should return set difference of arrays A and B', () => {
@@ -40,95 +25,97 @@ describe('helpers', () => {
 
   it('should pass comparison', () => { // eslint-disable-line max-statements
     // Null
-    expect(deepEqual(null, null)).toEqual(true)
-    expect(deepEqual(null, undefined)).toEqual(false)
-    expect(deepEqual(null, false)).toEqual(false)
-    expect(deepEqual(null, 0)).toEqual(false)
-    expect(deepEqual(null, '')).toEqual(false)
-    expect(deepEqual(null, [])).toEqual(false)
-    expect(deepEqual(null, {})).toEqual(false)
+    expect(deepEqual(null, null)).toBe(true)
+    expect(deepEqual(null, undefined)).toBe(false)
+    expect(deepEqual(null, false)).toBe(false)
+    expect(deepEqual(null, 0)).toBe(false)
+    expect(deepEqual(null, '')).toBe(false)
+    expect(deepEqual(null, [])).toBe(false)
+    expect(deepEqual(null, {})).toBe(false)
 
     // Undefined
-    expect(deepEqual(undefined, undefined)).toEqual(true)
-    expect(deepEqual(undefined, null)).toEqual(false)
-    expect(deepEqual(undefined, false)).toEqual(false)
-    expect(deepEqual(undefined, 0)).toEqual(false)
-    expect(deepEqual(undefined, '')).toEqual(false)
-    expect(deepEqual(undefined, [])).toEqual(false)
-    expect(deepEqual(undefined, {})).toEqual(false)
+    expect(deepEqual(undefined, undefined)).toBe(true)
+    expect(deepEqual(undefined, null)).toBe(false)
+    expect(deepEqual(undefined, false)).toBe(false)
+    expect(deepEqual(undefined, 0)).toBe(false)
+    expect(deepEqual(undefined, '')).toBe(false)
+    expect(deepEqual(undefined, [])).toBe(false)
+    expect(deepEqual(undefined, {})).toBe(false)
 
     // Boolean
-    expect(deepEqual(true, true)).toEqual(true)
-    expect(deepEqual(true, false)).toEqual(false)
-    expect(deepEqual(true, undefined)).toEqual(false)
-    expect(deepEqual(true, null)).toEqual(false)
-    expect(deepEqual(true, 0)).toEqual(false)
-    expect(deepEqual(true, 1)).toEqual(false)
-    expect(deepEqual(true, '')).toEqual(false)
-    expect(deepEqual(true, 'abc')).toEqual(false)
-    expect(deepEqual(true, [1, 2])).toEqual(false)
-    expect(deepEqual(true, { x: 1 })).toEqual(false)
+    expect(deepEqual(true, true)).toBe(true)
+    expect(deepEqual(true, false)).toBe(false)
+    expect(deepEqual(true, undefined)).toBe(false)
+    expect(deepEqual(true, null)).toBe(false)
+    expect(deepEqual(true, 0)).toBe(false)
+    expect(deepEqual(true, 1)).toBe(false)
+    expect(deepEqual(true, '')).toBe(false)
+    expect(deepEqual(true, 'abc')).toBe(false)
+    expect(deepEqual(true, [1, 2])).toBe(false)
+    expect(deepEqual(true, { x: 1 })).toBe(false)
 
-    expect(deepEqual(false, false)).toEqual(true)
-    expect(deepEqual(false, true)).toEqual(false)
-    expect(deepEqual(false, undefined)).toEqual(false)
-    expect(deepEqual(false, null)).toEqual(false)
-    expect(deepEqual(false, 0)).toEqual(false)
-    expect(deepEqual(false, 1)).toEqual(false)
-    expect(deepEqual(false, '')).toEqual(false)
-    expect(deepEqual(false, 'abc')).toEqual(false)
-    expect(deepEqual(false, [1, 2])).toEqual(false)
-    expect(deepEqual(false, { x: 1 })).toEqual(false)
+    expect(deepEqual(false, false)).toBe(true)
+    expect(deepEqual(false, true)).toBe(false)
+    expect(deepEqual(false, undefined)).toBe(false)
+    expect(deepEqual(false, null)).toBe(false)
+    expect(deepEqual(false, 0)).toBe(false)
+    expect(deepEqual(false, 1)).toBe(false)
+    expect(deepEqual(false, '')).toBe(false)
+    expect(deepEqual(false, 'abc')).toBe(false)
+    expect(deepEqual(false, [1, 2])).toBe(false)
+    expect(deepEqual(false, { x: 1 })).toBe(false)
 
     // Number
-    expect(deepEqual(5, 5)).toEqual(true)
-    expect(deepEqual(8, 8.0)).toEqual(true)
-    expect(deepEqual(8, '8')).toEqual(false)
-    expect(deepEqual(-10, -10)).toEqual(true)
+    expect(deepEqual(5, 5)).toBe(true)
+    expect(deepEqual(8, 8.0)).toBe(true)
+    expect(deepEqual(8, '8')).toBe(false)
+    expect(deepEqual(-10, -10)).toBe(true)
 
-    expect(deepEqual(0, '')).toEqual(false)
-    expect(deepEqual(0, false)).toEqual(false)
-    expect(deepEqual(0, null)).toEqual(false)
-    expect(deepEqual(0, undefined)).toEqual(false)
+    expect(deepEqual(0, '')).toBe(false)
+    expect(deepEqual(0, false)).toBe(false)
+    expect(deepEqual(0, null)).toBe(false)
+    expect(deepEqual(0, undefined)).toBe(false)
 
     // String
-    expect(deepEqual('', '')).toEqual(true)
-    expect(deepEqual('a', 'a')).toEqual(true)
-    expect(deepEqual('a', 'b')).toEqual(false)
-    expect(deepEqual('a', 'A')).toEqual(false)
-    expect(deepEqual('abc', 'abc')).toEqual(true)
-    expect(deepEqual('Abc', 'abc')).toEqual(false)
-    expect(deepEqual(' ', '')).toEqual(false)
+    expect(deepEqual('', '')).toBe(true)
+    expect(deepEqual('a', 'a')).toBe(true)
+    expect(deepEqual('a', 'b')).toBe(false)
+    expect(deepEqual('a', 'A')).toBe(false)
+    expect(deepEqual('abc', 'abc')).toBe(true)
+    expect(deepEqual('Abc', 'abc')).toBe(false)
+    expect(deepEqual(' ', '')).toBe(false)
 
     // Array
-    expect(deepEqual([], [])).toEqual(true)
-    expect(deepEqual([1], [1.0])).toEqual(true)
-    expect(deepEqual([1, '2'], [1, '2'])).toEqual(true)
-    expect(deepEqual([1, { x: 1, y: 2 }], [1, { x: 1, y: 2 }])).toEqual(true)
-    expect(deepEqual([1, { x: 1, y: null }], [1, { x: 1, y: false }])).toEqual(false)
-    expect(deepEqual([1, [1, 2]], [1, [1, 2]])).toEqual(true)
+    expect(deepEqual([], [])).toBe(true)
+    expect(deepEqual([1], [1.0])).toBe(true)
+    expect(deepEqual([1, '2'], [1, '2'])).toBe(true)
+    expect(deepEqual([1, { x: 1, y: 2 }], [1, { x: 1, y: 2 }])).toBe(true)
+    expect(deepEqual([1, { x: 1, y: null }], [1, { x: 1, y: false }])).toBe(false)
+    expect(deepEqual([1, [1, 2]], [1, [1, 2]])).toBe(true)
 
     // Object
-    expect(deepEqual({}, {})).toEqual(true)
-    expect(deepEqual({ x: 1 }, { x: 1 })).toEqual(true)
-    expect(deepEqual({ x: 1 }, {})).toEqual(false)
-    expect(deepEqual({ x: { a: 1, b: 2 } }, { x: { a: 1, b: 2 } })).toEqual(true)
+    expect(deepEqual({}, {})).toBe(true)
+    expect(deepEqual({ x: 1 }, { x: 1 })).toBe(true)
+    expect(deepEqual({ x: 1 }, {})).toBe(false)
+    expect(deepEqual({ x: { a: 1, b: 2 } }, { x: { a: 1, b: 2 } })).toBe(true)
 
     // Date
     const currentDate = new Date()
     const futureDate = new Date(1000)
 
-    expect(deepEqual(currentDate, currentDate)).toEqual(true)
-    expect(deepEqual({ date: currentDate }, { date: currentDate })).toEqual(true)
-    expect(deepEqual(currentDate, futureDate)).toEqual(false)
-    expect(deepEqual({ date: currentDate }, { date: futureDate })).toEqual(false)
+    expect(deepEqual(currentDate, currentDate)).toBe(true)
+    expect(deepEqual({ date: currentDate }, { date: currentDate })).toBe(true)
+    expect(deepEqual(currentDate, futureDate)).toBe(false)
+    expect(deepEqual({ date: currentDate }, { date: futureDate })).toBe(false)
 
-    const circular = {} // eslint-disable-line sonarjs/prefer-object-literal
+    const circular = {
+      me: null as any,
+    }
     circular.me = circular
 
-    expect(deepEqual({ r: circular }, { r: circular })).toEqual(true)
-    expect(deepEqual({ r: circular, x: 1 }, { r: circular, x: 2 })).toEqual(false)
-    expect(deepEqual({ r: [circular] }, { r: [circular] })).toEqual(true)
+    expect(deepEqual({ r: circular }, { r: circular })).toBe(true)
+    expect(deepEqual({ r: circular, x: 1 }, { r: circular, x: 2 })).toBe(false)
+    expect(deepEqual({ r: [circular] }, { r: [circular] })).toBe(true)
   })
 
   it('should get value directly on object if not undefined', () => {
@@ -144,9 +131,9 @@ describe('helpers', () => {
       },
     }
 
-    expect(getObjectValueByPath(obj, 'a')).toEqual('foo')
-    expect(getObjectValueByPath(obj, 'b.a')).toEqual('foobar')
-    expect(getObjectValueByPath(obj, 'c.d')).toEqual('bar')
+    expect(getObjectValueByPath(obj, 'a')).toBe('foo')
+    expect(getObjectValueByPath(obj, 'b.a')).toBe('foobar')
+    expect(getObjectValueByPath(obj, 'c.d')).toBe('bar')
   })
 
   it('should get nested value', () => {
@@ -164,24 +151,24 @@ describe('helpers', () => {
       g: null,
     }
 
-    expect(getNestedValue(obj, ['a', 'b', 'c'])).toEqual(1)
-    expect(getNestedValue(obj, ['a', 'b', 'd'])).toEqual(2)
+    expect(getNestedValue(obj, ['a', 'b', 'c'])).toBe(1)
+    expect(getNestedValue(obj, ['a', 'b', 'd'])).toBe(2)
     expect(getNestedValue(obj, ['a', 'b'])).toEqual({ c: 1, d: 2 })
-    expect(getNestedValue(obj, ['a', 'e', '0', 'f'])).toEqual('f')
-    expect(getNestedValue(obj, ['a', 'e', 0, 'f'])).toEqual('f')
-    expect(getNestedValue(obj, ['a', 'e', '1'])).toEqual('e1')
+    expect(getNestedValue(obj, ['a', 'e', '0', 'f'])).toBe('f')
+    expect(getNestedValue(obj, ['a', 'e', 0, 'f'])).toBe('f')
+    expect(getNestedValue(obj, ['a', 'e', '1'])).toBe('e1')
     expect(getNestedValue(obj, ['g'])).toBeNull()
     expect(getNestedValue(obj, ['missing', 'key'])).toBeUndefined()
 
     const arr = ['val', obj]
 
-    expect(getNestedValue(arr, ['1', 'a', 'b', 'c'])).toEqual(1)
-    expect(getNestedValue(arr, ['1', 'a', 'e', 0, 'f'])).toEqual('f')
-    expect(getNestedValue(arr, [0])).toEqual('val')
+    expect(getNestedValue(arr, ['1', 'a', 'b', 'c'])).toBe(1)
+    expect(getNestedValue(arr, ['1', 'a', 'e', 0, 'f'])).toBe('f')
+    expect(getNestedValue(arr, [0])).toBe('val')
     expect(getNestedValue(arr, [1])).toEqual(obj)
 
-    expect(getNestedValue('str', [])).toEqual('str')
-    expect(getNestedValue(5, [])).toEqual(5)
+    expect(getNestedValue('str', [])).toBe('str')
+    expect(getNestedValue(5, [])).toBe(5)
     expect(getNestedValue(null, [])).toBeNull()
 
     expect(getNestedValue(null, ['a'])).toBeUndefined()
@@ -198,15 +185,27 @@ describe('helpers', () => {
         y: 'nested',
       },
     }
-    expect(getPropertyFromItem(obj, 'a.b')).toEqual(1)
-    expect(getPropertyFromItem(obj, 'c.0')).toEqual(2)
-    expect(getPropertyFromItem(obj, 'c.2.d')).toEqual('d')
-    expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toEqual('fallback')
-    expect(getPropertyFromItem(obj, o => o.a.b + o.c[0])).toEqual(3)
-    expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toEqual('d')
-    expect(getPropertyFromItem(obj, 'x.y')).toEqual('comp')
-    expect(getPropertyFromItem(obj, ['x', 'y'])).toEqual('nested')
-    expect(getPropertyFromItem(obj, ['x.y'])).toEqual('comp')
+    expect(getPropertyFromItem(obj, 'a.b')).toBe(1)
+    expect(getPropertyFromItem(obj, 'c.0')).toBe(2)
+    expect(getPropertyFromItem(obj, 'c.2.d')).toBe('d')
+    expect(getPropertyFromItem(obj, 'c.2.d.x', 'fallback')).toBe('fallback')
+    expect(getPropertyFromItem(obj, o => +o.a.b + +o.c[0])).toBe(3)
+    expect(getPropertyFromItem(obj, ['c', 2, 'd'])).toBe('d')
+    expect(getPropertyFromItem(obj, 'x.y')).toBe('comp')
+    expect(getPropertyFromItem(obj, ['x', 'y'])).toBe('nested')
+    expect(getPropertyFromItem(obj, ['x.y'])).toBe('comp')
+  })
+
+  it('should get property from primitive items', () => {
+    const a = 1
+    const b = 'string'
+    const c = Symbol('symbol')
+    const d = false
+
+    expect(getPropertyFromItem(a, v => v)).toBe(a)
+    expect(getPropertyFromItem(b, v => v)).toBe(b)
+    expect(getPropertyFromItem(c, v => v)).toBe(c)
+    expect(getPropertyFromItem(d, v => v)).toBe(d)
   })
 
   it('should return proper value in convertToUnit', () => {
@@ -229,75 +228,18 @@ describe('helpers', () => {
     expect(convertToUnit('foo')).toBe('foo')
   })
 
-  describe('getSlotType', () => {
-    it('should detect old slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('normal')
-    })
-
-    it('should detect old scoped slots', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template slot="bar" slot-scope="data">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
-
-    it('should detect bare v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('v-slot')
-    })
-
-    it('should detect bound v-slot', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar="data">hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar', true)).toBe('scoped')
-    })
-
-    it('should count bare v-slot as scoped', () => {
-      const vm = new Vue({
-        components: {
-          foo: { render: h => h('div') },
-        },
-        template: `<foo ref="foo"><template #bar>hello</template></foo>`,
-      }).$mount()
-
-      expect(getSlotType(vm.$refs.foo, 'bar')).toBe('scoped')
-    })
-  })
-
   it('humanReadableFileSize should format file sizes with base 1024', () => {
-    expect(humanReadableFileSize(0, true)).toBe('0 B')
-    expect(humanReadableFileSize(512, true)).toBe('512 B')
+    expect(humanReadableFileSize(0, 1024)).toBe('0 B')
+    expect(humanReadableFileSize(512, 1024)).toBe('512 B')
 
-    expect(humanReadableFileSize(1024, true)).toBe('1.0 KiB')
-    expect(humanReadableFileSize(4096, true)).toBe('4.0 KiB')
+    expect(humanReadableFileSize(1024, 1024)).toBe('1.0 KiB')
+    expect(humanReadableFileSize(4096, 1024)).toBe('4.0 KiB')
 
-    expect(humanReadableFileSize(1048576, true)).toBe('1.0 MiB')
-    expect(humanReadableFileSize(2097152, true)).toBe('2.0 MiB')
+    expect(humanReadableFileSize(1048576, 1024)).toBe('1.0 MiB')
+    expect(humanReadableFileSize(2097152, 1024)).toBe('2.0 MiB')
 
-    expect(humanReadableFileSize(1073741824, true)).toBe('1.0 GiB')
-    expect(humanReadableFileSize(2147483648, true)).toBe('2.0 GiB')
+    expect(humanReadableFileSize(1073741824, 1024)).toBe('1.0 GiB')
+    expect(humanReadableFileSize(2147483648, 1024)).toBe('2.0 GiB')
   })
 
   it('humanReadableFileSize should format file sizes with base 1000', () => {
@@ -314,68 +256,66 @@ describe('helpers', () => {
     expect(humanReadableFileSize(2000000000)).toBe('2.0 GB')
   })
 
-  it('should sort items by single column', () => {
-    let items
-    const getItems = () => [{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }]
+  describe('mergeDeep', () => {
+    it('should include all properties from both source and target', () => {
+      expect(mergeDeep({ a: 'foo' }, { b: 'bar' })).toEqual({ a: 'foo', b: 'bar' })
+    })
 
-    sortItems(items = getItems(), ['string'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 2 }, { string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'foo', number: 1 }])
+    it('should not mutate source object', () => {
+      const source = { a: 'foo' }
+      const target = { b: 'bar' }
+      const result = mergeDeep(source, target)
 
-    sortItems(items = getItems(), ['string'], [true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }, { string: 'bar', number: 2 }])
+      expect(result).not.toBe(source)
+      expect(source).not.toHaveProperty('b')
+    })
 
-    sortItems(items = getItems(), ['number'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }])
+    it('should overwrite source properties', () => {
+      expect(mergeDeep({ a: 'foo' }, { a: 'bar' })).toEqual({ a: 'bar' })
+    })
 
-    sortItems(items = getItems(), ['number'], [true], 'en')
-    expect(items).toStrictEqual([{ string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'bar', number: 2 }, { string: 'foo', number: 1 }])
+    it('should recursively merge', () => {
+      expect(mergeDeep({ a: { b: 'foo' } }, { c: { d: 'bar' } })).toEqual({ a: { b: 'foo' }, c: { d: 'bar' } })
+    })
 
-    sortItems(items = getItems(), ['number'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'baz', number: 4 }, { string: 'fizzbuzz', number: 3 }, { string: 'bar', number: 2 }, { string: 'foo', number: 1 }])
+    it('should not recursively merge arrays', () => {
+      expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] })).toEqual({ a: ['bar'] })
+    })
 
-    sortItems(items = getItems(), ['number'], [true], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'bar', number: 2 }, { string: 'fizzbuzz', number: 3 }, { string: 'baz', number: 4 }])
+    it('should use arrayFn function if provided', () => {
+      expect(mergeDeep({ a: ['foo'] }, { a: ['bar'] }, (a, b) => [...a, ...b])).toEqual({ a: ['foo', 'bar'] })
+    })
   })
 
-  it('should sort items with deep structure', () => {
-    const items = [{ foo: { bar: { baz: 3 } } }, { foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }]
+  describe('destructComputed', () => {
+    it('should return object as refs', () => {
+      const obj = destructComputed(() => {
+        return {
+          a: 'foo',
+          b: 'bar',
+        }
+      })
 
-    sortItems(items, ['foo.bar.baz'], [], 'en')
-    expect(items).toStrictEqual([{ foo: { bar: { baz: 1 } } }, { foo: { bar: { baz: 2 } } }, { foo: { bar: { baz: 3 } } }])
-  })
+      expect(obj).toHaveProperty('a')
+      expect(obj).toHaveProperty('b')
+      expect(isRef(obj.a)).toBeTruthy()
+      expect(isRef(obj.b)).toBeTruthy()
+      expect(isProxy(obj)).toBeFalsy()
+    })
 
-  it('should sort items by multiple columns', () => {
-    let items
-    const getItems = () => [{ string: 'foo', number: 1 }, { string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }]
+    it('should be reactive', async () => {
+      const val = ref('foo')
+      const obj = destructComputed(() => {
+        return {
+          a: val.value,
+        }
+      })
 
-    sortItems(items = getItems(), ['string', 'number'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'foo', number: 1 }])
+      expect(obj.a.value).toBe('foo')
 
-    sortItems(items = getItems(), ['string', 'number'], [true, false], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
+      val.value = 'bar'
 
-    sortItems(items = getItems(), ['string', 'number'], [false, true], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
-
-    sortItems(items = getItems(), ['string', 'number'], [true, true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'bar', number: 3 }])
-
-    sortItems(items = getItems(), ['number', 'string'], [], 'en')
-    expect(items).toStrictEqual([{ string: 'baz', number: 1 }, { string: 'foo', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
-
-    sortItems(items = getItems(), ['number', 'string'], [true, false], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
-
-    sortItems(items = getItems(), ['number', 'string'], [false, true], 'en')
-    expect(items).toStrictEqual([{ string: 'foo', number: 1 }, { string: 'baz', number: 1 }, { string: 'baz', number: 2 }, { string: 'bar', number: 3 }])
-
-    sortItems(items = getItems(), ['number', 'string'], [true, true], 'en')
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'foo', number: 1 }, { string: 'baz', number: 1 }])
-
-    sortItems(items = getItems(), ['string', 'number'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
-
-    sortItems(items = getItems(), ['number', 'string'], [], 'en', { number: (a, b) => b - a })
-    expect(items).toStrictEqual([{ string: 'bar', number: 3 }, { string: 'baz', number: 2 }, { string: 'baz', number: 1 }, { string: 'foo', number: 1 }])
+      expect(obj.a.value).toBe('bar')
+    })
   })
 })

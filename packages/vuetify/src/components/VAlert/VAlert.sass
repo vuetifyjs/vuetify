@@ -1,190 +1,132 @@
-// Imports
-@import './_variables.scss'
+@use '../../styles/tools'
+@use './variables' as *
 
-// Theme
-+theme(v-alert) using ($material)
-  .v-alert--prominent .v-alert__icon
-    &:after
-      background: map-get($material, 'dividers')
-
-// Sheet
-+sheet(v-alert, $alert-elevation, $alert-border-radius, $alert-shaped-border-radius)
-
-// Block
 .v-alert
-  display: block
-  font-size: $alert-font-size
-  margin-bottom: $alert-margin
-  padding: $alert-padding
+  display: grid
+  flex: 1 1
+  grid-template-areas: "prepend content append close" ". content . ."
+  grid-template-columns: max-content auto max-content max-content
   position: relative
-  transition: $primary-transition
+  padding: $alert-padding
+  overflow: hidden
+  --v-border-color: #{$alert-border-color}
 
-  &:not(.v-sheet--tile)
-    border-radius: $alert-border-radius
+  @include tools.position($alert-positions)
+  @include tools.rounded($alert-border-radius)
+  @include tools.variant($alert-variants...)
 
-  > .v-icon,
-  > .v-alert__content
-    +ltr()
-      margin-right: $alert-margin
+  &--prominent
+    grid-template-areas: "prepend content append close" "prepend content . ."
 
-    +rtl()
-      margin-left: $alert-margin
+  &.v-alert--border
+    --v-border-opacity: #{$alert-border-opacity}
 
-  > .v-icon + .v-alert__content
-    +ltr()
-      margin-right: 0
+    &.v-alert--border-start
+      padding-inline-start: $alert-padding + $alert-border-thin-width
 
-    +rtl()
-      margin-left: 0
+    &.v-alert--border-end
+      padding-inline-end: $alert-padding + $alert-border-thin-width
 
-  > .v-alert__content + .v-icon
-    +ltr()
-      margin-right: 0
+  &--variant-plain
+    transition: $alert-plain-transition
 
-    +rtl()
-      margin-left: 0
+  @at-root
+    @include tools.density('v-alert', $alert-density) using ($modifier)
+      padding-bottom: $alert-padding + $modifier
+      padding-top: $alert-padding + $modifier
 
-// Elements
+      &.v-alert--border-top
+        padding-top: $alert-padding + $alert-border-thin-width + $modifier
+
+      &.v-alert--border-bottom
+        padding-bottom: $alert-padding + $alert-border-thin-width + $modifier
+
 .v-alert__border
-  border-style: solid
-  border-width: $alert-border-width
-  content: ''
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: var(--v-border-opacity)
   position: absolute
+  pointer-events: none
+  right: 0
+  top: 0
+  width: 100%
 
-  &:not(.v-alert__border--has-color)
-    opacity: $alert-border-opacity
+  @include tools.border($alert-border...)
 
-  &--left,
-  &--right
-    bottom: 0
-    top: 0
+  .v-alert--border-start &
+    border-inline-start-width: $alert-border-thin-width
 
-  &--bottom,
-  &--top
-    left: 0
-    right: 0
+  .v-alert--border-end &
+    border-inline-end-width: $alert-border-thin-width
 
-  &--bottom
-    border-bottom-left-radius: inherit
-    border-bottom-right-radius: inherit
-    bottom: 0
+  .v-alert--border-top &
+    border-top-width: $alert-border-thin-width
 
-  &--left
-    +ltr()
-      border-top-left-radius: inherit
-      border-bottom-left-radius: inherit
-      left: 0
+  .v-alert--border-bottom &
+    border-bottom-width: $alert-border-thin-width
 
-    +rtl()
-      border-top-right-radius: inherit
-      border-bottom-right-radius: inherit
-      right: 0
-
-  &--right
-    +ltr()
-      border-top-right-radius: inherit
-      border-bottom-right-radius: inherit
-      right: 0
-
-    +rtl()
-      border-top-left-radius: inherit
-      border-bottom-left-radius: inherit
-      left: 0
-
-  &--top
-    border-top-left-radius: inherit
-    border-top-right-radius: inherit
-    top: 0
+.v-alert__close
+  flex: 0 1 auto
+  grid-area: close
 
 .v-alert__content
-  flex: 1 1 auto
+  align-self: center
+  grid-area: content
+  overflow: hidden
 
-.v-alert__dismissible
-  +ltr()
-    margin: -16px -8px -16px 8px
-
-  +rtl()
-    margin: -16px 8px -16px -8px
-
-.v-alert__icon
+.v-alert__append,
+.v-alert__close
   align-self: flex-start
-  border-radius: 50%
-  height: $alert-icon-size
-  min-width: $alert-icon-size
-  position: relative
+  margin-inline-start: $alert-append-margin-inline-start
 
-  +ltr()
-    margin-right: 16px
+.v-alert__append
+  align-self: flex-start
+  grid-area: append
 
-  +rtl()
-    margin-left: 16px
+  + .v-alert__close
+    margin-inline-start: $alert-append-close-margin-inline-start
 
-  &.v-icon
-    font-size: $alert-icon-size
-
-.v-alert__wrapper
-  align-items: center
-  border-radius: inherit
+.v-alert__prepend
+  align-self: flex-start
   display: flex
+  align-items: center
+  grid-area: prepend
+  margin-inline-end: $alert-prepend-margin-inline-end
 
-// Modifiers
-.v-alert--border
-  &.v-alert--prominent
-    .v-alert__icon
-      +ltr()
-        margin-left: $alert-border-icon-margin
-
-      +rtl()
-        margin-right: $alert-border-icon-margin
-
-.v-alert--dense
-  padding-top: $alert-padding / 2
-  padding-bottom: $alert-padding / 2
-
-  .v-alert__border
-    border-width: $alert-dense-border-width
-
-.v-alert--outlined
-  background: transparent !important
-  border: $alert-outline !important
-
-  .v-alert__icon
-    color: inherit !important
-
-.v-alert--prominent
-  .v-alert__icon
+  .v-alert--prominent &
     align-self: center
-    height: $alert-prominent-icon-size
-    min-width: $alert-prominent-icon-size
 
-    &.v-icon
-      font-size: $alert-prominent-icon-font-size
+.v-alert__underlay
+  grid-area: none
+  position: absolute
 
-      &:after
-        background: currentColor !important
-        border-radius: 50%
-        bottom: 0
-        content: ''
-        left: 0
-        opacity: 0.16
-        position: absolute
-        right: 0
-        top: 0
+  .v-alert--border-start &
+    border-top-left-radius: 0
+    border-bottom-left-radius: 0
 
-  &.v-alert--dense .v-alert__icon.v-icon::after
-    transform: scale(1)
+  .v-alert--border-end &
+    border-top-right-radius: 0
+    border-bottom-right-radius: 0
 
-.v-alert--text
-  background: transparent !important
+  .v-alert--border-top &
+    border-top-left-radius: 0
+    border-top-right-radius: 0
 
-  &:before
-    background-color: currentColor
-    border-radius: inherit
-    bottom: 0
-    content: ''
-    left: 0
-    opacity: 0.12
-    position: absolute
-    pointer-events: none
-    right: 0
-    top: 0
+  .v-alert--border-bottom &
+    border-bottom-left-radius: 0
+    border-bottom-right-radius: 0
+
+.v-alert-title
+  align-items: center
+  align-self: center
+  display: flex
+  font-size: $alert-title-font-size
+  font-weight: $alert-title-font-weight
+  hyphens: $alert-title-hyphens
+  letter-spacing: $alert-title-letter-spacing
+  line-height: $alert-title-line-height
+  overflow-wrap: $alert-title-overflow-wrap
+  text-transform: $alert-title-text-transform
+  word-break: $alert-title-word-break
+  word-wrap: $alert-title-word-wrap

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Helpers
 import { wrapInArray, sortItems, deepEqual, groupItems, searchItems, fillArray } from '../../util/helpers'
 import Vue, { VNode } from 'vue'

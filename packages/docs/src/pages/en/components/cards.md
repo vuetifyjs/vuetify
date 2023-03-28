@@ -1,71 +1,89 @@
 ---
+nav: Cards
 meta:
   title: Card component
-  description: The v-card component is a versatile component that can be used for anything from a panel to a static image.
+  description: The v-card component is a versatile and enhanced sheet of paper that provides a simple interface for headings, text, images, and actions.
   keywords: cards, vuetify card component, vue card component, v-card
 related:
-  - /components/buttons/
-  - /components/images/
-  - /styles/text-and-typography/
+  - /components/buttons
+  - /components/images
+  - /styles/text-and-typography
 ---
 
 # Cards
 
-The `v-card` component is a versatile component that can be used for anything from a panel to a static image. The **card** component has numerous helper components to make markup as easy as possible. Components that have no listed options use Vue's functional component option for faster rendering and serve as markup sugar to make building easier. <inline-ad slug="scrimba-cards" />
+ The `v-card` component is a versatile an enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
 
-<entry-ad />
+![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
+
+---
 
 ## Usage
 
-A card has 4 basic components, `v-card-title`, `v-card-subtitle`, `v-card-text` and `v-card-actions`.
+The `v-card` component is a stylish way to wrap different types of content; such as tables, images, or user actions.
 
 <usage name="v-card" />
 
+<entry />
+
 ## API
 
-- [v-card](/api/v-card)
-- [v-card-actions](/api/v-card-actions)
-- [v-card-subtitle](/api/v-card-subtitle)
-- [v-card-text](/api/v-card-text)
-- [v-card-title](/api/v-card-title)
+| Component | Description |
+| - | - |
+| [v-card](/api/v-card/) | Primary Component |
+| [v-card-item](/api/v-card-item/) | Sub-component used to wrap the Card's `v-card-title` and `v-card-subtitle` components. |
+| [v-card-title](/api/v-card-title/) | Sub-component used to display the Card's title. Wraps the `#title` slot |
+| [v-card-subtitle](/api/v-card-subtitle/) | Sub-component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
+| [v-card-text](/api/v-card-text/) | Sub-component used to display the Card's text. Wraps the `#text` slot. |
+| [v-card-actions](/api/v-card-actions/) | Sub-component that modifies the default styling of [v-btn](/components/buttons/). Wraps the `#actions` slot |
 
-<inline-api page="components/cards" />
+## Anatomy
 
-## Functional Components
+The recommended placement of elements inside of `v-card` is:
 
-<vuetify-ad slug="vs-video-functional-components" />
+* Place `v-card-title`, `v-card-subtitle` or other title text on top
+* Place `v-card-text` and other forms of media below the card header
+* Place `v-card-actions` after card content
 
-### v-card-actions
+![Card Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-anatomy.png)
 
-The container used for placing **actions** for a card, such as [v-btn](/components/buttons) or [v-menu](/components/menus). Also applies *special margin* to buttons so that they properly line up with other card content areas.
+| Element / Area | Description |
+| - | - |
+| 1. Container | The Card container holds all `v-card` components. Composed of 3 major parts: `v-card-item`, `v-card-text`, and `v-card-actions` |
+| 2. Title (optional) | A heading with increased **font-size** |
+| 3. Subtitle (optional) | A subheading with a lower emphasis text color |
+| 4. Text (optional) | A content area with a lower emphasis text color |
+| 5. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
 
-### v-card-subtitle
+<api-inline hide-links />
 
-Provides a default **font-size** and **padding** for card subtitles. Font-size can be overwritten with [typography classes](/styles/typography).
+## Basics
 
-### v-card-text
+There are three ways you can populate a `v-card` with content. The first one is by using props, the second one is by slots, and the third one is by manually using the `v-card-*` components.
 
-Primarily used for **text content** in a card. Applies padding for text, reduces its font-size to .875rem.
+<example file="v-card/basics-content" />
 
-### v-card-title
+Props give you an easy interface to display text-only content. They can also be used to easily render images and icons.
 
-Provides a default **font-size** and **padding** for card titles. Font-size can be overwritten with [typography classes](/styles/typography).
+Use slots if you need to render more complex content. If you need full control over the content, use markup.
 
-<promoted-ad slug="vuetify-zero-theme-pro" />
+In some cases it is possible to combine the different options, like the example below where props, slots and markup have all been used.
+
+<alert type="info">
+
+  In general slots take precedence over props. So if you provide both **text** prop and use **text** slot, then only the slot content will be rendered.
+
+</alert>
+
+<example file="v-card/basics-combine" />
 
 ## Examples
 
 ### Props
 
-#### Loading
-
-Cards can be set to a loading state when processing a user action. This disables further actions and provides visual feedback with an indeterminate [v-progress-linear](/components/progress-linear).
-
-<example file="v-card/prop-loading" />
-
 #### Outlined
 
-An **outlined** card has 0 elevation and contains a soft border.
+A card with the **variant** prop set to `outlined` has zero elevation.
 
 <example file="v-card/prop-outlined" />
 
@@ -73,7 +91,7 @@ An **outlined** card has 0 elevation and contains a soft border.
 
 #### Card Reveal
 
-Using [v-expand-transition](https://vuetifyjs.com/en/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
+Using [v-expand-transition](/api/v-expand-transition/) and a `@click` event you can have a card that reveals more information once the button is clicked, activating the hidden card to be revealed.
 
 <example file="v-card/misc-card-reveal" />
 
@@ -97,7 +115,7 @@ Using grids, you can create beautiful layouts.
 
 #### Horizontal cards
 
-Using `v-col`, you can create customized horizontal cards. Use the `contain` property to shrink the `v-img` to fit inside the container, instead of covering.
+TODO: better description
 
 <example file="v-card/misc-horizontal-cards" />
 
@@ -125,4 +143,8 @@ Using [v-list-items](/components/lists) and a [v-slider](/components/sliders), w
 
 <example file="v-card/misc-weather-card" />
 
-<backmatter />
+#### Loading
+
+Use an indeterminate [v-progress-linear](/components/progress-linear) to indicate a loading state.
+
+<example file="v-card/prop-loading" />

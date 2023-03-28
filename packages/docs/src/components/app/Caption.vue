@@ -1,24 +1,17 @@
-<script>
-  import Headline from './Headline'
+<template>
+  <app-headline
+    :path="path"
+    color="grey"
+    size="caption"
+    weight="regular"
+  />
+</template>
 
-  export default {
-    name: 'AppCaption',
-
-    extends: Headline,
-
-    props: {
-      color: {
-        type: String,
-        default: 'secondary',
-      },
-      size: {
-        type: String,
-        default: 'caption',
-      },
-      weight: {
-        type: String,
-        default: 'regular',
-      },
+<script setup>
+  defineProps({
+    path: {
+      type: String,
+      required: true,
     },
-  }
+  })
 </script>

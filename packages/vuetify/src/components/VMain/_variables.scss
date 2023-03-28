@@ -1,6 +1,4 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
 
-$main-transition: 0.2s map-get($transition, 'fast-out-slow-in') !default;
-
-// TODO: remove in v3
-$content-transition: $main-transition !default;
+// VMain
+$main-transition: 0.2s settings.$standard-easing !default;

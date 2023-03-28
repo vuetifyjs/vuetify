@@ -16,8 +16,8 @@
     </v-card-text>
     <v-card-actions>
       <v-btn
-        text
-        color="teal accent-4"
+        variant="text"
+        color="teal-accent-4"
         @click="reveal = true"
       >
         Learn More
@@ -27,7 +27,7 @@
     <v-expand-transition>
       <v-card
         v-if="reveal"
-        class="transition-fast-in-fast-out v-card--reveal"
+        class="v-card--reveal"
         style="height: 100%;"
       >
         <v-card-text class="pb-0">
@@ -38,8 +38,8 @@
         </v-card-text>
         <v-card-actions class="pt-0">
           <v-btn
-            text
-            color="teal accent-4"
+            variant="text"
+            color="teal-accent-4"
             @click="reveal = false"
           >
             Close

@@ -1,0 +1,25 @@
+@use 'sass:math';
+@use 'sass:map';
+@use '../../styles/settings';
+@use '../../styles/tools';
+
+// VTable
+$table-background: rgb(var(--v-theme-surface)) !default;
+$table-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$table-density: ('default': 0, 'comfortable': -2, 'compact': -4) !default;
+$table-header-height: 56px !default;
+$table-header-font-weight: 500 !default;
+$table-header-font-size: tools.map-deep-get(settings.$typography, 'caption', 'size') !default;
+$table-row-height: var(--v-table-row-height, 52px) !default;
+$table-row-font-size: tools.map-deep-get(settings.$typography, 'subtitle-2', 'size') !default;
+$table-border-color: rgba(var(--v-border-color), var(--v-border-opacity)) !default;
+$table-border: thin solid $table-border-color !default;
+$table-hover-color: rgba(var(--v-border-color), var(--v-hover-opacity)) !default;
+$table-line-height: 1.5 !default;
+$table-column-padding: 0 16px !default;
+
+// Lists
+$table-theme: (
+  $table-background,
+  $table-color,
+);

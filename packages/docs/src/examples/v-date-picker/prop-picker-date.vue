@@ -8,7 +8,7 @@
       <v-date-picker
         ref="picker"
         v-model="date"
-        :picker-date.sync="pickerDate"
+        v-model:picker-date="pickerDate"
         full-width
       ></v-date-picker>
     </v-col>

@@ -1,3 +1,4 @@
-@import '../../styles/styles.sass';
+@use '../../styles/settings';
 
-$item-group-transition: $primary-transition !default;
+// Defaults
+$item-group-transition: 0.2s settings.$standard-easing !default;

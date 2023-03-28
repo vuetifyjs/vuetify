@@ -1,0 +1,5 @@
+{
+  "props": {
+    "mode": "Sets the transition mode (does not apply to transition-group)."
+  }
+}

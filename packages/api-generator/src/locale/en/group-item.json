@@ -1,0 +1,6 @@
+{
+  "props": {
+    "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used.",
+    "index": "?"
+  }
+}

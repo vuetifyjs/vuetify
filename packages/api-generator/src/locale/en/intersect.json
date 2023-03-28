@@ -1,0 +1,9 @@
+{
+  "argument": {
+    "value": "By default takes a handler function that is invoked when the element that the directive is attached to enters or leaves the visible browser area. It can also take an object, which allows you to pass along [IntersectionObserver options](https://developer.mozilla.org/en-US/docs/Web/API/IntersectionObserver/IntersectionObserver)."
+  },
+  "modifiers": {
+    "once": "The provided handler function is only invoked once, the first time the element is visible.",
+    "quiet": "Will not invoke the handler function if the element is visible when the IntersectionObserver is created."
+  }
+}

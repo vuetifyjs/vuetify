@@ -1,4 +1,5 @@
 ---
+nav: Combobox
 meta:
   title: Combobox component
   description: The combobox component provides type-ahead autocomplete functionality and allows users to provide a custom values beyond the provided list of options.
@@ -11,9 +12,7 @@ related:
 
 # Combobox
 
-The `v-combobox` component is a [v-autocomplete](/components/autocompletes) that allows the user to enter values that do not exist within the provided **items**. Created items will be returned as strings.
-
-<entry-ad />
+The `v-combobox` component is a [v-text-field](/components/text-fields) that allows the user to select values from a provided **items** array, or to enter their own value. Created items will be returned as strings.
 
 ## Usage
 
@@ -21,11 +20,15 @@ With Combobox, you can allow a user to create new values that may not be present
 
 <usage name="v-combobox" />
 
+<entry />
+
 ## API
 
-- [v-combobox](/api/v-combobox)
+| Component | Description |
+| - | - |
+| [v-combobox](/api/v-combobox/) | Primary component |
 
-<inline-api page="components/combobox" />
+<api-inline hide-links />
 
 ## Caveats
 
@@ -51,11 +54,11 @@ With Combobox, you can allow a user to create new values that may not be present
 
 ### Props
 
-#### Dense
+#### Density
 
-You can use `dense` prop to reduce combobox height and lower max height of list items.
+You can use `density` prop to adjusts vertical spacing within the component.
 
-<example file="v-combobox/prop-dense" />
+<example file="v-combobox/prop-density" />
 
 #### Multiple combobox
 
@@ -70,13 +73,3 @@ Previously known as **tags** - user is allowed to enter more than 1 value
 In this example we utilize a custom **no-data** slot to provide context to the user when searching / creating items.
 
 <example file="v-combobox/slot-no-data" />
-
-### Misc
-
-#### Advanced custom options
-
-The `v-combobox` improves upon the added functionality from `v-select` and `v-autocomplete`. This provides you with an expansive interface to create truly customized implementations. This example takes advantage of some more advanced features such as a custom **filter** algorithm, inline list editing and dynamic input items.
-
-<example file="v-combobox/misc-advanced" />
-
-<backmatter />

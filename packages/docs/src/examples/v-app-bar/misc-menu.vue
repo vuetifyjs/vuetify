@@ -1,5 +1,5 @@
 <template>
-  <v-card class="overflow-hidden">
+  <v-layout>
     <v-app-bar
       absolute
       color="#6A76AB"
@@ -31,16 +31,12 @@
         <v-icon>mdi-heart</v-icon>
       </v-btn>
 
-      <v-menu
-        bottom
-        left
-      >
-        <template v-slot:activator="{ on, attrs }">
+      <v-menu>
+        <template v-slot:activator="{ props }">
           <v-btn
             icon
             color="yellow"
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
@@ -66,7 +62,7 @@
       </v-menu>
 
       <template v-slot:extension>
-        <v-tabs align-with-title>
+        <v-tabs align-tabs="title">
           <v-tab>Tab 1</v-tab>
 
           <v-tab>Tab 2</v-tab>
@@ -79,8 +75,9 @@
       id="scrolling-techniques-4"
       class="overflow-y-auto"
       max-height="600"
+      width="100%"
     >
       <v-container style="height: 1000px;"></v-container>
     </v-sheet>
-  </v-card>
+  </v-layout>
 </template>

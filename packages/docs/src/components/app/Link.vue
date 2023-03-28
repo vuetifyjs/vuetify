@@ -1,94 +1,64 @@
-<script>
-  // Components
-  import { VIcon } from 'vuetify/lib/components/VIcon'
+<template>
+  <component
+    :is="tag"
+    class="app-link text-decoration-none text-primary font-weight-medium d-inline-flex align-center"
+    v-bind="attrs"
+  >
+    <template v-if="iconProps && isSamePage">
+      <VIcon v-bind="iconProps" />
+    </template>
 
+    <slot />
+
+    <template v-if="iconProps && !isSamePage">
+      <VIcon v-bind="iconProps" />
+    </template>
+  </component>
+</template>
+
+<script setup lang="ts">
   // Utilities
+  import { computed } from 'vue'
   import { rpath } from '@/util/routes'
 
-  export default {
-    name: 'AppLink',
-
-    inheritAttrs: false,
-
-    props: {
-      href: {
-        type: String,
-        default: '',
-      },
+  const props = defineProps({
+    href: {
+      type: String,
+      default: '',
     },
+  })
 
-    computed: {
-      attrs () {
-        return this.isExternal
-          ? { href: this.href, target: '_blank', rel: 'noopener' }
-          : {
-            to: {
-              path: this.isSamePage ? this.href : rpath(this.href),
-            },
-          }
-      },
-      icon () {
-        if (this.isSamePage) return '$mdiPound'
-        if (this.isExternal) return '$mdiOpenInNew'
-        if (this.href) return '$mdiPageNext'
-
-        return null
-      },
-      isExternal () {
-        return (
-          this.href.startsWith('http') ||
-          this.href.startsWith('mailto')
-        )
-      },
-      isSamePage () {
-        return (
-          !this.isExternal &&
-          this.href.startsWith('#')
-        )
-      },
-    },
-
-    methods: {
-      // vue-router scroll-behavior is skipped
-      // on same page hash changes. Manually
-      // run $vuetify goTo scroll function
-      onClick (e) {
-        if (!this.isSamePage) return
-
-        e.preventDefault()
-
-        this.$vuetify.goTo(this.href)
-      },
-    },
-
-    render (h) {
-      const children = []
-
-      if (!this.isExternal && !this.attrs.to) {
-        return null
-      }
-
-      if (!this.isSamePage) children.push(this.$slots.default)
-      if (this.icon) {
-        children.push(h(VIcon, {
-          class: `m${this.isSamePage ? 'r' : 'l'}-1`,
-          attrs: {
-            color: 'primary',
-            size: '.875rem',
-          },
-        }, [this.icon]))
-      }
-      if (this.isSamePage) children.push(this.$slots.default)
-
-      return h(this.isExternal ? 'a' : 'router-link', {
-        staticClass: 'app-link text-decoration-none primary--text font-weight-medium d-inline-block',
-        attrs: this.attrs,
-        [this.isExternal ? 'on' : 'nativeOn']: {
-          click: this.onClick,
+  const isExternal = computed(() => props.href.startsWith('http') || props.href.startsWith('mailto'))
+  const isSamePage = computed(() => !isExternal.value && props.href.startsWith('#'))
+  const attrs = computed(() => {
+    return isExternal.value
+      ? { href: props.href, target: '_blank', rel: 'noopener' }
+      : {
+        to: isSamePage.value ? props.href : {
+          path: rpath(props.href),
         },
-      }, children)
-    },
-  }
+      }
+  })
+
+  const icon = computed(() => {
+    if (isSamePage.value) return 'mdi-pound'
+    if (isExternal.value) return 'mdi-open-in-new'
+    if (props.href) return 'mdi-page-next'
+
+    return null
+  })
+
+  const iconProps = computed(() => {
+    if (!icon.value) return null
+
+    return {
+      icon: icon.value,
+      class: `m${isSamePage.value ? 'e' : 's'}-1`,
+      color: 'primary',
+      size: '.875rem',
+    }
+  })
+  const tag = computed(() => isExternal.value ? 'a' : 'router-link')
 </script>
 
 <style lang="sass">

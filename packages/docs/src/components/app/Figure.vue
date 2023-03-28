@@ -1,37 +1,36 @@
 <template>
-  <figure>
-    <app-sheet :outlined="outlined">
-      <app-img
-        v-bind="$attrs"
-        v-on="$listeners"
-      />
-    </app-sheet>
-
-    <slot />
+  <figure class="mb-6">
+    <v-img
+      class="rounded bg-surface"
+      cover
+      v-bind="$attrs"
+    />
 
     <figcaption
-      v-if="!$slots.default && caption"
-      class="text-subtitle-2 text-center text-capitalize mt-3"
+      v-if="caption"
+      class="text-caption font-weight-bold text-center text-capitalize text-medium-emphasis"
       v-text="caption"
     />
+
+    <slot v-else />
   </figure>
 </template>
 
+<script setup>
+  // Utilities
+  import { computed, useAttrs } from 'vue'
+
+  const attrs = useAttrs()
+
+  defineProps({
+    name: String,
+  })
+
+  const caption = computed(() => attrs.title === 'null' ? null : attrs.title)
+</script>
+
 <script>
   export default {
-    name: 'AppFigure',
-
     inheritAttrs: false,
-
-    props: {
-      name: String,
-      outlined: Boolean,
-    },
-
-    computed: {
-      caption () {
-        return this.name || this.$attrs.alt
-      },
-    },
   }
 </script>

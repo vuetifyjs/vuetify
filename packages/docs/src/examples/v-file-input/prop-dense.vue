@@ -1,7 +1,6 @@
 <template>
   <v-file-input
     label="File input"
-    outlined
-    dense
+    density="compact"
   ></v-file-input>
 </template>

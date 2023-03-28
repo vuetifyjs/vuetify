@@ -1,41 +1,32 @@
 <template>
-  <div class="text-center">
+  <div class="d-flex flex-column align-center">
     <v-rating
-      v-model="rating"
-      background-color="purple lighten-3"
-      color="purple"
-      small
+      model-value="3"
+      size="x-small"
     ></v-rating>
+
     <v-rating
-      v-model="rating"
-      background-color="pink lighten-3"
-      color="pink"
+      model-value="3"
+      size="small"
     ></v-rating>
+
     <v-rating
-      v-model="rating"
-      background-color="green lighten-3"
-      color="green"
-      large
+      model-value="3"
     ></v-rating>
+
     <v-rating
-      v-model="rating"
-      background-color="red lighten-3"
-      color="red"
-      x-large
+      model-value="3"
+      size="large"
     ></v-rating>
+
     <v-rating
-      v-model="rating"
-      background-color="indigo lighten-3"
-      color="indigo"
-      size="64"
+      model-value="3"
+      size="x-large"
+    ></v-rating>
+
+    <v-rating
+      model-value="3"
+      size="72"
     ></v-rating>
   </div>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      rating: 4,
-    }),
-  }
-</script>

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { CalendarCategory, CalendarCategoryTextFunction } from 'types'
 
 export function parsedCategoryText (

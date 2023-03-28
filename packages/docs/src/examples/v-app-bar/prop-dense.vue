@@ -1,7 +1,7 @@
 <template>
   <div>
     <v-app-bar
-      color="deep-purple accent-4"
+      color="deep-purple-accent-4"
       dense
       dark
     >
@@ -19,15 +19,11 @@
         <v-icon>mdi-magnify</v-icon>
       </v-btn>
 
-      <v-menu
-        left
-        bottom
-      >
-        <template v-slot:activator="{ on, attrs }">
+      <v-menu>
+        <template v-slot:activator="{ props }">
           <v-btn
             icon
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>

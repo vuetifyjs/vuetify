@@ -1,0 +1,31 @@
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../styles/settings';
+@use './variables' as *;
+
+@mixin avatar-sizes ($map: $avatar-sizes) {
+  @each $sizeName, $multiplier in settings.$size-scales {
+    $size: map.get($map, 'height') + (8 * $multiplier);
+
+    &.v-avatar--size-#{$sizeName} {
+      --v-avatar-height: #{$size};
+    }
+  }
+}
+
+@mixin avatar-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-avatar-height) + #{$multiplier * settings.$spacer});
+
+    &.v-avatar--density-#{$density} {
+      @if meta.type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

@@ -1,12 +1,14 @@
-@import './_variables.scss'
+@use '../../styles/tools'
+@use './variables' as *
 
-.v-color-picker__canvas
+.v-color-picker-canvas
   $root: &
+  display: flex
   position: relative
   overflow: hidden
-  contain: strict
+  contain: content
 
-  &-dot
+  &__dot
     position: absolute
     top: 0
     left: 0

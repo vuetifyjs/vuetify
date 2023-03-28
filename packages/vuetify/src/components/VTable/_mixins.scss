@@ -1,0 +1,25 @@
+@use 'sass:map';
+@use './variables' as *;
+
+@mixin table-density ($densities) {
+  @each $density, $properties in $densities {
+    .v-table--density-#{$density} {
+      > .v-table__wrapper {
+        > table {
+          > tbody,
+          > thead,
+          > tfoot {
+            > tr {
+              > th {
+                height: map-get($properties, header)
+              }
+              > td {
+                height: map-get($properties, row)
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,51 +1,48 @@
 <template>
-  <v-row
-    justify="center"
-    align="center"
+  <usage-example
+    v-model="model"
+    :name="name"
+    :options="options"
+    :code="code"
   >
-    <v-container fluid>
-      <v-card
-        img="https://cdn.vuetifyjs.com/images/home/vuetify_layout1.svg"
-        height="200px"
-        class="mb-6"
-      >
-        <v-system-bar
-          color="orange"
-          v-bind="$attrs"
-          v-on="$listeners"
-        >
-          <v-icon>mdi-gmail</v-icon>
-          <span>10 unread emails</span>
-          <v-spacer></v-spacer>
-          <v-icon>mdi-wifi-strength-4</v-icon>
-          <v-icon>mdi-signal-cellular-outline</v-icon>
-          <v-icon>mdi-battery</v-icon>
-          <span>12:30</span>
-        </v-system-bar>
-      </v-card>
-    </v-container>
-  </v-row>
+    <v-layout
+      class="elevation-2 rounded mx-auto bg-white"
+      style="max-width: 448px; height: 150px"
+    >
+      <v-system-bar v-bind="props">
+        <v-icon icon="mdi-wifi-strength-4"></v-icon>
+        <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+        <v-icon icon="mdi-battery" class="ms-2"></v-icon>
+
+        <span class="ms-2">3:13PM</span>
+      </v-system-bar>
+
+      <v-main></v-main>
+    </v-layout>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const name = 'v-system-bar'
+  const model = ref('default')
+  const options = ['window']
 
-    data: () => ({
-      defaults: {
-        height: 30,
-        'lights-out': false,
-        window: false,
-      },
-      options: {
-        booleans: ['lights-out'],
-        sliders: {
-          height: [1, 60],
-        },
-      },
-      tabs: ['window'],
-    }),
-  }
+  const props = computed(() => {
+    return {
+      window: model.value === 'window' || undefined,
+    }
+  })
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>
+  <v-icon icon="mdi-wifi-strength-4"></v-icon>
+  <v-icon icon="mdi-signal" class="ms-2"></v-icon>
+  <v-icon icon="mdi-battery" class="ms-2"></v-icon>
+
+  <span class="ms-2">3:13PM</span>
+</${name}>`
+  })
 </script>

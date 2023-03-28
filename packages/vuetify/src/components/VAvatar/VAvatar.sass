@@ -1,22 +1,29 @@
-@import './_variables.scss'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './mixins' as *
+@use './variables' as *
 
 .v-avatar
+  flex: none
   align-items: center
-  border-radius: $avatar-border-radius
   display: inline-flex
   justify-content: center
-  line-height: normal
+  line-height: $avatar-line-height
+  overflow: hidden
   position: relative
   text-align: center
-  vertical-align: middle
-  overflow: hidden
+  transition: 0.2s settings.$standard-easing
+  transition-property: width, height
+  vertical-align: $avatar-vertical-align
 
-  img,
-  svg,
-  .v-icon,
-  .v-image,
-  .v-responsive__content
-    border-radius: inherit
-    display: inline-flex
-    height: inherit
-    width: inherit
+  @include avatar-sizes($avatar-sizes)
+  @include avatar-density(('height', 'width'), $avatar-density)
+  @include tools.rounded($avatar-border-radius)
+  @include tools.variant($avatar-variants...)
+
+  &--rounded
+    @include tools.rounded($avatar-rounded-border-radius)
+
+  .v-img
+    height: 100%
+    width: 100%

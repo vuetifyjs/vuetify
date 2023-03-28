@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Stepper component
   description: The stepper component provides a linear progression process for gathering and displaying information to a user, similar to a form wizard.
@@ -13,7 +14,7 @@ related:
 
 The `v-stepper` component displays progress through numbered steps.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,13 +24,7 @@ A stepper can be used for a multitude of scenarios, including shopping carts, re
 
 ## API
 
-- [v-stepper](/api/v-stepper)
-- [v-stepper-content](/api/v-stepper-content)
-- [v-stepper-header](/api/v-stepper-header)
-- [v-stepper-items](/api/v-stepper-items)
-- [v-stepper-step](/api/v-stepper-step)
-
-<inline-api page="components/steppers" />
+<api-inline />
 
 <!-- ## Sub-components
 
@@ -126,5 +121,3 @@ An optional step can be called out with sub-text.
 The same state also applies to Vertical steppers.
 
 <example file="v-stepper/misc-vertical-error" />
-
-<backmatter />

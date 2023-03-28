@@ -3,14 +3,12 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="600px"
+      width="1024"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Open Dialog
         </v-btn>
@@ -94,15 +92,15 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="blue darken-1"
-            text
+            color="blue-darken-1"
+            variant="text"
             @click="dialog = false"
           >
             Close
           </v-btn>
           <v-btn
-            color="blue darken-1"
-            text
+            color="blue-darken-1"
+            variant="text"
             @click="dialog = false"
           >
             Save

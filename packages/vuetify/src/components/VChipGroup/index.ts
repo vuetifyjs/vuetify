@@ -1,4 +1,1 @@
-import VChipGroup from './VChipGroup'
-
-export { VChipGroup }
-export default VChipGroup
+export { VChipGroup } from './VChipGroup'

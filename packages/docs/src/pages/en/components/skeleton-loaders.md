@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Skeleton loader component
   description: The v-skeleton-loader component is a versatile tool that can fill many roles within a project. At its heart, the component provides an indication to the user that something is coming but not yet available.
@@ -13,7 +14,7 @@ related:
 
 The `v-skeleton-loader` component is a versatile tool that can fill many roles within a project.  At its heart, the component provides an indication to the user that something is coming but not yet available. There are over 30 pre-defined options available that can be combined to make custom examples.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,9 +24,7 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 ## API
 
-- [v-skeleton-loader](/api/v-skeleton-loader)
-
-<inline-api page="components/skeleton-loaders" />
+<api-inline />
 
 ## Examples
 
@@ -46,5 +45,3 @@ There are 2 ways that you can utilize the `v-skeleton-component`. The **default 
 ## Accessibility
 
 By default, the `v-skeleton-loader` component is assigned a [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert). We augment this role with two aria properties. An [**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) value of **true** denotes that a widget is missing required owned elements. An [**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) value of **polite** sets the screen reader's priority of live regions.
-
-<backmatter />

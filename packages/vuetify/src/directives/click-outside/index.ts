@@ -1,22 +1,21 @@
-import { attachedRoot } from '../../util/dom'
-import { VNodeDirective } from 'vue/types/vnode'
-import { VNode } from 'vue'
+import { attachedRoot } from '@/util'
+import type { DirectiveBinding } from 'vue'
 
 interface ClickOutsideBindingArgs {
-  handler: (e: Event) => void
+  handler: (e: MouseEvent) => void
   closeConditional?: (e: Event) => boolean
   include?: () => HTMLElement[]
 }
 
-interface ClickOutsideDirective extends VNodeDirective {
-  value?: ((e: Event) => void) | ClickOutsideBindingArgs
+interface ClickOutsideDirectiveBinding extends DirectiveBinding {
+  value: ((e: MouseEvent) => void) | ClickOutsideBindingArgs
 }
 
 function defaultConditional () {
   return true
 }
 
-function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective): boolean {
+function checkEvent (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding): boolean {
   // The include element callbacks below can be expensive
   // so we should avoid calling them when we're not active.
   // Explicitly check for false to allow fallback compatibility
@@ -44,17 +43,17 @@ function checkEvent (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDire
   // Toggleable can return true if it wants to deactivate.
   // Note that, because we're in the capture phase, this callback will occur before
   // the bubbling click event on any outside elements.
-  return !elements.some(el => el.contains(e.target as Node))
+  return !elements.some(el => el?.contains(e.target as Node))
 }
 
-function checkIsActive (e: PointerEvent, binding: ClickOutsideDirective): boolean | void {
+function checkIsActive (e: MouseEvent, binding: ClickOutsideDirectiveBinding): boolean | void {
   const isActive = (typeof binding.value === 'object' && binding.value.closeConditional) || defaultConditional
 
   return isActive(e)
 }
 
-function directive (e: PointerEvent, el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
-  const handler = typeof binding.value === 'function' ? binding.value : binding.value!.handler
+function directive (e: MouseEvent, el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
+  const handler = typeof binding.value === 'function' ? binding.value : binding.value.handler
 
   el._clickOutside!.lastMousedownWasOutside && checkEvent(e, el, binding) && setTimeout(() => {
     checkIsActive(e, binding) && handler && handler(e)
@@ -77,10 +76,10 @@ export const ClickOutside = {
   // sure that the root element is
   // available, iOS does not support
   // clicks on body
-  inserted (el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
-    const onClick = (e: Event) => directive(e as PointerEvent, el, binding, vnode)
+  mounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
+    const onClick = (e: Event) => directive(e as MouseEvent, el, binding)
     const onMousedown = (e: Event) => {
-      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as PointerEvent, el, binding)
+      el._clickOutside!.lastMousedownWasOutside = checkEvent(e as MouseEvent, el, binding)
     }
 
     handleShadow(el, (app: HTMLElement) => {
@@ -94,25 +93,25 @@ export const ClickOutside = {
       }
     }
 
-    el._clickOutside[vnode.context!._uid] = {
+    el._clickOutside[binding.instance!.$.uid] = {
       onClick,
       onMousedown,
     }
   },
 
-  unbind (el: HTMLElement, binding: ClickOutsideDirective, vnode: VNode) {
+  unmounted (el: HTMLElement, binding: ClickOutsideDirectiveBinding) {
     if (!el._clickOutside) return
 
     handleShadow(el, (app: HTMLElement) => {
-      if (!app || !el._clickOutside?.[vnode.context!._uid]) return
+      if (!app || !el._clickOutside?.[binding.instance!.$.uid]) return
 
-      const { onClick, onMousedown } = el._clickOutside[vnode.context!._uid]!
+      const { onClick, onMousedown } = el._clickOutside[binding.instance!.$.uid]!
 
       app.removeEventListener('click', onClick, true)
       app.removeEventListener('mousedown', onMousedown, true)
     })
 
-    delete el._clickOutside[vnode.context!._uid]
+    delete el._clickOutside[binding.instance!.$.uid]
   },
 }
 

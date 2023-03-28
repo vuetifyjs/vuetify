@@ -27,18 +27,18 @@
         no-action
       >
         <template v-slot:activator>
-          <v-list-item-content>
+          <v-list-item-header>
             <v-list-item-title v-text="item.title"></v-list-item-title>
-          </v-list-item-content>
+          </v-list-item-header>
         </template>
 
         <v-list-item
           v-for="child in item.items"
           :key="child.title"
         >
-          <v-list-item-content>
+          <v-list-item-header>
             <v-list-item-title v-text="child.title"></v-list-item-title>
-          </v-list-item-content>
+          </v-list-item-header>
         </v-list-item>
       </v-list-group>
     </v-list>

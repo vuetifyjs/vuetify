@@ -1,15 +1,14 @@
-// Imports
-@import './_variables.scss'
+@use '../../styles/tools'
+@use './variables' as *
 
-// Theme
-+theme(v-sheet) using ($material)
-  background-color: map-get($material, 'cards')
-  border-color: map-get($material, 'cards')
-  color: map-deep-get($material, 'text', 'primary')
-
-  &--outlined
-    border: $sheet-outlined-border-width solid map-get($material, 'dividers')
-
-// Sheet
 .v-sheet
-  +paper($sheet-elevation, $sheet-border-radius, $sheet-shaped-border-radius)
+  display: block
+
+  @include tools.border($sheet-border...)
+  @include tools.elevation($sheet-elevation)
+  @include tools.position($sheet-positions)
+  @include tools.rounded($sheet-border-radius)
+  @include tools.theme($sheet-theme...)
+
+  &--rounded
+    @include tools.rounded($sheet-rounded-border-radius)

@@ -1,0 +1,31 @@
+@use './variables' as *
+
+.v-tab
+  // override v-btn size specificity
+  &.v-tab
+    --v-btn-height: var(--v-tabs-height)
+    min-width: $tab-min-width
+
+  .v-slide-group--horizontal &
+    max-width: $tab-max-width
+
+  .v-slide-group--vertical &
+    justify-content: start
+
+.v-tab__slider
+  position: absolute
+  bottom: 0
+  left: 0
+  height: $tab-slider-size
+  width: 100%
+  background: currentColor
+  pointer-events: none
+  opacity: 0
+
+  .v-tab--selected &
+    opacity: 1
+
+  .v-slide-group--vertical &
+    top: 0
+    height: 100%
+    width: $tab-slider-size

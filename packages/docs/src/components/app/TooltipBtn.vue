@@ -1,47 +1,57 @@
 <template>
   <span class="v-app-tooltip-btn d-inline-block">
-    <v-tooltip
-      bottom
-      content-class="v-app-tooltip-btn__content"
-      open-delay="200"
+    <v-btn
+      :aria-label="path"
+      :variant="variant"
+      v-bind="$attrs"
+      icon
     >
-      <template #activator="{ on }">
-        <v-btn
-          :aria-label="path"
-          icon
-          v-bind="$attrs"
-          v-on="{
-            ...on,
-            ...$listeners
-          }"
-        >
-          <slot
-            v-if="$slots.icon"
-            name="icon"
-          />
+      <slot
+        v-if="$slots.icon"
+        name="icon"
+      />
 
-          <v-icon
-            v-else
-            v-text="icon"
-          />
-        </v-btn>
-      </template>
+      <v-icon
+        v-else
+        :icon="icon"
+      />
 
-      <i18n :path="path" />
-    </v-tooltip>
+      <v-tooltip
+        v-if="path"
+        activator="parent"
+        class="v-app-tooltip-btn__content"
+        location="bottom"
+        open-delay="200"
+      >
+        {{ t(path) }}
+      </v-tooltip>
+    </v-btn>
   </span>
 </template>
 
-<script>
-  export default {
-    name: 'AppTooltipBtn',
+<script setup lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
 
-    inheritAttrs: false,
+  // Types
+  import type { PropType } from 'vue'
+  import type { VBtn } from 'vuetify/components'
 
-    props: {
-      icon: String,
-      path: String,
+  defineProps({
+    icon: String,
+    path: String,
+    variant: {
+      type: String as PropType<VBtn['$props']['variant']>,
+      default: 'text',
     },
+  })
+
+  const { t } = useI18n()
+</script>
+
+<script lang="ts">
+  export default {
+    inheritAttrs: false,
   }
 </script>
 

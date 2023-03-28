@@ -1,7 +1,8 @@
 ---
+nav: Timelines
 meta:
   title: Timeline component
-  description: The timeline component is used to display chronological information horizontally.
+  description: The timeline component is used to display chronological information either vertically or horizontally.
   keywords: timelines, vuetify timeline component, vue timeline component
 related:
   - /components/cards/
@@ -14,20 +15,24 @@ related:
 
 The `v-timeline` is useful for stylistically displaying chronological information.
 
-<entry-ad />
+<entry />
 
+<!--
 ## Usage
 
-`v-timeline`'s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`.
+`v-timeline`s in their simplest form display a vertical timeline that should contain at least one `v-timeline-item`.
 
 <example file="v-timeline/usage" />
+-->
 
 ## API
 
-- [v-timeline](/api/v-timeline)
-- [v-timeline-item](/api/v-timeline-item)
+| Component | Description |
+| - | - |
+| [v-timeline](/api/v-timeline/) | Primary Component |
+| [v-timeline-item](/api/v-timeline-item/) | Sub-component used to display a single timeline item |
 
-<inline-api page="components/timelines" />
+<api-inline hide-links />
 
 <!-- ## Sub-components
 
@@ -39,35 +44,59 @@ v-timeline-item description -->
 
 ### Props
 
-#### Color
+#### Direction
 
-Colored dots create visual breakpoints that make your timelines easier to read.
+Switch between a horizontal and vertical timeline in real-time using the **direction** prop.
+
+<example file="v-timeline/prop-direction" />
+
+#### Side
+
+Use the **side** property to force all items to one side of the timeline.
+
+<example file="v-timeline/prop-single-side" />
+
+#### Alignment
+
+By default, `v-timeline-item` content is vertically aligned `center`. The **align** prop also supports `top` alignment.
+
+<example file="v-timeline/prop-align" />
+
+#### Dot color
+
+Colored dots create visual breakpoints that make your timelines easier for users to read.
 
 <example file="v-timeline/prop-color" />
 
-#### Dense
-
-**dense** timelines position all content to the right. In this example, `v-alert` replaces the card to provide a different design.
-
-<example file="v-timeline/prop-dense" />
-
 #### Icon dots
 
-Conditionally use icons within the `v-timeline-item`'s dot to provide additional context.
+Use icons within the `v-timeline-item` dot to provide additional context.
 
 <example file="v-timeline/prop-icon-dots" />
 
-#### Reverse
+<!-- #### Mirror
 
-You can reverse the direction of the timeline items by using the **reverse** prop. This works both in default and **dense** mode.
+You can mirror the placement of the timeline items by using the **mirror** prop.
 
-<example file="v-timeline/prop-reverse" />
+<example file="v-timeline/prop-mirror" /> -->
 
-#### Small
+#### Size
 
-The **small** prop allows alternate styles to provide a unique design.
+The **size** prop allows you to customize the size of each dot.
 
-<example file="v-timeline/prop-small" />
+<example file="v-timeline/prop-size" />
+
+#### Truncated line
+
+Truncate the start, end or both ends of the timeline center line by using the **truncate-line** prop.
+
+<example file="v-timeline/prop-truncate-line" />
+
+#### Line inset
+
+Modify the inset of dividing lines by specifying a custom amount using the **line-inset** prop.
+
+<example file="v-timeline/prop-line-inset" />
 
 ### Slots
 
@@ -83,18 +112,16 @@ The **opposite** slot provides an additional layer of customization within your 
 
 <example file="v-timeline/slot-opposite" />
 
+<!--
 #### Timeline item default
 
 If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on the side of the card.
 
 <example file="v-timeline/slot-timeline-item-default" />
+-->
 
 ### Misc
 
 #### Advanced
 
-Modular components allow you to create highly customized solutions that just work.
-
 <example file="v-timeline/misc-advanced" />
-
-<backmatter />

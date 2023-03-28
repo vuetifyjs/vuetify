@@ -1,0 +1,6 @@
+@use '../../styles/settings';
+
+$ripple-animation-transition-in: transform .25s settings.$decelerated-easing,
+                                 opacity .1s settings.$decelerated-easing !default;
+$ripple-animation-transition-out: opacity .3s settings.$decelerated-easing !default;
+$ripple-animation-visible-opacity: calc(.25 * var(--v-theme-overlay-multiplier)) !default;

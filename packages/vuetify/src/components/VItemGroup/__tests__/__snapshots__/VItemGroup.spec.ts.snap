@@ -1,0 +1,6 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`VItemGroup should render with a specified tag when the tag prop is provided with a value 1`] = `
+<button class="v-item-group v-theme--light">
+</button>
+`;

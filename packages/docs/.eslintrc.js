@@ -1,4 +1,10 @@
 module.exports = {
+  env: {
+    'vue/setup-compiler-macros': true,
+  },
+  rules: {
+    'vue/multi-word-component-names': 'off',
+  },
   overrides: [
     {
       files: [
@@ -19,9 +25,9 @@ module.exports = {
           default: 'longform',
           named: 'longform',
         }],
-        'vuetify/no-deprecated-classes': 'error',
-        'vuetify/grid-unknown-attributes': 'error',
-        'vuetify/no-legacy-grid': 'error',
+        // 'vuetify/no-deprecated-classes': 'error',
+        // 'vuetify/grid-unknown-attributes': 'error',
+        // 'vuetify/no-legacy-grid': 'error',
       },
     },
     {

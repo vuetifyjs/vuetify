@@ -2,7 +2,6 @@
   <div class="text-center">
     <v-rating
       v-bind="$attrs"
-      v-on="$listeners"
     ></v-rating>
   </div>
 </template>

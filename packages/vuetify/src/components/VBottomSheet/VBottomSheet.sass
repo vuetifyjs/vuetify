@@ -17,7 +17,7 @@
   overflow: visible
 
   &.v-bottom-sheet--inset
-    max-width: $bottom-sheet-inset-width
+    max-width: none
 
-    @media #{map-get($display-breakpoints, 'xs-only')}
-      max-width: none
+    @media #{map-get($display-breakpoints, 'sm-and-up')}
+      max-width: $bottom-sheet-inset-width

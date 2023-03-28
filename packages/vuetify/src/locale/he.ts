@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} נוספים',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} קבצים',
     counterSize: '{0} קבצים ({1} בסך הכל)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'ניווט עימוד',
+      root: 'ניווט עימוד',
       next: 'עמוד הבא',
       previous: 'עמוד הקודם',
       page: '{0} לך לעמוד',
       currentPage: '{0} עמוד נוכחי, עמוד',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

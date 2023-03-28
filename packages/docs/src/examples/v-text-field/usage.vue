@@ -1,97 +1,54 @@
 <template>
-  <v-form>
-    <v-container>
-      <v-row>
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Regular"
-          ></v-text-field>
-        </v-col>
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
+  >
+    <div>
+      <v-text-field v-bind="props" v-model="field"></v-text-field>
+    </div>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Regular"
-            placeholder="Placeholder"
-          ></v-text-field>
-        </v-col>
+    <template v-slot:configuration>
+      <v-text-field v-model="label" label="Label"></v-text-field>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Solo"
-            solo
-          ></v-text-field>
-        </v-col>
+      <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
 
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Solo"
-            placeholder="Placeholder"
-            solo
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Filled"
-            filled
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Filled"
-            placeholder="Placeholder"
-            filled
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Outlined"
-            outlined
-          ></v-text-field>
-        </v-col>
-
-        <v-col
-          cols="12"
-          sm="6"
-          md="3"
-        >
-          <v-text-field
-            label="Outlined"
-            placeholder="Placeholder"
-            outlined
-          ></v-text-field>
-        </v-col>
-      </v-row>
-    </v-container>
-  </v-form>
+      <v-checkbox v-model="clearable" label="Clearable"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
+
+<script setup>
+  // Utilities
+  import { computed, ref, watch } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-text-field'
+  const model = ref('default')
+  const clearable = ref(false)
+  const field = ref()
+  const label = ref('Label')
+  const prepend = ref(false)
+  const options = ['outlined', 'solo', 'underlined']
+  const props = computed(() => {
+    return {
+      clearable: clearable.value || undefined,
+      label: label.value,
+      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
+      variant: ['outlined', 'solo', 'underlined'].includes(model.value) ? model.value : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
+
+  watch(clearable, () => {
+    if (!field.value) field.value = 'Hover to Clear me'
+  })
+</script>

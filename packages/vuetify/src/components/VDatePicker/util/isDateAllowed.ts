@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { DatePickerAllowedDatesFunction } from 'vuetify/types'
 
 export default function isDateAllowed (date: string, min: string, max: string, allowedFn: DatePickerAllowedDatesFunction | undefined) {

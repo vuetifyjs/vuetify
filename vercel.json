@@ -2,14 +2,6 @@
   "version": 2,
   "cleanUrls": true,
   "trailingSlash": true,
-  "build": {
-    "env": {
-      "VUE_APP_COSMIC_BUCKET_SLUG": "@cosmic-bucket-slug",
-      "VUE_APP_COSMIC_BUCKET_READ_KEY": "@cosmic-bucket-read-key",
-      "VUE_APP_COSMIC_BUCKET_SLUG_STORE": "@cosmic-bucket-slug-store",
-      "VUE_APP_COSMIC_BUCKET_READ_KEY_STORE": "@cosmic-bucket-read-key-store"
-    }
-  },
   "rewrites": [
     {
       "source": "/eo-UY/(.*)",
@@ -54,6 +46,7 @@
     }
   ],
   "github": {
+    "enabled": false,
     "autoAlias": false,
     "silent": true
   }

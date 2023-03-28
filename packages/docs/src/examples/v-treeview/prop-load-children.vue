@@ -1,6 +1,6 @@
 <template>
   <v-card>
-    <v-card-title class="indigo white--text text-h5">
+    <v-card-title class="bg-indigo text-white text-h5">
       User Directory
     </v-card-title>
     <v-row
@@ -9,10 +9,10 @@
     >
       <v-col cols="5">
         <v-treeview
-          :active.sync="active"
+          v-model:active="active"
+          v-model:open="open"
           :items="items"
           :load-children="fetchUsers"
-          :open.sync="open"
           activatable
           color="warning"
           open-on-click
@@ -34,7 +34,7 @@
         <v-scroll-y-transition mode="out-in">
           <div
             v-if="!selected"
-            class="text-h6 grey--text text--lighten-1 font-weight-light"
+            class="text-h6 text-grey-lighten-1 font-weight-light"
             style="align-self: center;"
           >
             Select a User
@@ -59,10 +59,10 @@
               <h3 class="text-h5 mb-2">
                 {{ selected.name }}
               </h3>
-              <div class="blue--text mb-2">
+              <div class="text-blue mb-2">
                 {{ selected.email }}
               </div>
-              <div class="blue--text subheading font-weight-bold">
+              <div class="text-blue subheading font-weight-bold">
                 {{ selected.username }}
               </div>
             </v-card-text>
@@ -72,7 +72,7 @@
               tag="v-card-text"
             >
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >
@@ -80,7 +80,7 @@
               </v-col>
               <v-col>{{ selected.company.name }}</v-col>
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >
@@ -93,7 +93,7 @@
                 >{{ selected.website }}</a>
               </v-col>
               <v-col
-                class="text-right mr-4 mb-2"
+                class="text-right me-4 mb-2"
                 tag="strong"
                 cols="5"
               >

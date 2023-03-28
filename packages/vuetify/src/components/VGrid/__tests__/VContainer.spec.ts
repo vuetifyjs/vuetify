@@ -1,28 +1,26 @@
 // Components
-import VContainer from '../VContainer'
+import { VContainer } from '../VContainer'
 
 // Utilities
-import {
-  mount,
-  MountOptions,
-  Wrapper,
-} from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import { describe, expect, it } from '@jest/globals'
+import { createVuetify } from '@/framework'
 
-describe('VContainer.ts', () => {
-  type Instance = InstanceType<typeof VContainer>
-  let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
+describe('VContainer', () => {
+  const vuetify = createVuetify()
 
-  beforeEach(() => {
-    mountFunction = (options = {}) => {
-      return mount(VContainer, {
-        ...options,
-      })
-    }
-  })
+  function mountFunction (template: string) {
+    return mount({
+      components: { VContainer },
+      template,
+    }, {
+      global: { plugins: [vuetify] },
+    })
+  }
 
   it('should work', () => {
-    const wrapper = mountFunction()
+    const wrapper = mountFunction(`<VContainer />`)
 
-    expect(wrapper.html()).toMatchSnapshot()
+    expect(wrapper.html()).toBe('<div class="v-container"></div>')
   })
 })

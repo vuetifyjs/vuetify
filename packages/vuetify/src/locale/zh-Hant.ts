@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '還有其他 {0} 項',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: '分頁導航',
+      root: '分頁導航',
       next: '下一頁',
       previous: '上一頁',
       page: '轉到頁面 {0}',
       currentPage: '當前頁 {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

@@ -1,0 +1,6 @@
+{
+  "props": {},
+  "exposed": {
+    "theme": "The instance of the injected active theme"
+  }
+}

@@ -2,7 +2,7 @@
   <v-app id="inspire">
     <v-app-bar
       app
-      shrink-on-scroll
+      extended
     >
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
 

@@ -1,0 +1,38 @@
+@use 'sass:math';
+@use 'sass:map';
+@use 'sass:meta';
+@use '../../styles/settings';
+@use '../../styles/tools';
+@use './variables' as *;
+
+@mixin button-sizes ($map: $button-sizes, $immediate: false) {
+  @each $sizeName, $multiplier in settings.$size-scales {
+    $size: map.get($map, 'font-size') + math.div(2 * $multiplier, 16);
+    $height: map.get($map, 'height') + (8 * $multiplier);
+
+    #{if($immediate, &, '')}.v-btn--size-#{$sizeName} {
+      --v-btn-size: #{$size};
+      --v-btn-height: #{$height};
+      font-size: $size;
+      min-width: tools.roundEven($height * map.get($map, 'width-ratio'));
+      padding: 0 tools.roundEven(math.div($height, map.get($map, 'padding-ratio')));
+    }
+  }
+}
+
+@mixin button-density ($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-btn-height) + #{$multiplier * settings.$spacer});
+
+    &.v-btn--density-#{$density} {
+      @if meta.type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      }
+      @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

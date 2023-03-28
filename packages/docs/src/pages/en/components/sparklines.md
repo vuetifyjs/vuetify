@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Sparkline component
   description: The sparkline component creates beautiful and expressive simple graphs for displaying numerical data.
@@ -15,7 +16,7 @@ The sparkline component can be used to create simple graphs, like GitHub's contr
 
 Any [SVG attribute](https://developer.mozilla.org/en-US/docs/Web/SVG/Attribute) may be used in addition to the ones listed below.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -25,9 +26,7 @@ A sparkline is a tiny chart that provides a visual representation of data. The s
 
 ## API
 
-- [v-sparkline](/api/v-sparkline)
-
-<inline-api page="components/sparklines" />
+<api-inline />
 
 ## Examples
 
@@ -58,5 +57,3 @@ The `v-sparkline` component pairs nicely with `v-card` and `v-sheet` to create c
 For concise information, a complete chart might be overkill. Using a trend line with gradient provides enough detail for the user without showing too much information.
 
 <example file="v-sparkline/misc-heart-rate" />
-
-<backmatter />

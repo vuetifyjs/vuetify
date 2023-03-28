@@ -1,36 +1,25 @@
-@import './_variables.scss'
+@use '../../styles/settings'
+@use './variables' as *
 
 .v-tooltip
-  display: none
-
-  &--attached
-    display: inline
-
-  &__content
+  > .v-overlay__content
     background: $tooltip-background-color
     color: $tooltip-text-color
     border-radius: $tooltip-border-radius
     font-size: $tooltip-font-size
-    line-height: round($tooltip-font-size * 1.6)
+    line-height: $tooltip-line-height
     display: inline-block
     padding: $tooltip-padding
-    position: absolute
     text-transform: initial
     width: auto
-    opacity: 0
+    opacity: 1
     pointer-events: none
-
-    &.menuable__content__active
-      opacity: $tooltip-opacity
-
-    &--fixed
-      position: fixed
-
-    &[class*="-active"]
-      transition-timing-function: $tooltip-transition-timing-function
+    transition-property: opacity, transform
 
     &[class*="enter-active"]
+      transition-timing-function: settings.$decelerated-easing
       transition-duration: $tooltip-transition-enter-duration
 
     &[class*="leave-active"]
+      transition-timing-function: settings.$accelerated-easing
       transition-duration: $tooltip-transition-leave-duration

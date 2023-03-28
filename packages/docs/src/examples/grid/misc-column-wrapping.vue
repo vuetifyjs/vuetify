@@ -1,32 +1,20 @@
 <template>
-  <v-container class="grey lighten-5">
+  <v-container class="bg-surface-variant">
     <v-row no-gutters>
       <v-col cols="9">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-9
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-9
+        </v-sheet>
       </v-col>
       <v-col cols="4">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-4<br>Since 9 + 4 = 13 &gt; 12, this 4-column-wide div gets wrapped onto a new line as one contiguous unit.
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-4
+        </v-sheet>
       </v-col>
       <v-col cols="6">
-        <v-card
-          class="pa-2"
-          outlined
-          tile
-        >
-          .col-6<br>Subsequent columns continue along the new line.
-        </v-card>
+        <v-sheet class="pa-2 ma-2">
+          .v-col-6
+        </v-sheet>
       </v-col>
     </v-row>
   </v-container>

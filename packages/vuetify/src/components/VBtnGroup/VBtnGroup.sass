@@ -1,0 +1,51 @@
+@use 'sass:selector'
+@use '../../styles/tools'
+@use '../VBtn/variables' as *
+@use './variables' as *
+
+.v-btn-group
+  $root: &
+
+  display: inline-flex
+  flex-wrap: nowrap
+  max-width: 100%
+  min-width: 0
+  overflow: hidden
+  vertical-align: middle
+
+  @include tools.border($btn-group-border...)
+  @include tools.elevation($btn-group-elevation)
+  @include tools.rounded($btn-group-border-radius)
+  @include tools.theme($btn-group-theme...)
+
+  @at-root
+    @include tools.density('v-btn-group', $button-density) using ($modifier)
+      @at-root #{selector.append(&, $root)}
+        height: $btn-group-height + $modifier
+
+  .v-btn
+    border-radius: 0
+    border-color: inherit
+
+    &:not(:last-child)
+      border-inline-end: none
+
+    &:not(:first-child)
+      border-inline-start: none
+
+    &:first-child
+      border-start-start-radius: inherit
+      border-end-start-radius: inherit
+
+    &:last-child
+      border-start-end-radius: inherit
+      border-end-end-radius: inherit
+
+  &--divided
+    .v-btn:not(:last-child)
+      border-inline-end-width: $btn-group-border-thin-width
+      border-inline-end-style: $btn-group-border-style
+      border-inline-end-color: $btn-group-border-color
+
+  &--tile
+    @include tools.rounded($btn-group-tile-border-radius)

@@ -5,176 +5,170 @@ meta:
   keywords: a la carte, a-la-carte, vuetify single import, vuetify import, component importing, reduce vuetify size, treeshaking, tree shaking
 related:
   - /getting-started/unit-testing/
-  - /features/presets/
+  - /features/blueprints/
   - /introduction/why-vuetify/
 ---
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tab = ref('vite')
+</script>
+
 # Treeshaking
 
-Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small **package size** may be a requirement. The A la carte system enables you to pick and choose which components to import, drastically _lowering_ your build size. New projects created with the [Vue CLI plugin](/getting-started/quick-start#vue-cli-install) have this enabled by default.
+Being a component framework, Vuetify will always grow horizontally. Depending on your project, a small bundle size may be a requirement. Treeshaking enables you to drastically lower your build size by only including the components you actually use in the final bundle.
 
-<entry-ad />
+<entry />
 
-<alert type="error">
+## Automatic treeshaking
 
-  Treeshaking will only work with Webpack 4 in **production mode**. This is automatic when using Vue CLI.
+Vuetify comes with plugins for both webpack and vite that enable automatic treeshaking.  \
+Install [`webpack-plugin-vuetify`](https://www.npmjs.com/package/webpack-plugin-vuetify) or [`vite-plugin-vuetify`](https://www.npmjs.com/package/vite-plugin-vuetify) then enable it in your bundler configuration. Make sure the vuetify plugin comes after the vue plugin or it won't work correctly.
 
-</alert>
+<v-tabs v-model="tab" color="primary">
+  <v-tab value="vite" variant="plain">Vite</v-tab>
+  <v-tab value="webpack" variant="plain">Webpack</v-tab>
+  <v-tab value="vue-cli" variant="plain">Vue CLI</v-tab>
+  <v-tab value="nuxt" variant="plain">Nuxt</v-tab>
+</v-tabs>
+<v-window v-model="tab">
+  <v-window-item value="vite">
 
-## Vuetify-loader
+```js { resource="vite.config.js" }
+import vue from '@vitejs/plugin-vue'
+import vuetify from 'vite-plugin-vuetify'
 
-Keeping track of all the components you're using can be a real chore. The [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader) alleviates this pain by automatically importing all the Vuetify components you use, where you use them. This will also make code-splitting more effective, as webpack will only load the components required for that chunk to be displayed.
-
-### Importing from lib
-
-In order to use treeshaking, you must import Vuetify from **vuetify/lib**.
-
-```js
-// You still need to register Vuetify itself
-// src/plugins/vuetify.js
-
-import Vue from 'vue'
-import Vuetify from 'vuetify/lib'
-
-Vue.use(Vuetify)
-
-const opts = {}
-
-export default new Vuetify(opts)
-```
-
-<alert type="info">
-
-  The options object that you pass as the second argument to **Vue.use** can also include a components, directives and a transitions property.
-
-</alert>
-
-### Vue config installation
-
-While it is not recommended, you can opt out of using the Vue CLI plugin and instead manually configure the loader via the [configure webpack](https://cli.vuejs.org/config/#configurewebpack) option from Vue CLI.
-
-```js
-// vue.config.js
-
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
-
-module.exports = {
-  configureWebpack: {
-    plugins: [
-      new VuetifyLoaderPlugin()
-    ],
-  },
-}
-```
-
-### Webpack installation
-
-You can also explicitly install the loader for webpack based projects. Similar to the vue.config.js setup, you simply add the loader to your project's webpack plugins.
-
-```js
-// webpack.config.js
-
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
-
-module.exports = {
+export default {
   plugins: [
-    new VuetifyLoaderPlugin()
+    vue(),
+    vuetify(),
   ],
 }
 ```
 
-<discovery-ad />
+  </v-window-item>
+  <v-window-item value="webpack">
 
-## Required styles
-
-When you import from `vuetify/lib`, the baseline framework styles are pulled in as well. Each component is individually responsible for its styles and will be compiled just the same. If you are using Vue CLI and the `vue-cli-plugin-vuetify` plugin, this is done for you automatically, and you can **skip** this section. If you are working on a project where you do not have access to the cli, you can manually include the required packages:
-
-```bash
-yarn add sass sass-loader deepmerge -D
-```
-
-OR
-
-```bash
-npm install sass sass-loader deepmerge -D
-```
-
-<alert type="info">
-
-  For a more detailed explanation on how to setup your application to handle SASS, please navigate to the [theme page](/features/theme).
-
-</alert>
-
-After the installation, you will still need to configure your webpack.config.js to parse .sass files. For more information on how to do this, checkout the [official documentation](https://webpack.js.org/loaders/sass-loader/).
-
-## Custom dynamic imports
-
-The `vuetify-loader` also allows you to write your own custom match functions to import your own project's components as well. This can be done in both Vue CLI and webpack projects.
-
-```js
-// vue.config.js
-
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+```js { resource="webpack.config.js" }
+const { VueLoaderPlugin } = require('vue-loader')
+const { VuetifyPlugin } = require('webpack-plugin-vuetify')
 
 module.exports = {
-  configureWebpack: {
-    plugins: [
-      new VuetifyLoaderPlugin({
-        /**
-         * This function will be called for every tag used in each vue component
-         * It should return an array, the first element will be inserted into the
-         * components array, the second should be a corresponding import
-         *
-         * originalTag - the tag as it was originally used in the template
-         * kebabTag    - the tag normalized to kebab-case
-         * camelTag    - the tag normalized to PascalCase
-         * path        - a relative path to the current .vue file
-         * component   - a parsed representation of the current component
-         */
-        match (originalTag, { kebabTag, camelTag, path, component }) {
-          if (kebabTag.startsWith('core-')) {
-            return [
-              camelTag,
-              `import ${camelTag} from '@/components/core/${camelTag.substring(4)}.vue'`
-            ]
-          }
-        }
-      })
-    ],
-  },
+  plugins: [
+    new VueLoaderPlugin(),
+    new VuetifyPlugin(),
+  ],
 }
 ```
 
-```js
-// webpack.config.js
+  </v-window-item>
+  <v-window-item value="vue-cli">
 
-const VuetifyLoaderPlugin = require('vuetify-loader/lib/plugin')
+```js { resource="vue.config.js" }
+const { VuetifyPlugin } = require('webpack-plugin-vuetify')
 
-exports.plugins.push(
-  new VuetifyLoaderPlugin({
-    match (originalTag, { kebabTag, camelTag, path, component }) {
-      if (kebabTag.startsWith('core-')) {
-        return [
-          camelTag,
-          `import ${camelTag} from '@/components/core/${camelTag.substring(4)}.vue'`
-        ]
-      }
+module.exports = {
+  plugins: [
+    new VuetifyPlugin(),
+  ],
+}
+```
+
+  </v-window-item>
+  <v-window-item value="nuxt">
+
+<p class="ma-4">Nuxt also uses the vite plugin but needs some extra configuration to load it in the correct order:</p>
+
+```js { resource="nuxt.config.js" }
+import vuetify from 'vite-plugin-vuetify'
+
+export default defineNuxtConfig({
+  modules: [
+    async (options, nuxt) => {
+      nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
+        vuetify()
+      ))
     }
-  })
-)
+  ],
+})
+```
+
+  </v-window-item>
+</v-window>
+
+And that's it! Vuetify components and directives will be automatically imported into your application wherever they are used. If you had any wildcard imports they can now be removed.
+
+```diff { resource="main.js" }
+  import 'vuetify/styles'
+  import { createVuetify } from 'vuetify'
+- import * as components from 'vuetify/components'
+- import * as directives from 'vuetify/directives'
+```
+
+<discovery />
+
+## Manual imports
+
+Components can be manually imported when not using the loader plugin.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+import { VCard } from 'vuetify/components/VCard'
+import { VRating } from 'vuetify/components/VRating'
+import { VToolbar } from 'vuetify/components/VToolbar'
+import { Ripple } from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components: {
+    VCard,
+    VRating,
+    VToolbar,
+  },
+  directives: {
+    Ripple,
+  },
+})
+
+export default vuetify
+```
+
+You can also import components locally in .vue files, as seen below.
+
+```html
+<template>
+  <v-card>
+    <v-card-title>...</v-card-title>
+    <v-card-text>...</v-card-text>
+  </v-card>
+</template>
+
+<script>
+  import { VCard, VCardText, VCardTitle } from 'vuetify/components/VCard'
+
+  export default {
+    components: {
+      VCard,
+      VCardText,
+      VCardTitle,
+    }
+  }
+</script>
 ```
 
 ## Limitations
 
-When using the `vuetify-loader`, there are a few scenarios which will require manual importing of components.
+When using the loader plugin, there are a few scenarios which will require manually importing components.
 
 ### Dynamic components
 
+When using dynamic components the plugin is unable to parse which vuetify components are being rendered. This commonly occurs when using the built-in Vue `<component>`. More information about dynamic components can be found in the official Vue [documentation](https://vuejs.org/guide/essentials/component-basics.html#dynamic-components).
+
+<!--
 `v-data-iterator` can use any component via the content-tag prop. This component must be registered [globally](#markup-js-a-la-carte-manual):
 
 ```html
-<!-- Vue Component -->
-
 <template>
   <v-data-iterator content-tag="v-layout">
     ...
@@ -196,18 +190,18 @@ const opts = {}
 
 export default new Vuetify(opts)
 ```
+-->
 
-Dynamic components used with `<component :is="my-component">` can be registered [locally](#markup-js-a-la-carte-destructuring):
+Dynamic components using `<component>` can be registered locally:
 
 ```html
-<!-- Vue Component -->
-
 <template>
   <component :is="button ? 'v-btn' : 'v-chip'" />
 </template>
 
 <script>
-  import { VBtn, VChip } from 'vuetify/lib'
+  import { VBtn } from 'vuetify/components/VBtn'
+  import { VChip } from 'vuetify/components/VChip'
 
   export default {
     components: { VBtn, VChip },
@@ -216,64 +210,6 @@ Dynamic components used with `<component :is="my-component">` can be registered 
 </script>
 ```
 
-### Functional components
+### Import groups
 
-Functional components are inlined at runtime by vue, and cannot have a **components** property in their options. Any Vuetify components used in a custom functional component must either be registered globally (recommended), or locally, wherever the custom component is used.
-
-## Manually importing
-
-Components can be manually imported when not using the Vuetify loader. You will also want to do this when using dynamic components and the **vuetify-loader** as it only parses explicit usage. This commonly occurs when using the built in Vue `<component>`. More information about dynamic components can be found in the official Vue [documentation](https://vuejs.org/v2/guide/components.html#Dynamic-Components).
-
-```js
-// src/plugins/vuetify.js
-
-import Vue from 'vue'
-import Vuetify, {
-  VCard,
-  VRating,
-  VToolbar,
-} from 'vuetify/lib'
-import { Ripple } from 'vuetify/lib/directives'
-
-Vue.use(Vuetify, {
-  components: {
-    VCard,
-    VRating,
-    VToolbar,
-  },
-  directives: {
-    Ripple,
-  },
-})
-
-const opts = {}
-
-export default new Vuetify(opts)
-```
-
-You can also import components in .vue files, as seen below.
-
-```html
-<!-- Vue Component -->
-
-<template>
-  <v-card>
-    <v-card-title>...</v-card-title>
-    <v-card-text>...</v-card-text>
-  </v-card>
-</template>
-
-<script>
-  import { VCard, VCardText, VCardTitle } from 'vuetify/lib'
-
-  export default {
-    components: {
-      VCard,
-      VCardText,
-      VCardTitle,
-    }
-  }
-</script>
-```
-
-<backmatter />
+All components are available at both `vuetify/components` and `vuetify/components/<group>`. Use of the latter is preferred however as it only loads files that are needed. Treeshaking will still work in production builds if you use `vuetify/components`, but during development it will cause a performance hit by loading styles even for components you aren't using.

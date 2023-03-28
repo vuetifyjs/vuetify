@@ -1,79 +1,82 @@
 <template>
-  <v-row
-    align="center"
-    justify="center"
+  <usage-example
+    v-model="model"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-btn
-      v-bind="$attrs"
-      v-on="$listeners"
-    >
-      <v-icon v-if="$attrs.fab || $attrs.icon">
-        $mdiVuetify
-      </v-icon>
+    <div class="text-center">
+      <v-btn v-bind="props">
+        <template v-if="!icon" v-slot:default>Button</template>
+      </v-btn>
+    </div>
 
-      <span v-else>Click Me</span>
-    </v-btn>
-  </v-row>
+    <template v-slot:configuration>
+      <v-checkbox v-model="icon" label="Icon"></v-checkbox>
+      <v-checkbox v-model="prepend" label="Prepend icon"></v-checkbox>
+      <v-checkbox v-model="append" label="Append icon"></v-checkbox>
+      <v-checkbox v-model="stacked" label="Stacked"></v-checkbox>
+    </template>
+  </usage-example>
 </template>
 
-<script>
-  export default {
-    name: 'Usage',
+<script setup>
+  // Utilities
+  import { computed, ref, watch } from 'vue'
+  import { propsToString } from '@/util/helpers'
 
-    inheritAttrs: false,
+  const variants = ['outlined', 'tonal', 'text', 'plain']
+  const name = 'v-btn'
+  const model = ref('default')
+  const icon = ref(false)
+  const options = [...variants]
+  const block = ref(false)
+  const stacked = ref(false)
+  const prepend = ref(false)
+  const append = ref(false)
+  const props = computed(() => {
+    return {
+      block: block.value || undefined,
+      'prepend-icon': prepend.value ? 'mdi-vuetify' : undefined,
+      'append-icon': append.value ? 'mdi-vuetify' : undefined,
+      icon: icon.value ? 'mdi-vuetify' : undefined,
+      stacked: stacked.value || undefined,
+      variant: variants.includes(model.value) ? model.value : undefined,
+    }
+  })
 
-    data: () => ({
-      defaults: {
-        block: false,
-        color: null,
-        depressed: false,
-        disabled: false,
-        elevation: 2,
-        fab: false,
-        icon: false,
-        large: false,
-        loading: false,
-        outlined: false,
-        plain: false,
-        rounded: false,
-        small: false,
-        text: false,
-        tile: false,
-        'x-large': false,
-        'x-small': false,
-      },
-      options: {
-        booleans: [
-          'block',
-          'disabled',
-          'large',
-          'loading',
-          'small',
-          'x-large',
-          'x-small',
-        ],
-        sliders: {
-          elevation: [0, 24],
-        },
-        selects: {
-          color: [
-            'accent',
-            'primary',
-            'secondary',
-          ],
-        },
-      },
-      tabs: [
-        'depressed',
-        'icon',
-        'outlined',
-        'plain',
-        'raised',
-        'rounded',
-        'fab',
-        'text',
-        'tile',
-      ],
-    }),
-  }
+  watch(stacked, val => {
+    if (val) {
+      prepend.value = true
+      append.value = false
+      icon.value = false
+    }
+  })
+
+  watch(prepend, val => {
+    if (val) {
+      icon.value = false
+
+      if (stacked.value) (append.value = false)
+    }
+  })
+
+  watch(append, val => {
+    if (val) {
+      icon.value = false
+
+      if (stacked.value) (prepend.value = false)
+    }
+  })
+  watch(icon, val => val && (prepend.value = false, append.value = false, stacked.value = false))
+
+  const slots = computed(() => {
+    return `
+  Button
+`
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>

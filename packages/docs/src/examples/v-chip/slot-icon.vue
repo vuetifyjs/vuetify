@@ -4,10 +4,8 @@
       class="ma-2"
       color="indigo"
       text-color="white"
+      prepend-icon="mdi-account-circle"
     >
-      <v-avatar left>
-        <v-icon>mdi-account-circle</v-icon>
-      </v-avatar>
       Mike
     </v-chip>
 
@@ -15,22 +13,18 @@
       class="ma-2"
       color="orange"
       text-color="white"
+      append-icon="mdi-star"
     >
       Premium
-      <v-icon right>
-        mdi-star
-      </v-icon>
     </v-chip>
 
     <v-chip
       class="ma-2"
       color="primary"
       text-color="white"
+      append-icon="mdi-cake-variant"
     >
       1 Year
-      <v-icon right>
-        mdi-cake-variant
-      </v-icon>
     </v-chip>
 
     <v-chip
@@ -38,39 +32,36 @@
       color="green"
       text-color="white"
     >
-      <v-avatar
-        left
-        class="green darken-4"
-      >
-        1
-      </v-avatar>
+      <template v-slot:prepend>
+        <v-avatar
+          class="green-darken-4"
+        >
+          1
+        </v-avatar>
+      </template>
       Years
     </v-chip>
 
     <v-chip
       class="ma-2"
-      close
+      closable
       color="teal"
       text-color="white"
-      @click:close="close"
+      prepend-icon="mdi-checkbox-marked-circle"
+      :model-value="true"
     >
-      <v-avatar left>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
-      </v-avatar>
       Confirmed
     </v-chip>
 
     <v-chip
       class="ma-2"
-      close
+      closable
       color="teal"
       text-color="white"
       close-icon="mdi-delete"
-      @click:close="close"
+      prepend-icon="mdi-checkbox-marked-circle"
+      :model-value="true"
     >
-      <v-avatar left>
-        <v-icon>mdi-checkbox-marked-circle</v-icon>
-      </v-avatar>
       Confirmed
     </v-chip>
   </div>

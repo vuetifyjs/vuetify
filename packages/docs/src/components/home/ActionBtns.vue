@@ -1,78 +1,59 @@
 <template>
   <v-container>
     <v-row justify="center">
-      <v-col cols="auto">
+      <v-col
+        v-for="({ icon, text, ...attrs }, i) in buttons"
+        :key="`home-btn-${i}`"
+        cols="auto"
+      >
         <v-btn
           :min-width="btnWidth"
-          :to="{
-            name: 'Documentation',
-            params: {
-              category: 'getting-started',
-              page: 'installation'
-            }
-          }"
-          color="primary"
-          depressed
-          x-large
+          v-bind="attrs"
+          size="x-large"
         >
-          <v-icon left>
-            $mdiSpeedometer
-          </v-icon>
-
-          {{ $t('home.get-started') }}
-        </v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn
-          :min-width="btnWidth"
-          :to="{
-            name: 'Documentation',
-            params: {
-              category: 'introduction',
-              page: 'why-vuetify'
-            }
-          }"
-          color="primary"
-          outlined
-          x-large
-        >
-          <v-icon left>
-            $mdiVuetify
-          </v-icon>
-
-          {{ $t('home.why-vuetify') }}
-        </v-btn>
-      </v-col>
-
-      <v-col cols="auto">
-        <v-btn
-          :min-width="btnWidth"
-          color="#212121"
-          dark
-          depressed
-          href="https://github.com/vuetifyjs/vuetify"
-          rel="noopener"
-          target="_blank"
-          x-large
-        >
-          <v-icon left>
-            $mdiGithub
-          </v-icon>
-
-          GitHub
+          <v-icon :icon="icon" start />
+          {{ t(text) }}
         </v-btn>
       </v-col>
     </v-row>
   </v-container>
 </template>
 
-<script>
-  export default {
-    name: 'HomeActionBtns',
+<script setup>
+  // Composables
+  import { useI18n } from 'vue-i18n'
 
-    data: () => ({
-      btnWidth: 228,
-    }),
-  }
+  const { t } = useI18n()
+
+  const buttons = [
+    {
+      color: 'primary',
+      flat: true,
+      icon: 'mdi-speedometer',
+      text: 'home.get-started',
+      to: {
+        name: 'getting-started-installation',
+      },
+    },
+    {
+      color: 'primary',
+      icon: 'mdi-vuetify',
+      variant: 'outlined',
+      text: 'home.why-vuetify',
+      to: {
+        name: 'introduction-why-vuetify',
+      },
+    },
+    {
+      color: '#212121',
+      theme: 'dark',
+      flat: true,
+      href: 'https://github.com/vuetifyjs/vuetify',
+      icon: 'mdi-github',
+      rel: 'noopener',
+      target: '_blank',
+      text: 'github',
+    },
+  ]
+  const btnWidth = 228
 </script>

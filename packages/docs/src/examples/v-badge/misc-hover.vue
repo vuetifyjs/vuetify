@@ -1,16 +1,17 @@
 <template>
   <div class="text-center">
     <v-badge
-      :value="hover"
-      color="deep-purple accent-4"
+      :model-value="hover"
+      color="deep-purple"
       content="9999+"
-      left
+      location="top-end"
       transition="slide-x-transition"
     >
-      <v-hover v-model="hover">
+      <v-hover v-slot="{ props }" v-model="hover">
         <v-icon
-          color="grey lighten-1"
-          large
+          color="grey-lighten-1"
+          size="large"
+          v-bind="props"
         >
           mdi-account
         </v-icon>

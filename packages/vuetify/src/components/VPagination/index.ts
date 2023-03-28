@@ -1,4 +1,1 @@
-import VPagination from './VPagination'
-
-export { VPagination }
-export default VPagination
+export { VPagination } from './VPagination'

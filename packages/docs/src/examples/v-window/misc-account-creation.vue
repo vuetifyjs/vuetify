@@ -6,8 +6,7 @@
     <v-card-title class="text-h6 font-weight-regular justify-space-between">
       <span>{{ currentTitle }}</span>
       <v-avatar
-        color="primary lighten-2"
-        class="subheading white--text"
+        color="primary"
         size="24"
         v-text="step"
       ></v-avatar>
@@ -18,9 +17,9 @@
         <v-card-text>
           <v-text-field
             label="Email"
-            value="john@vuetifyjs.com"
+            placeholder="john@google.com"
           ></v-text-field>
-          <span class="text-caption grey--text text--darken-1">
+          <span class="text-caption text-grey-darken-1">
             This is the email you will use to login to your Vuetify account
           </span>
         </v-card-text>
@@ -36,7 +35,7 @@
             label="Confirm Password"
             type="password"
           ></v-text-field>
-          <span class="text-caption grey--text text--darken-1">
+          <span class="text-caption text-grey-darken-1">
             Please enter a password for your account
           </span>
         </v-card-text>
@@ -53,7 +52,7 @@
           <h3 class="text-h6 font-weight-light mb-2">
             Welcome to Vuetify
           </h3>
-          <span class="text-caption grey--text">Thanks for signing up!</span>
+          <span class="text-caption text-grey">Thanks for signing up!</span>
         </div>
       </v-window-item>
     </v-window>
@@ -62,17 +61,17 @@
 
     <v-card-actions>
       <v-btn
-        :disabled="step === 1"
-        text
+        v-if="step > 1"
+        variant="text"
         @click="step--"
       >
         Back
       </v-btn>
       <v-spacer></v-spacer>
       <v-btn
-        :disabled="step === 3"
+        v-if="step < 3"
         color="primary"
-        depressed
+        variant="flat"
         @click="step++"
       >
         Next

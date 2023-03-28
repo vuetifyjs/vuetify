@@ -1,0 +1,104 @@
+@use 'sass:selector'
+@use 'sass:math'
+@use '../../styles/settings'
+@use '../../styles/tools'
+@use './variables' as *
+
+@at-root
+  @include tools.density('v-input', $combobox-chips-margin-bottom) using ($modifier)
+    --combobox-chips-margin-bottom: #{0px + math.div($modifier, 2)}
+
+.v-combobox
+  .v-field
+    .v-text-field__prefix,
+    .v-text-field__suffix,
+    .v-field__input,
+    &.v-field
+      cursor: text
+
+  .v-field
+    .v-field__input
+      > input
+        align-self: flex-start
+        flex: 1 1
+
+    .v-field__append-inner
+      > .v-icon
+        margin-inline-start: 4px
+        transition: $combobox-transition
+
+  .v-field:not(.v-field--focused)
+    input
+      min-width: 0
+
+  .v-field--dirty
+    .v-combobox__selection
+      margin-inline-end: 2px
+
+  .v-field--single-line
+    .v-combobox__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
+.v-combobox
+  &__content
+    overflow: hidden
+
+    @include tools.elevation($combobox-content-elevation)
+    @include tools.rounded($combobox-content-border-radius)
+
+  &__mask
+    background: rgb(var(--v-theme-on-surface-variant))
+
+  &__selection
+    display: inline-flex
+    letter-spacing: inherit
+    line-height: inherit
+    max-width: 100%
+
+  &--active-menu
+    .v-field__append-inner
+      > .v-icon
+        opacity: var(--v-high-emphasis-opacity)
+        transform: rotate(180deg)
+
+  &--chips
+    .v-combobox__selection
+      margin-top: $combobox-chips-margin-top
+      margin-bottom: var(--combobox-chips-margin-bottom)
+
+      &:first-child
+        margin-inline-start: 0
+
+  &--selecting-index
+    .v-combobox__selection
+      opacity: var(--v-medium-emphasis-opacity)
+
+      &--selected
+        opacity: 1
+
+    .v-field__input > input
+      caret-color: transparent !important
+
+  &--single
+    &.v-text-field input
+      flex: 1 1
+      position: absolute
+      left: 0
+      right: 0
+      width: 100%
+      padding-inline-start: inherit
+      padding-inline-end: inherit
+
+    .v-field--active
+      input
+        transition: none
+
+    .v-field--dirty:not(.v-field--focused)
+      input
+        opacity: 0
+
+    .v-field--focused
+      .v-combobox__selection
+        opacity: 0

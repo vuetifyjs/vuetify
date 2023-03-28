@@ -1,5 +1,5 @@
 <template>
-  <v-container class="green lighten-2" fluid>
+  <v-container class="bg-green-lighten-2" fluid>
     <v-row>
       <v-col cols="9">
         <div class="ma-auto" style="max-width: 300px">

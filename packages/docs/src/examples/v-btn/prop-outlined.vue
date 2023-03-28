@@ -1,26 +1,23 @@
 <template>
-  <div class="text-center">
+  <div class="d-flex justify-space-around align-center flex-column flex-sm-row">
     <v-btn
-      class="ma-2"
-      outlined
-      color="indigo"
+      variant="outlined"
+      color="primary"
     >
       Outlined Button
     </v-btn>
     <v-btn
-      class="ma-2"
-      outlined
-      fab
-      color="teal"
+      variant="outlined"
+      icon
+      color="secondary"
     >
       <v-icon>mdi-format-list-bulleted-square</v-icon>
     </v-btn>
     <v-btn
-      class="ma-2"
-      outlined
-      large
-      fab
-      color="indigo"
+      variant="outlined"
+      size="large"
+      icon
+      color="info"
     >
       <v-icon>mdi-pencil</v-icon>
     </v-btn>

@@ -1,4 +1,5 @@
 ---
+nav: Textareas
 meta:
   title: Textarea component
   description: The textarea component is a text field that accepts lengthy textual input from users.
@@ -13,19 +14,21 @@ related:
 
 Textarea components are used for collecting large amounts of textual data.
 
-<entry-ad />
-
 ## Usage
 
 `v-textarea` in its simplest form is a multi-line text-field, useful for larger amounts of text.
 
-<example file="v-textarea/usage" />
+<usage name="v-textarea" />
+
+<entry />
 
 ## API
 
-- [v-textarea](/api/v-textarea)
+| Component | Description |
+| - | - |
+| [v-textarea](/api/v-textarea/) | Primary Component |
 
-<inline-api page="components/textareas" />
+<api-inline hide-links />
 
 ## Examples
 
@@ -86,5 +89,3 @@ The `rows` prop allows you to define how many rows the textarea has, when combin
 Utilizing alternative input styles, you can create amazing interfaces that are easy to build and easy to use.
 
 <example file="v-textarea/misc-signup-form" />
-
-<backmatter />

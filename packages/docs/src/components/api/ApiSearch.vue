@@ -3,19 +3,17 @@
     clearable
     item-value="text"
     prepend-inner-icon="$mdiDatabaseSearch"
-    solo
-    v-bind="$attrs"
-    v-on="$listeners"
+    variant="solo"
   >
     <template #selection="{ item, selected }">
       <v-chip
         :value="selected"
-        class="white--text"
+        class="text-white"
         color="primary"
         label
       >
         <v-icon
-          left
+          start
           v-text="item.icon"
         />
         <span v-text="item.text" />
@@ -37,9 +35,6 @@
   </v-autocomplete>
 </template>
 
-<script>
-  export default {
-    name: 'ApiSearch',
-    inheritAttrs: false,
-  }
+<script setup>
+  //
 </script>

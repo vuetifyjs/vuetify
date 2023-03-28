@@ -1,7 +1,7 @@
 // Imports
 @import '../../styles/styles.sass';
 
-$data-footer-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$data-footer-font-size: map-deep-get($typography, 'caption', 'size') !default;
 $data-footer-icons-after-btn-margin-start: 7px !default;
 $data-footer-icons-before-btn-margin-end: 7px !default;
 $data-footer-padding: 0 8px !default;
@@ -10,4 +10,4 @@ $data-footer-pagination-margin-start: 24px !default;
 $data-footer-select-margin-end: 14px !default;
 $data-footer-select-select-margin-start: 34px !default;
 $data-footer-select-select-margin-y: 13px !default;
-$data-footer-select-selections-comma-font-size: map-deep-get($headings, 'caption', 'size') !default;
+$data-footer-select-selections-comma-font-size: map-deep-get($typography, 'caption', 'size') !default;

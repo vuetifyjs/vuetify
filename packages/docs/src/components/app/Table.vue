@@ -1,14 +1,21 @@
 <template>
-  <app-sheet class="mb-4">
-    <v-simple-table
+  <app-sheet class="mb-4 app-table">
+    <v-table
       v-bind="$attrs"
-      v-on="$listeners"
     >
       <slot />
-    </v-simple-table>
+    </v-table>
   </app-sheet>
 </template>
 
 <script>
-  export default { name: 'AppTable' }
+  export default {
+    inheritAttrs: false,
+  }
 </script>
+
+<style lang="sass">
+  .app-table
+    tbody > tr > td:first-child
+      white-space: nowrap
+</style>

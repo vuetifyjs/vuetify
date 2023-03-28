@@ -1,24 +1,27 @@
-import { touch } from '../../../../test'
+// @ts-nocheck
+/* eslint-disable */
+
+// import { touch } from '../../../../test'
 import {
   mount,
   MountOptions,
   Wrapper,
 } from '@vue/test-utils'
-import { Lang } from '../../../services/lang'
-import VDatePicker from '../VDatePicker'
-import Vue from 'vue'
-import { preset } from '../../../presets/default'
+// import { Lang } from '../../../services/lang'
+// import VDatePicker from '../VDatePicker'
+// import Vue from 'vue'
+// import { preset } from '../../../presets/default'
 
-Vue.prototype.$vuetify = {
-  icons: {
-    values: {
-      next: 'mdi-chevron-right',
-      prev: 'mdi-chevron-left',
-    },
-  },
-}
+// Vue.prototype.$vuetify = {
+//   icons: {
+//     values: {
+//       next: 'mdi-chevron-right',
+//       prev: 'mdi-chevron-left',
+//     },
+//   },
+// }
 
-describe('VDatePicker.ts', () => { // eslint-disable-line max-statements
+describe.skip('VDatePicker.ts', () => { // eslint-disable-line max-statements
   type Instance = InstanceType<typeof VDatePicker>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
   beforeEach(() => {

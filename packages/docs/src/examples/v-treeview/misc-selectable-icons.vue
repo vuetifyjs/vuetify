@@ -39,7 +39,7 @@
           <div
             v-if="tree.length === 0"
             key="title"
-            class="text-h6 font-weight-light grey--text pa-4 text-center"
+            class="text-h6 font-weight-light text-grey pa-4 text-center"
           >
             Select your favorite breweries
           </div>
@@ -57,8 +57,8 @@
               class="ma-1"
             >
               <v-icon
-                left
-                small
+                start
+                size="small"
               >
                 mdi-beer
               </v-icon>
@@ -73,7 +73,7 @@
 
     <v-card-actions>
       <v-btn
-        text
+        variant="text"
         @click="tree = []"
       >
         Reset
@@ -82,12 +82,11 @@
       <v-spacer></v-spacer>
 
       <v-btn
-        class="white--text"
-        color="green darken-1"
-        depressed
+        color="green-darken-1"
+        variant="flat"
       >
         Save
-        <v-icon right>
+        <v-icon end>
           mdi-content-save
         </v-icon>
       </v-btn>

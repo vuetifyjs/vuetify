@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Styles
 import './VStepper.sass'
 
@@ -47,7 +50,7 @@ export default baseMixins.extend({
   },
 
   data () {
-    const data: Dictionary<any> = {
+    const data: Record<string, any> = {
       isBooted: false,
       steps: [] as VStepperStepInstance[],
       content: [] as VStepperContentInstance[],

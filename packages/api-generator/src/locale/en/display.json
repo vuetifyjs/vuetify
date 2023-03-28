@@ -1,0 +1,25 @@
+{
+  "props": {
+    "height": "This value is the current window height.",
+    "lg": "This value indicates that the device width is between the **md** and **lg** threshold values.",
+    "lgAndDown": "This value indicates that the device width is less than the **lg** threshold value.",
+    "lgAndUp": "This value indicates that the device width is greater than the **lg** threshold value.",
+    "md": "This value indicates that the device width is between the **sm** and **md** threshold values.",
+    "mdAndDown": "This value indicates that the device width is less than the **md** threshold value.",
+    "mdAndUp": "This value indicates that the device width is greater than the **md** threshold value.",
+    "mobile": "This value indicates whether the current display width is less than the defined [mobileBreakpoint](#mobile-breakpoint)",
+    "mobileBreakpoint": "This value indicates whether the current display width is less than the defined [mobileBreakpoint](#mobile-breakpoint)",
+    "name": "The name key correlates to the currently active breakpoint; e.g. **xs**, **sm**, **md**, **lg**, **xl**, **xxl**.",
+    "platform": "This object contains information from the detected device's [userAgent](https://developer.mozilla.org/en-US/docs/Web/API/NavigatorID/userAgent) and whether it supports **touch**.",
+    "sm": "This value indicates that the device width is between the **xs** and **sm** threshold values.",
+    "smAndDown": "This value indicates that the device width is less than the **sm** threshold value.",
+    "smAndUp": "This value indicates that the device width is greater than the **sm** threshold value.",
+    "thresholds": "This object is used for device viewport calculations.",
+    "width": "This value is the current window width.",
+    "xl": "This value indicates that the device width is between the **lg** and **xl** threshold values.",
+    "xlAndDown": "This value indicates that the device width is less than the **xl** threshold value.",
+    "xlAndUp": "This value indicates that the device width is greater than the **xl** threshold value.",
+    "xs": "This value indicates that the device width greater than the **xs** threshold value.",
+    "xxl": "This value indicates that the device width is greater than the **xl** threshold value."
+  }
+}

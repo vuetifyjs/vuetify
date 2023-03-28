@@ -1,4 +1,5 @@
 ---
+nav: Ripple
 meta:
   title: Ripple directive
   description: The ripple directive adds touch and click feedback to any element in the form of a water ripple.
@@ -13,7 +14,7 @@ related:
 
 The `v-ripple` directive is used to show action from a user. It can be applied to any block level element. Numerous components come with the ripple directive built in, such as the `v-btn`, `v-tabs-item` and many more.
 
-<entry-ad />
+<entry />
 
 ## Usage
 
@@ -23,11 +24,19 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## API
 
-- [v-ripple](/api/v-ripple)
+| Directive | Description |
+| - | - |
+| [v-ripple](/api/v-ripple/) | The ripple directive |
 
-<inline-api page="directives/ripple" />
+<api-inline  hide-links />
 
 ## Examples
+
+### Propagation
+
+If multiple elements have the ripple directive applied, only the inner one will show the effect. This can also be done without having a visible ripple by using `v-ripple.stop` to prevent ripples in the outer element if the inner element is clicked on. `v-ripple.stop` will not actually stop propagation of the mousedown/touchstart events unlike other workarounds.
+
+<example file="v-ripple/stop" />
 
 ### Options
 
@@ -50,5 +59,3 @@ Using a helper class, you can change the color of the ripple.
 Some components provide the `ripple` prop that allows you to control the ripple effect. You can turn it off or customize the behavior by using `class` or `center` options.
 
 <example file="v-ripple/misc-ripple-in-components" />
-
-<backmatter />

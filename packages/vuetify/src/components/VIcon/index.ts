@@ -1,4 +1,2 @@
-import VIcon from './VIcon'
-
-export { VIcon }
-export default VIcon
+export { VIcon } from './VIcon'
+export { VComponentIcon, VSvgIcon, VLigatureIcon, VClassIcon } from '@/composables/icons'

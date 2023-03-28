@@ -1,4 +1,1 @@
-import VDialog from './VDialog'
-
-export { VDialog }
-export default VDialog
+export { VDialog } from './VDialog'

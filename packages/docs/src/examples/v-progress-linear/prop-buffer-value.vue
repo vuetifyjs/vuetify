@@ -14,7 +14,7 @@
     <v-progress-linear
       v-model="value"
       :buffer-value="bufferValue"
-      color="red lighten-2"
+      color="red-lighten-2"
     ></v-progress-linear>
     <br>
     <v-progress-linear
@@ -49,7 +49,7 @@
       this.startBuffer()
     },
 
-    beforeDestroy () {
+    beforeUnmount () {
       clearInterval(this.interval)
     },
 

@@ -1,61 +1,61 @@
 <template>
-  <v-container fluid>
-    <v-row>
-      <v-col cols="12">
-        <v-subheader class="pl-0">
-          Show thumb when using slider
-        </v-subheader>
-        <v-slider
-          v-model="slider"
-          thumb-label
-        ></v-slider>
-      </v-col>
+  <div class="d-flex flex-column">
+    <div>
+      <div class="text-caption">
+        Show thumb when using slider
+      </div>
+      <v-slider
+        v-model="slider1"
+        thumb-label
+      ></v-slider>
+    </div>
 
-      <v-col cols="12">
-        <v-subheader class="pl-0">
-          Always show thumb label
-        </v-subheader>
-        <v-slider
-          v-model="slider"
-          thumb-label="always"
-        ></v-slider>
-      </v-col>
+    <div>
+      <div class="text-caption">
+        Always show thumb label
+      </div>
+      <v-slider
+        v-model="slider2"
+        thumb-label="always"
+      ></v-slider>
+    </div>
 
-      <v-col cols="12">
-        <v-subheader class="pl-0">
-          Custom thumb size
-        </v-subheader>
-        <v-slider
-          v-model="slider"
-          :thumb-size="24"
-          thumb-label="always"
-        ></v-slider>
-      </v-col>
+    <div>
+      <div class="text-caption">
+        Custom thumb size
+      </div>
+      <v-slider
+        v-model="slider3"
+        :thumb-size="36"
+        thumb-label="always"
+      ></v-slider>
+    </div>
 
-      <v-col cols="12">
-        <v-subheader class="pl-0">
-          Custom thumb label
-        </v-subheader>
-        <v-slider
-          v-model="slider"
-          :thumb-size="24"
-          thumb-label="always"
-        >
-          <template v-slot:thumb-label="{ value }">
-            {{ satisfactionEmojis[Math.min(Math.floor(value / 10), 9)] }}
-          </template>
-        </v-slider>
-      </v-col>
-    </v-row>
-  </v-container>
+    <div>
+      <div class="text-caption">
+        Custom thumb label
+      </div>
+      <v-slider
+        v-model="slider4"
+        thumb-label="always"
+      >
+        <template v-slot:thumb-label="{ modelValue }">
+          {{ satisfactionEmojis[Math.min(Math.floor(modelValue / 10), 9)] }}
+        </template>
+      </v-slider>
+    </div>
+  </div>
 </template>
 
 <script>
   export default {
     data () {
       return {
+        slider1: 50,
+        slider2: 50,
+        slider3: 50,
+        slider4: 50,
         satisfactionEmojis: ['😭', '😢', '☹️', '🙁', '😐', '🙂', '😊', '😁', '😄', '😍'],
-        slider: 45,
       }
     },
   }

@@ -17,9 +17,9 @@
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="red darken-3"
-              color="red darken-3"
-              value="red darken-3"
+              label="red-darken-3"
+              color="red-darken-3"
+              value="red-darken-3"
               hide-details
             ></v-switch>
           </v-col>
@@ -37,9 +37,9 @@
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="indigo darken-3"
-              color="indigo darken-3"
-              value="indigo darken-3"
+              label="indigo-darken-3"
+              color="indigo-darken-3"
+              value="indigo-darken-3"
               hide-details
             ></v-switch>
           </v-col>
@@ -57,9 +57,9 @@
             ></v-switch>
             <v-switch
               v-model="ex11"
-              label="orange darken-3"
-              color="orange darken-3"
-              value="orange darken-3"
+              label="orange-darken-3"
+              color="orange-darken-3"
+              value="orange-darken-3"
               hide-details
             ></v-switch>
           </v-col>
@@ -136,7 +136,7 @@
   export default {
     data () {
       return {
-        ex11: ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red darken-3', 'indigo darken-3', 'orange darken-3'],
+        ex11: ['red', 'indigo', 'orange', 'primary', 'secondary', 'success', 'info', 'warning', 'error', 'red-darken-3', 'indigo-darken-3', 'orange-darken-3'],
       }
     },
   }

@@ -1,5 +1,5 @@
-@import './animations.scss';
-@import './colors.scss';
-@import './reset.scss';
-@import './elevation.scss';
-@import './transitions.scss';
+@use './animations';
+@use './colors';
+@use './reset';
+@use './transitions';
+@use './rtl';

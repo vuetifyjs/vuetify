@@ -1,231 +1,166 @@
 <template>
-  <div>
+  <div class="border rounded my-6">
     <v-autocomplete
       v-model="search"
-      :background-color="backgroundColor"
-      :class="isFocused ? 'rounded-b-0 rounded-t-lg' : 'rounded-lg'"
       :items="releases"
+      :loading="store.isLoading"
       :menu-props="menuProps"
-      class="mt-8 mb-12"
-      dense
-      flat
       hide-details
-      item-text="name"
+      item-title="name"
       label="Select Release Version"
-      prepend-inner-icon="$mdiTextBoxSearchOutline"
+      prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      solo
       @blur="resetSearch"
       @focus="onFocus"
     >
-      <template #prepend-inner>
-        <div
-          class="ml-1 mr-2"
-          style="width: 40px;"
-        >
-          <v-progress-circular
-            v-if="isLoading"
-            color="primary"
-            indeterminate
-            size="20"
-            width="1"
+      <template #item="{ item, props }">
+        <v-list-item
+          v-if="item?.title"
+          v-bind="props"
+        />
+
+        <template v-else>
+          <v-divider />
+
+          <v-list-item
+            :title="t('load-more')"
+            class="mb-n2"
+            @click="store.fetch"
           />
-
-          <v-icon
-            v-else
-            :color="!isFocused ? 'grey' : undefined"
-          >
-            $mdiTextBoxSearchOutline
-          </v-icon>
-        </div>
-      </template>
-
-      <template #item="props">
-        <v-list-item-action>
-          <v-icon>$mdiTagOutline</v-icon>
-        </v-list-item-action>
-
-        <v-list-item-content>
-          <v-list-item-title
-            :id="props.attrs['aria-labelledby']"
-            v-text="props.item.name"
-          />
-
-          <v-list-item-subtitle>
-            <i18n path="published-on">
-              <template #date>
-                <strong v-text="props.item.published_at" />
-              </template>
-            </i18n>
-          </v-list-item-subtitle>
-        </v-list-item-content>
+        </template>
       </template>
     </v-autocomplete>
 
-    <v-skeleton-loader
-      v-if="isLoading"
-      type="image"
-      height="180"
-    />
-
     <v-card
-      v-else
+      variant="flat"
       min-height="180"
-      outlined
+      rounded="t-0 b"
     >
       <div
         v-if="!!search"
-        class="d-flex"
+        class="d-flex justify-space-between"
       >
-        <v-list-item>
-          <v-list-item-avatar size="48">
-            <v-img :src="search.author.avatar_url" />
-          </v-list-item-avatar>
+        <v-list-item
+          :prepend-avatar="search.author.avatar_url"
+          lines="two"
+        >
+          <v-list-item-title class="mb-1 text-h6">
+            <i18n-t keypath="released-by">
+              <template #author>
+                <app-link :href="search.author.html_url">
+                  {{ search.author.login }}
+                </app-link>
+              </template>
+            </i18n-t>
+          </v-list-item-title>
 
-          <v-list-item-content>
-            <v-list-item-title class="mb-1 text-h6">
-              <i18n path="released-by">
-                <template #author>
-                  <app-link :href="search.author.html_url">
-                    {{ search.author.login }}
-                  </app-link>
-                </template>
-              </i18n>
-            </v-list-item-title>
-
-            <v-list-item-subtitle>
-              <i18n path="published-on">
-                <template #date>
+          <v-list-item-subtitle>
+            <i18n-t keypath="published-on">
+              <template #date>
+                <v-chip
+                  color="green-darken-3"
+                  density="comfortable"
+                  label
+                  size="small"
+                  variant="flat"
+                >
                   <strong v-text="search.published_at" />
-                </template>
-              </i18n>
-            </v-list-item-subtitle>
-          </v-list-item-content>
+                </v-chip>
+              </template>
+            </i18n-t>
+          </v-list-item-subtitle>
         </v-list-item>
 
-        <div class="pr-3 d-flex align-center flex-1-0-auto">
+        <div class="pe-3 d-flex align-center flex-1-0-auto">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
+            class="text-white"
+            variant="flat"
           />
         </div>
       </div>
 
       <v-divider />
 
-      <div class="pa-4">
-        <app-md class="releases">
-          {{ search ? search.body : ' ' }}
-        </app-md>
+      <div class="px-4 pt-4">
+        <app-markdown
+          v-if="search?.body"
+          :content="search.body"
+          class="releases"
+        />
       </div>
     </v-card>
   </div>
 </template>
 
-<script>
+<script setup lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useReleasesStore } from '@/store/releases'
+
   // Utilities
-  import { get } from 'vuex-pathify'
-  import octokit from '@/plugins/octokit'
+  import { computed, nextTick, onBeforeMount, ref } from 'vue'
 
-  export default {
-    name: 'Releases',
+  const { t } = useI18n()
+  const store = useReleasesStore()
+  const isFocused = ref(false)
+  const isSearching = ref(false)
+  const search = ref<any>()
+  let timeout = -1
 
-    inject: ['theme'],
+  const onFocus = () => {
+    clearTimeout(timeout)
 
-    data: () => ({
-      isFocused: false,
-      isLoading: true,
-      isSearching: false,
-      releases: [],
-      search: undefined,
-    }),
-
-    computed: {
-      ...get('app', ['modified']),
-      ...get('route', [
-        'params@category',
-        'params@page',
-      ]),
-      version: get('app/version'),
-      at () {
-        const stat = this.modified[`/${this.category}/${this.page}/`] || {}
-
-        return stat.modified
-      },
-      backgroundColor () {
-        return this.$vuetify.theme.dark ? undefined : `grey lighten-${this.isFocused ? '5' : '3'}`
-      },
-      menuProps () {
-        return {
-          contentClass: `notes-autocomplete rounded-b-lg elevation-0 grey ${this.$vuetify.theme.dark ? 'darken-4' : 'lighten-5'}`,
-        }
-      },
-      tooltips () {
-        return [
-          {
-            icon: '$mdiDiscord',
-            href: 'https://discord.gg/QHWSAbA',
-            path: 'discuss-on-discord',
-          },
-          {
-            icon: '$mdiGithub',
-            href: `https://github.com/vuetifyjs/vuetify/discussions?discussions_q=${this.search.tag_name}`,
-            path: 'discuss-on-github',
-          },
-          {
-            icon: '$mdiAlertCircleOutline',
-            href: 'https://issues.vuetifyjs.com/',
-            path: 'file-a-bug-report',
-          },
-          {
-            icon: '$mdiOpenInNew',
-            href: this.search.html_url,
-            path: 'open-github-release',
-          },
-        ]
-      },
-    },
-
-    async mounted () {
-      const releases = []
-      const res = await octokit.request('GET /repos/vuetifyjs/vuetify/releases')
-
-      this.isLoading = false
-
-      for (const release of res.data) {
-        if (!release.name.startsWith('v2')) continue
-
-        releases.push({
-          ...release,
-          published_at: new Date(release.published_at).toDateString(),
-        })
-      }
-
-      this.releases = releases
-      this.search = releases[0]
-    },
-
-    methods: {
-      onFocus () {
-        clearTimeout(this.timeout)
-
-        this.isFocused = true
-      },
-      resetSearch (timeout = 0) {
-        clearTimeout(this.timeout)
-
-        this.$nextTick(() => {
-          this.isSearching = false
-
-          this.timeout = setTimeout(() => (this.isFocused = false), timeout)
-        })
-      },
-    },
+    isFocused.value = true
   }
+
+  const resetSearch = async () => {
+    clearTimeout(timeout)
+
+    await nextTick(() => {
+      isSearching.value = false
+
+      timeout = window.setTimeout(() => (isFocused.value = false), timeout)
+    })
+  }
+
+  const menuProps = computed(() => {
+    return {
+      contentClass: 'notes-autocomplete rounded-b-lg',
+      maxHeight: 300,
+    }
+  })
+
+  const tooltips = computed(() => {
+    return [
+      {
+        color: '#738ADB',
+        icon: 'mdi-discord',
+        href: 'https://discord.gg/QHWSAbA',
+        path: 'discuss-on-discord',
+      },
+    ]
+  })
+
+  const releases = computed(() => {
+    const releases = store.releases.slice()
+
+    releases.push(null as any)
+
+    return releases
+  })
+
+  onBeforeMount(async () => {
+    await store.fetch()
+
+    search.value = store.releases[0]
+  })
 </script>
 
 <style lang="sass">

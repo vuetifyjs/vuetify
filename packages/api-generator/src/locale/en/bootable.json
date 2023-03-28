@@ -1,5 +1,0 @@
-{
-  "props": {
-    "eager": "Will force the components content to render on mounted. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO."
-  }
-}

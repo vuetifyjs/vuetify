@@ -1,14 +1,15 @@
 <template>
-  <v-hover>
-    <template v-slot:default="{ hover }">
+  <div>
+    <v-hover v-slot="{ isHovering, props }">
       <v-card
         class="mx-auto"
         max-width="344"
+        v-bind="props"
       >
         <v-img src="https://cdn.vuetifyjs.com/images/cards/forest-art.jpg"></v-img>
 
         <v-card-text>
-          <h2 class="text-h6 primary--text">
+          <h2 class="text-h6 text-primary">
             Magento Forests
           </h2>
           Travel to the best outdoor experience on planet Earth. A vacation you will never forget!
@@ -16,28 +17,27 @@
 
         <v-card-title>
           <v-rating
-            :value="4"
+            :model-value="4"
             dense
             color="orange"
             background-color="orange"
             hover
-            class="mr-2"
+            class="me-2"
           ></v-rating>
-          <span class="primary--text text-subtitle-2">64 Reviews</span>
+          <span class="text-primary text-subtitle-2">64 Reviews</span>
         </v-card-title>
 
-        <v-fade-transition>
-          <v-overlay
-            v-if="hover"
-            absolute
-            color="#036358"
-          >
-            <v-btn>See more info</v-btn>
-          </v-overlay>
-        </v-fade-transition>
+        <v-overlay
+          :model-value="isHovering"
+          contained
+          scrim="#036358"
+          class="align-center justify-center"
+        >
+          <v-btn variant="flat">See more info</v-btn>
+        </v-overlay>
       </v-card>
-    </template>
-  </v-hover>
+    </v-hover>
+  </div>
 </template>
 
 <script>

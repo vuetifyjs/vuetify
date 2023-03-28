@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} lisää',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} tiedostoa',
     counterSize: '{0} tiedostoa ({1} yhteensä)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Pagination Navigation',
+      root: 'Pagination Navigation',
       next: 'Seuraava sivu',
       previous: 'Edellinen sivu',
       page: 'Mene sivulle {0}',
       currentPage: 'Nykyinen sivu, Sivu {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Luokitus {0}/{1}',
+      item: 'Luokitus {0}/{1}',
     },
   },
 }

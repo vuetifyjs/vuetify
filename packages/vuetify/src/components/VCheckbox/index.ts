@@ -1,10 +1,2 @@
-import VCheckbox from './VCheckbox'
-import VSimpleCheckbox from './VSimpleCheckbox'
-
-export { VCheckbox, VSimpleCheckbox }
-export default {
-  $_vuetify_subcomponents: {
-    VCheckbox,
-    VSimpleCheckbox,
-  },
-}
+export { VCheckbox } from './VCheckbox'
+export { VCheckboxBtn } from './VCheckboxBtn'

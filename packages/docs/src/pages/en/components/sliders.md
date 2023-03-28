@@ -1,8 +1,9 @@
 ---
 meta:
   title: Slider component
-  description: The slider component is a better visualization of the number input. It is used for gathering numerical user data.
+  description: The slider component can be used as an alternative visualization instead of a number input.
   keywords: sliders, vuetify slider component, vue slider component
+nav: Sliders
 related:
   - /components/forms/
   - /components/selects/
@@ -11,22 +12,23 @@ related:
 
 # Sliders
 
-The `v-slider` component is a better visualization of the number input. It is used for gathering numerical user data.
-
-<entry-ad />
+The `v-slider` component can be used as an alternative visualization instead of a number input.
 
 ## Usage
 
-Sliders reflect a range of values along a bar, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
+Sliders reflect a range of values along a track, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
 <usage name="v-slider" />
 
+<entry />
+
 ## API
 
-- [v-slider](/api/v-slider)
-- [v-range-slider](/api/v-range-slider)
+| Component | Description |
+| - | - |
+| [v-slider](/api/v-slider/) | Primary Component |
 
-<inline-api page="components/sliders" />
+<api-inline hide-links />
 
 ## Examples
 
@@ -44,23 +46,17 @@ You cannot interact with **disabled** sliders.
 
 <example file="v-slider/prop-disabled" />
 
-#### Discrete
+#### Step
 
-Discrete sliders offer a thumb label that displays the exact current amount. Using the **step** prop you can disallow selecting values outside of steps.
+Using the **step** prop you can control the precision of the slider, and how much it should move each step.
 
-<example file="v-slider/prop-discrete" />
+<example file="v-slider/prop-step" />
 
 #### Icons
 
 You can add icons to the slider with the **append-icon** and **prepend-icon** props. With `@click:append` and `@click:prepend` you can trigger a callback function when click the icon.
 
 <example file="v-slider/prop-icons" />
-
-#### Inverse label
-
-`v-slider` with **inverse-label** property displays label at the end of it.
-
-<example file="v-slider/prop-inverse-label" />
 
 #### Min and max
 
@@ -74,15 +70,9 @@ You cannot interact with **readonly** sliders, but they look as ordinary ones.
 
 <example file="v-slider/prop-readonly" />
 
-#### Step
-
-`v-slider` can have steps other than 1. This can be helpful for some applications where you need to adjust values with more or less accuracy.
-
-<example file="v-slider/prop-step" />
-
 #### Thumb
 
-You can display a thumb label while sliding or always with the **thumb-label** prop . It can have a custom color by setting **thumb-color** prop and a custom size with the **thumb-size** prop. With the **always-dirty** prop its color will never change, even when on the **`min** value.
+You can display a thumb label while sliding or always with the **thumb-label** prop . It can have a custom color by setting **thumb-color** prop and a custom size with the **thumb-size** prop.
 
 <example file="v-slider/prop-thumb" />
 
@@ -92,15 +82,15 @@ Tick marks represent predetermined values to which the user can move the slider.
 
 <example file="v-slider/prop-ticks" />
 
-#### Validation
+<!-- #### Validation
 
 Vuetify includes simple validation through the **rules** prop. The prop accepts a mixed array of types `function`, `boolean` and `string`. When the input value changes, each element in the array will be validated. Functions pass the current v-model as an argument and must return either `true` / `false` or a `string` containing an error message.
 
-<example file="v-slider/prop-validation" />
+<example file="v-slider/prop-validation" /> -->
 
 #### Vertical sliders
 
-You can use the **vertical** prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.
+You can use the **direction** prop to switch sliders to a vertical orientation. If you need to change the height of the slider, use css.
 
 <example file="v-slider/prop-vertical" />
 
@@ -117,5 +107,3 @@ Use slots such as `append` and `prepend` to easily customize the `v-slider` to f
 Sliders can be combined with other components in its `append` slot, such as `v-text-field`, to add additional functionality to the component.
 
 <example file="v-slider/slot-append-text-field" />
-
-<backmatter />

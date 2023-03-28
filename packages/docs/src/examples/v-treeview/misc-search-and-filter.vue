@@ -3,7 +3,7 @@
     class="mx-auto"
     max-width="500"
   >
-    <v-sheet class="pa-4 primary lighten-2">
+    <v-sheet class="pa-4 bg-primary-lighten-2">
       <v-text-field
         v-model="search"
         label="Search Company Directory"
@@ -23,10 +23,10 @@
     </v-sheet>
     <v-card-text>
       <v-treeview
+        v-model:open="open"
         :items="items"
         :search="search"
         :filter="filter"
-        :open.sync="open"
       >
         <template v-slot:prepend="{ item }">
           <v-icon

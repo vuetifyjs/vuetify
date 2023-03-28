@@ -1,31 +1,34 @@
 ---
+nav: Ratings
 meta:
   title: Rating component
   description: The star rating component is a specialized widget for collecting user feedback via ratings.
   keywords: star ratings, vuetify star rating component, vue star rating component, rating component
 related:
-  - /components/cards/
-  - /components/icons/
-  - /components/lists/
+  - /components/cards
+  - /components/icons
+  - /components/lists
 ---
 
 # Ratings
 
-The rating component is a specialized but crucial piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
-
-<entry-ad />
+The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
-<usage name="v-rating" />
+<!-- <usage name="v-rating" /> -->
+
+<entry />
 
 ## API
 
-- [v-rating](/api/v-rating)
+| Component | Description |
+| - | - |
+| [v-rating](/api/v-rating/) | Primary Component |
 
-<inline-api page="components/ratings" />
+<api-inline hide-links />
 
 ## Examples
 
@@ -37,15 +40,51 @@ The `v-rating` component can be colored as you want, you can set both selected a
 
 <example file="v-rating/prop-color" />
 
+#### Density
+
+Control the space occupied by `v-rating` items using the **density** prop.
+
+<example file="v-rating/prop-density" />
+
+#### Clearable
+
+Clicking on a current rating value can reset the rating by using **clearable** prop.
+
+<example file="v-rating/prop-clearable" />
+
+#### Readonly
+
+For ratings that are not meant to be changed you can use **readonly** prop.
+
+<example file="v-rating/prop-readonly" />
+
+#### Hover effect
+
+When using the **hover** prop, the rating icons will become a solid color and slightly increase its scale when the mouse is hovered over them.
+
+<example file="v-rating/prop-hover" />
+
+#### Labels
+
+The `v-rating` component can display labels above or below each item.
+
+<example file="v-rating/prop-item-labels" />
+
+#### Icons
+
+You can use custom icons.
+
+<example file="v-rating/prop-icons" />
+
 #### Length
 
-Sometimes an application will call for a customized implementation. Easily change length or displayed icons.
+Change the number of items by modifying the the **length** prop.
 
 <example file="v-rating/prop-length" />
 
-#### Incremented
+#### Half increments
 
-A rating can have 3 defined icons, **full-icon**, **half-icon** (with the **half-increments** prop) and **empty-icon**.
+The **half-increments** prop increases the granularity of the ratings, allow for `.5` values as well.
 
 <example file="v-rating/prop-half-increments" />
 
@@ -55,9 +94,9 @@ Utilize the same sizing classes available in `v-icon` or provide your own with t
 
 <example file="v-rating/prop-size" />
 
-#### Icon Label
+#### Aria Label
 
-Provide a label to assistive technologies for icons.
+Provide a label to assistive technologies for each item.
 
 <example file="v-rating/prop-icon-label" />
 
@@ -65,22 +104,26 @@ Provide a label to assistive technologies for icons.
 
 #### Item slot
 
-Slots are provided to give you even more freedom in how you display the rating.
+Slots enable advanced customization possibilities and provide you with more freedom in how you display the rating.
 
 <example file="v-rating/slot-item" />
 
+#### Custom labels slot
+
+Any arbitrary content could be displayed for labels in **item-label** slot.
+
+<example file="v-rating/slot-item-label" />
+
 ### Misc
 
-#### Advanced usage
+<!-- #### Advanced usage
 
 The `v-rating` component fits right in with existing components. Build truly complex examples with rich features and beautiful designs.
 
-<example file="v-rating/misc-advanced" />
+<example file="v-rating/misc-advanced" /> -->
 
 #### Card ratings
 
 The rating component pairs well with products allowing you to gather and display customer feedback.
 
 <example file="v-rating/misc-card" />
-
-<backmatter />

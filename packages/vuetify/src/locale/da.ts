@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} mere',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} filer',
     counterSize: '{0} filer ({1} total)',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Pagineringsnavigation',
+      root: 'Pagineringsnavigation',
       next: 'Næste side',
       previous: 'Forrige side',
       page: 'Gå til side {0}',
       currentPage: 'Nuværende side, Side {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Bedømmelse {0} af {1}',
+      item: 'Bedømmelse {0} af {1}',
     },
   },
 }

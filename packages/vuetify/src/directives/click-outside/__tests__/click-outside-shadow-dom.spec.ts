@@ -1,3 +1,5 @@
+import { describe, expect, it } from '@jest/globals'
+
 // Directives
 import ClickOutside from '../'
 import { wait } from '../../../../test'
@@ -13,14 +15,16 @@ function bootstrap (args?: object) {
       handler: jest.fn(),
       ...args,
     },
+    instance: {
+      $: { uid: 1 },
+    },
   } as any
-  const vnode = { context: { _uid: 1 } } as any
 
-  let shadowClickHandler
-  let outsideClickHandler
+  let shadowClickHandler: any
+  let outsideClickHandler: any
 
-  let shadowMousedownHandler
-  let outsideMousedownHandler
+  let shadowMousedownHandler: any
+  let outsideMousedownHandler: any
 
   document.body.appendChild(shadowHost)
   shadowRoot.appendChild(shadowEl)
@@ -38,11 +42,10 @@ function bootstrap (args?: object) {
   jest.spyOn(window.document, 'removeEventListener')
   jest.spyOn(shadowRoot, 'removeEventListener')
 
-  ClickOutside.inserted(shadowEl as HTMLElement, binding, vnode)
+  ClickOutside.mounted(shadowEl as HTMLElement, binding)
 
   return {
     binding,
-    vnode,
     callback: binding.value.handler,
     shadowEl: shadowEl as HTMLElement,
     outsideEl: outsideEl as HTMLElement,
@@ -56,18 +59,18 @@ function bootstrap (args?: object) {
 
 describe('click-outside.js within the Shadow DOM', () => {
   it('should register and unregister handler outside of the shadow DOM', () => {
-    const { outsideClickHandler, shadowEl, binding, vnode } = bootstrap()
+    const { outsideClickHandler, shadowEl, binding } = bootstrap()
     expect(window.document.addEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
 
-    ClickOutside.unbind(shadowEl, binding, vnode)
+    ClickOutside.unmounted(shadowEl, binding)
     expect(window.document.removeEventListener).toHaveBeenCalledWith('click', outsideClickHandler, true)
   })
 
   it('should register and unregister handler within the shadow DOM', () => {
-    const { shadowClickHandler, shadowRoot, shadowEl, binding, vnode } = bootstrap()
+    const { shadowClickHandler, shadowRoot, shadowEl, binding } = bootstrap()
     expect(shadowRoot.addEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
 
-    ClickOutside.unbind(shadowEl, binding, vnode)
+    ClickOutside.unmounted(shadowEl, binding)
     expect(shadowRoot.removeEventListener).toHaveBeenCalledWith('click', shadowClickHandler, true)
   })
 
@@ -102,7 +105,7 @@ describe('click-outside.js within the Shadow DOM', () => {
 
     shadowClickHandler({ target: shadowEl })
     await wait()
-    expect(callback).not.toHaveBeenCalledWith()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when mousedown was on the element within the shadow DOM', async () => {

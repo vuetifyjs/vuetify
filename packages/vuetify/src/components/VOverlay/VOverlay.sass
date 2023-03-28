@@ -1,42 +1,60 @@
-@import './_variables.scss'
-
-// Theme
-+theme(v-overlay) using ($material)
-  color: map-deep-get($material, 'text', 'primary')
+@use 'sass:selector'
+@use './variables' as *
 
 // Block
+.v-overlay-container
+  contain: layout
+  left: 0
+  pointer-events: none
+  position: absolute
+  top: 0
+  display: contents
+
+.v-overlay-scroll-blocked
+  padding-inline-end: var(--v-scrollbar-offset)
+  overflow-y: hidden !important
+
+  @at-root #{selector.append(html, &)}
+    position: fixed
+    top: var(--v-body-scroll-y)
+    left: var(--v-body-scroll-x)
+    width: 100%
+    height: 100%
+
 .v-overlay
-  align-items: center
   border-radius: inherit
   display: flex
-  justify-content: center
+  left: 0
+  pointer-events: none
   position: fixed
   top: 0
-  left: 0
-  right: 0
   bottom: 0
-  pointer-events: none
-  transition: $overlay-transition
+  right: 0
 
 // Element
 .v-overlay__content
-  position: relative
+  outline: none
+  position: absolute
+  pointer-events: auto
+  contain: layout
 
 .v-overlay__scrim
+  pointer-events: auto
+  background: $overlay-scrim-background
   border-radius: inherit
   bottom: 0
-  height: 100%
   left: 0
-  position: absolute
+  opacity: $overlay-opacity
+  position: fixed
   right: 0
   top: 0
-  transition: inherit
-  width: 100%
-  will-change: opacity
 
 // Modifier
 .v-overlay--absolute
   position: absolute
 
-.v-overlay--active
-  pointer-events: auto
+.v-overlay--contained .v-overlay__scrim
+  position: absolute
+
+.v-overlay--scroll-blocked
+  padding-inline-end: var(--v-scrollbar-offset)

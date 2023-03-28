@@ -5,16 +5,16 @@ meta:
   keywords: security, security vulnerability, disclosure policy, security disclosure
 nav: Security disclosure
 related:
+  - /introduction/enterprise-support/
+  - /getting-started/contributing/
   - /introduction/long-term-support/
-  - /introduction/support/
-  - /introduction/enterprise/
 ---
 
 # Security disclosure procedures
 
 This document outlines security procedures and general policies for the Vuetify project.
 
-<entry-ad />
+<entry />
 
 ## Reporting a Bug
 
@@ -37,5 +37,3 @@ When the security team receives a security bug report, they will assign it to a 
 ## Comments on this Policy
 
 If you have suggestions on how this process could be improved please submit a pull request using the [issue creator](https://issues.vuetifyjs.com).
-
-<backmatter />

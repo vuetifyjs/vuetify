@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: 'Еще {0}',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: 'Файлов: {0}',
     counterSize: 'Файлов: {0} (всего {1})',
@@ -54,16 +59,18 @@ export default {
   },
   pagination: {
     ariaLabel: {
-      wrapper: 'Навигация по страницам',
+      root: 'Навигация по страницам',
       next: 'Следующая страница',
       previous: 'Предыдущая страница',
       page: 'Перейти на страницу {0}',
       currentPage: 'Текущая страница, Страница {0}',
+      first: 'First page',
+      last: 'Last page',
     },
   },
   rating: {
     ariaLabel: {
-      icon: 'Rating {0} of {1}',
+      item: 'Rating {0} of {1}',
     },
   },
 }

@@ -1,13 +1,18 @@
 <template>
-  <v-container>
-    <!--  -->
-  </v-container>
+  <v-app>
+    <v-container>
+      <!-- -->
+    </v-container>
+  </v-app>
 </template>
 
 <script>
   export default {
-    data: () => ({
-    //
-    }),
+    name: 'Playground',
+    setup () {
+      return {
+        //
+      }
+    },
   }
 </script>

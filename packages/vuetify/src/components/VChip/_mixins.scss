@@ -1,0 +1,89 @@
+@use 'sass:map';
+@use 'sass:math';
+@use 'sass:meta';
+@use 'sass:selector';
+@use '../../styles/settings';
+@use './variables' as *;
+
+@mixin chip-sizes {
+  @each $sizeName, $multiplier in settings.$size-scales {
+    $size: map.get($chip-sizes, "font-size") + math.div(2 * $multiplier, 16);
+    $height: map.get($chip-sizes, "height") + (6 * $multiplier);
+    $padding: math.round(math.div($height, $chip-padding-ratio));
+
+    .v-chip.v-chip--size-#{$sizeName} {
+      --v-chip-size: #{$size};
+      --v-chip-height: #{$height};
+      font-size: $size;
+      padding: 0 $padding;
+
+      .v-avatar {
+        --v-avatar-height: #{$height - 6};
+
+        @at-root #{selector.append('.v-chip--pill', &)} {
+          --v-avatar-height: #{$height};
+        }
+      }
+
+      .v-avatar--start {
+        margin-inline-start: -$padding * .7;
+        margin-inline-end: $padding * .5;
+
+        @at-root #{selector.append('.v-chip--pill', &)} {
+          margin-inline-start: -$padding;
+        }
+      }
+
+      .v-avatar--end {
+        margin-inline-start: $padding * .5;
+        margin-inline-end: -$padding * .7;
+
+        @at-root #{selector.append('.v-chip--pill', &)} {
+          margin-inline-end: -$padding;
+        }
+
+        + .v-chip__close {
+          @at-root #{selector.append('.v-chip--pill', &)} {
+            margin-inline-start: $padding * 1.5;
+          }
+        }
+      }
+
+      .v-icon--start,
+      .v-chip__filter {
+        margin-inline-start: -$padding * .5;
+        margin-inline-end: $padding * .5;
+      }
+
+      .v-icon--end,
+      .v-chip__close {
+        margin-inline-start: $padding * .5;
+        margin-inline-end: -$padding * .5;
+      }
+
+      .v-icon--end,
+      .v-avatar--end,
+      .v-chip__append {
+        + .v-chip__close {
+          margin-inline-start: $padding;
+        }
+      }
+    }
+  }
+}
+
+@mixin chip-density($properties, $densities) {
+  @each $density, $multiplier in $densities {
+    $value: calc(var(--v-chip-height) + #{$multiplier * settings.$spacer});
+
+    &.v-chip--density-#{$density} {
+      @if meta.type-of($properties) == "list" {
+        @each $property in $properties {
+          #{$property}: $value;
+        }
+      } @else {
+        #{$properties}: $value;
+      }
+    }
+  }
+}

@@ -1,0 +1,52 @@
+@use "./absolute" as *
+@use "./elevation" as *
+
+@mixin variant($contained-background, $contained-color, $contained-elevation, $plain-opacity, $name)
+  &--variant-plain,
+  &--variant-outlined,
+  &--variant-text,
+  &--variant-tonal
+    background: transparent
+    color: inherit
+
+  &--variant-plain
+    opacity: $plain-opacity
+
+    &:focus,
+    &:hover
+      opacity: 1
+
+  &--variant-plain
+    .#{$name}__overlay
+      display: none
+
+  &--variant-elevated,
+  &--variant-flat
+    background: $contained-background
+    color: $contained-color
+
+  @if ($contained-elevation > 0)
+    &--variant-elevated
+      @include elevation($contained-elevation)
+
+  &--variant-flat
+    @include elevation(0)
+
+  &--variant-outlined
+    border: thin solid currentColor
+
+  &--variant-text
+    .#{$name}__overlay
+      background: currentColor
+
+  &--variant-tonal
+    .#{$name}__underlay
+      background: currentColor
+      opacity: var(--v-activated-opacity)
+      border-radius: inherit
+      position: absolute
+      top: 0
+      right: 0
+      bottom: 0
+      left: 0
+      pointer-events: none

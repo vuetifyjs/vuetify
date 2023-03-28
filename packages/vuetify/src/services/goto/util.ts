@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import Vue from 'vue'
 
 // Return target's cumulative offset from the top
@@ -39,7 +42,7 @@ function type (el: any) {
 function $ (el: any): HTMLElement | null {
   if (typeof el === 'string') {
     return document.querySelector<HTMLElement>(el)
-  } else if (el && el._isVue) {
+  } else if (el && el.__isVue) {
     return (el as Vue).$el as HTMLElement
   } else if (el instanceof HTMLElement) {
     return el

@@ -1,12 +1,10 @@
 <template>
   <div>
     <v-container
-      v-for="align in alignments"
-      :key="align"
-      class="grey lighten-5 mb-6"
+      class="bg-surface-variant mb-6"
     >
       <v-row
-        :align="align"
+        align="start"
         no-gutters
         style="height: 150px;"
       >
@@ -14,34 +12,72 @@
           v-for="n in 3"
           :key="n"
         >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            One of three columns
-          </v-card>
+          <v-sheet class="pa-2 ma-2">
+            .align-start
+          </v-sheet>
         </v-col>
       </v-row>
     </v-container>
 
-    <v-container class="grey lighten-5">
+    <v-container
+      class="bg-surface-variant mb-6"
+    >
       <v-row
+        align="center"
         no-gutters
         style="height: 150px;"
       >
         <v-col
-          v-for="align in alignments"
-          :key="align"
-          :align-self="align"
+          v-for="n in 3"
+          :key="n"
         >
-          <v-card
-            class="pa-2"
-            outlined
-            tile
-          >
-            One of three columns
-          </v-card>
+          <v-sheet class="pa-2 ma-2">
+            .align-center
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container
+      class="bg-surface-variant mb-6"
+    >
+      <v-row
+        align="end"
+        no-gutters
+        style="height: 150px;"
+      >
+        <v-col
+          v-for="n in 3"
+          :key="n"
+        >
+          <v-sheet class="pa-2 ma-2">
+            .align-end
+          </v-sheet>
+        </v-col>
+      </v-row>
+    </v-container>
+
+    <v-container class="bg-surface-variant">
+      <v-row
+        no-gutters
+        style="height: 150px;"
+      >
+        <v-col align-self="start">
+          <v-sheet class="pa-2 ma-2">
+            .align-self-start
+          </v-sheet>
+        </v-col>
+
+        <v-col align-self="center">
+          <v-sheet class="pa-2 ma-2">
+            .align-self-center
+          </v-sheet>
+        </v-col>
+
+        <v-col align-self="end">
+          <v-sheet class="pa-2 ma-2">
+            .align-self-end
+          </v-sheet>
         </v-col>
       </v-row>
     </v-container>

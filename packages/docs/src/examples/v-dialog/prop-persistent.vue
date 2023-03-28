@@ -3,14 +3,12 @@
     <v-dialog
       v-model="dialog"
       persistent
-      max-width="290"
+      width="auto"
     >
-      <template v-slot:activator="{ on, attrs }">
+      <template v-slot:activator="{ props }">
         <v-btn
           color="primary"
-          dark
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Open Dialog
         </v-btn>
@@ -23,15 +21,15 @@
         <v-card-actions>
           <v-spacer></v-spacer>
           <v-btn
-            color="green darken-1"
-            text
+            color="green-darken-1"
+            variant="text"
             @click="dialog = false"
           >
             Disagree
           </v-btn>
           <v-btn
-            color="green darken-1"
-            text
+            color="green-darken-1"
+            variant="text"
             @click="dialog = false"
           >
             Agree

@@ -1,0 +1,8 @@
+{
+  "props": {
+    "disabled": "Puts all children components into a disabled state",
+    "max": "Sets a maximum number of selections that can be made.",
+    "multiple": "Allows one to select mulitple items.",
+    "value": "The value used when the component is selected within a group. If not provided, the render index is used."
+  }
+}

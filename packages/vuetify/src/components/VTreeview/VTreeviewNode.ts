@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
 import { VExpandTransition } from '../transitions'
 import { VIcon } from '../VIcon'

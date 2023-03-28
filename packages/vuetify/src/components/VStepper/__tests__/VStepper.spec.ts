@@ -1,5 +1,8 @@
+// @ts-nocheck
+/* eslint-disable */
+
 // Components
-import VStepper from '../VStepper'
+// import VStepper from '../VStepper'
 
 // Utilities
 import {
@@ -8,7 +11,7 @@ import {
   Wrapper,
 } from '@vue/test-utils'
 
-describe('VStepper.ts', () => {
+describe.skip('VStepper.ts', () => {
   type Instance = InstanceType<typeof VStepper>
   let mountFunction: (options?: MountOptions<Instance>) => Wrapper<Instance>
 

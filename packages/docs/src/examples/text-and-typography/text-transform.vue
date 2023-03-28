@@ -7,7 +7,7 @@
       Uppercased text.
     </p>
     <p class="text-capitalize">
-      CapiTaliZed text.
+      capitalized text.
     </p>
   </div>
 </template>

@@ -8,8 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: master
-  LOCAL_BRANCH: docs/update-from-crowdin
+  CROWDIN_BRANCH: v3
 
 jobs:
   close:
@@ -20,8 +19,28 @@ jobs:
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
 
-  lint:
+  pre_job:
     runs-on: ubuntu-latest
+    outputs:
+      should_skip: ${{ steps.skip_check.outputs.should_skip }}
+    steps:
+      - id: skip_check
+        if: ${{ !startswith(github.ref, 'refs/tags/v') }}
+        uses: fkirc/skip-duplicate-actions@master
+        with:
+          skip_after_successful_duplicate: 'true'
+          concurrent_skipping: same_content
+          do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
+
+  lint:
+    name: Lint
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        scopes: ['--scope vuetify --scope @vuetify/api-generator', '--scope vuetifyjs.com']
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -29,13 +48,18 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn run build:lib
-        working-directory: ./packages/vuetify
-      - run: yarn run lint
+      - run: yarn build vuetify
+      - run: yarn lerna run lint $SCOPES
+        env:
+          SCOPES: ${{ matrix.scopes }}
 
-  test:
+  test-jest:
+    name: Test (Jest)
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -44,16 +68,22 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
 
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run test:coverage -- -- -i
       - uses: codecov/codecov-action@v1
 
-  deploy:
-    needs: [lint, test]
+  test-cypress:
+    name: Test (Cypress)
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true' && github.ref != 'refs/heads/master'
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    strategy:
+      fail-fast: false
+      matrix:
+        containers: ${{ fromJSON(github.repository_owner == 'vuetifyjs' && '[1, 2, 3, 4]' || '[1]') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -61,13 +91,48 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
+        working-directory: ./packages/vuetify
+        env:
+          CYPRESS_RECORD_KEY: ${{ secrets.CYPRESS_RECORD_KEY }}
+      - run: yarn cy:run
+        if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner != 'vuetifyjs' }}
+        working-directory: ./packages/vuetify
+      - uses: actions/upload-artifact@v2
+        if: failure()
+        with:
+          name: cypress-screenshots
+          path: ./packages/vuetify/cypress/screenshots/
+          if-no-files-found: ignore
+
+  deploy:
+    needs: [lint, test-jest, test-cypress]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn lerna run build --scope vuetify
+      - run: yarn build vuetify
+      - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
-      - run: for file in ./release/*.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
+      - run: rm ./release/_component-variables.sass
+      - run: for file in ./release/vuetify.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
       - run: zip -jr "release/vuetify-${RELEASE_TAG}.zip" release/*
       - name: NPM Release
         run: bash scripts/deploy.sh
@@ -76,12 +141,9 @@ jobs:
           TAG_NAME: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        uses: actions/create-release@v1
+        run: yarn conventional-github-releaser -p vuetify
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: ${{ env.RELEASE_TAG }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
@@ -93,7 +155,7 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
-    needs: [lint, test]
+    needs: [lint, test-jest]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
@@ -103,50 +165,56 @@ jobs:
           path: |
             node_modules
             **/node_modules
+            /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add now
+      - run: yarn global add vercel
+      - run: yarn --frozen-lockfile --non-interactive
 
-      - name: Download eo-UY
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: eo
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
+# TODO: crowdin is returning invalid markdown
+#      - name: Download eo-UY
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: eo
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
 
-      - name: Download ja
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: ja
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
+#      - name: Download ja
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: ja
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
+#
+#      - name: Download zh-CN
+#        uses: crowdin/github-action@1.1.2
+#        with:
+#          config: crowdin.yml
+#          upload_sources: false
+#          download_translations: true
+#          push_translations: false
+#          export_only_approved: false
+#          download_language: zh-CN
+#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+#          debug_mode: true
 
-      - name: Download zh-CN
-        uses: crowdin/github-action@1.1.2
-        with:
-          config: crowdin.yml
-          upload_sources: false
-          download_translations: true
-          push_translations: false
-          export_only_approved: false
-          download_language: zh-CN
-          localization_branch_name: ${{ env.LOCAL_BRANCH }}
-          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-          debug_mode: true
-
-      - run: yarn run build:modified
-        working-directory: ./packages/docs
+      - run: yarn build
+        env:
+          NODE_OPTIONS: --max-old-space-size=4096
+          VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
+          VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

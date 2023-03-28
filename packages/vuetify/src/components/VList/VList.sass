@@ -1,98 +1,94 @@
-@import './_variables.scss'
-@import './_mixins.sass'
+@use 'sass:list'
+@use '../../styles/tools'
+@use './variables' as *
 
-// Theme
 .v-list
-  &.primary,
-  &.secondary,
-  &.accent,
-  &.success,
-  &.error,
-  &.warning,
-  &.info
-    > .v-list-item
-      color: map-deep-get($material-dark, 'text', 'primary')
-
-+theme(v-list) using ($material)
-  background: map-get($material, 'cards')
-  color: map-deep-get($material, 'text','primary')
-
-  .v-list--disabled
-    color: map-deep-get($material, 'text', 'disabled')
-
-  .v-list-group--active:before,
-  .v-list-group--active:after
-    background: map-get($material, 'dividers')
-
-// Sheet
-+sheet(v-list, $list-elevation, $list-border-radius, $list-shaped-border-radius)
-
-// Block
-.v-list
-  display: block
+  overflow: auto
   padding: $list-padding
-  position: static
-  +elevationTransition()
+  position: relative
 
-// Modifier
-.v-list--disabled
+  @include tools.border($list-border...)
+  @include tools.elevation($list-elevation)
+  @include tools.rounded($list-border-radius)
+  @include tools.theme($list-theme...)
+
+  &--disabled
+    pointer-events: none
+    user-select: none
+
+  &--nav
+    padding-inline-start: $list-nav-padding
+    padding-inline-end: $list-nav-padding
+
+  .v-navigation-drawer--rail:not(.v-navigation-drawer--is-hovering) &
+    .v-avatar
+      --v-avatar-height: 24px
+
+  &--rounded
+    @include tools.rounded($list-rounded-border-radius)
+
+  &--subheader
+    padding-top: $list-subheader-padding-top
+
+.v-list-img
+  border-radius: inherit
+  display: flex
+  height: 100%
+  left: 0
+  overflow: hidden
+  position: absolute
+  top: 0
+  width: 100%
+  z-index: -1
+
+.v-list-subheader
+  $root: &
+
+  align-items: center
+  background: inherit
+  color: $list-subheader-color
+  display: flex
+  font-size: $list-subheader-font-size
+  font-weight: $list-subheader-font-weight
+  line-height: $list-subheader-line-height
+  padding-inline-end: $list-subheader-padding-end
+  min-height: $list-subheader-min-height
+  transition: $list-subheader-transition
+
+  &__text
+    overflow: hidden
+    text-overflow: ellipsis
+    white-space: nowrap
+
+  @at-root
+    @include tools.density('v-list', $list-density) using ($modifier)
+      $base-padding: list.nth($list-item-padding, 2)
+
+      #{$root}
+        min-height: $list-subheader-min-height + ($modifier * $list-subheader-min-height-multiplier)
+        padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
+
+  &--inset
+    --indent-padding: #{$list-subheader-inset-padding-start}
+
+  .v-list--nav &
+    font-size: $list-nav-subheader-font-size
+
+  &--sticky
+    background: inherit
+    left: 0
+    position: sticky
+    top: 0
+    z-index: 1
+
+.v-list__overlay
+  background-color: currentColor
+  border-radius: inherit
+  bottom: 0
+  left: 0
+  opacity: 0
   pointer-events: none
-
-.v-list--flat
-  .v-list-item:before
-    display: none
-
-.v-list--dense
-  .v-subheader
-    font-size: $list-dense-subheader-font-size
-    height: $list-dense-subheader-height
-    padding: $list-dense-subheader-padding
-
-.v-list--nav,
-.v-list--rounded
-  .v-list-item:not(:last-child):not(:only-child)
-    margin-bottom: $list-nav-rounded-item-margin-bottom
-
-  &.v-list--dense .v-list-item,
-  .v-list-item--dense
-    &:not(:last-child):not(:only-child)
-      margin-bottom: $list-nav-rounded-dense-item-margin-bottom
-
-.v-list--nav
-  padding-left: $list-nav-padding-left
-  padding-right: $list-nav-padding-right
-
-  .v-list-item
-    padding: $list-nav-item-padding
-
-  .v-list-item,
-  .v-list-item:before
-    border-radius: $list-nav-border-radius
-
-.v-list.v-sheet--shaped
-  +list-shaped($list-item-min-height)
-
-  &.v-list--two-line
-    +list-shaped($list-item-two-line-min-height)
-
-  &.v-list--three-line
-    +list-shaped($list-item-three-line-min-height)
-
-  +ltr()
-    padding-right: $list-shaped-padding
-
-  +rtl()
-    padding-left: $list-shaped-padding
-
-.v-list--rounded
-  padding: 8px
-  +list-rounded($list-item-min-height)
-
-  &.v-list--two-line
-    +list-rounded($list-item-two-line-min-height)
-
-  &.v-list--three-line
-    +list-rounded($list-item-three-line-min-height)
-
-.v-list--subheader
-  padding-top: $list-subheader-padding-top
+  position: absolute
+  right: 0
+  top: 0
+  transition: opacity 0.2s ease-in-out

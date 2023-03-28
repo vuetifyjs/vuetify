@@ -1,0 +1,9 @@
+@mixin border($color: null, $style: null, $width: null, $thin-width: false, $important: false)
+  border-color: $color if($important, !important, null)
+  border-style: $style if($important, !important, null)
+  border-width: $width if($important, !important, null)
+
+  @if $thin-width
+    &--border
+      border-width: $thin-width
+      box-shadow: none
