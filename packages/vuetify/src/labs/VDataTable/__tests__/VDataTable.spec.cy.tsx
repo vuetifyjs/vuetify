@@ -103,12 +103,10 @@ describe('VDataTable', () => {
       </Application>
     ))
 
-    cy
-      .get('.v-btn[aria-label="Next page"]')
+    cy.get('.v-btn[aria-label="Next page"]')
       .click()
-      .setProps({ search: 'a' })
-      .vue()
-      .emitted(VDataTable, 'update:page')
+    cy.setProps({ search: 'a' })
+    cy.emitted(VDataTable, 'update:page')
       .should('deep.equal', [[2], [1]])
   })
 

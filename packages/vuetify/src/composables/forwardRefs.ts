@@ -29,6 +29,10 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
       if (Reflect.has(target, key)) {
         return Reflect.get(target, key)
       }
+
+      // Skip internal properties
+      if (typeof key === 'symbol' || key.startsWith('__')) return
+
       for (const ref of refs) {
         if (ref.value && Reflect.has(ref.value, key)) {
           const val = Reflect.get(ref.value, key)
@@ -37,6 +41,21 @@ export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<Compo
             : val
         }
       }
+    },
+    has (target, key) {
+      if (Reflect.has(target, key)) {
+        return true
+      }
+
+      // Skip internal properties
+      if (typeof key === 'symbol' || key.startsWith('__')) return false
+
+      for (const ref of refs) {
+        if (ref.value && Reflect.has(ref.value, key)) {
+          return true
+        }
+      }
+      return false
     },
     getOwnPropertyDescriptor (target, key) {
       const descriptor = Reflect.getOwnPropertyDescriptor(target, key)

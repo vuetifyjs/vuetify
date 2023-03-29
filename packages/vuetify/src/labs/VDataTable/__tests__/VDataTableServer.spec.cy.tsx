@@ -170,15 +170,14 @@ describe('VDataTableServer', () => {
       </Application>
     ))
 
-    cy
-      .get('.v-btn[aria-label="Next page"]')
+    cy.get('.v-btn[aria-label="Next page"]')
       .click()
-      .get('.v-select')
+    cy.get('.v-select')
       .click()
-      .get('.v-list-item')
+    cy.get('.v-list-item')
       .eq(0)
       .click()
-      .emitted(VDataTableServer, 'update:options')
+    cy.emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
         [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
         [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
@@ -214,13 +213,12 @@ describe('VDataTableServer', () => {
       </Application>
     ))
 
-    cy
-      .get('.v-btn[aria-label="Next page"]')
+    cy.get('.v-btn[aria-label="Next page"]')
       .click()
-      .get('th')
+    cy.get('th')
       .eq(0)
       .click()
-      .emitted(VDataTableServer, 'update:options')
+    cy.emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
         [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
         [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
