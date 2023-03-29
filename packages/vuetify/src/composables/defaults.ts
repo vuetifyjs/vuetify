@@ -26,6 +26,7 @@ export function useDefaults () {
 
   return defaults
 }
+const cache = new WeakMap<object, object>()
 
 export function provideDefaults (
   defaults?: MaybeRef<DefaultsInstance | undefined>,
@@ -48,7 +49,7 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
+    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value }, undefined, cache)
 
     if (scoped) return properties
 
@@ -66,7 +67,7 @@ export function provideDefaults (
       return properties
     }
 
-    return mergeDeep(properties.prev, properties)
+    return mergeDeep(properties.prev, properties, undefined, cache)
   }) as ComputedRef<DefaultsInstance>
 
   provide(DefaultsSymbol, newDefaults)

@@ -116,15 +116,13 @@ export function getZIndex (el?: Element | null): number {
 export function convertToUnit (str: number, unit?: string): string
 export function convertToUnit (str: string | number | null | undefined, unit?: string): string | undefined
 export function convertToUnit (str: string | number | null | undefined, unit = 'px'): string | undefined {
-  if (str == null || str === '') {
-    return undefined
-  } else if (isNaN(+str!)) {
-    return String(str)
-  } else if (!isFinite(+str!)) {
-    return undefined
-  } else {
-    return `${Number(str)}${unit}`
-  }
+  if (str == null || str === '') return undefined
+
+  const parsedNumber = typeof str === 'number' ? str : parseFloat(str)
+
+  if (isNaN(parsedNumber) || !isFinite(parsedNumber)) return undefined
+
+  return `${parsedNumber}${unit}`
 }
 
 export function isObject (obj: any): obj is object {
@@ -318,22 +316,6 @@ export function throttle<T extends (...args: any[]) => any> (fn: T, limit: numbe
   }
 }
 
-type Writable<T> = {
-  -readonly [P in keyof T]: T[P]
-}
-
-/**
- * Filters slots to only those starting with `prefix`, removing the prefix
- */
-export function getPrefixedSlots (prefix: string, slots: Slots): Slots {
-  return Object.keys(slots)
-    .filter(k => k.startsWith(prefix))
-    .reduce<Writable<Slots>>((obj, k) => {
-      obj[k.replace(prefix, '')] = slots[k]
-      return obj
-    }, {})
-}
-
 export function clamp (value: number, min = 0, max = 1) {
   return Math.max(min, Math.min(max, value))
 }
@@ -353,7 +335,7 @@ export function chunk (str: string, size = 1) {
   const chunked: string[] = []
   let index = 0
   while (index < str.length) {
-    chunked.push(str.substr(index, size))
+    chunked.push(str.slice(index, index + size))
     index += size
   }
   return chunked
@@ -387,34 +369,18 @@ export function mergeDeep (
   target: Record<string, any> = {},
   arrayFn?: (a: unknown[], b: unknown[]) => unknown[],
 ) {
-  const out: Record<string, any> = {}
+  const out: Record<string, any> = Object.assign({}, source)
 
-  for (const key in source) {
-    out[key] = source[key]
-  }
+  for (const [key, targetProperty] of Object.entries(target)) {
+    const sourceProperty = out[key]
 
-  for (const key in target) {
-    const sourceProperty = source[key]
-    const targetProperty = target[key]
-
-    // Only continue deep merging if
-    // both properties are objects
-    if (
-      isObject(sourceProperty) &&
-      isObject(targetProperty)
-    ) {
+    if (isObject(sourceProperty) && isObject(targetProperty)) {
       out[key] = mergeDeep(sourceProperty, targetProperty, arrayFn)
-
-      continue
-    }
-
-    if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
+    } else if (Array.isArray(sourceProperty) && Array.isArray(targetProperty) && arrayFn) {
       out[key] = arrayFn(sourceProperty, targetProperty)
-
-      continue
+    } else {
+      out[key] = targetProperty
     }
-
-    out[key] = targetProperty
   }
 
   return out
@@ -422,21 +388,6 @@ export function mergeDeep (
 
 export function fillArray<T> (length: number, obj: T) {
   return Array(length).fill(obj)
-}
-
-export function flattenFragments (nodes: VNode[]): VNode[] {
-  return nodes.map(node => {
-    if (node.type === Fragment) {
-      return flattenFragments(node.children as VNode[])
-    } else {
-      return node
-    }
-  }).flat()
-}
-
-export const randomHexColor = () => {
-  const n = (Math.random() * 0xfffff * 1000000).toString(16)
-  return '#' + n.slice(0, 6)
 }
 
 export function toKebabCase (str = '') {
