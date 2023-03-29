@@ -67,7 +67,7 @@
     "./components": "./lib/components/index.mjs",
     "./components/*": "./lib/components/*/index.mjs",
     "./directives": "./lib/directives/index.mjs",
-    "./directives/*": "./lib/directives/*/*.mjs",
+    "./directives/*": "./lib/directives/*/index.mjs",
     "./locale": "./lib/locale/index.mjs",
     "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
     "./iconsets/*": "./lib/iconsets/*.mjs",
