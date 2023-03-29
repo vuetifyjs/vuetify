@@ -72,6 +72,17 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     }))
 
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
+    const activatorDefaults = computed(() => ({
+      VListItem: {
+        active: isOpen.value,
+        activeColor: props.activeColor,
+        color: props.color,
+        prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
+        appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
+        title: props.title,
+        value: props.value,
+      },
+    }))
 
     useRender(() => (
       <props.tag
@@ -86,19 +97,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         ]}
       >
         { slots.activator && (
-          <VDefaultsProvider
-            defaults={{
-              VListItem: {
-                active: isOpen.value,
-                activeColor: props.activeColor,
-                color: props.color,
-                prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
-                appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
-                title: props.title,
-                value: props.value,
-              },
-            }}
-          >
+          <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
               { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
