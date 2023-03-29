@@ -67,7 +67,7 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
-    subfolder?: boolean
+    subfolder?: string
     disabled?: boolean
   }
 
@@ -84,11 +84,17 @@
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
-    if (typeof item === 'string') {
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
+    const isString = typeof item === 'string'
+
+    if (isString || (item.title && !item.items)) {
+      const litem = isString ? { title: item } : item
+
+      if (litem.subfolder) path = litem.subfolder
+
+      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
 
       return {
-        title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
         emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,
