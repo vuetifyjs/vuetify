@@ -59,11 +59,6 @@ export const VTabs = genericComponent()({
     ...makeVSlideGroupProps(),
     ...makeDensityProps(),
     ...makeTagProps(),
-
-    direction: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal',
-    },
   },
 
   emits: {

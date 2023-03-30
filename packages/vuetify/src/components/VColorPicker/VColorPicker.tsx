@@ -63,6 +63,7 @@ export const VColorPicker = defineComponent({
       'minHeight',
       'maxHeight',
       'minWidth',
+      'maxWidth',
     ]),
   },
 

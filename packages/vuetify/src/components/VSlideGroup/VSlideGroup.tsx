@@ -19,8 +19,8 @@ import { clamp, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
 // Types
-import type { InjectionKey } from 'vue'
 import type { GroupProvide } from '@/composables/group'
+import type { InjectionKey, PropType } from 'vue'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -40,7 +40,7 @@ type VSlideGroupSlots = {
 export const makeVSlideGroupProps = propsFactory({
   centerActive: Boolean,
   direction: {
-    type: String,
+    type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
   },
   symbol: {
