@@ -203,8 +203,14 @@
           "server-side-tables"
         ]
       },
-      "skeleton-loaders",
-      "virtual-scroller"
+      {
+        "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "virtual-scroller",
+        "subfolder": "components"
+      }
     ]
   },
   {
