@@ -8,11 +8,19 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, h, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, toRef } from 'vue'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
+
+type VSkeletonBone<T> = T | VSkeletonBone<T>[]
+
+export type VSkeletonBones = VSkeletonBone<VNode>
+export type VSkeletonLoaderTypes = keyof typeof rootTypes
+export type VSkeletonLoaderSlots = {
+  default: []
+}
 
 export const rootTypes = {
   actions: 'button@2',
@@ -44,15 +52,19 @@ export const rootTypes = {
   'table-row': 'text@6',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
-} as Record<string, string>
+}
 
-function genBone (text: string, children: VNode[] = []) {
-  return h('div', {
-    class: [
-      'v-skeleton-loader__bone',
-      `v-skeleton-loader__${text}`,
-    ],
-  }, children)
+function genBone (text: string, children: VSkeletonBones = []) {
+  return (
+    <div
+      class={[
+        'v-skeleton-loader__bone',
+        `v-skeleton-loader__${text}`,
+      ]}
+    >
+      { children }
+    </div>
+  )
 }
 
 function genBones (bone: string) {
@@ -64,8 +76,8 @@ function genBones (bone: string) {
   return Array.from({ length }).map(() => genStructure(type))
 }
 
-function genStructure (type?: string): any {
-  let children: VNode[] = []
+function genStructure (type?: string): VSkeletonBones {
+  let children: VSkeletonBones = []
 
   if (!type) return children
 
@@ -88,12 +100,12 @@ function genStructure (type?: string): any {
   return [genBone(type, children)]
 }
 
-function mapBones (bones: string): VNode[] {
+function mapBones (bones: string) {
   // Remove spaces and return array of structures
   return bones.replace(/\s/g, '').split(',').map(genStructure)
 }
 
-export const VSkeletonLoader = genericComponent()({
+export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
   name: 'VSkeletonLoader',
 
   props: {
@@ -101,7 +113,7 @@ export const VSkeletonLoader = genericComponent()({
     color: String,
     loading: Boolean,
     type: {
-      type: [String, Array] as PropType<string | string[]>,
+      type: [String, Array] as PropType<VSkeletonLoaderTypes | VSkeletonLoaderTypes[]>,
       default: 'image',
     },
 
@@ -111,35 +123,35 @@ export const VSkeletonLoader = genericComponent()({
   },
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { themeClasses } = provideTheme(props)
 
-    const items = computed(() => {
-      return genStructure(props.type as any)
-    })
+    const items = computed(() => genStructure(wrapInArray(props.type).join(',')))
 
     useRender(() => {
       const isLoading = !slots.default || props.loading
 
-      return h('div', {
-        class: [
-          'v-skeleton-loader',
-          {
-            'v-skeleton-loader--boilerplate': props.boilerplate,
-          },
-          themeClasses.value,
-          backgroundColorClasses.value,
-          elevationClasses.value,
-        ],
-        style: [
-          backgroundColorStyles.value,
-          isLoading ? dimensionStyles.value : undefined,
-        ],
-      }, [
-        isLoading ? items.value : slots.default?.(),
-      ])
+      return (
+        <div
+          class={[
+            'v-skeleton-loader',
+            {
+              'v-skeleton-loader--boilerplate': props.boilerplate,
+            },
+            themeClasses.value,
+            backgroundColorClasses.value,
+            elevationClasses.value,
+          ]}
+          style={[
+            backgroundColorStyles.value,
+            isLoading ? dimensionStyles.value : {},
+          ]}
+        >
+          { isLoading ? items.value : slots.default?.() }
+        </div>
+      )
     })
 
     return {}
