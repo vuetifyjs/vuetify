@@ -85,8 +85,11 @@
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
     const isString = typeof item === 'string'
+    const isLink = !isString && (item.to || item.href)
+    const isParent = !isString && item.items
+    const isType = !isString && (item.divider || item.subheader)
 
-    if (isString || (item.title && !item.items)) {
+    if (isString || (!isLink && !isParent && !isType)) {
       const litem = isString ? { title: item } : item
 
       if (litem.subfolder) path = litem.subfolder
