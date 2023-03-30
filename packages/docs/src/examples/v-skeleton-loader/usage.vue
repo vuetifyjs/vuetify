@@ -6,15 +6,34 @@
     :options="options"
   >
     <div>
-      <v-skeleton-loader v-bind="props"></v-skeleton-loader>
+      <v-skeleton-loader
+        v-bind="props"
+        class="mx-auto"
+        max-width="300"
+      ></v-skeleton-loader>
     </div>
 
     <template v-slot:configuration>
-      <v-select v-model="type" label="Type" :items="items" clearable></v-select>
+      <v-select
+        v-model="type"
+        :items="items"
+        clearable
+        label="Type"
+      ></v-select>
 
-      <v-select v-model="color" label="Color" :items="colors" clearable></v-select>
+      <v-select
+        v-model="color"
+        :items="colors"
+        clearable
+        label="Color"
+      ></v-select>
 
-      <v-slider v-model="elevation" label="Elevation" min="0" max="24"></v-slider>
+      <v-slider
+        v-model="elevation"
+        label="Elevation"
+        min="0"
+        max="24"
+      ></v-slider>
     </template>
   </usage-example>
 </template>
@@ -35,9 +54,9 @@
 
   const props = computed(() => {
     return {
+      elevation: elevation.value || undefined,
       boilerplate: model.value === 'boilerplate' || undefined,
       color: color.value || undefined,
-      elevation: elevation.value || undefined,
       type: type.value || undefined,
     }
   })

@@ -307,7 +307,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Skeleton loader component" src="skeleton-loaders" placeholder>
+<components-list-item name="Skeleton loader component" src="skeleton-loaders">
 
   Displays a content placeholder, enhancing perceived performance during data-fetching & rendering
 

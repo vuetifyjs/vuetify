@@ -2,8 +2,8 @@
   <div>
     <div class="text-center">
       <v-btn
-        size="x-large"
         class="mb-12"
+        size="x-large"
         @click="loading = !loading"
       >
         Toggle Loading
@@ -26,8 +26,8 @@
           >
             <v-skeleton-loader
               :loading="loading"
-              type="image, list-item-two-line"
               height="240"
+              type="image, list-item-two-line"
             >
               <v-responsive>
                 <v-img
@@ -75,17 +75,17 @@
         {
           title: 'Homemade Dulce de Leche Ice Cream with Chocolate Chips',
           subtitle: 'Happy Foods',
-          src: 'https://media.istockphoto.com/id/1428437700/photo/mini-cookies-and-cream-cheesecakes.jpg?s=1024x1024&w=is&k=20&c=uX9YiCbNiN-GkjnQdYncnfqi2SrlHM1e4HzFVM5sOks=',
+          src: 'https://cdn.vuetifyjs.com/docs/images/graphics/dulce-ice-cream.png',
         },
         {
           title: 'Salted Caramel Swirl Ice Cream',
           subtitle: 'Stone Kitchen',
-          src: 'https://media.istockphoto.com/id/1296474411/photo/piece-of-sachertorte-sachr-cake-on-white-plate-top-view-copy-space.jpg?s=1024x1024&w=is&k=20&c=KScDPSoeX-Fe9dajh2bYKKYSUQwsILxJtUhK2HV7k38=',
+          src: 'https://cdn.vuetifyjs.com/docs/images/graphics/salted-caramel-ice-cream.png',
         },
         {
           title: 'Peanut Butter No-Churn Ice Cream',
           subtitle: 'The Sweeter Side',
-          src: 'https://media.istockphoto.com/id/1429640388/photo/vanilla-ice-cream-cup-dessert-with-brownie-and-hot-fudge-syrup-with-spoon-in-female-hand.jpg?s=1024x1024&w=is&k=20&c=iGx_rGJSGThmIwG5ywNcKkyPIFVytY9fLsGI762q_OQ=',
+          src: 'https://cdn.vuetifyjs.com/docs/images/graphics/peanut-butter-ice-cream.png',
         },
       ],
       loading: true,

@@ -5,7 +5,7 @@
 
 .v-skeleton-loader
   align-items: center
-  background: rgb(var(--v-theme-surface))
+  background: $skeleton-loader-background
   border-radius: $skeleton-loader-border-radius
   display: flex
   flex-wrap: wrap
@@ -22,7 +22,7 @@
   .v-skeleton-loader__heading,
   .v-skeleton-loader__image,
   .v-skeleton-loader__text
-    background: $skeleton-text-background
+    background: $skeleton-loader-text-background
 
   .v-skeleton-loader__list-item,
   .v-skeleton-loader__list-item-avatar,
@@ -46,14 +46,14 @@
       @include tools.absolute(true)
 
       animation: $skeleton-loader-loading-animation
-      background: $skeleton-background
+      background: $skeleton-loader-bone-background
       transform: $skeleton-loader-loading-transform
       z-index: 1
 
   &__avatar
     border-radius: 50%
     flex: 0 1 auto
-    margin: 8px 16px
+    margin: $skeleton-loader-avatar-margin
     max-height: $skeleton-loader-avatar-height
     min-height: $skeleton-loader-avatar-height
     height: $skeleton-loader-avatar-height
@@ -73,7 +73,7 @@
   &__button
     border-radius: $skeleton-loader-button-border-radius
     height: $skeleton-loader-button-height
-    margin: 16px
+    margin: $skeleton-loader-gutter
     max-width: $skeleton-loader-button-width
 
     + .v-skeleton-loader__bone
@@ -87,7 +87,7 @@
 
   &__chip
     border-radius: $skeleton-loader-chip-border-radius
-    margin: 16px
+    margin: $skeleton-loader-gutter
     height: $skeleton-loader-chip-height
     max-width: $skeleton-loader-chip-width
 
@@ -105,16 +105,16 @@
 
     .v-skeleton-loader__list-item:first-child
       .v-skeleton-loader__text
-        max-width: 88px
-        width: 20%
+        max-width: $skeleton-loader-date-picker-text-max-width
+        width: $skeleton-loader-date-picker-text-width
 
     .v-skeleton-loader__heading
-      max-width: 256px
-      width: 40%
+      max-width: $skeleton-loader-date-picker-heading-max-width
+      width: $skeleton-loader-date-picker-heading-width
 
   &__date-picker-days
     flex-wrap: wrap
-    margin: 16px
+    margin: $skeleton-loader-gutter
 
     .v-skeleton-loader__avatar
       border-radius: $skeleton-loader-border-radius
@@ -133,11 +133,11 @@
 
   &__heading
     border-radius: $skeleton-loader-heading-border-radius
-    margin: 16px
+    margin: $skeleton-loader-gutter
     height: $skeleton-loader-heading-height
 
     + .v-skeleton-loader__subtitle
-      margin-top: -16px
+      margin-top: -$skeleton-loader-gutter
 
   &__image
     height: $skeleton-loader-image-height
@@ -148,7 +148,7 @@
       border-radius: 0
 
   &__list-item
-    margin: 16px
+    margin: $skeleton-loader-gutter
 
     .v-skeleton-loader__text
       margin: 0
@@ -157,27 +157,27 @@
     justify-content: space-between
 
     .v-skeleton-loader__heading
-      margin-top: 16px
-      max-width: 16px
+      margin-top: $skeleton-loader-gutter
+      max-width: $skeleton-loader-gutter
 
   &__table-tfoot
     flex-wrap: nowrap
 
     > .v-skeleton-loader__text.v-skeleton-loader__bone
-      margin-top: 16px
+      margin-top: $skeleton-loader-gutter
 
   &__table-row
     align-items: baseline
-    margin: 0 8px
+    margin: $skeleton-loader-table-row-margin
     justify-content: space-evenly
     flex-wrap: nowrap
 
     > .v-skeleton-loader__text.v-skeleton-loader__bone
-      margin-inline-start: 8px
-      margin-inline-end: 8px
+      margin-inline-start: $skeleton-loader-table-row-text-margin
+      margin-inline-end: $skeleton-loader-table-row-text-margin
 
     + .v-skeleton-loader__divider
-      margin: 0 16px
+      margin: 0 $skeleton-loader-gutter
 
   &__table-cell
     align-items: center
@@ -189,23 +189,23 @@
       margin-bottom: 0
 
   &__subtitle
-    max-width: 70%
+    max-width: $skeleton-loader-subtitle-max-width
 
     > .v-skeleton-loader__text
-      height: 16px
-      border-radius: 8px
+      height: $skeleton-loader-subtitle-text-height
+      border-radius: $skeleton-loader-subtitle-text-border-radius
 
   &__text
     border-radius: $skeleton-loader-text-border-radius
-    margin: 16px
+    margin: $skeleton-loader-gutter
     height: $skeleton-loader-text-height
 
     + .v-skeleton-loader__text
-      margin-top: -8px
-      max-width: 50%
+      margin-top: $skeleton-loader-text-two-text-margin-top
+      max-width: $skeleton-loader-text-two-text-max-width
 
       + .v-skeleton-loader__text
-        max-width: 70%
+        max-width: $skeleton-loader-text-three-text-max-width
 
   &--boilerplate
     .v-skeleton-loader__bone:after

@@ -15,6 +15,8 @@ related:
 
 Skeleton loaders provide a simple way to display loading placeholders in your application.
 
+![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
+
 ----
 
 ## Usage
@@ -130,6 +132,19 @@ The following are a collection of examples that demonstrate more advanced and re
 The following example demonstrates how the `v-skeleton-loader` component can be used to create a placeholder loading state for when content is being fetched from a server or loaded asynchronously.
 
 <example file="v-skeleton-loader/misc-ice-cream" />
+
+## SASS Variables
+
+Make fine tuned changes by modifying the `v-skeleton-loader` [SASS variables](/features/sass-variables). This is useful when you want to change the default button height or padding.
+
+```scss { resource="src/settings.scss" }
+@use 'vuetify/settings' with (
+  $skeleton-loader-gutter: 24px,
+  $skeleton-loader-button-width: 80px,
+);
+```
+
+For a list of all available SASS variables, navigate to the [v-skeleton-loader](/api/v-skeleton-loader/#sass) API page.
 
 ## Accessibility
 
