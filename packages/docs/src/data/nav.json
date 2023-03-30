@@ -203,7 +203,10 @@
           "server-side-tables"
         ]
       },
-      "virtual-scroller"
+      {
+        "title": "virtual-scroller",
+        "subfolder": "components"
+      }
     ]
   },
   {
