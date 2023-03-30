@@ -145,3 +145,5 @@ export const VSkeletonLoader = genericComponent()({
     return {}
   },
 })
+
+export type VSkeletonLoader = InstanceType<typeof VSkeletonLoader>
