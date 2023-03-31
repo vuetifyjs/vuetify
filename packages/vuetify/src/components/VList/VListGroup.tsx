@@ -11,7 +11,8 @@ import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nes
 // Utilities
 import { computed, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
-
+import { MaybeTransition } from '@/composables/transition'
+import { useSsrBoot } from '@/composables/ssrBoot'
 export type VListGroupSlots = {
   default: []
   activator: [{ isOpen: boolean, props: Record<string, unknown> }]
@@ -60,7 +61,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
-
+    const { isBooted } = useSsrBoot()
     function onClick (e: Event) {
       open(!isOpen.value, e)
     }
@@ -104,11 +105,11 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
           </VDefaultsProvider>
         )}
 
-        <VExpandTransition>
-          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+        <MaybeTransition transition={ isBooted.value && { component: VExpandTransition } }>
+          <div class="v-list-group__items" v-show={ isOpen.value }>
             { slots.default?.() }
           </div>
-        </VExpandTransition>
+        </MaybeTransition>
       </props.tag>
     ))
 
