@@ -66,7 +66,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
-        <div class="v-card-item" onClick={ onClick } >
+        <div class="v-card-item" onClick={ onClick }>
           { hasPrepend && (
             <div key="prepend" class="v-card-item__prepend" onClick={ onPrependClick }>
               { !slots.prepend ? (
