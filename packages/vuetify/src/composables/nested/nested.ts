@@ -1,5 +1,5 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getCurrentInstance, propsFactory } from '@/util'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
@@ -217,7 +217,13 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const computedId = computed(() => id.value)
+  const computedId = computed(() => {
+    if (isGroup) {
+      const uidSymbol = Symbol(getUid())
+      return id.value ?? uidSymbol
+    }
+    return id.value
+  })
 
   const item = {
     ...parent,
