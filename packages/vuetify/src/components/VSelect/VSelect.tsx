@@ -126,7 +126,9 @@ export const VSelect = genericComponent<new <
       'modelValue',
       [],
       v => {
-        const transformValue = typeof props.itemTitle === 'function' ? items.value.find(item => item.value === v)?.raw : v
+        const transformValue =
+          typeof props.itemTitle === 'function' && !props.returnObject
+            ? items.value.find(item => item.value === v)?.raw : v
         return transformIn(wrapInArray(transformValue))
       },
       v => {
