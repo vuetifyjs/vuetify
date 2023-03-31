@@ -134,8 +134,7 @@ export const VSelect = genericComponent<new <
     const form = useForm()
     const selections = computed(() => {
       return model.value
-        .map(v => items.value.find(item => props.valueComparator(item.value, v.value)))
-        .filter(v => v) as InternalItem[]
+        .map(v => items.value.find(item => props.valueComparator(item.value, v.value)) || v)
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
