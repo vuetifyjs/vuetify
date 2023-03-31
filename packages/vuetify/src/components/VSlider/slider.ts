@@ -156,7 +156,7 @@ export const useSlider = ({
   })
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => props.step > 0 ? parseFloat(props.step) : 0)
+  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
   const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   const thumbSize = computed(() => parseInt(props.thumbSize, 10))
