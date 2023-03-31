@@ -17,7 +17,7 @@ import type { PropType, VNode } from 'vue'
 type VSkeletonBone<T> = T | VSkeletonBone<T>[]
 
 export type VSkeletonBones = VSkeletonBone<VNode>
-export type VSkeletonLoaderTypes = keyof typeof rootTypes
+export type VSkeletonLoaderType = keyof typeof rootTypes
 export type VSkeletonLoaderSlots = {
   default: []
 }
@@ -52,7 +52,7 @@ export const rootTypes = {
   'table-row': 'text@6',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
-}
+} as Record<string, string>
 
 function genBone (text: string, children: VSkeletonBones = []) {
   return (
@@ -113,7 +113,7 @@ export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
     color: String,
     loading: Boolean,
     type: {
-      type: [String, Array] as PropType<VSkeletonLoaderTypes | VSkeletonLoaderTypes[]>,
+      type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
       default: 'image',
     },
 
