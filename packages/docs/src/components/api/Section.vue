@@ -1,7 +1,6 @@
 <template>
   <div v-if="items?.length" class="mb-4">
     <div class="d-flex mb-2">
-
       <v-text-field
         v-model="search"
         density="compact"
@@ -11,14 +10,11 @@
         single-line
         hide-details
       />
-
     </div>
 
-    <!-- TODO: investigate what this component does, if it even exists -->
     <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
 
     <component :is="renderApiSection" :items="filteredItems" />
-
   </div>
 </template>
 
