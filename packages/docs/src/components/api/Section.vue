@@ -22,12 +22,13 @@
 </template>
 
 <script setup lang="ts">
-  import { computed, ref, watch } from 'vue'
+  import { computed, computed, ref, ref, watch, watch } from 'vue'
 
   // Components
   import SassTable from './SassTable.vue'
   import SlotsTable from './SlotsTable.vue'
   import PropsTable from './PropsTable.vue'
+  import SassTable from './SassTable.vue'
   import EventsTable from './EventsTable.vue'
   import ExposedTable from './ExposedTable.vue'
 
