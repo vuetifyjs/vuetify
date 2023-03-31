@@ -1,46 +1,41 @@
 <template>
   <div v-if="items?.length" class="mb-4">
-    <!-- <div class="d-flex mb-2">
-      <app-text-field
-        clearable
-        icon="$mdiMagnify"
+    <div class="d-flex mb-2">
+
+      <v-text-field
+        v-model="search"
+        density="compact"
+        variant="solo"
         label="Filter"
-        @input="filter = $event"
+        prepend-inner-icon="mdi-magnify"
+        single-line
+        hide-details
       />
-    </div> -->
+
+    </div>
+
     <app-headline v-if="showHeadline" :path="`api-headers.${section}`" />
-    <template v-if="['props', 'argument', 'modifiers'].includes(section)">
-      <PropsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'events'">
-      <EventsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'slots'">
-      <SlotsTable :items="items" />
-    </template>
-    <template v-else-if="section === 'exposed'">
-      <ExposedTable :items="items" />
-    </template>
-    <template v-else-if="section === 'sass'">
-      <SassTable :items="items" />
-    </template>
+
+    <component :is="renderApiSection" :items="filteredItems" />
+
   </div>
 </template>
 
 <script setup lang="ts">
+  import { computed, ref, watch } from 'vue'
+
   // Components
-  import EventsTable from './EventsTable.vue'
-  import ExposedTable from './ExposedTable.vue'
-  import PropsTable from './PropsTable.vue'
   import SassTable from './SassTable.vue'
   import SlotsTable from './SlotsTable.vue'
+  import PropsTable from './PropsTable.vue'
+  import EventsTable from './EventsTable.vue'
+  import ExposedTable from './ExposedTable.vue'
 
   // Composables
   import { useLocaleStore } from '@/store/locale'
 
   // Utilities
   import { Item } from './utils'
-  import { ref, watch } from 'vue'
 
   const getApi = (name: string) => {
     return import(`../../api/data/${name}.json`)
@@ -51,6 +46,7 @@
       type: String,
       required: true,
     },
+
     section: {
       type: String,
       required: true,
@@ -58,8 +54,40 @@
     showHeadline: Boolean,
   })
 
-  const store = useLocaleStore()
+  const sectionMap = {
+    sass: SassTable,
+    slots: SlotsTable,
+    events: EventsTable,
+    exposed: ExposedTable,
+    props: PropsTable,
+    argument: PropsTable,
+    modifiers: PropsTable,
+  }
+
+  const renderApiSection = computed(() => {
+    const component = sectionMap[props.section as keyof typeof sectionMap]
+    return component || null
+  })
+
+  // 👉 Seection Search logic
+  const search = ref()
+  const searchableFields = ['name', 'description']
+
+  const filteredItems = computed(() => {
+    return items.value.filter((item: any) =>
+      searchableFields
+        .map(field => item[field])
+        .some(value =>
+          value
+            .toString()
+            .toLowerCase()
+            .includes(search.value?.toLowerCase() ?? '')
+        )
+    )
+  })
+
   const items = ref()
+  const store = useLocaleStore()
 
   async function fetchApiData () {
     try {
