@@ -126,7 +126,7 @@ export const VSelect = genericComponent<new <
       'modelValue',
       [],
       v => {
-        let transformVal = reverseSymbolIfNullish(v) 
+        const transformVal = reverseSymbolIfNullish(v)
         return transformIn(transformVal == null ? [v] : wrapInArray(transformVal))
       },
       v => {
