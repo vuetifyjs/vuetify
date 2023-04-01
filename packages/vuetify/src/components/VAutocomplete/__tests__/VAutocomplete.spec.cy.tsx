@@ -157,7 +157,7 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
+        items={ items }
         modelValue={ selectedItems }
         itemTitle="name"
         itemValue="code"
