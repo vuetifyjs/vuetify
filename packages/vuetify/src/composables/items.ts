@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, pick, propsFactory } from '@/util'
+import { getPropertyFromItem, pick, propsFactory, transformNullishToSymbol } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -54,7 +54,8 @@ export const makeItemsProps = propsFactory({
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any) {
   const title = getPropertyFromItem(item, props.itemTitle, item)
-  const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue, title)
+  const itemValue = getPropertyFromItem(item, props.itemValue, title)
+  const value = props.returnObject ? item : (itemValue ?? transformNullishToSymbol(itemValue))
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
