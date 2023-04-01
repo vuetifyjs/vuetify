@@ -132,7 +132,7 @@ export const VSelect = genericComponent<new <
       v => {
         let transformed = transformOut(v) as any
         transformed = transformed.map((t: any) => reverseSymbolIfNullish(t))
-        return props.multiple ? (transformed) : (transformed[0] ?? null)
+        return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
     const form = useForm()

@@ -21,7 +21,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, reverseSymbolIfNullish, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -122,9 +122,13 @@ export const VAutocomplete = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(wrapInArray(v)),
       v => {
-        const transformed = transformOut(v)
+        const transformVal = reverseSymbolIfNullish(v)
+        return transformIn(transformVal == null ? [transformVal] : wrapInArray(transformVal))
+      },
+      v => {
+        let transformed = transformOut(v) as any
+        transformed = transformed.map((t: any) => reverseSymbolIfNullish(t))
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )

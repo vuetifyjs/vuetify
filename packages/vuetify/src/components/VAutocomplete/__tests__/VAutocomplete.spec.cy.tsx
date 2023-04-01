@@ -145,6 +145,28 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
+  // issue #16442
+  it('should allow null as legit itemValue', () => {
+    const items = [
+      { name: 'Default Language', code: null },
+      { code: 'en-US', name: 'English' },
+      { code: 'de-DE', name: 'German' },
+    ]
+
+    const selectedItems = null
+
+    cy.mount(() => (
+      <VAutocomplete
+        items={items}
+        modelValue={ selectedItems }
+        itemTitle="name"
+        itemValue="code"
+      />
+    ))
+
+    cy.get('.v-autocomplete__selection').eq(0).invoke('text').should('equal', 'Default Language')
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
