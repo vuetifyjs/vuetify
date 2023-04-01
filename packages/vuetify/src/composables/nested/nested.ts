@@ -218,7 +218,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
   const uidSymbol = Symbol(getUid())
-  const computedId = computed(() => id.value === undefined ? uidSymbol : id.value)
+  const computedId = computed(() => id.value ?? uidSymbol)
 
   const item = {
     ...parent,
