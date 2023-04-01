@@ -19,14 +19,14 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-text-field').type('Something')
-      .emitted(VForm, 'update:modelValue')
+    cy.emitted(VForm, 'update:modelValue')
       .then(emits => {
         expect(emits).to.deep.equal([
           [false],
         ])
       })
       .get('.v-text-field').type(' and something else')
-      .emitted(VForm, 'update:modelValue')
+    cy.emitted(VForm, 'update:modelValue')
       .then(emits => {
         expect(emits).to.deep.equal([
           [false],
@@ -46,12 +46,12 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-text-field').eq(0).type('Valid')
-      .emitted(VForm, 'update:modelValue')
+    cy.emitted(VForm, 'update:modelValue')
       .then(emits => {
         expect(emits).to.be.undefined
       })
       .get('.v-text-field').eq(1).type('Valid')
-      .emitted(VForm, 'update:modelValue')
+    cy.emitted(VForm, 'update:modelValue')
       .then(emits => {
         expect(emits).to.deep.equal([
           [true],
@@ -87,7 +87,9 @@ describe('VForm', () => {
       </Application>
     ))
 
-    cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
+    cy.get('.v-text-field')
+      .type('Something')
+      .should('have.class', 'v-input--error')
       .emitted(VForm, 'update:modelValue')
       .then(emits => {
         expect(emits).to.deep.equal([[false]])

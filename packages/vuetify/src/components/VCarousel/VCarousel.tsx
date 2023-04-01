@@ -40,7 +40,7 @@ export const VCarousel = genericComponent<VWindowSlots>()({
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: (value: string | number) => value > 0,
+      validator: (value: string | number) => +value > 0,
     },
     modelValue: null,
     progress: [Boolean, String],

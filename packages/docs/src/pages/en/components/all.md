@@ -301,19 +301,19 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
-<components-list-item name="Data table component"  src="data-tables" placeholder>
+<components-list-item name="Data table component"  src="data-tables/basics" placeholder>
 
   Data tables are used to display large amounts of data in a small amount of space
 
 </components-list-item>
 
-<components-list-item name="Server-side component"  src="server-side-data-tables" placeholder>
+<components-list-item name="Server-side component"  src="data-tables/server-side-tables" placeholder>
 
   Server side data tables are intended to be used with a server side data source
 
 </components-list-item>
 
-<components-list-item name="Virtual Data component"  src="virtual-data-tables" placeholder>
+<components-list-item name="Virtual Data component"  src="data-tables/virtual-tables" placeholder>
 
   The virtual data table component is used to display very large subsets of data
 
@@ -325,7 +325,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Virtual scroll component"  src="virtual-scrollers" placeholder>
+<components-list-item name="Virtual scroll component"  src="virtual-scroller" placeholder>
 
   The virtual scroller component makes it possible to render large amounts of data without sacrificing performance
 

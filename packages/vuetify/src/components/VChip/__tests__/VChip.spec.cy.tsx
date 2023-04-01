@@ -10,7 +10,7 @@ describe('VChip', () => {
 
     cy.get('.v-chip__close')
       .click()
-      .emitted(VChip)
+    cy.emitted(VChip)
       .then(emitted => {
         expect(emitted).to.have.property('click:close')
         expect(emitted).to.have.property('update:modelValue')
@@ -24,10 +24,10 @@ describe('VChip', () => {
 
     cy.get('.v-chip__close')
       .should('have.attr', 'aria-label')
-      .setProps({
-        closeLabel: 'Hello',
-      })
-      .get('.v-chip__close')
+    cy.setProps({
+      closeLabel: 'Hello',
+    })
+    cy.get('.v-chip__close')
       .should('have.attr', 'aria-label', 'Hello')
   })
 })

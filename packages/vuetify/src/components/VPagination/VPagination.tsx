@@ -242,7 +242,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               ref,
               ellipsis: false,
               icon: true,
-              disabled: !!props.disabled || props.length < 2,
+              disabled: !!props.disabled || +props.length < 2,
               color: isActive ? props.activeColor : props.color,
               ariaCurrent: isActive,
               ariaLabel: t(isActive ? props.currentPageAriaLabel : props.pageAriaLabel, item),
@@ -295,7 +295,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === keyValues.left && !props.disabled && page.value > props.start) {
+      if (e.key === keyValues.left && !props.disabled && page.value > +props.start) {
         page.value = page.value - 1
         nextTick(updateFocus)
       } else if (e.key === keyValues.right && !props.disabled && page.value < start.value + length.value - 1) {

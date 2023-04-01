@@ -50,7 +50,7 @@
 <script>
   export default {
     data: () => ({
-      items: Array.from({ length: 7000 }, (k, v) => v + 1),
+      items: Array.from({ length: 1000 }, (k, v) => v + 1),
       visibleItems: 30,
     }),
   }
