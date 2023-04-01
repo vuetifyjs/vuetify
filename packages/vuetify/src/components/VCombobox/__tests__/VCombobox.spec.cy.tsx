@@ -163,7 +163,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={ items } />
+        <VCombobox items={ items } hide-no-data />
       ))
         .get('input')
         .type('Item')
@@ -175,7 +175,7 @@ describe('VCombobox', () => {
         .should('have.length', 2)
       cy.get('input').clear()
       cy.get('input').type('Item 3')
-      cy.get('input').should('have.length', 1)
+      cy.get('input').should('have.length', 0)
     })
 
     it('should filter items when using multiple', () => {
@@ -187,7 +187,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={ items } multiple />
+        <VCombobox items={ items } multiple hide-no-data />
       ))
         .get('input')
         .type('Item')
