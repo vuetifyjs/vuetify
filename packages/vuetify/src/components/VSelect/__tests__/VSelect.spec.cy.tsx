@@ -247,8 +247,8 @@ describe('VSelect', () => {
     ]
 
     const selectedItems = ref(null)
-    
-    function itemTitleFunc(item: any) {
+
+    function itemTitleFunc (item: any) {
       return 'Item: ' + JSON.stringify(item)
     }
 
@@ -273,7 +273,6 @@ describe('VSelect', () => {
       .should('have.been.calledWith', { id: 1, name: 'a' })
 
     cy.get('.v-select__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
-
   })
 
   describe('hide-selected', () => {

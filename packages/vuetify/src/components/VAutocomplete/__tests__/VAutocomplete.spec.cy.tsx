@@ -153,8 +153,8 @@ describe('VAutocomplete', () => {
     ]
 
     const selectedItems = ref(null)
-    
-    function itemTitleFunc(item: any) {
+
+    function itemTitleFunc (item: any) {
       return 'Item: ' + JSON.stringify(item)
     }
 
@@ -179,10 +179,8 @@ describe('VAutocomplete', () => {
       .should('have.been.calledWith', { id: 1, name: 'a' })
 
     cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
-
   })
-  
-  
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
