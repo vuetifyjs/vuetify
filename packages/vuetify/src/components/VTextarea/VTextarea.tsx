@@ -107,7 +107,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
     const messages = computed(() => {
       return props.messages.length
         ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
+        : (isFocused.value || props.persistentHint) ? props.hint : ''
     })
 
     function onFocus () {
