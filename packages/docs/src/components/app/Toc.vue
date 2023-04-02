@@ -83,6 +83,12 @@
               <small class="text-disabled">Your logo here</small>
             </v-card>
           </v-col>
+
+          <v-col cols="12">
+            <a href="https://discord.com/channels/@me/1083648401503174716/1087697797840638003" target="_blank" rel="noopener noreferrer sponsored">
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+            </a>
+          </v-col>
         </v-row>
       </v-container>
     </template>
