@@ -123,6 +123,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
           top: slots.top,
           default: slots.default ?? (() => (
             <>
+              { slots.colgroup?.({ columns }) }
               <thead class="v-data-table__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders

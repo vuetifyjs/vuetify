@@ -112,5 +112,65 @@
     "location": "USA",
     "name": "Elijah Kotyluk",
     "team": "core"
+  },
+  "yooneskh": {
+    "discord": "YoonesKh#7826",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)",
+      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)"
+    ],
+    "languages": [
+      "English",
+      "Persian"
+    ],
+    "twitter": "yooneskh",
+    "linkedin": "yooneskh ",
+    "location": "Iran",
+    "name": "Yoones Khoshghadam",
+    "team": "core"
+  },
+  "": {
+    "discord": "Elvina Garcia#0203",
+    "focus": [
+      "Design/Animations"
+    ],
+    "languages": [
+      "English"
+    ],
+    "location": "Virginia, USA",
+    "name": "Elvina Garcia",
+    "team": "core"
+  },
+  "santiagoaloi": {
+    "discord": "lannister#9474",
+    "focus": [
+      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)",
+      "[vuetifyjs/docs](https://github.com/vuetifyjs/vuetify/tree/master/packages/docs)"
+    ],
+    "funding": [
+      "[GitHub Sponsors](https://github.com/sponsors/santiagoaloi/)"
+    ],
+    "languages": [
+      "Swedish",
+      "English",
+      "Spanish"
+    ],
+    "linkedin": "santiagoaloi",
+    "location": "Stockholm, Sweden",
+    "name": "Santiago Aloi",
+    "team": "core"
+  },
+  "yuwu9145": {
+    "discord": "yuchao#8454",
+    "focus": [
+      "[vuetifyjs](https://github.com/vuetifyjs)"
+    ],
+    "languages": [
+      "English",
+      "Chinese(Mandarin)"
+    ],
+    "location": "Melbourne, Australia",
+    "name": "Yuchao Wu",
+    "team": "core"
   }
 }

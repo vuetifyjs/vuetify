@@ -142,12 +142,14 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     }
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
-      const caretPosition = [el.selectionStart, el.selectionEnd]
       model.value = el.value
-      nextTick(() => {
-        el.selectionStart = caretPosition[0]
-        el.selectionEnd = caretPosition[1]
-      })
+      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+        const caretPosition = [el.selectionStart, el.selectionEnd]
+        nextTick(() => {
+          el.selectionStart = caretPosition[0]
+          el.selectionEnd = caretPosition[1]
+        })
+      }
     }
 
     useRender(() => {
@@ -206,6 +208,10 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                   default: ({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
+                    const placeholder = computed(() => {
+                      return ((props.persistentPlaceholder || isFocused.value) && !isDirty.value) ? props.placeholder : ''
+                    })
+
                     const inputNode = (
                       <input
                         ref={ inputRef }
@@ -218,7 +224,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         name={ props.name }
-                        placeholder={ props.placeholder }
+                        placeholder={ placeholder.value }
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
