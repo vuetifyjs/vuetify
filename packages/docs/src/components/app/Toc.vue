@@ -83,6 +83,12 @@
               <small class="text-disabled">Your logo here</small>
             </v-card>
           </v-col>
+
+          <v-col cols="12">
+            <a href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12" target="_blank" rel="noopener noreferrer sponsored">
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+            </a>
+          </v-col>
         </v-row>
       </v-container>
     </template>
