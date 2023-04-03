@@ -71,4 +71,5 @@ export default {
       icon: 'Bedømmelse {0} af {1}',
     },
   },
+  loading: 'Loading...',
 }

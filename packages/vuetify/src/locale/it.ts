@@ -71,4 +71,5 @@ export default {
       icon: 'Valutazione {0} di {1}',
     },
   },
+  loading: 'Loading...',
 }

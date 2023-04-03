@@ -71,4 +71,5 @@ export default {
       icon: 'Оцена {0} од {1}',
     },
   },
+  loading: 'Loading...',
 }

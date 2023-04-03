@@ -71,4 +71,5 @@ export default {
       icon: 'Hodnocení {0} z {1}',
     },
   },
+  loading: 'Loading...',
 }

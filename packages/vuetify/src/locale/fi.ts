@@ -71,4 +71,5 @@ export default {
       icon: 'Luokitus {0}/{1}',
     },
   },
+  loading: 'Loading...',
 }
