@@ -37,7 +37,7 @@ The `v-skeleton-loader` component provides a user with a visual indicator that c
 
 ## Anatomy
 
-The `v-skeleton-loader` does not have a default slot so there are no recommended placement of elements.
+The `v-skeleton-loader` has a default slot that is rendered when the component is not in a loading state.
 
 ![Skeleton loader Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-anatomy.png)
 
@@ -90,13 +90,13 @@ The following built-in types are available:
 | **list-item-avatar-three-line** | avatar, paragraph |
 | **paragraph** | text@3 |
 | **sentences** | text@2 |
+| **subtitle** | text |
 | **table** | table-heading, table-thead, table-tbody, table-tfoot |
 | **table-heading** | heading, text |
 | **table-thead** | heading@6 |
 | **table-tbody** | table-row-divider@6 |
 | **table-row-divider** | table-row, divider |
 | **table-row** | table-cell@6 |
-| **table-cell** | text |
 | **table-tfoot** | text@2, avatar@2 |
 | **text** | text |
 
@@ -104,10 +104,10 @@ The following built-in types are available:
 
 A skeleton loader is considered to be in a loading state if one of the following conditions are met:
 
-* The default slot was not used
+* The default slot is not used
 * The **loading** property is set to **true**
 
-If the this condition is met, the skeleton loader returns the type structure in place of the default slot and applies dimensions values; e.g. **height**, **width**, **min-height**, etc. If the condition is not met, the default slot is returned.
+If either condition is met, the skeleton loader returns the type structure in place of the default slot and applies dimensions values; e.g. **height**, **width**, **min-height**, etc. If the condition is not met, the default slot is returned.
 
 <example file="v-skeleton-loader/prop-loading" />
 
@@ -148,4 +148,22 @@ For a list of all available SASS variables, navigate to the [v-skeleton-loader](
 
 ## Accessibility
 
-By default, the `v-skeleton-loader` component is assigned a [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert). We augment this role with two aria properties. An [**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) value of **true** denotes that a widget is missing required owned elements. An [**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) value of **polite** sets the screen reader's priority of live regions.
+By default, the `v-skeleton-loader` component is assigned a [WAI-ARIA](https://www.w3.org/WAI/standards-guidelines/aria/) role of [**alert**](https://www.w3.org/TR/wai-aria/#alert). We augment this role with three aria properties. An [**aria-busy**](https://www.w3.org/TR/wai-aria-1.0/states_and_properties#aria-busy) value of **true** denotes that a widget is missing required owned elements. An [**aria-live**](https://www.w3.org/TR/wai-aria-1.1/#aria-live) value of **polite** sets the screen reader's priority of live regions. And finally, [**aria-label**](https://www.w3.org/TR/WCAG20-TECHS/ARIA6.html), which is used to provide a human readable description of the element.
+
+### Configuring the aria-label
+
+Configure the default text used in the `v-skeleton-loader` component in the locale options. The following example demonstrates how to update the **loading-text** property:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  locale: {
+    messages: {
+      loading: 'Loading content...',
+    },
+  },
+})
+```
+
+Navigate to the [Internationalization (i18n)](/features/internationalization/) page for more information on how to configure the locale options.
