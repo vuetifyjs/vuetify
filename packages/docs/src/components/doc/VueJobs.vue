@@ -2,14 +2,10 @@
   <v-row>
     <v-col cols="12">
       <div class="d-flex">
-        <v-text-field
+        <app-text-field
           v-model="search"
           :append-inner-icon="view ? 'mdi-view-grid-outline' : 'mdi-view-list-outline'"
           :placeholder="placeholder"
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          single-line
-          variant="outlined"
           @click:append-inner.stop.prevent="view = !view"
         />
       </div>
