@@ -85,7 +85,12 @@
           </v-col>
 
           <v-col cols="12">
-            <a href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12" target="_blank" rel="noopener noreferrer sponsored">
+            <a
+              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              @click="onClickPromotion"
+            >
               <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
             </a>
           </v-col>
@@ -102,6 +107,7 @@
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useAppStore } from '@/store/app'
+  import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
@@ -208,6 +214,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
+  const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -222,6 +229,14 @@
     // await wait(200)
 
     scrolling.value = false
+  }
+
+  function onClickPromotion () {
+    event('click', {
+      event_category: 'vuetify-toc',
+      event_label: 'promotion',
+      value: 'theme-selection',
+    })
   }
 
   const sponsorStore = useSponsorsStore()
