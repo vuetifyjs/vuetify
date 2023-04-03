@@ -83,7 +83,7 @@ function genStructure (type?: string): VSkeletonBones {
   if (!type) return children
 
   // TODO: figure out a better way to type this
-  const bone = (rootTypes as Record<string, string>)[type] ?? 'card'
+  const bone = (rootTypes as Record<string, string>)[type]
 
   // End of recursion, do nothing
   /* eslint-disable-next-line no-empty, brace-style */
