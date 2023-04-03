@@ -6,6 +6,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -52,14 +53,14 @@ export const rootTypes = {
   'table-row': 'text@6',
   'table-tfoot': 'text@2, avatar@2',
   text: 'text',
-} as Record<string, string>
+} as const
 
-function genBone (text: string, children: VSkeletonBones = []) {
+function genBone (type: string, children: VSkeletonBones = []) {
   return (
     <div
       class={[
         'v-skeleton-loader__bone',
-        `v-skeleton-loader__${text}`,
+        `v-skeleton-loader__${type}`,
       ]}
     >
       { children }
@@ -69,7 +70,7 @@ function genBone (text: string, children: VSkeletonBones = []) {
 
 function genBones (bone: string) {
   // e.g. 'text@3'
-  const [type, length] = bone.split('@') as [string, number]
+  const [type, length] = bone.split('@') as [VSkeletonLoaderType, number]
 
   // Generate a length array based upon
   // value after @ in the bone string
@@ -81,7 +82,8 @@ function genStructure (type?: string): VSkeletonBones {
 
   if (!type) return children
 
-  const bone = type in rootTypes ? rootTypes[type] : 'card'
+  // TODO: figure out a better way to type this
+  const bone = (rootTypes as Record<string, string>)[type] ?? 'card'
 
   // End of recursion, do nothing
   /* eslint-disable-next-line no-empty, brace-style */
@@ -112,6 +114,10 @@ export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
     boilerplate: Boolean,
     color: String,
     loading: Boolean,
+    loadingText: {
+      type: String,
+      default: '$vuetify.loading',
+    },
     type: {
       type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
       default: 'image',
@@ -127,6 +133,7 @@ export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
     const { dimensionStyles } = useDimension(props)
     const { elevationClasses } = useElevation(props)
     const { themeClasses } = provideTheme(props)
+    const { t } = useLocale()
 
     const items = computed(() => genStructure(wrapInArray(props.type).join(',')))
 
@@ -148,6 +155,10 @@ export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
             backgroundColorStyles.value,
             isLoading ? dimensionStyles.value : {},
           ]}
+          aria-busy={ !props.boilerplate ? isLoading : undefined }
+          aria-live={ !props.boilerplate ? 'polite' : undefined }
+          aria-label={ !props.boilerplate ? t(props.loadingText) : undefined }
+          role={ !props.boilerplate ? 'alert' : undefined }
         >
           { isLoading ? items.value : slots.default?.() }
         </div>
