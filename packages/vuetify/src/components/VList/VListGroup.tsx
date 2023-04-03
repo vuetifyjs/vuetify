@@ -59,6 +59,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
   setup (props, { slots }) {
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
+    const contentId = computed(() => `${id.value}-content`)
     const list = useList()
 
     function onClick (e: Event) {
@@ -69,6 +70,8 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       onClick,
       class: 'v-list-group__header',
       id: id.value,
+      'aria-expanded': String(isOpen.value),
+      'aria-owns': contentId.value,
     }))
 
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
@@ -105,7 +108,13 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
         )}
 
         <VExpandTransition>
-          <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
+          <div
+            id={ contentId.value }
+            class="v-list-group__items"
+            role="group"
+            aria-labelledby={ id.value }
+            v-show={ isOpen.value }
+          >
             { slots.default?.() }
           </div>
         </VExpandTransition>
