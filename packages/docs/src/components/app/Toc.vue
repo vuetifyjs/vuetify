@@ -85,7 +85,7 @@
           </v-col>
 
           <v-col cols="12">
-            <a href="https://discord.com/channels/@me/1083648401503174716/1087697797840638003" target="_blank" rel="noopener noreferrer sponsored">
+            <a href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12" target="_blank" rel="noopener noreferrer sponsored">
               <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
             </a>
           </v-col>
