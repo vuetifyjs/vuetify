@@ -5,11 +5,11 @@ describe('vuetify date adapter', () => {
   it('should return weekdays based on locale', () => {
     let instance = new VuetifyDateAdapter('en-us')
 
-    expect(instance.getWeekdays()).toBe(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
+    expect(instance.getWeekdays()).toStrictEqual(['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'])
 
     instance = new VuetifyDateAdapter('sv-se')
 
-    expect(instance.getWeekdays()).toBe(['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'])
+    expect(instance.getWeekdays()).toStrictEqual(['måndag', 'tisdag', 'onsdag', 'torsdag', 'fredag', 'lördag', 'söndag'])
   })
 
   it('should format dates', () => {

@@ -1,3 +1,6 @@
+// Composables
+import { useLocale } from './locale'
+
 // Utilities
 import { inject, shallowRef, watch } from 'vue'
 import { propsFactory } from '@/util'
@@ -5,7 +8,6 @@ import { propsFactory } from '@/util'
 // Types
 import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
-import { useLocale } from './locale'
 
 export const DateAdapterSymbol: InjectionKey<{ adapter: { new(locale: string): DateAdapter<any> } }> = Symbol.for('vuetify:date-adapter')
 
