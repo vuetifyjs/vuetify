@@ -331,7 +331,7 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
-<components-list-item name="Virtual scroll component"  src="virtual-scroller" placeholder>
+<components-list-item name="Virtual scroll component"  src="virtual-scroller" >
 
   The virtual scroller component makes it possible to render large amounts of data without sacrificing performance
 
