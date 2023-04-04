@@ -124,6 +124,7 @@ export const VCarousel = genericComponent<VWindowSlots>()({
                     >
                       { group.items.value.map((item, index) => {
                         const props = {
+                          id: `carousel-item-${item.id}`,
                           'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
                           class: [group.isSelected(item.id) && 'v-btn--active'],
                           onClick: () => group.select(item.id, true),
