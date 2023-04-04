@@ -87,6 +87,7 @@ export const VTabs = genericComponent()({
 
       return (
         <VSlideGroup
+          { ...slideGroupProps }
           v-model={ model.value }
           class={[
             'v-tabs',
@@ -106,7 +107,6 @@ export const VTabs = genericComponent()({
           ]}
           role="tablist"
           symbol={ VTabsSymbol }
-          { ...slideGroupProps }
         >
           { slots.default ? slots.default() : parsedItems.value.map(item => (
             <VTab { ...item } key={ item.title } />
