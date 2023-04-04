@@ -35,9 +35,7 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & MakeSlots<{
 }>
 
 export const VFileInput = genericComponent<new () => {
-  $props: InputHTMLAttributes & SlotsToProps<{
-    default: [VFileInputSlots]
-  }>
+  $props: InputHTMLAttributes & SlotsToProps<VFileInputSlots>
 }>()({
   name: 'VFileInput',
 
