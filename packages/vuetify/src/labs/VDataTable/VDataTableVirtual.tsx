@@ -120,6 +120,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
         }}
         height={ props.height }
         fixedHeader={ props.fixedHeader }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
