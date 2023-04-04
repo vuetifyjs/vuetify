@@ -40,7 +40,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
   inheritAttrs: false,
 
   props: {
-    accept: String,
     chips: Boolean,
     counter: Boolean,
     counterSizeString: {
@@ -208,7 +207,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       <input
                         ref={ inputRef }
                         type="file"
-                        accept={ props.accept }
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         multiple={ props.multiple }
