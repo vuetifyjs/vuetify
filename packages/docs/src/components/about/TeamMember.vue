@@ -1,8 +1,9 @@
 <template>
   <v-lazy min-height="128">
     <div class="d-flex">
-      <v-avatar color="grey-lighten-4" size="72">
+      <v-avatar color="grey-lighten-2" size="72">
         <v-img v-if="member.avatar" :src="member.avatar" />
+        <v-icon v-else color="grey" size="35"> mdi-image</v-icon>
       </v-avatar>
 
       <div class="ps-6 font-weight-medium">

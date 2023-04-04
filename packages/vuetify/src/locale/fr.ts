@@ -73,4 +73,5 @@ export default {
       item: 'Note de {0} sur {1}',
     },
   },
+  loading: 'Loading...',
 }

@@ -81,7 +81,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= props.max ? value
+        : value <= +props.max ? value
         : `${props.max}+`
 
       const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [

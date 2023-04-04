@@ -15,6 +15,7 @@ import AppMenu from '@/components/app/menu/Menu.vue'
 import AppMarkup from '@/components/app/Markup.vue'
 import AppSheet from '@/components/app/Sheet.vue'
 import AppTable from '@/components/app/Table.vue'
+import AppTextField from '@/components/app/TextField.vue'
 import AppTitle from '@/components/app/Title.vue'
 import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
 import Backmatter from '@/components/Backmatter.vue'
@@ -50,6 +51,7 @@ export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
     .component('AppMenu', AppMenu)
     .component('AppSheet', AppSheet)
     .component('AppTable', AppTable)
+    .component('AppTextField', AppTextField)
     .component('AppTitle', AppTitle)
     .component('AppTooltipBtn', AppTooltipBtn)
     .component('UnwrapMarkdown', (props, { slots }) => slots.default?.()?.[0].children)

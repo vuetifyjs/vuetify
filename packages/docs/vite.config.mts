@@ -1,15 +1,16 @@
 import path from 'upath'
 import fs from 'fs'
+import { fileURLToPath } from 'url'
 
 import { defineConfig, loadEnv } from 'vite'
 import Vue from '@vitejs/plugin-vue'
-import ViteFonts from 'vite-plugin-fonts'
+import ViteFonts from 'unplugin-fonts/vite'
 import Pages from 'vite-plugin-pages'
 import Layouts from 'vite-plugin-vue-layouts'
 // import Components from 'unplugin-vue-components/vite'
 import Markdown from 'vite-plugin-md'
 import { VitePWA } from 'vite-plugin-pwa'
-import VueI18n from '@intlify/vite-plugin-vue-i18n'
+import VueI18n from '@intlify/unplugin-vue-i18n/vite'
 import Inspect from 'vite-plugin-inspect'
 import Vuetify from 'vite-plugin-vuetify'
 import basicSsl from '@vitejs/plugin-basic-ssl'
@@ -18,7 +19,7 @@ import { configureMarkdown, parseMeta } from './build/markdown-it'
 import Api from './build/api-plugin'
 import { Examples } from './build/examples-plugin'
 
-const resolve = (file: string) => path.resolve(__dirname, file)
+const resolve = (file: string) => fileURLToPath(new URL(file, import.meta.url))
 
 const ssrTransformCustomDirective = () => {
   return {

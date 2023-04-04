@@ -30,7 +30,7 @@ type GroupHeaderSlot = {
 
 type ItemSlot = {
   index: number
-  item: InternalDataTableItem
+  item: DataTableItem
   columns: InternalDataTableHeader[]
   isExpanded: (item: DataTableItem) => boolean
   toggleExpand: (item: DataTableItem) => void

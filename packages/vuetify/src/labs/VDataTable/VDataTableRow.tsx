@@ -9,7 +9,8 @@ import { useSelection } from './composables/select'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { withModifiers } from 'vue'
+import { defineComponent, getPropertyFromItem, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -75,7 +76,7 @@ export const VDataTableRow = defineComponent({
                   return slots['item.data-table-select']?.(slotProps) ?? (
                     <VCheckboxBtn
                       modelValue={ isSelected([item]) }
-                      onClick={ () => toggleSelect(item) }
+                      onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
                     />
                   )
                 }
@@ -86,12 +87,12 @@ export const VDataTableRow = defineComponent({
                       icon={ isExpanded(item) ? '$collapse' : '$expand' }
                       size="small"
                       variant="text"
-                      onClick={ () => toggleExpand(item) }
+                      onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
                     />
                   )
                 }
 
-                return item.columns[column.key]
+                return getPropertyFromItem(item.columns, column.key)
               },
             }}
           </VDataTableColumn>
