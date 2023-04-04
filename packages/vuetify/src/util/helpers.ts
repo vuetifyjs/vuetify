@@ -571,15 +571,14 @@ export function callEvent (handler: EventProp | undefined, ...args: any[]) {
 }
 
 export const NullSymbol = Symbol.for('vuetify:null')
-export const UndefinedSymbol = Symbol.for('vuetify:undefined')
 
-export function transformNullishToSymbol (nullishVal: null | undefined): Symbol {
-  return nullishVal === undefined ? UndefinedSymbol : NullSymbol
+export function transformToSymbolIfNull<T> (val: null | T): Symbol | T {
+  return val ?? NullSymbol
 }
 
-export function reverseSymbolIfNullish (val: Symbol): any {
-  if (val === NullSymbol || val === UndefinedSymbol) {
-    return val === UndefinedSymbol ? undefined : null
+export function revertSymbolIfNull (val: Symbol): any {
+  if (val === NullSymbol) {
+    return null
   }
   return val
 }

@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, reverseSymbolIfNullish, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, omit, propsFactory, revertSymbolIfNull, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -126,12 +126,12 @@ export const VSelect = genericComponent<new <
       'modelValue',
       [],
       v => {
-        const transformVal = reverseSymbolIfNullish(v)
+        const transformVal = revertSymbolIfNull(v)
         return transformIn(transformVal == null ? [transformVal] : wrapInArray(transformVal))
       },
       v => {
         let transformed = transformOut(v) as any
-        transformed = transformed.map((t: any) => reverseSymbolIfNullish(t))
+        transformed = transformed.map((t: any) => revertSymbolIfNull(t))
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
@@ -226,7 +226,7 @@ export const VSelect = genericComponent<new <
         <VTextField
           ref={ vTextFieldRef }
           { ...textFieldProps }
-          modelValue={ model.value.map(v => reverseSymbolIfNullish(v.props.value)).join(', ') }
+          modelValue={ model.value.map(v => revertSymbolIfNull(v.props.value)).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
           dirty={ model.value.length > 0 }
