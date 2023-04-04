@@ -157,7 +157,7 @@ export function useValidation (
     isValidating.value = true
 
     for (const rule of props.rules) {
-      if (results.length >= (props.maxErrors ?? 1)) {
+      if (results.length >= +(props.maxErrors ?? 1)) {
         break
       }
 

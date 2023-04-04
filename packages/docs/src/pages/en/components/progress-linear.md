@@ -14,17 +14,21 @@ related:
 
 The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).
 
-<entry />
-
 ## Usage
 
 In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the **value** prop to control the progress.
 
 <usage name="v-progress-linear" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-progress-linear](/api/v-progress-linear/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

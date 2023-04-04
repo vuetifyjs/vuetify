@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { VCombobox } from '../VCombobox'
 import { ref } from 'vue'
 
@@ -21,13 +21,12 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple closableChips chips />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple closableChips chips />
       ))
-        .get('.v-chip__close')
-        .eq(0)
+        .get('.v-chip__close').eq(0)
         .click()
-        .get('input')
-        .get('.v-chip')
+      cy.get('input').should('exist')
+      cy.get('.v-chip')
         .should('have.length', 2)
     })
   })
@@ -56,43 +55,42 @@ describe('VCombobox', () => {
       ))
         .get('input')
         .click()
-        .get('.v-list-item')
-        .eq(0)
+      cy.get('.v-list-item').eq(0)
         .click({ waitForAnimations: false })
-        .should(() => {
-          expect(model.value).to.deep.equal(items[0])
-          expect(search.value).to.deep.equal(items[0].title)
-        })
-        .get('input')
+      cy.should(() => {
+        expect(model.value).to.deep.equal(items[0])
+        expect(search.value).to.deep.equal(items[0].title)
+      })
+      cy.get('input')
         .should('have.value', items[0].title)
         .blur()
-        .get('.v-combobox__selection')
+      cy.get('.v-combobox__selection')
         .should('contain', items[0].title)
 
-        .get('input')
-        .click()
-        .clear()
-        .type('Item 2')
-        .should(() => {
-          expect(model.value).to.equal('Item 2')
-          expect(search.value).to.equal('Item 2')
-        })
+      cy.get('input').click()
+      cy.get('input').clear()
+      cy.get('input').type('Item 2')
+      cy.should(() => {
+        expect(model.value).to.equal('Item 2')
+        expect(search.value).to.equal('Item 2')
+      })
+      cy.get('input')
         .should('have.value', 'Item 2')
         .blur()
-        .get('.v-combobox__selection')
+      cy.get('.v-combobox__selection')
         .should('contain', 'Item 2')
 
-        .get('input')
-        .click()
-        .clear()
-        .type('item3')
-        .should(() => {
-          expect(model.value).to.equal('item3')
-          expect(search.value).to.equal('item3')
-        })
+      cy.get('input').click()
+      cy.get('input').clear()
+      cy.get('input').type('item3')
+      cy.should(() => {
+        expect(model.value).to.equal('item3')
+        expect(search.value).to.equal('item3')
+      })
+      cy.get('input')
         .should('have.value', 'item3')
         .blur()
-        .get('.v-combobox__selection')
+      cy.get('.v-combobox__selection')
         .should('contain', 'item3')
     })
 
@@ -120,40 +118,37 @@ describe('VCombobox', () => {
       ))
         .get('.v-field input')
         .click()
-        .get('.v-list-item')
-        .eq(0)
+      cy.get('.v-list-item').eq(0)
         .click({ waitForAnimations: false })
-        .then(() => {
-          expect(model.value).to.deep.equal([items[0]])
-          expect(search.value).to.be.undefined
-        })
-        .get('.v-field input')
+      cy.then(() => {
+        expect(model.value).to.deep.equal([items[0]])
+        expect(search.value).to.be.undefined
+      })
+      cy.get('.v-field input').as('input')
         .should('have.value', '')
-        .get('.v-combobox__selection')
+      cy.get('.v-combobox__selection')
         .should('contain', items[0].title)
 
-        .get('.v-field input')
-        .click()
-        .type('Item 2')
-        .blur()
-        .should(() => {
-          expect(model.value).to.deep.equal([items[0], 'Item 2'])
-          expect(search.value).to.equal('')
-        })
-        .should('have.value', '')
-        .get('.v-combobox__selection')
+      cy.get('@input').click()
+      cy.get('@input').type('Item 2')
+      cy.get('@input').blur()
+      cy.should(() => {
+        expect(model.value).to.deep.equal([items[0], 'Item 2'])
+        expect(search.value).to.equal('')
+      })
+      cy.get('@input').should('have.value', '')
+      cy.get('.v-combobox__selection')
         .should('contain', 'Item 2')
 
-        .get('.v-field input')
-        .click()
-        .type('item3')
-        .blur()
-        .should(() => {
-          expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
-          expect(search.value).to.equal('')
-        })
-        .should('have.value', '')
-        .get('.v-combobox__selection')
+      cy.get('@input').click()
+      cy.get('@input').type('item3')
+      cy.get('@input').blur()
+      cy.should(() => {
+        expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
+        expect(search.value).to.equal('')
+      })
+      cy.get('@input').should('have.value', '')
+      cy.get('.v-combobox__selection')
         .should('contain', 'item3')
     })
   })
@@ -168,21 +163,19 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} />
+        <VCombobox items={ items } />
       ))
         .get('input')
         .type('Item')
-        .get('.v-list-item')
+      cy.get('.v-list-item')
         .should('have.length', 4)
-        .get('input')
-        .clear()
-        .type('Item 1')
-        .get('.v-list-item')
+      cy.get('input').clear()
+      cy.get('input').type('Item 1')
+      cy.get('.v-list-item')
         .should('have.length', 2)
-        .get('input')
-        .clear()
-        .type('Item 3')
-        .should('have.length', 1)
+      cy.get('input').clear()
+      cy.get('input').type('Item 3')
+      cy.get('input').should('have.length', 1)
     })
 
     it('should filter items when using multiple', () => {
@@ -194,21 +187,21 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} multiple />
+        <VCombobox items={ items } multiple />
       ))
         .get('input')
         .type('Item')
-        .get('.v-list-item')
+      cy.get('.v-list-item')
         .should('have.length', 4)
-        .get('input:first-child')
+      cy.get('input:first-child').as('input')
         .clear()
-        .type('Item 1')
-        .get('.v-list-item')
+      cy.get('@input').type('Item 1')
+      cy.get('.v-list-item')
         .should('have.length', 2)
-        .get('input:first-child')
-        .clear()
-        .type('Item 3')
-        .should('have.length', 1)
+      cy.get('@input').clear()
+      cy.get('@input').type('Item 3')
+      cy.get('.v-list-item')
+        .should('have.length', 0)
     })
 
     it('should filter with custom item shape', () => {
@@ -225,21 +218,20 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          items={items}
+          items={ items }
           item-value="id"
           item-title="name"
         />
       ))
         .get('input')
         .type('test')
-        .get('.v-list-item')
+      cy.get('.v-list-item')
         .should('have.length', 1)
         .eq(0)
         .should('have.text', 'Test1')
-        .get('input')
-        .clear()
-        .type('antonsen')
-        .get('.v-list-item')
+      cy.get('input').clear()
+      cy.get('input').type('antonsen')
+      cy.get('.v-list-item')
         .should('have.length', 1)
         .eq(0)
         .should('have.text', 'Antonsen PK')
@@ -253,7 +245,7 @@ describe('VCombobox', () => {
       const selectedItems = ref(['California', 'Colorado'])
 
       cy.mount(() => (
-        <VCombobox v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+        <VCombobox v-model={ selectedItems.value } items={ items.value } multiple chips closableChips />
       ))
 
       cy.get('.v-combobox input').click()
@@ -264,10 +256,10 @@ describe('VCombobox', () => {
       cy.get('.v-chip__close')
         .eq(0)
         .click()
-        .get('input')
-        .get('.v-chip')
+      cy.get('input').should('exist')
+      cy.get('.v-chip')
         .should('have.length', 1)
-        .should(() => expect(selectedItems.value).to.deep.equal(['Colorado']))
+      cy.should(() => expect(selectedItems.value).to.deep.equal(['Colorado']))
     })
 
     it('should work with objects when using multiple', () => {
@@ -301,8 +293,8 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          v-model={selectedItems.value}
-          items={items.value}
+          v-model={ selectedItems.value }
+          items={ items.value }
           multiple
           chips
           closableChips
@@ -318,13 +310,13 @@ describe('VCombobox', () => {
       cy.get('.v-chip__close')
         .eq(0)
         .click()
-        .get('input')
-        .get('.v-chip')
+      cy.get('input').should('exist')
+      cy.get('.v-chip')
         .should('have.length', 1)
-        .should(() => expect(selectedItems.value).to.deep.equal([{
-          title: 'Item 2',
-          value: 'item2',
-        }]))
+      cy.should(() => expect(selectedItems.value).to.deep.equal([{
+        title: 'Item 2',
+        value: 'item2',
+      }]))
     })
   })
 
@@ -336,22 +328,21 @@ describe('VCombobox', () => {
 
       cy.mount(() => (
         <VCombobox
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       ))
 
       cy.get('.v-combobox')
         .click()
-        .get('.v-list-item').should('have.length', 0)
+      cy.get('.v-list-item').should('have.length', 0)
         .get('.v-select--active-menu').should('have.length', 0)
 
-      cy
-        .get('.v-combobox input')
+      cy.get('.v-combobox input').as('input')
         .focus()
-        .type('{downarrow}', { force: true })
-        .get('.v-list-item').should('have.length', 0)
+      cy.get('@input').type('{downarrow}', { force: true })
+      cy.get('.v-list-item').should('have.length', 0)
         .get('.v-select--active-menu').should('have.length', 0)
     })
 
@@ -363,8 +354,8 @@ describe('VCombobox', () => {
       cy.mount(() => (
         <VForm readonly>
           <VCombobox
-            items={items}
-            modelValue={selectedItems}
+            items={ items }
+            modelValue={ selectedItems }
             readonly
           />
         </VForm>
@@ -372,14 +363,13 @@ describe('VCombobox', () => {
 
       cy.get('.v-combobox')
         .click()
-        .get('.v-list-item').should('have.length', 0)
+      cy.get('.v-list-item').should('have.length', 0)
         .get('.v-select--active-menu').should('have.length', 0)
 
-      cy
-        .get('.v-combobox input')
+      cy.get('.v-combobox input').as('input')
         .focus()
-        .type('{downarrow}', { force: true })
-        .get('.v-list-item').should('have.length', 0)
+      cy.get('@input').type('{downarrow}', { force: true })
+      cy.get('.v-list-item').should('have.length', 0)
         .get('.v-select--active-menu').should('have.length', 0)
     })
   })
@@ -399,7 +389,7 @@ describe('VCombobox', () => {
       ]
 
       cy.mount(() => (
-        <VCombobox items={items} modelValue={selectedItems} multiple hideSelected />
+        <VCombobox items={ items } modelValue={ selectedItems } multiple hideSelected />
       ))
 
       cy.get('.v-combobox input').click()

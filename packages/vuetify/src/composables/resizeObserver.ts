@@ -6,12 +6,12 @@ import type { DeepReadonly, Ref } from 'vue'
 import { IN_BROWSER } from '@/util/globals'
 
 interface ResizeState {
-  resizeRef: Ref<Element | undefined>
+  resizeRef: Ref<HTMLElement | undefined>
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
 }
 
 export function useResizeObserver (callback?: ResizeObserverCallback): ResizeState {
-  const resizeRef = ref<Element>()
+  const resizeRef = ref<HTMLElement>()
   const contentRect = ref<DOMRectReadOnly>()
 
   if (IN_BROWSER) {

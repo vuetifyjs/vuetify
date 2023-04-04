@@ -50,7 +50,7 @@ export function useScrollStrategies (
 
     scope = effectScope()
     await nextTick()
-    scope.run(() => {
+    scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
         props.scrollStrategy(data, props, scope!)
       } else {
@@ -147,7 +147,7 @@ function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProp
   })
 
   onScopeDispose(() => {
-    cancelIdleCallback(ric)
+    typeof cancelIdleCallback !== 'undefined' && cancelIdleCallback(ric)
     cancelAnimationFrame(raf)
   })
 }

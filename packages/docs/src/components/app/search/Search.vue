@@ -46,15 +46,11 @@
         />
       </v-card-title>
 
-      <v-text-field
+      <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
         class="flex-grow-0 mx-2"
-        density="comfortable"
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        single-line
         variant="solo"
       />
 
@@ -79,7 +75,7 @@
           v-else
           :search-client="searchClient"
           :search-function="searchFunction"
-          index-name="vuetifyjs-next"
+          index-name="vuetifyjs-v3"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"

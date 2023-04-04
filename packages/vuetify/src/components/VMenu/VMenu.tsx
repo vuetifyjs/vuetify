@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
 // Types
@@ -53,17 +53,17 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    let openChildren = 0
+    const openChildren = ref(0)
     provide(VMenuSymbol, {
       register () {
-        ++openChildren
+        ++openChildren.value
       },
       unregister () {
-        --openChildren
+        --openChildren.value
       },
       closeParents () {
         setTimeout(() => {
-          if (!openChildren) {
+          if (!openChildren.value) {
             isActive.value = false
             parent?.closeParents()
           }
@@ -88,7 +88,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay
@@ -115,7 +115,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
       )
     })
 
-    return forwardRefs({ id }, overlay)
+    return forwardRefs({ id, ΨopenChildren: openChildren }, overlay)
   },
 })
 

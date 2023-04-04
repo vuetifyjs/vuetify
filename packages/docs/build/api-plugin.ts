@@ -1,10 +1,13 @@
 // Imports
 import fs from 'fs'
 import path, { resolve } from 'path'
-import { startCase } from 'lodash'
+import { createRequire } from 'module'
+import { startCase } from 'lodash-es'
 import locales from '../src/i18n/locales.json'
 import pageToApi from '../src/data/page-to-api.json'
 import type { Plugin } from 'vite'
+
+const require = createRequire(import.meta.url)
 
 const localeList = locales
   .filter(item => item.enabled)
@@ -51,7 +54,7 @@ function genHeader (componentName: string) {
 
 const sanitize = (str: string) => str.replace(/\$/g, '')
 
-function loadMessages (locale: string) {
+async function loadMessages (locale: string) {
   const prefix = path.resolve('./src/i18n/messages/')
   const fallback = require(path.join(prefix, 'en.json'))
 
@@ -67,8 +70,8 @@ function loadMessages (locale: string) {
   }
 }
 
-function createMdFile (component: Record<string, any>, locale: string) {
-  const messages = loadMessages(locale)
+async function createMdFile (component: Record<string, any>, locale: string) {
+  const messages = await loadMessages(locale)
   let str = ''
 
   str += genHeader(component.displayName)
@@ -84,7 +87,7 @@ function createMdFile (component: Record<string, any>, locale: string) {
   return str
 }
 
-function writeFile (componentApi: Record<string, any>, locale: string) {
+async function writeFile (componentApi: Record<string, any>, locale: string) {
   if (!componentApi?.fileName) return
 
   const folder = `src/api/${locale}`
@@ -93,7 +96,7 @@ function writeFile (componentApi: Record<string, any>, locale: string) {
     fs.mkdirSync(resolve(folder), { recursive: true })
   }
 
-  fs.writeFileSync(resolve(`${folder}/${sanitize(componentApi.fileName)}.md`), createMdFile(componentApi, locale))
+  fs.writeFileSync(resolve(`${folder}/${sanitize(componentApi.fileName)}.md`), await createMdFile(componentApi, locale))
 }
 
 function getApiData () {
@@ -114,7 +117,7 @@ function getApiData () {
   return data
 }
 
-function generateFiles () {
+async function generateFiles () {
   // const api: Record<string, any>[] = getCompleteApi(localeList)
   const api = getApiData()
 
@@ -122,7 +125,7 @@ function generateFiles () {
     // const pages = {} as Record<string, any>
 
     for (const item of api) {
-      writeFile(item, locale)
+      await writeFile(item, locale)
 
       // pages[`/${locale}/api/${sanitize(kebabCase(item.name))}/`] = item.name
     }
@@ -143,10 +146,10 @@ function generateFiles () {
 export default function Api (): Plugin {
   return {
     name: 'vuetify:api',
-    configResolved () {
+    async configResolved () {
       // rimraf.sync(resolve('src/api'))
 
-      generateFiles()
+      await generateFiles()
     },
   }
 }

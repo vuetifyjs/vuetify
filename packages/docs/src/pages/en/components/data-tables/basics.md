@@ -14,11 +14,11 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
-<!-- <entry /> -->
-
 ## Usage
 
 There are three variants of the data table available depending on your requirements.
+
+<entry />
 
 ### v-data-table
 
@@ -36,7 +36,7 @@ You can find more information and examples [here](/components/data-tables/server
 
 ### v-data-table-virtual
 
-The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for display large data sets. It supports sorting and filtering, but not pagination.
+The virtual variant of the data table relies, like the standard variant, on all data being available locally. But unlike the standard variant it uses virtualization to only render a small portion of the rows. This makes it well suited for displaying large data sets. It supports sorting and filtering, but not pagination.
 
 You can find more information and examples [here](/components/data-tables/virtual-tables).
 
@@ -49,9 +49,8 @@ You can find more information and examples [here](/components/data-tables/virtua
 | [v-data-table](/api/v-data-table/) | Primary Component |
 | [v-data-table-server](/api/v-data-table-server/) | Specialized Data-table for displaying results from a server |
 | [v-data-table-virtual](/api/v-data-table-virtual/) | Data-table with built in row virtualization |
-| [v-data-table-header](/api/v-data-table-header/) | Functional Component used to display Data-table headers |
-| [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
-| [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
+| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
+| [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 <api-inline hide-links />
 

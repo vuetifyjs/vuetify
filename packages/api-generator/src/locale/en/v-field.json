@@ -6,7 +6,7 @@
     "disabled": "Removes the ability to click or target the input",
     "persistentClear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
     "singleLine": "Label does not move on focus/dirty",
-    "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
+    "id": "Sets the DOM id on the component",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend-inner** slot",
     "appendInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **append-inner** slot",
     "dirty": "Manually apply the dirty state styling"

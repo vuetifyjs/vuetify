@@ -13,21 +13,25 @@ related:
 
 Vuetify features an application layout system that allows you to easily create complex website designs.
 
+<entry />
+
 The system is built around an outside-in principle, where each application layout component reserves space for itself in one of four directions (left, right, up, down), leaving the available free space for any subsequent layout component(s) to occupy.
 
 The following components are compatible with the layout system:
 
-- [v-app-bar](/components/app-bars)
-- [v-system-bar](/components/system-bars)
-- [v-navigation-drawer](/components/navigation-drawers)
-- [v-footer](/components/footers)
-- [v-bottom-navigation](/components/bottom-navigation)
+| Component | Description |
+| - | - |
+| [v-app-bar](/components/app-bars/) | A container that is used navigation, branding, search, and actions |
+| [v-system-bar](/components/system-bars/) | A system bar replaces the native phone system bar |
+| [v-navigation-drawer](/components/navigation-drawers/) | A persistent or temporary container that holds site navigation links |
+| [v-footer](/components/footers/) | A generic component used to replace the default html footer |
+| [v-bottom-navigation](/components/bottom-navigation/) | A persistent or temporary container that holds navigation links and is typically used for smaller devices |
 
 The final part of the layout system is the **v-main** component. Inside this is where you place your page content. It will use the remaining free space on the page after all layout components have reserved their space.
 
 <alert type="info">
 
-  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100vh`. In your own application you would always use **v-app** for the root layout.
+  In the following examples, **v-app** has been replaced by **v-layout**. This is because **v-app** defaults to a minimum height of `100dvh`. In your own application you would always use **v-app** for the root layout.
 
 </alert>
 

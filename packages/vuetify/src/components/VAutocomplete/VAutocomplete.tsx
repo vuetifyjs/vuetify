@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, omit, useRender, wrapInArray } from '@/util'
-import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
@@ -107,7 +107,15 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = useProxiedModel(props, 'menu')
+    const vMenuRef = ref<VMenu>()
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        _menu.value = v
+      },
+    })
     const { items, transformIn, transformOut } = useItems(props)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
@@ -251,7 +259,7 @@ export const VAutocomplete = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
-      const [textFieldProps] = filterVTextFieldProps(props)
+      const [textFieldProps] = VTextField.filterProps(props)
 
       return (
         <VTextField
@@ -284,6 +292,7 @@ export const VAutocomplete = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
@@ -306,17 +315,16 @@ export const VAutocomplete = genericComponent<new <
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      )) }
+                      ))}
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map((item, index) => slots.item?.({
+                      { displayItems.value.map(item => slots.item?.({
                         item,
-                        index,
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem
-                          key={ index }
+                          key={ item.value }
                           { ...item.props }
                           onClick={ () => select(item) }
                         >
@@ -331,11 +339,11 @@ export const VAutocomplete = genericComponent<new <
                             },
                           }}
                         </VListItem>
-                      )) }
+                      ))}
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) }
+                  )}
                 </VMenu>
 
                 { selections.value.map((item, index) => {
@@ -355,35 +363,41 @@ export const VAutocomplete = genericComponent<new <
                   return (
                     <div key={ item.value } class="v-autocomplete__selection">
                       { hasChips ? (
-                        <VDefaultsProvider
-                          defaults={{
-                            VChip: {
-                              closable: props.closableChips,
-                              size: 'small',
-                              text: item.title,
-                            },
-                          }}
-                        >
-                          { slots.chip
-                            ? slots.chip({ item, index, props: slotProps })
-                            : (<VChip { ...slotProps } />)
-                          }
-                        </VDefaultsProvider>
+                        !slots.chip ? (
+                          <VChip
+                            key="chip"
+                            closable={ props.closableChips }
+                            size="small"
+                            text={ item.title }
+                            { ...slotProps }
+                          />
+                        ) : (
+                          <VDefaultsProvider
+                            key="chip-defaults"
+                            defaults={{
+                              VChip: {
+                                closable: props.closableChips,
+                                size: 'small',
+                                text: item.title,
+                              },
+                            }}
+                          >
+                            { slots.chip?.({ item, index, props: slotProps }) }
+                          </VDefaultsProvider>
+                        )
                       ) : (
-                        slots.selection
-                          ? slots.selection({ item, index })
-                          : (
-                            <span class="v-autocomplete__selection-text">
-                              { item.title }
-                              { props.multiple && (index < selections.value.length - 1) && (
-                                <span class="v-autocomplete__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
+                        slots.selection?.({ item, index }) ?? (
+                          <span class="v-autocomplete__selection-text">
+                            { item.title }
+                            { props.multiple && (index < selections.value.length - 1) && (
+                              <span class="v-autocomplete__selection-comma">,</span>
+                            )}
+                          </span>
+                        )
                       )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}

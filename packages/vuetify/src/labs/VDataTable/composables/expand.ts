@@ -32,7 +32,7 @@ type ExpandProps = {
   'onUpdate:expanded': ((value: any[]) => void) | undefined
 }
 
-export function createExpanded (props: ExpandProps) {
+export function provideExpanded (props: ExpandProps) {
   const expandOnClick = toRef(props, 'expandOnClick')
   const expanded = useProxiedModel(props, 'expanded', props.expanded, v => {
     return new Set(v)

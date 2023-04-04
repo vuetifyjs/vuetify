@@ -20,6 +20,7 @@
     "activeIcon": "mdi-speedometer",
     "items": [
       "installation",
+      "frequently-asked-questions",
       "wireframes",
       "browser-support",
       "upgrade-guide",
@@ -73,99 +74,90 @@
     "inactiveIcon": "mdi-view-dashboard-outline",
     "activeIcon": "mdi-view-dashboard",
     "items": [
-      "alerts",
-      "aspect-ratios",
-      "avatars",
-      "badges",
-      "banners",
-      "breadcrumbs",
+      "all",
+      { "divider": true },
+      { "subheader": "containment" },
       "buttons",
       "cards",
-      "carousels",
       "chips",
-      "color-pickers",
+      "dialogs",
       "dividers",
       "expansion-panels",
-      {
-        "title": "form-inputs-and-controls",
-        "activeIcon": "",
-        "inactiveIcon": "",
-        "items": [
-          "autocompletes",
-          "checkboxes",
-          "combobox",
-          "file-inputs",
-          "forms",
-          "inputs",
-          "radio-buttons",
-          "selects",
-          "sliders",
-          "range-sliders",
-          "switches",
-          "textareas",
-          "text-fields"
-        ]
-      },
+      "lists",
+      "menus",
+      "overlays",
+      "sheets",
+      "toolbars",
+      "tooltips",
+      { "divider": true },
+      { "subheader": "navigation" },
+      "app-bars",
+      "bottom-navigation",
+      "breadcrumbs",
+      "footers",
+      "navigation-drawers",
+      "paginations",
+      "system-bars",
+      "tabs",
+      { "divider": true },
+      { "subheader": "form-inputs-and-controls" },
+      "autocompletes",
+      "checkboxes",
+      "combobox",
+      "file-inputs",
+      "forms",
+      "inputs",
+      "radio-buttons",
+      "range-sliders",
+      "selects",
+      "sliders",
+      "switches",
+      "text-fields",
+      "textareas",
+      { "divider": true },
+      { "subheader": "data-and-display" },
+      "tables",
+      { "divider": true },
+      { "subheader": "grids" },
       "grids",
-      {
-        "title": "groups",
-        "items": [
-          "button-groups",
-          "chip-groups",
-          "item-groups",
-          "slide-groups",
-          "windows"
-        ]
-      },
+      { "divider": true },
+      { "subheader": "selection" },
+      "button-groups",
+      "carousels",
+      "chip-groups",
+      "item-groups",
+      "slide-groups",
+      "windows",
+      { "divider": true },
+      { "subheader": "feedback" },
+      "alerts",
+      "badges",
+      "banners",
       "hover",
+      "progress-circular",
+      "progress-linear",
+      "ratings",
+      "snackbars",
+      "timelines",
+      { "divider": true },
+      { "subheader": "images-and-icons" },
+      "aspect-ratios",
+      "avatars",
       "icons",
       "images",
-      {
-        "title": "layout",
-        "items": [
-          "app-bars",
-          "bottom-navigation",
-          "footers",
-          "navigation-drawers",
-          "system-bars"
-        ]
-      },
-      "lazy",
-      "lists",
-      "no-ssr",
-      {
-        "title": "overlays",
-        "items": [
-          "overlays",
-          "dialogs",
-          "menus",
-          "tooltips"
-        ]
-      },
-      "paginations",
       "parallax",
-      {
-        "title": "progress",
-        "items": [
-          "progress-circular",
-          "progress-linear"
-        ]
-      },
-      {
-        "title": "providers",
-        "items": [
-          "defaults-providers",
-          "locale-providers",
-          "theme-providers"
-        ]
-      },
-      "ratings",
-      "sheets",
-      "snackbars",
-      "tables",
-      "tabs",
-      "timelines",
-      "toolbars"
+      { "divider": true },
+      { "subheader": "pickers" },
+      "color-pickers",
+      { "divider": true },
+      { "subheader": "providers" },
+      "defaults-providers",
+      "locale-providers",
+      "theme-providers",
+      { "divider": true },
+      { "subheader": "miscellaneous" },
+      "lazy",
+      "no-ssr"
     ]
   },
   {
@@ -211,7 +203,14 @@
           "server-side-tables"
         ]
       },
-      "virtual-scroller"
+      {
+        "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "virtual-scroller",
+        "subfolder": "components"
+      }
     ]
   },
   {
@@ -220,7 +219,8 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "ui-kits"
+      "ui-kits",
+      "themes"
     ]
   },
   {
