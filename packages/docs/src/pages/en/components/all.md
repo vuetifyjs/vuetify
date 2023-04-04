@@ -307,6 +307,12 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
+<components-list-item name="Skeleton loader component" src="skeleton-loaders">
+
+  Displays a content placeholder, enhancing perceived performance during data-fetching & rendering
+
+</components-list-item>
+
 <components-list-item name="Server-side component"  src="data-tables/server-side-tables" placeholder>
 
   Server side data tables are intended to be used with a server side data source
