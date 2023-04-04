@@ -25,6 +25,7 @@
     "@vuelidate/validators": "^2.0.1",
     "algoliasearch": "^4.16.0",
     "cosmicjs": "^4.3.1",
+    "fflate": "^0.7.4",
     "isomorphic-fetch": "^3.0.0",
     "lodash-es": "^4.17.21",
     "pinia": "^2.0.33",

@@ -7032,6 +7032,11 @@ fd-slicer@~1.1.0:
   dependencies:
     pend "~1.2.0"
 
+fflate@^0.7.4:
+  version "0.7.4"
+  resolved "https://registry.yarnpkg.com/fflate/-/fflate-0.7.4.tgz#61587e5d958fdabb5a9368a302c25363f4f69f50"
+  integrity sha512-5u2V/CDW15QM1XbbgS+0DfPxVB+jUKhWEKuuFuHncbk3tEEqzmoXL+2KyOFuKGqOnmdIy0/davWF1CkuwtibCw==
+
 figgy-pudding@^3.4.1, figgy-pudding@^3.5.1:
   version "3.5.2"
   resolved "https://registry.yarnpkg.com/figgy-pudding/-/figgy-pudding-3.5.2.tgz#b4eee8148abb01dcf1d1ac34367d59e12fa61d6e"
@@ -7941,10 +7946,10 @@ homedir-polyfill@^1.0.1:
   dependencies:
     parse-passwd "^1.0.0"
 
-hookable@^5.5.1, "hookable@npm:strict-hookable@5.4.3":
-  version "5.4.3"
-  resolved "https://registry.yarnpkg.com/strict-hookable/-/strict-hookable-5.4.3.tgz#36130aba39465a29cf080000be471cc9267b321d"
-  integrity sha512-KfkDut346Cq3QtmDGAc3Ru3/tKbwQ1lwAaY3tM5tIWw4Fg1OBfBvgiNlwAJ38eM3BUgOeZHbe+Rvcdv+biwPTg==
+hookable@^5.5.1:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/hookable/-/hookable-5.5.3.tgz#6cfc358984a1ef991e2518cb9ed4a778bbd3215d"
+  integrity sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==
 
 hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   version "2.8.8"
