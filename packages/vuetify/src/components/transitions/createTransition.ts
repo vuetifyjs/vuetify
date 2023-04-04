@@ -73,7 +73,7 @@ export function createCssTransition (
         return h(tag as FunctionalComponent, {
           name: props.disabled ? '' : name,
           css: !props.disabled,
-          mode: props.mode,
+          ...(props.group ? undefined : { mode: props.mode }),
           ...(props.disabled ? {} : functions),
         }, slots.default)
       }
