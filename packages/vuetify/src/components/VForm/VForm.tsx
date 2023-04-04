@@ -7,9 +7,12 @@ import { ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
+import type { FormHTMLAttributes, GenericSlot } from '@/util'
 import type { SubmitEventPromise } from '@/composables/form'
 
-export const VForm = genericComponent()({
+export const VForm = genericComponent<new () => {
+  $props: FormHTMLAttributes & GenericSlot
+}>()({
   name: 'VForm',
 
   props: {

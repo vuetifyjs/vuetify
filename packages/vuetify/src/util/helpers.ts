@@ -3,6 +3,9 @@ import { camelize, capitalize, computed, Fragment, reactive, toRefs, watchEffect
 
 // Types
 import type {
+  ButtonHTMLAttributes as _ButtonHTMLAttributes,
+  FormHTMLAttributes as _FormHTMLAttributes,
+  InputHTMLAttributes as _InputHTMLAttributes,
   ComponentInternalInstance,
   ComponentPublicInstance,
   ComputedGetter,
@@ -569,3 +572,8 @@ export function callEvent (handler: EventProp | undefined, ...args: any[]) {
     handler(...args)
   }
 }
+
+export type Booleanish = boolean | 'true' | 'false'
+export type ButtonHTMLAttributes = Omit<_ButtonHTMLAttributes, '$children'>
+export type FormHTMLAttributes = Omit<_FormHTMLAttributes, '$children'>
+export type InputHTMLAttributes = Omit<_InputHTMLAttributes, '$children'>

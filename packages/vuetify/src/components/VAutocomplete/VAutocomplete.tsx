@@ -187,7 +187,7 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    function onInput (e: InputEvent) {
+    function onInput (e: Event) {
       search.value = (e.target as HTMLInputElement).value
     }
 

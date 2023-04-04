@@ -33,8 +33,8 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
+import type { ButtonHTMLAttributes, MakeSlots, SlotsToProps } from '@/util'
 
 export type VBtnSlots = MakeSlots<{
   default: []
@@ -81,7 +81,9 @@ export const makeVBtnProps = propsFactory({
   ...makeVariantProps({ variant: 'elevated' } as const),
 }, 'VBtn')
 
-export const VBtn = genericComponent<VBtnSlots>()({
+export const VBtn = genericComponent<new () => {
+  $props: ButtonHTMLAttributes & SlotsToProps<VBtnSlots>
+}>()({
   name: 'VBtn',
 
   directives: { Ripple },

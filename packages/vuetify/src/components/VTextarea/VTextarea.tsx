@@ -22,10 +22,13 @@ import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, us
 
 // Types
 import type { PropType } from 'vue'
+import type { InputHTMLAttributes, SlotsToProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
+export const VTextarea = genericComponent<new () => {
+  $props: InputHTMLAttributes & SlotsToProps<Omit<VInputSlots & VFieldSlots, 'default'>>
+}>()({
   name: 'VTextarea',
 
   directives: { Intersect },

@@ -29,6 +29,7 @@ import type {
   ExtractDefaultPropTypes,
   ExtractPropTypes,
   FunctionalComponent,
+  HTMLAttributes,
   MethodOptions,
   ObjectEmitsOptions,
   VNode,
@@ -97,7 +98,11 @@ export function defineComponent<
     I,
     II
   >
-): DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE> & FilterPropsOptions<PropsOptions>
+): (
+  & DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+  & FilterPropsOptions<PropsOptions>
+  & { $propsNames: keyof PropsOptions | keyof EmitsToProps<E> }
+)
 
 // Implementation
 export function defineComponent (options: ComponentOptions) {
@@ -207,11 +212,12 @@ type DefineComponentWithGenericProps<T extends (new () => {
     Mixin,
     Extends,
     E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
-    EE
+    EE,
+    PublicProps
   >
 >(
   options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
-) => Base & T & FilterPropsOptions<PropsOptions>
+) => Base & T & FilterPropsOptions<PropsOptions> & { $propsNames: keyof PropsOptions | keyof EmitsToProps<E> }
 
 type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<string, Slot>> = <
   PropsOptions extends Readonly<ComponentPropsOptions>,
@@ -238,7 +244,7 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
   PublicProps,
   ExtractPropTypes<PropsOptions> & SlotsToProps<Slots> & ({} extends E ? {} : EmitsToProps<E>),
   ExtractDefaultPropTypes<PropsOptions>
-> & FilterPropsOptions<PropsOptions>
+> & FilterPropsOptions<PropsOptions> & { $propsNames: keyof PropsOptions | keyof EmitsToProps<E> }
 
 // No argument - simple default slot
 export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
@@ -291,6 +297,7 @@ type PublicProps =
   & VNodeProps
   & AllowedComponentProps
   & ComponentCustomProps
+  & Omit<HTMLAttributes, '$children'>
 
 // Adds a filterProps method to the component options
 export interface FilterPropsOptions<PropsOptions extends Readonly<ComponentPropsOptions>, Props = ExtractPropTypes<PropsOptions>> {

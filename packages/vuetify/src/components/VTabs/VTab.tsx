@@ -2,7 +2,7 @@
 import './VTab.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
@@ -10,10 +10,10 @@ import { useTextColor } from '@/composables/color'
 // Utilities
 import { computed, ref } from 'vue'
 import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
-import { makeVBtnProps } from '@/components/VBtn/VBtn'
 
 // Types
 import type { PropType } from 'vue'
+import type { Booleanish } from '@/util'
 import { VTabsSymbol } from './shared'
 
 export const VTab = genericComponent()({
@@ -113,7 +113,7 @@ export const VTab = genericComponent()({
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
-          aria-selected={ String(isSelected.value) }
+          aria-selected={ String(isSelected.value) as Booleanish }
           active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
