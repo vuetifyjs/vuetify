@@ -2,10 +2,10 @@
 import './VCarousel.sass'
 
 // Components
+import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import { VWindow } from '@/components/VWindow'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -40,16 +40,16 @@ export const VCarousel = genericComponent<VWindowSlots>()({
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: (value: string | number) => +value > 0,
+      validator: (value: string | number) => Number(value) > 0,
     },
-    modelValue: null,
     progress: [Boolean, String],
-    showArrows: {
-      type: [Boolean, String],
-      default: true,
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
     verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+
+    ...makeVWindowProps({
+      continuous: true,
+      mandatory: 'force' as const,
+      showArrows: true,
+    }),
   },
 
   emits: {
