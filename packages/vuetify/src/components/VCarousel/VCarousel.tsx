@@ -82,78 +82,77 @@ export const VCarousel = genericComponent<VWindowSlots>()({
       window.requestAnimationFrame(startTimeout)
     }
 
-    useRender(() => {
-      const [windowProps] = VWindow.filterProps(props)
+    useRender(() => (
+      <VWindow
+        ref={ windowRef }
+        v-model={ model.value }
+        class={[
+          'v-carousel',
+          {
+            'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
+            'v-carousel--vertical-delimiters': props.verticalDelimiters,
+          },
+        ]}
+        style={{ height: convertToUnit(props.height) }}
+        continuous
+        mandatory="force"
+        showArrows={ props.showArrows }
+      >
+        {{
+          default: slots.default,
+          additional: ({ group }: { group: GroupProvide }) => (
+            <>
+              { !props.hideDelimiters && (
+                <div
+                  class="v-carousel__controls"
+                  style={{
+                    left: props.verticalDelimiters === 'left' && props.verticalDelimiters ? 0 : 'auto',
+                    right: props.verticalDelimiters === 'right' ? 0 : 'auto',
+                  }}
+                >
+                  { group.items.value.length > 0 && (
+                    <VDefaultsProvider
+                      defaults={{
+                        VBtn: {
+                          color: props.color,
+                          icon: props.delimiterIcon,
+                          size: 'x-small',
+                          variant: 'text',
+                        },
+                      }}
+                      scoped
+                    >
+                      { group.items.value.map((item, index) => {
+                        const props = {
+                          id: `carousel-item-${item.id}`,
+                          'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
+                          class: [group.isSelected(item.id) && 'v-btn--active'],
+                          onClick: () => group.select(item.id, true),
+                        }
 
-      return (
-        <VWindow
-          ref={ windowRef }
-          v-model={ model.value }
-          class={[
-            'v-carousel',
-            {
-              'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
-              'v-carousel--vertical-delimiters': props.verticalDelimiters,
-            },
-          ]}
-          style={{ height: convertToUnit(props.height) }}
-          { ...windowProps }
-        >
-          {{
-            default: slots.default,
-            additional: ({ group }: { group: GroupProvide }) => (
-              <>
-                { !props.hideDelimiters && (
-                  <div
-                    class="v-carousel__controls"
-                    style={{
-                      left: props.verticalDelimiters === 'left' && props.verticalDelimiters ? 0 : 'auto',
-                      right: props.verticalDelimiters === 'right' ? 0 : 'auto',
-                    }}
-                  >
-                    { group.items.value.length > 0 && (
-                      <VDefaultsProvider
-                        defaults={{
-                          VBtn: {
-                            color: props.color,
-                            icon: props.delimiterIcon,
-                            size: 'x-small',
-                            variant: 'text',
-                          },
-                        }}
-                        scoped
-                      >
-                        { group.items.value.map((item, index) => {
-                          const props = {
-                            'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
-                            class: [group.isSelected(item.id) && 'v-btn--active'],
-                            onClick: () => group.select(item.id, true),
-                          }
+                        return slots.item
+                          ? slots.item({ props, item })
+                          : (<VBtn { ...item } { ...props } />)
+                      })}
+                    </VDefaultsProvider>
+                  )}
+                </div>
+              )}
 
-                          return slots.item
-                            ? slots.item({ props, item })
-                            : (<VBtn { ...item } { ...props } />)
-                        })}
-                      </VDefaultsProvider>
-                    )}
-                  </div>
-                )}
-
-                { props.progress && (
-                  <VProgressLinear
-                    class="v-carousel__progress"
-                    color={ typeof props.progress === 'string' ? props.progress : undefined }
-                    modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
-                  />
-                )}
-              </>
-            ),
-            prev: slots.prev,
-            next: slots.next,
-          }}
-        </VWindow>
-      )
-    })
+              { props.progress && (
+                <VProgressLinear
+                  class="v-carousel__progress"
+                  color={ typeof props.progress === 'string' ? props.progress : undefined }
+                  modelValue={ (group.getItemIndex(model.value) + 1) / group.items.value.length * 100 }
+                />
+              )}
+            </>
+          ),
+          prev: slots.prev,
+          next: slots.next,
+        }}
+      </VWindow>
+    ))
 
     return {}
   },

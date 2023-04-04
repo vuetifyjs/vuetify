@@ -73,4 +73,5 @@ export default {
       item: 'Оцена {0} од {1}',
     },
   },
+  loading: 'Loading...',
 }
