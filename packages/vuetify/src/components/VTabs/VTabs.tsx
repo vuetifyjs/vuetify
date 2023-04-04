@@ -56,7 +56,7 @@ export const VTabs = genericComponent()({
     hideSlider: Boolean,
     sliderColor: String,
 
-    ...makeVSlideGroupProps(),
+    ...makeVSlideGroupProps({ mandatory: 'force' as const }),
     ...makeDensityProps(),
     ...makeTagProps(),
   },
