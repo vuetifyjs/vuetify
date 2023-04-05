@@ -118,8 +118,10 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
         style={{
           '--v-table-row-height': convertToUnit(itemHeight.value),
         }}
-        height={ props.height }
         fixedHeader={ props.fixedHeader }
+        fixedFooter={ props.fixedFooter }
+        height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
