@@ -1,8 +1,8 @@
 // Styles
-import '@mdi/font/css/materialdesignicons.css'
 import 'vuetify/styles'
 
 // Imports
+import { camelize, h } from 'vue'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
@@ -11,8 +11,8 @@ import * as labs from 'vuetify/labs/components'
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
 import { md } from 'vuetify/iconsets/md'
-import { mdi } from 'vuetify/iconsets/mdi'
-import { mdi as mdiSvg } from 'vuetify/iconsets/mdi-svg'
+import { mdi } from 'vuetify/iconsets/mdi-svg'
+import * as mdiSvg from '@mdi/js'
 
 // Types
 import type { VuetifyPlugin } from '@/types'
@@ -28,9 +28,14 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
       defaultSet: 'mdi',
       sets: {
         fa,
-        mdi,
         md,
-        mdiSvg,
+        mdiSvg: mdi,
+        mdi: {
+          component: props => {
+            const icon = mdiSvg[camelize(props.icon as string) as keyof typeof mdiSvg]
+            return h(components.VSvgIcon, { ...props, icon })
+          },
+        },
       },
     },
     theme: {
