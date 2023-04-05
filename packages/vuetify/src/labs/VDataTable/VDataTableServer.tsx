@@ -140,7 +140,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ flatItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}

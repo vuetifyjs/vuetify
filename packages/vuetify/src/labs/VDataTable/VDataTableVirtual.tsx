@@ -149,7 +149,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
                   <VDataTableRows
                     items={ visibleItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
 
