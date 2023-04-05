@@ -569,16 +569,3 @@ export function callEvent (handler: EventProp | undefined, ...args: any[]) {
     handler(...args)
   }
 }
-
-export const NullSymbol = Symbol.for('vuetify:null')
-
-export function transformToSymbolIfNull<T> (val: null | T): Symbol | T {
-  return val ?? NullSymbol
-}
-
-export function revertSymbolIfNull (val: Symbol): any {
-  if (val === NullSymbol) {
-    return null
-  }
-  return val
-}

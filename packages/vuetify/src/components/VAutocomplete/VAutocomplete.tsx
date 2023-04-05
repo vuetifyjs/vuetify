@@ -15,13 +15,13 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
-import { useItems } from '@/composables/items'
+import { revertSymbolIfNull, useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, revertSymbolIfNull, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -127,7 +127,7 @@ export const VAutocomplete = genericComponent<new <
         return transformIn(transformVal == null ? [transformVal] : wrapInArray(transformVal))
       },
       v => {
-        let transformed = transformOut(v) as any
+        let transformed = transformOut(v)
         transformed = transformed.map((t: any) => revertSymbolIfNull(t))
         return props.multiple ? transformed : (transformed[0] ?? null)
       }

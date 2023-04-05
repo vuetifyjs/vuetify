@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, pick, propsFactory, transformToSymbolIfNull } from '@/util'
+import { getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -102,4 +102,17 @@ export function useItems (props: ItemProps) {
   }
 
   return { items, transformIn, transformOut }
+}
+
+export const NullSymbol = Symbol.for('vuetify:null')
+
+export function transformToSymbolIfNull<T> (val: null | T): Symbol | T {
+  return val ?? NullSymbol
+}
+
+export function revertSymbolIfNull (val: Symbol): any {
+  if (val === NullSymbol) {
+    return null
+  }
+  return val
 }

@@ -14,7 +14,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeItemsProps, useItems } from '@/composables/items'
+import { makeItemsProps, revertSymbolIfNull, useItems } from '@/composables/items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
 import { useLocale } from '@/composables/locale'
@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, mergeProps, ref } from 'vue'
-import { deepEqual, genericComponent, omit, propsFactory, revertSymbolIfNull, useRender, wrapInArray } from '@/util'
+import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -130,7 +130,7 @@ export const VSelect = genericComponent<new <
         return transformIn(transformVal == null ? [transformVal] : wrapInArray(transformVal))
       },
       v => {
-        let transformed = transformOut(v) as any
+        let transformed = transformOut(v)
         transformed = transformed.map((t: any) => revertSymbolIfNull(t))
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
