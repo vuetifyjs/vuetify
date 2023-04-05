@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { computed, inject, mergeProps, onUnmounted, provide, ref, watch } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
@@ -59,7 +59,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         ++openChildren.value
       },
       unregister () {
-        --openChildren.value
+        openChildren.value = Math.max(0, openChildren.value - 1)
       },
       closeParents () {
         setTimeout(() => {
@@ -69,6 +69,10 @@ export const VMenu = genericComponent<OverlaySlots>()({
           }
         }, 40)
       },
+    })
+
+    onUnmounted(() => {
+      parent?.unregister()
     })
 
     watch(isActive, val => {
