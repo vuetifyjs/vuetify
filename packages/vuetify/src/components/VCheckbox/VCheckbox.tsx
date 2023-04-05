@@ -24,6 +24,8 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
   inheritAttrs: false,
 
   props: {
+    hint: String,
+    persistentHint: Boolean,
     ...makeVInputProps(),
     ...omit(makeVCheckboxBtnProps(), ['inline']),
   },
@@ -38,6 +40,10 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
     const uid = getUid()
     const id = computed(() => props.id || `checkbox-${uid}`)
 
+    const messages = computed(() => {
+      return props.messages.length ? props.messages : isFocused.value || props.persistentHint ? props.hint : ''
+    })
+
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
@@ -50,6 +56,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
+          messages={ messages.value }
         >
           {{
             ...slots,
