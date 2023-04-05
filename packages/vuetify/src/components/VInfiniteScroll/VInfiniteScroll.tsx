@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -20,7 +20,23 @@ import type { PropType } from 'vue'
 export type InfiniteScrollSide = 'start' | 'end' | 'both'
 export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
-const VInfiniteScrollIntersect = defineComponent({
+type InfiniteScrollSlot = {
+  side: InfiniteScrollSide
+  props: {
+    onClick: () => (side: InfiniteScrollSide) => void
+    color: string | undefined
+  }
+}
+
+type VInfiniteScrollSlots = {
+  default: [InfiniteScrollSlot]
+  loading: [InfiniteScrollSlot]
+  error: [InfiniteScrollSlot]
+  empty: [InfiniteScrollSlot]
+  'load-more': [InfiniteScrollSlot]
+}
+
+export const VInfiniteScrollIntersect = genericComponent()({
   name: 'VInfiniteScrollIntersect',
 
   props: {
@@ -50,10 +66,12 @@ const VInfiniteScrollIntersect = defineComponent({
     useRender(() => (
       <div class="v-infinite-scroll-intersect" ref={ intersectionRef }>&nbsp;</div>
     ))
+
+    return {}
   },
 })
 
-export const VInfiniteScroll = defineComponent({
+export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
   name: 'VInfiniteScroll',
 
   props: {
