@@ -103,12 +103,79 @@ describe('VDataTable', () => {
       </Application>
     ))
 
-    cy
-      .get('.v-btn[aria-label="Next page"]')
+    cy.get('.v-btn[aria-label="Next page"]')
       .click()
-      .setProps({ search: 'a' })
-      .vue()
-      .emitted(VDataTable, 'update:page')
+    cy.setProps({ search: 'a' })
+    cy.emitted(VDataTable, 'update:page')
       .should('deep.equal', [[2], [1]])
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16999
+  it('should search in nested keys', () => {
+    const nestedItems = [
+      {
+        foo: {
+          bar: 'hello',
+        },
+      },
+      {
+        foo: {
+          bar: 'world',
+        },
+      },
+    ]
+
+    const headers = [
+      {
+        key: 'foo.bar',
+        title: 'Column',
+      },
+    ]
+
+    cy.mount(props => (
+      <Application>
+        <VDataTable items={ nestedItems } headers={ headers } { ...props } />
+      </Application>
+    ))
+
+    cy.get('tbody tr')
+      .should('have.length', 2)
+      .invoke('text')
+      .should('equal', 'helloworld')
+      .setProps({
+        search: 'hello',
+      })
+      .get('tbody tr')
+      .should('have.length', 1)
+      .invoke('text')
+      .should('equal', 'hello')
+  })
+
+  it('should not emit click:row event when clicking select or expand', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
+      </Application>
+    ))
+
+    cy.get('tbody tr')
+      .eq(2)
+      .find('.v-checkbox-btn')
+      .click()
+
+    cy.get('tbody tr')
+      .eq(3)
+      .find('.v-btn')
+      .click()
+
+    cy.emitted(VDataTable, 'click:row')
+      .should('not.exist')
+
+    cy.get('tbody tr')
+      .eq(1)
+      .click()
+
+    cy.emitted(VDataTable, 'click:row')
+      .should('have.length', 1)
   })
 })

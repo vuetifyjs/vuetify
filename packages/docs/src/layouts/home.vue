@@ -25,6 +25,15 @@
   import AppBar from '@/components/app/bar/Bar.vue'
   import AppSettingsDrawer from '@/components/app/settings/Drawer.vue'
   import HomeFooter from '@/components/home/Footer.vue'
+
+  import { onMounted } from 'vue'
+  import { useShopifyStore } from '@/store/shopify'
+
+  const store = useShopifyStore()
+
+  onMounted(() => {
+    store.fetch()
+  })
 </script>
 
 <style lang="sass">

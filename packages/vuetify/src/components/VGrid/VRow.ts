@@ -2,16 +2,16 @@
 import './VGrid.sass'
 
 // Composables
-import { makeTagProps } from '@/composables/tag'
 import { breakpoints } from '@/composables/display'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
-import type { Prop, PropType } from 'vue'
 import type { Breakpoint } from '@/composables/display'
+import type { Prop, PropType } from 'vue'
 
 const ALIGNMENT = ['start', 'end', 'center'] as const
 

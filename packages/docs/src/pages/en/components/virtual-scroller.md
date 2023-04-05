@@ -14,6 +14,8 @@ related:
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically and is a good alternative to pagination.
 
+![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
+
 ----
 
 ## Usage
@@ -24,22 +26,24 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 
 <entry />
 
-## Anatomy
-
-The `v-virtual-scroll` component contains only a default slot with no styling options.
-
-| Element / Area | Description |
-| - | - |
-| 1. Container | The rendered content area from the provided [items](/api/v-virtual-scroll/#props-items) prop |
-
 ## API
 
 | Component | Description |
 | - | - |
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
-| [v-virtual-scroll-item](/api/v-virtual-scroll-item) | Wraps content and communicates height to parent |
+| [v-virtual-scroll-item](/api/v-virtual-scroll-item/) | Wraps content and communicates height to parent |
 
 <api-inline hide-links />
+
+## Anatomy
+
+The `v-virtual-scroll` component contains only a default slot with no styling options. It is typically used with large collections of [v-list-item](/components/lists/)s.
+
+![Virtual scroll Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The rendered content area from the provided **items** prop |
 
 ## Guide
 

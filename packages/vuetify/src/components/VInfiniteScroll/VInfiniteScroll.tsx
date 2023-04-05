@@ -231,7 +231,7 @@ export const VInfiniteScroll = defineComponent({
               rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
-          ) }
+          )}
 
           { slots.default?.() }
 
@@ -243,7 +243,7 @@ export const VInfiniteScroll = defineComponent({
               rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
-          ) }
+          )}
 
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }

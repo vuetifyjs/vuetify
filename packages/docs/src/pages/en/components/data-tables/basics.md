@@ -49,9 +49,8 @@ You can find more information and examples [here](/components/data-tables/virtua
 | [v-data-table](/api/v-data-table/) | Primary Component |
 | [v-data-table-server](/api/v-data-table-server/) | Specialized Data-table for displaying results from a server |
 | [v-data-table-virtual](/api/v-data-table-virtual/) | Data-table with built in row virtualization |
-| [v-data-table-header](/api/v-data-table-header/) | Functional Component used to display Data-table headers |
-| [v-data-footer](/api/v-data-footer/) | Functional Component used to display Data-table headers |
-| [v-simple-checkbox](/api/v-simple-checkbox/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
+| [v-data-table-footer](/api/v-data-table-footer/) | Functional Component used to display Data-table headers |
+| [v-checkbox-btn](/api/v-checkbox-btn/) | Reusable lightweight [v-checkbox](/components/checkboxes) |
 
 <api-inline hide-links />
 

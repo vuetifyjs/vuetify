@@ -203,7 +203,14 @@
           "server-side-tables"
         ]
       },
-      "virtual-scroller"
+      {
+        "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
+        "title": "virtual-scroller",
+        "subfolder": "components"
+      }
     ]
   },
   {
@@ -212,7 +219,8 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "ui-kits"
+      "ui-kits",
+      "themes"
     ]
   },
   {

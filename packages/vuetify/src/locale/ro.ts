@@ -77,4 +77,5 @@ export default {
     loadMore: 'Load more',
     empty: 'No more',
   },
+  loading: 'Loading...',
 }
