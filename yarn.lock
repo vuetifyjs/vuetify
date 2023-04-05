@@ -7946,10 +7946,10 @@ homedir-polyfill@^1.0.1:
   dependencies:
     parse-passwd "^1.0.0"
 
-hookable@^5.5.1:
-  version "5.5.3"
-  resolved "https://registry.yarnpkg.com/hookable/-/hookable-5.5.3.tgz#6cfc358984a1ef991e2518cb9ed4a778bbd3215d"
-  integrity sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==
+hookable@^5.5.1, "hookable@npm:strict-hookable@5.4.3":
+  version "5.4.3"
+  resolved "https://registry.yarnpkg.com/strict-hookable/-/strict-hookable-5.4.3.tgz#36130aba39465a29cf080000be471cc9267b321d"
+  integrity sha512-KfkDut346Cq3QtmDGAc3Ru3/tKbwQ1lwAaY3tM5tIWw4Fg1OBfBvgiNlwAJ38eM3BUgOeZHbe+Rvcdv+biwPTg==
 
 hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   version "2.8.8"
