@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, pick, propsFactory } from '@/util'
+import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -93,7 +93,7 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   function transformIn (value: any[]): InternalItem[] {
-    return value.map(item => transformItem(props, item))
+    return items.value.filter(item => value.includes(item.value) || value.some(v => deepEqual(v, item.value)))
   }
 
   function transformOut (value: InternalItem[]) {

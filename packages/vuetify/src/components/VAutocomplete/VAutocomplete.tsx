@@ -122,12 +122,7 @@ export const VAutocomplete = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => {
-        const transformValue =
-          typeof props.itemTitle === 'function' && !props.returnObject
-            ? items.value.find(item => item.value === v)?.raw : v
-        return transformIn(wrapInArray(transformValue))
-      },
+      v => transformIn(wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
