@@ -21,6 +21,7 @@
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.2.0",
     "@vuelidate/core": "^2.0.1",
     "@vuelidate/validators": "^2.0.1",
     "algoliasearch": "^4.16.0",
