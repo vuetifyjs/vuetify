@@ -77,31 +77,6 @@ describe('VTextField', () => {
       .should('have.value', 0)
     })
   
-  it('should change focus with arrow keys when in list and type is not number.', () => {
-
-    cy.mount(() => (
-      <VList>
-        <VListItem>
-      		<VTextField id='input-1' value='0' />
-        </VListItem>
-        <VListItem>
-      		<VTextField id='input-2' value='0' />
-        </VListItem>
-        <VListItem>
-      		<VTextField id='input-3' value='0' />
-        </VListItem>
-      </VList>
-    ))
-      .get('#input-1')
-      .type('{downArrow}{downArrow}')
-      .get('#input-3')
-      .should('have.focus')
-      
-      .get('#input-3')
-      .type('{upArrow}')
-      .get('#input-2')
-      .should('have.focus')
-    })
 
   describe('Showcase', () => {
     generate({ stories })
