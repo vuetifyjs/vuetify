@@ -30,7 +30,14 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-container](/api/v-container/) | The container component. |
+| [v-row](/api/v-row/) | Sub-component used to create rows. |
+| [v-col](/api/v-col/) | Sub-component used to create columns. |
+| [v-spacer](/api/v-spacer/) | A component often used in grid scenarios. |
+
+<api-inline hide-links />
 
 ## Sub-components
 

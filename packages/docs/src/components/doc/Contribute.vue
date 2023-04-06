@@ -23,8 +23,8 @@
 
   const href = computed(() => {
     const branch = getBranch()
-    const [,, category, page] = route.path.split('/')
+    const link = route.path.split('/').slice(2).filter(v => v).join('/')
 
-    return `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/pages/en/${category}/${page}.md`
+    return `https://github.com/vuetifyjs/vuetify/tree/${branch}/packages/docs/src/pages/en/${link}.md`
   })
 </script>

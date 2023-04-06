@@ -70,7 +70,7 @@ export const VColorPickerPreview = defineComponent({
               trackFillColor="white"
               hideDetails
             />
-          ) }
+          )}
         </div>
       </div>
     ))

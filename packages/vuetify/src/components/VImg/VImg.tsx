@@ -207,7 +207,7 @@ export const VImg = genericComponent<VImgSlots>()({
           class={['v-img__img', containClasses.value]}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
-          alt=""
+          alt={ props.alt }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -237,7 +237,7 @@ export const VImg = genericComponent<VImgSlots>()({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
-            alt=""
+            alt={ props.alt }
           />
         )}
       </MaybeTransition>

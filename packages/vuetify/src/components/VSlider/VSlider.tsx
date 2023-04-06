@@ -106,7 +106,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 { slots.label?.(slotProps) ?? props.label
                   ? (
                     <VLabel
-                      id={ slotProps.id }
+                      id={ slotProps.id.value }
                       class="v-slider__label"
                       text={ props.label }
                     />

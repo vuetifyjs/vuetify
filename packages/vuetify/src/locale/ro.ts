@@ -73,4 +73,5 @@ export default {
       item: 'Rating de {0} din {1}',
     },
   },
+  loading: 'Loading...',
 }

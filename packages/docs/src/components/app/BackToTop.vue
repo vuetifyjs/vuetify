@@ -1,7 +1,7 @@
 <template>
   <v-layout-item
     v-scroll="onScroll"
-    class="text-end"
+    class="text-end pointer-events-none"
     model-value
     position="bottom"
     size="88"
@@ -10,7 +10,7 @@
       <v-fab-transition>
         <v-btn
           v-show="model"
-          class="mt-auto"
+          class="mt-auto pointer-events-initial"
           color="primary"
           elevation="8"
           icon="mdi-chevron-up"
@@ -38,3 +38,13 @@
     })
   }
 </script>
+
+<style scoped>
+  .pointer-events-none {
+    pointer-events: none;
+  }
+
+  .pointer-events-initial {
+    pointer-events: initial;
+  }
+</style>

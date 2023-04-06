@@ -18,6 +18,8 @@ Experiment and use in-development components before they're released.
 
 ----
 
+<entry />
+
 ## What is Labs? { id=what-is-labs }
 
 Labs is a new way for developers to use unfinished components in an alpha state.
@@ -92,8 +94,6 @@ The following is a list of available and up-and-coming components for use with L
 | [v-data-table-row](/api/v-data-table-row/) | Data table reusable row component |
 | [v-data-table-rows](/api/v-data-table-rows/) | Data table reusable rows component |
 | [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component |
-| **Virtual scroll** | [Usage](/components/virtual-scrollers/) |
-| [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
 
 ### Up Next
 

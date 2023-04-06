@@ -76,7 +76,7 @@ describe('VList', () => {
 
     const wrapper = mountFunction((
       <CenteredGrid width="200px">
-        <VList items={items} opened={['group']} />
+        <VList items={ items } opened={['group']} />
       </CenteredGrid>
     ))
 
@@ -107,7 +107,7 @@ describe('VList', () => {
       <CenteredGrid width="400px">
         <VList items={ items } opened={['group']}>
           {{
-            item: item => <VListItem {...item} prependIcon="mdi-home" />,
+            item: item => <VListItem { ...item } prependIcon="mdi-home" />,
           }}
         </VList>
       </CenteredGrid>

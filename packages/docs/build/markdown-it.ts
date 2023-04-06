@@ -67,6 +67,7 @@ const validate = ajv.compile({
       items: { type: 'string' },
     },
     disabled: { type: 'boolean' },
+    emphasized: { type: 'boolean' },
   },
 })
 

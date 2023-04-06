@@ -12,7 +12,13 @@ related:
 
 # Sponsor Vuetify development
 
-Vuetify is an [MIT licensed](https://opensource.org/licenses/MIT) open-source project that's completely free to use. It is actively maintained by [John](https://github.com/johnleider) and [Heather](https://github.com/heatherleider) Leider as a full-time job. In addition, a Core team of open-source contributors help maintain and guide the future of the framework. The time and dedication it takes to maintain the core framework and ecosystem packages is substantial. You can support Vuetify’s open-source project by becoming a backer through one of the following methods:
+Vuetify is an [MIT licensed](https://opensource.org/licenses/MIT) open-source project that's completely free to use.
+
+<entry />
+
+## Precursor
+
+Vuetify is actively maintained by [John](https://github.com/johnleider) and [Heather](https://github.com/heatherleider) Leider as a full-time job. In addition, a Core team of open-source contributors help maintain and guide the future of the framework. The time and dedication it takes to maintain the core framework and ecosystem packages is substantial. You can support Vuetify’s open-source project by becoming a backer through one of the following methods:
 
 ## One-time donations
 
