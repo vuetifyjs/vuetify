@@ -225,7 +225,7 @@
   },
   {
     "title": "about",
-    "inactiveIcon": "$vuetify",
+    "inactiveIcon": "$vuetify-outline",
     "activeIcon": "$vuetify",
     "items": [
       "security-disclosure",
