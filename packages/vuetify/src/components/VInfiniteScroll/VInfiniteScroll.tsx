@@ -76,10 +76,6 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
 
   props: {
     color: String,
-    load: {
-      type: Function as PropType<(side: InfiniteScrollSide) => Promise<InfiniteScrollStatus>>,
-      required: true,
-    },
     direction: {
       type: String as PropType<'vertical' | 'horizontal'>,
       default: 'vertical',
@@ -108,7 +104,11 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     ...makeDimensionProps(),
   },
 
-  setup (props, { slots }) {
+  emits: {
+    load: (options: { side: InfiniteScrollSide, done: (status: InfiniteScrollStatus) => void }) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const rootEl = ref<HTMLDivElement>()
     const startStatus = ref<InfiniteScrollStatus>('ok')
     const endStatus = ref<InfiniteScrollStatus>('ok')
@@ -165,25 +165,24 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     }
 
     let previousScrollSize = 0
-    async function handleIntersect (side: InfiniteScrollSide) {
+    function handleIntersect (side: InfiniteScrollSide) {
       const status = getStatus(side)
       if (!rootEl.value || status === 'loading') return
 
-      try {
-        previousScrollSize = getScrollSize()
-        setStatus(side, 'loading')
-        const status = await props.load(side)
+      previousScrollSize = getScrollSize()
+      setStatus(side, 'loading')
+
+      function done (status: InfiniteScrollStatus) {
         setStatus(side, status)
-      } catch (err) {
-        setStatus(side, 'error')
-        throw err
-      } finally {
+
         nextTick(() => {
-          if (side === 'start') {
+          if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
           }
         })
       }
+
+      emit('load', { side, done })
     }
 
     const { t } = useLocale()
