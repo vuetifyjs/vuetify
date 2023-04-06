@@ -204,6 +204,10 @@
         ]
       },
       {
+        "title": "skeleton-loaders",
+        "subfolder": "components"
+      },
+      {
         "title": "virtual-scroller",
         "subfolder": "components"
       }
@@ -221,8 +225,8 @@
   },
   {
     "title": "about",
-    "inactiveIcon": "mdi-vuetify",
-    "activeIcon": "mdi-vuetify",
+    "inactiveIcon": "$vuetify-outline",
+    "activeIcon": "$vuetify",
     "items": [
       "security-disclosure",
       "code-of-conduct"

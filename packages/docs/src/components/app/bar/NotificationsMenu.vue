@@ -55,11 +55,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <svg width="96" height="84" viewBox="0 0 495 436" fill="none" xmlns="http://www.w3.org/2000/svg">
-          <!-- eslint-disable-next-line max-len -->
-          <path d="M129.795 228.936L123.336 217.498L0 0H246.617H259.591C259.591 0 259.591 0 259.591 0L129.796 228.936C129.796 228.936 129.796 228.936 129.796 228.935L129.795 228.936ZM306.937 0L153.497 270.686L246.617 434.996L369.954 217.498L493.234 0H306.937H306.937Z" fill="#D7D7D7" />
-        </svg>
-
+        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
       </div>
 
       <template v-else>

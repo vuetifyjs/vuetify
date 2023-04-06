@@ -56,7 +56,7 @@ export const useAppStore = defineStore({
         color: 'green',
       },
       about: {
-        icon: 'mdi-vuetify',
+        icon: '$vuetify',
         color: 'primary',
       },
       resources: {

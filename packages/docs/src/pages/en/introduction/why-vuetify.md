@@ -44,7 +44,7 @@ Every component in Vuetify is handcrafted under the guise of Google's [Material 
 Vuetify has a large ecosystem of supporting tools that enrich the development experience that range from project creation to design UI kits.
 
 * 🎨 [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
+* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin)
 * 🏗️ [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
 * ⌨️ Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
 * 🖼️ [Wireframe examples](/getting-started/wireframes/)
