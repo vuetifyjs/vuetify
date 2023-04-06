@@ -152,9 +152,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       }
     }
     function onKeydown (e: KeyboardEvent) {
-      if (props.type.toLowerCase() === 'number') {
-        e.stopPropagation()
-      }
+      e.stopPropagation()
     }
 
     useRender(() => {
