@@ -29,6 +29,8 @@ type InfiniteScrollSlot = {
 }
 
 type VInfiniteScrollSlots = {
+  start: []
+  end: []
   default: [InfiniteScrollSlot]
   loading: [InfiniteScrollSlot]
   error: [InfiniteScrollSlot]
@@ -76,10 +78,6 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
 
   props: {
     color: String,
-    load: {
-      type: Function as PropType<(side: InfiniteScrollSide) => Promise<InfiniteScrollStatus>>,
-      required: true,
-    },
     direction: {
       type: String as PropType<'vertical' | 'horizontal'>,
       default: 'vertical',
@@ -104,14 +102,17 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       type: String,
       default: '$vuetify.infiniteScroll.empty',
     },
+    items: Array,
 
     ...makeDimensionProps(),
   },
 
-  setup (props, { slots }) {
+  emits: {
+    load: (options: { side: InfiniteScrollSide }) => true,
+  },
+
+  setup (props, { slots, emit }) {
     const rootEl = ref<HTMLDivElement>()
-    const startStatus = ref<InfiniteScrollStatus>('ok')
-    const endStatus = ref<InfiniteScrollStatus>('ok')
     const margin = computed(() => convertToUnit(props.margin))
 
     function setScrollAmount (amount: number) {
@@ -152,70 +153,23 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
       }
     })
 
-    function setStatus (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
-      if (side === 'start') {
-        startStatus.value = status
-      } else if (side === 'end') {
-        endStatus.value = status
-      }
-    }
-
-    function getStatus (side: string) {
-      return side === 'start' ? startStatus.value : endStatus.value
-    }
-
     let previousScrollSize = 0
-    async function handleIntersect (side: InfiniteScrollSide) {
-      const status = getStatus(side)
-      if (!rootEl.value || status === 'loading') return
+    let previousLoadSide: string | null = null
 
-      try {
-        previousScrollSize = getScrollSize()
-        setStatus(side, 'loading')
-        const status = await props.load(side)
-        setStatus(side, status)
-      } catch (err) {
-        setStatus(side, 'error')
-        throw err
-      } finally {
-        nextTick(() => {
-          if (side === 'start') {
-            setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
-          }
-        })
-      }
+    function handleIntersect (side: InfiniteScrollSide) {
+      previousScrollSize = getScrollSize()
+      previousLoadSide = side
+
+      emit('load', { side })
     }
 
-    const { t } = useLocale()
-
-    function renderSide (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
-      if (props.side !== side && props.side !== 'both') return
-
-      const onClick = () => handleIntersect(side)
-      const slotProps = { side, props: { onClick, color: props.color } }
-
-      if (status === 'error') return slots.error?.(slotProps)
-
-      if (status === 'empty') return slots.empty?.(slotProps) ?? <div>{ t(props.emptyText) }</div>
-
-      if (props.mode === 'manual') {
-        if (status === 'loading') {
-          return slots.loading?.(slotProps) ?? (
-            <VProgressCircular indeterminate color={ props.color } />
-          )
+    watch(() => props.items, () => {
+      nextTick(() => {
+        if (previousLoadSide === 'start') {
+          setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
         }
-
-        return slots['load-more']?.(slotProps) ?? (
-          <VBtn variant="outlined" color={ props.color } onClick={ onClick }>
-            { t(props.loadMoreText) }
-          </VBtn>
-        )
-      }
-
-      return slots.loading?.(slotProps) ?? (
-        <VProgressCircular indeterminate color={ props.color } />
-      )
-    }
+      })
+    })
 
     const { dimensionStyles } = useDimension(props)
 
@@ -238,7 +192,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           style={ dimensionStyles.value }
         >
           <div class="v-infinite-scroll__side">
-            { renderSide('start', startStatus.value) }
+            { slots.start?.() }
           </div>
 
           { rootEl.value && hasStartIntersect && intersectMode && (
@@ -251,7 +205,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             />
           )}
 
-          { slots.default?.() }
+          { slots.default?.({ items: props.items }) }
 
           { rootEl.value && hasEndIntersect && intersectMode && (
             <VInfiniteScrollIntersect
@@ -264,7 +218,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           )}
 
           <div class="v-infinite-scroll__side">
-            { renderSide('end', endStatus.value) }
+            { slots.end?.() }
           </div>
         </div>
       )
