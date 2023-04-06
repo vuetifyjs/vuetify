@@ -1,6 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VTextField } from '../VTextField'
+import { VList, VListItem } from '../../VList'
 import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
 
@@ -47,6 +48,60 @@ describe('VTextField', () => {
     ))
       .get('.v-input__details').should('be.visible')
   })
+  
+  it('should increment and decrement with arrow keys when in list and type is number.', () => {
+
+    cy.mount(() => (
+      <VList>
+        <VListItem>
+      		<VTextField type='number' id='input-1' value='0' />
+        </VListItem>
+        <VListItem>
+      		<VTextField type='number' id='input-2' value='0' />
+        </VListItem>
+      </VList>
+    ))
+      .get('#input-1')
+      .type('{upArrow}{upArrow}{upArrow}')
+      .should('have.value', 3)
+
+      .get('#input-2')
+      .should('have.value', 0)
+      
+
+      .get('#input-1')
+      .type('{downArrow}{downArrow}')
+      .should('have.value', 1)
+      
+      .get('#input-2')
+      .should('have.value', 0)
+    })
+  
+  it('should change focus with arrow keys when in list and type is not number.', () => {
+
+    cy.mount(() => (
+      <VList>
+        <VListItem>
+      		<VTextField id='input-1' value='0' />
+        </VListItem>
+        <VListItem>
+      		<VTextField id='input-2' value='0' />
+        </VListItem>
+        <VListItem>
+      		<VTextField id='input-3' value='0' />
+        </VListItem>
+      </VList>
+    ))
+      .get('#input-1')
+      .type('{downArrow}{downArrow}')
+      .get('#input-3')
+      .should('have.focus')
+      
+      .get('#input-3')
+      .type('{upArrow}')
+      .get('#input-2')
+      .should('have.focus')
+    })
 
   describe('Showcase', () => {
     generate({ stories })
