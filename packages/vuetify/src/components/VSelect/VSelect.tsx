@@ -55,12 +55,6 @@ export const makeSelectProps = propsFactory({
   },
   openOnClear: Boolean,
   readonly: Boolean,
-
-  ...makeItemsProps(),
-  itemType: {
-    type: String,
-    default: 'type',
-  },
 }, 'select')
 
 type Primitive = string | number | boolean | symbol
@@ -98,6 +92,9 @@ export const VSelect = genericComponent<new <
 
   props: {
     ...makeSelectProps(),
+    ...makeItemsProps({
+      itemProps: true,
+    }),
     ...makeTransitionProps({ transition: { component: VDialogTransition } }),
   },
 

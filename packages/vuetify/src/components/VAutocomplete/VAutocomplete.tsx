@@ -12,11 +12,12 @@ import { VTextField } from '@/components/VTextField'
 import { VListChildren } from '../VList/VListChildren'
 
 // Composables
-import { highlightResult, makeFilterProps, useFilter } from '@/composables/filter'
+import { highlightResult, makeFilterProps } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { useItems } from '@/composables/items'
+import { makeItemsProps, useItems } from '@/composables/items'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useFilterNested } from '@/composables/filterNested'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
@@ -67,6 +68,7 @@ export const VAutocomplete = genericComponent<new <
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
+    ...makeItemsProps({ itemProps: true }),
     ...makeSelectProps(),
     ...makeTransitionProps({ transition: false }),
   },
@@ -94,7 +96,7 @@ export const VAutocomplete = genericComponent<new <
         return props.multiple ? transformed : (transformed[0] ?? null)
       }
     )
-    const { filteredItems, filteredMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
+    const { filteredItems, filteredMatches } = useFilterNested(props, items, computed(() => isPristine.value ? undefined : search.value))
     const selections = computed(() => {
       return model.value.map(v => {
         return items.value.find(item => item.value === v.value) || v

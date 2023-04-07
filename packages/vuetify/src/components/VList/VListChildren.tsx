@@ -16,6 +16,7 @@ import type { MakeSlots } from '@/util'
 import type { ListGroupActivatorSlot } from './VListGroup'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { InternalListItem } from './VList'
+import { VListSubheader } from './VListSubheader'
 
 export type ListItemSlot<T> = {
   item: InternalListItem<T>
@@ -56,13 +57,7 @@ export const VListChildren = genericComponent<new <T>() => {
       }
 
       return props.items?.map((internalItem, index) => {
-        const { children, props: itemProps, type, raw: item } = internalItem
-
-        if (type === 'divider') {
-          return slots.divider?.({ props: itemProps }) ?? (
-            <VDivider { ...itemProps } />
-          )
-        }
+        const { children, props: itemProps, raw: item } = internalItem
 
         const slotsWithItem = {
           subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
@@ -74,7 +69,13 @@ export const VListChildren = genericComponent<new <T>() => {
 
         const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
 
-        return children ? (
+        return children && itemProps.subheader ? (
+          <div>
+            <VListSubheader { ...itemProps }></VListSubheader>
+            <VListChildren items={ children } v-slots={ slots } />
+            { itemProps.divider && <VDivider /> }
+          </div>
+        ) : children ? (
           <VListGroup
             value={ itemProps?.value }
             { ...listGroupProps }

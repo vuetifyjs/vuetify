@@ -16,6 +16,7 @@ import { defineComponent, genericComponent, pick, propsFactory, useRender } from
 import type { InternalListItem } from './VList'
 import type { MakeSlots } from '@/util'
 import type { ExtractPropTypes, Ref } from 'vue'
+import { VDivider } from '../VDivider'
 
 export type ListGroupActivatorSlot = {
   props: {
@@ -49,6 +50,7 @@ export const makeVListGroupProps = propsFactory({
   appendIcon: IconValue,
   fluid: Boolean,
   subgroup: Boolean,
+  divider: Boolean,
   value: null,
 
   ...makeTagProps(),

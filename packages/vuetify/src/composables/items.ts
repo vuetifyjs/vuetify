@@ -58,7 +58,6 @@ export const makeItemsProps = propsFactory({
 }, 'item')
 
 export function transformItem <T> (props: Omit<ItemProps<T>, 'items'>, item: T) {
-  const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = getPropertyFromItem(item, props.itemValue, title)
   const children = getPropertyFromItem(item, props.itemChildren)
@@ -77,7 +76,6 @@ export function transformItem <T> (props: Omit<ItemProps<T>, 'items'>, item: T) 
   }
 
   return {
-    type,
     title: String(_props.title ?? ''),
     value: _props.value,
     props: _props,

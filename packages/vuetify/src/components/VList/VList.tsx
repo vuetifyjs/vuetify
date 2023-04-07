@@ -32,7 +32,7 @@ import type { ListItemSlot } from './VListChildren'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 
 export interface InternalListItem<T> extends InternalItem<T> {
-  type?: 'item' | 'divider'
+  type?: 'item'
 }
 
 export const VList = genericComponent<new <T>() => {
