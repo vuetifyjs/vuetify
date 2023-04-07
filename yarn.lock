@@ -151,6 +151,19 @@
   resolved "https://registry.yarnpkg.com/@assemblyscript/loader/-/loader-0.10.1.tgz#70e45678f06c72fa2e350e8553ec4a4d72b92e06"
   integrity sha512-H71nDOOL8Y7kWRLqf6Sums+01Q5msqBW2KhDUTemh1tvY04eSkSXrK0uj/4mmY0Xr16/3zyZmsrxN7CKuRbNRg==
 
+"@auth0/auth0-spa-js@^2.0.4":
+  version "2.0.4"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-spa-js/-/auth0-spa-js-2.0.4.tgz#81f6b5d9f72617ed30ee53cdf27dcd7a216bf2da"
+  integrity sha512-NgD6Fkm5Xnbned1VjhEW8irm1/Y8AWtdSLexgLXNwwBVgfnYicCVBu8w75m2t+4QljXkTcI7IXVEFhVmxMuxaA==
+
+"@auth0/auth0-vue@^2.2.0":
+  version "2.2.0"
+  resolved "https://registry.yarnpkg.com/@auth0/auth0-vue/-/auth0-vue-2.2.0.tgz#5bf8265b12f1fb210b41abae75e72b0a0b0f4e91"
+  integrity sha512-a8kNj9wF/hJFD/izAZojOTNlny/sq3qvuV8KLUreoQ92uMQBYiHtuclVHbRqoYxl2bwCtFJccttEmyYW3gzHDA==
+  dependencies:
+    "@auth0/auth0-spa-js" "^2.0.4"
+    vue "^3.2.41"
+
 "@babel/cli@^7.21.0":
   version "7.21.0"
   resolved "https://registry.yarnpkg.com/@babel/cli/-/cli-7.21.0.tgz#1868eb70e9824b427fc607610cce8e9e7889e7e1"
@@ -7946,10 +7959,10 @@ homedir-polyfill@^1.0.1:
   dependencies:
     parse-passwd "^1.0.0"
 
-hookable@^5.5.1, "hookable@npm:strict-hookable@5.4.3":
-  version "5.4.3"
-  resolved "https://registry.yarnpkg.com/strict-hookable/-/strict-hookable-5.4.3.tgz#36130aba39465a29cf080000be471cc9267b321d"
-  integrity sha512-KfkDut346Cq3QtmDGAc3Ru3/tKbwQ1lwAaY3tM5tIWw4Fg1OBfBvgiNlwAJ38eM3BUgOeZHbe+Rvcdv+biwPTg==
+hookable@^5.5.1:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/hookable/-/hookable-5.5.3.tgz#6cfc358984a1ef991e2518cb9ed4a778bbd3215d"
+  integrity sha512-Yc+BQe8SvoXH1643Qez1zqLRmbA5rCL+sSmk6TVos0LWVfNIB7PGncdlId77WzLGSIB5KaWgTaNTs2lNVEI6VQ==
 
 hosted-git-info@^2.1.4, hosted-git-info@^2.7.1:
   version "2.8.8"
@@ -14189,7 +14202,7 @@ vue-tsc@^1.2.0:
     "@volar/vue-language-core" "1.2.0"
     "@volar/vue-typescript" "1.2.0"
 
-vue@^3.2.47:
+vue@^3.2.41, vue@^3.2.47:
   version "3.2.47"
   resolved "https://registry.yarnpkg.com/vue/-/vue-3.2.47.tgz#3eb736cbc606fc87038dbba6a154707c8a34cff0"
   integrity sha512-60188y/9Dc9WVrAZeUVSDxRQOZ+z+y5nO2ts9jWXSTkMvayiWxCWOWtBQoYjLeccfXkiiPZWAHcV+WTPhkqJHQ==

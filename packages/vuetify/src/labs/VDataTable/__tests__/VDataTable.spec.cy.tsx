@@ -152,9 +152,10 @@ describe('VDataTable', () => {
   })
 
   it('should not emit click:row event when clicking select or expand', () => {
+    const onClick = cy.stub()
     cy.mount(() => (
       <Application>
-        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
+        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } onClick:row={ onClick } />
       </Application>
     ))
 
@@ -167,15 +168,15 @@ describe('VDataTable', () => {
       .eq(3)
       .find('.v-btn')
       .click()
-
-    cy.emitted(VDataTable, 'click:row')
-      .should('not.exist')
+      .then(() => {
+        expect(onClick).not.to.be.called
+      })
 
     cy.get('tbody tr')
       .eq(1)
       .click()
-
-    cy.emitted(VDataTable, 'click:row')
-      .should('have.length', 1)
+      .then(() => {
+        expect(onClick).to.be.calledOnce
+      })
   })
 })
