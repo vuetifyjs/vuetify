@@ -94,7 +94,7 @@ export function useItems (props: ItemProps) {
 
   function transformIn (value: any[]): InternalItem[] {
     return value.map(v => {
-      const existingItem = items.value.find( item => deepEqual(v, item.value))
+      const existingItem = items.value.find(item => deepEqual(v, item.value))
       // Nullish existingItem means value is a custom input value from combobox
       // In this case, use transformItem to create an InternalItem based on value
       return existingItem ?? transformItem(props, v)
