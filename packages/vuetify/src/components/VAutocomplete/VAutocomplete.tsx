@@ -330,7 +330,11 @@ export const VAutocomplete = genericComponent<new <
                         >
                           {{
                             prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                              <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                              <VCheckboxBtn
+                                modelValue={ isSelected }
+                                ripple={ false }
+                                tabindex="-1"
+                              />
                             ) : undefined,
                             title: () => {
                               return isPristine.value
