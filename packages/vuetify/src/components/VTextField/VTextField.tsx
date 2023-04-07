@@ -155,9 +155,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
         })
       }
     }
-    function onKeydown (e: KeyboardEvent) {
-      e.stopPropagation()
-    }
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
@@ -232,7 +229,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         type={ props.type }
                         onFocus={ onFocus }
                         onBlur={ blur }
-                        onKeydown={ onKeydown }
+                        onKeydown={ e => e.stopPropagation() }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

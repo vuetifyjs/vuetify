@@ -48,35 +48,30 @@ describe('VTextField', () => {
     ))
       .get('.v-input__details').should('be.visible')
   })
-  
-  it('should increment and decrement with arrow keys when in list and type is number.', () => {
 
+  it('should increment and decrement with arrow keys when in list and type is number.', () => {
     cy.mount(() => (
       <VList>
         <VListItem>
-      		<VTextField type='number' id='input-1' value='0' />
+          <VTextField type="number" id="input-1" value="0" />
         </VListItem>
         <VListItem>
-      		<VTextField type='number' id='input-2' value='0' />
+          <VTextField type="number" id="input-2" value="0" />
         </VListItem>
       </VList>
     ))
       .get('#input-1')
       .type('{upArrow}{upArrow}{upArrow}')
       .should('have.value', 3)
-
       .get('#input-2')
       .should('have.value', 0)
-      
-
       .get('#input-1')
       .type('{downArrow}{downArrow}')
       .should('have.value', 1)
-      
       .get('#input-2')
       .should('have.value', 0)
-    })
-  
+  })
+
 
   describe('Showcase', () => {
     generate({ stories })
