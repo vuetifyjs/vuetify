@@ -325,7 +325,7 @@ export const VAutocomplete = genericComponent<new <
                                   title: () => {
                                     return isPristine.value
                                       ? item.title
-                                      : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                      : highlightResult('v-autocomplete', item.title, getMatches(item)?.title, search.value?.length ?? 0)
                                   },
                                 }}
                               </VListItem>

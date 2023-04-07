@@ -173,7 +173,7 @@ export function useFilter <T extends InternalItem<any>> (
   return { filteredItems, filteredMatches, getMatches }
 }
 
-export function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
+export function highlightResult (component: string, text: string, matches: FilterMatch | undefined, length: number) {
   if (Array.isArray(matches)) throw new Error('Multiple matches is not implemented')
 
   if (matches == null) return text
@@ -181,9 +181,9 @@ export function highlightResult (text: string, matches: FilterMatch | undefined,
   return typeof matches === 'number' && ~matches
     ? (
       <>
-        <span class="v-combobox__unmask">{ text.substr(0, matches) }</span>
-        <span class="v-combobox__mask">{ text.substr(matches, length) }</span>
-        <span class="v-combobox__unmask">{ text.substr(matches + length) }</span>
+        <span class={ `${component}__unmask` }>{ text.substr(0, matches) }</span>
+        <span class={ `${component}__mask` }>{ text.substr(matches, length) }</span>
+        <span class={ `${component}__unmask` }>{ text.substr(matches + length) }</span>
       </>
     )
     : text
