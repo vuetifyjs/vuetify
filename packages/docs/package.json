@@ -21,6 +21,7 @@
     "fix:md": "markdownlint --config .markdownlintrc src/pages/en --fix"
   },
   "dependencies": {
+    "@auth0/auth0-vue": "^2.2.0",
     "@vuelidate/core": "^2.0.1",
     "@vuelidate/validators": "^2.0.1",
     "algoliasearch": "^4.16.0",
@@ -72,7 +73,7 @@
     "markdownlint-cli": "^0.33.0",
     "unplugin-fonts": "^1.0.0",
     "unplugin-vue-components": "^0.24.1",
-    "vite": "^4.3.0-beta.1",
+    "vite": "^4.3.0-beta.2",
     "vite-plugin-md": "^0.21.5",
     "vite-plugin-pages": "^0.29.0",
     "vite-plugin-pwa": "^0.14.7",
