@@ -3,7 +3,7 @@
     ref="infinite"
     height="500"
     side="both"
-    :load="load"
+    @load="load"
   >
     <div>
       <template v-for="card in cards" :key="card">
@@ -31,7 +31,7 @@
       createRange (length, start) {
         return Array.from({ length }).map((_, i) => i + start)
       },
-      load (side) {
+      load ({ side, done }) {
         const halfVirtualLength = this.virtualLength / 2
         if (side === 'start') {
           const arr = this.createRange(halfVirtualLength, this.cards[0] - halfVirtualLength)
@@ -44,7 +44,7 @@
           this.cards = [...this.cards.slice(halfVirtualLength), ...arr]
         }
 
-        return 'ok'
+        done('ok')
       },
     },
   }

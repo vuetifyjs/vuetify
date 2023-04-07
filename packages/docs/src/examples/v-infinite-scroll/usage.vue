@@ -10,7 +10,7 @@
       <v-infinite-scroll
         v-bind="props"
         :items="items.value"
-        :load="load"
+        @load="load"
       >
         <template v-for="(item, index) in items" :key="item">
           <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
@@ -30,7 +30,7 @@
   const name = 'v-infinite-scroll'
   const model = ref('default')
   const options = []
-  const items = ref(Array.from({ length: 50 }, (k, v) => v + 1))
+  const items = ref(Array.from({ length: 30 }, (k, v) => v + 1))
 
   function api () {
     return new Promise(resolve => {
@@ -40,18 +40,20 @@
     })
   }
 
-  async function load () {
+  async function load ({ done }) {
     // Perform API call
     const res = await api()
 
     items.value.push(...res)
+
+    done('ok')
   }
 
   const props = computed(() => {
     return {
       height: 300,
-      ':load': 'load',
       ':items': 'items',
+      ':onLoad': 'load',
     }
   })
 
@@ -83,11 +85,13 @@
         }, 1000)
       })
     },
-    async load () {
+    async load ({ done }) {
       // Perform API call
       const res = await this.api()
 
       this.items.push(...res)
+
+      done('ok')
     },
   },
 }`

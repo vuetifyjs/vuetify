@@ -22,14 +22,17 @@ When scrolling towards the bottom, new items will be rendered either automatical
 
 <usage name="v-infinite-scroll" />
 
-The **load** function will be called when the component needs to load more content. It is an asynchronous function with one parameter **side**. It tells you at which side new content should be added, either at the `'start'` or `'end'`. The return value of the function is a string which describes if the new content was loaded successfully or not. See the table below for the possible return values
+A **load** event will be emitted when the component needs to load more content. The argument passed is an object with two properties.
+
+- `side` tells you at which side new content should be added, either at the `'start'` or `'end'`. The return value of the function is a string which describes if the new content was loaded successfully or not.
+- `done` is a callback function that should be called when the loading of new content is done. It takes a single parameter `status` that describes if the load was successful or not. See the table below for the possible values.
 
 |Status|Description|
 |------|-----------|
 |`'ok'`|Content was added succesfully|
 |`'error'`|Something went wrong when adding content. This will display the `error` slot|
-|`'empty'`|There is no more content to fetch. This will display a message that there is no more content|
-|`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be returned from the **load** function|
+|`'empty'`|There is no more content to fetch. This will display the `empty` slot|
+|`'loading'`|Content is currently loading. This will display a message that content is loading. This status is only set internally by the component and should not be used with the **done** function|
 
 <entry />
 
@@ -95,7 +98,7 @@ You can customize the empty message with the **empty** slot.
 
 #### Error
 
-The `error` slot is shown if the status `'error'` is returned from the `load` function.
+The **error** slot is shown if the status `'error'` is returned from the `done` callback.
 
 <example file="v-infinite-scroll/slot-error" />
 

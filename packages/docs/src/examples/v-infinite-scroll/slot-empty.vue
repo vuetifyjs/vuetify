@@ -1,7 +1,7 @@
 <template>
   <v-infinite-scroll
-    :load="load"
     height="400"
+    @load="load"
   >
     <template v-for="(item, index) in items" :key="item">
       <div :class="['pa-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
@@ -21,12 +21,10 @@
     }),
 
     methods: {
-      load () {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            resolve('empty')
-          }, 1000)
-        })
+      load ({ done }) {
+        setTimeout(() => {
+          done('empty')
+        }, 1000)
       },
     },
   }

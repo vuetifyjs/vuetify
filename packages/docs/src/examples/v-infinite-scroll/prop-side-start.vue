@@ -2,7 +2,7 @@
   <v-infinite-scroll
     height="300"
     side="start"
-    :load="load"
+    @load="load"
   >
     <template v-for="(item, index) in items" :key="item">
       <div :class="['px-2', index % 2 === 0 ? 'bg-grey-lighten-2' : '']">
@@ -19,14 +19,12 @@
     }),
 
     methods: {
-      load () {
-        return new Promise(resolve => {
-          setTimeout(() => {
-            this.items.unshift(...Array.from({ length: 10 }, (k, v) => this.items[0] - (10 - v)))
+      load ({ done }) {
+        setTimeout(() => {
+          this.items.unshift(...Array.from({ length: 10 }, (k, v) => this.items[0] - (10 - v)))
 
-            resolve('ok')
-          }, 1000)
-        })
+          done('ok')
+        }, 1000)
       },
     },
   }

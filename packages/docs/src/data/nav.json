@@ -210,6 +210,10 @@
       {
         "title": "virtual-scroller",
         "subfolder": "components"
+      },
+      {
+        "title": "infinite-scroller",
+        "subfolder": "components"
       }
     ]
   },
