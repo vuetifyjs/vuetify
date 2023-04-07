@@ -13,16 +13,19 @@ import Intersect from '@/directives/intersect'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, clamp, convertToUnit, defineComponent, filterInputAttrs, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VTextarea = defineComponent({
+export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
   name: 'VTextarea',
 
   directives: { Intersect },
@@ -58,18 +61,21 @@ export const VTextarea = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const counterValue = computed(() => {
       return typeof props.counterValue === 'function'
         ? props.counterValue(model.value)
         : (model.value || '').toString().length
     })
     const max = computed(() => {
-      if (attrs.maxlength) return attrs.maxlength as undefined
+      if (attrs.maxlength) return attrs.maxlength as string | number
 
       if (
         !props.counter ||
@@ -91,7 +97,6 @@ export const VTextarea = defineComponent({
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const isFocused = ref(false)
     const controlHeight = ref('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
@@ -102,7 +107,7 @@ export const VTextarea = defineComponent({
     const messages = computed(() => {
       return props.messages.length
         ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
+        : (isFocused.value || props.persistentHint) ? props.hint : ''
     })
 
     function onFocus () {
@@ -110,12 +115,15 @@ export const VTextarea = defineComponent({
         textareaRef.value?.focus()
       }
 
-      if (!isFocused.value) isFocused.value = true
+      if (!isFocused.value) focus()
     }
     function onControlClick (e: MouseEvent) {
       onFocus()
 
       emit('click:control', e)
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
     }
     function onClear (e: MouseEvent) {
       e.stopPropagation()
@@ -129,7 +137,13 @@ export const VTextarea = defineComponent({
       })
     }
     function onInput (e: Event) {
-      model.value = (e.target as HTMLTextAreaElement).value
+      const el = e.target as HTMLTextAreaElement
+      const caretPosition = [el.selectionStart, el.selectionEnd]
+      model.value = el.value
+      nextTick(() => {
+        el.selectionStart = caretPosition[0]
+        el.selectionEnd = caretPosition[1]
+      })
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
@@ -204,6 +218,7 @@ export const VTextarea = defineComponent({
           onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
@@ -219,7 +234,8 @@ export const VTextarea = defineComponent({
                 style={{
                   '--v-textarea-control-height': controlHeight.value,
                 }}
-                onClick:control={ onControlClick }
+                onClick={ onControlClick }
+                onMousedown={ onControlMousedown }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
@@ -227,6 +243,7 @@ export const VTextarea = defineComponent({
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -240,7 +257,7 @@ export const VTextarea = defineComponent({
                         <span class="v-text-field__prefix">
                           { props.prefix }
                         </span>
-                      ) }
+                      )}
 
                       <textarea
                         ref={ textareaRef }
@@ -257,7 +274,7 @@ export const VTextarea = defineComponent({
                         rows={ props.rows }
                         name={ props.name }
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
@@ -279,7 +296,7 @@ export const VTextarea = defineComponent({
                         <span class="v-text-field__suffix">
                           { props.suffix }
                         </span>
-                      ) }
+                      )}
                     </>
                   ),
                 }}
@@ -297,10 +314,10 @@ export const VTextarea = defineComponent({
                       active={ props.persistentCounter || isFocused.value }
                       value={ counterValue.value }
                       max={ max.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

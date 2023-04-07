@@ -5,7 +5,7 @@
       <v-progress-circular
         :indeterminate="switchMe"
         size="24"
-        class="ml-2"
+        class="ms-2"
       ></v-progress-circular>
     </template>
   </v-switch>

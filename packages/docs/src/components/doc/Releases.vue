@@ -1,8 +1,9 @@
 <template>
-  <div class="border rounded mt-12">
+  <div class="border rounded my-6">
     <v-autocomplete
       v-model="search"
       :items="releases"
+      :loading="store.isLoading"
       :menu-props="menuProps"
       hide-details
       item-title="name"
@@ -11,10 +12,27 @@
       return-object
       @blur="resetSearch"
       @focus="onFocus"
-    />
+    >
+      <template #item="{ item, props }">
+        <v-list-item
+          v-if="item?.title"
+          v-bind="props"
+        />
+
+        <template v-else>
+          <v-divider />
+
+          <v-list-item
+            :title="t('load-more')"
+            class="mb-n2"
+            @click="store.fetch"
+          />
+        </template>
+      </template>
+    </v-autocomplete>
 
     <v-card
-      flat
+      variant="flat"
       min-height="180"
       rounded="t-0 b"
     >
@@ -53,15 +71,16 @@
           </v-list-item-subtitle>
         </v-list-item>
 
-        <div class="pr-3 d-flex align-center flex-1-0-auto">
+        <div class="pe-3 d-flex align-center flex-1-0-auto">
           <app-tooltip-btn
             v-for="(tooltip, i) in tooltips"
             :key="i"
             :href="tooltip.href"
             :icon="tooltip.icon"
             :path="tooltip.path"
-            :color="tooltip.color ?? 'grey-darken-1'"
+            :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
+            class="text-white"
             variant="flat"
           />
         </div>
@@ -69,9 +88,10 @@
 
       <v-divider />
 
-      <div class="pa-4">
+      <div class="px-4 pt-4">
         <app-markdown
-          :content="search?.body"
+          v-if="search?.body"
+          :content="search.body"
           class="releases"
         />
       </div>
@@ -80,13 +100,17 @@
 </template>
 
 <script setup lang="ts">
-  // Utilities
-  import { computed, nextTick, onMounted, ref } from 'vue'
+  // Composables
+  import { useI18n } from 'vue-i18n'
+  import { useReleasesStore } from '@/store/releases'
 
+  // Utilities
+  import { computed, nextTick, onBeforeMount, ref } from 'vue'
+
+  const { t } = useI18n()
+  const store = useReleasesStore()
   const isFocused = ref(false)
-  const isLoading = ref(true)
   const isSearching = ref(false)
-  const releases = ref<any[]>([])
   const search = ref<any>()
   let timeout = -1
 
@@ -109,6 +133,7 @@
   const menuProps = computed(() => {
     return {
       contentClass: 'notes-autocomplete rounded-b-lg',
+      maxHeight: 300,
     }
   })
 
@@ -123,26 +148,18 @@
     ]
   })
 
-  onMounted(async () => {
-    const filteredReleases = []
-    const res = await Promise.all([
-      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases', { method: 'GET' }),
-      fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=2', { method: 'GET' }),
-      // fetch('https://api.github.com/repos/vuetifyjs/vuetify/releases?page=3', { method: 'GET' }),
-    ]).then(v => Promise.all(v.map(res => res.json())))
+  const releases = computed(() => {
+    const releases = store.releases.slice()
 
-    for (const release of res.flat()) {
-      if (release.name.startsWith('v2')) continue
+    releases.push(null as any)
 
-      filteredReleases.push({
-        ...release,
-        published_at: new Date(release.published_at).toDateString(),
-      })
-    }
+    return releases
+  })
 
-    isLoading.value = false
-    releases.value = filteredReleases
-    search.value = filteredReleases[0]
+  onBeforeMount(async () => {
+    await store.fetch()
+
+    search.value = store.releases[0]
   })
 </script>
 

@@ -14,17 +14,22 @@ related:
 
 The `v-navigation-drawer` component is what your users will utilize to navigate through the application. The navigation-drawer is pre-configured to work with or without **vue-router** right out the box. For the purpose of display, some examples are wrapped in a `v-card` element. Within your application you will generally place the `v-navigation-drawer` as a direct child of `v-app`.
 
-<entry />
-
 ## Usage
 
 The navigation drawer is primarily used to house links to the pages in your application. Using `null` as the starting value for its **v-model** will initialize the drawer as closed on mobile and as open on desktop. It is common to pair drawers with the [v-list](/components/lists) component using the **nav** property.
 
 <!-- <example file="v-navigation-drawer/usage" /> -->
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-navigation-drawer](/api/v-navigation-drawer/) | Primary Component |
+| [v-list-item](/api/v-list-item/) | Component used to create navigation links |
+
+<api-inline hide-links />
 
 ## Caveats
 
@@ -93,5 +98,3 @@ Navigation drawers can be customized to fit any application's design. Here we ap
 In this example we define two navigation-drawers, one using **rail** and one without.
 
 <example file="v-navigation-drawer/misc-combined" />
-
-<backmatter />

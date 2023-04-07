@@ -18,7 +18,7 @@
             location="top end"
           >
             <v-icon
-              :icon="`mdi-bell${unread.length === 0 ? '-outline' : '-ring-outline'}`"
+              :icon="icon"
               class="mx-1"
               color="medium-emphasis"
             />
@@ -28,13 +28,13 @@
     </template>
 
     <v-toolbar
-      class="pl-4 pr-5"
+      class="ps-4 pe-5"
       color="surface"
       density="compact"
     >
       <v-btn
         :disabled="showArchived ? unread.length < 1 : read.length < 1"
-        class="px-2 ml-n1"
+        class="px-2 ms-n1"
         size="small"
         variant="text"
         @click="showArchived = !showArchived"
@@ -55,15 +55,15 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon
-          color="grey-lighten-2"
-          size="96"
-          icon="mdi-vuetify"
-        />
+        <svg width="96" height="84" viewBox="0 0 495 436" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <!-- eslint-disable-next-line max-len -->
+          <path d="M129.795 228.936L123.336 217.498L0 0H246.617H259.591C259.591 0 259.591 0 259.591 0L129.796 228.936C129.796 228.936 129.796 228.936 129.796 228.935L129.795 228.936ZM306.937 0L153.497 270.686L246.617 434.996L369.954 217.498L493.234 0H306.937H306.937Z" fill="#D7D7D7" />
+        </svg>
+
       </div>
 
       <template v-else>
-        <v-list :lines="false">
+        <v-list lines="three">
           <template
             v-for="(notification, i) in notifications"
             :key="notification.slug"
@@ -71,40 +71,32 @@
 
             <v-divider
               v-if="i !== 0"
-              class="my-3"
-              inset
+              class="my-1"
             />
 
             <v-list-item
               :ripple="false"
               class="py-2"
             >
-              <template #prepend>
-                <div class="mr-3 text-h6 mt-n16">
-                  {{ notification.metadata.emoji }}
-                </div>
-              </template>
+              <v-list-item-title class="text-wrap text-h6 mb-1 text-truncate">
+                <span>{{ notification.metadata.emoji }}</span>
 
-              <v-list-item-title
-                class="text-wrap text-h6 mb-1"
-                v-text="notification.title"
-              />
+                <span class="ps-3"> {{ notification.title }}</span>
+              </v-list-item-title>
 
-              <v-list-item-subtitle
-                class="text-caption"
-              >
+              <div class="text-caption text-medium-emphasis ps-10">
                 {{ notification.metadata.text }}
 
                 <app-link :href="notification.metadata.action">
                   {{ notification.metadata.action_text }}
                 </app-link>
-              </v-list-item-subtitle>
+              </div>
 
               <template #append>
                 <v-btn
                   :ripple="false"
                   :icon="marked.icon"
-                  class="ml-3"
+                  class="ms-3"
                   color="medium-emphasis"
                   variant="text"
                   @click.stop.prevent="toggle(notification)"
@@ -132,7 +124,7 @@
   import { computed, onMounted, ref } from 'vue'
 
   // Types
-  type Notification = {
+  interface Notification {
     metadata: {
       action: string
       action_text: string
@@ -146,7 +138,7 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic()
+  const { bucket } = useCosmic<Notification>()
   const { mobile } = useDisplay()
   const user = useUserStore()
   const menu = ref(false)
@@ -170,22 +162,14 @@
 
     return { icon, path }
   })
+  const icon = computed(() => {
+    if (menu.value && unread.value.length > 0) return 'mdi-bell-ring'
+    else if (menu.value) return 'mdi-bell'
+    else if (unread.value.length > 0) return 'mdi-bell-ring-outline'
+    else return 'mdi-bell-outline'
+  })
 
   const width = computed(() => mobile.value ? 420 : 520)
-
-  async function load () {
-    const { objects } = await bucket.getObjects<Notification>({
-      query: {
-        type: 'notifications',
-        status: 'published',
-      },
-      props: 'created_at,metadata,slug,title',
-      limit: 5,
-      sort: '-created_at',
-    })
-
-    all.value = objects ?? []
-  }
 
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
@@ -193,5 +177,18 @@
       : [...user.notifications.read, slug]
   }
 
-  onMounted(load)
+  onMounted(async () => {
+    if (all.value.length) return
+
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'notifications' })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(5)
+    ) || {}
+
+    all.value = objects
+  })
 </script>

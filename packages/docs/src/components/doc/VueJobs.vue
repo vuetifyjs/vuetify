@@ -1,37 +1,54 @@
 <template>
-  <div>
-    <div
-      v-for="job in jobs"
+  <v-row>
+    <v-col cols="12">
+      <div class="d-flex">
+        <app-text-field
+          v-model="search"
+          :append-inner-icon="view ? 'mdi-view-grid-outline' : 'mdi-view-list-outline'"
+          :placeholder="placeholder"
+          @click:append-inner.stop.prevent="view = !view"
+        />
+      </div>
+    </v-col>
+
+    <v-col
+      v-for="job in items"
       :key="job.id"
+      cols="12"
+      :md="view ? 6 : undefined"
+      class="d-flex"
     >
       <v-card
-        :href="job.url"
+        :href="job.link"
         border
-        class="mb-4 transition-swing"
+        class="transition-swing h-100 d-flex flex-column"
+        max-height="225"
         rel="sponsored"
         target="_blank"
         variant="flat"
+        @click="onClick(job)"
       >
         <v-list-item
-          :prepend-avatar="typeof job.avatar === 'string' ? job.avatar : undefined"
+          :prepend-avatar="typeof job.organization.avatar === 'string' ? job.organization.avatar : undefined"
           :title="job.title"
           class="mt-2"
         >
-          <template #subtitle>
+          <template v-if="job.locations.length > 0" #subtitle>
             <v-icon
-              class="mr-1"
+              class="me-1"
               icon="mdi-map-marker-outline"
               size="14"
             />
 
-            {{ job.location }}
+            {{ job.locations.join(', ') }}
           </template>
 
           <template #append>
             <v-btn
               color="success"
-              class="ml-6"
+              class="ms-6"
               size="small"
+              style="pointer-events: none;"
               variant="flat"
             >
               {{ t('apply') }}
@@ -39,66 +56,85 @@
               <v-icon
                 icon="mdi-open-in-new"
                 end
-                small
+                size="small"
               />
             </v-btn>
           </template>
         </v-list-item>
 
-        <v-card-text class="pb-2 pt-2">
+        <v-card-text class="pb-2 pt-2 d-flex">
           <div
             class="mb-4 text-medium-emphasis"
             v-text="job.description"
           />
-
-          <div class="d-flex align-center text-lowercase">
-            <v-chip
-              v-if="job.isNew"
-              class="mr-1"
-              color="#e83e8c"
-              label
-              size="x-small"
-            >
-              <span class="font-weight-bold">#{{ t('new') }}</span>
-            </v-chip>
-
-            <v-chip
-              class="px-2"
-              color="primary"
-              label
-              size="x-small"
-            >
-              <span class="font-weight-bold">#{{ job.type }}</span>
-            </v-chip>
-
-            <v-spacer />
-
-            <div class="text-end text-caption text-medium-emphasis">
-              via {{ job.via }}
-            </div>
-          </div>
         </v-card-text>
+
+        <div class="d-flex align-center text-lowercase px-4 pb-4">
+          <v-chip
+            v-if="job.isNew"
+            class="me-1"
+            color="#e83e8c"
+            label
+            size="x-small"
+          >
+            <span class="font-weight-bold">#{{ t('new') }}</span>
+          </v-chip>
+
+          <v-chip
+            v-if="job.remote"
+            class="px-2"
+            color="primary"
+            label
+            size="x-small"
+          >
+            <span class="font-weight-bold">#remote {{ job.remote }}</span>
+          </v-chip>
+
+          <v-spacer />
+
+          <div class="text-end text-caption text-medium-emphasis">
+            via {{ job.via }}
+          </div>
+        </div>
       </v-card>
-    </div>
-  </div>
+    </v-col>
+  </v-row>
 </template>
 
-<script>
+<script setup>
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useJobsStore } from '../../store/jobs'
+  import { useJobsStore } from '@/store/jobs'
 
   // Utilities
-  import { defineComponent } from 'vue'
+  import { computed, ref } from 'vue'
+  import { useGtag } from 'vue-gtag-next'
 
-  export default defineComponent({
-    name: 'VueJobs',
+  const { event } = useGtag()
+  const { jobs } = useJobsStore()
+  const { t } = useI18n()
+  const view = ref(true)
+  const search = ref('')
+  const items = computed(() => {
+    return jobs.filter(job => {
+      if (!search.value) return true
 
-    setup () {
-      const { jobs } = useJobsStore()
-      const { t } = useI18n()
+      const title = job.title.toLowerCase()
+      const description = job.description.toLowerCase()
+      const s = search.value.toLowerCase()
 
-      return { jobs, t }
-    },
+      return (title.includes(s) || description.includes(s))
+    })
   })
+  const placeholder = computed(() => {
+    return t('search-jobs')
+  })
+
+  function onClick (job) {
+    event('click', {
+      event_category: 'vuetify-job',
+      event_label: job.title,
+      value: job.id,
+    })
+  }
 </script>

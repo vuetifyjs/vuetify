@@ -31,7 +31,7 @@ import {
 
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
@@ -95,8 +95,7 @@ export const VField = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  }
-  $slots: VFieldSlots
+  } & SlotsToProps<VFieldSlots>
 }>()({
   name: 'VField',
 
@@ -110,7 +109,6 @@ export const VField = genericComponent<new <T>() => {
   },
 
   emits: {
-    'click:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
@@ -126,6 +124,7 @@ export const VField = genericComponent<new <T>() => {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const messagesId = computed(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
@@ -145,37 +144,40 @@ export const VField = genericComponent<new <T>() => {
       if (hasLabel.value) {
         const el: HTMLElement = labelRef.value!.$el
         const targetEl: HTMLElement = floatingLabelRef.value!.$el
-        const rect = nullifyTransforms(el)
-        const targetRect = targetEl.getBoundingClientRect()
 
-        const x = targetRect.x - rect.x
-        const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
+        requestAnimationFrame(() => {
+          const rect = nullifyTransforms(el)
+          const targetRect = targetEl.getBoundingClientRect()
 
-        const targetWidth = targetRect.width / 0.75
-        const width = Math.abs(targetWidth - rect.width) > 1
-          ? { maxWidth: convertToUnit(targetWidth) }
-          : undefined
+          const x = targetRect.x - rect.x
+          const y = targetRect.y - rect.y - (rect.height / 2 - targetRect.height / 2)
 
-        const style = getComputedStyle(el)
-        const targetStyle = getComputedStyle(targetEl)
-        const duration = parseFloat(style.transitionDuration) * 1000 || 150
-        const scale = parseFloat(targetStyle.getPropertyValue('--v-field-label-scale'))
-        const color = targetStyle.getPropertyValue('color')
+          const targetWidth = targetRect.width / 0.75
+          const width = Math.abs(targetWidth - rect.width) > 1
+            ? { maxWidth: convertToUnit(targetWidth) }
+            : undefined
 
-        el.style.visibility = 'visible'
-        targetEl.style.visibility = 'hidden'
+          const style = getComputedStyle(el)
+          const targetStyle = getComputedStyle(targetEl)
+          const duration = parseFloat(style.transitionDuration) * 1000 || 150
+          const scale = parseFloat(targetStyle.getPropertyValue('--v-field-label-scale'))
+          const color = targetStyle.getPropertyValue('color')
 
-        animate(el, {
-          transform: `translate(${x}px, ${y}px) scale(${scale})`,
-          color,
-          ...width,
-        }, {
-          duration,
-          easing: standardEasing,
-          direction: val ? 'normal' : 'reverse',
-        }).finished.then(() => {
-          el.style.removeProperty('visibility')
-          targetEl.style.removeProperty('visibility')
+          el.style.visibility = 'visible'
+          targetEl.style.visibility = 'hidden'
+
+          animate(el, {
+            transform: `translate(${x}px, ${y}px) scale(${scale})`,
+            color,
+            ...width,
+          }, {
+            duration,
+            easing: standardEasing,
+            direction: val ? 'normal' : 'reverse',
+          }).finished.then(() => {
+            el.style.removeProperty('visibility')
+            targetEl.style.removeProperty('visibility')
+          })
         })
       }
     }, { flush: 'post' })
@@ -192,8 +194,6 @@ export const VField = genericComponent<new <T>() => {
       if (e.target !== document.activeElement) {
         e.preventDefault()
       }
-
-      emit('click:control', e)
     }
 
     useRender(() => {
@@ -242,7 +242,7 @@ export const VField = genericComponent<new <T>() => {
 
           <LoaderSlot
             name="v-field"
-            active={ props.loading }
+            active={ !!props.loading }
             color={ props.error ? 'error' : props.color }
             v-slots={{ default: slots.loader }}
           />
@@ -251,14 +251,14 @@ export const VField = genericComponent<new <T>() => {
             <div key="prepend" class="v-field__prepend-inner">
               { props.prependInnerIcon && (
                 <InputIcon key="prepend-icon" name="prependInner" />
-              ) }
+              )}
 
               { slots['prepend-inner']?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           <div class="v-field__field" data-no-activator="">
-            { ['solo', 'filled'].includes(props.variant) && hasLabel.value && (
+            {['solo', 'filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
@@ -268,7 +268,7 @@ export const VField = genericComponent<new <T>() => {
               >
                 { label }
               </VFieldLabel>
-            ) }
+            )}
 
             <VFieldLabel ref={ labelRef } for={ id.value }>
               { label }
@@ -279,10 +279,11 @@ export const VField = genericComponent<new <T>() => {
               props: {
                 id: id.value,
                 class: 'v-field__input',
+                'aria-describedby': messagesId.value,
               },
               focus,
               blur,
-            } as VFieldSlot) }
+            } as VFieldSlot)}
           </div>
 
           { hasClear && (
@@ -290,6 +291,10 @@ export const VField = genericComponent<new <T>() => {
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }
+                onMousedown={ (e: MouseEvent) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                }}
               >
                 { slots.clear
                   ? slots.clear()
@@ -297,7 +302,7 @@ export const VField = genericComponent<new <T>() => {
                 }
               </div>
             </VExpandXTransition>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-field__append-inner">
@@ -305,9 +310,9 @@ export const VField = genericComponent<new <T>() => {
 
               { props.appendInnerIcon && (
                 <InputIcon key="append-icon" name="appendInner" />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           <div
             class={[
@@ -325,17 +330,17 @@ export const VField = genericComponent<new <T>() => {
                       { label }
                     </VFieldLabel>
                   </div>
-                ) }
+                )}
 
                 <div class="v-field__outline__end" />
               </>
-            ) }
+            )}
 
-            { ['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
+            {['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label }
               </VFieldLabel>
-            ) }
+            )}
           </div>
         </div>
       )

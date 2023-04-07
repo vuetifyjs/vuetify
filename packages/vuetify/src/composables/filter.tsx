@@ -49,7 +49,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: any[],
+  items: InternalItem<any>[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -126,17 +126,20 @@ export function filterItems (
   return array
 }
 
-export function useFilter <T> (
+export function useFilter <T extends InternalItem<any>> (
   props: FilterProps,
-  items: MaybeRef<InternalItem<T>[]>,
-  query?: Ref<string | undefined>,
+  items: MaybeRef<T[]>,
+  query: Ref<string | undefined>,
+  options?: {
+    filterKeys?: MaybeRef<FilterKeys>
+  }
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filteredItems: Ref<InternalItem<T>[]> = ref([])
+  const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
 
   watchEffect(() => {
@@ -150,7 +153,7 @@ export function useFilter <T> (
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
-        filterKeys: props.filterKeys,
+        filterKeys: unref(options?.filterKeys) ?? props.filterKeys,
         filterMode: props.filterMode,
         noFilter: props.noFilter,
       },
@@ -163,7 +166,11 @@ export function useFilter <T> (
     })
   })
 
-  return { filteredItems, filteredMatches }
+  function getMatches (item: T) {
+    return filteredMatches.value.get(item.value)
+  }
+
+  return { filteredItems, filteredMatches, getMatches }
 }
 
 export function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {

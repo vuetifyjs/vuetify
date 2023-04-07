@@ -5,7 +5,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { clamp, createRange, propsFactory } from '@/util'
+import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 import { computed, provide, ref, toRef } from 'vue'
 
 // Types
@@ -144,7 +144,7 @@ export const useSlider = ({
   getActiveThumb: (e: MouseEvent | TouchEvent) => HTMLElement
 }) => {
   const { isRtl } = useRtl()
-  const isReversed = computed(() => isRtl.value !== props.reverse)
+  const isReversed = toRef(props, 'reverse')
   const horizontalDirection = computed(() => {
     let hd: 'ltr' | 'rtl' = isRtl.value ? 'rtl' : 'ltr'
 
@@ -156,13 +156,8 @@ export const useSlider = ({
   })
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
-  const step = computed(() => props.step > 0 ? parseFloat(props.step) : 0)
-  const decimals = computed(() => {
-    const trimmedStep = step.value.toString().trim()
-    return trimmedStep.includes('.')
-      ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
-      : 0
-  })
+  const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
+  const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   const thumbSize = computed(() => parseInt(props.thumbSize, 10))
   const tickSize = computed(() => parseInt(props.tickSize, 10))
@@ -206,7 +201,7 @@ export const useSlider = ({
     // It is possible for left to be NaN, force to number
     let clickPos = Math.min(Math.max((clickOffset - trackStart - startOffset.value) / trackLength, 0), 1) || 0
 
-    if (vertical || isReversed.value) clickPos = 1 - clickPos
+    if (vertical || horizontalDirection.value === 'rtl') clickPos = 1 - clickPos
 
     return roundValue(min.value + clickPos * (max.value - min.value))
   }
@@ -286,7 +281,10 @@ export const useSlider = ({
     return clamp(isNaN(percentage) ? 0 : percentage, 0, 100)
   }
 
+  const showTicks = toRef(props, 'showTicks')
   const parsedTicks = computed<Tick[]>(() => {
+    if (!showTicks.value) return []
+
     if (!props.ticks) {
       return numTicks.value !== Infinity ? createRange(numTicks.value + 1).map(t => {
         const value = min.value + (t * step.value)
@@ -328,7 +326,7 @@ export const useSlider = ({
     readonly: toRef(props, 'readonly'),
     rounded: toRef(props, 'rounded'),
     roundValue,
-    showTicks: toRef(props, 'showTicks'),
+    showTicks,
     startOffset,
     step,
     thumbSize,

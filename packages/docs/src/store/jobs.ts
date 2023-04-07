@@ -30,24 +30,17 @@ export const useJobsStore = defineStore('jobs', () => {
   onBeforeMount(async () => {
     if (jobs.value.length) return
 
-    await fetch('https://vuejobs.com/api/jobs', {
+    await fetch('https://app.vuejobs.com/feed/vuetify?format=json', {
       method: 'get',
       headers: { 'Content-Type': 'application/json' },
     })
       .then(res => res.json())
       .then(res => {
-        for (const job of res) {
-          const {
-            company,
-            published_at: publishedAt = { for_humans: '' },
-            ...values
-          } = job
-
+        for (const job of res.data) {
           jobs.value.push({
-            ...values,
-            ...company,
-            isNew: publishedAt.for_humans.includes('day'),
-            via: 'vue-job',
+            ...job,
+            isNew: false,
+            via: 'vue-jobs',
           })
         }
       })

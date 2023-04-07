@@ -10,33 +10,26 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeTransitionProps } from '@/composables/transition'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { onMounted, ref, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { mergeProps, onMounted, ref, watch } from 'vue'
+import { genericComponent, omit, useRender } from '@/util'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
-// Types
-import type { MakeSlots } from '@/util'
+type VSnackbarSlots = {
+  activator: [{ isActive: boolean, props: Record<string, any> }]
+  default: []
+  actions: []
+}
 
-export const VSnackbar = genericComponent<new () => {
-  $slots: MakeSlots<{
-    activator: [{ isActive: boolean, props: Record<string, any> }]
-    default: []
-    actions: []
-  }>
-  $props: VOverlay['$props']
-}>()({
+export const VSnackbar = genericComponent<VSnackbarSlots>()({
   name: 'VSnackbar',
 
   props: {
-    contentClass: {
-      type: String,
-      default: '',
-    },
     multiLine: Boolean,
     timeout: {
       type: [Number, String],
@@ -44,13 +37,14 @@ export const VSnackbar = genericComponent<new () => {
     },
     vertical: Boolean,
 
-    modelValue: Boolean,
-
     ...makeLocationProps({ location: 'bottom' } as const),
     ...makePositionProps(),
     ...makeRoundedProps(),
     ...makeVariantProps(),
-    ...makeTransitionProps({ transition: 'v-snackbar-transition' }),
+    ...makeThemeProps(),
+    ...omit(makeVOverlayProps({
+      transition: 'v-snackbar-transition',
+    }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
   },
 
   emits: {
@@ -62,7 +56,7 @@ export const VSnackbar = genericComponent<new () => {
     const { locationStyles } = useLocation(props)
     const { positionClasses } = usePosition(props)
     const { scopeId } = useScopeId()
-
+    const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { roundedClasses } = useRounded(props)
 
@@ -91,41 +85,45 @@ export const VSnackbar = genericComponent<new () => {
       window.clearTimeout(activeTimeout)
     }
 
-    useRender(() => (
-      <VOverlay
-        v-model={ isActive.value }
-        ref={ overlay }
-        class={[
-          'v-snackbar',
-          {
-            'v-snackbar--active': isActive.value,
-            'v-snackbar--multi-line': props.multiLine && !props.vertical,
-            'v-snackbar--vertical': props.vertical,
-          },
-          positionClasses.value,
-        ]}
-        contentProps={{
-          style: locationStyles.value,
-        }}
-        contentClass={ props.contentClass }
-        persistent
-        noClickAnimation
-        scrim={ false }
-        scrollStrategy="none"
-        transition={ props.transition }
-        { ...scopeId }
-        v-slots={{ activator: slots.activator }}
-      >
-        <div
+    useRender(() => {
+      const [overlayProps] = VOverlay.filterProps(props)
+
+      return (
+        <VOverlay
+          ref={ overlay }
           class={[
-            'v-snackbar__wrapper',
-            colorClasses.value,
-            roundedClasses.value,
-            variantClasses.value,
+            'v-snackbar',
+            {
+              'v-snackbar--active': isActive.value,
+              'v-snackbar--multi-line': props.multiLine && !props.vertical,
+              'v-snackbar--vertical': props.vertical,
+            },
+            positionClasses.value,
           ]}
-          style={[colorStyles.value]}
-          onPointerenter={ onPointerenter }
-          onPointerleave={ startTimeout }
+          { ...overlayProps }
+          v-model={ isActive.value }
+          contentProps={ mergeProps({
+            class: [
+              'v-snackbar__wrapper',
+              themeClasses.value,
+              colorClasses.value,
+              roundedClasses.value,
+              variantClasses.value,
+            ],
+            style: [
+              locationStyles.value,
+              colorStyles.value,
+            ],
+            onPointerenter,
+            onPointerleave: startTimeout,
+          }, overlayProps.contentProps)}
+          persistent
+          noClickAnimation
+          scrim={ false }
+          scrollStrategy="none"
+          _disableGlobalStack
+          { ...scopeId }
+          v-slots={{ activator: slots.activator }}
         >
           { genOverlays(false, 'v-snackbar') }
 
@@ -137,7 +135,7 @@ export const VSnackbar = genericComponent<new () => {
             >
               { slots.default() }
             </div>
-          ) }
+          )}
 
           { slots.actions && (
             <VDefaultsProvider
@@ -152,10 +150,10 @@ export const VSnackbar = genericComponent<new () => {
                 { slots.actions() }
               </div>
             </VDefaultsProvider>
-          ) }
-        </div>
-      </VOverlay>
-    ))
+          )}
+        </VOverlay>
+      )
+    })
 
     return forwardRefs({}, overlay)
   },

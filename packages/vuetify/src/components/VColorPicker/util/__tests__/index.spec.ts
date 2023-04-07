@@ -1,6 +1,5 @@
+import { describe, expect, it } from '@jest/globals'
 import { extractColor, parseColor } from '../'
-
-import type { HSVA } from '@/util'
 
 const red = { h: 0, s: 1, v: 1, a: 1 }
 
@@ -16,7 +15,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
       expect(parseColor('FF00FF00')).toEqual(expect.objectContaining({
         h: expect.any(Number),
@@ -32,7 +30,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const rgba = { r: 128, g: 0, b: 255, a: 0.2 }
@@ -50,7 +47,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const hsla = { h: 220, s: 0.5, l: 1, a: 0.4 }
@@ -68,7 +64,6 @@ describe('VColorPicker Utils', () => {
         h: expect.any(Number),
         s: expect.any(Number),
         v: expect.any(Number),
-        a: 1,
       }))
 
       const hsva = { h: 220, s: 0.5, v: 1, a: 0.4 }
@@ -94,11 +89,11 @@ describe('VColorPicker Utils', () => {
       [red, { h: 0, s: 1, v: 1 }, { h: 0, s: 1, v: 1 }],
       [red, { h: 0, s: 1, v: 1, a: 0.5 }, { h: 0, s: 1, v: 1, a: 1 }],
       [red, undefined, '#FF0000'],
-    ]
+    ] as const
 
-    it.each(cases)('When given %p and %p, extractColor util should return %p',
-      (color: HSVA, input: any, result: any) => {
-        expect(extractColor(color, input)).toEqual(result)
-      })
+    it.each(cases)('When given %p and %p, extractColor util should return %p', (...args) => {
+      const [color, input, result] = args
+      expect(extractColor(color, input)).toEqual(result)
+    })
   })
 })

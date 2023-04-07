@@ -27,7 +27,12 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-timeline](/api/v-timeline/) | Primary Component |
+| [v-timeline-item](/api/v-timeline-item/) | Sub-component used to display a single timeline item |
+
+<api-inline hide-links />
 
 <!-- ## Sub-components
 
@@ -120,5 +125,3 @@ If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on th
 #### Advanced
 
 <example file="v-timeline/misc-advanced" />
-
-<backmatter />

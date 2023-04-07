@@ -41,9 +41,9 @@ function filter <T> (items: InternalItem<T>[], include: Set<any>, out: InternalI
 export function useFilterNested <T> (props: FilterProps, items: Ref<InternalItem<T>[]>, search: Ref<string | undefined>) {
   const flatItems = computed(() => flatten(items.value))
 
-  const { filteredItems: flatFilteredItems, filteredMatches } = useFilter(props, flatItems, search)
+  const { filteredItems: flatFilteredItems, filteredMatches, getMatches } = useFilter(props, flatItems, search)
 
   const filteredItems = computed(() => filter(items.value, new Set(flatFilteredItems.value.map(item => item.value))))
 
-  return { filteredItems, filteredMatches }
+  return { filteredItems, filteredMatches, getMatches }
 }

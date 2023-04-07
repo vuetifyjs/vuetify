@@ -1,7 +1,0 @@
-{
-  "props": {
-    "mode": "Sets the transition mode (does not apply to transition-group). You can find more information on the Vue documentation [for transition modes](https://vuejs.org/v2/api/#transition).",
-    "origin": "Sets the transition origin on the element. You can find more information on the MDN documentation [for transition origin](https://developer.mozilla.org/en-US/docs/Web/CSS/transform-origin).",
-    "transition": "Sets the component transition. Can be one of the [built in transitions](/styles/transitions) or one your own."
-  }
-}

@@ -13,9 +13,15 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VExpansionPanel = defineComponent({
+export type VExpansionPanelSlots = {
+  default: []
+  title: []
+  text: []
+}
+
+export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',
 
   props: {
@@ -99,13 +105,13 @@ export const VExpansionPanel = defineComponent({
             >
               { slots.title ? slots.title() : props.title }
             </VExpansionPanelTitle>
-          ) }
+          )}
 
           { hasText && (
             <VExpansionPanelText key="text" eager={ props.eager }>
               { slots.text ? slots.text() : props.text }
             </VExpansionPanelText>
-          ) }
+          )}
 
           { slots.default?.() }
         </props.tag>

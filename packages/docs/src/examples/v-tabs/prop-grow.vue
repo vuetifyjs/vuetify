@@ -8,7 +8,7 @@
 
     <v-tabs
       v-model="tab"
-      background-color="transparent"
+      bg-color="transparent"
       color="basil"
       grow
     >

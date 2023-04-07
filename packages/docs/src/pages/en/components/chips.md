@@ -14,9 +14,9 @@ related:
 
 The `v-chip` component is used to convey small pieces of information. Using the `close` property, the chip becomes interactive, allowing user interaction. This component is used by the [v-chip-group](/components/chip-groups) for advanced selection options.
 
-![chips Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chips/v-chips-entry.png)
+<!-- ![chips Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-chips/v-chips-entry.png) -->
 
----
+----
 
 ## Usage
 
@@ -28,7 +28,11 @@ Chips come in the following variations: closeable, filter, outlined, pill. The d
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-chip](/api/v-chip/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -123,5 +127,3 @@ Chips are great for providing supplementary actions to a particular task. In thi
 Selects can use chips to display the selected data. Try adding your own tags below.
 
 <example file="v-chip/misc-in-selects" />
-
-<backmatter />

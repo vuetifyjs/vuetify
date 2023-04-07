@@ -35,7 +35,7 @@
 
     <v-divider></v-divider>
 
-    <v-list lines="three" select-strategy="multiple">
+    <v-list lines="three" select-strategy="classic">
       <v-list-subheader>General</v-list-subheader>
 
       <v-list-item value="notifications">

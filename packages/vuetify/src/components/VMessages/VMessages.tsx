@@ -10,12 +10,20 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VMessages = defineComponent({
+export type VMessageSlot = {
+  message: string
+}
+
+export type VMessagesSlots = {
+  message: [VMessageSlot]
+}
+
+export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',
 
   props: {
@@ -48,6 +56,8 @@ export const VMessages = defineComponent({
           textColorClasses.value,
         ]}
         style={ textColorStyles.value }
+        role="alert"
+        aria-live="polite"
       >
         { props.active && (
           messages.value.map((message, i) => (
@@ -58,7 +68,7 @@ export const VMessages = defineComponent({
               { slots.message ? slots.message({ message }) : message }
             </div>
           ))
-        ) }
+        )}
       </MaybeTransition>
     ))
 

@@ -1,17 +1,15 @@
 {
   "props": {
     "active": "Controls the **active** state of the item. This is typically used to highlight the component",
-    "activeClass": "Configure the active CSS class applied when the link is active. You can find more information about the [**active-class** prop](https://router.vuejs.org/api/#active-class) on the vue-router documentation.",
-    "activeColor": "The applied color when a `v-list-item` is in an active state",
-    "appendAvatar": "Appends a [v-avatar](/components/avatars/) component to the header",
-    "appendIcon": "Appends a [v-icon](/components/icons/) component to the header",
-    "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - it can be the name of material color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`)",
+    "color": "Applies specified color to the control when in an **active** state or **input-value** is **true** - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "contained": "Changes the component style by changing how color is applied to the background.",
-    "disabled": "Disables the component",
-    "prependAvatar": "Prepends a [v-avatar](/components/avatars/) component to the header",
-    "prependIcon": "Prepends a [v-icon](/components/icons/) component to the header",
     "title": "Generates a `v-list-item-title` component with the supplied value",
-    "subtitle": "Generates a `v-list-item-subtitle` component with the supplied value",
-    "value": "The value used when a child of a [v-list-item-group](/components/list-item-groups)."
+    "value": "The value used for selection.",
+    "nav": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
+    "lines": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))"
+  },
+  "events": {
+    "click": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))",
+    "clickOnce": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-list-item.json))"
   }
 }

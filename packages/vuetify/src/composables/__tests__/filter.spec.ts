@@ -15,13 +15,14 @@ describe('filter', () => {
       ['foo', 'bar', -1],
       [1, '1', 0],
       ['1', 1, 0],
-    ])('should compare %s to %s and return a match result', (text: any, query: any, expected: boolean) => {
+    ])('should compare %s to %s and return a match result', (text, query, expected) => {
+      // @ts-expect-error
       expect(defaultFilter(text, query)).toBe(expected)
     })
   })
 
   describe('filterItems', () => {
-    const items = Array.from({ length: 5 }, (v, k) => ({
+    const items = Array.from({ length: 5 }, (v, k) => transformItem({} as any, {
       title: `Foo-${k}`,
       value: `fizz-${k}`,
     }))
@@ -75,7 +76,7 @@ describe('filter', () => {
           value: '1',
           custom: 'buzz',
         },
-      ]
+      ] as any
       const filterKeys = ['title', 'value', 'subtitle', 'custom']
 
       expect(filterItems(items, 'foo', {
@@ -110,8 +111,8 @@ describe('filter', () => {
       itemTitle: 'title',
       itemValue: 'value',
       itemChildren: 'children',
-      itemProps: undefined,
-      returnObject: undefined,
+      itemProps: 'props',
+      returnObject: false,
     }
     const items = Array.from({ length: 50 }, (v, k) => ({
       text: `item-${k}`,
@@ -147,19 +148,16 @@ describe('filter', () => {
       ]))
       const { filteredItems } = useFilter(props, items, query)
 
-      expect(filteredItems.value).toHaveLength(2)
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['fizz', 'buzz'])
 
       query.value = 'foo'
       await nextTick()
 
-      expect(filteredItems.value).toHaveLength(1)
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo'])
 
       items.value.push(transformItem(itemProps, { title: 'foobar' }))
       await nextTick()
 
-      expect(filteredItems.value).toHaveLength(2)
       expect(filteredItems.value.map(item => item.raw.title)).toEqual(['foo', 'foobar'])
     })
   })

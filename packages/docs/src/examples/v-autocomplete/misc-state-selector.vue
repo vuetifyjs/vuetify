@@ -1,12 +1,12 @@
 <template>
   <v-card>
-    <v-card-title class="text-h5 font-weight-regular blue-grey white--text">
+    <v-card-title class="text-h5 font-weight-regular bg-blue-grey">
       Profile
     </v-card-title>
+
     <v-card-text>
-      <v-subheader class="pa-0">
-        Where do you live?
-      </v-subheader>
+      <div class="text-caption pa-3">Where do you live?</div>
+
       <v-autocomplete
         v-model="model"
         :hint="!isEditing ? 'Click the icon to edit' : 'Click the icon to save'"
@@ -16,15 +16,13 @@
         persistent-hint
         prepend-icon="mdi-city"
       >
-        <template v-slot:append-outer>
-          <v-slide-x-reverse-transition
-            mode="out-in"
-          >
+        <template v-slot:append>
+          <v-slide-x-reverse-transition mode="out-in">
             <v-icon
               :key="`icon-${isEditing}`"
               :color="isEditing ? 'success' : 'info'"
+              :icon="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
               @click="isEditing = !isEditing"
-              v-text="isEditing ? 'mdi-check-outline' : 'mdi-circle-edit-outline'"
             ></v-icon>
           </v-slide-x-reverse-transition>
         </template>

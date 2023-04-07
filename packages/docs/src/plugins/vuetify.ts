@@ -6,6 +6,7 @@ import 'vuetify/styles'
 import { createVuetify } from 'vuetify'
 import * as components from 'vuetify/components'
 import * as directives from 'vuetify/directives'
+import * as labs from 'vuetify/labs/components'
 
 // Icons
 import { fa } from 'vuetify/iconsets/fa'
@@ -18,7 +19,10 @@ import type { VuetifyPlugin } from '@/types'
 
 export const useVuetify: VuetifyPlugin = ({ app }) => {
   const vuetify = createVuetify({
-    components,
+    components: {
+      ...components,
+      ...labs,
+    },
     directives,
     icons: {
       defaultSet: 'mdi',
@@ -37,6 +41,16 @@ export const useVuetify: VuetifyPlugin = ({ app }) => {
             secondary: '#5CBBF6',
             tertiary: '#E57373',
             accent: '#005CAF',
+            quarternary: '#B0D1E8',
+          },
+        },
+        dark: {
+          colors: {
+            primary: '#2196F3',
+            secondary: '#424242',
+            tertiary: '#E57373',
+            accent: '#FF4081',
+            quarternary: '#B0D1E8',
           },
         },
       },

@@ -5,9 +5,9 @@ import './VLabel.sass'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VLabel = defineComponent({
+export const VLabel = genericComponent()({
   name: 'VLabel',
 
   props: {

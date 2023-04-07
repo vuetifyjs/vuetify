@@ -38,9 +38,9 @@ describe('VTimeline', () => {
     })
 
     it('should support truncate-line', () => {
-      const truncateLine = ref<TimelineTruncateLine>('none')
+      const truncateLine = ref<TimelineTruncateLine>()
       cy.mount(() => (
-        <VTimeline truncateLine={truncateLine.value}>
+        <VTimeline truncateLine={ truncateLine.value }>
           <VTimelineItem key="1">
             {{
               default: () => 'Content',
@@ -81,7 +81,7 @@ describe('VTimeline', () => {
       const align = ref<TimelineAlign>('center')
 
       cy.mount(() => (
-        <VTimeline align={align.value}>
+        <VTimeline align={ align.value }>
           <VTimelineItem key="1">
             {{
               default: () => (
@@ -118,7 +118,7 @@ describe('VTimeline', () => {
       const side = ref<TimelineSide>('start')
 
       cy.mount(() => (
-        <VTimeline side={side.value}>
+        <VTimeline side={ side.value }>
           <VTimelineItem key="1">
             {{
               default: () => (
@@ -208,9 +208,9 @@ describe('VTimeline', () => {
     })
 
     it('should support truncate-line', () => {
-      const truncateLine = ref<TimelineTruncateLine>('none')
+      const truncateLine = ref<TimelineTruncateLine>()
       cy.mount(() => (
-        <VTimeline direction="horizontal" truncateLine={truncateLine.value}>
+        <VTimeline direction="horizontal" truncateLine={ truncateLine.value }>
           <VTimelineItem key="1">
             {{
               default: () => 'Content',
@@ -251,7 +251,7 @@ describe('VTimeline', () => {
       const align = ref<TimelineAlign>('center')
 
       cy.mount(() => (
-        <VTimeline direction="horizontal" align={align.value}>
+        <VTimeline direction="horizontal" align={ align.value }>
           <VTimelineItem key="1">
             {{
               default: () => (
@@ -288,7 +288,7 @@ describe('VTimeline', () => {
       const side = ref<TimelineSide>('start')
 
       cy.mount(() => (
-        <VTimeline direction="horizontal" side={side.value}>
+        <VTimeline direction="horizontal" side={ side.value }>
           <VTimelineItem key="1">
             {{
               default: () => (

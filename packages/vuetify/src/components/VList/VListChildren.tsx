@@ -1,6 +1,6 @@
 // Components
 import { VDivider } from '../VDivider'
-import { filterListGroupProps, VListGroup } from './VListGroup'
+import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 
 // Composables
@@ -12,8 +12,8 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { Prop } from 'vue'
-import type { MakeSlots } from '@/util'
-import type { ListGroupActivatorSlot } from './VListGroup'
+import type { SlotsToProps } from '@/util'
+import type { VListGroupSlots } from './VListGroup'
 import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
 import type { InternalListItem } from './VList'
 import { VListSubheader } from './VListSubheader'
@@ -27,11 +27,11 @@ export type ListItemSlot<T> = {
 export const VListChildren = genericComponent<new <T>() => {
   $props: {
     items?: InternalListItem<T>[]
-  }
-  $slots: MakeSlots<{
+  } & SlotsToProps<{
     default: []
-    header: [ListGroupActivatorSlot & { item: InternalListItem<T> }]
+    header: [VListGroupSlots['activator'] & { item: InternalListItem<T> }]
     item: [ListItemSlot<T>]
+    items?: T[]
     title: [ListItemTitleSlot]
     subtitle: [ListItemSubtitleSlot]
   }>
@@ -67,7 +67,7 @@ export const VListChildren = genericComponent<new <T>() => {
           title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
         }
 
-        const [listGroupProps, _1] = filterListGroupProps(itemProps as any)
+        const [listGroupProps, _1] = VListGroup.filterProps(itemProps)
 
         return children && itemProps.subheader ? (
           <div>

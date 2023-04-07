@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Date picker component
   description: The date picker component is a stand-alone interface that allows the selection of a date, month and year.
@@ -156,5 +157,3 @@ The date picker supports internationalization through the JavaScript Date object
 Date pickers come in two orientation variations, portrait **(default)** and landscape.
 
 <example file="v-date-picker/misc-orientation" />
-
-<backmatter />

@@ -41,11 +41,11 @@
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 
-    > :first-child:not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
+    > :first-child:not(:last-child):not(.v-expansion-panel--active):not(.v-expansion-panel--before-active)
       border-bottom-left-radius: 0 !important
       border-bottom-right-radius: 0 !important
 
-    > :last-child:not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
+    > :last-child:not(:first-child):not(.v-expansion-panel--active):not(.v-expansion-panel--after-active)
       border-top-left-radius: 0 !important
       border-top-right-radius: 0 !important
 

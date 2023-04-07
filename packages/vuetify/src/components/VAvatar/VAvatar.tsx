@@ -12,9 +12,10 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVAvatarProps = propsFactory({
   start: Boolean,
@@ -26,15 +27,17 @@ export const makeVAvatarProps = propsFactory({
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeTagProps(),
+  ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-})
+}, 'v-avatar')
 
-export const VAvatar = defineComponent({
+export const VAvatar = genericComponent()({
   name: 'VAvatar',
 
   props: makeVAvatarProps(),
 
   setup (props, { slots }) {
+    const { themeClasses } = provideTheme(props)
     const { colorClasses, colorStyles, variantClasses } = useVariant(props)
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
@@ -48,6 +51,7 @@ export const VAvatar = defineComponent({
             'v-avatar--start': props.start,
             'v-avatar--end': props.end,
           },
+          themeClasses.value,
           colorClasses.value,
           densityClasses.value,
           roundedClasses.value,
@@ -60,7 +64,7 @@ export const VAvatar = defineComponent({
         ]}
       >
         { props.image
-          ? (<VImg key="image" src={ props.image } alt="" />)
+          ? (<VImg key="image" src={ props.image } alt="" cover />)
           : props.icon
             ? (<VIcon key="icon" icon={ props.icon } />)
             : slots.default?.()

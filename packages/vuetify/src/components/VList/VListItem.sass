@@ -9,6 +9,7 @@
   grid-template-areas: "prepend content append"
   grid-template-columns: max-content auto max-content
   outline: none
+  max-width: 100%
   padding: $list-item-padding
   position: relative
   text-decoration: none
@@ -52,7 +53,6 @@
   > .v-icon
     margin-inline-end: $list-item-icon-margin-end
 
-  .v-list-item--two-line &,
   .v-list-item--three-line &
     align-self: start
 
@@ -68,7 +68,6 @@
   > .v-icon
     margin-inline-start: $list-item-icon-margin-start
 
-  .v-list-item--two-line &,
   .v-list-item--three-line &
     align-self: start
 
@@ -156,22 +155,28 @@
         $one-line-padding: (list.nth($list-item-padding, 1) + $modifier)
 
         min-height: $list-item-one-line-min-height + $modifier
-        padding-top: $one-line-padding
-        padding-bottom: $one-line-padding
+
+        @if ($one-line-padding > 0)
+          padding-top: $one-line-padding
+          padding-bottom: $one-line-padding
 
       &.v-list-item--two-line
         $two-line-padding: (list.nth($list-item-two-line-padding, 1) + $modifier)
 
         min-height: $list-item-two-line-min-height + $modifier
-        padding-top: $two-line-padding
-        padding-bottom: $two-line-padding
+
+        @if ($two-line-padding > 0)
+          padding-top: $two-line-padding
+          padding-bottom: $two-line-padding
 
       &.v-list-item--three-line
         $three-line-padding: (list.nth($list-item-three-line-padding, 1) + $modifier)
 
         min-height: $list-item-three-line-min-height + $modifier
-        padding-top: $three-line-padding
-        padding-bottom: $three-line-padding
+
+        @if ($three-line-padding > 0)
+          padding-top: $three-line-padding
+          padding-bottom: $three-line-padding
 
       &:not(.v-list-item--nav)
         &.v-list-item--one-line
@@ -191,7 +196,7 @@
     padding-inline-end: $list-nav-padding
 
     .v-list &
-      &:not(:last-child):not(:only-child)
+      &:not(:only-child)
         margin-bottom: $list-item-nav-margin-top
 
 .v-list-item__underlay
@@ -239,6 +244,6 @@ $base-padding: list.nth($list-item-padding, 2)
 .v-list-group__items .v-list-item
   padding-inline-start: calc(#{$base-padding} + var(--indent-padding)) !important
 
-.v-list-group__header.v-list-item--active
+.v-list-group__header.v-list-item--active:not(:focus-visible)
   .v-list-item__overlay
-    display: none
+    opacity: 0

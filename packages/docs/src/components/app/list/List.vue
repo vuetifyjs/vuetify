@@ -17,6 +17,18 @@
       />
     </template>
 
+    <template #title="{ item }">
+      {{ item.title }}
+
+      <v-badge
+        v-if="item.emphasized"
+        class="ms-n1"
+        color="success"
+        dot
+        inline
+      />
+    </template>
+
     <template #subheader="{ props: subheaderProps }">
       <slot
         name="subheader"
@@ -33,7 +45,7 @@
   </v-list>
 </template>
 
-<script lang="ts" setup>
+<script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
 
@@ -47,6 +59,7 @@
 
   export type Item = {
     title?: string
+    appendIcon?: string
     activeIcon?: string
     inactiveIcon?: string
     items?: (string | Item)[]
@@ -54,6 +67,8 @@
     divider?: boolean
     to?: RouteLocationRaw
     href?: string
+    subfolder?: string
+    disabled?: boolean
   }
 
   function generateApiItems (locale: string) {
@@ -69,11 +84,21 @@
   }
 
   function generateListItem (item: string | Item, path = '', locale = 'en', t = (key: string) => key): any {
-    if (typeof item === 'string') {
-      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${item}/`))
+    const isString = typeof item === 'string'
+    const isLink = !isString && (item.to || item.href)
+    const isParent = !isString && item.items
+    const isType = !isString && (item.divider || item.subheader)
+
+    if (isString || (!isLink && !isParent && !isType)) {
+      const litem = isString ? { title: item } : item
+
+      if (litem.subfolder) path = litem.subfolder
+
+      const route = routes.find((route: { path: string }) => route.path.endsWith(`/${locale}/${path}/${litem.title}/`))
 
       return {
-        title: route?.meta?.nav ?? route?.meta?.title ?? item,
+        title: route?.meta?.nav ?? route?.meta?.title ?? litem.title,
+        emphasized: route?.meta?.emphasized ?? false,
         to: route?.path,
         disabled: !route,
       }
@@ -87,9 +112,10 @@
         type: 'subheader',
       }
     } else if (item.items) {
+      const p = item.subfolder ? `${item.subfolder}/${item.title}` : path
       return {
         title: t(item.title!),
-        children: item.items.map(item => generateListItem(item, path, locale, t)),
+        children: item.items.map(item => generateListItem(item, p, locale, t)),
       }
     }
 
@@ -129,6 +155,8 @@
       children: item.title === 'api' ? generateApiItems(locale.value) : generateListItems(item, item.title!, locale.value, t),
       prependIcon: opened.value.includes(title ?? '') ? item.activeIcon : item.inactiveIcon,
       value: title,
+      appendIcon: item.appendIcon,
+      disabled: item.disabled,
     }
   }))
 </script>

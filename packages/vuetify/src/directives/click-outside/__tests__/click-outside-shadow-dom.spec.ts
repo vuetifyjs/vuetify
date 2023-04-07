@@ -105,7 +105,7 @@ describe('click-outside.js within the Shadow DOM', () => {
 
     shadowClickHandler({ target: shadowEl })
     await wait()
-    expect(callback).not.toHaveBeenCalledWith()
+    expect(callback).not.toHaveBeenCalled()
   })
 
   it('should not call the callback when mousedown was on the element within the shadow DOM', async () => {

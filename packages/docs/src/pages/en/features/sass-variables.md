@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/colors/
   - /features/theme/
-  - /features/presets/
+  - /features/treeshaking/
 ---
 
 # SASS variables
@@ -14,6 +14,30 @@ related:
 Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of the framework.
 
 <entry />
+
+## Installation
+
+Vuetify works out of the box without any additional compilers needing to be installed. Changing or using SASS variables though obviously requires the SASS compiler.
+
+### vite
+
+Vite provides built-in support for sass, less and stylus files. There is no need to install Vite-specific plugins for them, but the corresponding pre-processor itself must be installed. Vuetify needs sass as a preprocessor so install it:
+
+```bash
+npm install -D sass
+```
+
+for more information: https://vitejs.dev/guide/features.html#css-pre-processors
+
+### vue-cli
+
+You can select pre-processors (Sass/Less/Stylus) when creating the project. If you did not do so, the internal webpack config is still pre-configured to handle all of them. You just need to manually install the corresponding webpack loaders:
+
+```bash
+npm install -D sass-loader sass
+```
+
+for more information: https://cli.vuejs.org/guide/css.html#pre-processors
 
 ## Basic usage
 
@@ -30,6 +54,14 @@ Some variables are not used by vuetify components and are safe to modify without
   $color-pack: false,
 );
 ```
+
+<alert type="warning">
+
+`'vuetify/styles'` should not be used in sass files as it resolves to precompiled css ([vitejs/vite#7809](https://github.com/vitejs/vite/issues/7809))
+
+`'vuetify'` and `'vuetify/settings'` are valid and safe to use
+
+</alert>
 
 ## Component specific variables
 
@@ -89,6 +121,13 @@ You can access [global](/api/vuetify/) and per-component variables in Vue templa
 </style>
 ```
 
+Keep in mind that to obtain settings from Vuetify, you must forward its variables from within your local stylesheet. In the following example we modify `settings.scss` to **forward** instead of **use**:
+
+```diff { resource="settings.scss" }
+- @use 'vuetify/settings' with (
++ @forward 'vuetify/settings' with (
+```
+
 ## Caveats
 
 When using sass variables, there are a few considerations to be aware of.
@@ -110,5 +149,3 @@ PNPM and Yarn 2+ create symlinks to library files instead of copying them to nod
 ### sass-loader with `api: 'modern'`
 
 You might have to write a custom importer plugin to load the settings file.
-
-<backmatter />

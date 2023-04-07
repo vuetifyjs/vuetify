@@ -7,7 +7,7 @@
 
     <v-progress-circular
       model-value="80"
-      color="deep-orange lighten-2"
+      color="deep-orange-lighten-2"
     ></v-progress-circular>
 
     <v-progress-circular
@@ -22,7 +22,7 @@
 
     <v-progress-circular
       model-value="20"
-      color="indigo darken-2"
+      color="indigo-darken-2"
     ></v-progress-circular>
   </div>
 </template>

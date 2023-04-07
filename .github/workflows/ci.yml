@@ -8,8 +8,7 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: next
-  LOCAL_BRANCH: docs/update-from-crowdin
+  CROWDIN_BRANCH: v3
 
 jobs:
   close:
@@ -95,6 +94,8 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
 
+      - run: npm pkg set devDependencies.cypress="https://cdn.cypress.io/beta/npm/12.8.2/linux-x64/retry-dynamic-imports-243502ae98b750e429789d373dd7175f487a62ee/cypress.tgz"
+        working-directory: ./packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
@@ -117,6 +118,8 @@ jobs:
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
       - uses: actions/checkout@v2
+        with:
+          fetch-depth: 0
       - uses: actions/cache@v2
         with:
           path: |
@@ -126,6 +129,7 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build vuetify
+      - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
       - run: cp -r ./packages/vuetify/dist release
@@ -139,12 +143,9 @@ jobs:
           TAG_NAME: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
-        uses: actions/create-release@v1
+        run: yarn conventional-github-releaser -p vuetify
         env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          tag_name: ${{ env.RELEASE_TAG }}
-          release_name: ${{ env.RELEASE_TAG }}
+          CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload Release Asset
         uses: actions/upload-release-asset@v1
         env:
@@ -156,7 +157,7 @@ jobs:
           asset_content_type: application/zip
 
   publish-docs:
-    needs: [lint, test-jest, test-cypress]
+    needs: [lint, test-jest]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
@@ -169,6 +170,7 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn global add vercel
+      - run: yarn --frozen-lockfile --non-interactive
 
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
@@ -180,7 +182,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: eo
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 
@@ -193,7 +194,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: ja
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 #
@@ -206,7 +206,6 @@ jobs:
 #          push_translations: false
 #          export_only_approved: false
 #          download_language: zh-CN
-#          localization_branch_name: ${{ env.LOCAL_BRANCH }}
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
 #          debug_mode: true
 
@@ -215,6 +214,9 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
           VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
+          VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
+          VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
+          VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

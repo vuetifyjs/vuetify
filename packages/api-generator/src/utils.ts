@@ -1,3 +1,5 @@
+import { fileURLToPath } from 'url'
+import stringifyObject from 'stringify-object'
 import type { Definition, ObjectDefinition } from './types'
 
 function parseFunctionParams (func: string) {
@@ -58,6 +60,7 @@ export function addPropData (
     const instancePropObj = componentProps[propName]
 
     ;(propObj as any).default = instancePropObj?.default
+    ;(propObj as any).source = instancePropObj?.source
 
     sources.add(instancePropObj?.source ?? kebabName)
   }
@@ -68,35 +71,53 @@ export function addPropData (
 export function stringifyProps (props: any) {
   return Object.fromEntries(
     Object.entries<any>(props).map(([key, prop]) => {
+      let def = typeof prop === 'object'
+        ? getPropDefault(prop?.default, getPropType(prop?.type))
+        : getPropDefault(undefined, getPropType(prop))
+
+      if (typeof def === 'object') {
+        def = stringifyObject(def, {
+          indent: '  ',
+          inlineCharacterLimit: 60,
+          filter (obj, property) {
+            if (typeof obj === 'object' && !Array.isArray(obj) && obj != null && 'name' in obj && 'props' in obj && 'setup' in obj) {
+              return property === 'name'
+            }
+            return true
+          },
+        })
+      }
+
       return [key, {
         source: prop?.source,
-        default: typeof prop === 'object'
-          ? getPropDefault(prop?.default, getPropType(prop?.type))
-          : getPropDefault(undefined, getPropType(prop)),
+        default: def,
       }]
     })
   )
 }
 
-const loadLocale = (componentName: string, locale: string, fallback = {}): Record<string, string | Record<string, string>> => {
+async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
   try {
-    const data = require(`./locale/${locale}/${componentName}`)
-    return Object.assign(fallback, data)
+    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
+      assert: { type: 'json' },
+    })
+    return Object.assign(fallback, data.default)
   } catch (err) {
+    console.error(err.message?.split('imported from')[0] ?? err.message)
     return fallback
   }
 }
 
-function getSources (kebabName: string, sources: string[], locale: string) {
-  const arr = [
+async function getSources (kebabName: string, sources: string[], locale: string) {
+  const arr = await Promise.all([
     loadLocale(kebabName, locale),
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
-  ]
+  ])
 
   return {
     find: (section: string, key?: string) => {
-      return arr.reduce<string | null>((str, source) => {
+      return arr.reduce((str, source) => {
         if (str) return str
         return key ? source?.[section]?.[key] : source?.[section]
       }, null) ?? 'MISSING DESCRIPTION'
@@ -104,9 +125,9 @@ function getSources (kebabName: string, sources: string[], locale: string) {
   }
 }
 
-export function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
+export async function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
@@ -118,14 +139,14 @@ export function addDescriptions (kebabName: string, componentData: ComponentData
   }
 }
 
-export function addDirectiveDescriptions (
+export async function addDirectiveDescriptions (
   kebabName: string,
   componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
   sources: string[],
   locales: string[]
 ) {
   for (const locale of locales) {
-    const descriptions = getSources(kebabName, sources, locale)
+    const descriptions = await getSources(kebabName, sources, locale)
 
     if (componentData.argument) {
       for (const [name, arg] of Object.entries(componentData.argument)) {

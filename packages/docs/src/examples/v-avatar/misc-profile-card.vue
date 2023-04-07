@@ -2,7 +2,7 @@
   <v-card
     class="mx-auto"
     max-width="434"
-    tile
+    rounded="0"
   >
     <v-img
       height="100%"

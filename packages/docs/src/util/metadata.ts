@@ -17,6 +17,7 @@ export function genMetaInfo (
   title: string,
   description: string,
   keywords: string,
+  assets: string[] = [],
 ) {
   const length = (description ?? '').length
 
@@ -31,7 +32,7 @@ export function genMetaInfo (
   }
 
   return {
-    link: [] as (Record<string, any>[]),
+    link: assets.map(href => ({ rel: 'stylesheet', href })),
     meta: [
       { key: 'description', name: 'description', content: description },
       { key: 'keywords', name: 'keywords', content: keywords },
@@ -78,7 +79,7 @@ function genLink () {
 function genOpenGraphMetaInfo (args: Metadata) {
   return parseMeta('og', {
     description: args.description,
-    image: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
     site_name: 'Vuetify',
     title: args.title,
     type: 'website',
@@ -109,17 +110,15 @@ function genMeta () {
   return [
     { charset: 'utf-8' },
     { name: 'mobile-web-app-capable', content: 'yes' },
-    {
-      name: 'viewport',
-      content: 'width=device-width, initial-scale=1, maximum-scale=5, minimal-ui',
-    },
+    { name: 'theme-color', content: '#1867c0' },
   ]
 }
 
 function genTwitterMetaInfo () {
   return parseMeta('twitter', {
-    card: 'https://cdn.vuetifyjs.com/images/logos/vuetify-logo-300.png',
+    image: 'https://cdn.vuetifyjs.com/docs/images/graphics/og-image.png',
+    card: 'summary_large_image',
     domain: 'https://vuetifyjs.com/',
-    site: 'Vuetify',
+    site: '@vuetifyjs',
   })
 }

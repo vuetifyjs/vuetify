@@ -3,7 +3,7 @@
     <app-title
       v-if="title"
       :path="title"
-      class="mb-0 pl-1"
+      class="mb-0 ps-1"
     />
 
     <v-item-group
@@ -19,21 +19,19 @@
           :key="text"
           cols="6"
         >
-          <v-item :value="text">
-            <template #default="{ isSelected, toggle }">
-              <v-card
-                :ref="'item-' + text"
-                :color="isSelected ? 'primary' : `grey-${dark ? 'darken' : 'lighten'}-3`"
-                class="v-card--group py-3 px-4 text-center position-relative cursor-pointer d-flex align-center justify-space-between"
-                rounded
-                flat
-                @click="toggle"
-              >
-                {{ t(text) }}
-
-                <v-icon :icon="icon" />
-              </v-card>
-            </template>
+          <v-item v-slot="{ isSelected, toggle }" :value="text">
+            <v-btn
+              :ref="'item-' + text"
+              :color="isSelected ? 'primary' : `grey-${isDark ? 'darken' : 'lighten'}-3`"
+              :append-icon="icon"
+              class="px-4 text-capitalize justify-space-between"
+              block
+              variant="flat"
+              size="large"
+              @click="toggle"
+            >
+              {{ t(text) }}
+            </v-btn>
           </v-item>
         </v-col>
       </v-row>
@@ -41,36 +39,27 @@
   </div>
 </template>
 
-<script lang="ts">
+<script setup lang="ts">
+  // Composables
   import { useI18n } from 'vue-i18n'
-  import { computed, defineComponent, PropType } from 'vue'
   import { useTheme } from 'vuetify'
 
-  export default defineComponent({
-    name: 'SettingsGroup',
+  // Utilities
+  import { computed, PropType } from 'vue'
 
-    props: {
-      title: String,
-      modelValue: null,
-      items: Array as PropType<{ icon: string, text: string }[]>,
-      multiple: Boolean,
-    },
-
-    emits: {
-      'update:modelValue': (value: string) => true,
-    },
-
-    setup () {
-      const { t } = useI18n()
-      const theme = useTheme()
-
-      return { t, dark: computed(() => theme.current.value.dark) }
-    },
+  defineProps({
+    title: String,
+    modelValue: null,
+    items: Array as PropType<{ icon: string, text: string }[]>,
+    multiple: Boolean,
   })
-</script>
 
-<style lang="sass">
-  // Bug in Vuetify, ripple isn't inheriting border-radius
-  .v-card--group::before
-    border-radius: inherit
-</style>
+  defineEmits({
+    'update:modelValue': (value: string) => true,
+  })
+
+  const { t } = useI18n()
+  const theme = useTheme()
+
+  const isDark = computed(() => theme.current.value.dark)
+</script>

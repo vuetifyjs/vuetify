@@ -14,9 +14,13 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
 
-export const VSliderThumb = defineComponent({
+export type VSliderThumbSlots = {
+  'thumb-label': []
+}
+
+export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
@@ -38,6 +42,10 @@ export const VSliderThumb = defineComponent({
     position: {
       type: Number,
       required: true,
+    },
+    ripple: {
+      type: Boolean,
+      default: true,
     },
   },
 
@@ -84,7 +92,7 @@ export const VSliderThumb = defineComponent({
       const _step = step.value || 0.1
       const steps = (props.max - props.min) / _step
       if ([left, right, down, up].includes(e.key)) {
-        const increase = isReversed.value ? [left, up] : [right, up]
+        const increase = horizontalDirection.value === 'rtl' ? [left, up] : [right, up]
         const direction = increase.includes(e.key) ? 1 : -1
         const multiplier = e.shiftKey ? 2 : (e.ctrlKey ? 1 : 0)
 
@@ -108,8 +116,7 @@ export const VSliderThumb = defineComponent({
     }
 
     useRender(() => {
-      const positionPercentage = convertToUnit(vertical.value ? 100 - props.position : props.position, '%')
-      const inset = vertical.value ? 'block' : 'inline'
+      const positionPercentage = convertToUnit((vertical.value || isReversed.value) ? 100 - props.position : props.position, '%')
       const { elevationClasses } = useElevation(computed(() => !disabled.value ? elevation.value : undefined))
 
       return (
@@ -122,9 +129,8 @@ export const VSliderThumb = defineComponent({
             },
           ]}
           style={{
-            [`inset-${inset}-start`]: `calc(${positionPercentage} - var(--v-slider-thumb-size) / 2)`,
+            '--v-slider-thumb-position': positionPercentage,
             '--v-slider-thumb-size': convertToUnit(thumbSize.value),
-            direction: !vertical.value ? horizontalDirection.value : undefined,
           }}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
@@ -151,7 +157,7 @@ export const VSliderThumb = defineComponent({
               textColorClasses.value,
             ]}
             style={ textColorStyles.value }
-            v-ripple={[true, null, ['circle', 'center']]}
+            v-ripple={[props.ripple, null, ['circle', 'center']]}
           />
           <VScaleTransition origin="bottom center">
             <div

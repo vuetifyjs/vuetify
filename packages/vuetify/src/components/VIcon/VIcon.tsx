@@ -9,8 +9,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, toRef } from 'vue'
-import { convertToUnit, defineComponent, flattenFragments, propsFactory, useRender } from '@/util'
+import { computed, Text, toRef } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef } from 'vue'
@@ -26,7 +26,7 @@ export const makeVIconProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-icon')
 
-export const VIcon = defineComponent({
+export const VIcon = genericComponent()({
   name: 'VIcon',
 
   props: makeVIconProps(),
@@ -38,8 +38,8 @@ export const VIcon = defineComponent({
         const slot = slots.default?.()
         if (!slot) return
 
-        return flattenFragments(slot).filter(node =>
-          node.children && typeof node.children === 'string'
+        return slot.filter(node =>
+          node.type === Text && node.children && typeof node.children === 'string'
         )[0]?.children as string
       })
     }
@@ -75,7 +75,9 @@ export const VIcon = defineComponent({
         ]}
         role={ attrs.onClick ? 'button' : undefined }
         aria-hidden={ !attrs.onClick }
-      />
+      >
+        { slots.default?.() }
+      </iconData.value.component>
     ))
 
     return {}
