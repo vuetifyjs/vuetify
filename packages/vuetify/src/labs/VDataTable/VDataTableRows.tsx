@@ -68,10 +68,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
       default: '$vuetify.noDataText',
     },
     rowHeight: Number,
-  },
-
-  emits: {
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
   },
 
   setup (props, { emit, slots }) {
@@ -137,13 +134,13 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
               { slots.item ? slots.item(slotProps) : (
                 <VDataTableRow
                   key={ `item_${item.value}` }
-                  onClick={ (event: Event) => {
+                  onClick={ expandOnClick.value || props['onClick:row'] ? (event: Event) => {
                     if (expandOnClick.value) {
                       toggleExpand(item)
                     }
 
-                    emit('click:row', event, { item })
-                  }}
+                    props['onClick:row']?.(event, { item })
+                  } : undefined }
                   index={ index }
                   item={ item }
                   v-slots={ slots }

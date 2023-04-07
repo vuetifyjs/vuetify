@@ -44,6 +44,7 @@ export const makeVTextFieldProps = propsFactory({
     type: String,
     default: 'text',
   },
+  modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
@@ -143,7 +144,10 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
       model.value = el.value
-      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+      if (
+        props.modelModifiers?.trim &&
+        ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
+      ) {
         const caretPosition = [el.selectionStart, el.selectionEnd]
         nextTick(() => {
           el.selectionStart = caretPosition[0]

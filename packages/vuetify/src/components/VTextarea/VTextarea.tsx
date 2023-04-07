@@ -54,6 +54,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
       validator: (v: any) => !isNaN(parseFloat(v)),
     },
     suffix: String,
+    modelModifiers: Object as PropType<Record<string, boolean>>,
 
     ...makeVInputProps(),
     ...makeVFieldProps(),
@@ -138,12 +139,14 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
     }
     function onInput (e: Event) {
       const el = e.target as HTMLTextAreaElement
-      const caretPosition = [el.selectionStart, el.selectionEnd]
       model.value = el.value
-      nextTick(() => {
-        el.selectionStart = caretPosition[0]
-        el.selectionEnd = caretPosition[1]
-      })
+      if (props.modelModifiers?.trim) {
+        const caretPosition = [el.selectionStart, el.selectionEnd]
+        nextTick(() => {
+          el.selectionStart = caretPosition[0]
+          el.selectionEnd = caretPosition[1]
+        })
+      }
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
