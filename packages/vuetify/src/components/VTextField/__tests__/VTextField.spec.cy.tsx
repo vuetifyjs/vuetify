@@ -72,7 +72,6 @@ describe('VTextField', () => {
       .should('have.value', 0)
   })
 
-
   describe('Showcase', () => {
     generate({ stories })
   })
