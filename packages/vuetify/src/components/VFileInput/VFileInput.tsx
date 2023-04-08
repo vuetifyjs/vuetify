@@ -123,7 +123,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       }
     }
     function onClickPrepend (e: MouseEvent) {
-      callEvent(props['onClick:prepend'], e)
       onControlClick(e)
     }
     function onControlMousedown (e: MouseEvent) {
@@ -167,7 +166,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           v-model={ model.value }
           class="v-file-input"
           onClick:prepend={ onClickPrepend }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
