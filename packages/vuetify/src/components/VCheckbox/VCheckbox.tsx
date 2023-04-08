@@ -50,6 +50,8 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
+          onClick:prepend={ props['onClick:prepend'] }
+          onClick:append={ props['onClick:append'] }
         >
           {{
             ...slots,
