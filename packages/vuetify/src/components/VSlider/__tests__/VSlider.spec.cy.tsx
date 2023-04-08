@@ -1,4 +1,3 @@
-/// <reference types="..\..\..\..\types\cypress" />
 /// <reference types="../../../../types/cypress" />
 
 import { VApp } from '@/components/VApp'
@@ -173,8 +172,8 @@ describe('VSlider', () => {
           <VSlider
             prependIcon="mdi-magnify-minus-outline"
             appendIcon="mdi-magnify-plus-outline"
-            onClick:prepend={onClickPrepend}
-            onClick:append={onClickAppend}
+            onClick:prepend={ onClickPrepend }
+            onClick:append={ onClickAppend }
           />
         </CenteredGrid>
       </VApp>
