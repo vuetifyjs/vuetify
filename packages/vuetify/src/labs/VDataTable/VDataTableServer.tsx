@@ -118,11 +118,13 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
         height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
           default: slots.default ?? (() => (
             <>
+              { slots.colgroup?.({ columns }) }
               <thead class="v-data-table__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
@@ -138,7 +140,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ flatItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}

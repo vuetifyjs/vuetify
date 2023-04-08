@@ -289,7 +289,11 @@ export const VSelect = genericComponent<new <
                           >
                             {{
                               prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                                <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                                <VCheckboxBtn
+                                  modelValue={ isSelected }
+                                  ripple={ false }
+                                  tabindex="-1"
+                                />
                               ) : undefined,
                             }}
                           </VListItem>

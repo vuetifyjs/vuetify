@@ -80,7 +80,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
 
 | Feature | Description |
 | - | - |
-| [useLocale](/api/vuetify/use-locale/) | The locale composable is used
+| [useLocale](/api/use-locale/) | The locale composable is used
 | [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
 
 <api-inline hide-links />

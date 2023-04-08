@@ -78,7 +78,7 @@ jobs:
   test-cypress:
     name: Test (Cypress)
     needs: pre_job
-    if: needs.pre_job.outputs.should_skip != 'true' && github.ref != 'refs/heads/master'
+    if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -94,6 +94,8 @@ jobs:
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
 
+      - run: npm pkg set devDependencies.cypress="https://cdn.cypress.io/beta/npm/12.8.2/linux-x64/retry-dynamic-imports-243502ae98b750e429789d373dd7175f487a62ee/cypress.tgz"
+        working-directory: ./packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn cy:run --record --parallel --ci-build-id $GITHUB_RUN_ID
         if: ${{ !startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs' }}
@@ -215,6 +217,8 @@ jobs:
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          VITE_AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+          VITE_AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

@@ -9,12 +9,12 @@
 
     {{ t('enterprise') }}
 
-    <v-badge
+    <!-- <v-badge
       class="ms-n1 mb-4"
       color="success"
       dot
       inline
-    />
+    /> -->
   </app-btn>
 </template>
 

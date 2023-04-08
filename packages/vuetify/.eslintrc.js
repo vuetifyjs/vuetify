@@ -75,6 +75,7 @@ module.exports = {
         'cypress/no-unnecessary-waiting': 'warn',
         'cypress/assertion-before-screenshot': 'warn',
         'cypress/no-async-tests': 'error',
+        'cypress/unsafe-to-chain-command': 'off',
       },
     },
   ],

@@ -2,6 +2,7 @@
   <v-system-bar
     v-if="showBanner"
     color="#e7f0f6"
+    theme="light"
     height="52"
   >
     <div class="text-blue-darken-3 text-start ms-4">
