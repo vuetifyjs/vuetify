@@ -9,23 +9,22 @@ import {
   watchEffect,
 } from 'vue'
 import {
-  colorToInt,
-  colorToRGB,
   createRange,
   darken,
   getCurrentInstance,
   getLuma,
   IN_BROWSER,
-  intToHex,
   lighten,
   mergeDeep,
+  parseColor,
   propsFactory,
+  RGBtoHex,
 } from '@/util'
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
 import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
-import type { HeadAttrs, HeadClient } from '@vueuse/head'
+import type { HeadClient } from '@vueuse/head'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 
@@ -225,7 +224,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
           for (const variation of (['lighten', 'darken'] as const)) {
             const fn = variation === 'lighten' ? lighten : darken
             for (const amount of createRange(parsedOptions.variations[variation], 1)) {
-              theme.colors[`${name}-${variation}-${amount}`] = intToHex(fn(colorToInt(color), amount))
+              theme.colors[`${name}-${variation}-${amount}`] = RGBtoHex(fn(parseColor(color), amount))
             }
           }
         }
@@ -235,10 +234,10 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
         if (/^on-[a-z]/.test(color) || theme.colors[`on-${color}`]) continue
 
         const onColor = `on-${color}` as keyof OnColors
-        const colorVal = colorToInt(theme.colors[color]!)
+        const colorVal = parseColor(theme.colors[color]!)
 
-        const blackContrast = Math.abs(APCAcontrast(0, colorVal))
-        const whiteContrast = Math.abs(APCAcontrast(0xffffff, colorVal))
+        const blackContrast = Math.abs(APCAcontrast(parseColor(0), colorVal))
+        const whiteContrast = Math.abs(APCAcontrast(parseColor(0xffffff), colorVal))
 
         // TODO: warn about poor color selections
         // const contrastAsText = Math.abs(APCAcontrast(colorVal, colorToInt(theme.colors.background)))
@@ -265,19 +264,12 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       createCssClass(lines, ':root', ['color-scheme: dark'])
     }
 
+    createCssClass(lines, ':root', genCssVariables(current.value))
+
     for (const [themeName, theme] of Object.entries(computedThemes.value)) {
-      const { variables, dark } = theme
-
       createCssClass(lines, `.v-theme--${themeName}`, [
-        `color-scheme: ${dark ? 'dark' : 'normal'}`,
+        `color-scheme: ${theme.dark ? 'dark' : 'normal'}`,
         ...genCssVariables(theme),
-        ...Object.keys(variables).map(key => {
-          const value = variables[key]
-          const color = typeof value === 'string' && value.startsWith('#') ? colorToRGB(value) : undefined
-          const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
-
-          return `--v-${key}: ${rgb ?? value}`
-        }),
       ])
     }
 
@@ -304,22 +296,29 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
     return lines.map((str, i) => i === 0 ? str : `    ${str}`).join('')
   })
 
+  function getHead () {
+    return {
+      style: [{
+        children: styles.value,
+        id: 'vuetify-theme-stylesheet',
+        nonce: parsedOptions.cspNonce || false as never,
+      }],
+    }
+  }
+
   function install (app: App) {
     const head = app._context.provides.usehead as HeadClient | undefined
     if (head) {
-      head.addHeadObjs(computed(() => {
-        const style: HeadAttrs = {
-          children: styles.value,
-          type: 'text/css',
-          id: 'vuetify-theme-stylesheet',
+      if (head.push) {
+        const entry = head.push(getHead)
+        watch(styles, () => { entry.patch(getHead) })
+      } else {
+        if (IN_BROWSER) {
+          head.addHeadObjs(computed(getHead))
+          watchEffect(() => head.updateDOM())
+        } else {
+          head.addHeadObjs(getHead())
         }
-        if (parsedOptions.cspNonce) style.nonce = parsedOptions.cspNonce
-
-        return { style: [style] }
-      }))
-
-      if (IN_BROWSER) {
-        watchEffect(() => head.updateDOM())
       }
     } else {
       let styleEl = IN_BROWSER
@@ -412,11 +411,17 @@ function genCssVariables (theme: InternalThemeDefinition) {
 
   const variables: string[] = []
   for (const [key, value] of Object.entries(theme.colors)) {
-    const rgb = colorToRGB(value)
+    const rgb = parseColor(value)
     variables.push(`--v-theme-${key}: ${rgb.r},${rgb.g},${rgb.b}`)
     if (!key.startsWith('on-')) {
       variables.push(`--v-theme-${key}-overlay-multiplier: ${getLuma(value) > 0.18 ? lightOverlay : darkOverlay}`)
     }
+  }
+
+  for (const [key, value] of Object.entries(theme.variables)) {
+    const color = typeof value === 'string' && value.startsWith('#') ? parseColor(value) : undefined
+    const rgb = color ? `${color.r}, ${color.g}, ${color.b}` : undefined
+    variables.push(`--v-${key}: ${rgb ?? value}`)
   }
 
   return variables

@@ -1,7 +1,6 @@
 {
   "props": {
     "accordion": "Removes the margin around open panels",
-    "disabled": "Disables the entire expansion-panel",
     "expand": "Leaves the expansion-panel open while selecting another",
     "focusable": "Makes the expansion-panel headers focusable",
     "flat": "Removes the expansion-panel's elevation and borders",

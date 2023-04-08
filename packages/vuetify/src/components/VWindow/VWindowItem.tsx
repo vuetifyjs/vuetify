@@ -9,10 +9,12 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
+
+// Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
 
-export const VWindowItem = defineComponent({
+export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
 
   directives: {
@@ -120,7 +122,7 @@ export const VWindowItem = defineComponent({
     const { hasContent } = useLazy(props, groupItem.isSelected)
 
     useRender(() => (
-      <MaybeTransition transition={ isBooted.value && transition.value } >
+      <MaybeTransition transition={ transition.value } disabled={ !isBooted.value }>
         <div
           class={[
             'v-window-item',

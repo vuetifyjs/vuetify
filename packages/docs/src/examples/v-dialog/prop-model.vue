@@ -9,6 +9,7 @@
 
     <v-dialog
       v-model="dialog"
+      width="auto"
     >
       <v-card>
         <v-card-text>

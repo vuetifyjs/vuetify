@@ -12,17 +12,14 @@ import { useScopeId } from '@/composables/scopeId'
 import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
-import { mergeProps, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, IN_BROWSER, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
-import type { SlotsToProps } from '@/util'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
-export const VDialog = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',
 
   props: {
@@ -98,8 +95,15 @@ export const VDialog = genericComponent<new () => {
       }
     })
 
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-haspopup': 'dialog',
+        'aria-expanded': String(isActive.value),
+      }, props.activatorProps)
+    )
+
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay
@@ -113,12 +117,9 @@ export const VDialog = genericComponent<new () => {
           ]}
           { ...overlayProps }
           v-model={ isActive.value }
-          aria-role="dialog"
           aria-modal="true"
-          activatorProps={ mergeProps({
-            'aria-haspopup': 'dialog',
-            'aria-expanded': String(isActive.value),
-          }, props.activatorProps) }
+          activatorProps={ activatorProps.value }
+          role="dialog"
           { ...scopeId }
         >
           {{

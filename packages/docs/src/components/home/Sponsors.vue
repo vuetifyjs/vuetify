@@ -1,6 +1,5 @@
 <template>
   <v-sheet
-    v-if="sponsors.length"
     id="home-sponsors"
     class="mx-auto pa-3"
     color="transparent"
@@ -44,11 +43,9 @@
   import { useSponsorsStore } from '@/store/sponsors'
 
   // Utilities
-  import { computed, onBeforeMount } from 'vue'
+  import { computed } from 'vue'
 
   const sponsorStore = useSponsorsStore()
-
-  onBeforeMount(sponsorStore.load)
 
   const sponsors = computed(() => {
     return Object.values(sponsorStore.byTier)

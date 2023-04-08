@@ -1,4 +1,6 @@
 /* eslint-disable sonarjs/no-identical-functions */
+import { toRaw } from 'vue'
+
 export type SelectStrategyFn = (data: {
   id: unknown
   value: boolean
@@ -29,6 +31,8 @@ export type SelectStrategy = {
 export const independentSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected }) => {
+      id = toRaw(id)
+
       // When mandatory and we're trying to deselect when id
       // is the only currently selected item then do nothing
       if (mandatory && !value) {
@@ -74,6 +78,7 @@ export const independentSingleSelectStrategy = (mandatory?: boolean): SelectStra
 
   const strategy: SelectStrategy = {
     select: ({ selected, id, ...rest }) => {
+      id = toRaw(id)
       const singleSelected = selected.has(id) ? new Map([[id, selected.get(id)!]]) : new Map()
       return parentStrategy.select({ ...rest, id, selected: singleSelected })
     },
@@ -99,6 +104,7 @@ export const leafSelectStrategy = (mandatory?: boolean): SelectStrategy => {
 
   const strategy: SelectStrategy = {
     select: ({ id, selected, children, ...rest }) => {
+      id = toRaw(id)
       if (children.has(id)) return selected
 
       return parentStrategy.select({ id, selected, children, ...rest })
@@ -115,6 +121,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 
   const strategy: SelectStrategy = {
     select: ({ id, selected, children, ...rest }) => {
+      id = toRaw(id)
       if (children.has(id)) return selected
 
       return parentStrategy.select({ id, selected, children, ...rest })
@@ -129,6 +136,7 @@ export const leafSingleSelectStrategy = (mandatory?: boolean): SelectStrategy =>
 export const classicSelectStrategy = (mandatory?: boolean): SelectStrategy => {
   const strategy: SelectStrategy = {
     select: ({ id, value, selected, children, parents }) => {
+      id = toRaw(id)
       const original = new Map(selected)
 
       const items = [id]

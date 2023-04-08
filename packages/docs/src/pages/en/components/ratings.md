@@ -14,17 +14,21 @@ related:
 
 The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
-<entry />
-
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
 <!-- <usage name="v-rating" /> -->
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-rating](/api/v-rating/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -56,7 +60,7 @@ For ratings that are not meant to be changed you can use **readonly** prop.
 
 #### Hover effect
 
-TODO
+When using the **hover** prop, the rating icons will become a solid color and slightly increase its scale when the mouse is hovered over them.
 
 <example file="v-rating/prop-hover" />
 
@@ -124,4 +128,4 @@ The rating component pairs well with products allowing you to gather and display
 
 <example file="v-rating/misc-card" />
 
-<backmatter />
+<example file="v-rating/misc-card-overview" />

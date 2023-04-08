@@ -7,6 +7,7 @@ meta:
 related:
   - /components/cards/
   - /components/images/
+  - /components/text-fields/
 ---
 
 # Intersection observer
@@ -23,7 +24,11 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-intersect](/api/v-intersect/) | The intersection observer directive |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -34,5 +39,3 @@ Scroll the window and watch the colored dot. Notice as the [v-card](/components/
 The `v-intersect` directive accepts options. Available options can be found in the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API). Below is an example using the `threshold` option.
 
 <example file="v-intersect/prop-options" />
-
-<backmatter />

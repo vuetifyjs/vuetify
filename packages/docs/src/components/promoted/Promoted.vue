@@ -1,7 +1,7 @@
 <template>
   <a
     v-if="ad"
-    class="d-flex mb-4"
+    class="d-block mb-4"
     style="max-width: 640px;"
     v-bind="attrs"
     @click="onClick"
@@ -9,9 +9,7 @@
     <promoted-base
       v-bind="$attrs"
       class="v-vuetify--promoted"
-      compact
-      color="transparent"
-      dark
+      density="compact"
       max-width="640"
       outlined
     >
@@ -56,6 +54,7 @@
 
   const props = defineProps({
     ...createAdProps(),
+
     medium: {
       type: String,
       default: 'promoted',
@@ -66,7 +65,13 @@
   const { event } = useGtag()
 
   const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
-  const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
+  const logo = computed(() => {
+    if (props.medium === 'promoted') {
+      return ad.value?.metadata?.images?.preview?.url || ad.value?.metadata?.images?.logo?.url
+    }
+
+    return ad.value?.metadata?.images?.logo?.url
+  })
   const background = computed(() => ad.value?.metadata?.images?.background?.url)
 
   function onClick () {

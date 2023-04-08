@@ -5,17 +5,19 @@ meta:
   keywords: vuetify browser support
 related:
   - /getting-started/installation/
-  - /getting-started/frequently-asked-questions/
+  - /introduction/why-vuetify/
   - /features/sass-variables/
 ---
 
 # Browser support
 
-Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function. This is not an exhaustive list of compatible browsers, but the main targeted ones.
+Vuetify 3 is a next generation framework that takes advantage of the latest web technology features and requires an evergreen browser to function.
 
 <entry />
 
 ## Browsers
+
+This is not an exhaustive list of compatible browsers, but the main targeted ones. If you are using a browser that is not listed here, it is not officially supported.
 
 | Browser                 | Status                     |
 |-------------------------|----------------------------|
@@ -36,5 +38,3 @@ Safari and some older versions of other browsers require polyfills to work corre
 ```
 
 Support for even older browsers may be possible with additional polyfills and [PostCSS plugins](https://github.com/csstools/postcss-plugins/tree/main/plugins/postcss-logical), but has not been tested and is not guaranteed. If you need to support older browsers we recommend using Vuetify 2.
-
-<backmatter />

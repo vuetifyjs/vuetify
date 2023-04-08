@@ -1,8 +1,8 @@
 <template>
   <v-row
     align="center"
-    justify="center"
     class="ma-4"
+    justify="center"
   >
     <v-card
       height="300"
@@ -17,7 +17,11 @@
           Show Overlay
         </v-btn>
 
-        <v-overlay v-model="overlay" contained class="align-center justify-center">
+        <v-overlay
+          v-model="overlay"
+          contained
+          class="align-center justify-center"
+        >
           <v-btn
             color="success"
             @click="overlay = false"

@@ -42,7 +42,7 @@
           lines="two"
           subheader
         >
-          <v-subheader>User Controls</v-subheader>
+          <v-list-subheader>User Controls</v-list-subheader>
           <v-list-item title="Content filtering" subtitle="Set the content filtering level to restrict apps that can be downloaded"></v-list-item>
           <v-list-item title="Password" subtitle="Require password for purchase or use password to restrict purchase"></v-list-item>
         </v-list>
@@ -51,7 +51,7 @@
           lines="two"
           subheader
         >
-          <v-subheader>General</v-subheader>
+          <v-list-subheader>General</v-list-subheader>
           <v-list-item title="Notifications" subtitle="Notify me about updates to apps or games that I downloaded">
             <template v-slot:prepend>
               <v-checkbox v-model="notifications"></v-checkbox>

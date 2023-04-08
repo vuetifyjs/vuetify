@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -65,7 +65,7 @@ export const emptyNested: NestedProvide = {
 
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as PropType<SelectStrategy>,
-  openStrategy: [String, Function] as PropType<OpenStrategyProp>,
+  openStrategy: [String, Object] as PropType<OpenStrategyProp>,
   opened: Array as PropType<unknown[]>,
   selected: Array as PropType<unknown[]>,
   mandatory: Boolean,
@@ -92,7 +92,7 @@ export const useNested = (props: NestedProps) => {
   })
 
   const openStrategy = computed(() => {
-    if (typeof props.openStrategy === 'function') return props.openStrategy
+    if (typeof props.openStrategy === 'object') return props.openStrategy
 
     switch (props.openStrategy) {
       case 'list': return listOpenStrategy
@@ -217,7 +217,8 @@ export const useNested = (props: NestedProps) => {
 export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
   const parent = inject(VNestedSymbol, emptyNested)
 
-  const computedId = computed(() => id.value ?? Symbol(getUid()))
+  const uidSymbol = Symbol(getUid())
+  const computedId = computed(() => id.value ?? uidSymbol)
 
   const item = {
     ...parent,
@@ -227,7 +228,7 @@ export const useNestedItem = (id: Ref<unknown>, isGroup: boolean) => {
     isOpen: computed(() => parent.root.opened.value.has(computedId.value)),
     parent: computed(() => parent.root.parents.value.get(computedId.value)),
     select: (selected: boolean, e?: Event) => parent.root.select(computedId.value, selected, e),
-    isSelected: computed(() => parent.root.selected.value.get(computedId.value) === 'on'),
+    isSelected: computed(() => parent.root.selected.value.get(toRaw(computedId.value)) === 'on'),
     isIndeterminate: computed(() => parent.root.selected.value.get(computedId.value) === 'indeterminate'),
     isLeaf: computed(() => !parent.root.children.value.get(computedId.value)),
     isGroupActivator: parent.isGroupActivator,

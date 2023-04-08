@@ -6,7 +6,7 @@ meta:
 related:
   - /styles/display/
   - /styles/content/
-  - /components/subheaders/
+  - /features/internationalization/
 ---
 
 # Text and typography
@@ -92,5 +92,3 @@ When using [RTL](/features/bidirectionality), you may want to keep the alignment
 If instead you want the alignment to respond to the current text direction, use `start` and `end`.
 
 <example file="text-and-typography/text-rtl" />
-
-<backmatter />

@@ -14,17 +14,21 @@ related:
 
 The `v-file-input` component is a specialized input that provides a clean interface for selecting files, showing detailed selection information and upload progress. It is meant to be a direct replacement for a standard file input.
 
-<entry />
-
 ## Usage
 
 At its core, the `v-file-input` component is a basic container that extends [v-text-field](/components/text-fields).
 
 <usage name="v-file-input" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-file-input](/api/v-file-input/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -93,5 +97,3 @@ Using the `selection` slot, you can customize the appearance of your input selec
 The flexibility of the selection slot allows you accommodate complex use-cases. In this example we show the first 2 selections as chips while adding a number indicator for the remaining amount.
 
 <example file="v-file-input/misc-complex-selection" />
-
-<backmatter />

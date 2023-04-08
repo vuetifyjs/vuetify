@@ -70,6 +70,7 @@ declare global {
 
   export const __VUETIFY_VERSION__: string
   export const __REQUIRED_VUE__: string
+  export const __VUE_OPTIONS_API__: boolean | undefined
 
   namespace JSX {
     interface Element extends VNode {}

@@ -14,6 +14,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useHydration } from '@/composables/hydration'
 import { useRtl } from '@/composables/locale'
+import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
 import { useTeleport } from '@/composables/teleport'
 import { useToggleScope } from '@/composables/toggleScope'
@@ -28,7 +29,6 @@ import {
   genericComponent,
   getScrollParent,
   IN_BROWSER,
-  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -46,8 +46,8 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { MakeSlots, SlotsToProps } from '@/util'
-import type { ExtractPropTypes, PropType, Ref } from 'vue'
+import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -109,16 +109,18 @@ export const makeVOverlayProps = propsFactory({
   ...makeTransitionProps(),
 }, 'v-overlay')
 
-export const VOverlay = genericComponent<new () => {
-  $props: SlotsToProps<OverlaySlots>
-}>()({
+export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
 
   inheritAttrs: false,
 
-  props: makeVOverlayProps(),
+  props: {
+    _disableGlobalStack: Boolean,
+
+    ...makeVOverlayProps(),
+  },
 
   emits: {
     'click:outside': (e: MouseEvent) => true,
@@ -141,10 +143,11 @@ export const VOverlay = genericComponent<new () => {
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
     const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
     const isMounted = useHydration()
+    const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
       if (v) isActive.value = false
@@ -237,7 +240,7 @@ export const VOverlay = genericComponent<new () => {
           props: mergeProps({
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
-        }) }
+        })}
 
         { isMounted.value && (
           <Teleport
@@ -258,7 +261,8 @@ export const VOverlay = genericComponent<new () => {
                 ]}
                 style={[stackStyles.value, { top: convertToUnit(top.value) }]}
                 ref={ root }
-                {...attrs}
+                { ...scopeId }
+                { ...attrs }
               >
                 <Scrim
                   color={ scrimColor }
@@ -270,7 +274,7 @@ export const VOverlay = genericComponent<new () => {
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
-                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
+                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
                 >
                   <div
                     ref={ contentEl }
@@ -309,7 +313,3 @@ export const VOverlay = genericComponent<new () => {
 })
 
 export type VOverlay = InstanceType<typeof VOverlay>
-
-export function filterVOverlayProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>>) {
-  return pick(props, Object.keys(VOverlay.props) as any)
-}

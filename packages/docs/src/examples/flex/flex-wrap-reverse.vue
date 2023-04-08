@@ -1,7 +1,5 @@
 <template>
-  <v-sheet
-    class="d-flex flex-wrap-reverse bg-surface-variant"
-  >
+  <v-sheet class="d-flex flex-wrap-reverse bg-surface-variant">
     <v-sheet
       v-for="n in 20"
       :key="n"

@@ -30,7 +30,7 @@
 
   function highlight (value: string) {
     const code = typeof value === 'object' ? JSON.stringify(value) : value
-    const [out, stripped] = stripLinks(code)
+    const [out, stripped] = stripLinks(code ?? '')
     const [grammar, language] = MAP[props.language]
     const highlighted = Prism.highlight(out, grammar, language)
     return insertLinks(highlighted, stripped)

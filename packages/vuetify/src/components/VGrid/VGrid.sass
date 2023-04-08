@@ -7,6 +7,11 @@
 
   &--fluid
     max-width: 100%
+    
+  &.fill-height
+    align-items: center
+    display: flex
+    flex-wrap: wrap
 
 // Row
 //
@@ -14,7 +19,7 @@
 .v-row
   +make-row
 
-  & + .row
+  & + .v-row
     margin-top: settings.$grid-gutter * .5
 
     &--dense

@@ -5,26 +5,26 @@ import './VColorPickerPreview.sass'
 import { VSlider } from '@/components/VSlider'
 
 // Utilities
-import { defineComponent, HSVAtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
-import type { HSVA } from '@/util'
+import type { HSV } from '@/util'
 
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
   props: {
     color: {
-      type: Object as PropType<HSVA | null>,
+      type: Object as PropType<HSV | null>,
     },
     disabled: Boolean,
     hideAlpha: Boolean,
   },
 
   emits: {
-    'update:color': (color: HSVA) => true,
+    'update:color': (color: HSV) => true,
   },
 
   setup (props, { emit }) {
@@ -38,7 +38,7 @@ export const VColorPickerPreview = defineComponent({
         ]}
       >
         <div class="v-color-picker-preview__dot">
-          <div style={{ background: HSVAtoCSS(props.color ?? nullColor) }} />
+          <div style={{ background: HSVtoCSS(props.color ?? nullColor) }} />
         </div>
 
         <div class="v-color-picker-preview__sliders">
@@ -59,9 +59,9 @@ export const VColorPickerPreview = defineComponent({
           { !props.hideAlpha && (
             <VSlider
               class="v-color-picker-preview__track v-color-picker-preview__alpha"
-              modelValue={ props.color?.a }
+              modelValue={ props.color?.a ?? 1 }
               onUpdate:modelValue={ a => emit('update:color', { ...(props.color ?? nullColor), a }) }
-              step={ 0 }
+              step={ 1 / 256 }
               min={ 0 }
               max={ 1 }
               disabled={ props.disabled }
@@ -70,7 +70,7 @@ export const VColorPickerPreview = defineComponent({
               trackFillColor="white"
               hideDetails
             />
-          ) }
+          )}
         </div>
       </div>
     ))

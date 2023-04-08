@@ -14,7 +14,7 @@ export interface ScrollStrategyData {
   updateLocation: Ref<((e: Event) => void) | undefined>
 }
 
-type ScrollStrategyFn = (data: ScrollStrategyData, props: StrategyProps) => void
+type ScrollStrategyFn = (data: ScrollStrategyData, props: StrategyProps, scope: EffectScope) => void
 
 const scrollStrategies = {
   none: null,
@@ -50,13 +50,17 @@ export function useScrollStrategies (
 
     scope = effectScope()
     await nextTick()
-    scope.run(() => {
+    scope.active && scope.run(() => {
       if (typeof props.scrollStrategy === 'function') {
-        props.scrollStrategy(data, props)
+        props.scrollStrategy(data, props, scope!)
       } else {
-        scrollStrategies[props.scrollStrategy]?.(data, props)
+        scrollStrategies[props.scrollStrategy]?.(data, props, scope!)
       }
     })
+  })
+
+  onScopeDispose(() => {
+    scope?.stop()
   })
 }
 
@@ -107,9 +111,10 @@ function blockScrollStrategy (data: ScrollStrategyData, props: StrategyProps) {
   })
 }
 
-function repositionScrollStrategy (data: ScrollStrategyData) {
+function repositionScrollStrategy (data: ScrollStrategyData, props: StrategyProps, scope: EffectScope) {
   let slow = false
   let raf = -1
+  let ric = -1
 
   function update (e: Event) {
     requestNewFrame(() => {
@@ -120,21 +125,30 @@ function repositionScrollStrategy (data: ScrollStrategyData) {
     })
   }
 
-  bindScroll(data.activatorEl.value ?? data.contentEl.value, e => {
-    if (slow) {
-      // If the position calculation is slow,
-      // defer updates until scrolling is finished.
-      // Browsers usually fire one scroll event per frame so
-      // we just wait until we've got two frames without an event
-      cancelAnimationFrame(raf)
-      raf = requestAnimationFrame(() => {
-        raf = requestAnimationFrame(() => {
+  ric = (typeof requestIdleCallback === 'undefined' ? (cb: Function) => cb() : requestIdleCallback)(() => {
+    scope.run(() => {
+      bindScroll(data.activatorEl.value ?? data.contentEl.value, e => {
+        if (slow) {
+          // If the position calculation is slow,
+          // defer updates until scrolling is finished.
+          // Browsers usually fire one scroll event per frame so
+          // we just wait until we've got two frames without an event
+          cancelAnimationFrame(raf)
+          raf = requestAnimationFrame(() => {
+            raf = requestAnimationFrame(() => {
+              update(e)
+            })
+          })
+        } else {
           update(e)
-        })
+        }
       })
-    } else {
-      update(e)
-    }
+    })
+  })
+
+  onScopeDispose(() => {
+    typeof cancelIdleCallback !== 'undefined' && cancelIdleCallback(ric)
+    cancelAnimationFrame(raf)
   })
 }
 

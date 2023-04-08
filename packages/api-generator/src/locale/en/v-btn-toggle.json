@@ -8,9 +8,6 @@
     "shaped": "Applies a large border radius on the top left and bottom right of the card.",
     "tile": "Removes the component's border-radius."
   },
-  "events": {
-    "update:modelValue": "Emitted when the input is changed by user interaction"
-  },
   "exposed": {
     "next": "Activates the next button",
     "prev": "Activates the previous button",

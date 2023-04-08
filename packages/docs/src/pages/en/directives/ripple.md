@@ -24,7 +24,11 @@ Basic ripple functionality can be enabled just by using `v-ripple` directive on 
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-ripple](/api/v-ripple/) | The ripple directive |
+
+<api-inline  hide-links />
 
 ## Examples
 
@@ -55,5 +59,3 @@ Using a helper class, you can change the color of the ripple.
 Some components provide the `ripple` prop that allows you to control the ripple effect. You can turn it off or customize the behavior by using `class` or `center` options.
 
 <example file="v-ripple/misc-ripple-in-components" />
-
-<backmatter />

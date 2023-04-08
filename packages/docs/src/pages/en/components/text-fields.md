@@ -5,7 +5,7 @@ meta:
   description: The text field component accepts textual input from users.
   keywords: text fields, vuetify text field component, vue text field component
 related:
-  - /components/textarea/
+  - /components/textareas/
   - /components/selects/
   - /components/forms/
 ---
@@ -26,6 +26,14 @@ A simple text field with placeholder and/or label.
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-text-field](/api/v-text-field/) | Primary Component |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-text-field` is:
@@ -43,12 +51,6 @@ The recommended placement of elements inside of `v-text-field` is:
 | 4. Label | A content area for displaying text to users that correlates to the input |
 | 5. Append-inner icon | A custom icon that is located at the end of `v-field` component |
 | 6. Append icon | A custom icon that is located after `v-field` component |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-text-field](/api/v-text-field/) | Primary Component |
 
 ## Guide
 
@@ -74,7 +76,7 @@ The following code snippet is an example of a simple form for for collecting a u
 
 #### Placeholders
 
-Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label][#labeling] or [hint](#hints) properties.
+Sometimes a label alone doesn't convey enough information and you need to expose more. For those use-cases, use the **placeholder** property with or without the [label](#labeling) or [hint](#hint) properties.
 
 In the following snippet, we improve the user experience of a `v-text-field` that is capturing an email address:
 
@@ -124,6 +126,8 @@ In addition to **persistent-hint**, there are 3 other properties that support a 
 The **clearable** prop appends an inner [v-icon](/components/icons/) that clears the `v-text-field` when clicked. When an input is cleared, it resets the current `v-text-field` value. The following example displays an interactive icon when the mouse hovers over the input:
 
 <example file="v-text-field/prop-clearable" open />
+
+Note that **readonly** will not remove the clear icon, to prevent readonly inputs from being cleared you should also disable **clearable**.
 
 Sometimes you may need to perform an action when the user clears an input. By using a custom [Vue Event Handler](https://vuejs.org/guide/essentials/event-handling.html), you can bind a custom function that is invoked whenever the `v-text-field` is cleared by the user. The following example demonstrates how to use a a custom event handler to invoke the **onClear** method:
 
@@ -319,5 +323,3 @@ Full width text fields allow you to create boundless inputs. In this example, we
 Using the HTML input **type** [password](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/password) can be used with an appended icon and callback to control the visibility.
 
 <example file="v-text-field/misc-password" />
-
-<backmatter />

@@ -522,6 +522,13 @@ $utilities: () !default;
           100: 100%
         )
       ),
+      "height-screen": (
+        property: height,
+        class: h,
+        values: (
+          screen: 100dvh
+        )
+      ),
       "width": (
         property: width,
         class: w,

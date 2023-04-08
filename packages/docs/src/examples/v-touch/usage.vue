@@ -11,8 +11,10 @@
     justify="center"
     style="height: 500px"
   >
-    <v-subheader>Swipe Direction</v-subheader>
-    {{ swipeDirection }}
+    <v-col class="text-center">
+      <div class="text-subtitle-2">Swipe Direction</div>
+      {{ swipeDirection }}
+    </v-col>
   </v-row>
 </template>
 

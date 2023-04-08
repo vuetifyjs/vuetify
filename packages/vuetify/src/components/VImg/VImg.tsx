@@ -21,7 +21,7 @@ import {
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -37,7 +37,14 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: []
+  placeholder: []
+  error: []
+  sources: []
+}
+
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
@@ -89,7 +96,7 @@ export const VImg = defineComponent({
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,
           lazySrc: props.lazySrc || props.src.lazySrc,
-          aspect: Number(props.aspectRatio || props.src.aspect),
+          aspect: Number(props.aspectRatio || props.src.aspect || 0),
         } : {
           src: props.src,
           srcset: props.srcset,
@@ -104,6 +111,12 @@ export const VImg = defineComponent({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+    watch(aspectRatio, (val, oldVal) => {
+      if (!val && oldVal && image.value) {
+        pollForSize(image.value)
+      }
+    })
+
     // TODO: getSrc when window width changes
 
     onBeforeMount(() => init())
@@ -161,15 +174,17 @@ export const VImg = defineComponent({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
+    let timer = -1
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
+        clearTimeout(timer)
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          setTimeout(poll, timeout)
+          timer = window.setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
@@ -192,7 +207,7 @@ export const VImg = defineComponent({
           class={['v-img__img', containClasses.value]}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
-          alt=""
+          alt={ props.alt }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -222,7 +237,7 @@ export const VImg = defineComponent({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
-            alt=""
+            alt={ props.alt }
           />
         )}
       </MaybeTransition>

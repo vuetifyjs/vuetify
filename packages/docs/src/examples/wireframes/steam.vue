@@ -18,7 +18,7 @@
       <v-avatar
         v-for="n in 2"
         :key="`avatar--${n}`"
-        class="mr-3"
+        class="me-3"
         color="grey-lighten-1"
         size="36"
       ></v-avatar>
@@ -28,7 +28,7 @@
       <v-btn
         v-for="n in 4"
         :key="n"
-        class="mr-3"
+        class="me-3"
         color="grey-lighten-1"
         variant="flat"
         min-width="96"
@@ -53,7 +53,7 @@
         <v-btn
           min-width="0"
           variant="flat"
-          class="ml-3"
+          class="ms-3"
           color="grey-lighten-3"
         ></v-btn>
       </div>
@@ -64,7 +64,7 @@
         <v-btn
           v-for="n in 2"
           :key="`btn--${n}`"
-          class="ml-3"
+          class="ms-3"
           color="grey-lighten-1"
           fab
           size="x-small"
@@ -74,7 +74,7 @@
 
       <div class="pa-1 mb-4">
         <v-text-field
-          dense
+          density="compact"
           flat
           hide-details
           rounded
@@ -95,7 +95,7 @@
     >
       <v-text-field
         bg-color="grey lighten-1"
-        dense
+        density="compact"
         flat
         hide-details
         rounded

@@ -1,5 +1,5 @@
 // Utilities
-import { inject, reactive, ref, toRefs, watchEffect } from 'vue'
+import { inject, reactive, ref, shallowRef, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
@@ -8,15 +8,14 @@ import { IN_BROWSER, SUPPORTS_TOUCH } from '@/util/globals'
 // Types
 import type { InjectionKey, Ref } from 'vue'
 
-export type DisplayBreakpoint = keyof DisplayThresholds
+export const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
 
-export interface DisplayThresholds {
-  xs: number
-  sm: number
-  md: number
-  lg: number
-  xl: number
-  xxl: number
+export type Breakpoint = typeof breakpoints[number]
+
+export type DisplayBreakpoint = 'xs' | Breakpoint
+
+export type DisplayThresholds = {
+  [key in DisplayBreakpoint]: number
 }
 
 export interface DisplayOptions {
@@ -68,6 +67,9 @@ export interface DisplayInstance {
   platform: Ref<DisplayPlatform>
   thresholds: Ref<DisplayThresholds>
 
+  /** @internal */
+  ssr: boolean
+
   update (): void
 }
 
@@ -101,8 +103,10 @@ function getClientHeight (isHydrate?: boolean) {
     : 0
 }
 
-function getPlatform (): DisplayPlatform {
-  const userAgent = IN_BROWSER ? window.navigator.userAgent : 'ssr'
+function getPlatform (isHydrate?: boolean): DisplayPlatform {
+  const userAgent = IN_BROWSER && !isHydrate
+    ? window.navigator.userAgent
+    : 'ssr'
 
   function match (regexp: RegExp) {
     return Boolean(userAgent.match(regexp))
@@ -119,7 +123,6 @@ function getPlatform (): DisplayPlatform {
   const win = match(/win/i)
   const mac = match(/mac/i)
   const linux = match(/linux/i)
-  const ssr = match(/ssr/i)
 
   return {
     android,
@@ -134,21 +137,25 @@ function getPlatform (): DisplayPlatform {
     mac,
     linux,
     touch: SUPPORTS_TOUCH,
-    ssr,
+    ssr: userAgent === 'ssr',
   }
 }
 
-export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): DisplayInstance {
+export function createDisplay (options?: DisplayOptions, ssr?: boolean): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight(isHydrate))
-  const platform = getPlatform()
+  const height = ref(getClientHeight(ssr))
+  const platform = shallowRef(getPlatform(ssr))
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth(isHydrate))
+  const width = ref(getClientWidth(ssr))
 
-  function update () {
+  function updateSize () {
     height.value = getClientHeight()
     width.value = getClientWidth()
+  }
+  function update () {
+    updateSize()
+    platform.value = getPlatform()
   }
 
   // eslint-disable-next-line max-statements
@@ -167,9 +174,7 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): D
       : xl ? 'xl'
       : 'xxl'
     const breakpointValue = typeof mobileBreakpoint === 'number' ? mobileBreakpoint : thresholds[mobileBreakpoint]
-    const mobile = !platform.ssr
-      ? width.value < breakpointValue
-      : platform.android || platform.ios || platform.opera
+    const mobile = width.value < breakpointValue
 
     state.xs = xs
     state.sm = sm
@@ -190,15 +195,15 @@ export function createDisplay (options?: DisplayOptions, isHydrate?: boolean): D
     state.width = width.value
     state.mobile = mobile
     state.mobileBreakpoint = mobileBreakpoint
-    state.platform = platform
+    state.platform = platform.value
     state.thresholds = thresholds
   })
 
   if (IN_BROWSER) {
-    window.addEventListener('resize', update, { passive: true })
+    window.addEventListener('resize', updateSize, { passive: true })
   }
 
-  return { ...toRefs(state), update }
+  return { ...toRefs(state), update, ssr: !!ssr }
 }
 
 export function useDisplay () {

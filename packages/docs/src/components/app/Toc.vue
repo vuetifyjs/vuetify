@@ -1,11 +1,11 @@
 <template>
   <v-navigation-drawer
     id="app-toc"
+    v-model="app.toc"
     color="background"
     floating
     location="right"
     sticky
-    touchless
     width="256"
   >
     <template
@@ -13,12 +13,12 @@
       #prepend
     >
       <app-headline
-        class="mt-4 mb-2 ml-4"
+        class="mt-4 mb-2 ms-4"
         path="contents"
       />
     </template>
 
-    <ul class="ml-5">
+    <ul class="ms-5">
       <router-link
         v-for="{ to, level, text } in toc"
         v-slot="{ href }"
@@ -28,13 +28,13 @@
       >
         <li
           :class="[
-            'pl-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': route.hash === to,
               'text-medium-emphasis': route.hash !== to,
-              'pl-6': level === 3,
-              'pl-9': level === 4,
-              'pl-12': level === 5,
+              'ps-6': level === 3,
+              'ps-9': level === 4,
+              'ps-12': level === 5,
             }
           ]"
         >
@@ -52,9 +52,11 @@
       <v-container>
         <app-headline
           v-if="sponsors.length"
-          class="mb-1 mt-n1"
+          :to="rpath('/introduction/sponsors-and-backers/')"
+          class="mb-1 mt-n1 text-high-emphasis text-decoration-none"
           path="sponsors"
           size="subtitle-1"
+          tag="router-link"
         />
 
         <v-row dense>
@@ -70,12 +72,27 @@
             />
           </v-col>
 
-          <v-col cols="12" class="mt-3">
-            <sponsor-link block size="large" />
+          <v-col class="d-inline-flex">
+            <v-card
+              :color="dark ? undefined : 'grey-lighten-5'"
+              :to="rpath('/introduction/sponsors-and-backers/')"
+              class="py-2 px-3 text-center"
+              variant="flat"
+              width="100%"
+            >
+              <small class="text-disabled">Your logo here</small>
+            </v-card>
           </v-col>
 
           <v-col cols="12">
-            <carbon />
+            <a
+              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              @click="onClickPromotion"
+            >
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+            </a>
           </v-col>
         </v-row>
       </v-container>
@@ -86,21 +103,25 @@
 <script setup lang="ts">
   // Components
   import SponsorCard from '@/components/sponsor/Card.vue'
-  import SponsorLink from '@/components/sponsor/Link.vue'
 
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
+  import { useAppStore } from '@/store/app'
+  import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, onBeforeMount, ref } from 'vue'
+  import { computed, ref } from 'vue'
+  import { rpath } from '@/util/routes'
 
   type TocItem = {
     to: string;
     text: string;
     level: number;
   }
+
+  const app = useAppStore()
 
   function useUpdateHashOnScroll (route: RouteLocation, router: Router) {
     const scrolling = ref(false)
@@ -193,6 +214,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
+  const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -209,9 +231,15 @@
     scrolling.value = false
   }
 
-  const sponsorStore = useSponsorsStore()
+  function onClickPromotion () {
+    event('click', {
+      event_category: 'vuetify-toc',
+      event_label: 'promotion',
+      value: 'theme-selection',
+    })
+  }
 
-  onBeforeMount(async () => sponsorStore.load())
+  const sponsorStore = useSponsorsStore()
 
   const toc = computed(() => route.meta.toc as TocItem[])
 

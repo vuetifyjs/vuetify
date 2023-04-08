@@ -157,12 +157,14 @@ Unlike the [Intersection Observer API](https://developer.mozilla.org/en-US/docs/
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-mutate](/api/v-mutate/) | The mutation observer directive |
+
+<api-inline hide-links />
 
 ## Examples
 
 <example file="v-mutate/usage" />
 
 <example file="v-mutate/option-modifiers" />
-
-<backmatter />

@@ -13,13 +13,11 @@ related:
 
 Vuetify blueprints are a new way to pre-configure your entire application with a completely unique design system.
 
-![Blueprints Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/blueprints/blueprints-entry.png)
-
----
+<entry />
 
 ## Usage
 
-Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#md1) preset:
+Blueprints are a collection of Vuetify configuration options that assign default values for components, colors, language, and more. Open your project's `vuetify.js` file and import the desired blueprint. The follow example demonstrates how to apply the [Material Design 1](#material-design-1) preset:
 
 ```js { resource=plugins/vuetify.js }
 import { createVuetify } from 'vuetify'
@@ -30,19 +28,17 @@ export default createVuetify({
 })
 ```
 
-<entry />
-
 ### White-label concept
 
-While Vuetify is built under the guise of Google's [Material Design](https://material.io/) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
+While Vuetify is built under the guise of Google's [Material Design](https://material.io) specification, it is still flexible enough to be used as the foundation for any design system. By default, Vuetify components have no color and are **white-label** in nature. A white-label product is a product or service produced by one company that other companies rebrand to make it appear as if they had made it.
 
 ## Available blueprints
 
 | Name | Release date | Status | Resource |
 | - | - | - | - |
-| [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://material.io/archive/guidelines/) |
-| [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://material.io/) |
-| [Material Design 3](#material-design-3) | 2021 | ⚠️ Development | [Specification](https://m3.material.io/) |
+| [Material Design 1](#material-design-1) | 2014 | ✅ Available | [Specification](https://m1.material.io) |
+| [Material Design 2](#material-design-2) | 2017 | ✅ Available | [Specification](https://m2.material.io) |
+| [Material Design 3](#material-design-3) | 2022 | ✅ Available | [Specification](https://m3.material.io) |
 
 ### Material Design 1
 
@@ -79,5 +75,3 @@ import { md3 } from 'vuetify/blueprints'
 **Preview:**
 
 <example preview file="blueprints/md3" />
-
-<backmatter />

@@ -42,7 +42,7 @@
                   }"
                   width="30"
                   height="30"
-                  class="mr-2"
+                  class="me-2"
                   @click="toggle"
                 ></v-card>
               </v-item>

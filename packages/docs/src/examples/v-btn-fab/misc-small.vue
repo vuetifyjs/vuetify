@@ -38,9 +38,9 @@
           lines="two"
           subheader
         >
-          <v-subheader inset>
+          <v-list-subheader inset>
             Folders
-          </v-subheader>
+          </v-list-subheader>
 
           <v-list-item
             v-for="item in items"
@@ -70,9 +70,9 @@
 
           <v-divider inset></v-divider>
 
-          <v-subheader inset>
+          <v-list-subheader inset>
             Files
-          </v-subheader>
+          </v-list-subheader>
 
           <v-list-item
             v-for="item in items2"

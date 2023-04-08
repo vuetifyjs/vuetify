@@ -18,7 +18,7 @@
             location="top end"
           >
             <v-icon
-              :icon="`mdi-bell${unread.length === 0 ? '-outline' : '-ring-outline'}`"
+              :icon="icon"
               class="mx-1"
               color="medium-emphasis"
             />
@@ -28,13 +28,13 @@
     </template>
 
     <v-toolbar
-      class="pl-4 pr-5"
+      class="ps-4 pe-5"
       color="surface"
       density="compact"
     >
       <v-btn
         :disabled="showArchived ? unread.length < 1 : read.length < 1"
-        class="px-2 ml-n1"
+        class="px-2 ms-n1"
         size="small"
         variant="text"
         @click="showArchived = !showArchived"
@@ -55,11 +55,7 @@
       >
         <p>{{ t('done') }}</p>
 
-        <v-icon
-          color="grey-lighten-2"
-          size="96"
-          icon="mdi-vuetify"
-        />
+        <v-icon icon="$vuetify" size="96" color="#D7D7D7" />
       </div>
 
       <template v-else>
@@ -78,7 +74,7 @@
               :ripple="false"
               class="py-2"
             >
-              <v-list-item-title class="text-wrap text-h6 mb-1">
+              <v-list-item-title class="text-wrap text-h6 mb-1 text-truncate">
                 <span>{{ notification.metadata.emoji }}</span>
 
                 <span class="ps-3"> {{ notification.title }}</span>
@@ -96,7 +92,7 @@
                 <v-btn
                   :ripple="false"
                   :icon="marked.icon"
-                  class="ml-3"
+                  class="ms-3"
                   color="medium-emphasis"
                   variant="text"
                   @click.stop.prevent="toggle(notification)"
@@ -124,7 +120,7 @@
   import { computed, onMounted, ref } from 'vue'
 
   // Types
-  type Notification = {
+  interface Notification {
     metadata: {
       action: string
       action_text: string
@@ -138,7 +134,7 @@
   }
 
   const { t } = useI18n()
-  const { bucket } = useCosmic()
+  const { bucket } = useCosmic<Notification>()
   const { mobile } = useDisplay()
   const user = useUserStore()
   const menu = ref(false)
@@ -162,22 +158,14 @@
 
     return { icon, path }
   })
+  const icon = computed(() => {
+    if (menu.value && unread.value.length > 0) return 'mdi-bell-ring'
+    else if (menu.value) return 'mdi-bell'
+    else if (unread.value.length > 0) return 'mdi-bell-ring-outline'
+    else return 'mdi-bell-outline'
+  })
 
   const width = computed(() => mobile.value ? 420 : 520)
-
-  async function load () {
-    const { objects } = await bucket.getObjects<Notification>({
-      query: {
-        type: 'notifications',
-        status: 'published',
-      },
-      props: 'created_at,metadata,slug,title',
-      limit: 5,
-      sort: '-created_at',
-    })
-
-    all.value = objects ?? []
-  }
 
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
@@ -185,5 +173,18 @@
       : [...user.notifications.read, slug]
   }
 
-  onMounted(load)
+  onMounted(async () => {
+    if (all.value.length) return
+
+    const { objects = [] } = (
+      await bucket?.objects
+        .find({ type: 'notifications' })
+        .props('created_at,metadata,slug,title')
+        .status('published')
+        .sort('-created_at')
+        .limit(5)
+    ) || {}
+
+    all.value = objects
+  })
 </script>

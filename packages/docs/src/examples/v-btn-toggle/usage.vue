@@ -35,7 +35,6 @@
 
       <v-btn-toggle
         v-model="toggle_multiple"
-        dense
         background-color="primary"
         dark
         multiple

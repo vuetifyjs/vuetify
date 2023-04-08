@@ -7,15 +7,15 @@ type ComponentData = {
   slots: Record<string, Definition>
   events: Record<string, Definition>
   exposed: Record<string, Definition>
-  componentName: string
-  kebabName: string
+  displayName: string
+  fileName: string
 }
 
 export function createVeturApi (componentData: ComponentData[]) {
   const tags = componentData.reduce((obj, component) => {
     return {
       ...obj,
-      [component.kebabName]: {
+      [component.fileName]: {
         attributes: Object.keys(component.props ?? {}).map(name => kebabCase(name)).sort(),
         description: '',
       },
@@ -24,7 +24,7 @@ export function createVeturApi (componentData: ComponentData[]) {
 
   const attributes = componentData.reduce((obj, component) => {
     const attrs = Object.entries(component.props ?? {}).reduce((curr, [name, prop]) => {
-      curr[`${component.kebabName}/${kebabCase(name)}`] = {
+      curr[`${component.fileName}/${kebabCase(name)}`] = {
         type: prop.formatted,
         description: prop.description.en || '',
       }
