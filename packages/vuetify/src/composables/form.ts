@@ -20,6 +20,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
 }
 
@@ -70,7 +71,7 @@ export const makeFormProps = propsFactory({
 }, 'form')
 
 export function createForm (props: FormProps) {
-  const model = useProxiedModel(props, 'modelValue')
+  const model = useProxiedModel(props, 'modelValue', null)
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
@@ -170,6 +171,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validateOn: toRef(props, 'validateOn'),
   })
@@ -179,6 +181,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validate,
     reset,

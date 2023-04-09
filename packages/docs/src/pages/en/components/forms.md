@@ -12,7 +12,7 @@ related:
 
 # Forms
 
-When it comes to form validation, Vuetify has a multitude of integrations and baked in functionality. Want to use a 3rd party validation plugin? Out of the box you can use [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+When it comes to form validation, Vuetify has a simple built-in system based on functions as rules. Want to use a 3rd party validation plugin instead? We provide examples on how to integrate with both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
 
 <promoted slug="vuemastery-forms" />
 
@@ -42,11 +42,21 @@ The most basic of rules is a simple function that checks if an input has a value
 
 <example file="v-form/rules-required" />
 
-However rules a can be as complicated as you need them to be, including the ability to validate inputs asynchronously. In the below example we are checking the input against a fake API service that takes some time to respond. The `submit` event is a Promise that you can wait for.
+However rules can be as complicated as you need them to be, including the ability to validate inputs asynchronously. In the example below we are checking the input against a fake API service that takes some time to respond. The `submit` event is a Promise that you can wait for.
 
 This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit'` so that we only call the API service when the button is clicked.
 
 <example file="v-form/rules-async" />
+
+## Validation state
+
+The validation state available in the **v-model** (and returned by the `validate()` function) has three possible values.
+
+| Value | Description |
+| - | - |
+| `null`  | No validation has occured, or form has been reset using `reset()` or `resetValidation()` |
+| `false` | Validation has failed |
+| `true`  | Validation has passed |
 
 ## Examples
 

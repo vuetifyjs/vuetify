@@ -114,8 +114,15 @@ export function useValidation (
 
   const validateOn = computed(() => props.validateOn || form?.validateOn.value || 'input')
 
-  // Set initial valid state, for inputs that might not have rules
-  onMounted(() => form?.update(uid.value, isValid.value, errorMessages.value))
+  onMounted(() => {
+    // Set initial valid state, for inputs that might not have rules
+    form?.update(uid.value, isValid.value, errorMessages.value)
+
+    // If there is an initial value, validate it
+    if (validationModel.value) {
+      validate()
+    }
+  })
 
   useToggleScope(() => validateOn.value === 'input', () => {
     watch(validationModel, () => {

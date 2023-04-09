@@ -186,6 +186,57 @@ describe('VForm', () => {
       })
   })
 
+  it('should run validation on mount if input has value', () => {
+    const form = ref()
+
+    cy.mount(() => (
+      <Application>
+        <VForm ref={ form }>
+          <VTextField name="empty" rules={[v => v.length < 5 || 'Error']} modelValue="" />
+          <VTextField name="error" rules={[v => v.length < 5 || 'Error']} modelValue="Hello" />
+          <VTextField name="valid" rules={[v => v.length < 5 || 'Error']} modelValue="Hell" />
+        </VForm>
+      </Application>
+    ))
+
+    cy.get('.v-messages__message')
+      .should('have.length', 1)
+      .and('have.text', 'Error')
+      .then(() => {
+        expect(form.value.errors).to.deep.equal([
+          {
+            id: 'error',
+            errorMessages: ['Error'],
+          },
+        ])
+      })
+  })
+
+  it('should have initial value of null if no validation has occured', () => {
+    const form = ref()
+
+    cy.mount(() => (
+      <Application>
+        <VForm ref={ form }>
+          <VTextField name="empty" rules={[v => v.length < 5 || 'Error']} modelValue="" />
+        </VForm>
+      </Application>
+    ))
+
+    cy.then(() => {
+      expect(form.value.isValid).to.be.null
+    })
+      .get('.v-text-field input')
+      .type('Hell')
+      .then(() => {
+        expect(form.value.isValid).to.be.true
+      })
+      .type('o')
+      .then(() => {
+        expect(form.value.isValid).to.be.false
+      })
+  })
+
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
