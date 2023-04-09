@@ -2,6 +2,7 @@
 @use "../../styles/settings/variables";
 @use "../../styles/tools/functions";
 
+// VAppBar
 $app-bar-background: rgb(var(--v-theme-surface)) !default;
 $app-bar-border-color: variables.$border-color-root !default;
 $app-bar-border-radius: map.get(variables.$rounded, '0') !default;
@@ -29,6 +30,7 @@ $app-bar-title-font-size: functions.map-deep-get(variables.$typography, 'h5', 's
 $app-bar-title-padding: 6px 20px !default;
 $app-bar-transition: .2s variables.$standard-easing !default;
 
+// Lists
 $app-bar-border: (
   $app-bar-border-color,
   $app-bar-border-style,

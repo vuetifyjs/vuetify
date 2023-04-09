@@ -4,7 +4,7 @@
     max-width="344"
     variant="outlined"
   >
-    <v-card-header>
+    <v-card-item>
       <div>
         <div class="text-overline mb-1">
           OVERLINE
@@ -14,7 +14,7 @@
         </div>
         <div class="text-caption">Greyhound divisely hello coldly fonwderfully</div>
       </div>
-    </v-card-header>
+    </v-card-item>
 
     <v-card-actions>
       <v-btn variant="outlined">

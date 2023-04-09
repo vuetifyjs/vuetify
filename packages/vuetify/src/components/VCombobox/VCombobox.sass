@@ -1,10 +1,12 @@
-@forward './variables'
 @use 'sass:selector'
 @use 'sass:math'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VInput/variables' as *
+
+@at-root
+  @include tools.density('v-input', $combobox-chips-margin-bottom) using ($modifier)
+    --combobox-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 .v-combobox
   .v-field
@@ -33,6 +35,12 @@
     .v-combobox__selection
       margin-inline-end: 2px
 
+  .v-field--single-line
+    .v-combobox__selection-text
+      overflow: hidden
+      text-overflow: ellipsis
+      white-space: nowrap
+
 .v-combobox
   &__content
     overflow: hidden
@@ -47,6 +55,7 @@
     display: inline-flex
     letter-spacing: inherit
     line-height: inherit
+    max-width: 100%
 
   &--active-menu
     .v-field__append-inner
@@ -56,6 +65,9 @@
 
   &--chips
     .v-combobox__selection
+      margin-top: $combobox-chips-margin-top
+      margin-bottom: var(--combobox-chips-margin-bottom)
+
       &:first-child
         margin-inline-start: 0
 
@@ -75,6 +87,7 @@
       position: absolute
       left: 0
       right: 0
+      width: 100%
       padding-inline-start: inherit
       padding-inline-end: inherit
 

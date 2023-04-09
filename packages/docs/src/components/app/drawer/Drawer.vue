@@ -1,38 +1,68 @@
 <template>
   <v-navigation-drawer
+    id="app-drawer"
     v-model="app.drawer"
+    :order="mobile ? -1 : undefined"
     width="300"
   >
-    <app-list :items="items" nav />
+    <template #append>
+      <v-divider />
+
+      <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
+        <div class="d-inline-flex align-center">
+          <v-icon start>mdi-label</v-icon>
+          Latest release:
+        </div>
+
+        <v-btn
+          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
+          class="text-none px-2 ms-auto"
+          density="compact"
+          rel="noopener noreferrer"
+          target="_blank"
+          variant="text"
+        >
+          v{{ version }}
+
+          <v-icon size="xs" end>mdi-open-in-new</v-icon>
+        </v-btn>
+      </div>
+    </template>
+
+    <app-list :items="app.items" nav>
+      <template #divider>
+        <v-divider class="my-3 mb-4 ms-16" />
+      </template>
+    </app-list>
   </v-navigation-drawer>
 </template>
 
-<script lang="ts">
+<script setup>
   // Components
   import AppList from '@/components/app/list/List.vue'
 
   // Composables
   import { useAppStore } from '@/store/app'
-  import { useI18n } from 'vue-i18n'
+  import { useDisplay, version } from 'vuetify'
 
   // Utilities
-  import { defineComponent } from 'vue'
+  import { onMounted } from 'vue'
+  import { wait } from '@/util/helpers'
 
-  // Data
-  import nav from '@/data/nav-alpha.json'
+  const app = useAppStore()
+  const { mobile } = useDisplay()
 
-  export default defineComponent({
-    name: 'AppDrawer',
+  onMounted(async () => {
+    await wait(1000)
 
-    components: {
-      AppList,
-    },
+    const element = document.querySelector('#app-drawer .v-list-item--active:not(.v-list-group__header)')
 
-    setup () {
-      const { locale } = useI18n()
-      const app = useAppStore()
+    if (!element) return
 
-      return { app, items: nav, locale }
-    },
+    element.scrollIntoView({
+      behavior: 'smooth',
+      block: 'center',
+      inline: 'center',
+    })
   })
 </script>

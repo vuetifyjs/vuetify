@@ -1,6 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBadge } from '..'
+import { VBtn } from '@/components/VBtn'
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
@@ -25,17 +26,17 @@ const stories = {
   'Default badge': <VBadge />,
   'Icon badge': <VBadge icon="mdi-vuetify" />,
   'Offset badge': gridOn(['offsetX', 'offsetY'], offset, (xy, offset) => (
-      <VBadge {...{ [xy]: offset }} content={ `${offset}` }>
-        <button class="v-btn v-btn--size-default v-btn--variant-contained">
+      <VBadge { ...{ [xy]: offset } } content={ `${offset}` }>
+        <VBtn>
           { xy }
-        </button>
+        </VBtn>
       </VBadge>
   )),
   'Text color': gridOn(defaultColors, [null], color => (
     <VBadge textColor={ color } content={ color }>
-      <button class="v-btn v-btn--size-default v-btn--variant-contained">
+      <VBtn>
         { color }
-      </button>
+      </VBtn>
     </VBadge>
   )),
 }
@@ -46,11 +47,11 @@ describe('VBadge', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VBadge color={ color } content={ idx.toString() }>
               { color } badge
             </VBadge>
-          )) }
+          ))}
         </>
       ))
         .get('.v-badge')
@@ -93,11 +94,11 @@ describe('VBadge', () => {
     it('supports default text color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VBadge textColor={ color } content={ idx.toString() }>
               { color } text badge
             </VBadge>
-          )) }
+          ))}
         </>
       ))
         .get('.v-badge')
@@ -112,7 +113,7 @@ describe('VBadge', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories, props, component: VBadge })
   })
 })

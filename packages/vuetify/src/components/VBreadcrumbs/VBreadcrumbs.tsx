@@ -2,32 +2,43 @@
 import './VBreadcrumbs.sass'
 
 // Components
-import { VIcon } from '@/components/VIcon'
-import { VBreadcrumbsItem } from './VBreadcrumbsItem'
 import { VBreadcrumbsDivider } from './VBreadcrumbsDivider'
+import { VBreadcrumbsItem } from './VBreadcrumbsItem'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
+import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
 import type { LinkProps } from '@/composables/router'
+import type { PropType } from 'vue'
+import type { SlotsToProps } from '@/util'
 
 export type BreadcrumbItem = string | (LinkProps & {
   text: string
   disabled?: boolean
 })
 
-export const VBreadcrumbs = defineComponent({
+export const VBreadcrumbs = genericComponent<new <T>() => {
+  $props: {
+    items?: T[]
+  } & SlotsToProps<{
+    prepend: []
+    title: [{ item: T, index: number }]
+    divider: [{ item: T, index: number }]
+    default: []
+  }>
+}>()({
   name: 'VBreadcrumbs',
 
   props: {
@@ -52,11 +63,14 @@ export const VBreadcrumbs = defineComponent({
   },
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { densityClasses } = useDensity(props)
     const { roundedClasses } = useRounded(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
 
     provideDefaults({
+      VBreadcrumbsDivider: {
+        divider: toRef(props, 'divider'),
+      },
       VBreadcrumbsItem: {
         activeClass: toRef(props, 'activeClass'),
         activeColor: toRef(props, 'activeColor'),
@@ -65,42 +79,68 @@ export const VBreadcrumbs = defineComponent({
       },
     })
 
-    useRender(() => (
-      <props.tag
-        class={[
-          'v-breadcrumbs',
-          backgroundColorClasses.value,
-          densityClasses.value,
-          roundedClasses.value,
-        ]}
-        style={ backgroundColorStyles.value }
-      >
-        { props.icon && (
-          <VIcon icon={ props.icon } left />
-        ) }
+    useRender(() => {
+      const hasPrepend = !!(slots.prepend || props.icon)
 
-        { props.items.map((item, index, array) => (
-          <>
-            <VBreadcrumbsItem
-              key={ index }
-              disabled={ index >= array.length - 1 }
-              { ...(typeof item === 'string' ? { text: item } : item) }
-              v-slots={{
-                default: slots.text ? () => slots.text?.({ item, index }) : undefined,
-              }}
-            />
+      return (
+        <props.tag
+          class={[
+            'v-breadcrumbs',
+            backgroundColorClasses.value,
+            densityClasses.value,
+            roundedClasses.value,
+          ]}
+          style={ backgroundColorStyles.value }
+        >
+          { hasPrepend && (
+            <div key="prepend" class="v-breadcrumbs__prepend">
+              { !slots.prepend ? (
+                <VIcon
+                  key="prepend-icon"
+                  start
+                  icon={ props.icon }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !props.icon }
+                  defaults={{
+                    VIcon: {
+                      icon: props.icon,
+                      start: true,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              )}
+            </div>
+          )}
 
-            { index < array.length - 1 && (
-              <VBreadcrumbsDivider>
-                { slots.divider?.({ item, index }) ?? props.divider }
-              </VBreadcrumbsDivider>
-            ) }
-          </>
-        )) }
+          { props.items.map((item, index, array) => (
+            <>
+              <VBreadcrumbsItem
+                key={ index }
+                disabled={ index >= array.length - 1 }
+                { ...(typeof item === 'string' ? { title: item } : item) }
+                v-slots={{
+                  default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                }}
+              />
 
-        { slots.default?.() }
-      </props.tag>
-    ))
+              { index < array.length - 1 && (
+                <VBreadcrumbsDivider
+                  v-slots={{
+                    default: slots.divider ? () => slots.divider?.({ item, index }) : undefined,
+                  }}
+                />
+              )}
+            </>
+          ))}
+
+          { slots.default?.() }
+        </props.tag>
+      )
+    })
 
     return {}
   },

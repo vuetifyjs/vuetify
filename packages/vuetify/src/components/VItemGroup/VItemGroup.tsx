@@ -8,11 +8,11 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { Suspense } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export const VItemGroup = defineComponent({
+export const VItemGroup = genericComponent()({
   name: 'VItemGroup',
 
   props: {
@@ -46,7 +46,7 @@ export const VItemGroup = defineComponent({
               next,
               prev,
               selected: selected.value,
-            }) }
+            })}
           </>
         </Suspense>
       </props.tag>

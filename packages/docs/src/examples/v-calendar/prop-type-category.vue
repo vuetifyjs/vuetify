@@ -6,32 +6,32 @@
           flat
         >
           <v-btn
-            outlined
-            class="mr-4"
-            color="grey darken-2"
+            variant="outlined"
+            class="me-4"
+            color="grey-darken-2"
             @click="setToday"
           >
             Today
           </v-btn>
           <v-btn
             fab
-            text
-            small
-            color="grey darken-2"
+            variant="text"
+            size="small"
+            color="grey-darken-2"
             @click="prev"
           >
-            <v-icon small>
+            <v-icon size="small">
               mdi-chevron-left
             </v-icon>
           </v-btn>
           <v-btn
             fab
-            text
-            small
-            color="grey darken-2"
+            variant="text"
+            size="small"
+            color="grey-darken-2"
             @click="next"
           >
-            <v-icon small>
+            <v-icon size="small">
               mdi-chevron-right
             </v-icon>
           </v-btn>

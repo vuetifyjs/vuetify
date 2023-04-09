@@ -11,8 +11,8 @@
       scroll-target="#hide-on-scroll-example"
     >
       <v-btn
-        color="deep-purple accent-4"
-        text
+        color="deep-purple-accent-4"
+        variant="text"
       >
         <span>Recents</span>
 
@@ -20,8 +20,8 @@
       </v-btn>
 
       <v-btn
-        color="deep-purple accent-4"
-        text
+        color="deep-purple-accent-4"
+        variant="text"
       >
         <span>Favorites</span>
 
@@ -29,8 +29,8 @@
       </v-btn>
 
       <v-btn
-        color="deep-purple accent-4"
-        text
+        color="deep-purple-accent-4"
+        variant="text"
       >
         <span>Nearby</span>
 

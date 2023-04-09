@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Unit testing
   description: Learn how to create unit tests with vue-test-utils and Vuetify components in your Vue application.
@@ -50,14 +51,14 @@ Vue.use(Vuetify)
 
 ## Spec Tests
 
-Creating unit tests in Vuetify are similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
+Creating unit tests in Vuetify is similar to **vuex** and **vue-router** in that you will use the Vuetify object in a **localVue** instance and pass an instance to the mount functions options. The difference is that **Vuetify** won't be used by the localVue instance.
 
 ```js { resource="Imports" }
 import AppBtn from '../AppBtn.vue'
 import Vuetify from 'vuetify'
 
 // Utilities
-import { createLocalVue, mount } from '@vue/test-utils'
+import { createLocalVue } from '@vue/test-utils'
 
 describe('AppBtn.vue', () => {
   // DO NOT use Vuetify on the localInstance
@@ -125,7 +126,6 @@ In the example above we have created a custom component with a **title** prop an
 
 ```js { resource="test/CustomCard.spec.js" }
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -224,15 +224,12 @@ describe('CustomCard.vue', () => {
 })
 ```
 
-<vuetify slug="material-dashboard-pro" />
-
 ### Mocking Vuetify
 
 Many of Vuetify's components utilize the global `$vuetify` object to derive settings such as default text or breakpoint information. When testing these components, you will need to provide `vue-test-utils` with a mock object.
 
 ```js { resource="test/CustomAlert.spec.js" }
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -273,7 +270,6 @@ Keep in mind, you **only need to stub** the services that are being used. such a
 
 ```js { resource="test/CustomNavigationDrawer.spec.js" }
 // Libraries
-import Vue from 'vue'
 import Vuetify from 'vuetify'
 
 // Components
@@ -307,12 +303,8 @@ describe('CustomNavigationDrawer.vue', () => {
 
 A complete list of all services available are listed below:
 
-- [application](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/application)
-- [breakpoint](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/breakpoint)
+- [composables](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/composables)
 - [goto](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/goto)
-- [icons](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/icons)
-- [lang](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/lang)
-- [theme](https://github.com/vuetifyjs/vuetify/tree/master/packages/vuetify/src/services/theme)
 
 ## E2E tests
 
@@ -340,5 +332,3 @@ describe('Test With Attribute', () => {
 ```
 
 <promoted type="theme" />
-
-<backmatter />

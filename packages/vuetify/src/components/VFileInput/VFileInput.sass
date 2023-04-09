@@ -1,12 +1,22 @@
-@forward './variables'
 @use './variables' as *
+@use '../../styles/tools'
+@use 'sass:math'
+
+@at-root
+  @include tools.density('v-input', $file-input-chips-margin-bottom) using ($modifier)
+    --file-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
 
 // Block
 .v-file-input
   input[type="file"]
+    height: 100%
     left: 0
-    max-width: 0
     opacity: 0
-    pointer-events: none
     position: absolute
-    width: 0
+    top: 0
+    width: 100%
+    z-index: 1
+  
+  .v-chip
+    margin-top: $file-input-chips-margin-top
+    margin-bottom: var(--file-input-chips-margin-bottom)

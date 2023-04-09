@@ -1,17 +1,30 @@
 // Components
-import { VIcon } from '@/components/VIcon'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
-
-// Composables
-import { useBackgroundColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
+import { VIcon } from '@/components/VIcon'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
+// Composables
+import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
+
 // Utilities
 import { computed, inject } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+interface ExpansionPanelTitleSlot {
+  collapseIcon: IconValue
+  disabled: boolean | undefined
+  expanded: boolean
+  expandIcon: IconValue
+  readonly: boolean
+}
+
+export type VExpansionPanelTitleSlots = {
+  default: [ExpansionPanelTitleSlot]
+  actions: [ExpansionPanelTitleSlot]
+}
 
 export const makeVExpansionPanelTitleProps = propsFactory({
   color: String,
@@ -29,9 +42,9 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
-})
+}, 'v-expansion-panel-title')
 
-export const VExpansionPanelTitle = defineComponent({
+export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',
 
   directives: { Ripple },
@@ -72,18 +85,18 @@ export const VExpansionPanelTitle = defineComponent({
         onClick={ !props.readonly ? expansionPanel.toggle : undefined }
         v-ripple={ props.ripple }
       >
-        <div class="v-expansion-panel-title__overlay" />
+        <span class="v-expansion-panel-title__overlay" />
 
         { slots.default?.(slotProps.value) }
 
         { !props.hideActions && (
-          <div class="v-expansion-panel-title__icon">
+          <span class="v-expansion-panel-title__icon">
             {
               slots.actions ? slots.actions(slotProps.value)
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
-          </div>
-        ) }
+          </span>
+        )}
       </button>
     ))
 

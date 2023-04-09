@@ -10,14 +10,14 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { Suspense, toRef } from 'vue'
-import { deepEqual, defineComponent } from '@/util'
+import { deepEqual, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = defineComponent({
+export const VChipGroup = genericComponent()({
   name: 'VChipGroup',
 
   props: {
@@ -31,7 +31,7 @@ export const VChipGroup = defineComponent({
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
     ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'contained-text' } as const),
+    ...makeVariantProps({ variant: 'tonal' } as const),
   },
 
   emits: {
@@ -45,12 +45,13 @@ export const VChipGroup = defineComponent({
     provideDefaults({
       VChip: {
         color: toRef(props, 'color'),
+        disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
         variant: toRef(props, 'variant'),
       },
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-chip-group',
@@ -68,11 +69,13 @@ export const VChipGroup = defineComponent({
               next,
               prev,
               selected: selected.value,
-            }) }
+            })}
           </>
         </Suspense>
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
 

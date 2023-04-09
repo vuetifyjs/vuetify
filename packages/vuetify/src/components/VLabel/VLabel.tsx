@@ -5,25 +5,35 @@ import './VLabel.sass'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VLabel = defineComponent({
+export const VLabel = genericComponent()({
   name: 'VLabel',
 
   props: {
     text: String,
+    clickable: Boolean,
 
     ...makeThemeProps(),
   },
 
   setup (props, { slots }) {
-    return () => (
-      <label class="v-label">
+    useRender(() => (
+      <label
+        class={[
+          'v-label',
+          {
+            'v-label--clickable': props.clickable,
+          },
+        ]}
+      >
         { props.text }
 
         { slots.default?.() }
       </label>
-    )
+    ))
+
+    return {}
   },
 })
 

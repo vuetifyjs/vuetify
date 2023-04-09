@@ -4,7 +4,7 @@ import { useItems } from '../items'
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 
-describe('items.ts', () => {
+describe('items', () => {
   const defaults = {
     itemTitle: 'title',
     itemValue: 'value',
@@ -29,7 +29,7 @@ describe('items.ts', () => {
           title: 'Foo',
           value: 'Foo',
         },
-        originalItem: 'Foo',
+        raw: 'Foo',
       },
     ])
   })
@@ -44,7 +44,7 @@ describe('items.ts', () => {
           title: 'Foo',
           value: 'Foo',
         },
-        originalItem: { title: 'Foo' },
+        raw: { title: 'Foo' },
       },
     ])
   })
@@ -59,7 +59,7 @@ describe('items.ts', () => {
           title: 'Foo',
           value: 'Foo',
         },
-        originalItem: { text: 'Foo' },
+        raw: { text: 'Foo' },
       },
     ])
   })
@@ -74,13 +74,13 @@ describe('items.ts', () => {
           title: 'Foo',
           value: 1,
         },
-        originalItem: { title: 'Foo', id: 1 },
+        raw: { title: 'Foo', id: 1 },
       },
     ])
   })
 
   it('should support nested items', () => {
-    const originalItems = [
+    const rawItems = [
       {
         title: 'Foo',
         children: [
@@ -90,7 +90,7 @@ describe('items.ts', () => {
         ],
       },
     ]
-    const { items } = useItems({ ...defaults, items: originalItems })
+    const { items } = useItems({ ...defaults, items: rawItems })
     expect(items.value).toEqual([
       {
         title: 'Foo',
@@ -107,16 +107,16 @@ describe('items.ts', () => {
               title: 'Bar',
               value: 'Bar',
             },
-            originalItem: originalItems[0].children[0],
+            raw: rawItems[0].children[0],
           },
         ],
-        originalItem: originalItems[0],
+        raw: rawItems[0],
       },
     ])
   })
 
   it('should support custom itemChildren property', () => {
-    const originalItems = [
+    const rawItems = [
       {
         title: 'Foo',
         labels: [
@@ -126,7 +126,7 @@ describe('items.ts', () => {
         ],
       },
     ]
-    const { items } = useItems({ ...defaults, itemChildren: 'labels', items: originalItems })
+    const { items } = useItems({ ...defaults, itemChildren: 'labels', items: rawItems })
     expect(items.value).toEqual([
       {
         title: 'Foo',
@@ -143,16 +143,16 @@ describe('items.ts', () => {
               title: 'Bar',
               value: 'Bar',
             },
-            originalItem: originalItems[0].labels[0],
+            raw: rawItems[0].labels[0],
           },
         ],
-        originalItem: originalItems[0],
+        raw: rawItems[0],
       },
     ])
   })
 
   it('should include itemProps', () => {
-    const originalItems = [
+    const rawItems = [
       {
         title: 'Foo',
         prop: 1,
@@ -165,7 +165,7 @@ describe('items.ts', () => {
     const { items } = useItems({
       ...defaults,
       itemProps: item => ({ prop: item.prop, status: true }),
-      items: originalItems,
+      items: rawItems,
     })
 
     expect(items.value).toEqual([
@@ -178,7 +178,7 @@ describe('items.ts', () => {
           prop: 1,
           status: true,
         },
-        originalItem: originalItems[0],
+        raw: rawItems[0],
       },
       {
         title: 'Bar',
@@ -189,7 +189,7 @@ describe('items.ts', () => {
           prop: 2,
           status: true,
         },
-        originalItem: originalItems[1],
+        raw: rawItems[1],
       },
     ])
   })

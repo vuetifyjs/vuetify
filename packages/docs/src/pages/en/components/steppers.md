@@ -1,4 +1,5 @@
 ---
+disabled: true
 meta:
   title: Stepper component
   description: The stepper component provides a linear progression process for gathering and displaying information to a user, similar to a form wizard.
@@ -120,5 +121,3 @@ An optional step can be called out with sub-text.
 The same state also applies to Vertical steppers.
 
 <example file="v-stepper/misc-vertical-error" />
-
-<backmatter />

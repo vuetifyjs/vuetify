@@ -1,4 +1,3 @@
-@forward './variables'
 @use '../../styles/tools'
 @use './variables' as *
 
@@ -8,14 +7,17 @@
   justify-content: center
   margin: auto
 
-  .v-overlay__content
+  > .v-overlay__content
     max-height: calc(100% - #{$dialog-margin * 2})
+    width: calc(100% - #{$dialog-margin * 2})
+    max-width: calc(100% - #{$dialog-margin * 2})
     margin: $dialog-margin
     display: flex
     flex-direction: column
 
     > .v-card,
     > .v-sheet
+      --v-scrollbar-offset: 0px
       border-radius: $dialog-border-radius
       overflow-y: auto
 
@@ -25,10 +27,7 @@
       display: flex
       flex-direction: column
 
-      > .v-card-avatar
-        padding: $dialog-card-avatar-padding
-
-      > .v-card-header
+      > .v-card-item
         padding: $dialog-card-header-padding
 
         + .v-card-text
@@ -43,7 +42,7 @@
 .v-dialog--fullscreen
   --v-scrollbar-offset: 0px
 
-  .v-overlay__content
+  > .v-overlay__content
     border-radius: 0
     margin: 0
     padding: 0
@@ -61,8 +60,8 @@
       min-width: 100%
       border-radius: 0
 
-.v-dialog--scrollable .v-overlay__content,
-.v-dialog--scrollable .v-overlay__content > form
+.v-dialog--scrollable > .v-overlay__content,
+.v-dialog--scrollable > .v-overlay__content > form
   display: flex
 
   > .v-card

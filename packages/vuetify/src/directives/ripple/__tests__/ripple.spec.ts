@@ -58,7 +58,7 @@ describe('v-ripple', () => {
     expect(wrapper.find('.v-ripple__container').exists()).toBe(false)
   })
 
-  it.each(['enter', 'space'])('should trigger ripple on %s key press', (key: 'enter' | 'space') => {
+  it.each(['enter', 'space'] as const)('should trigger ripple on %s key press', key => {
     jest.useFakeTimers()
     const wrapper = mount(testComponent)
 

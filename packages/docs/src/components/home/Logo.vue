@@ -3,31 +3,26 @@
     :height="size"
     :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
     :width="size"
+    alt="Vuetify Logo"
     class="mx-auto"
     max-width="100%"
   />
 </template>
 
-<script lang="ts">
-  // Utilities
-  import { computed, defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { useTheme } from 'vuetify'
 
-  export default defineComponent({
-    name: 'Logo',
+  // Utilities
+  import { computed } from 'vue'
 
-    props: {
-      size: String,
-    },
+  defineProps({
+    size: String,
+  })
 
-    setup () {
-      const theme = useTheme()
+  const theme = useTheme()
 
-      const logo = computed(() => {
-        return `vuetify-logo-v3-${theme.name.value}.svg`
-      })
-
-      return { logo }
-    },
+  const logo = computed(() => {
+    return `vuetify-logo-v3-${theme.name.value}.svg`
   })
 </script>

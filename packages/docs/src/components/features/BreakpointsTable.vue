@@ -4,7 +4,7 @@
       <caption class="pa-4">{{ t('breakpoints-table.caption') }}</caption>
 
       <thead>
-        <tr class="text-left">
+        <tr class="text-start">
           <th v-for="header in headers" :key="header">{{ t(header) }}</th>
         </tr>
       </thead>
@@ -16,8 +16,9 @@
         >
           <td>
             <v-icon
-              start
               :icon="breakpoint.icon"
+              color="medium-emphasis"
+              start
             />
 
             <span>{{ t(breakpoint.device) }}</span>
@@ -36,19 +37,10 @@
       <tfoot>
         <tr>
           <td
-            class="text-caption text-center grey--text"
+            class="text-end text-medium-emphasis"
             colspan="4"
           >
-            <em>{{ t('breakpoints-table.footer', { size: '* -16px' }) }}</em>
-          </td>
-        </tr>
-
-        <tr>
-          <td
-            class="text-right text--secondary"
-            colspan="4"
-          >
-            <small class="d-block mr-n1 mb-n6">
+            <small class="d-block me-n1 mb-n6">
               <a
                 class="text-decoration-none d-inline-flex align-center"
                 href="https://material.io/design/layout/responsive-layout-grid.html"
@@ -56,10 +48,10 @@
                 target="_blank"
               >
                 <v-icon
-                  class="mr-1"
-                  small
-                  style="color: inherit;"
+                  class="me-1"
                   icon="mdi-material-design"
+                  size="small"
+                  style="color: inherit;"
                 />
 
                 {{ t('breakpoints-table.spec') }}
@@ -72,8 +64,8 @@
   </app-sheet>
 </template>
 
-<script lang="ts">
-  import { defineComponent } from 'vue'
+<script setup>
+  // Composables
   import { useI18n } from 'vue-i18n'
 
   const breakpoints = [
@@ -96,21 +88,28 @@
       device: 'medium',
       code: 'md',
       type: 'breakpoints-table.large-tablet-to-laptop',
-      range: '960px > < 1264px*',
+      range: '960px > < 1280px',
+    },
+    {
+      icon: 'mdi-monitor-small',
+      device: 'large',
+      code: 'lg',
+      type: 'breakpoints-table.desktop',
+      range: '1280px > < 1920px',
     },
     {
       icon: 'mdi-monitor',
-      device: 'large',
-      code: 'lg',
-      type: 'desktop',
-      range: '1264px > < 1904px*',
-    },
-    {
-      icon: 'mdi-television',
       device: 'extra-large',
       code: 'xl',
       type: 'breakpoints-table.large-to-extra-large',
-      range: '> 1904px*',
+      range: '1920px > < 2560px',
+    },
+    {
+      icon: 'mdi-monitor-screenshot',
+      device: 'extra-extra-large',
+      code: 'xxl',
+      type: 'breakpoints-table.extra-large-to-extra-extra-large',
+      range: '> 2560px',
     },
   ]
 
@@ -121,17 +120,5 @@
     'range',
   ]
 
-  export default defineComponent({
-    name: 'BreakpointsTable',
-
-    setup () {
-      const { t } = useI18n()
-
-      return {
-        breakpoints,
-        headers,
-        t,
-      }
-    },
-  })
+  const { t } = useI18n()
 </script>

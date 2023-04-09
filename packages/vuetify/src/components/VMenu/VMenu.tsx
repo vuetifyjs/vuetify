@@ -2,46 +2,48 @@
 import './VMenu.sass'
 
 // Components
-import { VOverlay } from '@/components/VOverlay'
 import { VDialogTransition } from '@/components/transitions'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VOverlay } from '@/components/VOverlay'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, useRender } from '@/util'
+import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { genericComponent, getUid, omit, useRender } from '@/util'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
-import { useForwardRef } from '@/composables/forwardRef'
-import { useScopeId } from '@/composables/scopeId'
 
-export const VMenu = genericComponent<new () => {
-  $slots: OverlaySlots
-}>()({
+export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
-
-  inheritAttrs: false,
 
   props: {
     // TODO
     // disableKeys: Boolean,
-    modelValue: Boolean,
     id: String,
 
-    ...makeTransitionProps({
+    ...omit(makeVOverlayProps({
+      closeDelay: 250,
+      closeOnContentClick: true,
+      locationStrategy: 'connected' as const,
+      openDelay: 300,
+      scrim: false,
+      scrollStrategy: 'reposition' as const,
       transition: { component: VDialogTransition },
-    } as const),
+    }), ['absolute']),
   },
 
   emits: {
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { attrs, slots }) {
+  setup (props, { slots }) {
     const isActive = useProxiedModel(props, 'modelValue')
     const { scopeId } = useScopeId()
 
@@ -51,17 +53,17 @@ export const VMenu = genericComponent<new () => {
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    let openChildren = 0
+    const openChildren = ref(0)
     provide(VMenuSymbol, {
       register () {
-        ++openChildren
+        ++openChildren.value
       },
       unregister () {
-        --openChildren
+        --openChildren.value
       },
       closeParents () {
         setTimeout(() => {
-          if (!openChildren) {
+          if (!openChildren.value) {
             isActive.value = false
             parent?.closeParents()
           }
@@ -77,37 +79,43 @@ export const VMenu = genericComponent<new () => {
       parent?.closeParents()
     }
 
-    useRender(() => (
-      <VOverlay
-        ref={ overlay }
-        v-model={ isActive.value }
-        class={[
-          'v-menu',
-        ]}
-        transition={ props.transition }
-        absolute
-        closeOnContentClick
-        locationStrategy="connected"
-        scrollStrategy="reposition"
-        scrim={ false }
-        openDelay="300"
-        closeDelay="250"
-        activatorProps={{
-          'aria-haspopup': 'menu',
-          'aria-expanded': String(isActive.value),
-          'aria-owns': id.value,
-        }}
-        onClick:outside={ onClickOutside }
-        { ...scopeId }
-        { ...attrs }
-        v-slots={{
-          default: slots.default,
-          activator: slots.activator,
-        }}
-      />
-    ))
+    const activatorProps = computed(() =>
+      mergeProps({
+        'aria-haspopup': 'menu',
+        'aria-expanded': String(isActive.value),
+        'aria-owns': id.value,
+      }, props.activatorProps)
+    )
 
-    return useForwardRef({ id }, overlay)
+    useRender(() => {
+      const [overlayProps] = VOverlay.filterProps(props)
+
+      return (
+        <VOverlay
+          ref={ overlay }
+          class={[
+            'v-menu',
+          ]}
+          { ...overlayProps }
+          v-model={ isActive.value }
+          absolute
+          activatorProps={ activatorProps.value }
+          onClick:outside={ onClickOutside }
+          { ...scopeId }
+        >
+          {{
+            activator: slots.activator,
+            default: (...args) => (
+              <VDefaultsProvider root>
+                { slots.default?.(...args) }
+              </VDefaultsProvider>
+            ),
+          }}
+        </VOverlay>
+      )
+    })
+
+    return forwardRefs({ id, ΨopenChildren: openChildren }, overlay)
   },
 })
 

@@ -1,5 +1,5 @@
 // Composables
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
@@ -28,25 +28,15 @@ export const makeLocationProps = propsFactory({
 export function useLocation (props: LocationProps, opposite = false, offset?: (side: string) => number) {
   const { isRtl } = useRtl()
 
-  function toPhysical (side: string) {
-    return (
-      side === 'start' ? (isRtl.value ? 'right' : 'left')
-      : side === 'end' ? (isRtl.value ? 'left' : 'right')
-      : side
-    ) as 'right' | 'left' | 'top' | 'bottom' | 'center'
-  }
-
   const locationStyles = computed(() => {
     if (!props.location) return {}
 
-    const anchor = parseAnchor(
+    const { side, align } = parseAnchor(
       props.location.split(' ').length > 1
         ? props.location
-        : `${props.location} center` as Anchor
+        : `${props.location} center` as Anchor,
+      isRtl.value
     )
-
-    const side = toPhysical(anchor.side)
-    const align = toPhysical(anchor.align)
 
     function getOffset (side: string) {
       return offset

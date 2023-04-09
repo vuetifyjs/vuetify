@@ -1,12 +1,12 @@
-@forward './variables'
 @use '../../styles/tools'
 @use './variables' as *
 
 .v-color-picker-canvas
   $root: &
+  display: flex
   position: relative
   overflow: hidden
-  contain: strict
+  contain: content
 
   &__dot
     position: absolute

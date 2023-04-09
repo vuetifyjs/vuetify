@@ -14,25 +14,27 @@ related:
 
 The `v-breadcrumbs` component is a navigational helper for pages. It can accept a **Material Icons** icon or text characters as a divider. An array of objects can be passed to the **items** property of the component.  Additionally, slots exists for more control of the breadcrumbs, either utilizing `v-breadcrumbs-item` or other custom markup.
 
-<entry />
+<!-- ![breadcrumbs Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-breadcrumbs/v-breadcrumbs-entry.png) -->
+
+---
 
 ## Usage
 
 By default, breadcrumbs use a text divider. This can be any string.
 
-<!-- <usage name="v-breadcrumbs" /> -->
+<usage name="v-breadcrumbs" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-breadcrumbs](/api/v-breadcrumbs/) | Primary Component |
+| [v-breadcrumbs-item](/api/v-breadcrumbs-item/) | Sub-component used for each breadcrumb |
+| [v-breadcrumbs-divider](/api/v-breadcrumbs-divider/) | Sub-component used for dividing breadcrumbs |
 
-<!-- ## Sub-components
-
-### v-breadcrumbs-item
-
-v-breadcrumbs-item description -->
-
-## Caveats
+<api-inline hide-links />
 
 <alert type="info">
 
@@ -50,24 +52,22 @@ Breadcrumbs separator can be set using `divider` property.
 
 <example file="v-breadcrumbs/prop-divider" />
 
-#### Large
-
-Large breadcrumbs have larger font size.
-
-<example file="v-breadcrumbs/prop-large" />
-
 ### Slots
 
-#### Icon Dividers
+#### Prepend
 
-For the icon variant, breadcrumbs can use any icon in Material Design Icons.
+Prepend content with the `prepend` slot.
+
+<example file="v-breadcrumbs/slot-prepend" />
+
+#### Dividers
+
+To customize the divider, use the `divider` slot.
 
 <example file="v-breadcrumbs/slot-icon-dividers" />
 
-#### Item
+#### Title
 
-You can use the `item` slot to customize each breadcrumb.
+You can use the `title` slot to customize each breadcrumb title.
 
-<example file="v-breadcrumbs/slot-item" />
-
-<backmatter />
+<example file="v-breadcrumbs/slot-title" />

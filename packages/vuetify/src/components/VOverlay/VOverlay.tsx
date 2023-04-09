@@ -3,29 +3,33 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton, useRouter } from '@/composables/router'
-import { useToggleScope } from '@/composables/toggleScope'
 import { useBackgroundColor } from '@/composables/color'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/rtl'
-import { useTeleport } from '@/composables/teleport'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
+import { useHydration } from '@/composables/hydration'
+import { useRtl } from '@/composables/locale'
+import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
+import { useTeleport } from '@/composables/teleport'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Directives
 import { ClickOutside } from '@/directives/click-outside'
 
 // Utilities
 import {
+  animate,
   convertToUnit,
   genericComponent,
   getScrollParent,
   IN_BROWSER,
+  propsFactory,
   standardEasing,
   useRender,
 } from '@/util'
@@ -41,9 +45,9 @@ import {
 } from 'vue'
 
 // Types
-import type { PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { BackgroundColorData } from '@/composables/color'
+import type { MakeSlots } from '@/util'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -73,9 +77,39 @@ export type OverlaySlots = MakeSlots<{
   activator: [{ isActive: boolean, props: Record<string, any> }]
 }>
 
-export const VOverlay = genericComponent<new () => {
-  $slots: OverlaySlots
-}>()({
+export const makeVOverlayProps = propsFactory({
+  absolute: Boolean,
+  attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
+  closeOnBack: {
+    type: Boolean,
+    default: true,
+  },
+  contained: Boolean,
+  contentClass: null,
+  contentProps: null,
+  disabled: Boolean,
+  noClickAnimation: Boolean,
+  modelValue: Boolean,
+  persistent: Boolean,
+  scrim: {
+    type: [String, Boolean],
+    default: true,
+  },
+  zIndex: {
+    type: [Number, String],
+    default: 2000,
+  },
+
+  ...makeActivatorProps(),
+  ...makeDimensionProps(),
+  ...makeLazyProps(),
+  ...makeLocationStrategyProps(),
+  ...makeScrollStrategyProps(),
+  ...makeThemeProps(),
+  ...makeTransitionProps(),
+}, 'v-overlay')
+
+export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',
 
   directives: { ClickOutside },
@@ -83,35 +117,9 @@ export const VOverlay = genericComponent<new () => {
   inheritAttrs: false,
 
   props: {
-    absolute: Boolean,
-    attach: [Boolean, String, Object] as PropType<boolean | string | Element>,
-    closeOnBack: {
-      type: Boolean,
-      default: true,
-    },
-    contained: Boolean,
-    contentClass: null,
-    contentProps: null,
-    disabled: Boolean,
-    noClickAnimation: Boolean,
-    modelValue: Boolean,
-    persistent: Boolean,
-    scrim: {
-      type: [String, Boolean],
-      default: true,
-    },
-    zIndex: {
-      type: [Number, String],
-      default: 2000,
-    },
+    _disableGlobalStack: Boolean,
 
-    ...makeActivatorProps(),
-    ...makeDimensionProps(),
-    ...makeLocationStrategyProps(),
-    ...makeScrollStrategyProps(),
-    ...makeThemeProps(),
-    ...makeTransitionProps(),
-    ...makeLazyProps(),
+    ...makeVOverlayProps(),
   },
 
   emits: {
@@ -130,14 +138,16 @@ export const VOverlay = genericComponent<new () => {
     })
     const { teleportTarget } = useTeleport(computed(() => props.attach || props.contained))
     const { themeClasses } = provideTheme(props)
-    const { rtlClasses } = useRtl()
+    const { rtlClasses, isRtl } = useRtl()
     const { hasContent, onAfterLeave } = useLazy(props, isActive)
     const scrimColor = useBackgroundColor(computed(() => {
       return typeof props.scrim === 'string' ? props.scrim : null
     }))
-    const { isTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'))
-    const { activatorEl, activatorRef, activatorEvents, contentEvents } = useActivator(props, { isActive, isTop })
+    const { globalTop, localTop, stackStyles } = useStack(isActive, toRef(props, 'zIndex'), props._disableGlobalStack)
+    const { activatorEl, activatorRef, activatorEvents, contentEvents, scrimEvents } = useActivator(props, { isActive, isTop: localTop })
     const { dimensionStyles } = useDimension(props)
+    const isMounted = useHydration()
+    const { scopeId } = useScopeId()
 
     watch(() => props.disabled, v => {
       if (v) isActive.value = false
@@ -146,6 +156,7 @@ export const VOverlay = genericComponent<new () => {
     const root = ref<HTMLElement>()
     const contentEl = ref<HTMLElement>()
     const { contentStyles, updateLocation } = useLocationStrategies(props, {
+      isRtl,
       contentEl,
       activatorEl,
       isActive,
@@ -166,7 +177,7 @@ export const VOverlay = genericComponent<new () => {
     }
 
     function closeConditional () {
-      return isActive.value && isTop.value
+      return isActive.value && globalTop.value
     }
 
     IN_BROWSER && watch(isActive, val => {
@@ -178,7 +189,7 @@ export const VOverlay = genericComponent<new () => {
     }, { immediate: true })
 
     function onKeydown (e: KeyboardEvent) {
-      if (e.key === 'Escape' && isTop.value) {
+      if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
           isActive.value = false
         } else animateClick()
@@ -188,7 +199,7 @@ export const VOverlay = genericComponent<new () => {
     const router = useRouter()
     useToggleScope(() => props.closeOnBack, () => {
       useBackButton(router, next => {
-        if (isTop.value && isActive.value) {
+        if (globalTop.value && isActive.value) {
           next(false)
           if (!props.persistent) isActive.value = false
           else animateClick()
@@ -212,7 +223,7 @@ export const VOverlay = genericComponent<new () => {
     function animateClick () {
       if (props.noClickAnimation) return
 
-      contentEl.value?.animate([
+      contentEl.value && animate(contentEl.value, [
         { transformOrigin: 'center' },
         { transform: 'scale(1.03)' },
         { transformOrigin: 'center' },
@@ -229,9 +240,9 @@ export const VOverlay = genericComponent<new () => {
           props: mergeProps({
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
-        }) }
+        })}
 
-        { IN_BROWSER && (
+        { isMounted.value && (
           <Teleport
             disabled={ !teleportTarget.value }
             to={ teleportTarget.value }
@@ -250,18 +261,20 @@ export const VOverlay = genericComponent<new () => {
                 ]}
                 style={[stackStyles.value, { top: convertToUnit(top.value) }]}
                 ref={ root }
-                {...attrs}
+                { ...scopeId }
+                { ...attrs }
               >
                 <Scrim
                   color={ scrimColor }
                   modelValue={ isActive.value && !!props.scrim }
+                  { ...toHandlers(scrimEvents.value) }
                 />
                 <MaybeTransition
                   appear
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
-                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
+                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
                 >
                   <div
                     ref={ contentEl }
@@ -284,15 +297,16 @@ export const VOverlay = genericComponent<new () => {
               </div>
             )}
           </Teleport>
-        ) }
+        )}
       </>
     ))
 
     return {
+      activatorEl,
       animateClick,
       contentEl,
-      activatorEl,
-      isTop,
+      globalTop,
+      localTop,
       updateLocation,
     }
   },

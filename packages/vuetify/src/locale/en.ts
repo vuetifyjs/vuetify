@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} more',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} files',
     counterSize: '{0} files ({1} in total)',
@@ -57,8 +62,8 @@ export default {
       root: 'Pagination Navigation',
       next: 'Next page',
       previous: 'Previous page',
-      page: 'Goto Page {0}',
-      currentPage: 'Page {0}, Current Page',
+      page: 'Go to page {0}',
+      currentPage: 'Page {0}, Current page',
       first: 'First page',
       last: 'Last page',
     },
@@ -68,4 +73,5 @@ export default {
       item: 'Rating {0} of {1}',
     },
   },
+  loading: 'Loading...',
 }

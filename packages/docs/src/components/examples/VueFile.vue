@@ -5,36 +5,28 @@
   />
 </template>
 
-<script>
+<script setup>
   // Utilities
   import { getExample } from 'virtual:examples'
-  import { shallowRef } from 'vue'
+  import { onBeforeMount, shallowRef } from 'vue'
 
-  export default {
-    name: 'VueFile',
-
-    props: {
-      file: {
-        type: String,
-        required: true,
-      },
+  const props = defineProps({
+    file: {
+      type: String,
+      required: true,
     },
+  })
 
-    data: () => ({ component: shallowRef() }),
+  const component = shallowRef()
 
-    created () {
-      this.load()
-    },
+  onBeforeMount(load)
 
-    methods: {
-      async load () {
-        try {
-          const { component } = await getExample(this.file)
-          this.component = component
-        } catch (e) {
-          console.error(e)
-        }
-      },
-    },
+  async function load () {
+    try {
+      const { component: example } = await getExample(props.file)
+      component.value = example
+    } catch (e) {
+      console.error(e)
+    }
   }
 </script>

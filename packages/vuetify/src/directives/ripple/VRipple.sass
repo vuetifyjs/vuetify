@@ -1,4 +1,3 @@
-@forward './variables'
 @use './variables' as *
 
 .v-ripple
@@ -29,9 +28,12 @@
 
     &--enter
       transition: none
+      opacity: 0
 
     &--in
       transition: $ripple-animation-transition-in
+      opacity: $ripple-animation-visible-opacity
 
     &--out
       transition: $ripple-animation-transition-out
+      opacity: 0

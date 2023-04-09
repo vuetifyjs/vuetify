@@ -1,7 +1,7 @@
-import type { ComponentPublicInstance, FunctionalComponent, VNodeChild } from 'vue'
+import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
 
 // @skip-build
-import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleAdapter, RtlInstance, ThemeInstance } from './framework'
+import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
 
 declare global {
   namespace JSX {
@@ -27,11 +27,10 @@ declare module '@vue/runtime-dom' {
 declare module '@vue/runtime-core' {
   interface Vuetify {
     defaults: DefaultsInstance
-    display: DisplayInstance
-    theme: ThemeInstance
+    display: UnwrapNestedRefs<DisplayInstance>
+    theme: UnwrapNestedRefs<ThemeInstance>
     icons: IconOptions
-    locale: LocaleAdapter
-    rtl: RtlInstance
+    locale: UnwrapNestedRefs<LocaleInstance & RtlInstance>
   }
 
   export interface ComponentCustomProperties {

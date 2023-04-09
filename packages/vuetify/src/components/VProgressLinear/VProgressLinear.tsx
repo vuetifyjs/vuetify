@@ -4,20 +4,26 @@ import './VProgressLinear.sass'
 // Composables
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/rtl'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { convertToUnit, defineComponent } from '@/util'
 import { computed, Transition } from 'vue'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VProgressLinear = defineComponent({
+type VProgressLinearSlots = {
+  default: [{ value: number, buffer: number }]
+}
+
+export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   name: 'VProgressLinear',
 
   props: {
+    absolute: Boolean,
     active: {
       type: Boolean,
       default: true,
@@ -48,6 +54,7 @@ export const VProgressLinear = defineComponent({
     striped: Boolean,
     roundedBar: Boolean,
 
+    ...makeLocationProps({ location: 'top' } as const),
     ...makeRoundedProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -61,6 +68,7 @@ export const VProgressLinear = defineComponent({
     const progress = useProxiedModel(props, 'modelValue')
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
+    const { locationStyles } = useLocation(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(computed(() => props.bgColor || props.color))
     const { backgroundColorClasses: barColorClasses, backgroundColorStyles: barColorStyles } = useBackgroundColor(props, 'color')
@@ -88,12 +96,13 @@ export const VProgressLinear = defineComponent({
       progress.value = Math.round(value / width * max.value)
     }
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ intersectionRef }
         class={[
           'v-progress-linear',
           {
+            'v-progress-linear--absolute': props.absolute,
             'v-progress-linear--active': props.active && isIntersecting.value,
             'v-progress-linear--reverse': isReversed.value,
             'v-progress-linear--rounded': props.rounded,
@@ -104,10 +113,14 @@ export const VProgressLinear = defineComponent({
           themeClasses.value,
         ]}
         style={{
+          bottom: props.location === 'bottom' ? 0 : undefined,
+          top: props.location === 'top' ? 0 : undefined,
           height: props.active ? convertToUnit(height.value) : 0,
           '--v-progress-linear-height': convertToUnit(height.value),
+          ...locationStyles.value,
         }}
         role="progressbar"
+        aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"
         aria-valuemax={ props.max }
         aria-valuenow={ props.indeterminate ? undefined : normalizedValue.value }
@@ -115,6 +128,7 @@ export const VProgressLinear = defineComponent({
       >
         { props.stream && (
           <div
+            key="stream"
             class={[
               'v-progress-linear__stream',
               textColorClasses.value,
@@ -129,7 +143,7 @@ export const VProgressLinear = defineComponent({
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />
-        ) }
+        )}
 
         <div
           class={[
@@ -159,7 +173,7 @@ export const VProgressLinear = defineComponent({
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
-              { ['long', 'short'].map(bar => (
+              {['long', 'short'].map(bar => (
                 <div
                   key={ bar }
                   class={[
@@ -169,17 +183,21 @@ export const VProgressLinear = defineComponent({
                   ]}
                   style={ barColorStyles.value }
                 />
-              )) }
+              ))}
             </div>
-          ) }
+          )}
         </Transition>
 
         { slots.default && (
           <div class="v-progress-linear__content">
             { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
-        ) }
+        )}
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VProgressLinear = InstanceType<typeof VProgressLinear>

@@ -4,26 +4,31 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Directives
+import { Touch } from '@/directives/touch'
+
 // Composables
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
-import { useLocale } from '@/composables/locale'
-import { useRtl } from '@/composables/rtl'
-
-// Directives
-import { Touch } from '@/directives/touch'
+import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, provide, ref, Suspense, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
 import type { GroupItemProvide, GroupProvide } from '@/composables/group'
-import type { TouchHandlers } from '@/directives/touch'
-import type { MakeSlots } from '@/util'
 import type { IconValue } from '@/composables/icons'
+import type { TouchHandlers } from '@/directives/touch'
+
+export type VWindowSlots = {
+  default: [{ group: GroupProvide }]
+  additional: [{ group: GroupProvide }]
+  prev: [{ props: ControlProps }]
+  next: [{ props: ControlProps }]
+}
 
 type WindowProvide = {
   transition: ComputedRef<undefined | string>
@@ -43,58 +48,53 @@ type ControlProps = {
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
-export const VWindow = genericComponent<new () => {
-  $slots: MakeSlots<{
-    default: [{ group: GroupProvide }]
-    additional: [{ group: GroupProvide }]
-    prev: [{ props: ControlProps }]
-    next: [{ props: ControlProps }]
-  }>
-}>()({
+export const makeVWindowProps = propsFactory({
+  continuous: Boolean,
+  nextIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$next',
+  },
+  prevIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$prev',
+  },
+  reverse: Boolean,
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+  },
+  touch: {
+    type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
+    default: undefined,
+  },
+  direction: {
+    type: String,
+    default: 'horizontal',
+  },
+
+  modelValue: null,
+  disabled: Boolean,
+  selectedClass: {
+    type: String,
+    default: 'v-window-item--active',
+  },
+  // TODO: mandatory should probably not be exposed but do this for now
+  mandatory: {
+    default: 'force' as const,
+  },
+
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-window')
+
+export const VWindow = genericComponent<VWindowSlots>()({
   name: 'VWindow',
 
   directives: {
     Touch,
   },
 
-  props: {
-    continuous: Boolean,
-    nextIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$next',
-    },
-    prevIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$prev',
-    },
-    reverse: Boolean,
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
-    touch: {
-      type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
-      default: undefined,
-    },
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-
-    modelValue: null,
-    disabled: Boolean,
-    selectedClass: {
-      type: String,
-      default: 'v-window-item--active',
-    },
-    // TODO: mandatory should probably not be exposed but do this for now
-    mandatory: {
-      default: 'force' as const,
-    },
-
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVWindowProps(),
 
   emits: {
     'update:modelValue': (v: any) => true,
@@ -201,9 +201,6 @@ export const VWindow = genericComponent<new () => {
         },
         right: () => {
           isRtlReverse.value ? next() : prev()
-        },
-        end: ({ originalEvent }) => {
-          originalEvent.stopPropagation()
         },
         start: ({ originalEvent }) => {
           originalEvent.stopPropagation()

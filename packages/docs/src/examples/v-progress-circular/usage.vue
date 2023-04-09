@@ -1,34 +1,70 @@
 <template>
   <usage-example
     v-model="model"
-    name="v-progress-circular"
+    :code="code"
+    :options="options"
+    :name="name"
   >
-    <v-defaults-provider
-      :defaults="{
-        VProgressCircular: {
-          color: 'primary'
-        }
-      }"
-    >
-      <v-progress-circular model-value="20"></v-progress-circular>
-      <v-progress-circular model-value="40"></v-progress-circular>
-      <v-progress-circular model-value="60"></v-progress-circular>
-      <v-progress-circular model-value="80"></v-progress-circular>
-      <v-progress-circular model-value="100"></v-progress-circular>
-    </v-defaults-provider>
+    <div class="text-center">
+      <v-progress-circular v-bind="props"></v-progress-circular>
+    </div>
+
+    <template v-slot:configuration>
+      <v-select
+        v-model="color"
+        :items="['primary', 'blue-lighten-3', 'error', 'dark-blue']"
+        label="Color"
+        clearable
+      ></v-select>
+
+      <v-slider
+        v-model="size"
+        label="Size"
+        step="1"
+        min="32"
+        max="128"
+      ></v-slider>
+
+      <v-slider
+        v-model="width"
+        label="Width"
+        step="1"
+        min="4"
+        max="12"
+      ></v-slider>
+
+      <v-checkbox v-model="indeterminate" label="Indeterminate"></v-checkbox>
+    </template>
   </usage-example>
 </template>
-<script>
-  export default {
-    name: 'ProgressCircularExample',
 
-    data: () => ({
-      model: 'default',
-    }),
-  }
+<script setup>
+  // Utilities
+  import { computed, ref } from 'vue'
+  import { propsToString } from '@/util/helpers'
+
+  const name = 'v-progress-circular'
+  const model = ref('default')
+  const color = ref()
+  const indeterminate = ref(false)
+  const size = ref()
+  const width = ref()
+  const options = []
+  const props = computed(() => {
+    return {
+      color: color.value || undefined,
+      indeterminate: indeterminate.value || undefined,
+      'model-value': !indeterminate.value ? '20' : undefined,
+      size: size.value !== 32 ? size.value : undefined,
+      width: width.value !== 4 ? width.value : undefined,
+    }
+  })
+
+  const slots = computed(() => {
+    return ``
+  })
+
+  const code = computed(() => {
+    return `<${name}${propsToString(props.value)}>${slots.value}</${name}>`
+  })
 </script>
-<style scoped>
-.v-progress-circular {
-  margin: 1rem;
-}
-</style>

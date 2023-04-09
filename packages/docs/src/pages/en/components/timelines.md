@@ -27,7 +27,12 @@ The `v-timeline` is useful for stylistically displaying chronological informatio
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-timeline](/api/v-timeline/) | Primary Component |
+| [v-timeline-item](/api/v-timeline-item/) | Sub-component used to display a single timeline item |
+
+<api-inline hide-links />
 
 <!-- ## Sub-components
 
@@ -91,12 +96,6 @@ Truncate the start, end or both ends of the timeline center line by using the **
 
 Modify the inset of dividing lines by specifying a custom amount using the **line-inset** prop.
 
-<alert type="warning">
-
-  It is not possible to use the **line-inset** prop together with the **truncate-line** prop. The **line-inset** prop will take precedence if both are specified.
-
-</alert>
-
 <example file="v-timeline/prop-line-inset" />
 
 ### Slots
@@ -126,5 +125,3 @@ If you place a `v-card` inside of a `v-timeline-item`, a caret will appear on th
 #### Advanced
 
 <example file="v-timeline/misc-advanced" />
-
-<backmatter />

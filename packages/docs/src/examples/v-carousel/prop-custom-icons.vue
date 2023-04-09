@@ -4,7 +4,6 @@
     max-width="444"
     class="mx-auto"
   >
-    <v-system-bar lights-out></v-system-bar>
     <v-carousel
       :continuous="false"
       :show-arrows="false"

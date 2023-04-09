@@ -6,15 +6,23 @@ meta:
   keywords: theme provider, vuetify theme provider component, vue theme provider component
 related:
   - /features/theme/
+  - /styles/colors/
+  - /features/application-layout/
 ---
 
 # Theme providers
 
 The theme provider allows you to style a section of your application in a different theme from the default
 
+<entry />
+
 ## API
 
-- [v-theme-provider](/api/v-theme-provider)
+| Component | Description |
+| - | - |
+| [v-theme-provider](/api/v-theme-provider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

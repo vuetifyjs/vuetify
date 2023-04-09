@@ -1,0 +1,10 @@
+{
+  "props": {
+    "fullHeight": "Sets the component height to 100%",
+    "overlaps": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/layout.json))"
+  },
+  "exposed": {
+    "getLayoutItem": "Function that returns position and size information about a specific layout item",
+    "items": "A array of all registered layout items"
+  }
+}

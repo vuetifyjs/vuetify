@@ -9,27 +9,31 @@ import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent } from '@/util'
 
-export const VSheet = defineComponent({
+export const makeVSheetProps = propsFactory({
+  color: String,
+
+  ...makeBorderProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-sheet')
+
+export const VSheet = genericComponent()({
   name: 'VSheet',
 
   props: {
-    color: String,
-
-    ...makeBorderProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
+    ...makeVSheetProps(),
   },
 
   setup (props, { slots }) {
@@ -42,7 +46,7 @@ export const VSheet = defineComponent({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-sheet',
@@ -60,6 +64,10 @@ export const VSheet = defineComponent({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VSheet = InstanceType<typeof VSheet>

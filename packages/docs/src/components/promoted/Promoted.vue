@@ -1,141 +1,96 @@
 <template>
-  <div
+  <a
     v-if="ad"
-    class="mb-8"
+    class="d-block mb-4"
+    style="max-width: 640px;"
+    v-bind="attrs"
+    @click="onClick"
   >
-    <a
-      v-bind="attrs"
-      @click="onClick"
+    <promoted-base
+      v-bind="$attrs"
+      class="v-vuetify--promoted"
+      density="compact"
+      max-width="640"
+      outlined
     >
-      <promoted-base
-        v-bind="$attrs"
-        class="v-vuetify--promoted"
-        compact
-        color="transparent"
-        dark
-        max-width="640"
-        outlined
+
+      <v-img
+        :src="background"
+        class="flex-1-1-auto rounded"
+        max-height="56"
+        cover
       >
+        <div class="d-flex align-center fill-height">
+          <v-img
+            :alt="`Link to ${ad.title}`"
+            :src="logo"
+            class="mx-2"
+            contain
+            height="56"
+            max-width="56"
+          />
 
-        <v-img
-          :src="background"
-          class="flex-1-1-auto rounded"
-          max-height="56"
-          cover
-        >
-          <div class="d-flex align-center fill-height">
-            <v-img
-              :alt="`Link to ${ad.title}`"
-              :src="logo"
-              class="mx-2"
-              contain
-              height="56"
-              max-width="56"
-            />
-
-            <app-markdown
-              v-if="description"
-              class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
-              :content="description"
-            />
-          </div>
-        </v-img>
-      </promoted-base>
-    </a>
-  </div>
+          <app-markdown
+            v-if="description"
+            :content="description"
+            class="text-subtitle-2 text-sm-h6 font-weight-light text-white"
+          />
+        </div>
+      </v-img>
+    </promoted-base>
+  </a>
 </template>
 
-<script lang="ts">
-  import { computed, defineComponent } from 'vue'
-  import { createAdProps, useAd } from '../../composables/ad'
-
+<script setup>
+  // Components
   import PromotedBase from './Base.vue'
 
-  export default defineComponent({
-    name: 'Promoted',
+  // Composables
+  import { createAdProps, useAd } from '@/composables/ad'
+  import { useGtag } from 'vue-gtag-next'
 
-    components: { PromotedBase },
+  // Utilities
+  import { computed } from 'vue'
 
-    inheritAttrs: false,
+  const props = defineProps({
+    ...createAdProps(),
 
-    props: {
-      ...createAdProps(),
-      medium: {
-        type: String,
-        default: 'promoted',
-      },
+    medium: {
+      type: String,
+      default: 'promoted',
     },
-
-    setup (props) {
-      const { ad, attrs } = useAd(props)
-
-      const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
-      const logo = computed(() => ad.value?.metadata?.images?.logo?.url || ad.value?.metadata?.images?.preview?.url)
-      const background = computed(() => ad.value?.metadata?.images?.background?.url)
-
-      function onClick () {
-        // this.$gtag.event('click', {
-        //   event_category: 'vuetifys',
-        //   event_label: this.slug,
-        //   value: 'promoted',
-        // })
-      }
-
-      return {
-        description,
-        logo,
-        ad,
-        attrs,
-        background,
-        onClick,
-      }
-    },
-
-    // computed: {
-    //   ads () {
-    //     const all = Ad.computed.ads.call(this)
-
-    //     return all.filter(ad => !!ad.metadata.images?.background?.url)
-    //   },
-    //   bg () {
-    //     return this.images?.background?.url
-    //   },
-    //   // Promoted ads have less space
-    //   // available for descriptions
-    //   description () {
-    //     // Originates from Ad mixin
-    //     const current = this.current
-
-    //     if (!current) return ''
-
-    //     const {
-    //       description,
-    //       description_short,
-    //     } = current.metadata
-
-    //     // Fallback to description
-    //     // with a reduced length
-    //     return description_short || (
-    //       description.length > 58
-    //         ? description.slice(0, 55) + '...'
-    //         : description
-    //     )
-    //   },
-    //   images () {
-    //     return this.current.metadata?.images
-    //   },
-    //   logo () {
-    //     return (
-    //       this.images?.logo?.url ||
-    //       this.images?.preview?.url
-    //     )
-    //   },
-    // },
-
-    // methods: {
-
-    // },
   })
+
+  const { ad, attrs } = useAd(props)
+  const { event } = useGtag()
+
+  const description = computed(() => ad.value?.metadata?.description_short || ad.value?.metadata?.description)
+  const logo = computed(() => {
+    if (props.medium === 'promoted') {
+      return ad.value?.metadata?.images?.preview?.url || ad.value?.metadata?.images?.logo?.url
+    }
+
+    return ad.value?.metadata?.images?.logo?.url
+  })
+  const background = computed(() => ad.value?.metadata?.images?.background?.url)
+
+  function onClick () {
+    const slug = ad.value?.slug
+
+    if (!slug) return
+
+    event('click', {
+      event_category: 'vuetifys',
+      event_label: slug,
+      value: 'promoted',
+    })
+  }
+</script>
+
+<script>
+  export default {
+    inheritAttrs: false,
+  }
 </script>
 
 <style lang="sass">

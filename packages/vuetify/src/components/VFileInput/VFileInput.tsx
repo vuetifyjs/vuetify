@@ -3,25 +3,38 @@ import './VFileInput.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
-import { useForwardRef } from '@/composables/forwardRef'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
-import { defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import {
+  callEvent,
+  filterInputAttrs,
+  genericComponent,
+  humanReadableFileSize,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import type { MakeSlots } from '@/util'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VFileInput = defineComponent({
+export type VFileInputSlots = VInputSlots & VFieldSlots & MakeSlots<{
+  counter: []
+}>
+
+export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
 
   inheritAttrs: false,
@@ -52,12 +65,8 @@ export const VFileInput = defineComponent({
       },
     },
 
-    ...makeVInputProps(),
+    ...makeVInputProps({ prependIcon: '$file' }),
 
-    prependIcon: {
-      type: IconValue,
-      default: '$file',
-    },
     modelValue: {
       type: Array as PropType<File[]>,
       default: () => ([]),
@@ -70,8 +79,8 @@ export const VFileInput = defineComponent({
   },
 
   emits: {
-    'click:clear': (e: MouseEvent) => true,
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
@@ -113,6 +122,13 @@ export const VFileInput = defineComponent({
         isFocused.value = true
       }
     }
+    function onClickPrepend (e: MouseEvent) {
+      callEvent(props['onClick:prepend'], e)
+      onControlClick(e)
+    }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+    }
     function onControlClick (e: MouseEvent) {
       inputRef.value?.click()
 
@@ -126,16 +142,21 @@ export const VFileInput = defineComponent({
       nextTick(() => {
         model.value = []
 
-        if (inputRef?.value) {
-          inputRef.value.value = ''
-        }
-
-        emit('click:clear', e)
+        callEvent(props['onClick:clear'], e)
       })
     }
 
+    watch(model, newValue => {
+      const hasModelReset = !Array.isArray(newValue) || !newValue.length
+
+      if (hasModelReset && inputRef.value) {
+        inputRef.value.value = ''
+      }
+    })
+
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
+      const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
@@ -145,14 +166,17 @@ export const VFileInput = defineComponent({
           ref={ vInputRef }
           v-model={ model.value }
           class="v-file-input"
+          onClick:prepend={ onClickPrepend }
+          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
-          onClick:prepend={ onControlClick }
+          focused={ isFocused.value }
           messages={ messages.value }
         >
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -161,11 +185,16 @@ export const VFileInput = defineComponent({
               <VField
                 ref={ vFieldRef }
                 prepend-icon={ props.prependIcon }
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
+                onClick:prependInner={ props['onClick:prependInner'] }
+                onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isDirty.value || isFocused.value }
                 dirty={ isDirty.value }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -186,22 +215,22 @@ export const VFileInput = defineComponent({
                           e.stopPropagation()
 
                           onFocus()
-                        } }
+                        }}
                         onChange={ e => {
                           if (!e.target) return
 
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
-                        } }
+                        }}
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }
                         { ...inputAttrs }
                       />
 
-                      { model.value.length > 0 && (
-                        <div class={ fieldClass }>
-                          { slots.selection ? slots.selection({
+                      <div class={ fieldClass }>
+                        { !!model.value?.length && (
+                          slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
                             totalBytesReadable: totalBytesReadable.value,
@@ -213,23 +242,29 @@ export const VFileInput = defineComponent({
                               color={ props.color }
                             >{ text }</VChip>
                           ))
-                          : fileNames.value.join(', ') }
-                        </div>
-                      ) }
+                          : fileNames.value.join(', ')
+                        )}
+                      </div>
                     </>
                   ),
                 }}
               </VField>
             ),
-            details: hasCounter ? () => (
+            details: hasDetails ? slotProps => (
               <>
-                <span />
+                { slots.details?.(slotProps) }
 
-                <VCounter
-                  active={ !!model.value.length }
-                  value={ counterValue.value }
-                  v-slots={ slots.counter }
-                />
+                { hasCounter && (
+                  <>
+                    <span />
+
+                    <VCounter
+                      active={ !!model.value?.length }
+                      value={ counterValue.value }
+                      v-slots:default={ slots.counter }
+                    />
+                  </>
+                )}
               </>
             ) : undefined,
           }}
@@ -237,7 +272,7 @@ export const VFileInput = defineComponent({
       )
     })
 
-    return useForwardRef({}, vInputRef, vFieldRef, inputRef)
+    return forwardRefs({}, vInputRef, vFieldRef, inputRef)
   },
 })
 

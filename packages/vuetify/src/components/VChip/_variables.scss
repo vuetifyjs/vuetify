@@ -4,16 +4,12 @@
 @use '../../styles/tools';
 
 // Defaults
-$chip-append-margin-inline-end: 0 !default;
-$chip-append-margin-inline-start: 8px !default;
 $chip-background: rgb(var(--v-theme-surface-variant)) !default;
 $chip-border-color: settings.$border-color-root !default;
 $chip-border-radius: map.get(settings.$rounded, "pill") !default;
 $chip-border-style: settings.$border-style-root !default;
 $chip-border-thin-width: thin !default;
 $chip-border-width: 0 !default;
-$chip-close-margin-inline-end: -4px !default;
-$chip-close-margin-inline-start: 8px !default;
 $chip-close-size: 18px !default;
 $chip-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $chip-density: ("default": 0, "comfortable": -2, "compact": -3) !default;
@@ -28,7 +24,7 @@ $chip-max-width: 100% !default;
 $chip-overflow: hidden !default;
 $chip-padding-ratio: 2 + math.div(2, 3) !default;
 $chip-plain-opacity: 0.26 !default;
-$chip-rounded-border-radius: settings.$border-radius-root !default;
+$chip-filter-transition: .15s settings.$standard-easing !default;
 $chip-white-space: nowrap !default;
 
 $chip-sizes: (

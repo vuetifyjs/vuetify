@@ -15,12 +15,12 @@ export interface LoaderSlotProps {
 }
 
 export interface LoaderProps {
-  loading: boolean | string
+  loading?: boolean | string
 }
 
 // Composables
 export const makeLoaderProps = propsFactory({
-  loading: Boolean,
+  loading: [Boolean, String],
 }, 'loader')
 
 export function useLoader (
@@ -45,7 +45,7 @@ export function LoaderSlot (
   { slots }: SetupContext,
 ) {
   return (
-    <div class={`${props.name}__loader`}>
+    <div class={ `${props.name}__loader` }>
       { slots.default?.({
         color: props.color,
         isActive: props.active,

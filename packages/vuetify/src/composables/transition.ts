@@ -20,8 +20,6 @@ interface MaybeTransitionProps extends TransitionProps {
 export const MaybeTransition: FunctionalComponent<MaybeTransitionProps> = (props, { slots }) => {
   const { transition, ...rest } = props
 
-  if (!transition || typeof transition === 'boolean') return slots.default?.()
-
   const { component = Transition, ...customProps } = typeof transition === 'object' ? transition : {}
 
   return h(

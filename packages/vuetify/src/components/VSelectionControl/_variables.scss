@@ -2,6 +2,7 @@
 @use '../../styles/settings';
 @use '../../styles/tools';
 
+// VSelectionControl
 $selection-control-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $selection-control-error-color: rgb(var(--v-theme-error)) !default;
 $selection-control-density: ('default': 0, 'comfortable': -1, 'compact': -3) !default;

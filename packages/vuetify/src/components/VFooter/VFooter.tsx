@@ -13,9 +13,9 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VFooter = defineComponent({
+export const VFooter = genericComponent()({
   name: 'VFooter',
 
   props: {
@@ -57,7 +57,7 @@ export const VFooter = defineComponent({
       absolute: toRef(props, 'absolute'),
     })
 
-    return () => (
+    useRender(() => (
       <props.tag
         ref={ resizeRef }
         class={[
@@ -69,11 +69,15 @@ export const VFooter = defineComponent({
           roundedClasses.value,
         ]}
         style={[
-          backgroundColorStyles,
+          backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VFooter = InstanceType<typeof VFooter>

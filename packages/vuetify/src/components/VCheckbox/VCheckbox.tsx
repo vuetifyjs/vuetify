@@ -2,72 +2,46 @@
 import './VCheckbox.sass'
 
 // Components
+import type { VInputSlots } from '@/components/VInput/VInput'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
+import { useFocus } from '@/composables/focus'
 
-// Utility
+// Utilities
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
 
-export const VCheckbox = defineComponent({
+// Types
+import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
+
+export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+
+export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
 
   props: {
-    indeterminate: Boolean,
-    indeterminateIcon: {
-      type: IconValue,
-      default: '$checkboxIndeterminate',
-    },
-
     ...makeVInputProps(),
-    ...makeSelectionControlProps(),
-
-    falseIcon: {
-      type: IconValue,
-      default: '$checkboxOff',
-    },
-    trueIcon: {
-      type: IconValue,
-      default: '$checkboxOn',
-    },
+    ...omit(makeVCheckboxBtnProps(), ['inline']),
   },
 
   emits: {
-    'update:indeterminate': (val: boolean) => true,
+    'update:focused': (focused: boolean) => true,
   },
 
   setup (props, { attrs, slots }) {
-    const indeterminate = useProxiedModel(props, 'indeterminate')
-    const falseIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.falseIcon
-    })
-    const trueIcon = computed(() => {
-      return indeterminate.value
-        ? props.indeterminateIcon
-        : props.trueIcon
-    })
+    const { isFocused, focus, blur } = useFocus(props)
 
     const uid = getUid()
     const id = computed(() => props.id || `checkbox-${uid}`)
 
-    function onChange () {
-      if (indeterminate.value) {
-        indeterminate.value = false
-      }
-    }
-
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
 
       return (
         <VInput
@@ -75,25 +49,25 @@ export const VCheckbox = defineComponent({
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
+          focused={ isFocused.value }
         >
           {{
             ...slots,
             default: ({
               id,
+              messagesId,
               isDisabled,
               isReadonly,
             }) => (
-              <VSelectionControl
-                { ...controlProps }
+              <VCheckboxBtn
+                { ...checkboxProps }
                 id={ id.value }
-                type="checkbox"
-                onUpdate:modelValue={ onChange }
-                falseIcon={ falseIcon.value }
-                trueIcon={ trueIcon.value }
-                aria-checked={ indeterminate.value ? 'mixed' : undefined }
+                aria-describedby={ messagesId.value }
                 disabled={ isDisabled.value }
                 readonly={ isReadonly.value }
                 { ...controlAttrs }
+                onFocus={ focus }
+                onBlur={ blur }
                 v-slots={ slots }
               />
             ),

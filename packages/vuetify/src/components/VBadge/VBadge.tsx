@@ -5,20 +5,28 @@ import './VBadge.sass'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
+import { IconValue } from '@/composables/icons'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, useTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
-import { makeLocationProps, useLocation } from '@/composables/location'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
+import { genericComponent, pick, useRender } from '@/util'
 import { toRef } from 'vue'
-import { defineComponent, pick } from '@/util'
 
-export const VBadge = defineComponent({
+// Types
+import type { MakeSlots } from '@/util'
+
+export type VBadgeSlots = MakeSlots<{
+  default: []
+  badge: []
+}>
+
+export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',
 
   inheritAttrs: false,
@@ -70,10 +78,10 @@ export const VBadge = defineComponent({
       )
     })
 
-    return () => {
+    useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= props.max ? value
+        : value <= +props.max ? value
         : `${props.max}+`
 
       const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
@@ -105,10 +113,10 @@ export const VBadge = defineComponent({
                 v-show={ props.modelValue }
                 class={[
                   'v-badge__badge',
+                  themeClasses.value,
                   backgroundColorClasses.value,
                   roundedClasses.value,
                   textColorClasses.value,
-                  themeClasses.value,
                 ]}
                 style={[
                   backgroundColorStyles.value,
@@ -132,7 +140,9 @@ export const VBadge = defineComponent({
           </div>
         </props.tag>
       )
-    }
+    })
+
+    return {}
   },
 })
 

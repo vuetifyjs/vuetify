@@ -1,4 +1,5 @@
 // Composables
+import { describe, expect, it } from '@jest/globals'
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities

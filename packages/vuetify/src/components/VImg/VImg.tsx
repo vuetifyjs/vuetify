@@ -12,7 +12,6 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 // Utilities
 import {
   computed,
-  h,
   nextTick,
   onBeforeMount,
   ref,
@@ -22,7 +21,7 @@ import {
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -38,7 +37,14 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: []
+  placeholder: []
+  error: []
+  sources: []
+}
+
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
@@ -71,7 +77,11 @@ export const VImg = defineComponent({
     ...makeTransitionProps(),
   },
 
-  emits: ['loadstart', 'load', 'error'],
+  emits: {
+    loadstart: (event: string | undefined) => true,
+    load: (event: string | undefined) => true,
+    error: (event: string | undefined) => true,
+  },
 
   setup (props, { emit, slots }) {
     const currentSrc = ref('') // Set from srcset
@@ -86,7 +96,7 @@ export const VImg = defineComponent({
           src: props.src.src,
           srcset: props.srcset || props.src.srcset,
           lazySrc: props.lazySrc || props.src.lazySrc,
-          aspect: Number(props.aspectRatio || props.src.aspect),
+          aspect: Number(props.aspectRatio || props.src.aspect || 0),
         } : {
           src: props.src,
           srcset: props.srcset,
@@ -101,6 +111,12 @@ export const VImg = defineComponent({
     watch(() => props.src, () => {
       init(state.value !== 'idle')
     })
+    watch(aspectRatio, (val, oldVal) => {
+      if (!val && oldVal && image.value) {
+        pollForSize(image.value)
+      }
+    })
+
     // TODO: getSrc when window width changes
 
     onBeforeMount(() => init())
@@ -158,15 +174,17 @@ export const VImg = defineComponent({
       if (img) currentSrc.value = img.currentSrc || img.src
     }
 
+    let timer = -1
     function pollForSize (img: HTMLImageElement, timeout: number | null = 100) {
       const poll = () => {
+        clearTimeout(timer)
         const { naturalHeight: imgHeight, naturalWidth: imgWidth } = img
 
         if (imgHeight || imgWidth) {
           naturalWidth.value = imgWidth
           naturalHeight.value = imgHeight
         } else if (!img.complete && state.value === 'loading' && timeout != null) {
-          setTimeout(poll, timeout)
+          timer = window.setTimeout(poll, timeout)
         } else if (img.currentSrc.endsWith('.svg') || img.currentSrc.startsWith('data:image/svg+xml')) {
           naturalWidth.value = 1
           naturalHeight.value = 1
@@ -181,18 +199,21 @@ export const VImg = defineComponent({
       'v-img__img--contain': !props.cover,
     }))
 
-    const __image = computed(() => {
-      if (!normalisedSrc.value.src || state.value === 'idle') return
+    const __image = () => {
+      if (!normalisedSrc.value.src || state.value === 'idle') return null
 
-      const img = h('img', {
-        class: ['v-img__img', containClasses.value],
-        src: normalisedSrc.value.src,
-        srcset: normalisedSrc.value.srcset,
-        sizes: props.sizes,
-        ref: image,
-        onLoad,
-        onError,
-      })
+      const img = (
+        <img
+          class={['v-img__img', containClasses.value]}
+          src={ normalisedSrc.value.src }
+          srcset={ normalisedSrc.value.srcset }
+          alt={ props.alt }
+          sizes={ props.sizes }
+          ref={ image }
+          onLoad={ onLoad }
+          onError={ onError }
+        />
+      )
 
       const sources = slots.sources?.()
 
@@ -208,22 +229,22 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __preloadImage = computed(() => (
+    const __preloadImage = () => (
       <MaybeTransition transition={ props.transition }>
         { normalisedSrc.value.lazySrc && state.value !== 'loaded' && (
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
-            alt=""
+            alt={ props.alt }
           />
         )}
       </MaybeTransition>
-    ))
+    )
 
-    const __placeholder = computed(() => {
-      if (!slots.placeholder) return
+    const __placeholder = () => {
+      if (!slots.placeholder) return null
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -232,10 +253,10 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __error = computed(() => {
-      if (!slots.error) return
+    const __error = () => {
+      if (!slots.error) return null
 
       return (
         <MaybeTransition transition={ props.transition } appear>
@@ -244,13 +265,13 @@ export const VImg = defineComponent({
           }
         </MaybeTransition>
       )
-    })
+    }
 
-    const __gradient = computed(() => {
-      if (!props.gradient) return
+    const __gradient = () => {
+      if (!props.gradient) return null
 
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
-    })
+    }
 
     const isBooted = ref(false)
     {
@@ -281,11 +302,18 @@ export const VImg = defineComponent({
           handler: init,
           options: props.options,
         }, null, ['once']]}
-        v-slots={{
-          additional: () => [__image.value, __preloadImage.value, __gradient.value, __placeholder.value, __error.value],
-          default: slots.default,
-        }}
-      />
+      >{{
+        additional: () => (
+          <>
+            <__image />
+            <__preloadImage />
+            <__gradient />
+            <__placeholder />
+            <__error />
+          </>
+        ),
+        default: slots.default,
+      }}</VResponsive>
     ))
 
     return {

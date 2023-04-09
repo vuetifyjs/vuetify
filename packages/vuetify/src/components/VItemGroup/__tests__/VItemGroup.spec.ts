@@ -4,19 +4,19 @@ import { VItemGroup } from '../VItemGroup'
 
 // Utilities
 import { h, nextTick } from 'vue'
-import { mount } from '@vue/test-utils'
+import { mount, type VueWrapper } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 
 describe('VItemGroup', () => {
   const vuetify = createVuetify()
   const mountFunction = (options = {}) => {
-    return mount(VItemGroup, {
+    return mount<any>(VItemGroup, {
       ...options,
       global: {
         plugins: [vuetify],
       },
-    })
+    }) as VueWrapper<VItemGroup>
   }
 
   const defaultSlot = () => [
@@ -93,7 +93,7 @@ describe('VItemGroup', () => {
 
     expect(events).toEqual([
       [[]],
-      [['foo', 'bar']],
+      [['bar']],
     ])
   })
 

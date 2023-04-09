@@ -47,14 +47,14 @@
 
                 <v-icon
                   v-if="!active"
-                  color="grey lighten-1"
+                  color="grey-lighten-1"
                 >
                   mdi-star-outline
                 </v-icon>
 
                 <v-icon
                   v-else
-                  color="yellow darken-3"
+                  color="yellow-darken-3"
                 >
                   mdi-star
                 </v-icon>

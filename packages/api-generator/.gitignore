@@ -1,3 +1,5 @@
 /dist/
+/lib/
 /src/locale/*
+/templates/tmp/
 !/src/locale/en

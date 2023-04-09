@@ -14,17 +14,21 @@ related:
 
 The `v-hover` component provides a simple interface for handling hover states for any component.
 
-<entry />
-
 ## Usage
 
  `v-hover` is a renderless component that uses the default slot to provide scoped access to its internal model; as well as mouse event listeners to modify it. To explicitly control the internal state, use the **model-value** property.
 
-<example file="v-hover/usage" />
+<usage name="v-hover" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-hover](/api/v-hover/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -55,5 +59,3 @@ Delay `v-hover` events by using **open-delay** and **close-delay** props in comb
 Create highly customized components that respond to user interaction.
 
 <example file="v-hover/misc-transition" />
-
-<backmatter />

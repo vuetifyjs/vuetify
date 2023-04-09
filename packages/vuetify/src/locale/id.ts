@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{0} lagi',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} berkas',
     counterSize: '{0} berkas (dari total {1})',
@@ -68,4 +73,5 @@ export default {
       item: 'Rating {0} of {1}',
     },
   },
+  loading: 'Loading...',
 }

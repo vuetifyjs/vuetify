@@ -4,16 +4,15 @@
       <template v-slot:activator="{ on, attrs }">
         <v-btn
           color="red"
-          dark
           v-bind="attrs"
           v-on="on"
         >
           Open Player
         </v-btn>
       </template>
-      <v-card tile>
+      <v-card rounded="0">
         <v-progress-linear
-          :value="50"
+          :model-value="50"
           class="my-0"
           height="3"
         ></v-progress-linear>
@@ -40,8 +39,8 @@
             </v-list-item-icon>
 
             <v-list-item-icon
-              class="ml-0"
-              :class="{ 'mr-3': $vuetify.display.mdAndUp }"
+              class="ms-0"
+              :class="{ 'me-3': $vuetify.display.mdAndUp }"
             >
               <v-btn icon>
                 <v-icon>mdi-fast-forward</v-icon>

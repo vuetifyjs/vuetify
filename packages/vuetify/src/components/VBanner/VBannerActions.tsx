@@ -2,9 +2,9 @@
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VBannerActions = defineComponent({
+export const VBannerActions = genericComponent()({
   name: 'VBannerActions',
 
   props: {
@@ -23,10 +23,12 @@ export const VBannerActions = defineComponent({
 
     useRender(() => (
       <div class="v-banner-actions">
-        { slots?.default?.() }
+        { slots.default?.() }
       </div>
     ))
 
     return {}
   },
 })
+
+export type VBannerActions = InstanceType<typeof VBannerActions>

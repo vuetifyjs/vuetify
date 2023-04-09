@@ -5,38 +5,24 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { makeGroupItemProps } from '@/composables/group'
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, pick, standardEasing, useRender } from '@/util'
-import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
+import { makeVBtnProps } from '@/components/VBtn/VBtn'
 
 // Types
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
-export const VTab = defineComponent({
+export const VTab = genericComponent()({
   name: 'VTab',
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
-
-    stacked: Boolean,
     title: String,
 
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    color: String,
     sliderColor: String,
     hideSlider: Boolean,
 
@@ -45,12 +31,17 @@ export const VTab = defineComponent({
       default: 'horizontal',
     },
 
-    ...makeTagProps(),
-    ...makeRouterProps(),
-    ...makeGroupItemProps({
+    ...omit(makeVBtnProps({
       selectedClass: 'v-tab--selected',
-    }),
-    ...makeThemeProps(),
+      variant: 'text' as const,
+    }), [
+      'active',
+      'block',
+      'flat',
+      'location',
+      'position',
+      'symbol',
+    ]),
   },
 
   setup (props, { slots, attrs }) {
@@ -94,7 +85,7 @@ export const VTab = defineComponent({
         const initialScale = prevBox[widthHeight] / nextBox[widthHeight]
 
         const sigma = 1.5
-        nextEl.animate({
+        animate(nextEl, {
           backgroundColor: [color, ''],
           transform: [
             `translate${XY}(${delta}px) scale${XY}(${initialScale})`,
@@ -110,21 +101,7 @@ export const VTab = defineComponent({
     }
 
     useRender(() => {
-      const [btnProps] = pick(props, [
-        'href',
-        'to',
-        'replace',
-        'icon',
-        'stacked',
-        'prependIcon',
-        'appendIcon',
-        'ripple',
-        'theme',
-        'disabled',
-        'selectedClass',
-        'value',
-        'color',
-      ])
+      const [btnProps] = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -137,9 +114,9 @@ export const VTab = defineComponent({
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
+          active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
-          variant="text"
           rounded={ 0 }
           { ...btnProps }
           { ...attrs }
@@ -155,7 +132,7 @@ export const VTab = defineComponent({
               ]}
               style={ sliderColorStyles.value }
             />
-          ) }
+          )}
         </VBtn>
       )
     })

@@ -13,21 +13,20 @@ import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
-import { useForwardRef } from '@/composables/forwardRef'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { convertToUnit, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { MakeSlots } from '@/util'
-import type { ExtractPropTypes, PropType } from 'vue'
-import { provideDefaults } from '@/composables/defaults'
-
-export type Density = typeof allowedDensities[number]
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
+
+export type Density = null | 'prominent' | 'default' | 'comfortable' | 'compact'
 
 export const makeVToolbarProps = propsFactory({
   absolute: Boolean,
@@ -47,7 +46,7 @@ export const makeVToolbarProps = propsFactory({
   floating: Boolean,
   height: {
     type: [Number, String],
-    default: 56,
+    default: 64,
   },
   image: String,
   title: String,
@@ -59,26 +58,26 @@ export const makeVToolbarProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-toolbar')
 
-export const VToolbar = genericComponent<new () => {
-  $slots: MakeSlots<{
-    default: []
-    image: [{ image: string }]
-    prepend: []
-    append: []
-    title: []
-    extension: []
-  }>
-}>()({
+export type VToolbarSlots = MakeSlots<{
+  default: []
+  image: []
+  prepend: []
+  append: []
+  title: []
+  extension: []
+}>
+
+export const VToolbar = genericComponent<VToolbarSlots>()({
   name: 'VToolbar',
 
   props: makeVToolbarProps(),
 
   setup (props, { slots }) {
+    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
     const { borderClasses } = useBorder(props)
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
-    const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
 
     const isExtended = ref(!!(props.extended || slots.extension?.()))
     const contentHeight = computed(() => parseInt((
@@ -99,7 +98,6 @@ export const VToolbar = genericComponent<new () => {
 
     provideDefaults({
       VBtn: {
-        flat: true,
         variant: 'text',
       },
     })
@@ -133,69 +131,89 @@ export const VToolbar = genericComponent<new () => {
           ]}
         >
           { hasImage && (
-            <div class="v-toolbar__image">
-              <VDefaultsProvider
-                defaults={{
-                  VImg: {
-                    cover: true,
-                    src: props.image,
-                  },
-                }}
-                scoped
-              >
-                { slots.image ? slots.image?.() : (<VImg />) }
-              </VDefaultsProvider>
+            <div key="image" class="v-toolbar__image">
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
             </div>
-          ) }
+          )}
 
-          <div
-            class="v-toolbar__content"
-            style={{ height: convertToUnit(contentHeight.value) }}
+          <VDefaultsProvider
+            defaults={{
+              VTabs: {
+                height: convertToUnit(contentHeight.value),
+              },
+            }}
           >
-            { slots.prepend && (
-              <div class="v-toolbar__prepend">
-                { slots.prepend?.() }
-              </div>
-            ) }
+            <div
+              class="v-toolbar__content"
+              style={{ height: convertToUnit(contentHeight.value) }}
+            >
+              { slots.prepend && (
+                <div class="v-toolbar__prepend">
+                  { slots.prepend?.() }
+                </div>
+              )}
 
-            { hasTitle && (
-              <VToolbarTitle text={ props.title }>
-                {{ text: slots.title }}
-              </VToolbarTitle>
-            ) }
+              { hasTitle && (
+                <VToolbarTitle key="title" text={ props.title }>
+                  {{ text: slots.title }}
+                </VToolbarTitle>
+              )}
 
-            { slots.default?.() }
+              { slots.default?.() }
 
-            { slots.append && (
-              <div class="v-toolbar__append">
-                { slots.append?.() }
-              </div>
-            ) }
-          </div>
+              { slots.append && (
+                <div class="v-toolbar__append">
+                  { slots.append?.() }
+                </div>
+              )}
+            </div>
+          </VDefaultsProvider>
 
-          <VExpandTransition>
-            { isExtended.value && (
-              <div
-                class="v-toolbar__extension"
-                style={{ height: convertToUnit(extensionHeight.value) }}
-              >
-                { extension }
-              </div>
-            ) }
-          </VExpandTransition>
+          <VDefaultsProvider
+            defaults={{
+              VTabs: {
+                height: convertToUnit(extensionHeight.value),
+              },
+            }}
+          >
+            <VExpandTransition>
+              { isExtended.value && (
+                <div
+                  class="v-toolbar__extension"
+                  style={{ height: convertToUnit(extensionHeight.value) }}
+                >
+                  { extension }
+                </div>
+              )}
+            </VExpandTransition>
+          </VDefaultsProvider>
         </props.tag>
       )
     })
 
-    return useForwardRef({
+    return {
       contentHeight,
       extensionHeight,
-    })
+    }
   },
 })
 
 export type VToolbar = InstanceType<typeof VToolbar>
-
-export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
-  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
-}

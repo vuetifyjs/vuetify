@@ -22,11 +22,11 @@ describe('VAlert', () => {
     it('supports default color props', () => {
       cy.mount(() => (
         <>
-          {defaultColors.map((color, idx) => (
+          { defaultColors.map((color, idx) => (
             <VAlert color={ color } text={ idx.toString() }>
               { color } alert
             </VAlert>
-          )) }
+          ))}
         </>
       ))
         .get('.v-alert')
@@ -39,7 +39,7 @@ describe('VAlert', () => {
     })
   })
 
-  describe('Showcase', { viewportHeight: 1130, viewportWidth: 700 }, () => {
+  describe('Showcase', () => {
     generate({ stories, props, component: VAlert })
   })
 })

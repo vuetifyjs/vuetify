@@ -5,23 +5,23 @@ meta:
   keywords: i18n, language, internationalization
 related:
   - /features/accessibility/
-  - /features/bidirectionality/
-  - /introduction/why-vuetify/
+  - /components/locale-providers/
+  - /getting-started/browser-support/
 ---
 
 # Internationalization (i18n)
 
 Vuetify supports language Internationalization (i18n) of its components.
 
-When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
+<entry />
 
-<entry slug="vs-video-i18n" />
+When bootstrapping your application you can specify available locales and the default locale with the **defaultLocale** option. The **locale** service also supports easy integration with [vue-i18n](https://kazupon.github.io/vue-i18n/). Using a locale that has an RTL (right-to-left) language also affects the directionality of the Vuetify components.
 
 ## Getting started
 
-To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify. You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on **$vuetify.locale**.
+To set the available locale messages or the default locale, supply the **locale** option when installing Vuetify.
 
-```js { resource="src/main.js" }
+```js { resource="main.js" }
 import { createApp } from 'vue'
 import { createVuetify } from 'vuetify'
 
@@ -35,8 +35,8 @@ const app = createApp()
 
 const vuetify = createVuetify({
   locale: {
-    defaultLocale: 'zhHans',
-    fallbackLocale: 'sv',
+    locale: 'zhHans',
+    fallback: 'sv',
     messages: { zhHans, pl, sv }
   }
 })
@@ -46,9 +46,44 @@ app.use(vuetify)
 app.mount('#app')
 ```
 
+You can change the locale during runtime by using the `useLocale` composable. If you are still using the Options API, you can access the locale settings on `this.$vuetify.locale`.
+
+```html { resource="Composition.vue" }
+<script>
+  import { useLocale } from 'vuetify'
+
+  export default {
+    setup () {
+      const { current } = useLocale()
+
+      return {
+        changeLocale: locale => current.value = locale
+      }
+    }
+  }
+</script>
+```
+
+```html { resource="Option.vue" }
+<script>
+  export default {
+    methods: {
+      changeLocale (locale) {
+        this.$vuetify.locale.current = locale
+      }
+    }
+  }
+</script>
+```
+
 ## API
 
-<api-inline />
+| Feature | Description |
+| - | - |
+| [useLocale](/api/use-locale/) | The locale composable is used
+| [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
+
+<api-inline hide-links />
 
 ## Scoped languages
 
@@ -59,11 +94,27 @@ Using the `v-locale-provider` component it is possible to scope a portion of you
   <v-app>
     <v-select></v-select> <!-- Will use default locale -->
 
-    <v-locale-provider locale="jp">
-      <v-select></v-select> <!-- Will use jp locale -->
+    <v-locale-provider locale="ja">
+      <v-select></v-select> <!-- Will use ja locale -->
     </v-locale-provider>
   </v-app>
 </template>
+```
+
+## RTL
+
+RTL (Right To Left) support is built in for all localizations that ship with Vuetify. If a [supported language](#supported-languages) is flagged as RTL, all content directions are automatically switched. See the [next section](#creating-a-custom-locale) for information on how to add RTL support to a custom locale.
+
+The following example demonstrates how to force RTL for a specific section of your content, without switching the current language, by using the `v-locale-provider` component:
+
+```html
+<v-app>
+  <v-card>...</v-card> <!-- default locale used here -->
+
+  <v-locale-provider rtl>
+    <v-card>...<v-card> <!-- default locale used here, but with RTL active -->
+  </v-locale-provider>
+</v-app>
 ```
 
 ## Creating a custom locale
@@ -84,7 +135,7 @@ import customLocale from './locales/customLocale'
 
 const vuetify = createVuetify({
   locale: {
-    defaultLocale: 'customLocale',
+    locale: 'customLocale',
     messages: { customLocale },
     rtl: {
       customLocale: true,
@@ -114,6 +165,10 @@ If you are building custom Vuetify components that need to hook into the locale 
   export default {
     setup () {
       const { t } = useLocale()
+
+      return {
+        t
+      }
     }
   }
 </script>
@@ -162,7 +217,9 @@ const i18n = new createI18n({
 })
 
 const vuetify = createVuetify({
-  locale: createVueI18nAdapter({ i18n, useI18n })
+  locale: {
+    adapter: createVueI18nAdapter({ i18n, useI18n })
+  }
 })
 
 const app = createApp()
@@ -178,7 +235,7 @@ app.mount('#app')
 Currently Vuetify provides translations in the following languages:
 
 - **af** - Afrikaans (Afrikaans)
-- **ar** - Arabic (اللغة العربية)
+- **ar** - Arabic (العربية)
 - **az** - Azerbaijani (Azərbaycan)
 - **bg** - Bulgarian (български)
 - **ca** - Catalan (català)
@@ -219,5 +276,3 @@ Currently Vuetify provides translations in the following languages:
 - **vi** - Vietnamese (Tiếng Việt)
 - **zhHans** - Chinese (中文)
 - **zhHant** - Chinese (正體中文)
-
-<backmatter />

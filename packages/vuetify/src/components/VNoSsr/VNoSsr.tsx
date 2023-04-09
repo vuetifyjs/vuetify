@@ -3,17 +3,16 @@ import { useHydration } from '@/composables/hydration'
 
 // Utilities
 import { defineComponent } from '@/util'
-import { ref } from 'vue'
+import type { GenericSlot } from '@/util'
 
-export const VNoSsr = defineComponent({
+export const VNoSsr = defineComponent<GenericSlot>({
   name: 'VNoSsr',
 
   setup (_, { slots }) {
-    const show = ref(false)
-
-    useHydration(() => (show.value = true))
+    const show = useHydration()
 
     return () => show.value && slots.default?.()
   },
-
 })
+
+export type VNoSsr = InstanceType<typeof VNoSsr>

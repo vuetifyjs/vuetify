@@ -1,40 +1,43 @@
 // Utilities
-import { computed, inject, provide, ref, watch } from 'vue'
+import { computed, inject, provide, ref, toRef, watch } from 'vue'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
+import type { ValidationProps } from './validation'
 
 export interface FormProvide {
-  register: (
-    id: number | string,
-    validate: () => Promise<string[]>,
-    reset: () => void,
-    resetValidation: () => void,
-    isValid: Ref<boolean | null>,
-  ) => void
+  register: (item: {
+    id: number | string
+    validate: () => Promise<string[]>
+    reset: () => void
+    resetValidation: () => void
+  }) => void
   unregister: (id: number | string) => void
+  update: (id: number | string, isValid: boolean | null, errorMessages: string[]) => void
   items: Ref<FormField[]>
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  validateOn: Ref<FormProps['validateOn']>
 }
 
-interface FormField {
+export interface FormField {
   id: number | string
   validate: () => Promise<string[]>
   reset: () => void
   resetValidation: () => void
   isValid: boolean | null
+  errorMessages: string[]
 }
 
-interface FieldValidationResult {
+export interface FieldValidationResult {
   id: number | string
   errorMessages: string[]
 }
 
-interface FormValidationResult {
+export interface FormValidationResult {
   valid: boolean
   errors: FieldValidationResult[]
 }
@@ -46,22 +49,25 @@ export const FormKey: InjectionKey<FormProvide> = Symbol.for('vuetify:form')
 export interface FormProps {
   disabled: boolean
   fastFail: boolean
-  lazyValidation: boolean
   readonly: boolean
   modelValue: boolean | null
   'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+  validateOn: ValidationProps['validateOn']
 }
 
 export const makeFormProps = propsFactory({
   disabled: Boolean,
   fastFail: Boolean,
-  lazyValidation: Boolean,
   readonly: Boolean,
   modelValue: {
     type: Boolean as PropType<boolean | null>,
     default: null,
   },
-})
+  validateOn: {
+    type: String as PropType<FormProps['validateOn']>,
+    default: 'input',
+  },
+}, 'form')
 
 export function createForm (props: FormProps) {
   const model = useProxiedModel(props, 'modelValue')
@@ -112,21 +118,29 @@ export function createForm (props: FormProps) {
   }
 
   watch(items, () => {
-    let valid = null
+    let valid = 0
+    let invalid = 0
+    const results = []
 
-    if (items.value.some(item => item.isValid === false)) {
-      valid = false
-    } else if (items.value.every(item => item.isValid === true)) {
-      valid = true
+    for (const item of items.value) {
+      if (item.isValid === false) {
+        invalid++
+        results.push({
+          id: item.id,
+          errorMessages: item.errorMessages,
+        })
+      } else if (item.isValid === true) valid++
     }
 
-    model.value = valid
-  }, {
-    deep: true,
-  })
+    errors.value = results
+    model.value =
+      invalid > 0 ? false
+      : valid === items.value.length ? true
+      : null
+  }, { deep: true })
 
   provide(FormKey, {
-    register: (id, validate, reset, resetValidation, isValid) => {
+    register: ({ id, validate, reset, resetValidation }) => {
       if (items.value.some(item => item.id === id)) {
         consoleWarn(`Duplicate input name "${id}"`)
       }
@@ -136,7 +150,8 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
-        isValid: isValid as unknown as boolean | null, // TODO: Better way to type this unwrapping?
+        isValid: null,
+        errorMessages: [],
       })
     },
     unregister: id => {
@@ -144,10 +159,19 @@ export function createForm (props: FormProps) {
         return item.id !== id
       })
     },
+    update: (id, isValid, errorMessages) => {
+      const found = items.value.find(item => item.id === id)
+
+      if (!found) return
+
+      found.isValid = isValid
+      found.errorMessages = errorMessages
+    },
     isDisabled,
     isReadonly,
     isValidating,
     items,
+    validateOn: toRef(props, 'validateOn'),
   })
 
   return {

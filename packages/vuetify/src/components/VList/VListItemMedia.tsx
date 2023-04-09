@@ -2,9 +2,9 @@
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VListItemMedia = defineComponent({
+export const VListItemMedia = genericComponent()({
   name: 'VListItemMedia',
 
   props: {
@@ -15,7 +15,7 @@ export const VListItemMedia = defineComponent({
   },
 
   setup (props, { slots }) {
-    return () => {
+    useRender(() => {
       return (
         <props.tag
           class={[
@@ -28,6 +28,10 @@ export const VListItemMedia = defineComponent({
           v-slots={ slots }
         />
       )
-    }
+    })
+
+    return {}
   },
 })
+
+export type VListItemMedia = InstanceType<typeof VListItemMedia>

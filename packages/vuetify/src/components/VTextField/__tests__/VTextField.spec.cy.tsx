@@ -4,7 +4,7 @@ import { VTextField } from '../VTextField'
 import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
 
-const variants = ['underlined', 'outlined', 'filled', 'contained', 'plain']
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VTextField label="label" />,
@@ -12,6 +12,7 @@ const stories = Object.fromEntries(Object.entries({
   Affixes: <VTextField label="label" prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VTextField label="label" prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
   'Prepend/append inner': <VTextField label="label" prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
+  Placeholder: <VTextField label="label" placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
@@ -19,7 +20,7 @@ const stories = Object.fromEntries(Object.entries({
         { cloneVNode(v, { variant }) }
         { cloneVNode(v, { variant, modelValue: 'Value' }) }
       </div>
-    )) }
+    ))}
   </div>
 )]))
 
@@ -39,7 +40,15 @@ describe('VTextField', () => {
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
   })
 
-  describe('Showcase', { viewportHeight: 2750, viewportWidth: 700 }, () => {
+  // https://github.com/vuetifyjs/vuetify/issues/15231
+  it('should render details if using hide-details="auto" and counter prop', () => {
+    cy.mount(() => (
+      <VTextField hide-details="auto" counter></VTextField>
+    ))
+      .get('.v-input__details').should('be.visible')
+  })
+
+  describe('Showcase', () => {
     generate({ stories })
   })
 })

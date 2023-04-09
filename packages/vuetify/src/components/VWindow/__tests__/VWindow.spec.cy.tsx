@@ -44,16 +44,11 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('@arrows').should('have.length', 1)
-
-    cy.get('@arrows').eq(0).click()
-
-    cy.get('.v-window__controls > .v-btn').as('arrows').should('have.length', 2)
-
-    cy.get('@arrows').eq(1).click()
-
-    cy.get('.v-window__controls > .v-btn').as('arrows').should('have.length', 1)
+      .get('@arrows').should('have.length', 1)
+      .get('@arrows').eq(0).click()
+      .get('.v-window__controls > .v-btn').as('arrows').should('have.length', 2)
+      .get('@arrows').eq(1).click()
+      .get('.v-window__controls > .v-btn').as('arrows').should('have.length', 1)
   })
 
   it('should not wrap around by default', () => {
@@ -73,22 +68,14 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window-item--active h1').should('have.text', 'foo')
-
-    cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('@arrows').should('have.length', 1)
-
-    cy.get('@arrows').eq(0).click()
-
-    cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('.v-window-item--active h1').should('have.text', 'bar')
-
-    cy.get('@arrows').should('have.length', 1)
-
-    cy.get('@arrows').eq(0).click()
-
-    cy.get('.v-window-item--active h1').should('have.text', 'foo')
+      .get('.v-window__controls > .v-btn').as('arrows')
+      .get('@arrows').should('have.length', 1)
+      .get('@arrows').eq(0).click()
+      .get('.v-window__controls > .v-btn').as('arrows')
+      .get('.v-window-item--active h1').should('have.text', 'bar')
+      .get('@arrows').should('have.length', 1)
+      .get('@arrows').eq(0).click()
+      .get('.v-window-item--active h1').should('have.text', 'foo')
   })
 
   it('should wrap around when using continuous prop', () => {
@@ -108,18 +95,12 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window-item--active h1').should('have.text', 'foo')
-
-    cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('@arrows').eq(0).click()
-
-    cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('.v-window-item--active h1').should('have.text', 'bar')
-
-    cy.get('@arrows').eq(1).click()
-
-    cy.get('.v-window-item--active h1').should('have.text', 'foo')
+      .get('.v-window__controls > .v-btn').as('arrows')
+      .get('@arrows').eq(0).click()
+      .get('.v-window__controls > .v-btn').as('arrows')
+      .get('.v-window-item--active h1').should('have.text', 'bar')
+      .get('@arrows').eq(1).click()
+      .get('.v-window-item--active h1').should('have.text', 'foo')
   })
 
   it('should emit new value when clicking arrows', () => {
@@ -128,7 +109,7 @@ describe('VWindow', () => {
     // wrap it in a div for now.
     cy.mount(() => (
       <div>
-        <VWindow showArrows modelValue="two">
+        <VWindow showArrows modelValue="two" onUpdate:modelValue={ undefined }>
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>
@@ -149,20 +130,10 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window__controls > .v-btn').as('arrows')
-
-    cy.get('@arrows').eq(0).click()
-
-    cy.get('@arrows').eq(1).click()
-
-    cy.vue().then(wrapper => {
-      const window = wrapper.findComponent('.v-window')
-
-      const emits = window.emitted('update:modelValue')
-
-      expect(emits).to.have.length(2)
-      expect(emits![0]).to.deep.equal(['one'])
-      expect(emits![1]).to.deep.equal(['three'])
-    })
+      .get('@arrows').eq(0).click()
+      .get('@arrows').eq(1).click()
+      .emitted(VWindow, 'update:modelValue')
+      .should('deep.equal', [['one'], ['three']])
   })
 
   it('should support touch control', () => {
@@ -184,18 +155,13 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window').swipe('left', 'right')
-
-    // without continuous, we should not be able to swipe back if at first item
-    cy.get('.v-window-item--active h1').should('have.text', 'foo')
-
-    cy.get('.v-window').swipe('right', 'left')
-
-    cy.get('.v-window-item--active h1').should('have.text', 'bar')
-
-    cy.get('.v-window').swipe('right', 'left')
-
-    // without continuous, we should not be able to swipe forward if at last item
-    cy.get('.v-window-item--active h1').should('have.text', 'bar')
+      // without continuous, we should not be able to swipe back if at first item
+      .get('.v-window-item--active h1').should('have.text', 'foo')
+      .get('.v-window').swipe('right', 'left')
+      .get('.v-window-item--active h1').should('have.text', 'bar')
+      .get('.v-window').swipe('right', 'left')
+      // without continuous, we should not be able to swipe forward if at last item
+      .get('.v-window-item--active h1').should('have.text', 'bar')
   })
 
   it('should support direction prop', () => {
@@ -243,14 +209,13 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window').swipe('right', 'left')
-
-    cy.get('.v-window-item--active h1').should('have.text', 'baz')
+      .get('.v-window-item--active h1').should('have.text', 'baz')
   })
 
   it('should disable touch support', () => {
     cy.mount(() => (
       <div>
-        <VWindow touch={false}>
+        <VWindow touch={ false }>
           <VWindowItem value="one">
             <div class="bg-grey text-white d-flex justify-center align-center">
               <h1>foo</h1>
@@ -266,7 +231,6 @@ describe('VWindow', () => {
     ))
 
     cy.get('.v-window').swipe('right', 'left')
-
-    cy.get('.v-window-item--active h1').should('have.text', 'foo')
+      .get('.v-window-item--active h1').should('have.text', 'foo')
   })
 })

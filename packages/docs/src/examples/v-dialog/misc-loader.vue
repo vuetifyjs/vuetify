@@ -3,7 +3,6 @@
     <v-btn
       :disabled="dialog"
       :loading="dialog"
-      class="text-white"
       color="purple-darken-2"
       @click="dialog = true"
     >
@@ -11,8 +10,9 @@
     </v-btn>
     <v-dialog
       v-model="dialog"
-      hide-overlay
+      :scrim="false"
       persistent
+      width="auto"
     >
       <v-card
         color="primary"

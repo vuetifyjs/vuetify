@@ -21,11 +21,7 @@ export function calculateUpdatedOffset ({
 }): number {
   const clientSize = isHorizontal ? selectedElement.clientWidth : selectedElement.clientHeight
   const offsetStart = isHorizontal ? selectedElement.offsetLeft : selectedElement.offsetTop
-  const adjustedOffsetStart = isRtl ? (contentSize - offsetStart - clientSize) : offsetStart
-
-  if (isRtl) {
-    currentScrollOffset = -currentScrollOffset
-  }
+  const adjustedOffsetStart = isRtl && isHorizontal ? (contentSize - offsetStart - clientSize) : offsetStart
 
   const totalSize = containerSize + currentScrollOffset
   const itemOffset = clientSize + adjustedOffsetStart
@@ -37,7 +33,7 @@ export function calculateUpdatedOffset ({
     currentScrollOffset = Math.min(currentScrollOffset - (totalSize - itemOffset - additionalOffset), contentSize - containerSize)
   }
 
-  return isRtl ? -currentScrollOffset : currentScrollOffset
+  return currentScrollOffset
 }
 
 export function calculateCenteredOffset ({
@@ -56,11 +52,9 @@ export function calculateCenteredOffset ({
   const clientSize = isHorizontal ? selectedElement.clientWidth : selectedElement.clientHeight
   const offsetStart = isHorizontal ? selectedElement.offsetLeft : selectedElement.offsetTop
 
-  if (isRtl) {
-    const offsetCentered = contentSize - offsetStart - clientSize / 2 - containerSize / 2
-    return -Math.min(contentSize - containerSize, Math.max(0, offsetCentered))
-  } else {
-    const offsetCentered = offsetStart + clientSize / 2 - containerSize / 2
-    return Math.min(contentSize - containerSize, Math.max(0, offsetCentered))
-  }
+  const offsetCentered = isRtl && isHorizontal
+    ? contentSize - offsetStart - clientSize / 2 - containerSize / 2
+    : offsetStart + clientSize / 2 - containerSize / 2
+
+  return Math.min(contentSize - containerSize, Math.max(0, offsetCentered))
 }

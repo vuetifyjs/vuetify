@@ -1,8 +1,7 @@
 <template>
   <v-snackbar
     v-model="pwa.snackbar"
-    bottom
-    right
+    location="bottom right"
     timeout="-1"
     vertical
   >
@@ -14,17 +13,17 @@
         @click="pwa.ignore"
       >
         <i18n-t
-          class="white--text"
+          class="text-white"
           keypath="pwa.ignore"
         />
       </v-btn>
       <app-btn
-        variant="contained"
+        variant="flat"
         color="primary"
         @click="pwa.update"
       >
         <i18n-t
-          class="white--text"
+          class="text-white"
           keypath="pwa.refresh"
         />
       </app-btn>
@@ -32,7 +31,7 @@
   </v-snackbar>
 </template>
 
-<script setup lang="ts">
+<script setup>
   import { usePwaStore } from '@/store/pwa'
 
   const pwa = usePwaStore()

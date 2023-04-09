@@ -1,28 +1,34 @@
 <template>
   <app-tooltip-btn
     :input-value="app.settings"
+    color="medium-emphasis"
     icon="mdi-cog-outline"
     path="settings"
-    @click="app.settings = !app.settings"
+    @mouseenter.once="onMouseenter"
+    @click="onClick"
   />
 </template>
 
-<script>
+<script setup>
+  // Composables
   import { useAppStore } from '@/store/app'
+  import { useRoute } from 'vue-router'
 
-  import AppTooltipBtn from '@/components/app/TooltipBtn.vue'
+  // Utilities
+  import { gtagClick } from '@/util/analytics'
 
-  export default {
-    name: 'SettingsToggle',
+  const app = useAppStore()
+  const { name } = useRoute()
 
-    components: {
-      AppTooltipBtn,
-    },
+  function onClick () {
+    gtagClick('app-bar', 'settings-toggle', name)
 
-    setup () {
-      const app = useAppStore()
+    app.settings = !app.settings
+  }
 
-      return { app }
-    },
+  function onMouseenter () {
+    if (app.settingsCanShow) return
+
+    app.settingsCanShow = true
   }
 </script>

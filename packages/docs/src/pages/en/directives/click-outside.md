@@ -6,6 +6,7 @@ meta:
   keywords: click outside, click directive, vue click directive, vuetify click directives
 related:
   - /components/dialogs/
+  - /components/navigation-drawers/
   - /directives/intersect/
 ---
 
@@ -29,16 +30,14 @@ The `v-click-outside` directive allows you to provide a handler to be invoked wh
 
 ### Options
 
-#### Close on outside click
+#### Close conditional
 
-Optionally provide a `closeOnOutsideClick` handler that returns `true` or `false`. This function determines whether the outside click function is invoked or not.
+Optionally provide a `closeConditional` handler that returns `true` or `false`. This function determines whether the outside click function is invoked or not.
 
 <example file="v-click-outside/option-close-on-outside-click" />
 
 #### Include
 
-Optionally provide an `include` function in the `options` object that returns an array of `HTMLElement`s. This function determines which additional elements that the click must be outside of.
+Optionally provide an `include` function in the `options` object that returns an array of `HTMLElement`s. This function determines which additional elements that the click must be outside of, for the handler to be called.
 
 <example file="v-click-outside/option-include" />
-
-<backmatter />

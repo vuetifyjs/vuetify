@@ -14,15 +14,19 @@ related:
 
 Select fields components are used for collecting user provided information from a list of options.
 
-<entry />
-
 ## Usage
 
-<example file="v-select/usage" />
+<usage name="v-select" />
+
+<entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-select](/api/v-select/) | The select component. |
+
+<api-inline hide-links />
 
 ## Caveats
 
@@ -40,7 +44,7 @@ Select fields components are used for collecting user provided information from 
 
 <alert type="error">
 
-  When using objects for the **items** prop, you must associate **item-text** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
+  When using objects for the **items** prop, you must associate **item-title** and **item-value** with existing properties on your objects. These values are defaulted to **title** and **value** and can be changed.
 
 </alert>
 
@@ -50,9 +54,9 @@ Select fields components are used for collecting user provided information from 
 
 #### Custom title and value
 
-You can specify the specific properties within your items array correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
+You can specify the specific properties within your items array that correspond to the title and value fields. By default, this is **title** and **value**. In this example we also use the **return-object** prop which will return the entire object of the selected item on selection.
 
-<example file="v-select/prop-custom-text-and-value" />
+<example file="v-select/prop-custom-title-and-value" />
 
 #### Density
 
@@ -98,16 +102,14 @@ You can use the **readonly** prop on `v-select` which will prevent a user from c
 
 ### Slots
 
-<!-- #### Append and prepend item
+#### Append and prepend item
 
 The `v-select` components can be optionally expanded with prepended and appended items. This is perfect for customized **select-all** functionality.
 
-<example file="v-select/slot-append-and-prepend-item" /> -->
+<example file="v-select/slot-append-and-prepend-item" />
 
 #### Selection
 
 The **selection** slot can be used to customize the way selected values are shown in the input. This is great when you don't want the selection to occupy multiple lines.
 
 <example file="v-select/slot-selection" />
-
-<backmatter />

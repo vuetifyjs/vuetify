@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '{بیشتر {0',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} پرونده',
     counterSize: '{0} پرونده ({1} در کل)',
@@ -68,4 +73,5 @@ export default {
       item: 'Rating {0} of {1}',
     },
   },
+  loading: 'Loading...',
 }

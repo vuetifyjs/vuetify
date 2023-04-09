@@ -1,5 +1,6 @@
-// Defaults
+// VCounter
 $counter-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
+$counter-flex: 0 1 auto !default;
 $counter-font-size: 12px !default;
 $counter-line-height: $counter-font-size !default;
 $counter-min-height: 12px !default;

@@ -7,29 +7,45 @@ import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VMain = defineComponent({
+export const VMain = genericComponent()({
   name: 'VMain',
 
-  props: makeTagProps({ tag: 'main' }),
+  props: {
+    scrollable: Boolean,
+
+    ...makeTagProps({ tag: 'main' }),
+  },
 
   setup (props, { slots }) {
     const { mainStyles } = useLayout()
     const { ssrBootStyles } = useSsrBoot()
 
-    return () => (
+    useRender(() => (
       <props.tag
-        class="v-main"
+        class={[
+          'v-main',
+          { 'v-main--scrollable': props.scrollable },
+        ]}
         style={[
           mainStyles.value,
           ssrBootStyles.value,
         ]}
       >
-        <div class="v-main__wrap">
-          { slots.default?.() }
-        </div>
+        { props.scrollable
+          ? (
+            <div class="v-main__scroller">
+              { slots.default?.() }
+            </div>
+          )
+          : slots.default?.()
+        }
       </props.tag>
-    )
+    ))
+
+    return {}
   },
 })
+
+export type VMain = InstanceType<typeof VMain>

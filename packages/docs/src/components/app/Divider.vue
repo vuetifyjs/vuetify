@@ -1,7 +1,7 @@
 <template>
-  <v-divider class="my-6" />
+  <v-divider class="my-5" />
 </template>
 
-<script>
-  export default { name: 'AppDivider' }
+<script setup>
+  //
 </script>

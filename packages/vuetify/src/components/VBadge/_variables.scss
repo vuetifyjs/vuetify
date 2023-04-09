@@ -1,7 +1,6 @@
 @use '../../styles/settings';
 
-// Defaults
-
+// VBadge
 $badge-background: rgb(var(--v-theme-surface-variant)) !default;
 $badge-color: rgba(var(--v-theme-on-surface-variant), var(--v-high-emphasis-opacity)) !default;
 $badge-border-color: rgb(var(--v-theme-background)) !default;
@@ -26,6 +25,7 @@ $badge-padding: 4px 6px !default;
 $badge-transition: .225s settings.$standard-easing !default;
 $badge-wrapper-margin: 0 4px !default;
 
+// Lists
 $badge-theme: (
   $badge-background,
   $badge-color
