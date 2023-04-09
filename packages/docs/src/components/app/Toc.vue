@@ -6,7 +6,6 @@
     floating
     location="right"
     sticky
-    touchless
     width="256"
   >
     <template
@@ -14,12 +13,12 @@
       #prepend
     >
       <app-headline
-        class="mt-4 mb-2 ml-4"
+        class="mt-4 mb-2 ms-4"
         path="contents"
       />
     </template>
 
-    <ul class="ml-5">
+    <ul class="ms-5">
       <router-link
         v-for="{ to, level, text } in toc"
         v-slot="{ href }"
@@ -29,13 +28,13 @@
       >
         <li
           :class="[
-            'pl-3 text-body-2 py-1 font-weight-regular',
+            'ps-3 text-body-2 py-1 font-weight-regular',
             {
               'text-primary router-link-active': route.hash === to,
               'text-medium-emphasis': route.hash !== to,
-              'pl-6': level === 3,
-              'pl-9': level === 4,
-              'pl-12': level === 5,
+              'ps-6': level === 3,
+              'ps-9': level === 4,
+              'ps-12': level === 5,
             }
           ]"
         >
@@ -86,7 +85,14 @@
           </v-col>
 
           <v-col cols="12">
-            <carbon />
+            <a
+              href="https://themeselection.com/item/category/vuejs-admin-templates/?utm_source=vuetify&utm_medium=banner&utm_campaign=category_page&utm_id=12"
+              target="_blank"
+              rel="noopener noreferrer sponsored"
+              @click="onClickPromotion"
+            >
+              <v-img src="https://cdn.vuetifyjs.com/docs/images/promotions/theme-selection-dashboard-2023/themeselection-promotion-banner.png" />
+            </a>
           </v-col>
         </v-row>
       </v-container>
@@ -101,6 +107,7 @@
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useAppStore } from '@/store/app'
+  import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
@@ -207,6 +214,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
+  const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -221,6 +229,14 @@
     // await wait(200)
 
     scrolling.value = false
+  }
+
+  function onClickPromotion () {
+    event('click', {
+      event_category: 'vuetify-toc',
+      event_label: 'promotion',
+      value: 'theme-selection',
+    })
   }
 
   const sponsorStore = useSponsorsStore()

@@ -3,7 +3,6 @@
     "inset": "Adds indentation (72px) for **normal** dividers, reduces max height for **vertical**.",
     "length": "Sets the dividers length. Default unit is px.",
     "thickness": "Sets the dividers thickness. Default unit is px.",
-    "vertical": "Displays dividers vertically.",
-    "color": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/v-divider.json))"
+    "vertical": "Displays dividers vertically."
   }
 }

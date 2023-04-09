@@ -1,6 +1,6 @@
 ---
 meta:
-  title: CSS Overflow helpers
+  title: Overflow
   description: Overflow helper classes allow you to configure how content overflows when it beocomes too large.
   keywords: overflow helper classes, overflow classes, vuetify overflow
 related:

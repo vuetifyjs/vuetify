@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'
@@ -64,8 +65,8 @@ describe('VSelect', () => {
 
     cy.mount(() => (
       <VSelect
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         chips
         closableChips
         multiple
@@ -86,7 +87,7 @@ describe('VSelect', () => {
       const selectedItems = ref(['California', 'Colorado'])
 
       cy.mount(() => (
-        <VSelect v-model={selectedItems.value} items={items.value} multiple chips closableChips />
+        <VSelect v-model={ selectedItems.value } items={ items.value } multiple chips closableChips />
       ))
 
       cy.get('.v-select').click()
@@ -136,8 +137,8 @@ describe('VSelect', () => {
 
       cy.mount(() => (
         <VSelect
-          v-model={selectedItems.value}
-          items={items.value}
+          v-model={ selectedItems.value }
+          items={ items.value }
           multiple
           chips
           closableChips
@@ -181,6 +182,85 @@ describe('VSelect', () => {
             value: 'item3',
           },
         ]))
+    })
+  })
+
+  it('should not be clickable when in readonly', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+
+    const selectedItems = 'Item 1'
+
+    cy.mount(() => (
+      <VSelect
+        items={ items }
+        modelValue={ selectedItems }
+        readonly
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+      .get('.v-list-item').should('have.length', 0)
+      .get('.v-select--active-menu').should('have.length', 0)
+
+    cy
+      .get('.v-select input')
+      .focus()
+      .type('{downarrow}', { force: true })
+      .get('.v-list-item').should('have.length', 0)
+      .get('.v-select--active-menu').should('have.length', 0)
+  })
+
+  it('should not be clickable when in readonly form', () => {
+    const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
+
+    const selectedItems = 'Item 1'
+
+    cy.mount(() => (
+      <VForm readonly>
+        <VSelect
+          items={ items }
+          modelValue={ selectedItems }
+          readonly
+        />
+      </VForm>
+    ))
+
+    cy.get('.v-select')
+      .click()
+      .get('.v-list-item').should('have.length', 0)
+      .get('.v-select--active-menu').should('have.length', 0)
+
+    cy
+      .get('.v-select input')
+      .focus()
+      .type('{downarrow}', { force: true })
+      .get('.v-list-item').should('have.length', 0)
+      .get('.v-select--active-menu').should('have.length', 0)
+  })
+
+  describe('hide-selected', () => {
+    it('should hide selected item(s)', () => {
+      const items = ref(['Item 1',
+        'Item 2',
+        'Item 3',
+        'Item 4',
+      ])
+
+      const selectedItems = ref([
+        'Item 1',
+        'Item 2',
+      ])
+
+      cy.mount(() => (
+        <VSelect v-model={ selectedItems.value } items={ items.value } multiple hideSelected />
+      ))
+
+      cy.get('.v-select').click()
+
+      cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
+      cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
 })

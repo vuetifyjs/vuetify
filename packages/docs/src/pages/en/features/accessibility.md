@@ -12,7 +12,7 @@ related:
 
 Web accessibility **(a11y for short)**, is the inclusive practice of ensuring there are no barriers that prevent the interaction with, or access to, websites on the World Wide Web by people with disabilities. Vuetify components are built to provide keyboard interactions for all mouse-based actions and utilize HTML5 semantic elements where applicable.
 
-<promoted slug="vuetify-fundamentals-cheat-sheet" />
+<entry />
 
 ## Material Design Accessibility
 
@@ -90,7 +90,7 @@ The `v-select` component will automatically configure all required a11y attribut
 When rendered, the `v-select` component's content will look similar to this:
 
 ```html
-<!-- Rendered `v-select-list` content HTML Output -->
+<!-- Rendered `v-select` list content HTML Output -->
 
 <div
   role="listbox"
@@ -109,6 +109,7 @@ When rendered, the `v-select` component's content will look similar to this:
     >
       Foo
     </div>
+  </div>
   <div
     aria-labelledby="bar-list-item-13"
     aria-selected="false"
@@ -147,14 +148,12 @@ When providing a `v-list-item` component in a slot, the aria attributes are pass
         v-bind="attrs"
         v-on="on"
       >
-        <v-list-item-content>
-          <v-list-item-title
-            :id="attrs['aria-labelledby']"
-            v-text="item.title"
-          ></v-list-item-title>
+        <v-list-item-title
+          :id="attrs['aria-labelledby']"
+          v-text="item.title"
+        ></v-list-item-title>
 
-          <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
-        </v-list-item-content>
+        <v-list-item-subtitle v-text="item.sub"></v-list-item-subtitle>
       </v-list-item>
     </template>
   </v-select>

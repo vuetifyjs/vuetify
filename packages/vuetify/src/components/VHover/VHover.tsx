@@ -3,9 +3,16 @@ import { makeDelayProps, useDelay } from '@/composables/delay'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
-export const VHover = defineComponent({
+type VHoverSlots = {
+  default: [{
+    isHovering: boolean
+    props: Record<string, unknown>
+  }]
+}
+
+export const VHover = genericComponent<VHoverSlots>()({
   name: 'VHover',
 
   props: {

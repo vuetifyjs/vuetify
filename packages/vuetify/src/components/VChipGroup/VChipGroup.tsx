@@ -9,7 +9,7 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, defineComponent, useRender } from '@/util'
+import { deepEqual, genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
@@ -17,7 +17,7 @@ import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = defineComponent({
+export const VChipGroup = genericComponent()({
   name: 'VChipGroup',
 
   props: {
@@ -45,6 +45,7 @@ export const VChipGroup = defineComponent({
     provideDefaults({
       VChip: {
         color: toRef(props, 'color'),
+        disabled: toRef(props, 'disabled'),
         filter: toRef(props, 'filter'),
         variant: toRef(props, 'variant'),
       },
@@ -66,7 +67,7 @@ export const VChipGroup = defineComponent({
           next,
           prev,
           selected: selected.value,
-        }) }
+        })}
       </props.tag>
     ))
 

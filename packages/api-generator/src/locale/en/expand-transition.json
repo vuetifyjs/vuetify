@@ -1,5 +1,5 @@
 {
   "props": {
-    "mode": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/expand-transition.json))"
+    "mode": "Sets the transition mode (does not apply to transition-group)."
   }
 }

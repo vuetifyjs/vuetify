@@ -14,13 +14,27 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, ref } from 'vue'
-import { callEvent, defineComponent, filterInputAttrs, humanReadableFileSize, useRender, wrapInArray } from '@/util'
+import { computed, nextTick, ref, watch } from 'vue'
+import {
+  callEvent,
+  filterInputAttrs,
+  genericComponent,
+  humanReadableFileSize,
+  useRender,
+  wrapInArray,
+} from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { MakeSlots } from '@/util'
+import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VFileInput = defineComponent({
+export type VFileInputSlots = VInputSlots & VFieldSlots & MakeSlots<{
+  counter: []
+}>
+
+export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
 
   inheritAttrs: false,
@@ -66,6 +80,7 @@ export const VFileInput = defineComponent({
 
   emits: {
     'click:control': (e: MouseEvent) => true,
+    'mousedown:control': (e: MouseEvent) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
@@ -111,6 +126,9 @@ export const VFileInput = defineComponent({
       callEvent(props['onClick:prepend'], e)
       onControlClick(e)
     }
+    function onControlMousedown (e: MouseEvent) {
+      emit('mousedown:control', e)
+    }
     function onControlClick (e: MouseEvent) {
       inputRef.value?.click()
 
@@ -124,13 +142,17 @@ export const VFileInput = defineComponent({
       nextTick(() => {
         model.value = []
 
-        if (inputRef?.value) {
-          inputRef.value.value = ''
-        }
-
         callEvent(props['onClick:clear'], e)
       })
     }
+
+    watch(model, newValue => {
+      const hasModelReset = !Array.isArray(newValue) || !newValue.length
+
+      if (hasModelReset && inputRef.value) {
+        inputRef.value.value = ''
+      }
+    })
 
     useRender(() => {
       const hasCounter = !!(slots.counter || props.counter)
@@ -154,6 +176,7 @@ export const VFileInput = defineComponent({
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
@@ -162,13 +185,16 @@ export const VFileInput = defineComponent({
               <VField
                 ref={ vFieldRef }
                 prepend-icon={ props.prependIcon }
-                onClick:control={ onControlClick }
+                onMousedown={ onControlMousedown }
+                onClick={ onControlClick }
                 onClick:clear={ onClear }
                 onClick:prependInner={ props['onClick:prependInner'] }
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
+                id={ id.value }
                 active={ isDirty.value || isFocused.value }
                 dirty={ isDirty.value }
+                disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
               >
@@ -189,13 +215,13 @@ export const VFileInput = defineComponent({
                           e.stopPropagation()
 
                           onFocus()
-                        } }
+                        }}
                         onChange={ e => {
                           if (!e.target) return
 
                           const target = e.target as HTMLInputElement
                           model.value = [...target.files ?? []]
-                        } }
+                        }}
                         onFocus={ onFocus }
                         onBlur={ () => (isFocused.value = false) }
                         { ...slotProps }
@@ -235,10 +261,10 @@ export const VFileInput = defineComponent({
                     <VCounter
                       active={ !!model.value?.length }
                       value={ counterValue.value }
-                      v-slots={ slots.counter }
+                      v-slots:default={ slots.counter }
                     />
                   </>
-                ) }
+                )}
               </>
             ) : undefined,
           }}

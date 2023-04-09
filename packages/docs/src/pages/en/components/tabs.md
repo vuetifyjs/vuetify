@@ -14,17 +14,22 @@ related:
 
 The `v-tabs` component is used for hiding content behind a selectable item. This can also be used as a pseudo-navigation for a page, where the tabs are links and the tab-items are the content.
 
-<entry />
-
 ## Usage
 
 The `v-tabs` component is a styled extension of [v-slide-group](/components/slide-groups). It provides an easy to use interface for organizing content into separate sections.
 
 <example file="v-tabs/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-tabs](/api/v-tabs/) | Primary Component |
+| [v-tab](/api/v-tab/) | Sub-component used for modifying the `v-tabs` state |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -34,15 +39,15 @@ The `v-tabs` component is a styled extension of [v-slide-group](/components/slid
 
 Make `v-tabs` line up with the `v-toolbar-title` component using the **align** prop (`v-app-bar-nav-icon` or `v-btn` must be used in `v-toolbar`).
 
-<example file="v-tabs/prop-align-title" />
+<example file="v-tabs/prop-align-tabs-title" />
 
 #### Align end
 
 The **align** prop can also align tabs to the center or end.
 
-<example file="v-tabs/prop-align-center" />
+<example file="v-tabs/prop-align-tabs-center" />
 
-<example file="v-tabs/prop-align-end" />
+<example file="v-tabs/prop-align-tabs-end" />
 
 #### Center active
 
@@ -70,7 +75,7 @@ The **grow** prop will make the tab items take up all available space with no li
 
 #### Stacked
 
-Using **stacked** prop you can have buttons that use both icons and text.
+Using **stacked** increases the `v-tabs` height to 72px to allow for both icons and text to be displayed.
 
 <example file="v-tabs/prop-stacked" />
 

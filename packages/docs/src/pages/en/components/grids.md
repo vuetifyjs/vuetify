@@ -6,7 +6,7 @@ meta:
   keywords: grids, vuetify grid component, layout component, flex component
 related:
   - /styles/flex
-  - /features/breakpoints
+  - /features/display-and-platform/
   - /styles/display
 ---
 
@@ -16,9 +16,7 @@ Vuetify comes with a 12 point grid system built using flexbox.
 
 The grid is used to create specific layouts within an application's content.  It contains 5 types of media breakpoints that are used for targeting specific screen sizes or orientations: **xs**, **sm**, **md**, **lg** and **xl**. These breakpoints are defined below in the Viewport Breakpoints table and can be modified by customizing the [Breakpoint service](/features/display-and-platform).
 
-<promoted slug="vuemastery-grids" />
-
-<breakpoints-table" />
+----
 
 ## Usage
 
@@ -26,15 +24,26 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 <example file="grid/usage" />
 
+<breakpoints-table />
+
+<promoted slug="vuemastery-grids" />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-container](/api/v-container/) | The container component. |
+| [v-row](/api/v-row/) | Sub-component used to create rows. |
+| [v-col](/api/v-col/) | Sub-component used to create columns. |
+| [v-spacer](/api/v-spacer/) | A component often used in grid scenarios. |
+
+<api-inline hide-links />
 
 ## Sub-components
 
 ### v-container
 
-`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied
+`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied.
 
 ### v-col
 

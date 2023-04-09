@@ -1,7 +1,8 @@
 <template>
   <div class="d-flex justify-center">
     <v-btn>
-      none
+      None
+
       <v-overlay
         activator="parent"
         location-strategy="connected"

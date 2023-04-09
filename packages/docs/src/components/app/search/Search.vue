@@ -14,7 +14,7 @@
         :prepend-icon="smAndUp ? 'mdi-magnify' : undefined"
         v-bind="props"
       >
-        <span :class="mdAndUp && 'mr-n1'">
+        <span :class="mdAndUp && 'me-n1'">
           <span v-if="smAndUp">
             {{ t('search.label') }}
           </span>
@@ -46,15 +46,11 @@
         />
       </v-card-title>
 
-      <v-text-field
+      <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
         class="flex-grow-0 mx-2"
-        density="comfortable"
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        single-line
         variant="solo"
       />
 
@@ -79,7 +75,7 @@
           v-else
           :search-client="searchClient"
           :search-function="searchFunction"
-          index-name="vuetifyjs-next"
+          index-name="vuetifyjs-v3"
         >
           <ais-configure
             :facetFilters="[`lang:${locale}`]"
@@ -105,10 +101,10 @@
   // Composables
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+  import { onBeforeRouteLeave, useRoute } from 'vue-router'
 
   // Utilities
   import { AisConfigure, AisHits, AisInstantSearch, AisPoweredBy } from 'vue-instantsearch/vue3/es/src/instantsearch.js'
-  import { onBeforeRouteLeave } from 'vue-router'
   import { onBeforeUnmount, onMounted, ref } from 'vue'
   import algoliasearch from 'algoliasearch'
 
@@ -117,6 +113,7 @@
 
   const { t } = useI18n()
   const { smAndUp, mdAndUp, xs, lgAndUp, mdAndDown } = useDisplay()
+  const { query } = useRoute()
 
   const list = ref<InstanceType<typeof SearchResults>>()
   const model = ref(false)
@@ -130,6 +127,10 @@
 
   onMounted(() => {
     document.addEventListener('keydown', onDocumentKeydown)
+    if (query?.search) {
+      searchString.value = query.search as string
+      model.value = true
+    }
   })
   onBeforeUnmount(() => {
     document.removeEventListener('keydown', onDocumentKeydown)

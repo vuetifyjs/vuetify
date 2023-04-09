@@ -1,4 +1,5 @@
 /dist/
+/lib/
 /src/locale/*
-/src/tmp/
+/templates/tmp/
 !/src/locale/en

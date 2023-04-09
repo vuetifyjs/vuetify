@@ -16,7 +16,7 @@ meta:
 
 # Vue Component Framework
 
-Vuetify is a no design skills required UI Framework with beautifully handcrafted Vue Components.
+Vuetify is a no design skills required UI Library with beautifully handcrafted Vue Components.
 {style="max-width: 568px" .mx-auto}
 
 <home-action-btns />
@@ -28,7 +28,7 @@ Vuetify is a no design skills required UI Framework with beautifully handcrafted
 
 Thank you to our special sponsor:
 
-<sponsor-card slug="teamwork" />
+<sponsor-card slug="teamwork" min-height="60" />
 
 <br>
 <br>

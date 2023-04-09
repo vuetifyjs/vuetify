@@ -3,6 +3,7 @@
     <v-col cols="auto">
       <v-dialog
         transition="dialog-bottom-transition"
+        width="auto"
       >
         <template v-slot:activator="{ props }">
           <v-btn
@@ -33,6 +34,7 @@
     <v-col cols="auto">
       <v-dialog
         transition="dialog-top-transition"
+        width="auto"
       >
         <template v-slot:activator="{ props }">
           <v-btn

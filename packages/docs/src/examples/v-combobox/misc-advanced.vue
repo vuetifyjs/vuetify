@@ -33,7 +33,7 @@
           label
           small
         >
-          <span class="pr-2">
+          <span class="pe-2">
             {{ item.text }}
           </span>
           <v-icon

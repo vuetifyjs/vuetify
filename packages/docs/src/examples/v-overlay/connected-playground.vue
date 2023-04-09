@@ -13,6 +13,7 @@
           <template v-slot:activator="{ props }">
             <v-btn v-bind="props" class="my-12"></v-btn>
           </template>
+
           <div>Overlay content</div>
         </v-tooltip>
       </v-col>
@@ -68,6 +69,7 @@
       originSide: 'auto',
       originAlign: '',
     }),
+
     computed: {
       location () {
         return `${this.locationSide} ${this.locationAlign}`
@@ -82,6 +84,7 @@
         return ['auto', 'overlap'].includes(this.originSide)
       },
     },
+
     watch: {
       locationSide (val) {
         if (['top', 'bottom'].includes(val)) {

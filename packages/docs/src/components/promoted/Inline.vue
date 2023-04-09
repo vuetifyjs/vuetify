@@ -1,13 +1,10 @@
 <template>
-  <div>
-    <!-- TODO: resolve style issues -->
-    <app-markdown
-      v-if="ad"
-      :content="description"
-      class="v-markdown--inline d-inline"
-      tag="span"
-    />
-  </div>
+  <app-markdown
+    v-if="ad"
+    :content="description"
+    class="v-markdown--inline d-inline"
+    tag="span"
+  />
 </template>
 
 <script setup>

@@ -1,7 +1,7 @@
 <template>
   <app-btn
     :to="rpath('/introduction/enterprise-support/')"
-    class="ml-1"
+    class="ms-1"
     color="medium-emphasis"
     variant="text"
     @click="gtagClick('app-bar', 'enterprise', name)"
@@ -9,12 +9,12 @@
 
     {{ t('enterprise') }}
 
-    <v-badge
+    <!-- <v-badge
       class="ms-n1 mb-4"
       color="success"
       dot
       inline
-    />
+    /> -->
   </app-btn>
 </template>
 

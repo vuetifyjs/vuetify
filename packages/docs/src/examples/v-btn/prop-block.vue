@@ -1,7 +1,3 @@
 <template>
-  <div class="fill-height">
-    <v-btn block>
-      Block Button
-    </v-btn>
-  </div>
+  <v-btn block>Block Button</v-btn>
 </template>

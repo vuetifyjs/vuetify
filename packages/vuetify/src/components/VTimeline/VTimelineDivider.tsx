@@ -1,4 +1,5 @@
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -6,14 +7,13 @@ import { IconValue } from '@/composables/icons'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 import { toRef } from 'vue'
 
-export const VTimelineDivider = defineComponent({
+export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',
 
   props: {
@@ -38,14 +38,6 @@ export const VTimelineDivider = defineComponent({
       backgroundColorClasses: lineColorClasses,
       backgroundColorStyles: lineColorStyles,
     } = useBackgroundColor(toRef(props, 'lineColor'))
-
-    provideDefaults({
-      VIcon: {
-        color: toRef(props, 'iconColor'),
-        icon: toRef(props, 'icon'),
-        size: toRef(props, 'size'),
-      },
-    })
 
     useRender(() => (
       <div
@@ -83,10 +75,30 @@ export const VTimelineDivider = defineComponent({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
+              { !slots.default ? (
+                <VIcon
+                  key="icon"
+                  color={ props.iconColor }
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="icon-defaults"
+                  disabled={ !props.icon }
+                  defaults={{
+                    VIcon: {
+                      color: props.iconColor,
+                      icon: props.icon,
+                      size: props.size,
+                    },
+                  }}
+                  v-slots:default={ slots.default }
+                />
+              )}
             </div>
           </div>
-        ) }
+        )}
 
         <div
           class={[

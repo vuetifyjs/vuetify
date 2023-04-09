@@ -14,17 +14,21 @@ related:
 
 The `v-progress-linear` component is used to convey data visually to users. It supports both indeterminate amounts, such as loading or processing, and finite amounts of progress (including separate buffer values).
 
-<entry />
-
 ## Usage
 
 In its simplest form, `v-progress-linear` displays a horizontal progress bar. Use the **value** prop to control the progress.
 
 <usage name="v-progress-linear" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-progress-linear](/api/v-progress-linear/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 
@@ -38,7 +42,7 @@ The primary value is controlled by **v-model**, whereas the buffer is controlled
 
 #### Colors
 
-You can set the colors of the progresss bar using the props **color** and **background-color**.
+You can set the colors of the progress bar using the props **color** and **background-color**.
 
 <example file="v-progress-linear/prop-colors" />
 
@@ -74,7 +78,7 @@ The **stream** property works with **buffer-value** to convey to the user that t
 
 #### Striped
 
-This applies a striped background over the value portion of the `v-progress-linear`. This prop has no effect when using **inderminate**.
+This applies a striped background over the value portion of the `v-progress-linear`. This prop has no effect when using **indeterminate**.
 
 <example file="v-progress-linear/prop-striped" />
 

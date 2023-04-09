@@ -1,12 +1,12 @@
 import { camelize, capitalize, h } from 'vue'
-import { defineComponent } from './defineComponent'
+import { genericComponent } from './defineComponent'
 
 export function createSimpleFunctional (
   klass: string,
   tag = 'div',
   name?: string
 ) {
-  return defineComponent({
+  return genericComponent()({
     name: name ?? capitalize(camelize(klass.replace(/__/g, '-'))),
 
     props: {

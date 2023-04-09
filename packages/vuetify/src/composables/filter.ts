@@ -3,7 +3,7 @@
 
 // Utilities
 import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
-import { computed, unref } from 'vue'
+import { computed, ref, unref, watchEffect } from 'vue'
 
 // Types
 import type { PropType, Ref } from 'vue'
@@ -49,7 +49,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: any[],
+  items: InternalItem[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -126,35 +126,49 @@ export function filterItems (
   return array
 }
 
-export function useFilter (
+export function useFilter <T extends InternalItem> (
   props: FilterProps,
-  items: MaybeRef<InternalItem[]>,
-  query?: Ref<string | undefined>,
+  items: MaybeRef<T[]>,
+  query: Ref<string | undefined>,
+  options?: {
+    filterKeys?: MaybeRef<FilterKeys>
+  }
 ) {
   const strQuery = computed(() => (
     typeof query?.value !== 'string' &&
     typeof query?.value !== 'number'
   ) ? '' : String(query.value))
 
-  const filteredItems = computed(() => {
+  const filteredItems: Ref<T[]> = ref([])
+  const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
+
+  watchEffect(() => {
+    filteredItems.value = []
+    filteredMatches.value = new Map()
+
     const transformedItems = unref(items)
-    const matches = filterItems(
+    const results = filterItems(
       transformedItems,
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
-        filterKeys: props.filterKeys,
+        filterKeys: unref(options?.filterKeys) ?? props.filterKeys,
         filterMode: props.filterMode,
         noFilter: props.noFilter,
       },
     )
 
-    return matches.map(({ index, matches }) => ({
-      item: transformedItems[index],
-      matches,
-    }))
+    results.forEach(({ index, matches }) => {
+      const item = transformedItems[index]
+      filteredItems.value.push(item)
+      filteredMatches.value.set(item.value, matches)
+    })
   })
 
-  return { filteredItems }
+  function getMatches (item: T) {
+    return filteredMatches.value.get(item.value)
+  }
+
+  return { filteredItems, filteredMatches, getMatches }
 }

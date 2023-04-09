@@ -17,7 +17,7 @@
 
           <v-btn
             variant="text"
-            class="mr-4"
+            class="me-4"
             icon="mdi-pencil"
           ></v-btn>
 
@@ -29,8 +29,8 @@
 
         <v-spacer></v-spacer>
 
-        <v-card-title class="pl-12 pt-12">
-          <div class="text-h4 pl-12 pt-12">
+        <v-card-title class="ps-12 pt-12">
+          <div class="text-h4 ps-12 pt-12">
             Ali Conners
           </div>
         </v-card-title>

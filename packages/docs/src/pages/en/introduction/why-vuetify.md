@@ -9,17 +9,12 @@ related:
   - /introduction/roadmap/
   - /introduction/enterprise-support/
 ---
-<script setup>
-  import Comparison from '@/components/introduction/Comparison.vue'
-</script>
 
 # Introduction
 
 Learn more about what Vuetify is, how to create an application from scratch, browse API references, sample code, tutorials, and more.
 
-![Why Vuetify Entry](https://cdn.vuetifyjs.com/docs/images/entry/why-vuetify-entry.png)
-
-----
+<entry />
 
 ## What is Vuetify?
 
@@ -27,7 +22,6 @@ Since its initial release in 2014, [Vue.js](https://vuejs.org/) has grown to be 
 
 * [Why you should use it](#why-vuetify)
 * [Features at a glance](#feature-guides)
-* [Framework comparison](#comparison)
 
 ## Getting started
 
@@ -35,7 +29,11 @@ The fastest way to try Vuetify is in the browser at 🎮[play.vuetifyjs.com](htt
 
 ## Why Vuetify? { id="why-vuetify" }
 
-Vuetify is a powerful UI Component Framework built from the ground up to be easy to learn and rewarding to master. Our collection of UI components maintain a consistent style throughout your application with enough customization options to meet any use-case.
+Vuetify is a powerful Vue Component Framework built from the ground up to be easy to learn and rewarding to master. Our collection of UI components maintain a consistent style throughout your application with enough customization options to meet any use-case.
+
+### It's free { id="its-free" }
+
+Vuetify is an Open Source project available for free under the [MIT licensed](http://opensource.org/licenses/MIT). Additionally, Vuetify's source code is available on GitHub, allowing developers to modify and contribute to its development if they choose to do so.
 
 ### Flexible components
 
@@ -46,7 +44,7 @@ Every component in Vuetify is handcrafted under the guise of Google's [Material 
 Vuetify has a large ecosystem of supporting tools that enrich the development experience that range from project creation to design UI kits.
 
 * 🎨 [Figma UI Component Kit](https://store.vuetifyjs.com/products/vuetify-ui-kit-figma)
-* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/next/packages/vite-plugin)
+* ⚡ [First-party Vite support](https://github.com/vuetifyjs/vuetify-loader/tree/master/packages/vite-plugin)
 * 🏗️ [Pre-configured Vue 3 applications for TypeScript and JavaScript](https://tryvuetify.com)
 * ⌨️ Intellisense & autocomplete support for [VSCode](https://code.visualstudio.com/docs/editor/intellisense) and [JetBrains](https://www.jetbrains.com/help/rider/Auto-Completing_Code.html) products
 * 🖼️ [Wireframe examples](/getting-started/wireframes/)
@@ -77,12 +75,6 @@ Vuetify has been in active development since 2016 and is constantly responding t
 
 In addition, after every MAJOR release, the previous version is still maintained with 18 months of [Long-term support](/introduction/long-term-support/).
 
-### Framework comparison
-
-Below is a list of the top Vue.js frameworks and the features that we feel are important to developers and businesses when choosing a UI library.
-
-<comparison />
-
 So what are you waiting for? Head over to the [Installation](/getting-started/installation/) page and start building your next great idea today.
 
 ## Feature Guides
@@ -91,8 +83,8 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 
 | Feature | Skill level | Time to read |
 | ------- | ----------- | ------------ |
-| [Bidirectionality (LTR/RTL)](/features/bidirectionality/) | Beginner | 1 min |
-| [Global configuration](/features/global-config/) | Beginner | 1 min |
+| [Bidirectionality (LTR/RTL)](/features/internationalization/) | Beginner | 1 min |
+| [Global configuration](/features/global-configuration/) | Beginner | 1 min |
 | [Icon Fonts](/features/icon-fonts/) | Beginner | 15 min |
 | [Layouts](/features/application-layout/) | Beginner | 5 min |
 | [Theme](/features/theme/) | Beginner | 15 min |
@@ -104,8 +96,5 @@ Learn more about the inner workings of Vuetify and become a skilled **v-develope
 | [SASS variables](/features/sass-variables/) | Intermediate | 10 min |
 | [Blueprints](/features/blueprints/) | Advanced | 10 min |
 | [Treeshaking](/features/treeshaking/) | Advanced | 15 min |
-
-<!-- | [Presets](/features/presets/) | Advanced | 15 min | -->
-<!-- | [Programmatic scrolling](/features/scrolling/) | Intermediate | 2 min | -->
 
 Can't find what you're looking for? Help us improve! Please reach out to [hello@vuetifyjs.com](mailto:hello@vuetifyjs.com) with your feedback or join us in the Vuetify [Discord community](https://community.vuetifyjs.com/).

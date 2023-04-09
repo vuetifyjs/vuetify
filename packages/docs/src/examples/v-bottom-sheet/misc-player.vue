@@ -39,8 +39,8 @@
             </v-list-item-icon>
 
             <v-list-item-icon
-              class="ml-0"
-              :class="{ 'mr-3': $vuetify.display.mdAndUp }"
+              class="ms-0"
+              :class="{ 'me-3': $vuetify.display.mdAndUp }"
             >
               <v-btn icon>
                 <v-icon>mdi-fast-forward</v-icon>

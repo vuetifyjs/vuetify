@@ -9,11 +9,9 @@ meta:
 
 The `v-no-ssr` component is a simple wrapper that allows a developer to designate what a server-side renderer should not render, but leave to the client.
 
-![No-Ssr Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-No-Ssr/v-No-Ssr-entry.png)
+<!-- ![No-Ssr Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-No-Ssr/v-No-Ssr-entry.png) -->
 
 ---
-
-<entry />
 
 ## Usage
 
@@ -29,3 +27,13 @@ The `v-no-ssr` component prevents its content from rendering on the server side.
   </v-no-ssr>
 </template>
 ```
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-no-ssr](/api/v-no-ssr/) | Primary Component |
+
+<api-inline hide-links />
+
+<entry />

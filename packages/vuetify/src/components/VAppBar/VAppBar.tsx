@@ -2,12 +2,13 @@
 import './VAppBar.sass'
 
 // Components
-import { filterToolbarProps, makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
+import { makeVToolbarProps, VToolbar } from '@/components/VToolbar/VToolbar'
 
 // Composables
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -15,12 +16,9 @@ import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
-export const VAppBar = genericComponent<new () => {
-  $props: SlotsToProps<VToolbarSlots>
-}>()({
+export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
   props: {
@@ -125,6 +123,7 @@ export const VAppBar = genericComponent<new () => {
     watch(currentScroll, setActive, { immediate: true })
     watch(scrollBehavior, setActive)
 
+    const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
@@ -136,7 +135,7 @@ export const VAppBar = genericComponent<new () => {
     })
 
     useRender(() => {
-      const [toolbarProps] = filterToolbarProps(props)
+      const [toolbarProps] = VToolbar.filterProps(props)
 
       return (
         <VToolbar
@@ -150,6 +149,8 @@ export const VAppBar = genericComponent<new () => {
           style={{
             ...layoutItemStyles.value,
             '--v-toolbar-image-opacity': opacity.value,
+            height: undefined,
+            ...ssrBootStyles.value,
           }}
           { ...toolbarProps }
           collapse={ isCollapsed.value }

@@ -27,7 +27,7 @@
         </v-img>
 
         <v-card-text>
-          <div class="font-weight-bold ml-1 mb-2">
+          <div class="font-weight-bold ms-1 mb-2">
             Today
           </div>
 
