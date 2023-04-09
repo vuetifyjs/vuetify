@@ -185,6 +185,13 @@ export const VSelect = genericComponent<new <
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
       }
+
+      // html select hotkeys
+      const keyboardLookupPrefix = e.key
+      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      if (item) {
+        model.value = [item]
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
