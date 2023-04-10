@@ -9,6 +9,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -57,6 +58,7 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
       default: () => ([]),
     },
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeRoundedProps(),
     ...makeTagProps({ tag: 'ul' }),
@@ -86,11 +88,15 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
         <props.tag
           class={[
             'v-breadcrumbs',
+            props.class,
             backgroundColorClasses.value,
             densityClasses.value,
             roundedClasses.value,
           ]}
-          style={ backgroundColorStyles.value }
+          style={[
+            props.style,
+            backgroundColorStyles.value,
+          ]}
         >
           { hasPrepend && (
             <VDefaultsProvider

@@ -2,6 +2,7 @@
 import './VTable.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -25,6 +26,7 @@ export const VTable = genericComponent<VTableSlots>()({
     height: [Number, String],
     hover: Boolean,
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -38,6 +40,7 @@ export const VTable = genericComponent<VTableSlots>()({
       <props.tag
         class={[
           'v-table',
+          props.class,
           {
             'v-table--fixed-height': !!props.height,
             'v-table--fixed-header': props.fixedHeader,
@@ -49,6 +52,7 @@ export const VTable = genericComponent<VTableSlots>()({
           themeClasses.value,
           densityClasses.value,
         ]}
+        style={ props.style }
       >
         { slots.top?.() }
 

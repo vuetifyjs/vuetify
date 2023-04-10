@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VDefaultsProvider } from '@/components'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VTab, VTabs } from '../'
@@ -153,5 +154,47 @@ describe('VTabs', () => {
       .then(() => {
         expect(model.value).to.equal('B')
       })
+  })
+
+  describe('global configuration', () => {
+    it('should only apply \'v-tabs\' class to root element and also apply global config class/style', () => {
+      cy.mount(() => (
+        <VDefaultsProvider defaults={ {
+          global: {
+            class: 'v-global-class',
+            style: {
+              opacity: 0.5,
+            },
+          },
+          VTabs: {
+            class: 'v-tabs-alt',
+            style: {
+              margin: '1px',
+            },
+          },
+          VSlideGroup: {
+            class: 'v-slide-group-alt',
+            style: {
+              padding: '1px',
+            },
+          },
+        } }
+        >
+
+          <VTabs />
+        </VDefaultsProvider>
+      ))
+
+      cy.get('.v-tabs')
+        .should('have.length', 1)
+        // assert it's the root element
+        .should('have.class', 'v-slide-group')
+        .should('have.class', 'v-tabs-alt') // VTabs class takes highest priority
+        .should('have.css', 'margin', '1px') // VTabs style takes highest priority
+        .should('have.css', 'padding', '0px') // Ignore VSlideGroup global style
+
+      cy.get('.v-tabs.v-global-class').should('not.exist') // Ignore global class
+      cy.get('.v-tabs.v-slide-group-alt').should('not.exist') // Ignore VSlideGroup global style
+    })
   })
 })

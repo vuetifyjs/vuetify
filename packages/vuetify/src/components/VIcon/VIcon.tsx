@@ -3,6 +3,7 @@ import './VIcon.sass'
 
 // Composables
 import { IconValue, useIcon } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -21,6 +22,7 @@ export const makeVIconProps = propsFactory({
   end: Boolean,
   icon: IconValue,
 
+  ...makeComponentProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),
   ...makeThemeProps(),
@@ -55,6 +57,7 @@ export const VIcon = genericComponent()({
         icon={ iconData.value.icon }
         class={[
           'v-icon',
+          props.class,
           'notranslate',
           themeClasses.value,
           sizeClasses.value,
@@ -66,6 +69,7 @@ export const VIcon = genericComponent()({
           },
         ]}
         style={[
+          props.style,
           !sizeClasses.value ? ({
             fontSize: convertToUnit(props.size),
             height: convertToUnit(props.size),

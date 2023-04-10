@@ -1,7 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VForm } from '@/components'
 import { VCombobox } from '../VCombobox'
+import { Application } from '@/../cypress/templates'
 import { ref } from 'vue'
 
 describe('VCombobox', () => {
@@ -407,6 +409,58 @@ describe('VCombobox', () => {
       cy.get('.v-overlay__content .v-list-item').should('have.length', 2)
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
+    })
+  })
+
+  describe('global configuration', () => {
+    it('should only apply \'v-combobox\' class to root element and also apply global config class/style', () => {
+      cy.mount(() => (
+        <Application>
+          <VDefaultsProvider defaults={ {
+            global: {
+              class: 'v-global-class',
+              style: {
+                opacity: 0.5,
+              },
+            },
+            VCombobox: {
+              class: 'v-combobox-alt',
+              style: {
+                margin: '1px',
+              },
+            },
+            VTextField: {
+              class: 'v-textfield-alt',
+              style: {
+                padding: '1px',
+              },
+            },
+            VInput: {
+              class: 'v-input-alt',
+              style: {
+                'z-index': 999999999,
+              },
+            },
+          } }
+          >
+            <VCombobox />
+          </VDefaultsProvider>
+        </Application>
+      ))
+
+      cy.get('.v-combobox')
+        .should('have.length', 1)
+        // assert it's the root element
+        .should('have.class', 'v-input')
+        .should('have.class', 'v-combobox-alt') // VCombobox class takes highest priority
+        .should('have.css', 'margin', '1px') // VCombobox  style takes highest priority
+        .should('have.css', 'padding', '0px') // Ignore VTextField global style
+        .should('have.css', 'z-index', 'auto') // Ignore VInput global style
+        .should('have.css', 'opacity', '1') // Ignore global style
+
+      cy.get('.v-combobox.v-global-class').should('not.exist') // Ignore global class
+      cy.get('.v-combobox.v-textfield-alt').should('not.exist') // Ignore VTextField global class
+      cy.get('.v-combobox.v-input-alt').should('not.exist') // Ignore VInput global style
     })
   })
 })

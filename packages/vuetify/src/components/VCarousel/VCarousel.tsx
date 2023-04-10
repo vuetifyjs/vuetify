@@ -8,6 +8,7 @@ import { VProgressLinear } from '@/components/VProgressLinear'
 import { VWindow } from '@/components/VWindow'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -50,6 +51,8 @@ export const VCarousel = genericComponent<VWindowSlots>()({
       validator: (v: any) => typeof v === 'boolean' || v === 'hover',
     },
     verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -88,12 +91,16 @@ export const VCarousel = genericComponent<VWindowSlots>()({
         v-model={ model.value }
         class={[
           'v-carousel',
+          props.class,
           {
             'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
             'v-carousel--vertical-delimiters': props.verticalDelimiters,
           },
         ]}
-        style={{ height: convertToUnit(props.height) }}
+        style={[
+          props.style,
+          { height: convertToUnit(props.height) },
+        ]}
         continuous
         mandatory="force"
         showArrows={ props.showArrows }

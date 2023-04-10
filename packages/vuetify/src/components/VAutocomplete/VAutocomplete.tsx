@@ -272,6 +272,7 @@ export const VAutocomplete = genericComponent<new <
           onInput={ onInput }
           class={[
             'v-autocomplete',
+            props.class,
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,

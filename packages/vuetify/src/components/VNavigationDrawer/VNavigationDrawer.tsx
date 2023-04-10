@@ -3,6 +3,7 @@ import './VNavigationDrawer.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -78,6 +79,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     },
     sticky: Boolean,
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
@@ -209,6 +211,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             onMouseleave={ () => (isHovering.value = false) }
             class={[
               'v-navigation-drawer',
+              props.class,
               `v-navigation-drawer--${location.value}`,
               {
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
@@ -226,6 +229,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               roundedClasses.value,
             ]}
             style={[
+              props.style,
               backgroundColorStyles.value,
               layoutItemStyles.value,
               dragStyles.value,

@@ -9,6 +9,7 @@ import { VColorPickerSwatches } from './VColorPickerSwatches'
 import { VSheet } from '@/components/VSheet'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeThemeProps } from '@/composables/theme'
@@ -64,6 +65,7 @@ export const VColorPicker = defineComponent({
       default: 300,
     },
 
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
     ...makeThemeProps(),
@@ -124,10 +126,12 @@ export const VColorPicker = defineComponent({
         theme={ props.theme }
         class={[
           'v-color-picker',
+          props.class,
         ]}
-        style={{
-          '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
-        }}
+        style={[
+          props.style,
+          { '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }) },
+        ]}
         maxWidth={ props.width }
       >
         { !props.hideCanvas && (

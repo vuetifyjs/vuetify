@@ -15,6 +15,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -89,6 +90,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     onClick: EventProp,
     onClickOnce: EventProp,
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
@@ -182,6 +184,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
         <Tag
           class={[
             'v-list-item',
+            props.class,
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
@@ -200,6 +203,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
             variantClasses.value,
           ]}
           style={[
+            props.style,
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
           ]}

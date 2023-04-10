@@ -3,6 +3,7 @@ import './VBtnGroup.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -21,6 +22,7 @@ import type { ExtractPropTypes } from 'vue'
 export const makeVBtnGroupProps = propsFactory({
   divided: Boolean,
 
+  ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeDensityProps(),
   ...makeElevationProps(),
@@ -57,6 +59,7 @@ export const VBtnGroup = genericComponent()({
         <props.tag
           class={[
             'v-btn-group',
+            props.class,
             {
               'v-btn-group--divided': props.divided,
             },
@@ -66,6 +69,7 @@ export const VBtnGroup = genericComponent()({
             elevationClasses.value,
             roundedClasses.value,
           ]}
+          style={ props.style }
           v-slots={ slots }
         />
       )

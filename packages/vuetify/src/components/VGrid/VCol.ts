@@ -2,6 +2,7 @@
 import './VGrid.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -100,6 +101,7 @@ export const VCol = genericComponent()({
       validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
     },
 
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -132,7 +134,11 @@ export const VCol = genericComponent()({
     })
 
     return () => h(props.tag, {
-      class: classes.value,
+      class: [
+        props.class,
+        classes.value,
+      ],
+      style: props.style,
     }, slots.default?.())
   },
 })

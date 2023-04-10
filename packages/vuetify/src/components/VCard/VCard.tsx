@@ -18,6 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -73,6 +74,7 @@ export const VCard = genericComponent<VCardSlots>()({
     text: String,
     title: String,
 
+    ...makeComponentProps(),
     ...makeThemeProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
@@ -122,6 +124,7 @@ export const VCard = genericComponent<VCardSlots>()({
         <Tag
           class={[
             'v-card',
+            props.class,
             {
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
@@ -139,6 +142,7 @@ export const VCard = genericComponent<VCardSlots>()({
             variantClasses.value,
           ]}
           style={[
+            props.style,
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,

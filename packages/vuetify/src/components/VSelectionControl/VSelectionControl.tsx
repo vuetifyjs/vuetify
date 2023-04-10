@@ -4,6 +4,7 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
+import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Directives
@@ -54,6 +55,7 @@ export const makeSelectionControlProps = propsFactory({
   falseValue: null,
   value: null,
 
+  ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
 }, 'v-selection-control')
 
@@ -199,6 +201,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
         <div
           class={[
             'v-selection-control',
+            props.class,
             {
               'v-selection-control--dirty': model.value,
               'v-selection-control--disabled': props.disabled,
@@ -210,6 +213,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             densityClasses.value,
           ]}
           { ...rootAttrs }
+          style={ props.style }
         >
           <div
             class={[

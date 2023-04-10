@@ -1,4 +1,5 @@
 // Components
+import { makeComponentProps } from '@/composables/component'
 import { VImg } from '@/components/VImg'
 import { VWindowItem } from '@/components/VWindow'
 
@@ -15,11 +16,20 @@ export const VCarouselItem = genericComponent<VImgSlots>()({
 
   props: {
     value: null,
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots, attrs }) {
     useRender(() => (
-      <VWindowItem class="v-carousel-item" value={ props.value }>
+      <VWindowItem
+        class={[
+          'v-carousel-item',
+          props.class,
+        ]}
+        style={ props.style }
+        value={ props.value }
+      >
         <VImg { ...attrs } v-slots={ slots } />
       </VWindowItem>
     ))

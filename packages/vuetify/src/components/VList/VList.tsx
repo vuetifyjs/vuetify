@@ -7,6 +7,7 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -97,6 +98,7 @@ export const VList = genericComponent<new <T>() => {
     },
     nav: Boolean,
 
+    ...makeComponentProps(),
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
       openStrategy: 'list' as const,
@@ -226,6 +228,7 @@ export const VList = genericComponent<new <T>() => {
           ref={ contentRef }
           class={[
             'v-list',
+            props.class,
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
@@ -239,6 +242,7 @@ export const VList = genericComponent<new <T>() => {
             roundedClasses.value,
           ]}
           style={[
+            props.style,
             backgroundColorStyles.value,
             dimensionStyles.value,
           ]}

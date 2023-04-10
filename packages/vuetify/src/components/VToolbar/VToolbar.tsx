@@ -9,6 +9,7 @@ import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -51,6 +52,7 @@ export const makeVToolbarProps = propsFactory({
   image: String,
   title: String,
 
+  ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
@@ -113,6 +115,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         <props.tag
           class={[
             'v-toolbar',
+            props.class,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,
@@ -127,6 +130,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             themeClasses.value,
           ]}
           style={[
+            props.style,
             backgroundColorStyles.value,
           ]}
         >
@@ -209,6 +213,9 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
 
 export type VToolbar = InstanceType<typeof VToolbar>
 
-export function filterToolbarProps (props: ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>) {
-  return pick(props, Object.keys(VToolbar?.props ?? {}) as any)
+type VToolbarProps = ExtractPropTypes<ReturnType<typeof makeVToolbarProps>>
+
+export function filterToolbarProps (props: VToolbarProps) {
+  const keys = Object.keys(VToolbar?.props ?? {}).filter(k => k !== 'style')
+  return pick<VToolbarProps, any>(props, keys)
 }

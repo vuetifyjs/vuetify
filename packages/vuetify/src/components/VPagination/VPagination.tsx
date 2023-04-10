@@ -7,6 +7,7 @@ import { VBtn } from '../VBtn'
 // Composables
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
@@ -106,6 +107,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     },
     showFirstLastPage: Boolean,
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -309,8 +311,10 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         ref={ resizeRef }
         class={[
           'v-pagination',
+          props.class,
           themeClasses.value,
         ]}
+        style={ props.style }
         role="navigation"
         aria-label={ t(props.ariaLabel) }
         onKeydown={ onKeydown }

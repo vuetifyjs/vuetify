@@ -3,6 +3,7 @@ import './VBottomNavigation.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
@@ -41,6 +42,7 @@ export const VBottomNavigation = genericComponent()({
       default: true,
     },
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
@@ -98,6 +100,7 @@ export const VBottomNavigation = genericComponent()({
         <props.tag
           class={[
             'v-bottom-navigation',
+            props.class,
             {
               'v-bottom-navigation--active': isActive.value,
               'v-bottom-navigation--grow': props.grow,
@@ -111,6 +114,7 @@ export const VBottomNavigation = genericComponent()({
             roundedClasses.value,
           ]}
           style={[
+            props.style,
             backgroundColorStyles.value,
             layoutItemStyles.value,
             {

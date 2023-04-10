@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupItemProps } from '@/composables/group'
 import { makeRouterProps } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
@@ -45,6 +46,7 @@ export const VTab = genericComponent()({
       default: 'horizontal',
     },
 
+    ...makeComponentProps(),
     ...makeTagProps(),
     ...makeRouterProps(),
     ...makeGroupItemProps({
@@ -124,6 +126,7 @@ export const VTab = genericComponent()({
         'selectedClass',
         'value',
         'color',
+        'style',
       ])
 
       return (
@@ -133,6 +136,7 @@ export const VTab = genericComponent()({
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"

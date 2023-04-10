@@ -2,6 +2,7 @@
 import './VThemeProvider.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
 
@@ -14,6 +15,7 @@ export const VThemeProvider = genericComponent()({
   props: {
     withBackground: Boolean,
 
+    ...makeComponentProps(),
     ...makeThemeProps(),
     ...makeTagProps(),
   },
@@ -25,7 +27,14 @@ export const VThemeProvider = genericComponent()({
       if (!props.withBackground) return slots.default?.()
 
       return (
-        <props.tag class={['v-theme-provider', themeClasses.value]}>
+        <props.tag
+          class={[
+            'v-theme-provider',
+            props.class,
+            themeClasses.value,
+          ]}
+          style={ props.style }
+        >
           { slots.default?.() }
         </props.tag>
       )

@@ -3,6 +3,7 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -26,6 +27,7 @@ export const VFooter = genericComponent()({
       default: 'auto',
     },
 
+    ...makeComponentProps(),
     ...makeBorderProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
@@ -62,6 +64,7 @@ export const VFooter = genericComponent()({
         ref={ resizeRef }
         class={[
           'v-footer',
+          props.class,
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
@@ -69,6 +72,7 @@ export const VFooter = genericComponent()({
           roundedClasses.value,
         ]}
         style={[
+          props.style,
           backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
         ]}

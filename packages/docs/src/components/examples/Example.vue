@@ -77,7 +77,7 @@
         </v-expand-transition>
 
         <v-theme-provider
-          :class="showCode && 'border-t'"
+          :class="showCode ? 'border-t' : ''"
           :theme="theme"
           class="pa-4 rounded-b"
           with-background

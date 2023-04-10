@@ -5,6 +5,7 @@ import './VParallax.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useDisplay } from '@/composables'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useResizeObserver } from '@/composables/resizeObserver'
@@ -28,6 +29,8 @@ export const VParallax = genericComponent<VImgSlots>()({
       type: [Number, String],
       default: 0.5,
     },
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -90,8 +93,10 @@ export const VParallax = genericComponent<VImgSlots>()({
       <VImg
         class={[
           'v-parallax',
+          props.class,
           { 'v-parallax--active': isIntersecting.value },
         ]}
+        style={ props.style }
         ref={ root }
         cover
         onLoadstart={ onScroll }

@@ -6,6 +6,7 @@ import { VSlideGroup } from '@/components/VSlideGroup'
 import { VTab } from './VTab'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { provideDefaults } from '@/composables/defaults'
@@ -65,6 +66,7 @@ export const VTabs = genericComponent()({
       default: 'force',
     },
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeTagProps(),
   },
@@ -95,6 +97,7 @@ export const VTabs = genericComponent()({
         v-model={ model.value }
         class={[
           'v-tabs',
+          props.class,
           `v-tabs--${props.direction}`,
           `v-tabs--align-tabs-${props.alignTabs}`,
           {
@@ -106,6 +109,7 @@ export const VTabs = genericComponent()({
           backgroundColorClasses.value,
         ]}
         style={[
+          props.style,
           { '--v-tabs-height': convertToUnit(props.height) },
           backgroundColorStyles.value,
         ]}
