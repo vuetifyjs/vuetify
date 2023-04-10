@@ -272,7 +272,7 @@ describe('VSelect', () => {
 
     cy.mount(() => (
       <VSelect
-        modelValue={ selectedItems }
+        v-model={ selectedItems }
         items={ items.value }
       />
     ))
