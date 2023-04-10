@@ -139,7 +139,6 @@ export const VSelect = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
-    const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
 
@@ -192,6 +191,8 @@ export const VSelect = genericComponent<new <
     
       // html select hotkeys
       ((e: KeyboardEvent) => {
+        const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+
         function checkPrintable (e: KeyboardEvent) {
           const isPrintableChar = e.key.length === 1 && e.key !== ' '
           const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
