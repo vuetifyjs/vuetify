@@ -188,7 +188,7 @@ export const VSelect = genericComponent<new <
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
       }
-    
+
       // html select hotkeys
       ((e: KeyboardEvent) => {
         const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
