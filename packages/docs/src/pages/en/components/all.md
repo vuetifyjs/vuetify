@@ -307,6 +307,12 @@ These components are used to display data and information in a variety of ways.
 
 </components-list-item>
 
+<components-list-item name="Infinite scroll component"  src="infinite-scroller" placeholder>
+
+  The Infinite scroll component is a container that loads more items when scrolling
+
+</components-list-item>
+
 <components-list-item name="Skeleton loader component" src="skeleton-loaders">
 
   Displays a content placeholder, enhancing perceived performance during data-fetching & rendering

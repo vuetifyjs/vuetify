@@ -1,5 +1,6 @@
 ---
-nav: Infinite scroller
+emphasized: true
+nav: Infinite scrollers
 meta:
   title: Infinite scroller component
   description: The Infinite scroll component is a container that loads more items when scrolling. It is useful when you need to display an unknown but large number of items.

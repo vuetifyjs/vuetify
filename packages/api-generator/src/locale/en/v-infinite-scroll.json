@@ -1,6 +1,5 @@
 {
   "props": {
-    "load": "Function called when new content should be loaded.",
     "direction": "Specifies if scroller is **vertical** or **horizontal**.",
     "side": "Specifies the side where new content should appear. Either the **start**, **end**, or **both** sides.",
     "mode": "Specifies if content should load automatically when scrolling (**intersect**) or manually (**manual**).",
@@ -13,5 +12,8 @@
     "load-more": "Shown when scrolled to either side of the content, in manual mode.",
     "empty": "Shown when load returned status 'empty'",
     "error": "Shown when load returned status 'error'"
+  },
+  "events": {
+    "load": "Emitted when the scroll threshold is reached."
   }
 }
