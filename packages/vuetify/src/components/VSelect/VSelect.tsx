@@ -191,14 +191,14 @@ export const VSelect = genericComponent<new <
       }
     }
     // html select hotkeys
-    function onBeforeinput(e: InputEvent) {
-      if (props.multiple || !e.data) return
+    function onKeypress(e: KeyboardEvent) {
+      if (props.multiple) return
 
       const now = performance.now()
       if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
         keyboardLookupPrefix = ''
       }
-      keyboardLookupPrefix += e.data.toLowerCase()
+      keyboardLookupPrefix += e.key.toLowerCase()
       keyboardLookupLastTime = now
 
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
@@ -256,11 +256,12 @@ export const VSelect = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
+          readonly
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          onBeforeinput={ onBeforeinput }
+          onKeypress={ onKeypress }
         >
           {{
             ...slots,
