@@ -265,7 +265,7 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16055
-  it('should select item after typing its first few letters', async () => {
+  it('should select item after typing its first few letters', () => {
     const items = ref(['aaa', 'foo', 'faa'])
 
     const selectedItems = ref(undefined)
@@ -283,7 +283,7 @@ describe('VSelect', () => {
       .focus()
       .type('f', { force: true })
       .get('.v-list-item').should('have.length', 3)
-      .then( _  => {
+      .then(_ => {
         expect(selectedItems.value).equal('foo')
       })
   })

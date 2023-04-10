@@ -169,7 +169,7 @@ describe('VAutocomplete', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16055
-  it('should not replicate html select hotkeys in v-autocomplete', async () => {
+  it('should not replicate html select hotkeys in v-autocomplete', () => {
     const items = ref(['aaa', 'foo', 'faa'])
 
     const selectedItems = ref(undefined)
@@ -187,7 +187,7 @@ describe('VAutocomplete', () => {
       .focus()
       .type('f', { force: true })
       .get('.v-list-item').should('have.length', 2)
-      .then( _  => {
+      .then(_ => {
         expect(selectedItems.value).equal(undefined)
       })
   })
