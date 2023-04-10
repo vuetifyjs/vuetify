@@ -54,7 +54,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
