@@ -53,7 +53,7 @@ export const defaultRtl = {
   en: false,
   es: false,
   et: false,
-  fa: false,
+  fa: true,
   fi: false,
   fr: false,
   hr: false,

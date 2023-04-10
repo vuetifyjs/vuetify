@@ -75,7 +75,7 @@ Icons can be used inside of buttons to add emphasis to the action.
 
 #### Material Design
 
-[Material Design](https://material.io/tools/icons/?style=baseline) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#install-material-icons)
+[Material Design](https://fonts.google.com/icons) is also supported. For more information on how to install it please [navigate here](/features/icon-fonts#install-material-icons)
 
 <alert type="info">
 

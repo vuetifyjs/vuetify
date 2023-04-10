@@ -1,2 +1,2 @@
 export * from './VDataTable'
-export * from './VVirtualScroll'
+export * from './VSkeletonLoader'

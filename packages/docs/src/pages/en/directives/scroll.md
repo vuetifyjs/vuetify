@@ -24,7 +24,11 @@ The default behavior is to bind to the window. If no additional configuration op
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-scroll](/api/v-scroll/) | The scroll directive |
+
+<api-inline hide-links />
 
 ## Examples
 

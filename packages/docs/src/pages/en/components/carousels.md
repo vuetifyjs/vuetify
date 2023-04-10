@@ -16,7 +16,7 @@ The `v-carousel` component is used to display large numbers of visual content on
 
 <!-- ![carousel Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-carousel/v-carousel-entry.png) -->
 
----
+----
 
 ## Usage
 
@@ -28,13 +28,12 @@ The `v-carousel` component expands upon `v-window` by providing additional featu
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-carousel](/api/v-carousel/) | Primary component |
+| [v-carousel-item](/api/v-carousel-item/) | Sub-component used for displaying the `v-carousel` state |
 
-<!-- ## Sub-components
-
-### v-carousel-item
-
-v-carousel-item description -->
+<api-inline hide-links />
 
 ## Examples
 

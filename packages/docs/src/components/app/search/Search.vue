@@ -46,15 +46,11 @@
         />
       </v-card-title>
 
-      <v-text-field
+      <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
         class="flex-grow-0 mx-2"
-        density="comfortable"
-        hide-details
-        prepend-inner-icon="mdi-magnify"
-        single-line
         variant="solo"
       />
 

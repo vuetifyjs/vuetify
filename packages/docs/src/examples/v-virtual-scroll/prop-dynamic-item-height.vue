@@ -21,7 +21,7 @@
   export default {
     computed: {
       items () {
-        return Array.from({ length: 10000 }, (k, v) => v + 1)
+        return Array.from({ length: 1000 }, (k, v) => v + 1)
       },
     },
   }

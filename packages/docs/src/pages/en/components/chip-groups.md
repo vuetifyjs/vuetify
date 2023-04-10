@@ -28,7 +28,11 @@ Chip groups make it easy for users to select filtering options for more complex 
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-chip-group](/api/v-chip-group/) | Primary component |
+
+<api-inline hide-links />
 
 ## Examples
 

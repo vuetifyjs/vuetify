@@ -20,7 +20,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')
@@ -38,7 +38,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')
@@ -56,7 +56,7 @@ describe('VBtnGroup', () => {
               <VBtn>Button 2</VBtn>
               <VBtn>Button 3</VBtn>
             </VBtnGroup>
-          )) }
+          ))}
         </>
       ))
         .get('.v-btn-group')
