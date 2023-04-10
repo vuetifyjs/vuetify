@@ -1,54 +1,46 @@
 <template>
-  <div class="text-center">
-    <v-bottom-sheet inset>
-      <template v-slot:activator="{ on, attrs }">
+  <v-bottom-sheet inset>
+    <template v-slot:activator="{ props }">
+      <div class="text-center">
         <v-btn
           color="red"
-          v-bind="attrs"
-          v-on="on"
+          v-bind="props"
         >
           Open Player
         </v-btn>
-      </template>
-      <v-card rounded="0">
-        <v-progress-linear
-          :model-value="50"
-          class="my-0"
-          height="3"
-        ></v-progress-linear>
+      </div>
+    </template>
 
-        <v-list>
-          <v-list-item>
-            <v-list-item-content>
-              <v-list-item-title>The Walker</v-list-item-title>
-              <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
-            </v-list-item-content>
+    <v-sheet>
+      <v-progress-linear model-value="50"></v-progress-linear>
 
-            <v-spacer></v-spacer>
+      <v-list>
+        <v-list-item>
+          <v-list-item-title>The Walker</v-list-item-title>
 
-            <v-list-item-icon>
-              <v-btn icon>
-                <v-icon>mdi-rewind</v-icon>
-              </v-btn>
-            </v-list-item-icon>
+          <v-list-item-subtitle>Fitz & The Trantrums</v-list-item-subtitle>
 
-            <v-list-item-icon :class="{ 'mx-5': $vuetify.display.mdAndUp }">
-              <v-btn icon>
-                <v-icon>mdi-pause</v-icon>
-              </v-btn>
-            </v-list-item-icon>
+          <template v-slot:append>
+            <v-btn
+              icon="mdi-rewind"
+              variant="text"
+            ></v-btn>
 
-            <v-list-item-icon
-              class="ms-0"
+            <v-btn
+              :class="{ 'mx-5': $vuetify.display.mdAndUp }"
+              icon="mdi-pause"
+              variant="text"
+            ></v-btn>
+
+            <v-btn
               :class="{ 'me-3': $vuetify.display.mdAndUp }"
-            >
-              <v-btn icon>
-                <v-icon>mdi-fast-forward</v-icon>
-              </v-btn>
-            </v-list-item-icon>
-          </v-list-item>
-        </v-list>
-      </v-card>
-    </v-bottom-sheet>
-  </div>
+              class="ms-0"
+              icon="mdi-fast-forward"
+              variant="text"
+            ></v-btn>
+          </template>
+        </v-list-item>
+      </v-list>
+    </v-sheet>
+  </v-bottom-sheet>
 </template>

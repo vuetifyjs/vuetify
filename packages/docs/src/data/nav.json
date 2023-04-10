@@ -77,6 +77,7 @@
       "all",
       { "divider": true },
       { "subheader": "containment" },
+      "bottom-sheets",
       "buttons",
       "cards",
       "chips",

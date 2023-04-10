@@ -7,10 +7,11 @@
     >
       Open v-model
     </v-btn>
+
     <v-bottom-sheet v-model="sheet">
       <v-sheet
         class="text-center"
-        height="200px"
+        height="200"
       >
         <v-btn
           class="mt-6"
@@ -20,6 +21,7 @@
         >
           close
         </v-btn>
+
         <div class="py-3">
           This is a bottom sheet using the controlled by v-model instead of activator
         </div>
