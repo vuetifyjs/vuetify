@@ -140,7 +140,8 @@ export const VSelect = genericComponent<new <
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
     const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
-    let keyboardLookupPrefix = '', keyboardLookupLastTime: number
+    let keyboardLookupPrefix = ''
+    let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
