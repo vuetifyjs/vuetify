@@ -194,9 +194,8 @@ export const VList = genericComponent<new <T>() => {
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.value) return
 
-      const focusable = [...contentRef.value.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
+      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
       const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
       if (!location) {
