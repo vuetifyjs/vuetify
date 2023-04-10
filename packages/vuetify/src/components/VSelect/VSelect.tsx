@@ -191,7 +191,7 @@ export const VSelect = genericComponent<new <
       }
     }
     // html select hotkeys
-    function onKeypress(e: KeyboardEvent) {
+    function onKeypress (e: KeyboardEvent) {
       if (props.multiple) return
 
       const now = performance.now()
