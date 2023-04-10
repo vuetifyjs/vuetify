@@ -80,7 +80,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>() =>
     })
 
     const items = computed(() => props.items.map(item => {
-      return typeof item === 'string' ? { title: item } : item
+      return typeof item === 'string' ? { item: { title: item }, raw: item } : { item, raw: item }
     }))
 
     useRender(() => {
@@ -115,21 +115,21 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>() =>
             </VDefaultsProvider>
           ) }
 
-          { items.value.map((item, index, array) => (
+          { items.value.map(({ item, raw }, index, array) => (
             <>
               <VBreadcrumbsItem
                 key={ item.title }
                 disabled={ index >= array.length - 1 }
                 { ...item }
                 v-slots={{
-                  default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                  default: slots.title ? () => slots.title?.({ item: raw, index }) : undefined,
                 }}
               />
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider
                   v-slots={{
-                    default: slots.divider ? () => slots.divider?.({ item, index }) : undefined,
+                    default: slots.divider ? () => slots.divider?.({ item: raw, index }) : undefined,
                   }}
                 />
               ) }

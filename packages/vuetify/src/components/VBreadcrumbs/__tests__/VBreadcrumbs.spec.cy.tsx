@@ -12,7 +12,7 @@ describe('VBreadcrumbs', () => {
       <Application>
         <VBreadcrumbs items={ ['hello', 'world']}>
           {{
-            title: ({ item }: any) => `${item.title}!`,
+            title: ({ item }: any) => `${item}!`,
           }}
         </VBreadcrumbs>
       </Application>
