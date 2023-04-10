@@ -191,19 +191,21 @@ export const VSelect = genericComponent<new <
       }
 
       // html select hotkeys
-      if (props.multiple) return
+      ((e: KeyboardEvent) => {
+        if (props.multiple) return
 
-      const now = performance.now()
-      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
-        keyboardLookupPrefix = ''
-      }
-      keyboardLookupPrefix += e.key.toLowerCase()
-      keyboardLookupLastTime = now
+        const now = performance.now()
+        if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+          keyboardLookupPrefix = ''
+        }
+        keyboardLookupPrefix += e.key.toLowerCase()
+        keyboardLookupLastTime = now
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item !== undefined) {
-        model.value = [item]
-      }
+        const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+        if (item !== undefined) {
+          model.value = [item]
+        }
+      })(e)
     }
     function select (item: InternalItem) {
       if (props.multiple) {
