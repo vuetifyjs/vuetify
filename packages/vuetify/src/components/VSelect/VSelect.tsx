@@ -189,22 +189,29 @@ export const VSelect = genericComponent<new <
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
       }
-    }
-    // html select hotkeys
-    function onKeypress (e: KeyboardEvent) {
-      if (props.multiple) return
+    
+      // html select hotkeys
+      ((e: KeyboardEvent) => {
+        function checkPrintable (e: KeyboardEvent) {
+          const isPrintableChar = e.key.length === 1 && e.key !== ' '
+          const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+          return isPrintableChar && noModifier
+        }
 
-      const now = performance.now()
-      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
-        keyboardLookupPrefix = ''
-      }
-      keyboardLookupPrefix += e.key.toLowerCase()
-      keyboardLookupLastTime = now
+        if (props.multiple || !checkPrintable(e)) return
 
-      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item !== undefined) {
-        model.value = [item]
-      }
+        const now = performance.now()
+        if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+          keyboardLookupPrefix = ''
+        }
+        keyboardLookupPrefix += e.key.toLowerCase()
+        keyboardLookupLastTime = now
+
+        const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+        if (item !== undefined) {
+          model.value = [item]
+        }
+      })(e)
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -261,7 +268,6 @@ export const VSelect = genericComponent<new <
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
-          onKeypress={ onKeypress }
         >
           {{
             ...slots,
