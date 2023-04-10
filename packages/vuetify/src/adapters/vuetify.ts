@@ -1,10 +1,12 @@
-// Types
+// Utilities
 import { createRange } from '@/util'
+
+// Types
 import type { DateAdapter } from './date-adapter'
 
 function getWeekArray (date: Date) {
-  const weeks = []
   let currentWeek = []
+  const weeks = []
   const firstDayOfMonth = startOfMonth(date)
   const lastDayOfMonth = endOfMonth(date)
 

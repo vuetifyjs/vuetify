@@ -12,12 +12,12 @@ import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import type { DateAdapter } from './adapters/date-adapter'
 
 export * from './composables'
 
@@ -25,9 +25,7 @@ export interface VuetifyOptions {
   aliases?: Record<string, any>
   blueprint?: Blueprint
   components?: Record<string, any>
-  date?: {
-    adapter: { new(locale: string): DateAdapter<any> }
-  }
+  date?: DateOptions
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions

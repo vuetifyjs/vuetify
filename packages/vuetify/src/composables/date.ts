@@ -9,6 +9,10 @@ import { propsFactory } from '@/util'
 import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
 
+export type DateOptions = {
+  adapter: { new(locale: string): DateAdapter<any> }
+}
+
 export const DateAdapterSymbol: InjectionKey<{ adapter: { new(locale: string): DateAdapter<any> } }> = Symbol.for('vuetify:date-adapter')
 
 export interface DateProps {
