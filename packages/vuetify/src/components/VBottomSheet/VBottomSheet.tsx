@@ -4,6 +4,9 @@ import './VBottomSheet.sass'
 // Components
 import { makeVDialogProps, VDialog } from '@/components/VDialog/VDialog'
 
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
@@ -19,7 +22,13 @@ export const VBottomSheet = genericComponent()({
     }),
   },
 
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
   setup (props, { slots }) {
+    const isActive = useProxiedModel(props, 'modelValue')
+
     useRender(() => {
       const [dialogProps] = VDialog.filterProps(props)
 
@@ -32,12 +41,12 @@ export const VBottomSheet = genericComponent()({
             },
           ]}
           { ...dialogProps }
-        >
-          {{
+          v-model={ isActive.value }
+          v-slots={{
             activator: slots.activator,
             default: slots.default,
           }}
-        </VDialog>
+        />
       )
     })
 
@@ -46,32 +55,3 @@ export const VBottomSheet = genericComponent()({
 })
 
 export type VBottomSheet = InstanceType<typeof VBottomSheet>
-
-// import './VBottomSheet.sass'
-
-// // Extensions
-// import VDialog from '../VDialog/VDialog'
-
-// /* @vue/component */
-// export default VDialog.extend({
-//   name: 'v-bottom-sheet',
-
-//   props: {
-//     inset: Boolean,
-//     maxWidth: [String, Number],
-//     transition: {
-//       type: String,
-//       default: 'bottom-sheet-transition',
-//     },
-//   },
-
-//   computed: {
-//     classes (): object {
-//       return {
-//         ...VDialog.options.computed.classes.call(this),
-//         'v-bottom-sheet': true,
-//         'v-bottom-sheet--inset': this.inset,
-//       }
-//     },
-//   },
-// })
