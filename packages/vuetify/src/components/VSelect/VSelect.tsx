@@ -139,6 +139,9 @@ export const VSelect = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
+    const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+    let keyboardLookupPrefix = '', keyboardLookupLastTime: number
+
     const displayItems = computed(() => {
       if (props.hideSelected) {
         return items.value.filter(item => !selections.value.some(s => s === item))
@@ -187,9 +190,17 @@ export const VSelect = genericComponent<new <
       }
 
       // html select hotkeys
-      const keyboardLookupPrefix = e.key
+      if (props.multiple) return
+
+      const now = performance.now()
+      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        keyboardLookupPrefix = ''
+      }
+      keyboardLookupPrefix += e.key.toLowerCase()
+      keyboardLookupLastTime = now
+
       const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-      if (item) {
+      if (item !== undefined) {
         model.value = [item]
       }
     }
