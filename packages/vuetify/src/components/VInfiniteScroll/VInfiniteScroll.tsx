@@ -36,7 +36,7 @@ type VInfiniteScrollSlots = {
   'load-more': [InfiniteScrollSlot]
 }
 
-export const VInfiniteScrollIntersect = genericComponent()({
+export const VInfiniteScrollIntersect = genericComponent<VInfiniteScrollSlots>()({
   name: 'VInfiniteScrollIntersect',
 
   props: {
@@ -248,7 +248,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
               rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
-          ) }
+          )}
 
           { slots.default?.() }
 
@@ -260,7 +260,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
               rootRef={ rootEl.value }
               rootMargin={ margin.value }
             />
-          ) }
+          )}
 
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }
