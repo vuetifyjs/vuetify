@@ -81,8 +81,8 @@ export const makeVFieldProps = propsFactory({
   'onClick:prependInner': EventProp,
 
   ...makeThemeProps(),
-  ...makeRoundedProps(),
   ...makeLoaderProps(),
+  ...makeRoundedProps(),
 }, 'v-field')
 
 export type VFieldSlots = MakeSlots<{
@@ -118,10 +118,10 @@ export const VField = genericComponent<new <T>() => {
 
   setup (props, { attrs, emit, slots }) {
     const { themeClasses } = provideTheme(props)
-    const { roundedClasses } = useRounded(props)
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
+    const { roundedClasses } = useRounded(props)
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -233,9 +233,9 @@ export const VField = genericComponent<new <T>() => {
             },
             themeClasses.value,
             backgroundColorClasses.value,
-            roundedClasses.value,
             focusClasses.value,
             loaderClasses.value,
+            roundedClasses.value,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -264,7 +264,7 @@ export const VField = genericComponent<new <T>() => {
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['solo', 'solo-inverted', 'filled', 'solo-filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }
