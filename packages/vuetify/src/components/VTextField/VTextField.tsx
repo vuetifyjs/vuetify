@@ -66,6 +66,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     'mousedown:control': (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
+    'beforeinput': (e: InputEvent) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
@@ -229,6 +230,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         type={ props.type }
                         onFocus={ onFocus }
                         onBlur={ blur }
+                        onBeforeinput={ e => emit('beforeinput', e as InputEvent) }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

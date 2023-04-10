@@ -189,23 +189,22 @@ export const VSelect = genericComponent<new <
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
       }
+    }
+    // html select hotkeys
+    function onBeforeinput(e: InputEvent) {
+      if (props.multiple || !e.data) return
 
-      // html select hotkeys
-      ((e: KeyboardEvent) => {
-        if (props.multiple) return
+      const now = performance.now()
+      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        keyboardLookupPrefix = ''
+      }
+      keyboardLookupPrefix += e.data.toLowerCase()
+      keyboardLookupLastTime = now
 
-        const now = performance.now()
-        if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
-          keyboardLookupPrefix = ''
-        }
-        keyboardLookupPrefix += e.key.toLowerCase()
-        keyboardLookupLastTime = now
-
-        const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-        if (item !== undefined) {
-          model.value = [item]
-        }
-      })(e)
+      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      if (item !== undefined) {
+        model.value = [item]
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -257,11 +256,11 @@ export const VSelect = genericComponent<new <
             },
           ]}
           appendInnerIcon={ props.menuIcon }
-          readonly
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
           onKeydown={ onKeydown }
+          onBeforeinput={ onBeforeinput }
         >
           {{
             ...slots,
