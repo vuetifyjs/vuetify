@@ -48,12 +48,12 @@
   &--variant-solo-inverted
     background: $field-control-solo-background
     border-color: transparent
-    color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity))
+    color: $field-control-solo-inverted-color
 
     @include tools.elevation($field-control-solo-elevation)
 
     &.v-field--focused
-      color: rgb(var(--v-theme-on-surface-variant))
+      color: $field-control-solo-inverted-focused-color
 
   &--variant-filled
     border-bottom-left-radius: 0
@@ -103,7 +103,7 @@
     box-shadow: none
 
   &--rounded
-    border-radius: 9999px !important
+    @include tools.rounded($field-rounded-border-radius)
 
   // These are separate so they can override the default variant styles
   &.v-field
@@ -386,6 +386,7 @@
 .v-field__overlay
   border-radius: inherit
   pointer-events: none
+
   @include tools.absolute()
 
 .v-field--variant-filled
@@ -429,10 +430,8 @@
       opacity: calc((#{.04} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
 
   &.v-field--focused .v-field__overlay
-    background-color: rgb(var(--v-theme-surface-variant))
+    background-color: $field-overlay-focused-background-color
     opacity: 1
-
-    // opacity: calc((#{1} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
 
 /* endregion */
 /* region MODIFIERS */

@@ -10,9 +10,9 @@ import { VFieldLabel } from './VFieldLabel'
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
