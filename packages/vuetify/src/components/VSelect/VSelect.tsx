@@ -190,29 +190,27 @@ export const VSelect = genericComponent<new <
       }
 
       // html select hotkeys
-      ((e: KeyboardEvent) => {
-        const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+      const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
 
-        function checkPrintable (e: KeyboardEvent) {
-          const isPrintableChar = e.key.length === 1 && e.key !== ' '
-          const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
-          return isPrintableChar && noModifier
-        }
+      function checkPrintable (e: KeyboardEvent) {
+        const isPrintableChar = e.key.length === 1
+        const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+        return isPrintableChar && noModifier
+      }
 
-        if (props.multiple || !checkPrintable(e)) return
+      if (props.multiple || !checkPrintable(e)) return
 
-        const now = performance.now()
-        if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
-          keyboardLookupPrefix = ''
-        }
-        keyboardLookupPrefix += e.key.toLowerCase()
-        keyboardLookupLastTime = now
+      const now = performance.now()
+      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        keyboardLookupPrefix = ''
+      }
+      keyboardLookupPrefix += e.key.toLowerCase()
+      keyboardLookupLastTime = now
 
-        const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
-        if (item !== undefined) {
-          model.value = [item]
-        }
-      })(e)
+      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      if (item !== undefined) {
+        model.value = [item]
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
