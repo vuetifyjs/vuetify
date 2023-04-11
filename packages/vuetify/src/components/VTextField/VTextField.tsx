@@ -217,7 +217,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         !isFocused.value &&
                         props.label &&
                         !props.persistentPlaceholder
-                      )) return ''
+                      )) return undefined
 
                       return props.placeholder
                     })

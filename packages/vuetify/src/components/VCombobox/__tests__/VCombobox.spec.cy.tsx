@@ -399,4 +399,28 @@ describe('VCombobox', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VCombobox placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-combobox input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-combobox input')
+      .should('not.have.attr', 'placeholder')
+      .get('.v-combobox input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-combobox input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-combobox input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-combobox input')
+      .should('not.have.attr', 'placeholder')
+  })
 })

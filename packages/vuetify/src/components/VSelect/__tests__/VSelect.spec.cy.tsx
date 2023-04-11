@@ -239,6 +239,30 @@ describe('VSelect', () => {
       .get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VSelect placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .get('.v-select input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ref(['Item 1',

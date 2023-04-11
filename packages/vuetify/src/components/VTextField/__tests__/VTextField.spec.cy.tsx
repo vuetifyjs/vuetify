@@ -12,7 +12,6 @@ const stories = Object.fromEntries(Object.entries({
   Affixes: <VTextField label="label" prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VTextField label="label" prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
   'Prepend/append inner': <VTextField label="label" prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
-  Placeholder: <VTextField label="label" placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
@@ -46,6 +45,27 @@ describe('VTextField', () => {
       <VTextField hide-details="auto" counter></VTextField>
     ))
       .get('.v-input__details').should('be.visible')
+  })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VTextField placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-text-field input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-text-field input')
+      .should('not.have.attr', 'placeholder')
+      .get('.v-text-field input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-text-field input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-text-field input')
+      .should('not.have.attr', 'placeholder')
   })
 
   describe('Showcase', () => {
