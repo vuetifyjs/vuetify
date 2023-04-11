@@ -48,7 +48,7 @@ It is important to note that using any of the display classes above will result 
 
 The flex utility classes can be used to modify the **flex** css property. This makes it easy to position flex items within a flex container.
 
-<!-- <example file="flex/flex" /> -->
+<example file="flex/flex-flex" />
 
 There are also responsive variations for `flex`:
 
