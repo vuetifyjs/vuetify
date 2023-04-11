@@ -14,6 +14,6 @@
     "error": "Shown when load returned status 'error'"
   },
   "events": {
-    "load": "Emitted when the scroll threshold is reached."
+    "load": "Emitted when reaching the start / end threshold, or if triggered when using manual mode."
   }
 }

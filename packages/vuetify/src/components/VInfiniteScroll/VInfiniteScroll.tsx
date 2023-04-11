@@ -12,7 +12,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, defineComponent, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -36,7 +36,7 @@ type VInfiniteScrollSlots = {
   'load-more': [InfiniteScrollSlot]
 }
 
-export const VInfiniteScrollIntersect = genericComponent<VInfiniteScrollSlots>()({
+export const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',
 
   props: {
