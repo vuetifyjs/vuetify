@@ -46,32 +46,6 @@
         </li>
       </router-link>
     </ul>
-
-    <v-container>
-      <headline
-        v-if="allSponsors.length"
-        class="mb-1 mt-n1"
-        path="sponsors"
-        size="subtitle-1"
-      />
-
-      <v-row dense>
-        <v-col
-          v-for="sponsor of allSponsors"
-          :key="sponsor.slug"
-          class="d-inline-flex"
-        >
-          <sponsor
-            :sponsor="sponsor"
-            :color="dark ? undefined : 'grey-lighten-5'"
-          />
-        </v-col>
-
-        <v-col cols="12">
-          <sponsor-link block size="large" />
-        </v-col>
-      </v-row>
-    </v-container>
   </v-navigation-drawer>
 </template>
 
