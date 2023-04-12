@@ -406,7 +406,7 @@ describe('VCombobox', () => {
     it('should only apply \'v-combobox\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <Application>
-          <VDefaultsProvider defaults={ {
+          <VDefaultsProvider defaults={{
             global: {
               class: 'v-global-class',
               style: {
@@ -431,7 +431,7 @@ describe('VCombobox', () => {
                 'z-index': 999999999,
               },
             },
-          } }
+          }}
           >
             <VCombobox />
           </VDefaultsProvider>

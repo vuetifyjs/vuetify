@@ -267,7 +267,7 @@ describe('VSelect', () => {
   describe('global configuration', () => {
     it('should only apply \'v-select\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
-        <VDefaultsProvider defaults={ {
+        <VDefaultsProvider defaults={{
           global: {
             class: 'v-global-class',
             style: {
@@ -292,7 +292,7 @@ describe('VSelect', () => {
               color: 'black',
             },
           },
-        } }
+        }}
         >
 
           <VSelect />

@@ -7,7 +7,7 @@ describe('VTabs', () => {
   describe('global configuration', () => {
     it('should only apply \'v-tab\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
-        <VDefaultsProvider defaults={ {
+        <VDefaultsProvider defaults={{
           global: {
             class: 'v-global-class',
             style: {
@@ -26,7 +26,7 @@ describe('VTabs', () => {
               'z-index': '99999',
             },
           },
-        } }
+        }}
         >
 
           <VTab />

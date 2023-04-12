@@ -35,7 +35,7 @@ describe('VAppBar', () => {
     it('should only apply \'v-app-bar\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
         <VLayout>
-          <VDefaultsProvider defaults={ {
+          <VDefaultsProvider defaults={{
             global: {
               class: 'v-global-class',
               style: {
@@ -54,7 +54,7 @@ describe('VAppBar', () => {
                 padding: '1px',
               },
             },
-          } }
+          }}
           >
 
             <VAppBar />

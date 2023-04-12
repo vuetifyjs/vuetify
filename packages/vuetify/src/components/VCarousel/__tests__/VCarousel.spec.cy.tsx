@@ -7,7 +7,7 @@ describe('VCarousel', () => {
   describe('global configuration', () => {
     it('should only apply \'v-carousel\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
-        <VDefaultsProvider defaults={ {
+        <VDefaultsProvider defaults={{
           global: {
             class: 'v-global-class',
             style: {
@@ -38,7 +38,7 @@ describe('VCarousel', () => {
               'z-index': '999999',
             },
           },
-        } }
+        }}
         >
 
           <VCarousel>

@@ -7,14 +7,14 @@ describe('VTooltip', () => {
   describe('global configuration', () => {
     it('should only apply \'v-tooltip\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
-        <VDefaultsProvider defaults={ {
+        <VDefaultsProvider defaults={{
           global: {
             class: 'v-global-class',
             style: {
               opacity: 0.5,
             },
           },
-        } }
+        }}
         >
           <VBtn
             id="menu-activator"
