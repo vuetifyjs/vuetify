@@ -638,7 +638,9 @@ export default baseMixins.extend<options>().extend({
       if (
         this.multiple ||
         !this.isInteractive ||
-        this.disableLookup
+        this.disableLookup ||
+        e.key.length > 1 ||
+        e.ctrlKey || e.metaKey || e.altKey
       ) return
 
       const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
