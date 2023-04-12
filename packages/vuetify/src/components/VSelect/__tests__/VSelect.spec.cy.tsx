@@ -263,4 +263,28 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should select item after typing its first few letters', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+      .get('.v-select input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 3)
+      .then(_ => {
+        expect(selectedItems.value).equal('foo')
+      })
+  })
 })

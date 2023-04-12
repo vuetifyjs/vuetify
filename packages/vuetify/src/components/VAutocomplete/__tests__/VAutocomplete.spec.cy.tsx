@@ -167,4 +167,28 @@ describe('VAutocomplete', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
   })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should not replicate html select hotkeys in v-autocomplete', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+      .get('.v-autocomplete input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 2)
+      .then(_ => {
+        expect(selectedItems.value).equal(undefined)
+      })
+  })
 })

@@ -139,6 +139,9 @@ export const VSelect = genericComponent<new <
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
+    let keyboardLookupPrefix = ''
+    let keyboardLookupLastTime: number
+
     const displayItems = computed(() => {
       if (props.hideSelected) {
         return items.value.filter(item => !selections.value.some(s => s === item))
@@ -184,6 +187,29 @@ export const VSelect = genericComponent<new <
         listRef.value?.focus('first')
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
+      }
+
+      // html select hotkeys
+      const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+
+      function checkPrintable (e: KeyboardEvent) {
+        const isPrintableChar = e.key.length === 1
+        const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+        return isPrintableChar && noModifier
+      }
+
+      if (props.multiple || !checkPrintable(e)) return
+
+      const now = performance.now()
+      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        keyboardLookupPrefix = ''
+      }
+      keyboardLookupPrefix += e.key.toLowerCase()
+      keyboardLookupLastTime = now
+
+      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      if (item !== undefined) {
+        model.value = [item]
       }
     }
     function select (item: InternalItem) {
