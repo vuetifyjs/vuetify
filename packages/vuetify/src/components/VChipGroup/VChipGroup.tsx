@@ -71,7 +71,7 @@ export const VChipGroup = genericComponent()({
           next,
           prev,
           selected: selected.value,
-        }) }
+        })}
       </props.tag>
     ))
 

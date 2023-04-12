@@ -2,10 +2,10 @@
 import './VCarousel.sass'
 
 // Components
+import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
-import { VWindow } from '@/components/VWindow'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -41,18 +41,17 @@ export const VCarousel = genericComponent<VWindowSlots>()({
     interval: {
       type: [Number, String],
       default: 6000,
-      validator: (value: string | number) => value > 0,
+      validator: (value: string | number) => Number(value) > 0,
     },
-    modelValue: null,
     progress: [Boolean, String],
-    showArrows: {
-      type: [Boolean, String],
-      default: true,
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
     verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
 
     ...makeComponentProps(),
+    ...makeVWindowProps({
+      continuous: true,
+      mandatory: 'force' as const,
+      showArrows: true,
+    }),
   },
 
   emits: {
@@ -131,6 +130,7 @@ export const VCarousel = genericComponent<VWindowSlots>()({
                     >
                       { group.items.value.map((item, index) => {
                         const props = {
+                          id: `carousel-item-${item.id}`,
                           'aria-label': t('$vuetify.carousel.ariaLabel.delimiter', index + 1, group.items.value.length),
                           class: [group.isSelected(item.id) && 'v-btn--active'],
                           onClick: () => group.select(item.id, true),
@@ -139,9 +139,9 @@ export const VCarousel = genericComponent<VWindowSlots>()({
                         return slots.item
                           ? slots.item({ props, item })
                           : (<VBtn { ...item } { ...props } />)
-                      }) }
+                      })}
                     </VDefaultsProvider>
-                  ) }
+                  )}
                 </div>
               )}
 

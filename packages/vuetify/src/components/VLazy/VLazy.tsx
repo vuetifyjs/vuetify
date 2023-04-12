@@ -60,8 +60,11 @@ export const VLazy = genericComponent()({
           props.class,
         ]}
         v-intersect={[
-          onIntersect,
-          props.options,
+          {
+            handler: onIntersect,
+            options: props.options,
+          },
+          null,
           isActive.value ? [] : ['once'],
         ]}
         style={[

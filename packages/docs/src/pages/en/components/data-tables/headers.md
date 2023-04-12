@@ -12,6 +12,10 @@ related:
 
 # Data table - Headers
 
+Headers are used to define the columns of the table.
+
+<entry />
+
 ## TODO:
 
 - Headers is the entire section above body (but below top), possibly multiple rows

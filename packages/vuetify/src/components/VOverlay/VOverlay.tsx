@@ -30,7 +30,6 @@ import {
   genericComponent,
   getScrollParent,
   IN_BROWSER,
-  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -49,7 +48,7 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { MakeSlots } from '@/util'
-import type { ExtractPropTypes, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -243,7 +242,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
           props: mergeProps({
             ref: activatorRef,
           }, toHandlers(activatorEvents.value), props.activatorProps),
-        }) }
+        })}
 
         { isMounted.value && (
           <Teleport
@@ -282,7 +281,7 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   persisted
                   transition={ props.transition }
                   target={ activatorEl.value }
-                  onAfterLeave={() => { onAfterLeave(); emit('afterLeave') }}
+                  onAfterLeave={ () => { onAfterLeave(); emit('afterLeave') } }
                 >
                   <div
                     ref={ contentEl }
@@ -321,7 +320,3 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 })
 
 export type VOverlay = InstanceType<typeof VOverlay>
-
-export function filterVOverlayProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>>) {
-  return pick(props, Object.keys(VOverlay.props) as any)
-}

@@ -200,6 +200,13 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       },
     })
 
+    function onMouseenter () {
+      isHovering.value = true
+    }
+    function onMouseleave () {
+      isHovering.value = false
+    }
+
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -207,8 +214,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
         <>
           <props.tag
             ref={ rootEl }
-            onMouseenter={ () => (isHovering.value = true) }
-            onMouseleave={ () => (isHovering.value = false) }
+            onMouseenter={ onMouseenter }
+            onMouseleave={ onMouseleave }
             class={[
               'v-navigation-drawer',
               props.class,

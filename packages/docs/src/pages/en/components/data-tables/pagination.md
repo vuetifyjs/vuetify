@@ -12,7 +12,9 @@ related:
 
 # Data table - Pagination
 
-Lorem ipsum etc etc
+Pagination is used to split up large amounts of data into smaller chunks.
+
+<entry />
 
 ## Examples
 

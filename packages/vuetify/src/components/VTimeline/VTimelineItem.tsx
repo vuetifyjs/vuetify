@@ -101,7 +101,7 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           <div class="v-timeline-item__opposite">
             { !props.hideOpposite && slots.opposite?.() }
           </div>
-        ) }
+        )}
       </div>
     ))
 

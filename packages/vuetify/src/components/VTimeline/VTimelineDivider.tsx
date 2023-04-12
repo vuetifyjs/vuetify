@@ -1,4 +1,5 @@
 // Components
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
@@ -7,7 +8,6 @@ import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
@@ -40,14 +40,6 @@ export const VTimelineDivider = genericComponent()({
       backgroundColorClasses: lineColorClasses,
       backgroundColorStyles: lineColorStyles,
     } = useBackgroundColor(toRef(props, 'lineColor'))
-
-    provideDefaults({
-      VIcon: {
-        color: toRef(props, 'iconColor'),
-        icon: toRef(props, 'icon'),
-        size: toRef(props, 'size'),
-      },
-    })
 
     useRender(() => (
       <div
@@ -87,10 +79,30 @@ export const VTimelineDivider = genericComponent()({
               ]}
               style={ backgroundColorStyles.value }
             >
-              { slots.default?.() ?? (props.icon ? (<VIcon />) : undefined) }
+              { !slots.default ? (
+                <VIcon
+                  key="icon"
+                  color={ props.iconColor }
+                  icon={ props.icon }
+                  size={ props.size }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="icon-defaults"
+                  disabled={ !props.icon }
+                  defaults={{
+                    VIcon: {
+                      color: props.iconColor,
+                      icon: props.icon,
+                      size: props.size,
+                    },
+                  }}
+                  v-slots:default={ slots.default }
+                />
+              )}
             </div>
           </div>
-        ) }
+        )}
 
         <div
           class={[

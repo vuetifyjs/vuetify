@@ -14,23 +14,22 @@ related:
 
 The `v-slide-group` component is used to display pseudo paginated information. It uses [v-item-group](/components/item-groups) at its core and provides a baseline for components such as [v-tabs](/components/tabs) and [v-chip-group](/components/chip-groups).
 
-<entry />
-
 ## Usage
 
 Similar to the [v-window](/components/windows) component, `v-slide-group` lets items to take up as much space as needed, allowing the user to move horizontally through the provided information.
 
 <example file="v-slide-group/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-slide-group](/api/v-slide-group/) | Primary Component |
+| [v-slide-item](/api/v-slide-item/) | Sub-component used for modifying the `v-slide-group` state |
 
-<!-- ## Sub-components
-
-### v-slide-item
-
-v-slide-item description -->
+<api-inline hide-links />
 
 ## Examples
 

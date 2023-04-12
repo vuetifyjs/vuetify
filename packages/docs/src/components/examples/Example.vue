@@ -34,6 +34,7 @@
               </v-btn>
             </div>
           </v-fade-transition>
+
           <v-spacer />
 
           <v-tooltip
@@ -96,18 +97,20 @@
   // Composables
   import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
-  import { useTheme } from 'vuetify'
+  import { useTheme, version as vuetifyVersion } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef, version as vueVersion } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
+  import { strFromU8, strToU8, zlibSync } from 'fflate'
 
   const { t } = useI18n()
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -186,29 +189,84 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  const actions = computed(() => [
-    {
-      icon: 'mdi-theme-light-dark',
-      path: 'invert-example-colors',
-      onClick: toggleTheme,
-    },
-    {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
-    },
-    {
-      icon: 'mdi-github',
-      path: 'view-in-github',
-      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-      target: '_blank',
-    },
-    {
-      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-      path: !showCode.value ? 'view-source' : 'hide-source',
-      onClick: () => {
-        showCode.value = !showCode.value
+  // This is copied directly from playground
+  function utoa (data: string): string {
+    const buffer = strToU8(data)
+    const zipped = zlibSync(buffer, { level: 9 })
+    const binary = strFromU8(zipped, true)
+    return btoa(binary)
+  }
+
+  const playgroundLink = computed(() => {
+    if (!isLoaded.value || isError.value) {
+      return null
+    }
+
+    const resources = JSON.parse(component.value.codepenResources || '{}')
+
+    const links = {
+      css: resources.css ?? [],
+    }
+
+    const importMap = {
+      imports: resources.imports ?? {},
+    }
+
+    const files = {
+      'App.vue': sections.value
+        .filter(section => ['script', 'template'].includes(section.name))
+        .map(section => section.content)
+        .join('\n\n'),
+      'links.json': JSON.stringify(links),
+      'import-map.json': JSON.stringify(importMap),
+    }
+
+    // This is copied directly from playground
+    const hash = utoa(JSON.stringify([files, vueVersion, vuetifyVersion, true]))
+
+    return `https://play.vuetifyjs.com#${hash}`
+  })
+
+  const actions = computed(() => {
+    const array = []
+
+    if (!props.hideInvert) {
+      array.push({
+        icon: 'mdi-theme-light-dark',
+        path: 'invert-example-colors',
+        onClick: toggleTheme,
+      })
+    }
+
+    if (playgroundLink.value) {
+      array.push({
+        icon: 'mdi-vuetify',
+        path: 'edit-in-playground',
+        href: playgroundLink.value,
+        target: '_blank',
+      })
+    }
+
+    return [
+      ...array,
+      {
+        icon: 'mdi-codepen',
+        path: 'edit-in-codepen',
+        onClick: openCodepen,
       },
-    },
-  ])
+      {
+        icon: 'mdi-github',
+        path: 'view-in-github',
+        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+        target: '_blank',
+      },
+      {
+        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+        path: !showCode.value ? 'view-source' : 'hide-source',
+        onClick: () => {
+          showCode.value = !showCode.value
+        },
+      },
+    ]
+  })
 </script>

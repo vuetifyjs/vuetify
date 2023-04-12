@@ -29,9 +29,9 @@ describe('VLayout', () => {
         <VNavigationDrawer width="200" permanent></VNavigationDrawer>
         <VMain>
           <div>
-            {createRange(10).map(_ => <div>hello</div>)}
+            { createRange(10).map(_ => <div>hello</div>) }
             <nav style="position: sticky; top: var(--v-layout-top); background: grey">Sticky Header</nav>
-            {createRange(100).map(_ => <div>hello</div>)}
+            { createRange(100).map(_ => <div>hello</div>) }
           </div>
         </VMain>
       </VLayout>
@@ -48,9 +48,9 @@ describe('VLayout', () => {
         <VNavigationDrawer width="200" permanent></VNavigationDrawer>
         <VMain scrollable>
           <div>
-            {createRange(10).map(_ => <div>hello</div>)}
+            { createRange(10).map(_ => <div>hello</div>) }
             <nav style="position: sticky; top: 0px; background: grey">Sticky Header</nav>
-            {createRange(100).map(_ => <div>hello</div>)}
+            { createRange(100).map(_ => <div>hello</div>) }
           </div>
         </VMain>
       </VLayout>

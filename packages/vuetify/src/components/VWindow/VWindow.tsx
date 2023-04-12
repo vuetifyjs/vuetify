@@ -16,7 +16,7 @@ import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, provide, ref, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, InjectionKey, PropType, Ref } from 'vue'
@@ -49,6 +49,46 @@ type ControlProps = {
 export const VWindowSymbol: InjectionKey<WindowProvide> = Symbol.for('vuetify:v-window')
 export const VWindowGroupSymbol: InjectionKey<GroupItemProvide> = Symbol.for('vuetify:v-window-group')
 
+export const makeVWindowProps = propsFactory({
+  continuous: Boolean,
+  nextIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$next',
+  },
+  prevIcon: {
+    type: [Boolean, String, Function, Object] as PropType<IconValue>,
+    default: '$prev',
+  },
+  reverse: Boolean,
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => typeof v === 'boolean' || v === 'hover',
+  },
+  touch: {
+    type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
+    default: undefined,
+  },
+  direction: {
+    type: String,
+    default: 'horizontal',
+  },
+
+  modelValue: null,
+  disabled: Boolean,
+  selectedClass: {
+    type: String,
+    default: 'v-window-item--active',
+  },
+  // TODO: mandatory should probably not be exposed but do this for now
+  mandatory: {
+    default: 'force' as const,
+  },
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-window')
+
 export const VWindow = genericComponent<VWindowSlots>()({
   name: 'VWindow',
 
@@ -56,45 +96,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
     Touch,
   },
 
-  props: {
-    continuous: Boolean,
-    nextIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$next',
-    },
-    prevIcon: {
-      type: [Boolean, String, Function, Object] as PropType<IconValue>,
-      default: '$prev',
-    },
-    reverse: Boolean,
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => typeof v === 'boolean' || v === 'hover',
-    },
-    touch: {
-      type: [Object, Boolean] as PropType<boolean | TouchHandlers>,
-      default: undefined,
-    },
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-
-    modelValue: null,
-    disabled: Boolean,
-    selectedClass: {
-      type: String,
-      default: 'v-window-item--active',
-    },
-    // TODO: mandatory should probably not be exposed but do this for now
-    mandatory: {
-      default: 'force' as const,
-    },
-
-    ...makeComponentProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVWindowProps(),
 
   emits: {
     'update:modelValue': (v: any) => true,

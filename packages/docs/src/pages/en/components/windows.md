@@ -14,17 +14,22 @@ related:
 
 The `v-window` component provides the baseline functionality for transitioning content from one pane to another. Other components such as `v-tabs`, `v-carousel` and `v-stepper` utilize this component at their core.
 
-<entry />
-
 ## Usage
 
 Designed to easily cycle through content, `v-window` provides a simple interface to create custom implementations.
 
 <example file="v-window/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-window](/api/v-window/) | Primary Component |
+| [v-window-item](/api/v-window-item/) | Sub-component used to display a single window item |
+
+<api-inline hide-links />
 
 ## Examples
 

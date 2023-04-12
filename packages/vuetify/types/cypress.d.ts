@@ -3,10 +3,22 @@ import 'cypress-real-events'
 import type { mount as cyMount } from 'cypress/vue'
 import type { SnapshotOptions } from '@percy/core'
 import type { MountingOptions, VueWrapper } from '@vue/test-utils'
-import type { ComponentPublicInstance, FunctionalComponent } from 'vue'
+import type { AllowedComponentProps, ComponentPublicInstance, FunctionalComponent, VNodeProps } from 'vue'
 import type { VuetifyOptions } from '@/framework'
 
 type Swipe = number[] | string
+
+type StripProps = keyof VNodeProps | keyof AllowedComponentProps | 'v-slots' | '$children' | `v-slot:${string}`
+type Events<T> = T extends { $props: infer P extends object }
+  ? {
+    [K in Exclude<keyof P, StripProps> as K extends `on${infer N}`
+      ? Uncapitalize<N>
+      : never
+    ]: P[K] extends (((...args: any[]) => any) | undefined)
+      ? Parameters<NonNullable<P[K]>>[]
+      : never
+  }
+  : never
 
 declare global {
   namespace Cypress {
@@ -22,12 +34,12 @@ declare global {
         name?: string,
         options?: SnapshotOptions
       ): Chainable
-      vue (): Chainable<{
-        wrapper: VueWrapper<ComponentPublicInstance>
-        component: VueWrapper<ComponentPublicInstance>['vm']
-      }>
+      vue (): Chainable<VueWrapper<ComponentPublicInstance>>
       swipe (...path: Swipe[]): Chainable<void>
-      emitted (selector: Parameters<VueWrapper<any>['findComponent']>[0], event: string): Chainable<unknown[]>
+      emitted <T extends new (...args: any) => any, E extends Events<InstanceType<T>>, K extends keyof E> (
+        selector: T,
+        event?: K
+      ): Chainable<E[K]>
     }
   }
 }

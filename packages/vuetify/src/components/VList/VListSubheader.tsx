@@ -46,7 +46,7 @@ export const VListSubheader = genericComponent()({
             <div class="v-list-subheader__text">
               { slots.default?.() ?? props.title }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })

@@ -55,19 +55,19 @@ describe('VFileInput', () => {
     const model = ref([oneMBFile, twoMBFile])
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" v-model={model.value} />
+        <VFileInput label="foo" v-model={ model.value } />
       </CenteredGrid>
     ))
       .get('.v-field__clearable > .v-icon')
       .click()
-      .get('.v-input input')
+    cy.get('.v-input input')
       .should('have.value', '')
   })
 
   it('should support removing clearable icon', () => {
     cy.mount(() => (
       <CenteredGrid width="400px">
-        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={false} />
+        <VFileInput label="foo" modelValue={[oneMBFile, twoMBFile]} clearable={ false } />
       </CenteredGrid>
     ))
       .get('.v-field__append-inner > .v-btn')
@@ -118,14 +118,14 @@ describe('VFileInput', () => {
         'onUpdate:modelValue': update,
       },
     })
-      .get('.v-file-input input')
+      .get('.v-file-input input').as('input')
       .focus()
-      .attachFile('text.txt')
-      .blur()
-      .then(() => {
-        expect(change).to.be.calledOnce
-        expect(update).to.be.calledOnce
-      })
+    cy.get('@input').attachFile('text.txt')
+    cy.get('@input').blur()
+    cy.then(() => {
+      expect(change).to.be.calledOnce
+      expect(update).to.be.calledOnce
+    })
   })
 
   it('should put extra attributes on input', () => {
@@ -158,33 +158,33 @@ describe('VFileInput', () => {
     cy.mount(() => (
       <TestWrapper />
     ))
-      .get('.v-file-input input')
+      .get('.v-file-input input').as('input')
       .should($res => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(0)
       })
     // add file
-      .attachFile('text.txt')
+    cy.get('@input').attachFile('text.txt')
       .should($res => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(1)
       })
     // reset input from wrapper/parent component
-      .get('button').click()
-      .get('.v-file-input input')
+    cy.get('button').click()
+    cy.get('@input')
       .should($res => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(0)
       })
-    // add same file again
+      // add same file again
       .attachFile('text.txt')
       .should($res => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(1)
       })
     // reset input from wrapper/parent component
-      .get('button').click()
-      .get('.v-file-input input')
+    cy.get('button').click()
+    cy.get('@input')
       .should($res => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(0)

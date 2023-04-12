@@ -87,6 +87,8 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
     })
 
     const computedTicks = computed(() => {
+      if (!showTicks.value) return []
+
       const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
 
       return ticks.map((tick, index) => {
@@ -170,7 +172,7 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
             >
               { computedTicks.value }
             </div>
-          ) }
+          )}
         </div>
       )
     })

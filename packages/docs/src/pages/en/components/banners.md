@@ -26,6 +26,16 @@ Banners can contain one to two lines of text, to which actions and icons can be 
 
 <entry />
 
+## API
+
+| Component | Description |
+| - | - |
+| [v-banner](/api/v-banner/) | Primary Component |
+| [v-banner-text](/api/v-banner-text/) | Sub-component used to display the `v-banner` subtitle. Wraps the `#text` slot |
+| [v-banner-actions](/api/v-banner-actions/) | Sub-component that modifies the default styling of [v-btn](/components/buttons/). Wraps the `#actions` slot |
+
+<api-inline hide-links />
+
 ## Anatomy
 
 The recommended placement of elements inside of `v-banner` is:
@@ -42,16 +52,6 @@ The recommended placement of elements inside of `v-banner` is:
 | 2. Avatar / Icon (optional) | Leading media content intended to improve visual context |
 | 3. Text | A content area for displaying text and other inline elements |
 | 4. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
-
-## API
-
-| Component | Description |
-| - | - |
-| [v-banner](/api/v-banner/) | Primary Component |
-| [v-banner-text](/api/v-banner-text/) | Functional component used to display the Banner's subtitle. Wraps the `#text` slot |
-| [v-banner-actions](/api/v-banner-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
-
-<api-inline hide-links />
 
 ## Examples
 

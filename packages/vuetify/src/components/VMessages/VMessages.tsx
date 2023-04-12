@@ -74,7 +74,7 @@ export const VMessages = genericComponent<VMessagesSlots>()({
               { slots.message ? slots.message({ message }) : message }
             </div>
           ))
-        ) }
+        )}
       </MaybeTransition>
     ))
 

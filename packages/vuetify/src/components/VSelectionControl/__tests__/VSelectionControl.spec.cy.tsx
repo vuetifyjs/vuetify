@@ -15,7 +15,7 @@ describe('VSelectionControl', () => {
               color={ color }
               label={ `${color} Selection Control` }
             />
-          )) }
+          ))}
         </>
       ))
         .get('div.v-selection-control')

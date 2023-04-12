@@ -47,7 +47,7 @@ export const VItemGroup = genericComponent()({
           next,
           prev,
           selected: selected.value,
-        }) }
+        })}
       </props.tag>
     )
   },

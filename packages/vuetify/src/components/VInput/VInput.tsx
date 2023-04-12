@@ -142,15 +142,15 @@ export const VInput = genericComponent<VInputSlots>()({
                   key="prepend-icon"
                   name="prepend"
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default && (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
@@ -159,11 +159,11 @@ export const VInput = genericComponent<VInputSlots>()({
                   key="append-icon"
                   name="append"
                 />
-              ) }
+              )}
 
               { slots.append?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasDetails && (
             <div class="v-input__details">
@@ -179,7 +179,7 @@ export const VInput = genericComponent<VInputSlots>()({
 
               { slots.details?.(slotProps.value) }
             </div>
-          ) }
+          )}
         </div>
       )
     })

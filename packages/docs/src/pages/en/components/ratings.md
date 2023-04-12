@@ -14,13 +14,13 @@ related:
 
 The `v-rating` component is a specialized but important piece in building user widgets. Collecting user feedback via ratings is a simple analytic that can provide a lot of feedback to your product or application.
 
-<entry />
-
 ## Usage
 
 The `v-rating` component provides a simple interface for gathering user feedback.
 
 <!-- <usage name="v-rating" /> -->
+
+<entry />
 
 ## API
 
@@ -127,3 +127,5 @@ The `v-rating` component fits right in with existing components. Build truly com
 The rating component pairs well with products allowing you to gather and display customer feedback.
 
 <example file="v-rating/misc-card" />
+
+<example file="v-rating/misc-card-overview" />

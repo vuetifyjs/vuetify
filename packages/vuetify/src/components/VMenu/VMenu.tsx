@@ -14,7 +14,7 @@ import { useScopeId } from '@/composables/scopeId'
 // Utilities
 import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
 import { genericComponent, getUid, omit, useRender } from '@/util'
-import { filterVOverlayProps, makeVOverlayProps } from '@/components/VOverlay/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
 // Types
@@ -88,7 +88,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     )
 
     useRender(() => {
-      const [overlayProps] = filterVOverlayProps(props)
+      const [overlayProps] = VOverlay.filterProps(props)
 
       return (
         <VOverlay
