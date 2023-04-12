@@ -145,30 +145,6 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
-  it('should conditionally show placeholder', () => {
-    cy.mount(props => (
-      <VAutocomplete placeholder="Placeholder" { ...props } />
-    ))
-      .get('.v-autocomplete input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .setProps({ label: 'Label' })
-      .get('.v-autocomplete input')
-      .should('not.have.attr', 'placeholder')
-      .get('.v-autocomplete input')
-      .focus()
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .blur()
-      .setProps({ persistentPlaceholder: true })
-      .get('.v-autocomplete input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .setProps({ modelValue: 'Foobar' })
-      .get('.v-autocomplete input')
-      .should('not.have.attr', 'placeholder')
-      .setProps({ multiple: true, modelValue: ['Foobar'] })
-      .get('.v-autocomplete input')
-      .should('not.have.attr', 'placeholder')
-  })
-
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
@@ -190,5 +166,31 @@ describe('VAutocomplete', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VAutocomplete placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-autocomplete input')
+      .should('not.be.visible')
+      .get('.v-autocomplete input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
   })
 })

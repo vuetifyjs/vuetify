@@ -48,27 +48,6 @@ describe('VTextField', () => {
       .get('.v-input__details').should('be.visible')
   })
 
-  it('should conditionally show placeholder', () => {
-    cy.mount(props => (
-      <VTextField placeholder="Placeholder" { ...props } />
-    ))
-      .get('.v-text-field input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .setProps({ label: 'Label' })
-      .get('.v-text-field input')
-      .should('not.have.attr', 'placeholder')
-      .get('.v-text-field input')
-      .focus()
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .blur()
-      .setProps({ persistentPlaceholder: true })
-      .get('.v-text-field input')
-      .should('have.attr', 'placeholder', 'Placeholder')
-      .setProps({ modelValue: 'Foobar' })
-      .get('.v-text-field input')
-      .should('not.have.attr', 'placeholder')
-  })
-
   describe('Showcase', () => {
     generate({ stories })
   })

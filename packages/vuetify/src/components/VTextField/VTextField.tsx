@@ -212,12 +212,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                   default: ({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
-                    const placeholder = isDirty.value || (
-                      !isFocused.value &&
-                      props.label &&
-                      !props.persistentPlaceholder
-                    ) ? undefined : props.placeholder
-
                     const inputNode = (
                       <input
                         ref={ inputRef }
@@ -230,7 +224,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         name={ props.name }
-                        placeholder={ placeholder }
+                        placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }
