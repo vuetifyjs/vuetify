@@ -400,6 +400,28 @@ describe('VCombobox', () => {
     })
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/17120
+  it('should display 0 when selected', () => {
+    const items = [0, 1, 2, 3, 4]
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VCombobox
+        items={ items }
+        v-model={ selectedItems.value }
+      />
+    ))
+      .get('.v-field input')
+      .click()
+
+    cy.get('.v-list-item').eq(0)
+      .click({ waitForAnimations: false })
+
+    cy.get('.v-combobox input')
+      .should('have.value', '0')
+  })
+
   it('should conditionally show placeholder', () => {
     cy.mount(props => (
       <VCombobox placeholder="Placeholder" { ...props } />
