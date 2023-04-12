@@ -350,6 +350,7 @@ export const VCombobox = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
 
       return (
@@ -359,7 +360,7 @@ export const VCombobox = genericComponent<new <
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
           validationValue={ model.externalValue }
-          dirty={ model.value.length > 0 }
+          dirty={ isDirty }
           class={[
             'v-combobox',
             {
@@ -371,6 +372,7 @@ export const VCombobox = genericComponent<new <
           ]}
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           readonly={ props.readonly }
+          placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onFocus={ () => isFocused.value = true }

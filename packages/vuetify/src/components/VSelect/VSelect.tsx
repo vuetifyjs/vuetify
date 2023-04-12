@@ -138,6 +138,7 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const isFocused = ref(false)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number
@@ -242,7 +243,14 @@ export const VSelect = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
+      const isDirty = model.value.length > 0
       const [textFieldProps] = VTextField.filterProps(props)
+
+      const placeholder = isDirty || (
+        !isFocused.value &&
+        props.label &&
+        !props.persistentPlaceholder
+      ) ? undefined : props.placeholder
 
       return (
         <VTextField
@@ -250,8 +258,9 @@ export const VSelect = genericComponent<new <
           { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          dirty={ model.value.length > 0 }
+          dirty={ isDirty }
           class={[
             'v-select',
             {
@@ -263,6 +272,7 @@ export const VSelect = genericComponent<new <
           ]}
           appendInnerIcon={ props.menuIcon }
           readonly
+          placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
