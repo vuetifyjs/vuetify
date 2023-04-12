@@ -107,7 +107,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
             },
           ]}
           { ...attrs }
-          style={props.style}
+          style={ props.style }
         >
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }

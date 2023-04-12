@@ -66,7 +66,7 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
-    ...makeComponentProps(),
+  ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeRoundedProps(),
   ...makeDensityProps(),

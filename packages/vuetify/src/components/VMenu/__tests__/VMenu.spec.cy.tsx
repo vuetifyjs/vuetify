@@ -10,14 +10,14 @@ describe('VMenu', () => {
       cy.mount(() => (
         <Application>
           <CenteredGrid width="360px">
-            <VDefaultsProvider defaults={ {
+            <VDefaultsProvider defaults={{
               global: {
                 class: 'v-global-class',
                 style: {
                   opacity: 0.5,
                 },
               },
-            } }
+            }}
             >
               <VBtn
                 id="menu-activator"

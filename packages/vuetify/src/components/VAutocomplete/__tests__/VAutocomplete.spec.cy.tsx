@@ -171,7 +171,7 @@ describe('VAutocomplete', () => {
   describe('global configuration', () => {
     it('should only apply \'v-autocomplete\' class to root element and also apply global config class/style', () => {
       cy.mount(() => (
-        <VDefaultsProvider defaults={ {
+        <VDefaultsProvider defaults={{
           global: {
             class: 'v-global-class',
             style: {
@@ -196,7 +196,7 @@ describe('VAutocomplete', () => {
               color: 'black',
             },
           },
-        } }
+        }}
         >
 
           <VAutocomplete />
