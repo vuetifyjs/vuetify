@@ -127,7 +127,7 @@ export const VColorPicker = defineComponent({
           theme={ props.theme }
           class={[
             'v-color-picker',
-            props.class
+            props.class,
           ]}
           style={[
             props.style,

@@ -91,7 +91,7 @@ export const VTabs = genericComponent()({
           v-model={ model.value }
           class={[
             'v-tabs',
-            props.class, 
+            props.class,
             `v-tabs--${props.direction}`,
             `v-tabs--align-tabs-${props.alignTabs}`,
             {
