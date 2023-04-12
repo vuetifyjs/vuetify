@@ -84,7 +84,7 @@
               class="py-2"
             >
               <template #prepend>
-                <div class="pe-4">{{ notification.metadata.emoji }}</div>
+                <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
               </template>
 
               <v-list-item-title class="text-wrap text-h6 mb-1">
@@ -100,7 +100,7 @@
               </div>
 
               <template #append>
-                <div class="ps-4">
+                <div class="ps-4 mt-n2">
                   <v-icon
                     :icon="showArchived ? 'mdi-email-outline' : 'mdi-email-open-outline'"
                     color="medium-emphasis"
