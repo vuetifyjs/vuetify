@@ -214,9 +214,13 @@ jobs:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
           VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
+          VITE_COSMIC_BUCKET_SLUG_STORE: ${{ secrets.COSMIC_BUCKET_SLUG_STORE }}
+          VITE_COSMIC_BUCKET_READ_KEY_STORE: ${{ secrets.COSMIC_BUCKET_READ_KEY_STORE }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
+          VITE_AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
+          VITE_AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

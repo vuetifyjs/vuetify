@@ -26,9 +26,6 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 
 const activeTypes = ['color', 'file', 'time', 'date', 'datetime-local', 'week', 'month']
 
-type EventProp<T = (...args: any[]) => any> = T | T[]
-const EventProp = [Function, Array] as PropType<EventProp>
-
 export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
   counter: [Boolean, Number, String] as PropType<true | number | string>,
@@ -44,6 +41,7 @@ export const makeVTextFieldProps = propsFactory({
     type: String,
     default: 'text',
   },
+  modelModifiers: Object as PropType<Record<string, boolean>>,
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
@@ -143,7 +141,10 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     function onInput (e: Event) {
       const el = e.target as HTMLInputElement
       model.value = el.value
-      if (['text', 'search', 'password', 'tel', 'url'].includes(props.type)) {
+      if (
+        props.modelModifiers?.trim &&
+        ['text', 'search', 'password', 'tel', 'url'].includes(props.type)
+      ) {
         const caretPosition = [el.selectionStart, el.selectionEnd]
         nextTick(() => {
           el.selectionStart = caretPosition[0]
@@ -208,10 +209,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                   default: ({
                     props: { class: fieldClass, ...slotProps },
                   }) => {
-                    const placeholder = computed(() => {
-                      return ((props.persistentPlaceholder || isFocused.value) && !isDirty.value) ? props.placeholder : ''
-                    })
-
                     const inputNode = (
                       <input
                         ref={ inputRef }
@@ -224,7 +221,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         readonly={ isReadonly.value }
                         disabled={ isDisabled.value }
                         name={ props.name }
-                        placeholder={ placeholder.value }
+                        placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
                         onFocus={ onFocus }

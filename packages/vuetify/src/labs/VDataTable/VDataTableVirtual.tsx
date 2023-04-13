@@ -54,7 +54,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -118,8 +118,10 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
         style={{
           '--v-table-row-height': convertToUnit(itemHeight.value),
         }}
-        height={ props.height }
         fixedHeader={ props.fixedHeader }
+        fixedFooter={ props.fixedFooter }
+        height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
@@ -147,7 +149,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
                   <VDataTableRows
                     items={ visibleItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
 

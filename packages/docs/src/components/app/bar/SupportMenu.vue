@@ -38,7 +38,17 @@
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
-      appendIcon: 'mdi-alert-circle-outline',
+      appendIcon: 'mdi-bug-outline',
+    },
+    {
+      title: 'faq',
+      to: rpath('/getting-started/frequently-asked-questions/'),
+      appendIcon: 'mdi-head-question-outline',
+    },
+    {
+      title: 'upgrade-guide',
+      to: rpath('/getting-started/upgrade-guide/'),
+      appendIcon: 'mdi-update',
     },
     {
       title: 'github-discussions',
@@ -48,19 +58,9 @@
     { divider: true },
     { subheader: t('resources') },
     {
-      title: 'upgrade-guide',
-      to: rpath('/getting-started/upgrade-guide/'),
-      appendIcon: 'mdi-update',
-    },
-    {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
       appendIcon: 'mdi-alert-circle-outline',
-    },
-    {
-      title: 'codepen-template',
-      href: 'https://template.vuetifyjs.com/',
-      appendIcon: 'mdi-file-document-outline',
     },
     {
       title: 'documentation-status',

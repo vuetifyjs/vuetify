@@ -11,6 +11,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { pinia, usePinia } from '@/plugins/pinia'
 import { useGlobalComponents } from '@/plugins/global-components'
+import { useAuth0 } from '@/plugins/auth'
 import { useGtag } from '@/plugins/gtag'
 import { useI18n } from '@/plugins/i18n'
 import { useLocaleStore } from '@/store/locale'
@@ -110,6 +111,7 @@ export const createApp = ViteSSG(
     })
 
     useGlobalComponents(ctx)
+    useAuth0(ctx)
     useGtag(ctx)
     useI18n(ctx)
     usePwa(ctx)

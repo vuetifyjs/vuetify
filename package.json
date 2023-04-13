@@ -80,12 +80,10 @@
     "typescript": "^5.0.2",
     "upath": "^2.0.1",
     "vite-plugin-inspect": "^0.7.18",
+    "vite-plugin-warmup": "^0.0.2",
     "vue": "^3.2.47",
     "vue-analytics": "^5.16.1",
     "vue-router": "^4.1.6",
     "yargs": "^17.7.1"
-  },
-  "resolutions": {
-    "hookable": "npm:strict-hookable@5.4.3"
   }
 }
