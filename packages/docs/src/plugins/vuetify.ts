@@ -12,7 +12,7 @@ import * as labs from 'vuetify/labs/components'
 import { fa } from 'vuetify/iconsets/fa'
 import { md } from 'vuetify/iconsets/md'
 import { mdi } from 'vuetify/iconsets/mdi-svg'
-import * as mdiSvg from '@mdi/js'
+import * as mdiSvg from './icons'
 
 // Types
 import type { VuetifyPlugin } from '@/types'

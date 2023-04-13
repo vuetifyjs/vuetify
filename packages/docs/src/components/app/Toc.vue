@@ -266,7 +266,7 @@
   const dark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   #app-toc
     ul
       list-style-type: none
@@ -284,7 +284,7 @@
       li:not(.router-link-active)
         border-left-color: rgba(255, 255, 255, 0.5)
 
-    .v-navigation-drawer__content
+    :deep(.v-navigation-drawer__content)
       height: auto
       margin-right: 12px
 </style>
