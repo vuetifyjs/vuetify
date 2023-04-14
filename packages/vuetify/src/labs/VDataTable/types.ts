@@ -12,7 +12,7 @@ export type DataTableHeader = {
   rowspan?: number
 
   fixed?: boolean
-  align?: 'start' | 'end'
+  align?: 'start' | 'center' | 'end'
 
   width?: number
   minWidth?: string
