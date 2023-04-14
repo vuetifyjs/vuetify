@@ -21,7 +21,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, watch } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -239,6 +239,12 @@ export const VSelect = genericComponent<new <
         vTextFieldRef.value?.focus()
       }
     }
+
+    watch(menu, value => {
+      if (!model.value?.length) {
+        isFocused.value = value
+      }
+    })
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)

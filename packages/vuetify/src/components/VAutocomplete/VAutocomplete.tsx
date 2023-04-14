@@ -256,6 +256,12 @@ export const VAutocomplete = genericComponent<new <
       isPristine.value = !val
     })
 
+    watch(menu, value => {
+      if (!model.value?.length) {
+        isFocused.value = value
+      }
+    })
+
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
@@ -268,6 +274,7 @@ export const VAutocomplete = genericComponent<new <
           { ...textFieldProps }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
@@ -285,8 +292,6 @@ export const VAutocomplete = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{
