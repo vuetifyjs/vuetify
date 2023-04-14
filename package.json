@@ -85,8 +85,5 @@
     "vue-analytics": "^5.16.1",
     "vue-router": "^4.1.6",
     "yargs": "^17.7.1"
-  },
-  "resolutions": {
-    "hookable": "npm:strict-hookable@5.4.3"
   }
 }

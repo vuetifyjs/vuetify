@@ -86,8 +86,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     title: [String, Number, Boolean],
     value: null,
 
-    onClick: EventProp,
-    onClickOnce: EventProp,
+    onClick: EventProp<[MouseEvent]>(),
+    onClickOnce: EventProp<[MouseEvent]>(),
 
     ...makeBorderProps(),
     ...makeDensityProps(),
