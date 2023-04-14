@@ -53,7 +53,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     multiple: Boolean,
     hint: String,
     persistentHint: Boolean,
-    placeholder: String,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,

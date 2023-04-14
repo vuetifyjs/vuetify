@@ -1,6 +1,7 @@
 import path from 'path'
 import fs from 'fs/promises'
 import { readFileSync } from 'fs'
+import { fileURLToPath } from 'url'
 
 import dts from 'rollup-plugin-dts'
 import alias from '@rollup/plugin-alias'
@@ -9,7 +10,7 @@ import fg from 'fast-glob'
 import mm from 'micromatch'
 import MagicString from 'magic-string'
 
-import importMap from '../dist/json/importMap.json'
+import importMap from '../dist/json/importMap.json' assert { type: 'json' }
 
 const externalsPlugin = () => ({
   resolveId (source, importer) {
@@ -39,7 +40,7 @@ function createTypesConfig (input, output, renderChunk, filter) {
         externalsPlugin(),
         alias({
           entries: [
-            { find: /^@\/(.*)/, replacement: path.resolve(__dirname, '../types-temp/$1') },
+            { find: /^@\/(.*)/, replacement: fileURLToPath(new URL('../types-temp/$1', import.meta.url)) },
           ]
         }),
         {
@@ -71,7 +72,7 @@ async function getShims () {
     `    ${name}: typeof import('vuetify/components')['${name}']`
   )).join('\n')
 
-  return (await fs.readFile(path.resolve(__dirname, '../src/shims.d.ts'), { encoding: 'utf8' }))
+  return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
     .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
     .replace(/^\s+\/\/ @generate-components$/gm, components)
 }
@@ -89,7 +90,7 @@ export default [
   createTypesConfig('blueprints/*.d.ts', 'lib/blueprints/*.d.ts'),
   createTypesConfig('components/index.d.ts', 'lib/components/index.d.ts'),
   createTypesConfig('components/*/index.d.ts', 'lib/components/*/index.d.ts', undefined, files => {
-    const index = readFileSync(path.resolve(__dirname, '../src/components/index.ts'), { encoding: 'utf8' })
+    const index = readFileSync(fileURLToPath(new URL('../src/components/index.ts', import.meta.url)), { encoding: 'utf8' })
     const block = Array.from(index.matchAll(/^\/\/ export \* from '\.\/(.*)'$/gm), m => m[1])
     return files.filter(file => !block.some(name => file.includes(`/${name}/`)))
   }),

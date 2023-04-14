@@ -73,4 +73,5 @@ export default {
       item: 'Betyg {0} av {1}',
     },
   },
+  loading: 'Loading...',
 }

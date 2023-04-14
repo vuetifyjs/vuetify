@@ -107,6 +107,10 @@
 
 <codepen-resources lang="json">
   {
-    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@4.x/dist/vee-validate.js"]
+    "js": ["https://cdn.jsdelivr.net/npm/vee-validate@4.x/dist/vee-validate.js"],
+    "imports": {
+      "vee-validate": "https://cdn.jsdelivr.net/npm/vee-validate@4.8.4/dist/vee-validate.esm.js",
+      "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api@6.5.0/lib/esm/index.js"
+    }
   }
 </codepen-resources>

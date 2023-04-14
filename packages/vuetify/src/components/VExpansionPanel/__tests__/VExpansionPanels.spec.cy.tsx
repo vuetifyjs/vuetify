@@ -75,10 +75,10 @@ describe('VExpansionPanels', () => {
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-title')
-      .eq(0)
+      .get('.v-expansion-panel-title').eq(0).as('title')
       .click()
-      .should('have.class', 'v-expansion-panel-title')
+    // TODO: basically a noop, what is this test supposed to do?
+    cy.get('@title').should('have.class', 'v-expansion-panel-title')
   })
 
   it('supports hide-actions prop', () => {
@@ -143,10 +143,9 @@ describe('VExpansionPanels', () => {
         <div class="value">{ foo.value }</div>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-title')
-      .eq(1)
+      .get('.v-expansion-panel-title').eq(1).as('title')
       .click()
-      .should('have.class', 'v-expansion-panel-title--active')
+    cy.get('@title').should('have.class', 'v-expansion-panel-title--active')
       .get('.value')
       .should('have.text', 'foo')
   })

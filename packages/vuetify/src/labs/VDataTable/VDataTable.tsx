@@ -25,9 +25,11 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
-import type { DataTableItem } from './types'
+import type { PropType } from 'vue'
+import type { DataTableItem, InternalDataTableHeader } from './types'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
+  colgroup: [InternalDataTableHeader]
   default: []
   top: []
   headers: []
@@ -43,6 +45,7 @@ export const makeVDataTableProps = propsFactory({
   ...makeDataTableItemProps(),
   ...makeDataTableHeaderProps(),
   hideNoData: Boolean,
+  hover: Boolean,
   noDataText: {
     type: String,
     default: '$vuetify.noDataText',
@@ -51,9 +54,10 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
+  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
 }, 'v-data-table')
 
-export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()({
+export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
   props: {
@@ -76,7 +80,6 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -138,6 +141,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
         height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
@@ -158,7 +162,7 @@ export const VDataTable = genericComponent<VDataTableSlots & { colgroup: [] }>()
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ paginatedItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}
