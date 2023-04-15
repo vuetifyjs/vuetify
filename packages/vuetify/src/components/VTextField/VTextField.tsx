@@ -159,7 +159,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
       const [fieldProps] = filterFieldProps(props)
-      const isMenuActive = typeof rootAttrs.class === 'string' && rootAttrs.class.includes('--active-menu')
 
       return (
         <VInput
@@ -225,7 +224,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                         placeholder={ props.placeholder }
                         size={ 1 }
                         type={ props.type }
-                        onBlur={ () => isMenuActive || blur() }
+                        onFocus={ onFocus }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

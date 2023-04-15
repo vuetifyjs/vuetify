@@ -21,7 +21,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref, watch } from 'vue'
+import { computed, mergeProps, ref } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -234,17 +234,14 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
         vTextFieldRef.value?.focus()
       }
     }
-
-    watch(menu, value => {
-      if (!model.value?.length) {
-        isFocused.value = value
-      }
-    })
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
@@ -306,6 +303,7 @@ export const VSelect = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (

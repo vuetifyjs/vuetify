@@ -178,12 +178,6 @@ export const VCombobox = genericComponent<new <
       }
     })
 
-    watch(menu, value => {
-      if (!model.value?.length) {
-        isFocused.value = value
-      }
-    })
-
     const { filteredItems, getMatches } = useFilter(props, items, computed(() => isPristine.value ? undefined : search.value))
 
     const selections = computed(() => {

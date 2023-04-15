@@ -256,12 +256,6 @@ export const VAutocomplete = genericComponent<new <
       isPristine.value = !val
     })
 
-    watch(menu, value => {
-      if (!model.value?.length) {
-        isFocused.value = value
-      }
-    })
-
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
