@@ -12,6 +12,8 @@ related:
 
 # Upgrade Guide
 
+<!-- Initial comment of upgarde guide update, Lannister and AasmundN -->
+
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
