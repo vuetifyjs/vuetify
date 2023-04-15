@@ -4,6 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'
+import { keyValues } from '@/util'
 
 describe('VSelect', () => {
   it('should render selection slot', () => {
@@ -310,5 +311,23 @@ describe('VSelect', () => {
       .then(_ => {
         expect(selectedItems.value).equal('foo')
       })
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VSelect
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
   })
 })
