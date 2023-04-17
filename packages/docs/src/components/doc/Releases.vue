@@ -8,6 +8,7 @@
       hide-details
       item-title="name"
       label="Select Release Version"
+      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
       @blur="resetSearch"
