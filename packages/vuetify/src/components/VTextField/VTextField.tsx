@@ -175,8 +175,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
-          onClick:prepend={ props['onClick:prepend'] }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
