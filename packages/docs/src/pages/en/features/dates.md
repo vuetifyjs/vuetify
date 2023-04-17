@@ -19,6 +19,8 @@ Easily hook up date libraries that are used for components that require date fun
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. The following example shows the default behavior of the date composable. If no other date adapter is given, the default Vuetify one is used.
 
+The follow example demonstrates explicitly importing the Vuetify date adapter and passing it to the date options.
+
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
 import VuetifyDateAdapter from 'vuetify/adapters'
@@ -29,6 +31,58 @@ export default createVuetify({
   },
 })
 ```
+
+Within your application, import the **useDate** function and use it to access the date composable.
+
+```html { resource="src/views/Date.vue" }
+<script>
+  import { useDate } from 'vuetify'
+
+  export default {
+    setup () {
+      const date = useDate()
+
+      console.log(date.getMonth(new Date('March 1, 2021'))) // 3
+    }
+  }
+</script>
+```
+
+### Format options
+
+The date composable supports the following date formatting options:
+
+* fullDateWithWeekday
+* normalDateWithWeekday
+* keyboardDate
+* monthAndDate
+* monthAndYear
+
+The following example shows how to use the date composable to format a date string:
+
+```html { resource="src/views/Date.vue" }
+<script>
+  import { useDate } from 'vuetify'
+
+  export default {
+    setup () {
+      const date = useDate()
+
+      const formatted = date.format('2010-04-13 00:00:00', 'fullDateWithWeekday')
+
+      console.log(formatted) // Tuesday, April 13, 2010
+    }
+  }
+</script>
+```
+
+## API
+
+| Feature | Description |
+| - | - |
+| [useDate](/api/use-date/) | The date composable is used by components that require date functionality |
+
+<api-inline hide-links />
 
 ### Adapter
 
@@ -47,9 +101,9 @@ export default createVuetify({
 })
 ```
 
-### API
+#### Create you own
 
-#### Interface
+To create your own date adapter, implement the following interface:
 
 ```ts
 export interface DateAdapter<Date> {
