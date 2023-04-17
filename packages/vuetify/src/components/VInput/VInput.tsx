@@ -188,8 +188,3 @@ export const VInput = genericComponent<VInputSlots>()({
 })
 
 export type VInput = InstanceType<typeof VInput>
-
-export function filterInputProps (props: Record<string, unknown>) {
-  const keys = Object.keys(VInput.props)
-  return pick(props, keys)
-}
