@@ -18,8 +18,13 @@ import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { LoaderSlotProps } from '@/composables/loader'
+import type { MakeSlots } from '@/util'
 
-export type VSwitchSlots = VInputSlots & VSelectionControlSlots
+export type VSwitchSlots =
+  & VInputSlots
+  & VSelectionControlSlots
+  & MakeSlots<{ loader: [LoaderSlotProps] }>
 
 export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
