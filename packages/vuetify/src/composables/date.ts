@@ -9,8 +9,8 @@ import { propsFactory } from '@/util'
 import VuetifyDateAdapter from '@/adapters/vuetify'
 
 // Types
-import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
+import type { InjectionKey, PropType } from 'vue'
 
 export interface DateInstance extends DateAdapter<Date> {
   locale: string
@@ -32,6 +32,7 @@ export function createDate (options?: DateOptions) {
   return options ?? { adapter: VuetifyDateAdapter }
 }
 
+// TODO: revisit this after it starts being implemented
 export const makeDateProps = propsFactory({
   displayDate: {
     type: Object as PropType<Date>,
