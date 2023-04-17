@@ -12,7 +12,9 @@ import VuetifyDateAdapter from '@/adapters/vuetify'
 import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
 
-export interface DateInstance extends DateAdapter<Date> {}
+export interface DateInstance extends DateAdapter<Date> {
+  locale: string
+}
 
 export type DateOptions = {
   adapter: { new(locale: string): DateInstance }
@@ -52,7 +54,7 @@ export function useDate (props: DateProps) {
   const instance = new date.adapter(locale.current.value)
 
   watch(locale.current, val => {
-    instance.setLocale(val)
+    instance.locale = val
   }, { immediate: true })
 
   return instance

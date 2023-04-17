@@ -355,11 +355,7 @@ function setYear (date: Date, year: number) {
 }
 
 export default class VuetifyDateAdapter implements DateAdapter<Date> {
-  constructor (private locale: string = 'en') {}
-
-  setLocale (locale: string) {
-    this.locale = locale
-  }
+  constructor (public locale: string = 'en') {}
 
   date (value?: any) {
     return date(value)

@@ -1,6 +1,4 @@
 export interface DateAdapter<Date> {
-  setLocale (locale: string): void
-
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
 
