@@ -2,18 +2,23 @@
 import { useLocale } from './locale'
 
 // Utilities
-import { inject, shallowRef, watch } from 'vue'
+import { inject, watch } from 'vue'
 import { propsFactory } from '@/util'
+
+// Adapters
+import VuetifyDateAdapter from '@/adapters/vuetify'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
 import type { DateAdapter } from '@/adapters/date-adapter'
 
+export interface DateInstance extends DateAdapter<Date> {}
+
 export type DateOptions = {
-  adapter: { new(locale: string): DateAdapter<any> }
+  adapter: { new(locale: string): DateInstance }
 }
 
-export const DateAdapterSymbol: InjectionKey<{ adapter: { new(locale: string): DateAdapter<any> } }> = Symbol.for('vuetify:date-adapter')
+export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:date-adapter')
 
 export interface DateProps {
   displayDate: Date
@@ -21,8 +26,8 @@ export interface DateProps {
   modelValue: any[]
 }
 
-export function createDate (options: { adapter: { new(locale: string): DateAdapter<any> } }) {
-  return options
+export function createDate (options?: DateOptions) {
+  return options ?? { adapter: VuetifyDateAdapter }
 }
 
 export const makeDateProps = propsFactory({
@@ -44,12 +49,11 @@ export function useDate (props: DateProps) {
   if (!date) throw new Error('[Vuetify] Could not find injected date')
 
   // eslint-disable-next-line new-cap
-  const instance = shallowRef(new date.adapter(locale.current.value))
+  const instance = new date.adapter(locale.current.value)
 
-  watch(locale.current, () => {
-    // eslint-disable-next-line new-cap
-    instance.value = new date.adapter(locale.current.value)
-  })
+  watch(locale.current, val => {
+    instance.setLocale(val)
+  }, { immediate: true })
 
   return instance
 }

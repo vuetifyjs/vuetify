@@ -51,7 +51,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
-  const date = createDate(options?.date)
+  const date = createDate(options.date)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -122,6 +122,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     theme,
     icons,
     locale,
+    date,
   }
 }
 
