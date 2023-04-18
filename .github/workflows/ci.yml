@@ -32,9 +32,32 @@ jobs:
           concurrent_skipping: same_content
           do_not_skip: '["pull_request", "workflow_dispatch", "schedule"]'
 
+  build-vuetify:
+    name: Build vuetify
+    needs: pre_job
+    if: needs.pre_job.outputs.should_skip != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - run: yarn --frozen-lockfile --non-interactive
+      - run: yarn build vuetify
+      - uses: actions/upload-artifact@v3
+        with:
+          name: vuetify-dist
+          path: |
+            packages/vuetify/dist
+            packages/vuetify/lib
+
   lint:
     name: Lint
-    needs: pre_job
+    needs: [pre_job, build-vuetify]
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
     strategy:
@@ -50,8 +73,11 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: vuetify-dist
+          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn build vuetify
       - run: yarn lerna run lint $SCOPES
         env:
           SCOPES: ${{ matrix.scopes }}
@@ -80,10 +106,6 @@ jobs:
     needs: pre_job
     if: needs.pre_job.outputs.should_skip != 'true'
     runs-on: ubuntu-latest
-    strategy:
-      fail-fast: false
-      matrix:
-        containers: ${{ fromJSON(github.repository_owner == 'vuetifyjs' && '[1, 2, 3, 4]' || '[1]') }}
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -113,7 +135,7 @@ jobs:
           if-no-files-found: ignore
 
   deploy:
-    needs: [lint, test-jest, test-cypress]
+    needs: [lint, test-jest, test-cypress, build-vuetify]
     runs-on: ubuntu-latest
     if: github.event_name == 'push' && startswith(github.ref, 'refs/tags/v') && github.repository_owner == 'vuetifyjs'
     steps:
@@ -127,8 +149,11 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: vuetify-dist
+          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn build vuetify
       - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
       - run: rm -rf release
@@ -156,10 +181,11 @@ jobs:
           asset_name: vuetify-${{ env.RELEASE_TAG }}.zip
           asset_content_type: application/zip
 
-  publish-docs:
-    needs: [lint, test-jest]
+  build-docs:
+    name: Build docs
+    needs: [pre_job, build-vuetify]
+    if: needs.pre_job.outputs.should_skip != 'true' && github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     runs-on: ubuntu-latest
-    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
     steps:
       - uses: actions/checkout@v2
       - uses: actions/cache@v2
@@ -169,9 +195,11 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn global add vercel
+      - uses: actions/download-artifact@v3
+        with:
+          name: vuetify-dist
+          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
-
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
 #        uses: crowdin/github-action@1.1.2
@@ -183,42 +211,44 @@ jobs:
 #          export_only_approved: false
 #          download_language: eo
 #          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-#          debug_mode: true
-
-#      - name: Download ja
-#        uses: crowdin/github-action@1.1.2
-#        with:
-#          config: crowdin.yml
-#          upload_sources: false
-#          download_translations: true
-#          push_translations: false
-#          export_only_approved: false
-#          download_language: ja
-#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-#          debug_mode: true
-#
-#      - name: Download zh-CN
-#        uses: crowdin/github-action@1.1.2
-#        with:
-#          config: crowdin.yml
-#          upload_sources: false
-#          download_translations: true
-#          push_translations: false
-#          export_only_approved: false
-#          download_language: zh-CN
-#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
-#          debug_mode: true
-
-      - run: yarn build
+      - run: yarn build api
+      - run: yarn build docs
         env:
           NODE_OPTIONS: --max-old-space-size=4096
           VITE_COSMIC_BUCKET_SLUG: ${{ secrets.COSMIC_BUCKET_SLUG }}
           VITE_COSMIC_BUCKET_READ_KEY: ${{ secrets.COSMIC_BUCKET_READ_KEY }}
+          VITE_COSMIC_BUCKET_SLUG_STORE: ${{ secrets.COSMIC_BUCKET_SLUG_STORE }}
+          VITE_COSMIC_BUCKET_READ_KEY_STORE: ${{ secrets.COSMIC_BUCKET_READ_KEY_STORE }}
           VITE_EMAILJS_PUBLIC_KEY: ${{ secrets.EMAILJS_PUBLIC_KEY }}
           VITE_EMAILJS_SERVICE_ID: ${{ secrets.EMAILJS_SERVICE_ID }}
           VITE_EMAILJS_TEMPLATE_ID: ${{ secrets.EMAILJS_TEMPLATE_ID }}
           VITE_AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
           VITE_AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
+          VITE_GITHUB_SHA: ${{ github.sha }}
+      - uses: actions/upload-artifact@v3
+        with:
+          name: docs-dist
+          path: packages/docs/dist
+
+  publish-docs:
+    needs: [lint, test-jest, build-docs]
+    runs-on: ubuntu-latest
+    if: github.event_name == 'push' && github.repository_owner == 'vuetifyjs' && (github.ref == 'refs/heads/master' || github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next')
+    steps:
+      - uses: actions/checkout@v2
+      - uses: actions/cache@v2
+        with:
+          path: |
+            node_modules
+            **/node_modules
+            /home/runner/.cache/Cypress
+          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
+      - uses: actions/download-artifact@v3
+        with:
+          name: docs-dist
+          path: packages/docs/dist
+      - run: yarn global add vercel
+      - run: yarn --frozen-lockfile --non-interactive
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
         env:
           NOW_TOKEN: ${{ secrets.NOW_TOKEN }}

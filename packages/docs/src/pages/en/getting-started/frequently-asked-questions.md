@@ -29,7 +29,7 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 * **What versions of Vue.js are compatible with Vuetify?** { #what-versions-of-vuejs-are-compatible-with-vuetify }
 
-  Vuetify is compatible with Vue.js 2.6.0 and above.
+  Vuetify is compatible with Vue.js 3.0.0 and above.
 
 * **Can I use Vuetify with other CSS frameworks?** { #can-i-use-vuetify-with-other-css-frameworks }
 
@@ -65,6 +65,22 @@ Stuck on a particular problem? Check some of these common gotchas before creatin
 
 * **Is there still support for IE11 in Vuetify 3?** { #is-there-still-support-for-ie11-in-vuetify-3 }
 
-  No. If you need to support IE11, you will need to use Vuetify 2.
+  No. If you need to support IE11, use [Vuetify 2](https://v2.vuetifyjs.com/).
+
+* **Is there support for Nuxt 3?** { #is-there-support-for-nuxt-3 }
+
+  Yes, Vuetify 3 is compatible with Nuxt 3 but does not currently have a community Nuxt module.
+
+* **What is Vuetify Labs?** { #what-is-vuetify-labs }
+
+  Vuetify Labs is a collection of components that are still in development. They are not considered stable and may change at any time. They are not included in the default Vuetify installation and must be imported individually. See the [Labs](/labs/introduction/) page for more information.
+
+* **Does Vuetify have Nightly Builds?** { #does-vuetify-have-nightly-builds }
+
+  Yes, Vuetify has nightly builds. See the [Nightly Builds](/getting-started/installation/#nightly-builds) page for more information.
+
+* **I found a bug, what should I do?** { #i-found-a-bug-what-should-i-do }
+
+  Please create a new [issue](https://issues.vuetifyjs.com/) with our Issue Generator. Please make sure to check for existing issues before creating a new one.
 
 <promoted type="theme" />

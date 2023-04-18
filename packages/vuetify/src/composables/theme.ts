@@ -283,7 +283,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-          `background: rgb(var(--v-theme-${key})) !important`,
+          `background-color: rgb(var(--v-theme-${key})) !important`,
           `color: rgb(var(--v-theme-on-${key})) !important`,
         ])
         createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])

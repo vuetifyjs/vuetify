@@ -12,7 +12,7 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile an enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 

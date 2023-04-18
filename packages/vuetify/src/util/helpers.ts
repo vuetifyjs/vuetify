@@ -552,15 +552,15 @@ export function includes (arr: readonly any[], val: any) {
 const onRE = /^on[^a-z]/
 export const isOn = (key: string) => onRE.test(key)
 
-export type EventProp<T = (...args: any[]) => any> = T | T[]
-export const EventProp = [Function, Array] as PropType<EventProp>
+export type EventProp<T extends any[] = any[], F = (...args: T) => any> = F | F[]
+export const EventProp = <T extends any[] = any[]>() => [Function, Array] as PropType<EventProp<T>>
 
 export function hasEvent (props: Record<string, any>, name: string) {
   name = 'on' + capitalize(name)
   return !!(props[name] || props[`${name}Once`] || props[`${name}Capture`] || props[`${name}OnceCapture`] || props[`${name}CaptureOnce`])
 }
 
-export function callEvent (handler: EventProp | undefined, ...args: any[]) {
+export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, ...args: T) {
   if (Array.isArray(handler)) {
     for (const h of handler) {
       h(...args)
