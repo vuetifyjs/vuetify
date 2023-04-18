@@ -27,7 +27,6 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
   inheritAttrs: false,
 
   props: {
-    hint: String,
     indeterminate: Boolean,
     inset: Boolean,
     flat: Boolean,
@@ -35,8 +34,6 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
       type: [Boolean, String],
       default: false,
     },
-    persistentHint: Boolean,
-
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
   },
@@ -68,10 +65,6 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
       }
     }
 
-    const messages = computed(() => {
-      return props.messages.length ? props.messages : isFocused.value || props.persistentHint ? props.hint : ''
-    })
-
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
@@ -94,7 +87,6 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,

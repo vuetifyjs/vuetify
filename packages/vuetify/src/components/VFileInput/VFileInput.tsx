@@ -51,8 +51,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    hint: String,
-    persistentHint: Boolean,
     placeholder: String,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
@@ -108,11 +106,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vFieldRef = ref<VInput>()
     const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (props.persistentHint) ? props.hint : ''
-    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -171,7 +164,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,

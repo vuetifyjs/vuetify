@@ -37,8 +37,6 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
     autofocus: Boolean,
     counter: [Boolean, Number, String] as PropType<true | number | string>,
     counterValue: Function as PropType<(value: any) => number>,
-    hint: String,
-    persistentHint: Boolean,
     prefix: String,
     placeholder: String,
     persistentPlaceholder: Boolean,
@@ -104,12 +102,6 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
       isFocused.value ||
       props.persistentPlaceholder
     ))
-
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (isFocused.value || props.persistentHint) ? props.hint : ''
-    })
 
     function onFocus () {
       if (textareaRef.value !== document.activeElement) {
@@ -222,7 +214,6 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,
