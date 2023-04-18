@@ -51,7 +51,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    placeholder: String,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
