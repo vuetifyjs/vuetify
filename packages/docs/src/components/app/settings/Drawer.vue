@@ -39,11 +39,16 @@
 
       <app-settings-dev />
     </v-container>
+
+    <template #append>
+      <app-settings-append />
+    </template>
   </v-navigation-drawer>
 </template>
 
 <script setup>
   // Components
+  import AppSettingsAppend from './Append.vue'
   import AppSettingsApi from './Api.vue'
   import AppSettingsRtl from './Rtl.vue'
   import AppSettingsTheme from './Theme.vue'

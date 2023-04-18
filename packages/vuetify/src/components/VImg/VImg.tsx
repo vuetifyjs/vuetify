@@ -78,9 +78,9 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   emits: {
-    loadstart: (event: string | undefined) => true,
-    load: (event: string | undefined) => true,
-    error: (event: string | undefined) => true,
+    loadstart: (value: string | undefined) => true,
+    load: (value: string | undefined) => true,
+    error: (value: string | undefined) => true,
   },
 
   setup (props, { emit, slots }) {

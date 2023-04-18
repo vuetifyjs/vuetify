@@ -47,9 +47,20 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
     },
     build: {
       sourcemap: mode === 'development',
+      modulePreload: false,
+      cssCodeSplit: false,
       rollupOptions: {
-        output: {
-          inlineDynamicImports: true,
+        output: ssrBuild ? { inlineDynamicImports: true } : {
+          // TODO: these options currently cause a request cascade
+          // experimentalMinChunkSize: 20 * 1024,
+          // manualChunks (id) {
+          //   if (
+          //     ['vue/', '@vue/', 'vue-', 'pinia', '@vueuse/'].some(part => id.includes('node_modules/' + part)) ||
+          //     id === '\0plugin-vue:export-helper'
+          //   ) return 'vendor'
+          //   if (id.includes('packages/vuetify/')) return 'vuetify'
+          //   if (id.includes('packages/docs/src/api')) return 'api-pages'
+          // }
         },
       },
     },
@@ -80,6 +91,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       // https://github.com/JohnCampionJr/vite-plugin-vue-layouts
       Layouts({
         layoutsDirs: 'src/layouts',
+        importMode (name) {
+          return name === 'home' ? 'sync' : 'async'
+        }
       }),
 
       // https://github.com/antfu/vite-plugin-md
@@ -135,6 +149,12 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         onRoutesGenerated (routes) {
           return routes.filter(route => !route.disabled)
         },
+        importMode (filepath) {
+          return [
+            '/src/pages/en/getting-started/installation.md',
+            '/src/pages/en/index.md'
+          ].includes(filepath) ? 'sync' : 'async'
+        }
       }),
 
       // https://github.com/antfu/vite-plugin-pwa
@@ -248,7 +268,7 @@ $&`), html)
     },
 
     ssr: {
-      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia'],
+      noExternal: ['vue-i18n', '@vuelidate/core', 'pinia', '@auth0/auth0-vue'],
     },
 
     server: {

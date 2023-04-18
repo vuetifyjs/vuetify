@@ -239,6 +239,30 @@ describe('VSelect', () => {
       .get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VSelect placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .get('.v-select input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ref(['Item 1',
@@ -262,5 +286,29 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should select item after typing its first few letters', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+      .get('.v-select input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 3)
+      .then(_ => {
+        expect(selectedItems.value).equal('foo')
+      })
   })
 })

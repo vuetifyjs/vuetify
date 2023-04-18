@@ -15,7 +15,7 @@ related:
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
+Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
 
 <entry />
 
@@ -124,12 +124,14 @@ app.use(vuetify)
 
 ### v-btn/v-btn-toggle
 
-- `active-class` prop has been renamed to `selected-class`.
-- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class
+- `active-class` prop has been renamed to `selected-class`
+- `fab` is no longer supported. If you just need a round button, use `icon` prop or apply a `.rounded-circle` class.
 - `flat` / `outlined` / `text` / `plain` props have been combined into a single `variant` prop.
-- `depressed` has been renamed to `variant="flat"`.
-- `retain-focus-on-click` has been removed, buttons use `:focus-visible` instead.
-- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2
+- `depressed` has been renamed to `variant="flat"`
+- `retain-focus-on-click` has been removed, buttons use [`:focus-visible`](https://developer.mozilla.org/en-US/docs/Web/CSS/:focus-visible) instead.
+- `v-btn-toggle` needs `mandatory="force"` prop to achieve the same behaviour as `mandatory` prop in v2.
+- Disabled buttons use a faded variant of the specified `color` instead of grey ([#15147](https://github.com/vuetifyjs/vuetify/issues/15147))
+  - The `$button-colored-disabled` sass variable can be set to false to use grey instead.
 
 ### v-checkbox/v-radio/v-switch
 
