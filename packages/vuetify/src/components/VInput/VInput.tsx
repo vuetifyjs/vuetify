@@ -123,7 +123,7 @@ export const VInput = genericComponent<VInputSlots>()({
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasMessages = messages.value.length > 0
+      const hasMessages = messages.value?.length > 0
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
         (hasMessages || !!slots.details)
