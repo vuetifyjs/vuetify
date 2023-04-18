@@ -77,7 +77,9 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
       const [controlProps, _2] = VSelectionControl.filterProps(props)
       const control = ref<VSelectionControl>()
 
-      function onClick () {
+      function onClick (e: Event) {
+        e.stopPropagation()
+        e.preventDefault()
         control.value?.input?.click()
       }
 
