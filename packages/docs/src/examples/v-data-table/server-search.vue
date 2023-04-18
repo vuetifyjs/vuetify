@@ -1,15 +1,33 @@
 <template>
   <v-data-table-server
     v-model:items-per-page="itemsPerPage"
+    :search="search"
     :headers="headers"
     :items-length="totalItems"
     :items="serverItems"
     :loading="loading"
-    :search="search"
     class="elevation-1"
     item-value="name"
     @update:options="loadItems"
-  ></v-data-table-server>
+  >
+    <template v-slot:tfoot>
+      <tr>
+        <td>
+          <v-text-field v-model="name" hide-details placeholder="Search name..." class="ma-2" density="compact"></v-text-field>
+        </td>
+        <td>
+          <v-text-field
+            v-model="calories"
+            hide-details
+            placeholder="Minimum calories"
+            type="number"
+            class="ma-2"
+            density="compact"
+          ></v-text-field>
+        </td>
+      </tr>
+    </template>
+  </v-data-table-server>
 </template>
 
 <script>
@@ -97,12 +115,23 @@
   ]
 
   const FakeAPI = {
-    async fetch ({ page, itemsPerPage, sortBy }) {
+    async fetch ({ page, itemsPerPage, sortBy, search }) {
       return new Promise(resolve => {
         setTimeout(() => {
           const start = (page - 1) * itemsPerPage
           const end = start + itemsPerPage
-          const items = desserts.slice()
+          const items = desserts.slice().filter(item => {
+            if (search.name && !item.name.toLowerCase().includes(search.name.toLowerCase())) {
+              return false
+            }
+
+            // eslint-disable-next-line sonarjs/prefer-single-boolean-return
+            if (search.calories && !(item.calories >= Number(search.calories))) {
+              return false
+            }
+
+            return true
+          })
 
           if (sortBy.length) {
             const sortKey = sortBy[0].key
@@ -141,11 +170,22 @@
       serverItems: [],
       loading: true,
       totalItems: 0,
+      name: '',
+      calories: '',
+      search: '',
     }),
+    watch: {
+      name () {
+        this.search = String(Date.now())
+      },
+      calories () {
+        this.search = String(Date.now())
+      },
+    },
     methods: {
       loadItems ({ page, itemsPerPage, sortBy }) {
         this.loading = true
-        FakeAPI.fetch({ page, itemsPerPage, sortBy }).then(({ items, total }) => {
+        FakeAPI.fetch({ page, itemsPerPage, sortBy, search: { name: this.name, calories: this.calories } }).then(({ items, total }) => {
           this.serverItems = items
           this.totalItems = total
           this.loading = false
