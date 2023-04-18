@@ -10,7 +10,7 @@ import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
-import { VListChildren } from '../VList/VListChildren'
+import { VListChildren } from '@/components/VList/VListChildren'
 
 // Composables
 import { IconValue } from '@/composables/icons'
