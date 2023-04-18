@@ -420,7 +420,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     // Icky hack to make sure the content is positioned consistently
     if (!result) return
     const { available, contentBox } = result
-    if (contentBox.height > available.y) {
+    if (contentBox.height > available.y || contentStyles.value.maxHeight) {
       requestAnimationFrame(() => {
         updateLocation()
         requestAnimationFrame(() => {
