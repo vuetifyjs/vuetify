@@ -254,9 +254,11 @@ export const VCombobox = genericComponent<new <
           return
         }
 
-        select(selection.value)
+        const originalSelectionIndex = selectionIndex.value
 
-        nextTick(() => !selection.value && (selectionIndex.value = length - 2))
+        if (selection.value) select(selection.value)
+
+        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
 
       if (e.key === 'ArrowLeft') {
