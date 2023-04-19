@@ -37,15 +37,6 @@
       <tfoot>
         <tr>
           <td
-            class="text-caption text-center text-medium-emphasis"
-            colspan="4"
-          >
-            <em>{{ t('breakpoints-table.footer', { size: '* -16px' }) }}</em>
-          </td>
-        </tr>
-
-        <tr>
-          <td
             class="text-end text-medium-emphasis"
             colspan="4"
           >
@@ -97,21 +88,28 @@
       device: 'medium',
       code: 'md',
       type: 'breakpoints-table.large-tablet-to-laptop',
-      range: '960px > < 1264px*',
+      range: '960px > < 1280px',
+    },
+    {
+      icon: 'mdi-monitor-small',
+      device: 'large',
+      code: 'lg',
+      type: 'breakpoints-table.desktop',
+      range: '1280px > < 1920px',
     },
     {
       icon: 'mdi-monitor',
-      device: 'large',
-      code: 'lg',
-      type: 'desktop',
-      range: '1264px > < 1904px*',
-    },
-    {
-      icon: 'mdi-television',
       device: 'extra-large',
       code: 'xl',
       type: 'breakpoints-table.large-to-extra-large',
-      range: '> 1904px*',
+      range: '1920px > < 2560px',
+    },
+    {
+      icon: 'mdi-monitor-screenshot',
+      device: 'extra-extra-large',
+      code: 'xxl',
+      type: 'breakpoints-table.extra-large-to-extra-extra-large',
+      range: '> 2560px',
     },
   ]
 

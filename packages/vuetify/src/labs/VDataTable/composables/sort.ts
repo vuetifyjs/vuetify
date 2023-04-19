@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed, inject, provide, toRef } from 'vue'
 import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
@@ -26,23 +26,38 @@ const VDataTableSortSymbol: InjectionKey<{
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
 
-export function createSort (props: {
+type SortProps = {
   sortBy: SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort: boolean
   multiSort: boolean
-}) {
+}
+
+export function createSort (props: SortProps) {
   const sortBy = useProxiedModel(props, 'sortBy')
+  const mustSort = toRef(props, 'mustSort')
+  const multiSort = toRef(props, 'multiSort')
+
+  return { sortBy, mustSort, multiSort }
+}
+
+export function provideSort (options: {
+  sortBy: Ref<readonly SortItem[]>
+  mustSort: Ref<boolean>
+  multiSort: Ref<boolean>
+  page?: Ref<number>
+}) {
+  const { sortBy, mustSort, multiSort, page } = options
 
   const toggleSort = (key: string) => {
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
     const item = newSortBy.find(x => x.key === key)
 
     if (!item) {
-      if (props.multiSort) newSortBy = [...newSortBy, { key, order: 'asc' }]
+      if (multiSort.value) newSortBy = [...newSortBy, { key, order: 'asc' }]
       else newSortBy = [{ key, order: 'asc' }]
     } else if (item.order === 'desc') {
-      if (props.mustSort) {
+      if (mustSort.value) {
         item.order = 'asc'
       } else {
         newSortBy = newSortBy.filter(x => x.key !== key)
@@ -52,6 +67,7 @@ export function createSort (props: {
     }
 
     sortBy.value = newSortBy
+    if (page) page.value = 1
   }
 
   const data = { sortBy, toggleSort }

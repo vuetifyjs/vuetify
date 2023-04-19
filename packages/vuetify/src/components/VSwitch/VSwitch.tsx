@@ -2,7 +2,7 @@
 import './VSwitch.sass'
 
 // Components
-import { filterControlProps, makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
 
@@ -18,8 +18,13 @@ import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+import type { LoaderSlotProps } from '@/composables/loader'
+import type { MakeSlots } from '@/util'
 
-export type VSwitchSlots = VInputSlots & VSelectionControlSlots
+export type VSwitchSlots =
+  & VInputSlots
+  & VSelectionControlSlots
+  & MakeSlots<{ loader: [LoaderSlotProps] }>
 
 export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
@@ -69,10 +74,12 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
       const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps(props)
+      const [controlProps, _2] = VSelectionControl.filterProps(props)
       const control = ref<VSelectionControl>()
 
-      function onClick () {
+      function onClick (e: Event) {
+        e.stopPropagation()
+        e.preventDefault()
         control.value?.input?.click()
       }
 
@@ -144,7 +151,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
                               )
                           )}
                         </LoaderSlot>
-                      ) }
+                      )}
                     </div>
                   ),
                 }}

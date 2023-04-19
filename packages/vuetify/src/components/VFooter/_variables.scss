@@ -1,5 +1,6 @@
 @use 'sass:map';
 @use '../../styles/settings';
+@use "../../styles/settings/variables";
 
 // VFooter
 $footer-background: rgb(var(--v-theme-surface)) !default;
@@ -15,6 +16,7 @@ $footer-elevation: 0 !default;
 $footer-padding: 8px 16px !default;
 $footer-positions: absolute fixed !default;
 $footer-rounded-border-radius: settings.$border-radius-root !default;
+$footer-transition: .2s variables.$standard-easing !default;
 
 // Lists
 $footer-border: (

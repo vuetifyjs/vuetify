@@ -14,9 +14,15 @@ related:
 
 The theme provider allows you to style a section of your application in a different theme from the default
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-theme-provider](/api/v-theme-provider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

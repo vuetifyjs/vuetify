@@ -116,7 +116,7 @@ function staticLocationStrategy () {
 }
 
 /** Get size of element ignoring max-width/max-height */
-function getIntrinsicSize (el: HTMLElement) {
+function getIntrinsicSize (el: HTMLElement, isRtl: boolean) {
   // const scrollables = new Map<Element, [number, number]>()
   // el.querySelectorAll('*').forEach(el => {
   //   const x = el.scrollLeft
@@ -134,7 +134,11 @@ function getIntrinsicSize (el: HTMLElement) {
   /* eslint-disable-next-line sonarjs/prefer-immediate-return */
   const contentBox = nullifyTransforms(el)
 
-  contentBox.x -= parseFloat(el.style.left || 0)
+  if (isRtl) {
+    contentBox.x += parseFloat(el.style.right || 0)
+  } else {
+    contentBox.x -= parseFloat(el.style.left || 0)
+  }
   contentBox.y -= parseFloat(el.style.top || 0)
 
   // el.style.maxWidth = initialMaxWidth
@@ -224,7 +228,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (!data.activatorEl.value || !data.contentEl.value) return
 
     const targetBox = data.activatorEl.value.getBoundingClientRect()
-    const contentBox = getIntrinsicSize(data.contentEl.value)
+    const contentBox = getIntrinsicSize(data.contentEl.value, data.isRtl.value)
     const scrollParents = getScrollParents(data.contentEl.value)
     const viewportMargin = 12
 
@@ -388,7 +392,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
       transformOrigin: `${placement.origin.side} ${placement.origin.align}`,
       // transform: `translate(${pixelRound(x)}px, ${pixelRound(y)}px)`,
       top: convertToUnit(pixelRound(y)),
-      left: convertToUnit(pixelRound(x)),
+      left: data.isRtl.value ? undefined : convertToUnit(pixelRound(x)),
+      right: data.isRtl.value ? convertToUnit(pixelRound(-x)) : undefined,
       minWidth: convertToUnit(axis === 'y' ? Math.min(minWidth.value, targetBox.width) : minWidth.value),
       maxWidth: convertToUnit(pixelCeil(clamp(available.x, minWidth.value === Infinity ? 0 : minWidth.value, maxWidth.value))),
       maxHeight: convertToUnit(pixelCeil(clamp(available.y, minHeight.value === Infinity ? 0 : minHeight.value, maxHeight.value))),

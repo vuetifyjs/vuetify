@@ -29,6 +29,7 @@ While `v-bottom navigation` is meant to be used with [vue-router](https://router
 | Component | Description |
 | - | - |
 | [v-bottom-navigation](/api/v-bottom-navigation/) | Primary Component |
+| [v-btn](/api/v-btn/) | Sub-component used for modifying the `v-bottom-navigation` state |
 
 <api-inline hide-links />
 

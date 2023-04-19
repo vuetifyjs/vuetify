@@ -24,4 +24,8 @@ Resize your window and observe the values change..
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [v-resize](/api/v-resize/) | The resize directive |
+
+<api-inline hide-links />

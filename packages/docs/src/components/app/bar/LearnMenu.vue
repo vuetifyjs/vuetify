@@ -30,17 +30,22 @@
     {
       title: t('feature-guides'),
       to: rpath('/introduction/why-vuetify/#feature-guides'),
-      appendIcon: 'mdi-star-circle-outline',
+      appendIcon: 'mdi-lightbulb-on-outline',
     },
     {
       title: t('roadmap'),
       to: rpath('/introduction/roadmap/'),
-      appendIcon: 'mdi-road-variant',
+      appendIcon: 'mdi-compass-outline',
     },
     {
       title: t('components'),
       to: rpath('/components/all/'),
-      appendIcon: 'mdi-view-dashboard',
+      appendIcon: 'mdi-view-dashboard-outline',
+    },
+    {
+      title: t('labs'),
+      to: rpath('/labs/introduction/'),
+      appendIcon: 'mdi-beaker-outline',
     },
   ]))
 </script>
