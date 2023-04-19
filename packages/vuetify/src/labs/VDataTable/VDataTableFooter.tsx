@@ -15,7 +15,6 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalItem } from '@/composables/items'
 
 export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
   name: 'VDataTableFooter',
