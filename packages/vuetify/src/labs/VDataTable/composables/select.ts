@@ -30,7 +30,7 @@ export const VDataTableSelectionSymbol: InjectionKey<{
 
 type SelectionProps = Pick<ItemProps, 'itemValue'> & { modelValue: any[], 'onUpdate:modelValue': ((value: any[]) => void) | undefined }
 
-export function createSelection (props: SelectionProps, allItems: Ref<DataTableItem[]>) {
+export function provideSelection (props: SelectionProps, allItems: Ref<DataTableItem[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {

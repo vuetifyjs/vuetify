@@ -12,8 +12,8 @@ describe('VExpansionPanels', () => {
       <CenteredGrid width="200px">
         <VExpansionPanels>
           { titles.map(title => (
-            <VExpansionPanel title={title} text="Content" />
-          )) }
+            <VExpansionPanel title={ title } text="Content" />
+          ))}
         </VExpansionPanels>
       </CenteredGrid>
     ))
@@ -36,7 +36,7 @@ describe('VExpansionPanels', () => {
                 text: () => 'Content',
               }}
             </VExpansionPanel>
-          )) }
+          ))}
         </VExpansionPanels>
       </CenteredGrid>
     ))
@@ -57,7 +57,7 @@ describe('VExpansionPanels', () => {
               <VExpansionPanelTitle>{ title }</VExpansionPanelTitle>
               <VExpansionPanelText>Content</VExpansionPanelText>
             </VExpansionPanel>
-          )) }
+          ))}
         </VExpansionPanels>
       </CenteredGrid>
     ))
@@ -75,10 +75,10 @@ describe('VExpansionPanels', () => {
         </VExpansionPanels>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-title')
-      .eq(0)
+      .get('.v-expansion-panel-title').eq(0).as('title')
       .click()
-      .should('have.class', 'v-expansion-panel-title')
+    // TODO: basically a noop, what is this test supposed to do?
+    cy.get('@title').should('have.class', 'v-expansion-panel-title')
   })
 
   it('supports hide-actions prop', () => {
@@ -136,17 +136,16 @@ describe('VExpansionPanels', () => {
     const foo = ref()
     cy.mount(() => (
       <CenteredGrid width="200px">
-        <VExpansionPanels modelValue={foo.value} onUpdate:modelValue={v => foo.value = v}>
+        <VExpansionPanels modelValue={ foo.value } onUpdate:modelValue={ v => foo.value = v }>
           <VExpansionPanel value="bar" title="Header" text="Content" />
           <VExpansionPanel value="foo" title="Header" text="Content" />
         </VExpansionPanels>
-        <div class="value">{foo.value}</div>
+        <div class="value">{ foo.value }</div>
       </CenteredGrid>
     ))
-      .get('.v-expansion-panel-title')
-      .eq(1)
+      .get('.v-expansion-panel-title').eq(1).as('title')
       .click()
-      .should('have.class', 'v-expansion-panel-title--active')
+    cy.get('@title').should('have.class', 'v-expansion-panel-title--active')
       .get('.value')
       .should('have.text', 'foo')
   })

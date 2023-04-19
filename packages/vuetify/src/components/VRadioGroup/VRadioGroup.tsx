@@ -2,8 +2,8 @@
 import './VRadioGroup.sass'
 
 // Components
-import { filterControlProps } from '@/components/VSelectionControl/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VSelectionControl } from '@/components/VSelectionControl'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
 
@@ -60,11 +60,8 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps({
-        ...props,
-        multiple: false as const,
-      })
+      const [inputProps, _1] = VInput.filterProps(props)
+      const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -93,7 +90,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
                   <VLabel id={ id.value }>
                     { label }
                   </VLabel>
-                ) }
+                )}
 
                 <VSelectionControlGroup
                   { ...controlProps }
@@ -106,6 +103,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
                   aria-labelledby={ label ? id.value : undefined }
+                  multiple={ false }
                   { ...controlAttrs }
                   v-model={ model.value }
                   v-slots={ slots }

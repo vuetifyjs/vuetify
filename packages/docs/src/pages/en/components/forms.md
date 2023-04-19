@@ -24,6 +24,8 @@ Whenever the value of an input is changed, each rule will receive the new value 
 
 <example file="v-form/usage" />
 
+<entry />
+
 ## API
 
 | Component | Description |

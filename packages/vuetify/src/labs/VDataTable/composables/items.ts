@@ -18,6 +18,23 @@ export const makeDataTableItemProps = propsFactory({
   }),
 }, 'v-data-table-item')
 
+function add (obj: Record<string, unknown>, key: string, value: unknown) {
+  const path = key.split('.')
+
+  while (path.length > 1) {
+    const part = path.shift()!
+    if (obj[part] == null) {
+      obj[part] = {}
+    }
+
+    if (typeof obj[part] === 'object') {
+      obj = obj[part] as Record<string, unknown>
+    }
+  }
+
+  obj[path[0]] = value
+}
+
 export function useDataTableItems (props: ItemProps, columns: Ref<InternalDataTableHeader[]>) {
   const { items } = useItems(props)
 
@@ -26,7 +43,7 @@ export function useDataTableItems (props: ItemProps, columns: Ref<InternalDataTa
       ...item,
       type: 'item',
       columns: columns.value.reduce((obj, column) => {
-        obj[column.key] = getPropertyFromItem(item.raw, column.value ?? column.key)
+        add(obj, column.key, getPropertyFromItem(item.raw, column.value ?? column.key))
         return obj
       }, {} as Record<string, unknown>),
     }

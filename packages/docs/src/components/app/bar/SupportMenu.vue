@@ -38,39 +38,39 @@
     {
       title: 'file-a-bug-report',
       href: 'https://issues.vuetifyjs.com/',
-      appendIcon: 'mdi-spider',
+      appendIcon: 'mdi-bug-outline',
     },
     {
-      title: 'github-discussions',
-      href: 'https://github.com/vuetifyjs/vuetify/discussions',
-      appendIcon: 'mdi-message-text',
+      title: 'faq',
+      to: rpath('/getting-started/frequently-asked-questions/'),
+      appendIcon: 'mdi-head-question-outline',
     },
-    { divider: true },
-    { subheader: t('resources') },
     {
       title: 'upgrade-guide',
       to: rpath('/getting-started/upgrade-guide/'),
       appendIcon: 'mdi-update',
     },
     {
+      title: 'github-discussions',
+      href: 'https://github.com/vuetifyjs/vuetify/discussions',
+      appendIcon: 'mdi-message-text-outline',
+    },
+    { divider: true },
+    { subheader: t('resources') },
+    {
       title: 'github-issues',
       href: 'https://github.com/vuetifyjs/vuetify/issues/',
       appendIcon: 'mdi-alert-circle-outline',
     },
     {
-      title: 'codepen-template',
-      href: 'https://template.vuetifyjs.com/',
-      appendIcon: 'mdi-codepen',
-    },
-    {
       title: 'documentation-status',
       href: 'https://status.vuetifyjs.com/',
-      appendIcon: 'mdi-server',
+      appendIcon: 'mdi-cloud-outline',
     },
     {
       title: 'stack-overflow',
       href: 'https://stackoverflow.com/search?q=vuetify',
-      appendIcon: 'mdi-stack-overflow',
+      appendIcon: 'mdi-layers-outline',
     },
     {
       title: 'latest-releases',
