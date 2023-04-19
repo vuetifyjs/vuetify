@@ -338,7 +338,6 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(isFocused, val => {
-      emit('update:focused', val)
       if (val) {
         selectionIndex.value = -1
       } else {
