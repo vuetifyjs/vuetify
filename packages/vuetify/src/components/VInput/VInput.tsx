@@ -37,6 +37,8 @@ export const makeVInputProps = propsFactory({
   appendIcon: IconValue,
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hint: String,
+  persistentHint: Boolean,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
     default: () => ([]),
@@ -108,13 +110,20 @@ export const VInput = genericComponent<VInputSlots>()({
       validate,
     }))
 
+    const messages = computed(() => {
+      if (errorMessages.value.length > 0) {
+        return errorMessages.value
+      } else if (props.hint && (props.persistentHint || props.focused)) {
+        return props.hint
+      } else {
+        return props.messages
+      }
+    })
+
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasMessages = !!(
-        props.messages?.length ||
-        errorMessages.value.length
-      )
+      const hasMessages = messages.value.length > 0
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
         (hasMessages || !!slots.details)
@@ -165,10 +174,7 @@ export const VInput = genericComponent<VInputSlots>()({
               <VMessages
                 id={ messagesId.value }
                 active={ hasMessages }
-                messages={ errorMessages.value.length > 0
-                  ? errorMessages.value
-                  : props.messages
-                }
+                messages={ messages.value }
                 v-slots={{ message: slots.message }}
               />
 

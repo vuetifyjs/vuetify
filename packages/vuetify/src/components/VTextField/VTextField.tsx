@@ -30,8 +30,6 @@ export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
   counter: [Boolean, Number, String] as PropType<true | number | string>,
   counterValue: Function as PropType<(value: any) => number>,
-  hint: String,
-  persistentHint: Boolean,
   prefix: String,
   placeholder: String,
   persistentPlaceholder: Boolean,
@@ -102,11 +100,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       props.persistentPlaceholder ||
       isFocused.value
     ))
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (isFocused.value || props.persistentHint) ? props.hint : ''
-    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -177,7 +170,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,
