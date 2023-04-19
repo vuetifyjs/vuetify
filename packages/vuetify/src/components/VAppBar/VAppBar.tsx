@@ -90,9 +90,9 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       scrollBehavior.value.elevate &&
       currentScroll.value === (scrollBehavior.value.inverted ? 1 : 0)
     ))
-    const scrollRatio = computed(() => Math.max(
-      ((currentThreshold.value - currentScroll.value) / currentThreshold.value) || 0,
-      0
+    const scrollRatio = computed(() => Math.min(
+      ((currentThreshold.value - currentScroll.value) / currentThreshold.value) || 1,
+      1
     ))
     const opacity = computed(() => (
       scrollBehavior.value.fadeImage
@@ -117,6 +117,8 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
         }
       } else if (scrollBehavior.value.inverted) {
         isActive.value = currentScroll.value === 0
+      } else {
+        isActive.value = true
       }
     }
 

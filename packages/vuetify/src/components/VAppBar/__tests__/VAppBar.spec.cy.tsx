@@ -6,7 +6,7 @@ import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
 
 // Constants
-const SCROLL_OPTIONS = { ensureScrollable: true, duration: 50 }
+const SCROLL_OPTIONS = { ensureScrollable: true, duration: 200 }
 
 describe('VAppBar', () => {
   it('should allow custom height', () => {
@@ -39,13 +39,14 @@ describe('VAppBar', () => {
 
   it('should support scroll behavior', () => {
     cy
-      .mount(({ scrollBehavior }: any) => (
+      .mount(({ scrollBehavior, image }: any) => (
         <VLayout>
-          <VAppBar scrollBehavior={ scrollBehavior } />
+          <VAppBar
+            image={ image }
+            scrollBehavior={ scrollBehavior }
+          />
 
-          <VMain style="min-height: 200vh;">
-            Content
-          </VMain>
+          <VMain style="min-height: 200vh;" />
         </VLayout>
       ))
       .setProps({ scrollBehavior: 'hide' })
@@ -81,5 +82,18 @@ describe('VAppBar', () => {
       .get('.v-app-bar').should('be.visible')
       .window().scrollTo(0, 0, SCROLL_OPTIONS)
       .get('.v-app-bar').should('not.be.visible')
+      .setProps({
+        image: 'https://picsum.photos/1920/1080?random',
+        scrollBehavior: 'fade-image',
+      })
+      .get('.v-toolbar__image').should('have.css', 'opacity', '1')
+      .window().scrollTo(0, 100, SCROLL_OPTIONS)
+      .get('.v-toolbar__image').should('have.css', 'opacity', '0.5')
+      .window().scrollTo(0, 200, SCROLL_OPTIONS)
+      .get('.v-toolbar__image').should('have.css', 'opacity', '0')
+      .window().scrollTo(0, 50, SCROLL_OPTIONS)
+      .get('.v-toolbar__image').should('have.css', 'opacity', '0.8')
+      .window().scrollTo(0, 0, SCROLL_OPTIONS)
+      .get('.v-toolbar__image').should('have.css', 'opacity', '1')
   })
 })
