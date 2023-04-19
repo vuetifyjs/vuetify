@@ -270,7 +270,6 @@ export const VAutocomplete = genericComponent<new <
 
         if (index === -1) {
           model.value = [...model.value, item]
-          search.value = ''
         } else {
           const value = [...model.value]
           value.splice(index, 1)
