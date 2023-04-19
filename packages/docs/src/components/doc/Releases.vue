@@ -5,6 +5,7 @@
       :items="releases"
       :loading="store.isLoading"
       :menu-props="menuProps"
+      :placeholder="`v${version}`"
       hide-details
       item-title="name"
       label="Select Release Version"
@@ -105,6 +106,7 @@
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref } from 'vue'
+  import { version } from 'vuetify'
 
   const { t } = useI18n()
   const store = useReleasesStore()
