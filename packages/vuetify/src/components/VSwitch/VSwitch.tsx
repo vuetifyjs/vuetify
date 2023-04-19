@@ -39,6 +39,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
       type: [Boolean, String],
       default: false,
     },
+
     ...makeVInputProps(),
     ...makeSelectionControlProps(),
   },
