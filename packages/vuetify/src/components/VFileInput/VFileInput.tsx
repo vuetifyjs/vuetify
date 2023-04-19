@@ -10,6 +10,7 @@ import { VField } from '@/components/VField'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -78,12 +79,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
   emits: {
     'click:control': (e: MouseEvent) => true,
     'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
@@ -103,16 +106,13 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
 
-      if (!isFocused.value) {
-        isFocused.value = true
-      }
+      if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
       onControlClick(e)
@@ -212,7 +212,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           model.value = [...target.files ?? []]
                         }}
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

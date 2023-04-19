@@ -104,6 +104,7 @@ export const VSelect = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
@@ -405,6 +406,7 @@ export const VSelect = genericComponent<new <
     })
 
     return forwardRefs({
+      isFocused,
       menu,
       select,
     }, vTextFieldRef)

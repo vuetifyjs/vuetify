@@ -98,6 +98,7 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
