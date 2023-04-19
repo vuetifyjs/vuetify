@@ -57,7 +57,7 @@ export function useCodepen ({ code, sections, component }: {
   })
 
   const script = computed(() => {
-    const script = sections.value.find(section => section.name === 'script')?.content || ''
+    const script = sections.value.find(section => section.name === 'options')?.content || ''
 
     const imports = /(import*) ([^'\n]*) from ([^\n]*)/g
     const body = (/export default {([\s\S]*)}/g.exec(script)?.[1] || '')

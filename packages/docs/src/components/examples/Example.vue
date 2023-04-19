@@ -120,9 +120,17 @@
   })
 
   function parseTemplate (target: string, template: string) {
-    const string = `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
-    const regex = new RegExp(string, 'g')
+    const regexStrings: Record<string, string> = {
+      composition: `(<script setup>[\\w\\W]*?<\\/script>)`,
+      options: `(<script>[\\w\\W]*?<\\/script>)`,
+    }
+    const pattern = regexStrings?.[target] || `(<${target}(.*)?>[\\w\\W]*<\\/${target}>)`
+    const regex = new RegExp(pattern, 'g')
     const parsed = regex.exec(template) || []
+
+    if (parsed[1] && target === 'composition') {
+      hasComposition.value = true
+    }
 
     return parsed[1] || ''
   }
@@ -139,6 +147,7 @@
   const ExampleComponent = computed(() => {
     return isError.value ? ExampleMissing : isLoaded.value ? component.value : null
   })
+  const hasComposition = ref(false)
 
   onMounted(importExample)
 
@@ -157,9 +166,14 @@
           content: parseTemplate('template', _code),
         },
         {
-          name: 'script',
+          name: 'composition',
           language: 'javascript',
-          content: parseTemplate('script', _code),
+          content: parseTemplate('composition', _code),
+        },
+        {
+          name: 'options',
+          language: 'javascript',
+          content: parseTemplate('options', _code),
         },
         {
           name: 'style',
@@ -214,7 +228,7 @@
 
     const files = {
       'App.vue': sections.value
-        .filter(section => ['script', 'template'].includes(section.name))
+        .filter(section => [hasComposition.value ? 'composition' : 'options', 'template'].includes(section.name))
         .map(section => section.content)
         .join('\n\n'),
       'links.json': JSON.stringify(links),
