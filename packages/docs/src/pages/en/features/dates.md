@@ -44,7 +44,7 @@ Within your application, import the **useDate** function and use it to access th
       const date = useDate()
 
       console.log(date.getMonth(new Date('March 1, 2021'))) // 3
-    }
+    },
   }
 </script>
 ```
@@ -78,7 +78,7 @@ The following example shows how to use the date composable to format a date stri
       const formatted = date.format('2010-04-13 00:00:00', 'fullDateWithWeekday')
 
       console.log(formatted) // Tuesday, April 13, 2010
-    }
+    },
   }
 </script>
 ```
@@ -110,7 +110,7 @@ export default createVuetify({
 
 #### Create you own
 
-To create your own date adapter, implement the following interface:
+To create your own date adapter, implement the **DateAdapter** interface:
 
 ```ts
 export interface DateAdapter<Date> {
