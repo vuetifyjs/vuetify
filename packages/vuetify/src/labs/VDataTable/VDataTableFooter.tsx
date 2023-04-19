@@ -62,7 +62,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
       default: '$vuetify.dataFooter.lastPage',
     },
     itemsPerPageOptions: {
-      type: Array as PropType<InternalItem[]>,
+      type: Array as PropType<{ title: string, value: number }[]>,
       default: () => ([
         { value: 10, title: '10' },
         { value: 25, title: '25' },
