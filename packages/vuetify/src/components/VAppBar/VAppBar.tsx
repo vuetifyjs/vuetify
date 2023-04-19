@@ -54,7 +54,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       const behavior = new Set(props.scrollBehavior?.split(' ') ?? [])
       return {
         hide: behavior.has('hide'),
-        fullyHide: behavior.has('fully-hide'),
+        // fullyHide: behavior.has('fully-hide'),
         inverted: behavior.has('inverted'),
         collapse: behavior.has('collapse'),
         elevate: behavior.has('elevate'),
