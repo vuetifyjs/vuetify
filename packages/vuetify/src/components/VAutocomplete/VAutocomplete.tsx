@@ -268,6 +268,7 @@ export const VAutocomplete = genericComponent<new <
           { ...textFieldProps }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
@@ -285,8 +286,6 @@ export const VAutocomplete = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{

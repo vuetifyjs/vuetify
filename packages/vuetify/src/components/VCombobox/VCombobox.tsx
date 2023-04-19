@@ -359,6 +359,7 @@ export const VCombobox = genericComponent<new <
           { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           class={[
@@ -375,8 +376,6 @@ export const VCombobox = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{

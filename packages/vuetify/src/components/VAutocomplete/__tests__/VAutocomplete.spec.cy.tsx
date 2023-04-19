@@ -3,6 +3,7 @@
 import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 import { VAutocomplete } from '../VAutocomplete'
+import { keyValues } from '@/util'
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
@@ -216,5 +217,24 @@ describe('VAutocomplete', () => {
       .setProps({ multiple: true, modelValue: ['Foobar'] })
       .get('.v-autocomplete input')
       .should('not.have.attr', 'placeholder')
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VAutocomplete
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
   })
 })
