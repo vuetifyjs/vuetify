@@ -3,7 +3,7 @@ import './VFileInput.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
@@ -115,7 +115,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       }
     }
     function onClickPrepend (e: MouseEvent) {
-      callEvent(props['onClick:prepend'], e)
       onControlClick(e)
     }
     function onControlMousedown (e: MouseEvent) {
@@ -150,7 +149,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasCounter = !!(slots.counter || props.counter)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -159,7 +158,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           v-model={ model.value }
           class="v-file-input"
           onClick:prepend={ onClickPrepend }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }

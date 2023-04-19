@@ -11,7 +11,7 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
@@ -194,8 +194,3 @@ export const VInput = genericComponent<VInputSlots>()({
 })
 
 export type VInput = InstanceType<typeof VInput>
-
-export function filterInputProps (props: Record<string, unknown>) {
-  const keys = Object.keys(VInput.props).filter(k => !isOn(k))
-  return pick(props, keys)
-}

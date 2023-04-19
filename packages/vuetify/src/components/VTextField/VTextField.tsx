@@ -3,7 +3,7 @@ import './VTextField.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VCounter } from '@/components/VCounter'
 
 // Directives
@@ -150,7 +150,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -165,8 +165,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
           ]}
-          onClick:prepend={ props['onClick:prepend'] }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
