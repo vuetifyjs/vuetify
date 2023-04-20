@@ -99,6 +99,7 @@ export const VCombobox = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:search': (val: string) => true,
     'update:menu': (val: boolean) => true,
@@ -254,9 +255,11 @@ export const VCombobox = genericComponent<new <
           return
         }
 
-        select(selection.value)
+        const originalSelectionIndex = selectionIndex.value
 
-        nextTick(() => !selection.value && (selectionIndex.value = length - 2))
+        if (selection.value) select(selection.value)
+
+        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
       }
 
       if (e.key === 'ArrowLeft') {
@@ -359,6 +362,7 @@ export const VCombobox = genericComponent<new <
           { ...textFieldProps }
           v-model={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           class={[
@@ -375,8 +379,6 @@ export const VCombobox = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{

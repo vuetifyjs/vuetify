@@ -3,13 +3,14 @@ import './VFileInput.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
+import { useFocus } from '@/composables/focus'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -51,8 +52,6 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       default: '$vuetify.fileInput.counter',
     },
     multiple: Boolean,
-    hint: String,
-    persistentHint: Boolean,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
       default: false,
@@ -80,12 +79,14 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
   emits: {
     'click:control': (e: MouseEvent) => true,
     'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (files: File[]) => true,
   },
 
   setup (props, { attrs, emit, slots }) {
     const { t } = useLocale()
     const model = useProxiedModel(props, 'modelValue')
+    const { isFocused, focus, blur } = useFocus(props)
     const base = computed(() => typeof props.showSize !== 'boolean' ? props.showSize : undefined)
     const totalBytes = computed(() => (model.value ?? []).reduce((bytes, { size = 0 }) => bytes + size, 0))
     const totalBytesReadable = computed(() => humanReadableFileSize(totalBytes.value, base.value))
@@ -105,24 +106,15 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     })
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const isFocused = ref(false)
     const inputRef = ref<HTMLInputElement>()
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (props.persistentHint) ? props.hint : ''
-    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
       }
 
-      if (!isFocused.value) {
-        isFocused.value = true
-      }
+      if (!isFocused.value) focus()
     }
     function onClickPrepend (e: MouseEvent) {
-      callEvent(props['onClick:prepend'], e)
       onControlClick(e)
     }
     function onControlMousedown (e: MouseEvent) {
@@ -157,7 +149,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const hasCounter = !!(slots.counter || props.counter)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -166,11 +158,9 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           v-model={ model.value }
           class="v-file-input"
           onClick:prepend={ onClickPrepend }
-          onClick:append={ props['onClick:append'] }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,
@@ -222,7 +212,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                           model.value = [...target.files ?? []]
                         }}
                         onFocus={ onFocus }
-                        onBlur={ () => (isFocused.value = false) }
+                        onBlur={ blur }
                         { ...slotProps }
                         { ...inputAttrs }
                       />

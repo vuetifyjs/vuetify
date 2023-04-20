@@ -18,6 +18,7 @@ import { useForm } from '@/composables/form'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
@@ -97,6 +98,7 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
@@ -116,7 +118,10 @@ export const VAutocomplete = genericComponent<new <
         _menu.value = v
       },
     })
+    const selectionIndex = ref(-1)
+    const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
+    const { textColorClasses, textColorStyles } = useTextColor(color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -144,6 +149,7 @@ export const VAutocomplete = genericComponent<new <
     })
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const selection = computed(() => selections.value[selectionIndex.value])
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -164,7 +170,13 @@ export const VAutocomplete = genericComponent<new <
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
-      if (['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)) {
+      const selectionStart = vTextFieldRef.value.selectionStart
+      const length = selected.value.length
+
+      if (
+        selectionIndex.value > -1 ||
+        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
+      ) {
         e.preventDefault()
       }
 
@@ -184,6 +196,52 @@ export const VAutocomplete = genericComponent<new <
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
         listRef.value?.focus('prev')
+      }
+
+      if (!props.multiple) return
+
+      if (['Backspace', 'Delete'].includes(e.key)) {
+        if (selectionIndex.value < 0) {
+          if (e.key === 'Backspace' && !search.value) {
+            selectionIndex.value = length - 1
+          }
+
+          return
+        }
+
+        const originalSelectionIndex = selectionIndex.value
+
+        if (selection.value) select(selection.value)
+
+        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+      }
+
+      if (e.key === 'ArrowLeft') {
+        if (selectionIndex.value < 0 && selectionStart > 0) return
+
+        const prev = selectionIndex.value > -1
+          ? selectionIndex.value - 1
+          : length - 1
+
+        if (selections.value[prev]) {
+          selectionIndex.value = prev
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
+        }
+      }
+
+      if (e.key === 'ArrowRight') {
+        if (selectionIndex.value < 0) return
+
+        const next = selectionIndex.value + 1
+
+        if (selections.value[next]) {
+          selectionIndex.value = next
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(0, 0)
+        }
       }
     }
 
@@ -213,7 +271,6 @@ export const VAutocomplete = genericComponent<new <
 
         if (index === -1) {
           model.value = [...model.value, item]
-          search.value = ''
         } else {
           const value = [...model.value]
           value.splice(index, 1)
@@ -268,6 +325,7 @@ export const VAutocomplete = genericComponent<new <
           { ...textFieldProps }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
           onInput={ onInput }
@@ -276,6 +334,7 @@ export const VAutocomplete = genericComponent<new <
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
+              'v-autocomplete--selecting-index': selectionIndex.value > -1,
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-autocomplete--selection-slot': !!slots.selection,
             },
@@ -285,8 +344,6 @@ export const VAutocomplete = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
           onKeydown={ onKeydown }
         >
           {{
@@ -367,7 +424,17 @@ export const VAutocomplete = genericComponent<new <
                   }
 
                   return (
-                    <div key={ item.value } class="v-autocomplete__selection">
+                    <div
+                      key={ item.value }
+                      class={[
+                        'v-autocomplete__selection',
+                        index === selectionIndex.value && [
+                          'v-autocomplete__selection--selected',
+                          textColorClasses.value,
+                        ],
+                      ]}
+                      style={ index === selectionIndex.value ? textColorStyles.value : {} }
+                    >
                       { hasChips ? (
                         !slots.chip ? (
                           <VChip

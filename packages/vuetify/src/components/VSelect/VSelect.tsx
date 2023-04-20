@@ -104,6 +104,7 @@ export const VSelect = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
@@ -234,6 +235,9 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
         vTextFieldRef.value?.focus()
@@ -300,6 +304,7 @@ export const VSelect = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
@@ -401,6 +406,7 @@ export const VSelect = genericComponent<new <
     })
 
     return forwardRefs({
+      isFocused,
       menu,
       select,
     }, vTextFieldRef)
