@@ -151,7 +151,7 @@
     "eslint-plugin-jest": "^25.7.0",
     "fast-glob": "^3.2.12",
     "identity-obj-proxy": "^3.0.0",
-    "jest-canvas-mock": "^2.3.1",
+    "jest-canvas-mock": "^2.5.0",
     "micromatch": "^4.0.5",
     "postcss": "^8.4.21",
     "rollup": "^3.20.2",
