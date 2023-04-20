@@ -11,6 +11,7 @@ import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
@@ -36,7 +37,7 @@ import type { MakeSlots, SlotsToProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
-const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
 
 export interface DefaultInputSlot {
@@ -64,6 +65,7 @@ export const makeVFieldProps = propsFactory({
   dirty: Boolean,
   disabled: Boolean,
   error: Boolean,
+  flat: Boolean,
   label: String,
   persistentClear: Boolean,
   prependInnerIcon: IconValue,
@@ -75,13 +77,14 @@ export const makeVFieldProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
 
-  'onClick:clear': EventProp,
-  'onClick:appendInner': EventProp,
-  'onClick:prependInner': EventProp,
+  'onClick:clear': EventProp<[MouseEvent]>(),
+  'onClick:appendInner': EventProp<[MouseEvent]>(),
+  'onClick:prependInner': EventProp<[MouseEvent]>(),
 
   ...makeComponentProps(),
   ...makeThemeProps(),
   ...makeLoaderProps(),
+  ...makeRoundedProps(),
 }, 'v-field')
 
 export type VFieldSlots = MakeSlots<{
@@ -120,6 +123,7 @@ export const VField = genericComponent<new <T>() => {
     const { loaderClasses } = useLoader(props)
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
+    const { roundedClasses } = useRounded(props)
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -221,6 +225,7 @@ export const VField = genericComponent<new <T>() => {
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
+              'v-field--flat': props.flat,
               'v-field--has-background': !!props.bgColor,
               'v-field--persistent-clear': props.persistentClear,
               'v-field--prepended': hasPrepend,
@@ -233,6 +238,7 @@ export const VField = genericComponent<new <T>() => {
             backgroundColorClasses.value,
             focusClasses.value,
             loaderClasses.value,
+            roundedClasses.value,
           ]}
           style={[
             props.style,
@@ -262,7 +268,7 @@ export const VField = genericComponent<new <T>() => {
           )}
 
           <div class="v-field__field" data-no-activator="">
-            {['solo', 'filled'].includes(props.variant) && hasLabel.value && (
+            {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
                 ref={ floatingLabelRef }

@@ -22,7 +22,6 @@ export const VTab = genericComponent()({
 
   props: {
     fixed: Boolean,
-    title: String,
 
     sliderColor: String,
     hideSlider: Boolean,
@@ -125,7 +124,8 @@ export const VTab = genericComponent()({
           { ...attrs }
           onGroup:selected={ updateSlider }
         >
-          { slots.default ? slots.default() : props.title }
+          { slots.default?.() ?? props.text }
+
           { !props.hideSlider && (
             <div
               ref={ sliderEl }

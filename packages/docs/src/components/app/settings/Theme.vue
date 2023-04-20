@@ -64,18 +64,3 @@
     },
   })
 </script>
-
-<style lang="sass">
-.app-copy
-  position: fixed !important
-  z-index: -1 !important
-  pointer-events: none !important
-  contain: size style !important
-  overflow: clip !important
-
-.app-transition
-  --clip-size: 0
-  --clip-pos: 0 0
-  clip-path: circle(var(--clip-size) at var(--clip-pos))
-  transition: clip-path .35s ease-out
-</style>

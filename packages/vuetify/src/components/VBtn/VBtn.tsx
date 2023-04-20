@@ -66,6 +66,8 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
+  text: String,
+
   ...makeComponentProps(),
   ...makeBorderProps(),
   ...makeRoundedProps(),
@@ -232,8 +234,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
                     icon: props.icon,
                   },
                 }}
-                v-slots:default={ slots.default }
-              />
+              >
+                { slots.default?.() ?? props.text }
+              </VDefaultsProvider>
             )}
           </span>
 

@@ -6,7 +6,6 @@
     :items="serverItems"
     :loading="loading"
     class="elevation-1"
-    item-title="name"
     item-value="name"
     @update:options="loadItems"
   ></v-data-table-server>
@@ -97,12 +96,12 @@
   ]
 
   const FakeAPI = {
-    async fetch (page, itemsPerPage, sortBy) {
+    async fetch ({ page, itemsPerPage, sortBy }) {
       return new Promise(resolve => {
         setTimeout(() => {
           const start = (page - 1) * itemsPerPage
           const end = start + itemsPerPage
-          const items = desserts.slice(start, end)
+          const items = desserts.slice()
 
           if (sortBy.length) {
             const sortKey = sortBy[0].key
@@ -114,7 +113,9 @@
             })
           }
 
-          resolve({ items, total: desserts.length })
+          const paginated = items.slice(start, end)
+
+          resolve({ items: paginated, total: items.length })
         }, 500)
       })
     },
@@ -140,13 +141,10 @@
       loading: true,
       totalItems: 0,
     }),
-    beforeMount () {
-      this.loadItems({ page: 1, itemsPerPage: 5, sortBy: [] })
-    },
     methods: {
       loadItems ({ page, itemsPerPage, sortBy }) {
         this.loading = true
-        FakeAPI.fetch(page, itemsPerPage, sortBy).then(({ items, total }) => {
+        FakeAPI.fetch({ page, itemsPerPage, sortBy }).then(({ items, total }) => {
           this.serverItems = items
           this.totalItems = total
           this.loading = false

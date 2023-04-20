@@ -84,8 +84,8 @@ export const VChip = genericComponent<VChipSlots>()({
       default: true,
     },
 
-    onClick: EventProp,
-    onClickOnce: EventProp,
+    onClick: EventProp<[MouseEvent]>(),
+    onClickOnce: EventProp<[MouseEvent]>(),
 
     ...makeComponentProps(),
     ...makeBorderProps(),

@@ -9,6 +9,9 @@
   transition: $progress-linear-transition
   width: 100%
 
+  &--rounded
+    @include tools.rounded($progress-linear-border-radius)
+
 // Elements
 .v-progress-linear__background
   background: $progress-linear-background

@@ -37,7 +37,7 @@
     },
     {
       color: 'primary',
-      icon: 'mdi-vuetify',
+      icon: '$vuetify',
       variant: 'outlined',
       text: 'home.why-vuetify',
       to: {

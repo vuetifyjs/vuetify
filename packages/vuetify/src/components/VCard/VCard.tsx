@@ -35,6 +35,7 @@ import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
+import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VCardSlots = MakeSlots<{
   default: []
@@ -42,7 +43,7 @@ export type VCardSlots = MakeSlots<{
   title: []
   subtitle: []
   text: []
-  loader: []
+  loader: [LoaderSlotProps]
   image: []
   prepend: []
   append: []
