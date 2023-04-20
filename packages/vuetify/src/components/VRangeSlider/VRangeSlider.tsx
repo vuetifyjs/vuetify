@@ -3,7 +3,7 @@ import '../VSlider/VSlider.sass'
 
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
+import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
 import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
@@ -38,9 +38,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
   emits: {
     'update:focused': (value: boolean) => true,
     'update:modelValue': (value: [number, number]) => true,
+    end: (value: [number, number]) => true,
+    start: (value: [number, number]) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
@@ -57,6 +59,19 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       return (a < b || (a === b && startOffset < 0)) ? startThumbRef.value.$el : stopThumbRef.value.$el
     }
 
+    const steps = useSteps(props)
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      undefined,
+      arr => {
+        if (!arr?.length) return [0, 0]
+
+        return arr.map(value => steps.roundValue(value))
+      },
+    ) as WritableComputedRef<[number, number]> & { readonly externalValue: number[] }
+
     const {
       activeThumbRef,
       hasLabels,
@@ -66,43 +81,37 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
       onSliderMousedown,
       onSliderTouchstart,
       position,
-      roundValue,
       trackContainerRef,
     } = useSlider({
-      /* eslint-disable @typescript-eslint/no-use-before-define */
       props,
-      handleSliderMouseUp: newValue => {
-        model.value = activeThumbRef.value === startThumbRef.value?.$el ? [newValue, model.value[1]] : [model.value[0], newValue]
+      steps,
+      onSliderStart: () => {
+        emit('start', model.value)
       },
-      handleMouseMove: newValue => {
+      onSliderEnd: ({ value }) => {
+        const newValue: [number, number] = activeThumbRef.value === startThumbRef.value?.$el
+          ? [value, model.value[1]]
+          : [model.value[0], value]
+
+        model.value = newValue
+        emit('end', newValue)
+      },
+      onSliderMove: ({ value }) => {
         const [start, stop] = model.value
 
         if (!props.strict && start === stop && start !== min.value) {
-          activeThumbRef.value = newValue > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
+          activeThumbRef.value = value > start ? stopThumbRef.value?.$el : startThumbRef.value?.$el
           activeThumbRef.value?.focus()
         }
 
         if (activeThumbRef.value === startThumbRef.value?.$el) {
-          model.value = [Math.min(newValue, stop), stop]
+          model.value = [Math.min(value, stop), stop]
         } else {
-          model.value = [start, Math.max(start, newValue)]
+          model.value = [start, Math.max(start, value)]
         }
       },
       getActiveThumb,
-      /* eslint-enable @typescript-eslint/no-use-before-define */
     })
-
-    const model = useProxiedModel(
-      props,
-      'modelValue',
-      undefined,
-      arr => {
-        // eslint-disable-next-line @typescript-eslint/prefer-optional-chain
-        if (!arr || !arr.length) return [0, 0]
-
-        return arr.map(value => roundValue(value))
-      },
-    ) as WritableComputedRef<[number, number]> & { readonly externalValue: number[] }
 
     const { isFocused, focus, blur } = useFocus(props)
     const trackStart = computed(() => position(model.value[0]))
