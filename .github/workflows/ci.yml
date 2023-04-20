@@ -98,7 +98,8 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
 
       - run: yarn --frozen-lockfile --non-interactive
-      - run: yarn lerna run test:coverage -- -- -i
+      - run: yarn run test:coverage -i
+        working-directory: ./packages/vuetify
       - uses: codecov/codecov-action@v1
 
   test-cypress:
