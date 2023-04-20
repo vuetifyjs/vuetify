@@ -6,18 +6,17 @@ import { VDataTableRows } from './VDataTableRows'
 
 // Composables
 import { provideDefaults } from '@/composables/defaults'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { createExpanded, makeDataTableExpandProps } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
+import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
-import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
-import { createSelection, makeDataTableSelectProps } from './composables/select'
-import { createSort, makeDataTableSortProps } from './composables/sort'
+import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
+import { makeDataTableSelectProps, provideSelection } from './composables/select'
+import { createSort, makeDataTableSortProps, provideSort } from './composables/sort'
 
 // Utilities
-import { provide, toRef } from 'vue'
+import { computed, provide, toRef } from 'vue'
 import { genericComponent, useRender } from '@/util'
 import { makeVDataTableProps } from './VDataTable'
 
@@ -35,7 +34,10 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       type: String,
       default: '$vuetify.dataIterator.loadingText',
     },
-    itemsLength: [Number, String],
+    itemsLength: {
+      type: [Number, String],
+      required: true,
+    },
 
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
@@ -55,13 +57,16 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy } = createGroupBy(props)
+    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { page, itemsPerPage } = createPagination(props)
+    const itemsLength = computed(() => parseInt(props.itemsLength, 10))
 
-    createExpanded(props)
+    provideExpanded(props)
 
     const { columns } = createHeaders(props, {
       groupBy,
@@ -71,21 +76,22 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { sortBy, toggleSort } = createSort(props)
+    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened } = createGroupBy(props, groupBy, sortBy)
+    const { opened } = provideGroupBy({ groupBy, sortBy })
 
-    const { page, itemsPerPage } = createPagination(props, items)
+    providePagination({ page, itemsPerPage, itemsLength })
 
     const { flatItems } = useGroupedItems(items, groupBy, opened)
 
-    createSelection(props, items)
+    provideSelection(props, items)
 
     useOptions({
       page,
       itemsPerPage,
       sortBy,
       groupBy,
+      search: toRef(props, 'search'),
     })
 
     provide('v-data-table', {
@@ -113,11 +119,13 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
         height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
           default: slots.default ?? (() => (
             <>
+              { slots.colgroup?.({ columns }) }
               <thead class="v-data-table__thead" role="rowgroup">
                 { slots.headers ? slots.headers() : (
                   <VDataTableHeaders
@@ -133,7 +141,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ flatItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}

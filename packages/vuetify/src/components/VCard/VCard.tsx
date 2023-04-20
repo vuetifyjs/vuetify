@@ -34,6 +34,7 @@ import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { MakeSlots } from '@/util'
+import type { LoaderSlotProps } from '@/composables/loader'
 
 export type VCardSlots = MakeSlots<{
   default: []
@@ -41,7 +42,7 @@ export type VCardSlots = MakeSlots<{
   title: []
   subtitle: []
   text: []
-  loader: []
+  loader: [LoaderSlotProps]
   image: []
   prepend: []
   append: []
@@ -149,19 +150,27 @@ export const VCard = genericComponent<VCardSlots>()({
           tabindex={ props.disabled ? -1 : undefined }
         >
           { hasImage && (
-            <VDefaultsProvider
-              key="image"
-              defaults={{
-                VImg: {
-                  cover: true,
-                  src: props.image,
-                },
-              }}
-            >
-              <div class="v-card__image">
-                { slots.image?.() ?? <VImg /> }
-              </div>
-            </VDefaultsProvider>
+            <div key="image" class="v-card__image">
+              { !slots.image ? (
+                <VImg
+                  key="image-img"
+                  cover
+                  src={ props.image }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="image-defaults"
+                  disabled={ !props.image }
+                  defaults={{
+                    VImg: {
+                      cover: true,
+                      src: props.image,
+                    },
+                  }}
+                  v-slots:default={ slots.image }
+                />
+              )}
+            </div>
           )}
 
           <LoaderSlot

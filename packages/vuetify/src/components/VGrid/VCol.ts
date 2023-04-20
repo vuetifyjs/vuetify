@@ -2,6 +2,7 @@
 import './VGrid.sass'
 
 // Composables
+import { breakpoints } from '@/composables/display'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -9,9 +10,11 @@ import { capitalize, computed, h } from 'vue'
 import { genericComponent } from '@/util'
 
 // Types
+import type { Breakpoint } from '@/composables/display'
 import type { Prop, PropType } from 'vue'
 
-const breakpoints = ['sm', 'md', 'lg', 'xl', 'xxl'] as const // no xs
+type BreakpointOffset = `offset${Capitalize<Breakpoint>}`
+type BreakpointOrder = `order${Capitalize<Breakpoint>}`
 
 const breakpointProps = (() => {
   return breakpoints.reduce((props, val) => {
@@ -20,27 +23,29 @@ const breakpointProps = (() => {
       default: false,
     }
     return props
-  }, {} as Record<string, Prop<boolean | string | number, false>>)
+  }, {} as Record<Breakpoint, Prop<boolean | string | number, false>>)
 })()
 
 const offsetProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['offset' + capitalize(val)] = {
+    const offsetKey = ('offset' + capitalize(val)) as BreakpointOffset
+    props[offsetKey] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Record<string, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOffset, Prop<string | number, null>>)
 })()
 
 const orderProps = (() => {
   return breakpoints.reduce((props, val) => {
-    props['order' + capitalize(val)] = {
+    const orderKey = ('order' + capitalize(val)) as BreakpointOrder
+    props[orderKey] = {
       type: [String, Number],
       default: null,
     }
     return props
-  }, {} as Record<string, Prop<string | number, null>>)
+  }, {} as Record<BreakpointOrder, Prop<string | number, null>>)
 })()
 
 const propMap = {

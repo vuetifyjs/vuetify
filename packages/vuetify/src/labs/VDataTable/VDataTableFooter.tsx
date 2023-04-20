@@ -15,7 +15,6 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { InternalItem } from '@/composables/items'
 
 export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
   name: 'VDataTableFooter',
@@ -62,7 +61,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
       default: '$vuetify.dataFooter.lastPage',
     },
     itemsPerPageOptions: {
-      type: Array as PropType<InternalItem[]>,
+      type: Array as PropType<{ title: string, value: number }[]>,
       default: () => ([
         { value: 10, title: '10' },
         { value: 25, title: '25' },
@@ -76,7 +75,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
 
   setup (props, { slots }) {
     const { t } = useLocale()
-    const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage } = usePagination()
+    const { page, pageCount, startIndex, stopIndex, itemsLength, itemsPerPage, setItemsPerPage } = usePagination()
 
     const itemsPerPageOptions = computed(() => (
       props.itemsPerPageOptions.map(option => ({
@@ -95,7 +94,7 @@ export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
           <VSelect
             items={ itemsPerPageOptions.value }
             modelValue={ itemsPerPage.value }
-            onUpdate:modelValue={ v => itemsPerPage.value = Number(v) }
+            onUpdate:modelValue={ v => setItemsPerPage(Number(v)) }
             density="compact"
             variant="outlined"
             hide-details

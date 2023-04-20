@@ -19,25 +19,20 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-text-field').type('Something')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([
-        [false],
-      ])
-    })
-
-    cy.get('.v-text-field').type(' and something else')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([
-        [false],
-        [true],
-      ])
-    })
+    cy.emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([
+          [false],
+        ])
+      })
+      .get('.v-text-field').type(' and something else')
+    cy.emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([
+          [false],
+          [true],
+        ])
+      })
   })
 
   it('should only emit true if all inputs are explicitly valid', () => {
@@ -51,22 +46,17 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-text-field').eq(0).type('Valid')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.be.undefined
-    })
-
-    cy.get('.v-text-field').eq(1).type('Valid')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([
-        [true],
-      ])
-    })
+    cy.emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.be.undefined
+      })
+      .get('.v-text-field').eq(1).type('Valid')
+    cy.emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([
+          [true],
+        ])
+      })
   })
 
   it('should expose validate function', () => {
@@ -79,12 +69,12 @@ describe('VForm', () => {
       </Application>
     ))
 
-    cy.get('.v-form').then(async () => {
-      const { valid } = await form.value.validate()
-      expect(valid).to.equal(false)
-    })
-
-    cy.get('.v-text-field').should('have.class', 'v-input--error')
+    cy.get('.v-form')
+      .then(async () => {
+        const { valid } = await form.value.validate()
+        expect(valid).to.equal(false)
+      })
+      .get('.v-text-field').should('have.class', 'v-input--error')
   })
 
   it('should expose reset function', () => {
@@ -97,25 +87,21 @@ describe('VForm', () => {
       </Application>
     ))
 
-    cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([[false]])
-    })
-
-    cy.get('.v-form').then(() => {
-      form.value.reset()
-    })
-
-    cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', '')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([[false], [null]])
-    })
+    cy.get('.v-text-field')
+      .type('Something')
+      .should('have.class', 'v-input--error')
+      .emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([[false]])
+      })
+      .get('.v-form').then(() => {
+        form.value.reset()
+      })
+      .get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', '')
+      .emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([[false], [null]])
+      })
   })
 
   it('should expose resetValidation function', () => {
@@ -129,24 +115,18 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-text-field').type('Something').should('have.class', 'v-input--error')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([[false]])
-    })
-
-    cy.get('.v-form').then(() => {
-      form.value.resetValidation()
-    })
-
-    cy.get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', 'Something')
-
-    cy.vue().then(({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted('update:modelValue')
-
-      expect(emits).to.deep.equal([[false], [null]])
-    })
+      .emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([[false]])
+      })
+      .get('.v-form').then(() => {
+        form.value.resetValidation()
+      })
+      .get('.v-text-field').should('have.not.class', 'v-input--error').find('input').should('have.value', 'Something')
+      .emitted(VForm, 'update:modelValue')
+      .then(emits => {
+        expect(emits).to.deep.equal([[false], [null]])
+      })
   })
 
   it('should not submit form if validation fails', () => {
@@ -158,7 +138,7 @@ describe('VForm', () => {
     ))
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
-    cy.get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
+      .get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
   })
 
   it('should emit a SubmitEventPromise', () => {
@@ -176,11 +156,11 @@ describe('VForm', () => {
     }
 
     cy.get('.v-btn').click().url().should('not.contain', '/action')
-    cy.vue().then(async ({ wrapper }) => {
-      const emits = wrapper.findComponent<VForm>('.v-form').emitted<[SubmitEventPromise]>('submit')
-
-      expect(await emits![0][0]).to.deep.equal({ valid: true, errors: [] })
-    })
+      .emitted(VForm, 'submit')
+      .then(async emits => {
+        const result = await emits[0][0]
+        expect(result).to.deep.equal({ valid: true, errors: [] })
+      })
   })
 
   it('should expose errors reactively', () => {
@@ -209,7 +189,7 @@ describe('VForm', () => {
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
-  it.only('should submit form if validation passes', () => {
+  it('should submit form if validation passes', () => {
     cy.mount(() => (
       <VForm action="/__cypress/src/action">
         <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
