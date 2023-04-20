@@ -1,186 +1,155 @@
 <template>
-  <div>
-    <v-data-table-server
-      :headers="headers"
-      :items="desserts"
-      :items-length="totalDesserts"
-      :loading="loading"
-      :items-per-page="2"
-      item-value="name"
-      show-select
-      show-expand
-      class="elevation-1"
-      @update:options="options = $event"
-    >
-      <template v-slot:expanded-row>
-        This is an expanded row
-      </template>
-    </v-data-table-server>
-  </div>
+  <v-data-table-server
+    v-model:items-per-page="itemsPerPage"
+    :headers="headers"
+    :items-length="totalItems"
+    :items="serverItems"
+    :loading="loading"
+    :search="search"
+    class="elevation-1"
+    item-value="name"
+    @update:options="loadItems"
+  ></v-data-table-server>
 </template>
 
 <script>
-  export default {
-    data () {
-      return {
-        totalDesserts: 0,
-        desserts: [],
-        loading: true,
-        options: {},
-        headers: [
-          {
-            title: 'Dessert (100g serving)',
-            align: 'start',
-            sortable: false,
-            key: 'name',
-          },
-          { title: 'Calories', key: 'calories' },
-          { title: 'Fat (g)', key: 'fat' },
-          { title: 'Carbs (g)', key: 'carbs' },
-          { title: 'Protein (g)', key: 'protein' },
-          { title: 'Iron (%)', key: 'iron' },
-        ],
-      }
+  const desserts = [
+    {
+      name: 'Frozen Yogurt',
+      calories: 159,
+      fat: 6.0,
+      carbs: 24,
+      protein: 4.0,
+      iron: '1',
     },
-    watch: {
-      options: {
-        handler () {
-          this.getDataFromApi()
-        },
-        deep: true,
-      },
+    {
+      name: 'Jelly bean',
+      calories: 375,
+      fat: 0.0,
+      carbs: 94,
+      protein: 0.0,
+      iron: '0',
     },
-    methods: {
-      getDataFromApi () {
-        this.loading = true
-        this.fakeApiCall().then(data => {
-          this.desserts = data.items
-          this.totalDesserts = data.total
-          this.loading = false
-        })
-      },
-      /**
-       * In a real application this would be a call to fetch() or axios.get()
-       */
-      fakeApiCall () {
-        return new Promise((resolve, reject) => {
-          const { sortBy = [], page, itemsPerPage } = this.options
+    {
+      name: 'KitKat',
+      calories: 518,
+      fat: 26.0,
+      carbs: 65,
+      protein: 7,
+      iron: '6',
+    },
+    {
+      name: 'Eclair',
+      calories: 262,
+      fat: 16.0,
+      carbs: 23,
+      protein: 6.0,
+      iron: '7',
+    },
+    {
+      name: 'Gingerbread',
+      calories: 356,
+      fat: 16.0,
+      carbs: 49,
+      protein: 3.9,
+      iron: '16',
+    },
+    {
+      name: 'Ice cream sandwich',
+      calories: 237,
+      fat: 9.0,
+      carbs: 37,
+      protein: 4.3,
+      iron: '1',
+    },
+    {
+      name: 'Lollipop',
+      calories: 392,
+      fat: 0.2,
+      carbs: 98,
+      protein: 0,
+      iron: '2',
+    },
+    {
+      name: 'Cupcake',
+      calories: 305,
+      fat: 3.7,
+      carbs: 67,
+      protein: 4.3,
+      iron: '8',
+    },
+    {
+      name: 'Honeycomb',
+      calories: 408,
+      fat: 3.2,
+      carbs: 87,
+      protein: 6.5,
+      iron: '45',
+    },
+    {
+      name: 'Donut',
+      calories: 452,
+      fat: 25.0,
+      carbs: 51,
+      protein: 4.9,
+      iron: '22',
+    },
+  ]
 
-          let items = this.getDesserts()
-          const total = items.length
+  const FakeAPI = {
+    async fetch ({ page, itemsPerPage, sortBy }) {
+      return new Promise(resolve => {
+        setTimeout(() => {
+          const start = (page - 1) * itemsPerPage
+          const end = start + itemsPerPage
+          const items = desserts.slice()
 
           if (sortBy.length) {
-            items = items.sort((a, b) => {
-              const sortA = a[sortBy[0].key]
-              const sortB = b[sortBy[0].key]
-
-              if (sortBy[0].order) {
-                if (sortA < sortB) return 1
-                if (sortA > sortB) return -1
-                return 0
-              } else {
-                if (sortA < sortB) return -1
-                if (sortA > sortB) return 1
-                return 0
-              }
+            const sortKey = sortBy[0].key
+            const sortOrder = sortBy[0].order
+            items.sort((a, b) => {
+              const aValue = a[sortKey]
+              const bValue = b[sortKey]
+              return sortOrder === 'desc' ? bValue - aValue : aValue - bValue
             })
           }
 
-          if (itemsPerPage > 0) {
-            items = items.slice((page - 1) * itemsPerPage, page * itemsPerPage)
-          }
+          const paginated = items.slice(start, end)
 
-          setTimeout(() => {
-            resolve({
-              items,
-              total,
-            })
-          }, 1000)
+          resolve({ items: paginated, total: items.length })
+        }, 500)
+      })
+    },
+  }
+
+  export default {
+    data: () => ({
+      itemsPerPage: 5,
+      headers: [
+        {
+          title: 'Dessert (100g serving)',
+          align: 'start',
+          sortable: false,
+          key: 'name',
+        },
+        { title: 'Calories', key: 'calories', align: 'end' },
+        { title: 'Fat (g)', key: 'fat', align: 'end' },
+        { title: 'Carbs (g)', key: 'carbs', align: 'end' },
+        { title: 'Protein (g)', key: 'protein', align: 'end' },
+        { title: 'Iron (%)', key: 'iron', align: 'end' },
+      ],
+      serverItems: [],
+      loading: true,
+      totalItems: 0,
+    }),
+    methods: {
+      loadItems ({ page, itemsPerPage, sortBy }) {
+        this.loading = true
+        FakeAPI.fetch({ page, itemsPerPage, sortBy }).then(({ items, total }) => {
+          this.serverItems = items
+          this.totalItems = total
+          this.loading = false
         })
-      },
-      getDesserts () {
-        return [
-          {
-            name: 'Frozen Yogurt',
-            calories: 159,
-            fat: 6.0,
-            carbs: 24,
-            protein: 4.0,
-            iron: 1,
-          },
-          {
-            name: 'Ice cream sandwich',
-            calories: 237,
-            fat: 9.0,
-            carbs: 37,
-            protein: 4.3,
-            iron: 1,
-          },
-          {
-            name: 'Eclair',
-            calories: 262,
-            fat: 16.0,
-            carbs: 23,
-            protein: 6.0,
-            iron: 7,
-          },
-          {
-            name: 'Cupcake',
-            calories: 305,
-            fat: 3.7,
-            carbs: 67,
-            protein: 4.3,
-            iron: 8,
-          },
-          {
-            name: 'Gingerbread',
-            calories: 356,
-            fat: 16.0,
-            carbs: 49,
-            protein: 3.9,
-            iron: 16,
-          },
-          {
-            name: 'Jelly bean',
-            calories: 375,
-            fat: 0.0,
-            carbs: 94,
-            protein: 0.0,
-            iron: 0,
-          },
-          {
-            name: 'Lollipop',
-            calories: 392,
-            fat: 0.2,
-            carbs: 98,
-            protein: 0,
-            iron: 2,
-          },
-          {
-            name: 'Honeycomb',
-            calories: 408,
-            fat: 3.2,
-            carbs: 87,
-            protein: 6.5,
-            iron: 45,
-          },
-          {
-            name: 'Donut',
-            calories: 452,
-            fat: 25.0,
-            carbs: 51,
-            protein: 4.9,
-            iron: 22,
-          },
-          {
-            name: 'KitKat',
-            calories: 518,
-            fat: 26.0,
-            carbs: 65,
-            protein: 7,
-            iron: 6,
-          },
-        ]
       },
     },
   }

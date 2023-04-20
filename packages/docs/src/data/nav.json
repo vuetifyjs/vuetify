@@ -36,6 +36,7 @@
       "aliasing",
       "application-layout",
       "blueprints",
+      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
@@ -117,6 +118,7 @@
       { "divider": true },
       { "subheader": "data-and-display" },
       "tables",
+      "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
       "grids",
@@ -206,10 +208,6 @@
       {
         "title": "skeleton-loaders",
         "subfolder": "components"
-      },
-      {
-        "title": "virtual-scroller",
-        "subfolder": "components"
       }
     ]
   },
@@ -225,8 +223,8 @@
   },
   {
     "title": "about",
-    "inactiveIcon": "mdi-vuetify",
-    "activeIcon": "mdi-vuetify",
+    "inactiveIcon": "$vuetify-outline",
+    "activeIcon": "$vuetify",
     "items": [
       "security-disclosure",
       "code-of-conduct"

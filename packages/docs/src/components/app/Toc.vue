@@ -73,15 +73,25 @@
           </v-col>
 
           <v-col class="d-inline-flex">
-            <v-card
-              :color="dark ? undefined : 'grey-lighten-5'"
-              :to="rpath('/introduction/sponsors-and-backers/')"
-              class="py-2 px-3 text-center"
-              variant="flat"
-              width="100%"
-            >
-              <small class="text-disabled">Your logo here</small>
-            </v-card>
+
+            <v-hover>
+              <template #default="{ isHovering, props: hoverProps }">
+                <v-card
+                  :color="isHovering ? 'primary' : dark ? undefined : 'grey-lighten-5'"
+                  :to="rpath('/introduction/sponsors-and-backers/')"
+                  v-bind="hoverProps"
+                  class="py-1 px-3 text-center"
+                  variant="tonal"
+                  width="100%"
+                >
+                  <div :class="isHovering ? undefined : 'text-disabled'">
+                    Support
+
+                    <v-icon icon="$vuetify" />
+                  </div>
+                </v-card>
+              </template>
+            </v-hover>
           </v-col>
 
           <v-col cols="12">
@@ -256,7 +266,7 @@
   const dark = computed(() => theme.current.value.dark)
 </script>
 
-<style lang="sass">
+<style lang="sass" scoped>
   #app-toc
     ul
       list-style-type: none
@@ -274,7 +284,7 @@
       li:not(.router-link-active)
         border-left-color: rgba(255, 255, 255, 0.5)
 
-    .v-navigation-drawer__content
+    :deep(.v-navigation-drawer__content)
       height: auto
       margin-right: 12px
 </style>

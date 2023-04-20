@@ -25,6 +25,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
+import type { PropType } from 'vue'
 import type { DataTableItem, InternalDataTableHeader } from './types'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
@@ -53,14 +54,14 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
+  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+  search: String,
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
     ...makeDataTableGroupProps(),
@@ -78,7 +79,6 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -161,7 +161,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ paginatedItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}

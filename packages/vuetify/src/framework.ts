@@ -1,4 +1,5 @@
 // Composables
+import { createDate, DateAdapterSymbol } from './composables/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
@@ -11,6 +12,7 @@ import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/composables/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
@@ -23,6 +25,7 @@ export interface VuetifyOptions {
   aliases?: Record<string, any>
   blueprint?: Blueprint
   components?: Record<string, any>
+  date?: DateOptions
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
@@ -48,6 +51,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
+  const date = createDate(options.date)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -73,6 +77,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     app.provide(ThemeSymbol, theme)
     app.provide(IconSymbol, icons)
     app.provide(LocaleSymbol, locale)
+    app.provide(DateAdapterSymbol, date)
 
     if (IN_BROWSER && options.ssr) {
       if (app.$nuxt) {
@@ -102,6 +107,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
               theme: inject.call(this, ThemeSymbol),
               icons: inject.call(this, IconSymbol),
               locale: inject.call(this, LocaleSymbol),
+              date: inject.call(this, DateAdapterSymbol),
             })
           },
         },
@@ -116,6 +122,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     theme,
     icons,
     locale,
+    date,
   }
 }
 

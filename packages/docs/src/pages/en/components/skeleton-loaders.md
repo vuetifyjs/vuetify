@@ -80,6 +80,7 @@ The following built-in types are available:
 | **date-picker** | list-item, card-heading, divider, date-picker-options, date-picker-days, actions |
 | **date-picker-options** | text, avatar@2 |
 | **date-picker-days** | avatar@28 |
+| **divider** | divider |
 | **heading** | heading |
 | **image** | image |
 | **list-item** | text |

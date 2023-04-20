@@ -119,7 +119,6 @@
   "components/bottom-sheets": "/components/navigation-drawers",
   "components/simple-tables": "/components/tables",
   "components/data-tables": "/labs/introduction",
-  "components/virtual-scroller": "/labs/introduction",
   "components/data-iterators": "/introduction/roadmap",
   "components/date-pickers": "/introduction/roadmap",
   "components/date-pickers-month": "/introduction/roadmap",

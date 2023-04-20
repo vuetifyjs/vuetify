@@ -2,6 +2,7 @@
 
 // INPUT
 $field-border-radius: settings.$border-radius-root !default;
+$field-rounded-border-radius: map-get(settings.$rounded, 'pill') !default;
 $field-color: rgba(var(--v-theme-on-surface), var(--v-medium-emphasis-opacity)) !default;
 $field-disabled-color: rgba(var(--v-theme-on-surface), var(--v-disabled-opacity)) !default;
 $field-error-color: rgb(var(--v-theme-error)) !default;
@@ -18,6 +19,8 @@ $field-clearable-transition: .15s opacity, .15s width settings.$standard-easing 
 $field-control-solo-background: rgb(var(--v-theme-surface)) !default;
 $field-control-solo-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
 $field-control-solo-elevation: 2 !default;
+$field-control-solo-inverted-color: rgba(var(--v-theme-on-surface), var(--v-high-emphasis-opacity)) !default;
+$field-control-solo-inverted-focused-color: rgb(var(--v-theme-on-surface-variant)) !default;
 $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-opacity)) !default;
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;
@@ -43,3 +46,4 @@ $field-focused-border-width: 2px !default;
 
 // OVERLAY
 $field-overlay-filled-opacity: 0.04 !default;
+$field-overlay-focused-background-color: rgb(var(--v-theme-surface-variant)) !default;
