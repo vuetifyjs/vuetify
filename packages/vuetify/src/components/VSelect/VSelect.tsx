@@ -125,7 +125,7 @@ export const VSelect = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(v === null ? [null] : wrapInArray(v)),
+      v => transformIn(v == null ? [null] : wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
@@ -133,8 +133,9 @@ export const VSelect = genericComponent<new <
     )
     const form = useForm()
     const selections = computed(() => {
-      return model.value
-        .map(v => items.value.find(item => props.valueComparator(item.value, v.value)) || v)
+      return model.value.map(v => {
+        return items.value.find(item => props.valueComparator(item.value, v.value)) || v
+      })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
 
