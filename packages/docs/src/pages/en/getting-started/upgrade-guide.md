@@ -22,7 +22,7 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 <alert type="warning">
 
   This page is incomplete. Please check back later for more information, or submit a PR if you notice something missing. If you have additional questions, reach out to us in [Discord](https://community.vuetifyjs.com/)
-  
+
 </alert>
 
 <alert type="warning">
@@ -31,13 +31,12 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
 - v-calendar
 - v-date-picker
-- v-data-table
-- v-infinite-scroll
-- v-skeleton-loader
+- [v-data-table](/components/data-tables/basics/)
+- [v-skeleton-loader](/components/skeleton-loaders/)
 - v-stepper
 - v-time-picker
 - v-treeview
-- v-virtual-scroll
+- [v-virtual-scroll](/components/virtual-scroller/)
 
 </alert>
 
