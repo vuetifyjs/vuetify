@@ -29,15 +29,15 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 
   Not all Vuetify 2 components are currently available in Vuetify 3; These components will be released as their development is completed via [Vuetify Labs](https://vuetifyjs.com/en/labs/introduction/).
 
-  - v-calendar
-  - v-date-picker
-  - v-data-table
-  - v-infinite-scroll
-  - v-skeleton-loader
-  - v-stepper
-  - v-time-picker
-  - v-treeview
-  - v-virtual-scroll
+- v-calendar
+- v-date-picker
+- v-data-table
+- v-infinite-scroll
+- v-skeleton-loader
+- v-stepper
+- v-time-picker
+- v-treeview
+- v-virtual-scroll
 
 </alert>
 
