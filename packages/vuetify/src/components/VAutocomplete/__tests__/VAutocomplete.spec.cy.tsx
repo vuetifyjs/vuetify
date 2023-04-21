@@ -204,7 +204,7 @@ describe('VAutocomplete', () => {
 
       cy.get('.v-autocomplete__selection').eq(0).invoke('text').should('equal', 'Default Language')
     })
-    it('should have input as NOT dirty when the v-model is null, but null is not present in the items', () => {
+    it('should mark input as "not dirty" when the v-model is null, but null is not present in the items', () => {
       const items = [
         { code: 'en-US', name: 'English' },
         { code: 'de-DE', name: 'German' },
