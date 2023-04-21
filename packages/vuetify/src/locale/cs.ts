@@ -73,4 +73,5 @@ export default {
       item: 'Hodnocení {0} z {1}',
     },
   },
+  loading: 'Loading...',
 }

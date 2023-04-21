@@ -2,21 +2,18 @@
 import './VColorPicker.sass'
 
 // Components
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
-import { VSheet } from '@/components/VSheet'
 
 // Composables
-import { makeElevationProps } from '@/composables/elevation'
-import { makeRoundedProps } from '@/composables/rounded'
-import { makeThemeProps } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { defineComponent, HSVtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, omit, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
 import { onMounted, ref } from 'vue'
 
@@ -59,14 +56,15 @@ export const VColorPicker = defineComponent({
     modelValue: {
       type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
     },
-    width: {
-      type: [Number, String],
-      default: 300,
-    },
 
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeThemeProps(),
+    ...omit(makeVSheetProps({ width: 300 }), [
+      'height',
+      'location',
+      'minHeight',
+      'maxHeight',
+      'minWidth',
+      'maxWidth',
+    ]),
   },
 
   emits: {
@@ -117,69 +115,74 @@ export const VColorPicker = defineComponent({
       },
     })
 
-    useRender(() => (
-      <VSheet
-        rounded={ props.rounded }
-        elevation={ props.elevation }
-        theme={ props.theme }
-        class={[
-          'v-color-picker',
-        ]}
-        style={{
-          '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
-        }}
-        maxWidth={ props.width }
-      >
-        { !props.hideCanvas && (
-          <VColorPickerCanvas
-            key="canvas"
-            color={ currentColor.value }
-            onUpdate:color={ updateColor }
-            disabled={ props.disabled }
-            dotSize={ props.dotSize }
-            width={ props.width }
-            height={ props.canvasHeight }
-          />
-        )}
+    useRender(() => {
+      const [sheetProps] = VSheet.filterProps(props)
 
-        { (!props.hideSliders || !props.hideInputs) && (
-          <div key="controls" class="v-color-picker__controls">
-            { !props.hideSliders && (
-              <VColorPickerPreview
-                key="preview"
-                color={ currentColor.value }
-                onUpdate:color={ updateColor }
-                hideAlpha={ !mode.value.endsWith('a') }
-                disabled={ props.disabled }
-              />
-            )}
+      return (
+        <VSheet
+          rounded={ props.rounded }
+          elevation={ props.elevation }
+          theme={ props.theme }
+          class={[
+            'v-color-picker',
+          ]}
+          style={{
+            '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
+          }}
+          { ...sheetProps }
+          maxWidth={ props.width }
+        >
+          { !props.hideCanvas && (
+            <VColorPickerCanvas
+              key="canvas"
+              color={ currentColor.value }
+              onUpdate:color={ updateColor }
+              disabled={ props.disabled }
+              dotSize={ props.dotSize }
+              width={ props.width }
+              height={ props.canvasHeight }
+            />
+          )}
 
-            { !props.hideInputs && (
-              <VColorPickerEdit
-                key="edit"
-                modes={ props.modes }
-                mode={ mode.value }
-                onUpdate:mode={ m => mode.value = m }
-                color={ currentColor.value }
-                onUpdate:color={ updateColor }
-                disabled={ props.disabled }
-              />
-            )}
-          </div>
-        )}
+          { (!props.hideSliders || !props.hideInputs) && (
+            <div key="controls" class="v-color-picker__controls">
+              { !props.hideSliders && (
+                <VColorPickerPreview
+                  key="preview"
+                  color={ currentColor.value }
+                  onUpdate:color={ updateColor }
+                  hideAlpha={ !mode.value.endsWith('a') }
+                  disabled={ props.disabled }
+                />
+              )}
 
-        { props.showSwatches && (
-          <VColorPickerSwatches
-            key="swatches"
-            color={ currentColor.value }
-            onUpdate:color={ updateColor }
-            maxHeight={ props.swatchesMaxHeight }
-            swatches={ props.swatches }
-            disabled={ props.disabled }
-          />
-        )}
-      </VSheet>
-    ))
+              { !props.hideInputs && (
+                <VColorPickerEdit
+                  key="edit"
+                  modes={ props.modes }
+                  mode={ mode.value }
+                  onUpdate:mode={ m => mode.value = m }
+                  color={ currentColor.value }
+                  onUpdate:color={ updateColor }
+                  disabled={ props.disabled }
+                />
+              )}
+            </div>
+          )}
+
+          { props.showSwatches && (
+            <VColorPickerSwatches
+              key="swatches"
+              color={ currentColor.value }
+              onUpdate:color={ updateColor }
+              maxHeight={ props.swatchesMaxHeight }
+              swatches={ props.swatches }
+              disabled={ props.disabled }
+            />
+          )}
+        </VSheet>
+      )
+    })
 
     return {}
   },

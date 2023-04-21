@@ -28,8 +28,7 @@ export function rpath (path = '') {
     '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
-    hash ? `#${hash}` : null,
-  ].filter(v => v != null).join('/')))
+  ].filter(v => v != null).join('/'))) + (hash ? `#${hash}` : '')
 }
 
 export function leadingSlash (str: string) {

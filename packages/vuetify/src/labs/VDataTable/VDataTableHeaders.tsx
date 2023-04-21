@@ -160,14 +160,13 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         { props.loading && (
           <tr class="v-data-table__progress">
             <th colspan={ columns.value.length }>
-
-            <LoaderSlot
-              name="v-data-table-headers"
-              active
-              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-              indeterminate
-              v-slots={{ default: slots.loader }}
-            />
+              <LoaderSlot
+                name="v-data-table-headers"
+                active
+                color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                indeterminate
+                v-slots={{ default: slots.loader }}
+              />
             </th>
           </tr>
         )}
