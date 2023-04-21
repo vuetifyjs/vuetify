@@ -94,8 +94,8 @@ export function useItems (props: ItemProps) {
 
   function transformIn (value: any[]): InternalItem[] {
     return value
-      // when model value is null, returns InternalItem based on null only when null is
-      // one of items
+      // When the model value is null, returns an InternalItem based on null
+      // only if null is one of the items
       .filter(v => v != null || (v == null && items.value.some(item => item.value == null)))
       .map(v => {
         const existingItem = items.value.find(item => deepEqual(v, item.value))
