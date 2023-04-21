@@ -182,7 +182,7 @@ describe('VAutocomplete', () => {
     cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
   })
 
-  // issue #16442
+  // https://github.com/vuetifyjs/vuetify/issues/16442
   it('should allow null as legit itemValue', () => {
     const items = [
       { name: 'Default Language', code: null },
@@ -194,8 +194,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         itemTitle="name"
         itemValue="code"
       />
