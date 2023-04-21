@@ -576,3 +576,28 @@ export function focusableChildren (el: Element) {
     .join(', ')
   return [...el.querySelectorAll(targets)] as HTMLElement[]
 }
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last') {
+  const focusable = focusableChildren(el)
+  const idx = focusable.indexOf(document.activeElement as HTMLElement)
+
+  if (!location) {
+    if (!el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else {
+    let _el
+    let idxx = idx
+    const inc = location === 'next' ? 1 : -1
+    do {
+      idxx += inc
+      _el = focusable[idxx]
+    } while ((!_el || _el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
+  }
+}

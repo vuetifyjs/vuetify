@@ -21,13 +21,12 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { focusableChildren, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
+import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
-import { filter } from 'cypress/types/minimatch'
 
 export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
@@ -193,29 +192,8 @@ export const VList = genericComponent<new <T>() => {
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (!contentRef.value) return
-
-      const focusable = focusableChildren(contentRef.value)
-      const idx = focusable.indexOf(document.activeElement as HTMLElement)
-
-      if (!location) {
-        if (!contentRef.value.contains(document.activeElement)) {
-          focusable[0]?.focus()
-        }
-      } else if (location === 'first') {
-        focusable[0]?.focus()
-      } else if (location === 'last') {
-        focusable.at(-1)?.focus()
-      } else {
-        let el
-        let idxx = idx
-        const inc = location === 'next' ? 1 : -1
-        do {
-          idxx += inc
-          el = focusable[idxx]
-        } while ((!el || el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
-        if (el) el.focus()
-        else focus(location === 'next' ? 'first' : 'last')
+      if (contentRef.value) {
+        return focusChild(contentRef.value, location)
       }
     }
 
