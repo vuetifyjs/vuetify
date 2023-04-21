@@ -569,3 +569,10 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, .
     handler(...args)
   }
 }
+
+export function focusableChildren (el: Element) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}:not([tabindex="-1"]):not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}

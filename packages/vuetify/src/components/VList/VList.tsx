@@ -21,12 +21,13 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
+import { focusableChildren, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
+import { filter } from 'cypress/types/minimatch'
 
 export interface InternalListItem extends InternalItem {
   type?: 'item' | 'subheader' | 'divider'
@@ -194,8 +195,7 @@ export const VList = genericComponent<new <T>() => {
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.value) return
 
-      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
-      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+      const focusable = focusableChildren(contentRef.value)
       const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
       if (!location) {
