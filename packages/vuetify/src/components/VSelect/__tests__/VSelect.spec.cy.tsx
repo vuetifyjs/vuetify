@@ -241,25 +241,45 @@ describe('VSelect', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16442
-  it('should allow null as legit itemValue', () => {
-    const items = [
-      { name: 'Default Language', code: null },
-      { code: 'en-US', name: 'English' },
-      { code: 'de-DE', name: 'German' },
-    ]
+  describe('null value', () => {
+    it('should allow null as legit itemValue', () => {
+      const items = [
+        { name: 'Default Language', code: null },
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
 
-    const selectedItems = null
+      const selectedItems = null
 
-    cy.mount(() => (
-      <VSelect
-        items={ items }
-        modelValue={ selectedItems }
-        itemTitle="name"
-        itemValue="code"
-      />
-    ))
+      cy.mount(() => (
+        <VSelect
+          items={ items }
+          modelValue={ selectedItems }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
 
-    cy.get('.v-select__selection').eq(0).invoke('text').should('equal', 'Default Language')
+      cy.get('.v-select__selection').eq(0).invoke('text').should('equal', 'Default Language')
+    })
+    it('should have input as NOT dirty when the v-model is null, but null is not present in the items', () => {
+      const items = [
+        { code: 'en-US', name: 'English' },
+        { code: 'de-DE', name: 'German' },
+      ]
+
+      cy.mount(() => (
+        <VSelect
+          label="Language"
+          items={ items }
+          modelValue={ null }
+          itemTitle="name"
+          itemValue="code"
+        />
+      ))
+
+      cy.get('.v-field').should('not.have.class', 'v-field--dirty')
+    })
   })
 
   it('should conditionally show placeholder', () => {
