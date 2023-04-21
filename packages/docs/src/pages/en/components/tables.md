@@ -14,7 +14,11 @@ related:
 
 The simpler of the table components is `v-table`, a basic wrapper component for the HTML `<table>` element. In addition, regular table elements such as `<thead>`, `<tbody>`, `<tr>`, and `<td>` work by default.
 
-The more advanced table component is [`v-data-table`](/api/v-data-table/), which allows sorting, searching, pagination, grouping, and row selection.
+<alert type="info">
+
+More advanced tables such as [v-data-table](/components/data-tables/basics/) are available for preview in [Vuetify Labs](/labs/introduction/).
+
+</alert>
 
 <!-- ![Table Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-table/v-table-entry.png) -->
 
