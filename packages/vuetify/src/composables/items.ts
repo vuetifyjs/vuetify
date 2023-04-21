@@ -93,12 +93,16 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   function transformIn (value: any[]): InternalItem[] {
-    return value.map(v => {
-      const existingItem = items.value.find(item => deepEqual(v, item.value))
-      // Nullish existingItem means value is a custom input value from combobox
-      // In this case, use transformItem to create an InternalItem based on value
-      return existingItem ?? transformItem(props, v)
-    })
+    return value
+      // when model value is null, returns InternalItem based on null only when null is
+      // one of items
+      .filter(v => v != null || (v == null && items.value.some(item => item.value == null)))
+      .map(v => {
+        const existingItem = items.value.find(item => deepEqual(v, item.value))
+        // Nullish existingItem means value is a custom input value from combobox
+        // In this case, use transformItem to create an InternalItem based on value
+        return existingItem ?? transformItem(props, v)
+      })
   }
 
   function transformOut (value: InternalItem[]) {
