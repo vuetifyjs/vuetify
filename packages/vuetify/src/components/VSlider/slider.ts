@@ -5,7 +5,7 @@ import { makeRoundedProps } from '@/composables/rounded'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { clamp, createRange, propsFactory } from '@/util'
+import { clamp, createRange, getDecimals, propsFactory } from '@/util'
 import { computed, provide, ref, toRef } from 'vue'
 
 // Types
@@ -140,12 +140,7 @@ export const useSteps = (props: SliderProps) => {
   const min = computed(() => parseFloat(props.min))
   const max = computed(() => parseFloat(props.max))
   const step = computed(() => +props.step > 0 ? parseFloat(props.step) : 0)
-  const decimals = computed(() => {
-    const trimmedStep = step.value.toString().trim()
-    return trimmedStep.includes('.')
-      ? (trimmedStep.length - trimmedStep.indexOf('.') - 1)
-      : 0
-  })
+  const decimals = computed(() => Math.max(getDecimals(step.value), getDecimals(min.value)))
 
   function roundValue (value: number) {
     if (step.value <= 0) return value
