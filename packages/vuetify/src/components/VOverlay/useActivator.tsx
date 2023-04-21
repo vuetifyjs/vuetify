@@ -3,7 +3,15 @@ import { makeDelayProps, useDelay } from '@/composables/delay'
 import { VMenuSymbol } from '@/components/VMenu/shared'
 
 // Utilities
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
+import {
+  eventName,
+  getCurrentInstance,
+  IN_BROWSER,
+  isComponentInstance,
+  isOn,
+  propsFactory,
+  SUPPORTS_FOCUS_VISIBLE,
+} from '@/util'
 import {
   computed,
   effectScope,
@@ -246,6 +254,7 @@ function _useActivator (
     unbindActivatorProps()
   })
 
+  const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
@@ -254,10 +263,29 @@ function _useActivator (
     })
 
     Object.keys(_props).forEach(k => {
-      if (_props[k] == null) {
-        el.removeAttribute(k)
+      if (isOn(k)) {
+        const name = eventName(k)
+        if (_props[k] == null) {
+          const handler = handlers.get(el)
+          handler?.forEach(v => {
+            const [n, fn] = v
+            if (n === name) {
+              el.removeEventListener(name, fn)
+              handler.delete(v)
+            }
+          })
+        } else {
+          el.addEventListener(name, _props[k])
+          const handler = handlers.get(el) || new Set()
+          handler.add([name, _props[k]])
+          if (!handlers.has(el)) handlers.set(el, handler)
+        }
       } else {
-        el.setAttribute(k, _props[k])
+        if (_props[k] == null) {
+          el.removeAttribute(k)
+        } else {
+          el.setAttribute(k, _props[k])
+        }
       }
     })
   }
@@ -270,7 +298,19 @@ function _useActivator (
     })
 
     Object.keys(_props).forEach(k => {
-      el.removeAttribute(k)
+      if (isOn(k)) {
+        const name = eventName(k)
+        const handler = handlers.get(el)
+        handler?.forEach(v => {
+          const [n, fn] = v
+          if (n === name) {
+            el.removeEventListener(name, fn)
+            handler.delete(v)
+          }
+        })
+      } else {
+        el.removeAttribute(k)
+      }
     })
   }
 

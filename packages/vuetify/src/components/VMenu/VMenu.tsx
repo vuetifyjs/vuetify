@@ -13,7 +13,7 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
+import { focusChild, genericComponent, getUid, omit, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
@@ -79,11 +79,26 @@ export const VMenu = genericComponent<OverlaySlots>()({
       parent?.closeParents()
     }
 
+    function onKeydown (e: KeyboardEvent) {
+      const el = overlay.value?.contentEl
+      if (el && isActive.value) {
+        if (e.key === 'ArrowDown') {
+          focusChild(el, 'next')
+        } else if (e.key === 'ArrowUp') {
+          focusChild(el, 'prev')
+        }
+      } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
+        isActive.value = true
+        setTimeout(() => setTimeout(() => onKeydown(e)))
+      }
+    }
+
     const activatorProps = computed(() =>
       mergeProps({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
         'aria-owns': id.value,
+        onKeydown,
       }, props.activatorProps)
     )
 

@@ -192,6 +192,9 @@ export const VOverlay = genericComponent<OverlaySlots>()({
       if (e.key === 'Escape' && globalTop.value) {
         if (!props.persistent) {
           isActive.value = false
+          if (contentEl.value?.contains(document.activeElement)) {
+            activatorEl.value?.focus()
+          }
         } else animateClick()
       }
     }
