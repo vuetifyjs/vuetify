@@ -21,7 +21,7 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 | Feature | Description |
 | - | - |
-| [useTheme](/api/composables/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
+| [useTheme](/api/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
 | [v-theme-provider](/api/v-theme-provider/) | The theme provider component modifies the theme of all its children |
 
 <api-inline hide-links />
