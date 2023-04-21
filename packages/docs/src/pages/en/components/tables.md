@@ -12,7 +12,7 @@ related:
 
 # Tables
 
-The simpler of the table components is `v-table`, a simple wrapper component around the HTML `<table>` element. Inside the component you can use all the regular table elements such as `<thead>`, `<tbody>`, `<tr>`, etc. 
+The simpler of the table components is `v-table`, a basic wrapper component for the HTML `<table>` element. In addition, regular table elements such as `<thead>`, `<tbody>`, `<tr>`, and `<td>` work by default.
 
 The more advanced table component is [`v-data-table`](/api/v-data-table/), which allows sorting, searching, pagination, grouping, and row selection.
 
