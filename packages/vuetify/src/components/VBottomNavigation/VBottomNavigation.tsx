@@ -124,7 +124,7 @@ export const VBottomNavigation = genericComponent()({
             <div class="v-bottom-navigation__content">
               { slots.default() }
             </div>
-          ) }
+          )}
         </props.tag>
       )
     })

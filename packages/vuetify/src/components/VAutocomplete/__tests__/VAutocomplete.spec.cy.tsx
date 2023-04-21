@@ -1,8 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 import { VAutocomplete } from '../VAutocomplete'
+import { keyValues } from '@/util'
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
@@ -12,19 +13,17 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         chips
         closableChips
         multiple
       />
     ))
-      .get('.v-chip__close')
-      .eq(0)
-      .click()
-      .get('input')
-      .get('.v-chip')
-      .should('have.length', 2)
+
+    cy.get('.v-chip__close').eq(0).click()
+    cy.get('input').should('exist')
+    cy.get('.v-chip').should('have.length', 2)
   })
 
   it('should have selected chip with array of strings', () => {
@@ -34,8 +33,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        v-model={selectedItems.value}
-        items={items.value}
+        v-model={ selectedItems.value }
+        items={ items.value }
         chips
         multiple
         closableChips
@@ -45,17 +44,15 @@ describe('VAutocomplete', () => {
     cy.get('.mdi-menu-down').click()
 
     cy.get('.v-list-item--active').should('have.length', 2)
-    cy.get('.v-list-item--active input').eq(0).click().then(() => {
+    cy.get('.v-list-item--active input').eq(0).click()
+    cy.then(() => {
       expect(selectedItems.value).to.deep.equal(['Colorado'])
     })
 
     cy.get('.v-list-item--active').should('have.length', 1)
 
-    cy
-      .get('.v-chip__close')
-      .eq(0)
-      .click()
-      .get('.v-chip')
+    cy.get('.v-chip__close').eq(0).click()
+    cy.get('.v-chip')
       .should('have.length', 0)
       .should(() => expect(selectedItems.value).to.be.empty)
   })
@@ -81,8 +78,8 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        v-model={selectedItems.value}
-        items={items.value}
+        v-model={ selectedItems.value }
+        items={ items.value }
         returnObject
         chips
         multiple
@@ -92,7 +89,8 @@ describe('VAutocomplete', () => {
     cy.get('.mdi-menu-down').click()
 
     cy.get('.v-list-item--active').should('have.length', 1)
-    cy.get('.v-list-item--active input').click().then(() => {
+    cy.get('.v-list-item--active input').click()
+    cy.then(() => {
       expect(selectedItems.value).to.be.empty
     })
     cy.get('.v-list-item--active').should('have.length', 0)
@@ -105,23 +103,21 @@ describe('VAutocomplete', () => {
 
     cy.mount(() => (
       <VAutocomplete
-        items={items}
-        modelValue={selectedItems}
+        items={ items }
+        modelValue={ selectedItems }
         readonly
       />
     ))
 
-    cy.get('.v-autocomplete')
-      .click()
-      .get('.v-list-item').should('have.length', 0)
-      .get('.v-select--active-menu').should('have.length', 0)
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-list-item').should('have.length', 0)
+    cy.get('.v-select--active-menu').should('have.length', 0)
 
-    cy
-      .get('.v-autocomplete input')
+    cy.get('.v-autocomplete input').as('input')
       .focus()
-      .type('{downarrow}', { force: true })
-      .get('.v-list-item').should('have.length', 0)
-      .get('.v-select--active-menu').should('have.length', 0)
+    cy.get('@input').type('{downarrow}', { force: true })
+    cy.get('.v-list-item').should('have.length', 0)
+    cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
   it('should not be clickable when in readonly form', () => {
@@ -132,24 +128,58 @@ describe('VAutocomplete', () => {
     cy.mount(() => (
       <VForm readonly>
         <VAutocomplete
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           readonly
         />
       </VForm>
     ))
 
-    cy.get('.v-autocomplete')
-      .click()
-      .get('.v-list-item').should('have.length', 0)
-      .get('.v-select--active-menu').should('have.length', 0)
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-list-item').should('have.length', 0)
+    cy.get('.v-select--active-menu').should('have.length', 0)
 
-    cy
-      .get('.v-autocomplete input')
+    cy.get('.v-autocomplete input').as('input')
       .focus()
-      .type('{downarrow}', { force: true })
-      .get('.v-list-item').should('have.length', 0)
-      .get('.v-select--active-menu').should('have.length', 0)
+    cy.get('@input').type('{downarrow}', { force: true })
+    cy.get('.v-list-item').should('have.length', 0)
+    cy.get('.v-select--active-menu').should('have.length', 0)
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16210
+  it('should return item object as the argument of item-title function', () => {
+    const items = [
+      { id: 1, name: 'a' },
+      { id: 2, name: 'b' },
+    ]
+
+    const selectedItems = ref(null)
+
+    function itemTitleFunc (item: any) {
+      return 'Item: ' + JSON.stringify(item)
+    }
+
+    const itemTitleFuncSpy = cy.spy(itemTitleFunc).as('itemTitleFunc')
+
+    cy.mount(() => (
+      <VAutocomplete
+        items={ items }
+        modelValue={ selectedItems }
+        item-title={ itemTitleFuncSpy }
+        item-value="id"
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItems.value).to.deep.equal(1)
+    })
+
+    cy.get('@itemTitleFunc')
+      .should('have.been.calledWith', { id: 1, name: 'a' })
+
+    cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
   })
 
   // issue #16442
@@ -182,8 +212,8 @@ describe('VAutocomplete', () => {
 
       cy.mount(() => (
         <VAutocomplete
-          items={items}
-          modelValue={selectedItems}
+          items={ items }
+          modelValue={ selectedItems }
           hideSelected
           multiple
         />
@@ -195,5 +225,74 @@ describe('VAutocomplete', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should not replicate html select hotkeys in v-autocomplete', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+      .get('.v-autocomplete input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 2)
+      .then(_ => {
+        expect(selectedItems.value).equal(undefined)
+      })
+  })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VAutocomplete placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-autocomplete input')
+      .should('not.be.visible')
+      .get('.v-autocomplete input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VAutocomplete
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
   })
 })

@@ -24,7 +24,12 @@ A basic example
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-treeview](/api/v-treeview/) | Primary Component |
+| [v-treeview-node](/api/v-treeview-node/) | Sub-component used to display a single treeview node |
+
+<api-inline hide-links />
 
 ## Examples
 

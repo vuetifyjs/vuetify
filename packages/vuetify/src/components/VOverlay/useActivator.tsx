@@ -92,6 +92,8 @@ export function useActivator (
       isActive.value = !isActive.value
     },
     mouseenter: (e: MouseEvent) => {
+      if (e.sourceCapabilities?.firesTouchEvents) return
+
       isHovered = true
       activatorEl.value = (e.currentTarget || e.target) as HTMLElement
       runOpenDelay()

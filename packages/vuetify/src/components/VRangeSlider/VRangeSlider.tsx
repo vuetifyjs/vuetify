@@ -2,7 +2,7 @@
 import '../VSlider/VSlider.sass'
 
 // Components
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { getOffset, makeSliderProps, useSlider } from '@/components/VSlider/slider'
 import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
@@ -109,7 +109,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value[1]))
 
     useRender(() => {
-      const [inputProps, _] = filterInputProps(props)
+      const [inputProps, _] = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -198,11 +198,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                       startThumbRef.value?.$el.blur()
                       stopThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ min.value }
                   max={ model.value[1] }
                   position={ trackStart.value }
@@ -232,11 +232,11 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                       stopThumbRef.value?.$el.blur()
                       startThumbRef.value?.$el.focus()
                     }
-                  } }
+                  }}
                   onBlur={ () => {
                     blur()
                     activeThumbRef.value = undefined
-                  } }
+                  }}
                   min={ model.value[0] }
                   max={ max.value }
                   position={ trackStop.value }
