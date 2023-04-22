@@ -1,9 +1,5 @@
 {
-  "props": {
-    "trueValue": "Sets value for truthy state",
-    "falseValue": "Sets value for falsy state",
-    "value": "The input’s value"
-  },
+  "props": {},
   "slots": {
     "input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))"
   },
