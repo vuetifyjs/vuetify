@@ -4,13 +4,12 @@ import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
-import { createExpanded, makeDataTableExpandProps } from './composables/expand'
-import { createSort, makeDataTableSortProps, useSortedItems } from './composables/sort'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
-import { createSelection, makeDataTableSelectProps } from './composables/select'
+import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
+import { makeDataTableSelectProps, provideSelection } from './composables/select'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { useOptions } from './composables/options'
 import { makeFilterProps, useFilter } from '@/composables/filter'
@@ -35,8 +34,6 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
   name: 'VDataTableVirtual',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeVDataTableProps(),
     ...makeDataTableGroupProps(),
@@ -55,11 +52,13 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy } = createGroupBy(props)
+    const { sortBy, multiSort, mustSort } = createSort(props)
+
     const { columns } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
@@ -71,16 +70,16 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const search = toRef(props, 'search')
     const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
 
-    const { sortBy } = createSort(props)
-    const { sortByWithGroups, opened, extractRows } = createGroupBy(props, groupBy, sortBy)
+    provideSort({ sortBy, multiSort, mustSort })
+    const { sortByWithGroups, opened, extractRows } = provideGroupBy({ groupBy, sortBy })
 
     const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
     const allRows = computed(() => extractRows(flatItems.value))
 
-    createSelection(props, allRows)
-    createExpanded(props)
+    provideSelection(props, allRows)
+    provideExpanded(props)
 
     const {
       containerRef,
@@ -117,8 +116,10 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
         style={{
           '--v-table-row-height': convertToUnit(itemHeight.value),
         }}
-        height={ props.height }
         fixedHeader={ props.fixedHeader }
+        fixedFooter={ props.fixedFooter }
+        height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
@@ -146,7 +147,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
                   <VDataTableRows
                     items={ visibleItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
 

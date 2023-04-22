@@ -23,7 +23,7 @@ export interface FormProvide {
   validateOn: Ref<FormProps['validateOn']>
 }
 
-interface FormField {
+export interface FormField {
   id: number | string
   validate: () => Promise<string[]>
   reset: () => void
@@ -32,12 +32,12 @@ interface FormField {
   errorMessages: string[]
 }
 
-interface FieldValidationResult {
+export interface FieldValidationResult {
   id: number | string
   errorMessages: string[]
 }
 
-interface FormValidationResult {
+export interface FormValidationResult {
   valid: boolean
   errors: FieldValidationResult[]
 }

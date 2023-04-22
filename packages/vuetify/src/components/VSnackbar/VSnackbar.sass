@@ -4,12 +4,9 @@
 
 .v-snackbar
   justify-content: center
-  padding-inline-end: var(--v-scrollbar-offset)
-
-  &:not(.v-snackbar--absolute)
-    height: 100vh
-    position: fixed
-    z-index: $snackbar-z-index
+  z-index: $snackbar-z-index
+  margin: $snackbar-wrapper-margin
+  margin-inline-end: calc(#{$snackbar-wrapper-margin} + var(--v-scrollbar-offset))
 
   &:not(.v-snackbar--centered):not(.v-snackbar--top)
     align-items: flex-end
@@ -17,7 +14,6 @@
   &__wrapper
     align-items: center
     display: flex
-    margin: $snackbar-wrapper-margin
     max-width: $snackbar-wrapper-max-width
     min-height: $snackbar-wrapper-min-height
     min-width: $snackbar-wrapper-min-width
@@ -49,7 +45,6 @@
       min-width: auto
 
   &--absolute
-    height: 100%
     position: absolute
     z-index: $snackbar-absolute-z-index
 

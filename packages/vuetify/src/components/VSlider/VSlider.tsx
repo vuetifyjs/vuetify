@@ -2,7 +2,7 @@
 import './VSlider.sass'
 
 // Components
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
@@ -82,7 +82,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
     const trackStop = computed(() => position(model.value))
 
     useRender(() => {
-      const [inputProps, _] = filterInputProps(props)
+      const [inputProps, _] = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -106,7 +106,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 { slots.label?.(slotProps) ?? props.label
                   ? (
                     <VLabel
-                      id={ slotProps.id }
+                      id={ slotProps.id.value }
                       class="v-slider__label"
                       text={ props.label }
                     />

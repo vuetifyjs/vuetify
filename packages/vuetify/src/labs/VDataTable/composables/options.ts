@@ -17,7 +17,7 @@ export function useOptions ({
   itemsPerPage: Ref<number>
   sortBy: Ref<readonly SortItem[]>
   groupBy: Ref<readonly SortItem[]>
-  search?: Ref<string | undefined>
+  search: Ref<string | undefined>
 }) {
   const vm = getCurrentInstance('VDataTable')
 
@@ -26,20 +26,11 @@ export function useOptions ({
     itemsPerPage: itemsPerPage.value,
     sortBy: sortBy.value,
     groupBy: groupBy.value,
+    search: search.value,
   }))
-
-  // Reset page when sorting changes
-  watch(sortBy, () => {
-    page.value = 1
-  }, { deep: true })
 
   // Reset page when searching
   watch(() => search?.value, () => {
-    page.value = 1
-  })
-
-  // Reset page when items-per-page changes
-  watch(itemsPerPage, () => {
     page.value = 1
   })
 

@@ -29,7 +29,6 @@ import {
   genericComponent,
   getScrollParent,
   IN_BROWSER,
-  pick,
   propsFactory,
   standardEasing,
   useRender,
@@ -48,7 +47,7 @@ import {
 // Types
 import type { BackgroundColorData } from '@/composables/color'
 import type { MakeSlots } from '@/util'
-import type { ExtractPropTypes, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
   [key: string]: unknown
@@ -314,7 +313,3 @@ export const VOverlay = genericComponent<OverlaySlots>()({
 })
 
 export type VOverlay = InstanceType<typeof VOverlay>
-
-export function filterVOverlayProps (props: Partial<ExtractPropTypes<ReturnType<typeof makeVOverlayProps>>>) {
-  return pick(props, Object.keys(VOverlay.props) as any)
-}

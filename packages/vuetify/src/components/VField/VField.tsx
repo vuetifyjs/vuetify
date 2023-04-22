@@ -74,9 +74,9 @@ export const makeVFieldProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
 
-  'onClick:clear': EventProp,
-  'onClick:appendInner': EventProp,
-  'onClick:prependInner': EventProp,
+  'onClick:clear': EventProp<[MouseEvent]>(),
+  'onClick:appendInner': EventProp<[MouseEvent]>(),
+  'onClick:prependInner': EventProp<[MouseEvent]>(),
 
   ...makeThemeProps(),
   ...makeLoaderProps(),
@@ -291,6 +291,10 @@ export const VField = genericComponent<new <T>() => {
               <div
                 class="v-field__clearable"
                 v-show={ props.dirty }
+                onMousedown={ (e: MouseEvent) => {
+                  e.preventDefault()
+                  e.stopPropagation()
+                }}
               >
                 { slots.clear
                   ? slots.clear()

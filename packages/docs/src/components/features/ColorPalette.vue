@@ -1,11 +1,8 @@
 <template>
   <section id="material-colors" class="mb-4">
-    <v-text-field
+    <app-text-field
       v-model="search"
-      append-icon="mdi-palette"
-      prepend-inner-icon="mdi-magnify"
-      label="Search"
-      single-line
+      class="mb-4"
     />
 
     <v-container

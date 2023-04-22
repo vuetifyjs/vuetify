@@ -23,7 +23,11 @@ The **goTo** method takes two parameters **target** and **options**. **target** 
 
 ## API
 
-<api-inline />
+| Directive | Description |
+| - | - |
+| [scroll](/api/v-scroll/) | The scroll directive |
+
+<api-inline hide-links />
 
 ## Use with router
 

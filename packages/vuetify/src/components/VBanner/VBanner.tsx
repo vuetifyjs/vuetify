@@ -78,7 +78,8 @@ export const VBanner = genericComponent<VBannerSlots>()({
 
     useRender(() => {
       const hasText = !!(props.text || slots.text)
-      const hasPrepend = !!(slots.prepend || props.avatar || props.icon)
+      const hasPrependMedia = !!(props.avatar || props.icon)
+      const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
       return (
         <props.tag
@@ -103,30 +104,37 @@ export const VBanner = genericComponent<VBannerSlots>()({
           role="banner"
         >
           { hasPrepend && (
-            <VDefaultsProvider
-              key="prepend"
-              defaults={{
-                VAvatar: {
-                  color: color.value,
-                  density: density.value,
-                  icon: props.icon,
-                  image: props.avatar,
-                },
-              }}
-            >
-              <div class="v-banner__prepend">
-                { slots.prepend
-                  ? slots.prepend()
-                  : (props.avatar || props.icon) && (<VAvatar />)
-                }
-              </div>
-            </VDefaultsProvider>
+            <div key="prepend" class="v-banner__prepend">
+              { !slots.prepend ? (
+                <VAvatar
+                  key="prepend-avatar"
+                  color={ color.value }
+                  density={ density.value }
+                  icon={ props.icon }
+                  image={ props.avatar }
+                />
+              ) : (
+                <VDefaultsProvider
+                  key="prepend-defaults"
+                  disabled={ !hasPrependMedia }
+                  defaults={{
+                    VAvatar: {
+                      color: color.value,
+                      density: density.value,
+                      icon: props.icon,
+                      image: props.avatar,
+                    },
+                  }}
+                  v-slots:default={ slots.prepend }
+                />
+              )}
+            </div>
           )}
 
           <div class="v-banner__content">
             { hasText && (
               <VBannerText key="text">
-                { slots.text ? slots.text() : props.text }
+                { slots.text?.() ?? props.text }
               </VBannerText>
             )}
 
@@ -134,9 +142,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
           </div>
 
           { slots.actions && (
-            <VBannerActions>
-              { slots.actions() }
-            </VBannerActions>
+            <VBannerActions key="actions" v-slots:default={ slots.actions } />
           )}
         </props.tag>
       )
