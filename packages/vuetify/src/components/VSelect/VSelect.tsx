@@ -126,7 +126,7 @@ export const VSelect = genericComponent<new <
       props,
       'modelValue',
       [],
-      v => transformIn(v == null ? [null] : wrapInArray(v)),
+      v => transformIn(v === null ? [null] : wrapInArray(v)),
       v => {
         const transformed = transformOut(v)
         return props.multiple ? transformed : (transformed[0] ?? null)
