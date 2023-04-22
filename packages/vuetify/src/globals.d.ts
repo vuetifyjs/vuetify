@@ -65,6 +65,10 @@ declare global {
     ): void
   }
 
+  interface MouseEvent {
+    sourceCapabilities?: { firesTouchEvents: boolean }
+  }
+
   function parseInt(s: string | number, radix?: number): number
   function parseFloat(string: string | number): number
 

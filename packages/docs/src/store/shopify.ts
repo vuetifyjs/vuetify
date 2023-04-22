@@ -5,34 +5,38 @@ import { useCosmic } from '@/composables/cosmic'
 import { defineStore } from 'pinia'
 
 // Types
+interface Image {
+  src: string
+  altText: string | null
+}
+
+interface VariantOption {
+  name: string
+  value: string
+}
+
+interface Variant {
+  id: string
+  title: string
+  price: string
+  available: boolean
+  selectedOptions: VariantOption[]
+}
+
+interface Product {
+  id: string
+  title: string
+  description: string
+  images: Image[]
+  options: unknown[] // type of options not provided in given JSON data
+  variants: Variant[]
+  vendor: string
+  productType: string
+  onlineStoreUrl: string
+}
+
 export type State = {
   products: Product[]
-}
-
-export interface ProductRecord {
-  metadata: {
-    products: string
-  }
-}
-
-export interface ProductImage {
-  src: string
-}
-
-export interface Variant {
-  price: string
-  compareAtPrice: string
-}
-
-export interface Product {
-  availableForSale: boolean
-  handle: string
-  id: string
-  image: ProductImage
-  images: ProductImage[]
-  productType: string
-  title: string
-  variants: Variant[]
 }
 
 export const useShopifyStore = defineStore('shopify', {
@@ -44,7 +48,7 @@ export const useShopifyStore = defineStore('shopify', {
     async fetch () {
       if (this.products.length) return
 
-      const { bucket } = useCosmic<ProductRecord>(
+      const { bucket } = useCosmic<any>(
         import.meta.env.VITE_COSMIC_BUCKET_SLUG_STORE,
         import.meta.env.VITE_COSMIC_BUCKET_READ_KEY_STORE,
       )

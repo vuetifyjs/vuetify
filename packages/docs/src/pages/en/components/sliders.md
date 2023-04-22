@@ -14,17 +14,21 @@ related:
 
 The `v-slider` component can be used as an alternative visualization instead of a number input.
 
-<entry />
-
 ## Usage
 
 Sliders reflect a range of values along a track, from which users may select a single value. They are ideal for adjusting settings such as volume, brightness, or applying image filters.
 
 <usage name="v-slider" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-slider](/api/v-slider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

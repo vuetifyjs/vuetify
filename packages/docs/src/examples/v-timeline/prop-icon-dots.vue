@@ -43,7 +43,7 @@
         },
         {
           color: 'indigo-lighten-2',
-          icon: 'mdi-buffer',
+          icon: 'mdi-layers-triple',
         },
       ],
     }),

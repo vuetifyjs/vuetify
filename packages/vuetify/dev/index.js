@@ -10,7 +10,7 @@ import { routes } from './router'
 
 library.add(fas)
 
-viteSSR(App, { routes }, ({ app }) => {
+export default viteSSR(App, { routes }, ({ app }) => {
   const head = createHead()
 
   // app.config.performance = true

@@ -28,15 +28,13 @@ By default, breadcrumbs use a text divider. This can be any string.
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-breadcrumbs](/api/v-breadcrumbs/) | Primary Component |
+| [v-breadcrumbs-item](/api/v-breadcrumbs-item/) | Sub-component used for each breadcrumb |
+| [v-breadcrumbs-divider](/api/v-breadcrumbs-divider/) | Sub-component used for dividing breadcrumbs |
 
-<!-- ## Sub-components
-
-### v-breadcrumbs-item
-
-v-breadcrumbs-item description -->
-
-## Caveats
+<api-inline hide-links />
 
 <alert type="info">
 

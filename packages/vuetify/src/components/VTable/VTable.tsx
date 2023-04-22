@@ -61,7 +61,7 @@ export const VTable = genericComponent<VTableSlots>()({
               { slots.default() }
             </table>
           </div>
-        ) : slots.wrapper?.() }
+        ) : slots.wrapper?.()}
 
         { slots.bottom?.() }
       </props.tag>

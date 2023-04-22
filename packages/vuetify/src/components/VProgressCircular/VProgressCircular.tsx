@@ -134,7 +134,7 @@ export const VProgressCircular = genericComponent()({
           <div class="v-progress-circular__content">
             { slots.default({ value: normalizedValue.value }) }
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

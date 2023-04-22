@@ -1,6 +1,3 @@
-import prettier from 'prettier'
-import typescriptParser from 'prettier/parser-typescript'
-
 export type Item = {
   name: string
   source: string
@@ -47,7 +44,11 @@ export function insertLinks (str: string, stripped: Record<string, string>) {
   return str
 }
 
-export function getType (item: { formatted: string }) {
+export async function getType (item: { formatted: string }) {
+  const [{ default: prettier }, { default: typescriptParser }] = await Promise.all([
+    import ('prettier'),
+    import('prettier/parser-typescript'),
+  ])
   const prefix = 'type Type = '
   const [str, stripped] = stripLinks(item.formatted)
   const formatted = prettier.format(prefix + str, {

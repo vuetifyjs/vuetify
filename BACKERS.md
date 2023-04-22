@@ -24,7 +24,7 @@ You can join them in supporting Vuetify by [Sponsoring the Project](https://vuet
 ### Gold
 
 - [DigitalMaas](https://www.digitalmaas.com/)
-- [Quanted Square](https://analytics.quantedsquare.com/)
+- [Quanted Square](https://quantedsquare.com/)
 - [HYPE](https://www.hypeinnovation.com/home)
 - [PapersOwl](https://papersowl.com/write-my-essay-please)
 - [Cosmic](https://www.cosmicjs.com/)
