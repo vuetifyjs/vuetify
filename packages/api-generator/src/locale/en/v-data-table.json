@@ -6,7 +6,7 @@
     "customGroup": "Function used to group items",
     "customSort": "Function used to sort items",
     "caption": "Set the caption (using `<caption>`)",
-    "dense": "Decreases the height of rows",
+    "density": "Adjusts the vertical height of the table rows",
     "disableFiltering": "Disables filtering completely",
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
