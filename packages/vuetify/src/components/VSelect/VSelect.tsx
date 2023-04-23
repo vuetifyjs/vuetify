@@ -72,8 +72,8 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 
 export const VSelect = genericComponent<new <
   T,
-  ReturnObject extends boolean = false,
-  Multiple extends boolean = false,
+  ReturnObject extends boolean,
+  Multiple extends boolean,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
 >() => {
   $props: {
@@ -96,7 +96,7 @@ export const VSelect = genericComponent<new <
   name: 'VSelect',
 
   props: {
-    ...makeSelectProps(),
+    ...makeSelectProps({ multiple: false, returnObject: false }),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),

@@ -61,8 +61,8 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 
 export const VAutocomplete = genericComponent<new <
   T,
-  ReturnObject extends boolean = false,
-  Multiple extends boolean = false,
+  ReturnObject extends boolean,
+  Multiple extends boolean,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
 >() => {
   $props: {
@@ -90,7 +90,7 @@ export const VAutocomplete = genericComponent<new <
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps(),
+    ...makeSelectProps({ multiple: false, returnObject: false }),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),

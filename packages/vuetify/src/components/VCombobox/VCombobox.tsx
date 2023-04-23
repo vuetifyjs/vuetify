@@ -62,8 +62,8 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 
 export const VCombobox = genericComponent<new <
   T,
-  ReturnObject extends boolean = true,
-  Multiple extends boolean = false,
+  ReturnObject extends boolean,
+  Multiple extends boolean,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
 >() => {
   $props: {
@@ -91,7 +91,7 @@ export const VCombobox = genericComponent<new <
     delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ hideNoData: true, returnObject: true }),
+    ...makeSelectProps({ hideNoData: true, multiple: false, returnObject: true }),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),
