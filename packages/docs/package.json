@@ -80,7 +80,6 @@
     "vite-plugin-pwa": "^0.14.7",
     "vite-plugin-vue-layouts": "^0.8.0",
     "vite-plugin-vuetify": "^1.0.2",
-    "vue-tsc": "^1.2.0",
     "workbox-precaching": "^6.5.4",
     "workbox-routing": "^6.5.4",
     "workbox-strategies": "^6.5.4",
