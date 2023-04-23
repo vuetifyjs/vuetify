@@ -40,13 +40,6 @@ export const VDataTableRow = defineComponent({
         ]}
         onClick={ props.onClick }
       >
-        { !columns.value.length && (
-          <VDataTableColumn
-            key="no-data"
-            v-slots={ slots }
-          />
-        )}
-
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
             align={ column.align }
