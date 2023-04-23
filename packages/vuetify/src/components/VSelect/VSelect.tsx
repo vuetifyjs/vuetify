@@ -97,7 +97,7 @@ export const VSelect = genericComponent<new <
   props: {
     ...makeSelectProps(),
     ...makeItemsProps({
-      itemProps: true,
+      itemProps: () => (item: any) => ({ subheader: item.subheader, divider: item.divider }),
     }),
     ...omit(makeVTextFieldProps({
       modelValue: null,
@@ -308,7 +308,7 @@ export const VSelect = genericComponent<new <
                     { hasList && (
                       <VListChildren
                         key="list"
-                        items={ items.value }
+                        items={ displayItems.value }
                         noDataText={ !props.hideNoData ? props.noDataText : undefined }
                       >
                         {{

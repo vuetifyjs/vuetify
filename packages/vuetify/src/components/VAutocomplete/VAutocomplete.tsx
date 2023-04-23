@@ -73,7 +73,9 @@ export const VAutocomplete = genericComponent<new <
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeItemsProps({ itemProps: true }),
+    ...makeItemsProps({
+      itemProps: () => (item: any) => ({ subheader: item.subheader, divider: item.divider }),
+    }),
     ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
       modelValue: null,
