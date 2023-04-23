@@ -47,8 +47,8 @@ export const makeVInputProps = propsFactory({
     validator: (v: any) => ['horizontal', 'vertical'].includes(v),
   },
 
-  'onClick:prepend': EventProp,
-  'onClick:append': EventProp,
+  'onClick:prepend': EventProp<[MouseEvent]>(),
+  'onClick:append': EventProp<[MouseEvent]>(),
 
   ...makeDensityProps(),
   ...makeValidationProps(),

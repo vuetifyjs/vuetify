@@ -74,9 +74,9 @@ export const makeVFieldProps = propsFactory({
     validator: (v: any) => allowedVariants.includes(v),
   },
 
-  'onClick:clear': EventProp,
-  'onClick:appendInner': EventProp,
-  'onClick:prependInner': EventProp,
+  'onClick:clear': EventProp<[MouseEvent]>(),
+  'onClick:appendInner': EventProp<[MouseEvent]>(),
+  'onClick:prependInner': EventProp<[MouseEvent]>(),
 
   ...makeThemeProps(),
   ...makeLoaderProps(),

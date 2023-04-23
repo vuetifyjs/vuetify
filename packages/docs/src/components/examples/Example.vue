@@ -240,7 +240,7 @@
 
     if (playgroundLink.value) {
       array.push({
-        icon: 'mdi-vuetify',
+        icon: '$vuetify',
         path: 'edit-in-playground',
         href: playgroundLink.value,
         target: '_blank',
