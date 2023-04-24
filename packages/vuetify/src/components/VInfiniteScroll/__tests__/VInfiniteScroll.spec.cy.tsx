@@ -11,23 +11,23 @@ const SCROLL_OPTIONS = { ensureScrollable: true, duration: 300 }
 
 describe('VInfiniteScroll', () => {
   // TODO: This only fails in CI, not locally
-  it.skip('should call load function when scrolled', () => {
-    const load = cy.spy().as('load')
-    const items = createRange(50)
+  // it.skip('should call load function when scrolled', () => {
+  //   const load = cy.spy().as('load')
+  //   const items = createRange(50)
 
-    cy.mount(() => (
-      <VInfiniteScroll height="400" onLoad={ load }>
-        { items.map(item => (
-          <div class="pa-2">{ item }</div>
-        ))}
-      </VInfiniteScroll>
-    ))
-      .get('.v-infinite-scroll').scrollTo('bottom', SCROLL_OPTIONS)
-      .get('.v-infinite-scroll .v-progress-circular').should('exist')
-      .then(() => {
-        expect(load).to.be.calledOnce
-      })
-  })
+  //   cy.mount(() => (
+  //     <VInfiniteScroll height="400" onLoad={ load }>
+  //       { items.map(item => (
+  //         <div class="pa-2">{ item }</div>
+  //       ))}
+  //     </VInfiniteScroll>
+  //   ))
+  //     .get('.v-infinite-scroll').scrollTo('bottom', SCROLL_OPTIONS)
+  //     .get('.v-infinite-scroll .v-progress-circular').should('exist')
+  //     .then(() => {
+  //       expect(load).to.be.calledOnce
+  //     })
+  // })
 
   it('should work when using start side', () => {
     const load = cy.spy().as('load')
