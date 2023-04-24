@@ -3,7 +3,7 @@ import './VCheckbox.sass'
 
 // Components
 import type { VInputSlots } from '@/components/VInput/VInput'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
 // Composables
@@ -40,7 +40,7 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
+      const [inputProps, _1] = VInput.filterProps(props)
       const [checkboxProps, _2] = VCheckboxBtn.filterProps(props)
 
       return (

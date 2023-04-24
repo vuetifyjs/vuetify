@@ -163,57 +163,57 @@ exports[`createTheme should create style element 1`] = `
     }
     .bg-background {
       --v-theme-overlay-multiplier: var(--v-theme-background-overlay-multiplier);
-      background: rgb(var(--v-theme-background)) !important;
+      background-color: rgb(var(--v-theme-background)) !important;
       color: rgb(var(--v-theme-on-background)) !important;
     }
     .bg-surface {
       --v-theme-overlay-multiplier: var(--v-theme-surface-overlay-multiplier);
-      background: rgb(var(--v-theme-surface)) !important;
+      background-color: rgb(var(--v-theme-surface)) !important;
       color: rgb(var(--v-theme-on-surface)) !important;
     }
     .bg-surface-variant {
       --v-theme-overlay-multiplier: var(--v-theme-surface-variant-overlay-multiplier);
-      background: rgb(var(--v-theme-surface-variant)) !important;
+      background-color: rgb(var(--v-theme-surface-variant)) !important;
       color: rgb(var(--v-theme-on-surface-variant)) !important;
     }
     .bg-primary {
       --v-theme-overlay-multiplier: var(--v-theme-primary-overlay-multiplier);
-      background: rgb(var(--v-theme-primary)) !important;
+      background-color: rgb(var(--v-theme-primary)) !important;
       color: rgb(var(--v-theme-on-primary)) !important;
     }
     .bg-primary-darken-1 {
       --v-theme-overlay-multiplier: var(--v-theme-primary-darken-1-overlay-multiplier);
-      background: rgb(var(--v-theme-primary-darken-1)) !important;
+      background-color: rgb(var(--v-theme-primary-darken-1)) !important;
       color: rgb(var(--v-theme-on-primary-darken-1)) !important;
     }
     .bg-secondary {
       --v-theme-overlay-multiplier: var(--v-theme-secondary-overlay-multiplier);
-      background: rgb(var(--v-theme-secondary)) !important;
+      background-color: rgb(var(--v-theme-secondary)) !important;
       color: rgb(var(--v-theme-on-secondary)) !important;
     }
     .bg-secondary-darken-1 {
       --v-theme-overlay-multiplier: var(--v-theme-secondary-darken-1-overlay-multiplier);
-      background: rgb(var(--v-theme-secondary-darken-1)) !important;
+      background-color: rgb(var(--v-theme-secondary-darken-1)) !important;
       color: rgb(var(--v-theme-on-secondary-darken-1)) !important;
     }
     .bg-error {
       --v-theme-overlay-multiplier: var(--v-theme-error-overlay-multiplier);
-      background: rgb(var(--v-theme-error)) !important;
+      background-color: rgb(var(--v-theme-error)) !important;
       color: rgb(var(--v-theme-on-error)) !important;
     }
     .bg-info {
       --v-theme-overlay-multiplier: var(--v-theme-info-overlay-multiplier);
-      background: rgb(var(--v-theme-info)) !important;
+      background-color: rgb(var(--v-theme-info)) !important;
       color: rgb(var(--v-theme-on-info)) !important;
     }
     .bg-success {
       --v-theme-overlay-multiplier: var(--v-theme-success-overlay-multiplier);
-      background: rgb(var(--v-theme-success)) !important;
+      background-color: rgb(var(--v-theme-success)) !important;
       color: rgb(var(--v-theme-on-success)) !important;
     }
     .bg-warning {
       --v-theme-overlay-multiplier: var(--v-theme-warning-overlay-multiplier);
-      background: rgb(var(--v-theme-warning)) !important;
+      background-color: rgb(var(--v-theme-warning)) !important;
       color: rgb(var(--v-theme-on-warning)) !important;
     }
     .text-background {
