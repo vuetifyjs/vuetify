@@ -145,6 +145,31 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should be empty when delete the selected option', () => {
+    const items = ref([
+      { title: 'Item 1', value: 'Item 1' },
+      { title: 'Item 2', value: 'Item 2' },
+    ])
+
+    const selectedItems = ref(null);
+
+    cy.mount(() => (
+      <VAutocomplete
+      v-model={ selectedItems.value }
+      items={ items.value }
+      returnObject
+      />
+    ))
+
+    cy.get('.v-autocomplete').click();
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').contains('Item 1').click();
+
+    cy.get('.v-fieldinput > input').clear();
+    cy.get('.v-inputdetails').click();
+    cy.get('.v-field__input').should('not.have.text', 'Item 1');
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
