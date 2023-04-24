@@ -142,7 +142,11 @@ export const VRow = genericComponent()({
     })
 
     return () => h(props.tag, {
-      class: ['v-row', props.class, classes.value],
+      class: [
+        'v-row',
+        classes.value,
+        props.class,
+      ],
       style: props.style,
     }, slots.default?.())
   },

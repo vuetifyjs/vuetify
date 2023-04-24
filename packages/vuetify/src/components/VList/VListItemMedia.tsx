@@ -22,11 +22,11 @@ export const VListItemMedia = genericComponent()({
         <props.tag
           class={[
             'v-list-item-media',
-            props.class,
             {
               'v-list-item-media--start': props.start,
               'v-list-item-media--end': props.end,
             },
+            props.class,
           ]}
           style={ props.style }
           v-slots={ slots }

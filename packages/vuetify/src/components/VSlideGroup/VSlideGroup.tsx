@@ -346,12 +346,12 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       <props.tag
         class={[
           'v-slide-group',
-          props.class,
           {
             'v-slide-group--vertical': !isHorizontal.value,
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          props.class,
         ]}
         style={ props.style }
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }

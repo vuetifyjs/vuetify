@@ -2,8 +2,10 @@
 import './VColorPickerSwatches.sass'
 
 // Components
-import { makeComponentProps } from '@/composables/component'
 import { VIcon } from '@/components/VIcon'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
@@ -63,8 +65,8 @@ export const VColorPickerSwatches = defineComponent({
           props.class,
         ]}
         style={[
-          props.style,
           { maxHeight: convertToUnit(props.maxHeight) },
+          props.style,
         ]}
       >
         <div>

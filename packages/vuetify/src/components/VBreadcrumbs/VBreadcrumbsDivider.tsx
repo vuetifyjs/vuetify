@@ -9,6 +9,7 @@ export const VBreadcrumbsDivider = genericComponent()({
 
   props: {
     divider: [Number, String],
+
     ...makeComponentProps(),
   },
 

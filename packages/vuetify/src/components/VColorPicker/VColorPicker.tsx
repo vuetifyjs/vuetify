@@ -9,7 +9,6 @@ import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 
@@ -58,7 +57,6 @@ export const VColorPicker = defineComponent({
       type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
     },
 
-    ...makeComponentProps(),
     ...omit(makeVSheetProps({ width: 300 }), [
       'height',
       'location',
@@ -127,12 +125,10 @@ export const VColorPicker = defineComponent({
           theme={ props.theme }
           class={[
             'v-color-picker',
-            props.class,
           ]}
-          style={[
-            props.style,
-            { '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }) },
-          ]}
+          style={{
+            '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
+          }}
           { ...sheetProps }
           maxWidth={ props.width }
         >

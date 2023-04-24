@@ -79,8 +79,8 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     },
     sticky: Boolean,
 
-    ...makeComponentProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -218,7 +218,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
             onMouseleave={ onMouseleave }
             class={[
               'v-navigation-drawer',
-              props.class,
               `v-navigation-drawer--${location.value}`,
               {
                 'v-navigation-drawer--expand-on-hover': props.expandOnHover,
@@ -234,14 +233,15 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               borderClasses.value,
               elevationClasses.value,
               roundedClasses.value,
+              props.class,
             ]}
             style={[
-              props.style,
               backgroundColorStyles.value,
               layoutItemStyles.value,
               dragStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
+              props.style,
             ]}
             { ...attrs }
           >

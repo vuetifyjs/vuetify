@@ -90,8 +90,8 @@ export const VListItem = genericComponent<VListItemSlots>()({
     onClick: EventProp<[MouseEvent]>(),
     onClickOnce: EventProp<[MouseEvent]>(),
 
-    ...makeComponentProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -186,7 +186,6 @@ export const VListItem = genericComponent<VListItemSlots>()({
         <Tag
           class={[
             'v-list-item',
-            props.class,
             {
               'v-list-item--active': isActive.value,
               'v-list-item--disabled': props.disabled,
@@ -203,11 +202,12 @@ export const VListItem = genericComponent<VListItemSlots>()({
             lineClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }

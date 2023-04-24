@@ -5,7 +5,6 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
@@ -31,7 +30,6 @@ export const VTab = genericComponent()({
       default: 'horizontal',
     },
 
-    ...makeComponentProps(),
     ...omit(makeVBtnProps({
       selectedClass: 'v-tab--selected',
       variant: 'text' as const,
@@ -111,7 +109,6 @@ export const VTab = genericComponent()({
           ref={ rootEl }
           class={[
             'v-tab',
-            props.class,
           ]}
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"

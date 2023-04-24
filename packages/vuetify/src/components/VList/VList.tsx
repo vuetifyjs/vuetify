@@ -98,12 +98,12 @@ export const VList = genericComponent<new <T>() => {
     },
     nav: Boolean,
 
-    ...makeComponentProps(),
     ...makeNestedProps({
       selectStrategy: 'single-leaf' as const,
       openStrategy: 'list' as const,
     }),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -227,7 +227,6 @@ export const VList = genericComponent<new <T>() => {
           ref={ contentRef }
           class={[
             'v-list',
-            props.class,
             {
               'v-list--disabled': props.disabled,
               'v-list--nav': props.nav,
@@ -239,11 +238,12 @@ export const VList = genericComponent<new <T>() => {
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
           role="listbox"
           aria-activedescendant={ undefined }

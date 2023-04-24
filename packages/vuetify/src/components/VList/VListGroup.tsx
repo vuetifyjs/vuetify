@@ -3,11 +3,11 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
 
 // Composables
-import { useList } from './list'
 import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
+import { useList } from './list'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
@@ -93,13 +93,13 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       <props.tag
         class={[
           'v-list-group',
-          props.class,
           {
             'v-list-group--prepend': list?.hasPrepend.value,
             'v-list-group--fluid': props.fluid,
             'v-list-group--subgroup': props.subgroup,
             'v-list-group--open': isOpen.value,
           },
+          props.class,
         ]}
         style={ props.style }
       >

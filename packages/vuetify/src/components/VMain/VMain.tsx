@@ -28,13 +28,13 @@ export const VMain = genericComponent()({
       <props.tag
         class={[
           'v-main',
-          props.class,
           { 'v-main--scrollable': props.scrollable },
+          props.class,
         ]}
         style={[
-          props.style,
           mainStyles.value,
           ssrBootStyles.value,
+          props.style,
         ]}
       >
         { props.scrollable

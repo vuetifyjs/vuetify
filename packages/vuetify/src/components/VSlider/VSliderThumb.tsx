@@ -126,18 +126,18 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
         <div
           class={[
             'v-slider-thumb',
-            props.class,
             {
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
+            props.class,
           ]}
           style={[
-            props.style,
             {
               '--v-slider-thumb-position': positionPercentage,
               '--v-slider-thumb-size': convertToUnit(thumbSize.value),
             },
+            props.style,
           ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }

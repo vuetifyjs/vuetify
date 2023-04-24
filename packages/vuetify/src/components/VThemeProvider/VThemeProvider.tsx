@@ -3,8 +3,8 @@ import './VThemeProvider.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { genericComponent } from '@/util'
@@ -30,8 +30,8 @@ export const VThemeProvider = genericComponent()({
         <props.tag
           class={[
             'v-theme-provider',
-            props.class,
             themeClasses.value,
+            props.class,
           ]}
           style={ props.style }
         >

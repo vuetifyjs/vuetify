@@ -52,8 +52,8 @@ export const makeVToolbarProps = propsFactory({
   image: String,
   title: String,
 
-  ...makeComponentProps(),
   ...makeBorderProps(),
+  ...makeComponentProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
@@ -115,7 +115,6 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
         <props.tag
           class={[
             'v-toolbar',
-            props.class,
             {
               'v-toolbar--absolute': props.absolute,
               'v-toolbar--collapse': props.collapse,
@@ -128,10 +127,11 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             elevationClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
+            props.style,
           ]}
         >
           { hasImage && (

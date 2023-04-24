@@ -68,8 +68,8 @@ export const VLazy = genericComponent()({
           isActive.value ? [] : ['once'],
         ]}
         style={[
-          props.style,
           dimensionStyles.value,
+          props.style,
         ]}
       >
         { isActive.value && (

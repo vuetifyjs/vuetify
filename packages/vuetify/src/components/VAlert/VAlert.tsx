@@ -8,8 +8,9 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -21,7 +22,6 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -145,7 +145,6 @@ export const VAlert = genericComponent<VAlertSlots>()({
         <props.tag
           class={[
             'v-alert',
-            props.class,
             props.border && {
               'v-alert--border': !!props.border,
               [`v-alert--border-${props.border === true ? 'start' : props.border}`]: true,
@@ -160,12 +159,13 @@ export const VAlert = genericComponent<VAlertSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           role="alert"
         >

@@ -55,12 +55,12 @@ export const VMessages = genericComponent<VMessagesSlots>()({
         tag="div"
         class={[
           'v-messages',
-          props.class,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           textColorStyles.value,
+          props.style,
         ]}
         role="alert"
         aria-live="polite"

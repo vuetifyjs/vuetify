@@ -41,11 +41,11 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
     lineInset: [Number, String],
 
     ...makeComponentProps(),
-    ...makeRoundedProps(),
+    ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
-    ...makeDimensionProps(),
   },
 
   setup (props, { slots }) {
@@ -64,17 +64,17 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
       <div
         class={[
           'v-timeline-item',
-          props.class,
           {
             'v-timeline-item--fill-dot': props.fillDot,
           },
+          props.class,
         ]}
         style={[
-          props.style,
           {
             '--v-timeline-dot-size': convertToUnit(dotSize.value),
             '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),
           },
+          props.style,
         ]}
       >
         <div

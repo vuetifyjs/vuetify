@@ -11,8 +11,8 @@ export const VToolbarItems = genericComponent()({
   name: 'VToolbarItems',
 
   props: {
-    ...makeVariantProps({ variant: 'text' }),
     ...makeComponentProps(),
+    ...makeVariantProps({ variant: 'text' }),
   },
 
   setup (props, { slots }) {

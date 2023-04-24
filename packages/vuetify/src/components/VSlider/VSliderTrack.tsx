@@ -5,8 +5,8 @@ import './VSliderTrack.sass'
 import { VSliderSymbol } from './slider'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useBackgroundColor } from '@/composables/color'
 import { useRounded } from '@/composables/rounded'
 
 // Utilities
@@ -125,16 +125,16 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
         <div
           class={[
             'v-slider-track',
-            props.class,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             {
               '--v-slider-track-size': convertToUnit(trackSize.value),
               '--v-slider-tick-size': convertToUnit(tickSize.value),
               direction: !vertical.value ? horizontalDirection.value : undefined,
             },
+            props.style,
           ]}
         >
           <div

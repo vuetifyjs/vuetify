@@ -24,10 +24,10 @@ export const VLabel = genericComponent()({
       <label
         class={[
           'v-label',
-          props.class,
           {
             'v-label--clickable': props.clickable,
           },
+          props.class,
         ]}
         style={ props.style }
       >

@@ -36,8 +36,8 @@ export const VItemGroup = genericComponent()({
       <props.tag
         class={[
           'v-item-group',
-          props.class,
           themeClasses.value,
+          props.class,
         ]}
         style={ props.style }
       >

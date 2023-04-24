@@ -20,8 +20,8 @@ import { toRef } from 'vue'
 export const makeVSheetProps = propsFactory({
   color: String,
 
-  ...makeComponentProps(),
   ...makeBorderProps(),
+  ...makeComponentProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
   ...makeLocationProps(),
@@ -52,19 +52,19 @@ export const VSheet = genericComponent()({
       <props.tag
         class={[
           'v-sheet',
-          props.class,
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
           elevationClasses.value,
           positionClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           backgroundColorStyles.value,
           dimensionStyles.value,
           locationStyles.value,
+          props.style,
         ]}
         v-slots={ slots }
       />

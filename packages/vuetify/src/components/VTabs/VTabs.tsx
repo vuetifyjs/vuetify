@@ -91,7 +91,6 @@ export const VTabs = genericComponent()({
           v-model={ model.value }
           class={[
             'v-tabs',
-            props.class,
             `v-tabs--${props.direction}`,
             `v-tabs--align-tabs-${props.alignTabs}`,
             {
@@ -103,7 +102,6 @@ export const VTabs = genericComponent()({
             backgroundColorClasses.value,
           ]}
           style={[
-            props.style,
             { '--v-tabs-height': convertToUnit(props.height) },
             backgroundColorStyles.value,
           ]}

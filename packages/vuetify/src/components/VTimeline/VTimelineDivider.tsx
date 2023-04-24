@@ -45,10 +45,10 @@ export const VTimelineDivider = genericComponent()({
       <div
         class={[
           'v-timeline-divider',
-          props.class,
           {
             'v-timeline-divider--fill-dot': props.fillDot,
           },
+          props.class,
         ]}
         style={ props.style }
       >

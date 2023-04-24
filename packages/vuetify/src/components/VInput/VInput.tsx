@@ -135,10 +135,10 @@ export const VInput = genericComponent<VInputSlots>()({
         <div
           class={[
             'v-input',
-            props.class,
             `v-input--${props.direction}`,
             densityClasses.value,
             validationClasses.value,
+            props.class,
           ]}
           style={ props.style }
         >

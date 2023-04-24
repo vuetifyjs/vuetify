@@ -42,8 +42,8 @@ export const VBottomNavigation = genericComponent()({
       default: true,
     },
 
-    ...makeComponentProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
@@ -100,7 +100,6 @@ export const VBottomNavigation = genericComponent()({
         <props.tag
           class={[
             'v-bottom-navigation',
-            props.class,
             {
               'v-bottom-navigation--active': isActive.value,
               'v-bottom-navigation--grow': props.grow,
@@ -112,9 +111,9 @@ export const VBottomNavigation = genericComponent()({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
             layoutItemStyles.value,
             {
@@ -122,6 +121,7 @@ export const VBottomNavigation = genericComponent()({
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
             ssrBootStyles.value,
+            props.style,
           ]}
         >
           { slots.default && (

@@ -25,6 +25,7 @@ export const VLayoutItem = genericComponent()({
       default: 300,
     },
     modelValue: Boolean,
+
     ...makeComponentProps(),
     ...makeLayoutItemProps(),
   },
@@ -47,8 +48,8 @@ export const VLayoutItem = genericComponent()({
           props.class,
         ]}
         style={[
-          props.style,
           layoutItemStyles.value,
+          props.style,
         ]}
       >
         { slots.default?.() }

@@ -113,8 +113,8 @@ export const VSelectionControlGroup = genericComponent()({
       <div
         class={[
           'v-selection-control-group',
-          props.class,
           { 'v-selection-control-group--inline': props.inline },
+          props.class,
         ]}
         style={ props.style }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }

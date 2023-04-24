@@ -200,7 +200,6 @@ export const VSelectionControl = genericComponent<new <T>() => {
         <div
           class={[
             'v-selection-control',
-            props.class,
             {
               'v-selection-control--dirty': model.value,
               'v-selection-control--disabled': props.disabled,
@@ -210,6 +209,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--inline': props.inline,
             },
             densityClasses.value,
+            props.class,
           ]}
           { ...rootAttrs }
           style={ props.style }

@@ -128,8 +128,8 @@ export const VWindowItem = genericComponent()({
         <div
           class={[
             'v-window-item',
-            props.class,
             groupItem.selectedClass.value,
+            props.class,
           ]}
           style={ props.style }
           v-show={ groupItem.isSelected.value }

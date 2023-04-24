@@ -3,9 +3,9 @@ import './VProgressLinear.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
@@ -103,7 +103,6 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
         ref={ intersectionRef }
         class={[
           'v-progress-linear',
-          props.class,
           {
             'v-progress-linear--absolute': props.absolute,
             'v-progress-linear--active': props.active && isIntersecting.value,
@@ -114,9 +113,9 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           },
           roundedClasses.value,
           themeClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           {
             bottom: props.location === 'bottom' ? 0 : undefined,
             top: props.location === 'top' ? 0 : undefined,
@@ -124,6 +123,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             '--v-progress-linear-height': convertToUnit(height.value),
             ...locationStyles.value,
           },
+          props.style,
         ]}
         role="progressbar"
         aria-hidden={ props.active ? 'false' : 'true' }

@@ -57,7 +57,6 @@ export const VIcon = genericComponent()({
         icon={ iconData.value.icon }
         class={[
           'v-icon',
-          props.class,
           'notranslate',
           themeClasses.value,
           sizeClasses.value,
@@ -67,15 +66,16 @@ export const VIcon = genericComponent()({
             'v-icon--start': props.start,
             'v-icon--end': props.end,
           },
+          props.class,
         ]}
         style={[
-          props.style,
           !sizeClasses.value ? ({
             fontSize: convertToUnit(props.size),
             height: convertToUnit(props.size),
             width: convertToUnit(props.size),
           }) : undefined,
           textColorStyles.value,
+          props.style,
         ]}
         role={ attrs.onClick ? 'button' : undefined }
         aria-hidden={ !attrs.onClick }

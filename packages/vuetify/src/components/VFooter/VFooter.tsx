@@ -27,8 +27,8 @@ export const VFooter = genericComponent()({
       default: 'auto',
     },
 
-    ...makeComponentProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -64,17 +64,17 @@ export const VFooter = genericComponent()({
         ref={ resizeRef }
         class={[
           'v-footer',
-          props.class,
           themeClasses.value,
           backgroundColorClasses.value,
           borderClasses.value,
           elevationClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
+          props.style,
         ]}
         v-slots={ slots }
       />

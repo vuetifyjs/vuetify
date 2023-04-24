@@ -2,8 +2,10 @@
 import './VColorPickerEdit.sass'
 
 // Components
-import { makeComponentProps } from '@/composables/component'
 import { VBtn } from '@/components/VBtn'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { computed } from 'vue'

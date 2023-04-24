@@ -40,7 +40,6 @@ export const VTable = genericComponent<VTableSlots>()({
       <props.tag
         class={[
           'v-table',
-          props.class,
           {
             'v-table--fixed-height': !!props.height,
             'v-table--fixed-header': props.fixedHeader,
@@ -51,6 +50,7 @@ export const VTable = genericComponent<VTableSlots>()({
           },
           themeClasses.value,
           densityClasses.value,
+          props.class,
         ]}
         style={ props.style }
       >

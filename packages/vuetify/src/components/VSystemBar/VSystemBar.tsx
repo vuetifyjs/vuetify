@@ -52,18 +52,18 @@ export const VSystemBar = genericComponent()({
       <props.tag
         class={[
           'v-system-bar',
-          props.class,
           { 'v-system-bar--window': props.window },
           themeClasses.value,
           backgroundColorClasses.value,
           elevationClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           backgroundColorStyles.value,
           layoutItemStyles.value,
           ssrBootStyles.value,
+          props.style,
         ]}
         v-slots={ slots }
       />

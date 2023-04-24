@@ -80,7 +80,6 @@ export const VProgressCircular = genericComponent()({
         ref={ root }
         class={[
           'v-progress-circular',
-          props.class,
           {
             'v-progress-circular--indeterminate': !!props.indeterminate,
             'v-progress-circular--visible': isIntersecting.value,
@@ -89,11 +88,12 @@ export const VProgressCircular = genericComponent()({
           themeClasses.value,
           sizeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           sizeStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         role="progressbar"
         aria-valuemin="0"

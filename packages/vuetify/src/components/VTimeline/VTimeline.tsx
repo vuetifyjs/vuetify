@@ -101,7 +101,6 @@ export const VTimeline = genericComponent()({
       <props.tag
         class={[
           'v-timeline',
-          props.class,
           `v-timeline--${props.direction}`,
           `v-timeline--align-${props.align}`,
           `v-timeline--justify-${props.justify}`,
@@ -112,12 +111,13 @@ export const VTimeline = genericComponent()({
           themeClasses.value,
           densityClasses.value,
           sideClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           {
             '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
           },
+          props.style,
         ]}
         v-slots={ slots }
       />

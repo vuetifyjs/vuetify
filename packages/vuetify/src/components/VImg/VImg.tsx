@@ -294,12 +294,12 @@ export const VImg = genericComponent<VImgSlots>()({
       <VResponsive
         class={[
           'v-img',
-          props.class,
           { 'v-img--booting': !isBooted.value },
+          props.class,
         ]}
         style={[
-          props.style,
           { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+          props.style,
         ]}
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }

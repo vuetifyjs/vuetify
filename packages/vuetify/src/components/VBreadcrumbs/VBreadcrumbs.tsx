@@ -88,14 +88,14 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
         <props.tag
           class={[
             'v-breadcrumbs',
-            props.class,
             backgroundColorClasses.value,
             densityClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
+            props.style,
           ]}
         >
           { hasPrepend && (

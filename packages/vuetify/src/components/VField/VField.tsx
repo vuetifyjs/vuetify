@@ -218,7 +218,6 @@ export const VField = genericComponent<new <T>() => {
         <div
           class={[
             'v-field',
-            props.class,
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
@@ -239,11 +238,12 @@ export const VField = genericComponent<new <T>() => {
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
             textColorStyles.value,
+            props.style,
           ]}
           onClick={ onClick }
           { ...attrs }

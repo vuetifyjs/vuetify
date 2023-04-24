@@ -140,8 +140,8 @@ export const VCol = genericComponent()({
 
     return () => h(props.tag, {
       class: [
-        props.class,
         classes.value,
+        props.class,
       ],
       style: props.style,
     }, slots.default?.())

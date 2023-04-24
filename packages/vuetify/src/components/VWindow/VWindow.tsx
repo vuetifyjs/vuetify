@@ -220,11 +220,11 @@ export const VWindow = genericComponent<VWindowSlots>()({
         ref={ rootRef }
         class={[
           'v-window',
-          props.class,
           {
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
           },
           themeClasses.value,
+          props.class,
         ]}
         style={ props.style }
         v-touch={ touchOptions.value }

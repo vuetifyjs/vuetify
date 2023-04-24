@@ -1,7 +1,9 @@
 // Components
-import { makeComponentProps } from '@/composables/component'
 import { VImg } from '@/components/VImg'
 import { VWindowItem } from '@/components/VWindow'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { genericComponent, useRender } from '@/util'

@@ -28,15 +28,15 @@ export const VApp = genericComponent()({
       <div
         ref={ layoutRef }
         class={[
-          props.class,
           'v-application',
           theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           layoutStyles.value,
+          props.style,
         ]}
       >
         <div class="v-application__wrap">

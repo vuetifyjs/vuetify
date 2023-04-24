@@ -9,9 +9,10 @@ export const VBannerActions = genericComponent()({
   name: 'VBannerActions',
 
   props: {
-    ...makeComponentProps(),
     color: String,
     density: String,
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -25,7 +26,10 @@ export const VBannerActions = genericComponent()({
 
     useRender(() => (
       <div
-        class={[props.class, 'v-banner-actions']}
+        class={[
+          'v-banner-actions',
+          props.class,
+        ]}
         style={ props.style }
       >
         { slots.default?.() }

@@ -2,8 +2,10 @@
 import './VColorPickerPreview.sass'
 
 // Components
-import { makeComponentProps } from '@/composables/component'
 import { VSlider } from '@/components/VSlider'
+
+// Composables
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { defineComponent, HSVtoCSS, useRender } from '@/util'
@@ -35,10 +37,10 @@ export const VColorPickerPreview = defineComponent({
       <div
         class={[
           'v-color-picker-preview',
-          props.class,
           {
             'v-color-picker-preview--hide-alpha': props.hideAlpha,
           },
+          props.class,
         ]}
         style={ props.style }
       >

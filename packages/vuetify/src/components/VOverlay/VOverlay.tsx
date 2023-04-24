@@ -12,8 +12,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton, useRouter } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useHydration } from '@/composables/hydration'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
 import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
@@ -101,8 +101,8 @@ export const makeVOverlayProps = propsFactory({
     default: 2000,
   },
 
-  ...makeComponentProps(),
   ...makeActivatorProps(),
+  ...makeComponentProps(),
   ...makeDimensionProps(),
   ...makeLazyProps(),
   ...makeLocationStrategyProps(),
@@ -253,7 +253,6 @@ export const VOverlay = genericComponent<OverlaySlots>()({
               <div
                 class={[
                   'v-overlay',
-                  props.class,
                   {
                     'v-overlay--absolute': props.absolute || props.contained,
                     'v-overlay--active': isActive.value,
@@ -261,11 +260,12 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   },
                   themeClasses.value,
                   rtlClasses.value,
+                  props.class,
                 ]}
                 style={[
-                  props.style,
                   stackStyles.value,
                   { top: convertToUnit(top.value) },
+                  props.style,
                 ]}
                 ref={ root }
                 { ...scopeId }

@@ -107,8 +107,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     },
     showFirstLastPage: Boolean,
 
-    ...makeComponentProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
@@ -311,8 +311,8 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         ref={ resizeRef }
         class={[
           'v-pagination',
-          props.class,
           themeClasses.value,
+          props.class,
         ]}
         style={ props.style }
         role="navigation"

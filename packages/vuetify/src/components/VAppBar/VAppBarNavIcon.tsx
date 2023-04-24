@@ -2,8 +2,8 @@
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { genericComponent, useRender } from '@/util'
@@ -19,6 +19,7 @@ export const VAppBarNavIcon = genericComponent<VBtnSlots>()({
       type: IconValue,
       default: '$menu',
     },
+
     ...makeComponentProps(),
   },
 

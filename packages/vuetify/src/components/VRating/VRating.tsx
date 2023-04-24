@@ -211,12 +211,12 @@ export const VRating = genericComponent<VRatingSlots>()({
         <props.tag
           class={[
             'v-rating',
-            props.class,
             {
               'v-rating--hover': props.hover,
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
+            props.class,
           ]}
           style={ props.style }
         >

@@ -21,11 +21,11 @@ export const VListItemAction = genericComponent()({
       <props.tag
         class={[
           'v-list-item-action',
-          props.class,
           {
             'v-list-item-action--start': props.start,
             'v-list-item-action--end': props.end,
           },
+          props.class,
         ]}
         style={ props.style }
         v-slots={ slots }

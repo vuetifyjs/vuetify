@@ -2,8 +2,8 @@
 import './VLocaleProvider.sass'
 
 // Composables
-import { provideLocale } from '@/composables/locale'
 import { makeComponentProps } from '@/composables/component'
+import { provideLocale } from '@/composables/locale'
 
 // Utilities
 import { genericComponent, useRender } from '@/util'
@@ -19,6 +19,7 @@ export const VLocaleProvider = genericComponent()({
       type: Boolean,
       default: undefined,
     },
+
     ...makeComponentProps(),
   },
 
@@ -29,8 +30,8 @@ export const VLocaleProvider = genericComponent()({
       <div
         class={[
           'v-locale-provider',
-          props.class,
           rtlClasses.value,
+          props.class,
         ]}
         style={ props.style }
       >

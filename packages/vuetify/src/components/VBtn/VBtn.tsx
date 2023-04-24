@@ -68,9 +68,8 @@ export const makeVBtnProps = propsFactory({
 
   text: String,
 
-  ...makeComponentProps(),
   ...makeBorderProps(),
-  ...makeRoundedProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -78,6 +77,7 @@ export const makeVBtnProps = propsFactory({
   ...makeLoaderProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
+  ...makeRoundedProps(),
   ...makeRouterProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'button' }),
@@ -150,7 +150,6 @@ export const VBtn = genericComponent<VBtnSlots>()({
           type={ Tag === 'a' ? undefined : 'button' }
           class={[
             'v-btn',
-            props.class,
             group?.selectedClass.value,
             {
               'v-btn--active': isActive.value,
@@ -172,13 +171,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            props.style,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }

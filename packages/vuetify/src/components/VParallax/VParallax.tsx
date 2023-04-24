@@ -93,8 +93,8 @@ export const VParallax = genericComponent<VImgSlots>()({
       <VImg
         class={[
           'v-parallax',
-          props.class,
           { 'v-parallax--active': isIntersecting.value },
+          props.class,
         ]}
         style={ props.style }
         ref={ root }
