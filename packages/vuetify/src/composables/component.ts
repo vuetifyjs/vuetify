@@ -4,16 +4,18 @@ import { propsFactory } from '@/util/propsFactory'
 // Types
 import type { PropType, StyleValue } from 'vue'
 
+export type ClassValue = any
+
 export interface ComponentProps {
-  class?: string | any[] | Record<string, any>
+  class?: ClassValue
   style: StyleValue
 }
 
 // Composables
 export const makeComponentProps = propsFactory({
-  class: [String, Array] as PropType<ComponentProps['class']>,
+  class: [String, Array] as PropType<ClassValue>,
   style: {
-    type: [String, Array, Object] as PropType<ComponentProps['style']>,
+    type: [String, Array, Object] as PropType<StyleValue>,
     default: null,
   },
 }, 'component')
