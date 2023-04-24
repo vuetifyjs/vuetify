@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Global configuration
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.
@@ -56,6 +57,73 @@ This is used internally by some components already:
 - Lists, chip groups, expansion panels, tabs, and forms all use this system to propagate certain props to their children, for example `<v-tabs disabled>` will set the default value of `disabled` to `true` for all `<v-tab>` components inside it.
 
 [v-defaults-provider](/components/defaults-providers/) can be used to set defaults for components within a specific scope.
+
+## Global class and styles
+
+<alert type="success">
+
+This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+
+</alert>
+
+In addition properties, Vuetify allows you to set global classes and styles that are applied to all components; included nested default configurations. While this feature works for defaults of regular Vuetify components, it is especially useful when creating [virtual components](/features/aliasing/#virtual-component-defaults).
+
+The following example demonstrates how to set a global class and style for a core Vuetify component and an aliased one:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  aliases: {
+    GBtnPrimary: VBtn,
+    GBtnSecondary: VBtn,
+  },
+  defaults: {
+    GBtnPrimary: {
+      class: 'g-btn-primary',
+      style: 'text-transform: none;',
+    },
+    GBtnSecondary: {
+      class: 'g-btn-secondary',
+      style: 'letter-spacing: 2px;',
+    },
+    VBtn: {
+      color: 'success',
+    },
+  },
+})
+```
+
+### Limitations and caveats
+
+Class and style defaults are not merged with with template defined classes and styles. This means if you use a custom class in a template it **will** override the global default value. In the following example we create a virtual component named **GSheetPrimary** and set the default class to `g-sheet-primary`:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VSheet } from 'vuetify/components/VSheet'
+
+export default createVuetify({
+  aliases: {
+    GSheetPrimary: VSheet,
+  },
+  defaults: {
+    GSheetPrimary: {
+      class: 'border',
+    },
+  },
+})
+```
+
+```html
+<template>
+  <GSheetPrimary />
+  <!-- <v-sheet class="v-sheet g-sheet-primary ..."> -->
+
+  <GSheetPrimary class="custom-class" />
+  <!-- <v-sheet class="v-sheet custom-class ..."> -->
+</template>
+```
 
 ## Priority
 
