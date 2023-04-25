@@ -12,6 +12,7 @@
       v-model="dialog"
       :scrim="false"
       persistent
+      width="auto"
     >
       <v-card
         color="primary"

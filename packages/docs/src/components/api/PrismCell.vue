@@ -1,7 +1,5 @@
 <template>
-  <pre
-    v-html="highlight(String(code))"
-  />
+  <pre v-html="html" />
 </template>
 
 <script setup lang="ts">
@@ -13,7 +11,7 @@
 
   // Utilities
   import { insertLinks, stripLinks } from './utils'
-  import { PropType } from 'vue'
+  import { PropType, ref, watchEffect } from 'vue'
 
   const props = defineProps({
     code: null,
@@ -23,6 +21,11 @@
     },
   })
 
+  const html = ref('')
+  watchEffect(async () => {
+    html.value = highlight(String(await props.code))
+  })
+
   const MAP = {
     typescript: [Prism.languages.typescript, 'ts'] as const,
     scss: [Prism.languages.scss, 'scss'] as const,
@@ -30,7 +33,7 @@
 
   function highlight (value: string) {
     const code = typeof value === 'object' ? JSON.stringify(value) : value
-    const [out, stripped] = stripLinks(code)
+    const [out, stripped] = stripLinks(code ?? '')
     const [grammar, language] = MAP[props.language]
     const highlighted = Prism.highlight(out, grammar, language)
     return insertLinks(highlighted, stripped)

@@ -21,7 +21,7 @@ export function useTeleport (target: Ref<boolean | string | Element>) {
       return undefined
     }
 
-    let container = targetElement.querySelector('.v-overlay-container')
+    let container = targetElement.querySelector(':scope > .v-overlay-container')
 
     if (!container) {
       container = document.createElement('div')

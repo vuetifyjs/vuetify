@@ -6,6 +6,7 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItem, GroupHeaderItem } from '../types'
 import type { SortItem } from './sort'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
@@ -16,16 +17,26 @@ export const makeDataTableGroupProps = propsFactory({
 
 const VDataTableGroupSymbol: InjectionKey<{
   opened: Ref<Set<string>>
-  toggleGroup: (group: string, value?: boolean) => void
+  toggleGroup: (group: GroupHeaderItem) => void
+  isGroupOpen: (group: GroupHeaderItem) => boolean
   sortByWithGroups: Ref<SortItem[]>
   groupBy: Ref<readonly SortItem[]>
   extractRows: (items: (DataTableItem | GroupHeaderItem)[]) => DataTableItem[]
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
+  groupBy: SortItem[]
+  'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
 }
 
-export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem[]>, sortBy: Ref<readonly SortItem[]>) {
+export function createGroupBy (props: GroupProps) {
+  const groupBy = useProxiedModel(props, 'groupBy')
+
+  return { groupBy }
+}
+
+export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, sortBy: Ref<readonly SortItem[]> }) {
+  const { groupBy, sortBy } = options
   const opened = ref(new Set<string>())
 
   const sortByWithGroups = computed(() => {
@@ -35,10 +46,16 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
     })).concat(sortBy.value)
   })
 
-  function toggleGroup (group: string, value?: boolean) {
-    const open = value == null ? !opened.value.has(group) : value
-    if (open) opened.value.add(group)
-    else opened.value.delete(group)
+  function isGroupOpen (group: GroupHeaderItem) {
+    return opened.value.has(group.id)
+  }
+
+  function toggleGroup (group: GroupHeaderItem) {
+    const newOpened = new Set(opened.value)
+    if (!isGroupOpen(group)) newOpened.add(group.id)
+    else newOpened.delete(group.id)
+
+    opened.value = newOpened
   }
 
   function extractRows (items: (DataTableItem | GroupHeaderItem)[]) {
@@ -63,7 +80,7 @@ export function createGroupBy (props: GroupProps, groupBy: Ref<readonly SortItem
   //   }
   // })
 
-  const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows }
+  const data = { sortByWithGroups, toggleGroup, opened, groupBy, extractRows, isGroupOpen }
 
   provide(VDataTableGroupSymbol, data)
 

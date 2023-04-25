@@ -2,9 +2,7 @@
 const path = require('path')
 
 module.exports = {
-  'no-render-string-reference': {
-    create: require('./scripts/no-render-string-reference'),
-  },
+  'no-render-string-reference': require('./scripts/rules/no-render-string-reference'),
   'jsx-condition-key': {
     create (context) {
       return {
@@ -58,6 +56,7 @@ module.exports = {
       }
     },
   },
+  'jsx-curly-spacing': require('./scripts/rules/jsx-curly-spacing'),
   'jest-global-imports': {
     meta: {
       fixable: 'code',

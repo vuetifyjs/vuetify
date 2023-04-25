@@ -25,7 +25,7 @@
 
             <v-chip
               label
-              class="text-uppercase ml-2"
+              class="text-uppercase ms-2"
               :color="product.isFree ? 'primary' : 'success'"
               size="small"
               variant="flat"

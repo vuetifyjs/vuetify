@@ -30,7 +30,7 @@
               <v-btn icon variant="flat" color="primary" size="small">{{ item }}</v-btn>
             </template>
 
-            <v-list-item-title class="ml-4">
+            <v-list-item-title class="ms-4">
               User Database Record <strong>ID {{ item }}</strong>
             </v-list-item-title>
 
@@ -50,7 +50,7 @@
 <script>
   export default {
     data: () => ({
-      items: Array.from({ length: 7000 }, (k, v) => v + 1),
+      items: Array.from({ length: 1000 }, (k, v) => v + 1),
       visibleItems: 30,
     }),
   }

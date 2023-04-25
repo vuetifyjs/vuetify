@@ -20,14 +20,25 @@ import { useTouch } from './touch'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, defineComponent, toPhysical, useRender } from '@/util'
+import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-const locations = ['start', 'end', 'left', 'right', 'bottom'] as const
+export type VNavigationDrawerImageSlot = {
+  image: string
+}
 
-export const VNavigationDrawer = defineComponent({
+export type VNavigationDrawerSlots = {
+  default: []
+  prepend: []
+  append: []
+  image: [VNavigationDrawerImageSlot]
+}
+
+const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
+
+export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
 
   props: {
@@ -187,6 +198,13 @@ export const VNavigationDrawer = defineComponent({
       },
     })
 
+    function onMouseenter () {
+      isHovering.value = true
+    }
+    function onMouseleave () {
+      isHovering.value = false
+    }
+
     useRender(() => {
       const hasImage = (slots.image || props.image)
 
@@ -194,8 +212,8 @@ export const VNavigationDrawer = defineComponent({
         <>
           <props.tag
             ref={ rootEl }
-            onMouseenter={ () => (isHovering.value = true) }
-            onMouseleave={ () => (isHovering.value = false) }
+            onMouseenter={ onMouseenter }
+            onMouseleave={ onMouseleave }
             class={[
               'v-navigation-drawer',
               `v-navigation-drawer--${location.value}`,

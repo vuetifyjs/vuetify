@@ -77,7 +77,7 @@
         <div class="d-flex justify-space-between flex-grow-1">
           <div>
             <v-chip
-              class="ml-0"
+              class="ms-0"
               color="purple"
               label
               size="small"

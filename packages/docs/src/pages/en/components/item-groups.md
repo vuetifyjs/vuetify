@@ -14,23 +14,22 @@ related:
 
 The `v-item-group` provides the ability to create a group of selectable items out of any component. This is the baseline functionality for components such as `v-tabs` and `v-carousel`.
 
-<entry />
-
 ## Usage
 
 The core usage of the `v-item-group` is to create groups of anything that should be controlled by a **model**.
 
 <!-- <example file="v-item-group/usage" /> -->
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-item-group](/api/v-item-group/) | The item group component. |
+| [v-item](/api/v-item/) | Sub-component used for modifying the `v-item-group` state |
 
-<!-- ## Sub-components
-
-### v-item
-
-v-item description -->
+<api-inline hide-links />
 
 ## Examples
 

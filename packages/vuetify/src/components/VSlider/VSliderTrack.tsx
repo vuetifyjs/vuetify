@@ -10,9 +10,13 @@ import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, defineComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, useRender } from '@/util'
 
-export const VSliderTrack = defineComponent({
+export type VSliderTrackSlots = {
+  'tick-label': []
+}
+
+export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',
 
   props: {
@@ -80,6 +84,8 @@ export const VSliderTrack = defineComponent({
     })
 
     const computedTicks = computed(() => {
+      if (!showTicks.value) return []
+
       const ticks = vertical.value ? parsedTicks.value.slice().reverse() : parsedTicks.value
 
       return ticks.map((tick, index) => {
@@ -159,7 +165,7 @@ export const VSliderTrack = defineComponent({
             >
               { computedTicks.value }
             </div>
-          ) }
+          )}
         </div>
       )
     })

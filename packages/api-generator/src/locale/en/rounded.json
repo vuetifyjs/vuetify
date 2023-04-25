@@ -1,5 +1,5 @@
 {
   "props": {
-    "rounded": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/rounded.json))"
+    "rounded": "Designates the **border-radius** applied to the component. You can find more information on the [Border Radius page](/styles/border-radius)."
   }
 }

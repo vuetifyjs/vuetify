@@ -15,13 +15,12 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { clamp, genericComponent, IN_BROWSER, useRender } from '@/util'
+import { clamp, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
 // Types
-import type { InjectionKey } from 'vue'
-import type { SlotsToProps } from '@/util'
 import type { GroupProvide } from '@/composables/group'
+import type { InjectionKey, PropType } from 'vue'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -32,49 +31,51 @@ interface SlideGroupSlot {
   isSelected: GroupProvide['isSelected']
 }
 
-export const VSlideGroup = genericComponent<new () => {
-  $props: SlotsToProps<{
-    default: [SlideGroupSlot]
-    prev: [SlideGroupSlot]
-    next: [SlideGroupSlot]
-  }>
-}>()({
+type VSlideGroupSlots = {
+  default: [SlideGroupSlot]
+  prev: [SlideGroupSlot]
+  next: [SlideGroupSlot]
+}
+
+export const makeVSlideGroupProps = propsFactory({
+  centerActive: Boolean,
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+  symbol: {
+    type: null,
+    default: VSlideGroupSymbol,
+  },
+  nextIcon: {
+    type: IconValue,
+    default: '$next',
+  },
+  prevIcon: {
+    type: IconValue,
+    default: '$prev',
+  },
+  showArrows: {
+    type: [Boolean, String],
+    validator: (v: any) => (
+      typeof v === 'boolean' || [
+        'always',
+        'desktop',
+        'mobile',
+      ].includes(v)
+    ),
+  },
+
+  ...makeTagProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-slide-group-item--active',
+  }),
+}, 'v-slide-group')
+
+export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',
 
-  props: {
-    centerActive: Boolean,
-    direction: {
-      type: String,
-      default: 'horizontal',
-    },
-    symbol: {
-      type: null,
-      default: VSlideGroupSymbol,
-    },
-    nextIcon: {
-      type: IconValue,
-      default: '$next',
-    },
-    prevIcon: {
-      type: IconValue,
-      default: '$prev',
-    },
-    showArrows: {
-      type: [Boolean, String],
-      validator: (v: any) => (
-        typeof v === 'boolean' || [
-          'always',
-          'desktop',
-          'mobile',
-        ].includes(v)
-      ),
-    },
-
-    ...makeTagProps(),
-    ...makeGroupProps({
-      selectedClass: 'v-slide-group-item--active',
-    }),
-  },
+  props: makeVSlideGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -365,9 +366,9 @@ export const VSlideGroup = genericComponent<new () => {
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.nextIcon : props.prevIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
 
         <div
           key="container"
@@ -403,9 +404,9 @@ export const VSlideGroup = genericComponent<new () => {
               <VFadeTransition>
                 <VIcon icon={ isRtl.value ? props.prevIcon : props.nextIcon }></VIcon>
               </VFadeTransition>
-            ) }
+            )}
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

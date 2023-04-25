@@ -6,6 +6,7 @@ meta:
   keywords: click outside, click directive, vue click directive, vuetify click directives
 related:
   - /components/dialogs/
+  - /components/navigation-drawers/
   - /directives/intersect/
 ---
 

@@ -13,7 +13,7 @@
       #{if($direction == top or $direction == bottom, align-items, justify-content)}: #{if($direction == top or $direction == left, flex-end, flex-start)}
 
 @mixin timeline-line-align($center, $first, $second)
-  &:before
+  &::before
     +tools.ltr()
       #{$first}: calc(#{$center} - #{var(--v-timeline-line-width)} / 2)
       #{$second}: initial

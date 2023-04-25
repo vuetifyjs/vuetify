@@ -6,7 +6,7 @@ meta:
   keywords: grids, vuetify grid component, layout component, flex component
 related:
   - /styles/flex
-  - /features/breakpoints
+  - /features/display-and-platform/
   - /styles/display
 ---
 
@@ -30,13 +30,20 @@ The Vuetify grid is heavily inspired by the [Bootstrap grid](https://getbootstra
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-container](/api/v-container/) | The container component. |
+| [v-row](/api/v-row/) | Sub-component used to create rows. |
+| [v-col](/api/v-col/) | Sub-component used to create columns. |
+| [v-spacer](/api/v-spacer/) | A component often used in grid scenarios. |
+
+<api-inline hide-links />
 
 ## Sub-components
 
 ### v-container
 
-`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied
+`v-container` provides the ability to center and horizontally pad your site's contents. You can also use the **fluid** prop to fully extend the container across all viewport and device sizes. Maintains previous 1.x functionality in which props are passed through as classes on `v-container` allowing for the application of helper classes (such as `ma-#`/`pa-#`/`fill-height`) to easily be applied.
 
 ### v-col
 

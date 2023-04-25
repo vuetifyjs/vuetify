@@ -10,13 +10,18 @@ import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent } from '@/util'
+import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { GroupHeaderItem } from './types'
 
-export const VDataTableGroupHeaderRow = defineComponent({
+type VDataTableGroupHeaderRowSlots = {
+  'data-table-group': [{ item: GroupHeaderItem, count: number, props: Record<string, unknown> }]
+  'data-table-select': [{ props: Record<string, unknown> }]
+}
+
+export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
   name: 'VDataTableGroupHeaderRow',
 
   props: {
@@ -27,7 +32,7 @@ export const VDataTableGroupHeaderRow = defineComponent({
   },
 
   setup (props, { slots }) {
-    const { opened, toggleGroup, extractRows } = useGroupBy()
+    const { isGroupOpen, toggleGroup, extractRows } = useGroupBy()
     const { isSelected, isSomeSelected, select } = useSelection()
     const { columns } = useHeaders()
 
@@ -44,8 +49,8 @@ export const VDataTableGroupHeaderRow = defineComponent({
       >
         { columns.value.map(column => {
           if (column.key === 'data-table-group') {
-            const icon = opened.value.has(props.item.id) ? '$expand' : '$next'
-            const onClick = () => toggleGroup(props.item.id)
+            const icon = isGroupOpen(props.item) ? '$expand' : '$next'
+            const onClick = () => toggleGroup(props.item)
 
             return slots['data-table-group']?.({ item: props.item, count: rows.value.length, props: { icon, onClick } }) ?? (
               <VDataTableColumn class="v-data-table-group-header-row__column">

@@ -5,13 +5,15 @@ meta:
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
 related:
-  - /components/data-tables/basics
+  - /components/data-tables/basics/
   - /components/tables/
 ---
 
 # Data table - Sorting
 
-Lorem ipsum etc etc
+Data tables can sort rows by a column value.
+
+<entry />
 
 ## Examples
 

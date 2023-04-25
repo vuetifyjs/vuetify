@@ -3,6 +3,7 @@
     :height="size"
     :src="`https://cdn.vuetifyjs.com/docs/images/logos/${logo}`"
     :width="size"
+    alt="Vuetify Logo"
     class="mx-auto"
     max-width="100%"
   />

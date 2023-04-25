@@ -32,23 +32,31 @@
       </v-btn>
 
       <v-menu>
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-btn
             icon
             color="yellow"
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>
         </template>
 
         <v-list>
-          <v-list-item
-            v-for="(item, i) in items"
-            :key="i"
-          >
-            <v-list-item-title>{{ item.title }}</v-list-item-title>
+          <v-list-item>
+            <v-list-item-title>Click Me 1</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Click Me 2</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Click Me 3</v-list-item-title>
+          </v-list-item>
+
+          <v-list-item>
+            <v-list-item-title>Click Me 4</v-list-item-title>
           </v-list-item>
         </v-list>
       </v-menu>
@@ -56,7 +64,9 @@
       <template v-slot:extension>
         <v-tabs align-tabs="title">
           <v-tab>Tab 1</v-tab>
+
           <v-tab>Tab 2</v-tab>
+
           <v-tab>Tab 3</v-tab>
         </v-tabs>
       </template>
@@ -71,16 +81,3 @@
     </v-sheet>
   </v-layout>
 </template>
-
-<script>
-  export default {
-    data: () => ({
-      items: [
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me' },
-        { title: 'Click Me 2' },
-      ],
-    }),
-  }
-</script>

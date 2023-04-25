@@ -5,9 +5,9 @@ import './VGrid.sass'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VContainer = defineComponent({
+export const VContainer = genericComponent()({
   name: 'VContainer',
 
   props: {

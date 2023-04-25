@@ -18,11 +18,12 @@ import { useForm } from '@/composables/form'
 import { useItems } from '@/composables/items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { genericComponent, omit, useRender, wrapInArray } from '@/util'
-import { filterVTextFieldProps, makeVTextFieldProps } from '../VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { FilterMatch } from '@/composables/filter'
@@ -97,6 +98,7 @@ export const VAutocomplete = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:search': (val: any) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
@@ -107,8 +109,19 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = ref(false)
     const isPristine = ref(true)
-    const menu = useProxiedModel(props, 'menu')
+    const vMenuRef = ref<VMenu>()
+    const _menu = useProxiedModel(props, 'menu')
+    const menu = computed({
+      get: () => _menu.value,
+      set: v => {
+        if (_menu.value && !v && vMenuRef.value?.ΨopenChildren) return
+        _menu.value = v
+      },
+    })
+    const selectionIndex = ref(-1)
+    const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
+    const { textColorClasses, textColorStyles } = useTextColor(color)
     const search = useProxiedModel(props, 'search', '')
     const model = useProxiedModel(
       props,
@@ -136,18 +149,17 @@ export const VAutocomplete = genericComponent<new <
     })
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const selection = computed(() => selections.value[selectionIndex.value])
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
-      model.value = []
-
       if (props.openOnClear) {
         menu.value = true
       }
 
       search.value = ''
     }
-    function onClickControl () {
+    function onMousedownControl () {
       if (
         (props.hideNoData && !items.value.length) ||
         props.readonly || form?.isReadonly.value
@@ -157,6 +169,16 @@ export const VAutocomplete = genericComponent<new <
     }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
+
+      const selectionStart = vTextFieldRef.value.selectionStart
+      const length = selected.value.length
+
+      if (
+        selectionIndex.value > -1 ||
+        ['Enter', 'ArrowDown', 'ArrowUp'].includes(e.key)
+      ) {
+        e.preventDefault()
+      }
 
       if (['Enter', 'ArrowDown'].includes(e.key)) {
         menu.value = true
@@ -171,11 +193,55 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (e.key === 'ArrowDown') {
-        e.preventDefault()
         listRef.value?.focus('next')
       } else if (e.key === 'ArrowUp') {
-        e.preventDefault()
         listRef.value?.focus('prev')
+      }
+
+      if (!props.multiple) return
+
+      if (['Backspace', 'Delete'].includes(e.key)) {
+        if (selectionIndex.value < 0) {
+          if (e.key === 'Backspace' && !search.value) {
+            selectionIndex.value = length - 1
+          }
+
+          return
+        }
+
+        const originalSelectionIndex = selectionIndex.value
+
+        if (selection.value) select(selection.value)
+
+        selectionIndex.value = originalSelectionIndex >= length - 1 ? (length - 2) : originalSelectionIndex
+      }
+
+      if (e.key === 'ArrowLeft') {
+        if (selectionIndex.value < 0 && selectionStart > 0) return
+
+        const prev = selectionIndex.value > -1
+          ? selectionIndex.value - 1
+          : length - 1
+
+        if (selections.value[prev]) {
+          selectionIndex.value = prev
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(search.value?.length, search.value?.length)
+        }
+      }
+
+      if (e.key === 'ArrowRight') {
+        if (selectionIndex.value < 0) return
+
+        const next = selectionIndex.value + 1
+
+        if (selections.value[next]) {
+          selectionIndex.value = next
+        } else {
+          selectionIndex.value = -1
+          vTextFieldRef.value.setSelectionRange(0, 0)
+        }
       }
     }
 
@@ -205,7 +271,6 @@ export const VAutocomplete = genericComponent<new <
 
         if (index === -1) {
           model.value = [...model.value, item]
-          search.value = ''
         } else {
           const value = [...model.value]
           value.splice(index, 1)
@@ -251,7 +316,8 @@ export const VAutocomplete = genericComponent<new <
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
-      const [textFieldProps] = filterVTextFieldProps(props)
+      const isDirty = model.value.length > 0
+      const [textFieldProps] = VTextField.filterProps(props)
 
       return (
         <VTextField
@@ -259,25 +325,25 @@ export const VAutocomplete = genericComponent<new <
           { ...textFieldProps }
           modelValue={ search.value }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          dirty={ model.value.length > 0 }
+          dirty={ isDirty }
           onInput={ onInput }
           class={[
             'v-autocomplete',
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
+              'v-autocomplete--selecting-index': selectionIndex.value > -1,
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-autocomplete--selection-slot': !!slots.selection,
             },
           ]}
           appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
+          placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
-          onClick:control={ onClickControl }
-          onClick:input={ onClickControl }
-          onFocus={ () => isFocused.value = true }
-          onBlur={ () => isFocused.value = false }
+          onMousedown:control={ onMousedownControl }
           onKeydown={ onKeydown }
         >
           {{
@@ -285,10 +351,12 @@ export const VAutocomplete = genericComponent<new <
             default: () => (
               <>
                 <VMenu
+                  ref={ vMenuRef }
                   v-model={ menu.value }
                   activator="parent"
                   contentClass="v-autocomplete__content"
                   eager={ props.eager }
+                  maxHeight={ 310 }
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
@@ -306,23 +374,26 @@ export const VAutocomplete = genericComponent<new <
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      )) }
+                      ))}
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map((item, index) => slots.item?.({
+                      { displayItems.value.map(item => slots.item?.({
                         item,
-                        index,
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem
-                          key={ index }
+                          key={ item.value }
                           { ...item.props }
                           onClick={ () => select(item) }
                         >
                           {{
                             prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                              <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
+                              <VCheckboxBtn
+                                modelValue={ isSelected }
+                                ripple={ false }
+                                tabindex="-1"
+                              />
                             ) : undefined,
                             title: () => {
                               return isPristine.value
@@ -331,11 +402,11 @@ export const VAutocomplete = genericComponent<new <
                             },
                           }}
                         </VListItem>
-                      )) }
+                      ))}
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) }
+                  )}
                 </VMenu>
 
                 { selections.value.map((item, index) => {
@@ -353,37 +424,53 @@ export const VAutocomplete = genericComponent<new <
                   }
 
                   return (
-                    <div key={ item.value } class="v-autocomplete__selection">
+                    <div
+                      key={ item.value }
+                      class={[
+                        'v-autocomplete__selection',
+                        index === selectionIndex.value && [
+                          'v-autocomplete__selection--selected',
+                          textColorClasses.value,
+                        ],
+                      ]}
+                      style={ index === selectionIndex.value ? textColorStyles.value : {} }
+                    >
                       { hasChips ? (
-                        <VDefaultsProvider
-                          defaults={{
-                            VChip: {
-                              closable: props.closableChips,
-                              size: 'small',
-                              text: item.title,
-                            },
-                          }}
-                        >
-                          { slots.chip
-                            ? slots.chip({ item, index, props: slotProps })
-                            : (<VChip { ...slotProps } />)
-                          }
-                        </VDefaultsProvider>
+                        !slots.chip ? (
+                          <VChip
+                            key="chip"
+                            closable={ props.closableChips }
+                            size="small"
+                            text={ item.title }
+                            { ...slotProps }
+                          />
+                        ) : (
+                          <VDefaultsProvider
+                            key="chip-defaults"
+                            defaults={{
+                              VChip: {
+                                closable: props.closableChips,
+                                size: 'small',
+                                text: item.title,
+                              },
+                            }}
+                          >
+                            { slots.chip?.({ item, index, props: slotProps }) }
+                          </VDefaultsProvider>
+                        )
                       ) : (
-                        slots.selection
-                          ? slots.selection({ item, index })
-                          : (
-                            <span class="v-autocomplete__selection-text">
-                              { item.title }
-                              { props.multiple && (index < selections.value.length - 1) && (
-                                <span class="v-autocomplete__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
+                        slots.selection?.({ item, index }) ?? (
+                          <span class="v-autocomplete__selection-text">
+                            { item.title }
+                            { props.multiple && (index < selections.value.length - 1) && (
+                              <span class="v-autocomplete__selection-comma">,</span>
+                            )}
+                          </span>
+                        )
                       )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}

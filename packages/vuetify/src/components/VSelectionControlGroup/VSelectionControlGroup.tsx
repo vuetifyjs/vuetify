@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, onScopeDispose, provide, toRef } from 'vue'
-import { deepEqual, defineComponent, getUid, propsFactory, useRender } from '@/util'
+import { deepEqual, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
@@ -52,7 +52,7 @@ export const makeSelectionControlGroupProps = propsFactory({
   ...makeDensityProps(),
 }, 'v-selection-control-group')
 
-export const VSelectionControlGroup = defineComponent({
+export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
   props: {

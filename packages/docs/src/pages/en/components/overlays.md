@@ -1,5 +1,5 @@
 ---
-nav: Custom Overlays
+nav: Overlays
 meta:
   title: Overlay component
   description: The overlay component makes it easy to create a scrim over components or your entire application.
@@ -14,17 +14,21 @@ related:
 
 `v-overlay` is the base for components that float over the rest of the page, such as `v-menu` and `v-dialog`. It can also be used on its own and comes with everything you need to create a custom popover component.
 
-<entry />
-
 ## Usage
 
 In its simplest form, the `v-overlay` component will add a dimmed layer over your application.
 
 <example file="v-overlay/usage" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-overlay](/api/v-overlay/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Activator
 

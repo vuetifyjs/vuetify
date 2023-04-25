@@ -5,38 +5,23 @@ import './VTab.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { makeGroupItemProps } from '@/composables/group'
-import { makeRouterProps } from '@/composables/router'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { animate, defineComponent, pick, standardEasing, useRender } from '@/util'
+import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
+import { makeVBtnProps } from '@/components/VBtn/VBtn'
 
 // Types
-import { VTabsSymbol } from './shared'
 import type { PropType } from 'vue'
+import { VTabsSymbol } from './shared'
 
-export const VTab = defineComponent({
+export const VTab = genericComponent()({
   name: 'VTab',
 
   props: {
     fixed: Boolean,
-    icon: [Boolean, String, Function, Object] as PropType<boolean | IconValue>,
-    prependIcon: IconValue,
-    appendIcon: IconValue,
 
-    stacked: Boolean,
-    title: String,
-
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    color: String,
     sliderColor: String,
     hideSlider: Boolean,
 
@@ -45,12 +30,17 @@ export const VTab = defineComponent({
       default: 'horizontal',
     },
 
-    ...makeTagProps(),
-    ...makeRouterProps(),
-    ...makeGroupItemProps({
+    ...omit(makeVBtnProps({
       selectedClass: 'v-tab--selected',
-    }),
-    ...makeThemeProps(),
+      variant: 'text' as const,
+    }), [
+      'active',
+      'block',
+      'flat',
+      'location',
+      'position',
+      'symbol',
+    ]),
   },
 
   setup (props, { slots, attrs }) {
@@ -110,21 +100,7 @@ export const VTab = defineComponent({
     }
 
     useRender(() => {
-      const [btnProps] = pick(props, [
-        'href',
-        'to',
-        'replace',
-        'icon',
-        'stacked',
-        'prependIcon',
-        'appendIcon',
-        'ripple',
-        'theme',
-        'disabled',
-        'selectedClass',
-        'value',
-        'color',
-      ])
+      const [btnProps] = VBtn.filterProps(props)
 
       return (
         <VBtn
@@ -140,13 +116,13 @@ export const VTab = defineComponent({
           active={ false }
           block={ props.fixed }
           maxWidth={ props.fixed ? 300 : undefined }
-          variant="text"
           rounded={ 0 }
           { ...btnProps }
           { ...attrs }
           onGroup:selected={ updateSlider }
         >
-          { slots.default ? slots.default() : props.title }
+          { slots.default?.() ?? props.text }
+
           { !props.hideSlider && (
             <div
               ref={ sliderEl }
@@ -156,7 +132,7 @@ export const VTab = defineComponent({
               ]}
               style={ sliderColorStyles.value }
             />
-          ) }
+          )}
         </VBtn>
       )
     })
