@@ -16,7 +16,7 @@ The `v-divider` component is used to separate sections of lists or layouts.
 
 <!-- ![divider Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-divider/v-divider-entry.png) -->
 
----
+----
 
 ## Usage
 
@@ -24,11 +24,21 @@ Dividers in their simplest form display a horizontal line.
 
 <usage name="v-divider" />
 
+<alert type="info">
+
+  This example uses the **border-opacity** utility class and not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+
+</alert>
+
 <entry />
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-divider](/api/v-divider/) | The divider component. |
+
+<api-inline hide-links />
 
 ## Examples
 

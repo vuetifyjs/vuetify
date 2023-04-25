@@ -73,4 +73,9 @@ export default {
       item: '評価 {1} のうち {0}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

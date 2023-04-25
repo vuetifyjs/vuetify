@@ -13,7 +13,14 @@ function addCodeRules (md: MarkdownIt) {
   md.renderer.rules.code_inline = function (tokens, idx) {
     const token = tokens[idx]
 
-    return `<code class="v-code">${md.utils.escapeHtml(token.content)}</code>`
+    const attrs = Object.entries(
+      (token.attrs || []).reduce((acc, [key, value]) => {
+        acc[key] = acc[key] ? acc[key] + ' ' + value : value
+        return acc
+      }, { class: 'v-code' } as Record<string, string>)
+    ).map(([key, value]) => `${key}="${value}"`).join(' ')
+
+    return `<code ${attrs}>${md.utils.escapeHtml(token.content)}</code>`
   }
 }
 

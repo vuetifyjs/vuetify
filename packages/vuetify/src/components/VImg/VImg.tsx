@@ -21,7 +21,7 @@ import {
 } from 'vue'
 import {
   convertToUnit,
-  defineComponent,
+  genericComponent,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -37,7 +37,14 @@ export interface srcObject {
   aspect: number
 }
 
-export const VImg = defineComponent({
+export type VImgSlots = {
+  default: []
+  placeholder: []
+  error: []
+  sources: []
+}
+
+export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
@@ -71,9 +78,9 @@ export const VImg = defineComponent({
   },
 
   emits: {
-    loadstart: (event: string | undefined) => true,
-    load: (event: string | undefined) => true,
-    error: (event: string | undefined) => true,
+    loadstart: (value: string | undefined) => true,
+    load: (value: string | undefined) => true,
+    error: (value: string | undefined) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -200,7 +207,7 @@ export const VImg = defineComponent({
           class={['v-img__img', containClasses.value]}
           src={ normalisedSrc.value.src }
           srcset={ normalisedSrc.value.srcset }
-          alt=""
+          alt={ props.alt }
           sizes={ props.sizes }
           ref={ image }
           onLoad={ onLoad }
@@ -230,7 +237,7 @@ export const VImg = defineComponent({
           <img
             class={['v-img__img', 'v-img__img--preload', containClasses.value]}
             src={ normalisedSrc.value.lazySrc }
-            alt=""
+            alt={ props.alt }
           />
         )}
       </MaybeTransition>

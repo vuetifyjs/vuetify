@@ -14,17 +14,21 @@ related:
 
 The `v-progress-circular` component is used to convey data circularly to users. It also can be put into an indeterminate state to portray loading.
 
-<entry />
-
 ## Usage
 
 In its simplest form, v-progress-circular displays a circular progress bar. Use the value prop to control the progress.
 
 <usage name="v-progress-circular" />
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-progress-circular](/api/v-progress-circular/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

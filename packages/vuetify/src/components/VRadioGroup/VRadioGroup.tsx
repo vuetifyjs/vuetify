@@ -2,8 +2,8 @@
 import './VRadioGroup.sass'
 
 // Components
-import { filterControlProps } from '@/components/VSelectionControl/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VSelectionControl } from '@/components/VSelectionControl'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
 
@@ -13,9 +13,15 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, filterInputAttrs, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
 
-export const VRadioGroup = defineComponent({
+// Types
+import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
+
+export type VRadioGroupSlots = VInputSlots & VSelectionControlSlots
+
+export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',
 
   inheritAttrs: false,
@@ -54,11 +60,8 @@ export const VRadioGroup = defineComponent({
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
-      const [controlProps, _2] = filterControlProps({
-        ...props,
-        multiple: false as const,
-      })
+      const [inputProps, _1] = VInput.filterProps(props)
+      const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
           label: props.label,
@@ -87,7 +90,7 @@ export const VRadioGroup = defineComponent({
                   <VLabel id={ id.value }>
                     { label }
                   </VLabel>
-                ) }
+                )}
 
                 <VSelectionControlGroup
                   { ...controlProps }
@@ -100,6 +103,7 @@ export const VRadioGroup = defineComponent({
                   disabled={ isDisabled.value }
                   readonly={ isReadonly.value }
                   aria-labelledby={ label ? id.value : undefined }
+                  multiple={ false }
                   { ...controlAttrs }
                   v-model={ model.value }
                   v-slots={ slots }

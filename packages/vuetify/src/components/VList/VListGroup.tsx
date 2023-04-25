@@ -6,22 +6,17 @@ import { VExpandTransition } from '@/components/transitions'
 import { useList } from './list'
 import { IconValue } from '@/composables/icons'
 import { makeTagProps } from '@/composables/tag'
+import { MaybeTransition } from '@/composables/transition'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
+import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, genericComponent, pick, propsFactory, useRender } from '@/util'
+import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import type { InternalListItem } from './VList'
-import type { SlotsToProps } from '@/util'
-import type { ExtractPropTypes, Ref } from 'vue'
-
-export type ListGroupActivatorSlot = {
-  props: {
-    onClick: (e: Event) => void
-    class: string
-  }
+export type VListGroupSlots = {
+  default: []
+  activator: [{ isOpen: boolean, props: Record<string, unknown> }]
 }
 
 const VListGroupActivator = defineComponent({
@@ -54,14 +49,7 @@ export const makeVListGroupProps = propsFactory({
   ...makeTagProps(),
 }, 'v-list-group')
 
-export const VListGroup = genericComponent<new <T extends InternalListItem>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    activator: [ListGroupActivatorSlot]
-    default: []
-  }>
-}>()({
+export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',
 
   props: {
@@ -74,18 +62,30 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
     const id = computed(() => `v-list-group--id-${String(_id.value)}`)
     const list = useList()
+    const { isBooted } = useSsrBoot()
 
     function onClick (e: Event) {
       open(!isOpen.value, e)
     }
 
-    const activatorProps: Ref<ListGroupActivatorSlot['props']> = computed(() => ({
+    const activatorProps = computed(() => ({
       onClick,
       class: 'v-list-group__header',
       id: id.value,
     }))
 
     const toggleIcon = computed(() => isOpen.value ? props.collapseIcon : props.expandIcon)
+    const activatorDefaults = computed(() => ({
+      VListItem: {
+        active: isOpen.value,
+        activeColor: props.activeColor,
+        color: props.color,
+        prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
+        appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
+        title: props.title,
+        value: props.value,
+      },
+    }))
 
     useRender(() => (
       <props.tag
@@ -100,30 +100,18 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
         ]}
       >
         { slots.activator && (
-          <VDefaultsProvider
-            defaults={{
-              VListItem: {
-                active: isOpen.value,
-                activeColor: props.activeColor,
-                color: props.color,
-                prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
-                appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
-                title: props.title,
-                value: props.value,
-              },
-            }}
-          >
+          <VDefaultsProvider defaults={ activatorDefaults.value }>
             <VListGroupActivator>
-              { slots.activator({ props: activatorProps.value, isOpen }) }
+              { slots.activator({ props: activatorProps.value, isOpen: isOpen.value }) }
             </VListGroupActivator>
           </VDefaultsProvider>
-        ) }
+        )}
 
-        <VExpandTransition>
+        <MaybeTransition transition={{ component: VExpandTransition }} disabled={ !isBooted.value }>
           <div class="v-list-group__items" role="group" aria-labelledby={ id.value } v-show={ isOpen.value }>
             { slots.default?.() }
           </div>
-        </VExpandTransition>
+        </MaybeTransition>
       </props.tag>
     ))
 
@@ -132,7 +120,3 @@ export const VListGroup = genericComponent<new <T extends InternalListItem>() =>
 })
 
 export type VListGroup = InstanceType<typeof VListGroup>
-
-export function filterListGroupProps (props: ExtractPropTypes<ReturnType<typeof makeVListGroupProps>>) {
-  return pick(props, Object.keys(VListGroup.props) as any)
-}

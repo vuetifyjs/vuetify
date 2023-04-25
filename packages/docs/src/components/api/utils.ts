@@ -1,6 +1,3 @@
-import prettier from 'prettier'
-import typescriptParser from 'prettier/parser-typescript'
-
 export type Item = {
   name: string
   source: string
@@ -26,7 +23,7 @@ export type Item = {
 export function stripLinks (str: string): [string, Record<string, string>] {
   let out = str.slice()
   const obj: Record<string, string> = {}
-  const regexp = /<a.*>(.*?)<\/a>/g
+  const regexp = /<a.*?>(.*?)<\/a>/g
 
   let matches = regexp.exec(str)
 
@@ -42,12 +39,16 @@ export function stripLinks (str: string): [string, Record<string, string>] {
 
 export function insertLinks (str: string, stripped: Record<string, string>) {
   for (const [key, value] of Object.entries(stripped)) {
-    str = str.replace(key, value)
+    str = str.replaceAll(new RegExp(`(^|\\W)(${key})(\\W|$)`, 'g'), `$1${value}$3`)
   }
   return str
 }
 
-export function getType (item: { formatted: string }) {
+export async function getType (item: { formatted: string }) {
+  const [{ default: prettier }, { default: typescriptParser }] = await Promise.all([
+    import ('prettier'),
+    import('prettier/parser-typescript'),
+  ])
   const prefix = 'type Type = '
   const [str, stripped] = stripLinks(item.formatted)
   const formatted = prettier.format(prefix + str, {

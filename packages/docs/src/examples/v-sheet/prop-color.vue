@@ -1,6 +1,6 @@
 <template>
   <v-container>
-    <v-row class="flex-child">
+    <v-row class="flex-child text-subtitle-2">
       <v-col
         class="d-flex"
         cols="12"
@@ -16,6 +16,7 @@
           </sheet-footer>
         </v-sheet>
       </v-col>
+
       <v-col
         class="d-flex"
         cols="12"
@@ -103,12 +104,9 @@
       SheetFooter: {
         setup (_, { slots }) {
           return () => h('v-sheet', {
-            staticClass: 'mt-auto align-center justify-center d-flex px-2',
-            props: {
-              color: 'rgba(0, 0, 0, .36)',
-              dark: true,
-              height: 50,
-            },
+            class: 'ma-auto px-4',
+            color: 'rgba(0, 0, 0, .36)',
+            height: 50,
           }, slots.default())
         },
       },

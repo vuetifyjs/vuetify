@@ -6,17 +6,15 @@ meta:
 nav: Roadmap
 related:
   - /introduction/long-term-support/
-  - /introduction/support/
-  - /getting-started/frequently-asked-questions/
+  - /introduction/enterprise-support/
+  - /getting-started/browser-support/
 ---
 
 # The Vuetify roadmap
 
 Vuetify is always under development. We are constantly working towards improving the existing codebase, adding new features, and expanding the ecosystem with developer tooling that makes building applications even easier.
 
-![Roadmap Entry](https://cdn.vuetifyjs.com/docs/images/entry/roadmap.png)
-
-----
+<entry />
 
 ## In Development
 

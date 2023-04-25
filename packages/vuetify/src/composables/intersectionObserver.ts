@@ -2,7 +2,7 @@
 import { onBeforeUnmount, ref, watch } from 'vue'
 import { SUPPORTS_INTERSECTION } from '@/util'
 
-export function useIntersectionObserver (callback?: IntersectionObserverCallback) {
+export function useIntersectionObserver (callback?: IntersectionObserverCallback, options?: IntersectionObserverInit) {
   const intersectionRef = ref<HTMLElement>()
   const isIntersecting = ref(false)
 
@@ -11,7 +11,7 @@ export function useIntersectionObserver (callback?: IntersectionObserverCallback
       callback?.(entries, observer)
 
       isIntersecting.value = !!entries.find(entry => entry.isIntersecting)
-    })
+    }, options)
 
     onBeforeUnmount(() => {
       observer.disconnect()

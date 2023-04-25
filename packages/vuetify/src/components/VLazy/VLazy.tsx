@@ -8,12 +8,12 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import intersect from '@/directives/intersect'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VLazy = defineComponent({
+export const VLazy = genericComponent()({
   name: 'VLazy',
 
   directives: { intersect },
@@ -55,8 +55,11 @@ export const VLazy = defineComponent({
       <props.tag
         class="v-lazy"
         v-intersect={[
-          onIntersect,
-          props.options,
+          {
+            handler: onIntersect,
+            options: props.options,
+          },
+          null,
           isActive.value ? [] : ['once'],
         ]}
         style={ dimensionStyles.value }

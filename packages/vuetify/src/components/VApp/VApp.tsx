@@ -7,9 +7,9 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
-export const VApp = defineComponent({
+export const VApp = genericComponent()({
   name: 'VApp',
 
   props: {

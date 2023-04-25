@@ -1,13 +1,15 @@
 <template>
-  <div class="border rounded mt-12">
+  <div class="border rounded my-6">
     <v-autocomplete
       v-model="search"
       :items="releases"
       :loading="store.isLoading"
       :menu-props="menuProps"
+      :placeholder="`v${version}`"
       hide-details
       item-title="name"
       label="Select Release Version"
+      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
       @blur="resetSearch"
@@ -40,10 +42,7 @@
         v-if="!!search"
         class="d-flex justify-space-between"
       >
-        <v-list-item
-          :prepend-avatar="search.author.avatar_url"
-          lines="two"
-        >
+        <v-list-item lines="two">
           <v-list-item-title class="mb-1 text-h6">
             <i18n-t keypath="released-by">
               <template #author>
@@ -80,7 +79,8 @@
             :path="tooltip.path"
             :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
-            class="text-white"
+            class="text-white ms-2"
+            density="comfortable"
             variant="flat"
           />
         </div>
@@ -106,6 +106,7 @@
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref } from 'vue'
+  import { version } from 'vuetify'
 
   const { t } = useI18n()
   const store = useReleasesStore()
@@ -144,6 +145,12 @@
         icon: 'mdi-discord',
         href: 'https://discord.gg/QHWSAbA',
         path: 'discuss-on-discord',
+      },
+      {
+        color: '#212121',
+        href: search.value.html_url,
+        icon: 'mdi-github',
+        path: 'open-github-release',
       },
     ]
   })

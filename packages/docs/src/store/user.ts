@@ -18,6 +18,7 @@ export type RootState = {
     read: string[]
     last: {
       banner: null | number
+      v2banner: null | number
       install: null | number
       notification: null | number
       promotion: null | number
@@ -38,6 +39,7 @@ export const useUserStore = defineStore('user', () => {
       read: [],
       last: {
         banner: null,
+        v2banner: null,
         install: null,
         notification: null,
         promotion: null,

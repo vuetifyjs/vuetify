@@ -20,7 +20,6 @@ import {
   filterInputAttrs,
   genericComponent,
   getUid,
-  pick,
   propsFactory,
   SUPPORTS_FOCUS_VISIBLE,
   useRender,
@@ -29,7 +28,7 @@ import {
 
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
-import type { SlotsToProps } from '@/util'
+import type { MakeSlots, SlotsToProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -41,6 +40,12 @@ export type SelectionControlSlot = {
     id: string
   }
 }
+
+export type VSelectionControlSlots = MakeSlots<{
+  default: []
+  label: [{ label: string | undefined, props: Record<string, unknown> }]
+  input: [SelectionControlSlot]
+}>
 
 export const makeSelectionControlProps = propsFactory({
   label: String,
@@ -122,10 +127,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
   $props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<{
-    default: []
-    input: [SelectionControlSlot]
-  }>
+  } & SlotsToProps<VSelectionControlSlots>
 }>()({
   name: 'VSelectionControl',
 
@@ -254,7 +256,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                   onBlur,
                   id: id.value,
                 },
-              } as SelectionControlSlot) }
+              } as SelectionControlSlot)}
             </div>
           </div>
 
@@ -262,7 +264,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             <VLabel for={ id.value } clickable>
               { label }
             </VLabel>
-          ) }
+          )}
         </div>
       )
     })
@@ -275,7 +277,3 @@ export const VSelectionControl = genericComponent<new <T>() => {
 })
 
 export type VSelectionControl = InstanceType<typeof VSelectionControl>
-
-export function filterControlProps (props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>>) {
-  return pick(props, Object.keys(VSelectionControl.props) as any)
-}

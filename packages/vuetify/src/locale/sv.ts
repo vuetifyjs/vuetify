@@ -73,4 +73,9 @@ export default {
       item: 'Betyg {0} av {1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

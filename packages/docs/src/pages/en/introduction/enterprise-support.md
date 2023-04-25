@@ -5,7 +5,7 @@ meta:
   description: Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.
   keywords: vuetify enterprise, tidelift enterprise, tidelift vuetify
 related:
-  - /introduction/support/
+  - /introduction/long-term-support/
   - /about/security-disclosure/
   - /introduction/meet-the-team/
 ---

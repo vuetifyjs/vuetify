@@ -6,7 +6,7 @@ meta:
   keywords: toolbars, vuetify toolbar component, vue toolbar component
 related:
   - /components/buttons/
-  - /components/footer/
+  - /components/footers/
   - /components/tabs/
 ---
 
@@ -28,17 +28,14 @@ A toolbar is a flexible container that can be used in a number of ways. By defau
 
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-toolbar](/api/v-toolbar/) | Primary Component |
+| [v-toolbar-items](/api/v-toolbar-items/) | Sub-component used to modify the styling of [v-btn](/components/buttons) |
+| [v-toolbar-title](/api/v-toolbar-title/) | Sub-component used to display the title of the toolbar |
+| [v-btn](/api/v-btn/) | Sub-component commonly used in `v-toolbar` |
 
-<!-- ## Sub-components
-
-### v-toolbar-items
-
-v-toolbar-items description
-
-### v-toolbar-title
-
-v-toolbar-title description -->
+<api-inline hide-links />
 
 ## Caveats
 
@@ -96,7 +93,7 @@ Toolbars come in **2** variants, light and dark. Light toolbars have dark tinted
 
 #### Prominent toolbars
 
-Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
+Prominent toolbars increase the `v-toolbar`'s height to _128px_ and positions the `v-toolbar-title` towards the bottom of the container. This is expanded upon in [v-app-bar](/components/app-bars#prominent-w-scroll-shrink) with the ability to shrink a **prominent** toolbar to a **dense** or **short** one.
 
 <example file="v-toolbar/prop-prominent" />
 

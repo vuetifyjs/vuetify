@@ -7,7 +7,7 @@ meta:
 related:
   - /getting-started/installation/
   - /getting-started/browser-support/
-  - /components/all/
+  - /introduction/sponsors-and-backers/
 ---
 
 # Vuetify Labs
@@ -17,6 +17,8 @@ Experiment and use in-development components before they're released.
 ![Labs Entry](https://cdn.vuetifyjs.com/docs/images/entry/labs-entry.png)
 
 ----
+
+<entry />
 
 ## What is Labs? { id=what-is-labs }
 
@@ -94,14 +96,20 @@ The following is a list of available and up-and-coming components for use with L
 | [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component |
 | **Virtual scroll** | [Usage](/components/virtual-scrollers/) |
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
+| **Skeleton loader** | [Usage](/components/skeleton-loaders/) |
+| [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
+| **Infinite scroll** | [Usage](/components/infinite-scroller/) |
+| [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
 ### Up Next
 
 | Component | Release Target |
 | - | - |
-| v-calendar | Q1 2023 |
-| v-infinite-scroll | Q1 2023 |
+| v-infinite-scroll | April 2023 |
+| v-calendar | ~~Q1~~* Q2 2023 |
 | v-date-picker | Q2 2023 |
+
+* Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.
 
 <alert type="warning">
 

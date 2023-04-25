@@ -13,23 +13,27 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { defineComponent } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
-export const VSheet = defineComponent({
+export const makeVSheetProps = propsFactory({
+  color: String,
+
+  ...makeBorderProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-sheet')
+
+export const VSheet = genericComponent()({
   name: 'VSheet',
 
   props: {
-    color: String,
-
-    ...makeBorderProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
+    ...makeVSheetProps(),
   },
 
   setup (props, { slots }) {
@@ -42,7 +46,7 @@ export const VSheet = defineComponent({
     const { positionClasses } = usePosition(props)
     const { roundedClasses } = useRounded(props)
 
-    return () => (
+    useRender(() => (
       <props.tag
         class={[
           'v-sheet',
@@ -60,7 +64,9 @@ export const VSheet = defineComponent({
         ]}
         v-slots={ slots }
       />
-    )
+    ))
+
+    return {}
   },
 })
 

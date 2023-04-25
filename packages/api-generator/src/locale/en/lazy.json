@@ -1,5 +1,5 @@
 {
   "props": {
-    "eager": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/next/packages/api-generator/src/locale/en/lazy.json))"
+    "eager": "Forces the component's content to render when it mounts. This is useful if you have content that will not be rendered in the DOM that you want crawled for SEO."
   }
 }

@@ -12,7 +12,7 @@ related:
 
 # Cards
 
- The `v-card` component is a versatile an enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
+ The `v-card` component is a versatile and enhanced version of [v-sheet](/components/sheets/) that provides a simple interface for headings, text, images, icons, and more <inline slug="scrimba-cards" />
 
 ![Card Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-card/v-card-entry.png)
 
@@ -25,6 +25,17 @@ The `v-card` component is a stylish way to wrap different types of content; such
 <usage name="v-card" />
 
 <entry />
+
+## API
+
+| Component | Description |
+| - | - |
+| [v-card](/api/v-card/) | Primary Component |
+| [v-card-item](/api/v-card-item/) | Sub-component used to wrap the Card's `v-card-title` and `v-card-subtitle` components. |
+| [v-card-title](/api/v-card-title/) | Sub-component used to display the Card's title. Wraps the `#title` slot |
+| [v-card-subtitle](/api/v-card-subtitle/) | Sub-component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
+| [v-card-text](/api/v-card-text/) | Sub-component used to display the Card's text. Wraps the `#text` slot. |
+| [v-card-actions](/api/v-card-actions/) | Sub-component that modifies the default styling of [v-btn](/components/buttons/). Wraps the `#actions` slot |
 
 ## Anatomy
 
@@ -44,16 +55,7 @@ The recommended placement of elements inside of `v-card` is:
 | 4. Text (optional) | A content area with a lower emphasis text color |
 | 5. Actions (optional) | A content area that typically contains one or more [v-btn](/components/buttons) components |
 
-## API
-
-| Component | Description |
-| - | - |
-| [v-card](/api/v-card/) | Primary Component |
-| [v-card-item](/api/v-card-item/) | Functional component used to wrap the Card's `v-card-title` and `v-card-subtitle` components. |
-| [v-card-title](/api/v-card-title/) | Functional component used to display the Card's title. Wraps the `#title` slot |
-| [v-card-subtitle](/api/v-card-subtitle/) | Functional component used to display the Card's subtitle. Wraps the `#subtitle` slot. |
-| [v-card-text](/api/v-card-text/) | Functional component used to display the Card's subtitle. Wraps the `#text` slot. |
-| [v-card-actions](/api/v-card-actions/) | Functional component that modifies the default styling of [v-btn](/components/buttons/) and provides a container for user actions |
+<api-inline hide-links />
 
 ## Basics
 

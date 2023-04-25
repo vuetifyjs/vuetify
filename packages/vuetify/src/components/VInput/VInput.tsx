@@ -11,11 +11,11 @@ import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
 import { computed } from 'vue'
-import { EventProp, genericComponent, getUid, isOn, pick, propsFactory, useRender } from '@/util'
+import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { MakeSlots } from '@/util'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
@@ -37,6 +37,8 @@ export const makeVInputProps = propsFactory({
   appendIcon: IconValue,
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
+  hint: String,
+  persistentHint: Boolean,
   messages: {
     type: [Array, String] as PropType<string | string[]>,
     default: () => ([]),
@@ -47,8 +49,8 @@ export const makeVInputProps = propsFactory({
     validator: (v: any) => ['horizontal', 'vertical'].includes(v),
   },
 
-  'onClick:prepend': EventProp,
-  'onClick:append': EventProp,
+  'onClick:prepend': EventProp<[MouseEvent]>(),
+  'onClick:append': EventProp<[MouseEvent]>(),
 
   ...makeDensityProps(),
   ...makeValidationProps(),
@@ -61,9 +63,7 @@ export type VInputSlots = MakeSlots<{
   details: [VInputSlot]
 }>
 
-export const VInput = genericComponent<new () => {
-  $props: SlotsToProps<VInputSlots>
-}>()({
+export const VInput = genericComponent<VInputSlots>()({
   name: 'VInput',
 
   props: {
@@ -110,13 +110,20 @@ export const VInput = genericComponent<new () => {
       validate,
     }))
 
+    const messages = computed(() => {
+      if (errorMessages.value.length > 0) {
+        return errorMessages.value
+      } else if (props.hint && (props.persistentHint || props.focused)) {
+        return props.hint
+      } else {
+        return props.messages
+      }
+    })
+
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.prependIcon)
       const hasAppend = !!(slots.append || props.appendIcon)
-      const hasMessages = !!(
-        props.messages?.length ||
-        errorMessages.value.length
-      )
+      const hasMessages = messages.value.length > 0
       const hasDetails = !props.hideDetails || (
         props.hideDetails === 'auto' &&
         (hasMessages || !!slots.details)
@@ -139,15 +146,15 @@ export const VInput = genericComponent<new () => {
                   key="prepend-icon"
                   name="prepend"
                 />
-              ) }
+              )}
             </div>
-          ) }
+          )}
 
           { slots.default && (
             <div class="v-input__control">
               { slots.default?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasAppend && (
             <div key="append" class="v-input__append">
@@ -156,27 +163,24 @@ export const VInput = genericComponent<new () => {
                   key="append-icon"
                   name="append"
                 />
-              ) }
+              )}
 
               { slots.append?.(slotProps.value) }
             </div>
-          ) }
+          )}
 
           { hasDetails && (
             <div class="v-input__details">
               <VMessages
                 id={ messagesId.value }
                 active={ hasMessages }
-                messages={ errorMessages.value.length > 0
-                  ? errorMessages.value
-                  : props.messages
-                }
+                messages={ messages.value }
                 v-slots={{ message: slots.message }}
               />
 
               { slots.details?.(slotProps.value) }
             </div>
-          ) }
+          )}
         </div>
       )
     })
@@ -190,8 +194,3 @@ export const VInput = genericComponent<new () => {
 })
 
 export type VInput = InstanceType<typeof VInput>
-
-export function filterInputProps (props: Record<string, unknown>) {
-  const keys = Object.keys(VInput.props).filter(k => !isOn(k))
-  return pick(props, keys)
-}

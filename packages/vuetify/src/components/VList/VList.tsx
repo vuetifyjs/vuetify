@@ -25,7 +25,6 @@ import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
-import type { ListGroupActivatorSlot } from './VListGroup'
 import type { SlotsToProps } from '@/util'
 import type { PropType } from 'vue'
 
@@ -81,7 +80,7 @@ export const VList = genericComponent<new <T>() => {
     items?: T[]
   } & SlotsToProps<{
     subheader: []
-    header: [ListGroupActivatorSlot]
+    header: [{ props: Record<string, unknown> }]
     item: [T]
   }>
 }>()({
@@ -195,9 +194,8 @@ export const VList = genericComponent<new <T>() => {
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
       if (!contentRef.value) return
 
-      const focusable = [...contentRef.value.querySelectorAll(
-        'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-      )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
+      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
       const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
       if (!location) {
