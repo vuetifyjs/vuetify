@@ -15,7 +15,7 @@ related:
 ## Introduction
 
 This page contains a detailed list of breaking changes and the steps required to upgrade your application to Vuetify 3.0
-Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/v/next)
+Many of these changes can be applied automatically by [eslint-plugin-vuetify](https://www.npmjs.com/package/eslint-plugin-vuetify/)
 
 <entry />
 

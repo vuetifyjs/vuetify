@@ -27,7 +27,7 @@
         js: 'mdi-nodejs',
         json: 'mdi-code-json',
         md: 'mdi-language-markdown',
-        pdf: 'mdi-file-pdf',
+        pdf: 'mdi-file-pdf-box',
         png: 'mdi-file-image',
         txt: 'mdi-file-document-outline',
         xls: 'mdi-file-excel',

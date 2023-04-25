@@ -17,7 +17,7 @@ export function useOptions ({
   itemsPerPage: Ref<number>
   sortBy: Ref<readonly SortItem[]>
   groupBy: Ref<readonly SortItem[]>
-  search?: Ref<string | undefined>
+  search: Ref<string | undefined>
 }) {
   const vm = getCurrentInstance('VDataTable')
 
@@ -26,6 +26,7 @@ export function useOptions ({
     itemsPerPage: itemsPerPage.value,
     sortBy: sortBy.value,
     groupBy: groupBy.value,
+    search: search.value,
   }))
 
   // Reset page when searching
