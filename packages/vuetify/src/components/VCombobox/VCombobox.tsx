@@ -373,7 +373,9 @@ export const VCombobox = genericComponent<new <
               'v-combobox--selecting-index': selectionIndex.value > -1,
               [`v-combobox--${props.multiple ? 'multiple' : 'single'}`]: true,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }

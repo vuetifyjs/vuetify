@@ -273,7 +273,9 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly
           placeholder={ placeholder }
