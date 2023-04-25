@@ -96,7 +96,7 @@ export const VSelect = genericComponent<new <
   name: 'VSelect',
 
   props: {
-    ...makeSelectProps({ multiple: false, returnObject: false }),
+    ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),

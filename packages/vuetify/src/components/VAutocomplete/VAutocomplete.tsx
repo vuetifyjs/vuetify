@@ -90,7 +90,7 @@ export const VAutocomplete = genericComponent<new <
     search: String,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ multiple: false, returnObject: false }),
+    ...makeSelectProps(),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),
