@@ -66,9 +66,9 @@ This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vue
 
 </alert>
 
-In addition properties, Vuetify allows you to set global classes and styles that are applied to all components; included nested default configurations. While this feature works for defaults of regular Vuetify components, it is especially useful when creating [virtual components](/features/aliasing/#virtual-component-defaults).
+Define global classes and styles that are applied to an individual component or globally. This makes it extremely easy to customize the look and feel of your application using [virtual](/features/aliasing/#virtual-component-defaults) or [built-in](/components/all/) components.
 
-The following example demonstrates how to set a global class and style for a core Vuetify component and an aliased one:
+The following example creates an alias of the [v-btn](/components/buttons/) component and modifies some of its defaults:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -76,60 +76,72 @@ import { VBtn } from 'vuetify/components/VBtn'
 
 export default createVuetify({
   aliases: {
-    GBtnPrimary: VBtn,
-    GBtnSecondary: VBtn,
+    VBtnPrimary: VBtn,
   },
+
   defaults: {
-    GBtnPrimary: {
-      class: 'g-btn-primary',
+    global: {
+      class: 'v-global-class',
+    },
+    VBtnPrimary: {
+      class: 'v-btn--primary',
       style: 'text-transform: none;',
-    },
-    GBtnSecondary: {
-      class: 'g-btn-secondary',
-      style: 'letter-spacing: 2px;',
-    },
-    VBtn: {
-      color: 'success',
     },
   },
 })
 ```
 
-### Limitations and caveats
+Now when `<v-btn-primary>` is used in a Vue template, it will have both the `v-global-class` and `v-btn--primary` classes:
 
-Class and style defaults are not merged with with template defined classes and styles. This means if you use a custom class in a template it **will** override the global default value. In the following example we create a virtual component named **GSheetPrimary** and set the default class to `g-sheet-primary`:
+```html
+<!-- Example HTML Output -->
+<button class="v-global-class v-btn v-btn--primary">Foobar</button>
+```
+
+This is also useful when you have multiple variants of a component that need individual classes to target:
+
+```html { resource="src/components/HelloWorld.vue" }
+<template>
+  <v-app>
+    <v-main>
+      <v-btn-primary>Primary</v-btn-primary>
+
+      <v-btn-secondary>Secondary</v-btn-secondary>
+    </v-main>
+  </v-app>
+</template>
+
+<style>
+  .v-btn.v-btn--primary {
+    background: linear-gradient(to right, #ff8a00, #da1b60);
+    color: white;
+  }
+  .v-btn.v-btn--secondary {
+    z-index: 999;
+  }
+</style>
+```
+
+Keep in mind, aliased components do not inherit global class or styles from their extension. For example, the following Vuetify configuration uses a [v-chip](/components/chips/) as the alias for the virtual `<v-chip-primary>` component.
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import { VSheet } from 'vuetify/components/VSheet'
+import { VChip } from 'vuetify/components/VChip'
 
 export default createVuetify({
   aliases: {
-    GSheetPrimary: VSheet,
+    VChipPrimary: VChip,
   },
+
   defaults: {
-    GSheetPrimary: {
-      class: 'border',
+    VChipPrimary: {
+      class: 'v-chip--primary',
+    },
+    VChip: {
+      class: 'v-chip--custom',
     },
   },
 })
 ```
 
-```html
-<template>
-  <GSheetPrimary />
-  <!-- <v-sheet class="v-sheet g-sheet-primary ..."> -->
-
-  <GSheetPrimary class="custom-class" />
-  <!-- <v-sheet class="v-sheet custom-class ..."> -->
-</template>
-```
-
-## Priority
-
-When creating and mounting a component, Vuetify uses the following priority in determining which prop value to use:
-
-1. Value set as prop value to the component itself
-2. Value defined in component specific section of defaults configuration object
-3. Value defined in global section of defaults configuration object
-4. Value defined in the prop definition of the Vuetify component itself.
+When `<v-chip-primary>` is used in a template, it will **not** have the `v-chip--custom` class.
