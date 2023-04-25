@@ -1,6 +1,6 @@
 // Utilities
 import { computed } from 'vue'
-import { getPropertyFromItem, pick, propsFactory } from '@/util'
+import { deepEqual, getPropertyFromItem, pick, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -93,7 +93,12 @@ export function useItems (props: ItemProps) {
   const items = computed(() => transformItems(props, props.items))
 
   function transformIn (value: any[]): InternalItem[] {
-    return value.map(item => transformItem(props, item))
+    return value.map(v => {
+      const existingItem = items.value.find(item => deepEqual(v, item.value))
+      // Nullish existingItem means value is a custom input value from combobox
+      // In this case, use transformItem to create an InternalItem based on value
+      return existingItem ?? transformItem(props, v)
+    })
   }
 
   function transformOut (value: InternalItem[]) {
