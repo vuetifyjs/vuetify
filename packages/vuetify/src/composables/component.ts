@@ -8,7 +8,7 @@ export type ClassValue = any
 
 export interface ComponentProps {
   class?: ClassValue
-  style: StyleValue
+  style: StyleValue | undefined
 }
 
 // Composables

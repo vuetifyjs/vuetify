@@ -52,14 +52,14 @@ export const VDivider = genericComponent()({
             'v-divider--inset': props.inset,
             'v-divider--vertical': props.vertical,
           },
-          props.class,
           themeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           dividerStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         aria-orientation={
           !attrs.role || attrs.role === 'separator'

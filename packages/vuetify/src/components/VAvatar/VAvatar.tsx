@@ -49,7 +49,6 @@ export const VAvatar = genericComponent()({
       <props.tag
         class={[
           'v-avatar',
-          props.class,
           {
             'v-avatar--start': props.start,
             'v-avatar--end': props.end,
@@ -60,11 +59,12 @@ export const VAvatar = genericComponent()({
           roundedClasses.value,
           sizeClasses.value,
           variantClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           colorStyles.value,
           sizeStyles.value,
+          props.style,
         ]}
       >
         { props.image

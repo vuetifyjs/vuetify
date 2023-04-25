@@ -74,15 +74,15 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
       <button
         class={[
           'v-expansion-panel-title',
-          props.class,
           {
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
           },
           backgroundColorClasses.value,
+          props.class,
         ]}
         style={[
-          props.style,
           backgroundColorStyles.value,
+          props.style,
         ]}
         type="button"
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }

@@ -57,11 +57,11 @@ export const VChipGroup = genericComponent()({
       <props.tag
         class={[
           'v-chip-group',
-          props.class,
           {
             'v-chip-group--column': props.column,
           },
           themeClasses.value,
+          props.class,
         ]}
         style={ props.style }
       >

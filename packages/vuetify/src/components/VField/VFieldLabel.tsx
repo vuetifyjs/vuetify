@@ -21,8 +21,8 @@ export const VFieldLabel = genericComponent()({
       <VLabel
         class={[
           'v-field-label',
-          props.class,
           { 'v-field-label--floating': props.floating },
+          props.class,
         ]}
         style={ props.style }
         aria-hidden={ props.floating || undefined }

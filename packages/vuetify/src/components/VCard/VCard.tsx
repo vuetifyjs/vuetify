@@ -75,9 +75,8 @@ export const VCard = genericComponent<VCardSlots>()({
     text: String,
     title: String,
 
-    ...makeComponentProps(),
-    ...makeThemeProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -87,6 +86,7 @@ export const VCard = genericComponent<VCardSlots>()({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
     ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
@@ -125,7 +125,6 @@ export const VCard = genericComponent<VCardSlots>()({
         <Tag
           class={[
             'v-card',
-            props.class,
             {
               'v-card--disabled': props.disabled,
               'v-card--flat': props.flat,
@@ -141,12 +140,13 @@ export const VCard = genericComponent<VCardSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }

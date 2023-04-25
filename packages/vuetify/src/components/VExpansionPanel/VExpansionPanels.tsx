@@ -64,9 +64,9 @@ export const VExpansionPanels = genericComponent()({
       <props.tag
         class={[
           'v-expansion-panels',
-          props.class,
           themeClasses.value,
           variantClass.value,
+          props.class,
         ]}
         style={ props.style }
         v-slots={ slots }

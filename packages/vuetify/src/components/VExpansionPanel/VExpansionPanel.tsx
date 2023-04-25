@@ -77,7 +77,6 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
         <props.tag
           class={[
             'v-expansion-panel',
-            props.class,
             {
               'v-expansion-panel--active': groupItem.isSelected.value,
               'v-expansion-panel--before-active': isBeforeSelected.value,
@@ -86,10 +85,11 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             },
             roundedClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             backgroundColorStyles.value,
+            props.style,
           ]}
           aria-expanded={ groupItem.isSelected.value }
         >

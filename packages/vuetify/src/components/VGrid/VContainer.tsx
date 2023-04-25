@@ -26,8 +26,8 @@ export const VContainer = genericComponent()({
       <props.tag
         class={[
           'v-container',
-          props.class,
           { 'v-container--fluid': props.fluid },
+          props.class,
         ]}
         style={ props.style }
         v-slots={ slots }

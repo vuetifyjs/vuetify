@@ -104,12 +104,13 @@ export const VTab = genericComponent()({
 
       return (
         <VBtn
-          _as="VTab"
           symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
+          style={ props.style }
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }

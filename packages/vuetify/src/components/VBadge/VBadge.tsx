@@ -98,13 +98,13 @@ export const VBadge = genericComponent<VBadgeSlots>()({
         <props.tag
           class={[
             'v-badge',
-            props.class,
             {
               'v-badge--bordered': props.bordered,
               'v-badge--dot': props.dot,
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            props.class,
           ]}
           { ...attrs }
           style={ props.style }

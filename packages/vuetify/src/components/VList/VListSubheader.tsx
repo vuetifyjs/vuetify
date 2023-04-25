@@ -30,16 +30,16 @@ export const VListSubheader = genericComponent()({
         <props.tag
           class={[
             'v-list-subheader',
-            props.class,
             {
               'v-list-subheader--inset': props.inset,
               'v-list-subheader--sticky': props.sticky,
             },
             textColorClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             { textColorStyles },
+            props.style,
           ]}
         >
           { hasText && (

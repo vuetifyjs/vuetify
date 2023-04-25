@@ -276,52 +276,43 @@ describe('VAutocomplete', () => {
 
   describe('global configuration', () => {
     it('should only apply \'v-autocomplete\' class to root element and also apply global config class/style', () => {
-      cy.mount(() => (
-        <VDefaultsProvider defaults={{
-          global: {
-            class: 'v-global-class',
-            style: {
-              opacity: 0.5,
-            },
-          },
-          VAutocomplete: {
-            class: 'v-autocomplete-alt',
-            style: {
-              margin: '1px',
-            },
-          },
-          VTextField: {
-            class: 'v-textfield-alt',
-            style: {
-              padding: '1px',
-            },
-          },
-          VInput: {
-            class: 'v-input-alt',
-            style: {
-              color: 'black',
-            },
-          },
-        }}
-        >
-
-          <VAutocomplete />
-        </VDefaultsProvider>
-      ))
-
-      cy.get('.v-autocomplete')
-        .should('have.length', 1)
-        // assert it's the root element
-        .should('have.class', 'v-input')
-        .should('have.class', 'v-autocomplete-alt') // VAutocomplete class takes highest priority
-        .should('have.css', 'margin', '1px') // VAutocomplete style takes highest priority
-        .should('have.css', 'padding', '0px') // Ignore VTextField global style
-        .should('have.css', 'color', 'rgb(0, 0, 0)') // Ignore VInput global style
-        .should('have.css', 'opacity', '1') // Ignore global style
-
-      cy.get('.v-autocomplete.v-global-class').should('not.exist') // Ignore global class
-      cy.get('.v-autocomplete.v-textfield-alt').should('not.exist') // Ignore VTextField global class
-      cy.get('.v-autocomplete.v-input-alt').should('not.exist') // Ignore VInput global style
+      cy
+        .mount(() => (
+          <VDefaultsProvider
+            defaults={{
+              global: {
+                class: 'v-global-class',
+                style: {
+                  opacity: 0.5,
+                },
+              },
+              VAutocomplete: {
+                class: 'v-autocomplete-alt',
+                style: {
+                  margin: '2px',
+                  padding: '1px',
+                },
+              },
+              VInput: {
+                class: 'v-input-alt',
+                style: {
+                  color: 'black',
+                  margin: '1px',
+                },
+              },
+            }}
+          >
+            <VAutocomplete />
+          </VDefaultsProvider>
+        ))
+        .get('.v-autocomplete')
+        .should('have.class', 'v-global-class')
+        .should('have.class', 'v-autocomplete-alt')
+        .should('have.class', 'v-input-alt')
+        .should('have.css', 'margin', '2px')
+        .should('have.css', 'padding', '1px')
+        .should('have.css', 'color', 'rgb(0, 0, 0)')
+        .should('have.css', 'opacity', '0.5')
     })
   })
 })

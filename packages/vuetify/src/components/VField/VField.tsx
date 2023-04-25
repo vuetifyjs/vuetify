@@ -82,9 +82,9 @@ export const makeVFieldProps = propsFactory({
   'onClick:prependInner': EventProp<[MouseEvent]>(),
 
   ...makeComponentProps(),
-  ...makeThemeProps(),
   ...makeLoaderProps(),
   ...makeRoundedProps(),
+  ...makeThemeProps(),
 }, 'v-field')
 
 export type VFieldSlots = MakeSlots<{

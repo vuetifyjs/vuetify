@@ -38,7 +38,6 @@ export const VBreadcrumbsItem = genericComponent()({
         <Tag
           class={[
             'v-breadcrumbs-item',
-            props.class,
             {
               'v-breadcrumbs-item--active': isActive.value,
               'v-breadcrumbs-item--disabled': props.disabled,
@@ -46,10 +45,11 @@ export const VBreadcrumbsItem = genericComponent()({
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
+            props.class,
           ]}
           style={[
-            props.style,
             textColorStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }

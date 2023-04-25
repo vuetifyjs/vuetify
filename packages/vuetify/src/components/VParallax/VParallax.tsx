@@ -15,7 +15,7 @@ import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 
 // Types
-import type { VImgSlots } from '../VImg/VImg'
+import type { VImgSlots } from '@/components/VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
