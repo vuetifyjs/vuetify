@@ -91,7 +91,7 @@ export const VCombobox = genericComponent<new <
     delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ hideNoData: true, multiple: false, returnObject: true }),
+    ...makeSelectProps({ hideNoData: true, returnObject: true }),
     ...omit(makeVTextFieldProps({
       modelValue: null,
     }), ['validationValue', 'dirty', 'appendInnerIcon']),
