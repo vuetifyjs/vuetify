@@ -117,7 +117,3 @@ A menu can be configured to be static when opened, allowing it to function as a 
 Menus can be placed within almost any component.
 
 <example file="v-menu/misc-use-in-components" />
-
-## Accessibility
-
-By default, `v-menu` components are _detached_ and moved to the root of your application. In order to properly support [inserting dynamic content into the DOM](https://www.w3.org/WAI/WCAG21/Techniques/client-side-script/SCR26), you _must_ use the **attach** prop. This will ensure that focus transfers from the activator to the content when pressing the <kbd>tab</kbd> key.

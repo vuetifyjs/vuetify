@@ -127,14 +127,12 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
             <>
               { slots.colgroup?.({ columns }) }
               <thead class="v-data-table__thead" role="rowgroup">
-                { slots.headers ? slots.headers() : (
-                  <VDataTableHeaders
-                    sticky={ props.fixedHeader }
-                    loading={ props.loading }
-                    color={ props.color }
-                    v-slots={ slots }
-                  />
-                )}
+                <VDataTableHeaders
+                  sticky={ props.fixedHeader }
+                  loading={ props.loading }
+                  color={ props.color }
+                  v-slots={ slots }
+                />
               </thead>
               { slots.thead?.() }
               <tbody class="v-data-table__tbody" role="rowgroup">

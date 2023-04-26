@@ -82,7 +82,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
       if (props.loading && slots.loading) {
         return (
           <tr
-            class="v-data-table-rows-no-data"
+            class="v-data-table-rows-loading"
             key="loading"
           >
             <td colspan={ columns.value.length }>
@@ -92,7 +92,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
         )
       }
 
-      if (!props.loading && !props.items.length && !props.hideNoData && slots['no-data']) {
+      if (!props.loading && !props.items.length && !props.hideNoData) {
         return (
           <tr
             class="v-data-table-rows-no-data"
