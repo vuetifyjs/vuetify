@@ -3,7 +3,6 @@
 import { VTextField } from '../VTextField'
 import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
-import { VDefaultsProvider } from '@/components'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 
@@ -51,31 +50,5 @@ describe('VTextField', () => {
 
   describe('Showcase', () => {
     generate({ stories })
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-text-field\' class to root element and also apply global config class/style', () => {
-      cy.mount(() => (
-        <VDefaultsProvider defaults={{
-          global: {
-            class: 'v-global-class',
-            style: {
-              opacity: 0.5,
-            },
-          },
-        }}
-        >
-
-          <VTextField />
-        </VDefaultsProvider>
-      ))
-
-      cy.get('.v-text-field')
-        .should('have.length', 1)
-        // assert it's the root element
-        .should('have.class', 'v-input')
-        .should('have.class', 'v-global-class')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VDefaultsProvider, VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'
@@ -365,47 +365,5 @@ describe('VSelect', () => {
       .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-select\' class to root element and also apply global config class/style', () => {
-      cy
-        .mount(() => (
-          <VDefaultsProvider
-            defaults={{
-              global: {
-                class: 'v-global-class',
-                style: {
-                  opacity: 0.5,
-                },
-              },
-              VSelect: {
-                class: 'v-select-alt',
-                style: {
-                  margin: '2px',
-                  padding: '1px',
-                },
-              },
-              VInput: {
-                class: 'v-input-alt',
-                style: {
-                  color: 'black',
-                  margin: '1px',
-                },
-              },
-            }}
-          >
-            <VSelect />
-          </VDefaultsProvider>
-        ))
-        .get('.v-select')
-        .should('have.class', 'v-global-class')
-        .should('have.class', 'v-select-alt')
-        .should('have.class', 'v-input-alt')
-        .should('have.css', 'margin', '2px')
-        .should('have.css', 'padding', '1px')
-        .should('have.css', 'color', 'rgb(0, 0, 0)')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

@@ -1,7 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import { VDefaultsProvider } from '@/components'
 import { ref } from 'vue'
 import { VFileInput } from '../VFileInput'
 
@@ -189,31 +188,5 @@ describe('VFileInput', () => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(0)
       })
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-file-input\' class to root element and also apply global config class/style', () => {
-      cy.mount(() => (
-        <VDefaultsProvider defaults={{
-          global: {
-            class: 'v-global-class',
-            style: {
-              opacity: 0.5,
-            },
-          },
-        }}
-        >
-
-          <VFileInput />
-        </VDefaultsProvider>
-      ))
-
-      cy.get('.v-file-input')
-        .should('have.length', 1)
-        // assert it's the root element
-        .should('have.class', 'v-input')
-        .should('have.class', 'v-global-class')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

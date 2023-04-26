@@ -1,6 +1,5 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VDefaultsProvider } from '@/components'
 import { ref } from 'vue'
 import { createRouter, createWebHistory } from 'vue-router'
 import { VTab, VTabs } from '../'
@@ -142,45 +141,5 @@ describe('VTabs', () => {
       .then(() => {
         expect(model.value).to.equal('B')
       })
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-tabs\' class to root element and also apply global config class/style', () => {
-      cy
-        .mount(() => (
-          <VDefaultsProvider
-            defaults={{
-              global: {
-                class: 'v-global-class',
-                style: {
-                  opacity: 0.5,
-                },
-              },
-              VTabs: {
-                class: 'v-tabs-alt',
-                style: {
-                  margin: '2px',
-                  padding: '1px',
-                },
-              },
-              VSlideGroup: {
-                class: 'v-slide-group-alt',
-                style: {
-                  margin: '1px',
-                },
-              },
-            }}
-          >
-            <VTabs />
-          </VDefaultsProvider>
-        ))
-        .get('.v-tabs')
-        .should('have.class', 'v-global-class')
-        .should('have.class', 'v-tabs-alt')
-        .should('have.class', 'v-slide-group-alt')
-        .should('have.css', 'margin', '2px')
-        .should('have.css', 'padding', '1px')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

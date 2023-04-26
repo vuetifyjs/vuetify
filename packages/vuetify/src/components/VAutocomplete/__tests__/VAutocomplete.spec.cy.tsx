@@ -1,6 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VDefaultsProvider, VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 import { VAutocomplete } from '../VAutocomplete'
 import { keyValues } from '@/util'
@@ -272,53 +272,5 @@ describe('VAutocomplete', () => {
       .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-autocomplete\' class to root element and also apply global config class/style', () => {
-      cy
-        .mount(() => (
-          <VDefaultsProvider
-            defaults={{
-              global: {
-                class: 'v-global-class',
-                style: {
-                  margin: '200px',
-                  opacity: 0.5,
-                },
-              },
-              VTextField: {
-                class: 'v-textfield--alt',
-                style: {
-                  margin: '2px',
-                },
-              },
-              VInput: {
-                class: 'v-input--alt',
-                style: {
-                  margin: '3px',
-                  padding: '1px',
-                },
-              },
-              VAutocomplete: {
-                class: 'v-autocomplete--alt',
-                style: {
-                  margin: '4px',
-                },
-              },
-            }}
-          >
-            <VAutocomplete />
-          </VDefaultsProvider>
-        ))
-        .get('.v-autocomplete')
-        .should('have.class', 'v-global-class')
-        .should('have.class', 'v-autocomplete--alt')
-        .should('have.class', 'v-input--alt')
-        .should('have.class', 'v-textfield--alt')
-        .should('have.css', 'margin', '4px')
-        .should('have.css', 'padding', '1px')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

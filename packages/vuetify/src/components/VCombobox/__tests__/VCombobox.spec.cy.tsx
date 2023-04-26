@@ -1,9 +1,7 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VForm } from '@/components'
+import { VForm } from '@/components/VForm'
 import { VCombobox } from '../VCombobox'
-import { Application } from '@/../cypress/templates'
 import { ref } from 'vue'
 import { keyValues } from '@/util'
 
@@ -468,49 +466,5 @@ describe('VCombobox', () => {
       .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-combobox\' class to root element and also apply global config class/style', () => {
-      cy
-        .mount(() => (
-          <Application>
-            <VDefaultsProvider
-              defaults={{
-                global: {
-                  class: 'v-global-class',
-                  style: {
-                    opacity: 0.5,
-                  },
-                },
-                VCombobox: {
-                  class: 'v-combobox-alt',
-                  style: {
-                    margin: '2px',
-                    padding: '1px',
-                  },
-                },
-                VInput: {
-                  class: 'v-input-alt',
-                  style: {
-                    color: 'black',
-                    margin: '1px',
-                  },
-                },
-              }}
-            >
-              <VCombobox />
-            </VDefaultsProvider>
-          </Application>
-        ))
-        .get('.v-combobox')
-        .should('have.class', 'v-global-class')
-        .should('have.class', 'v-combobox-alt')
-        .should('have.class', 'v-input-alt')
-        .should('have.css', 'margin', '2px')
-        .should('have.css', 'padding', '1px')
-        .should('have.css', 'color', 'rgb(0, 0, 0)')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

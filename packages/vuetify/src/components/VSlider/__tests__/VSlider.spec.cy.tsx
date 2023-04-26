@@ -3,7 +3,6 @@
 import { VApp } from '@/components/VApp'
 import { Application, CenteredGrid } from '@/../cypress/templates'
 import { VSlider } from '..'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 describe('VSlider', () => {
   it('should react to clicking on track', () => {
@@ -253,31 +252,5 @@ describe('VSlider', () => {
         [6.0051],
         [10],
       ])
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-slider\' class to root element and also apply global config class/style', () => {
-      cy.mount(() => (
-        <VDefaultsProvider defaults={{
-          global: {
-            class: 'v-global-class',
-            style: {
-              opacity: 0.5,
-            },
-          },
-        }}
-        >
-
-          <VSlider />
-        </VDefaultsProvider>
-      ))
-
-      cy.get('.v-slider')
-        .should('have.length', 1)
-        // assert it's the root element
-        .should('have.class', 'v-input')
-        .should('have.class', 'v-global-class')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })

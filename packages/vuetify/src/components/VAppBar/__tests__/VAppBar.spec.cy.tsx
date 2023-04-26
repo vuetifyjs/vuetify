@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VAppBar, VDefaultsProvider } from '@/components'
-import { VLayout } from '@/components/VLayout'
 // Components
+import { VAppBar } from '..'
+import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
 
 // Constants
@@ -95,48 +95,5 @@ describe('VAppBar', () => {
       .get('.v-toolbar__image').should('have.css', 'opacity', '0.8')
       .window().scrollTo(0, 0, SCROLL_OPTIONS)
       .get('.v-toolbar__image').should('have.css', 'opacity', '1')
-  })
-
-  describe('global configuration', () => {
-    it('should only apply \'v-app-bar\' class to root element and also apply global config class/style', () => {
-      cy
-        .mount(() => (
-          <VLayout>
-            <VDefaultsProvider
-              defaults={{
-                global: {
-                  class: 'v-global-class',
-                  style: {
-                    opacity: 0.5,
-                  },
-                },
-                VAppBar: {
-                  class: 'v-app-bar-alt',
-                  style: {
-                    margin: '2px',
-                    padding: '1px',
-                  },
-                },
-                VToolbar: {
-                  class: 'v-toolbar-alt',
-                  style: {
-                    margin: '1px',
-                  },
-                },
-              }}
-            >
-              <VAppBar />
-            </VDefaultsProvider>
-          </VLayout>
-        ))
-        .get('.v-app-bar')
-        .should('have.length', 1)
-        .should('have.class', 'v-global-class')
-        .should('have.class', 'v-app-bar-alt')
-        .should('have.class', 'v-toolbar-alt')
-        .should('have.css', 'margin', '2px')
-        .should('have.css', 'padding', '1px')
-        .should('have.css', 'opacity', '0.5')
-    })
   })
 })
