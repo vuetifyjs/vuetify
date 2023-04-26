@@ -1,15 +1,15 @@
 // Composables
-import { useLocale } from './locale'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { inject, watch } from 'vue'
 import { propsFactory } from '@/util'
 
 // Adapters
-import VuetifyDateAdapter from '@/adapters/vuetify'
+import { VuetifyDateAdapter } from './adapters/vuetify'
 
 // Types
-import type { DateAdapter } from '@/adapters/date-adapter'
+import type { DateAdapter } from './DateAdapter'
 import type { InjectionKey, PropType } from 'vue'
 
 export interface DateInstance extends DateAdapter<Date> {

@@ -1,5 +1,5 @@
 // Composables
-import { createDate, DateAdapterSymbol } from './composables/date'
+import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
@@ -12,7 +12,7 @@ import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
-import type { DateOptions } from '@/composables/date'
+import type { DateOptions } from '@/labs/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'

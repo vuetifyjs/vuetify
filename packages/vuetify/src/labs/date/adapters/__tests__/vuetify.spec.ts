@@ -1,5 +1,5 @@
 import { describe, expect, it } from '@jest/globals'
-import VuetifyDateAdapter from '../vuetify'
+import { VuetifyDateAdapter } from '../vuetify'
 
 describe('vuetify date adapter', () => {
   it('should return weekdays based on locale', () => {

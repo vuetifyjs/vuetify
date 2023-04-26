@@ -2,7 +2,7 @@
 import { createRange } from '@/util'
 
 // Types
-import type { DateAdapter } from './date-adapter'
+import type { DateAdapter } from '../DateAdapter'
 
 function getWeekArray (date: Date) {
   let currentWeek = []
@@ -354,7 +354,7 @@ function setYear (date: Date, year: number) {
   return d
 }
 
-export default class VuetifyDateAdapter implements DateAdapter<Date> {
+export class VuetifyDateAdapter implements DateAdapter<Date> {
   constructor (public locale: string = 'en') {}
 
   date (value?: any) {
