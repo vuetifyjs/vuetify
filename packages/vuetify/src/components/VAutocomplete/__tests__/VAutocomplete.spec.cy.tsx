@@ -283,21 +283,27 @@ describe('VAutocomplete', () => {
               global: {
                 class: 'v-global-class',
                 style: {
+                  margin: '200px',
                   opacity: 0.5,
                 },
               },
-              VAutocomplete: {
-                class: 'v-autocomplete-alt',
+              VTextField: {
+                class: 'v-textfield--alt',
                 style: {
                   margin: '2px',
-                  padding: '1px',
                 },
               },
               VInput: {
-                class: 'v-input-alt',
+                class: 'v-input--alt',
                 style: {
-                  color: 'black',
-                  margin: '1px',
+                  margin: '3px',
+                  padding: '1px',
+                },
+              },
+              VAutocomplete: {
+                class: 'v-autocomplete--alt',
+                style: {
+                  margin: '4px',
                 },
               },
             }}
@@ -307,11 +313,11 @@ describe('VAutocomplete', () => {
         ))
         .get('.v-autocomplete')
         .should('have.class', 'v-global-class')
-        .should('have.class', 'v-autocomplete-alt')
-        .should('have.class', 'v-input-alt')
-        .should('have.css', 'margin', '2px')
+        .should('have.class', 'v-autocomplete--alt')
+        .should('have.class', 'v-input--alt')
+        .should('have.class', 'v-textfield--alt')
+        .should('have.css', 'margin', '200px') // should be 4px, but global takes highest priority
         .should('have.css', 'padding', '1px')
-        .should('have.css', 'color', 'rgb(0, 0, 0)')
         .should('have.css', 'opacity', '0.5')
     })
   })

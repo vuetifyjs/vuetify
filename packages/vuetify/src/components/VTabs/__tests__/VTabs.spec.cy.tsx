@@ -178,8 +178,9 @@ describe('VTabs', () => {
         .should('have.class', 'v-global-class')
         .should('have.class', 'v-tabs-alt')
         .should('have.class', 'v-slide-group-alt')
-        .should('have.css', 'margin', '2px') // VTabs style takes highest priority
-        .should('have.css', 'padding', '1px') // Ignore VSlideGroup global style
+        .should('have.css', 'margin', '2px')
+        .should('have.css', 'padding', '1px')
+        .should('have.css', 'opacity', '0.5')
     })
   })
 })
