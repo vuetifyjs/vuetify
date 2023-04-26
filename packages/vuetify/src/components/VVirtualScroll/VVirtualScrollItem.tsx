@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
 
@@ -11,6 +12,8 @@ export const VVirtualScrollItem = genericComponent()({
 
   props: {
     dynamicHeight: Boolean,
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -37,7 +40,11 @@ export const VVirtualScrollItem = genericComponent()({
     useRender(() => (
       <div
         ref={ props.dynamicHeight ? resizeRef : undefined }
-        class="v-virtual-scroll__item"
+        class={[
+          'v-virtual-scroll__item',
+          props.class,
+        ]}
+        style={ props.style }
       >
         { slots.default?.() }
       </div>

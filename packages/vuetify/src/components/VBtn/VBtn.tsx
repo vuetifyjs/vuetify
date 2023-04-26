@@ -14,6 +14,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -68,7 +69,7 @@ export const makeVBtnProps = propsFactory({
   text: String,
 
   ...makeBorderProps(),
-  ...makeRoundedProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -76,6 +77,7 @@ export const makeVBtnProps = propsFactory({
   ...makeLoaderProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
+  ...makeRoundedProps(),
   ...makeRouterProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'button' }),
@@ -169,12 +171,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            props.style,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }

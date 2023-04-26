@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: Global configuration
   description: Vuetify.config is an object containing global configuration options that modify the bootstrapping of your project.
@@ -57,11 +58,154 @@ This is used internally by some components already:
 
 [v-defaults-provider](/components/defaults-providers/) can be used to set defaults for components within a specific scope.
 
-## Priority
+## Global class and styles
 
-When creating and mounting a component, Vuetify uses the following priority in determining which prop value to use:
+<alert type="success">
 
-1. Value set as prop value to the component itself
-2. Value defined in component specific section of defaults configuration object
-3. Value defined in global section of defaults configuration object
-4. Value defined in the prop definition of the Vuetify component itself.
+This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+
+</alert>
+
+Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
+
+Let's say that you want to set the **text-transform** of all [v-btn](/components/buttons/) components to `none`, but are not interested in using [SASS variables](/features/sass-variables/). By simply adding the **style** property to a component's default values, you are able to apply custom values to all instances of said component.
+
+The following code example modifies the **text-transform** CSS property of all `<v-btn>` components:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  defaults: {
+    VBtn: {
+      style: 'text-transform: none;',
+    },
+  },
+})
+```
+
+As an alternative, apply utility classes instead to achieve the same effect:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  defaults: {
+    VBtn: {
+      class: 'text-none',
+    },
+  },
+})
+```
+
+Additionally, it works with any valid Vue value type such as objects and arrays:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  defaults: {
+    VBtn: {
+      style: [{ textTransform: 'none' }],
+    },
+  },
+})
+```
+
+### Using with virtual components
+
+Whether you are developing a wrapper framework or just a design system for your application, [virtual components](/features/aliasing/#virtual-component-defaults) are a powerful ally. Within the Vuetify defaults system, classes and styles are treated just like regular props but instead of being overwritten at the template level, they are merged.
+
+For example, lets create an alias of the [v-btn](/components/buttons/) component and modify some of its default values:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  aliases: {
+    VBtnPrimary: VBtn,
+  },
+
+  defaults: {
+    VBtnPrimary: {
+      class: ['v-btn--primary', 'text-none'],
+    },
+  },
+})
+```
+
+Now, use `<v-btn-primary>` in a template and apply a custom class:
+
+```html
+<template>
+  <v-btn-primary class="foobar">Foobar</v-btn-primary>
+</template>
+```
+
+When compiled, the resulting HTML will contain both the globally defined classes and the custom one:
+
+```html
+<!-- Example HTML Output -->
+<button class="v-btn v-btn--primary text-none foobar">Fizzbuzz</button>
+```
+
+This is particularly useful when you have multiple variants of a component that need individual classes to target:
+
+```html { resource="src/components/HelloWorld.vue" }
+<template>
+  <v-app>
+    <v-main>
+      <v-btn-primary>Primary</v-btn-primary>
+
+      <span class="mx-2" />
+
+      <v-btn-secondary>Secondary</v-btn-secondary>
+    </v-main>
+  </v-app>
+</template>
+
+<style>
+  .v-btn.v-btn--primary {
+    background: linear-gradient(to right, #ff8a00, #da1b60);
+    color: white;
+  }
+  .v-btn.v-btn--secondary {
+    background: linear-gradient(to right, #da1b60, #ff8a00);
+    color: white;
+  }
+</style>
+```
+
+Keep in mind that virtual components do not inherit global class or styles from their extension. For example, the following Vuetify configuration uses a [v-chip](/components/chips/) as the alias for the virtual `<v-chip-primary>` component.
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VChip } from 'vuetify/components/VChip'
+
+export default createVuetify({
+  aliases: {
+    VChipPrimary: VChip,
+  },
+
+  defaults: {
+    VChipPrimary: {
+      class: 'v-chip--primary',
+    },
+    VChip: {
+      class: 'v-chip--custom',
+    },
+  },
+})
+```
+
+When `<v-chip-primary>` is used in a template, it will **not** have the `v-chip--custom` class.
+
+<alert type="warning">
+
+There are some cases where a default class or style could be unintentionally passed down to an inner component. This mostly concerns [form inputs and controls](/components/all/#form-inputs-and-controls).
+
+</alert>

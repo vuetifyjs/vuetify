@@ -156,7 +156,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         <VInput
           ref={ vInputRef }
           v-model={ model.value }
-          class="v-file-input"
+          class={[
+            'v-file-input',
+            props.class,
+          ]}
+          style={ props.style }
           onClick:prepend={ onClickPrepend }
           { ...rootAttrs }
           { ...inputProps }

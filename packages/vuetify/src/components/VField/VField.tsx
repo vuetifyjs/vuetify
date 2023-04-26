@@ -9,6 +9,7 @@ import { VFieldLabel } from './VFieldLabel'
 // Composables
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -81,9 +82,10 @@ export const makeVFieldProps = propsFactory({
   'onClick:appendInner': EventProp<[MouseEvent]>(),
   'onClick:prependInner': EventProp<[MouseEvent]>(),
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeLoaderProps(),
   ...makeRoundedProps(),
+  ...makeThemeProps(),
 }, 'v-field')
 
 export type VFieldSlots = MakeSlots<{
@@ -234,10 +236,12 @@ export const VField = genericComponent<new <T>() => {
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             textColorStyles.value,
+            props.style,
           ]}
           onClick={ onClick }
           { ...attrs }
@@ -360,6 +364,6 @@ export type VField = InstanceType<typeof VField>
 
 // TODO: this is kinda slow, might be better to implicitly inherit props instead
 export function filterFieldProps (attrs: Record<string, unknown>) {
-  const keys = Object.keys(VField.props).filter(k => !isOn(k))
+  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class' && k !== 'style')
   return pick(attrs, keys)
 }

@@ -164,7 +164,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }

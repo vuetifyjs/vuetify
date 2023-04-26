@@ -4,6 +4,7 @@ import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VExpansionPanelText } from './VExpansionPanelText'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps } from '@/composables/lazy'
@@ -29,6 +30,7 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
     text: String,
     bgColor: String,
 
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeGroupItemProps(),
     ...makeLazyProps(),
@@ -83,8 +85,12 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             },
             roundedClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
-          style={ backgroundColorStyles.value }
+          style={[
+            backgroundColorStyles.value,
+            props.style,
+          ]}
           aria-expanded={ groupItem.isSelected.value }
         >
           <div

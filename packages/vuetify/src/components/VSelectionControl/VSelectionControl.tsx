@@ -4,6 +4,7 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
+import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Directives
@@ -53,6 +54,7 @@ export const makeSelectionControlProps = propsFactory({
   falseValue: null,
   value: null,
 
+  ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
 }, 'v-selection-control')
 
@@ -207,8 +209,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--inline': props.inline,
             },
             densityClasses.value,
+            props.class,
           ]}
           { ...rootAttrs }
+          style={ props.style }
         >
           <div
             class={[

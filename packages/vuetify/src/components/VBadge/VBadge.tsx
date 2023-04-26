@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -52,6 +53,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     offsetY: [Number, String],
     textColor: String,
 
+    ...makeComponentProps(),
     ...makeLocationProps({ location: 'top end' } as const),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -102,8 +104,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            props.class,
           ]}
           { ...attrs }
+          style={ props.style }
         >
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }

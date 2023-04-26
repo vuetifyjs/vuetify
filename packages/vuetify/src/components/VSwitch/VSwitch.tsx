@@ -90,7 +90,9 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }

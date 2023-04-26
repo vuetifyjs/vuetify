@@ -3,6 +3,7 @@ import './VIcon.sass'
 
 // Composables
 import { IconValue, useIcon } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -21,6 +22,7 @@ export const makeVIconProps = propsFactory({
   end: Boolean,
   icon: IconValue,
 
+  ...makeComponentProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),
   ...makeThemeProps(),
@@ -64,6 +66,7 @@ export const VIcon = genericComponent()({
             'v-icon--start': props.start,
             'v-icon--end': props.end,
           },
+          props.class,
         ]}
         style={[
           !sizeClasses.value ? ({
@@ -72,6 +75,7 @@ export const VIcon = genericComponent()({
             width: convertToUnit(props.size),
           }) : undefined,
           textColorStyles.value,
+          props.style,
         ]}
         role={ attrs.onClick ? 'button' : undefined }
         aria-hidden={ !attrs.onClick }

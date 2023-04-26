@@ -18,6 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -74,8 +75,8 @@ export const VCard = genericComponent<VCardSlots>()({
     text: String,
     title: String,
 
-    ...makeThemeProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -85,6 +86,7 @@ export const VCard = genericComponent<VCardSlots>()({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
     ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
@@ -138,11 +140,13 @@ export const VCard = genericComponent<VCardSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }

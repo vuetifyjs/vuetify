@@ -113,7 +113,7 @@ export function defineComponent (options: ComponentOptions) {
     options.props = propsFactory(options.props ?? {}, toKebabCase(options.name))()
     const propKeys = Object.keys(options.props)
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys)
+      return pick(props, propKeys, ['class', 'style'])
     }
 
     options.props._as = String
@@ -128,7 +128,9 @@ export function defineComponent (options: ComponentOptions) {
       const _props = new Proxy(props, {
         get (target, prop) {
           const propValue = Reflect.get(target, prop)
-          if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
+          if (prop === 'class' || prop === 'style') {
+            return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
+          } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
             return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? propValue
           }
           return propValue

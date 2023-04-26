@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
@@ -18,6 +19,7 @@ export const VBreadcrumbsItem = genericComponent()({
     disabled: Boolean,
     title: String,
 
+    ...makeComponentProps(),
     ...makeRouterProps(),
     ...makeTagProps({ tag: 'li' }),
   },
@@ -43,9 +45,11 @@ export const VBreadcrumbsItem = genericComponent()({
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
+            props.class,
           ]}
           style={[
             textColorStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }

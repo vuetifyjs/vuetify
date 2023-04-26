@@ -7,6 +7,7 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -102,6 +103,7 @@ export const VList = genericComponent<new <T>() => {
       openStrategy: 'list' as const,
     }),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -214,10 +216,12 @@ export const VList = genericComponent<new <T>() => {
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
           role="listbox"
           aria-activedescendant={ undefined }

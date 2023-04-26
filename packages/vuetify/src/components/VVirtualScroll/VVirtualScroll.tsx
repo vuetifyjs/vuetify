@@ -5,6 +5,7 @@ import './VVirtualScroll.sass'
 import { VVirtualScrollItem } from './VVirtualScrollItem'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
@@ -47,6 +48,7 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     itemHeight: [Number, String],
     visibleItems: [Number, String],
 
+    ...makeComponentProps(),
     ...makeDimensionProps(),
   },
 
@@ -161,9 +163,15 @@ export const VVirtualScroll = genericComponent<new <T>() => {
     useRender(() => (
       <div
         ref={ rootEl }
-        class="v-virtual-scroll"
+        class={[
+          'v-virtual-scroll',
+          props.class,
+        ]}
         onScroll={ handleScroll }
-        style={ dimensionStyles.value }
+        style={[
+          dimensionStyles.value,
+          props.style,
+        ]}
       >
         <div
           class="v-virtual-scroll__container"
