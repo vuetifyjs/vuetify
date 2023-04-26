@@ -34,15 +34,14 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export type VBtnSlots = MakeSlots<{
+export type VBtnSlots = {
   default: []
   prepend: []
   append: []
   loader: []
-}>
+}
 
 export const makeVBtnProps = propsFactory({
   active: {

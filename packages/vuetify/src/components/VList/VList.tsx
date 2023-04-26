@@ -2,6 +2,7 @@
 import './VList.sass'
 
 // Components
+import type { VListChildrenSlots } from './VListChildren'
 import { VListChildren } from './VListChildren'
 
 // Composables
@@ -26,10 +27,10 @@ import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } fr
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
-import type { SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
-export interface InternalListItem extends InternalItem {
+export interface InternalListItem<T = any> extends InternalItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
@@ -76,15 +77,9 @@ function useListItems (props: ItemProps & { itemType: string }) {
   return { items }
 }
 
-export const VList = genericComponent<new <T>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    subheader: []
-    header: [{ props: Record<string, unknown> }]
-    item: [T]
-  }>
-}>()({
+export const VList = genericComponent<new <T>(props: {
+  items?: T[]
+}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
   name: 'VList',
 
   props: {

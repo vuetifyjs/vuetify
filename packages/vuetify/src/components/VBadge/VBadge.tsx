@@ -19,13 +19,10 @@ import { useLocale } from '@/composables/locale'
 import { genericComponent, pick, useRender } from '@/util'
 import { toRef } from 'vue'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VBadgeSlots = MakeSlots<{
+export type VBadgeSlots = {
   default: []
   badge: []
-}>
+}
 
 export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',

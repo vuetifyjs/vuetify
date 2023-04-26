@@ -32,15 +32,12 @@ import { Ripple } from '@/directives/ripple'
 import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VChipSlots = MakeSlots<{
+export type VChipSlots = {
   default: []
   label: []
   prepend: []
   append: []
-}>
+}
 
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',

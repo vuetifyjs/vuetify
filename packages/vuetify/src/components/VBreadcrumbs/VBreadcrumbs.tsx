@@ -23,23 +23,21 @@ import { computed, toRef } from 'vue'
 // Types
 import type { LinkProps } from '@/composables/router'
 import type { PropType } from 'vue'
-import type { SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 
 export type BreadcrumbItem = string | (Partial<LinkProps> & {
   title: string
   disabled?: boolean
 })
 
-export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    prepend: []
-    title: [{ item: T, index: number }]
-    divider: [{ item: T, index: number }]
-    default: []
-  }>
-}>()({
+export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(props: {
+  items?: T[]
+}) => GenericProps<typeof props, {
+  prepend: []
+  title: [{ item: T, index: number }]
+  divider: [{ item: T, index: number }]
+  default: []
+}>>()({
   name: 'VBreadcrumbs',
 
   props: {

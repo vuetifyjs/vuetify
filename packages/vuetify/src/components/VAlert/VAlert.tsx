@@ -29,20 +29,19 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
 
-export type VAlertSlots = MakeSlots<{
+export type VAlertSlots = {
   default: []
   prepend: []
   title: []
   text: []
   append: []
   close: []
-}>
+}
 
 export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',

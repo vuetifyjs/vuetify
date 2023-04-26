@@ -47,7 +47,6 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { MakeSlots } from '@/util'
 import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
@@ -73,10 +72,10 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export type OverlaySlots = MakeSlots<{
+export type OverlaySlots = {
   default: [{ isActive: Ref<boolean> }]
   activator: [{ isActive: boolean, props: Record<string, any> }]
-}>
+}
 
 export const makeVOverlayProps = propsFactory({
   absolute: Boolean,

@@ -34,10 +34,9 @@ import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VCardSlots = MakeSlots<{
+export type VCardSlots = {
   default: []
   actions: []
   title: []
@@ -47,7 +46,7 @@ export type VCardSlots = MakeSlots<{
   image: []
   prepend: []
   append: []
-}>
+}
 
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',

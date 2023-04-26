@@ -27,13 +27,12 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VFileInputSlots = VInputSlots & VFieldSlots & MakeSlots<{
+export type VFileInputSlots = VInputSlots & VFieldSlots & {
   counter: []
-}>
+}
 
 export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',

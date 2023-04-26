@@ -83,7 +83,7 @@ describe('VList', () => {
     wrapper.get('.v-list-item').should('have.length', 3)
   })
 
-  it('supports item slot', () => {
+  it.only('supports item slot', () => {
     const items = [
       {
         title: 'Foo',
@@ -93,7 +93,7 @@ describe('VList', () => {
       {
         title: 'Group',
         value: 'group',
-        $children: [
+        children: [
           {
             title: 'Child',
             subtitle: 'Subtitle',

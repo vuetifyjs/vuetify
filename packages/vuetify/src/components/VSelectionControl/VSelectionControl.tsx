@@ -29,7 +29,7 @@ import {
 
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -42,11 +42,11 @@ export type SelectionControlSlot = {
   }
 }
 
-export type VSelectionControlSlots = MakeSlots<{
+export type VSelectionControlSlots = {
   default: []
   label: [{ label: string | undefined, props: Record<string, unknown> }]
   input: [SelectionControlSlot]
-}>
+}
 
 export const makeSelectionControlProps = propsFactory({
   label: String,
@@ -125,12 +125,10 @@ export function useSelectionControl (
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>() => {
-  $props: {
-    modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<VSelectionControlSlots>
-}>()({
+export const VSelectionControl = genericComponent<new <T>(props: {
+  modelValue?: T
+  'onUpdate:modelValue'?: (val: T) => any
+}) => GenericProps<typeof props, VSelectionControlSlots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },
