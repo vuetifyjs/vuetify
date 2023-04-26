@@ -2,7 +2,6 @@
 import './VList.sass'
 
 // Components
-import type { VListChildrenSlots } from './VListChildren'
 import { VListChildren } from './VListChildren'
 
 // Composables
@@ -26,6 +25,7 @@ import { computed, ref, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
+import type { VListChildrenSlots } from './VListChildren'
 import type { InternalItem, ItemProps } from '@/composables/items'
 import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
