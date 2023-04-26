@@ -7,14 +7,29 @@
     variant="tonal"
   >
     <template #prepend>
-      <v-icon :color="type" :icon="`$${type}`" />
+      <v-icon
+        :color="type"
+        :icon="icon"
+      />
     </template>
     <slot />
   </v-alert>
 </template>
 
 <script setup>
-  defineProps({ type: String })
+  import { computed } from 'vue'
+
+  const props = defineProps({ type: String })
+
+  const icon = computed(() => {
+    switch (props.type) {
+      case 'error': return 'mdi-close-circle-outline'
+      case 'info': return 'mdi-information-outline'
+      case 'success': return 'mdi-check-circle-outline'
+      case 'warning': return 'mdi-alert-circle-outline'
+      default: return '$vuetify'
+    }
+  })
 </script>
 
 <style lang="sass">

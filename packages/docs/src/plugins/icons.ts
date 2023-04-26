@@ -180,6 +180,7 @@ export {
   mdiImageEditOutline,
   mdiInboxArrowDown,
   mdiInformation,
+  mdiInformationOutline,
   mdiInstagram,
   mdiLabel,
   mdiLanguageHtml5,
