@@ -66,11 +66,11 @@ This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vue
 
 </alert>
 
-Define global classes and styles to individual or all components. This works for all [built-in](/components/all/) components including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when configuration your application's design system.
+Define global classes and styles for all [built-in](/components/all/) components; including [virtual](/features/aliasing/#virtual-component-defaults) ones. This provides an immense amount of utility when building your application's design system and it reduces the amount of duplicated code in your templates.
 
-Let's say that you want to set the **text-transform** of all [v-btn](/components/buttons/) components to `none` but are not interested in using [SASS variables](/features/sass-variables/). In the same manner as regular props, simply define the **style** property for the component.
+Let's say that you want to set the **text-transform** of all [v-btn](/components/buttons/) components to `none`, but are not interested in using [SASS variables](/features/sass-variables/). By simply adding the **style** property to a component's default values, you are able to apply custom values to all instances of said component.
 
-The following code modifies the **text-transform** css property for all `<v-btn>` components:
+The following code example modifies the **text-transform** CSS property of all `<v-btn>` components:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -85,7 +85,22 @@ export default createVuetify({
 })
 ```
 
-You can also use any valid Vue style type, including objects and arrays:
+As an alternative, apply utility classes instead to achieve the same effect:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+import { VBtn } from 'vuetify/components/VBtn'
+
+export default createVuetify({
+  defaults: {
+    VBtn: {
+      class: 'text-none',
+    },
+  },
+})
+```
+
+Additionally, it works with any valid Vue value type such as objects and arrays:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -95,21 +110,6 @@ export default createVuetify({
   defaults: {
     VBtn: {
       style: [{ textTransform: 'none' }],
-    },
-  },
-})
-```
-
-Using classes is also a valid option:
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { VBtn } from 'vuetify/components/VBtn'
-
-export default createVuetify({
-  defaults: {
-    VBtn: {
-      class: ['text-none'],
     },
   },
 })
