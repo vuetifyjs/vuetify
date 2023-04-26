@@ -10,13 +10,19 @@ related:
   - /components/combobox/
 ---
 
+<alert type="success">
+
+This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+
+</alert>
+
 # Virtual scrollers
 
 The `v-virtual-scroll` component displays a virtual, _infinite_ list. It supports dynamic height and scrolling vertically and is a good alternative to pagination.
 
 ![Virtual scroll Entry](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-entry.png)
 
-----
+---
 
 ## Usage
 
@@ -28,9 +34,9 @@ The virtual scroller displays just enough records to fill the viewport and uses 
 
 ## API
 
-| Component | Description |
-| - | - |
-| [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
+| Component                                            | Description                                     |
+| ---------------------------------------------------- | ----------------------------------------------- |
+| [v-virtual-scroll](/api/v-virtual-scroll/)           | Primary Component                               |
 | [v-virtual-scroll-item](/api/v-virtual-scroll-item/) | Wraps content and communicates height to parent |
 
 <api-inline hide-links />
@@ -41,9 +47,9 @@ The `v-virtual-scroll` component contains only a default slot with no styling op
 
 ![Virtual scroll Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-virtual-scroll/v-virtual-scroll-anatomy.png)
 
-| Element / Area | Description |
-| - | - |
-| 1. Container | The rendered content area from the provided **items** prop |
+| Element / Area | Description                                                |
+| -------------- | ---------------------------------------------------------- |
+| 1. Container   | The rendered content area from the provided **items** prop |
 
 ## Guide
 
@@ -83,7 +89,7 @@ The `v-virtual-scroll` component renders a set amount of visible items, meant to
 
 <alert type="info">
 
-  Depending on the size of the scroll container, the size of the items, and the complexity of what you are rendering, adjusting the **visible-items** might improve the performance of the scrolling.
+Depending on the size of the scroll container, the size of the items, and the complexity of what you are rendering, adjusting the **visible-items** might improve the performance of the scrolling.
 
 </alert>
 

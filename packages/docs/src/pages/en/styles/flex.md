@@ -50,6 +50,12 @@ The flex utility classes can be used to modify the **flex** css property. This m
 
 <example file="flex/flex-flex" />
 
+<alert type="success">
+
+This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+
+</alert>
+
 There are also responsive variations for `flex`:
 
 - **.flex-fill**
