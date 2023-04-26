@@ -25,9 +25,9 @@ import { computed, ref, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
-import type { VListChildrenSlots } from './VListChildren'
-import type { InternalItem, ItemProps } from '@/composables/items'
 import type { GenericProps } from '@/util'
+import type { InternalItem, ItemProps } from '@/composables/items'
+import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
 
 export interface InternalListItem<T = any> extends InternalItem<T> {
