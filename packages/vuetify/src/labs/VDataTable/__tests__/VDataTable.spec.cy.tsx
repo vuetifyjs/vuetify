@@ -179,4 +179,14 @@ describe('VDataTable', () => {
         expect(onClick).to.be.calledOnce
       })
   })
+
+  it('should show no-data-text if there are no items', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable item={[]} headers={ DESSERT_HEADERS } />
+      </Application>
+    ))
+
+    cy.get('.v-data-table tbody tr').should('have.text', 'No data available')
+  })
 })

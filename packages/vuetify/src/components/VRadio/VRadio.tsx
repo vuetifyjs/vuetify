@@ -21,7 +21,11 @@ export const VRadio = genericComponent<VSelectionControlSlots>()({
     useRender(() => (
       <VSelectionControl
         { ...props }
-        class="v-radio"
+        class={[
+          'v-radio',
+          props.class,
+        ]}
+        style={ props.style }
         type="radio"
         v-slots={ slots }
       />

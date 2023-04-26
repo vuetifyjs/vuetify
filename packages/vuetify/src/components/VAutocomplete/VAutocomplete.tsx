@@ -338,7 +338,9 @@ export const VAutocomplete = genericComponent<new <
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-autocomplete--selection-slot': !!slots.selection,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }

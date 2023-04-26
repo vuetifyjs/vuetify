@@ -12,14 +12,29 @@ import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 
 // Utilities
+import { computed } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
+import type { SortItem } from './composables/sort'
+
+type HeadersSlotProps = {
+  headers: InternalDataTableHeader[][]
+  columns: InternalDataTableHeader[]
+  sortBy: SortItem[]
+  someSelected: boolean
+  allSelected: boolean
+  toggleSort: (key: string) => void
+  selectAll: (value: boolean) => void
+  getSortIcon: (key: string) => IconValue
+  getFixedStyles: (column: InternalDataTableHeader) => Record<string, string>
+}
 
 export type VDataTableHeadersSlots = {
   default: []
+  headers: [HeadersSlotProps]
   loader: [LoaderSlotProps]
   'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
 }
@@ -70,6 +85,18 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
 
+    const slotProps = computed(() => ({
+      headers: headers.value,
+      columns: columns.value,
+      toggleSort,
+      sortBy: sortBy.value,
+      someSelected: someSelected.value,
+      allSelected: allSelected.value,
+      selectAll,
+      getSortIcon,
+      getFixedStyles,
+    }))
+
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const isSorted = !!sortBy.value.find(x => x.key === column.key)
       const noPadding = column.key === 'data-table-select' || column.key === 'data-table-expand'
@@ -99,16 +126,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           {{
             default: () => {
-              const slotName = `column.${column.key}`
-              const slotProps = {
+              const columnSlotName = `column.${column.key}`
+              const columnSlotProps = {
                 column,
                 selectAll,
               }
 
-              if (slots[slotName]) return slots[slotName]!(slotProps)
+              if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['column.data-table-select']?.(slotProps) ?? (
+                return slots['column.data-table-select']?.(columnSlotProps) ?? (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -147,19 +174,23 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
-    useRender(() => (
-      <>
-        { headers.value.map((row, y) => (
-          <tr>
-            { row.map((column, x) => (
-              <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+    useRender(() => {
+      return (
+        <>
+          { slots.headers
+            ? slots.headers(slotProps.value)
+            : headers.value.map((row, y) => (
+            <tr>
+              { row.map((column, x) => (
+                <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+              ))}
+            </tr>
             ))}
-          </tr>
-        ))}
 
-        { props.loading && (
-          <tr class="v-data-table__progress">
-            <th colspan={ columns.value.length }>
+          { props.loading && (
+            <tr class="v-data-table__progress">
+              <th colspan={ columns.value.length }>
+
               <LoaderSlot
                 name="v-data-table-headers"
                 active
@@ -167,10 +198,11 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
                 indeterminate
                 v-slots={{ default: slots.loader }}
               />
-            </th>
-          </tr>
-        )}
-      </>
-    ))
+              </th>
+            </tr>
+          )}
+        </>
+      )
+    })
   },
 })

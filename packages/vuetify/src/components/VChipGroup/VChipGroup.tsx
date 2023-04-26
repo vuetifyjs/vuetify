@@ -2,6 +2,7 @@
 import './VChipGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -28,6 +29,7 @@ export const VChipGroup = genericComponent()({
       default: deepEqual,
     },
 
+    ...makeComponentProps(),
     ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -59,7 +61,9 @@ export const VChipGroup = genericComponent()({
             'v-chip-group--column': props.column,
           },
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.default?.({
           isSelected,

@@ -188,17 +188,20 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -207,7 +210,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -571,5 +574,37 @@ export function callEvent<T extends any[]> (handler: EventProp<T> | undefined, .
     }
   } else if (typeof handler === 'function') {
     handler(...args)
+  }
+}
+
+export function focusableChildren (el: Element) {
+  const targets = ['button', '[href]', 'input:not([type="hidden"])', 'select', 'textarea', '[tabindex]']
+    .map(s => `${s}:not([tabindex="-1"]):not([disabled])`)
+    .join(', ')
+  return [...el.querySelectorAll(targets)] as HTMLElement[]
+}
+
+export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 'last') {
+  const focusable = focusableChildren(el)
+  const idx = focusable.indexOf(document.activeElement as HTMLElement)
+
+  if (!location) {
+    if (!el.contains(document.activeElement)) {
+      focusable[0]?.focus()
+    }
+  } else if (location === 'first') {
+    focusable[0]?.focus()
+  } else if (location === 'last') {
+    focusable.at(-1)?.focus()
+  } else {
+    let _el
+    let idxx = idx
+    const inc = location === 'next' ? 1 : -1
+    do {
+      idxx += inc
+      _el = focusable[idxx]
+    } while ((!_el || _el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
+    if (_el) _el.focus()
+    else focusChild(el, location === 'next' ? 'first' : 'last')
   }
 }

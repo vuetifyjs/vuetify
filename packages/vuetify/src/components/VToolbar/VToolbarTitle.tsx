@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -10,6 +11,7 @@ import type { MakeSlots } from '@/util'
 export const makeVToolbarTitleProps = propsFactory({
   text: String,
 
+  ...makeComponentProps(),
   ...makeTagProps(),
 }, 'v-toolbar-title')
 
@@ -28,7 +30,13 @@ export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({
       const hasText = !!(slots.default || slots.text || props.text)
 
       return (
-        <props.tag class="v-toolbar-title">
+        <props.tag
+          class={[
+            'v-toolbar-title',
+            props.class,
+          ]}
+          style={ props.style }
+        >
           { hasText && (
             <div class="v-toolbar-title__placeholder">
               { slots.text ? slots.text() : props.text }

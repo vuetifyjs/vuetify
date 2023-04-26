@@ -101,7 +101,7 @@ export function defineComponent (options: ComponentOptions) {
     options.props = propsFactory(options.props ?? {}, toKebabCase(options.name))()
     const propKeys = Object.keys(options.props)
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys)
+      return pick(props, propKeys, ['class', 'style'])
     }
 
     options.props._as = String

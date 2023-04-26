@@ -45,11 +45,15 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
       return (
         <VInput
-          class="v-checkbox"
+          class={[
+            'v-checkbox',
+            props.class,
+          ]}
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
+          style={ props.style }
         >
           {{
             ...slots,

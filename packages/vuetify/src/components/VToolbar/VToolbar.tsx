@@ -9,6 +9,7 @@ import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -52,6 +53,7 @@ export const makeVToolbarProps = propsFactory({
   title: String,
 
   ...makeBorderProps(),
+  ...makeComponentProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
@@ -125,9 +127,11 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             elevationClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
+            props.style,
           ]}
         >
           { hasImage && (

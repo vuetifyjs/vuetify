@@ -2,6 +2,7 @@
 import './VLocaleProvider.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideLocale } from '@/composables/locale'
 
 // Utilities
@@ -18,6 +19,8 @@ export const VLocaleProvider = genericComponent()({
       type: Boolean,
       default: undefined,
     },
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -28,7 +31,9 @@ export const VLocaleProvider = genericComponent()({
         class={[
           'v-locale-provider',
           rtlClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.default?.() }
       </div>

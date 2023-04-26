@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
@@ -15,7 +16,7 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { clamp, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
+import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
 // Types
@@ -66,6 +67,7 @@ export const makeVSlideGroupProps = propsFactory({
     ),
   },
 
+  ...makeComponentProps(),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
@@ -252,9 +254,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       if (!contentRef.value) return
 
       if (!location) {
-        const focusable = [...contentRef.value.querySelectorAll(
-          'button, [href], input, select, textarea, [tabindex]:not([tabindex="-1"])'
-        )].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
+        const focusable = focusableChildren(contentRef.value)
         focusable[0]?.focus()
       } else if (location === 'next') {
         const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
@@ -349,7 +349,9 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          props.class,
         ]}
+        style={ props.style }
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >

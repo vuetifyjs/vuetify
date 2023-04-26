@@ -147,13 +147,17 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
             {
               'v-app-bar--bottom': props.location === 'bottom',
             },
+            props.class,
           ]}
-          style={{
-            ...layoutItemStyles.value,
-            '--v-toolbar-image-opacity': opacity.value,
-            height: undefined,
-            ...ssrBootStyles.value,
-          }}
+          style={[
+            {
+              ...layoutItemStyles.value,
+              '--v-toolbar-image-opacity': opacity.value,
+              height: undefined,
+              ...ssrBootStyles.value,
+            },
+            props.style,
+          ]}
           { ...toolbarProps }
           collapse={ isCollapsed.value }
           flat={ isFlat.value }

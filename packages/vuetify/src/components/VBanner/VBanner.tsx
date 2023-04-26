@@ -9,6 +9,8 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -19,7 +21,6 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useDisplay } from '@/composables/display'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { genericComponent, useRender } from '@/util'
@@ -49,6 +50,7 @@ export const VBanner = genericComponent<VBannerSlots>()({
     text: String,
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -96,10 +98,12 @@ export const VBanner = genericComponent<VBannerSlots>()({
             positionClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            props.class,
           ]}
           style={[
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           role="banner"
         >

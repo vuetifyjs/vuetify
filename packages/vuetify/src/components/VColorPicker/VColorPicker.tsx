@@ -125,10 +125,14 @@ export const VColorPicker = defineComponent({
           theme={ props.theme }
           class={[
             'v-color-picker',
+            props.class,
           ]}
-          style={{
-            '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
-          }}
+          style={[
+            {
+              '--v-color-picker-color-hsv': HSVtoCSS({ ...(currentColor.value ?? nullColor), a: 1 }),
+            },
+            props.style,
+          ]}
           { ...sheetProps }
           maxWidth={ props.width }
         >

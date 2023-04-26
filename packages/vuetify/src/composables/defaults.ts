@@ -96,7 +96,9 @@ export function useDefaults (props: Record<string, any>, name?: string, defaults
   const _props = new Proxy(props, {
     get (target, prop) {
       const propValue = Reflect.get(target, prop)
-      if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
+      if (prop === 'class' || prop === 'style') {
+        return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
+      } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
         return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? propValue
       }
       return propValue

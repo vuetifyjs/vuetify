@@ -208,7 +208,9 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
               'v-textarea--no-resize': props.noResize || props.autoGrow,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
