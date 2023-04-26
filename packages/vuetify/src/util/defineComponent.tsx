@@ -126,29 +126,34 @@ export function defineComponent (options: ComponentOptions) {
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 
-export type SlotsToProps<T extends Record<string, any>> = T extends Record<string, Slot> ? ({
+export type SlotsToProps<
+  U extends Record<string, any[]> | Record<string, Slot>,
+  T = U extends Record<string, any[]> ? MakeSlots<U> : U
+> = {
   $children?: (
     | VNodeChild
-    | (keyof T extends 'default' ? T['default'] : {})
+    | (T extends { default: infer V } ? V : {})
     | { [K in keyof T]?: T[K] }
   )
-  $slots?: { [K in keyof T]?: T[K] }
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
-}) : T extends Record<string, any[]> ? SlotsToProps<MakeSlots<T>> : never
-
-type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
-export type MakeSlots<T extends Record<string, any[]>> = {
-  [K in keyof T]: Slot<T[K]>
 }
 
-export type GenericSlot = SlotsToProps<{ default: [] }>
+type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
+export type MakeSlots<T extends Record<string, any[]> | Record<string, Slot>> = {
+  [K in keyof T]: T[K] extends any[] ? Slot<T[K]> : T[K]
+}
 
-type DefineComponentWithGenericProps<T extends (new () => {
+export type GenericProps<Props, Slots extends Record<string, any[]>> = {
+  $props: Props & SlotsToProps<Slots>
+  $slots: MakeSlots<Slots>
+}
+
+type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>) => {
   $props?: Record<string, any>
 })> = <
-  PropsOptions extends Readonly<ComponentPropsOptions>,
+  PropsOptions extends Readonly<ComponentObjectPropsOptions>,
   RawBindings,
   D,
   C extends ComputedOptions = {},
@@ -206,7 +211,7 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
 export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
 
 // Generic constructor argument - generic props and slots
-export function genericComponent<T extends (new () => {
+export function genericComponent<T extends (new (props: Record<string, any>) => {
   $props?: Record<string, any>
 })> (exposeDefaults?: boolean): DefineComponentWithGenericProps<T>
 

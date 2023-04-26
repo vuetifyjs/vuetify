@@ -33,7 +33,7 @@ import {
 
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
@@ -88,21 +88,19 @@ export const makeVFieldProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-field')
 
-export type VFieldSlots = MakeSlots<{
+export type VFieldSlots = {
   clear: []
   'prepend-inner': [DefaultInputSlot & VInputSlot]
   'append-inner': [DefaultInputSlot & VInputSlot]
   label: [DefaultInputSlot & VInputSlot]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
-}>
+}
 
-export const VField = genericComponent<new <T>() => {
-  $props: {
-    modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<VFieldSlots>
-}>()({
+export const VField = genericComponent<new <T>(props: {
+  modelValue?: T
+  'onUpdate:modelValue'?: (val: T) => any
+}) => GenericProps<typeof props, VFieldSlots>>()({
   name: 'VField',
 
   inheritAttrs: false,

@@ -20,7 +20,6 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -45,9 +44,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: []
-}>>()({
+}>()({
   name: 'VTextField',
 
   directives: { Intersect },

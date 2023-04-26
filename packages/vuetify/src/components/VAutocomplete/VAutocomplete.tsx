@@ -28,7 +28,7 @@ import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 // Types
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -64,24 +64,20 @@ export const VAutocomplete = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->() => {
-  $props: {
-    items?: readonly T[]
-    returnObject?: ReturnObject
-    multiple?: Multiple
-    modelValue?: V
-    'onUpdate:modelValue'?: (val: V) => void
-  } & SlotsToProps<
-    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      selection: [{ item: InternalItem<T>, index: number }]
-      'prepend-item': []
-      'append-item': []
-      'no-data': []
-    }>
-  >
-}>()({
+>(props: {
+  items?: readonly T[]
+  returnObject?: ReturnObject
+  multiple?: Multiple
+  modelValue?: V
+  'onUpdate:modelValue'?: (val: V) => void
+}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
+  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<T>, index: number }]
+  'prepend-item': []
+  'append-item': []
+  'no-data': []
+}>>()({
   name: 'VAutocomplete',
 
   props: {

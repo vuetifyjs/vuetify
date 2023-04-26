@@ -35,8 +35,8 @@ import type { PropType } from 'vue'
 
 type ListItemSlot = {
   isActive: boolean
-  activate: (value: boolean) => void
   isSelected: boolean
+  isIndeterminate: boolean
   select: (value: boolean) => void
 }
 
@@ -48,7 +48,7 @@ export type ListItemSubtitleSlot = {
   subtitle?: string
 }
 
-type VListItemSlots = {
+export type VListItemSlots = {
   prepend: [ListItemSlot]
   append: [ListItemSlot]
   default: [ListItemSlot]
@@ -152,7 +152,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-    }))
+    } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {
       emit('click', e)
