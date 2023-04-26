@@ -17,19 +17,19 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { genericComponent, useRender } from '@/util'
-import { toRef } from 'vue'
+import { computed, toRef } from 'vue'
 
 // Types
 import type { LinkProps } from '@/composables/router'
 import type { PropType } from 'vue'
 import type { SlotsToProps } from '@/util'
 
-export type BreadcrumbItem = string | (LinkProps & {
-  text: string
+export type BreadcrumbItem = string | (Partial<LinkProps> & {
+  title: string
   disabled?: boolean
 })
 
-export const VBreadcrumbs = genericComponent<new <T>() => {
+export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>() => {
   $props: {
     items?: T[]
   } & SlotsToProps<{
@@ -79,6 +79,10 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
       },
     })
 
+    const items = computed(() => props.items.map(item => {
+      return typeof item === 'string' ? { item: { title: item }, raw: item } : { item, raw: item }
+    }))
+
     useRender(() => {
       const hasPrepend = !!(slots.prepend || props.icon)
 
@@ -116,21 +120,21 @@ export const VBreadcrumbs = genericComponent<new <T>() => {
             </div>
           )}
 
-          { props.items.map((item, index, array) => (
+          { items.value.map(({ item, raw }, index, array) => (
             <>
               <VBreadcrumbsItem
-                key={ index }
+                key={ item.title }
                 disabled={ index >= array.length - 1 }
-                { ...(typeof item === 'string' ? { title: item } : item) }
+                { ...item }
                 v-slots={{
-                  default: slots.title ? () => slots.title?.({ item, index }) : undefined,
+                  default: slots.title ? () => slots.title?.({ item: raw, index }) : undefined,
                 }}
               />
 
               { index < array.length - 1 && (
                 <VBreadcrumbsDivider
                   v-slots={{
-                    default: slots.divider ? () => slots.divider?.({ item, index }) : undefined,
+                    default: slots.divider ? () => slots.divider?.({ item: raw, index }) : undefined,
                   }}
                 />
               )}

@@ -21,7 +21,7 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
+import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
 import type { InternalItem, ItemProps } from '@/composables/items'
@@ -192,30 +192,8 @@ export const VList = genericComponent<new <T>() => {
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (!contentRef.value) return
-
-      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
-      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
-      const idx = focusable.indexOf(document.activeElement as HTMLElement)
-
-      if (!location) {
-        if (!contentRef.value.contains(document.activeElement)) {
-          focusable[0]?.focus()
-        }
-      } else if (location === 'first') {
-        focusable[0]?.focus()
-      } else if (location === 'last') {
-        focusable.at(-1)?.focus()
-      } else {
-        let el
-        let idxx = idx
-        const inc = location === 'next' ? 1 : -1
-        do {
-          idxx += inc
-          el = focusable[idxx]
-        } while ((!el || el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
-        if (el) el.focus()
-        else focus(location === 'next' ? 'first' : 'last')
+      if (contentRef.value) {
+        return focusChild(contentRef.value, location)
       }
     }
 
