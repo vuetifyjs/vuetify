@@ -17,7 +17,7 @@ describe('defaults.ts', () => {
       },
     })
 
-    const wrapper = mount(VBtn, {
+    const wrapper = mount<any>(VBtn, {
       global: {
         plugins: [vuetify],
       },
