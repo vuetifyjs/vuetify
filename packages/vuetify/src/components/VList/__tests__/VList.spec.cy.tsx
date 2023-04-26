@@ -83,7 +83,7 @@ describe('VList', () => {
     wrapper.get('.v-list-item').should('have.length', 3)
   })
 
-  it.only('supports item slot', () => {
+  it('supports item slot', () => {
     const items = [
       {
         title: 'Foo',
