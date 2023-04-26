@@ -4,6 +4,7 @@
  */
 
 export { useDate } from './date'
+export { useDefaults } from './defaults'
 export { useDisplay } from './display'
 export { useLayout } from './layout'
 export { useLocale, useRtl } from './locale'
