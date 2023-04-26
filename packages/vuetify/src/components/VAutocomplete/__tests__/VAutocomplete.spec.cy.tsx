@@ -316,7 +316,7 @@ describe('VAutocomplete', () => {
         .should('have.class', 'v-autocomplete--alt')
         .should('have.class', 'v-input--alt')
         .should('have.class', 'v-textfield--alt')
-        .should('have.css', 'margin', '200px') // should be 4px, but global takes highest priority
+        .should('have.css', 'margin', '4px')
         .should('have.css', 'padding', '1px')
         .should('have.css', 'opacity', '0.5')
     })

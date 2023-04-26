@@ -129,7 +129,7 @@ export function defineComponent (options: ComponentOptions) {
         get (target, prop) {
           const propValue = Reflect.get(target, prop)
           if (prop === 'class' || prop === 'style') {
-            return [componentDefaults.value?.[prop], defaults.value!.global?.[prop], propValue].filter(v => v != null)
+            return [defaults.value!.global?.[prop], componentDefaults.value?.[prop], propValue].filter(v => v != null)
           } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
             return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? propValue
           }
