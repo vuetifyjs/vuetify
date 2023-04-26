@@ -206,6 +206,10 @@
         ]
       },
       {
+        "title": "infinite-scroller",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
         "subfolder": "components"
       }

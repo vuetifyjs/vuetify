@@ -98,6 +98,8 @@ The following is a list of available and up-and-coming components for use with L
 | [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
 | **Skeleton loader** | [Usage](/components/skeleton-loaders/) |
 | [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
+| **Infinite scroll** | [Usage](/components/infinite-scroller/) |
+| [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
 ### Up Next
 
