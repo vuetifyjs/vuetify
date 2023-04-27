@@ -65,7 +65,12 @@ export function providePagination (options: {
   const pageCount = computed(() => {
     if (itemsPerPage.value === -1 || itemsLength.value === 0) return 1
 
-    return Math.ceil(itemsLength.value / itemsPerPage.value)
+    const pageCountValue = Math.ceil(itemsLength.value / itemsPerPage.value)
+    if (page.value > pageCountValue) {
+      page.value = pageCountValue
+    }
+
+    return pageCountValue 
   })
 
   function setItemsPerPage (value: number) {
