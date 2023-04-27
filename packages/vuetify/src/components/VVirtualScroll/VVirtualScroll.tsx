@@ -121,8 +121,12 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
       rootEl.value.scrollTop = offset
     }
 
+    const items = computed(() => props.items.map((item, index) => ({
+      raw: item,
+      index,
+    })))
     const last = computed(() => Math.min(props.items.length, first.value + visibleItems.value))
-    const computedItems = computed(() => props.items.slice(first.value, last.value))
+    const computedItems = computed(() => items.value.slice(first.value, last.value))
     const paddingTop = computed(() => calculateOffset(first.value))
     const paddingBottom = computed(() => calculateOffset(props.items.length) - calculateOffset(last.value))
 
@@ -167,13 +171,13 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
             paddingBottom: convertToUnit(paddingBottom.value),
           }}
         >
-          { computedItems.value.map((item, index) => (
+          { computedItems.value.map(item => (
             <VVirtualScrollItem
-              key={ index }
+              key={ item.index }
               dynamicHeight={ !props.itemHeight }
-              onUpdate:height={ height => handleItemResize(index + first.value, height) }
+              onUpdate:height={ height => handleItemResize(item.index, height) }
             >
-              { slots.default?.({ item, index: index + first.value }) }
+              { slots.default?.({ item: item.raw, index: item.index }) }
             </VVirtualScrollItem>
           ))}
         </div>
