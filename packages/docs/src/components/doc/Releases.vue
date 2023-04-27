@@ -82,6 +82,7 @@
             class="text-white ms-2"
             density="comfortable"
             variant="flat"
+            @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
@@ -110,11 +111,13 @@
   import { computed, nextTick, onBeforeMount, ref } from 'vue'
   import { useRoute } from 'vue-router'
   import { version } from 'vuetify'
+  import { wait } from '@/util/helpers'
 
   const { t } = useI18n()
   const store = useReleasesStore()
   const isFocused = ref(false)
   const isSearching = ref(false)
+  const clicked = ref('copy-link')
   const route = useRoute()
   const search = ref<any>()
   let timeout = -1
@@ -144,6 +147,20 @@
 
   const tooltips = computed(() => {
     return [
+      {
+        color: '#3b5998',
+        icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
+        async onClick () {
+          navigator.clipboard.writeText(`https://vuetifyjs.com/getting-started/release-notes/?version=${search.value.tag_name}`)
+
+          clicked.value = 'copied'
+
+          await wait(1500)
+
+          clicked.value = 'copy-link'
+        },
+        path: clicked.value,
+      },
       {
         color: '#738ADB',
         icon: 'mdi-discord',
