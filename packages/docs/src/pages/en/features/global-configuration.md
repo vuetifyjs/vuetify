@@ -115,7 +115,7 @@ export default createVuetify({
 })
 ```
 
-### Using with virtual components
+## Using with virtual components
 
 Whether you are developing a wrapper framework or just a design system for your application, [virtual components](/features/aliasing/#virtual-component-defaults) are a powerful ally. Within the Vuetify defaults system, classes and styles are treated just like regular props but instead of being overwritten at the template level, they are merged.
 
@@ -209,3 +209,152 @@ When `<v-chip-primary>` is used in a template, it will **not** have the `v-chip-
 There are some cases where a default class or style could be unintentionally passed down to an inner component. This mostly concerns [form inputs and controls](/components/all/#form-inputs-and-controls).
 
 </alert>
+
+## Using in custom components
+
+<alert type="success">
+
+This feature was introduced in [v3.2.0 (Orion)](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+
+</alert>
+
+Hook into the Vuetify defaults engine and configure your custom components the same way that we do. This feature makes it super easy to homogenize functionality across your application and reduce the amount of duplicated code.
+
+Let's start with an example by creating a basic component that accepts a single prop:
+
+```html { resource="src/components/MyComponent.vue" }
+<template>
+  <div>I am {{ foo }}</div>
+</template>
+
+<script setup>
+  defineProps({ foo: String })
+</script>
+```
+
+Now, let's add our new component to the Vuetify defaults configuration object and assign a default value to its `foo` prop:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  defaults: {
+    MyComponent1: {
+      foo: 'bar',
+    },
+  },
+})
+```
+
+Next, import the `useDefaults` composable into `MyComponent1.vue`. This function has two optional arguments:
+
+- `props` - The props object used to generate the component's default values
+- `name` - The name of the component. This is used to reference the defaults key defined in your Vuetify configuration
+
+In your template, assign the return value of `defineProps` to a variable and pass it to `useDefaults`:
+
+```html { resource="src/components/MyComponent1.vue" }
+<template>
+  <div>I am {{ props.foo }}</div>
+</template>
+
+<script setup>
+  import { useDefaults } from 'vuetify'
+
+  const _props = defineProps({ foo: String })
+  const props = useDefaults(_props, 'MyComponent1')
+</script>
+```
+
+Notice that we have to explicltly use the `props` object in the template. This is because Vue automatically unwraps the values in `defineProps`.
+
+```diff
+-<div>I am {{ foo }}</div>
++<div>I am {{ props.foo }}</div>
+```
+
+<alert type="info">
+
+The **name** argument is optional and is inferred from the component's name if not provided.
+
+</alert>
+
+When `<MyComponent1>` is used in a template, it uses the default value assigned in the Vuetify config:
+
+```html
+<template>
+  <MyComponent1 /> <!-- I am bar -->
+</template>
+```
+
+### Nested defaults
+
+It is possible to assign nested defaults within your component chain. This provides you with countless ways to configure your application and its components.
+
+Let's expand on the previous [example](#using-in-custom-components) by creating a new component, `<MyComponent2>` that uses `<MyComponent1>`:
+
+```html { resource="src/components/MyComponent2.vue" }
+<template>
+  <MyComponent1 />
+</template>
+
+<script setup>
+  import MyComponent1 from './MyComponent1.vue'
+</script>
+```
+
+Now, let's add `<MyComponent2>` to the Vuetify defaults configuration object and assign a default value to `foo` prop of all nested `<MyComponent1>` components:
+
+```js { resource="src/plugins/vuetify.js" }
+import { createVuetify } from 'vuetify'
+
+export default createVuetify({
+  defaults: {
+    MyComponent: { foo: 'bar' },
+
+    MyComponent2: {
+      MyComponent: { foo: 'baz' },
+    }
+  }
+})
+```
+
+Head back to the `MyComponent2.vue` file and import & invoke the `useDefaults` composable:
+
+```html { resource="src/components/MyComponent2.vue" }
+<template>
+  <div>
+    <slot />
+  </div>
+</template>
+
+<script setup>
+  import MyComponent1 from './MyComponent1.vue'
+  import { useDefaults } from 'vuetify'
+
+  useDefaults()
+</script>
+```
+
+Finally, add both new components to a template and inspect the output:
+
+```html
+<template>
+  <v-app>
+    <v-main>
+      <MyComponent1 /> <!-- I am bar -->
+
+      <MyComponent2>
+        <MyComponent1 /> <!-- I am baz -->
+      </MyComponent2>
+    </v-main>
+  </v-app>
+</template>
+
+<script setup>
+  import MyComponent1 from './MyComponent1.vue'
+  import MyComponent2 from './MyComponent2.vue'
+</script>
+```
+
+Now, whenever `<MyComponent1>` is used within the `<MyComponent2>` component, it has a different assigned default value.
