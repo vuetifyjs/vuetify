@@ -84,7 +84,11 @@ function propIsDefined (vnode: VNode, prop: string) {
     typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
 }
 
-export function useDefaults (props: Record<string, any>, name?: string, defaults = injectDefaults()) {
+export function useDefaults (
+  props: Record<string, any> = {},
+  name?: string,
+  defaults = injectDefaults()
+) {
   const vm = getCurrentInstance('useDefaults')
 
   name = name ?? vm.type.name ?? vm.type.__name
@@ -92,14 +96,14 @@ export function useDefaults (props: Record<string, any>, name?: string, defaults
     throw new Error('[Vuetify] Could not determine component name')
   }
 
-  const componentDefaults = computed(() => defaults.value![props._as ?? name])
+  const componentDefaults = computed(() => defaults.value?.[props._as ?? name])
   const _props = new Proxy(props, {
     get (target, prop) {
       const propValue = Reflect.get(target, prop)
       if (prop === 'class' || prop === 'style') {
         return [componentDefaults.value?.[prop], propValue].filter(v => v != null)
       } else if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-        return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? propValue
+        return componentDefaults.value?.[prop] ?? defaults.value?.global?.[prop] ?? propValue
       }
       return propValue
     },
