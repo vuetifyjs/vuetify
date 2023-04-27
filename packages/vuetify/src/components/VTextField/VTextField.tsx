@@ -59,6 +59,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
   emits: {
     'click:control': (e: MouseEvent) => true,
     'mousedown:control': (e: MouseEvent) => true,
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: string) => true,
   },
 
