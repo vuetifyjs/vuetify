@@ -290,12 +290,15 @@ export const VAutocomplete = genericComponent<new <
 
         nextTick(() => (isSelecting.value = false))
       }
+      if (props.chips && !props.multiple) {
+        search.value = ''
+      }
     }
 
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
+        search.value = props.multiple || props.chips || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
