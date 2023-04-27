@@ -84,7 +84,7 @@ function propIsDefined (vnode: VNode, prop: string) {
     typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
 }
 
-export function useDefaults (
+export function internalUseDefaults (
   props: Record<string, any> = {},
   name?: string,
   defaults = injectDefaults()
@@ -130,4 +130,13 @@ export function useDefaults (
   }
 
   return { props: _props, provideSubDefaults }
+}
+
+export function useDefaults (
+  props: Record<string, any> = {},
+  name?: string,
+) {
+  const { props: _props, provideSubDefaults } = internalUseDefaults(props, name)
+  provideSubDefaults()
+  return _props
 }

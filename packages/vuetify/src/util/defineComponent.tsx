@@ -5,7 +5,7 @@ import {
 import { consoleWarn } from '@/util/console'
 import { pick, toKebabCase } from '@/util/helpers'
 import { propsFactory } from '@/util/propsFactory'
-import { injectDefaults, useDefaults } from '@/composables/defaults'
+import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -111,7 +111,7 @@ export function defineComponent (options: ComponentOptions) {
       // Skip props proxy if defaults are not provided
       if (!defaults.value) return options._setup(props, ctx)
 
-      const { props: _props, provideSubDefaults } = useDefaults(props, props._as ?? options.name, defaults)
+      const { props: _props, provideSubDefaults } = internalUseDefaults(props, props._as ?? options.name, defaults)
 
       const setupBindings = options._setup(_props, ctx)
 
