@@ -15,10 +15,10 @@
       @blur="resetSearch"
       @focus="onFocus"
     >
-      <template #item="{ item, props }">
+      <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
-          v-bind="props"
+          v-bind="itemProps"
         />
 
         <template v-else>
@@ -102,16 +102,20 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
+
+  // Stores
   import { useReleasesStore } from '@/store/releases'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref } from 'vue'
+  import { useRoute } from 'vue-router'
   import { version } from 'vuetify'
 
   const { t } = useI18n()
   const store = useReleasesStore()
   const isFocused = ref(false)
   const isSearching = ref(false)
+  const route = useRoute()
   const search = ref<any>()
   let timeout = -1
 
@@ -165,6 +169,12 @@
 
   onBeforeMount(async () => {
     await store.fetch()
+
+    if (route.query.version) {
+      const found = store.releases.find(release => release.tag_name === route.query.version)
+
+      if (found) return (search.value = found)
+    }
 
     search.value = store.releases[0]
   })
