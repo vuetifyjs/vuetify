@@ -87,23 +87,15 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
     }
 
     function calculateMidPointIndex (scrollTop: number) {
-      let start = 0
-      let end = props.items.length
+      const end = props.items.length
 
-      while (start <= end) {
-        const middle = start + Math.floor((end - start) / 2)
-        const middleOffset = calculateOffset(middle)
-
-        if (middleOffset === scrollTop) {
-          return middle
-        } else if (middleOffset < scrollTop) {
-          start = middle + 1
-        } else if (middleOffset > scrollTop) {
-          end = middle - 1
-        }
+      let middle = 0
+      let middleOffset = 0
+      while (middleOffset < scrollTop && middle < end) {
+        middleOffset += sizes[middle++] || itemHeight.value
       }
 
-      return start
+      return middle - 1
     }
 
     let lastScrollTop = 0
