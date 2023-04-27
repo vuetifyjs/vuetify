@@ -71,7 +71,11 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
       return (
         <VInput
-          class="v-radio-group"
+          class={[
+            'v-radio-group',
+            props.class,
+          ]}
+          style={ props.style }
           { ...inputAttrs }
           { ...inputProps }
           v-model={ model.value }

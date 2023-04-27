@@ -188,17 +188,20 @@ type MaybePick<
 // Array of keys
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: U[]): [yes: MaybePick<T, U>, no: Omit<T, U>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: U[], exclude?: E[]): [yes: MaybePick<T, Exclude<U, E>>, no: Omit<T, Exclude<U, E>>]
 // Array of keys or RegExp to test keys against
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>]
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>]
 export function pick<
   T extends object,
-  U extends Extract<keyof T, string>
-> (obj: T, paths: (U | RegExp)[]): [yes: Partial<T>, no: Partial<T>] {
+  U extends Extract<keyof T, string>,
+  E extends Extract<keyof T, string>
+> (obj: T, paths: (U | RegExp)[], exclude?: E[]): [yes: Partial<T>, no: Partial<T>] {
   const found = Object.create(null)
   const rest = Object.create(null)
 
@@ -207,7 +210,7 @@ export function pick<
       paths.some(path => path instanceof RegExp
         ? path.test(key)
         : path === key
-      )
+      ) && !exclude?.some(path => path === key)
     ) {
       found[key] = obj[key]
     } else {
@@ -347,6 +350,10 @@ export function getDecimals (value: number) {
 
 export function padEnd (str: string, length: number, char = '0') {
   return str + char.repeat(Math.max(0, length - str.length))
+}
+
+export function padStart (str: string, length: number, char = '0') {
+  return char.repeat(Math.max(0, length - str.length)) + str
 }
 
 export function chunk (str: string, size = 1) {

@@ -14,6 +14,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -33,15 +34,14 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export type VBtnSlots = MakeSlots<{
+export type VBtnSlots = {
   default: []
   prepend: []
   append: []
   loader: []
-}>
+}
 
 export const makeVBtnProps = propsFactory({
   active: {
@@ -65,8 +65,10 @@ export const makeVBtnProps = propsFactory({
     default: true,
   },
 
+  text: String,
+
   ...makeBorderProps(),
-  ...makeRoundedProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeDimensionProps(),
   ...makeElevationProps(),
@@ -74,6 +76,7 @@ export const makeVBtnProps = propsFactory({
   ...makeLoaderProps(),
   ...makeLocationProps(),
   ...makePositionProps(),
+  ...makeRoundedProps(),
   ...makeRouterProps(),
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'button' }),
@@ -167,12 +170,14 @@ export const VBtn = genericComponent<VBtnSlots>()({
             roundedClasses.value,
             sizeClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
             locationStyles.value,
             sizeStyles.value,
+            props.style,
           ]}
           disabled={ isDisabled.value || undefined }
           href={ link.href.value }
@@ -228,8 +233,9 @@ export const VBtn = genericComponent<VBtnSlots>()({
                     icon: props.icon,
                   },
                 }}
-                v-slots:default={ slots.default }
-              />
+              >
+                { slots.default?.() ?? props.text }
+              </VDefaultsProvider>
             )}
           </span>
 

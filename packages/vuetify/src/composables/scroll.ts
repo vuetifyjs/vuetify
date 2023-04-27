@@ -112,6 +112,9 @@ export function useScroll (
   canScroll && watch(canScroll, onScroll, { immediate: true })
 
   return {
+    computedScrollThreshold,
+    currentScroll,
+    currentThreshold,
     isScrollActive,
 
     // required only for testing

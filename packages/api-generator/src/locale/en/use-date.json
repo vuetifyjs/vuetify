@@ -1,0 +1,29 @@
+{
+  "exposed": {
+    "date": "Takes any value and returns a date object.",
+    "format": "Takes a date object and returns it in a specified format.",
+    "startOfMonth": "Returns first day of the month.",
+    "endOfMonth": "Returns the last day of the month.",
+    "startOfWeek": "Returns the first day of the week.",
+    "endOfWeek": "Returns the last day of the week.",
+    "startOfDay": "Returns the first second of the day.",
+    "endOfDay": "Returns the last second of the day.",
+    "startOfYear": "Returns the first day of the year.",
+    "endOfYear": "Returns the last day of the year.",
+    "isAfter": "Returns true if the first date is after the second date.",
+    "isEqual": "Returns true if the two dates are equal.",
+    "isSameDay": "Returns true if the two dates are the same day.",
+    "isSameMonth": "Returns true if the two dates are the same month.",
+    "isValid": "Returns true if the date is valid.",
+    "isWithinRange": "Returns true if the first date is within the range of the second and third dates.",
+    "addDays": "Adds the specified number of days to the date.",
+    "addMonths": "Adds the specified number of months to the date.",
+    "getYear": "Returns the year of the date.",
+    "setYear": "Sets the year of the date.",
+    "getDiff": "Returns the difference between two dates in the specified unit.",
+    "getWeek": "Returns the week of the year of the date.",
+    "getWeekArray": "Returns an array of the days of the week of the date.",
+    "getWeekdays": "Returns an array of the names of the days of the week.",
+    "getMonth": "Returns the month of the date."
+  }
+}

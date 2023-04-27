@@ -3,6 +3,7 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -27,6 +28,7 @@ export const VFooter = genericComponent()({
     },
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -67,10 +69,12 @@ export const VFooter = genericComponent()({
           borderClasses.value,
           elevationClasses.value,
           roundedClasses.value,
+          props.class,
         ]}
         style={[
           backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
+          props.style,
         ]}
         v-slots={ slots }
       />

@@ -9,6 +9,7 @@ import { VSliderSymbol } from './slider'
 import Ripple from '@/directives/ripple'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
 import { useTextColor } from '@/composables/color'
 
@@ -47,6 +48,8 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
       type: Boolean,
       default: true,
     },
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -127,11 +130,15 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
+            props.class,
           ]}
-          style={{
-            '--v-slider-thumb-position': positionPercentage,
-            '--v-slider-thumb-size': convertToUnit(thumbSize.value),
-          }}
+          style={[
+            {
+              '--v-slider-thumb-position': positionPercentage,
+              '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+            },
+            props.style,
+          ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
           aria-valuemin={ props.min }

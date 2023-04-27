@@ -21,7 +21,6 @@ export const VTab = genericComponent()({
 
   props: {
     fixed: Boolean,
-    title: String,
 
     sliderColor: String,
     hideSlider: Boolean,
@@ -105,12 +104,13 @@ export const VTab = genericComponent()({
 
       return (
         <VBtn
-          _as="VTab"
           symbol={ VTabsSymbol }
           ref={ rootEl }
           class={[
             'v-tab',
+            props.class,
           ]}
+          style={ props.style }
           tabindex={ isSelected.value ? 0 : -1 }
           role="tab"
           aria-selected={ String(isSelected.value) }
@@ -122,7 +122,8 @@ export const VTab = genericComponent()({
           { ...attrs }
           onGroup:selected={ updateSlider }
         >
-          { slots.default ? slots.default() : props.title }
+          { slots.default?.() ?? props.text }
+
           { !props.hideSlider && (
             <div
               ref={ sliderEl }

@@ -7,6 +7,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { useDisplay } from '@/composables'
@@ -66,6 +67,7 @@ export const makeVSlideGroupProps = propsFactory({
     ),
   },
 
+  ...makeComponentProps(),
   ...makeTagProps(),
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
@@ -347,7 +349,9 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             'v-slide-group--has-affixes': hasAffixes.value,
             'v-slide-group--is-overflowing': isOverflowing.value,
           },
+          props.class,
         ]}
+        style={ props.style }
         tabindex={ (isFocused.value || group.selected.value.length) ? -1 : 0 }
         onFocus={ onFocus }
       >
