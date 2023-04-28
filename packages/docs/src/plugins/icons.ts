@@ -277,6 +277,7 @@ export {
   mdiServerPlus,
   mdiShapeOutline,
   mdiShareVariant,
+  mdiShareVariantOutline,
   mdiShieldLockOutline,
   mdiShieldStarOutline,
   mdiShoppingOutline,

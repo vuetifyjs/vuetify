@@ -15,10 +15,10 @@
       @blur="resetSearch"
       @focus="onFocus"
     >
-      <template #item="{ item, props }">
+      <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
-          v-bind="props"
+          v-bind="itemProps"
         />
 
         <template v-else>
@@ -82,6 +82,7 @@
             class="text-white ms-2"
             density="comfortable"
             variant="flat"
+            @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
@@ -102,16 +103,22 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
+
+  // Stores
   import { useReleasesStore } from '@/store/releases'
 
   // Utilities
   import { computed, nextTick, onBeforeMount, ref } from 'vue'
+  import { useRoute } from 'vue-router'
   import { version } from 'vuetify'
+  import { wait } from '@/util/helpers'
 
   const { t } = useI18n()
   const store = useReleasesStore()
   const isFocused = ref(false)
   const isSearching = ref(false)
+  const clicked = ref('copy-link')
+  const route = useRoute()
   const search = ref<any>()
   let timeout = -1
 
@@ -141,6 +148,20 @@
   const tooltips = computed(() => {
     return [
       {
+        color: '#3b5998',
+        icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
+        async onClick () {
+          navigator.clipboard.writeText(`https://vuetifyjs.com/getting-started/release-notes/?version=${search.value.tag_name}`)
+
+          clicked.value = 'copied'
+
+          await wait(1500)
+
+          clicked.value = 'copy-link'
+        },
+        path: clicked.value,
+      },
+      {
         color: '#738ADB',
         icon: 'mdi-discord',
         href: 'https://discord.gg/QHWSAbA',
@@ -165,6 +186,12 @@
 
   onBeforeMount(async () => {
     await store.fetch()
+
+    if (route.query.version) {
+      const found = store.releases.find(release => release.tag_name === route.query.version)
+
+      if (found) return (search.value = found)
+    }
 
     search.value = store.releases[0]
   })
