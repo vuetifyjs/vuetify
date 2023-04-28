@@ -166,9 +166,9 @@ describe('VAutocomplete', () => {
     cy.get('.v-list-item').should('have.length', 2)
     cy.get('.v-list-item').contains('Item 1').click();
 
-    cy.get('.v-fieldinput > input').clear();
-    cy.get('.v-inputdetails').click();
-    cy.get('.v-field__input').should('not.have.text', 'Item 1');
+    cy.get('.v-field__input').clear();
+    cy.get('body').click('bottomLeft');
+    cy.get('.v-field__input').should('not.include.text', 'Item 1');
   })
   
   it('should return item object as the argument of item-title function', () => {
