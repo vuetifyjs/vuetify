@@ -151,7 +151,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`https://vuetifyjs.com/getting-started/release-notes/?version=${search.value.tag_name}`)
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value.tag_name}`)
 
           clicked.value = 'copied'
 

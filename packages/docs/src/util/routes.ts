@@ -36,7 +36,11 @@ export function leadingSlash (str: string) {
 }
 
 export function trailingSlash (str: string) {
-  return str.endsWith('/') ? str : str + '/'
+  return (
+    str.startsWith('/') ||
+    str.startsWith('#') ||
+    str.startsWith('?')
+  ) ? str : str + '/'
 }
 
 export const generatedRoutes = generatedPages.map(route => ({
