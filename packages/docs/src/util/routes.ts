@@ -22,13 +22,14 @@ export function preferredLocale (locale = 'en') {
 
 export function rpath (path = '') {
   const locale = preferredLocale()
-  const [url, hash] = path.split('#')
+  const [_url, hash] = path.split('#')
+  const [url, query] = _url.split('?')
 
   return leadingSlash(trailingSlash([
     '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
-  ].filter(v => v != null).join('/'))) + (hash ? `#${hash}` : '')
+  ].filter(v => v != null).join('/'))) + (hash ? `#${hash}` : '') + (query ? `?${query}` : '')
 }
 
 export function leadingSlash (str: string) {
@@ -36,11 +37,7 @@ export function leadingSlash (str: string) {
 }
 
 export function trailingSlash (str: string) {
-  return (
-    str.startsWith('/') ||
-    str.startsWith('#') ||
-    str.startsWith('?')
-  ) ? str : str + '/'
+  return str.endsWith('/') ? str : str + '/'
 }
 
 export const generatedRoutes = generatedPages.map(route => ({
