@@ -64,6 +64,10 @@
         transform: rotate(180deg)
 
   &--chips
+    .v-field__input
+      padding-top: calc(var(--v-field__input-padding-top) + $combobox-chips-margin-top)
+      padding-bottom: calc(var(--v-field__input-padding-bottom) + var(--combobox-chips-margin-bottom))
+
     .v-combobox__selection
       margin-top: $combobox-chips-margin-top
       margin-bottom: var(--combobox-chips-margin-bottom)
