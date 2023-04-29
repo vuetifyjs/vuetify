@@ -83,7 +83,7 @@ export const VCombobox = genericComponent<new <
 
   props: {
     // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
+    autoSelectFirst: Boolean,
     delimiters: Array as PropType<string[]>,
 
     ...makeFilterProps({ filterKeys: ['title'] }),
@@ -192,6 +192,11 @@ export const VCombobox = genericComponent<new <
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
+    const highlightFirst = computed(() => (
+      props.autoSelectFirst &&
+      filteredItems.value.length > 0 &&
+      !isPristine.value
+    ))
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -231,6 +236,10 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
+        if (e.key === 'Enter' && highlightFirst.value) {
+          select(filteredItems.value[0])
+        }
+
         isPristine.value = true
       }
 
@@ -411,12 +420,13 @@ export const VCombobox = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map(item => slots.item?.({
+                      { displayItems.value.map((item, index) => slots.item?.({
                         item,
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem
                           key={ item.value }
+                          active={ (highlightFirst.value && index === 0) ? true : undefined }
                           { ...item.props }
                           onClick={ () => select(item) }
                         >
