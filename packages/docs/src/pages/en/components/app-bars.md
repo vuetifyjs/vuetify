@@ -10,6 +10,10 @@ related:
   - /components/toolbars/
 ---
 
+<script setup>
+  import PropScrollBehavior from '@/examples/v-app-bar/prop-scroll-behavior.vue'
+</script>
+
 # App bars
 
 The `v-app-bar` component is pivotal to any graphical user interface (GUI), as it generally is the primary source of site navigation. The app-bar component works great in conjunction with a [v-navigation-drawer](/components/navigation-drawers) for providing site navigation in your application.
@@ -65,11 +69,16 @@ The recommended placement of elements inside of `v-app-bar` is:
 
 ### Props
 
-<!-- #### Collapsible bars
+#### Scroll behavior
 
-With the **collapse** and **collapse-on-scroll** props you can easily control the state of toolbar that the user interacts with.
+Available values:
+- **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+- **collapse**: Shrink horizontally to a small bar in one corner.
+- **elevate**: Add a drop shadow to the app bar when scrolling.
+- **fade-image**: Fade out the image as the user scrolls down.
+- **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
 
-<example file="v-app-bar/prop-collapse" /> -->
+<prop-scroll-behavior />
 
 #### Density
 
@@ -77,35 +86,11 @@ You can make **app-bar** dense. A dense app bar has lower height than regular on
 
 <example file="v-app-bar/prop-density" />
 
-<!-- #### Elevate on scroll
-
-When using the **elevate-on-scroll** prop, the `v-app-bar` will rest at an elevation of 0dp until the user begins to scroll down. Once scrolling, the bar raises to 4dp.
-
-<example file="v-app-bar/prop-elevate-on-scroll" />
-
-#### Fade image on scroll
-
-The background image of a `v-app-bar` can fade on scroll. Use the `fade-img-on-scroll` property for this.
-
-<example file="v-app-bar/prop-img-fade" />
-
-#### Hiding on scroll
-
-`v-app-bar` can be hidden on scroll. Use the `hide-on-scroll` property for this.
-
-<example file="v-app-bar/prop-hide" /> -->
-
 #### Images
 
 `v-app-bar` can contain background images. You can set source via the `image` prop. If you need to customize the `v-img` properties, the app-bar provides you with an **image** slot.
 
 <example file="v-app-bar/prop-image" />
-
-<!-- #### Inverted scrolling
-
-When using the **inverted-scroll** property, the bar will hide until the user scrolls past the designated threshold. Once past the threshold, the `v-app-bar` will continue to display until the users scrolls up past the threshold. If no **scroll-threshold** value is supplied a default value of _0_ will be used.
-
-<example file="v-app-bar/prop-inverted-scroll" /> -->
 
 #### Prominent
 
