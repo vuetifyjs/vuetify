@@ -7,6 +7,7 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -21,14 +22,15 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
-import { genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
+import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
+import type { GenericProps } from '@/util'
 import type { InternalItem, ItemProps } from '@/composables/items'
-import type { SlotsToProps } from '@/util'
+import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
 
-export interface InternalListItem extends InternalItem {
+export interface InternalListItem<T = any> extends InternalItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
@@ -75,15 +77,9 @@ function useListItems (props: ItemProps & { itemType: string }) {
   return { items }
 }
 
-export const VList = genericComponent<new <T>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    subheader: []
-    header: [{ props: Record<string, unknown> }]
-    item: [T]
-  }>
-}>()({
+export const VList = genericComponent<new <T>(props: {
+  items?: T[]
+}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
   name: 'VList',
 
   props: {
@@ -102,6 +98,7 @@ export const VList = genericComponent<new <T>() => {
       openStrategy: 'list' as const,
     }),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -192,30 +189,8 @@ export const VList = genericComponent<new <T>() => {
     }
 
     function focus (location?: 'next' | 'prev' | 'first' | 'last') {
-      if (!contentRef.value) return
-
-      const targets = ['button', '[href]', 'input', 'select', 'textarea', '[tabindex]'].map(s => `${s}:not([tabindex="-1"])`).join(', ')
-      const focusable = [...contentRef.value.querySelectorAll(targets)].filter(el => !el.hasAttribute('disabled')) as HTMLElement[]
-      const idx = focusable.indexOf(document.activeElement as HTMLElement)
-
-      if (!location) {
-        if (!contentRef.value.contains(document.activeElement)) {
-          focusable[0]?.focus()
-        }
-      } else if (location === 'first') {
-        focusable[0]?.focus()
-      } else if (location === 'last') {
-        focusable.at(-1)?.focus()
-      } else {
-        let el
-        let idxx = idx
-        const inc = location === 'next' ? 1 : -1
-        do {
-          idxx += inc
-          el = focusable[idxx]
-        } while ((!el || el.offsetParent == null) && idxx < focusable.length && idxx >= 0)
-        if (el) el.focus()
-        else focus(location === 'next' ? 'first' : 'last')
+      if (contentRef.value) {
+        return focusChild(contentRef.value, location)
       }
     }
 
@@ -236,10 +211,12 @@ export const VList = genericComponent<new <T>() => {
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
           role="listbox"
           aria-activedescendant={ undefined }

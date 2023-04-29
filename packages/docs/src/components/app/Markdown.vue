@@ -1,14 +1,14 @@
 <template>
   <component :is="tag" class="v-markdown">
-    <component :is="{ template: markdown }" />
+    <component :is="template" />
   </component>
 </template>
 
 <script setup>
   // Utilities
   import { computed } from 'vue'
-  import MarkdownIt from 'markdown-it'
   import { configureMarkdown } from '@/util/markdown-it'
+  import MarkdownIt from 'markdown-it'
 
   const md = configureMarkdown(MarkdownIt({
     html: true,
@@ -104,4 +104,5 @@
   })
 
   const markdown = computed(() => md.render(props.content, {}))
+  const template = computed(() => ({ template: markdown.value }))
 </script>

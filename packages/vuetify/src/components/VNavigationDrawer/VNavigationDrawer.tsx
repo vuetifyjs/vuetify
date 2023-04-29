@@ -3,6 +3,7 @@ import './VNavigationDrawer.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
@@ -79,6 +80,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     sticky: Boolean,
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeElevationProps(),
     ...makeLayoutItemProps(),
     ...makeRoundedProps(),
@@ -231,6 +233,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               borderClasses.value,
               elevationClasses.value,
               roundedClasses.value,
+              props.class,
             ]}
             style={[
               backgroundColorStyles.value,
@@ -238,6 +241,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               dragStyles.value,
               ssrBootStyles.value,
               stickyStyles.value,
+              props.style,
             ]}
             { ...attrs }
           >

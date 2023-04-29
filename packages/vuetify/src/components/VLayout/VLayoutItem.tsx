@@ -2,6 +2,7 @@
 import './VLayoutItem.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
@@ -24,6 +25,8 @@ export const VLayoutItem = genericComponent()({
       default: 300,
     },
     modelValue: Boolean,
+
+    ...makeComponentProps(),
     ...makeLayoutItemProps(),
   },
 
@@ -42,8 +45,12 @@ export const VLayoutItem = genericComponent()({
       <div
         class={[
           'v-layout-item',
+          props.class,
         ]}
-        style={ layoutItemStyles.value }
+        style={[
+          layoutItemStyles.value,
+          props.style,
+        ]}
       >
         { slots.default?.() }
       </div>

@@ -3,6 +3,7 @@ import './VOverlay.sass'
 
 // Composables
 import { makeActivatorProps, useActivator } from './useActivator'
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
@@ -11,8 +12,8 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useBackButton, useRouter } from '@/composables/router'
 import { useBackgroundColor } from '@/composables/color'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useHydration } from '@/composables/hydration'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
 import { useScopeId } from '@/composables/scopeId'
 import { useStack } from '@/composables/stack'
@@ -46,7 +47,6 @@ import {
 
 // Types
 import type { BackgroundColorData } from '@/composables/color'
-import type { MakeSlots } from '@/util'
 import type { PropType, Ref } from 'vue'
 
 interface ScrimProps {
@@ -72,10 +72,10 @@ function Scrim (props: ScrimProps) {
   )
 }
 
-export type OverlaySlots = MakeSlots<{
+export type OverlaySlots = {
   default: [{ isActive: Ref<boolean> }]
   activator: [{ isActive: boolean, props: Record<string, any> }]
-}>
+}
 
 export const makeVOverlayProps = propsFactory({
   absolute: Boolean,
@@ -101,6 +101,7 @@ export const makeVOverlayProps = propsFactory({
   },
 
   ...makeActivatorProps(),
+  ...makeComponentProps(),
   ...makeDimensionProps(),
   ...makeLazyProps(),
   ...makeLocationStrategyProps(),
@@ -258,8 +259,13 @@ export const VOverlay = genericComponent<OverlaySlots>()({
                   },
                   themeClasses.value,
                   rtlClasses.value,
+                  props.class,
                 ]}
-                style={[stackStyles.value, { top: convertToUnit(top.value) }]}
+                style={[
+                  stackStyles.value,
+                  { top: convertToUnit(top.value) },
+                  props.style,
+                ]}
                 ref={ root }
                 { ...scopeId }
                 { ...attrs }

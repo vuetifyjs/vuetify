@@ -99,7 +99,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               'v-snackbar--vertical': props.vertical,
             },
             positionClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({

@@ -9,6 +9,8 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -20,7 +22,6 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -28,20 +29,19 @@ import { genericComponent } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
 
-export type VAlertSlots = MakeSlots<{
+export type VAlertSlots = {
   default: []
   prepend: []
   title: []
   text: []
   append: []
   close: []
-}>
+}
 
 export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',
@@ -84,6 +84,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
       validator: (val: ContextualType) => allowedTypes.includes(val),
     },
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -157,11 +158,13 @@ export const VAlert = genericComponent<VAlertSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           role="alert"
         >

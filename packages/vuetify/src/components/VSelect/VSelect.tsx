@@ -28,7 +28,7 @@ import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeSelectProps = propsFactory({
@@ -75,24 +75,20 @@ export const VSelect = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->() => {
-  $props: {
-    items?: readonly T[]
-    returnObject?: ReturnObject
-    multiple?: Multiple
-    modelValue?: V
-    'onUpdate:modelValue'?: (val: V) => void
-  } & SlotsToProps<
-    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      selection: [{ item: InternalItem<T>, index: number }]
-      'prepend-item': []
-      'append-item': []
-      'no-data': []
-    }>
-  >
-}>()({
+>(props: {
+  items?: readonly T[]
+  returnObject?: ReturnObject
+  multiple?: Multiple
+  modelValue?: V
+  'onUpdate:modelValue'?: (val: V) => void
+}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
+  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<T>, index: number }]
+  'prepend-item': []
+  'append-item': []
+  'no-data': []
+}>>()({
   name: 'VSelect',
 
   props: {
@@ -104,6 +100,7 @@ export const VSelect = genericComponent<new <
   },
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
@@ -234,6 +231,9 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
+    }
     function onFocusout (e: FocusEvent) {
       if (e.relatedTarget == null) {
         vTextFieldRef.value?.focus()
@@ -269,7 +269,9 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly
           placeholder={ placeholder }
@@ -300,6 +302,7 @@ export const VSelect = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
+                      onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
@@ -401,6 +404,7 @@ export const VSelect = genericComponent<new <
     })
 
     return forwardRefs({
+      isFocused,
       menu,
       select,
     }, vTextFieldRef)

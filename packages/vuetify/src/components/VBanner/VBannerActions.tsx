@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
@@ -10,6 +11,8 @@ export const VBannerActions = genericComponent()({
   props: {
     color: String,
     density: String,
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -22,7 +25,13 @@ export const VBannerActions = genericComponent()({
     })
 
     useRender(() => (
-      <div class="v-banner-actions">
+      <div
+        class={[
+          'v-banner-actions',
+          props.class,
+        ]}
+        style={ props.style }
+      >
         { slots.default?.() }
       </div>
     ))

@@ -3,7 +3,7 @@ import './VTextField.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VCounter } from '@/components/VCounter'
 
 // Directives
@@ -20,7 +20,6 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -30,8 +29,6 @@ export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
   counter: [Boolean, Number, String] as PropType<true | number | string>,
   counterValue: Function as PropType<(value: any) => number>,
-  hint: String,
-  persistentHint: Boolean,
   prefix: String,
   placeholder: String,
   persistentPlaceholder: Boolean,
@@ -47,9 +44,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: []
-}>>()({
+}>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -102,11 +99,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       props.persistentPlaceholder ||
       isFocused.value
     ))
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (isFocused.value || props.persistentHint) ? props.hint : ''
-    })
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -157,7 +149,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -171,13 +163,12 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
-          onClick:prepend={ props['onClick:prepend'] }
-          onClick:append={ props['onClick:append'] }
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,

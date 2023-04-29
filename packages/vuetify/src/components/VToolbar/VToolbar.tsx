@@ -9,6 +9,7 @@ import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -22,7 +23,6 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 
 const allowedDensities = [null, 'prominent', 'default', 'comfortable', 'compact'] as const
 
@@ -52,20 +52,21 @@ export const makeVToolbarProps = propsFactory({
   title: String,
 
   ...makeBorderProps(),
+  ...makeComponentProps(),
   ...makeElevationProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
 }, 'v-toolbar')
 
-export type VToolbarSlots = MakeSlots<{
+export type VToolbarSlots = {
   default: []
   image: []
   prepend: []
   append: []
   title: []
   extension: []
-}>
+}
 
 export const VToolbar = genericComponent<VToolbarSlots>()({
   name: 'VToolbar',
@@ -125,9 +126,11 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             elevationClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
+            props.style,
           ]}
         >
           { hasImage && (

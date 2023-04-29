@@ -55,14 +55,13 @@ export const makeVDataTableProps = propsFactory({
   fixedHeader: Boolean,
   fixedFooter: Boolean,
   'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+  search: String,
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
     ...makeDataTableGroupProps(),
@@ -149,13 +148,11 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
             <>
               { slots.colgroup?.({ columns }) }
               <thead>
-                { slots.headers ? slots.headers() : (
-                  <VDataTableHeaders
-                    sticky={ props.fixedHeader }
-                    multiSort={ props.multiSort }
-                    v-slots={ slots }
-                  />
-                )}
+                <VDataTableHeaders
+                  sticky={ props.fixedHeader }
+                  multiSort={ props.multiSort }
+                  v-slots={ slots }
+                />
               </thead>
               { slots.thead?.() }
               <tbody>

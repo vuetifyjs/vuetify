@@ -1,3 +1,3 @@
 export * from './VDataTable'
+export * from './VInfiniteScroll'
 export * from './VSkeletonLoader'
-export * from './VVirtualScroll'

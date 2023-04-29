@@ -2,14 +2,14 @@
 import './VSlider.sass'
 
 // Components
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { makeSliderProps, useSlider } from './slider'
+import { makeSliderProps, useSlider, useSteps } from './slider'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
@@ -17,13 +17,12 @@ import { computed, ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VSliderSlots = VInputSlots & MakeSlots<{
+export type VSliderSlots = VInputSlots & {
   'tick-label': []
   'thumb-label': []
-}>
+}
 
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
@@ -42,10 +41,25 @@ export const VSlider = genericComponent<VSliderSlots>()({
   emits: {
     'update:focused': (value: boolean) => true,
     'update:modelValue': (v: number) => true,
+    start: (value: number) => true,
+    end: (value: number) => true,
   },
 
-  setup (props, { slots }) {
+  setup (props, { slots, emit }) {
     const thumbContainerRef = ref()
+
+    const steps = useSteps(props)
+
+    const model = useProxiedModel(
+      props,
+      'modelValue',
+      undefined,
+      v => {
+        const value = typeof v === 'string' ? parseFloat(v) : v == null ? steps.min.value : v
+
+        return steps.roundValue(value)
+      },
+    )
 
     const {
       min,
@@ -60,29 +74,24 @@ export const VSlider = genericComponent<VSliderSlots>()({
       readonly,
     } = useSlider({
       props,
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      handleSliderMouseUp: newValue => model.value = roundValue(newValue),
-      // eslint-disable-next-line @typescript-eslint/no-use-before-define
-      handleMouseMove: newValue => model.value = roundValue(newValue),
+      steps,
+      onSliderStart: () => {
+        emit('start', model.value)
+      },
+      onSliderEnd: ({ value }) => {
+        const roundedValue = roundValue(value)
+        model.value = roundedValue
+        emit('end', roundedValue)
+      },
+      onSliderMove: ({ value }) => model.value = roundValue(value),
       getActiveThumb: () => thumbContainerRef.value?.$el,
     })
-
-    const model = useProxiedModel(
-      props,
-      'modelValue',
-      undefined,
-      v => {
-        const value = typeof v === 'string' ? parseFloat(v) : v == null ? min.value : v
-
-        return roundValue(value)
-      },
-    )
 
     const { isFocused, focus, blur } = useFocus(props)
     const trackStop = computed(() => position(model.value))
 
     useRender(() => {
-      const [inputProps, _] = filterInputProps(props)
+      const [inputProps, _] = VInput.filterProps(props)
       const hasPrepend = !!(props.label || slots.label || slots.prepend)
 
       return (
@@ -95,7 +104,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...inputProps }
           focused={ isFocused.value }
         >
