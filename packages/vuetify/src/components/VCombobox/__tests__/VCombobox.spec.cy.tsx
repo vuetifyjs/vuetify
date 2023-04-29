@@ -467,4 +467,32 @@ describe('VCombobox', () => {
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
   })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VCombobox
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Select"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .click()
+      .should('have.class', 'v-combobox--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-combobox--active-menu')
+  })
 })
