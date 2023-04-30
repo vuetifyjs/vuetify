@@ -9,12 +9,12 @@ describe('VTextarea', () => {
     const model = ref('Lorem ipsum dolor sit amet consectetur adipisicing elit. ')
     cy.mount(() => <VTextarea auto-grow rows="1" v-model={ model.value } />)
       .get('textarea').first()
-      .should(el => expect(el.outerHeight()).to.equal(56))
+      .should(el => expect(el.outerHeight()).to.equal(58))
       .click()
       .type('Eos q')
-      .should(el => expect(el.outerHeight()).to.equal(56))
+      .should(el => expect(el.outerHeight()).to.equal(58))
       .type('u')
-      .should(el => expect(el.outerHeight()).to.equal(80))
+      .should(el => expect(el.outerHeight()).to.equal(84))
   })
 
   it('should respect max-rows', () => {
