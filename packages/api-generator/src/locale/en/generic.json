@@ -34,15 +34,18 @@
     "end": "Applies margin at the start of the component.",
     "noDataText": "Text shown when no items are provided to the component",
     "modelValue": "The v-model value of the component. If component supports the **multiple** prop, this defaults to an empty array",
+    "modelModifiers": "**FOR INTERNAL USE ONLY**",
     "persistent": "Clicking outside or pressing **esc** key will not dismiss the dialog",
     "prependIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend** slot before default content",
     "ripple": "Applies the [v-ripple](/directives/ripple) directive.",
     "selectedClass": "Configure the active CSS class applied when an item is selected.",
     "size": "Sets the height and width of the component.",
     "symbol": "The [Symbol](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) used to hook into group functionality for components like [v-btn-toggle](/components/btn-toggle) and [v-bottom-navigation](/components/bottom-navigations/) ",
+    "messages": "Displays a list of messages or a single message if using a string",
     "tag": "Specify a custom tag used on the root element",
     "textColor": "Applies a specified color to the control text - supports utility colors (for example `success` or `purple`) or css color (for example `success` or `purple`) or css color (`#033` or `rgba(255, 0, 0, 0.5)`). Find a list of built-in classes on the [colors page](/styles/colors#material-colors)",
     "text": "Specify content text for the component.",
+    "search": "Text input used to filter items.",
     "title": "Specify a title text for the component.",
     "subtitle": "Specify a subtitle text for the component.",
     "trueValue": "Sets value for truthy state",
@@ -60,6 +63,7 @@
     "append": "Adds an item inside the input and after input content",
     "appendInner": "Adds an item inside the input content",
     "chip": "Slot for custom chip when using the [chip](#property-chip) prop",
+    "details": "Slot for custom input details to modifying the display of [messages](#props-messages).",
     "default": "The default Vue slot.",
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
     "loader": "Slot for custom loader (displayed when [loading](#props-loading) prop is equal to true)",
@@ -89,5 +93,13 @@
     "input": "The updated bound model",
     "update:modelValue": "Event that is emitted when the component's model changes",
     "group:selected": "Event that is emitted when an item is selected within a group."
+  },
+  "exposed": {
+    "filteredItems": "The current array of items based upon the current search text.",
+    "isFocused": "Returns true if the input is focused.",
+    "isPristine": "Returns true if the input has not been modified in any way.",
+    "menu": "Returns true if the menu is currently open.",
+    "search": "The current search text.",
+    "select": "The function used to select an items. The first argument expects the value of the item."
   }
 }

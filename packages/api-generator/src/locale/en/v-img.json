@@ -10,8 +10,7 @@
     "src": "The image URL. This prop is mandatory.",
     "srcset": "A set of alternate images to use based on device size. [Read more...](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/img#attr-srcset).",
     "transition": "The transition to use when switching from `lazy-src` to `src`. Can be one of the [built in](/styles/transitions/) or custom transition.",
-    "gradient": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-img.json))",
-    "width": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-img.json))"
+    "gradient": "The gradient to apply to the image. This can be any valid CSS gradient declaration. You can find more information on the [MDN documentation for gradients](https://developer.mozilla.org/en-US/docs/Web/CSS/gradient)."
   },
   "slots": {
     "placeholder": "Display an overlay while the image is loading",

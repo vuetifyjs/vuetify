@@ -1,18 +1,7 @@
 {
   "props": {
     "autoSelectFirst": "When searching, will always highlight the first option",
-    "dark": "Applies the dark theme variant to the component. This will default the components color to _white_ unless you've configured your [application theme](/customization/theme) to **dark** or if you are using the **color** prop on the component. You can find more information on the Material Design documentation for [dark themes](https://material.io/design/color/dark-theme.html).",
     "filter": "The filtering algorithm used when searching. [example](https://github.com/vuetifyjs/vuetify/blob/master/packages/vuetify/src/components/VAutocomplete/VAutocomplete.ts#L40)",
-    "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side",
-    "searchInput": "Search value. Can be used with `.sync` modifier.",
-    "search": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))"
-  },
-  "exposed": {
-    "isFocused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))",
-    "isPristine": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))",
-    "menu": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))",
-    "search": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))",
-    "filteredItems": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))",
-    "select": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-autocomplete.json))"
+    "noFilter": "Do not apply filtering when searching. Useful when data is being filtered server side"
   }
 }

@@ -14,9 +14,7 @@
     "required": "Designates the input as required; Adds an asterisk to the end of the label; Does not perform any validation.",
     "tabindex": "Tab index of input",
     "toggleKeys": "Array of key codes that will toggle the input (if it supports toggling)",
-    "value": "The input's value",
-    "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))",
-    "messages": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))"
+    "value": "The input's value"
   },
   "events": {
     "change": "Emitted when the input is changed by user interaction",
@@ -25,9 +23,6 @@
     "click:prepend": "Emitted when prepended icon is clicked",
     "mousedown": "Emitted when click is pressed",
     "mouseup": "Emitted when click is released"
-  },
-  "slots": {
-    "details": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))"
   },
   "exposed": {
     "reset": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-input.json))",

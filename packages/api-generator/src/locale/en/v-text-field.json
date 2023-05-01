@@ -15,15 +15,6 @@
     "type": "Sets input type",
     "counterValue": "Function returns the counter display text"
   },
-  "slots": {
-    "append-outer": "Adds an item outside the input and after input content",
-    "prepend-inner": "Adds an item inside the input and before input content",
-    "prepend": "Adds an item outside the input and before input content",
-    "append": "Adds an item inside the input and after input content",
-    "details": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "clear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))",
-    "append-inner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-text-field.json))"
-  },
   "events": {
     "blur": "Emitted when the input is blurred",
     "change": "Emitted when the input is changed by user interaction",
