@@ -48,10 +48,10 @@ jobs:
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build vuetify
-      - uses: actions/upload-artifact@v3
+      - uses: ./.github/actions/upload-artifact
         with:
           name: vuetify-dist
-          path: |
+          path: >
             packages/vuetify/dist
             packages/vuetify/lib
 
@@ -73,10 +73,9 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - uses: actions/download-artifact@v3
+      - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn lerna run lint $SCOPES
         env:
@@ -148,10 +147,9 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - uses: actions/download-artifact@v3
+      - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
       - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
@@ -194,10 +192,9 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - uses: actions/download-artifact@v3
+      - uses: ./.github/actions/download-artifact
         with:
           name: vuetify-dist
-          path: packages/vuetify
       - run: yarn --frozen-lockfile --non-interactive
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
@@ -224,7 +221,7 @@ jobs:
           VITE_AUTH0_DOMAIN: ${{ secrets.AUTH0_DOMAIN }}
           VITE_AUTH0_CLIENT_ID: ${{ secrets.AUTH0_CLIENT_ID }}
           VITE_GITHUB_SHA: ${{ github.sha }}
-      - uses: actions/upload-artifact@v3
+      - uses: ./.github/actions/upload-artifact
         with:
           name: docs-dist
           path: packages/docs/dist
@@ -242,10 +239,9 @@ jobs:
             **/node_modules
             /home/runner/.cache/Cypress
           key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - uses: actions/download-artifact@v3
+      - uses: ./.github/actions/download-artifact
         with:
           name: docs-dist
-          path: packages/docs/dist
       - run: yarn global add vercel
       - run: yarn --frozen-lockfile --non-interactive
       - run: node scripts/deploy-and-alias.js ${{ github.ref }}
