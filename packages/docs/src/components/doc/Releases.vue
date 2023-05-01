@@ -103,13 +103,13 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
+  import { useRoute, useRouter } from 'vue-router'
 
   // Stores
   import { useReleasesStore } from '@/store/releases'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { computed, nextTick, onBeforeMount, ref, watch } from 'vue'
   import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
@@ -119,6 +119,7 @@
   const isSearching = ref(false)
   const clicked = ref('copy-link')
   const route = useRoute()
+  const router = useRouter()
   const search = ref<any>()
   let timeout = -1
 
@@ -194,6 +195,10 @@
     }
 
     search.value = store.releases[0]
+  })
+
+  watch(search, ({ tag_name: version }) => {
+    router.push({ query: { version } })
   })
 </script>
 
