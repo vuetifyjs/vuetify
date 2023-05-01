@@ -21,7 +21,7 @@ import { useTouch } from './touch'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
+import { genericComponent, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -161,7 +161,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       return isDragging.value ? size * dragProgress.value : size
     })
 
-    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: location,
@@ -184,12 +184,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
         transition: 'none',
-      } : undefined,
-      ...layoutRect.value ? {
-        left: convertToUnit(layoutRect.value.left),
-        right: convertToUnit(layoutRect.value.right),
-        top: convertToUnit(layoutRect.value.top),
-        bottom: convertToUnit(layoutRect.value.bottom),
       } : undefined,
       ...layoutItemScrimStyles.value,
     }))
