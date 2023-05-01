@@ -73,7 +73,7 @@
     "append-item": "Adds an item after menu content",
     "item": "Define a custom item appearance",
     "prepend-item": "Adds an item before menu content",
-    "selection": "Define a custom selection appearance",
+    "selection": "Define a custom selection appearance"
   },
   "events": {
     "click": "Event that is emitted when the component is clicked",
