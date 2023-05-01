@@ -9,6 +9,8 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VIcon } from '@/components/VIcon'
+
 import { VTextField } from '@/components/VTextField'
 
 // Composables
@@ -327,13 +329,20 @@ export const VSelect = genericComponent<new <
                             onClick={ () => select(item) }
                           >
                             {{
-                              prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                                <VCheckboxBtn
-                                  modelValue={ isSelected }
-                                  ripple={ false }
-                                  tabindex="-1"
-                                />
-                              ) : undefined,
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
                             }}
                           </VListItem>
                         )

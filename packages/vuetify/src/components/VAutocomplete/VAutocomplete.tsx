@@ -31,6 +31,7 @@ import type { InternalItem } from '@/composables/items'
 import type { GenericProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import { VIcon } from '@/components'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -386,13 +387,20 @@ export const VAutocomplete = genericComponent<new <
                           onClick={ () => select(item) }
                         >
                           {{
-                            prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                              <VCheckboxBtn
-                                modelValue={ isSelected }
-                                ripple={ false }
-                                tabindex="-1"
-                              />
-                            ) : undefined,
+                            prepend: ({ isSelected }) => (
+                              <>
+                                { props.multiple && !props.hideSelected ? (
+                                  <VCheckboxBtn
+                                    modelValue={ isSelected }
+                                    ripple={ false }
+                                    tabindex="-1"
+                                  />
+                                ) : undefined }
+                                { item.props.prependIcon && (
+                                  <VIcon icon={ item.props.prependIcon } />
+                                )}
+                              </>
+                            ),
                             title: () => {
                               return isPristine.value
                                 ? item.title
