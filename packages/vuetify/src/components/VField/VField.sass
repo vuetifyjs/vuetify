@@ -1,4 +1,5 @@
 @use 'sass:map'
+@use 'sass:math'
 @use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
@@ -69,11 +70,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-height + $modifier}
-          $v-field-padding-bottom: ($field-control-padding-bottom + $modifier * .5)
-          @if ($v-field-padding-bottom > 0px)
-            --v-field-padding-bottom: #{$v-field-padding-bottom}
-          @else
-            --v-field-padding-bottom: 0px
+          --v-field-padding-bottom: #{math.max(0px, ($field-control-padding-bottom + $modifier * .5))}
 
   &--variant-outlined,
   &--single-line,
