@@ -10,7 +10,7 @@ import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
-import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
+import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 import { useOptions } from './composables/options'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { provideDefaults } from '@/composables/defaults'
@@ -42,7 +42,9 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     ...makeDataTableItemProps(),
     ...makeDataTableSelectProps(),
     ...makeDataTableSortProps(),
-    ...makeDataTableVirtualProps(),
+    ...makeVirtualProps({
+      itemHeight: 44,
+    }),
     ...makeFilterProps(),
   },
 
@@ -59,7 +61,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { groupBy } = createGroupBy(props)
     const { sortBy, multiSort, mustSort } = createSort(props)
 
-    const { columns } = createHeaders(props, {
+    const { headers, columns } = createHeaders(props, {
       groupBy,
       showSelect: toRef(props, 'showSelect'),
       showExpand: toRef(props, 'showExpand'),
@@ -81,19 +83,15 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     provideSelection(props, allRows)
     provideExpanded(props)
 
+    const headerHeight = computed(() => headers.value.length * 56)
+
     const {
       containerRef,
       paddingTop,
       paddingBottom,
-      startIndex,
-      stopIndex,
-      itemHeight,
+      computedItems,
       handleScroll,
-    } = useVirtual(props, flatItems)
-
-    const visibleItems = computed(() => {
-      return flatItems.value.slice(startIndex.value, stopIndex.value)
-    })
+    } = useVirtual(props, flatItems, headerHeight)
 
     useOptions({
       sortBy,
@@ -114,7 +112,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       <VTable
         class="v-data-table"
         style={{
-          '--v-table-row-height': convertToUnit(itemHeight.value),
+          '--v-table-row-height': convertToUnit(props.itemHeight),
         }}
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
@@ -146,7 +144,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                   </tr>
 
                   <VDataTableRows
-                    items={ visibleItems.value }
+                    items={ computedItems.value.map(({ raw }) => raw) }
                     onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
