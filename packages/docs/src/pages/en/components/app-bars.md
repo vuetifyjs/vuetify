@@ -72,11 +72,12 @@ The recommended placement of elements inside of `v-app-bar` is:
 #### Scroll behavior
 
 Available values:
-- **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
-- **collapse**: Shrink horizontally to a small bar in one corner.
-- **elevate**: Add a drop shadow to the app bar when scrolling.
-- **fade-image**: Fade out the image as the user scrolls down.
-- **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
+
+* **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+* **collapse**: Shrink horizontally to a small bar in one corner.
+* **elevate**: Add a drop shadow to the app bar when scrolling.
+* **fade-image**: Fade out the image as the user scrolls down.
+* **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
 
 <prop-scroll-behavior />
 
