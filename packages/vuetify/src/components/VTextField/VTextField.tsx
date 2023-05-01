@@ -97,7 +97,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
-      isFocused.value
+      isFocused.value ||
+      props.active
     ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
