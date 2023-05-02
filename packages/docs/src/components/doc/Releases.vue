@@ -103,13 +103,13 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
+  import { useRoute, useRouter } from 'vue-router'
 
   // Stores
-  import { useReleasesStore } from '@/store/releases'
+  import { Release, useReleasesStore } from '@/store/releases'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { computed, nextTick, onBeforeMount, ref, watch } from 'vue'
   import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
@@ -119,7 +119,8 @@
   const isSearching = ref(false)
   const clicked = ref('copy-link')
   const route = useRoute()
-  const search = ref<any>()
+  const router = useRouter()
+  const search = ref<Release>()
   let timeout = -1
 
   const onFocus = () => {
@@ -151,7 +152,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value.tag_name}`)
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value!.tag_name}`)
 
           clicked.value = 'copied'
 
@@ -169,7 +170,7 @@
       },
       {
         color: '#212121',
-        href: search.value.html_url,
+        href: search.value!.html_url,
         icon: 'mdi-github',
         path: 'open-github-release',
       },
@@ -194,6 +195,10 @@
     }
 
     search.value = store.releases[0]
+  })
+
+  watch(search, val => {
+    router.push({ query: { version: val!.tag_name } })
   })
 </script>
 

@@ -95,6 +95,13 @@
     }
   })
 
+  const fence = md.renderer.rules.fence
+  md.renderer.rules.fence = (tokens, idx, options, env, self) => {
+    return fence(tokens, idx, options, env, self)
+      .replaceAll('{{', '&lbrace;&lbrace;')
+      .replaceAll('}}', '&rbrace;&rbrace;')
+  }
+
   const props = defineProps({
     tag: {
       type: String,

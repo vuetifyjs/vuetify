@@ -44,10 +44,10 @@ The `v-app-bar` component is used for application-wide actions and information.
 
 The recommended placement of elements inside of `v-app-bar` is:
 
-* Place `v-app-bar-nav-icon` or other navigation items on the far left
-* Place `v-app-bar-title` to the right of navigation
-* Place contextual actions to the right of navigation
-* Place overflow actions to the far right
+- Place `v-app-bar-nav-icon` or other navigation items on the far left
+- Place `v-app-bar-title` to the right of navigation
+- Place contextual actions to the right of navigation
+- Place overflow actions to the far right
 
 ![App Bar Anatomy](https://cdn.vuetifyjs.com/docs/images/components-temp/v-app-bar/v-app-bar-anatomy.png)
 
@@ -73,11 +73,15 @@ The recommended placement of elements inside of `v-app-bar` is:
 
 Available values:
 
-* **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
-* **collapse**: Shrink horizontally to a small bar in one corner.
-* **elevate**: Add a drop shadow to the app bar when scrolling.
-* **fade-image**: Fade out the image as the user scrolls down.
-* **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
+- **hide**: The default slot area will shift up and hide as the user scrolls down. The extension slot remains visible.
+- **collapse**: Shrink horizontally to a small bar in one corner.
+- **elevate**: Add a drop shadow to the app bar when scrolling. Ignores `scroll-threshold`, will always be applied with any amount of scrolling.
+- **fade-image**: Fade out the image as the user scrolls down.
+- **inverted**: Has no effect on its own, but will reverse the behavior when combined with any other option.
+
+The `scroll-threshold` prop is used to determine how far the user must scroll down (in pixels) before the behavior is applied.
+
+A scroll listener is added to `window` by default, but can be changed to a custom element using the `scroll-target` prop.
 
 <prop-scroll-behavior />
 

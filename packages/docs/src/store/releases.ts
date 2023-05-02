@@ -1,15 +1,11 @@
 // Plugins
 import octokit from '@/plugins/octokit'
+import type { components as octokitComponents } from '@octokit/openapi-types'
 
 // Utilities
 import { defineStore } from 'pinia'
 
-export type Release = {
-  url: string
-  tag_name: string
-  html_name: string
-  published_at: string
-}
+export type Release = octokitComponents['schemas']['release']
 
 export type State = {
   releases: Release[]

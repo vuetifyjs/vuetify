@@ -77,22 +77,18 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
     })
     const {
       currentScroll,
-      currentThreshold,
-      computedScrollThreshold,
+      scrollThreshold,
       isScrollingUp,
+      scrollRatio,
     } = useScroll(props, { canScroll })
 
     const isCollapsed = computed(() => props.collapse || (
       scrollBehavior.value.collapse &&
-      (scrollBehavior.value.inverted ? currentScroll.value < 1 : currentScroll.value > 0)
+      (scrollBehavior.value.inverted ? scrollRatio.value > 0 : scrollRatio.value === 0)
     ))
     const isFlat = computed(() => props.flat || (
       scrollBehavior.value.elevate &&
-      currentScroll.value === (scrollBehavior.value.inverted ? 1 : 0)
-    ))
-    const scrollRatio = computed(() => Math.min(
-      ((currentThreshold.value - currentScroll.value) / currentThreshold.value) || 1,
-      1
+      (scrollBehavior.value.inverted ? currentScroll.value > 0 : currentScroll.value === 0)
     ))
     const opacity = computed(() => (
       scrollBehavior.value.fadeImage
@@ -108,15 +104,12 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       return (height + extensionHeight)
     })
     function setActive () {
-      const val = currentScroll.value
       if (scrollBehavior.value.hide) {
         if (scrollBehavior.value.inverted) {
-          isActive.value = val > computedScrollThreshold.value
+          isActive.value = currentScroll.value > scrollThreshold.value
         } else {
-          isActive.value = isScrollingUp.value || (val < computedScrollThreshold.value)
+          isActive.value = isScrollingUp.value || (currentScroll.value < scrollThreshold.value)
         }
-      } else if (scrollBehavior.value.inverted) {
-        isActive.value = currentScroll.value === 0
       } else {
         isActive.value = true
       }

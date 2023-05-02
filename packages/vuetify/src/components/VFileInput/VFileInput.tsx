@@ -106,6 +106,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const inputRef = ref<HTMLInputElement>()
+    const isActive = computed(() => (
+      isFocused.value ||
+      props.active
+    ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -184,7 +188,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
                 id={ id.value }
-                active={ isDirty.value || isFocused.value }
+                active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
