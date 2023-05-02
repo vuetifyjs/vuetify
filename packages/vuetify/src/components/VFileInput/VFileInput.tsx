@@ -50,6 +50,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       type: String,
       default: '$vuetify.fileInput.counter',
     },
+    hideInput: Boolean,
     multiple: Boolean,
     showSize: {
       type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
@@ -154,6 +155,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
       const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
+      const hasInput = !props.hideInput
 
       return (
         <VInput
@@ -193,6 +195,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
                 error={ isValid.value === false }
+                style={ !hasInput ? { display: 'none' } : props.style }
               >
                 {{
                   ...slots,
@@ -225,7 +228,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                       />
 
                       <div class={ fieldClass }>
-                        { !!model.value?.length && (
+                        { !!model.value?.length && hasInput && (
                           slots.selection ? slots.selection({
                             fileNames: fileNames.value,
                             totalBytes: totalBytes.value,
