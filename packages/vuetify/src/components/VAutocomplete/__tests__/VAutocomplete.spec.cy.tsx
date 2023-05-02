@@ -152,25 +152,26 @@ describe('VAutocomplete', () => {
       { title: 'Item 2', value: 'Item 2' },
     ])
 
-    const selectedItems = ref(null);
+    const selectedItems = ref(null)
 
     cy.mount(() => (
       <VAutocomplete
-      v-model={ selectedItems.value }
-      items={ items.value }
-      returnObject
+        v-model={ selectedItems.value }
+        items={ items.value }
+        returnObject
       />
     ))
 
-    cy.get('.v-autocomplete').click();
+    cy.get('.v-autocomplete').click()
     cy.get('.v-list-item').should('have.length', 2)
-    cy.get('.v-list-item').contains('Item 1').click();
+    cy.get('.v-list-item').contains('Item 1').click()
 
-    cy.get('.v-field__input').clear();
-    cy.get('body').click('bottomLeft');
-    cy.get('.v-field__input').should('not.include.text', 'Item 1');
+    cy.get('.v-field__input').clear()
+    cy.get('body').click('bottomLeft')
+    cy.get('.v-field__input').should('not.include.text', 'Item 1')
   })
-  
+
+  // https://github.com/vuetifyjs/vuetify/issues/16210
   it('should return item object as the argument of item-title function', () => {
     const items = [
       { id: 1, name: 'a' },
