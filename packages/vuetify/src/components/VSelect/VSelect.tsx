@@ -338,6 +338,7 @@ export const VSelect = genericComponent<new <
                                       tabindex="-1"
                                     />
                                   ) : undefined }
+
                                   { item.props.prependIcon && (
                                     <VIcon icon={ item.props.prependIcon } />
                                   )}

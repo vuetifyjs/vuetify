@@ -6,6 +6,7 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -31,7 +32,6 @@ import type { InternalItem } from '@/composables/items'
 import type { GenericProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
-import { VIcon } from '@/components'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -396,6 +396,7 @@ export const VAutocomplete = genericComponent<new <
                                     tabindex="-1"
                                   />
                                 ) : undefined }
+
                                 { item.props.prependIcon && (
                                   <VIcon icon={ item.props.prependIcon } />
                                 )}
