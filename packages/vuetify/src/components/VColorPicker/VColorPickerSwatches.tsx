@@ -8,12 +8,20 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
-import { parseColor } from './util'
+import {
+  convertToUnit,
+  deepEqual,
+  defineComponent,
+  getContrast,
+  parseColor,
+  RGBtoCSS,
+  RGBtoHSV,
+  useRender,
+} from '@/util'
 import colors from '@/util/colors'
 
 // Types
-import type { HSV } from '@/util'
+import type { Color, HSV } from '@/util'
 import type { PropType } from 'vue'
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
@@ -43,7 +51,7 @@ export const VColorPickerSwatches = defineComponent({
 
   props: {
     swatches: {
-      type: Array as PropType<string[][]>,
+      type: Array as PropType<Color[][]>,
       default: () => parseDefaultColors(colors),
     },
     disabled: Boolean,
@@ -73,14 +81,16 @@ export const VColorPickerSwatches = defineComponent({
           { props.swatches.map(swatch => (
             <div class="v-color-picker-swatches__swatch">
               { swatch.map(color => {
-                const hsva = parseColor(color)
+                const rgba = parseColor(color)
+                const hsva = RGBtoHSV(rgba)
+                const background = RGBtoCSS(rgba)
 
                 return (
                   <div
                     class="v-color-picker-swatches__color"
                     onClick={ () => hsva && emit('update:color', hsva) }
                   >
-                    <div style={{ background: color }}>
+                    <div style={{ background }}>
                       { props.color && deepEqual(props.color, hsva)
                         ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined
