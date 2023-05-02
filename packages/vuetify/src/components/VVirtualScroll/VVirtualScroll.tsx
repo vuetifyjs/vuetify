@@ -11,17 +11,18 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, onScopeDispose, ref, watch, watchEffect } from 'vue'
 import {
   clamp,
   convertToUnit,
   createRange,
-  genericComponent,
+  genericComponent, getCurrentInstance, getScrollParent,
   useRender,
 } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
+import { useToggleScope } from '@/composables/toggleScope'
 
 const UP = -1
 const DOWN = 1
@@ -44,6 +45,7 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
       default: () => ([]),
     },
     itemHeight: [Number, String],
+    inline: Boolean,
 
     ...makeComponentProps(),
     ...makeDimensionProps(),
@@ -58,7 +60,7 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
         baseItemHeight.value = val
       },
     })
-    const rootEl = ref<HTMLDivElement>()
+    const rootEl = ref<HTMLElement>()
     const { resizeRef, contentRect } = useResizeObserver()
     watchEffect(() => {
       resizeRef.value = rootEl.value
@@ -134,7 +136,7 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
 
     onMounted(() => {
       if (!itemHeight.value) {
-        // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
+        // If itemHeight prop is not set, then calculate an estimated height from the average of initial items
         itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
       }
     })
@@ -151,38 +153,59 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
       })
     })
 
-    useRender(() => (
-      <div
-        ref={ rootEl }
-        class={[
-          'v-virtual-scroll',
-          props.class,
-        ]}
-        onScroll={ handleScroll }
-        style={[
-          dimensionStyles.value,
-          props.style,
-        ]}
-      >
-        <div
-          class="v-virtual-scroll__container"
-          style={{
-            paddingTop: convertToUnit(paddingTop.value),
-            paddingBottom: convertToUnit(paddingBottom.value),
-          }}
+    useToggleScope(() => props.inline, () => {
+      const vm = getCurrentInstance('VVirtualScroll')
+      onMounted(() => {
+        rootEl.value = getScrollParent(vm.ctx.$el as HTMLElement)
+        rootEl.value?.addEventListener('scroll', handleScroll)
+      })
+      onScopeDispose(() => {
+        rootEl.value?.removeEventListener('scroll', handleScroll)
+      })
+    })
+
+    useRender(() => {
+      const children = computedItems.value.map(item => (
+        <VVirtualScrollItem
+          key={ item.index }
+          dynamicHeight={ !props.itemHeight }
+          onUpdate:height={ height => handleItemResize(item.index, height) }
         >
-          { computedItems.value.map(item => (
-            <VVirtualScrollItem
-              key={ item.index }
-              dynamicHeight={ !props.itemHeight }
-              onUpdate:height={ height => handleItemResize(item.index, height) }
-            >
-              { slots.default?.({ item: item.raw, index: item.index }) }
-            </VVirtualScrollItem>
-          ))}
+          { slots.default?.({ item: item.raw, index: item.index }) }
+        </VVirtualScrollItem>
+      ))
+
+      return props.inline ? (
+        <>
+          <div class="v-virtual-scroll__spacer" style={{ paddingTop: convertToUnit(paddingTop.value) }} />
+          { children }
+          <div class="v-virtual-scroll__spacer" style={{ paddingBottom: convertToUnit(paddingBottom.value) }} />
+        </>
+      ) : (
+        <div
+          ref={ rootEl }
+          class={[
+            'v-virtual-scroll',
+            props.class,
+          ]}
+          onScroll={ handleScroll }
+          style={[
+            dimensionStyles.value,
+            props.style,
+          ]}
+        >
+          <div
+            class="v-virtual-scroll__container"
+            style={{
+              paddingTop: convertToUnit(paddingTop.value),
+              paddingBottom: convertToUnit(paddingBottom.value),
+            }}
+          >
+            { children }
+          </div>
         </div>
-      </div>
-    ))
+      )
+    })
 
     return {
       scrollToIndex,

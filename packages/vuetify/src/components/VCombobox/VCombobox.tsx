@@ -6,7 +6,7 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components'
+import { VIcon, VVirtualScroll } from '@/components'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -412,39 +412,48 @@ export const VCombobox = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map(item => slots.item?.({
-                        item,
-                        props: mergeProps(item.props, { onClick: () => select(item) }),
-                      }) ?? (
-                        <VListItem
-                          key={ item.value }
-                          { ...item.props }
-                          onClick={ () => select(item) }
-                        >
-                          {{
-                            prepend: ({ isSelected }) => (
-                              <>
-                                { props.multiple && !props.hideSelected ? (
-                                  <VCheckboxBtn
-                                    modelValue={ isSelected }
-                                    ripple={ false }
-                                    tabindex="-1"
-                                  />
-                                ) : undefined }
+                      <VVirtualScroll inline items={ displayItems.value }>
+                        { ({ item, index }) => {
+                          if (slots.item) {
+                            return slots.item?.({
+                              item,
+                              index,
+                              props: mergeProps(item.props, { onClick: () => select(item) }),
+                            })
+                          }
 
-                                { item.props.prependIcon && (
-                                  <VIcon icon={ item.props.prependIcon } />
-                                )}
-                              </>
-                            ),
-                            title: () => {
-                              return isPristine.value
-                                ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
-                            },
-                          }}
-                        </VListItem>
-                      ))}
+                          return (
+                            <VListItem
+                              key={ index }
+                              { ...item.props }
+                              onClick={ () => select(item) }
+                            >
+                              {{
+                                prepend: ({ isSelected }) => (
+                                  <>
+                                    { props.multiple && !props.hideSelected ? (
+                                      <VCheckboxBtn
+                                        modelValue={ isSelected }
+                                        ripple={ false }
+                                        tabindex="-1"
+                                      />
+                                    ) : undefined }
+
+                                    { item.props.prependIcon && (
+                                      <VIcon icon={ item.props.prependIcon } />
+                                    )}
+                                  </>
+                                ),
+                                title: () => {
+                                  return isPristine.value
+                                    ? item.title
+                                    : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                                },
+                              }}
+                            </VListItem>
+                          )
+                        }}
+                      </VVirtualScroll>
 
                       { slots['append-item']?.() }
                     </VList>
