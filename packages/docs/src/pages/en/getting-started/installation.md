@@ -145,6 +145,7 @@ createApp(App).use(vuetify).mount('#app')
 ```
 
 To import the fonts you need to add to webpack.mix.js:
+
 ```js
 mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
 ```
