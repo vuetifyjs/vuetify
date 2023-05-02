@@ -23,6 +23,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -45,39 +46,41 @@ export type VImgSlots = {
   sources: []
 }
 
+export const makeVImgProps = propsFactory({
+  aspectRatio: [String, Number],
+  alt: String,
+  cover: Boolean,
+  eager: Boolean,
+  gradient: String,
+  lazySrc: String,
+  options: {
+    type: Object as PropType<IntersectionObserverInit>,
+    // For more information on types, navigate to:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    default: () => ({
+      root: undefined,
+      rootMargin: undefined,
+      threshold: undefined,
+    }),
+  },
+  sizes: String,
+  src: {
+    type: [String, Object] as PropType<string | srcObject>,
+    default: '',
+  },
+  srcset: String,
+  width: [String, Number],
+
+  ...makeComponentProps(),
+  ...makeTransitionProps(),
+}, 'v-img')
+
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
 
-  props: {
-    aspectRatio: [String, Number],
-    alt: String,
-    cover: Boolean,
-    eager: Boolean,
-    gradient: String,
-    lazySrc: String,
-    options: {
-      type: Object as PropType<IntersectionObserverInit>,
-      // For more information on types, navigate to:
-      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      default: () => ({
-        root: undefined,
-        rootMargin: undefined,
-        threshold: undefined,
-      }),
-    },
-    sizes: String,
-    src: {
-      type: [String, Object] as PropType<string | srcObject>,
-      default: '',
-    },
-    srcset: String,
-    width: [String, Number],
-
-    ...makeComponentProps(),
-    ...makeTransitionProps(),
-  },
+  props: makeVImgProps(),
 
   emits: {
     loadstart: (value: string | undefined) => true,

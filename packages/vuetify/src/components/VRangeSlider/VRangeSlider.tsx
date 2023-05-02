@@ -15,26 +15,28 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
 import type { VSliderSlots } from '../VSlider/VSlider'
 
+export const makeVRangeSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeVInputProps(),
+  ...makeSliderProps(),
+
+  strict: Boolean,
+  modelValue: {
+    type: Array as PropType<number[]>,
+    default: () => ([0, 0]),
+  },
+}, 'v-range-slider')
+
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeVInputProps(),
-    ...makeSliderProps(),
-
-    strict: Boolean,
-    modelValue: {
-      type: Array as PropType<number[]>,
-      default: () => ([0, 0]),
-    },
-  },
+  props: makeVRangeSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,

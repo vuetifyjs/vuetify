@@ -10,10 +10,25 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, inject, nextTick, ref } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import { VWindowGroupSymbol, VWindowSymbol } from './VWindow'
+
+export const makeVWindowItemProps = propsFactory({
+  reverseTransition: {
+    type: [Boolean, String],
+    default: undefined,
+  },
+  transition: {
+    type: [Boolean, String],
+    default: undefined,
+  },
+
+  ...makeComponentProps(),
+  ...makeGroupItemProps(),
+  ...makeLazyProps(),
+}, 'v-window-item')
 
 export const VWindowItem = genericComponent()({
   name: 'VWindowItem',
@@ -22,20 +37,7 @@ export const VWindowItem = genericComponent()({
     Touch,
   },
 
-  props: {
-    reverseTransition: {
-      type: [Boolean, String],
-      default: undefined,
-    },
-    transition: {
-      type: [Boolean, String],
-      default: undefined,
-    },
-
-    ...makeComponentProps(),
-    ...makeGroupItemProps(),
-    ...makeLazyProps(),
-  },
+  props: makeVWindowItemProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,

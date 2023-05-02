@@ -13,31 +13,33 @@ import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
 import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
+import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
+export const makeVMenuProps = propsFactory({
+  // TODO
+  // disableKeys: Boolean,
+  id: String,
+
+  ...omit(makeVOverlayProps({
+    closeDelay: 250,
+    closeOnContentClick: true,
+    locationStrategy: 'connected' as const,
+    openDelay: 300,
+    scrim: false,
+    scrollStrategy: 'reposition' as const,
+    transition: { component: VDialogTransition },
+  }), ['absolute']),
+}, 'v-menu')
+
 export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
 
-  props: {
-    // TODO
-    // disableKeys: Boolean,
-    id: String,
-
-    ...omit(makeVOverlayProps({
-      closeDelay: 250,
-      closeOnContentClick: true,
-      locationStrategy: 'connected' as const,
-      openDelay: 300,
-      scrim: false,
-      scrollStrategy: 'reposition' as const,
-      transition: { component: VDialogTransition },
-    }), ['absolute']),
-  },
+  props: makeVMenuProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,

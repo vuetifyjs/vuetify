@@ -23,7 +23,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -60,6 +60,19 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
+export const makeVAutocompleteProps = propsFactory({
+  // TODO: implement post keyboard support
+  // autoSelectFirst: Boolean,
+  search: String,
+
+  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeSelectProps(),
+  ...omit(makeVTextFieldProps({
+    modelValue: null,
+  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  ...makeTransitionProps({ transition: false }),
+}, 'v-autocomplete')
+
 export const VAutocomplete = genericComponent<new <
   T,
   ReturnObject extends boolean = false,
@@ -81,18 +94,7 @@ export const VAutocomplete = genericComponent<new <
 }>>()({
   name: 'VAutocomplete',
 
-  props: {
-    // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
-    search: String,
-
-    ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps(),
-    ...omit(makeVTextFieldProps({
-      modelValue: null,
-    }), ['validationValue', 'dirty', 'appendInnerIcon']),
-    ...makeTransitionProps({ transition: false }),
-  },
+  props: makeVAutocompleteProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,

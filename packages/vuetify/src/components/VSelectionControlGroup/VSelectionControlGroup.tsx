@@ -27,6 +27,7 @@ export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> 
 export const makeSelectionControlGroupProps = propsFactory({
   color: String,
   disabled: Boolean,
+  defaultsTarget: String,
   error: Boolean,
   id: String,
   inline: Boolean,
@@ -49,22 +50,17 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeThemeProps(),
 }, 'v-selection-control-group')
 
 export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
-  props: {
-    defaultsTarget: {
-      type: String,
-      default: 'VSelectionControl',
-    },
-
-    ...makeComponentProps(),
-    ...makeSelectionControlGroupProps(),
-  },
+  props: makeSelectionControlGroupProps({
+    defaultsTarget: 'VSelectionControl',
+  }),
 
   emits: {
     'update:modelValue': (val: any) => true,

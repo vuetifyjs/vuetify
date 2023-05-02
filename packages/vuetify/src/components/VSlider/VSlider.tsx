@@ -15,7 +15,7 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
@@ -25,19 +25,21 @@ export type VSliderSlots = VInputSlots & {
   'thumb-label': []
 }
 
+export const makeVSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeSliderProps(),
+  ...makeVInputProps(),
+
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+}, 'v-slider')
+
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeSliderProps(),
-    ...makeVInputProps(),
-
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-  },
+  props: makeVSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,

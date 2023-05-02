@@ -12,36 +12,38 @@ import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
+export const makeVAppBarProps = propsFactory({
+  scrollBehavior: String,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  location: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'top',
+    validator: (value: any) => ['top', 'bottom'].includes(value),
+  },
+
+  ...makeVToolbarProps(),
+  ...makeLayoutItemProps(),
+  ...makeScrollProps(),
+
+  height: {
+    type: [Number, String],
+    default: 64,
+  },
+}, 'v-app-bar')
+
 export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
-  props: {
-    scrollBehavior: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    location: {
-      type: String as PropType<'top' | 'bottom'>,
-      default: 'top',
-      validator: (value: any) => ['top', 'bottom'].includes(value),
-    },
-
-    ...makeVToolbarProps(),
-    ...makeLayoutItemProps(),
-    ...makeScrollProps(),
-
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-  },
+  props: makeVAppBarProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,

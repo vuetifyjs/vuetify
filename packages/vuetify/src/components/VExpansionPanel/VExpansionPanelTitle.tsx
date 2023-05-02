@@ -43,6 +43,8 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
+
+  ...makeComponentProps(),
 }, 'v-expansion-panel-title')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
@@ -50,10 +52,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
   directives: { Ripple },
 
-  props: {
-    ...makeComponentProps(),
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelTitleProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)

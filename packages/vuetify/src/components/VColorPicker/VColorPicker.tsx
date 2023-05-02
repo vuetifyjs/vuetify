@@ -14,7 +14,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, HSVtoCSS, omit, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, omit, propsFactory, useRender } from '@/util'
 import { extractColor, modes, nullColor, parseColor } from './util'
 import { onMounted, ref } from 'vue'
 
@@ -22,51 +22,53 @@ import { onMounted, ref } from 'vue'
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
+export const makeVPickerProps = propsFactory({
+  canvasHeight: {
+    type: [String, Number],
+    default: 150,
+  },
+  disabled: Boolean,
+  dotSize: {
+    type: [Number, String],
+    default: 10,
+  },
+  hideCanvas: Boolean,
+  hideSliders: Boolean,
+  hideInputs: Boolean,
+  mode: {
+    type: String,
+    default: 'rgba',
+    validator: (v: string) => Object.keys(modes).includes(v),
+  },
+  modes: {
+    type: Array as PropType<string[]>,
+    default: () => Object.keys(modes),
+    validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
+  },
+  showSwatches: Boolean,
+  swatches: Array as PropType<string[][]>,
+  swatchesMaxHeight: {
+    type: [Number, String],
+    default: 150,
+  },
+  modelValue: {
+    type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
+  },
+
+  ...omit(makeVSheetProps({ width: 300 }), [
+    'height',
+    'location',
+    'minHeight',
+    'maxHeight',
+    'minWidth',
+    'maxWidth',
+  ]),
+}, 'v-color-picker')
+
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
 
-  props: {
-    canvasHeight: {
-      type: [String, Number],
-      default: 150,
-    },
-    disabled: Boolean,
-    dotSize: {
-      type: [Number, String],
-      default: 10,
-    },
-    hideCanvas: Boolean,
-    hideSliders: Boolean,
-    hideInputs: Boolean,
-    mode: {
-      type: String,
-      default: 'rgba',
-      validator: (v: string) => Object.keys(modes).includes(v),
-    },
-    modes: {
-      type: Array as PropType<string[]>,
-      default: () => Object.keys(modes),
-      validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
-    },
-    showSwatches: Boolean,
-    swatches: Array as PropType<string[][]>,
-    swatchesMaxHeight: {
-      type: [Number, String],
-      default: 150,
-    },
-    modelValue: {
-      type: [Object, String] as PropType<Record<string, unknown> | string | undefined | null>,
-    },
-
-    ...omit(makeVSheetProps({ width: 300 }), [
-      'height',
-      'location',
-      'minHeight',
-      'maxHeight',
-      'minWidth',
-      'maxWidth',
-    ]),
-  },
+  props: makeVPickerProps(),
 
   emits: {
     'update:modelValue': (color: any) => true,

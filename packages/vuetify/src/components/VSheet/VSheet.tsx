@@ -34,9 +34,7 @@ export const makeVSheetProps = propsFactory({
 export const VSheet = genericComponent()({
   name: 'VSheet',
 
-  props: {
-    ...makeVSheetProps(),
-  },
+  props: makeVSheetProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
