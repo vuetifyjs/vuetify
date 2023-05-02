@@ -297,6 +297,7 @@ export const VAutocomplete = genericComponent<new <
 
         nextTick(() => isSelecting.value = false)
       } else {
+        if (!props.multiple && !search.value) model.value = []
         menu.value = false
         search.value = ''
       }
