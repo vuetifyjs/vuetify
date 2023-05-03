@@ -28,6 +28,11 @@ export interface InternalDisplayOptions {
   thresholds: DisplayThresholds
 }
 
+export type SSROptions = boolean | {
+  clientWidth: number
+  clientHeight?: number
+}
+
 export interface DisplayPlatform {
   android: boolean
   ios: boolean
@@ -91,20 +96,20 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-function getClientWidth (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientWidth (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerWidth
-    : 0
+    : (typeof ssr === 'object' && ssr.clientWidth) || 0
 }
 
-function getClientHeight (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientHeight (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerHeight
-    : 0
+    : (typeof ssr === 'object' && ssr.clientHeight) || 0
 }
 
-function getPlatform (isHydrate?: boolean): DisplayPlatform {
-  const userAgent = IN_BROWSER && !isHydrate
+function getPlatform (ssr?: SSROptions): DisplayPlatform {
+  const userAgent = IN_BROWSER && !ssr
     ? window.navigator.userAgent
     : 'ssr'
 
@@ -141,7 +146,7 @@ function getPlatform (isHydrate?: boolean): DisplayPlatform {
   }
 }
 
-export function createDisplay (options?: DisplayOptions, ssr?: boolean): DisplayInstance {
+export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
   const height = ref(getClientHeight(ssr))
