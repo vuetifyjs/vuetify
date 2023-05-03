@@ -220,7 +220,8 @@
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
-  top: var(--v-field-label-top)
+  top: 50%
+  transform: translateY(-50%)
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
@@ -241,6 +242,8 @@
     font-size: var(--v-field-label-scale)
     visibility: hidden
     max-width: 100%
+    top: var(--v-field-label-top)
+    transform: none
 
     .v-field.v-field--active &
       visibility: visible
