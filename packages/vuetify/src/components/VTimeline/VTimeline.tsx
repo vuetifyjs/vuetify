@@ -7,6 +7,7 @@ import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -66,6 +67,7 @@ export const VTimeline = genericComponent()({
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
     const { densityClasses } = useDensity(props)
+    const { rtlClasses } = useRtl()
 
     provideDefaults({
       VTimelineDivider: {
@@ -111,6 +113,7 @@ export const VTimeline = genericComponent()({
           themeClasses.value,
           densityClasses.value,
           sideClasses.value,
+          rtlClasses.value,
           props.class,
         ]}
         style={[

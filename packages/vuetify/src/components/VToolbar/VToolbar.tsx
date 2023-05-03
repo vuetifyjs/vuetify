@@ -16,6 +16,7 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, toRef } from 'vue'
@@ -79,6 +80,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
     const { themeClasses } = provideTheme(props)
+    const { rtlClasses } = useRtl()
 
     const isExtended = ref(!!(props.extended || slots.extension?.()))
     const contentHeight = computed(() => parseInt((
@@ -126,6 +128,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
             elevationClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            rtlClasses.value,
             props.class,
           ]}
           style={[

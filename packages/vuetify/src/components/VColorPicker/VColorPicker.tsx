@@ -11,6 +11,7 @@ import { VColorPickerSwatches } from './VColorPickerSwatches'
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { defineComponent, HSVtoCSS, omit, useRender } from '@/util'
@@ -97,6 +98,7 @@ export const VColorPicker = defineComponent({
         return extractColor(v, props.modelValue)
       }
     )
+    const { rtlClasses } = useRtl()
 
     const updateColor = (hsva: HSV) => {
       currentColor.value = hsva
@@ -125,6 +127,7 @@ export const VColorPicker = defineComponent({
           theme={ props.theme }
           class={[
             'v-color-picker',
+            rtlClasses.value,
             props.class,
           ]}
           style={[

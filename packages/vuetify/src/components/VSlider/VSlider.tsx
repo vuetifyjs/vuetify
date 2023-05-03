@@ -8,9 +8,10 @@ import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 
 // Composables
-import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider, useSteps } from './slider'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -47,6 +48,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
   setup (props, { slots, emit }) {
     const thumbContainerRef = ref()
+    const { rtlClasses } = useRtl()
 
     const steps = useSteps(props)
 
@@ -104,6 +106,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
