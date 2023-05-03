@@ -64,12 +64,13 @@
         transform: rotate(180deg)
 
   &--chips
-    .v-field:not(.v-field--variant-outlined)
-      .v-field__input
-        margin-top: $autocomplete-chips-margin-top
-        margin-bottom: var(--autocomplete-chips-margin-bottom)
+    .v-field__input
+      min-height: calc(var(--v-field__input-min-height) + var(--autocomplete-chips-margin-bottom) + $autocomplete-chips-margin-top)
 
     .v-autocomplete__selection
+      margin-top: $autocomplete-chips-margin-top
+      margin-bottom: var(--autocomplete-chips-margin-bottom)
+
       &:first-child
         margin-inline-start: 0
 

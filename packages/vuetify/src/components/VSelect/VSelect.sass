@@ -61,12 +61,14 @@
         transform: rotate(180deg)
 
   &--chips
-    .v-field:not(.v-field--variant-outlined)
+    .v-field
       .v-field__input
-        margin-top: $select-chips-margin-top
-        margin-bottom: var(--select-chips-margin-bottom)
+        min-height: calc(var(--v-field__input-min-height) + var(--select-chips-margin-bottom) + $select-chips-margin-top)
 
     .v-select__selection
+      margin-top: $select-chips-margin-top
+      margin-bottom: var(--select-chips-margin-bottom)
+
       &:first-child
         margin-inline-start: 0
 
