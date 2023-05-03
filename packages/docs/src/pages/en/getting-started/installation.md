@@ -123,6 +123,33 @@ const app = createApp()
 app.use(vuetify).mount('#app')
 ```
 
+## Using Laravel Mix
+
+```js
+import { createApp } from 'vue'
+import App from './App.vue'
+
+// Vuetify
+import '@mdi/font/css/materialdesignicons.css'
+import 'vuetify/styles'
+import { createVuetify } from 'vuetify'
+import * as components from 'vuetify/components'
+import * as directives from 'vuetify/directives'
+
+const vuetify = createVuetify({
+  components,
+  directives
+})
+
+createApp(App).use(vuetify).mount('#app')
+```
+
+To import the fonts you need to add to webpack.mix.js:
+
+```js
+mix.copy('node_modules/@mdi/font/fonts/', 'dist/fonts/')
+```
+
 ## Exposed exports
 
 ### JS

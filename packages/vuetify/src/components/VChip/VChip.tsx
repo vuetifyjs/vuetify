@@ -11,7 +11,9 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -20,9 +22,8 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
@@ -31,15 +32,12 @@ import { Ripple } from '@/directives/ripple'
 import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VChipSlots = MakeSlots<{
+export type VChipSlots = {
   default: []
   label: []
   prepend: []
   append: []
-}>
+}
 
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
@@ -87,6 +85,7 @@ export const VChip = genericComponent<VChipSlots>()({
     onClickOnce: EventProp<[MouseEvent]>(),
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeGroupItemProps(),
@@ -179,9 +178,11 @@ export const VChip = genericComponent<VChipSlots>()({
             sizeClasses.value,
             variantClasses.value,
             group?.selectedClass.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
+            props.style,
           ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }

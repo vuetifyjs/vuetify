@@ -15,6 +15,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -34,8 +35,8 @@ import type { PropType } from 'vue'
 
 type ListItemSlot = {
   isActive: boolean
-  activate: (value: boolean) => void
   isSelected: boolean
+  isIndeterminate: boolean
   select: (value: boolean) => void
 }
 
@@ -47,7 +48,7 @@ export type ListItemSubtitleSlot = {
   subtitle?: string
 }
 
-type VListItemSlots = {
+export type VListItemSlots = {
   prepend: [ListItemSlot]
   append: [ListItemSlot]
   default: [ListItemSlot]
@@ -90,6 +91,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
     onClickOnce: EventProp<[MouseEvent]>(),
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -150,7 +152,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-    }))
+    } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -200,10 +202,12 @@ export const VListItem = genericComponent<VListItemSlots>()({
             lineClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }

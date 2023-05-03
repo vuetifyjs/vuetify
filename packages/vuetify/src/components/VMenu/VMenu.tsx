@@ -95,7 +95,9 @@ export const VMenu = genericComponent<OverlaySlots>()({
           ref={ overlay }
           class={[
             'v-menu',
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
           absolute

@@ -17,10 +17,8 @@
     "touchless": "Disable mobile touch functionality",
     "value": "Controls whether the component is visible or hidden.",
     "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "railWidth": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "railWidth": "Sets the width for the component when `rail` is enabled.",
     "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "width": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
   },
   "slots": {

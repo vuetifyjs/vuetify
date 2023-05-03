@@ -100,10 +100,12 @@ export const VTabs = genericComponent()({
             },
             densityClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
           style={[
             { '--v-tabs-height': convertToUnit(props.height) },
             backgroundColorStyles.value,
+            props.style,
           ]}
           role="tablist"
           symbol={ VTabsSymbol }

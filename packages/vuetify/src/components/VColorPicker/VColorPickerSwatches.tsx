@@ -4,6 +4,9 @@ import './VColorPickerSwatches.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
 import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
 import { parseColor } from './util'
@@ -46,6 +49,8 @@ export const VColorPickerSwatches = defineComponent({
     disabled: Boolean,
     color: Object as PropType<HSV | null>,
     maxHeight: [Number, String],
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -55,10 +60,14 @@ export const VColorPickerSwatches = defineComponent({
   setup (props, { emit }) {
     useRender(() => (
       <div
-        class="v-color-picker-swatches"
-        style={{
-          maxHeight: convertToUnit(props.maxHeight),
-        }}
+        class={[
+          'v-color-picker-swatches',
+          props.class,
+        ]}
+        style={[
+          { maxHeight: convertToUnit(props.maxHeight) },
+          props.style,
+        ]}
       >
         <div>
           { props.swatches.map(swatch => (

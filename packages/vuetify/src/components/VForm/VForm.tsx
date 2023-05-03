@@ -1,6 +1,7 @@
 // Composables
 import { createForm, makeFormProps } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
+import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { ref } from 'vue'
@@ -13,6 +14,7 @@ export const VForm = genericComponent()({
   name: 'VForm',
 
   props: {
+    ...makeComponentProps(),
     ...makeFormProps(),
   },
 
@@ -54,7 +56,11 @@ export const VForm = genericComponent()({
     useRender(() => ((
       <form
         ref={ formRef }
-        class="v-form"
+        class={[
+          'v-form',
+          props.class,
+        ]}
+        style={ props.style }
         novalidate
         onReset={ onReset }
         onSubmit={ onSubmit }

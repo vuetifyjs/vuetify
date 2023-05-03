@@ -3,6 +3,7 @@ import './VSelectionControlGroup.sass'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
@@ -61,6 +62,7 @@ export const VSelectionControlGroup = genericComponent()({
       default: 'VSelectionControl',
     },
 
+    ...makeComponentProps(),
     ...makeSelectionControlGroupProps(),
   },
 
@@ -112,7 +114,9 @@ export const VSelectionControlGroup = genericComponent()({
         class={[
           'v-selection-control-group',
           { 'v-selection-control-group--inline': props.inline },
+          props.class,
         ]}
+        style={ props.style }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }
       >
         { slots.default?.() }

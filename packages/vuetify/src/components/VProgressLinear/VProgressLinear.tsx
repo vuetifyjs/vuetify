@@ -2,9 +2,10 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
@@ -54,6 +55,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
     striped: Boolean,
     roundedBar: Boolean,
 
+    ...makeComponentProps(),
     ...makeLocationProps({ location: 'top' } as const),
     ...makeRoundedProps(),
     ...makeTagProps(),
@@ -66,7 +68,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
   setup (props, { slots }) {
     const progress = useProxiedModel(props, 'modelValue')
-    const { isRtl } = useRtl()
+    const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { locationStyles } = useLocation(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -111,14 +113,19 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           },
           roundedClasses.value,
           themeClasses.value,
+          rtlClasses.value,
+          props.class,
         ]}
-        style={{
-          bottom: props.location === 'bottom' ? 0 : undefined,
-          top: props.location === 'top' ? 0 : undefined,
-          height: props.active ? convertToUnit(height.value) : 0,
-          '--v-progress-linear-height': convertToUnit(height.value),
-          ...locationStyles.value,
-        }}
+        style={[
+          {
+            bottom: props.location === 'bottom' ? 0 : undefined,
+            top: props.location === 'top' ? 0 : undefined,
+            height: props.active ? convertToUnit(height.value) : 0,
+            '--v-progress-linear-height': convertToUnit(height.value),
+            ...locationStyles.value,
+          },
+          props.style,
+        ]}
         role="progressbar"
         aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"

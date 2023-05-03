@@ -1,5 +1,7 @@
 {
   "props": {
+    "active": "",
+    "baseColor": "Sets the color of the input when it is not focused",
     "reverse": "Reverses the orientation ",
     "error": "Puts the input in a manual error state",
     "clearIcon": "The icon used when the **clerable** prop is set to true",
@@ -25,7 +27,6 @@
     "append-inner": "Slot that is appended to the input",
     "clear": "Slot for custom clear icon (displayed when the **clearable** prop is equal to true)",
     "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
-    "loader": "Slot for custom loader (displayed when **loading** prop is equal to true)",
     "prepend-inner": "Slot that is prepended to the input"
   },
   "exposed": {

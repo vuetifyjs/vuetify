@@ -92,8 +92,12 @@ export const VCarousel = genericComponent<VWindowSlots>()({
             'v-carousel--hide-delimiter-background': props.hideDelimiterBackground,
             'v-carousel--vertical-delimiters': props.verticalDelimiters,
           },
+          props.class,
         ]}
-        style={{ height: convertToUnit(props.height) }}
+        style={[
+          { height: convertToUnit(props.height) },
+          props.style,
+        ]}
         continuous
         mandatory="force"
         showArrows={ props.showArrows }

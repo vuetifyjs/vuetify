@@ -112,7 +112,9 @@ export const VDialog = genericComponent<OverlaySlots>()({
               'v-dialog--fullscreen': props.fullscreen,
               'v-dialog--scrollable': props.scrollable,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
           aria-modal="true"

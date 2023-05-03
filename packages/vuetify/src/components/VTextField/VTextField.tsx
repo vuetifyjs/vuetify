@@ -20,7 +20,6 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -45,9 +44,9 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
+export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: []
-}>>()({
+}>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -98,7 +97,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
-      isFocused.value
+      isFocused.value ||
+      props.active
     ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -164,7 +164,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               'v-text-field--suffixed': props.suffix,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }

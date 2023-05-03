@@ -7,6 +7,7 @@ import { VListChildren } from './VListChildren'
 // Composables
 import { createList } from './list'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -24,11 +25,12 @@ import { computed, ref, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, useRender } from '@/util'
 
 // Types
+import type { GenericProps } from '@/util'
 import type { InternalItem, ItemProps } from '@/composables/items'
-import type { SlotsToProps } from '@/util'
+import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
 
-export interface InternalListItem extends InternalItem {
+export interface InternalListItem<T = any> extends InternalItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
@@ -75,15 +77,9 @@ function useListItems (props: ItemProps & { itemType: string }) {
   return { items }
 }
 
-export const VList = genericComponent<new <T>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    subheader: []
-    header: [{ props: Record<string, unknown> }]
-    item: [T]
-  }>
-}>()({
+export const VList = genericComponent<new <T>(props: {
+  items?: T[]
+}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
   name: 'VList',
 
   props: {
@@ -102,6 +98,7 @@ export const VList = genericComponent<new <T>() => {
       openStrategy: 'list' as const,
     }),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -214,10 +211,12 @@ export const VList = genericComponent<new <T>() => {
             elevationClasses.value,
             lineClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             dimensionStyles.value,
+            props.style,
           ]}
           role="listbox"
           aria-activedescendant={ undefined }

@@ -6,6 +6,7 @@ import { VMessages } from '@/components/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
@@ -15,7 +16,6 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
@@ -52,16 +52,17 @@ export const makeVInputProps = propsFactory({
   'onClick:prepend': EventProp<[MouseEvent]>(),
   'onClick:append': EventProp<[MouseEvent]>(),
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeValidationProps(),
 }, 'v-input')
 
-export type VInputSlots = MakeSlots<{
+export type VInputSlots = {
   default: [VInputSlot]
   prepend: [VInputSlot]
   append: [VInputSlot]
   details: [VInputSlot]
-}>
+}
 
 export const VInput = genericComponent<VInputSlots>()({
   name: 'VInput',
@@ -130,12 +131,15 @@ export const VInput = genericComponent<VInputSlots>()({
       )
 
       return (
-        <div class={[
-          'v-input',
-          `v-input--${props.direction}`,
-          densityClasses.value,
-          validationClasses.value,
-        ]}
+        <div
+          class={[
+            'v-input',
+            `v-input--${props.direction}`,
+            densityClasses.value,
+            validationClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">
