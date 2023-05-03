@@ -41,9 +41,9 @@ export function defineComponent<
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = {},
   EE extends string = string,
-  S extends SlotsType = {},
   I extends {} = {},
-  II extends string = string
+  II extends string = string,
+  S extends SlotsType = {},
 >(
   options: ComponentOptionsWithoutProps<
     Props,
@@ -55,9 +55,9 @@ export function defineComponent<
     Extends,
     E,
     EE,
-    S,
     I,
-    II
+    II,
+    S
   >
 ): DefineComponent<Props, RawBindings, D, C, M, Mixin, Extends, E, EE>
 
@@ -72,9 +72,9 @@ export function defineComponent<
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = {},
   EE extends string = string,
-  S extends SlotsType = {},
   I extends {} = {},
-  II extends string = string
+  II extends string = string,
+  S extends SlotsType = {},
 >(
   options: ComponentOptionsWithObjectProps<
     PropsOptions,
@@ -86,9 +86,9 @@ export function defineComponent<
     Extends,
     E,
     EE,
-    S,
     I,
-    II
+    II,
+    S
   >
 ): DefineComponent<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE> & FilterPropsOptions<PropsOptions>
 
@@ -210,10 +210,10 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
   Extends,
   E,
   EE,
-  S,
   PublicProps,
   ExtractPropTypes<PropsOptions> & SlotsToProps<Slots> & ({} extends E ? {} : EmitsToProps<E>),
-  ExtractDefaultPropTypes<PropsOptions>
+  ExtractDefaultPropTypes<PropsOptions>,
+  S
 > & FilterPropsOptions<PropsOptions>
 
 // No argument - simple default slot
