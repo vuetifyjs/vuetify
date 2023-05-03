@@ -87,6 +87,12 @@
     "yargs": "^17.7.1"
   },
   "resolutions": {
+    "@vue/compiler-dom": "^3.3.0-beta.3",
+    "@vue/compiler-sfc": "^3.3.0-beta.3",
+    "@vue/compiler-ssr": "^3.3.0-beta.3",
+    "@vue/reactivity": "^3.3.0-beta.3",
+    "@vue/server-renderer": "^3.3.0-beta.3",
+    "@vue/shared": "^3.3.0-beta.3",
     "vue": "^3.3.0-beta.3"
   }
 }
