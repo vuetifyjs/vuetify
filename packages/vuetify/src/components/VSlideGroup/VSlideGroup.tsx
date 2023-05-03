@@ -16,12 +16,13 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, watch } from 'vue'
-import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
-import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
+import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
+import { animateVerticalScroll } from '@/util/animateVerticalScroll'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -108,7 +109,60 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       return group.items.value.findIndex(item => item.id === group.selected.value[group.selected.value.length - 1])
     })
 
+    const scrollToPosition = (newPosition: number) => {
+      if (!IN_BROWSER || !containerRef.value) {
+        return
+      }
+
+      const offsetSize = getOffsetSize(containerRef.value)
+      const scrollPosition = getScrollPosition(containerRef.value)
+      const scrollSize = getScrollSize(containerRef.value)
+
+      if (scrollSize <= offsetSize) {
+        return
+      }
+
+      // Prevent scrolling by only a couple of pixels, which doesn't look smooth
+      if (Math.abs(newPosition - scrollPosition) < 16) {
+        return
+      }
+
+      if (isHorizontal.value) {
+        animateHorizontalScroll({
+          container: containerRef.value!,
+          left: newPosition,
+          rtl: isRtl.value,
+        })
+      } else {
+        animateVerticalScroll({
+          container: containerRef.value!,
+          top: newPosition,
+        })
+      }
+    }
+
+    const scrollToChildren = (children: HTMLElement) => {
+      if (!containerRef.value) return
+
+      const containerOffsetSize = getOffsetSize(containerRef.value)
+      const childrenOffsetPosition = getOffsetPosition(children)
+      const childrenOffsetSize = getOffsetSize(children)
+
+      const newPosition = childrenOffsetPosition - (containerOffsetSize / 2) + (childrenOffsetSize / 2)
+
+      scrollToPosition(newPosition)
+    }
+
     if (IN_BROWSER) {
+      watch(() => group.selected.value, () => {
+        if (!props.centerActive) return
+
+        if (firstSelectedIndex.value >= 0 && contentRef.value) {
+          const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+          scrollToChildren(selectedElement)
+        }
+      })
+
       let frame = -1
       watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
         cancelAnimationFrame(frame)
@@ -121,98 +175,40 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
             isOverflowing.value = containerSize.value + 1 < contentSize.value
           }
-
-          if (firstSelectedIndex.value >= 0 && contentRef.value) {
-            // TODO: Is this too naive? Should we store element references in group composable?
-            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
-
-            if (firstSelectedIndex.value === 0 || !isOverflowing.value) {
-              scrollOffset.value = 0
-            } else if (props.centerActive) {
-              scrollOffset.value = calculateCenteredOffset({
-                selectedElement,
-                containerSize: containerSize.value,
-                contentSize: contentSize.value,
-                isRtl: isRtl.value,
-                isHorizontal: isHorizontal.value,
-              })
-            } else if (isOverflowing.value) {
-              scrollOffset.value = calculateUpdatedOffset({
-                selectedElement,
-                containerSize: containerSize.value,
-                contentSize: contentSize.value,
-                isRtl: isRtl.value,
-                currentScrollOffset: scrollOffset.value,
-                isHorizontal: isHorizontal.value,
-              })
-            }
-          }
         })
       })
     }
 
-    const disableTransition = ref(false)
-
-    let startTouch = 0
-    let startOffset = 0
-
-    function onTouchstart (e: TouchEvent) {
-      const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
-      startOffset = sign * scrollOffset.value
-      startTouch = e.touches[0][sizeProperty]
-      disableTransition.value = true
-    }
-
-    function onTouchmove (e: TouchEvent) {
-      if (!isOverflowing.value) return
-
-      const sizeProperty = isHorizontal.value ? 'clientX' : 'clientY'
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
-      scrollOffset.value = sign * (startOffset + startTouch - e.touches[0][sizeProperty])
-    }
-
-    function onTouchend (e: TouchEvent) {
-      const maxScrollOffset = contentSize.value - containerSize.value
-
-      if (scrollOffset.value < 0 || !isOverflowing.value) {
-        scrollOffset.value = 0
-      } else if (scrollOffset.value >= maxScrollOffset) {
-        scrollOffset.value = maxScrollOffset
-      }
-
-      disableTransition.value = false
-    }
-
-    function onScroll () {
-      if (!containerRef.value) return
-
-      containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
-    }
-
     const isFocused = ref(false)
+
+    function getScrollSize (element?: HTMLElement) {
+      const key = isHorizontal.value ? 'scrollWidth' : 'scrollHeight'
+      return element?.[key] || 0
+    }
+
+    function getScrollPosition (element?: HTMLElement) {
+      const key = isHorizontal.value ? 'scrollLeft' : 'scrollTop'
+      return element?.[key] || 0
+    }
+
+    function getOffsetSize (element?: HTMLElement) {
+      const key = isHorizontal.value ? 'offsetWidth' : 'offsetHeight'
+      return element?.[key] || 0
+    }
+
+    function getOffsetPosition (element?: HTMLElement) {
+      const key = isHorizontal.value ? 'offsetLeft' : 'offsetTop'
+      return element?.[key] || 0
+    }
+
+    function onScroll (e: UIEvent) {
+      const { scrollTop, scrollLeft } = e.target as HTMLElement
+
+      scrollOffset.value = isHorizontal.value ? scrollLeft : scrollTop
+    }
+
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
-
-      if (!isOverflowing.value || !contentRef.value) return
-
-      // Focused element is likely to be the root of an item, so a
-      // breadth-first search will probably find it in the first iteration
-      for (const el of e.composedPath()) {
-        for (const item of contentRef.value.children) {
-          if (item === el) {
-            scrollOffset.value = calculateUpdatedOffset({
-              selectedElement: item as HTMLElement,
-              containerSize: containerSize.value,
-              contentSize: contentSize.value,
-              isRtl: isRtl.value,
-              currentScrollOffset: scrollOffset.value,
-              isHorizontal: isHorizontal.value,
-            })
-            return
-          }
-        }
-      }
     }
 
     function onFocusout (e: FocusEvent) {
@@ -229,72 +225,75 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     function onKeydown (e: KeyboardEvent) {
       if (!contentRef.value) return
 
+      const toFocus = (location: Parameters<typeof focus>[0]) => {
+        e.preventDefault()
+        focus(location)
+      }
+
       if (isHorizontal.value) {
         if (e.key === 'ArrowRight') {
-          focus(isRtl.value ? 'prev' : 'next')
+          toFocus(isRtl.value ? 'prev' : 'next')
         } else if (e.key === 'ArrowLeft') {
-          focus(isRtl.value ? 'next' : 'prev')
+          toFocus(isRtl.value ? 'next' : 'prev')
         }
       } else {
         if (e.key === 'ArrowDown') {
-          focus('next')
+          toFocus('next')
         } else if (e.key === 'ArrowUp') {
-          focus('prev')
+          toFocus('prev')
         }
       }
 
       if (e.key === 'Home') {
-        focus('first')
+        toFocus('first')
       } else if (e.key === 'End') {
-        focus('last')
+        toFocus('last')
       }
     }
 
-    function focus (location?: 'next' | 'prev' | 'first' | 'last') {
+    function focus (location?: 'next' | 'prev' | 'first' | 'last'): void {
       if (!contentRef.value) return
+
+      let el: HTMLElement | undefined
 
       if (!location) {
         const focusable = focusableChildren(contentRef.value)
-        focusable[0]?.focus()
+        el = focusable[0]
       } else if (location === 'next') {
-        const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
-        if (el) el.focus()
-        else focus('first')
+        el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
+
+        if (!el) return focus('first')
       } else if (location === 'prev') {
-        const el = contentRef.value.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
-        if (el) el.focus()
-        else focus('last')
+        el = contentRef.value.querySelector(':focus')?.previousElementSibling as HTMLElement | undefined
+
+        if (!el) return focus('last')
       } else if (location === 'first') {
-        (contentRef.value.firstElementChild as HTMLElement)?.focus()
+        el = (contentRef.value.firstElementChild as HTMLElement)
       } else if (location === 'last') {
-        (contentRef.value.lastElementChild as HTMLElement)?.focus()
+        el = (contentRef.value.lastElementChild as HTMLElement)
+      }
+
+      if (el) {
+        scrollToChildren(el)
+        el.focus({ preventScroll: true })
       }
     }
 
     function scrollTo (location: 'prev' | 'next') {
-      const newAbsoluteOffset = scrollOffset.value + (location === 'prev' ? -1 : 1) * containerSize.value
+      const direction = isHorizontal.value && isRtl.value ? -1 : 1
 
-      scrollOffset.value = clamp(newAbsoluteOffset, 0, contentSize.value - containerSize.value)
+      const offsetStep = (location === 'prev' ? -direction : direction) * containerSize.value
+
+      let newPosition = scrollOffset.value + offsetStep
+
+      if (isHorizontal.value && isRtl.value && containerRef.value) {
+        const { scrollWidth, offsetWidth: containerWidth } = containerRef.value!
+
+        newPosition += scrollWidth - containerWidth
+      }
+
+      scrollToPosition(newPosition)
     }
-
-    const contentStyles = computed(() => {
-      // This adds friction when scrolling the 'wrong' way when at max offset
-      let scrollAmount = scrollOffset.value > contentSize.value - containerSize.value
-        ? -(contentSize.value - containerSize.value) + bias(contentSize.value - containerSize.value - scrollOffset.value)
-        : -scrollOffset.value
-
-      // This adds friction when scrolling the 'wrong' way when at min offset
-      if (scrollOffset.value <= 0) {
-        scrollAmount = bias(-scrollOffset.value)
-      }
-
-      const sign = isRtl.value && isHorizontal.value ? -1 : 1
-      return {
-        transform: `translate${isHorizontal.value ? 'X' : 'Y'}(${sign * scrollAmount}px)`,
-        transition: disableTransition.value ? 'none' : '',
-        willChange: disableTransition.value ? 'transform' : '',
-      }
-    })
 
     const slotProps = computed(() => ({
       next: group.next,
@@ -336,8 +335,13 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     })
 
     const hasNext = computed(() => {
+      if (!containerRef.value) return false
+
       // Check one scroll ahead to know the width of right-most item
-      return contentSize.value > Math.abs(scrollOffset.value) + containerSize.value
+      const scrollSize = getScrollSize(containerRef.value)
+      const offsetSize = getOffsetSize(containerRef.value)
+
+      return scrollSize - (Math.abs(scrollOffset.value) + offsetSize) !== 0
     })
 
     useRender(() => (
@@ -381,10 +385,6 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
           <div
             ref={ contentRef }
             class="v-slide-group__content"
-            style={ contentStyles.value }
-            onTouchstartPassive={ onTouchstart }
-            onTouchmovePassive={ onTouchmove }
-            onTouchendPassive={ onTouchend }
             onFocusin={ onFocusin }
             onFocusout={ onFocusout }
             onKeydown={ onKeydown }
