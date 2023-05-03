@@ -18,7 +18,7 @@ import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
 
 export type VSliderThumbSlots = {
-  'thumb-label': []
+  'thumb-label': [{ modelValue: number }]
 }
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({

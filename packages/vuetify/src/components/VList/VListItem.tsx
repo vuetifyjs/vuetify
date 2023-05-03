@@ -41,11 +41,11 @@ type ListItemSlot = {
 }
 
 export type ListItemTitleSlot = {
-  title?: string
+  title?: string | number | boolean
 }
 
 export type ListItemSubtitleSlot = {
-  subtitle?: string
+  subtitle?: string | number | boolean
 }
 
 export type VListItemSlots = {

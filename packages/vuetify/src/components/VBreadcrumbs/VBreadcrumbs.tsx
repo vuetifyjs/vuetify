@@ -30,14 +30,17 @@ export type BreadcrumbItem = string | (Partial<LinkProps> & {
   disabled?: boolean
 })
 
-export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, {
-  prepend: []
-  title: [{ item: T, index: number }]
-  divider: [{ item: T, index: number }]
-  default: []
-}>>()({
+export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
+  props: {
+    items?: T[]
+  },
+  slots: {
+    prepend: []
+    title: [{ item: T, index: number }]
+    divider: [{ item: T, index: number }]
+    default: []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBreadcrumbs',
 
   props: {

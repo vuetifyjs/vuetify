@@ -31,11 +31,14 @@ export interface VVirtualScrollSlot<T> {
   index: number
 }
 
-export const VVirtualScroll = genericComponent<new <T>(props: {
-  items?: readonly T[]
-}) => GenericProps<typeof props, {
-  default: [VVirtualScrollSlot<T>]
-}>>()({
+export const VVirtualScroll = genericComponent<new <T>(
+  props: {
+    items?: readonly T[]
+  },
+  slots: {
+    default: [VVirtualScrollSlot<T>]
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScroll',
 
   props: {

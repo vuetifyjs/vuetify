@@ -35,7 +35,6 @@ import {
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 import type { PropType, Ref } from 'vue'
-import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -90,17 +89,20 @@ export const makeVFieldProps = propsFactory({
 
 export type VFieldSlots = {
   clear: []
-  'prepend-inner': [DefaultInputSlot & VInputSlot]
-  'append-inner': [DefaultInputSlot & VInputSlot]
-  label: [DefaultInputSlot & VInputSlot]
+  'prepend-inner': [DefaultInputSlot]
+  'append-inner': [DefaultInputSlot]
+  label: [DefaultInputSlot & { label: string | undefined, props: Record<string, any> }]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
 }
 
-export const VField = genericComponent<new <T>(props: {
-  modelValue?: T
-  'onUpdate:modelValue'?: (val: T) => any
-}) => GenericProps<typeof props, VFieldSlots>>()({
+export const VField = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  },
+  slots: VFieldSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -205,6 +207,7 @@ export const VField = genericComponent<new <T>(props: {
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = slots.label
         ? slots.label({
+          ...slotProps.value,
           label: props.label,
           props: { for: id.value },
         })

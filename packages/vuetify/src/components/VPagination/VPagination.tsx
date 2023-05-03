@@ -29,12 +29,27 @@ import { createRange, genericComponent, keyValues, useRender } from '@/util'
 // Types
 import type { ComponentPublicInstance } from 'vue'
 
+type ItemSlot = {
+  isActive: boolean
+  key: string | number
+  page: string
+  props: Record<string, any>
+}
+
+type ControlSlot = {
+  icon: IconValue
+  onClick: (e: Event) => void
+  disabled: boolean
+  ariaLabel: string
+  ariaDisabled: boolean
+}
+
 export type VPaginationSlots = {
-  item: []
-  first: []
-  next: []
-  prev: []
-  last: []
+  item: [ItemSlot]
+  first: [ControlSlot]
+  prev: [ControlSlot]
+  next: [ControlSlot]
+  last: [ControlSlot]
 }
 
 export const VPagination = genericComponent<VPaginationSlots>()({
@@ -48,7 +63,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     },
     modelValue: {
       type: Number,
-      default: (props: any) => props.start,
+      default: (props: any) => props.start as number,
     },
     disabled: Boolean,
     length: {
@@ -323,7 +338,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
         <ul class="v-pagination__list">
           { props.showFirstLastPage && (
             <li key="first" class="v-pagination__first" data-test="v-pagination-first">
-              { slots.first ? slots.first(controls.value.first) : (
+              { slots.first ? slots.first(controls.value.first!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.first } />
               )}
             </li>
@@ -368,7 +383,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
               class="v-pagination__last"
               data-test="v-pagination-last"
             >
-              { slots.last ? slots.last(controls.value.last) : (
+              { slots.last ? slots.last(controls.value.last!) : (
                 <VBtn _as="VPaginationBtn" { ...controls.value.last } />
               )}
             </li>

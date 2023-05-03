@@ -12,7 +12,17 @@ import { genericComponent } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
 
-export const VItemGroup = genericComponent()({
+type VItemGroupSlots = {
+  default: [{
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }]
+}
+
+export const VItemGroup = genericComponent<VItemGroupSlots>()({
   name: 'VItemGroup',
 
   props: {

@@ -4,7 +4,7 @@ import './VTextField.sass'
 // Components
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter } from '@/components/VCounter'
+import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
 
 // Directives
 import Intersect from '@/directives/intersect'
@@ -44,9 +44,12 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & {
+export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
   default: []
-}>()({
+  counter: [VCounterSlot]
+}
+
+export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
   directives: { Intersect },

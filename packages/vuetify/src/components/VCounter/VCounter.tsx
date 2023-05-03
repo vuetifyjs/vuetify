@@ -12,7 +12,17 @@ import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
-export const VCounter = genericComponent()({
+export type VCounterSlot = {
+  counter: string
+  max: string | number | undefined
+  value: string | number | undefined
+}
+
+type VCounterSlots = {
+  default: [VCounterSlot]
+}
+
+export const VCounter = genericComponent<VCounterSlots>()({
   name: 'VCounter',
 
   functional: true,

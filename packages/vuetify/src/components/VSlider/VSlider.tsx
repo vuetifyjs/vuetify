@@ -17,9 +17,10 @@ import { computed, ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
 export type VSliderSlots = VInputSlots & {
+  label: [VInputSlot]
   'tick-label': []
   'thumb-label': []
 }

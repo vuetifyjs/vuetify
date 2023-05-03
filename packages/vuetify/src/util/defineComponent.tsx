@@ -11,6 +11,7 @@ import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
 import type {
   AllowedComponentProps,
   ComponentCustomProps,
+  ComponentInjectOptions,
   ComponentObjectPropsOptions,
   ComponentOptions,
   ComponentOptionsMixin,
@@ -26,6 +27,7 @@ import type {
   MethodOptions,
   ObjectEmitsOptions,
   SlotsType,
+  VNode,
   VNodeChild,
   VNodeProps,
 } from 'vue'
@@ -132,7 +134,7 @@ export function defineComponent (options: ComponentOptions) {
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 
 export type SlotsToProps<
-  U extends Record<string, any[]> | Record<string, Slot>,
+  U extends RawSlots,
   T = U extends Record<string, any[]> ? MakeSlots<U> : U
 > = {
   $children?: (
@@ -145,9 +147,14 @@ export type SlotsToProps<
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
 }
 
+type RawSlots = Record<string, any[]> | Record<string, Slot>
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
-export type MakeSlots<T extends Record<string, any[]> | Record<string, Slot>> = {
+type VueSlot<T extends any[] = any[]> = (...args: T) => VNode[]
+export type MakeSlots<T extends RawSlots> = {
   [K in keyof T]: T[K] extends any[] ? Slot<T[K]> : T[K]
+}
+type MakeInternalSlots<T extends RawSlots> = {
+  [K in keyof T]: T[K] extends any[] ? VueSlot<T[K]> : T[K]
 }
 
 export type GenericProps<Props, Slots extends Record<string, any[]>> = {
@@ -155,7 +162,7 @@ export type GenericProps<Props, Slots extends Record<string, any[]>> = {
   $slots: MakeSlots<Slots>
 }
 
-type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>) => {
+type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>, slots: RawSlots) => {
   $props?: Record<string, any>
 })> = <
   PropsOptions extends Readonly<ComponentObjectPropsOptions>,
@@ -167,27 +174,35 @@ type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>)
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = Record<string, any>,
   EE extends string = string,
-  S extends SlotsType = {},
-  I = InstanceType<T>,
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  // Slots extends RawSlots = ConstructorParameters<T> extends [any, infer SS extends RawSlots | undefined] ? Exclude<SS, undefined> : {},
+  Slots extends RawSlots = ConstructorParameters<T>[1],
+  S extends SlotsType = SlotsType<Partial<MakeInternalSlots<Slots>>>,
+  III = InstanceType<T>,
+  P = III extends Record<'$props', any>
+    ? Omit<PropsOptions, keyof III['$props']>
+    : PropsOptions,
   Base = DefineComponent<
-    I extends Record<'$props', any>
-      ? Omit<PropsOptions, keyof I['$props']>
-      : PropsOptions,
+    P,
     RawBindings,
     D,
     C,
     M,
     Mixin,
     Extends,
-    E extends any[] ? E : I extends Record<'$props', any> ? Omit<E, ToListeners<keyof I['$props']>> : E,
+    E extends any[] ? E : III extends Record<'$props', any> ? Omit<E, ToListeners<keyof III['$props']>> : E,
     EE,
+    PublicProps,
+    ExtractPropTypes<P> & ({} extends E ? {} : EmitsToProps<E>),
+    ExtractDefaultPropTypes<P>,
     S
   >
 >(
-  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE, I, II, S>
 ) => Base & T & FilterPropsOptions<PropsOptions>
 
-type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<string, Slot>> = <
+type DefineComponentWithSlots<Slots extends RawSlots> = <
   PropsOptions extends Readonly<ComponentPropsOptions>,
   RawBindings,
   D,
@@ -197,9 +212,11 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
   Extends extends ComponentOptionsMixin = ComponentOptionsMixin,
   E extends EmitsOptions = Record<string, any>,
   EE extends string = string,
-  S extends SlotsType = {},
+  I extends ComponentInjectOptions = {},
+  II extends string = string,
+  S extends SlotsType = SlotsType<Partial<MakeInternalSlots<Slots>>>,
 >(
-  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE>
+  options: ComponentOptionsWithObjectProps<PropsOptions, RawBindings, D, C, M, Mixin, Extends, E, EE, I, II, S>
 ) => DefineComponent<
   ExtractPropTypes<PropsOptions> & SlotsToProps<Slots>,
   RawBindings,
@@ -220,13 +237,13 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
 export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
 
 // Generic constructor argument - generic props and slots
-export function genericComponent<T extends (new (props: Record<string, any>) => {
+export function genericComponent<T extends (new (props: Record<string, any>, slots: any) => {
   $props?: Record<string, any>
 })> (exposeDefaults?: boolean): DefineComponentWithGenericProps<T>
 
 // Slots argument - simple slots
 export function genericComponent<
-  Slots extends Record<string, any[]> | Record<string, Slot>
+  Slots extends RawSlots
 > (exposeDefaults?: boolean): DefineComponentWithSlots<Slots>
 
 // Implementation

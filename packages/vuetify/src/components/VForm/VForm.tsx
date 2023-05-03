@@ -10,7 +10,11 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { SubmitEventPromise } from '@/composables/form'
 
-export const VForm = genericComponent()({
+type VFormSlots = {
+  default: [ReturnType<typeof createForm>]
+}
+
+export const VForm = genericComponent<VFormSlots>()({
   name: 'VForm',
 
   props: {

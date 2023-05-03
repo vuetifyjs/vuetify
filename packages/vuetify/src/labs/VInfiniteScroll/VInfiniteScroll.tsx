@@ -22,14 +22,11 @@ export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
 type InfiniteScrollSlot = {
   side: InfiniteScrollSide
-  props: {
-    onClick: () => (side: InfiniteScrollSide) => void
-    color: string | undefined
-  }
+  props: Record<string, any>
 }
 
 type VInfiniteScrollSlots = {
-  default: [InfiniteScrollSlot]
+  default: []
   loading: [InfiniteScrollSlot]
   error: [InfiniteScrollSlot]
   empty: [InfiniteScrollSlot]

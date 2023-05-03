@@ -125,10 +125,13 @@ export function useSelectionControl (
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>(props: {
-  modelValue?: T
-  'onUpdate:modelValue'?: (val: T) => any
-}) => GenericProps<typeof props, VSelectionControlSlots>>()({
+export const VSelectionControl = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },

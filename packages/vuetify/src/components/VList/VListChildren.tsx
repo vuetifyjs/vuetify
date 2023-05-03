@@ -15,16 +15,21 @@ import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
 export type VListChildrenSlots<T> = {
-  [K in keyof VListItemSlots]: VListItemSlots[K] & [{ item: T }]
+  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & [{ item: T }]
 } & {
+  default: []
   item: [T]
   divider: [{ props: T }]
   subheader: [{ props: T }]
+  header: [{ props: T }]
 }
 
-export const VListChildren = genericComponent<new <T extends InternalListItem>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
+export const VListChildren = genericComponent<new <T extends InternalListItem>(
+  props: {
+    items?: T[]
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VListChildren',
 
   props: {
@@ -43,10 +48,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(p
 
       if (type === 'subheader') {
         return slots.subheader?.({ props: itemProps }) ?? (
-          <VListSubheader
-            { ...itemProps }
-            v-slots={{ default: slots.subheader }}
-          />
+          <VListSubheader { ...itemProps } />
         )
       }
 

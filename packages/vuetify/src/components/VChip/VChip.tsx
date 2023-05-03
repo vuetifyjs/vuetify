@@ -33,10 +33,19 @@ import { EventProp, genericComponent } from '@/util'
 import { computed } from 'vue'
 
 export type VChipSlots = {
-  default: []
+  default: [{
+    isSelected: boolean | undefined
+    selectedClass: boolean | (string | undefined)[] | undefined
+    select: ((value: boolean) => void) | undefined
+    toggle: (() => void) | undefined
+    value: unknown
+    disabled: boolean
+  }]
   label: []
   prepend: []
   append: []
+  close: []
+  filter: []
 }
 
 export const VChip = genericComponent<VChipSlots>()({

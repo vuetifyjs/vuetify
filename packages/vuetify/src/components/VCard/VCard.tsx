@@ -5,6 +5,7 @@ import './VCard.sass'
 
 // Components
 import { VCardActions } from './VCardActions'
+import type { VCardItemSlots } from './VCardItem'
 import { VCardItem } from './VCardItem'
 import { VCardText } from './VCardText'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -36,16 +37,13 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VCardSlots = {
+export type VCardSlots = VCardItemSlots & {
   default: []
   actions: []
-  title: []
-  subtitle: []
   text: []
   loader: [LoaderSlotProps]
   image: []
-  prepend: []
-  append: []
+  item: []
 }
 
 export const VCard = genericComponent<VCardSlots>()({
