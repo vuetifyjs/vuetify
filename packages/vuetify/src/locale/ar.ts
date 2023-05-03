@@ -45,9 +45,9 @@ export default {
     moreEvents: '{0} أكثر',
   },
   input: {
-    clear: 'Clear {0}',
-    prependAction: '{0} prepended action',
-    appendAction: '{0} appended action',
+    clear: 'واضح {0}',
+    prependAction: '{0} الإجراء المسبق',
+    appendAction: '{0} الإجراء المرفق',
   },
   fileInput: {
     counter: '{0} ملفات',
@@ -64,8 +64,8 @@ export default {
       previous: 'الصفحة السابقة',
       page: '{0} انتقل إلى الصفحة',
       currentPage: '{0} الصفحة الحالية رقمها',
-      first: 'First page',
-      last: 'Last page',
+      first: 'الصفحة الاولى',
+      last: 'الصفحة الاخيرة',
     },
   },
   rating: {
@@ -73,9 +73,9 @@ export default {
       item: 'القييم {0} من {1}',
     },
   },
-  loading: 'Loading...',
+  loading: 'تحميل...',
   infiniteScroll: {
-    loadMore: 'Load more',
-    empty: 'No more',
+    loadMore: 'تحميل المزيد',
+    empty: 'لا توجد بيانات',
   },
 }
