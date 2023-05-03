@@ -216,6 +216,7 @@ describe('VSlideGroup', () => {
       </Application>
     ))
 
+    // Have no idea why this fails, all good on mobile devices
     cy.get('.v-slide-group__content').should('exist').swipe([450, 50], [50, 50])
 
     cy.get('.item-1').should('not.be.visible')

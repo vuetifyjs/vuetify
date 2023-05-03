@@ -154,15 +154,6 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     }
 
     if (IN_BROWSER) {
-      watch(() => group.selected.value, () => {
-        if (!props.centerActive) return
-
-        if (firstSelectedIndex.value >= 0 && contentRef.value) {
-          const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
-          scrollToChildren(selectedElement)
-        }
-      })
-
       let frame = -1
       watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
         cancelAnimationFrame(frame)
@@ -174,6 +165,11 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
             contentSize.value = contentRect.value[sizeProperty]
 
             isOverflowing.value = containerSize.value + 1 < contentSize.value
+          }
+
+          if ((props.centerActive || isOverflowing.value) && firstSelectedIndex.value >= 0 && contentRef.value) {
+            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+            scrollToChildren(selectedElement)
           }
         })
       })
