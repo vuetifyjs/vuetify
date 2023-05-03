@@ -61,6 +61,9 @@
         transform: rotate(180deg)
 
   &--chips
+    .v-field-label
+      top: calc(var(--v-field-label-top) + ($select-chips-margin-top + var(--select-chips-margin-bottom)) / 2)
+
     .v-field__input
       margin-top: $select-chips-margin-top
       margin-bottom: var(--select-chips-margin-bottom)

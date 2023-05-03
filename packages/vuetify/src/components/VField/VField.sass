@@ -220,10 +220,11 @@
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
-  top: var(--v-input-padding-top, $field-control-padding-top)
+  top: var(--v-field-label-top)
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+  --v-field-label-top: var(--v-input-padding-top, $field-control-padding-top)
 
   .v-field--active &
     visibility: hidden
