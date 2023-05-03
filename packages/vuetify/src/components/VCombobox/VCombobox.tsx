@@ -293,7 +293,10 @@ export const VCombobox = genericComponent<new <
       }
     }
     function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
+      if (isFocused.value) {
+        isPristine.value = true
+        vTextFieldRef.value?.focus()
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -322,12 +325,6 @@ export const VCombobox = genericComponent<new <
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
-    }
-
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
-        vTextFieldRef.value?.focus()
-      }
     }
 
     watch(filteredItems, val => {
@@ -404,7 +401,6 @@ export const VCombobox = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />

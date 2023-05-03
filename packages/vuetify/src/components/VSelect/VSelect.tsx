@@ -233,13 +233,13 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
-    function onFocusin (e: FocusEvent) {
-      isFocused.value = true
-    }
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
+    function onAfterLeave () {
+      if (isFocused.value) {
         vTextFieldRef.value?.focus()
       }
+    }
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
     }
 
     useRender(() => {
@@ -296,6 +296,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
                   { hasList && (
@@ -305,7 +306,6 @@ export const VSelect = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />

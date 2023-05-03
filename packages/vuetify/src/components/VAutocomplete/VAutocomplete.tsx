@@ -247,17 +247,14 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
+      if (isFocused.value) {
+        isPristine.value = true
+        vTextFieldRef.value?.focus()
+      }
     }
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
-    }
-
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
-        vTextFieldRef.value?.focus()
-      }
     }
 
     const isSelecting = ref(false)
@@ -370,7 +367,6 @@ export const VAutocomplete = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
