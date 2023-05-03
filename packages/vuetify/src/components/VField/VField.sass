@@ -225,7 +225,6 @@
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
-  --v-field-label-top: var(--v-input-padding-top, $field-control-padding-top)
 
   .v-field--active &
     visibility: hidden
@@ -242,7 +241,7 @@
     font-size: var(--v-field-label-scale)
     visibility: hidden
     max-width: 100%
-    top: var(--v-field-label-top)
+    top: var(--v-input-padding-top, $field-control-padding-top)
     transform: none
 
     .v-field.v-field--active &
