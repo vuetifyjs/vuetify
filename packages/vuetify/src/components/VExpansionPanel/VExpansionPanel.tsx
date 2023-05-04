@@ -91,7 +91,6 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             backgroundColorStyles.value,
             props.style,
           ]}
-          aria-expanded={ groupItem.isSelected.value }
         >
           <div
             class={[
