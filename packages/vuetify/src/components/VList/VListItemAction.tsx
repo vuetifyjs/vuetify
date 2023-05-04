@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -11,6 +12,7 @@ export const VListItemAction = genericComponent()({
     start: Boolean,
     end: Boolean,
 
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -23,7 +25,9 @@ export const VListItemAction = genericComponent()({
             'v-list-item-action--start': props.start,
             'v-list-item-action--end': props.end,
           },
+          props.class,
         ]}
+        style={ props.style }
         v-slots={ slots }
       />
     ))

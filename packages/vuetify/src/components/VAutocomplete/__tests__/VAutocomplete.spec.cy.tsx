@@ -3,6 +3,7 @@
 import { VForm } from '@/components/VForm'
 import { ref } from 'vue'
 import { VAutocomplete } from '../VAutocomplete'
+import { keyValues } from '@/util'
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
@@ -145,6 +146,42 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
+  // https://github.com/vuetifyjs/vuetify/issues/16210
+  it('should return item object as the argument of item-title function', () => {
+    const items = [
+      { id: 1, name: 'a' },
+      { id: 2, name: 'b' },
+    ]
+
+    const selectedItems = ref(null)
+
+    function itemTitleFunc (item: any) {
+      return 'Item: ' + JSON.stringify(item)
+    }
+
+    const itemTitleFuncSpy = cy.spy(itemTitleFunc).as('itemTitleFunc')
+
+    cy.mount(() => (
+      <VAutocomplete
+        items={ items }
+        modelValue={ selectedItems }
+        item-title={ itemTitleFuncSpy }
+        item-value="id"
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItems.value).to.deep.equal(1)
+    })
+
+    cy.get('@itemTitleFunc')
+      .should('have.been.calledWith', { id: 1, name: 'a' })
+
+    cy.get('.v-autocomplete__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ['Item 1', 'Item 2', 'Item 3', 'Item 4']
@@ -166,5 +203,102 @@ describe('VAutocomplete', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should not replicate html select hotkeys in v-autocomplete', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+      .get('.v-autocomplete input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 2)
+      .then(_ => {
+        expect(selectedItems.value).equal(undefined)
+      })
+  })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VAutocomplete placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-autocomplete input')
+      .should('not.be.visible')
+      .get('.v-autocomplete input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-autocomplete input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-autocomplete input')
+      .should('not.have.attr', 'placeholder')
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VAutocomplete
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-autocomplete')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
+  })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VAutocomplete
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Autocomplete"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .click()
+      .should('have.class', 'v-autocomplete--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-autocomplete--active-menu')
   })
 })

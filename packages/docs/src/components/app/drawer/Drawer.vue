@@ -10,21 +10,20 @@
 
       <div class="text-medium-emphasis text-caption py-2 px-3 d-flex align-center">
         <div class="d-inline-flex align-center">
-          <v-icon start>mdi-label</v-icon>
-          Latest release:
+          <v-icon icon="mdi-label" start />
+
+          {{ t('latest-release') }}
         </div>
 
         <v-btn
-          :href="`https://github.com/vuetifyjs/vuetify/releases/tag/v${version}`"
+          :to="rpath('/getting-started/release-notes/')"
           class="text-none px-2 ms-auto"
           density="compact"
-          rel="noopener noreferrer"
-          target="_blank"
           variant="text"
         >
           v{{ version }}
 
-          <v-icon size="xs" end>mdi-open-in-new</v-icon>
+          <v-icon icon="mdi-page-next" size="xs" end />
         </v-btn>
       </div>
     </template>
@@ -44,13 +43,16 @@
   // Composables
   import { useAppStore } from '@/store/app'
   import { useDisplay, version } from 'vuetify'
+  import { useI18n } from 'vue-i18n'
 
   // Utilities
   import { onMounted } from 'vue'
+  import { rpath } from '@/util/routes'
   import { wait } from '@/util/helpers'
 
   const app = useAppStore()
   const { mobile } = useDisplay()
+  const { t } = useI18n()
 
   onMounted(async () => {
     await wait(1000)

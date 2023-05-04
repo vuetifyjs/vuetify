@@ -81,6 +81,12 @@ Block buttons extend the full available width of their container. This is useful
 
 <example file="v-btn/prop-block" />
 
+<alert type="info">
+
+Block applies **width: 100%** which can cause overflow issues inside a flex container.
+
+</alert>
+
 #### Rounded
 
 Use the **rounded** prop to control the border radius of a button.
@@ -103,20 +109,14 @@ The **ripple** property determines whether the [v-ripple](/directives/ripple/) d
 
 The **variant** prop gives you easy access to several different button styles. Available variants are: **elevated**(default), **flat**, **tonal**, **outlined**, **text**, and **plain**.
 
-| Value | Example | Description |
-| - | - | - |
-| **elevated** | <v-btn variant="elevated">Button</v-btn> | Elevates the button with a shadow |
-| **flat** | <v-btn variant="flat">Button</v-btn> | Removes button shadow |{ .bg-surface-variant }
-| **tonal** | <v-btn variant="tonal">Button</v-btn> | Background color is a lowered opacity of the current text color |
-| **outlined** | <v-btn variant="outlined">Button</v-btn> | Applies a thin border with the current text color |
-| **text** | <v-btn variant="text">Button</v-btn> | Removes the background and removes shadow |
-| **plain** | <v-btn variant="plain">Button</v-btn> | Removes the background and lowers the opacity until hovered |
-
-<alert type="info">
-
-  The block applies **width: 100%** which can have overflow issues when inside of a flex container.
-
-</alert>
+| Value        | Example                                                  | Description                                                     |
+|--------------|----------------------------------------------------------|-----------------------------------------------------------------|
+| **elevated** | <v-btn color="primary" variant="elevated">Button</v-btn> | Elevates the button with a shadow                               |
+| **flat**     | <v-btn color="primary" variant="flat">Button</v-btn>     | Removes button shadow                                           |
+| **tonal**    | <v-btn color="primary" variant="tonal">Button</v-btn>    | Background color is a lowered opacity of the current text color |
+| **outlined** | <v-btn color="primary" variant="outlined">Button</v-btn> | Applies a thin border with the current text color               |
+| **text**     | <v-btn color="primary" variant="text">Button</v-btn>     | Removes the background and removes shadow                       |
+| **plain**    | <v-btn color="primary" variant="plain">Button</v-btn>    | Removes the background and lowers the opacity until hovered     |
 
 #### Icon
 

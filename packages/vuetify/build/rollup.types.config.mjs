@@ -99,6 +99,7 @@ export default [
   }),
   createTypesConfig('labs/components.d.ts', 'lib/labs/components.d.ts'),
   createTypesConfig('labs/*/index.d.ts', 'lib/labs/*/index.d.ts'),
+  createTypesConfig('labs/date/adapters/*.d.ts', 'lib/labs/date/adapters/*.d.ts'),
   createTypesConfig('directives/index.d.ts', 'lib/directives/index.d.ts'),
   createTypesConfig('locale/index.d.ts', 'lib/locale/index.d.ts'),
   createTypesConfig('locale/adapters/*.d.ts', 'lib/locale/adapters/*.d.ts'),

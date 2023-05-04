@@ -5,18 +5,20 @@
       :items="releases"
       :loading="store.isLoading"
       :menu-props="menuProps"
+      :placeholder="`v${version}`"
       hide-details
       item-title="name"
       label="Select Release Version"
+      persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
       @blur="resetSearch"
       @focus="onFocus"
     >
-      <template #item="{ item, props }">
+      <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
-          v-bind="props"
+          v-bind="itemProps"
         />
 
         <template v-else>
@@ -40,10 +42,7 @@
         v-if="!!search"
         class="d-flex justify-space-between"
       >
-        <v-list-item
-          :prepend-avatar="search.author.avatar_url"
-          lines="two"
-        >
+        <v-list-item lines="two">
           <v-list-item-title class="mb-1 text-h6">
             <i18n-t keypath="released-by">
               <template #author>
@@ -80,8 +79,10 @@
             :path="tooltip.path"
             :color="tooltip.color ?? 'text-high-emphasis'"
             :target="tooltip.href ? '_blank' : undefined"
-            class="text-white"
+            class="text-white ms-2"
+            density="comfortable"
             variant="flat"
+            @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
@@ -102,16 +103,24 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
-  import { useReleasesStore } from '@/store/releases'
+  import { useRoute, useRouter } from 'vue-router'
+
+  // Stores
+  import { Release, useReleasesStore } from '@/store/releases'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref } from 'vue'
+  import { computed, nextTick, onBeforeMount, ref, watch } from 'vue'
+  import { version } from 'vuetify'
+  import { wait } from '@/util/helpers'
 
   const { t } = useI18n()
   const store = useReleasesStore()
   const isFocused = ref(false)
   const isSearching = ref(false)
-  const search = ref<any>()
+  const clicked = ref('copy-link')
+  const route = useRoute()
+  const router = useRouter()
+  const search = ref<Release>()
   let timeout = -1
 
   const onFocus = () => {
@@ -140,10 +149,30 @@
   const tooltips = computed(() => {
     return [
       {
+        color: '#3b5998',
+        icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
+        async onClick () {
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value!.tag_name}`)
+
+          clicked.value = 'copied'
+
+          await wait(1500)
+
+          clicked.value = 'copy-link'
+        },
+        path: clicked.value,
+      },
+      {
         color: '#738ADB',
         icon: 'mdi-discord',
         href: 'https://discord.gg/QHWSAbA',
         path: 'discuss-on-discord',
+      },
+      {
+        color: '#212121',
+        href: search.value!.html_url,
+        icon: 'mdi-github',
+        path: 'open-github-release',
       },
     ]
   })
@@ -159,7 +188,17 @@
   onBeforeMount(async () => {
     await store.fetch()
 
+    if (route.query.version) {
+      const found = store.releases.find(release => release.tag_name === route.query.version)
+
+      if (found) return (search.value = found)
+    }
+
     search.value = store.releases[0]
+  })
+
+  watch(search, val => {
+    router.push({ query: { version: val!.tag_name } })
   })
 </script>
 

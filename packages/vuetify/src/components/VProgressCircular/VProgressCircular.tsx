@@ -2,6 +2,7 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -36,6 +37,7 @@ export const VProgressCircular = genericComponent()({
       default: 4,
     },
 
+    ...makeComponentProps(),
     ...makeSizeProps(),
     ...makeTagProps({ tag: 'div' }),
     ...makeThemeProps(),
@@ -86,10 +88,12 @@ export const VProgressCircular = genericComponent()({
           themeClasses.value,
           sizeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
           sizeStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         role="progressbar"
         aria-valuemin="0"

@@ -3,6 +3,7 @@ import './VApp.sass'
 
 // Composables
 import { createLayout, makeLayoutProps } from '@/composables/layout'
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/locale'
 
@@ -13,6 +14,7 @@ export const VApp = genericComponent()({
   name: 'VApp',
 
   props: {
+    ...makeComponentProps(),
     ...makeLayoutProps({ fullHeight: true }),
     ...makeThemeProps(),
   },
@@ -30,8 +32,12 @@ export const VApp = genericComponent()({
           theme.themeClasses.value,
           layoutClasses.value,
           rtlClasses.value,
+          props.class,
         ]}
-        style={ layoutStyles.value }
+        style={[
+          layoutStyles.value,
+          props.style,
+        ]}
       >
         <div class="v-application__wrap">
           { slots.default?.() }

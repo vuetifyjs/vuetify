@@ -1,0 +1,19 @@
+{
+  "props": {
+    "direction": "Specifies if scroller is **vertical** or **horizontal**.",
+    "side": "Specifies the side where new content should appear. Either the **start**, **end**, or **both** sides.",
+    "mode": "Specifies if content should load automatically when scrolling (**intersect**) or manually (**manual**).",
+    "margin": "Value sent to the intersection observer. Will make the observer trigger earlier, by the margin (px) value supplied.",
+    "loadMoreText": "Text shown in default load more button, when in manual mode.",
+    "emptyText": "Text shown when there is no more content to load."
+  },
+  "slots": {
+    "loading": "Shown when content is loading.",
+    "load-more": "Shown when scrolled to either side of the content, in manual mode.",
+    "empty": "Shown when load returned status 'empty'",
+    "error": "Shown when load returned status 'error'"
+  },
+  "events": {
+    "load": "Emitted when reaching the start / end threshold, or if triggered when using manual mode."
+  }
+}

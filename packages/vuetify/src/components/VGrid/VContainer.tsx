@@ -2,6 +2,7 @@
 import './VGrid.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
@@ -16,6 +17,7 @@ export const VContainer = genericComponent()({
       default: false,
     },
 
+    ...makeComponentProps(),
     ...makeTagProps(),
   },
 
@@ -25,7 +27,9 @@ export const VContainer = genericComponent()({
         class={[
           'v-container',
           { 'v-container--fluid': props.fluid },
+          props.class,
         ]}
+        style={ props.style }
         v-slots={ slots }
       />
     ))

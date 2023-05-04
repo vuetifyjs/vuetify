@@ -205,6 +205,14 @@
         ]
       },
       {
+        "title": "dates",
+        "subfolder": "features"
+      },
+      {
+        "title": "infinite-scroller",
+        "subfolder": "components"
+      },
+      {
         "title": "skeleton-loaders",
         "subfolder": "components"
       }
@@ -222,8 +230,8 @@
   },
   {
     "title": "about",
-    "inactiveIcon": "mdi-vuetify",
-    "activeIcon": "mdi-vuetify",
+    "inactiveIcon": "$vuetify-outline",
+    "activeIcon": "$vuetify",
     "items": [
       "security-disclosure",
       "code-of-conduct"

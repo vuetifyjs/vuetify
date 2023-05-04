@@ -52,7 +52,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -86,6 +86,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       itemsPerPage,
       sortBy,
       groupBy,
+      search: toRef(props, 'search'),
     })
 
     provide('v-data-table', {
@@ -113,6 +114,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
         fixedHeader={ props.fixedHeader }
         fixedFooter={ props.fixedFooter }
         height={ props.height }
+        hover={ props.hover }
       >
         {{
           top: slots.top,
@@ -120,21 +122,19 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
             <>
               { slots.colgroup?.({ columns }) }
               <thead class="v-data-table__thead" role="rowgroup">
-                { slots.headers ? slots.headers() : (
-                  <VDataTableHeaders
-                    sticky={ props.fixedHeader }
-                    loading={ props.loading }
-                    color={ props.color }
-                    v-slots={ slots }
-                  />
-                )}
+                <VDataTableHeaders
+                  sticky={ props.fixedHeader }
+                  loading={ props.loading }
+                  color={ props.color }
+                  v-slots={ slots }
+                />
               </thead>
               { slots.thead?.() }
               <tbody class="v-data-table__tbody" role="rowgroup">
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ flatItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}

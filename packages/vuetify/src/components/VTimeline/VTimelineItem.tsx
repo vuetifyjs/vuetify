@@ -3,6 +3,7 @@ import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps } from '@/composables/elevation'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
@@ -39,11 +40,12 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
     iconColor: String,
     lineInset: [Number, String],
 
-    ...makeRoundedProps(),
+    ...makeComponentProps(),
+    ...makeDimensionProps(),
     ...makeElevationProps(),
+    ...makeRoundedProps(),
     ...makeSizeProps(),
     ...makeTagProps(),
-    ...makeDimensionProps(),
   },
 
   setup (props, { slots }) {
@@ -65,11 +67,15 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
           {
             'v-timeline-item--fill-dot': props.fillDot,
           },
+          props.class,
         ]}
-        style={{
-          '--v-timeline-dot-size': convertToUnit(dotSize.value),
-          '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),
-        }}
+        style={[
+          {
+            '--v-timeline-dot-size': convertToUnit(dotSize.value),
+            '--v-timeline-line-inset': props.lineInset ? `calc(var(--v-timeline-dot-size) / 2 + ${convertToUnit(props.lineInset)})` : convertToUnit(0),
+          },
+          props.style,
+        ]}
       >
         <div
           class="v-timeline-item__body"
