@@ -136,7 +136,7 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
                         <LoaderSlot
                           name="v-switch"
                           active
-                          color={ isValid.value === false ? undefined : loaderColor.value }
+                          color={ !isValid.value ? undefined : loaderColor.value }
                         >
                           { slotProps => (
                             slots.loader

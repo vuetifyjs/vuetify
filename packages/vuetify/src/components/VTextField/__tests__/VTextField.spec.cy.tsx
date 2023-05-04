@@ -25,16 +25,51 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VTextField', () => {
-  it('should update validation when model changes', () => {
+  it('should validate input on mount', () => {
+    cy.mount(() => (
+      <VTextField rules={[v => v?.length > 4 || 'Error!']}></VTextField>
+    ))
+
+    cy.get('.v-text-field').should('have.class', 'v-input--error')
+
+    cy.get('.v-text-field input').type('Hello')
+
+    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
+  })
+
+  it('should not validate on mount when using validate-on lazy', () => {
     const rules = [
-      (value: string) => value.length > 5 || 'Error!',
+      (value: string) => value?.length > 5 || 'Error!',
     ]
 
     cy.mount(() => (
-      <VTextField label="Label" rules={ rules } />
+      <VTextField label="Label" validate-on="lazy" rules={ rules } />
     ))
 
+    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
+
     cy.get('.v-text-field input').type('Hello')
+
+    cy.get('.v-text-field').should('have.class', 'v-input--error')
+    cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
+  })
+
+  it('should handle multiple options in validate-on prop', () => {
+    const rules = [
+      (value: string) => value?.length > 5 || 'Error!',
+    ]
+
+    cy.mount(() => (
+      <VTextField label="Label" validate-on="blur lazy" rules={ rules } />
+    ))
+
+    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
+
+    cy.get('.v-text-field input').type('Hello')
+
+    cy.get('.v-text-field').should('not.have.class', 'v-input--error')
+
+    cy.get('.v-text-field input').blur()
 
     cy.get('.v-text-field').should('have.class', 'v-input--error')
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')

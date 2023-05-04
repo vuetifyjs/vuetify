@@ -19,6 +19,8 @@ export type ValidationRule =
   | ((value: any) => ValidationResult)
   | ((value: any) => PromiseLike<ValidationResult>)
 
+type ValidateOnValue = 'blur' | 'input' | 'submit'
+
 export interface ValidationProps {
   disabled: boolean
   error: boolean
@@ -31,7 +33,7 @@ export interface ValidationProps {
   rules: ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
-  validateOn?: 'blur' | 'input' | 'submit'
+  validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
   validationValue: any
 }
 
@@ -82,15 +84,12 @@ export function useValidation (
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
-    if (props.error || errorMessages.value.length) return false
-    if (!props.rules.length) return true
-
-    return isPristine.value ? null : true
+    return !(props.error || errorMessages.value.length)
   })
   const isValidating = ref(false)
   const validationClasses = computed(() => {
     return {
-      [`${name}--error`]: isValid.value === false,
+      [`${name}--error`]: !isPristine.value && !isValid.value,
       [`${name}--dirty`]: isDirty.value,
       [`${name}--disabled`]: isDisabled.value,
       [`${name}--readonly`]: isReadonly.value,
@@ -112,19 +111,22 @@ export function useValidation (
     form?.unregister(uid.value)
   })
 
-  const validateOn = computed(() => props.validateOn || form?.validateOn.value || 'input')
+  const validateOn = computed(() => {
+    const value = (props.validateOn ?? form?.validateOn.value)
 
-  onMounted(() => {
-    // Set initial valid state, for inputs that might not have rules
-    form?.update(uid.value, isValid.value, errorMessages.value)
+    if (value === 'lazy') return 'input lazy'
 
-    // If there is an initial value, validate it
-    if (validationModel.value) {
-      validate()
-    }
+    return value || 'input'
   })
 
-  useToggleScope(() => validateOn.value === 'input', () => {
+  onMounted(() => {
+    // If there are no rules, default to valid
+    form?.update(uid.value, !props.rules.length, [])
+
+    validate(validateOn.value.includes('lazy'))
+  })
+
+  useToggleScope(() => validateOn.value.includes('input'), () => {
     watch(validationModel, () => {
       if (validationModel.value != null) {
         validate()
@@ -138,7 +140,7 @@ export function useValidation (
     })
   })
 
-  useToggleScope(() => validateOn.value === 'blur', () => {
+  useToggleScope(() => validateOn.value.includes('blur'), () => {
     watch(() => props.focused, val => {
       if (!val) validate()
     })
@@ -155,10 +157,9 @@ export function useValidation (
 
   function resetValidation () {
     isPristine.value = true
-    internalErrorMessages.value = []
   }
 
-  async function validate () {
+  async function validate (silent = false) {
     const results = []
 
     isValidating.value = true
@@ -185,7 +186,7 @@ export function useValidation (
 
     internalErrorMessages.value = results
     isValidating.value = false
-    isPristine.value = false
+    isPristine.value = silent
 
     return internalErrorMessages.value
   }

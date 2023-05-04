@@ -111,7 +111,6 @@ describe('validation', () => {
     })
 
     expect(wrapper.vm.isPristine).toBe(true)
-    expect(wrapper.vm.isValid).toBeNull()
 
     await wrapper.vm.validate()
 
@@ -137,7 +136,6 @@ describe('validation', () => {
     wrapper.vm.reset()
 
     expect(wrapper.vm.isPristine).toBe(true)
-    expect(wrapper.vm.isValid).toBeNull()
   })
 
   it('should return valid if no rules are set', async () => {

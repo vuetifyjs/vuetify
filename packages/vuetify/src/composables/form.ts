@@ -51,8 +51,8 @@ export interface FormProps {
   disabled: boolean
   fastFail: boolean
   readonly: boolean
-  modelValue: boolean | null
-  'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
+  modelValue: boolean
+  'onUpdate:modelValue': ((val: boolean) => void) | undefined
   validateOn: ValidationProps['validateOn']
 }
 
@@ -60,10 +60,7 @@ export const makeFormProps = propsFactory({
   disabled: Boolean,
   fastFail: Boolean,
   readonly: Boolean,
-  modelValue: {
-    type: Boolean as PropType<boolean | null>,
-    default: null,
-  },
+  modelValue: Boolean,
   validateOn: {
     type: String as PropType<FormProps['validateOn']>,
     default: 'input',
@@ -71,7 +68,7 @@ export const makeFormProps = propsFactory({
 }, 'form')
 
 export function createForm (props: FormProps) {
-  const model = useProxiedModel(props, 'modelValue', null)
+  const model = useProxiedModel(props, 'modelValue')
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
@@ -109,13 +106,10 @@ export function createForm (props: FormProps) {
 
   function reset () {
     items.value.forEach(item => item.reset())
-    model.value = null
   }
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errors.value = []
-    model.value = null
   }
 
   watch(items, () => {
@@ -136,8 +130,7 @@ export function createForm (props: FormProps) {
     errors.value = results
     model.value =
       invalid > 0 ? false
-      : valid === items.value.length ? true
-      : null
+      : valid === items.value.length
   }, { deep: true })
 
   provide(FormKey, {
@@ -151,7 +144,7 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
-        isValid: null,
+        isValid: false,
         errorMessages: [],
       })
     },
