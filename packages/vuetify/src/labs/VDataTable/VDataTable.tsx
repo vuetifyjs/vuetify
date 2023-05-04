@@ -156,14 +156,6 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
             <>
               { slots.colgroup?.({ columns }) }
               <thead>
-                { slots.headers ? slots.headers() : (
-                  <VDataTableHeaders
-                    sticky={ props.fixedHeader }
-                    loading={ props.loading }
-                    multiSort={ props.multiSort }
-                    v-slots={ slots }
-                  />
-                )}
                 <VDataTableHeaders
                   sticky={ props.fixedHeader }
                   loading={ props.loading }
