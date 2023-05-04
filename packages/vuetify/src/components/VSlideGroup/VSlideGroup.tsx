@@ -254,7 +254,8 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       if (!contentRef.value) return
 
       if (!location) {
-        const focusable = focusableChildren(contentRef.value)
+        let focusable = focusableChildren(contentRef.value)
+        if (!focusable.length) focusable = focusableChildren(contentRef.value, true)
         focusable[0]?.focus()
       } else if (location === 'next') {
         const el = contentRef.value.querySelector(':focus')?.nextElementSibling as HTMLElement | undefined
