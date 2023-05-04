@@ -35,7 +35,7 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & {
   selection: [{
     fileNames: string[]
     totalBytes: number
-    totalBytesReadable: number
+    totalBytesReadable: string
   }]
 }
 

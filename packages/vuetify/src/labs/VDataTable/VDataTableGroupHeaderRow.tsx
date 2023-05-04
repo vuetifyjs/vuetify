@@ -16,7 +16,7 @@ import { genericComponent } from '@/util'
 import type { PropType } from 'vue'
 import type { GroupHeaderItem } from './types'
 
-type VDataTableGroupHeaderRowSlots = {
+export type VDataTableGroupHeaderRowSlots = {
   'data-table-group': [{ item: GroupHeaderItem, count: number, props: Record<string, unknown> }]
   'data-table-select': [{ props: Record<string, unknown> }]
 }
