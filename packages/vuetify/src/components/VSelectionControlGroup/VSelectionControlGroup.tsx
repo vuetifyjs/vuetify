@@ -53,14 +53,18 @@ export const makeSelectionControlGroupProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeThemeProps(),
+}, 'selection-control-group')
+
+export const makeVSelectionControlGroupProps = propsFactory({
+  ...makeSelectionControlGroupProps({
+    defaultsTarget: 'VSelectionControl',
+  }),
 }, 'v-selection-control-group')
 
 export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
-  props: makeSelectionControlGroupProps({
-    defaultsTarget: 'VSelectionControl',
-  }),
+  props: makeVSelectionControlGroupProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
