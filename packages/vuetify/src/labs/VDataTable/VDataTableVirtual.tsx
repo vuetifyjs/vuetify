@@ -7,6 +7,7 @@ import { VTable } from '@/components/VTable'
 import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
+import { makeDataTableProps } from './VDataTable'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { provideDefaults } from '@/composables/defaults'
@@ -18,7 +19,6 @@ import { useOptions } from './composables/options'
 // Utlities
 import { computed, ref, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
-import { makeVDataTableProps } from './VDataTable'
 
 // Types
 import type { DataTableItem } from './types'
@@ -31,9 +31,9 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & {
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
+  ...makeDataTableProps(),
   ...makeDataTableVirtualProps(),
   ...makeFilterProps(),
-  ...makeVDataTableProps(),
 }, 'v-data-table-virtual')
 
 export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({

@@ -9,7 +9,7 @@ import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/gr
 import { createHeaders } from './composables/headers'
 import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
 import { createSort, provideSort } from './composables/sort'
-import { makeVDataTableProps } from './VDataTable'
+import { makeDataTableProps } from './VDataTable'
 import { provideDefaults } from '@/composables/defaults'
 import { provideExpanded } from './composables/expand'
 import { provideSelection } from './composables/select'
@@ -31,8 +31,8 @@ export const makeVDataTableServerProps = propsFactory({
   },
 
   ...makeDataTablePaginateProps(),
+  ...makeDataTableProps(),
   ...makeVDataTableFooterProps(),
-  ...makeVDataTableProps(),
 }, 'v-data-table-server')
 
 export const VDataTableServer = genericComponent<VDataTableSlots>()({

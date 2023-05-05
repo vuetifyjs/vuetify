@@ -15,6 +15,7 @@ import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from 
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeVTableProps } from '@/components/VTable/VTable'
 import { provideDefaults } from '@/composables/defaults'
 import { useOptions } from './composables/options'
@@ -22,7 +23,6 @@ import { useOptions } from './composables/options'
 // Utilities
 import { computed, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
-import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
 import type { DataTableItem, InternalDataTableHeader } from './types'
@@ -41,7 +41,9 @@ export type VDataTableSlots = VDataTableRowsSlots & {
   'footer.prepend': []
 }
 
-export const makeVDataTableProps = propsFactory({
+export const makeDataTableProps = propsFactory({
+  ...makeVDataTableRowsProps(),
+
   width: [String, Number],
   search: String,
 
@@ -52,19 +54,20 @@ export const makeVDataTableProps = propsFactory({
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
   ...makeVDataTableHeadersProps(),
-  ...makeVDataTableRowsProps(),
   ...makeVTableProps(),
+}, 'data-table')
+
+export const makeVDataTableProps = propsFactory({
+  ...makeDataTablePaginateProps(),
+  ...makeDataTableProps(),
+  ...makeFilterProps(),
+  ...makeVDataTableFooterProps(),
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
-  props: {
-    ...makeDataTablePaginateProps(),
-    ...makeFilterProps(),
-    ...makeVDataTableFooterProps(),
-    ...makeVDataTableProps(),
-  },
+  props: makeVDataTableProps(),
 
   emits: {
     'update:modelValue': (value: any[]) => true,
