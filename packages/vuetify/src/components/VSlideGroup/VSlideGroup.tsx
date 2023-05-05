@@ -23,6 +23,7 @@ import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
 import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
 import { animateVerticalScroll } from '@/util/animateVerticalScroll'
+import { calculateCenteredOffset, calculateUpdatedOffset, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -109,14 +110,67 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       return group.items.value.findIndex(item => item.id === group.selected.value[group.selected.value.length - 1])
     })
 
-    const scrollToPosition = (newPosition: number) => {
+    if (IN_BROWSER) {
+      let frame = -1
+      watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
+        cancelAnimationFrame(frame)
+        frame = requestAnimationFrame(() => {
+          if (containerRect.value && contentRect.value) {
+            const sizeProperty = isHorizontal.value ? 'width' : 'height'
+
+            containerSize.value = containerRect.value[sizeProperty]
+            contentSize.value = contentRect.value[sizeProperty]
+
+            isOverflowing.value = containerSize.value + 1 < contentSize.value
+          }
+
+          if (firstSelectedIndex.value >= 0 && contentRef.value) {
+            // TODO: Is this too naive? Should we store element references in group composable?
+            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
+
+            if (props.centerActive) {
+              scrollToChildren(selectedElement, true)
+            } else if (isOverflowing.value) {
+              scrollToChildren(selectedElement)
+            }
+          }
+        })
+      })
+    }
+
+    const isFocused = ref(false)
+
+    function scrollToChildren (children: HTMLElement, center?: boolean) {
+      if (!containerRef.value) return
+
+      let newPosition = scrollOffset.value
+
+      if (center) {
+        newPosition = calculateCenteredOffset({
+          containerElement: containerRef.value,
+          selectedElement: children,
+          isHorizontal: isHorizontal.value,
+        })
+      } else {
+        newPosition = calculateUpdatedOffset({
+          containerElement: containerRef.value,
+          selectedElement: children,
+          isHorizontal: isHorizontal.value,
+          isRtl: isRtl.value,
+        })
+      }
+
+      scrollToPosition(newPosition)
+    }
+
+    function scrollToPosition (newPosition: number) {
       if (!IN_BROWSER || !containerRef.value) {
         return
       }
 
-      const offsetSize = getOffsetSize(containerRef.value)
-      const scrollPosition = getScrollPosition(containerRef.value)
-      const scrollSize = getScrollSize(containerRef.value)
+      const offsetSize = getOffsetSize(isHorizontal.value, containerRef.value)
+      const scrollPosition = getScrollPosition(isHorizontal.value, isRtl.value, containerRef.value)
+      const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
 
       if (scrollSize <= offsetSize) {
         return
@@ -139,62 +193,6 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
           top: newPosition,
         })
       }
-    }
-
-    const scrollToChildren = (children: HTMLElement) => {
-      if (!containerRef.value) return
-
-      const containerOffsetSize = getOffsetSize(containerRef.value)
-      const childrenOffsetPosition = getOffsetPosition(children)
-      const childrenOffsetSize = getOffsetSize(children)
-
-      const newPosition = childrenOffsetPosition - (containerOffsetSize / 2) + (childrenOffsetSize / 2)
-
-      scrollToPosition(newPosition)
-    }
-
-    if (IN_BROWSER) {
-      let frame = -1
-      watch(() => [group.selected.value, containerRect.value, contentRect.value, isHorizontal.value], () => {
-        cancelAnimationFrame(frame)
-        frame = requestAnimationFrame(() => {
-          if (containerRect.value && contentRect.value) {
-            const sizeProperty = isHorizontal.value ? 'width' : 'height'
-
-            containerSize.value = containerRect.value[sizeProperty]
-            contentSize.value = contentRect.value[sizeProperty]
-
-            isOverflowing.value = containerSize.value + 1 < contentSize.value
-          }
-
-          if ((props.centerActive || isOverflowing.value) && firstSelectedIndex.value >= 0 && contentRef.value) {
-            const selectedElement = contentRef.value.children[lastSelectedIndex.value] as HTMLElement
-            scrollToChildren(selectedElement)
-          }
-        })
-      })
-    }
-
-    const isFocused = ref(false)
-
-    function getScrollSize (element?: HTMLElement) {
-      const key = isHorizontal.value ? 'scrollWidth' : 'scrollHeight'
-      return element?.[key] || 0
-    }
-
-    function getScrollPosition (element?: HTMLElement) {
-      const key = isHorizontal.value ? 'scrollLeft' : 'scrollTop'
-      return element?.[key] || 0
-    }
-
-    function getOffsetSize (element?: HTMLElement) {
-      const key = isHorizontal.value ? 'offsetWidth' : 'offsetHeight'
-      return element?.[key] || 0
-    }
-
-    function getOffsetPosition (element?: HTMLElement) {
-      const key = isHorizontal.value ? 'offsetLeft' : 'offsetTop'
-      return element?.[key] || 0
     }
 
     function onScroll (e: UIEvent) {
@@ -334,8 +332,8 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       if (!containerRef.value) return false
 
       // Check one scroll ahead to know the width of right-most item
-      const scrollSize = getScrollSize(containerRef.value)
-      const offsetSize = getOffsetSize(containerRef.value)
+      const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
+      const offsetSize = getOffsetSize(isHorizontal.value, containerRef.value)
 
       return scrollSize - (Math.abs(scrollOffset.value) + offsetSize) !== 0
     })
