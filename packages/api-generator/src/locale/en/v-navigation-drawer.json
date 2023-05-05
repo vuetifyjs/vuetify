@@ -18,7 +18,7 @@
     "value": "Controls whether the component is visible or hidden.",
     "rail": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "railWidth": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
-    "scrim": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
+    "scrim": "Hides drawer overlay if set to false. This prop can also be used to set the overlay's color. Supports utility colors (for example `success` or `primary`) or CSS color (for example `#00ff00` or `rgb(0, 255, 0))`",
     "width": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))",
     "sticky": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-navigation-drawer.json))"
