@@ -203,6 +203,18 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+
+      if (!isOverflowing.value || !contentRef.value) return
+
+      // Focused element is likely to be the root of an item, so a
+      // breadth-first search will probably find it in the first iteration
+      for (const el of e.composedPath()) {
+        for (const item of contentRef.value.children) {
+          if (item === el) {
+            scrollToChildren(item as HTMLElement)
+          }
+        }
+      }
     }
 
     function onFocusout (e: FocusEvent) {
@@ -268,7 +280,6 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       }
 
       if (el) {
-        scrollToChildren(el)
         el.focus({ preventScroll: true })
       }
     }
