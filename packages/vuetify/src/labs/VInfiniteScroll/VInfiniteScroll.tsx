@@ -9,6 +9,7 @@ import { VProgressCircular } from '@/components/VProgressCircular'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useLocale } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, nextTick, onMounted, ref, watch } from 'vue'
@@ -64,6 +65,7 @@ export const makeVInfiniteScrollProps = propsFactory({
   },
 
   ...makeDimensionProps(),
+  ...makeTagProps(),
 }, 'v-infinite-scroll')
 
 export const VInfiniteScrollIntersect = defineComponent({
@@ -221,12 +223,13 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     const { dimensionStyles } = useDimension(props)
 
     useRender(() => {
+      const Tag = props.tag
       const hasStartIntersect = props.side === 'start' || props.side === 'both'
       const hasEndIntersect = props.side === 'end' || props.side === 'both'
       const intersectMode = props.mode === 'intersect'
 
       return (
-        <div
+        <Tag
           ref={ rootEl }
           class={[
             'v-infinite-scroll',
@@ -267,7 +270,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           <div class="v-infinite-scroll__side">
             { renderSide('end', endStatus.value) }
           </div>
-        </div>
+        </Tag>
       )
     })
   },
