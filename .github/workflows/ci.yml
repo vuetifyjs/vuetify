@@ -154,7 +154,7 @@ jobs:
       - uses: ./.github/actions/yarn-install
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
-#        uses: crowdin/github-action@1.1.2
+#        uses: crowdin/github-action@1.8.0
 #        with:
 #          config: crowdin.yml
 #          upload_sources: false
