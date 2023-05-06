@@ -23,7 +23,7 @@ import type { GroupProvide } from '@/composables/group'
 import type { InjectionKey, PropType } from 'vue'
 import { animateHorizontalScroll } from '@/util/animateHorizontalScroll'
 import { animateVerticalScroll } from '@/util/animateVerticalScroll'
-import { calculateCenteredOffset, calculateUpdatedOffset, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
+import { calculateCenteredOffset, calculateUpdatedOffset, getClientSize, getOffsetSize, getScrollPosition, getScrollSize } from './helpers'
 
 export const VSlideGroupSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-slide-group')
 
@@ -336,17 +336,20 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     })
 
     const hasPrev = computed(() => {
-      return Math.abs(scrollOffset.value) > 0
+      // 1 pixel in reserve, may be lost after rounding
+      return Math.abs(scrollOffset.value) > 1
     })
 
     const hasNext = computed(() => {
       if (!containerRef.value) return false
 
-      // Check one scroll ahead to know the width of right-most item
       const scrollSize = getScrollSize(isHorizontal.value, containerRef.value)
-      const offsetSize = getOffsetSize(isHorizontal.value, containerRef.value)
+      const clientSize = getClientSize(isHorizontal.value, containerRef.value)
 
-      return scrollSize - (Math.abs(scrollOffset.value) + offsetSize) !== 0
+      const scrollSizeMax = scrollSize - clientSize
+
+      // 1 pixel in reserve, may be lost after rounding
+      return scrollSizeMax - Math.abs(scrollOffset.value) > 1
     })
 
     useRender(() => (

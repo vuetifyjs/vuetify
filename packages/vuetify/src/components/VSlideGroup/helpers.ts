@@ -53,6 +53,11 @@ export function getScrollSize (isHorizontal: boolean, element?: HTMLElement) {
   return element?.[key] || 0
 }
 
+export function getClientSize (isHorizontal: boolean, element?: HTMLElement) {
+  const key = isHorizontal ? 'clientWidth' : 'clientHeight'
+  return element?.[key] || 0
+}
+
 export function getScrollPosition (isHorizontal: boolean, rtl: boolean, element?: HTMLElement) {
   if (!element) {
     return 0
