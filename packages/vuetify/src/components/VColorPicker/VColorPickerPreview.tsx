@@ -8,25 +8,27 @@ import { VSlider } from '@/components/VSlider'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { defineComponent, HSVtoCSS, useRender } from '@/util'
+import { defineComponent, HSVtoCSS, propsFactory, useRender } from '@/util'
 import { nullColor } from './util'
 
 // Types
 import type { PropType } from 'vue'
 import type { HSV } from '@/util'
 
+export const makeVColorPickerPreviewProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  hideAlpha: Boolean,
+
+  ...makeComponentProps(),
+}, 'v-color-picker-preview')
+
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    hideAlpha: Boolean,
-
-    ...makeComponentProps(),
-  },
+  props: makeVColorPickerPreviewProps(),
 
   emits: {
     'update:color': (color: HSV) => true,

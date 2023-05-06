@@ -23,7 +23,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -61,6 +61,19 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
+export const makeVComboboxProps = propsFactory({
+  // TODO: implement post keyboard support
+  // autoSelectFirst: Boolean,
+  delimiters: Array as PropType<string[]>,
+
+  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeSelectProps({ hideNoData: true, returnObject: true }),
+  ...omit(makeVTextFieldProps({
+    modelValue: null,
+  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  ...makeTransitionProps({ transition: false }),
+}, 'v-combobox')
+
 export const VCombobox = genericComponent<new <
   T,
   ReturnObject extends boolean = true,
@@ -82,18 +95,7 @@ export const VCombobox = genericComponent<new <
 }>>()({
   name: 'VCombobox',
 
-  props: {
-    // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
-    delimiters: Array as PropType<string[]>,
-
-    ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ hideNoData: true, returnObject: true }),
-    ...omit(makeVTextFieldProps({
-      modelValue: null,
-    }), ['validationValue', 'dirty', 'appendInnerIcon']),
-    ...makeTransitionProps({ transition: false }),
-  },
+  props: makeVComboboxProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,

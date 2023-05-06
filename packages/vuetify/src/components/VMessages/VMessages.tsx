@@ -11,7 +11,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -24,26 +24,28 @@ export type VMessagesSlots = {
   message: [VMessageSlot]
 }
 
+export const makeVMessagesProps = propsFactory({
+  active: Boolean,
+  color: String,
+  messages: {
+    type: [Array, String] as PropType<string | string[]>,
+    default: () => ([]),
+  },
+
+  ...makeComponentProps(),
+  ...makeTransitionProps({
+    transition: {
+      component: VSlideYTransition,
+      leaveAbsolute: true,
+      group: true,
+    },
+  }),
+}, 'v-messages')
+
 export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',
 
-  props: {
-    active: Boolean,
-    color: String,
-    messages: {
-      type: [Array, String] as PropType<string | string[]>,
-      default: () => ([]),
-    },
-
-    ...makeComponentProps(),
-    ...makeTransitionProps({
-      transition: {
-        component: VSlideYTransition,
-        leaveAbsolute: true,
-        group: true,
-      },
-    }),
-  },
+  props: makeVMessagesProps(),
 
   setup (props, { slots }) {
     const messages = computed(() => wrapInArray(props.messages))

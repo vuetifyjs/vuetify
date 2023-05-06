@@ -17,6 +17,7 @@ import {
   convertToUnit,
   createRange,
   genericComponent,
+  propsFactory,
   useRender,
 } from '@/util'
 
@@ -31,6 +32,17 @@ export interface VVirtualScrollSlot<T> {
   index: number
 }
 
+export const makeVVirtualScrollProps = propsFactory({
+  items: {
+    type: Array,
+    default: () => ([]),
+  },
+  itemHeight: [Number, String],
+
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+}, 'v-virtual-scroll')
+
 export const VVirtualScroll = genericComponent<new <T>(props: {
   items?: readonly T[]
 }) => GenericProps<typeof props, {
@@ -38,16 +50,7 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
 }>>()({
   name: 'VVirtualScroll',
 
-  props: {
-    items: {
-      type: Array,
-      default: () => ([]),
-    },
-    itemHeight: [Number, String],
-
-    ...makeComponentProps(),
-    ...makeDimensionProps(),
-  },
+  props: makeVVirtualScrollProps(),
 
   setup (props, { slots }) {
     const first = ref(0)

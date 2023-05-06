@@ -18,12 +18,38 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+
+export const makeVTextareaProps = propsFactory({
+  autoGrow: Boolean,
+  autofocus: Boolean,
+  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counterValue: Function as PropType<(value: any) => number>,
+  prefix: String,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
+  persistentCounter: Boolean,
+  noResize: Boolean,
+  rows: {
+    type: [Number, String],
+    default: 5,
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
+  maxRows: {
+    type: [Number, String],
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
+  suffix: String,
+  modelModifiers: Object as PropType<Record<string, boolean>>,
+
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
+}, 'v-textarea')
 
 export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
   name: 'VTextarea',
@@ -32,31 +58,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
 
   inheritAttrs: false,
 
-  props: {
-    autoGrow: Boolean,
-    autofocus: Boolean,
-    counter: [Boolean, Number, String] as PropType<true | number | string>,
-    counterValue: Function as PropType<(value: any) => number>,
-    prefix: String,
-    placeholder: String,
-    persistentPlaceholder: Boolean,
-    persistentCounter: Boolean,
-    noResize: Boolean,
-    rows: {
-      type: [Number, String],
-      default: 5,
-      validator: (v: any) => !isNaN(parseFloat(v)),
-    },
-    maxRows: {
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseFloat(v)),
-    },
-    suffix: String,
-    modelModifiers: Object as PropType<Record<string, boolean>>,
-
-    ...makeVInputProps(),
-    ...makeVFieldProps(),
-  },
+  props: makeVTextareaProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,

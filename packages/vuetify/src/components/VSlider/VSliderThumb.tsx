@@ -15,42 +15,44 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 export type VSliderThumbSlots = {
   'thumb-label': []
 }
+
+export const makeVSliderThumbProps = propsFactory({
+  focused: Boolean,
+  max: {
+    type: Number,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  modelValue: {
+    type: Number,
+    required: true,
+  },
+  position: {
+    type: Number,
+    required: true,
+  },
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+
+  ...makeComponentProps(),
+}, 'v-slider-thumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
 
-  props: {
-    focused: Boolean,
-    max: {
-      type: Number,
-      required: true,
-    },
-    min: {
-      type: Number,
-      required: true,
-    },
-    modelValue: {
-      type: Number,
-      required: true,
-    },
-    position: {
-      type: Number,
-      required: true,
-    },
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-
-    ...makeComponentProps(),
-  },
+  props: makeVSliderThumbProps(),
 
   emits: {
     'update:modelValue': (v: number) => true,
