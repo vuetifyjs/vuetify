@@ -54,7 +54,7 @@
 </template>
 
 <script setup lang="ts">
-// Styles
+  // Styles
   import Prism from 'prismjs'
   import 'prismjs/themes/prism.css'
   import 'prismjs/components/prism-bash.js'
@@ -71,14 +71,14 @@
   import { useUserStore } from '@/store/user'
 
   // Utilities
-  import { ComponentPublicInstance, computed, ref } from 'vue'
+  import { ComponentPublicInstance, computed, ref, watchEffect } from 'vue'
   import { IN_BROWSER } from '@/util/globals'
   import { wait } from '@/util/helpers'
   import { stripLinks } from '@/components/api/utils'
 
   const props = defineProps({
     resource: String,
-    code: String,
+    code: null,
     inline: Boolean,
     language: {
       type: String,
@@ -110,9 +110,11 @@
   const clicked = ref(false)
   const root = ref<ComponentPublicInstance>()
 
-  const highlighted = computed(() => (
-    props.code && props.language && Prism.highlight(props.code, Prism.languages[props.language], props.language)
-  ))
+  const highlighted = ref('')
+  watchEffect(async () => {
+    highlighted.value = props.code && props.language && Prism.highlight(await props.code, Prism.languages[props.language], props.language)
+  })
+
   const className = computed(() => `langauge-${props.language}`)
 
   async function copy () {
