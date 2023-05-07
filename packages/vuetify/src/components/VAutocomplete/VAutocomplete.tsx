@@ -299,6 +299,7 @@ export const VAutocomplete = genericComponent<new <
         if (!props.multiple && !search.value) model.value = []
         menu.value = false
         search.value = ''
+        selectionIndex.value = -1
       }
     })
 

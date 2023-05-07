@@ -334,16 +334,15 @@ export const VCombobox = genericComponent<new <
     })
 
     watch(isFocused, val => {
-      if (val) {
-        selectionIndex.value = -1
-      } else {
-        menu.value = false
+      if (val) return
 
-        if (!props.multiple || !search.value) return
+      selectionIndex.value = -1
+      menu.value = false
 
-        model.value = [...model.value, transformItem(props, search.value)]
-        search.value = ''
-      }
+      if (!props.multiple || !search.value) return
+
+      model.value = [...model.value, transformItem(props, search.value)]
+      search.value = ''
     })
 
     useRender(() => {
