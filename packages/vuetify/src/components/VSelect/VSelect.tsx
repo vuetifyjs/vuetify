@@ -324,6 +324,7 @@ export const VSelect = genericComponent<new <
                           <VListItem
                             key={ index }
                             { ...item.props }
+                            color={ props.color }
                             onClick={ () => select(item) }
                           >
                             {{
