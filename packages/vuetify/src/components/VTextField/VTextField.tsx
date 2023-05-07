@@ -205,7 +205,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                       <input
                         ref={ (e: Element | ComponentPublicInstance | null) => {
                           inputRef.value = e as HTMLInputElement
-                          controlRef(e)
+                          controlRef(e as Element)
                         }}
                         value={ model.value }
                         onInput={ onInput }

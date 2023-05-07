@@ -34,7 +34,7 @@ import {
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
-import type { ComponentPublicInstance, PropType, Ref } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
@@ -43,7 +43,7 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
   isFocused: Ref<boolean>
-  controlRef: (ref: Element | ComponentPublicInstance | null) => void
+  controlRef: (ref: Element | null) => void
   focus: () => void
   blur: () => void
 }
@@ -135,7 +135,7 @@ export const VField = genericComponent<new <T>(props: {
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
-    const controlRef = (el: Element | ComponentPublicInstance | null) => {
+    const controlRef = (el: Element | null) => {
       textAreaEle = el
     }
 
