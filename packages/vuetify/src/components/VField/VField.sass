@@ -237,6 +237,13 @@
   .v-field--error:not(.v-field--disabled) &
     color: rgb(var(--v-theme-error))
 
+  .v-field--single-line-input &
+    top: 50%
+    transform: translateY(-50%)
+    &--floating
+      top: var(--v-input-padding-top)
+      transform: none
+
   &--floating
     --v-field-label-scale: #{$field-label-floating-scale}em
     font-size: var(--v-field-label-scale)

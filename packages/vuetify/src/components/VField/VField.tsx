@@ -16,7 +16,7 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
+import { computed, onMounted, ref, toRef, watch } from 'vue'
 import {
   animate,
   convertToUnit,
@@ -34,7 +34,7 @@ import {
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
-import type { PropType, Ref } from 'vue'
+import type { ComponentPublicInstance, PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
@@ -43,7 +43,7 @@ type Variant = typeof allowedVariants[number]
 export interface DefaultInputSlot {
   isActive: Ref<boolean>
   isFocused: Ref<boolean>
-  controlRef: Ref<HTMLElement | undefined>
+  controlRef: (ref: Element | ComponentPublicInstance | null) => void
   focus: () => void
   blur: () => void
 }
@@ -124,16 +124,20 @@ export const VField = genericComponent<new <T>(props: {
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
 
+    let textAreaEle: any
+
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
-
+    const singleLineInput = ref(false)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
     const messagesId = computed(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
-    const controlRef = ref<HTMLElement>()
+    const controlRef = (el: Element | ComponentPublicInstance | null) => {
+      textAreaEle = el
+    }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -198,6 +202,16 @@ export const VField = genericComponent<new <T>(props: {
       }
     }
 
+    onMounted(() => {
+      if (textAreaEle) {
+        const { lineHeight } = getComputedStyle(textAreaEle)
+        const lines = Math.floor(textAreaEle.scrollHeight / parseInt(lineHeight, 10))
+        if (lines === 1) {
+          singleLineInput.value = true
+        }
+      }
+    })
+
     useRender(() => {
       const isOutlined = props.variant === 'outlined'
       const hasPrepend = (slots['prepend-inner'] || props.prependInnerIcon)
@@ -226,6 +240,7 @@ export const VField = genericComponent<new <T>(props: {
               'v-field--prepended': hasPrepend,
               'v-field--reverse': props.reverse,
               'v-field--single-line': props.singleLine,
+              'v-field--single-line-input': singleLineInput.value,
               'v-field--no-label': !label,
               [`v-field--variant-${props.variant}`]: true,
             },
@@ -287,6 +302,7 @@ export const VField = genericComponent<new <T>(props: {
                 class: 'v-field__input',
                 'aria-describedby': messagesId.value,
               },
+              controlRef,
               focus,
               blur,
             } as VFieldSlot)}
