@@ -21,6 +21,7 @@ import {
   filterInputAttrs,
   genericComponent,
   humanReadableFileSize,
+  propsFactory,
   useRender,
   wrapInArray,
 } from '@/util'
@@ -34,46 +35,48 @@ export type VFileInputSlots = VInputSlots & VFieldSlots & {
   counter: []
 }
 
+export const makeVFileInputProps = propsFactory({
+  chips: Boolean,
+  counter: Boolean,
+  counterSizeString: {
+    type: String,
+    default: '$vuetify.fileInput.counterSize',
+  },
+  counterString: {
+    type: String,
+    default: '$vuetify.fileInput.counter',
+  },
+  multiple: Boolean,
+  showSize: {
+    type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
+    default: false,
+    validator: (v: boolean | number) => {
+      return (
+        typeof v === 'boolean' ||
+        [1000, 1024].includes(v)
+      )
+    },
+  },
+
+  ...makeVInputProps({ prependIcon: '$file' }),
+
+  modelValue: {
+    type: Array as PropType<File[]>,
+    default: () => ([]),
+    validator: (val: any) => {
+      return wrapInArray(val).every(v => v != null && typeof v === 'object')
+    },
+  },
+
+  ...makeVFieldProps({ clearable: true }),
+}, 'v-file-input')
+
 export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
 
   inheritAttrs: false,
 
-  props: {
-    chips: Boolean,
-    counter: Boolean,
-    counterSizeString: {
-      type: String,
-      default: '$vuetify.fileInput.counterSize',
-    },
-    counterString: {
-      type: String,
-      default: '$vuetify.fileInput.counter',
-    },
-    multiple: Boolean,
-    showSize: {
-      type: [Boolean, Number] as PropType<boolean | 1000 | 1024>,
-      default: false,
-      validator: (v: boolean | number) => {
-        return (
-          typeof v === 'boolean' ||
-          [1000, 1024].includes(v)
-        )
-      },
-    },
-
-    ...makeVInputProps({ prependIcon: '$file' }),
-
-    modelValue: {
-      type: Array as PropType<File[]>,
-      default: () => ([]),
-      validator: (val: any) => {
-        return wrapInArray(val).every(v => v != null && typeof v === 'object')
-      },
-    },
-
-    ...makeVFieldProps({ clearable: true }),
-  },
+  props: makeVFileInputProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,
@@ -106,6 +109,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const inputRef = ref<HTMLInputElement>()
+    const isActive = computed(() => (
+      isFocused.value ||
+      props.active
+    ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -184,7 +191,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
                 id={ id.value }
-                active={ isDirty.value || isFocused.value }
+                active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

@@ -6,6 +6,7 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -22,7 +23,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -60,6 +61,19 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     ? readonly Val<T, ReturnObject>[]
     : Val<T, ReturnObject>
 
+export const makeVComboboxProps = propsFactory({
+  // TODO: implement post keyboard support
+  // autoSelectFirst: Boolean,
+  delimiters: Array as PropType<string[]>,
+
+  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeSelectProps({ hideNoData: true, returnObject: true }),
+  ...omit(makeVTextFieldProps({
+    modelValue: null,
+  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  ...makeTransitionProps({ transition: false }),
+}, 'v-combobox')
+
 export const VCombobox = genericComponent<new <
   T,
   ReturnObject extends boolean = true,
@@ -81,18 +95,7 @@ export const VCombobox = genericComponent<new <
 }>>()({
   name: 'VCombobox',
 
-  props: {
-    // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
-    delimiters: Array as PropType<string[]>,
-
-    ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps({ hideNoData: true, returnObject: true }),
-    ...omit(makeVTextFieldProps({
-      modelValue: null,
-    }), ['validationValue', 'dirty', 'appendInnerIcon']),
-    ...makeTransitionProps({ transition: false }),
-  },
+  props: makeVComboboxProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -292,7 +295,10 @@ export const VCombobox = genericComponent<new <
       }
     }
     function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
+      if (isFocused.value) {
+        isPristine.value = true
+        vTextFieldRef.value?.focus()
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -321,12 +327,6 @@ export const VCombobox = genericComponent<new <
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
-    }
-
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
-        vTextFieldRef.value?.focus()
-      }
     }
 
     watch(filteredItems, val => {
@@ -403,7 +403,6 @@ export const VCombobox = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
@@ -421,13 +420,21 @@ export const VCombobox = genericComponent<new <
                           onClick={ () => select(item) }
                         >
                           {{
-                            prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                              <VCheckboxBtn
-                                modelValue={ isSelected }
-                                ripple={ false }
-                                tabindex="-1"
-                              />
-                            ) : undefined,
+                            prepend: ({ isSelected }) => (
+                              <>
+                                { props.multiple && !props.hideSelected ? (
+                                  <VCheckboxBtn
+                                    modelValue={ isSelected }
+                                    ripple={ false }
+                                    tabindex="-1"
+                                  />
+                                ) : undefined }
+
+                                { item.props.prependIcon && (
+                                  <VIcon icon={ item.props.prependIcon } />
+                                )}
+                              </>
+                            ),
                             title: () => {
                               return isPristine.value
                                 ? item.title
@@ -452,6 +459,10 @@ export const VCombobox = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onMousedown (e: MouseEvent) {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
                   }

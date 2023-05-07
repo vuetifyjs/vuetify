@@ -28,7 +28,7 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { EventProp, genericComponent, useRender } from '@/util'
+import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -56,51 +56,53 @@ export type VListItemSlots = {
   subtitle: [ListItemSubtitleSlot]
 }
 
+export const makeVListItemProps = propsFactory({
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
+  activeClass: String,
+  activeColor: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  disabled: Boolean,
+  lines: String as PropType<'one' | 'two' | 'three'>,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  nav: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  subtitle: [String, Number, Boolean],
+  title: [String, Number, Boolean],
+  value: null,
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'v-list-item')
+
 export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
   directives: { Ripple },
 
-  props: {
-    active: {
-      type: Boolean,
-      default: undefined,
-    },
-    activeClass: String,
-    activeColor: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    lines: String as PropType<'one' | 'two' | 'three'>,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    nav: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    subtitle: [String, Number, Boolean],
-    title: [String, Number, Boolean],
-    value: null,
-
-    onClick: EventProp<[MouseEvent]>(),
-    onClickOnce: EventProp<[MouseEvent]>(),
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'text' } as const),
-  },
+  props: makeVListItemProps(),
 
   emits: {
     click: (e: MouseEvent | KeyboardEvent) => true,

@@ -97,14 +97,14 @@
   // Composables
   import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
-  import { useTheme, version as vuetifyVersion } from 'vuetify'
+  import { usePlayground } from '@/composables/playground'
+  import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef, version as vueVersion } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
-  import { strFromU8, strToU8, zlibSync } from 'fflate'
 
   const { t } = useI18n()
 
@@ -189,42 +189,12 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  // This is copied directly from playground
-  function utoa (data: string): string {
-    const buffer = strToU8(data)
-    const zipped = zlibSync(buffer, { level: 9 })
-    const binary = strFromU8(zipped, true)
-    return btoa(binary)
-  }
-
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) {
-      return null
-    }
+    if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.codepenResources || '{}')
 
-    const links = {
-      css: resources.css ?? [],
-    }
-
-    const importMap = {
-      imports: resources.imports ?? {},
-    }
-
-    const files = {
-      'App.vue': sections.value
-        .filter(section => ['script', 'template'].includes(section.name))
-        .map(section => section.content)
-        .join('\n\n'),
-      'links.json': JSON.stringify(links),
-      'import-map.json': JSON.stringify(importMap),
-    }
-
-    // This is copied directly from playground
-    const hash = utoa(JSON.stringify([files, vueVersion, vuetifyVersion, true]))
-
-    return `https://play.vuetifyjs.com#${hash}`
+    return usePlayground(sections.value, resources.css, resources.imports)
   })
 
   const actions = computed(() => {

@@ -366,4 +366,32 @@ describe('VSelect', () => {
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
   })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VSelect
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Select"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .click()
+      .should('have.class', 'v-select--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-select--active-menu')
+  })
 })

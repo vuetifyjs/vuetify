@@ -20,6 +20,7 @@ import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
 
 export * from './composables'
+export type { DateOptions, DateInstance } from '@/labs/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>

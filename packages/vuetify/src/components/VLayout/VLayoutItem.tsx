@@ -7,28 +7,30 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
+export const makeVLayoutItemProps = propsFactory({
+  position: {
+    type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
+    required: true,
+  },
+  size: {
+    type: [Number, String],
+    default: 300,
+  },
+  modelValue: Boolean,
+
+  ...makeComponentProps(),
+  ...makeLayoutItemProps(),
+}, 'v-layout-item')
+
 export const VLayoutItem = genericComponent()({
   name: 'VLayoutItem',
 
-  props: {
-    position: {
-      type: String as PropType<'top' | 'right' | 'bottom' | 'left'>,
-      required: true,
-    },
-    size: {
-      type: [Number, String],
-      default: 300,
-    },
-    modelValue: Boolean,
-
-    ...makeComponentProps(),
-    ...makeLayoutItemProps(),
-  },
+  props: makeVLayoutItemProps(),
 
   setup (props, { slots }) {
     const { layoutItemStyles } = useLayoutItem({

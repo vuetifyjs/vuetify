@@ -49,13 +49,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping release"
               exit 1
           fi
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn --frozen-lockfile --non-interactive
+      - uses: ./.github/actions/yarn-install
       - run: yarn lerna version --conventional-commits --conventional-prerelease --no-push --no-commit-hooks --preid "$RELEASE_BRANCH-$(date +'%Y%m%d')" --yes
       - run: yarn conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
       - run: cat ./packages/vuetify/CHANGELOG.md
@@ -93,14 +87,7 @@ jobs:
               echo "Last commit was more than 24 hours ago, skipping tests"
               exit 1
           fi
-      - uses: actions/cache@v2
-        with:
-          path: |
-            node_modules
-            **/node_modules
-            /home/runner/.cache/Cypress
-          key: ${{ runner.os }}-${{ hashFiles('./yarn.lock') }}
-      - run: yarn --frozen-lockfile --non-interactive
+      - uses: ./.github/actions/yarn-install
       - run: echo "COMMIT=$(git rev-parse HEAD)" >> $GITHUB_ENV
       - run: yarn cy:run
         working-directory: ./packages/vuetify

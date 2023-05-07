@@ -29,7 +29,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { EventProp, genericComponent } from '@/util'
+import { EventProp, genericComponent, propsFactory } from '@/util'
 import { computed } from 'vue'
 
 export type VChipSlots = {
@@ -39,63 +39,65 @@ export type VChipSlots = {
   append: []
 }
 
+export const makeVChipProps = propsFactory({
+  activeClass: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  closable: Boolean,
+  closeIcon: {
+    type: IconValue,
+    default: '$delete',
+  },
+  closeLabel: {
+    type: String,
+    default: '$vuetify.close',
+  },
+  draggable: Boolean,
+  filter: Boolean,
+  filterIcon: {
+    type: String,
+    default: '$complete',
+  },
+  label: Boolean,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  pill: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  text: String,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'span' }),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'v-chip')
+
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },
 
-  props: {
-    activeClass: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    closable: Boolean,
-    closeIcon: {
-      type: IconValue,
-      default: '$delete',
-    },
-    closeLabel: {
-      type: String,
-      default: '$vuetify.close',
-    },
-    draggable: Boolean,
-    filter: Boolean,
-    filterIcon: {
-      type: String,
-      default: '$complete',
-    },
-    label: Boolean,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    pill: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    text: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-
-    onClick: EventProp<[MouseEvent]>(),
-    onClickOnce: EventProp<[MouseEvent]>(),
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'span' }),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipProps(),
 
   emits: {
     'click:close': (e: MouseEvent) => true,

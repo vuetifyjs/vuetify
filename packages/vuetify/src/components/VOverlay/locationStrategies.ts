@@ -235,8 +235,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     if (!scrollParents.length) {
       scrollParents.push(document.documentElement)
       if (!(data.contentEl.value.style.top && data.contentEl.value.style.left)) {
-        contentBox.x += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
-        contentBox.y += parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
+        contentBox.x -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-x') || 0)
+        contentBox.y -= parseFloat(document.documentElement.style.getPropertyValue('--v-body-scroll-y') || 0)
       }
     }
 

@@ -14,6 +14,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -123,6 +124,7 @@ export const VField = genericComponent<new <T>(props: {
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
+    const { rtlClasses } = useRtl()
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -234,6 +236,7 @@ export const VField = genericComponent<new <T>(props: {
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
+            rtlClasses.value,
             props.class,
           ]}
           style={[

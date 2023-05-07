@@ -9,39 +9,41 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { animate, genericComponent, omit, standardEasing, useRender } from '@/util'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 import { makeVBtnProps } from '@/components/VBtn/VBtn'
 
 // Types
 import type { PropType } from 'vue'
 import { VTabsSymbol } from './shared'
 
+export const makeVTabProps = propsFactory({
+  fixed: Boolean,
+
+  sliderColor: String,
+  hideSlider: Boolean,
+
+  direction: {
+    type: String as PropType<'horizontal' | 'vertical'>,
+    default: 'horizontal',
+  },
+
+  ...omit(makeVBtnProps({
+    selectedClass: 'v-tab--selected',
+    variant: 'text' as const,
+  }), [
+    'active',
+    'block',
+    'flat',
+    'location',
+    'position',
+    'symbol',
+  ]),
+}, 'v-tabs')
+
 export const VTab = genericComponent()({
   name: 'VTab',
 
-  props: {
-    fixed: Boolean,
-
-    sliderColor: String,
-    hideSlider: Boolean,
-
-    direction: {
-      type: String as PropType<'horizontal' | 'vertical'>,
-      default: 'horizontal',
-    },
-
-    ...omit(makeVBtnProps({
-      selectedClass: 'v-tab--selected',
-      variant: 'text' as const,
-    }), [
-      'active',
-      'block',
-      'flat',
-      'location',
-      'position',
-      'symbol',
-    ]),
-  },
+  props: makeVTabProps(),
 
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')

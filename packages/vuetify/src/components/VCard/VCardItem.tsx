@@ -10,7 +10,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 
 // Utility
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
   default: []
@@ -20,20 +20,22 @@ export type VCardItemSlots = {
   subtitle: []
 }
 
+export const makeCardItemProps = propsFactory({
+  appendAvatar: String,
+  appendIcon: IconValue,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  subtitle: String,
+  title: String,
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+}, 'v-card-item')
+
 export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
 
-  props: {
-    appendAvatar: String,
-    appendIcon: IconValue,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    subtitle: String,
-    title: String,
-
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-  },
+  props: makeCardItemProps(),
 
   setup (props, { slots }) {
     useRender(() => {

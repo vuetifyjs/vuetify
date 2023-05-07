@@ -6,7 +6,7 @@ import { VListSubheader } from './VListSubheader'
 
 // Utilities
 import { createList } from './list'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { InternalListItem } from './VList'
@@ -22,14 +22,16 @@ export type VListChildrenSlots<T> = {
   subheader: [{ props: T }]
 }
 
+export const makeVListChildrenProps = propsFactory({
+  items: Array as PropType<InternalListItem[]>,
+}, 'v-list-children')
+
 export const VListChildren = genericComponent<new <T extends InternalListItem>(props: {
   items?: T[]
 }) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
   name: 'VListChildren',
 
-  props: {
-    items: Array as PropType<InternalListItem[]>,
-  },
+  props: makeVListChildrenProps(),
 
   setup (props, { slots }) {
     createList()

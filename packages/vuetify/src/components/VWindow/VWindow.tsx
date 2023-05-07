@@ -69,7 +69,7 @@ export const makeVWindowProps = propsFactory({
     default: undefined,
   },
   direction: {
-    type: String,
+    type: String as PropType<'horizontal' | 'vertical'>,
     default: 'horizontal',
   },
 

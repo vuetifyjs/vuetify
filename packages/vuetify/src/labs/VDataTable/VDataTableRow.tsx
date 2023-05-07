@@ -10,20 +10,22 @@ import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
 import { withModifiers } from 'vue'
-import { defineComponent, getPropertyFromItem, useRender } from '@/util'
+import { defineComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { DataTableItem } from './types'
 
+export const makeVDataTableRowProps = propsFactory({
+  index: Number as PropType<Number>,
+  item: Object as PropType<DataTableItem>,
+  onClick: Function as PropType<(e: MouseEvent) => void>,
+}, 'v-data-table-row')
+
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
 
-  props: {
-    index: Number as PropType<Number>,
-    item: Object as PropType<DataTableItem>,
-    onClick: Function as PropType<(e: MouseEvent) => void>,
-  },
+  props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
     const { isSelected, toggleSelect } = useSelection()

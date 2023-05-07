@@ -146,6 +146,31 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should be empty when delete the selected option', () => {
+    const items = ref([
+      { title: 'Item 1', value: 'Item 1' },
+      { title: 'Item 2', value: 'Item 2' },
+    ])
+
+    const selectedItems = ref(null)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        returnObject
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').contains('Item 1').click()
+
+    cy.get('.v-field__input').clear()
+    cy.get('body').click('bottomLeft')
+    cy.get('.v-field__input').should('not.include.text', 'Item 1')
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/16210
   it('should return item object as the argument of item-title function', () => {
     const items = [
@@ -272,5 +297,33 @@ describe('VAutocomplete', () => {
       .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
 
     cy.get('.v-field').should('have.class', 'v-field--focused')
+  })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VAutocomplete
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Autocomplete"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-autocomplete')
+      .should('not.have.class', 'v-autocomplete--active-menu')
+      .click()
+      .should('have.class', 'v-autocomplete--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-autocomplete--active-menu')
   })
 })

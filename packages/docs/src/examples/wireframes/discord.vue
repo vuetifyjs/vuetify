@@ -11,7 +11,6 @@
     </v-system-bar>
 
     <v-navigation-drawer
-      absolute
       color="grey-lighten-3"
       rail
     >

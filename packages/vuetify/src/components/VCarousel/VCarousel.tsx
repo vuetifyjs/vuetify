@@ -13,7 +13,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
 
 // Types
@@ -21,36 +21,38 @@ import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
 import type { VWindowSlots } from '../VWindow/VWindow'
 
+export const makeVCarouselProps = propsFactory({
+  color: String,
+  cycle: Boolean,
+  delimiterIcon: {
+    type: IconValue,
+    default: '$delimiter',
+  },
+  height: {
+    type: [Number, String],
+    default: 500,
+  },
+  hideDelimiters: Boolean,
+  hideDelimiterBackground: Boolean,
+  interval: {
+    type: [Number, String],
+    default: 6000,
+    validator: (value: string | number) => Number(value) > 0,
+  },
+  progress: [Boolean, String],
+  verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
+
+  ...makeVWindowProps({
+    continuous: true,
+    mandatory: 'force' as const,
+    showArrows: true,
+  }),
+}, 'v-carousel')
+
 export const VCarousel = genericComponent<VWindowSlots>()({
   name: 'VCarousel',
 
-  props: {
-    color: String,
-    cycle: Boolean,
-    delimiterIcon: {
-      type: IconValue,
-      default: '$delimiter',
-    },
-    height: {
-      type: [Number, String],
-      default: 500,
-    },
-    hideDelimiters: Boolean,
-    hideDelimiterBackground: Boolean,
-    interval: {
-      type: [Number, String],
-      default: 6000,
-      validator: (value: string | number) => Number(value) > 0,
-    },
-    progress: [Boolean, String],
-    verticalDelimiters: [Boolean, String] as PropType<boolean | 'left' | 'right'>,
-
-    ...makeVWindowProps({
-      continuous: true,
-      mandatory: 'force' as const,
-      showArrows: true,
-    }),
-  },
+  props: makeVCarouselProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
