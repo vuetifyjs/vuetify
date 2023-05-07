@@ -1,6 +1,8 @@
+// Components
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types

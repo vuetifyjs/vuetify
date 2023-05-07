@@ -2,8 +2,7 @@
 import './VTab.sass'
 
 // Components
-import { makeVBtnProps } from '@/components/VBtn/VBtn'
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'

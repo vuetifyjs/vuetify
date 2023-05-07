@@ -1,6 +1,9 @@
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { getCurrentInstance, getUid, propsFactory } from '@/util'
+
+// Utilities
 import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw } from 'vue'
+import { getCurrentInstance, getUid, propsFactory } from '@/util'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -12,8 +15,8 @@ import {
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { SelectStrategyFn } from './selectStrategies'
 import type { OpenStrategy } from './openStrategies'
+import type { SelectStrategyFn } from './selectStrategies'
 
 export type SelectStrategy = 'single-leaf' | 'leaf' | 'independent' | 'single-independent' | 'classic' | SelectStrategyFn
 export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
