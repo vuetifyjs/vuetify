@@ -15,8 +15,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
 import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { computed, shallowRef } from 'vue'
 
 // Types
 import type { Prop } from 'vue'
@@ -105,7 +105,7 @@ export const VRating = genericComponent<VRatingSlots>()({
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
-    const hoverIndex = ref(-1)
+    const hoverIndex = shallowRef(-1)
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1

@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
+import { computed, inject, onBeforeUnmount, provide, ref, shallowRef, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -48,7 +48,7 @@ type NestedProvide = {
 export const VNestedSymbol: InjectionKey<NestedProvide> = Symbol.for('vuetify:nested')
 
 export const emptyNested: NestedProvide = {
-  id: ref(),
+  id: shallowRef(),
   root: {
     register: () => null,
     unregister: () => null,
@@ -129,7 +129,7 @@ export const useNested = (props: NestedProps) => {
   const vm = getCurrentInstance('nested')
 
   const nested: NestedProvide = {
-    id: ref(),
+    id: shallowRef(),
     root: {
       opened,
       selected,

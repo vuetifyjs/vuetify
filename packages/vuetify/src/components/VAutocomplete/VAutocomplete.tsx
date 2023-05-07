@@ -22,7 +22,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
@@ -106,8 +106,8 @@ export const VAutocomplete = genericComponent<new <
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const isFocused = ref(false)
-    const isPristine = ref(true)
+    const isFocused = shallowRef(false)
+    const isPristine = shallowRef(true)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -117,7 +117,7 @@ export const VAutocomplete = genericComponent<new <
         _menu.value = v
       },
     })
-    const selectionIndex = ref(-1)
+    const selectionIndex = shallowRef(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -259,7 +259,7 @@ export const VAutocomplete = genericComponent<new <
       isFocused.value = true
     }
 
-    const isSelecting = ref(false)
+    const isSelecting = shallowRef(false)
 
     function select (item: InternalItem) {
       if (props.multiple) {

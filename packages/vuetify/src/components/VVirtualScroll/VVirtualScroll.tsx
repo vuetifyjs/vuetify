@@ -11,7 +11,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   convertToUnit,
@@ -53,8 +53,8 @@ export const VVirtualScroll = genericComponent<new <T>(props: {
   props: makeVVirtualScrollProps(),
 
   setup (props, { slots }) {
-    const first = ref(0)
-    const baseItemHeight = ref(props.itemHeight)
+    const first = shallowRef(0)
+    const baseItemHeight = shallowRef(props.itemHeight)
     const itemHeight = computed({
       get: () => parseInt(baseItemHeight.value ?? 0, 10),
       set (val) {
