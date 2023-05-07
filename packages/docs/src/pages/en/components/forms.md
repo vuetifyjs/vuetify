@@ -50,13 +50,7 @@ This also demonstrates the **validate-on** prop, which tells the `v-form` compon
 
 ## Validation state
 
-The validation state available in the **v-model** (and returned by the `validate()` function) has three possible values.
-
-| Value | Description |
-| - | - |
-| `null`  | No validation has occured, or form has been reset using `reset()` or `resetValidation()` |
-| `false` | Validation has failed |
-| `true`  | Validation has passed |
+By default all inputs will run their validation rules when mounted. This also means that inputs that fail their validation will be shown in the error state. If this is not desirable, you can add `'lazy'` to the previously mentioned **validate-on** prop. So if you want the component to validate when its input changes, but not show errors on mount, you can use **validate-on="input lazy"**. It is important to note that `'lazy'` does not prevent the input from validating on mount. The validation still runs, but any potential errors are hidden.
 
 ## Examples
 
