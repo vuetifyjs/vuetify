@@ -1,5 +1,5 @@
 ---
-emphasized: true
+emphasized: false
 meta:
   title: Dates
   description: Vuetify has first party date support that can easily be swapped for another date library
@@ -24,7 +24,7 @@ The following example demonstrates explicitly importing the Vuetify date adapter
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import VuetifyDateAdapter from 'vuetify/adapters'
+import { VuetifyDateAdapter } from 'vuetify/labs/date/adapters/vuetify'
 
 export default createVuetify({
   date: {
@@ -37,7 +37,7 @@ Within your application, import the **useDate** function and use it to access th
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify'
+  import { useDate } from 'vuetify/labs'
 
   export default {
     setup () {
@@ -69,7 +69,7 @@ The following example shows how to use the date composable to format a date stri
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify'
+  import { useDate } from 'vuetify/labs'
 
   export default {
     setup () {
@@ -93,10 +93,10 @@ The following example shows how to use the date composable to format a date stri
 
 ### Adapter
 
-The built in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
+The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
+import { createVuetify } from 'vuetify/labs'
 import LuxonAdapter from "@date-io/luxon"
 
 const luxon = new LuxonAdapter({ locale: "sv" });
@@ -108,11 +108,13 @@ export default createVuetify({
 })
 ```
 
-#### Create you own
+#### Create your own
 
 To create your own date adapter, implement the **DateAdapter** interface:
 
 ```ts
+import type { DateAdapter } from 'vuetify/labs'
+
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string

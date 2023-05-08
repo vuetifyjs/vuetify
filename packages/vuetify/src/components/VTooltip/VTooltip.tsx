@@ -92,7 +92,9 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           ref={ overlay }
           class={[
             'v-tooltip',
+            props.class,
           ]}
+          style={ props.style }
           id={ id.value }
           { ...overlayProps }
           v-model={ isActive.value }

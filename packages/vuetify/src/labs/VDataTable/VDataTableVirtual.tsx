@@ -107,12 +107,19 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       VDataTableRows: {
         hideNoData: toRef(props, 'hideNoData'),
         noDataText: toRef(props, 'noDataText'),
+        loading: toRef(props, 'loading'),
+        loadingText: toRef(props, 'loadingText'),
       },
     })
 
     useRender(() => (
       <VTable
-        class="v-data-table"
+        class={[
+          'v-data-table',
+          {
+            'v-data-table--loading': props.loading,
+          },
+        ]}
         style={{
           '--v-table-row-height': convertToUnit(itemHeight.value),
         }}
@@ -136,6 +143,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                 <thead>
                   <VDataTableHeaders
                     sticky={ props.fixedHeader }
+                    loading={ props.loading }
                     multiSort={ props.multiSort }
                     v-slots={ slots }
                   />

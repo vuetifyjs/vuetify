@@ -1,4 +1,5 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
@@ -31,6 +32,7 @@ export const VLazy = genericComponent()({
       }),
     },
 
+    ...makeComponentProps(),
     ...makeDimensionProps(),
     ...makeTagProps(),
     ...makeTransitionProps({ transition: 'fade-transition' }),
@@ -53,7 +55,10 @@ export const VLazy = genericComponent()({
 
     useRender(() => (
       <props.tag
-        class="v-lazy"
+        class={[
+          'v-lazy',
+          props.class,
+        ]}
         v-intersect={[
           {
             handler: onIntersect,
@@ -62,7 +67,10 @@ export const VLazy = genericComponent()({
           null,
           isActive.value ? [] : ['once'],
         ]}
-        style={ dimensionStyles.value }
+        style={[
+          dimensionStyles.value,
+          props.style,
+        ]}
       >
         { isActive.value && (
           <MaybeTransition transition={ props.transition } appear>

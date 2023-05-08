@@ -18,6 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -33,10 +34,9 @@ import { computed } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VCardSlots = MakeSlots<{
+export type VCardSlots = {
   default: []
   actions: []
   title: []
@@ -46,7 +46,7 @@ export type VCardSlots = MakeSlots<{
   image: []
   prepend: []
   append: []
-}>
+}
 
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
@@ -74,8 +74,8 @@ export const VCard = genericComponent<VCardSlots>()({
     text: String,
     title: String,
 
-    ...makeThemeProps(),
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeDimensionProps(),
     ...makeElevationProps(),
@@ -85,6 +85,7 @@ export const VCard = genericComponent<VCardSlots>()({
     ...makeRoundedProps(),
     ...makeRouterProps(),
     ...makeTagProps(),
+    ...makeThemeProps(),
     ...makeVariantProps({ variant: 'elevated' } as const),
   },
 
@@ -138,11 +139,13 @@ export const VCard = genericComponent<VCardSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }

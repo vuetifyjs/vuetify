@@ -6,6 +6,7 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VIcon } from '@/components'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -28,7 +29,7 @@ import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 // Types
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -64,24 +65,20 @@ export const VAutocomplete = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->() => {
-  $props: {
-    items?: readonly T[]
-    returnObject?: ReturnObject
-    multiple?: Multiple
-    modelValue?: V
-    'onUpdate:modelValue'?: (val: V) => void
-  } & SlotsToProps<
-    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      selection: [{ item: InternalItem<T>, index: number }]
-      'prepend-item': []
-      'append-item': []
-      'no-data': []
-    }>
-  >
-}>()({
+>(props: {
+  items?: readonly T[]
+  returnObject?: ReturnObject
+  multiple?: Multiple
+  modelValue?: V
+  'onUpdate:modelValue'?: (val: V) => void
+}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
+  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<T>, index: number }]
+  'prepend-item': []
+  'append-item': []
+  'no-data': []
+}>>()({
   name: 'VAutocomplete',
 
   props: {
@@ -338,7 +335,9 @@ export const VAutocomplete = genericComponent<new <
               [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-autocomplete--selection-slot': !!slots.selection,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
@@ -388,13 +387,21 @@ export const VAutocomplete = genericComponent<new <
                           onClick={ () => select(item) }
                         >
                           {{
-                            prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                              <VCheckboxBtn
-                                modelValue={ isSelected }
-                                ripple={ false }
-                                tabindex="-1"
-                              />
-                            ) : undefined,
+                            prepend: ({ isSelected }) => (
+                              <>
+                                { props.multiple && !props.hideSelected ? (
+                                  <VCheckboxBtn
+                                    modelValue={ isSelected }
+                                    ripple={ false }
+                                    tabindex="-1"
+                                  />
+                                ) : undefined }
+
+                                { item.props.prependIcon && (
+                                  <VIcon icon={ item.props.prependIcon } />
+                                )}
+                              </>
+                            ),
                             title: () => {
                               return isPristine.value
                                 ? item.title
@@ -419,6 +426,10 @@ export const VAutocomplete = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onMousedown (e: MouseEvent) {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
                   }

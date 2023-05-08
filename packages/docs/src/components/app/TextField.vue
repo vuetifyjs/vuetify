@@ -1,6 +1,7 @@
 <template>
   <v-text-field
     :placeholder="t('search.label')"
+    base-color="disabled"
     hide-details
     persistent-placeholder
     prepend-inner-icon="mdi-magnify"

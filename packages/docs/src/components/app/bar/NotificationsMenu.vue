@@ -6,10 +6,7 @@
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn
-        path="notifications"
-        v-bind="props"
-      >
+      <app-tooltip-btn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
@@ -94,7 +91,10 @@
               <div class="text-medium-emphasis text-caption">
                 {{ notification.metadata.text }}
 
-                <app-link :href="notification.metadata.action">
+                <app-link
+                  :href="notification.metadata.action"
+                  @click="onClick(notification)"
+                >
                   {{ notification.metadata.action_text }}
                 </app-link>
               </div>
@@ -171,6 +171,10 @@
 
   const width = computed(() => mobile.value ? 420 : 520)
 
+  function onClick (notification: Notification) {
+    toggle(notification)
+    menu.value = false
+  }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
       ? user.notifications.read.filter(n => n !== slug)

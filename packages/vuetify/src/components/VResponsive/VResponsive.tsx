@@ -2,6 +2,7 @@
 import './VResponsive.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 
 // Utilities
@@ -30,6 +31,7 @@ export const makeVResponsiveProps = propsFactory({
   contentClass: String,
   inline: Boolean,
 
+    ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'v-responsive')
 
@@ -47,8 +49,12 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
         class={[
           'v-responsive',
           { 'v-responsive--inline': props.inline },
+          props.class,
         ]}
-        style={ dimensionStyles.value }
+        style={[
+          dimensionStyles.value,
+          props.style,
+        ]}
       >
         <div class="v-responsive__sizer" style={ aspectStyles.value } />
 

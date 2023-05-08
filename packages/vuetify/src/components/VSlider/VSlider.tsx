@@ -17,13 +17,12 @@ import { computed, ref } from 'vue'
 import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VSliderSlots = VInputSlots & MakeSlots<{
+export type VSliderSlots = VInputSlots & {
   'tick-label': []
   'thumb-label': []
-}>
+}
 
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
@@ -105,7 +104,9 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...inputProps }
           focused={ isFocused.value }
         >

@@ -2,6 +2,7 @@
 import './VLabel.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
@@ -14,6 +15,7 @@ export const VLabel = genericComponent()({
     text: String,
     clickable: Boolean,
 
+    ...makeComponentProps(),
     ...makeThemeProps(),
   },
 
@@ -25,7 +27,9 @@ export const VLabel = genericComponent()({
           {
             'v-label--clickable': props.clickable,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
         { props.text }
 

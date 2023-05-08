@@ -36,7 +36,6 @@
       "aliasing",
       "application-layout",
       "blueprints",
-      "dates",
       "display-and-platform",
       "global-configuration",
       "icon-fonts",
@@ -204,6 +203,10 @@
           "virtual-tables",
           "server-side-tables"
         ]
+      },
+      {
+        "title": "dates",
+        "subfolder": "features"
       },
       {
         "title": "infinite-scroller",

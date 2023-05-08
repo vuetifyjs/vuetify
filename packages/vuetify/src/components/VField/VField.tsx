@@ -9,6 +9,7 @@ import { VFieldLabel } from './VFieldLabel'
 // Composables
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -32,7 +33,7 @@ import {
 
 // Types
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { VInputSlot } from '@/components/VInput/VInput'
 
@@ -61,6 +62,7 @@ export const makeVFieldProps = propsFactory({
   },
   active: Boolean,
   color: String,
+  baseColor: String,
   dirty: Boolean,
   disabled: Boolean,
   error: Boolean,
@@ -80,26 +82,25 @@ export const makeVFieldProps = propsFactory({
   'onClick:appendInner': EventProp<[MouseEvent]>(),
   'onClick:prependInner': EventProp<[MouseEvent]>(),
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeLoaderProps(),
   ...makeRoundedProps(),
+  ...makeThemeProps(),
 }, 'v-field')
 
-export type VFieldSlots = MakeSlots<{
+export type VFieldSlots = {
   clear: []
   'prepend-inner': [DefaultInputSlot & VInputSlot]
   'append-inner': [DefaultInputSlot & VInputSlot]
   label: [DefaultInputSlot & VInputSlot]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
-}>
+}
 
-export const VField = genericComponent<new <T>() => {
-  $props: {
-    modelValue?: T
-    'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<VFieldSlots>
-}>()({
+export const VField = genericComponent<new <T>(props: {
+  modelValue?: T
+  'onUpdate:modelValue'?: (val: T) => any
+}) => GenericProps<typeof props, VFieldSlots>>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -136,12 +137,9 @@ export const VField = genericComponent<new <T>() => {
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
-      return (
-        isActive.value &&
-        isFocused.value &&
-        !props.error &&
-        !props.disabled
-      ) ? props.color : undefined
+      return props.error || props.disabled ? undefined
+        : isActive.value && isFocused.value ? props.color
+        : props.baseColor
     }))
 
     watch(isActive, val => {
@@ -236,10 +234,12 @@ export const VField = genericComponent<new <T>() => {
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
             textColorStyles.value,
+            props.style,
           ]}
           onClick={ onClick }
           { ...attrs }
@@ -362,6 +362,6 @@ export type VField = InstanceType<typeof VField>
 
 // TODO: this is kinda slow, might be better to implicitly inherit props instead
 export function filterFieldProps (attrs: Record<string, unknown>) {
-  const keys = Object.keys(VField.props).filter(k => !isOn(k))
+  const keys = Object.keys(VField.props).filter(k => !isOn(k) && k !== 'class' && k !== 'style')
   return pick(attrs, keys)
 }

@@ -7,13 +7,13 @@
     "hideSliders": "Hides sliders",
     "hideInputs": "Hides inputs",
     "hideModeSwitch": "Hides mode switch",
-    "mode": "Sets mode of inputs. Available modes are 'rgba', 'hsla', and 'hexa'. Can be synced with the `.sync` modifier.",
+    "mode": "The current selected input type. Syncable with `v-model:mode`",
+    "modes": "Sets available input types",
     "showSwatches": "Displays color swatches",
-    "swatches": "Sets the available color swatches to select from - This prop only accepts rgba hex strings",
+    "swatches": "Sets the available color swatches to select from. 2D array of rows and columns, accepts any color format the picker does",
     "swatchesMaxHeight": "Sets the maximum height of the swatches section",
     "value": "Current color. This can be either a string representing a hex color, or an object representing a RGBA, HSLA, or HSVA value",
     "width": "Sets the width of the color picker",
-    "modes": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-color-picker.json))"
   },
   "events": {
     "input": "Selected color. Depending on what you passed to the `value` prop this is either a string or an object",

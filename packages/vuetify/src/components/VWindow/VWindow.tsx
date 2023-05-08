@@ -8,6 +8,7 @@ import { VBtn } from '@/components/VBtn'
 import { Touch } from '@/directives/touch'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
@@ -83,6 +84,7 @@ export const makeVWindowProps = propsFactory({
     default: 'force' as const,
   },
 
+  ...makeComponentProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
 }, 'v-window')
@@ -222,7 +224,9 @@ export const VWindow = genericComponent<VWindowSlots>()({
             'v-window--show-arrows-on-hover': props.showArrows === 'hover',
           },
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
         v-touch={ touchOptions.value }
       >
         <div

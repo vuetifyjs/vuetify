@@ -5,6 +5,7 @@ import './VCounter.sass'
 import { VSlideYTransition } from '@/components/transitions'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -24,6 +25,7 @@ export const VCounter = genericComponent()({
       default: 0,
     },
 
+    ...makeComponentProps(),
     ...makeTransitionProps({
       transition: { component: VSlideYTransition },
     }),
@@ -38,7 +40,11 @@ export const VCounter = genericComponent()({
       <MaybeTransition transition={ props.transition }>
         <div
           v-show={ props.active }
-          class="v-counter"
+          class={[
+            'v-counter',
+            props.class,
+          ]}
+          style={ props.style }
         >
           { slots.default
             ? slots.default({

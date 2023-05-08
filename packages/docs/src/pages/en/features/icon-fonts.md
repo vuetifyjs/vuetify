@@ -170,14 +170,8 @@ $ npm install @mdi/js -D
   <v-icon :icon="mdiAccount" />
 </template>
 
-<script>
+<script setup>
   import { mdiAccount } from '@mdi/js'
-
-  export default {
-    data: () => ({
-      mdiAccount
-    }),
-  }
 </script>
 ```
 

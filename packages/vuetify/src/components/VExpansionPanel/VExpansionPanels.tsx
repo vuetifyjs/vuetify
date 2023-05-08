@@ -2,6 +2,7 @@
 import './VExpansionPanel.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -33,6 +34,7 @@ export const VExpansionPanels = genericComponent()({
     },
     readonly: Boolean,
 
+    ...makeComponentProps(),
     ...makeGroupProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -64,7 +66,9 @@ export const VExpansionPanels = genericComponent()({
           'v-expansion-panels',
           themeClasses.value,
           variantClass.value,
+          props.class,
         ]}
+        style={ props.style }
         v-slots={ slots }
       />
     ))

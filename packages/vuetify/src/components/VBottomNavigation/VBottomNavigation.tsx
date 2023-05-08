@@ -3,6 +3,7 @@ import './VBottomNavigation.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupProps, useGroup } from '@/composables/group'
@@ -42,6 +43,7 @@ export const VBottomNavigation = genericComponent()({
     },
 
     ...makeBorderProps(),
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeElevationProps(),
     ...makeRoundedProps(),
@@ -109,6 +111,7 @@ export const VBottomNavigation = genericComponent()({
             densityClasses.value,
             elevationClasses.value,
             roundedClasses.value,
+            props.class,
           ]}
           style={[
             backgroundColorStyles.value,
@@ -118,6 +121,7 @@ export const VBottomNavigation = genericComponent()({
               transform: `translateY(${convertToUnit(!isActive.value ? 100 : 0, '%')})`,
             },
             ssrBootStyles.value,
+            props.style,
           ]}
         >
           { slots.default && (

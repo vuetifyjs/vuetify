@@ -27,13 +27,12 @@ import {
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export type VFileInputSlots = VInputSlots & VFieldSlots & MakeSlots<{
+export type VFileInputSlots = VInputSlots & VFieldSlots & {
   counter: []
-}>
+}
 
 export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
@@ -107,6 +106,10 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
     const inputRef = ref<HTMLInputElement>()
+    const isActive = computed(() => (
+      isFocused.value ||
+      props.active
+    ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -156,7 +159,11 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
         <VInput
           ref={ vInputRef }
           v-model={ model.value }
-          class="v-file-input"
+          class={[
+            'v-file-input',
+            props.class,
+          ]}
+          style={ props.style }
           onClick:prepend={ onClickPrepend }
           { ...rootAttrs }
           { ...inputProps }
@@ -181,7 +188,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
                 onClick:appendInner={ props['onClick:appendInner'] }
                 { ...fieldProps }
                 id={ id.value }
-                active={ isDirty.value || isFocused.value }
+                active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

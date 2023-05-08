@@ -4,6 +4,9 @@ import './VColorPickerEdit.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
 import { computed } from 'vue'
 import { defineComponent, useRender } from '@/util'
@@ -31,20 +34,22 @@ export const VColorPickerEdit = defineComponent({
     color: Object as PropType<HSV | null>,
     disabled: Boolean,
     mode: {
-      type: String,
+      type: String as PropType<keyof typeof modes>,
       default: 'rgba',
       validator: (v: string) => Object.keys(modes).includes(v),
     },
     modes: {
-      type: Array as PropType<string[]>,
+      type: Array as PropType<(keyof typeof modes)[]>,
       default: () => Object.keys(modes),
       validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
     },
+
+    ...makeComponentProps(),
   },
 
   emits: {
     'update:color': (color: HSV) => true,
-    'update:mode': (mode: string) => true,
+    'update:mode': (mode: keyof typeof modes) => true,
   },
 
   setup (props, { emit }) {
@@ -78,7 +83,11 @@ export const VColorPickerEdit = defineComponent({
 
     useRender(() => (
       <div
-        class="v-color-picker-edit"
+        class={[
+          'v-color-picker-edit',
+          props.class,
+        ]}
+        style={ props.style }
       >
         { inputs.value?.map(props => (
           <VColorPickerInput { ...props } />

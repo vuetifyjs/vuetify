@@ -2,6 +2,7 @@
 import './VColorPickerCanvas.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
@@ -32,6 +33,8 @@ export const VColorPickerCanvas = defineComponent({
       type: [Number, String],
       default: 300,
     },
+
+    ...makeComponentProps(),
   },
 
   emits: {
@@ -179,7 +182,11 @@ export const VColorPickerCanvas = defineComponent({
     useRender(() => (
       <div
         ref={ resizeRef }
-        class="v-color-picker-canvas"
+        class={[
+          'v-color-picker-canvas',
+          props.class,
+        ]}
+        style={ props.style }
         onClick={ handleClick }
         onMousedown={ handleMouseDown }
         onTouchstart={ handleMouseDown }

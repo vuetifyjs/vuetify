@@ -7,6 +7,7 @@ import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VRes
 import intersect from '@/directives/intersect'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -72,6 +73,7 @@ export const VImg = genericComponent<VImgSlots>()({
     srcset: String,
 
     ...makeVResponsiveProps(),
+    ...makeComponentProps(),
     ...makeTransitionProps(),
   },
 
@@ -293,7 +295,9 @@ export const VImg = genericComponent<VImgSlots>()({
           class={[
             'v-img',
             { 'v-img--booting': !isBooted.value },
+          props.class,
           ]}
+          style={ props.style }
           { ...responsiveProps }
           aspectRatio={ aspectRatio.value }
           aria-label={ props.alt }

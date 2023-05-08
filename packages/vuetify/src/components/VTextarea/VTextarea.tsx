@@ -99,8 +99,9 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
     const controlHeight = ref('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
+      props.persistentPlaceholder ||
       isFocused.value ||
-      props.persistentPlaceholder
+      props.active
     ))
 
     function onFocus () {
@@ -208,7 +209,9 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
               'v-textarea--no-resize': props.noResize || props.autoGrow,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }

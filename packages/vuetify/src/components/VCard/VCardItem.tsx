@@ -6,21 +6,19 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 
 // Utility
 import { genericComponent, useRender } from '@/util'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VCardItemSlots = MakeSlots<{
+export type VCardItemSlots = {
   default: []
   prepend: []
   append: []
   title: []
   subtitle: []
-}>
+}
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',
@@ -33,6 +31,7 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
     subtitle: String,
     title: String,
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
   },
 
@@ -46,7 +45,13 @@ export const VCardItem = genericComponent<VCardItemSlots>()({
       const hasSubtitle = !!(props.subtitle || slots.subtitle)
 
       return (
-        <div class="v-card-item">
+        <div
+          class={[
+            'v-card-item',
+            props.class,
+          ]}
+          style={ props.style }
+        >
           { hasPrepend && (
             <div key="prepend" class="v-card-item__prepend">
               { !slots.prepend ? (

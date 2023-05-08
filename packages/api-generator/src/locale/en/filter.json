@@ -1,9 +1,9 @@
 {
   "props": {
-    "filterMode": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/filter.json))",
-    "noFilter": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/filter.json))",
-    "customFilter": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/filter.json))",
-    "customKeyFilter": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/filter.json))",
-    "filterKeys": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/filter.json))"
+    "filterMode": "Apply a specific filter when matching items. **some** is the default, which will return true if any key matches the search term. **every** will return true only if every key matches the search term. The **union** mode will return true if every key matches the search term. The **intersection** mode will return true if any key matches the search term.",
+    "noFilter": "Disables all item filtering.",
+    "customFilter": "Function used to filter items.",
+    "customKeyFilter": "Function used on specific keys within the item object.",
+    "filterKeys": "Array of specific keys to filter on the item."
   }
 }

@@ -9,6 +9,8 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VIcon } from '@/components/VIcon'
+
 import { VTextField } from '@/components/VTextField'
 
 // Composables
@@ -28,7 +30,7 @@ import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
 export const makeSelectProps = propsFactory({
@@ -75,24 +77,20 @@ export const VSelect = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->() => {
-  $props: {
-    items?: readonly T[]
-    returnObject?: ReturnObject
-    multiple?: Multiple
-    modelValue?: V
-    'onUpdate:modelValue'?: (val: V) => void
-  } & SlotsToProps<
-    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      selection: [{ item: InternalItem<T>, index: number }]
-      'prepend-item': []
-      'append-item': []
-      'no-data': []
-    }>
-  >
-}>()({
+>(props: {
+  items?: readonly T[]
+  returnObject?: ReturnObject
+  multiple?: Multiple
+  modelValue?: V
+  'onUpdate:modelValue'?: (val: V) => void
+}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
+  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<T>, index: number }]
+  'prepend-item': []
+  'append-item': []
+  'no-data': []
+}>>()({
   name: 'VSelect',
 
   props: {
@@ -273,7 +271,9 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly
           placeholder={ placeholder }
@@ -329,13 +329,21 @@ export const VSelect = genericComponent<new <
                             onClick={ () => select(item) }
                           >
                             {{
-                              prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                                <VCheckboxBtn
-                                  modelValue={ isSelected }
-                                  ripple={ false }
-                                  tabindex="-1"
-                                />
-                              ) : undefined,
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
+
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
                             }}
                           </VListItem>
                         )
@@ -356,6 +364,10 @@ export const VSelect = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onMousedown (e: MouseEvent) {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
                   }
