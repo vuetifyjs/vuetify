@@ -124,7 +124,7 @@ export const VField = genericComponent<new <T>(props: {
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
 
-    let textAreaEle: any
+    let controlEl: Element | null
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -136,7 +136,7 @@ export const VField = genericComponent<new <T>(props: {
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = (el: Element | null) => {
-      textAreaEle = el
+      controlEl = el
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
@@ -203,9 +203,9 @@ export const VField = genericComponent<new <T>(props: {
     }
 
     onMounted(() => {
-      if (textAreaEle) {
-        const { lineHeight, paddingTop, paddingBottom } = getComputedStyle(textAreaEle)
-        const contentHeight = textAreaEle.scrollHeight - parseInt(paddingTop, 10) - parseInt(paddingBottom, 10)
+      if (controlEl) {
+        const { lineHeight, paddingTop, paddingBottom } = getComputedStyle(controlEl)
+        const contentHeight = controlEl.scrollHeight - parseInt(paddingTop, 10) - parseInt(paddingBottom, 10)
         singleLineInput.value = contentHeight / parseInt(lineHeight, 10) < 2
       }
     })
