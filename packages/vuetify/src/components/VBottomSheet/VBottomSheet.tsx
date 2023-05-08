@@ -24,12 +24,21 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
 
   props: makeVBottomSheetProps(),
 
-  setup (props, { slots }) {
+  emits: {
+    'update:modelValue': (value: boolean) => true,
+  },
+
+  setup (props, { emit, slots }) {
+    function onUpdate (value: boolean) {
+      emit('update:modelValue', value)
+    }
+
     useRender(() => {
       const [dialogProps] = VDialog.filterProps(props)
 
       return (
         <VDialog
+          onUpdate:modelValue={ onUpdate }
           class={[
             'v-bottom-sheet',
             {
