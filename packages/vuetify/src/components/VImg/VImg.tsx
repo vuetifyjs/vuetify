@@ -295,7 +295,7 @@ export const VImg = genericComponent<VImgSlots>()({
           class={[
             'v-img',
             { 'v-img--booting': !isBooted.value },
-          props.class,
+            props.class,
           ]}
           style={ props.style }
           { ...responsiveProps }

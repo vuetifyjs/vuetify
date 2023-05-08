@@ -31,7 +31,7 @@ export const makeVResponsiveProps = propsFactory({
   contentClass: String,
   inline: Boolean,
 
-    ...makeComponentProps(),
+  ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'v-responsive')
 
