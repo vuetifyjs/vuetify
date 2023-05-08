@@ -204,11 +204,9 @@ export const VField = genericComponent<new <T>(props: {
 
     onMounted(() => {
       if (textAreaEle) {
-        const { lineHeight } = getComputedStyle(textAreaEle)
-        const lines = Math.floor(textAreaEle.scrollHeight / parseInt(lineHeight, 10))
-        if (lines === 1) {
-          singleLineInput.value = true
-        }
+        const { lineHeight, paddingTop, paddingBottom } = getComputedStyle(textAreaEle)
+        const contentHeight = textAreaEle.scrollHeight - parseInt(paddingTop, 10) - parseInt(paddingBottom, 10)
+        singleLineInput.value = contentHeight / parseInt(lineHeight, 10) < 2
       }
     })
 
