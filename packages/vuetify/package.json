@@ -54,26 +54,62 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
-      "default": "./lib/framework.mjs"
+      "default": "./lib/framework.mjs",
+      "types": "./lib/index.d.ts"
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
       "default": "./lib/styles/main.css"
     },
     "./styles/*": "./lib/styles/*",
-    "./framework": "./lib/framework.mjs",
-    "./blueprints": "./lib/blueprints/index.mjs",
-    "./blueprints/*": "./lib/blueprints/*.mjs",
-    "./components": "./lib/components/index.mjs",
-    "./components/*": "./lib/components/*/index.mjs",
-    "./directives": "./lib/directives/index.mjs",
-    "./directives/*": "./lib/directives/*/index.mjs",
-    "./locale": "./lib/locale/index.mjs",
-    "./locale/adapters/*": "./lib/locale/adapters/*.mjs",
-    "./iconsets/*": "./lib/iconsets/*.mjs",
-    "./labs/components": "./lib/labs/components.mjs",
-    "./labs/date/adapters/*": "./lib/labs/date/adapters/*.mjs",
-    "./labs/*": "./lib/labs/*/index.mjs",
+    "./framework": {
+      "types": "./lib/index.d.ts",
+      "default": "./lib/framework.mjs"
+    },
+    "./blueprints": {
+      "types": "./lib/blueprints/index.d.ts",
+      "default": "./lib/blueprints/index.mjs"
+    },
+    "./blueprints/*": {
+      "types": "./lib/blueprints/*.d.ts",
+      "default": "./lib/blueprints/*.mjs"
+    },
+    "./components": {
+      "types": "./lib/components/index.d.ts",
+      "default": "./lib/components/index.mjs"
+    },
+    "./components/*": {
+      "types": "./lib/components/*/index.d.ts",
+      "default": "./lib/components/*/index.mjs"
+    },
+    "./directives": {
+      "types": "./lib/directives/index.d.ts",
+      "default": "./lib/directives/index.mjs"
+    },
+    "./directives/*": {
+      "types": "./lib/directives/*/*.d.ts",
+      "default": "./lib/directives/*/*.mjs"
+      },
+    "./locale": {
+      "types": "./lib/locale/index.d.ts",
+      "default": "./lib/locale/index.mjs"
+    },
+    "./locale/adapters/*": {
+      "types": "./lib/locale/adapters/*.d.ts",
+      "default": "./lib/locale/adapters/*.mjs"
+    },
+    "./iconsets/*": {
+      "types": "./lib/iconsets/*.d.ts",
+      "default": "./lib/iconsets/*.mjs"
+    },
+    "./labs/components": {
+      "types": "./lib/labs/components.d.ts",
+      "default": "./lib/labs/components.mjs"
+    },
+    "./labs/*": {
+      "types": "./lib/labs/*.d.ts",
+      "default": "./lib/labs/*.mjs"
+    },
     "./*": "./*"
   },
   "typesVersions": {
