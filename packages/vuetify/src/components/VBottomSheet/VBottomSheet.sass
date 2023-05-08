@@ -21,10 +21,14 @@
     margin-inline-start: 0
     margin-inline-end: 0
     margin-bottom: 0
-    transition-duration: .3s
+    transition-duration: $bottom-sheet-transition-duration
     width: 100%
     max-width: 100%
     overflow: visible
+
+    > .v-card,,
+    > .v-sheet
+      border-radius: $bottom-sheet-border-radius
 
   &.v-bottom-sheet--inset
     max-width: none
