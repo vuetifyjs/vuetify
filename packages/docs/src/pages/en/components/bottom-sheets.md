@@ -1,5 +1,6 @@
 ---
 emphasized: true
+nav: Bottom sheets
 meta:
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
@@ -13,6 +14,12 @@ related:
 # Bottom sheets
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.
+
+<alert type="success">
+
+This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
+</alert>
 
 ## Usage
 
