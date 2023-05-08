@@ -1,6 +1,6 @@
 import { VApp } from '@/components/VApp'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
-import { FunctionalComponent } from 'vue'
+import type { FunctionalComponent } from 'vue'
 
 export const Application: FunctionalComponent<{ rtl?: boolean }> = (props, { slots, attrs }) => {
   return (

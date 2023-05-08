@@ -34,6 +34,7 @@ export const rootTypes = {
   'date-picker': 'list-item, heading, divider, date-picker-options, date-picker-days, actions',
   'date-picker-options': 'text, avatar@2',
   'date-picker-days': 'avatar@28',
+  divider: 'divider',
   heading: 'heading',
   image: 'image',
   'list-item': 'text',

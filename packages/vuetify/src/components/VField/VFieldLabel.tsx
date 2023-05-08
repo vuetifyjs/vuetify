@@ -1,6 +1,9 @@
 // Components
 import { VLabel } from '@/components/VLabel'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
 import { genericComponent, useRender } from '@/util'
 
@@ -9,6 +12,8 @@ export const VFieldLabel = genericComponent()({
 
   props: {
     floating: Boolean,
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -17,7 +22,9 @@ export const VFieldLabel = genericComponent()({
         class={[
           'v-field-label',
           { 'v-field-label--floating': props.floating },
+          props.class,
         ]}
+        style={ props.style }
         aria-hidden={ props.floating || undefined }
         v-slots={ slots }
       />

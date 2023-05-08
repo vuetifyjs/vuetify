@@ -15,7 +15,6 @@
     "closable": "Adds remove button and then a chip can be closed"
   },
   "events": {
-    "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used",
-    "click:close": "Emitted when close icon is clicked"
+    "click": "Emitted when component is clicked, toggles chip if contained in a chip group - Will trigger component to ripple when clicked unless the `.native` modifier is used"
   }
 }

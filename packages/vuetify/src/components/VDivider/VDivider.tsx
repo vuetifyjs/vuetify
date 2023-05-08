@@ -2,6 +2,7 @@
 import './VDivider.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useTextColor } from '@/composables/color'
 
@@ -22,6 +23,7 @@ export const VDivider = genericComponent()({
     thickness: [Number, String],
     vertical: Boolean,
 
+    ...makeComponentProps(),
     ...makeThemeProps(),
   },
 
@@ -52,10 +54,12 @@ export const VDivider = genericComponent()({
           },
           themeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
           dividerStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         aria-orientation={
           !attrs.role || attrs.role === 'separator'

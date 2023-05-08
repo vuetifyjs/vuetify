@@ -3,6 +3,7 @@
 import { VForm } from '@/components/VForm'
 import { VCombobox } from '../VCombobox'
 import { ref } from 'vue'
+import { keyValues } from '@/util'
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -398,5 +399,100 @@ describe('VCombobox', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17120
+  it('should display 0 when selected', () => {
+    const items = [0, 1, 2, 3, 4]
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VCombobox
+        items={ items }
+        v-model={ selectedItems.value }
+      />
+    ))
+      .get('.v-field input')
+      .click()
+
+    cy.get('.v-list-item').eq(0)
+      .click({ waitForAnimations: false })
+
+    cy.get('.v-combobox input')
+      .should('have.value', '0')
+  })
+
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VCombobox placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-combobox input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-combobox input')
+      .should('not.be.visible')
+      .get('.v-combobox input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-combobox input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .should('be.visible')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-combobox input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-combobox input')
+      .should('not.have.attr', 'placeholder')
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VCombobox
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-combobox')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
+  })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VCombobox
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Select"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .click()
+      .should('have.class', 'v-combobox--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-combobox--active-menu')
   })
 })

@@ -1,5 +1,3 @@
-import * as components from './components'
+export * as components from './components'
 
-export {
-  components,
-}
+export * from './date'

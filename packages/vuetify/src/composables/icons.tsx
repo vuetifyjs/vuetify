@@ -8,8 +8,11 @@ import { defineComponent, genericComponent, mergeDeep, propsFactory } from '@/ut
 // Types
 import type { InjectionKey, JSXComponent, PropType, Ref } from 'vue'
 
-export type IconValue = string | JSXComponent
-export const IconValue = [String, Function, Object] as PropType<IconValue>
+export type IconValue =
+  | string
+  | (string | [path: string, opacity: number])[]
+  | JSXComponent
+export const IconValue = [String, Function, Object, Array] as PropType<IconValue>
 
 export interface IconAliases {
   [name: string]: IconValue
@@ -92,9 +95,10 @@ export const VComponentIcon = genericComponent()({
 
   setup (props, { slots }) {
     return () => {
+      const Icon = props.icon as JSXComponent
       return (
         <props.tag>
-          { props.icon ? <props.icon /> : slots.default?.() }
+          { props.icon ? <Icon /> : slots.default?.() }
         </props.tag>
       )
     }
@@ -120,7 +124,14 @@ export const VSvgIcon = defineComponent({
             role="img"
             aria-hidden="true"
           >
-            <path d={ props.icon as string }></path>
+            { Array.isArray(props.icon)
+              ? props.icon.map(path => (
+                Array.isArray(path)
+                  ? <path d={ path[0] as string } fill-opacity={ path[1] }></path>
+                  : <path d={ path as string }></path>
+              ))
+              : <path d={ props.icon as string }></path>
+            }
           </svg>
         </props.tag>
       )
@@ -198,7 +209,12 @@ export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) =
 
     if (!icon) throw new Error(`Could not find aliased icon "${iconAlias}"`)
 
-    if (typeof icon !== 'string') {
+    if (Array.isArray(icon)) {
+      return {
+        component: VSvgIcon,
+        icon,
+      }
+    } else if (typeof icon !== 'string') {
       return {
         component: VComponentIcon,
         icon,

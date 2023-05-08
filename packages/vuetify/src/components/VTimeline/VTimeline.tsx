@@ -2,6 +2,7 @@
 import './VTimeline.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -56,6 +57,7 @@ export const VTimeline = genericComponent()({
       validator: (v: any) => ['start', 'end', 'both'].includes(v),
     } as Prop<TimelineTruncateLine>,
 
+    ...makeComponentProps(),
     ...makeDensityProps(),
     ...makeTagProps(),
     ...makeThemeProps(),
@@ -109,10 +111,14 @@ export const VTimeline = genericComponent()({
           themeClasses.value,
           densityClasses.value,
           sideClasses.value,
+          props.class,
         ]}
-        style={{
-          '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
-        }}
+        style={[
+          {
+            '--v-timeline-line-thickness': convertToUnit(props.lineThickness),
+          },
+          props.style,
+        ]}
         v-slots={ slots }
       />
     ))

@@ -2,6 +2,7 @@
 
 import { Application } from '../../../../cypress/templates'
 import { VDataTable } from '..'
+import { ref } from 'vue'
 
 const DESSERT_HEADERS = [
   { title: 'Dessert (100g serving)', key: 'name' },
@@ -152,9 +153,10 @@ describe('VDataTable', () => {
   })
 
   it('should not emit click:row event when clicking select or expand', () => {
+    const onClick = cy.stub()
     cy.mount(() => (
       <Application>
-        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
+        <VDataTable showSelect showExpand items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } onClick:row={ onClick } />
       </Application>
     ))
 
@@ -167,15 +169,43 @@ describe('VDataTable', () => {
       .eq(3)
       .find('.v-btn')
       .click()
-
-    cy.emitted(VDataTable, 'click:row')
-      .should('not.exist')
+      .then(() => {
+        expect(onClick).not.to.be.called
+      })
 
     cy.get('tbody tr')
       .eq(1)
       .click()
+      .then(() => {
+        expect(onClick).to.be.calledOnce
+      })
+  })
 
-    cy.emitted(VDataTable, 'click:row')
-      .should('have.length', 1)
+  it('should show no-data-text if there are no items', () => {
+    cy.mount(() => (
+      <Application>
+        <VDataTable items={[]} headers={ DESSERT_HEADERS } />
+      </Application>
+    ))
+
+    cy.get('.v-data-table tbody tr').should('have.text', 'No data available')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/17226
+  it('should change page if we are trying to display a page beyond current page count', () => {
+    const items = ref(DESSERT_ITEMS.slice())
+    cy.mount(() => (
+      <Application>
+        <VDataTable items={ items.value } headers={ DESSERT_HEADERS } itemsPerPage={ 5 }></VDataTable>
+      </Application>
+    ))
+
+    cy.get('[aria-label="Next page"]')
+      .click()
+      .then(() => {
+        items.value = DESSERT_ITEMS.slice(0, 5)
+      })
+      .emitted(VDataTable, 'update:page')
+      .should('deep.equal', [[2], [1]])
   })
 })

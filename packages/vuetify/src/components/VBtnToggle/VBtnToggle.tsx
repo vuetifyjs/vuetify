@@ -43,8 +43,12 @@ export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
 
       return (
         <VBtnGroup
-          class="v-btn-toggle"
+          class={[
+            'v-btn-toggle',
+            props.class,
+          ]}
           { ...btnGroupProps }
+          style={ props.style }
         >
           { slots.default?.({
             isSelected,

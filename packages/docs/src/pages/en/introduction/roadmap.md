@@ -1,4 +1,5 @@
 ---
+emphasized: true
 meta:
   title: The Vuetify roadmap
   description: The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.
@@ -26,11 +27,16 @@ The following releases are currently under development:
 
 </alert>
 
-### v3.2 (Orion)
+### v3.3 (Icarus)
 
-- **Target Release:** Q2 2023
-- **Overview:** New and ported components from v2. Exposing defaults system for public use, allowing you to hook into the global default configuration with your components.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/53)
+- **Target Release:** Q3 2023
+- **Overview:** This release will be smaller in scope with a primary focus on expanding our testing coverage and will include 4 new components:
+  - `<v-overflow-btn>`
+  - `<v-otp-input>`
+  - `<v-speed-dial>`
+  - `<v-stepper>`
+
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
 
 ### v2.7 (Nirvana)
 
@@ -52,6 +58,14 @@ The following versions have continued maintenance for backwards compatible fixes
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
 
+### v3.2 (Orion)
+
+- **Released:** April 2023
+- **Target Release:** Q2 2023
+- **Notes:** [v3.2 Release](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+- **Overview:** New and ported components from v2. Exposed defaults system for public use, allowing you to hook into the global default configuration with your components. More information in the [release notes](https://github.com/vuetifyjs/vuetify/releases/tag/v3.2.0)
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/53)
+
 ### v3.1 (Valkyrie)
 
 - **Released:** January 2023
@@ -64,9 +78,7 @@ The following are the already released **minor** and **major** version updates. 
 
 - **Released:** January 2023
 - **Target Release:** Q4 2022
-- **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state:
-  - [v-data-table](/components/data-tables/basics/)
-  - [v-virtual-scroll](/labs/virtual-scroller/)
+- **Overview:** Labs is a new package that includes large components from Vuetify 2 in a pre-production state. More information is located on the [Labs introduction](/labs/introduction/) page.
 
 ### v3.0 (Titan)
 

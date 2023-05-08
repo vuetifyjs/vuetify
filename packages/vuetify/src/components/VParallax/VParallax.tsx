@@ -5,6 +5,7 @@ import './VParallax.sass'
 import { VImg } from '@/components/VImg'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useDisplay } from '@/composables'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
 import { useResizeObserver } from '@/composables/resizeObserver'
@@ -14,7 +15,7 @@ import { clamp, genericComponent, getScrollParent, useRender } from '@/util'
 import { computed, onBeforeUnmount, ref, watch, watchEffect } from 'vue'
 
 // Types
-import type { VImgSlots } from '../VImg/VImg'
+import type { VImgSlots } from '@/components/VImg/VImg'
 
 function floor (val: number) {
   return Math.floor(Math.abs(val)) * Math.sign(val)
@@ -28,6 +29,8 @@ export const VParallax = genericComponent<VImgSlots>()({
       type: [Number, String],
       default: 0.5,
     },
+
+    ...makeComponentProps(),
   },
 
   setup (props, { slots }) {
@@ -91,7 +94,9 @@ export const VParallax = genericComponent<VImgSlots>()({
         class={[
           'v-parallax',
           { 'v-parallax--active': isIntersecting.value },
+          props.class,
         ]}
+        style={ props.style }
         ref={ root }
         cover
         onLoadstart={ onScroll }

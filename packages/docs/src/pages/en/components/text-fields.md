@@ -265,7 +265,7 @@ The following example uses the **label**, **prepend**, and **prepend-inner** slo
     <template v-slot:append-inner>
       <v-icon
         v-if="model"
-        icon="mdi-success"
+        icon="mdi-check-circle"
       />
     </template>
 

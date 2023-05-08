@@ -75,18 +75,6 @@ If your items are not of a uniform size, omit the **item-height** prop to have `
 
 <example file="v-virtual-scroll/prop-dynamic-item-height" />
 
-#### Visible items
-
-The `v-virtual-scroll` component renders a set amount of visible items, meant to cover the viewport of the scroller, plus some amount of buffer above and below it so that scrolling looks and feels smooth. Modify this value by using the **visible-items** prop.
-
-<example file="v-virtual-scroll/prop-visible-items" />
-
-<alert type="info">
-
-  Depending on the size of the scroll container, the size of the items, and the complexity of what you are rendering, adjusting the **visible-items** might improve the performance of the scrolling.
-
-</alert>
-
 ### Examples
 
 The following is a collection of `v-virtual-scroll` examples that demonstrate how different the properties work in an application.

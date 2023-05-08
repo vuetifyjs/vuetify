@@ -3,7 +3,7 @@ import './VRadioGroup.sass'
 
 // Components
 import { VSelectionControl } from '@/components/VSelectionControl'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeSelectionControlGroupProps, VSelectionControlGroup } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 import { VLabel } from '@/components/VLabel'
 
@@ -60,7 +60,7 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
     useRender(() => {
       const [inputAttrs, controlAttrs] = filterInputAttrs(attrs)
-      const [inputProps, _1] = filterInputProps(props)
+      const [inputProps, _1] = VInput.filterProps(props)
       const [controlProps, _2] = VSelectionControl.filterProps(props)
       const label = slots.label
         ? slots.label({
@@ -71,7 +71,11 @@ export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
 
       return (
         <VInput
-          class="v-radio-group"
+          class={[
+            'v-radio-group',
+            props.class,
+          ]}
+          style={ props.style }
           { ...inputAttrs }
           { ...inputProps }
           v-model={ model.value }

@@ -28,3 +28,9 @@ Headers are used to define the columns of the table.
 You can use the dynamic slots `column.<key>` to customize only certain columns. `<key>` corresponds to the **key** property in the items found in the **headers** prop.
 
 <example file="v-data-table/slot-header" />
+
+### Headers slot
+
+You can also override all the internal headers by using the `headers` slot. Remember that you will have to re-implement any internal functionality like sorting.
+
+<example file="v-data-table/slot-headers" />

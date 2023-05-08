@@ -25,6 +25,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
+import type { PropType } from 'vue'
 import type { DataTableItem, InternalDataTableHeader } from './types'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
@@ -53,14 +54,19 @@ export const makeVDataTableProps = propsFactory({
   width: [String, Number],
   fixedHeader: Boolean,
   fixedFooter: Boolean,
+  loading: [Boolean, String],
+  loadingText: {
+    type: String,
+    default: '$vuetify.dataIterator.loadingText',
+  },
+  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+  search: String,
 }, 'v-data-table')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',
 
   props: {
-    search: String,
-
     ...makeVDataTableProps(),
     ...makeDataTableExpandProps(),
     ...makeDataTableGroupProps(),
@@ -78,7 +84,6 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     'update:options': (value: any) => true,
     'update:groupBy': (value: any) => true,
     'update:expanded': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
@@ -126,6 +131,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
       VDataTableRows: {
         hideNoData: toRef(props, 'hideNoData'),
         noDataText: toRef(props, 'noDataText'),
+        loading: toRef(props, 'loading'),
+        loadingText: toRef(props, 'loadingText'),
       },
     })
 
@@ -135,6 +142,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
           'v-data-table',
           {
             'v-data-table--show-select': props.showSelect,
+            'v-data-table--loading': props.loading,
           },
         ]}
         fixedHeader={ props.fixedHeader }
@@ -148,20 +156,19 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
             <>
               { slots.colgroup?.({ columns }) }
               <thead>
-                { slots.headers ? slots.headers() : (
-                  <VDataTableHeaders
-                    sticky={ props.fixedHeader }
-                    multiSort={ props.multiSort }
-                    v-slots={ slots }
-                  />
-                )}
+                <VDataTableHeaders
+                  sticky={ props.fixedHeader }
+                  loading={ props.loading }
+                  multiSort={ props.multiSort }
+                  v-slots={ slots }
+                />
               </thead>
               { slots.thead?.() }
               <tbody>
                 { slots.body ? slots.body() : (
                   <VDataTableRows
                     items={ paginatedItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
+                    onClick:row={ props['onClick:row'] }
                     v-slots={ slots }
                   />
                 )}
