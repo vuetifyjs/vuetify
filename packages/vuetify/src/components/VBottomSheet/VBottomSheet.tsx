@@ -4,6 +4,9 @@ import './VBottomSheet.sass'
 // Components
 import { makeVDialogProps, VDialog } from '@/components/VDialog/VDialog'
 
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
@@ -28,24 +31,22 @@ export const VBottomSheet = genericComponent<OverlaySlots>()({
     'update:modelValue': (value: boolean) => true,
   },
 
-  setup (props, { emit, slots }) {
-    function onUpdate (value: boolean) {
-      emit('update:modelValue', value)
-    }
+  setup (props, { slots }) {
+    const isActive = useProxiedModel(props, 'modelValue')
 
     useRender(() => {
       const [dialogProps] = VDialog.filterProps(props)
 
       return (
         <VDialog
-          onUpdate:modelValue={ onUpdate }
+          { ...dialogProps }
+          v-model={ isActive.value }
           class={[
             'v-bottom-sheet',
             {
               'v-bottom-sheet--inset': props.inset,
             },
           ]}
-          { ...dialogProps }
           v-slots={ slots }
         />
       )
