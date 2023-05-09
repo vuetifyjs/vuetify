@@ -14,7 +14,7 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { Component, PropType } from 'vue'
 
 export type VMessageSlot = {
   message: string
@@ -35,7 +35,7 @@ export const makeVMessagesProps = propsFactory({
   ...makeComponentProps(),
   ...makeTransitionProps({
     transition: {
-      component: VSlideYTransition,
+      component: VSlideYTransition as Component,
       leaveAbsolute: true,
       group: true,
     },

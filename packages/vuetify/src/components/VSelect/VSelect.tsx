@@ -31,7 +31,7 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
 import type { GenericProps } from '@/util'
-import type { PropType } from 'vue'
+import type { Component, PropType } from 'vue'
 
 type Primitive = string | number | boolean | symbol
 
@@ -77,7 +77,7 @@ export const makeVSelectProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: { component: VDialogTransition } }),
+  ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'v-select')
 
 export const VSelect = genericComponent<new <

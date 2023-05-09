@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { type Component, computed, inject, mergeProps, provide, ref, watch } from 'vue'
 import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
@@ -32,7 +32,7 @@ export const makeVMenuProps = propsFactory({
     openDelay: 300,
     scrim: false,
     scrollStrategy: 'reposition' as const,
-    transition: { component: VDialogTransition },
+    transition: { component: VDialogTransition as Component },
   }), ['absolute']),
 }, 'v-menu')
 
