@@ -7,6 +7,7 @@
       :menu-props="menuProps"
       :placeholder="tag"
       hide-details
+      density="comfortable"
       item-title="name"
       label="Select Release Version"
       persistent-placeholder
@@ -33,11 +34,10 @@
 
     <v-card
       variant="flat"
-      min-height="180"
       rounded="t-0 b"
     >
       <div
-        v-if="!!search"
+        v-if="search?.author"
         class="d-flex justify-space-between"
       >
         <v-list-item v-if="search.author" lines="two">
@@ -85,15 +85,17 @@
         </div>
       </div>
 
-      <v-divider />
+      <template v-if="search?.body && !store.isLoading">
+        <v-divider />
 
-      <div class="px-4 pt-4">
-        <app-markdown
-          v-if="search?.body"
-          :content="search.body"
-          class="releases"
-        />
-      </div>
+        <div class="px-4 pt-4">
+          <app-markdown
+            v-if="search?.body"
+            :content="search.body"
+            class="releases"
+          />
+        </div>
+      </template>
     </v-card>
   </div>
 </template>
