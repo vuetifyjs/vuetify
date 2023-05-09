@@ -261,14 +261,16 @@ export const VChip = genericComponent<VChipSlots>()({
             </div>
           )}
 
-          { slots.default?.({
-            isSelected: group?.isSelected.value,
-            selectedClass: group?.selectedClass.value,
-            select: group?.select,
-            toggle: group?.toggle,
-            value: group?.value.value,
-            disabled: props.disabled,
-          }) ?? props.text }
+          <div class="v-chip__content">
+            { slots.default?.({
+              isSelected: group?.isSelected.value,
+              selectedClass: group?.selectedClass.value,
+              select: group?.select,
+              toggle: group?.toggle,
+              value: group?.value.value,
+              disabled: props.disabled,
+            }) ?? props.text }
+          </div>
 
           { hasAppend && (
             <div key="append" class="v-chip__append">
