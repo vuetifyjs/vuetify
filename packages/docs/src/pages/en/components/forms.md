@@ -12,7 +12,7 @@ related:
 
 # Forms
 
-When it comes to form validation, Vuetify has a simple built-in system based on functions as rules. Want to use a 3rd party validation plugin instead? We provide examples on how to integrate with both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
+Vuetify offers a simple built-in form validation system based on functions as rules, making it easy for developers to get set up quickly. If you prefer using a 3rd party validation plugin, we also provide examples for integrating both [Vee-validate](https://github.com/baianat/Vee-validate) and [vuelidate](https://github.com/vuelidate/vuelidate).
 
 <promoted slug="vuemastery-forms" />
 
@@ -42,15 +42,51 @@ The most basic of rules is a simple function that checks if an input has a value
 
 <example file="v-form/rules-required" />
 
-However rules can be as complicated as you need them to be, including the ability to validate inputs asynchronously. In the example below we are checking the input against a fake API service that takes some time to respond. The `submit` event is a Promise that you can wait for.
-
-This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit'` so that we only call the API service when the button is clicked.
+However, you can make rules as complicated as needed, even allowing for asynchronous input validation. In the example below, the input is checked against a fake API service that takes some time to respond. Wait for the `submit` event promise to resolve and see the validation in action.
 
 <example file="v-form/rules-async" />
 
+This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit'` so that we only call the API service when the button is clicked.
+
 ## Validation state
 
-By default all inputs will run their validation rules when mounted. This also means that inputs that fail their validation will be shown in the error state. If this is not desirable, you can add `'lazy'` to the previously mentioned **validate-on** prop. So if you want the component to validate when its input changes, but not show errors on mount, you can use **validate-on="input lazy"**. It is important to note that `'lazy'` does not prevent the input from validating on mount. The validation still runs, but any potential errors are hidden.
+By default, all inputs run their validation rules when mounted. This means that inputs failing validation are mounted in an error state. To avoid this, add [lazy](/api/v-form/#props-lazy) to the **validate-on** prop.
+
+The following example contains a [v-text-field](/components/text-fields/) with a rule that requires the input to have a value. To avoid being mounted in an error state, we set **validate-on** to `"input lazy"`:
+
+```html
+<template>
+  <v-form validate-on="input lazy">
+    <v-text-field
+      v-model="name"
+      :rules="[ v => !!v || 'Name is required' ]"
+      label="Name"
+      required
+    ></v-text-field>
+  </v-form>
+</template>
+
+<script>
+  export default {
+    data: () => ({ name: '' }),
+  }
+</script>
+```
+
+The table below is a list of all available validation states:
+
+| Validate On | Description |
+| - | - |
+| **lazy** | Validation runs on mount but does not display errors. |
+| **input** | Validation runs when the input's value changes. |
+| **blur** | Validation runs when the input loses focus. |
+| **submit** | Validation runs when the form is submitted. |
+
+<alert type="warning">
+
+Note that **lazy** does not prevent input validation on mount. It only suppresses the error state.
+
+</alert>
 
 ## Examples
 

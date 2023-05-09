@@ -262,7 +262,7 @@ describe('VForm', () => {
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
-  it('submit form if validation passes', () => {
+  it('submits form if validation passes', () => {
     cy.mount(() => (
       <VForm action="/__cypress/src/action">
         <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />
