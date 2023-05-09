@@ -306,16 +306,32 @@ function getItemIndex (items: UnwrapRef<GroupItem[]>, value: unknown) {
 }
 
 function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
-  return modelValue.map(value => {
-    const item = items.find(item => deepEqual(value, item.value))
-    if (item != null) return item.id
+  const ids: number[] = []
 
-    return null
+  modelValue.forEach(value => {
+    const item = items.find(item => deepEqual(value, item.value))
+    const itemByIndex = items[value]
+
+    if (item?.value != null) {
+      ids.push(item.id)
+    } else if (itemByIndex != null) {
+      ids.push(itemByIndex.id)
+    }
   })
+
+  return ids
 }
 
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
-  return ids
-    .map(id => items.find(item => item.id === id))
-    .map((item, i) => item?.value != null ? item.value : i)
+  const values: {}[] = []
+
+  ids.forEach(id => {
+    const item = items.find(item => item.id === id)
+    if (item) {
+      const itemIndex = items.indexOf(item)
+      values.push(item.value != null ? item.value : itemIndex)
+    }
+  })
+
+  return values
 }
