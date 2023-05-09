@@ -9,7 +9,7 @@ import { VTextField } from '@/components/VTextField'
 import type { SubmitEventPromise } from '@/composables'
 
 describe('VForm', () => {
-  it('should emit when inputs are updated', () => {
+  it('emits when inputs are updated', () => {
     cy.mount(() => (
       <Application>
         <VForm>
@@ -35,7 +35,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should only emit true if all inputs are explicitly valid', () => {
+  it('only emits true if all inputs are explicitly valid', () => {
     cy.mount(() => (
       <Application>
         <VForm>
@@ -59,7 +59,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should expose validate function', () => {
+  it('exposes validate function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
@@ -77,7 +77,7 @@ describe('VForm', () => {
       .get('.v-text-field').should('have.class', 'v-input--error')
   })
 
-  it('should expose reset function', () => {
+  it('exposes reset function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
@@ -99,7 +99,7 @@ describe('VForm', () => {
       .should('have.value', '')
   })
 
-  it('should expose resetValidation function', () => {
+  it('exposes resetValidation function', () => {
     const form = ref()
     cy.mount(() => (
       <Application>
@@ -129,7 +129,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should not submit form if validation fails', () => {
+  it('does not submit form if validation fails', () => {
     cy.mount(() => (
       <VForm action="/action">
         <VTextField rules={[v => !!v || 'Field required']} />
@@ -141,7 +141,7 @@ describe('VForm', () => {
       .get('.v-text-field').should('have.class', 'v-input--error').find('.v-messages').should('have.text', 'Field required')
   })
 
-  it('should emit a SubmitEventPromise', () => {
+  it('emits a SubmitEventPromise', () => {
     cy.mount(() => (
       <Application>
         <VForm action="/action" onSubmit={ onSubmit }>
@@ -163,7 +163,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should expose errors reactively', () => {
+  it('exposes errors reactively', () => {
     const form = ref()
 
     cy.mount(() => (
@@ -186,7 +186,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should run validation on mount', () => {
+  it('runs validation on mount', () => {
     const form = ref()
 
     cy.mount(() => (
@@ -220,7 +220,7 @@ describe('VForm', () => {
       })
   })
 
-  it('should provide validate-on prop to child inputs', () => {
+  it('provides validate-on prop to child inputs', () => {
     const form = ref()
 
     cy.mount(() => (
@@ -243,7 +243,7 @@ describe('VForm', () => {
       .get('.v-text-field').should('have.class', 'v-input--error')
   })
 
-  it.only('should validate inputs to true if there are no rules', () => {
+  it('validates inputs to true if there are no rules', () => {
     const model = ref(false)
     cy.mount(() => (
       <Application>
@@ -262,7 +262,7 @@ describe('VForm', () => {
   // TODO: This test has to be the last one,
   // because subsequent tests in the same file
   // will break due to the page change
-  it('should submit form if validation passes', () => {
+  it('submit form if validation passes', () => {
     cy.mount(() => (
       <VForm action="/__cypress/src/action">
         <VTextField modelValue="foo" rules={[v => !!v || 'Field required']} />

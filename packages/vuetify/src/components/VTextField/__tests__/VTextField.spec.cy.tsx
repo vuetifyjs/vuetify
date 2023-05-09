@@ -25,7 +25,7 @@ const stories = Object.fromEntries(Object.entries({
 )]))
 
 describe('VTextField', () => {
-  it('should validate input on mount', () => {
+  it('validates input on mount', () => {
     cy.mount(() => (
       <VTextField rules={[v => v?.length > 4 || 'Error!']}></VTextField>
     ))
@@ -37,7 +37,7 @@ describe('VTextField', () => {
     cy.get('.v-text-field').should('not.have.class', 'v-input--error')
   })
 
-  it('should not validate on mount when using validate-on lazy', () => {
+  it('does not validate on mount when using validate-on lazy', () => {
     const rules = [
       (value: string) => value?.length > 5 || 'Error!',
     ]
@@ -54,7 +54,7 @@ describe('VTextField', () => {
     cy.get('.v-messages').should('exist').invoke('text').should('equal', 'Error!')
   })
 
-  it('should handle multiple options in validate-on prop', () => {
+  it('handles multiple options in validate-on prop', () => {
     const rules = [
       (value: string) => value?.length > 5 || 'Error!',
     ]
@@ -76,7 +76,7 @@ describe('VTextField', () => {
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/15231
-  it('should render details if using hide-details="auto" and counter prop', () => {
+  it('renders details if using hide-details="auto" and counter prop', () => {
     cy.mount(() => (
       <VTextField hide-details="auto" counter></VTextField>
     ))
