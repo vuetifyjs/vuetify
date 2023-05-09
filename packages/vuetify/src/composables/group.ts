@@ -315,11 +315,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 }
 
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
-  let values = []
-
-  values = ids
+  return ids
     .map(id => items.find(item => item.id === id))
     .map((item, i) => item?.value != null ? item.value : i)
-
-  return values
 }
