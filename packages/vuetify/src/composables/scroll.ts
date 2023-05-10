@@ -1,7 +1,6 @@
 // Utilities
 import {
   computed,
-  getCurrentInstance,
   onBeforeUnmount,
   onMounted,
   ref,
@@ -88,7 +87,7 @@ export function useScroll (
       const newTarget = scrollTarget ? document.querySelector(scrollTarget) : window
 
       if (!newTarget) {
-        consoleWarn(`Unable to locate element with identifier ${scrollTarget}`, getCurrentInstance())
+        consoleWarn(`Unable to locate element with identifier ${scrollTarget}`)
         return
       }
 
