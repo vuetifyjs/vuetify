@@ -3,6 +3,7 @@ import './VSelectionControlGroup.sass'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { makeThemeProps } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
@@ -26,6 +27,7 @@ export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> 
 export const makeSelectionControlGroupProps = propsFactory({
   color: String,
   disabled: Boolean,
+  defaultsTarget: String,
   error: Boolean,
   id: String,
   inline: Boolean,
@@ -48,21 +50,21 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeThemeProps(),
+}, 'selection-control-group')
+
+export const makeVSelectionControlGroupProps = propsFactory({
+  ...makeSelectionControlGroupProps({
+    defaultsTarget: 'VSelectionControl',
+  }),
 }, 'v-selection-control-group')
 
 export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
-  props: {
-    defaultsTarget: {
-      type: String,
-      default: 'VSelectionControl',
-    },
-
-    ...makeSelectionControlGroupProps(),
-  },
+  props: makeVSelectionControlGroupProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
@@ -112,7 +114,9 @@ export const VSelectionControlGroup = genericComponent()({
         class={[
           'v-selection-control-group',
           { 'v-selection-control-group--inline': props.inline },
+          props.class,
         ]}
+        style={ props.style }
         role={ props.type === 'radio' ? 'radiogroup' : undefined }
       >
         { slots.default?.() }

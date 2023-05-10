@@ -17,7 +17,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { mergeProps, onMounted, ref, watch } from 'vue'
-import { genericComponent, omit, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 type VSnackbarSlots = {
@@ -26,26 +26,28 @@ type VSnackbarSlots = {
   actions: []
 }
 
+export const makeVSnackbarProps = propsFactory({
+  multiLine: Boolean,
+  timeout: {
+    type: [Number, String],
+    default: 5000,
+  },
+  vertical: Boolean,
+
+  ...makeLocationProps({ location: 'bottom' } as const),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeVariantProps(),
+  ...makeThemeProps(),
+  ...omit(makeVOverlayProps({
+    transition: 'v-snackbar-transition',
+  }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
+}, 'v-snackbar')
+
 export const VSnackbar = genericComponent<VSnackbarSlots>()({
   name: 'VSnackbar',
 
-  props: {
-    multiLine: Boolean,
-    timeout: {
-      type: [Number, String],
-      default: 5000,
-    },
-    vertical: Boolean,
-
-    ...makeLocationProps({ location: 'bottom' } as const),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeVariantProps(),
-    ...makeThemeProps(),
-    ...omit(makeVOverlayProps({
-      transition: 'v-snackbar-transition',
-    }), ['persistent', 'noClickAnimation', 'scrim', 'scrollStrategy']),
-  },
+  props: makeVSnackbarProps(),
 
   emits: {
     'update:modelValue': (v: boolean) => true,
@@ -99,7 +101,9 @@ export const VSnackbar = genericComponent<VSnackbarSlots>()({
               'v-snackbar--vertical': props.vertical,
             },
             positionClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...overlayProps }
           v-model={ isActive.value }
           contentProps={ mergeProps({

@@ -4,9 +4,12 @@ import './VColorPickerEdit.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 import { modes, nullColor } from './util'
 
 // Types
@@ -24,23 +27,27 @@ const VColorPickerInput = ({ label, ...rest }: any) => {
   )
 }
 
+export const makeVColorPickerEditProps = propsFactory({
+  color: Object as PropType<HSV | null>,
+  disabled: Boolean,
+  mode: {
+    type: String,
+    default: 'rgba',
+    validator: (v: string) => Object.keys(modes).includes(v),
+  },
+  modes: {
+    type: Array as PropType<string[]>,
+    default: () => Object.keys(modes),
+    validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
+  },
+
+  ...makeComponentProps(),
+}, 'v-color-picker-edit')
+
 export const VColorPickerEdit = defineComponent({
   name: 'VColorPickerEdit',
 
-  props: {
-    color: Object as PropType<HSV | null>,
-    disabled: Boolean,
-    mode: {
-      type: String,
-      default: 'rgba',
-      validator: (v: string) => Object.keys(modes).includes(v),
-    },
-    modes: {
-      type: Array as PropType<string[]>,
-      default: () => Object.keys(modes),
-      validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
-    },
-  },
+  props: makeVColorPickerEditProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -78,7 +85,11 @@ export const VColorPickerEdit = defineComponent({
 
     useRender(() => (
       <div
-        class="v-color-picker-edit"
+        class={[
+          'v-color-picker-edit',
+          props.class,
+        ]}
+        style={ props.style }
       >
         { inputs.value?.map(props => (
           <VColorPickerInput { ...props } />

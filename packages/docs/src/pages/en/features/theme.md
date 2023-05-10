@@ -21,7 +21,7 @@ Customize your application's default text colors, surfaces, and more. Easily mod
 
 | Feature | Description |
 | - | - |
-| [useTheme](/api/composables/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
+| [useTheme](/api/use-theme/) | The theme composable allows you to get information about, and modify the current theme |
 | [v-theme-provider](/api/v-theme-provider/) | The theme provider component modifies the theme of all its children |
 
 <api-inline hide-links />
@@ -65,7 +65,7 @@ const myCustomLightTheme = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
-  }
+  },
 }
 
 export default createVuetify({
@@ -73,8 +73,8 @@ export default createVuetify({
     defaultTheme: 'myCustomLightTheme',
     themes: {
       myCustomLightTheme,
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -88,8 +88,8 @@ import { createVuetify } from 'vuetify'
 
 export default createVuetify({
   theme: {
-    defaultTheme: 'dark'
-  }
+    defaultTheme: 'dark',
+  },
 })
 ```
 
@@ -112,7 +112,7 @@ const myCustomLightTheme: ThemeDefinition = {
     info: '#2196F3',
     success: '#4CAF50',
     warning: '#FB8C00',
-  }
+  },
 }
 
 export default createVuetify({
@@ -120,8 +120,8 @@ export default createVuetify({
     defaultTheme: 'myCustomLightTheme',
     themes: {
       myCustomLightTheme,
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -148,7 +148,7 @@ export default {
       theme,
       toggleTheme: () => theme.global.name.value = theme.global.current.value.dark ? 'light' : 'dark'
     }
-  }
+  },
 }
 </script>
 ```
@@ -199,11 +199,11 @@ export default createVuetify({
         dark: false,
         colors: {
           ..., // We have omitted the standard color properties here to emphasize the custom one that we've added
-          something: '#00ff00'
-        }
-      }
-    }
-  }
+          something: '#00ff00',
+        },
+      },
+    },
+  },
 })
 ```
 
@@ -243,9 +243,9 @@ export default createVuetify({
       darken: 2,
     },
     themes: {
-      ...
-    }
-  }
+      //
+    },
+  },
 })
 ```
 
@@ -324,8 +324,8 @@ import {createVuetify} from 'vuetify'
 
 export const vuetify = createVuetify({
   theme: {
-    cspNonce: 'dQw4w9WgXcQ'
-  }
+    cspNonce: 'dQw4w9WgXcQ',
+  },
 })
 ```
 

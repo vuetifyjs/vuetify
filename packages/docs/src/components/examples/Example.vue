@@ -60,7 +60,7 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition v-if="hasRendered">
-          <div v-if="showCode">
+          <div v-show="showCode">
             <v-window v-model="template">
               <v-window-item
                 v-for="section of sections"
@@ -97,14 +97,14 @@
   // Composables
   import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
-  import { useTheme, version as vuetifyVersion } from 'vuetify'
+  import { usePlayground } from '@/composables/playground'
+  import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef, version as vueVersion } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
-  import { strFromU8, strToU8, zlibSync } from 'fflate'
 
   const { t } = useI18n()
 
@@ -203,42 +203,17 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  // This is copied directly from playground
-  function utoa (data: string): string {
-    const buffer = strToU8(data)
-    const zipped = zlibSync(buffer, { level: 9 })
-    const binary = strFromU8(zipped, true)
-    return btoa(binary)
-  }
-
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) {
-      return null
-    }
+    if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.codepenResources || '{}')
 
-    const links = {
-      css: resources.css ?? [],
-    }
-
-    const importMap = {
-      imports: resources.imports ?? {},
-    }
-
-    const files = {
-      'App.vue': sections.value
-        .filter(section => [hasComposition.value ? 'composition' : 'options', 'template'].includes(section.name))
-        .map(section => section.content)
-        .join('\n\n'),
-      'links.json': JSON.stringify(links),
-      'import-map.json': JSON.stringify(importMap),
-    }
-
-    // This is copied directly from playground
-    const hash = utoa(JSON.stringify([files, vueVersion, vuetifyVersion, true]))
-
-    return `https://play.vuetifyjs.com#${hash}`
+    return usePlayground(
+      sections.value,
+      resources.css,
+      resources.imports,
+      hasComposition.value,
+    )
   })
 
   const actions = computed(() => {
@@ -254,7 +229,7 @@
 
     if (playgroundLink.value) {
       array.push({
-        icon: '$vuetify',
+        icon: '$vuetifyPlay',
         path: 'edit-in-playground',
         href: playgroundLink.value,
         target: '_blank',

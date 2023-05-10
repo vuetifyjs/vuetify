@@ -2,25 +2,29 @@
 import './VItemGroup.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
+
+export const makeVItemGroupProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-item--selected',
+  }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-item-group')
 
 export const VItemGroup = genericComponent()({
   name: 'VItemGroup',
 
-  props: {
-    ...makeGroupProps({
-      selectedClass: 'v-item--selected',
-    }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVItemGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -35,7 +39,9 @@ export const VItemGroup = genericComponent()({
         class={[
           'v-item-group',
           themeClasses.value,
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.default?.({
           isSelected,

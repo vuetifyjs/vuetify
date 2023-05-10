@@ -10,7 +10,7 @@ import { useSelection } from './composables/select'
 import { useGroupBy } from './composables/group'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DataTableItem, GroupHeaderItem, InternalDataTableHeader, InternalDataTableItem } from './types'
@@ -49,27 +49,29 @@ export type VDataTableRowsSlots = {
   'item.data-table-expand': [ItemSlot]
 } & { [key: `item.${string}`]: [ItemSlot] }
 
+export const makeVDataTableRowsProps = propsFactory({
+  loading: [Boolean, String],
+  loadingText: {
+    type: String,
+    default: '$vuetify.dataIterator.loadingText',
+  },
+  hideNoData: Boolean,
+  items: {
+    type: Array as PropType<InternalDataTableItem[]>,
+    default: () => ([]),
+  },
+  noDataText: {
+    type: String,
+    default: '$vuetify.noDataText',
+  },
+  rowHeight: Number,
+  'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
+}, 'v-data-table-rows')
+
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',
 
-  props: {
-    loading: [Boolean, String],
-    loadingText: {
-      type: String,
-      default: '$vuetify.dataIterator.loadingText',
-    },
-    hideNoData: Boolean,
-    items: {
-      type: Array as PropType<InternalDataTableItem[]>,
-      default: () => ([]),
-    },
-    noDataText: {
-      type: String,
-      default: '$vuetify.noDataText',
-    },
-    rowHeight: Number,
-    'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
-  },
+  props: makeVDataTableRowsProps(),
 
   setup (props, { emit, slots }) {
     const { columns } = useHeaders()
@@ -82,7 +84,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
       if (props.loading && slots.loading) {
         return (
           <tr
-            class="v-data-table-rows-no-data"
+            class="v-data-table-rows-loading"
             key="loading"
           >
             <td colspan={ columns.value.length }>
@@ -92,7 +94,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
         )
       }
 
-      if (!props.loading && !props.items.length && !props.hideNoData && slots['no-data']) {
+      if (!props.loading && !props.items.length && !props.hideNoData) {
         return (
           <tr
             class="v-data-table-rows-no-data"

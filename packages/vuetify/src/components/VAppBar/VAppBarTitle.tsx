@@ -1,8 +1,7 @@
 // Components
-import { VToolbarTitle } from '@/components/VToolbar'
+import { makeVToolbarTitleProps, VToolbarTitle } from '@/components/VToolbar/VToolbarTitle'
 
 // Utilities
-import { makeVToolbarTitleProps } from '@/components/VToolbar/VToolbarTitle'
 import { genericComponent, useRender } from '@/util'
 
 // Types

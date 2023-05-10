@@ -1,17 +1,11 @@
 // Utils
 import {
   defineComponent as _defineComponent, // eslint-disable-line no-restricted-imports
-  computed,
-  getCurrentInstance,
-  shallowRef,
-  watchEffect,
 } from 'vue'
 import { consoleWarn } from '@/util/console'
-import { mergeDeep, pick, toKebabCase } from '@/util/helpers'
-import { injectSelf } from '@/util/injectSelf'
+import { pick, toKebabCase } from '@/util/helpers'
 import { propsFactory } from '@/util/propsFactory'
-import { DefaultsSymbol, provideDefaults, useDefaults } from '@/composables/defaults'
-import { useToggleScope } from '@/composables/toggleScope'
+import { injectDefaults, internalUseDefaults } from '@/composables/defaults'
 
 // Types
 import type {
@@ -31,15 +25,9 @@ import type {
   FunctionalComponent,
   MethodOptions,
   ObjectEmitsOptions,
-  VNode,
   VNodeChild,
   VNodeProps,
 } from 'vue'
-
-function propIsDefined (vnode: VNode, prop: string) {
-  return typeof vnode.props?.[prop] !== 'undefined' ||
-    typeof vnode.props?.[toKebabCase(prop)] !== 'undefined'
-}
 
 // No props
 export function defineComponent<
@@ -113,47 +101,21 @@ export function defineComponent (options: ComponentOptions) {
     options.props = propsFactory(options.props ?? {}, toKebabCase(options.name))()
     const propKeys = Object.keys(options.props)
     options.filterProps = function filterProps (props: Record<string, any>) {
-      return pick(props, propKeys)
+      return pick(props, propKeys, ['class', 'style'])
     }
 
     options.props._as = String
     options.setup = function setup (props: Record<string, any>, ctx) {
-      const defaults = useDefaults()
+      const defaults = injectDefaults()
 
       // Skip props proxy if defaults are not provided
       if (!defaults.value) return options._setup(props, ctx)
 
-      const vm = getCurrentInstance()!
-      const componentDefaults = computed(() => defaults.value![props._as ?? options.name!])
-      const _props = new Proxy(props, {
-        get (target, prop) {
-          const propValue = Reflect.get(target, prop)
-          if (typeof prop === 'string' && !propIsDefined(vm.vnode, prop)) {
-            return componentDefaults.value?.[prop] ?? defaults.value!.global?.[prop] ?? propValue
-          }
-          return propValue
-        },
-      })
-
-      const _subcomponentDefaults = shallowRef()
-      watchEffect(() => {
-        if (componentDefaults.value) {
-          const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-          if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
-        }
-      })
+      const { props: _props, provideSubDefaults } = internalUseDefaults(props, props._as ?? options.name, defaults)
 
       const setupBindings = options._setup(_props, ctx)
 
-      // If subcomponent defaults are provided, override any
-      // subcomponents provided by the component's setup function.
-      // This uses injectSelf so must be done after the original setup to work.
-      useToggleScope(_subcomponentDefaults, () => {
-        provideDefaults(mergeDeep(
-          injectSelf(DefaultsSymbol)?.value ?? {},
-          _subcomponentDefaults.value
-        ))
-      })
+      provideSubDefaults()
 
       return setupBindings
     }
@@ -164,29 +126,34 @@ export function defineComponent (options: ComponentOptions) {
 
 type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on${infer U}` ? Uncapitalize<U> : K }[T]
 
-export type SlotsToProps<T extends Record<string, any>> = T extends Record<string, Slot> ? ({
+export type SlotsToProps<
+  U extends Record<string, any[]> | Record<string, Slot>,
+  T = U extends Record<string, any[]> ? MakeSlots<U> : U
+> = {
   $children?: (
     | VNodeChild
-    | (keyof T extends 'default' ? T['default'] : {})
+    | (T extends { default: infer V } ? V : {})
     | { [K in keyof T]?: T[K] }
   )
-  $slots?: { [K in keyof T]?: T[K] }
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
-}) : T extends Record<string, any[]> ? SlotsToProps<MakeSlots<T>> : never
-
-type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
-export type MakeSlots<T extends Record<string, any[]>> = {
-  [K in keyof T]: Slot<T[K]>
 }
 
-export type GenericSlot = SlotsToProps<{ default: [] }>
+type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
+export type MakeSlots<T extends Record<string, any[]> | Record<string, Slot>> = {
+  [K in keyof T]: T[K] extends any[] ? Slot<T[K]> : T[K]
+}
 
-type DefineComponentWithGenericProps<T extends (new () => {
+export type GenericProps<Props, Slots extends Record<string, any[]>> = {
+  $props: Props & SlotsToProps<Slots>
+  $slots: MakeSlots<Slots>
+}
+
+type DefineComponentWithGenericProps<T extends (new (props: Record<string, any>) => {
   $props?: Record<string, any>
 })> = <
-  PropsOptions extends Readonly<ComponentPropsOptions>,
+  PropsOptions extends Readonly<ComponentObjectPropsOptions>,
   RawBindings,
   D,
   C extends ComputedOptions = {},
@@ -244,7 +211,7 @@ type DefineComponentWithSlots<Slots extends Record<string, any[]> | Record<strin
 export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
 
 // Generic constructor argument - generic props and slots
-export function genericComponent<T extends (new () => {
+export function genericComponent<T extends (new (props: Record<string, any>) => {
   $props?: Record<string, any>
 })> (exposeDefaults?: boolean): DefineComponentWithGenericProps<T>
 

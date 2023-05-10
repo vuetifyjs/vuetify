@@ -7,9 +7,7 @@ import { genericComponent } from '@/util'
 export const VValidation = genericComponent()({
   name: 'VValidation',
 
-  props: {
-    ...makeValidationProps(),
-  },
+  props: makeValidationProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,

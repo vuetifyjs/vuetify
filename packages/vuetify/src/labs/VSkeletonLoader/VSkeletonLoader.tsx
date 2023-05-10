@@ -10,7 +10,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender, wrapInArray } from '@/util'
+import { genericComponent, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, VNode } from 'vue'
@@ -34,6 +34,7 @@ export const rootTypes = {
   'date-picker': 'list-item, heading, divider, date-picker-options, date-picker-days, actions',
   'date-picker-options': 'text, avatar@2',
   'date-picker-days': 'avatar@28',
+  divider: 'divider',
   heading: 'heading',
   image: 'image',
   'list-item': 'text',
@@ -107,26 +108,28 @@ function mapBones (bones: string) {
   return bones.replace(/\s/g, '').split(',').map(genStructure)
 }
 
+export const makeVSkeletonLoaderProps = propsFactory({
+  boilerplate: Boolean,
+  color: String,
+  loading: Boolean,
+  loadingText: {
+    type: String,
+    default: '$vuetify.loading',
+  },
+  type: {
+    type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
+    default: 'image',
+  },
+
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeThemeProps(),
+}, 'v-skeleton-loader')
+
 export const VSkeletonLoader = genericComponent<VSkeletonLoaderSlots>()({
   name: 'VSkeletonLoader',
 
-  props: {
-    boilerplate: Boolean,
-    color: String,
-    loading: Boolean,
-    loadingText: {
-      type: String,
-      default: '$vuetify.loading',
-    },
-    type: {
-      type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
-      default: 'image',
-    },
-
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVSkeletonLoaderProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))

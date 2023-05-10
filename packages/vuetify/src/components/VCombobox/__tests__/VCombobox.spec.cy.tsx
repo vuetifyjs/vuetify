@@ -3,6 +3,7 @@
 import { VForm } from '@/components/VForm'
 import { VCombobox } from '../VCombobox'
 import { ref } from 'vue'
+import { keyValues } from '@/util'
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -446,5 +447,52 @@ describe('VCombobox', () => {
       .setProps({ multiple: true, modelValue: ['Foobar'] })
       .get('.v-combobox input')
       .should('not.have.attr', 'placeholder')
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VCombobox
+        multiple
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-combobox')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
+  })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VCombobox
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Select"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-combobox')
+      .should('not.have.class', 'v-combobox--active-menu')
+      .click()
+      .should('have.class', 'v-combobox--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-combobox--active-menu')
   })
 })

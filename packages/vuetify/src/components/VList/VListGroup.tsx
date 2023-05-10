@@ -3,10 +3,11 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VExpandTransition } from '@/components/transitions'
 
 // Composables
-import { useList } from './list'
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
+import { useList } from './list'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
@@ -44,19 +45,17 @@ export const makeVListGroupProps = propsFactory({
   appendIcon: IconValue,
   fluid: Boolean,
   subgroup: Boolean,
+  title: String,
   value: null,
 
+  ...makeComponentProps(),
   ...makeTagProps(),
 }, 'v-list-group')
 
 export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',
 
-  props: {
-    title: String,
-
-    ...makeVListGroupProps(),
-  },
+  props: makeVListGroupProps(),
 
   setup (props, { slots }) {
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)
@@ -97,7 +96,9 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
             'v-list-group--subgroup': props.subgroup,
             'v-list-group--open': isOpen.value,
           },
+          props.class,
         ]}
+        style={ props.style }
       >
         { slots.activator && (
           <VDefaultsProvider defaults={ activatorDefaults.value }>

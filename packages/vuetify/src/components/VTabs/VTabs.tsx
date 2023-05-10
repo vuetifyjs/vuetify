@@ -14,7 +14,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -32,34 +32,36 @@ function parseItems (items: TabItem[] | undefined) {
   })
 }
 
+export const makeVTabsProps = propsFactory({
+  alignTabs: {
+    type: String as PropType<'start' | 'title' | 'center' | 'end'>,
+    default: 'start',
+  },
+  color: String,
+  fixedTabs: Boolean,
+  items: {
+    type: Array as PropType<TabItem[]>,
+    default: () => ([]),
+  },
+  stacked: Boolean,
+  bgColor: String,
+  grow: Boolean,
+  height: {
+    type: [Number, String],
+    default: undefined,
+  },
+  hideSlider: Boolean,
+  sliderColor: String,
+
+  ...makeVSlideGroupProps({ mandatory: 'force' as const }),
+  ...makeDensityProps(),
+  ...makeTagProps(),
+}, 'v-tabs')
+
 export const VTabs = genericComponent()({
   name: 'VTabs',
 
-  props: {
-    alignTabs: {
-      type: String as PropType<'start' | 'title' | 'center' | 'end'>,
-      default: 'start',
-    },
-    color: String,
-    fixedTabs: Boolean,
-    items: {
-      type: Array as PropType<TabItem[]>,
-      default: () => ([]),
-    },
-    stacked: Boolean,
-    bgColor: String,
-    grow: Boolean,
-    height: {
-      type: [Number, String],
-      default: undefined,
-    },
-    hideSlider: Boolean,
-    sliderColor: String,
-
-    ...makeVSlideGroupProps({ mandatory: 'force' as const }),
-    ...makeDensityProps(),
-    ...makeTagProps(),
-  },
+  props: makeVTabsProps(),
 
   emits: {
     'update:modelValue': (v: unknown) => true,
@@ -100,10 +102,12 @@ export const VTabs = genericComponent()({
             },
             densityClasses.value,
             backgroundColorClasses.value,
+            props.class,
           ]}
           style={[
             { '--v-tabs-height': convertToUnit(props.height) },
             backgroundColorStyles.value,
+            props.style,
           ]}
           role="tablist"
           symbol={ VTabsSymbol }

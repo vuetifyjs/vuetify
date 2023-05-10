@@ -29,7 +29,7 @@ export default createVuetify({
     aliases,
     sets: {
       mdi,
-    }
+    },
   },
 })
 ```
@@ -66,7 +66,7 @@ export default createVuetify({
     sets: {
       fa,
       mdi,
-    }
+    },
   },
 })
 ```
@@ -170,14 +170,8 @@ $ npm install @mdi/js -D
   <v-icon :icon="mdiAccount" />
 </template>
 
-<script>
+<script setup>
   import { mdiAccount } from '@mdi/js'
-
-  export default {
-    data: () => ({
-      mdiAccount
-    }),
-  }
 </script>
 ```
 
@@ -326,7 +320,7 @@ export default createVuetify({
     aliases,
     sets: {
       fa,
-    }
+    },
   },
 })
 ```
@@ -448,7 +442,7 @@ export default createVuetify({
     sets: {
       custom,
     },
-  }
+  },
 })
 ```
 

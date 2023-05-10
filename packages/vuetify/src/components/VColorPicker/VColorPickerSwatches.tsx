@@ -4,14 +4,29 @@ import './VColorPickerSwatches.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 
+// Composables
+import { makeComponentProps } from '@/composables/component'
+
 // Utilities
-import { convertToUnit, deepEqual, defineComponent, getContrast, useRender } from '@/util'
+import { convertToUnit, deepEqual, defineComponent, getContrast, propsFactory, useRender } from '@/util'
 import { parseColor } from './util'
 import colors from '@/util/colors'
 
 // Types
 import type { HSV } from '@/util'
 import type { PropType } from 'vue'
+
+export const makeVColorPickerSwatchesProps = propsFactory({
+  swatches: {
+    type: Array as PropType<string[][]>,
+    default: () => parseDefaultColors(colors),
+  },
+  disabled: Boolean,
+  color: Object as PropType<HSV | null>,
+  maxHeight: [Number, String],
+
+  ...makeComponentProps(),
+}, 'v-color-picker-swatches')
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {
@@ -38,15 +53,7 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
 export const VColorPickerSwatches = defineComponent({
   name: 'VColorPickerSwatches',
 
-  props: {
-    swatches: {
-      type: Array as PropType<string[][]>,
-      default: () => parseDefaultColors(colors),
-    },
-    disabled: Boolean,
-    color: Object as PropType<HSV | null>,
-    maxHeight: [Number, String],
-  },
+  props: makeVColorPickerSwatchesProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -55,10 +62,14 @@ export const VColorPickerSwatches = defineComponent({
   setup (props, { emit }) {
     useRender(() => (
       <div
-        class="v-color-picker-swatches"
-        style={{
-          maxHeight: convertToUnit(props.maxHeight),
-        }}
+        class={[
+          'v-color-picker-swatches',
+          props.class,
+        ]}
+        style={[
+          { maxHeight: convertToUnit(props.maxHeight) },
+          props.style,
+        ]}
       >
         <div>
           { props.swatches.map(swatch => (

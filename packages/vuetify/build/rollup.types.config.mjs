@@ -11,6 +11,7 @@ import mm from 'micromatch'
 import MagicString from 'magic-string'
 
 import importMap from '../dist/json/importMap.json' assert { type: 'json' }
+import importMapLabs from '../dist/json/importMap-labs.json' assert { type: 'json' }
 
 const externalsPlugin = () => ({
   resolveId (source, importer) {
@@ -71,6 +72,10 @@ async function getShims () {
   const components = Object.keys(importMap.components).map(name => (
     `    ${name}: typeof import('vuetify/components')['${name}']`
   )).join('\n')
+    + '\n'
+    + Object.keys(importMapLabs.components).map(name => (
+      `    ${name}: typeof import('vuetify/labs/components')['${name}']`
+    )).join('\n')
 
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
     .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
@@ -99,6 +104,7 @@ export default [
   }),
   createTypesConfig('labs/components.d.ts', 'lib/labs/components.d.ts'),
   createTypesConfig('labs/*/index.d.ts', 'lib/labs/*/index.d.ts'),
+  createTypesConfig('labs/date/adapters/*.d.ts', 'lib/labs/date/adapters/*.d.ts'),
   createTypesConfig('directives/index.d.ts', 'lib/directives/index.d.ts'),
   createTypesConfig('locale/index.d.ts', 'lib/locale/index.d.ts'),
   createTypesConfig('locale/adapters/*.d.ts', 'lib/locale/adapters/*.d.ts'),

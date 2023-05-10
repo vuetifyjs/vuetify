@@ -71,6 +71,16 @@
       &:first-child
         margin-inline-start: 0
 
+  &--selecting-index
+    .v-autocomplete__selection
+      opacity: var(--v-medium-emphasis-opacity)
+
+      &--selected
+        opacity: 1
+
+    .v-field__input > input
+      caret-color: transparent
+
   &--single
     &.v-text-field input
       flex: 1 1
@@ -90,10 +100,5 @@
         opacity: 0
 
     .v-field--focused
-      .v-autocomplete__selection-text
+      .v-autocomplete__selection
         opacity: 0
-
-  &--selection-slot
-    &.v-text-field input
-      position: relative
-      padding-inline-start: 0
