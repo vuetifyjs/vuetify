@@ -75,18 +75,21 @@ The following example contains a [v-text-field](/components/text-fields/) with a
 
 The table below is a list of all available validation states:
 
-| Validate On | Description |
-| - | - |
-| **lazy** | Validation runs on mount but does not display errors. |
-| **input** | Validation runs when the input's value changes. |
-| **blur** | Validation runs when the input loses focus. |
-| **submit** | Validation runs when the form is submitted. |
+| Validate On | Description                                                                                                  |
+|-------------|--------------------------------------------------------------------------------------------------------------|
+| **input**   | Validation runs when the input's value changes or it loses focus.                                            |
+| **blur**    | Validation runs when the input loses focus.                                                                  |
+| **submit**  | Validation runs when the form is submitted.                                                                  |
+| **lazy**    | Prevents validation from running on mount. Can be combined with other options, implies **input** on its own. |
 
-<alert type="warning">
+| `validate-on=` | `"input"` | `"blur"` | `"submit"` | `"lazy"` |
+|----------------|:---------:|:--------:|:----------:|:--------:|
+| On mount       |     ✅     |    ✅     |     ✅      |    ❌     |
+| On input       |     ✅     |    ❌     |     ❌      |    *     |
+| On blur        |     ✅     |    ✅     |     ❌      |    *     |
+| On submit      |     ✅     |    ✅     |     ✅      |    *     |
 
-Note that **lazy** does not prevent input validation on mount. It only suppresses the error state.
-
-</alert>
+<p class="text-caption">* Uses the behavior of whatever it's combined with.</p>
 
 ## Examples
 
