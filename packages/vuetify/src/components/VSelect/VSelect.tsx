@@ -42,7 +42,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -90,7 +90,7 @@ export const VSelect = genericComponent<new <
   items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
-  modelValue?: V
+  modelValue?: V | null
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
   item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]

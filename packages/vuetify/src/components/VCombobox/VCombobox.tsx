@@ -59,7 +59,7 @@ type Val <T, ReturnObject extends boolean> = string | (T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
 
 export const makeVComboboxProps = propsFactory({
   // TODO: implement post keyboard support
@@ -84,7 +84,7 @@ export const VCombobox = genericComponent<new <
   items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
-  modelValue?: V
+  modelValue?: V | null
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
   item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
