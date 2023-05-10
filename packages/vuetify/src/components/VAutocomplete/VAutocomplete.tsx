@@ -74,20 +74,21 @@ export const makeVAutocompleteProps = propsFactory({
 }, 'v-autocomplete')
 
 export const VAutocomplete = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(props: {
-  items?: readonly T[]
+  items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
   modelValue?: V
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<T>, index: number }]
+  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<Item>, index: number }]
   'prepend-item': []
   'append-item': []
   'no-data': []
