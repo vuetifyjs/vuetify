@@ -31,7 +31,9 @@ const VListGroupActivator = defineComponent({
 })
 
 export const makeVListGroupProps = propsFactory({
+  /* @deprecated */
   activeColor: String,
+  baseColor: String,
   color: String,
   collapseIcon: {
     type: IconValue,
@@ -81,6 +83,7 @@ export const VListGroup = genericComponent<VListGroupSlots>()({
       VListItem: {
         active: isOpen.value,
         activeColor: props.activeColor,
+        baseColor: props.baseColor,
         color: props.color,
         prependIcon: props.prependIcon || (props.subgroup && toggleIcon.value),
         appendIcon: props.appendIcon || (!props.subgroup && toggleIcon.value),
