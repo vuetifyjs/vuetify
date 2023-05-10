@@ -112,23 +112,28 @@ export function useValidation (
   })
 
   const validateOn = computed(() => {
-    const value = (props.validateOn ?? form?.validateOn.value)
+    let value = (props.validateOn ?? form?.validateOn.value) || 'input'
+    if (value === 'lazy') value = 'input lazy'
+    const set = new Set(value?.split(' ') ?? [])
 
-    if (value === 'lazy') return 'input lazy'
-
-    return value || 'input'
+    return {
+      blur: set.has('blur'),
+      input: set.has('input'),
+      submit: set.has('submit'),
+      lazy: set.has('lazy'),
+    }
   })
 
   onMounted(() => {
     // If there are no rules, default to valid
     form?.update(uid.value, !props.rules.length, [])
 
-    if (!validateOn.value.includes('lazy')) {
+    if (!validateOn.value.lazy) {
       validate(true)
     }
   })
 
-  useToggleScope(() => validateOn.value.includes('input'), () => {
+  useToggleScope(() => validateOn.value.input, () => {
     watch(validationModel, () => {
       if (validationModel.value != null) {
         validate()
@@ -142,7 +147,7 @@ export function useValidation (
     })
   })
 
-  useToggleScope(() => validateOn.value.includes('blur'), () => {
+  useToggleScope(() => validateOn.value.blur, () => {
     watch(() => props.focused, val => {
       if (!val) validate()
     })
