@@ -326,9 +326,9 @@ function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
   const values: unknown[] = []
 
   ids.forEach(id => {
-    const item = items.find(item => item.id === id)
-    if (item) {
-      const itemIndex = items.indexOf(item)
+    const itemIndex = items.findIndex(item => item.id === id)
+    if (~itemIndex) {
+      const item = items[itemIndex]
       values.push(item.value != null ? item.value : itemIndex)
     }
   })
