@@ -139,7 +139,6 @@ export const VAlert = genericComponent<VAlertSlots>()({
     return () => {
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
-      const hasText = !!(props.text || slots.text)
       const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
@@ -216,7 +215,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               </VAlertTitle>
             )}
 
-            { hasText && (slots.text?.() ?? props.text) }
+            { slots.text?.() ?? props.text }
 
             { slots.default?.() }
           </div>
