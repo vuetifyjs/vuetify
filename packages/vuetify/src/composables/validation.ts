@@ -123,7 +123,9 @@ export function useValidation (
     // If there are no rules, default to valid
     form?.update(uid.value, !props.rules.length, [])
 
-    validate(validateOn.value.includes('lazy'))
+    if (!validateOn.value.includes('lazy')) {
+      validate(true)
+    }
   })
 
   useToggleScope(() => validateOn.value.includes('input'), () => {
