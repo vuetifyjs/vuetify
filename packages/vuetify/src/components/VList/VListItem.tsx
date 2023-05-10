@@ -28,7 +28,7 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { EventProp, genericComponent, useRender } from '@/util'
+import { deprecate, EventProp, genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -67,6 +67,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       default: undefined,
     },
     activeClass: String,
+    /* @deprecated */
     activeColor: String,
     appendAvatar: String,
     appendIcon: IconValue,
@@ -182,6 +183,10 @@ export const VListItem = genericComponent<VListItemSlots>()({
       const hasPrepend = !!(hasPrependMedia || slots.prepend)
 
       list?.updateHasPrepend(hasPrepend)
+
+      if (props.activeColor) {
+        deprecate('active-color', ['color', 'base-color'])
+      }
 
       return (
         <Tag
