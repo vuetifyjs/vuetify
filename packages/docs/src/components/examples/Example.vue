@@ -60,7 +60,7 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition v-if="hasRendered">
-          <div v-if="showCode">
+          <div v-show="showCode">
             <v-window v-model="template">
               <v-window-item
                 v-for="section of sections"

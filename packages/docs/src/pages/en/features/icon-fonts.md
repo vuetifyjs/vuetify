@@ -29,7 +29,7 @@ export default createVuetify({
     aliases,
     sets: {
       mdi,
-    }
+    },
   },
 })
 ```
@@ -66,7 +66,7 @@ export default createVuetify({
     sets: {
       fa,
       mdi,
-    }
+    },
   },
 })
 ```
@@ -320,7 +320,7 @@ export default createVuetify({
     aliases,
     sets: {
       fa,
-    }
+    },
   },
 })
 ```
@@ -442,7 +442,7 @@ export default createVuetify({
     sets: {
       custom,
     },
-  }
+  },
 })
 ```
 

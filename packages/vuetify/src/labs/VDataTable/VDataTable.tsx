@@ -140,7 +140,9 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
             {
               'v-data-table--show-select': props.showSelect,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...tableProps }
         >
           {{

@@ -52,9 +52,19 @@ export const useReleasesStore = defineStore('releases', {
 
       if (found) return found
 
-      const res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)
+      this.isLoading = true
 
-      if (res.data) {
+      let res: any
+
+      if (!tag.startsWith('v')) tag = `v${tag}`
+
+      if (tag.length >= 6) {
+        res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)
+      }
+
+      this.isLoading = false
+
+      if (res?.data) {
         this.releases.push(this.format(res.data))
 
         return res.data

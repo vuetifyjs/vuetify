@@ -9,7 +9,7 @@ import { toRef } from 'vue'
 
 export const makeVToolbarItemsProps = propsFactory({
   ...makeComponentProps(),
-  ...makeVariantProps({ variant: 'text' }),
+  ...makeVariantProps({ variant: 'text' } as const),
 }, 'v-toolbar-items')
 
 export const VToolbarItems = genericComponent()({

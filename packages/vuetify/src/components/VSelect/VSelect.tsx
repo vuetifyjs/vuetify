@@ -31,7 +31,7 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
 import type { GenericProps } from '@/util'
-import type { PropType } from 'vue'
+import type { Component, PropType } from 'vue'
 
 type Primitive = string | number | boolean | symbol
 
@@ -42,7 +42,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -77,24 +77,25 @@ export const makeVSelectProps = propsFactory({
   ...omit(makeVTextFieldProps({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
-  ...makeTransitionProps({ transition: { component: VDialogTransition } }),
+  ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'v-select')
 
 export const VSelect = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(props: {
-  items?: readonly T[]
+  items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
-  modelValue?: V
+  modelValue?: V | null
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<T>, index: number }]
+  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<Item>, index: number }]
   'prepend-item': []
   'append-item': []
   'no-data': []

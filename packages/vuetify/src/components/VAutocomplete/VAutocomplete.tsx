@@ -58,7 +58,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
 
 export const makeVAutocompleteProps = propsFactory({
   // TODO: implement post keyboard support
@@ -74,20 +74,21 @@ export const makeVAutocompleteProps = propsFactory({
 }, 'v-autocomplete')
 
 export const VAutocomplete = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(props: {
-  items?: readonly T[]
+  items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
-  modelValue?: V
+  modelValue?: V | null
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<T>, index: number }]
+  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<Item>, index: number }]
   'prepend-item': []
   'append-item': []
   'no-data': []
@@ -277,9 +278,7 @@ export const VAutocomplete = genericComponent<new <
 
         isSelecting.value = true
 
-        if (!slots.selection) {
-          search.value = item.title
-        }
+        search.value = item.title
 
         menu.value = false
         isPristine.value = true
@@ -291,7 +290,7 @@ export const VAutocomplete = genericComponent<new <
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
+        search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
@@ -299,6 +298,7 @@ export const VAutocomplete = genericComponent<new <
         if (!props.multiple && !search.value) model.value = []
         menu.value = false
         search.value = ''
+        selectionIndex.value = -1
       }
     })
 
@@ -328,12 +328,11 @@ export const VAutocomplete = genericComponent<new <
           onInput={ onInput }
           class={[
             'v-autocomplete',
+            `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
-              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
-              'v-autocomplete--selection-slot': !!slots.selection,
             },
             props.class,
           ]}

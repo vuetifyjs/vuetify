@@ -155,6 +155,8 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
   if (activatorFixed) {
     Object.assign(contentStyles.value, {
       position: 'fixed',
+      top: 0,
+      left: 0,
     })
   }
 

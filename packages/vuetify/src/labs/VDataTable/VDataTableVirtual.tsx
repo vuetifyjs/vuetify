@@ -112,10 +112,14 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
       return (
         <VTable
-          class="v-data-table"
-          style={{
-            '--v-table-row-height': convertToUnit(itemHeight.value),
-          }}
+          class={[
+            'v-data-table',
+            props.class,
+          ]}
+          style={[
+            { '--v-table-row-height': convertToUnit(itemHeight.value) },
+            props.style,
+          ]}
           { ...tableProps }
         >
           {{

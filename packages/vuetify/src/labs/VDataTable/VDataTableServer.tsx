@@ -112,7 +112,9 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
             {
               'v-data-table--loading': props.loading,
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...tableProps }
         >
           {{
