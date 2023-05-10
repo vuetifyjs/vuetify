@@ -1,7 +1,5 @@
 // Components
-import { VBtn } from '@/components/VBtn'
-
-import { makeVBtnProps } from '@/components/VBtn/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
