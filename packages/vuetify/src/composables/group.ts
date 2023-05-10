@@ -323,7 +323,7 @@ function getIds (items: UnwrapRef<GroupItem[]>, modelValue: any[]) {
 }
 
 function getValues (items: UnwrapRef<GroupItem[]>, ids: any[]) {
-  const values: object[] = []
+  const values: unknown[] = []
 
   ids.forEach(id => {
     const item = items.find(item => item.id === id)
