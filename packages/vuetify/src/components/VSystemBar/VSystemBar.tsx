@@ -12,7 +12,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVSystemBarProps = propsFactory({
@@ -43,7 +43,7 @@ export const VSystemBar = genericComponent()({
     const { layoutItemStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
-      position: ref('top'),
+      position: shallowRef('top'),
       layoutSize: height,
       elementSize: height,
       active: computed(() => true),

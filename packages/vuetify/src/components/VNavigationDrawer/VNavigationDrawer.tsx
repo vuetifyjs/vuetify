@@ -20,7 +20,7 @@ import { useSticky } from './sticky'
 import { useTouch } from './touch'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
 import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
@@ -108,7 +108,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { ssrBootStyles } = useSsrBoot()
 
     const rootEl = ref<HTMLElement>()
-    const isHovering = ref(false)
+    const isHovering = shallowRef(false)
 
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)

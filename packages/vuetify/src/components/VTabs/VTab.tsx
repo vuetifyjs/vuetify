@@ -2,19 +2,18 @@
 import './VTab.sass'
 
 // Components
-import { VBtn } from '@/components/VBtn'
+import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 
 // Composables
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref } from 'vue'
 import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
-import { makeVBtnProps } from '@/components/VBtn/VBtn'
+import { computed, ref, shallowRef } from 'vue'
+import { VTabsSymbol } from './shared'
 
 // Types
 import type { PropType } from 'vue'
-import { VTabsSymbol } from './shared'
 
 export const makeVTabProps = propsFactory({
   fixed: Boolean,
@@ -48,7 +47,7 @@ export const VTab = genericComponent()({
   setup (props, { slots, attrs }) {
     const { textColorClasses: sliderColorClasses, textColorStyles: sliderColorStyles } = useTextColor(props, 'sliderColor')
     const isHorizontal = computed(() => props.direction === 'horizontal')
-    const isSelected = ref(false)
+    const isSelected = shallowRef(false)
 
     const rootEl = ref<VBtn>()
     const sliderEl = ref<HTMLElement>()

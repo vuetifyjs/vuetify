@@ -21,7 +21,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, ref, shallowRef, toRef } from 'vue'
 import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, useRender } from '@/util'
 
 // Types
@@ -155,7 +155,7 @@ export const VList = genericComponent<new <T>(props: {
       },
     })
 
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
     const contentRef = ref<HTMLElement>()
     function onFocusin (e: FocusEvent) {
       isFocused.value = true

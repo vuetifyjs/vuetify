@@ -23,7 +23,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, shallowRef } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -42,7 +42,7 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -81,20 +81,21 @@ export const makeVSelectProps = propsFactory({
 }, 'v-select')
 
 export const VSelect = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(props: {
-  items?: readonly T[]
+  items?: T
   returnObject?: ReturnObject
   multiple?: Multiple
-  modelValue?: V
+  modelValue?: V | null
   'onUpdate:modelValue'?: (val: V) => void
 }) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<T>, index: number }]
+  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+  selection: [{ item: InternalItem<Item>, index: number }]
   'prepend-item': []
   'append-item': []
   'no-data': []
@@ -139,7 +140,7 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number

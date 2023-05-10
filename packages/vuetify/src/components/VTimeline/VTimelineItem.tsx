@@ -12,7 +12,7 @@ import { makeTagProps } from '@/composables/tag'
 // Utilities
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { ref, watch } from 'vue'
+import { ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -53,7 +53,7 @@ export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)
 
-    const dotSize = ref(0)
+    const dotSize = shallowRef(0)
     const dotRef = ref<VTimelineDivider>()
     watch(dotRef, newValue => {
       if (!newValue) return

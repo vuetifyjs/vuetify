@@ -17,7 +17,7 @@ import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
 
 // Utlities
-import { computed, ref, toRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -92,8 +92,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
     useOptions({
       sortBy,
-      page: ref(1),
-      itemsPerPage: ref(-1),
+      page: shallowRef(1),
+      itemsPerPage: shallowRef(-1),
       groupBy,
       search,
     })

@@ -9,7 +9,7 @@ import { MaybeTransition } from '@/composables/transition'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, shallowRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -50,8 +50,12 @@ export const VWindowItem = genericComponent()({
 
     if (!window || !groupItem) throw new Error('[Vuetify] VWindowItem must be used inside VWindow')
 
-    const isTransitioning = ref(false)
-    const hasTransition = computed(() => window.isReversed.value ? props.reverseTransition !== false : props.transition !== false)
+    const isTransitioning = shallowRef(false)
+    const hasTransition = computed(() => isBooted.value && (
+      window.isReversed.value
+        ? props.reverseTransition !== false
+        : props.transition !== false
+    ))
 
     function onAfterTransition () {
       if (!isTransitioning.value || !window) {

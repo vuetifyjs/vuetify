@@ -23,7 +23,7 @@ import { useRefs } from '@/composables/refs'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, nextTick, ref, toRef } from 'vue'
+import { computed, nextTick, shallowRef, toRef } from 'vue'
 import { createRange, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
@@ -134,7 +134,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { width } = useDisplay()
-    const maxButtons = ref(-1)
+    const maxButtons = shallowRef(-1)
 
     provideDefaults(undefined, { scoped: true })
 

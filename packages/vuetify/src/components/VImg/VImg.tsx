@@ -16,6 +16,7 @@ import {
   nextTick,
   onBeforeMount,
   ref,
+  shallowRef,
   vShow,
   watch,
   withDirectives,
@@ -89,11 +90,11 @@ export const VImg = genericComponent<VImgSlots>()({
   },
 
   setup (props, { emit, slots }) {
-    const currentSrc = ref('') // Set from srcset
+    const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
-    const state = ref<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
-    const naturalWidth = ref<number>()
-    const naturalHeight = ref<number>()
+    const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
+    const naturalWidth = shallowRef<number>()
+    const naturalHeight = shallowRef<number>()
 
     const normalisedSrc = computed<srcObject>(() => {
       return props.src && typeof props.src === 'object'
@@ -278,7 +279,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
     }
 
-    const isBooted = ref(false)
+    const isBooted = shallowRef(false)
     {
       const stop = watch(aspectRatio, val => {
         if (val) {
