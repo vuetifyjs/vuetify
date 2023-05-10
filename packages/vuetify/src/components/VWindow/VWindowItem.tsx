@@ -51,7 +51,11 @@ export const VWindowItem = genericComponent()({
     if (!window || !groupItem) throw new Error('[Vuetify] VWindowItem must be used inside VWindow')
 
     const isTransitioning = ref(false)
-    const hasTransition = computed(() => window.isReversed.value ? props.reverseTransition !== false : props.transition !== false)
+    const hasTransition = computed(() => isBooted.value && (
+      window.isReversed.value
+        ? props.reverseTransition !== false
+        : props.transition !== false
+    ))
 
     function onAfterTransition () {
       if (!isTransitioning.value || !window) {
