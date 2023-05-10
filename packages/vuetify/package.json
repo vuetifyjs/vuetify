@@ -33,7 +33,7 @@
   "module": "lib/framework.mjs",
   "jsdelivr": "dist/vuetify.js",
   "unpkg": "dist/vuetify.js",
-  "types": "lib/index.d.ts",
+  "types": "lib/index.d.mts",
   "sass": "lib/styles/main.sass",
   "styles": "lib/styles/main.css",
   "sideEffects": [
@@ -79,17 +79,17 @@
   "typesVersions": {
     "*": {
       "lib/framework.mjs": [
-        "lib/index.d.ts"
+        "lib/index.d.mts"
       ],
       "framework": [
-        "lib/index.d.ts"
+        "lib/index.d.mts"
       ],
       "*": [
         "*",
         "dist/*",
         "lib/*",
-        "lib/*.d.ts",
-        "lib/*/index.d.ts"
+        "lib/*.d.mts",
+        "lib/*/index.d.mts"
       ]
     }
   },
@@ -167,12 +167,16 @@
     "vue-router": "^4.1.6"
   },
   "peerDependencies": {
+    "typescript": ">=4.7",
     "vite-plugin-vuetify": "^1.0.0-alpha.12",
     "vue": "^3.2.0",
     "vue-i18n": "^9.0.0",
     "webpack-plugin-vuetify": "^2.0.0-alpha.11"
   },
   "peerDependenciesMeta": {
+    "typescript": {
+      "optional": true
+    },
     "vue-i18n": {
       "optional": true
     },
