@@ -23,7 +23,7 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, shallowRef } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
@@ -140,7 +140,7 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
 
     let keyboardLookupPrefix = ''
     let keyboardLookupLastTime: number

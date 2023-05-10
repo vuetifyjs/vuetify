@@ -15,7 +15,7 @@ import { useGroup } from '@/composables/group'
 import { useLocale, useRtl } from '@/composables/locale'
 
 // Utilities
-import { computed, provide, ref, watch } from 'vue'
+import { computed, provide, ref, shallowRef, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -111,7 +111,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
 
     const rootRef = ref()
     const isRtlReverse = computed(() => isRtl.value ? !props.reverse : props.reverse)
-    const isReversed = ref(false)
+    const isReversed = shallowRef(false)
     const transition = computed(() => {
       const axis = props.direction === 'vertical' ? 'y' : 'x'
       const reverse = isRtlReverse.value ? !isReversed.value : isReversed.value
@@ -119,7 +119,7 @@ export const VWindow = genericComponent<VWindowSlots>()({
 
       return `v-window-${axis}${direction}-transition`
     })
-    const transitionCount = ref(0)
+    const transitionCount = shallowRef(0)
     const transitionHeight = ref<undefined | string>(undefined)
 
     const activeIndex = computed(() => {

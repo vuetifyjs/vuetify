@@ -7,7 +7,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
-import { computed, onMounted, ref, watch } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { HSV } from '@/util'
@@ -45,8 +45,8 @@ export const VColorPickerCanvas = defineComponent({
   },
 
   setup (props, { emit }) {
-    const isInteracting = ref(false)
-    const isOutsideUpdate = ref(false)
+    const isInteracting = shallowRef(false)
+    const isOutsideUpdate = shallowRef(false)
     const dotPosition = ref({ x: 0, y: 0 })
 
     const dotStyles = computed(() => {
@@ -61,8 +61,8 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const canvasRef = ref<HTMLCanvasElement | null>()
-    const canvasWidth = ref(parseFloat(props.width))
-    const canvasHeight = ref(parseFloat(props.height))
+    const canvasWidth = shallowRef(parseFloat(props.width))
+    const canvasHeight = shallowRef(parseFloat(props.height))
     const { resizeRef } = useResizeObserver(entries => {
       if (!resizeRef.value?.offsetParent) return
 

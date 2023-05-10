@@ -2,8 +2,8 @@
 import './VMenu.sass'
 
 // Components
-import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialogTransition } from '@/components/transitions'
 import { VOverlay } from '@/components/VOverlay'
 
 // Composables
@@ -12,7 +12,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { type Component, computed, inject, mergeProps, provide, ref, watch } from 'vue'
+import { type Component, computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
 import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'
@@ -55,7 +55,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
     const overlay = ref<VOverlay>()
 
     const parent = inject(VMenuSymbol, null)
-    const openChildren = ref(0)
+    const openChildren = shallowRef(0)
     provide(VMenuSymbol, {
       register () {
         ++openChildren.value

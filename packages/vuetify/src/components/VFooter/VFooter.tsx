@@ -13,7 +13,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVFooterProps = propsFactory({
@@ -45,7 +45,7 @@ export const VFooter = genericComponent()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const autoHeight = ref(32)
+    const autoHeight = shallowRef(32)
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight

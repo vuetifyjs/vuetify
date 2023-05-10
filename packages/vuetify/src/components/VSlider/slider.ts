@@ -6,7 +6,7 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { clamp, createRange, getDecimals, propsFactory } from '@/util'
-import { computed, provide, ref, toRef } from 'vue'
+import { computed, provide, ref, shallowRef, toRef } from 'vue'
 
 // Types
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
@@ -195,9 +195,9 @@ export const useSlider = ({
   const trackColor = computed(() => props.error || props.disabled ? undefined : props.trackColor ?? props.color)
   const trackFillColor = computed(() => props.error || props.disabled ? undefined : props.trackFillColor ?? props.color)
 
-  const mousePressed = ref(false)
+  const mousePressed = shallowRef(false)
 
-  const startOffset = ref(0)
+  const startOffset = shallowRef(0)
   const trackContainerRef = ref<VSliderTrack | undefined>()
   const activeThumbRef = ref<HTMLElement | undefined>()
 

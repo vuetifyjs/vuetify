@@ -17,8 +17,8 @@ import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -98,7 +98,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const controlHeight = ref('')
+    const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
       props.persistentPlaceholder ||
