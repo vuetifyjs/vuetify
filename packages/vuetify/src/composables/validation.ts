@@ -117,7 +117,7 @@ export function useValidation (
     const set = new Set(value?.split(' ') ?? [])
 
     return {
-      blur: set.has('blur'),
+      blur: set.has('blur') || set.has('input'),
       input: set.has('input'),
       submit: set.has('submit'),
       lazy: set.has('lazy'),
