@@ -60,21 +60,20 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition v-if="hasRendered">
-          <div v-show="showCode">
-            <v-window v-model="template">
-              <v-window-item
-                v-for="section of sections"
-                :key="section.name"
-              >
-                <v-theme-provider :theme="theme">
-                  <app-markup
-                    :code="section.content"
-                    :rounded="false"
-                  />
-                </v-theme-provider>
-              </v-window-item>
-            </v-window>
-          </div>
+          <v-window v-show="showCode" v-model="template">
+            <v-window-item
+              v-for="(section, i) of sections"
+              :key="section.name"
+              :eager="i === 0 || isEager"
+            >
+              <v-theme-provider :theme="theme">
+                <app-markup
+                  :code="section.content"
+                  :rounded="false"
+                />
+              </v-theme-provider>
+            </v-window-item>
+          </v-window>
         </v-expand-transition>
 
         <v-theme-provider
@@ -101,7 +100,7 @@
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
@@ -132,6 +131,7 @@
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
   const hasRendered = ref(false)
+  const isEager = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -239,4 +239,6 @@
       },
     ]
   })
+
+  watch(showCode, val => val && (isEager.value = true))
 </script>
