@@ -20,6 +20,7 @@ import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
   id: ComputedRef<string>
+  labelId: ComputedRef<string>
   messagesId: ComputedRef<string>
   isDirty: ComputedRef<boolean>
   isDisabled: ComputedRef<boolean>
@@ -81,6 +82,7 @@ export const VInput = genericComponent<VInputSlots>()({
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const labelId = computed(() => `${id.value}-label`)
     const messagesId = computed(() => `${id.value}-messages`)
 
     const {
@@ -99,6 +101,7 @@ export const VInput = genericComponent<VInputSlots>()({
 
     const slotProps = computed<VInputSlot>(() => ({
       id,
+      labelId,
       messagesId,
       isDirty,
       isDisabled,

@@ -108,7 +108,7 @@ export const VField = genericComponent<new <T>(props: {
 
   props: {
     id: String,
-
+    labelId: String,
     ...makeFocusProps(),
     ...makeVFieldProps(),
   },
@@ -131,6 +131,7 @@ export const VField = genericComponent<new <T>(props: {
 
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
+    const labelId = computed(() => `${id.value}-label`)
     const messagesId = computed(() => `${id.value}-messages`)
 
     const labelRef = ref<VFieldLabel>()
@@ -279,7 +280,7 @@ export const VField = genericComponent<new <T>(props: {
               </VFieldLabel>
             )}
 
-            <VFieldLabel ref={ labelRef } for={ id.value }>
+            <VFieldLabel ref={ labelRef } id={ labelId.value } for={ id.value }>
               { label }
             </VFieldLabel>
 

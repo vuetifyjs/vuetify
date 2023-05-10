@@ -179,6 +179,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               isDirty,
               isReadonly,
               isValid,
+              labelId,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -190,6 +191,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                 role="textbox"
                 { ...fieldProps }
                 id={ id.value }
+                aria-labelledby={ labelId.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }

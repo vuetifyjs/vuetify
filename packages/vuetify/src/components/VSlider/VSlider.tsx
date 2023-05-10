@@ -122,7 +122,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 { slots.label?.(slotProps) ?? props.label
                   ? (
                     <VLabel
-                      id={ slotProps.id.value }
+                      id={ slotProps.labelId.value }
                       class="v-slider__label"
                       text={ props.label }
                     />
@@ -132,7 +132,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 { slots.prepend?.(slotProps) }
               </>
             ) : undefined,
-            default: ({ id, messagesId }) => (
+            default: ({ id, labelId, messagesId }) => (
               <div
                 class="v-slider__container"
                 onMousedown={ !readonly.value ? onSliderMousedown : undefined }
@@ -157,6 +157,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
                 <VSliderThumb
                   ref={ thumbContainerRef }
+                  aria-labelledby={ hasPrepend ? labelId.value : undefined }
                   aria-describedby={ messagesId.value }
                   focused={ isFocused.value }
                   min={ min.value }

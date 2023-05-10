@@ -221,10 +221,12 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
           {{
             ...slots,
             default: ({
+              id,
               isDisabled,
               isDirty,
               isReadonly,
               isValid,
+              labelId,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -238,6 +240,8 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
                 onClick:appendInner={ props['onClick:appendInner'] }
                 role="textbox"
                 { ...fieldProps }
+                id={ id.value }
+                aria-labelledby={ labelId.value }
                 active={ isActive.value || isDirty.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
