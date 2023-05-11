@@ -1,31 +1,30 @@
 <template>
   <div class="text-center">
-    <v-btn
-      color="blue"
-      dark
-      @click="sheet = !sheet"
-    >
+    <v-btn @click="sheet = !sheet">
       Open v-model
     </v-btn>
 
     <v-bottom-sheet v-model="sheet">
-      <v-sheet
+      <v-card
         class="text-center"
         height="200"
       >
-        <v-btn
-          class="mt-6"
-          variant="text"
-          color="red"
-          @click="sheet = !sheet"
-        >
-          close
-        </v-btn>
+        <v-card-text>
+          <v-btn
+            variant="text"
+            @click="sheet = !sheet"
+          >
+            close
+          </v-btn>
 
-        <div class="py-3">
-          This is a bottom sheet using the controlled by v-model instead of activator
-        </div>
-      </v-sheet>
+          <br>
+          <br>
+
+          <div>
+            This is a bottom sheet using the controlled by v-model instead of activator
+          </div>
+        </v-card-text>
+      </v-card>
     </v-bottom-sheet>
   </div>
 </template>

@@ -13,7 +13,11 @@ related:
 
 # Bottom sheets
 
-The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`. Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet can contain anything.
+The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`.
+
+![Bottom Sheet Entry](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+
+---
 
 <alert type="success">
 
@@ -23,7 +27,7 @@ This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/
 
 ## Usage
 
-Here we display an example list of actions that could be present in an application.
+Whereas a bottom navigation component is for buttons and specific application level actions, a bottom sheet is meant to contain anything.
 
 <usage name="v-bottom-sheet" />
 
@@ -31,31 +35,83 @@ Here we display an example list of actions that could be present in an applicati
 
 ## API
 
-<api-inline />
+| Component                                        | Description       |
+|--------------------------------------------------|-------------------|
+| [v-bottom-sheet](/api/v-bottom-sheet/) | Primary Component |
 
-## Examples
+<api-inline hide-links />
+
+## Anatomy
+
+The recommended components to use inside of a `v-bottom-sheet` are:
+
+* [v-card](/components/cards/)
+* [v-list](/components/lists/)
+* [v-sheet](/components/sheets/)
+
+![Bottom Sheet Anatomy](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+
+| Element / Area | Description                                                              |
+|----------------|--------------------------------------------------------------------------|
+| 1. Container   | The bottom sheet is a dialog that animates from the bottom of the screen |
+
+## Guide
+
+The `v-bottom-sheet` component is a modified [v-dialog](/components/dialogs/) that slides from the bottom of the screen. It is used for elevating content above other elements in a dialog style fashion. The bottom sheet can be controlled using the `v-model` prop or through the `activator` slot.
+
+The following code snippet is an example of a basic `v-bottom-sheet` component:
+
+```html
+<v-bottom-sheet>
+  <template v-slot:activator="{ props }">
+    <v-btn v-bind="props">Open Bottom Sheet</v-btn>
+  </template>
+
+  <v-card
+    title="Bottom Sheet"
+    text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis."
+  ></v-card>
+</v-bottom-sheet>
+```
 
 ### Props
 
-#### Inset
-
-Bottom sheets can be inset, reducing their maximum width on desktop to 70%. This can be further reduced manually using the **width** prop.
-
-<example file="v-bottom-sheet/prop-inset" />
+The `v-bottom-sheet` component has access to all of the props available in [v-dialog](/api/v-dialog/).
 
 #### Model
 
-Bottom sheets can be controlled using **v-model**. You can use it to close them or if you can't use `activator` slot.
+The **v-model** (or **model-value**) controls the visibility of the bottom sheet:
 
 <example file="v-bottom-sheet/prop-model" />
 
-#### Persistent
+This also works in tandem with the [activator]() slot.
 
-Persistent bottom sheets can't be closed by clicking outside them.
+#### Inset
 
-<example file="v-bottom-sheet/prop-persistent" />
+With the **inset** prop, reduce the maximum width of the content area on desktop to 70%. This can be further reduced manually using the **width** prop.
 
-### Misc
+<example file="v-bottom-sheet/prop-inset" />
+
+### Slots
+
+The `v-bottom-sheet` component has access to all of the slots available in [v-dialog](/api/v-dialog#slots).
+
+![Bottom Sheet Slots](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+
+| Slot         | Description                                         |
+|--------------|-----------------------------------------------------|
+| 1. Default   | The default slot                                    |
+| 2. Activator | The activator slot is used to open the bottom sheet |
+
+<alert type="info">
+
+The **activator** slot is not required when using the **v-model** prop.
+
+</alert>
+
+### Examples
+
+The following are a collection of examples that demonstrate more advanced and real world use of the `v-bottom-sheet` component.
 
 #### Music Player
 
@@ -68,3 +124,9 @@ Using a inset bottom sheet, you can make practical components such as this simpl
 By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
 <example file="v-bottom-sheet/misc-open-in-list" />
+
+#### Persistent
+
+Persistent bottom sheets can't be closed by clicking outside them.
+
+<example file="v-bottom-sheet/prop-persistent" />
