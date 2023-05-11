@@ -151,6 +151,19 @@ Funds donated through GitHub Sponsors and Patreon go directly to support John an
 
 <br>
 
+### Development Setup
+
+```bash
+# install deps
+yarn
+
+# build dist files
+yarn build
+
+# serve examples at localhost:8080
+yarn dev
+```
+
 ### 🚀 Introduction
 
 Vuetify is a no design skills required UI Library with beautifully handcrafted Vue Components. No design skills required — everything you need to create amazing applications is at your fingertips. Vuetify has a massive API that supports any use-case. Some highlights include:
