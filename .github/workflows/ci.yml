@@ -11,14 +11,6 @@ env:
   CROWDIN_BRANCH: v3
 
 jobs:
-  close:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next') && github.repository_owner == 'vuetifyjs'
-    steps:
-      - uses: vuetifyjs/close-action@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   pre_job:
     runs-on: ubuntu-latest
     outputs:
