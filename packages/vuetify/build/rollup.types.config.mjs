@@ -78,8 +78,8 @@ async function getShims () {
     )).join('\n')
 
   return (await fs.readFile(fileURLToPath(new URL('../src/shims.d.ts', import.meta.url)), { encoding: 'utf8' }))
-    .replace(/^\s+\/\/ @skip-build\s+.*$/gm, '')
-    .replace(/^\s+\/\/ @generate-components$/gm, components)
+    .replaceAll(/^\s*\/\/ @skip-build\s+.*$/gm, '')
+    .replace(/^\s*\/\/ @generate-components$/gm, components)
 }
 
 export default [
