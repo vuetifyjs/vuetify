@@ -17,7 +17,7 @@
     "piscina": "^3.2.0",
     "rimraf": "^3.0.2",
     "ts-morph": "^18.0.0",
-    "vue": "^3.2.47",
+    "vue": "^3.3.1",
     "vuetify": "^3.2.1"
   },
   "devDependencies": {

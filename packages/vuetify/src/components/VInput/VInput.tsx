@@ -2,7 +2,7 @@
 import './VInput.sass'
 
 // Components
-import { VMessages } from '@/components/VMessages'
+import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -62,6 +62,7 @@ export type VInputSlots = {
   prepend: [VInputSlot]
   append: [VInputSlot]
   details: [VInputSlot]
+  message: [VMessageSlot]
 }
 
 export const VInput = genericComponent<VInputSlots>()({

@@ -12,7 +12,7 @@ import { computed, provide, ref, toRef } from 'vue'
 import type { ExtractPropTypes, InjectionKey, PropType, Ref } from 'vue'
 import type { VSliderTrack } from './VSliderTrack'
 
-type Tick = {
+export type Tick = {
   value: number
   position: number
   label?: string

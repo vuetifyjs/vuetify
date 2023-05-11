@@ -17,7 +17,11 @@ import { convertToUnit, genericComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const VProgressCircular = genericComponent()({
+type VProgressCircularSlots = {
+  default: [{ value: number }]
+}
+
+export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',
 
   props: {

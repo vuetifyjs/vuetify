@@ -27,7 +27,7 @@ import { genericComponent, toPhysical, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 export type VNavigationDrawerImageSlot = {
-  image: string
+  image: string | undefined
 }
 
 export type VNavigationDrawerSlots = {

@@ -25,11 +25,11 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { DataTableItem, InternalDataTableHeader } from './types'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
-  colgroup: [InternalDataTableHeader]
+  colgroup: [{ columns: Ref<InternalDataTableHeader[]> }]
   default: []
   top: []
   headers: []

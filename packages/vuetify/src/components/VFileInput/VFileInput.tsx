@@ -32,6 +32,11 @@ import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VFileInputSlots = VInputSlots & VFieldSlots & {
   counter: []
+  selection: [{
+    fileNames: string[]
+    totalBytes: number
+    totalBytesReadable: string
+  }]
 }
 
 export const VFileInput = genericComponent<VFileInputSlots>()({

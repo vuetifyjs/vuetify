@@ -1,5 +1,5 @@
 // Components
-import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
+import { VDataTableGroupHeaderRow, type VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
@@ -38,7 +38,7 @@ type ItemSlot = {
   toggleSelect: (item: DataTableItem) => void
 }
 
-export type VDataTableRowsSlots = {
+export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
   default: []
   item: [ItemSlot]
   loading: []

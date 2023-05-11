@@ -2,7 +2,7 @@
 import './VSliderTrack.sass'
 
 // Components
-import { VSliderSymbol } from './slider'
+import { type Tick, VSliderSymbol } from './slider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
@@ -14,7 +14,7 @@ import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, useRender } from '@/util'
 
 export type VSliderTrackSlots = {
-  'tick-label': []
+  'tick-label': [{ tick: Tick, index: number }]
 }
 
 export const VSliderTrack = genericComponent<VSliderTrackSlots>()({

@@ -5,7 +5,7 @@ import '../VTextField/VTextField.sass'
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter } from '@/components/VCounter'
+import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
 
 // Directives
@@ -25,7 +25,11 @@ import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
-export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
+type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  counter: [VCounterSlot]
+}
+
+export const VTextarea = genericComponent<VTextareaSlots>()({
   name: 'VTextarea',
 
   directives: { Intersect },

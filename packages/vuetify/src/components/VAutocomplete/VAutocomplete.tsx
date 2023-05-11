@@ -65,20 +65,23 @@ export const VAutocomplete = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->(props: {
-  items?: readonly T[]
-  returnObject?: ReturnObject
-  multiple?: Multiple
-  modelValue?: V
-  'onUpdate:modelValue'?: (val: V) => void
-}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<T>, index: number }]
-  'prepend-item': []
-  'append-item': []
-  'no-data': []
-}>>()({
+>(
+  props: {
+    items?: readonly T[]
+    returnObject?: ReturnObject
+    multiple?: Multiple
+    modelValue?: V
+    'onUpdate:modelValue'?: (val: V) => void
+  },
+  slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
+    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: InternalItem<T>, index: number }]
+    'prepend-item': []
+    'append-item': []
+    'no-data': []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
 
   props: {
@@ -377,8 +380,9 @@ export const VAutocomplete = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map(item => slots.item?.({
+                      { displayItems.value.map((item, index) => slots.item?.({
                         item,
+                        index,
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem

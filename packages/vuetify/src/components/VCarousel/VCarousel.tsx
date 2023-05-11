@@ -21,7 +21,18 @@ import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
 import type { VWindowSlots } from '../VWindow/VWindow'
 
-export const VCarousel = genericComponent<VWindowSlots>()({
+type VCarouselSlots = VWindowSlots & {
+  item: [{
+    props: Record<string, any>
+    item: {
+      id: number
+      value: unknown
+      disabled: boolean | undefined
+    }
+  }]
+}
+
+export const VCarousel = genericComponent<VCarouselSlots>()({
   name: 'VCarousel',
 
   props: {

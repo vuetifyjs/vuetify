@@ -15,16 +15,21 @@ import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
 export type VListChildrenSlots<T> = {
-  [K in keyof VListItemSlots]: VListItemSlots[K] & [{ item: T }]
+  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & [{ item: T }]
 } & {
-  item: [T]
-  divider: [{ props: T }]
-  subheader: [{ props: T }]
+  default: []
+  item: [{ props: InternalListItem['props'] }]
+  divider: [{ props: InternalListItem['props'] }]
+  subheader: [{ props: InternalListItem['props'] }]
+  header: [{ props: InternalListItem['props'] }]
 }
 
-export const VListChildren = genericComponent<new <T extends InternalListItem>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
+export const VListChildren = genericComponent<new <T extends InternalListItem>(
+  props: {
+    items?: T[]
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VListChildren',
 
   props: {
@@ -43,10 +48,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(p
 
       if (type === 'subheader') {
         return slots.subheader?.({ props: itemProps }) ?? (
-          <VListSubheader
-            { ...itemProps }
-            v-slots={{ default: slots.subheader }}
-          />
+          <VListSubheader { ...itemProps } />
         )
       }
 
@@ -54,7 +56,6 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(p
         subtitle: slots.subtitle ? (slotProps: any) => slots.subtitle?.({ ...slotProps, item }) : undefined,
         prepend: slots.prepend ? (slotProps: any) => slots.prepend?.({ ...slotProps, item }) : undefined,
         append: slots.append ? (slotProps: any) => slots.append?.({ ...slotProps, item }) : undefined,
-        default: slots.default ? (slotProps: any) => slots.default?.({ ...slotProps, item }) : undefined,
         title: slots.title ? (slotProps: any) => slots.title?.({ ...slotProps, item }) : undefined,
       }
 
@@ -75,7 +76,7 @@ export const VListChildren = genericComponent<new <T extends InternalListItem>(p
           }}
         </VListGroup>
       ) : (
-        slots.item ? slots.item(itemProps) : (
+        slots.item ? slots.item({ props: itemProps }) : (
           <VListItem
             { ...itemProps }
             v-slots={ slotsWithItem }

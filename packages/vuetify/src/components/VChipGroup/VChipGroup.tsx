@@ -18,7 +18,17 @@ import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
 
-export const VChipGroup = genericComponent()({
+type VChipGroupProps = {
+  default: [{
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }]
+}
+
+export const VChipGroup = genericComponent<VChipGroupProps>()({
   name: 'VChipGroup',
 
   props: {

@@ -77,9 +77,12 @@ function useListItems (props: ItemProps & { itemType: string }) {
   return { items }
 }
 
-export const VList = genericComponent<new <T>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
+export const VList = genericComponent<new <T>(
+  props: {
+    items?: T[]
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
   props: {
