@@ -156,7 +156,7 @@ function connectedLocationStrategy (data: LocationStrategyData, props: StrategyP
     Object.assign(contentStyles.value, {
       position: 'fixed',
       top: 0,
-      left: 0,
+      [data.isRtl.value ? 'right' : 'left']: 0,
     })
   }
 
