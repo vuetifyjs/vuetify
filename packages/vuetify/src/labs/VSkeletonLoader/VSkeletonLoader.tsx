@@ -117,7 +117,7 @@ export const makeVSkeletonLoaderProps = propsFactory({
     default: '$vuetify.loading',
   },
   type: {
-    type: [String, Array] as PropType<VSkeletonLoaderType | VSkeletonLoaderType[]>,
+    type: [String, Array] as PropType<string | string[]>,
     default: 'image',
   },
 
