@@ -166,6 +166,10 @@ export const VAutocomplete = genericComponent<new <
 
       menu.value = true
     }
+    function onClickAppendInner (e: MouseEvent) {
+      e.stopPropagation()
+      menu.value = !menu.value
+    }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
@@ -341,6 +345,7 @@ export const VAutocomplete = genericComponent<new <
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
+          onClick:appendInner={ onClickAppendInner }
           onKeydown={ onKeydown }
         >
           {{

@@ -114,6 +114,7 @@ export const VField = genericComponent<new <T>(props: {
   },
 
   emits: {
+    mousedown: (e: MouseEvent) => true,
     'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
   },
@@ -266,7 +267,11 @@ export const VField = genericComponent<new <T>(props: {
             </div>
           )}
 
-          <div class="v-field__field" data-no-activator="">
+          <div
+            class="v-field__field"
+            onMousedown={ e => emit('mousedown', e) }
+            data-no-activator=""
+          >
             {['filled', 'solo', 'solo-inverted', 'solo-filled'].includes(props.variant) && hasLabel.value && (
               <VFieldLabel
                 key="floating-label"
