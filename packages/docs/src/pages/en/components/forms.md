@@ -20,7 +20,7 @@ Vuetify offers a simple built-in form validation system based on functions as ru
 
 The `v-form` component makes it easy to add validation to form inputs. All input components have a **rules** prop that can be used to specify conditions in which the input is either *valid* or *invalid*.
 
-Whenever the value of an input is changed, each rule will receive the new value and be re-evaluated. If a rule returns `false` or a `string`, validation has failed and the `string` value will be presented as an error message.
+Whenever the value of an input is changed, each rule receives a new value and is re-evaluated. If a rule returns `false` or a `string`, validation has failed and the `string` value is presented as an error message.
 
 <example file="v-form/usage" />
 
@@ -36,9 +36,9 @@ Whenever the value of an input is changed, each rule will receive the new value 
 
 ## Rules
 
-Rules allow you to apply custom validation on all form components. These are validated sequentially, and components will display a *maximum* of 1 error at a time, so make sure you order your rules accordingly.
+Rules allow you to apply custom validation on all form components. These are validated sequentially, and components display a *maximum* of 1 error at a time; so make sure you order your rules accordingly.
 
-The most basic of rules is a simple function that checks if an input has a value or not, i.e. it makes it a required input.
+The most basic of rules is a simple function that checks if an input has a value or not; i.e. it makes it a required input.
 
 <example file="v-form/rules-required" />
 
@@ -50,7 +50,7 @@ This also demonstrates the **validate-on** prop, which tells the `v-form` compon
 
 ## Validation state
 
-By default, all inputs run their validation rules when mounted. This means that inputs failing validation are mounted in an error state. To avoid this, add [lazy](/api/v-form/#props-lazy) to the **validate-on** prop.
+By default, all inputs run their validation rules when mounted. This means that inputs failing validation are mounted in an error state but do not display them to the user. To avoid this, add [lazy](/api/v-form/#props-lazy) to the **validate-on** prop.
 
 The following example contains a [v-text-field](/components/text-fields/) with a rule that requires the input to have a value. To avoid being mounted in an error state, we set **validate-on** to `"input lazy"`:
 
@@ -73,7 +73,7 @@ The following example contains a [v-text-field](/components/text-fields/) with a
 </script>
 ```
 
-The table below is a list of all available validation states:
+The following table is a list of all available validation states:
 
 | Validate On | Description                                                                                                  |
 |-------------|--------------------------------------------------------------------------------------------------------------|
