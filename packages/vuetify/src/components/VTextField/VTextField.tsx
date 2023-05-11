@@ -179,7 +179,6 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
               isDirty,
               isReadonly,
               isValid,
-              isPristine,
             }) => (
               <VField
                 ref={ vFieldRef }
@@ -195,7 +194,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
-                error={ !isPristine.value && !isValid.value }
+                error={ isValid.value === false }
               >
                 {{
                   ...slots,

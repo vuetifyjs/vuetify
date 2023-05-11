@@ -25,7 +25,7 @@ export interface VInputSlot {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isPristine: Ref<boolean>
-  isValid: ComputedRef<boolean>
+  isValid: ComputedRef<boolean | null>
   isValidating: Ref<boolean>
   reset: () => void
   resetValidation: () => void
@@ -112,7 +112,7 @@ export const VInput = genericComponent<VInputSlots>()({
     }))
 
     const messages = computed(() => {
-      if (errorMessages.value.length > 0) {
+      if (!isPristine.value && errorMessages.value.length > 0) {
         return errorMessages.value
       } else if (props.hint && (props.persistentHint || props.focused)) {
         return props.hint
@@ -177,7 +177,7 @@ export const VInput = genericComponent<VInputSlots>()({
             <div class="v-input__details">
               <VMessages
                 id={ messagesId.value }
-                active={ hasMessages && !isPristine.value }
+                active={ hasMessages }
                 messages={ messages.value }
                 v-slots={{ message: slots.message }}
               />

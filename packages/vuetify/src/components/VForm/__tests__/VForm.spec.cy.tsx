@@ -18,21 +18,14 @@ describe('VForm', () => {
       </Application>
     ))
 
+    cy.emitted(VForm, 'update:modelValue')
+      .should('be.undefined')
     cy.get('.v-text-field').type('Something!!')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [true],
-        ])
-      })
-      .get('.v-text-field').type('{backspace}{backspace}')
+      .should('deep.equal', [[false], [true]])
+    cy.get('.v-text-field').type('{backspace}{backspace}')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [true],
-          [false],
-        ])
-      })
+      .should('deep.equal', [[false], [true], [false]])
   })
 
   it('only emits true if all inputs are explicitly valid', () => {
@@ -45,18 +38,14 @@ describe('VForm', () => {
       </Application>
     ))
 
+    cy.emitted(VForm, 'update:modelValue')
+      .should('be.undefined')
     cy.get('.v-text-field').eq(0).type('Valid')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.be.undefined
-      })
-      .get('.v-text-field').eq(1).type('Valid')
+      .should('be.undefined')
+    cy.get('.v-text-field').eq(1).type('Valid')
     cy.emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.deep.equal([
-          [true],
-        ])
-      })
+      .should('deep.equal', [[true]])
   })
 
   it('exposes validate function', () => {
@@ -90,10 +79,10 @@ describe('VForm', () => {
     cy.get('.v-text-field')
       .type('Something')
       .should('have.class', 'v-input--error')
-      .get('.v-form').then(() => {
-        form.value.reset()
-      })
-      .get('.v-text-field')
+    cy.get('.v-form').then(() => {
+      form.value.reset()
+    })
+    cy.get('.v-text-field')
       .should('have.not.class', 'v-input--error')
       .find('input')
       .should('have.value', '')
@@ -112,21 +101,17 @@ describe('VForm', () => {
     cy.get('.v-text-field')
       .type('Something')
       .should('have.class', 'v-input--error')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.be.undefined
-      })
-      .get('.v-form').then(() => {
-        form.value.resetValidation()
-      })
-      .get('.v-text-field')
+    cy.emitted(VForm, 'update:modelValue')
+      .should('deep.equal', [[false]])
+    cy.get('.v-form').then(() => {
+      form.value.resetValidation()
+    })
+    cy.get('.v-text-field')
       .should('have.not.class', 'v-input--error')
       .find('input')
       .should('have.value', 'Something')
-      .emitted(VForm, 'update:modelValue')
-      .then(emits => {
-        expect(emits).to.be.undefined
-      })
+    cy.emitted(VForm, 'update:modelValue')
+      .should('deep.equal', [[false], [null]])
   })
 
   it('does not submit form if validation fails', () => {
@@ -186,40 +171,6 @@ describe('VForm', () => {
       })
   })
 
-  it('runs validation on mount', () => {
-    const form = ref()
-
-    cy.mount(() => (
-      <Application>
-        <VForm ref={ form }>
-          <VTextField name="empty" rules={[v => v?.length < 5 || 'Error']} modelValue="" />
-          <VTextField name="error" rules={[v => v?.length < 5 || 'Error']} modelValue="Hello" />
-          <VTextField name="valid" rules={[v => v?.length < 5 || 'Error']} modelValue="Hell" />
-        </VForm>
-      </Application>
-    ))
-
-    cy.get('.v-messages__message')
-      .should('have.length', 1)
-      .and('have.text', 'Error')
-      .then(() => {
-        expect(form.value.errors).to.deep.equal([
-          {
-            id: 'empty',
-            errorMessages: [],
-          },
-          {
-            id: 'error',
-            errorMessages: ['Error'],
-          },
-          {
-            id: 'valid',
-            errorMessages: [],
-          },
-        ])
-      })
-  })
-
   it('provides validate-on prop to child inputs', () => {
     const form = ref()
 
@@ -232,7 +183,7 @@ describe('VForm', () => {
     ))
 
     cy.then(() => {
-      expect(form.value.isValid).to.be.false
+      expect(form.value.isValid).to.be.true
     })
       .get('.v-text-field').should('not.have.class', 'v-input--error')
       .get('.v-text-field input')

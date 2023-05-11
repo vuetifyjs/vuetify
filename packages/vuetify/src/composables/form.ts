@@ -51,8 +51,8 @@ export interface FormProps {
   disabled: boolean
   fastFail: boolean
   readonly: boolean
-  modelValue: boolean
-  'onUpdate:modelValue': ((val: boolean) => void) | undefined
+  modelValue: boolean | null
+  'onUpdate:modelValue': ((val: boolean | null) => void) | undefined
   validateOn: ValidationProps['validateOn']
 }
 
@@ -60,7 +60,10 @@ export const makeFormProps = propsFactory({
   disabled: Boolean,
   fastFail: Boolean,
   readonly: Boolean,
-  modelValue: Boolean,
+  modelValue: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   validateOn: {
     type: String as PropType<FormProps['validateOn']>,
     default: 'input',
@@ -130,7 +133,8 @@ export function createForm (props: FormProps) {
     errors.value = results
     model.value =
       invalid > 0 ? false
-      : valid === items.value.length
+      : valid === items.value.length ? true
+      : null
   }, { deep: true })
 
   provide(FormKey, {
@@ -144,7 +148,7 @@ export function createForm (props: FormProps) {
         validate,
         reset,
         resetValidation,
-        isValid: false,
+        isValid: null,
         errorMessages: [],
       })
     },

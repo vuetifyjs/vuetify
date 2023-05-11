@@ -5,7 +5,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { makeFocusProps } from '@/composables/focus'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
+import { computed, nextTick, onBeforeMount, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -84,12 +84,18 @@ export function useValidation (
       : internalErrorMessages.value
   })
   const isValid = computed(() => {
-    return !(props.error || errorMessages.value.length)
+    if (props.error || props.errorMessages.length) return false
+    if (!props.rules.length) return true
+    if (isPristine.value) {
+      return internalErrorMessages.value.length ? null : true
+    } else {
+      return !internalErrorMessages.value.length
+    }
   })
   const isValidating = ref(false)
   const validationClasses = computed(() => {
     return {
-      [`${name}--error`]: !isPristine.value && !isValid.value,
+      [`${name}--error`]: isValid.value === false,
       [`${name}--dirty`]: isDirty.value,
       [`${name}--disabled`]: isDisabled.value,
       [`${name}--readonly`]: isReadonly.value,
@@ -124,13 +130,11 @@ export function useValidation (
     }
   })
 
-  onMounted(() => {
-    // If there are no rules, default to valid
-    form?.update(uid.value, !props.rules.length, [])
-
+  onMounted(async () => {
     if (!validateOn.value.lazy) {
-      validate(true)
+      await validate(true)
     }
+    form?.update(uid.value, isValid.value, errorMessages.value)
   })
 
   useToggleScope(() => validateOn.value.input, () => {
@@ -158,12 +162,17 @@ export function useValidation (
   })
 
   function reset () {
-    resetValidation()
     model.value = null
+    nextTick(() => resetValidation())
   }
 
   function resetValidation () {
     isPristine.value = true
+    if (!validateOn.value.lazy) {
+      validate(true)
+    } else {
+      internalErrorMessages.value = []
+    }
   }
 
   async function validate (silent = false) {
