@@ -163,7 +163,7 @@ export function useValidation (
 
   function reset () {
     model.value = null
-    nextTick(() => resetValidation())
+    nextTick(resetValidation)
   }
 
   function resetValidation () {
