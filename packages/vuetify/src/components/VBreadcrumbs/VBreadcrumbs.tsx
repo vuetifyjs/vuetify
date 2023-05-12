@@ -17,7 +17,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { computed, toRef } from 'vue'
 
 // Types
@@ -29,6 +29,28 @@ export type BreadcrumbItem = string | (Partial<LinkProps> & {
   title: string
   disabled?: boolean
 })
+
+export const makeVBreadcrumbsProps = propsFactory({
+  activeClass: String,
+  activeColor: String,
+  bgColor: String,
+  color: String,
+  disabled: Boolean,
+  divider: {
+    type: String,
+    default: '/',
+  },
+  icon: IconValue,
+  items: {
+    type: Array as PropType<BreadcrumbItem[]>,
+    default: () => ([]),
+  },
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'ul' }),
+}, 'v-breadcrumbs')
 
 export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   props: {
@@ -43,27 +65,7 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBreadcrumbs',
 
-  props: {
-    activeClass: String,
-    activeColor: String,
-    bgColor: String,
-    color: String,
-    disabled: Boolean,
-    divider: {
-      type: String,
-      default: '/',
-    },
-    icon: IconValue,
-    items: {
-      type: Array as PropType<BreadcrumbItem[]>,
-      default: () => ([]),
-    },
-
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'ul' }),
-  },
+  props: makeVBreadcrumbsProps(),
 
   setup (props, { slots }) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))

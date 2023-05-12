@@ -47,6 +47,7 @@ export const makeVListGroupProps = propsFactory({
   appendIcon: IconValue,
   fluid: Boolean,
   subgroup: Boolean,
+  title: String,
   value: null,
 
   ...makeComponentProps(),
@@ -56,11 +57,7 @@ export const makeVListGroupProps = propsFactory({
 export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',
 
-  props: {
-    title: String,
-
-    ...makeVListGroupProps(),
-  },
+  props: makeVListGroupProps(),
 
   setup (props, { slots }) {
     const { isOpen, open, id: _id } = useNestedItem(toRef(props, 'value'), true)

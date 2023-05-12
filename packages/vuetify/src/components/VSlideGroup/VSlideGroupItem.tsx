@@ -21,9 +21,7 @@ type VSlideGroupItemSlots = {
 export const VSlideGroupItem = genericComponent<VSlideGroupItemSlots>()({
   name: 'VSlideGroupItem',
 
-  props: {
-    ...makeGroupItemProps(),
-  },
+  props: makeGroupItemProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,

@@ -4,6 +4,7 @@ import {
   onBeforeUnmount,
   onMounted,
   ref,
+  shallowRef,
   watch,
 } from 'vue'
 import { clamp, consoleWarn, propsFactory } from '@/util'
@@ -44,11 +45,11 @@ export function useScroll (
   const { canScroll } = args
   let previousScroll = 0
   const target = ref<Element | Window | null>(null)
-  const currentScroll = ref(0)
-  const savedScroll = ref(0)
-  const currentThreshold = ref(0)
-  const isScrollActive = ref(false)
-  const isScrollingUp = ref(false)
+  const currentScroll = shallowRef(0)
+  const savedScroll = shallowRef(0)
+  const currentThreshold = shallowRef(0)
+  const isScrollActive = shallowRef(false)
+  const isScrollingUp = shallowRef(false)
 
   const scrollThreshold = computed(() => {
     return Number(props.scrollThreshold)

@@ -25,7 +25,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -33,6 +33,56 @@ import type { PropType } from 'vue'
 const allowedTypes = ['success', 'info', 'warning', 'error'] as const
 
 type ContextualType = typeof allowedTypes[number]
+
+export const makeVAlertProps = propsFactory({
+  border: {
+    type: [Boolean, String] as PropType<boolean | 'top' | 'end' | 'bottom' | 'start'>,
+    validator: (val: boolean | string) => {
+      return typeof val === 'boolean' || [
+        'top',
+        'end',
+        'bottom',
+        'start',
+      ].includes(val)
+    },
+  },
+  borderColor: String,
+  closable: Boolean,
+  closeIcon: {
+    type: IconValue,
+    default: '$close',
+  },
+  closeLabel: {
+    type: String,
+    default: '$vuetify.close',
+  },
+  icon: {
+    type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
+    default: null,
+  },
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  prominent: Boolean,
+  title: String,
+  text: String,
+  type: {
+    type: String as PropType<ContextualType>,
+    validator: (val: ContextualType) => allowedTypes.includes(val),
+  },
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'flat' } as const),
+}, 'v-alert')
 
 export type VAlertSlots = {
   default: []
@@ -46,55 +96,7 @@ export type VAlertSlots = {
 export const VAlert = genericComponent<VAlertSlots>()({
   name: 'VAlert',
 
-  props: {
-    border: {
-      type: [Boolean, String] as PropType<boolean | 'top' | 'end' | 'bottom' | 'start'>,
-      validator: (val: boolean | string) => {
-        return typeof val === 'boolean' || [
-          'top',
-          'end',
-          'bottom',
-          'start',
-        ].includes(val)
-      },
-    },
-    borderColor: String,
-    closable: Boolean,
-    closeIcon: {
-      type: IconValue,
-      default: '$close',
-    },
-    closeLabel: {
-      type: String,
-      default: '$vuetify.close',
-    },
-    icon: {
-      type: [Boolean, String, Function, Object] as PropType<false | IconValue>,
-      default: null,
-    },
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    prominent: Boolean,
-    title: String,
-    text: String,
-    type: {
-      type: String as PropType<ContextualType>,
-      validator: (val: ContextualType) => allowedTypes.includes(val),
-    },
-
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'flat' } as const),
-  },
+  props: makeVAlertProps(),
 
   emits: {
     'click:close': (e: MouseEvent) => true,
@@ -137,7 +139,6 @@ export const VAlert = genericComponent<VAlertSlots>()({
     return () => {
       const hasPrepend = !!(slots.prepend || icon.value)
       const hasTitle = !!(slots.title || props.title)
-      const hasText = !!(props.text || slots.text)
       const hasClose = !!(slots.close || props.closable)
 
       return isActive.value && (
@@ -214,7 +215,7 @@ export const VAlert = genericComponent<VAlertSlots>()({
               </VAlertTitle>
             )}
 
-            { hasText && (slots.text?.() ?? props.text) }
+            { slots.text?.() ?? props.text }
 
             { slots.default?.() }
           </div>

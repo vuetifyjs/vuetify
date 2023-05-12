@@ -3,7 +3,6 @@
     "active": "Controls the **active** state of the item. This is typically used to highlight the component",
     "activeClass": "The class applied to the component when it is in an active state",
     "appendIcon": "Creates a [v-icon](/api/v-icon/) component after default content in the **append** slot",
-    "attach": "Specifies which DOM element that this component should detach to. String can be any valid querySelector and Object can be any valid Node. This attaches to the root `v-app` component by default",
     "auto": "Centers list on selected element",
     "activeColor": "The applied color when the component is in an active state",
     "appendAvatar": "Appends a [v-avatar](/components/avatars/) component after default content in the **append** slot",

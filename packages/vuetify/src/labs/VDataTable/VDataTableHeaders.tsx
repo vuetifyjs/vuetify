@@ -13,7 +13,7 @@ import { useSort } from './composables/sort'
 
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { CSSProperties } from 'vue'
@@ -33,6 +33,22 @@ type HeadersSlotProps = {
   getFixedStyles: (column: InternalDataTableHeader, y: number) => CSSProperties | undefined
 }
 
+export const makeVDataTableHeadersProps = propsFactory({
+  color: String,
+  sticky: Boolean,
+  multiSort: Boolean,
+  sortAscIcon: {
+    type: IconValue,
+    default: '$sortAsc',
+  },
+  sortDescIcon: {
+    type: IconValue,
+    default: '$sortDesc',
+  },
+
+  ...makeLoaderProps(),
+}, 'v-data-table-headers')
+
 export type VDataTableHeadersSlots = {
   default: []
   headers: [HeadersSlotProps]
@@ -43,21 +59,7 @@ export type VDataTableHeadersSlots = {
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
 
-  props: {
-    color: String,
-    sticky: Boolean,
-    multiSort: Boolean,
-    sortAscIcon: {
-      type: IconValue,
-      default: '$sortAsc',
-    },
-    sortDescIcon: {
-      type: IconValue,
-      default: '$sortDesc',
-    },
-
-    ...makeLoaderProps(),
-  },
+  props: makeVDataTableHeadersProps(),
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy } = useSort()

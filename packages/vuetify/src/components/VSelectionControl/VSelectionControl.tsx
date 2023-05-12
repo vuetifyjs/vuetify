@@ -16,7 +16,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -156,8 +156,8 @@ export const VSelectionControl = genericComponent<new <T>(
     } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = ref(false)
-    const isFocusVisible = ref(false)
+    const isFocused = shallowRef(false)
+    const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
 
     group?.onForceUpdate(() => {

@@ -27,7 +27,7 @@ Similar to the [v-window](/components/windows) component, `v-slide-group` lets i
 | Component | Description |
 | - | - |
 | [v-slide-group](/api/v-slide-group/) | Primary Component |
-| [v-slide-item](/api/v-slide-item/) | Sub-component used for modifying the `v-slide-group` state |
+| [v-slide-group-item](/api/v-slide-group-item/) | Sub-component used for modifying the `v-slide-group` state |
 
 <api-inline hide-links />
 

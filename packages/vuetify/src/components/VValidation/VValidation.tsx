@@ -11,9 +11,7 @@ export type VValidationSlots = {
 export const VValidation = genericComponent<VValidationSlots>()({
   name: 'VValidation',
 
-  props: {
-    ...makeValidationProps(),
-  },
+  props: makeValidationProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,

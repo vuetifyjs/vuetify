@@ -15,7 +15,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { computed, ref, watch } from 'vue'
+import { computed, shallowRef, watch } from 'vue'
 import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
 
@@ -87,10 +87,10 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
     const { isRtl } = useRtl()
     const { mobile } = useDisplay()
     const group = useGroup(props, props.symbol)
-    const isOverflowing = ref(false)
-    const scrollOffset = ref(0)
-    const containerSize = ref(0)
-    const contentSize = ref(0)
+    const isOverflowing = shallowRef(false)
+    const scrollOffset = shallowRef(0)
+    const containerSize = shallowRef(0)
+    const contentSize = shallowRef(0)
     const isHorizontal = computed(() => props.direction === 'horizontal')
 
     const { resizeRef: containerRef, contentRect: containerRect } = useResizeObserver()
@@ -151,7 +151,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       })
     }
 
-    const disableTransition = ref(false)
+    const disableTransition = shallowRef(false)
 
     let startTouch = 0
     let startOffset = 0
@@ -190,7 +190,7 @@ export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
       containerRef.value[isHorizontal.value ? 'scrollLeft' : 'scrollTop'] = 0
     }
 
-    const isFocused = ref(false)
+    const isFocused = shallowRef(false)
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
 

@@ -5,7 +5,6 @@ import './VCard.sass'
 
 // Components
 import { VCardActions } from './VCardActions'
-import type { VCardItemSlots } from './VCardItem'
 import { VCardItem } from './VCardItem'
 import { VCardText } from './VCardText'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -32,10 +31,47 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VCardItemSlots } from './VCardItem'
 import type { LoaderSlotProps } from '@/composables/loader'
+
+export const makeVCardProps = propsFactory({
+  appendAvatar: String,
+  appendIcon: IconValue,
+  disabled: Boolean,
+  flat: Boolean,
+  hover: Boolean,
+  image: String,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  subtitle: String,
+  text: String,
+  title: String,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLoaderProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'elevated' } as const),
+}, 'v-card')
 
 export type VCardSlots = VCardItemSlots & {
   default: []
@@ -51,41 +87,7 @@ export const VCard = genericComponent<VCardSlots>()({
 
   directives: { Ripple },
 
-  props: {
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    flat: Boolean,
-    hover: Boolean,
-    image: String,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    subtitle: String,
-    text: String,
-    title: String,
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLoaderProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'elevated' } as const),
-  },
+  props: makeVCardProps(),
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)

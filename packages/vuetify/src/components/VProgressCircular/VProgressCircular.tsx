@@ -12,10 +12,33 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+
+export const makeVProgressCircularProps = propsFactory({
+  bgColor: String,
+  color: String,
+  indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  rotate: {
+    type: [Number, String],
+    default: 0,
+  },
+  width: {
+    type: [Number, String],
+    default: 4,
+  },
+
+  ...makeComponentProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'div' }),
+  ...makeThemeProps(),
+}, 'v-progress-circular')
 
 type VProgressCircularSlots = {
   default: [{ value: number }]
@@ -24,28 +47,7 @@ type VProgressCircularSlots = {
 export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',
 
-  props: {
-    bgColor: String,
-    color: String,
-    indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    rotate: {
-      type: [Number, String],
-      default: 0,
-    },
-    width: {
-      type: [Number, String],
-      default: 4,
-    },
-
-    ...makeComponentProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'div' }),
-    ...makeThemeProps(),
-  },
+  props: makeVProgressCircularProps(),
 
   setup (props, { slots }) {
     const MAGIC_RADIUS_CONSTANT = 20

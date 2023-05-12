@@ -8,9 +8,18 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 export const VItemGroupSymbol = Symbol.for('vuetify:v-item-group')
+
+export const makeVItemGroupProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeGroupProps({
+    selectedClass: 'v-item--selected',
+  }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-item-group')
 
 type VItemGroupSlots = {
   default: [{
@@ -25,14 +34,7 @@ type VItemGroupSlots = {
 export const VItemGroup = genericComponent<VItemGroupSlots>()({
   name: 'VItemGroup',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeGroupProps({
-      selectedClass: 'v-item--selected',
-    }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVItemGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,

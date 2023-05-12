@@ -103,7 +103,11 @@ async function loadLocale (componentName: string, locale: string, fallback = {})
     })
     return Object.assign(fallback, data.default)
   } catch (err) {
-    console.error(err.message?.split('imported from')[0] ?? err.message)
+    if (err.code === 'ERR_MODULE_NOT_FOUND') {
+      console.error(`Missing locale for ${componentName} in ${locale}`)
+    } else {
+      console.error(err.message)
+    }
     return fallback
   }
 }

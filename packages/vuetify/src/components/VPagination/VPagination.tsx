@@ -23,8 +23,8 @@ import { useRefs } from '@/composables/refs'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, nextTick, ref, toRef } from 'vue'
-import { createRange, genericComponent, keyValues, useRender } from '@/util'
+import { computed, nextTick, shallowRef, toRef } from 'vue'
+import { createRange, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'
@@ -52,86 +52,88 @@ export type VPaginationSlots = {
   last: [ControlSlot]
 }
 
+export const makeVPaginationProps = propsFactory({
+  activeColor: String,
+  start: {
+    type: [Number, String],
+    default: 1,
+  },
+  modelValue: {
+    type: Number,
+    default: (props: any) => props.start as number,
+  },
+  disabled: Boolean,
+  length: {
+    type: [Number, String],
+    default: 1,
+    validator: (val: number) => val % 1 === 0,
+  },
+  totalVisible: [Number, String],
+  firstIcon: {
+    type: IconValue,
+    default: '$first',
+  },
+  prevIcon: {
+    type: IconValue,
+    default: '$prev',
+  },
+  nextIcon: {
+    type: IconValue,
+    default: '$next',
+  },
+  lastIcon: {
+    type: IconValue,
+    default: '$last',
+  },
+  ariaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.root',
+  },
+  pageAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.page',
+  },
+  currentPageAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.currentPage',
+  },
+  firstAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.first',
+  },
+  previousAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.previous',
+  },
+  nextAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.next',
+  },
+  lastAriaLabel: {
+    type: String,
+    default: '$vuetify.pagination.ariaLabel.last',
+  },
+  ellipsis: {
+    type: String,
+    default: '...',
+  },
+  showFirstLastPage: Boolean,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'nav' }),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'v-pagination')
+
 export const VPagination = genericComponent<VPaginationSlots>()({
   name: 'VPagination',
 
-  props: {
-    activeColor: String,
-    start: {
-      type: [Number, String],
-      default: 1,
-    },
-    modelValue: {
-      type: Number,
-      default: (props: any) => props.start as number,
-    },
-    disabled: Boolean,
-    length: {
-      type: [Number, String],
-      default: 1,
-      validator: (val: number) => val % 1 === 0,
-    },
-    totalVisible: [Number, String],
-    firstIcon: {
-      type: IconValue,
-      default: '$first',
-    },
-    prevIcon: {
-      type: IconValue,
-      default: '$prev',
-    },
-    nextIcon: {
-      type: IconValue,
-      default: '$next',
-    },
-    lastIcon: {
-      type: IconValue,
-      default: '$last',
-    },
-    ariaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.root',
-    },
-    pageAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.page',
-    },
-    currentPageAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.currentPage',
-    },
-    firstAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.first',
-    },
-    previousAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.previous',
-    },
-    nextAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.next',
-    },
-    lastAriaLabel: {
-      type: String,
-      default: '$vuetify.pagination.ariaLabel.last',
-    },
-    ellipsis: {
-      type: String,
-      default: '...',
-    },
-    showFirstLastPage: Boolean,
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'nav' }),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'text' } as const),
-  },
+  props: makeVPaginationProps(),
 
   emits: {
     'update:modelValue': (value: number) => true,
@@ -147,7 +149,7 @@ export const VPagination = genericComponent<VPaginationSlots>()({
     const { isRtl } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { width } = useDisplay()
-    const maxButtons = ref(-1)
+    const maxButtons = shallowRef(-1)
 
     provideDefaults(undefined, { scoped: true })
 

@@ -2,7 +2,7 @@
 import { aliases, mdi } from '@/iconsets/mdi'
 
 // Utilities
-import { computed, inject, isRef } from 'vue'
+import { computed, inject, unref } from 'vue'
 import { defineComponent, genericComponent, mergeDeep, propsFactory } from '@/util'
 
 // Types
@@ -187,13 +187,13 @@ export function createIcons (options?: IconOptions) {
   }, options)
 }
 
-export const useIcon = (props: Ref<string | undefined> | { icon?: IconValue }) => {
+export const useIcon = (props: Ref<IconValue | undefined>) => {
   const icons = inject(IconSymbol)
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
   const iconData = computed<IconInstance>(() => {
-    const iconAlias = isRef(props) ? props.value : props.icon
+    const iconAlias = unref(props)
 
     if (!iconAlias) return { component: VComponentIcon }
 

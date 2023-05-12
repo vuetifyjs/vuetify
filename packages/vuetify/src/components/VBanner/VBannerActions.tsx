@@ -3,17 +3,19 @@ import { makeComponentProps } from '@/composables/component'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utility
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVBannerActionsProps = propsFactory({
+  color: String,
+  density: String,
+
+  ...makeComponentProps(),
+}, 'v-banner-actions')
 
 export const VBannerActions = genericComponent()({
   name: 'VBannerActions',
 
-  props: {
-    color: String,
-    density: String,
-
-    ...makeComponentProps(),
-  },
+  props: makeVBannerActionsProps(),
 
   setup (props, { slots }) {
     provideDefaults({

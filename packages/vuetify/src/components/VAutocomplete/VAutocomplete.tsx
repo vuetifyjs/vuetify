@@ -6,7 +6,7 @@ import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VIcon } from '@/components'
+import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
@@ -22,8 +22,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
-import { computed, mergeProps, nextTick, ref, watch } from 'vue'
-import { genericComponent, omit, useRender, wrapInArray } from '@/util'
+import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
+import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -58,25 +58,39 @@ type Val <T, ReturnObject extends boolean> = T extends Primitive
 type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
   Multiple extends true
     ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
+    : Val<T, ReturnObject> | null
+
+export const makeVAutocompleteProps = propsFactory({
+  // TODO: implement post keyboard support
+  // autoSelectFirst: Boolean,
+  search: String,
+
+  ...makeFilterProps({ filterKeys: ['title'] }),
+  ...makeSelectProps(),
+  ...omit(makeVTextFieldProps({
+    modelValue: null,
+  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  ...makeTransitionProps({ transition: false }),
+}, 'v-autocomplete')
 
 export const VAutocomplete = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends readonly (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
 >(
   props: {
-    items?: readonly T[]
+    items?: T
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: V
+    modelValue?: V | null
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<T>, index: number }]
+    item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: InternalItem<Item>, index: number }]
     'prepend-item': []
     'append-item': []
     'no-data': []
@@ -84,18 +98,7 @@ export const VAutocomplete = genericComponent<new <
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
 
-  props: {
-    // TODO: implement post keyboard support
-    // autoSelectFirst: Boolean,
-    search: String,
-
-    ...makeFilterProps({ filterKeys: ['title'] }),
-    ...makeSelectProps(),
-    ...omit(makeVTextFieldProps({
-      modelValue: null,
-    }), ['validationValue', 'dirty', 'appendInnerIcon']),
-    ...makeTransitionProps({ transition: false }),
-  },
+  props: makeVAutocompleteProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -107,8 +110,8 @@ export const VAutocomplete = genericComponent<new <
   setup (props, { slots }) {
     const { t } = useLocale()
     const vTextFieldRef = ref()
-    const isFocused = ref(false)
-    const isPristine = ref(true)
+    const isFocused = shallowRef(false)
+    const isPristine = shallowRef(true)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -118,7 +121,7 @@ export const VAutocomplete = genericComponent<new <
         _menu.value = v
       },
     })
-    const selectionIndex = ref(-1)
+    const selectionIndex = shallowRef(-1)
     const color = computed(() => vTextFieldRef.value?.color)
     const { items, transformIn, transformOut } = useItems(props)
     const { textColorClasses, textColorStyles } = useTextColor(color)
@@ -250,20 +253,17 @@ export const VAutocomplete = genericComponent<new <
     }
 
     function onAfterLeave () {
-      if (isFocused.value) isPristine.value = true
+      if (isFocused.value) {
+        isPristine.value = true
+        vTextFieldRef.value?.focus()
+      }
     }
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
     }
 
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
-        vTextFieldRef.value?.focus()
-      }
-    }
-
-    const isSelecting = ref(false)
+    const isSelecting = shallowRef(false)
 
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -281,9 +281,7 @@ export const VAutocomplete = genericComponent<new <
 
         isSelecting.value = true
 
-        if (!slots.selection) {
-          search.value = item.title
-        }
+        search.value = item.title
 
         menu.value = false
         isPristine.value = true
@@ -295,13 +293,15 @@ export const VAutocomplete = genericComponent<new <
     watch(isFocused, val => {
       if (val) {
         isSelecting.value = true
-        search.value = props.multiple || !!slots.selection ? '' : String(selections.value.at(-1)?.props.title ?? '')
+        search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
         isPristine.value = true
 
         nextTick(() => isSelecting.value = false)
       } else {
+        if (!props.multiple && !search.value) model.value = []
         menu.value = false
         search.value = ''
+        selectionIndex.value = -1
       }
     })
 
@@ -331,12 +331,11 @@ export const VAutocomplete = genericComponent<new <
           onInput={ onInput }
           class={[
             'v-autocomplete',
+            `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
-              [`v-autocomplete--${props.multiple ? 'multiple' : 'single'}`]: true,
-              'v-autocomplete--selection-slot': !!slots.selection,
             },
             props.class,
           ]}
@@ -372,7 +371,6 @@ export const VAutocomplete = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
-                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />

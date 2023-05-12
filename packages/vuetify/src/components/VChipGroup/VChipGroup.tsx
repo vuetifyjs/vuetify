@@ -10,13 +10,28 @@ import { makeVariantProps } from '@/composables/variant'
 import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
-import { deepEqual, genericComponent, useRender } from '@/util'
+import { deepEqual, genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
 
 export const VChipGroupSymbol = Symbol.for('vuetify:v-chip-group')
+
+export const makeVChipGroupProps = propsFactory({
+  column: Boolean,
+  filter: Boolean,
+  valueComparator: {
+    type: Function as PropType<typeof deepEqual>,
+    default: deepEqual,
+  },
+
+  ...makeComponentProps(),
+  ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'v-chip-group')
 
 type VChipGroupProps = {
   default: [{
@@ -31,20 +46,7 @@ type VChipGroupProps = {
 export const VChipGroup = genericComponent<VChipGroupProps>()({
   name: 'VChipGroup',
 
-  props: {
-    column: Boolean,
-    filter: Boolean,
-    valueComparator: {
-      type: Function as PropType<typeof deepEqual>,
-      default: deepEqual,
-    },
-
-    ...makeComponentProps(),
-    ...makeGroupProps({ selectedClass: 'v-chip--selected' }),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipGroupProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,

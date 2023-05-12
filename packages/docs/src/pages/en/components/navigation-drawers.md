@@ -35,7 +35,7 @@ The navigation drawer is primarily used to house links to the pages in your appl
 
 <alert type="info">
 
-  The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **mini-variant.sync** to a data prop.
+  The **expand-on-hover** prop does not alter the content area of **v-main**. To have content area respond to **expand-on-hover**, bind **v-model:rail** to a data prop.
 
 </alert>
 

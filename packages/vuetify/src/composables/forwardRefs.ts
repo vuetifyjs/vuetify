@@ -6,7 +6,7 @@ const Refs = Symbol('Forwarded refs')
 /** Omit properties starting with P */
 type OmitPrefix<T, P extends string> = [Extract<keyof T, `${P}${any}`>] extends [never] ? T : Omit<T, `${P}${any}`>
 
-type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : never
+type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : T
 
 function getDescriptor (obj: any, key: PropertyKey) {
   let currentObj = obj

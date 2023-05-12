@@ -8,13 +8,14 @@ import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
 
 // Composables
-import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider, useSteps } from './slider'
+import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
@@ -25,19 +26,21 @@ export type VSliderSlots = VInputSlots & {
   'thumb-label': []
 }
 
+export const makeVSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeSliderProps(),
+  ...makeVInputProps(),
+
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+}, 'v-slider')
+
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeSliderProps(),
-    ...makeVInputProps(),
-
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-  },
+  props: makeVSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,
@@ -48,6 +51,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
   setup (props, { slots, emit }) {
     const thumbContainerRef = ref()
+    const { rtlClasses } = useRtl()
 
     const steps = useSteps(props)
 
@@ -105,6 +109,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }

@@ -11,12 +11,13 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   convertToUnit,
   createRange,
   genericComponent,
+  propsFactory,
   useRender,
 } from '@/util'
 
@@ -31,6 +32,17 @@ export interface VVirtualScrollSlot<T> {
   index: number
 }
 
+export const makeVVirtualScrollProps = propsFactory({
+  items: {
+    type: Array,
+    default: () => ([]),
+  },
+  itemHeight: [Number, String],
+
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+}, 'v-virtual-scroll')
+
 export const VVirtualScroll = genericComponent<new <T>(
   props: {
     items?: readonly T[]
@@ -41,20 +53,11 @@ export const VVirtualScroll = genericComponent<new <T>(
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScroll',
 
-  props: {
-    items: {
-      type: Array,
-      default: () => ([]),
-    },
-    itemHeight: [Number, String],
-
-    ...makeComponentProps(),
-    ...makeDimensionProps(),
-  },
+  props: makeVVirtualScrollProps(),
 
   setup (props, { slots }) {
-    const first = ref(0)
-    const baseItemHeight = ref(props.itemHeight)
+    const first = shallowRef(0)
+    const baseItemHeight = shallowRef(props.itemHeight)
     const itemHeight = computed({
       get: () => parseInt(baseItemHeight.value ?? 0, 10),
       set (val) {
