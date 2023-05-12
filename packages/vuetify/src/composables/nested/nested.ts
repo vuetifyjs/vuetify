@@ -1,6 +1,6 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { getCurrentInstance, getUid, propsFactory } from '@/util'
-import { computed, inject, onBeforeUnmount, provide, ref, toRaw } from 'vue'
+import { computed, inject, onBeforeUnmount, onMounted, provide, ref, toRaw } from 'vue'
 import { listOpenStrategy, multipleOpenStrategy, singleOpenStrategy } from './openStrategies'
 import {
   classicSelectStrategy,
@@ -23,6 +23,7 @@ export interface NestedProps {
   openStrategy: OpenStrategyProp | undefined
   selected: unknown[] | undefined
   opened: unknown[] | undefined
+  openOnMount?: 'selected' | 'all'
   mandatory: boolean
   'onUpdate:selected': ((val: unknown[]) => void) | undefined
   'onUpdate:opened': ((val: unknown[]) => void) | undefined
@@ -42,6 +43,7 @@ type NestedProvide = {
     open: (id: unknown, value: boolean, event?: Event) => void
     select: (id: unknown, value: boolean, event?: Event) => void
     openOnSelect: (id: unknown, value: boolean, event?: Event) => void
+    getPath: (id: unknown) => unknown[]
   }
 }
 
@@ -60,6 +62,7 @@ export const emptyNested: NestedProvide = {
     opened: ref(new Set()),
     selected: ref(new Map()),
     selectedValues: ref([]),
+    getPath: () => [],
   },
 }
 
@@ -69,6 +72,9 @@ export const makeNestedProps = propsFactory({
   opened: Array as PropType<unknown[]>,
   selected: Array as PropType<unknown[]>,
   mandatory: Boolean,
+  openOnMount: {
+    type: String as PropType<'selected' | 'all'>,
+  },
 }, 'nested')
 
 export const useNested = (props: NestedProps) => {
@@ -125,6 +131,21 @@ export const useNested = (props: NestedProps) => {
 
     return path
   }
+
+  onMounted(() => {
+    if (props.openOnMount === 'all') {
+      opened.value = new Set(children.value.keys())
+    } else if (props.openOnMount === 'selected') {
+      const newOpened = new Set(opened.value)
+      for (const key of selected.value.keys()) {
+        const path = getPath(key).slice(0, -1)
+        for (const parent of path) {
+          newOpened.add(parent)
+        }
+      }
+      opened.value = newOpened
+    }
+  })
 
   const vm = getCurrentInstance('nested')
 
@@ -206,6 +227,7 @@ export const useNested = (props: NestedProps) => {
       },
       children,
       parents,
+      getPath,
     },
   }
 
