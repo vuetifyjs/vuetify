@@ -136,6 +136,10 @@ export const VBtn = genericComponent<VBtnSlots>()({
       if (isDisabled.value) return
 
       link.navigate?.(e)
+
+      const shouldOpenInNewWindow = e.metaKey || attrs.target === '_blank'
+      if (shouldOpenInNewWindow) return
+
       group?.toggle()
     }
 
