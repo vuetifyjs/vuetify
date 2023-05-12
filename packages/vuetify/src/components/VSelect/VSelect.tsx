@@ -82,7 +82,7 @@ export const makeVSelectProps = propsFactory({
 
 export const VSelect = genericComponent<new <
   T extends readonly any[],
-  Item = T extends (infer U)[] ? U : never,
+  Item = T extends readonly (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
