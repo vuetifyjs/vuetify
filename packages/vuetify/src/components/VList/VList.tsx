@@ -11,7 +11,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeItemsProps } from '@/composables/items'
+import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -26,11 +26,11 @@ import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, 
 
 // Types
 import type { GenericProps } from '@/util'
-import type { InternalItem, ItemProps } from '@/composables/items'
+import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
 
-export interface InternalListItem<T = any> extends InternalItem<T> {
+export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 

@@ -7,7 +7,8 @@ import { propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { InternalItem, ItemProps } from '@/composables/items'
+import type { DataTableItemProps } from './items'
+import type { DataTableItem } from '../types'
 
 export const makeDataTableSelectProps = propsFactory({
   showSelect: Boolean,
@@ -27,9 +28,12 @@ export const VDataTableSelectionSymbol: InjectionKey<{
   allSelected: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-selection')
 
-type SelectionProps = Pick<ItemProps, 'itemValue'> & { modelValue: any[], 'onUpdate:modelValue': ((value: any[]) => void) | undefined }
+type SelectionProps = {
+  modelValue: any[]
+  'onUpdate:modelValue': ((value: any[]) => void) | undefined
+} & Pick<DataTableItemProps, 'itemValue'>
 
-export function provideSelection <T extends InternalItem = InternalItem> (props: SelectionProps, allItems: Ref<T[]>) {
+export function provideSelection <T extends DataTableItem> (props: SelectionProps, allItems: Ref<T[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {

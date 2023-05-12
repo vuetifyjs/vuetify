@@ -16,7 +16,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeItemsProps, useItems } from '@/composables/items'
+import { makeItemsProps, useItems } from '@/composables/list-items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
 import { useLocale } from '@/composables/locale'
@@ -29,7 +29,7 @@ import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
-import type { InternalItem } from '@/composables/items'
+import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
 import type { Component, PropType } from 'vue'
 
@@ -95,9 +95,9 @@ export const VSelect = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<Item>, index: number }]
+    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: ListItem<Item>, index: number }]
     'prepend-item': []
     'append-item': []
     'no-data': []
@@ -218,7 +218,7 @@ export const VSelect = genericComponent<new <
         model.value = [item]
       }
     }
-    function select (item: InternalItem) {
+    function select (item: ListItem) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 

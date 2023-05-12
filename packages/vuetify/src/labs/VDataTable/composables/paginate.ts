@@ -7,8 +7,6 @@ import { clamp, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
-import type { InternalItem } from '@/composables/items'
-import type { DataTableItem } from '../types'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
@@ -93,7 +91,7 @@ export function providePagination (options: {
   }
 
   function setPage (value: number) {
-    page.value = clamp(value, 0, pageCount.value)
+    page.value = clamp(value, 1, pageCount.value)
   }
 
   const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength, nextPage, prevPage, setPage, setItemsPerPage }

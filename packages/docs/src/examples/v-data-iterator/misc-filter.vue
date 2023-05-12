@@ -9,27 +9,27 @@
     <template v-slot:header>
       <v-toolbar
         dark
-        color="blue darken-3"
-        class="pa-2 mb-2"
+        color="blue-darken-3"
+        class="px-2 mb-2"
       >
         <v-text-field
           v-model="search"
           clearable
           hide-details
           prepend-inner-icon="mdi-magnify"
-          label="Search"
+          placeholder="Search"
           variant="solo"
+          density="comfortable"
         ></v-text-field>
         <v-spacer></v-spacer>
         <v-select
           v-model="sortKey"
-          flat
-          solo-inverted
           hide-details
           :items="keys"
           :item-value="item => item.toLowerCase()"
-          prepend-inner-icon="mdi-magnify"
+          prepend-inner-icon="mdi-sort"
           label="Sort by"
+          density="comfortable"
         ></v-select>
         <v-spacer></v-spacer>
         <v-btn-toggle
@@ -37,16 +37,12 @@
           mandatory
         >
           <v-btn
-            size="large"
-            depressed
             color="blue"
             value="asc"
           >
             <v-icon>mdi-arrow-up</v-icon>
           </v-btn>
           <v-btn
-            size="large"
-            depressed
             color="blue"
             value="desc"
           >
@@ -82,7 +78,7 @@
                 v-for="(key, index) in filteredKeys"
                 :key="index"
                 :title="key"
-                :subtitle="item.raw[key.toLowerCase()]"
+                :subtitle="String(item.raw[key.toLowerCase()])"
                 :class="{ 'text-blue': sortKey === key.toLowerCase() }"
               ></v-list-item>
             </v-list>
@@ -94,27 +90,25 @@
     <template v-slot:footer>
       <div class="d-flex align-center justify-space-around pa-4">
         <span class="grey--text">Items per page</span>
-        <v-menu offset-y>
+        <v-menu>
           <template v-slot:activator="{ props }">
             <v-btn
-              dark
-              text
+              variant="text"
               color="primary"
               class="ml-2"
+              append-icon="mdi-chevron-down"
               v-bind="props"
             >
               {{ itemsPerPage }}
-              <v-icon>mdi-chevron-down</v-icon>
             </v-btn>
           </template>
           <v-list>
             <v-list-item
               v-for="(number, index) in itemsPerPageArray"
               :key="index"
+              :title="number"
               @click="itemsPerPage = number"
-            >
-              <v-list-item-title>{{ number }}</v-list-item-title>
-            </v-list-item>
+            ></v-list-item>
           </v-list>
         </v-menu>
 
@@ -127,19 +121,16 @@
           Page {{ page }} of {{ numberOfPages }}
         </span>
         <v-btn
-          fab
-          dark
-          color="blue darken-3"
-          class="mr-1"
+          icon
+          size="small"
           @click="prevPage"
         >
           <v-icon>mdi-chevron-left</v-icon>
         </v-btn>
         <v-btn
-          fab
-          dark
-          color="blue darken-3"
-          class="ml-1"
+          icon
+          size="small"
+          class="ml-2"
           @click="nextPage"
         >
           <v-icon>mdi-chevron-right</v-icon>
@@ -153,8 +144,8 @@
   export default {
     data () {
       return {
-        itemsPerPageArray: [4, 8, 12],
-        itemsPerPage: 4,
+        itemsPerPageArray: [3, 6, 9],
+        itemsPerPage: 3,
         page: 1,
         search: '',
         sortKey: 'name',
@@ -275,7 +266,7 @@
     },
     computed: {
       numberOfPages () {
-        return Math.ceil(this.items.length / this.itemsPerPage)
+        return Math.ceil(this.desserts.length / this.itemsPerPage)
       },
       filteredKeys () {
         return this.keys.filter(key => key !== 'Name')

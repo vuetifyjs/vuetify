@@ -243,7 +243,7 @@ const allowedRefs = [
   'ValidationRule',
   'FormValidationResult',
   'SortItem',
-  'InternalItem',
+  'ListItem',
   'InternalDataTableItem',
   'DataTableItem',
   'DataTableHeader',

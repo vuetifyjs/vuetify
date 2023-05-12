@@ -1,64 +1,15 @@
 <template>
   <v-data-iterator
     :items="desserts"
-    :items-per-page="4"
-    :sort-by="sortBy"
-    :search="search"
+    :items-per-page="3"
   >
     <template v-slot:header>
-      <v-toolbar
-        dark
-        color="blue darken-3"
-        class="pa-2 mb-2"
-      >
-        <v-text-field
-          v-model="search"
-          clearable
-          hide-details
-          prepend-inner-icon="mdi-magnify"
-          label="Search"
-          variant="solo"
-        ></v-text-field>
-        <v-spacer></v-spacer>
-        <v-select
-          v-model="sortKey"
-          flat
-          solo-inverted
-          hide-details
-          :items="keys"
-          prepend-inner-icon="mdi-magnify"
-          label="Sort by"
-        ></v-select>
-        <v-spacer></v-spacer>
-        <v-btn-toggle
-          v-model="sortOrder"
-          mandatory
-        >
-          <v-btn
-            size="large"
-            depressed
-            color="blue"
-            value="asc"
-          >
-            <v-icon>mdi-arrow-up</v-icon>
-          </v-btn>
-          <v-btn
-            size="large"
-            depressed
-            color="blue"
-            value="desc"
-          >
-            <v-icon>mdi-arrow-down</v-icon>
-          </v-btn>
-        </v-btn-toggle>
-      </v-toolbar>
+      <div class="bg-primary pa-2 mb-2">
+        Header
+      </div>
     </template>
 
-    <template v-slot:no-data>
-      <v-alert class="ma-2" type="warning">No results</v-alert>
-    </template>
-
-    <template v-slot:default="{ items, isSelected, toggleSelect }">
+    <template v-slot:default="{ items }">
       <v-row>
         <v-col
           v-for="item in items"
@@ -71,78 +22,27 @@
           <v-card class="fill-height">
             <v-card-title class="subheading font-weight-bold d-flex align-center justify-space-between">
               {{ item.raw.name }}
-              <v-checkbox-btn :model-value="isSelected(item)" @click="toggleSelect(item)"></v-checkbox-btn>
             </v-card-title>
 
             <v-divider></v-divider>
 
             <v-list density="compact">
-              <v-list-item title="Calories" :subtitle="item.raw.calories"></v-list-item>
-              <v-list-item title="Fat" :subtitle="item.raw.fat"></v-list-item>
-              <v-list-item title="Carbs" :subtitle="item.raw.carbs"></v-list-item>
-              <v-list-item title="Protein" :subtitle="item.raw.protein"></v-list-item>
-              <v-list-item title="Sodium" :subtitle="item.raw.sodium"></v-list-item>
-              <v-list-item title="Calcium" :subtitle="item.raw.calcium"></v-list-item>
-              <v-list-item title="Iron" :subtitle="item.raw.iron"></v-list-item>
+              <v-list-item title="Calories" :subtitle="String(item.raw.calories)"></v-list-item>
+              <v-list-item title="Fat" :subtitle="String(item.raw.fat)"></v-list-item>
+              <v-list-item title="Carbs" :subtitle="String(item.raw.carbs)"></v-list-item>
+              <v-list-item title="Protein" :subtitle="String(item.raw.protein)"></v-list-item>
+              <v-list-item title="Sodium" :subtitle="String(item.raw.sodium)"></v-list-item>
+              <v-list-item title="Calcium" :subtitle="String(item.raw.calcium)"></v-list-item>
+              <v-list-item title="Iron" :subtitle="String(item.raw.iron)"></v-list-item>
             </v-list>
           </v-card>
         </v-col>
       </v-row>
     </template>
 
-    <template v-slot:footer="{ prevPage, nextPage, pageCount, page, setItemsPerPage, itemsPerPage }">
-      <div class="d-flex align-center justify-space-around pa-4">
-        <span class="grey--text">Items per page</span>
-        <v-menu offset-y>
-          <template v-slot:activator="{ props }">
-            <v-btn
-              dark
-              text
-              color="primary"
-              class="ml-2"
-              v-bind="props"
-            >
-              {{ itemsPerPage }}
-              <v-icon>mdi-chevron-down</v-icon>
-            </v-btn>
-          </template>
-          <v-list>
-            <v-list-item
-              v-for="(number, index) in itemsPerPageArray"
-              :key="index"
-              @click="setItemsPerPage(number)"
-            >
-              <v-list-item-title>{{ number }}</v-list-item-title>
-            </v-list-item>
-          </v-list>
-        </v-menu>
-
-        <v-spacer></v-spacer>
-
-        <span
-          class="mr-4
-          grey--text"
-        >
-          Page {{ page }} of {{ pageCount }}
-        </span>
-        <v-btn
-          fab
-          dark
-          color="blue darken-3"
-          class="mr-1"
-          @click="prevPage"
-        >
-          <v-icon>mdi-chevron-left</v-icon>
-        </v-btn>
-        <v-btn
-          fab
-          dark
-          color="blue darken-3"
-          class="ml-1"
-          @click="nextPage"
-        >
-          <v-icon>mdi-chevron-right</v-icon>
-        </v-btn>
+    <template v-slot:footer>
+      <div class="bg-primary pa-2 mt-2">
+        Footer
       </div>
     </template>
   </v-data-iterator>
@@ -151,21 +51,7 @@
 <script>
   export default {
     data: () => ({
-      itemsPerPageArray: [4, 8, 12],
-      search: '',
-      filter: {},
-      sortKey: 'name',
-      sortOrder: 'asc',
-      keys: [
-        'name',
-        'calories',
-        'fat',
-        'carbs',
-        'protein',
-        'sodium',
-        'calcium',
-        'iron',
-      ],
+      itemsPerPageArray: [3, 6, 9],
       desserts: [
         {
           name: 'Frozen Yogurt',
@@ -278,11 +164,6 @@
           key: this.sortKey,
           order: this.sortOrder,
         }]
-      },
-    },
-    methods: {
-      updateItemsPerPage (number) {
-        this.itemsPerPage = number
       },
     },
   }

@@ -1,22 +1,11 @@
-// Composables
-import { makeItemsProps, useItems } from '@/composables/items'
-
 // Utilities
 import { computed } from 'vue'
+import type { SelectItemKey } from '@/util'
 import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
-import type { Ref } from 'vue'
-import type { ItemProps } from '@/composables/items'
+import type { PropType, Ref } from 'vue'
 import type { DataTableItem, InternalDataTableHeader } from '../types'
-
-export const makeDataTableItemProps = propsFactory({
-  // TODO: Worth it to make specific datatable implementation
-  // without title, children?
-  ...makeItemsProps({
-    itemValue: 'id',
-  }),
-}, 'v-data-table-item')
 
 function add (obj: Record<string, unknown>, key: string, value: unknown) {
   const path = key.split('.')
@@ -35,19 +24,60 @@ function add (obj: Record<string, unknown>, key: string, value: unknown) {
   obj[path[0]] = value
 }
 
-export function useDataTableItems (props: ItemProps, columns: Ref<InternalDataTableHeader[]>) {
-  const { items } = useItems(props)
+export interface DataTableItemProps {
+  items: any[]
+  itemValue: SelectItemKey
+  returnObject: boolean
+}
 
-  const dataTableItems = computed<DataTableItem[]>(() => items.value.map(item => {
-    return {
-      ...item,
-      type: 'item',
-      columns: columns.value.reduce((obj, column) => {
-        add(obj, column.key, getPropertyFromItem(item.raw, column.value ?? column.key))
-        return obj
-      }, {} as Record<string, unknown>),
-    }
-  }))
+// Composables
+export const makeDataTableItemProps = propsFactory({
+  items: {
+    type: Array as PropType<DataTableItemProps['items']>,
+    default: () => ([]),
+  },
+  itemValue: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
+    default: 'value',
+  },
+  returnObject: Boolean,
+}, 'v-data-table-item')
 
-  return { items: dataTableItems }
+export function transformItem (
+  props: Omit<DataTableItemProps, 'items'>,
+  item: any,
+  columns: InternalDataTableHeader[]
+): DataTableItem {
+  const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
+  const itemColumns = columns.reduce((obj, column) => {
+    add(obj, column.key, getPropertyFromItem(item.raw, column.value ?? column.key))
+    return obj
+  }, {} as Record<string, unknown>)
+
+  return {
+    type: 'item',
+    value,
+    columns: itemColumns,
+    raw: item,
+  }
+}
+
+export function transformItems (
+  props: Omit<DataTableItemProps, 'items'>,
+  items: DataTableItemProps['items'],
+  columns: InternalDataTableHeader[]
+) {
+  const array: DataTableItem[] = []
+
+  for (const item of items) {
+    array.push(transformItem(props, item, columns))
+  }
+
+  return array
+}
+
+export function useDataTableItems (props: DataTableItemProps, columns: Ref<InternalDataTableHeader[]>) {
+  const items = computed(() => transformItems(props, props.items, columns.value))
+
+  return { items }
 }

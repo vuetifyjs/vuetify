@@ -4,7 +4,7 @@ import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
 
 // Composables
-import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
+import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
 import { makeDataTableProps } from './VDataTable'
@@ -32,6 +32,7 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & {
 
 export const makeVDataTableVirtualProps = propsFactory({
   ...makeDataTableProps(),
+  ...makeDataTableGroupProps(),
   ...makeDataTableVirtualProps(),
   ...makeFilterProps(),
 }, 'v-data-table-virtual')
@@ -61,9 +62,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     })
     const { items } = useDataTableItems(props, columns)
 
-    const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
+    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { transform: item => item.columns })
 
     provideSort({ sortBy, multiSort, mustSort })
     const { sortByWithGroups, opened, extractRows } = provideGroupBy({ groupBy, sortBy })

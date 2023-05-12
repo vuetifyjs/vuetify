@@ -12,7 +12,7 @@ related:
 
 # Data iterators
 
-The `v-data-iterator` component is used for displaying data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
+The `v-data-iterator` component is used for displaying arbitrary data, and shares a majority of its functionality with the `v-data-table` component. Features include sorting, searching, pagination, and selection.
 
 ## Usage
 
@@ -40,7 +40,7 @@ The `v-data-iterator` has internal state for both selection and expansion, just 
 
 #### Header and footer
 
-The `v-data-iterator` has both a header and footer slot for adding extra content.
+The `v-data-iterator` has both a **header** and **footer** slot for adding extra content.
 
 <example file="v-data-iterator/slot-header-and-footer" />
 

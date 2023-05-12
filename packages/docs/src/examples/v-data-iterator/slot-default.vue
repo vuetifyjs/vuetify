@@ -2,7 +2,7 @@
   <v-data-iterator
     :items="desserts"
     item-value="name"
-    :items-per-page="4"
+    :items-per-page="3"
   >
     <template v-slot:default="{ items, isExpanded, toggleExpand }">
       <v-row>

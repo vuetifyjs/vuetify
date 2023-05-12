@@ -1,28 +1,59 @@
 // Composables
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeItemsProps, useItems } from '@/composables/items'
 import { makeTagProps } from '@/composables/tag'
-import { createPagination, makeDataTablePaginateProps, usePaginatedItems } from '../VDataTable/composables/paginate'
-import { createSelection, makeDataTableSelectProps } from '../VDataTable/composables/select'
-import { createSort, makeDataTableSortProps, useSortedItems } from '../VDataTable/composables/sort'
-import { createExpanded, makeDataTableExpandProps } from '../VDataTable/composables/expand'
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '../VDataTable/composables/paginate'
+import { makeDataTableSelectProps, provideSelection } from '../VDataTable/composables/select'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '../VDataTable/composables/sort'
+import { makeDataTableExpandProps, provideExpanded } from '../VDataTable/composables/expand'
+import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '../VDataTable/composables/group'
+import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
 import { useOptions } from '../VDataTable/composables/options'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
-import type { InternalItem } from '@/composables/items'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from '../VDataTable/composables/group'
-import { useProxiedModel } from '@/composables/proxiedModel'
+import type { SortItem } from '../VDataTable/composables/sort'
+import type { DataIteratorItem } from './composables/items'
+import type { Group } from '../VDataTable/composables/group'
 
-export const VDataIterator = defineComponent({
+type VDataIteratorSlotProps = {
+  page: number
+  itemsPerPage: number
+  sortBy: readonly SortItem[]
+  pageCount: number
+  toggleSort: ReturnType<typeof provideSort>['toggleSort']
+  prevPage: ReturnType<typeof providePagination>['prevPage']
+  nextPage: ReturnType<typeof providePagination>['nextPage']
+  setPage: ReturnType<typeof providePagination>['setPage']
+  setItemsPerPage: ReturnType<typeof providePagination>['setItemsPerPage']
+  isSelected: ReturnType<typeof provideSelection>['isSelected']
+  select: ReturnType<typeof provideSelection>['select']
+  selectAll: ReturnType<typeof provideSelection>['selectAll']
+  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
+  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
+  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
+  isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
+  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
+  items: DataIteratorItem[]
+  groupedItems: (DataIteratorItem | Group<DataIteratorItem>)[]
+}
+
+export type VDataIteratorSlots = {
+  default: [VDataIteratorSlotProps]
+  header: [VDataIteratorSlotProps]
+  footer: [VDataIteratorSlotProps]
+  'no-data': []
+}
+
+export const VDataIterator = genericComponent<VDataIteratorSlots>()({
   name: 'VDataIterator',
 
   props: {
     ...makeTagProps(),
-    ...makeItemsProps(),
+    ...makeDataIteratorItemProps(),
     ...makeDataTableSelectProps(),
     ...makeDataTableSortProps(),
     ...makeDataTablePaginateProps(),
@@ -45,51 +76,51 @@ export const VDataIterator = defineComponent({
 
   setup (props, { slots }) {
     const groupBy = useProxiedModel(props, 'groupBy')
+    const search = toRef(props, 'search')
 
-    const { items } = useItems(props)
+    const { items } = useDataIteratorItems(props)
+    const { filteredItems } = useFilter(props, items, search, { transform: item => item.raw })
 
-    const { filteredItems } = useFilter<InternalItem>(props, items, toRef(props, 'search'))
+    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { page, itemsPerPage } = createPagination(props)
 
-    const { sortBy, toggleSort } = createSort(props)
-    const { sortByWithGroups, opened, isGroupOpen, toggleGroup } = createGroupBy(props, groupBy, sortBy)
+    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
+    const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
+    const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
+
+    const itemsLength = computed(() => flatItems.value.length)
 
     const {
-      page,
-      itemsPerPage,
       startIndex,
       stopIndex,
       pageCount,
       prevPage,
       nextPage,
-      setPage,
       setItemsPerPage,
-    } = createPagination(props, sortedItems)
-    const { paginatedItems } = usePaginatedItems(sortedItems, startIndex, stopIndex, itemsPerPage)
+      setPage,
+    } = providePagination({ page, itemsPerPage, itemsLength })
+    const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
 
-    const { flatItems } = useGroupedItems(paginatedItems, groupBy, opened)
+    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { isSelected, select, selectAll, toggleSelect } = createSelection(props, items)
-
-    const { isExpanded, toggleExpand } = createExpanded(props)
+    const { isSelected, select, selectAll, toggleSelect } = provideSelection(props, paginatedItemsWithoutGroups)
+    const { isExpanded, toggleExpand } = provideExpanded(props)
 
     useOptions({
       page,
       itemsPerPage,
       sortBy,
-      pageCount,
-      startIndex,
-      stopIndex,
       groupBy,
+      search,
     })
 
     const slotProps = computed(() => ({
-      page,
-      itemsPerPage,
-      sortBy,
-      pageCount,
-      startIndex,
-      stopIndex,
+      page: page.value,
+      itemsPerPage: itemsPerPage.value,
+      sortBy: sortBy.value,
+      pageCount: pageCount.value,
       toggleSort,
       prevPage,
       nextPage,

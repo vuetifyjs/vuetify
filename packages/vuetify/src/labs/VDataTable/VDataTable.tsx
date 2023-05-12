@@ -25,7 +25,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Ref } from 'vue'
-import type { DataTableItem, InternalDataTableHeader } from './types'
+import type { InternalDataTableHeader } from './types'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 
 export type VDataTableSlots = VDataTableRowsSlots & {
@@ -92,9 +92,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
 
     const { items } = useDataTableItems(props, columns)
 
-    const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
+    const { filteredItems } = useFilter(props, items, search, { transform: item => item.columns })
 
     provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows } = provideGroupBy({ groupBy, sortBy })
@@ -105,6 +104,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
 
     const { startIndex, stopIndex } = providePagination({ page, itemsPerPage, itemsLength })
     const { paginatedItems } = usePaginatedItems({ items: flatItems, startIndex, stopIndex, itemsPerPage })
+
+    const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
     provideSelection(props, paginatedItemsWithoutGroups)
 

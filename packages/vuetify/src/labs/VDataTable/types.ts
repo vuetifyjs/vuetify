@@ -1,4 +1,3 @@
-import type { InternalItem } from '@/composables/items'
 import type { SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
@@ -29,9 +28,16 @@ export type InternalDataTableHeader = DataTableHeader & {
   lastFixed?: boolean
 }
 
-export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }
+export type DataTableItem<T = any> = {
+  type: 'item'
+  value: any
+  columns: {
+    [key: string]: any
+  }
+  raw: T
+}
 
-export type GroupHeaderItem<T extends InternalItem = DataTableItem> = {
+export type GroupHeaderItem<T extends DataTableItem> = {
   type: 'group-header'
   id: string
   key: string

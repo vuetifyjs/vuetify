@@ -7,7 +7,6 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { InternalItem } from '@/composables/items'
 import type { DataTableCompareFunction } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
@@ -90,7 +89,7 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems <T extends InternalItem = InternalItem> (
+export function useSortedItems <T extends Record<string, any>> (
   props: { customKeySort?: Record<string, DataTableCompareFunction>, locale: string },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
@@ -104,7 +103,7 @@ export function useSortedItems <T extends InternalItem = InternalItem> (
   return { sortedItems }
 }
 
-export function sortItems<T extends InternalItem> (
+export function sortItems<T extends Record<string, any>> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
