@@ -30,6 +30,7 @@ export const VDataIterator = defineComponent({
     ...makeDataTableGroupProps(),
     ...makeFilterProps(),
     search: String,
+    loading: Boolean,
   },
 
   emits: {
@@ -102,6 +103,8 @@ export const VDataIterator = defineComponent({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
+      items: paginatedItems.value,
+      groupedItems: flatItems.value,
     }))
 
     useRender(() => (
@@ -110,7 +113,7 @@ export const VDataIterator = defineComponent({
         { !paginatedItems.value.length
           ? slots['no-data']?.()
           : slots.default
-            ? slots.default({ items: paginatedItems.value, groupedItems: flatItems.value, ...slotProps.value })
+            ? slots.default(slotProps.value)
             : undefined
         }
         { slots.footer?.(slotProps.value) }
