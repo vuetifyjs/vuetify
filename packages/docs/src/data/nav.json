@@ -77,7 +77,6 @@
       "all",
       { "divider": true },
       { "subheader": "containment" },
-      "bottom-sheets",
       "buttons",
       "cards",
       "chips",
@@ -188,6 +187,10 @@
     "activeIcon": "mdi-beaker",
     "items": [
       "introduction",
+      {
+        "title": "bottom-sheets",
+        "subfolder": "components"
+      },
       {
         "title": "data-tables",
         "subfolder": "components",
