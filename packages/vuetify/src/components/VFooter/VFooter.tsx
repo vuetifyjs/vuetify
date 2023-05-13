@@ -14,7 +14,7 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVFooterProps = propsFactory({
   app: Boolean,
@@ -76,6 +76,7 @@ export const VFooter = genericComponent()({
         style={[
           backgroundColorStyles.value,
           props.app ? layoutItemStyles.value : undefined,
+          { height: convertToUnit(props.height) },
           props.style,
         ]}
         v-slots={ slots }
