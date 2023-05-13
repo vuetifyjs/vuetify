@@ -12,11 +12,6 @@ function getNumberOfDaysInMonth (year: number, month: number) {
   return new Date(year, month, 0).getDate()
 }
 
-function getMonthName (month: number, locale = 'en-US') {
-  const date = new Date(`2022-${month}-01`)
-  return date.toLocaleString(locale, { month: 'long' })
-}
-
 export function changeMonth (year: number, month: number, change: number) {
   if (change < 0 && month + change < 1) {
     return [year - 1, 12 + (month + change)]

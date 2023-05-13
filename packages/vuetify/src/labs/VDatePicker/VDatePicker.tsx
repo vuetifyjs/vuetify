@@ -12,7 +12,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
 import { createDatePicker } from './composables'
 
@@ -42,11 +42,11 @@ export const VDatePicker = defineComponent({
     const adapter = useDate()
     createDatePicker(props)
 
-    const inputModel = ref(props.modelValue?.length ? adapter.value.format(props.modelValue[0], 'keyboardDate') : '')
+    const inputModel = ref(props.modelValue?.length ? adapter.format(props.modelValue[0], 'keyboardDate') : '')
     const selected = ref<any[]>(props.modelValue ?? [])
 
     watch(inputModel, () => {
-      const { isValid, date } = adapter.value
+      const { isValid, date } = adapter
 
       selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
     })
@@ -87,6 +87,7 @@ export const VDatePicker = defineComponent({
                 />
                 <MaybeTransition transition={ props.transition } mode="out-in">
                   { props.viewMode === 'month' ? (
+                    // @ts-expect-error huh?
                     <VDatePickerMonth
                       v-model={ selected.value }
                       displayDate={ props.displayDate }

@@ -18,7 +18,7 @@ import type { PropType } from 'vue'
 import { VBtn } from '@/components/VBtn'
 import { VDateRangePickerHeader } from './VDateRangePickerHeader'
 import { VDateRangePickerMonth } from './VDateRangePickerMonth'
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 
 export const VDateRangePicker = defineComponent({
   name: 'VDateRangePicker',
@@ -54,16 +54,16 @@ export const VDateRangePicker = defineComponent({
     createDatePicker(props)
 
     const selected = ref(props.modelValue)
-    const inputModel = ref(props.modelValue[0] ? adapter.value.format(props.modelValue[0], 'keyboardDate') : '')
+    const inputModel = ref(props.modelValue[0] ? adapter.format(props.modelValue[0], 'keyboardDate') : '')
 
     // watch(() => props.modelValue, newValue => {
     //   if (!newValue?.length) return
 
-    //   inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
+    //   inputModel.value = adapter.format(newValue[0], 'keyboardDate')
     // })
 
     watch(inputModel, () => {
-      const { isValid, date } = adapter.value
+      const { isValid, date } = adapter
 
       selected.value = isValid(inputModel.value) ? [date(inputModel.value)] : []
     })
@@ -75,7 +75,7 @@ export const VDateRangePicker = defineComponent({
     // })
 
     // function handleInput (value: any, index: number) {
-    //   if (value.length === 10 && adapter.value.isValid(value)) {
+    //   if (value.length === 10 && adapter.isValid(value)) {
     //     const modelValue = props.modelValue.slice()
     //     modelValue.splice(index, value)
     //     emit('update:modelValue', modelValue)
@@ -91,12 +91,12 @@ export const VDateRangePicker = defineComponent({
     useRender(() => {
       return (
         <VPicker
-          key={props.inputMode}
+          key={ props.inputMode }
           class={[
             'v-date-range-picker',
             `v-date-range-picker--${props.inputMode}`,
           ]}
-          width={328}
+          width={ 328 }
           v-slots={{
             header: () => (
               <VDateRangePickerHeader

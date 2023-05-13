@@ -6,7 +6,7 @@ import { VSpacer } from '@/components/VGrid'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed } from 'vue'
@@ -48,8 +48,8 @@ export const VDatePickerControls = defineComponent({
   setup (props, { emit }) {
     const adapter = useDate()
     const monthAndYear = computed(() => {
-      const month = props.range === 'end' ? adapter.value.addMonths(props.displayDate, 1) : props.displayDate
-      return adapter.value.format(month, 'monthAndYear')
+      const month = props.range === 'end' ? adapter.addMonths(props.displayDate, 1) : props.displayDate
+      return adapter.format(month, 'monthAndYear')
     })
 
     useRender(() => {
@@ -58,7 +58,7 @@ export const VDatePickerControls = defineComponent({
           variant="text"
           size="small"
           icon={ props.prevIcon }
-          onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, -1)) }
+          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, -1)) }
         />
       )
 
@@ -67,7 +67,7 @@ export const VDatePickerControls = defineComponent({
           variant="text"
           size="small"
           icon={ props.nextIcon }
-          onClick={ () => emit('update:displayDate', adapter.value.addMonths(props.displayDate, 1)) }
+          onClick={ () => emit('update:displayDate', adapter.addMonths(props.displayDate, 1)) }
         />
       )
 
@@ -89,7 +89,7 @@ export const VDatePickerControls = defineComponent({
               { prevBtn }
               { nextBtn }
             </div>
-          ) }
+          )}
           { props.viewMode === 'month' && props.range === 'end' && nextBtn }
         </div>
       )

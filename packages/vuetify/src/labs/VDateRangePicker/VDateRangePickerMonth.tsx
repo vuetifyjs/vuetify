@@ -10,7 +10,7 @@ import { useDatePicker } from '../VDatePicker/composables'
 // Utilities
 import { computed, onMounted, ref } from 'vue'
 import { createRange, defineComponent, useRender } from '@/util'
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 
 export const VDateRangePickerMonth = defineComponent({
   name: 'VDateRangePickerMonth',
@@ -31,7 +31,7 @@ export const VDateRangePickerMonth = defineComponent({
     const months = computed(() => {
       const range = createRange(6, -3)
 
-      return range.map(offset => adapter.value.addMonths(props.displayDate, offset))
+      return range.map(offset => adapter.addMonths(props.displayDate, offset))
     })
 
     const monthRef = ref()
@@ -50,9 +50,9 @@ export const VDateRangePickerMonth = defineComponent({
       >
         { months.value.map(month => (
           <>
-            <div class="v-date-range-picker-month__header">{adapter.value.format(month, 'monthAndYear')}</div>
+            <div class="v-date-range-picker-month__header">{ adapter.format(month, 'monthAndYear') }</div>
             <VDatePickerMonth
-              ref={ adapter.value.isSameMonth(month, props.displayDate) ? monthRef : undefined }
+              ref={ adapter.isSameMonth(month, props.displayDate) ? monthRef : undefined }
               modelValue={ props.modelValue }
               onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
               displayDate={ month }

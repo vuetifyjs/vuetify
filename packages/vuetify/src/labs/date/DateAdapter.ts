@@ -7,6 +7,7 @@ export interface DateAdapter<Date> {
   startOfYear (date: Date): Date
   endOfYear (date: Date): Date
 
+  isBefore (date: Date, comparing: Date): boolean
   isAfter (date: Date, comparing: Date): boolean
   isEqual (date: Date, comparing: Date): boolean
   isSameDay (date: Date, comparing: Date): boolean
@@ -21,7 +22,7 @@ export interface DateAdapter<Date> {
   setYear (date: Date, year: number): Date
   getDiff (date: Date, comparing: Date | string, unit?: string): number
   getWeek (date: Date): number
-  getWeekArray (date: Date): (Date | null)[][]
+  getWeekArray (date: Date): Date[][]
   getWeekdays (): string[]
   getMonth (date: Date): number
 }

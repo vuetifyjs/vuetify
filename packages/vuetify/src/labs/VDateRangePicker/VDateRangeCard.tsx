@@ -16,7 +16,7 @@ import { ref } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
 
 export const VDateRangeCard = defineComponent({
@@ -57,7 +57,7 @@ export const VDateRangeCard = defineComponent({
                 />
                 <VDatePickerMonth
                   modelValue={ props.modelValue }
-                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue)}
+                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
                   displayDate={ props.displayDate }
                   v-model:hoverDate={ hoverDate.value }
                   multiple
@@ -75,8 +75,8 @@ export const VDateRangeCard = defineComponent({
                 />
                 <VDatePickerMonth
                   modelValue={ props.modelValue }
-                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue)}
-                  displayDate={ adapter.value.addMonths(props.displayDate, 1) }
+                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
+                  displayDate={ adapter.addMonths(props.displayDate, 1) }
                   v-model:hoverDate={ hoverDate.value }
                   multiple
                   side="end"

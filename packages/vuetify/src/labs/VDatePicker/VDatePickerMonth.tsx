@@ -14,9 +14,8 @@ import { defineComponent, omit } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
-import { isSameDay, isSameMonth } from 'date-fns'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',
@@ -54,7 +53,7 @@ export const VDatePickerMonth = defineComponent({
     const month = computed(() => props.displayDate)
 
     const findClosestDate = (date: any, dates: any[]) => {
-      const { isSameDay, getDiff } = adapter.value
+      const { isSameDay, getDiff } = adapter
       const [startDate, endDate] = dates
 
       if (isSameDay(startDate, endDate)) {
@@ -67,18 +66,18 @@ export const VDatePickerMonth = defineComponent({
       return distStart < distEnd ? startDate : endDate
     }
 
-    const hoverRange = computed<[any, any] | null>(() => {
-      if (!props.hoverDate) return null
+    // const hoverRange = computed<[any, any] | null>(() => {
+    //   if (!props.hoverDate) return null
 
-      const closestDate = findClosestDate(props.hoverDate, props.modelValue)
+    //   const closestDate = findClosestDate(props.hoverDate, props.modelValue)
 
-      if (!closestDate) return null
+    //   if (!closestDate) return null
 
-      return adapter.value.isAfter(props.hoverDate, closestDate) ? [closestDate, props.hoverDate] : [props.hoverDate, closestDate]
-    })
+    //   return adapter.isAfter(props.hoverDate, closestDate) ? [closestDate, props.hoverDate] : [props.hoverDate, closestDate]
+    // })
 
     const weeksInMonth = computed(() => {
-      const weeks = adapter.value.getWeekArray(month.value, !props.hideAdjacentMonths)
+      const weeks = adapter.getWeekArray(month.value)
 
       const days = weeks.flat()
 
@@ -90,7 +89,7 @@ export const VDatePickerMonth = defineComponent({
 
         let week = []
         for (let day = 1; day <= daysInMonth - days.length; day++) {
-          week.push(adapter.value.addDays(lastDay, day))
+          week.push(adapter.addDays(lastDay, day))
 
           if (day % 7 === 0) {
             weeks.push(week)
@@ -107,45 +106,45 @@ export const VDatePickerMonth = defineComponent({
       const isRange = validDates.length > 1
 
       const days = weeksInMonth.value.flat()
-      const today = adapter.value.date()
+      const today = adapter.date()
 
       const startDate = validDates[0]
       const endDate = validDates[1]
 
       return days.map((date, index) => {
-        const isStart = startDate && adapter.value.isSameDay(date, startDate)
-        const isEnd = endDate && adapter.value.isSameDay(date, endDate)
-        const isAdjacent = !adapter.value.isSameMonth(date, month.value)
-        const isSame = validDates.length === 2 && adapter.value.isSameDay(startDate, endDate)
+        const isStart = startDate && adapter.isSameDay(date, startDate)
+        const isEnd = endDate && adapter.isSameDay(date, endDate)
+        const isAdjacent = !adapter.isSameMonth(date, month.value)
+        const isSame = validDates.length === 2 && adapter.isSameDay(startDate, endDate)
 
         return {
           date,
-          formatted: adapter.value.format(date, 'keyboardDate'),
-          year: adapter.value.getYear(date),
-          month: adapter.value.getMonth(date),
+          formatted: adapter.format(date, 'keyboardDate'),
+          year: adapter.getYear(date),
+          month: adapter.getMonth(date),
           isWeekStart: index % 7 === 0,
           isWeekEnd: index % 7 === 6,
           isSelected: isStart || isEnd,
           isStart,
           isEnd,
-          isToday: adapter.value.isSameDay(date, today),
+          isToday: adapter.isSameDay(date, today),
           isAdjacent,
           isHidden: isAdjacent && props.hideAdjacentMonths,
           inRange: isRange &&
             !isSame &&
-            (isStart || (validDates.length === 2 && adapter.value.isWithinRange(date, validDates as [any, any]))),
+            (isStart || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
           // isHovered: props.hoverDate === date,
           // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
           isHovered: false,
           inHover: false,
-          localized: adapter.value.format(date, 'dayOfMonth'),
+          localized: adapter.format(date, 'dayOfMonth'),
         }
       })
     })
 
     const weeks = computed(() => {
       return weeksInMonth.value.map(week => {
-        return adapter.value.getWeek(week[0])
+        return adapter.getWeek(week[0])
       })
     })
 
@@ -158,7 +157,7 @@ export const VDatePickerMonth = defineComponent({
         if (isDragging.value && dragHandle.value != null) {
           const otherIndex = (dragHandle.value + 1) % 2
           const fn = otherIndex === 0 ? 'isBefore' : 'isAfter'
-          if (adapter.value[fn](date, newModel[otherIndex])) {
+          if (adapter[fn](date, newModel[otherIndex])) {
             newModel[dragHandle.value] = newModel[otherIndex]
             newModel[otherIndex] = date
             dragHandle.value = otherIndex
@@ -166,11 +165,11 @@ export const VDatePickerMonth = defineComponent({
             newModel[dragHandle.value] = date
           }
         } else {
-          if (newModel.find(d => adapter.value.isSameDay(d, date))) {
-            newModel = newModel.filter(v => !adapter.value.isSameDay(v, date))
+          if (newModel.find(d => adapter.isSameDay(d, date))) {
+            newModel = newModel.filter(v => !adapter.isSameDay(v, date))
           } else if (newModel.length === 2) {
             let index: number | undefined
-            if (!props.side || isSameMonth(newModel[0], newModel[1])) {
+            if (!props.side || adapter.isSameMonth(newModel[0], newModel[1])) {
               const closest = findClosestDate(date, newModel)
               index = newModel.indexOf(closest)
             } else {
@@ -179,7 +178,7 @@ export const VDatePickerMonth = defineComponent({
 
             newModel = newModel.map((v, i) => i === index ? date : v)
           } else {
-            if (newModel[0] && adapter.value.isBefore(newModel[0], date)) {
+            if (newModel[0] && adapter.isBefore(newModel[0], date)) {
               newModel = [newModel[0], date]
             } else {
               newModel = [date, newModel[0]]
@@ -199,7 +198,7 @@ export const VDatePickerMonth = defineComponent({
       if (!el || el === daysRef.value) return null
 
       if ('vDate' in el.dataset) {
-        return adapter.value.date(el.dataset.vDate)
+        return adapter.date(el.dataset.vDate)
       }
 
       return findElement(el.parentElement)
@@ -221,7 +220,7 @@ export const VDatePickerMonth = defineComponent({
 
       if (!selected) return
 
-      const modelIndex = props.modelValue.findIndex(d => adapter.value.isEqual(d, selected))
+      const modelIndex = props.modelValue.findIndex(d => adapter.isEqual(d, selected))
 
       if (modelIndex >= 0) {
         canDrag = true
@@ -296,7 +295,7 @@ export const VDatePickerMonth = defineComponent({
           onMousedown={ handleMousedown }
           onTouchstart={ handleMousedown }
         >
-          { !props.hideWeekdays && adapter.value.getWeekdays().map(weekDay => (
+          { !props.hideWeekdays && adapter.getWeekdays().map(weekDay => (
             <div
               class={[
                 'v-date-picker-month__day',

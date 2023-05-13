@@ -1,8 +1,4 @@
-import type { DateAdapter } from '@/adapters/date-adapter'
-import { useDate } from '@/composables/date'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { wrapInArray } from '@/util'
-import { computed, inject, onBeforeMount, provide, ref } from 'vue'
+import { inject, provide, ref } from 'vue'
 import type { InjectionKey, Ref } from 'vue'
 
 export type DatePickerProvide = {

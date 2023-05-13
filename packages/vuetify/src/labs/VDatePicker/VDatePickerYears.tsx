@@ -5,7 +5,7 @@ import './VDatePickerYears.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useDate } from '@/composables/date'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { convertToUnit, createRange, defineComponent, useRender } from '@/util'
@@ -29,7 +29,7 @@ export const VDatePickerYears = defineComponent({
 
   setup (props, { emit }) {
     const adapter = useDate()
-    const displayYear = computed(() => adapter.value.getYear(props.displayDate))
+    const displayYear = computed(() => adapter.getYear(props.displayDate))
     const years = computed(() => {
       const min = props.min ?? displayYear.value - 50 - 2
       const max = props.max ?? displayYear.value + 50
@@ -57,9 +57,9 @@ export const VDatePickerYears = defineComponent({
               rounded="xl"
               color={ year === displayYear.value ? 'primary' : undefined }
               onClick={ () => {
-                emit('update:displayDate', adapter.value.setYear(props.displayDate, year))
+                emit('update:displayDate', adapter.setYear(props.displayDate, year))
                 emit('update:viewMode', 'month')
-              } }
+              }}
             >{ year }</VBtn>
           ))}
         </div>

@@ -57,11 +57,11 @@ export const VDateRangeField = defineComponent({
     const { t } = useLocale()
     const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, true)
 
-    const startInput = ref(model.value.length ? adapter.value.format(model.value[0], 'keyboardDate') : '')
-    const endInput = ref(model.value.length > 1 ? adapter.value.format(model.value[1], 'keyboardDate') : '')
+    const startInput = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
+    const endInput = ref(model.value.length > 1 ? adapter.format(model.value[1], 'keyboardDate') : '')
 
     function handleBlur (index: number) {
-      const { isValid, isSameDay, date } = adapter.value
+      const { isValid, isSameDay, date } = adapter
 
       if (index === 0 && isValid(startInput.value)) {
         const newDate = date(startInput.value)
@@ -82,11 +82,11 @@ export const VDateRangeField = defineComponent({
       if (!newValue.length) return
 
       if (newValue[0]) {
-        startInput.value = adapter.value.format(newValue[0], 'keyboardDate')
+        startInput.value = adapter.format(newValue[0], 'keyboardDate')
       }
 
       if (newValue[1]) {
-        endInput.value = adapter.value.format(newValue[1], 'keyboardDate')
+        endInput.value = adapter.format(newValue[1], 'keyboardDate')
       }
     })
 
@@ -130,10 +130,10 @@ export const VDateRangeField = defineComponent({
                   v-model:displayDate={ displayDate.value }
                   v-model:viewMode={ viewMode.value }
                   v-model:inputMode={ inputMode.value }
-                  onSave={() => {
+                  onSave={ () => {
                     isActive.value = false
                   }}
-                  onCancel={() => {
+                  onCancel={ () => {
                     isActive.value = false
                   }}
                 />
@@ -147,7 +147,7 @@ export const VDateRangeField = defineComponent({
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <div class="v-date-range-field">
             <VMenu
-              offset={ [-28, 0] }
+              offset={[-28, 0]}
               closeOnContentClick={ false }
               contentClass="foo"
               v-slots={{
@@ -163,6 +163,7 @@ export const VDateRangeField = defineComponent({
                   </div>
                 ),
                 default: () => (
+                  // @ts-expect-error huh?
                   <VDateRangeCard
                     v-model={ model.value }
                     v-model:displayDate={ displayDate.value }
@@ -175,7 +176,7 @@ export const VDateRangeField = defineComponent({
             <div class="v-date-range-field__divider">{ t(props.dividerText) }</div>
             <VMenu
               key="bar"
-              offset={ [-28, 0] }
+              offset={[-28, 0]}
               closeOnContentClick={ false }
               v-slots={{
                 activator: ({ props: slotProps }) => (
@@ -190,6 +191,7 @@ export const VDateRangeField = defineComponent({
                   </div>
                 ),
                 default: () => (
+                  // @ts-expect-error huh?
                   <VDateRangeCard
                     v-model={ model.value }
                     v-model:displayDate={ displayDate.value }

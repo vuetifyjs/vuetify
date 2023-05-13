@@ -51,10 +51,10 @@ export const VDateField = defineComponent({
 
   setup (props) {
     const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateField(props, false)
-    const inputModel = ref(model.value.length ? adapter.value.format(model.value[0], 'keyboardDate') : '')
+    const inputModel = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
 
     function handleBlur () {
-      const { isEqual } = adapter.value
+      const { isEqual } = adapter
       const date = parseKeyboardDate(inputModel.value)
 
       if (date && (!model.value[0] || !isEqual(date, model.value[0]))) {
@@ -66,7 +66,7 @@ export const VDateField = defineComponent({
     watch(model, newValue => {
       if (!newValue.length) return
 
-      inputModel.value = adapter.value.format(newValue[0], 'keyboardDate')
+      inputModel.value = adapter.format(newValue[0], 'keyboardDate')
     })
 
     const { mobile } = useDisplay()
@@ -91,6 +91,7 @@ export const VDateField = defineComponent({
             v-slots={{
               activator,
               default: ({ isActive }) => (
+                // @ts-expect-error huh?
                 <VDatePicker
                   v-model={ model.value }
                   v-model:inputMode={ inputMode.value }

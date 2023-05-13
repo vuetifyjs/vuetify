@@ -5,13 +5,16 @@ import { aliases, mdi } from 'vuetify/src/iconsets/mdi'
 import { fa } from 'vuetify/src/iconsets/fa-svg'
 import { ar, en, ja, sv } from 'vuetify/src/locale'
 import * as directives from 'vuetify/src/directives'
-import VuetifyDateAdapter from 'vuetify/src/adapters/vuetify'
+import { VuetifyDateAdapter } from 'vuetify/src/labs/date/adapters/vuetify'
+import datefnssv from 'date-fns/locale/sv'
+import datefnsen from 'date-fns/locale/en-US'
+import DateIoDateFnsAdapter from '@date-io/date-fns'
 
 export default createVuetify({
   directives,
   ssr: !!process.env.VITE_SSR,
   locale: {
-    locale: 'sv-SE',
+    locale: 'en-US',
     messages: {
       'en-US': en,
       ar,
@@ -21,6 +24,10 @@ export default createVuetify({
   },
   date: {
     adapter: VuetifyDateAdapter,
+    // locale: {
+    //   'sv-SE': datefnssv,
+    //   'en-US': datefnsen,
+    // },
   },
   icons: {
     defaultSet: 'mdi',

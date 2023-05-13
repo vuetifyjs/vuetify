@@ -29,13 +29,12 @@ export const VPicker = defineComponent({
             'v-picker--with-actions': !!slots.actions,
           },
         ]}
-        { ...props }
       >
         { slots.header ? (
           <div class="v-picker__header">
             { slots.header() }
           </div>
-        ) : undefined}
+        ) : undefined }
 
         <div class="v-picker__body">
           { slots.default?.() }
@@ -45,7 +44,7 @@ export const VPicker = defineComponent({
           <div class="v-picker__actions">
             { slots.actions() }
           </div>
-        ) : undefined}
+        ) : undefined }
       </VSheet>
     ))
 

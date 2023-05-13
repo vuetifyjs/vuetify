@@ -27,7 +27,7 @@ export const VDateCard = defineComponent({
       default: 'calendar',
     },
     viewMode: {
-      type: String as PropType<'month' | 'years'>,
+      type: String as PropType<'month' | 'year'>,
       default: 'month',
     },
     modelValue: null,
@@ -41,7 +41,7 @@ export const VDateCard = defineComponent({
   emits: {
     'update:modelValue': (value: any) => true,
     'update:displayDate': (value: any) => true,
-    'update:viewMode': (mode: 'month' | 'years') => true,
+    'update:viewMode': (mode: 'month' | 'year') => true,
     'update:inputMode': (value: any) => true,
   },
 
@@ -75,7 +75,7 @@ export const VDateCard = defineComponent({
               viewMode={ props.viewMode }
               onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
             />
-          ) }
+          )}
         </MaybeTransition>
       </VCard>
     ))
