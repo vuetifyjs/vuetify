@@ -402,7 +402,7 @@ export const VSelect = genericComponent<new <
                         )
                       ) : (
                         slots.selection?.({ item, index }) ?? (
-                          <span class="v-select__selection-text">
+                          <span class="v-select__selection-text text-truncate">
                             { item.title }
                             { props.multiple && (index < selections.value.length - 1) && (
                               <span class="v-select__selection-comma">,</span>
