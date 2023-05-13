@@ -17,7 +17,6 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
 import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
-import { onClickOutside } from '@vueuse/core'
 
 // Types
 import type { PropType } from 'vue'
@@ -96,7 +95,9 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const vFieldRef = ref<VField>()
     const inputRef = ref<HTMLInputElement>()
 
-    onClickOutside(vInputRef as any, _ => blur())
+    function onClickOutside () {
+      blur()
+    }
 
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
@@ -174,6 +175,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
+          v-click-outside={ onClickOutside }
         >
           {{
             ...slots,
