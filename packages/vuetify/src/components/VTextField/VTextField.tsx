@@ -7,6 +7,7 @@ import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VCounter } from '@/components/VCounter'
 
 // Directives
+import ClickOutside from '@/directives/click-outside'
 import Intersect from '@/directives/intersect'
 
 // Composables
@@ -49,7 +50,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 }>()({
   name: 'VTextField',
 
-  directives: { Intersect },
+  directives: { Intersect, ClickOutside },
 
   inheritAttrs: false,
 
