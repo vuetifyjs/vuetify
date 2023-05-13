@@ -5,6 +5,7 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { GroupableItem } from '../../VDataTable/composables/group'
 
 export interface DataIteratorItemProps {
   items: any[]
@@ -12,10 +13,8 @@ export interface DataIteratorItemProps {
   returnObject: boolean
 }
 
-export interface DataIteratorItem<T = any> {
-  type: 'item'
+export interface DataIteratorItem<T = any> extends GroupableItem<T> {
   value: unknown
-  raw: T
 }
 
 // Composables

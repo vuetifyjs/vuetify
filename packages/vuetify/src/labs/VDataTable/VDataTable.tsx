@@ -108,7 +108,6 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
     provideSelection(props, paginatedItemsWithoutGroups)
-
     provideExpanded(props)
 
     useOptions({

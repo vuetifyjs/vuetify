@@ -1,4 +1,5 @@
 import type { SelectItemKey } from '@/util'
+import type { GroupableItem } from './composables/group'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 
@@ -23,25 +24,13 @@ export type DataTableHeader = {
 
 export type InternalDataTableHeader = DataTableHeader & {
   sortable: boolean
-
   fixedOffset?: number
   lastFixed?: boolean
 }
 
-export type DataTableItem<T = any> = {
-  type: 'item'
+export interface DataTableItem<T = any> extends GroupableItem<T> {
   value: any
   columns: {
     [key: string]: any
   }
-  raw: T
-}
-
-export type GroupHeaderItem<T extends DataTableItem> = {
-  type: 'group-header'
-  id: string
-  key: string
-  value: string
-  depth: number
-  items: (GroupHeaderItem<T> | T)[]
 }
