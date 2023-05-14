@@ -335,7 +335,12 @@ export const VCombobox = genericComponent<new <
       return (
         // Click originates from outside the menu content
         // Multiple selects don't close when an item is clicked
-        !displayItems.value.length
+        (!listRef.value?.$el.contains(e.target as Node)) &&
+
+        // Click originates from outside the element
+        vTextFieldRef.value.$el &&
+        !vTextFieldRef.value.$el.contains(e.target as Node) &&
+        e.target !== vTextFieldRef.value.$el
       )
     }
 
