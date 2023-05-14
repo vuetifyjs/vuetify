@@ -1,7 +1,7 @@
 ---
 nav: Upgrade guide
 meta:
-  title: Guide to upgrading Vuetify
+  title: Upgrade guide
   description: Detailed instruction on how to upgrade Vuetify to 3.0
   keywords: migration, upgrade, releases, upgrading vuetify, alpha, v3
 related:
@@ -36,7 +36,6 @@ Many of these changes can be applied automatically by [eslint-plugin-vuetify](ht
 - v-stepper
 - v-time-picker
 - v-treeview
-- [v-virtual-scroll](/components/virtual-scroller/)
 
 </alert>
 

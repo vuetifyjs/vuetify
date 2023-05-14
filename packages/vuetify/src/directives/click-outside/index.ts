@@ -89,7 +89,7 @@ export const ClickOutside = {
 
     if (!el._clickOutside) {
       el._clickOutside = {
-        lastMousedownWasOutside: true,
+        lastMousedownWasOutside: false,
       }
     }
 

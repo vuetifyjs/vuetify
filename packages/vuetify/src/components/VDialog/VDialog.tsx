@@ -17,6 +17,7 @@ import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRende
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
+import type { Component } from 'vue'
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 
 export const makeVDialogProps = propsFactory({
@@ -30,10 +31,10 @@ export const makeVDialogProps = propsFactory({
   ...makeVOverlayProps({
     origin: 'center center' as const,
     scrollStrategy: 'block' as const,
-    transition: { component: VDialogTransition },
+    transition: { component: VDialogTransition as Component },
     zIndex: 2400,
   }),
-}, 'VDialog')
+}, 'v-dialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',

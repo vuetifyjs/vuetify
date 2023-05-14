@@ -8,16 +8,18 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVAppProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps({ fullHeight: true }),
+  ...makeThemeProps(),
+}, 'v-app')
 
 export const VApp = genericComponent()({
   name: 'VApp',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeLayoutProps({ fullHeight: true }),
-    ...makeThemeProps(),
-  },
+  props: makeVAppProps(),
 
   setup (props, { slots }) {
     const theme = provideTheme(props)

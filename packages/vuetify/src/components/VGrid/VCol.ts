@@ -8,7 +8,7 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { capitalize, computed, h } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { Breakpoint } from '@/composables/display'
@@ -81,34 +81,36 @@ function breakpointClass (type: keyof typeof propMap, prop: string, val: boolean
 
 const ALIGN_SELF_VALUES = ['auto', 'start', 'end', 'center', 'baseline', 'stretch'] as const
 
+export const makeVColProps = propsFactory({
+  cols: {
+    type: [Boolean, String, Number],
+    default: false,
+  },
+  ...breakpointProps,
+  offset: {
+    type: [String, Number],
+    default: null,
+  },
+  ...offsetProps,
+  order: {
+    type: [String, Number],
+    default: null,
+  },
+  ...orderProps,
+  alignSelf: {
+    type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
+    default: null,
+    validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
+  },
+
+  ...makeComponentProps(),
+  ...makeTagProps(),
+}, 'v-col')
+
 export const VCol = genericComponent()({
   name: 'VCol',
 
-  props: {
-    cols: {
-      type: [Boolean, String, Number],
-      default: false,
-    },
-    ...breakpointProps,
-    offset: {
-      type: [String, Number],
-      default: null,
-    },
-    ...offsetProps,
-    order: {
-      type: [String, Number],
-      default: null,
-    },
-    ...orderProps,
-    alignSelf: {
-      type: String as PropType<typeof ALIGN_SELF_VALUES[number]>,
-      default: null,
-      validator: (str: any) => ALIGN_SELF_VALUES.includes(str),
-    },
-
-    ...makeComponentProps(),
-    ...makeTagProps(),
-  },
+  props: makeVColProps(),
 
   setup (props, { slots }) {
     const classes = computed(() => {

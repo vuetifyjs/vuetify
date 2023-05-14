@@ -78,6 +78,12 @@ export async function generateComponentDataFromTypes (component: string) {
     item.source = undefined
   })
 
+  for (const [name, { formatted }] of Object.entries(props.properties)) {
+    if (formatted.length > 400) {
+      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+    }
+  }
+
   return {
     props: props.properties,
     events: events.properties,
