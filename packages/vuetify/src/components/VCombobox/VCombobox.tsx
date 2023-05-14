@@ -329,6 +329,16 @@ export const VCombobox = genericComponent<new <
       isFocused.value = true
     }
 
+    function onCloseConditional (e: any) {
+      if (!menu.value) return true
+
+      return (
+        // Click originates from outside the menu content
+        // Multiple selects don't close when an item is clicked
+        !displayItems.value.length
+      )
+    }
+
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
     })
@@ -371,6 +381,7 @@ export const VCombobox = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
+          closeConditional={ onCloseConditional }
           appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
