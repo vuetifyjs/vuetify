@@ -156,7 +156,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                     v-slots={ slots }
                   />
                 </thead>
-                { slots.thead?.() }
+                { slots.thead?.({ ...dataTableHeadersProps, columns: columns.value }) }
                 <tbody>
                   { slots.body ? slots.body() : (
                     <VDataTableRows
@@ -167,7 +167,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                   )}
                 </tbody>
                 { slots.tbody?.() }
-                { slots.tfoot?.() }
+                { slots.tfoot?.({ columns: columns.value }) }
               </>
             )),
             bottom: slots.bottom ?? (() => (
