@@ -132,7 +132,8 @@ describe('VCombobox', () => {
 
       cy.get('@input').click()
       cy.get('@input').type('Item 2')
-      cy.get('@input').blur()
+      cy.get('body').click(100, 1000, { force: true }) // blur it
+      cy.get('body').click(100, 1000, { force: true }) // blur it
       cy.should(() => {
         expect(model.value).to.deep.equal([items[0], 'Item 2'])
         expect(search.value).to.equal('')
@@ -143,7 +144,8 @@ describe('VCombobox', () => {
 
       cy.get('@input').click()
       cy.get('@input').type('item3')
-      cy.get('@input').blur()
+      cy.get('body').click(100, 1000, { force: true }) // blur it
+      cy.get('body').click(100, 1000, { force: true }) // blur it
       cy.should(() => {
         expect(model.value).to.deep.equal([items[0], 'Item 2', 'item3'])
         expect(search.value).to.equal('')
