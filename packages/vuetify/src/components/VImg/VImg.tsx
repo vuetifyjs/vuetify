@@ -46,7 +46,7 @@ export type VImgSlots = {
   sources: []
 }
 
-export const makeVImgProps = propsFactory( {
+export const makeVImgProps = propsFactory({
   alt: String,
   cover: Boolean,
   eager: Boolean,
