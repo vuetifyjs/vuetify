@@ -34,7 +34,6 @@ $field-control-underlined-padding-bottom: 2px !default;
 $field-control-height: 56px !default;
 
 // INPUT
-$field-input-padding-top: 32px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
 $field-input-min-height: #{max(
   var(--v-input-control-height, $input-control-height),
