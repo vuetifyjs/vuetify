@@ -83,11 +83,23 @@ export function useValidation (
       ? wrapInArray(props.errorMessages).slice(0, Math.max(0, +props.maxErrors))
       : internalErrorMessages.value
   })
+  const validateOn = computed(() => {
+    let value = (props.validateOn ?? form?.validateOn.value) || 'input'
+    if (value === 'lazy') value = 'input lazy'
+    const set = new Set(value?.split(' ') ?? [])
+
+    return {
+      blur: set.has('blur') || set.has('input'),
+      input: set.has('input'),
+      submit: set.has('submit'),
+      lazy: set.has('lazy'),
+    }
+  })
   const isValid = computed(() => {
     if (props.error || props.errorMessages.length) return false
     if (!props.rules.length) return true
     if (isPristine.value) {
-      return internalErrorMessages.value.length ? null : true
+      return internalErrorMessages.value.length || validateOn.value.lazy ? null : true
     } else {
       return !internalErrorMessages.value.length
     }
@@ -115,19 +127,6 @@ export function useValidation (
 
   onBeforeUnmount(() => {
     form?.unregister(uid.value)
-  })
-
-  const validateOn = computed(() => {
-    let value = (props.validateOn ?? form?.validateOn.value) || 'input'
-    if (value === 'lazy') value = 'input lazy'
-    const set = new Set(value?.split(' ') ?? [])
-
-    return {
-      blur: set.has('blur') || set.has('input'),
-      input: set.has('input'),
-      submit: set.has('submit'),
-      lazy: set.has('lazy'),
-    }
   })
 
   onMounted(async () => {
