@@ -46,41 +46,19 @@ However, you can make rules as complicated as needed, even allowing for asynchro
 
 <example file="v-form/rules-async" />
 
-This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit'` so that we only call the API service when the button is clicked.
+The submit event is a combination of a native `SubmitEvent` with a promise, so it can be `await`ed or used with `.then()` to get the result of the validation.
+<br>
+This also demonstrates the **validate-on** prop, which tells the `v-form` component when validation should happen. Here we set it to `'submit lazy'` so that we only call the API service when the button is clicked.
 
 ## Validation state
 
-By default, all inputs run their validation rules when mounted. This means that inputs failing validation are mounted in an error state but do not display them to the user. To avoid this, add [lazy](/api/v-form/#props-lazy) to the **validate-on** prop.
-
-The following example contains a [v-text-field](/components/text-fields/) with a rule that requires the input to have a value. To avoid being mounted in an error state, we set **validate-on** to `"input lazy"`:
-
-```html
-<template>
-  <v-form validate-on="input lazy">
-    <v-text-field
-      v-model="name"
-      :rules="[ v => !!v || 'Name is required' ]"
-      label="Name"
-      required
-    ></v-text-field>
-  </v-form>
-</template>
-
-<script>
-  export default {
-    data: () => ({ name: '' }),
-  }
-</script>
-```
-
-The following table is a list of all available validation states:
-
-| Validate On | Description                                                                                                  |
-|-------------|--------------------------------------------------------------------------------------------------------------|
-| **input**   | Validation runs when the input's value changes or it loses focus.                                            |
-| **blur**    | Validation runs when the input loses focus.                                                                  |
-| **submit**  | Validation runs when the form is submitted.                                                                  |
-| **lazy**    | Prevents validation from running on mount. Can be combined with other options, implies **input** on its own. |
+By default, all inputs run their validation rules when mounted but do not display errors to the user.
+<br>
+When rules run is controlled with the **validate-on** prop which accepts a string containing `input`, `blur`, `submit`, or `lazy`.
+<br>
+`input`, `blur`, and `submit` set when a validation error can first be displayed to the user, while `lazy` disables validation on mount (useful for async rules).
+<br>
+`lazy` can be combined with other options, and implies `input` on its own.
 
 | `validate-on=` | `"input"` | `"blur"` | `"submit"` | `"lazy"` |
 |----------------|:---------:|:--------:|:----------:|:--------:|
@@ -88,8 +66,15 @@ The following table is a list of all available validation states:
 | On input       |     ✅     |    ❌     |     ❌      |    *     |
 | On blur        |     ✅     |    ✅     |     ❌      |    *     |
 | On submit      |     ✅     |    ✅     |     ✅      |    *     |
-
 <p class="text-caption">* Uses the behavior of whatever it's combined with.</p>
+
+The current validation state of the form is accessed through `v-model` or the submit event and has three possible states:
+
+- `true`: All inputs with rules have run their validation and succeeded.
+- `false`: At least one input has failed validation after either being interacted with, or a manual validation has been triggered.
+- `null`: At least one input has failed validation without being interacted with, or has `lazy` validation that has not been run yet.
+
+This allows you to either check for any validation failure with `!valid`, or only errors that are displayed to the user with `valid === false`{.text-no-wrap}.
 
 ## Examples
 

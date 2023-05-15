@@ -1,6 +1,6 @@
 <template>
   <v-sheet max-width="300" class="mx-auto">
-    <v-form validate-on="submit" @submit.prevent="submit">
+    <v-form validate-on="submit lazy" @submit.prevent="submit">
       <v-text-field
         v-model="userName"
         :rules="rules"
