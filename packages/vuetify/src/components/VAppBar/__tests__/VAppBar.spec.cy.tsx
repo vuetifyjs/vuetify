@@ -6,10 +6,10 @@ import { VLayout } from '@/components/VLayout'
 import { VMain } from '@/components/VMain'
 
 // Constants
-const SCROLL_OPTIONS = { ensureScrollable: true, duration: 200 }
+const SCROLL_OPTIONS = { ensureScrollable: true, duration: 50 }
 
 describe('VAppBar', () => {
-  it('should allow custom height', () => {
+  it('allows custom height', () => {
     cy
       .mount(({ height }: any) => (
         <VLayout>
@@ -21,7 +21,7 @@ describe('VAppBar', () => {
       .get('.v-app-bar').should('have.css', 'height', '128px')
   })
 
-  it('should support density', () => {
+  it('supports density', () => {
     cy
       .mount(({ density = 'default' }: any) => (
         <VLayout>
@@ -37,9 +37,80 @@ describe('VAppBar', () => {
       .get('.v-app-bar').should('have.css', 'height', '48px')
   })
 
-  it('should support scroll behavior', () => {
-    cy
-      .mount(({ scrollBehavior, image }: any) => (
+  describe('scroll behavior', () => {
+    it('hides', () => {
+      cy.mount(({ scrollBehavior }: any) => (
+        <VLayout>
+          <VAppBar scrollBehavior={ scrollBehavior } />
+
+          <VMain style="min-height: 200vh;" />
+        </VLayout>
+      ))
+        .setProps({ scrollBehavior: 'hide' })
+        .get('.v-app-bar').should('be.visible')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('not.be.visible')
+        .window().scrollTo(0, 250, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('be.visible')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('be.visible')
+
+        .setProps({ scrollBehavior: 'hide inverted' })
+        .get('.v-app-bar').should('not.be.visible')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('be.visible')
+        .window().scrollTo(0, 250, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('not.be.visible')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('not.be.visible')
+    })
+
+    it('collapses', () => {
+      cy.mount(({ scrollBehavior }: any) => (
+        <VLayout>
+          <VAppBar scrollBehavior={ scrollBehavior } />
+
+          <VMain style="min-height: 200vh;" />
+        </VLayout>
+      ))
+        .setProps({ scrollBehavior: 'collapse' })
+        .get('.v-app-bar').should('be.visible')
+        .get('.v-app-bar').should('have.not.class', 'v-toolbar--collapse')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('have.class', 'v-toolbar--collapse')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+
+        .setProps({ scrollBehavior: 'collapse inverted' })
+        .get('.v-app-bar').should('be.visible')
+        .get('.v-app-bar').should('have.class', 'v-toolbar--collapse')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('not.have.class', 'v-toolbar--collapse')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+    })
+
+    it('elevates', () => {
+      cy.mount(({ scrollBehavior }: any) => (
+        <VLayout>
+          <VAppBar scrollBehavior={ scrollBehavior } />
+
+          <VMain style="min-height: 200vh;" />
+        </VLayout>
+      ))
+        .setProps({ scrollBehavior: 'elevate' })
+        .get('.v-app-bar').should('have.class', 'v-toolbar--flat')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('not.have.class', 'v-toolbar--flat')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+
+        .setProps({ scrollBehavior: 'elevate inverted' })
+        .get('.v-app-bar').should('not.have.class', 'v-toolbar--flat')
+        .window().scrollTo(0, 500, SCROLL_OPTIONS)
+        .get('.v-app-bar').should('have.class', 'v-toolbar--flat')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+    })
+
+    it('fades image', () => {
+      cy.mount(({ scrollBehavior, image }: any) => (
         <VLayout>
           <VAppBar
             image={ image }
@@ -49,51 +120,30 @@ describe('VAppBar', () => {
           <VMain style="min-height: 200vh;" />
         </VLayout>
       ))
-      .setProps({ scrollBehavior: 'hide' })
-      .get('.v-app-bar').should('be.visible')
-      .window().scrollTo(0, 500, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('not.be.visible')
-      .window().scrollTo(0, 250, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('be.visible')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('be.visible')
-      .setProps({ scrollBehavior: 'inverted' })
-      .get('.v-app-bar').should('be.visible')
-      .window().scrollTo(0, 500, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('not.be.visible')
-      .window().scrollTo(0, 250, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('not.be.visible')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('be.visible')
-      .setProps({ scrollBehavior: 'collapse' })
-      .get('.v-app-bar').should('be.visible')
-      .get('.v-app-bar').should('have.not.class', 'v-toolbar--collapse')
-      .window().scrollTo(0, 500, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('have.class', 'v-toolbar--collapse')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .setProps({ scrollBehavior: 'elevate' })
-      .get('.v-app-bar').should('have.class', 'v-toolbar--flat')
-      .window().scrollTo(0, 500, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('have.not.class', 'v-toolbar--flat')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .setProps({ scrollBehavior: 'hide inverted' })
-      .get('.v-app-bar').should('not.be.visible')
-      .window().scrollTo(0, 500, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('be.visible')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .get('.v-app-bar').should('not.be.visible')
-      .setProps({
-        image: 'https://picsum.photos/1920/1080?random',
-        scrollBehavior: 'fade-image',
-      })
-      .get('.v-toolbar__image').should('have.css', 'opacity', '1')
-      .window().scrollTo(0, 100, SCROLL_OPTIONS)
-      .get('.v-toolbar__image').should('have.css', 'opacity', '0.5')
-      .window().scrollTo(0, 200, SCROLL_OPTIONS)
-      .get('.v-toolbar__image').should('have.css', 'opacity', '0')
-      .window().scrollTo(0, 50, SCROLL_OPTIONS)
-      .get('.v-toolbar__image').should('have.css', 'opacity', '0.8')
-      .window().scrollTo(0, 0, SCROLL_OPTIONS)
-      .get('.v-toolbar__image').should('have.css', 'opacity', '1')
+        .setProps({
+          image: 'https://picsum.photos/1920/1080?random',
+          scrollBehavior: 'fade-image',
+        })
+        .get('.v-toolbar__image').should('have.css', 'opacity', '1')
+        .window().scrollTo(0, 150, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0.5')
+        .window().scrollTo(0, 300, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0')
+        .window().scrollTo(0, 60, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0.8')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '1')
+
+        .setProps({ scrollBehavior: 'fade-image inverted' })
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0')
+        .window().scrollTo(0, 150, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0.5')
+        .window().scrollTo(0, 300, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '1')
+        .window().scrollTo(0, 60, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0.2')
+        .window().scrollTo(0, 0, SCROLL_OPTIONS)
+        .get('.v-toolbar__image').should('have.css', 'opacity', '0')
+    })
   })
 })

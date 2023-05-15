@@ -13,28 +13,30 @@ import { useBackgroundColor } from '@/composables/color'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, shallowRef, toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVFooterProps = propsFactory({
+  app: Boolean,
+  color: String,
+  height: {
+    type: [Number, String],
+    default: 'auto',
+  },
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeElevationProps(),
+  ...makeLayoutItemProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'footer' }),
+  ...makeThemeProps(),
+}, 'v-footer')
 
 export const VFooter = genericComponent()({
   name: 'VFooter',
 
-  props: {
-    app: Boolean,
-    color: String,
-    height: {
-      type: [Number, String],
-      default: 'auto',
-    },
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeElevationProps(),
-    ...makeLayoutItemProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'footer' }),
-    ...makeThemeProps(),
-  },
+  props: makeVFooterProps(),
 
   setup (props, { slots }) {
     const { themeClasses } = provideTheme(props)
@@ -43,7 +45,7 @@ export const VFooter = genericComponent()({
     const { elevationClasses } = useElevation(props)
     const { roundedClasses } = useRounded(props)
 
-    const autoHeight = ref(32)
+    const autoHeight = shallowRef(32)
     const { resizeRef } = useResizeObserver(entries => {
       if (!entries.length) return
       autoHeight.value = entries[0].target.clientHeight

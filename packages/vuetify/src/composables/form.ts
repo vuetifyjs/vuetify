@@ -1,6 +1,8 @@
-// Utilities
-import { computed, inject, provide, ref, toRef, watch } from 'vue'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
@@ -20,6 +22,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
 }
 
@@ -74,7 +77,7 @@ export function createForm (props: FormProps) {
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
-  const isValidating = ref(false)
+  const isValidating = shallowRef(false)
   const items = ref<FormField[]>([])
   const errors = ref<FieldValidationResult[]>([])
 
@@ -108,13 +111,10 @@ export function createForm (props: FormProps) {
 
   function reset () {
     items.value.forEach(item => item.reset())
-    model.value = null
   }
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errors.value = []
-    model.value = null
   }
 
   watch(items, () => {
@@ -170,6 +170,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validateOn: toRef(props, 'validateOn'),
   })
@@ -179,6 +180,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validate,
     reset,

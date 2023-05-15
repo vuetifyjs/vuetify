@@ -1,6 +1,5 @@
 ---
 nav: All Components
-emphasized: true
 meta:
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.

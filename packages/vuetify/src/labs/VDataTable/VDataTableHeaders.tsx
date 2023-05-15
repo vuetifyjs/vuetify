@@ -13,9 +13,10 @@ import { useSort } from './composables/sort'
 
 // Utilities
 import { computed } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { CSSProperties } from 'vue'
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { SortItem } from './composables/sort'
@@ -23,40 +24,42 @@ import type { SortItem } from './composables/sort'
 type HeadersSlotProps = {
   headers: InternalDataTableHeader[][]
   columns: InternalDataTableHeader[]
-  sortBy: SortItem[]
+  sortBy: readonly SortItem[]
   someSelected: boolean
   allSelected: boolean
   toggleSort: (key: string) => void
   selectAll: (value: boolean) => void
   getSortIcon: (key: string) => IconValue
-  getFixedStyles: (column: InternalDataTableHeader) => Record<string, string>
+  getFixedStyles: (column: InternalDataTableHeader, y: number) => CSSProperties | undefined
 }
+
+export const makeVDataTableHeadersProps = propsFactory({
+  color: String,
+  sticky: Boolean,
+  multiSort: Boolean,
+  sortAscIcon: {
+    type: IconValue,
+    default: '$sortAsc',
+  },
+  sortDescIcon: {
+    type: IconValue,
+    default: '$sortDesc',
+  },
+
+  ...makeLoaderProps(),
+}, 'v-data-table-headers')
 
 export type VDataTableHeadersSlots = {
   default: []
   headers: [HeadersSlotProps]
   loader: [LoaderSlotProps]
-  'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
-}
+  'column.data-table-select': [{ column: InternalDataTableHeader, selectAll: (value: boolean) => void }]
+} & { [key: `column.${string}`]: [{ column: InternalDataTableHeader, selectAll: (value: boolean) => void }] }
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
 
-  props: {
-    color: String,
-    sticky: Boolean,
-    multiSort: Boolean,
-    sortAscIcon: {
-      type: IconValue,
-      default: '$sortAsc',
-    },
-    sortDescIcon: {
-      type: IconValue,
-      default: '$sortDesc',
-    },
-
-    ...makeLoaderProps(),
-  },
+  props: makeVDataTableHeadersProps(),
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy } = useSort()
@@ -64,8 +67,8 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
-    const getFixedStyles = (column: InternalDataTableHeader, y: number) => {
-      if (!props.sticky && !column.fixed) return null
+    const getFixedStyles = (column: InternalDataTableHeader, y: number): CSSProperties | undefined => {
+      if (!props.sticky && !column.fixed) return undefined
 
       return {
         position: 'sticky',
@@ -95,7 +98,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       selectAll,
       getSortIcon,
       getFixedStyles,
-    }))
+    } satisfies HeadersSlotProps))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const isSorted = !!sortBy.value.find(x => x.key === column.key)
@@ -126,7 +129,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           {{
             default: () => {
-              const columnSlotName = `column.${column.key}`
+              const columnSlotName = `column.${column.key}` as const
               const columnSlotProps = {
                 column,
                 selectAll,

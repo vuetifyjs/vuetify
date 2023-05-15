@@ -40,6 +40,8 @@
   "close": "Close",
   "code": "Code",
   "codepen-template": "Codepen template",
+  "copied": "Copied!",
+  "copy-link": "Copy link",
   "company": "Company",
   "comparison": {
     "average": "**Based on average of all Major/Minor/Patch releases over the last 12 months.",

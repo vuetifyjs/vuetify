@@ -180,6 +180,10 @@ export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
 }
 
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
+}
+
 type MaybePick<
   T extends object,
   U extends Extract<keyof T, string>
@@ -608,3 +612,5 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     else focusChild(el, location === 'next' ? 'first' : 'last')
   }
 }
+
+export function noop () {}

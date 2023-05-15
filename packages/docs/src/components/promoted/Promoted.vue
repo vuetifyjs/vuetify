@@ -1,7 +1,7 @@
 <template>
   <a
     v-if="ad"
-    class="d-block mb-4"
+    class="d-block"
     style="max-width: 640px;"
     v-bind="attrs"
     @click="onClick"
@@ -13,7 +13,6 @@
       max-width="640"
       outlined
     >
-
       <v-img
         :src="background"
         class="flex-1-1-auto rounded"

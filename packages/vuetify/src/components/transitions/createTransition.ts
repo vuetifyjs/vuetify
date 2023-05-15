@@ -1,9 +1,18 @@
 // Utilities
+import { genericComponent, propsFactory } from '@/util'
 import { h, Transition, TransitionGroup } from 'vue'
-import { genericComponent } from '@/util'
 
 // Types
 import type { FunctionalComponent, PropType } from 'vue'
+
+export const makeTransitionProps = propsFactory({
+  disabled: Boolean,
+  group: Boolean,
+  hideOnLeave: Boolean,
+  leaveAbsolute: Boolean,
+  mode: String,
+  origin: String,
+}, 'transition')
 
 export function createCssTransition (
   name: string,
@@ -13,20 +22,10 @@ export function createCssTransition (
   return genericComponent()({
     name,
 
-    props: {
-      disabled: Boolean,
-      group: Boolean,
-      hideOnLeave: Boolean,
-      leaveAbsolute: Boolean,
-      mode: {
-        type: String,
-        default: mode,
-      },
-      origin: {
-        type: String,
-        default: origin,
-      },
-    },
+    props: makeTransitionProps({
+      mode,
+      origin,
+    }),
 
     setup (props, { slots }) {
       const functions = {

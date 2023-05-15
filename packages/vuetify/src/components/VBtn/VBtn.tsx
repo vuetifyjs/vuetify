@@ -82,7 +82,7 @@ export const makeVBtnProps = propsFactory({
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'VBtn')
+}, 'v-btn')
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',
@@ -131,6 +131,13 @@ export const VBtn = genericComponent<VBtnSlots>()({
       return Object(props.value) === props.value
         ? JSON.stringify(props.value, null, 0) : props.value
     })
+
+    function onClick (e: MouseEvent) {
+      if (isDisabled.value) return
+
+      link.navigate?.(e)
+      group?.toggle()
+    }
 
     useSelectLink(link, group?.select)
 
@@ -186,12 +193,7 @@ export const VBtn = genericComponent<VBtnSlots>()({
             null,
             props.icon ? ['center'] : null,
           ]}
-          onClick={ (e: MouseEvent) => {
-            if (isDisabled.value) return
-
-            link.navigate?.(e)
-            group?.toggle()
-          }}
+          onClick={ onClick }
           value={ valueAttr.value }
         >
           { genOverlays(true, 'v-btn') }
