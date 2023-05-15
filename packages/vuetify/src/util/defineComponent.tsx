@@ -128,6 +128,7 @@ type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on
 
 export type SlotsToProps<
   U extends Record<string, any[]> | Record<string, Slot>,
+  Generic extends boolean = false,
   T = U extends Record<string, any[]> ? MakeSlots<U> : U
 > = {
   $children?: (
@@ -138,7 +139,9 @@ export type SlotsToProps<
   'v-slots'?: { [K in keyof T]?: T[K] | false }
 } & {
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
-}
+} & (Generic extends false ? {
+  $slots?: { [K in keyof T]?: T[K] }
+} : {})
 
 type Slot<T extends any[] = any[]> = (...args: T) => VNodeChild
 export type MakeSlots<T extends Record<string, any[]> | Record<string, Slot>> = {
@@ -146,7 +149,7 @@ export type MakeSlots<T extends Record<string, any[]> | Record<string, Slot>> = 
 }
 
 export type GenericProps<Props, Slots extends Record<string, any[]>> = {
-  $props: Props & SlotsToProps<Slots>
+  $props: Props & SlotsToProps<Slots, true>
   $slots: MakeSlots<Slots>
 }
 
