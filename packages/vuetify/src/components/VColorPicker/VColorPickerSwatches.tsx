@@ -14,6 +14,7 @@ import {
   defineComponent,
   getContrast,
   parseColor,
+  propsFactory,
   RGBtoCSS,
   RGBtoHSV,
   useRender,
@@ -23,6 +24,18 @@ import colors from '@/util/colors'
 // Types
 import type { Color, HSV } from '@/util'
 import type { PropType } from 'vue'
+
+export const makeVColorPickerSwatchesProps = propsFactory({
+  swatches: {
+    type: Array as PropType<Color[][]>,
+    default: () => parseDefaultColors(colors),
+  },
+  disabled: Boolean,
+  color: Object as PropType<HSV | null>,
+  maxHeight: [Number, String],
+
+  ...makeComponentProps(),
+}, 'v-color-picker-swatches')
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {
@@ -49,17 +62,7 @@ function parseDefaultColors (colors: Record<string, Record<string, string>>) {
 export const VColorPickerSwatches = defineComponent({
   name: 'VColorPickerSwatches',
 
-  props: {
-    swatches: {
-      type: Array as PropType<Color[][]>,
-      default: () => parseDefaultColors(colors),
-    },
-    disabled: Boolean,
-    color: Object as PropType<HSV | null>,
-    maxHeight: [Number, String],
-
-    ...makeComponentProps(),
-  },
+  props: makeVColorPickerSwatchesProps(),
 
   emits: {
     'update:color': (color: HSV) => true,

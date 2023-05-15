@@ -86,7 +86,7 @@ export const createApp = ViteSSG(
         // For initial page load
         wait = 1500
         main = document.querySelector('main')
-      } else if (to.path !== from.path) {
+      } else if (to.path !== from.path && to.hash) {
         // For cross page navigation
         wait = 500
       }

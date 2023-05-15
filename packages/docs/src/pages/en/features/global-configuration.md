@@ -45,7 +45,7 @@ createVuetify({
   defaults: {
     VCard: {
       VBtn: { variant: 'outlined' },
-    }
+    },
   },
 })
 ```
