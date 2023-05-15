@@ -3,11 +3,11 @@
     <template v-slot:activator="{ props }">
       <div class="text-center">
         <v-btn
-          color="red"
           v-bind="props"
-        >
-          Open Player
-        </v-btn>
+          color="red"
+          size="x-large"
+          text="Click Me"
+        ></v-btn>
       </div>
     </template>
 
@@ -27,13 +27,13 @@
             ></v-btn>
 
             <v-btn
-              :class="{ 'mx-5': $vuetify.display.mdAndUp }"
+              :class="{ 'mx-5': display.mdAndUp.value }"
               icon="mdi-pause"
               variant="text"
             ></v-btn>
 
             <v-btn
-              :class="{ 'me-3': $vuetify.display.mdAndUp }"
+              :class="{ 'me-3': display.mdAndUp.value }"
               class="ms-0"
               icon="mdi-fast-forward"
               variant="text"
@@ -44,3 +44,15 @@
     </v-sheet>
   </v-bottom-sheet>
 </template>
+
+<script>
+  import { useDisplay } from 'vuetify'
+
+  export default {
+    setup () {
+      const display = useDisplay()
+
+      return { display }
+    },
+  }
+</script>

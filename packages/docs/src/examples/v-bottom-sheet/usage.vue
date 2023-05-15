@@ -11,9 +11,10 @@
       <template v-slot:activator="{ props: activatorProps }">
         <div class="pa-2 text-center">
           <v-btn
-            size="x-large"
             v-bind="activatorProps"
-          >Click Me</v-btn>
+            size="x-large"
+            text="Click Me"
+          ></v-btn>
         </div>
       </template>
 
@@ -41,7 +42,16 @@
   })
 
   const slots = computed(() => {
-    return ''
+    return `
+  <template v-slot:activator="{ props }">
+    <v-btn v-bind="props" text="Click Me"></v-btn>
+  </template>
+
+  <v-card
+    title="Bottom Sheet"
+    text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis dolorem perspiciatis asperiores sed consectetur praesentium! Delectus et iure maxime eaque exercitationem!"
+  ></v-card>
+`
   })
 
   const code = computed(() => {

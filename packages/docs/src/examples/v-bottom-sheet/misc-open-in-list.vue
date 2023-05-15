@@ -3,11 +3,11 @@
     <template v-slot:activator="{ props }">
       <div class="text-center">
         <v-btn
-          color="purple"
           v-bind="props"
-        >
-          Open In List
-        </v-btn>
+          color="purple"
+          size="x-large"
+          text="Click Me"
+        ></v-btn>
       </div>
     </template>
 

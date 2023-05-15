@@ -1,8 +1,10 @@
 <template>
   <div class="text-center">
-    <v-btn @click="sheet = !sheet">
-      Open v-model
-    </v-btn>
+    <v-btn
+      size="x-large"
+      text="Click Me"
+      @click="sheet = !sheet"
+    ></v-btn>
 
     <v-bottom-sheet v-model="sheet">
       <v-card

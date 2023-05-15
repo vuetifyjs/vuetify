@@ -15,7 +15,7 @@ related:
 
 The bottom sheet is a modified `v-dialog` that slides from the bottom of the screen, similar to a `v-bottom-navigation`.
 
-![Bottom Sheet Entry](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+![Bottom Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-entry.png)
 
 ---
 
@@ -49,7 +49,7 @@ The recommended components to use inside of a `v-bottom-sheet` are:
 * [v-list](/components/lists/)
 * [v-sheet](/components/sheets/)
 
-![Bottom Sheet Anatomy](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+![Bottom Sheet Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-anatomy.png)
 
 | Element / Area | Description                                                              |
 |----------------|--------------------------------------------------------------------------|
@@ -63,10 +63,6 @@ The following code snippet is an example of a basic `v-bottom-sheet` component:
 
 ```html
 <v-bottom-sheet>
-  <template v-slot:activator="{ props }">
-    <v-btn v-bind="props">Open Bottom Sheet</v-btn>
-  </template>
-
   <v-card
     title="Bottom Sheet"
     text="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Ut, eos? Nulla aspernatur odio rem, culpa voluptatibus eius debitis."
@@ -84,7 +80,7 @@ The **v-model** (or **model-value**) controls the visibility of the bottom sheet
 
 <example file="v-bottom-sheet/prop-model" />
 
-This also works in tandem with the [activator]() slot.
+This also works in tandem with the [activator](/api/v-bottom-sheet/#slots-activator) slot.
 
 #### Inset
 
@@ -96,7 +92,7 @@ With the **inset** prop, reduce the maximum width of the content area on desktop
 
 The `v-bottom-sheet` component has access to all of the slots available in [v-dialog](/api/v-dialog#slots).
 
-![Bottom Sheet Slots](https://vuetifyjs.b-cdn.net/docs/images/graphics/img-placeholder.png)
+![Bottom Sheet Slots](https://cdn.vuetifyjs.com/docs/images/components/v-bottom-sheet/v-bottom-sheet-slots.png)
 
 | Slot         | Description                                         |
 |--------------|-----------------------------------------------------|
@@ -124,9 +120,3 @@ Using a inset bottom sheet, you can make practical components such as this simpl
 By combining a functional list into a bottom sheet, you can create a simple 'open in' component.
 
 <example file="v-bottom-sheet/misc-open-in-list" />
-
-#### Persistent
-
-Persistent bottom sheets can't be closed by clicking outside them.
-
-<example file="v-bottom-sheet/prop-persistent" />
