@@ -532,6 +532,7 @@ export const VCombobox = genericComponent<new <
                 { slots['append-inner']?.(...args) }
                 { props.items.length && props.menuIcon ? (
                   <VIcon
+                    class="v-combobox__menu-icon"
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }

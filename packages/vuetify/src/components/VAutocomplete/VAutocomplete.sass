@@ -22,11 +22,6 @@
         align-self: flex-start
         flex: 1 1
 
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $autocomplete-transition
-
   .v-field:not(.v-field--focused)
     input
       min-width: 0
@@ -56,12 +51,6 @@
     letter-spacing: inherit
     line-height: inherit
     max-width: 100%
-
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
 
   &--chips
     .v-autocomplete__selection
@@ -102,3 +91,11 @@
     .v-field--focused
       .v-autocomplete__selection
         opacity: 0
+
+  &__menu-icon
+    margin-inline-start: 4px
+    transition: $autocomplete-transition
+
+    .v-autocomplete--active-menu &
+      opacity: var(--v-high-emphasis-opacity)
+      transform: rotate(180deg)

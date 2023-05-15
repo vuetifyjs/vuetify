@@ -497,6 +497,7 @@ export const VAutocomplete = genericComponent<new <
                 { slots['append-inner']?.(...args) }
                 { props.menuIcon ? (
                   <VIcon
+                    class="v-autocomplete__menu-icon"
                     icon={ props.menuIcon }
                     onMousedown={ onMousedownMenuIcon }
                     onClick={ noop }
