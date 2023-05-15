@@ -30,7 +30,7 @@ export const makeVTextFieldProps = propsFactory({
   autofocus: Boolean,
   counter: [Boolean, Number, String] as PropType<true | number | string>,
   counterValue: Function as PropType<(value: any) => number>,
-  closeConditional: Function,
+  closeOutsideInclude: Function as PropType<() => HTMLElement[]>,
   prefix: String,
   placeholder: String,
   persistentPlaceholder: Boolean,
@@ -179,7 +179,7 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
           focused={ isFocused.value }
           v-click-outside={{
             handler: onClickOutside,
-            closeConditional: props.closeConditional,
+            include: props.closeOutsideInclude,
           }}
         >
           {{
