@@ -67,7 +67,7 @@ export default baseMixins.extend<options>().extend({
           value: this.isActive,
         }],
       }), [
-        h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this)),
+        h('div', { class: 'v-expansion-panel-content__wrap' }, getSlot(this, 'default', { open: this.isActive })),
       ]),
     ]))
   },
