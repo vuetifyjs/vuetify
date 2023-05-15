@@ -183,7 +183,7 @@ describe('VForm', () => {
     ))
 
     cy.then(() => {
-      expect(form.value.isValid).to.be.true
+      expect(form.value.isValid).to.be.null
     })
       .get('.v-text-field').should('not.have.class', 'v-input--error')
       .get('.v-text-field input')
