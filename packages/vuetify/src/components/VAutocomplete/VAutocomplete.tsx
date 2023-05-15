@@ -398,7 +398,7 @@ export const VAutocomplete = genericComponent<new <
                         props: mergeProps(item.props, { onClick: () => select(item) }),
                       }) ?? (
                         <VListItem
-                          key={ item.value }
+                          key={ index }
                           active={ (highlightFirst.value && index === 0) ? true : undefined }
                           { ...item.props }
                           onClick={ () => select(item) }
