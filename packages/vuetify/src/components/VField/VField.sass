@@ -81,7 +81,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-padding-bottom: #{16px + $modifier * .5}
+          --v-field-padding-bottom: #{15px + $modifier * .5}
 
   &--variant-plain,
   &--variant-underlined
@@ -93,7 +93,7 @@
       --v-field-padding-start: 0px
       --v-field-padding-end: 0px
       --v-field-padding-top: 6px
-      --v-field-padding-bottom: 2px
+      --v-field-padding-bottom: 1px
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
