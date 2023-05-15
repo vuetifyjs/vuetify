@@ -1,3 +1,4 @@
 export * from './VCalendar'
 export * from './VDataTable'
-export * from './VVirtualScroll'
+export * from './VInfiniteScroll'
+export * from './VSkeletonLoader'

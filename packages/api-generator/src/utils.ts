@@ -1,3 +1,4 @@
+import { fileURLToPath } from 'url'
 import stringifyObject from 'stringify-object'
 import type { Definition, ObjectDefinition } from './types'
 
@@ -97,12 +98,16 @@ export function stringifyProps (props: any) {
 
 async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
   try {
-    const data = await import(new URL(`../src/locale/${locale}/${componentName}.json`, import.meta.url).pathname, {
+    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
       assert: { type: 'json' },
     })
     return Object.assign(fallback, data.default)
   } catch (err) {
-    console.error(err.message?.split('imported from')[0] ?? err.message)
+    if (err.code === 'ERR_MODULE_NOT_FOUND') {
+      console.error(`Missing locale for ${componentName} in ${locale}`)
+    } else {
+      console.error(err.message)
+    }
     return fallback
   }
 }

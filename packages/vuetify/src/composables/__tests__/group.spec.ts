@@ -162,7 +162,7 @@ describe('group', () => {
 
       expect(wrapper.emitted()['update:modelValue']).toEqual([
         [['two']],
-        [['one', 'two']],
+        [['two', 'one']],
       ])
     })
 
@@ -314,7 +314,7 @@ describe('group', () => {
 
       expect(wrapper.emitted('update:modelValue')).toStrictEqual([
         [[1]],
-        [[0, 1]],
+        [[1, 0]],
       ])
     })
 

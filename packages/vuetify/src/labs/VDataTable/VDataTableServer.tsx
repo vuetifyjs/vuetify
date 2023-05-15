@@ -1,51 +1,44 @@
 // Components
-import { VTable } from '@/components/VTable'
-import { VDataTableFooter } from './VDataTableFooter'
+import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
+import { VTable } from '@/components/VTable'
 
 // Composables
+import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
+import { createHeaders } from './composables/headers'
+import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
+import { createSort, provideSort } from './composables/sort'
+import { makeDataTableProps } from './VDataTable'
 import { provideDefaults } from '@/composables/defaults'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { createExpanded, makeDataTableExpandProps } from './composables/expand'
-import { createGroupBy, makeDataTableGroupProps, useGroupedItems } from './composables/group'
-import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
-import { makeDataTableItemProps, useDataTableItems } from './composables/items'
+import { provideExpanded } from './composables/expand'
+import { provideSelection } from './composables/select'
+import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
-import { createPagination, makeDataTablePaginateProps } from './composables/paginate'
-import { createSelection, makeDataTableSelectProps } from './composables/select'
-import { createSort, makeDataTableSortProps } from './composables/sort'
 
 // Utilities
-import { provide, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
-import { makeVDataTableProps } from './VDataTable'
+import { computed, provide, toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DataTableItem } from './types'
 import type { VDataTableSlots } from './VDataTable'
 
+export const makeVDataTableServerProps = propsFactory({
+  itemsLength: {
+    type: [Number, String],
+    required: true,
+  },
+
+  ...makeDataTablePaginateProps(),
+  ...makeDataTableProps(),
+  ...makeVDataTableFooterProps(),
+}, 'v-data-table-server')
+
 export const VDataTableServer = genericComponent<VDataTableSlots>()({
   name: 'VDataTableServer',
 
-  props: {
-    color: String,
-    loading: [Boolean, String],
-    loadingText: {
-      type: String,
-      default: '$vuetify.dataIterator.loadingText',
-    },
-    itemsLength: [Number, String],
-
-    ...makeVDataTableProps(),
-    ...makeDataTableExpandProps(),
-    ...makeDataTableHeaderProps(),
-    ...makeDataTableItemProps(),
-    ...makeDataTableSelectProps(),
-    ...makeDataTableSortProps(),
-    ...makeDataTablePaginateProps(),
-    ...makeDataTableGroupProps(),
-  },
+  props: makeVDataTableServerProps(),
 
   emits: {
     'update:modelValue': (value: any[]) => true,
@@ -55,13 +48,16 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
     'update:options': (options: any) => true,
     'update:expanded': (options: any) => true,
     'update:groupBy': (value: any) => true,
-    'click:row': (event: Event, value: { item: DataTableItem }) => true,
+    'click:row': (e: Event, value: { item: DataTableItem }) => true,
   },
 
   setup (props, { emit, slots }) {
-    const groupBy = useProxiedModel(props, 'groupBy')
+    const { groupBy } = createGroupBy(props)
+    const { sortBy, multiSort, mustSort } = createSort(props)
+    const { page, itemsPerPage } = createPagination(props)
+    const itemsLength = computed(() => parseInt(props.itemsLength, 10))
 
-    createExpanded(props)
+    provideExpanded(props)
 
     const { columns } = createHeaders(props, {
       groupBy,
@@ -71,21 +67,22 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
     const { items } = useDataTableItems(props, columns)
 
-    const { sortBy, toggleSort } = createSort(props)
+    const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened } = createGroupBy(props, groupBy, sortBy)
+    const { opened } = provideGroupBy({ groupBy, sortBy })
 
-    const { page, itemsPerPage } = createPagination(props, items)
+    providePagination({ page, itemsPerPage, itemsLength })
 
     const { flatItems } = useGroupedItems(items, groupBy, opened)
 
-    createSelection(props, items)
+    provideSelection(props, items)
 
     useOptions({
       page,
       itemsPerPage,
       sortBy,
       groupBy,
+      search: toRef(props, 'search'),
     })
 
     provide('v-data-table', {
@@ -102,56 +99,62 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       },
     })
 
-    useRender(() => (
-      <VTable
-        class={[
-          'v-data-table',
-          {
-            'v-data-table--loading': props.loading,
-          },
-        ]}
-        fixedHeader={ props.fixedHeader }
-        fixedFooter={ props.fixedFooter }
-        height={ props.height }
-      >
-        {{
-          top: slots.top,
-          default: slots.default ?? (() => (
-            <>
-              <thead class="v-data-table__thead" role="rowgroup">
-                { slots.headers ? slots.headers() : (
+    useRender(() => {
+      const [dataTableFooterProps] = VDataTableFooter.filterProps(props)
+      const [dataTableHeadersProps] = VDataTableHeaders.filterProps(props)
+      const [dataTableRowsProps] = VDataTableRows.filterProps(props)
+      const [tableProps] = VTable.filterProps(props)
+
+      return (
+        <VTable
+          class={[
+            'v-data-table',
+            {
+              'v-data-table--loading': props.loading,
+            },
+            props.class,
+          ]}
+          style={ props.style }
+          { ...tableProps }
+        >
+          {{
+            top: slots.top,
+            default: slots.default ?? (() => (
+              <>
+                { slots.colgroup?.({ columns }) }
+                <thead class="v-data-table__thead" role="rowgroup">
                   <VDataTableHeaders
+                    { ...dataTableHeadersProps }
                     sticky={ props.fixedHeader }
-                    loading={ props.loading }
-                    color={ props.color }
                     v-slots={ slots }
                   />
-                ) }
-              </thead>
-              { slots.thead?.() }
-              <tbody class="v-data-table__tbody" role="rowgroup">
-                { slots.body ? slots.body() : (
-                  <VDataTableRows
-                    items={ flatItems.value }
-                    onClick:row={ (event, value) => emit('click:row', event, value) }
-                    v-slots={ slots }
-                  />
-                ) }
-              </tbody>
-              { slots.tbody?.() }
-              { slots.tfoot?.() }
-            </>
-          )),
-          bottom: slots.bottom ?? (() => (
-            <VDataTableFooter
-              v-slots={{
-                prepend: slots['footer.prepend'],
-              }}
-            />
-          )),
-        }}
-      </VTable>
-    ))
+                </thead>
+                { slots.thead?.() }
+                <tbody class="v-data-table__tbody" role="rowgroup">
+                  { slots.body ? slots.body() : (
+                    <VDataTableRows
+                      { ...dataTableRowsProps }
+                      items={ flatItems.value }
+                      v-slots={ slots }
+                    />
+                  )}
+                </tbody>
+                { slots.tbody?.() }
+                { slots.tfoot?.() }
+              </>
+            )),
+            bottom: slots.bottom ?? (() => (
+              <VDataTableFooter
+                { ...dataTableFooterProps }
+                v-slots={{
+                  prepend: slots['footer.prepend'],
+                }}
+              />
+            )),
+          }}
+        </VTable>
+      )
+    })
   },
 })
 

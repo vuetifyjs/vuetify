@@ -18,6 +18,10 @@
   .v-selection-control--error:not(.v-selection-control--disabled) &
     background-color: $switch-error-background-color
 
+.v-switch__thumb
+  .v-selection-control--dirty &
+    color: currentColor
+
 .v-switch__track
   border-radius: $switch-track-radius
   height: $switch-track-height
@@ -58,9 +62,6 @@
   .v-selection-control
     min-height: var(--v-input-control-height)
 
-  .v-selection-control__wrapper
-    width: auto
-
   .v-selection-control__input
     border-radius: 50%
     transition: $switch-control-input-transition
@@ -77,3 +78,7 @@
     .v-switch__thumb
       transform: scale(.75)
       box-shadow: none
+
+  &.v-switch--inset
+    .v-selection-control__wrapper
+      width: auto

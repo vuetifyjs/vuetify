@@ -10,11 +10,8 @@
       fade-img-on-scroll
       scroll-target="#scrolling-techniques-4"
     >
-      <template v-slot:img="{ props }">
-        <v-img
-          v-bind="props"
-          gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"
-        ></v-img>
+      <template v-slot:image>
+        <v-img gradient="to top right, rgba(100,115,201,.7), rgba(25,32,72,.7)"></v-img>
       </template>
 
       <v-app-bar-nav-icon></v-app-bar-nav-icon>
@@ -32,12 +29,11 @@
       </v-btn>
 
       <v-menu>
-        <template v-slot:activator="{ on, attrs }">
+        <template v-slot:activator="{ props }">
           <v-btn
             icon
             color="yellow"
-            v-bind="attrs"
-            v-on="on"
+            v-bind="props"
           >
             <v-icon>mdi-dots-vertical</v-icon>
           </v-btn>

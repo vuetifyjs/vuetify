@@ -14,9 +14,15 @@ related:
 
 The locale provider allows you to provide specific default prop values to components in a section of your application
 
+<entry />
+
 ## API
 
-<api-inline />
+| Component | Description |
+| - | - |
+| [v-locale-provider](/api/v-locale-provider/) | Primary Component |
+
+<api-inline hide-links />
 
 ## Examples
 

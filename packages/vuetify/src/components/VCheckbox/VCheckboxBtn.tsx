@@ -8,10 +8,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, pick, propsFactory, useRender } from '@/util'
-
-// Types
-import type { ExtractPropTypes } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -62,9 +59,12 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
       <VSelectionControl
         { ...props }
         v-model={ model.value }
-        class="v-checkbox-btn"
+        class={[
+          'v-checkbox-btn',
+          props.class,
+        ]}
+        style={ props.style }
         type="checkbox"
-        inline
         onUpdate:modelValue={ onChange }
         falseIcon={ falseIcon.value }
         trueIcon={ trueIcon.value }
@@ -78,7 +78,3 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
 })
 
 export type VCheckboxBtn = InstanceType<typeof VCheckboxBtn>
-
-export function filterCheckboxBtnProps (props: ExtractPropTypes<ReturnType<typeof makeVCheckboxBtnProps>>) {
-  return pick(props, Object.keys(VCheckboxBtn.props) as any)
-}

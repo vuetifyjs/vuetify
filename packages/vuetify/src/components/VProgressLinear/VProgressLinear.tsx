@@ -2,9 +2,10 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
+import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useIntersectionObserver } from '@/composables/intersectionObserver'
@@ -13,52 +14,55 @@ import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
   default: [{ value: number, buffer: number }]
 }
 
+export const makeVProgressLinearProps = propsFactory({
+  absolute: Boolean,
+  active: {
+    type: Boolean,
+    default: true,
+  },
+  bgColor: String,
+  bgOpacity: [Number, String],
+  bufferValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  clickable: Boolean,
+  color: String,
+  height: {
+    type: [Number, String],
+    default: 4,
+  },
+  indeterminate: Boolean,
+  max: {
+    type: [Number, String],
+    default: 100,
+  },
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  reverse: Boolean,
+  stream: Boolean,
+  striped: Boolean,
+  roundedBar: Boolean,
+
+  ...makeComponentProps(),
+  ...makeLocationProps({ location: 'top' } as const),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-progress-linear')
+
 export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   name: 'VProgressLinear',
 
-  props: {
-    absolute: Boolean,
-    active: {
-      type: Boolean,
-      default: true,
-    },
-    bgColor: String,
-    bgOpacity: [Number, String],
-    bufferValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    clickable: Boolean,
-    color: String,
-    height: {
-      type: [Number, String],
-      default: 4,
-    },
-    indeterminate: Boolean,
-    max: {
-      type: [Number, String],
-      default: 100,
-    },
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    reverse: Boolean,
-    stream: Boolean,
-    striped: Boolean,
-    roundedBar: Boolean,
-
-    ...makeLocationProps({ location: 'top' } as const),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVProgressLinearProps(),
 
   emits: {
     'update:modelValue': (value: number) => true,
@@ -66,7 +70,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
 
   setup (props, { slots }) {
     const progress = useProxiedModel(props, 'modelValue')
-    const { isRtl } = useRtl()
+    const { isRtl, rtlClasses } = useRtl()
     const { themeClasses } = provideTheme(props)
     const { locationStyles } = useLocation(props)
     const { textColorClasses, textColorStyles } = useTextColor(props, 'color')
@@ -111,14 +115,19 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
           },
           roundedClasses.value,
           themeClasses.value,
+          rtlClasses.value,
+          props.class,
         ]}
-        style={{
-          bottom: props.location === 'bottom' ? 0 : undefined,
-          top: props.location === 'top' ? 0 : undefined,
-          height: props.active ? convertToUnit(height.value) : 0,
-          '--v-progress-linear-height': convertToUnit(height.value),
-          ...locationStyles.value,
-        }}
+        style={[
+          {
+            bottom: props.location === 'bottom' ? 0 : undefined,
+            top: props.location === 'top' ? 0 : undefined,
+            height: props.active ? convertToUnit(height.value) : 0,
+            '--v-progress-linear-height': convertToUnit(height.value),
+            ...locationStyles.value,
+          },
+          props.style,
+        ]}
         role="progressbar"
         aria-hidden={ props.active ? 'false' : 'true' }
         aria-valuemin="0"
@@ -143,7 +152,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
               '--v-progress-linear-stream-to': convertToUnit(height.value * (isReversed.value ? 1 : -1)),
             }}
           />
-        ) }
+        )}
 
         <div
           class={[
@@ -173,7 +182,7 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
             />
           ) : (
             <div class="v-progress-linear__indeterminate">
-              { ['long', 'short'].map(bar => (
+              {['long', 'short'].map(bar => (
                 <div
                   key={ bar }
                   class={[
@@ -183,16 +192,16 @@ export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
                   ]}
                   style={ barColorStyles.value }
                 />
-              )) }
+              ))}
             </div>
-          ) }
+          )}
         </Transition>
 
         { slots.default && (
           <div class="v-progress-linear__content">
             { slots.default({ value: normalizedValue.value, buffer: normalizedBuffer.value }) }
           </div>
-        ) }
+        )}
       </props.tag>
     ))
 

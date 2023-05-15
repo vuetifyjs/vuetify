@@ -1,6 +1,8 @@
-// Utilities
-import { computed, inject, provide, ref, toRef, watch } from 'vue'
+// Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+// Utilities
+import { computed, inject, provide, ref, shallowRef, toRef, watch } from 'vue'
 import { consoleWarn, propsFactory } from '@/util'
 
 // Types
@@ -23,7 +25,7 @@ export interface FormProvide {
   validateOn: Ref<FormProps['validateOn']>
 }
 
-interface FormField {
+export interface FormField {
   id: number | string
   validate: () => Promise<string[]>
   reset: () => void
@@ -32,12 +34,12 @@ interface FormField {
   errorMessages: string[]
 }
 
-interface FieldValidationResult {
+export interface FieldValidationResult {
   id: number | string
   errorMessages: string[]
 }
 
-interface FormValidationResult {
+export interface FormValidationResult {
   valid: boolean
   errors: FieldValidationResult[]
 }
@@ -74,7 +76,7 @@ export function createForm (props: FormProps) {
 
   const isDisabled = computed(() => props.disabled)
   const isReadonly = computed(() => props.readonly)
-  const isValidating = ref(false)
+  const isValidating = shallowRef(false)
   const items = ref<FormField[]>([])
   const errors = ref<FieldValidationResult[]>([])
 

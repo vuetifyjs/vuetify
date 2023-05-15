@@ -1,9 +1,9 @@
 {
   "props": {
-    "indeterminate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))",
-    "indeterminateIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))"
+    "indeterminate": "Puts the control in an indeterminate state. Used with the [indeterminate-icon](#props-indeterminate-icon) property.",
+    "indeterminateIcon": "Icon used when the component is in an indeterminate state."
   },
   "events": {
-    "update:indeterminate": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-checkbox-btn.json))"
+    "update:indeterminate": "Event that is emitted when the component's indeterminate state changes."
   }
 }

@@ -37,18 +37,31 @@
   &--appended
     padding-inline-end: $field-control-affixed-padding
 
-  &--variant-solo
+  &--variant-solo,
+  &--variant-solo-filled
     background: $field-control-solo-background
     border-color: transparent
     color: $field-control-solo-color
 
     @include tools.elevation($field-control-solo-elevation)
 
+  &--variant-solo-inverted
+    background: $field-control-solo-background
+    border-color: transparent
+    color: $field-control-solo-inverted-color
+
+    @include tools.elevation($field-control-solo-elevation)
+
+    &.v-field--focused
+      color: $field-control-solo-inverted-focused-color
+
   &--variant-filled
     border-bottom-left-radius: 0
     border-bottom-right-radius: 0
 
   &--variant-solo,
+  &--variant-solo-inverted,
+  &--variant-solo-filled,
   &--variant-filled
     $root: &
 
@@ -85,6 +98,12 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+
+  &--flat
+    box-shadow: none
+
+  &--rounded
+    @include tools.rounded($field-rounded-border-radius)
 
   // These are separate so they can override the default variant styles
   &.v-field
@@ -224,7 +243,9 @@
       visibility: visible
 
     .v-field--variant-solo &,
-    .v-field--variant-filled &
+    .v-field--variant-solo-inverted &,
+    .v-field--variant-filled &,
+    .v-field--variant-solo-filled &
       $root: &
 
       @at-root
@@ -320,7 +341,6 @@
     &__notch
       flex: none
       position: relative
-      border-width: 0 0 var(--v-field-border-width)
 
       &::before,
       &::after
@@ -362,14 +382,17 @@
 
 /* endregion */
 /* region OVERLAY */
+.v-field__overlay
+  border-radius: inherit
+  pointer-events: none
+
+  @include tools.absolute()
+
 .v-field--variant-filled
   .v-field__overlay
     background-color: currentColor
-    border-radius: inherit
     opacity: $field-overlay-filled-opacity
-    pointer-events: none
     transition: opacity $field-subtle-transition-timing
-    @include tools.absolute()
 
   &.v-field--has-background .v-field__overlay
     opacity: 0
@@ -380,6 +403,34 @@
 
   &.v-field--focused .v-field__overlay
     opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+.v-field--variant-solo-filled
+  .v-field__overlay
+    background-color: currentColor
+    opacity: $field-overlay-filled-opacity
+    transition: opacity $field-subtle-transition-timing
+
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
+
+  &.v-field--focused .v-field__overlay
+    opacity: calc((#{$field-overlay-filled-opacity} + #{map.get(settings.$states, 'focus')}) * var(--v-theme-overlay-multiplier))
+
+.v-field--variant-solo-inverted
+  .v-field__overlay
+    transition: opacity $field-subtle-transition-timing
+
+  &.v-field--has-background .v-field__overlay
+    opacity: 0
+
+  @media (hover: hover)
+    &:hover .v-field__overlay
+      opacity: calc((#{.04} + #{map.get(settings.$states, 'hover')}) * var(--v-theme-overlay-multiplier))
+
+  &.v-field--focused .v-field__overlay
+    background-color: $field-overlay-focused-background-color
+    opacity: 1
 
 /* endregion */
 /* region MODIFIERS */

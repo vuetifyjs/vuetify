@@ -10,26 +10,28 @@ import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { GroupHeaderItem } from './types'
 
-type VDataTableGroupHeaderRowSlots = {
+export type VDataTableGroupHeaderRowSlots = {
   'data-table-group': [{ item: GroupHeaderItem, count: number, props: Record<string, unknown> }]
   'data-table-select': [{ props: Record<string, unknown> }]
 }
 
+export const makeVDataTableGroupHeaderRowProps = propsFactory({
+  item: {
+    type: Object as PropType<GroupHeaderItem>,
+    required: true,
+  },
+}, 'v-data-table-group-header-row')
+
 export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
   name: 'VDataTableGroupHeaderRow',
 
-  props: {
-    item: {
-      type: Object as PropType<GroupHeaderItem>,
-      required: true,
-    },
-  },
+  props: makeVDataTableGroupHeaderRowProps(),
 
   setup (props, { slots }) {
     const { isGroupOpen, toggleGroup, extractRows } = useGroupBy()

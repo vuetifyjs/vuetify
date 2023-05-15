@@ -2,7 +2,7 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, inject, provide } from 'vue'
+import { computed, inject, provide, watchEffect } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -22,6 +22,7 @@ export const makeDataTablePaginateProps = propsFactory({
 const VDataTablePaginationSymbol: InjectionKey<{
   page: Ref<number>
   itemsPerPage: Ref<number>
+  setItemsPerPage: (value: number) => void
   startIndex: Ref<number>
   stopIndex: Ref<number>
   pageCount: Ref<number>
@@ -36,10 +37,19 @@ type PaginationProps = {
   itemsLength?: number | string
 }
 
-export function createPagination (props: PaginationProps, items: Ref<any[]>) {
+export function createPagination (props: PaginationProps) {
   const page = useProxiedModel(props, 'page', undefined, value => +(value ?? 1))
   const itemsPerPage = useProxiedModel(props, 'itemsPerPage', undefined, value => +(value ?? 10))
-  const itemsLength = computed(() => +(props.itemsLength ?? items.value.length))
+
+  return { page, itemsPerPage }
+}
+
+export function providePagination (options: {
+  page: Ref<number>
+  itemsPerPage: Ref<number>
+  itemsLength: Ref<number>
+}) {
+  const { page, itemsPerPage, itemsLength } = options
 
   const startIndex = computed(() => {
     if (itemsPerPage.value === -1) return 0
@@ -58,7 +68,18 @@ export function createPagination (props: PaginationProps, items: Ref<any[]>) {
     return Math.ceil(itemsLength.value / itemsPerPage.value)
   })
 
-  const data = { page, itemsPerPage, startIndex, stopIndex, pageCount, itemsLength }
+  watchEffect(() => {
+    if (page.value > pageCount.value) {
+      page.value = pageCount.value
+    }
+  })
+
+  function setItemsPerPage (value: number) {
+    itemsPerPage.value = value
+    page.value = 1
+  }
+
+  const data = { page, itemsPerPage, itemsLength, startIndex, stopIndex, pageCount, setItemsPerPage }
 
   provide(VDataTablePaginationSymbol, data)
 
@@ -73,12 +94,13 @@ export function usePagination () {
   return data
 }
 
-export function usePaginatedItems (
-  items: Ref<any[]>,
-  startIndex: Ref<number>,
-  stopIndex: Ref<number>,
+export function usePaginatedItems (options: {
+  items: Ref<any[]>
+  startIndex: Ref<number>
+  stopIndex: Ref<number>
   itemsPerPage: Ref<number>
-) {
+}) {
+  const { items, startIndex, stopIndex, itemsPerPage } = options
   const paginatedItems = computed(() => {
     if (itemsPerPage.value <= 0) return items.value
 

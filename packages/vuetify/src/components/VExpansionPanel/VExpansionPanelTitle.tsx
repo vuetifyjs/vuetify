@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 import { Ripple } from '@/directives/ripple'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
 import { useBackgroundColor } from '@/composables/color'
 
@@ -13,9 +14,17 @@ import { useBackgroundColor } from '@/composables/color'
 import { computed, inject } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
+interface ExpansionPanelTitleSlot {
+  collapseIcon: IconValue
+  disabled: boolean | undefined
+  expanded: boolean
+  expandIcon: IconValue
+  readonly: boolean
+}
+
 export type VExpansionPanelTitleSlots = {
-  default: []
-  actions: []
+  default: [ExpansionPanelTitleSlot]
+  actions: [ExpansionPanelTitleSlot]
 }
 
 export const makeVExpansionPanelTitleProps = propsFactory({
@@ -34,6 +43,8 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
+
+  ...makeComponentProps(),
 }, 'v-expansion-panel-title')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
@@ -41,9 +52,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
   directives: { Ripple },
 
-  props: {
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelTitleProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
@@ -68,8 +77,12 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
           },
           backgroundColorClasses.value,
+          props.class,
         ]}
-        style={ backgroundColorStyles.value }
+        style={[
+          backgroundColorStyles.value,
+          props.style,
+        ]}
         type="button"
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }
         disabled={ expansionPanel.disabled.value }
@@ -88,7 +101,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
               : <VIcon icon={ expansionPanel.isSelected.value ? props.collapseIcon : props.expandIcon } />
             }
           </span>
-        ) }
+        )}
       </button>
     ))
 

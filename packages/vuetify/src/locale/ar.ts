@@ -73,4 +73,9 @@ export default {
       item: 'القييم {0} من {1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

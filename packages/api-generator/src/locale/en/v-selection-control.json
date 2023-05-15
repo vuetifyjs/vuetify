@@ -1,14 +1,12 @@
 {
   "props": {
-    "trueValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))",
-    "falseValue": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))",
-    "value": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))"
+    "value": "The value used when the component is selected in a group. If not provided, a unique ID will be used."
   },
   "slots": {
-    "input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))"
+    "input": "The slot used for the default input element."
   },
   "exposed": {
-    "isFocused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))",
-    "input": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control.json))"
+    "isFocused": "Will return true if the component is currently focused.",
+    "input": "Reference to the root input element."
   }
 }

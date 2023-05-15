@@ -9,45 +9,50 @@ import { VSliderSymbol } from './slider'
 import Ripple from '@/directives/ripple'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 export type VSliderThumbSlots = {
-  'thumb-label': []
+  'thumb-label': [{ modelValue: number }]
 }
+
+export const makeVSliderThumbProps = propsFactory({
+  focused: Boolean,
+  max: {
+    type: Number,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  modelValue: {
+    type: Number,
+    required: true,
+  },
+  position: {
+    type: Number,
+    required: true,
+  },
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+
+  ...makeComponentProps(),
+}, 'v-slider-thumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
 
-  props: {
-    focused: Boolean,
-    max: {
-      type: Number,
-      required: true,
-    },
-    min: {
-      type: Number,
-      required: true,
-    },
-    modelValue: {
-      type: Number,
-      required: true,
-    },
-    position: {
-      type: Number,
-      required: true,
-    },
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-  },
+  props: makeVSliderThumbProps(),
 
   emits: {
     'update:modelValue': (v: number) => true,
@@ -127,11 +132,15 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
               'v-slider-thumb--focused': props.focused,
               'v-slider-thumb--pressed': props.focused && mousePressed.value,
             },
+            props.class,
           ]}
-          style={{
-            '--v-slider-thumb-position': positionPercentage,
-            '--v-slider-thumb-size': convertToUnit(thumbSize.value),
-          }}
+          style={[
+            {
+              '--v-slider-thumb-position': positionPercentage,
+              '--v-slider-thumb-size': convertToUnit(thumbSize.value),
+            },
+            props.style,
+          ]}
           role="slider"
           tabindex={ disabled.value ? -1 : 0 }
           aria-valuemin={ props.min }

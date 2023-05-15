@@ -2,13 +2,15 @@
 import './VSelect.sass'
 
 // Components
-import { filterVTextFieldProps, makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialogTransition } from '@/components/transitions'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { VIcon } from '@/components/VIcon'
+
 import { VTextField } from '@/components/VTextField'
 
 // Composables
@@ -21,15 +23,26 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
-import { computed, mergeProps, ref } from 'vue'
+import { computed, mergeProps, ref, shallowRef } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { InternalItem } from '@/composables/items'
-import type { MakeSlots, SlotsToProps } from '@/util'
-import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
+import type { Component, PropType } from 'vue'
+
+type Primitive = string | number | boolean | symbol
+
+type Val <T, ReturnObject extends boolean> = T extends Primitive
+  ? T
+  : (ReturnObject extends true ? T : any)
+
+type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
+  Multiple extends true
+    ? readonly Val<T, ReturnObject>[]
+    : Val<T, ReturnObject> | null
 
 export const makeSelectProps = propsFactory({
   chips: Boolean,
@@ -57,53 +70,45 @@ export const makeSelectProps = propsFactory({
   },
 
   ...makeItemsProps({ itemChildren: false }),
+}, 'select')
+
+export const makeVSelectProps = propsFactory({
+  ...makeSelectProps(),
+  ...omit(makeVTextFieldProps({
+    modelValue: null,
+  }), ['validationValue', 'dirty', 'appendInnerIcon']),
+  ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
 }, 'v-select')
 
-type Primitive = string | number | boolean | symbol
-
-type Val <T, ReturnObject extends boolean> = T extends Primitive
-  ? T
-  : (ReturnObject extends true ? T : any)
-
-type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
-  Multiple extends true
-    ? readonly Val<T, ReturnObject>[]
-    : Val<T, ReturnObject>
-
 export const VSelect = genericComponent<new <
-  T,
+  T extends readonly any[],
+  Item = T extends readonly (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
-  V extends Value<T, ReturnObject, Multiple> = Value<T, ReturnObject, Multiple>
->() => {
-  $props: {
-    items?: readonly T[]
+  V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
+>(
+  props: {
+    items?: T
     returnObject?: ReturnObject
     multiple?: Multiple
-    modelValue?: V
+    modelValue?: V | null
     'onUpdate:modelValue'?: (val: V) => void
-  } & SlotsToProps<
-    Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-      item: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      chip: [{ item: InternalItem<T>, index: number, props: Record<string, unknown> }]
-      selection: [{ item: InternalItem<T>, index: number }]
-      'prepend-item': []
-      'append-item': []
-      'no-data': []
-    }>
-  >
-}>()({
+  },
+  slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
+    item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: InternalItem<Item>, index: number }]
+    'prepend-item': []
+    'append-item': []
+    'no-data': []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
 
-  props: {
-    ...makeSelectProps(),
-    ...omit(makeVTextFieldProps({
-      modelValue: null,
-    }), ['validationValue', 'dirty', 'appendInnerIcon']),
-    ...makeTransitionProps({ transition: { component: VDialogTransition } }),
-  },
+  props: makeVSelectProps(),
 
   emits: {
+    'update:focused': (focused: boolean) => true,
     'update:modelValue': (val: any) => true,
     'update:menu': (val: boolean) => true,
   },
@@ -138,6 +143,10 @@ export const VSelect = genericComponent<new <
       })
     })
     const selected = computed(() => selections.value.map(selection => selection.props.value))
+    const isFocused = shallowRef(false)
+
+    let keyboardLookupPrefix = ''
+    let keyboardLookupLastTime: number
 
     const displayItems = computed(() => {
       if (props.hideSelected) {
@@ -185,6 +194,29 @@ export const VSelect = genericComponent<new <
       } else if (e.key === 'End') {
         listRef.value?.focus('last')
       }
+
+      // html select hotkeys
+      const KEYBOARD_LOOKUP_THRESHOLD = 1000 // milliseconds
+
+      function checkPrintable (e: KeyboardEvent) {
+        const isPrintableChar = e.key.length === 1
+        const noModifier = !e.ctrlKey && !e.metaKey && !e.altKey
+        return isPrintableChar && noModifier
+      }
+
+      if (props.multiple || !checkPrintable(e)) return
+
+      const now = performance.now()
+      if (now - keyboardLookupLastTime > KEYBOARD_LOOKUP_THRESHOLD) {
+        keyboardLookupPrefix = ''
+      }
+      keyboardLookupPrefix += e.key.toLowerCase()
+      keyboardLookupLastTime = now
+
+      const item = items.value.find(item => item.title.toLowerCase().startsWith(keyboardLookupPrefix))
+      if (item !== undefined) {
+        model.value = [item]
+      }
     }
     function select (item: InternalItem) {
       if (props.multiple) {
@@ -207,16 +239,26 @@ export const VSelect = genericComponent<new <
         menu.value = false
       }
     }
-    function onFocusout (e: FocusEvent) {
-      if (e.relatedTarget == null) {
+    function onAfterLeave () {
+      if (isFocused.value) {
         vTextFieldRef.value?.focus()
       }
+    }
+    function onFocusin (e: FocusEvent) {
+      isFocused.value = true
     }
 
     useRender(() => {
       const hasChips = !!(props.chips || slots.chip)
       const hasList = !!((!props.hideNoData || displayItems.value.length) || slots.prepend || slots.append || slots['no-data'])
-      const [textFieldProps] = filterVTextFieldProps(props)
+      const isDirty = model.value.length > 0
+      const [textFieldProps] = VTextField.filterProps(props)
+
+      const placeholder = isDirty || (
+        !isFocused.value &&
+        props.label &&
+        !props.persistentPlaceholder
+      ) ? undefined : props.placeholder
 
       return (
         <VTextField
@@ -224,8 +266,9 @@ export const VSelect = genericComponent<new <
           { ...textFieldProps }
           modelValue={ model.value.map(v => v.props.value).join(', ') }
           onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
-          dirty={ model.value.length > 0 }
+          dirty={ isDirty }
           class={[
             'v-select',
             {
@@ -234,9 +277,12 @@ export const VSelect = genericComponent<new <
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
             },
+            props.class,
           ]}
+          style={ props.style }
           appendInnerIcon={ props.menuIcon }
           readonly
+          placeholder={ placeholder }
           onClick:clear={ onClear }
           onMousedown:control={ onMousedownControl }
           onBlur={ onBlur }
@@ -256,6 +302,7 @@ export const VSelect = genericComponent<new <
                   openOnClick={ false }
                   closeOnContentClick={ false }
                   transition={ props.transition }
+                  onAfterLeave={ onAfterLeave }
                   { ...props.menuProps }
                 >
                   { hasList && (
@@ -264,11 +311,11 @@ export const VSelect = genericComponent<new <
                       selected={ selected.value }
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
-                      onFocusout={ onFocusout }
+                      onFocusin={ onFocusin }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
-                      )) }
+                      ))}
 
                       { slots['prepend-item']?.() }
 
@@ -288,9 +335,21 @@ export const VSelect = genericComponent<new <
                             onClick={ () => select(item) }
                           >
                             {{
-                              prepend: ({ isSelected }) => props.multiple && !props.hideSelected ? (
-                                <VCheckboxBtn modelValue={ isSelected } ripple={ false } />
-                              ) : undefined,
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
+
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
                             }}
                           </VListItem>
                         )
@@ -298,7 +357,7 @@ export const VSelect = genericComponent<new <
 
                       { slots['append-item']?.() }
                     </VList>
-                  ) }
+                  )}
                 </VMenu>
 
                 { selections.value.map((item, index) => {
@@ -311,6 +370,10 @@ export const VSelect = genericComponent<new <
 
                   const slotProps = {
                     'onClick:close': onChipClose,
+                    onMousedown (e: MouseEvent) {
+                      e.preventDefault()
+                      e.stopPropagation()
+                    },
                     modelValue: true,
                     'onUpdate:modelValue': undefined,
                   }
@@ -318,35 +381,41 @@ export const VSelect = genericComponent<new <
                   return (
                     <div key={ item.value } class="v-select__selection">
                       { hasChips ? (
-                        <VDefaultsProvider
-                          defaults={{
-                            VChip: {
-                              closable: props.closableChips,
-                              size: 'small',
-                              text: item.title,
-                            },
-                          }}
-                        >
-                          { slots.chip
-                            ? slots.chip({ item, index, props: slotProps })
-                            : (<VChip { ...slotProps } />)
-                          }
-                        </VDefaultsProvider>
+                        !slots.chip ? (
+                          <VChip
+                            key="chip"
+                            closable={ props.closableChips }
+                            size="small"
+                            text={ item.title }
+                            { ...slotProps }
+                          />
+                        ) : (
+                          <VDefaultsProvider
+                            key="chip-defaults"
+                            defaults={{
+                              VChip: {
+                                closable: props.closableChips,
+                                size: 'small',
+                                text: item.title,
+                              },
+                            }}
+                          >
+                            { slots.chip?.({ item, index, props: slotProps }) }
+                          </VDefaultsProvider>
+                        )
                       ) : (
-                        slots.selection
-                          ? slots.selection({ item, index })
-                          : (
-                            <span class="v-select__selection-text">
-                              { item.title }
-                              { props.multiple && (index < selections.value.length - 1) && (
-                                <span class="v-select__selection-comma">,</span>
-                              ) }
-                            </span>
-                          )
+                        slots.selection?.({ item, index }) ?? (
+                          <span class="v-select__selection-text">
+                            { item.title }
+                            { props.multiple && (index < selections.value.length - 1) && (
+                              <span class="v-select__selection-comma">,</span>
+                            )}
+                          </span>
+                        )
                       )}
                     </div>
                   )
-                }) }
+                })}
               </>
             ),
           }}
@@ -355,6 +424,7 @@ export const VSelect = genericComponent<new <
     })
 
     return forwardRefs({
+      isFocused,
       menu,
       select,
     }, vTextFieldRef)

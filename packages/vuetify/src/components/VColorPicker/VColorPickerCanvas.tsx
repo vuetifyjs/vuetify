@@ -2,37 +2,42 @@
 import './VColorPickerCanvas.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { clamp, convertToUnit, defineComponent, getEventCoordinates, useRender } from '@/util'
-import { computed, onMounted, ref, watch } from 'vue'
+import { clamp, convertToUnit, defineComponent, getEventCoordinates, propsFactory, useRender } from '@/util'
+import { computed, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { HSV } from '@/util'
 import type { PropType } from 'vue'
 
+export const makeVColorPickerCanvasProps = propsFactory({
+  color: {
+    type: Object as PropType<HSV | null>,
+  },
+  disabled: Boolean,
+  dotSize: {
+    type: [Number, String],
+    default: 10,
+  },
+  height: {
+    type: [Number, String],
+    default: 150,
+  },
+  width: {
+    type: [Number, String],
+    default: 300,
+  },
+
+  ...makeComponentProps(),
+}, 'v-color-picker-canvas')
+
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',
 
-  props: {
-    color: {
-      type: Object as PropType<HSV | null>,
-    },
-    disabled: Boolean,
-    dotSize: {
-      type: [Number, String],
-      default: 10,
-    },
-    height: {
-      type: [Number, String],
-      default: 150,
-    },
-    width: {
-      type: [Number, String],
-      default: 300,
-    },
-  },
+  props: makeVColorPickerCanvasProps(),
 
   emits: {
     'update:color': (color: HSV) => true,
@@ -40,8 +45,8 @@ export const VColorPickerCanvas = defineComponent({
   },
 
   setup (props, { emit }) {
-    const isInteracting = ref(false)
-    const isOutsideUpdate = ref(false)
+    const isInteracting = shallowRef(false)
+    const isOutsideUpdate = shallowRef(false)
     const dotPosition = ref({ x: 0, y: 0 })
 
     const dotStyles = computed(() => {
@@ -56,8 +61,8 @@ export const VColorPickerCanvas = defineComponent({
     })
 
     const canvasRef = ref<HTMLCanvasElement | null>()
-    const canvasWidth = ref(parseFloat(props.width))
-    const canvasHeight = ref(parseFloat(props.height))
+    const canvasWidth = shallowRef(parseFloat(props.width))
+    const canvasHeight = shallowRef(parseFloat(props.height))
     const { resizeRef } = useResizeObserver(entries => {
       if (!resizeRef.value?.offsetParent) return
 
@@ -179,7 +184,11 @@ export const VColorPickerCanvas = defineComponent({
     useRender(() => (
       <div
         ref={ resizeRef }
-        class="v-color-picker-canvas"
+        class={[
+          'v-color-picker-canvas',
+          props.class,
+        ]}
+        style={ props.style }
         onClick={ handleClick }
         onMousedown={ handleMouseDown }
         onTouchstart={ handleMouseDown }

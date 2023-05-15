@@ -34,6 +34,7 @@
               </v-btn>
             </div>
           </v-fade-transition>
+
           <v-spacer />
 
           <v-tooltip
@@ -59,21 +60,20 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition v-if="hasRendered">
-          <div v-if="showCode">
-            <v-window v-model="template">
-              <v-window-item
-                v-for="section of sections"
-                :key="section.name"
-              >
-                <v-theme-provider :theme="theme">
-                  <app-markup
-                    :code="section.content"
-                    :rounded="false"
-                  />
-                </v-theme-provider>
-              </v-window-item>
-            </v-window>
-          </div>
+          <v-window v-show="showCode" v-model="template">
+            <v-window-item
+              v-for="(section, i) of sections"
+              :key="section.name"
+              :eager="i === 0 || isEager"
+            >
+              <v-theme-provider :theme="theme">
+                <app-markup
+                  :code="section.content"
+                  :rounded="false"
+                />
+              </v-theme-provider>
+            </v-window-item>
+          </v-window>
         </v-expand-transition>
 
         <v-theme-provider
@@ -96,10 +96,11 @@
   // Composables
   import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
+  import { usePlayground } from '@/composables/playground'
   import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
@@ -108,6 +109,7 @@
 
   const props = defineProps({
     inline: Boolean,
+    hideInvert: Boolean,
     file: {
       type: String,
       required: true,
@@ -129,6 +131,7 @@
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
   const hasRendered = ref(false)
+  const isEager = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -186,29 +189,56 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  const actions = computed(() => [
-    {
-      icon: 'mdi-theme-light-dark',
-      path: 'invert-example-colors',
-      onClick: toggleTheme,
-    },
-    {
-      icon: 'mdi-codepen',
-      path: 'edit-in-codepen',
-      onClick: openCodepen,
-    },
-    {
-      icon: 'mdi-github',
-      path: 'view-in-github',
-      href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
-      target: '_blank',
-    },
-    {
-      icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
-      path: !showCode.value ? 'view-source' : 'hide-source',
-      onClick: () => {
-        showCode.value = !showCode.value
+  const playgroundLink = computed(() => {
+    if (!isLoaded.value || isError.value) return null
+
+    const resources = JSON.parse(component.value.codepenResources || '{}')
+
+    return usePlayground(sections.value, resources.css, resources.imports)
+  })
+
+  const actions = computed(() => {
+    const array = []
+
+    if (!props.hideInvert) {
+      array.push({
+        icon: 'mdi-theme-light-dark',
+        path: 'invert-example-colors',
+        onClick: toggleTheme,
+      })
+    }
+
+    if (playgroundLink.value) {
+      array.push({
+        icon: '$vuetifyPlay',
+        path: 'edit-in-playground',
+        href: playgroundLink.value,
+        target: '_blank',
+      })
+    }
+
+    return [
+      ...array,
+      {
+        icon: 'mdi-codepen',
+        path: 'edit-in-codepen',
+        onClick: openCodepen,
       },
-    },
-  ])
+      {
+        icon: 'mdi-github',
+        path: 'view-in-github',
+        href: `https://github.com/vuetifyjs/vuetify/tree/${getBranch()}/packages/docs/src/examples/${props.file}.vue`,
+        target: '_blank',
+      },
+      {
+        icon: !showCode.value ? 'mdi-code-tags' : 'mdi-chevron-up',
+        path: !showCode.value ? 'view-source' : 'hide-source',
+        onClick: () => {
+          showCode.value = !showCode.value
+        },
+      },
+    ]
+  })
+
+  watch(showCode, val => val && (isEager.value = true))
 </script>

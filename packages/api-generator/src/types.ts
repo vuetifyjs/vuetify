@@ -15,7 +15,7 @@ function inspect (project: Project, node?: Node<ts.Node>) {
     if (definition.properties) {
       // Exclude private properties
       definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('_') && !name.startsWith('Ψ')))
+        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
     }
     return definition
   }
@@ -77,6 +77,12 @@ export async function generateComponentDataFromTypes (component: string) {
     item.text = undefined
     item.source = undefined
   })
+
+  for (const [name, { formatted }] of Object.entries(props.properties)) {
+    if (formatted.length > 400) {
+      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+    }
+  }
 
   return {
     props: props.properties,

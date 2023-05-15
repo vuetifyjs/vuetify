@@ -4,6 +4,7 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
+import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
 
 // Directives
@@ -15,12 +16,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
   getUid,
-  pick,
   propsFactory,
   SUPPORTS_FOCUS_VISIBLE,
   useRender,
@@ -29,7 +29,7 @@ import {
 
 // Types
 import type { CSSProperties, ExtractPropTypes, Ref, WritableComputedRef } from 'vue'
-import type { MakeSlots, SlotsToProps } from '@/util'
+import type { GenericProps } from '@/util'
 
 export type SelectionControlSlot = {
   model: WritableComputedRef<any>
@@ -42,11 +42,11 @@ export type SelectionControlSlot = {
   }
 }
 
-export type VSelectionControlSlots = MakeSlots<{
+export type VSelectionControlSlots = {
   default: []
   label: [{ label: string | undefined, props: Record<string, unknown> }]
   input: [SelectionControlSlot]
-}>
+}
 
 export const makeSelectionControlProps = propsFactory({
   label: String,
@@ -54,6 +54,7 @@ export const makeSelectionControlProps = propsFactory({
   falseValue: null,
   value: null,
 
+  ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
 }, 'v-selection-control')
 
@@ -124,12 +125,13 @@ export function useSelectionControl (
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>() => {
-  $props: {
+export const VSelectionControl = genericComponent<new <T>(
+  props: {
     modelValue?: T
     'onUpdate:modelValue'?: (val: T) => any
-  } & SlotsToProps<VSelectionControlSlots>
-}>()({
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },
@@ -154,8 +156,8 @@ export const VSelectionControl = genericComponent<new <T>() => {
     } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = ref(false)
-    const isFocusVisible = ref(false)
+    const isFocused = shallowRef(false)
+    const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
 
     group?.onForceUpdate(() => {
@@ -208,8 +210,10 @@ export const VSelectionControl = genericComponent<new <T>() => {
               'v-selection-control--inline': props.inline,
             },
             densityClasses.value,
+            props.class,
           ]}
           { ...rootAttrs }
+          style={ props.style }
         >
           <div
             class={[
@@ -257,7 +261,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
                   onBlur,
                   id: id.value,
                 },
-              } as SelectionControlSlot) }
+              } as SelectionControlSlot)}
             </div>
           </div>
 
@@ -265,7 +269,7 @@ export const VSelectionControl = genericComponent<new <T>() => {
             <VLabel for={ id.value } clickable>
               { label }
             </VLabel>
-          ) }
+          )}
         </div>
       )
     })
@@ -278,7 +282,3 @@ export const VSelectionControl = genericComponent<new <T>() => {
 })
 
 export type VSelectionControl = InstanceType<typeof VSelectionControl>
-
-export function filterControlProps (props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>>) {
-  return pick(props, Object.keys(VSelectionControl.props) as any)
-}
