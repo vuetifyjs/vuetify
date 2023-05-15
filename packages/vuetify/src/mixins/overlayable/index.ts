@@ -180,7 +180,7 @@ export default Vue.extend<Vue & Toggleable & Stackable & options>().extend({
 
       if (!alreadyAtStart && scrollingUp) return true
       if (!alreadyAtEnd && scrollingDown) return true
-      if ((alreadyAtStart || alreadyAtEnd)) {
+      if ((alreadyAtStart || alreadyAtEnd) && el.parentNode) {
         return this.shouldScroll(el.parentNode as Element, e)
       }
 
