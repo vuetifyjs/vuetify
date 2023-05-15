@@ -23,7 +23,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -216,6 +216,13 @@ export const VCombobox = genericComponent<new <
 
       menu.value = true
     }
+    function onMousedownMenuIcon (e: MouseEvent) {
+      if (isFocused.value) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      menu.value = !menu.value
+    }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
 
@@ -375,7 +382,6 @@ export const VCombobox = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          appendInnerIcon={ props.items.length ? props.menuIcon : undefined }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
@@ -519,6 +525,18 @@ export const VCombobox = genericComponent<new <
                     </div>
                   )
                 })}
+              </>
+            ),
+            'append-inner': (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { props.items.length && props.menuIcon ? (
+                  <VIcon
+                    icon={ props.menuIcon }
+                    onMousedown={ onMousedownMenuIcon }
+                    onClick={ noop }
+                  />
+                ) : undefined }
               </>
             ),
           }}
