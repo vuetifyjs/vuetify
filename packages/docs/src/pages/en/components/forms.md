@@ -68,11 +68,11 @@ When rules run is controlled with the **validate-on** prop which accepts a strin
 | On submit      |     ✅     |    ✅     |     ✅      |    *     |
 <p class="text-caption">* Uses the behavior of whatever it's combined with.</p>
 
-The current validation state of the form is accessed through `v-model` or the submit event and has three possible states:
+The form's current validation status is accessed using `v-model` or the submit event. It can be in one of three states:
 
-- `true`: All inputs with rules have run their validation and succeeded.
-- `false`: At least one input has failed validation after either being interacted with, or a manual validation has been triggered.
-- `null`: At least one input has failed validation without being interacted with, or has `lazy` validation that has not been run yet.
+- `true`: All inputs with validation rules have been successfully validated.
+- `false`: At least one input has failed validation either by interaction or manual validation.
+- `null`: At least one input has failed validation without interaction or has not been validated yet due to `lazy` validation.
 
 This allows you to either check for any validation failure with `!valid`, or only errors that are displayed to the user with `valid === false`{.text-no-wrap}.
 
