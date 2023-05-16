@@ -57,7 +57,7 @@ export default createVuetify({
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates. Note that typescript support will require you to also add the component to `@vue/runtime-core`'s `GlobalComponents` interface.
+When Vuetify instantiates it will register `VDataTable` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 
