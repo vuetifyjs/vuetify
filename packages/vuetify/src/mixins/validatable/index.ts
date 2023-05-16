@@ -23,7 +23,10 @@ export default baseMixins.extend({
   name: 'validatable',
 
   props: {
-    disabled: Boolean,
+    disabled: {
+      type: Boolean,
+      default: null,
+    },
     error: Boolean,
     errorCount: {
       type: [Number, String],
@@ -37,7 +40,10 @@ export default baseMixins.extend({
       type: [String, Array],
       default: () => [],
     } as PropValidator<InputMessage | null>,
-    readonly: Boolean,
+    readonly: {
+      type: Boolean,
+      default: null,
+    },
     rules: {
       type: Array,
       default: () => [],
@@ -125,7 +131,7 @@ export default baseMixins.extend({
       },
     },
     isDisabled (): boolean {
-      return this.disabled || (
+      return this.disabled ?? (
         !!this.form &&
         this.form.disabled
       )
@@ -134,7 +140,7 @@ export default baseMixins.extend({
       return !this.isDisabled && !this.isReadonly
     },
     isReadonly (): boolean {
-      return this.readonly || (
+      return this.readonly ?? (
         !!this.form &&
         this.form.readonly
       )
