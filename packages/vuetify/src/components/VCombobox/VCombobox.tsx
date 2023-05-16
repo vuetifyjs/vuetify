@@ -427,41 +427,45 @@ export const VCombobox = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map((item, index) => slots.item?.({
-                        item,
-                        index,
-                        props: mergeProps(item.props, { onClick: () => select(item) }),
-                      }) ?? (
-                        <VListItem
-                          key={ index }
-                          active={ (highlightFirst.value && index === 0) ? true : undefined }
-                          { ...item.props }
-                          onClick={ () => select(item) }
-                        >
-                          {{
-                            prepend: ({ isSelected }) => (
-                              <>
-                                { props.multiple && !props.hideSelected ? (
-                                  <VCheckboxBtn
-                                    modelValue={ isSelected }
-                                    ripple={ false }
-                                    tabindex="-1"
-                                  />
-                                ) : undefined }
+                      { displayItems.value.map((item, index) => {
+                        const itemProps = mergeProps(item.props, {
+                          key: index,
+                          active: (highlightFirst.value && index === 0) ? true : undefined,
+                          onClick: () => select(item),
+                        })
 
-                                { item.props.prependIcon && (
-                                  <VIcon icon={ item.props.prependIcon } />
-                                )}
-                              </>
-                            ),
-                            title: () => {
-                              return isPristine.value
-                                ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
-                            },
-                          }}
-                        </VListItem>
-                      ))}
+                        return slots.item?.({
+                          item,
+                          index,
+                          props: itemProps,
+                        }) ?? (
+                          <VListItem { ...itemProps }>
+                            {{
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      key={ item.value }
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
+
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
+                              title: () => {
+                                return isPristine.value
+                                  ? item.title
+                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                              },
+                            }}
+                          </VListItem>
+                        )
+                      })}
 
                       { slots['append-item']?.() }
                     </VList>
