@@ -52,7 +52,7 @@ function highlightResult (text: string, matches: FilterMatch | undefined, length
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = string | (T extends Primitive
+type Val <T, ReturnObject extends boolean> = string | ([T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any))
 
