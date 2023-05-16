@@ -112,6 +112,7 @@ export const VCombobox = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
+    const listHasFocus = ref(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -201,7 +202,8 @@ export const VCombobox = genericComponent<new <
     const highlightFirst = computed(() => (
       props.autoSelectFirst &&
       filteredItems.value.length > 0 &&
-      !isPristine.value
+      !isPristine.value &&
+      !listHasFocus.value
     ))
     const listRef = ref<VList>()
 
@@ -249,7 +251,7 @@ export const VCombobox = genericComponent<new <
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (e.key === 'Enter' && highlightFirst.value) {
+        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
           select(filteredItems.value[0])
         }
 
@@ -346,14 +348,20 @@ export const VCombobox = genericComponent<new <
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+      setTimeout(() => {
+        listHasFocus.value = true
+      })
+    }
+    function onFocusout (e: FocusEvent) {
+      listHasFocus.value = false
     }
 
     watch(filteredItems, val => {
       if (!val.length && props.hideNoData) menu.value = false
     })
 
-    watch(isFocused, val => {
-      if (val) return
+    watch(isFocused, (val, oldVal) => {
+      if (val || val === oldVal) return
 
       selectionIndex.value = -1
       menu.value = false
@@ -420,6 +428,7 @@ export const VCombobox = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
+                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />

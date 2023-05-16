@@ -111,6 +111,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
+    const listHasFocus = ref(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -155,7 +156,8 @@ export const VAutocomplete = genericComponent<new <
     const highlightFirst = computed(() => (
       props.autoSelectFirst &&
       filteredItems.value.length > 0 &&
-      !isPristine.value
+      !isPristine.value &&
+      !listHasFocus.value
     ))
     const listRef = ref<VList>()
 
@@ -203,7 +205,7 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
-        if (e.key === 'Enter' && highlightFirst.value) {
+        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
           select(filteredItems.value[0])
         }
 
@@ -212,6 +214,9 @@ export const VAutocomplete = genericComponent<new <
 
       if (e.key === 'ArrowDown') {
         listRef.value?.focus('next')
+        if (highlightFirst.value) {
+          listRef.value?.focus('next')
+        }
       } else if (e.key === 'ArrowUp') {
         listRef.value?.focus('prev')
       }
@@ -276,6 +281,12 @@ export const VAutocomplete = genericComponent<new <
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+      setTimeout(() => {
+        listHasFocus.value = true
+      })
+    }
+    function onFocusout (e: FocusEvent) {
+      listHasFocus.value = false
     }
 
     const isSelecting = shallowRef(false)
@@ -305,7 +316,9 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    watch(isFocused, val => {
+    watch(isFocused, (val, oldVal) => {
+      if (val === oldVal) return
+
       if (val) {
         isSelecting.value = true
         search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
@@ -385,6 +398,7 @@ export const VAutocomplete = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
+                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
