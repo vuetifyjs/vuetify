@@ -5,15 +5,14 @@
       :items="releases"
       :loading="store.isLoading"
       :menu-props="menuProps"
-      :placeholder="`v${version}`"
+      :placeholder="tag"
       hide-details
+      density="comfortable"
       item-title="name"
       label="Select Release Version"
       persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      @blur="resetSearch"
-      @focus="onFocus"
     >
       <template #item="{ item, props: itemProps }">
         <v-list-item
@@ -35,14 +34,13 @@
 
     <v-card
       variant="flat"
-      min-height="180"
       rounded="t-0 b"
     >
       <div
-        v-if="!!search"
+        v-if="search?.author"
         class="d-flex justify-space-between"
       >
-        <v-list-item lines="two">
+        <v-list-item v-if="search.author" lines="two">
           <v-list-item-title class="mb-1 text-h6">
             <i18n-t keypath="released-by">
               <template #author>
@@ -53,7 +51,7 @@
             </i18n-t>
           </v-list-item-title>
 
-          <v-list-item-subtitle>
+          <v-list-item-subtitle v-if="search.published_at">
             <i18n-t keypath="published-on">
               <template #date>
                 <v-chip
@@ -87,15 +85,17 @@
         </div>
       </div>
 
-      <v-divider />
+      <template v-if="search?.body && !store.isLoading">
+        <v-divider />
 
-      <div class="px-4 pt-4">
-        <app-markdown
-          v-if="search?.body"
-          :content="search.body"
-          class="releases"
-        />
-      </div>
+        <div class="px-4 pt-4">
+          <app-markdown
+            v-if="search?.body"
+            :content="search.body"
+            class="releases"
+          />
+        </div>
+      </template>
     </v-card>
   </div>
 </template>
@@ -103,40 +103,22 @@
 <script setup lang="ts">
   // Composables
   import { useI18n } from 'vue-i18n'
+  import { useRoute, useRouter } from 'vue-router'
 
   // Stores
-  import { useReleasesStore } from '@/store/releases'
+  import { Release, useReleasesStore } from '@/store/releases'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref } from 'vue'
-  import { useRoute } from 'vue-router'
+  import { computed, onBeforeMount, ref, watch } from 'vue'
   import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
   const { t } = useI18n()
   const store = useReleasesStore()
-  const isFocused = ref(false)
-  const isSearching = ref(false)
   const clicked = ref('copy-link')
   const route = useRoute()
-  const search = ref<any>()
-  let timeout = -1
-
-  const onFocus = () => {
-    clearTimeout(timeout)
-
-    isFocused.value = true
-  }
-
-  const resetSearch = async () => {
-    clearTimeout(timeout)
-
-    await nextTick(() => {
-      isSearching.value = false
-
-      timeout = window.setTimeout(() => (isFocused.value = false), timeout)
-    })
-  }
+  const router = useRouter()
+  const search = ref<Release>()
 
   const menuProps = computed(() => {
     return {
@@ -151,7 +133,7 @@
         color: '#3b5998',
         icon: clicked.value === 'copied' ? 'mdi-check' : 'mdi-share-variant-outline',
         async onClick () {
-          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value.tag_name}`)
+          navigator.clipboard.writeText(`${window.location.origin}/getting-started/release-notes/?version=${search.value!.tag_name}`)
 
           clicked.value = 'copied'
 
@@ -169,7 +151,7 @@
       },
       {
         color: '#212121',
-        href: search.value.html_url,
+        href: search.value!.html_url,
         icon: 'mdi-github',
         path: 'open-github-release',
       },
@@ -184,16 +166,20 @@
     return releases
   })
 
+  const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
   onBeforeMount(async () => {
     await store.fetch()
 
-    if (route.query.version) {
-      const found = store.releases.find(release => release.tag_name === route.query.version)
+    search.value = await store.find(tag.value)
+  })
 
-      if (found) return (search.value = found)
-    }
+  watch(search, val => {
+    const version = val?.tag_name ?? tag.value
 
-    search.value = store.releases[0]
+    if (!version) return
+
+    router.push({ query: { version } })
   })
 </script>
 

@@ -60,21 +60,20 @@
 
       <div class="d-flex flex-column">
         <v-expand-transition v-if="hasRendered">
-          <div v-if="showCode">
-            <v-window v-model="template">
-              <v-window-item
-                v-for="section of sections"
-                :key="section.name"
-              >
-                <v-theme-provider :theme="theme">
-                  <app-markup
-                    :code="section.content"
-                    :rounded="false"
-                  />
-                </v-theme-provider>
-              </v-window-item>
-            </v-window>
-          </div>
+          <v-window v-show="showCode" v-model="template">
+            <v-window-item
+              v-for="(section, i) of sections"
+              :key="section.name"
+              :eager="i === 0 || isEager"
+            >
+              <v-theme-provider :theme="theme">
+                <app-markup
+                  :code="section.content"
+                  :rounded="false"
+                />
+              </v-theme-provider>
+            </v-window-item>
+          </v-window>
         </v-expand-transition>
 
         <v-theme-provider
@@ -97,14 +96,14 @@
   // Composables
   import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
-  import { useTheme, version as vuetifyVersion } from 'vuetify'
+  import { usePlayground } from '@/composables/playground'
+  import { useTheme } from 'vuetify'
 
   // Utilities
-  import { computed, mergeProps, onMounted, ref, shallowRef, version as vueVersion } from 'vue'
+  import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
   import { getBranch } from '@/util/helpers'
   import { getExample } from 'virtual:examples'
   import { upperFirst } from 'lodash-es'
-  import { strFromU8, strToU8, zlibSync } from 'fflate'
 
   const { t } = useI18n()
 
@@ -132,6 +131,7 @@
   const showCode = ref(props.inline || props.open)
   const template = ref(0)
   const hasRendered = ref(false)
+  const isEager = shallowRef(false)
 
   const component = shallowRef()
   const code = ref<string>()
@@ -189,42 +189,12 @@
 
   const { Codepen, openCodepen } = useCodepen({ code, sections, component })
 
-  // This is copied directly from playground
-  function utoa (data: string): string {
-    const buffer = strToU8(data)
-    const zipped = zlibSync(buffer, { level: 9 })
-    const binary = strFromU8(zipped, true)
-    return btoa(binary)
-  }
-
   const playgroundLink = computed(() => {
-    if (!isLoaded.value || isError.value) {
-      return null
-    }
+    if (!isLoaded.value || isError.value) return null
 
     const resources = JSON.parse(component.value.codepenResources || '{}')
 
-    const links = {
-      css: resources.css ?? [],
-    }
-
-    const importMap = {
-      imports: resources.imports ?? {},
-    }
-
-    const files = {
-      'App.vue': sections.value
-        .filter(section => ['script', 'template'].includes(section.name))
-        .map(section => section.content)
-        .join('\n\n'),
-      'links.json': JSON.stringify(links),
-      'import-map.json': JSON.stringify(importMap),
-    }
-
-    // This is copied directly from playground
-    const hash = utoa(JSON.stringify([files, vueVersion, vuetifyVersion, true]))
-
-    return `https://play.vuetifyjs.com#${hash}`
+    return usePlayground(sections.value, resources.css, resources.imports)
   })
 
   const actions = computed(() => {
@@ -269,4 +239,6 @@
       },
     ]
   })
+
+  watch(showCode, val => val && (isEager.value = true))
 </script>

@@ -20,14 +20,14 @@ import { useSticky } from './sticky'
 import { useTouch } from './touch'
 
 // Utilities
-import { computed, nextTick, onBeforeMount, ref, toRef, Transition, watch } from 'vue'
-import { convertToUnit, genericComponent, toPhysical, useRender } from '@/util'
+import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'
+import { genericComponent, propsFactory, toPhysical, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 export type VNavigationDrawerImageSlot = {
-  image: string
+  image: string | undefined
 }
 
 export type VNavigationDrawerSlots = {
@@ -39,54 +39,56 @@ export type VNavigationDrawerSlots = {
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const
 
+export const makeVNavigationDrawerProps = propsFactory({
+  color: String,
+  disableResizeWatcher: Boolean,
+  disableRouteWatcher: Boolean,
+  expandOnHover: Boolean,
+  floating: Boolean,
+  modelValue: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
+  permanent: Boolean,
+  rail: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
+  railWidth: {
+    type: [Number, String],
+    default: 56,
+  },
+  scrim: {
+    type: [String, Boolean],
+    default: true,
+  },
+  image: String,
+  temporary: Boolean,
+  touchless: Boolean,
+  width: {
+    type: [Number, String],
+    default: 256,
+  },
+  location: {
+    type: String as PropType<typeof locations[number]>,
+    default: 'start',
+    validator: (value: any) => locations.includes(value),
+  },
+  sticky: Boolean,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeElevationProps(),
+  ...makeLayoutItemProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps({ tag: 'nav' }),
+  ...makeThemeProps(),
+}, 'v-navigation-drawer')
+
 export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',
 
-  props: {
-    color: String,
-    disableResizeWatcher: Boolean,
-    disableRouteWatcher: Boolean,
-    expandOnHover: Boolean,
-    floating: Boolean,
-    modelValue: {
-      type: Boolean as PropType<boolean | null>,
-      default: null,
-    },
-    permanent: Boolean,
-    rail: {
-      type: Boolean as PropType<boolean | null>,
-      default: null,
-    },
-    railWidth: {
-      type: [Number, String],
-      default: 56,
-    },
-    scrim: {
-      type: [String, Boolean],
-      default: true,
-    },
-    image: String,
-    temporary: Boolean,
-    touchless: Boolean,
-    width: {
-      type: [Number, String],
-      default: 256,
-    },
-    location: {
-      type: String as PropType<typeof locations[number]>,
-      default: 'start',
-      validator: (value: any) => locations.includes(value),
-    },
-    sticky: Boolean,
-
-    ...makeBorderProps(),
-    ...makeComponentProps(),
-    ...makeElevationProps(),
-    ...makeLayoutItemProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps({ tag: 'nav' }),
-    ...makeThemeProps(),
-  },
+  props: makeVNavigationDrawerProps(),
 
   emits: {
     'update:modelValue': (val: boolean) => true,
@@ -106,7 +108,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const { ssrBootStyles } = useSsrBoot()
 
     const rootEl = ref<HTMLElement>()
-    const isHovering = ref(false)
+    const isHovering = shallowRef(false)
 
     const width = computed(() => {
       return (props.rail && props.expandOnHover && isHovering.value)
@@ -161,7 +163,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       return isDragging.value ? size * dragProgress.value : size
     })
 
-    const { layoutItemStyles, layoutRect, layoutItemScrimStyles } = useLayoutItem({
+    const { layoutItemStyles, layoutItemScrimStyles } = useLayoutItem({
       id: props.name,
       order: computed(() => parseInt(props.order, 10)),
       position: location,
@@ -184,12 +186,6 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
       ...isDragging.value ? {
         opacity: dragProgress.value * 0.2,
         transition: 'none',
-      } : undefined,
-      ...layoutRect.value ? {
-        left: convertToUnit(layoutRect.value.left),
-        right: convertToUnit(layoutRect.value.right),
-        top: convertToUnit(layoutRect.value.top),
-        bottom: convertToUnit(layoutRect.value.bottom),
       } : undefined,
       ...layoutItemScrimStyles.value,
     }))

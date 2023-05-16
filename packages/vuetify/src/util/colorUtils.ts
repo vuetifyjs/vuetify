@@ -1,6 +1,6 @@
 // Utilities
 import { consoleWarn } from './console'
-import { chunk, padEnd } from './helpers'
+import { chunk, has, padEnd } from './helpers'
 import * as sRGB from '@/util/color/transformSRGB'
 import * as CIELAB from '@/util/color/transformCIELAB'
 
@@ -13,10 +13,20 @@ export type HSV = { h: number, s: number, v: number, a?: number }
 export type RGB = { r: number, g: number, b: number, a?: number }
 export type HSL = { h: number, s: number, l: number, a?: number }
 export type Hex = string & { __hexBrand: never }
-export type Color = string | number | {}
+export type Color = string | number | HSV | RGB | HSL
 
 export function isCssColor (color?: string | null | false): boolean {
   return !!color && /^(#|var\(--|(rgb|hsl)a?\()/.test(color)
+}
+
+const cssColorRe = /^(?<fn>(?:rgb|hsl)a?)\((?<values>.+)\)/
+const mappers = {
+  rgb: (r: number, g: number, b: number, a?: number) => ({ r, g, b, a }),
+  rgba: (r: number, g: number, b: number, a?: number) => ({ r, g, b, a }),
+  hsl: (h: number, s: number, l: number, a?: number) => HSLtoRGB({ h, s, l, a }),
+  hsla: (h: number, s: number, l: number, a?: number) => HSLtoRGB({ h, s, l, a }),
+  hsv: (h: number, s: number, v: number, a?: number) => HSVtoRGB({ h, s, v, a }),
+  hsva: (h: number, s: number, v: number, a?: number) => HSVtoRGB({ h, s, v, a }),
 }
 
 export function parseColor (color: Color): RGB {
@@ -30,6 +40,19 @@ export function parseColor (color: Color): RGB {
       g: (color & 0xFF00) >> 8,
       b: (color & 0xFF),
     }
+  } else if (typeof color === 'string' && cssColorRe.test(color)) {
+    const { groups } = color.match(cssColorRe)!
+    const { fn, values } = groups as { fn: keyof typeof mappers, values: string }
+    const realValues = values.split(/,\s*/)
+      .map(v => {
+        if (v.endsWith('%') && ['hsl', 'hsla', 'hsv', 'hsva'].includes(fn)) {
+          return parseFloat(v) / 100
+        } else {
+          return parseFloat(v)
+        }
+      }) as [number, number, number, number?]
+
+    return mappers[fn](...realValues)
   } else if (typeof color === 'string') {
     let hex = color.startsWith('#') ? color.slice(1) : color
 
@@ -45,9 +68,17 @@ export function parseColor (color: Color): RGB {
     }
 
     return HexToRGB(hex as Hex)
-  } else {
-    throw new TypeError(`Colors can only be numbers or strings, recieved ${color == null ? color : color.constructor.name} instead`)
+  } else if (typeof color === 'object') {
+    if (has(color, ['r', 'g', 'b'])) {
+      return color
+    } else if (has(color, ['h', 's', 'l'])) {
+      return HSVtoRGB(HSLtoHSV(color))
+    } else if (has(color, ['h', 's', 'v'])) {
+      return HSVtoRGB(color)
+    }
   }
+
+  throw new TypeError(`Invalid color: ${color == null ? color : (String(color) || (color as any).constructor.name)}\nExpected #hex, #hexa, rgb(), rgba(), hsl(), hsla(), object or number`)
 }
 
 export function RGBToInt (color: RGB) {
@@ -87,6 +118,10 @@ export function HSVtoRGB (hsva: HSV): RGB {
   const rgb = [f(5), f(3), f(1)].map(v => Math.round(v * 255))
 
   return { r: rgb[0], g: rgb[1], b: rgb[2], a }
+}
+
+export function HSLtoRGB (hsla: HSL): RGB {
+  return HSVtoRGB(HSLtoHSV(hsla))
 }
 
 /** Converts RGBA to HSVA. Based on formula from https://en.wikipedia.org/wiki/HSL_and_HSV */

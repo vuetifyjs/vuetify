@@ -5,18 +5,24 @@ import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { SubmitEventPromise } from '@/composables/form'
 
-export const VForm = genericComponent()({
+export const makeVFormProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeFormProps(),
+}, 'v-form')
+
+type VFormSlots = {
+  default: [ReturnType<typeof createForm>]
+}
+
+export const VForm = genericComponent<VFormSlots>()({
   name: 'VForm',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeFormProps(),
-  },
+  props: makeVFormProps(),
 
   emits: {
     'update:modelValue': (val: boolean | null) => true,

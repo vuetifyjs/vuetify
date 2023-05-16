@@ -11,29 +11,32 @@ import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType, WritableComputedRef } from 'vue'
 import type { VSliderSlots } from '../VSlider/VSlider'
 
+export const makeVRangeSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeVInputProps(),
+  ...makeSliderProps(),
+
+  strict: Boolean,
+  modelValue: {
+    type: Array as PropType<number[]>,
+    default: () => ([0, 0]),
+  },
+}, 'v-range-slider')
+
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeVInputProps(),
-    ...makeSliderProps(),
-
-    strict: Boolean,
-    modelValue: {
-      type: Array as PropType<number[]>,
-      default: () => ([0, 0]),
-    },
-  },
+  props: makeVRangeSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,
@@ -46,6 +49,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
     const startThumbRef = ref<VSliderThumb>()
     const stopThumbRef = ref<VSliderThumb>()
     const inputRef = ref<VInput>()
+    const { rtlClasses } = useRtl()
 
     function getActiveThumb (e: MouseEvent | TouchEvent) {
       if (!startThumbRef.value || !stopThumbRef.value) return
@@ -132,6 +136,7 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }

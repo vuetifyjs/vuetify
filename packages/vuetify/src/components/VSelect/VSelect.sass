@@ -30,11 +30,6 @@
         transition: none
         pointer-events: none
 
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $select-transition
-
   .v-field--dirty
     .v-select__selection
       margin-inline-end: 2px
@@ -57,12 +52,6 @@
     line-height: inherit
     max-width: 100%
 
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
-
   &--chips
     .v-field__input
       min-height: calc(var(--v-field-input-min-height) + var(--select-chips-margin-bottom) + $select-chips-margin-top)
@@ -80,3 +69,10 @@
         > input
           opacity: 0
 
+  &__menu-icon
+    margin-inline-start: 4px
+    transition: $select-transition
+
+    .v-select--active-menu &
+      opacity: var(--v-high-emphasis-opacity)
+      transform: rotate(180deg)
