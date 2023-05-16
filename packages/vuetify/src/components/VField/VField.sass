@@ -170,11 +170,16 @@
   grid-area: append-inner
   padding-inline-start: var(--v-field-padding-after)
 
-.v-field__prepend-inner,
 .v-field__append-inner,
-.v-field__clearable
+.v-field__clearable,
+.v-field__prepend-inner
   align-items: center
   display: flex
+
+.v-field__prepend-inner,
+.v-field__clearable
+  padding-top: $field-input-padding-top
+  padding-bottom: $field-input-padding-bottom
 
 .v-field__prepend-inner,
 .v-field__append-inner
