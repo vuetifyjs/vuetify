@@ -173,8 +173,13 @@
 .v-field__append-inner,
 .v-field__clearable,
 .v-field__prepend-inner
-  align-items: center
   display: flex
+  align-items: flex-start 
+  padding-top: var(--v-input-padding-top, $field-control-padding-top)
+
+  .v-field--center-affix &
+    align-items: center
+    padding-top: 0
 
 .v-field.v-field--variant-underlined,
 .v-field.v-field--variant-plain
@@ -234,6 +239,10 @@
   transition: $field-transition-timing
   transition-property: opacity, transform
 
+  .v-field--center-affix &
+    top: 50%
+    transform: translateY(-50%)
+
   .v-field--active &
     visibility: hidden
 
@@ -249,6 +258,9 @@
     font-size: var(--v-field-label-scale)
     visibility: hidden
     max-width: 100%
+
+    .v-field--center-affix &
+      transform: none
 
     .v-field.v-field--active &
       visibility: visible

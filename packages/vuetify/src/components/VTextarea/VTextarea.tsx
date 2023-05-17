@@ -243,6 +243,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
+                centerAffix={ +props.rows === 1 }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

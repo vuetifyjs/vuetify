@@ -61,6 +61,10 @@ export const makeVFieldProps = propsFactory({
     default: '$clear',
   },
   active: Boolean,
+  centerAffix: {
+    type: Boolean,
+    default: undefined,
+  },
   color: String,
   baseColor: String,
   dirty: Boolean,
@@ -138,6 +142,7 @@ export const VField = genericComponent<new <T>(
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -222,6 +227,7 @@ export const VField = genericComponent<new <T>(
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
+              'v-field--center-affix': props.centerAffix ?? !isPlainOrUnderlined.value,
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
@@ -348,7 +354,7 @@ export const VField = genericComponent<new <T>(
               </>
             )}
 
-            {['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
+            { isPlainOrUnderlined.value && hasLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label }
               </VFieldLabel>
