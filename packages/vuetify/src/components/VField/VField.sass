@@ -28,6 +28,8 @@
   --v-field-padding-end: #{$field-control-padding-end}
   --v-field-padding-top: #{$field-control-padding-top}
   --v-field-padding-bottom: #{$field-control-padding-bottom}
+  --v-field-input-padding-top: #{$field-input-padding-top}
+  --v-field-input-padding-bottom: #{$field-input-padding-bottom}
 
 /* endregion */
 /* region MODIFIERS */
@@ -129,8 +131,6 @@
   padding-bottom: var(--v-field-input-padding-bottom)
   width: 100%
   --v-field-input-min-height: #{$field-input-min-height}
-  --v-field-input-padding-top: #{$field-input-padding-top}
-  --v-field-input-padding-bottom: #{$field-input-padding-bottom}
 
   input
     letter-spacing: inherit
@@ -175,6 +175,12 @@
 .v-field__prepend-inner
   align-items: center
   display: flex
+
+.v-field.v-field--variant-underlined
+  .v-field__append-inner,
+  .v-field__clearable
+    padding-top: $field-input-padding-top
+    padding-bottom: $field-input-padding-bottom
 
 .v-field:not(.v-field--variant-filled):not(.v-field--variant-solo):not(.v-field--variant-solo-filled)
   .v-field__prepend-inner
