@@ -64,7 +64,10 @@ export const makeVFieldProps = propsFactory({
   color: String,
   baseColor: String,
   dirty: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   error: Boolean,
   flat: Boolean,
   label: String,

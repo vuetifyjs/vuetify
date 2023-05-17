@@ -70,6 +70,12 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
+<components-list-item name="Bottom sheet component" src="bottom-sheets" placeholder>
+
+  The bottom sheet component elevates content from the bottom of the screen
+
+</components-list-item>
+
 <components-list-item name="Overlay component" src="overlays" placeholder>
 
   The overlay component is used to display a custom scrim that sits on top of the application

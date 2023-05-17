@@ -22,14 +22,14 @@ export type ValidationRule =
 type ValidateOnValue = 'blur' | 'input' | 'submit'
 
 export interface ValidationProps {
-  disabled: boolean
+  disabled: boolean | null
   error: boolean
   errorMessages: string | string[]
   focused: boolean
   maxErrors: string | number
   name: string | undefined
   label: string | undefined
-  readonly: boolean
+  readonly: boolean | null
   rules: ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
@@ -38,7 +38,10 @@ export interface ValidationProps {
 }
 
 export const makeValidationProps = propsFactory({
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   error: Boolean,
   errorMessages: {
     type: [Array, String] as PropType<string | string[]>,
@@ -50,7 +53,10 @@ export const makeValidationProps = propsFactory({
   },
   name: String,
   label: String,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean,
+    default: null,
+  },
   rules: {
     type: Array as PropType<ValidationRule[]>,
     default: () => ([]),
@@ -76,8 +82,8 @@ export function useValidation (
     wrapInArray(model.value === '' ? null : model.value).length ||
     wrapInArray(validationModel.value === '' ? null : validationModel.value).length
   ))
-  const isDisabled = computed(() => !!(props.disabled || form?.isDisabled.value))
-  const isReadonly = computed(() => !!(props.readonly || form?.isReadonly.value))
+  const isDisabled = computed(() => !!(props.disabled ?? form?.isDisabled.value))
+  const isReadonly = computed(() => !!(props.readonly ?? form?.isReadonly.value))
   const errorMessages = computed(() => {
     return props.errorMessages.length
       ? wrapInArray(props.errorMessages).slice(0, Math.max(0, +props.maxErrors))
