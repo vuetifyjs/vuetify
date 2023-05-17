@@ -28,7 +28,8 @@ function addImageRules (md: MarkdownIt) {
   md.renderer.rules.image = (tokens, idx, options, env, self) => {
     const token = tokens[idx]
     const alt = token.content
-    const src = token.attrGet('src')
+    const placeholder = token.attrGet('placeholder') ? 'https://cdn.vuetifyjs.com/docs/images/graphics/placeholder.png' : undefined
+    const src = placeholder ?? token.attrGet('src')
     const title = token.attrGet('title') ?? ''
     const isEntry = alt.toLowerCase().includes('entry')
     const height = token.attrGet('height') ?? (isEntry ? 305 : '')
