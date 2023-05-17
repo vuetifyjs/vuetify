@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -149,6 +149,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
+    const rows = ref(+props.rows)
+    watchEffect(() => {
+      if (!props.autoGrow) rows.value = +props.rows
+    })
     function calculateInputHeight () {
       if (!props.autoGrow) return
 
@@ -169,8 +173,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
         )
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+        const newHeight = clamp(height ?? 0, minHeight, maxHeight)
+        rows.value = Math.floor((newHeight - padding) / lineHeight)
 
-        controlHeight.value = convertToUnit(clamp(height ?? 0, minHeight, maxHeight))
+        controlHeight.value = convertToUnit(newHeight)
       })
     }
 
@@ -243,7 +249,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
-                centerAffix={ +props.rows === 1 }
+                centerAffix={ rows.value === 1 }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }
