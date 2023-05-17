@@ -65,8 +65,7 @@
   &--variant-solo,
   &--variant-solo-inverted,
   &--variant-solo-filled,
-  &--variant-filled,
-  &--variant-underlined
+  &--variant-filled
     $root: &
 
     @at-root
@@ -101,9 +100,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
-
-  &--variant-plain .v-field
-    --v-field-padding-bottom: 1px
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--flat
     box-shadow: none
