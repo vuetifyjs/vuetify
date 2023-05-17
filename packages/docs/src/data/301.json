@@ -116,7 +116,6 @@
   "about/meet-the-team": "/introduction/meet-the-team",
   "about/sponsors-and-backers": "/introduction/sponsors-and-backers",
   "components/application": "/features/application-layout",
-  "components/bottom-sheets": "/components/navigation-drawers",
   "components/simple-tables": "/components/tables",
   "components/data-tables": "/labs/introduction",
   "components/data-iterators": "/introduction/roadmap",
