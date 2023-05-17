@@ -66,6 +66,7 @@
   &--variant-solo-inverted,
   &--variant-solo-filled,
   &--variant-filled
+  &--variant-underlined
     $root: &
 
     @at-root
@@ -95,12 +96,14 @@
       --v-field-padding-start: 0px
       --v-field-padding-end: 0px
       --v-field-padding-top: 6px
-      --v-field-padding-bottom: 1px
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+      
+  &--variant-plain .v-field
+    --v-field-padding-bottom: 1px
 
   &--flat
     box-shadow: none
