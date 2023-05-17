@@ -584,3 +584,5 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     else focusChild(el, location === 'next' ? 'first' : 'last')
   }
 }
+
+export function noop () {}

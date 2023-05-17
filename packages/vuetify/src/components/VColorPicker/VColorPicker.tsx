@@ -14,7 +14,7 @@ import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { consoleWarn, defineComponent, HSVtoCSS, omit, propsFactory, parseColor, RGBtoHSV, useRender } from '@/util'
+import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 import { extractColor, modes, nullColor } from './util'
 import { onMounted, ref } from 'vue'
 

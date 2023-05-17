@@ -23,7 +23,7 @@ import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
@@ -51,7 +51,7 @@ function highlightResult (text: string, matches: FilterMatch | undefined, length
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = T extends Primitive
+type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any)
 
@@ -169,6 +169,13 @@ export const VAutocomplete = genericComponent<new <
       ) return
 
       menu.value = true
+    }
+    function onMousedownMenuIcon (e: MouseEvent) {
+      if (isFocused.value) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
@@ -340,7 +347,6 @@ export const VAutocomplete = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
@@ -484,6 +490,19 @@ export const VAutocomplete = genericComponent<new <
                     </div>
                   )
                 })}
+              </>
+            ),
+            'append-inner': (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { props.menuIcon ? (
+                  <VIcon
+                    class="v-autocomplete__menu-icon"
+                    icon={ props.menuIcon }
+                    onMousedown={ onMousedownMenuIcon }
+                    onClick={ noop }
+                  />
+                ) : undefined }
               </>
             ),
           }}

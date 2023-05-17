@@ -35,7 +35,7 @@ import type { Component, PropType } from 'vue'
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = T extends Primitive
+type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any)
 
@@ -280,7 +280,6 @@ export const VSelect = genericComponent<new <
             props.class,
           ]}
           style={ props.style }
-          appendInnerIcon={ props.menuIcon }
           readonly
           placeholder={ placeholder }
           onClick:clear={ onClear }
@@ -416,6 +415,17 @@ export const VSelect = genericComponent<new <
                     </div>
                   )
                 })}
+              </>
+            ),
+            'append-inner': (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { props.menuIcon ? (
+                  <VIcon
+                    class="v-select__menu-icon"
+                    icon={ props.menuIcon }
+                  />
+                ) : undefined }
               </>
             ),
           }}
