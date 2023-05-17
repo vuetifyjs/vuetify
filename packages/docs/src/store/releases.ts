@@ -24,7 +24,6 @@ export const useReleasesStore = defineStore('releases', {
     format (release: Release) {
       return {
         ...release,
-        published_at: new Date(release.published_at as any).toDateString(),
         props: {
           prependIcon: `mdi-numeric-${release.tag_name.slice(1, 2)}-box`,
           title: release.tag_name,
