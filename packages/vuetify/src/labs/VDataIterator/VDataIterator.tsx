@@ -1,23 +1,25 @@
 // Composables
+import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
+import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTagProps } from '@/composables/tag'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '../VDataTable/composables/paginate'
-import { makeDataTableSelectProps, provideSelection } from '../VDataTable/composables/select'
-import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '../VDataTable/composables/sort'
-import { makeDataTableExpandProps, provideExpanded } from '../VDataTable/composables/expand'
-import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '../VDataTable/composables/group'
-import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
-import { useOptions } from '../VDataTable/composables/options'
 import { useProxiedModel } from '@/composables/proxiedModel'
+
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '@/labs/VDataTable/composables/paginate'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/labs/VDataTable/composables/sort'
+import { makeDataTableExpandProps, provideExpanded } from '@/labs/VDataTable/composables/expand'
+import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/labs/VDataTable/composables/group'
+import { makeDataTableSelectProps, provideSelection } from '@/labs/VDataTable/composables/select'
+import { useOptions } from '@/labs/VDataTable/composables/options'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { SortItem } from '../VDataTable/composables/sort'
 import type { DataIteratorItem } from './composables/items'
-import type { Group } from '../VDataTable/composables/group'
+import type { Group } from '@/labs/VDataTable/composables/group'
+import type { SortItem } from '@/labs/VDataTable/composables/sort'
 
 type VDataIteratorSlotProps = {
   page: number
@@ -48,21 +50,25 @@ export type VDataIteratorSlots = {
   'no-data': []
 }
 
+export const makeVDataIteratorProps = propsFactory({
+  search: String,
+  loading: Boolean,
+
+  ...makeComponentProps(),
+  ...makeDataIteratorItemProps(),
+  ...makeDataTableSelectProps(),
+  ...makeDataTableSortProps(),
+  ...makeDataTablePaginateProps({ itemsPerPage: 5 }),
+  ...makeDataTableExpandProps(),
+  ...makeDataTableGroupProps(),
+  ...makeFilterProps(),
+  ...makeTagProps(),
+}, 'v-data-iterator')
+
 export const VDataIterator = genericComponent<VDataIteratorSlots>()({
   name: 'VDataIterator',
 
-  props: {
-    ...makeTagProps(),
-    ...makeDataIteratorItemProps(),
-    ...makeDataTableSelectProps(),
-    ...makeDataTableSortProps(),
-    ...makeDataTablePaginateProps(),
-    ...makeDataTableExpandProps(),
-    ...makeDataTableGroupProps(),
-    ...makeFilterProps(),
-    search: String,
-    loading: Boolean,
-  },
+  props: makeVDataIteratorProps(),
 
   emits: {
     'update:modelValue': (value: any[]) => true,
@@ -139,14 +145,20 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
     }))
 
     useRender(() => (
-      <props.tag class="v-data-iterator">
+      <props.tag
+        class={[
+          'v-data-iterator',
+          props.class,
+        ]}
+        style={ props.style }
+      >
         { slots.header?.(slotProps.value) }
+
         { !paginatedItems.value.length
           ? slots['no-data']?.()
-          : slots.default
-            ? slots.default(slotProps.value)
-            : undefined
+          : slots.default?.(slotProps.value)
         }
+
         { slots.footer?.(slotProps.value) }
       </props.tag>
     ))
