@@ -187,7 +187,10 @@
     "activeIcon": "mdi-beaker",
     "items": [
       "introduction",
-      "data-iterator",
+      {
+        "title": "data-iterator",
+        "subfolder": "components"
+      },
       {
         "title": "data-tables",
         "subfolder": "components",
