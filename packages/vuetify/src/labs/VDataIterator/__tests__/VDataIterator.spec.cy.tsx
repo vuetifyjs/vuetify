@@ -100,6 +100,6 @@ describe('VDataIterator', () => {
       </Application>
     ))
 
-    cy.get('.dessert-item').should('have.length', DESSERT_ITEMS.length)
+    cy.get('.dessert-item').should('have.length', 5)
   })
 })
