@@ -118,7 +118,6 @@
   "components/application": "/features/application-layout",
   "components/simple-tables": "/components/tables",
   "components/data-tables": "/labs/introduction",
-  "components/data-iterators": "/introduction/roadmap",
   "components/date-pickers": "/introduction/roadmap",
   "components/date-pickers-month": "/introduction/roadmap",
   "components/time-pickers": "/introduction/roadmap",
