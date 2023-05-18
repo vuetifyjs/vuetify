@@ -5,11 +5,14 @@
     item-value="name"
     class="elevation-1"
   >
-    <template v-slot:headers="{ columns }">
+    <template v-slot:headers="{ columns, isSorted, getSortIcon, toggleSort }">
       <tr>
         <template v-for="column in columns" :key="column.key">
           <td>
-            <span class="mr-2">{{ column.title }}</span>
+            <span class="mr-2 cursor-pointer" @click="() => toggleSort(column)">{{ column.title }}</span>
+            <template v-if="isSorted(column)">
+              <v-icon :icon="getSortIcon(column)"></v-icon>
+            </template>
             <v-icon v-if="column.removable" icon="$close" @click="() => remove(column.key)"></v-icon>
           </td>
         </template>

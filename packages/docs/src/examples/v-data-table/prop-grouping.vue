@@ -8,7 +8,6 @@
     item-value="name"
   ></v-data-table>
 </template>
-
 <script>
   export default {
     data: () => ({
@@ -18,11 +17,11 @@
         {
           title: 'Dessert (100g serving)',
           align: 'start',
-          value: 'name',
+          key: 'name',
           groupable: false,
         },
-        { title: 'Category', value: 'category', align: 'end' },
-        { title: 'Dairy', value: 'dairy', align: 'end' },
+        { title: 'Category', key: 'category', align: 'end' },
+        { title: 'Dairy', key: 'dairy', align: 'end' },
       ],
       desserts: [
         {
@@ -73,6 +72,7 @@
         {
           name: 'KitKat',
           category: 'Candy',
+          dairy: 'Yes',
         },
       ],
     }),
