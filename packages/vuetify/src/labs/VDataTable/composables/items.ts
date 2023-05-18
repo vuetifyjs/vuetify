@@ -7,23 +7,6 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 import type { PropType, Ref } from 'vue'
 import type { DataTableItem, InternalDataTableHeader } from '../types'
 
-function add (obj: Record<string, unknown>, key: string, value: unknown) {
-  const path = key.split('.')
-
-  while (path.length > 1) {
-    const part = path.shift()!
-    if (obj[part] == null) {
-      obj[part] = {}
-    }
-
-    if (typeof obj[part] === 'object') {
-      obj = obj[part] as Record<string, unknown>
-    }
-  }
-
-  obj[path[0]] = value
-}
-
 export interface DataTableItemProps {
   items: any[]
   itemValue: SelectItemKey
@@ -50,7 +33,7 @@ export function transformItem (
 ): DataTableItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
   const itemColumns = columns.reduce((obj, column) => {
-    add(obj, column.key, getPropertyFromItem(item.raw, column.value ?? column.key))
+    obj[column.key] = getPropertyFromItem(item, column.value ?? column.key)
     return obj
   }, {} as Record<string, unknown>)
 

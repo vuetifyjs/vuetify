@@ -7,7 +7,7 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableCompareFunction } from '../types'
+import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {

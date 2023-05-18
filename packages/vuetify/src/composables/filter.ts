@@ -125,7 +125,7 @@ export function filterItems (
   return array
 }
 
-export function useFilter <T extends Record<string, any>> (
+export function useFilter <T extends { value: unknown }> (
   props: FilterProps,
   items: MaybeRef<T[]>,
   query: Ref<string | undefined>,
