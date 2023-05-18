@@ -27,6 +27,7 @@ export interface ValidationProps {
   maxErrors: string | number
   name: string | undefined
   label: string | undefined
+  optional: boolean
   readonly: boolean
   rules: ValidationRule[]
   modelValue: any
@@ -48,6 +49,7 @@ export const makeValidationProps = propsFactory({
   },
   name: String,
   label: String,
+  optional: Boolean,
   readonly: Boolean,
   rules: {
     type: Array as PropType<ValidationRule[]>,
@@ -81,7 +83,12 @@ export function useValidation (
       ? wrapInArray(props.errorMessages).slice(0, Math.max(0, +props.maxErrors))
       : internalErrorMessages.value
   })
+  const isEmpty = computed(() => {
+    return model.value === undefined || model.value === '' || model.value === null ||
+      (Array.isArray(model.value) && model.value.length === 0)
+  })
   const isValid = computed(() => {
+    if (props.optional && isEmpty.value) return true
     if (props.error || errorMessages.value.length) return false
     if (!props.rules.length) return true
 
@@ -156,24 +163,26 @@ export function useValidation (
 
     isValidating.value = true
 
-    for (const rule of props.rules) {
-      if (results.length >= +(props.maxErrors ?? 1)) {
-        break
+    if (!props.optional || !isEmpty.value) {
+      for (const rule of props.rules) {
+        if (results.length >= +(props.maxErrors ?? 1)) {
+          break
+        }
+
+        const handler = typeof rule === 'function' ? rule : () => rule
+        const result = await handler(validationModel.value)
+
+        if (result === true) continue
+
+        if (typeof result !== 'string') {
+          // eslint-disable-next-line no-console
+          console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
+
+          continue
+        }
+
+        results.push(result)
       }
-
-      const handler = typeof rule === 'function' ? rule : () => rule
-      const result = await handler(validationModel.value)
-
-      if (result === true) continue
-
-      if (typeof result !== 'string') {
-        // eslint-disable-next-line no-console
-        console.warn(`${result} is not a valid value. Rule functions must return boolean true or a string.`)
-
-        continue
-      }
-
-      results.push(result)
     }
 
     internalErrorMessages.value = results
