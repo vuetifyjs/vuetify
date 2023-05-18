@@ -50,7 +50,7 @@ export const makeItemsProps = propsFactory({
     default: 'props',
   },
   returnObject: Boolean,
-}, 'item')
+}, 'list-items')
 
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any): ListItem {
   const title = getPropertyFromItem(item, props.itemTitle, item)
