@@ -11,38 +11,40 @@ import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, mergeProps, ref } from 'vue'
-import { genericComponent, getUid, omit, useRender } from '@/util'
+import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { OverlaySlots } from '@/components/VOverlay/VOverlay'
 import type { StrategyProps } from '@/components/VOverlay/locationStrategies'
 
+export const makeVTooltipProps = propsFactory({
+  id: String,
+  text: String,
+
+  ...omit(makeVOverlayProps({
+    closeOnBack: false,
+    location: 'end' as const,
+    locationStrategy: 'connected' as const,
+    eager: true,
+    minWidth: 0,
+    offset: 10,
+    openOnClick: false,
+    openOnHover: true,
+    origin: 'auto' as const,
+    scrim: false,
+    scrollStrategy: 'reposition' as const,
+    transition: false,
+  }), [
+    'absolute',
+    'persistent',
+  ]),
+}, 'v-tooltip')
+
 export const VTooltip = genericComponent<OverlaySlots>()({
   name: 'VTooltip',
 
-  props: {
-    id: String,
-    text: String,
-
-    ...omit(makeVOverlayProps({
-      closeOnBack: false,
-      location: 'end' as const,
-      locationStrategy: 'connected' as const,
-      eager: true,
-      minWidth: 0,
-      offset: 10,
-      openOnClick: false,
-      openOnHover: true,
-      origin: 'auto' as const,
-      scrim: false,
-      scrollStrategy: 'reposition' as const,
-      transition: false,
-    }), [
-      'absolute',
-      'persistent',
-    ]),
-  },
+  props: makeVTooltipProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -92,7 +94,9 @@ export const VTooltip = genericComponent<OverlaySlots>()({
           ref={ overlay }
           class={[
             'v-tooltip',
+            props.class,
           ]}
+          style={ props.style }
           id={ id.value }
           { ...overlayProps }
           v-model={ isActive.value }

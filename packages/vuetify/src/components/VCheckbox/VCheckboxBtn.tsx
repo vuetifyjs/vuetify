@@ -59,9 +59,12 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
       <VSelectionControl
         { ...props }
         v-model={ model.value }
-        class="v-checkbox-btn"
+        class={[
+          'v-checkbox-btn',
+          props.class,
+        ]}
+        style={ props.style }
         type="checkbox"
-        inline
         onUpdate:modelValue={ onChange }
         falseIcon={ falseIcon.value }
         trueIcon={ trueIcon.value }

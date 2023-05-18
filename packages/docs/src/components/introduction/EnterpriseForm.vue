@@ -5,12 +5,6 @@
         color: 'primary',
         density: 'compact',
       },
-      VTextField: {
-        color: 'primary',
-      },
-      VTextarea: {
-        color: 'primary',
-      },
     }"
   >
     <v-card
@@ -37,22 +31,22 @@
 
           <v-row class="mb-4">
             <v-col cols="12" md="6">
-              <v-text-field
+              <app-text-field
                 v-model="name"
                 :rules="[rules.required]"
-                label="Name"
-                hide-details
                 name="name"
+                :placeholder="t('name')"
+                prepend-inner-icon="mdi-account-circle-outline"
               />
             </v-col>
 
             <v-col cols="12" md="6">
-              <v-text-field
+              <app-text-field
                 v-model="email"
+                :placeholder="t('email-address')"
                 :rules="[rules.required, rules.email]"
-                label="Email address"
-                hide-details
                 name="email"
+                prepend-inner-icon="mdi-email-outline"
               />
             </v-col>
           </v-row>
@@ -146,6 +140,9 @@
 </template>
 
 <script setup lang="ts">
+  // Composables
+  import { useI18n } from 'vue-i18n'
+
   // Utilities
   import { computed, ref, watch } from 'vue'
   import { rpath } from '@/util/routes'
@@ -153,6 +150,7 @@
   import emailjs from '@emailjs/browser'
 
   const theme = useTheme()
+  const { t } = useI18n()
 
   const name = ref('')
   const email = ref('')

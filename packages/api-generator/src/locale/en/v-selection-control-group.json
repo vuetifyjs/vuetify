@@ -1,13 +1,13 @@
 {
   "props": {
-    "id": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "type": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "error": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "readonly": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "inline": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "falseIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "trueIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "multiple": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))",
-    "defaultsTarget": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-selection-control-group.json))"
+    "id": "Sets the DOM id on the component",
+    "error": "Puts the input in a manual error state",
+    "readonly": "Puts input in readonly state",
+    "inline": "Puts children inputs into a row.",
+    "type": "Provides the default type for children selection controls.",
+    "falseIcon": "The icon used when inactive",
+    "trueIcon": "The icon used when active",
+    "multiple": "Changes select to multiple. Accepts array for value",
+    "defaultsTarget": "The target component to provide defaults values for."
   }
 }

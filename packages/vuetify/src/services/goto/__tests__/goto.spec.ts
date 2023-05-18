@@ -16,7 +16,7 @@ import goTo, { Goto } from '../index'
 import { VuetifyServiceContract } from 'vuetify/types/services'
 
 describe.skip('$vuetify.goTo', () => {
-  (global as any).performance = require('perf_hooks').performance
+  // (global as any).performance = require('perf_hooks').performance
   let framework: Record<string, VuetifyServiceContract> = {}
 
   beforeEach(() => {

@@ -1,26 +1,30 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVBreadcrumbsItemProps = propsFactory({
+  active: Boolean,
+  activeClass: String,
+  activeColor: String,
+  color: String,
+  disabled: Boolean,
+  title: String,
+
+  ...makeComponentProps(),
+  ...makeRouterProps(),
+  ...makeTagProps({ tag: 'li' }),
+}, 'v-breadcrumbs-item')
 
 export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
 
-  props: {
-    active: Boolean,
-    activeClass: String,
-    activeColor: String,
-    color: String,
-    disabled: Boolean,
-    title: String,
-
-    ...makeRouterProps(),
-    ...makeTagProps({ tag: 'li' }),
-  },
+  props: makeVBreadcrumbsItemProps(),
 
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)
@@ -43,9 +47,11 @@ export const VBreadcrumbsItem = genericComponent()({
               [`${props.activeClass}`]: isActive.value && props.activeClass,
             },
             textColorClasses.value,
+            props.class,
           ]}
           style={[
             textColorStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           aria-current={ isActive.value ? 'page' : undefined }

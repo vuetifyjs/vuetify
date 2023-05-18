@@ -1,5 +1,5 @@
 // Utilities
-import { computed, ref } from 'vue'
+import { computed, ref, shallowRef } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
@@ -26,11 +26,11 @@ const DOWN = 1
 
 // TODO: Replace this with composable from v-virtual-scroll
 export function useVirtual (props: VirtualProps, items: Ref<any[]>) {
-  const startIndex = ref(0)
+  const startIndex = shallowRef(0)
   const itemHeight = computed(() => parseInt(props.itemHeight, 10))
   const visibleItems = computed(() => parseInt(props.visibleItems, 10))
   const containerRef = ref<HTMLDivElement>()
-  const isScrolling = ref(false)
+  const isScrolling = shallowRef(false)
 
   function calculateOffset (index: number) {
     return index * itemHeight.value

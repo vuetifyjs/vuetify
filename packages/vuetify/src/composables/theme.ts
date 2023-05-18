@@ -163,9 +163,9 @@ const defaultThemeOptions: Exclude<ThemeOptions, false> = {
       variables: {
         'border-color': '#FFFFFF',
         'border-opacity': 0.12,
-        'high-emphasis-opacity': 0.87,
-        'medium-emphasis-opacity': 0.60,
-        'disabled-opacity': 0.38,
+        'high-emphasis-opacity': 1,
+        'medium-emphasis-opacity': 0.70,
+        'disabled-opacity': 0.50,
         'idle-opacity': 0.10,
         'hover-opacity': 0.04,
         'focus-opacity': 0.12,
@@ -283,7 +283,7 @@ export function createTheme (options?: ThemeOptions): ThemeInstance & { install:
       } else {
         createCssClass(bgLines, `.bg-${key}`, [
           `--v-theme-overlay-multiplier: var(--v-theme-${key}-overlay-multiplier)`,
-          `background: rgb(var(--v-theme-${key})) !important`,
+          `background-color: rgb(var(--v-theme-${key})) !important`,
           `color: rgb(var(--v-theme-on-${key})) !important`,
         ])
         createCssClass(fgLines, `.text-${key}`, [`color: rgb(var(--v-theme-${key})) !important`])

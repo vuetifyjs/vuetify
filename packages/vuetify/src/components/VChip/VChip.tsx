@@ -11,7 +11,9 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
@@ -20,83 +22,82 @@ import { makeRouterProps, useLink } from '@/composables/router'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { IconValue } from '@/composables/icons'
 import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
 // Utilities
-import { EventProp, genericComponent } from '@/util'
+import { EventProp, genericComponent, propsFactory } from '@/util'
 import { computed } from 'vue'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VChipSlots = MakeSlots<{
+export type VChipSlots = {
   default: []
   label: []
   prepend: []
   append: []
-}>
+}
+
+export const makeVChipProps = propsFactory({
+  activeClass: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  closable: Boolean,
+  closeIcon: {
+    type: IconValue,
+    default: '$delete',
+  },
+  closeLabel: {
+    type: String,
+    default: '$vuetify.close',
+  },
+  draggable: Boolean,
+  filter: Boolean,
+  filterIcon: {
+    type: String,
+    default: '$complete',
+  },
+  label: Boolean,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  pill: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  text: String,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'span' }),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'tonal' } as const),
+}, 'v-chip')
 
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',
 
   directives: { Ripple },
 
-  props: {
-    activeClass: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    closable: Boolean,
-    closeIcon: {
-      type: IconValue,
-      default: '$delete',
-    },
-    closeLabel: {
-      type: String,
-      default: '$vuetify.close',
-    },
-    draggable: Boolean,
-    filter: Boolean,
-    filterIcon: {
-      type: String,
-      default: '$complete',
-    },
-    label: Boolean,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    pill: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    text: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-
-    onClick: EventProp,
-    onClickOnce: EventProp,
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'span' }),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'tonal' } as const),
-  },
+  props: makeVChipProps(),
 
   emits: {
     'click:close': (e: MouseEvent) => true,
@@ -179,9 +180,11 @@ export const VChip = genericComponent<VChipSlots>()({
             sizeClasses.value,
             variantClasses.value,
             group?.selectedClass.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
+            props.style,
           ]}
           disabled={ props.disabled || undefined }
           draggable={ props.draggable }
@@ -258,14 +261,16 @@ export const VChip = genericComponent<VChipSlots>()({
             </div>
           )}
 
-          { slots.default?.({
-            isSelected: group?.isSelected.value,
-            selectedClass: group?.selectedClass.value,
-            select: group?.select,
-            toggle: group?.toggle,
-            value: group?.value.value,
-            disabled: props.disabled,
-          }) ?? props.text }
+          <div class="v-chip__content">
+            { slots.default?.({
+              isSelected: group?.isSelected.value,
+              selectedClass: group?.selectedClass.value,
+              select: group?.select,
+              toggle: group?.toggle,
+              value: group?.value.value,
+              disabled: props.disabled,
+            }) ?? props.text }
+          </div>
 
           { hasAppend && (
             <div key="append" class="v-chip__append">

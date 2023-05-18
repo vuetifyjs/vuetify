@@ -37,8 +37,8 @@ const vuetify = createVuetify({
   locale: {
     locale: 'zhHans',
     fallback: 'sv',
-    messages: { zhHans, pl, sv }
-  }
+    messages: { zhHans, pl, sv },
+  },
 })
 
 app.use(vuetify)
@@ -59,7 +59,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
       return {
         changeLocale: locale => current.value = locale
       }
-    }
+    },
   }
 </script>
 ```
@@ -70,8 +70,8 @@ You can change the locale during runtime by using the `useLocale` composable. If
     methods: {
       changeLocale (locale) {
         this.$vuetify.locale.current = locale
-      }
-    }
+      },
+    },
   }
 </script>
 ```
@@ -80,7 +80,7 @@ You can change the locale during runtime by using the `useLocale` composable. If
 
 | Feature | Description |
 | - | - |
-| [useLocale](/api/vuetify/use-locale/) | The locale composable is used
+| [useLocale](/api/use-locale/) | The locale composable is used
 | [v-locale-provider](/api/v-locale-provider/) | The locale provider component is used to scope a portion of your application to a different locale than the default one |
 
 <api-inline hide-links />
@@ -139,8 +139,8 @@ const vuetify = createVuetify({
     messages: { customLocale },
     rtl: {
       customLocale: true,
-    }
-  }
+    },
+  },
 })
 ```
 
@@ -169,7 +169,7 @@ If you are building custom Vuetify components that need to hook into the locale 
       return {
         t
       }
-    }
+    },
   }
 </script>
 ```
@@ -218,8 +218,8 @@ const i18n = new createI18n({
 
 const vuetify = createVuetify({
   locale: {
-    adapter: createVueI18nAdapter({ i18n, useI18n })
-  }
+    adapter: createVueI18nAdapter({ i18n, useI18n }),
+  },
 })
 
 const app = createApp()

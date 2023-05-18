@@ -4,7 +4,7 @@ import '../VTextField/VTextField.sass'
 
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { filterInputProps, makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
 
@@ -17,13 +17,39 @@ import { useFocus } from '@/composables/focus'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, watch } from 'vue'
-import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, useRender } from '@/util'
+import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+
+export const makeVTextareaProps = propsFactory({
+  autoGrow: Boolean,
+  autofocus: Boolean,
+  counter: [Boolean, Number, String] as PropType<true | number | string>,
+  counterValue: Function as PropType<(value: any) => number>,
+  prefix: String,
+  placeholder: String,
+  persistentPlaceholder: Boolean,
+  persistentCounter: Boolean,
+  noResize: Boolean,
+  rows: {
+    type: [Number, String],
+    default: 5,
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
+  maxRows: {
+    type: [Number, String],
+    validator: (v: any) => !isNaN(parseFloat(v)),
+  },
+  suffix: String,
+  modelModifiers: Object as PropType<Record<string, boolean>>,
+
+  ...makeVInputProps(),
+  ...makeVFieldProps(),
+}, 'v-textarea')
 
 export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'>>()({
   name: 'VTextarea',
@@ -32,32 +58,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
 
   inheritAttrs: false,
 
-  props: {
-    autoGrow: Boolean,
-    autofocus: Boolean,
-    counter: [Boolean, Number, String] as PropType<true | number | string>,
-    counterValue: Function as PropType<(value: any) => number>,
-    hint: String,
-    persistentHint: Boolean,
-    prefix: String,
-    placeholder: String,
-    persistentPlaceholder: Boolean,
-    persistentCounter: Boolean,
-    noResize: Boolean,
-    rows: {
-      type: [Number, String],
-      default: 5,
-      validator: (v: any) => !isNaN(parseFloat(v)),
-    },
-    maxRows: {
-      type: [Number, String],
-      validator: (v: any) => !isNaN(parseFloat(v)),
-    },
-    suffix: String,
-
-    ...makeVInputProps(),
-    ...makeVFieldProps(),
-  },
+  props: makeVTextareaProps(),
 
   emits: {
     'click:control': (e: MouseEvent) => true,
@@ -97,18 +98,13 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
 
     const vInputRef = ref<VInput>()
     const vFieldRef = ref<VInput>()
-    const controlHeight = ref('')
+    const controlHeight = shallowRef('')
     const textareaRef = ref<HTMLInputElement>()
     const isActive = computed(() => (
+      props.persistentPlaceholder ||
       isFocused.value ||
-      props.persistentPlaceholder
+      props.active
     ))
-
-    const messages = computed(() => {
-      return props.messages.length
-        ? props.messages
-        : (isActive.value || props.persistentHint) ? props.hint : ''
-    })
 
     function onFocus () {
       if (textareaRef.value !== document.activeElement) {
@@ -138,12 +134,14 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
     }
     function onInput (e: Event) {
       const el = e.target as HTMLTextAreaElement
-      const caretPosition = [el.selectionStart, el.selectionEnd]
       model.value = el.value
-      nextTick(() => {
-        el.selectionStart = caretPosition[0]
-        el.selectionEnd = caretPosition[1]
-      })
+      if (props.modelModifiers?.trim) {
+        const caretPosition = [el.selectionStart, el.selectionEnd]
+        nextTick(() => {
+          el.selectionStart = caretPosition[0]
+          el.selectionEnd = caretPosition[1]
+        })
+      }
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
@@ -195,7 +193,7 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
       const hasCounter = !!(slots.counter || props.counter || props.counterValue)
       const hasDetails = !!(hasCounter || slots.details)
       const [rootAttrs, inputAttrs] = filterInputAttrs(attrs)
-      const [{ modelValue: _, ...inputProps }] = filterInputProps(props)
+      const [{ modelValue: _, ...inputProps }] = VInput.filterProps(props)
       const [fieldProps] = filterFieldProps(props)
 
       return (
@@ -213,13 +211,12 @@ export const VTextarea = genericComponent<Omit<VInputSlots & VFieldSlots, 'defau
               'v-textarea--no-resize': props.noResize || props.autoGrow,
               'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
-          onClick:prepend={ props['onClick:prepend'] }
-          onClick:append={ props['onClick:append'] }
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
           focused={ isFocused.value }
-          messages={ messages.value }
         >
           {{
             ...slots,

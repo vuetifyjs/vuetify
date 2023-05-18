@@ -9,6 +9,8 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -19,45 +21,46 @@ import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
 import { useDisplay } from '@/composables/display'
-import { IconValue } from '@/composables/icons'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
 // Types
-import type { MakeSlots } from '@/util'
 import type { PropType } from 'vue'
 
-export type VBannerSlots = MakeSlots<{
+export type VBannerSlots = {
   default: []
   prepend: []
   text: []
   actions: []
-}>
+}
+
+export const makeVBannerProps = propsFactory({
+  avatar: String,
+  color: String,
+  icon: IconValue,
+  lines: String as PropType<'one' | 'two' | 'three'>,
+  stacked: Boolean,
+  sticky: Boolean,
+  text: String,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-banner')
 
 export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',
 
-  props: {
-    avatar: String,
-    color: String,
-    icon: IconValue,
-    lines: String as PropType<'one' | 'two' | 'three'>,
-    stacked: Boolean,
-    sticky: Boolean,
-    text: String,
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVBannerProps(),
 
   setup (props, { slots }) {
     const { borderClasses } = useBorder(props)
@@ -96,10 +99,12 @@ export const VBanner = genericComponent<VBannerSlots>()({
             positionClasses.value,
             roundedClasses.value,
             themeClasses.value,
+            props.class,
           ]}
           style={[
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           role="banner"
         >

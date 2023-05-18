@@ -73,4 +73,9 @@ export default {
       item: 'Puntuación {0} de {1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

@@ -73,4 +73,9 @@ export default {
       item: 'Luokitus {0}/{1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

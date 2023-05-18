@@ -1,19 +1,15 @@
 {
   "props": {
-    "collapseOnScroll": "Puts the component into a collapsed state when scrolling.",
-    "elevateOnScroll": "Elevates the component when scrolling.",
     "extensionHeight": "Designate an explicit height for the `extension` slot.",
-    "fadeImgOnScroll": "When using the **src** prop or `img` slot, will fade the image when scrolling.",
     "flat": "Removes the component's **box-shadow**.",
     "floating": "Applies **display: inline-flex** to the component.",
-    "hideOnScroll": "Hides the component when scrolling. Will still show the `extension` slot.",
-    "invertedScroll": "Hides the component when scrolling down and displays it when scrolling up.",
     "prominent": "Increases the height of the component content to the value of the **prominentHeight** prop.",
     "prominentHeight": "Designate an explicit height when using the **prominent** prop.",
-    "scrollOffScreen": "Hides the component when scrolling. Will **NOT** show the `extension` slot.",
-    "shrinkOnScroll": "Shrinks a **prominent** toolbar to a **dense** or **short** (default) one when scrolling.",
     "collapse": "Morphs the component into a collapsed state, reducing its maximum width.",
-    "location": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-app-bar.json))"
+    "scrollBehavior": "Specify an action to take when the scroll position of **scroll-target** reaches **scroll-threshold**. Accepts any combination of hide, inverted, collapse, elevate, and fade-image. Multiple values can be used, separated by a space.",
+    "scrollTarget":  "The element to target for scrolling events. Uses `window` by default.",
+    "scrollThreshold": "The amount of scroll distance down before **scroll-behavior** activates.",
+    "location": "Aligns the component towards the top or bottom."
   },
   "slots": {
     "extension": "Slot positioned directly under the main content of the toolbar. Height of this slot can be set explicitly with the **extension-height** prop.",

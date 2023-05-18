@@ -11,6 +11,7 @@ import { setupLayouts } from 'virtual:generated-layouts'
 // Plugins
 import { pinia, usePinia } from '@/plugins/pinia'
 import { useGlobalComponents } from '@/plugins/global-components'
+import { useAuth0 } from '@/plugins/auth'
 import { useGtag } from '@/plugins/gtag'
 import { useI18n } from '@/plugins/i18n'
 import { useLocaleStore } from '@/store/locale'
@@ -78,11 +79,19 @@ export const createApp = ViteSSG(
     ],
     async scrollBehavior (to, from, savedPosition) {
       let main = IN_BROWSER && document.querySelector('main')
+      // For default & hash navigation
+      let wait = 0
 
       if (!main) {
-        await (new Promise(resolve => setTimeout(resolve, 1000)))
+        // For initial page load
+        wait = 1500
         main = document.querySelector('main')
+      } else if (to.path !== from.path && to.hash) {
+        // For cross page navigation
+        wait = 500
       }
+
+      await (new Promise(resolve => setTimeout(resolve, wait)))
 
       if (to.hash) {
         return {
@@ -110,6 +119,7 @@ export const createApp = ViteSSG(
     })
 
     useGlobalComponents(ctx)
+    useAuth0(ctx)
     useGtag(ctx)
     useI18n(ctx)
     usePwa(ctx)

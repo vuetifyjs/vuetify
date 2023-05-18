@@ -6,7 +6,7 @@
     "customGroup": "Function used to group items",
     "customSort": "Function used to sort items",
     "caption": "Set the caption (using `<caption>`)",
-    "dense": "Decreases the height of rows",
+    "density": "Adjusts the vertical height of the table rows",
     "disableFiltering": "Disables filtering completely",
     "disablePagination": "Disables pagination completely",
     "disableSort": "Disables sorting completely",
@@ -19,6 +19,7 @@
     "headersLength": "Can be used in combination with `hide-default-header` to specify the number of columns in the table to allow expansion rows and loading bar to function properly",
     "height": "Set an explicit height of table",
     "hideDefaultHeader": "Hide the default headers",
+    "hover": "Adds a hover effects to a table rows",
     "itemClass": "Property on supplied `items` that contains item's row class or function that takes an item as an argument and returns the class of corresponding row",
     "itemsPerPage": "Changes how many items per page should be visible. Can be used with `.sync` modifier. Setting this prop to `-1` will display all items on the page",
     "locale": "Sets the locale used for sorting. This is passed into [`Intl.Collator()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Intl/Collator/Collator) in the default `customSort` function",
@@ -61,7 +62,7 @@
     "top": "Slot to add content above the table"
   },
   "events": {
-    "click:row": "Emits when a table row is clicked. This event provides 3 arguments: the first is the item data that was clicked, the second is the other related data provided by the `item` slot, and the third is the native click event. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
+    "click:row": "Emits when a table row is clicked. This event provides 2 arguments: the first is the native click event, and the second is an object containing the corresponding item for that row. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "contextmenu:row": "Emits when a table row is right-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "dblclick:row": "Emits when a table row is double-clicked. The item for the row is included. **NOTE:** will not emit when table rows are defined through a slot such as `item` or `body`.",
     "current-items": "Emits the items provided via the **items** prop, every time the internal **computedItems** is changed.",

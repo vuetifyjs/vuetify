@@ -18,6 +18,7 @@ import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant
 import { IconValue } from '@/composables/icons'
 import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -30,62 +31,65 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { MakeSlots } from '@/util'
+import type { LoaderSlotProps } from '@/composables/loader'
 
-export type VCardSlots = MakeSlots<{
+export const makeVCardProps = propsFactory({
+  appendAvatar: String,
+  appendIcon: IconValue,
+  disabled: Boolean,
+  flat: Boolean,
+  hover: Boolean,
+  image: String,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  subtitle: String,
+  text: String,
+  title: String,
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeLoaderProps(),
+  ...makeLocationProps(),
+  ...makePositionProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'elevated' } as const),
+}, 'v-card')
+
+export type VCardSlots = {
   default: []
   actions: []
   title: []
   subtitle: []
   text: []
-  loader: []
+  loader: [LoaderSlotProps]
   image: []
   prepend: []
   append: []
-}>
+}
 
 export const VCard = genericComponent<VCardSlots>()({
   name: 'VCard',
 
   directives: { Ripple },
 
-  props: {
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    flat: Boolean,
-    hover: Boolean,
-    image: String,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    subtitle: String,
-    text: String,
-    title: String,
-
-    ...makeThemeProps(),
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeLoaderProps(),
-    ...makeLocationProps(),
-    ...makePositionProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeVariantProps({ variant: 'elevated' } as const),
-  },
+  props: makeVCardProps(),
 
   setup (props, { attrs, slots }) {
     const { themeClasses } = provideTheme(props)
@@ -137,11 +141,13 @@ export const VCard = genericComponent<VCardSlots>()({
             positionClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             colorStyles.value,
             dimensionStyles.value,
             locationStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           onClick={ isClickable.value && link.navigate }

@@ -4,6 +4,7 @@ import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
 import { ref } from 'vue'
 import { VSelect } from '../VSelect'
+import { keyValues } from '@/util'
 
 describe('VSelect', () => {
   it('should render selection slot', () => {
@@ -239,6 +240,66 @@ describe('VSelect', () => {
       .get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should conditionally show placeholder', () => {
+    cy.mount(props => (
+      <VSelect placeholder="Placeholder" { ...props } />
+    ))
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ label: 'Label' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .get('.v-select input')
+      .focus()
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .blur()
+      .setProps({ persistentPlaceholder: true })
+      .get('.v-select input')
+      .should('have.attr', 'placeholder', 'Placeholder')
+      .setProps({ modelValue: 'Foobar' })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+      .setProps({ multiple: true, modelValue: ['Foobar'] })
+      .get('.v-select input')
+      .should('not.have.attr', 'placeholder')
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16210
+  it('should return item object as the argument of item-title function', () => {
+    const items = [
+      { id: 1, name: 'a' },
+      { id: 2, name: 'b' },
+    ]
+
+    const selectedItems = ref(null)
+
+    function itemTitleFunc (item: any) {
+      return 'Item: ' + JSON.stringify(item)
+    }
+
+    const itemTitleFuncSpy = cy.spy(itemTitleFunc).as('itemTitleFunc')
+
+    cy.mount(() => (
+      <VSelect
+        items={ items }
+        modelValue={ selectedItems }
+        item-title={ itemTitleFuncSpy }
+        item-value="id"
+      />
+    ))
+
+    cy.get('.v-select').click()
+
+    cy.get('.v-list-item').eq(0).click({ waitForAnimations: false }).should(() => {
+      expect(selectedItems.value).to.deep.equal(1)
+    })
+
+    cy.get('@itemTitleFunc')
+      .should('have.been.calledWith', { id: 1, name: 'a' })
+
+    cy.get('.v-select__selection-text').should('have.text', `Item: {"id":1,"name":"a"}`)
+  })
+
   describe('hide-selected', () => {
     it('should hide selected item(s)', () => {
       const items = ref(['Item 1',
@@ -262,5 +323,75 @@ describe('VSelect', () => {
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(0).should('have.text', 'Item 3')
       cy.get('.v-overlay__content .v-list-item .v-list-item-title').eq(1).should('have.text', 'Item 4')
     })
+  })
+
+  // https://github.com/vuetifyjs/vuetify/issues/16055
+  it('should select item after typing its first few letters', () => {
+    const items = ref(['aaa', 'foo', 'faa'])
+
+    const selectedItems = ref(undefined)
+
+    cy.mount(() => (
+      <VSelect
+        v-model={ selectedItems.value }
+        items={ items.value }
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+      .get('.v-select input')
+      .focus()
+      .type('f', { force: true })
+      .get('.v-list-item').should('have.length', 3)
+      .then(_ => {
+        expect(selectedItems.value).equal('foo')
+      })
+  })
+
+  it('should keep TextField focused while selecting items from open menu', () => {
+    cy.mount(() => (
+      <VSelect
+        items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+      />
+    ))
+
+    cy.get('.v-select')
+      .click()
+
+    cy.get('.v-list')
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+      .trigger('keydown', { key: keyValues.down, waitForAnimations: false })
+
+    cy.get('.v-field').should('have.class', 'v-field--focused')
+  })
+
+  it('should not open menu when closing a chip', () => {
+    cy
+      .mount(() => (
+        <VSelect
+          chips
+          closable-chips
+          items={['foo', 'bar']}
+          label="Select"
+          modelValue={['foo', 'bar']}
+          multiple
+        />
+      ))
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .get('.v-chip__close').eq(1)
+      .click()
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .get('.v-chip__close')
+      .click()
+      .get('.v-select')
+      .should('not.have.class', 'v-select--active-menu')
+      .click()
+      .should('have.class', 'v-select--active-menu')
+      .trigger('keydown', { key: keyValues.esc })
+      .should('not.have.class', 'v-select--active-menu')
   })
 })

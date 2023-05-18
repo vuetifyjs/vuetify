@@ -10,10 +10,9 @@
     "stream": "An alternative style for portraying loading that works in tandem with **buffer-value**",
     "striped": "Adds a stripe background to the filled portion of the progress component",
     "top": "Aligns the content towards the top",
-    "clickable": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-progress-linear.json))",
-    "height": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-progress-linear.json))",
-    "max": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-progress-linear.json))",
-    "roundedBar": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-progress-linear.json))"
+    "clickable": "Clicking on the progress track will automatically set the value",
+    "max": "Sets the maximum value the progress can reach",
+    "roundedBar": "Applies a border radius to the progress bar"
   },
   "slots": {
     "default": "Provides the current value of the component"

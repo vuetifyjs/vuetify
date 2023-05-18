@@ -68,7 +68,7 @@ describe('VBreadcrumbs', () => {
   it('should render link if href is set', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={[{ text: 'hello', href: '/hello' }, { text: 'world', href: '/world' }]}></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'hello', href: '/hello' }, { title: 'world', href: '/world' }]}></VBreadcrumbs>
       </Application>
     ))
 
@@ -92,7 +92,7 @@ describe('VBreadcrumbs', () => {
 
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={[{ text: 'about', to: '/about' }, { text: 'something', to: '/something' }]}></VBreadcrumbs>
+        <VBreadcrumbs items={[{ title: 'about', to: '/about' }, { title: 'something', to: '/something' }]}></VBreadcrumbs>
       </Application>
     ), {
       global: {
@@ -102,7 +102,8 @@ describe('VBreadcrumbs', () => {
 
     cy.get('.v-breadcrumbs').should('exist')
 
-    cy.get('.v-breadcrumbs-item').should('exist').eq(0).click().then(() => {
+    cy.get('.v-breadcrumbs-item').should('exist').eq(0).click()
+    cy.then(() => {
       expect(router.currentRoute.value.path).to.equal('/about')
     })
   })
@@ -158,7 +159,7 @@ describe('VBreadcrumbs', () => {
   it('should be possible to override last item disabled by default', () => {
     cy.mount(() => (
       <Application>
-        <VBreadcrumbs items={['foo', { text: 'bar', disabled: false }]}></VBreadcrumbs>
+        <VBreadcrumbs items={['foo', { title: 'bar', disabled: false }]}></VBreadcrumbs>
       </Application>
     ))
 

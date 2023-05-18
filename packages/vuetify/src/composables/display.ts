@@ -1,5 +1,5 @@
 // Utilities
-import { inject, reactive, ref, shallowRef, toRefs, watchEffect } from 'vue'
+import { inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
@@ -144,10 +144,10 @@ function getPlatform (isHydrate?: boolean): DisplayPlatform {
 export function createDisplay (options?: DisplayOptions, ssr?: boolean): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight(ssr))
+  const height = shallowRef(getClientHeight(ssr))
   const platform = shallowRef(getPlatform(ssr))
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth(ssr))
+  const width = shallowRef(getClientWidth(ssr))
 
   function updateSize () {
     height.value = getClientHeight()

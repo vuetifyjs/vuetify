@@ -2,6 +2,7 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -11,35 +12,38 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
+export const makeVProgressCircularProps = propsFactory({
+  bgColor: String,
+  color: String,
+  indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  rotate: {
+    type: [Number, String],
+    default: 0,
+  },
+  width: {
+    type: [Number, String],
+    default: 4,
+  },
+
+  ...makeComponentProps(),
+  ...makeSizeProps(),
+  ...makeTagProps({ tag: 'div' }),
+  ...makeThemeProps(),
+}, 'v-progress-circular')
+
 export const VProgressCircular = genericComponent()({
   name: 'VProgressCircular',
 
-  props: {
-    bgColor: String,
-    color: String,
-    indeterminate: [Boolean, String] as PropType<boolean | 'disable-shrink'>,
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    rotate: {
-      type: [Number, String],
-      default: 0,
-    },
-    width: {
-      type: [Number, String],
-      default: 4,
-    },
-
-    ...makeSizeProps(),
-    ...makeTagProps({ tag: 'div' }),
-    ...makeThemeProps(),
-  },
+  props: makeVProgressCircularProps(),
 
   setup (props, { slots }) {
     const MAGIC_RADIUS_CONSTANT = 20
@@ -86,10 +90,12 @@ export const VProgressCircular = genericComponent()({
           themeClasses.value,
           sizeClasses.value,
           textColorClasses.value,
+          props.class,
         ]}
         style={[
           sizeStyles.value,
           textColorStyles.value,
+          props.style,
         ]}
         role="progressbar"
         aria-valuemin="0"

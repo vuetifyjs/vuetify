@@ -1,11 +1,10 @@
 // Composables
-import { createDate, DateAdapterSymbol } from './composables/date'
+import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
-import { createDate, DateAdapterSymbol } from './composables/date'
 
 // Utilities
 import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
@@ -13,22 +12,21 @@ import { nextTick, reactive } from 'vue'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
+import type { DateOptions } from '@/labs/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
-import type { DateAdapter } from './adapters/date-adapter'
 
 export * from './composables'
+export type { DateOptions, DateInstance } from '@/labs/date'
 
 export interface VuetifyOptions {
   aliases?: Record<string, any>
   blueprint?: Blueprint
   components?: Record<string, any>
-  date?: {
-    adapter: { new(locale: string): DateAdapter<any> }
-  }
+  date?: DateOptions
   directives?: Record<string, any>
   defaults?: DefaultsOptions
   display?: DisplayOptions
@@ -36,9 +34,6 @@ export interface VuetifyOptions {
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
   ssr?: boolean
-  date?: {
-    adapter: DateAdapter<any>
-  }
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
@@ -57,7 +52,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
   const theme = createTheme(options.theme)
   const icons = createIcons(options.icons)
   const locale = createLocale(options.locale)
-  const date = createDate(options?.date)
+  const date = createDate(options.date)
 
   const install = (app: App) => {
     for (const key in directives) {
@@ -128,6 +123,7 @@ export function createVuetify (vuetify: VuetifyOptions = {}) {
     theme,
     icons,
     locale,
+    date,
   }
 }
 

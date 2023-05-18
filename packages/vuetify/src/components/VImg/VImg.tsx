@@ -7,6 +7,7 @@ import { VResponsive } from '@/components/VResponsive'
 import intersect from '@/directives/intersect'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
@@ -15,6 +16,7 @@ import {
   nextTick,
   onBeforeMount,
   ref,
+  shallowRef,
   vShow,
   watch,
   withDirectives,
@@ -22,6 +24,7 @@ import {
 import {
   convertToUnit,
   genericComponent,
+  propsFactory,
   SUPPORTS_INTERSECTION,
   useRender,
 } from '@/util'
@@ -44,51 +47,54 @@ export type VImgSlots = {
   sources: []
 }
 
+export const makeVImgProps = propsFactory({
+  aspectRatio: [String, Number],
+  alt: String,
+  cover: Boolean,
+  eager: Boolean,
+  gradient: String,
+  lazySrc: String,
+  options: {
+    type: Object as PropType<IntersectionObserverInit>,
+    // For more information on types, navigate to:
+    // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
+    default: () => ({
+      root: undefined,
+      rootMargin: undefined,
+      threshold: undefined,
+    }),
+  },
+  sizes: String,
+  src: {
+    type: [String, Object] as PropType<string | srcObject>,
+    default: '',
+  },
+  srcset: String,
+  width: [String, Number],
+
+  ...makeComponentProps(),
+  ...makeTransitionProps(),
+}, 'v-img')
+
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
 
   directives: { intersect },
 
-  props: {
-    aspectRatio: [String, Number],
-    alt: String,
-    cover: Boolean,
-    eager: Boolean,
-    gradient: String,
-    lazySrc: String,
-    options: {
-      type: Object as PropType<IntersectionObserverInit>,
-      // For more information on types, navigate to:
-      // https://developer.mozilla.org/en-US/docs/Web/API/Intersection_Observer_API
-      default: () => ({
-        root: undefined,
-        rootMargin: undefined,
-        threshold: undefined,
-      }),
-    },
-    sizes: String,
-    src: {
-      type: [String, Object] as PropType<string | srcObject>,
-      default: '',
-    },
-    srcset: String,
-    width: [String, Number],
-
-    ...makeTransitionProps(),
-  },
+  props: makeVImgProps(),
 
   emits: {
-    loadstart: (event: string | undefined) => true,
-    load: (event: string | undefined) => true,
-    error: (event: string | undefined) => true,
+    loadstart: (value: string | undefined) => true,
+    load: (value: string | undefined) => true,
+    error: (value: string | undefined) => true,
   },
 
   setup (props, { emit, slots }) {
-    const currentSrc = ref('') // Set from srcset
+    const currentSrc = shallowRef('') // Set from srcset
     const image = ref<HTMLImageElement>()
-    const state = ref<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
-    const naturalWidth = ref<number>()
-    const naturalHeight = ref<number>()
+    const state = shallowRef<'idle' | 'loading' | 'loaded' | 'error'>(props.eager ? 'loading' : 'idle')
+    const naturalWidth = shallowRef<number>()
+    const naturalHeight = shallowRef<number>()
 
     const normalisedSrc = computed<srcObject>(() => {
       return props.src && typeof props.src === 'object'
@@ -273,7 +279,7 @@ export const VImg = genericComponent<VImgSlots>()({
       return <div class="v-img__gradient" style={{ backgroundImage: `linear-gradient(${props.gradient})` }} />
     }
 
-    const isBooted = ref(false)
+    const isBooted = shallowRef(false)
     {
       const stop = watch(aspectRatio, val => {
         if (val) {
@@ -293,8 +299,12 @@ export const VImg = genericComponent<VImgSlots>()({
         class={[
           'v-img',
           { 'v-img--booting': !isBooted.value },
+          props.class,
         ]}
-        style={{ width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) }}
+        style={[
+          { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
+          props.style,
+        ]}
         aspectRatio={ aspectRatio.value }
         aria-label={ props.alt }
         role={ props.alt ? 'img' : undefined }

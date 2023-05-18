@@ -2,11 +2,12 @@
   <v-system-bar
     v-if="showBanner"
     color="#e7f0f6"
+    theme="light"
     height="52"
   >
     <div class="text-blue-darken-3 text-start ms-4">
       <div class="text-caption">
-        You are currently viewing the documentation for <strong>Vuetify 3</strong>
+        You are viewing the documentation for <strong>Vuetify 3</strong>
       </div>
     </div>
 
@@ -24,7 +25,7 @@
     </v-btn>
 
     <v-btn
-      class="ms-6 me-6"
+      class="ms-4 ms-md-6 me-2"
       density="comfortable"
       size="small"
       icon="$clear"

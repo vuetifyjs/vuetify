@@ -1,10 +1,12 @@
 {
   "props": {
-    "reverse": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "error": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "clearIcon": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
+    "active": "",
+    "baseColor": "Sets the color of the input when it is not focused",
+    "reverse": "Reverses the orientation ",
+    "error": "Puts the input in a manual error state",
+    "clearIcon": "The icon used when the **clerable** prop is set to true",
     "disabled": "Removes the ability to click or target the input",
-    "persistentClear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
+    "persistentClear": "Always show the clearable icon when the input is dirty (By default it only shows on hover)",
     "singleLine": "Label does not move on focus/dirty",
     "id": "Sets the DOM id on the component",
     "prependInnerIcon": "Creates a [v-icon](/api/v-icon/) component in the **prepend-inner** slot",
@@ -12,19 +14,22 @@
     "dirty": "Manually apply the dirty state styling"
   },
   "events": {
-    "click:clear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "click:appendInner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "click:prependInner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "click:control": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "update:focused": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))"
+    "click:append": "Emitted when append icon is clicked",
+    "click:appendInner": "Emitted when appended inner icon is clicked",
+    "click:clear": "Emitted when clearable icon clicked",
+    "click:control": "Emitted when the main input is clicked",
+    "click:prepend": "Emitted when prepended icon is clicked",
+    "click:prependInner": "Emitted when prepended inner icon is clicked",
+    "group:selected": "Event that is emitted when an item is selected within a group.",
+    "update:focused": "Emitted when the input is focused or blurred"
   },
   "slots": {
-    "clear": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "prepend-inner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "append-inner": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))",
-    "loader": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))"
+    "append-inner": "Slot that is appended to the input",
+    "clear": "Slot for custom clear icon (displayed when the **clearable** prop is equal to true)",
+    "label": "The default slot of the [v-label](/api/v-label/) or [v-field-label](/api/v-field-label/) component",
+    "prepend-inner": "Slot that is prepended to the input"
   },
   "exposed": {
-    "controlRef": "MISSING DESCRIPTION ([edit in github](https://github.com/vuetifyjs/vuetify/tree/master/packages/api-generator/src/locale/en/v-field.json))"
+    "controlRef": "Reference to the control element of the field"
   }
 }

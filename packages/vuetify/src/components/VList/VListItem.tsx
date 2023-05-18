@@ -15,6 +15,7 @@ import { Ripple } from '@/directives/ripple'
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
@@ -27,15 +28,15 @@ import { useNestedItem } from '@/composables/nested/nested'
 
 // Utilities
 import { computed, watch } from 'vue'
-import { EventProp, genericComponent, useRender } from '@/util'
+import { EventProp, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
 type ListItemSlot = {
   isActive: boolean
-  activate: (value: boolean) => void
   isSelected: boolean
+  isIndeterminate: boolean
   select: (value: boolean) => void
 }
 
@@ -47,7 +48,7 @@ export type ListItemSubtitleSlot = {
   subtitle?: string
 }
 
-type VListItemSlots = {
+export type VListItemSlots = {
   prepend: [ListItemSlot]
   append: [ListItemSlot]
   default: [ListItemSlot]
@@ -55,50 +56,53 @@ type VListItemSlots = {
   subtitle: [ListItemSubtitleSlot]
 }
 
+export const makeVListItemProps = propsFactory({
+  active: {
+    type: Boolean,
+    default: undefined,
+  },
+  activeClass: String,
+  activeColor: String,
+  appendAvatar: String,
+  appendIcon: IconValue,
+  disabled: Boolean,
+  lines: String as PropType<'one' | 'two' | 'three'>,
+  link: {
+    type: Boolean,
+    default: undefined,
+  },
+  nav: Boolean,
+  prependAvatar: String,
+  prependIcon: IconValue,
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+  subtitle: [String, Number, Boolean],
+  title: [String, Number, Boolean],
+  value: null,
+
+  onClick: EventProp<[MouseEvent]>(),
+  onClickOnce: EventProp<[MouseEvent]>(),
+
+  ...makeBorderProps(),
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeDimensionProps(),
+  ...makeElevationProps(),
+  ...makeRoundedProps(),
+  ...makeRouterProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeVariantProps({ variant: 'text' } as const),
+}, 'v-list-item')
+
 export const VListItem = genericComponent<VListItemSlots>()({
   name: 'VListItem',
 
   directives: { Ripple },
 
-  props: {
-    active: {
-      type: Boolean,
-      default: undefined,
-    },
-    activeClass: String,
-    activeColor: String,
-    appendAvatar: String,
-    appendIcon: IconValue,
-    disabled: Boolean,
-    lines: String as PropType<'one' | 'two' | 'three'>,
-    link: {
-      type: Boolean,
-      default: undefined,
-    },
-    nav: Boolean,
-    prependAvatar: String,
-    prependIcon: IconValue,
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-    subtitle: [String, Number, Boolean],
-    title: [String, Number, Boolean],
-    value: null,
-
-    onClick: EventProp,
-    onClickOnce: EventProp,
-
-    ...makeBorderProps(),
-    ...makeDensityProps(),
-    ...makeDimensionProps(),
-    ...makeElevationProps(),
-    ...makeRoundedProps(),
-    ...makeRouterProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeVariantProps({ variant: 'text' } as const),
-  },
+  props: makeVListItemProps(),
 
   emits: {
     click: (e: MouseEvent | KeyboardEvent) => true,
@@ -150,7 +154,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
       select,
       isSelected: isSelected.value,
       isIndeterminate: isIndeterminate.value,
-    }))
+    } satisfies ListItemSlot))
 
     function onClick (e: MouseEvent) {
       emit('click', e)
@@ -200,10 +204,12 @@ export const VListItem = genericComponent<VListItemSlots>()({
             lineClasses.value,
             roundedClasses.value,
             variantClasses.value,
+            props.class,
           ]}
           style={[
             hasColor ? colorStyles.value : undefined,
             dimensionStyles.value,
+            props.style,
           ]}
           href={ link.href.value }
           tabindex={ isClickable.value ? 0 : undefined }

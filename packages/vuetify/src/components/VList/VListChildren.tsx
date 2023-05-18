@@ -6,30 +6,32 @@ import { VListSubheader } from './VListSubheader'
 
 // Utilities
 import { createList } from './list'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { InternalListItem } from './VList'
-import type { ListItemSubtitleSlot, ListItemTitleSlot } from './VListItem'
-import type { SlotsToProps } from '@/util'
-import type { Prop } from 'vue'
+import type { VListItemSlots } from './VListItem'
+import type { GenericProps } from '@/util'
+import type { PropType } from 'vue'
 
-export const VListChildren = genericComponent<new <T extends InternalListItem>() => {
-  $props: {
-    items?: T[]
-  } & SlotsToProps<{
-    default: []
-    header: [{ props: Record<string, unknown> }]
-    item: [T]
-    title: [ListItemTitleSlot]
-    subtitle: [ListItemSubtitleSlot]
-  }>
-}>()({
+export type VListChildrenSlots<T> = {
+  [K in keyof VListItemSlots]: VListItemSlots[K] & [{ item: T }]
+} & {
+  item: [T]
+  divider: [{ props: T }]
+  subheader: [{ props: T }]
+}
+
+export const makeVListChildrenProps = propsFactory({
+  items: Array as PropType<InternalListItem[]>,
+}, 'v-list-children')
+
+export const VListChildren = genericComponent<new <T extends InternalListItem>(props: {
+  items?: T[]
+}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
   name: 'VListChildren',
 
-  props: {
-    items: Array as Prop<InternalListItem[]>,
-  },
+  props: makeVListChildrenProps(),
 
   setup (props, { slots }) {
     createList()

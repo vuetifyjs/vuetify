@@ -32,7 +32,19 @@ Components available through Labs are considered **NOT** production ready and on
 
 ## Usage
 
-Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap the `v-data-table` component with your Vuetify instance:
+Using a Labs component is as simple as importing from `vuetify/labs`. The following example shows how to import and bootstrap `v-data-table` in your component:
+
+```html
+<template>
+  <v-data-table />
+</template>
+
+<script setup>
+  import { VDataTable } from 'vuetify/labs/VDataTable'
+</script>
+```
+
+Alternatively you can make the component available globally by importing it in your Vuetify plugin file:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
@@ -45,36 +57,19 @@ export default createVuetify({
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates. This also allows you to define [Global Default](/features/global-configuration/) properties.
+When Vuetify instantiates it will register `VDataTable` as a usable component within templates. Note that typescript support will require you to also add the component to `@vue/runtime-core`'s `GlobalComponents` interface.
 
-The following example configures the default values for the **fixedHeader** and **noDataText** props:
-
-```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify'
-import { VDataTable } from 'vuetify/labs/VDataTable'
-
-export default createVuetify({
-  components: {
-    VDataTable,
-  },
-  defaults: {
-    VDataTable: {
-      fixedHeader: true,
-      noDataText: 'Results not found',
-    },
-  },
-})
-```
-
-If you wish to install all Labs components - use the following code snippet:
+If you wish to install all available Vuetify components use the following code snippet:
 
 ```js { resource="src/plugins/vuetify.js" }
 import { createVuetify } from 'vuetify'
-import * as labs from 'vuetify/labs/components'
+import * as components from 'vuetify/components'
+import * as labsComponents from 'vuetify/labs/components'
 
 export default createVuetify({
   components: {
-    ...labs,
+    ...components,
+    ...labsComponents,
   },
 })
 ```
@@ -94,16 +89,20 @@ The following is a list of available and up-and-coming components for use with L
 | [v-data-table-row](/api/v-data-table-row/) | Data table reusable row component |
 | [v-data-table-rows](/api/v-data-table-rows/) | Data table reusable rows component |
 | [v-data-table-column](/api/v-data-table-column/) | Data table reusable column component |
-| **Virtual scroll** | [Usage](/components/virtual-scrollers/) |
-| [v-virtual-scroll](/api/v-virtual-scroll/) | Primary Component |
+| **Skeleton loader** | [Usage](/components/skeleton-loaders/) |
+| [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
+| **Infinite scroll** | [Usage](/components/infinite-scroller/) |
+| [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
 
 ### Up Next
 
 | Component | Release Target |
 | - | - |
-| v-calendar | Q1 2023 |
-| v-infinite-scroll | Q1 2023 |
+| v-infinite-scroll | April 2023 |
+| v-calendar | ~~Q1~~* Q2 2023 |
 | v-date-picker | Q2 2023 |
+
+<small>*Q1 2023 was the original target, but due to the complexity of the component, it has been pushed back to Q2 2023.</small>
 
 <alert type="warning">
 

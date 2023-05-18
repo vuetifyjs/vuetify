@@ -12,14 +12,45 @@ import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
 
 // Utilities
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { computed } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
+import type { SortItem } from './composables/sort'
+
+type HeadersSlotProps = {
+  headers: InternalDataTableHeader[][]
+  columns: InternalDataTableHeader[]
+  sortBy: SortItem[]
+  someSelected: boolean
+  allSelected: boolean
+  toggleSort: (key: string) => void
+  selectAll: (value: boolean) => void
+  getSortIcon: (key: string) => IconValue
+  getFixedStyles: (column: InternalDataTableHeader) => Record<string, string>
+}
+
+export const makeVDataTableHeadersProps = propsFactory({
+  color: String,
+  sticky: Boolean,
+  multiSort: Boolean,
+  sortAscIcon: {
+    type: IconValue,
+    default: '$sortAsc',
+  },
+  sortDescIcon: {
+    type: IconValue,
+    default: '$sortDesc',
+  },
+
+  ...makeLoaderProps(),
+}, 'v-data-table-headers')
 
 export type VDataTableHeadersSlots = {
   default: []
+  headers: [HeadersSlotProps]
   loader: [LoaderSlotProps]
   'column.data-table-select': [InternalDataTableHeader, (value: boolean) => void]
 }
@@ -27,21 +58,7 @@ export type VDataTableHeadersSlots = {
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
 
-  props: {
-    color: String,
-    sticky: Boolean,
-    multiSort: Boolean,
-    sortAscIcon: {
-      type: IconValue,
-      default: '$sortAsc',
-    },
-    sortDescIcon: {
-      type: IconValue,
-      default: '$sortDesc',
-    },
-
-    ...makeLoaderProps(),
-  },
+  props: makeVDataTableHeadersProps(),
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy } = useSort()
@@ -69,6 +86,18 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
     }
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(props, 'color')
+
+    const slotProps = computed(() => ({
+      headers: headers.value,
+      columns: columns.value,
+      toggleSort,
+      sortBy: sortBy.value,
+      someSelected: someSelected.value,
+      allSelected: allSelected.value,
+      selectAll,
+      getSortIcon,
+      getFixedStyles,
+    }))
 
     const VDataTableHeaderCell = ({ column, x, y }: { column: InternalDataTableHeader, x: number, y: number }) => {
       const isSorted = !!sortBy.value.find(x => x.key === column.key)
@@ -99,16 +128,16 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
         >
           {{
             default: () => {
-              const slotName = `column.${column.key}`
-              const slotProps = {
+              const columnSlotName = `column.${column.key}`
+              const columnSlotProps = {
                 column,
                 selectAll,
               }
 
-              if (slots[slotName]) return slots[slotName]!(slotProps)
+              if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['column.data-table-select']?.(slotProps) ?? (
+                return slots['column.data-table-select']?.(columnSlotProps) ?? (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
@@ -147,31 +176,35 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
       )
     }
 
-    useRender(() => (
-      <>
-        { headers.value.map((row, y) => (
-          <tr>
-            { row.map((column, x) => (
-              <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+    useRender(() => {
+      return (
+        <>
+          { slots.headers
+            ? slots.headers(slotProps.value)
+            : headers.value.map((row, y) => (
+            <tr>
+              { row.map((column, x) => (
+                <VDataTableHeaderCell column={ column } x={ x } y={ y } />
+              ))}
+            </tr>
             ))}
-          </tr>
-        ))}
 
-        { props.loading && (
-          <tr class="v-data-table__progress">
-            <th colspan={ columns.value.length }>
+          { props.loading && (
+            <tr class="v-data-table__progress">
+              <th colspan={ columns.value.length }>
 
-            <LoaderSlot
-              name="v-data-table-headers"
-              active
-              color={ typeof props.loading === 'boolean' ? undefined : props.loading }
-              indeterminate
-              v-slots={{ default: slots.loader }}
-            />
-            </th>
-          </tr>
-        )}
-      </>
-    ))
+              <LoaderSlot
+                name="v-data-table-headers"
+                active
+                color={ typeof props.loading === 'boolean' ? undefined : props.loading }
+                indeterminate
+                v-slots={{ default: slots.loader }}
+              />
+              </th>
+            </tr>
+          )}
+        </>
+      )
+    })
   },
 })

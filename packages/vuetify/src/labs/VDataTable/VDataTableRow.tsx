@@ -9,20 +9,23 @@ import { useSelection } from './composables/select'
 import { VDataTableColumn } from './VDataTableColumn'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { withModifiers } from 'vue'
+import { defineComponent, getPropertyFromItem, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { DataTableItem } from './types'
 
+export const makeVDataTableRowProps = propsFactory({
+  index: Number as PropType<Number>,
+  item: Object as PropType<DataTableItem>,
+  onClick: Function as PropType<(e: MouseEvent) => void>,
+}, 'v-data-table-row')
+
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
 
-  props: {
-    index: Number as PropType<Number>,
-    item: Object as PropType<DataTableItem>,
-    onClick: Function as PropType<(e: MouseEvent) => void>,
-  },
+  props: makeVDataTableRowProps(),
 
   setup (props, { slots }) {
     const { isSelected, toggleSelect } = useSelection()
@@ -39,13 +42,6 @@ export const VDataTableRow = defineComponent({
         ]}
         onClick={ props.onClick }
       >
-        { !columns.value.length && (
-          <VDataTableColumn
-            key="no-data"
-            v-slots={ slots }
-          />
-        )}
-
         { props.item && columns.value.map((column, i) => (
           <VDataTableColumn
             align={ column.align }
@@ -75,7 +71,7 @@ export const VDataTableRow = defineComponent({
                   return slots['item.data-table-select']?.(slotProps) ?? (
                     <VCheckboxBtn
                       modelValue={ isSelected([item]) }
-                      onClick={ () => toggleSelect(item) }
+                      onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
                     />
                   )
                 }
@@ -86,12 +82,12 @@ export const VDataTableRow = defineComponent({
                       icon={ isExpanded(item) ? '$collapse' : '$expand' }
                       size="small"
                       variant="text"
-                      onClick={ () => toggleExpand(item) }
+                      onClick={ withModifiers(() => toggleExpand(item), ['stop']) }
                     />
                   )
                 }
 
-                return item.columns[column.key]
+                return getPropertyFromItem(item.columns, column.key)
               },
             }}
           </VDataTableColumn>

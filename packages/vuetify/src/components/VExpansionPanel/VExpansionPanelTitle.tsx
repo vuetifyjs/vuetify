@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 import { Ripple } from '@/directives/ripple'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
 import { useBackgroundColor } from '@/composables/color'
 
@@ -42,6 +43,8 @@ export const makeVExpansionPanelTitleProps = propsFactory({
     default: false,
   },
   readonly: Boolean,
+
+  ...makeComponentProps(),
 }, 'v-expansion-panel-title')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
@@ -49,9 +52,7 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
 
   directives: { Ripple },
 
-  props: {
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelTitleProps(),
 
   setup (props, { slots }) {
     const expansionPanel = inject(VExpansionPanelSymbol)
@@ -76,8 +77,12 @@ export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>(
             'v-expansion-panel-title--active': expansionPanel.isSelected.value,
           },
           backgroundColorClasses.value,
+          props.class,
         ]}
-        style={ backgroundColorStyles.value }
+        style={[
+          backgroundColorStyles.value,
+          props.style,
+        ]}
         type="button"
         tabindex={ expansionPanel.disabled.value ? -1 : undefined }
         disabled={ expansionPanel.disabled.value }

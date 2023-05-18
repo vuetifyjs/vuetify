@@ -73,4 +73,9 @@ export default {
       item: 'Rating de {0} din {1}',
     },
   },
+  loading: 'Loading...',
+  infiniteScroll: {
+    loadMore: 'Load more',
+    empty: 'No more',
+  },
 }

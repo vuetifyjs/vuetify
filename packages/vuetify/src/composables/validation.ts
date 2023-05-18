@@ -5,7 +5,7 @@ import { useToggleScope } from '@/composables/toggleScope'
 import { makeFocusProps } from '@/composables/focus'
 
 // Utilities
-import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, unref, watch } from 'vue'
+import { computed, onBeforeMount, onBeforeUnmount, onMounted, ref, shallowRef, unref, watch } from 'vue'
 import { getCurrentInstanceName, getUid, propsFactory, wrapInArray } from '@/util'
 
 // Types
@@ -69,7 +69,7 @@ export function useValidation (
   const validationModel = computed(() => props.validationValue === undefined ? model.value : props.validationValue)
   const form = useForm()
   const internalErrorMessages = ref<string[]>([])
-  const isPristine = ref(true)
+  const isPristine = shallowRef(true)
   const isDirty = computed(() => !!(
     wrapInArray(model.value === '' ? null : model.value).length ||
     wrapInArray(validationModel.value === '' ? null : validationModel.value).length
@@ -87,7 +87,7 @@ export function useValidation (
 
     return isPristine.value ? null : true
   })
-  const isValidating = ref(false)
+  const isValidating = shallowRef(false)
   const validationClasses = computed(() => {
     return {
       [`${name}--error`]: isValid.value === false,
@@ -157,7 +157,7 @@ export function useValidation (
     isValidating.value = true
 
     for (const rule of props.rules) {
-      if (results.length >= (props.maxErrors ?? 1)) {
+      if (results.length >= +(props.maxErrors ?? 1)) {
         break
       }
 

@@ -125,6 +125,10 @@ describe('VDataTableServer', () => {
         const start = (opts.page - 1) * opts.itemsPerPage
         const end = start + opts.itemsPerPage
         items.value = DESSERT_ITEMS.slice(start, end)
+        options.value = {
+          ...options.value,
+          ...opts,
+        }
       }, 10)
     }
 
@@ -156,6 +160,10 @@ describe('VDataTableServer', () => {
         const start = (opts.page - 1) * opts.itemsPerPage
         const end = start + opts.itemsPerPage
         items.value = DESSERT_ITEMS.slice(start, end)
+        options.value = {
+          ...options.value,
+          ...opts,
+        }
       }, 10)
     }
 
@@ -170,19 +178,18 @@ describe('VDataTableServer', () => {
       </Application>
     ))
 
-    cy
-      .get('.v-btn[aria-label="Next page"]')
+    cy.get('.v-btn[aria-label="Next page"]')
       .click()
-      .get('.v-select')
+    cy.get('.v-select')
       .click()
-      .get('.v-list-item')
+    cy.get('.v-list-item')
       .eq(0)
       .click()
-      .emitted(VDataTableServer, 'update:options')
+    cy.emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
-        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
-        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
-        [{ page: 1, itemsPerPage: 10, sortBy: [], groupBy: [] }],
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: undefined }],
+        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [], search: undefined }],
+        [{ page: 1, itemsPerPage: 10, sortBy: [], groupBy: [], search: undefined }],
       ])
   })
 
@@ -200,6 +207,58 @@ describe('VDataTableServer', () => {
         const start = (opts.page - 1) * opts.itemsPerPage
         const end = start + opts.itemsPerPage
         items.value = DESSERT_ITEMS.slice(start, end)
+        options.value = {
+          ...options.value,
+          ...opts,
+        }
+      }, 10)
+    }
+
+    cy.mount(() => (
+      <Application>
+        <VDataTableServer
+          headers={ DESSERT_HEADERS }
+          items={ items.value }
+          { ...options.value }
+          onUpdate:options={ load }
+        ></VDataTableServer>
+      </Application>
+    ))
+
+    cy.get('.v-btn[aria-label="Next page"]')
+      .click()
+    cy.get('th')
+      .eq(0)
+      .click()
+    cy.emitted(VDataTableServer, 'update:options')
+      .should('deep.equal', [
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: undefined }],
+        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [], search: undefined }],
+        [{ page: 1, itemsPerPage: 2, sortBy: [{ key: 'name', order: 'asc' }], groupBy: [], search: undefined }],
+      ])
+  })
+
+  it('should only trigger update event once when search changes', () => {
+    const items = ref<any[]>([])
+    const options = ref({
+      itemsLength: DESSERT_ITEMS.length,
+      page: 1,
+      itemsPerPage: 2,
+      search: '',
+    })
+
+    // eslint-disable-next-line sonarjs/no-identical-functions
+    function load (opts: { page: number, itemsPerPage: number, search: string }) {
+      setTimeout(() => {
+        const start = (opts.page - 1) * opts.itemsPerPage
+        const end = start + opts.itemsPerPage
+        items.value = DESSERT_ITEMS
+          .filter(item => !opts.search || item.name.toLowerCase().includes(opts.search.toLowerCase()))
+          .slice(start, end)
+        options.value = {
+          ...options.value,
+          ...opts,
+        }
       }, 10)
     }
 
@@ -217,14 +276,18 @@ describe('VDataTableServer', () => {
     cy
       .get('.v-btn[aria-label="Next page"]')
       .click()
-      .get('th')
-      .eq(0)
-      .click()
+
+    cy.then(() => {
+      options.value = {
+        ...options.value,
+        search: 'frozen',
+      }
+    })
       .emitted(VDataTableServer, 'update:options')
       .should('deep.equal', [
-        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [] }],
-        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [] }],
-        [{ page: 1, itemsPerPage: 2, sortBy: [{ key: 'name', order: 'asc' }], groupBy: [] }],
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: '' }],
+        [{ page: 2, itemsPerPage: 2, sortBy: [], groupBy: [], search: '' }],
+        [{ page: 1, itemsPerPage: 2, sortBy: [], groupBy: [], search: 'frozen' }],
       ])
   })
 })

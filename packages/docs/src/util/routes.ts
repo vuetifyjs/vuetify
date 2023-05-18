@@ -22,14 +22,14 @@ export function preferredLocale (locale = 'en') {
 
 export function rpath (path = '') {
   const locale = preferredLocale()
-  const [url, hash] = path.split('#')
+  const [_url, hash] = path.split('#')
+  const [url, query] = _url.split('?')
 
   return leadingSlash(trailingSlash([
     '',
     locale,
     ...url.split('/').filter(p => !!p && p !== locale),
-    hash ? `#${hash}` : null,
-  ].filter(v => v != null).join('/')))
+  ].filter(v => v != null).join('/'))) + (hash ? `#${hash}` : '') + (query ? `?${query}` : '')
 }
 
 export function leadingSlash (str: string) {

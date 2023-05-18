@@ -6,6 +6,7 @@ import { VIcon } from '@/components/VIcon'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -15,49 +16,49 @@ import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, pick, useRender } from '@/util'
+import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
-// Types
-import type { MakeSlots } from '@/util'
-
-export type VBadgeSlots = MakeSlots<{
+export type VBadgeSlots = {
   default: []
   badge: []
-}>
+}
+
+export const makeVBadgeProps = propsFactory({
+  bordered: Boolean,
+  color: String,
+  content: [Number, String],
+  dot: Boolean,
+  floating: Boolean,
+  icon: IconValue,
+  inline: Boolean,
+  label: {
+    type: String,
+    default: '$vuetify.badge',
+  },
+  max: [Number, String],
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  offsetX: [Number, String],
+  offsetY: [Number, String],
+  textColor: String,
+
+  ...makeComponentProps(),
+  ...makeLocationProps({ location: 'top end' } as const),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+  ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
+}, 'v-badge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',
 
   inheritAttrs: false,
 
-  props: {
-    bordered: Boolean,
-    color: String,
-    content: [Number, String],
-    dot: Boolean,
-    floating: Boolean,
-    icon: IconValue,
-    inline: Boolean,
-    label: {
-      type: String,
-      default: '$vuetify.badge',
-    },
-    max: [Number, String],
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    offsetX: [Number, String],
-    offsetY: [Number, String],
-    textColor: String,
-
-    ...makeLocationProps({ location: 'top end' } as const),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-    ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-  },
+  props: makeVBadgeProps(),
 
   setup (props, ctx) {
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'color'))
@@ -81,7 +82,7 @@ export const VBadge = genericComponent<VBadgeSlots>()({
     useRender(() => {
       const value = Number(props.content)
       const content = (!props.max || isNaN(value)) ? props.content
-        : value <= props.max ? value
+        : value <= +props.max ? value
         : `${props.max}+`
 
       const [badgeAttrs, attrs] = pick(ctx.attrs as Record<string, any>, [
@@ -102,8 +103,10 @@ export const VBadge = genericComponent<VBadgeSlots>()({
               'v-badge--floating': props.floating,
               'v-badge--inline': props.inline,
             },
+            props.class,
           ]}
           { ...attrs }
+          style={ props.style }
         >
           <div class="v-badge__wrapper">
             { ctx.slots.default?.() }

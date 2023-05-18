@@ -6,6 +6,7 @@ import { VBtn } from '@/components/VBtn'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
@@ -14,8 +15,8 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { computed, ref } from 'vue'
-import { clamp, createRange, genericComponent, getUid, useRender } from '@/util'
+import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
+import { computed, shallowRef } from 'vue'
 
 // Types
 import type { Prop } from 'vue'
@@ -43,51 +44,54 @@ type VRatingSlots = {
   'item-label': [VRatingItemLabelSlot]
 }
 
+export const makeVRatingProps = propsFactory({
+  name: String,
+  itemAriaLabel: {
+    type: String,
+    default: '$vuetify.rating.ariaLabel.item',
+  },
+  activeColor: String,
+  color: String,
+  clearable: Boolean,
+  disabled: Boolean,
+  emptyIcon: {
+    type: IconValue,
+    default: '$ratingEmpty',
+  },
+  fullIcon: {
+    type: IconValue,
+    default: '$ratingFull',
+  },
+  halfIncrements: Boolean,
+  hover: Boolean,
+  length: {
+    type: [Number, String],
+    default: 5,
+  },
+  readonly: Boolean,
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+  itemLabels: Array as Prop<string[]>,
+  itemLabelPosition: {
+    type: String,
+    default: 'top',
+    validator: (v: any) => ['top', 'bottom'].includes(v),
+  },
+  ripple: Boolean,
+
+  ...makeComponentProps(),
+  ...makeDensityProps(),
+  ...makeSizeProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-rating')
+
 export const VRating = genericComponent<VRatingSlots>()({
   name: 'VRating',
 
-  props: {
-    name: String,
-    itemAriaLabel: {
-      type: String,
-      default: '$vuetify.rating.ariaLabel.item',
-    },
-    activeColor: String,
-    color: String,
-    clearable: Boolean,
-    disabled: Boolean,
-    emptyIcon: {
-      type: IconValue,
-      default: '$ratingEmpty',
-    },
-    fullIcon: {
-      type: IconValue,
-      default: '$ratingFull',
-    },
-    halfIncrements: Boolean,
-    hover: Boolean,
-    length: {
-      type: [Number, String],
-      default: 5,
-    },
-    readonly: Boolean,
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-    itemLabels: Array as Prop<string[]>,
-    itemLabelPosition: {
-      type: String,
-      default: 'top',
-      validator: (v: any) => ['top', 'bottom'].includes(v),
-    },
-    ripple: Boolean,
-
-    ...makeDensityProps(),
-    ...makeSizeProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVRatingProps(),
 
   emits: {
     'update:modelValue': (value: number | string) => true,
@@ -101,7 +105,7 @@ export const VRating = genericComponent<VRatingSlots>()({
 
     const range = computed(() => createRange(Number(props.length), 1))
     const increments = computed(() => range.value.flatMap(v => props.halfIncrements ? [v - 0.5, v] : [v]))
-    const hoverIndex = ref(-1)
+    const hoverIndex = shallowRef(-1)
 
     const itemState = computed(() => increments.value.map(value => {
       const isHovering = props.hover && hoverIndex.value > -1
@@ -214,7 +218,9 @@ export const VRating = genericComponent<VRatingSlots>()({
               'v-rating--readonly': props.readonly,
             },
             themeClasses.value,
+            props.class,
           ]}
+          style={ props.style }
         >
           <VRatingItem value={ 0 } index={ -1 } showStar={ false } />
 

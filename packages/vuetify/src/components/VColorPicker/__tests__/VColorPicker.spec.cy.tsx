@@ -99,7 +99,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(canvas).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
       .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{6}$/))
   })
@@ -118,7 +118,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(canvas).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
       .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{8}$/))
   })
@@ -137,7 +137,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(canvas).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
       .then(arr => expect(arr[0][0]).to.match(/^#[A-F0-9]{6}$/))
   })
@@ -156,7 +156,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(canvas).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
       .then(emits => {
         expect(emits[0][0]).to.haveOwnProperty('h')
@@ -180,7 +180,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(canvas).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
       .then(emits => {
         expect(emits[0][0]).to.haveOwnProperty('r')
@@ -224,7 +224,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(slider).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .then(emits => expect(emits[0][0]).to.not.equal('#0000ff'))
   })
 
@@ -242,7 +242,7 @@ describe('VColorPicker', () => {
 
         cy.wrap(slider).click(width / 2, height / 2)
       })
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .then(emits => expect(emits[0][0]).to.not.equal('#0000ff'))
   })
 
@@ -253,9 +253,11 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-swatches__swatch').eq(4).find('.v-color-picker-swatches__color').eq(0).as('color').click()
-      .get('@color').find('.v-icon').should('exist')
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.get('.v-color-picker-swatches__swatch').eq(4)
+      .find('.v-color-picker-swatches__color').eq(0).as('color')
+      .click()
+    cy.get('@color').find('.v-icon').should('exist')
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('have.length', 1)
   })
 
@@ -275,7 +277,7 @@ describe('VColorPicker', () => {
     })
 
     cy.get('.bg-primary').should('not.exist')
-      .get('.text-primary').should('not.exist')
+    cy.get('.text-primary').should('not.exist')
   })
 
   it('should not show dot or input values if no color is set', () => {
@@ -286,15 +288,15 @@ describe('VColorPicker', () => {
     ))
 
     cy.get('.v-color-picker-canvas__dot').should('not.exist')
-      .get('.v-color-picker-edit__input input').should('have.value', '')
-      .get('.v-color-picker-canvas canvas').then(canvas => {
-        const width = canvas.width() ?? 0
-        const height = canvas.height() ?? 0
+    cy.get('.v-color-picker-edit__input input').should('have.value', '')
+    cy.get('.v-color-picker-canvas canvas').then(canvas => {
+      const width = canvas.width() ?? 0
+      const height = canvas.height() ?? 0
 
-        cy.wrap(canvas).click(width / 2, height / 2)
-      })
-      .get('.v-color-picker-canvas__dot').should('exist')
-      .get('.v-color-picker-edit__input input').invoke('val').should('not.be.empty')
+      cy.wrap(canvas).click(width / 2, height / 2)
+    })
+    cy.get('.v-color-picker-canvas__dot').should('exist')
+    cy.get('.v-color-picker-edit__input input').invoke('val').should('not.be.empty')
   })
 
   it('should emit correct color when typing in hex field', () => {
@@ -304,10 +306,10 @@ describe('VColorPicker', () => {
       </Application>
     ))
 
-    cy.get('.v-color-picker-edit__input input')
+    cy.get('.v-color-picker-edit__input input').as('input')
       .type('FF00CC')
-      .blur()
-      .emitted(VColorPicker, 'update:modelValue')
+    cy.get('@input').blur()
+    cy.emitted(VColorPicker, 'update:modelValue')
       .should('deep.equal', [['#FF00CC']])
   })
 })

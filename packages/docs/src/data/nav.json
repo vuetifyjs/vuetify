@@ -117,6 +117,7 @@
       { "divider": true },
       { "subheader": "data-and-display" },
       "tables",
+      "virtual-scroller",
       { "divider": true },
       { "subheader": "grids" },
       "grids",
@@ -203,7 +204,18 @@
           "server-side-tables"
         ]
       },
-      "virtual-scroller"
+      {
+        "title": "dates",
+        "subfolder": "features"
+      },
+      {
+        "title": "infinite-scroller",
+        "subfolder": "components"
+      },
+      {
+        "title": "skeleton-loaders",
+        "subfolder": "components"
+      }
     ]
   },
   {
@@ -212,13 +224,14 @@
     "activeIcon": "mdi-human-male-board",
     "items": [
       "jobs-for-vue",
-      "ui-kits"
+      "ui-kits",
+      "themes"
     ]
   },
   {
     "title": "about",
-    "inactiveIcon": "mdi-vuetify",
-    "activeIcon": "mdi-vuetify",
+    "inactiveIcon": "$vuetify-outline",
+    "activeIcon": "$vuetify",
     "items": [
       "security-disclosure",
       "code-of-conduct"
