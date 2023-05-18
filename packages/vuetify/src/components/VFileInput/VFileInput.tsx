@@ -118,6 +118,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       isFocused.value ||
       props.active
     ))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -169,12 +170,16 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           v-model={ model.value }
           class={[
             'v-file-input',
+            {
+              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+            },
             props.class,
           ]}
           style={ props.style }
           onClick:prepend={ onClickPrepend }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{

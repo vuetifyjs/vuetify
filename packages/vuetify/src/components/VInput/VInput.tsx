@@ -35,6 +35,10 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  centerAffix: {
+    type: Boolean,
+    default: true,
+  },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
@@ -136,6 +140,9 @@ export const VInput = genericComponent<VInputSlots>()({
           class={[
             'v-input',
             `v-input--${props.direction}`,
+            {
+              'v-input--center-affix': props.centerAffix,
+            },
             densityClasses.value,
             validationClasses.value,
             props.class,

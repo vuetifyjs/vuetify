@@ -85,6 +85,8 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
       return props.counter
     })
 
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+
     function onIntersect (
       isIntersecting: boolean,
       entries: IntersectionObserverEntry[]
@@ -165,13 +167,14 @@ export const VTextField = genericComponent<VTextFieldSlots>()({
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
-              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-text-field--plain-underlined': ['plain', 'underlined'].includes(props.variant),
             },
             props.class,
           ]}
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{
