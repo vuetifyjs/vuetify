@@ -169,8 +169,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_start` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[0] }
                 />
@@ -178,8 +178,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_stop` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[1] }
                 />

@@ -39,7 +39,7 @@ export interface ValidationProps {
 
 export const makeValidationProps = propsFactory({
   disabled: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | null>,
     default: null,
   },
   error: Boolean,
@@ -54,7 +54,7 @@ export const makeValidationProps = propsFactory({
   name: String,
   label: String,
   readonly: {
-    type: Boolean,
+    type: Boolean as PropType<boolean | null>,
     default: null,
   },
   rules: {
