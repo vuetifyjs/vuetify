@@ -8,7 +8,6 @@
     item-value="name"
   ></v-data-table>
 </template>
-
 <script>
   export default {
     data: () => ({
@@ -73,6 +72,7 @@
         {
           name: 'KitKat',
           category: 'Candy',
+          dairy: 'Yes',
         },
       ],
     }),

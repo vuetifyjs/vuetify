@@ -3,8 +3,8 @@
     :headers="headers"
     :items="desserts"
     class="elevation-1"
-    density="compact"
     item-key="name"
+    items-per-page="5"
   ></v-data-table>
 </template>
 
@@ -94,17 +94,27 @@
         },
       ],
       headers: [
-        {
-          title: 'Dessert (100g serving)',
-          align: 'start',
-          sortable: false,
-          key: 'name',
-        },
-        { title: 'Calories', align: 'end', key: 'calories' },
-        { title: 'Fat (g)', align: 'end', key: 'fat' },
-        { title: 'Carbs (g)', align: 'end', key: 'carbs' },
-        { title: 'Protein (g)', align: 'end', key: 'protein' },
-        { title: 'Iron (%)', align: 'end', key: 'iron' },
+        [
+          {
+            title: 'Dessert (100g serving)',
+            align: 'start',
+            sortable: false,
+            key: 'name',
+            rowspan: 2,
+          },
+          {
+            title: 'Properties',
+            key: 'foo',
+            colspan: 5,
+          },
+        ],
+        [
+          { title: 'Calories', align: 'end', key: 'calories' },
+          { title: 'Fat (g)', align: 'end', key: 'fat' },
+          { title: 'Carbs (g)', align: 'end', key: 'carbs' },
+          { title: 'Protein (g)', align: 'end', key: 'protein' },
+          { title: 'Iron (%)', align: 'end', key: 'iron' },
+        ],
       ],
     }),
   }

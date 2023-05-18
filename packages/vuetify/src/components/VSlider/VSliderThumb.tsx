@@ -146,7 +146,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }
-          aria-readonly={ readonly.value }
+          aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
         >

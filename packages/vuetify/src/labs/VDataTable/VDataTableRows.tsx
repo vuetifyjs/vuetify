@@ -42,7 +42,6 @@ type ItemSlot = {
 }
 
 export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
-  default: []
   item: [ItemSlot]
   loading: []
   'group-header': [GroupHeaderSlot]

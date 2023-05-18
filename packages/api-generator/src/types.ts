@@ -1,5 +1,6 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { prettifyType } from './utils'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -13,9 +14,12 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
     if (definition.properties) {
-      // Exclude private properties
-      definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
+      definition.properties = Object.fromEntries(
+        Object.entries(definition.properties)
+          // Exclude private properties
+          .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
     return definition
   }
