@@ -235,10 +235,14 @@
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
-  top: calc(var(--v-input-padding-top) + var(--v-field-padding-top))
+  top: var(--v-input-padding-top)
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+
+  .v-field--variant-underlined &,
+  .v-field--variant-plain &
+    top: calc(var(--v-input-padding-top) + var(--v-field-padding-top))
 
   .v-field--center-affix &
     top: 50%
