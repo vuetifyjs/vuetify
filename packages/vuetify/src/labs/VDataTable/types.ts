@@ -29,7 +29,7 @@ export type InternalDataTableHeader = DataTableHeader & {
   lastFixed?: boolean
 }
 
-export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, unknown> }
+export type DataTableItem = InternalItem & { type: 'item', columns: Record<string, any> }
 
 export type GroupHeaderItem = {
   type: 'group-header'

@@ -23,7 +23,7 @@ type SliderProvide = {
   color: Ref<string | undefined>
   decimals: Ref<number>
   direction: Ref<'vertical' | 'horizontal'>
-  disabled: Ref<boolean | undefined>
+  disabled: Ref<boolean | null | undefined>
   elevation: Ref<number | string | undefined>
   min: Ref<number>
   max: Ref<number>
@@ -33,7 +33,7 @@ type SliderProvide = {
   onSliderTouchstart: (e: TouchEvent) => void
   parseMouseMove: (e: MouseEvent | TouchEvent) => number
   position: (val: number) => number
-  readonly: Ref<boolean | undefined>
+  readonly: Ref<boolean | null | undefined>
   rounded: Ref<boolean | number | string | undefined>
   roundValue: (value: number) => number
   thumbLabel: Ref<boolean | string | undefined>
@@ -73,9 +73,15 @@ function getPosition (e: MouseEvent | TouchEvent, position: 'clientX' | 'clientY
 }
 
 export const makeSliderProps = propsFactory({
-  disabled: Boolean,
+  disabled: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   error: Boolean,
-  readonly: Boolean,
+  readonly: {
+    type: Boolean as PropType<boolean | null>,
+    default: null,
+  },
   max: {
     type: [Number, String],
     default: 100,

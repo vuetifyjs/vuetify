@@ -67,13 +67,12 @@ export function createHeaders (
     const fixedRows: InternalDataTableHeader[][] = createRange(rowCount).map(() => [])
     const fixedOffsets = createRange(rowCount).fill(0)
 
-    let count = 0
     flat.forEach(({ column, row }) => {
-      const id = column.key ?? `data-table-column-${count++}`
+      const key = column.key
       for (let i = row; i <= row + (column.rowspan ?? 1) - 1; i++) {
         fixedRows[i].push({
           ...column,
-          key: id,
+          key,
           fixedOffset: fixedOffsets[i],
           sortable: column.sortable ?? !!column.key,
         })

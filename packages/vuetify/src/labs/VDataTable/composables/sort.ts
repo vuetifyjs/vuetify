@@ -21,7 +21,8 @@ export const makeDataTableSortProps = propsFactory({
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>
-  toggleSort: (key: string) => void
+  toggleSort: (column: InternalDataTableHeader) => void
+  isSorted: (column: InternalDataTableHeader) => boolean
 }> = Symbol.for('vuetify:data-table-sort')
 
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
@@ -49,18 +50,18 @@ export function provideSort (options: {
 }) {
   const { sortBy, mustSort, multiSort, page } = options
 
-  const toggleSort = (key: string) => {
+  const toggleSort = (column: InternalDataTableHeader) => {
     let newSortBy = sortBy.value.map(x => ({ ...x })) ?? []
-    const item = newSortBy.find(x => x.key === key)
+    const item = newSortBy.find(x => x.key === column.key)
 
     if (!item) {
-      if (multiSort.value) newSortBy = [...newSortBy, { key, order: 'asc' }]
-      else newSortBy = [{ key, order: 'asc' }]
+      if (multiSort.value) newSortBy = [...newSortBy, { key: column.key, order: 'asc' }]
+      else newSortBy = [{ key: column.key, order: 'asc' }]
     } else if (item.order === 'desc') {
       if (mustSort.value) {
         item.order = 'asc'
       } else {
-        newSortBy = newSortBy.filter(x => x.key !== key)
+        newSortBy = newSortBy.filter(x => x.key !== column.key)
       }
     } else {
       item.order = 'desc'
@@ -70,7 +71,11 @@ export function provideSort (options: {
     if (page) page.value = 1
   }
 
-  const data = { sortBy, toggleSort }
+  function isSorted (column: InternalDataTableHeader) {
+    return !!sortBy.value.find(item => item.key === column.key)
+  }
+
+  const data = { sortBy, toggleSort, isSorted }
 
   provide(VDataTableSortSymbol, data)
 
