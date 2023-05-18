@@ -15,6 +15,7 @@
   "dependencies": {
     "deepmerge": "^4.3.1",
     "piscina": "^3.2.0",
+    "prettier": "^2.8.7",
     "rimraf": "^3.0.2",
     "ts-morph": "^18.0.0",
     "vue": "^3.3.1",
