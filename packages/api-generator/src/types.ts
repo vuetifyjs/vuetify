@@ -244,11 +244,21 @@ const allowedRefs = [
   'FormValidationResult',
   'SortItem',
   'ListItem',
-  'InternalDataTableItem',
+  'Group',
   'DataTableItem',
   'DataTableHeader',
   'InternalDataTableHeader',
   'FilterFunction',
+  'DataIteratorItem',
+]
+const plainRefs = [
+  'Component',
+  'ComponentPublicInstance',
+  'ComponentInternalInstance',
+  'FunctionalComponent',
+  'DataTableItem',
+  'Group',
+  'DataIteratorItem',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -286,7 +296,7 @@ function formatDefinition (definition: Definition) {
       }, []).join('; ')} }`
       break
     case 'ref':
-      if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+      if (plainRefs.includes(definition.ref)) {
         formatted = definition.ref
       } else {
         formatted = definition.text
@@ -304,8 +314,8 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (allowedRefs.includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  if (allowedRefs.includes(formatted)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
   }
 }
 
@@ -332,7 +342,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
+    allowedRefs.includes(symbol?.getName()) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition
