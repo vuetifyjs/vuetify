@@ -8,7 +8,6 @@ import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
 import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
-import type { Group } from './composables/group'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
@@ -26,6 +25,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { UnwrapRef } from 'vue'
+import type { Group } from './composables/group'
 import type { DataTableItem, InternalDataTableHeader } from './types'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
