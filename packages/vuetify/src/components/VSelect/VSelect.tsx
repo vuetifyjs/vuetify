@@ -273,9 +273,10 @@ export const VSelect = genericComponent<new <
             'v-select',
             {
               'v-select--active-menu': menu.value,
-              'v-select--chips': !!props.chips || !!slots.selection,
+              'v-select--chips': !!props.chips,
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
+              'v-select--selection-slot': !!slots.selection,
             },
             props.class,
           ]}
