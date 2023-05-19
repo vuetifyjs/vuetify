@@ -1,5 +1,6 @@
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useLocale } from '@/composables'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
@@ -17,10 +18,6 @@ export const makeDataTableSortProps = propsFactory({
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
-  locale: {
-    type: String,
-    default: 'en',
-  },
 }, 'v-data-table-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
@@ -95,14 +92,15 @@ export function useSort () {
 }
 
 export function useSortedItems <T extends Record<string, any>> (
-  props: { customKeySort?: Record<string, DataTableCompareFunction>, locale: string },
+  props: { customKeySort?: Record<string, DataTableCompareFunction> },
   items: Ref<T[]>,
   sortBy: Ref<readonly SortItem[]>,
 ) {
+  const locale = useLocale()
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, props.locale, props.customKeySort)
+    return sortItems(items.value, sortBy.value, locale.current.value, props.customKeySort)
   })
 
   return { sortedItems }
