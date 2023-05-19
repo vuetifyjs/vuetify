@@ -108,11 +108,6 @@ jobs:
       - uses: ./.github/actions/yarn-install
       - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      - run: rm -rf release
-      - run: cp -r ./packages/vuetify/dist release
-      - run: rm ./release/_component-variables.sass
-      - run: for file in ./release/vuetify.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
-      - run: zip -jr "release/vuetify-${RELEASE_TAG}.zip" release/*
       - name: NPM Release
         run: bash scripts/deploy.sh
         env:
@@ -123,15 +118,6 @@ jobs:
         run: yarn conventional-github-releaser -p vuetify
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_name: vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_content_type: application/zip
 
   build-docs:
     name: Build docs
