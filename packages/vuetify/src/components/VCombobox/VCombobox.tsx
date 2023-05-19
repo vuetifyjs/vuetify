@@ -62,7 +62,9 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeVComboboxProps = propsFactory({
-  autoSelectFirst: Boolean,
+  autoSelectFirst: {
+    type: [Boolean, String] as PropType<boolean | 'exact'>,
+  },
   delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -199,12 +201,14 @@ export const VCombobox = genericComponent<new <
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
-    const highlightFirst = computed(() => (
-      props.autoSelectFirst &&
-      filteredItems.value.length > 0 &&
-      !isPristine.value &&
-      !listHasFocus.value
-    ))
+    const highlightFirst = computed(() => {
+      const selectFirst = props.autoSelectFirst === true ||
+        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+      return selectFirst &&
+        displayItems.value.length > 0 &&
+        !isPristine.value &&
+        !listHasFocus.value
+    })
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -366,10 +370,16 @@ export const VCombobox = genericComponent<new <
       selectionIndex.value = -1
       menu.value = false
 
-      if (!props.multiple || !search.value) return
-
-      model.value = [...model.value, transformItem(props, search.value)]
-      search.value = ''
+      if (
+        highlightFirst.value &&
+        !listHasFocus.value &&
+        !selections.value.some(({ value }) => value === displayItems.value[0].value)
+      ) {
+        select(displayItems.value[0])
+      } else if (props.multiple && search.value) {
+        model.value = [...model.value, transformItem(props, search.value)]
+        search.value = ''
+      }
     })
 
     useRender(() => {

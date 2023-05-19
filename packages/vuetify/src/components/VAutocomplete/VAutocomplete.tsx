@@ -27,9 +27,10 @@ import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } fr
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
+import type { PropType } from 'vue'
+import type { GenericProps } from '@/util'
 import type { FilterMatch } from '@/composables/filter'
 import type { InternalItem } from '@/composables/items'
-import type { GenericProps } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -61,7 +62,9 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeVAutocompleteProps = propsFactory({
-  autoSelectFirst: Boolean,
+  autoSelectFirst: {
+    type: [Boolean, String] as PropType<boolean | 'exact'>,
+  },
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -153,12 +156,14 @@ export const VAutocomplete = genericComponent<new <
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
-    const highlightFirst = computed(() => (
-      props.autoSelectFirst &&
-      filteredItems.value.length > 0 &&
-      !isPristine.value &&
-      !listHasFocus.value
-    ))
+    const highlightFirst = computed(() => {
+      const selectFirst = props.autoSelectFirst === true ||
+        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+      return selectFirst &&
+        displayItems.value.length > 0 &&
+        !isPristine.value &&
+        !listHasFocus.value
+    })
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -327,6 +332,13 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && !search.value) model.value = []
+        else if (
+          highlightFirst.value &&
+          !listHasFocus.value &&
+          !selections.value.some(({ value }) => value === displayItems.value[0].value)
+        ) {
+          select(displayItems.value[0])
+        }
         menu.value = false
         search.value = ''
         selectionIndex.value = -1
