@@ -1,0 +1,110 @@
+// Basil specific variables
+$basil-font-size: 16;
+$basil-tab-font-size: 1rem;
+$basil-tab-padding: 0 10px;
+$basil-tabs-slider-border-radius: 24px;
+$basil-tabs-slider-border-width: 2px;
+$basil-tabs-slider-wrapper-min-height: 40px;
+$basil-tabs-slider-wrapper-min-width: 100%;
+$basil-tabs-tab-width: 100%;
+
+// Preset variables
+$body-font-family: 'Montserrat', sans-serif;
+$border-radius-root: 0;
+$button-font-weight: 700;
+$button-icon-font-size: #{14 / $basil-font-size}rem;
+$button-outline-border-width: 2px;
+$dialog-elevation: 0;
+$heading-font-family: 'Lekton', sans-serif;
+$headings: (
+  'h1':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{96 / $basil-font-size}rem,
+    'weight': 600
+  ),
+  'h2':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{60 / $basil-font-size}rem,
+    'weight': 600
+  ),
+  'h3':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{48 / $basil-font-size}rem,
+    'weight': 600
+  ),
+  'h4':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{34 / $basil-font-size}rem,
+    'weight': 600
+  ),
+  'h5':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{24 / $basil-font-size}rem,
+    'weight': 500
+  ),
+  'h6':(
+    'font-family': $heading-font-family,
+    'letter-spacing': initial,
+    'size': #{21 / $basil-font-size}rem,
+    'weight': 700
+  ),
+  'subtitle-1':(
+    'font-family': $heading-font-family,
+    'letter-spacing': initial,
+    'size': #{17 / $basil-font-size}rem,
+    'weight': 700
+  ),
+  'subtitle-2':(
+    'font-family': $heading-font-family,
+    'letter-spacing': initial,
+    'size': #{15 / $basil-font-size}rem,
+    'weight': 700
+  ),
+  'body-1':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{16 / $basil-font-size}rem,
+    'weight': 600
+  ),
+  'body-2':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{14 / $basil-font-size}rem,
+    'weight': 400
+  ),
+  'caption':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{12 / $basil-font-size}rem,
+    'weight': 500
+  ),
+  'overline':(
+    'font-family': $body-font-family,
+    'letter-spacing': initial,
+    'size': #{10 / $basil-font-size}rem,
+    'weight': 400
+  )
+);
+$tabs-bar-background-color: transparent;
+$tabs-bar-height: 22px;
+$tabs-item-vertical-height: 40px;
+$tabs-item-letter-spacing: 0;
+
+$settings: (
+  body-font-family: $body-font-family,
+  border-radius-root: $border-radius-root,
+  button-font-weight: $button-font-weight,
+  button-icon-font-size: $button-icon-font-size,
+  button-outline-border-width: $button-outline-border-width,
+  dialog-elevation: $dialog-elevation,
+  heading-font-family: $heading-font-family,
+  tabs-bar-background-color: $tabs-bar-background-color,
+  tabs-bar-height: $tabs-bar-height,
+  tabs-item-vertical-height: $tabs-item-vertical-height,
+  tabs-item-letter-spacing: $tabs-item-letter-spacing,
+);

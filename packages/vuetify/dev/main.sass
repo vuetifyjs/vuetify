@@ -1,0 +1,4 @@
+@use '../src/blueprints/basil/variables' as basil
+@use 'sass:meta'
+
+@include meta.load-css('../settings', $with: basil.$settings)
