@@ -10,7 +10,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
-    type: Array as PropType<SortItem[]>,
+    type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
 }, 'data-table-group')
@@ -25,7 +25,7 @@ const VDataTableGroupSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
-  groupBy: SortItem[]
+  groupBy: readonly SortItem[]
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
 }
 
@@ -95,7 +95,7 @@ export function useGroupBy () {
   return data
 }
 
-function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
+function groupItemsByProperty (items: readonly DataTableItem[], groupBy: string) {
   if (!items.length) return []
 
   const groups = new Map<any, DataTableItem[]>()
@@ -111,7 +111,7 @@ function groupItemsByProperty (items: DataTableItem[], groupBy: string) {
   return groups
 }
 
-function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefix = 'root') {
+function groupItems (items: readonly DataTableItem[], groupBy: string[], depth = 0, prefix = 'root') {
   if (!groupBy.length) return []
 
   const groupedItems = groupItemsByProperty(items, groupBy[0])
@@ -134,7 +134,7 @@ function groupItems (items: DataTableItem[], groupBy: string[], depth = 0, prefi
   return groups
 }
 
-function flattenItems (items: (DataTableItem | GroupHeaderItem)[], opened: Set<string>) {
+function flattenItems (items: readonly (DataTableItem | GroupHeaderItem)[], opened: Set<string>) {
   const flatItems: (DataTableItem | GroupHeaderItem)[] = []
 
   for (const item of items) {

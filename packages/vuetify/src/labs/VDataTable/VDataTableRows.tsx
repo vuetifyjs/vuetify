@@ -56,7 +56,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<InternalDataTableItem[]>,
+    type: Array as PropType<readonly InternalDataTableItem[]>,
     default: () => ([]),
   },
   noDataText: {

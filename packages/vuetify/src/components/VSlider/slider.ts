@@ -45,7 +45,7 @@ type SliderProvide = {
   trackColor: Ref<string | undefined>
   trackFillColor: Ref<string | undefined>
   trackSize: Ref<number>
-  ticks: Ref<number[] | Record<string, string> | undefined>
+  ticks: Ref<readonly number[] | Record<string, string> | undefined>
   tickSize: Ref<number>
   trackContainerRef: Ref<VSliderTrack | undefined>
   vertical: Ref<boolean>
@@ -110,7 +110,7 @@ export const makeSliderProps = propsFactory({
     validator: (v: any) => typeof v === 'boolean' || v === 'always',
   },
   ticks: {
-    type: [Array, Object] as PropType<number[] | Record<number, string>>,
+    type: [Array, Object] as PropType<readonly number[] | Record<number, string>>,
   },
   tickSize: {
     type: [Number, String],
