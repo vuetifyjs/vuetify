@@ -3,11 +3,11 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide } from 'vue'
-import { propsFactory } from '@/util'
+import { propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { ItemProps } from '@/composables/items'
+import type { DataTableItemProps } from './items'
 import type { DataTableItem } from '../types'
 
 export const makeDataTableSelectProps = propsFactory({
@@ -19,36 +19,36 @@ export const makeDataTableSelectProps = propsFactory({
 }, 'v-data-table-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<{
-  toggleSelect: (item: DataTableItem) => void
-  select: (items: DataTableItem[], value: boolean) => void
+  toggleSelect: (item: any) => void
+  select: (items: any[], value: boolean) => void
   selectAll: (value: boolean) => void
-  isSelected: (items: DataTableItem[]) => boolean
-  isSomeSelected: (items: DataTableItem[]) => boolean
+  isSelected: (items: any[]) => boolean
+  isSomeSelected: (items: any[]) => boolean
   someSelected: Ref<boolean>
   allSelected: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-selection')
 
-type SelectionProps = Pick<ItemProps, 'itemValue'> & {
+type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
   modelValue: readonly any[]
   'onUpdate:modelValue': ((value: any[]) => void) | undefined
 }
 
-export function provideSelection (props: SelectionProps, allItems: Ref<DataTableItem[]>) {
+export function provideSelection <T extends DataTableItem> (props: SelectionProps, allItems: Ref<T[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {
     return new Set(v)
   }, v => {
     return [...v.values()]
   })
 
-  function isSelected (items: DataTableItem[]) {
-    return items.every(item => selected.value.has(item.value))
+  function isSelected (items: T | T[]) {
+    return wrapInArray(items).every(item => selected.value.has(item.value))
   }
 
-  function isSomeSelected (items: DataTableItem[]) {
-    return items.some(item => selected.value.has(item.value))
+  function isSomeSelected (items: T | T[]) {
+    return wrapInArray(items).some(item => selected.value.has(item.value))
   }
 
-  function select (items: DataTableItem[], value: boolean) {
+  function select (items: T[], value: boolean) {
     const newSelected = new Set(selected.value)
 
     for (const item of items) {
@@ -59,7 +59,7 @@ export function provideSelection (props: SelectionProps, allItems: Ref<DataTable
     selected.value = newSelected
   }
 
-  function toggleSelect (item: DataTableItem) {
+  function toggleSelect (item: T) {
     select([item], !isSelected([item]))
   }
 

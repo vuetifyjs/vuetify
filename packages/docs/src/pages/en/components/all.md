@@ -306,6 +306,12 @@ These components are used to display data and information in a variety of ways.
 
 <v-row>
 
+<components-list-item name="Data iterator component" src="data-iterators" placeholder>
+
+  The data iterator component provides an easy interface for paginating and sorting data
+
+</components-list-item>
+
 <components-list-item name="Data table component"  src="data-tables/basics" placeholder>
 
   Data tables are used to display large amounts of data in a small amount of space

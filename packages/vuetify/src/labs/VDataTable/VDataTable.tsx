@@ -25,7 +25,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { UnwrapRef } from 'vue'
-import type { DataTableItem, InternalDataTableHeader, InternalDataTableItem } from './types'
+import type { Group } from './composables/group'
+import type { DataTableItem, InternalDataTableHeader } from './types'
 import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 
@@ -46,8 +47,8 @@ export type VDataTableSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: DataTableItem[]
-  groupedItems: InternalDataTableItem[]
+  items: readonly DataTableItem[]
+  groupedItems: readonly (DataTableItem | Group<DataTableItem>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -115,14 +116,13 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
 
     const { items } = useDataTableItems(props, columns)
 
-    const filterKeys = computed(() => columns.value.map(c => 'columns.' + c.key))
     const search = toRef(props, 'search')
-    const { filteredItems } = useFilter<DataTableItem>(props, items, search, { filterKeys })
+    const { filteredItems } = useFilter(props, items, search, { transform: item => item.columns })
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
     const { sortByWithGroups, opened, extractRows, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
 
-    const { sortedItems } = useSortedItems(filteredItems, sortByWithGroups, columns)
+    const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
     const itemsLength = computed(() => flatItems.value.length)
 

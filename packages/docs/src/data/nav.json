@@ -192,6 +192,10 @@
         "subfolder": "components"
       },
       {
+        "title": "data-iterators",
+        "subfolder": "components"
+      },
+      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",

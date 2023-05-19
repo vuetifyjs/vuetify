@@ -14,16 +14,16 @@ import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { GroupHeaderItem } from './types'
+import type { Group } from './composables/group'
 
 export type VDataTableGroupHeaderRowSlots = {
-  'data-table-group': [{ item: GroupHeaderItem, count: number, props: Record<string, unknown> }]
+  'data-table-group': [{ item: Group, count: number, props: Record<string, unknown> }]
   'data-table-select': [{ props: Record<string, unknown> }]
 }
 
 export const makeVDataTableGroupHeaderRowProps = propsFactory({
   item: {
-    type: Object as PropType<GroupHeaderItem>,
+    type: Object as PropType<Group>,
     required: true,
   },
 }, 'v-data-table-group-header-row')

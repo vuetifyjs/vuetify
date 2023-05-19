@@ -16,7 +16,7 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
-import { useItems } from '@/composables/items'
+import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
@@ -30,7 +30,7 @@ import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 import type { FilterMatch } from '@/composables/filter'
-import type { InternalItem } from '@/composables/items'
+import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -90,9 +90,9 @@ export const VAutocomplete = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: InternalItem<Item>, index: number }]
+    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: ListItem<Item>, index: number }]
     'prepend-item': []
     'append-item': []
     'no-data': []
@@ -296,7 +296,7 @@ export const VAutocomplete = genericComponent<new <
 
     const isSelecting = shallowRef(false)
 
-    function select (item: InternalItem) {
+    function select (item: ListItem) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 

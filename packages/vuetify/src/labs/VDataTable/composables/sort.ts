@@ -1,5 +1,6 @@
 // Composables
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useLocale } from '@/composables'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'
@@ -7,14 +8,14 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { InternalItem } from '@/composables/items'
-import type { DataTableCompareFunction, DataTableItem, InternalDataTableHeader } from '../types'
+import type { DataTableCompareFunction, InternalDataTableHeader } from '../types'
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
     type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
+  customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
 }, 'v-data-table-sort')
@@ -90,26 +91,22 @@ export function useSort () {
   return data
 }
 
-export function useSortedItems (items: Ref<DataTableItem[]>, sortBy: Ref<readonly SortItem[]>, columns: Ref<InternalDataTableHeader[]>) {
-  // TODO: Put this in separate prop customKeySort to match filter composable?
-  const customSorters = computed(() => {
-    return columns.value.reduce<Record<string, DataTableCompareFunction>>((obj, item) => {
-      if (item.sort) obj[item.key] = item.sort
-
-      return obj
-    }, {})
-  })
-
+export function useSortedItems <T extends Record<string, any>> (
+  props: { customKeySort?: Record<string, DataTableCompareFunction> },
+  items: Ref<T[]>,
+  sortBy: Ref<readonly SortItem[]>,
+) {
+  const locale = useLocale()
   const sortedItems = computed(() => {
     if (!sortBy.value.length) return items.value
 
-    return sortItems(items.value, sortBy.value, 'en', customSorters.value)
+    return sortItems(items.value, sortBy.value, locale.current.value, props.customKeySort)
   })
 
   return { sortedItems }
 }
 
-export function sortItems<T extends InternalItem> (
+export function sortItems<T extends Record<string, any>> (
   items: T[],
   sortByItems: readonly SortItem[],
   locale: string,
@@ -120,7 +117,7 @@ export function sortItems<T extends InternalItem> (
   return [...items].sort((a, b) => {
     for (let i = 0; i < sortByItems.length; i++) {
       const sortKey = sortByItems[i].key
-      const sortOrder = sortByItems[i].order
+      const sortOrder = sortByItems[i].order ?? 'asc'
 
       if (sortOrder === false) continue
 

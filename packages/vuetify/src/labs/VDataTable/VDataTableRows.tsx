@@ -13,29 +13,32 @@ import { useGroupBy } from './composables/group'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { DataTableItem, GroupHeaderItem, InternalDataTableHeader, InternalDataTableItem } from './types'
 import type { PropType } from 'vue'
+import type { Group, provideGroupBy } from './composables/group'
+import type { provideExpanded } from './composables/expand'
+import type { provideSelection } from './composables/select'
+import type { DataTableItem, InternalDataTableHeader } from './types'
 
 type GroupHeaderSlot = {
   index: number
-  item: GroupHeaderItem
+  item: Group
   columns: InternalDataTableHeader[]
-  isExpanded: (item: DataTableItem) => boolean
-  toggleExpand: (item: DataTableItem) => void
-  isSelected: (items: DataTableItem[]) => boolean
-  toggleSelect: (item: DataTableItem) => void
-  toggleGroup: (group: GroupHeaderItem) => void
-  isGroupOpen: (group: GroupHeaderItem) => boolean
+  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
+  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
+  isSelected: ReturnType<typeof provideSelection>['isSelected']
+  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
+  toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
+  isGroupOpen: ReturnType<typeof provideGroupBy>['toggleGroup']
 }
 
 type ItemSlot = {
   index: number
   item: DataTableItem
   columns: InternalDataTableHeader[]
-  isExpanded: (item: DataTableItem) => boolean
-  toggleExpand: (item: DataTableItem) => void
-  isSelected: (items: DataTableItem[]) => boolean
-  toggleSelect: (item: DataTableItem) => void
+  isExpanded: ReturnType<typeof provideExpanded>['isExpanded']
+  toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
+  isSelected: ReturnType<typeof provideSelection>['isSelected']
+  toggleSelect: ReturnType<typeof provideSelection>['toggleSelect']
 }
 
 export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
@@ -56,7 +59,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<readonly InternalDataTableItem[]>,
+    type: Array as PropType<readonly (DataTableItem | Group)[]>,
     default: () => ([]),
   },
   noDataText: {
@@ -109,7 +112,7 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
       return (
         <>
           { props.items.map((item, index) => {
-            if (item.type === 'group-header') {
+            if (item.type === 'group') {
               return slots['group-header'] ? slots['group-header']({
                 index,
                 item,
