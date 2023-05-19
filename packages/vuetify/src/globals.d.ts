@@ -107,6 +107,10 @@ declare module '@vue/runtime-core' {
   export interface App {
     $nuxt?: { hook: (name: string, fn: () => void) => void }
   }
+
+  export interface VNode {
+    ctx: ComponentInternalInstance | null
+  }
 }
 
 declare module '@vue/runtime-dom' {
