@@ -40,7 +40,7 @@ export const makeVInputProps = propsFactory({
   hint: String,
   persistentHint: Boolean,
   messages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
   direction: {

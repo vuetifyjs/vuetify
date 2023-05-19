@@ -19,7 +19,7 @@ import { extractColor, modes, nullColor } from './util'
 import { onMounted, ref } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
+import type { DeepReadonly, PropType } from 'vue'
 import type { Color, HSV } from '@/util'
 
 export const makeVPickerProps = propsFactory({
@@ -41,12 +41,12 @@ export const makeVPickerProps = propsFactory({
     validator: (v: string) => Object.keys(modes).includes(v),
   },
   modes: {
-    type: Array as PropType<(keyof typeof modes)[]>,
+    type: Array as PropType<readonly (keyof typeof modes)[]>,
     default: () => Object.keys(modes),
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },
   showSwatches: Boolean,
-  swatches: Array as PropType<Color[][]>,
+  swatches: Array as PropType<DeepReadonly<Color[][]>>,
   swatchesMaxHeight: {
     type: [Number, String],
     default: 150,

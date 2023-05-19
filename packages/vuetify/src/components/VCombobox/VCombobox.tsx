@@ -63,7 +63,7 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
 
 export const makeVComboboxProps = propsFactory({
   autoSelectFirst: Boolean,
-  delimiters: Array as PropType<string[]>,
+  delimiters: Array as PropType<readonly string[]>,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
   ...makeSelectProps({ hideNoData: true, returnObject: true }),

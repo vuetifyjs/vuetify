@@ -36,7 +36,7 @@ export const makeVColorPickerEditProps = propsFactory({
     validator: (v: string) => Object.keys(modes).includes(v),
   },
   modes: {
-    type: Array as PropType<(keyof typeof modes)[]>,
+    type: Array as PropType<readonly (keyof typeof modes)[]>,
     default: () => Object.keys(modes),
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },

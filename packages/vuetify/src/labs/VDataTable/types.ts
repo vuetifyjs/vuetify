@@ -37,7 +37,7 @@ export type GroupHeaderItem = {
   key: string
   value: string
   depth: number
-  items: (GroupHeaderItem | DataTableItem)[]
+  items: readonly (GroupHeaderItem | DataTableItem)[]
 }
 
 export type InternalDataTableItem = DataTableItem | GroupHeaderItem

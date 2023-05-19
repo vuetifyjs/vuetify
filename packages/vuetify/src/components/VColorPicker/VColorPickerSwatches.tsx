@@ -23,11 +23,11 @@ import colors from '@/util/colors'
 
 // Types
 import type { Color, HSV } from '@/util'
-import type { PropType } from 'vue'
+import type { DeepReadonly, PropType } from 'vue'
 
 export const makeVColorPickerSwatchesProps = propsFactory({
   swatches: {
-    type: Array as PropType<Color[][]>,
+    type: Array as PropType<DeepReadonly<Color[][]>>,
     default: () => parseDefaultColors(colors),
   },
   disabled: Boolean,

@@ -25,12 +25,12 @@ export type VListChildrenSlots<T> = {
 }
 
 export const makeVListChildrenProps = propsFactory({
-  items: Array as PropType<InternalListItem[]>,
+  items: Array as PropType<readonly InternalListItem[]>,
 }, 'v-list-children')
 
 export const VListChildren = genericComponent<new <T extends InternalListItem>(
   props: {
-    items?: T[]
+    items?: readonly T[]
   },
   slots: VListChildrenSlots<T>
 ) => GenericProps<typeof props, typeof slots>>()({
