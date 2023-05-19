@@ -2,7 +2,7 @@ import { sortItems } from '../composables/sort'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { transformItems } from '@/composables/items'
+import { transformItems } from '@/composables/list-items'
 
 describe('VDataTable - sorting', () => {
   it('should sort items by single column', () => {

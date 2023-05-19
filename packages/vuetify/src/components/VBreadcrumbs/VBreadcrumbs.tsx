@@ -42,7 +42,7 @@ export const makeVBreadcrumbsProps = propsFactory({
   },
   icon: IconValue,
   items: {
-    type: Array as PropType<BreadcrumbItem[]>,
+    type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
 
@@ -50,16 +50,19 @@ export const makeVBreadcrumbsProps = propsFactory({
   ...makeDensityProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'ul' }),
-}, 'v-breacrumbs')
+}, 'v-breadcrumbs')
 
-export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, {
-  prepend: []
-  title: [{ item: T, index: number }]
-  divider: [{ item: T, index: number }]
-  default: []
-}>>()({
+export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
+  props: {
+    items?: T[]
+  },
+  slots: {
+    prepend: []
+    title: [{ item: T, index: number }]
+    divider: [{ item: T, index: number }]
+    default: []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBreadcrumbs',
 
   props: makeVBreadcrumbsProps(),

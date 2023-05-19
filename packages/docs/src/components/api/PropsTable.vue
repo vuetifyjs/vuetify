@@ -5,7 +5,7 @@
         <NameCell section="props" :name="kebabCase(item.name)" />
 
         <td>
-          <PrismCell :code="getType(item)" />
+          <PrismCell :code="item.formatted" />
         </td>
 
         <td>
@@ -23,7 +23,6 @@
   import PrismCell from './PrismCell.vue'
 
   // Utilities
-  import { getType } from './utils'
   import { kebabCase } from 'lodash-es'
 
   const headers = ['name', 'type', 'default']

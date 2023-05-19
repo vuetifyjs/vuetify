@@ -11,7 +11,7 @@ import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeItemsProps } from '@/composables/items'
+import { makeItemsProps } from '@/composables/list-items'
 import { makeNestedProps, useNested } from '@/composables/nested/nested'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
@@ -26,11 +26,11 @@ import { focusChild, genericComponent, getPropertyFromItem, pick, propsFactory, 
 
 // Types
 import type { GenericProps } from '@/util'
-import type { InternalItem, ItemProps } from '@/composables/items'
+import type { ItemProps, ListItem } from '@/composables/list-items'
 import type { VListChildrenSlots } from './VListChildren'
 import type { PropType } from 'vue'
 
-export interface InternalListItem<T = any> extends InternalItem<T> {
+export interface InternalListItem<T = any> extends ListItem<T> {
   type?: 'item' | 'subheader' | 'divider'
 }
 
@@ -78,6 +78,8 @@ function useListItems (props: ItemProps & { itemType: string }) {
 }
 
 export const makeVListProps = propsFactory({
+  baseColor: String,
+  /* @deprecated */
   activeColor: String,
   activeClass: String,
   bgColor: String,
@@ -108,9 +110,12 @@ export const makeVListProps = propsFactory({
   ...makeVariantProps({ variant: 'text' } as const),
 }, 'v-list')
 
-export const VList = genericComponent<new <T>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, VListChildrenSlots<T>>>()({
+export const VList = genericComponent<new <T>(
+  props: {
+    items?: T[]
+  },
+  slots: VListChildrenSlots<T>
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VList',
 
   props: makeVListProps(),
@@ -134,6 +139,7 @@ export const VList = genericComponent<new <T>(props: {
     const { open, select } = useNested(props)
     const lineClasses = computed(() => props.lines ? `v-list--${props.lines}-line` : undefined)
     const activeColor = toRef(props, 'activeColor')
+    const baseColor = toRef(props, 'baseColor')
     const color = toRef(props, 'color')
 
     createList()
@@ -141,11 +147,13 @@ export const VList = genericComponent<new <T>(props: {
     provideDefaults({
       VListGroup: {
         activeColor,
+        baseColor,
         color,
       },
       VListItem: {
         activeClass: toRef(props, 'activeClass'),
         activeColor,
+        baseColor,
         color,
         density: toRef(props, 'density'),
         disabled: toRef(props, 'disabled'),

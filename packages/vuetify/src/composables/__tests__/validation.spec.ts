@@ -110,6 +110,8 @@ describe('validation', () => {
       modelValue: '',
     })
 
+    await nextTick()
+
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()
 
@@ -135,6 +137,8 @@ describe('validation', () => {
     expect(wrapper.vm.isValid).toBe(true)
 
     wrapper.vm.reset()
+    await nextTick() // model update
+    await nextTick() // await rules
 
     expect(wrapper.vm.isPristine).toBe(true)
     expect(wrapper.vm.isValid).toBeNull()

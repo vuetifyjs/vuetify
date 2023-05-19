@@ -18,7 +18,7 @@ import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 export type VSliderThumbSlots = {
-  'thumb-label': []
+  'thumb-label': [{ modelValue: number }]
 }
 
 export const makeVSliderThumbProps = propsFactory({
@@ -146,7 +146,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }
-          aria-readonly={ readonly.value }
+          aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
         >

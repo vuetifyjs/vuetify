@@ -81,6 +81,7 @@ export {
   mdiCity,
   mdiClipboardText,
   mdiClock,
+  mdiClockOutline,
   mdiClockStart,
   mdiClockTimeFourOutline,
   mdiClose,

@@ -15,7 +15,11 @@ export const makeVFormProps = propsFactory({
   ...makeFormProps(),
 }, 'v-form')
 
-export const VForm = genericComponent()({
+type VFormSlots = {
+  default: [ReturnType<typeof createForm>]
+}
+
+export const VForm = genericComponent<VFormSlots>()({
   name: 'VForm',
 
   props: makeVFormProps(),

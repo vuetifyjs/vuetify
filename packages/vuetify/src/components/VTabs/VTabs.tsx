@@ -22,7 +22,7 @@ import { VTabsSymbol } from './shared'
 
 export type TabItem = string | Record<string, any>
 
-function parseItems (items: TabItem[] | undefined) {
+function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []
 
   return items.map(item => {
@@ -40,7 +40,7 @@ export const makeVTabsProps = propsFactory({
   color: String,
   fixedTabs: Boolean,
   items: {
-    type: Array as PropType<TabItem[]>,
+    type: Array as PropType<readonly TabItem[]>,
     default: () => ([]),
   },
   stacked: Boolean,

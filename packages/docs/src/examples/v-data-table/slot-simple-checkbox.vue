@@ -6,7 +6,7 @@
   >
     <template v-slot:item.glutenfree="{ item }">
       <v-checkbox-btn
-        v-model="item.value.glutenfree"
+        v-model="item.columns.glutenfree"
         disabled
       ></v-checkbox-btn>
     </template>

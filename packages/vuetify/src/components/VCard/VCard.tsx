@@ -34,6 +34,7 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VCardItemSlots } from './VCardItem'
 import type { LoaderSlotProps } from '@/composables/loader'
 
 export const makeVCardProps = propsFactory({
@@ -72,16 +73,13 @@ export const makeVCardProps = propsFactory({
   ...makeVariantProps({ variant: 'elevated' } as const),
 }, 'v-card')
 
-export type VCardSlots = {
+export type VCardSlots = VCardItemSlots & {
   default: []
   actions: []
-  title: []
-  subtitle: []
   text: []
   loader: [LoaderSlotProps]
   image: []
-  prepend: []
-  append: []
+  item: []
 }
 
 export const VCard = genericComponent<VCardSlots>()({

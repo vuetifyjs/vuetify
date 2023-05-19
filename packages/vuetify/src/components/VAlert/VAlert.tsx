@@ -90,7 +90,7 @@ export type VAlertSlots = {
   title: []
   text: []
   append: []
-  close: []
+  close: [{ props: Record<string, any> }]
 }
 
 export const VAlert = genericComponent<VAlertSlots>()({

@@ -29,6 +29,7 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
 export const makeVResponsiveProps = propsFactory({
   aspectRatio: [String, Number],
   contentClass: String,
+  inline: Boolean,
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
@@ -47,6 +48,7 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
       <div
         class={[
           'v-responsive',
+          { 'v-responsive--inline': props.inline },
           props.class,
         ]}
         style={[
