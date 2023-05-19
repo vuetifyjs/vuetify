@@ -326,4 +326,27 @@ describe('VAutocomplete', () => {
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-autocomplete--active-menu')
   })
+
+  it('should auto-select-first item when pressing enter', () => {
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-autocomplete input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-autocomplete input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
+  })
 })
