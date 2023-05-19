@@ -276,6 +276,7 @@ export const VSelect = genericComponent<new <
               'v-select--chips': !!props.chips,
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
+              'v-select--selection-slot': !!slots.selection,
             },
             props.class,
           ]}
@@ -319,25 +320,23 @@ export const VSelect = genericComponent<new <
                       { slots['prepend-item']?.() }
 
                       { displayItems.value.map((item, index) => {
-                        if (slots.item) {
-                          return slots.item?.({
-                            item,
-                            index,
-                            props: mergeProps(item.props, { onClick: () => select(item) }),
-                          })
-                        }
+                        const itemProps = mergeProps(item.props, {
+                          key: index,
+                          onClick: () => select(item),
+                        })
 
-                        return (
-                          <VListItem
-                            key={ index }
-                            { ...item.props }
-                            onClick={ () => select(item) }
-                          >
+                        return slots.item?.({
+                          item,
+                          index,
+                          props: itemProps,
+                        }) ?? (
+                          <VListItem { ...itemProps }>
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
                                   { props.multiple && !props.hideSelected ? (
                                     <VCheckboxBtn
+                                      key={ item.value }
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"

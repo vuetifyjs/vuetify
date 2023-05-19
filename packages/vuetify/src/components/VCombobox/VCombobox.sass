@@ -16,6 +16,9 @@
     &.v-field
       cursor: text
 
+    &--variant-outlined
+      --combobox-chips-margin-bottom: #{$combobox-chips-margin-top}
+
   .v-field
     .v-field__input
       > input
@@ -52,7 +55,11 @@
     line-height: inherit
     max-width: 100%
 
-  &--chips
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--combobox-chips-margin-bottom) + $combobox-chips-margin-top)
+
     .v-combobox__selection
       margin-top: $combobox-chips-margin-top
       margin-bottom: var(--combobox-chips-margin-bottom)
