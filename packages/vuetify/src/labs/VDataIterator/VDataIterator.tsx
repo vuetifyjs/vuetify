@@ -39,8 +39,8 @@ type VDataIteratorSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: DataIteratorItem[]
-  groupedItems: (DataIteratorItem | Group<DataIteratorItem>)[]
+  items: readonly DataIteratorItem[]
+  groupedItems: readonly (DataIteratorItem | Group<DataIteratorItem>)[]
 }
 
 export type VDataIteratorSlots = {

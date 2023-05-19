@@ -21,12 +21,12 @@ export interface Group<T = any> {
   id: string
   key: string
   value: any
-  items: (T | Group<T>)[]
+  items: readonly (T | Group<T>)[]
 }
 
 export const makeDataTableGroupProps = propsFactory({
   groupBy: {
-    type: Array as PropType<SortItem[]>,
+    type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
 }, 'data-table-group')
@@ -41,7 +41,7 @@ const VDataTableGroupSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-group')
 
 type GroupProps = {
-  groupBy: SortItem[]
+  groupBy: readonly SortItem[]
   'onUpdate:groupBy': ((value: SortItem[]) => void) | undefined
 }
 
@@ -74,7 +74,7 @@ export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, so
     opened.value = newOpened
   }
 
-  function extractRows <T extends GroupableItem> (items: (T | Group<T>)[]) {
+  function extractRows <T extends GroupableItem> (items: readonly (T | Group<T>)[]) {
     function dive (group: Group<T>): T[] {
       const arr = []
 
@@ -112,7 +112,7 @@ export function useGroupBy () {
   return data
 }
 
-function groupItemsByProperty <T extends GroupableItem> (items: T[], groupBy: string) {
+function groupItemsByProperty <T extends GroupableItem> (items: readonly T[], groupBy: string) {
   if (!items.length) return []
 
   const groups = new Map<any, T[]>()
@@ -128,7 +128,7 @@ function groupItemsByProperty <T extends GroupableItem> (items: T[], groupBy: st
   return groups
 }
 
-function groupItems <T extends GroupableItem> (items: T[], groupBy: string[], depth = 0, prefix = 'root') {
+function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: readonly string[], depth = 0, prefix = 'root') {
   if (!groupBy.length) return []
 
   const groupedItems = groupItemsByProperty(items, groupBy[0])
@@ -151,7 +151,7 @@ function groupItems <T extends GroupableItem> (items: T[], groupBy: string[], de
   return groups
 }
 
-function flattenItems <T extends GroupableItem> (items: (T | Group<T>)[], opened: Set<string>): (T | Group<T>)[] {
+function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[], opened: Set<string>): readonly (T | Group<T>)[] {
   const flatItems: (T | Group<T>)[] = []
 
   for (const item of items) {

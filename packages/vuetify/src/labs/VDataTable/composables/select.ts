@@ -13,7 +13,7 @@ import type { DataTableItem } from '../types'
 export const makeDataTableSelectProps = propsFactory({
   showSelect: Boolean,
   modelValue: {
-    type: Array as PropType<any[]>,
+    type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
 }, 'v-data-table-select')
@@ -28,10 +28,10 @@ export const VDataTableSelectionSymbol: InjectionKey<{
   allSelected: Ref<boolean>
 }> = Symbol.for('vuetify:data-table-selection')
 
-type SelectionProps = {
-  modelValue: any[]
+type SelectionProps = Pick<DataTableItemProps, 'itemValue'> & {
+  modelValue: readonly any[]
   'onUpdate:modelValue': ((value: any[]) => void) | undefined
-} & Pick<DataTableItemProps, 'itemValue'>
+}
 
 export function provideSelection <T extends DataTableItem> (props: SelectionProps, allItems: Ref<T[]>) {
   const selected = useProxiedModel(props, 'modelValue', props.modelValue, v => {

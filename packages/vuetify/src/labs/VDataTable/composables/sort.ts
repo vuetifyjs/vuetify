@@ -11,7 +11,7 @@ import type { DataTableCompareFunction, InternalDataTableHeader } from '../types
 
 export const makeDataTableSortProps = propsFactory({
   sortBy: {
-    type: Array as PropType<SortItem[]>,
+    type: Array as PropType<readonly SortItem[]>,
     default: () => ([]),
   },
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
@@ -32,7 +32,7 @@ const VDataTableSortSymbol: InjectionKey<{
 export type SortItem = { key: string, order?: boolean | 'asc' | 'desc' }
 
 type SortProps = {
-  sortBy: SortItem[]
+  sortBy: readonly SortItem[]
   'onUpdate:sortBy': ((value: any) => void) | undefined
   mustSort: boolean
   multiSort: boolean

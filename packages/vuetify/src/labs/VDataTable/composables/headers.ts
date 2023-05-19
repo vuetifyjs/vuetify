@@ -3,13 +3,13 @@ import { inject, provide, ref, watch } from 'vue'
 import { createRange, propsFactory } from '@/util'
 
 // Types
-import type { InjectionKey, PropType, Ref } from 'vue'
+import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableHeader, InternalDataTableHeader } from '../types'
 import type { SortItem } from './sort'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
-    type: Array as PropType<DataTableHeader[] | DataTableHeader[][]>,
+    type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
 }, 'v-data-table-header')
@@ -20,7 +20,7 @@ export const VDataTableHeadersSymbol: InjectionKey<{
 }> = Symbol.for('vuetify:data-table-headers')
 
 type HeaderProps = {
-  headers: DataTableHeader[] | DataTableHeader[][]
+  headers: DeepReadonly<DataTableHeader[] | DataTableHeader[][]>
 }
 
 export function createHeaders (

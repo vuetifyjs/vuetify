@@ -25,7 +25,7 @@ export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:
 export interface DateProps {
   displayDate: Date
   hideAdjacentMonths: boolean
-  modelValue: any[]
+  modelValue: readonly any[]
 }
 
 export function createDate (options?: DateOptions) {
@@ -40,7 +40,7 @@ export const makeDateProps = propsFactory({
   },
   hideAdjacentMonths: Boolean,
   modelValue: {
-    type: null as unknown as PropType<any[]>,
+    type: null as unknown as PropType<readonly any[]>,
     default: () => [],
   },
 }, 'date')

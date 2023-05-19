@@ -59,7 +59,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<(DataTableItem | Group)[]>,
+    type: Array as PropType<readonly (DataTableItem | Group)[]>,
     default: () => ([]),
   },
   noDataText: {

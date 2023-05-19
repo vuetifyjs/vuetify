@@ -47,8 +47,8 @@ export type VDataTableSlotProps = {
   toggleExpand: ReturnType<typeof provideExpanded>['toggleExpand']
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
-  items: DataTableItem[]
-  groupedItems: (DataTableItem | Group<DataTableItem>)[]
+  items: readonly DataTableItem[]
+  groupedItems: readonly (DataTableItem | Group<DataTableItem>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }

@@ -24,13 +24,13 @@ type ValidateOnValue = 'blur' | 'input' | 'submit'
 export interface ValidationProps {
   disabled: boolean | null
   error: boolean
-  errorMessages: string | string[]
+  errorMessages: string | readonly string[]
   focused: boolean
   maxErrors: string | number
   name: string | undefined
   label: string | undefined
   readonly: boolean | null
-  rules: ValidationRule[]
+  rules: readonly ValidationRule[]
   modelValue: any
   'onUpdate:modelValue': ((val: any) => void) | undefined
   validateOn?: ValidateOnValue | `${ValidateOnValue} lazy` | `lazy ${ValidateOnValue}` | 'lazy'
@@ -44,7 +44,7 @@ export const makeValidationProps = propsFactory({
   },
   error: Boolean,
   errorMessages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
   maxErrors: {
@@ -58,7 +58,7 @@ export const makeValidationProps = propsFactory({
     default: null,
   },
   rules: {
-    type: Array as PropType<ValidationRule[]>,
+    type: Array as PropType<readonly ValidationRule[]>,
     default: () => ([]),
   },
   modelValue: null,

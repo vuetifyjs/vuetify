@@ -110,7 +110,7 @@ export function usePagination () {
 }
 
 export function usePaginatedItems (options: {
-  items: Ref<any[]>
+  items: Ref<readonly any[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>
