@@ -108,17 +108,23 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 
 You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
 
-```js
-import { createSimpleTransition } from 'vuetify/components/transitions/createTransition'
+```js { resource="src/main.js" }
+import { createApp } from 'vue'
+import { createVuetify } from 'vuetify'
+import { createSimpleTransition } from 'vuetify/components/transitions'
 
 const myTransition = createSimpleTransition('my-transition')
 
-Vue.component('my-transition', myTransition)
+const app = createApp()
+const vuetify = createVuetify()
+
+app.use(vuetify)
+app.component(MyTransition)
 ```
 
 The **createSimpleTransition** function accepts 1 argument, name. This will be the name that you can hook into with your style. This is an example of what `v-fade-transition` looks like:
 
-```stylus
+```sass
 .fade-transition
   &-leave-active
     position: absolute
