@@ -16,6 +16,9 @@
     &.v-field
       cursor: text
 
+    &--variant-outlined
+      --autocomplete-chips-margin-bottom: #{$autocomplete-chips-margin-top}
+
   .v-field
     .v-field__input
       > input
@@ -52,7 +55,11 @@
     line-height: inherit
     max-width: 100%
 
-  &--chips
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--autocomplete-chips-margin-bottom) + $autocomplete-chips-margin-top)
+
     .v-autocomplete__selection
       margin-top: $autocomplete-chips-margin-top
       margin-bottom: var(--autocomplete-chips-margin-bottom)

@@ -18,7 +18,7 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { callEvent, clamp, convertToUnit, filterInputAttrs, genericComponent, propsFactory, useRender } from '@/util'
-import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch } from 'vue'
+import { computed, nextTick, onBeforeUnmount, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 
 // Types
 import type { PropType } from 'vue'
@@ -149,6 +149,11 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
     }
 
     const sizerRef = ref<HTMLTextAreaElement>()
+    const rows = ref(+props.rows)
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+    watchEffect(() => {
+      if (!props.autoGrow) rows.value = +props.rows
+    })
     function calculateInputHeight () {
       if (!props.autoGrow) return
 
@@ -169,8 +174,10 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
           parseFloat(fieldStyle.getPropertyValue('--v-input-control-height'))
         )
         const maxHeight = parseFloat(props.maxRows!) * lineHeight + padding || Infinity
+        const newHeight = clamp(height ?? 0, minHeight, maxHeight)
+        rows.value = Math.floor((newHeight - padding) / lineHeight)
 
-        controlHeight.value = convertToUnit(clamp(height ?? 0, minHeight, maxHeight))
+        controlHeight.value = convertToUnit(newHeight)
       })
     }
 
@@ -213,13 +220,14 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
               'v-text-field--suffixed': props.suffix,
               'v-textarea--auto-grow': props.autoGrow,
               'v-textarea--no-resize': props.noResize || props.autoGrow,
-              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
             },
             props.class,
           ]}
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{
@@ -243,6 +251,7 @@ export const VTextarea = genericComponent<VTextareaSlots>()({
                 role="textbox"
                 { ...fieldProps }
                 active={ isActive.value || isDirty.value }
+                centerAffix={ rows.value === 1 && !isPlainOrUnderlined.value }
                 dirty={ isDirty.value || props.dirty }
                 disabled={ isDisabled.value }
                 focused={ isFocused.value }

@@ -16,6 +16,9 @@
     &.v-field
       cursor: pointer
 
+    &--variant-outlined
+      --select-chips-margin-bottom: #{$select-chips-margin-top}
+
   .v-field
     .v-field__input
       > input
@@ -49,7 +52,11 @@
     line-height: inherit
     max-width: 100%
 
-  &--chips
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--select-chips-margin-bottom) + $select-chips-margin-top)
+
     .v-select__selection
       margin-top: $select-chips-margin-top
       margin-bottom: var(--select-chips-margin-bottom)
