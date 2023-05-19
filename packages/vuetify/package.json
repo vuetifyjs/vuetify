@@ -54,7 +54,8 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
-      "default": "./lib/framework.mjs"
+      "default": "./lib/framework.mjs",
+      "types": "./lib/index.d.mts"
     },
     "./styles": {
       "sass": "./lib/styles/main.sass",
