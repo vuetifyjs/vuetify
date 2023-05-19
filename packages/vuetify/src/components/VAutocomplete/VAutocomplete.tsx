@@ -341,7 +341,7 @@ export const VAutocomplete = genericComponent<new <
             `v-autocomplete--${props.multiple ? 'multiple' : 'single'}`,
             {
               'v-autocomplete--active-menu': menu.value,
-              'v-autocomplete--chips': !!props.chips,
+              'v-autocomplete--chips': !!props.chips || !!slots.selection,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
             },
             props.class,
