@@ -24,6 +24,8 @@ export const useDirectiveComponent = (
       // Get the children from the props or directive value, or the element's children
       const children = props.text || value.text || el.innerHTML
 
+      // If vnode.ctx is the same as the instance, then we're bound to a plain element
+      // and need to find the nearest parent component instance to inherit provides from
       const provides = (vnode.ctx === binding.instance!.$
         ? findComponentParent(vnode, binding.instance!.$)?.provides
         : vnode.ctx?.provides) ?? binding.instance!.$.provides
