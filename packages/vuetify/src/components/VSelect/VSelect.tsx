@@ -16,7 +16,7 @@ import { VTextField } from '@/components/VTextField'
 // Composables
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
-import { makeItemsProps, useItems } from '@/composables/items'
+import { makeItemsProps, useItems } from '@/composables/list-items'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
 import { useLocale } from '@/composables/locale'
@@ -29,13 +29,13 @@ import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VFieldSlots } from '@/components/VField/VField'
-import type { InternalItem } from '@/composables/items'
+import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
 import type { Component, PropType } from 'vue'
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = T extends Primitive
+type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any)
 
@@ -82,24 +82,27 @@ export const makeVSelectProps = propsFactory({
 
 export const VSelect = genericComponent<new <
   T extends readonly any[],
-  Item = T extends (infer U)[] ? U : never,
+  Item = T extends readonly (infer U)[] ? U : never,
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
->(props: {
-  items?: T
-  returnObject?: ReturnObject
-  multiple?: Multiple
-  modelValue?: V | null
-  'onUpdate:modelValue'?: (val: V) => void
-}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<Item>, index: number }]
-  'prepend-item': []
-  'append-item': []
-  'no-data': []
-}>>()({
+>(
+  props: {
+    items?: T
+    returnObject?: ReturnObject
+    multiple?: Multiple
+    modelValue?: V | null
+    'onUpdate:modelValue'?: (val: V) => void
+  },
+  slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
+    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: ListItem<Item>, index: number }]
+    'prepend-item': []
+    'append-item': []
+    'no-data': []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',
 
   props: makeVSelectProps(),
@@ -215,7 +218,7 @@ export const VSelect = genericComponent<new <
         model.value = [item]
       }
     }
-    function select (item: InternalItem) {
+    function select (item: ListItem) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 
@@ -273,11 +276,11 @@ export const VSelect = genericComponent<new <
               'v-select--chips': !!props.chips,
               [`v-select--${props.multiple ? 'multiple' : 'single'}`]: true,
               'v-select--selected': model.value.length,
+              'v-select--selection-slot': !!slots.selection,
             },
             props.class,
           ]}
           style={ props.style }
-          appendInnerIcon={ props.menuIcon }
           readonly
           placeholder={ placeholder }
           onClick:clear={ onClear }
@@ -317,25 +320,23 @@ export const VSelect = genericComponent<new <
                       { slots['prepend-item']?.() }
 
                       { displayItems.value.map((item, index) => {
-                        if (slots.item) {
-                          return slots.item?.({
-                            item,
-                            index,
-                            props: mergeProps(item.props, { onClick: () => select(item) }),
-                          })
-                        }
+                        const itemProps = mergeProps(item.props, {
+                          key: index,
+                          onClick: () => select(item),
+                        })
 
-                        return (
-                          <VListItem
-                            key={ index }
-                            { ...item.props }
-                            onClick={ () => select(item) }
-                          >
+                        return slots.item?.({
+                          item,
+                          index,
+                          props: itemProps,
+                        }) ?? (
+                          <VListItem { ...itemProps }>
                             {{
                               prepend: ({ isSelected }) => (
                                 <>
                                   { props.multiple && !props.hideSelected ? (
                                     <VCheckboxBtn
+                                      key={ item.value }
                                       modelValue={ isSelected }
                                       ripple={ false }
                                       tabindex="-1"
@@ -413,6 +414,17 @@ export const VSelect = genericComponent<new <
                     </div>
                   )
                 })}
+              </>
+            ),
+            'append-inner': (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { props.menuIcon ? (
+                  <VIcon
+                    class="v-select__menu-icon"
+                    icon={ props.menuIcon }
+                  />
+                ) : undefined }
               </>
             ),
           }}

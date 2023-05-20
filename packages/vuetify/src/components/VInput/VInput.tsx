@@ -2,7 +2,7 @@
 import './VInput.sass'
 
 // Components
-import { VMessages } from '@/components/VMessages'
+import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -35,12 +35,16 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  centerAffix: {
+    type: Boolean,
+    default: true,
+  },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   persistentHint: Boolean,
   messages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
   direction: {
@@ -62,6 +66,7 @@ export type VInputSlots = {
   prepend: [VInputSlot]
   append: [VInputSlot]
   details: [VInputSlot]
+  message: [VMessageSlot]
 }
 
 export const VInput = genericComponent<VInputSlots>()({
@@ -112,7 +117,7 @@ export const VInput = genericComponent<VInputSlots>()({
     }))
 
     const messages = computed(() => {
-      if (errorMessages.value.length > 0) {
+      if (!isPristine.value && errorMessages.value.length > 0) {
         return errorMessages.value
       } else if (props.hint && (props.persistentHint || props.focused)) {
         return props.hint
@@ -135,6 +140,9 @@ export const VInput = genericComponent<VInputSlots>()({
           class={[
             'v-input',
             `v-input--${props.direction}`,
+            {
+              'v-input--center-affix': props.centerAffix,
+            },
             densityClasses.value,
             validationClasses.value,
             props.class,

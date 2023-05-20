@@ -5,7 +5,7 @@
         <NameCell section="events" :name="item.name" />
 
         <td>
-          <PrismCell :code="getType(item)" />
+          <PrismCell :code="item.formatted" />
         </td>
       </tr>
     </template>
@@ -17,9 +17,6 @@
   import ApiTable from './ApiTable.vue'
   import NameCell from './NameCell.vue'
   import PrismCell from './PrismCell.vue'
-
-  // Utilities
-  import { getType } from './utils'
 
   const headers = ['name', 'type']
 </script>

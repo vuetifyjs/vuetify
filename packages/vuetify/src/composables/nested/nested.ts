@@ -24,8 +24,8 @@ export type OpenStrategyProp = 'single' | 'multiple' | 'list' | OpenStrategy
 export interface NestedProps {
   selectStrategy: SelectStrategy | undefined
   openStrategy: OpenStrategyProp | undefined
-  selected: unknown[] | undefined
-  opened: unknown[] | undefined
+  selected: readonly unknown[] | undefined
+  opened: readonly unknown[] | undefined
   mandatory: boolean
   'onUpdate:selected': ((val: unknown[]) => void) | undefined
   'onUpdate:opened': ((val: unknown[]) => void) | undefined
@@ -69,8 +69,8 @@ export const emptyNested: NestedProvide = {
 export const makeNestedProps = propsFactory({
   selectStrategy: [String, Function] as PropType<SelectStrategy>,
   openStrategy: [String, Object] as PropType<OpenStrategyProp>,
-  opened: Array as PropType<unknown[]>,
-  selected: Array as PropType<unknown[]>,
+  opened: Array as PropType<readonly unknown[]>,
+  selected: Array as PropType<readonly unknown[]>,
   mandatory: Boolean,
 }, 'nested')
 

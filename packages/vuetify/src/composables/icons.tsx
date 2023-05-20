@@ -192,7 +192,7 @@ export const useIcon = (props: Ref<IconValue | undefined>) => {
 
   if (!icons) throw new Error('Missing Vuetify Icons provide!')
 
-  const iconData: Ref<IconInstance> = computed(() => {
+  const iconData = computed<IconInstance>(() => {
     const iconAlias = unref(props)
 
     if (!iconAlias) return { component: VComponentIcon }
