@@ -9,10 +9,12 @@ import type { SelectItemKey } from '@/util'
 export interface ListItem<T = any> {
   title: string
   value: any
+  testId: string
   props: {
     [key: string]: any
     title: string
     value: any
+    testId: string
   }
   children?: ListItem<T>[]
   raw: T
@@ -22,6 +24,7 @@ export interface ItemProps {
   items: any[]
   itemTitle: SelectItemKey
   itemValue: SelectItemKey
+  itemTestId: SelectItemKey
   itemChildren: SelectItemKey
   itemProps: SelectItemKey
   returnObject: boolean
@@ -41,6 +44,10 @@ export const makeItemsProps = propsFactory({
     type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
   },
+  itemTestId: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
+    default: 'testId',
+  },
   itemChildren: {
     type: [Boolean, String, Array, Function] as PropType<SelectItemKey>,
     default: 'children',
@@ -55,6 +62,7 @@ export const makeItemsProps = propsFactory({
 export function transformItem (props: Omit<ItemProps, 'items'>, item: any): ListItem {
   const title = getPropertyFromItem(item, props.itemTitle, item)
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue, title)
+  const testId = getPropertyFromItem(item, props.itemTestId, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true
     ? typeof item === 'object' && item != null && !Array.isArray(item)
@@ -67,12 +75,14 @@ export function transformItem (props: Omit<ItemProps, 'items'>, item: any): List
   const _props = {
     title,
     value,
+    testId,
     ...itemProps,
   }
 
   return {
     title: String(_props.title ?? ''),
     value: _props.value,
+    testId: _props.testId,
     props: _props,
     children: Array.isArray(children) ? transformItems(props, children) : undefined,
     raw: item,

@@ -42,12 +42,14 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
   const type = getPropertyFromItem(item, props.itemType, 'item')
   const title = isPrimitive(item) ? item : getPropertyFromItem(item, props.itemTitle)
   const value = getPropertyFromItem(item, props.itemValue, undefined)
+  const testId = getPropertyFromItem(item, props.itemTestId, title)
   const children = getPropertyFromItem(item, props.itemChildren)
   const itemProps = props.itemProps === true ? pick(item, ['children'])[1] : getPropertyFromItem(item, props.itemProps)
 
   const _props = {
     title,
     value,
+    testId,
     ...itemProps,
   }
 
@@ -55,6 +57,7 @@ function transformItem (props: ItemProps & { itemType: string }, item: any): Int
     type,
     title: _props.title,
     value: _props.value,
+    testId: _props.testId,
     props: _props,
     children: type === 'item' && children ? transformItems(props, children) : undefined,
     raw: item,

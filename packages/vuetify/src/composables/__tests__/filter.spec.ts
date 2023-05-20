@@ -109,6 +109,7 @@ describe('filter', () => {
     const itemProps = {
       itemTitle: 'title',
       itemValue: 'value',
+      itemTestId: 'testId',
       itemChildren: 'children',
       itemProps: 'props',
       returnObject: false,

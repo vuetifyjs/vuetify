@@ -81,6 +81,7 @@ export const makeVListItemProps = propsFactory({
     default: true,
   },
   subtitle: [String, Number, Boolean],
+  testId: [String, Number, Boolean],
   title: [String, Number, Boolean],
   value: null,
 
@@ -222,6 +223,7 @@ export const VListItem = genericComponent<VListItemSlots>()({
           onClick={ onClick }
           onKeydown={ isClickable.value && !isLink.value && onKeyDown }
           v-ripple={ isClickable.value && props.ripple }
+          data-test={ props.testId }
         >
           { genOverlays(isClickable.value || isActive.value, 'v-list-item') }
 

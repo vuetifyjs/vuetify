@@ -229,4 +229,60 @@ describe('VList', () => {
 
     cy.get('.v-list-item').eq(1).should('not.have.class', 'v-list-item--active')
   })
+
+  context('test ID', () => {
+    context('when no explicit test ID is given', () => {
+      it('should add an implicit test ID to each item', () => {
+        const items = [
+          { title: 'Item #1', value: 1 },
+          { title: 'Item #2', value: 2 },
+          { title: 'Item #3', value: 3 },
+        ]
+
+        mountFunction((
+          <CenteredGrid width="200px">
+            <VList items={ items } />
+          </CenteredGrid>
+        ))
+
+        cy.getBySel('Item #1').should('have.text', 'Item #1')
+      })
+    })
+
+    context('when an explicit test ID is given', () => {
+      it('should add the explicit test ID to each item', () => {
+        const items = [
+          { title: 'Item #1', value: 1, testId: 'first' },
+          { title: 'Item #2', value: 2, testId: 'second' },
+          { title: 'Item #3', value: 3, testId: 'third' },
+        ]
+
+        mountFunction((
+          <CenteredGrid width="200px">
+            <VList items={ items } />
+          </CenteredGrid>
+        ))
+
+        cy.getBySel('second').should('have.text', 'Item #2')
+      })
+    })
+
+    context('when a non-default test ID property is used', () => {
+      it('should add the test ID to each item using the specified property', () => {
+        const items = [
+          { title: 'Item #1', value: 1, testSelector: 'first' },
+          { title: 'Item #2', value: 2, testSelector: 'second' },
+          { title: 'Item #3', value: 3, testSelector: 'third' },
+        ]
+
+        mountFunction((
+          <CenteredGrid width="200px">
+            <VList items={ items } item-test-id="testSelector" />
+          </CenteredGrid>
+        ))
+
+        cy.getBySel('third').should('have.text', 'Item #3')
+      })
+    })
+  })
 })
