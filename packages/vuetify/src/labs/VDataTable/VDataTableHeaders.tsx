@@ -76,7 +76,7 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
 
   setup (props, { slots, emit }) {
     const { toggleSort, sortBy, isSorted } = useSort()
-    const { someSelected, allSelected, selectAll } = useSelection()
+    const { someSelected, allSelected, selectAll, showSelectAll } = useSelection()
     const { columns, headers } = useHeaders()
     const { loaderClasses } = useLoader(props)
 
@@ -157,13 +157,13 @@ export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
               if (slots[columnSlotName]) return slots[columnSlotName]!(columnSlotProps)
 
               if (column.key === 'data-table-select') {
-                return slots['column.data-table-select']?.(columnSlotProps) ?? (
+                return slots['column.data-table-select']?.(columnSlotProps) ?? (showSelectAll && (
                   <VCheckboxBtn
                     modelValue={ allSelected.value }
                     indeterminate={ someSelected.value && !allSelected.value }
                     onUpdate:modelValue={ selectAll }
                   />
-                )
+                ))
               }
 
               return (

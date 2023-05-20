@@ -75,9 +75,12 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     const { sortedItems } = useSortedItems(props, filteredItems, sortByWithGroups)
     const { flatItems } = useGroupedItems(sortedItems, groupBy, opened)
 
-    const allRows = computed(() => extractRows(flatItems.value))
+    const allItems = computed(() => extractRows(flatItems.value))
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, allRows)
+    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
+      allItems,
+      currentPage: allItems,
+    })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     const {
@@ -124,7 +127,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: items.value,
+      items: allItems.value,
       groupedItems: flatItems.value,
       columns: columns.value,
       headers: headers.value,

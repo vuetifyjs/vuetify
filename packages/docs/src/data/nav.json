@@ -203,6 +203,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",

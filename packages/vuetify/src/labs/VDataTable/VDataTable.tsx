@@ -131,7 +131,14 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, paginatedItemsWithoutGroups)
+    const {
+      isSelected,
+      select,
+      selectAll,
+      toggleSelect,
+      someSelected,
+      allSelected,
+    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
@@ -169,8 +176,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: paginatedItems.value,
-      groupedItems: flatItems.value,
+      items: paginatedItemsWithoutGroups.value,
+      groupedItems: paginatedItems.value,
       columns: columns.value,
       headers: headers.value,
     }))

@@ -10,6 +10,7 @@ import type { DataTableItem, InternalDataTableHeader } from '../types'
 export interface DataTableItemProps {
   items: any[]
   itemValue: SelectItemKey
+  itemSelectable: SelectItemKey
   returnObject: boolean
 }
 
@@ -23,6 +24,10 @@ export const makeDataTableItemProps = propsFactory({
     type: [String, Array, Function] as PropType<SelectItemKey>,
     default: 'value',
   },
+  itemSelectable: {
+    type: [String, Array, Function] as PropType<SelectItemKey>,
+    default: null,
+  },
   returnObject: Boolean,
 }, 'v-data-table-item')
 
@@ -32,6 +37,7 @@ export function transformItem (
   columns: InternalDataTableHeader[]
 ): DataTableItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
+  const selectable = getPropertyFromItem(item, props.itemSelectable, true)
   const itemColumns = columns.reduce((obj, column) => {
     obj[column.key] = getPropertyFromItem(item, column.value ?? column.key)
     return obj
@@ -40,6 +46,7 @@ export function transformItem (
   return {
     type: 'item',
     value,
+    selectable,
     columns: itemColumns,
     raw: item,
   }

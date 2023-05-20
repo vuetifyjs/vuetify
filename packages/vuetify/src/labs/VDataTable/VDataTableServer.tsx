@@ -67,15 +67,20 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
 
     const { toggleSort } = provideSort({ sortBy, multiSort, mustSort, page })
 
-    const { opened, isGroupOpen, toggleGroup } = provideGroupBy({ groupBy, sortBy })
+    const { opened, isGroupOpen, toggleGroup, extractRows } = provideGroupBy({ groupBy, sortBy })
 
     const { pageCount, setItemsPerPage } = providePagination({ page, itemsPerPage, itemsLength })
 
     const { flatItems } = useGroupedItems(items, groupBy, opened)
 
-    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, items)
+    const { isSelected, select, selectAll, toggleSelect, someSelected, allSelected } = provideSelection(props, {
+      allItems: items,
+      currentPage: items,
+    })
 
     const { isExpanded, toggleExpand } = provideExpanded(props)
+
+    const itemsWithoutGroups = computed(() => extractRows(items.value))
 
     useOptions({
       page,
@@ -116,7 +121,7 @@ export const VDataTableServer = genericComponent<VDataTableSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: items.value,
+      items: itemsWithoutGroups.value,
       groupedItems: flatItems.value,
       columns: columns.value,
       headers: headers.value,

@@ -7,6 +7,7 @@ import { clamp, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'
+import type { Group } from './group'
 
 export const makeDataTablePaginateProps = propsFactory({
   page: {
@@ -109,8 +110,8 @@ export function usePagination () {
   return data
 }
 
-export function usePaginatedItems (options: {
-  items: Ref<readonly any[]>
+export function usePaginatedItems <T> (options: {
+  items: Ref<readonly (T | Group<T>)[]>
   startIndex: Ref<number>
   stopIndex: Ref<number>
   itemsPerPage: Ref<number>

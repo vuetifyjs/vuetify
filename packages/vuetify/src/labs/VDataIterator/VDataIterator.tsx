@@ -111,7 +111,12 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
 
     const paginatedItemsWithoutGroups = computed(() => extractRows(paginatedItems.value))
 
-    const { isSelected, select, selectAll, toggleSelect } = provideSelection(props, paginatedItemsWithoutGroups)
+    const {
+      isSelected,
+      select,
+      selectAll,
+      toggleSelect,
+    } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
     useOptions({
@@ -140,8 +145,8 @@ export const VDataIterator = genericComponent<VDataIteratorSlots>()({
       toggleExpand,
       isGroupOpen,
       toggleGroup,
-      items: paginatedItems.value,
-      groupedItems: flatItems.value,
+      items: paginatedItemsWithoutGroups.value,
+      groupedItems: paginatedItems.value,
     }))
 
     useRender(() => (
