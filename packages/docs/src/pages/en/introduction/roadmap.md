@@ -35,20 +35,17 @@ The following releases are currently under development:
   - `<v-otp-input>`
   - `<v-speed-dial>`
   - `<v-stepper>`
-
 - **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/61)
-
-### v3.3 (Icarus)
-
-- **Target Release:** Q2 2023
-- **Overview:** A small intermediary minor that will release alongside Vue v3.3 and include a few small features.
-- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/67)
 
 ### v2.7 (Nirvana)
 
 - **Target Release:** Q2 2023
 - **Support until:** 18 months after release
 - **Overview:** Backports and deprecations from v3.0.0 to help developers prepare for v3 upgrade
+
+### Labs release schedule
+
+Information regarding upcoming Labs components is located on the [Labs introduction](/labs/introduction/) page.
 
 ----
 
@@ -63,6 +60,14 @@ The following versions have continued maintenance for backwards compatible fixes
 ## Released
 
 The following are the already released **minor** and **major** version updates. Find more information on the [latest releases](https://github.com/vuetifyjs/vuetify/releases/latest) on GitHub.
+
+### v3.3 (Icarus)
+
+- **Released:** May 2023
+- **Target Release:** Q2 2023
+- **Notes:** [v3.3 Release](/getting-started/release-notes/?version=v3.3.0)
+- **Overview:** A small intermediary minor that will release alongside Vue v3.3 and include a few small features.
+- **Milestone Issues:** [Github Issues](https://github.com/vuetifyjs/vuetify/milestone/67)
 
 ### v3.2 (Orion)
 

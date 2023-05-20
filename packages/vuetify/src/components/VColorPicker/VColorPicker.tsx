@@ -14,13 +14,13 @@ import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, HSVtoCSS, omit, propsFactory, useRender } from '@/util'
-import { extractColor, modes, nullColor, parseColor } from './util'
+import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
+import { extractColor, modes, nullColor } from './util'
 import { onMounted, ref } from 'vue'
 
 // Types
-import type { PropType } from 'vue'
-import type { HSV } from '@/util'
+import type { DeepReadonly, PropType } from 'vue'
+import type { Color, HSV } from '@/util'
 
 export const makeVPickerProps = propsFactory({
   canvasHeight: {
@@ -36,17 +36,17 @@ export const makeVPickerProps = propsFactory({
   hideSliders: Boolean,
   hideInputs: Boolean,
   mode: {
-    type: String,
+    type: String as PropType<keyof typeof modes>,
     default: 'rgba',
     validator: (v: string) => Object.keys(modes).includes(v),
   },
   modes: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<readonly (keyof typeof modes)[]>,
     default: () => Object.keys(modes),
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },
   showSwatches: Boolean,
-  swatches: Array as PropType<string[][]>,
+  swatches: Array as PropType<DeepReadonly<Color[][]>>,
   swatchesMaxHeight: {
     type: [Number, String],
     default: 150,
@@ -72,7 +72,7 @@ export const VColorPicker = defineComponent({
 
   emits: {
     'update:modelValue': (color: any) => true,
-    'update:mode': (mode: string) => true,
+    'update:mode': (mode: keyof typeof modes) => true,
   },
 
   setup (props) {
@@ -83,9 +83,13 @@ export const VColorPicker = defineComponent({
       'modelValue',
       undefined,
       v => {
-        let c = parseColor(v)
-
-        if (!c) return null
+        let c: HSV
+        try {
+          c = RGBtoHSV(parseColor(v as any))
+        } catch (err) {
+          consoleWarn(err as any)
+          return null
+        }
 
         if (lastPickedColor.value) {
           c = { ...c, h: lastPickedColor.value.h }

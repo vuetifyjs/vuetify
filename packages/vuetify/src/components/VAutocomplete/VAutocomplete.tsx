@@ -16,20 +16,21 @@ import { forwardRefs } from '@/composables/forwardRefs'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
-import { useItems } from '@/composables/items'
+import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useTextColor } from '@/composables/color'
 
 // Utility
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
-import { genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
+import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
 import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
-import type { FilterMatch } from '@/composables/filter'
-import type { InternalItem } from '@/composables/items'
+import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
+import type { FilterMatch } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -51,7 +52,7 @@ function highlightResult (text: string, matches: FilterMatch | undefined, length
 
 type Primitive = string | number | boolean | symbol
 
-type Val <T, ReturnObject extends boolean> = T extends Primitive
+type Val <T, ReturnObject extends boolean> = [T] extends [Primitive]
   ? T
   : (ReturnObject extends true ? T : any)
 
@@ -61,8 +62,9 @@ type Value <T, ReturnObject extends boolean, Multiple extends boolean> =
     : Val<T, ReturnObject> | null
 
 export const makeVAutocompleteProps = propsFactory({
-  // TODO: implement post keyboard support
-  // autoSelectFirst: Boolean,
+  autoSelectFirst: {
+    type: [Boolean, String] as PropType<boolean | 'exact'>,
+  },
   search: String,
 
   ...makeFilterProps({ filterKeys: ['title'] }),
@@ -79,20 +81,23 @@ export const VAutocomplete = genericComponent<new <
   ReturnObject extends boolean = false,
   Multiple extends boolean = false,
   V extends Value<Item, ReturnObject, Multiple> = Value<Item, ReturnObject, Multiple>
->(props: {
-  items?: T
-  returnObject?: ReturnObject
-  multiple?: Multiple
-  modelValue?: V | null
-  'onUpdate:modelValue'?: (val: V) => void
-}) => GenericProps<typeof props, Omit<VInputSlots & VFieldSlots, 'default'> & {
-  item: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-  chip: [{ item: InternalItem<Item>, index: number, props: Record<string, unknown> }]
-  selection: [{ item: InternalItem<Item>, index: number }]
-  'prepend-item': []
-  'append-item': []
-  'no-data': []
-}>>()({
+>(
+  props: {
+    items?: T
+    returnObject?: ReturnObject
+    multiple?: Multiple
+    modelValue?: V | null
+    'onUpdate:modelValue'?: (val: V) => void
+  },
+  slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
+    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
+    selection: [{ item: ListItem<Item>, index: number }]
+    'prepend-item': []
+    'append-item': []
+    'no-data': []
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',
 
   props: makeVAutocompleteProps(),
@@ -109,6 +114,7 @@ export const VAutocomplete = genericComponent<new <
     const vTextFieldRef = ref()
     const isFocused = shallowRef(false)
     const isPristine = shallowRef(true)
+    const listHasFocus = ref(false)
     const vMenuRef = ref<VMenu>()
     const _menu = useProxiedModel(props, 'menu')
     const menu = computed({
@@ -150,6 +156,14 @@ export const VAutocomplete = genericComponent<new <
 
     const selected = computed(() => selections.value.map(selection => selection.props.value))
     const selection = computed(() => selections.value[selectionIndex.value])
+    const highlightFirst = computed(() => {
+      const selectFirst = props.autoSelectFirst === true ||
+        (props.autoSelectFirst === 'exact' && search.value === displayItems.value[0]?.title)
+      return selectFirst &&
+        displayItems.value.length > 0 &&
+        !isPristine.value &&
+        !listHasFocus.value
+    })
     const listRef = ref<VList>()
 
     function onClear (e: MouseEvent) {
@@ -166,6 +180,13 @@ export const VAutocomplete = genericComponent<new <
       ) return
 
       menu.value = true
+    }
+    function onMousedownMenuIcon (e: MouseEvent) {
+      if (isFocused.value) {
+        e.preventDefault()
+        e.stopPropagation()
+      }
+      menu.value = !menu.value
     }
     function onKeydown (e: KeyboardEvent) {
       if (props.readonly || form?.isReadonly.value) return
@@ -189,11 +210,18 @@ export const VAutocomplete = genericComponent<new <
       }
 
       if (['Enter', 'Escape', 'Tab'].includes(e.key)) {
+        if (highlightFirst.value && ['Enter', 'Tab'].includes(e.key)) {
+          select(filteredItems.value[0])
+        }
+
         isPristine.value = true
       }
 
       if (e.key === 'ArrowDown') {
         listRef.value?.focus('next')
+        if (highlightFirst.value) {
+          listRef.value?.focus('next')
+        }
       } else if (e.key === 'ArrowUp') {
         listRef.value?.focus('prev')
       }
@@ -258,11 +286,17 @@ export const VAutocomplete = genericComponent<new <
 
     function onFocusin (e: FocusEvent) {
       isFocused.value = true
+      setTimeout(() => {
+        listHasFocus.value = true
+      })
+    }
+    function onFocusout (e: FocusEvent) {
+      listHasFocus.value = false
     }
 
     const isSelecting = shallowRef(false)
 
-    function select (item: InternalItem) {
+    function select (item: ListItem) {
       if (props.multiple) {
         const index = selected.value.findIndex(selection => props.valueComparator(selection, item.value))
 
@@ -287,7 +321,9 @@ export const VAutocomplete = genericComponent<new <
       }
     }
 
-    watch(isFocused, val => {
+    watch(isFocused, (val, oldVal) => {
+      if (val === oldVal) return
+
       if (val) {
         isSelecting.value = true
         search.value = props.multiple ? '' : String(selections.value.at(-1)?.props.title ?? '')
@@ -296,6 +332,13 @@ export const VAutocomplete = genericComponent<new <
         nextTick(() => isSelecting.value = false)
       } else {
         if (!props.multiple && !search.value) model.value = []
+        else if (
+          highlightFirst.value &&
+          !listHasFocus.value &&
+          !selections.value.some(({ value }) => value === displayItems.value[0].value)
+        ) {
+          select(displayItems.value[0])
+        }
         menu.value = false
         search.value = ''
         selectionIndex.value = -1
@@ -332,12 +375,12 @@ export const VAutocomplete = genericComponent<new <
             {
               'v-autocomplete--active-menu': menu.value,
               'v-autocomplete--chips': !!props.chips,
+              'v-autocomplete--selection-slot': !!slots.selection,
               'v-autocomplete--selecting-index': selectionIndex.value > -1,
             },
             props.class,
           ]}
           style={ props.style }
-          appendInnerIcon={ props.menuIcon }
           readonly={ props.readonly }
           placeholder={ isDirty ? undefined : props.placeholder }
           onClick:clear={ onClear }
@@ -368,6 +411,7 @@ export const VAutocomplete = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
+                      onFocusout={ onFocusout }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
@@ -375,39 +419,45 @@ export const VAutocomplete = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      { displayItems.value.map(item => slots.item?.({
-                        item,
-                        props: mergeProps(item.props, { onClick: () => select(item) }),
-                      }) ?? (
-                        <VListItem
-                          key={ item.value }
-                          { ...item.props }
-                          onClick={ () => select(item) }
-                        >
-                          {{
-                            prepend: ({ isSelected }) => (
-                              <>
-                                { props.multiple && !props.hideSelected ? (
-                                  <VCheckboxBtn
-                                    modelValue={ isSelected }
-                                    ripple={ false }
-                                    tabindex="-1"
-                                  />
-                                ) : undefined }
+                      { displayItems.value.map((item, index) => {
+                        const itemProps = mergeProps(item.props, {
+                          key: index,
+                          active: (highlightFirst.value && index === 0) ? true : undefined,
+                          onClick: () => select(item),
+                        })
 
-                                { item.props.prependIcon && (
-                                  <VIcon icon={ item.props.prependIcon } />
-                                )}
-                              </>
-                            ),
-                            title: () => {
-                              return isPristine.value
-                                ? item.title
-                                : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
-                            },
-                          }}
-                        </VListItem>
-                      ))}
+                        return slots.item?.({
+                          item,
+                          index,
+                          props: itemProps,
+                        }) ?? (
+                          <VListItem { ...itemProps }>
+                            {{
+                              prepend: ({ isSelected }) => (
+                                <>
+                                  { props.multiple && !props.hideSelected ? (
+                                    <VCheckboxBtn
+                                      key={ item.value }
+                                      modelValue={ isSelected }
+                                      ripple={ false }
+                                      tabindex="-1"
+                                    />
+                                  ) : undefined }
+
+                                  { item.props.prependIcon && (
+                                    <VIcon icon={ item.props.prependIcon } />
+                                  )}
+                                </>
+                              ),
+                              title: () => {
+                                return isPristine.value
+                                  ? item.title
+                                  : highlightResult(item.title, getMatches(item)?.title, search.value?.length ?? 0)
+                              },
+                            }}
+                          </VListItem>
+                        )
+                      })}
 
                       { slots['append-item']?.() }
                     </VList>
@@ -480,6 +530,19 @@ export const VAutocomplete = genericComponent<new <
                     </div>
                   )
                 })}
+              </>
+            ),
+            'append-inner': (...args) => (
+              <>
+                { slots['append-inner']?.(...args) }
+                { props.menuIcon ? (
+                  <VIcon
+                    class="v-autocomplete__menu-icon"
+                    icon={ props.menuIcon }
+                    onMousedown={ onMousedownMenuIcon }
+                    onClick={ noop }
+                  />
+                ) : undefined }
               </>
             ),
           }}

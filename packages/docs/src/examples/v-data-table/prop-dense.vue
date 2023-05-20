@@ -98,7 +98,7 @@
           title: 'Dessert (100g serving)',
           align: 'start',
           sortable: false,
-          value: 'name',
+          key: 'name',
         },
         { title: 'Calories', align: 'end', key: 'calories' },
         { title: 'Fat (g)', align: 'end', key: 'fat' },

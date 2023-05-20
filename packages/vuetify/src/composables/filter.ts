@@ -8,7 +8,6 @@ import { computed, ref, unref, watchEffect } from 'vue'
 // Types
 import type { PropType, Ref } from 'vue'
 import type { MaybeRef } from '@/util'
-import type { InternalItem } from './items'
 
 /**
  * - match without highlight
@@ -49,7 +48,7 @@ export const makeFilterProps = propsFactory({
 }, 'filter')
 
 export function filterItems (
-  items: InternalItem[],
+  items: any[],
   query: string,
   options?: {
     customKeyFilter?: FilterKeyFunctions
@@ -126,12 +125,12 @@ export function filterItems (
   return array
 }
 
-export function useFilter <T extends InternalItem> (
+export function useFilter <T extends { value: unknown }> (
   props: FilterProps,
   items: MaybeRef<T[]>,
   query: Ref<string | undefined>,
   options?: {
-    filterKeys?: MaybeRef<FilterKeys>
+    transform?: (item: T) => any
   }
 ) {
   const strQuery = computed(() => (
@@ -141,26 +140,28 @@ export function useFilter <T extends InternalItem> (
 
   const filteredItems: Ref<T[]> = ref([])
   const filteredMatches: Ref<Map<unknown, Record<string, FilterMatch>>> = ref(new Map())
+  const transformedItems = computed(() => options?.transform ? unref(items).map(options?.transform) : unref(items))
 
   watchEffect(() => {
     filteredItems.value = []
     filteredMatches.value = new Map()
 
-    const transformedItems = unref(items)
     const results = filterItems(
-      transformedItems,
+      transformedItems.value,
       strQuery.value,
       {
         customKeyFilter: props.customKeyFilter,
         default: props.customFilter,
-        filterKeys: unref(options?.filterKeys) ?? props.filterKeys,
+        filterKeys: props.filterKeys,
         filterMode: props.filterMode,
         noFilter: props.noFilter,
       },
     )
 
+    const originalItems = unref(items)
+
     results.forEach(({ index, matches }) => {
-      const item = transformedItems[index]
+      const item = originalItems[index]
       filteredItems.value.push(item)
       filteredMatches.value.set(item.value, matches)
     })

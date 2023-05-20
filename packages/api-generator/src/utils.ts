@@ -1,5 +1,7 @@
 import { fileURLToPath } from 'url'
 import stringifyObject from 'stringify-object'
+import prettier from 'prettier'
+import typescriptParser from 'prettier/esm/parser-typescript.mjs'
 import type { Definition, ObjectDefinition } from './types'
 
 function parseFunctionParams (func: string) {
@@ -167,5 +169,53 @@ export async function addDirectiveDescriptions (
         modifier.description[locale] = descriptions.find('modifiers', name)
       }
     }
+  }
+}
+
+export function stripLinks (str: string): [string, Record<string, string>] {
+  let out = str.slice()
+  const obj: Record<string, string> = {}
+  const regexp = /<a.*?>(.*?)<\/a>/g
+
+  let matches = regexp.exec(str)
+
+  while (matches !== null) {
+    obj[matches[1]] = matches[0]
+    out = out.replace(matches[0], matches[1])
+
+    matches = regexp.exec(str)
+  }
+
+  return [out, obj]
+}
+
+export function insertLinks (str: string, stripped: Record<string, string>) {
+  for (const [key, value] of Object.entries(stripped)) {
+    str = str.replaceAll(new RegExp(`(^|\\W)(${key})(\\W|$)`, 'g'), `$1${value}$3`)
+  }
+  return str
+}
+
+export function prettifyType (name: string, item: Definition) {
+  const prefix = 'type Type = '
+  const [str, stripped] = stripLinks(item.formatted)
+  let formatted
+  try {
+    formatted = prettier.format(prefix + str, {
+      parser: 'typescript',
+      plugins: [typescriptParser],
+      bracketSpacing: true,
+      semi: false,
+      singleQuote: true,
+      trailingComma: 'all',
+    })
+  } catch (err) {
+    console.error(`${name}:`, err.message)
+    return item
+  }
+
+  return {
+    ...item,
+    formatted: insertLinks(formatted, stripped).replace(/type\sType\s=\s+?/m, ''),
   }
 }

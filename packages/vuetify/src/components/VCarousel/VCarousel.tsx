@@ -2,7 +2,7 @@
 import './VCarousel.sass'
 
 // Components
-import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
+import { makeVWindowProps, VWindow, type VWindowSlots } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
@@ -19,7 +19,6 @@ import { onMounted, ref, watch } from 'vue'
 // Types
 import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
-import type { VWindowSlots } from '../VWindow/VWindow'
 
 export const makeVCarouselProps = propsFactory({
   color: String,
@@ -49,7 +48,18 @@ export const makeVCarouselProps = propsFactory({
   }),
 }, 'v-carousel')
 
-export const VCarousel = genericComponent<VWindowSlots>()({
+type VCarouselSlots = VWindowSlots & {
+  item: [{
+    props: Record<string, any>
+    item: {
+      id: number
+      value: unknown
+      disabled: boolean | undefined
+    }
+  }]
+}
+
+export const VCarousel = genericComponent<VCarouselSlots>()({
   name: 'VCarousel',
 
   props: makeVCarouselProps(),

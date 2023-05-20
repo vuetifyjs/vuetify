@@ -495,4 +495,27 @@ describe('VCombobox', () => {
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-combobox--active-menu')
   })
+
+  it('should auto-select-first item when pressing enter', () => {
+    cy
+      .mount(() => (
+        <VCombobox
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-combobox')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-combobox input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-combobox input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
+  })
 })

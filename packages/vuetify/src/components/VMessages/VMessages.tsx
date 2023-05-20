@@ -28,7 +28,7 @@ export const makeVMessagesProps = propsFactory({
   active: Boolean,
   color: String,
   messages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
 

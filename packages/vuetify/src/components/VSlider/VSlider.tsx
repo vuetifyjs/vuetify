@@ -18,9 +18,10 @@ import { computed, ref } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
 export type VSliderSlots = VInputSlots & {
+  label: [VInputSlot]
   'tick-label': []
   'thumb-label': []
 }
@@ -141,8 +142,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value }
                 />

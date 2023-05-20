@@ -40,7 +40,11 @@ export const makeVProgressCircularProps = propsFactory({
   ...makeThemeProps(),
 }, 'v-progress-circular')
 
-export const VProgressCircular = genericComponent()({
+type VProgressCircularSlots = {
+  default: [{ value: number }]
+}
+
+export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',
 
   props: makeVProgressCircularProps(),

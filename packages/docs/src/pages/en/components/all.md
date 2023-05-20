@@ -1,6 +1,5 @@
 ---
 nav: All Components
-emphasized: true
 meta:
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.
@@ -68,6 +67,12 @@ Containment components wrap other components and provide additional functionalit
 <components-list-item name="Dialog component" src="dialogs" placeholder>
 
   The dialog component informs a user about a specific task and may contain critical information
+
+</components-list-item>
+
+<components-list-item name="Bottom sheet component" src="bottom-sheets" placeholder>
+
+  The bottom sheet component elevates content from the bottom of the screen
 
 </components-list-item>
 
@@ -300,6 +305,12 @@ These components allow a user to select one or multiple items from a list of opt
 These components are used to display data and information in a variety of ways.
 
 <v-row>
+
+<components-list-item name="Data iterator component" src="data-iterators" placeholder>
+
+  The data iterator component provides an easy interface for paginating and sorting data
+
+</components-list-item>
 
 <components-list-item name="Data table component"  src="data-tables/basics" placeholder>
 
