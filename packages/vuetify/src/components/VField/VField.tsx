@@ -14,6 +14,7 @@ import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useBackgroundColor, useTextColor } from '@/composables/color'
+import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -35,7 +36,6 @@ import {
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
 import type { PropType, Ref } from 'vue'
-import type { VInputSlot } from '@/components/VInput/VInput'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]
@@ -61,10 +61,17 @@ export const makeVFieldProps = propsFactory({
     default: '$clear',
   },
   active: Boolean,
+  centerAffix: {
+    type: Boolean,
+    default: undefined,
+  },
   color: String,
   baseColor: String,
   dirty: Boolean,
-  disabled: Boolean,
+  disabled: {
+    type: Boolean,
+    default: null,
+  },
   error: Boolean,
   flat: Boolean,
   label: String,
@@ -90,17 +97,20 @@ export const makeVFieldProps = propsFactory({
 
 export type VFieldSlots = {
   clear: []
-  'prepend-inner': [DefaultInputSlot & VInputSlot]
-  'append-inner': [DefaultInputSlot & VInputSlot]
-  label: [DefaultInputSlot & VInputSlot]
+  'prepend-inner': [DefaultInputSlot]
+  'append-inner': [DefaultInputSlot]
+  label: [DefaultInputSlot & { label: string | undefined, props: Record<string, any> }]
   loader: [LoaderSlotProps]
   default: [VFieldSlot]
 }
 
-export const VField = genericComponent<new <T>(props: {
-  modelValue?: T
-  'onUpdate:modelValue'?: (val: T) => any
-}) => GenericProps<typeof props, VFieldSlots>>()({
+export const VField = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  },
+  slots: VFieldSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VField',
 
   inheritAttrs: false,
@@ -123,6 +133,7 @@ export const VField = genericComponent<new <T>(props: {
     const { focusClasses, isFocused, focus, blur } = useFocus(props)
     const { InputIcon } = useInputIcon(props)
     const { roundedClasses } = useRounded(props)
+    const { rtlClasses } = useRtl()
 
     const isActive = computed(() => props.dirty || props.active)
     const hasLabel = computed(() => !props.singleLine && !!(props.label || slots.label))
@@ -134,6 +145,7 @@ export const VField = genericComponent<new <T>(props: {
     const labelRef = ref<VFieldLabel>()
     const floatingLabelRef = ref<VFieldLabel>()
     const controlRef = ref<HTMLElement>()
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     const { backgroundColorClasses, backgroundColorStyles } = useBackgroundColor(toRef(props, 'bgColor'))
     const { textColorClasses, textColorStyles } = useTextColor(computed(() => {
@@ -205,6 +217,7 @@ export const VField = genericComponent<new <T>(props: {
       const hasAppend = !!(slots['append-inner'] || props.appendInnerIcon || hasClear)
       const label = slots.label
         ? slots.label({
+          ...slotProps.value,
           label: props.label,
           props: { for: id.value },
         })
@@ -217,6 +230,7 @@ export const VField = genericComponent<new <T>(props: {
             {
               'v-field--active': isActive.value,
               'v-field--appended': hasAppend,
+              'v-field--center-affix': props.centerAffix ?? !isPlainOrUnderlined.value,
               'v-field--disabled': props.disabled,
               'v-field--dirty': props.dirty,
               'v-field--error': props.error,
@@ -234,6 +248,7 @@ export const VField = genericComponent<new <T>(props: {
             focusClasses.value,
             loaderClasses.value,
             roundedClasses.value,
+            rtlClasses.value,
             props.class,
           ]}
           style={[
@@ -342,7 +357,7 @@ export const VField = genericComponent<new <T>(props: {
               </>
             )}
 
-            {['plain', 'underlined'].includes(props.variant) && hasLabel.value && (
+            { isPlainOrUnderlined.value && hasLabel.value && (
               <VFieldLabel ref={ floatingLabelRef } floating for={ id.value }>
                 { label }
               </VFieldLabel>

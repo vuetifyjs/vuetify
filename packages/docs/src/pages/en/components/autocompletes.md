@@ -89,3 +89,15 @@ Sometimes you need to load data externally based upon a search query. Use the `s
 Using a combination of `v-autocomplete` slots and transitions, you can create a stylish toggleable autocomplete field such as this state selector.
 
 <example file="v-autocomplete/misc-state-selector" />
+
+#### New tab
+
+<alert type="success">
+
+This feature was introduced in [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
+</alert>
+
+The **auto-select-first** property highlights the first result when searching, allowing you to press <v-kbd>tab</v-kbd> or <v-kbd>enter</v-kbd> to quickly select it.
+
+<example file="v-autocomplete/misc-new-tab" />

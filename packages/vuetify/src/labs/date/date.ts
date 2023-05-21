@@ -17,7 +17,7 @@ export interface DateInstance extends DateAdapter<Date> {
 }
 
 export type DateOptions = {
-  adapter: { new(locale: string): DateInstance }
+  adapter: (new (locale: string) => DateInstance) | DateInstance
 }
 
 export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:date-adapter')
@@ -25,7 +25,7 @@ export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:
 export interface DateProps {
   displayDate: Date
   hideAdjacentMonths: boolean
-  modelValue: any[]
+  modelValue: readonly any[]
 }
 
 export function createDate (options?: DateOptions) {
@@ -40,23 +40,27 @@ export const makeDateProps = propsFactory({
   },
   hideAdjacentMonths: Boolean,
   modelValue: {
-    type: null as unknown as PropType<any[]>,
+    type: null as unknown as PropType<readonly any[]>,
     default: () => [],
   },
 }, 'date')
 
-export function useDate (props: DateProps) {
+export function useDate (props?: DateProps) {
   const date = inject(DateAdapterSymbol)
   const locale = useLocale()
 
   if (!date) throw new Error('[Vuetify] Could not find injected date')
 
-  // eslint-disable-next-line new-cap
-  const instance = new date.adapter(locale.current.value)
+  const instance = typeof date.adapter === 'function'
+    // eslint-disable-next-line new-cap
+    ? new date.adapter(locale.current.value)
+    : date.adapter
 
-  watch(locale.current, val => {
-    instance.locale = val
-  }, { immediate: true })
+  if (typeof date.adapter === 'function') {
+    watch(locale.current, val => {
+      instance.locale = val
+    })
+  }
 
   return instance
 }

@@ -4,17 +4,19 @@ import { useResizeObserver } from '@/composables/resizeObserver'
 import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { onUpdated, watch } from 'vue'
+
+export const makeVVirtualScrollItemProps = propsFactory({
+  dynamicHeight: Boolean,
+
+  ...makeComponentProps(),
+}, 'v-virtual-scroll-item')
 
 export const VVirtualScrollItem = genericComponent()({
   name: 'VVirtualScrollItem',
 
-  props: {
-    dynamicHeight: Boolean,
-
-    ...makeComponentProps(),
-  },
+  props: makeVVirtualScrollItemProps(),
 
   emits: {
     'update:height': (height: number) => true,

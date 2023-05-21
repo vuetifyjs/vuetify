@@ -16,16 +16,14 @@
     &.v-field
       cursor: text
 
+    &--variant-outlined
+      --autocomplete-chips-margin-bottom: #{$autocomplete-chips-margin-top}
+
   .v-field
     .v-field__input
       > input
         align-self: flex-start
         flex: 1 1
-
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $autocomplete-transition
 
   .v-field:not(.v-field--focused)
     input
@@ -57,13 +55,11 @@
     line-height: inherit
     max-width: 100%
 
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--autocomplete-chips-margin-bottom) + $autocomplete-chips-margin-top)
 
-  &--chips
     .v-autocomplete__selection
       margin-top: $autocomplete-chips-margin-top
       margin-bottom: var(--autocomplete-chips-margin-bottom)
@@ -103,7 +99,10 @@
       .v-autocomplete__selection
         opacity: 0
 
-  &--selection-slot
-    &.v-text-field input
-      position: relative
-      padding-inline-start: 0
+  &__menu-icon
+    margin-inline-start: 4px
+    transition: $autocomplete-transition
+
+    .v-autocomplete--active-menu &
+      opacity: var(--v-high-emphasis-opacity)
+      transform: rotate(180deg)

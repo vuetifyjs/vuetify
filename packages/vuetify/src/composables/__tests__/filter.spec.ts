@@ -2,7 +2,7 @@
 import { defaultFilter, filterItems, useFilter } from '../filter'
 import { describe, expect, it } from '@jest/globals'
 import { nextTick, ref } from 'vue'
-import { transformItem, transformItems } from '../items'
+import { transformItem, transformItems } from '../list-items'
 
 describe('filter', () => {
   describe('defaultFilter', () => {

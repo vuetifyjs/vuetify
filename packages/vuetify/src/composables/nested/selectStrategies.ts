@@ -11,7 +11,7 @@ export type SelectStrategyFn = (data: {
 }) => Map<unknown, 'on' | 'off' | 'indeterminate'>
 
 export type SelectStrategyTransformInFn = (
-  v: unknown[] | undefined,
+  v: readonly unknown[] | undefined,
   children: Map<unknown, unknown[]>,
   parents: Map<unknown, unknown>,
 ) => Map<unknown, 'on' | 'off' | 'indeterminate'>

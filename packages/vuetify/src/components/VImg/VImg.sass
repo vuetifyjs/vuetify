@@ -13,9 +13,10 @@
 .v-img__gradient,
 .v-img__placeholder,
 .v-img__error
-  z-index: -1
-
-  @include tools.absolute()
+  grid-row-start: 1
+  grid-column-start: 1
+  width: 100%
+  height: 100%
 
 .v-img__img
   &--preload

@@ -146,6 +146,31 @@ describe('VAutocomplete', () => {
     cy.get('.v-select--active-menu').should('have.length', 0)
   })
 
+  it('should be empty when delete the selected option', () => {
+    const items = ref([
+      { title: 'Item 1', value: 'Item 1' },
+      { title: 'Item 2', value: 'Item 2' },
+    ])
+
+    const selectedItems = ref(null)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        returnObject
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').contains('Item 1').click()
+
+    cy.get('.v-field__input').clear()
+    cy.get('body').click('bottomLeft')
+    cy.get('.v-field__input').should('not.include.text', 'Item 1')
+  })
+
   // https://github.com/vuetifyjs/vuetify/issues/16210
   it('should return item object as the argument of item-title function', () => {
     const items = [
@@ -300,5 +325,28 @@ describe('VAutocomplete', () => {
       .should('have.class', 'v-autocomplete--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-autocomplete--active-menu')
+  })
+
+  it('should auto-select-first item when pressing enter', () => {
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-autocomplete input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-autocomplete input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
   })
 })

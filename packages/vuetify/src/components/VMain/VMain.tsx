@@ -8,17 +8,19 @@ import { useLayout } from '@/composables/layout'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVMainProps = propsFactory({
+  scrollable: Boolean,
+
+  ...makeComponentProps(),
+  ...makeTagProps({ tag: 'main' }),
+}, 'v-main')
 
 export const VMain = genericComponent()({
   name: 'VMain',
 
-  props: {
-    scrollable: Boolean,
-
-    ...makeComponentProps(),
-    ...makeTagProps({ tag: 'main' }),
-  },
+  props: makeVMainProps(),
 
   setup (props, { slots }) {
     const { mainStyles } = useLayout()

@@ -6,18 +6,20 @@ import { makeComponentProps } from '@/composables/component'
 import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVLabelProps = propsFactory({
+  text: String,
+  clickable: Boolean,
+
+  ...makeComponentProps(),
+  ...makeThemeProps(),
+}, 'v-label')
 
 export const VLabel = genericComponent()({
   name: 'VLabel',
 
-  props: {
-    text: String,
-    clickable: Boolean,
-
-    ...makeComponentProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVLabelProps(),
 
   setup (props, { slots }) {
     useRender(() => (
