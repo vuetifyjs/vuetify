@@ -1,5 +1,6 @@
 {
   "props": {
+    "autoSelectFirst": "When searching, will always highlight the first option and select it on blur. `exact` will only highlight and select exact matches.",
     "delimiters": "Accepts an array of strings that will trigger a new tag when typing. Does not replace the normal Tab and Enter keys."
   },
   "exposed": {

@@ -14,7 +14,21 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVExpansionPanelProps = propsFactory({
+  title: String,
+  text: String,
+  bgColor: String,
+
+  ...makeComponentProps(),
+  ...makeElevationProps(),
+  ...makeGroupItemProps(),
+  ...makeLazyProps(),
+  ...makeRoundedProps(),
+  ...makeTagProps(),
+  ...makeVExpansionPanelTitleProps(),
+}, 'v-expansion-panel')
 
 export type VExpansionPanelSlots = {
   default: []
@@ -25,19 +39,7 @@ export type VExpansionPanelSlots = {
 export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
   name: 'VExpansionPanel',
 
-  props: {
-    title: String,
-    text: String,
-    bgColor: String,
-
-    ...makeComponentProps(),
-    ...makeElevationProps(),
-    ...makeGroupItemProps(),
-    ...makeLazyProps(),
-    ...makeRoundedProps(),
-    ...makeTagProps(),
-    ...makeVExpansionPanelTitleProps(),
-  },
+  props: makeVExpansionPanelProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
@@ -91,7 +93,6 @@ export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({
             backgroundColorStyles.value,
             props.style,
           ]}
-          aria-expanded={ groupItem.isSelected.value }
         >
           <div
             class={[

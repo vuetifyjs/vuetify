@@ -7,6 +7,7 @@
       :menu-props="menuProps"
       :placeholder="tag"
       hide-details
+      density="comfortable"
       item-title="name"
       label="Select Release Version"
       persistent-placeholder
@@ -33,39 +34,26 @@
 
     <v-card
       variant="flat"
-      min-height="180"
       rounded="t-0 b"
     >
       <div
-        v-if="!!search"
+        v-if="search?.author"
         class="d-flex justify-space-between"
       >
-        <v-list-item v-if="search.author" lines="two">
-          <v-list-item-title class="mb-1 text-h6">
-            <i18n-t keypath="released-by">
-              <template #author>
-                <app-link :href="search.author.html_url">
-                  {{ search.author.login }}
-                </app-link>
-              </template>
-            </i18n-t>
-          </v-list-item-title>
-
-          <v-list-item-subtitle v-if="search.published_at">
+        <v-list-item v-if="publishedOn" lines="two">
+          <v-list-item-title class="d-flex align-center">
             <i18n-t keypath="published-on">
               <template #date>
                 <v-chip
-                  color="green-darken-3"
+                  :text="publishedOn"
+                  class="ms-2 text-caption"
                   density="comfortable"
                   label
-                  size="small"
                   variant="flat"
-                >
-                  <strong v-text="search.published_at" />
-                </v-chip>
+                />
               </template>
             </i18n-t>
-          </v-list-item-subtitle>
+          </v-list-item-title>
         </v-list-item>
 
         <div class="pe-3 d-flex align-center flex-1-0-auto">
@@ -79,27 +67,31 @@
             :target="tooltip.href ? '_blank' : undefined"
             class="text-white ms-2"
             density="comfortable"
+            size="small"
             variant="flat"
             @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
 
-      <v-divider />
+      <template v-if="search?.body && !store.isLoading">
+        <v-divider />
 
-      <div class="px-4 pt-4">
-        <app-markdown
-          v-if="search?.body"
-          :content="search.body"
-          class="releases"
-        />
-      </div>
+        <div class="px-4 pt-4">
+          <app-markdown
+            v-if="search?.body"
+            :content="search.body"
+            class="releases"
+          />
+        </div>
+      </template>
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
   // Composables
+  import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
 
@@ -112,10 +104,12 @@
   import { wait } from '@/util/helpers'
 
   const { t } = useI18n()
-  const store = useReleasesStore()
-  const clicked = ref('copy-link')
+  const date = useDate()
   const route = useRoute()
   const router = useRouter()
+  const store = useReleasesStore()
+
+  const clicked = ref('copy-link')
   const search = ref<Release>()
 
   const menuProps = computed(() => {
@@ -165,6 +159,12 @@
   })
 
   const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
+  const publishedOn = computed(() => {
+    if (!search.value?.published_at) return undefined
+
+    return date.format(new Date(search.value.published_at), 'fullDateWithWeekday')
+  })
 
   onBeforeMount(async () => {
     await store.fetch()

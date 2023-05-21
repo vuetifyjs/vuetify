@@ -19,7 +19,7 @@ import { useBackgroundColor } from '@/composables/color'
 import { useRtl } from '@/composables/locale'
 
 // Utilities
-import { computed, ref, toRef } from 'vue'
+import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
@@ -82,7 +82,7 @@ export const VToolbar = genericComponent<VToolbarSlots>()({
     const { themeClasses } = provideTheme(props)
     const { rtlClasses } = useRtl()
 
-    const isExtended = ref(!!(props.extended || slots.extension?.()))
+    const isExtended = shallowRef(!!(props.extended || slots.extension?.()))
     const contentHeight = computed(() => parseInt((
       Number(props.height) +
       (props.density === 'prominent' ? Number(props.height) : 0) -

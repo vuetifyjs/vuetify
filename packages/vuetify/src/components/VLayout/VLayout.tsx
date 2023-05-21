@@ -6,15 +6,17 @@ import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVLayoutProps = propsFactory({
+  ...makeComponentProps(),
+  ...makeLayoutProps(),
+}, 'v-layout')
 
 export const VLayout = genericComponent()({
   name: 'VLayout',
 
-  props: {
-    ...makeComponentProps(),
-    ...makeLayoutProps(),
-  },
+  props: makeVLayoutProps(),
 
   setup (props, { slots }) {
     const { layoutClasses, layoutStyles, getLayoutItem, items, layoutRef } = createLayout(props)

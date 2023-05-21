@@ -1,5 +1,5 @@
 // Utilities
-import { inject, reactive, ref, shallowRef, toRefs, watchEffect } from 'vue'
+import { inject, reactive, shallowRef, toRefs, watchEffect } from 'vue'
 import { mergeDeep } from '@/util'
 
 // Globals
@@ -26,6 +26,11 @@ export interface DisplayOptions {
 export interface InternalDisplayOptions {
   mobileBreakpoint: number | DisplayBreakpoint
   thresholds: DisplayThresholds
+}
+
+export type SSROptions = boolean | {
+  clientWidth: number
+  clientHeight?: number
 }
 
 export interface DisplayPlatform {
@@ -91,20 +96,20 @@ const parseDisplayOptions = (options: DisplayOptions = defaultDisplayOptions) =>
   return mergeDeep(defaultDisplayOptions, options) as InternalDisplayOptions
 }
 
-function getClientWidth (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientWidth (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerWidth
-    : 0
+    : (typeof ssr === 'object' && ssr.clientWidth) || 0
 }
 
-function getClientHeight (isHydrate?: boolean) {
-  return IN_BROWSER && !isHydrate
+function getClientHeight (ssr?: SSROptions) {
+  return IN_BROWSER && !ssr
     ? window.innerHeight
-    : 0
+    : (typeof ssr === 'object' && ssr.clientHeight) || 0
 }
 
-function getPlatform (isHydrate?: boolean): DisplayPlatform {
-  const userAgent = IN_BROWSER && !isHydrate
+function getPlatform (ssr?: SSROptions): DisplayPlatform {
+  const userAgent = IN_BROWSER && !ssr
     ? window.navigator.userAgent
     : 'ssr'
 
@@ -141,13 +146,13 @@ function getPlatform (isHydrate?: boolean): DisplayPlatform {
   }
 }
 
-export function createDisplay (options?: DisplayOptions, ssr?: boolean): DisplayInstance {
+export function createDisplay (options?: DisplayOptions, ssr?: SSROptions): DisplayInstance {
   const { thresholds, mobileBreakpoint } = parseDisplayOptions(options)
 
-  const height = ref(getClientHeight(ssr))
+  const height = shallowRef(getClientHeight(ssr))
   const platform = shallowRef(getPlatform(ssr))
   const state = reactive({} as DisplayInstance)
-  const width = ref(getClientWidth(ssr))
+  const width = shallowRef(getClientWidth(ssr))
 
   function updateSize () {
     height.value = getClientHeight()

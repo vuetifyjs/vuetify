@@ -24,7 +24,6 @@ export const useReleasesStore = defineStore('releases', {
     format (release: Release) {
       return {
         ...release,
-        published_at: new Date(release.published_at as any).toDateString(),
         props: {
           prependIcon: `mdi-numeric-${release.tag_name.slice(1, 2)}-box`,
           title: release.tag_name,
@@ -52,9 +51,19 @@ export const useReleasesStore = defineStore('releases', {
 
       if (found) return found
 
-      const res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)
+      this.isLoading = true
 
-      if (res.data) {
+      let res: any
+
+      if (!tag.startsWith('v')) tag = `v${tag}`
+
+      if (tag.length >= 6) {
+        res = await octokit.request(`GET /repos/vuetifyjs/vuetify/releases/tags/${tag}`)
+      }
+
+      this.isLoading = false
+
+      if (res?.data) {
         this.releases.push(this.format(res.data))
 
         return res.data

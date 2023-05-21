@@ -11,37 +11,39 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useSsrBoot } from '@/composables/ssrBoot'
 
 // Utilities
-import { computed, ref, toRef, watch } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { computed, ref, shallowRef, toRef, watch } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { VToolbarSlots } from '@/components/VToolbar/VToolbar'
 
+export const makeVAppBarProps = propsFactory({
+  scrollBehavior: String,
+  modelValue: {
+    type: Boolean,
+    default: true,
+  },
+  location: {
+    type: String as PropType<'top' | 'bottom'>,
+    default: 'top',
+    validator: (value: any) => ['top', 'bottom'].includes(value),
+  },
+
+  ...makeVToolbarProps(),
+  ...makeLayoutItemProps(),
+  ...makeScrollProps(),
+
+  height: {
+    type: [Number, String],
+    default: 64,
+  },
+}, 'v-app-bar')
+
 export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',
 
-  props: {
-    scrollBehavior: String,
-    modelValue: {
-      type: Boolean,
-      default: true,
-    },
-    location: {
-      type: String as PropType<'top' | 'bottom'>,
-      default: 'top',
-      validator: (value: any) => ['top', 'bottom'].includes(value),
-    },
-
-    ...makeVToolbarProps(),
-    ...makeLayoutItemProps(),
-    ...makeScrollProps(),
-
-    height: {
-      type: [Number, String],
-      default: 64,
-    },
-  },
+  props: makeVAppBarProps(),
 
   emits: {
     'update:modelValue': (value: boolean) => true,
@@ -124,7 +126,7 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       order: computed(() => parseInt(props.order, 10)),
       position: toRef(props, 'location'),
       layoutSize: height,
-      elementSize: ref(undefined),
+      elementSize: shallowRef(undefined),
       active: isActive,
       absolute: toRef(props, 'absolute'),
     })

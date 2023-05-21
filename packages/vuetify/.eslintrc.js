@@ -16,6 +16,7 @@ module.exports = {
     // 'vue/html-self-closing': 'off',
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
+    'local-rules/no-components-index': 'error',
 
     'no-restricted-imports': ['error', {
       paths: [{

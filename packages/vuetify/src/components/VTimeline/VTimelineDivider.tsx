@@ -11,25 +11,27 @@ import { makeSizeProps, useSize } from '@/composables/size'
 import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
+
+export const makeVTimelineDividerProps = propsFactory({
+  dotColor: String,
+  fillDot: Boolean,
+  hideDot: Boolean,
+  icon: IconValue,
+  iconColor: String,
+  lineColor: String,
+
+  ...makeComponentProps(),
+  ...makeRoundedProps(),
+  ...makeSizeProps(),
+  ...makeElevationProps(),
+}, 'v-timeline-divider')
 
 export const VTimelineDivider = genericComponent()({
   name: 'VTimelineDivider',
 
-  props: {
-    dotColor: String,
-    fillDot: Boolean,
-    hideDot: Boolean,
-    icon: IconValue,
-    iconColor: String,
-    lineColor: String,
-
-    ...makeComponentProps(),
-    ...makeRoundedProps(),
-    ...makeSizeProps(),
-    ...makeElevationProps(),
-  },
+  props: makeVTimelineDividerProps(),
 
   setup (props, { slots }) {
     const { sizeClasses, sizeStyles } = useSize(props, 'v-timeline-divider__dot')

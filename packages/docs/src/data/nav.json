@@ -188,6 +188,14 @@
     "items": [
       "introduction",
       {
+        "title": "bottom-sheets",
+        "subfolder": "components"
+      },
+      {
+        "title": "data-iterators",
+        "subfolder": "components"
+      },
+      {
         "title": "data-tables",
         "subfolder": "components",
         "activeIcon": "",
@@ -195,6 +203,7 @@
         "items": [
           "basics",
           "headers",
+          "selection",
           "sorting",
           "pagination",
           "filtering",
