@@ -18,13 +18,6 @@ const stories = Object.fromEntries(Object.entries({
   'Prepend/append': <VSelect label="label" items={ items } prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
   'Prepend/append inner': <VSelect label="label" items={ items } prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
   Placeholder: <VSelect label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
-  Chips: <VSelect label="label" items={ items } chips />,
-  SelectionSlot: <VSelect label="label" items={ items } >{{
-    selection: ({ item }) => {
-      return item.title
-    },
-  }}
-      </VSelect>,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
@@ -32,6 +25,18 @@ const stories = Object.fromEntries(Object.entries({
         <div class="d-flex" style="gap: 0.4rem">
           { cloneVNode(v, { variant, density }) }
           { cloneVNode(v, { variant, density, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'] }) }
+          <VSelect
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VSelect>
         </div>
       ))
     )).flat()}
