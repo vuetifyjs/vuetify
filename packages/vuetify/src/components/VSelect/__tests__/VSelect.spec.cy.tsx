@@ -394,4 +394,71 @@ describe('VSelect', () => {
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-select--active-menu')
   })
+
+  context('test ID', () => {
+    context('when no explicit test ID is given', () => {
+      it('should add an implicit test ID to each item', () => {
+        cy.mount(() => (
+          <VSelect
+            items={['California', 'Colorado', 'Florida', 'Georgia']}
+            data-test="select"
+          />
+        ))
+
+        cy.getBySel('select').click()
+        cy.get('.v-overlay__content').within(() => {
+          cy.getBySel('Colorado').should('have.text', 'Colorado')
+        })
+      })
+    })
+
+    context('when an explicit test ID is given', () => {
+      it('should add the explicit test ID to each item', () => {
+        const items = [
+          { title: 'Florida', value: 'FL', testId: 'florida' },
+          { title: 'Georgia', value: 'GA', testId: 'georgia' },
+          { title: 'Nebraska', value: 'NE', testId: 'nebraska' },
+          { title: 'California', value: 'CA', testId: 'california' },
+          { title: 'New York', value: 'NY', testId: 'new_york' },
+        ]
+
+        cy.mount(() => (
+          <VSelect
+            items={ items }
+            data-test="select"
+          />
+        ))
+
+        cy.getBySel('select').click()
+        cy.get('.v-overlay__content').within(() => {
+          cy.getBySel('new_york').should('have.text', 'New York')
+        })
+      })
+    })
+
+    describe('when a non-default test ID property is used', () => {
+      it('should add the test ID to each item using the specified property', () => {
+        const items = [
+          { title: 'Florida', value: 'FL', testSelector: 'florida' },
+          { title: 'Georgia', value: 'GA', testSelector: 'georgia' },
+          { title: 'Nebraska', value: 'NE', testSelector: 'nebraska' },
+          { title: 'California', value: 'CA', testSelector: 'california' },
+          { title: 'New York', value: 'NY', testSelector: 'new_york' },
+        ]
+
+        cy.mount(() => (
+          <VSelect
+            items={ items }
+            data-test="select"
+            item-test-id="testSelector"
+          />
+        ))
+
+        cy.getBySel('select').click()
+        cy.get('.v-overlay__content').within(() => {
+          cy.getBySel('new_york').should('have.text', 'New York')
+        })
+      })
+    })
+  })
 })
