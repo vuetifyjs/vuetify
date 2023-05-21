@@ -92,7 +92,6 @@ export {
   mdiCloudUpload,
   mdiCodeJson,
   mdiCodeTags,
-  mdiCodepen,
   mdiCogOutline,
   mdiComment,
   mdiCompassOutline,

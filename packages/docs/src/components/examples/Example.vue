@@ -53,8 +53,6 @@
 
             <span>{{ t(path) }}</span>
           </v-tooltip>
-
-          <Codepen v-if="isLoaded" />
         </v-toolbar>
       </v-lazy>
 
@@ -94,10 +92,10 @@
   import ExampleMissing from './ExampleMissing.vue'
 
   // Composables
-  import { useCodepen } from '@/composables/codepen'
   import { useI18n } from 'vue-i18n'
   import { usePlayground } from '@/composables/playground'
   import { useTheme } from 'vuetify'
+  import { useUserStore } from '@/store/user'
 
   // Utilities
   import { computed, mergeProps, onMounted, ref, shallowRef, watch } from 'vue'
@@ -201,18 +199,16 @@
     return parentTheme.current.value.dark
   })
 
-  const { Codepen, openCodepen } = useCodepen({ code, sections, component })
-
   const playgroundLink = computed(() => {
     if (!isLoaded.value || isError.value) return null
 
-    const resources = JSON.parse(component.value.codepenResources || '{}')
-
+    const resources = JSON.parse(component.value.playgroundResources || '{}')
+    const scriptType = useUserStore().composition === 'composition' && hasComposition.value ? 'composition' : 'options'
     return usePlayground(
       sections.value,
       resources.css,
       resources.imports,
-      hasComposition.value,
+      scriptType,
     )
   })
 
@@ -238,11 +234,6 @@
 
     return [
       ...array,
-      {
-        icon: 'mdi-codepen',
-        path: 'edit-in-codepen',
-        onClick: openCodepen,
-      },
       {
         icon: 'mdi-github',
         path: 'view-in-github',

@@ -98,7 +98,7 @@
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
     "js": [
       "https://cdn.jsdelivr.net/npm/@vuelidate/core/dist/index.js",
@@ -110,4 +110,4 @@
       "@vuelidate/validators": "https://cdn.jsdelivr.net/npm/@vuelidate/validators/dist/index.esm.js"
     }
   }
-</codepen-resources>
+</playground-resources>

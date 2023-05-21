@@ -105,7 +105,7 @@
   }
 </script>
 
-<codepen-resources lang="json">
+<playground-resources lang="json">
   {
     "js": ["https://cdn.jsdelivr.net/npm/vee-validate@4.x/dist/vee-validate.js"],
     "imports": {
@@ -113,4 +113,4 @@
       "@vue/devtools-api": "https://cdn.jsdelivr.net/npm/@vue/devtools-api@6.5.0/lib/esm/index.js"
     }
   }
-</codepen-resources>
+</playground-resources>

@@ -132,21 +132,3 @@
     },
   }
 </script>
-
-<codepen-additional>
-  const easings = {
-    linear: '',
-    easeInQuad: '',
-    easeOutQuad: '',
-    easeInOutQuad: '',
-    easeInCubic: '',
-    easeOutCubic: '',
-    easeInOutCubic: '',
-    easeInQuart: '',
-    easeOutQuart: '',
-    easeInOutQuart: '',
-    easeInQuint: '',
-    easeOutQuint: '',
-    easeInOutQuint: ''
-  }
-</codepen-additional>

@@ -15,11 +15,11 @@ export function usePlayground (
   sections: ({ name: string, content: string, language: string})[] = [],
   css: string[] = [],
   imports: Record<string, string> = {},
-  hasComposition?: boolean
+  scriptType?: ('options' | 'composition'),
 ) {
   const files = {
     'App.vue': sections
-      .filter(section => [hasComposition ? 'composition' : 'options', 'template'].includes(section.name))
+      .filter(section => [scriptType, 'template', 'style'].includes(section.name))
       .map(section => section.content)
       .join('\n\n'),
     'links.json': JSON.stringify({ css }),

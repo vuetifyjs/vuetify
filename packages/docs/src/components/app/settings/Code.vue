@@ -1,5 +1,5 @@
 <template>
-  <app-settings-group v-model="user.composition" title="code" :items="items" multiple />
+  <app-settings-group v-model="user.composition" title="code" :items="items" />
 </template>
 
 <script setup>
