@@ -27,7 +27,7 @@ export const makeDataIteratorItemProps = propsFactory({
   },
   itemValue: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'value',
+    default: 'id',
   },
   itemSelectable: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
