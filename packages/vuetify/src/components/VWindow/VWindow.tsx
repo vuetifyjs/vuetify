@@ -25,10 +25,10 @@ import type { IconValue } from '@/composables/icons'
 import type { TouchHandlers } from '@/directives/touch'
 
 export type VWindowSlots = {
-  default: [{ group: GroupProvide }]
-  additional: [{ group: GroupProvide }]
-  prev: [{ props: ControlProps }]
-  next: [{ props: ControlProps }]
+  default: { group: GroupProvide }
+  additional: { group: GroupProvide }
+  prev: { props: ControlProps }
+  next: { props: ControlProps }
 }
 
 type WindowProvide = {

@@ -57,10 +57,10 @@ export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
     items?: T[]
   },
   slots: {
-    prepend: []
-    title: [{ item: T, index: number }]
-    divider: [{ item: T, index: number }]
-    default: []
+    prepend: never
+    title: { item: T, index: number }
+    divider: { item: T, index: number }
+    default: never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBreadcrumbs',

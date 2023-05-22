@@ -29,9 +29,9 @@ import type { VDataTableHeadersSlots } from './VDataTableHeaders'
 type VDataTableVirtualSlotProps = Omit<VDataTableSlotProps, 'setItemsPerPage' | 'page' | 'pageCount' | 'itemsPerPage'>
 
 export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
-  top: [VDataTableVirtualSlotProps]
+  top: VDataTableVirtualSlotProps
   headers: VDataTableHeadersSlots['headers']
-  bottom: [VDataTableVirtualSlotProps]
+  bottom: VDataTableVirtualSlotProps
 }
 
 export const makeVDataTableVirtualProps = propsFactory({

@@ -85,12 +85,12 @@ export const makeVAlertProps = propsFactory({
 }, 'v-alert')
 
 export type VAlertSlots = {
-  default: []
-  prepend: []
-  title: []
-  text: []
-  append: []
-  close: [{ props: Record<string, any> }]
+  default: never
+  prepend: never
+  title: never
+  text: never
+  append: never
+  close: { props: Record<string, any> }
 }
 
 export const VAlert = genericComponent<VAlertSlots>()({

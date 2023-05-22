@@ -33,17 +33,17 @@ export const makeVChipGroupProps = propsFactory({
   ...makeVariantProps({ variant: 'tonal' } as const),
 }, 'v-chip-group')
 
-type VChipGroupProps = {
-  default: [{
+type VChipGroupSlots = {
+  default: {
     isSelected: (id: number) => boolean
     select: (id: number, value: boolean) => void
     next: () => void
     prev: () => void
     selected: readonly number[]
-  }]
+  }
 }
 
-export const VChipGroup = genericComponent<VChipGroupProps>()({
+export const VChipGroup = genericComponent<VChipGroupSlots>()({
   name: 'VChipGroup',
 
   props: makeVChipGroupProps(),

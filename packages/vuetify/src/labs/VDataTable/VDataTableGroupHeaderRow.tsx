@@ -17,8 +17,8 @@ import type { PropType } from 'vue'
 import type { Group } from './composables/group'
 
 export type VDataTableGroupHeaderRowSlots = {
-  'data-table-group': [{ item: Group, count: number, props: Record<string, unknown> }]
-  'data-table-select': [{ props: Record<string, unknown> }]
+  'data-table-group': { item: Group, count: number, props: Record<string, unknown> }
+  'data-table-select': { props: Record<string, unknown> }
 }
 
 export const makeVDataTableGroupHeaderRowProps = propsFactory({

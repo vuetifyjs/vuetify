@@ -31,9 +31,9 @@ export const makeVExpansionPanelProps = propsFactory({
 }, 'v-expansion-panel')
 
 export type VExpansionPanelSlots = {
-  default: []
-  title: []
-  text: []
+  default: never
+  title: never
+  text: never
 }
 
 export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({

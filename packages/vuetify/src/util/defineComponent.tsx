@@ -135,8 +135,7 @@ type ToListeners<T extends string | number | symbol> = { [K in T]: K extends `on
 
 export type SlotsToProps<
   U extends RawSlots,
-  Generic extends boolean = false,
-  T = U extends Record<string, any[]> ? MakeInternalSlots<U> : U
+  T = MakeInternalSlots<U>
 > = {
   $children?: (
     | VNodeChild
@@ -148,18 +147,18 @@ export type SlotsToProps<
   [K in keyof T as `v-slot:${K & string}`]?: T[K] | false
 }
 
-type RawSlots = Record<string, any[]> | Record<string, Slot>
-type Slot<T = any> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
-type VueSlot<T = any> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
-export type MakeInternalSlots<T extends RawSlots> = {
-  [K in keyof T]: T[K] extends any[] ? Slot<T[K][number]> : T[K]
+type RawSlots = Record<string, unknown>
+type Slot<T> = [T] extends [never] ? () => VNodeChild : (arg: T) => VNodeChild
+type VueSlot<T> = [T] extends [never] ? () => VNode[] : (arg: T) => VNode[]
+type MakeInternalSlots<T extends RawSlots> = {
+  [K in keyof T]: Slot<T[K]>
 }
 type MakeSlots<T extends RawSlots> = {
-  [K in keyof T]: T[K] extends any[] ? VueSlot<T[K][number]> : T[K]
+  [K in keyof T]: VueSlot<T[K]>
 }
 
-export type GenericProps<Props, Slots extends Record<string, any[]>> = {
-  $props: Props & SlotsToProps<Slots, true>
+export type GenericProps<Props, Slots extends Record<string, unknown>> = {
+  $props: Props & SlotsToProps<Slots>
   $slots: MakeSlots<Slots>
 }
 
@@ -235,7 +234,7 @@ type DefineComponentWithSlots<Slots extends RawSlots> = <
 > & FilterPropsOptions<PropsOptions>
 
 // No argument - simple default slot
-export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: [] }>
+export function genericComponent (exposeDefaults?: boolean): DefineComponentWithSlots<{ default: never }>
 
 // Generic constructor argument - generic props and slots
 export function genericComponent<T extends (new (props: Record<string, any>, slots: any) => {

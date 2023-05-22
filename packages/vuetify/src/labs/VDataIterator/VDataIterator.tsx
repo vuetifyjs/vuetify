@@ -44,10 +44,10 @@ type VDataIteratorSlotProps = {
 }
 
 export type VDataIteratorSlots = {
-  default: [VDataIteratorSlotProps]
-  header: [VDataIteratorSlotProps]
-  footer: [VDataIteratorSlotProps]
-  'no-data': []
+  default: VDataIteratorSlotProps
+  header: VDataIteratorSlotProps
+  footer: VDataIteratorSlotProps
+  'no-data': never
 }
 
 export const makeVDataIteratorProps = propsFactory({

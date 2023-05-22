@@ -73,8 +73,8 @@ function Scrim (props: ScrimProps) {
 }
 
 export type OverlaySlots = {
-  default: [{ isActive: Ref<boolean> }]
-  activator: [{ isActive: boolean, props: Record<string, any> }]
+  default: { isActive: Ref<boolean> }
+  activator: { isActive: boolean, props: Record<string, any> }
 }
 
 export const makeVOverlayProps = propsFactory({

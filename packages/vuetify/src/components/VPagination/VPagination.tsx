@@ -45,11 +45,11 @@ type ControlSlot = {
 }
 
 export type VPaginationSlots = {
-  item: [ItemSlot]
-  first: [ControlSlot]
-  prev: [ControlSlot]
-  next: [ControlSlot]
-  last: [ControlSlot]
+  item: ItemSlot
+  first: ControlSlot
+  prev: ControlSlot
+  next: ControlSlot
+  last: ControlSlot
 }
 
 export const makeVPaginationProps = propsFactory({

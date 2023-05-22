@@ -22,13 +22,13 @@ export const makeVItemGroupProps = propsFactory({
 }, 'v-item-group')
 
 type VItemGroupSlots = {
-  default: [{
+  default: {
     isSelected: (id: number) => boolean
     select: (id: number, value: boolean) => void
     next: () => void
     prev: () => void
     selected: readonly number[]
-  }]
+  }
 }
 
 export const VItemGroup = genericComponent<VItemGroupSlots>()({

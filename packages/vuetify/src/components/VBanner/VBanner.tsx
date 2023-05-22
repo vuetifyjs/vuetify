@@ -30,10 +30,10 @@ import { toRef } from 'vue'
 import type { PropType } from 'vue'
 
 export type VBannerSlots = {
-  default: []
-  prepend: []
-  text: []
-  actions: []
+  default: never
+  prepend: never
+  text: never
+  actions: never
 }
 
 export const makeVBannerProps = propsFactory({

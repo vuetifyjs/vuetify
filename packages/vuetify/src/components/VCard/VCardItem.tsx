@@ -13,11 +13,11 @@ import { makeDensityProps } from '@/composables/density'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VCardItemSlots = {
-  default: []
-  prepend: []
-  append: []
-  title: []
-  subtitle: []
+  default: never
+  prepend: never
+  append: never
+  title: never
+  subtitle: never
 }
 
 export const makeCardItemProps = propsFactory({

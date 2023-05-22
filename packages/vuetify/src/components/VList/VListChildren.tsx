@@ -15,13 +15,13 @@ import type { GenericProps } from '@/util'
 import type { PropType } from 'vue'
 
 export type VListChildrenSlots<T> = {
-  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & [{ item: T }]
+  [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }
 } & {
-  default: []
-  item: [{ props: InternalListItem['props'] }]
-  divider: [{ props: InternalListItem['props'] }]
-  subheader: [{ props: InternalListItem['props'] }]
-  header: [{ props: InternalListItem['props'] }]
+  default: never
+  item: { props: InternalListItem['props'] }
+  divider: { props: InternalListItem['props'] }
+  subheader: { props: InternalListItem['props'] }
+  header: { props: InternalListItem['props'] }
 }
 
 export const makeVListChildrenProps = propsFactory({

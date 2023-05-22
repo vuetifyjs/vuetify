@@ -61,12 +61,12 @@ export const makeVToolbarProps = propsFactory({
 }, 'v-toolbar')
 
 export type VToolbarSlots = {
-  default: []
-  image: []
-  prepend: []
-  append: []
-  title: []
-  extension: []
+  default: never
+  image: never
+  prepend: never
+  append: never
+  title: never
+  extension: never
 }
 
 export const VToolbar = genericComponent<VToolbarSlots>()({

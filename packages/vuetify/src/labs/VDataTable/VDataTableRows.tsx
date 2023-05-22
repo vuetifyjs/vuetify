@@ -42,14 +42,14 @@ type ItemSlot = {
 }
 
 export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
-  item: [ItemSlot]
-  loading: []
-  'group-header': [GroupHeaderSlot]
-  'no-data': []
-  'expanded-row': [ItemSlot]
-  'item.data-table-select': [ItemSlot]
-  'item.data-table-expand': [ItemSlot]
-} & { [key: `item.${string}`]: [ItemSlot] }
+  item: ItemSlot
+  loading: never
+  'group-header': GroupHeaderSlot
+  'no-data': never
+  'expanded-row': ItemSlot
+  'item.data-table-select': ItemSlot
+  'item.data-table-expand': ItemSlot
+} & { [key: `item.${string}`]: ItemSlot }
 
 export const makeVDataTableRowsProps = propsFactory({
   loading: [Boolean, String],
