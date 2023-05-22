@@ -112,7 +112,7 @@ jobs:
         run: bash scripts/deploy.sh
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          TAG_NAME: ${{ env.RELEASE_TAG }}
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
         run: yarn conventional-github-releaser -p vuetify
