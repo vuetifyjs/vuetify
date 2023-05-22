@@ -1,13 +1,14 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VForm } from '@/components/VForm'
+import { allowedDensities } from '@/composables/density'
 import { VCombobox } from '../VCombobox'
 import { cloneVNode, ref } from 'vue'
 import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
-const densities = ['default', 'comfortable', 'compact'] as const
+const densities = allowedDensities.filter(d => d)
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({

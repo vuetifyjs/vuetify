@@ -2,17 +2,18 @@
 
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+import { allowedDensities } from '@/composables/density'
 import { cloneVNode, ref } from 'vue'
 import { VSelect } from '../VSelect'
 import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
-const densities = ['default', 'comfortable', 'compact'] as const
+const densities = allowedDensities.filter(d => d)
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VSelect label="label" />,
+  'Default input': <VSelect label="label" items={ items } />,
   Disabled: <VSelect label="label" items={ items } disabled />,
   Affixes: <VSelect label="label" items={ items } prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VSelect label="label" items={ items } prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,

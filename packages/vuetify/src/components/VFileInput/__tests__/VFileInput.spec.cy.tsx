@@ -4,12 +4,13 @@ import { CenteredGrid } from '@/../cypress/templates'
 import { cloneVNode, ref } from 'vue'
 import { generate } from '../../../../cypress/templates'
 import { VFileInput } from '../VFileInput'
+import { allowedDensities } from '@/composables/density'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
-const densities = ['default', 'comfortable', 'compact'] as const
+const densities = allowedDensities.filter(d => d)
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
