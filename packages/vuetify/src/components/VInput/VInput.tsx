@@ -117,7 +117,7 @@ export const VInput = genericComponent<VInputSlots>()({
     }))
 
     const messages = computed(() => {
-      if (!isPristine.value && errorMessages.value.length > 0) {
+      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
         return errorMessages.value
       } else if (props.hint && (props.persistentHint || props.focused)) {
         return props.hint
