@@ -2,33 +2,38 @@
 import './VSliderTrack.sass'
 
 // Components
-import { VSliderSymbol } from './slider'
+import { type Tick, VSliderSymbol } from './slider'
 
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { useBackgroundColor } from '@/composables/color'
 import { useRounded } from '@/composables/rounded'
 
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, useRender } from '@/util'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VSliderTrackSlots = {
-  'tick-label': []
+  'tick-label': { tick: Tick, index: number }
 }
+
+export const makeVSliderTrackProps = propsFactory({
+  start: {
+    type: Number,
+    required: true,
+  },
+  stop: {
+    type: Number,
+    required: true,
+  },
+
+  ...makeComponentProps(),
+}, 'v-slider-track')
 
 export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',
 
-  props: {
-    start: {
-      type: Number,
-      required: true,
-    },
-    stop: {
-      type: Number,
-      required: true,
-    },
-  },
+  props: makeVSliderTrackProps(),
 
   emits: {},
 
@@ -123,12 +128,16 @@ export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
           class={[
             'v-slider-track',
             roundedClasses.value,
+            props.class,
           ]}
-          style={{
-            '--v-slider-track-size': convertToUnit(trackSize.value),
-            '--v-slider-tick-size': convertToUnit(tickSize.value),
-            direction: !vertical.value ? horizontalDirection.value : undefined,
-          }}
+          style={[
+            {
+              '--v-slider-track-size': convertToUnit(trackSize.value),
+              '--v-slider-tick-size': convertToUnit(tickSize.value),
+              direction: !vertical.value ? horizontalDirection.value : undefined,
+            },
+            props.style,
+          ]}
         >
           <div
             class={[

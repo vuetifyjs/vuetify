@@ -4,7 +4,7 @@ import './VTextField.sass'
 // Components
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter } from '@/components/VCounter'
+import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
 
 // Directives
 import Intersect from '@/directives/intersect'
@@ -20,7 +20,6 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
-import type { MakeSlots } from '@/util'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -45,9 +44,12 @@ export const makeVTextFieldProps = propsFactory({
   ...makeVFieldProps(),
 }, 'v-text-field')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & MakeSlots<{
-  default: []
-}>>()({
+export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  default: never
+  counter: VCounterSlot
+}
+
+export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -83,6 +85,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
       return props.counter
     })
 
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
+
     function onIntersect (
       isIntersecting: boolean,
       entries: IntersectionObserverEntry[]
@@ -98,7 +102,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
     const isActive = computed(() => (
       activeTypes.includes(props.type) ||
       props.persistentPlaceholder ||
-      isFocused.value
+      isFocused.value ||
+      props.active
     ))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
@@ -162,11 +167,14 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
-              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-text-field--plain-underlined': ['plain', 'underlined'].includes(props.variant),
             },
+            props.class,
           ]}
+          style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{

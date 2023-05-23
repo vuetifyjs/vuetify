@@ -32,8 +32,12 @@
     </template>
 
     <v-card height="100%">
-      <v-card-title class="bg-primary d-flex align-centen py-4">
-        {{ t('search.label') }} Vuetify
+      <v-toolbar color="primary" class="ps-3 pe-4">
+        <v-icon icon="$vuetify" size="x-large" />
+
+        <v-toolbar-title class="ms-2">
+          {{ t('search.label') }} Vuetify
+        </v-toolbar-title>
 
         <v-spacer />
 
@@ -44,17 +48,15 @@
           variant="text"
           @click="model = false"
         />
-      </v-card-title>
+      </v-toolbar>
 
       <app-text-field
         v-model="searchString"
         :placeholder="`${t('search.looking') }...`"
         autofocus
-        class="flex-grow-0 mx-2"
-        variant="solo"
+        class="flex-grow-0"
+        variant="filled"
       />
-
-      <v-divider />
 
       <v-card-text class="pa-4">
         <div v-if="!searchString" class="mt-16 pt-16 text-center">

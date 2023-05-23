@@ -2,7 +2,6 @@
   <promoted-base
     ref="script"
     :class="[
-      'mb-4',
       isDark ? 'theme--dark' : 'theme--light',
     ]"
     border

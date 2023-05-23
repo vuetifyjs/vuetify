@@ -1,5 +1,8 @@
 <template>
-  <v-lazy :min-height="minHeight">
+  <v-lazy
+    :min-height="minHeight"
+    class="d-flex mb-4"
+  >
     <v-sheet
       v-bind="$attrs"
       :color="isDark ? '#1F1F1F' : 'grey-lighten-4'"
@@ -33,7 +36,7 @@
 
   const minHeight = computed(() => {
     if (props.minHeight) return props.minHeight
-    if (props.density === 'compact') return 52
+    if (props.density === 'compact') return 56
     if (props.density === 'comfortable') return 74
 
     return 118

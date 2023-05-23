@@ -13,36 +13,37 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utility
 import { computed, ref } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VInputSlots } from '@/components/VInput/VInput'
 import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { MakeSlots } from '@/util'
 
 export type VSwitchSlots =
   & VInputSlots
   & VSelectionControlSlots
-  & MakeSlots<{ loader: [LoaderSlotProps] }>
+  & { loader: LoaderSlotProps }
+
+export const makeVSwitchProps = propsFactory({
+  indeterminate: Boolean,
+  inset: Boolean,
+  flat: Boolean,
+  loading: {
+    type: [Boolean, String],
+    default: false,
+  },
+
+  ...makeVInputProps(),
+  ...makeSelectionControlProps(),
+}, 'v-switch')
 
 export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',
 
   inheritAttrs: false,
 
-  props: {
-    indeterminate: Boolean,
-    inset: Boolean,
-    flat: Boolean,
-    loading: {
-      type: [Boolean, String],
-      default: false,
-    },
-
-    ...makeVInputProps(),
-    ...makeSelectionControlProps(),
-  },
+  props: makeVSwitchProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -90,7 +91,9 @@ export const VSwitch = genericComponent<VSwitchSlots>()({
             { 'v-switch--inset': props.inset },
             { 'v-switch--indeterminate': indeterminate.value },
             loaderClasses.value,
+            props.class,
           ]}
+          style={ props.style }
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }

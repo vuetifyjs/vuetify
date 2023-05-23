@@ -11,22 +11,24 @@ import { useFocus } from '@/composables/focus'
 
 // Utilities
 import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
 
 export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
 
+export const makeVCheckboxProps = propsFactory({
+  ...makeVInputProps(),
+  ...omit(makeVCheckboxBtnProps(), ['inline']),
+}, 'v-checkbox')
+
 export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
 
-  props: {
-    ...makeVInputProps(),
-    ...omit(makeVCheckboxBtnProps(), ['inline']),
-  },
+  props: makeVCheckboxProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,
@@ -45,11 +47,15 @@ export const VCheckbox = genericComponent<VCheckboxSlots>()({
 
       return (
         <VInput
-          class="v-checkbox"
+          class={[
+            'v-checkbox',
+            props.class,
+          ]}
           { ...inputAttrs }
           { ...inputProps }
           id={ id.value }
           focused={ isFocused.value }
+          style={ props.style }
         >
           {{
             ...slots,

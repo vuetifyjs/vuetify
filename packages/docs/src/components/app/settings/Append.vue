@@ -1,7 +1,11 @@
 <template>
   <v-list-item v-if="GITHUB_SHA" class="text-caption">
     Build
-    <a :href="`https://github.com/vuetifyjs/vuetify/commit/${GITHUB_SHA}`">{{ GITHUB_SHA }}</a>
+    <a
+      :href="`https://github.com/vuetifyjs/vuetify/commit/${GITHUB_SHA}`"
+      target="_blank"
+      rel="noopener noreferrer"
+    >{{ GITHUB_SHA }}</a>
   </v-list-item>
 
   <v-divider />

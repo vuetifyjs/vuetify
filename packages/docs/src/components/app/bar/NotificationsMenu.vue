@@ -6,10 +6,7 @@
     :width="width"
   >
     <template #activator="{ props }">
-      <app-tooltip-btn
-        path="notifications"
-        v-bind="props"
-      >
+      <app-tooltip-btn v-bind="props">
         <template #icon>
           <v-badge
             :model-value="unread.length > 0"
@@ -87,14 +84,19 @@
                 <div class="pe-4 mt-n2">{{ notification.metadata.emoji }}</div>
               </template>
 
-              <v-list-item-title class="text-wrap text-h6 mb-1">
-                <div> {{ notification.title }}</div>
+              <v-list-item-title class="text-wrap text-h6">
+                <div>{{ notification.title }}</div>
               </v-list-item-title>
+
+              <div class="text-caption mb-1">{{ format(notification.created_at) }}</div>
 
               <div class="text-medium-emphasis text-caption">
                 {{ notification.metadata.text }}
 
-                <app-link :href="notification.metadata.action">
+                <app-link
+                  :href="notification.metadata.action"
+                  @click="onClick(notification)"
+                >
                   {{ notification.metadata.action_text }}
                 </app-link>
               </div>
@@ -122,8 +124,11 @@
 
   // Composables
   import { useCosmic } from '@/composables/cosmic'
+  import { useDate } from 'vuetify/labs/date'
   import { useDisplay } from 'vuetify'
   import { useI18n } from 'vue-i18n'
+
+  // Stores
   import { useUserStore } from '@/store/user'
 
   // Utilities
@@ -146,7 +151,9 @@
   const { t } = useI18n()
   const { bucket } = useCosmic<Notification>()
   const { mobile } = useDisplay()
+  const date = useDate()
   const user = useUserStore()
+
   const menu = ref(false)
   const all = ref<Notification[]>([])
   const showArchived = ref(false)
@@ -171,6 +178,13 @@
 
   const width = computed(() => mobile.value ? 420 : 520)
 
+  function format (str: string) {
+    return date.format(new Date(str), 'normalDateWithWeekday')
+  }
+  function onClick (notification: Notification) {
+    toggle(notification)
+    menu.value = false
+  }
   function toggle ({ slug }: Notification) {
     user.notifications.read = user.notifications.read.includes(slug)
       ? user.notifications.read.filter(n => n !== slug)
@@ -189,7 +203,7 @@
         .props('created_at,metadata,slug,title')
         .status('published')
         .sort('-created_at')
-        .limit(5)
+        .limit(10)
     ) || {}
 
     all.value = objects

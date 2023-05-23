@@ -2,10 +2,11 @@
 import './VInput.sass'
 
 // Components
-import { VMessages } from '@/components/VMessages'
+import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
@@ -15,7 +16,6 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import type { MakeSlots } from '@/util'
 import { useInputIcon } from '@/components/VInput/InputIcon'
 
 export interface VInputSlot {
@@ -35,12 +35,16 @@ export interface VInputSlot {
 export const makeVInputProps = propsFactory({
   id: String,
   appendIcon: IconValue,
+  centerAffix: {
+    type: Boolean,
+    default: true,
+  },
   prependIcon: IconValue,
   hideDetails: [Boolean, String] as PropType<boolean | 'auto'>,
   hint: String,
   persistentHint: Boolean,
   messages: {
-    type: [Array, String] as PropType<string | string[]>,
+    type: [Array, String] as PropType<string | readonly string[]>,
     default: () => ([]),
   },
   direction: {
@@ -52,16 +56,18 @@ export const makeVInputProps = propsFactory({
   'onClick:prepend': EventProp<[MouseEvent]>(),
   'onClick:append': EventProp<[MouseEvent]>(),
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeValidationProps(),
 }, 'v-input')
 
-export type VInputSlots = MakeSlots<{
-  default: [VInputSlot]
-  prepend: [VInputSlot]
-  append: [VInputSlot]
-  details: [VInputSlot]
-}>
+export type VInputSlots = {
+  default: VInputSlot
+  prepend: VInputSlot
+  append: VInputSlot
+  details: VInputSlot
+  message: VMessageSlot
+}
 
 export const VInput = genericComponent<VInputSlots>()({
   name: 'VInput',
@@ -111,7 +117,7 @@ export const VInput = genericComponent<VInputSlots>()({
     }))
 
     const messages = computed(() => {
-      if (errorMessages.value.length > 0) {
+      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
         return errorMessages.value
       } else if (props.hint && (props.persistentHint || props.focused)) {
         return props.hint
@@ -130,12 +136,18 @@ export const VInput = genericComponent<VInputSlots>()({
       )
 
       return (
-        <div class={[
-          'v-input',
-          `v-input--${props.direction}`,
-          densityClasses.value,
-          validationClasses.value,
-        ]}
+        <div
+          class={[
+            'v-input',
+            `v-input--${props.direction}`,
+            {
+              'v-input--center-affix': props.centerAffix,
+            },
+            densityClasses.value,
+            validationClasses.value,
+            props.class,
+          ]}
+          style={ props.style }
         >
           { hasPrepend && (
             <div key="prepend" class="v-input__prepend">

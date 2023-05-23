@@ -1,5 +1,6 @@
 import type { Node, Type } from 'ts-morph'
 import { Project, ts } from 'ts-morph'
+import { prettifyType } from './utils'
 
 const project = new Project({
   tsConfigFilePath: './tsconfig.json',
@@ -13,9 +14,12 @@ function inspect (project: Project, node?: Node<ts.Node>) {
   if (kind === ts.SyntaxKind.TypeAliasDeclaration) {
     const definition = generateDefinition(node, [], project) as ObjectDefinition
     if (definition.properties) {
-      // Exclude private properties
-      definition.properties = Object.fromEntries(Object.entries(definition.properties)
-        .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ')))
+      definition.properties = Object.fromEntries(
+        Object.entries(definition.properties)
+          // Exclude private properties
+          .filter(([name]) => !name.startsWith('$') && !name.startsWith('_') && !name.startsWith('Ψ'))
+          .map(([name, prop]) => [name, prettifyType(name, prop)])
+      )
     }
     return definition
   }
@@ -77,6 +81,12 @@ export async function generateComponentDataFromTypes (component: string) {
     item.text = undefined
     item.source = undefined
   })
+
+  for (const [name, { formatted }] of Object.entries(props.properties)) {
+    if (formatted.length > 400) {
+      console.log(`Long prop type (${formatted.length}): ${component}.${name}`)
+    }
+  }
 
   return {
     props: props.properties,
@@ -237,12 +247,22 @@ const allowedRefs = [
   'ValidationRule',
   'FormValidationResult',
   'SortItem',
-  'InternalItem',
-  'InternalDataTableItem',
+  'ListItem',
+  'Group',
   'DataTableItem',
   'DataTableHeader',
   'InternalDataTableHeader',
   'FilterFunction',
+  'DataIteratorItem',
+]
+const plainRefs = [
+  'Component',
+  'ComponentPublicInstance',
+  'ComponentInternalInstance',
+  'FunctionalComponent',
+  'DataTableItem',
+  'Group',
+  'DataIteratorItem',
 ]
 
 function formatDefinition (definition: Definition) {
@@ -280,7 +300,7 @@ function formatDefinition (definition: Definition) {
       }, []).join('; ')} }`
       break
     case 'ref':
-      if (['Component', 'ComponentPublicInstance', 'ComponentInternalInstance', 'FunctionalComponent'].includes(definition.ref)) {
+      if (plainRefs.includes(definition.ref)) {
         formatted = definition.ref
       } else {
         formatted = definition.text
@@ -298,8 +318,8 @@ function formatDefinition (definition: Definition) {
 
   definition.formatted = formatted
 
-  if (allowedRefs.includes(definition.text)) {
-    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${definition.text}</a>`
+  if (allowedRefs.includes(formatted)) {
+    definition.formatted = `<a href="https://github.com/vuetifyjs/vuetify/blob/master/packages/${definition.source}" target="_blank">${formatted}</a>`
   }
 }
 
@@ -326,7 +346,7 @@ function generateDefinition (node: Node<ts.Node>, recursed: string[], project: P
 
   if (
     count(recursed, type.getText()) > 1 ||
-    allowedRefs.includes(type.getAliasSymbol()?.getName()) ||
+    allowedRefs.includes(symbol?.getName()) ||
     isExternalDeclaration(declaration, definition.text)
   ) {
     definition = definition as RefDefinition

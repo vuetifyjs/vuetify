@@ -8,6 +8,7 @@ import { VImg } from '@/components/VImg'
 // Composables
 import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 import { IconValue } from '@/composables/icons'
+import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeSizeProps, useSize } from '@/composables/size'
@@ -23,6 +24,7 @@ export const makeVAvatarProps = propsFactory({
   icon: IconValue,
   image: String,
 
+  ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeRoundedProps(),
   ...makeSizeProps(),
@@ -57,10 +59,12 @@ export const VAvatar = genericComponent()({
           roundedClasses.value,
           sizeClasses.value,
           variantClasses.value,
+          props.class,
         ]}
         style={[
           colorStyles.value,
           sizeStyles.value,
+          props.style,
         ]}
       >
         { props.image

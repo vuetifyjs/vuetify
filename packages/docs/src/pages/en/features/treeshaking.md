@@ -89,7 +89,7 @@ export default defineNuxtConfig({
       nuxt.hooks.hook('vite:extendConfig', config => config.plugins.push(
         vuetify()
       ))
-    }
+    },
   ],
 })
 ```
@@ -152,7 +152,7 @@ You can also import components locally in .vue files, as seen below.
       VCard,
       VCardText,
       VCardTitle,
-    }
+    },
   }
 </script>
 ```

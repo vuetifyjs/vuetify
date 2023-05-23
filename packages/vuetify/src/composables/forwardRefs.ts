@@ -6,7 +6,7 @@ const Refs = Symbol('Forwarded refs')
 /** Omit properties starting with P */
 type OmitPrefix<T, P extends string> = [Extract<keyof T, `${P}${any}`>] extends [never] ? T : Omit<T, `${P}${any}`>
 
-type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : never
+type OmitProps<T> = T extends { $props: any } ? Omit<T, keyof T['$props']> : T
 
 function getDescriptor (obj: any, key: PropertyKey) {
   let currentObj = obj
@@ -18,7 +18,7 @@ function getDescriptor (obj: any, key: PropertyKey) {
   return undefined
 }
 
-export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit'> | undefined>[]> (
+export function forwardRefs<T extends {}, U extends Ref<HTMLElement | Omit<ComponentPublicInstance, '$emit' | '$slots'> | undefined>[]> (
   target: T,
   ...refs: U
 ): T & UnionToIntersection<{ [K in keyof U]: OmitPrefix<OmitProps<NonNullable<UnwrapRef<U[K]>>>, '$'> }[number]> {

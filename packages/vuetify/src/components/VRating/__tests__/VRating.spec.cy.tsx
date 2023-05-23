@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+import { VBtn } from '@/components/VBtn'
 import { Application } from '../../../../cypress/templates'
 import { VRating } from '../VRating'
 
@@ -89,21 +90,26 @@ describe('VRating', () => {
       <Application>
         <VRating>
           {{
-            item: (props: any) => <div class="foo">{ props.value }</div>,
+            item: ({ value, rating }) => (
+              <VBtn variant="tonal" class="mx-1" color={ rating === value ? 'primary' : undefined }>{ value }</VBtn>
+            ),
           }}
         </VRating>
       </Application>
     ))
 
-    cy.get('.v-rating__item .foo').should('have.length', 5)
+    cy.get('.v-btn.mx-1')
+      .eq(2)
+      .click()
+      .should('have.class', 'text-primary')
   })
 
-  it('should support scoped item slot', () => {
+  it('should support scoped item-label slot', () => {
     cy.mount(() => (
       <Application>
         <VRating>
           {{
-            'item-label': (props: any) => <div class="foo">{ props.value }</div>,
+            'item-label': props => <div class="foo">{ props.value }</div>,
           }}
         </VRating>
       </Application>
@@ -134,5 +140,27 @@ describe('VRating', () => {
     cy.get('.v-rating__item input').should('have.length', 10)
       .get('.v-rating__item .v-rating__item--half').eq(3).click({ force: true })
       .emitted(VRating, 'update:modelValue').should('deep.equal', [[3.5]])
+  })
+
+  it('should support tabbed navigation', () => {
+    cy.mount(() => (
+      <Application>
+        <VRating />
+      </Application>
+    ))
+
+    cy.realPress('Tab')
+      .get('.v-btn').eq(0).focused()
+      .realPress('Space')
+      .realPress('Tab')
+      .get('.v-btn').eq(1).focused()
+      .realPress('Tab')
+      .get('.v-btn').eq(2).focused()
+      .realPress('Space')
+      .realPress(['Shift', 'Tab'])
+      .get('.v-btn').eq(1).focused()
+      .realPress('Space')
+      .emitted(VRating, 'update:modelValue')
+      .should('deep.equal', [[1], [3], [2]])
   })
 })

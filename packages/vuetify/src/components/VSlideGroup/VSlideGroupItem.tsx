@@ -10,20 +10,18 @@ import type { UnwrapRef } from 'vue'
 import type { GroupItemProvide } from '@/composables/group'
 
 type VSlideGroupItemSlots = {
-  default: [{
+  default: {
     isSelected: UnwrapRef<GroupItemProvide['isSelected']>
     select: GroupItemProvide['select']
     toggle: GroupItemProvide['toggle']
     selectedClass: UnwrapRef<GroupItemProvide['selectedClass']>
-  }]
+  }
 }
 
 export const VSlideGroupItem = genericComponent<VSlideGroupItemSlots>()({
   name: 'VSlideGroupItem',
 
-  props: {
-    ...makeGroupItemProps(),
-  },
+  props: makeGroupItemProps(),
 
   emits: {
     'group:selected': (val: { value: boolean }) => true,
