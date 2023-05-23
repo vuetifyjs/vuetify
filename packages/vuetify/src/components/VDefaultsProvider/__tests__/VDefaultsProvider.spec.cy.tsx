@@ -1,6 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
+
+// Components
 import { VCard } from '@/components/VCard'
 import { VDefaultsProvider } from '../VDefaultsProvider'
 

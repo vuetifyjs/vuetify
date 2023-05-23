@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
 import { generate, gridOn } from '@/../cypress/templates'

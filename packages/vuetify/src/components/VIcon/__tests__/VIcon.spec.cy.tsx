@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+// Utilities
 import { defineComponent } from 'vue'
 import { VClassIcon } from '..'
 import { VIcon } from '../VIcon'

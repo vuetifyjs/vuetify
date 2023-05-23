@@ -1,3 +1,4 @@
+// Utilities
 import { defineComponent, ref } from 'vue'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
@@ -7,6 +8,8 @@ import {
   makeScrollProps,
   useScroll,
 } from '../scroll'
+
+// Types
 import type { ScrollArguments } from '../scroll'
 
 // Utils

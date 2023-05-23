@@ -1,4 +1,7 @@
+// Utilities
 import { createSimpleFunctional } from '@/util'
+
+// Components
 import VStepper from './VStepper'
 import VStepperStep from './VStepperStep'
 import VStepperContent from './VStepperContent'

@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+// Utilities
 import { ref } from 'vue'
 import { VCheckboxBtn } from '../'
 

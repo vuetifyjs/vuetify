@@ -5,18 +5,18 @@ import './VRating.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
+import { useLocale } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useLocale } from '@/composables/locale'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
 import { computed, shallowRef } from 'vue'
+import { clamp, createRange, genericComponent, getUid, propsFactory, useRender } from '@/util'
 
 // Types
 import type { Prop } from 'vue'

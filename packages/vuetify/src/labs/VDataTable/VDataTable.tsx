@@ -15,8 +15,8 @@ import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from 
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
-import { makeFilterProps, useFilter } from '@/composables/filter'
 import { provideDefaults } from '@/composables/defaults'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useOptions } from './composables/options'
 
 // Utilities
@@ -27,8 +27,8 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { UnwrapRef } from 'vue'
 import type { Group } from './composables/group'
 import type { DataTableItem, InternalDataTableHeader } from './types'
-import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
+import type { VDataTableRowsSlots } from './VDataTableRows'
 
 export type VDataTableSlotProps = {
   page: number

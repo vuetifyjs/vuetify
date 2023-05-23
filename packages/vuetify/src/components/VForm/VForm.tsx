@@ -1,7 +1,7 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createForm, makeFormProps } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { ref } from 'vue'

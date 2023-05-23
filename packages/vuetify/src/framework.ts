@@ -7,17 +7,17 @@ import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
 
 // Utilities
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 import { nextTick, reactive } from 'vue'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
-import type { DateOptions } from '@/labs/date'
 import type { DefaultsOptions } from '@/composables/defaults'
 import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { DateOptions } from '@/labs/date'
 
 export * from './composables'
 export type { DateOptions, DateInstance } from '@/labs/date'

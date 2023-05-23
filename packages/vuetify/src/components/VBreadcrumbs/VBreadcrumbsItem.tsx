@@ -1,8 +1,8 @@
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'

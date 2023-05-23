@@ -6,9 +6,9 @@ import { createVuetify } from '@/framework'
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 
-// Types
-import { VuetifyDateAdapter } from '../adapters/vuetify'
+// Utilities
 import { defineComponent, h } from 'vue'
+import { VuetifyDateAdapter } from '../adapters/vuetify'
 
 describe('date.ts', () => {
   const Component = defineComponent({

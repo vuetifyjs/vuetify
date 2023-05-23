@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VApp } from '@/components/VApp'
 import { VMain } from '..'
 

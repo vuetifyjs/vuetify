@@ -1,6 +1,6 @@
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useLocale } from '@/composables'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, inject, provide, toRef } from 'vue'

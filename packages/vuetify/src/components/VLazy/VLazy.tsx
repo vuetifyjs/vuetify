@@ -1,9 +1,9 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeTagProps } from '@/composables/tag'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import intersect from '@/directives/intersect'

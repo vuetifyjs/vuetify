@@ -10,8 +10,8 @@ import { VSliderTrack } from './VSliderTrack'
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'

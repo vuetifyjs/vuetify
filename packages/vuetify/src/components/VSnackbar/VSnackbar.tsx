@@ -4,21 +4,21 @@ import './VSnackbar.sass'
 // Components
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
-import { makeRoundedProps, useRounded } from '@/composables/rounded'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
 
 // Utilities
 import { mergeProps, onMounted, ref, watch } from 'vue'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 type VSnackbarSlots = {
   activator: { isActive: boolean, props: Record<string, any> }

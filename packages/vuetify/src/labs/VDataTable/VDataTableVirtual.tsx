@@ -9,22 +9,22 @@ import { createHeaders } from './composables/headers'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
 import { makeDataTableProps } from './VDataTable'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
-import { makeFilterProps, useFilter } from '@/composables/filter'
 import { provideDefaults } from '@/composables/defaults'
+import { makeFilterProps, useFilter } from '@/composables/filter'
 import { provideExpanded } from './composables/expand'
 import { provideSelection } from './composables/select'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
 
-// Utlities
+// Utilities
 import { computed, shallowRef, toRef } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { DataTableItem } from './types'
 import type { VDataTableSlotProps } from './VDataTable'
-import type { VDataTableRowsSlots } from './VDataTableRows'
 import type { VDataTableHeadersSlots } from './VDataTableHeaders'
+import type { VDataTableRowsSlots } from './VDataTableRows'
 
 type VDataTableVirtualSlotProps = Omit<VDataTableSlotProps, 'setItemsPerPage' | 'page' | 'pageCount' | 'itemsPerPage'>
 

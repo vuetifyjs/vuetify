@@ -1,8 +1,8 @@
-import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
+// eslint-disable local-rules/sort-imports
 
-// @skip-build
+// Types
+import type { ComponentPublicInstance, FunctionalComponent, UnwrapNestedRefs, VNodeChild } from 'vue'
 import type { DefaultsInstance, DisplayInstance, IconOptions, LocaleInstance, RtlInstance, ThemeInstance } from './framework'
-// @skip-build
 import type { DateOptions } from './labs'
 
 declare global {

@@ -1,6 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
+
+// Utilities
 import { ref } from 'vue'
 import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '../'
 

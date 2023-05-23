@@ -1,5 +1,6 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VLayout } from '@/components/VLayout'
 import { VBottomNavigation } from '..'
 

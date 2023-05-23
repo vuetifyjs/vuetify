@@ -4,15 +4,15 @@ import './VWindow.sass'
 // Components
 import { VBtn } from '@/components/VBtn'
 
-// Directives
-import { Touch } from '@/directives/touch'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { useGroup } from '@/composables/group'
 import { useLocale, useRtl } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
+
+// Directives
+import { Touch } from '@/directives/touch'
 
 // Utilities
 import { computed, provide, ref, shallowRef, watch } from 'vue'

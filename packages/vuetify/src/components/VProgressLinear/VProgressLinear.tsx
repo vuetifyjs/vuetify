@@ -2,15 +2,15 @@
 import './VProgressLinear.sass'
 
 // Composables
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useRtl } from '@/composables/locale'
 import { makeLocationProps, useLocation } from '@/composables/location'
+import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, Transition } from 'vue'

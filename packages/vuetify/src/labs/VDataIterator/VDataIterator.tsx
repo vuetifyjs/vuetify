@@ -2,9 +2,8 @@
 import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-
+import { makeTagProps } from '@/composables/tag'
 import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '@/labs/VDataTable/composables/paginate'
 import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/labs/VDataTable/composables/sort'
 import { makeDataTableExpandProps, provideExpanded } from '@/labs/VDataTable/composables/expand'

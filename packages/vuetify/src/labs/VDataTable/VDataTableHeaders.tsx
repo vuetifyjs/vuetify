@@ -4,13 +4,12 @@ import { VDataTableColumn } from './VDataTableColumn'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
-import { useBackgroundColor } from '@/composables/color'
 import { useHeaders } from './composables/headers'
-import type { provideSelection } from './composables/select'
 import { useSelection } from './composables/select'
 import { useSort } from './composables/sort'
+import { useBackgroundColor } from '@/composables/color'
+import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 
 // Utilities
 import { computed } from 'vue'
@@ -18,9 +17,10 @@ import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util
 
 // Types
 import type { CSSProperties, UnwrapRef } from 'vue'
+import type { provideSelection } from './composables/select'
+import type { provideSort } from './composables/sort'
 import type { InternalDataTableHeader } from './types'
 import type { LoaderSlotProps } from '@/composables/loader'
-import type { provideSort } from './composables/sort'
 
 export type HeadersSlotProps = {
   headers: InternalDataTableHeader[][]

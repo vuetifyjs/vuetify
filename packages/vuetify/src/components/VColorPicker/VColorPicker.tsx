@@ -9,9 +9,9 @@ import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'

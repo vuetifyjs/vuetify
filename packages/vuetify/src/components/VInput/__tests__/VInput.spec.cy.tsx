@@ -2,6 +2,8 @@
 
 import { VInput } from '../VInput'
 import { generate } from '../../../../cypress/templates'
+
+// Utilities
 import { cloneVNode } from 'vue'
 
 const densities = ['default', 'comfortable', 'compact']

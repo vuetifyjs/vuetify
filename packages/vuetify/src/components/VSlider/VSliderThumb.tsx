@@ -5,13 +5,13 @@ import './VSliderThumb.sass'
 import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
 
-// Directives
-import Ripple from '@/directives/ripple'
-
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
+
+// Directives
+import Ripple from '@/directives/ripple'
 
 // Utilities
 import { computed, inject } from 'vue'

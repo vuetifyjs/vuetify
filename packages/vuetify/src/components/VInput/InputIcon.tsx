@@ -1,5 +1,10 @@
+// Components
 import { VIcon } from '@/components/VIcon'
+
+// Composables
 import { useLocale } from '@/composables/locale'
+
+// Types
 import type { IconValue } from '@/composables/icons'
 
 type names = 'clear' | 'prepend' | 'append' | 'appendInner' | 'prependInner'

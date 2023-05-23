@@ -2,15 +2,15 @@
 import './VFileInput.sass'
 
 // Components
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 

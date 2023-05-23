@@ -2,16 +2,22 @@
 import './VCheckbox.sass'
 
 // Components
-import type { VInputSlots } from '@/components/VInput/VInput'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
 
 // Composables
 import { useFocus } from '@/composables/focus'
 
 // Utilities
-import { computed } from 'vue'
 import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
+
+// Types
+import type { VInputSlots } from '@/components/VInput/VInput'
+
+// Components
+import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
+
+// Utilities
+import { computed } from 'vue'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'

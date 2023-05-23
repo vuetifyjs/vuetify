@@ -6,11 +6,11 @@ import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSli
 import { VTab } from './VTab'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'

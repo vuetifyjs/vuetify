@@ -2,11 +2,11 @@
 import './VSkeletonLoader.sass'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { computed, toRef } from 'vue'

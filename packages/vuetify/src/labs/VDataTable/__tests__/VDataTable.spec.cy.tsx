@@ -2,6 +2,8 @@
 
 import { Application } from '../../../../cypress/templates'
 import { VDataTable } from '..'
+
+// Utilities
 import { ref } from 'vue'
 
 const DESSERT_HEADERS = [

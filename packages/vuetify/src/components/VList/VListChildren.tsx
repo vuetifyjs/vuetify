@@ -9,10 +9,10 @@ import { createList } from './list'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { InternalListItem } from './VList'
 import type { VListItemSlots } from './VListItem'
 import type { GenericProps } from '@/util'
-import type { PropType } from 'vue'
 
 export type VListChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }

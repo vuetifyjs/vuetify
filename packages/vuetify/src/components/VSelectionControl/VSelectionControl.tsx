@@ -4,16 +4,16 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
-
-// Composables
-import { useDensity } from '@/composables/density'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject, nextTick, ref, shallowRef } from 'vue'

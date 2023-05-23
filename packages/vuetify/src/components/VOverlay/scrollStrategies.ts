@@ -1,6 +1,6 @@
 // Utilities
-import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 import { effectScope, nextTick, onScopeDispose, watchEffect } from 'vue'
+import { convertToUnit, getScrollParents, hasScrollbar, IN_BROWSER, propsFactory } from '@/util'
 import { requestNewFrame } from './requestNewFrame'
 
 // Types

@@ -1,8 +1,10 @@
 // Directives
 import Touch from '../'
 
-// Types
+// Utilities
 import { nextTick } from 'vue'
+
+// Types
 import type { TouchValue } from '../'
 
 // Utilities
