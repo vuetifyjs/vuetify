@@ -4,13 +4,13 @@ import { VMenuSymbol } from '@/components/VMenu/shared'
 
 // Utilities
 import {
-  eventName,
+  bindProps,
   getCurrentInstance,
   IN_BROWSER,
   isComponentInstance,
-  isOn,
   propsFactory,
   SUPPORTS_FOCUS_VISIBLE,
+  unbindProps,
 } from '@/util'
 import {
   computed,
@@ -254,7 +254,6 @@ function _useActivator (
     unbindActivatorProps()
   })
 
-  const handlers = new WeakMap<HTMLElement, Set<[string, () => void]>>()
   function bindActivatorProps (el = getActivator(), _props = props.activatorProps) {
     if (!el) return
 
@@ -262,32 +261,7 @@ function _useActivator (
       el.addEventListener(name, cb as (e: Event) => void)
     })
 
-    Object.keys(_props).forEach(k => {
-      if (isOn(k)) {
-        const name = eventName(k)
-        if (_props[k] == null) {
-          const handler = handlers.get(el)
-          handler?.forEach(v => {
-            const [n, fn] = v
-            if (n === name) {
-              el.removeEventListener(name, fn)
-              handler.delete(v)
-            }
-          })
-        } else {
-          el.addEventListener(name, _props[k])
-          const handler = handlers.get(el) || new Set()
-          handler.add([name, _props[k]])
-          if (!handlers.has(el)) handlers.set(el, handler)
-        }
-      } else {
-        if (_props[k] == null) {
-          el.removeAttribute(k)
-        } else {
-          el.setAttribute(k, _props[k])
-        }
-      }
-    })
+    bindProps(el, _props)
   }
 
   function unbindActivatorProps (el = getActivator(), _props = props.activatorProps) {
@@ -297,21 +271,7 @@ function _useActivator (
       el.removeEventListener(name, cb as (e: Event) => void)
     })
 
-    Object.keys(_props).forEach(k => {
-      if (isOn(k)) {
-        const name = eventName(k)
-        const handler = handlers.get(el)
-        handler?.forEach(v => {
-          const [n, fn] = v
-          if (n === name) {
-            el.removeEventListener(name, fn)
-            handler.delete(v)
-          }
-        })
-      } else {
-        el.removeAttribute(k)
-      }
-    })
+    unbindProps(el, _props)
   }
 
   function getActivator (selector = props.activator): HTMLElement | undefined {
