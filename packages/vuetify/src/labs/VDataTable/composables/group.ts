@@ -18,7 +18,6 @@ export interface GroupableItem<T = any> {
 export interface Group<T = any> {
   type: 'group'
   depth: number
-  id: string
   key: string
   value: any
   items: readonly (T | Group<T>)[]
@@ -63,13 +62,13 @@ export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, so
   })
 
   function isGroupOpen (group: Group) {
-    return opened.value.has(group.id)
+    return opened.value.has(group.key)
   }
 
   function toggleGroup (group: Group) {
     const newOpened = new Set(opened.value)
-    if (!isGroupOpen(group)) newOpened.add(group.id)
-    else newOpened.delete(group.id)
+    if (!isGroupOpen(group)) newOpened.add(group.key)
+    else newOpened.delete(group.key)
 
     opened.value = newOpened
   }
@@ -88,7 +87,7 @@ export function provideGroupBy (options: { groupBy: Ref<readonly SortItem[]>, so
 
       return arr
     }
-    return dive({ type: 'group', items, id: 'dummy', key: 'dummy', value: 'dummy', depth: 0 })
+    return dive({ type: 'group', items, key: 'dummy', value: 'dummy', depth: 0 })
   }
 
   // onBeforeMount(() => {
@@ -128,7 +127,7 @@ function groupItemsByProperty <T extends GroupableItem> (items: readonly T[], gr
   return groups
 }
 
-function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: readonly string[], depth = 0, prefix = 'root') {
+function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: readonly string[], depth = 0, prefix = 'group') {
   if (!groupBy.length) return []
 
   const groupedItems = groupItemsByProperty(items, groupBy[0])
@@ -136,14 +135,12 @@ function groupItems <T extends GroupableItem> (items: readonly T[], groupBy: rea
 
   const rest = groupBy.slice(1)
   groupedItems.forEach((items, value) => {
-    const key = groupBy[0]
-    const id = `${prefix}_${key}_${value}`
+    const key = `${prefix}-${groupBy[0]}-${value}`
     groups.push({
       depth,
-      id,
       key,
       value,
-      items: rest.length ? groupItems(items, rest, depth + 1, id) : items,
+      items: rest.length ? groupItems(items, rest, depth + 1, key) : items,
       type: 'group',
     })
   })
@@ -161,7 +158,7 @@ function flattenItems <T extends GroupableItem> (items: readonly (T | Group<T>)[
         flatItems.push(item)
       }
 
-      if (opened.has(item.id) || item.value == null) {
+      if (opened.has(item.key) || item.value == null) {
         flatItems.push(...flattenItems(item.items, opened))
       }
     } else {

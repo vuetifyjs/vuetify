@@ -47,6 +47,7 @@ export function transformItem (
   return {
     type: 'item',
     index,
+    key: `item-${index}`,
     value,
     selectable,
     columns: itemColumns,

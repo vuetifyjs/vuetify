@@ -32,6 +32,7 @@ export type InternalDataTableHeader = DataTableHeader & {
 
 export interface DataTableItem<T = any> extends GroupableItem<T>, SelectableItem {
   index: number
+  key: string
   columns: {
     [key: string]: any
   }

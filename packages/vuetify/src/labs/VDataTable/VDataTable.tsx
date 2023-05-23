@@ -8,7 +8,7 @@ import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
 import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
-import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
+import { Expanded, makeDataTableExpandProps, provideExpanded, useExpandedItems } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
 import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
@@ -48,7 +48,7 @@ export type VDataTableSlotProps = {
   isGroupOpen: ReturnType<typeof provideGroupBy>['isGroupOpen']
   toggleGroup: ReturnType<typeof provideGroupBy>['toggleGroup']
   items: readonly DataTableItem[]
-  groupedItems: readonly (DataTableItem | Group<DataTableItem>)[]
+  groupedItems: readonly (DataTableItem | Group<DataTableItem> | Expanded<DataTableItem>)[]
   columns: InternalDataTableHeader[]
   headers: InternalDataTableHeader[][]
 }
@@ -140,7 +140,8 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
       allSelected,
     } = provideSelection(props, { allItems: items, currentPage: paginatedItemsWithoutGroups })
 
-    const { isExpanded, toggleExpand } = provideExpanded(props)
+    const { expanded, isExpanded, toggleExpand } = provideExpanded(props)
+    const { expandedItems } = useExpandedItems(paginatedItemsWithoutGroups, expanded)
 
     useOptions({
       page,
@@ -217,7 +218,7 @@ export const VDataTable = genericComponent<VDataTableSlots>()({
                   { slots.body ? slots.body(slotProps.value) : (
                     <VDataTableRows
                       { ...dataTableRowsProps }
-                      items={ paginatedItems.value }
+                      items={ expandedItems.value }
                       v-slots={ slots }
                     />
                   )}

@@ -1,5 +1,5 @@
 // Utilities
-import { onBeforeUnmount, readonly, ref, watch } from 'vue'
+import { ComponentPublicInstance, onBeforeUnmount, readonly, ref, watch } from 'vue'
 import { refElement } from '@/util'
 import { IN_BROWSER } from '@/util/globals'
 
@@ -7,7 +7,7 @@ import { IN_BROWSER } from '@/util/globals'
 import type { DeepReadonly, Ref } from 'vue'
 
 interface ResizeState {
-  resizeRef: Ref<HTMLElement | undefined>
+  resizeRef: Ref<HTMLElement | ComponentPublicInstance | undefined>
   contentRect: DeepReadonly<Ref<DOMRectReadOnly | undefined>>
 }
 

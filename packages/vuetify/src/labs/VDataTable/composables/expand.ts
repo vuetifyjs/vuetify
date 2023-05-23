@@ -2,12 +2,25 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { inject, provide, toRef } from 'vue'
+import { computed, inject, provide, toRef } from 'vue'
 import { propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
 import type { DataTableItem } from '../types'
+import { Group } from './group'
+
+export type Expanded<T = any> = {
+  type: 'expanded'
+  key: string
+  item: T
+}
+
+type ExpandProps = {
+  expandOnClick: boolean
+  expanded: readonly string[]
+  'onUpdate:expanded': ((value: any[]) => void) | undefined
+}
 
 export const makeDataTableExpandProps = propsFactory({
   expandOnClick: Boolean,
@@ -25,12 +38,6 @@ export const VDataTableExpandedKey: InjectionKey<{
   isExpanded: (item: DataTableItem) => boolean
   toggleExpand: (item: DataTableItem) => void
 }> = Symbol.for('vuetify:datatable:expanded')
-
-type ExpandProps = {
-  expandOnClick: boolean
-  expanded: readonly string[]
-  'onUpdate:expanded': ((value: any[]) => void) | undefined
-}
 
 export function provideExpanded (props: ExpandProps) {
   const expandOnClick = toRef(props, 'expandOnClick')
@@ -65,6 +72,20 @@ export function provideExpanded (props: ExpandProps) {
   provide(VDataTableExpandedKey, data)
 
   return data
+}
+
+export function useExpandedItems (items: Ref<readonly (DataTableItem | Group)[]>, expanded: Ref<Set<string>>) {
+  const expandedItems = computed(() => items.value.reduce<(DataTableItem | Group | Expanded)[]>((arr, item) => {
+    arr.push(item)
+
+    if (item.type === 'item' && expanded.value.has(item.value)) {
+      arr.push({ type: 'expanded', item, key: `expanded-${item.index}` } as Expanded)
+    }
+
+    return arr
+  }, []))
+
+  return { expandedItems }
 }
 
 export function useExpanded () {
