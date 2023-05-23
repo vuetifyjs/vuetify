@@ -6,8 +6,8 @@ export function bindProps (el: HTMLElement, props: Record<string, any>) {
   Object.keys(props).forEach(k => {
     if (isOn(k)) {
       const name = eventName(k)
+      const handler = handlers.get(el)
       if (props[k] == null) {
-        const handler = handlers.get(el)
         handler?.forEach(v => {
           const [n, fn] = v
           if (n === name) {
@@ -15,11 +15,11 @@ export function bindProps (el: HTMLElement, props: Record<string, any>) {
             handler.delete(v)
           }
         })
-      } else {
+      } else if (!handler || ![...handler]?.some(v => v[0] === name && v[1] === props[k])) {
         el.addEventListener(name, props[k])
-        const handler = handlers.get(el) || new Set()
-        handler.add([name, props[k]])
-        if (!handlers.has(el)) handlers.set(el, handler)
+        const _handler = handler || new Set()
+        _handler.add([name, props[k]])
+        if (!handlers.has(el)) handlers.set(el, _handler)
       }
     } else {
       if (props[k] == null) {
