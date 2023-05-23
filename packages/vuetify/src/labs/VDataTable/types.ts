@@ -1,6 +1,7 @@
-import type { SelectItemKey } from '@/util'
+// Types
 import type { GroupableItem } from './composables/group'
 import type { SelectableItem } from './composables/select'
+import type { SelectItemKey } from '@/util'
 
 export type DataTableCompareFunction<T = any> = (a: T, b: T) => number
 

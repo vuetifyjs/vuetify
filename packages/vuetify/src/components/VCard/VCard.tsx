@@ -10,24 +10,24 @@ import { VCardText } from './VCardText'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
 
-// Directives
-import { Ripple } from '@/directives/ripple'
-
 // Composables
-import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
-import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
 import { makeLocationProps, useLocation } from '@/composables/location'
 import { makePositionProps, usePosition } from '@/composables/position'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { genOverlays, makeVariantProps, useVariant } from '@/composables/variant'
+
+// Directives
+import { Ripple } from '@/directives/ripple'
 
 // Utilities
 import { computed } from 'vue'

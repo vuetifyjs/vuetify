@@ -23,8 +23,8 @@ import {
 import { APCAcontrast } from '@/util/color/APCA'
 
 // Types
-import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 import type { HeadClient } from '@vueuse/head'
+import type { App, DeepReadonly, InjectionKey, Ref } from 'vue'
 
 type DeepPartial<T> = T extends object ? { [P in keyof T]?: DeepPartial<T[P]> } : T
 

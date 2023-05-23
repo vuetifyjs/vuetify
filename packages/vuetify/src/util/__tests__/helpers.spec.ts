@@ -1,5 +1,3 @@
-import { describe, expect, it } from '@jest/globals'
-
 import {
   arrayDiff,
   convertToUnit,
@@ -11,6 +9,9 @@ import {
   humanReadableFileSize,
   mergeDeep,
 } from '../helpers'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { isProxy, isRef, ref } from 'vue'
 
 describe('helpers', () => {

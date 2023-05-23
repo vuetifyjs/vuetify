@@ -2,8 +2,8 @@
 import './VLayout.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'

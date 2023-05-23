@@ -22,8 +22,8 @@ import {
 import colors from '@/util/colors'
 
 // Types
-import type { Color, HSV } from '@/util'
 import type { DeepReadonly, PropType } from 'vue'
+import type { Color, HSV } from '@/util'
 
 export const makeVColorPickerSwatchesProps = propsFactory({
   swatches: {

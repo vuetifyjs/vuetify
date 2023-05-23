@@ -2,37 +2,37 @@
 import './VCombobox.sass'
 
 // Components
-import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VTextField } from '@/components/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTransitionProps } from '@/composables/transition'
-import { transformItem, useItems } from '@/composables/list-items'
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { transformItem, useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utility
+// Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { PropType } from 'vue'
-import type { GenericProps } from '@/util'
-import type { FilterMatch } from '@/composables/filter'
-import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilterMatch } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text

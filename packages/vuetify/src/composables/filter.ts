@@ -2,8 +2,8 @@
 /* eslint-disable no-labels */
 
 // Utilities
-import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 import { computed, ref, unref, watchEffect } from 'vue'
+import { getPropertyFromItem, propsFactory, wrapInArray } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'

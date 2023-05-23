@@ -1,8 +1,12 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
-import { ref } from 'vue'
+
+// Components
 import { VFileInput } from '../VFileInput'
+
+// Utilities
+import { ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')

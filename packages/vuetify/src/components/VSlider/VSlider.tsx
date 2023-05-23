@@ -2,16 +2,16 @@
 import './VSlider.sass'
 
 // Components
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'

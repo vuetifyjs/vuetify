@@ -2,19 +2,19 @@
 import './VField.sass'
 
 // Components
+import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
 import { useInputIcon } from '@/components/VInput/InputIcon'
-import { VFieldLabel } from './VFieldLabel'
 
 // Composables
-import { IconValue } from '@/composables/icons'
-import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useBackgroundColor, useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeFocusProps, useFocus } from '@/composables/focus'
+import { IconValue } from '@/composables/icons'
+import { LoaderSlot, makeLoaderProps, useLoader } from '@/composables/loader'
+import { useRtl } from '@/composables/locale'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor, useTextColor } from '@/composables/color'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, ref, toRef, watch } from 'vue'
@@ -33,9 +33,9 @@ import {
 } from '@/util'
 
 // Types
+import type { PropType, Ref } from 'vue'
 import type { LoaderSlotProps } from '@/composables/loader'
 import type { GenericProps } from '@/util'
-import type { PropType, Ref } from 'vue'
 
 const allowedVariants = ['underlined', 'outlined', 'filled', 'solo', 'solo-inverted', 'solo-filled', 'plain'] as const
 type Variant = typeof allowedVariants[number]

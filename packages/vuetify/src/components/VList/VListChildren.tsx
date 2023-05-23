@@ -1,18 +1,18 @@
 // Components
-import { VDivider } from '../VDivider'
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
+import { VDivider } from '../VDivider'
 
 // Utilities
 import { createList } from './list'
 import { genericComponent, propsFactory } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { InternalListItem } from './VList'
 import type { VListItemSlots } from './VListItem'
 import type { GenericProps } from '@/util'
-import type { PropType } from 'vue'
 
 export type VListChildrenSlots<T> = {
   [K in keyof Omit<VListItemSlots, 'default'>]: VListItemSlots[K] & { item: T }

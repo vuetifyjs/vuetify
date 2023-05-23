@@ -1,23 +1,24 @@
 // Components
-import { VDataTableGroupHeaderRow, type VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
+import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { useExpanded } from './composables/expand'
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import type { Group, provideGroupBy } from './composables/group'
 import type { provideExpanded } from './composables/expand'
+import type { Group, provideGroupBy } from './composables/group'
 import type { provideSelection } from './composables/select'
 import type { DataTableItem, InternalDataTableHeader } from './types'
+import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 
 type GroupHeaderSlot = {
   index: number

@@ -1,9 +1,9 @@
+// Composables
+import { useProxiedModel } from '@/composables/proxiedModel'
+
 // Utilities
 import { inject, provide, toRef } from 'vue'
 import { propsFactory } from '@/util'
-
-// Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'

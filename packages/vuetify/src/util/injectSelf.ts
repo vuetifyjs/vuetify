@@ -1,4 +1,7 @@
+// Utilities
 import { getCurrentInstance } from '@/util/getCurrentInstance'
+
+// Types
 import type { InjectionKey } from 'vue'
 
 export function injectSelf<T>(key: InjectionKey<T> | string): T | undefined

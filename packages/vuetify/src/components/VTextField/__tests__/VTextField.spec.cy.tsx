@@ -1,8 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VTextField } from '../VTextField'
-import { generate } from '../../../../cypress/templates'
+
+// Utilities
 import { cloneVNode } from 'vue'
+import { generate } from '../../../../cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 

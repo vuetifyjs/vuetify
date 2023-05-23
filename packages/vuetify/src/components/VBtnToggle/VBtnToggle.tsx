@@ -7,7 +7,7 @@ import { makeVBtnGroupProps, VBtnGroup } from '@/components/VBtnGroup/VBtnGroup'
 // Composables
 import { makeGroupProps, useGroup } from '@/composables/group'
 
-// Utility
+// Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types

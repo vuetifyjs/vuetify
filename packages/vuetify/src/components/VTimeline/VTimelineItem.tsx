@@ -2,17 +2,17 @@
 import { VTimelineDivider } from './VTimelineDivider'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeElevationProps } from '@/composables/elevation'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps } from '@/composables/rounded'
 import { makeSizeProps } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { ref, shallowRef, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

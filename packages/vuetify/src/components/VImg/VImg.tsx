@@ -1,14 +1,15 @@
+// Styles
 import './VImg.sass'
 
 // Components
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
-// Directives
-import intersect from '@/directives/intersect'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Directives
+import intersect from '@/directives/intersect'
 
 // Utilities
 import {
