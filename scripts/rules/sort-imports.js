@@ -34,40 +34,37 @@ module.exports = {
     const sourceCode = context.getSourceCode()
     const comments = sourceCode.getAllComments().filter(comment => comment.type === 'Line')
     const importMap = []
-    function registerImport (node) {
-      const value = {
-        node,
-        source: node.source.value,
-        types: node.importKind === 'type',
-        code: sourceCode.lines.slice(node.loc.start.line - 1, node.loc.end.line).join('\n') + '\n',
-      }
-      const groupIdx = groups.findIndex(group => value.types ? group.types : group.match?.test(node.source.value))
-      const innerIdx = innerOrder.findIndex(prefix => node.source.value.startsWith(prefix))
-      value.groupOrder = ~groupIdx ? groupIdx : null
-      value.innerOrder = innerIdx
-      value.originalOrder = importMap.length
-
-      const groupComment = comments.findLast(c => (
-        c.range[1] < node.range[0] &&
-        /^ [A-Z][a-z]+$/.test(c.value) &&
-        !sourceCode.text.slice(c.range[1], node.range[0]).includes('\n\n')
-      ))
-      value.groupComment = groupComment
-      value.originalGroup = groupComment?.value.trim()
-      if (~groupIdx) {
-        value.group = groups[groupIdx].label
-      } else {
-        const groupIdx = groups.findIndex(group => group.label === value.originalGroup)
-        value.groupOrder = ~groupIdx ? groupIdx : null
-        value.group = value.originalGroup
-      }
-
-      importMap.push(value)
-    }
 
     return {
       ImportDeclaration (node) {
-        registerImport(node)
+        const value = {
+          node,
+          source: node.source.value,
+          types: node.importKind === 'type',
+          code: sourceCode.lines.slice(node.loc.start.line - 1, node.loc.end.line).join('\n') + '\n',
+        }
+        const groupIdx = groups.findIndex(group => value.types ? group.types : group.match?.test(node.source.value))
+        const innerIdx = innerOrder.findIndex(prefix => node.source.value.startsWith(prefix))
+        value.groupOrder = ~groupIdx ? groupIdx : null
+        value.innerOrder = innerIdx
+        value.originalOrder = importMap.length
+
+        const groupComment = comments.findLast(c => (
+          c.range[1] < node.range[0] &&
+          /^ [A-Z][a-z]+$/.test(c.value) &&
+          !sourceCode.text.slice(c.range[1], node.range[0]).includes('\n\n')
+        ))
+        value.groupComment = groupComment
+        value.originalGroup = groupComment?.value.trim()
+        if (~groupIdx) {
+          value.group = groups[groupIdx].label
+        } else {
+          const groupIdx = groups.findIndex(group => group.label === value.originalGroup)
+          value.groupOrder = ~groupIdx ? groupIdx : null
+          value.group = value.originalGroup
+        }
+
+        importMap.push(value)
       },
       'Program:exit' () {
         const sorted = [...importMap].sort((a, b) => {
