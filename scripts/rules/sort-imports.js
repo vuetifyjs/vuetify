@@ -39,7 +39,7 @@ module.exports = {
         node,
         source: node.source.value,
         types: node.importKind === 'type',
-        code: sourceCode.getText(node, 0, 1),
+        code: sourceCode.lines.slice(node.loc.start.line - 1, node.loc.end.line).join('\n') + '\n',
       }
       const groupIdx = groups.findIndex(group => value.types ? group.types : group.match?.test(node.source.value))
       const innerIdx = innerOrder.findIndex(prefix => node.source.value.startsWith(prefix))
@@ -130,7 +130,7 @@ module.exports = {
               })
               return fixer.replaceTextRange([
                 importMap.at(0).groupComment?.range[0] ?? importMap.at(0).node.range[0],
-                importMap.at(-1).node.range[1] + 1,
+                importMap.at(-1).node.range[0] + importMap.at(-1).code.length,
               ], newCode.trimStart())
             },
           })
