@@ -19,9 +19,9 @@ import type { PropType } from 'vue'
 
 // Types
 export type VTimelineItemSlots = {
-  default: []
-  icon: []
-  opposite: []
+  default: never
+  icon: never
+  opposite: never
 }
 
 export const makeVTimelineItemProps = propsFactory({

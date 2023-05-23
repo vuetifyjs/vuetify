@@ -49,14 +49,14 @@ export const makeVCarouselProps = propsFactory({
 }, 'v-carousel')
 
 type VCarouselSlots = VWindowSlots & {
-  item: [{
+  item: {
     props: Record<string, any>
     item: {
       id: number
       value: unknown
       disabled: boolean | undefined
     }
-  }]
+  }
 }
 
 export const VCarousel = genericComponent<VCarouselSlots>()({

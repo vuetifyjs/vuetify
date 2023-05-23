@@ -16,8 +16,8 @@ import { computed, toRef } from 'vue'
 import { defineComponent, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VListGroupSlots = {
-  default: []
-  activator: [{ isOpen: boolean, props: Record<string, unknown> }]
+  default: never
+  activator: { isOpen: boolean, props: Record<string, unknown> }
 }
 
 const VListGroupActivator = defineComponent({

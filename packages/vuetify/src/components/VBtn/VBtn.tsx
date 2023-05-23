@@ -37,10 +37,10 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 import type { PropType } from 'vue'
 
 export type VBtnSlots = {
-  default: []
-  prepend: []
-  append: []
-  loader: []
+  default: never
+  prepend: never
+  append: never
+  loader: never
 }
 
 export const makeVBtnProps = propsFactory({

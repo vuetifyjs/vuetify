@@ -32,12 +32,12 @@ import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VFileInputSlots = VInputSlots & VFieldSlots & {
-  counter: []
-  selection: [{
+  counter: never
+  selection: {
     fileNames: string[]
     totalBytes: number
     totalBytesReadable: string
-  }]
+  }
 }
 
 export const makeVFileInputProps = propsFactory({

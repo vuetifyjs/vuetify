@@ -49,11 +49,11 @@ export type ListItemSubtitleSlot = {
 }
 
 export type VListItemSlots = {
-  prepend: [ListItemSlot]
-  append: [ListItemSlot]
-  default: [ListItemSlot]
-  title: [ListItemTitleSlot]
-  subtitle: [ListItemSubtitleSlot]
+  prepend: ListItemSlot
+  append: ListItemSlot
+  default: ListItemSlot
+  title: ListItemTitleSlot
+  subtitle: ListItemSubtitleSlot
 }
 
 export const makeVListItemProps = propsFactory({

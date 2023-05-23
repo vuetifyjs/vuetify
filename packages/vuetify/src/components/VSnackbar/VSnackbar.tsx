@@ -21,9 +21,9 @@ import { genericComponent, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 type VSnackbarSlots = {
-  activator: [{ isActive: boolean, props: Record<string, any> }]
-  default: []
-  actions: []
+  activator: { isActive: boolean, props: Record<string, any> }
+  default: never
+  actions: never
 }
 
 export const makeVSnackbarProps = propsFactory({

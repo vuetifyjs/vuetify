@@ -17,7 +17,7 @@ import { computed, Transition } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 type VProgressLinearSlots = {
-  default: [{ value: number, buffer: number }]
+  default: { value: number, buffer: number }
 }
 
 export const makeVProgressLinearProps = propsFactory({

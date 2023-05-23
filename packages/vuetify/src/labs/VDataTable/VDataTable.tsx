@@ -54,15 +54,15 @@ export type VDataTableSlotProps = {
 }
 
 export type VDataTableSlots = VDataTableRowsSlots & VDataTableHeadersSlots & {
-  default: [VDataTableSlotProps]
-  colgroup: [VDataTableSlotProps]
-  top: [VDataTableSlotProps]
-  body: [VDataTableSlotProps]
-  tbody: [VDataTableSlotProps]
-  thead: [VDataTableSlotProps]
-  tfoot: [VDataTableSlotProps]
-  bottom: [VDataTableSlotProps]
-  'footer.prepend': []
+  default: VDataTableSlotProps
+  colgroup: VDataTableSlotProps
+  top: VDataTableSlotProps
+  body: VDataTableSlotProps
+  tbody: VDataTableSlotProps
+  thead: VDataTableSlotProps
+  tfoot: VDataTableSlotProps
+  bottom: VDataTableSlotProps
+  'footer.prepend': never
 }
 
 export const makeDataTableProps = propsFactory({

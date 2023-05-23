@@ -33,9 +33,9 @@ interface SlideGroupSlot {
 }
 
 type VSlideGroupSlots = {
-  default: [SlideGroupSlot]
-  prev: [SlideGroupSlot]
-  next: [SlideGroupSlot]
+  default: SlideGroupSlot
+  prev: SlideGroupSlot
+  next: SlideGroupSlot
 }
 
 export const makeVSlideGroupProps = propsFactory({

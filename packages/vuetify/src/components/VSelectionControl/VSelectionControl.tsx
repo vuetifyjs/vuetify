@@ -43,9 +43,9 @@ export type SelectionControlSlot = {
 }
 
 export type VSelectionControlSlots = {
-  default: []
-  label: [{ label: string | undefined, props: Record<string, unknown> }]
-  input: [SelectionControlSlot]
+  default: never
+  label: { label: string | undefined, props: Record<string, unknown> }
+  input: SelectionControlSlot
 }
 
 export const makeSelectionControlProps = propsFactory({

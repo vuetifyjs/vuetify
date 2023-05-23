@@ -20,8 +20,8 @@ import { genericComponent, pick, propsFactory, useRender } from '@/util'
 import { toRef } from 'vue'
 
 export type VBadgeSlots = {
-  default: []
-  badge: []
+  default: never
+  badge: never
 }
 
 export const makeVBadgeProps = propsFactory({

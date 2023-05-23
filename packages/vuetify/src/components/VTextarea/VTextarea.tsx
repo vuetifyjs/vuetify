@@ -52,7 +52,7 @@ export const makeVTextareaProps = propsFactory({
 }, 'v-textarea')
 
 type VTextareaSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  counter: [VCounterSlot]
+  counter: VCounterSlot
 }
 
 export const VTextarea = genericComponent<VTextareaSlots>()({

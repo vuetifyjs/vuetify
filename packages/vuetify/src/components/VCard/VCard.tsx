@@ -74,12 +74,12 @@ export const makeVCardProps = propsFactory({
 }, 'v-card')
 
 export type VCardSlots = VCardItemSlots & {
-  default: []
-  actions: []
-  text: []
-  loader: [LoaderSlotProps]
-  image: []
-  item: []
+  default: never
+  actions: never
+  text: never
+  loader: LoaderSlotProps
+  image: never
+  item: never
 }
 
 export const VCard = genericComponent<VCardSlots>()({

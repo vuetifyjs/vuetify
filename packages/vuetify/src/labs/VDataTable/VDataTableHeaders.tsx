@@ -47,11 +47,11 @@ type VDataTableHeaderCellColumnSlotProps = {
 }
 
 export type VDataTableHeadersSlots = {
-  headers: [HeadersSlotProps]
-  loader: [LoaderSlotProps]
-  'column.data-table-select': [VDataTableHeaderCellColumnSlotProps]
-  'column.data-table-expand': [VDataTableHeaderCellColumnSlotProps]
-} & { [key: `column.${string}`]: [VDataTableHeaderCellColumnSlotProps] }
+  headers: HeadersSlotProps
+  loader: LoaderSlotProps
+  'column.data-table-select': VDataTableHeaderCellColumnSlotProps
+  'column.data-table-expand': VDataTableHeaderCellColumnSlotProps
+} & { [key: `column.${string}`]: VDataTableHeaderCellColumnSlotProps }
 
 export const makeVDataTableHeadersProps = propsFactory({
   color: String,

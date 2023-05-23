@@ -40,8 +40,8 @@ type VRatingItemLabelSlot = {
 }
 
 type VRatingSlots = {
-  item: [VRatingItemSlot]
-  'item-label': [VRatingItemLabelSlot]
+  item: VRatingItemSlot
+  'item-label': VRatingItemLabelSlot
 }
 
 export const makeVRatingProps = propsFactory({

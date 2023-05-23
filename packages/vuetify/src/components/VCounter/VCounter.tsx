@@ -33,7 +33,7 @@ export type VCounterSlot = {
 }
 
 type VCounterSlots = {
-  default: [VCounterSlot]
+  default: VCounterSlot
 }
 
 export const VCounter = genericComponent<VCounterSlots>()({

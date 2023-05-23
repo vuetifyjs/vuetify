@@ -48,7 +48,7 @@ export const VVirtualScroll = genericComponent<new <T>(
     items?: readonly T[]
   },
   slots: {
-    default: [VVirtualScrollSlot<T>]
+    default: VVirtualScrollSlot<T>
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScroll',

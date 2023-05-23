@@ -21,7 +21,7 @@ export type VMessageSlot = {
 }
 
 export type VMessagesSlots = {
-  message: [VMessageSlot]
+  message: VMessageSlot
 }
 
 export const makeVMessagesProps = propsFactory({

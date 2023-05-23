@@ -20,7 +20,7 @@ export interface DefaultBtnToggleSlot extends Pick<GroupProvide, BtnToggleSlotPr
 export const VBtnToggleSymbol: InjectionKey<GroupProvide> = Symbol.for('vuetify:v-btn-toggle')
 
 type VBtnToggleSlots = {
-  default: [DefaultBtnToggleSlot]
+  default: DefaultBtnToggleSlot
 }
 
 export const makeVBtnToggleProps = propsFactory({

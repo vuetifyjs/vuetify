@@ -14,7 +14,7 @@ import { computed, inject } from 'vue'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VSliderTrackSlots = {
-  'tick-label': [{ tick: Tick, index: number }]
+  'tick-label': { tick: Tick, index: number }
 }
 
 export const makeVSliderTrackProps = propsFactory({

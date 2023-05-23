@@ -70,7 +70,7 @@ export const makeVDataTableFooterProps = propsFactory({
   showCurrentPage: Boolean,
 }, 'v-data-table-footer')
 
-export const VDataTableFooter = genericComponent<{ prepend: [] }>()({
+export const VDataTableFooter = genericComponent<{ prepend: never }>()({
   name: 'VDataTableFooter',
 
   props: makeVDataTableFooterProps(),

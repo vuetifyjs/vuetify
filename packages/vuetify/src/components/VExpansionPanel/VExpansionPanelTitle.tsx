@@ -23,8 +23,8 @@ interface ExpansionPanelTitleSlot {
 }
 
 export type VExpansionPanelTitleSlots = {
-  default: [ExpansionPanelTitleSlot]
-  actions: [ExpansionPanelTitleSlot]
+  default: ExpansionPanelTitleSlot
+  actions: ExpansionPanelTitleSlot
 }
 
 export const makeVExpansionPanelTitleProps = propsFactory({

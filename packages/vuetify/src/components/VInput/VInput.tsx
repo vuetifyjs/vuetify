@@ -62,11 +62,11 @@ export const makeVInputProps = propsFactory({
 }, 'v-input')
 
 export type VInputSlots = {
-  default: [VInputSlot]
-  prepend: [VInputSlot]
-  append: [VInputSlot]
-  details: [VInputSlot]
-  message: [VMessageSlot]
+  default: VInputSlot
+  prepend: VInputSlot
+  append: VInputSlot
+  details: VInputSlot
+  message: VMessageSlot
 }
 
 export const VInput = genericComponent<VInputSlots>()({

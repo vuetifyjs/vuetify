@@ -31,10 +31,10 @@ export type VNavigationDrawerImageSlot = {
 }
 
 export type VNavigationDrawerSlots = {
-  default: []
-  prepend: []
-  append: []
-  image: [VNavigationDrawerImageSlot]
+  default: never
+  prepend: never
+  append: never
+  image: VNavigationDrawerImageSlot
 }
 
 const locations = ['start', 'end', 'left', 'right', 'top', 'bottom'] as const

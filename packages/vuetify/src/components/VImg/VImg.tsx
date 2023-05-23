@@ -40,10 +40,10 @@ export interface srcObject {
 }
 
 export type VImgSlots = {
-  default: []
-  placeholder: []
-  error: []
-  sources: []
+  default: never
+  placeholder: never
+  error: never
+  sources: never
 }
 
 export const makeVImgProps = propsFactory({

@@ -45,8 +45,8 @@ export const makeVTextFieldProps = propsFactory({
 }, 'v-text-field')
 
 export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: []
-  counter: [VCounterSlot]
+  default: never
+  counter: VCounterSlot
 }
 
 export const VTextField = genericComponent<VTextFieldSlots>()({

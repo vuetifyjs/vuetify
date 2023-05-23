@@ -23,7 +23,7 @@ import type { LoaderSlotProps } from '@/composables/loader'
 export type VSwitchSlots =
   & VInputSlots
   & VSelectionControlSlots
-  & { loader: [LoaderSlotProps] }
+  & { loader: LoaderSlotProps }
 
 export const makeVSwitchProps = propsFactory({
   indeterminate: Boolean,

@@ -96,12 +96,12 @@ export const makeVFieldProps = propsFactory({
 }, 'v-field')
 
 export type VFieldSlots = {
-  clear: []
-  'prepend-inner': [DefaultInputSlot]
-  'append-inner': [DefaultInputSlot]
-  label: [DefaultInputSlot & { label: string | undefined, props: Record<string, any> }]
-  loader: [LoaderSlotProps]
-  default: [VFieldSlot]
+  clear: never
+  'prepend-inner': DefaultInputSlot
+  'append-inner': DefaultInputSlot
+  label: DefaultInputSlot & { label: string | undefined, props: Record<string, any> }
+  loader: LoaderSlotProps
+  default: VFieldSlot
 }
 
 export const VField = genericComponent<new <T>(

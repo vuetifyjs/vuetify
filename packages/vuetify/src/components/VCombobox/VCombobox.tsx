@@ -90,12 +90,12 @@ export const VCombobox = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: ListItem<Item>, index: number }]
-    'prepend-item': []
-    'append-item': []
-    'no-data': []
+    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: ListItem<Item>, index: number }
+    'prepend-item': never
+    'append-item': never
+    'no-data': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VCombobox',
