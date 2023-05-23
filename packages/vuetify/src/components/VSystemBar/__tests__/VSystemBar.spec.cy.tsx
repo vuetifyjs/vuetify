@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
-import { VLayout } from '@/components/VLayout'
 import { VSystemBar } from '..'
+import { VLayout } from '@/components/VLayout'
 
 // Tests
 describe('VSystemBar', () => {

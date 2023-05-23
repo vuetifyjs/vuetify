@@ -3,10 +3,8 @@ import { makeDateProps, useDate } from '../date'
 import { createVuetify } from '@/framework'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
-
-// Utilities
+import { mount } from '@vue/test-utils'
 import { defineComponent, h } from 'vue'
 import { VuetifyDateAdapter } from '../adapters/vuetify'
 

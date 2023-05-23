@@ -1,10 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
+import { VNavigationDrawer } from '..'
 import { VLayout } from '@/components/VLayout'
 import { VLocaleProvider } from '@/components/VLocaleProvider'
 import { VMain } from '@/components/VMain'
-import { VNavigationDrawer } from '..'
 
 // Utilities
 import { ref } from 'vue'

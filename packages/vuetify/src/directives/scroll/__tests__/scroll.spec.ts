@@ -1,10 +1,9 @@
-import { describe, expect, it } from '@jest/globals'
-
 // Directives
 import Scroll from '../'
 import { scrollWindow } from '../../../../test'
 
 // Utilities
+import { describe, expect, it } from '@jest/globals'
 import {
   createApp,
   defineComponent,

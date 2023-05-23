@@ -4,8 +4,8 @@ import { CenteredGrid } from '@/../cypress/templates'
 import { createVuetify } from '@/framework'
 
 // Components
-import { VBtn } from '@/components/VBtn'
 import { VThemeProvider } from '..'
+import { VBtn } from '@/components/VBtn'
 
 describe('VThemeProvider', () => {
   const vuetify = createVuetify()

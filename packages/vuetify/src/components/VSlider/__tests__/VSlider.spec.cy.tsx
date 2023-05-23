@@ -1,9 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
+import { VSlider } from '..'
 import { Application, CenteredGrid } from '@/../cypress/templates'
 import { VApp } from '@/components/VApp'
-import { VSlider } from '..'
 
 describe('VSlider', () => {
   it('should react to clicking on track', () => {

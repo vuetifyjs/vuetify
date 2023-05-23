@@ -2,6 +2,8 @@
 /// <reference types="../../../../types/cypress" />
 
 import { CenteredGrid } from '@/../cypress/templates'
+
+// Utilities
 import { createRouter, createWebHistory } from 'vue-router'
 import { VList, VListItem } from '..'
 

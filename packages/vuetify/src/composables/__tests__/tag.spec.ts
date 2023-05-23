@@ -1,8 +1,8 @@
 // Utilities
+import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 import { h } from 'vue'
 import { makeTagProps } from '../tag'
-import { mount } from '@vue/test-utils'
-import { describe, expect, it } from '@jest/globals'
 
 // Types
 import type { TagProps } from '../tag'

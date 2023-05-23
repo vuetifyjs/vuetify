@@ -1,7 +1,7 @@
 // Utilities
-import { defineComponent, ref } from 'vue'
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
+import { defineComponent, ref } from 'vue'
 
 // Effects
 import {
