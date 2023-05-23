@@ -29,9 +29,6 @@ module.exports = {
 
     // 'import/no-cycle': 'warn',
     // 'import/no-self-import': 'warn',
-    // 'import/order': ['error', {
-    //   'newlines-between': 'always',
-    // }],
   },
   overrides: [
     {
