@@ -31,18 +31,37 @@ module.exports = {
     fixable: 'code',
   },
   create (context) {
+    const sourceCode = context.getSourceCode()
+    const comments = sourceCode.getAllComments().filter(comment => comment.type === 'Line')
     const importMap = []
     function registerImport (node) {
       const value = {
         node,
         source: node.source.value,
         types: node.importKind === 'type',
+        code: sourceCode.getText(node, 0, 1),
       }
       const groupIdx = groups.findIndex(group => value.types ? group.types : group.match?.test(node.source.value))
       const innerIdx = innerOrder.findIndex(prefix => node.source.value.startsWith(prefix))
       value.groupOrder = ~groupIdx ? groupIdx : null
       value.innerOrder = ~innerIdx ? innerIdx : null
       value.originalOrder = importMap.length
+
+      const groupComment = comments.findLast(c => (
+        c.range[1] < node.range[0] &&
+        /^ [A-Z][a-z]+$/.test(c.value) &&
+        !sourceCode.text.slice(c.range[1], node.range[0]).includes('\n\n')
+      ))
+      value.groupComment = groupComment
+      value.originalGroup = groupComment?.value.trim()
+      if (~groupIdx) {
+        value.group = groups[groupIdx].label
+      } else {
+        const groupIdx = groups.findIndex(group => group.label === value.originalGroup)
+        value.groupOrder = ~groupIdx ? groupIdx : null
+        value.group = value.originalGroup
+      }
+
       importMap.push(value)
     }
 
@@ -51,7 +70,6 @@ module.exports = {
         registerImport(node)
       },
       'Program:exit' () {
-        // const comments = context.getSourceCode().getAllComments().filter(comment => comment.type === 'Line')
         const sorted = [...importMap].sort((a, b) => {
           if ([a.groupOrder, b.groupOrder].includes(null)) return 0
           if (a.groupOrder === b.groupOrder) {
@@ -70,26 +88,53 @@ module.exports = {
           importMap[value.originalOrder] = value
         })
 
-        importMap.forEach(value => {
-          // if (value.groupOrder != null) {
-          //   const groupLabel = groups[value.groupOrder].label
-          //   const blockComments = comments.filter(comment => comment.loc.start.line < value.node.loc.start.line)
-          //   console.log(groupLabel, blockComments)
-          // }
-          if (value.order < value.originalOrder) {
-            const correctNode = sorted.find(v => v.originalOrder === value.order)
-            context.report({
-              node: value.node,
-              message: `${value.source} should appear before ${correctNode.source}`,
-              fix (fixer) {
-                return [
-                  fixer.removeRange([value.node.range[0], value.node.range[1] + 1]),
-                  fixer.insertTextBefore(correctNode.node, context.getSourceCode().getText(value.node) + '\n'),
-                ]
-              },
-            })
-          }
-        })
+        const isSorted = sorted.every((value, idx) => value.order === value.originalOrder && value.group === value.originalGroup)
+
+        if (!isSorted) {
+          const problemsForward = []
+          const problemsReverse = []
+          const problemNodes = importMap.filter(value => value.order !== value.originalOrder || value.group !== value.originalGroup)
+          problemNodes.forEach(value => {
+            if (value.group !== value.originalGroup) {
+              problemsForward.push(`  ${value.source} should be in group ${value.group}`)
+            } else if (value.order < value.originalOrder) {
+              const correctNode = sorted.find(v => v.originalOrder === value.order)
+              problemsForward.push(`  ${value.source} should appear before ${correctNode.source}`)
+            }
+          })
+          ;[...problemNodes].reverse().forEach(value => {
+            if (value.group !== value.originalGroup) {
+              problemsReverse.push(`  ${value.source} should be in group ${value.group}`)
+            } else if (value.order > value.originalOrder) {
+              const correctNode = sorted.find(v => v.originalOrder === value.order)
+              problemsReverse.push(`  ${value.source} should appear after ${correctNode.source}`)
+            }
+          })
+          const problems = (problemsForward.length <= problemsReverse.length ? problemsForward : problemsReverse).join('\n')
+
+          context.report({
+            loc: {
+              start: importMap.at(0).groupComment?.loc.start ?? importMap.at(0).node.loc.start,
+              end: importMap.at(-1).node.loc.end,
+            },
+            message: 'Imports should be sorted\n' + problems,
+            fix (fixer) {
+              let newCode = ''
+              let currentGroup = null
+              sorted.forEach(value => {
+                if (value.group && value.group !== currentGroup) {
+                  currentGroup = value.group
+                  newCode += `\n// ${currentGroup}\n`
+                }
+                newCode += value.code
+              })
+              return fixer.replaceTextRange([
+                importMap.at(0).groupComment?.range[0] ?? importMap.at(0).node.range[0],
+                importMap.at(-1).node.range[1] + 1,
+              ], newCode.trimStart())
+            },
+          })
+        }
       },
     }
   },
