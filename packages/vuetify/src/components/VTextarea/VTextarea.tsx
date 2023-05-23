@@ -5,7 +5,8 @@ import '../VTextField/VTextField.sass'
 // Components
 import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter, type VCounterSlot } from '@/components/VCounter/VCounter'
+import { VCounter } from '@/components/VCounter/VCounter'
+import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import { VField } from '@/components/VField'
 
 // Directives

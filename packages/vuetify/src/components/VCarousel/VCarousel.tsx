@@ -2,7 +2,8 @@
 import './VCarousel.sass'
 
 // Components
-import { makeVWindowProps, VWindow, type VWindowSlots } from '@/components/VWindow/VWindow'
+import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'

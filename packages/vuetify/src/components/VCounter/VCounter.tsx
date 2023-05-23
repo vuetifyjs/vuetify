@@ -9,7 +9,8 @@ import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { type Component, computed } from 'vue'
+import { computed } from 'vue'
+import type { Component } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVCounterProps = propsFactory({

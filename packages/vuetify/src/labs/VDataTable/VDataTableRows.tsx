@@ -1,5 +1,6 @@
 // Components
-import { VDataTableGroupHeaderRow, type VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
+import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
+import type { VDataTableGroupHeaderRowSlots } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables

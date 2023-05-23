@@ -12,7 +12,8 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
 
 // Utilities
-import { type Component, computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
+import { computed, inject, mergeProps, provide, ref, shallowRef, watch } from 'vue'
+import type { Component } from 'vue'
 import { genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 import { VMenuSymbol } from './shared'

@@ -2,7 +2,8 @@
 import './VSliderTrack.sass'
 
 // Components
-import { type Tick, VSliderSymbol } from './slider'
+import { VSliderSymbol } from './slider'
+import type { Tick } from './slider'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

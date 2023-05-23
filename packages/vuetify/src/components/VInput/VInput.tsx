@@ -2,7 +2,8 @@
 import './VInput.sass'
 
 // Components
-import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
+import { VMessages } from '@/components/VMessages/VMessages'
+import type { VMessageSlot } from '@/components/VMessages/VMessages'
 
 // Composables
 import { IconValue } from '@/composables/icons'

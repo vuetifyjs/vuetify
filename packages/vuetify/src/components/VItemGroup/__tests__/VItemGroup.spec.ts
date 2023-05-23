@@ -4,7 +4,8 @@ import { VItemGroup } from '../VItemGroup'
 
 // Utilities
 import { h } from 'vue'
-import { mount, type VueWrapper } from '@vue/test-utils'
+import { mount } from '@vue/test-utils'
+import type { VueWrapper } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 import { createVuetify } from '@/framework'
 
