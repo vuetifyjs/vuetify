@@ -1,7 +1,7 @@
 // Utilities
 import { computed, inject, provide, ref } from 'vue'
-import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 import { defaultRtl } from '@/locale'
+import { createVuetifyAdapter } from '@/locale/adapters/vuetify'
 
 // Types
 import type { InjectionKey, Ref } from 'vue'

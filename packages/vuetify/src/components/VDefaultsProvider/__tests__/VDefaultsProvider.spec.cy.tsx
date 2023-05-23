@@ -3,8 +3,8 @@
 import { CenteredGrid } from '@/../cypress/templates'
 
 // Components
-import { VCard } from '@/components/VCard'
 import { VDefaultsProvider } from '../VDefaultsProvider'
+import { VCard } from '@/components/VCard'
 
 describe('VDefaultsProvider', () => {
   it('should apply new defaults', () => {

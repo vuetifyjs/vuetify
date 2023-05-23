@@ -1,6 +1,6 @@
 // Components
-import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VDataTableColumn } from './VDataTableColumn'
+import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VIcon } from '@/components/VIcon'
 
 // Composables

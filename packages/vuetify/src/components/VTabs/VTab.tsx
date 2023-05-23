@@ -9,8 +9,8 @@ import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, shallowRef } from 'vue'
-import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

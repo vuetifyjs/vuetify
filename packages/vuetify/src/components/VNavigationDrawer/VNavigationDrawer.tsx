@@ -2,6 +2,8 @@
 import './VNavigationDrawer.sass'
 
 // Composables
+import { useSticky } from './sticky'
+import { useTouch } from './touch'
 import { useRtl } from '@/composables'
 import { makeBorderProps, useBorder } from '@/composables/border'
 import { useBackgroundColor } from '@/composables/color'
@@ -16,8 +18,6 @@ import { useRouter } from '@/composables/router'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useSticky } from './sticky'
-import { useTouch } from './touch'
 
 // Utilities
 import { computed, nextTick, onBeforeMount, ref, shallowRef, toRef, Transition, watch } from 'vue'

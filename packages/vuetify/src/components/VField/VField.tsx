@@ -2,9 +2,9 @@
 import './VField.sass'
 
 // Components
+import { VFieldLabel } from './VFieldLabel'
 import { VExpandXTransition } from '@/components/transitions'
 import { useInputIcon } from '@/components/VInput/InputIcon'
-import { VFieldLabel } from './VFieldLabel'
 
 // Composables
 import { useBackgroundColor, useTextColor } from '@/composables/color'

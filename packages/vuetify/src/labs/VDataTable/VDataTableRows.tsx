@@ -4,11 +4,11 @@ import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'
 
 // Composables
-import { useLocale } from '@/composables/locale'
 import { useExpanded } from './composables/expand'
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'

@@ -2,10 +2,10 @@
 import './VSlider.sass'
 
 // Components
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
 import { makeSliderProps, useSlider, useSteps } from './slider'

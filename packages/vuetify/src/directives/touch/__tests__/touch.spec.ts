@@ -3,14 +3,12 @@ import Touch from '../'
 
 // Utilities
 import { nextTick } from 'vue'
-
-// Types
-import type { TouchValue } from '../'
-
-// Utilities
 import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
 import { touch } from '@/../test'
+
+// Types
+import type { TouchValue } from '../'
 
 describe('v-touch', () => {
   const mountFunction = (value: TouchValue): Element => {

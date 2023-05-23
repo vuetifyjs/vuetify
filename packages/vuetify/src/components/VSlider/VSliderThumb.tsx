@@ -2,8 +2,8 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
 
 // Composables
 import { useTextColor } from '@/composables/color'

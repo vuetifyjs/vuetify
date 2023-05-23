@@ -2,14 +2,14 @@
 import './VOverlay.sass'
 
 // Composables
-import { makeActivatorProps, useActivator } from './useActivator'
-import { makeComponentProps } from '@/composables/component'
-import { makeDimensionProps, useDimension } from '@/composables/dimensions'
-import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { makeLocationStrategyProps, useLocationStrategies } from './locationStrategies'
 import { makeScrollStrategyProps, useScrollStrategies } from './scrollStrategies'
+import { makeActivatorProps, useActivator } from './useActivator'
 import { useBackgroundColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { useHydration } from '@/composables/hydration'
+import { makeLazyProps, useLazy } from '@/composables/lazy'
 import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useBackButton, useRouter } from '@/composables/router'

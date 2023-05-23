@@ -3,13 +3,13 @@ import { VExpandTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables
+import { useList } from './list'
 import { makeComponentProps } from '@/composables/component'
 import { IconValue } from '@/composables/icons'
 import { useNestedGroupActivator, useNestedItem } from '@/composables/nested/nested'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { MaybeTransition } from '@/composables/transition'
-import { useList } from './list'
 
 // Utilities
 import { computed, toRef } from 'vue'

@@ -1,8 +1,8 @@
 // Components
-import { VDivider } from '../VDivider'
 import { VListGroup } from './VListGroup'
 import { VListItem } from './VListItem'
 import { VListSubheader } from './VListSubheader'
+import { VDivider } from '../VDivider'
 
 // Utilities
 import { createList } from './list'

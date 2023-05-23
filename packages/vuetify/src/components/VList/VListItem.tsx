@@ -2,11 +2,11 @@
 import './VListItem.sass'
 
 // Components
+import { VListItemSubtitle } from './VListItemSubtitle'
+import { VListItemTitle } from './VListItemTitle'
 import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VListItemSubtitle } from './VListItemSubtitle'
-import { VListItemTitle } from './VListItemTitle'
 
 // Composables
 import { useList } from './list'

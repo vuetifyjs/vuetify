@@ -1,10 +1,10 @@
 // Composables
-import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 
 // Utilities
 import { nextTick, reactive } from 'vue'

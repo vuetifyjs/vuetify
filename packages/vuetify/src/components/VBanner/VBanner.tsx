@@ -2,9 +2,9 @@
 import './VBanner.sass'
 
 // Components
-import { VAvatar } from '@/components/VAvatar'
 import { VBannerActions } from './VBannerActions'
 import { VBannerText } from './VBannerText'
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables

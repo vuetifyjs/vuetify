@@ -2,8 +2,8 @@
 import './VTabs.sass'
 
 // Components
-import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 import { VTab } from './VTab'
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

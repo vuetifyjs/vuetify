@@ -1,8 +1,8 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
-import { VApp } from '@/components/VApp'
 import { Application, CenteredGrid } from '@/../cypress/templates'
+import { VApp } from '@/components/VApp'
 import { VSlider } from '..'
 
 describe('VSlider', () => {

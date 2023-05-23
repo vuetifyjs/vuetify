@@ -1,9 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 // Components
-import { VBtn } from '@/components/VBtn'
 import { Application } from '../../../../cypress/templates'
 import { VRating } from '../VRating'
+import { VBtn } from '@/components/VBtn'
 
 describe('VRating', () => {
   it('should response to user interaction', () => {

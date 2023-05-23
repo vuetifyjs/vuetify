@@ -1,7 +1,7 @@
 // Components
-import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VExpansionPanelText } from './VExpansionPanelText'
+import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'

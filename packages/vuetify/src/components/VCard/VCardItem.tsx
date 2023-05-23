@@ -1,7 +1,7 @@
 // Components
-import { VAvatar } from '@/components/VAvatar'
 import { VCardSubtitle } from './VCardSubtitle'
 import { VCardTitle } from './VCardTitle'
+import { VAvatar } from '@/components/VAvatar'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 
 // Composables

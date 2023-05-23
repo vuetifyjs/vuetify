@@ -2,8 +2,8 @@
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 
 // Utilities
-import { genericComponent } from '@/util'
 import { VSlideGroupSymbol } from './VSlideGroup'
+import { genericComponent } from '@/util'
 
 // Types
 import type { UnwrapRef } from 'vue'

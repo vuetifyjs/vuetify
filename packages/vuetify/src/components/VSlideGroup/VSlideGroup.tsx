@@ -16,8 +16,8 @@ import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, shallowRef, watch } from 'vue'
-import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 import { bias, calculateCenteredOffset, calculateUpdatedOffset } from './helpers'
+import { clamp, focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'

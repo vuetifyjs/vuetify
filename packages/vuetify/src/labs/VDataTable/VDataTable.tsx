@@ -8,16 +8,16 @@ import { makeVDataTableRowsProps, VDataTableRows } from './VDataTableRows'
 import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 
 // Composables
+import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
-import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
-import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { makeDataTableItemProps, useDataTableItems } from './composables/items'
+import { useOptions } from './composables/options'
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from './composables/sort'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { useOptions } from './composables/options'
 
 // Utilities
 import { computed, toRef } from 'vue'

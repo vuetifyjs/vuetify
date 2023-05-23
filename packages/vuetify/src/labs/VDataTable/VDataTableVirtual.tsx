@@ -1,20 +1,20 @@
 // Components
+import { makeDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
 
 // Composables
+import { provideExpanded } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
+import { useDataTableItems } from './composables/items'
+import { useOptions } from './composables/options'
+import { provideSelection } from './composables/select'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
-import { makeDataTableProps } from './VDataTable'
 import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { provideExpanded } from './composables/expand'
-import { provideSelection } from './composables/select'
-import { useDataTableItems } from './composables/items'
-import { useOptions } from './composables/options'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'

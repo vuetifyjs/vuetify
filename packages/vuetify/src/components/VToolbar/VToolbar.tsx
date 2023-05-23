@@ -2,10 +2,10 @@
 import './VToolbar.sass'
 
 // Components
+import { VToolbarTitle } from './VToolbarTitle'
 import { VExpandTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VImg } from '@/components/VImg'
-import { VToolbarTitle } from './VToolbarTitle'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
