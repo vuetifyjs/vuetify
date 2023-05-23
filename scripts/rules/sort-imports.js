@@ -17,14 +17,14 @@ const groups = [
   },
   {
     label: 'Utilities',
-    match: /^@\/util|^vue$/,
+    match: /^@\/util|^vue$|^vue-|^@vue\/|^@jest/,
   },
   {
     label: 'Types',
     types: true,
   },
 ]
-const innerOrder = ['vue', './', '../', '@/']
+const innerOrder = ['./', '..', '@/']
 
 module.exports = {
   meta: {
@@ -44,7 +44,7 @@ module.exports = {
       const groupIdx = groups.findIndex(group => value.types ? group.types : group.match?.test(node.source.value))
       const innerIdx = innerOrder.findIndex(prefix => node.source.value.startsWith(prefix))
       value.groupOrder = ~groupIdx ? groupIdx : null
-      value.innerOrder = ~innerIdx ? innerIdx : null
+      value.innerOrder = innerIdx
       value.originalOrder = importMap.length
 
       const groupComment = comments.findLast(c => (
