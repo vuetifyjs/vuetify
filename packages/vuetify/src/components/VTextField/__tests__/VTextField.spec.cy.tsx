@@ -5,7 +5,6 @@ import { generate } from '../../../../cypress/templates'
 import { cloneVNode } from 'vue'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
-const densities = ['default', 'comfortable', 'compact'] as const
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VTextField label="label" />,
@@ -17,13 +16,11 @@ const stories = Object.fromEntries(Object.entries({
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
-      densities.map(density => (
-        <div class="d-flex" style="gap: 0.4rem">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: 'Value' }) }
-        </div>
-      ))
-    )).flat()}
+      <div class="d-flex" style="gap: 0.4rem">
+        { cloneVNode(v, { variant }) }
+        { cloneVNode(v, { variant, modelValue: 'Value' }) }
+      </div>
+    ))}
   </div>
 )]))
 

@@ -5,7 +5,7 @@ import { getCurrentInstanceName, propsFactory } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
+const allowedDensities = [null, 'default', 'comfortable', 'compact'] as const
 
 // typeof allowedDensities[number] evalutes to any
 // when generating api types for whatever reason.

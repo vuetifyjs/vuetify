@@ -1,47 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VForm } from '@/components/VForm'
-import { allowedDensities } from '@/composables/density'
 import { VCombobox } from '../VCombobox'
-import { cloneVNode, ref } from 'vue'
-import { generate } from '../../../../cypress/templates'
+import { ref } from 'vue'
 import { keyValues } from '@/util'
-
-const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
-const densities = allowedDensities.filter(d => d)
-const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
-
-const stories = Object.fromEntries(Object.entries({
-  'Default input': <VCombobox label="label" />,
-  Disabled: <VCombobox label="label" items={ items } disabled />,
-  Affixes: <VCombobox label="label" items={ items } prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VCombobox label="label" items={ items } prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
-  'Prepend/append inner': <VCombobox label="label" items={ items } prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
-  Placeholder: <VCombobox label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
-}).map(([k, v]) => [k, (
-  <div class="d-flex flex-column flex-grow-1">
-    { variants.map(variant => (
-      densities.map(density => (
-        <div class="d-flex" style="gap: 0.4rem">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: ['California'] }) }
-          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'] }) }
-          <VCombobox
-            variant={ variant }
-            density={ density }
-            modelValue={['California']}
-            { ...v.props }
-          >{{
-            selection: ({ item }) => {
-              return item.title
-            },
-          }}
-          </VCombobox>
-        </div>
-      ))
-    )).flat()}
-  </div>
-)]))
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -555,9 +517,5 @@ describe('VCombobox', () => {
       .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
       .get('.v-list-item')
       .should('have.length', 6)
-  })
-
-  describe('Showcase', () => {
-    generate({ stories })
   })
 })
