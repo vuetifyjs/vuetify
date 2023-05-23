@@ -82,6 +82,13 @@ export const VMenu = genericComponent<OverlaySlots>()({
     }
 
     function onKeydown (e: KeyboardEvent) {
+      if (e.key === 'Tab') {
+        isActive.value = false
+        overlay.value?.activatorEl?.focus()
+      }
+    }
+
+    function onActivatorKeydown (e: KeyboardEvent) {
       const el = overlay.value?.contentEl
       if (el && isActive.value) {
         if (e.key === 'ArrowDown') {
@@ -91,7 +98,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         }
       } else if (['ArrowDown', 'ArrowUp'].includes(e.key)) {
         isActive.value = true
-        setTimeout(() => setTimeout(() => onKeydown(e)))
+        setTimeout(() => setTimeout(() => onActivatorKeydown(e)))
       }
     }
 
@@ -100,7 +107,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
         'aria-haspopup': 'menu',
         'aria-expanded': String(isActive.value),
         'aria-owns': id.value,
-        onKeydown,
+        onKeydown: onActivatorKeydown,
       }, props.activatorProps)
     )
 
@@ -120,6 +127,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           absolute
           activatorProps={ activatorProps.value }
           onClick:outside={ onClickOutside }
+          onKeydown={ onKeydown }
           { ...scopeId }
         >
           {{
