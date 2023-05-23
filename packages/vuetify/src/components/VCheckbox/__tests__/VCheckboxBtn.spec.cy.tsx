@@ -1,8 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VCheckboxBtn } from '../'
+
 // Utilities
 import { ref } from 'vue'
-import { VCheckboxBtn } from '../'
 
 describe('VCheckboxBtn', () => {
   it('should function without v-model', () => {

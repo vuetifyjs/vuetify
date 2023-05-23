@@ -1,6 +1,8 @@
+// Composables
+import { usePosition } from '../position'
+
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { usePosition } from '../position'
 
 // Types
 import type { PositionProps } from '../position'

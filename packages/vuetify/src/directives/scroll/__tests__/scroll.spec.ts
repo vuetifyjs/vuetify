@@ -1,6 +1,5 @@
 // Directives
 import Scroll from '../'
-import { scrollWindow } from '../../../../test'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
@@ -10,6 +9,7 @@ import {
   h,
   withDirectives,
 } from 'vue'
+import { scrollWindow } from '../../../../test'
 
 describe('v-scroll', () => {
   const instance = {

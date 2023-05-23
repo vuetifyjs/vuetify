@@ -1,8 +1,10 @@
+// Composables
+import { makeTagProps } from '../tag'
+
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { h } from 'vue'
-import { makeTagProps } from '../tag'
 
 // Types
 import type { TagProps } from '../tag'

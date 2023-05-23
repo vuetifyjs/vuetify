@@ -1,10 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '../'
 import { CenteredGrid } from '@/../cypress/templates'
 
 // Utilities
 import { ref } from 'vue'
-import { VExpansionPanel, VExpansionPanels, VExpansionPanelText, VExpansionPanelTitle } from '../'
 
 describe('VExpansionPanels', () => {
   it('renders using props', () => {

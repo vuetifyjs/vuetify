@@ -1,6 +1,8 @@
+// Composables
+import { useSize } from '../size'
+
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { useSize } from '../size'
 
 describe('size', () => {
   it.each([

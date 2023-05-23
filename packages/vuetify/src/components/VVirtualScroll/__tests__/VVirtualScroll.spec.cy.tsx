@@ -1,7 +1,9 @@
 /// <reference types="../../../../types/cypress" />
 
-// Utilities
+// Components
 import { VVirtualScroll } from '../VVirtualScroll'
+
+// Utilities
 import { createRange } from '@/util'
 
 describe('VVirtualScroll', () => {

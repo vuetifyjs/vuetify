@@ -1,6 +1,8 @@
+// Composables
+import { allowedVariants, makeVariantProps, useVariant } from '../variant'
+
 // Utilities
 import { describe, expect, it } from '@jest/globals'
-import { allowedVariants, makeVariantProps, useVariant } from '../variant'
 
 describe('variant', () => {
   it.each([

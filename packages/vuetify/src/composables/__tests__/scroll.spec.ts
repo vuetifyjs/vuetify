@@ -1,13 +1,10 @@
+// Composables
+import { makeScrollProps, useScroll } from '../scroll'
+
 // Utilities
 import { describe, expect, it } from '@jest/globals'
 import { mount } from '@vue/test-utils'
 import { defineComponent, ref } from 'vue'
-
-// Effects
-import {
-  makeScrollProps,
-  useScroll,
-} from '../scroll'
 
 // Types
 import type { ScrollArguments } from '../scroll'

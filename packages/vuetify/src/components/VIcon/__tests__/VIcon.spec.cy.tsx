@@ -1,9 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
-// Utilities
-import { defineComponent } from 'vue'
+// Components
 import { VClassIcon } from '..'
 import { VIcon } from '../VIcon'
+
+// Utilities
+import { defineComponent } from 'vue'
 
 describe('VIcon', () => {
   describe('icon prop', () => {

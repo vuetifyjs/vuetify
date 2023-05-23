@@ -1,11 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
-// Utilities
-import { createRouter, createWebHistory } from 'vue-router'
+// Components
 import { VBreadcrumbs } from '..'
 import { Application } from '../../../../cypress/templates'
 import { VBreadcrumbsDivider } from '../VBreadcrumbsDivider'
 import { VBreadcrumbsItem } from '../VBreadcrumbsItem'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VBreadcrumbs', () => {
   it('should use item slot', () => {
