@@ -1,4 +1,3 @@
-
 // Components
 import { VDataTableGroupHeaderRow } from './VDataTableGroupHeaderRow'
 import { VDataTableRow } from './VDataTableRow'

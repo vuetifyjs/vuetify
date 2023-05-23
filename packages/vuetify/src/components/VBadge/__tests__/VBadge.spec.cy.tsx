@@ -2,8 +2,10 @@
 
 // Components
 import { VBadge } from '..'
-import { generate, gridOn } from '@/../cypress/templates'
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
+import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']
 const location = ['bottom start', 'bottom end', 'top start', 'top end']

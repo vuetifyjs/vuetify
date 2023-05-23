@@ -1,9 +1,9 @@
-// eslint-disable local-rules/sort-imports
+/* eslint-disable local-rules/sort-imports */
 
 // Styles
 import './styles/main.sass'
 
-// undefined
+// Components
 import * as components from './components'
 import * as directives from './directives'
 import { createVuetify as _createVuetify } from './framework'

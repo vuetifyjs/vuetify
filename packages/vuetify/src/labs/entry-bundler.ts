@@ -1,12 +1,8 @@
-// eslint-disable local-rules/sort-imports
+/* eslint-disable local-rules/sort-imports */
 
-// undefined
+// Components
 import * as components from './allComponents'
-
-// Directives
 import * as directives from '@/directives'
-
-// undefined
 import { createVuetify as _createVuetify } from '@/framework'
 
 // Types
