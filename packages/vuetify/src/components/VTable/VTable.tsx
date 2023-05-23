@@ -11,10 +11,10 @@ import { makeThemeProps, provideTheme } from '@/composables/theme'
 import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 export type VTableSlots = {
-  default: []
-  top: []
-  bottom: []
-  wrapper: []
+  default: never
+  top: never
+  bottom: never
+  wrapper: never
 }
 
 export const makeVTableProps = propsFactory({

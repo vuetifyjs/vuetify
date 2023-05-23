@@ -1,8 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
-import { ref } from 'vue'
+// Components
 import { VAutocomplete } from '../VAutocomplete'
+import { VForm } from '@/components/VForm'
+
+// Utilities
+import { ref } from 'vue'
 import { keyValues } from '@/util'
 
 describe('VAutocomplete', () => {

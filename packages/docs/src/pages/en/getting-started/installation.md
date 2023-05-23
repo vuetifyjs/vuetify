@@ -187,6 +187,13 @@ The three development branches (`master`, `dev`, and `next`) are automatically p
 | `dev`       | New features     | `"vuetify": "npm:@vuetify/nightly@dev"`    | [Changelog](https://unpkg.com/@vuetify/nightly@dev/CHANGELOG.md)    |
 | `next`      | Breaking changes | `"vuetify": "npm:@vuetify/nightly@next"`   | [Changelog](https://unpkg.com/@vuetify/nightly@next/CHANGELOG.md)   |
 
+```diff
+ "devDependencies": {
+-  "vuetify": "^3.3.0"
++  "vuetify": "npm:@vuetify/nightly@3.3.0-master.2023-05-21"
+ }
+```
+
 ## Questions
 
 Have a question that belongs here? Tell us in our [Discord Community](https://community.vuetifyjs.com/) or create a request on our [Issue Generator](https://issues.vuetifyjs.com/).

@@ -1,8 +1,8 @@
 import { VTextField } from '../VTextField'
 
 // Utilities
-import { mount } from '@vue/test-utils'
 import { describe, expect, it } from '@jest/globals'
+import { mount } from '@vue/test-utils'
 import { createVuetify } from '@/framework'
 
 describe('VTextField', () => {

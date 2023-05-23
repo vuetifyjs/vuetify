@@ -2,10 +2,10 @@
 import './VApp.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
-import { makeThemeProps, provideTheme } from '@/composables/theme'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { useRtl } from '@/composables/locale'
+import { makeThemeProps, provideTheme } from '@/composables/theme'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'

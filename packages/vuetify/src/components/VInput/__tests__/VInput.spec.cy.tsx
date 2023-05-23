@@ -1,8 +1,11 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VInput } from '../VInput'
-import { generate } from '../../../../cypress/templates'
+
+// Utilities
 import { cloneVNode } from 'vue'
+import { generate } from '../../../../cypress/templates'
 
 const densities = ['default', 'comfortable', 'compact']
 

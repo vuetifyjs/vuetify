@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
 import { VBadge } from '..'
 import { VBtn } from '@/components/VBtn'
+
+// Utilities
 import { generate, gridOn } from '@/../cypress/templates'
 
 const defaultColors = ['success', 'info', 'warning', 'error', 'invalid']

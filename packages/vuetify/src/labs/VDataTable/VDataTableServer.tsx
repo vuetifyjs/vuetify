@@ -1,20 +1,20 @@
 // Components
+import { makeDataTableProps } from './VDataTable'
 import { makeVDataTableFooterProps, VDataTableFooter } from './VDataTableFooter'
 import { VDataTableHeaders } from './VDataTableHeaders'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
 
 // Composables
+import { provideExpanded } from './composables/expand'
 import { createGroupBy, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders } from './composables/headers'
-import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
-import { createSort, provideSort } from './composables/sort'
-import { makeDataTableProps } from './VDataTable'
-import { provideDefaults } from '@/composables/defaults'
-import { provideExpanded } from './composables/expand'
-import { provideSelection } from './composables/select'
 import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
+import { createPagination, makeDataTablePaginateProps, providePagination } from './composables/paginate'
+import { provideSelection } from './composables/select'
+import { createSort, provideSort } from './composables/sort'
+import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, provide, toRef } from 'vue'

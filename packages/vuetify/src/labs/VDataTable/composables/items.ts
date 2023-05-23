@@ -4,8 +4,8 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { SelectItemKey } from '@/util'
 import type { DataTableItem, InternalDataTableHeader } from '../types'
+import type { SelectItemKey } from '@/util'
 
 export interface DataTableItemProps {
   items: any[]
@@ -22,7 +22,7 @@ export const makeDataTableItemProps = propsFactory({
   },
   itemValue: {
     type: [String, Array, Function] as PropType<SelectItemKey>,
-    default: 'value',
+    default: 'id',
   },
   itemSelectable: {
     type: [String, Array, Function] as PropType<SelectItemKey>,

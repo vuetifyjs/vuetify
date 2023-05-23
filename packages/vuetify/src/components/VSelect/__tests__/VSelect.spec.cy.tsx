@@ -1,9 +1,12 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+
+// Utilities
 import { ref } from 'vue'
-import { VSelect } from '../VSelect'
 import { keyValues } from '@/util'
 
 describe('VSelect', () => {

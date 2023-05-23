@@ -1,7 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
+// Components
 import { VCombobox } from '../VCombobox'
+import { VForm } from '@/components/VForm'
+
+// Utilities
 import { ref } from 'vue'
 import { keyValues } from '@/util'
 
