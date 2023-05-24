@@ -405,6 +405,7 @@ export default baseMixins.extend<options>().extend({
           placeholder: this.persistentPlaceholder || this.isFocused || !this.hasLabel ? this.placeholder : undefined,
           readonly: this.isReadonly,
           type: this.type,
+          'aria-describedby': this.hasDetails ? this.computedId + '-messages' : null,
         },
         on: Object.assign(listeners, {
           blur: this.onBlur,
