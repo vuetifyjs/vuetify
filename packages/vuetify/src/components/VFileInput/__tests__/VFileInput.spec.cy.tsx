@@ -1,15 +1,51 @@
 /// <reference types="../../../../types/cypress" />
 
-import { CenteredGrid } from '@/../cypress/templates'
+import { CenteredGrid, generate } from '@/../cypress/templates'
 
 // Components
 import { VFileInput } from '../VFileInput'
 
 // Utilities
-import { ref } from 'vue'
+import { cloneVNode, ref } from 'vue'
 
 const oneMBFile = new File([new ArrayBuffer(1021576)], '1MB file')
 const twoMBFile = new File([new ArrayBuffer(2021152)], '2MB file')
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VFileInput label="label" />,
+  Disabled: <VFileInput label="label" items={ items } disabled />,
+  Affixes: <VFileInput label="label" items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VFileInput label="label" items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VFileInput label="label" items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VFileInput label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex" style="gap: 0.4rem">
+          { cloneVNode(v, { variant, density }) }
+          { cloneVNode(v, { variant, density, modelValue: [oneMBFile, twoMBFile] }) }
+          { cloneVNode(v, { variant, density, chips: true, modelValue: [oneMBFile, twoMBFile] }) }
+          <VFileInput
+            variant={ variant }
+            density={ density }
+            modelValue={[oneMBFile, twoMBFile]}
+            { ...v.props }
+          >{{
+            selection: ({ fileNames }) => {
+              return fileNames.map(f => f)
+            },
+          }}
+          </VFileInput>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VFileInput', () => {
   it('should add file', () => {
@@ -192,5 +228,9 @@ describe('VFileInput', () => {
         const input = $res[0] as HTMLInputElement
         expect(input.files).to.have.length(0)
       })
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })
