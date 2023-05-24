@@ -12,8 +12,8 @@ const stories = Object.fromEntries(Object.entries({
   'Default input': <VTextField label="label" />,
   Disabled: <VTextField label="label" disabled />,
   Affixes: <VTextField label="label" prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VTextField label="label" prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
-  'Prepend/append inner': <VTextField label="label" prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
+  'Prepend/append': <VTextField label="label" prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VTextField label="label" prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
   Placeholder: <VTextField label="label" placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
