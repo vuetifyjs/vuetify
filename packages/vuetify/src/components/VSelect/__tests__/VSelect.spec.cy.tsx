@@ -7,8 +7,8 @@ import { VListItem } from '@/components/VList'
 
 // Utilities
 import { cloneVNode, ref } from 'vue'
-import { keyValues } from '@/util'
 import { generate } from '../../../../cypress/templates'
+import { keyValues } from '@/util'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
@@ -18,8 +18,8 @@ const stories = Object.fromEntries(Object.entries({
   'Default input': <VSelect label="label" items={ items } />,
   Disabled: <VSelect label="label" items={ items } disabled />,
   Affixes: <VSelect label="label" items={ items } prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VSelect label="label" items={ items } prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
-  'Prepend/append inner': <VSelect label="label" items={ items } prependInnerIcon="mdi-vuetify" appendInnerIcon="mdi-vuetify" />,
+  'Prepend/append': <VSelect label="label" items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VSelect label="label" items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
   Placeholder: <VSelect label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
