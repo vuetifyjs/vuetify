@@ -9,6 +9,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeScrollProps, useScroll } from '@/composables/scroll'
 import { useSsrBoot } from '@/composables/ssrBoot'
+import { useToggleScope } from '@/composables/toggleScope'
 
 // Utilities
 import { computed, ref, shallowRef, toRef, watch } from 'vue'
@@ -117,8 +118,10 @@ export const VAppBar = genericComponent<VToolbarSlots>()({
       }
     }
 
-    watch(currentScroll, setActive, { immediate: true })
-    watch(scrollBehavior, setActive)
+    useToggleScope(() => !!props.scrollBehavior, () => {
+      watch(currentScroll, setActive, { immediate: true })
+      watch(scrollBehavior, setActive)
+    })
 
     const { ssrBootStyles } = useSsrBoot()
     const { layoutItemStyles } = useLayoutItem({
