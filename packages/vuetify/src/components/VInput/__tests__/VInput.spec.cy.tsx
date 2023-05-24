@@ -13,7 +13,7 @@ const stories = Object.fromEntries(Object.entries({
   Default: <VInput />,
   Disabled: <VInput disabled />,
   Affixes: <VInput prefix="prefix" suffix="suffix" />,
-  PrependAppend: <VInput prependIcon="mdi-vuetify" appendIcon="mdi-vuetify" />,
+  PrependAppend: <VInput prependIcon="$vuetify" appendIcon="$vuetify" />,
   Hint: <VInput hint="hint" persistentHint />,
   Messages: <VInput messages="messages" />,
 }).map(([k, v]) => [k, (
