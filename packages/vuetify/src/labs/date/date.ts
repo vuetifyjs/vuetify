@@ -9,8 +9,8 @@ import { propsFactory } from '@/util'
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
 // Types
-import type { DateAdapter } from './DateAdapter'
 import type { InjectionKey, PropType } from 'vue'
+import type { DateAdapter } from './DateAdapter'
 
 export interface DateInstance extends DateAdapter<Date> {
   locale: string

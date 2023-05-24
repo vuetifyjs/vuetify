@@ -2,21 +2,21 @@
 import './VColorPicker.sass'
 
 // Components
-import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 import { VColorPickerCanvas } from './VColorPickerCanvas'
 import { VColorPickerEdit } from './VColorPickerEdit'
 import { VColorPickerPreview } from './VColorPickerPreview'
 import { VColorPickerSwatches } from './VColorPickerSwatches'
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Composables
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { provideDefaults } from '@/composables/defaults'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
-import { extractColor, modes, nullColor } from './util'
 import { onMounted, ref } from 'vue'
+import { extractColor, modes, nullColor } from './util'
+import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory, RGBtoHSV, useRender } from '@/util'
 
 // Types
 import type { DeepReadonly, PropType } from 'vue'

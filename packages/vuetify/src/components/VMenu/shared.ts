@@ -1,3 +1,4 @@
+// Types
 import type { InjectionKey } from 'vue'
 
 interface MenuProvide {

@@ -1,5 +1,6 @@
-import type { TouchStoredHandlers } from './directives/touch'
+// Types
 import type { Events, VNode } from 'vue'
+import type { TouchStoredHandlers } from './directives/touch'
 
 declare global {
   interface HTMLCollection {

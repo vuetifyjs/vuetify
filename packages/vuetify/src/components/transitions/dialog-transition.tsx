@@ -1,7 +1,5 @@
-// Components
-import { Transition } from 'vue'
-
 // Utilities
+import { Transition } from 'vue'
 import {
   acceleratedEasing,
   animate,

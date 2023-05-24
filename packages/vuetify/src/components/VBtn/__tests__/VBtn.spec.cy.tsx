@@ -1,8 +1,10 @@
 /// <reference types="../../../../types/cypress" />
 
 import { VBtn } from '../VBtn'
-import { generate, gridOn } from '@/../cypress/templates'
+
+// Utilities
 import { createRouter, createWebHistory } from 'vue-router'
+import { generate, gridOn } from '@/../cypress/templates'
 
 const anchor = {
   href: '#my-anchor',

@@ -1,12 +1,12 @@
 // Components
+import { VDataTableColumn } from './VDataTableColumn'
 import { VBtn } from '@/components/VBtn'
 import { VCheckboxBtn } from '@/components/VCheckbox'
-import { VDataTableColumn } from './VDataTableColumn'
 
 // Composables
+import { useGroupBy } from './composables/group'
 import { useHeaders } from './composables/headers'
 import { useSelection } from './composables/select'
-import { useGroupBy } from './composables/group'
 
 // Utilities
 import { computed } from 'vue'
@@ -17,8 +17,8 @@ import type { PropType } from 'vue'
 import type { Group } from './composables/group'
 
 export type VDataTableGroupHeaderRowSlots = {
-  'data-table-group': [{ item: Group, count: number, props: Record<string, unknown> }]
-  'data-table-select': [{ props: Record<string, unknown> }]
+  'data-table-group': { item: Group, count: number, props: Record<string, unknown> }
+  'data-table-select': { props: Record<string, unknown> }
 }
 
 export const makeVDataTableGroupHeaderRowProps = propsFactory({
