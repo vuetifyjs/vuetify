@@ -7,7 +7,7 @@ import { VForm } from '@/components/VForm'
 // Utilities
 import { cloneVNode, ref } from 'vue'
 import { keyValues } from '@/util'
-import { generate } from 'cypress/templates'
+import { generate } from '../../../../cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
