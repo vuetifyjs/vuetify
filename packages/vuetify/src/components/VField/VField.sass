@@ -71,7 +71,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-height + $modifier}
+          --v-input-control-height: calc(#{$field-control-height + $modifier} - var(--v-input-chips-margin-top-bottom-sum))
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined,
@@ -99,7 +99,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-input-control-height: calc(#{$field-control-underlined-height + $modifier} - var(--v-input-chips-margin-top-bottom-sum))
           --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined
