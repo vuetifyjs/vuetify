@@ -1,8 +1,5 @@
-// Composables
-import { useToggleScope } from '@/composables/toggleScope'
-
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowRef, unref, watch, watchEffect } from 'vue'
 import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
@@ -113,7 +110,9 @@ export function internalUseDefaults (
   watchEffect(() => {
     if (componentDefaults.value) {
       const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-      if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
+      _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
+    } else {
+      _subcomponentDefaults.value = undefined
     }
   })
 
@@ -121,12 +120,14 @@ export function internalUseDefaults (
     // If subcomponent defaults are provided, override any
     // subcomponents provided by the component's setup function.
     // This uses injectSelf so must be done after the original setup to work.
-    useToggleScope(_subcomponentDefaults, () => {
-      provideDefaults(mergeDeep(
-        injectSelf(DefaultsSymbol)?.value ?? {},
-        _subcomponentDefaults.value
-      ))
-    })
+    const subDefaults = shallowRef()
+    watch(_subcomponentDefaults, val => {
+      subDefaults.value = val ? mergeDeep(
+        injectSelf(DefaultsSymbol, vm)?.value ?? {},
+        val
+      ) : undefined
+    }, { immediate: true })
+    provideDefaults(subDefaults)
   }
 
   return { props: _props, provideSubDefaults }
