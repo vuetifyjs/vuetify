@@ -17,7 +17,6 @@ module.exports = {
     // 'vue/html-closing-bracket-spacing': 'off',
     // 'local-rules/no-render-string-reference': 'error',
     'local-rules/no-components-index': 'error',
-    'local-rules/sort-imports': 'warn',
 
     'no-restricted-imports': ['error', {
       paths: [{
@@ -31,6 +30,12 @@ module.exports = {
     // 'import/no-self-import': 'warn',
   },
   overrides: [
+    {
+      files: 'src/**/*',
+      rules: {
+        'local-rules/sort-imports': 'warn',
+      },
+    },
     {
       files: 'dev/Playground.vue',
       rules: {
