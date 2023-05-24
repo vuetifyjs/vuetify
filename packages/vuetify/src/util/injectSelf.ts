@@ -2,11 +2,11 @@
 import { getCurrentInstance } from '@/util/getCurrentInstance'
 
 // Types
-import type { ComponentInternalInstance, InjectionKey } from 'vue'
+import type { InjectionKey } from 'vue'
 
-export function injectSelf<T>(key: InjectionKey<T> | string, vm?: ComponentInternalInstance): T | undefined
-export function injectSelf (key: InjectionKey<any> | string, vm = getCurrentInstance('injectSelf')) {
-  const { provides } = vm
+export function injectSelf<T>(key: InjectionKey<T> | string): T | undefined
+export function injectSelf (key: InjectionKey<any> | string) {
+  const { provides } = getCurrentInstance('injectSelf')
 
   if (provides && (key as string | symbol) in provides) {
     // TS doesn't allow symbol as index type
