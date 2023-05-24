@@ -2,15 +2,14 @@
 import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTagProps } from '@/composables/tag'
 import { useProxiedModel } from '@/composables/proxiedModel'
-
-import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '@/labs/VDataTable/composables/paginate'
-import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/labs/VDataTable/composables/sort'
+import { makeTagProps } from '@/composables/tag'
 import { makeDataTableExpandProps, provideExpanded } from '@/labs/VDataTable/composables/expand'
 import { makeDataTableGroupProps, provideGroupBy, useGroupedItems } from '@/labs/VDataTable/composables/group'
-import { makeDataTableSelectProps, provideSelection } from '@/labs/VDataTable/composables/select'
 import { useOptions } from '@/labs/VDataTable/composables/options'
+import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from '@/labs/VDataTable/composables/paginate'
+import { makeDataTableSelectProps, provideSelection } from '@/labs/VDataTable/composables/select'
+import { createSort, makeDataTableSortProps, provideSort, useSortedItems } from '@/labs/VDataTable/composables/sort'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -44,10 +43,10 @@ type VDataIteratorSlotProps = {
 }
 
 export type VDataIteratorSlots = {
-  default: [VDataIteratorSlotProps]
-  header: [VDataIteratorSlotProps]
-  footer: [VDataIteratorSlotProps]
-  'no-data': []
+  default: VDataIteratorSlotProps
+  header: VDataIteratorSlotProps
+  footer: VDataIteratorSlotProps
+  'no-data': never
 }
 
 export const makeVDataIteratorProps = propsFactory({

@@ -1,7 +1,7 @@
 // Composables
+import { makeComponentProps } from '@/composables/component'
 import { createForm, makeFormProps } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
-import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { ref } from 'vue'
@@ -16,7 +16,7 @@ export const makeVFormProps = propsFactory({
 }, 'v-form')
 
 type VFormSlots = {
-  default: [ReturnType<typeof createForm>]
+  default: ReturnType<typeof createForm>
 }
 
 export const VForm = genericComponent<VFormSlots>()({

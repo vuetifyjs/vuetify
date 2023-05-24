@@ -1,6 +1,6 @@
 // Utilities
-import { genericComponent, propsFactory } from '@/util'
 import { h, Transition, TransitionGroup } from 'vue'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { FunctionalComponent, PropType } from 'vue'

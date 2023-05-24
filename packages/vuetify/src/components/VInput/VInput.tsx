@@ -2,12 +2,13 @@
 import './VInput.sass'
 
 // Components
-import { VMessages, type VMessageSlot } from '@/components/VMessages/VMessages'
+import { useInputIcon } from '@/components/VInput/InputIcon'
+import { VMessages } from '@/components/VMessages/VMessages'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
@@ -16,7 +17,7 @@ import { EventProp, genericComponent, getUid, propsFactory, useRender } from '@/
 
 // Types
 import type { ComputedRef, PropType, Ref } from 'vue'
-import { useInputIcon } from '@/components/VInput/InputIcon'
+import type { VMessageSlot } from '@/components/VMessages/VMessages'
 
 export interface VInputSlot {
   id: ComputedRef<string>
@@ -62,11 +63,11 @@ export const makeVInputProps = propsFactory({
 }, 'v-input')
 
 export type VInputSlots = {
-  default: [VInputSlot]
-  prepend: [VInputSlot]
-  append: [VInputSlot]
-  details: [VInputSlot]
-  message: [VMessageSlot]
+  default: VInputSlot
+  prepend: VInputSlot
+  append: VInputSlot
+  details: VInputSlot
+  message: VMessageSlot
 }
 
 export const VInput = genericComponent<VInputSlots>()({
@@ -117,7 +118,7 @@ export const VInput = genericComponent<VInputSlots>()({
     }))
 
     const messages = computed(() => {
-      if (!isPristine.value && errorMessages.value.length > 0) {
+      if (props.errorMessages?.length || (!isPristine.value && errorMessages.value.length)) {
         return errorMessages.value
       } else if (props.hint && (props.persistentHint || props.focused)) {
         return props.hint

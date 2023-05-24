@@ -1,8 +1,8 @@
 // Composables
-import { describe, expect, it } from '@jest/globals'
 import { useBackgroundColor, useColor, useTextColor } from '../color'
 
 // Utilities
+import { describe, expect, it } from '@jest/globals'
 import { reactive, toRef } from 'vue'
 
 describe('color.ts', () => {

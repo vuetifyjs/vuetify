@@ -6,10 +6,10 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 import { genericComponent, propsFactory } from '@/util'
 
 type VHoverSlots = {
-  default: [{
+  default: {
     isHovering: boolean | undefined
     props: Record<string, unknown>
-  }]
+  }
 }
 
 export const makeVHoverProps = propsFactory({

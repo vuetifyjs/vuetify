@@ -1,11 +1,14 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VSelect } from '../VSelect'
 import { VForm } from '@/components/VForm'
 import { VListItem } from '@/components/VList'
+
+// Utilities
 import { cloneVNode, ref } from 'vue'
-import { VSelect } from '../VSelect'
-import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+import { generate } from 'cypress/templates'
 
 const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
 const densities = ['default', 'comfortable', 'compact'] as const
