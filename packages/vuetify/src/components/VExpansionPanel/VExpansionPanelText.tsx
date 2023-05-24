@@ -1,6 +1,6 @@
 // Components
-import { VExpandTransition } from '@/components/transitions'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
+import { VExpandTransition } from '@/components/transitions'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'

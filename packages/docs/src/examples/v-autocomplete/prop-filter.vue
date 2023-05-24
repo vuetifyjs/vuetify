@@ -84,9 +84,9 @@
     }),
 
     methods: {
-      customFilter (item, queryText, itemText) {
-        const textOne = item.name.toLowerCase()
-        const textTwo = item.abbr.toLowerCase()
+      customFilter (itemTitle, queryText, item) {
+        const textOne = item.raw.name.toLowerCase()
+        const textTwo = item.raw.abbr.toLowerCase()
         const searchText = queryText.toLowerCase()
 
         return textOne.indexOf(searchText) > -1 ||

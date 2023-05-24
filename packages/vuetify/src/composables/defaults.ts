@@ -1,8 +1,5 @@
-// Composables
-import { useToggleScope } from '@/composables/toggleScope'
-
 // Utilities
-import { computed, inject, provide, ref, shallowRef, unref, watchEffect } from 'vue'
+import { computed, inject, provide, ref, shallowRef, unref, watch, watchEffect } from 'vue'
 import { getCurrentInstance, injectSelf, mergeDeep, toKebabCase } from '@/util'
 
 // Types
@@ -40,9 +37,9 @@ export function provideDefaults (
   }
 ) {
   const injectedDefaults = injectDefaults()
-  const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
+    const providedDefaults = unref(defaults)
     const disabled = unref(options?.disabled)
 
     if (disabled) return injectedDefaults.value
@@ -51,7 +48,9 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
+    if (providedDefaults == null && !(scoped || reset || root)) return injectedDefaults.value
+
+    let properties = mergeDeep(providedDefaults, { prev: injectedDefaults.value })
 
     if (scoped) return properties
 
@@ -113,7 +112,9 @@ export function internalUseDefaults (
   watchEffect(() => {
     if (componentDefaults.value) {
       const subComponents = Object.entries(componentDefaults.value).filter(([key]) => key.startsWith(key[0].toUpperCase()))
-      if (subComponents.length) _subcomponentDefaults.value = Object.fromEntries(subComponents)
+      _subcomponentDefaults.value = subComponents.length ? Object.fromEntries(subComponents) : undefined
+    } else {
+      _subcomponentDefaults.value = undefined
     }
   })
 
@@ -121,12 +122,14 @@ export function internalUseDefaults (
     // If subcomponent defaults are provided, override any
     // subcomponents provided by the component's setup function.
     // This uses injectSelf so must be done after the original setup to work.
-    useToggleScope(_subcomponentDefaults, () => {
-      provideDefaults(mergeDeep(
-        injectSelf(DefaultsSymbol)?.value ?? {},
-        _subcomponentDefaults.value
-      ))
-    })
+    const subDefaults = shallowRef()
+    watch(_subcomponentDefaults, val => {
+      subDefaults.value = val ? mergeDeep(
+        injectSelf(DefaultsSymbol, vm)?.value ?? {},
+        val
+      ) : undefined
+    }, { immediate: true })
+    provideDefaults(subDefaults)
   }
 
   return { props: _props, provideSubDefaults }

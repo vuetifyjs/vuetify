@@ -8,9 +8,9 @@ import { makeVBtnProps, VBtn } from '@/components/VBtn/VBtn'
 import { useTextColor } from '@/composables/color'
 
 // Utilities
-import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 import { computed, ref, shallowRef } from 'vue'
 import { VTabsSymbol } from './shared'
+import { animate, genericComponent, omit, propsFactory, standardEasing, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'

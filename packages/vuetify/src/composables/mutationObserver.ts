@@ -1,6 +1,6 @@
 // Utilities
-import { isComponentInstance } from '@/util'
 import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+import { isComponentInstance } from '@/util'
 
 // Types
 import type { ComponentPublicInstance } from 'vue'

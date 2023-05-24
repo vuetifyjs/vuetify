@@ -5,16 +5,16 @@ import './VDialog.sass'
 import { VDialogTransition } from '@/components/transitions'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VOverlay } from '@/components/VOverlay'
+import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Composables
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { useScopeId } from '@/composables/scopeId'
-import { forwardRefs } from '@/composables/forwardRefs'
 
 // Utilities
 import { computed, mergeProps, nextTick, ref, watch } from 'vue'
 import { focusableChildren, genericComponent, IN_BROWSER, propsFactory, useRender } from '@/util'
-import { makeVOverlayProps } from '@/components/VOverlay/VOverlay'
 
 // Types
 import type { Component } from 'vue'

@@ -1,8 +1,8 @@
 // Utilities
 import { consoleWarn } from './console'
 import { chunk, has, padEnd } from './helpers'
-import * as sRGB from '@/util/color/transformSRGB'
 import * as CIELAB from '@/util/color/transformCIELAB'
+import * as sRGB from '@/util/color/transformSRGB'
 
 // Types
 import type { Colors } from '@/composables/theme'

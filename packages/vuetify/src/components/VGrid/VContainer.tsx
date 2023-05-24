@@ -3,8 +3,8 @@ import './VGrid.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
 import { useRtl } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'

@@ -4,8 +4,8 @@ import { getPropertyFromItem, propsFactory } from '@/util'
 
 // Types
 import type { PropType, Ref } from 'vue'
-import type { SelectItemKey } from '@/util'
 import type { DataTableItem, InternalDataTableHeader } from '../types'
+import type { SelectItemKey } from '@/util'
 
 export interface DataTableItemProps {
   items: any[]

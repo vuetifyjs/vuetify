@@ -61,7 +61,7 @@
   const props = computed(() => {
     return {
       closable: closable.value || undefined,
-      icon: icon.value ? 'mdi-vuetify' : undefined,
+      icon: icon.value ? '$vuetify' : undefined,
       title: title.value ? 'Alert title' : undefined,
       text: '...',
       type: type.value || undefined,

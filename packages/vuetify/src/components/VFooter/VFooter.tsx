@@ -3,14 +3,14 @@ import './VFooter.sass'
 
 // Composables
 import { makeBorderProps, useBorder } from '@/composables/border'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useBackgroundColor } from '@/composables/color'
-import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
