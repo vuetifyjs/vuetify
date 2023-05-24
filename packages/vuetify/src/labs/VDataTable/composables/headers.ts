@@ -77,7 +77,7 @@ export function createHeaders (
           sortable: column.sortable ?? !!column.key,
         })
 
-        fixedOffsets[i] += column.width ?? 0
+        fixedOffsets[i] += Number(column.width ?? 0)
       }
     })
 

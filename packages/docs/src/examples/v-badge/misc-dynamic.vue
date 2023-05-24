@@ -25,7 +25,7 @@
         color="green"
       >
         <v-icon size="large">
-          mdi-vuetify
+          $vuetify
         </v-icon>
       </v-badge>
     </v-row>

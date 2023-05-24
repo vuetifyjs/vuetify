@@ -33,7 +33,7 @@
   const props = computed(() => {
     return {
       color: color.value || undefined,
-      icon: icon.value || 'mdi-vuetify',
+      icon: icon.value || '$vuetify',
       size: ['', 'medium'].includes(size.value) ? undefined : size.value,
     }
   })
