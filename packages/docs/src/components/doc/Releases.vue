@@ -14,6 +14,24 @@
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
     >
+      <template #selection>
+        <div class="d-flex align-center">
+          <div class="me-1">{{ search?.tag_name }}</div>
+
+          &mdash;
+
+          <template v-for="(value, key) in reactions" :key="key">
+            <template v-if="search?.reactions?.[key]">
+              <span class="d-inline-flex align-center text-body-2 me-2">
+                {{ value }}
+
+                <span class="text-caption">{{ search.reactions[key] }}</span>
+              </span>
+            </template>
+          </template>
+        </div>
+      </template>
+
       <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
@@ -42,7 +60,7 @@
       >
         <v-list-item v-if="publishedOn" lines="two">
           <v-list-item-title class="d-flex align-center">
-            <i18n-t keypath="published-on">
+            <i18n-t keypath="published">
               <template #date>
                 <v-chip
                   :text="publishedOn"
@@ -102,6 +120,15 @@
   import { computed, onBeforeMount, ref, watch } from 'vue'
   import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
+
+  const reactions = {
+    '+1': '👍',
+    hooray: '🎉',
+    rocket: '🚀',
+    laugh: '😂',
+    heart: '❤️',
+    eyes: '👀',
+  }
 
   const { t } = useI18n()
   const date = useDate()
