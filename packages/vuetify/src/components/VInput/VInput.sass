@@ -21,7 +21,6 @@
 
     @include tools.density('v-input', $input-chips-margin-bottom) using ($modifier)
       --v-input-chips-margin-bottom: #{0px + math.div($modifier, 2)}
-      --v-input-chips-margin-top-bottom-sum: calc(var(--v-input-chips-margin-top) + var(--v-input-chips-margin-bottom))
 
 .v-input--vertical
   grid-template-areas: "append" "control" "prepend"
