@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
+import { computed, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
@@ -21,7 +21,10 @@ type VirtualProps = {
 }
 
 export const makeVirtualProps = propsFactory({
-  itemHeight: [Number, String],
+  itemHeight: {
+    type: [Number, String],
+    default: 48,
+  },
 }, 'virtual')
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
@@ -41,14 +44,10 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const display = useDisplay()
 
   const sizeMap = new Map<any, number>()
-  let sizes = createRange(items.value.length).map(() => itemHeight.value)
+  let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
     const height = (contentRect.value?.height ?? display.height.value) - (offset?.value ?? 0)
-    return itemHeight.value
-      ? Math.max(12,
-        Math.ceil((height / itemHeight.value) * 1.7 + 1)
-      )
-      : 12
+    return Math.ceil((height / itemHeight.value) * 1.7 + 1)
   })
 
   function handleItemResize (index: number, height: number) {
@@ -58,7 +57,8 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   }
 
   function calculateOffset (index: number) {
-    return sizes.slice(0, index).reduce((curr, value) => curr + (value || itemHeight.value), 0)
+    return sizes.slice(0, index)
+      .reduce((acc, val) => acc! + (val || itemHeight.value), 0)!
   }
 
   function calculateMidPointIndex (scrollTop: number) {
@@ -107,13 +107,6 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const computedItems = computed(() => allItems.value.slice(first.value, last.value))
   const paddingTop = computed(() => calculateOffset(first.value))
   const paddingBottom = computed(() => calculateOffset(items.value.length) - calculateOffset(last.value))
-
-  onMounted(() => {
-    if (!itemHeight.value) {
-      // If itemHeight prop is not set, then calculate an estimated height from the average of inital items
-      itemHeight.value = sizes.slice(first.value, last.value).reduce((curr, height) => curr + height, 0) / (visibleItems.value)
-    }
-  })
 
   watch(() => items.value.length, () => {
     sizes = createRange(items.value.length).map(() => itemHeight.value)

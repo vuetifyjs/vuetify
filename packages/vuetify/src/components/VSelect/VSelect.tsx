@@ -318,9 +318,10 @@ export const VSelect = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      <VVirtualScroll inline items={ displayItems.value }>
-                        { ({ item, index }) => {
+                      <VVirtualScroll renderless items={ displayItems.value }>
+                        { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
+                            ref: itemRef,
                             key: index,
                             onClick: () => select(item),
                           })

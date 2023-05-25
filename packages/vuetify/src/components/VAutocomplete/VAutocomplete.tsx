@@ -6,11 +6,11 @@ import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
-import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
 import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
+import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
 import { useTextColor } from '@/composables/color'
@@ -419,9 +419,10 @@ export const VAutocomplete = genericComponent<new <
 
                       { slots['prepend-item']?.() }
 
-                      <VVirtualScroll inline items={ displayItems.value }>
-                        { ({ item, index }) => {
+                      <VVirtualScroll renderless items={ displayItems.value }>
+                        { ({ item, index, itemRef }) => {
                           const itemProps = mergeProps(item.props, {
+                            ref: itemRef,
                             key: index,
                             active: (highlightFirst.value && index === 0) ? true : undefined,
                             onClick: () => select(item),

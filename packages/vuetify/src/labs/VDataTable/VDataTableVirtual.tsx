@@ -188,10 +188,10 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                               renderless
                               onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
                             >
-                              { slotProps => (
+                              { ({ itemRef }) => (
                                 <VDataTableRow
                                   { ...itemSlotProps.props }
-                                  { ...slotProps?.props }
+                                  ref={ itemRef }
                                   key={ itemSlotProps.item.index }
                                   v-slots={ slots }
                                 />

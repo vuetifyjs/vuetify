@@ -22,7 +22,7 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType } from 'vue'
+import type { PropType, Ref } from 'vue'
 import type { GenericProps } from '@/util'
 
 export interface VVirtualScrollSlot<T> {
@@ -35,19 +35,22 @@ export const makeVVirtualScrollProps = propsFactory({
     type: Array as PropType<readonly unknown[]>,
     default: () => ([]),
   },
-  inline: Boolean,
+  renderless: Boolean,
 
   ...makeVirtualProps(),
   ...makeComponentProps(),
   ...makeDimensionProps(),
 }, 'v-virtual-scroll')
 
-export const VVirtualScroll = genericComponent<new <T>(
+export const VVirtualScroll = genericComponent<new <T, Renderless extends boolean = false>(
   props: {
     items?: readonly T[]
+    renderless?: Renderless
   },
   slots: {
-    default: VVirtualScrollSlot<T>
+    default: VVirtualScrollSlot<T> & (Renderless extends true ? {
+      itemRef: Ref<HTMLElement | undefined>
+    } : {})
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScroll',
@@ -67,7 +70,7 @@ export const VVirtualScroll = genericComponent<new <T>(
       computedItems,
     } = useVirtual(props, toRef(props, 'items'))
 
-    useToggleScope(() => props.inline, () => {
+    useToggleScope(() => props.renderless, () => {
       onMounted(() => {
         containerRef.value = getScrollParent(vm.ctx.$el as HTMLElement)
         containerRef.value?.addEventListener('scroll', handleScroll)
@@ -81,14 +84,14 @@ export const VVirtualScroll = genericComponent<new <T>(
       const children = computedItems.value.map(item => (
         <VVirtualScrollItem
           key={ item.index }
-          dynamicHeight={ !props.itemHeight }
+          renderless={ props.renderless }
           onUpdate:height={ height => handleItemResize(item.index, height) }
         >
-          { slots.default?.({ item: item.raw, index: item.index }) }
+          { slotProps => slots.default?.({ item: item.raw, index: item.index, ...slotProps }) }
         </VVirtualScrollItem>
       ))
 
-      return props.inline ? (
+      return props.renderless ? (
         <>
           <div class="v-virtual-scroll__spacer" style={{ paddingTop: convertToUnit(paddingTop.value) }} />
           { children }
