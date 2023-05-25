@@ -46,7 +46,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   const sizeMap = new Map<any, number>()
   let sizes = Array.from<number | null>({ length: items.value.length })
   const visibleItems = computed(() => {
-    const height = (contentRect.value?.height ?? display.height.value) - (offset?.value ?? 0)
+    const height = (
+      !contentRect.value || containerRef.value === document.documentElement
+        ? display.height.value
+        : contentRect.value.height
+    ) - (offset?.value ?? 0)
     return Math.ceil((height / itemHeight.value) * 1.7 + 1)
   })
 
