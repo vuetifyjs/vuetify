@@ -189,7 +189,12 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                               onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
                             >
                               { slotProps => (
-                                <VDataTableRow { ...itemSlotProps.props } { ...slotProps?.props } v-slots={ slots } />
+                                <VDataTableRow
+                                  { ...itemSlotProps.props }
+                                  { ...slotProps?.props }
+                                  key={ itemSlotProps.item.index }
+                                  v-slots={ slots }
+                                />
                               )}
                             </VVirtualScrollItem>
                           )
