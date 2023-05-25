@@ -44,9 +44,11 @@ export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, o
   let sizes = createRange(items.value.length).map(() => itemHeight.value)
   const visibleItems = computed(() => {
     const height = (contentRect.value?.height ?? display.height.value) - (offset?.value ?? 0)
-    return Math.max(12,
-      Math.ceil((height / itemHeight.value) * 1.7 + 1)
-    )
+    return itemHeight.value
+      ? Math.max(12,
+        Math.ceil((height / itemHeight.value) * 1.7 + 1)
+      )
+      : 12
   })
 
   function handleItemResize (index: number, height: number) {
