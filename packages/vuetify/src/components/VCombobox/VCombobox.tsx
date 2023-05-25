@@ -393,7 +393,7 @@ export const VCombobox = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           v-model={ search.value }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ v => { if (v == null || v === '') model.value = [] } }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }
