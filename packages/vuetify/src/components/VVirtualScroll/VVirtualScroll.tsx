@@ -19,6 +19,7 @@ import {
 } from '@/util'
 
 // Types
+import type { PropType } from 'vue'
 import type { GenericProps } from '@/util'
 
 export interface VVirtualScrollSlot<T> {
@@ -27,6 +28,11 @@ export interface VVirtualScrollSlot<T> {
 }
 
 export const makeVVirtualScrollProps = propsFactory({
+  items: {
+    type: Array as PropType<readonly unknown[]>,
+    default: () => ([]),
+  },
+
   ...makeVirtualProps(),
   ...makeComponentProps(),
   ...makeDimensionProps(),

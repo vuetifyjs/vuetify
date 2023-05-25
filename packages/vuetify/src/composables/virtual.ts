@@ -3,7 +3,7 @@ import { useDisplay } from '@/composables/display'
 import { useResizeObserver } from '@/composables/resizeObserver'
 
 // Utilities
-import { computed, onMounted, ref, watch, watchEffect } from 'vue'
+import { computed, onMounted, ref, shallowRef, watch, watchEffect } from 'vue'
 import {
   clamp,
   createRange,
@@ -11,27 +11,22 @@ import {
 } from '@/util'
 
 // Types
-import type { PropType, Ref } from 'vue'
+import type { Ref } from 'vue'
 
 const UP = -1
 const DOWN = 1
 
 type VirtualProps = {
   itemHeight?: number | string
-  items: readonly unknown[]
 }
 
 export const makeVirtualProps = propsFactory({
-  items: {
-    type: Array as PropType<readonly unknown[]>,
-    default: () => ([]),
-  },
   itemHeight: [Number, String],
 }, 'virtual')
 
 export function useVirtual <T> (props: VirtualProps, items: Ref<readonly T[]>, offset?: Ref<number>) {
-  const first = ref(0)
-  const baseItemHeight = ref(props.itemHeight)
+  const first = shallowRef(0)
+  const baseItemHeight = shallowRef(props.itemHeight)
   const itemHeight = computed({
     get: () => parseInt(baseItemHeight.value ?? 0, 10),
     set (val) {

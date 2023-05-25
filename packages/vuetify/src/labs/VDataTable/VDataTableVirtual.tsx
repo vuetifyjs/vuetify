@@ -35,11 +35,11 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlot
 }
 
 export const makeVDataTableVirtualProps = propsFactory({
+  ...makeDataTableProps(),
+  ...makeDataTableGroupProps(),
   ...makeVirtualProps({
     itemHeight: 44,
   }),
-  ...makeDataTableProps(),
-  ...makeDataTableGroupProps(),
   ...makeFilterProps(),
 }, 'v-data-table-virtual')
 
