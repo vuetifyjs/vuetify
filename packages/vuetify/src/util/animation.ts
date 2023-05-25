@@ -1,3 +1,4 @@
+// Utilities
 import { Box } from '@/util/box'
 
 /** @see https://stackoverflow.com/a/57876601/2074736 */

@@ -7,8 +7,8 @@ import { getObjectValueByPath, propsFactory } from '@/util'
 
 // Types
 import type { InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableItem } from '../types'
 import type { SortItem } from './sort'
+import type { DataTableItem } from '../types'
 
 export interface GroupableItem<T = any> {
   type: 'item'

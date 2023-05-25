@@ -26,7 +26,7 @@ Dividers in their simplest form display a horizontal line.
 
 <alert type="info">
 
-  This example uses the **border-opacity** utility class and not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+  This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
 
 </alert>
 

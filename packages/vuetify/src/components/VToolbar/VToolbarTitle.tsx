@@ -13,8 +13,8 @@ export const makeVToolbarTitleProps = propsFactory({
 }, 'v-toolbar-title')
 
 export type VToolbarTitleSlots = {
-  default: []
-  text: []
+  default: never
+  text: never
 }
 
 export const VToolbarTitle = genericComponent<VToolbarTitleSlots>()({

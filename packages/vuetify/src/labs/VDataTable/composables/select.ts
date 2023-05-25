@@ -88,16 +88,7 @@ export const makeDataTableSelectProps = propsFactory({
   },
 }, 'v-data-table-select')
 
-export const VDataTableSelectionSymbol: InjectionKey<{
-  toggleSelect: (item: SelectableItem) => void
-  select: (items: SelectableItem[], value: boolean) => void
-  selectAll: (value: boolean) => void
-  isSelected: (items: SelectableItem[]) => boolean
-  isSomeSelected: (items: SelectableItem[]) => boolean
-  someSelected: Ref<boolean>
-  allSelected: Ref<boolean>
-  showSelectAll: boolean
-}> = Symbol.for('vuetify:data-table-selection')
+export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
 
 export function provideSelection (
   props: SelectionProps,

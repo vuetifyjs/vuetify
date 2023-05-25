@@ -13,7 +13,8 @@
       width: 100%
       display: none
 
-  .v-input__append, .v-input__prepend
+  > .v-input__append,
+  > .v-input__prepend
     padding: 0
 
 // Elements
@@ -39,7 +40,7 @@
   margin-inline-start: $slider-horizontal-start
   margin-inline-end: $slider-horizontal-end
 
-  .v-input__control
+  > .v-input__control
     min-height: $slider-horizontal-min-height
     display: flex
     align-items: center
@@ -49,13 +50,13 @@
   margin-top: $slider-vertical-margin-top
   margin-bottom: $slider-vertical-margin-bottom
 
-  .v-input__control
+  > .v-input__control
     min-height: $slider-vertical-min-height
 
 .v-slider.v-input--disabled
   pointer-events: none
 
-.v-slider--has-labels .v-input__control
+.v-slider--has-labels > .v-input__control
   margin-bottom: $slider-tick-label-margin-top * .5
 
 .v-slider__label

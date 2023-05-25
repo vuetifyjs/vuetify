@@ -4,8 +4,8 @@ import { createRange, propsFactory } from '@/util'
 
 // Types
 import type { DeepReadonly, InjectionKey, PropType, Ref } from 'vue'
-import type { DataTableHeader, InternalDataTableHeader } from '../types'
 import type { SortItem } from './sort'
+import type { DataTableHeader, InternalDataTableHeader } from '../types'
 
 export const makeDataTableHeaderProps = propsFactory({
   headers: {
@@ -77,7 +77,7 @@ export function createHeaders (
           sortable: column.sortable ?? !!column.key,
         })
 
-        fixedOffsets[i] += column.width ?? 0
+        fixedOffsets[i] += Number(column.width ?? 0)
       }
     })
 

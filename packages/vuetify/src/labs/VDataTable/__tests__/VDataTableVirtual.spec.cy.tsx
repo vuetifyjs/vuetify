@@ -96,11 +96,26 @@ const DESSERT_ITEMS = [
 ]
 
 describe('VDataTable', () => {
-  it('should render', () => {
+  it('should render only visible items', () => {
+    const items = [...new Array(10)].reduce(curr => {
+      curr.push(...DESSERT_ITEMS)
+      return curr
+    }, [])
     cy.mount(() => (
       <Application>
-        <VDataTableVirtual items={ DESSERT_ITEMS } headers={ DESSERT_HEADERS } />
+        <VDataTableVirtual items={ items } headers={ DESSERT_HEADERS } height={ 500 } />
       </Application>
     ))
+
+    cy.get('tbody tr')
+      .should('have.length.lt', items.length)
+      .get('tbody tr')
+      .last()
+      .should('have.css', 'height')
+      .and('not.equal', '0px')
+      .get('tbody tr')
+      .first()
+      .should('have.css', 'height')
+      .and('equal', '0px')
   })
 })

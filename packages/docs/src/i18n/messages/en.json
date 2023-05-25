@@ -170,7 +170,7 @@
   "professional-support": "Professional support",
   "progress": "Progress",
   "providers": "Providers",
-  "published-on": "Published on {date}",
+  "published": "Published: {date}",
   "pwa": {
     "install": "Install Vuetify Documentation",
     "new-content-available": "New content is available. Click **Refresh** to update.",
