@@ -1,8 +1,10 @@
 // Components
 import { makeDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
+import { VDataTableRow } from './VDataTableRow'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
+import { VVirtualScrollItem } from '@/components/VVirtualScroll/VVirtualScrollItem'
 
 // Composables
 import { provideExpanded } from './composables/expand'
@@ -37,9 +39,7 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlot
 export const makeVDataTableVirtualProps = propsFactory({
   ...makeDataTableProps(),
   ...makeDataTableGroupProps(),
-  ...makeVirtualProps({
-    itemHeight: 44,
-  }),
+  ...makeVirtualProps(),
   ...makeFilterProps(),
 }, 'v-data-table-virtual')
 
@@ -92,7 +92,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       paddingTop,
       paddingBottom,
       computedItems,
-      itemHeight,
+      handleItemResize,
       handleScroll,
     } = useVirtual(props, flatItems, headerHeight)
     const displayItems = computed(() => computedItems.value.map(item => item.raw))
@@ -147,10 +147,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
             },
             props.class,
           ]}
-          style={[
-            { '--v-table-row-height': convertToUnit(itemHeight.value) },
-            props.style,
-          ]}
+          style={ props.style }
           { ...tableProps }
         >
           {{
@@ -180,8 +177,25 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                     <VDataTableRows
                       { ...dataTableRowsProps }
                       items={ displayItems.value }
-                      v-slots={ slots }
-                    />
+                    >
+                      {{
+                        ...slots,
+                        item: itemSlotProps => {
+                          return slots.item?.(itemSlotProps) ?? (
+                            <VVirtualScrollItem
+                              key={ itemSlotProps.item.index }
+                              dynamicHeight
+                              renderless
+                              onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
+                            >
+                              { slotProps => (
+                                <VDataTableRow { ...itemSlotProps.props } { ...slotProps?.props } v-slots={ slots } />
+                              )}
+                            </VVirtualScrollItem>
+                          )
+                        },
+                      }}
+                    </VDataTableRows>
 
                     <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
                       <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>

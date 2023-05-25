@@ -15,7 +15,13 @@ import {
   watch,
   watchEffect,
 } from 'vue'
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
+import {
+  getCurrentInstance,
+  IN_BROWSER,
+  propsFactory,
+  refElement,
+  SUPPORTS_FOCUS_VISIBLE,
+} from '@/util'
 
 // Types
 import type {
@@ -200,8 +206,7 @@ export function useActivator (
     if (!activatorRef.value) return
 
     nextTick(() => {
-      const activator = activatorRef.value
-      activatorEl.value = isComponentInstance(activator) ? activator.$el : activator
+      activatorEl.value = refElement(activatorRef.value)
     })
   })
 
