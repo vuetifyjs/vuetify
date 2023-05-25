@@ -1,9 +1,9 @@
 @use 'sass:map'
+@use 'sass:math'
 @use 'sass:selector'
 @use '../../styles/settings'
 @use '../../styles/tools'
 @use './variables' as *
-@use '../VInput/variables' as *
 
 /* region INPUT */
 .v-field
@@ -27,6 +27,8 @@
   --v-field-padding-end: #{$field-control-padding-end}
   --v-field-padding-top: #{$field-control-padding-top}
   --v-field-padding-bottom: #{$field-control-padding-bottom}
+  --v-field-input-padding-top: #{$field-input-padding-top}
+  --v-field-input-padding-bottom: #{$field-input-padding-bottom}
 
 /* endregion */
 /* region MODIFIERS */
@@ -69,7 +71,7 @@
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-height + $modifier}
-          --v-field-padding-bottom: #{$field-control-padding-bottom + $modifier * .5}
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--variant-outlined,
   &--single-line,
@@ -80,7 +82,7 @@
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
-          --v-field-padding-bottom: #{16px + $modifier * .5}
+          --v-field-padding-bottom: #{15px + $modifier * .5}
 
   &--variant-plain,
   &--variant-underlined
@@ -91,13 +93,13 @@
     &.v-field
       --v-field-padding-start: 0px
       --v-field-padding-end: 0px
-      --v-field-padding-top: 6px
-      --v-field-padding-bottom: 2px
+      --v-field-padding-top: var(--v-field-padding-top--plain-underlined, 6px)
 
     @at-root
       @include tools.density('v-input', $input-density) using ($modifier)
         @at-root #{selector.nest(&, $root)}
           --v-input-control-height: #{$field-control-underlined-height + $modifier}
+          --v-field-padding-bottom: #{math.max(0px, $field-control-padding-bottom + $modifier * .5)}
 
   &--flat
     box-shadow: none
@@ -121,12 +123,13 @@
   flex-wrap: wrap
   letter-spacing: $field-letter-spacing
   opacity: $field-input-opacity
-  min-height: var(--v-input-control-height, $input-control-height)
+  min-height: var(--v-field-input-min-height)
   padding-inline-start: var(--v-field-padding-start)
   padding-inline-end: var(--v-field-padding-end)
-  padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0))
-  padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom)
+  padding-top: var(--v-field-input-padding-top)
+  padding-bottom: var(--v-field-input-padding-bottom)
   width: 100%
+  --v-field-input-min-height: #{$field-input-min-height}
 
   input
     letter-spacing: inherit
@@ -166,12 +169,25 @@
   grid-area: append-inner
   padding-inline-start: var(--v-field-padding-after)
 
-.v-field__prepend-inner,
 .v-field__append-inner,
-.v-field__clearable
-  align-items: flex-start
+.v-field__clearable,
+.v-field__prepend-inner
   display: flex
+  align-items: flex-start
   padding-top: var(--v-input-padding-top, $field-control-padding-top)
+
+  .v-field--center-affix &
+    align-items: center
+    padding-top: 0
+
+.v-field.v-field--variant-underlined,
+.v-field.v-field--variant-plain
+  .v-field__append-inner,
+  .v-field__clearable,
+  .v-field__prepend-inner
+    align-items: flex-start
+    padding-top: $field-input-padding-top
+    padding-bottom: $field-input-padding-bottom
 
 .v-field__prepend-inner,
 .v-field__append-inner
@@ -218,10 +234,18 @@
   max-width: calc(100% - var(--v-field-padding-start) - var(--v-field-padding-end))
   pointer-events: none
   position: absolute
-  top: var(--v-input-padding-top, $field-control-padding-top)
+  top: var(--v-input-padding-top)
   transform-origin: left center
   transition: $field-transition-timing
   transition-property: opacity, transform
+
+  .v-field--variant-underlined &,
+  .v-field--variant-plain &
+    top: calc(var(--v-input-padding-top) + var(--v-field-padding-top))
+
+  .v-field--center-affix &
+    top: 50%
+    transform: translateY(-50%)
 
   .v-field--active &
     visibility: hidden
@@ -238,6 +262,9 @@
     font-size: var(--v-field-label-scale)
     visibility: hidden
     max-width: 100%
+
+    .v-field--center-affix &
+      transform: none
 
     .v-field.v-field--active &
       visibility: visible
@@ -257,6 +284,7 @@
     .v-field--variant-underlined &
       transform: translateY(-16px)
       margin: 0
+      top: var(--v-input-padding-top)
 
     .v-field--variant-outlined &
       transform: translateY(-50%)

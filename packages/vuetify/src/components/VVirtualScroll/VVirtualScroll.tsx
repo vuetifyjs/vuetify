@@ -10,33 +10,39 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
+import { toRef } from 'vue'
 import {
   convertToUnit,
   genericComponent,
+  propsFactory,
   useRender,
 } from '@/util'
 
 // Types
 import type { GenericProps } from '@/util'
-import { toRef } from 'vue'
 
 export interface VVirtualScrollSlot<T> {
   item: T
   index: number
 }
 
-export const VVirtualScroll = genericComponent<new <T>(props: {
-  items?: readonly T[]
-}) => GenericProps<typeof props, {
-  default: [VVirtualScrollSlot<T>]
-}>>()({
+export const makeVVirtualScrollProps = propsFactory({
+  ...makeVirtualProps(),
+  ...makeComponentProps(),
+  ...makeDimensionProps(),
+}, 'v-virtual-scroll')
+
+export const VVirtualScroll = genericComponent<new <T>(
+  props: {
+    items?: readonly T[]
+  },
+  slots: {
+    default: VVirtualScrollSlot<T>
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScroll',
 
-  props: {
-    ...makeVirtualProps(),
-    ...makeComponentProps(),
-    ...makeDimensionProps(),
-  },
+  props: makeVVirtualScrollProps(),
 
   setup (props, { slots }) {
     const { dimensionStyles } = useDimension(props)

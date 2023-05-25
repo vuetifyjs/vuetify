@@ -3,14 +3,14 @@ import './VExpansionPanel.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeGroupProps, useGroup } from '@/composables/group'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { computed, toRef } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { InjectionKey, PropType } from 'vue'
@@ -22,23 +22,25 @@ const allowedVariants = ['default', 'accordion', 'inset', 'popout'] as const
 
 type Variant = typeof allowedVariants[number]
 
+export const makeVExpansionPanelsProps = propsFactory({
+  color: String,
+  variant: {
+    type: String as PropType<Variant>,
+    default: 'default',
+    validator: (v: any) => allowedVariants.includes(v),
+  },
+  readonly: Boolean,
+
+  ...makeComponentProps(),
+  ...makeGroupProps(),
+  ...makeTagProps(),
+  ...makeThemeProps(),
+}, 'v-expansion-panel')
+
 export const VExpansionPanels = genericComponent()({
   name: 'VExpansionPanels',
 
-  props: {
-    color: String,
-    variant: {
-      type: String as PropType<Variant>,
-      default: 'default',
-      validator: (v: any) => allowedVariants.includes(v),
-    },
-    readonly: Boolean,
-
-    ...makeComponentProps(),
-    ...makeGroupProps(),
-    ...makeTagProps(),
-    ...makeThemeProps(),
-  },
+  props: makeVExpansionPanelsProps(),
 
   emits: {
     'update:modelValue': (val: unknown) => true,

@@ -3,22 +3,24 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { toRefs } from 'vue'
-import { genericComponent } from '@/util'
+import { genericComponent, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import type { DefaultsOptions } from '@/composables/defaults'
 
+export const makeDefaultsProviderProps = propsFactory({
+  defaults: Object as PropType<DefaultsOptions>,
+  disabled: Boolean,
+  reset: [Number, String],
+  root: Boolean,
+  scoped: Boolean,
+}, 'v-defaults-provider')
+
 export const VDefaultsProvider = genericComponent(false)({
   name: 'VDefaultsProvider',
 
-  props: {
-    defaults: Object as PropType<DefaultsOptions>,
-    disabled: Boolean,
-    reset: [Number, String],
-    root: Boolean,
-    scoped: Boolean,
-  },
+  props: makeDefaultsProviderProps(),
 
   setup (props, { slots }) {
     const { defaults, disabled, reset, root, scoped } = toRefs(props)

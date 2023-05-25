@@ -4,19 +4,19 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
 
-// Composables
-import { useDensity } from '@/composables/density'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
-import { computed, inject, nextTick, ref } from 'vue'
+import { computed, inject, nextTick, ref, shallowRef } from 'vue'
 import {
   filterInputAttrs,
   genericComponent,
@@ -43,9 +43,9 @@ export type SelectionControlSlot = {
 }
 
 export type VSelectionControlSlots = {
-  default: []
-  label: [{ label: string | undefined, props: Record<string, unknown> }]
-  input: [SelectionControlSlot]
+  default: never
+  label: { label: string | undefined, props: Record<string, unknown> }
+  input: SelectionControlSlot
 }
 
 export const makeSelectionControlProps = propsFactory({
@@ -125,10 +125,13 @@ export function useSelectionControl (
   }
 }
 
-export const VSelectionControl = genericComponent<new <T>(props: {
-  modelValue?: T
-  'onUpdate:modelValue'?: (val: T) => any
-}) => GenericProps<typeof props, VSelectionControlSlots>>()({
+export const VSelectionControl = genericComponent<new <T>(
+  props: {
+    modelValue?: T
+    'onUpdate:modelValue'?: (val: T) => any
+  },
+  slots: VSelectionControlSlots,
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelectionControl',
 
   directives: { Ripple },
@@ -153,8 +156,8 @@ export const VSelectionControl = genericComponent<new <T>(props: {
     } = useSelectionControl(props)
     const uid = getUid()
     const id = computed(() => props.id || `input-${uid}`)
-    const isFocused = ref(false)
-    const isFocusVisible = ref(false)
+    const isFocused = shallowRef(false)
+    const isFocusVisible = shallowRef(false)
     const input = ref<HTMLInputElement>()
 
     group?.onForceUpdate(() => {

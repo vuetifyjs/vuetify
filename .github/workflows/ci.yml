@@ -11,14 +11,6 @@ env:
   CROWDIN_BRANCH: v3
 
 jobs:
-  close:
-    runs-on: ubuntu-latest
-    if: github.event_name == 'push' && (github.ref == 'refs/heads/dev' || github.ref == 'refs/heads/next') && github.repository_owner == 'vuetifyjs'
-    steps:
-      - uses: vuetifyjs/close-action@master
-        with:
-          token: ${{ secrets.GITHUB_TOKEN }}
-
   pre_job:
     runs-on: ubuntu-latest
     outputs:
@@ -116,30 +108,16 @@ jobs:
       - uses: ./.github/actions/yarn-install
       - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      - run: rm -rf release
-      - run: cp -r ./packages/vuetify/dist release
-      - run: rm ./release/_component-variables.sass
-      - run: for file in ./release/vuetify.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
-      - run: zip -jr "release/vuetify-${RELEASE_TAG}.zip" release/*
       - name: NPM Release
         run: bash scripts/deploy.sh
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          TAG_NAME: ${{ env.RELEASE_TAG }}
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
         run: yarn conventional-github-releaser -p vuetify
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_name: vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_content_type: application/zip
 
   build-docs:
     name: Build docs
@@ -154,7 +132,7 @@ jobs:
       - uses: ./.github/actions/yarn-install
 # TODO: crowdin is returning invalid markdown
 #      - name: Download eo-UY
-#        uses: crowdin/github-action@1.1.2
+#        uses: crowdin/github-action@1.8.0
 #        with:
 #          config: crowdin.yml
 #          upload_sources: false

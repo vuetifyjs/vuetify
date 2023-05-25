@@ -1,9 +1,9 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
-import type { DeepReadonly, Ref } from 'vue'
-
-// Globals
 import { IN_BROWSER } from '@/util/globals'
+
+// Types
+import type { DeepReadonly, Ref } from 'vue'
 
 interface ResizeState {
   resizeRef: Ref<HTMLElement | undefined>

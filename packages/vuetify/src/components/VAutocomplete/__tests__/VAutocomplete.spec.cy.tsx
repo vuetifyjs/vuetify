@@ -1,9 +1,49 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
-import { ref } from 'vue'
+// Components
 import { VAutocomplete } from '../VAutocomplete'
+import { VForm } from '@/components/VForm'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
+import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VAutocomplete label="label" />,
+  Disabled: <VAutocomplete label="label" items={ items } disabled />,
+  Affixes: <VAutocomplete label="label" items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VAutocomplete label="label" items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VAutocomplete label="label" items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VAutocomplete label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex" style="gap: 0.4rem">
+          { cloneVNode(v, { variant, density }) }
+          { cloneVNode(v, { variant, density, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'] }) }
+          <VAutocomplete
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VAutocomplete>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VAutocomplete', () => {
   it('should close only first chip', () => {
@@ -144,6 +184,31 @@ describe('VAutocomplete', () => {
     cy.get('@input').type('{downarrow}', { force: true })
     cy.get('.v-list-item').should('have.length', 0)
     cy.get('.v-select--active-menu').should('have.length', 0)
+  })
+
+  it('should be empty when delete the selected option', () => {
+    const items = ref([
+      { title: 'Item 1', value: 'Item 1' },
+      { title: 'Item 2', value: 'Item 2' },
+    ])
+
+    const selectedItems = ref(null)
+
+    cy.mount(() => (
+      <VAutocomplete
+        v-model={ selectedItems.value }
+        items={ items.value }
+        returnObject
+      />
+    ))
+
+    cy.get('.v-autocomplete').click()
+    cy.get('.v-list-item').should('have.length', 2)
+    cy.get('.v-list-item').contains('Item 1').click()
+
+    cy.get('.v-field__input').clear()
+    cy.get('body').click('bottomLeft')
+    cy.get('.v-field__input').should('not.include.text', 'Item 1')
   })
 
   // https://github.com/vuetifyjs/vuetify/issues/16210
@@ -300,5 +365,32 @@ describe('VAutocomplete', () => {
       .should('have.class', 'v-autocomplete--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-autocomplete--active-menu')
+  })
+
+  it('should auto-select-first item when pressing enter', () => {
+    cy
+      .mount(() => (
+        <VAutocomplete
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-autocomplete')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-autocomplete input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-autocomplete input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })

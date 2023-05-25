@@ -2,31 +2,33 @@
 import './VCheckbox.sass'
 
 // Components
-import type { VInputSlots } from '@/components/VInput/VInput'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
 
 // Utilities
 import { computed } from 'vue'
-import { filterInputAttrs, genericComponent, getUid, omit, useRender } from '@/util'
+import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRender } from '@/util'
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
+
+export const makeVCheckboxProps = propsFactory({
+  ...makeVInputProps(),
+  ...omit(makeVCheckboxBtnProps(), ['inline']),
+}, 'v-checkbox')
 
 export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',
 
   inheritAttrs: false,
 
-  props: {
-    ...makeVInputProps(),
-    ...omit(makeVCheckboxBtnProps(), ['inline']),
-  },
+  props: makeVCheckboxProps(),
 
   emits: {
     'update:focused': (focused: boolean) => true,

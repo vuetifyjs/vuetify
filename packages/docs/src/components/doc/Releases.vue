@@ -5,16 +5,33 @@
       :items="releases"
       :loading="store.isLoading"
       :menu-props="menuProps"
-      :placeholder="`v${version}`"
+      :placeholder="tag"
       hide-details
+      density="comfortable"
       item-title="name"
       label="Select Release Version"
       persistent-placeholder
       prepend-inner-icon="mdi-text-box-search-outline"
       return-object
-      @blur="resetSearch"
-      @focus="onFocus"
     >
+      <template #selection>
+        <div class="d-flex align-center">
+          <div class="me-1">{{ search?.tag_name }}</div>
+
+          &mdash;
+
+          <template v-for="(value, key) in reactions" :key="key">
+            <template v-if="search?.reactions?.[key]">
+              <span class="d-inline-flex align-center text-body-2 me-2">
+                {{ value }}
+
+                <span class="text-caption">{{ search.reactions[key] }}</span>
+              </span>
+            </template>
+          </template>
+        </div>
+      </template>
+
       <template #item="{ item, props: itemProps }">
         <v-list-item
           v-if="item?.title"
@@ -35,39 +52,26 @@
 
     <v-card
       variant="flat"
-      min-height="180"
       rounded="t-0 b"
     >
       <div
-        v-if="!!search"
+        v-if="search?.author"
         class="d-flex justify-space-between"
       >
-        <v-list-item lines="two">
-          <v-list-item-title class="mb-1 text-h6">
-            <i18n-t keypath="released-by">
-              <template #author>
-                <app-link :href="search.author.html_url">
-                  {{ search.author.login }}
-                </app-link>
+        <v-list-item v-if="publishedOn" lines="two">
+          <v-list-item-title class="d-flex align-center">
+            <i18n-t keypath="published">
+              <template #date>
+                <v-chip
+                  :text="publishedOn"
+                  class="ms-2 text-caption"
+                  density="comfortable"
+                  label
+                  variant="flat"
+                />
               </template>
             </i18n-t>
           </v-list-item-title>
-
-          <v-list-item-subtitle>
-            <i18n-t keypath="published-on">
-              <template #date>
-                <v-chip
-                  color="green-darken-3"
-                  density="comfortable"
-                  label
-                  size="small"
-                  variant="flat"
-                >
-                  <strong v-text="search.published_at" />
-                </v-chip>
-              </template>
-            </i18n-t>
-          </v-list-item-subtitle>
         </v-list-item>
 
         <div class="pe-3 d-flex align-center flex-1-0-auto">
@@ -81,27 +85,31 @@
             :target="tooltip.href ? '_blank' : undefined"
             class="text-white ms-2"
             density="comfortable"
+            size="small"
             variant="flat"
             @click="tooltip?.onClick?.()"
           />
         </div>
       </div>
 
-      <v-divider />
+      <template v-if="search?.body && !store.isLoading">
+        <v-divider />
 
-      <div class="px-4 pt-4">
-        <app-markdown
-          v-if="search?.body"
-          :content="search.body"
-          class="releases"
-        />
-      </div>
+        <div class="px-4 pt-4">
+          <app-markdown
+            v-if="search?.body"
+            :content="search.body"
+            class="releases"
+          />
+        </div>
+      </template>
     </v-card>
   </div>
 </template>
 
 <script setup lang="ts">
   // Composables
+  import { useDate } from 'vuetify/labs/date'
   import { useI18n } from 'vue-i18n'
   import { useRoute, useRouter } from 'vue-router'
 
@@ -109,35 +117,27 @@
   import { Release, useReleasesStore } from '@/store/releases'
 
   // Utilities
-  import { computed, nextTick, onBeforeMount, ref, watch } from 'vue'
+  import { computed, onBeforeMount, ref, watch } from 'vue'
   import { version } from 'vuetify'
   import { wait } from '@/util/helpers'
 
+  const reactions = {
+    '+1': '👍',
+    hooray: '🎉',
+    rocket: '🚀',
+    laugh: '😂',
+    heart: '❤️',
+    eyes: '👀',
+  }
+
   const { t } = useI18n()
-  const store = useReleasesStore()
-  const isFocused = ref(false)
-  const isSearching = ref(false)
-  const clicked = ref('copy-link')
+  const date = useDate()
   const route = useRoute()
   const router = useRouter()
+  const store = useReleasesStore()
+
+  const clicked = ref('copy-link')
   const search = ref<Release>()
-  let timeout = -1
-
-  const onFocus = () => {
-    clearTimeout(timeout)
-
-    isFocused.value = true
-  }
-
-  const resetSearch = async () => {
-    clearTimeout(timeout)
-
-    await nextTick(() => {
-      isSearching.value = false
-
-      timeout = window.setTimeout(() => (isFocused.value = false), timeout)
-    })
-  }
 
   const menuProps = computed(() => {
     return {
@@ -185,20 +185,26 @@
     return releases
   })
 
+  const tag = computed(() => (route.query.version ?? `v${version}`) as string)
+
+  const publishedOn = computed(() => {
+    if (!search.value?.published_at) return undefined
+
+    return date.format(new Date(search.value.published_at), 'fullDateWithWeekday')
+  })
+
   onBeforeMount(async () => {
     await store.fetch()
 
-    if (route.query.version) {
-      const found = store.releases.find(release => release.tag_name === route.query.version)
-
-      if (found) return (search.value = found)
-    }
-
-    search.value = store.releases[0]
+    search.value = await store.find(tag.value)
   })
 
   watch(search, val => {
-    router.push({ query: { version: val!.tag_name } })
+    const version = val?.tag_name ?? tag.value
+
+    if (!version) return
+
+    router.push({ query: { version } })
   })
 </script>
 

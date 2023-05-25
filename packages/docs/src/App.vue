@@ -151,6 +151,7 @@
 
   p
     margin-bottom: 1rem
+    line-height: 1.8
 
     a, a:visited
       color: rgb(var(--v-theme-primary))

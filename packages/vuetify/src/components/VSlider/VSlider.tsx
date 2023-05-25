@@ -2,41 +2,45 @@
 import './VSlider.sass'
 
 // Components
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VLabel } from '@/components/VLabel'
 import { VSliderThumb } from './VSliderThumb'
 import { VSliderTrack } from './VSliderTrack'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
+import { VLabel } from '@/components/VLabel'
 
 // Composables
-import { makeFocusProps, useFocus } from '@/composables/focus'
 import { makeSliderProps, useSlider, useSteps } from './slider'
+import { makeFocusProps, useFocus } from '@/composables/focus'
+import { useRtl } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { VInputSlot, VInputSlots } from '@/components/VInput/VInput'
 
 export type VSliderSlots = VInputSlots & {
-  'tick-label': []
-  'thumb-label': []
+  label: VInputSlot
+  'tick-label': never
+  'thumb-label': never
 }
+
+export const makeVSliderProps = propsFactory({
+  ...makeFocusProps(),
+  ...makeSliderProps(),
+  ...makeVInputProps(),
+
+  modelValue: {
+    type: [Number, String],
+    default: 0,
+  },
+}, 'v-slider')
 
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',
 
-  props: {
-    ...makeFocusProps(),
-    ...makeSliderProps(),
-    ...makeVInputProps(),
-
-    modelValue: {
-      type: [Number, String],
-      default: 0,
-    },
-  },
+  props: makeVSliderProps(),
 
   emits: {
     'update:focused': (value: boolean) => true,
@@ -47,6 +51,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
 
   setup (props, { slots, emit }) {
     const thumbContainerRef = ref()
+    const { rtlClasses } = useRtl()
 
     const steps = useSteps(props)
 
@@ -104,6 +109,7 @@ export const VSlider = genericComponent<VSliderSlots>()({
               'v-slider--pressed': mousePressed.value,
               'v-slider--disabled': props.disabled,
             },
+            rtlClasses.value,
             props.class,
           ]}
           style={ props.style }
@@ -136,8 +142,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value }
                 />

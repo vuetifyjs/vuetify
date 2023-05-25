@@ -2,55 +2,57 @@
 import './VSliderThumb.sass'
 
 // Components
-import { VScaleTransition } from '../transitions'
 import { VSliderSymbol } from './slider'
+import { VScaleTransition } from '../transitions'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useElevation } from '@/composables/elevation'
 
 // Directives
 import Ripple from '@/directives/ripple'
 
-// Composables
-import { makeComponentProps } from '@/composables/component'
-import { useElevation } from '@/composables/elevation'
-import { useTextColor } from '@/composables/color'
-
 // Utilities
 import { computed, inject } from 'vue'
-import { convertToUnit, genericComponent, keyValues, useRender } from '@/util'
+import { convertToUnit, genericComponent, keyValues, propsFactory, useRender } from '@/util'
 
 export type VSliderThumbSlots = {
-  'thumb-label': []
+  'thumb-label': { modelValue: number }
 }
+
+export const makeVSliderThumbProps = propsFactory({
+  focused: Boolean,
+  max: {
+    type: Number,
+    required: true,
+  },
+  min: {
+    type: Number,
+    required: true,
+  },
+  modelValue: {
+    type: Number,
+    required: true,
+  },
+  position: {
+    type: Number,
+    required: true,
+  },
+  ripple: {
+    type: Boolean,
+    default: true,
+  },
+
+  ...makeComponentProps(),
+}, 'v-slider-thumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',
 
   directives: { Ripple },
 
-  props: {
-    focused: Boolean,
-    max: {
-      type: Number,
-      required: true,
-    },
-    min: {
-      type: Number,
-      required: true,
-    },
-    modelValue: {
-      type: Number,
-      required: true,
-    },
-    position: {
-      type: Number,
-      required: true,
-    },
-    ripple: {
-      type: Boolean,
-      default: true,
-    },
-
-    ...makeComponentProps(),
-  },
+  props: makeVSliderThumbProps(),
 
   emits: {
     'update:modelValue': (v: number) => true,
@@ -144,7 +146,7 @@ export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
           aria-valuemin={ props.min }
           aria-valuemax={ props.max }
           aria-valuenow={ props.modelValue }
-          aria-readonly={ readonly.value }
+          aria-readonly={ !!readonly.value }
           aria-orientation={ direction.value }
           onKeydown={ !readonly.value ? onKeydown : undefined }
         >

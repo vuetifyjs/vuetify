@@ -1,5 +1,4 @@
 // Components
-import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
@@ -9,6 +8,9 @@ import { useProxiedModel } from '@/composables/proxiedModel'
 // Utilities
 import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+import type { VSelectionControlSlots } from '@/components/VSelectionControl/VSelectionControl'
 
 export const makeVCheckboxBtnProps = propsFactory({
   indeterminate: Boolean,
@@ -44,13 +46,13 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
     }
 
     const falseIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.falseIcon
     })
 
     const trueIcon = computed(() => {
-      return props.indeterminate
+      return indeterminate.value
         ? props.indeterminateIcon
         : props.trueIcon
     })
@@ -68,7 +70,7 @@ export const VCheckboxBtn = genericComponent<VSelectionControlSlots>()({
         onUpdate:modelValue={ onChange }
         falseIcon={ falseIcon.value }
         trueIcon={ trueIcon.value }
-        aria-checked={ props.indeterminate ? 'mixed' : undefined }
+        aria-checked={ indeterminate.value ? 'mixed' : undefined }
         v-slots={ slots }
       />
     ))

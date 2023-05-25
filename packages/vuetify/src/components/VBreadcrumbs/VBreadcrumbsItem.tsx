@@ -1,28 +1,30 @@
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeRouterProps, useLink } from '@/composables/router'
 import { makeTagProps } from '@/composables/tag'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed } from 'vue'
-import { genericComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
+
+export const makeVBreadcrumbsItemProps = propsFactory({
+  active: Boolean,
+  activeClass: String,
+  activeColor: String,
+  color: String,
+  disabled: Boolean,
+  title: String,
+
+  ...makeComponentProps(),
+  ...makeRouterProps(),
+  ...makeTagProps({ tag: 'li' }),
+}, 'v-breadcrumbs-item')
 
 export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',
 
-  props: {
-    active: Boolean,
-    activeClass: String,
-    activeColor: String,
-    color: String,
-    disabled: Boolean,
-    title: String,
-
-    ...makeComponentProps(),
-    ...makeRouterProps(),
-    ...makeTagProps({ tag: 'li' }),
-  },
+  props: makeVBreadcrumbsItemProps(),
 
   setup (props, { slots, attrs }) {
     const link = useLink(props, attrs)

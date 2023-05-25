@@ -2,12 +2,12 @@
 import './VSelectionControlGroup.sass'
 
 // Composables
-import { IconValue } from '@/composables/icons'
 import { makeComponentProps } from '@/composables/component'
-import { makeDensityProps } from '@/composables/density'
-import { makeThemeProps } from '@/composables/theme'
 import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeThemeProps } from '@/composables/theme'
 
 // Utilities
 import { computed, onScopeDispose, provide, toRef } from 'vue'
@@ -27,6 +27,7 @@ export const VSelectionControlGroupSymbol: InjectionKey<VSelectionGroupContext> 
 export const makeSelectionControlGroupProps = propsFactory({
   color: String,
   disabled: Boolean,
+  defaultsTarget: String,
   error: Boolean,
   id: String,
   inline: Boolean,
@@ -49,22 +50,21 @@ export const makeSelectionControlGroupProps = propsFactory({
     default: deepEqual,
   },
 
-  ...makeThemeProps(),
+  ...makeComponentProps(),
   ...makeDensityProps(),
+  ...makeThemeProps(),
+}, 'selection-control-group')
+
+export const makeVSelectionControlGroupProps = propsFactory({
+  ...makeSelectionControlGroupProps({
+    defaultsTarget: 'VSelectionControl',
+  }),
 }, 'v-selection-control-group')
 
 export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',
 
-  props: {
-    defaultsTarget: {
-      type: String,
-      default: 'VSelectionControl',
-    },
-
-    ...makeComponentProps(),
-    ...makeSelectionControlGroupProps(),
-  },
+  props: makeVSelectionControlGroupProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,

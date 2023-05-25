@@ -1,4 +1,6 @@
+@forward '../VInput/variables';
 @use '../../styles/settings';
+@use '../VInput/variables' as *;
 
 // INPUT
 $field-border-radius: settings.$border-radius-root !default;
@@ -25,7 +27,7 @@ $field-control-filled-background: rgba(var(--v-theme-on-surface), var(--v-idle-o
 $field-control-padding-start: 16px !default;
 $field-control-padding-end: 16px !default;
 $field-control-padding-top: 10px !default;
-$field-control-padding-bottom: 6px !default;
+$field-control-padding-bottom: 5px !default;
 $field-control-affixed-padding: 12px !default;
 $field-control-affixed-inner-padding: 6px !default;
 $field-control-underlined-height: 48px !default;
@@ -33,8 +35,13 @@ $field-control-underlined-padding-bottom: 2px !default;
 $field-control-height: 56px !default;
 
 // INPUT
-$field-input-padding-top: 32px !default;
 $field-input-opacity: var(--v-high-emphasis-opacity) !default;
+$field-input-min-height: #{max(
+  var(--v-input-control-height, $input-control-height),
+  calc($input-font-size * $input-line-height + var(--v-field-input-padding-top) + var(--v-field-input-padding-bottom))
+)} !default;
+$field-input-padding-top: calc(var(--v-field-padding-top, $field-control-padding-top) + var(--v-input-padding-top, 0)) !default;
+$field-input-padding-bottom: var(--v-field-padding-bottom, $field-control-padding-bottom) !default;
 
 // LABEL
 $field-label-floating-scale: .75 !default;
