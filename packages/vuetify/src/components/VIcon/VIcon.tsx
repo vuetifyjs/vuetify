@@ -2,12 +2,12 @@
 import './VIcon.sass'
 
 // Composables
-import { IconValue, useIcon } from '@/composables/icons'
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { IconValue, useIcon } from '@/composables/icons'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, Text, toRef } from 'vue'

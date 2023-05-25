@@ -2,7 +2,6 @@
 import './VAutocomplete.sass'
 
 // Components
-import { makeSelectProps } from '@/components/VSelect/VSelect'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
@@ -10,30 +9,30 @@ import { VIcon } from '@/components/VIcon'
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
-import { VTextField } from '@/components/VTextField'
+import { makeSelectProps } from '@/components/VSelect/VSelect'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
+import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
-import { makeTransitionProps } from '@/composables/transition'
 import { useForm } from '@/composables/form'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useItems } from '@/composables/list-items'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utility
+// Utilities
 import { computed, mergeProps, nextTick, ref, shallowRef, watch } from 'vue'
 import { genericComponent, noop, omit, propsFactory, useRender, wrapInArray } from '@/util'
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Types
 import type { PropType } from 'vue'
-import type { GenericProps } from '@/util'
-import type { FilterMatch } from '@/composables/filter'
-import type { ListItem } from '@/composables/list-items'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
+import type { FilterMatch } from '@/composables/filter'
+import type { ListItem } from '@/composables/list-items'
+import type { GenericProps } from '@/util'
 
 function highlightResult (text: string, matches: FilterMatch | undefined, length: number) {
   if (matches == null) return text
@@ -91,12 +90,12 @@ export const VAutocomplete = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: ListItem<Item>, index: number }]
-    'prepend-item': []
-    'append-item': []
-    'no-data': []
+    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: ListItem<Item>, index: number }
+    'prepend-item': never
+    'append-item': never
+    'no-data': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VAutocomplete',

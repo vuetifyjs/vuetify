@@ -70,6 +70,7 @@ export const VDataTableRow = defineComponent({
                 if (column.key === 'data-table-select') {
                   return slots['item.data-table-select']?.(slotProps) ?? (
                     <VCheckboxBtn
+                      disabled={ !item.selectable }
                       modelValue={ isSelected([item]) }
                       onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
                     />

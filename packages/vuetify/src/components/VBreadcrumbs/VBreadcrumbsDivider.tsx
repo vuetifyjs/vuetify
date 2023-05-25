@@ -1,7 +1,7 @@
 // Composables
 import { makeComponentProps } from '@/composables/component'
 
-// Utility
+// Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVBreadcrumbsDividerProps = propsFactory({

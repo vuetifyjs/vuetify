@@ -1,7 +1,7 @@
 {
   "name": "vuetify",
   "description": "Vue Material Component Framework",
-  "version": "3.3.0",
+  "version": "3.3.1",
   "author": {
     "name": "John Leider",
     "email": "john@vuetifyjs.com"
@@ -54,6 +54,7 @@
     ".": {
       "sass": "./lib/styles/main.sass",
       "style": "./lib/styles/main.css",
+      "types": "./lib/index.d.mts",
       "default": "./lib/framework.mjs"
     },
     "./styles": {
