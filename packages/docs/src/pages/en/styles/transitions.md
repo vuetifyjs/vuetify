@@ -40,6 +40,7 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 
 ## Examples
 
+<!--
 ### Props
 
 #### Custom Origin
@@ -47,6 +48,7 @@ Smooth animations help make a UI feel great. Using Vue's transition system and r
 Programmatically control the transition origin with a simple prop.
 
 <example file="transitions/prop-custom-origin" />
+-->
 
 ### Misc
 
@@ -103,7 +105,6 @@ Animations use the application's `$primary-transition`.
 Using multiple custom transitions, it is easy to bring a simple todo list to life!
 
 <example file="transitions/misc-todo" />
-
 
 <!--
 ## Create your own
