@@ -104,6 +104,8 @@ Using multiple custom transitions, it is easy to bring a simple todo list to lif
 
 <example file="transitions/misc-todo" />
 
+
+<!--
 ## Create your own
 
 You can use Vuetify's transition helper function to easily create your own custom transitions. This function will return an object that you can import into Vue. Using Vue's [functional component](https://vuejs.org/v2/guide/render-function.html#Functional-Components) option will make sure your transition is as efficient as possible. Simply import the function:
@@ -129,3 +131,4 @@ The **createSimpleTransition** function accepts 1 argument, name. This will be t
   &-enter, &-leave-to
     opacity: 0
 ```
+-->
