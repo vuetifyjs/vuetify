@@ -26,15 +26,16 @@ const stories = Object.fromEntries(Object.entries({
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
       densities.map(density => (
-        <div class="d-flex" style="gap: 0.4rem">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: [oneMBFile, twoMBFile] }) }
-          { cloneVNode(v, { variant, density, chips: true, modelValue: [oneMBFile, twoMBFile] }) }
+        <div class="d-flex" style="gap: 0.4rem; height: 150px;">
+          { cloneVNode(v, { variant, density, class: 'align-self-start' }) }
+          { cloneVNode(v, { variant, density, modelValue: [oneMBFile, twoMBFile], class: 'align-self-start' }) }
+          { cloneVNode(v, { variant, density, chips: true, modelValue: [oneMBFile, twoMBFile], class: 'align-self-start' }) }
           <VFileInput
             variant={ variant }
             density={ density }
             modelValue={[oneMBFile, twoMBFile]}
             { ...v.props }
+            class="align-self-start"
           >{{
             selection: ({ fileNames }) => {
               return fileNames.map(f => f)

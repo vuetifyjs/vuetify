@@ -25,15 +25,16 @@ const stories = Object.fromEntries(Object.entries({
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
       densities.map(density => (
-        <div class="d-flex" style="gap: 0.4rem">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: ['California'] }) }
-          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'] }) }
+        <div class="d-flex" style="gap: 0.4rem; height: 150px;">
+          { cloneVNode(v, { variant, density, class: 'align-self-start' }) }
+          { cloneVNode(v, { variant, density, modelValue: ['California'], class: 'align-self-start' }) }
+          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'], class: 'align-self-start' }) }
           <VSelect
             variant={ variant }
             density={ density }
             modelValue={['California']}
             { ...v.props }
+            class="align-self-start"
           >{{
             selection: ({ item }) => {
               return item.title
