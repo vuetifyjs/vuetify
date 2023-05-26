@@ -13,6 +13,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
+import { useScrolling } from './useScrolling'
 import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
@@ -155,7 +156,7 @@ export const VSelect = genericComponent<new <
     })
 
     const listRef = ref<VList>()
-
+    const { onListScroll, onListKeydown } = useScrolling(listRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -311,6 +312,8 @@ export const VSelect = genericComponent<new <
                       selectStrategy={ props.multiple ? 'independent' : 'single-independent' }
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
+                      onKeydown={ onListKeydown }
+                      onScrollPassive={ onListScroll }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />

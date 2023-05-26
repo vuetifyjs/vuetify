@@ -13,6 +13,7 @@ import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextFi
 import { VVirtualScroll } from '@/components/VVirtualScroll'
 
 // Composables
+import { useScrolling } from '../VSelect/useScrolling'
 import { useTextColor } from '@/composables/color'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useForm } from '@/composables/form'
@@ -165,7 +166,7 @@ export const VAutocomplete = genericComponent<new <
         !listHasFocus.value
     })
     const listRef = ref<VList>()
-
+    const { onListScroll, onListKeydown } = useScrolling(listRef)
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -412,6 +413,8 @@ export const VAutocomplete = genericComponent<new <
                       onMousedown={ (e: MouseEvent) => e.preventDefault() }
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
+                      onKeydown={ onListKeydown }
+                      onScrollPassive={ onListScroll }
                     >
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
