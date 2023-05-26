@@ -14,24 +14,25 @@ const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VAutocomplete label="label" />,
-  Disabled: <VAutocomplete label="label" items={ items } disabled />,
-  Affixes: <VAutocomplete label="label" items={ items } prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VAutocomplete label="label" items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
-  'Prepend/append inner': <VAutocomplete label="label" items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
-  Placeholder: <VAutocomplete label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
+  'Default input': <VAutocomplete />,
+  Disabled: <VAutocomplete items={ items } disabled />,
+  Affixes: <VAutocomplete items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VAutocomplete items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VAutocomplete items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VAutocomplete items={ items } placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
       densities.map(density => (
         <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: ['California'] }) }
-          { cloneVNode(v, { variant, density, chips: true, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: ['California'] }) }
           <VAutocomplete
             variant={ variant }
             density={ density }
             modelValue={['California']}
+            label="selection slot"
             { ...v.props }
           >{{
             selection: ({ item }) => {

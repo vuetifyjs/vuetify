@@ -16,24 +16,25 @@ const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VFileInput label="label" />,
-  Disabled: <VFileInput label="label" items={ items } disabled />,
-  Affixes: <VFileInput label="label" items={ items } prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VFileInput label="label" items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
-  'Prepend/append inner': <VFileInput label="label" items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
-  Placeholder: <VFileInput label="label" items={ items } placeholder="placeholder" persistentPlaceholder />,
+  'Default input': <VFileInput />,
+  Disabled: <VFileInput items={ items } disabled />,
+  Affixes: <VFileInput items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VFileInput items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VFileInput items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VFileInput items={ items } placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
       densities.map(density => (
         <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
-          { cloneVNode(v, { variant, density }) }
-          { cloneVNode(v, { variant, density, modelValue: [oneMBFile, twoMBFile] }) }
-          { cloneVNode(v, { variant, density, chips: true, modelValue: [oneMBFile, twoMBFile] }) }
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: [oneMBFile, twoMBFile] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: [oneMBFile, twoMBFile] }) }
           <VFileInput
             variant={ variant }
             density={ density }
             modelValue={[oneMBFile, twoMBFile]}
+            label="selection slot"
             { ...v.props }
           >{{
             selection: ({ fileNames }) => {
