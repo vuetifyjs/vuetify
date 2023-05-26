@@ -9,6 +9,7 @@ import { VMessages } from '@/components/VMessages/VMessages'
 import { makeComponentProps } from '@/composables/component'
 import { makeDensityProps, useDensity } from '@/composables/density'
 import { IconValue } from '@/composables/icons'
+import { useRtl } from '@/composables/locale'
 import { makeValidationProps, useValidation } from '@/composables/validation'
 
 // Utilities
@@ -83,6 +84,7 @@ export const VInput = genericComponent<VInputSlots>()({
 
   setup (props, { attrs, slots, emit }) {
     const { densityClasses } = useDensity(props)
+    const { rtlClasses } = useRtl()
     const { InputIcon } = useInputIcon(props)
 
     const uid = getUid()
@@ -145,6 +147,7 @@ export const VInput = genericComponent<VInputSlots>()({
               'v-input--center-affix': props.centerAffix,
             },
             densityClasses.value,
+            rtlClasses.value,
             validationClasses.value,
             props.class,
           ]}
