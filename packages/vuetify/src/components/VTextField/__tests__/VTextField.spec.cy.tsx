@@ -20,9 +20,9 @@ const stories = Object.fromEntries(Object.entries({
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
       densities.map(density => (
-        <div class="d-flex" style="gap: 0.4rem; height: 100px;">
-          { cloneVNode(v, { variant, density, class: 'align-self-start' }) }
-          { cloneVNode(v, { variant, density, modelValue: 'Value', class: 'align-self-start' }) }
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density }) }
+          { cloneVNode(v, { variant, density, modelValue: 'Value' }) }
         </div>
       ))
     )).flat()}
