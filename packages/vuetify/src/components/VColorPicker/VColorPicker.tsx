@@ -83,6 +83,8 @@ export const VColorPicker = defineComponent({
       'modelValue',
       undefined,
       v => {
+        if (v == null || v === '') return null
+
         let c: HSV
         try {
           c = RGBtoHSV(parseColor(v as any))
