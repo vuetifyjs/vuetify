@@ -108,23 +108,12 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Pages({
         extensions: ['vue', 'md'],
         dirs: [
-          { dir: 'src/pages', baseRoute: 'pages' },
-          { dir: 'src/api', baseRoute: 'api' },
+          { dir: 'src/pages', baseRoute: '' },
+          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
-          const [base, locale, ...folders] = route.component.split('/').slice(2)
-          const paths = [locale]
+          const [locale, category, ...rest] = route.path.split('/').slice(1)
 
-          if (base !== 'pages') paths.push(base)
-
-          for (const folder of folders) {
-            if (folder.match('index')) continue
-
-            // remove file extensions if present
-            paths.push(folder.replace(/\.[a-z]*/, ''))
-          }
-
-          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
             ...parseMeta(route.component),
@@ -136,12 +125,11 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
           return {
             ...route,
-            path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
+            name: [`${category ?? meta.layout}`, ...rest].join('-'),
             meta: {
               ...meta,
               category,
-              page: rest?.join('-'),
+              page: rest.join('-'),
               locale,
             },
           }

@@ -55,6 +55,8 @@ const run = async () => {
 
   const template = await fs.readFile('./templates/component.d.ts', 'utf-8')
 
+  rimraf.sync(path.resolve('./dist'))
+  await fs.mkdir(path.resolve('./dist'))
   await mkdirp('./templates/tmp')
   for (const component in components) {
     // await fs.writeFile(`./templates/tmp/${component}.d.ts`, template.replaceAll('__component__', component))
@@ -64,7 +66,7 @@ const run = async () => {
     )
   }
 
-  const outPath = fileURLToPath(new URL('../../docs/src/api/data/', import.meta.url))
+  const outPath = path.resolve('./dist/api')
 
   const componentData = await Promise.all(
     Object.entries(components).map(([componentName, componentInstance]) => {
@@ -169,8 +171,6 @@ const run = async () => {
     }
   }
 
-  rimraf.sync(path.resolve('./dist'))
-  await fs.mkdir(path.resolve('./dist'))
   createVeturApi(componentData)
   createWebTypesApi(componentData, directives)
   await fs.mkdir(path.resolve('../vuetify/dist/json'), { recursive: true })
