@@ -66,7 +66,7 @@ export function provideDefaults (
         properties = properties.prev
       }
 
-      if (typeof root === 'string' && root in properties) {
+      if (properties && typeof root === 'string' && root in properties) {
         properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
       }
 
