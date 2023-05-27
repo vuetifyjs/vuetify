@@ -78,18 +78,19 @@ export const VInfiniteScrollIntersect = defineComponent({
   },
 
   emits: {
-    intersect: (side: InfiniteScrollSide) => true,
+    intersect: (side: InfiniteScrollSide, isIntersecting: boolean) => true,
   },
 
   setup (props, { emit }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
+      console.log('-entries')
     }, props.rootMargin ? {
       root: props.rootRef,
       rootMargin: props.rootMargin,
     } : undefined)
 
     watch(isIntersecting, async val => {
-      if (val) emit('intersect', props.side)
+      emit('intersect', props.side, val)
     })
 
     useRender(() => (
@@ -114,6 +115,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     const startStatus = ref<InfiniteScrollStatus>('ok')
     const endStatus = ref<InfiniteScrollStatus>('ok')
     const margin = computed(() => convertToUnit(props.margin))
+    const isIntersecting = ref<boolean>(false)
 
     function setScrollAmount (amount: number) {
       if (!rootEl.value) return
@@ -166,7 +168,15 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     }
 
     let previousScrollSize = 0
-    function handleIntersect (side: InfiniteScrollSide) {
+    function handleIntersect (side: InfiniteScrollSide, isIntersectingRaw: boolean) {
+      isIntersecting.value = isIntersectingRaw
+      if (isIntersecting) {
+        intersecting(side)
+      }
+    }
+    
+    function intersecting (side: InfiniteScrollSide) {
+      if (!isIntersecting.value) return
       const status = getStatus(side)
       if (!rootEl.value || status === 'loading') return
 
@@ -180,6 +190,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
           }
+          intersecting(side)
         })
       }
 
@@ -191,7 +202,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     function renderSide (side: InfiniteScrollSide, status: InfiniteScrollStatus) {
       if (props.side !== side && props.side !== 'both') return
 
-      const onClick = () => handleIntersect(side)
+      const onClick = () => intersecting(side)
       const slotProps = { side, props: { onClick, color: props.color } }
 
       if (status === 'error') return slots.error?.(slotProps)
