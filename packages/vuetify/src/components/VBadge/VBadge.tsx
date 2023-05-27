@@ -51,7 +51,7 @@ export const makeVBadgeProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeTransitionProps({ transition: 'scale-rotate-transition' }),
-}, 'v-badge')
+}, 'VBadge')
 
 export const VBadge = genericComponent<VBadgeSlots>()({
   name: 'VBadge',

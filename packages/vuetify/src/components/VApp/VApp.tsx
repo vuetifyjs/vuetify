@@ -14,7 +14,7 @@ export const makeVAppProps = propsFactory({
   ...makeComponentProps(),
   ...makeLayoutProps({ fullHeight: true }),
   ...makeThemeProps(),
-}, 'v-app')
+}, 'VApp')
 
 export const VApp = genericComponent()({
   name: 'VApp',

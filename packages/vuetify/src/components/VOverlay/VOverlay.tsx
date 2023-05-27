@@ -108,7 +108,7 @@ export const makeVOverlayProps = propsFactory({
   ...makeScrollStrategyProps(),
   ...makeThemeProps(),
   ...makeTransitionProps(),
-}, 'v-overlay')
+}, 'VOverlay')
 
 export const VOverlay = genericComponent<OverlaySlots>()({
   name: 'VOverlay',

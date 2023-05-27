@@ -20,7 +20,7 @@ export const makeVHoverProps = propsFactory({
   },
 
   ...makeDelayProps(),
-}, 'v-hover')
+}, 'VHover')
 
 export const VHover = genericComponent<VHoverSlots>()({
   name: 'VHover',

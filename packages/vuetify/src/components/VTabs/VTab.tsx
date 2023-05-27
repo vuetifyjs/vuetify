@@ -37,7 +37,7 @@ export const makeVTabProps = propsFactory({
     'position',
     'symbol',
   ]),
-}, 'v-tabs')
+}, 'VTab')
 
 export const VTab = genericComponent()({
   name: 'VTab',

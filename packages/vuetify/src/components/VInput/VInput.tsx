@@ -61,7 +61,7 @@ export const makeVInputProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeValidationProps(),
-}, 'v-input')
+}, 'VInput')
 
 export type VInputSlots = {
   default: VInputSlot

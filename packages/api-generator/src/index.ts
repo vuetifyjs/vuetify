@@ -15,7 +15,6 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 import { execSync } from 'child_process'
-import { fileURLToPath } from 'url'
 
 type TranslationData = {
   [type in 'props' | 'events' | 'slots' | 'exposed']?: {
@@ -114,12 +113,12 @@ const run = async () => {
       for (const type of ['props', 'events', 'slots', 'exposed']) {
         for (const name in component[type]) {
           if (type === 'props' && !component[type][name].source) {
-            console.warn(`Missing source for ${component.kebabName} ${type}: ${name}`)
+            console.warn(`Missing source for ${component.displayName} ${type}: ${name}`)
           }
 
           const filename = type === 'props'
-            ? kebabCase(component[type][name].source ?? component.componentName)
-            : component.kebabName
+            ? component[type][name].source ?? component.displayName
+            : component.displayName
 
           for (const locale of locales) {
             const sourceData = await readData(`./src/locale/${locale}/${filename}.json`)
@@ -146,13 +145,14 @@ const run = async () => {
   // Composables
   if (!argv.skipComposables) {
     const composables = await Promise.all(generateComposableDataFromTypes().map(async composable => {
+      console.log(composable.name)
       const kebabName = kebabCase(composable.name)
-      await addDescriptions(composable.name, composable.data, [kebabName], locales)
+      await addDescriptions(composable.name, composable.data, locales)
       return { fileName: kebabName, displayName: composable.name, ...composable }
     }))
 
     for (const { displayName, fileName, data } of composables) {
-      await fs.writeFile(path.resolve(outPath, `${fileName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
+      await fs.writeFile(path.resolve(outPath, `${displayName}.json`), JSON.stringify({ displayName, fileName, ...data }, null, 2))
     }
   }
 
@@ -160,10 +160,11 @@ const run = async () => {
   let directives: any[] = []
   if (!argv.skipDirectives) {
     directives = await Promise.all(generateDirectiveDataFromTypes().map(async directive => {
-      const kebabName = kebabCase(directive.name)
-      await addDirectiveDescriptions(directive.name, directive, [kebabName], locales)
+      const name = `v-${kebabCase(directive.name)}`
+      console.log(name)
+      await addDirectiveDescriptions(name, directive, locales)
 
-      return { fileName: kebabName, displayName: `v-${kebabName}`, ...directive }
+      return { fileName: name, displayName: name, ...directive }
     }))
 
     for (const { displayName, fileName, ...directive } of directives) {

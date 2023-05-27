@@ -20,7 +20,7 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number as PropType<Number>,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
-}, 'v-data-table-row')
+}, 'VDataTableRow')
 
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',

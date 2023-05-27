@@ -15,7 +15,7 @@ export interface DataTableItemProps {
 }
 
 // Composables
-export const makeDataTableItemProps = propsFactory({
+export const makeDataTableItemsProps = propsFactory({
   items: {
     type: Array as PropType<DataTableItemProps['items']>,
     default: () => ([]),
@@ -29,7 +29,7 @@ export const makeDataTableItemProps = propsFactory({
     default: null,
   },
   returnObject: Boolean,
-}, 'v-data-table-item')
+}, 'DataTable-items')
 
 export function transformItem (
   props: Omit<DataTableItemProps, 'items'>,

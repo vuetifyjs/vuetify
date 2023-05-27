@@ -73,7 +73,7 @@ export const makeVComboboxProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
-}, 'v-combobox')
+}, 'VCombobox')
 
 export const VCombobox = genericComponent<new <
   T extends readonly any[],

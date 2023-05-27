@@ -72,7 +72,7 @@ export const makeVAutocompleteProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: false }),
-}, 'v-autocomplete')
+}, 'VAutocomplete')
 
 export const VAutocomplete = genericComponent<new <
   T extends readonly any[],

@@ -11,7 +11,7 @@ import { makeVTableProps, VTable } from '@/components/VTable/VTable'
 import { makeDataTableExpandProps, provideExpanded } from './composables/expand'
 import { createGroupBy, makeDataTableGroupProps, provideGroupBy, useGroupedItems } from './composables/group'
 import { createHeaders, makeDataTableHeaderProps } from './composables/headers'
-import { makeDataTableItemProps, useDataTableItems } from './composables/items'
+import { makeDataTableItemsProps, useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
 import { createPagination, makeDataTablePaginateProps, providePagination, usePaginatedItems } from './composables/paginate'
 import { makeDataTableSelectProps, provideSelection } from './composables/select'
@@ -74,19 +74,19 @@ export const makeDataTableProps = propsFactory({
   ...makeDataTableExpandProps(),
   ...makeDataTableGroupProps(),
   ...makeDataTableHeaderProps(),
-  ...makeDataTableItemProps(),
+  ...makeDataTableItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
   ...makeVDataTableHeadersProps(),
   ...makeVTableProps(),
-}, 'data-table')
+}, 'DataTable')
 
 export const makeVDataTableProps = propsFactory({
   ...makeDataTablePaginateProps(),
   ...makeDataTableProps(),
   ...makeFilterProps(),
   ...makeVDataTableFooterProps(),
-}, 'v-data-table')
+}, 'VDataTable')
 
 export const VDataTable = genericComponent<VDataTableSlots>()({
   name: 'VDataTable',

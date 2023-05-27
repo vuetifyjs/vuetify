@@ -32,7 +32,7 @@ export const makeVColorPickerCanvasProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-color-picker-canvas')
+}, 'VColorPickerCanvas')
 
 export const VColorPickerCanvas = defineComponent({
   name: 'VColorPickerCanvas',

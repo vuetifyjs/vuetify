@@ -84,7 +84,7 @@ async function createMdFile (component: Record<string, any>, locale: string) {
   for (const section of ['props', 'events', 'slots', 'exposed', 'sass', 'options', 'argument', 'modifiers']) {
     if (Object.keys(component[section] ?? {}).length) {
       str += `## ${messages[section]} {#${section}}\n\n`
-      str += `<api-section name="${component.fileName}" section="${section}" />\n\n`
+      str += `<api-section name="${component.displayName}" section="${section}" />\n\n`
     }
   }
 

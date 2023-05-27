@@ -26,7 +26,7 @@ type VBtnToggleSlots = {
 export const makeVBtnToggleProps = propsFactory({
   ...makeVBtnGroupProps(),
   ...makeGroupProps(),
-}, 'v-btn-toggle')
+}, 'VBtnToggle')
 
 export const VBtnToggle = genericComponent<VBtnToggleSlots>()({
   name: 'VBtnToggle',

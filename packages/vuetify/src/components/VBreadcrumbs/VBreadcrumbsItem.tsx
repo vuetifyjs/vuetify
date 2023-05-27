@@ -19,7 +19,7 @@ export const makeVBreadcrumbsItemProps = propsFactory({
   ...makeComponentProps(),
   ...makeRouterProps(),
   ...makeTagProps({ tag: 'li' }),
-}, 'v-breadcrumbs-item')
+}, 'VBreadcrumbsItem')
 
 export const VBreadcrumbsItem = genericComponent()({
   name: 'VBreadcrumbsItem',

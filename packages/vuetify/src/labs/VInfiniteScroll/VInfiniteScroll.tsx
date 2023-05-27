@@ -63,7 +63,7 @@ export const makeVInfiniteScrollProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeTagProps(),
-}, 'v-infinite-scroll')
+}, 'VInfiniteScroll')
 
 export const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',

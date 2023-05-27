@@ -82,7 +82,7 @@ export const makeVBtnProps = propsFactory({
   ...makeTagProps({ tag: 'button' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'v-btn')
+}, 'VBtn')
 
 export const VBtn = genericComponent<VBtnSlots>()({
   name: 'VBtn',

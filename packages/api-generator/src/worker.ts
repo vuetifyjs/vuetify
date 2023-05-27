@@ -12,20 +12,19 @@ export default async (json: string) => {
   console.log(componentName)
 
   try {
-    const kebabName = kebabCase(componentName)
     const componentData = await generateComponentDataFromTypes(componentName)
 
-    const sources = addPropData(kebabName, componentData as any, componentProps)
+    const sources = addPropData(componentName, componentData as any, componentProps)
 
-    await addDescriptions(kebabName, componentData as any, sources, locales)
+    await addDescriptions(componentName, componentData as any, locales, sources)
 
     const sass = parseSassVariables(componentName)
 
     await mkdirp(outPath)
 
-    const component = { displayName: kebabName, fileName: kebabName, ...componentData, sass }
+    const component = { displayName: componentName, fileName: kebabCase(componentName), ...componentData, sass }
 
-    await fs.writeFile(path.resolve(outPath, `${component.fileName}.json`), JSON.stringify(component, null, 2))
+    await fs.writeFile(path.resolve(outPath, `${componentName}.json`), JSON.stringify(component, null, 2))
 
     return component
   } catch (err) {

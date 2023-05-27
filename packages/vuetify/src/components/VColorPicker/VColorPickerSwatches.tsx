@@ -35,7 +35,7 @@ export const makeVColorPickerSwatchesProps = propsFactory({
   maxHeight: [Number, String],
 
   ...makeComponentProps(),
-}, 'v-color-picker-swatches')
+}, 'VColorPickerSwatches')
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {

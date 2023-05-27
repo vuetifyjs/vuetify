@@ -26,7 +26,7 @@ export const makeVSystemBarProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-system-bar')
+}, 'VSystemBar')
 
 export const VSystemBar = genericComponent()({
   name: 'VSystemBar',

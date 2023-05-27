@@ -58,7 +58,7 @@ export const makeVToolbarProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'header' }),
   ...makeThemeProps(),
-}, 'v-toolbar')
+}, 'VToolbar')
 
 export type VToolbarSlots = {
   default: never

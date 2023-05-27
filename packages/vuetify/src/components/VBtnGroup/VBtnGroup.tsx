@@ -27,7 +27,7 @@ export const makeVBtnGroupProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps(),
-}, 'v-btn-group')
+}, 'VBtnGroup')
 
 export const VBtnGroup = genericComponent()({
   name: 'VBtnGroup',

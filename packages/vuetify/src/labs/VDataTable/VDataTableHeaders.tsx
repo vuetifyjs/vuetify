@@ -67,7 +67,7 @@ export const makeVDataTableHeadersProps = propsFactory({
   },
 
   ...makeLoaderProps(),
-}, 'v-data-table-headers')
+}, 'VDataTableHeaders')
 
 export const VDataTableHeaders = genericComponent<VDataTableHeadersSlots>()({
   name: 'VDataTableHeaders',
