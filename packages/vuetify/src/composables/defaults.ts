@@ -35,7 +35,7 @@ export function provideDefaults (
   options?: {
     disabled?: MaybeRef<boolean | undefined>
     reset?: MaybeRef<number | string | undefined>
-    root?: MaybeRef<boolean | undefined>
+    root?: MaybeRef<boolean | string | undefined>
     scoped?: MaybeRef<boolean | undefined>
   }
 ) {
@@ -64,6 +64,10 @@ export function provideDefaults (
         }
 
         properties = properties.prev
+      }
+
+      if (typeof root === 'string' && root in properties) {
+        properties = mergeDeep(mergeDeep(properties, { prev: properties }), properties[root])
       }
 
       return properties

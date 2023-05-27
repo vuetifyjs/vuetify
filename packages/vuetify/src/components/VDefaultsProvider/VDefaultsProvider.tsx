@@ -13,7 +13,7 @@ export const makeDefaultsProviderProps = propsFactory({
   defaults: Object as PropType<DefaultsOptions>,
   disabled: Boolean,
   reset: [Number, String],
-  root: Boolean,
+  root: [Boolean, String],
   scoped: Boolean,
 }, 'v-defaults-provider')
 
