@@ -1,8 +1,10 @@
 // Components
 import { makeDataTableProps } from './VDataTable'
 import { VDataTableHeaders } from './VDataTableHeaders'
+import { VDataTableRow } from './VDataTableRow'
 import { VDataTableRows } from './VDataTableRows'
 import { VTable } from '@/components/VTable'
+import { VVirtualScrollItem } from '@/components/VVirtualScroll/VVirtualScrollItem'
 
 // Composables
 import { provideExpanded } from './composables/expand'
@@ -12,9 +14,9 @@ import { useDataTableItems } from './composables/items'
 import { useOptions } from './composables/options'
 import { provideSelection } from './composables/select'
 import { createSort, provideSort, useSortedItems } from './composables/sort'
-import { makeDataTableVirtualProps, useVirtual } from './composables/virtual'
 import { provideDefaults } from '@/composables/defaults'
 import { makeFilterProps, useFilter } from '@/composables/filter'
+import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
 import { computed, shallowRef, toRef } from 'vue'
@@ -37,7 +39,7 @@ export type VDataTableVirtualSlots = VDataTableRowsSlots & VDataTableHeadersSlot
 export const makeVDataTableVirtualProps = propsFactory({
   ...makeDataTableProps(),
   ...makeDataTableGroupProps(),
-  ...makeDataTableVirtualProps(),
+  ...makeVirtualProps(),
   ...makeFilterProps(),
 }, 'v-data-table-virtual')
 
@@ -83,19 +85,17 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
     })
     const { isExpanded, toggleExpand } = provideExpanded(props)
 
+    const headerHeight = computed(() => headers.value.length * 56)
+
     const {
       containerRef,
       paddingTop,
       paddingBottom,
-      startIndex,
-      stopIndex,
-      itemHeight,
+      computedItems,
+      handleItemResize,
       handleScroll,
-    } = useVirtual(props, flatItems)
-
-    const visibleItems = computed(() => {
-      return flatItems.value.slice(startIndex.value, stopIndex.value)
-    })
+    } = useVirtual(props, flatItems, headerHeight)
+    const displayItems = computed(() => computedItems.value.map(item => item.raw))
 
     useOptions({
       sortBy,
@@ -147,10 +147,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
             },
             props.class,
           ]}
-          style={[
-            { '--v-table-row-height': convertToUnit(itemHeight.value) },
-            props.style,
-          ]}
+          style={ props.style }
           { ...tableProps }
         >
           {{
@@ -179,9 +176,31 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
                     <VDataTableRows
                       { ...dataTableRowsProps }
-                      items={ visibleItems.value }
-                      v-slots={ slots }
-                    />
+                      items={ displayItems.value }
+                    >
+                      {{
+                        ...slots,
+                        item: itemSlotProps => {
+                          return slots.item?.(itemSlotProps) ?? (
+                            <VVirtualScrollItem
+                              key={ itemSlotProps.item.index }
+                              dynamicHeight
+                              renderless
+                              onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
+                            >
+                              { slotProps => (
+                                <VDataTableRow
+                                  { ...itemSlotProps.props }
+                                  { ...slotProps?.props }
+                                  key={ itemSlotProps.item.index }
+                                  v-slots={ slots }
+                                />
+                              )}
+                            </VVirtualScrollItem>
+                          )
+                        },
+                      }}
+                    </VDataTableRows>
 
                     <tr style={{ height: convertToUnit(paddingBottom.value), border: 0 }}>
                       <td colspan={ columns.value.length } style={{ height: convertToUnit(paddingBottom.value), border: 0 }}></td>

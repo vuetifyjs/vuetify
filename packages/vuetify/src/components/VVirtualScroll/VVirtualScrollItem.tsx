@@ -9,11 +9,12 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 export const makeVVirtualScrollItemProps = propsFactory({
   dynamicHeight: Boolean,
+  renderless: Boolean,
 
   ...makeComponentProps(),
 }, 'v-virtual-scroll-item')
 
-export const VVirtualScrollItem = genericComponent()({
+export const VVirtualScrollItem = genericComponent<{ default: { props: Record<string, any> } | void }>()({
   name: 'VVirtualScrollItem',
 
   props: makeVVirtualScrollItemProps(),
@@ -39,7 +40,11 @@ export const VVirtualScrollItem = genericComponent()({
 
     onUpdated(updateHeight)
 
-    useRender(() => (
+    useRender(() => props.renderless ? (
+      <>
+        { slots.default?.({ props: { ref: props.dynamicHeight ? resizeRef : undefined } }) }
+      </>
+    ) : (
       <div
         ref={ props.dynamicHeight ? resizeRef : undefined }
         class={[

@@ -34,6 +34,7 @@ export const makeDataTableItemProps = propsFactory({
 export function transformItem (
   props: Omit<DataTableItemProps, 'items'>,
   item: any,
+  index: number,
   columns: InternalDataTableHeader[]
 ): DataTableItem {
   const value = props.returnObject ? item : getPropertyFromItem(item, props.itemValue)
@@ -45,6 +46,7 @@ export function transformItem (
 
   return {
     type: 'item',
+    index,
     value,
     selectable,
     columns: itemColumns,
@@ -56,14 +58,8 @@ export function transformItems (
   props: Omit<DataTableItemProps, 'items'>,
   items: DataTableItemProps['items'],
   columns: InternalDataTableHeader[]
-) {
-  const array: DataTableItem[] = []
-
-  for (const item of items) {
-    array.push(transformItem(props, item, columns))
-  }
-
-  return array
+): DataTableItem[] {
+  return items.map((item, index) => transformItem(props, item, index, columns))
 }
 
 export function useDataTableItems (props: DataTableItemProps, columns: Ref<InternalDataTableHeader[]>) {

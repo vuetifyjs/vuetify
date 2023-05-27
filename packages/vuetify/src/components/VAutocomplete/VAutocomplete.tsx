@@ -292,6 +292,9 @@ export const VAutocomplete = genericComponent<new <
     function onFocusout (e: FocusEvent) {
       listHasFocus.value = false
     }
+    function onUpdateModelValue (v: any) {
+      if (v == null || (v === '' && !props.multiple)) model.value = []
+    }
 
     const isSelecting = shallowRef(false)
 
@@ -363,7 +366,7 @@ export const VAutocomplete = genericComponent<new <
           ref={ vTextFieldRef }
           { ...textFieldProps }
           modelValue={ search.value }
-          onUpdate:modelValue={ v => { if (v == null) model.value = [] } }
+          onUpdate:modelValue={ onUpdateModelValue }
           v-model:focused={ isFocused.value }
           validationValue={ model.externalValue }
           dirty={ isDirty }

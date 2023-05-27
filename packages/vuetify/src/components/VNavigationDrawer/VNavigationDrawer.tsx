@@ -15,6 +15,7 @@ import { makeLayoutItemProps, useLayoutItem } from '@/composables/layout'
 import { useProxiedModel } from '@/composables/proxiedModel'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { useRouter } from '@/composables/router'
+import { useScopeId } from '@/composables/scopeId'
 import { useSsrBoot } from '@/composables/ssrBoot'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
@@ -106,6 +107,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
     const router = useRouter()
     const isActive = useProxiedModel(props, 'modelValue', null, v => !!v)
     const { ssrBootStyles } = useSsrBoot()
+    const { scopeId } = useScopeId()
 
     const rootEl = ref<HTMLElement>()
     const isHovering = shallowRef(false)
@@ -239,6 +241,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
               stickyStyles.value,
               props.style,
             ]}
+            { ...scopeId }
             { ...attrs }
           >
             { hasImage && (
@@ -273,6 +276,7 @@ export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
                 class={['v-navigation-drawer__scrim', scrimColor.backgroundColorClasses.value]}
                 style={[scrimStyles.value, scrimColor.backgroundColorStyles.value]}
                 onClick={ () => isActive.value = false }
+                { ...scopeId }
               />
             )}
           </Transition>

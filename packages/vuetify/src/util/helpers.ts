@@ -131,8 +131,10 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+  return obj && '$el' in obj
+    ? obj.$el as HTMLElement
+    : obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases

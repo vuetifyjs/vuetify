@@ -43,7 +43,7 @@ type ItemSlot = {
 }
 
 export type VDataTableRowsSlots = VDataTableGroupHeaderRowSlots & {
-  item: ItemSlot
+  item: ItemSlot & { props: Record<string, any> }
   loading: never
   'group-header': GroupHeaderSlot
   'no-data': never
@@ -141,21 +141,28 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
               toggleExpand,
               isSelected,
               toggleSelect,
-            } as ItemSlot
+            } satisfies ItemSlot
+
+            const itemSlotProps = {
+              ...slotProps,
+              props: {
+                key: `item_${item.value}`,
+                onClick: expandOnClick.value || props['onClick:row'] ? (event: Event) => {
+                  if (expandOnClick.value) {
+                    toggleExpand(item)
+                  }
+                  props['onClick:row']?.(event, { item })
+                } : undefined,
+                index,
+                item,
+              },
+            }
 
             return (
               <>
-                { slots.item ? slots.item(slotProps) : (
+                { slots.item ? slots.item(itemSlotProps) : (
                   <VDataTableRow
-                    key={ `item_${item.value}` }
-                    onClick={ expandOnClick.value || props['onClick:row'] ? (event: Event) => {
-                      if (expandOnClick.value) {
-                        toggleExpand(item)
-                      }
-                      props['onClick:row']?.(event, { item })
-                    } : undefined }
-                    index={ index }
-                    item={ item }
+                    { ...itemSlotProps.props }
                     v-slots={ slots }
                   />
                 )}
