@@ -83,7 +83,6 @@ export const VInfiniteScrollIntersect = defineComponent({
 
   setup (props, { emit }) {
     const { intersectionRef, isIntersecting } = useIntersectionObserver(entries => {
-      console.log('-entries')
     }, props.rootMargin ? {
       root: props.rootRef,
       rootMargin: props.rootMargin,
