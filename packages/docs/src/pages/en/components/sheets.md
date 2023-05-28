@@ -14,6 +14,8 @@ related:
 
 The `v-sheet` component is a transformable piece of _paper_ that provides a basic foundation for Vuetify features.
 
+![Sheet Entry](https://cdn.vuetifyjs.com/docs/images/components/v-sheet/v-sheet-entry.png)
+
 ----
 
 ## Usage
@@ -31,6 +33,16 @@ The sheet component has support for elevation, rounded corners, color, and more.
 | [v-sheet](/api/v-sheet/) | Primary Component |
 
 <api-inline hide-links />
+
+## Anatomy
+
+The `v-sheet` component contains only a default slot.
+
+![Sheet Anatomy](https://cdn.vuetifyjs.com/docs/images/components/v-sheet/v-sheet-anatomy.png)
+
+| Element / Area | Description |
+| - | - |
+| 1. Container | The main content area |
 
 ## Guide
 
