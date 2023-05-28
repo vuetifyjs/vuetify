@@ -26,7 +26,7 @@ export const makeVDataTableGroupHeaderRowProps = propsFactory({
     type: Object as PropType<Group>,
     required: true,
   },
-}, 'v-data-table-group-header-row')
+}, 'VDataTableGroupHeaderRow')
 
 export const VDataTableGroupHeaderRow = genericComponent<VDataTableGroupHeaderRowSlots>()({
   name: 'VDataTableGroupHeaderRow',

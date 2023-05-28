@@ -35,7 +35,7 @@ export const makeVSliderProps = propsFactory({
     type: [Number, String],
     default: 0,
   },
-}, 'v-slider')
+}, 'VSlider')
 
 export const VSlider = genericComponent<VSliderSlots>()({
   name: 'VSlider',

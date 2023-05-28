@@ -53,13 +53,13 @@ export const makeSelectionControlGroupProps = propsFactory({
   ...makeComponentProps(),
   ...makeDensityProps(),
   ...makeThemeProps(),
-}, 'selection-control-group')
+}, 'SelectionControlGroup')
 
 export const makeVSelectionControlGroupProps = propsFactory({
   ...makeSelectionControlGroupProps({
     defaultsTarget: 'VSelectionControl',
   }),
-}, 'v-selection-control-group')
+}, 'VSelectionControlGroup')
 
 export const VSelectionControlGroup = genericComponent()({
   name: 'VSelectionControlGroup',

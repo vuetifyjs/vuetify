@@ -128,7 +128,7 @@ export const makeVPaginationProps = propsFactory({
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-pagination')
+}, 'VPagination')
 
 export const VPagination = genericComponent<VPaginationSlots>()({
   name: 'VPagination',

@@ -33,7 +33,7 @@ export const makeVResponsiveProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
-}, 'v-responsive')
+}, 'VResponsive')
 
 export const VResponsive = genericComponent<VResponsiveSlots>()({
   name: 'VResponsive',

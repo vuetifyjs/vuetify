@@ -27,7 +27,7 @@ export const makeVCounterProps = propsFactory({
   ...makeTransitionProps({
     transition: { component: VSlideYTransition as Component },
   }),
-}, 'v-counter')
+}, 'VCounter')
 
 export type VCounterSlot = {
   counter: string

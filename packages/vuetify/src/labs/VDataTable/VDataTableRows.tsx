@@ -69,7 +69,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   rowHeight: Number,
   'onClick:row': Function as PropType<(e: Event, value: { item: DataTableItem }) => void>,
-}, 'v-data-table-rows')
+}, 'VDataTableRows')
 
 export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
   name: 'VDataTableRows',

@@ -55,7 +55,7 @@ export const makeVBannerProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-banner')
+}, 'VBanner')
 
 export const VBanner = genericComponent<VBannerSlots>()({
   name: 'VBanner',

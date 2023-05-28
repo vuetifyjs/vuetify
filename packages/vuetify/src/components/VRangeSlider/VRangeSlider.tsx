@@ -31,7 +31,7 @@ export const makeVRangeSliderProps = propsFactory({
     type: Array as PropType<readonly number[]>,
     default: () => ([0, 0]),
   },
-}, 'v-range-slider')
+}, 'VRangeSlider')
 
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',

@@ -22,7 +22,7 @@ export const makeVDividerProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeThemeProps(),
-}, 'v-divider')
+}, 'VDivider')
 
 export const VDivider = genericComponent()({
   name: 'VDivider',

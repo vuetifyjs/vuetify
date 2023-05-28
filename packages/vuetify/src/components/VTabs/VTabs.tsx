@@ -56,7 +56,7 @@ export const makeVTabsProps = propsFactory({
   ...makeVSlideGroupProps({ mandatory: 'force' as const }),
   ...makeDensityProps(),
   ...makeTagProps(),
-}, 'v-tabs')
+}, 'VTabs')
 
 export const VTabs = genericComponent()({
   name: 'VTabs',

@@ -34,7 +34,7 @@ export const makeVDialogProps = propsFactory({
     transition: { component: VDialogTransition as Component },
     zIndex: 2400,
   }),
-}, 'v-dialog')
+}, 'VDialog')
 
 export const VDialog = genericComponent<OverlaySlots>()({
   name: 'VDialog',

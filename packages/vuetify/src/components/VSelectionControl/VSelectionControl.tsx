@@ -48,7 +48,7 @@ export type VSelectionControlSlots = {
   input: SelectionControlSlot
 }
 
-export const makeSelectionControlProps = propsFactory({
+export const makeVSelectionControlProps = propsFactory({
   label: String,
   trueValue: null,
   falseValue: null,
@@ -56,10 +56,10 @@ export const makeSelectionControlProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
-}, 'v-selection-control')
+}, 'VSelectionControl')
 
 export function useSelectionControl (
-  props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
+  props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
     'onUpdate:modelValue': ((val: any) => void) | undefined
   }
 ) {
@@ -138,7 +138,7 @@ export const VSelectionControl = genericComponent<new <T>(
 
   inheritAttrs: false,
 
-  props: makeSelectionControlProps(),
+  props: makeVSelectionControlProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,

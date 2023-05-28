@@ -29,7 +29,7 @@ export const makeVSheetProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-sheet')
+}, 'VSheet')
 
 export const VSheet = genericComponent()({
   name: 'VSheet',

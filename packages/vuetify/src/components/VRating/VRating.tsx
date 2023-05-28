@@ -86,7 +86,7 @@ export const makeVRatingProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-rating')
+}, 'VRating')
 
 export const VRating = genericComponent<VRatingSlots>()({
   name: 'VRating',
