@@ -6,7 +6,7 @@ import importMapLabs from 'vuetify/dist/json/importMap-labs.json' assert { type:
 import { kebabCase } from './helpers/text'
 import { generateComposableDataFromTypes, generateDirectiveDataFromTypes } from './types'
 import Piscina from 'piscina'
-import { addDescriptions, addDirectiveDescriptions, stringifyProps } from './utils'
+import { addDescriptions, addDirectiveDescriptions, addPropData, stringifyProps } from './utils'
 import * as os from 'os'
 import mkdirp from 'mkdirp'
 import { createVeturApi } from './vetur'
@@ -15,6 +15,7 @@ import { createWebTypesApi } from './web-types'
 import inspector from 'inspector'
 import yargs from 'yargs'
 import { execSync } from 'child_process'
+import { parseSassVariables } from './helpers/sass'
 
 type TranslationData = {
   [type in 'props' | 'events' | 'slots' | 'exposed']?: {
@@ -43,7 +44,8 @@ const componentsInfo = {
 
 const run = async () => {
   const argv = await yar.argv
-  const locales = ['en']
+
+  const locales = await fs.readdir('./src/locale', 'utf-8')
 
   // Components
   const pool = new Piscina({
@@ -66,19 +68,22 @@ const run = async () => {
   }
 
   const outPath = path.resolve('./dist/api')
+  await mkdirp(outPath)
 
   const componentData = await Promise.all(
-    Object.entries(components).map(([componentName, componentInstance]) => {
+    Object.entries(components).map(async ([componentName, componentInstance]) => {
       if (argv.components && !argv.components.includes(componentName)) return null
 
-      return pool.run(
-        JSON.stringify({
-          componentName,
-          componentProps: stringifyProps(componentInstance.props),
-          locales,
-          outPath,
-        })
-      )
+      const data = await pool.run(componentName)
+      const componentProps = stringifyProps(componentInstance.props)
+      const sources = addPropData(componentName, data, componentProps)
+      await addDescriptions(componentName, data, locales, sources)
+      const sass = parseSassVariables(componentName)
+
+      const component = { displayName: componentName, fileName: kebabCase(componentName), ...data, sass }
+      await fs.writeFile(path.resolve(outPath, `${componentName}.json`), JSON.stringify(component, null, 2))
+
+      return component
     }).filter(Boolean)
   )
 

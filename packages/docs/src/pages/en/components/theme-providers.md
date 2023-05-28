@@ -1,6 +1,6 @@
 ---
-nav: Theme providers
 meta:
+  nav: Theme providers
   title: Theme provider component
   description: The theme provider allows you to style a section of your application in a different theme from the default
   keywords: theme provider, vuetify theme provider component, vue theme provider component

@@ -1,6 +1,6 @@
 ---
-nav: Virtual scrollers
 meta:
+  nav: Virtual scrollers
   title: Virtual scroll component
   description: The Virtual scroll component is a container that renders only visible elements. It is useful when you need to display large amounts of uniform data.
   keywords: virtual scroll, vuetify virtual scroll component, vue virtual scroll component, v-virtual-scroll component

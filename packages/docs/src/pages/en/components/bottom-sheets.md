@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Bottom sheets
 meta:
+  nav: Bottom sheets
   title: Bottom sheet component
   description: The bottom sheet component is used for elevating content above other elements in a dialog style fashion.
   keywords: bottom sheets, vuetify bottom sheet component, vue bottom sheet component

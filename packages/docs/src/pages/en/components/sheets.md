@@ -1,6 +1,6 @@
 ---
-nav: Sheets
 meta:
+  nav: Sheets
   title: Sheet component
   description: The sheet component is the baseline for many Material Design implementations used in Vuetify.
   keywords: sheets, vuetify sheet component, vue sheet component, paper, material design paper, material design sheets

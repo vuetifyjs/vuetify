@@ -7,7 +7,7 @@ import type { ViteSSGContext } from '@vuetify/vite-ssg'
 // Globals
 import { IN_BROWSER } from '@/util/globals'
 
-export function useAuth0 (ctx: ViteSSGContext) {
+export function installAuth0 (ctx: ViteSSGContext) {
   if (!IN_BROWSER) return
 
   ctx.app.use(
