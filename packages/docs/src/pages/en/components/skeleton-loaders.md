@@ -19,6 +19,12 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 
 ----
 
+<alert type="warning">
+
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
+</alert>
+
 ## Usage
 
 The `v-skeleton-loader` component provides a user with a visual indicator that content is coming / loading. This is better received than traditional full-screen loaders.

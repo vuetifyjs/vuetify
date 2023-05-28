@@ -14,6 +14,14 @@ related:
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
 
+----
+
+<alert type="warning">
+
+This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?version=v3.1.0)
+
+</alert>
+
 ## Usage
 
 There are three variants of the data table available depending on your requirements.

@@ -18,6 +18,12 @@ The `v-virtual-scroll` component displays a virtual, _infinite_ list. It support
 
 ----
 
+<alert type="warning">
+
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
+</alert>
+
 ## Usage
 
 The virtual scroller displays just enough records to fill the viewport and uses the existing component, rehydrating it with new data.

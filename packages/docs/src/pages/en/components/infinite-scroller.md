@@ -17,6 +17,12 @@ The `v-infinite-scroll` component displays a potentially infinite list, by loadi
 
 ----
 
+<alert type="warning">
+
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
+</alert>
+
 ## Usage
 
 When scrolling towards the bottom, new items will be rendered either automatically, or manually with the click of a button.
