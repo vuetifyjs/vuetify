@@ -23,7 +23,7 @@ export const makeVColorPickerPreviewProps = propsFactory({
   hideAlpha: Boolean,
 
   ...makeComponentProps(),
-}, 'v-color-picker-preview')
+}, 'VColorPickerPreview')
 
 export const VColorPickerPreview = defineComponent({
   name: 'VColorPickerPreview',

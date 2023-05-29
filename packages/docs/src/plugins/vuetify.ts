@@ -15,9 +15,9 @@ import { mdi } from 'vuetify/iconsets/mdi-svg'
 import * as mdiSvg from './icons'
 
 // Types
-import type { VuetifyPlugin } from '@/types'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
-export const useVuetify: VuetifyPlugin = ({ app }) => {
+export function installVuetify ({ app }: ViteSSGContext) {
   const vuetify = createVuetify({
     components: {
       ...components,

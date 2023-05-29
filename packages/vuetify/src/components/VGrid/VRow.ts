@@ -111,7 +111,7 @@ export const makeVRowProps = propsFactory({
   ...alignContentProps,
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-row')
+}, 'VRow')
 
 export const VRow = genericComponent()({
   name: 'VRow',

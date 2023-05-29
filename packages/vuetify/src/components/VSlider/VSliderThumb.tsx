@@ -45,7 +45,7 @@ export const makeVSliderThumbProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-slider-thumb')
+}, 'VSliderThumb')
 
 export const VSliderThumb = genericComponent<VSliderThumbSlots>()({
   name: 'VSliderThumb',

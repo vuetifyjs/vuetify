@@ -1,5 +1,5 @@
 // Components
-import { makeSelectionControlProps, useSelectionControl } from '../VSelectionControl'
+import { makeVSelectionControlProps, useSelectionControl } from '../VSelectionControl'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'
@@ -12,7 +12,7 @@ describe('VSelectionControl', () => {
 
   function mountFunction (options = {}) {
     return mount(defineComponent({
-      props: makeSelectionControlProps(),
+      props: makeVSelectionControlProps(),
       setup (props) {
         return useSelectionControl(props as any)
       },

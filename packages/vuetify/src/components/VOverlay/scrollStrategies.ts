@@ -34,7 +34,7 @@ export const makeScrollStrategyProps = propsFactory({
     default: 'block',
     validator: (val: any) => typeof val === 'function' || val in scrollStrategies,
   },
-}, 'v-overlay-scroll-strategies')
+}, 'VOverlay-scroll-strategies')
 
 export function useScrollStrategies (
   props: StrategyProps,

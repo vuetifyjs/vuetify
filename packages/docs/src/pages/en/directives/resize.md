@@ -1,6 +1,6 @@
 ---
-nav: Resize
 meta:
+  nav: Resize
   title: Resize directive
   description: The resize directive provides the ability to conditionally invoke functions when the screen is resized.
   keywords: resize, vuetify resize directive, vue resize directive, window resize directive

@@ -93,7 +93,7 @@ export const makeVFieldProps = propsFactory({
   ...makeLoaderProps(),
   ...makeRoundedProps(),
   ...makeThemeProps(),
-}, 'v-field')
+}, 'VField')
 
 export type VFieldSlots = {
   clear: never

@@ -73,7 +73,7 @@ export const makeVImgProps = propsFactory({
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',

@@ -108,7 +108,7 @@ export const makeVListProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'text' } as const),
-}, 'v-list')
+}, 'VList')
 
 export const VList = genericComponent<new <T>(
   props: {

@@ -51,7 +51,7 @@ export const makeVBottomNavigationProps = propsFactory({
     selectedClass: 'v-btn--selected',
   }),
   ...makeThemeProps(),
-}, 'v-bottom-navigation')
+}, 'VBottomNavigation')
 
 export const VBottomNavigation = genericComponent()({
   name: 'VBottomNavigation',

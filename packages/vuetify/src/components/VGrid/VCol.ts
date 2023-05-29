@@ -105,7 +105,7 @@ export const makeVColProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-col')
+}, 'VCol')
 
 export const VCol = genericComponent()({
   name: 'VCol',

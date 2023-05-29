@@ -31,7 +31,7 @@ export const makeVSliderTrackProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-slider-track')
+}, 'VSliderTrack')
 
 export const VSliderTrack = genericComponent<VSliderTrackSlots>()({
   name: 'VSliderTrack',

@@ -27,7 +27,7 @@ export const makeVTableProps = propsFactory({
   ...makeDensityProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-table')
+}, 'VTable')
 
 export const VTable = genericComponent<VTableSlots>()({
   name: 'VTable',

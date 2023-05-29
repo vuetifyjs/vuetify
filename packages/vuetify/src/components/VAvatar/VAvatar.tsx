@@ -31,7 +31,7 @@ export const makeVAvatarProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-}, 'v-avatar')
+}, 'VAvatar')
 
 export const VAvatar = genericComponent()({
   name: 'VAvatar',

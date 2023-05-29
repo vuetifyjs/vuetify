@@ -18,7 +18,7 @@ export const makeDataTableSortProps = propsFactory({
   customKeySort: Object as PropType<Record<string, DataTableCompareFunction>>,
   multiSort: Boolean,
   mustSort: Boolean,
-}, 'v-data-table-sort')
+}, 'DataTable-sort')
 
 const VDataTableSortSymbol: InjectionKey<{
   sortBy: Ref<readonly SortItem[]>

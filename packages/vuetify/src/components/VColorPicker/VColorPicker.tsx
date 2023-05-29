@@ -22,7 +22,7 @@ import { consoleWarn, defineComponent, HSVtoCSS, omit, parseColor, propsFactory,
 import type { DeepReadonly, PropType } from 'vue'
 import type { Color, HSV } from '@/util'
 
-export const makeVPickerProps = propsFactory({
+export const makeVColorPickerProps = propsFactory({
   canvasHeight: {
     type: [String, Number],
     default: 150,
@@ -63,12 +63,12 @@ export const makeVPickerProps = propsFactory({
     'minWidth',
     'maxWidth',
   ]),
-}, 'v-color-picker')
+}, 'VColorPicker')
 
 export const VColorPicker = defineComponent({
   name: 'VColorPicker',
 
-  props: makeVPickerProps(),
+  props: makeVColorPickerProps(),
 
   emits: {
     'update:modelValue': (color: any) => true,

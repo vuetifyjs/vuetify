@@ -4,7 +4,7 @@ import './VSwitch.sass'
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VProgressCircular } from '@/components/VProgressCircular'
-import { makeSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
+import { makeVSelectionControlProps, VSelectionControl } from '@/components/VSelectionControl/VSelectionControl'
 
 // Composables
 import { useFocus } from '@/composables/focus'
@@ -35,8 +35,8 @@ export const makeVSwitchProps = propsFactory({
   },
 
   ...makeVInputProps(),
-  ...makeSelectionControlProps(),
-}, 'v-switch')
+  ...makeVSelectionControlProps(),
+}, 'VSwitch')
 
 export const VSwitch = genericComponent<VSwitchSlots>()({
   name: 'VSwitch',

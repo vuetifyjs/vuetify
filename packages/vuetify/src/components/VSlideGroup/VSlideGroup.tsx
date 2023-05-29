@@ -72,7 +72,7 @@ export const makeVSlideGroupProps = propsFactory({
   ...makeGroupProps({
     selectedClass: 'v-slide-group-item--active',
   }),
-}, 'v-slide-group')
+}, 'VSlideGroup')
 
 export const VSlideGroup = genericComponent<VSlideGroupSlots>()({
   name: 'VSlideGroup',

@@ -31,7 +31,7 @@ export const makeVFooterProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'footer' }),
   ...makeThemeProps(),
-}, 'v-footer')
+}, 'VFooter')
 
 export const VFooter = genericComponent()({
   name: 'VFooter',

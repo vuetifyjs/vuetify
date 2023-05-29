@@ -47,7 +47,7 @@ export const makeVCarouselProps = propsFactory({
     mandatory: 'force' as const,
     showArrows: true,
   }),
-}, 'v-carousel')
+}, 'VCarousel')
 
 type VCarouselSlots = VWindowSlots & {
   item: {

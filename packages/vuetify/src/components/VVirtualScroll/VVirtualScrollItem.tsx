@@ -12,7 +12,7 @@ export const makeVVirtualScrollItemProps = propsFactory({
   renderless: Boolean,
 
   ...makeComponentProps(),
-}, 'v-virtual-scroll-item')
+}, 'VVirtualScrollItem')
 
 export const VVirtualScrollItem = genericComponent<{ default: { props: Record<string, any> } | void }>()({
   name: 'VVirtualScrollItem',
