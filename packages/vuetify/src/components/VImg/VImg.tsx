@@ -1,14 +1,15 @@
+// Styles
 import './VImg.sass'
 
 // Components
 import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
-// Directives
-import intersect from '@/directives/intersect'
-
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Directives
+import intersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -40,10 +41,10 @@ export interface srcObject {
 }
 
 export type VImgSlots = {
-  default: []
-  placeholder: []
-  error: []
-  sources: []
+  default: never
+  placeholder: never
+  error: never
+  sources: never
 }
 
 export const makeVImgProps = propsFactory({
@@ -72,7 +73,7 @@ export const makeVImgProps = propsFactory({
   ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',

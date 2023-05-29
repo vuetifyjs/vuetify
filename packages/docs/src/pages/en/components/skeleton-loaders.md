@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Skeleton loaders
 meta:
+  nav: Skeleton loaders
   title: Skeleton loader component
   description:  The skeleton loader component provides a placeholder loading state for when content is being fetched from a server or loaded asynchronously. It can be used in a variety of contexts, including cards, lists, and tables.
   keywords: skeleton loaders, vuetify skeleton loader component, vue skeleton loader
@@ -18,6 +18,12 @@ Skeleton loaders provide a simple way to display loading placeholders in your ap
 ![Skeleton loader Entry](https://cdn.vuetifyjs.com/docs/images/components-temp/v-skeleton-loader/v-skeleton-loader-entry.png)
 
 ----
+
+<alert type="warning">
+
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
+</alert>
 
 ## Usage
 

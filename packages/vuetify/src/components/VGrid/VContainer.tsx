@@ -3,8 +3,8 @@ import './VGrid.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
-import { makeTagProps } from '@/composables/tag'
 import { useRtl } from '@/composables/locale'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -17,7 +17,7 @@ export const makeVContainerProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-container')
+}, 'VContainer')
 
 export const VContainer = genericComponent()({
   name: 'VContainer',

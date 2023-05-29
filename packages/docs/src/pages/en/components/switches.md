@@ -1,6 +1,6 @@
 ---
-nav: Switches
 meta:
+  nav: Switches
   title: Switch component
   description: The switch component is a simple and eloquent toggle used to select between two values.
   keywords: switch, switch component, vuetify switch component, vue switch component

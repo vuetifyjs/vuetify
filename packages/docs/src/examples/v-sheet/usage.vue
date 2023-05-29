@@ -45,6 +45,13 @@
       <v-checkbox v-model="border" label="Border"></v-checkbox>
 
       <v-checkbox v-model="rounded" label="Rounded"></v-checkbox>
+
+      <v-slider
+        v-model="elevation"
+        label="Elevation"
+        min="0"
+        max="24"
+      ></v-slider>
     </template>
   </usage-example>
 </template>
@@ -67,11 +74,11 @@
   const props = computed(() => {
     return {
       elevation: elevation.value || undefined,
+      height: 200,
+      width: 200,
       border: border.value || undefined,
-      rounded: rounded.value || undefined,
-      height: 250,
-      width: 250,
       color: color.value || undefined,
+      rounded: rounded.value || undefined,
     }
   })
 

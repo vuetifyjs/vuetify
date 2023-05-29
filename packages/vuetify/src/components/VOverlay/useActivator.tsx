@@ -1,9 +1,10 @@
-// Composables
-import { makeDelayProps, useDelay } from '@/composables/delay'
+// Components
 import { VMenuSymbol } from '@/components/VMenu/shared'
 
+// Composables
+import { makeDelayProps, useDelay } from '@/composables/delay'
+
 // Utilities
-import { getCurrentInstance, IN_BROWSER, isComponentInstance, propsFactory, SUPPORTS_FOCUS_VISIBLE } from '@/util'
 import {
   computed,
   effectScope,
@@ -14,9 +15,15 @@ import {
   watch,
   watchEffect,
 } from 'vue'
+import {
+  getCurrentInstance,
+  IN_BROWSER,
+  propsFactory,
+  refElement,
+  SUPPORTS_FOCUS_VISIBLE,
+} from '@/util'
 
 // Types
-import type { DelayProps } from '@/composables/delay'
 import type {
   ComponentInternalInstance,
   ComponentPublicInstance,
@@ -24,6 +31,7 @@ import type {
   PropType,
   Ref,
 } from 'vue'
+import type { DelayProps } from '@/composables/delay'
 
 interface ActivatorProps extends DelayProps {
   activator?: 'parent' | string | Element | ComponentPublicInstance
@@ -56,7 +64,7 @@ export const makeActivatorProps = propsFactory({
   closeOnContentClick: Boolean,
 
   ...makeDelayProps(),
-}, 'v-overlay-activator')
+}, 'VOverlay-activator')
 
 export function useActivator (
   props: ActivatorProps,
@@ -198,8 +206,7 @@ export function useActivator (
     if (!activatorRef.value) return
 
     nextTick(() => {
-      const activator = activatorRef.value
-      activatorEl.value = isComponentInstance(activator) ? activator.$el : activator
+      activatorEl.value = refElement(activatorRef.value)
     })
   })
 

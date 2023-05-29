@@ -2,9 +2,8 @@
 import './VCheckbox.sass'
 
 // Components
-import type { VInputSlots } from '@/components/VInput/VInput'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { makeVCheckboxBtnProps, VCheckboxBtn } from './VCheckboxBtn'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
 import { useFocus } from '@/composables/focus'
@@ -15,13 +14,14 @@ import { filterInputAttrs, genericComponent, getUid, omit, propsFactory, useRend
 
 // Types
 import type { VSelectionControlSlots } from '../VSelectionControl/VSelectionControl'
+import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
 
 export const makeVCheckboxProps = propsFactory({
   ...makeVInputProps(),
   ...omit(makeVCheckboxBtnProps(), ['inline']),
-}, 'v-checkbox')
+}, 'VCheckbox')
 
 export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',

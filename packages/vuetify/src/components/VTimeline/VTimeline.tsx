@@ -3,11 +3,11 @@ import './VTimeline.sass'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { useRtl } from '@/composables/locale'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { provideDefaults } from '@/composables/defaults'
-import { useRtl } from '@/composables/locale'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -59,7 +59,7 @@ export const makeVTimelineProps = propsFactory({
   ...makeDensityProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-timeline')
+}, 'VTimeline')
 
 export const VTimeline = genericComponent()({
   name: 'VTimeline',

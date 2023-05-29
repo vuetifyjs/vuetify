@@ -1,10 +1,13 @@
 /// <reference types="../../../../types/cypress" />
 
+// Components
+import { VLayout } from '../VLayout'
 import { VAppBar } from '@/components/VAppBar'
 import { VMain } from '@/components/VMain'
 import { VNavigationDrawer } from '@/components/VNavigationDrawer'
+
+// Utilities
 import { createRange } from '@/util'
-import { VLayout } from '../VLayout'
 
 describe('VLayout', () => {
   it('should position main component', () => {

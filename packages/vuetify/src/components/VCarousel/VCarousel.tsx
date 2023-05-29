@@ -2,10 +2,10 @@
 import './VCarousel.sass'
 
 // Components
-import { makeVWindowProps, VWindow, type VWindowSlots } from '@/components/VWindow/VWindow'
 import { VBtn } from '@/components/VBtn'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VProgressLinear } from '@/components/VProgressLinear'
+import { makeVWindowProps, VWindow } from '@/components/VWindow/VWindow'
 
 // Composables
 import { IconValue } from '@/composables/icons'
@@ -13,12 +13,13 @@ import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 import { onMounted, ref, watch } from 'vue'
+import { convertToUnit, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { GroupProvide } from '@/composables/group'
 import type { PropType } from 'vue'
+import type { VWindowSlots } from '@/components/VWindow/VWindow'
+import type { GroupProvide } from '@/composables/group'
 
 export const makeVCarouselProps = propsFactory({
   color: String,
@@ -46,17 +47,17 @@ export const makeVCarouselProps = propsFactory({
     mandatory: 'force' as const,
     showArrows: true,
   }),
-}, 'v-carousel')
+}, 'VCarousel')
 
 type VCarouselSlots = VWindowSlots & {
-  item: [{
+  item: {
     props: Record<string, any>
     item: {
       id: number
       value: unknown
       disabled: boolean | undefined
     }
-  }]
+  }
 }
 
 export const VCarousel = genericComponent<VCarouselSlots>()({

@@ -1,6 +1,6 @@
 ---
-nav: Selects
 meta:
+  nav: Selects
   title: Select component
   description: The select component provides a list of options that a user can make selections from.
   keywords: selects, vuetify select component, vue select component

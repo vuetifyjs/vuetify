@@ -127,12 +127,6 @@ The documentation is located in `packages/docs` but also uses some files from `p
 
 If you want to see changes from Vuetify in the documentation you need to run `yarn build:lib` in the vuetify package before starting the documentation server.
 
-<alert type="info">
-
-Please note that Vuetify v3's documentation is located on the `next` branch and not on the `master` branch.
-
-</alert>
-
 ### Submitting Changes / Pull Requests
 
 First you should create a fork of the vuetify repository to push your changes to. Information on forking repositories can be found in the [GitHub documentation](https://help.github.com/en/github/getting-started-with-github/fork-a-repo).

@@ -2,36 +2,35 @@
 import './VSelect.sass'
 
 // Components
-import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
+import { VDialogTransition } from '@/components/transitions'
 import { VCheckboxBtn } from '@/components/VCheckbox'
 import { VChip } from '@/components/VChip'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VDialogTransition } from '@/components/transitions'
+import { VIcon } from '@/components/VIcon'
 import { VList, VListItem } from '@/components/VList'
 import { VMenu } from '@/components/VMenu'
-import { VIcon } from '@/components/VIcon'
-
 import { VTextField } from '@/components/VTextField'
+import { makeVTextFieldProps } from '@/components/VTextField/VTextField'
 
 // Composables
+import { useForm } from '@/composables/form'
 import { forwardRefs } from '@/composables/forwardRefs'
 import { IconValue } from '@/composables/icons'
 import { makeItemsProps, useItems } from '@/composables/list-items'
-import { makeTransitionProps } from '@/composables/transition'
-import { useForm } from '@/composables/form'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utility
+// Utilities
 import { computed, mergeProps, ref, shallowRef } from 'vue'
 import { deepEqual, genericComponent, omit, propsFactory, useRender, wrapInArray } from '@/util'
 
 // Types
-import type { VInputSlots } from '@/components/VInput/VInput'
+import type { Component, PropType } from 'vue'
 import type { VFieldSlots } from '@/components/VField/VField'
+import type { VInputSlots } from '@/components/VInput/VInput'
 import type { ListItem } from '@/composables/list-items'
 import type { GenericProps } from '@/util'
-import type { Component, PropType } from 'vue'
 
 type Primitive = string | number | boolean | symbol
 
@@ -70,7 +69,7 @@ export const makeSelectProps = propsFactory({
   },
 
   ...makeItemsProps({ itemChildren: false }),
-}, 'select')
+}, 'Select')
 
 export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
@@ -78,7 +77,7 @@ export const makeVSelectProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
-}, 'v-select')
+}, 'VSelect')
 
 export const VSelect = genericComponent<new <
   T extends readonly any[],
@@ -95,12 +94,12 @@ export const VSelect = genericComponent<new <
     'onUpdate:modelValue'?: (val: V) => void
   },
   slots: Omit<VInputSlots & VFieldSlots, 'default'> & {
-    item: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    chip: [{ item: ListItem<Item>, index: number, props: Record<string, unknown> }]
-    selection: [{ item: ListItem<Item>, index: number }]
-    'prepend-item': []
-    'append-item': []
-    'no-data': []
+    item: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    chip: { item: ListItem<Item>, index: number, props: Record<string, unknown> }
+    selection: { item: ListItem<Item>, index: number }
+    'prepend-item': never
+    'append-item': never
+    'no-data': never
   }
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VSelect',

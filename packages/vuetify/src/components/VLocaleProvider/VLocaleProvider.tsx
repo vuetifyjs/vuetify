@@ -18,7 +18,7 @@ export const makeVLocaleProviderProps = propsFactory({
   },
 
   ...makeComponentProps(),
-}, 'v-locale-provider')
+}, 'VLocaleProvider')
 
 export const VLocaleProvider = genericComponent()({
   name: 'VLocaleProvider',

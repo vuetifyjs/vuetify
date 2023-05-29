@@ -4,16 +4,16 @@ import './VSelectionControl.sass'
 // Components
 import { VIcon } from '@/components/VIcon'
 import { VLabel } from '@/components/VLabel'
-import { makeComponentProps } from '@/composables/component'
 import { makeSelectionControlGroupProps, VSelectionControlGroupSymbol } from '@/components/VSelectionControlGroup/VSelectionControlGroup'
+
+// Composables
+import { useTextColor } from '@/composables/color'
+import { makeComponentProps } from '@/composables/component'
+import { useDensity } from '@/composables/density'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import { Ripple } from '@/directives/ripple'
-
-// Composables
-import { useDensity } from '@/composables/density'
-import { useProxiedModel } from '@/composables/proxiedModel'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, inject, nextTick, ref, shallowRef } from 'vue'
@@ -43,12 +43,12 @@ export type SelectionControlSlot = {
 }
 
 export type VSelectionControlSlots = {
-  default: []
-  label: [{ label: string | undefined, props: Record<string, unknown> }]
-  input: [SelectionControlSlot]
+  default: never
+  label: { label: string | undefined, props: Record<string, unknown> }
+  input: SelectionControlSlot
 }
 
-export const makeSelectionControlProps = propsFactory({
+export const makeVSelectionControlProps = propsFactory({
   label: String,
   trueValue: null,
   falseValue: null,
@@ -56,10 +56,10 @@ export const makeSelectionControlProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeSelectionControlGroupProps(),
-}, 'v-selection-control')
+}, 'VSelectionControl')
 
 export function useSelectionControl (
-  props: ExtractPropTypes<ReturnType<typeof makeSelectionControlProps>> & {
+  props: ExtractPropTypes<ReturnType<typeof makeVSelectionControlProps>> & {
     'onUpdate:modelValue': ((val: any) => void) | undefined
   }
 ) {
@@ -138,7 +138,7 @@ export const VSelectionControl = genericComponent<new <T>(
 
   inheritAttrs: false,
 
-  props: makeSelectionControlProps(),
+  props: makeVSelectionControlProps(),
 
   emits: {
     'update:modelValue': (val: any) => true,
