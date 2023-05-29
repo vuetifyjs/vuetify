@@ -189,7 +189,12 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
           }
-          intersecting(side)
+          window.requestAnimationFrame(() => {
+            window.requestAnimationFrame(() => {
+              intersecting(side)
+            })
+          })
+          
         })
       }
 
