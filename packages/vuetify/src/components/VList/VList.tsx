@@ -228,6 +228,7 @@ export const VList = genericComponent<new <T>(
             dimensionStyles.value,
             props.style,
           ]}
+          tabindex={ (props.disabled || isFocused.value) ? -1 : 0 }
           role="listbox"
           aria-activedescendant={ undefined }
           onFocusin={ onFocusin }
