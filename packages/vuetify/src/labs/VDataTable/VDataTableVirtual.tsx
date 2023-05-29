@@ -41,7 +41,7 @@ export const makeVDataTableVirtualProps = propsFactory({
   ...makeDataTableGroupProps(),
   ...makeVirtualProps(),
   ...makeFilterProps(),
-}, 'v-data-table-virtual')
+}, 'VDataTableVirtual')
 
 export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
   name: 'VDataTableVirtual',

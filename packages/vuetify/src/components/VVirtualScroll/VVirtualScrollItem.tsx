@@ -14,7 +14,7 @@ export const makeVVirtualScrollItemProps = propsFactory({
   renderless: Boolean,
 
   ...makeComponentProps(),
-}, 'v-virtual-scroll-item')
+}, 'VVirtualScrollItem')
 
 export const VVirtualScrollItem = genericComponent<new <Renderless extends boolean = false>(
   props: {

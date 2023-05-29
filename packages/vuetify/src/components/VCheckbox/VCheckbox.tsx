@@ -21,7 +21,7 @@ export type VCheckboxSlots = VInputSlots & VSelectionControlSlots
 export const makeVCheckboxProps = propsFactory({
   ...makeVInputProps(),
   ...omit(makeVCheckboxBtnProps(), ['inline']),
-}, 'v-checkbox')
+}, 'VCheckbox')
 
 export const VCheckbox = genericComponent<VCheckboxSlots>()({
   name: 'VCheckbox',

@@ -38,7 +38,7 @@ export const makeVProgressCircularProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
-}, 'v-progress-circular')
+}, 'VProgressCircular')
 
 type VProgressCircularSlots = {
   default: { value: number }

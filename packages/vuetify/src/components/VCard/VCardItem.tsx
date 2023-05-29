@@ -30,7 +30,7 @@ export const makeCardItemProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeDensityProps(),
-}, 'v-card-item')
+}, 'VCardItem')
 
 export const VCardItem = genericComponent<VCardItemSlots>()({
   name: 'VCardItem',

@@ -40,7 +40,7 @@ export const makeVMessagesProps = propsFactory({
       group: true,
     },
   }),
-}, 'v-messages')
+}, 'VMessages')
 
 export const VMessages = genericComponent<VMessagesSlots>()({
   name: 'VMessages',

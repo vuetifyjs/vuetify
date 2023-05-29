@@ -70,7 +70,7 @@ export const makeSelectProps = propsFactory({
   },
 
   ...makeItemsProps({ itemChildren: false }),
-}, 'select')
+}, 'Select')
 
 export const makeVSelectProps = propsFactory({
   ...makeSelectProps(),
@@ -78,7 +78,7 @@ export const makeVSelectProps = propsFactory({
     modelValue: null,
   }), ['validationValue', 'dirty', 'appendInnerIcon']),
   ...makeTransitionProps({ transition: { component: VDialogTransition as Component } }),
-}, 'v-select')
+}, 'VSelect')
 
 export const VSelect = genericComponent<new <
   T extends readonly any[],

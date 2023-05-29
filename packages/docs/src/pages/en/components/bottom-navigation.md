@@ -1,6 +1,6 @@
 ---
-nav: Bottom navigation
 meta:
+  nav: Bottom navigation
   title: Bottom navigation component
   description: The bottom navigation component is used for mobile devices and acts as the primary navigation for your application.
   keywords: bottom navigation, vuetify bottom navigation component, vue bottom navigation component

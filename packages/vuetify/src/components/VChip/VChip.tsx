@@ -99,7 +99,7 @@ export const makeVChipProps = propsFactory({
   ...makeTagProps({ tag: 'span' }),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
-}, 'v-chip')
+}, 'VChip')
 
 export const VChip = genericComponent<VChipSlots>()({
   name: 'VChip',

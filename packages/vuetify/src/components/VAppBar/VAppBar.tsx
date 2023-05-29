@@ -39,7 +39,7 @@ export const makeVAppBarProps = propsFactory({
     type: [Number, String],
     default: 64,
   },
-}, 'v-app-bar')
+}, 'VAppBar')
 
 export const VAppBar = genericComponent<VToolbarSlots>()({
   name: 'VAppBar',

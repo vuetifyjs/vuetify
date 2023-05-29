@@ -13,7 +13,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVExpansionPanelTextProps = propsFactory({
   ...makeComponentProps(),
   ...makeLazyProps(),
-}, 'v-expansion-panel-text')
+}, 'VExpansionPanelText')
 
 export const VExpansionPanelText = genericComponent()({
   name: 'VExpansionPanelText',

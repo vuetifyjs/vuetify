@@ -16,7 +16,7 @@ export const makeDataTableExpandProps = propsFactory({
     type: Array as PropType<readonly string[]>,
     default: () => ([]),
   },
-}, 'v-data-table-expand')
+}, 'DataTable-expand')
 
 export const VDataTableExpandedKey: InjectionKey<{
   expand: (item: DataTableItem, value: boolean) => void

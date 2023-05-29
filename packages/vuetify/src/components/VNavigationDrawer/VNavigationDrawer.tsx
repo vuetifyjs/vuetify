@@ -84,7 +84,7 @@ export const makeVNavigationDrawerProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'nav' }),
   ...makeThemeProps(),
-}, 'v-navigation-drawer')
+}, 'VNavigationDrawer')
 
 export const VNavigationDrawer = genericComponent<VNavigationDrawerSlots>()({
   name: 'VNavigationDrawer',

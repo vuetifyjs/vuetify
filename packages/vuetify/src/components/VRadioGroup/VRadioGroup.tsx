@@ -42,7 +42,7 @@ export const makeVRadioGroupProps = propsFactory({
     type: String,
     default: 'radio',
   },
-}, 'v-radio-group')
+}, 'VRadioGroup')
 
 export const VRadioGroup = genericComponent<VRadioGroupSlots>()({
   name: 'VRadioGroup',

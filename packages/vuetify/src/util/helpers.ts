@@ -572,7 +572,7 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
   if (!location) {
-    if (!el.contains(document.activeElement)) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
   } else if (location === 'first') {

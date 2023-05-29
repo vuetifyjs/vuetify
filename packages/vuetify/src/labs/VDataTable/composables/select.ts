@@ -86,7 +86,7 @@ export const makeDataTableSelectProps = propsFactory({
     type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
-}, 'v-data-table-select')
+}, 'DataTable-select')
 
 export const VDataTableSelectionSymbol: InjectionKey<ReturnType<typeof provideSelection>> = Symbol.for('vuetify:data-table-selection')
 

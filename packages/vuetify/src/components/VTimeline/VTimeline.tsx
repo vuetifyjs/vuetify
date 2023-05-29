@@ -59,7 +59,7 @@ export const makeVTimelineProps = propsFactory({
   ...makeDensityProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-timeline')
+}, 'VTimeline')
 
 export const VTimeline = genericComponent()({
   name: 'VTimeline',

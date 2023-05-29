@@ -39,7 +39,7 @@ export const makeVTooltipProps = propsFactory({
     'absolute',
     'persistent',
   ]),
-}, 'v-tooltip')
+}, 'VTooltip')
 
 export const VTooltip = genericComponent<OverlaySlots>()({
   name: 'VTooltip',

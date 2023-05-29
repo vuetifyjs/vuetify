@@ -43,7 +43,7 @@ export const makeVTimelineItemProps = propsFactory({
   ...makeRoundedProps(),
   ...makeSizeProps(),
   ...makeTagProps(),
-}, 'v-timeline-item')
+}, 'VTimelineItem')
 
 export const VTimelineItem = genericComponent<VTimelineItemSlots>()({
   name: 'VTimelineItem',

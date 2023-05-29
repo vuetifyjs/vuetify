@@ -1,5 +1,5 @@
 // Composables
-import { makeDataIteratorItemProps, useDataIteratorItems } from './composables/items'
+import { makeDataIteratorItemsProps, useDataIteratorItems } from './composables/items'
 import { makeComponentProps } from '@/composables/component'
 import { makeFilterProps, useFilter } from '@/composables/filter'
 import { useProxiedModel } from '@/composables/proxiedModel'
@@ -54,7 +54,7 @@ export const makeVDataIteratorProps = propsFactory({
   loading: Boolean,
 
   ...makeComponentProps(),
-  ...makeDataIteratorItemProps(),
+  ...makeDataIteratorItemsProps(),
   ...makeDataTableSelectProps(),
   ...makeDataTableSortProps(),
   ...makeDataTablePaginateProps({ itemsPerPage: 5 }),
@@ -62,7 +62,7 @@ export const makeVDataIteratorProps = propsFactory({
   ...makeDataTableGroupProps(),
   ...makeFilterProps(),
   ...makeTagProps(),
-}, 'v-data-iterator')
+}, 'VDataIterator')
 
 export const VDataIterator = genericComponent<VDataIteratorSlots>()({
   name: 'VDataIterator',
