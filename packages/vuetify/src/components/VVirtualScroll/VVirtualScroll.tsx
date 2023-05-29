@@ -10,7 +10,7 @@ import { makeDimensionProps, useDimension } from '@/composables/dimensions'
 import { makeVirtualProps, useVirtual } from '@/composables/virtual'
 
 // Utilities
-import { ref, toRef } from 'vue'
+import { toRef } from 'vue'
 import {
   convertToUnit,
   genericComponent,
@@ -59,7 +59,7 @@ export const VVirtualScroll = genericComponent<new <T>(
       paddingTop,
       paddingBottom,
       virtualItems,
-    } = useVirtual(props, toRef(props, 'items'), ref(0), false)
+    } = useVirtual(props, toRef(props, 'items'))
 
     useRender(() => (
       <div
@@ -83,8 +83,8 @@ export const VVirtualScroll = genericComponent<new <T>(
         >
           { virtualItems.value.map((item, index) => (
             <VVirtualScrollItem
-              key={ index }
-              id={ index }
+              key={ item.key }
+              virtualKey={ item.key }
               dynamicHeight={ !props.itemHeight }
             >
               { slots.default?.({ item, index }) }

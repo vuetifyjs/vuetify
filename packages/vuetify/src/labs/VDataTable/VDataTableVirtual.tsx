@@ -92,7 +92,7 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
       paddingBottom,
       virtualItems,
       handleScroll,
-    } = useVirtual(props, expandedItems, headerHeight, true)
+    } = useVirtual(props, expandedItems, headerHeight, item => item.key)
 
     useOptions({
       sortBy,
@@ -173,8 +173,8 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
 
                     <VDataTableRows
                       { ...dataTableRowsProps }
-                      items={ virtualItems.value }
                       virtual
+                      items={ virtualItems.value }
                       v-slots={ slots }
                     ></VDataTableRows>
 

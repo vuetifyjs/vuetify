@@ -10,7 +10,7 @@ import { useSelection } from './composables/select'
 import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
+import { GenericProps, genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -44,7 +44,7 @@ export const makeVDataTableRowsProps = propsFactory({
   },
   hideNoData: Boolean,
   items: {
-    type: Array as PropType<readonly (DataTableItem | Group | Expanded)[]>,
+    type: Array as PropType<readonly any[]>,
     default: () => ([]),
   },
   noDataText: {
@@ -56,7 +56,19 @@ export const makeVDataTableRowsProps = propsFactory({
   virtual: Boolean,
 }, 'VDataTableRows')
 
-export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
+type Keyed<T> = { key: number | string, item: T }
+
+export const VDataTableRows = genericComponent<new <
+  T extends DataTableItem | Group<DataTableItem> | Expanded<DataTableItem>,
+  Virtual extends boolean = false,
+  Item = Virtual extends true ? Keyed<T> : T,
+>(
+props: {
+  items?: Item[]
+  virtual?: Virtual
+},
+slots: VDataTableRowsSlots
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VDataTableRows',
 
   props: makeVDataTableRowsProps(),
@@ -140,12 +152,11 @@ export const VDataTableRows = genericComponent<VDataTableRowsSlots>()({
             if (props.virtual) {
               return (
                 <VVirtualScrollItem
-                  key={ item.key }
-                  id={ item.key }
+                  virtualKey={ item.key }
                   dynamicHeight
                   renderless
                 >
-                  { slotProps => makeRow(item, slotProps) }
+                  { slotProps => makeRow(item.item, slotProps) }
                 </VVirtualScrollItem>
               )
             }
