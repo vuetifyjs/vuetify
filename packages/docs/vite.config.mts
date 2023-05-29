@@ -209,10 +209,9 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Examples(),
 
       {
-        name: 'vuetify:codepen-blocks',
+        name: 'vuetify:example-blocks',
         transform (code, id) {
-          const type = id.includes('vue&type=codepen-additional') ? 'codepenAdditional'
-            : id.includes('vue&type=codepen-resources') ? 'codepenResources'
+          const type = id.includes('vue&type=playground-resources') ? 'playgroundResources'
             : null
           if (!type) return
 
