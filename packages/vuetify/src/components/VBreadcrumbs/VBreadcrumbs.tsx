@@ -42,7 +42,7 @@ export const makeVBreadcrumbsProps = propsFactory({
   },
   icon: IconValue,
   items: {
-    type: Array as PropType<BreadcrumbItem[]>,
+    type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
 

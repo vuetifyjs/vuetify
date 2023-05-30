@@ -142,8 +142,8 @@ export const VSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ id.value }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value }
                 />

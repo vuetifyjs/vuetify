@@ -22,6 +22,7 @@ export interface FormProvide {
   isDisabled: ComputedRef<boolean>
   isReadonly: ComputedRef<boolean>
   isValidating: Ref<boolean>
+  isValid: Ref<boolean | null>
   validateOn: Ref<FormProps['validateOn']>
 }
 
@@ -110,13 +111,10 @@ export function createForm (props: FormProps) {
 
   function reset () {
     items.value.forEach(item => item.reset())
-    model.value = null
   }
 
   function resetValidation () {
     items.value.forEach(item => item.resetValidation())
-    errors.value = []
-    model.value = null
   }
 
   watch(items, () => {
@@ -172,6 +170,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validateOn: toRef(props, 'validateOn'),
   })
@@ -181,6 +180,7 @@ export function createForm (props: FormProps) {
     isDisabled,
     isReadonly,
     isValidating,
+    isValid: model,
     items,
     validate,
     reset,

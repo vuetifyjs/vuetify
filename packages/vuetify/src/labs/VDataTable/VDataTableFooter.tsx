@@ -58,7 +58,7 @@ export const makeVDataTableFooterProps = propsFactory({
     default: '$vuetify.dataFooter.lastPage',
   },
   itemsPerPageOptions: {
-    type: Array as PropType<{ title: string, value: number }[]>,
+    type: Array as PropType<readonly { title: string, value: number }[]>,
     default: () => ([
       { value: 10, title: '10' },
       { value: 25, title: '25' },

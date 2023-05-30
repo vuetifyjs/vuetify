@@ -1,5 +1,5 @@
 // Composables
-import { useItems } from '../items'
+import { useItems } from '../list-items'
 
 // Utilities
 import { describe, expect, it } from '@jest/globals'

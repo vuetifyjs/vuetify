@@ -16,16 +16,14 @@
     &.v-field
       cursor: text
 
+    &--variant-outlined
+      --combobox-chips-margin-bottom: #{$combobox-chips-margin-top}
+
   .v-field
     .v-field__input
       > input
         align-self: flex-start
         flex: 1 1
-
-    .v-field__append-inner
-      > .v-icon
-        margin-inline-start: 4px
-        transition: $combobox-transition
 
   .v-field:not(.v-field--focused)
     input
@@ -57,13 +55,11 @@
     line-height: inherit
     max-width: 100%
 
-  &--active-menu
-    .v-field__append-inner
-      > .v-icon
-        opacity: var(--v-high-emphasis-opacity)
-        transform: rotate(180deg)
+  &--chips,
+  &--selection-slot
+    .v-field__input
+      min-height: calc(var(--v-field-input-min-height) + var(--combobox-chips-margin-bottom) + $combobox-chips-margin-top)
 
-  &--chips
     .v-combobox__selection
       margin-top: $combobox-chips-margin-top
       margin-bottom: var(--combobox-chips-margin-bottom)
@@ -102,3 +98,11 @@
     .v-field--focused
       .v-combobox__selection
         opacity: 0
+
+  &__menu-icon
+    margin-inline-start: 4px
+    transition: $combobox-transition
+
+    .v-combobox--active-menu &
+      opacity: var(--v-high-emphasis-opacity)
+      transform: rotate(180deg)

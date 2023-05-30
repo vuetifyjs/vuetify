@@ -16,23 +16,17 @@ jobs:
         include:
           - branch: 'master'
             tag: 'latest'
-            preid: 'prepatch'
           - branch: 'dev'
             tag: 'dev'
-            preid: 'preminor'
           - branch: 'next'
             tag: 'next'
-            preid: 'premajor'
           - branch: 'v2-stable'
             tag: 'v2-stable'
-            preid: 'prepatch'
           - branch: 'v2-dev'
             tag: 'v2-dev'
-            preid: 'preminor'
     env:
       RELEASE_BRANCH: ${{ matrix.branch }}
       RELEASE_TAG: ${{ matrix.tag }}
-      RELEASE_PREID: ${{ matrix.preid }}
     steps:
       - run: |
           git config --global user.email "actions@github.com"
@@ -50,7 +44,7 @@ jobs:
               exit 1
           fi
       - uses: ./.github/actions/yarn-install
-      - run: yarn lerna version --conventional-commits --conventional-prerelease --no-push --no-commit-hooks --preid "$RELEASE_BRANCH-$(date +'%Y%m%d')" --yes
+      - run: yarn lerna version $(node -e "console.log(require('./lerna.json').version)")-$RELEASE_BRANCH.$(date +'%Y-%m-%d') --no-push --no-commit-hooks --force-publish --yes
       - run: yarn conventional-changelog -p angular --outfile ./packages/vuetify/CHANGELOG.md -r 2
       - run: cat ./packages/vuetify/CHANGELOG.md
       - run: >-

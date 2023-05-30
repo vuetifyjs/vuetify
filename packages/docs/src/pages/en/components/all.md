@@ -70,6 +70,12 @@ Containment components wrap other components and provide additional functionalit
 
 </components-list-item>
 
+<components-list-item name="Bottom sheet component" src="bottom-sheets" placeholder>
+
+  The bottom sheet component elevates content from the bottom of the screen
+
+</components-list-item>
+
 <components-list-item name="Overlay component" src="overlays" placeholder>
 
   The overlay component is used to display a custom scrim that sits on top of the application
@@ -299,6 +305,12 @@ These components allow a user to select one or multiple items from a list of opt
 These components are used to display data and information in a variety of ways.
 
 <v-row>
+
+<components-list-item name="Data iterator component" src="data-iterators" placeholder>
+
+  The data iterator component provides an easy interface for paginating and sorting data
+
+</components-list-item>
 
 <components-list-item name="Data table component"  src="data-tables/basics" placeholder>
 

@@ -37,7 +37,7 @@ Within your application, import the **useDate** function and use it to access th
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify/labs'
+  import { useDate } from 'vuetify/labs/date'
 
   export default {
     setup () {
@@ -69,7 +69,7 @@ The following example shows how to use the date composable to format a date stri
 
 ```html { resource="src/views/Date.vue" }
 <script>
-  import { useDate } from 'vuetify/labs'
+  import { useDate } from 'vuetify/labs/date'
 
   export default {
     setup () {
@@ -96,7 +96,7 @@ The following example shows how to use the date composable to format a date stri
 The built-in date adapter implements a subset of functionality from the [DateIOFormats](https://github.com/dmtrKovalenko/date-io/blob/master/packages/core/IUtils.d.ts) interface. Because of this, it's easy to swap in any date library supported by [date-io](https://github.com/dmtrKovalenko/date-io).
 
 ```js { resource="src/plugins/vuetify.js" }
-import { createVuetify } from 'vuetify/labs'
+import { createVuetify } from 'vuetify'
 import LuxonAdapter from "@date-io/luxon"
 
 const luxon = new LuxonAdapter({ locale: "sv" });
