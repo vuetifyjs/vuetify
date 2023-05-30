@@ -167,8 +167,8 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     }
 
     let previousScrollSize = 0
-    function handleIntersect (side: InfiniteScrollSide, isIntersectingRaw: boolean) {
-      isIntersecting.value = isIntersectingRaw
+    function handleIntersect (side: InfiniteScrollSide, _isIntersecting: boolean) {
+      isIntersecting.value = _isIntersecting
       if (isIntersecting.value) {
         intersecting(side)
       }
