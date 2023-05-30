@@ -169,13 +169,14 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
     let previousScrollSize = 0
     function handleIntersect (side: InfiniteScrollSide, isIntersectingRaw: boolean) {
       isIntersecting.value = isIntersectingRaw
-      if (isIntersecting) {
+      if (isIntersecting.value) {
         intersecting(side)
       }
     }
-    
+
     function intersecting (side: InfiniteScrollSide) {
-      if (!isIntersecting.value) return
+      if (props.mode !== 'manual' && !isIntersecting.value) return
+
       const status = getStatus(side)
       if (!rootEl.value || status === 'loading') return
 
@@ -189,12 +190,14 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
           if (status === 'ok' && side === 'start') {
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
           }
-          window.requestAnimationFrame(() => {
+          if (props.mode !== 'manual') {
             window.requestAnimationFrame(() => {
-              intersecting(side)
+              window.requestAnimationFrame(() => {
+                intersecting(side)
+              })
             })
-          })
-          
+
+          }
         })
       }
 
