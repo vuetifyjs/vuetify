@@ -37,9 +37,9 @@ export function provideDefaults (
   }
 ) {
   const injectedDefaults = injectDefaults()
+  const providedDefaults = ref(defaults)
 
   const newDefaults = computed(() => {
-    const providedDefaults = unref(defaults)
     const disabled = unref(options?.disabled)
 
     if (disabled) return injectedDefaults.value
@@ -48,9 +48,7 @@ export function provideDefaults (
     const reset = unref(options?.reset)
     const root = unref(options?.root)
 
-    if (providedDefaults == null && !(scoped || reset || root)) return injectedDefaults.value
-
-    let properties = mergeDeep(providedDefaults, { prev: injectedDefaults.value })
+    let properties = mergeDeep(providedDefaults.value, { prev: injectedDefaults.value })
 
     if (scoped) return properties
 
