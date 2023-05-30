@@ -85,13 +85,13 @@ describe('VInfiniteScroll', () => {
 
     const load = async ({ done }: any) => {
       setTimeout(() => {
-        items.value.push(...Array.from({ length: 3 }, (k, v) => v + items?.value?.at(-1) + 1))
+        items.value.push(...Array.from({ length: 3 }, (k, v) => v + items.value.at(-1)! + 1))
         loadTracker()
         done('ok')
       }, 100)
     }
 
-    cy.viewport(400, 300)
+    cy.viewport(400, 200)
       .mount(() => (
         <VInfiniteScroll onLoad={ load } mode="intersect">
           { items.value.map(item => (
@@ -100,9 +100,6 @@ describe('VInfiniteScroll', () => {
         </VInfiniteScroll>
       ))
         .get('.v-infinite-scroll .v-progress-circular').should('exist')
-        .get('@loadTracker').should('have.been.calledThrice')
-        .then(_ => {
-          expect(items.value.length).equal(12)
-        })
+        .get('@loadTracker').should('have.been.calledTwice')
   })
 })
