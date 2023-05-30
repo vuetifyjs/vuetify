@@ -81,7 +81,7 @@ describe('VInfiniteScroll', () => {
   // https://github.com/vuetifyjs/vuetify/issues/17358
   it('should keep triggering load logic until VInfiniteScrollIntersect disappears', () => {
     const loadTracker = cy.spy().as('loadTracker')
-  	const items = ref(Array.from({ length: 3 }, (k, v) => v + 1))
+    const items = ref(Array.from({ length: 3 }, (k, v) => v + 1))
 
     const load = async ({ done }: any) => {
       setTimeout(() => {
@@ -99,7 +99,7 @@ describe('VInfiniteScroll', () => {
           ))}
         </VInfiniteScroll>
       ))
-        .get('.v-infinite-scroll .v-progress-circular').should('exist')
-        .get('@loadTracker').should('have.been.calledTwice')
+      .get('.v-infinite-scroll .v-progress-circular').should('exist')
+      .get('@loadTracker').should('have.been.calledTwice')
   })
 })

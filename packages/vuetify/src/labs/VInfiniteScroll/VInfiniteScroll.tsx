@@ -195,9 +195,7 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
               window.requestAnimationFrame(() => {
                 intersecting(side)
               })
-
             })
-
           }
         })
       }
