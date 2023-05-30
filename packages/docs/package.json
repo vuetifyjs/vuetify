@@ -50,7 +50,7 @@
     "@types/rimraf": "^3.0.2",
     "@vitejs/plugin-basic-ssl": "^1.0.1",
     "@vitejs/plugin-vue": "^4.2.2",
-    "@vue/compiler-sfc": "^3.3.1",
+    "@vue/compiler-sfc": "^3.3.4",
     "@vuetify/api-generator": "^3.3.2",
     "@vuetify/vite-ssg": "^0.20.2",
     "ajv": "^8.12.0",
