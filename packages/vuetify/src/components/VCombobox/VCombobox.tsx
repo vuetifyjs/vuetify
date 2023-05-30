@@ -444,11 +444,11 @@ export const VCombobox = genericComponent<new <
                       onFocusin={ onFocusin }
                       onFocusout={ onFocusout }
                     >
+                      { slots['prepend-item']?.() }
+
                       { !displayItems.value.length && !props.hideNoData && (slots['no-data']?.() ?? (
                         <VListItem title={ t(props.noDataText) } />
                       ))}
-
-                      { slots['prepend-item']?.() }
 
                       { displayItems.value.map((item, index) => {
                         const itemProps = mergeProps(item.props, {
