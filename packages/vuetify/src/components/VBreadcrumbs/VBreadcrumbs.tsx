@@ -50,7 +50,7 @@ export const makeVBreadcrumbsProps = propsFactory({
   ...makeDensityProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'ul' }),
-}, 'v-breadcrumbs')
+}, 'VBreadcrumbs')
 
 export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
   props: {

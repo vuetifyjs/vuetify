@@ -1,9 +1,9 @@
 ---
 meta:
+  nav: Tables
   title: Table
   description: The table component is a lightweight wrapper around the table element that provides a Material Design feel without all the baggage.
   keywords: table, simple table, vuetify table component, vue simple table component, table component
-nav: 'Tables'
 related:
   - /components/data-tables/basics/
   - /components/data-tables/headers/

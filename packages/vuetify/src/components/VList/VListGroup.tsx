@@ -52,7 +52,7 @@ export const makeVListGroupProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-list-group')
+}, 'VListGroup')
 
 export const VListGroup = genericComponent<VListGroupSlots>()({
   name: 'VListGroup',

@@ -82,7 +82,7 @@ export const makeVAlertProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'flat' } as const),
-}, 'v-alert')
+}, 'VAlert')
 
 export type VAlertSlots = {
   default: never

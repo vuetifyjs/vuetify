@@ -1,8 +1,7 @@
-import { fileURLToPath } from 'url'
 import stringifyObject from 'stringify-object'
 import prettier from 'prettier'
 import typescriptParser from 'prettier/esm/parser-typescript.mjs'
-import type { Definition, ObjectDefinition } from './types'
+import type { Definition } from './types'
 
 function parseFunctionParams (func: string) {
   const [, regular] = /function\s\((.*)\)\s\{.*/i.exec(func) || []
@@ -53,7 +52,7 @@ type ComponentData = {
 }
 
 export function addPropData (
-  kebabName: string,
+  name: string,
   componentData: ComponentData,
   componentProps: any
 ) {
@@ -64,7 +63,7 @@ export function addPropData (
     ;(propObj as any).default = instancePropObj?.default
     ;(propObj as any).source = instancePropObj?.source
 
-    sources.add(instancePropObj?.source ?? kebabName)
+    sources.add(instancePropObj?.source ?? name)
   }
 
   return [...sources.values()]
@@ -98,25 +97,32 @@ export function stringifyProps (props: any) {
   )
 }
 
-async function loadLocale (componentName: string, locale: string, fallback = {}): Promise<Record<string, string | Record<string, string>>> {
+const localeCache = new Map<string, object>()
+async function loadLocale (componentName: string, locale: string): Promise<Record<string, string | Record<string, string>>> {
+  const cacheKey = `${locale}/${componentName}`
+  if (localeCache.has(cacheKey)) {
+    return localeCache.get(cacheKey) as any
+  }
   try {
-    const data = await import(`../src/locale/${locale}/${componentName}.json`, {
+    const data = await import(`../src/locale/${cacheKey}.json`, {
       assert: { type: 'json' },
     })
-    return Object.assign(fallback, data.default)
+    localeCache.set(cacheKey, data.default)
+    return data.default
   } catch (err) {
     if (err.code === 'ERR_MODULE_NOT_FOUND') {
-      console.error(`Missing locale for ${componentName} in ${locale}`)
+      console.error(`Missing locale for ${cacheKey}`)
+      localeCache.set(cacheKey, {})
     } else {
       console.error(err.message)
     }
-    return fallback
+    return {}
   }
 }
 
-async function getSources (kebabName: string, sources: string[], locale: string) {
+async function getSources (name: string, locale: string, sources: string[]) {
   const arr = await Promise.all([
-    loadLocale(kebabName, locale),
+    loadLocale(name, locale),
     ...sources.map(source => loadLocale(source, locale)),
     loadLocale('generic', locale),
   ])
@@ -131,9 +137,9 @@ async function getSources (kebabName: string, sources: string[], locale: string)
   }
 }
 
-export async function addDescriptions (kebabName: string, componentData: ComponentData, sources: string[], locales: string[]) {
+export async function addDescriptions (name: string, componentData: ComponentData, locales: string[], sources: string[] = []) {
   for (const locale of locales) {
-    const descriptions = await getSources(kebabName, sources, locale)
+    const descriptions = await getSources(name, locale, sources)
 
     for (const section of ['props', 'slots', 'events', 'exposed'] as const) {
       for (const [propName, propObj] of Object.entries(componentData[section] ?? {})) {
@@ -146,13 +152,13 @@ export async function addDescriptions (kebabName: string, componentData: Compone
 }
 
 export async function addDirectiveDescriptions (
-  kebabName: string,
+  name: string,
   componentData: { argument: { value: Definition }, modifiers: Record<string, Definition> },
-  sources: string[],
-  locales: string[]
+  locales: string[],
+  sources: string[] = [],
 ) {
   for (const locale of locales) {
-    const descriptions = await getSources(kebabName, sources, locale)
+    const descriptions = await getSources(name, locale, sources)
 
     if (componentData.argument) {
       for (const [name, arg] of Object.entries(componentData.argument)) {

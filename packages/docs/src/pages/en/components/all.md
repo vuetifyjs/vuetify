@@ -1,6 +1,6 @@
 ---
-nav: All Components
 meta:
+  nav: All Components
   title: All Vuetify Components
   description: Browse all of the available Vuetify components or group by category.
   keywords: components, all components, all Vuetify components

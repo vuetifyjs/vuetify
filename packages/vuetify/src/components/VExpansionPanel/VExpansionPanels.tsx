@@ -35,7 +35,7 @@ export const makeVExpansionPanelsProps = propsFactory({
   ...makeGroupProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-expansion-panel')
+}, 'VExpansionPanels')
 
 export const VExpansionPanels = genericComponent()({
   name: 'VExpansionPanels',

@@ -1,5 +1,6 @@
 // Utilities
 import { onBeforeUnmount, readonly, ref, watch } from 'vue'
+import { refElement } from '@/util'
 import { IN_BROWSER } from '@/util/globals'
 
 // Types
@@ -29,11 +30,11 @@ export function useResizeObserver (callback?: ResizeObserverCallback): ResizeSta
 
     watch(resizeRef, (newValue, oldValue) => {
       if (oldValue) {
-        observer.unobserve(oldValue)
+        observer.unobserve(refElement(oldValue))
         contentRect.value = undefined
       }
 
-      if (newValue) observer.observe(newValue)
+      if (newValue) observer.observe(refElement(newValue))
     }, {
       flush: 'post',
     })

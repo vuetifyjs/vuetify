@@ -57,7 +57,7 @@ export const makeVProgressLinearProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-progress-linear')
+}, 'VProgressLinear')
 
 export const VProgressLinear = genericComponent<VProgressLinearSlots>()({
   name: 'VProgressLinear',

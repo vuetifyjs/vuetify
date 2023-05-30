@@ -71,7 +71,7 @@ export const makeVCardProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'elevated' } as const),
-}, 'v-card')
+}, 'VCard')
 
 export type VCardSlots = VCardItemSlots & {
   default: never

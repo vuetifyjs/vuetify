@@ -68,7 +68,7 @@ export const makeVDataTableFooterProps = propsFactory({
     ]),
   },
   showCurrentPage: Boolean,
-}, 'v-data-table-footer')
+}, 'VDataTableFooter')
 
 export const VDataTableFooter = genericComponent<{ prepend: never }>()({
   name: 'VDataTableFooter',

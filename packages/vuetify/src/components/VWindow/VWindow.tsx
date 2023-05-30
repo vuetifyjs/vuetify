@@ -87,7 +87,7 @@ export const makeVWindowProps = propsFactory({
   ...makeComponentProps(),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-window')
+}, 'VWindow')
 
 export const VWindow = genericComponent<VWindowSlots>()({
   name: 'VWindow',

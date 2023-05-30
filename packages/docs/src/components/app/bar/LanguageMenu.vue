@@ -1,7 +1,6 @@
 <template>
   <app-menu
     key="language-menu"
-    :close-on-content-click="false"
     :open-on-hover="false"
     :items="items"
   >

@@ -30,11 +30,14 @@
 
           <tr v-if="item.description || (DEV && item.source)">
             <td colspan="3" class="text-mono pt-4">
-              <app-markdown
-                v-if="item.description"
-                :content="item.description"
-                class="mb-0"
-              />
+              <template v-if="item.description">
+                <app-markdown
+                  v-if="localeStore.locale !== 'eo-UY'"
+                  :content="item.description"
+                  class="mb-0"
+                />
+                <span v-else>{{ item.description }}</span>
+              </template>
 
               <p v-if="DEV && item.source">
                 <strong>source: {{ item.source }}</strong>
@@ -53,6 +56,7 @@
 
   // Utilities
   import { PropType } from 'vue'
+  import { useLocaleStore } from '@/store/locale'
 
   defineProps({
     headers: {
@@ -66,6 +70,7 @@
   })
 
   const { current: theme } = useTheme()
+  const localeStore = useLocaleStore()
 
   const DEV = import.meta.env.DEV
 </script>

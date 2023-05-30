@@ -12,7 +12,7 @@ export const makeDataTableHeaderProps = propsFactory({
     type: Array as PropType<DeepReadonly<DataTableHeader[] | DataTableHeader[][]>>,
     default: () => ([]),
   },
-}, 'v-data-table-header')
+}, 'DataTable-header')
 
 export const VDataTableHeadersSymbol: InjectionKey<{
   headers: Ref<InternalDataTableHeader[][]>

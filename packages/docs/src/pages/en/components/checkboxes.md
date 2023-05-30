@@ -1,6 +1,6 @@
 ---
-nav: Checkboxes
 meta:
+  nav: Checkboxes
   title: Checkbox component
   description: The checkbox component permits users to select between two values.
   keywords: checkbox, checkbox component, vuetify checkbox component, vue checkbox component

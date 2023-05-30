@@ -11,7 +11,7 @@ export const makeVListItemActionProps = propsFactory({
 
   ...makeComponentProps(),
   ...makeTagProps(),
-}, 'v-list-item-action')
+}, 'VListItemAction')
 
 export const VListItemAction = genericComponent()({
   name: 'VListItemAction',

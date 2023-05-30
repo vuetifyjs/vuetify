@@ -45,7 +45,7 @@ export const makeVExpansionPanelTitleProps = propsFactory({
   readonly: Boolean,
 
   ...makeComponentProps(),
-}, 'v-expansion-panel-title')
+}, 'VExpansionPanelTitle')
 
 export const VExpansionPanelTitle = genericComponent<VExpansionPanelTitleSlots>()({
   name: 'VExpansionPanelTitle',

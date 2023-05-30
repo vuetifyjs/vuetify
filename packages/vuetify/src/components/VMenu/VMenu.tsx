@@ -35,7 +35,7 @@ export const makeVMenuProps = propsFactory({
     scrollStrategy: 'reposition' as const,
     transition: { component: VDialogTransition as Component },
   }), ['absolute']),
-}, 'v-menu')
+}, 'VMenu')
 
 export const VMenu = genericComponent<OverlaySlots>()({
   name: 'VMenu',
@@ -111,7 +111,7 @@ export const VMenu = genericComponent<OverlaySlots>()({
           {{
             activator: slots.activator,
             default: (...args) => (
-              <VDefaultsProvider root>
+              <VDefaultsProvider root="VMenu">
                 { slots.default?.(...args) }
               </VDefaultsProvider>
             ),

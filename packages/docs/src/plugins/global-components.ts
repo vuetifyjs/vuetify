@@ -36,9 +36,9 @@ import VueFile from '@/components/examples/VueFile.vue'
 import Vuetify from '@/components/promoted/Vuetify.vue'
 
 // Types
-import type { GlobalComponentsPlugin } from '@/types'
+import type { ViteSSGContext } from '@vuetify/vite-ssg'
 
-export const useGlobalComponents: GlobalComponentsPlugin = ({ app }) => {
+export function installGlobalComponents ({ app }: ViteSSGContext) {
   app
     .component('AppBtn', AppBtn)
     .component('AppCaption', AppCaption)

@@ -11,7 +11,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVLayoutProps = propsFactory({
   ...makeComponentProps(),
   ...makeLayoutProps(),
-}, 'v-layout')
+}, 'VLayout')
 
 export const VLayout = genericComponent()({
   name: 'VLayout',

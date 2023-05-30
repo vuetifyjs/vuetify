@@ -23,7 +23,7 @@ export const makeVIconProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'i' }),
   ...makeThemeProps(),
-}, 'v-icon')
+}, 'VIcon')
 
 export const VIcon = genericComponent()({
   name: 'VIcon',

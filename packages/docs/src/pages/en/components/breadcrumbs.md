@@ -1,6 +1,6 @@
 ---
-nav: Breadcrumbs
 meta:
+  nav: Breadcrumbs
   title: Breadcrumbs component
   description: The breadcrumbs component is a navigational helper for pages. It can accept a Material Icons icon or characters as a divider.
   keywords: breadcrumbs, vuetify breadcrumbs component, vue breadcrumbs component, v-breadcrumbs component

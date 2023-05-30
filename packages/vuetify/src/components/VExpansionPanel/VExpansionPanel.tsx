@@ -28,7 +28,7 @@ export const makeVExpansionPanelProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeVExpansionPanelTitleProps(),
-}, 'v-expansion-panel')
+}, 'VExpansionPanel')
 
 export type VExpansionPanelSlots = {
   default: never

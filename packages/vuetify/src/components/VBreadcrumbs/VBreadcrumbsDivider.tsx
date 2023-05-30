@@ -8,7 +8,7 @@ export const makeVBreadcrumbsDividerProps = propsFactory({
   divider: [Number, String],
 
   ...makeComponentProps(),
-}, 'v-breadcrumbs-divider')
+}, 'VBreadcrumbsDivider')
 
 export const VBreadcrumbsDivider = genericComponent()({
   name: 'VBreadcrumbsDivider',

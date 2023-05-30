@@ -1,6 +1,6 @@
 ---
-nav: Images
 meta:
+  nav: Images
   title: Image component
   description: The image component provides a flexible interface for displaying different types of images.
   keywords: images, vuetify image component, vue image component

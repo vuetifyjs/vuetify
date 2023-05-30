@@ -1,6 +1,6 @@
 ---
-nav: Introduction
 meta:
+  nav: Introduction
   title: Introduction to Labs
   description: A collection of in-development components for testing purposes before final release
   keywords: labs

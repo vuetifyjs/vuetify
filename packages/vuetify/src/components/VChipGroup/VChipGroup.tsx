@@ -31,7 +31,7 @@ export const makeVChipGroupProps = propsFactory({
   ...makeTagProps(),
   ...makeThemeProps(),
   ...makeVariantProps({ variant: 'tonal' } as const),
-}, 'v-chip-group')
+}, 'VChipGroup')
 
 type VChipGroupSlots = {
   default: {

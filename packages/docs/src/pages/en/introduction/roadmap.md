@@ -1,10 +1,10 @@
 ---
 emphasized: true
 meta:
+  nav: Roadmap
   title: The Vuetify roadmap
   description: The upcoming planned features and new functionality coming to Vuetify. New components, new directives, and much much more!.
   keywords: vuetify roadmap, future plans, new vuetify features
-nav: Roadmap
 related:
   - /introduction/long-term-support/
   - /introduction/enterprise-support/

@@ -10,7 +10,7 @@ export const makeVBannerActionsProps = propsFactory({
   density: String,
 
   ...makeComponentProps(),
-}, 'v-banner-actions')
+}, 'VBannerActions')
 
 export const VBannerActions = genericComponent()({
   name: 'VBannerActions',

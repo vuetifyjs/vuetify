@@ -1,6 +1,6 @@
 ---
-nav: Sponsors and backers
 meta:
+  nav: Sponsors and backers
   title: Sponsoring Vuetify
   description: Help support Vuetify by backing the project. This helps with the maintenance of existing features and the development of new ones.
   keywords: sponsor, backer, donations, patron, supporting vuetify, vuetify support

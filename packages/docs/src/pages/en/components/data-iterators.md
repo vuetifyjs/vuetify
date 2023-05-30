@@ -1,7 +1,7 @@
 ---
 emphasized: true
-nav: Data iterators
 meta:
+  nav: Data iterators
   title: Data iterator component
   description: The data iterator component is used for filter and displaying data including sorting, searching, pagination, and selection.
   keywords: data iterators, vuetify data iterator component, vue data iterator component
@@ -18,6 +18,12 @@ The `v-data-iterator` component is used for displaying arbitrary data, and share
 ![Data iterator Entry](https://cdn.vuetifyjs.com/docs/images/components/v-data-iterator/v-data-iterator-entry.png){ placeholder=true }
 
 ----
+
+<alert type="warning">
+
+This feature requires [v3.3.0 (Icarus)](/getting-started/release-notes/?version=v3.3.0)
+
+</alert>
 
 ## Usage
 

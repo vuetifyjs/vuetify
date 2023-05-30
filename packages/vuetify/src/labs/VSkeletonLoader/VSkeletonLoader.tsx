@@ -121,7 +121,7 @@ export const makeVSkeletonLoaderProps = propsFactory({
   ...makeDimensionProps(),
   ...makeElevationProps(),
   ...makeThemeProps(),
-}, 'v-skeleton-loader')
+}, 'VSkeletonLoader')
 
 export const VSkeletonLoader = genericComponent()({
   name: 'VSkeletonLoader',
