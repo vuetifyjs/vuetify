@@ -24,14 +24,15 @@ export const VCalendarDay = genericComponent()({
       return (
         <div
           class={[
-            'v-calendar-day',
+            'v-calendar-weekly__day',
           ]}
         >
           { hasTitle && (
-            <div key="title" class="v-calendar-day__title">
+            <div key="title" class="v-calendar-weekly__day-label">
               { slots.title?.() ?? (
                 <VBtn
                   color={ props.color }
+                  disabled={ props.disabled }
                   icon
                   size="x-small"
                   variant="text"
@@ -43,7 +44,7 @@ export const VCalendarDay = genericComponent()({
           ) }
 
           { slots.content && (
-            <div key="content" class="v-calendar-day__content">
+            <div key="content" class="v-calendar-weekly__day-content">
               { slots.content() }
             </div>
           ) }

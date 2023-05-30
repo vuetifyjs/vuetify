@@ -215,11 +215,11 @@ const firstDay: Record<string, number> = {
 const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
 function getWeekdays (locale: string) {
-  const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
-
+  // TODO: use locale
+  const daysFromSunday = firstDay.US
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
-    weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)
+    weekday.setDate(addDays(sundayJanuarySecond2000, daysFromSunday + i).getDate())
     return new Intl.DateTimeFormat(locale, { weekday: 'long' }).format(weekday)
   })
 }
@@ -243,6 +243,9 @@ function format (value: Date, formatString: string, locale: string): string {
       break
     case 'monthAndYear':
       options = { month: 'long', year: 'numeric' }
+      break
+    case 'dayDate':
+      options = { day: 'numeric' }
       break
     default:
       options = { timeZone: 'UTC', timeZoneName: 'short' }

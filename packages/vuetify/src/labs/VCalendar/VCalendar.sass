@@ -15,6 +15,7 @@
 .v-calendar-weekly__head
   display: flex
   user-select: none
+  border-bottom: 1px solid #e0e0e0
 
 .v-calendar-weekly__head-weekday
   flex: 1 0 20px
@@ -61,9 +62,13 @@
   // https://github.com/vuetifyjs/vuetify/issues/9058
   // https://bugzilla.mozilla.org/show_bug.cgi?id=1114904
   min-width: 0
+  min-height: 100px
   // Themed
   border-right: 1px solid #e0e0e0
   border-bottom: 1px solid #e0e0e0
+  flex: 1 1 auto
+  border-inline-end: 1px solid #e0e0e0
+  text-align: center
 
   &.v-present
     .v-calendar-weekly__day-month
@@ -76,10 +81,11 @@
   box-shadow: none
   text-align: center
   margin: $calendar-weekly-day-label-margin
+  padding: .5rem 0
 
   .v-btn
     font-size: $calendar-weekly-day-label-font-size
-    text-transform: none
+    text-transform: none !important
 
 .v-calendar-weekly__day-month
   position: absolute
@@ -90,17 +96,3 @@
   left: $calendar-weekly-day-month-left
   height: $calendar-weekly-day-label-size
   line-height: $calendar-weekly-day-label-size
-
-// ----
-
-.v-calendar-day
-  min-height: 100px
-  flex: 1 1 auto
-  border-inline-end: 1px solid #e0e0e0
-  text-align: center
-
-.v-calendar-day__title
-  padding: .5rem 0
-
-  > .v-btn
-    text-transform: none !important
