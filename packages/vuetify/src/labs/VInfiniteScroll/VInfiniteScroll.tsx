@@ -191,9 +191,13 @@ export const VInfiniteScroll = genericComponent<VInfiniteScrollSlots>()({
             setScrollAmount(getScrollSize() - previousScrollSize + getScrollAmount())
           }
           if (props.mode !== 'manual') {
-            window.requestAnimationFrame(() => {
+            nextTick(() => {
               window.requestAnimationFrame(() => {
-                intersecting(side)
+                window.requestAnimationFrame(() => {
+                  window.requestAnimationFrame(() => {
+                    intersecting(side)
+                  })
+                })
               })
             })
           }
