@@ -11,11 +11,11 @@ import type { PropType } from 'vue'
 export const makeDateProps = propsFactory({
   modelValue: {
     type: null as unknown as PropType<any[]>,
-    required: true,
+    default: () => [],
   },
   displayDate: {
     type: null as unknown as PropType<any>,
-    required: true,
+    default: new Date(),
   },
   inputMode: {
     type: String as PropType<'calendar' | 'keyboard'>,
