@@ -9,18 +9,19 @@ import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed, onMounted, ref } from 'vue'
-import { convertToUnit, createRange, defineComponent, useRender } from '@/util'
+import { convertToUnit, createRange, genericComponent, propsFactory, useRender } from '@/util'
 
-export const VDatePickerYears = defineComponent({
+export const makeVDatePickerYearsProps = propsFactory({
+  min: Number,
+  max: Number,
+  height: [String, Number],
+  displayDate: null,
+}, 'VDatePickerYears')
+
+export const VDatePickerYears = genericComponent()({
   name: 'VDatePickerYears',
 
-  props: {
-    min: Number,
-    max: Number,
-    viewMode: String,
-    height: [String, Number],
-    displayDate: null,
-  },
+  props: makeVDatePickerYearsProps(),
 
   emits: {
     'update:displayDate': (date: any) => true,

@@ -15,12 +15,12 @@ import { provideDefaults } from '@/composables/defaults'
 
 // Utilities
 import { ref, toRef, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VDateRangeField = defineComponent({
+export const VDateRangeField = genericComponent()({
   name: 'VDateRangeField',
 
   props: {

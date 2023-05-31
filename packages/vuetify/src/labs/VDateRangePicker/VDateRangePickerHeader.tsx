@@ -7,37 +7,39 @@ import { VBtn } from '../../components/VBtn'
 // Composables
 import { useBackgroundColor } from '@/composables/color'
 import { useLocale } from '@/composables/locale'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed } from 'vue'
-import { useDate } from '@/labs/date'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VDateRangePickerHeader = defineComponent({
+export const makeVDateRangePickerHeaderProps = propsFactory({
+  color: String,
+  title: String,
+  header: String,
+  keyboardIcon: {
+    type: String,
+    default: '$edit',
+  },
+  calendarIcon: {
+    type: String,
+    default: '$calendar',
+  },
+  closeIcon: {
+    type: String,
+    default: '$close',
+  },
+  showInputSwitch: Boolean,
+  inputMode: String,
+  modelValue: null,
+  displayDate: null,
+  range: null,
+}, 'VDateRangePickerHeader')
+
+export const VDateRangePickerHeader = genericComponent()({
   name: 'VDateRangePickerHeader',
 
-  props: {
-    color: String,
-    title: String,
-    header: String,
-    keyboardIcon: {
-      type: String,
-      default: '$edit',
-    },
-    calendarIcon: {
-      type: String,
-      default: '$calendar',
-    },
-    closeIcon: {
-      type: String,
-      default: '$close',
-    },
-    showInputSwitch: Boolean,
-    inputMode: String,
-    modelValue: null,
-    displayDate: null,
-    range: null,
-  },
+  props: makeVDateRangePickerHeaderProps(),
 
   emits: {
     cancel: () => true,

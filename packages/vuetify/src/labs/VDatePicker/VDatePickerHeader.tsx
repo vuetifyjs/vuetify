@@ -12,27 +12,30 @@ import { useLocale } from '@/composables/locale'
 import { computed } from 'vue'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
 import { useDate } from '@/labs/date'
-import { defineComponent, omit, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
-export const VDatePickerHeader = defineComponent({
+export const makeVDatePickerHeaderProps = propsFactory({
+  color: String,
+  title: String,
+  header: String,
+  keyboardIcon: {
+    type: String,
+    default: '$edit',
+  },
+  calendarIcon: {
+    type: String,
+    default: '$calendar',
+  },
+  showInputSwitch: Boolean,
+  range: Boolean,
+
+  ...omit(makeDateProps(), ['displayDate', 'viewMode']),
+}, 'VDatePickerHeader')
+
+export const VDatePickerHeader = genericComponent()({
   name: 'VDatePickerHeader',
 
-  props: {
-    color: String,
-    title: String,
-    header: String,
-    keyboardIcon: {
-      type: String,
-      default: '$edit',
-    },
-    calendarIcon: {
-      type: String,
-      default: '$calendar',
-    },
-    showInputSwitch: Boolean,
-    range: Boolean,
-    ...omit(makeDateProps(), ['displayDate', 'viewMode']),
-  },
+  props: makeVDatePickerHeaderProps(),
 
   emits: {
     ...omit(dateEmits, ['update:modelValue', 'update:viewMode', 'update:modelValue']),

@@ -2,9 +2,9 @@
 import './VDateCard.sass'
 
 // Components
-import { VDatePickerControls } from './VDatePickerControls'
-import { VDatePickerMonth } from './VDatePickerMonth'
-import { VDatePickerYears } from './VDatePickerYears'
+import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'
+import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
+import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VCard } from '@/components/VCard'
 
 // Composables
@@ -12,31 +12,29 @@ import { createDatePicker } from './composables'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VDateCard = defineComponent({
+export const makeVDateCardProps = propsFactory({
+  inputMode: {
+    type: String as PropType<'keyboard' | 'calendar'>,
+    default: 'calendar',
+  },
+
+  ...makeVDatePickerControlsProps(),
+  ...makeVDatePickerMonthProps(),
+  ...makeVDatePickerYearsProps(),
+  ...makeTransitionProps({ transition: 'fade' }),
+
+  modelValue: null,
+}, 'VDateCard')
+
+export const VDateCard = genericComponent()({
   name: 'VDateCard',
 
-  props: {
-    color: String,
-    inputMode: {
-      type: String as PropType<'keyboard' | 'calendar'>,
-      default: 'calendar',
-    },
-    viewMode: {
-      type: String as PropType<'month' | 'year'>,
-      default: 'month',
-    },
-    modelValue: null,
-    displayDate: null,
-    ...makeTransitionProps({
-      transition: 'fade',
-    }),
-    range: Boolean,
-  },
+  props: makeVDateCardProps(),
 
   emits: {
     'update:modelValue': (value: any) => true,
@@ -48,37 +46,43 @@ export const VDateCard = defineComponent({
   setup (props, { emit }) {
     createDatePicker(props)
 
-    useRender(() => (
-      <VCard
-        class="v-date-card"
-      >
-        <VDatePickerControls
-          displayDate={ props.displayDate }
-          onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-          viewMode={ props.viewMode }
-          onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
-        />
-        <MaybeTransition transition={ props.transition } mode="out-in">
-          { props.viewMode === 'month' ? (
-            <div class="v-date-card__month">
-              <VDatePickerMonth
-                modelValue={ props.modelValue }
-                onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
-                displayDate={ props.displayDate }
+    useRender(() => {
+      const [cardProps] = VCard.filterProps(props)
+      const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
+      const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
+      const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
+
+      return (
+        <VCard
+          { ...cardProps }
+          class="v-date-card"
+        >
+          <VDatePickerControls
+            { ...datePickerControlsProps }
+            onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+            onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
+          />
+
+          <MaybeTransition transition={ props.transition } mode="out-in">
+            { props.viewMode === 'month' ? (
+              <div class="v-date-card__month">
+                <VDatePickerMonth
+                  { ...datePickerMonthProps }
+                  onUpdate:modelValue={ modelValue => emit('update:modelValue', modelValue) }
+                  onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                />
+              </div>
+            ) : (
+              <VDatePickerYears
+                { ...datePickerYearsProps }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
+                onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
               />
-            </div>
-          ) : (
-            <VDatePickerYears
-              displayDate={ props.displayDate }
-              onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-              viewMode={ props.viewMode }
-              onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
-            />
-          )}
-        </MaybeTransition>
-      </VCard>
-    ))
+            )}
+          </MaybeTransition>
+        </VCard>
+      )
+    })
 
     return {}
   },

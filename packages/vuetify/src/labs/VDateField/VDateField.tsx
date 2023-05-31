@@ -14,36 +14,38 @@ import { useDisplay } from '@/composables'
 
 // Utilities
 import { ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 
-export const VDateField = defineComponent({
+export const makeVDateFieldProps = propsFactory({
+  prependInnerIcon: {
+    type: String,
+    default: '$calendar',
+  },
+  placeholder: {
+    type: String,
+    default: 'mm/dd/yyyy',
+  },
+  label: String,
+  mobile: Boolean,
+  ...makeDateProps(),
+  modelValue: {
+    type: null as unknown as PropType<any>,
+  },
+  displayDate: {
+    type: null as unknown as PropType<any>,
+  },
+  format: {
+    type: String,
+  },
+}, 'VDateField')
+
+export const VDateField = genericComponent()({
   name: 'VDateField',
 
-  props: {
-    prependInnerIcon: {
-      type: String,
-      default: '$calendar',
-    },
-    placeholder: {
-      type: String,
-      default: 'mm/dd/yyyy',
-    },
-    label: String,
-    mobile: Boolean,
-    ...makeDateProps(),
-    modelValue: {
-      type: null as unknown as PropType<any>,
-    },
-    displayDate: {
-      type: null as unknown as PropType<any>,
-    },
-    format: {
-      type: String,
-    },
-  },
+  props: makeVDateFieldProps(),
 
   emits: {
     ...dateEmits,

@@ -10,36 +10,39 @@ import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
-import { defineComponent, omit } from '@/util'
+import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
 import { useDate } from '@/labs/date'
 
-export const VDatePickerMonth = defineComponent({
+export const makeVDatePickerMonthProps = propsFactory({
+  color: {
+    type: String,
+    default: 'primary',
+  },
+  hideAdjacentMonths: Boolean,
+  hideWeekdays: Boolean,
+  showWeek: Boolean,
+  range: {
+    default: false,
+    type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
+    validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
+  },
+  hoverDate: null,
+  multiple: Boolean,
+  side: {
+    type: String,
+  },
+
+  ...omit(makeDateProps(), ['inputMode', 'viewMode']),
+}, 'VDatePickerMonth')
+
+export const VDatePickerMonth = genericComponent()({
   name: 'VDatePickerMonth',
 
-  props: {
-    color: {
-      type: String,
-      default: 'primary',
-    },
-    hideAdjacentMonths: Boolean,
-    hideWeekdays: Boolean,
-    showWeek: Boolean,
-    range: {
-      default: false,
-      type: [String, Boolean] as PropType<'start' | 'end' | boolean>,
-      validator: (v: any) => typeof v === 'boolean' || ['start', 'end'].includes(v),
-    },
-    hoverDate: null,
-    multiple: Boolean,
-    side: {
-      type: String,
-    },
-    ...omit(makeDateProps(), ['inputMode', 'viewMode']),
-  },
+  props: makeVDatePickerMonthProps(),
 
   emits: {
     ...omit(dateEmits, ['update:inputMode', 'update:viewMode']),

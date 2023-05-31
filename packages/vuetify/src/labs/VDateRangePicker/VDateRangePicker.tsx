@@ -9,36 +9,34 @@ import { VPicker } from '@/labs/VPicker'
 // Composables
 import { createDatePicker } from '../VDatePicker/composables'
 import { makeTransitionProps } from '@/composables/transition'
+import { useDate } from '@/labs/date'
+import { makeVPickerProps } from '@/labs/VPicker/VPicker'
 
 // Utilities
 import { ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VDateRangePickerHeader } from './VDateRangePickerHeader'
-import { VDateRangePickerMonth } from './VDateRangePickerMonth'
-import { useDate } from '@/labs/date'
+import { makeVDateRangePickerHeaderProps, VDateRangePickerHeader } from './VDateRangePickerHeader'
+import { makeVDateRangePickerMonthProps, VDateRangePickerMonth } from './VDateRangePickerMonth'
 
-export const VDateRangePicker = defineComponent({
+export const makeVDateRangePickerProps = propsFactory({
+  viewMode: {
+    type: String as PropType<'month' | 'years'>,
+    default: 'month',
+  },
+
+  ...makeVPickerProps(),
+  ...makeVDateRangePickerHeaderProps(),
+  ...makeVDateRangePickerMonthProps(),
+  ...makeTransitionProps({ transition: 'fade' }),
+}, 'VDateRangePicker')
+
+export const VDateRangePicker = genericComponent()({
   name: 'VDateRangePicker',
 
-  props: {
-    color: String,
-    inputMode: {
-      type: String as PropType<'keyboard' | 'calendar'>,
-      default: 'calendar',
-    },
-    viewMode: {
-      type: String as PropType<'month' | 'years'>,
-      default: 'month',
-    },
-    modelValue: null,
-    displayDate: null,
-    ...makeTransitionProps({
-      transition: 'fade',
-    }),
-  },
+  props: makeVDateRangePickerProps(),
 
   emits: {
     'update:modelValue': (date: any) => true,
@@ -90,6 +88,8 @@ export const VDateRangePicker = defineComponent({
 
     useRender(() => {
       const [pickerProps] = VPicker.filterProps(props)
+      const [dateRangePickerHeaderProps] = VDateRangePickerHeader.filterProps(props)
+      const [dateRangePickerMonthProps] = VDateRangePickerMonth.filterProps(props)
 
       return (
         <VPicker
@@ -103,20 +103,18 @@ export const VDateRangePicker = defineComponent({
           v-slots={{
             header: () => (
               <VDateRangePickerHeader
+                { ...dateRangePickerHeaderProps }
                 modelValue={ selected.value }
-                displayDate={ props.displayDate }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                inputMode={ props.inputMode }
                 onUpdate:inputMode={ inputMode => emit('update:inputMode', inputMode) }
-                color={ props.color }
                 onCancel={ handleCancel }
                 onSave={ handleSave }
               />
             ),
             default: () => props.inputMode === 'calendar' ? (
               <VDateRangePickerMonth
+                { ...dateRangePickerMonthProps }
                 v-model={ selected.value }
-                displayDate={ props.displayDate }
               />
             ) : (
               <div class="v-date-range-picker__input">

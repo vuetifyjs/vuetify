@@ -11,35 +11,37 @@ import { useDate } from '@/labs/date'
 // Utilities
 import { computed } from 'vue'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
-import { defineComponent, omit, useRender } from '@/util'
+import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
-export const VDatePickerControls = defineComponent({
+export const makeVDatePickerControlsProps = propsFactory({
+  nextIcon: {
+    type: [String],
+    default: '$next',
+  },
+  prevIcon: {
+    type: [String],
+    default: '$prev',
+  },
+  expandIcon: {
+    type: [String],
+    default: '$expand',
+  },
+  collapseIcon: {
+    type: [String],
+    default: '$collapse',
+  },
+  range: {
+    default: false,
+    type: [String, Boolean],
+    validator: (v: any) => v === false || ['start', 'end'].includes(v),
+  },
+  ...omit(makeDateProps(), ['modelValue', 'inputMode']),
+}, 'VDatePickerControls')
+
+export const VDatePickerControls = genericComponent()({
   name: 'VDatePickerControls',
 
-  props: {
-    nextIcon: {
-      type: [String],
-      default: '$next',
-    },
-    prevIcon: {
-      type: [String],
-      default: '$prev',
-    },
-    expandIcon: {
-      type: [String],
-      default: '$expand',
-    },
-    collapseIcon: {
-      type: [String],
-      default: '$collapse',
-    },
-    range: {
-      default: false,
-      type: [String, Boolean],
-      validator: (v: any) => v === false || ['start', 'end'].includes(v),
-    },
-    ...omit(makeDateProps(), ['modelValue', 'inputMode']),
-  },
+  props: makeVDatePickerControlsProps(),
 
   emits: {
     ...omit(dateEmits, ['update:modelValue', 'update:inputMode']),
