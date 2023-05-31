@@ -19,9 +19,19 @@ export const makeVItemGroupProps = propsFactory({
   }),
   ...makeTagProps(),
   ...makeThemeProps(),
-}, 'v-item-group')
+}, 'VItemGroup')
 
-export const VItemGroup = genericComponent()({
+type VItemGroupSlots = {
+  default: {
+    isSelected: (id: number) => boolean
+    select: (id: number, value: boolean) => void
+    next: () => void
+    prev: () => void
+    selected: readonly number[]
+  }
+}
+
+export const VItemGroup = genericComponent<VItemGroupSlots>()({
   name: 'VItemGroup',
 
   props: makeVItemGroupProps(),

@@ -1,4 +1,4 @@
-// Components
+// Composables
 import { VClassIcon } from '@/composables/icons'
 
 // Types

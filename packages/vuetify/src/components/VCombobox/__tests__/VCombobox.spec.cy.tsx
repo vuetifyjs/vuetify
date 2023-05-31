@@ -1,9 +1,50 @@
 /// <reference types="../../../../types/cypress" />
 
-import { VForm } from '@/components/VForm'
+// Components
 import { VCombobox } from '../VCombobox'
-import { ref } from 'vue'
+import { VForm } from '@/components/VForm'
+
+// Utilities
+import { cloneVNode, ref } from 'vue'
+import { generate } from '../../../../cypress/templates'
 import { keyValues } from '@/util'
+
+const variants = ['underlined', 'outlined', 'filled', 'solo', 'plain'] as const
+const densities = ['default', 'comfortable', 'compact'] as const
+const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
+
+const stories = Object.fromEntries(Object.entries({
+  'Default input': <VCombobox />,
+  Disabled: <VCombobox items={ items } disabled />,
+  Affixes: <VCombobox items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VCombobox items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VCombobox items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VCombobox items={ items } placeholder="placeholder" persistentPlaceholder />,
+}).map(([k, v]) => [k, (
+  <div class="d-flex flex-column flex-grow-1">
+    { variants.map(variant => (
+      densities.map(density => (
+        <div class="d-flex align-start" style="gap: 0.4rem; height: 100px;">
+          { cloneVNode(v, { variant, density, label: `${variant} ${density}` }) }
+          { cloneVNode(v, { variant, density, label: `with value`, modelValue: ['California'] }) }
+          { cloneVNode(v, { variant, density, label: `chips`, chips: true, modelValue: ['California'] }) }
+          <VCombobox
+            variant={ variant }
+            density={ density }
+            modelValue={['California']}
+            label="selection slot"
+            { ...v.props }
+          >{{
+            selection: ({ item }) => {
+              return item.title
+            },
+          }}
+          </VCombobox>
+        </div>
+      ))
+    )).flat()}
+  </div>
+)]))
 
 describe('VCombobox', () => {
   describe('closableChips', () => {
@@ -494,5 +535,32 @@ describe('VCombobox', () => {
       .should('have.class', 'v-combobox--active-menu')
       .trigger('keydown', { key: keyValues.esc })
       .should('not.have.class', 'v-combobox--active-menu')
+  })
+
+  it('should auto-select-first item when pressing enter', () => {
+    cy
+      .mount(() => (
+        <VCombobox
+          items={['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming']}
+          multiple
+          autoSelectFirst
+        />
+      ))
+      .get('.v-combobox')
+      .click()
+      .get('.v-list-item')
+      .should('have.length', 6)
+      .get('.v-combobox input')
+      .type('Cal')
+      .get('.v-list-item').eq(0)
+      .should('have.class', 'v-list-item--active')
+      .get('.v-combobox input')
+      .trigger('keydown', { key: keyValues.enter, waitForAnimations: false })
+      .get('.v-list-item')
+      .should('have.length', 6)
+  })
+
+  describe('Showcase', () => {
+    generate({ stories })
   })
 })

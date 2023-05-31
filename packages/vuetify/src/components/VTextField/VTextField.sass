@@ -72,7 +72,14 @@
 /* endregion */
 /* region MODIFIERS */
 .v-text-field
-  &--flush-details
+  &--plain-underlined
+    --v-field-padding-top--plain-underlined: 6px
+
     .v-input__details
       padding: 0
+
+    .v-input__prepend,
+    .v-input__append
+      align-items: flex-start
+      padding-top: calc(var(--v-field-padding-top--plain-underlined) + var(--v-input-padding-top))
 /* endregion */

@@ -8,17 +8,26 @@ import { VIcon } from '@/components/VIcon'
 import { makeComponentProps } from '@/composables/component'
 
 // Utilities
-import { convertToUnit, deepEqual, defineComponent, getContrast, propsFactory, useRender } from '@/util'
-import { parseColor } from './util'
+import {
+  convertToUnit,
+  deepEqual,
+  defineComponent,
+  getContrast,
+  parseColor,
+  propsFactory,
+  RGBtoCSS,
+  RGBtoHSV,
+  useRender,
+} from '@/util'
 import colors from '@/util/colors'
 
 // Types
-import type { HSV } from '@/util'
-import type { PropType } from 'vue'
+import type { DeepReadonly, PropType } from 'vue'
+import type { Color, HSV } from '@/util'
 
 export const makeVColorPickerSwatchesProps = propsFactory({
   swatches: {
-    type: Array as PropType<string[][]>,
+    type: Array as PropType<DeepReadonly<Color[][]>>,
     default: () => parseDefaultColors(colors),
   },
   disabled: Boolean,
@@ -26,7 +35,7 @@ export const makeVColorPickerSwatchesProps = propsFactory({
   maxHeight: [Number, String],
 
   ...makeComponentProps(),
-}, 'v-color-picker-swatches')
+}, 'VColorPickerSwatches')
 
 function parseDefaultColors (colors: Record<string, Record<string, string>>) {
   return Object.keys(colors).map(key => {
@@ -75,14 +84,16 @@ export const VColorPickerSwatches = defineComponent({
           { props.swatches.map(swatch => (
             <div class="v-color-picker-swatches__swatch">
               { swatch.map(color => {
-                const hsva = parseColor(color)
+                const rgba = parseColor(color)
+                const hsva = RGBtoHSV(rgba)
+                const background = RGBtoCSS(rgba)
 
                 return (
                   <div
                     class="v-color-picker-swatches__color"
                     onClick={ () => hsva && emit('update:color', hsva) }
                   >
-                    <div style={{ background: color }}>
+                    <div style={{ background }}>
                       { props.color && deepEqual(props.color, hsva)
                         ? <VIcon size="x-small" icon="$success" color={ getContrast(color, '#FFFFFF') > 2 ? 'white' : 'black' } />
                         : undefined

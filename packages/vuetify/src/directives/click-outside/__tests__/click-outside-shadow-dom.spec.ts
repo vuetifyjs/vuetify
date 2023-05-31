@@ -1,7 +1,8 @@
-import { describe, expect, it } from '@jest/globals'
-
 // Directives
 import ClickOutside from '../'
+
+// Utilities
+import { describe, expect, it } from '@jest/globals'
 import { wait } from '../../../../test'
 
 function bootstrap (args?: object) {

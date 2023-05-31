@@ -1,9 +1,12 @@
 /* eslint-disable sonarjs/no-identical-functions */
 /// <reference types="../../../../types/cypress" />
 
-import { CenteredGrid } from '@/../cypress/templates'
-import { createRouter, createWebHistory } from 'vue-router'
+// Components
 import { VList, VListItem } from '..'
+import { CenteredGrid } from '@/../cypress/templates'
+
+// Utilities
+import { createRouter, createWebHistory } from 'vue-router'
 
 describe('VList', () => {
   function mountFunction (content: JSX.Element) {

@@ -1,23 +1,23 @@
 // Composables
-import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 import { createDefaults, DefaultsSymbol } from '@/composables/defaults'
 import { createDisplay, DisplaySymbol } from '@/composables/display'
 import { createIcons, IconSymbol } from '@/composables/icons'
 import { createLocale, LocaleSymbol } from '@/composables/locale'
 import { createTheme, ThemeSymbol } from '@/composables/theme'
+import { createDate, DateAdapterSymbol } from '@/labs/date/date'
 
 // Utilities
-import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 import { nextTick, reactive } from 'vue'
+import { defineComponent, getUid, IN_BROWSER, mergeDeep } from '@/util'
 
 // Types
 import type { App, ComponentPublicInstance, InjectionKey } from 'vue'
-import type { DateOptions } from '@/labs/date'
 import type { DefaultsOptions } from '@/composables/defaults'
-import type { DisplayOptions } from '@/composables/display'
+import type { DisplayOptions, SSROptions } from '@/composables/display'
 import type { IconOptions } from '@/composables/icons'
 import type { LocaleOptions, RtlOptions } from '@/composables/locale'
 import type { ThemeOptions } from '@/composables/theme'
+import type { DateOptions } from '@/labs/date'
 
 export * from './composables'
 export type { DateOptions, DateInstance } from '@/labs/date'
@@ -33,14 +33,14 @@ export interface VuetifyOptions {
   theme?: ThemeOptions
   icons?: IconOptions
   locale?: LocaleOptions & RtlOptions
-  ssr?: boolean
+  ssr?: SSROptions
 }
 
 export interface Blueprint extends Omit<VuetifyOptions, 'blueprint'> {}
 
 export function createVuetify (vuetify: VuetifyOptions = {}) {
   const { blueprint, ...rest } = vuetify
-  const options = mergeDeep(blueprint, rest)
+  const options: VuetifyOptions = mergeDeep(blueprint, rest)
   const {
     aliases = {},
     components = {},

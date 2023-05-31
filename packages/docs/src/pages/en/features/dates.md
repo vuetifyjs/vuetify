@@ -16,6 +16,14 @@ Easily hook up date libraries that are used for components that require date fun
 
 <entry />
 
+----
+
+<alert type="warning">
+
+This feature requires [v3.2.0 (Orion)](/getting-started/release-notes/?version=v3.2.0)
+
+</alert>
+
 ## Usage
 
 The date composable provides a shared architecture that is used by components such as date picker and calendar. The default implementation is built using the native Date object, but can be swapped out for another date library. If no other date adapter is given, the default Vuetify one is used.

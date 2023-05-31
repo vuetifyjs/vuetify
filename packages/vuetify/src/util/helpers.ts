@@ -131,8 +131,10 @@ export function isObject (obj: any): obj is object {
   return obj !== null && typeof obj === 'object' && !Array.isArray(obj)
 }
 
-export function isComponentInstance (obj: any): obj is ComponentPublicInstance {
-  return obj?.$el
+export function refElement<T extends object | undefined> (obj: T): Exclude<T, ComponentPublicInstance> | HTMLElement {
+  return obj && '$el' in obj
+    ? obj.$el as HTMLElement
+    : obj as HTMLElement
 }
 
 // KeyboardEvent.keyCode aliases
@@ -178,6 +180,10 @@ export const keyValues: Record<string, string> = Object.freeze({
 
 export function keys<O extends {}> (o: O) {
   return Object.keys(o) as (keyof O)[]
+}
+
+export function has<T extends string> (obj: object, key: T[]): obj is Record<T, unknown> {
+  return key.every(k => obj.hasOwnProperty(k))
 }
 
 type MaybePick<
@@ -252,39 +258,16 @@ export function arrayDiff (a: any[], b: any[]): any[] {
   return diff
 }
 
-interface ItemGroup<T> {
-  name: string
-  items: T[]
-}
-
-export function groupItems<T extends any = any> (
-  items: T[],
-  groupBy: string[],
-  groupDesc: boolean[]
-): ItemGroup<T>[] {
-  const key = groupBy[0]
-  const groups: ItemGroup<T>[] = []
-  let current
-  for (let i = 0; i < items.length; i++) {
-    const item = items[i]
-    const val = getObjectValueByPath(item, key, null)
-    if (current !== val) {
-      current = val
-      groups.push({
-        name: val ?? '',
-        items: [],
-      })
-    }
-    groups[groups.length - 1].items.push(item)
-  }
-  return groups
-}
-
-export function wrapInArray<T> (v: T | T[] | null | undefined): T[] {
+type IfAny<T, Y, N> = 0 extends (1 & T) ? Y : N;
+export function wrapInArray<T> (
+  v: T | null | undefined
+): T extends readonly any[]
+    ? IfAny<T, T[], T>
+    : NonNullable<T>[] {
   return v == null
     ? []
     : Array.isArray(v)
-      ? v : [v]
+      ? v as any : [v]
 }
 
 export function defaultFilter (value: any, search: string | null, item: any) {
@@ -589,7 +572,7 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
   const idx = focusable.indexOf(document.activeElement as HTMLElement)
 
   if (!location) {
-    if (!el.contains(document.activeElement)) {
+    if (el === document.activeElement || !el.contains(document.activeElement)) {
       focusable[0]?.focus()
     }
   } else if (location === 'first') {
@@ -608,3 +591,5 @@ export function focusChild (el: Element, location?: 'next' | 'prev' | 'first' | 
     else focusChild(el, location === 'next' ? 'first' : 'last')
   }
 }
+
+export function noop () {}

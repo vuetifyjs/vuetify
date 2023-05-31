@@ -95,39 +95,8 @@
     "linkedin": "blalan05",
     "location": "Wisconsin, USA",
     "name": "Blaine Landowski",
-    "team": "core"
-  },
-  "ElijahKotyluk": {
-    "discord": "edk#4363",
-    "funding": [
-      "[GitHub Sponsors](https://github.com/sponsors/ElijahKotyluk)"
-    ],
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/vue-cli-plugins](https://github.com/vuetifyjs/vue-cli-plugins)"
-    ],
-    "languages": [
-      "English"
-    ],
-    "location": "USA",
-    "name": "Elijah Kotyluk",
-    "team": "core"
-  },
-  "yooneskh": {
-    "discord": "YoonesKh#7826",
-    "focus": [
-      "[vuetifyjs](https://github.com/vuetifyjs)",
-      "[vuetifyjs/Community Suppport](https://discord.com/invite/vuetify-340160225338195969)"
-    ],
-    "languages": [
-      "English",
-      "Persian"
-    ],
-    "twitter": "yooneskh",
-    "linkedin": "yooneskh ",
-    "location": "Iran",
-    "name": "Yoones Khoshghadam",
-    "team": "core"
+    "team": "core",
+    "work": "CEO at Foundational Technologies LLC"
   },
   "": {
     "discord": "Elvina Garcia#0203",
@@ -158,7 +127,8 @@
     "linkedin": "santiagoaloi",
     "location": "Stockholm, Sweden",
     "name": "Santiago Aloi",
-    "team": "core"
+    "team": "core",
+    "work": "Product Specialist @ DataTalks"
   },
   "yuwu9145": {
     "discord": "yuchao#8454",

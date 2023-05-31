@@ -9,8 +9,8 @@ import { propsFactory } from '@/util'
 import { VuetifyDateAdapter } from './adapters/vuetify'
 
 // Types
-import type { DateAdapter } from './DateAdapter'
 import type { InjectionKey, PropType } from 'vue'
+import type { DateAdapter } from './DateAdapter'
 
 export interface DateInstance<T> extends DateAdapter<T> {
   locale: string
@@ -27,7 +27,7 @@ export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:
 export interface DateProps {
   displayDate: any
   hideAdjacentMonths: boolean
-  modelValue: any[]
+  modelValue: readonly any[]
 }
 
 export function createDate (options?: DateOptions) {
@@ -42,7 +42,7 @@ export const makeDateProps = propsFactory({
   },
   hideAdjacentMonths: Boolean,
   modelValue: {
-    type: null as unknown as PropType<any[]>,
+    type: null as unknown as PropType<readonly any[]>,
     default: () => [],
   },
 }, 'date')

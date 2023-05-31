@@ -1,6 +1,6 @@
 ---
-nav: For Enterprise
 meta:
+  nav: For Enterprise
   title: Enterprise support from Vuetify
   description: Get the tools you need to continuously catalog and understand the open source software that your application depends on with the Tidelift subscription.
   keywords: vuetify enterprise, tidelift enterprise, tidelift vuetify

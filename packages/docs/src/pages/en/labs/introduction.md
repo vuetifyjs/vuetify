@@ -1,6 +1,6 @@
 ---
-nav: Introduction
 meta:
+  nav: Introduction
   title: Introduction to Labs
   description: A collection of in-development components for testing purposes before final release
   keywords: labs
@@ -57,7 +57,7 @@ export default createVuetify({
 })
 ```
 
-When Vuetify instantiates it will register `VDataTable` as a usable component within templates. Note that typescript support will require you to also add the component to `@vue/runtime-core`'s `GlobalComponents` interface.
+When Vuetify instantiates it will register `VDataTable` as a usable component within templates.
 
 If you wish to install all available Vuetify components use the following code snippet:
 
@@ -93,6 +93,8 @@ The following is a list of available and up-and-coming components for use with L
 | [v-skeleton-loader](/api/v-skeleton-loader/) | Primary Component |
 | **Infinite scroll** | [Usage](/components/infinite-scroller/) |
 | [v-infinite-scroll](/api/v-infinite-scroll/) | Primary Component |
+| **Bottom sheet** | [Usage](/components/bottom-sheets/) |
+| [v-bottom-sheet](/api/v-bottom-sheet/) | Primary Component |
 
 ### Up Next
 

@@ -10,8 +10,8 @@ import { computed } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 export type VResponsiveSlots = {
-  default: []
-  additional: []
+  default: never
+  additional: never
 }
 
 export function useAspectStyles (props: { aspectRatio?: string | number }) {
@@ -29,10 +29,11 @@ export function useAspectStyles (props: { aspectRatio?: string | number }) {
 export const makeVResponsiveProps = propsFactory({
   aspectRatio: [String, Number],
   contentClass: String,
+  inline: Boolean,
 
   ...makeComponentProps(),
   ...makeDimensionProps(),
-}, 'v-responsive')
+}, 'VResponsive')
 
 export const VResponsive = genericComponent<VResponsiveSlots>()({
   name: 'VResponsive',
@@ -47,6 +48,7 @@ export const VResponsive = genericComponent<VResponsiveSlots>()({
       <div
         class={[
           'v-responsive',
+          { 'v-responsive--inline': props.inline },
           props.class,
         ]}
         style={[

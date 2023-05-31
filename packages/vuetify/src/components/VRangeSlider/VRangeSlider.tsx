@@ -3,15 +3,15 @@ import '../VSlider/VSlider.sass'
 
 // Components
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
 import { VLabel } from '@/components/VLabel'
+import { getOffset, makeSliderProps, useSlider, useSteps } from '@/components/VSlider/slider'
 import { VSliderThumb } from '@/components/VSlider/VSliderThumb'
 import { VSliderTrack } from '@/components/VSlider/VSliderTrack'
 
 // Composables
 import { makeFocusProps, useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 import { useRtl } from '@/composables/locale'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -28,10 +28,10 @@ export const makeVRangeSliderProps = propsFactory({
 
   strict: Boolean,
   modelValue: {
-    type: Array as PropType<number[]>,
+    type: Array as PropType<readonly number[]>,
     default: () => ([0, 0]),
   },
-}, 'v-range-slider')
+}, 'VRangeSlider')
 
 export const VRangeSlider = genericComponent<VSliderSlots>()({
   name: 'VRangeSlider',
@@ -169,8 +169,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_start` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[0] }
                 />
@@ -178,8 +178,8 @@ export const VRangeSlider = genericComponent<VSliderSlots>()({
                 <input
                   id={ `${id.value}_stop` }
                   name={ props.name || id.value }
-                  disabled={ props.disabled }
-                  readonly={ props.readonly }
+                  disabled={ !!props.disabled }
+                  readonly={ !!props.readonly }
                   tabindex="-1"
                   value={ model.value[1] }
                 />

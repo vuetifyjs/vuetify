@@ -20,7 +20,7 @@ export const makeVDataTableRowProps = propsFactory({
   index: Number as PropType<Number>,
   item: Object as PropType<DataTableItem>,
   onClick: Function as PropType<(e: MouseEvent) => void>,
-}, 'v-data-table-row')
+}, 'VDataTableRow')
 
 export const VDataTableRow = defineComponent({
   name: 'VDataTableRow',
@@ -70,6 +70,7 @@ export const VDataTableRow = defineComponent({
                 if (column.key === 'data-table-select') {
                   return slots['item.data-table-select']?.(slotProps) ?? (
                     <VCheckboxBtn
+                      disabled={ !item.selectable }
                       modelValue={ isSelected([item]) }
                       onClick={ withModifiers(() => toggleSelect(item), ['stop']) }
                     />

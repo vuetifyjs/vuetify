@@ -1,14 +1,15 @@
+// Styles
 import './VImg.sass'
 
 // Components
-import { VResponsive } from '@/components/VResponsive'
-
-// Directives
-import intersect from '@/directives/intersect'
+import { makeVResponsiveProps, VResponsive } from '@/components/VResponsive/VResponsive'
 
 // Composables
 import { makeComponentProps } from '@/composables/component'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
+
+// Directives
+import intersect from '@/directives/intersect'
 
 // Utilities
 import {
@@ -22,7 +23,6 @@ import {
   withDirectives,
 } from 'vue'
 import {
-  convertToUnit,
   genericComponent,
   propsFactory,
   SUPPORTS_INTERSECTION,
@@ -41,14 +41,13 @@ export interface srcObject {
 }
 
 export type VImgSlots = {
-  default: []
-  placeholder: []
-  error: []
-  sources: []
+  default: never
+  placeholder: never
+  error: never
+  sources: never
 }
 
 export const makeVImgProps = propsFactory({
-  aspectRatio: [String, Number],
   alt: String,
   cover: Boolean,
   eager: Boolean,
@@ -70,11 +69,11 @@ export const makeVImgProps = propsFactory({
     default: '',
   },
   srcset: String,
-  width: [String, Number],
 
+  ...makeVResponsiveProps(),
   ...makeComponentProps(),
   ...makeTransitionProps(),
-}, 'v-img')
+}, 'VImg')
 
 export const VImg = genericComponent<VImgSlots>()({
   name: 'VImg',
@@ -294,37 +293,38 @@ export const VImg = genericComponent<VImgSlots>()({
       })
     }
 
-    useRender(() => (
-      <VResponsive
-        class={[
-          'v-img',
-          { 'v-img--booting': !isBooted.value },
-          props.class,
-        ]}
-        style={[
-          { width: convertToUnit(props.width === 'auto' ? naturalWidth.value : props.width) },
-          props.style,
-        ]}
-        aspectRatio={ aspectRatio.value }
-        aria-label={ props.alt }
-        role={ props.alt ? 'img' : undefined }
-        v-intersect={[{
-          handler: init,
-          options: props.options,
-        }, null, ['once']]}
-      >{{
-        additional: () => (
-          <>
-            <__image />
-            <__preloadImage />
-            <__gradient />
-            <__placeholder />
-            <__error />
-          </>
-        ),
-        default: slots.default,
-      }}</VResponsive>
-    ))
+    useRender(() => {
+      const [responsiveProps] = VResponsive.filterProps(props)
+      return (
+        <VResponsive
+          class={[
+            'v-img',
+            { 'v-img--booting': !isBooted.value },
+            props.class,
+          ]}
+          style={ props.style }
+          { ...responsiveProps }
+          aspectRatio={ aspectRatio.value }
+          aria-label={ props.alt }
+          role={ props.alt ? 'img' : undefined }
+          v-intersect={[{
+            handler: init,
+            options: props.options,
+          }, null, ['once']]}
+        >{{
+          additional: () => (
+            <>
+              <__image />
+              <__preloadImage />
+              <__gradient />
+              <__placeholder />
+              <__error />
+            </>
+          ),
+          default: slots.default,
+        }}</VResponsive>
+      )
+    })
 
     return {
       currentSrc,

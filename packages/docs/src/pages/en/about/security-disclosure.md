@@ -1,9 +1,9 @@
 ---
 meta:
+  nav: Security disclosure
   title: Security disclosure procedures
   description: This document outlines security procedures and general policies for the Vuetify project.
   keywords: security, security vulnerability, disclosure policy, security disclosure
-nav: Security disclosure
 related:
   - /introduction/enterprise-support/
   - /getting-started/contributing/

@@ -8,7 +8,6 @@ env:
   GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
   CROWDIN_PROJECT_ID: ${{ secrets.CROWDIN_PROJECT_ID }}
   CROWDIN_PERSONAL_TOKEN: ${{ secrets.CROWDIN_PERSONAL_TOKEN }}
-  CROWDIN_BRANCH: v3
 
 jobs:
   pre_job:
@@ -108,30 +107,16 @@ jobs:
       - uses: ./.github/actions/yarn-install
       - run: yarn build api
       - run: echo "RELEASE_TAG=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
-      - run: rm -rf release
-      - run: cp -r ./packages/vuetify/dist release
-      - run: rm ./release/_component-variables.sass
-      - run: for file in ./release/vuetify.*; do mv "$file" "${file/release\/vuetify/release/vuetify-${RELEASE_TAG}}"; done
-      - run: zip -jr "release/vuetify-${RELEASE_TAG}.zip" release/*
       - name: NPM Release
         run: bash scripts/deploy.sh
         env:
           NPM_API_KEY: ${{ secrets.NPM_TOKEN }}
-          TAG_NAME: ${{ env.RELEASE_TAG }}
+          RELEASE_TAG: ${{ env.RELEASE_TAG }}
       - name: GitHub release
         id: create_release
         run: yarn conventional-github-releaser -p vuetify
         env:
           CONVENTIONAL_GITHUB_RELEASER_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-      - name: Upload Release Asset
-        uses: actions/upload-release-asset@v1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          upload_url: ${{ steps.create_release.outputs.upload_url }}
-          asset_path: release/vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_name: vuetify-${{ env.RELEASE_TAG }}.zip
-          asset_content_type: application/zip
 
   build-docs:
     name: Build docs
@@ -144,17 +129,7 @@ jobs:
         with:
           name: vuetify-dist
       - uses: ./.github/actions/yarn-install
-# TODO: crowdin is returning invalid markdown
-#      - name: Download eo-UY
-#        uses: crowdin/github-action@1.8.0
-#        with:
-#          config: crowdin.yml
-#          upload_sources: false
-#          download_translations: true
-#          push_translations: false
-#          export_only_approved: false
-#          download_language: eo
-#          crowdin_branch_name: ${{ env.CROWDIN_BRANCH }}
+      - uses: ./.github/actions/download-locales
       - run: yarn build api
       - run: yarn build docs
         env:

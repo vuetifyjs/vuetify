@@ -2,8 +2,8 @@
 import './VLayout.sass'
 
 // Composables
-import { createLayout, makeLayoutProps } from '@/composables/layout'
 import { makeComponentProps } from '@/composables/component'
+import { createLayout, makeLayoutProps } from '@/composables/layout'
 
 // Utilities
 import { genericComponent, propsFactory, useRender } from '@/util'
@@ -11,7 +11,7 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 export const makeVLayoutProps = propsFactory({
   ...makeComponentProps(),
   ...makeLayoutProps(),
-}, 'v-layout')
+}, 'VLayout')
 
 export const VLayout = genericComponent()({
   name: 'VLayout',

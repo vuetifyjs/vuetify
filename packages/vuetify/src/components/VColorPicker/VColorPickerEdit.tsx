@@ -9,8 +9,8 @@ import { makeComponentProps } from '@/composables/component'
 
 // Utilities
 import { computed } from 'vue'
-import { defineComponent, propsFactory, useRender } from '@/util'
 import { modes, nullColor } from './util'
+import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
@@ -31,18 +31,18 @@ export const makeVColorPickerEditProps = propsFactory({
   color: Object as PropType<HSV | null>,
   disabled: Boolean,
   mode: {
-    type: String,
+    type: String as PropType<keyof typeof modes>,
     default: 'rgba',
     validator: (v: string) => Object.keys(modes).includes(v),
   },
   modes: {
-    type: Array as PropType<string[]>,
+    type: Array as PropType<readonly (keyof typeof modes)[]>,
     default: () => Object.keys(modes),
     validator: (v: any) => Array.isArray(v) && v.every(m => Object.keys(modes).includes(m)),
   },
 
   ...makeComponentProps(),
-}, 'v-color-picker-edit')
+}, 'VColorPickerEdit')
 
 export const VColorPickerEdit = defineComponent({
   name: 'VColorPickerEdit',
@@ -51,7 +51,7 @@ export const VColorPickerEdit = defineComponent({
 
   emits: {
     'update:color': (color: HSV) => true,
-    'update:mode': (mode: string) => true,
+    'update:mode': (mode: keyof typeof modes) => true,
   },
 
   setup (props, { emit }) {

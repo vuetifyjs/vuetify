@@ -1,6 +1,6 @@
 ---
-nav: Grids
 meta:
+  nav: Grids
   title: Grid system
   description: Vuetify supports the 12 point Material Design grid for laying out and controlling breakpoints for your application.
   keywords: grids, vuetify grid component, layout component, flex component

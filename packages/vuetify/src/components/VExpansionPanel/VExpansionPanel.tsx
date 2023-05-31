@@ -1,16 +1,16 @@
 // Components
-import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
 import { VExpansionPanelSymbol } from './VExpansionPanels'
 import { VExpansionPanelText } from './VExpansionPanelText'
+import { makeVExpansionPanelTitleProps, VExpansionPanelTitle } from './VExpansionPanelTitle'
 
 // Composables
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
 import { makeElevationProps, useElevation } from '@/composables/elevation'
 import { makeGroupItemProps, useGroupItem } from '@/composables/group'
 import { makeLazyProps } from '@/composables/lazy'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, provide } from 'vue'
@@ -28,12 +28,12 @@ export const makeVExpansionPanelProps = propsFactory({
   ...makeRoundedProps(),
   ...makeTagProps(),
   ...makeVExpansionPanelTitleProps(),
-}, 'v-expansion-panel')
+}, 'VExpansionPanel')
 
 export type VExpansionPanelSlots = {
-  default: []
-  title: []
-  text: []
+  default: never
+  title: never
+  text: never
 }
 
 export const VExpansionPanel = genericComponent<VExpansionPanelSlots>()({

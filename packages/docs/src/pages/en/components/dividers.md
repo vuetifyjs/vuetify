@@ -1,6 +1,6 @@
 ---
-nav: Dividers
 meta:
+  nav: Dividers
   title: Divider component
   description: The divider component is a thin line commonly used to separate groups of content in lists or layouts.
   keywords: dividers, vuetify divider component, vue divider component
@@ -26,7 +26,7 @@ Dividers in their simplest form display a horizontal line.
 
 <alert type="info">
 
-  This example uses the **border-opacity** utility class and not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
+  This example uses the **border-opacity** utility class and is not available when **$utilities** is set to **false**. More information regarding utility classes is located on the [SASS variables page](features/sass-variables/#basic-usage).
 
 </alert>
 

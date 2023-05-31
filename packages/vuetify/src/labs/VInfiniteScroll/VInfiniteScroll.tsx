@@ -23,18 +23,15 @@ export type InfiniteScrollStatus = 'ok' | 'empty' | 'loading' | 'error'
 
 type InfiniteScrollSlot = {
   side: InfiniteScrollSide
-  props: {
-    onClick: () => (side: InfiniteScrollSide) => void
-    color: string | undefined
-  }
+  props: Record<string, any>
 }
 
 type VInfiniteScrollSlots = {
-  default: [InfiniteScrollSlot]
-  loading: [InfiniteScrollSlot]
-  error: [InfiniteScrollSlot]
-  empty: [InfiniteScrollSlot]
-  'load-more': [InfiniteScrollSlot]
+  default: never
+  loading: InfiniteScrollSlot
+  error: InfiniteScrollSlot
+  empty: InfiniteScrollSlot
+  'load-more': InfiniteScrollSlot
 }
 
 export const makeVInfiniteScrollProps = propsFactory({
@@ -66,7 +63,7 @@ export const makeVInfiniteScrollProps = propsFactory({
 
   ...makeDimensionProps(),
   ...makeTagProps(),
-}, 'v-infinite-scroll')
+}, 'VInfiniteScroll')
 
 export const VInfiniteScrollIntersect = defineComponent({
   name: 'VInfiniteScrollIntersect',

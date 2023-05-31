@@ -2,15 +2,15 @@
 import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
-import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
 import { ref, shallowRef, watch } from 'vue'
+import { consoleError, consoleWarn, getObjectValueByPath } from '@/util'
 
 // Locales
 import en from '@/locale/en'
 
 // Types
-import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 import type { Ref } from 'vue'
+import type { LocaleInstance, LocaleMessages, LocaleOptions } from '@/composables/locale'
 
 const LANG_PREFIX = '$vuetify.'
 

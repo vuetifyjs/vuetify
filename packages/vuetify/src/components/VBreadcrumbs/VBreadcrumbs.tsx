@@ -8,21 +8,21 @@ import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VIcon } from '@/components/VIcon'
 
 // Composables
-import { IconValue } from '@/composables/icons'
+import { useBackgroundColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { provideDefaults } from '@/composables/defaults'
 import { makeDensityProps, useDensity } from '@/composables/density'
+import { IconValue } from '@/composables/icons'
 import { makeRoundedProps, useRounded } from '@/composables/rounded'
 import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
-import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
-import { genericComponent, propsFactory, useRender } from '@/util'
 import { computed, toRef } from 'vue'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import type { LinkProps } from '@/composables/router'
 import type { PropType } from 'vue'
+import type { LinkProps } from '@/composables/router'
 import type { GenericProps } from '@/util'
 
 export type BreadcrumbItem = string | (Partial<LinkProps> & {
@@ -42,7 +42,7 @@ export const makeVBreadcrumbsProps = propsFactory({
   },
   icon: IconValue,
   items: {
-    type: Array as PropType<BreadcrumbItem[]>,
+    type: Array as PropType<readonly BreadcrumbItem[]>,
     default: () => ([]),
   },
 
@@ -50,16 +50,19 @@ export const makeVBreadcrumbsProps = propsFactory({
   ...makeDensityProps(),
   ...makeRoundedProps(),
   ...makeTagProps({ tag: 'ul' }),
-}, 'v-breacrumbs')
+}, 'VBreadcrumbs')
 
-export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(props: {
-  items?: T[]
-}) => GenericProps<typeof props, {
-  prepend: []
-  title: [{ item: T, index: number }]
-  divider: [{ item: T, index: number }]
-  default: []
-}>>()({
+export const VBreadcrumbs = genericComponent<new <T extends BreadcrumbItem>(
+  props: {
+    items?: T[]
+  },
+  slots: {
+    prepend: never
+    title: { item: T, index: number }
+    divider: { item: T, index: number }
+    default: never
+  }
+) => GenericProps<typeof props, typeof slots>>()({
   name: 'VBreadcrumbs',
 
   props: makeVBreadcrumbsProps(),

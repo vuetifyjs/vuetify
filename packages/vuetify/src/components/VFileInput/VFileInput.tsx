@@ -2,15 +2,15 @@
 import './VFileInput.sass'
 
 // Components
-import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
-import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 import { VChip } from '@/components/VChip'
 import { VCounter } from '@/components/VCounter'
 import { VField } from '@/components/VField'
+import { filterFieldProps, makeVFieldProps } from '@/components/VField/VField'
+import { makeVInputProps, VInput } from '@/components/VInput/VInput'
 
 // Composables
-import { forwardRefs } from '@/composables/forwardRefs'
 import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
 import { useLocale } from '@/composables/locale'
 import { useProxiedModel } from '@/composables/proxiedModel'
 
@@ -32,7 +32,12 @@ import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
 export type VFileInputSlots = VInputSlots & VFieldSlots & {
-  counter: []
+  counter: never
+  selection: {
+    fileNames: string[]
+    totalBytes: number
+    totalBytesReadable: string
+  }
 }
 
 export const makeVFileInputProps = propsFactory({
@@ -69,7 +74,7 @@ export const makeVFileInputProps = propsFactory({
   },
 
   ...makeVFieldProps({ clearable: true }),
-}, 'v-file-input')
+}, 'VFileInput')
 
 export const VFileInput = genericComponent<VFileInputSlots>()({
   name: 'VFileInput',
@@ -113,6 +118,7 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
       isFocused.value ||
       props.active
     ))
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
     function onFocus () {
       if (inputRef.value !== document.activeElement) {
         inputRef.value?.focus()
@@ -164,12 +170,18 @@ export const VFileInput = genericComponent<VFileInputSlots>()({
           v-model={ model.value }
           class={[
             'v-file-input',
+            {
+              'v-file-input--chips': !!props.chips,
+              'v-file-input--selection-slot': !!slots.selection,
+              'v-text-field--plain-underlined': isPlainOrUnderlined.value,
+            },
             props.class,
           ]}
           style={ props.style }
           onClick:prepend={ onClickPrepend }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{

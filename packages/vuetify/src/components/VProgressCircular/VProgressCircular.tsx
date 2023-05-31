@@ -2,13 +2,13 @@
 import './VProgressCircular.sass'
 
 // Composables
+import { useTextColor } from '@/composables/color'
 import { makeComponentProps } from '@/composables/component'
+import { useIntersectionObserver } from '@/composables/intersectionObserver'
+import { useResizeObserver } from '@/composables/resizeObserver'
 import { makeSizeProps, useSize } from '@/composables/size'
 import { makeTagProps } from '@/composables/tag'
 import { makeThemeProps, provideTheme } from '@/composables/theme'
-import { useIntersectionObserver } from '@/composables/intersectionObserver'
-import { useResizeObserver } from '@/composables/resizeObserver'
-import { useTextColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref, toRef, watchEffect } from 'vue'
@@ -38,9 +38,13 @@ export const makeVProgressCircularProps = propsFactory({
   ...makeSizeProps(),
   ...makeTagProps({ tag: 'div' }),
   ...makeThemeProps(),
-}, 'v-progress-circular')
+}, 'VProgressCircular')
 
-export const VProgressCircular = genericComponent()({
+type VProgressCircularSlots = {
+  default: { value: number }
+}
+
+export const VProgressCircular = genericComponent<VProgressCircularSlots>()({
   name: 'VProgressCircular',
 
   props: makeVProgressCircularProps(),

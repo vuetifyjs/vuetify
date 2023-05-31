@@ -2,15 +2,15 @@
 import './VTabs.sass'
 
 // Components
-import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 import { VTab } from './VTab'
+import { makeVSlideGroupProps, VSlideGroup } from '@/components/VSlideGroup/VSlideGroup'
 
 // Composables
-import { makeDensityProps, useDensity } from '@/composables/density'
-import { makeTagProps } from '@/composables/tag'
-import { provideDefaults } from '@/composables/defaults'
 import { useBackgroundColor } from '@/composables/color'
+import { provideDefaults } from '@/composables/defaults'
+import { makeDensityProps, useDensity } from '@/composables/density'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { makeTagProps } from '@/composables/tag'
 
 // Utilities
 import { computed, toRef } from 'vue'
@@ -22,7 +22,7 @@ import { VTabsSymbol } from './shared'
 
 export type TabItem = string | Record<string, any>
 
-function parseItems (items: TabItem[] | undefined) {
+function parseItems (items: readonly TabItem[] | undefined) {
   if (!items) return []
 
   return items.map(item => {
@@ -40,7 +40,7 @@ export const makeVTabsProps = propsFactory({
   color: String,
   fixedTabs: Boolean,
   items: {
-    type: Array as PropType<TabItem[]>,
+    type: Array as PropType<readonly TabItem[]>,
     default: () => ([]),
   },
   stacked: Boolean,
@@ -56,7 +56,7 @@ export const makeVTabsProps = propsFactory({
   ...makeVSlideGroupProps({ mandatory: 'force' as const }),
   ...makeDensityProps(),
   ...makeTagProps(),
-}, 'v-tabs')
+}, 'VTabs')
 
 export const VTabs = genericComponent()({
   name: 'VTabs',

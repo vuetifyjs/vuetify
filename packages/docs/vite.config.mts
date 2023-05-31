@@ -108,26 +108,18 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
       Pages({
         extensions: ['vue', 'md'],
         dirs: [
-          { dir: 'src/pages', baseRoute: 'pages' },
-          { dir: 'src/api', baseRoute: 'api' },
+          { dir: 'src/pages', baseRoute: '' },
+          { dir: 'node_modules/.cache/api-pages', baseRoute: '' },
         ],
         extendRoute (route) {
-          const [base, locale, ...folders] = route.component.split('/').slice(2)
-          const paths = [locale]
+          let [locale, category, ...rest] = route.path.split('/').slice(1)
 
-          if (base !== 'pages') paths.push(base)
+          const idx = route.component.toLowerCase().indexOf(locale)
+          locale = ~idx ? route.component.slice(idx, idx + locale.length) : locale
 
-          for (const folder of folders) {
-            if (folder.match('index')) continue
-
-            // remove file extensions if present
-            paths.push(folder.replace(/\.[a-z]*/, ''))
-          }
-
-          const [category, ...rest] = paths.slice(1)
           const meta = {
             layout: 'default',
-            ...parseMeta(route.component),
+            ...parseMeta(route.component, locale),
           }
 
           if (meta.disabled) {
@@ -136,12 +128,12 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
 
           return {
             ...route,
-            path: `/${paths.join('/')}/`,
-            name: `${category ?? meta.layout}${rest.length ? '-' + rest.join('-') : ''}`,
+            path: '/' + [locale, category, ...rest].filter(Boolean).join('/') + '/',
+            // name: [`${category ?? meta.layout}`, ...rest].join('-'),
             meta: {
               ...meta,
               category,
-              page: rest?.join('-'),
+              page: rest.join('-'),
               locale,
             },
           }
@@ -166,7 +158,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         injectManifest: {
           globIgnores: ['**/*.html'],
           additionalManifestEntries: [
-            { url: '/_crowdin.html', revision: Date.now().toString(16) },
             { url: '/_fallback.html', revision: Date.now().toString(16) },
           ],
           dontCacheBustURLsMatching: /assets\/.+[A-Za-z0-9]{8}\.(js|css)$/,
@@ -238,10 +229,6 @@ export default defineConfig(({ command, mode, ssrBuild }) => {
         transformIndexHtml (html) {
           fs.mkdirSync('dist', { recursive: true })
           fs.writeFileSync(path.join('dist/_fallback.html'), html)
-          fs.writeFileSync(path.join('dist/_crowdin.html').replace(/<\/head>/, `
-<script type="text/javascript">let _jipt = [['project', 'vuetify']];</script>
-<script type="text/javascript" src="//cdn.crowdin.com/jipt/jipt.js"></script>
-$&`), html)
         },
       },
 
@@ -255,6 +242,11 @@ $&`), html)
       script: 'sync',
       formatting: 'minify',
       crittersOptions: false,
+      includedRoutes (routes) {
+        return routes.filter(route => (route === '/' || route.startsWith('/en/')) &&
+          ['/eo-UY/', '/api/', ':', '*'].every(v => !route.includes(v))
+        )
+      },
     },
 
     optimizeDeps: {

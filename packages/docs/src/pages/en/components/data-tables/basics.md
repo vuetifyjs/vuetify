@@ -1,6 +1,6 @@
 ---
-nav: Basics
 meta:
+  nav: Basics
   title: Data table component
   description: The data table component is used for displaying tabular data in a way that is easy for users to scan. It includes sorting, searching, pagination and selection.
   keywords: data tables, vuetify data table component, vue data table component
@@ -13,6 +13,14 @@ related:
 # Data tables
 
 The `v-data-table` component is used for displaying tabular data. Features include sorting, searching, pagination, grouping, and row selection.
+
+----
+
+<alert type="warning">
+
+This feature requires [v3.1.0 (Valkyrie)](/getting-started/release-notes/?version=v3.1.0)
+
+</alert>
 
 ## Usage
 
@@ -76,11 +84,11 @@ You can apply the **hide-default-header** and **hide-default-footer** props to r
 
 <example file="v-data-table/prop-hide-header-footer" /> -->
 
-#### Row selection
+#### Selection
 
-The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row. If you need to, you can render your own checkboxes using the `column.data-table-select` and `item.data-table-select` slots respectively.
+The **show-select** prop will render a checkbox in the default header to toggle all rows, and a checkbox for each row.
 
-<!-- You can also switch between allowing multiple selected rows at the same time or just one with the **single-select** prop. -->
+For more information and examples, see the [selection](/components/data-tables/selection) page.
 
 <example file="v-data-table/prop-row-selection" />
 

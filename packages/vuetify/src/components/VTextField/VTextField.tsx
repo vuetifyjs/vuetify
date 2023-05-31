@@ -2,17 +2,17 @@
 import './VTextField.sass'
 
 // Components
+import { VCounter } from '@/components/VCounter/VCounter'
 import { filterFieldProps, makeVFieldProps, VField } from '@/components/VField/VField'
 import { makeVInputProps, VInput } from '@/components/VInput/VInput'
-import { VCounter } from '@/components/VCounter'
+
+// Composables
+import { useFocus } from '@/composables/focus'
+import { forwardRefs } from '@/composables/forwardRefs'
+import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Directives
 import Intersect from '@/directives/intersect'
-
-// Composables
-import { forwardRefs } from '@/composables/forwardRefs'
-import { useFocus } from '@/composables/focus'
-import { useProxiedModel } from '@/composables/proxiedModel'
 
 // Utilities
 import { cloneVNode, computed, nextTick, ref } from 'vue'
@@ -20,6 +20,7 @@ import { callEvent, filterInputAttrs, genericComponent, propsFactory, useRender 
 
 // Types
 import type { PropType } from 'vue'
+import type { VCounterSlot } from '@/components/VCounter/VCounter'
 import type { VFieldSlots } from '@/components/VField/VField'
 import type { VInputSlots } from '@/components/VInput/VInput'
 
@@ -42,11 +43,14 @@ export const makeVTextFieldProps = propsFactory({
 
   ...makeVInputProps(),
   ...makeVFieldProps(),
-}, 'v-text-field')
+}, 'VTextField')
 
-export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'default'> & {
-  default: []
-}>()({
+export type VTextFieldSlots = Omit<VInputSlots & VFieldSlots, 'default'> & {
+  default: never
+  counter: VCounterSlot
+}
+
+export const VTextField = genericComponent<VTextFieldSlots>()({
   name: 'VTextField',
 
   directives: { Intersect },
@@ -81,6 +85,8 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
 
       return props.counter
     })
+
+    const isPlainOrUnderlined = computed(() => ['plain', 'underlined'].includes(props.variant))
 
     function onIntersect (
       isIntersecting: boolean,
@@ -162,13 +168,14 @@ export const VTextField = genericComponent<Omit<VInputSlots & VFieldSlots, 'defa
             {
               'v-text-field--prefixed': props.prefix,
               'v-text-field--suffixed': props.suffix,
-              'v-text-field--flush-details': ['plain', 'underlined'].includes(props.variant),
+              'v-text-field--plain-underlined': ['plain', 'underlined'].includes(props.variant),
             },
             props.class,
           ]}
           style={ props.style }
           { ...rootAttrs }
           { ...inputProps }
+          centerAffix={ !isPlainOrUnderlined.value }
           focused={ isFocused.value }
         >
           {{

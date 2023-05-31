@@ -1,6 +1,6 @@
 /* eslint-disable max-len */
 
-// Components
+// Composables
 import { VSvgIcon } from '@/composables/icons'
 
 // Types
