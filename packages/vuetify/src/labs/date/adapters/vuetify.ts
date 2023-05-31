@@ -222,7 +222,7 @@ const sundayJanuarySecond2000 = new Date(2000, 0, 2)
 
 function getWeekdays (locale: string) {
   const daysFromSunday = firstDay[locale.slice(-2).toUpperCase()]
-  
+
   return createRange(7).map(i => {
     const weekday = new Date(sundayJanuarySecond2000)
     weekday.setDate(sundayJanuarySecond2000.getDate() + daysFromSunday + i)

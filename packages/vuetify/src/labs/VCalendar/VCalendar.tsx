@@ -27,7 +27,7 @@ export const VCalendar = genericComponent()({
   },
 
   setup (props, { emit, slots }) {
-    const date = useDate(props)
+    const date = useDate()
 
     const dayNames = date.getWeekdays()
     const showWeeks = date.getWeekArray(new Date())
@@ -50,7 +50,7 @@ export const VCalendar = genericComponent()({
                   <VCalendarDay
                     active={ props.value === day }
                     disabled={ day ? props.disabled?.includes(day) : false }
-                    title={ day ? date.format(day, 'dayDate') : 'NaN' }
+                    title={ day ? date.format(day, 'dayOfMonth') : 'NaN' }
                   ></VCalendarDay>
                 ))
               }
