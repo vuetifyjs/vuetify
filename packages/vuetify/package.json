@@ -117,11 +117,9 @@
     "cy:open": "cypress open --component -b electron",
     "cy:run": "percy exec -- cypress run --component"
   },
-  "dependencies": {
-    "@date-io/core": "2.14.0",
-    "@date-io/date-fns": "2.14.0"
-  },
   "devDependencies": {
+    "@date-io/core": "2.14.0",
+    "@date-io/date-fns": "2.14.0",
     "@formatjs/intl": "^2.6.9",
     "@fortawesome/fontawesome-svg-core": "^1.2.36",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
