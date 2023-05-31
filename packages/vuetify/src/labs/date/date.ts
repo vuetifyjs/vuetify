@@ -12,18 +12,20 @@ import { VuetifyDateAdapter } from './adapters/vuetify'
 import type { DateAdapter } from './DateAdapter'
 import type { InjectionKey, PropType } from 'vue'
 
-export interface DateInstance extends DateAdapter<Date> {
+export interface DateInstance<T> extends DateAdapter<T> {
   locale: string
 }
 
-export type DateOptions = {
-  adapter: (new (locale: string) => DateInstance) | DateInstance
+export type DateOptions<T = any> = {
+  adapter: (new (options: { locale: any }) => DateInstance<T>) | DateInstance<T>
+  formats?: Record<string, string>
+  locale?: Record<string, any>
 }
 
 export const DateAdapterSymbol: InjectionKey<DateOptions> = Symbol.for('vuetify:date-adapter')
 
 export interface DateProps {
-  displayDate: Date
+  displayDate: any
   hideAdjacentMonths: boolean
   modelValue: readonly any[]
 }
@@ -45,7 +47,7 @@ export const makeDateProps = propsFactory({
   },
 }, 'date')
 
-export function useDate (props?: DateProps) {
+export function useDate () {
   const date = inject(DateAdapterSymbol)
   const locale = useLocale()
 
@@ -53,14 +55,13 @@ export function useDate (props?: DateProps) {
 
   const instance = typeof date.adapter === 'function'
     // eslint-disable-next-line new-cap
-    ? new date.adapter(locale.current.value)
+    ? new date.adapter({ locale: date.locale ? date.locale[locale.current.value] : locale.current.value })
     : date.adapter
 
-  if (typeof date.adapter === 'function') {
-    watch(locale.current, val => {
-      instance.locale = val
-    })
-  }
+  watch(locale.current, value => {
+    const newLocale = date.locale ? date.locale[value] : value
+    instance.locale = newLocale ?? instance.locale
+  })
 
   return instance
 }

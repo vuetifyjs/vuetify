@@ -15,7 +15,7 @@ describe('date.ts', () => {
     props: makeDateProps(),
 
     setup (props) {
-      const date = useDate(props)
+      const date = useDate()
 
       return { date }
     },
