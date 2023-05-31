@@ -1,2 +1,2 @@
-export * from './VDateRangeCard'
-export * from './VDateRangePicker'
+export { VDateRangeCard } from './VDateRangeCard'
+export { VDateRangePicker } from './VDateRangePicker'

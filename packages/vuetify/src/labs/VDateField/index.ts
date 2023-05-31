@@ -1,2 +1,2 @@
-export * from './VDateField'
-export * from './VDateRangeField'
+export { VDateField } from './VDateField'
+export { VDateRangeField } from './VDateRangeField'
