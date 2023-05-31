@@ -2,7 +2,7 @@
 import './VDateRangePicker.sass'
 
 // Components
-import { VPicker } from '@/components/VPicker'
+import { VPicker } from '@/labs/VPicker'
 import { VTextField } from '@/components/VTextField'
 
 // Composables

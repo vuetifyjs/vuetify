@@ -6,7 +6,7 @@ import { VDatePickerControls } from './VDatePickerControls'
 import { VDatePickerHeader } from './VDatePickerHeader'
 import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
-import { VPicker } from '@/components/VPicker'
+import { VPicker } from '@/labs/VPicker'
 import { VTextField } from '@/components/VTextField'
 import { VBtn } from '@/components/VBtn'
 
