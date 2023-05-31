@@ -163,7 +163,6 @@ export const VDateRangeField = defineComponent({
                   </div>
                 ),
                 default: () => (
-                  // @ts-expect-error huh?
                   <VDateRangeCard
                     v-model={ model.value }
                     v-model:displayDate={ displayDate.value }
@@ -191,7 +190,6 @@ export const VDateRangeField = defineComponent({
                   </div>
                 ),
                 default: () => (
-                  // @ts-expect-error huh?
                   <VDateRangeCard
                     v-model={ model.value }
                     v-model:displayDate={ displayDate.value }

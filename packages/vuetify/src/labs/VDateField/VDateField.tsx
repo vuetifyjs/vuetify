@@ -91,7 +91,6 @@ export const VDateField = defineComponent({
             v-slots={{
               activator,
               default: ({ isActive }) => (
-                // @ts-expect-error huh?
                 <VDatePicker
                   v-model={ model.value }
                   v-model:inputMode={ inputMode.value }
