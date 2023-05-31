@@ -2,15 +2,15 @@
 import './VDateField.sass'
 
 // Components
+import { VDateCard, VDatePicker } from '../VDatePicker'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VDateCard, VDatePicker } from '../VDatePicker'
 
 // Composables
-import { useDisplay } from '@/composables'
 import { createDateField, dateEmits, makeDateProps } from './composables'
+import { useDisplay } from '@/composables'
 
 // Utilities
 import { ref, watch } from 'vue'

@@ -5,8 +5,8 @@ import './VDatePickerMonth.sass'
 import { VBtn } from '@/components/VBtn'
 
 // Composables
-import { useBackgroundColor } from '@/composables/color'
 import { useDatePicker } from './composables'
+import { useBackgroundColor } from '@/composables/color'
 
 // Utilities
 import { computed, ref } from 'vue'
@@ -14,8 +14,8 @@ import { defineComponent, omit } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { useDate } from '@/labs/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { useDate } from '@/labs/date'
 
 export const VDatePickerMonth = defineComponent({
   name: 'VDatePickerMonth',

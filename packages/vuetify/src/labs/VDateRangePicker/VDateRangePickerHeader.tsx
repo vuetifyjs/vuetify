@@ -6,12 +6,12 @@ import { VBtn } from '../../components/VBtn'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
 import { computed } from 'vue'
-import { useLocale } from '@/composables/locale'
 import { useDate } from '@/labs/date'
+import { defineComponent, useRender } from '@/util'
 
 export const VDateRangePickerHeader = defineComponent({
   name: 'VDateRangePickerHeader',

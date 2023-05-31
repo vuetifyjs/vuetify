@@ -6,13 +6,13 @@ import { VBtn } from '../../components/VBtn'
 
 // Composables
 import { useBackgroundColor } from '@/composables/color'
+import { useLocale } from '@/composables/locale'
 
 // Utilities
-import { defineComponent, omit, useRender } from '@/util'
 import { computed } from 'vue'
-import { useLocale } from '@/composables/locale'
-import { useDate } from '@/labs/date'
 import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { useDate } from '@/labs/date'
+import { defineComponent, omit, useRender } from '@/util'
 
 export const VDatePickerHeader = defineComponent({
   name: 'VDatePickerHeader',

@@ -1,3 +1,6 @@
+// @ts-nocheck
+/* eslint-disable */
+
 import { getWeek } from '../utils'
 import { describe, expect, it } from '@jest/globals'
 

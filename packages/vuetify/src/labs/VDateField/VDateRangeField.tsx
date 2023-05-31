@@ -2,16 +2,16 @@
 import './VDateRangeField.sass'
 
 // Components
+import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
+import { VDefaultsProvider } from '@/components/VDefaultsProvider'
+import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
-import { VDialog } from '@/components/VDialog'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
-import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
 
 // Composables
+import { createDateField, dateEmits, makeDateProps } from './composables'
 import { useDisplay, useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
-import { createDateField, dateEmits, makeDateProps } from './composables'
 
 // Utilities
 import { ref, toRef, watch } from 'vue'

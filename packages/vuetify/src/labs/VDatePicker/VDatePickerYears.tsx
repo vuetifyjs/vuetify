@@ -8,8 +8,8 @@ import { VBtn } from '@/components/VBtn'
 import { useDate } from '@/labs/date'
 
 // Utilities
-import { convertToUnit, createRange, defineComponent, useRender } from '@/util'
 import { computed, onMounted, ref } from 'vue'
+import { convertToUnit, createRange, defineComponent, useRender } from '@/util'
 
 export const VDatePickerYears = defineComponent({
   name: 'VDatePickerYears',

@@ -9,8 +9,8 @@ import { useDatePicker } from '../VDatePicker/composables'
 
 // Utilities
 import { computed, onMounted, ref } from 'vue'
-import { createRange, defineComponent, useRender } from '@/util'
 import { useDate } from '@/labs/date'
+import { createRange, defineComponent, useRender } from '@/util'
 
 export const VDateRangePickerMonth = defineComponent({
   name: 'VDateRangePickerMonth',

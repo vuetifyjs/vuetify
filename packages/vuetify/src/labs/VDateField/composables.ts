@@ -1,6 +1,6 @@
 // Composables
-import { useDate } from '@/labs/date'
 import { useProxiedModel } from '@/composables/proxiedModel'
+import { useDate } from '@/labs/date'
 
 // Utilities
 import { propsFactory, wrapInArray } from '@/util'

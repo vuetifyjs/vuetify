@@ -6,17 +6,17 @@ import { VDatePickerControls } from './VDatePickerControls'
 import { VDatePickerHeader } from './VDatePickerHeader'
 import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
-import { VPicker } from '@/labs/VPicker'
-import { VTextField } from '@/components/VTextField'
 import { VBtn } from '@/components/VBtn'
+import { VTextField } from '@/components/VTextField'
+import { dateEmits, makeDateProps } from '@/labs/VDateField/composables'
+import { VPicker } from '@/labs/VPicker'
 
 // Composables
+import { createDatePicker } from './composables'
 import { makeTransitionProps, MaybeTransition } from '@/composables/transition'
 import { useDate } from '@/labs/date'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
-import { createDatePicker } from './composables'
 
-// Utilites
+// Utilities
 import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 

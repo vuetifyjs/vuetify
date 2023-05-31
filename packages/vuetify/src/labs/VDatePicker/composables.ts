@@ -1,4 +1,7 @@
+// Utilities
 import { inject, provide, ref } from 'vue'
+
+// Types
 import type { InjectionKey, Ref } from 'vue'
 
 export type DatePickerProvide = {

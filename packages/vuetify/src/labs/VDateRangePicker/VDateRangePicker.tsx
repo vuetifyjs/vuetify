@@ -2,20 +2,20 @@
 import './VDateRangePicker.sass'
 
 // Components
-import { VPicker } from '@/labs/VPicker'
+import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
+import { VPicker } from '@/labs/VPicker'
 
 // Composables
-import { makeTransitionProps } from '@/composables/transition'
 import { createDatePicker } from '../VDatePicker/composables'
+import { makeTransitionProps } from '@/composables/transition'
 
-// Utilites
+// Utilities
 import { ref, watch } from 'vue'
 import { defineComponent, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { VBtn } from '@/components/VBtn'
 import { VDateRangePickerHeader } from './VDateRangePickerHeader'
 import { VDateRangePickerMonth } from './VDateRangePickerMonth'
 import { useDate } from '@/labs/date'
@@ -89,8 +89,11 @@ export const VDateRangePicker = defineComponent({
     }
 
     useRender(() => {
+      const [pickerProps] = VPicker.filterProps(props)
+
       return (
         <VPicker
+          { ...pickerProps }
           key={ props.inputMode }
           class={[
             'v-date-range-picker',
@@ -134,7 +137,7 @@ export const VDateRangePicker = defineComponent({
                 <VBtn variant="text" color={ props.color } onClick={ handleCancel }>Cancel</VBtn>
                 <VBtn variant="text" color={ props.color } onClick={ handleSave }>Ok</VBtn>
               </div>
-            ) : null,
+            ) : undefined,
           }}
         />
       )
