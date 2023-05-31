@@ -18,19 +18,20 @@ import { createDatePicker } from './composables'
 
 // Utilites
 import { ref, watch } from 'vue'
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VDatePicker = defineComponent({
+export const makeVDatePickerProps = propsFactory({
+  color: String,
+  showActions: Boolean,
+
+  ...makeDateProps(),
+  ...makeTransitionProps({ transition: 'fade' }),
+}, 'VDatePicker')
+
+export const VDatePicker = genericComponent()({
   name: 'VDatePicker',
 
-  props: {
-    color: String,
-    ...makeTransitionProps({
-      transition: 'fade',
-    }),
-    showActions: Boolean,
-    ...makeDateProps(),
-  },
+  props: makeVDatePickerProps(),
 
   emits: {
     save: (date: any) => true,
@@ -64,37 +65,43 @@ export const VDatePicker = defineComponent({
     }
 
     useRender(() => {
+      const [pickerProps] = VPicker.filterProps(props)
+      const [datePickerHeaderProps] = VDatePickerHeader.filterProps(props)
+      const [datePickerControlsProps] = VDatePickerControls.filterProps(props)
+      const [datePickerMonthProps] = VDatePickerMonth.filterProps(props)
+      const [datePickerYearsProps] = VDatePickerYears.filterProps(props)
+
       return (
         <VPicker
+          { ...pickerProps }
           class="v-date-picker"
           v-slots={{
             header: () => (
               <VDatePickerHeader
+                { ...datePickerHeaderProps }
                 modelValue={ selected.value }
-                inputMode={ props.inputMode }
                 onUpdate:inputMode={ inputMode => emit('update:inputMode', inputMode) }
                 onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                color={ props.color }
               />
             ),
             default: () => props.inputMode === 'calendar' ? (
               <>
                 <VDatePickerControls
-                  displayDate={ props.displayDate }
+                  { ...datePickerControlsProps }
                   onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
-                  viewMode={ props.viewMode }
                   onUpdate:viewMode={ viewMode => emit('update:viewMode', viewMode) }
                 />
+
                 <MaybeTransition transition={ props.transition } mode="out-in">
                   { props.viewMode === 'month' ? (
-                    // @ts-expect-error huh?
                     <VDatePickerMonth
+                      { ...datePickerMonthProps }
                       v-model={ selected.value }
-                      displayDate={ props.displayDate }
                       onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
                     />
                   ) : (
                     <VDatePickerYears
+                      { ...datePickerYearsProps }
                       height="300"
                       displayDate={ props.displayDate }
                       onUpdate:displayDate={ displayDate => emit('update:displayDate', displayDate) }
