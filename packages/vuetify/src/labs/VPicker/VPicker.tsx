@@ -2,51 +2,62 @@
 import './VPicker.sass'
 
 // Components
-import { VSheet } from '@/components/VSheet'
-
-// Composables
-import { makeVSheetProps } from '@/components/VSheet/VSheet'
+import { makeVSheetProps, VSheet } from '@/components/VSheet/VSheet'
 
 // Utilities
-import { defineComponent, useRender } from '@/util'
+import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const VPicker = defineComponent({
+// Types
+export type VPickerSlots = {
+  header: never
+  default: never
+  actions: never
+}
+
+export const makeVPickerProps = propsFactory({
+  landscape: Boolean,
+
+  ...makeVSheetProps(),
+}, 'VPicker')
+
+export const VPicker = genericComponent<VPickerSlots>()({
   name: 'VPicker',
 
-  props: {
-    landscape: Boolean,
-
-    ...makeVSheetProps(),
-  },
+  props: makeVPickerProps(),
 
   setup (props, { slots }) {
-    useRender(() => (
-      <VSheet
-        class={[
-          'v-picker',
-          {
-            'v-picker--landscape': props.landscape,
-            'v-picker--with-actions': !!slots.actions,
-          },
-        ]}
-      >
-        { slots.header ? (
-          <div class="v-picker__header">
-            { slots.header() }
-          </div>
-        ) : undefined }
+    useRender(() => {
+      const [sheetProps] = VSheet.filterProps(props)
 
-        <div class="v-picker__body">
-          { slots.default?.() }
-        </div>
+      return (
+        <VSheet
+          { ...sheetProps }
+          class={[
+            'v-picker',
+            {
+              'v-picker--landscape': props.landscape,
+              'v-picker--with-actions': !!slots.actions,
+            },
+          ]}
+        >
+          { slots.header && (
+            <div class="v-picker__header">
+              { slots.header() }
+            </div>
+          )}
 
-        { slots.actions ? (
-          <div class="v-picker__actions">
-            { slots.actions() }
+          <div class="v-picker__body">
+            { slots.default?.() }
           </div>
-        ) : undefined }
-      </VSheet>
-    ))
+
+          { slots.actions && (
+            <div class="v-picker__actions">
+              { slots.actions() }
+            </div>
+          )}
+        </VSheet>
+      )
+    })
 
     return {}
   },
