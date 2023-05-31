@@ -3,25 +3,80 @@ import { defineStore } from 'pinia'
 import { onBeforeMount, ref } from 'vue'
 
 // Types
-type Company = {
-  avatar: string
-  name: string
-}
-
-type Published = {
-  date: string
-  for_humans: string
-}
-
 type Job = {
-  company: Company
-  description: string
   id: number
-  location: string
-  published_at: Published
   title: string
-  type: 'full-time' | 'part-time'
+  description: string
+  avatar: string
+  company: string
+  locations: string[]
+  published: string
   url: string
+  via: string
+}
+
+type VueJobsJob = {
+  description: string
+  link: string
+  locations: string[]
+  organization: {
+    name: string
+    avatar: string
+  }
+  published_at: string
+  remote: string
+  title: string
+}
+
+type FreeflowJob = {
+  compensation: string
+  created: string
+  description: string
+  location: string
+  number: number
+  post_url: string
+  title: string
+}
+
+async function fetchVueJobs () {
+  const res = await fetch('https://app.vuejobs.com/feed/vuetify?format=json', {
+    method: 'get',
+    headers: { 'Content-Type': 'application/json' },
+  }).then(res => res.json())
+
+  return res.data.map((job: VueJobsJob) => ({
+    id: job.title,
+    title: job.title,
+    description: job.description,
+    avatar: job.organization.avatar,
+    company: job.organization.name,
+    locations: job.locations.length ? job.locations : ['Remote'],
+    published: job.published_at,
+    url: job.link,
+    via: 'vue-jobs',
+  }))
+}
+
+async function fetchFreeflowJobs () {
+  const res = await fetch('https://public.freeflow.network/api/jobs', {
+    method: 'get',
+    headers: {
+      'Content-Type': 'application/json',
+      'X-Api-Key': 'anidjttnd2339590052',
+    },
+  }).then(res => res.json())
+
+  return res.map((job: FreeflowJob) => ({
+    id: job.number,
+    title: job.title,
+    description: job.description.length > 200 ? job.description.slice(0, 200) + '...' : job.description,
+    avatar: undefined,
+    company: 'Vuetify Discord',
+    locations: ['Remote'],
+    published: job.created,
+    url: job.post_url,
+    via: 'discord',
+  }))
 }
 
 export const useJobsStore = defineStore('jobs', () => {
@@ -30,20 +85,12 @@ export const useJobsStore = defineStore('jobs', () => {
   onBeforeMount(async () => {
     if (jobs.value.length) return
 
-    await fetch('https://app.vuejobs.com/feed/vuetify?format=json', {
-      method: 'get',
-      headers: { 'Content-Type': 'application/json' },
+    jobs.value.push(...await fetchVueJobs())
+    jobs.value.push(...await fetchFreeflowJobs())
+
+    jobs.value.sort((a, b) => {
+      return new Date(b.published).getTime() - new Date(a.published).getTime()
     })
-      .then(res => res.json())
-      .then(res => {
-        for (const job of res.data) {
-          jobs.value.push({
-            ...job,
-            isNew: false,
-            via: 'vue-jobs',
-          })
-        }
-      })
   })
 
   return { jobs }
