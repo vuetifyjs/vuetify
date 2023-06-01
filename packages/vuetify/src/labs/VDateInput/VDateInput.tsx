@@ -45,6 +45,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateInput(props, false)
 
     const dialog = ref(false)
+    const menu = ref(false)
     const inputModel = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
 
     function onBlur () {
@@ -65,10 +66,12 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
 
     function onSave () {
       dialog.value = false
+      menu.value = false
     }
 
     function onCancel () {
       dialog.value = false
+      menu.value = false
     }
 
     useRender(() => {
@@ -85,6 +88,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
             ...slots,
             default: () => !mobile.value ? (
               <VMenu
+                v-model={ menu.value }
                 activator="parent"
                 closeOnContentClick={ false }
                 location="end bottom"
@@ -95,6 +99,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   v-model:displayDate={ displayDate.value }
                   v-model:inputMode={ inputMode.value }
                   v-model:viewMode={ viewMode.value }
+                  onSave={ onSave }
+                  onCancel={ onCancel }
                 />
               </VMenu>
             ) : (

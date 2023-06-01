@@ -49,6 +49,8 @@ export const VDateCard = genericComponent<VCardSlots>()({
   props: makeVDateCardProps(),
 
   emits: {
+    save: () => true,
+    cancel: () => true,
     'update:displayDate': (value: any) => true,
     'update:inputMode': (value: any) => true,
     'update:modelValue': (value: any) => true,
@@ -67,6 +69,15 @@ export const VDateCard = genericComponent<VCardSlots>()({
 
     function onViewModeUpdate (val: any) {
       emit('update:viewMode', val)
+    }
+
+    function onSave () {
+      emit('update:modelValue', model.value)
+      emit('save')
+    }
+
+    function onCancel () {
+      emit('cancel')
     }
 
     useRender(() => {
@@ -112,8 +123,8 @@ export const VDateCard = genericComponent<VCardSlots>()({
               <>
                 { slots.actions?.() ?? (
                   <>
-                    <VBtn text={ t(props.cancelText) } />
-                    <VBtn text={ t(props.okText) } />
+                    <VBtn onClick={ onCancel } text={ t(props.cancelText) } />
+                    <VBtn onClick={ onSave } text={ t(props.okText) } />
                   </>
                 )}
               </>
