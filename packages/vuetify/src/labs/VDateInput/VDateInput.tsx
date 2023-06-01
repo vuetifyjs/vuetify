@@ -2,10 +2,10 @@
 import './VDateInput.sass'
 
 // Components
-import { VDateCard, VDatePicker } from '@/labs/VDatePicker'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
-import { makeVTextFieldProps, VTextField, VTextFieldSlots } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
+import { VDateCard, VDatePicker } from '@/labs/VDatePicker'
 
 // Composables
 import { createDateInput, dateEmits, makeDateProps } from './composables'
@@ -16,6 +16,8 @@ import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
+import type { VTextFieldSlots } from '@/components/VTextField/VTextField'
+
 export type VDateInputSlots = VTextFieldSlots
 
 export const makeVDateInputProps = propsFactory({
@@ -55,7 +57,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       }
     }
 
-    watch(model.value, val => {
+    watch(model, val => {
       if (!val.length) return
 
       inputModel.value = adapter.format(val[0], 'keyboardDate')
@@ -115,7 +117,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                   ),
                 }}
               </VDialog>
-            )
+            ),
           }}
         </VTextField>
       )
