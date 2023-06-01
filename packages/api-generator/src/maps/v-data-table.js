@@ -81,6 +81,14 @@ const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
   headers: 'DataTableHeader[]',
   isMobile: 'boolean',
+  on: {
+    click: '(event: MouseEvent) => void',
+    contextmenu: '(event: MouseEvent) => void',
+    dblclick: '(event: MouseEvent) => void',
+  },
+  attrs: {
+    class: 'object',
+  },
 }
 
 const DataTableItemColumnScopedProps = {
