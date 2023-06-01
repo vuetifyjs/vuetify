@@ -24,7 +24,7 @@ export default Vue.extend({
   name: 'mouse',
 
   methods: {
-    getDefaultMouseEventHandlers (suffix: string, getEvent: MouseHandler): MouseEventsMap {
+    getDefaultMouseEventHandlers (suffix: string, getData: MouseHandler, eventFirst = false): MouseEventsMap {
       const listeners = Object.keys(this.$listeners)
         .filter(key => key.endsWith(suffix))
         .reduce((acc, key) => {
@@ -35,9 +35,9 @@ export default Vue.extend({
       return this.getMouseEventHandlers({
         ...listeners,
         ['contextmenu' + suffix]: { event: 'contextmenu', prevent: true, result: false },
-      }, getEvent)
+      }, getData, eventFirst)
     },
-    getMouseEventHandlers (events: MouseEvents, getEvent: MouseHandler): MouseEventsMap {
+    getMouseEventHandlers (events: MouseEvents, getData: MouseHandler, eventFirst = false): MouseEventsMap {
       const on: MouseEventsMap = {}
 
       for (const event in events) {
@@ -86,7 +86,13 @@ export default Vue.extend({
               }
             }
 
-            this.$emit(event, getEvent(e), e)
+            // TODO: VCalendar emits the calendar event as the first argument,
+            // but it really should be the native event instead so modifiers can be used
+            if (eventFirst) {
+              this.$emit(event, e, getData(e))
+            } else {
+              this.$emit(event, getData(e), e)
+            }
           }
 
           return eventOptions.result

@@ -243,13 +243,10 @@ export default mixins(
           },
         },
         on: {
-          ...this.getDefaultMouseEventHandlers(':row', () => data),
-          // TODO: for click, contextmenu and dblclick, the first argument should be data,
-          // and the second argument should be the event,
+          ...this.getDefaultMouseEventHandlers(':row', () => data, true),
+          // TODO: the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
           click: (event: MouseEvent) => this.$emit('click:row', item, data, event),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
-          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
         },
       }
     },
