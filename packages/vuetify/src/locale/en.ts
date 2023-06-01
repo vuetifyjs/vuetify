@@ -37,6 +37,8 @@ export default {
     divider: 'to',
   },
   datePicker: {
+    ok: 'OK',
+    cancel: 'Cancel',
     range: {
       title: {
         placeholder: 'Select range',
