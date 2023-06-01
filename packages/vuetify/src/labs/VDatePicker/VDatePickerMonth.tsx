@@ -344,6 +344,7 @@ export const VDatePickerMonth = genericComponent()({
                   icon
                   ripple={ false } /* ripple not working correctly since we preventDefault in touchend */
                   variant={ (item.isToday || item.isHovered) && !item.isSelected ? 'outlined' : 'flat' }
+                  active={ item.isSelected }
                   color={ item.isSelected ? props.color : (item.isToday || item.isHovered) ? undefined : 'transparent' }
                 >
                   { item.localized }
