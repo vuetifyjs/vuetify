@@ -16,7 +16,7 @@ import { ref } from 'vue'
 import { defineComponent, propsFactory, useRender } from '@/util'
 
 // Types
-import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
 
 export const makeVDateRangeCardProps = propsFactory({

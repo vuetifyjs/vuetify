@@ -8,7 +8,7 @@ import { VDatePickerMonth } from './VDatePickerMonth'
 import { VDatePickerYears } from './VDatePickerYears'
 import { VBtn } from '@/components/VBtn'
 import { VTextField } from '@/components/VTextField'
-import { dateEmits, makeDateProps } from '@/labs/VDateField/composables'
+import { dateEmits, makeDateProps } from '@/labs/VDateInput/composables'
 import { VPicker } from '@/labs/VPicker'
 
 // Composables

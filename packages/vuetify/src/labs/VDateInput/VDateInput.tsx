@@ -1,5 +1,5 @@
 // Styles
-import './VDateField.sass'
+import './VDateInput.sass'
 
 // Components
 import { VDateCard, VDatePicker } from '../VDatePicker'
@@ -9,14 +9,14 @@ import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
-import { createDateField, dateEmits, makeDateProps } from './composables'
+import { createDateInput, dateEmits, makeDateProps } from './composables'
 import { useDisplay } from '@/composables'
 
 // Utilities
 import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-export const makeVDateFieldProps = propsFactory({
+export const makeVDateInputProps = propsFactory({
   mobile: Boolean,
 
   ...makeDateProps(),
@@ -24,19 +24,19 @@ export const makeVDateFieldProps = propsFactory({
     appendInnerIcon: '$calendar',
     placeholder: 'mm/dd/yyyy'
   }),
-}, 'VDateField')
+}, 'VDateInput')
 
-export const VDateField = genericComponent()({
-  name: 'VDateField',
+export const VDateInput = genericComponent()({
+  name: 'VDateInput',
 
-  props: makeVDateFieldProps(),
+  props: makeVDateInputProps(),
 
   emits: {
     ...dateEmits,
   },
 
   setup (props) {
-    const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateField(props, false)
+    const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateInput(props, false)
     const inputModel = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
 
     function handleBlur () {
@@ -73,7 +73,7 @@ export const VDateField = genericComponent()({
       if (mobile.value) {
         return (
           <VDialog
-            contentClass="v-date-field__dialog-content"
+            contentClass="v-date-input__dialog-content"
             v-slots={{
               activator,
               default: ({ isActive }) => (

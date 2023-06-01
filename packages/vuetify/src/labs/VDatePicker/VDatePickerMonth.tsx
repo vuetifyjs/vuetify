@@ -14,7 +14,7 @@ import { genericComponent, omit, propsFactory } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
 
 export const makeVDatePickerMonthProps = propsFactory({

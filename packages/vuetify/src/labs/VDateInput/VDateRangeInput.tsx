@@ -1,5 +1,5 @@
 // Styles
-import './VDateRangeField.sass'
+import './VDateRangeInput.sass'
 
 // Components
 import { VDateRangeCard, VDateRangePicker } from '../VDateRangePicker'
@@ -9,7 +9,7 @@ import { VMenu } from '@/components/VMenu'
 import { VTextField } from '@/components/VTextField'
 
 // Composables
-import { createDateField, dateEmits, makeDateProps } from './composables'
+import { createDateInput, dateEmits, makeDateProps } from './composables'
 import { useDisplay, useLocale } from '@/composables'
 import { provideDefaults } from '@/composables/defaults'
 
@@ -20,8 +20,8 @@ import { genericComponent, useRender } from '@/util'
 // Types
 import type { PropType } from 'vue'
 
-export const VDateRangeField = genericComponent()({
-  name: 'VDateRangeField',
+export const VDateRangeInput = genericComponent()({
+  name: 'VDateRangeInput',
 
   props: {
     color: String,
@@ -55,7 +55,7 @@ export const VDateRangeField = genericComponent()({
 
   setup (props) {
     const { t } = useLocale()
-    const { adapter, model, inputMode, viewMode, displayDate } = createDateField(props, true)
+    const { adapter, model, inputMode, viewMode, displayDate } = createDateInput(props, true)
 
     const startInput = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
     const endInput = ref(model.value.length > 1 ? adapter.format(model.value[1], 'keyboardDate') : '')
@@ -103,10 +103,10 @@ export const VDateRangeField = genericComponent()({
         return (
           <VDialog
             fullscreen={ inputMode.value === 'calendar' }
-            contentClass="v-date-range-field__dialog-content"
+            contentClass="v-date-range-input__dialog-content"
             v-slots={{
               activator: ({ props: slotProps }) => (
-                <div class="v-date-range-field" { ...slotProps }>
+                <div class="v-date-range-input" { ...slotProps }>
                   <VTextField
                     modelValue={ startInput.value }
                     onBlur={ () => handleBlur(0) }
@@ -114,7 +114,7 @@ export const VDateRangeField = genericComponent()({
                     placeholder={ props.placeholder }
                     label={ props.fromLabel }
                   />
-                  <div class="v-date-range-field__divider">{ t(props.dividerText) }</div>
+                  <div class="v-date-range-input__divider">{ t(props.dividerText) }</div>
                   <VTextField
                     modelValue={ endInput.value }
                     onBlur={ () => handleBlur(1) }
@@ -145,7 +145,7 @@ export const VDateRangeField = genericComponent()({
 
       return (
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
-          <div class="v-date-range-field">
+          <div class="v-date-range-input">
             <VMenu
               offset={[-28, 0]}
               closeOnContentClick={ false }
@@ -172,7 +172,7 @@ export const VDateRangeField = genericComponent()({
                 ),
               }}
             />
-            <div class="v-date-range-field__divider">{ t(props.dividerText) }</div>
+            <div class="v-date-range-input__divider">{ t(props.dividerText) }</div>
             <VMenu
               key="bar"
               offset={[-28, 0]}

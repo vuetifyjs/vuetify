@@ -35,7 +35,7 @@ export const dateEmits = {
   'update:viewMode': (viewMode: 'month' | 'year') => true,
 }
 
-type DateFieldProps = {
+type DateInputProps = {
   modelValue?: any | any[]
   'onUpdate:modelValue': ((value: any | any[]) => void) | undefined
   displayDate?: any
@@ -47,7 +47,7 @@ type DateFieldProps = {
   format?: string
 }
 
-export function createDateField (props: DateFieldProps, isRange: boolean) {
+export function createDateInput (props: DateInputProps, isRange: boolean) {
   const adapter = useDate()
   const model = useProxiedModel(
     props,

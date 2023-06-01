@@ -80,7 +80,7 @@
         v-model="date"
         :locale="locale"
       /> -->
-      <v-date-field label="Date" />
+      <v-date-input label="Date" />
       <!-- <v-btn @click="prev">prev</v-btn>
       <v-btn @click="next">next</v-btn> -->
 
@@ -88,21 +88,21 @@
         v-model="multiple"
         :locale="locale"
       /> -->
-      <!-- <v-date-field label="Date" v-model="foo" /> -->
+      <!-- <v-date-input label="Date" v-model="foo" /> -->
 
-      <v-date-range-field from-label="From" to-label="To" v-model="multiple" />
+      <v-date-range-input v-model="multiple" from-label="From" to-label="To" />
     </div>
   </v-app>
 </template>
 
 <script>
-  import { VDateField, VDateRangeField } from '../src/labs/VDateField'
+  import { VDateInput, VDateRangeInput } from '../src/labs/VDateInput'
   import sv from 'date-fns/locale/sv'
 
   export default {
     components: {
-      VDateField,
-      VDateRangeField,
+      VDateInput,
+      VDateRangeInput,
     },
     data: () => ({
       date: '2022-01-01',

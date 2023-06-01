@@ -10,7 +10,7 @@ import { useLocale } from '@/composables/locale'
 
 // Utilities
 import { computed } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 

@@ -10,7 +10,7 @@ import { useDate } from '@/labs/date'
 
 // Utilities
 import { computed } from 'vue'
-import { dateEmits, makeDateProps } from '../VDateField/composables'
+import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { genericComponent, omit, propsFactory, useRender } from '@/util'
 
 export const makeVDatePickerControlsProps = propsFactory({
