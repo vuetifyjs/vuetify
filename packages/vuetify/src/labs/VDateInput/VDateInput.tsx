@@ -85,7 +85,8 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
               <VMenu
                 activator="parent"
                 closeOnContentClick={ false }
-                location="bottom end"
+                location="end bottom"
+                origin="top right"
               >
                 <VDateCard
                   v-model={ model.value }
