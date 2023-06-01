@@ -44,6 +44,11 @@ export default {
   calendar: {
     moreEvents: '還有其他 {0} 項',
   },
+  input: {
+    clear: 'Clear {0}',
+    prependAction: '{0} prepended action',
+    appendAction: '{0} appended action',
+  },
   fileInput: {
     counter: '{0} 個檔案',
     counterSize: '{0} 個檔案（共 {1}）',

@@ -230,9 +230,28 @@ export default mixins(
       return this.customSort(items, sortBy, sortDesc, locale, this.columnSorters)
     },
     createItemProps (item: any, index: number): DataTableItemProps {
-      const props = VDataIterator.options.methods.createItemProps.call(this, item, index)
+      const data = {
+        ...VDataIterator.options.methods.createItemProps.call(this, item, index),
+        headers: this.computedHeaders,
+      }
 
-      return Object.assign(props, { headers: this.computedHeaders })
+      return {
+        ...data,
+        attrs: {
+          class: {
+            'v-data-table__selected': data.isSelected,
+          },
+        },
+        on: {
+          ...this.getDefaultMouseEventHandlers(':row', () => data),
+          // TODO: for click, contextmenu and dblclick, the first argument should be data,
+          // and the second argument should be the event,
+          // but this is a breaking change so it's for v3
+          click: (event: MouseEvent) => this.$emit('click:row', item, data, event),
+          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
+          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
+        },
+      }
     },
     genCaption (props: DataScopeProps) {
       if (this.caption) return [this.$createElement('caption', [this.caption])]
@@ -512,15 +531,7 @@ export default mixins(
           rtl: this.$vuetify.rtl,
         },
         scopedSlots,
-        on: {
-          ...this.getDefaultMouseEventHandlers(':row', () => data),
-          // TODO: for click, contextmenu and dblclick, the first argument should be data,
-          // and the second argument should be the event,
-          // but this is a breaking change so it's for v3
-          click: () => this.$emit('click:row', item, data),
-          contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, data),
-          dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, data),
-        },
+        on: data.on,
       })
     },
     genBody (props: DataScopeProps): VNode | string | VNodeChildren {

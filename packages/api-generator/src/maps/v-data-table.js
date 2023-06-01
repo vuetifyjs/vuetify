@@ -31,7 +31,7 @@ const DataTableEvents = [
   {
     name: 'click:row',
     source: 'v-data-table',
-    value: `any, ${dataString}`,
+    value: `any, ${dataString}, MouseEvent`,
   },
   {
     name: 'contextmenu:row',
@@ -121,6 +121,14 @@ const DataTableItemScopedProps = {
   ...DataIteratorItemScopedProps,
   headers: 'DataTableHeader[]',
   isMobile: 'boolean',
+  on: {
+    click: '(event: MouseEvent) => void',
+    contextmenu: '(event: MouseEvent) => void',
+    dblclick: '(event: MouseEvent) => void',
+  },
+  attrs: {
+    class: 'object',
+  },
 }
 
 const DataTableItemColumnScopedProps = {

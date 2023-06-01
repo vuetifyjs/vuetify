@@ -9,9 +9,9 @@
       outlined
     >
       <ad-script
-        id="carbonads"
+        id="carbonads-script"
         script-id="_carbonads_js"
-        src="//cdn.carbonads.com/carbon.js?serve=CKYI5KQY&placement=vuetifyjscom"
+        src="//cdn.carbonads.com/carbon.js?serve=CWYDC27I&placement=v2vuetifyjscom"
         @script:error="error = true"
       />
     </app-ad>

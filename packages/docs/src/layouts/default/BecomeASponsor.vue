@@ -10,17 +10,12 @@
 
     <sponsor
       comfortable
-      slug="appeggio"
+      slug="teamwork"
     />
 
     <sponsor
       comfortable
       slug="qomplx"
-    />
-
-    <sponsor
-      comfortable
-      slug="vueschool"
     />
   </div>
 </template>

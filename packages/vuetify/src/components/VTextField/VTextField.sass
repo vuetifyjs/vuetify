@@ -504,6 +504,15 @@
   &.v-input--has-state > .v-input__control > .v-input__slot:before
     border-color: currentColor
 
+  .v-input__icon--clear
+    opacity: 0
+    transition: opacity $primary-transition
+
+  &.v-input--is-focused,
+  &.v-input--is-dirty:hover
+    .v-input__icon--clear
+      opacity: 1
+
   // TODO: where are the corresponding rules for LTR?
   //
   // +rtl()

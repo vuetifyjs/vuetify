@@ -14,5 +14,8 @@ module.exports = {
         value: 'string',
       },
     ],
+    exclude: {
+      props: ['hide-spin-buttons'],
+    },
   },
 }

@@ -5,7 +5,6 @@
     :color="dark ? '#121212' : undefined"
     :right="!rtl"
     app
-    class="py-4 pr-3"
     clipped
     floating
     width="256"
@@ -15,12 +14,12 @@
       #prepend
     >
       <headline
-        class="mb-2"
+        class="mt-4 mb-2 ml-4"
         path="contents"
       />
     </template>
 
-    <ul class="mb-6">
+    <ul>
       <router-link
         v-for="({ to, level, text }, i) in toc"
         :key="to"
@@ -48,25 +47,31 @@
       </router-link>
     </ul>
 
-    <div class="ml-5">
-      <app-caption
-        v-if="sponsors.length"
-        class="ml-2 mb-3"
-        path="platinum-sponsors"
+    <v-container>
+      <headline
+        v-if="allSponsors.length"
+        class="mb-1 mt-n1"
+        path="sponsors"
+        size="subtitle-1"
       />
 
-      <sponsors
-        class="mb-3"
-        compact
-        no-gutters
-        tier="2"
-      />
+      <v-row dense>
+        <v-col
+          v-for="sponsor of allSponsors"
+          :key="sponsor.slug"
+          class="d-inline-flex"
+        >
+          <sponsor
+            :sponsor="sponsor"
+            :color="dark ? undefined : 'grey-lighten-5'"
+          />
+        </v-col>
 
-      <sponsor-link
-        class="ml-2"
-        small
-      />
-    </div>
+        <v-col cols="12">
+          <sponsor-link block size="large" />
+        </v-col>
+      </v-row>
+    </v-container>
   </v-navigation-drawer>
 </template>
 
@@ -92,6 +97,15 @@
         'hash',
         'path',
       ]),
+      allSponsors () {
+        return this.sponsors.filter(sponsor => sponsor.metadata.tier <= 1)
+          .sort((a, b) => {
+            const aTier = a.metadata.tier
+            const bTier = b.metadata.tier
+
+            return aTier === bTier ? 0 : aTier > bTier ? 1 : -1
+          })
+      },
       sponsors: get('sponsors/all'),
       scrolling: sync('app/scrolling'),
       toc: get('pages/toc'),
