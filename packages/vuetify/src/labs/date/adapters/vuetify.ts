@@ -374,6 +374,10 @@ export class VuetifyDateAdapter implements DateAdapter<Date> {
     return date(value)
   }
 
+  toIso (date: Date) {
+    return `${date.getFullYear()}-${date.getMonth() + 1}-${date.getDate()}`
+  }
+
   addDays (date: Date, amount: number) {
     return addDays(date, amount)
   }

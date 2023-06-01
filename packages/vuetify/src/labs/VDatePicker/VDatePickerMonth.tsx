@@ -119,6 +119,7 @@ export const VDatePickerMonth = genericComponent()({
 
         return {
           date,
+          isoDate: adapter.toIso(date),
           formatted: adapter.format(date, 'keyboardDate'),
           year: adapter.getYear(date),
           month: adapter.getMonth(date),
@@ -319,7 +320,7 @@ export const VDatePickerMonth = genericComponent()({
                   'v-date-picker-month__day--hovered': item.isHovered,
                 },
               ]}
-              data-v-date={ !item.isHidden ? item.formatted : undefined }
+              data-v-date={ !item.isHidden ? item.isoDate : undefined }
             >
               { item.inRange && (
                 <div

@@ -1,6 +1,7 @@
 export interface DateAdapter<Date> {
   date (value?: any): Date | null
   format (date: Date, formatString: string): string
+  toIso (date: Date): string
 
   startOfMonth (date: Date): Date
   endOfMonth (date: Date): Date
