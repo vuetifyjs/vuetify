@@ -152,7 +152,7 @@ describe('VDialog.ts', () => {
     expect(input).toHaveBeenCalledWith(true)
   })
 
-  it('not should open disabed dialog on activator click', async () => {
+  it('not should open disabled dialog on activator click', async () => {
     const input = jest.fn()
     const wrapper = mountFunction({
       propsData: {

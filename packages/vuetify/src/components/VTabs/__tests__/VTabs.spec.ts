@@ -180,4 +180,26 @@ describe('VTabs.ts', () => {
     expect(wrapper.vm.slider.height).toBe(99)
     expect(wrapper.vm.slider.width).toBe(4)
   })
+
+  it('should use tabValue if it exists', () => {
+    const wrapper = mountFunction({
+      propsData: {
+        value: 'first',
+      },
+      slots: {
+        default: {
+          render: h => h('div', [
+            h(VTab, { props: { tabValue: 'first' } }),
+            h(VTab, { props: { tabValue: 'second' } }),
+          ]),
+        },
+      },
+    })
+
+    const tab = wrapper.findAll('.v-tab').at(1).trigger('click')
+
+    const emitted = wrapper.emitted('change')
+
+    expect(emitted).toStrictEqual([['second']])
+  })
 })

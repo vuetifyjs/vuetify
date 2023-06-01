@@ -10,7 +10,7 @@ if (!semver.valid(version)) {
 const prerelease = semver.prerelease(version)
 
 if (prerelease == null) {
-  console.log('latest')
+  console.log('v2-stable')
 } else {
-  console.log('next')
+  console.log('v2-dev')
 }

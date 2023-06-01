@@ -13,6 +13,13 @@ describe('VInput.ts', () => {
       return mount(VInput, {
         // https://github.com/vuejs/vue-test-utils/issues/1130
         sync: false,
+        mocks: {
+          $vuetify: {
+            lang: {
+              t: (val: string) => val,
+            },
+          },
+        },
         ...options,
       })
     }

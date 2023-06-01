@@ -17,7 +17,7 @@ Vuetify uses **SASS/SCSS** to craft the style and appearance of all aspects of t
 
 <alert type="warning">
 
-  Note: SASS/SCSS variables are only supported using when using the [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader). This is done automatically when using the [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) plugin.
+  Note: SASS/SCSS variables are only supported when using [vuetify-loader](https://github.com/vuetifyjs/vuetify-loader). This is done automatically when using the [vue-cli-plugin-vuetify](https://github.com/vuetifyjs/vue-cli-plugins/tree/master/packages/vue-cli-plugin-vuetify) plugin.
 
 </alert>
 

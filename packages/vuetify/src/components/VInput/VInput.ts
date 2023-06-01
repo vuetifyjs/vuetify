@@ -177,13 +177,25 @@ export default baseMixins.extend<options>().extend({
       const eventName = `click:${kebabCase(type)}`
       const hasListener = !!(this.listeners$[eventName] || cb)
 
+      const localeKey = {
+        prepend: 'prependAction',
+        prependInner: 'prependAction',
+        append: 'appendAction',
+        appendOuter: 'appendAction',
+        clear: 'clear',
+      }[type]
+      const label = hasListener && localeKey
+        ? this.$vuetify.lang.t(`$vuetify.input.${localeKey}`, this.label ?? '')
+        : undefined
+
       const data = mergeData({
         attrs: {
-          'aria-label': hasListener ? kebabCase(type).split('-')[0] + ' icon' : undefined,
+          'aria-label': label,
           color: this.validationState,
           dark: this.dark,
           disabled: this.isDisabled,
           light: this.light,
+          tabindex: type === 'clear' ? -1 : undefined,
         },
         on: !hasListener
           ? undefined

@@ -240,7 +240,7 @@ export default mixins(
         on: {
           // TODO: for click, the first argument should be the event, and the second argument should be data,
           // but this is a breaking change so it's for v3
-          click: () => this.$emit('click:row', item, props),
+          click: (event: MouseEvent) => this.$emit('click:row', item, props, event),
           contextmenu: (event: MouseEvent) => this.$emit('contextmenu:row', event, props),
           dblclick: (event: MouseEvent) => this.$emit('dblclick:row', event, props),
         },

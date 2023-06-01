@@ -746,5 +746,70 @@ describe('VTimePicker.ts', () => {
       expect(wrapper.vm.selectingHour).toBe(false)
       expect(wrapper.vm.selectingMinute).toBe(false)
     })
+
+    it('should emit active-picker when selectingSecond/selectingMinute/selectingHour' + useSecondsDesc, () => {
+      const wrapper = mountFunction({
+        propsData: {
+          useSeconds: useSecondsValue,
+        },
+      })
+      wrapper.vm.selectingMinute = true
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Minute)
+      expect(wrapper.emitted()['update:active-picker']).toHaveLength(1)
+      expect(wrapper.emitted()['update:active-picker'][0]).toEqual(['MINUTE'])
+
+      wrapper.vm.selectingHour = true
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Hour)
+      expect(wrapper.emitted()['update:active-picker']).toHaveLength(2)
+      expect(wrapper.emitted()['update:active-picker'][1]).toEqual(['HOUR'])
+
+      wrapper.vm.selectingSecond = true
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Second)
+      expect(wrapper.emitted()['update:active-picker']).toHaveLength(3)
+      expect(wrapper.emitted()['update:active-picker'][2]).toEqual(['SECOND'])
+    })
+
+    it('should set selecting to Hour when active-picker changes to "HOUR"' + useSecondsDesc, () => {
+      const wrapper = mountFunction({
+        propsData: {
+          useSeconds: useSecondsValue,
+          activePicker: '',
+          value: '09:12:34',
+        },
+      })
+      wrapper.vm.selectingMinute = true
+      wrapper.setProps({ activePicker: 'HOUR' })
+
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Hour)
+    })
+
+    it('should set selecting to Minute when active-picker changes to "MINUTE"' + useSecondsDesc, () => {
+      const wrapper = mountFunction({
+        propsData: {
+          useSeconds: useSecondsValue,
+          activePicker: '',
+          value: '09:12:34',
+        },
+      })
+      wrapper.vm.selectingSecond = true
+      wrapper.setProps({ activePicker: 'MINUTE' })
+
+      expect(wrapper.vm.selecting).toBe(SelectingTimes.Minute)
+    })
+
+    it('should set selecting to Seconds when active-picker changes to "SECOND"' + useSecondsDesc, () => {
+      const wrapper = mountFunction({
+        propsData: {
+          useSeconds: useSecondsValue,
+          activePicker: '',
+          value: '09:12:34',
+        },
+      })
+      wrapper.vm.selectingHour = true
+      wrapper.setProps({ activePicker: 'SECOND' })
+
+      const expectedValue = useSecondsValue ? SelectingTimes.Second : SelectingTimes.Hour
+      expect(wrapper.vm.selecting).toBe(expectedValue)
+    })
   })
 })

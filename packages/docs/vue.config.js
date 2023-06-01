@@ -22,13 +22,26 @@ module.exports = {
   },
   pwa: {
     name: 'Vuetify Documentation',
-    themeColor: '#094A7F',
-    msTileColor: '#5CBBF6',
+    themeColor: '#1867C0',
+    msTileColor: '#1867C0',
     manifestOptions: {
-      background_color: '#5CBBF6',
+      background_color: '#1867C0',
     },
     appleMobileWebAppCapable: 'yes',
     appleMobileWebAppStatusBarStyle: 'black',
+    description: 'Vuetify UI Library Documentation',
+    icons: [
+      {
+        src: 'img/icons/android-chrome-192x192.png',
+        sizes: '192x192',
+        type: 'image/png',
+      },
+      {
+        src: 'img/icons/android-chrome-512x512.png',
+        sizes: '512x512',
+        type: 'image/png',
+      },
+    ],
 
     // configure the workbox plugin
     workboxPluginMode: 'InjectManifest',

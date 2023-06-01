@@ -26,7 +26,7 @@
             fat: 6.0,
             carbs: 24,
             protein: 4.0,
-            iron: '1%',
+            iron: 1,
             glutenfree: true,
           },
           {
@@ -35,7 +35,7 @@
             fat: 9.0,
             carbs: 37,
             protein: 4.3,
-            iron: '1%',
+            iron: 1,
             glutenfree: false,
           },
           {
@@ -44,7 +44,7 @@
             fat: 16.0,
             carbs: 23,
             protein: 6.0,
-            iron: '7%',
+            iron: 7,
             glutenfree: false,
           },
           {
@@ -53,7 +53,7 @@
             fat: 0.0,
             carbs: 94,
             protein: 0.0,
-            iron: '0%',
+            iron: 0,
             glutenfree: true,
           },
           {
@@ -62,7 +62,7 @@
             fat: 0.2,
             carbs: 98,
             protein: 0,
-            iron: '2%',
+            iron: 2,
             glutenfree: true,
           },
           {
@@ -71,7 +71,7 @@
             fat: 26.0,
             carbs: 65,
             protein: 7,
-            iron: '6%',
+            iron: 6,
             glutenfree: false,
           },
         ],

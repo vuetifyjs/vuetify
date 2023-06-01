@@ -204,7 +204,7 @@ export default VTextField.extend({
 
       // This solves an issue in Safari where
       // nothing happens when adding a file
-      // do to the input event not firing
+      // due to the input event not firing
       // https://github.com/vuetifyjs/vuetify/issues/7941
       delete input.data!.on!.input
       input.data!.on!.change = this.onInput
@@ -259,7 +259,12 @@ export default VTextField.extend({
 
       node.data!.on = {
         ...(node.data!.on || {}),
-        click: () => this.$refs.input.click(),
+        click: (e: MouseEvent) => {
+          // Clicking the label already delegates to input element, so we shouldn't click it twice
+          if (e.target && (e.target as HTMLElement).nodeName === 'LABEL') return
+
+          this.$refs.input.click()
+        },
       }
 
       return node
