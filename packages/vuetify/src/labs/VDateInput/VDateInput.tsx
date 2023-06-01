@@ -6,7 +6,7 @@ import { VDateCard, VDatePicker } from '../VDatePicker'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
-import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
+import { makeVTextFieldProps, VTextField, VTextFieldSlots } from '@/components/VTextField/VTextField'
 
 // Composables
 import { createDateInput, dateEmits, makeDateProps } from './composables'
@@ -15,6 +15,9 @@ import { useDisplay } from '@/composables'
 // Utilities
 import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
+
+// Types
+export type VDateInputSlots = VTextFieldSlots
 
 export const makeVDateInputProps = propsFactory({
   mobile: Boolean,
@@ -26,7 +29,7 @@ export const makeVDateInputProps = propsFactory({
   }),
 }, 'VDateInput')
 
-export const VDateInput = genericComponent()({
+export const VDateInput = genericComponent<VDateInputSlots>()({
   name: 'VDateInput',
 
   props: makeVDateInputProps(),
@@ -35,7 +38,7 @@ export const VDateInput = genericComponent()({
     ...dateEmits,
   },
 
-  setup (props) {
+  setup (props, { slots }) {
     const { adapter, model, inputMode, viewMode, displayDate, parseKeyboardDate } = createDateInput(props, false)
     const inputModel = ref(model.value.length ? adapter.format(model.value[0], 'keyboardDate') : '')
 
@@ -66,6 +69,7 @@ export const VDateInput = genericComponent()({
             { ...textFieldProps }
             v-model={ inputModel.value }
             onBlur={ handleBlur }
+            v-slots={ slots }
           />
         </div>
       )
