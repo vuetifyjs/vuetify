@@ -3,7 +3,6 @@ import './VDateInput.sass'
 
 // Components
 import { VDateCard, VDatePicker } from '../VDatePicker'
-import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField, VTextFieldSlots } from '@/components/VTextField/VTextField'
@@ -101,27 +100,25 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
       }
 
       return (
-        <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
-          <VMenu
-            closeOnContentClick={ false }
-            location="end bottom"
-            origin="top end"
-            v-slots={{
-              activator,
-              default: ({ isActive }) => (
-                <VDateCard
-                  modelValue={ model.value }
-                  onUpdate:modelValue={ (value: any) => {
-                    model.value = value
-                  }}
-                  v-model:displayDate={ displayDate.value }
-                  v-model:viewMode={ viewMode.value }
-                  v-model:inputMode={ inputMode.value }
-                />
-              ),
-            }}
-          />
-        </VDefaultsProvider>
+        <VMenu
+          closeOnContentClick={ false }
+          location="end bottom"
+          origin="top end"
+          v-slots={{
+            activator,
+            default: ({ isActive }) => (
+              <VDateCard
+                modelValue={ model.value }
+                onUpdate:modelValue={ (value: any) => {
+                  model.value = value
+                }}
+                v-model:displayDate={ displayDate.value }
+                v-model:viewMode={ viewMode.value }
+                v-model:inputMode={ inputMode.value }
+              />
+            ),
+          }}
+        />
       )
     })
   },
