@@ -18,10 +18,7 @@ import { dateEmits, makeDateProps } from '../VDateInput/composables'
 import { useDate } from '@/labs/date'
 
 export const makeVDatePickerMonthProps = propsFactory({
-  color: {
-    type: String,
-    default: 'primary',
-  },
+  color: String,
   hideAdjacentMonths: Boolean,
   hideWeekdays: Boolean,
   showWeek: Boolean,
