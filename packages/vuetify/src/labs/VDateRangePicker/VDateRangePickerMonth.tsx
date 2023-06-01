@@ -73,3 +73,5 @@ export const VDateRangePickerMonth = genericComponent()({
     })
   },
 })
+
+export type VDateRangePickerMonth = InstanceType<typeof VDateRangePickerMonth>

@@ -142,3 +142,5 @@ export const VDateRangePicker = genericComponent()({
     })
   },
 })
+
+export type VDateRangePicker = InstanceType<typeof VDateRangePicker>

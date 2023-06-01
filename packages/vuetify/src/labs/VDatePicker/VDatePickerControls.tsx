@@ -100,3 +100,5 @@ export const VDatePickerControls = genericComponent()({
     return {}
   },
 })
+
+export type VDatePickerControls = InstanceType<typeof VDatePickerControls>

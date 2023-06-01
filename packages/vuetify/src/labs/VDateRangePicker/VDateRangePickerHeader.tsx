@@ -127,3 +127,5 @@ export const VDateRangePickerHeader = genericComponent()({
     return {}
   },
 })
+
+export type VDateRangePickerHeader = InstanceType<typeof VDateRangePickerHeader>

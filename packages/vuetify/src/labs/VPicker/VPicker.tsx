@@ -62,3 +62,5 @@ export const VPicker = genericComponent<VPickerSlots>()({
     return {}
   },
 })
+
+export type VPicker = InstanceType<typeof VPicker>

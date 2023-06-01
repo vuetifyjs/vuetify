@@ -87,3 +87,5 @@ export const VDateCard = genericComponent()({
     return {}
   },
 })
+
+export type VDateCard = InstanceType<typeof VDateCard>

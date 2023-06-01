@@ -205,3 +205,5 @@ export const VDateRangeInput = genericComponent()({
     })
   },
 })
+
+export type VDateRangeInput = InstanceType<typeof VDateRangeInput>

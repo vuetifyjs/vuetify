@@ -122,3 +122,5 @@ export const VDateInput = genericComponent()({
     })
   },
 })
+
+export type VDateInput = InstanceType<typeof VDateInput>

@@ -70,3 +70,5 @@ export const VDatePickerYears = genericComponent()({
     return {}
   },
 })
+
+export type VDatePickerYears = InstanceType<typeof VDatePickerYears>

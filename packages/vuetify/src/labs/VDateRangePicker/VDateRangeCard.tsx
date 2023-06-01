@@ -109,3 +109,5 @@ export const VDateRangeCard = defineComponent({
     return {}
   },
 })
+
+export type VDateRangeCard = InstanceType<typeof VDateRangeCard>
