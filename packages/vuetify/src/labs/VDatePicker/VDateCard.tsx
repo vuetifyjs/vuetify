@@ -5,8 +5,9 @@ import './VDateCard.sass'
 import { makeVDatePickerControlsProps, VDatePickerControls } from './VDatePickerControls'
 import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
+import { VFadeTransition } from '@/components/transitions'
 import { VBtn } from '@/components/VBtn'
-import { VCard, VCardSlots } from '@/components/VCard/VCard'
+import { VCard } from '@/components/VCard/VCard'
 
 // Composables
 import { createDatePicker } from './composables'
@@ -19,15 +20,16 @@ import { genericComponent, propsFactory, useRender } from '@/util'
 
 // Types
 import type { PropType } from 'vue'
+import type { VCardSlots } from '@/components/VCard/VCard'
 
 export const makeVDateCardProps = propsFactory({
   cancelText: {
     type: String,
-    default: '$vuetify.datePicker.cancel'
+    default: '$vuetify.datePicker.cancel',
   },
   okText: {
     type: String,
-    default: '$vuetify.datePicker.ok'
+    default: '$vuetify.datePicker.ok',
   },
   inputMode: {
     type: String as PropType<'keyboard' | 'calendar'>,
@@ -38,7 +40,7 @@ export const makeVDateCardProps = propsFactory({
   ...makeVDatePickerControlsProps(),
   ...makeVDatePickerMonthProps(),
   ...makeVDatePickerYearsProps(),
-  ...makeTransitionProps({ transition: 'fade' }),
+  ...makeTransitionProps({ transition: { component: VFadeTransition, leaveAbsolute: true } }),
 }, 'VDateCard')
 
 export const VDateCard = genericComponent<VCardSlots>()({
@@ -89,7 +91,7 @@ export const VDateCard = genericComponent<VCardSlots>()({
                   onUpdate:viewMode={ onViewModeUpdate }
                 />
 
-                <MaybeTransition transition={ props.transition } mode="out-in">
+                <MaybeTransition transition={ props.transition }>
                   { props.viewMode === 'month' ? (
                     <VDatePickerMonth
                       { ...datePickerMonthProps }
@@ -106,7 +108,7 @@ export const VDateCard = genericComponent<VCardSlots>()({
                 </MaybeTransition>
               </>
             ),
-            actions: !hasActions ? undefined : (() => (
+            actions: !hasActions ? undefined : () => (
               <>
                 { slots.actions?.() ?? (
                   <>
@@ -115,7 +117,7 @@ export const VDateCard = genericComponent<VCardSlots>()({
                   </>
                 )}
               </>
-            )),
+            ),
           }}
         </VCard>
       )
