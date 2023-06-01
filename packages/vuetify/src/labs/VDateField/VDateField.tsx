@@ -6,7 +6,7 @@ import { VDateCard, VDatePicker } from '../VDatePicker'
 import { VDefaultsProvider } from '@/components/VDefaultsProvider'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
-import { VTextField } from '@/components/VTextField'
+import { makeVTextFieldProps, VTextField } from '@/components/VTextField/VTextField'
 
 // Composables
 import { createDateField, dateEmits, makeDateProps } from './composables'
@@ -16,30 +16,14 @@ import { useDisplay } from '@/composables'
 import { ref, watch } from 'vue'
 import { genericComponent, propsFactory, useRender } from '@/util'
 
-// Types
-import type { PropType } from 'vue'
-
 export const makeVDateFieldProps = propsFactory({
-  prependInnerIcon: {
-    type: String,
-    default: '$calendar',
-  },
-  placeholder: {
-    type: String,
-    default: 'mm/dd/yyyy',
-  },
-  label: String,
   mobile: Boolean,
+
   ...makeDateProps(),
-  modelValue: {
-    type: null as unknown as PropType<any>,
-  },
-  displayDate: {
-    type: null as unknown as PropType<any>,
-  },
-  format: {
-    type: String,
-  },
+  ...makeVTextFieldProps({
+    appendInnerIcon: '$calendar',
+    placeholder: 'mm/dd/yyyy'
+  }),
 }, 'VDateField')
 
 export const VDateField = genericComponent()({
@@ -74,14 +58,14 @@ export const VDateField = genericComponent()({
     const { mobile } = useDisplay()
 
     useRender(() => {
+      const [textFieldProps] = VTextField.filterProps(props)
+
       const activator = ({ props: slotProps }: any) => (
         <div { ...slotProps }>
           <VTextField
+            { ...textFieldProps }
             v-model={ inputModel.value }
             onBlur={ handleBlur }
-            prependInnerIcon={ props.prependInnerIcon }
-            placeholder={ props.placeholder }
-            label={ props.label }
           />
         </div>
       )
@@ -116,7 +100,8 @@ export const VDateField = genericComponent()({
         <VDefaultsProvider defaults={{ VOverlay: { minWidth: '100%' } }}>
           <VMenu
             closeOnContentClick={ false }
-            offset={[-30, 0]}
+            location="end bottom"
+            origin="top end"
             v-slots={{
               activator,
               default: ({ isActive }) => (
