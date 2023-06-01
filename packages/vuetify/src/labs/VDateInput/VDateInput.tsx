@@ -66,6 +66,7 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
         <div { ...slotProps }>
           <VTextField
             { ...textFieldProps }
+            class="v-date-input"
             v-model={ inputModel.value }
             onBlur={ handleBlur }
             v-slots={ slots }
