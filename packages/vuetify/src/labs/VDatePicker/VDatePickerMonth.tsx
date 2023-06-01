@@ -39,7 +39,7 @@ export const makeVDatePickerMonthProps = propsFactory({
 export const VDatePickerMonth = genericComponent()({
   name: 'VDatePickerMonth',
 
-  props: makeVDatePickerMonthProps(),
+  props: makeVDatePickerMonthProps({ color: 'surface-variant' }),
 
   emits: {
     ...omit(dateEmits, ['update:inputMode', 'update:viewMode']),
@@ -132,7 +132,7 @@ export const VDatePickerMonth = genericComponent()({
           isHidden: isAdjacent && props.hideAdjacentMonths,
           inRange: isRange &&
             !isSame &&
-            (isStart || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
+            (isStart || isEnd || (validDates.length === 2 && adapter.isWithinRange(date, validDates as [any, any]))),
           // isHovered: props.hoverDate === date,
           // inHover: hoverRange.value && isWithinRange(date, hoverRange.value),
           isHovered: false,
