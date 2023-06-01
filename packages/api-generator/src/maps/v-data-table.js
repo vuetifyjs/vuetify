@@ -82,7 +82,7 @@ const DataTableItemScopedProps = {
   headers: 'DataTableHeader[]',
   isMobile: 'boolean',
   on: {
-    click: '() => void',
+    click: '(event: MouseEvent) => void',
     contextmenu: '(event: MouseEvent) => void',
     dblclick: '(event: MouseEvent) => void',
   },
