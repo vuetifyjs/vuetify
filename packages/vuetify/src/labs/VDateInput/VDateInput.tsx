@@ -24,7 +24,8 @@ export const makeVDateInputProps = propsFactory({
   ...makeDateProps(),
   ...makeVTextFieldProps({
     appendInnerIcon: '$calendar',
-    placeholder: 'mm/dd/yyyy'
+    placeholder: 'mm/dd/yyyy',
+    dirty: true,
   }),
 }, 'VDateInput')
 
@@ -62,64 +63,62 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
     useRender(() => {
       const [textFieldProps] = VTextField.filterProps(props)
 
-      const activator = ({ props: slotProps }: any) => (
-        <div { ...slotProps }>
-          <VTextField
-            { ...textFieldProps }
-            class="v-date-input"
-            v-model={ inputModel.value }
-            onBlur={ handleBlur }
-            v-slots={ slots }
-          />
-        </div>
-      )
-
-      if (mobile.value) {
-        return (
-          <VDialog
-            contentClass="v-date-input__dialog-content"
-            v-slots={{
-              activator,
-              default: ({ isActive }) => (
-                <VDatePicker
-                  v-model={ model.value }
-                  v-model:inputMode={ inputMode.value }
-                  v-model:viewMode={ viewMode.value }
-                  v-model:displayDate={ displayDate.value }
-                  showActions
-                  onSave={ () => {
-                    isActive.value = false
-                  }}
-                  onCancel={ () => {
-                    isActive.value = false
-                  }}
-                />
-              ),
-            }}
-          />
-        )
-      }
-
       return (
-        <VMenu
-          closeOnContentClick={ false }
-          location="end bottom"
-          origin="top end"
-          v-slots={{
-            activator,
-            default: ({ isActive }) => (
-              <VDateCard
-                modelValue={ model.value }
-                onUpdate:modelValue={ (value: any) => {
-                  model.value = value
+        <VTextField
+          { ...textFieldProps }
+          class="v-date-input"
+          v-model={ inputModel.value }
+          onBlur={ handleBlur }
+        >
+          {{
+            ...slots,
+            default: () => !mobile.value ? (
+              <VMenu
+                activator="parent"
+                closeOnContentClick={ false }
+                location="end bottom"
+                origin="top end"
+              >
+                {{
+                  default: () => (
+                    <VDateCard
+                      modelValue={ model.value }
+                      onUpdate:modelValue={ (value: any) => {
+                        model.value = value
+                      }}
+                      v-model:displayDate={ displayDate.value }
+                      v-model:viewMode={ viewMode.value }
+                      v-model:inputMode={ inputMode.value }
+                    />
+                  )
                 }}
-                v-model:displayDate={ displayDate.value }
-                v-model:viewMode={ viewMode.value }
-                v-model:inputMode={ inputMode.value }
-              />
-            ),
+              </VMenu>
+            ) : (
+              <VDialog
+                activator="parent"
+                contentClass="v-date-input__dialog-content"
+              >
+                {{
+                  default: ({ isActive }) => (
+                    <VDatePicker
+                      v-model={ model.value }
+                      v-model:inputMode={ inputMode.value }
+                      v-model:viewMode={ viewMode.value }
+                      v-model:displayDate={ displayDate.value }
+                      showActions
+                      onSave={ () => {
+                        isActive.value = false
+                      }}
+                      onCancel={ () => {
+                        isActive.value = false
+                      }}
+                    />
+                  ),
+                }}
+              </VDialog>
+            )
           }}
-        />
+        </VTextField>
       )
     })
   },
