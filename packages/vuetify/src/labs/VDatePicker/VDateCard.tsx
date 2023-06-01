@@ -7,7 +7,6 @@ import { makeVDatePickerMonthProps, VDatePickerMonth } from './VDatePickerMonth'
 import { makeVDatePickerYearsProps, VDatePickerYears } from './VDatePickerYears'
 import { VBtn } from '@/components/VBtn'
 import { VCard, VCardSlots } from '@/components/VCard/VCard'
-import { VSpacer } from '@/components/VGrid'
 
 // Composables
 import { createDatePicker } from './composables'
@@ -85,7 +84,6 @@ export const VDateCard = genericComponent<VCardSlots>()({
             default: () => (
               <>
                 <VDatePickerControls
-                  key="picker-controls"
                   { ...datePickerControlsProps }
                   onUpdate:displayDate={ onDisplayUpdate }
                   onUpdate:viewMode={ onViewModeUpdate }
@@ -94,14 +92,12 @@ export const VDateCard = genericComponent<VCardSlots>()({
                 <MaybeTransition transition={ props.transition } mode="out-in">
                   { props.viewMode === 'month' ? (
                     <VDatePickerMonth
-                      key="picker-month"
                       { ...datePickerMonthProps }
                       v-model={ model.value }
                       onUpdate:displayDate={ onDisplayUpdate }
                     />
                   ) : (
                     <VDatePickerYears
-                      key="picker-years"
                       { ...datePickerYearsProps }
                       onUpdate:displayDate={ onDisplayUpdate }
                       onUpdate:viewMode={ onViewModeUpdate }
@@ -114,7 +110,6 @@ export const VDateCard = genericComponent<VCardSlots>()({
               <>
                 { slots.actions?.() ?? (
                   <>
-                    <VSpacer />
                     <VBtn text={ t(props.cancelText) } />
                     <VBtn text={ t(props.okText) } />
                   </>

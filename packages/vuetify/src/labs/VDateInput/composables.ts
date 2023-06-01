@@ -31,6 +31,7 @@ export const makeDateProps = propsFactory({
 export const dateEmits = {
   'update:modelValue': (date: any[]) => true,
   'update:displayDate': (date: any) => true,
+  'update:focused': (focused: boolean) => true,
   'update:inputMode': (inputMode: 'calendar' | 'keyboard') => true,
   'update:viewMode': (viewMode: 'month' | 'year') => true,
 }

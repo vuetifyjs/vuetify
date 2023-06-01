@@ -2,7 +2,7 @@
 import './VDateInput.sass'
 
 // Components
-import { VDateCard, VDatePicker } from '../VDatePicker'
+import { VDateCard, VDatePicker } from '@/labs/VDatePicker'
 import { VDialog } from '@/components/VDialog'
 import { VMenu } from '@/components/VMenu'
 import { makeVTextFieldProps, VTextField, VTextFieldSlots } from '@/components/VTextField/VTextField'
@@ -83,28 +83,19 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
             ...slots,
             default: () => !mobile.value ? (
               <VMenu
-                key="menu"
                 activator="parent"
                 closeOnContentClick={ false }
-                location="end bottom"
-                origin="top end"
+                location="bottom end"
               >
-                {{
-                  default: () => (
-                    <VDateCard
-                      key="date-card"
-                      v-model={ model.value }
-                      v-model:displayDate={ displayDate.value }
-                      v-model:inputMode={ inputMode.value }
-                      v-model:viewMode={ viewMode.value }
-                      showActions
-                    />
-                  )
-                }}
+                <VDateCard
+                  v-model={ model.value }
+                  v-model:displayDate={ displayDate.value }
+                  v-model:inputMode={ inputMode.value }
+                  v-model:viewMode={ viewMode.value }
+                />
               </VMenu>
             ) : (
               <VDialog
-                key="dialog"
                 v-model={ dialog.value }
                 activator="parent"
                 contentClass="v-date-input__dialog-content"
@@ -117,7 +108,6 @@ export const VDateInput = genericComponent<VDateInputSlots>()({
                       v-model:displayDate={ displayDate.value }
                       v-model:inputMode={ inputMode.value }
                       v-model:viewMode={ viewMode.value }
-                      showActions
                       onSave={ onSave }
                       onCancel={ onCancel }
                     />
