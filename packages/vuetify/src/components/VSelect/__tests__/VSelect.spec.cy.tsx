@@ -15,12 +15,12 @@ const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VSelect items={ items } menuIcon="$vuetify" />,
-  Disabled: <VSelect items={ items } menuIcon="$vuetify" disabled />,
-  Affixes: <VSelect items={ items } menuIcon="$vuetify" prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VSelect items={ items } menuIcon="$vuetify" prependIcon="$vuetify" appendIcon="$vuetify" />,
-  'Prepend/append inner': <VSelect items={ items } menuIcon="$vuetify" prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
-  Placeholder: <VSelect items={ items } menuIcon="$vuetify" placeholder="placeholder" persistentPlaceholder />,
+  'Default input': <VSelect items={ items } />,
+  Disabled: <VSelect items={ items } disabled />,
+  Affixes: <VSelect items={ items } prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VSelect items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VSelect items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VSelect items={ items } placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
