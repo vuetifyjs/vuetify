@@ -16,12 +16,12 @@ const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VFileInput />,
-  Disabled: <VFileInput items={ items } disabled />,
-  Affixes: <VFileInput items={ items } prefix="prefix" suffix="suffix" />,
+  'Default input': <VFileInput prependIcon="$vuetify" />,
+  Disabled: <VFileInput items={ items } prependIcon="$vuetify" disabled />,
+  Affixes: <VFileInput items={ items } prependIcon="$vuetify" prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VFileInput items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
-  'Prepend/append inner': <VFileInput items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
-  Placeholder: <VFileInput items={ items } placeholder="placeholder" persistentPlaceholder />,
+  'Prepend/append inner': <VFileInput items={ items } prependIcon="$vuetify" prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VFileInput items={ items } placeholder="placeholder" prependIcon="$vuetify" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
