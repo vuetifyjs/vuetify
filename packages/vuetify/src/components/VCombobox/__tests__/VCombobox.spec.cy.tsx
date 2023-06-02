@@ -15,11 +15,11 @@ const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming
 
 const stories = Object.fromEntries(Object.entries({
   'Default input': <VCombobox />,
-  Disabled: <VCombobox items={ items } disabled />,
-  Affixes: <VCombobox items={ items } prefix="prefix" suffix="suffix" />,
-  'Prepend/append': <VCombobox items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
-  'Prepend/append inner': <VCombobox items={ items } prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
-  Placeholder: <VCombobox items={ items } placeholder="placeholder" persistentPlaceholder />,
+  Disabled: <VCombobox items={ items } disabled menuIcon="$vuetify" />,
+  Affixes: <VCombobox items={ items } menuIcon="$vuetify" prefix="prefix" suffix="suffix" />,
+  'Prepend/append': <VCombobox items={ items } menuIcon="$vuetify" prependIcon="$vuetify" appendIcon="$vuetify" />,
+  'Prepend/append inner': <VCombobox items={ items } menuIcon="$vuetify" prependInnerIcon="$vuetify" appendInnerIcon="$vuetify" />,
+  Placeholder: <VCombobox items={ items } menuIcon="$vuetify" placeholder="placeholder" persistentPlaceholder />,
 }).map(([k, v]) => [k, (
   <div class="d-flex flex-column flex-grow-1">
     { variants.map(variant => (
