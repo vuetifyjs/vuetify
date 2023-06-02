@@ -16,7 +16,7 @@ const densities = ['default', 'comfortable', 'compact'] as const
 const items = ['California', 'Colorado', 'Florida', 'Georgia', 'Texas', 'Wyoming'] as const
 
 const stories = Object.fromEntries(Object.entries({
-  'Default input': <VFileInput prependIcon="$vuetify"  />,
+  'Default input': <VFileInput prependIcon="$vuetify" />,
   Disabled: <VFileInput items={ items } prependIcon="$vuetify" disabled />,
   Affixes: <VFileInput items={ items } prependIcon="$vuetify" prefix="prefix" suffix="suffix" />,
   'Prepend/append': <VFileInput items={ items } prependIcon="$vuetify" appendIcon="$vuetify" />,
