@@ -4,6 +4,9 @@
 import { VClassIcon } from '..'
 import { VIcon } from '../VIcon'
 
+// Icons
+import { aliases } from '@/iconsets/mdi-svg'
+
 // Utilities
 import { defineComponent } from 'vue'
 
@@ -23,8 +26,7 @@ describe('VIcon', () => {
         <VIcon icon="$close" />
       ))
 
-      cy.get('.v-icon').should('have.class', 'mdi')
-      cy.get('.v-icon').should('have.class', 'mdi-close')
+      cy.get('.v-icon svg path').invoke('attr', 'd').should('contain', `${aliases.close}`.replace('svg:', ''))
     })
 
     it('should render icon from alternative set', () => {
@@ -60,8 +62,7 @@ describe('VIcon', () => {
         <VIcon>$close</VIcon>
       ))
 
-      cy.get('.v-icon').should('have.class', 'mdi')
-      cy.get('.v-icon').should('have.class', 'mdi-close')
+      cy.get('.v-icon svg path').invoke('attr', 'd').should('contain', `${aliases.close}`.replace('svg:', ''))
     })
 
     it('should render icon from alternative set', () => {
