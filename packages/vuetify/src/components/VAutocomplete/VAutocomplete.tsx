@@ -165,6 +165,8 @@ export const VAutocomplete = genericComponent<new <
     })
     const listRef = ref<VList>()
 
+    const shouldSkipMenuToggle = computed(() => (props.hideNoData && !items.value.length) || props.readonly || form?.isReadonly.value)
+
     function onClear (e: MouseEvent) {
       if (props.openOnClear) {
         menu.value = true
@@ -173,14 +175,13 @@ export const VAutocomplete = genericComponent<new <
       search.value = ''
     }
     function onMousedownControl () {
-      if (
-        (props.hideNoData && !items.value.length) ||
-        props.readonly || form?.isReadonly.value
-      ) return
+      if (shouldSkipMenuToggle.value) return
 
       menu.value = true
     }
     function onMousedownMenuIcon (e: MouseEvent) {
+      if (shouldSkipMenuToggle.value) return
+
       if (isFocused.value) {
         e.preventDefault()
         e.stopPropagation()
