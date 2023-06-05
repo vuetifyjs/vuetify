@@ -184,7 +184,6 @@ export const VDataTableVirtual = genericComponent<VDataTableVirtualSlots>()({
                           return slots.item?.(itemSlotProps) ?? (
                             <VVirtualScrollItem
                               key={ itemSlotProps.item.index }
-                              dynamicHeight
                               renderless
                               onUpdate:height={ height => handleItemResize(itemSlotProps.item.index, height) }
                             >

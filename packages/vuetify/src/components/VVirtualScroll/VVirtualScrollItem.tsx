@@ -28,13 +28,15 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
 ) => GenericProps<typeof props, typeof slots>>()({
   name: 'VVirtualScrollItem',
 
+  inheritAttrs: false,
+
   props: makeVVirtualScrollItemProps(),
 
   emits: {
     'update:height': (height: number) => true,
   },
 
-  setup (props, { emit, slots }) {
+  setup (props, { attrs, emit, slots }) {
     const { resizeRef, contentRect } = useResizeObserver(undefined, 'border')
 
     watch(() => contentRect.value?.height, height => {
@@ -53,6 +55,7 @@ export const VVirtualScrollItem = genericComponent<new <Renderless extends boole
           props.class,
         ]}
         style={ props.style }
+        { ...attrs }
       >
         { (slots.default as any)?.() }
       </div>
