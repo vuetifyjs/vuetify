@@ -142,24 +142,35 @@
 <script setup>
   import { ref, watch } from 'vue'
 
-  const
-  1 = ref('https://cdn.vuetifyjs.com/images/lists/1.jpg')
-  const
-  2 = ref('https://cdn.vuetifyjs.com/images/lists/2.jpg')
-  const
-  3 = ref('https://cdn.vuetifyjs.com/images/lists/3.jpg')
-  const
-  4 = ref('https://cdn.vuetifyjs.com/images/lists/4.jpg')
-  const
-  5 = ref('https://cdn.vuetifyjs.com/images/lists/5.jpg')
-  function remove (item) {
-    const index = friends.indexOf(item.name)
-    if (index >= 0) { friends.splice(index, 1) }
+  const srcs = {
+    1: 'https://cdn.vuetifyjs.com/images/lists/1.jpg',
+    2: 'https://cdn.vuetifyjs.com/images/lists/2.jpg',
+    3: 'https://cdn.vuetifyjs.com/images/lists/3.jpg',
+    4: 'https://cdn.vuetifyjs.com/images/lists/4.jpg',
+    5: 'https://cdn.vuetifyjs.com/images/lists/5.jpg',
   }
+  const people = [
+    { name: 'Sandra Adams', group: 'Group 1', avatar: srcs[1] },
+    { name: 'Ali Connors', group: 'Group 1', avatar: srcs[2] },
+    { name: 'Trevor Hansen', group: 'Group 1', avatar: srcs[3] },
+    { name: 'Tucker Smith', group: 'Group 1', avatar: srcs[2] },
+    { name: 'Britta Holt', group: 'Group 2', avatar: srcs[4] },
+    { name: 'Jane Smith ', group: 'Group 2', avatar: srcs[5] },
+    { name: 'John Smith', group: 'Group 2', avatar: srcs[1] },
+    { name: 'Sandra Williams', group: 'Group 2', avatar: srcs[3] },
+  ]
+
+  const autoUpdate = ref(true)
+  const friends = ref(['Sandra Adams', 'Britta Holt'])
+  const isUpdating = ref(false)
+  const name = ref('Midnight Crew')
+  const title = ref('The summer breeze')
+
+  let timeout = -1
   watch(isUpdating, val => {
     clearTimeout(timeout)
     if (val) {
-      timeout = setTimeout(() => (isUpdating = false), 3000)
+      timeout = setTimeout(() => (isUpdating.value = false), 3000)
     }
   })
 </script>
