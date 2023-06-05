@@ -44,6 +44,35 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const valid = ref(false)
+  const firstname = ref('')
+  const lastname = ref('')
+  const nameRules = ref([
+    value => {
+      if (value) { return true }
+      return 'Name is requred.'
+    },
+    value => {
+      if (value?.length <= 10) { return true }
+      return 'Name must be less than 10 characters.'
+    },
+  ])
+  const email = ref('')
+  const emailRules = ref([
+    value => {
+      if (value) { return true }
+      return 'E-mail is requred.'
+    },
+    value => {
+      if (/.+@.+\..+/.test(value)) { return true }
+      return 'E-mail must be valid.'
+    },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

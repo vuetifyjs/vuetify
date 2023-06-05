@@ -50,6 +50,12 @@
   </form>
 </template>
 
+<script setup>
+  import { reactive, ref } from 'vue'
+  import { useVuelidate } from '@vuelidate/core'
+  import { email, required } from '@vuelidate/validators'
+</script>
+
 <script>
   import { reactive, ref } from 'vue'
   import { useVuelidate } from '@vuelidate/core'

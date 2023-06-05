@@ -42,6 +42,24 @@
   </div>
 </template>
 
+<script setup>
+  import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+  const interval = ref({})
+  const value = ref(0)
+  onBeforeUnmount(function beforeUnmount () {
+    clearInterval(interval.value)
+  })
+  onMounted(() => {
+    interval.value = setInterval(() => {
+      if (value.value === 100) {
+        return (value.value = 0)
+      }
+      value.value += 10
+    }, 1000)
+  })
+</script>
+
 <script>
   export default {
     data () {

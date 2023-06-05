@@ -21,6 +21,17 @@
   </v-footer>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const icons = ref([
+    'mdi-facebook',
+    'mdi-twitter',
+    'mdi-linkedin',
+    'mdi-instagram',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

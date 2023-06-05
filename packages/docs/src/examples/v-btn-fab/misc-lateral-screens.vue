@@ -63,6 +63,22 @@
   </v-card>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const fab = ref(false)
+  const hidden = ref(false)
+  const tabs = ref(null)
+  const activeFab = computed(() => {
+    switch (tabs.value) {
+      case 'one': return { color: 'success', icon: 'mdi-share-variant' }
+      case 'two': return { color: 'red', icon: 'mdi-pencil' }
+      case 'three': return { color: 'green', icon: 'mdi-chevron-up' }
+      default: return {}
+    }
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

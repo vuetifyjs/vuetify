@@ -90,6 +90,40 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dialog = ref(false)
+  const dialog2 = ref(false)
+  const dialog3 = ref(false)
+  const notifications = ref(false)
+  const sound = ref(true)
+  const widgets = ref(false)
+  const items = ref([
+    {
+      title: 'Click Me',
+    },
+    {
+      title: 'Click Me',
+    },
+    {
+      title: 'Click Me',
+    },
+    {
+      title: 'Click Me 2',
+    },
+  ])
+  const select = ref([
+    { text: 'State 1' },
+    { text: 'State 2' },
+    { text: 'State 3' },
+    { text: 'State 4' },
+    { text: 'State 5' },
+    { text: 'State 6' },
+    { text: 'State 7' },
+  ])
+</script>
+
 <script>
   export default {
     data () {

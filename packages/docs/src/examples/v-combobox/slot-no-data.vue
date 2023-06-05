@@ -23,6 +23,19 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const items = ref(['Gaming', 'Programming', 'Vue', 'Vuetify'])
+  const model = ref(['Vuetify'])
+  const search = ref(null)
+  watch(model, val => {
+    if (val.length > 5) {
+      ctx.root.$nextTick(() => model.value.pop())
+    }
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

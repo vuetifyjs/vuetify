@@ -6,6 +6,73 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const show = ref(true)
+  const defaults = ref({
+    'background-color': null,
+    dense: false,
+    color: null,
+    'empty-icon': '$mdiStarOutline',
+    'full-icon': '$mdiStar',
+    'half-icon': '$mdiStarHalfFull',
+    'half-increments': false,
+    length: 5,
+    hover: true,
+    readonly: false,
+    value: 3,
+    size: 64,
+  })
+  const options = ref({
+    booleans: [
+      'half-increments',
+      'hover',
+      'readonly',
+    ],
+    selects: {
+      color: [
+        'primary',
+        'warning',
+        'green',
+        'red',
+        'blue',
+        'error',
+        'teal',
+        'red lighten-3',
+      ],
+      'background-color': [
+        'grey lighten-2',
+        'warning lighten-1',
+        'green lighten-2',
+        'red lighten-2',
+        'grey',
+        '#eee',
+        'cyan lighten-2',
+        'grey lighten-1',
+      ],
+      'empty-icon': [
+        '$mdiHeartOutline',
+        '$mdiStarOutline',
+      ],
+      'full-icon': [
+        '$mdiHeart',
+        '$mdiStar',
+      ],
+      'half-icon': [
+        '$mdiHeartHalfFull',
+        '$mdiStarHalfFull',
+      ],
+    },
+    sliders: {
+      length: [1, 15],
+      size: [0, 100],
+      value: [0, 15, 0.5],
+    },
+  })
+  const tabs = ref(['dense'])
+</script>
+
 <script>
   export default {
     name: 'Usage',

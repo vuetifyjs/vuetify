@@ -23,6 +23,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const elevations = ref([0, 4, 8, 12, 16, 20])
+</script>
+
 <script>
   export default {
     data: () => ({

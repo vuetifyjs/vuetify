@@ -14,6 +14,13 @@
   </v-window>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const length = ref(3)
+  const window = ref(0)
+</script>
+
 <script>
   export default {
     data: () => ({

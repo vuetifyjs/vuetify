@@ -86,6 +86,19 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed, ref } from 'vue'
+
+  const length = ref(17)
+
+  const computedPadding = computed(() => {
+    return `p${paddingDirection}-${paddingSize}`
+  })
+  const computedMargin = computed(() => {
+    return `m${marginDirection}-${marginSize}`
+  })
+</script>
+
 <script>
   export default {
     data () {

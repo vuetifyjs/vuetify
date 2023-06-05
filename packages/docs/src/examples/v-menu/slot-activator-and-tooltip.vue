@@ -26,6 +26,17 @@
   </div>
 </template>
 
+<script setup>
+  import { mergeProps, ref } from 'vue'
+
+  const items = ref([
+    { title: 'Click Me1' },
+    { title: 'Click Me2' },
+    { title: 'Click Me3' },
+    { title: 'Click Me4' },
+  ])
+</script>
+
 <script>
   import { mergeProps } from 'vue'
 

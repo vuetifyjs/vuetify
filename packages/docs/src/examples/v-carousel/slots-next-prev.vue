@@ -36,6 +36,25 @@
   </v-carousel>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const colors = ref([
+    'indigo',
+    'warning',
+    'pink darken-2',
+    'red lighten-1',
+    'deep-purple accent-4',
+  ])
+  const slides = ref([
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ])
+</script>
+
 <script>
   export default {
     data () {

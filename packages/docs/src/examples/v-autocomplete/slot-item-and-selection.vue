@@ -139,6 +139,31 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const
+  1 = ref('https://cdn.vuetifyjs.com/images/lists/1.jpg')
+  const
+  2 = ref('https://cdn.vuetifyjs.com/images/lists/2.jpg')
+  const
+  3 = ref('https://cdn.vuetifyjs.com/images/lists/3.jpg')
+  const
+  4 = ref('https://cdn.vuetifyjs.com/images/lists/4.jpg')
+  const
+  5 = ref('https://cdn.vuetifyjs.com/images/lists/5.jpg')
+  function remove (item) {
+    const index = friends.indexOf(item.name)
+    if (index >= 0) { friends.splice(index, 1) }
+  }
+  watch(isUpdating, val => {
+    clearTimeout(timeout)
+    if (val) {
+      timeout = setTimeout(() => (isUpdating = false), 3000)
+    }
+  })
+</script>
+
 <script>
   export default {
     data () {

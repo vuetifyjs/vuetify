@@ -12,6 +12,19 @@
   ></v-select>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const select = ref({ state: 'Florida', abbr: 'FL' })
+  const items = ref([
+    { state: 'Florida', abbr: 'FL' },
+    { state: 'Georgia', abbr: 'GA' },
+    { state: 'Nebraska', abbr: 'NE' },
+    { state: 'California', abbr: 'CA' },
+    { state: 'New York', abbr: 'NY' },
+  ])
+</script>
+
 <script>
   export default {
     data () {

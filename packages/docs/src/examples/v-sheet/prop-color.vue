@@ -95,6 +95,10 @@
   </v-container>
 </template>
 
+<script setup>
+  import { h } from 'vue'
+</script>
+
 <script>
   import { h } from 'vue'
 

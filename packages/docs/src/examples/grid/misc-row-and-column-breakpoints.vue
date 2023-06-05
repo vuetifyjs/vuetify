@@ -19,6 +19,15 @@
   </v-container>
 </template>
 
+<script setup>
+  import { computed } from 'vue'
+
+  const cols = computed(() => {
+    const { lg, sm } = ctx.root.$vuetify.display
+    return lg ? [3, 9] : sm ? [9, 3] : [6, 6]
+  })
+</script>
+
 <script>
   export default {
     computed: {

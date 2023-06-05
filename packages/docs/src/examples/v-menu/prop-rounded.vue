@@ -29,6 +29,18 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const btns = ref([
+    ['Removed', '0'],
+    ['Large', 'lg'],
+    ['Custom', 'b-xl'],
+  ])
+  const colors = ref(['deep-purple accent-4', 'error', 'teal darken-1'])
+  const items = ref([...Array(4)].map((_, i) => `Item ${i}`))
+</script>
+
 <script>
   export default {
     data: () => ({

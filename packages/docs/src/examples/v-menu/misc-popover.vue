@@ -76,6 +76,15 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const fav = ref(true)
+  const menu = ref(false)
+  const message = ref(false)
+  const hints = ref(true)
+</script>
+
 <script>
   export default {
     data: () => ({

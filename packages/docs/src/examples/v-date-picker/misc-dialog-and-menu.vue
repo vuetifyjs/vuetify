@@ -125,6 +125,15 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref((new Date(Date.now() - (new Date()).getTimezoneOffset() * 60000)).toISOString().substr(0, 10))
+  const menu = ref(false)
+  const modal = ref(false)
+  const menu2 = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

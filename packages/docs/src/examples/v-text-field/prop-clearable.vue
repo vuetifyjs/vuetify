@@ -12,6 +12,12 @@
   </v-responsive>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const model = ref('Leider')
+</script>
+
 <script>
   export default {
     data: () => ({

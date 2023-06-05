@@ -81,6 +81,14 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const time = ref(null)
+  const menu2 = ref(false)
+  const modal2 = ref(false)
+</script>
+
 <script>
   export default {
     data () {

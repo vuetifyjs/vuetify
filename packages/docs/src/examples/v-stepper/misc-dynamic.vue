@@ -55,6 +55,25 @@
   </div>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const e1 = ref(1)
+  const steps = ref(2)
+  function nextStep (n) {
+    if (n === steps.value) {
+      e1.value = 1
+    } else {
+      e1.value = n + 1
+    }
+  }
+  watch(steps, val => {
+    if (e1.value > val) {
+      e1.value = val
+    }
+  })
+</script>
+
 <script>
   export default {
     data () {

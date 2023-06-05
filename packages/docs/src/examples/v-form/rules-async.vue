@@ -18,6 +18,31 @@
   </v-sheet>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const loading = ref(false)
+  const rules = ref([value => vm.checkApi(value)])
+  const timeout = ref(null)
+  const userName = ref('')
+  async function submit (event) {
+    loading.value = true
+    const results = await event
+    loading.value = false
+    alert(JSON.stringify(results, null, 2))
+  }
+  async function checkApi (userName) {
+    return new Promise(resolve => {
+      clearTimeout(timeout.value)
+      timeout.value = setTimeout(() => {
+        if (!userName) { return resolve('Please enter a user name.') }
+        if (userName === 'johnleider') { return resolve('User name already taken. Please try another one.') }
+        return resolve(true)
+      }, 1000)
+    })
+  }
+</script>
+
 <script>
   export default {
     data: vm => ({

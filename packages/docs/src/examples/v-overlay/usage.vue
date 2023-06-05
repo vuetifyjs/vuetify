@@ -11,6 +11,17 @@
   </div>
 </template>
 
+<script setup>
+  import { ref, watch } from 'vue'
+
+  const overlay = ref(false)
+  watch(overlay, val => {
+    val && setTimeout(() => {
+      overlay.value = false
+    }, 2000)
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

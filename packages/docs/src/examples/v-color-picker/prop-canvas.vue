@@ -14,6 +14,13 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const c1 = ref('#ff00ff')
+  const c2 = ref('#00ff00')
+</script>
+
 <script>
 
   export default {

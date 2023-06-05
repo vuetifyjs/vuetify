@@ -14,6 +14,13 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const colors = ref(['green', 'purple', 'orange', 'indigo', 'red'])
+  const rating = ref(4.5)
+</script>
+
 <script>
   export default {
     data: () => ({

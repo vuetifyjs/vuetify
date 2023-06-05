@@ -17,6 +17,14 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const text = ref('')
+  function appendIconCallback () { }
+  function prependIconCallback () { }
+</script>
+
 <script>
   export default {
     data () {

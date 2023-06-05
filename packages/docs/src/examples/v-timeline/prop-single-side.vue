@@ -17,6 +17,23 @@
   </v-timeline>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref([
+    {
+      id: 1,
+      color: 'info',
+      icon: 'mdi-information',
+    },
+    {
+      id: 2,
+      color: 'error',
+      icon: 'mdi-alert-circle',
+    },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

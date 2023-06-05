@@ -81,6 +81,26 @@
   </v-toolbar>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dropdown_font = ref([
+    { text: 'Arial' },
+    { text: 'Calibri' },
+    { text: 'Courier' },
+    { text: 'Verdana' },
+  ])
+  const dropdown_edit = ref([
+    { text: '100%' },
+    { text: '75%' },
+    { text: '50%' },
+    { text: '25%' },
+    { text: '0%' },
+  ])
+  const toggle_exclusive = ref(2)
+  const toggle_multiple = ref([1, 2, 3])
+</script>
+
 <script>
   export default {
     data () {

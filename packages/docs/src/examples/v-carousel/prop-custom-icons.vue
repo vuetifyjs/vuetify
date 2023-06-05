@@ -31,6 +31,25 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const colors = ref([
+    'green',
+    'secondary',
+    'yellow darken-4',
+    'red lighten-2',
+    'orange darken-1',
+  ])
+  const slides = ref([
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ])
+</script>
+
 <script>
   export default {
     data () {

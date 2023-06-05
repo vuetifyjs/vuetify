@@ -25,6 +25,33 @@
   </div>
 </template>
 
+<script setup>
+  import { onBeforeUnmount, onMounted, ref, watch } from 'vue'
+
+  const value = ref(10)
+  const bufferValue = ref(20)
+  const interval = ref(0)
+  function startBuffer () {
+    clearInterval(interval.value)
+    interval.value = setInterval(() => {
+      value.value += Math.random() * (15 - 5) + 5
+      bufferValue.value += Math.random() * (15 - 5) + 6
+    }, 2000)
+  }
+  watch(value, val => {
+    if (val < 100) { return }
+    value.value = 0
+    bufferValue.value = 10
+    startBuffer()
+  })
+  onMounted(() => {
+    startBuffer()
+  })
+  onBeforeUnmount(function beforeUnmount () {
+    clearInterval(interval.value)
+  })
+</script>
+
 <script>
   export default {
     data () {

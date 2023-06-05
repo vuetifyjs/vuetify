@@ -11,6 +11,14 @@
   </v-responsive>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const rules = ref({
+    required: value => !!value || 'Field is required',
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

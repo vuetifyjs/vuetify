@@ -24,6 +24,16 @@
   </v-combobox>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const chips = ref(['Programming', 'Playing video games', 'Watching movies', 'Sleeping'])
+  const items = ref(['Streaming', 'Eating'])
+  function remove (item) {
+    chips.value.splice(chips.value.indexOf(item), 1)
+  }
+</script>
+
 <script>
   export default {
     data () {

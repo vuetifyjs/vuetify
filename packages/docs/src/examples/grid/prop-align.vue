@@ -84,6 +84,16 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const alignments = ref([
+    'start',
+    'center',
+    'end',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

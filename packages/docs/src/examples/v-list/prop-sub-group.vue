@@ -53,6 +53,22 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const open = ref(['Users'])
+  const admins = ref([
+    ['Management', 'mdi-account-multiple-outline'],
+    ['Settings', 'mdi-cog-outline'],
+  ])
+  const cruds = ref([
+    ['Create', 'mdi-plus-outline'],
+    ['Read', 'mdi-file-outline'],
+    ['Update', 'mdi-update'],
+    ['Delete', 'mdi-delete'],
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

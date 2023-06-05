@@ -96,6 +96,14 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const date = ref(new Date().toISOString().substr(0, 7))
+  const menu = ref(false)
+  const modal = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

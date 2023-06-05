@@ -9,6 +9,37 @@
   </div>
 </template>
 
+<script setup>
+  import { onBeforeUnmount, onMounted, ref } from 'vue'
+
+  const value = ref(0)
+  const query = ref(false)
+  const show = ref(true)
+  const interval = ref(0)
+  function queryAndIndeterminate () {
+    query.value = true
+    show.value = true
+    value.value = 0
+    setTimeout(() => {
+      query.value = false
+      interval.value = setInterval(() => {
+        if (value.value === 100) {
+          clearInterval(interval.value)
+          show.value = false
+          return setTimeout(queryAndIndeterminate, 2000)
+        }
+        value.value += 25
+      }, 1000)
+    }, 2500)
+  }
+  onMounted(() => {
+    queryAndIndeterminate()
+  })
+  onBeforeUnmount(function beforeUnmount () {
+    clearInterval(interval.value)
+  })
+</script>
+
 <script>
   export default {
     data () {

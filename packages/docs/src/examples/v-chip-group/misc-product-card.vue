@@ -46,6 +46,20 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const selection = ref('08')
+  const sizes = ref([
+    '04',
+    '06',
+    '08',
+    '10',
+    '12',
+    '14',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

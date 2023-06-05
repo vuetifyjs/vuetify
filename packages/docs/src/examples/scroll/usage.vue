@@ -94,7 +94,7 @@
 </template>
 
 <script>
-  import * as easings from 'vuetify/lib/services/goto/easing-patterns'
+  import * as _easings from 'vuetify/lib/services/goto/easing-patterns'
 
   export default {
     data () {
@@ -108,7 +108,7 @@
         duration: 300,
         offset: 0,
         easing: 'easeInOutCubic',
-        easings: Object.keys(easings),
+        easings: Object.keys(_easings),
       }
     },
     computed: {

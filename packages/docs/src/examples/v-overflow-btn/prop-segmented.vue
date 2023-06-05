@@ -10,6 +10,16 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dropdown_icon = ref([
+    { text: 'list', callback: () => console.log('list') },
+    { text: 'favorite', callback: () => console.log('favorite') },
+    { text: 'delete', callback: () => console.log('delete') },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

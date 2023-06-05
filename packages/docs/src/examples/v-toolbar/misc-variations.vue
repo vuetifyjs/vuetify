@@ -35,6 +35,17 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const bars = ref([
+    { class: '' },
+    { class: '', dark: true },
+    { class: 'primary', dark: true },
+    { class: 'elevation-0' },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

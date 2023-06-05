@@ -10,6 +10,18 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dropdown_edit = ref([
+    { text: '100%' },
+    { text: '75%' },
+    { text: '50%' },
+    { text: '25%' },
+    { text: '0%' },
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

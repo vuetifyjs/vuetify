@@ -21,6 +21,18 @@
   </v-carousel>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const slides = ref([
+    'First',
+    'Second',
+    'Third',
+    'Fourth',
+    'Fifth',
+  ])
+</script>
+
 <script>
   export default {
     data () {

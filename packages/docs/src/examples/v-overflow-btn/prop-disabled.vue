@@ -10,6 +10,12 @@
   </v-container>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dropdown_font = ref(['Arial', 'Calibri', 'Courier', 'Verdana'])
+</script>
+
 <script>
   export default {
     data: () => ({

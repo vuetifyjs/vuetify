@@ -18,6 +18,19 @@
   </v-footer>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const links = ref([
+    'Home',
+    'About Us',
+    'Team',
+    'Services',
+    'Blog',
+    'Contact Us',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

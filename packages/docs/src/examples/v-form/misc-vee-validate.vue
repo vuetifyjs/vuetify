@@ -48,6 +48,11 @@
   </form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+  import { useField, useForm } from 'vee-validate'
+</script>
+
 <script>
   import { ref } from 'vue'
   import { useField, useForm } from 'vee-validate'

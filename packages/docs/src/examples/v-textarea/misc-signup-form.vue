@@ -130,6 +130,25 @@
   </v-card>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const agreement = ref(false)
+  const bio = ref('Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts')
+  const dialog = ref(false)
+  const email = ref(undefined)
+  const form = ref(false)
+  const isLoading = ref(false)
+  const password = ref(undefined)
+  const phone = ref(undefined)
+  const rules = ref({
+    email: v => !!(v || '').match(/@/) || 'Please enter a valid email',
+    length: len => v => (v || '').length >= len || `Invalid character length, required ${len}`,
+    password: v => !!(v || '').match(/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*(_|[^\w])).+$/) || 'Password must contain an upper case letter, a numeric character, and a special character',
+    required: v => !!v || 'This field is required',
+  })
+</script>
+
 <script>
   export default {
     data: () => ({

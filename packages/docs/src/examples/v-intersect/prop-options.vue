@@ -44,6 +44,15 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const isIntersecting = ref(false)
+  function onIntersect (isIntersecting, entries, observer) {
+    isIntersecting.value = entries[0].intersectionRatio >= 0.5
+  }
+</script>
+
 <script>
   export default {
     data: () => ({

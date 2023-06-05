@@ -62,6 +62,13 @@
   </v-row>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const dates = ref(['2018-09-15', '2018-09-20'])
+  const menu = ref(false)
+</script>
+
 <script>
   export default {
     data: () => ({

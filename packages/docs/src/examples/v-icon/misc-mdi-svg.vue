@@ -7,6 +7,18 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+  import { mdiAccount, mdiDelete, mdiPencil, mdiShareVariant } from '@mdi/js'
+
+  const icons = ref({
+    mdiAccount,
+    mdiPencil,
+    mdiShareVariant,
+    mdiDelete,
+  })
+</script>
+
 <script>
   import {
     mdiAccount,

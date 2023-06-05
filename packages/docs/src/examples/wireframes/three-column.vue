@@ -77,6 +77,17 @@
   </v-app>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const links = ref([
+    'Dashboard',
+    'Messages',
+    'Profile',
+    'Updates',
+  ])
+</script>
+
 <script>
   export default {
     data: () => ({

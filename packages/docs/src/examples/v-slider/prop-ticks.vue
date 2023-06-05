@@ -34,6 +34,17 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const tickLabels = ref({
+    0: 'Figs',
+    1: 'Lemon',
+    2: 'Pear',
+    3: 'Apple',
+  })
+</script>
+
 <script>
   export default {
     data () {

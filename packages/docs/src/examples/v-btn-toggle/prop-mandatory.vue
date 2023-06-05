@@ -14,6 +14,12 @@
   </div>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const toggle = ref(undefined)
+</script>
+
 <script>
   export default {
     data () {

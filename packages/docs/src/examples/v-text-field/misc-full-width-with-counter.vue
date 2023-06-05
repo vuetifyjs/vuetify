@@ -33,6 +33,15 @@
   </v-form>
 </template>
 
+<script setup>
+  import { ref } from 'vue'
+
+  const items = ref(['Trevor Handsen', 'Alex Nelson'])
+  const selected = ref(['Trevor Handsen'])
+  const subject = ref('Plans for the weekend')
+  const title = ref('Hi,\nI just wanted to check in and see if you had any plans the upcoming weekend. We are thinking of heading up to Napa')
+</script>
+
 <script>
   export default {
     data: () => ({
