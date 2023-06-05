@@ -117,7 +117,7 @@
   // Composables
   import { RouteLocation, Router, useRoute, useRouter } from 'vue-router'
   import { useAppStore } from '@/store/app'
-  import { useGtag } from 'vue-gtag-next'
+  // import { useGtag } from 'vue-gtag-next'
   import { useSponsorsStore } from '@/store/sponsors'
   import { useTheme } from 'vuetify'
 
@@ -224,7 +224,7 @@
   const route = useRoute()
   const router = useRouter()
   const theme = useTheme()
-  const { event } = useGtag()
+  // const { event } = useGtag()
 
   const { scrolling } = useUpdateHashOnScroll(route, router)
 
@@ -241,13 +241,13 @@
     scrolling.value = false
   }
 
-  function onClickPromotion () {
-    event('click', {
-      event_category: 'vuetify-toc',
-      event_label: 'promotion',
-      value: 'theme-selection',
-    })
-  }
+  // function onClickPromotion () {
+  //   event('click', {
+  //     event_category: 'vuetify-toc',
+  //     event_label: 'promotion',
+  //     value: 'theme-selection',
+  //   })
+  // }
 
   const sponsorStore = useSponsorsStore()
 
