@@ -65,9 +65,9 @@ export interface IconSet {
 }
 
 export type IconOptions = {
-  defaultSet: string
+  defaultSet?: string
   aliases?: Partial<IconAliases>
-  sets: Record<string, IconSet>
+  sets?: Record<string, IconSet>
 }
 
 type IconInstance = {
@@ -75,7 +75,7 @@ type IconInstance = {
   icon?: IconValue
 }
 
-export const IconSymbol: InjectionKey<IconOptions> = Symbol.for('vuetify:icons')
+export const IconSymbol: InjectionKey<Required<IconOptions>> = Symbol.for('vuetify:icons')
 
 export const makeIconProps = propsFactory({
   icon: {
